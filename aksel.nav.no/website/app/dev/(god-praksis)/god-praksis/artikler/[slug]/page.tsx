@@ -3,7 +3,7 @@ import { PortableTextBlock } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { TagFillIcon } from "@navikt/aksel-icons";
-import { BodyShort, HStack, Heading } from "@navikt/ds-react";
+import { BodyShort, HStack, Heading, Label, VStack } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -13,7 +13,7 @@ import {
 import { SystemPanel } from "@/app/_ui/panels/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
-import { dateStr } from "@/utils";
+import { abbrName, dateStr } from "@/utils";
 import styles from "./page.module.css";
 
 type Props = {
@@ -73,6 +73,10 @@ export default async function Page(props: Props) {
     pageData?._updatedAt;
 
   const outdated = differenceInMonths(new Date(), new Date(verifiedDate)) >= 12;
+  const authors =
+    pageData?.contributors
+      ?.filter((auth) => !!auth.title)
+      .map((auth) => auth.title ?? "") ?? [];
 
   return (
     <article className={styles.pageArticle}>
@@ -123,96 +127,28 @@ export default async function Page(props: Props) {
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
+        {authors?.length > 0 && (
+          <VStack gap="space-8" marginBlock="space-48">
+            <Label data-aksel-heading-color as="p">
+              Medvirkende
+            </Label>
+
+            <HStack gap="space-4" asChild>
+              <BodyShort textColor="subtle">
+                {authors.map(abbrName).map((x, y) => (
+                  <address key={x}>
+                    {x}
+                    {y !== authors.length - 1 && ", "}
+                  </address>
+                ))}
+              </BodyShort>
+            </HStack>
+          </VStack>
+        )}
+        {/* {userState && <Feedback userState={userState} />} */}
       </div>
     </article>
   );
-
-  /* return (
-    <div>
-      <GodPraksisIntroHero
-        title={temaPage.title ?? "Tema"}
-        description={temaPage.description}
-        image={temaPage.pictogram}
-        isCollapsible
-      />
-      <VStack
-        gap="space-48"
-        paddingBlock="space-24"
-        paddingInline={{ xs: "space-16", lg: "space-40" }}
-      >
-        <GodPrakisChipsNavigation
-          articles={articlesByContext}
-          innholdstype={innholdstypeParam}
-          undertema={undertemaParam}
-        />
-        <VStack gap="space-48">
-          {Object.entries(articlesMap).length === 0 ? (
-            <p>Ingen artikler funnet.</p>
-          ) : (
-            Object.values(articlesMap).map(
-              ({ title, description, ariaLabel, articles }) => (
-                <section aria-label={ariaLabel} key={title}>
-                  <VStack gap="space-8" marginBlock="0 space-24">
-                    <Heading level="2" size="large" data-aksel-heading-color>
-                      {title}
-                    </Heading>
-                    {description && (
-                      <BodyLong data-text-prose>{description}</BodyLong>
-                    )}
-                  </VStack>
-                  <HGrid
-                    key={title}
-                    as="ul"
-                    columns={{ xs: 1, md: 2 }}
-                    gap={{ xs: "space-12", md: "space-24" }}
-                  >
-                    {articles.map((article) => (
-                      <li key={article.slug}>
-                        <LinkCard>
-                          <LinkCardTitle as="h2">
-                            <LinkCardAnchor href={article.slug ?? ""}>
-                              {article.heading}
-                            </LinkCardAnchor>
-                          </LinkCardTitle>
-
-                          {article.description && (
-                            <LinkCardDescription>
-                              {article.displayDate && (
-                                <Box asChild marginBlock="0 space-8">
-                                  <Detail
-                                    as="time"
-                                    textColor="subtle"
-                                    uppercase
-                                  >
-                                    {article.displayDate}
-                                  </Detail>
-                                </Box>
-                              )}
-                              <p>{article.description}</p>
-                            </LinkCardDescription>
-                          )}
-                          <LinkCardFooter>
-                            <HStack gap="space-12">
-                              <GodPraksisTaxonomyTag type="undertema">
-                                {article.undertema}
-                              </GodPraksisTaxonomyTag>
-                              <GodPraksisTaxonomyTag type="innholdstype">
-                                {article.innholdstype}
-                              </GodPraksisTaxonomyTag>
-                            </HStack>
-                          </LinkCardFooter>
-                        </LinkCard>
-                      </li>
-                    ))}
-                  </HGrid>
-                </section>
-              ),
-            )
-          )}
-        </VStack>
-      </VStack>
-    </div>
-  ); */
 }
 
 function UnderTemaLink({

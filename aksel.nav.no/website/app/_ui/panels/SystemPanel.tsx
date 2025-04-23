@@ -17,7 +17,7 @@ type SystemPanelProps = {
    */
   unsafeBeta?: boolean;
   /**
-   * Sanity document id;
+   * Sanity document id
    */
   docId?: string;
 };
