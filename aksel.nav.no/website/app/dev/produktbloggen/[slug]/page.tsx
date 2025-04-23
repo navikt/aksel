@@ -1,3 +1,4 @@
+import { Metadata, ResolvingMetadata } from "next";
 import { PortableTextBlock } from "next-sanity";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
@@ -5,14 +6,43 @@ import { Image } from "sanity";
 import { BodyLong, BodyShort, Detail, HStack, Heading } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
-import { BLOGG_BY_SLUG_QUERY } from "@/app/_sanity/queries";
-import { urlForImage } from "@/app/_sanity/utils";
+import {
+  BLOGG_BY_SLUG_QUERY,
+  METADATA_BY_SLUG_QUERY,
+} from "@/app/_sanity/queries";
+import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { abbrName, dateStr, getImage } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { slug } = await params;
+
+  const { data: pageData } = await sanityFetch({
+    query: METADATA_BY_SLUG_QUERY,
+    params: { slug: `produktbloggen/${slug}` },
+    stega: false,
+  });
+
+  const ogImages = (await parent).openGraph?.images || [];
+  const pageOgImage = urlForOpenGraphImage(pageData?.seo?.image as Image);
+
+  pageOgImage && ogImages.unshift(pageOgImage);
+
+  return {
+    title: pageData?.heading,
+    description: pageData?.seo?.meta,
+    openGraph: {
+      images: ogImages,
+    },
+  };
+}
 
 /* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page({ params }: Props) {
@@ -43,17 +73,6 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      {/*
-        generateMetadata() (see others)
-      <SEO
-        title={page?.heading}
-        description={page?.seo?.meta ?? page?.ingress}
-        image={page?.seo?.image}
-        fallbackImage={getImage(page?.heading ?? "", "OG")}
-        publishDate={publishDate}
-      />
-      */}
-
       <main tabIndex={-1} id="hovedinnhold" className={styles.main}>
         <div className={styles.preamble}>
           <div className={styles.intro}>
