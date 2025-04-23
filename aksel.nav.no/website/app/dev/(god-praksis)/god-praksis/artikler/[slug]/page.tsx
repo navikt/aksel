@@ -132,7 +132,6 @@ export default async function Page(props: Props) {
             <Label data-aksel-heading-color as="p">
               Medvirkende
             </Label>
-
             <HStack gap="space-4" asChild>
               <BodyShort textColor="subtle">
                 {authors.map(abbrName).map((x, y) => (
