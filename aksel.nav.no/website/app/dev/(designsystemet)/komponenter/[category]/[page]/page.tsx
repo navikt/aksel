@@ -9,6 +9,7 @@ import {
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { SystemPanel } from "@/app/_ui/panels/SystemPanel";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { DesignsystemetKomponentIntro } from "@/app/dev/(designsystemet)/_ui/Designsystemet.intro";
@@ -86,6 +87,12 @@ export default async function Page({ params }: Props) {
         toc={toc}
       />
       <div>
+        {["beta", "new"].includes(pageData.status?.tag ?? "") && (
+          <SystemPanel
+            variant={pageData.status?.tag as "beta" | "new"}
+            unsafeBeta={pageData.status?.unsafe}
+          />
+        )}
         <DesignsystemetKomponentIntro data={pageData} />
         <CustomPortableText value={pageData.content as PortableTextBlock[]} />
       </div>

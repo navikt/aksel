@@ -1,3 +1,4 @@
+import differenceInMonths from "date-fns/differenceInMonths";
 import { PortableTextBlock } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,6 +10,7 @@ import {
   GOD_PRAKSIS_ARTICLE_BY_SLUG,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
+import { SystemPanel } from "@/app/_ui/panels/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { dateStr } from "@/utils";
@@ -65,6 +67,13 @@ export default async function Page(props: Props) {
     notFound();
   }
 
+  const verifiedDate =
+    pageData?.updateInfo?.lastVerified ??
+    pageData?.publishedAt ??
+    pageData?._updatedAt;
+
+  const outdated = differenceInMonths(new Date(), new Date(verifiedDate)) >= 12;
+
   return (
     <article className={styles.pageArticle}>
       <div>
@@ -86,11 +95,7 @@ export default async function Page(props: Props) {
           </BodyShort>
         )}
         <BodyShort size="small" as="time" textColor="subtle">
-          {`Oppdatert ${await dateStr(
-            pageData?.updateInfo?.lastVerified ??
-              pageData?.publishedAt ??
-              pageData?._updatedAt,
-          )}`}
+          {`Oppdatert ${await dateStr(verifiedDate)}`}
         </BodyShort>
         <HStack gap="space-8" marginBlock="space-16 space-48">
           {pageData.undertema?.map(({ tema, title }) => (
@@ -113,8 +118,7 @@ export default async function Page(props: Props) {
         toc={toc}
       />
       <div>
-        {/* {outdated && <OutdatedAlert />} */}
-
+        {outdated && <SystemPanel variant="outdated" />}
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
