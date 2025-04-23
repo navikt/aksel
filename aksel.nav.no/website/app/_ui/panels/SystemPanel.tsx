@@ -3,7 +3,11 @@ import {
   SparklesIcon,
   TestFlaskIcon,
 } from "@navikt/aksel-icons";
-import { BodyLong, Button, Heading } from "@navikt/ds-react";
+import { BodyLong, Heading } from "@navikt/ds-react";
+import {
+  SystemPanelAction,
+  SystemPanelOutdatedAction,
+} from "@/app/_ui/panels/SystemPanel.action";
 import styles from "./SystemPanel.module.css";
 
 type SystemPanelProps = {
@@ -12,6 +16,10 @@ type SystemPanelProps = {
    * @default false
    */
   unsafeBeta?: boolean;
+  /**
+   * Sanity document id;
+   */
+  docId?: string;
 };
 
 const VariantConfig = {
@@ -20,7 +28,6 @@ const VariantConfig = {
     description:
       "Det er over 1 år siden innholdet ble revidert. Vi kan ikke være helt sikre på hvor nøyaktig artikkelen er lenger.",
     icon: <HourglassBottomFilledIcon aria-hidden fontSize="1.5rem" />,
-    action: OutdatedAction,
     colorRole: "neutral",
   },
   beta: {
@@ -28,18 +35,7 @@ const VariantConfig = {
     description:
       "Komponenten er under utvikling, men klar for adopsjon. Vi ønsker gjerne innspill på hvordan den fungerer og hvilke forbedringer vi kan gjøre.",
     icon: <TestFlaskIcon aria-hidden fontSize="1.5rem" />,
-    action: () => (
-      <div className={styles.systemPanelAction}>
-        <Button
-          size="small"
-          variant="secondary-neutral"
-          as="a"
-          href="https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9%2Cbeta+%F0%9F%A7%AA&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+%3CActionMenu%20/%3E"
-        >
-          Send innspill
-        </Button>
-      </div>
-    ),
+
     colorRole: "meta-purple",
   },
   new: {
@@ -47,18 +43,7 @@ const VariantConfig = {
     description:
       "Denne komponenten er ny eller oppdatert. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
     icon: <SparklesIcon aria-hidden fontSize="1.5rem" />,
-    action: () => (
-      <div className={styles.systemPanelAction}>
-        <Button
-          size="small"
-          variant="secondary-neutral"
-          as="a"
-          href="https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9%2Cbeta+%F0%9F%A7%AA&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+%3CActionMenu%20/%3E"
-        >
-          Send innspill
-        </Button>
-      </div>
-    ),
+
     colorRole: "success",
   },
 } as const;
@@ -67,7 +52,7 @@ const unsafeDescription =
   "Komponenten er under utvikling. Så lenge komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i minor versjon av kodepakker og i Figma. Teamet ditt må selv ta stilling til om dere ønsker å bruke denne i produksjon.";
 
 function SystemPanel(props: SystemPanelProps) {
-  const { variant, unsafeBeta = false } = props;
+  const { variant, docId, unsafeBeta = false } = props;
 
   const config = VariantConfig[variant];
 
@@ -82,7 +67,11 @@ function SystemPanel(props: SystemPanelProps) {
         <BodyLong data-text-prose>
           {unsafeBeta ? unsafeDescription : config.description}
         </BodyLong>
-        {config.action()}
+        {variant === "outdated" ? (
+          <SystemPanelOutdatedAction docId={docId} />
+        ) : (
+          <SystemPanelAction />
+        )}
       </div>
     </div>
   );
@@ -99,18 +88,6 @@ function SystemPanelHeader({ variant }: Pick<SystemPanelProps, "variant">) {
       </Heading>
     </div>
   );
-}
-
-/**
- * TODO: Implement shortcut to update the article in Sanity
- * - Need to have new presentation setup working
- * - Need to have a way to get the user sanity login state
- */
-function OutdatedAction() {
-  /* <Link href="https://aksel.nav.no/side/skriv-for-aksel#a5b79ddd59da">
-      Hvordan oppdaterer man innhold i Sanity?
-    </Link> */
-  return <></>;
 }
 
 export { SystemPanel };
