@@ -7,7 +7,7 @@ import {
   ThumbDownIcon,
   ThumbUpIcon,
 } from "@navikt/aksel-icons";
-import { Heading } from "@navikt/ds-react";
+import { CopyButton, Heading, Spacer } from "@navikt/ds-react";
 import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { AkselBrandColors } from "@/app/theme";
 import styles from "./EditorPanel.module.css";
@@ -22,7 +22,10 @@ type EditorPanelProps = {
    * @default "h2"
    */
   headingTag?: "h2" | "h3" | "h4" | "p";
-
+  /**
+   * Optional text to copy
+   */
+  copyText?: string;
   variant:
     | "tips"
     | "do"
@@ -79,7 +82,7 @@ const VariantConfig: Record<
 } as const;
 
 function EditorPanel(props: EditorPanelProps) {
-  const { variant, children, heading, headingTag } = props;
+  const { variant, children, heading, headingTag, copyText } = props;
 
   const config = VariantConfig[variant];
 
@@ -93,6 +96,7 @@ function EditorPanel(props: EditorPanelProps) {
         variant={variant}
         heading={heading}
         headingTag={headingTag}
+        copyText={copyText}
       />
       <div className={styles.editorPanelContent}>{children}</div>
     </div>
@@ -100,9 +104,12 @@ function EditorPanel(props: EditorPanelProps) {
 }
 
 function EditorPanelHeader(
-  props: Pick<EditorPanelProps, "variant" | "heading" | "headingTag">,
+  props: Pick<
+    EditorPanelProps,
+    "variant" | "heading" | "headingTag" | "copyText"
+  >,
 ) {
-  const { variant, heading, headingTag = "h2" } = props;
+  const { variant, heading, headingTag = "h2", copyText } = props;
   const config = VariantConfig[variant];
 
   return (
@@ -111,6 +118,12 @@ function EditorPanelHeader(
       <Heading as={headingTag} size="small">
         {heading ?? config.heading}
       </Heading>
+      {copyText && (
+        <>
+          <Spacer />
+          <CopyButton size="small" copyText={copyText} />
+        </>
+      )}
     </div>
   );
 }
