@@ -84,18 +84,25 @@ export default async function Page({ params }: Props) {
                 {pageData?.ingress}
               </BodyLong>
             )}
-            <div className={styles.articleMeta}>
-              <Detail uppercase as="span">
-                {publishDate}
-              </Detail>
-              {authors?.[0] && (
-                <>
-                  <span className={styles.diamond} />
-                  <BodyShort size="small" as="address" className="not-italic">
-                    {authors?.[0]}
-                  </BodyShort>
-                </>
-              )}
+            <div>
+              <HStack
+                justify="center"
+                align="center"
+                gap="space-8"
+                marginBlock="space-20 0"
+              >
+                <Detail uppercase as="span">
+                  {publishDate}
+                </Detail>
+                {authors?.[0] && (
+                  <>
+                    <span className={styles.diamond} />
+                    <BodyShort size="small" as="address" className="not-italic">
+                      {authors?.[0]}
+                    </BodyShort>
+                  </>
+                )}
+              </HStack>
             </div>
           </div>
           <div className={styles.image}>
@@ -105,8 +112,8 @@ export default async function Page({ params }: Props) {
                 blurDataURL={imageUrl}
                 placeholder="blur"
                 decoding="sync"
-                layout="fill"
-                objectFit="cover"
+                fill={true}
+                sizes="100%"
                 aria-hidden
                 priority
                 alt=""
@@ -116,8 +123,8 @@ export default async function Page({ params }: Props) {
               <NextImage
                 src={getImage(pageData?.heading ?? "", "thumbnail")}
                 decoding="sync"
-                layout="fill"
-                objectFit="cover"
+                fill={true}
+                sizes="100%"
                 aria-hidden
                 priority
                 alt=""

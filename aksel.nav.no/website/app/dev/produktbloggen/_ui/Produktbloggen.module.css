@@ -43,16 +43,6 @@
   line-height: var(--ax-font-line-height-heading-medium);
 }
 
-.articleMeta {
-  display: inline-flex;
-  margin-top: var(--ax-space-32);
-  flex-wrap: wrap;
-  gap: var(--ax-space-8);
-  align-items: center;
-  font-size: var(--ax-font-size-medium);
-  line-height: var(--ax-font-line-height-large);
-}
-
 .diamond {
   width: var(--ax-space-8);
   height: var(--ax-space-8);
