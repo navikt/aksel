@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
-import { Detail } from "../typography";
+import { Detail, Heading, HeadingProps } from "../typography";
 
 export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -19,16 +19,34 @@ export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
    * Overrides hoizontal position of toptext.
    */
   toptextPosition?: "left" | "right";
+  /**
+   * The heading level for the toptext.
+   * @default "3"
+   */
+  toptextHeadingLevel?: Exclude<HeadingProps["level"], "1">;
 }
 
 const Bubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
-  ({ children, className, name, timestamp, toptextPosition, ...rest }, ref) => {
+  (
+    {
+      children,
+      className,
+      name,
+      timestamp,
+      toptextPosition,
+      toptextHeadingLevel = "3",
+      ...rest
+    },
+    ref,
+  ) => {
     const { cn } = useRenameCSS();
 
     return (
       <div ref={ref} className={cn("navds-chat__bubble", className)} {...rest}>
         {(timestamp || name) && (
-          <h3
+          <Heading
+            size="xsmall"
+            level={toptextHeadingLevel}
             className={cn(
               `navds-chat__top-text`,
               toptextPosition && `navds-chat__top-text--${toptextPosition}`,
@@ -41,7 +59,7 @@ const Bubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
               </Detail>
             )}
             {timestamp && <Detail as="span">{timestamp}</Detail>}
-          </h3>
+          </Heading>
         )}
         {children}
       </div>
