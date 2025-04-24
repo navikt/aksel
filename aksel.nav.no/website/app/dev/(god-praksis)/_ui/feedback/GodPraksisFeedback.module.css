@@ -1,0 +1,8 @@
+.feedbackIllustrationSquare {
+  fill: var(--ax-bg-meta-purple-moderate-pressed);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .feedbackIllustrationSquare {
+  fill: var(--ax-bg-meta-purple-strong);
+}

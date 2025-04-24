@@ -1,43 +1,24 @@
-.heroSelector {
-  --aksel-website-hero-selector-x: ;
-  --aksel-website-hero-selector-y: ;
-
-  clip-path: circle(140% at var(--aksel-website-hero-selector-x) var(--aksel-website-hero-selector-y));
-  animation: clipExpand 800ms cubic-bezier(0.3, 0, 0.15, 1);
-  height: fit-content;
-  min-height: 100%;
-}
-
-@keyframes clipExpand {
-  0% {
-    clip-path: circle(0% at var(--aksel-website-hero-selector-x) var(--aksel-website-hero-selector-y));
-  }
-
-  100% {
-    clip-path: circle(140% at var(--aksel-website-hero-selector-x) var(--aksel-website-hero-selector-y));
-  }
-}
-
-.heroGradient {
-  background: linear-gradient(85deg, #5eead4 0%, #99f6e4 48%, #99f6e4 100%);
-}
-
-.heroGradientOpen {
-  background: linear-gradient(265deg, #14b8a6 0%, #2dd4bf 48.5%, #2dd4bf 100%);
-}
-
-/* NEW */
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
 .godPraksisHero {
   border-radius: var(--ax-border-radius-xlarge);
   border: 1px solid var(--ax-border-brand-blue-subtleA);
   position: relative;
   isolation: isolate;
   background: linear-gradient(238deg, var(--ax-bg-brand-blue-soft) 20.83%, var(--ax-bg-brand-blue-moderate) 36.67%);
+  transition: margin 500ms;
 }
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .godPraksisHero {
   background: linear-gradient(238deg, var(--ax-bg-brand-blue-softA) 20.83%, var(--ax-bg-neutral-soft) 36.67%);
+}
+
+.godPraksisHeroDescription {
+  margin-block-end: var(--ax-space-24);
+
+  &[data-collapsible="true"] {
+    margin-block-end: 0;
+  }
 }
 
 .godPraksisHeroTitle {
@@ -52,6 +33,7 @@
   z-index: -1;
   overflow: clip;
   border-radius: var(--ax-border-radius-xlarge);
+  box-sizing: content-box;
 }
 
 .heroCubeSvg {
@@ -78,4 +60,68 @@
   &:hover {
     text-decoration-thickness: 0.15em;
   }
+}
+
+.godPraksisHeroDialog {
+  position: absolute;
+  inset: -1px;
+  overflow: clip;
+  border-radius: var(--ax-border-radius-xlarge);
+  border: 1px solid var(--ax-border-brand-blue-subtle);
+  box-shadow: 0 0 0 1px var(--ax-border-brand-blue-subtle);
+  clip-path: circle(140% at var(--website-hero-selector-x) var(--website-hero-selector-y));
+  animation: clipExpand 1s cubic-bezier(0.3, 0.2, 0.15, 1);
+  height: fit-content;
+  min-height: 100%;
+  background: linear-gradient(238deg, var(--ax-bg-brand-blue-moderate) 20.83%, var(--ax-bg-brand-blue-moderate-hover) 36.67%);
+
+  &[data-hidden="true"] {
+    display: none;
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .godPraksisHeroDialog {
+  background: linear-gradient(238deg, var(--ax-bg-brand-blue-moderate) 20.83%, var(--ax-bg-brand-blue-soft) 36.67%);
+}
+
+@keyframes clipExpand {
+  0% {
+    clip-path: circle(5% at var(--website-hero-selector-x) var(--website-hero-selector-y));
+  }
+
+  100% {
+    clip-path: circle(140% at var(--website-hero-selector-x) var(--website-hero-selector-y));
+  }
+}
+
+.godPraksisHeroButton {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-2);
+  border-radius: var(--ax-border-radius-full);
+  padding-block: var(--ax-space-4);
+  margin-block-end: var(--ax-space-16);
+  padding-inline: var(--ax-space-16) var(--ax-space-8);
+  background: var(--ax-bg-brand-blue-strong);
+  color: var(--ax-text-brand-blue-contrast);
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+
+  &[data-open="true"] {
+    background: var(--ax-bg-brand-blue-strong-pressed);
+  }
+
+  &[data-hidden="true"] {
+    visibility: hidden;
+  }
+}
+
+.godPraksisHeroButtonIcon {
+  flex-shrink: 0;
 }

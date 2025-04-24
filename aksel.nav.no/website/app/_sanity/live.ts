@@ -12,6 +12,7 @@ export const { sanityFetch, SanityLive } = defineLive({
   client,
   serverToken: token,
   /* Only add after draftmode is put behind auth */
+  browserToken: "invalid token",
   /* browserToken: token, */
   stega: false,
 });

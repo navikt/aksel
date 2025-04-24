@@ -33,7 +33,8 @@
     color: var(--ax-text-contrast);
   }
 
-  &[data-autoLayout="true"] {
+  &[data-layout="auto"] {
+    row-gap: var(--ax-space-4);
     display: grid;
     grid-template-areas:
       "image image"
@@ -42,21 +43,25 @@
       "icon footer";
     grid-template-columns: auto 1fr;
     /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
-    grid-template-rows: auto 1fr auto auto;
+    grid-template-rows: min-content min-content min-content auto;
     align-items: center;
+
+    &:not(:has(.aksel-link-card__description, .aksel-link-card__footer)) {
+      grid-template-rows: auto 1fr auto auto;
+    }
   }
 }
 
 .aksel-link-card__title {
   grid-area: title;
   height: fit-content;
-  margin-bottom: var(--ax-space-16);
   color: var(--ax-text-default);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--ax-space-8);
   width: 100%;
+  word-break: break-all;
 
   &[data-variant="subtle"] {
     color: var(--ax-text-subtle);
@@ -69,8 +74,8 @@
 
 .aksel-link-card__description {
   grid-area: description;
-  margin-bottom: var(--ax-space-16);
   max-width: 400px;
+  display: grid;
 
   &:last-child {
     margin-bottom: 0;
@@ -78,8 +83,10 @@
 }
 
 .aksel-link-card__footer {
+  margin-block-start: var(--ax-space-16);
   grid-area: footer;
   vertical-align: bottom;
+  align-self: flex-end;
 }
 
 .aksel-link-card__icon {
