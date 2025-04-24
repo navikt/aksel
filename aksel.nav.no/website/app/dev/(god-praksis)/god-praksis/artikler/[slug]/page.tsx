@@ -1,50 +1,70 @@
 import differenceInMonths from "date-fns/differenceInMonths";
+import { Metadata, ResolvingMetadata } from "next";
 import { PortableTextBlock } from "next-sanity";
-import Link from "next/link";
+import NextLink from "next/link";
 import { notFound } from "next/navigation";
+import { Image } from "sanity";
 import { TagFillIcon } from "@navikt/aksel-icons";
-import { BodyShort, HStack, Heading } from "@navikt/ds-react";
+import {
+  BodyShort,
+  Box,
+  HStack,
+  Heading,
+  Label,
+  Link,
+  VStack,
+} from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ARTICLE_BY_SLUG,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
-import { SystemPanel } from "@/app/_ui/panels/SystemPanel";
+import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
+import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
+import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
+import { GodPraksisFeedback } from "@/app/dev/(god-praksis)/_ui/feedback/GodPraksisFeedback";
 import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
-import { dateStr } from "@/utils";
+import { abbrName, dateStr } from "@/utils";
 import styles from "./page.module.css";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-/* export async function generateMetadata(
+export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { slug } = await params;
 
   const { data: seoData } = await sanityFetch({
-    query: GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
-    params: { slug: tema },
+    query: GOD_PRAKSIS_ARTICLE_BY_SLUG,
+    params: { slug: `god-praksis/artikler/${slug}` },
     stega: false,
   });
 
   const ogImages = (await parent).openGraph?.images || [];
   const pageOgImage = urlForOpenGraphImage(seoData?.seo?.image as Image);
+  const fallbackOgImage = urlForOpenGraphImage(
+    seoData?.undertema?.[0]?.tema?.image as Image,
+  );
 
   pageOgImage && ogImages.unshift(pageOgImage);
+  fallbackOgImage && ogImages.unshift(fallbackOgImage);
 
   return {
-    title: seoData?.title ?? "Tema",
-    description: seoData?.seo?.meta ?? seoData?.description,
+    title: seoData?.heading,
+    description: seoData?.seo?.meta ?? seoData?.ingress,
     openGraph: {
       images: ogImages,
+      publishedTime: seoData?.publishedAt ?? seoData?._updatedAt,
+      modifiedTime: seoData?.updateInfo?.lastVerified ?? seoData?._updatedAt,
     },
   };
-} */
+}
 
 export default async function Page(props: Props) {
   const { slug } = await props.params;
@@ -73,6 +93,10 @@ export default async function Page(props: Props) {
     pageData?._updatedAt;
 
   const outdated = differenceInMonths(new Date(), new Date(verifiedDate)) >= 12;
+  const authors =
+    pageData?.contributors
+      ?.filter((auth) => !!auth.title)
+      .map((auth) => auth.title ?? "") ?? [];
 
   return (
     <article className={styles.pageArticle}>
@@ -99,140 +123,70 @@ export default async function Page(props: Props) {
         </BodyShort>
         <HStack gap="space-8" marginBlock="space-16 space-48">
           {pageData.undertema?.map(({ tema, title }) => (
-            <UnderTemaLink
+            <NextLink
               key={title}
+              className={styles.pageUndertemaTag}
               href={`/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
                 title ?? "",
               )}`}
+              data-link-card-anchor
+              data-umami-event="navigere"
+              data-umami-event-kilde="god praksis artikkel chips"
             >
-              {title}
-            </UnderTemaLink>
+              <TagFillIcon aria-hidden fontSize="1.25rem" />
+              <span className={styles.pageUndertemaTagText}>{title}</span>
+              <LinkCardArrow />
+            </NextLink>
           ))}
         </HStack>
       </div>
-      <TableOfContents
-        feedback={{
-          name: pageData.heading,
-          text: "Send innspill",
-        }}
-        toc={toc}
-      />
+      <TableOfContents toc={toc} />
       <div>
         {outdated && <SystemPanel variant="outdated" docId={pageData._id} />}
-        <SystemPanel variant="outdated" docId={pageData._id} />
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
+        {pageData.relevante_artikler &&
+          pageData.relevante_artikler.length > 0 && (
+            <Box marginBlock="space-96 space-0">
+              <EditorPanel variant="links" heading="Les også">
+                <WebsiteList as="ul">
+                  {pageData.relevante_artikler.map((item) => (
+                    <WebsiteListItem key={item.heading} icon>
+                      <Link
+                        variant="neutral"
+                        href={item.slug?.current}
+                        data-umami-event="navigere"
+                        data-umami-event-kilde="les ogsaa"
+                      >
+                        {item.heading}
+                      </Link>
+                    </WebsiteListItem>
+                  ))}
+                </WebsiteList>
+              </EditorPanel>
+            </Box>
+          )}
+        {authors?.length > 0 && (
+          <VStack gap="space-8" marginBlock="space-48">
+            <Label data-aksel-heading-color as="p">
+              Medvirkende
+            </Label>
+            <HStack gap="space-4" asChild>
+              <BodyShort textColor="subtle" as="div">
+                {authors.map(abbrName).map((x, y) => (
+                  <address key={x}>
+                    {x}
+                    {y !== authors.length - 1 && ", "}
+                  </address>
+                ))}
+              </BodyShort>
+            </HStack>
+          </VStack>
+        )}
+
+        <GodPraksisFeedback docId={pageData._id} />
       </div>
     </article>
-  );
-
-  /* return (
-    <div>
-      <GodPraksisIntroHero
-        title={temaPage.title ?? "Tema"}
-        description={temaPage.description}
-        image={temaPage.pictogram}
-        isCollapsible
-      />
-      <VStack
-        gap="space-48"
-        paddingBlock="space-24"
-        paddingInline={{ xs: "space-16", lg: "space-40" }}
-      >
-        <GodPrakisChipsNavigation
-          articles={articlesByContext}
-          innholdstype={innholdstypeParam}
-          undertema={undertemaParam}
-        />
-        <VStack gap="space-48">
-          {Object.entries(articlesMap).length === 0 ? (
-            <p>Ingen artikler funnet.</p>
-          ) : (
-            Object.values(articlesMap).map(
-              ({ title, description, ariaLabel, articles }) => (
-                <section aria-label={ariaLabel} key={title}>
-                  <VStack gap="space-8" marginBlock="0 space-24">
-                    <Heading level="2" size="large" data-aksel-heading-color>
-                      {title}
-                    </Heading>
-                    {description && (
-                      <BodyLong data-text-prose>{description}</BodyLong>
-                    )}
-                  </VStack>
-                  <HGrid
-                    key={title}
-                    as="ul"
-                    columns={{ xs: 1, md: 2 }}
-                    gap={{ xs: "space-12", md: "space-24" }}
-                  >
-                    {articles.map((article) => (
-                      <li key={article.slug}>
-                        <LinkCard>
-                          <LinkCardTitle as="h2">
-                            <LinkCardAnchor href={article.slug ?? ""}>
-                              {article.heading}
-                            </LinkCardAnchor>
-                          </LinkCardTitle>
-
-                          {article.description && (
-                            <LinkCardDescription>
-                              {article.displayDate && (
-                                <Box asChild marginBlock="0 space-8">
-                                  <Detail
-                                    as="time"
-                                    textColor="subtle"
-                                    uppercase
-                                  >
-                                    {article.displayDate}
-                                  </Detail>
-                                </Box>
-                              )}
-                              <p>{article.description}</p>
-                            </LinkCardDescription>
-                          )}
-                          <LinkCardFooter>
-                            <HStack gap="space-12">
-                              <GodPraksisTaxonomyTag type="undertema">
-                                {article.undertema}
-                              </GodPraksisTaxonomyTag>
-                              <GodPraksisTaxonomyTag type="innholdstype">
-                                {article.innholdstype}
-                              </GodPraksisTaxonomyTag>
-                            </HStack>
-                          </LinkCardFooter>
-                        </LinkCard>
-                      </li>
-                    ))}
-                  </HGrid>
-                </section>
-              ),
-            )
-          )}
-        </VStack>
-      </VStack>
-    </div>
-  ); */
-}
-
-function UnderTemaLink({
-  children,
-  href,
-}: {
-  children: React.ReactNode;
-  href: string;
-}) {
-  return (
-    <Link
-      className={styles.pageUndertemaTag}
-      href={href}
-      data-link-card-anchor
-      data-umami-event="navigere"
-      data-umami-event-kilde="god praksis artikkel chips"
-    >
-      <TagFillIcon aria-hidden fontSize="1.25rem" />
-      <span className={styles.pageUndertemaTagText}>{children}</span>
-      <LinkCardArrow />
-    </Link>
   );
 }

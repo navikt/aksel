@@ -29,14 +29,11 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
     `rgba(${background.rgb?.r},${background.rgb?.g},${background.rgb?.b},${background.rgb?.a})`;
 
   return (
-    <figure
-      data-block-margin="space-28"
-      className={styles.bildeFigure}
-      style={{ "--bilde-background": imageBg }}
-      data-image-border={border}
-    >
+    <figure data-block-margin="space-28" className={styles.bildeFigure}>
       <img
+        data-image-border={border}
         className={`light ${styles.bildeImage}`}
+        style={{ "--bilde-background": imageBg }}
         alt={dekorativt ? "" : alt}
         decoding="async"
         src={imageUrl}
@@ -45,11 +42,15 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
       {caption && (
         <HGrid
           as="figcaption"
-          marginBlock="space-8 0"
+          marginBlock="space-12 0"
+          marginInline="space-12"
           gap="space-4"
-          paddingBlock="space-16"
         >
-          <BodyLong as="span" size="small">
+          <BodyLong
+            as="span"
+            size="small"
+            align={kilde?.har_kilde ? "start" : "center"}
+          >
             {caption}
           </BodyLong>
           {kilde?.har_kilde && (

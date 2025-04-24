@@ -1,9 +1,8 @@
 import NextLink from "next/link";
-import { LinkIcon } from "@navikt/aksel-icons";
-import { HStack, Heading, Link } from "@navikt/ds-react";
+import { Link } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
-import styles from "./RelatertInnhold.module.css";
 
 function RelatertInnhold(
   props: ExtractPortableComponentProps<"relatert_innhold">,
@@ -26,17 +25,7 @@ function RelatertInnhold(
   };
 
   return (
-    <div
-      className={styles.relatertInnhold}
-      data-block-margin="space-28"
-      data-color-role="neutral"
-    >
-      <HStack gap="space-8" align="center" marginBlock="0 space-4">
-        <LinkIcon fontSize="1.5rem" title="Lenker" aria-hidden />
-        <Heading size="small" as="p">
-          {title || "Lenker"}
-        </Heading>
-      </HStack>
+    <EditorPanel variant="links" heading={title ?? undefined} headingTag="p">
       <WebsiteList as="ul">
         {lenker.map((pageLink) => (
           <WebsiteListItem key={pageLink._key} icon>
@@ -52,7 +41,7 @@ function RelatertInnhold(
           </WebsiteListItem>
         ))}
       </WebsiteList>
-    </div>
+    </EditorPanel>
   );
 }
 

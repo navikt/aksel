@@ -25,6 +25,10 @@
   .navds-body-long.navds-typo--spacing + & {
     margin-top: -1rem;
   }
+
+  &:not(:last-child) {
+    margin-bottom: var(--ax-space-16);
+  }
 }
 
 .typoListIcon {
