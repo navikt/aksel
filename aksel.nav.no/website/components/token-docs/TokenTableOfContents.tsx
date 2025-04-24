@@ -8,14 +8,9 @@ import { searchTokens } from "./toolbar/SearchField.utils";
 const TokenTableOfContents = () => {
   const searchParams = useSearchParams();
   const filteredTokens = searchTokens(searchParams?.get("tokenQuery") || "");
-  const toc = Object.entries(TOKEN_CATEGORIES)
-    .filter(([category]) =>
-      filteredTokens.some((token) => token.category === category),
-    )
-    .map(([key, category]) => ({
-      title: category.title,
-      id: key,
-    }));
+  const toc = TOKEN_CATEGORIES.filter((category) =>
+    filteredTokens.some((token) => token.category === category.id),
+  );
   return (
     <TableOfContents
       feedback={{

@@ -1,26 +1,24 @@
 import { Chips } from "@navikt/ds-react";
-import { RoleT } from "./config";
+import { BreakpointRoleT, ColorRoleT, FontRoleT, RoleT } from "./config";
 
 const TokenRolesChips = ({
   roles,
   selectedRole,
   setSelectedRole,
 }: {
-  roles: RoleT[];
+  roles: RoleT<ColorRoleT["id"] | FontRoleT["id"] | BreakpointRoleT["id"]>[];
   selectedRole: string | null;
   setSelectedRole: React.Dispatch<React.SetStateAction<typeof selectedRole>>;
 }) => {
   return (
     <Chips>
-      {roles.map(({ title }) => (
+      {roles.map(({ id, title }) => (
         <Chips.Toggle
           checkmark={false}
           key={title}
-          selected={selectedRole === title.toLowerCase()}
+          selected={selectedRole === id}
           onClick={() =>
-            selectedRole !== title.toLowerCase()
-              ? setSelectedRole(title.toLowerCase())
-              : setSelectedRole(null)
+            selectedRole !== id ? setSelectedRole(id) : setSelectedRole(null)
           }
         >
           {title}

@@ -11,24 +11,21 @@ import Toolbar from "./toolbar/Toolbar";
 const TokensPage = () => {
   const searchParams = useSearchParams();
   const filteredTokens = searchTokens(searchParams?.get("tokenQuery") || "");
-
-  const filteredCategories = Object.entries(TOKEN_CATEGORIES).filter(
-    ([category]) => filteredTokens.some((token) => token.category === category),
+  const filteredCategories = TOKEN_CATEGORIES.filter(({ id }) =>
+    filteredTokens.some((token) => token.category === id),
   );
   return (
     <VStack gap="10">
       <Toolbar />
-      {filteredCategories.map(([key, category]) => {
-        const { title, description } = category;
-        const roles = "roles" in category ? category.roles : undefined;
+      {filteredCategories.map(({ id, title, description, roles }) => {
         return (
           <TokenCategory
-            id={key}
-            key={key}
+            id={id}
+            key={id}
             title={title}
             description={description}
             roles={roles}
-            tokens={filteredTokens.filter((token) => token.category === key)}
+            tokens={filteredTokens.filter((token) => token.category === id)}
           />
         );
       })}

@@ -3,7 +3,7 @@ import { BodyLong, Heading, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { TokenForDocumentationT } from "../types/tokens";
 import TokenRolesChips from "./TokenRolesChips";
-import { BreakpointRolesT, ColorRolesT, FontRolesT } from "./config";
+import { BreakpointRoleT, ColorRoleT, FontRoleT } from "./config";
 import { sortTokens } from "./token-utils";
 import TokenEntry from "./token/example/TokenEntry";
 
@@ -17,19 +17,22 @@ const TokenCategory = ({
   id: string;
   title: string;
   description: string;
-  roles?: ColorRolesT | FontRolesT | BreakpointRolesT;
+  roles?: ColorRoleT[] | FontRoleT[] | BreakpointRoleT[];
   tokens: TokenForDocumentationT[];
 }) => {
   const sortedTokens = tokens.sort(sortTokens);
   const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
-  const filteredRoles = Object.entries(roles || {})
-    .filter(([role]) => tokens.some((token) => token.role === role))
-    .map(([, role]) => role);
+  const filteredRoles = roles?.filter((role) =>
+    tokens.some((token) => token.role === role.id),
+  );
   useEffect(() => {
-    if (filteredRoles.length === 1) {
-      setSelectedRole(filteredRoles[0].title.replace(" ", "-").toLowerCase());
+    if (filteredRoles?.length === 1) {
+      setSelectedRole(filteredRoles[0].id);
     }
   }, [filteredRoles]);
+  const descriptionForSelectedRole =
+    selectedRole &&
+    roles?.find((role) => role.id === selectedRole)?.description;
   return (
     <section aria-labelledby={id}>
       <Heading
@@ -55,11 +58,9 @@ const TokenCategory = ({
               setSelectedRole={setSelectedRole}
             />
           )}
-          {selectedRole && roles && (
+          {descriptionForSelectedRole && (
             <BodyLong as="p">
-              <TextWithMarkdown>
-                {roles[selectedRole]?.description}
-              </TextWithMarkdown>
+              <TextWithMarkdown>{descriptionForSelectedRole}</TextWithMarkdown>
             </BodyLong>
           )}
           <div>

@@ -1,183 +1,202 @@
 import { type SemanticColorRoles } from "@navikt/ds-tokens/types";
 
-export type RoleT = {
+export type RoleT<T> = {
+  id: T;
   title: string;
   description: string;
 };
 
-export type ColorRolesT = Record<SemanticColorRoles, RoleT>;
+export type ColorRoleT = RoleT<SemanticColorRoles>;
 
-export type FontRolesT = Record<
-  "family" | "line-height" | "size" | "weight",
-  RoleT
->;
+export type FontRoleT = RoleT<"family" | "line-height" | "size" | "weight">;
 
-export type BreakpointRolesT = Record<"mobile first" | "desktop first", RoleT>;
+export type BreakpointRoleT = RoleT<"mobile first" | "desktop first">;
 
-export type ColorCategoriesT = Record<
-  "backgroundColor" | "borderColor" | "textColor",
+export type ColorCategoryT = {
+  id: "backgroundColor" | "borderColor" | "textColor";
+  title: string;
+  description: string;
+  roles?: ColorRoleT;
+};
+
+export type FontCategoryT = {
+  id: "font";
+  title: string;
+  description: string;
+  roles?: FontRoleT;
+};
+
+export type BreakpointCategoryT = {
+  id: "breakpoint";
+  title: string;
+  description: string;
+  roles?: BreakpointRoleT;
+};
+
+export type TokenCategoryT = {
+  id:
+    | ColorCategoryT["id"]
+    | FontCategoryT["id"]
+    | BreakpointCategoryT["id"]
+    | "shadow"
+    | "space"
+    | "radius";
+  title: string;
+  description: string;
+  roles?: ColorRoleT[] | FontRoleT[] | BreakpointRoleT[];
+};
+
+const COLOR_ROLES: ColorRoleT[] = [
   {
-    title: string;
-    description: string;
-    roles?: ColorRolesT;
-  }
->;
-
-export type FontCategoriesT = Record<
-  "font",
-  {
-    title: string;
-    description: string;
-    roles?: FontRolesT;
-  }
->;
-
-export type BreakpointCategoriesT = Record<
-  "breakpoint",
-  {
-    title: string;
-    description: string;
-    roles?: BreakpointRolesT;
-  }
->;
-
-export type TokenCategoriesT = ColorCategoriesT &
-  FontCategoriesT &
-  BreakpointCategoriesT &
-  Record<
-    "shadow" | "space" | "radius",
-    {
-      title: string;
-      description: string;
-    }
-  >;
-
-const COLOR_ROLES: ColorRolesT = {
-  neutral: {
+    id: "neutral",
     title: "Neutral",
     description:
       "Neutral brukes på elementer som ikke skal stikke seg ut eller har et bestemt budskap.",
   },
-  accent: {
+  {
+    id: "accent",
     title: "Accent",
     description: "Accent brukes som standard farge på interaktive elementer.",
   },
-  success: {
+  {
+    id: "success",
     title: "Success",
     description:
       "Success brukes på elementer som har en positiv interaksjon eller budskap.",
   },
-  warning: {
+  {
+    id: "warning",
     title: "Warning",
     description: "Warning brukes på elementer som kommuniserer advarsel.",
   },
-  danger: {
+  {
+    id: "danger",
     title: "Danger",
     description:
       "Danger brukes på elementer som har en destruktiv interaksjon eller kommuniserer at noe gikk galt.",
   },
-  info: {
+  {
+    id: "info",
     title: "Info",
     description:
       "Info brukes på elementer som har informerer eller gir opplysning.",
   },
-  "brand-magenta": {
+  {
+    id: "brand-magenta",
     title: "Brand magenta",
     description:
       "Brand Magenta er den primære brand-fargen. Brukes sparsommelig.",
   },
-  "brand-beige": {
+  {
+    id: "brand-beige",
     title: "Brand beige",
     description:
       "Brand Beige er den sekundære brand-fargen. Brukes sparsommelig.",
   },
-  "brand-blue": {
+  {
+    id: "brand-blue",
     title: "Brand blue",
     description:
       "Brand Blue er den tertiære brand-fargen. Kan brukes mer enn de andre brand-fargene.",
   },
-  "meta-lime": {
+  {
+    id: "meta-lime",
     title: "Meta lime",
     description:
       "Meta Lime brukes gjerne på metadata. Team definerer selv hva fargen kommuniserer.",
   },
-  "meta-purple": {
+  {
+    id: "meta-purple",
     title: "Meta purple",
     description:
       "TODO: Meta Purple brukes gjerne på metadata. Team definerer selv hva fargen kommuniserer.",
   },
-};
+];
 
-const FONT_ROLES: FontRolesT = {
-  family: {
+const FONT_ROLES: FontRoleT[] = [
+  {
+    id: "family",
     title: "Family",
     description: "Fonten som brukes i fontstilene.",
   },
-  "line-height": {
+  {
+    id: "line-height",
     title: "Line height",
     description: "Linjehøyder som brukes i fontstilene.",
   },
-  size: {
+  {
+    id: "size",
     title: "Size",
     description: "Tekststørrelser som brukes i fontstilene.",
   },
-  weight: {
+  {
+    id: "weight",
     title: "Weight",
     description: "Fontvekter som brukes i fontstilene.",
   },
-};
+];
 
-const BREAKPOINT_ROLES: BreakpointRolesT = {
-  "mobile first": {
+const BREAKPOINT_ROLES: BreakpointRoleT[] = [
+  {
+    id: "mobile first",
     title: "Mobile first",
     description: "Brekkpunkter som tar utgangspunkt i mobil først.",
   },
-  "desktop first": {
+  {
+    id: "desktop first",
     title: "Desktop first",
     description: "Brekkpunkter som tar utgangspunkt i desktop først.",
   },
-};
+];
 
-const TOKEN_CATEGORIES: TokenCategoriesT = {
-  backgroundColor: {
+const TOKEN_CATEGORIES: TokenCategoryT[] = [
+  {
+    id: "backgroundColor",
     title: "Background colors",
     description: "Farge på bakgrunner.",
     roles: COLOR_ROLES,
   },
-  borderColor: {
+  {
+    id: "borderColor",
     title: "Border colors",
     description: "Farge på border/stroke.",
     roles: COLOR_ROLES,
   },
-  textColor: {
+  {
+    id: "textColor",
     title: "Text colors",
     description: "Farge på tekst og ikoner.",
     roles: COLOR_ROLES,
   },
-  shadow: {
+  {
+    id: "shadow",
     title: "Shadows",
     description:
       "Skyggestil som brukes på svevende elementer (popovers og modaler).",
   },
-  space: {
+  {
+    id: "space",
     title: "Spacing",
     description: "Avstander som brukes til padding, margin og gap.",
   },
-  radius: {
+  {
+    id: "radius",
     title: "Radius",
     description: "Hjørneavrundinger som brukes på elementer.",
   },
-  font: {
+  {
+    id: "font",
     title: "Fonts",
     description: "Byggeklossene til fonstilene.",
     roles: FONT_ROLES,
   },
-  breakpoint: {
+  {
+    id: "breakpoint",
     title: "Breakpoints",
     description:
       "Skjermbreddeverdier som kan utløse endring i layout og innhold.",
     roles: BREAKPOINT_ROLES,
   },
-};
+];
 
 export { TOKEN_CATEGORIES, COLOR_ROLES, FONT_ROLES, BREAKPOINT_ROLES };

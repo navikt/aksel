@@ -19,7 +19,7 @@ function tokenIndex(_tokens: TokenForDocumentationT[]) {
   });
 }
 
-function searchTokens(query: string) {
+function searchTokens(query: string): TokenForDocumentationT[] {
   return query
     ? tokenIndex(tokens)
         .search(query)
