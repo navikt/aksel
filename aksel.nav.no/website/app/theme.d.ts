@@ -10,5 +10,9 @@ declare module "react" {
      * Standarized margin for PortableText blocks.
      */
     "data-block-margin"?: "space-28" | "space-0";
+    /**
+     * When set, the element will be rendered with a max-width made for prose text.
+     */
+    "data-text-prose"?: boolean;
   }
 }

@@ -1,5 +1,5 @@
 import { PortableTextBlock } from "next-sanity";
-import { Detail, HStack, Heading, Tag } from "@navikt/ds-react";
+import { BodyShort, Box, Detail, HStack, Heading, Tag } from "@navikt/ds-react";
 import {
   GRUNNLEGGENDE_BY_SLUG_QUERYResult,
   KOMPONENT_BY_SLUG_QUERYResult,
@@ -42,6 +42,12 @@ type DesignsystemetPageT = {
     | MONSTER_MALER_BY_SLUG_QUERYResult;
 };
 
+const eyebrowMap = {
+  komponent_artikkel: "Komponenter",
+  ds_artikkel: "Grunnleggende",
+  templates_artikkel: "Maler",
+};
+
 async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
   /* TODO: refactor dateStr to appdir */
   const publishDate = await dateStr(data?._updatedAt ?? data?._createdAt ?? "");
@@ -51,7 +57,12 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
   const isComponentPage = data?._type === "komponent_artikkel";
 
   return (
-    <div data-block-margin="space-28">
+    <Box marginBlock="space-0 space-28">
+      {data?._type && (
+        <BodyShort size="small" className={styles.pageHeaderEyebrow}>
+          {eyebrowMap[data?._type]}
+        </BodyShort>
+      )}
       <Heading level="1" size="xlarge" className={styles.pageHeaderHeading}>
         {data?.heading}
       </Heading>
@@ -83,7 +94,7 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
       {isComponentPage && <KomponentLinks data={data} />}
 
       <DesignsystemetThumbnail />
-    </div>
+    </Box>
   );
 }
 
