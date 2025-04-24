@@ -18,8 +18,8 @@ const TokenEntry = ({
     <Box.New
       borderWidth={`${index === 0 ? 1 : 0} 0 1`}
       borderColor="neutral-subtle"
-      paddingBlock="4"
-      paddingInline="2"
+      paddingBlock="space-16"
+      paddingInline="space-8"
     >
       <HGrid gap="8" columns="min-content 1fr">
         <TokenPreview token={token} />
