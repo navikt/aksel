@@ -3,7 +3,7 @@ export type TokenForDocumentationT = {
   value: string;
   jsValue: string;
   rawValue: string;
-  comment: string;
+  comment?: string;
   type: string;
   rawType: string;
   group?: string;
