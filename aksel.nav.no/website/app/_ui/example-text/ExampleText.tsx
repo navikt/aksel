@@ -1,6 +1,6 @@
 import { BodyLong, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
-import { EditorPanel } from "@/app/_ui/editor-panel /EditorPanel";
+import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 
 function ExampleText(
   props: ExtractPortableComponentProps<"exampletext_block">,

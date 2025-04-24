@@ -21,7 +21,7 @@ import {
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { EditorPanel } from "@/app/_ui/editor-panel /EditorPanel";
+import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
