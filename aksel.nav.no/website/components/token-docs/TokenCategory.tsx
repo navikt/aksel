@@ -3,12 +3,12 @@ import { BodyLong, Heading, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { TokenForDocumentationT } from "../types/tokens";
 import TokenRolesChips from "./TokenRolesChips";
+import TokensList from "./TokensList";
 import { BreakpointRoleT, ColorRoleT, FontRoleT } from "./config";
 import { sortTokens } from "./token-utils";
-import TokenEntry from "./token/example/TokenEntry";
 
 const TokenCategory = ({
-  id,
+  id: categoryId,
   title,
   description,
   roles,
@@ -36,14 +36,10 @@ const TokenCategory = ({
     }
   }, [filteredRoles]);
 
-  const descriptionForSelectedRole =
-    selectedRole &&
-    roles?.find((role) => role.id === selectedRole)?.description;
-
   return (
-    <section aria-labelledby={id}>
+    <section aria-labelledby={categoryId}>
       <Heading
-        id={id}
+        id={categoryId}
         level="2"
         size="large"
         spacing
@@ -58,25 +54,42 @@ const TokenCategory = ({
               <TextWithMarkdown>{description}</TextWithMarkdown>
             </BodyLong>
           )}
-          {filteredRoles && (
+          {filteredRoles && filteredRoles.length > 1 && (
             <TokenRolesChips
               roles={filteredRoles}
               selectedRole={selectedRole}
               setSelectedRole={setSelectedRole}
             />
           )}
-          {descriptionForSelectedRole && (
-            <BodyLong as="p">
-              <TextWithMarkdown>{descriptionForSelectedRole}</TextWithMarkdown>
-            </BodyLong>
-          )}
-          <div>
-            {filteredAndSortedTokens.map((token, index) => {
-              return (
-                <TokenEntry token={token} key={token.name} index={index} />
+          {filteredRoles === undefined || filteredRoles.length === 0 ? (
+            <TokensList tokens={filteredAndSortedTokens} />
+          ) : (
+            filteredRoles?.map((role) => {
+              const tokensForRole = filteredAndSortedTokens.filter(
+                (token) => token.role === role.id,
               );
-            })}
-          </div>
+              if (tokensForRole.length === 0) {
+                return null;
+              }
+              return (
+                <div key={role.id}>
+                  <Heading
+                    level="3"
+                    size="medium"
+                    id={categoryId + role.id}
+                    spacing
+                    style={{ scrollMarginBlockStart: "6rem" }}
+                  >
+                    {role.title}
+                  </Heading>
+                  <BodyLong as="p" spacing>
+                    <TextWithMarkdown>{role.description}</TextWithMarkdown>
+                  </BodyLong>
+                  <TokensList tokens={tokensForRole} />
+                </div>
+              );
+            })
+          )}
         </VStack>
       </div>
     </section>
