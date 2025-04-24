@@ -17,7 +17,7 @@ import {
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
-  GOD_PRAKSIS_ARTICLE_BY_SLUG,
+  GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
@@ -41,7 +41,7 @@ export async function generateMetadata(
   const { slug } = await params;
 
   const { data: seoData } = await sanityFetch({
-    query: GOD_PRAKSIS_ARTICLE_BY_SLUG,
+    query: GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
     params: { slug: `god-praksis/artikler/${slug}` },
     stega: false,
   });
@@ -73,7 +73,7 @@ export default async function Page(props: Props) {
 
   const [{ data: pageData }, { data: toc }] = await Promise.all([
     sanityFetch({
-      query: GOD_PRAKSIS_ARTICLE_BY_SLUG,
+      query: GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
     }),
     sanityFetch({
