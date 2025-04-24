@@ -5,7 +5,6 @@ import {
   ExpansionCardDescription,
   ExpansionCardHeader,
   ExpansionCardTitle,
-  /* @ts-expect-error Workspace cant resolve valid import */
 } from "@navikt/ds-react/ExpansionCard";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
