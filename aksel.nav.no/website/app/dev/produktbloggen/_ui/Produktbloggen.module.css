@@ -1,9 +1,128 @@
+.overviewTitle {
+  font-size: 48px;
+  color: var(--ax-text-brand-blue);
+  text-align: center;
+}
+
+.overviewSubtitle {
+  & p {
+    color: var(--ax-text-brand-blue-subtle);
+    text-align: center;
+    max-width: 670px;
+    font-size: var(--ax-font-size-heading-small);
+  }
+}
+
+.latestBloggPosts {
+  display: grid;
+  gap: var(--ax-space-48);
+  margin-inline: auto;
+  margin-block: var(--ax-space-40);
+}
+
+.bloggPosts {
+  margin-inline: auto;
+  margin-bottom: var(--ax-space-128);
+  display: grid;
+  width: 100%;
+  padding-inline: var(--ax-space-16);
+  max-width: var(--ax-breakpoint-2xl);
+}
+
+.remainingPosts {
+  display: grid;
+  gap: var(--ax-space-48);
+  margin-top: var(--ax-space-32);
+}
+
+.article {
+  display: none;
+  grid-column: span 1 / span 1;
+}
+
+.articleMobile {
+  display: block;
+  width: 100%;
+  grid-column: span 1 / span 1;
+}
+
+.articleImage {
+  position: relative;
+  display: block;
+  margin-bottom: var(--ax-space-40);
+  border-radius: var(--ax-border-radius-large);
+  box-shadow: inset 0 0 0 1px var(--ax-border-neutral-subtleA);
+  aspect-ratio: 16 / 9;
+
+  & img {
+    object-fit: cover;
+  }
+}
+
+.remainingArticle {
+  display: none;
+  gap: var(--ax-space-24);
+}
+
+.remainingArticleImage {
+  /*
+relative hidden aspect-square h-[11.75rem] rounded-lg ring-1 ring-border-subtle lg:block
+*/
+  position: relative;
+  display: none;
+  border-radius: var(--ax-border-radius-large);
+  box-shadow: inset 0 0 0 1px var(--ax-border-neutral-subtleA);
+  aspect-ratio: 1 / 1;
+  height: 12rem;
+
+  & img {
+    object-fit: cover;
+  }
+}
+
+/* sm */
+@media (min-width: 480px) {
+  .bloggPosts {
+    padding-inline: var(--ax-space-24);
+  }
+}
+
+/* md */
+@media (min-width: 768px) {
+  .latestBloggPosts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .remainingPosts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .article {
+    display: block;
+  }
+
+  .articleMobile {
+    display: none;
+  }
+
+  .remainingArticle {
+    display: flex;
+  }
+}
+
+/* lg */
+@media (min-width: 1024px) {
+  .remainingArticleImage {
+    display: block;
+  }
+}
+
 .websitePage {
   background-color: var(--ax-bg-brand-blue-soft);
 }
 
 .main {
-  padding-block: var(--ax-space-64) 8vw;
+  padding-block: var(--ax-space-80) 8vw;
   padding-bottom: var(--ax-space-128);
 
   &:focus {
@@ -67,7 +186,6 @@
     display: block;
     height: 100%;
     position: absolute;
-    top: 0;
     width: 100%;
     border-radius: 1rem;
   }

@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { urlFor } from "@/sanity/interface";
 import { dateStr, getAuthors, getImage } from "@/utils";
+import styles from "../_ui/Produktbloggen.module.css";
 
 export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
   const date = await dateStr(blogg?.publishedAt ?? blogg._createdAt);
@@ -11,24 +12,19 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
     ?.quality(100)
     .auto("format")
     .url();
-  // const imageBlurUrl = urlFor(blogg?.seo?.image)
-  //   ?.width(24)
-  //   .height(24)
-  //   .blur(10)
-  //   .url();
 
   return (
     <article>
-      <div className="col-span-1 hidden md:block">
-        <div className="relative mb-10 block aspect-video rounded-lg ring-1 ring-border-subtle">
+      <div className={styles.article}>
+        <div className={styles.articleImage}>
           {imageUrl ? (
             <NextImage
               src={imageUrl}
               blurDataURL={imageUrl}
               placeholder="blur"
               decoding="sync"
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              sizes="100%"
               aria-hidden
               priority
               alt=""
@@ -38,39 +34,13 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
             <NextImage
               src={getImage(blogg?.heading ?? "", "thumbnail")}
               decoding="sync"
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              sizes="100%"
               aria-hidden
               priority
               alt=""
             />
           )}
-          {/*
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
-              blurDataURL={imageBlurUrl}
-              placeholder="blur"
-              quality={100}
-              layout="fill"
-              objectFit="cover"
-              aria-hidden
-              priority
-              className="rounded-lg"
-              decoding="sync"
-            />
-          ) : (
-            <Image
-              src={getImage(blogg?.heading ?? "", "thumbnail")}
-              layout="fill"
-              objectFit="contain"
-              aria-hidden
-              priority
-              className="rounded-lg"
-              decoding="sync"
-            />
-          )}
-          */}
         </div>
         <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
           <Link className="text-aksel-heading underline hover:no-underline">
@@ -90,16 +60,16 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
         )}
       </div>
       {/* Mobile view */}
-      <div className="w-full md:hidden">
-        <div className="relative mb-10 block aspect-video rounded-lg ring-1 ring-border-subtle">
+      <div className={styles.articleMobile}>
+        <div className={styles.articleImage}>
           {imageUrl ? (
             <NextImage
               src={imageUrl}
               blurDataURL={imageUrl}
               placeholder="blur"
               decoding="sync"
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              sizes="100%"
               aria-hidden
               priority
               alt=""
@@ -109,8 +79,8 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
             <NextImage
               src={getImage(blogg?.heading ?? "", "thumbnail")}
               decoding="sync"
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              sizes="100%"
               aria-hidden
               priority
               alt=""

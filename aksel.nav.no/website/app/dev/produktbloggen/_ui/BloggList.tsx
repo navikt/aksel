@@ -4,6 +4,7 @@ import { Image } from "sanity";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { dateStr, getImage } from "@/utils";
+import styles from "../_ui/Produktbloggen.module.css";
 
 const getAuthors = (blog: any) =>
   (blog?.contributors as any)?.map((x) => x?.title) ?? [];
@@ -17,16 +18,16 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
 
   return (
     <li>
-      <div className="hidden gap-6 md:flex">
-        <div className="relative hidden aspect-square h-[11.75rem] rounded-lg ring-1 ring-border-subtle lg:block">
+      <div className={styles.remainingArticle}>
+        <div className={styles.remainingArticleImage}>
           {imageUrl ? (
             <NextImage
               src={imageUrl}
               blurDataURL={imageUrl}
               placeholder="blur"
               decoding="sync"
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              sizes="100%"
               aria-hidden
               priority
               alt=""
@@ -36,8 +37,8 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
             <NextImage
               src={getImage(blogg?.heading ?? "", "thumbnail")}
               decoding="sync"
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              sizes="100%"
               aria-hidden
               priority
               alt=""
