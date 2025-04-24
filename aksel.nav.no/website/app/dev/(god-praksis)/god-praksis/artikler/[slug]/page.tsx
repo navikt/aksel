@@ -102,7 +102,7 @@ export default async function Page(props: Props) {
     <article className={styles.pageArticle}>
       <div>
         {pageData.innholdstype && (
-          <BodyShort size="large" className={styles.pageEyebrow}>
+          <BodyShort size="small" className={styles.pageEyebrow}>
             {pageData.innholdstype}
           </BodyShort>
         )}
@@ -146,10 +146,28 @@ export default async function Page(props: Props) {
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
+
+        {authors?.length > 0 && (
+          <VStack gap="space-8" marginBlock="space-48">
+            <Label data-aksel-heading-color as="p">
+              Medvirkende
+            </Label>
+            <HStack gap="space-4" asChild>
+              <BodyShort textColor="subtle" as="div">
+                {authors.map(abbrName).map((x, y) => (
+                  <address key={x} className={styles.pageAuthor}>
+                    {x}
+                    {y !== authors.length - 1 && ", "}
+                  </address>
+                ))}
+              </BodyShort>
+            </HStack>
+          </VStack>
+        )}
         {pageData.relevante_artikler &&
           pageData.relevante_artikler.length > 0 && (
-            <Box marginBlock="space-96 space-0">
-              <EditorPanel variant="links" heading="Les også">
+            <Box marginBlock="space-0 space-48">
+              <EditorPanel variant="links" heading="Relatert innhold fra Aksel">
                 <WebsiteList as="ul">
                   {pageData.relevante_artikler.map((item) => (
                     <WebsiteListItem key={item.heading} icon>
@@ -167,23 +185,6 @@ export default async function Page(props: Props) {
               </EditorPanel>
             </Box>
           )}
-        {authors?.length > 0 && (
-          <VStack gap="space-8" marginBlock="space-48">
-            <Label data-aksel-heading-color as="p">
-              Medvirkende
-            </Label>
-            <HStack gap="space-4" asChild>
-              <BodyShort textColor="subtle" as="div">
-                {authors.map(abbrName).map((x, y) => (
-                  <address key={x}>
-                    {x}
-                    {y !== authors.length - 1 && ", "}
-                  </address>
-                ))}
-              </BodyShort>
-            </HStack>
-          </VStack>
-        )}
 
         <GodPraksisFeedback docId={pageData._id} />
       </div>
