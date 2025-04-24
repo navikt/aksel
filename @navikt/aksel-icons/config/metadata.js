@@ -49,8 +49,12 @@ fs.writeFileSync(
     created_at: Date;
   }
 
+  type AkselIconName = ${Object.keys(metadata)
+    .map((icon) => `"${icon}"`)
+    .join(" | ")};
+
   declare const metadata: {
-    [iconId: string]: AkselIcon;
+    [key in AkselIconName]: AkselIcon;
   };
 
   export default metadata;`,

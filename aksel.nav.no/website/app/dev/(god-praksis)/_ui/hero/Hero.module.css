@@ -21,6 +21,11 @@
   }
 }
 
+.godPraksisHeroTitle {
+  color: var(--ax-text-brand-blue);
+  margin-block-end: var(--ax-space-16);
+}
+
 .heroCube {
   pointer-events: none;
   position: absolute;

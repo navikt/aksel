@@ -1,0 +1,104 @@
+.iconButton {
+  padding: var(--ax-space-8);
+  display: grid;
+  place-content: center;
+  background-color: var(--ax-bg-neutral-soft);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  color: var(--ax-text-neutral);
+  border-radius: var(--ax-border-radius-large);
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &[data-state="active"] {
+    background: var(--ax-bg-accent-strong-pressed);
+    color: var(--ax-text-accent-contrast);
+    border-color: transparent;
+
+    &:hover {
+      background: var(--ax-bg-accent-strong-hover);
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.iconDetails {
+  border-radius: var(--ax-border-radius-xlarge);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  background: var(--ax-bg-raised);
+  overflow: clip;
+  padding: var(--ax-space-20);
+
+  &[data-inline] {
+    padding: 0;
+  }
+
+  [data-modal="true"] & {
+    border-radius: 0;
+    border: none;
+    padding-block-end: var(--ax-space-20);
+  }
+}
+
+.iconDetailsShowcase {
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+  background: var(--ax-bg-neutral-softA);
+  padding-block: var(--ax-space-8);
+  display: grid;
+  place-content: center;
+}
+
+.iconDetailsContent {
+  padding: var(--ax-space-24) var(--ax-space-20);
+
+  [data-modal="true"] & {
+    padding: 0;
+  }
+}
+
+.iconDetailsActions {
+  [data-modal="true"] & {
+    padding-inline: var(--ax-space-20);
+  }
+}
+
+.iconFeedback {
+  margin-top: var(--ax-space-16);
+
+  [data-modal="true"] & {
+    padding-inline: var(--ax-space-20);
+    padding-block: var(--ax-space-20);
+  }
+}
+
+.iconPageSidebar {
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  top: calc(var(--website-header-height-width-border) + var(--ax-space-24));
+  position: sticky;
+  height: min-content;
+}
+
+.iconPageSkiplink {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background-color: var(--ax-bg-info-strong);
+  padding: var(--ax-space-16);
+  color: var(--ax-text-info-contrast);
+  text-decoration: none;
+  transform: translateY(200%);
+
+  &:focus-within {
+    transform: translateY(0);
+    outline: none;
+  }
+}
+
+.iconPageLinkLi {
+  list-style: none;
+}
