@@ -4,9 +4,9 @@ import { TokenForDocumentationT } from "../../types/tokens";
 
 function tokenIndex(_tokens: TokenForDocumentationT[]) {
   return new Fuse(_tokens, {
-    threshold: 0.1,
+    threshold: 0.3,
     keys: [
-      { name: "name", weight: 0.7 },
+      { name: "name", weight: 0.9 },
       { name: "group", weight: 0.3 },
       { name: "category", weight: 0.3 },
       { name: "comment", weight: 0.3 },
