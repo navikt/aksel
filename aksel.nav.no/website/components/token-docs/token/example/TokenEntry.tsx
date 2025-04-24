@@ -23,7 +23,7 @@ const TokenEntry = ({
     >
       <HGrid gap="8" columns="min-content 1fr">
         <TokenPreview token={token} />
-        <VStack align="start" gap="2">
+        <VStack align="start" gap="space-8">
           <VStack align="start">
             <CopyButton
               copyText={tokenText}
