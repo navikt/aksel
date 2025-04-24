@@ -112,9 +112,7 @@ export default async function Page({ params }: Props) {
               gap="space-8"
               marginBlock="space-20 0"
             >
-              <Detail uppercase as="span">
-                {publishDate}
-              </Detail>
+              <Detail as="span">{publishDate}</Detail>
               {authors?.[0] && (
                 <>
                   <span className={styles.diamond} />
