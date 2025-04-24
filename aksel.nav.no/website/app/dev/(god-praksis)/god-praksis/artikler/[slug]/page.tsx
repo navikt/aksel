@@ -68,7 +68,6 @@ export async function generateMetadata(
 
 export default async function Page(props: Props) {
   const { slug } = await props.params;
-  /* const headersList = await headers() */
 
   const parsedSlug = `god-praksis/artikler/${slug}`;
 
