@@ -138,14 +138,17 @@ function CompareImagesProvider({
 
   /* Set on CompareHandle */
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-    event.preventDefault();
     if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+      event.preventDefault();
       movePosition(-5);
     } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+      event.preventDefault();
       movePosition(5);
     } else if (event.key === "Home") {
+      event.preventDefault();
       movePosition(-100);
     } else if (event.key === "End") {
+      event.preventDefault();
       movePosition(100);
     }
   };
