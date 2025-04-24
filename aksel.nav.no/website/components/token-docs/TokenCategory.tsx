@@ -20,19 +20,26 @@ const TokenCategory = ({
   roles?: ColorRoleT[] | FontRoleT[] | BreakpointRoleT[];
   tokens: TokenForDocumentationT[];
 }) => {
-  const sortedTokens = tokens.sort(sortTokens);
-  const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
   const filteredRoles = roles?.filter((role) =>
     tokens.some((token) => token.role === role.id),
   );
+  const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
+  const filteredTokens =
+    selectedRole === null
+      ? tokens
+      : tokens.filter((token) => token.role === selectedRole);
+  const filteredAndSortedTokens = filteredTokens.sort(sortTokens);
+
   useEffect(() => {
     if (filteredRoles?.length === 1) {
       setSelectedRole(filteredRoles[0].id);
     }
   }, [filteredRoles]);
+
   const descriptionForSelectedRole =
     selectedRole &&
     roles?.find((role) => role.id === selectedRole)?.description;
+
   return (
     <section aria-labelledby={id}>
       <Heading
@@ -64,15 +71,11 @@ const TokenCategory = ({
             </BodyLong>
           )}
           <div>
-            {sortedTokens
-              .filter(
-                (token) => selectedRole === null || token.role === selectedRole,
-              )
-              .map((token, index) => {
-                return (
-                  <TokenEntry token={token} key={token.name} index={index} />
-                );
-              })}
+            {filteredAndSortedTokens.map((token, index) => {
+              return (
+                <TokenEntry token={token} key={token.name} index={index} />
+              );
+            })}
           </div>
         </VStack>
       </div>
