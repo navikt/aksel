@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import React from "react";
 import { VStack } from "@navikt/ds-react";
+import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import TokenCategory from "./TokenCategory";
 import { TOKEN_CATEGORIES } from "./config";
 import { searchTokens } from "./toolbar/SearchField.utils";
@@ -17,6 +18,7 @@ const TokensPage = () => {
   return (
     <VStack gap="10">
       <Toolbar />
+      {filteredTokens.length === 0 && <EmptyStateCard />}
       {filteredCategories.map(({ id, title, description, roles }) => {
         return (
           <TokenCategory
