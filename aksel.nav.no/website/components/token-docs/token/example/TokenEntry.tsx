@@ -21,7 +21,7 @@ const TokenEntry = ({
       paddingBlock="space-16"
       paddingInline="space-8"
     >
-      <HGrid gap="8" columns="min-content 1fr">
+      <HGrid gap="8" columns="min-content 1fr" align="center">
         <TokenPreview token={token} />
         <VStack align="start" gap="space-8">
           <VStack align="start">
