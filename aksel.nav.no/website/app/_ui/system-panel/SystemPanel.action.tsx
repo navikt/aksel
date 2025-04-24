@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { BodyLong, Button, Link, VStack } from "@navikt/ds-react";
+import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { clientConfig } from "@/sanity/config";
 import styles from "./SystemPanel.module.css";
 
@@ -63,11 +64,14 @@ function SystemPanelOutdatedAction({ docId }: { docId?: string }) {
         target="_blank"
         size="small"
         variant="secondary-neutral"
+        iconPosition="right"
+        data-link-card-anchor
+        icon={<LinkCardArrow />}
       >
-        Har du lyst til å kontrollere innholdet nå?
+        Kontroller innholdet nå
       </Button>
     </VStack>
   );
 }
 
-export { SystemPanelOutdatedAction, SystemPanelAction };
+export { SystemPanelAction, SystemPanelOutdatedAction };

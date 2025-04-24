@@ -16,7 +16,7 @@ import {
 import { FormState, sendFeedbackAction } from "./actions";
 import { zodFormDataSchema } from "./actions.zod";
 
-function GodPraksisFeedbackLoginState() {
+function GodPraksisFeedbackLogin() {
   const pathname = usePathname();
 
   return (
@@ -79,11 +79,18 @@ function GodPraksisFeedbackForm({
         .flatten()
         .fieldErrors.feedback?.join(",");
 
+      /* If error is unrelated to the feedback-message itself, something on the system-side failed */
       if (!feedbackError) {
         setFormState({
           value: "error",
           error: "Noe gikk galt ved innsending, ta kontakt med team Aksel",
         });
+
+        window.umami &&
+          umami.track("skjema validering feilet", {
+            skjemanavn: "slack-feedback",
+            skjemaId: docId,
+          });
         return;
       }
 
@@ -227,4 +234,4 @@ function GodPraksisFeedbackForm({
   );
 }
 
-export { GodPraksisFeedbackForm, GodPraksisFeedbackLoginState };
+export { GodPraksisFeedbackForm, GodPraksisFeedbackLogin };

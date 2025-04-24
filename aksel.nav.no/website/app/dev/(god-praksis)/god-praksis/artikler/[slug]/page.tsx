@@ -7,6 +7,7 @@ import { Image } from "sanity";
 import { TagFillIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,
+  Box,
   HStack,
   Heading,
   Label,
@@ -145,6 +146,27 @@ export default async function Page(props: Props) {
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
+        {pageData.relevante_artikler &&
+          pageData.relevante_artikler.length > 0 && (
+            <Box marginBlock="space-96 space-0">
+              <EditorPanel variant="links" heading="Les også">
+                <WebsiteList as="ul">
+                  {pageData.relevante_artikler.map((item) => (
+                    <WebsiteListItem key={item.heading} icon>
+                      <Link
+                        variant="neutral"
+                        href={item.slug?.current}
+                        data-umami-event="navigere"
+                        data-umami-event-kilde="les ogsaa"
+                      >
+                        {item.heading}
+                      </Link>
+                    </WebsiteListItem>
+                  ))}
+                </WebsiteList>
+              </EditorPanel>
+            </Box>
+          )}
         {authors?.length > 0 && (
           <VStack gap="space-8" marginBlock="space-48">
             <Label data-aksel-heading-color as="p">
@@ -162,27 +184,9 @@ export default async function Page(props: Props) {
             </HStack>
           </VStack>
         )}
+
         <GodPraksisFeedback docId={pageData._id} />
-        {/* {userState && <Feedback userState={userState} />} */}
       </div>
-      {pageData.relevante_artikler && (
-        <EditorPanel variant="links" heading="Les også">
-          <WebsiteList as="ul">
-            {pageData.relevante_artikler.map((item) => (
-              <WebsiteListItem key={item.heading} icon>
-                <Link
-                  variant="neutral"
-                  href={item.slug?.current}
-                  data-umami-event="navigere"
-                  data-umami-event-kilde="les ogsaa"
-                >
-                  {item.heading}
-                </Link>
-              </WebsiteListItem>
-            ))}
-          </WebsiteList>
-        </EditorPanel>
-      )}
     </article>
   );
 }
