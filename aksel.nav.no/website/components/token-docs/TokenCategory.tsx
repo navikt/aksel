@@ -10,7 +10,7 @@ import TokenEntry from "./token/example/TokenEntry";
 const TokenCategory = ({
   id,
   title,
-  description = "Lorem ipsum",
+  description,
   roles,
   tokens,
 }: {
