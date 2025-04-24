@@ -1,10 +1,24 @@
 # Changelog
 
+## 7.20
+
+### @navikt/ds-react
+
+- Combobox: Use option-value as `id` instead of `label`. ([#3735](https://github.com/navikt/aksel/pull/3735))
+
+- Timeline: Add `placement`-prop for periods for more fine-grained control over Popover-placement. ([#3736](https://github.com/navikt/aksel/pull/3736))
+
+### @navikt/ds-css
+
+- Combobox: Use option-value as `id` instead of `label`. ([#3735](https://github.com/navikt/aksel/pull/3735))
+
 ## 7.19
 
 ### @navikt/ds-react
 
-- Darkside: `<Theme />`-component no longer defaults to `light`-theme className when no theme is provided. ([#3720](https://github.com/navikt/aksel/pull/3720))
+- Darkside: Using `Page`-component would always give errors when using new `Theme`-component. ([`208adb8`](https://github.com/navikt/aksel/commit/208adb8b3f1a93a872782a8f309fed65b6b112d2))
+
+* Darkside: `<Theme />`-component no longer defaults to `light`-theme className when no theme is provided. ([#3720](https://github.com/navikt/aksel/pull/3720))
 
 ### @navikt/ds-tokens
 
@@ -12,9 +26,11 @@
 
 ### @navikt/ds-css
 
-- Darkside: Togglegroup now has bg-input background. ([#3715](https://github.com/navikt/aksel/pull/3715))
+- Combobox: Singleselect selected value now uses the complete input-width when possible. ([#3734](https://github.com/navikt/aksel/pull/3734))
 
-- Combobox: Fix wrapping issue when ToggleListButton is hidden ([#3727](https://github.com/navikt/aksel/pull/3727))
+* Darkside: Togglegroup now has bg-input background. ([#3715](https://github.com/navikt/aksel/pull/3715))
+
+* Combobox: Fix wrapping issue when ToggleListButton is hidden ([#3727](https://github.com/navikt/aksel/pull/3727))
 
 ## 7.18
 

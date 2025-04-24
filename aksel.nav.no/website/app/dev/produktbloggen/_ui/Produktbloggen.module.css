@@ -2,18 +2,9 @@
   background-color: var(--ax-bg-brand-blue-soft);
 }
 
-.pageLayout {
-  display: grid;
-  margin-inline: auto;
-  width: 100%;
-  gap: var(--ax-space-24);
-
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  min-height: calc(100vh - var(--website-header-height-width-border));
-}
-
 .main {
   padding-block: var(--ax-space-64) 8vw;
+  padding-bottom: var(--ax-space-128);
 
   &:focus {
     outline: none;
@@ -43,21 +34,12 @@
   line-height: var(--ax-font-line-height-heading-medium);
 }
 
-.articleMeta {
-  display: inline-flex;
-  margin-top: var(--ax-space-32);
-  flex-wrap: wrap;
-  gap: var(--ax-space-8);
-  align-items: center;
-  font-size: var(--ax-font-size-medium);
-  line-height: var(--ax-font-line-height-large);
-}
-
 .diamond {
   width: var(--ax-space-8);
   height: var(--ax-space-8);
   rotate: 45deg;
   background-color: var(--ax-text-brand-blue-icon);
+  border-radius: var(--ax-space-1);
 }
 
 .diamondCenter {
@@ -75,6 +57,18 @@
   max-width: 48rem;
 
   & img {
+    border-radius: 1rem;
+    object-fit: cover;
+  }
+
+  &::after {
+    box-shadow: inset 0 0 0 1px var(--ax-border-neutral-subtleA);
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
     border-radius: 1rem;
   }
 }
@@ -94,9 +88,6 @@
   margin-bottom: var(--ax-space-8);
   text-align: center;
   letter-spacing: 1.05px;
-
-  /* shouldn't this be a part of details uppercase? */
-  color: var(--ax-text-brand-blue);
 }
 
 .author {
@@ -115,18 +106,7 @@
 /* 480 === sm
 min-width: X == X is the minimum width needed before styles apply */
 @media (min-width: 480px) {
-  .main {
-    padding-bottom: var(--ax-space-128);
-  }
-
   .intro {
     width: 90%;
-  }
-}
-
-/* 768 == md */
-@media (min-width: 768px) {
-  .h1 {
-    hyphens: none;
   }
 }

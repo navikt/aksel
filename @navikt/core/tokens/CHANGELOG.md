@@ -1,5 +1,9 @@
 # @navikt/ds-tokens
 
+## 7.20.0
+
+## 7.19.1
+
 ## 7.19.0
 
 ### Patch Changes
