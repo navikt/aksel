@@ -8227,6 +8227,50 @@ export type METADATA_BY_SLUG_QUERYResult =
 // Variable: SLUG_BY_TYPE_QUERY
 // Query: *[_type == $type && defined(slug.current)].slug.current
 export type SLUG_BY_TYPE_QUERYResult = Array<string | null>;
+// Variable: GOD_PRAKSIS_ALL_TEMA_QUERY
+// Query: *[_type == "gp.tema"] | order(lower(title)){  title,  description,  pictogram,  "slug": slug.current,  "articles": *[_type=="aksel_artikkel"    && (^._id in undertema[]->tema._ref)] {      heading,      "slug": slug.current,      "undertema": undertema[]->{title, "temaTitle": tema->title},      "innholdstype": innholdstype->title,      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month    } | order(coalesce(views, -1) desc)[0...4]{      heading,      slug,      undertema,      innholdstype    },}
+export type GOD_PRAKSIS_ALL_TEMA_QUERYResult = Array<{
+  title: string | null;
+  description: string | null;
+  pictogram: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  slug: string | null;
+  articles: Array<{
+    heading: string | null;
+    slug: string | null;
+    undertema: Array<{
+      title: string | null;
+      temaTitle: string | null;
+    }> | null;
+    innholdstype: string | null;
+  }>;
+}>;
+// Variable: GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY
+// Query: *[_type == "godpraksis_landingsside"][0].seo
+export type GOD_PRAKSIS_LANDING_PAGE_SEO_QUERYResult = {
+  meta?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+} | null;
 
 declare module "@sanity/client" {
   interface SanityQueries {
@@ -8245,5 +8289,7 @@ declare module "@sanity/client" {
     '*[slug.current == $slug][0].content[style match \'h2\'][]{\n  "id": _key,\n  "title": pt::text(@)\n}': TOC_BY_SLUG_QUERYResult;
     "*[slug.current == $slug][0]{\n  heading,\n  ingress,\n  publishedAt,\n  seo\n}": METADATA_BY_SLUG_QUERYResult;
     "\n  *[_type == $type && defined(slug.current)].slug.current\n": SLUG_BY_TYPE_QUERYResult;
+    '*[_type == "gp.tema"] | order(lower(title)){\n  title,\n  description,\n  pictogram,\n  "slug": slug.current,\n  "articles": *[_type=="aksel_artikkel"\n    && (^._id in undertema[]->tema._ref)] {\n      heading,\n      "slug": slug.current,\n      "undertema": undertema[]->{title, "temaTitle": tema->title},\n      "innholdstype": innholdstype->title,\n      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month\n    } | order(coalesce(views, -1) desc)[0...4]{\n      heading,\n      slug,\n      undertema,\n      innholdstype\n    },\n}': GOD_PRAKSIS_ALL_TEMA_QUERYResult;
+    '*[_type == "godpraksis_landingsside"][0].seo': GOD_PRAKSIS_LANDING_PAGE_SEO_QUERYResult;
   }
 }

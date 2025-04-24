@@ -40,10 +40,13 @@ async function getStaticParamsSlugs(
   return data
     .filter((item): item is NonNullable<typeof item> => Boolean(item))
     .map((slug) => {
+      const [category, page] = slug
+        .replace(`${SanityDoctypeSlugPrefixConfig[type]}/`, "")
+        .split("/");
+
       return {
-        slug: slug
-          .replace(`${SanityDoctypeSlugPrefixConfig[type]}/`, "")
-          .split("/"),
+        category,
+        page,
       };
     });
 }
