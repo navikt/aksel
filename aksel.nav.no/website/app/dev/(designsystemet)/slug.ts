@@ -48,7 +48,8 @@ async function getStaticParamsSlugs(
         category,
         page,
       };
-    });
+    })
+    .filter((item) => !!item.page && !!item.category);
 }
 
 export { getStaticParamsSlugs, parseDesignsystemSlug };
