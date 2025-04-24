@@ -181,6 +181,43 @@ const GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY = defineQuery(
   }`,
 );
 
+const GOD_PRAKSIS_ARTICLE_BY_SLUG = defineQuery(
+  `*[slug.current == $slug && _type == "aksel_artikkel"][0]
+  {
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+    "innholdstype": innholdstype->title,
+    "undertema": undertema[]->{
+      title,
+      "tema": tema->{
+        title,
+        "slug": slug.current,
+        "image": seo.image
+      }
+    },
+    ${contributorsAll},
+    relevante_artikler[]->{
+      heading,
+      ingress,
+      slug,
+      "innholdstype": innholdstype->title,
+    }
+  }`,
+);
+
+/* --------------------------------- Slack --------------------------------- */
+
+const DOCUMENT_BY_ID_FOR_SLACK_QUERY = defineQuery(`*[_id == $id][0]{
+      "id": _id,
+      "title": heading,
+      "editors": contributors[]->email,
+      "slug": slug.current,
+      "contacts": undertema[]->tema->contacts[]->email
+    }`);
+
 /* --------------------------------- Exports -------------------------------- */
 export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
@@ -201,4 +238,6 @@ export {
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
   GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
+  GOD_PRAKSIS_ARTICLE_BY_SLUG,
+  DOCUMENT_BY_ID_FOR_SLACK_QUERY,
 };

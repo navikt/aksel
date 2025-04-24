@@ -60,6 +60,9 @@ export async function generateMetadata(
     openGraph: {
       images: ogImages,
     },
+    alternates: {
+      canonical: `/god-praksis/${tema}`,
+    },
   };
 }
 

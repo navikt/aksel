@@ -10,6 +10,7 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
+import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { DesignsystemetKomponentIntro } from "@/app/dev/(designsystemet)/_ui/Designsystemet.intro";
 import {
@@ -86,6 +87,12 @@ export default async function Page({ params }: Props) {
         toc={toc}
       />
       <div>
+        {["beta", "new"].includes(pageData.status?.tag ?? "") && (
+          <SystemPanel
+            variant={pageData.status?.tag as "beta" | "new"}
+            unsafeBeta={pageData.status?.unsafe}
+          />
+        )}
         <DesignsystemetKomponentIntro data={pageData} />
         <CustomPortableText value={pageData.content as PortableTextBlock[]} />
       </div>

@@ -72,8 +72,8 @@ async function sendSlackbotFeedback(
    */
   const document = await getClient().fetch(
     `*[_id == $id][0]{
-      "id": _id,
       "title": heading,
+      "id": _id,
       "editors": contributors[]->email,
       "slug": slug.current,
       "contacts": undertema[]->tema->contacts[]->email
