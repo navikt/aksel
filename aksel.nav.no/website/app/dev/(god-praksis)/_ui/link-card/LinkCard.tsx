@@ -8,7 +8,6 @@ import React, {
   ImgHTMLAttributes,
   forwardRef,
 } from "react";
-import { undefined } from "zod";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
