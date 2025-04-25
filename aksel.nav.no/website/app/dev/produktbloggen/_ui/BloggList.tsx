@@ -1,7 +1,14 @@
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { Image } from "sanity";
-import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
+import {
+  BodyLong,
+  BodyShort,
+  Heading,
+  Hide,
+  Link,
+  Show,
+} from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { dateStr, getImage } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
@@ -18,83 +25,84 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
 
   return (
     <li>
-      <div className={styles.remainingArticle}>
-        <div className={styles.remainingArticleImage}>
-          {imageUrl ? (
-            <NextImage
-              src={imageUrl}
-              blurDataURL={imageUrl}
-              placeholder="blur"
-              decoding="sync"
-              fill={true}
-              sizes="100%"
-              aria-hidden
-              priority
-              alt=""
-              quality={100}
-            />
-          ) : (
-            <NextImage
-              src={getImage(blogg?.heading ?? "", "thumbnail")}
-              decoding="sync"
-              fill={true}
-              sizes="100%"
-              aria-hidden
-              priority
-              alt=""
-            />
-          )}
-        </div>
+      <Show asChild above="md">
+        <div className={styles.remainingArticle}>
+          <div className={styles.remainingArticleImage}>
+            {imageUrl ? (
+              <NextImage
+                src={imageUrl}
+                blurDataURL={imageUrl}
+                placeholder="blur"
+                decoding="sync"
+                fill={true}
+                sizes="100%"
+                aria-hidden
+                priority
+                alt=""
+                quality={100}
+              />
+            ) : (
+              <NextImage
+                src={getImage(blogg?.heading ?? "", "thumbnail")}
+                decoding="sync"
+                fill={true}
+                sizes="100%"
+                aria-hidden
+                priority
+                alt=""
+              />
+            )}
+          </div>
 
-        <div className="w-full">
+          <div>
+            <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
+              <Link className={styles.link}>
+                <Heading size="medium" level="2">
+                  {blogg.heading}
+                </Heading>
+              </Link>
+            </NextLink>
+            <BodyLong className={styles.articleBody} size="medium">
+              {blogg?.ingress}
+            </BodyLong>
+            {getAuthors(blogg).length > 0 ? (
+              <BodyShort size="small" className={styles.articleAuthor}>
+                <span>{getAuthors(blogg)[0]}</span>
+                <span>{date}</span>
+              </BodyShort>
+            ) : (
+              <BodyShort size="small" className={styles.articleBodySubtle}>
+                <span>{date}</span>
+              </BodyShort>
+            )}
+          </div>
+        </div>
+      </Show>
+
+      <Hide asChild above="md">
+        <div className="w-full md:hidden">
           <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-            <Link className="text-aksel-heading underline hover:no-underline">
+            <Link className={styles.link}>
               <Heading size="medium" level="2">
                 {blogg.heading}
               </Heading>
             </Link>
           </NextLink>
-          <BodyLong className="mt-4" size="medium">
+          <BodyLong className={styles.articleBody} size="medium">
             {blogg?.ingress}
           </BodyLong>
           {getAuthors(blogg).length > 0 ? (
-            <BodyShort
-              size="small"
-              className="mt-4 flex gap-2 text-text-subtle"
-            >
-              <span className="font-semibold">{getAuthors(blogg)[0]}</span>
-              <span className="animate-fadeIn">{date}</span>
+            <BodyShort size="small" className={styles.articleAuthor}>
+              <span>{getAuthors(blogg)[0]}</span>
+              <span>{date}</span>
             </BodyShort>
           ) : (
-            <BodyShort size="small" className="mt-4 text-text-subtle">
-              <span className="animate-fadeIn">{date}</span>
+            <BodyShort size="small" className={styles.articleBodySubtle}>
+              <span>{date}</span>
             </BodyShort>
           )}
         </div>
-      </div>
-
-      <div className="w-full md:hidden">
-        <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-          <Link className="text-aksel-heading underline hover:no-underline">
-            <Heading size="medium" level="2">
-              {blogg.heading}
-            </Heading>
-          </Link>
-        </NextLink>
-        <BodyLong className="mt-4" size="medium">
-          {blogg?.ingress}
-        </BodyLong>
-        {getAuthors(blogg).length > 0 ? (
-          <BodyShort size="small" className="mt-4 flex gap-2 text-text-subtle">
-            <span className="font-semibold">{getAuthors(blogg)[0]}</span>
-            <span>{date}</span>
-          </BodyShort>
-        ) : (
-          <BodyShort size="small" className="mt-4 text-text-subtle">
-            <span>{date}</span>
-          </BodyShort>
-        )}
-      </div>
+      </Hide>
     </li>
   );
 };

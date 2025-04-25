@@ -116,7 +116,7 @@ export default async function Page({ params }: Props) {
               {authors?.[0] && (
                 <>
                   <span className={styles.diamond} />
-                  <BodyShort size="small" as="address" className="not-italic">
+                  <BodyShort size="small" as="address">
                     {authors?.[0]}
                   </BodyShort>
                 </>
