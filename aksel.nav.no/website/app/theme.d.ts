@@ -14,5 +14,9 @@ declare module "react" {
      * When set, the element will be rendered with a max-width made for prose text.
      */
     "data-text-prose"?: boolean;
+    /**
+     * When set, adds branded colors to the heading.
+     */
+    "data-aksel-heading-color"?: boolean;
   }
 }

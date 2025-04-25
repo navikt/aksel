@@ -47,7 +47,7 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
         {...restProps}
         className={cn("aksel-link-card", className)}
         data-arrow={hasArrow}
-        data-autoLayout={autoLayout}
+        data-layout={autoLayout ? "auto" : undefined}
       >
         {children}
       </div>
@@ -130,18 +130,17 @@ const LinkCardAnchor = forwardRef<HTMLAnchorElement, LinkCardAnchorProps>(
 );
 
 /* ---------------------------- LinkCard Description ---------------------------- */
-interface LinkCardDescriptionProps
-  extends HTMLAttributes<HTMLParagraphElement> {
+interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
 const LinkCardDescription = forwardRef<
-  HTMLParagraphElement,
+  HTMLDivElement,
   LinkCardDescriptionProps
 >(({ children }: LinkCardDescriptionProps, forwardedRef) => {
   return (
     <BodyLong
-      as="p"
+      as="div"
       size="medium"
       ref={forwardedRef}
       className={cn("aksel-link-card__description")}
@@ -248,8 +247,8 @@ const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
       className,
       alt,
       aspectRatio,
-      width = aspectRatio ? "100%" : undefined,
-      height = aspectRatio ? "100%" : undefined,
+      width = aspectRatio ? "100%" : "",
+      height = aspectRatio ? "100%" : "",
       isInset = false,
       ...restProps
     }: LinkCardImageProps,

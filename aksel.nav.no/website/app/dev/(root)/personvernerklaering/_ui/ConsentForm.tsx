@@ -2,8 +2,11 @@
 
 import { useState, useTransition } from "react";
 import { Button, Radio, RadioGroup, VStack } from "@navikt/ds-react";
-import { getCookieConsent } from "@/app/_ui/consent-banner/ConsentBanner.utils";
-import { submitForm } from "./actions";
+import {
+  acceptCookiesAction,
+  getCookieConsent,
+  rejectCookiesAction,
+} from "@/app/_ui/consent-banner/ConsentBanner.utils";
 
 function ConsentForm({
   consent,
@@ -18,7 +21,12 @@ function ConsentForm({
   const submitAction = async (formData: FormData) => {
     startTransition(async () => {
       setDisableSave(true);
-      await submitForm(formData);
+
+      if (formData.get("acceptedTracking") === "tracking_yes") {
+        await acceptCookiesAction();
+      } else if (formData.get("acceptedTracking") === "tracking_no") {
+        await rejectCookiesAction();
+      }
     });
   };
 
