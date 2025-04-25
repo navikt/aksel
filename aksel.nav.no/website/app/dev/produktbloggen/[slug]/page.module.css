@@ -1,0 +1,45 @@
+.articleTitle {
+  text-wrap: balance;
+  font-size: 3rem;
+}
+
+.articleIngress {
+  color: var(--ax-text-brand-blue-subtle);
+  margin-top: var(--ax-space-24);
+  font-size: 1.5rem;
+  line-height: 1.33;
+}
+
+.articleDiamond {
+  width: var(--ax-space-8);
+  height: var(--ax-space-8);
+  rotate: 45deg;
+  background-color: var(--ax-text-brand-blue-icon);
+  border-radius: 2px;
+}
+
+.image {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  margin-block: var(--ax-space-64) 0;
+  margin-inline: auto;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 48rem;
+
+  & img {
+    border-radius: 1rem;
+    object-fit: cover;
+  }
+
+  &::after {
+    box-shadow: inset 0 0 0 1px var(--ax-border-neutral-subtleA);
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-radius: 1rem;
+  }
+}

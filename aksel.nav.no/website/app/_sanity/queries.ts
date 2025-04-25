@@ -1,5 +1,5 @@
 import { defineQuery, groq } from "next-sanity";
-import { contributorsAll, destructureBlocks } from "@/sanity/queries";
+import { destructureBlocks } from "@/sanity/queries";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
 
@@ -113,7 +113,7 @@ const BLOGG_BY_SLUG_QUERY =
     ...,
     ${destructureBlocks}
   },
-  ${contributorsAll},
+  contributors[]->{title},
   publishedAt,
 }`);
 
@@ -199,7 +199,7 @@ const GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY = defineQuery(
         "image": seo.image
       }
     },
-    ${contributorsAll},
+    contributors[]->{title},
     relevante_artikler[]->{
       heading,
       ingress,
