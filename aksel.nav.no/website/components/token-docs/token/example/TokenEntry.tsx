@@ -1,5 +1,12 @@
 import { useSearchParams } from "next/navigation";
-import { Box, CopyButton, Detail, HGrid, VStack } from "@navikt/ds-react";
+import {
+  BodyShort,
+  Box,
+  CopyButton,
+  Detail,
+  HGrid,
+  VStack,
+} from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { TokenForDocumentationT } from "../../types";
 import TokenPreview from "./TokenPreview";
@@ -40,9 +47,9 @@ const TokenEntry = ({
               )}
           </VStack>
           {token.comment && (
-            <Detail>
+            <BodyShort size="small">
               <TextWithMarkdown>{token.comment}</TextWithMarkdown>
-            </Detail>
+            </BodyShort>
           )}
         </VStack>
       </HGrid>
