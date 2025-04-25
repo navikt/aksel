@@ -1,6 +1,4 @@
 import { BodyLong, Box, Heading, Link } from "@navikt/ds-react";
-
-/* @ts-expect-error Workspace cant resolve valid imports */
 import { Page as DsPage, PageBlock } from "@navikt/ds-react/Page";
 import { getCookieConsent } from "@/app/_ui/consent-banner/ConsentBanner.utils";
 import Footer from "@/app/_ui/footer/Footer";

@@ -2,7 +2,6 @@ import {
   List as AkselList,
   ListItem as AkselListItem,
   ListProps as AkselListProps,
-  /* @ts-expect-error Workspace can't understand these imports yet */
 } from "@navikt/ds-react/List";
 import styles from "./Typography.module.css";
 

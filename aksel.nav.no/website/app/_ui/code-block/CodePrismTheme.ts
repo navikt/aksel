@@ -9,7 +9,6 @@ import {
   TextNeutralSubtle,
   TextSuccess,
   TextWarning,
-  /* @ts-expect-error Workspace cant resolve valid import */
 } from "@navikt/ds-tokens/darkside-js";
 
 const AkselPrismTheme: PrismTheme = {

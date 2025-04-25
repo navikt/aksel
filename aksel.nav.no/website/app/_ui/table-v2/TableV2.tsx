@@ -6,7 +6,6 @@ import {
   TableHeader,
   TableHeaderCell,
   TableRow,
-  /* @ts-expect-error: Workspace cant resolve import */
 } from "@navikt/ds-react/Table";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 
