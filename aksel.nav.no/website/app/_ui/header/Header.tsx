@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Link from "next/link";
 import { Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
@@ -13,9 +14,14 @@ const LINKS = [
   { name: "Bloggen", href: "/produktbloggen" },
 ];
 
-function Header() {
+function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
+  variant = variant ? variant : "default";
   return (
-    <header className={styles.header}>
+    <header
+      className={clsx(styles.header, {
+        [styles.headerProduktbloggen]: variant === "produktbloggen",
+      })}
+    >
       <a className={styles.skiplink} href="#hovedinnhold">
         Hopp til innhold
       </a>

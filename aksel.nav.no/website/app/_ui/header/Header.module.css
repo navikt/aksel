@@ -3,8 +3,12 @@
   background-color: var(--ax-bg-default);
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 20;
   border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+.headerProduktbloggen {
+  background-color: var(--ax-bg-brand-blue-soft);
 }
 
 .headerContainer {
