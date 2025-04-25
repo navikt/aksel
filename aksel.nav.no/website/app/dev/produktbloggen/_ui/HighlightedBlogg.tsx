@@ -43,18 +43,18 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
           )}
         </div>
         <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-          <Link className="text-aksel-heading underline hover:no-underline">
+          <Link className={styles.link}>
             <Heading size="large" level="2">
               {blogg.heading}
             </Heading>
           </Link>
         </NextLink>
-        <BodyLong className="mt-4" size="small">
+        <BodyLong className={styles.articleBody} size="small">
           {blogg?.ingress}
         </BodyLong>
         {getAuthors(blogg).length > 0 && (
-          <BodyShort size="small" className="mt-4 flex gap-2 text-text-subtle">
-            <span className="font-semibold">{getAuthors(blogg)[0]}</span>
+          <BodyShort size="small" className={styles.articleAuthor}>
+            <span>{getAuthors(blogg)[0]}</span>
             <span>{date}</span>
           </BodyShort>
         )}
@@ -88,18 +88,18 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
           )}
         </div>
         <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-          <Link className="text-aksel-heading underline hover:no-underline">
+          <Link className={styles.link}>
             <Heading size="large" level="2">
               {blogg.heading}
             </Heading>
           </Link>
         </NextLink>
-        <BodyLong className="mt-4" size="small">
+        <BodyLong className={styles.articleBody} size="small">
           {blogg?.ingress}
         </BodyLong>
         {getAuthors(blogg).length > 0 && (
-          <BodyShort size="small" className="mt-4 flex gap-2 text-text-subtle">
-            <span className="font-semibold">{getAuthors(blogg)[0]}</span>
+          <BodyShort size="small" className={styles.articleAuthor}>
+            <span>{getAuthors(blogg)[0]}</span>
             <span>{date}</span>
           </BodyShort>
         )}
