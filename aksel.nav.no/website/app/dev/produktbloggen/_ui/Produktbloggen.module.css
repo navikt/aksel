@@ -32,7 +32,7 @@
 .remainingPosts {
   display: grid;
   gap: var(--ax-space-48);
-  margin-top: var(--ax-space-32);
+  margin-top: var(--ax-space-8);
 }
 
 .article {
@@ -120,6 +120,7 @@
 
   .remainingPosts {
     grid-template-columns: repeat(2, 1fr);
+    margin-top: var(--ax-space-32);
   }
 }
 

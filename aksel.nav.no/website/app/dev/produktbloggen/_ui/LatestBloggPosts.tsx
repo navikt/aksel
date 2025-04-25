@@ -2,6 +2,7 @@ import { Heading, Show, VStack } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import styles from "../_ui/Produktbloggen.module.css";
 import { HighlightedBlogg } from "./HighlightedBlogg";
+import { SimpleArticle } from "./SimpleArticle";
 
 export const LatestBloggposts = ({
   bloggs,
@@ -39,6 +40,9 @@ export const LatestBloggposts = ({
         <HighlightedBlogg blogg={bloggs[0]} />
         <Show above="md">
           <HighlightedBlogg blogg={bloggs[1]} />
+        </Show>
+        <Show below="md">
+          <SimpleArticle blogg={bloggs[1]} />
         </Show>
       </div>
     </>

@@ -80,7 +80,7 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
       </Show>
 
       <Hide asChild above="md">
-        <div className="w-full md:hidden">
+        <div>
           <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
             <Link className={styles.link}>
               <Heading size="medium" level="2">

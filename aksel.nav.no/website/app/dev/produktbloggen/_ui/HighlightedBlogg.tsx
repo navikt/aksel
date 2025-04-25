@@ -59,7 +59,6 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
           </NextLink>
           <BodyLong className={styles.articleBody} size="small">
             {blogg?.ingress}
-            HLBLOGG DESKTOP
           </BodyLong>
           {getAuthors(blogg).length > 0 && (
             <BodyShort size="small" className={styles.articleAuthor}>
@@ -107,7 +106,6 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
           </NextLink>
           <BodyLong className={styles.articleBody} size="small">
             {blogg?.ingress}
-            HLBLOGG MOBILE
           </BodyLong>
           {getAuthors(blogg).length > 0 && (
             <BodyShort size="small" className={styles.articleAuthor}>
