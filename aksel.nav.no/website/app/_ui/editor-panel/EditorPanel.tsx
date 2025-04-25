@@ -106,7 +106,9 @@ function EditorPanel(props: EditorPanelProps) {
         headingTag={headingTag}
         actionComponent={actionComponent}
       />
-      <div className={styles.editorPanelContent}>{children}</div>
+      <div data-text-prose className={styles.editorPanelContent}>
+        {children}
+      </div>
     </div>
   );
 }
