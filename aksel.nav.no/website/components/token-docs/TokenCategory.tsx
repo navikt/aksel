@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BodyShort, Heading, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { TokenForDocumentationT } from "../types/tokens";
@@ -29,12 +29,6 @@ const TokenCategory = ({
       ? tokens
       : tokens.filter((token) => token.role === selectedRole);
   const filteredAndSortedTokens = filteredTokens.sort(sortTokens);
-
-  useEffect(() => {
-    if (filteredRoles?.length === 1) {
-      setSelectedRole(filteredRoles[0].id);
-    }
-  }, [filteredRoles]);
 
   return (
     <VStack gap="space-32" aria-labelledby={categoryId} as="section">
