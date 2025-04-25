@@ -3,12 +3,10 @@ import React from "react";
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
-  BodyShort,
   Detail,
   HStack,
   Heading,
   Link,
-  Tag,
   VStack,
 } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
@@ -67,12 +65,6 @@ const Page = async () => {
             </BodyLong>
           </VStack>
           <VStack gap="space-16">
-            <HStack gap="space-8" align="center">
-              <Tag variant="info" size="small">
-                Stabil
-              </Tag>
-              <BodyShort size="medium">Oppdatert 22. april 2025</BodyShort>
-            </HStack>
             <HStack gap="space-16" align="center">
               <Link href="https://github.com/navikt/aksel" variant="neutral">
                 <GithubIcon aria-hidden="true" />
