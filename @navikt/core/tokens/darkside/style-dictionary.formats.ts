@@ -56,7 +56,7 @@ export const formatSCSS: FormatFn = async ({ dictionary, file }) => {
   return `${header}${tokens}\n`;
 };
 
-const formatCategory = (token: TransformedToken) => {
+const formatCategory = (token: TransformedToken): string | undefined => {
   const colorTypes = {
     bg: "backgroundColor",
     border: "borderColor",
@@ -66,7 +66,7 @@ const formatCategory = (token: TransformedToken) => {
     case "color":
       return token.attributes?.type
         ? colorTypes[token.attributes?.type as keyof typeof colorTypes]
-        : token.attributes?.type;
+        : (token.attributes?.type as string);
       break;
     case "global-space":
       return "space";
@@ -83,7 +83,7 @@ const formatCategory = (token: TransformedToken) => {
   }
 };
 
-const formatRawValue = (token: TransformedToken) => {
+const formatRawValue = (token: TransformedToken): string => {
   if (token.type === "global-breakpoint") {
     return `@media(${token.group === "desktop first" ? "max" : "min"}-width: ${
       token.value
@@ -95,7 +95,7 @@ const formatRawValue = (token: TransformedToken) => {
 const formatModifier = (
   name: TransformedToken["name"],
   type: TransformedToken["type"],
-) => {
+): string => {
   const nameParts = name.split("-");
   switch (type) {
     case "global-breakpoint":
@@ -105,6 +105,16 @@ const formatModifier = (
     default:
       return nameParts[nameParts.length - 1];
   }
+};
+
+const formatRole = (group: TransformedToken["group"]): string => {
+  if (group?.indexOf(".") === -1) {
+    if (["background", "text", "border"].includes(group)) {
+      return "root";
+    }
+    return group;
+  }
+  return group?.split(".")[1];
 };
 
 export const formatDOCS: FormatFn = async ({ dictionary }) => {
@@ -127,10 +137,7 @@ export const formatDOCS: FormatFn = async ({ dictionary }) => {
           rawType: token.attributes?.type,
           group: token.group,
           category: formatCategory(token),
-          role:
-            token.group?.indexOf(".") >= 0
-              ? token.group.split(".")[1]
-              : token.group,
+          role: formatRole(token.group),
           modifier: formatModifier(name, token.type),
         }) + (index === dictionary.allTokens.length - 1 ? "" : ",")
       );

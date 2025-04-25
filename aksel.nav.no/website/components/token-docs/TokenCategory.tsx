@@ -83,9 +83,11 @@ const TokenCategory = ({
                 >
                   {role.title}
                 </Heading>
-                <BodyShort as="p">
-                  <TextWithMarkdown>{role.description}</TextWithMarkdown>
-                </BodyShort>
+                {role.description && (
+                  <BodyShort as="p">
+                    <TextWithMarkdown>{role.description}</TextWithMarkdown>
+                  </BodyShort>
+                )}
               </div>
               <TokensList tokens={tokensForRole} />
             </VStack>

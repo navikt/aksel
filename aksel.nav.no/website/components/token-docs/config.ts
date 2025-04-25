@@ -6,7 +6,9 @@ export type RoleT<T> = {
   description: string;
 };
 
-export type ColorRoleT = RoleT<SemanticColorRoles>;
+export type RootRoleT = RoleT<"root">;
+
+export type ColorRoleT = RoleT<SemanticColorRoles> | RootRoleT;
 
 export type FontRoleT = RoleT<"family" | "line-height" | "size" | "weight">;
 
@@ -47,6 +49,12 @@ export type TokenCategoryT = {
 };
 
 const COLOR_ROLES: ColorRoleT[] = [
+  {
+    id: "root",
+    title: "Root",
+    description:
+      "Root brukes på elementer i spesialtilfeller som for å skape dypde i skjermbildet eller der elementet ikke har en bestemt rolle.",
+  },
   {
     id: "neutral",
     title: "Neutral",
