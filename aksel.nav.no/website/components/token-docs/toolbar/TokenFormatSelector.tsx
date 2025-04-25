@@ -21,7 +21,7 @@ const TokenFormatSelector = () => {
 
   return (
     <Select
-      label="Velg bostedsland"
+      label="Velg token-format"
       hideLabel
       style={{ width: "9rem" }}
       onChange={handleChange}
