@@ -1,5 +1,5 @@
 import { Box, VStack } from "@navikt/ds-react";
-import { TokenForDocumentationT } from "../../../types/tokens";
+import { TokenForDocumentationT } from "../../types";
 
 const RadiusToken = ({ token }: { token: TokenForDocumentationT }) => (
   <VStack as="div" align="center" justify="center" height="100%">

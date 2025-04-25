@@ -1,4 +1,4 @@
-import { TokenForDocumentationT } from "../types/tokens";
+import { TokenForDocumentationT } from "./types";
 
 const sortTokens = (a: TokenForDocumentationT, b: TokenForDocumentationT) => {
   switch (a.category) {

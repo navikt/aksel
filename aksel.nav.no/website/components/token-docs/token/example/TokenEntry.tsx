@@ -1,7 +1,7 @@
 import { useSearchParams } from "next/navigation";
 import { Box, CopyButton, Detail, HGrid, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
-import { TokenForDocumentationT } from "../../../types/tokens";
+import { TokenForDocumentationT } from "../../types";
 import TokenPreview from "./TokenPreview";
 
 const TokenEntry = ({

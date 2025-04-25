@@ -1,5 +1,5 @@
-import { TokenForDocumentationT } from "../types/tokens";
 import TokenEntry from "./token/example/TokenEntry";
+import { TokenForDocumentationT } from "./types";
 
 const TokensList = ({ tokens }: { tokens: TokenForDocumentationT[] }) => {
   return (

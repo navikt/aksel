@@ -5,7 +5,7 @@ import {
   MonitorIcon,
   TabletIcon,
 } from "@navikt/aksel-icons";
-import { TokenForDocumentationT } from "../../../types/tokens";
+import { TokenForDocumentationT } from "../../types";
 
 const BreakpointToken = ({ token }: { token: TokenForDocumentationT }) => {
   switch (token.modifier.split("-")[0]) {

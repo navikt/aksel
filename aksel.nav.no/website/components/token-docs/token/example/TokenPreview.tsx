@@ -1,5 +1,5 @@
 import { Box, VStack } from "@navikt/ds-react";
-import { TokenForDocumentationT } from "../../../types/tokens";
+import { TokenForDocumentationT } from "../../types";
 import BreakpointToken from "./BreakpointToken";
 import ColorToken from "./ColorToken";
 import FontToken from "./FontToken";

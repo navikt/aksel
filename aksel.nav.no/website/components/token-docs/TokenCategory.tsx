@@ -1,11 +1,11 @@
 import React from "react";
 import { BodyShort, Heading, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
-import { TokenForDocumentationT } from "../types/tokens";
 import TokenRolesChips from "./TokenRolesChips";
 import TokensList from "./TokensList";
 import { BreakpointRoleT, ColorRoleT, FontRoleT } from "./config";
 import { sortTokens } from "./token-utils";
+import { TokenForDocumentationT } from "./types";
 
 const TokenCategory = ({
   id: categoryId,

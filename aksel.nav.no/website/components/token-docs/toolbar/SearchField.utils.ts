@@ -1,6 +1,6 @@
 import Fuse from "fuse.js";
 import { tokens } from "@navikt/ds-tokens/token_docs";
-import { TokenForDocumentationT } from "../../types/tokens";
+import { TokenForDocumentationT } from "../types";
 
 function tokenIndex(_tokens: TokenForDocumentationT[]) {
   return new Fuse(_tokens, {
