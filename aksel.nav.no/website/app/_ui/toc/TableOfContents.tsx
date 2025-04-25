@@ -101,7 +101,7 @@ function TableOfContentsLinks({
           variant="secondary-neutral"
           size="small"
           icon={<SparklesIcon aria-hidden />}
-          href={`https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+%3C${feedback.name}%20/%3E`}
+          href={`https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill%5D%20${feedback.name}`}
           data-umami-event="feedback-designsystem"
           data-umami-event-kilde="toc"
           target="_blank"
