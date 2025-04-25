@@ -1,9 +1,28 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Image } from "sanity";
 import { sanityFetch } from "@/app/_sanity/live";
 import { BLOGG_LANDINGSSIDE_QUERY } from "@/app/_sanity/queries";
+import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { BloggList } from "./_ui/BloggList";
 import { LatestBloggposts } from "./_ui/LatestBloggPosts";
 import styles from "./_ui/Produktbloggen.module.css";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { data: pageData } = await sanityFetch({
+    query: BLOGG_LANDINGSSIDE_QUERY,
+  });
+
+  const pageOgImage = urlForOpenGraphImage(pageData?.page.seo?.image as Image);
+
+  return {
+    title: "Produktbloggen",
+    description: pageData?.page.seo?.meta,
+    openGraph: {
+      images: pageOgImage,
+    },
+  };
+}
 
 /* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page() {
