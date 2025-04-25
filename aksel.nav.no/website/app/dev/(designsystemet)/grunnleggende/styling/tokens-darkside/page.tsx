@@ -1,4 +1,3 @@
-import { Metadata, ResolvingMetadata } from "next/types";
 import React from "react";
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import {
@@ -14,22 +13,15 @@ import TokenTableOfContents from "../../../../../../components/token-docs/TokenT
 import TokensPage from "../../../../../../components/token-docs/TokensPage";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
 
-export async function generateMetadata(
-  _,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const ogImages = (await parent).openGraph?.images || [];
-
-  return {
-    title: "Design tokens",
-    description:
-      "Ved å bruke design tokens sørger vi for at både designere og utviklere arbeider etter de samme reglene og retningslinjene. " +
-      "Dette forenkler vedlikeholdet av designet og sikrer en helhetlig visuell fremstilling på tvers av produkter.",
-    openGraph: {
-      images: ogImages,
-    },
-  };
-}
+export const metadata = {
+  title: "Design tokens",
+  description:
+    "Ved å bruke design tokens sørger vi for at både designere og utviklere arbeider etter de samme reglene og retningslinjene. " +
+    "Dette forenkler vedlikeholdet av designet og sikrer en helhetlig visuell fremstilling på tvers av produkter.",
+  /* openGraph: {
+      images: ogImages, // Need to add manually from somewhere?
+    }, */
+};
 
 const Page = async () => {
   return (
