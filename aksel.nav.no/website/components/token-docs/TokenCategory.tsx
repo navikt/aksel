@@ -31,30 +31,31 @@ const TokenCategory = ({
   const filteredAndSortedTokens = filteredTokens.sort(sortTokens);
 
   return (
-    <VStack gap="space-32" aria-labelledby={categoryId} as="section">
-      <div>
-        <Heading
-          id={categoryId}
-          level="2"
-          size="large"
-          spacing
-          style={{ scrollMarginBlockStart: "6rem" }}
-        >
-          {title}
-        </Heading>
-        {description && (
-          <BodyShort as="p">
-            <TextWithMarkdown>{description}</TextWithMarkdown>
-          </BodyShort>
+    <VStack gap="space-24" aria-labelledby={categoryId} as="section">
+      <VStack gap="space-16">
+        <VStack gap="space-8">
+          <Heading
+            id={categoryId}
+            level="2"
+            size="large"
+            style={{ scrollMarginBlockStart: "6rem" }}
+          >
+            {title}
+          </Heading>
+          {description && (
+            <BodyShort as="p">
+              <TextWithMarkdown>{description}</TextWithMarkdown>
+            </BodyShort>
+          )}
+        </VStack>
+        {filteredRoles && filteredRoles.length > 1 && (
+          <TokenRolesChips
+            roles={filteredRoles}
+            selectedRole={selectedRole}
+            setSelectedRole={setSelectedRole}
+          />
         )}
-      </div>
-      {filteredRoles && filteredRoles.length > 1 && (
-        <TokenRolesChips
-          roles={filteredRoles}
-          selectedRole={selectedRole}
-          setSelectedRole={setSelectedRole}
-        />
-      )}
+      </VStack>
       {filteredRoles === undefined || filteredRoles.length === 0 ? (
         <TokensList tokens={filteredAndSortedTokens} />
       ) : (
@@ -66,13 +67,12 @@ const TokenCategory = ({
             return null;
           }
           return (
-            <VStack gap="space-32" key={role.id}>
-              <div>
+            <VStack gap="space-16" key={role.id}>
+              <VStack gap="space-8">
                 <Heading
                   level="3"
                   size="medium"
                   id={`${categoryId}-${role.id}`}
-                  spacing
                   style={{ scrollMarginBlockStart: "6rem" }}
                 >
                   {role.title}
@@ -82,7 +82,7 @@ const TokenCategory = ({
                     <TextWithMarkdown>{role.description}</TextWithMarkdown>
                   </BodyShort>
                 )}
-              </div>
+              </VStack>
               <TokensList tokens={tokensForRole} />
             </VStack>
           );

@@ -16,7 +16,7 @@ const TokensPage = () => {
     filteredTokens.some((token) => token.category === id),
   );
   return (
-    <VStack gap="10">
+    <VStack gap="space-8">
       <Toolbar />
       {filteredTokens.length === 0 && <EmptyStateCard />}
       {filteredCategories.map(({ id, title, description, roles }) => {
