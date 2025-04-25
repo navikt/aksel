@@ -1,5 +1,5 @@
 import { PortableTextBlock } from "next-sanity";
-import { BodyShort, Box, Detail, HStack, Heading, Tag } from "@navikt/ds-react";
+import { BodyShort, Box, HStack, Heading, Tag } from "@navikt/ds-react";
 import {
   GRUNNLEGGENDE_BY_SLUG_QUERYResult,
   KOMPONENT_BY_SLUG_QUERYResult,
@@ -7,6 +7,7 @@ import {
 } from "@/app/_sanity/query-types";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
+import { DesignsystemetEyebrow } from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { dateStr } from "@/utils";
 import styles from "./Designsystemet.module.css";
 import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";
@@ -42,15 +43,9 @@ type DesignsystemetPageT = {
     | MONSTER_MALER_BY_SLUG_QUERYResult;
 };
 
-const eyebrowMap = {
-  komponent_artikkel: "Komponenter",
-  ds_artikkel: "Grunnleggende",
-  templates_artikkel: "Maler",
-};
-
 async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
   /* TODO: refactor dateStr to appdir */
-  const publishDate = await dateStr(data?._updatedAt ?? data?._createdAt ?? "");
+  const updateDate = await dateStr(data?._updatedAt ?? data?._createdAt ?? "");
 
   const statusTag = getStatusTag(data?.status?.tag);
 
@@ -58,14 +53,13 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
 
   return (
     <Box marginBlock="space-0 space-28">
-      {data?._type && (
-        <BodyShort size="small" className={styles.pageHeaderEyebrow}>
-          {eyebrowMap[data?._type]}
-        </BodyShort>
-      )}
-      <Heading level="1" size="xlarge" className={styles.pageHeaderHeading}>
-        {data?.heading}
-      </Heading>
+      <DesignsystemetEyebrow type={data?._type} />
+
+      <Box marginBlock="space-0 space-8" asChild>
+        <Heading level="1" size="xlarge" data-aksel-heading-color>
+          {data?.heading}
+        </Heading>
+      </Box>
       {isComponentPage && (
         <CustomPortableText
           value={data?.intro?.body as PortableTextBlock[]}
@@ -85,10 +79,10 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
             {statusTag.text}
           </Tag>
         )}
-        {publishDate && (
-          <Detail as="span" textColor="subtle">
-            {publishDate}
-          </Detail>
+        {updateDate && (
+          <BodyShort size="small" as="span" textColor="subtle">
+            {`Oppdatert ${updateDate}`}
+          </BodyShort>
         )}
       </HStack>
       {isComponentPage && <KomponentLinks data={data} />}
