@@ -13,18 +13,11 @@ import { FigmaIcon, GithubIcon } from "@/assets/Icons";
 import TokenTableOfContents from "../../../../../../components/token-docs/TokenTableOfContents";
 import TokensPage from "../../../../../../components/token-docs/TokensPage";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
-import { getStaticParamsSlugs } from "../../../slug";
-
-type Props = {
-  params: Promise<{ slug: string[] }>;
-};
 
 export async function generateMetadata(
-  { params }: Props,
+  _,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  await params;
-
   const ogImages = (await parent).openGraph?.images || [];
 
   return {
@@ -36,10 +29,6 @@ export async function generateMetadata(
       images: ogImages,
     },
   };
-}
-
-export async function generateStaticParams() {
-  return await getStaticParamsSlugs("ds_artikkel");
 }
 
 const Page = async () => {
