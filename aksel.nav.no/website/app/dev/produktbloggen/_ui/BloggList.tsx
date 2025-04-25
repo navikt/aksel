@@ -27,7 +27,9 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
     <li>
       <Show asChild above="md">
         <div className={styles.remainingArticle}>
-          <div className={styles.remainingArticleImage}>
+          <div
+            className={`${styles.remainingArticleImage} ${styles.imageContainer}`}
+          >
             {imageUrl ? (
               <NextImage
                 src={imageUrl}

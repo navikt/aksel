@@ -24,7 +24,7 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
     <article>
       <Show above="md">
         <div className={styles.article}>
-          <div className={styles.articleImage}>
+          <div className={`${styles.articleImage} ${styles.imageContainer}`}>
             {imageUrl ? (
               <NextImage
                 src={imageUrl}
@@ -71,7 +71,7 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
       {/* Mobile view */}
       <Hide above="md">
         <div className={styles.articleMobile}>
-          <div className={styles.articleImage}>
+          <div className={`${styles.articleImage} ${styles.imageContainer}`}>
             {imageUrl ? (
               <NextImage
                 src={imageUrl}
