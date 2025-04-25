@@ -130,6 +130,9 @@ export const formatDOCS: FormatFn = async ({ dictionary }) => {
           value: createTokenValue(token),
           rawValue: formatRawValue(token),
           jsValue: tokenNameWithoutPrefix,
+          cssValue: createTokenValue(token),
+          scssValue: `$ax-${name}`,
+          lessValue: `@ax-${name}`,
           comment: token.comment?.startsWith("TODO")
             ? undefined // Filter out placeholder comments
             : token.comment,

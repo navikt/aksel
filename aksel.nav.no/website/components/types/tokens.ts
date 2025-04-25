@@ -1,7 +1,9 @@
 export type TokenForDocumentationT = {
   name: string;
-  value: string;
   jsValue: string;
+  lessValue: string;
+  scssValue: string;
+  cssValue: string;
   rawValue: string;
   comment?: string;
   type: string;

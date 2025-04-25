@@ -9,7 +9,7 @@ const ShadowToken = ({ token }: { token: TokenForDocumentationT }) => (
       borderColor="neutral-subtle"
       width="32px"
       height="32px"
-      style={{ boxShadow: token.value }}
+      style={{ boxShadow: token.cssValue }}
     />
   </VStack>
 );

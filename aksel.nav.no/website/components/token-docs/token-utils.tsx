@@ -14,8 +14,8 @@ const sortTokens = (a: TokenForDocumentationT, b: TokenForDocumentationT) => {
     }
     case "breakpoint":
       return (
-        parseFloat(a.value.replace("px", "")) -
-        parseFloat(b.value.replace("px", ""))
+        parseFloat(a.cssValue.replace("px", "")) -
+        parseFloat(b.cssValue.replace("px", ""))
       );
     case "font": {
       if (a.group === b.group) {

@@ -10,7 +10,7 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
           borderColor="neutral-subtle"
           borderRadius="full"
           borderWidth="1"
-          style={{ backgroundColor: token.value }}
+          style={{ backgroundColor: token.cssValue }}
           width="32px"
           height="32px"
         />
@@ -22,7 +22,7 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
           borderWidth="4"
           width="32px"
           height="32px"
-          style={{ borderColor: token.value }}
+          style={{ borderColor: token.cssValue }}
         />
       );
     case "textColor": {
@@ -32,7 +32,7 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
             <VStack as="div" align="center" justify="center" height="100%">
               <PaletteIcon
                 title="a11y-title"
-                color={token.value}
+                color={token.cssValue}
                 fontSize="var(--ax-font-size-heading-medium)"
               />
             </VStack>
@@ -42,7 +42,7 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
       return (
         <Box.New width="32px" height="32px">
           <VStack as="div" align="center" justify="center" height="100%">
-            <Heading size="medium" style={{ color: token.value }}>
+            <Heading size="medium" style={{ color: token.cssValue }}>
               Aa
             </Heading>
           </VStack>

@@ -11,8 +11,8 @@ const TokenFormatSelector = () => {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const params = new URLSearchParams(searchParams?.toString());
     const value = event.target.value;
-    if (value === "js") {
-      params.set("tokenFormat", "js");
+    if (value) {
+      params.set("tokenFormat", value);
     } else {
       params.delete("tokenFormat");
     }
@@ -26,8 +26,10 @@ const TokenFormatSelector = () => {
       style={{ width: "9rem" }}
       onChange={handleChange}
     >
-      <option value="css">CSS</option>
-      <option value="js">JS</option>
+      <option>CSS</option>
+      <option value="jsValue">JS</option>
+      <option value="scssValue">SCSS</option>
+      <option value="lessValue">LESS</option>
     </Select>
   );
 };

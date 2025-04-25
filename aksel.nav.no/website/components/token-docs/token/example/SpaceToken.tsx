@@ -6,7 +6,7 @@ const SpaceToken = ({ token }: { token: TokenForDocumentationT }) => (
   <VStack as="div" align="center" justify="center" height="100%">
     <SpaceHorizontalIcon
       title={token.name}
-      color={token.value}
+      color={token.cssValue}
       fontSize="var(--ax-font-size-heading-medium)"
     />
   </VStack>

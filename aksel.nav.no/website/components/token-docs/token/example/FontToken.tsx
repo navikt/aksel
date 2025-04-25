@@ -13,19 +13,19 @@ const FontToken = ({ token }: { token: TokenForDocumentationT }) => {
     case "family":
       fontStyling = {
         ...fontStyling,
-        fontFamily: token.value,
+        fontFamily: token.cssValue,
       };
       break;
     case "size":
       fontStyling = {
         ...fontStyling,
-        fontSize: token.value,
+        fontSize: token.cssValue,
       };
       break;
     case "weight":
       fontStyling = {
         ...fontStyling,
-        fontWeight: token.value,
+        fontWeight: token.cssValue,
       };
       break;
     case "line-height":

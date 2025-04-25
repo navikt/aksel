@@ -12,8 +12,8 @@ const TokenEntry = ({
   token: TokenForDocumentationT;
 }) => {
   const searchParams = useSearchParams();
-  const tokenFormat = searchParams?.get("tokenFormat");
-  const tokenText = tokenFormat === "js" ? token.jsValue : `--ax-${token.name}`;
+  const tokenValue = searchParams?.get("tokenFormat");
+  const tokenText = tokenValue ? token[tokenValue] : `--ax-${token.name}`;
   return (
     <Box.New
       borderWidth={`${index === 0 ? 1 : 0} 0 1`}

@@ -9,7 +9,7 @@ const RadiusToken = ({ token }: { token: TokenForDocumentationT }) => (
       height="32px"
       background="neutral-strong"
       style={{
-        borderRadius: token.value,
+        borderRadius: token.cssValue,
       }}
     />
   </VStack>
