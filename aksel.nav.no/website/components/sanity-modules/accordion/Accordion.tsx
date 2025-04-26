@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Accordion as DsAccordion } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
