@@ -147,7 +147,7 @@ export default async function Page(props: Props) {
             <HStack gap="space-4" asChild>
               <BodyShort textColor="subtle" as="div">
                 {authors.map(abbrName).map((x, y) => (
-                  <address key={x}>
+                  <address key={x} className={styles.pageAuthor}>
                     {x}
                     {y !== authors.length - 1 && ", "}
                   </address>
