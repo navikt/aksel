@@ -1,13 +1,12 @@
 import {
   BulletListIcon,
-  CodeIcon,
   ExternalLinkIcon,
   FileTextIcon,
   LinkIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
-import InlineCode from "@/web/InlineCode";
-import KBD from "@/web/KBD";
+import { Kbd } from "@/app/_ui/kbd/Kbd";
+import { Code } from "@/app/_ui/typography/Code";
 import { allArticleDocsRef } from "../../../config";
 import {
   ExternalLinkRenderer,
@@ -18,7 +17,7 @@ export const styles = [
   {
     title: "Avsnitt",
     value: "normal",
-    component: (props) => <p className="text-lg">{props.children}</p>,
+    component: (props) => <p>{props.children}</p>,
   },
 ];
 
@@ -43,38 +42,30 @@ export const block = {
       {
         title: "Strong",
         value: "strong",
-        icon: () => (
-          <span className="font-semibold" aria-label="bold">
-            B
-          </span>
+        component: ({ children }) => (
+          <strong style={{ fontWeight: 600 }}>{children}</strong>
         ),
       },
       {
         title: "Italic",
         value: "em",
-        icon: () => (
-          <span className="italic" aria-label="italic">
-            i
-          </span>
-        ),
       },
       {
         title: "Inline-Kode",
         value: "code",
-        icon: () => <CodeIcon aria-label="Kode" />,
-        component: ({ children }) => <InlineCode>{children}</InlineCode>,
+        component: ({ children }) => <Code>{children}</Code>,
       },
       {
         title: "Quote",
         value: "quote",
-        icon: () => <span className="font-semibold">Q</span>,
+        icon: () => <span>Q</span>,
         component: ({ children }) => <q>{children}</q>,
       },
       {
         title: "Keyboard",
         value: "kbd",
         icon: () => <kbd>KBD</kbd>,
-        component: ({ children }) => <KBD>{children}</KBD>,
+        component: ({ children }) => <Kbd>{children}</Kbd>,
       },
     ],
     annotations: [
