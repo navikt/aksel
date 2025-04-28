@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
-import { Heading, Show, VStack } from "@navikt/ds-react";
-import { CustomPortableText } from "@/app/CustomPortableText";
+import { BodyLong, Heading, Show, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import { BLOGG_LANDINGSSIDE_QUERY } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
@@ -55,12 +53,10 @@ export default async function Page() {
           >
             Produktbloggen
           </Heading>
-          {pageData.page.intro && (
-            <CustomPortableText
-              value={pageData.page.intro as PortableTextBlock[]}
-              className={styles.overviewSubtitle}
-            />
-          )}
+          <BodyLong className={styles.overviewSubtitle}>
+            Skriverier fra produktutviklingsmiljøet i NAV. Har du eller teamet
+            ditt noe å dele? Ta kontakt med Team Aksel!
+          </BodyLong>
         </VStack>
 
         <div className={styles.latestBloggPosts}>

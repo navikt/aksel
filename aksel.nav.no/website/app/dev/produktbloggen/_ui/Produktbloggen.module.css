@@ -5,12 +5,10 @@
 }
 
 .overviewSubtitle {
-  & p {
-    color: var(--ax-text-brand-blue-subtle);
-    text-align: center;
-    max-width: 670px;
-    font-size: var(--ax-font-size-heading-small);
-  }
+  color: var(--ax-text-brand-blue-subtle);
+  text-align: center;
+  max-width: 670px;
+  font-size: var(--ax-font-size-heading-small);
 }
 
 .latestBloggPosts {
