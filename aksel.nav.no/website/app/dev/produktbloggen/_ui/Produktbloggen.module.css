@@ -17,7 +17,7 @@
   display: grid;
   gap: var(--ax-space-48);
   margin-inline: auto;
-  margin-block: var(--ax-space-40);
+  margin-block: var(--ax-space-48);
 }
 
 .bloggPosts {
