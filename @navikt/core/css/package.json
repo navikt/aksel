@@ -33,7 +33,7 @@
     "cssnano": "7.0.6",
     "esbuild": "^0.25.0",
     "fast-glob": "3.2.11",
-    "lightningcss": "^1.29.2",
+    "lightningcss": "^1.29.3",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.31",
