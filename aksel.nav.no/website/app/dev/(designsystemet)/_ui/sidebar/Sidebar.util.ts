@@ -98,10 +98,10 @@ function generateSidebar(
           });
         }
 
-        if (category.value === "styling") {
-          pages.unshift({
+        if (type === "grunnleggende" && category.value === "darkside") {
+          pages.push({
             heading: "Tokens darkside",
-            slug: `${type}/styling/tokens-darkside`,
+            slug: `${type}/${category.value}/design-tokens`,
             tag: "ready",
           });
         }
@@ -111,6 +111,24 @@ function generateSidebar(
           pages,
         };
       });
+
+    // TODO: Remove this when we have published any darkside pages from Sanity, so the entry above is activated
+    if (
+      type === "grunnleggende" &&
+      !groupedPages.some((page) => page.value === "darkside")
+    ) {
+      groupedPages.push({
+        title: "Darkside",
+        value: "darkside",
+        pages: [
+          {
+            heading: "Design tokens",
+            slug: `${type}/darkside/design-tokens`,
+            tag: "ready",
+          },
+        ],
+      });
+    }
 
     return {
       label: pageTypes[type].name,
