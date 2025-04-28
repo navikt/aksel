@@ -209,6 +209,30 @@ const GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY = defineQuery(
   }`,
 );
 
+/* ---------------------------- Standalone pages ---------------------------- */
+
+const SIDE_ARTICLE_BY_SLUG_QUERY = defineQuery(`
+*[slug.current == $slug && _type == "aksel_standalone"][0]
+  {
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
+  }
+`);
+
+/* ------------------------------- Prinsipper ------------------------------- */
+const PRINSIPPER_BY_SLUG_QUERY = defineQuery(`
+  *[slug.current == $slug && _type == "aksel_prinsipp"][0]{
+  ...,
+  content[]{
+    ...,
+    ${destructureBlocks}
+  },
+  ${contributorsAll}
+}`);
+
 /* --------------------------------- Slack --------------------------------- */
 
 const DOCUMENT_BY_ID_FOR_SLACK_QUERY = defineQuery(`*[_id == $id][0]{
@@ -241,4 +265,6 @@ export {
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
   DOCUMENT_BY_ID_FOR_SLACK_QUERY,
+  SIDE_ARTICLE_BY_SLUG_QUERY,
+  PRINSIPPER_BY_SLUG_QUERY,
 };
