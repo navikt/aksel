@@ -8,7 +8,8 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { DesignsystemetOverviewPage } from "@/app/dev/(designsystemet)/_ui/overview/DesignsystemetOverview";
-import { sanityCategoryLookup } from "@/sanity/config";
+import { sanityCategoryLookup, templatesKategorier } from "@/sanity/config";
+import { MonsterMalerPage } from "./_ui/MonsterMalerPage";
 
 type Props = {
   params: Promise<{ category: string }>;
@@ -58,6 +59,14 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: Props) {
   const { category } = await params;
+
+  /**
+   * Overview-pages can only match the categories in config. If we get a category outside of the config,
+   * we can assume its a "top-level" page, and we should not show the overview page.
+   */
+  if (!templatesKategorier.find((cat) => cat.value === category)) {
+    return <MonsterMalerPage slug={`monster-maler/${category}`} />;
+  }
 
   const [{ data: categoryPages }, { data: landingPage }] = await Promise.all([
     sanityFetch({
