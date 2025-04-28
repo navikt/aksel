@@ -8,14 +8,14 @@ import {
   Link,
   Show,
 } from "@navikt/ds-react";
-import { urlFor } from "@/sanity/interface";
+import { urlForImage } from "@/app/_sanity/utils";
 import { dateStr, getAuthors, getImage } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
 export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
   const date = await dateStr(blogg?.publishedAt ?? blogg._createdAt);
 
-  const imageUrl = urlFor(blogg?.seo?.image)
+  const imageUrl = urlForImage(blogg?.seo?.image)
     ?.quality(100)
     .auto("format")
     .url();
