@@ -87,12 +87,7 @@
 }
 
 .link {
-  text-decoration: underline;
   color: var(--ax-text-brand-blue);
-
-  &:hover {
-    text-decoration: none;
-  }
 }
 
 /* sm */
