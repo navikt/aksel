@@ -1,4 +1,4 @@
-import { BodyLong, VStack } from "@navikt/ds-react";
+import { BodyLong, CopyButton, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 
@@ -17,7 +17,7 @@ function ExampleText(
         variant="example-text"
         heading={title}
         headingTag="p"
-        copyText={text}
+        actionComponent={<CopyButton size="small" copyText={text} />}
       >
         <VStack gap="space-24">{formatText(text)}</VStack>
       </EditorPanel>

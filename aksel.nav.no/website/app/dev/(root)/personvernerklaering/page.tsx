@@ -1,6 +1,4 @@
 import { BodyLong, Box, Heading, Link } from "@navikt/ds-react";
-
-/* @ts-expect-error Workspace cant resolve valid imports */
 import { Page as DsPage, PageBlock } from "@navikt/ds-react/Page";
 import { getCookieConsent } from "@/app/_ui/consent-banner/ConsentBanner.utils";
 import Footer from "@/app/_ui/footer/Footer";
@@ -17,9 +15,9 @@ export default async function Page() {
   const consent = await getCookieConsent();
 
   return (
-    <DsPage footer={<Footer />}>
+    <DsPage footer={<Footer />} footerPosition="belowFold">
       <Header />
-      <Box marginBlock="space-80">
+      <Box paddingBlock="space-40" asChild>
         <PageBlock as="main" id="hovedinnhold" tabIndex={-1} width="md" gutters>
           <Heading level="1" size="xlarge" data-aksel-heading-color spacing>
             Personvern og sikkerhet på aksel.nav.no

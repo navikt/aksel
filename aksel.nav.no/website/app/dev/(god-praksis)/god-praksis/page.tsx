@@ -1,4 +1,4 @@
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
@@ -26,19 +26,11 @@ import {
   LinkCardTitle,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 
-export async function generateMetadata(
-  _,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const { data: seo } = await sanityFetch({
     query: GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
     stega: false,
   });
-
-  const ogImages = (await parent).openGraph?.images || [];
-  const pageOgImage = urlForOpenGraphImage(seo?.image as Image);
-
-  pageOgImage && ogImages.unshift(pageOgImage);
 
   return {
     title: "God praksis",
@@ -46,23 +38,21 @@ export async function generateMetadata(
       seo?.meta ??
       `Mange som jobber med produktutvikling i Nav sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her.`,
     openGraph: {
-      images: ogImages,
+      images: urlForOpenGraphImage(seo?.image as Image),
     },
   };
 }
 
 export default async function Page() {
-  const [{ data: temaList }] = await Promise.all([
-    sanityFetch({
-      query: GOD_PRAKSIS_ALL_TEMA_QUERY,
-    }),
-  ]);
+  const { data: temaList } = await sanityFetch({
+    query: GOD_PRAKSIS_ALL_TEMA_QUERY,
+  });
 
   if (!temaList || temaList.length === 0) {
     notFound();
   }
 
-  const filteredTemaList = temaList.filter((x) => x.articles.length > 0);
+  const filteredTemaList = temaList.filter((tema) => tema.articles.length > 0);
 
   return (
     <div>

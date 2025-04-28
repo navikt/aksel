@@ -1,5 +1,5 @@
 import differenceInMonths from "date-fns/differenceInMonths";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { PortableTextBlock } from "next-sanity";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
@@ -34,10 +34,7 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
   const { data: seoData } = await sanityFetch({
@@ -46,20 +43,16 @@ export async function generateMetadata(
     stega: false,
   });
 
-  const ogImages = (await parent).openGraph?.images || [];
   const pageOgImage = urlForOpenGraphImage(seoData?.seo?.image as Image);
   const fallbackOgImage = urlForOpenGraphImage(
     seoData?.undertema?.[0]?.tema?.image as Image,
   );
 
-  pageOgImage && ogImages.unshift(pageOgImage);
-  fallbackOgImage && ogImages.unshift(fallbackOgImage);
-
   return {
     title: seoData?.heading,
     description: seoData?.seo?.meta ?? seoData?.ingress,
     openGraph: {
-      images: ogImages,
+      images: pageOgImage ?? fallbackOgImage,
       publishedTime: seoData?.publishedAt ?? seoData?._updatedAt,
       modifiedTime: seoData?.updateInfo?.lastVerified ?? seoData?._updatedAt,
     },
@@ -154,7 +147,7 @@ export default async function Page(props: Props) {
             <HStack gap="space-4" asChild>
               <BodyShort textColor="subtle" as="div">
                 {authors.map(abbrName).map((x, y) => (
-                  <address key={x} className={styles.pageAuthor}>
+                  <address key={x}>
                     {x}
                     {y !== authors.length - 1 && ", "}
                   </address>
