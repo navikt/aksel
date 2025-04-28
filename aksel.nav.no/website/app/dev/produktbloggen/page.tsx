@@ -3,7 +3,10 @@ import { notFound } from "next/navigation";
 import { Image } from "sanity";
 import { BodyLong, Heading, Show, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
-import { BLOGG_LANDINGSSIDE_QUERY } from "@/app/_sanity/queries";
+import {
+  BLOGG_LANDINGSSIDE_BLOGS_QUERY,
+  BLOGG_LANDINGSSIDE_PAGE_QUERY,
+} from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { BloggList } from "./_ui/BloggList";
 import { HighlightedBlogg } from "./_ui/HighlightedBlogg";
@@ -12,7 +15,7 @@ import { SimpleArticle } from "./_ui/SimpleArticle";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: pageData } = await sanityFetch({
-    query: BLOGG_LANDINGSSIDE_QUERY,
+    query: BLOGG_LANDINGSSIDE_PAGE_QUERY,
   });
 
   const pageOgImage = urlForOpenGraphImage(pageData?.page.seo?.image as Image);
@@ -29,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
 /* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page() {
   const { data: pageData } = await sanityFetch({
-    query: BLOGG_LANDINGSSIDE_QUERY,
+    query: BLOGG_LANDINGSSIDE_BLOGS_QUERY,
   });
 
   if (!pageData?.bloggposts) {

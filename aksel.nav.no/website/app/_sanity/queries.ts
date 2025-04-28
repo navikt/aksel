@@ -20,9 +20,8 @@ const DESIGNSYSTEM_OVERVIEW_PAGES_QUERY = defineQuery(
   }`,
 );
 
-const BLOGG_LANDINGSSIDE_QUERY = defineQuery(`
+const BLOGG_LANDINGSSIDE_BLOGS_QUERY = defineQuery(`
   *[_type == "blogg_landingsside"][0]{
-    "page": {..., intro[]{...,${destructureBlocks}}},
     "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){
       seo,
       heading,
@@ -33,6 +32,11 @@ const BLOGG_LANDINGSSIDE_QUERY = defineQuery(`
       "slug": slug.current,
       ${contributorsAll}
     }
+  }`);
+
+const BLOGG_LANDINGSSIDE_PAGE_QUERY = defineQuery(`
+  *[_type == "blogg_landingsside"][0]{
+    "page": {...},
   }`);
 
 const DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY = defineQuery(
@@ -250,7 +254,8 @@ export {
   BLOGG_BY_SLUG_QUERY,
   MONSTER_MALER_BY_SLUG_QUERY,
   METADATA_BY_SLUG_QUERY,
-  BLOGG_LANDINGSSIDE_QUERY,
+  BLOGG_LANDINGSSIDE_PAGE_QUERY,
+  BLOGG_LANDINGSSIDE_BLOGS_QUERY,
   GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
   GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
