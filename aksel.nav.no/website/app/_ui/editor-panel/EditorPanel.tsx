@@ -1,4 +1,5 @@
 import {
+  DownloadIcon,
   ExclamationmarkTriangleIcon,
   FileTextIcon,
   InformationSquareIcon,
@@ -7,7 +8,7 @@ import {
   ThumbDownIcon,
   ThumbUpIcon,
 } from "@navikt/aksel-icons";
-import { CopyButton, Heading, Spacer } from "@navikt/ds-react";
+import { Heading, Spacer } from "@navikt/ds-react";
 import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { AkselBrandColors } from "@/app/theme";
 import styles from "./EditorPanel.module.css";
@@ -23,9 +24,10 @@ type EditorPanelProps = {
    */
   headingTag?: "h2" | "h3" | "h4" | "p";
   /**
-   * Optional text to copy
+   * Optional action
+   * @example <CopyButton />
    */
-  copyText?: string;
+  actionComponent?: React.ReactNode;
   variant:
     | "tips"
     | "do"
@@ -33,6 +35,7 @@ type EditorPanelProps = {
     | "caution"
     | "info"
     | "links"
+    | "attachment"
     | "example-text";
 };
 
@@ -74,6 +77,11 @@ const VariantConfig: Record<
     icon: <LinkIcon aria-hidden fontSize="1.5rem" />,
     colorRole: "neutral",
   },
+  attachment: {
+    heading: "Vedlegg",
+    icon: <DownloadIcon aria-hidden fontSize="1.5rem" />,
+    colorRole: "neutral",
+  },
   "example-text": {
     heading: "Eksempeltekst",
     icon: <FileTextIcon aria-hidden fontSize="1.5rem" />,
@@ -82,7 +90,7 @@ const VariantConfig: Record<
 } as const;
 
 function EditorPanel(props: EditorPanelProps) {
-  const { variant, children, heading, headingTag, copyText } = props;
+  const { variant, children, heading, headingTag, actionComponent } = props;
 
   const config = VariantConfig[variant];
 
@@ -96,9 +104,11 @@ function EditorPanel(props: EditorPanelProps) {
         variant={variant}
         heading={heading}
         headingTag={headingTag}
-        copyText={copyText}
+        actionComponent={actionComponent}
       />
-      <div className={styles.editorPanelContent}>{children}</div>
+      <div data-text-prose className={styles.editorPanelContent}>
+        {children}
+      </div>
     </div>
   );
 }
@@ -106,10 +116,16 @@ function EditorPanel(props: EditorPanelProps) {
 function EditorPanelHeader(
   props: Pick<
     EditorPanelProps,
-    "variant" | "heading" | "headingTag" | "copyText"
+    "variant" | "heading" | "headingTag" | "actionComponent"
   >,
 ) {
-  const { variant, heading, headingTag = "h2", copyText } = props;
+  const {
+    variant,
+    heading,
+    headingTag = "h2",
+
+    actionComponent,
+  } = props;
   const config = VariantConfig[variant];
 
   return (
@@ -118,10 +134,10 @@ function EditorPanelHeader(
       <Heading as={headingTag} size="small">
         {heading ?? config.heading}
       </Heading>
-      {copyText && (
+      {actionComponent && (
         <>
           <Spacer />
-          <CopyButton size="small" copyText={copyText} />
+          {actionComponent}
         </>
       )}
     </div>

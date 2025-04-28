@@ -5,6 +5,7 @@ import "@navikt/ds-tokens/darkside-css";
 import { SanityLive } from "@/app/_sanity/live";
 import { ConsentBanner } from "@/app/_ui/consent-banner/ConsentBanner";
 import { ThemeProvider } from "@/app/_ui/theming/ThemeProvider";
+import { Umami } from "@/app/_ui/umami/Umami";
 import "./globals.css";
 
 export const dynamic = "force-dynamic";
@@ -42,6 +43,7 @@ export default async function RootLayout({
         />
       </head>
       <body>
+        <Umami />
         <ThemeProvider>
           <ConsentBanner />
           {children}

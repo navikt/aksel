@@ -57,14 +57,12 @@
 }
 
 .pageHeaderHeading {
-  color: var(--ax-text-brand-blue);
   margin-block-end: var(--ax-space-4);
 }
 
 .pageHeaderEyebrow {
   color: var(--ax-text-brand-blue-subtle);
-  text-transform: uppercase;
-  margin-block-end: var(--ax-space-4);
+  margin-block-end: var(--ax-space-2);
 }
 
 .thumbnailContainer {

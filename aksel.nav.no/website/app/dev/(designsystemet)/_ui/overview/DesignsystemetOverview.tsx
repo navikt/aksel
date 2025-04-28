@@ -3,6 +3,7 @@ import type { Image } from "sanity";
 import {
   Bleed,
   BodyLong,
+  Box,
   HStack,
   Heading,
   Tag,
@@ -12,40 +13,45 @@ import { DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult } from "@/app/_sanity/que
 import { urlForImage } from "@/app/_sanity/utils";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
+import {
+  DesignsystemetEyebrow,
+  DesignsystemetEyebrowProps,
+} from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
 import {
   LinkCard,
   LinkCardAnchor,
   LinkCardTitle,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
-import pagestyles from "../Designsystemet.module.css";
 import styles from "./DesignsystemetOverview.module.css";
+
+type DesignsystemetOverviewPageProps = {
+  title: string;
+  ingress?: string;
+  links: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult;
+} & Pick<DesignsystemetEyebrowProps, "type">;
 
 function DesignsystemetOverviewPage({
   title,
   ingress,
   links,
-}: {
-  title: string;
-  ingress?: string;
-  links: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult;
-}) {
+  type,
+}: DesignsystemetOverviewPageProps) {
   const list = sortDesignsystemetOverviewList(links);
 
   return (
     <DesignsystemetPageLayout>
       <div>
-        <Heading
-          level="1"
-          size="xlarge"
-          className={pagestyles.pageHeaderHeading}
-        >
+        <DesignsystemetEyebrow type={type} />
+        <Heading level="1" size="xlarge" data-aksel-heading-color>
           {title}
         </Heading>
         {ingress && (
-          <BodyLong size="large" className="mb-4 only:mb-7">
-            <MarkdownText>{ingress}</MarkdownText>
-          </BodyLong>
+          <Box marginBlock="space-8 space-0" asChild>
+            <BodyLong size="large">
+              <MarkdownText>{ingress}</MarkdownText>
+            </BodyLong>
+          </Box>
         )}
       </div>
 

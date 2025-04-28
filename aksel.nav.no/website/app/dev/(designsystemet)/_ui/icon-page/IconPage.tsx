@@ -6,6 +6,7 @@ import { BrailleIcon, DownloadIcon } from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import {
   BodyLong,
+  Box,
   Button,
   HGrid,
   HStack,
@@ -14,8 +15,8 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
+import { DesignsystemetEyebrow } from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { FigmaIcon } from "@/assets/Icons";
-import pagestyles from "../Designsystemet.module.css";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
 import { IconPageButton } from "./IconPage.button";
 import { IconDetails, IntroInformation } from "./IconPage.details";
@@ -43,18 +44,17 @@ function IconPage({
   return (
     <DesignsystemetPageLayout>
       <div>
-        <Heading
-          level="1"
-          size="xlarge"
-          className={pagestyles.pageHeaderHeading}
-        >
+        <DesignsystemetEyebrow type="komponent_artikkel" />
+        <Heading level="1" size="xlarge" data-aksel-heading-color>
           Ikoner
         </Heading>
-        <BodyLong size="large">
-          {Object.keys(meta).length} open source-ikoner designet og utviklet for
-          Nav
-        </BodyLong>
-        <HStack as="ul" gap="space-16" marginBlock="space-16 0">
+        <Box marginBlock="space-8 space-0" asChild>
+          <BodyLong size="large">
+            {Object.keys(meta).length} open source-ikoner designet og utviklet
+            for Nav
+          </BodyLong>
+        </Box>
+        <HStack as="ul" gap="space-16" marginBlock="space-24 0">
           <li className={styles.iconPageLinkLi}>
             <NextLink
               href="https://www.figma.com/community/file/1214869602572392330"
@@ -129,16 +129,11 @@ function IconPage({
               {iconsWithCategories.map((section) => {
                 return (
                   <div key={section.category}>
-                    <Heading
-                      level="2"
-                      size="large"
-                      spacing
-                      className={pagestyles.pageHeaderHeading}
-                    >
+                    <Heading level="2" size="large" data-aksel-heading-color>
                       {section.category}
                     </Heading>
 
-                    <HStack gap="space-8">
+                    <HStack gap="space-8" marginBlock="space-16 space-0">
                       {section.icons.map((icon) => {
                         const T = Icons[`${icon.id}Icon`]; // eslint-disable-line import/namespace
                         if (T === undefined) {

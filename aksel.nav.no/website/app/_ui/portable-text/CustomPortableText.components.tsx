@@ -71,7 +71,7 @@ function customPortableTextComponents({
     marks,
     list: {
       bullet: ({ children }) => (
-        <WebsiteList as="ul" data-block-margin="space-28">
+        <WebsiteList as="ul" /* data-block-margin="space-28" */>
           {children}
         </WebsiteList>
       ),
@@ -123,6 +123,7 @@ function blockComponents({
           spacing
           className={styles.removeSpacingForLast}
           size={typoConfig.size}
+          data-text-prose
         >
           {children}
         </BodyComponent>,

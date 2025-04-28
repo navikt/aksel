@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { HGrid, Heading } from "@navikt/ds-react";
-
-/* @ts-expect-error Workspace cant resolve valid import */
 import { PageBlock } from "@navikt/ds-react/Page";
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
 import AkselLogo from "@/assets/Logo";

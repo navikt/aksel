@@ -24,6 +24,8 @@ export const Attachment = defineType({
       title: "Innhold",
       name: "body",
       type: "riktekst_enkel",
+      validation: (Rule) =>
+        Rule.required().error("Vedlegg trenger beskrivelse."),
     }),
   ],
   preview: {
