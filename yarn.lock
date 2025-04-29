@@ -5355,7 +5355,7 @@ __metadata:
     "@navikt/ds-css": "npm:^7.20.0"
     "@navikt/ds-tokens": "npm:^7.20.0"
     "@types/cli-progress": "npm:3.11.6"
-    axios: "npm:1.8.3"
+    axios: "npm:1.8.4"
     chalk: "npm:4.1.0"
     cli-progress: "npm:^3.12.0"
     clipboardy: "npm:^2.3.0"
@@ -5384,7 +5384,7 @@ __metadata:
     autoprefixer: "npm:^10.4.20"
     browserslist: "npm:^4.24.4"
     cssnano: "npm:7.0.6"
-    esbuild: "npm:^0.25.0"
+    esbuild: "npm:^0.25.1"
     fast-glob: "npm:3.2.11"
     lightningcss: "npm:^1.29.3"
     lodash: "npm:^4.17.21"
@@ -5457,7 +5457,7 @@ __metadata:
     "@figma/plugin-typings": "npm:^1.100.2"
     color: "npm:4.2.3"
     colorjs.io: "npm:^0.5.2"
-    esbuild: "npm:^0.25.0"
+    esbuild: "npm:^0.25.1"
     lightningcss: "npm:^1.29.3"
     lodash: "npm:^4.17.21"
     style-dictionary: "npm:^4.1.1"
@@ -8761,6 +8761,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:4.17.16":
+  version: 4.17.16
+  resolution: "@types/lodash@npm:4.17.16"
+  checksum: 10/9a8bb7471a7521bd65d528e1bd14f79819a3eeb6f8a35a8a44649a7d773775c0813e93fd93bd32ccf350bb076c0bf02c6d47877c4625f526f6dd4d283c746aec
+  languageName: node
+  linkType: hard
+
 "@types/mdast@npm:^4.0.0":
   version: 4.0.4
   resolution: "@types/mdast@npm:4.0.4"
@@ -10293,7 +10300,7 @@ __metadata:
     react: "npm:^18.0.0"
     react-dom: "npm:^18.0.0"
     typescript: "npm:5.5.4"
-    vite: "npm:^5.4.15"
+    vite: "npm:^5.4.18"
     vite-plugin-singlefile: "npm:^1.0.0"
     vite-plugin-svgr: "npm:^4.2.0"
   languageName: unknown
@@ -10362,7 +10369,7 @@ __metadata:
     stylelint-value-no-unknown-custom-properties: "npm:^6.0.1"
     tsx: "npm:^4.19.1"
     typescript: "npm:5.5.4"
-    vite: "npm:^5.4.15"
+    vite: "npm:^5.4.18"
     vite-plugin-turbosnap: "npm:^1.0.3"
     vite-tsconfig-paths: "npm:^5.1.4"
   languageName: unknown
@@ -10889,14 +10896,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.8.3":
-  version: 1.8.3
-  resolution: "axios@npm:1.8.3"
+"axios@npm:1.8.4":
+  version: 1.8.4
+  resolution: "axios@npm:1.8.4"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/050f911cadd6d47a38ddbf91d2f8da2c34661dda8077e7ad6546e8178701125366fddbba07211a648b6815cf6c2c3c91c0a65d8b968e3d1a6054a21141ff9c01
+  checksum: 10/a10f0dd836613924e48cf03dc2eff3fd21b14f764807aedaee4880a70c0f142aaebdb21da7ce27104d4c16ca00d0e452a20a20851f60e385a8d5bad1ae909d46
   languageName: node
   linkType: hard
 
@@ -14287,7 +14294,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0":
+"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0, esbuild@npm:^0.25.1":
   version: 0.25.3
   resolution: "esbuild@npm:0.25.3"
   dependencies:
@@ -27200,7 +27207,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths-webpack-plugin@npm:^4.0.1":
+"tsconfig-paths-webpack-plugin@npm:^4.0.1, tsconfig-paths-webpack-plugin@npm:^4.2.0":
   version: 4.2.0
   resolution: "tsconfig-paths-webpack-plugin@npm:4.2.0"
   dependencies:
@@ -28237,9 +28244,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.15":
-  version: 5.4.15
-  resolution: "vite@npm:5.4.15"
+"vite@npm:^5.4.18":
+  version: 5.4.18
+  resolution: "vite@npm:5.4.18"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -28276,7 +28283,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/ddc4e7b874ebc0dc5bff53568e7d90f6c622747912fdda7f4ce533e15293009aaabb677ca29b5f108b18c5d60c0c32a7c0156f802bc94df355ca36915a4ae293
+  checksum: 10/491f0d047695a4bb3aafdb30822a3638ac41c23b022c1599bf51beab26a7cffe3ef1617bdf014592da48864079f217da5bf144a6c3238d2d74dea688ba3a549a
   languageName: node
   linkType: hard
 
@@ -28714,6 +28721,7 @@ __metadata:
     "@sanity/vision": "npm:3.78.0"
     "@slack/web-api": "npm:^7.8.0"
     "@types/jscodeshift": "npm:^0.11.11"
+    "@types/lodash": "npm:4.17.16"
     "@types/react": "npm:^18.3.11"
     "@types/react-dom": "npm:^18.0.0"
     "@types/umami": "npm:^2.10.0"
@@ -28762,6 +28770,7 @@ __metadata:
     swr: "npm:^2.3.2"
     tailwindcss: "npm:^3.3.3"
     tinycolor2: "npm:^1.6.0"
+    tsconfig-paths-webpack-plugin: "npm:^4.2.0"
     tsx: "npm:^4.19.1"
     typescript: "npm:5.5.4"
     typescript-cookie: "npm:^1.0.6"
