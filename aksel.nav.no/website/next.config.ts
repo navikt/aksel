@@ -16,7 +16,7 @@ const cspHeader = `
     base-uri 'self';
     form-action 'self' https://codesandbox.io/api/v1/sandboxes/define;
     frame-ancestors 'self' localhost:3000;
-    frame-src 'self' localhost:3000 https://localhost:3000 https://aksel.ansatt.dev.nav.no;
+    frame-src 'self' localhost:3000 http://localhost:3000 https://localhost:3000 https://aksel.ansatt.dev.nav.no;
     media-src 'self' ${cdnUrl} cdn.sanity.io;
     upgrade-insecure-requests;
     img-src 'self' blob: data: cdn.sanity.io ${dekoratorUrl} https://avatars.githubusercontent.com data: ${cdnUrl};

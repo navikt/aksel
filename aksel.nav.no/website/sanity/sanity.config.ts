@@ -7,10 +7,12 @@ import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
 import { AuthConfig, defineConfig } from "sanity";
 import { media } from "sanity-plugin-media";
+import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { TestFlaskIcon } from "@navikt/aksel-icons";
 import { SANITY_PROJECT_ID } from "./config";
 import { AkselLogo } from "./logo";
+import { resolve } from "./plugins/presentation/resolve";
 import { publicationFlow } from "./plugins/publication-flow";
 import { defaultDocumentNode, structure } from "./plugins/structure";
 import { schema } from "./schema";
@@ -46,6 +48,18 @@ export const workspaceConfig = defineConfig([
       visionTool(),
       colorInput(),
       nbNOLocale(),
+      presentationTool({
+        resolve,
+        allowOrigins: ["http://localhost:3000", "https://localhost:3000"],
+
+        previewUrl: {
+          previewMode: {
+            enable: "/api/draft-mode/enable",
+
+            shareAccess: true,
+          },
+        },
+      }),
     ],
     releases: {
       enabled: false,
@@ -80,6 +94,18 @@ export const workspaceConfig = defineConfig([
       visionTool(),
       colorInput(),
       nbNOLocale(),
+      presentationTool({
+        resolve,
+        previewUrl: {
+          /* Temp solution so that we send the presentation view to app-dir instead of legacy pages-dir */
+
+          previewMode: {
+            enable: "/api/draft-mode/enable",
+
+            shareAccess: true,
+          },
+        },
+      }),
     ],
     releases: {
       enabled: false,
