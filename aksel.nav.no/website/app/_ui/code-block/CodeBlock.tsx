@@ -4,8 +4,6 @@ import { Highlight } from "prism-react-renderer";
 import { useId } from "react";
 import { ChevronDownUpIcon, ChevronUpDownIcon } from "@navikt/aksel-icons";
 import { Button, CopyButton, HStack, Spacer, Tabs } from "@navikt/ds-react";
-
-/* @ts-expect-error Import is valid, workspace just can't resolve it */
 import { TabsList, TabsPanel, TabsTab } from "@navikt/ds-react/Tabs";
 import styles from "./CodeBlock.module.css";
 import {

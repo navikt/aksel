@@ -9,7 +9,7 @@ function ThemeButton() {
 
   return (
     <>
-      <style id="testid-123">{`
+      <style id="theme-button">{`
         :root, .light {
           --website-theme-toggle-light-display: block;
           --website-theme-toggle-dark-display: none;

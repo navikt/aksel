@@ -9,7 +9,7 @@
   &[data-level="2"] {
     margin-block: var(--ax-space-48) var(--ax-space-16);
 
-    &:first-of-type {
+    &:first-child {
       margin-top: 0;
     }
   }

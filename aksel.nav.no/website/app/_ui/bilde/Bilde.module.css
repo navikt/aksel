@@ -26,18 +26,18 @@
 
 .bildeFigure {
   margin-inline: auto;
-  background-color: var(--bilde-background, var(--ax-bg-neutral-softA));
   border-radius: var(--ax-border-radius-large);
-
-  &[data-image-border="true"] {
-    box-shadow: 0 0 0 1px var(--ax-border-neutral-subtleA);
-  }
 }
 
 .bildeImage {
   margin-inline: auto;
   padding: 0;
   border-radius: var(--ax-border-radius-large);
+  background-color: var(--bilde-background, var(--ax-bg-neutral-softA));
+
+  &[data-image-border="true"] {
+    box-shadow: 0 0 0 1px var(--ax-border-neutral-subtleA);
+  }
 
   &[data-image-size="small"] {
     max-width: min(100%, 600px);

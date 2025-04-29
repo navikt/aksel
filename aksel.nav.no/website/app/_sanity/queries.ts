@@ -113,7 +113,8 @@ const BLOGG_BY_SLUG_QUERY =
     ...,
     ${destructureBlocks}
   },
-  ${contributorsAll}
+  ${contributorsAll},
+  publishedAt,
 }`);
 
 const TOC_BY_SLUG_QUERY =
@@ -133,6 +134,92 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
   *[_type == $type && defined(slug.current)].slug.current
 `);
 
+/* ------------------------------- God praksis ------------------------------ */
+const GOD_PRAKSIS_ALL_TEMA_QUERY =
+  defineQuery(`*[_type == "gp.tema"] | order(lower(title)){
+  title,
+  description,
+  pictogram,
+  "slug": slug.current,
+  "articles": *[_type=="aksel_artikkel"
+    && (^._id in undertema[]->tema._ref)] {
+      heading,
+      "slug": slug.current,
+      "undertema": undertema[]->{title, "temaTitle": tema->title},
+      "innholdstype": innholdstype->title,
+      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month
+    } | order(coalesce(views, -1) desc)[0...4]{
+      heading,
+      slug,
+      undertema,
+      innholdstype
+    },
+}`);
+
+const GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY = defineQuery(
+  `*[_type == "godpraksis_landingsside"][0].seo`,
+);
+
+const GOD_PRAKSIS_TEMA_BY_SLUG_QUERY = defineQuery(
+  `*[_type == "gp.tema" && slug.current == $slug][0]{
+    ...,
+    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{
+      title,
+      description
+    },
+  }`,
+);
+
+const GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY = defineQuery(
+  `*[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(updateInfo.lastVerified desc) {
+    _id,
+    heading,
+    "displayDate": updateInfo.lastVerified,
+    "description": ingress,
+    "undertema": undertema[]->{title, "temaTitle": tema->title},
+    "innholdstype": innholdstype->title,
+    "slug": slug.current,
+  }`,
+);
+
+const GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY = defineQuery(
+  `*[slug.current == $slug && _type == "aksel_artikkel"][0]
+  {
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+    "innholdstype": innholdstype->title,
+    "undertema": undertema[]->{
+      title,
+      "tema": tema->{
+        title,
+        "slug": slug.current,
+        "image": seo.image
+      }
+    },
+    ${contributorsAll},
+    relevante_artikler[]->{
+      heading,
+      ingress,
+      slug,
+      "innholdstype": innholdstype->title,
+    }
+  }`,
+);
+
+/* --------------------------------- Slack --------------------------------- */
+
+const DOCUMENT_BY_ID_FOR_SLACK_QUERY = defineQuery(`*[_id == $id][0]{
+      "id": _id,
+      "title": heading,
+      "editors": contributors[]->email,
+      "slug": slug.current,
+      "contacts": undertema[]->tema->contacts[]->email
+    }`);
+
+/* --------------------------------- Exports -------------------------------- */
 export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
@@ -148,4 +235,10 @@ export {
   BLOGG_BY_SLUG_QUERY,
   MONSTER_MALER_BY_SLUG_QUERY,
   METADATA_BY_SLUG_QUERY,
+  GOD_PRAKSIS_ALL_TEMA_QUERY,
+  GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
+  GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
+  GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
+  GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
+  DOCUMENT_BY_ID_FOR_SLACK_QUERY,
 };

@@ -107,7 +107,7 @@ function resolveAnchor(match: FuseResultMatch, item: SearchPageT) {
   return null;
 }
 
-function preloadSearchIndex() {
+async function preloadSearchIndex() {
   void fetchArticles();
 }
 

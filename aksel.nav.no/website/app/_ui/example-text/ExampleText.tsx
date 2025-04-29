@@ -1,39 +1,26 @@
-import { useId } from "react";
-import {
-  BodyLong,
-  CopyButton,
-  HStack,
-  Heading,
-  VStack,
-} from "@navikt/ds-react";
+import { BodyLong, CopyButton, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
-import styles from "./ExampleText.module.css";
+import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 
 function ExampleText(
   props: ExtractPortableComponentProps<"exampletext_block">,
 ) {
   const { title, text } = props.value;
-  const id = useId();
 
   if (!text || !title) {
     return null;
   }
 
   return (
-    <section
-      aria-labelledby={id}
-      className={styles.exampleText}
-      data-block-margin="space-28"
-    >
-      <HStack justify="space-between" gap="4" align="center" wrap={false}>
-        <Heading size="small" as="p" textColor="subtle" id={id} aria-hidden>
-          {title}
-        </Heading>
-        <CopyButton copyText={text} size="small" />
-      </HStack>
-
-      <hr aria-hidden className={styles.exampleTextDivider} />
-      <VStack gap="space-24">{formatText(text)}</VStack>
+    <section aria-label={title}>
+      <EditorPanel
+        variant="example-text"
+        heading={title}
+        headingTag="p"
+        actionComponent={<CopyButton size="small" copyText={text} />}
+      >
+        <VStack gap="space-24">{formatText(text)}</VStack>
+      </EditorPanel>
     </section>
   );
 }

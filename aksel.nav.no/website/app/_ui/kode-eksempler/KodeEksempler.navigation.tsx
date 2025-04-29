@@ -1,8 +1,6 @@
 "use client";
 
 import { BodyLong } from "@navikt/ds-react";
-
-/* @ts-expect-error Workspace cant resolve valid import */
 import { Chips, ChipsToggle } from "@navikt/ds-react/Chips";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
@@ -37,7 +35,7 @@ function KodeEksemplerNavigation(props: {
               selected={activeExample.current?.navn === fil.navn}
               onClick={() => activeExample.update(fil.navn)}
             >
-              {fil.title}
+              {fil.title ?? ""}
             </ChipsToggle>
           );
         })}

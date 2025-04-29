@@ -70,7 +70,11 @@ function customPortableTextComponents({
     block,
     marks,
     list: {
-      bullet: ({ children }) => <WebsiteList as="ul">{children}</WebsiteList>,
+      bullet: ({ children }) => (
+        <WebsiteList as="ul" /* data-block-margin="space-28" */>
+          {children}
+        </WebsiteList>
+      ),
       number: ({ children }) => <WebsiteList as="ol">{children}</WebsiteList>,
     },
     listItem: {
@@ -110,7 +114,7 @@ function marksComponents() {
 function blockComponents({
   typoConfig = { type: "long", size: "medium" },
 }: CustomPortableTextComponentsProps) {
-  const BodyComponent = typoConfig.type === "short" ? BodyLong : BodyShort;
+  const BodyComponent = typoConfig.type === "long" ? BodyLong : BodyShort;
 
   return {
     normal: ({ children }) =>
@@ -119,6 +123,7 @@ function blockComponents({
           spacing
           className={styles.removeSpacingForLast}
           size={typoConfig.size}
+          data-text-prose
         >
           {children}
         </BodyComponent>,

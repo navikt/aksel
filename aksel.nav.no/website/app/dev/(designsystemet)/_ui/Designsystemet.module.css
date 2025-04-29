@@ -27,7 +27,7 @@
 .pageLayoutMain {
   width: fit-content;
   margin: 0 auto;
-  padding-block: var(--ax-space-24) var(--ax-space-128);
+  padding-block: var(--ax-space-56) var(--ax-space-128);
   padding-inline: var(--ax-space-40);
   display: grid;
   column-gap: var(--ax-space-40);
@@ -57,8 +57,12 @@
 }
 
 .pageHeaderHeading {
-  color: var(--ax-text-brand-blue);
-  margin-block-end: var(--ax-space-8);
+  margin-block-end: var(--ax-space-4);
+}
+
+.pageHeaderEyebrow {
+  color: var(--ax-text-brand-blue-subtle);
+  margin-block-end: var(--ax-space-2);
 }
 
 .thumbnailContainer {

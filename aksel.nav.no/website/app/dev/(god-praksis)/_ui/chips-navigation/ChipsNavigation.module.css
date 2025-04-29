@@ -1,0 +1,39 @@
+.chipsHeading {
+  color: var(--ax-text-subtle);
+  min-height: 2rem;
+}
+
+.chipsButton {
+  display: flex;
+  align-items: center;
+  padding-inline: var(--ax-space-12);
+  padding-block: var(--ax-space-4);
+  border-radius: var(--ax-border-radius-full);
+  border: 1px solid var(--ax-border-subtleA);
+  background: var(--ax-bg-moderateA);
+  min-height: 2rem;
+
+  &:hover:not(:disabled) {
+    background: var(--ax-bg-moderate-hoverA);
+    border-color: var(--ax-border-default);
+  }
+
+  &:disabled {
+    opacity: var(--ax-opacity-disabled);
+  }
+
+  &[data-active="true"] {
+    background: var(--ax-bg-strong-pressed);
+    color: var(--ax-text-contrast);
+    border-color: transparent;
+
+    &:hover {
+      background: var(--ax-bg-strong-hover);
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}

@@ -4,6 +4,7 @@
 @import "@navikt/ds-css/darkside" layer(dsComponents);
 @import "tailwindcss/components" layer(twComponents);
 @import "tailwindcss/utilities" layer(twUtilities);
+@import "./dev/(god-praksis)/_ui/link-card/link-card.css" layer(dsComponents);
 
 :root {
   --website-header-height: 4rem;
@@ -17,6 +18,11 @@ body {
   overscroll-behavior: none;
 }
 
+/* Stops skiplink from setting focus */
+#hovedinnhold:focus {
+  outline: none;
+}
+
 [data-block-margin] {
   &[data-block-margin="space-28"] {
     margin-block: var(--ax-space-28);
@@ -25,6 +31,14 @@ body {
   &:last-child {
     margin-block-end: 0;
   }
+}
+
+[data-text-prose] {
+  max-width: 670px;
+}
+
+[data-aksel-heading-color] {
+  color: var(--ax-text-brand-blue);
 }
 
 .sr-only {
@@ -37,6 +51,24 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+[data-wrapper-prose] {
+  margin-inline: auto;
+  max-width: 670px;
+}
+
+/* 480 === sm
+min-width: X == X is the minimum width needed before styles apply */
+@media (min-width: 480px) {
+  [data-wrapper-prose] {
+    width: 90%;
+  }
+}
+
+/* Local resets */
+address {
+  font-style: normal;
 }
 
 /* ---------------------------- AkselBrand theme ---------------------------- */

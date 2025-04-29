@@ -4,7 +4,6 @@ import {
   AccordionContent,
   AccordionHeader,
   AccordionItem,
-  /* @ts-expect-error Workspace cant resolve valid import */
 } from "@navikt/ds-react/Accordion";
 import { useWebsiteAccordion } from "./WebsiteAccordion.provider";
 

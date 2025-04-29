@@ -2,15 +2,15 @@ import {
   List as AkselList,
   ListItem as AkselListItem,
   ListProps as AkselListProps,
-  /* @ts-expect-error Workspace can't understand these imports yet */
 } from "@navikt/ds-react/List";
 import styles from "./Typography.module.css";
 
-type ListProps = Pick<AkselListProps, "as" | "children">;
+type ListProps = Pick<AkselListProps, "as" | "children"> &
+  React.HTMLAttributes<HTMLDivElement>;
 
-function WebsiteList({ children, as = "ul" }: ListProps) {
+function WebsiteList({ children, as = "ul", ...restProps }: ListProps) {
   return (
-    <AkselList className={styles.typoList} as={as}>
+    <AkselList {...restProps} className={styles.typoList} as={as}>
       {children}
     </AkselList>
   );
