@@ -20,6 +20,7 @@ const TokenRolesChips = ({
           onClick={() =>
             selectedRole !== id ? setSelectedRole(id) : setSelectedRole(null)
           }
+          variant="neutral"
         >
           {title}
         </Chips.Toggle>
