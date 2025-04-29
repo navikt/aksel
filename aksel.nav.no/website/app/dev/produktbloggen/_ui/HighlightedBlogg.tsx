@@ -60,7 +60,9 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
           </BodyLong>
           {getAuthors(blogg).length > 0 && (
             <BodyShort size="small" className={styles.articleAuthor}>
-              <span>{getAuthors(blogg)[0]}</span>
+              <BodyShort as="span" size="small" weight="semibold">
+                {getAuthors(blogg)[0]}
+              </BodyShort>
               <span>{date}</span>
             </BodyShort>
           )}
@@ -107,7 +109,9 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
           </BodyLong>
           {getAuthors(blogg).length > 0 && (
             <BodyShort size="small" className={styles.articleAuthor}>
-              <span>{getAuthors(blogg)[0]}</span>
+              <BodyShort as="span" size="small" weight="semibold">
+                {getAuthors(blogg)[0]}
+              </BodyShort>
               <span>{date}</span>
             </BodyShort>
           )}
