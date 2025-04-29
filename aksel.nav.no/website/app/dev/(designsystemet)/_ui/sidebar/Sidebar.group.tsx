@@ -1,3 +1,4 @@
+import { stegaClean } from "next-sanity";
 import { useId } from "react";
 import { BodyShort, Detail } from "@navikt/ds-react";
 import { DesignsystemSidebarSectionT } from "@/types";
@@ -15,7 +16,7 @@ function DesignsystemSidebarGroup(props: DesignsystemSidebarGroupT) {
   const { label, links, layout } = props;
   const id = useId();
 
-  const isDarkside = label.toLowerCase() === "darkside";
+  const isDarkside = stegaClean(label.toLowerCase()) === "darkside";
 
   const LabelComponent = layout === "sidebar" ? Detail : BodyShort;
 

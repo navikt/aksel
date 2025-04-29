@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const { data: seoData } = await sanityFetch({
     query: GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
-    params: { slug: `god-praksis/artikler/${slug}` },
+    params: { slug: decodeURIComponent(`god-praksis/artikler/${slug}`) },
     stega: false,
   });
 
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page(props: Props) {
   const { slug } = await props.params;
 
-  const parsedSlug = `god-praksis/artikler/${slug}`;
+  const parsedSlug = decodeURIComponent(`god-praksis/artikler/${slug}`);
 
   const [{ data: pageData }, { data: toc }] = await Promise.all([
     sanityFetch({

@@ -1,5 +1,4 @@
-import { stegaClean } from "@sanity/client/stega";
-import { PortableTextBlock } from "next-sanity";
+import { PortableTextBlock, stegaClean } from "next-sanity";
 import {
   ExpansionCard,
   ExpansionCardContent,
