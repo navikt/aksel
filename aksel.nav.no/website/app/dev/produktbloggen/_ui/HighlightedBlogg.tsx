@@ -55,7 +55,7 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
               {blogg.heading}
             </Link>
           </Heading>
-          <BodyLong className={styles.articleBody} size="small">
+          <BodyLong className={styles.articleBody} size="large">
             {blogg?.ingress}
           </BodyLong>
           {getAuthors(blogg).length > 0 && (
