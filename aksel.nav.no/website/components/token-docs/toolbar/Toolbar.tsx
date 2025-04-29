@@ -4,7 +4,13 @@ import TokenFormatSelector from "./TokenFormatSelector";
 
 const Toolbar = () => {
   return (
-    <HStack as="nav" align="center" justify="space-between" marginBlock="0 4">
+    <HStack
+      as="nav"
+      align="center"
+      justify="space-between"
+      marginBlock="0 4"
+      gap="space-16"
+    >
       <div style={{ width: "19rem" }}>
         <SearchField />
       </div>
