@@ -1,13 +1,15 @@
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { Image } from "sanity";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
+  METADATA_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { DesignsystemetOverviewPage } from "@/app/dev/(designsystemet)/_ui/overview/DesignsystemetOverview";
+import { getStaticParamsSlugs } from "@/app/dev/(designsystemet)/slug";
 import { komponentKategorier, sanityCategoryLookup } from "@/sanity/config";
 import { KomponenterPage } from "./_ui/KomponenterPage";
 
@@ -17,21 +19,29 @@ type Props = {
 
 const categoryConfig = sanityCategoryLookup("komponenter");
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
+
+  if (!komponentKategorier.find((cat) => cat.value === category)) {
+    const { data: pageData } = await sanityFetch({
+      query: METADATA_BY_SLUG_QUERY,
+      params: { slug: `komponenter/${category}` },
+      stega: false,
+    });
+
+    return {
+      title: pageData?.heading,
+      description: pageData?.seo?.meta,
+      openGraph: {
+        images: urlForOpenGraphImage(pageData?.seo?.image as Image),
+      },
+    };
+  }
 
   const { data: page } = await sanityFetch({
     query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
     stega: false,
   });
-
-  const ogImages = (await parent).openGraph?.images || [];
-  const pageOgImage = urlForOpenGraphImage(page?.seo?.image as Image);
-
-  pageOgImage && ogImages.unshift(pageOgImage);
 
   const currentCategory = categoryConfig.find((cat) => cat.value === category);
 
@@ -39,22 +49,30 @@ export async function generateMetadata(
     title: currentCategory?.title,
     description: page?.seo?.meta,
     openGraph: {
-      images: ogImages,
+      images: urlForOpenGraphImage(page?.seo?.image as Image),
     },
   };
 }
 
 export async function generateStaticParams() {
-  const { data: page } = await sanityFetch({
-    query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
-    stega: false,
-    perspective: "published",
-  });
+  const [{ data: page }, topLevelPages] = await Promise.all([
+    sanityFetch({
+      query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
+      stega: false,
+      perspective: "published",
+    }),
+    getStaticParamsSlugs({
+      type: "komponent_artikkel",
+      onlyTopLevelPages: true,
+    }),
+  ]);
 
-  return (
-    page?.overview_pages?.map((overviewPage) => ({ category: overviewPage })) ??
-    []
+  const pages = topLevelPages;
+  page?.overview_pages?.forEach((overviewPage) =>
+    pages.push({ category: overviewPage }),
   );
+
+  return pages;
 }
 
 export default async function Page({ params }: Props) {
