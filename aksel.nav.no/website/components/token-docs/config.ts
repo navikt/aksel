@@ -117,7 +117,7 @@ const COLOR_ROLES: ColorRoleT[] = [
     id: "meta-purple",
     title: "Meta purple",
     description:
-      "TODO: Meta Purple brukes gjerne på metadata. Team definerer selv hva fargen kommuniserer.",
+      "Meta Purple brukes gjerne på metadata. Team definerer selv hva fargen kommuniserer.",
   },
 ];
 
