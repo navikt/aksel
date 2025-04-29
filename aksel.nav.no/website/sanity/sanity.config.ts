@@ -48,18 +48,6 @@ export const workspaceConfig = defineConfig([
       visionTool(),
       colorInput(),
       nbNOLocale(),
-      presentationTool({
-        resolve,
-        allowOrigins: ["http://localhost:3000", "https://localhost:3000"],
-
-        previewUrl: {
-          previewMode: {
-            enable: "/api/draft-mode/enable",
-
-            shareAccess: true,
-          },
-        },
-      }),
     ],
     releases: {
       enabled: false,
@@ -97,11 +85,8 @@ export const workspaceConfig = defineConfig([
       presentationTool({
         resolve,
         previewUrl: {
-          /* Temp solution so that we send the presentation view to app-dir instead of legacy pages-dir */
-
           previewMode: {
             enable: "/api/draft-mode/enable",
-
             shareAccess: true,
           },
         },
