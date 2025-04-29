@@ -1,16 +1,10 @@
 import React from "react";
 import { ClockDashedIcon } from "@navikt/aksel-icons";
-import {
-  BodyLong,
-  Detail,
-  HStack,
-  Heading,
-  Link,
-  VStack,
-} from "@navikt/ds-react";
+import { BodyLong, HStack, Heading, Link, VStack } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
 import TokenTableOfContents from "../../../../../../components/token-docs/TokenTableOfContents";
 import TokensPage from "../../../../../../components/token-docs/TokensPage";
+import { DesignsystemetEyebrow } from "../../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
 
 export const metadata = {
@@ -29,14 +23,7 @@ const Page = async () => {
       <VStack gap="space-40">
         <VStack gap="space-24">
           <VStack>
-            <Detail
-              data-color-role="brand-blue"
-              textColor="subtle"
-              weight="semibold"
-              uppercase
-            >
-              Styling
-            </Detail>
+            <DesignsystemetEyebrow type="ds_artikkel" />
             <Heading level="1" size="xlarge">
               Tokenoversikt
             </Heading>
