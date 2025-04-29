@@ -98,11 +98,11 @@
 /* md */
 @media (min-width: 768px) {
   .latestBloggPosts {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .remainingPosts {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-top: var(--ax-space-32);
   }
 }
