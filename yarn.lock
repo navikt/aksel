@@ -8287,11 +8287,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/eslint-plugin@npm:^1.1.4":
-  version: 1.1.7
-  resolution: "@vitest/eslint-plugin@npm:1.1.7"
+"@vitest/eslint-plugin@npm:^1.1.43":
+  version: 1.1.43
+  resolution: "@vitest/eslint-plugin@npm:1.1.43"
   peerDependencies:
-    "@typescript-eslint/utils": ">= 8.0"
+    "@typescript-eslint/utils": ">= 8.24.0"
     eslint: ">= 8.57.0"
     typescript: ">= 5.0.0"
     vitest: "*"
@@ -8300,7 +8300,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 10/bc47f9639f6f52a621f61437e455123344c5945588a135043bb25e18a7dbd330e7981f78f9de6159274a9379c4438a68c32c5578d7246ea5d0cd6741b0719df6
+  checksum: 10/a133bb0b5ea2c740801e9c9ed992e83ee3dc19c2a2e7348e3096137cf7cb4293f59cbf26079d14d235e13f2ce68eed11e79a7899387516853c0893fa617dc3c2
   languageName: node
   linkType: hard
 
@@ -8921,7 +8921,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.8.1"
     "@typescript-eslint/parser": "npm:^8.8.1"
-    "@vitest/eslint-plugin": "npm:^1.1.4"
+    "@vitest/eslint-plugin": "npm:^1.1.43"
     chromatic: "npm:11.5.4"
     concurrently: "npm:9.0.1"
     cross-env: "npm:^7.0.0"
