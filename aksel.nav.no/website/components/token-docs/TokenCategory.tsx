@@ -1,3 +1,4 @@
+import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import { BodyShort, Heading, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
@@ -20,20 +21,22 @@ const TokenCategory = ({
   roles?: ColorRoleT[] | FontRoleT[] | BreakpointRoleT[];
   tokens: TokenForDocumentationT[];
 }) => {
+  const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const tokenQuery = searchParams?.get("tokenQuery") as string | undefined;
+
+  useEffect(() => {
+    setSelectedRole(null);
+  }, [tokenQuery]);
+
   const filteredRoles = roles?.filter((role) =>
     tokens.some((token) => token.role === role.id),
   );
-  const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
   const filteredTokens =
     selectedRole === null
       ? tokens
       : tokens.filter((token) => token.role === selectedRole);
   const filteredAndSortedTokens = filteredTokens.sort(sortTokens);
-  useEffect(() => {
-    if (selectedRole) {
-      setSelectedRole(null);
-    }
-  }, [selectedRole, tokens]);
 
   return (
     <VStack gap="space-24" aria-labelledby={categoryId} as="section">
