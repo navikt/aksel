@@ -29,7 +29,7 @@ export const useSearch = () => {
           query: value,
         });
 
-        umamiTrack("sok");
+        umamiTrack("sok", {});
       }),
     [data],
   );

@@ -73,7 +73,7 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
           const newResults = await fuseGlobalSearch(query);
           setSearchResults(newResults);
         });
-        umamiTrack("sok");
+        umamiTrack("sok", {});
       }),
     [startTransition],
   );
