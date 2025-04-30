@@ -2899,6 +2899,61 @@ export type DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult = Array<
       overview_pages: Array<string> | null;
     }
 >;
+// Variable: BLOGG_LANDINGSSIDE_BLOGS_QUERY
+// Query: *[_type == "blogg_landingsside"][0]{    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){      seo,      heading,      ingress,      publishedAt,      _createdAt,      _id,      "slug": slug.current,      contributors[]->{title}    }  }
+export type BLOGG_LANDINGSSIDE_BLOGS_QUERYResult = {
+  bloggposts: Array<{
+    seo: {
+      meta?: string;
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    } | null;
+    heading: string | null;
+    ingress: string | null;
+    publishedAt: string | null;
+    _createdAt: string;
+    _id: string;
+    slug: string | null;
+    contributors: Array<{
+      title: string | null;
+    }> | null;
+  }>;
+} | null;
+// Variable: BLOGG_LANDINGSSIDE_PAGE_QUERY
+// Query: *[_type == "blogg_landingsside"][0]{    "page": {...},  }
+export type BLOGG_LANDINGSSIDE_PAGE_QUERYResult = {
+  page: {
+    _id: string;
+    _type: "blogg_landingsside";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    intro?: Riktekst_standard;
+    seo?: {
+      meta?: string;
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    };
+  };
+} | null;
 // Variable: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY
 // Query: *[_type == "komponenter_landingsside"][0]
 export type DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERYResult = {
@@ -9519,6 +9574,8 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {\n  _type,\n  heading,\n  "slug": slug.current,\n  kategori,\n  "tag": status.tag,\n  "sidebarindex": sidebarindex,\n}': DESIGNSYSTEM_SIDEBAR_QUERYResult;
     '*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {\n  _type,\n  overview_pages\n  }': DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult;
+    '\n  *[_type == "blogg_landingsside"][0]{\n    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){\n      seo,\n      heading,\n      ingress,\n      publishedAt,\n      _createdAt,\n      _id,\n      "slug": slug.current,\n      contributors[]->{title}\n    }\n  }': BLOGG_LANDINGSSIDE_BLOGS_QUERYResult;
+    '\n  *[_type == "blogg_landingsside"][0]{\n    "page": {...},\n  }': BLOGG_LANDINGSSIDE_PAGE_QUERYResult;
     '*[_type == "komponenter_landingsside"][0]': DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERYResult;
     '*[_type == "grunnleggende_landingsside"][0]': DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERYResult;
     '*[_type == "templates_landingsside"][0]': DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERYResult;
