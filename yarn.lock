@@ -5355,7 +5355,7 @@ __metadata:
     "@navikt/ds-css": "npm:^7.21.0"
     "@navikt/ds-tokens": "npm:^7.21.0"
     "@types/cli-progress": "npm:3.11.6"
-    axios: "npm:1.8.4"
+    axios: "npm:1.9.0"
     chalk: "npm:4.1.0"
     cli-progress: "npm:^3.12.0"
     clipboardy: "npm:^2.3.0"
@@ -10300,7 +10300,7 @@ __metadata:
     react: "npm:^18.0.0"
     react-dom: "npm:^18.0.0"
     typescript: "npm:5.5.4"
-    vite: "npm:^5.4.18"
+    vite: "npm:^5.4.19"
     vite-plugin-singlefile: "npm:^1.0.0"
     vite-plugin-svgr: "npm:^4.2.0"
   languageName: unknown
@@ -10369,7 +10369,7 @@ __metadata:
     stylelint-value-no-unknown-custom-properties: "npm:^6.0.1"
     tsx: "npm:^4.19.1"
     typescript: "npm:5.5.4"
-    vite: "npm:^5.4.18"
+    vite: "npm:^5.4.19"
     vite-plugin-turbosnap: "npm:^1.0.3"
     vite-tsconfig-paths: "npm:^5.1.4"
   languageName: unknown
@@ -10896,14 +10896,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.8.4":
-  version: 1.8.4
-  resolution: "axios@npm:1.8.4"
+"axios@npm:1.9.0":
+  version: 1.9.0
+  resolution: "axios@npm:1.9.0"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/a10f0dd836613924e48cf03dc2eff3fd21b14f764807aedaee4880a70c0f142aaebdb21da7ce27104d4c16ca00d0e452a20a20851f60e385a8d5bad1ae909d46
+  checksum: 10/a2f90bba56820883879f32a237e2b9ff25c250365dcafd41cec41b3406a3df334a148f90010182dfdadb4b41dc59f6f0b3e8898ff41b666d1157b5f3f4523497
   languageName: node
   linkType: hard
 
@@ -17028,8 +17028,8 @@ __metadata:
   linkType: hard
 
 "http-proxy-middleware@npm:^2.0.3":
-  version: 2.0.7
-  resolution: "http-proxy-middleware@npm:2.0.7"
+  version: 2.0.9
+  resolution: "http-proxy-middleware@npm:2.0.9"
   dependencies:
     "@types/http-proxy": "npm:^1.17.8"
     http-proxy: "npm:^1.18.1"
@@ -17041,7 +17041,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/express":
       optional: true
-  checksum: 10/4a51bf612b752ad945701995c1c029e9501c97e7224c0cf3f8bf6d48d172d6a8f2b57c20fec469534fdcac3aa8a6f332224a33c6b0d7f387aa2cfff9b67216fd
+  checksum: 10/4ece416a91d52e96f8136c5f4abfbf7ac2f39becbad21fa8b158a12d7e7d8f808287ff1ae342b903fd1f15f2249dee87fabc09e1f0e73106b83331c496d67660
   languageName: node
   linkType: hard
 
@@ -26623,14 +26623,14 @@ __metadata:
   linkType: hard
 
 "tar-fs@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "tar-fs@npm:2.1.1"
+  version: 2.1.2
+  resolution: "tar-fs@npm:2.1.2"
   dependencies:
     chownr: "npm:^1.1.1"
     mkdirp-classic: "npm:^0.5.2"
     pump: "npm:^3.0.0"
     tar-stream: "npm:^2.1.4"
-  checksum: 10/526deae025453e825f87650808969662fbb12eb0461d033e9b447de60ec951c6c4607d0afe7ce057defe9d4e45cf80399dd74bc15f9d9e0773d5e990a78ce4ac
+  checksum: 10/623f7e8e58a43578ba7368002c3cc7e321f6d170053ac0691d95172dbc7daf5dcf4347eb061277627340870ce6cfda89f5a5d633cc274c41ae6d69f54a2374e7
   languageName: node
   linkType: hard
 
@@ -28244,9 +28244,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.18":
-  version: 5.4.18
-  resolution: "vite@npm:5.4.18"
+"vite@npm:^5.4.19":
+  version: 5.4.19
+  resolution: "vite@npm:5.4.19"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -28283,7 +28283,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/491f0d047695a4bb3aafdb30822a3638ac41c23b022c1599bf51beab26a7cffe3ef1617bdf014592da48864079f217da5bf144a6c3238d2d74dea688ba3a549a
+  checksum: 10/27900c87ec6f84967ba12bd4a24c2b9182c3ddad278a13a1c7736ccc4ac7e325f3fbdc11836e2906857140cc89c55121cb0746d4100046e797e21e1e7570d9c4
   languageName: node
   linkType: hard
 
