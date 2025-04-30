@@ -30,7 +30,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
         <Link
           href="/"
           passHref
-          onClick={() => umamiTrack("navigere", { kilde: "header" })}
+          onClick={() => umamiTrack("navigere", { kilde: "header", url: "/" })}
           className={styles.headerLogoLink}
         >
           <Show above="sm">

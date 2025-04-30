@@ -33,6 +33,7 @@ export const IntroCards = ({
             onClick={() =>
               umamiTrack("navigere", {
                 kilde: "introkort",
+                url: href,
               })
             }
           >

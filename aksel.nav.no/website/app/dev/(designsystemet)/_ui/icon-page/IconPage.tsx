@@ -67,6 +67,7 @@ function IconPage({
                 onClick={() =>
                   umamiTrack("navigere", {
                     kilde: "ikonside",
+                    url: "https://www.figma.com/community/file/1214869602572392330",
                   })
                 }
               >
@@ -86,6 +87,7 @@ function IconPage({
                 onClick={() =>
                   umamiTrack("navigere", {
                     kilde: "ikonside",
+                    url: "/god-praksis/artikler/tilgjengelig-ikonbruk",
                   })
                 }
               >

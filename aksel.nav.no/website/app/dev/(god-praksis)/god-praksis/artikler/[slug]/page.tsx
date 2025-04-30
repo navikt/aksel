@@ -126,6 +126,9 @@ export default async function Page(props: Props) {
               onClick={() =>
                 umamiTrack("navigere", {
                   kilde: "god praksis artikkel chips",
+                  url: `/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
+                    title ?? "",
+                  )}`,
                 })
               }
             >
@@ -173,6 +176,7 @@ export default async function Page(props: Props) {
                         onClick={() =>
                           umamiTrack("navigere", {
                             kilde: "les ogsaa",
+                            url: item.slug?.current ?? "",
                           })
                         }
                       >

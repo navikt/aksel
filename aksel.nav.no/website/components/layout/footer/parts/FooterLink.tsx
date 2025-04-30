@@ -10,6 +10,7 @@ function FooterLink({ children, href }) {
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "footer",
+            url: href,
           })
         }
       >

@@ -24,6 +24,7 @@ export const TitleLinks = () => (
           onClick={() =>
             umamiTrack("navigere", {
               kilde: "ikonside",
+              url: "https://www.figma.com/community/file/1214869602572392330",
             })
           }
         >
@@ -60,6 +61,7 @@ export const TitleLinks = () => (
           onClick={() =>
             umamiTrack("navigere", {
               kilde: "ikonside",
+              url: "https://www.npmjs.com/package/@navikt/aksel-icons",
             })
           }
         >
@@ -79,6 +81,7 @@ export const TitleLinks = () => (
           onClick={() =>
             umamiTrack("navigere", {
               kilde: "ikonside",
+              url: "https://github.com/navikt/aksel/tree/main/%40navikt/aksel-icons/CONTRIBUTING.md",
             })
           }
         >
@@ -99,6 +102,7 @@ export const TitleLinks = () => (
           onClick={() =>
             umamiTrack("navigere", {
               kilde: "ikonside",
+              url: "/god-praksis/artikler/tilgjengelig-ikonbruk",
             })
           }
         >

@@ -142,6 +142,7 @@ const Card = ({ article, visible, index }: CardProps) => {
             onClick={() =>
               umamiTrack("navigere", {
                 kilde: "forsidekort",
+                url: `/${article.slug}`,
               })
             }
           >

@@ -41,6 +41,7 @@ const Header = ({
             onClick={() =>
               umamiTrack("navigere", {
                 kilde: "header",
+                url: "/",
               })
             }
             className="mx-4 grid h-11 place-items-center rounded px-2 focus:outline-none focus-visible:shadow-focus sm:mr-6"

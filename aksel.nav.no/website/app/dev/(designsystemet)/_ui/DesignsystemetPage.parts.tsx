@@ -65,7 +65,7 @@ function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
           onClick={() =>
             umamiTrack("navigere", {
               kilde: "komponent-header",
-              url: data.figma_link,
+              url: data.figma_link ?? "",
             })
           }
           variant="subtle"
@@ -79,6 +79,7 @@ function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "komponent-header",
+            url: "/grunnleggende/kode/endringslogg",
           })
         }
       >

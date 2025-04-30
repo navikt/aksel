@@ -50,6 +50,7 @@ export const Hit = forwardRef<
             onClick={() =>
               umamiTrack("navigere", {
                 kilde: "global sok",
+                url: href,
               })
             }
             className={cl(

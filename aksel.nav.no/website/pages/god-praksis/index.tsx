@@ -202,6 +202,7 @@ const GpPage = (props: PageProps["props"]) => {
                             onClick={() =>
                               umamiTrack("navigere", {
                                 kilde: "god praksis forside",
+                                url: `/god-praksis/${tema.slug}`,
                               })
                             }
                           >

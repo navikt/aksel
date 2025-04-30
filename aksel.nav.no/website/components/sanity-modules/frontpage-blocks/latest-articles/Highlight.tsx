@@ -107,6 +107,7 @@ export const Highlight = ({
             onClick={() =>
               umamiTrack("navigere", {
                 kilde: "global sok",
+                url: `/${article.slug.current}`,
               })
             }
             href={`/${article.slug.current}`}

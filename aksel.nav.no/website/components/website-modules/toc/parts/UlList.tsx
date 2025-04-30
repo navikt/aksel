@@ -60,6 +60,7 @@ function UlList({
 
                     umamiTrack("navigere", {
                       kilde: "toc",
+                      url: `#${node.id}`,
                     });
                   }}
                   className={cl(

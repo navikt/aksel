@@ -96,6 +96,7 @@ export function MenuLink({
           onClick?.();
           umamiTrack("navigere", {
             kilde: source,
+            url: href,
           });
         }}
         className={cl(

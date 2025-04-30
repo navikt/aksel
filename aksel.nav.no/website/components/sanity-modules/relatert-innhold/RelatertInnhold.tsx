@@ -37,6 +37,7 @@ const RelatertInnhold = ({ node }: RelatertInnholdProps) => {
               onClick={() =>
                 umamiTrack("navigere", {
                   kilde: "relatert innhold",
+                  url: getHref(x),
                 })
               }
               className="text-xl font-semibold text-gray-800 dark:text-text-on-inverted"

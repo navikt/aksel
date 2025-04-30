@@ -120,6 +120,7 @@ export default async function Page() {
                   onClick={() =>
                     umamiTrack("navigere", {
                       kilde: "god praksis forside",
+                      url: `/god-praksis/${tema.slug}`,
                     })
                   }
                   data-link-card-anchor

@@ -39,6 +39,7 @@ function DesignsystemSidebarItem(props: {
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "sidebar",
+            url: `/dev/${page.slug}`,
           })
         }
       >

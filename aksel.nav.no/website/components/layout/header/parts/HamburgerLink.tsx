@@ -22,6 +22,7 @@ function HamburgerLink({ name, href, onClick }) {
           onClick();
           umamiTrack("navigere", {
             kilde: "hamburger",
+            url: href,
           });
         }}
       >

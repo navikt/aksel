@@ -28,6 +28,7 @@ function HeaderLink({ name, href, prefetch = undefined }: HeaderLinkProps) {
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "header",
+            url: href,
           })
         }
       >

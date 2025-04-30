@@ -66,7 +66,9 @@ function GlobalSearchLink(props: {
             size="small"
             as={Link}
             href={href}
-            onClick={() => umamiTrack("navigere", { kilde: "global sok" })}
+            onClick={() =>
+              umamiTrack("navigere", { kilde: "global sok", url: href })
+            }
             className={styles.searchLink}
             prefetch={false}
           >

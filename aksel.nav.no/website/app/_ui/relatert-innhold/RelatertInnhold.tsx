@@ -34,7 +34,10 @@ function RelatertInnhold(
               as={NextLink}
               href={getHref(pageLink)}
               onClick={() =>
-                umamiTrack("navigere", { kilde: "relatert innhold" })
+                umamiTrack("navigere", {
+                  kilde: "relatert innhold",
+                  url: getHref(pageLink),
+                })
               }
               variant="neutral"
             >

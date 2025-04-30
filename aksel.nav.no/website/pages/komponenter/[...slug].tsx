@@ -227,7 +227,7 @@ const Page = ({
           onClick={() =>
             umamiTrack("navigere", {
               kilde: "komponent-header",
-              url: page.figma_link,
+              url: page.figma_link ?? "",
             })
           }
         >

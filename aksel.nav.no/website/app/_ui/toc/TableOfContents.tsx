@@ -69,7 +69,10 @@ function TableOfContents({
                   href={`#${node.id}`}
                   onClick={() => {
                     tocCtx.setActiveId(node.id);
-                    umamiTrack("navigere", { kilde: "toc" });
+                    umamiTrack("navigere", {
+                      kilde: "toc",
+                      url: `#${node.id}`,
+                    });
                   }}
                   className={cl(styles.tocNavListItemLink, {
                     [styles.tocNavListNotch]: active,

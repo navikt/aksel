@@ -171,6 +171,7 @@ function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "sidebar",
+            url: `/${page.slug}`,
           })
         }
       >

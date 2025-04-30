@@ -38,6 +38,7 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "god praksis forside",
+            url: href,
           })
         }
       >
