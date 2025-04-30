@@ -1,7 +1,7 @@
 import { useMemoObservable } from "react-rx";
 import { SanityDocument, useDocumentStore, useFormValue } from "sanity";
 import { FileFillIcon } from "@navikt/aksel-icons";
-import { BodyLong, Heading } from "@navikt/ds-react";
+import { BodyLong, BoxNew, HStack, Heading } from "@navikt/ds-react";
 
 type MetadataT = {
   title: string;
@@ -29,19 +29,22 @@ export function InnholdstypeHighlight(props) {
   return (
     <div>
       <div>{props.renderDefault(props)}</div>
-      <div className="mt-4 space-y-4">
-        <div className="rounded-md bg-surface-subtle p-4 dark:bg-gray-900">
-          <div className="inline-flex items-center gap-1 text-violet-700 dark:text-violet-300">
-            <FileFillIcon aria-hidden fontSize="1rem" className="shrink-0" />
-            <Heading level="3" size="small">
-              {`${result.title} (innholdstype)`}
-            </Heading>
-          </div>
-          {result.description && (
-            <BodyLong className="mt-2">{result.description}</BodyLong>
-          )}
-        </div>
-      </div>
+      <BoxNew
+        background="neutral-soft"
+        borderWidth="1"
+        borderColor="neutral-subtleA"
+        borderRadius="medium"
+        padding="space-16"
+        marginBlock="space-4 space-0"
+      >
+        <HStack gap="space-4" marginBlock="space-0 space-4" align="center">
+          <FileFillIcon aria-hidden fontSize="1.25rem" />
+          <Heading level="3" size="small">
+            {`${result.title} (innholdstype)`}
+          </Heading>
+        </HStack>
+        {result.description && <BodyLong>{result.description}</BodyLong>}
+      </BoxNew>
     </div>
   );
 }

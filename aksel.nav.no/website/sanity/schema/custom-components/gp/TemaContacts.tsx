@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 import { useMemoObservable } from "react-rx";
 import { useDocumentStore, useFormValue } from "sanity";
-import { BodyLong, Heading, Link } from "@navikt/ds-react";
+import { BodyLong, BoxNew, Heading, Link, VStack } from "@navikt/ds-react";
 
 type ResultT = {
   tema: { title: string; contacts: { title: string; email: string }[] };
@@ -29,19 +29,26 @@ export function TemaContacts() {
   }
 
   return (
-    <div className="rounded-md bg-surface-subtle p-4 dark:bg-gray-900">
-      <Heading level="3" size="small" className="mb-1">
+    <BoxNew
+      background="neutral-soft"
+      borderWidth="1"
+      borderColor="neutral-subtleA"
+      borderRadius="medium"
+      padding="space-16"
+      marginBlock="space-4 space-0"
+    >
+      <Heading level="3" size="small">
         Temakontakter
       </Heading>
-      <BodyLong className="mb-4">
+      <BodyLong spacing>
         Kontaktpersoner for temaene valgt på denne artikkelen. Hvis du trenger
         hjelp med innhold eller struktur, kan du ta kontakt med en av disse.
       </BodyLong>
-      <div className="space-y-2">
+      <VStack gap="space-16">
         {results.toReversed().map((res) => {
           return (
             <dl key={res.tema.title}>
-              <Heading as="dt" size="xsmall" className="mb-1">
+              <Heading as="dt" size="xsmall">
                 {res.tema.title}
               </Heading>
               {res.tema.contacts.map((contact) => (
@@ -55,7 +62,7 @@ export function TemaContacts() {
             </dl>
           );
         })}
-      </div>
-    </div>
+      </VStack>
+    </BoxNew>
   );
 }
