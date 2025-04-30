@@ -96,7 +96,9 @@ function LinkBlock({ heading, links }: LinkBlockPropsT) {
             <Link
               className={styles.footerLink}
               href={link.url}
-              onClick={() => umamiTrack("navigere", { kilde: "footer" })}
+              onClick={() =>
+                umamiTrack("navigere", { kilde: "footer", url: link.url })
+              }
               prefetch={false}
             >
               {link.icon}
