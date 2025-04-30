@@ -12,9 +12,7 @@ const Toolbar = () => {
       gap="space-16"
     >
       <SearchField />
-      <HStack gap="space-8">
-        <TokenFormatSelector />
-      </HStack>
+      <TokenFormatSelector />
     </HStack>
   );
 };
