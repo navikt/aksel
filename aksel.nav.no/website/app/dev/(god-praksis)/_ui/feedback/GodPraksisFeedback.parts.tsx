@@ -13,6 +13,7 @@ import {
   Link,
   Textarea,
 } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { FormState, sendFeedbackAction } from "./actions";
 import { zodFormDataSchema } from "./actions.zod";
 
@@ -86,11 +87,11 @@ function GodPraksisFeedbackForm({
           error: "Noe gikk galt ved innsending, ta kontakt med team Aksel",
         });
 
-        window.umami &&
-          umami.track("skjema validering feilet", {
-            skjemanavn: "slack-feedback",
-            skjemaId: docId,
-          });
+        umamiTrack("skjema validering feilet", {
+          skjemanavn: "slack-feedback",
+          skjemaId: docId,
+        });
+
         return;
       }
 
@@ -114,11 +115,10 @@ function GodPraksisFeedbackForm({
           error: result.error,
         });
 
-        window.umami &&
-          umami.track("skjema validering feilet", {
-            skjemanavn: "slack-feedback",
-            skjemaId: docId,
-          });
+        umamiTrack("skjema validering feilet", {
+          skjemanavn: "slack-feedback",
+          skjemaId: docId,
+        });
         return;
       }
 
@@ -127,11 +127,10 @@ function GodPraksisFeedbackForm({
         error: null,
       });
 
-      window.umami &&
-        umami.track("skjema fullfort", {
-          skjemanavn: "slack-feedback",
-          skjemaId: docId,
-        });
+      umamiTrack("skjema fullfort", {
+        skjemanavn: "slack-feedback",
+        skjemaId: docId,
+      });
     });
   };
 
