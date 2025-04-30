@@ -646,28 +646,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.17.4":
-  version: 7.17.4
-  resolution: "@navikt/aksel-icons@npm:7.17.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.17.4%2F294d943be11babbbeab9272c2de5c90a22585862"
-  checksum: 10/811ed221f7ee0df4b6e3298875eda018a62c4ce6f7ed7f34516fc2953d30885a74e4064dceb5e0e40dacb7d8bd5068acae8188f15894d5f54f69de6556b364d8
+"@navikt/aksel-icons@npm:^7.21.0":
+  version: 7.21.0
+  resolution: "@navikt/aksel-icons@npm:7.21.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.21.0%2F9cfc7982634a0f4f6c304ca015e4403057e2f04e"
+  checksum: 10/6aa1e64bebdd38acc310f65fb49bd9e96a0d1aa975f6fba1d49ec13283b2a8953483674de04aef504b037a6cdef20c75175e0064aeb3abaa572c278f9b51495f
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=shadow-dom%40workspace%3A.":
-  version: 7.17.4
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=007468&locator=shadow-dom%40workspace%3A."
-  checksum: 10/064781faffb3d446ccd37e41ceb48af0d8f9fd3a3bae2a03ec3bde783b02e6bb04b9ecd9cd3d1711239f89b4557f0b5e0985a3af0f367bb53dc84fc55b3a18c3
+  version: 7.21.0
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=a04b37&locator=shadow-dom%40workspace%3A."
+  checksum: 10/f2485eac990f5bf254a1fa421807c814c699c081ebafc1c2d4a37b5ebe8471040e15de9c1993fe78e67fc698942c3009d71665029c4470b53ad4ea700fc44456
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=shadow-dom%40workspace%3A.":
-  version: 7.17.4
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=10c98d&locator=shadow-dom%40workspace%3A."
+  version: 7.21.0
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=3beff6&locator=shadow-dom%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.17.4"
-    "@navikt/ds-tokens": "npm:^7.17.4"
+    "@navikt/aksel-icons": "npm:^7.21.0"
+    "@navikt/ds-tokens": "npm:^7.21.0"
     clsx: "npm:^2.1.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.6.1"
@@ -677,14 +677,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/36c76ffdc59a92eba3c662798bfd7b24a0f9b66977d975a6a4c1e3ab7418bf19651e61aa5514e5a2dca09b8587870600b538fa76ac774186ba51e17514b7f7ef
+  checksum: 10/66f0bd17d6d7d639816d6e945ca2a8f2f1f4be3d196914a550011b5c499149ae24f9d4a86a4a36dcf3692430b34c4a212f3269e7f01036ee4da2f9886b118509
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^7.17.4":
-  version: 7.17.4
-  resolution: "@navikt/ds-tokens@npm:7.17.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.17.4%2F869463e1c2cbe3e084589f5a0a57d1c0ad9bff53"
-  checksum: 10/b6e2b881bbef02d48924f94b976069672f98c76f7fff8b72c21c38a7faf03d98c1bbf8acb390550ad93b7169e91f7968f647597efb677751a0a05edd2b4425e8
+"@navikt/ds-tokens@npm:^7.21.0":
+  version: 7.21.0
+  resolution: "@navikt/ds-tokens@npm:7.21.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.21.0%2F406f2638550015ec493249f6ca09df67a91e8c7d"
+  checksum: 10/10dd3131ff3448b3409a135dd339a281d83bf68e83d064ae984942dd812f463197a5de7c8319e4f20faad32f0d075ed52e04214b6237873b2847aa4365550ac8
   languageName: node
   linkType: hard
 
@@ -2023,7 +2023,7 @@ __metadata:
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     typescript: "npm:5.5.4"
-    vite: "npm:^5.4.15"
+    vite: "npm:^5.4.18"
   languageName: unknown
   linkType: soft
 
@@ -2230,9 +2230,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.15":
-  version: 5.4.15
-  resolution: "vite@npm:5.4.15"
+"vite@npm:^5.4.18":
+  version: 5.4.19
+  resolution: "vite@npm:5.4.19"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -2269,7 +2269,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/ddc4e7b874ebc0dc5bff53568e7d90f6c622747912fdda7f4ce533e15293009aaabb677ca29b5f108b18c5d60c0c32a7c0156f802bc94df355ca36915a4ae293
+  checksum: 10/27900c87ec6f84967ba12bd4a24c2b9182c3ddad278a13a1c7736ccc4ac7e325f3fbdc11836e2906857140cc89c55121cb0746d4100046e797e21e1e7570d9c4
   languageName: node
   linkType: hard
 
