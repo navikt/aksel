@@ -1,6 +1,5 @@
 import { Studio } from "@/app/(admin)/admin/[[...index]]/Studio";
 
-/* export const dynamic = "force-static"; */
 
 export { metadata, viewport } from "next-sanity/studio";
 
