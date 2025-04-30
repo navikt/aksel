@@ -5,7 +5,6 @@ import { useTheme } from "next-themes";
 import { StudioThemeColorSchemeKey } from "sanity";
 import { workspaceConfig } from "../../../../sanity/sanity.config";
 
-/* export const dynamic = "force-static"; */
 
 function Studio() {
   const { theme, setTheme } = useTheme();
