@@ -11,9 +11,7 @@ const Toolbar = () => {
       marginBlock="0 4"
       gap="space-16"
     >
-      <div style={{ width: "19rem" }}>
-        <SearchField />
-      </div>
+      <SearchField />
       <HStack gap="2">
         <TokenFormatSelector />
       </HStack>

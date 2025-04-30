@@ -2,10 +2,10 @@ import React from "react";
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import { BodyLong, HStack, Heading, Link, VStack } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
-import TokenTableOfContents from "../../../../../../components/token-docs/TokenTableOfContents";
-import TokensPage from "../../../../../../components/token-docs/TokensPage";
 import { DesignsystemetEyebrow } from "../../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
+import TokenTableOfContents from "./_ui/TokenTableOfContents";
+import TokensPage from "./_ui/TokensPage";
 
 export const metadata = {
   title: "Design tokens",
