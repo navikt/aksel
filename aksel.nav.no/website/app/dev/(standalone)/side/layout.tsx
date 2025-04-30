@@ -3,7 +3,7 @@ import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 
-export default async function GodPraksisLayout({
+export default async function PrinsippLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ export default async function GodPraksisLayout({
     <AkselPage footer={<Footer />} footerPosition="belowFold">
       <Header />
       <Box paddingBlock="space-40" tabIndex={-1} id="hovedinnhold" asChild>
-        <PageBlock width="xl" gutters as="main">
+        <PageBlock width="md" gutters as="main">
           {children}
         </PageBlock>
       </Box>
