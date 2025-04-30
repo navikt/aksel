@@ -1,6 +1,7 @@
 import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
 function HamburgerLink({ name, href, onClick }) {
   const { asPath } = useRouter();
@@ -17,9 +18,12 @@ function HamburgerLink({ name, href, onClick }) {
             "": !asPath.startsWith(href),
           },
         )}
-        onClick={() => onClick()}
-        data-umami-event="navigere"
-        data-umami-event-kilde="hamburger"
+        onClick={() => {
+          onClick();
+          umamiTrack("navigere", {
+            kilde: "hamburger",
+          });
+        }}
       >
         {name}
       </Link>

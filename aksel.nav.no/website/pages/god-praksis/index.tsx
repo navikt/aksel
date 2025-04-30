@@ -12,6 +12,7 @@ import {
   Stack,
   VStack,
 } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import Footer from "@/layout/footer/Footer";
 import { GpCardGrid } from "@/layout/god-praksis-page/ArticleSections";
 import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
@@ -198,8 +199,11 @@ const GpPage = (props: PageProps["props"]) => {
                             href={`/god-praksis/${tema.slug}`}
                             as={NextLink}
                             className="group mt-4 w-fit text-deepblue-700"
-                            data-umami-event="navigere"
-                            data-umami-event-kilde="god praksis forside"
+                            onClick={() =>
+                              umamiTrack("navigere", {
+                                kilde: "god praksis forside",
+                              })
+                            }
                           >
                             <h3 className="flex items-center">
                               {`Alt fra ${tema.title} `}

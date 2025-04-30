@@ -1,6 +1,7 @@
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
 import { urlFor } from "@/sanity/interface";
@@ -33,9 +34,12 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
       <NextLink
         href={href}
         passHref
-        data-umami-event="navigere"
-        data-umami-event-kilde="god praksis forside"
         className="navds-heading--small navds-link navds-heading flex-wrap break-all text-deepblue-700 no-underline hover:underline focus:outline-none"
+        onClick={() =>
+          umamiTrack("navigere", {
+            kilde: "god praksis forside",
+          })
+        }
       >
         {children}
       </NextLink>

@@ -1,6 +1,7 @@
 import cl from "clsx";
 import Link from "next/link";
 import { BodyShort } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { TableOfContentsT } from "@/types";
 import { removeEmojies } from "@/utils";
 import styles from "../TableOfContents.module.css";
@@ -52,13 +53,15 @@ function UlList({
                   as={Link}
                   prefetch={false}
                   href={`#${node.id}`}
-                  onClick={() =>
+                  onClick={() => {
                     nested
                       ? tocProps.setActiveSubId(node.id)
-                      : tocProps.setActiveId(node.id)
-                  }
-                  data-umami-event="navigere"
-                  data-umami-event-kilde="toc"
+                      : tocProps.setActiveId(node.id);
+
+                    umamiTrack("navigere", {
+                      kilde: "toc",
+                    });
+                  }}
                   className={cl(
                     styles.menuListItem,
                     "flex py-05 focus:outline-none *:focus-visible:shadow-focus group-first:pt-0 group-last:last:pb-0",

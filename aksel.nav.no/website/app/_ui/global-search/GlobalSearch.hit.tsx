@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 import { Heading } from "@navikt/ds-react";
 import { doctypeToColorRole } from "@/app/_ui/theming/theme-config";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { urlFor } from "@/sanity/interface";
 import { StatusTag } from "@/web/StatusTag";
 import { SearchHitT, SearchResultPageTypesT } from "./GlobalSearch.config";
@@ -65,8 +66,7 @@ function GlobalSearchLink(props: {
             size="small"
             as={Link}
             href={href}
-            data-umami-event="navigere"
-            data-umami-event-kilde="global sok"
+            onClick={() => umamiTrack("navigere", { kilde: "global sok" })}
             className={styles.searchLink}
             prefetch={false}
           >

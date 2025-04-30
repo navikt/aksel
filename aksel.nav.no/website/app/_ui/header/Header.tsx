@@ -4,6 +4,7 @@ import { Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
 import { ThemeButton } from "@/app/_ui/theming/Theme.button";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import AkselLogo from "@/assets/Logo";
 import { HeaderLink } from "./Header.link";
 import styles from "./Header.module.css";
@@ -29,8 +30,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
         <Link
           href="/"
           passHref
-          data-umami-event="navigere"
-          data-umami-event-kilde="header"
+          onClick={() => umamiTrack("navigere", { kilde: "header" })}
           className={styles.headerLogoLink}
         >
           <Show above="sm">

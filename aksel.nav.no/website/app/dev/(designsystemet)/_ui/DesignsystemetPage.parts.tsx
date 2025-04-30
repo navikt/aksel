@@ -1,6 +1,7 @@
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import { HStack, Link } from "@navikt/ds-react";
 import { KOMPONENT_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
 
 const GITHUB_CONFIG = {
@@ -45,9 +46,12 @@ function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
           target="_blank"
           rel="noreferrer noopener"
           href={gitConfig.git}
-          data-umami-event="navigere"
-          data-umami-event-url={gitConfig.git}
-          data-umami-event-kilde="komponent-header"
+          onClick={() =>
+            umamiTrack("navigere", {
+              kilde: "komponent-header",
+              url: gitConfig.git,
+            })
+          }
           variant="subtle"
         >
           <GithubIcon /> Github
@@ -58,9 +62,12 @@ function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
           target="_blank"
           rel="noreferrer noopener"
           href={data.figma_link}
-          data-umami-event="navigere"
-          data-umami-event-url={data.figma_link}
-          data-umami-event-kilde="komponent-header"
+          onClick={() =>
+            umamiTrack("navigere", {
+              kilde: "komponent-header",
+              url: data.figma_link,
+            })
+          }
           variant="subtle"
         >
           <FigmaIcon /> Figma
@@ -69,8 +76,11 @@ function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
       <Link
         href="/grunnleggende/kode/endringslogg"
         variant="subtle"
-        data-umami-event="navigere"
-        data-umami-event-kilde="komponent-header"
+        onClick={() =>
+          umamiTrack("navigere", {
+            kilde: "komponent-header",
+          })
+        }
       >
         <ClockDashedIcon fontSize="1.5rem" aria-hidden />
         Endringslogg

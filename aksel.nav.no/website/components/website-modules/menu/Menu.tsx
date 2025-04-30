@@ -2,6 +2,7 @@ import cl from "clsx";
 import Link from "next/link";
 import { HTMLAttributes, createContext, useContext } from "react";
 import { BodyShort, Label } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./Menu.module.css";
 
 type MenuProps = {
@@ -91,9 +92,12 @@ export function MenuLink({
         as={Link}
         prefetch={false}
         href={href}
-        onClick={() => onClick?.()}
-        data-umami-event="navigere"
-        data-umami-event-kilde={source}
+        onClick={() => {
+          onClick?.();
+          umamiTrack("navigere", {
+            kilde: source,
+          });
+        }}
         className={cl(
           styles.menuListItem,
           "flex py-05 focus:outline-none *:focus-visible:shadow-focus group-first:pt-0 group-last:last:pb-0",

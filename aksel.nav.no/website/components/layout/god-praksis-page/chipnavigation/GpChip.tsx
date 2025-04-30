@@ -1,5 +1,6 @@
 import cl from "clsx";
 import { useRouter } from "next/router";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
 type GpChipProps = {
   children: React.ReactNode;
@@ -15,7 +16,6 @@ export function GpChip(props: GpChipProps) {
   return (
     <button
       aria-pressed={props.pressed}
-      onClick={props.onClick}
       className={cl(
         "grid min-h-8 place-content-center whitespace-nowrap rounded-full bg-surface-neutral-subtle px-3 py-1 ring-1 ring-inset transition-opacity focus:outline-none focus-visible:shadow-focus-gap aria-pressed:text-text-on-inverted",
         "disabled:bg-surface-neutral-subtle disabled:opacity-40 disabled:ring-border-default",
@@ -26,9 +26,13 @@ export function GpChip(props: GpChipProps) {
             props.type === "undertema",
         },
       )}
-      data-umami-event="god-praksis-chip"
-      data-umami-event-type={props.type}
-      data-umami-event-url={asPath}
+      onClick={() => {
+        props?.onClick?.();
+        umamiTrack("god-praksis-chip", {
+          type: props.type,
+          url: asPath,
+        });
+      }}
       disabled={props.disabled}
     >
       {props.children}

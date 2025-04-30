@@ -1,5 +1,6 @@
 import cl from "clsx";
 import Link from "next/link";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
 export const IntroCards = ({
   links,
@@ -29,8 +30,11 @@ export const IntroCards = ({
               },
             )}
             prefetch={false}
-            data-umami-event="navigere"
-            data-umami-event-kilde="introkort"
+            onClick={() =>
+              umamiTrack("navigere", {
+                kilde: "introkort",
+              })
+            }
           >
             <span className="flex items-center gap-2">
               <Icon

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./Header.module.css";
 
 type HeaderLinkProps = {
@@ -36,8 +37,7 @@ function HeaderLink({ name, href }: HeaderLinkProps) {
       prefetch={false}
       data-current={isActive()}
       className={styles.headerLink}
-      data-umami-event="navigere"
-      data-umami-event-kilde="header"
+      onClick={() => umamiTrack("navigere", { kilde: "header" })}
     >
       {name}
     </Link>

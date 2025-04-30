@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HGrid, Heading } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
 import AkselLogo from "@/assets/Logo";
 import styles from "./Footer.module.css";
@@ -95,8 +96,7 @@ function LinkBlock({ heading, links }: LinkBlockPropsT) {
             <Link
               className={styles.footerLink}
               href={link.url}
-              data-umami-event="navigere"
-              data-umami-event-kilde="footer"
+              onClick={() => umamiTrack("navigere", { kilde: "footer" })}
               prefetch={false}
             >
               {link.icon}
