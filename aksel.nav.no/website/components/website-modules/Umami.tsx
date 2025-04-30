@@ -1,8 +1,7 @@
 "use client";
 
 import getConfig from "next/config";
-
-/* import Script from "next/script"; */
+import Script from "next/script";
 import { useEffect, useState } from "react";
 import { useCookies } from "./CookieProvider";
 
@@ -21,10 +20,7 @@ export const Umami = () => {
     return null;
   }
 
-  /* 30.04.2025: Umami is down currently. Until we handle logging better internally we have disabled it. */
-  return null;
-
-  /* return (
+  return (
     <Script
       defer
       src="https://cdn.nav.no/team-researchops/sporing/sporing.js"
@@ -33,7 +29,7 @@ export const Umami = () => {
       data-tag={umamiTag}
       data-exclude-search="true"
     />
-  ); */
+  );
 };
 
 /**
