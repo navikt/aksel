@@ -8,11 +8,11 @@ const Toolbar = () => {
       as="nav"
       align="center"
       justify="space-between"
-      marginBlock="0 4"
+      marginBlock="space-0 space-16"
       gap="space-16"
     >
       <SearchField />
-      <HStack gap="2">
+      <HStack gap="space-8">
         <TokenFormatSelector />
       </HStack>
     </HStack>
