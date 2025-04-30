@@ -8,7 +8,7 @@ import { umamiTrack } from "@/app/_ui/umami/Umami.track";
  */
 function UmamiNotFoundPageLog() {
   useEffect(() => {
-    umamiTrack("404", { urlBuilder: window.location.pathname });
+    umamiTrack("404", { url: window.location.pathname });
   }, []);
 
   return null;
