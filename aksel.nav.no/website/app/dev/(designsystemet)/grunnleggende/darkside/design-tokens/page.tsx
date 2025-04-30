@@ -24,7 +24,7 @@ const Page = async () => {
         <VStack gap="space-24">
           <VStack>
             <DesignsystemetEyebrow type="ds_artikkel" />
-            <Heading level="1" size="xlarge">
+            <Heading level="1" size="xlarge" data-aksel-heading-color>
               Tokenoversikt
             </Heading>
             <BodyLong size="large">
