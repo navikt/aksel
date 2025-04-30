@@ -6,7 +6,6 @@
   "author": "Aksel | Nav designsystem team",
   "scripts": {
     "dev": "next --turbopack | pino-pretty",
-    "build:old": "next build",
     "build": "yarn workspace playroom build:playroom && yarn update:searchindex && next build && yarn update:rss && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "update:searchindex": "yarn tsx --env-file-if-exists=.env ./scripts/create-index",
@@ -56,7 +55,7 @@
     "jscodeshift": "^0.15.1",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
-    "next": "15.2.3",
+    "next": "15.3.1",
     "next-logger": "^5.0.1",
     "next-sanity": "9.8.61",
     "next-themes": "^0.4.6",
