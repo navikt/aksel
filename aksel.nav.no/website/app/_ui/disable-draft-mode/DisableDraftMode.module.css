@@ -1,0 +1,20 @@
+.disableDraftMode {
+  padding: var(--ax-space-16);
+  background-color: var(--ax-bg-neutral-moderate);
+  position: fixed;
+  bottom: var(--ax-space-16);
+  right: var(--ax-space-16);
+  border-radius: var(--ax-border-radius-large);
+  cursor: pointer;
+  font-weight: var(--ax-font-weight-bold);
+  font-size: 1.25rem;
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &:focus {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
