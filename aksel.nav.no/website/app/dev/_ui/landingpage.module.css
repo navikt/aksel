@@ -1,0 +1,106 @@
+.animationButton {
+  background-color: var(--ax-bg-neutral-softA);
+  border-radius: var(--ax-border-radius-full);
+  margin-bottom: 16px;
+  color: var(--ax-text-neutral);
+
+  &:hover {
+    background-color: var(--ax-neutral-300A);
+  }
+
+  & svg {
+    color: var(--ax-neutral-700);
+  }
+}
+
+.mainBanner {
+  background: var(--ax-bg-meta-purple-strong);
+  padding: var(--ax-space-16);
+  text-align: center;
+  font-size: var(--ax-font-size-xlarge);
+  color: var(--ax-text-neutral-contrast);
+  text-decoration: underline;
+}
+
+.frontPage {
+  position: relative;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.hero {
+  position: relative;
+  margin-inline: auto;
+  margin-bottom: var(--ax-space-12);
+  margin-top: var(--ax-space-20);
+  padding-inline: var(--ax-space-4);
+  display: grid;
+  width: 100%;
+  text-align: center;
+  place-items: center;
+}
+
+.cubeWrapper {
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .hero {
+    padding-inline: 1.5rem;
+    margin-top: 9rem;
+    max-width: 632px;
+  }
+}
+
+@property --c-1 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --c-2 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+.heroLinearBG {
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  height: 900px;
+  width: 100%;
+  transition: background 1s;
+  animation: 20s ease infinite rainbow-hype;
+  background: linear-gradient(196deg, var(--c-1) 8.43%, var(--c-2) 23.44%, transparent 70.98%);
+
+  --aksel-brand-teal-300: #b7eee4;
+  --aksel-brand-teal-400: #90e1d2;
+}
+
+@keyframes rainbow-hype {
+  0% {
+    --c-1: var(--ax-bg-meta-purple-moderate-pressed);
+    --c-2: var(--ax-bg-meta-purple-moderate-hover);
+  }
+
+  33% {
+    --c-1: var(--aksel-brand-teal-400);
+    --c-2: var(--aksel-brand-teal-300);
+  }
+
+  66% {
+    --c-1: var(--ax-bg-brand-blue-moderate-pressed);
+    --c-2: var(--ax-bg-brand-blue-moderate-hover);
+  }
+
+  100% {
+    --c-1: var(--ax-bg-meta-purple-moderate-pressed);
+    --c-2: var(--ax-bg-meta-purple-moderate-hover);
+  }
+}
+
+.akselPage {
+  position: relative;
+  z-index: 10;
+}
