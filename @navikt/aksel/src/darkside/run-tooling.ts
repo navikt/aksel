@@ -88,6 +88,7 @@ export async function runTooling(
 
   // Task execution loop
   let task: TaskName;
+  // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
   while ((task = await getNextTask()) !== "exit") {
     console.info("\n\n");
 

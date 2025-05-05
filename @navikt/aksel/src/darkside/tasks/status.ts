@@ -48,6 +48,7 @@ function getStatus(
 
         let match: RegExpExecArray | null;
 
+        // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
         while ((match = regex.exec(fileSrc))) {
           const { row, column } = getWordPositionInFile(fileSrc, match.index);
 
@@ -74,6 +75,7 @@ function getStatus(
     );
 
     let legacyMatch: RegExpExecArray | null;
+    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     while ((legacyMatch = legacyRegex.exec(fileSrc)) !== null) {
       const { row, column } = getWordPositionInFile(fileSrc, legacyMatch.index);
 
@@ -98,6 +100,7 @@ function getStatus(
           continue;
         }
         let match: RegExpExecArray | null;
+        // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
         while ((match = regex.exec(fileSrc))) {
           const { row, column } = getWordPositionInFile(fileSrc, match.index);
 
