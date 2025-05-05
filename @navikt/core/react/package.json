@@ -623,7 +623,7 @@
     "test:watch": "TZ=UTC vitest watch -c tests/vitest.config.ts"
   },
   "dependencies": {
-    "@floating-ui/react": "0.25.4",
+    "@floating-ui/react": "0.27.8",
     "@floating-ui/react-dom": "^2.0.9",
     "@navikt/aksel-icons": "^7.21.0",
     "@navikt/ds-tokens": "^7.21.0",
