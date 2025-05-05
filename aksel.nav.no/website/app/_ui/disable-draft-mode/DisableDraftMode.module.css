@@ -1,19 +1,21 @@
 .disableDraftMode {
   padding: var(--ax-space-16);
-  background-color: var(--ax-bg-neutral-moderate);
+  background-color: var(--ax-bg-neutral-strong);
+  color: var(--ax-text-neutral-contrast);
   position: fixed;
-  bottom: var(--ax-space-16);
-  right: var(--ax-space-16);
-  border-radius: var(--ax-border-radius-large);
+  right: 0;
+  left: 0;
+  bottom: 0;
   cursor: pointer;
   font-weight: var(--ax-font-weight-bold);
   font-size: 1.25rem;
+  text-align: center;
 
   &:hover {
-    background-color: var(--ax-bg-neutral-moderate-hover);
+    background-color: var(--ax-bg-neutral-strong-hover);
   }
 
-  &:focus {
+  &:focus-visible {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;
   }

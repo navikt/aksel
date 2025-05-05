@@ -25,7 +25,7 @@ export const workspaceConfig = defineConfig([
     description: "Production environment for Aksel",
     name: "default",
     dataset: "production",
-    basePath: "/admin/prod",
+    basePath: "/admin",
     icon: AkselLogo,
     auth: authStore(),
     scheduledPublishing: { enabled: false },
@@ -48,6 +48,16 @@ export const workspaceConfig = defineConfig([
       visionTool(),
       colorInput(),
       nbNOLocale(),
+      /* TODO:  Uncomment when updated Aksel uses Prod-dataset */
+      /* presentationTool({
+        resolve,
+        previewUrl: {
+          previewMode: {
+            enable: "/api/draft-mode/enable",
+            shareAccess: true,
+          },
+        },
+      }), */
     ],
     releases: {
       enabled: false,
@@ -59,7 +69,7 @@ export const workspaceConfig = defineConfig([
     description: "Development environment for Aksel",
     name: "dev",
     dataset: "development",
-    basePath: "/admin/dev",
+    basePath: "/admin-dev",
     icon: TestFlaskIcon,
     auth: authStore(),
     scheduledPublishing: { enabled: false },

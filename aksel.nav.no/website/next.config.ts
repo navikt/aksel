@@ -112,6 +112,11 @@ const nextConfig: NextConfig = {
         destination: "/api/preview?slug=:slug*",
         permanent: true,
       },
+      /* {
+        source: "/admin/intent/edit/mode=presentation;:slug*",
+        destination: "/admin/dev/intent/edit/mode=presentation;:slug*",
+        permanent: false,
+      }, */
       /* TODO: Use icon-page redirects after release */
       /* {
         source: "/ikoner",
