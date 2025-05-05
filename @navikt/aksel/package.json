@@ -48,7 +48,7 @@
   "devDependencies": {
     "@types/cli-progress": "3.11.6",
     "rimraf": "6.0.1",
-    "typescript": "5.5.4",
+    "typescript": "5.8.3",
     "vitest": "^2.1.9"
   },
   "sideEffects": false,
