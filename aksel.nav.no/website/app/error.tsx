@@ -6,7 +6,7 @@ import { Page } from "@navikt/ds-react/Page";
 import { logger } from "@navikt/next-logger";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 
-export default function Error({
+export default function ErrorPage({
   error,
 }: {
   error: Error & { digest?: string };

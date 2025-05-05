@@ -31,6 +31,7 @@ async function GodPraksisPictogram({
 
   return (
     <div
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
       dangerouslySetInnerHTML={{ __html: cleanedSvg }}
       data-active={active}
       aria-hidden
