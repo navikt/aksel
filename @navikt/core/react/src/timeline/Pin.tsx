@@ -137,7 +137,6 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
               ref={refs.setFloating}
               {...getFloatingProps()}
               style={floatingStyles}
-              tabIndex={-2}
             >
               {children}
               {showArrow && (
