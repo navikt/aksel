@@ -53,7 +53,7 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     document.addEventListener("keydown", listener);
 
     return () => document.removeEventListener("keydown", listener);
-  }, [inputRef, open, setOpen]);
+  }, [open]);
 
   const openSearch = () => {
     setOpen(true);
@@ -74,7 +74,7 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
         });
         window.umami && umami.track("sok");
       }),
-    [startTransition],
+    [],
   );
 
   const resetSearch = useCallback(() => {
