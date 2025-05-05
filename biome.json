@@ -67,7 +67,8 @@
       "**/codemod/**/*.js",
       "**/tailwind/tailwind.config.js",
       "**/.next/**",
-      "**/modal/dialog-polyfill.ts"
+      "**/modal/dialog-polyfill.ts",
+      "**/_sanity/query-types.ts"
     ]
   }
 }
