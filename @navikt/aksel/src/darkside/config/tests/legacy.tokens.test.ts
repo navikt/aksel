@@ -28,7 +28,6 @@ describe("Legacy token migration", () => {
     const legacyTokens = Object.keys(legacyTokenConfig).map((key) =>
       translateToken(`a-${key}`, "js").toLowerCase(),
     );
-    console.info(JSON.stringify(legacyTokens, null, 2));
     Object.keys(jsTokens).forEach((key) => {
       expect(legacyTokens).toContain(key.toLowerCase());
     });
