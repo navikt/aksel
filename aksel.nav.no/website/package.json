@@ -6,7 +6,6 @@
   "author": "Aksel | Nav designsystem team",
   "scripts": {
     "dev": "next --turbopack | pino-pretty",
-    "build:old": "next build",
     "build": "yarn workspace playroom build:playroom && yarn update:searchindex && next build && yarn update:rss && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "update:searchindex": "yarn tsx --env-file-if-exists=.env ./scripts/create-index",
@@ -56,7 +55,7 @@
     "jscodeshift": "^0.15.1",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
-    "next": "15.2.3",
+    "next": "15.3.1",
     "next-logger": "^5.0.1",
     "next-sanity": "9.10.2",
     "next-themes": "^0.4.6",
@@ -92,6 +91,7 @@
     "@portabletext/block-tools": "^1.1.21",
     "@sanity/schema": "3.86.1",
     "@types/jscodeshift": "^0.11.11",
+    "@types/lodash": "4.17.16",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.0.0",
     "@types/umami": "^2.10.0",
@@ -108,6 +108,7 @@
     "rss": "^1.2.2",
     "showdown": "^2.1.0",
     "start-server-and-test": "^2.0.3",
+    "tsconfig-paths-webpack-plugin": "^4.2.0",
     "tsx": "^4.19.1",
     "typescript": "5.5.4",
     "vitest": "^2.1.9"

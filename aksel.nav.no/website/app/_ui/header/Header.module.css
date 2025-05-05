@@ -91,11 +91,12 @@
   color: var(--ax-text-info-contrast);
   text-decoration: none;
 
-  /* We move it further away to avoid it showing when scroll "overshoots" */
-  transform: translateY(-300%);
+  /* We move it further away and (just in case scale it to 0) 
+  to avoid it showing when scroll "overshoots" */
+  transform: translateY(-300%) scale(0);
 
   &:focus-within {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     outline: none;
   }
 }

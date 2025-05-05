@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 7.21.0
+
+### Minor Changes
+
+- Icons: New icon 'Cpu'. ([#3740](https://github.com/navikt/aksel/pull/3740))
+
 ## 7.20.0
 
 ## 7.19.1

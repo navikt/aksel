@@ -322,6 +322,11 @@
   border-color: var(--ax-border-neutral-subtleA);
   border-radius: var(--ax-border-radius-large);
   padding: var(--ax-space-16) var(--ax-space-20);
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
 }
 
 @media (forced-colors: active) {

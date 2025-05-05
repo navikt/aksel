@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.21.0
+
+### Patch Changes
+
+- Darkside: Update Chips.Toggle hover-border. ([#3738](https://github.com/navikt/aksel/pull/3738))
+
 ## 7.20.0
 
 ### Minor Changes
