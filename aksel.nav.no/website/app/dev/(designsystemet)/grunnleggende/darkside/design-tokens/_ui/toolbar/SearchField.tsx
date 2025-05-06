@@ -32,6 +32,7 @@ const SearchField = () => {
         hideLabel
         variant="simple"
         htmlSize="26"
+        autoComplete="off"
       />
     </form>
   );
