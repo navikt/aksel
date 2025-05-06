@@ -5,45 +5,37 @@
   z-index: -1;
   opacity: 0.3;
   pointer-events: none;
+
+  & svg {
+    position: absolute;
+    color: white;
+  }
 }
 
 .animated1 {
   animation: shape-1 60s ease-in-out infinite;
-  color: white;
-  position: absolute;
   transform: translate(-95rem, -13.95rem);
 }
 
 .animated2 {
   animation: shape-2 60s ease-in-out infinite;
-  color: white;
-  position: absolute;
   transform: translate(-69.5rem, -13.95rem);
 }
 
 .animated3 {
   animation: shape-3 60s ease-in-out infinite;
-  color: white;
-  position: absolute;
   transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
 }
 
-.animated4 {
-  color: white;
-  position: absolute;
-}
+/* .animated4 { } */
 
 .animated5 {
   animation: shape-5 60s ease-in-out infinite;
-  color: white;
-  position: absolute;
   transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
 }
 
 .animated6 {
   animation: shape-6 60s ease-in-out infinite;
-  color: white;
-  position: absolute;
   transform: translate(70rem, -13.95rem);
 }
 
