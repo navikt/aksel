@@ -26,15 +26,18 @@ function DoDont(props: ExtractPortableComponentProps<"do_dont">) {
           ?.auto("format")
           .url();
 
-        if (!imageUrl) {
+        if (!imageUrl || !block.variant) {
           return null;
         }
+
+        const { role } = NotchConfig[block.variant];
 
         return (
           <Box
             as="figure"
             key={block._key}
             gridColumn={block.fullwidth ? "span 2" : "span 1"}
+            data-color-role={role}
           >
             <Notch block={block} />
             <img
@@ -78,10 +81,10 @@ function Notch({ block }: { block: Do_dont_block }) {
     return null;
   }
 
-  const { icon: Icon, text, role } = NotchConfig[block.variant];
+  const { icon: Icon, text } = NotchConfig[block.variant];
 
   return (
-    <div data-color-role={role} className={styles.doDontNotch}>
+    <div className={styles.doDontNotch}>
       <Icon aria-hidden fontSize="1.5rem" />
       <BodyShort as="span" size="large">
         {text}

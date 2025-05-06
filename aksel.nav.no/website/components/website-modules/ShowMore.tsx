@@ -1,3 +1,5 @@
+"use client";
+
 import cl from "clsx";
 import React, { useEffect, useRef, useState, version } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";

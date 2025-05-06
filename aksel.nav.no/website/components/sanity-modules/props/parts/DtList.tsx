@@ -1,3 +1,5 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import { BodyShort, Skeleton } from "@navikt/ds-react";
 import { AkselTable, AkselTableRow } from "@/web/Table";

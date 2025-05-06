@@ -2,6 +2,7 @@ import cl from "clsx";
 import NextImage from "next/legacy/image";
 import NextLink from "next/link";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { urlFor } from "@/sanity/interface";
@@ -138,8 +139,12 @@ const Card = ({ article, visible, index }: CardProps) => {
             href={`/${article.slug}`}
             passHref
             className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
-            data-umami-event="navigere"
-            data-umami-event-kilde="forsidekort"
+            onClick={() =>
+              umamiTrack("navigere", {
+                kilde: "forsidekort",
+                url: `/${article.slug}`,
+              })
+            }
           >
             <Heading
               level="3"

@@ -3,7 +3,7 @@ import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 
-export default async function DesignsystemLayout({
+export default async function GodPraksisLayout({
   children,
 }: {
   children: React.ReactNode;

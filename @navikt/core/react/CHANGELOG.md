@@ -1,5 +1,27 @@
 # @navikt/ds-react
 
+## 7.21.1
+
+### Patch Changes
+
+- ExpansionCard: Omit `onToggle` from extending `HTMLAttributes<HTMLDivElement>` to avoid overlapping with popover api. ([#3773](https://github.com/navikt/aksel/pull/3773))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.21.1
+  - @navikt/aksel-icons@7.21.1
+
+## 7.21.0
+
+### Minor Changes
+
+- Chat: Add 'toptextHeadingLevel'-prop to allow changing h-level based on semantics. ([#3739](https://github.com/navikt/aksel/pull/3739))
+
+### Patch Changes
+
+- Updated dependencies [[`8ea18b0`](https://github.com/navikt/aksel/commit/8ea18b07a3bec913e04fc274983da83daca86983)]:
+  - @navikt/aksel-icons@7.21.0
+  - @navikt/ds-tokens@7.21.0
+
 ## 7.20.0
 
 ### Minor Changes

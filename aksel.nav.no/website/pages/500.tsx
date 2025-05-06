@@ -8,6 +8,7 @@ import {
   Page,
   VStack,
 } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 
@@ -15,7 +16,9 @@ function ErrorPage({ statusCode }) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    window.umami && umami.track(statusCode, { url: window.location.pathname });
+    umamiTrack(statusCode, {
+      url: window.location.pathname,
+    });
     setIsClient(true);
   }, [statusCode]);
 

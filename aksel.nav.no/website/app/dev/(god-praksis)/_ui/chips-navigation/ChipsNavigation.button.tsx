@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./ChipsNavigation.module.css";
 
 type GpChipNavigationButtonProps = {
@@ -35,6 +36,13 @@ function GodPrakisChipsNavigationButton(props: GpChipNavigationButtonProps) {
     } else {
       params.set(type, title);
     }
+
+    umamiTrack("god-praksis-chip", {
+      kilde: "sidebar",
+      type: props.type,
+      url: pathname ?? undefined,
+    });
+
     push(getHref(), { scroll: false });
   };
 
@@ -45,9 +53,6 @@ function GodPrakisChipsNavigationButton(props: GpChipNavigationButtonProps) {
       data-active={isActive}
       onClick={handleClick}
       aria-pressed={isActive}
-      data-umami-event="god-praksis-chip"
-      data-umami-event-type={props.type}
-      data-umami-event-url={pathname}
       onMouseEnter={() => {
         const href = getHref();
         prefetch(href);
