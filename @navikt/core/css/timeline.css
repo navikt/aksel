@@ -360,6 +360,7 @@
 }
 
 .navds-timeline__popover:focus {
+  box-shadow: var(--a-shadow-focus);
   outline: none;
 }
 

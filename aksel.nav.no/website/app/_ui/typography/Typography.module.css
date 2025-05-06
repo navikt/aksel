@@ -7,9 +7,11 @@
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   font-family: var(--website-font-mono);
   display: inline;
+  box-shadow: inset 0 0 0 1px var(--ax-border-neutral-subtleA);
 
   &[data-highlighted="true"] {
     background-color: var(--ax-bg-brand-blue-moderateA);
+    box-shadow: inset 0 0 0 1px var(--ax-border-brand-blue-subtleA);
   }
 
   &[data-strikethrough="true"] {

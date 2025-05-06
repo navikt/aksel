@@ -1,3 +1,5 @@
+"use client";
+
 import { codeInput } from "@sanity/code-input";
 import { colorInput } from "@sanity/color-input";
 import { nbNOLocale } from "@sanity/locale-nb-no";
