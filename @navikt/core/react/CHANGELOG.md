@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.21.1
+
+### Patch Changes
+
+- ExpansionCard: Omit `onToggle` from extending `HTMLAttributes<HTMLDivElement>` to avoid overlapping with popover api. ([#3773](https://github.com/navikt/aksel/pull/3773))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.21.1
+  - @navikt/aksel-icons@7.21.1
+
 ## 7.21.0
 
 ### Minor Changes
