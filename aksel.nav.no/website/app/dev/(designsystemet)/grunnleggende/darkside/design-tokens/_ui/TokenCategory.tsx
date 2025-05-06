@@ -46,7 +46,7 @@ const TokenCategory = ({
             id={categoryId}
             level="2"
             size="large"
-            style={{ scrollMarginBlockStart: "6rem" }}
+            style={{ scrollMarginBlockStart: "5.5rem" }}
           >
             {title}
           </Heading>
