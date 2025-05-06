@@ -47,7 +47,7 @@ const FontToken = ({ token }: { token: TokenForDocumentationT }) => {
       height="100%"
       className={isTokenGroupUnknown ? "vk-error" : undefined}
     >
-      <Heading size="medium" style={fontStyling}>
+      <Heading as="span" size="medium" style={fontStyling}>
         Aa
       </Heading>
     </VStack>

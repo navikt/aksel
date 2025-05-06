@@ -42,7 +42,7 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
       return (
         <Box.New width="32px" height="32px">
           <VStack as="div" align="center" justify="center" height="100%">
-            <Heading size="medium" style={{ color: token.cssValue }}>
+            <Heading as="span" size="medium" style={{ color: token.cssValue }}>
               Aa
             </Heading>
           </VStack>
