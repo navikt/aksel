@@ -58,6 +58,7 @@ const TokenCategory = ({
         </VStack>
         {filteredRoles && filteredRoles.length > 1 && (
           <TokenRolesChips
+            category={title}
             roles={filteredRoles}
             selectedRole={selectedRole}
             setSelectedRole={setSelectedRole}

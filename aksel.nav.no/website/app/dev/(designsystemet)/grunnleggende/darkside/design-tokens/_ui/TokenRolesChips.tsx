@@ -2,16 +2,18 @@ import { Chips } from "@navikt/ds-react";
 import { BreakpointRoleT, ColorRoleT, FontRoleT, RoleT } from "./config";
 
 const TokenRolesChips = ({
+  category,
   roles,
   selectedRole,
   setSelectedRole,
 }: {
+  category: string;
   roles: RoleT<ColorRoleT["id"] | FontRoleT["id"] | BreakpointRoleT["id"]>[];
   selectedRole: string | null;
   setSelectedRole: React.Dispatch<React.SetStateAction<typeof selectedRole>>;
 }) => {
   return (
-    <Chips>
+    <Chips aria-label={`Filtrer på ${category} rolle`}>
       {roles.map(({ id, title }) => (
         <Chips.Toggle
           checkmark={false}
