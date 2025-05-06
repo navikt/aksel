@@ -45,6 +45,7 @@ const TokenExample = ({ token }: { token: TokenForDocumentationT }) => {
 
 const TokenPreview = ({ token }: { token: TokenForDocumentationT }) => (
   <Box.New
+    aria-hidden="true"
     background={
       token.category === "textColor" && token.modifier === "contrast"
         ? "neutral-strong"
