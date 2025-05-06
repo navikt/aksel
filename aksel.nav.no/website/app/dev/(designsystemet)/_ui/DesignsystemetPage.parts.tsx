@@ -1,3 +1,5 @@
+"use client";
+
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import { HStack, Link } from "@navikt/ds-react";
 import { KOMPONENT_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
