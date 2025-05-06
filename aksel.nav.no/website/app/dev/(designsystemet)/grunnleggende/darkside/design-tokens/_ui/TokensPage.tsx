@@ -19,18 +19,20 @@ const TokensPage = () => {
     <VStack gap="space-8">
       <Toolbar />
       {filteredTokens.length === 0 && <EmptyStateCard />}
-      {filteredCategories.map(({ id, title, description, roles }) => {
-        return (
-          <TokenCategory
-            id={id}
-            key={id}
-            title={title}
-            description={description}
-            roles={roles}
-            tokens={filteredTokens.filter((token) => token.category === id)}
-          />
-        );
-      })}
+      <VStack gap="space-40">
+        {filteredCategories.map(({ id, title, description, roles }) => {
+          return (
+            <TokenCategory
+              id={id}
+              key={id}
+              title={title}
+              description={description}
+              roles={roles}
+              tokens={filteredTokens.filter((token) => token.category === id)}
+            />
+          );
+        })}
+      </VStack>
     </VStack>
   );
 };
