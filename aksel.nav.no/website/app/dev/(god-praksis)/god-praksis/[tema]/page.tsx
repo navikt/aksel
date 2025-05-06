@@ -262,7 +262,7 @@ export default async function Page(props: Props) {
                       <li key={article.slug}>
                         <LinkCard>
                           <LinkCardTitle as="h2">
-                            <LinkCardAnchor href={`/${article.slug}` ?? ""}>
+                            <LinkCardAnchor href={`/dev/${article.slug}` ?? ""}>
                               {article.heading}
                             </LinkCardAnchor>
                           </LinkCardTitle>

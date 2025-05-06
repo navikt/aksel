@@ -1,3 +1,4 @@
+import { stegaClean } from "next-sanity";
 import "server-only";
 import {
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult,
@@ -44,17 +45,17 @@ function generateSidebar(
 ): DesignsystemSidebarDataT {
   return Object.keys(pageTypes).map((type) => {
     const overviewPageList = overviewPages.find((page) =>
-      page._type.includes(type),
+      stegaClean(page._type).includes(type),
     )?.overview_pages;
 
     const categories = sanityCategoryLookup(type as keyof typeof pageTypes);
     const filteredInput = input.filter(
-      (doc) => doc._type === pageTypes[type]._type,
+      (doc) => stegaClean(doc._type) === pageTypes[type]._type,
     );
 
     const standalonePages: SidebarPageT[] = filteredInput
       .filter(isValidPage)
-      .filter((page) => page.kategori === "standalone")
+      .filter((page) => stegaClean(page.kategori) === "standalone")
       .sort((a, b) => {
         return (a?.heading ?? "").localeCompare(b?.heading ?? "");
       })
@@ -70,7 +71,7 @@ function generateSidebar(
       .map((category) => ({
         ...category,
         pages: filteredInput
-          .filter((y) => y?.kategori === category.value)
+          .filter((y) => stegaClean(y?.kategori) === category.value)
           .filter(isValidPage)
           .sort((a, b) => {
             return (a?.heading ?? "").localeCompare(b?.heading ?? "");
@@ -81,7 +82,7 @@ function generateSidebar(
       .filter((category) => !(!category.pages || category.pages.length === 0))
       .map((category) => {
         const hasOverviewPage = overviewPageList?.some(
-          (page) => category.value === page,
+          (page) => stegaClean(category.value) === page,
         );
 
         const pages = category.pages.map((page) => ({
@@ -125,7 +126,10 @@ function isValidPage(page: SidebarInputNodeT): page is SidebarInputNodeT & {
   return !!(page?.heading && page?.slug && page?.tag);
 }
 
-function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {
+function sortDeprecated(dirtyA: SidebarInputNodeT, dirtyB: SidebarInputNodeT) {
+  const a = stegaClean(dirtyA);
+  const b = stegaClean(dirtyB);
+
   if (a?.tag === "deprecated" && b?.tag === "deprecated") {
     return 0;
   }
@@ -141,7 +145,10 @@ function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {
   return 0;
 }
 
-function sortIndex(a: SidebarInputNodeT, b: SidebarInputNodeT) {
+function sortIndex(dirtyA: SidebarInputNodeT, dirtyB: SidebarInputNodeT) {
+  const a = stegaClean(dirtyA);
+  const b = stegaClean(dirtyB);
+
   if (a.sidebarindex === null && b.sidebarindex === null) {
     return 0;
   }

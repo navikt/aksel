@@ -3,10 +3,9 @@
 import { NextStudio } from "next-sanity/studio";
 import { useTheme } from "next-themes";
 import { StudioThemeColorSchemeKey } from "sanity";
-import { workspaceConfig } from "../../../../sanity/sanity.config";
+import workspaceConfig from "../../sanity/sanity.config";
 
-
-function Studio() {
+function AdminStudio() {
   const { theme, setTheme } = useTheme();
 
   return (
@@ -27,4 +26,4 @@ function Studio() {
   );
 }
 
-export { Studio };
+export { AdminStudio };

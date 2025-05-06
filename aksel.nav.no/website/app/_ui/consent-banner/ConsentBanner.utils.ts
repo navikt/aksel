@@ -6,6 +6,7 @@
  */
 import { cookies } from "next/headers";
 import { client } from "@/app/_sanity/client";
+import { writeToken } from "@/app/_sanity/token";
 
 const CURRENT_VERSION = 1;
 const CONSENT_TRACKER_ID = "aksel-consent";
@@ -73,7 +74,7 @@ async function updateCookieConsent(
   if (["accepted", "rejected"].includes(newState)) {
     await client
       .config({
-        token: process.env.SANITY_WRITE,
+        token: writeToken,
       })
       .patch("cookie_tracker")
       .inc({ total: 1, [stateToSanityKey[newState]]: 1 })

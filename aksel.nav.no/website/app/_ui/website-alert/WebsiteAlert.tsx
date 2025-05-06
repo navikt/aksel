@@ -1,4 +1,4 @@
-import { PortableTextBlock } from "next-sanity";
+import { PortableTextBlock, stegaClean } from "next-sanity";
 import { Alert, Heading } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
@@ -16,7 +16,7 @@ function WebsiteAlert(props: ExtractPortableComponentProps<"alert">) {
         <Heading
           spacing
           size="small"
-          as={heading_level ?? "h2"}
+          as={stegaClean(heading_level) ?? "h2"}
           id={`${encodeURIComponent(heading)}-a`}
           className="scroll-m-20"
         >

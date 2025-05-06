@@ -47,7 +47,7 @@ function classifyTraffic() {
   const isPreview = () => !!document.getElementById("exit-preview-id");
   const isExample = () => window.location.pathname.startsWith("/eksempler/");
   const isTemplate = () => window.location.pathname.startsWith("/templates/");
-  const isAdmin = () => window.location.pathname.startsWith("/admin/");
+  const isAdmin = () => window.location.pathname.startsWith("/admin");
 
   if (
     isProdUrl() &&

@@ -16,6 +16,7 @@ async function GodPraksisFeedback({ docId }: { docId: string }) {
       borderColor="neutral-subtleA"
       background="raised"
       padding="space-24"
+      marginBlock="space-48"
     >
       <HGrid
         gap={{ xs: "space-16", md: "space-64" }}

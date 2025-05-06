@@ -1,3 +1,4 @@
+import { stegaClean } from "next-sanity";
 import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { Komponent_artikkel } from "@/app/_sanity/query-types";
 import { AkselBrandColors } from "@/app/theme";
@@ -37,7 +38,9 @@ const statusToText: Record<NonNullable<StatusTagT>, string> = {
  * @param statusTag Current tag: beta, deprecated, new, ready
  * @param ignoreStable Counts ready as null
  */
-function getStatusTag(statusTag: StatusTagT, ignoreStable = false) {
+function getStatusTag(dirtyStatusTag: StatusTagT, ignoreStable = false) {
+  const statusTag = stegaClean(dirtyStatusTag);
+
   if (!statusTag || (statusTag === "ready" && ignoreStable)) {
     return null;
   }

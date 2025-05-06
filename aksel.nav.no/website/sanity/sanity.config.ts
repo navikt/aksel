@@ -7,10 +7,12 @@ import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
 import { AuthConfig, defineConfig } from "sanity";
 import { media } from "sanity-plugin-media";
+import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { TestFlaskIcon } from "@navikt/aksel-icons";
 import { SANITY_PROJECT_ID } from "./config";
 import { AkselLogo } from "./logo";
+import { resolve } from "./plugins/presentation/resolve";
 import { publicationFlow } from "./plugins/publication-flow";
 import { defaultDocumentNode, structure } from "./plugins/structure";
 import { schema } from "./schema";
@@ -23,7 +25,7 @@ export const workspaceConfig = defineConfig([
     description: "Production environment for Aksel",
     name: "default",
     dataset: "production",
-    basePath: "/admin/prod",
+    basePath: "/admin",
     icon: AkselLogo,
     auth: authStore(),
     scheduledPublishing: { enabled: false },
@@ -46,6 +48,16 @@ export const workspaceConfig = defineConfig([
       visionTool(),
       colorInput(),
       nbNOLocale(),
+      /* TODO:  Uncomment when updated Aksel uses Prod-dataset */
+      /* presentationTool({
+        resolve,
+        previewUrl: {
+          previewMode: {
+            enable: "/api/draft-mode/enable",
+            shareAccess: true,
+          },
+        },
+      }), */
     ],
     releases: {
       enabled: false,
@@ -57,7 +69,7 @@ export const workspaceConfig = defineConfig([
     description: "Development environment for Aksel",
     name: "dev",
     dataset: "development",
-    basePath: "/admin/dev",
+    basePath: "/admin-dev",
     icon: TestFlaskIcon,
     auth: authStore(),
     scheduledPublishing: { enabled: false },
@@ -80,6 +92,15 @@ export const workspaceConfig = defineConfig([
       visionTool(),
       colorInput(),
       nbNOLocale(),
+      presentationTool({
+        resolve,
+        previewUrl: {
+          previewMode: {
+            enable: "/api/draft-mode/enable",
+            shareAccess: true,
+          },
+        },
+      }),
     ],
     releases: {
       enabled: false,
