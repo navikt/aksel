@@ -1,4 +1,4 @@
-import { groq } from "next-sanity";
+// import { groq } from "next-sanity";
 import {
   Page as AkselPage,
   BodyLong,
@@ -8,32 +8,19 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
-import { getClient } from "@/sanity/client.server";
+// import { sanityFetch } from "../_sanity/live";
 import Footer from "../_ui/footer/Footer";
 import { Header } from "../_ui/header/Header";
-import GpFrontpageCard from "./_ui/GpFrontpageCard";
 import { Hero } from "./_ui/Hero";
 import styles from "./_ui/landingpage.module.css";
 
-const temaQuery = groq`*[_type == "gp.tema"] | order(lower(title))`;
+const Page = async () => {
+  // const temaQuery = groq`*[_type == "gp.tema"] | order(lower(title))`;
 
-export const generateStaticParams = async () => {
-  const client = getClient();
+  // const { data: tema } = await sanityFetch({
+  //   query: temaQuery,
+  // });
 
-  const [tema] = await Promise.all([
-    //   client.fetch(pageDataQuery),
-    //   client.fetch(blockQuery),
-    client.fetch(temaQuery),
-  ]);
-
-  // console.log({ tema });
-
-  return {
-    props: tema,
-  };
-};
-
-const Page = ({ page, blocks, tema }) => {
   return (
     <>
       <Header />
@@ -76,13 +63,15 @@ const Page = ({ page, blocks, tema }) => {
                         God praksis
                       </Heading>
                       <BodyLong size="large" className="max-w-3xl">
-                        {page?.god_praksis_intro ??
-                          "Alle som jobber med produktutvikling i Nav sitter på kunnskap og erfaring som er nyttig for andre. Derfor deler vi god praksis med hverandre her."}
+                        Alle som jobber med produktutvikling i Nav sitter på
+                        kunnskap og erfaring som er nyttig for andre. Derfor
+                        deler vi god praksis med hverandre her.
                       </BodyLong>
                     </BoxNew>
 
                     <ul className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
-                      {tema?.map((t) => (
+                      {/*
+                      {tema.map((t) => (
                         <GpFrontpageCard
                           key={t.title}
                           href={`/god-praksis/${t.slug.current}`}
@@ -91,16 +80,10 @@ const Page = ({ page, blocks, tema }) => {
                           {t.title}
                         </GpFrontpageCard>
                       ))}
+                      */}
                     </ul>
                   </VStack>
                 </BoxNew>
-                {blocks && (
-                  <BoxNew paddingInline={{ xs: "2", lg: "18" }}>
-                    {/*
-                  <FrontpageBlock blocks={blocks} />
-                  */}
-                  </BoxNew>
-                )}
               </HGrid>
             </PageBlock>
           </BoxNew>
