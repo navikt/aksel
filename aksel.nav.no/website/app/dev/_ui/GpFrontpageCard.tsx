@@ -1,26 +1,37 @@
 "use client";
 
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import NextLink from "next/link";
+import { urlForImage } from "@/app/_sanity/utils";
 import ErrorBoundary from "@/error-boundary";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
-import { urlFor } from "@/sanity/interface";
 
+// NOTE: could perhaps avoid this "repeated type" we already get
+// from the sanity query results type? (send type down from parent
+// to this component somehow?)
 type GpFrontpageCardProps = {
   children: React.ReactNode;
   href: string;
-  image?: SanityImageSource;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+    };
+    alt: string;
+    _type: "image";
+  };
 };
 
 const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
-  const imageUrl = urlFor(image)?.auto("format").url();
+  const imageUrl = urlForImage(image)?.auto("format").url();
 
   return (
     <li className="flex items-center gap-2 px-2 py-4 sm:gap-4 sm:px-6">
       <div className="relative h-8 w-8 shrink-0 sm:h-12 sm:w-12">
         {imageUrl ? (
           <Image
+            alt={image.alt}
             src={imageUrl}
             decoding="sync"
             layout="fill"

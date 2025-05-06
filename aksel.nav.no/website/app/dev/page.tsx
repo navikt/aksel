@@ -1,4 +1,4 @@
-// import { groq } from "next-sanity";
+import { Image } from "next/image";
 import {
   Page as AkselPage,
   BodyLong,
@@ -8,28 +8,28 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
-// import { sanityFetch } from "../_sanity/live";
+import { sanityFetch } from "../_sanity/live";
+import { GOD_PRAKSIS_TEMA_QUERY } from "../_sanity/queries";
 import Footer from "../_ui/footer/Footer";
 import { Header } from "../_ui/header/Header";
+import GpFrontpageCard from "./_ui/GpFrontpageCard";
 import { Hero } from "./_ui/Hero";
 import styles from "./_ui/landingpage.module.css";
 
 const Page = async () => {
-  // const temaQuery = groq`*[_type == "gp.tema"] | order(lower(title))`;
-
-  // const { data: tema } = await sanityFetch({
-  //   query: temaQuery,
-  // });
+  const { data: tema } = await sanityFetch({
+    query: GOD_PRAKSIS_TEMA_QUERY,
+  });
 
   return (
     <>
-      <Header />
       <AkselPage
         footer={<Footer />}
         footerPosition="belowFold"
         contentBlockPadding="none"
         className={styles.akselPage}
       >
+        <Header />
         <div className={styles.heroLinearBG} />
         <main tabIndex={-1} id="hovedinnhold" className={styles.frontPage}>
           <div className={styles.mainBanner}>
@@ -70,17 +70,15 @@ const Page = async () => {
                     </BoxNew>
 
                     <ul className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
-                      {/*
                       {tema.map((t) => (
                         <GpFrontpageCard
                           key={t.title}
-                          href={`/god-praksis/${t.slug.current}`}
-                          image={t.pictogram}
+                          href={`/god-praksis/${t.slug?.current}`}
+                          image={t.pictogram as Image}
                         >
                           {t.title}
                         </GpFrontpageCard>
                       ))}
-                      */}
                     </ul>
                   </VStack>
                 </BoxNew>
