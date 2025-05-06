@@ -9,6 +9,7 @@ const FontToken = ({ token }: { token: TokenForDocumentationT }) => {
     fontWeight: "var(--ax-font-weight-regular)",
     lineHeight: "var(--ax-font-line-height-heading-xsmall)",
   };
+  let isTokenGroupUnknown = false;
   switch (token.group) {
     case "family":
       fontStyling = {
@@ -34,9 +35,18 @@ const FontToken = ({ token }: { token: TokenForDocumentationT }) => {
           <LineHeightIcon width="32px" height="32px" title={token.name} />
         </VStack>
       );
+    default:
+      console.warn("Unknown token group", token);
+      isTokenGroupUnknown = true;
   }
   return (
-    <VStack as="div" align="center" justify="center" height="100%">
+    <VStack
+      as="div"
+      align="center"
+      justify="center"
+      height="100%"
+      className={isTokenGroupUnknown ? "vk-error" : undefined}
+    >
       <Heading size="medium" style={fontStyling}>
         Aa
       </Heading>

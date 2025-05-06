@@ -21,7 +21,15 @@ const BreakpointToken = ({ token }: { token: TokenForDocumentationT }) => {
     case "2xl":
       return <MonitorIcon width="32px" height="32px" title={token.name} />;
     default:
-      return "";
+      console.warn("Unknown token modifier", token);
+      return (
+        <MonitorIcon
+          width="32px"
+          height="32px"
+          title={token.name}
+          className="vk-error"
+        />
+      );
   }
 };
 

@@ -28,6 +28,7 @@ const TokenExample = ({ token }: { token: TokenForDocumentationT }) => {
         </VStack>
       );
     default:
+      console.warn("Unknown token category", token);
       return (
         <Box.New
           borderColor="neutral-subtle"
@@ -36,6 +37,7 @@ const TokenExample = ({ token }: { token: TokenForDocumentationT }) => {
           borderWidth="1"
           width="32px"
           height="32px"
+          className="vk-error"
         />
       );
   }

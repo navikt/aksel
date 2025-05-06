@@ -50,9 +50,18 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
       );
     }
     default:
-      // eslint-disable-next-line no-console
-      console.log("Unknown token category", token);
-      return null;
+      console.warn("Unknown token category", token);
+      return (
+        <Box.New
+          borderColor="neutral-subtle"
+          borderRadius="full"
+          borderWidth="1"
+          style={{ backgroundColor: token.cssValue }}
+          width="32px"
+          height="32px"
+          className="vk-error"
+        />
+      );
   }
 };
 
