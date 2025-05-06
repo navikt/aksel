@@ -4,7 +4,15 @@ import styles from "./ImageAsSvg.module.css";
 /**
  * Utility function to fetch and format a image as SVG with recoloring.
  */
-async function ImageAsThemedSvg({ url, size }: { url?: string; size: number }) {
+async function ImageAsThemedSvg({
+  url,
+  size,
+  className,
+}: {
+  url?: string;
+  size: number;
+  className?: string;
+}) {
   if (!url) {
     return null;
   }
@@ -29,6 +37,7 @@ async function ImageAsThemedSvg({ url, size }: { url?: string; size: number }) {
       dangerouslySetInnerHTML={{ __html: cleanedSvg }}
       aria-hidden
       style={{ "--website-svg-size": `${size}px` }}
+      className={className}
     />
   );
 }

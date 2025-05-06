@@ -1,89 +1,20 @@
+import { ImageAsThemedSvg } from "@/app/_ui/image-as-svg/ImageAsSvg";
 import styles from "./Designsystemet.module.css";
 
-function DesignsystemetThumbnail() {
+function DesignsystemetThumbnail({ thumbnailUrl }: { thumbnailUrl?: string }) {
+  if (!thumbnailUrl) {
+    return null;
+  }
+
   return (
     <div className={styles.thumbnailContainer}>
       <CubeShape />
-      <Thumbnail />
+      <ImageAsThemedSvg
+        size={280}
+        url={thumbnailUrl}
+        className={styles.thumbnailImage}
+      />
     </div>
-  );
-}
-
-function Thumbnail() {
-  return (
-    <svg
-      viewBox="0 0 289 289"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-      className={styles.thumbnailImage}
-    >
-      <path
-        d="M35.06 91.7645C35.06 82.6549 42.4449 75.27 51.5545 75.27H237.445C246.555 75.27 253.94 82.6549 253.94 91.7646V197.016C253.94 206.125 246.555 213.51 237.445 213.51H51.5546C42.4449 213.51 35.06 206.125 35.06 197.015V91.7645Z"
-        fill="white"
-      />
-      <mask id="path-3-inside-1_1364_1724" fill="white">
-        <path d="M35.06 78.0191C35.06 76.5008 36.2908 75.27 37.8091 75.27H251.191C252.709 75.27 253.94 76.5008 253.94 78.0191V118.601C253.94 120.119 252.709 121.35 251.191 121.35H37.8091C36.2908 121.35 35.06 120.119 35.06 118.601V78.0191Z" />
-      </mask>
-      <path
-        d="M35.06 75.27H253.94H35.06ZM253.94 118.601C253.94 121.71 251.42 124.23 248.311 124.23H40.6891C37.5802 124.23 35.06 121.71 35.06 118.601V118.47C35.06 118.47 36.2908 118.47 37.8091 118.47H251.191C252.709 118.47 253.94 118.47 253.94 118.47V118.601ZM35.06 121.35V75.27V121.35ZM253.94 75.27V121.35V75.27Z"
-        fill="#C0D6E4"
-        mask="url(#path-3-inside-1_1364_1724)"
-      />
-      <path
-        d="M51.1398 92.23L59.0598 100.15L66.9798 92.23"
-        stroke="#417DA0"
-        strokeWidth="2.88"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <rect
-        x="83.62"
-        y="90.79"
-        width="122.4"
-        height="11.52"
-        rx="5.76"
-        fill="#417DA0"
-      />
-      <mask id="path-7-inside-2_1364_1724" fill="white">
-        <path d="M35.06 124.099C35.06 122.581 36.2908 121.35 37.8091 121.35H251.191C252.709 121.35 253.94 122.581 253.94 124.099V164.681C253.94 166.199 252.709 167.43 251.191 167.43H37.8091C36.2908 167.43 35.06 166.199 35.06 164.681V124.099Z" />
-      </mask>
-      <path
-        d="M35.06 121.35H253.94H35.06ZM253.94 164.681C253.94 167.79 251.42 170.31 248.311 170.31H40.6891C37.5802 170.31 35.06 167.79 35.06 164.681V164.55C35.06 164.55 36.2908 164.55 37.8091 164.55H251.191C252.709 164.55 253.94 164.55 253.94 164.55V164.681ZM35.06 167.43V121.35V167.43ZM253.94 121.35V167.43V121.35Z"
-        fill="#C0D6E4"
-        mask="url(#path-7-inside-2_1364_1724)"
-      />
-      <path
-        d="M51.1398 138.31L59.0598 146.23L66.9798 138.31"
-        stroke="#417DA0"
-        strokeWidth="2.88"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <rect
-        x="83.62"
-        y="136.87"
-        width="136.8"
-        height="11.52"
-        rx="5.76"
-        fill="#417DA0"
-      />
-      <path
-        d="M51.1398 184.39L59.0598 192.31L66.9798 184.39"
-        stroke="#417DA0"
-        strokeWidth="2.88"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <rect
-        x="83.62"
-        y="182.95"
-        width="109.44"
-        height="11.52"
-        rx="5.76"
-        fill="#417DA0"
-      />
-    </svg>
   );
 }
 
