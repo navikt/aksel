@@ -160,47 +160,47 @@ const BREAKPOINT_ROLES: BreakpointRoleT[] = [
 const TOKEN_CATEGORIES: TokenCategoryT[] = [
   {
     id: "backgroundColor",
-    title: "Background colors",
+    title: "Bakgrunnsfarger",
     description: "Farge på bakgrunner.",
     roles: COLOR_ROLES,
   },
   {
     id: "borderColor",
-    title: "Border colors",
+    title: "Kantlinjefarger",
     description: "Farge på border/stroke.",
     roles: COLOR_ROLES,
   },
   {
     id: "textColor",
-    title: "Text colors",
+    title: "Tekstfarger",
     description: "Farge på tekst og ikoner.",
     roles: COLOR_ROLES,
   },
   {
     id: "shadow",
-    title: "Shadows",
+    title: "Skygger",
     description:
       "Skyggestil som brukes på svevende elementer (popovers og modaler).",
   },
   {
     id: "space",
-    title: "Spacing",
+    title: "Avstander",
     description: "Avstander som brukes til padding, margin og gap.",
   },
   {
     id: "radius",
-    title: "Radius",
+    title: "Radiuser",
     description: "Hjørneavrundinger som brukes på elementer.",
   },
   {
     id: "font",
-    title: "Fonts",
-    description: "Byggeklossene til fonstilene.",
+    title: "Fontstiler",
+    description: "Byggeklossene til fontstilene.",
     roles: FONT_ROLES,
   },
   {
     id: "breakpoint",
-    title: "Breakpoints",
+    title: "Brekkpunkter",
     description:
       "Skjermbreddeverdier som kan utløse endring i layout og innhold.",
     roles: BREAKPOINT_ROLES,

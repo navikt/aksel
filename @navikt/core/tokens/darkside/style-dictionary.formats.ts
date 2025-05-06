@@ -83,6 +83,30 @@ const formatCategory = (token: TransformedToken): string | undefined => {
   }
 };
 
+const formatCategoryTitle = (token: TransformedToken): string | undefined => {
+  const category = formatCategory(token);
+  switch (category) {
+    case "backgroundColor":
+      return "Bakgrunnsfarger";
+    case "borderColor":
+      return "Kantlinjefarger";
+    case "textColor":
+      return "Tekstfarger";
+    case "shadow":
+      return "Skygger";
+    case "space":
+      return "Avstander";
+    case "radius":
+      return "Radiuser";
+    case "font":
+      return "Fontstiler";
+    case "breakpoint":
+      return "Brekkpunkter";
+    default:
+      return category;
+  }
+};
+
 const formatRawValue = (token: TransformedToken): string => {
   if (token.type === "global-breakpoint") {
     return `@media (${token.group === "desktop first" ? "max" : "min"}-width: ${
@@ -140,6 +164,7 @@ export const formatDOCS: FormatFn = async ({ dictionary }) => {
           rawType: token.attributes?.type,
           group: token.group,
           category: formatCategory(token),
+          categoryTitle: formatCategoryTitle(token),
           role: formatRole(token.group),
           modifier: formatModifier(name, token.type),
         }) + (index === dictionary.allTokens.length - 1 ? "" : ",")
