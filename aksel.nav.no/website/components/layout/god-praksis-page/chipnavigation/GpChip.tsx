@@ -27,7 +27,7 @@ export function GpChip(props: GpChipProps) {
         },
       )}
       onClick={() => {
-        props?.onClick?.();
+        props.onClick?.();
         umamiTrack("god-praksis-chip", {
           type: props.type,
           url: asPath,
