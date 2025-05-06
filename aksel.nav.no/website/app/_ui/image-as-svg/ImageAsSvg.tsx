@@ -25,7 +25,7 @@ async function ImageAsThemedSvg({ url, size }: { url?: string; size: number }) {
 
   return (
     <div
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: We purify the SVG string, so its safer to use locally here.
       dangerouslySetInnerHTML={{ __html: cleanedSvg }}
       aria-hidden
       style={{ "--website-svg-size": `${size}px` }}

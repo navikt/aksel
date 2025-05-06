@@ -86,21 +86,20 @@ function DesignsystemetOverviewCard({
         </Bleed>
 
         <LinkCardTitle as="h2">
-          <LinkCardAnchor href={`/${page?.slug}`}>
-            <HStack as="span" gap="space-8" align="center">
-              <span>{page?.heading} </span>
-              {statusTagWithoutStable && (
-                <Tag
-                  size="small"
-                  variant="success"
-                  data-color-role={statusTag?.colorRole}
-                >
-                  {/* TODO: Remove underline from tag */}
-                  {statusTagWithoutStable.text}
-                </Tag>
-              )}
-            </HStack>
-          </LinkCardAnchor>
+          <HStack as="span" gap="space-8" align="center">
+            <LinkCardAnchor href={`/${page?.slug}`}>
+              {page?.heading}
+            </LinkCardAnchor>
+            {statusTagWithoutStable && (
+              <Tag
+                size="small"
+                variant="success"
+                data-color-role={statusTag?.colorRole}
+              >
+                {statusTagWithoutStable.text}
+              </Tag>
+            )}
+          </HStack>
         </LinkCardTitle>
       </VStack>
     </LinkCard>

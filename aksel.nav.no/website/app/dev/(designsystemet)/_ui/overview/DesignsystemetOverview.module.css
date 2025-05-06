@@ -33,6 +33,11 @@
   background: var(--ax-bg-moderate);
 }
 
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .overviewImageWrapper {
+  background: var(--ax-bg-soft);
+}
+
 .overviewCardHeading {
   display: flex;
   align-items: center;
