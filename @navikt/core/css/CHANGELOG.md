@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.21.1
+
+### Patch Changes
+
+- Timeline: Add focus-markings to Popover dialogs. ([#3768](https://github.com/navikt/aksel/pull/3768))
+
 ## 7.21.0
 
 ### Patch Changes
