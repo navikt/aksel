@@ -16,6 +16,7 @@ import {
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { GodPraksisTaxonomyTag } from "@/app/dev/(god-praksis)/_ui/GodPraksisTaxonomyTag";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
 import {
@@ -116,8 +117,12 @@ export default async function Page() {
                 <Link
                   href={`/god-praksis/${tema.slug}`}
                   as={NextLink}
-                  data-umami-event="navigere"
-                  data-umami-event-kilde="god praksis forside"
+                  onClick={() =>
+                    umamiTrack("navigere", {
+                      kilde: "god praksis forside",
+                      url: `/god-praksis/${tema.slug}`,
+                    })
+                  }
                   data-link-card-anchor
                   data-color-role="brand-blue"
                 >

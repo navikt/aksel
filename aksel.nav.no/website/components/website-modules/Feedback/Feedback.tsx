@@ -13,6 +13,7 @@ import {
   Textarea,
   VStack,
 } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { AuthUser, UserStateT } from "@/auth/auth.types";
 import { useAuth } from "@/auth/useAuth";
 import { SlackFeedbackResponse } from "@/slack";
@@ -64,30 +65,28 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
           setAPIError(res.error);
           setState("error");
 
-          window.umami &&
-            umami.track("skjema validering feilet", {
-              skjemanavn: "slack-feedback",
-              skjemaId: sanityDocumentId,
-            });
+          umamiTrack("skjema validering feilet", {
+            skjemanavn: "slack-feedback",
+            skjemaId: sanityDocumentId,
+          });
         } else {
           setFormError(null);
           setState("feedbackSent");
 
-          window.umami &&
-            umami.track("skjema fullfort", {
-              skjemanavn: "slack-feedback",
-              skjemaId: sanityDocumentId,
-            });
+          umamiTrack("skjema fullfort", {
+            skjemanavn: "slack-feedback",
+            skjemaId: sanityDocumentId,
+          });
         }
       })
       .catch(() => {
         setAPIError("unknownError");
         setState("error");
-        window.umami &&
-          umami.track("skjema validering feilet", {
-            skjemanavn: "slack-feedback",
-            skjemaId: sanityDocumentId,
-          });
+
+        umamiTrack("skjema validering feilet", {
+          skjemanavn: "slack-feedback",
+          skjemaId: sanityDocumentId,
+        });
       });
   };
 

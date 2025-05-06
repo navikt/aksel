@@ -25,6 +25,7 @@ import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { GodPraksisFeedback } from "@/app/dev/(god-praksis)/_ui/feedback/GodPraksisFeedback";
 import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { abbrName, dateStr } from "@/utils";
@@ -114,22 +115,30 @@ export default async function Page(props: Props) {
           {`Oppdatert ${await dateStr(verifiedDate)}`}
         </BodyShort>
         <HStack gap="space-8" marginBlock="space-16 space-48">
-          {pageData.undertema?.map(({ tema, title }) => (
-            <NextLink
-              key={title}
-              className={styles.pageUndertemaTag}
-              href={`/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
-                title ?? "",
-              )}`}
-              data-link-card-anchor
-              data-umami-event="navigere"
-              data-umami-event-kilde="god praksis artikkel chips"
-            >
-              <TagFillIcon aria-hidden fontSize="1.25rem" />
-              <span className={styles.pageUndertemaTagText}>{title}</span>
-              <LinkCardArrow />
-            </NextLink>
-          ))}
+          {pageData.undertema?.map(({ tema, title }) => {
+            const href = `/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
+              title ?? "",
+            )}`;
+
+            return (
+              <NextLink
+                key={title}
+                className={styles.pageUndertemaTag}
+                href={href}
+                data-link-card-anchor
+                onClick={() =>
+                  umamiTrack("navigere", {
+                    kilde: "god praksis artikkel chips",
+                    url: href,
+                  })
+                }
+              >
+                <TagFillIcon aria-hidden fontSize="1.25rem" />
+                <span className={styles.pageUndertemaTagText}>{title}</span>
+                <LinkCardArrow />
+              </NextLink>
+            );
+          })}
         </HStack>
       </div>
       <TableOfContents toc={toc} />
@@ -166,8 +175,12 @@ export default async function Page(props: Props) {
                       <Link
                         variant="neutral"
                         href={item.slug?.current}
-                        data-umami-event="navigere"
-                        data-umami-event-kilde="les ogsaa"
+                        onClick={() =>
+                          umamiTrack("navigere", {
+                            kilde: "les ogsaa",
+                            url: item.slug?.current ?? "",
+                          })
+                        }
                       >
                         {item.heading}
                       </Link>

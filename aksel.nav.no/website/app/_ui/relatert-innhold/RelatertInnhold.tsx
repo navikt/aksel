@@ -3,6 +3,7 @@ import { Link } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
 function RelatertInnhold(
   props: ExtractPortableComponentProps<"relatert_innhold">,
@@ -32,8 +33,12 @@ function RelatertInnhold(
             <Link
               as={NextLink}
               href={getHref(pageLink)}
-              data-umami-event="navigere"
-              data-umami-event-kilde="relatert innhold"
+              onClick={() =>
+                umamiTrack("navigere", {
+                  kilde: "relatert innhold",
+                  url: getHref(pageLink),
+                })
+              }
               variant="neutral"
             >
               {pageLink.title || "Mangler tittel"}

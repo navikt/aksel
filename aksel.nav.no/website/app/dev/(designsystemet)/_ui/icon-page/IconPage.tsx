@@ -15,6 +15,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { DesignsystemetEyebrow } from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { FigmaIcon } from "@/assets/Icons";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
@@ -63,8 +64,12 @@ function IconPage({
             >
               <Link
                 variant="subtle"
-                data-umami-event="navigere"
-                data-umami-event-kilde="ikonside"
+                onClick={() =>
+                  umamiTrack("navigere", {
+                    kilde: "ikonside",
+                    url: "https://www.figma.com/community/file/1214869602572392330",
+                  })
+                }
               >
                 <FigmaIcon /> <span>Figma</span>
               </Link>
@@ -79,8 +84,12 @@ function IconPage({
             >
               <Link
                 variant="subtle"
-                data-umami-event="navigere"
-                data-umami-event-kilde="ikonside"
+                onClick={() =>
+                  umamiTrack("navigere", {
+                    kilde: "ikonside",
+                    url: "/god-praksis/artikler/tilgjengelig-ikonbruk",
+                  })
+                }
               >
                 <BrailleIcon aria-hidden fontSize="1.5rem" />{" "}
                 <span>Tilgjengelighet</span>
@@ -92,10 +101,13 @@ function IconPage({
               variant="subtle"
               href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
               download="Ikonpakke"
-              data-umami-event="last ned"
-              data-umami-event-tema="ikon"
-              data-umami-event-type="zip"
-              data-umami-event-tittel="ikonpakke"
+              onClick={() =>
+                umamiTrack("last ned", {
+                  tema: "ikon",
+                  type: "zip",
+                  tittel: "ikonpakke",
+                })
+              }
             >
               <DownloadIcon fontSize="1.5rem" aria-hidden /> Last ned ikonpakke
             </Link>
