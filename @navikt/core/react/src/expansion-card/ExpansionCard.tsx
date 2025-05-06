@@ -48,7 +48,7 @@ interface ExpansionCardComponent
 }
 
 interface ExpansionCardCommonProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onToggle"> {
   children: React.ReactNode;
   /**
    * Callback for when Card is toggled open/closed
