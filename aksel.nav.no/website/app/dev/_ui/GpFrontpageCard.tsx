@@ -12,13 +12,13 @@ import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
 type GpFrontpageCardProps = {
   children: React.ReactNode;
   href: string;
-  image: {
+  image?: {
     asset?: {
       _ref: string;
       _type: "reference";
       _weak?: boolean;
     };
-    alt: string;
+    alt?: string;
     _type: "image";
   };
 };
@@ -31,7 +31,7 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
       <div className="relative h-8 w-8 shrink-0 sm:h-12 sm:w-12">
         {imageUrl ? (
           <Image
-            alt={image.alt}
+            alt={image?.alt ?? ""}
             src={imageUrl}
             decoding="sync"
             layout="fill"

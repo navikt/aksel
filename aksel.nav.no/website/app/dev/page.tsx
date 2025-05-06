@@ -1,4 +1,3 @@
-import { Image } from "next/image";
 import {
   Page as AkselPage,
   BodyLong,
@@ -74,7 +73,7 @@ const Page = async () => {
                         <GpFrontpageCard
                           key={t.title}
                           href={`/god-praksis/${t.slug?.current}`}
-                          image={t.pictogram as Image}
+                          image={t.pictogram}
                         >
                           {t.title}
                         </GpFrontpageCard>

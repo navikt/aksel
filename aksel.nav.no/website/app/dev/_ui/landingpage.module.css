@@ -104,10 +104,6 @@
   background: linear-gradient(180deg, transparent 0%, var(--ax-bg-default) 52%);
 }
 
-.godPraksisCard {
-  height: 620px;
-}
-
 .akselPage {
   position: relative;
   z-index: 10;
