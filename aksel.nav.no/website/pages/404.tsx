@@ -9,12 +9,15 @@ import {
   Page,
   VStack,
 } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 
 export default function NotFound() {
   useEffect(() => {
-    window.umami && umami.track("404", { url: window.location.pathname });
+    umamiTrack("404", {
+      url: window.location.pathname,
+    });
   }, []);
 
   return (

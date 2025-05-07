@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import React, { useContext, useId, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import {
   DesignsystemSidebarSectionT,
   SidebarGroupedPagesT,
@@ -121,14 +122,17 @@ function SidebarSubNav(props: SidebarGroupedPagesT) {
   return (
     <li>
       <button
-        onClick={() => setOpen(!open)}
         className={cl(styles.navListSubButton, {
           [styles.navListNotch]: isSectionActive && !open,
         })}
         data-state={isSectionActive ? "active" : "inactive"}
         aria-expanded={open}
-        data-umami-event="sidebar-subnav"
-        data-umami-event-kategori={title}
+        onClick={() => {
+          setOpen(!open);
+          umamiTrack("sidebar-subnav", {
+            kategori: title,
+          });
+        }}
       >
         {title}
         <ChevronDownIcon aria-hidden />
@@ -164,8 +168,12 @@ function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
         })}
         prefetch={false}
         data-current={active}
-        data-umami-event="navigere"
-        data-umami-event-kilde="sidebar"
+        onClick={() =>
+          umamiTrack("navigere", {
+            kilde: "sidebar",
+            url: `/${page.slug}`,
+          })
+        }
       >
         {page.heading}
         <StatusTag size="xsmall" status={page.tag} />

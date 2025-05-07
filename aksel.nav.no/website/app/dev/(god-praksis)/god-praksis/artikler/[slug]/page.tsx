@@ -114,22 +114,27 @@ export default async function Page(props: Props) {
           {`Oppdatert ${await dateStr(verifiedDate)}`}
         </BodyShort>
         <HStack gap="space-8" marginBlock="space-16 space-48">
-          {pageData.undertema?.map(({ tema, title }) => (
-            <NextLink
-              key={title}
-              className={styles.pageUndertemaTag}
-              href={`/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
-                title ?? "",
-              )}`}
-              data-link-card-anchor
-              data-umami-event="navigere"
-              data-umami-event-kilde="god praksis artikkel chips"
-            >
-              <TagFillIcon aria-hidden fontSize="1.25rem" />
-              <span className={styles.pageUndertemaTagText}>{title}</span>
-              <LinkCardArrow />
-            </NextLink>
-          ))}
+          {pageData.undertema?.map(({ tema, title }) => {
+            const href = `/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
+              title ?? "",
+            )}`;
+
+            return (
+              <NextLink
+                key={title}
+                className={styles.pageUndertemaTag}
+                href={href}
+                data-link-card-anchor
+                data-umami-event="navigere"
+                data-umami-event-kilde="god praksis artikkel chips"
+                data-umami-event-url={href}
+              >
+                <TagFillIcon aria-hidden fontSize="1.25rem" />
+                <span className={styles.pageUndertemaTagText}>{title}</span>
+                <LinkCardArrow />
+              </NextLink>
+            );
+          })}
         </HStack>
       </div>
       <TableOfContents toc={toc} />
@@ -168,6 +173,7 @@ export default async function Page(props: Props) {
                         href={item.slug?.current}
                         data-umami-event="navigere"
                         data-umami-event-kilde="les ogsaa"
+                        data-umami-event-url={item.slug?.current ?? ""}
                       >
                         {item.heading}
                       </Link>

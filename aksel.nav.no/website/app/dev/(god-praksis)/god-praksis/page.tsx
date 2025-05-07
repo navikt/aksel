@@ -116,8 +116,6 @@ export default async function Page() {
                 <Link
                   href={`/god-praksis/${tema.slug}`}
                   as={NextLink}
-                  data-umami-event="navigere"
-                  data-umami-event-kilde="god praksis forside"
                   data-link-card-anchor
                   data-color-role="brand-blue"
                 >

@@ -4,6 +4,7 @@ import cl from "clsx";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { SidebarGroupedPagesT } from "@/types";
 import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
@@ -23,14 +24,17 @@ function DesignsystemSidebarSubNav(
   return (
     <li>
       <button
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          setOpen(!open);
+          umamiTrack("sidebar-subnav", {
+            kategori: title,
+          });
+        }}
         className={cl(styles.navListSubButton, {
           [styles.navListNotch]: isSectionActive && !open,
         })}
         data-state={isSectionActive ? "active" : "inactive"}
         aria-expanded={open}
-        data-umami-event="sidebar-subnav"
-        data-umami-event-kategori={title}
       >
         {title}
         <ChevronDownIcon aria-hidden className={styles.navListSubButtonIcon} />

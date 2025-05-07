@@ -95,9 +95,10 @@ function LinkBlock({ heading, links }: LinkBlockPropsT) {
             <Link
               className={styles.footerLink}
               href={link.url}
+              prefetch={false}
               data-umami-event="navigere"
               data-umami-event-kilde="footer"
-              prefetch={false}
+              data-umami-event-url={link.url}
             >
               {link.icon}
               {link.text}
