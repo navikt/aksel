@@ -11,6 +11,7 @@ export const spaceTokenConfig = {
       acc[px] = {
         value: pxToRem(px),
         type: "global-space",
+        comment: "TODO: Sjur fyller ut",
       };
       return acc;
     },
