@@ -79,26 +79,30 @@ function DesignsystemetOverviewCard({
   return (
     <LinkCard data-color-role={statusTag?.colorRole} autoLayout={false}>
       <VStack gap="space-16">
-        <Bleed marginInline="space-20" marginBlock="space-16 0">
-          <span className={styles.overviewImageWrapper}>
-            <ImageAsThemedSvg url={imageUrl} size={200} />
-          </span>
-        </Bleed>
+        <Box position="relative" asChild>
+          <Bleed marginInline="space-20" marginBlock="space-16 0">
+            <span className={styles.overviewImageWrapper}>
+              <ImageAsThemedSvg url={imageUrl} size={200} />
+            </span>
+            {statusTagWithoutStable && (
+              <Box asChild position="absolute" bottom="space-8" left="space-8">
+                <Tag
+                  size="small"
+                  variant="alt1-filled"
+                  data-color-role={statusTag?.colorRole}
+                >
+                  {statusTagWithoutStable.text}
+                </Tag>
+              </Box>
+            )}
+          </Bleed>
+        </Box>
 
         <LinkCardTitle as="h2">
           <HStack as="span" gap="space-8" align="center">
             <LinkCardAnchor href={`/${page?.slug}`}>
               {page?.heading}
             </LinkCardAnchor>
-            {statusTagWithoutStable && (
-              <Tag
-                size="small"
-                variant="success"
-                data-color-role={statusTag?.colorRole}
-              >
-                {statusTagWithoutStable.text}
-              </Tag>
-            )}
           </HStack>
         </LinkCardTitle>
       </VStack>
