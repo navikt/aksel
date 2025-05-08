@@ -69,11 +69,7 @@ export const Hero = () => {
     <>
       <div className="z-20 pb-28">
         <div className={styles.hero}>
-          <Heading
-            level="1"
-            size="xlarge"
-            className="leading-[1.2] text-deepblue-700 sm:text-[3.5rem]"
-          >
+          <Heading level="1" size="xlarge" className={styles.heroText}>
             Aksel gjør det enklere å lage digitale produkter
           </Heading>
           <div className={styles.cubeWrapper}>

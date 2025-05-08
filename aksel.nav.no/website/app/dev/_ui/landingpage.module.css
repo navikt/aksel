@@ -44,26 +44,6 @@
   position: relative;
 }
 
-@media (min-width: 640px) {
-  .hero {
-    padding-inline: 1.5rem;
-    margin-top: 9rem;
-    max-width: 632px;
-  }
-}
-
-@property --c-1 {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: transparent;
-}
-
-@property --c-2 {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: transparent;
-}
-
 .heroLinearBG {
   position: absolute;
   z-index: -2;
@@ -71,32 +51,85 @@
   height: 900px;
   width: 100%;
   transition: background 1s;
-  animation: 20s ease infinite rainbow-hype;
-  background: linear-gradient(196deg, var(--c-1) 8.43%, var(--c-2) 23.44%, transparent 70.98%);
+  animation: 60s ease infinite rainbow-hype;
+  background: linear-gradient(196deg, var(--gradient-1) 8.43%, var(--gradient-2) 24%, transparent 70.98%);
 
+  /* temporary colors */
+  --aksel-brand-logo: #004367;
+  --aksel-brand-teal-200: #2a7c75; /* also lighter? */
   --aksel-brand-teal-300: #b7eee4;
   --aksel-brand-teal-400: #90e1d2;
+  --aksel-brand-teal-800: #41ab9d;
+  --meta-purple-subtleA: #c380fe;
+  --brand-blue-moderate: #005d96; /* lighter than 00253c? */
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .heroLinearBG {
+  background: linear-gradient(196deg, var(--gradient-dark) 0%, transparent 30%);
+}
+
+@property --gradient-1 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --gradient-2 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --gradient-dark {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --hero-text {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+.heroText {
+  color: var(--aksel-brand-logo);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .heroText {
+  animation: 60s ease infinite rainbow-hype;
+  color: var(--hero-text);
 }
 
 @keyframes rainbow-hype {
   0% {
-    --c-1: var(--ax-bg-meta-purple-moderate-pressed);
-    --c-2: var(--ax-bg-meta-purple-moderate-hover);
+    --gradient-1: var(--ax-bg-meta-purple-moderate-pressed);
+    --gradient-2: var(--ax-bg-meta-purple-moderate-hover);
+    --gradient-dark: var(--meta-purple-subtleA);
+    --hero-text: var(--ax-text-meta-purple-subtle);
   }
 
   33% {
-    --c-1: var(--aksel-brand-teal-400);
-    --c-2: var(--aksel-brand-teal-300);
+    --gradient-1: var(--aksel-brand-teal-400);
+    --gradient-2: var(--aksel-brand-teal-300);
+    --gradient-dark: var(--aksel-brand-teal-200);
+    --hero-text: var(--aksel-brand-teal-800);
   }
 
   66% {
-    --c-1: var(--ax-bg-brand-blue-moderate-pressed);
-    --c-2: var(--ax-bg-brand-blue-moderate-hover);
+    --gradient-1: var(--ax-bg-brand-blue-moderate-pressed);
+    --gradient-2: var(--ax-bg-brand-blue-moderate-hover);
+    --gradient-dark: var(--brand-blue-moderate);
+    --hero-text: var(--ax-text-brand-blue-subtle);
   }
 
   100% {
-    --c-1: var(--ax-bg-meta-purple-moderate-pressed);
-    --c-2: var(--ax-bg-meta-purple-moderate-hover);
+    --gradient-1: var(--ax-bg-meta-purple-moderate-pressed);
+    --gradient-2: var(--ax-bg-meta-purple-moderate-hover);
+    --gradient-dark: var(--meta-purple-subtleA);
+    --hero-text: var(--ax-text-meta-purple-subtle);
   }
 }
 
@@ -107,4 +140,16 @@
 .akselPage {
   position: relative;
   z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .hero {
+    padding-inline: 1.5rem;
+    margin-top: 9rem;
+    max-width: 632px;
+  }
+
+  .heroText {
+    font-size: 3.5rem;
+  }
 }

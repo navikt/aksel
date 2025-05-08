@@ -10,6 +10,40 @@
     position: absolute;
     color: white;
   }
+
+  --aksel-brand-teal-800: #41ab9d;
+}
+
+@property --cube-stroke-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@keyframes rainbow-hype {
+  0% {
+    --cube-stroke-color: var(--ax-text-meta-purple-subtle);
+  }
+
+  33% {
+    --cube-stroke-color: var(--aksel-brand-teal-800);
+  }
+
+  66% {
+    --cube-stroke-color: var(--ax-text-brand-blue-subtle);
+  }
+
+  100% {
+    --cube-stroke-color: var(--ax-text-meta-purple-subtle);
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .animated {
+  & svg {
+    animation: 60s ease infinite rainbow-hype;
+    color: var(--cube-stroke-color);
+  }
 }
 
 .animated1 {
