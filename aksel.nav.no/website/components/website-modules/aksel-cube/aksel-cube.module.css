@@ -45,6 +45,7 @@
   & svg {
     animation: 60s ease infinite rainbow-hype;
     color: var(--cube-stroke-color);
+    opacity: 0.2; /* missing subtleA colors? */
   }
 }
 
