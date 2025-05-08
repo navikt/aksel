@@ -1,10 +1,14 @@
 "use client";
 
 import { useDraftModeEnvironment } from "next-sanity/hooks";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useTransition } from "react";
 import styles from "./DisableDraftMode.module.css";
+import { disableDraftModeAction } from "./actions";
 
 function DisableDraftMode() {
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
   const environment = useDraftModeEnvironment();
   const pathname = usePathname();
 
@@ -13,16 +17,24 @@ function DisableDraftMode() {
    * and no need to show it inside the admin panel.
    */
   if (
-    (environment !== "live" && environment !== "unknown") ||
+    (environment !== "live" &&
+      environment !== "unknown" &&
+      environment !== "presentation-window") ||
     pathname?.startsWith("/admin")
   ) {
     return null;
   }
 
+  const disable = () =>
+    startTransition(async () => {
+      await disableDraftModeAction();
+      router.refresh();
+    });
+
   return (
-    <a href="/api/draft-mode/disable" className={styles.disableDraftMode}>
-      Avslutt forhåndsvisning
-    </a>
+    <button type="button" onClick={disable} className={styles.disableDraftMode}>
+      {pending ? "Avslutter forhåndsvisning" : "Avslutt forhåndsvisning"}
+    </button>
   );
 }
 
