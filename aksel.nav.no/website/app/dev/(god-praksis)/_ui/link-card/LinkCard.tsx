@@ -75,6 +75,11 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
    * @default "default"
    */
   variant?: "default" | "subtle";
+  /**
+   * Whether to show animated arrow icon
+   * @default true
+   */
+  showArrow?: boolean;
 };
 
 const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
@@ -85,6 +90,7 @@ const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
       size = "small",
       weight = "semibold",
       variant = "default",
+      showArrow = true,
     }: LinkCardTitleProps,
     forwardedRef,
   ) => {
@@ -100,7 +106,7 @@ const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
         )}
       >
         {children}
-        <LinkCardArrow />
+        {showArrow && <LinkCardArrow />}
       </Heading>
     );
   },
@@ -292,7 +298,7 @@ export {
   LinkCardArrow,
   LinkCardDescription,
   LinkCardFooter,
-  LinkCardTitle,
   LinkCardIcon,
   LinkCardImage,
+  LinkCardTitle,
 };
