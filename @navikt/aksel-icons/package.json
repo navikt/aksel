@@ -85,7 +85,7 @@
     "rehype-parse": "9.0.1",
     "tsc-alias": "1.8.8",
     "tsx": "^4.19.1",
-    "typescript": "5.5.4",
+    "typescript": "5.8.3",
     "unified": "11.0.5",
     "vitest": "^2.1.9"
   }
