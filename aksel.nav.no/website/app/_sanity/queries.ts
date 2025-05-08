@@ -228,6 +228,10 @@ const GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY = defineQuery(
   }`,
 );
 
+const GOD_PRAKSIS_TEMA_QUERY = defineQuery(
+  `*[_type == "gp.tema"] | order(lower(title))`,
+);
+
 /* ---------------------------- Standalone pages ---------------------------- */
 
 const SIDE_ARTICLE_BY_SLUG_QUERY = defineQuery(`
@@ -285,6 +289,7 @@ export {
   GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
+  GOD_PRAKSIS_TEMA_QUERY,
   DOCUMENT_BY_ID_FOR_SLACK_QUERY,
   SIDE_ARTICLE_BY_SLUG_QUERY,
   PRINSIPPER_BY_SLUG_QUERY,
