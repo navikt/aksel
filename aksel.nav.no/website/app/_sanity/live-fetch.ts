@@ -1,3 +1,4 @@
+import "server-only";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
@@ -7,6 +8,7 @@ import {
   SITEMAP_ARTICLES_BY_TYPE_QUERY,
   SITEMAP_LANDINGPAGES_QUERY,
 } from "@/app/_sanity/queries";
+import { PAGE_ROUTES } from "@/app/routing-config";
 import { allArticleDocuments } from "@/sanity/config";
 
 async function fetchAllSanityPages(): Promise<
@@ -58,7 +60,6 @@ async function fetchAllSanityPages(): Promise<
     }),
   ]);
 
-  /* { path: "ikoner", lastMod: undefined }, */
   const paths = [
     { slug: "", lastMod: landingPageData.frontpage },
     { slug: "/god-praksis", lastMod: landingPageData.godpraksis },
@@ -84,6 +85,20 @@ async function fetchAllSanityPages(): Promise<
 
   dsTemplatesData?.overview_pages?.forEach((overviewPage) => {
     paths.push({ slug: `/monster-maler/${overviewPage}`, lastMod: null });
+  });
+
+  Object.values(PAGE_ROUTES).forEach((category) => {
+    category.root.forEach((page) =>
+      paths.push({ slug: `/${page.slug}`, lastMod: null }),
+    );
+
+    if (category?.nested) {
+      Object.values(category.nested).forEach((nestedCategory) => {
+        nestedCategory.forEach((page) =>
+          paths.push({ slug: `/${page.slug}`, lastMod: null }),
+        );
+      });
+    }
   });
 
   return paths;
