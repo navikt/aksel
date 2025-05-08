@@ -18,13 +18,8 @@ const Example = () => {
       </DatePicker>
       {selectedRange && (
         <Box paddingBlock="4 0">
-          <div>
-            {selectedRange?.from &&
-              selectedRange.from.toISOString().split("T")[0]}
-          </div>
-          <div>
-            {selectedRange?.to && selectedRange.to.toISOString().split("T")[0]}
-          </div>
+          <div>{selectedRange?.from?.toISOString().split("T")[0]}</div>
+          <div>{selectedRange?.to?.toISOString().split("T")[0]}</div>
         </Box>
       )}
     </div>

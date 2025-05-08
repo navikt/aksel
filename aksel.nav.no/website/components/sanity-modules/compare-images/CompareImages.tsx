@@ -36,7 +36,7 @@ const CompareImages = ({ node }: CompareImagesProps) => {
 
   const [isDragging, setIsDragging] = useState(false);
 
-  const syncPosition = () => {
+  const syncPosition = useCallback(() => {
     if (!containerRef.current || !handleRef.current) {
       return;
     }
@@ -54,7 +54,8 @@ const CompareImages = ({ node }: CompareImagesProps) => {
 
     handleRef.current.ariaValueNow = rounded.toString();
     handleRef.current.ariaValueText = `${rounded}%`;
-  };
+  }, []);
+
   /**
    * Update the position based on the cursor's current position within container.
    */
@@ -83,7 +84,7 @@ const CompareImages = ({ node }: CompareImagesProps) => {
       internalPosition.current = Number(clampedPercentageX.toFixed(2));
       syncPosition();
     },
-    [],
+    [syncPosition],
   );
 
   const handlePointerMove = useCallback(

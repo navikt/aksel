@@ -54,7 +54,7 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     document.addEventListener("keydown", listener);
 
     return () => document.removeEventListener("keydown", listener);
-  }, [inputRef, open, setOpen]);
+  }, [open]);
 
   const openSearch = () => {
     setOpen(true);
@@ -75,7 +75,7 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
         });
         umamiTrack("sok", {});
       }),
-    [startTransition],
+    [],
   );
 
   const resetSearch = useCallback(() => {

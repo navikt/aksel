@@ -46,9 +46,9 @@ function getStatus(
           continue;
         }
 
-        let match: RegExpExecArray | null;
+        let match: RegExpExecArray | null = regex.exec(fileSrc);
 
-        while ((match = regex.exec(fileSrc))) {
+        while (match) {
           const { row, column } = getWordPositionInFile(fileSrc, match.index);
 
           StatusStore.add({
@@ -64,6 +64,8 @@ function getStatus(
             fileName,
             name: match[0],
           });
+
+          match = regex.exec(fileSrc);
         }
       }
     }
@@ -73,8 +75,9 @@ function getStatus(
       "gm",
     );
 
-    let legacyMatch: RegExpExecArray | null;
-    while ((legacyMatch = legacyRegex.exec(fileSrc)) !== null) {
+    let legacyMatch: RegExpExecArray | null = legacyRegex.exec(fileSrc);
+
+    while (legacyMatch !== null) {
       const { row, column } = getWordPositionInFile(fileSrc, legacyMatch.index);
 
       StatusStore.add({
@@ -86,6 +89,8 @@ function getStatus(
         fileName,
         name: legacyMatch[0],
       });
+
+      legacyMatch = legacyRegex.exec(fileSrc);
     }
 
     for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
@@ -97,8 +102,9 @@ function getStatus(
         if (!regex) {
           continue;
         }
-        let match: RegExpExecArray | null;
-        while ((match = regex.exec(fileSrc))) {
+        let match: RegExpExecArray | null = regex.exec(fileSrc);
+
+        while (match) {
           const { row, column } = getWordPositionInFile(fileSrc, match.index);
 
           StatusStore.add({
@@ -109,6 +115,8 @@ function getStatus(
             fileName,
             name: match[0],
           });
+
+          match = regex.exec(fileSrc);
         }
       }
     }

@@ -42,7 +42,6 @@ const Page = () => {
       case "rejected":
         setUserPreference("tracking_no");
         break;
-      case "undecided":
       default:
         setUserPreference("");
         break;

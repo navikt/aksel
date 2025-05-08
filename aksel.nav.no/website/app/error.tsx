@@ -7,7 +7,7 @@ import { logger } from "@navikt/next-logger";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
-export default function Error({
+export default function ErrorPage({
   error,
 }: {
   error: Error & { digest?: string };

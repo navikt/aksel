@@ -62,7 +62,6 @@ export default function transformer(file: FileInfo, api: API) {
       src = code;
 
       root = j(code);
-      continue;
     }
   }
 
