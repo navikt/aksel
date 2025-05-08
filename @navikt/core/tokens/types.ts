@@ -90,7 +90,7 @@ export type SpaceKeys = `space-${(typeof spaceInPixels)[number]}`;
 
 export type ShadowKeys = "dialog";
 
-export type BorderRadiusKeys = "small" | "medium" | "large" | "xlarge" | "full";
+export type BorderRadiusKeys = "2" | "4" | "8" | "12" | "full";
 
 export type BreakPointKeys =
   | "xs"
@@ -134,6 +134,13 @@ export type FontLineHeightKeys =
 export type FontWeightKeys = "weight-bold" | "weight-regular";
 
 /* Legacy tokens */
+export type LegacyBorderRadiusKeys =
+  | "small"
+  | "medium"
+  | "large"
+  | "xlarge"
+  | "full";
+
 export type LegacyShadowKeys =
   | "xsmall"
   | "small"

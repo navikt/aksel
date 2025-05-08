@@ -2,23 +2,23 @@ import { type BorderRadiusKeys } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 export const radiusTokenConfig = {
-  "border-radius": {
-    small: {
+  radius: {
+    "2": {
       value: "2px",
       type: "global-radius",
       comment: "TODO: Sjur fyller ut",
     },
-    medium: {
+    "4": {
       value: "4px",
       type: "global-radius",
       comment: "TODO: Sjur fyller ut",
     },
-    large: {
+    "8": {
       value: "8px",
       type: "global-radius",
       comment: "TODO: Sjur fyller ut",
     },
-    xlarge: {
+    "12": {
       value: "12px",
       type: "global-radius",
       comment: "TODO: Sjur fyller ut",
@@ -30,8 +30,5 @@ export const radiusTokenConfig = {
     },
   },
 } satisfies {
-  "border-radius": Record<
-    BorderRadiusKeys,
-    StyleDictionaryToken<"global-radius">
-  >;
+  radius: Record<BorderRadiusKeys, StyleDictionaryToken<"global-radius">>;
 };

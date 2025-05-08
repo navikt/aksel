@@ -1,5 +1,4 @@
 import { mergeConfigs, tokensWithPrefix } from "./tokens.util";
-import { radiusTokenConfig } from "./tokens/border-radius";
 import { breakpointTokenConfig } from "./tokens/breakpoint";
 import {
   globalDarkTokens,
@@ -9,6 +8,7 @@ import { semanticTokensForAllRoles } from "./tokens/colors/semantic-role.tokens"
 import { semanticRootTokens } from "./tokens/colors/semantic-root.tokens";
 import { fontTokenConfig } from "./tokens/font";
 import { opacityTokenConfig } from "./tokens/opacity";
+import { radiusTokenConfig } from "./tokens/radius";
 import { shadowTokenConfig } from "./tokens/shadow";
 import { spaceTokenConfig } from "./tokens/space";
 
