@@ -57,7 +57,6 @@ function generateSidebar(
           .sort(sortIndex)
           .sort(sortDeprecated),
       }))
-      /* .filter((category) => !(!category.pages || category.pages.length === 0)) */
       .map((category) => {
         const hasOverviewPage = overviewPageList?.some(
           (page) => category.value === page,
