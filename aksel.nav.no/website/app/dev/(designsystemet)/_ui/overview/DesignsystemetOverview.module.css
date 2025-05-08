@@ -30,7 +30,12 @@
   aspect-ratio: 16 / 10;
   border-start-start-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   border-start-end-radius: calc(var(--ax-border-radius-xlarge) - 1px);
-  background: var(--ax-bg-moderate);
+  background: var(--ax-bg-soft);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .overviewImageWrapper {
+  background: var(--ax-bg-neutral-soft);
 }
 
 .overviewCardHeading {

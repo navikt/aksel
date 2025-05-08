@@ -72,16 +72,13 @@
   align-items: center;
   aspect-ratio: 24 / 9;
   border-radius: 16px;
-  background-color: var(--ax-bg-brand-blue-moderate);
+  background-color: var(--ax-bg-moderate);
   margin-block-start: var(--ax-space-28);
   overflow: hidden;
 }
 
 .thumbnailImage {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 10;
 }
 
 .thumbnailCube {
