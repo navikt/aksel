@@ -15,6 +15,8 @@ function DesignsystemSidebarSubNav(
   const { pages, title, layout } = props;
   const pathName = usePathname();
 
+  const isDarkside = title.toLowerCase() === "darkside";
+
   const isSectionActive = pages.some((page) => {
     return pathName?.split("#")[0] === `/${page.slug}`;
   });
@@ -22,7 +24,7 @@ function DesignsystemSidebarSubNav(
   const [open, setOpen] = useState(isSectionActive);
 
   return (
-    <li>
+    <li data-type={isDarkside ? "darkside" : "neutral"}>
       <button
         onClick={() => {
           setOpen(!open);
