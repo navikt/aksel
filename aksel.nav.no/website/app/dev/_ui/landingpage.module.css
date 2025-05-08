@@ -94,12 +94,13 @@
 }
 
 .heroText {
+  /* animation added here to both light & dark, to keep them "in sync" */
+  animation: 60s ease infinite rainbow-hype;
   color: var(--aksel-brand-logo);
 }
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .heroText {
-  animation: 60s ease infinite rainbow-hype;
   color: var(--hero-text);
 }
 
