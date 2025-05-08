@@ -43,17 +43,6 @@ type Routes = {
 };
 
 const PAGE_ROUTES: Routes = {
-  komponenter: {
-    title: "Komponenter",
-    _type: "komponent_artikkel",
-    root: [
-      {
-        heading: "Ikoner",
-        slug: "komponenter/ikoner",
-        tag: "ready",
-      },
-    ],
-  },
   grunnleggende: {
     title: "Grunnleggende",
     _type: "ds_artikkel",
@@ -67,6 +56,17 @@ const PAGE_ROUTES: Routes = {
         },
       ],
     },
+  },
+  komponenter: {
+    title: "Komponenter",
+    _type: "komponent_artikkel",
+    root: [
+      {
+        heading: "Ikoner",
+        slug: "komponenter/ikoner",
+        tag: "ready",
+      },
+    ],
   },
   templates: {
     title: "Mønster og Maler",

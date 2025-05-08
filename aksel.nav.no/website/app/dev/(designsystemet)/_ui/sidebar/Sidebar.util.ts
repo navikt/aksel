@@ -26,6 +26,7 @@ function generateSidebar(
     )?.overview_pages;
 
     const categories = sanityCategoryLookup(type);
+
     const filteredInput = input.filter(
       (doc) => doc._type === PAGE_ROUTES[type]._type,
     );
@@ -56,7 +57,7 @@ function generateSidebar(
           .sort(sortIndex)
           .sort(sortDeprecated),
       }))
-      .filter((category) => !(!category.pages || category.pages.length === 0))
+      /* .filter((category) => !(!category.pages || category.pages.length === 0)) */
       .map((category) => {
         const hasOverviewPage = overviewPageList?.some(
           (page) => category.value === page,
@@ -76,45 +77,23 @@ function generateSidebar(
           });
         }
 
-        if (type === "grunnleggende" && category.value === "darkside") {
-          pages.push({
-            heading: "Tokens darkside",
-            slug: `${type}/${category.value}/design-tokens`,
-            tag: "ready",
-          });
+        if (
+          PAGE_ROUTES[type].nested &&
+          category.value in PAGE_ROUTES[type].nested
+        ) {
+          pages.push(...PAGE_ROUTES[type].nested[category.value]);
         }
 
         return {
           ...category,
           pages,
         };
-      });
-
-    // TODO: Remove this when we have published any darkside pages from Sanity, so the entry above is activated
-    /* if (
-      type === "grunnleggende" &&
-      !groupedPages.some((page) => page.value === "darkside")
-    ) {
-      groupedPages.push({
-        title: "Darkside",
-        value: "darkside",
-        pages: [
-          {
-            heading: "Design tokens",
-            slug: `${type}/darkside/design-tokens`,
-            tag: "ready",
-          },
-        ],
-      });
-    } */
+      })
+      .filter((category) => category.pages.length > 0);
 
     return {
       label: PAGE_ROUTES[type].title,
-      links: [
-        /* ...PAGE_ROUTES[type]., */
-        ...standalonePages,
-        ...groupedPages,
-      ],
+      links: [...PAGE_ROUTES[type].root, ...standalonePages, ...groupedPages],
     };
   });
 }
