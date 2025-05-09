@@ -42,10 +42,6 @@
 
 .navListGroup {
   border-radius: var(--ax-border-radius-medium);
-
-  &[data-type="darkside"] {
-    background-color: var(--ax-bg-brand-magenta-moderate);
-  }
 }
 
 .navListGroupLabel {

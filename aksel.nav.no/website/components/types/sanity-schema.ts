@@ -169,7 +169,10 @@ export type ArticleListT = {
   _id: string;
   heading: string;
   slug: { current: string };
-  kategori: (typeof komponentKategorier)[number]["value"];
+  kategori:
+    | (typeof komponentKategorier)[number]["value"]
+    | (typeof grunnleggendeKategorier)[number]["value"]
+    | (typeof templatesKategorier)[number]["value"];
   status: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     unsafe?: boolean;

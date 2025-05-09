@@ -157,6 +157,7 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
 const GOD_PRAKSIS_ALL_TEMA_QUERY =
   defineQuery(`*[_type == "gp.tema"] | order(lower(title)){
   title,
+  _updatedAt,
   description,
   pictogram,
   "slug": slug.current,
@@ -262,6 +263,22 @@ const DOCUMENT_BY_ID_FOR_SLACK_QUERY = defineQuery(`*[_id == $id][0]{
       "contacts": undertema[]->tema->contacts[]->email
     }`);
 
+/* --------------------------------- Sitemap -------------------------------- */
+const SITEMAP_LANDINGPAGES_QUERY = defineQuery(`
+{
+      "frontpage": *[_type == "aksel_forside"][0]._updatedAt,
+      "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,
+      "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,
+}
+  `);
+
+const SITEMAP_ARTICLES_BY_TYPE_QUERY = defineQuery(`
+  *[_type in $doctypes]{
+    "slug": slug.current,
+    _updatedAt
+  }
+  `);
+
 /* --------------------------------- Exports -------------------------------- */
 export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
@@ -288,4 +305,6 @@ export {
   DOCUMENT_BY_ID_FOR_SLACK_QUERY,
   SIDE_ARTICLE_BY_SLUG_QUERY,
   PRINSIPPER_BY_SLUG_QUERY,
+  SITEMAP_LANDINGPAGES_QUERY,
+  SITEMAP_ARTICLES_BY_TYPE_QUERY,
 };

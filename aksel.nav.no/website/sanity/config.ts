@@ -53,7 +53,7 @@ export const komponentKategorier = [
   { title: "Core", value: "core" },
   { title: "Alpha", value: "alpha" },
   { title: "Avviklet", value: "legacy" },
-];
+] as const;
 
 export const grunnleggendeKategorier = [
   { title: "Introduksjon", value: "introduksjon" },
@@ -62,13 +62,13 @@ export const grunnleggendeKategorier = [
   { title: "Darkside", value: "darkside" },
   { title: "Guider", value: "guider" },
   { title: "Kode", value: "kode" },
-];
+] as const;
 
 export const templatesKategorier = [
   { title: "Brev", value: "brev" },
   { title: "Støtte", value: "stotte" },
   { title: "Søknadsdialog", value: "soknadsdialog" },
-];
+] as const;
 
 export const bloggKategorier = [
   { title: "Nytt fra teamene", value: "nytt-fra-teamene" },
