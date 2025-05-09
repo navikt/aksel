@@ -11,6 +11,7 @@ import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { Label } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import copy from "../util/copy";
+import { mergeRefs } from "../util/hooks/useMergeRefs";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 export interface CopyButtonProps
@@ -96,6 +97,11 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     const [active, setActive] = useState(false);
     const timeoutRef = useRef<number>();
     const translate = useI18n("CopyButton");
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const mergedRef = mergeRefs([buttonRef, ref]);
+    const [fixedSize, setFixedSize] = useState<
+      { width: number; height: number } | undefined
+    >(undefined);
 
     const { cn } = useRenameCSS();
 
@@ -105,6 +111,15 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       return () => {
         timeoutRef.current && clearTimeout(timeoutRef.current);
       };
+    }, []);
+
+    useEffect(() => {
+      if (buttonRef?.current) {
+        setFixedSize({
+          height: buttonRef?.current.offsetHeight,
+          width: buttonRef?.current.offsetWidth,
+        });
+      }
     }, []);
 
     const handleClick = () => {
@@ -148,7 +163,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     if (themeContext) {
       return (
         <Button
-          ref={ref}
+          ref={mergedRef}
           type="button"
           className={cn("navds-copybutton", className)}
           {...rest}
@@ -158,6 +173,11 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           icon={copyIcon}
           data-active={active}
           size={size}
+          style={
+            fixedSize
+              ? { height: fixedSize.height, width: fixedSize.width }
+              : undefined
+          }
         >
           {text ? (active ? activeString : text) : null}
         </Button>
@@ -166,10 +186,11 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 
     return (
       <button
-        ref={ref}
+        ref={mergedRef}
         type="button"
         {...rest}
         className={cn(
+          "tull",
           "navds-copybutton",
           className,
           `navds-copybutton--${size}`,
@@ -181,6 +202,11 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           },
         )}
         onClick={composeEventHandlers(onClick, handleClick)}
+        style={
+          fixedSize
+            ? { minHeight: fixedSize.height, minWidth: fixedSize.width }
+            : undefined
+        }
       >
         <span className={cn("navds-copybutton__content")}>
           {iconPosition === "left" && copyIcon}
