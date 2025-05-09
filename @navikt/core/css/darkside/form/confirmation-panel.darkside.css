@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: var(--ax-space-12);
   padding: var(--ax-space-16);
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   border: 1px solid var(--ax-border-default);
   background-color: var(--ax-bg-moderate);
   transition: background-color linear 100ms;
@@ -25,8 +25,8 @@
     border-left: 8px solid;
     border-color: orange;
     forced-color-adjust: none;
-    border-start-start-radius: calc(var(--ax-border-radius-large) - 1px);
-    border-end-start-radius: calc(var(--ax-border-radius-large) - 1px);
+    border-start-start-radius: calc(var(--ax-radius-8) - 1px);
+    border-end-start-radius: calc(var(--ax-radius-8) - 1px);
   }
 
   .aksel-confirmation-panel--checked .aksel-confirmation-panel__inner::before {

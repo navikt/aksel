@@ -7,7 +7,7 @@
 
   background-color: var(--__axc-modal-bg);
   border: 1px solid var(--ax-border-neutral-subtleA);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   box-shadow: var(--ax-shadow-dialog);
   padding: 0;
   position: fixed;

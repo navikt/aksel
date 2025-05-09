@@ -13,8 +13,8 @@
   }
 
   & .aksel-chat__bubble {
-    border-radius: var(--ax-border-radius-xlarge);
-    border-bottom-right-radius: var(--ax-border-radius-small);
+    border-radius: var(--ax-radius-12);
+    border-bottom-right-radius: var(--ax-radius-2);
   }
 }
 
@@ -22,7 +22,7 @@
 .aksel-chat__avatar {
   align-items: center;
   background-color: var(--ax-bg-raised);
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   border: 1px solid var(--ax-border-neutral-subtleA);
   color: var(--ax-text-neutral);
   display: flex;
@@ -60,8 +60,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--ax-space-8);
-  border-radius: var(--ax-border-radius-xlarge);
-  border-bottom-left-radius: var(--ax-border-radius-small);
+  border-radius: var(--ax-radius-12);
+  border-bottom-left-radius: var(--ax-radius-2);
   border: 1px solid var(--ax-border-neutral-subtleA);
 }
 

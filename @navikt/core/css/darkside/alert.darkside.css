@@ -1,5 +1,5 @@
 .aksel-alert {
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   border: 1px solid;
   padding: var(--ax-space-20);
   display: flex;
