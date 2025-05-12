@@ -1,11 +1,11 @@
 import { describe, expect, test } from "vitest";
-import { radiusTokenConfig } from "../tokens/border-radius";
 import {
   globalDarkTokens,
   globalLightTokens,
 } from "../tokens/colors/global.tokens";
 import { semanticTokensForAllRoles } from "../tokens/colors/semantic-role.tokens";
 import { semanticRootTokens } from "../tokens/colors/semantic-root.tokens";
+import { radiusTokenConfig } from "../tokens/radius";
 import { spaceTokenConfig } from "../tokens/space";
 
 const configKeysWithGroup = ["value", "type", "group"];
