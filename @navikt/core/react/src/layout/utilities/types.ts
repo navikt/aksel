@@ -1,7 +1,9 @@
 import type {
+  BorderRadiusKeys,
   BreakPointKeys,
   LegacyBgColorKeys,
   LegacyBorderColorKeys,
+  LegacyBorderRadiusKeys,
   LegacyShadowKeys,
   LegacySpacingKeys,
   LegacySurfaceColorKeys,
@@ -19,6 +21,7 @@ export type BreakpointsAlias = Extract<
 >;
 
 export type SpacingScale = LegacySpacingKeys | SpaceKeys;
+export type BorderRadiusScale = LegacyBorderRadiusKeys | BorderRadiusKeys;
 
 export type SpaceDelimitedAttribute<T extends string> =
   | T

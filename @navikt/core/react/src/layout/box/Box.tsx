@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import { type LegacyBorderRadiusKeys } from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
 import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { omit } from "../../util";
@@ -13,6 +12,7 @@ import { getResponsiveProps } from "../utilities/css";
 import {
   BackgroundColorToken,
   BorderColorToken,
+  BorderRadiusScale,
   ResponsiveProp,
   ShadowToken,
   SpaceDelimitedAttribute,
@@ -37,11 +37,11 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
    * or an object of radius tokens for different breakpoints.
    * @example
    * borderRadius='full'
-   * borderRadius='0 full large small'
-   * borderRadius={{xs: 'small large', sm: '0', md: 'large', lg: 'full'}}
+   * borderRadius='0 full 12 2'
+   * borderRadius={{xs: '2 12', sm: '0', md: '12', lg: 'full'}}
    */
   borderRadius?: ResponsiveProp<
-    SpaceDelimitedAttribute<LegacyBorderRadiusKeys | "0">
+    SpaceDelimitedAttribute<BorderRadiusScale | "0">
   >;
   /**
    * CSS `border-width` property. If this is not set there will be no border.
