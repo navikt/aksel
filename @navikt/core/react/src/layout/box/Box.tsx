@@ -114,7 +114,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
       if (
         process.env.NODE_ENV !== "production" &&
         themeContext &&
-        (background || borderColor || shadow || borderRadius)
+        (background || borderColor || shadow)
       ) {
         let errorText = ``;
         if (background) {
@@ -127,7 +127,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
           errorText += `\n- shadow: "${shadow}"`;
         }
         throw new Error(
-          `<Box /> with properties 'background', 'borderColor',  'shadow' or 'borderRadius' cannot be used with Aksel <Theme /> (darkmode-support). \nTo continue using these properties, migrate to '<Box.New>' (BoxNew for RSC)\nUpdate these props:${errorText}`,
+          `<Box /> with properties 'background', 'borderColor' or 'shadow' cannot be used with Aksel <Theme /> (darkmode-support). \nTo continue using these properties, migrate to '<Box.New>' (BoxNew for RSC)\nUpdate these props:${errorText}`,
         );
       }
 
