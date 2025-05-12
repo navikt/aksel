@@ -9,6 +9,7 @@ import {
 } from "@navikt/aksel-icons";
 import { Box, HStack } from "@navikt/ds-react";
 import styles from "./examples.module.css";
+import { ExampleThemingSwitch } from "./withDsExample.theme";
 
 type withDsT = {
   /**
@@ -89,6 +90,7 @@ export const withDsExample = (
         })}
         style={{ background: getBg(background) }}
       >
+        <ExampleThemingSwitch />
         {showBreakpoints && <BreakpointText />}
         <div
           id="ds-example"

@@ -68,7 +68,7 @@ function KodeEksemplerIFrame(props: {
   };
 
   const demoVariant = dir.variant;
-  const iframeUrl = `/${demoVariant}/${dir.title}/${current?.navn}`;
+  const iframeUrl = `/${demoVariant}/${dir.title}/${current?.navn}?darkside=true`;
 
   return (
     <div>
