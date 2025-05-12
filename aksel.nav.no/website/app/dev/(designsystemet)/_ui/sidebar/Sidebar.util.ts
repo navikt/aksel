@@ -91,6 +91,20 @@ function generateSidebar(
       })
       .filter((category) => category.pages.length > 0);
 
+    if (type === "grunnleggende") {
+      groupedPages.push({
+        title: "Endringslogg",
+        value: "endringslogg",
+        pages: [
+          {
+            heading: "2025",
+            slug: `${type}/endringslogg/2025`,
+            tag: "ready",
+          },
+        ],
+      });
+    }
+
     return {
       label: PAGE_ROUTES[type].title,
       links: [...PAGE_ROUTES[type].root, ...standalonePages, ...groupedPages],
