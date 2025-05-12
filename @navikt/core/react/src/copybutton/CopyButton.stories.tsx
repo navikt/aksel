@@ -151,6 +151,14 @@ export const Texts: Story = {
           activeText="Kopierte XYZ"
         />
       </div>
+      <div>
+        <CopyButton
+          copyText="3.14"
+          text="Kopier en veldig lang tekst som ikke får plass"
+          activeText="Kopierte XYZ"
+          iconPosition="right"
+        />
+      </div>
     </div>
   ),
 };
