@@ -95,7 +95,7 @@ export const successSemanticTokenConfig = {
       comment:
         "Standard farge for tekst og ikoner med rollen success. Godkjent på alle bakgrunner unntatt strong.",
     },
-    "success-icon": {
+    "success-decoration": {
       value: "{ax.success.600.value}",
       type: "color",
       group: "text.success",

@@ -70,7 +70,7 @@ export type DefaultTextColorKeys = "logo";
 export type TextColorKeys =
   | SemanticColorRoles
   | `${SemanticColorRoles}-subtle`
-  | `${SemanticColorRoles}-icon`
+  | `${SemanticColorRoles}-decoration`
   | `${SemanticColorRoles}-contrast`;
 
 export type BorderColorKeys = "focus";
