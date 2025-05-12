@@ -177,12 +177,12 @@ export default async function Page(props: Props) {
     }
 
     if (undertemaParam && innholdstypeParam) {
-      if (!articlesMap["all"]) {
+      if (!articlesMap.all) {
         const title = `${
           innholdstypeTitleMap[article.innholdstype] ?? article.innholdstype
         } for ${article.undertema.toLocaleLowerCase()}`;
 
-        articlesMap["all"] = {
+        articlesMap.all = {
           title,
           description: undefined,
           ariaLabel: title,
@@ -190,7 +190,7 @@ export default async function Page(props: Props) {
         };
       }
 
-      articlesMap["all"].articles.push(article);
+      articlesMap.all.articles.push(article);
     } else {
       const key = article[groupByField];
 
@@ -262,7 +262,7 @@ export default async function Page(props: Props) {
                       <li key={article.slug}>
                         <LinkCard>
                           <LinkCardTitle as="h2">
-                            <LinkCardAnchor href={`/${article.slug}` ?? ""}>
+                            <LinkCardAnchor href={`/${article.slug}`}>
                               {article.heading}
                             </LinkCardAnchor>
                           </LinkCardTitle>

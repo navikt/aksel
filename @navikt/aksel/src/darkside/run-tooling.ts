@@ -87,8 +87,9 @@ export async function runTooling(
   getStatus(filepaths);
 
   // Task execution loop
-  let task: TaskName;
-  while ((task = await getNextTask()) !== "exit") {
+  let task: TaskName = await getNextTask();
+
+  while (task !== "exit") {
     console.info("\n\n");
 
     try {
@@ -96,6 +97,7 @@ export async function runTooling(
     } catch (error) {
       program.error(chalk.red("Error:", error.message));
     }
+    task = await getNextTask();
   }
 
   process.exit(0);

@@ -181,6 +181,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
           <a
             href="/darkside"
             target="_blank"
+            rel="noreferrer"
             className="rounded p-1 underline hover:decoration-2 focus:shadow-focus-inverted focus:outline-none"
           >
             Vi trenger testere fra team i Nav for darkmode og theming!

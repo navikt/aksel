@@ -64,7 +64,7 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
         <CustomPortableText
           value={data?.intro?.body as PortableTextBlock[]}
           typoConfig={{
-            type: "short",
+            type: "long",
             size: "large",
           }}
         />

@@ -32,7 +32,7 @@ function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
   /* https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch */
   const [renderThemeToggle, setRenderThemeToggle] = useState(false);
 
-  useEffect(() => setRenderThemeToggle(true), [setTheme]);
+  useEffect(() => setRenderThemeToggle(true), []);
 
   return (
     <div className={styles.mobileNavMenuIntialView}>

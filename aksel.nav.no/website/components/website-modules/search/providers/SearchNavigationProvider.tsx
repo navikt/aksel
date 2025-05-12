@@ -28,10 +28,7 @@ export const SearchNavigationProvider = ({
 
   /* Add a small delay to get a precieved smoother navigation */
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
     const handler = () => {
-      timeout && clearTimeout(timeout);
-
       setTimeout(() => close(), 100);
     };
     router.events.on("beforeHistoryChange", handler);
