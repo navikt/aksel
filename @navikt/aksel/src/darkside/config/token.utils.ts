@@ -1,4 +1,4 @@
-function generateRoundedTwTags(name: string, addNewPrefix = false) {
+function generateRoundedTwTags(name: string) {
   const options = [
     "s",
     "e",
@@ -17,7 +17,7 @@ function generateRoundedTwTags(name: string, addNewPrefix = false) {
   ];
 
   return `rounded-${name},${options
-    .map((option) => `rounded-${option}-${addNewPrefix ? "ax-" : ""}${name}`)
+    .map((option) => `rounded-${option}-${name}`)
     .join(",")}`;
 }
 
