@@ -990,42 +990,42 @@ const colors = {
   "icon-alt-3": {
     ref: "deepblue-500",
     raw: "rgba(0, 91, 130, 1)",
-    replacement: "text-brand-blue-icon",
+    replacement: "text-brand-blue-decoration",
   },
   "icon-alt-2": {
     ref: "limegreen-700",
     raw: "rgba(127, 137, 0, 1)",
-    replacement: "text-meta-lime-icon",
+    replacement: "text-meta-lime-decoration",
   },
   "icon-alt-1": {
     ref: "purple-500",
     raw: "rgba(99, 70, 137, 1)",
-    replacement: "text-meta-purple-icon",
+    replacement: "text-meta-purple-decoration",
   },
   "icon-info": {
     ref: "lightblue-800",
     raw: "rgba(35, 107, 125, 1)",
-    replacement: "text-info-icon",
+    replacement: "text-info-decoration",
   },
   "icon-warning": {
     ref: "orange-600",
     raw: "rgba(199, 115, 0, 1)",
-    replacement: "text-warning-icon",
+    replacement: "text-warning-decoration",
   },
   "icon-danger": {
     ref: "red-500",
     raw: "rgba(195, 0, 0, 1)",
-    replacement: "text-danger-icon",
+    replacement: "text-danger-decoration",
   },
   "icon-success": {
     ref: "green-500",
     raw: "rgba(6, 137, 58, 1)",
-    replacement: "text-success-icon",
+    replacement: "text-success-decoration",
   },
   "icon-action": {
     ref: "blue-500",
     raw: "rgba(0, 103, 197, 1)",
-    replacement: "text-accent-icon",
+    replacement: "text-accent-decoration",
   },
   "icon-action-on-action-subtle": {
     ref: "blue-600",
