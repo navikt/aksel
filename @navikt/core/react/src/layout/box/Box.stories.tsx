@@ -357,6 +357,29 @@ export const BorderRadius = () => (
       padding="10"
       borderWidth="2"
       borderColor="border-strong"
+      borderRadius="2 4 8 12"
+    >
+      Box
+    </Box>
+    <Box
+      background="bg-subtle"
+      padding="10"
+      borderWidth="2"
+      borderColor="border-strong"
+      borderRadius={{
+        xs: "2 4 8 12",
+        md: "4 2 8 full",
+        lg: "12 8",
+      }}
+    >
+      Box
+    </Box>
+
+    <Box
+      background="bg-subtle"
+      padding="10"
+      borderWidth="2"
+      borderColor="border-strong"
       borderRadius={{
         xs: "small medium large xlarge",
         md: "medium small large full",
@@ -408,6 +431,7 @@ export const BoxNewDarksideLight: Story = {
       background="accent-moderate"
       shadow="dialog"
       borderColor="brand-magenta-strong"
+      borderRadius="12"
       borderWidth="2"
       padding="5"
       paddingInline="20"
@@ -424,6 +448,7 @@ export const BoxNewDarksideDark: Story = {
       background="accent-moderate"
       shadow="dialog"
       borderColor="brand-magenta-strong"
+      borderRadius="12"
       borderWidth="2"
       padding="5"
       paddingInline="20"

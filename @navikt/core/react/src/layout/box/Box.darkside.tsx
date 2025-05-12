@@ -129,8 +129,8 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
         ...getResponsiveProps(
           "ax",
           "box",
-          "border-radius",
-          "border-radius",
+          "radius",
+          "radius",
           borderRadius,
           false,
           ["0"],
@@ -149,7 +149,7 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
               "navds-box-bg": background,
               "navds-box-border-color": borderColor,
               "navds-box-border-width": borderWidth,
-              "navds-box-border-radius": borderRadius,
+              "navds-box-radius": borderRadius,
               "navds-box-shadow": shadow,
             })}
           >

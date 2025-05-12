@@ -153,8 +153,8 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
         ...getResponsiveProps(
           prefix,
           "box",
-          "border-radius",
-          "border-radius",
+          "radius",
+          "radius",
           borderRadius,
           false,
           ["0"],
