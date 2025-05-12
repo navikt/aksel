@@ -105,7 +105,7 @@
 .aksel-timeline__period--success {
   background: var(--ax-bg-success-moderate);
   border: solid 1px var(--ax-border-success);
-  color: var(--ax-text-success-icon);
+  color: var(--ax-text-success-decoration);
 
   &.aksel-timeline__period--clickable:hover {
     background: var(--ax-bg-success-moderate-hover);
@@ -122,7 +122,7 @@
 .aksel-timeline__period--warning {
   background: var(--ax-bg-warning-moderate);
   border: solid 1px var(--ax-border-warning);
-  color: var(--ax-text-warning-icon);
+  color: var(--ax-text-warning-decoration);
 
   &.aksel-timeline__period--clickable:hover {
     background: var(--ax-bg-warning-moderate-hover);
@@ -139,7 +139,7 @@
 .aksel-timeline__period--danger {
   background: var(--ax-bg-danger-moderate);
   border: solid 1px var(--ax-border-danger);
-  color: var(--ax-text-danger-icon);
+  color: var(--ax-text-danger-decoration);
 
   &.aksel-timeline__period--clickable:hover {
     background: var(--ax-bg-danger-moderate-hover);
@@ -156,7 +156,7 @@
 .aksel-timeline__period--info {
   background: var(--ax-bg-info-moderate);
   border: solid 1px var(--ax-border-info);
-  color: var(--ax-text-info-icon);
+  color: var(--ax-text-info-decoration);
 
   &.aksel-timeline__period--clickable:hover {
     background: var(--ax-bg-info-moderate-hover);
@@ -173,7 +173,7 @@
 .aksel-timeline__period--neutral {
   background: var(--ax-bg-neutral-moderate);
   border: solid 1px var(--ax-border-neutral);
-  color: var(--ax-text-neutral-icon);
+  color: var(--ax-text-neutral-decoration);
 
   &.aksel-timeline__period--clickable:hover {
     background: var(--ax-bg-neutral-moderate-hover);
