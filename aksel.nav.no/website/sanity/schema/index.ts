@@ -24,6 +24,9 @@ export const schema: SchemaPluginOptions = {
     document.GrunnleggendeLandingSide,
     document.GrunnleggendeArtikkel,
 
+    /* Endringslogg */
+    document.EndringsloggArtikkel,
+
     /* Møster og Maler */
     document.TemplatesLandingSide,
     document.TemplatesArtikkel,

@@ -1,5 +1,5 @@
 import { StructureBuilder } from "sanity/structure";
-import { HouseIcon, TokenIcon } from "@navikt/aksel-icons";
+import { FileXMarkIcon, HouseIcon, TokenIcon } from "@navikt/aksel-icons";
 import { grunnleggendeKategorier } from "@/sanity/config";
 import { Panes } from "./panes";
 import { listDraftArticles, listOutdatedArticles } from "./structure.util";
@@ -23,6 +23,14 @@ export function grunnleggendeStructure(S: StructureBuilder) {
 
           S.divider(),
           ...Panes("ds_artikkel", [...grunnleggendeKategorier], S),
+          S.listItem()
+            .title(`Endringslogg`)
+            .icon(FileXMarkIcon)
+            .child(
+              S.documentTypeList("ds_endringsloggartikkel")
+                .title("Endringslogg")
+                .schemaType("ds_endringsloggartikkel"),
+            ),
         ]),
     );
 }

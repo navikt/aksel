@@ -7,6 +7,7 @@ export * from "./god-praksis/tema";
 export * from "./god-praksis/innholdstype";
 export * from "./god-praksis/undertema";
 export * from "./grunnleggende/artikkel";
+export * from "./grunnleggende/endringsloggartikkel";
 export * from "./grunnleggende/landingsside";
 export * from "./komponenter/artikkel";
 export * from "./komponenter/kode-eksempler";

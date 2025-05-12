@@ -2,7 +2,7 @@ import { ClientConfig } from "@sanity/client";
 
 export const SANITY_PROJECT_ID = "hnbe3yhs";
 export const SANITY_API_VERSION = "2024-04-11";
-export let SANITY_DATASET = "production";
+export let SANITY_DATASET = "development";
 
 if (process.env.LOCAL_DATASET_OVERRIDE === "development") {
   SANITY_DATASET = "development";
