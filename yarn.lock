@@ -5690,7 +5690,7 @@ __metadata:
     prettier: "npm:3.1.1"
     react: "npm:^18.0.0"
     rehype-parse: "npm:9.0.1"
-    tsc-alias: "npm:1.8.8"
+    tsc-alias: "npm:1.8.16"
     tsx: "npm:^4.19.1"
     typescript: "npm:5.8.3"
     unified: "npm:11.0.5"
@@ -5789,7 +5789,7 @@ __metadata:
     react-router-dom: "npm:^6.3.0"
     rimraf: "npm:6.0.1"
     swr: "npm:^2.3.2"
-    tsc-alias: "npm:1.8.8"
+    tsc-alias: "npm:1.8.16"
     tsx: "npm:^4.19.1"
     typescript: "npm:5.8.3"
     vitest: "npm:^2.1.9"
@@ -28333,19 +28333,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsc-alias@npm:1.8.8":
-  version: 1.8.8
-  resolution: "tsc-alias@npm:1.8.8"
+"tsc-alias@npm:1.8.16":
+  version: 1.8.16
+  resolution: "tsc-alias@npm:1.8.16"
   dependencies:
     chokidar: "npm:^3.5.3"
     commander: "npm:^9.0.0"
+    get-tsconfig: "npm:^4.10.0"
     globby: "npm:^11.0.4"
     mylas: "npm:^2.1.9"
     normalize-path: "npm:^3.0.0"
     plimit-lit: "npm:^1.2.6"
   bin:
     tsc-alias: dist/bin/index.js
-  checksum: 10/145d7bb23a618e1136c8addd4b4ed23a1d503a37d3fc5b3698a993fea9331180a68853b0e78ff50fb3fb7ed95d4996a2d82f77395814bbd1c40adee8a9151d90
+  checksum: 10/a4c1988e645c0bbb993629f1cde79189549db35c2aeff7aa23bbf0864437f6dd15f91de3b51fe05cbd53e56ed32529710cc22855a8925c637357ab4c5e4f862a
   languageName: node
   linkType: hard
 
