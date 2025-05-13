@@ -1,4 +1,5 @@
 import React from "react";
+import { BodyLong, Heading, Tag, VStack } from "@navikt/ds-react";
 
 export const metadata = {
   title: "Designsystemet",
@@ -10,9 +11,23 @@ export const metadata = {
 
 const Page = async () => {
   return (
-    <>
-      <main></main>
-    </>
+    <VStack as="main" align="center" gap="space-80">
+      <VStack gap="space-48" paddingBlock="space-24">
+        <VStack gap="space-16" width="600px" align="center">
+          <VStack gap="space-8">
+            <Tag variant="success">Ny versjon av Aksel er ute (darkside)</Tag>
+            <Heading level="1" size="xlarge">
+              Aksel designsystemet
+            </Heading>
+          </VStack>
+          <BodyLong size="large" as="p" align="center">
+            Aksel er designsystemet til Navs produktutvikling, en samling med
+            designtokens, dokumenterte komponenter, maler og guider. En komplett
+            plattform for å lage førsteklasses grensesnitt
+          </BodyLong>
+        </VStack>
+      </VStack>
+    </VStack>
   );
 };
 
