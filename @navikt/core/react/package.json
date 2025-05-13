@@ -12,7 +12,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/aksel.git"
+    "url": "git+https://github.com/navikt/aksel.git",
+    "directory": "@navikt/core/react"
   },
   "sideEffects": false,
   "typings": "./esm/index.d.ts",
