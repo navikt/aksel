@@ -1,0 +1,41 @@
+"use client";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Search } from "@navikt/ds-react";
+
+const SearchField = () => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  function handleSearch(query: string) {
+    const params = new URLSearchParams(searchParams?.toString());
+    if (query) {
+      params.set("changelogQuery", query);
+    } else {
+      params.delete("changelogQuery");
+    }
+    replace(`${pathname}${params.toString() ? `?${params.toString()}` : ""}`);
+  }
+
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault(); // Search performed onChange, so just prevent
+  }
+
+  return (
+    <form role="search" onSubmit={onSubmit}>
+      <Search
+        label="Søk i endringsloggen"
+        defaultValue={searchParams?.get("changelogQuery") || ""}
+        onChange={handleSearch}
+        name="changelogSearch"
+        hideLabel
+        variant="simple"
+        htmlSize="26"
+        autoComplete="off"
+      />
+    </form>
+  );
+};
+
+export default SearchField;
