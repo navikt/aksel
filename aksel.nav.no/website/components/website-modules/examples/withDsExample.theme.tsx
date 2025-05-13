@@ -1,5 +1,6 @@
 import { ThemeProvider, useTheme } from "next-themes";
 import { useRouter } from "next/router";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { Box, Select } from "@navikt/ds-react";
 
 type SupportedThemes = "legacy" | "light" | "dark";
@@ -22,13 +23,60 @@ function ExampleTheming({ children }: { children: React.ReactNode }) {
     </ThemeProvider>
   );
 }
+/* https://cdn.nav.no/aksel/@navikt/ds-css/7.20.0/index.min.css */
 
 function ExampleThemingSwitch() {
   const { theme, setTheme } = useTheme();
-
   const { query, isReady } = useRouter();
+  const currentStylesheetRef = useRef<HTMLLinkElement | null>(null);
 
-  const shouldShow = isReady && query.darkside === "true";
+  const createThemeLink = useCallback((themeName: string) => {
+    if (themeName === "legacy") {
+      console.info("Using legacy theme, skipping stylesheet update");
+      return;
+    }
+
+    const themeUrlSuffix =
+      themeName === "legacy"
+        ? "@navikt/ds-css/dist"
+        : "@navikt/ds-css/dist/darkside";
+
+    const newStylesheet = document.createElement("link");
+    newStylesheet.rel = "stylesheet";
+    newStylesheet.href = `https://cdn.jsdelivr.net/npm/${themeUrlSuffix}/index.min.css`;
+
+    newStylesheet.id = `dynamic-theme-stylesheet-${themeName}`;
+    document.head.appendChild(newStylesheet);
+    currentStylesheetRef.current = newStylesheet;
+  }, []);
+
+  const resetThemeLink = useCallback(() => {
+    if (currentStylesheetRef.current?.parentNode === document.head) {
+      document.head.removeChild(currentStylesheetRef.current);
+    }
+    currentStylesheetRef.current = null;
+
+    /* createThemeLink("legacy"); */
+  }, []);
+
+  const shouldShow = useMemo(
+    () => isReady && query.darkside === "true",
+    [isReady, query.darkside],
+  );
+
+  useEffect(() => {
+    if (!shouldShow || !theme) {
+      resetThemeLink();
+      return;
+    }
+
+    resetThemeLink();
+    createThemeLink(theme);
+
+    return () => {
+      resetThemeLink();
+    };
+  }, [createThemeLink, resetThemeLink, shouldShow, theme]);
 
   if (!shouldShow) {
     return null;

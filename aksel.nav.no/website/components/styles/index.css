@@ -1,13 +1,13 @@
-@import "tailwindcss/base";
-@import "@navikt/ds-css";
+@layer twBase, dsComponents, twComponents, twUtilities, websiteUtil;
+
+@import "tailwindcss/base" layer(twBase);
+@import "@navikt/ds-css" layer(dsComponents);
 @import "./global.css";
-
-@import "tailwindcss/components";
-
-@import "tailwindcss/utilities";
-@import "./utilities.css";
-@import "./sanity.css";
-@import "./animations.css";
+@import "tailwindcss/components" layer(twComponents);
+@import "tailwindcss/utilities" layer(twUtilities);
+@import "./utilities.css" layer(websiteUtil);
+@import "./sanity.css" layer(websiteUtil);
+@import "./animations.css" layer(websiteUtil);
 
 /* Alpha-components for testing */
-@import "./alpha/show-more.css";
+@import "./alpha/show-more.css" layer(websiteUtil);
