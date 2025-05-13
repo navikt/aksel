@@ -138,12 +138,33 @@
   background: linear-gradient(180deg, transparent 0%, var(--ax-bg-default) 52%);
 }
 
+.godPraksisHeading {
+  color: var(--ax-text-brand-blue);
+}
+
+.godPraksisInfo {
+  max-width: 600px;
+}
+
+.godPraksisCardList {
+  display: grid;
+  gap: var(--ax-space-32);
+}
+
+.godPraksisCardItemImage {
+  color: red;
+}
+
+.godPraksisCardItemLink {
+  color: var(--ax-text-brand-blue);
+}
+
 .akselPage {
   position: relative;
   z-index: 10;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 480px) {
   .hero {
     padding-inline: 1.5rem;
     margin-top: 9rem;

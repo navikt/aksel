@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import NextLink from "next/link";
+import { BoxNew, HStack } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import ErrorBoundary from "@/error-boundary";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
+import styles from "./landingpage.module.css";
 
 // NOTE: could perhaps avoid this "repeated type" we already get
 // from the sanity query results type? (send type down from parent
@@ -27,8 +29,18 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
   const imageUrl = urlForImage(image)?.auto("format").url();
 
   return (
-    <li className="flex items-center gap-2 px-2 py-4 sm:gap-4 sm:px-6">
-      <div className="relative h-8 w-8 shrink-0 sm:h-12 sm:w-12">
+    <HStack
+      gap="space-8"
+      paddingInline={{ xs: "space-8", sm: "space-24" }}
+      paddingBlock="space-16"
+      align="center"
+    >
+      <BoxNew
+        position="relative"
+        flexShrink="0"
+        width={{ xs: "32px", sm: "48px" }}
+        height={{ xs: "32px", sm: "48px" }}
+      >
         {imageUrl ? (
           <Image
             alt={image?.alt ?? ""}
@@ -37,22 +49,23 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
             layout="fill"
             objectFit="contain"
             aria-hidden
+            className={styles.godPraksisCardItemImage}
             priority
           />
         ) : (
           <FallbackPictogram />
         )}
-      </div>
+      </BoxNew>
       <NextLink
         href={href}
         passHref
         data-umami-event="navigere"
         data-umami-event-kilde="god praksis forside"
-        className="navds-heading--small navds-link navds-heading flex-wrap break-all text-deepblue-700 no-underline hover:underline focus:outline-none"
+        className={styles.godPraksisCardItemLink}
       >
         {children}
       </NextLink>
-    </li>
+    </HStack>
   );
 };
 
