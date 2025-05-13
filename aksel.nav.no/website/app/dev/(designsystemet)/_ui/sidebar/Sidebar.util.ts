@@ -92,15 +92,20 @@ function generateSidebar(
       .filter((category) => category.pages.length > 0);
 
     if (type === "grunnleggende") {
+      const startYear = 2022;
+      const currentYear = new Date().getFullYear();
       groupedPages.push({
         title: "Endringslogg",
         value: "endringslogg",
         pages: [
-          {
-            heading: "2025",
-            slug: `${type}/endringslogg/2025`,
-            tag: "ready",
-          },
+          ...Array.from({ length: currentYear + 1 - startYear }, (_, value) => {
+            return {
+              heading: `${startYear + value}`,
+              // TODO: Add endringslogg as category to allow `${type}/${category.value}/${startYear + value}`,
+              slug: `${type}/endringslogg/${startYear + value}`,
+              tag: "ready" as "ready" | "new" | "beta" | "deprecated",
+            };
+          }).reverse(),
         ],
       });
     }
