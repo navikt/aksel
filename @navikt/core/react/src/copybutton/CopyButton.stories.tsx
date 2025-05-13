@@ -151,11 +151,19 @@ export const Texts: Story = {
           activeText="Kopierte XYZ"
         />
       </div>
-      <div>
+      <div
+        style={{
+          width: "350px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          alignItems: "flex-start",
+        }}
+      >
         <CopyButton
           copyText="3.14"
-          text="Kopier en veldig lang tekst som ikke får plass"
-          activeText="Kopierte XYZ"
+          text="Kopier en veldig lang tekst som brekker over flere linjer"
+          activeText="Kopierte teksten uten layout-shift"
           iconPosition="right"
         />
       </div>
