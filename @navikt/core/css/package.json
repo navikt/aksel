@@ -18,7 +18,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/aksel.git"
+    "url": "git+https://github.com/navikt/aksel.git",
+    "directory": "@navikt/core/css"
   },
   "scripts": {
     "build": "node config/bundle.js && yarn build:darkside",
