@@ -175,7 +175,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           size={size}
           style={
             fixedSize
-              ? { height: fixedSize.height, width: fixedSize.width }
+              ? { minHeight: fixedSize.height, minWidth: fixedSize.width }
               : undefined
           }
         >
