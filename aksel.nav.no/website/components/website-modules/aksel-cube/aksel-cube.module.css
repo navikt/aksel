@@ -5,45 +5,74 @@
   z-index: -1;
   opacity: 0.3;
   pointer-events: none;
+
+  & svg {
+    /* animation added here to both light & dark, to keep them "in sync" */
+    animation: 60s ease infinite rainbow-hype;
+    position: absolute;
+    color: white;
+  }
+
+  --aksel-brand-teal-800: #41ab9d;
+}
+
+@property --cube-stroke-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@keyframes rainbow-hype {
+  0% {
+    --cube-stroke-color: var(--ax-text-meta-purple-subtle);
+  }
+
+  33% {
+    --cube-stroke-color: var(--aksel-brand-teal-800);
+  }
+
+  66% {
+    --cube-stroke-color: var(--ax-text-brand-blue-subtle);
+  }
+
+  100% {
+    --cube-stroke-color: var(--ax-text-meta-purple-subtle);
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .animated {
+  & svg {
+    animation: 60s ease infinite rainbow-hype;
+    color: var(--cube-stroke-color);
+    opacity: 0.2; /* missing subtleA colors? */
+  }
 }
 
 .animated1 {
   animation: shape-1 60s ease-in-out infinite;
-  color: white;
-  position: absolute;
   transform: translate(-95rem, -13.95rem);
 }
 
 .animated2 {
   animation: shape-2 60s ease-in-out infinite;
-  color: white;
-  position: absolute;
   transform: translate(-69.5rem, -13.95rem);
 }
 
 .animated3 {
   animation: shape-3 60s ease-in-out infinite;
-  color: white;
-  position: absolute;
   transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
 }
 
-.animated4 {
-  color: white;
-  position: absolute;
-}
+/* .animated4 { } */
 
 .animated5 {
   animation: shape-5 60s ease-in-out infinite;
-  color: white;
-  position: absolute;
   transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
 }
 
 .animated6 {
   animation: shape-6 60s ease-in-out infinite;
-  color: white;
-  position: absolute;
   transform: translate(70rem, -13.95rem);
 }
 

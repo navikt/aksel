@@ -1,4 +1,5 @@
 import DOMPurify from "isomorphic-dompurify";
+import "server-only";
 import styles from "./GodPraksisPictogram.module.css";
 
 /**
