@@ -190,7 +190,6 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         type="button"
         {...rest}
         className={cn(
-          "tull",
           "navds-copybutton",
           className,
           `navds-copybutton--${size}`,
