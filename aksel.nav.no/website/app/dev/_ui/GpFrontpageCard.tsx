@@ -1,12 +1,10 @@
-"use client";
-
-import Image from "next/image";
 import NextLink from "next/link";
+import { Image } from "sanity";
 import { BoxNew, HStack } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
-import ErrorBoundary from "@/error-boundary";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
 import styles from "./landingpage.module.css";
+import { GodPraksisPictogram } from "./pictogram/GodPraksisPictogram";
 
 // NOTE: could perhaps avoid this "repeated type" we already get
 // from the sanity query results type? (send type down from parent
@@ -26,7 +24,7 @@ type GpFrontpageCardProps = {
 };
 
 const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
-  const imageUrl = urlForImage(image)?.auto("format").url();
+  const imageUrl = urlForImage(image as Image)?.url();
 
   return (
     <HStack
@@ -42,16 +40,7 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
         height={{ xs: "32px", sm: "48px" }}
       >
         {imageUrl ? (
-          <Image
-            alt={image?.alt ?? ""}
-            src={imageUrl}
-            decoding="sync"
-            layout="fill"
-            objectFit="contain"
-            aria-hidden
-            className={styles.godPraksisCardItemImage}
-            priority
-          />
+          <GodPraksisPictogram url={imageUrl} />
         ) : (
           <FallbackPictogram />
         )}
@@ -70,9 +59,5 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
 };
 
 export default function Component(props: GpFrontpageCardProps) {
-  return (
-    <ErrorBoundary boundaryName="GpFrontpageCard">
-      <GpFrontpageCard {...props} />
-    </ErrorBoundary>
-  );
+  return <GpFrontpageCard {...props} />;
 }

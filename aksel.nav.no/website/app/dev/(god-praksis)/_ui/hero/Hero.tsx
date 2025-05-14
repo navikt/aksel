@@ -15,7 +15,7 @@ import {
   LinkCardIcon,
   LinkCardTitle,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
-import { GodPraksisPictogram } from "@/app/dev/(god-praksis)/_ui/pictogram/GodPraksisPictogram";
+import { GodPraksisPictogram } from "@/app/dev/_ui/pictogram/GodPraksisPictogram";
 import styles from "./Hero.module.css";
 
 type GpIntroHeroProps = {
