@@ -11,6 +11,11 @@
     "indentStyle": "space",
     "indentWidth": 2
   },
+  "css": {
+    "parser": {
+      "cssModules": true
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -62,7 +67,8 @@
       "**/codemod/**/*.js",
       "**/tailwind/tailwind.config.js",
       "**/.next/**",
-      "**/modal/dialog-polyfill.ts"
+      "**/modal/dialog-polyfill.ts",
+      "**/_sanity/query-types.ts"
     ]
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import cl from "clsx";
+import { stegaClean } from "next-sanity";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BodyShort, Tag } from "@navikt/ds-react";
@@ -17,7 +18,7 @@ function DesignsystemSidebarItem(props: {
   const { page, isIndented = false, layout } = props;
   const pathName = usePathname();
 
-  const active = pathName?.split("#")[0] === `/${page.slug}`;
+  const active = pathName?.split("#")[0] === stegaClean(`/${page.slug}`);
   const statusTag = getStatusTag(page.tag, true);
 
   return (

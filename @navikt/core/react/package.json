@@ -12,7 +12,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/aksel.git"
+    "url": "git+https://github.com/navikt/aksel.git",
+    "directory": "@navikt/core/react"
   },
   "sideEffects": false,
   "typings": "./esm/index.d.ts",
@@ -646,7 +647,7 @@
     "react-router-dom": "^6.3.0",
     "rimraf": "6.0.1",
     "swr": "^2.3.2",
-    "tsc-alias": "1.8.8",
+    "tsc-alias": "1.8.16",
     "tsx": "^4.19.1",
     "typescript": "5.8.3",
     "vitest": "^2.1.9"
