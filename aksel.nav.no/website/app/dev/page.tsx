@@ -92,7 +92,7 @@ const Page = async () => {
               </BoxNew>
             </PageBlock>
             {/* Siste fra Aksel */}
-            <PageBlock>
+            <PageBlock width="2xl" gutters>
               {latest && <FrontpageLatest latest={latest} />}
             </PageBlock>
           </BoxNew>
