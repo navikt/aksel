@@ -35,7 +35,7 @@
 .aksel-guide {
   box-sizing: border-box;
   border: 2px solid var(--ax-border-info);
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   overflow: hidden;
   width: var(--__axc-guide-panel-guide-size);
   height: var(--__axc-guide-panel-guide-size);
@@ -51,7 +51,7 @@
 .aksel-guide-panel__content {
   background-color: var(--ax-bg-raised);
   border: 2px solid var(--ax-border-info);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   position: relative;
 
   .aksel-guide-panel:is([data-poster="true"], [data-responsive="true"]) > & {
@@ -72,7 +72,7 @@
 
 .aksel-guide-panel__content-inner {
   padding: var(--ax-space-16);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   background-color: var(--ax-bg-raised);
   position: relative;
   height: 100%;

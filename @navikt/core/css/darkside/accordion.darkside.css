@@ -10,7 +10,7 @@
   cursor: pointer;
   border: none;
   position: relative;
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   background: transparent;
   color: var(--ax-text-accent-subtle);
 
@@ -91,7 +91,7 @@
 
 /* ------------------------- Accordion chevron icon ------------------------- */
 .aksel-accordion__icon-wrapper {
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   width: 22px;
   height: 22px;
   align-self: center;

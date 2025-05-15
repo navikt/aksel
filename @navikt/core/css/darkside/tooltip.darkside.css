@@ -2,7 +2,7 @@
   z-index: 3000;
   background-color: var(--ax-bg-neutral-strong);
   color: var(--ax-text-neutral-contrast);
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-radius-4);
   padding: 0 var(--ax-space-6);
   align-items: center;
   display: flex;
@@ -115,7 +115,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--ax-border-radius-small);
+  border-radius: var(--ax-radius-2);
   background: var(--ax-bg-neutral-moderate);
 
   @media (forced-colors: active) {

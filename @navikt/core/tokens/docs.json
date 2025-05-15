@@ -488,7 +488,12 @@
     { "name": "--a-border-radius-medium", "value": "4px" },
     { "name": "--a-border-radius-large", "value": "8px" },
     { "name": "--a-border-radius-xlarge", "value": "12px" },
-    { "name": "--a-border-radius-full", "value": "9999px" }
+    { "name": "--a-border-radius-full", "value": "9999px" },
+    { "name": "--a-radius-2", "value": "2px" },
+    { "name": "--a-radius-4", "value": "4px" },
+    { "name": "--a-radius-8", "value": "8px" },
+    { "name": "--a-radius-12", "value": "12px" },
+    { "name": "--a-radius-full", "value": "9999px" }
   ],
   "shadow": [
     {

@@ -95,7 +95,7 @@ export const metaPurpleSemanticTokenConfig = {
       comment:
         "Standard farge for tekst og ikoner med rollen meta purple. Godkjent på alle bakgrunner unntatt strong.",
     },
-    "meta-purple-icon": {
+    "meta-purple-decoration": {
       value: "{ax.meta-purple.600.value}",
       type: "color",
       group: "text.meta-purple",

@@ -95,7 +95,7 @@ export const warningSemanticTokenConfig = {
       comment:
         "Standard farge for tekst og ikoner med rollen warning. Godkjent på alle bakgrunner unntatt strong.",
     },
-    "warning-icon": {
+    "warning-decoration": {
       value: "{ax.warning.600.value}",
       type: "color",
       group: "text.warning",

@@ -31,7 +31,7 @@
 
 .aksel-read-more:is([data-volume="low"], :not([data-volume])) {
   & .aksel-read-more__button {
-    border-radius: var(--ax-border-radius-medium);
+    border-radius: var(--ax-radius-4);
 
     &:hover {
       background-color: var(--ax-bg-neutral-moderate-hoverA);
@@ -42,7 +42,7 @@
 .aksel-read-more[data-volume="high"] {
   & .aksel-read-more__button {
     background-color: var(--ax-bg-accent-moderate);
-    border-radius: var(--ax-border-radius-full);
+    border-radius: var(--ax-radius-full);
 
     &:hover {
       background-color: var(--ax-bg-accent-moderate-hoverA);

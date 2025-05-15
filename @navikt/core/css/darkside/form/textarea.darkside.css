@@ -4,7 +4,7 @@
   appearance: none;
   padding: var(--ax-space-8);
   background-color: var(--ax-bg-input);
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   border: 1px solid var(--ax-border-neutral);
   resize: none;
   width: 100%;

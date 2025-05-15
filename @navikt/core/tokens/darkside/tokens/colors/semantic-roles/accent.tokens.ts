@@ -95,7 +95,7 @@ export const accentSemanticTokenConfig = {
       comment:
         "Standard farge for tekst og ikoner med rollen accent. Godkjent på alle bakgrunner unntatt strong.",
     },
-    "accent-icon": {
+    "accent-decoration": {
       value: "{ax.accent.600.value}",
       type: "color",
       group: "text.accent",
