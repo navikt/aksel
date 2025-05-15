@@ -23,7 +23,6 @@ function ExampleTheming({ children }: { children: React.ReactNode }) {
     </ThemeProvider>
   );
 }
-/* https://cdn.nav.no/aksel/@navikt/ds-css/7.20.0/index.min.css */
 
 function ExampleThemingSwitch() {
   const { theme, setTheme } = useTheme();
