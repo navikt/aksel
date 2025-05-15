@@ -88,9 +88,9 @@ function ExampleThemingSwitch() {
         value={theme}
         size="small"
       >
-        <option value="legacy">Legacy</option>
-        <option value="light">Darkside light</option>
-        <option value="dark">Darkside dark</option>
+        <option value="legacy">Standard</option>
+        <option value="light">Ny lyst modus</option>
+        <option value="dark">Ny mørk modus</option>
       </Select>
     </Box>
   );
