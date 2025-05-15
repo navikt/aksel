@@ -1,7 +1,6 @@
 import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 import path from "path";
-import packageJson from "../package.json";
 
 const cdnUrl = "https://cdn.nav.no";
 const dekoratorUrl = "https://www.nav.no";
@@ -57,16 +56,6 @@ const securityHeaders = [
 
 const useCdn = process.env.USE_CDN_ASSETS === "true";
 const isProduction = process.env.PRODUCTION === "true";
-const akselVersion = packageJson.dependencies["@navikt/ds-react"].replace(
-  "^",
-  "",
-);
-
-if (akselVersion === null) {
-  throw new Error(
-    "Invalid version of @navikt/ds-react. Please check the version in package.json.",
-  );
-}
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
@@ -83,7 +72,6 @@ const nextConfig: NextConfig = {
    * Only use for public runtime config that is not sensitive
    */
   env: {
-    aksel_version: akselVersion,
     UMAMI_TRACKING_ID: isProduction
       ? "fb69e1e9-1bd3-4fd9-b700-9d035cbf44e1"
       : "7b9fb2cd-40f4-4a30-b208-5b4dba026b57",
