@@ -1,6 +1,7 @@
 import NextLink from "next/link";
 import { NewspaperIcon } from "@navikt/aksel-icons";
 import { Heading, Link } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { RelatertInnholdT } from "@/types";
 
@@ -33,8 +34,12 @@ const RelatertInnhold = ({ node }: RelatertInnholdProps) => {
             <Link
               as={NextLink}
               href={getHref(x)}
-              data-umami-event="navigere"
-              data-umami-event-kilde="relatert innhold"
+              onClick={() =>
+                umamiTrack("navigere", {
+                  kilde: "relatert innhold",
+                  url: getHref(x),
+                })
+              }
               className="text-xl font-semibold text-gray-800 dark:text-text-on-inverted"
             >
               {x.title}

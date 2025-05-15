@@ -1,136 +1,40 @@
 import _ from "lodash";
-import { type SemanticColorRoles } from "../../../types";
-import { ColorRolesList } from "../../../types";
+import { GlobalColorRoles } from "../../../types";
 import { type StyleDictionaryTokenConfig } from "../../tokens.util";
+import { accentSemanticTokenConfig } from "./semantic-roles/accent.tokens";
+import { brandBeigeSemanticTokenConfig } from "./semantic-roles/brand-beige.tokens";
+import { brandBlueSemanticTokenConfig } from "./semantic-roles/brand-blue.tokens";
+import { brandMagentaSemanticTokenConfig } from "./semantic-roles/brand-magenta.tokens";
+import { dangerSemanticTokenConfig } from "./semantic-roles/danger.tokens";
+import { infoSemanticTokenConfig } from "./semantic-roles/info.tokens";
+import { metaLimeSemanticTokenConfig } from "./semantic-roles/meta-lime.tokens";
+import { metaPurpleSemanticTokenConfig } from "./semantic-roles/meta-purple.tokens";
+import { neutralSemanticTokenConfig } from "./semantic-roles/neutral.tokens";
+import { successSemanticTokenConfig } from "./semantic-roles/success.tokens";
+import { warningSemanticTokenConfig } from "./semantic-roles/warning.tokens";
 
-/**
- * Maps the semantic colors to the global color layer for a given role.
- * @note Gray is handled a little differently, as it is visually perceived a little lighter than other colors.
- */
-export function semanticTokensForRole(role: SemanticColorRoles) {
-  return {
-    bg: {
-      [`${role}-soft`]: {
-        value: `{ax.${role}.100.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-softA`]: {
-        value: `{ax.${role}.100A.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-moderate`]: {
-        value: `{ax.${role}.200.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-moderateA`]: {
-        value: `{ax.${role}.200A.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-moderate-hover`]: {
-        value: `{ax.${role}.300.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-moderate-hoverA`]: {
-        value: `{ax.${role}.300A.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-moderate-pressed`]: {
-        value: `{ax.${role}.400.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-moderate-pressedA`]: {
-        value: `{ax.${role}.400A.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-strong`]: {
-        value:
-          role === "neutral"
-            ? `{ax.${role}.700.value}`
-            : `{ax.${role}.600.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-strong-hover`]: {
-        value:
-          role === "neutral"
-            ? `{ax.${role}.800.value}`
-            : `{ax.${role}.700.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-strong-pressed`]: {
-        value:
-          role === "neutral"
-            ? `{ax.${role}.900.value}`
-            : `{ax.${role}.800.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-    },
-    text: {
-      [role]: {
-        value: `{ax.${role}.1000.value}`,
-        type: "color",
-        group: `text.${role}`,
-      },
-      [`${role}-subtle`]: {
-        value:
-          role === "neutral"
-            ? `{ax.${role}.900.value}`
-            : `{ax.${role}.800.value}`,
-        type: "color",
-        group: `text.${role}`,
-      },
-      [`${role}-icon`]: {
-        value: `{ax.${role}.600.value}`,
-        type: "color",
-        group: `text.${role}`,
-      },
-      [`${role}-contrast`]: {
-        value: "{ax.neutral.000.value}",
-        type: "color",
-        group: `text.${role}`,
-      },
-    },
-    border: {
-      [role]: {
-        value: `{ax.${role}.600.value}`,
-        type: "color",
-        group: `border.${role}`,
-      },
-      [`${role}-subtle`]: {
-        value: `{ax.${role}.400.value}`,
-        type: "color",
-        group: `border.${role}`,
-      },
-      [`${role}-subtleA`]: {
-        value: `{ax.${role}.400A.value}`,
-        type: "color",
-        group: `border.${role}`,
-      },
-      [`${role}-strong`]: {
-        value: `{ax.${role}.700.value}`,
-        type: "color",
-        group: `border.${role}`,
-      },
-    },
-  } satisfies StyleDictionaryTokenConfig<"color">;
-}
+const semanticRoleConfig: Record<GlobalColorRoles, any> = {
+  neutral: neutralSemanticTokenConfig,
+  accent: accentSemanticTokenConfig,
+  success: successSemanticTokenConfig,
+  warning: warningSemanticTokenConfig,
+  danger: dangerSemanticTokenConfig,
+  info: infoSemanticTokenConfig,
+  "brand-magenta": brandMagentaSemanticTokenConfig,
+  "brand-beige": brandBeigeSemanticTokenConfig,
+  "brand-blue": brandBlueSemanticTokenConfig,
+  "meta-purple": metaPurpleSemanticTokenConfig,
+  "meta-lime": metaLimeSemanticTokenConfig,
+};
 
 /**
  * We need to deep merge the token config for each role to get the complete token config for all roles.
  */
-export const semanticTokensForAllRoles = () => {
-  return ColorRolesList.reduce(
-    (acc, role) => _.merge(acc, semanticTokensForRole(role)),
-    {} as ReturnType<typeof semanticTokensForRole>,
+function semanticTokensForAllRoles() {
+  return Object.values(semanticRoleConfig).reduce(
+    (acc, config) => _.merge(acc, config),
+    {} as StyleDictionaryTokenConfig<"color">,
   );
-};
+}
+
+export { semanticRoleConfig, semanticTokensForAllRoles };

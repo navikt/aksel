@@ -34,6 +34,7 @@ function RelatertInnhold(
               href={getHref(pageLink)}
               data-umami-event="navigere"
               data-umami-event-kilde="relatert innhold"
+              data-umami-event-url={getHref(pageLink)}
               variant="neutral"
             >
               {pageLink.title || "Mangler tittel"}

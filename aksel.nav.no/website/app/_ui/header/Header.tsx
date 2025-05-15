@@ -26,13 +26,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
         Hopp til innhold
       </a>
       <div className={styles.headerContainer}>
-        <Link
-          href="/"
-          passHref
-          data-umami-event="navigere"
-          data-umami-event-kilde="header"
-          className={styles.headerLogoLink}
-        >
+        <Link href="/" passHref className={styles.headerLogoLink}>
           <Show above="sm">
             <AkselLogo className={styles.headerLogo} />
           </Show>

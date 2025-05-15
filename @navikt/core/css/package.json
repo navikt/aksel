@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "7.21.0",
+  "version": "7.21.1",
   "description": "CSS for Nav Designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -18,7 +18,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/aksel.git"
+    "url": "git+https://github.com/navikt/aksel.git",
+    "directory": "@navikt/core/css"
   },
   "scripts": {
     "build": "node config/bundle.js && yarn build:darkside",
@@ -27,11 +28,11 @@
     "test": "yarn build && vitest run"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^7.21.0",
+    "@navikt/ds-tokens": "^7.21.1",
     "autoprefixer": "^10.4.20",
     "browserslist": "^4.24.4",
     "cssnano": "7.0.6",
-    "esbuild": "^0.25.1",
+    "esbuild": "^0.25.4",
     "fast-glob": "3.2.11",
     "lightningcss": "^1.29.3",
     "lodash": "^4.17.21",

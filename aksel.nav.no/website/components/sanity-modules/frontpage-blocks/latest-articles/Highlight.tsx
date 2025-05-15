@@ -2,6 +2,7 @@ import cl from "clsx";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { urlFor } from "@/sanity/interface";
 import { getAuthors, getImage } from "@/utils";
@@ -103,8 +104,12 @@ export const Highlight = ({
         <Heading size="large" level="3">
           <Link
             as={NextLink}
-            data-umami-event="navigere"
-            data-umami-event-kilde="global sok"
+            onClick={() =>
+              umamiTrack("navigere", {
+                kilde: "global sok",
+                url: `/${article.slug.current}`,
+              })
+            }
             href={`/${article.slug.current}`}
             className="mb-5 mt-2 text-text-default underline hover:no-underline"
           >

@@ -5,6 +5,7 @@ import ReactDOMServer from "react-dom/server";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { Button, Heading } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
 import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
@@ -97,10 +98,13 @@ export const IconSidebar = ({
         variant="primary"
         className="mt-8 w-full"
         as="a"
-        data-umami-event="last ned"
-        data-umami-event-tema="ikon"
-        data-umami-event-type="svg"
-        data-umami-event-tittel={name}
+        onClick={() =>
+          umamiTrack("last ned", {
+            tema: "ikon",
+            type: "svg",
+            tittel: name,
+          })
+        }
         href={blob ? URL.createObjectURL(blob) : "#"}
         download={name}
       >

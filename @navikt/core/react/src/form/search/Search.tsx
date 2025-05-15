@@ -161,6 +161,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           title={clearButtonLabel || translate("clear")}
           hidden={!showClearButton}
           onClick={(event) => handleClear({ trigger: "Click", event })}
+          type="button"
         />
       ) : (
         <button

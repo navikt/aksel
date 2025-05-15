@@ -11,6 +11,7 @@ import {
   useTransition,
 } from "react";
 import { debounce } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { fuseGlobalSearch } from "./GlobalSearch.actions";
 
 type ActionReturnT = Awaited<ReturnType<typeof fuseGlobalSearch>>;
@@ -53,7 +54,7 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     document.addEventListener("keydown", listener);
 
     return () => document.removeEventListener("keydown", listener);
-  }, [inputRef, open, setOpen]);
+  }, [open]);
 
   const openSearch = () => {
     setOpen(true);
@@ -72,9 +73,9 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
           const newResults = await fuseGlobalSearch(query);
           setSearchResults(newResults);
         });
-        window.umami && umami.track("sok");
+        umamiTrack("sok", {});
       }),
-    [startTransition],
+    [],
   );
 
   const resetSearch = useCallback(() => {

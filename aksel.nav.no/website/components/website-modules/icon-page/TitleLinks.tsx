@@ -1,6 +1,7 @@
 import NextLink from "next/link";
 import { BrailleIcon, DownloadIcon, PackageIcon } from "@navikt/aksel-icons";
 import { Link as DsLink } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
 
 const Divider = () => (
@@ -20,8 +21,12 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          data-umami-event="navigere"
-          data-umami-event-kilde="ikonside"
+          onClick={() =>
+            umamiTrack("navigere", {
+              kilde: "ikonside",
+              url: "https://www.figma.com/community/file/1214869602572392330",
+            })
+          }
         >
           <FigmaIcon className="ml-1" /> <span className="">Figma</span>
         </DsLink>
@@ -33,10 +38,13 @@ export const TitleLinks = () => (
         className="text-text-default no-underline hover:underline"
         href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
         download="Ikonpakke"
-        data-umami-event="last ned"
-        data-umami-event-tema="ikon"
-        data-umami-event-type="zip"
-        data-umami-event-tittel="ikonpakke"
+        onClick={() =>
+          umamiTrack("last ned", {
+            tema: "ikon",
+            type: "zip",
+            tittel: "ikonpakke",
+          })
+        }
       >
         <DownloadIcon className="text-2xl" aria-hidden /> Last ned ikonpakke
       </DsLink>
@@ -50,8 +58,12 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          data-umami-event="navigere"
-          data-umami-event-kilde="ikonside"
+          onClick={() =>
+            umamiTrack("navigere", {
+              kilde: "ikonside",
+              url: "https://www.npmjs.com/package/@navikt/aksel-icons",
+            })
+          }
         >
           <PackageIcon className="text-2xl" aria-hidden /> Installer med NPM
         </DsLink>
@@ -66,8 +78,12 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          data-umami-event="navigere"
-          data-umami-event-kilde="ikonside"
+          onClick={() =>
+            umamiTrack("navigere", {
+              kilde: "ikonside",
+              url: "https://github.com/navikt/aksel/tree/main/%40navikt/aksel-icons/CONTRIBUTING.md",
+            })
+          }
         >
           <GithubIcon className="ml-[3px] h-[18px] w-[18px]" />{" "}
           <span className="ml-1">Bidra</span>
@@ -83,8 +99,12 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          data-umami-event="navigere"
-          data-umami-event-kilde="ikonside"
+          onClick={() =>
+            umamiTrack("navigere", {
+              kilde: "ikonside",
+              url: "/god-praksis/artikler/tilgjengelig-ikonbruk",
+            })
+          }
         >
           <BrailleIcon aria-hidden className="text-2xl" />{" "}
           <span>Tilgjengelighet</span>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BodyShort, Tag } from "@navikt/ds-react";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { SidebarPageT } from "@/types";
 import styles from "./Sidebar.module.css";
 
@@ -36,8 +37,12 @@ function DesignsystemSidebarItem(props: {
         })}
         prefetch={false}
         data-current={active}
-        data-umami-event="navigere"
-        data-umami-event-kilde="sidebar"
+        onClick={() =>
+          umamiTrack("navigere", {
+            kilde: "sidebar",
+            url: `/dev/${page.slug}`,
+          })
+        }
       >
         {page.heading}
         {statusTag && (
