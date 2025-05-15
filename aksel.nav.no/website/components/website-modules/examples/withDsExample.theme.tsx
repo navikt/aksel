@@ -56,7 +56,6 @@ function ExampleThemingSwitch() {
     }
     currentStylesheetRef.current = null;
 
-    /* createThemeLink("legacy"); */
   }, []);
 
   const shouldShow = useMemo(
