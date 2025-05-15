@@ -147,7 +147,8 @@ function IconPage({
 
                     <HStack gap="space-8" marginBlock="space-16 space-0">
                       {section.icons.map((icon) => {
-                        const T = Icons[`${icon.id}Icon`]; // eslint-disable-line import/namespace
+                        // eslint-disable-next-line import/namespace
+                        const T = Icons[`${icon.id}Icon`];
                         if (T === undefined) {
                           return null;
                         }
