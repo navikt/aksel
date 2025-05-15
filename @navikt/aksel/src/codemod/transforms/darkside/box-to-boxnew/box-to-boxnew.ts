@@ -230,15 +230,20 @@ const legacyBorderRadiusNameTokenLookup = {
  * oldValue: "xlarge", "full"
  * @returns "12", "full"
  */
-function convertBorderRadiusToRadius(radiusToken: string): string {
-  if (radiusToken === "full") {
-    return "full";
+function convertBorderRadiusToRadius(oldValue: string): string {
+  const radiusTokens = oldValue.split(" ");
+
+  const newRadius = [];
+  for (const radiusToken of radiusTokens) {
+    if (radiusToken === "full") {
+      newRadius.push(radiusToken);
+    } else if (!(radiusToken in legacyBorderRadiusNameTokenLookup)) {
+      console.warn(`Possibly invalid radius token found: ${radiusToken}\n`);
+      newRadius.push(radiusToken);
+    } else {
+      newRadius.push(`${legacyBorderRadiusNameTokenLookup[radiusToken]}`);
+    }
   }
 
-  if (radiusToken in legacyBorderRadiusNameTokenLookup) {
-    return legacyBorderRadiusNameTokenLookup[radiusToken];
-  }
-
-  console.warn("Unrecognized border-radius token:", radiusToken);
-  return radiusToken;
+  return newRadius.join(" ");
 }
