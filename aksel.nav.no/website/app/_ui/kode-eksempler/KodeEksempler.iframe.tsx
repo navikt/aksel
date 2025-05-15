@@ -1,5 +1,6 @@
 "use client";
 
+import { stegaClean } from "next-sanity";
 import { useRef, useState } from "react";
 import { BoxNew, HStack, Skeleton, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
@@ -68,7 +69,9 @@ function KodeEksemplerIFrame(props: {
   };
 
   const demoVariant = dir.variant;
-  const iframeUrl = `/${demoVariant}/${dir.title}/${current?.navn}?darkside=true`;
+  const iframeUrl = stegaClean(
+    `/${demoVariant}/${dir.title}/${current?.navn}?darkside=true`,
+  );
 
   return (
     <div>
