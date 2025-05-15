@@ -1,4 +1,4 @@
-import { PortableTextBlock } from "next-sanity";
+import { PortableTextBlock, stegaClean } from "next-sanity";
 import {
   ExpansionCard,
   ExpansionCardContent,
@@ -31,7 +31,10 @@ function WebsiteExpansionCard(
       data-block-margin="space-28"
     >
       <ExpansionCardHeader>
-        <ExpansionCardTitle as={heading_level} size={cardSize[heading_level]}>
+        <ExpansionCardTitle
+          as={stegaClean(heading_level)}
+          size={cardSize[stegaClean(heading_level)]}
+        >
           {heading}
         </ExpansionCardTitle>
         {description && (

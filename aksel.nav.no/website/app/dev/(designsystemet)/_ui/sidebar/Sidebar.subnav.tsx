@@ -1,6 +1,7 @@
 "use client";
 
 import cl from "clsx";
+import { stegaClean } from "next-sanity";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
@@ -16,7 +17,7 @@ function DesignsystemSidebarSubNav(
   const pathName = usePathname();
 
   const isSectionActive = pages.some((page) => {
-    return pathName?.split("#")[0] === `/${page.slug}`;
+    return pathName?.split("#")[0] === stegaClean(`/${page.slug}`);
   });
 
   const [open, setOpen] = useState(isSectionActive);
