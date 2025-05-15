@@ -1,6 +1,7 @@
 "use client";
 
 import cl from "clsx";
+import { stegaClean } from "next-sanity";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
@@ -15,14 +16,16 @@ function DesignsystemSidebarSubNav(
   const { pages, title, layout } = props;
   const pathName = usePathname();
 
+  const isDarkside = title.toLowerCase() === "darkside";
+
   const isSectionActive = pages.some((page) => {
-    return pathName?.split("#")[0] === `/${page.slug}`;
+    return pathName?.split("#")[0] === stegaClean(`/${page.slug}`);
   });
 
   const [open, setOpen] = useState(isSectionActive);
 
   return (
-    <li>
+    <li data-type={isDarkside ? "darkside" : "neutral"}>
       <button
         onClick={() => {
           setOpen(!open);
