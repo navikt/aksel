@@ -4,53 +4,32 @@ import {
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult,
   DESIGNSYSTEM_SIDEBAR_QUERYResult,
 } from "@/app/_sanity/query-types";
+import { PAGE_ROUTES } from "@/app/routing-config";
 import { sanityCategoryLookup } from "@/sanity/config";
 import { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
-
-/**
- * TODO: We currently do not support sorting "unique" pages
- */
-const pageTypes = {
-  grunnleggende: {
-    name: "Grunnleggende",
-    _type: "ds_artikkel",
-    uniquePages: [],
-  },
-  komponenter: {
-    name: "Komponenter",
-    _type: "komponent_artikkel",
-    uniquePages: [
-      {
-        heading: "Ikoner",
-        slug: "komponenter/ikoner",
-        tag: "ready",
-      },
-    ],
-  },
-  templates: {
-    name: "Mønster og Maler",
-    _type: "templates_artikkel",
-    uniquePages: [],
-  },
-} as const;
 
 type DesignsystemSidebarDataT = {
   label: string;
   links: DesignsystemSidebarSectionT;
 }[];
 
+function typedKeys<T extends object>(obj: T): (keyof T)[] {
+  return Object.keys(obj) as (keyof T)[];
+}
+
 function generateSidebar(
   input: DESIGNSYSTEM_SIDEBAR_QUERYResult,
   overviewPages: DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult,
 ): DesignsystemSidebarDataT {
-  return Object.keys(pageTypes).map((type) => {
+  return typedKeys(PAGE_ROUTES).map((type) => {
     const overviewPageList = overviewPages.find((page) =>
       stegaClean(page._type).includes(type),
     )?.overview_pages;
 
-    const categories = sanityCategoryLookup(type as keyof typeof pageTypes);
+    const categories = sanityCategoryLookup(type);
+
     const filteredInput = input.filter(
-      (doc) => stegaClean(doc._type) === pageTypes[type]._type,
+      (doc) => stegaClean(doc._type) === PAGE_ROUTES[type]._type,
     );
 
     const standalonePages: SidebarPageT[] = filteredInput
@@ -79,7 +58,6 @@ function generateSidebar(
           .sort(sortIndex)
           .sort(sortDeprecated),
       }))
-      .filter((category) => !(!category.pages || category.pages.length === 0))
       .map((category) => {
         const hasOverviewPage = overviewPageList?.some(
           (page) => stegaClean(category.value) === page,
@@ -99,45 +77,23 @@ function generateSidebar(
           });
         }
 
-        if (type === "grunnleggende" && category.value === "darkside") {
-          pages.push({
-            heading: "Tokens darkside",
-            slug: `${type}/${category.value}/design-tokens`,
-            tag: "ready",
-          });
+        if (
+          PAGE_ROUTES[type].nested &&
+          category.value in PAGE_ROUTES[type].nested
+        ) {
+          pages.push(...PAGE_ROUTES[type].nested[category.value]);
         }
 
         return {
           ...category,
           pages,
         };
-      });
-
-    // TODO: Remove this when we have published any darkside pages from Sanity, so the entry above is activated
-    if (
-      type === "grunnleggende" &&
-      !groupedPages.some((page) => page.value === "darkside")
-    ) {
-      groupedPages.push({
-        title: "Darkside",
-        value: "darkside",
-        pages: [
-          {
-            heading: "Design tokens",
-            slug: `${type}/darkside/design-tokens`,
-            tag: "ready",
-          },
-        ],
-      });
-    }
+      })
+      .filter((category) => category.pages.length > 0);
 
     return {
-      label: pageTypes[type].name,
-      links: [
-        ...pageTypes[type].uniquePages,
-        ...standalonePages,
-        ...groupedPages,
-      ],
+      label: PAGE_ROUTES[type].title,
+      links: [...PAGE_ROUTES[type].root, ...standalonePages, ...groupedPages],
     };
   });
 }
