@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { stegaClean } from "next-sanity";
 import { notFound } from "next/navigation";
 import type { Image } from "sanity";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -103,7 +104,9 @@ export default async function Page({ params }: Props) {
   }
 
   if (
-    !landingPage?.overview_pages?.some((itemValue) => itemValue === category)
+    !landingPage?.overview_pages?.some(
+      (itemValue) => stegaClean(itemValue) === category,
+    )
   ) {
     notFound();
   }

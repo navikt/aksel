@@ -1,6 +1,6 @@
 "use client";
 export { default as Tabs } from "./Tabs";
-export { type TabsProps } from "./Tabs.types";
+export type { TabsProps } from "./Tabs.types";
 export { default as TabsTab, type TabProps } from "./parts/tab/Tab";
 export {
   default as TabsList,

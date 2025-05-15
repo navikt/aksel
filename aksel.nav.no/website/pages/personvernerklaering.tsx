@@ -42,7 +42,6 @@ const Page = () => {
       case "rejected":
         setUserPreference("tracking_no");
         break;
-      case "undecided":
       default:
         setUserPreference("");
         break;
@@ -140,6 +139,12 @@ const Page = () => {
                 avgjøre om vi må vise banneret på nytt hvis det har kommet nye
                 cookies siden sist du ga ditt samtykke. Lagres til vi ber om
                 nytt samtykke etter 365 dager.
+              </BodyLong>
+              <Heading size="small" level="4" spacing>
+                aksel-example-theme
+              </Heading>
+              <BodyLong spacing>
+                Husker valgt fargetema i kode-eksempler.
               </BodyLong>
 
               <Heading size="medium" level="3" spacing>

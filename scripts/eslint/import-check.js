@@ -23,7 +23,9 @@ module.exports = {
 
         if (!hasSandbox) {
           return;
-        } else if (isExampleHOC && !isAliasImport) {
+        }
+
+        if (isExampleHOC && !isAliasImport) {
           context.report({
             node,
             message:
