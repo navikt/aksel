@@ -140,6 +140,12 @@ const Page = () => {
                 cookies siden sist du ga ditt samtykke. Lagres til vi ber om
                 nytt samtykke etter 365 dager.
               </BodyLong>
+              <Heading size="small" level="4" spacing>
+                aksel-example-theme
+              </Heading>
+              <BodyLong spacing>
+                Husker valgt fargetema i kode-eksempler.
+              </BodyLong>
 
               <Heading size="medium" level="3" spacing>
                 Godkjenn alle

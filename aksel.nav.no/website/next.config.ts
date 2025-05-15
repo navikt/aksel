@@ -14,7 +14,7 @@ const cspHeader = `
     default-src 'self' 'unsafe-inline' ${cdnUrl};
     script-src 'self' 'unsafe-eval' 'unsafe-inline' ${dekoratorUrl} ${cdnUrl};
     font-src 'self' ${cdnUrl} data:;
-    style-src 'self' 'unsafe-inline' ${dekoratorUrl} ${cdnUrl};
+    style-src 'self' 'unsafe-inline' ${dekoratorUrl} ${cdnUrl} https://cdn.jsdelivr.net;
     object-src 'none';
     base-uri 'self';
     form-action 'self' https://codesandbox.io/api/v1/sandboxes/define;
