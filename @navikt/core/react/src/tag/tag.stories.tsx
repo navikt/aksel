@@ -113,6 +113,18 @@ export const Variants: StoryFn<Story> = () => {
   );
 };
 
+export const VariantsWithAccentRoleOverride: StoryFn<Story> = () => {
+  return (
+    <div className="rowgap rowgap-wrap">
+      {variants.map((variant) => (
+        <div key={variant} data-color-role="accent">
+          <Tag variant={variant}>{variant}</Tag>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export const WithIcons: StoryFn<Story> = () => {
   return (
     <HStack gap="2" align="start">
