@@ -13,6 +13,9 @@ type PageRoute = {
   slug: string;
   tag: string;
   heading: string;
+  searchMetadata?: {
+    intro?: string;
+  };
 };
 
 type Routes = {
@@ -53,6 +56,10 @@ const PAGE_ROUTES: Routes = {
           heading: "Tokens darkside",
           slug: `grunnleggende/darkside/design-tokens`,
           tag: "ready",
+          searchMetadata: {
+            intro: `Ved å bruke design tokens sørger vi for at både designere og utviklere arbeider etter de samme reglene og retningslinjene.
+Dette forenkler vedlikeholdet av designet og sikrer en helhetlig visuell fremstilling på tvers av produkter.`,
+          },
         },
       ],
     },
@@ -65,6 +72,10 @@ const PAGE_ROUTES: Routes = {
         heading: "Ikoner",
         slug: "komponenter/ikoner",
         tag: "ready",
+        searchMetadata: {
+          intro:
+            "901+ open source-ikoner designet og utviklet for Nav. Finn riktig ikon til din løsning.",
+        },
       },
     ],
   },
