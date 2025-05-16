@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 7.22.0
+
+### Minor Changes
+
+- Box: Add support for new `radius`-tokens that will replace `borderRadius`-tokens when `darkside` is set as main. ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+### Patch Changes
+
+- ConfirmationPanel: Now tagged as deprecated. [See documentation](https://aksel.nav.no/komponenter/legacy/confirmationpanel#99622218e7f0) for more information. ([#3789](https://github.com/navikt/aksel/pull/3789))
+
+- Updated dependencies [[`1619b52`](https://github.com/navikt/aksel/commit/1619b52008c0bb5a994d4ccfccbd5620b45e6da8)]:
+  - @navikt/ds-tokens@7.22.0
+  - @navikt/aksel-icons@7.22.0
+
 ## 7.21.1
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # @navikt/aksel
 
+## 7.22.0
+
+### Minor Changes
+
+- Darkside: Added migration-support for border-radius token update. ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+### Patch Changes
+
+- Updated dependencies [[`1619b52`](https://github.com/navikt/aksel/commit/1619b52008c0bb5a994d4ccfccbd5620b45e6da8), [`1619b52`](https://github.com/navikt/aksel/commit/1619b52008c0bb5a994d4ccfccbd5620b45e6da8)]:
+  - @navikt/ds-css@7.22.0
+  - @navikt/ds-tokens@7.22.0
+
 ## 7.21.1
 
 ### Patch Changes
