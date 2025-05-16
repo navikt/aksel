@@ -152,7 +152,7 @@
 }
 
 .godPraksisCardItemImage {
-  color: red;
+  /* color: red; */
 }
 
 .godPraksisCardItemLink {
@@ -222,6 +222,15 @@
   filter: hue-rotate(65deg);
 }
 
+.cardImageWrapperWrapper {
+  display: flex;
+  place-items: center;
+  overflow: hidden;
+  border-top-left-radius: var(--ax-border-radius-large);
+  border-top-right-radius: var(--ax-border-radius-large);
+  background: var(--ax-brand-blue-300);
+}
+
 .cardImageWrapper {
   position: relative;
   height: 200px;
@@ -236,15 +245,53 @@
 .card {
   position: relative;
   background: var(--ax-bg-raised);
-  box-shadow: var(--ax-shadow-dialog);
+  border: solid 1px var(--ax-border-neutral-subtleA);
   border-radius: var(--ax-border-radius-large);
   transition-property: opacity, transform;
   transition-duration: 700ms;
 
-  &:focus-within {
+  &:focus-within,
+  &:hover {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: 2px;
+
+    .cardLinkHeading {
+      text-decoration: none;
+    }
   }
+}
+
+.cardContent {
+  padding-bottom: var(--ax-space-64);
+}
+
+.cardLink {
+  &:focus {
+    outline: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--ax-border-radius-large);
+  }
+}
+
+.cardLinkHeading {
+  text-decoration: underline;
+}
+
+.cardBody {
+  margin-top: var(--ax-space-8);
+}
+
+.cardFooter {
+  position: absolute;
+  bottom: var(--ax-space-20);
+  display: flex;
+  gap: var(--ax-space-8);
+  color: var(--ax-text-neutral-subtle);
 }
 
 .cardVisible {

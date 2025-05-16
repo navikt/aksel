@@ -1,7 +1,7 @@
 import cl from "clsx";
 import NextImage from "next/legacy/image";
 import NextLink from "next/link";
-import { BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { BodyShort, BoxNew, Detail, Heading, Stack } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
@@ -112,23 +112,22 @@ const Card = ({ article, visible, index }: CardProps) => {
     >
       {showImage && (
         <div
-          className={cl(
-            "flex max-h-80 items-center justify-center overflow-hidden rounded-t-lg",
-            "bg-deepblue-200 filter",
-            {
-              [`${styles.betaHue}`]: article?.status?.tag === "beta",
-            },
-          )}
+          className={cl(`${styles.cardImageWrapperWrapper}`, {
+            [`${styles.betaHue}`]: article?.status?.tag === "beta",
+          })}
         >
           {Image}
         </div>
       )}
-      <div className={cl("p-3 sm:p-5", showFooter && "pb-16 sm:pb-16")}>
-        <div className="flex flex-col-reverse">
+      <BoxNew
+        padding={{ xs: "space-12", sm: "space-20" }}
+        className={`${showFooter && styles.cardContent}`}
+      >
+        <Stack direction="column-reverse" className="flex flex-col-reverse">
           <NextLink
             href={`/${article.slug}`}
             passHref
-            className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
+            className={styles.cardLink}
             onClick={() =>
               umamiTrack("navigere", {
                 kilde: "forsidekort",
@@ -136,11 +135,7 @@ const Card = ({ article, visible, index }: CardProps) => {
               })
             }
           >
-            <Heading
-              level="3"
-              size="small"
-              className="underline group-hover:no-underline"
-            >
+            <Heading level="3" size="small" className={styles.cardLinkHeading}>
               {article.heading}
             </Heading>
           </NextLink>
@@ -150,23 +145,23 @@ const Card = ({ article, visible, index }: CardProps) => {
             size="xsmall"
             beta={article.status?.tag === "beta"}
           />
-        </div>
+        </Stack>
         {article.ingress ? (
-          <BodyShort className="mt-2">{article.ingress}</BodyShort>
+          <BodyShort className={styles.cardBody}>{article.ingress}</BodyShort>
         ) : article.seo?.meta ? (
-          <BodyShort className="mt-2">{article.seo.meta}</BodyShort>
+          <BodyShort className={styles.cardBody}>{article.seo.meta}</BodyShort>
         ) : null}
         {showFooter && (
-          <span className="absolute bottom-5 flex gap-2 text-text-subtle">
+          <span className={styles.cardFooter}>
             {article?.contributors && (
-              <Detail as="span" className="font-semibold">
+              <Detail as="span" weight="semibold">
                 {abbrName(article?.contributors[0]?.title)}
               </Detail>
             )}
             <Detail as="span">{date}</Detail>
           </span>
         )}
-      </div>
+      </BoxNew>
     </div>
   );
 };
