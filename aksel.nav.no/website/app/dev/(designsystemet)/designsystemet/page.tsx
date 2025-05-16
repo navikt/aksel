@@ -1,5 +1,12 @@
 import React from "react";
-import { BodyLong, Heading, Tag, VStack } from "@navikt/ds-react";
+import { CodeIcon, PaletteIcon } from "@navikt/aksel-icons";
+import { BodyLong, HStack, Heading, Tag, VStack } from "@navikt/ds-react";
+import {
+  LinkCard,
+  LinkCardDescription,
+  LinkCardIcon,
+  LinkCardTitle,
+} from "../../(god-praksis)/_ui/link-card/LinkCard";
 
 export const metadata = {
   title: "Designsystemet",
@@ -26,6 +33,24 @@ const Page = async () => {
             plattform for å lage førsteklasses grensesnitt
           </BodyLong>
         </VStack>
+        <HStack gap="space-24">
+          <LinkCard>
+            <LinkCardTitle as="h2">Start med design</LinkCardTitle>
+            <LinkCardDescription>
+              Figma-filer og kreative arenaer
+            </LinkCardDescription>
+            <LinkCardIcon>
+              <PaletteIcon fontSize="48" />
+            </LinkCardIcon>
+          </LinkCard>
+          <LinkCard>
+            <LinkCardTitle as="h2">Start med utvikling</LinkCardTitle>
+            <LinkCardDescription>Installasjon og tips</LinkCardDescription>
+            <LinkCardIcon>
+              <CodeIcon fontSize="48" />
+            </LinkCardIcon>
+          </LinkCard>
+        </HStack>
       </VStack>
     </VStack>
   );
