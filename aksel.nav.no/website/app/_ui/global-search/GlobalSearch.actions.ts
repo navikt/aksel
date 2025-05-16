@@ -20,25 +20,39 @@ async function fuseGlobalSearch(query: string) {
     keys: [
       { name: "heading", weight: 100 },
       { name: "lvl2.text", weight: 50 },
-      { name: "lvl3.text", weight: 40 },
-      { name: "lvl4.text", weight: 30 },
-      { name: "ingress", weight: 30 },
-      { name: "intro", weight: 30 },
-      { name: "tema", weight: 70 },
-      { name: "content.text", weight: 20 },
+      { name: "lvl3.text", weight: 30 },
+      { name: "lvl4.text", weight: 20 },
+      { name: "ingress", weight: 20 },
+      { name: "intro", weight: 20 },
+      { name: "tema", weight: 60 },
+      { name: "content.text", weight: 10 },
+      { name: "overrideString", weight: 999 },
     ],
     includeScore: true,
     shouldSort: true,
-    minMatchCharLength: 2,
+    minMatchCharLength: 3,
     includeMatches: true,
-    threshold: 0.3,
+    threshold: 0.18,
+    distance: 50,
   });
 
   const fuseResults = fuse
     .search(query)
     .filter((x) => x.score !== undefined && x.score < 0.3);
 
-  const formatedResults = formatFuseResults(fuseResults);
+  const formatedResults = formatFuseResults(fuseResults).sort((a, b) => {
+    const aOverride = a.score === 0 && !!a.item.overrideString;
+    const bOverride = b.score === 0 && !!b.item.overrideString;
+
+    if (aOverride && bOverride) {
+      return 0;
+    }
+    if (aOverride && !bOverride) {
+      return -1;
+    }
+
+    return 1;
+  });
 
   const groupedHits: Partial<
     Record<keyof typeof globalSearchConfig, SearchHitT[]>
@@ -81,7 +95,7 @@ async function fuseGlobalSearch(query: string) {
 }
 
 function formatFuseResults(
-  rawResults: FuseResult<SearchPageT>[] | SearchPageT[],
+  rawResults: FuseResult<SearchPageT>[],
 ): SearchHitT[] {
   return rawResults.map((result) => {
     const item = result.item;
