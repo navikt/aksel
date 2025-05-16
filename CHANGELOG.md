@@ -1,5 +1,29 @@
 # Changelog
 
+## 7.22
+
+### @navikt/aksel
+
+- Darkside: Added migration-support for border-radius token update. ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+### @navikt/ds-tokens
+
+- Border-radius: Add new `radius`-tokens that will replace `border-radius`-tokens. T-shirt sizing is replaced with numbers reflecting its value. `--a-border-radius-medium` is now `--ax-radius-4`. Until darkside-theming is mainlined, we will continue to support both new and legacy border-radius side by side. ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+### @navikt/ds-tailwind
+
+- Border-radius: Removed `rounded`-value based on aksel token-config. Use built-in values from tailwindcss as replacement [Tailwindcss docs](https://tailwindcss.com/docs/border-radius). ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+### @navikt/ds-css
+
+- Darkside: Components now use new `radius`-tokens, replacing `border-radius`-tokens. ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+### @navikt/ds-react
+
+- Box: Add support for new `radius`-tokens that will replace `borderRadius`-tokens when `darkside` is set as main. ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+* ConfirmationPanel: Now tagged as deprecated. [See documentation](https://aksel.nav.no/komponenter/legacy/confirmationpanel#99622218e7f0) for more information. ([#3789](https://github.com/navikt/aksel/pull/3789))
+
 ## 7.21
 
 ### @navikt/ds-css
