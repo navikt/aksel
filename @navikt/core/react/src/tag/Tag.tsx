@@ -1,4 +1,5 @@
 import React, { HTMLAttributes, forwardRef } from "react";
+import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyShort } from "../typography";
 
@@ -70,6 +71,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
 
     return (
       <BodyShort
+        data-color-role={variantToRole(variant)}
         {...rest}
         ref={ref}
         as="span"
@@ -89,5 +91,43 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
     );
   },
 );
+
+function variantToRole(variant: TagProps["variant"]): GlobalColorRoles {
+  switch (variant) {
+    case "warning":
+    case "warning-filled":
+    case "warning-moderate":
+      return "warning";
+    case "error":
+    case "error-filled":
+    case "error-moderate":
+      return "danger";
+    case "info":
+    case "info-filled":
+    case "info-moderate":
+    case "alt3":
+    case "alt3-filled":
+    case "alt3-moderate":
+      return "info";
+    case "success":
+    case "success-filled":
+    case "success-moderate":
+      return "success";
+    case "neutral":
+    case "neutral-filled":
+    case "neutral-moderate":
+      return "neutral";
+    case "alt1":
+    case "alt1-filled":
+    case "alt1-moderate":
+      return "meta-purple";
+    case "alt2":
+    case "alt2-filled":
+    case "alt2-moderate":
+      return "meta-lime";
+    default:
+      return "neutral";
+  }
+}
 
 export default Tag;

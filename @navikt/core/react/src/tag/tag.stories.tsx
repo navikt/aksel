@@ -117,9 +117,9 @@ export const VariantsWithAccentRoleOverride: StoryFn<Story> = () => {
   return (
     <div className="rowgap rowgap-wrap">
       {variants.map((variant) => (
-        <div key={variant} data-color-role="accent">
-          <Tag variant={variant}>{variant}</Tag>
-        </div>
+        <Tag key={variant} variant={variant} data-color-role="accent">
+          {variant}
+        </Tag>
       ))}
     </div>
   );
