@@ -29,9 +29,9 @@ export function grunnleggendeStructure(S: StructureBuilder) {
             .title("Endringslogg")
             .icon(TasklistIcon)
             .child(
-              S.documentTypeList("ds_endringsloggartikkel")
-                .title("Endringslogg")
-                .schemaType("ds_endringsloggartikkel"),
+              S.documentTypeList("ds_endringsloggartikkel").title(
+                "Endringslogg",
+              ),
             ),
         ]),
     );
