@@ -102,19 +102,19 @@
 }
 
 .aksel-tag--outline {
-  box-shadow: inset 0 0 0 1px var(--__axc-tag-border);
-  background: var(--__axc-tag-bg);
-  color: var(--__axc-tag-text);
+  box-shadow: inset 0 0 0 1px var(--ax-border-default, var(--__axc-tag-border));
+  background: var(--ax-bg-moderateA, var(--__axc-tag-bg));
+  color: var(--ax-text-default, var(--__axc-tag-text));
 }
 
 .aksel-tag--moderate {
-  background: var(--__axc-tag-bg);
-  color: var(--__axc-tag-text);
+  background: var(--ax-bg-moderateA, var(--__axc-tag-bg));
+  color: var(--ax-text-default, var(--__axc-tag-text));
 }
 
 .aksel-tag--strong {
-  background: var(--__axc-tag-bg-strong);
-  color: var(--__axc-tag-text-strong);
+  background: var(--ax-bg-strong, var(--__axc-tag-bg-strong));
+  color: var(--ax-text-contrast, var(--__axc-tag-text-strong));
 }
 
 @media (forced-colors: active) {
