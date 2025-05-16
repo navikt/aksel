@@ -60,6 +60,7 @@ export const EndringsloggArtikkel = defineType({
       description:
         'Dette innholdet vises på innlegget i endringsloggen. Er det "mye" innhold vil en "Vis mer"-knapp dukke opp.',
       type: "riktekst_grunnleggende",
+      validation: (Rule) => Rule.required(),
     }),
   ],
 
