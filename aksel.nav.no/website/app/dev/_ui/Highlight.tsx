@@ -1,13 +1,13 @@
 import cl from "clsx";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
-import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
+import { BodyLong, BodyShort, HStack, Heading, Link } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { urlFor } from "@/sanity/interface";
 import { getAuthors, getImage } from "@/utils";
 import { ArticleT } from "./Card";
-import { Tag } from "./Tag";
+import { BetaTag, Tag } from "./Tag";
 import styles from "./landingpage.module.css";
 
 export const Highlight = ({
@@ -94,11 +94,13 @@ export const Highlight = ({
         )}
       </div>
       <div>
-        <Tag
-          type={article._type}
-          text={article.tema ? article.tema[0] : undefined}
-          beta={article?.status?.tag === "beta"}
-        />
+        <HStack gap="space-8">
+          <Tag
+            type={article._type}
+            text={article.tema ? article.tema[0] : undefined}
+          />
+          {article.status?.tag === "beta" && <BetaTag />}
+        </HStack>
         <Heading size="large" level="3">
           <Link
             as={NextLink}

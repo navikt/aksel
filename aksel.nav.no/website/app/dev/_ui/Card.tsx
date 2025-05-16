@@ -1,13 +1,20 @@
 import cl from "clsx";
 import NextImage from "next/legacy/image";
 import NextLink from "next/link";
-import { BodyShort, BoxNew, Detail, Heading, Stack } from "@navikt/ds-react";
+import {
+  BodyShort,
+  Detail,
+  HStack,
+  Heading,
+  Stack,
+  VStack,
+} from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { abbrName, getImage } from "@/utils";
-import { Tag } from "./Tag";
+import { BetaTag, Tag } from "./Tag";
 import styles from "./landingpage.module.css";
 
 export type ArticleT = {
@@ -38,7 +45,8 @@ type CardProps = {
 const Card = ({ article, visible, index }: CardProps) => {
   const date = useFormatedDate(article.publishedAt ?? article._updatedAt);
 
-  const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
+  const showAuthor = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
+
   const showImage = [
     "ds_artikkel",
     "komponent_artikkel",
@@ -119,40 +127,45 @@ const Card = ({ article, visible, index }: CardProps) => {
           {Image}
         </div>
       )}
-      <BoxNew
+      <VStack
         padding={{ xs: "space-12", sm: "space-20" }}
-        className={`${showFooter && styles.cardContent}`}
+        className={styles.cardContent}
       >
-        <Stack direction="column-reverse" className="flex flex-col-reverse">
-          <NextLink
-            href={`/${article.slug}`}
-            passHref
-            className={styles.cardLink}
-            onClick={() =>
-              umamiTrack("navigere", {
-                kilde: "forsidekort",
-                url: `/${article.slug}`,
-              })
-            }
-          >
-            <Heading level="3" size="small" className={styles.cardLinkHeading}>
-              {article.heading}
-            </Heading>
-          </NextLink>
-          <Tag
-            type={article._type}
-            text={article.tema ? article.tema[0] : undefined}
-            size="xsmall"
-            beta={article.status?.tag === "beta"}
-          />
-        </Stack>
-        {article.ingress ? (
-          <BodyShort className={styles.cardBody}>{article.ingress}</BodyShort>
-        ) : article.seo?.meta ? (
-          <BodyShort className={styles.cardBody}>{article.seo.meta}</BodyShort>
-        ) : null}
-        {showFooter && (
-          <span className={styles.cardFooter}>
+        <div>
+          <Stack direction="column-reverse">
+            <NextLink
+              href={`/${article.slug}`}
+              passHref
+              className={styles.cardLink}
+              onClick={() =>
+                umamiTrack("navigere", {
+                  kilde: "forsidekort",
+                  url: `/${article.slug}`,
+                })
+              }
+            >
+              <Heading
+                level="3"
+                size="small"
+                className={styles.cardLinkHeading}
+              >
+                {article.heading}
+              </Heading>
+            </NextLink>
+          </Stack>
+          {article.ingress ? (
+            <BodyShort className={styles.cardIngress}>
+              {article.ingress}
+            </BodyShort>
+          ) : article.seo?.meta ? (
+            <BodyShort className={styles.cardIngress}>
+              {article.seo.meta}
+            </BodyShort>
+          ) : null}
+        </div>
+
+        {showAuthor && (
+          <span className={styles.cardAuthor}>
             {article?.contributors && (
               <Detail as="span" weight="semibold">
                 {abbrName(article?.contributors[0]?.title)}
@@ -161,7 +174,16 @@ const Card = ({ article, visible, index }: CardProps) => {
             <Detail as="span">{date}</Detail>
           </span>
         )}
-      </BoxNew>
+
+        <HStack gap="space-8">
+          <Tag
+            type={article._type}
+            text={article.tema ? article.tema[0] : undefined}
+            size="xsmall"
+          />
+          {article.status?.tag === "beta" && <BetaTag />}
+        </HStack>
+      </VStack>
     </div>
   );
 };

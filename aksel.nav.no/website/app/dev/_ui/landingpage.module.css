@@ -263,7 +263,10 @@
 }
 
 .cardContent {
-  padding-bottom: var(--ax-space-64);
+  padding-top: var(--ax-space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-16);
 }
 
 .cardLink {
@@ -283,13 +286,11 @@
   text-decoration: underline;
 }
 
-.cardBody {
-  margin-top: var(--ax-space-8);
+.cardIngress {
+  margin-top: var(--ax-space-4);
 }
 
-.cardFooter {
-  position: absolute;
-  bottom: var(--ax-space-20);
+.cardAuthor {
   display: flex;
   gap: var(--ax-space-8);
   color: var(--ax-text-neutral-subtle);
