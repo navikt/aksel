@@ -29,7 +29,7 @@ export function grunnleggendeStructure(S: StructureBuilder) {
             .title("Endringslogg")
             .icon(TasklistIcon)
             .child(
-              S.documentTypeList("ds_endringsloggartikkel").title(
+              S.documentTypeList("ds_endringslogg_artikkel").title(
                 "Endringslogg",
               ),
             ),

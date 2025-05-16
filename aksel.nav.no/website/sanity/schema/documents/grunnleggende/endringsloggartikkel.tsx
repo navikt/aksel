@@ -7,7 +7,7 @@ import { titleField } from "../presets/title-field";
 
 export const EndringsloggArtikkel = defineType({
   title: "Endringsloggartikkel",
-  name: "ds_endringsloggartikkel",
+  name: "ds_endringslogg_artikkel",
   type: "document",
   groups: SanityTabGroups,
   fields: [
@@ -71,6 +71,11 @@ export const EndringsloggArtikkel = defineType({
     },
     prepare(selection) {
       const { heading, endringsdato, endringstype, fremhevet } = selection;
+      if (!endringsdato || !endringstype) {
+        return {
+          title: heading,
+        };
+      }
       return {
         title: heading,
         subtitle: `${endringsdato.split("T")[0]} | ${capitalize(endringstype)}${
