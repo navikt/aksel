@@ -27,7 +27,8 @@ html:has(.globalstyles) {
   @apply max-w-none;
 }
 
-:where(.globalstyles) a {
+/* stylelint-disable-next-line aksel/no-class-override */
+:where(.globalstyles) a:not(.navds-link) {
   color: inherit;
   text-decoration: inherit;
   text-underline-offset: 2px;
