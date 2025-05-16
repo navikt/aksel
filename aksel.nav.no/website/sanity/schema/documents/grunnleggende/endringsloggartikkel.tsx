@@ -1,4 +1,6 @@
 import { defineField, defineType } from "sanity";
+import { FileCodeIcon, FileImageIcon, FileTextIcon } from "@navikt/aksel-icons";
+import { capitalize } from "@/utils";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { sanitySlug } from "../presets/slug";
@@ -60,4 +62,29 @@ export const EndringsloggArtikkel = defineType({
       type: "riktekst_grunnleggende",
     }),
   ],
+
+  preview: {
+    select: {
+      heading: "heading",
+      endringsdato: "endringsdato",
+      endringstype: "endringstype",
+      fremhevet: "fremhevet",
+    },
+    prepare(selection) {
+      const { heading, endringsdato, endringstype, fremhevet } = selection;
+      return {
+        title: heading,
+        subtitle: `${endringsdato.split("T")[0]} | ${capitalize(endringstype)}${
+          fremhevet ? " ⭐" : ""
+        }`,
+        media: typeToIcon[endringstype],
+      };
+    },
+  },
 });
+
+const typeToIcon = {
+  design: <FileImageIcon aria-hidden />,
+  dokumentasjon: <FileTextIcon aria-hidden />,
+  kode: <FileCodeIcon aria-hidden />,
+};
