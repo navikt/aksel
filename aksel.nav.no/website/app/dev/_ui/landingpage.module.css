@@ -225,6 +225,7 @@
 .cardImageWrapperWrapper {
   display: flex;
   place-items: center;
+  justify-content: center;
   overflow: hidden;
   border-top-left-radius: var(--ax-border-radius-large);
   border-top-right-radius: var(--ax-border-radius-large);
