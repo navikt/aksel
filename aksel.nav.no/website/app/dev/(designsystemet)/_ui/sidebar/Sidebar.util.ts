@@ -91,23 +91,25 @@ function generateSidebar(
       })
       .filter((category) => category.pages.length > 0);
 
-    if (type === "grunnleggende") {
-      groupedPages.push({
-        title: "Endringslogg",
-        value: "endringslogg",
-        pages: [
-          {
-            heading: "Endringslogg",
-            slug: `${type}/endringslogg`,
-            tag: "ready" as "ready" | "new" | "beta" | "deprecated",
-          },
-        ],
-      });
-    }
+    const endringslogg =
+      type === "grunnleggende"
+        ? [
+            {
+              heading: "Endringslogg",
+              slug: `${type}/endringslogg`,
+              tag: "ready" as "ready" | "new" | "beta" | "deprecated",
+            },
+          ]
+        : [];
 
     return {
       label: PAGE_ROUTES[type].title,
-      links: [...PAGE_ROUTES[type].root, ...standalonePages, ...groupedPages],
+      links: [
+        ...PAGE_ROUTES[type].root,
+        ...standalonePages,
+        ...groupedPages,
+        ...endringslogg,
+      ],
     };
   });
 }
