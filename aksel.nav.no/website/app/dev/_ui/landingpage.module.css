@@ -151,10 +151,6 @@
   gap: var(--ax-space-32);
 }
 
-.godPraksisCardItemImage {
-  /* color: red; */
-}
-
 .godPraksisCardItemLink {
   color: var(--ax-text-brand-blue);
 }
@@ -171,6 +167,7 @@
 
 .latestSection {
   margin-top: var(--ax-space-80);
+  margin-bottom: var(--ax-space-40);
 }
 
 .highlightWrapper {
