@@ -54,7 +54,7 @@ describe(`Each icons has a valid code`, () => {
 
         nodes.forEach((n) => {
           if (n.properties?.stroke) {
-            expect(n.properties.stroke).toEqual("#23262A");
+            expect(n.properties.stroke).toEqual("#202733");
           }
         });
       });

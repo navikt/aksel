@@ -29,7 +29,7 @@
   height: auto;
   transform-origin: 0 55%;
   transform: scale(1, 0.6);
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
 
   &:empty::before {
     content: "\00a0";
@@ -37,7 +37,7 @@
 }
 
 .aksel-skeleton--circle {
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
 }
 
 .aksel-skeleton--rectangle {
@@ -45,7 +45,7 @@
 }
 
 .aksel-skeleton--rounded {
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
 }
 
 @keyframes akselSkeletonAnimation {

@@ -67,13 +67,10 @@ const formatCategory = (token: TransformedToken): string | undefined => {
       return token.attributes?.type
         ? colorTypes[token.attributes?.type as keyof typeof colorTypes]
         : (token.attributes?.type as string);
-      break;
     case "global-space":
       return "space";
-      break;
     case "global-radius":
       return "radius";
-      break;
     case "global-breakpoint":
       return "breakpoint";
     case "global-font":

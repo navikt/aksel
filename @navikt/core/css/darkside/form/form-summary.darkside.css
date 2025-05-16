@@ -1,7 +1,7 @@
 .aksel-form-summary {
   overflow: hidden;
   border: 1px solid var(--ax-border-neutral-subtleA);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   background: var(--ax-bg-raised);
 }
 
@@ -74,7 +74,7 @@
   margin-top: var(--ax-space-8);
   padding: var(--ax-space-16);
   background: var(--ax-bg-info-moderateA);
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   border: 1px solid var(--ax-border-info-subtleA);
 
   & .aksel-form-summary__answer {

@@ -67,6 +67,31 @@ export default function transformer(file: FileInfo, api: API) {
         }
       });
     }
+
+    findProps({ j, path: astElement, name: "borderRadius" }).forEach((attr) => {
+      const attrValue = attr.value.value;
+
+      if (attrValue.type === "StringLiteral") {
+        /* borderRadius="xlarge" */
+        attrValue.value = convertBorderRadiusToRadius(attrValue.value);
+      } else if (attrValue.type === "JSXExpressionContainer") {
+        /* borderRadius={{xs: "xlarge", sm: "large"}} */
+        const expression = attrValue.expression;
+        if (expression.type === "ObjectExpression") {
+          /* xs, md, sm */
+          expression.properties.forEach((property) => {
+            if (property.type === "ObjectProperty") {
+              if (property.value.type === "StringLiteral") {
+                property.value.value = convertBorderRadiusToRadius(
+                  property.value.value,
+                );
+              }
+            }
+          });
+        }
+      }
+    });
+
     if (!encounteredUnmigratableProp) {
       // TODO: ?? Box -> BoxNew type fail? (but works)
       (astElement.node.openingElement.name as JSXIdentifier).name = "BoxNew";
@@ -102,7 +127,7 @@ export default function transformer(file: FileInfo, api: API) {
       toImport: "@navikt/ds-react/Box",
       fromName: "Box",
       toName: "BoxNew",
-      ignoreAlias: localName !== "Box",
+      ignoreAlias: true,
     });
   }
 
@@ -191,3 +216,34 @@ const analyzePartialMigration = (
 
   return "mixed";
 };
+
+const legacyBorderRadiusNameTokenLookup = {
+  full: "full",
+  xlarge: "12",
+  large: "8",
+  medium: "4",
+  small: "2",
+};
+
+/**
+ * Takes an old valid border-radius token and returns the new converted radius token
+ * oldValue: "xlarge", "full"
+ * @returns "12", "full"
+ */
+function convertBorderRadiusToRadius(oldValue: string): string {
+  const radiusTokens = oldValue.split(" ");
+
+  const newRadius = [];
+  for (const radiusToken of radiusTokens) {
+    if (radiusToken === "full") {
+      newRadius.push(radiusToken);
+    } else if (!(radiusToken in legacyBorderRadiusNameTokenLookup)) {
+      console.warn(`Possibly invalid radius token found: ${radiusToken}\n`);
+      newRadius.push(radiusToken);
+    } else {
+      newRadius.push(`${legacyBorderRadiusNameTokenLookup[radiusToken]}`);
+    }
+  }
+
+  return newRadius.join(" ");
+}

@@ -22,7 +22,7 @@
 .aksel-search__wrapper {
   display: inline-flex;
   align-items: center;
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
 
   /* We have to outline the whole container to include the Search-buttons */
   &:has(.aksel-search__input:focus-visible) {
@@ -97,8 +97,8 @@
 .aksel-search__button-search {
   flex-shrink: 0;
   border-radius: 0;
-  border-top-right-radius: var(--ax-border-radius-large);
-  border-bottom-right-radius: var(--ax-border-radius-large);
+  border-top-right-radius: var(--ax-radius-8);
+  border-bottom-right-radius: var(--ax-radius-8);
 }
 
 .aksel-search__button-search.aksel-button--secondary {

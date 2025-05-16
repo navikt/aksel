@@ -1,9 +1,9 @@
 .aksel-expansioncard {
-  --__axc-expansioncard-border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
+  --__axc-expansioncard-border-radius: calc(var(--ax-radius-12) - 1px);
   --__axc-expansioncard-padding-block: var(--ax-space-20);
   --__axc-expansioncard-padding-inline: var(--ax-space-20);
 
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   background-color: var(--ax-bg-raised);
   height: fit-content;
   border: 1px solid var(--ax-border-neutral);
@@ -91,7 +91,7 @@
   margin: 0;
   background: transparent;
   border: none;
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   min-height: 3rem;
   min-width: 3rem;
   font-size: 1.5rem;

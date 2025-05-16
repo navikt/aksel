@@ -46,7 +46,7 @@
   align-items: center;
   gap: var(--ax-space-8);
   padding: var(--ax-space-4);
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-radius-4);
   color: var(--ax-text-neutral);
 
   &:hover {

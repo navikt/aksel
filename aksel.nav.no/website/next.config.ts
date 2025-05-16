@@ -2,6 +2,9 @@ import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 import path from "path";
 
+const useCdn = process.env.USE_CDN_ASSETS === "true";
+const isProduction = process.env.PRODUCTION === "true";
+
 const cdnUrl = "https://cdn.nav.no";
 const dekoratorUrl = "https://www.nav.no";
 const tempChromaticRedirect =
@@ -11,16 +14,16 @@ const cspHeader = `
     default-src 'self' 'unsafe-inline' ${cdnUrl};
     script-src 'self' 'unsafe-eval' 'unsafe-inline' ${dekoratorUrl} ${cdnUrl};
     font-src 'self' ${cdnUrl} data:;
-    style-src 'self' 'unsafe-inline' ${dekoratorUrl} ${cdnUrl};
+    style-src 'self' 'unsafe-inline' ${dekoratorUrl} ${cdnUrl} https://cdn.jsdelivr.net;
     object-src 'none';
     base-uri 'self';
     form-action 'self' https://codesandbox.io/api/v1/sandboxes/define;
     frame-ancestors 'self' localhost:3000;
-    frame-src 'self' localhost:3000 https://aksel.ansatt.dev.nav.no;
+    frame-src 'self' localhost:3000 http://localhost:3000 https://localhost:3000 https://aksel.ansatt.dev.nav.no;
     media-src 'self' ${cdnUrl} cdn.sanity.io;
-    upgrade-insecure-requests;
     img-src 'self' blob: data: cdn.sanity.io ${dekoratorUrl} https://avatars.githubusercontent.com data: ${cdnUrl};
     connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${tempChromaticRedirect} https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://umami.nav.no https://main--66b4b3beb91603ed0ab5c45e.chromatic.com;
+    ${isProduction ? "upgrade-insecure-requests;" : ""}
 `;
 
 const securityHeaders = [
@@ -53,9 +56,6 @@ const securityHeaders = [
     value: cspHeader.replace(/\n/g, ""),
   },
 ];
-
-const useCdn = process.env.USE_CDN_ASSETS === "true";
-const isProduction = process.env.PRODUCTION === "true";
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
