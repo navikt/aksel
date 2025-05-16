@@ -218,8 +218,43 @@
   object-fit: cover;
 }
 
-.sectionImageBeta {
+.betaHue {
   filter: hue-rotate(65deg);
+}
+
+.cardImageWrapper {
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
+
+.cardImage {
+  border-top-left-radius: var(--ax-border-radius-large);
+  border-top-right-radius: var(--ax-border-radius-large);
+}
+
+.card {
+  position: relative;
+  background: var(--ax-bg-raised);
+  box-shadow: var(--ax-shadow-dialog);
+  border-radius: var(--ax-border-radius-large);
+  transition-property: opacity, transform;
+  transition-duration: 700ms;
+
+  &:focus-within {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardNotVisible {
+  opacity: 0;
+  transform: translateY(12px);
 }
 
 @media (min-width: 480px) {

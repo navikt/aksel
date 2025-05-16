@@ -64,7 +64,7 @@ export const Highlight = ({
             layout="fill"
             aria-hidden
             className={cl(`${styles.sectionImage}`, {
-              [`${styles.sectionImageBeta}`]: article?.status?.tag === "beta",
+              [`${styles.betaHue}`]: article?.status?.tag === "beta",
             })}
             decoding="auto"
           />
@@ -78,7 +78,7 @@ export const Highlight = ({
             objectFit="cover"
             aria-hidden
             className={cl(`${styles.sectionImage}`, {
-              [`${styles.sectionImageBeta}`]: article?.status?.tag === "beta",
+              [`${styles.betaHue}`]: article?.status?.tag === "beta",
             })}
             decoding="auto"
           />

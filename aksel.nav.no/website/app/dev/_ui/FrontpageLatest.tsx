@@ -4,7 +4,6 @@ import cl from "clsx";
 import { useEffect, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { BoxNew, Heading } from "@navikt/ds-react";
-import ErrorBoundary from "@/error-boundary";
 import Card, { ArticleT } from "./Card";
 import { Highlight } from "./Highlight";
 import styles from "./landingpage.module.css";
@@ -97,14 +96,6 @@ function getList(block: LatestT) {
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     );
   });
-}
-
-export default function Component(props: LatestArticlesProps) {
-  return (
-    <ErrorBoundary boundaryName="Latest-articles">
-      <Latest {...props} />
-    </ErrorBoundary>
-  );
 }
 
 export const FrontpageLatest = ({ latest }) => {

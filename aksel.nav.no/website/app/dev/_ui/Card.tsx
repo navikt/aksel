@@ -2,12 +2,13 @@ import cl from "clsx";
 import NextImage from "next/legacy/image";
 import NextLink from "next/link";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
-import { urlFor } from "@/sanity/interface";
 import { abbrName, getImage } from "@/utils";
 import { Tag } from "./Tag";
+import styles from "./landingpage.module.css";
 
 export type ArticleT = {
   _key: string;
@@ -45,35 +46,29 @@ const Card = ({ article, visible, index }: CardProps) => {
     "templates_artikkel",
   ].includes(article._type);
 
-  const statusImageUrl = urlFor(article.status?.bilde)
-    ?.auto("format")
-    .url();
-
-  const statusImageBlurUrl = urlFor(article.status?.bilde)
+  const statusImageUrl = urlForImage(article.status?.bilde)?.url();
+  const statusImageBlurUrl = urlForImage(article.status?.bilde)
     ?.width(24)
     .height(24)
     .blur(10)
     .url();
 
-  const fallbackImageUrl = urlFor(article.seo?.image)
-    ?.auto("format")
-    .url();
-
-  const fallbackImageBlurUrl = urlFor(article.seo?.image)
+  const fallbackImageUrl = urlForImage(article.seo?.image)?.url();
+  const fallbackImageBlurUrl = urlForImage(article.seo?.image)
     ?.width(24)
     .height(24)
     .blur(10)
     .url();
 
   let Image = (
-    <div className="relative h-[200px] w-full">
+    <div className={styles.cardImageWrapper}>
       <NextImage
         layout="fill"
         objectFit="cover"
         src={getImage(article?.heading ?? "", "thumbnail")}
         alt={article.heading + " thumbnail"}
         aria-hidden
-        className="rounded-t-lg"
+        className={styles.cardImage}
       />
     </div>
   );
@@ -92,7 +87,7 @@ const Card = ({ article, visible, index }: CardProps) => {
     );
   } else if (fallbackImageUrl) {
     Image = (
-      <div className="relative h-[200px] w-full">
+      <div className={styles.cardImageWrapper}>
         <NextImage
           src={fallbackImageUrl}
           blurDataURL={fallbackImageBlurUrl}
@@ -101,7 +96,7 @@ const Card = ({ article, visible, index }: CardProps) => {
           objectFit="cover"
           alt={article.heading + " thumbnail"}
           aria-hidden
-          className="rounded-t-lg"
+          className={styles.cardImage}
         />
       </div>
     );
@@ -109,15 +104,10 @@ const Card = ({ article, visible, index }: CardProps) => {
 
   return (
     <div
-      className={cl(
-        "group relative rounded-lg bg-surface-default",
-        "shadow-xsmall ring-border-subtle-hover focus-within:ring-[3px] focus-within:ring-border-focus hover:shadow-small",
-        `transition-[opacity,transform] duration-700`,
-        {
-          "translate-y-0 opacity-100": visible,
-          "translate-y-12 opacity-0": !visible,
-        },
-      )}
+      className={cl(`${styles.card}`, {
+        [`${styles.cardVisible}`]: visible,
+        [`${styles.cardNotVisible}`]: !visible,
+      })}
       style={{ transitionDelay: `${index * 70}ms` }}
     >
       {showImage && (
@@ -126,7 +116,7 @@ const Card = ({ article, visible, index }: CardProps) => {
             "flex max-h-80 items-center justify-center overflow-hidden rounded-t-lg",
             "bg-deepblue-200 filter",
             {
-              "hue-rotate-[65deg]": article?.status?.tag === "beta",
+              [`${styles.betaHue}`]: article?.status?.tag === "beta",
             },
           )}
         >
