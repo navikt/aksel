@@ -2,7 +2,6 @@ import { defineField, defineType } from "sanity";
 import { FileCodeIcon, FileImageIcon, FileTextIcon } from "@navikt/aksel-icons";
 import { capitalize } from "@/utils";
 import SanityTabGroups from "../presets/groups";
-import { hiddenFields } from "../presets/hidden-fields";
 import { sanitySlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
 
@@ -12,7 +11,6 @@ export const EndringsloggArtikkel = defineType({
   type: "document",
   groups: SanityTabGroups,
   fields: [
-    ...hiddenFields,
     titleField,
 
     sanitySlug("grunnleggende/endringslogg/", 3),
@@ -85,7 +83,7 @@ export const EndringsloggArtikkel = defineType({
 });
 
 const typeToIcon = {
-  design: <FileImageIcon aria-hidden />,
-  dokumentasjon: <FileTextIcon aria-hidden />,
-  kode: <FileCodeIcon aria-hidden />,
+  design: <FileImageIcon aria-hidden fontSize="1.6rem" />,
+  dokumentasjon: <FileTextIcon aria-hidden fontSize="1.6rem" />,
+  kode: <FileCodeIcon aria-hidden fontSize="1.6rem" />,
 };
