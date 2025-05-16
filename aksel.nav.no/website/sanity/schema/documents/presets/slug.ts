@@ -121,3 +121,28 @@ export const kategoriSlug = (prefix: string) =>
       },
     },
   });
+
+export const endringsloggSlug = (prefix: string) =>
+  defineField({
+    title: "url",
+    name: "slug",
+    type: "slug",
+    validation: (Rule) => validateSlug(Rule, prefix, 3),
+    group: "settings",
+    options: {
+      source: "heading",
+      slugify: (input) => {
+        return `${prefix}${"endringslogg/"}${input}`
+          .toLowerCase()
+          .trim()
+          .slice(0, 200)
+          .trim()
+          .replace(/\s+/g, "-")
+          .replace(/-+/gm, "-")
+          .replace(/æ/g, "a")
+          .replace(/å/g, "a")
+          .replace(/ø/g, "o")
+          .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, "");
+      },
+    },
+  });

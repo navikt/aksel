@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
-import { kategoriSlug } from "../presets/slug";
+import { endringsloggSlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
 
 const prefix = "grunnleggende/";
@@ -15,6 +15,14 @@ export const EndringsloggArtikkel = defineType({
     ...hiddenFields,
     titleField,
 
+    endringsloggSlug(prefix),
+    defineField({
+      title: "Endringsdato",
+      name: "endringsdato",
+      description: "Datoen styrer hvor kortet vises i endringsloggen.",
+      validation: (Rule) => Rule.required(),
+      type: "datetime",
+    }),
     defineField({
       title: "Type endring",
       name: "endringstype",
@@ -29,39 +37,27 @@ export const EndringsloggArtikkel = defineType({
         layout: "radio",
       },
     }),
-    kategoriSlug(prefix),
     defineField({
-      name: "fremhevet",
       title: "Fremhevet",
-      description: "...",
+      name: "fremhevet",
+      description:
+        "Dette valget legger på styling på oppdateringen som gjør at den tiltrekker seg mer oppmerksomhet.",
       type: "boolean",
       initialValue: false,
     }),
     defineField({
-      name: "endringsdato",
-      title: "Endringsdato",
-      description: "Datoen styrer hvor kortet vises i endringsloggen.",
-      validation: (Rule) => Rule.required(),
-      type: "date",
+      hidden: ({ document }) => !document?.fremhevet,
+      title: "Fremhevet herobilde",
+      name: "herobilde",
+      description:
+        "Bildet vises øverst på kortet/siden og blir bruks som OG-bilde. Anbefalt størrelse er 1200x630px.",
+      type: "image",
     }),
     defineField({
       title: "Innhold",
       name: "innhold",
-      description: "Dette innholdet vises på innlegget i endringsloggen",
-      type: "riktekst_grunnleggende",
-    }),
-    defineField({
-      name: "vismer",
-      title: "Vis mer",
-      description: "Mer innhold i innlegget som vises/åpnes med en knapp",
-      type: "boolean",
-      initialValue: false,
-    }),
-    defineField({
-      hidden: ({ document }) => !document?.vismer,
-      title: 'Innhold i "vis mer"',
-      name: "merinnhold",
-      description: 'Dette innholdet vises når noen klikker på "Vis mer"',
+      description:
+        'Dette innholdet vises på innlegget i endringsloggen. Er det "mye" innhold vil en "Vis mer"-knapp dukke opp.',
       type: "riktekst_grunnleggende",
     }),
   ],
