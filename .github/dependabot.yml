@@ -11,6 +11,23 @@ updates:
       interval: weekly
     registries:
       - npm-github
+    groups:
+      sanity:
+        patterns:
+          - "sanity"
+          - "@sanity/vision"
+          - "@sanity/schema"
+      eslint:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+      storybook:
+        patterns:
+          - "*storybook*"
 
   - package-ecosystem: github-actions
     directory: "/"

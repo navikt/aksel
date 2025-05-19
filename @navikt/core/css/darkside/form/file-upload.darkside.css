@@ -16,7 +16,7 @@
   text-align: center;
   padding: var(--ax-space-20);
   border: 1px dashed var(--ax-border-neutral);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   background-color: var(--__axc-dropzone-background);
   color: var(--ax-text-neutral);
   transition: background-color var(--__axc-dropzone-animation-length-short) var(--__axc-dropzone-animation-ease-out);
@@ -62,7 +62,7 @@
     position: absolute;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-    border-radius: var(--ax-border-radius-xlarge);
+    border-radius: var(--ax-radius-12);
     animation: akselDropzoneDragoverAnimation var(--__axc-dropzone-animation-length-short)
       var(--__axc-dropzone-animation-ease-out);
   }
@@ -111,7 +111,7 @@
 .aksel-dropzone__area-release__icon {
   display: grid;
   padding: var(--__axc-dropzone-icon-padding);
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   background-color: var(--ax-bg-neutral-moderateA);
   transition:
     background-color 300ms var(--__axc-dropzone-animation-ease-out),
@@ -161,7 +161,7 @@ li.aksel-file-item {
   border: 1px solid var(--ax-border-neutral-subtleA);
   outline-offset: -1px;
   transition: outline-color 250ms cubic-bezier(0, 0.3, 0.15, 1);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   padding: var(--ax-space-20);
   display: flex;
   gap: var(--ax-space-12);
@@ -175,7 +175,7 @@ li.aksel-file-item {
 .aksel-file-item__icon {
   background-color: var(--ax-bg-neutral-moderateA);
   color: var(--ax-text-neutral);
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   min-height: 2.5rem;
   min-width: 2.5rem;
   margin-top: var(--ax-space-2);

@@ -7,7 +7,7 @@
   --__axc-tag-text: ;
   --__axc-tag-text-strong: ;
 
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-radius-4);
   display: inline-flex;
   align-items: center;
   justify-content: center;

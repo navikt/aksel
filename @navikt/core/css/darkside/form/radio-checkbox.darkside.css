@@ -30,7 +30,7 @@
 .aksel-checkbox__label::before,
 .aksel-radio__label::before {
   content: "";
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-radius-4);
   background-color: var(--ax-bg-input);
   flex-shrink: 0;
   width: 1.5rem;
@@ -39,7 +39,7 @@
 }
 
 .aksel-radio__label::before {
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
 }
 
 .aksel-checkbox__content,
@@ -74,7 +74,7 @@
   position: absolute;
   width: 100%;
   height: calc(100% - var(--ax-space-24));
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-radius-4);
   outline: 3px solid var(--ax-border-focus);
   outline-offset: 3px;
   pointer-events: none;

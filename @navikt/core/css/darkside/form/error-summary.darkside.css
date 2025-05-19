@@ -2,7 +2,7 @@
   background-color: var(--ax-bg-default);
   padding: var(--ax-space-20);
   border: 4px solid var(--ax-border-danger);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   outline-offset: 3px;
 
   &:focus-visible,

@@ -1,5 +1,5 @@
 .aksel-alert {
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   border: 1px solid;
   padding: var(--ax-space-20);
   display: flex;
@@ -40,7 +40,7 @@
   background-color: var(--ax-bg-info-moderate);
 
   > .aksel-alert__icon {
-    color: var(--ax-text-info-icon);
+    color: var(--ax-text-info-decoration);
   }
 }
 
@@ -49,7 +49,7 @@
   background-color: var(--ax-bg-success-moderate);
 
   > .aksel-alert__icon {
-    color: var(--ax-text-success-icon);
+    color: var(--ax-text-success-decoration);
   }
 }
 
@@ -58,7 +58,7 @@
   background-color: var(--ax-bg-warning-moderate);
 
   > .aksel-alert__icon {
-    color: var(--ax-text-warning-icon);
+    color: var(--ax-text-warning-decoration);
   }
 }
 
@@ -67,7 +67,7 @@
   background-color: var(--ax-bg-danger-moderate);
 
   > .aksel-alert__icon {
-    color: var(--ax-text-danger-icon);
+    color: var(--ax-text-danger-decoration);
   }
 }
 

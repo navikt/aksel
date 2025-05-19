@@ -2,7 +2,6 @@ import React, { forwardRef } from "react";
 import type {
   BorderColorKeys,
   BorderColorWithRoleKeys,
-  BorderRadiusKeys,
   ShadowKeys,
   StaticBgKeys,
   StaticDefaultBgKeys,
@@ -17,7 +16,11 @@ import BasePrimitive, {
 } from "../base/BasePrimitive";
 import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
-import { ResponsiveProp, SpaceDelimitedAttribute } from "../utilities/types";
+import {
+  BorderRadiusScale,
+  ResponsiveProp,
+  SpaceDelimitedAttribute,
+} from "../utilities/types";
 
 export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
@@ -38,12 +41,12 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * or an object of radius tokens for different breakpoints.
    * @example
    * borderRadius='full'
-   * borderRadius='0 full large small'
-   * borderRadius={{xs: 'small large', sm: '0', md: 'large', lg: 'full'}}
+   * borderRadius='0 full 12 2'
+   * borderRadius={{xs: '2 12', sm: '0', md: '12', lg: 'full'}}
    * @see {@link BorderRadiusKeys}
    */
   borderRadius?: ResponsiveProp<
-    SpaceDelimitedAttribute<BorderRadiusKeys | "0">
+    SpaceDelimitedAttribute<BorderRadiusScale | "0">
   >;
   /**
    * CSS `border-width` property. If this is not set there will be no border.
@@ -126,8 +129,8 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
         ...getResponsiveProps(
           "ax",
           "box",
-          "border-radius",
-          "border-radius",
+          "radius",
+          "radius",
           borderRadius,
           false,
           ["0"],
@@ -146,7 +149,7 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
               "navds-box-bg": background,
               "navds-box-border-color": borderColor,
               "navds-box-border-width": borderWidth,
-              "navds-box-border-radius": borderRadius,
+              "navds-box-radius": borderRadius,
               "navds-box-shadow": shadow,
             })}
           >

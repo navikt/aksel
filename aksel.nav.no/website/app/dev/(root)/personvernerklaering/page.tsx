@@ -84,6 +84,10 @@ export default async function Page() {
             tema.
           </BodyLong>
           <Heading size="small" level="4" spacing data-aksel-heading-color>
+            aksel-example-theme
+          </Heading>
+          <BodyLong spacing>Husker valgt fargetema i kode-eksempler.</BodyLong>
+          <Heading size="small" level="4" spacing data-aksel-heading-color>
             aksel-consent
           </Heading>
 

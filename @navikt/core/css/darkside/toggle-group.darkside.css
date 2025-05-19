@@ -10,7 +10,7 @@
 
 /* Main Togglegroup */
 .aksel-toggle-group {
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   background-color: var(--ax-bg-input);
   box-shadow: inset 0 0 0 1px var(--ax-border-neutral);
   display: inline-grid;
@@ -30,7 +30,7 @@
   cursor: pointer;
   background-color: transparent;
   color: var(--ax-text-neutral);
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   min-width: fit-content;
   position: relative;
 
