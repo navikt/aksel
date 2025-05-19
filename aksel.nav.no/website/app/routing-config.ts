@@ -62,7 +62,7 @@ const PAGE_ROUTES: Routes = {
           slug: `grunnleggende/darkside/design-tokens`,
           tag: "ready",
           searchMetadata: {
-            intro: tokenMetadata.description,
+            intro: tokenMetadata?.description ?? "",
           },
         },
       ],
@@ -77,7 +77,7 @@ const PAGE_ROUTES: Routes = {
         slug: "komponenter/ikoner",
         tag: "ready",
         searchMetadata: {
-          intro: iconsMetadata.description,
+          intro: iconsMetadata?.description ?? "",
         },
       },
     ],
