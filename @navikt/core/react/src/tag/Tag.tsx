@@ -67,11 +67,11 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
     const { cn } = useRenameCSS();
     const filledVariant = variant?.endsWith("-filled") && "strong";
     const moderateVariant = variant?.endsWith("-moderate") && "moderate";
-    const color = variant?.replace("-filled", "").replace("-moderate", "");
 
     return (
       <BodyShort
         data-color-role={variantToRole(variant)}
+        data-variant={filledVariant || moderateVariant || "outline"}
         {...rest}
         ref={ref}
         as="span"
@@ -81,8 +81,6 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
           className,
           `navds-tag--${variant}`,
           `navds-tag--${size}`,
-          `navds-tag--${filledVariant || moderateVariant || "outline"}`,
-          `navds-tag--${color}`,
         )}
       >
         {icon && <span className={cn("navds-tag__icon--left")}>{icon}</span>}
