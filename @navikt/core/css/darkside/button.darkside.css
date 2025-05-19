@@ -20,63 +20,7 @@
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;
   }
-}
 
-.aksel-button--small,
-.aksel-button--xsmall {
-  --__axc-button-icon-margin: -2px;
-}
-
-.aksel-button--small {
-  padding: var(--ax-space-4) var(--ax-space-12);
-  min-height: 2rem;
-  min-width: 2rem;
-  gap: var(--ax-space-6);
-}
-
-.aksel-button--xsmall {
-  padding: var(--ax-space-2) var(--ax-space-8);
-  gap: var(--ax-space-4);
-
-  --__axc-button-icon-size: 1.25rem;
-}
-
-.aksel-button--icon-only {
-  padding: var(--ax-space-12);
-
-  &.aksel-button--small {
-    padding: var(--ax-space-4);
-  }
-
-  &.aksel-button--xsmall {
-    padding: var(--ax-space-2);
-  }
-}
-
-@supports not selector(:focus-visible) {
-  .aksel-button:focus {
-    outline: 3px solid var(--ax-border-focus);
-  }
-}
-
-.aksel-button__icon {
-  font-size: var(--__axc-button-icon-size);
-  display: flex;
-
-  &:first-child {
-    margin-left: var(--__axc-button-icon-margin);
-  }
-
-  &:last-child {
-    margin-right: var(--__axc-button-icon-margin);
-  }
-
-  .aksel-button--icon-only & {
-    margin: 0;
-  }
-}
-
-.aksel-button {
   &[data-variant="primary"] {
     background-color: var(--ax-bg-strong);
     color: var(--ax-text-contrast);
@@ -148,6 +92,60 @@
         color: var(--ax-text-default);
       }
     }
+  }
+}
+
+.aksel-button--small,
+.aksel-button--xsmall {
+  --__axc-button-icon-margin: -2px;
+}
+
+.aksel-button--small {
+  padding: var(--ax-space-4) var(--ax-space-12);
+  min-height: 2rem;
+  min-width: 2rem;
+  gap: var(--ax-space-6);
+}
+
+.aksel-button--xsmall {
+  padding: var(--ax-space-2) var(--ax-space-8);
+  gap: var(--ax-space-4);
+
+  --__axc-button-icon-size: 1.25rem;
+}
+
+@supports not selector(:focus-visible) {
+  .aksel-button:focus {
+    outline: 3px solid var(--ax-border-focus);
+  }
+}
+
+.aksel-button__icon {
+  font-size: var(--__axc-button-icon-size);
+  display: flex;
+
+  &:first-child {
+    margin-left: var(--__axc-button-icon-margin);
+  }
+
+  &:last-child {
+    margin-right: var(--__axc-button-icon-margin);
+  }
+
+  .aksel-button--icon-only & {
+    margin: 0;
+  }
+}
+
+.aksel-button--icon-only {
+  padding: var(--ax-space-12);
+
+  &.aksel-button--small {
+    padding: var(--ax-space-4);
+  }
+
+  &.aksel-button--xsmall {
+    padding: var(--ax-space-2);
   }
 }
 
