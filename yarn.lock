@@ -10509,7 +10509,7 @@ __metadata:
     react-dom: "npm:^18.0.0"
     typescript: "npm:5.8.3"
     vite: "npm:^5.4.18"
-    vite-plugin-singlefile: "npm:^1.0.0"
+    vite-plugin-singlefile: "npm:^2.2.0"
     vite-plugin-svgr: "npm:^4.2.0"
   languageName: unknown
   linkType: soft
@@ -28846,15 +28846,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-singlefile@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "vite-plugin-singlefile@npm:1.0.0"
+"vite-plugin-singlefile@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "vite-plugin-singlefile@npm:2.2.0"
   dependencies:
-    micromatch: "npm:^4.0.5"
+    micromatch: "npm:^4.0.8"
   peerDependencies:
-    rollup: ^4.9.5
-    vite: ^5.0.11
-  checksum: 10/851dc17df1b25b07969f3dd6d9b09f70eb346d6c56e966bee2cbda7e2a37ea4300d91e2afff10289eee88cf5cc996cb3a3447e47e4481ad76d7ec64082bcce21
+    rollup: ^4.35.0
+    vite: ^5.4.11 || ^6.0.0
+  checksum: 10/c73b6831d30fe00a6ac441218cc74bb6d94bf48e323c980ed8316b69fdd4c51b44a8c0ed72b3dd34a41ace1b082091504359145938732bca6a20b9c241f1b480
   languageName: node
   linkType: hard
 
