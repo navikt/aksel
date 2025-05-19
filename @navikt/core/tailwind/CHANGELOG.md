@@ -1,5 +1,11 @@
 # @navikt/ds-tailwind
 
+## 7.22.0
+
+### Minor Changes
+
+- Border-radius: Removed `rounded`-value based on aksel token-config. Use built-in values from tailwindcss as replacement [Tailwindcss docs](https://tailwindcss.com/docs/border-radius). ([#3784](https://github.com/navikt/aksel/pull/3784))
+
 ## 7.21.1
 
 ## 7.21.0
