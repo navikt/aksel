@@ -45,6 +45,6 @@
     "@navikt/ds-css": "../../@navikt/core/css",
     "@navikt/ds-react": "../../@navikt/core/react",
     "@navikt/ds-tokens": "../../@navikt/core/tokens",
-    "vite": "^5.4.18"
+    "vite": "^5.4.19"
   }
 }
