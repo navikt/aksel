@@ -131,14 +131,6 @@
             "@navikt/core/tokens/dist/darkside/tokens.css"
           ]
         }
-      ],
-      "selector-pseudo-class-no-unknown": [
-        true,
-        {
-          "ignorePseudoClasses": [
-            "/^global$/"
-          ]
-        }
       ]
     },
     "ignoreFiles": [
