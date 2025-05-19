@@ -35,7 +35,7 @@ export const isSlugUnique: SlugIsUniqueValidator = (slug, options) => {
 
 export const sanitySlug = (prefix: string, depth: number, source?: string) =>
   defineField({
-    title: "url",
+    title: "URL",
     name: "slug",
     type: "slug",
     validation: (Rule) => validateSlug(Rule, prefix, depth ?? 3),
@@ -92,7 +92,7 @@ export const validateKategoriSlug = (Rule: SlugRule, prefix: string) =>
 
 export const kategoriSlug = (prefix: string) =>
   defineField({
-    title: "url",
+    title: "URL",
     name: "slug",
     type: "slug",
     validation: (Rule) => validateKategoriSlug(Rule, prefix),

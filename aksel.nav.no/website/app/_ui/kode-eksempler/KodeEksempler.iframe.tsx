@@ -69,7 +69,9 @@ function KodeEksemplerIFrame(props: {
   };
 
   const demoVariant = dir.variant;
-  const iframeUrl = stegaClean(`/${demoVariant}/${dir.title}/${current?.navn}`);
+  const iframeUrl = stegaClean(
+    `/${demoVariant}/${dir.title}/${current?.navn}?darkside=true`,
+  );
 
   return (
     <div>

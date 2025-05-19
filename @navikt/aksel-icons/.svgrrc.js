@@ -10,7 +10,7 @@ module.exports = {
     role: "img",
   },
   replaceAttrValues: {
-    "#23262A": "currentColor",
+    "#202733": "currentColor",
   },
   template,
 };

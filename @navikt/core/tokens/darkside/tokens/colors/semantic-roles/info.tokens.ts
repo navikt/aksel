@@ -95,7 +95,7 @@ export const infoSemanticTokenConfig = {
       comment:
         "Standard farge for tekst og ikoner med rollen info. Godkjent på alle bakgrunner unntatt strong.",
     },
-    "info-icon": {
+    "info-decoration": {
       value: "{ax.info.600.value}",
       type: "color",
       group: "text.info",

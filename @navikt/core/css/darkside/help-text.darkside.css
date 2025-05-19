@@ -3,7 +3,7 @@
   border: 0;
   cursor: pointer;
   background-color: transparent;
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,13 +13,13 @@
 }
 
 .aksel-help-text__icon {
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
 }
 
 .aksel-help-text__popover.aksel-popover {
   background-color: var(--ax-bg-info-moderate);
   max-width: min(65ch, calc(100vw - var(--ax-space-24)));
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   border: 1px solid var(--ax-border-info);
 }
 

@@ -23,6 +23,7 @@ const filtered = [
   "ds_artikkel",
   "komponent_artikkel",
   "grunnleggende_landingsside",
+  "ds_endringslogg_artikkel",
   "templates_landingsside",
   "templates_artikkel",
   "komponenter_landingsside",

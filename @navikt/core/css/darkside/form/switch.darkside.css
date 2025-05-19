@@ -57,7 +57,7 @@
     left: 0;
     width: 100%;
     height: calc(100% - var(--__axc-switch-block-padding) * 2);
-    border-radius: var(--ax-border-radius-medium);
+    border-radius: var(--ax-radius-4);
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;
     pointer-events: none;
@@ -85,7 +85,7 @@
   position: absolute;
   top: var(--ax-space-12);
   left: 0;
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   border: 2px solid var(--ax-border-neutral);
   transition-property: background-color, border-color;
   transition-duration: 100ms;
@@ -124,7 +124,7 @@
 /* ------------------------------ Switch Thumb ------------------------------ */
 .aksel-switch__thumb {
   background-color: var(--ax-bg-neutral-strong);
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   width: 1.125rem;
   height: 1.125rem;
   position: absolute;

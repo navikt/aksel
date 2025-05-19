@@ -95,7 +95,7 @@ export const neutralSemanticTokenConfig = {
       comment:
         "En nedtonet farge for tekst og ikoner med rollen neutral. Godkjent på alle bakgrunner unntatt strong.",
     },
-    "neutral-icon": {
+    "neutral-decoration": {
       value: "{ax.neutral.600.value}",
       type: "color",
       group: "text.neutral",

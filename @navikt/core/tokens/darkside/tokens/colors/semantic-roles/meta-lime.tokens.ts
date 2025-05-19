@@ -95,7 +95,7 @@ export const metaLimeSemanticTokenConfig = {
       comment:
         "Standard farge for tekst og ikoner med rollen meta lime. Godkjent på alle bakgrunner unntatt strong.",
     },
-    "meta-lime-icon": {
+    "meta-lime-decoration": {
       value: "{ax.meta-lime.600.value}",
       type: "color",
       group: "text.meta-lime",

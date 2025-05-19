@@ -95,7 +95,7 @@ export const brandBlueSemanticTokenConfig = {
       comment:
         "Standard farge for tekst og ikoner med rollen brand blue. Godkjent på alle bakgrunner unntatt strong.",
     },
-    "brand-blue-icon": {
+    "brand-blue-decoration": {
       value: "{ax.brand-blue.600.value}",
       type: "color",
       group: "text.brand-blue",

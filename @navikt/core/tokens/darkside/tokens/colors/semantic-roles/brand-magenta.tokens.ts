@@ -95,7 +95,7 @@ export const brandMagentaSemanticTokenConfig = {
       comment:
         "Standard farge for tekst og ikoner med rollen brand magenta. Godkjent på alle bakgrunner unntatt strong.",
     },
-    "brand-magenta-icon": {
+    "brand-magenta-decoration": {
       value: "{ax.brand-magenta.600.value}",
       type: "color",
       group: "text.brand-magenta",

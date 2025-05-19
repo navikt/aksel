@@ -32,7 +32,7 @@ export const Prinsipp = defineType({
     titleField,
     editorField,
     defineField({
-      title: "url",
+      title: "URL",
       name: "slug",
       type: "slug",
       validation: (Rule) =>

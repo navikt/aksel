@@ -1,4 +1,9 @@
-import type { LegacySpacingKeys, SpaceKeys } from "@navikt/ds-tokens/types";
+import type {
+  BorderRadiusKeys,
+  LegacyBorderRadiusKeys,
+  LegacySpacingKeys,
+  SpaceKeys,
+} from "@navikt/ds-tokens/types";
 import { ResponsiveProp } from "./types";
 
 export function getResponsiveValue<T = string>(
@@ -55,10 +60,21 @@ const legacySpacingTokenLookup: Record<
   "--ax-spacing-0": "--ax-space-0",
 };
 
+const legacyBorderRadiusNameTokenLookup: Record<
+  `${LegacyBorderRadiusKeys}`,
+  `${BorderRadiusKeys}`
+> = {
+  full: "full",
+  xlarge: "12",
+  large: "8",
+  medium: "4",
+  small: "2",
+};
+
 const translateTokenStringToCSS = (
   specialLayout: string,
   tokenString: string,
-  tokenSubgroup: "spacing" | "border-radius",
+  tokenSubgroup: "spacing" | "radius",
   tokenExceptions: string[],
   invert: boolean,
   prefix: string,
@@ -91,6 +107,9 @@ const translateTokenStringToCSS = (
         output = `var(${
           legacySpacingTokenLookup[spacingTokenName] ?? spacingTokenName
         })`;
+      } else if (tokenSubgroup === "radius") {
+        const name = legacyBorderRadiusNameTokenLookup[propValue] ?? propValue;
+        output = `var(--${prefix}-radius-${name})`;
       }
 
       // Handle inversion for negative values
@@ -107,7 +126,7 @@ export function getResponsiveProps<T extends string>(
   prefix: string,
   componentName: string,
   componentProp: string,
-  tokenSubgroup: "spacing" | "border-radius",
+  tokenSubgroup: "spacing" | "radius",
   responsiveProp?: ResponsiveProp<T>,
   invert = false,
   tokenExceptions: string[] = [],

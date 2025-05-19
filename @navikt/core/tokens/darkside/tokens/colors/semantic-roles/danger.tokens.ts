@@ -95,7 +95,7 @@ export const dangerSemanticTokenConfig = {
       comment:
         "Standard farge for tekst og ikoner med rollen danger. Godkjent på alle bakgrunner unntatt strong.",
     },
-    "danger-icon": {
+    "danger-decoration": {
       value: "{ax.danger.600.value}",
       type: "color",
       group: "text.danger",
