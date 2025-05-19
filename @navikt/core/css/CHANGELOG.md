@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.22.0
+
+### Minor Changes
+
+- Darkside: Components now use new `radius`-tokens, replacing `border-radius`-tokens. ([#3784](https://github.com/navikt/aksel/pull/3784))
+
 ## 7.21.1
 
 ### Patch Changes
