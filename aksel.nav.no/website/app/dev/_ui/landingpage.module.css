@@ -68,6 +68,7 @@
   --brand-blue-moderate: #005d96; /* lighter than 00253c? */
 }
 
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .heroLinearBG {
   background: linear-gradient(196deg, var(--gradient-dark) 0%, transparent 30%);
 }
@@ -138,8 +139,15 @@
 }
 
 .forsidePageWrapper {
-  background: linear-gradient(180deg, transparent 0%, var(--ax-bg-default) 52%);
   margin-inline: var(--ax-space-8);
+}
+
+.cubeFader {
+  background: linear-gradient(180deg, transparent 0%, var(--ax-bg-default) 52%);
+}
+
+.cubeBlocker {
+  background: var(--ax-bg-default);
 }
 
 .godPraksisHeading {
@@ -165,7 +173,8 @@
 }
 
 .latestHeading {
-  margin-block: var(--ax-space-64) var(--ax-space-28);
+  /* TODO: using margin here leaves a gap in the cubeBlocker */
+  padding-block: var(--ax-space-64) var(--ax-space-28);
   color: var(--ax-text-brand-blue);
 }
 

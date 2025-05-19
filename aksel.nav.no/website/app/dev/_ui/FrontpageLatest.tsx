@@ -98,9 +98,15 @@ function getList(block: LatestT) {
   });
 }
 
-export const FrontpageLatest = ({ latest }) => {
+export const FrontpageLatest = ({
+  latest,
+  className,
+}: {
+  latest: LatestT[];
+  className?: string;
+}) => {
   return (
-    <BoxNew>
+    <BoxNew className={className}>
       {latest.map((x) => {
         switch (x._type) {
           case "nytt_fra_aksel":

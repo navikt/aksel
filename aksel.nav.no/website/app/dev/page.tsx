@@ -1,5 +1,6 @@
 import {
   Page as AkselPage,
+  Bleed,
   BodyLong,
   BoxNew,
   HGrid,
@@ -52,46 +53,61 @@ const Page = async () => {
             <PageBlock width="xl" gutters>
               <Hero />
               {/* God praksis */}
-              <BoxNew
-                background="raised"
-                borderWidth="1"
-                borderColor="neutral-subtleA"
-                borderRadius="xlarge"
-                paddingBlock={{ xs: "space-48" }}
-                paddingInline={{ xs: "space-16", sm: "space-48" }}
+              <Bleed
+                /* TODO: maybe this fading & blocking of cubeanim should be baked into the cubeanim? */
+                className={styles.cubeFader}
+                marginInline="full"
+                reflectivePadding
               >
-                <VStack gap="space-12">
-                  <BoxNew paddingInline={{ xs: "2", sm: "6" }}>
-                    <Heading
-                      level="2"
-                      size="xlarge"
-                      className={styles.godPraksisHeading}
-                      spacing
-                    >
-                      God praksis
-                    </Heading>
-                    <BodyLong size="large" className={styles.godPraksisInfo}>
-                      Alle som jobber med produktutvikling i Nav sitter på
-                      kunnskap og erfaring som er nyttig for andre. Derfor deler
-                      vi god praksis med hverandre her.
-                    </BodyLong>
-                  </BoxNew>
-
-                  <HGrid as="ul" columns={{ md: 2, xl: 3 }}>
-                    {tema.map((t) => (
-                      <GpFrontpageCard
-                        key={t.title}
-                        href={`/god-praksis/${t.slug?.current}`}
-                        image={t.pictogram}
+                <BoxNew
+                  background="raised"
+                  borderWidth="1"
+                  borderColor="neutral-subtleA"
+                  borderRadius="xlarge"
+                  paddingBlock={{ xs: "space-48" }}
+                  paddingInline={{ xs: "space-16", sm: "space-48" }}
+                >
+                  <VStack gap="space-12">
+                    <BoxNew paddingInline={{ xs: "2", sm: "6" }}>
+                      <Heading
+                        level="2"
+                        size="xlarge"
+                        className={styles.godPraksisHeading}
+                        spacing
                       >
-                        {t.title}
-                      </GpFrontpageCard>
-                    ))}
-                  </HGrid>
-                </VStack>
-              </BoxNew>
+                        God praksis
+                      </Heading>
+                      <BodyLong size="large" className={styles.godPraksisInfo}>
+                        Alle som jobber med produktutvikling i Nav sitter på
+                        kunnskap og erfaring som er nyttig for andre. Derfor
+                        deler vi god praksis med hverandre her.
+                      </BodyLong>
+                    </BoxNew>
+
+                    <HGrid as="ul" columns={{ md: 2, xl: 3 }}>
+                      {tema.map((t) => (
+                        <GpFrontpageCard
+                          key={t.title}
+                          href={`/god-praksis/${t.slug?.current}`}
+                          image={t.pictogram}
+                        >
+                          {t.title}
+                        </GpFrontpageCard>
+                      ))}
+                    </HGrid>
+                  </VStack>
+                </BoxNew>
+              </Bleed>
               {/* Siste fra Aksel */}
-              {latest && <FrontpageLatest latest={latest} />}
+              {latest && (
+                <Bleed
+                  reflectivePadding
+                  marginInline="full"
+                  className={styles.cubeBlocker}
+                >
+                  <FrontpageLatest latest={latest} />
+                </Bleed>
+              )}
             </PageBlock>
           </BoxNew>
         </main>
