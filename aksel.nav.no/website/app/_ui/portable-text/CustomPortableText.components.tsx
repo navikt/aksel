@@ -146,6 +146,7 @@ function blockComponents({
           level="2"
           size="large"
           data-level="2"
+          data-text-prose
         >
           {children}
         </Heading>,
@@ -160,6 +161,7 @@ function blockComponents({
           tabIndex={-1}
           id={value?._key}
           data-level="3"
+          data-text-prose
         >
           {children}
         </Heading>,
@@ -173,6 +175,7 @@ function blockComponents({
           size="small"
           id={value?._key}
           data-level="4"
+          data-text-prose
         >
           {children}
         </Heading>,
@@ -186,6 +189,7 @@ function blockComponents({
           size="small"
           id={value?._key}
           data-level="4"
+          data-text-prose
         >
           {children}
         </Heading>,
