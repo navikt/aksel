@@ -5858,7 +5858,6 @@ __metadata:
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
     "@figma/plugin-typings": "npm:^1.100.2"
-    color: "npm:5.0.0"
     colorjs.io: "npm:^0.5.2"
     esbuild: "npm:^0.25.4"
     lightningcss: "npm:^1.29.3"

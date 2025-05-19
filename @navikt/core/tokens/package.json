@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.100.2",
-    "color": "5.0.0",
     "colorjs.io": "^0.5.2",
     "esbuild": "^0.25.4",
     "lightningcss": "^1.29.3",
