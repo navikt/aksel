@@ -2,7 +2,6 @@ import { defineField, defineType } from "sanity";
 import { FileCodeIcon, FileImageIcon, FileTextIcon } from "@navikt/aksel-icons";
 import { capitalize } from "@/utils";
 import SanityTabGroups from "../presets/groups";
-import { sanitySlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
 
 export const EndringsloggArtikkel = defineType({
@@ -13,7 +12,16 @@ export const EndringsloggArtikkel = defineType({
   fields: [
     titleField,
 
-    sanitySlug("grunnleggende/endringslogg/", 3),
+    defineField({
+      title: "URL",
+      name: "slug",
+      type: "slug",
+      validation: (Rule) => Rule.required(),
+      group: "settings",
+      options: {
+        source: "heading",
+      },
+    }),
     defineField({
       title: "Endringsdato",
       name: "endringsdato",
@@ -55,6 +63,7 @@ export const EndringsloggArtikkel = defineType({
     defineField({
       title: "Innhold",
       name: "innhold",
+      group: "innhold",
       description:
         'Dette innholdet vises på innlegget i endringsloggen. Er det "mye" innhold vil en "Vis mer"-knapp dukke opp.',
       type: "riktekst_grunnleggende",
