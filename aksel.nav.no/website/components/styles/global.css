@@ -28,7 +28,7 @@ html:has(.globalstyles) {
 }
 
 /* stylelint-disable-next-line aksel/no-class-override */
-:where(.globalstyles) a:not(.navds-link) {
+:where(.globalstyles) a:not(.navds-link, .navds-button) {
   color: inherit;
   text-decoration: inherit;
   text-underline-offset: 2px;
