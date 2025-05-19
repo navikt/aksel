@@ -210,6 +210,27 @@ export const Indent: Story = {
   },
 };
 
+export const ColorRole: Story = {
+  render: () => {
+    return (
+      <div className="colgap">
+        <h3>Default</h3>
+        <Accordion>
+          {[...Array(2)].map((_, y) => (
+            <Item key={y} />
+          ))}
+        </Accordion>
+        <h3>Danger</h3>
+        <Accordion data-color-role="danger">
+          {[...Array(2)].map((_, y) => (
+            <Item key={y} />
+          ))}
+        </Accordion>
+      </div>
+    );
+  },
+};
+
 export const Chromatic: Story = {
   render: (...props) => (
     <div>
@@ -232,6 +253,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Indent</h2>
         {Indent.render?.(...props)}
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        {ColorRole.render?.(...props)}
       </div>
     </div>
   ),
