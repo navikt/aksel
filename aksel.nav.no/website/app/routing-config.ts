@@ -13,6 +13,9 @@ type PageRoute = {
   slug: string;
   tag: string;
   heading: string;
+  /**
+   * Since we cant include the search metadata in the sanity query, we need to manually add it here.
+   */
   searchMetadata?: {
     intro?: string;
   };

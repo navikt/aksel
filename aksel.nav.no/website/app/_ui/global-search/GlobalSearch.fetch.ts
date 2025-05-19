@@ -37,8 +37,7 @@ async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
 
   const sanitizedData = sanitizeSanityData(allArticles);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  Object.entries(PAGE_ROUTES).forEach(([_, value]) => {
+  Object.values(PAGE_ROUTES).forEach((value) => {
     value.root.forEach((page) =>
       sanitizedData.push({
         heading: page.heading,
@@ -76,7 +75,7 @@ async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
         );
       });
     }
-  }, []);
+  });
 
   // Cache the data for 1 hour
   searchCache.set(CACHE_KEY, sanitizedData, 60 * 60);
