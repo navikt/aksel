@@ -38,6 +38,7 @@ const Page = async () => {
         contentBlockPadding="none"
         className={styles.akselPage}
       >
+        {/* insert context for AnimationContext wrap here */}
         <Header />
         <div className={styles.heroLinearBG} />
         <main tabIndex={-1} id="hovedinnhold" className={styles.frontPage}>

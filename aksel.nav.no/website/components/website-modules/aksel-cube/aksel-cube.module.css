@@ -1,5 +1,7 @@
 .animated {
-  animation: rotation 60s ease-in-out infinite;
+  animation:
+    rotation 60s ease-in-out infinite,
+    rainbow-hype 60s ease infinite;
   transform: rotate(-45deg);
   position: absolute;
   z-index: -1;
@@ -7,19 +9,22 @@
   pointer-events: none;
 
   & svg {
-    /* animation added here to both light & dark, to keep them "in sync" */
-    animation: 60s ease infinite rainbow-hype;
-    position: absolute;
     color: white;
   }
 
   --aksel-brand-teal-800: #41ab9d;
 }
 
+:global(.dark) .animated {
+  & svg {
+    color: var(--cube-stroke-color);
+  }
+}
+
 @property --cube-stroke-color {
   syntax: "<color>";
   inherits: false;
-  initial-value: transparent;
+  initial-value: #763cc0; /* our tokens are not typed with @property */
 }
 
 @keyframes rainbow-hype {
@@ -40,40 +45,49 @@
   }
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
-:global(.dark) .animated {
-  & svg {
-    animation: 60s ease infinite rainbow-hype;
-    color: var(--cube-stroke-color);
-    opacity: 0.2; /* missing subtleA colors? */
-  }
-}
-
 .animated1 {
-  animation: shape-1 60s ease-in-out infinite;
+  animation:
+    shape-1 60s ease-in-out infinite,
+    rainbow-hype 60s ease infinite;
   transform: translate(-95rem, -13.95rem);
+  position: absolute;
 }
 
 .animated2 {
-  animation: shape-2 60s ease-in-out infinite;
+  animation:
+    shape-2 60s ease-in-out infinite,
+    rainbow-hype 60s ease infinite;
   transform: translate(-69.5rem, -13.95rem);
+  position: absolute;
 }
 
 .animated3 {
-  animation: shape-3 60s ease-in-out infinite;
+  animation:
+    shape-3 60s ease-in-out infinite,
+    rainbow-hype 60s ease infinite;
   transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
+  position: absolute;
 }
 
-/* .animated4 { } */
+.animated4 {
+  animation: rainbow-hype 60s ease infinite;
+  position: absolute;
+}
 
 .animated5 {
-  animation: shape-5 60s ease-in-out infinite;
+  animation:
+    shape-5 60s ease-in-out infinite,
+    rainbow-hype 60s ease infinite;
   transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
+  position: absolute;
 }
 
 .animated6 {
-  animation: shape-6 60s ease-in-out infinite;
+  animation:
+    shape-6 60s ease-in-out infinite,
+    rainbow-hype 60s ease infinite;
   transform: translate(70rem, -13.95rem);
+  position: absolute;
 }
 
 @keyframes rotation {
