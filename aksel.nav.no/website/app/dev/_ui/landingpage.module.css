@@ -35,9 +35,9 @@
 .hero {
   position: relative;
   margin-inline: auto;
-  margin-bottom: var(--ax-space-12);
-  margin-top: var(--ax-space-20);
-  padding-inline: var(--ax-space-4);
+  padding-inline: 1.5rem;
+  margin-top: 112px;
+  margin-bottom: var(--ax-space-48);
   display: grid;
   width: 100%;
   text-align: center;
@@ -101,6 +101,7 @@
   /* animation added here to both light & dark, to keep them "in sync" */
   animation: 60s ease infinite rainbow-hype;
   color: var(--aksel-brand-logo);
+  line-height: 67px;
 }
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
@@ -282,8 +283,6 @@
 
 @media (min-width: 480px) {
   .hero {
-    padding-inline: 1.5rem;
-    margin-top: 9rem;
     max-width: 632px;
   }
 
