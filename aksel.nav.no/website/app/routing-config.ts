@@ -8,6 +8,8 @@ import {
   komponentKategorier,
   templatesKategorier,
 } from "@/sanity/config";
+import { metadata as tokenMetadata } from "./dev/(designsystemet)/grunnleggende/darkside/design-tokens/page";
+import { metadata as iconsMetadata } from "./dev/(designsystemet)/komponenter/ikoner/page";
 
 type PageRoute = {
   slug: string;
@@ -60,8 +62,7 @@ const PAGE_ROUTES: Routes = {
           slug: `grunnleggende/darkside/design-tokens`,
           tag: "ready",
           searchMetadata: {
-            intro: `Ved å bruke design tokens sørger vi for at både designere og utviklere arbeider etter de samme reglene og retningslinjene.
-Dette forenkler vedlikeholdet av designet og sikrer en helhetlig visuell fremstilling på tvers av produkter.`,
+            intro: tokenMetadata.description,
           },
         },
       ],
@@ -76,8 +77,7 @@ Dette forenkler vedlikeholdet av designet og sikrer en helhetlig visuell fremsti
         slug: "komponenter/ikoner",
         tag: "ready",
         searchMetadata: {
-          intro:
-            "901+ open source-ikoner designet og utviklet for Nav. Finn riktig ikon til din løsning.",
+          intro: iconsMetadata.description,
         },
       },
     ],
