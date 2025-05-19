@@ -47,11 +47,10 @@ const Page = async () => {
             </a>
           </div>
 
-          <Hero />
-
-          <BoxNew className={styles.godPraksis}>
-            {/* God praksis */}
-            <PageBlock width="2xl" gutters>
+          <BoxNew className={styles.forsidePageWrapper}>
+            <PageBlock width="xl" gutters>
+              <Hero />
+              {/* God praksis */}
               <BoxNew
                 background="raised"
                 borderWidth="1"
@@ -90,9 +89,7 @@ const Page = async () => {
                   </HGrid>
                 </VStack>
               </BoxNew>
-            </PageBlock>
-            {/* Siste fra Aksel */}
-            <PageBlock width="2xl" gutters>
+              {/* Siste fra Aksel */}
               {latest && <FrontpageLatest latest={latest} />}
             </PageBlock>
           </BoxNew>

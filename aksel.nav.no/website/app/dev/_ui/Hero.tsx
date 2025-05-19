@@ -9,7 +9,6 @@ import {
   Heading,
   useClientLayoutEffect,
 } from "@navikt/ds-react";
-import { PageBlock } from "@navikt/ds-react/Page";
 import { userPrefersReducedMotion } from "@/utils";
 import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
 import {
@@ -98,31 +97,26 @@ export const Hero = () => {
         />
       </div>
       {!reducedMotion && (
-        <PageBlock width="2xl" gutters>
-          <HStack justify="end">
-            <Button
-              className={styles.animationButton}
-              variant="tertiary-neutral"
-              size="small"
-              icon={
-                pause ? (
-                  <PlayFillIcon title="Start animasjon" />
-                ) : (
-                  <PauseFillIcon title="Stopp animasjon" />
-                )
-              }
-              onClick={() => {
-                setPause(!pause);
-                localStorage.setItem(
-                  "pause-animations",
-                  JSON.stringify(!pause),
-                );
-              }}
-            >
-              Animasjon
-            </Button>
-          </HStack>
-        </PageBlock>
+        <HStack justify="end">
+          <Button
+            className={styles.animationButton}
+            variant="tertiary-neutral"
+            size="small"
+            icon={
+              pause ? (
+                <PlayFillIcon title="Start animasjon" />
+              ) : (
+                <PauseFillIcon title="Stopp animasjon" />
+              )
+            }
+            onClick={() => {
+              setPause(!pause);
+              localStorage.setItem("pause-animations", JSON.stringify(!pause));
+            }}
+          >
+            Animasjon
+          </Button>
+        </HStack>
       )}
     </>
   );

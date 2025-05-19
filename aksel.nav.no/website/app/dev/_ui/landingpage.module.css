@@ -134,8 +134,9 @@
   }
 }
 
-.godPraksis {
+.forsidePageWrapper {
   background: linear-gradient(180deg, transparent 0%, var(--ax-bg-default) 52%);
+  margin-inline: var(--ax-space-8);
 }
 
 .godPraksisHeading {
@@ -326,5 +327,11 @@
 
   .highlightWrapper {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1440px) {
+  .forsidePageWrapper {
+    margin-inline: var(--ax-space-72);
   }
 }

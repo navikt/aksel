@@ -100,7 +100,7 @@ function getList(block: LatestT) {
 
 export const FrontpageLatest = ({ latest }) => {
   return (
-    <BoxNew paddingInline={{ xs: "space-8", lg: "space-72" }}>
+    <BoxNew>
       {latest.map((x) => {
         switch (x._type) {
           case "nytt_fra_aksel":
