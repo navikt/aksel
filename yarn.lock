@@ -8036,12 +8036,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/csf-tools@npm:^8.6.12":
-  version: 8.6.12
-  resolution: "@storybook/csf-tools@npm:8.6.12"
+"@storybook/csf-tools@npm:^8.6.14":
+  version: 8.6.14
+  resolution: "@storybook/csf-tools@npm:8.6.14"
   peerDependencies:
     storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
-  checksum: 10/3d0464141ec700a3d9ff0603f3b40dbadfc3722066d5936e8f481b9dbb40c3106e813592c8cebe78b99856cec63bb59c0e9ebf863be23a4bbacaee4ddb5d405a
+  checksum: 10/67bbb9bcb46da547daf14ed62f7bd1151fdea8598fac8edef332e09e1dafad73e8c31258d3c93e952492c49a90221567f4235a4ad54f97aeed2bdeab80c39315
   languageName: node
   linkType: hard
 
@@ -10539,7 +10539,7 @@ __metadata:
     "@storybook/addon-storysource": "npm:^8.6.12"
     "@storybook/addon-themes": "npm:^8.6.12"
     "@storybook/blocks": "npm:^8.6.12"
-    "@storybook/csf-tools": "npm:^8.6.12"
+    "@storybook/csf-tools": "npm:^8.6.14"
     "@storybook/manager-api": "npm:^8.6.12"
     "@storybook/nextjs": "npm:^8.6.12"
     "@storybook/react": "npm:^8.6.12"
