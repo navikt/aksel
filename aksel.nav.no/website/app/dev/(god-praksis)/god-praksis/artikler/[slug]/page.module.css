@@ -21,7 +21,6 @@
 
 .pageEyebrow {
   color: var(--ax-text-meta-purple-subtle);
-  text-transform: uppercase;
   margin-block-end: var(--ax-space-4);
 }
 
