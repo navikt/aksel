@@ -135,6 +135,11 @@ async function main() {
  * ```
  */
 async function buildThemedRolesCSS() {
+  /**
+   * We set 'accent' as the default base-theme.
+   */
+  const rootSelector = `:root, [data-color-role=accent]`;
+
   for (const role of ColorRolesList) {
     const config = [
       globalLightTokens,
@@ -146,7 +151,7 @@ async function buildThemedRolesCSS() {
       /* mergeConfigs is strictly typed, so we use any until we potentially update types */
       tokens: tokensWithPrefix(mergeConfigs(config as any)),
       filename: `role-${role}.css`,
-      selector: `[data-color-role=${role}]`,
+      selector: role === "accent" ? rootSelector : `[data-color-role=${role}]`,
       filter: async (token) => token.type === "themed-role",
     });
   }
