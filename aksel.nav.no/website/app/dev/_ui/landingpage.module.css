@@ -232,48 +232,12 @@
   filter: hue-rotate(65deg);
 }
 
-.cardImageWrapperWrapper {
-  display: flex;
-  place-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-top-left-radius: var(--ax-border-radius-large);
-  border-top-right-radius: var(--ax-border-radius-large);
+.cardImageWrapper {
   background: var(--ax-brand-blue-300);
 }
 
-.cardImageWrapper {
-  position: relative;
-  height: 200px;
-  width: 100%;
-}
-
-.cardImage {
-  border-top-left-radius: var(--ax-border-radius-large);
-  border-top-right-radius: var(--ax-border-radius-large);
-}
-
-.card {
-  position: relative;
-  background: var(--ax-bg-raised);
-  border: solid 1px var(--ax-border-neutral-subtleA);
-  border-radius: var(--ax-border-radius-large);
-  transition-property: opacity, transform;
-  transition-duration: 700ms;
-
-  &:focus-within,
-  &:hover {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 2px;
-
-    .cardLinkHeading {
-      text-decoration: none;
-    }
-  }
-}
-
 .cardContent {
-  padding-top: var(--ax-space-16);
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--ax-space-16);

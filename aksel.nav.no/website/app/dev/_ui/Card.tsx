@@ -1,19 +1,17 @@
 import cl from "clsx";
-import NextImage from "next/legacy/image";
-import NextLink from "next/link";
-import {
-  BodyShort,
-  Detail,
-  HStack,
-  Heading,
-  Stack,
-  VStack,
-} from "@navikt/ds-react";
+import { Detail, HStack, Stack, VStack } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { abbrName, getImage } from "@/utils";
+import {
+  LinkCard,
+  LinkCardAnchor,
+  LinkCardDescription,
+  LinkCardImage,
+  LinkCardTitle,
+} from "../(god-praksis)/_ui/link-card/LinkCard";
 import { BetaTag, Tag } from "./Tag";
 import styles from "./landingpage.module.css";
 
@@ -55,87 +53,53 @@ const Card = ({ article, visible, index }: CardProps) => {
   ].includes(article._type);
 
   const statusImageUrl = urlForImage(article.status?.bilde)?.url();
-  const statusImageBlurUrl = urlForImage(article.status?.bilde)
+  // TODO: use blur images? but <LinkCardImage> takes string URL for now
+  /* const statusImageBlurUrl = urlForImage(article.status?.bilde)
     ?.width(24)
     .height(24)
     .blur(10)
-    .url();
+    .url(); */
 
   const fallbackImageUrl = urlForImage(article.seo?.image)?.url();
-  const fallbackImageBlurUrl = urlForImage(article.seo?.image)
+  // TODO: use blur images? but <LinkCardImage> takes string URL for now
+  /* const fallbackImageBlurUrl = urlForImage(article.seo?.image)
     ?.width(24)
     .height(24)
     .blur(10)
-    .url();
-
-  let Image = (
-    <div className={styles.cardImageWrapper}>
-      <NextImage
-        layout="fill"
-        objectFit="cover"
-        src={getImage(article?.heading ?? "", "thumbnail")}
-        alt={article.heading + " thumbnail"}
-        aria-hidden
-        className={styles.cardImage}
-      />
-    </div>
-  );
-
-  if (statusImageUrl) {
-    Image = (
-      <NextImage
-        src={statusImageUrl}
-        blurDataURL={statusImageBlurUrl}
-        placeholder="blur"
-        width="200"
-        height="200"
-        alt={article.heading + " thumbnail"}
-        aria-hidden
-      />
-    );
-  } else if (fallbackImageUrl) {
-    Image = (
-      <div className={styles.cardImageWrapper}>
-        <NextImage
-          src={fallbackImageUrl}
-          blurDataURL={fallbackImageBlurUrl}
-          placeholder="blur"
-          layout="fill"
-          objectFit="cover"
-          alt={article.heading + " thumbnail"}
-          aria-hidden
-          className={styles.cardImage}
-        />
-      </div>
-    );
-  }
+    .url(); */
 
   return (
-    <div
-      className={cl(`${styles.card}`, {
+    <LinkCard
+      className={cl({
         [`${styles.cardVisible}`]: visible,
         [`${styles.cardNotVisible}`]: !visible,
       })}
       style={{ transitionDelay: `${index * 70}ms` }}
     >
-      {showImage && (
-        <div
-          className={cl(`${styles.cardImageWrapperWrapper}`, {
-            [`${styles.betaHue}`]: article?.status?.tag === "beta",
-          })}
-        >
-          {Image}
-        </div>
-      )}
-      <VStack
-        padding={{ xs: "space-12", sm: "space-20" }}
-        className={styles.cardContent}
-      >
+      <VStack className={styles.cardContent}>
+        {showImage && (
+          <HStack
+            justify="center"
+            width="100%"
+            className={cl(`${styles.cardImageWrapper}`, {
+              [`${styles.betaHue}`]: article?.status?.tag === "beta",
+            })}
+          >
+            <LinkCardImage
+              src={
+                statusImageUrl ||
+                fallbackImageUrl ||
+                getImage(article?.heading ?? "", "thumbnail") ||
+                ""
+              }
+              alt={article.heading + " thumbnail"}
+            />
+          </HStack>
+        )}
         <div>
           <Stack direction="column-reverse">
-            <NextLink
-              href={`/${article.slug}`}
-              passHref
+            <LinkCardTitle
+              as="h2"
               className={styles.cardLink}
               onClick={() =>
                 umamiTrack("navigere", {
@@ -144,23 +108,15 @@ const Card = ({ article, visible, index }: CardProps) => {
                 })
               }
             >
-              <Heading
-                level="3"
-                size="small"
-                className={styles.cardLinkHeading}
-              >
+              <LinkCardAnchor href={`/${article.slug}`}>
                 {article.heading}
-              </Heading>
-            </NextLink>
+              </LinkCardAnchor>
+            </LinkCardTitle>
           </Stack>
           {article.ingress ? (
-            <BodyShort className={styles.cardIngress}>
-              {article.ingress}
-            </BodyShort>
+            <LinkCardDescription>{article.ingress}</LinkCardDescription>
           ) : article.seo?.meta ? (
-            <BodyShort className={styles.cardIngress}>
-              {article.seo.meta}
-            </BodyShort>
+            <LinkCardDescription>{article.seo.meta}</LinkCardDescription>
           ) : null}
         </div>
 
@@ -184,7 +140,7 @@ const Card = ({ article, visible, index }: CardProps) => {
           {article.status?.tag === "beta" && <BetaTag />}
         </HStack>
       </VStack>
-    </div>
+    </LinkCard>
   );
 };
 

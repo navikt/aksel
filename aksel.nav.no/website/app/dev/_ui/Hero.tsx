@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { PauseFillIcon, PlayFillIcon } from "@navikt/aksel-icons";
 import {
+  BoxNew,
   Button,
   HGrid,
   HStack,
@@ -30,7 +31,7 @@ const LinkCards = ({
 }) => {
   return (
     <HStack justify="center">
-      <HGrid columns={3} paddingInline="space-12" gap="space-12">
+      <HGrid columns={{ xs: 1, md: 3 }} paddingInline="space-12" gap="space-12">
         {links.map((link) => {
           return (
             <LinkCard key={link.title}>
@@ -66,7 +67,7 @@ export const Hero = () => {
 
   return (
     <>
-      <div className="z-20 pb-28">
+      <BoxNew paddingBlock={{ xs: "0 space-28", md: "0 space-72" }}>
         <div className={styles.hero}>
           <Heading level="1" size="xlarge" className={styles.heroText}>
             Aksel gjør det enklere å lage digitale produkter
@@ -95,7 +96,7 @@ export const Hero = () => {
             },
           ]}
         />
-      </div>
+      </BoxNew>
       {!reducedMotion && (
         <HStack justify="end">
           <Button
