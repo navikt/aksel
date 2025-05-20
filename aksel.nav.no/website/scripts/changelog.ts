@@ -45,7 +45,7 @@ export async function main() {
 
   // We go through the last 3 entries in case there has been changes,
   // or in case previous attempts have failed.
-  for (let i = 0; i < 3; i++) {
+  for (let i = 2; i >= 0; i--) {
     const currentChangelogEntry = changelog[i];
     const version = currentChangelogEntry.substring(
       0,
@@ -58,21 +58,21 @@ export async function main() {
     const blocks = htmlToBlocks(converter.makeHtml(text), blockContentType, {
       parseHtml: (htmlStr) => new JSDOM(htmlStr).window._document,
     });
+    const id = `auto-endringslogg-kode-${version}`;
 
     // Check for existing document
-    const existingDoc = await client.fetch(
-      `*[_type == "ds_endringslogg_artikkel" && endringstype == 'kode' && heading == $heading]`,
-      { heading },
-    );
+    const existingDoc = await client.fetch(`*[_id == "${id}"]`);
     if (existingDoc.length > 1) {
       throw new Error(
-        `Found multiple documents with the same heading (${heading}), don't know which one to update 😵‍💫`,
+        `Found multiple documents for the same version (${version}), don't know which one to update 😵‍💫`,
       );
     }
+
     if (existingDoc.length === 0) {
       // Create new document
       await client
         .create({
+          _id: id,
           _type: "ds_endringslogg_artikkel",
           heading,
           slug: {
