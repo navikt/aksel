@@ -59,6 +59,13 @@ export const EndringsloggArtikkel = defineType({
       description:
         "Bildet vises øverst på kortet/siden og blir brukt som OG-bilde. Anbefalt størrelse er 1200x630px.",
       type: "image",
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternativ tekst",
+        },
+      ],
     }),
     defineField({
       title: "Innhold",
