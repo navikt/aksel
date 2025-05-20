@@ -56,52 +56,53 @@
   width: 100%;
   transition: background 1s;
   animation: 60s ease infinite rainbow-hype;
-  background: linear-gradient(196deg, var(--gradient-1) 8.43%, var(--gradient-2) 24%, transparent 70.98%);
+  background: linear-gradient(196deg, var(--gradient-1) 18.43%, var(--gradient-2) 24%, transparent 70.98%);
 
   /* temporary colors */
   --aksel-brand-logo: #004367;
-  --aksel-brand-teal-200: #2a7c75; /* also lighter? */
+  --aksel-brand-teal-200: #0d2725; /* also lighter? */
   --aksel-brand-teal-300: #b7eee4;
   --aksel-brand-teal-400: #90e1d2;
   --aksel-brand-teal-800: #41ab9d;
   --meta-purple-subtleA: #c380fe;
-  --brand-blue-moderate: #005d96; /* lighter than 00253c? */
+  --brand-blue-moderate: #00253c; /* lighter than 00253c? */
 }
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .heroLinearBG {
-  background: linear-gradient(196deg, var(--gradient-dark) 0%, transparent 30%);
+  background: linear-gradient(196deg, var(--gradient-dark) 8.43%, transparent 40%);
 }
 
 @property --gradient-1 {
   syntax: "<color>";
   inherits: false;
-  initial-value: transparent;
+  initial-value: #dfcaf9;
 }
 
 @property --gradient-2 {
   syntax: "<color>";
   inherits: false;
-  initial-value: transparent;
+  initial-value: #ebdefc;
 }
 
 @property --gradient-dark {
   syntax: "<color>";
   inherits: false;
-  initial-value: transparent;
+  initial-value: #c380fe;
 }
 
 @property --hero-text {
   syntax: "<color>";
   inherits: false;
-  initial-value: transparent;
+  initial-value: #763cc0;
 }
 
 .heroText {
   /* animation added here to both light & dark, to keep them "in sync" */
   animation: 60s ease infinite rainbow-hype;
   color: var(--aksel-brand-logo);
-  line-height: 67px;
+  font-size: 40px;
+  line-height: 52px;
 }
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
@@ -113,7 +114,7 @@
   0% {
     --gradient-1: var(--ax-bg-meta-purple-moderate-pressed);
     --gradient-2: var(--ax-bg-meta-purple-moderate-hover);
-    --gradient-dark: var(--meta-purple-subtleA);
+    --gradient-dark: var(--ax-bg-meta-purple-moderate);
     --hero-text: var(--ax-text-meta-purple-subtle);
   }
 
@@ -134,7 +135,7 @@
   100% {
     --gradient-1: var(--ax-bg-meta-purple-moderate-pressed);
     --gradient-2: var(--ax-bg-meta-purple-moderate-hover);
-    --gradient-dark: var(--meta-purple-subtleA);
+    --gradient-dark: var(--ax-bg-meta-purple-moderate);
     --hero-text: var(--ax-text-meta-purple-subtle);
   }
 }
@@ -287,7 +288,8 @@
   }
 
   .heroText {
-    font-size: 3.5rem;
+    font-size: 56px;
+    line-height: 67px;
   }
 
   .sectionImage {

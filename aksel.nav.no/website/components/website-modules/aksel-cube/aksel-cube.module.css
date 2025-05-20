@@ -10,11 +10,17 @@
 
   & svg {
     color: white;
+
+    & path {
+      stroke-width: 4.5px;
+    }
   }
 
   --aksel-brand-teal-800: #41ab9d;
+  --aksel-brand-teal-400A: hsl(159deg 90% 61% / 0.17);
 }
 
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .animated {
   & svg {
     color: var(--cube-stroke-color);
@@ -24,24 +30,24 @@
 @property --cube-stroke-color {
   syntax: "<color>";
   inherits: false;
-  initial-value: #763cc0; /* our tokens are not typed with @property */
+  initial-value: #dfcaf9; /* our tokens are not typed with @property */
 }
 
 @keyframes rainbow-hype {
   0% {
-    --cube-stroke-color: var(--ax-text-meta-purple-subtle);
+    --cube-stroke-color: var(--ax-border-meta-purple-subtle);
   }
 
   33% {
-    --cube-stroke-color: var(--aksel-brand-teal-800);
+    --cube-stroke-color: var(--aksel-brand-teal-400A);
   }
 
   66% {
-    --cube-stroke-color: var(--ax-text-brand-blue-subtle);
+    --cube-stroke-color: var(--ax-border-brand-blue-subtleA);
   }
 
   100% {
-    --cube-stroke-color: var(--ax-text-meta-purple-subtle);
+    --cube-stroke-color: var(--ax-border-meta-purple-subtle);
   }
 }
 
