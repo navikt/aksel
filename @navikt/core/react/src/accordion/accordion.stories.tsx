@@ -220,8 +220,8 @@ export const ColorRole: Story = {
             <Item key={y} />
           ))}
         </Accordion>
-        <h3>Danger</h3>
-        <Accordion data-color-role="danger">
+        <h3>Beige</h3>
+        <Accordion data-color-role="brand-beige">
           {[...Array(2)].map((_, y) => (
             <Item key={y} />
           ))}

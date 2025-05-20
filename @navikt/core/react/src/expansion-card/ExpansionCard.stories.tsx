@@ -2,6 +2,7 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { PlantIcon } from "@navikt/aksel-icons";
 import { ExpansionCard, ExpansionCardProps } from ".";
+import { VStack } from "../layout/stack";
 import { BodyLong } from "../typography";
 
 const meta: Meta<typeof ExpansionCard> = {
@@ -276,3 +277,48 @@ export const Chromatic: Story = {
     chromatic: { disable: false },
   },
 };
+
+export const ColorRole = () => (
+  <VStack gap="space-40">
+    <div>
+      <ExpansionCard aria-label="bare description">
+        <ExpansionCard.Header>
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+    </div>
+    <div data-color-role="brand-magenta">
+      <ExpansionCard aria-label="bare description">
+        <ExpansionCard.Header>
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+    </div>
+
+    <div>
+      <ExpansionCard
+        aria-label="bare description"
+        data-color-role="brand-magenta"
+      >
+        <ExpansionCard.Header>
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+    </div>
+  </VStack>
+);

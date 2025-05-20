@@ -138,6 +138,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
         }}
       >
         <section
+          data-color-role="neutral"
           {...rest}
           className={cn(
             "navds-expansioncard",
