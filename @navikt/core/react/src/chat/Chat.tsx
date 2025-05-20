@@ -1,4 +1,5 @@
 import React, { HTMLAttributes, forwardRef } from "react";
+import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, HeadingProps } from "../typography";
 import Bubble from "./Bubble";
@@ -111,7 +112,9 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
           `navds-chat--${size}`,
           `navds-chat--${variant}`,
         )}
+        data-color-role={variantToRole(variant)}
         {...rest}
+        data-variant={variant}
       >
         {avatar && (
           <div className={cn("navds-chat__avatar")} aria-hidden>
@@ -138,6 +141,19 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
     );
   },
 ) as ChatComponent;
+
+function variantToRole(variant: ChatProps["variant"]): GlobalColorRoles {
+  switch (variant) {
+    case "neutral":
+      return "neutral";
+    case "subtle":
+      return "neutral";
+    case "info":
+      return "info";
+    default:
+      return "neutral";
+  }
+}
 
 Chat.Bubble = Bubble;
 
