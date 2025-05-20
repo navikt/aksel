@@ -1,7 +1,7 @@
 @property --cube-stroke-color-light {
   syntax: "<color>";
   inherits: false;
-  initial-value: #dfcaf9; /* our tokens are not typed with @property */
+  initial-value: white;
 }
 
 @property --cube-stroke-color-dark {
@@ -21,6 +21,7 @@
   pointer-events: none;
 
   & svg {
+    /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
     color: var(--cube-stroke-color-light);
 
     & path {

@@ -1,17 +1,8 @@
 "use client";
 
 import cl from "clsx";
-import { useState } from "react";
 import { PauseFillIcon, PlayFillIcon } from "@navikt/aksel-icons";
-import {
-  BoxNew,
-  Button,
-  HGrid,
-  HStack,
-  Heading,
-  useClientLayoutEffect,
-} from "@navikt/ds-react";
-import { userPrefersReducedMotion } from "@/utils";
+import { BoxNew, Button, HGrid, HStack, Heading } from "@navikt/ds-react";
 import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
 import {
   LinkCard,
@@ -20,6 +11,7 @@ import {
   LinkCardTitle,
 } from "../(god-praksis)/_ui/link-card/LinkCard";
 import styles from "./landingpage.module.css";
+import { useShouldStopAnimation } from "./useShouldStopAnimation";
 
 const LinkCards = ({
   links,
@@ -49,33 +41,24 @@ const LinkCards = ({
 };
 
 export const Hero = () => {
-  const [pause, setPause] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useClientLayoutEffect(() => {
-    const disableAnimations =
-      navigator.userAgent.indexOf("Safari") !== -1 &&
-      navigator.userAgent.indexOf("Chrome") === -1;
-
-    setReducedMotion(userPrefersReducedMotion() || disableAnimations);
-    const data = localStorage.getItem("pause-animations");
-    if (disableAnimations) {
-      setPause(true);
-      return;
-    }
-    setPause(JSON.parse(data ?? "false"));
-  }, []);
+  const { reducedMotion, pause, setPause } = useShouldStopAnimation();
 
   return (
     <>
       <BoxNew paddingBlock={{ xs: "0 space-28", md: "0 space-72" }}>
         <div className={styles.hero}>
-          <Heading level="1" size="xlarge" className={styles.heroText}>
+          <Heading
+            level="1"
+            size="xlarge"
+            className={cl(styles.heroText, {
+              "animation-stop": reducedMotion || pause,
+            })}
+          >
             Aksel gjør det enklere å lage digitale produkter
           </Heading>
           <div
             className={cl(styles.cubeWrapper, {
-              "animation-stop": reducedMotion,
+              "animation-stop": reducedMotion || pause,
             })}
           >
             <AkselCubeAnimated />

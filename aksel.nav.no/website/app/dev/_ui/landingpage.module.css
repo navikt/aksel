@@ -88,13 +88,13 @@
 @property --gradient-dark {
   syntax: "<color>";
   inherits: false;
-  initial-value: #c380fe;
+  initial-value: #261e3b;
 }
 
 @property --hero-text {
   syntax: "<color>";
   inherits: false;
-  initial-value: #763cc0;
+  initial-value: #ae8cdb;
 }
 
 .heroText {
