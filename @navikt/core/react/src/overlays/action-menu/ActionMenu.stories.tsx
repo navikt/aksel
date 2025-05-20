@@ -4,6 +4,7 @@ import { PencilIcon, StarIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { HStack, VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
+import { Theme } from "../../theme";
 import { Tooltip } from "../../tooltip";
 import { BodyShort } from "../../typography";
 import { ActionMenu } from "./ActionMenu";
@@ -659,5 +660,20 @@ export const Chromatic: Story = {
   },
   parameters: {
     chromatic: { disable: false },
+  },
+};
+
+export const ColorRole = {
+  render: (args, context) => {
+    return (
+      <div>
+        <h2>Default</h2>
+        <div>{Chromatic.render?.(args, context)}</div>
+        <h2>Themed</h2>
+        <Theme data-color-role="meta-purple">
+          {Chromatic.render?.(args, context)}
+        </Theme>
+      </div>
+    );
   },
 };

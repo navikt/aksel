@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { Slot } from "../slot/Slot";
 import { createContext } from "../util/create-context";
 import { AsChildProps } from "../util/types";
@@ -50,6 +51,7 @@ type ThemeContext = {
    * @default Inherits parent theme, or "light" if root
    */
   theme?: "light" | "dark";
+  colorRole?: GlobalColorRoles;
 };
 
 const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
@@ -60,8 +62,15 @@ const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
 
 export type ThemeProps = {
   className?: string;
+  /**
+   * Sets default background when enabled
+   */
   hasBackground?: boolean;
-} & ThemeContext &
+  /**
+   * Sets default 'base'-color for application
+   */
+  "data-color-role"?: GlobalColorRoles;
+} & Omit<ThemeContext, "colorRole"> &
   AsChildProps;
 
 const Theme = forwardRef<HTMLDivElement, ThemeProps>(
@@ -74,6 +83,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
       asChild = false,
       theme = context?.theme,
       hasBackground: hasBackgroundProp = true,
+      "data-color-role": colorRole = context?.colorRole,
     } = props;
 
     const isRoot = context === undefined;
@@ -84,12 +94,13 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
     const SlotElement = asChild ? Slot : "div";
 
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} colorRole={colorRole}>
         <RenameCSS>
           <SlotElement
             ref={ref}
             className={cl("aksel-theme", className, theme)}
             data-background={hasBackground}
+            data-color-role={colorRole}
           >
             {children}
           </SlotElement>
