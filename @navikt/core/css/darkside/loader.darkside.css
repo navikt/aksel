@@ -61,39 +61,21 @@
   animation: loader-dasharray 1.5s ease-in-out infinite;
   stroke-dasharray: 80px, 200px;
   stroke-dashoffset: 0;
-  stroke: var(--ax-border-neutral-strong);
+  stroke: var(--ax-border-strong);
   stroke-linecap: round;
   stroke-width: var(--__axc-loader-stroke-width);
+
+  &[data-variant="inverted"] {
+    stroke: var(--ax-border-subtle);
+  }
 }
 
 .aksel-loader__background {
-  stroke: var(--ax-border-neutral-subtleA);
+  stroke: var(--ax-border-subtleA);
   stroke-width: var(--__axc-loader-stroke-width);
-}
 
-.aksel-loader--neutral {
-  & .aksel-loader__foreground {
-    stroke: var(--ax-border-neutral-strong);
-  }
-}
-
-.aksel-loader--interaction {
-  & .aksel-loader__foreground {
-    stroke: var(--ax-border-accent-strong);
-  }
-
-  & .aksel-loader__background {
-    stroke: var(--ax-border-accent-subtleA);
-  }
-}
-
-.aksel-loader--inverted {
-  & .aksel-loader__foreground {
-    stroke: var(--ax-border-neutral-subtle);
-  }
-
-  & .aksel-loader__background {
-    stroke: var(--ax-border-neutral-strong);
+  &[data-variant="inverted"] {
+    stroke: var(--ax-border-strong);
   }
 }
 

@@ -1,4 +1,5 @@
 import React, { SVGProps, forwardRef } from "react";
+import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
 import { omit } from "../util";
 import { useId } from "../util/hooks";
@@ -84,7 +85,9 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
         focusable="false"
         viewBox="0 0 50 50"
         preserveAspectRatio="xMidYMid"
+        data-color-role={variantToRole(variant)}
         {...omit(rest, ["children"])}
+        data-variant={variant}
       >
         <title id={id ?? `loader-${internalId}`}>
           {title || translate("title")}
@@ -109,5 +112,18 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
     );
   },
 );
+
+function variantToRole(variant: LoaderProps["variant"]): GlobalColorRoles {
+  switch (variant) {
+    case "neutral":
+      return "neutral";
+    case "interaction":
+      return "accent";
+    case "inverted":
+      return "neutral";
+    default:
+      return "neutral";
+  }
+}
 
 export default Loader;
