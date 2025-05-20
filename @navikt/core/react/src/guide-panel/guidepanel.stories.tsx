@@ -134,3 +134,40 @@ export const Chromatic: Story = {
     chromatic: { disable: false },
   },
 };
+
+export const ColorRole: Story = {
+  render: () => (
+    <div>
+      <div>
+        <GuidePanel>
+          <BodyLong spacing>
+            Duis et ex ad magna nostrud ut officia nulla cillum commodo sint
+            irure elit nulla. Ad proident nulla ex sunt exercitation sunt Lorem
+            non laboris ea ex cillum nulla consequat. Enim pariatur eiusmod quis
+            est fugiat officia nostrud dolore occaecat nisi.
+          </BodyLong>
+          <BodyLong>
+            Do esse magna nulla amet excepteur. Tempor laboris ipsum magna velit
+            dolore nulla id ex mollit. Deserunt ut esse laboris pariatur tempor
+            laborum veniam enim. Nisi deserunt officia minim enim.
+          </BodyLong>
+        </GuidePanel>
+      </div>
+      <div>
+        <GuidePanel data-color-role="brand-magenta">
+          <BodyLong spacing>
+            Duis et ex ad magna nostrud ut officia nulla cillum commodo sint
+            irure elit nulla. Ad proident nulla ex sunt exercitation sunt Lorem
+            non laboris ea ex cillum nulla consequat. Enim pariatur eiusmod quis
+            est fugiat officia nostrud dolore occaecat nisi.
+          </BodyLong>
+          <BodyLong>
+            Do esse magna nulla amet excepteur. Tempor laboris ipsum magna velit
+            dolore nulla id ex mollit. Deserunt ut esse laboris pariatur tempor
+            laborum veniam enim. Nisi deserunt officia minim enim.
+          </BodyLong>
+        </GuidePanel>
+      </div>
+    </div>
+  ),
+};
