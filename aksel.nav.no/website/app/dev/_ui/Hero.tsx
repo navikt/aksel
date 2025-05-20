@@ -1,5 +1,6 @@
 "use client";
 
+import cl from "clsx";
 import { useState } from "react";
 import { PauseFillIcon, PlayFillIcon } from "@navikt/aksel-icons";
 import {
@@ -72,7 +73,11 @@ export const Hero = () => {
           <Heading level="1" size="xlarge" className={styles.heroText}>
             Aksel gjør det enklere å lage digitale produkter
           </Heading>
-          <div className={styles.cubeWrapper}>
+          <div
+            className={cl(styles.cubeWrapper, {
+              "animation-stop": reducedMotion,
+            })}
+          >
             <AkselCubeAnimated />
           </div>
         </div>

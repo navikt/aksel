@@ -1,3 +1,15 @@
+@property --cube-stroke-color-light {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #dfcaf9; /* our tokens are not typed with @property */
+}
+
+@property --cube-stroke-color-dark {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #3a2f55; /* our tokens are not typed with @property */
+}
+
 .animated {
   animation:
     rotation 60s ease-in-out infinite,
@@ -9,7 +21,7 @@
   pointer-events: none;
 
   & svg {
-    color: white;
+    color: var(--cube-stroke-color-light);
 
     & path {
       stroke-width: 4.5px;
@@ -23,31 +35,25 @@
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .animated {
   & svg {
-    color: var(--cube-stroke-color);
+    color: var(--cube-stroke-color-dark);
   }
-}
-
-@property --cube-stroke-color {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #dfcaf9; /* our tokens are not typed with @property */
 }
 
 @keyframes rainbow-hype {
   0% {
-    --cube-stroke-color: var(--ax-border-meta-purple-subtle);
+    --cube-stroke-color-dark: var(--ax-border-meta-purple-subtle);
   }
 
   33% {
-    --cube-stroke-color: var(--aksel-brand-teal-400A);
+    --cube-stroke-color-dark: var(--aksel-brand-teal-400A);
   }
 
   66% {
-    --cube-stroke-color: var(--ax-border-brand-blue-subtleA);
+    --cube-stroke-color-dark: var(--ax-border-brand-blue-subtleA);
   }
 
   100% {
-    --cube-stroke-color: var(--ax-border-meta-purple-subtle);
+    --cube-stroke-color-dark: var(--ax-border-meta-purple-subtle);
   }
 }
 
