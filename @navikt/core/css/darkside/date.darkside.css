@@ -8,8 +8,8 @@
     }
 
     &.rdp-day_selected {
-      background-color: var(--ax-bg-accent-moderate-pressedA);
-      box-shadow: inset 0 0 0 1px var(--ax-border-accent-subtleA);
+      background-color: var(--ax-bg-moderate-pressedA);
+      box-shadow: inset 0 0 0 1px var(--ax-border-subtleA);
       color: var(--ax-text-neutral);
     }
   }
@@ -59,8 +59,8 @@
 
   .rdp-day_selected,
   .aksel-monthpicker__month--selected {
-    color: var(--ax-text-accent-contrast);
-    background: var(--ax-bg-accent-strong-pressed);
+    color: var(--ax-text-contrast);
+    background: var(--ax-bg-strong-pressed);
     cursor: pointer;
   }
 
@@ -73,7 +73,7 @@
 
   .rdp-button:where(:not(.rdp-day_selected, [disabled])):hover,
   .aksel-date__month-button:where(:not(.rdp-day_selected, [disabled])):hover {
-    background: var(--ax-bg-accent-moderate-hoverA);
+    background: var(--ax-bg-moderate-hoverA);
     cursor: pointer;
   }
 
@@ -84,7 +84,7 @@
       width: 6px;
       height: 6px;
       display: block;
-      background-color: var(--ax-text-accent-subtle);
+      background-color: var(--ax-text-subtle);
       border-radius: var(--ax-radius-full);
       content: "";
       position: absolute;
@@ -96,7 +96,7 @@
     &.rdp-day_selected:not(.rdp-day_range_middle),
     &:active {
       &::before {
-        background-color: var(--ax-text-accent-contrast);
+        background-color: var(--ax-text-contrast);
       }
     }
   }
@@ -162,8 +162,8 @@
     }
 
     &:active:not(:disabled) {
-      color: var(--ax-text-accent-contrast);
-      background-color: var(--ax-bg-accent-strong-pressed);
+      color: var(--ax-text-contrast);
+      background-color: var(--ax-bg-strong-pressed);
     }
   }
 }
