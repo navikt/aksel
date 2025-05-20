@@ -105,39 +105,9 @@ export const CustomIllustration: Story = {
   ),
 };
 
-export const Chromatic: Story = {
-  render: (props, context) => (
-    <div>
-      <div>
-        <h2>Default</h2>
-        {Default.render?.(Default.args || {}, context)}
-      </div>
-      <div>
-        <h2>PosterVariants</h2>
-        {PosterVariants.render?.(props, context)}
-      </div>
-      <div>
-        <h2>ColorOverride</h2>
-        {ColorOverride.render?.(props, context)}
-      </div>
-      <div>
-        <h2>Content</h2>
-        {Content.render?.(props, context)}
-      </div>
-      <div>
-        <h2>CustomIllustration</h2>
-        {CustomIllustration.render?.(props, context)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
-
 export const ColorRole: Story = {
   render: () => (
-    <div>
+    <VStack gap="space-40">
       <div>
         <GuidePanel>
           <BodyLong spacing>
@@ -168,6 +138,40 @@ export const ColorRole: Story = {
           </BodyLong>
         </GuidePanel>
       </div>
+    </VStack>
+  ),
+};
+
+export const Chromatic: Story = {
+  render: (props, context) => (
+    <div>
+      <div>
+        <h2>Default</h2>
+        {Default.render?.(Default.args || {}, context)}
+      </div>
+      <div>
+        <h2>PosterVariants</h2>
+        {PosterVariants.render?.(props, context)}
+      </div>
+      <div>
+        <h2>ColorOverride</h2>
+        {ColorOverride.render?.(props, context)}
+      </div>
+      <div>
+        <h2>Content</h2>
+        {Content.render?.(props, context)}
+      </div>
+      <div>
+        <h2>CustomIllustration</h2>
+        {CustomIllustration.render?.(props, context)}
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        {ColorRole.render?.(props, context)}
+      </div>
     </div>
   ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

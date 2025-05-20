@@ -336,6 +336,10 @@ export const Chromatic: Story = {
         <h2>Avatar</h2>
         {Avatar.render?.(...props)}
       </div>
+      <div>
+        <h2>ColorRole</h2>
+        {ColorRole.render?.(...props)}
+      </div>
     </div>
   ),
   parameters: {

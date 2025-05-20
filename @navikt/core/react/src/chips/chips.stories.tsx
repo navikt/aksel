@@ -229,6 +229,17 @@ export const Small = () => {
   );
 };
 
+export const ColorRole = () => (
+  <div>
+    <div>
+      <Regular />
+    </div>
+    <div>
+      <Regular data-color-role="warning" />
+    </div>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <div>
@@ -255,22 +266,13 @@ export const Chromatic: Story = {
         <h2>Small</h2>
         <Small />
       </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
+      </div>
     </div>
   ),
   parameters: {
     chromatic: { disable: false },
   },
-};
-
-export const ColorRole = {
-  render: () => (
-    <div>
-      <div>
-        <Regular />
-      </div>
-      <div>
-        <Regular data-color-role="warning" />
-      </div>
-    </div>
-  ),
 };

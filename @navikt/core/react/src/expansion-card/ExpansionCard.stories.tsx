@@ -252,32 +252,6 @@ export const Icon = () => (
   </div>
 );
 
-export const Chromatic: Story = {
-  render: () => {
-    return (
-      <div>
-        <h2>Description</h2>
-        <Description />
-        <h2>Sizes</h2>
-        <Sizes />
-        <h2>Heading sizing</h2>
-        <HeadingSizing />
-        <h2>Default open</h2>
-        <DefaultOpen />
-        <h2>Controlled state</h2>
-        <ControlledState />
-        <h2>Customization</h2>
-        <Customization />
-        <h2>Icon</h2>
-        <Icon />
-      </div>
-    );
-  },
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
-
 export const ColorRole = () => (
   <VStack gap="space-40">
     <div>
@@ -322,3 +296,31 @@ export const ColorRole = () => (
     </div>
   </VStack>
 );
+
+export const Chromatic: Story = {
+  render: () => {
+    return (
+      <div>
+        <h2>Description</h2>
+        <Description />
+        <h2>Sizes</h2>
+        <Sizes />
+        <h2>Heading sizing</h2>
+        <HeadingSizing />
+        <h2>Default open</h2>
+        <DefaultOpen />
+        <h2>Controlled state</h2>
+        <ControlledState />
+        <h2>Customization</h2>
+        <Customization />
+        <h2>Icon</h2>
+        <Icon />
+        <h2>ColorRole</h2>
+        <ColorRole />
+      </div>
+    );
+  },
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
