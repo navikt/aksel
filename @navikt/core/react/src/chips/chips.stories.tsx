@@ -166,18 +166,21 @@ export const Removable = () => {
   );
 };
 
-export const Regular = () => {
+export const Regular = (props: any) => {
   const [selected, setSelected] = useState<number[]>([2]);
   return (
     <div className="colgap">
       <Chips>
         {options.map((c, y) => (
-          <Chips.Removable key={y}>{c}</Chips.Removable>
+          <Chips.Removable key={y} {...props}>
+            {c}
+          </Chips.Removable>
         ))}
       </Chips>
       <Chips>
         {options.map((c, y) => (
           <Chips.Toggle
+            {...props}
             selected={selected.includes(y)}
             onClick={() =>
               setSelected(
@@ -257,4 +260,17 @@ export const Chromatic: Story = {
   parameters: {
     chromatic: { disable: false },
   },
+};
+
+export const ColorRole = {
+  render: () => (
+    <div>
+      <div>
+        <Regular />
+      </div>
+      <div>
+        <Regular data-color-role="warning" />
+      </div>
+    </div>
+  ),
 };

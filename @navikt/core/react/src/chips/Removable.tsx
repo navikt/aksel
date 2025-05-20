@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
+import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -39,6 +40,7 @@ export const RemovableChips = forwardRef<
 
     return (
       <button
+        data-color-role={variantToRole(variant)}
         {...rest}
         ref={ref}
         type={type}
@@ -58,5 +60,18 @@ export const RemovableChips = forwardRef<
     );
   },
 );
+
+function variantToRole(
+  variant: ChipsRemovableProps["variant"],
+): GlobalColorRoles {
+  switch (variant) {
+    case "action":
+      return "accent";
+    case "neutral":
+      return "neutral";
+    default:
+      return "neutral";
+  }
+}
 
 export default RemovableChips;
