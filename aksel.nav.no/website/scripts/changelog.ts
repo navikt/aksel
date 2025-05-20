@@ -58,13 +58,16 @@ export async function main() {
     const blocks = htmlToBlocks(converter.makeHtml(text), blockContentType, {
       parseHtml: (htmlStr) => new JSDOM(htmlStr).window._document,
     });
-    const id = `auto-endringslogg-kode-${version}`;
+    const slug = `versjon-${version}`;
 
     // Check for existing document
-    const existingDoc = await client.fetch(`*[_id == "${id}"]`);
+    const existingDoc = await client.fetch(
+      `*[_type == "ds_endringslogg_artikkel" && slug.current == $slug]`,
+      { slug },
+    );
     if (existingDoc.length > 1) {
       throw new Error(
-        `Found multiple documents for the same version (${version}), don't know which one to update 😵‍💫`,
+        `Found multiple documents with the same slug (${slug}), don't know which one to update 😵‍💫`,
       );
     }
 
@@ -72,12 +75,12 @@ export async function main() {
       // Create new document
       await client
         .create({
-          _id: id,
+          _id: `auto-endringslogg-kode-${version}`,
           _type: "ds_endringslogg_artikkel",
           heading,
           slug: {
             _type: "slug",
-            current: `versjon-${version}`,
+            current: slug,
           },
           endringsdato: new Date(),
           endringstype: "kode",
