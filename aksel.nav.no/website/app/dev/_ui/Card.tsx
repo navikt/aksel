@@ -70,11 +70,12 @@ const Card = ({ article, visible, index }: CardProps) => {
 
   return (
     <LinkCard
-      className={cl({
+      className={cl(styles.card, {
         [`${styles.cardVisible}`]: visible,
         [`${styles.cardNotVisible}`]: !visible,
       })}
       style={{ transitionDelay: `${index * 70}ms` }}
+      autoLayout={false}
     >
       <VStack className={styles.cardContent}>
         {showImage && (
@@ -108,7 +109,10 @@ const Card = ({ article, visible, index }: CardProps) => {
                 })
               }
             >
-              <LinkCardAnchor href={`/${article.slug}`}>
+              <LinkCardAnchor
+                href={`/${article.slug}`}
+                className={styles.cardAnchor}
+              >
                 {article.heading}
               </LinkCardAnchor>
             </LinkCardTitle>

@@ -234,8 +234,16 @@
   filter: hue-rotate(65deg);
 }
 
+.card {
+  height: fit-content;
+}
+
 .cardImageWrapper {
   background: var(--ax-brand-blue-300);
+
+  /* margin-inline: -20px; */
+
+  /* width: auto; */
 }
 
 .cardContent {
@@ -243,6 +251,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--ax-space-16);
+}
+
+.cardAnchor {
+  word-break: normal;
 }
 
 .cardLink {
