@@ -104,7 +104,6 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
             "navds-button",
             `navds-button--${variant}`,
             `navds-button--${size}`,
-            `navds-button--${size}`,
             {
               "navds-button--loading": loading,
               "navds-button--icon-only": !!icon && !children,
