@@ -53,7 +53,7 @@ export const EndringsloggArtikkel = defineType({
       initialValue: false,
     }),
     defineField({
-      hidden: ({ document }) => !document.fremhevet,
+      hidden: ({ document }) => !document?.fremhevet,
       title: "Fremhevet herobilde",
       name: "herobilde",
       description:
@@ -72,7 +72,16 @@ export const EndringsloggArtikkel = defineType({
           type: "string",
           title: "Alternativ tekst",
           description: "Beskriv bildet for skjermlesere",
-          hidden: ({ document }) => document.herobilde.dekorativt,
+          hidden: ({ document }) => (document?.herobilde as any).dekorativt,
+          validation: (Rule) =>
+            Rule.custom((value, { document }) => {
+              if ((document?.herobilde as any).dekorativt) {
+                return true;
+              }
+              return value
+                ? true
+                : "Bildet må ha en alternativ tekst hvis det ikke skal være dekorativt";
+            }),
         }),
       ],
     }),
