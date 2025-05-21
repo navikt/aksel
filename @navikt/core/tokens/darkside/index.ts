@@ -136,7 +136,7 @@ async function main() {
  */
 async function buildThemedRolesCSS() {
   /**
-   * We set 'accent' as the default base-theme.
+   * We set 'accent' as the default color palette.
    */
   const rootSelector = `:root, [data-color-role=accent]`;
 
