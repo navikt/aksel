@@ -1,3 +1,4 @@
+import { Metadata } from "next/types";
 import React from "react";
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import { BodyLong, HStack, Heading, Link, VStack } from "@navikt/ds-react";
@@ -7,14 +8,11 @@ import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
 import TokenTableOfContents from "./_ui/TokenTableOfContents";
 import TokensPage from "./_ui/TokensPage";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Design tokens",
   description:
     "Ved å bruke design tokens sørger vi for at både designere og utviklere arbeider etter de samme reglene og retningslinjene. " +
     "Dette forenkler vedlikeholdet av designet og sikrer en helhetlig visuell fremstilling på tvers av produkter.",
-  /* openGraph: {
-      images: ogImages, // Need to add manually from somewhere?
-    }, */
 };
 
 const Page = async () => {
@@ -35,21 +33,21 @@ const Page = async () => {
           <VStack gap="space-16">
             <HStack gap="space-16" align="center">
               <Link href="https://github.com/navikt/aksel" variant="neutral">
-                <GithubIcon aria-hidden="true" />
+                <GithubIcon aria-hidden />
                 GitHub
               </Link>
               <Link
                 href="https://www.figma.com/community/file/1214869602572392330"
                 variant="neutral"
               >
-                <FigmaIcon aria-hidden="true" />
+                <FigmaIcon aria-hidden />
                 Figma-community
               </Link>
               <Link
                 href="https://aksel.nav.no/grunnleggende/kode/endringslogg"
                 variant="neutral"
               >
-                <ClockDashedIcon aria-hidden="true" />
+                <ClockDashedIcon aria-hidden />
                 Endringslogg
               </Link>
             </HStack>

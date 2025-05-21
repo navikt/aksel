@@ -38,6 +38,7 @@ function DoDont(props: ExtractPortableComponentProps<"do_dont">) {
             key={block._key}
             gridColumn={block.fullwidth ? "span 2" : "span 1"}
             data-color-role={role}
+            className={styles.doDont}
           >
             <Notch block={block} />
             <img

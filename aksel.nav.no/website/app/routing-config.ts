@@ -8,11 +8,19 @@ import {
   komponentKategorier,
   templatesKategorier,
 } from "@/sanity/config";
+import { metadata as tokenMetadata } from "./dev/(designsystemet)/grunnleggende/darkside/design-tokens/page";
+import { metadata as iconsMetadata } from "./dev/(designsystemet)/komponenter/ikoner/page";
 
 type PageRoute = {
   slug: string;
   tag: string;
   heading: string;
+  /**
+   * Since we cant include the search metadata in the sanity query, we need to manually add it here.
+   */
+  searchMetadata?: {
+    intro?: string;
+  };
 };
 
 type Routes = {
@@ -53,6 +61,9 @@ const PAGE_ROUTES: Routes = {
           heading: "Tokens darkside",
           slug: `grunnleggende/darkside/design-tokens`,
           tag: "ready",
+          searchMetadata: {
+            intro: tokenMetadata?.description ?? "",
+          },
         },
       ],
     },
@@ -65,6 +76,9 @@ const PAGE_ROUTES: Routes = {
         heading: "Ikoner",
         slug: "komponenter/ikoner",
         tag: "ready",
+        searchMetadata: {
+          intro: iconsMetadata?.description ?? "",
+        },
       },
     ],
   },

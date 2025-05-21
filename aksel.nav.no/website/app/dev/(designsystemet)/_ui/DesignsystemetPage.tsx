@@ -60,7 +60,12 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
       <DesignsystemetEyebrow type={data?._type} />
 
       <Box marginBlock="space-0 space-8" asChild>
-        <Heading level="1" size="xlarge" data-aksel-heading-color>
+        <Heading
+          level="1"
+          size="xlarge"
+          data-aksel-heading-color
+          data-text-prose
+        >
           {data?.heading}
         </Heading>
       </Box>

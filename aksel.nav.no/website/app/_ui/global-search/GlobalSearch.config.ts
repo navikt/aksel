@@ -28,6 +28,8 @@ interface SearchPageT {
   lvl2: { text: string; id: string }[];
   lvl3: { text: string; id: string }[];
   lvl4: { text: string; id: string }[];
+  seo?: { meta?: string };
+  overrideString?: string;
 }
 
 type SearchHitT = {

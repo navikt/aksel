@@ -1,18 +1,24 @@
+.doDont {
+  border: 1px solid var(--ax-border-default);
+  border-radius: var(--ax-border-radius-xlarge);
+  height: fit-content;
+}
+
 .doDontNotch {
   padding: var(--ax-space-12) var(--ax-space-16);
   color: var(--ax-text-subtle);
   background-color: var(--ax-bg-moderate);
-  border: 1px solid var(--ax-border-default);
-  border-bottom: 1px solid var(--ax-border-subtleA);
-  border-radius: var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge) 0 0;
+  box-shadow: 0 1px 0 0 var(--ax-border-subtleA);
+  border-radius: calc(var(--ax-border-radius-xlarge) - 1px) calc(var(--ax-border-radius-xlarge) - 1px) 0 0;
   display: flex;
   gap: var(--ax-space-6);
+  position: relative;
+  z-index: 1;
 }
 
 .doDontImage {
   width: 100%;
   position: relative;
-  border-inline: 1px solid var(--ax-border-default);
   background-color: var(--ax-bg-default);
 }
 
@@ -20,7 +26,7 @@
   padding: var(--ax-space-12) var(--ax-space-16);
   color: var(--ax-text-neutral);
   background-color: var(--ax-bg-neutral-softA);
-  border: 1px solid var(--ax-border-default);
-  border-top: 1px solid var(--ax-border-neutral-subtleA);
-  border-radius: 0 0 var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge);
+  border-radius: 0 0 calc(var(--ax-border-radius-xlarge) - 1px) calc(var(--ax-border-radius-xlarge) - 1px);
+  box-shadow: 0 -1px 0 0 var(--ax-border-neutral-subtleA);
+  position: relative;
 }
