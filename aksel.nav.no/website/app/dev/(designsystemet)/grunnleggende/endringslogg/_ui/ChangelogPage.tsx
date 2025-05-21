@@ -14,32 +14,35 @@ export default async () => {
     ),
     params: { year: `${year}`, nextYear: `${year + 1}` },
   });
+  // const logsData = {};
   return (
     <>
       <VStack
         gap="space-24"
+        paddingBlock="space-12 space-0"
         /** Make search and filter sticky */
-        style={{
-          position: "sticky",
-          top: "var(--website-header-height)",
-          background: "var(--ax-bg-default)",
-          paddingTop: "var(--ax-space-12)",
-          paddingBottom: "var(--ax-space-12)",
-        }}
+        // style={{
+        //   position: "sticky",
+        //   top: "calc(var(--website-header-height))",
+        //   background: "var(--ax-bg-default)",
+        //   zIndex: 1,
+        // }}
       >
         <SearchField />
         <FilterChips />
       </VStack>
-      <VStack paddingBlock="space-48">
-        <ChronologicalList list={logsData} />
-
-        <EmptyStateCard
-          actionComponent={
-            <BodyShort size="small">
-              Det er ikke sluppet noen endringer i denne perioden.
-            </BodyShort>
-          }
-        />
+      <VStack paddingBlock="space-32 space-0">
+        {logsData?.length > 0 ? (
+          <ChronologicalList list={logsData} />
+        ) : (
+          <EmptyStateCard
+            actionComponent={
+              <BodyShort size="small">
+                Det er ikke sluppet noen endringer i denne perioden.
+              </BodyShort>
+            }
+          />
+        )}
       </VStack>
     </>
   );
