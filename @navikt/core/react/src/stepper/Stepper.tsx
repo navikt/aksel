@@ -100,16 +100,17 @@ export const Stepper: StepperComponent = forwardRef<
           const stepProps: Partial<StepperStepProps> =
             React.isValidElement<StepperStepProps>(step) ? step.props : {};
 
+          const isInteractive = stepProps.interactive ?? interactive;
+
           return (
             <li
               className={cn("navds-stepper__item", {
                 /* TODO: Remove these 3 classNames in darkmode update */
                 "navds-stepper__item--behind": activeStep > index,
                 "navds-stepper__item--completed": stepProps.completed,
-                "navds-stepper__item--non-interactive": !(
-                  stepProps.interactive ?? interactive
-                ),
+                "navds-stepper__item--non-interactive": !isInteractive,
               })}
+              data-color-role={isInteractive ? undefined : "neutral"}
               key={index + (children?.toString?.() ?? "")}
             >
               <span
