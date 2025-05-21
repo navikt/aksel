@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.22.1
+
+### Patch Changes
+
+- Darkside: Let data-color-role override variant defined in Tag-component. ([#3795](https://github.com/navikt/aksel/pull/3795))
+
+- ErrorSummary: Heading size is now 'xsmall' for non-medium sizes and remains 'small' when size='medium'. ([#3806](https://github.com/navikt/aksel/pull/3806))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.22.1
+  - @navikt/aksel-icons@7.22.1
+
 ## 7.22.0
 
 ### Minor Changes
