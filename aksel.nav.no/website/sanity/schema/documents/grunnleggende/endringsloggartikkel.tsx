@@ -53,18 +53,27 @@ export const EndringsloggArtikkel = defineType({
       initialValue: false,
     }),
     defineField({
-      hidden: ({ document }) => !document?.fremhevet,
+      hidden: ({ document }) => !document.fremhevet,
       title: "Fremhevet herobilde",
       name: "herobilde",
       description:
         "Bildet vises øverst på kortet/siden og blir brukt som OG-bilde. Anbefalt størrelse er 1200x630px.",
       type: "image",
       fields: [
-        {
+        defineField({
+          name: "dekorativt",
+          title: "Bildet er bare dekorativt",
+          description: "Gjemmer bildet fra skjermlesere for å minske støy",
+          type: "boolean",
+          initialValue: false,
+        }),
+        defineField({
           name: "alt",
           type: "string",
           title: "Alternativ tekst",
-        },
+          description: "Beskriv bildet for skjermlesere",
+          hidden: ({ document }) => document.herobilde.dekorativt,
+        }),
       ],
     }),
     defineField({
