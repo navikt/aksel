@@ -134,6 +134,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         role="progressbar"
         aria-labelledby={ariaLabelledBy}
         aria-label={ariaLabel}
+        data-color-role="info"
         {...rest}
       >
         <div

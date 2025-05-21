@@ -26,7 +26,7 @@
   --__ac-progress-bar-translate: initial;
 
   transform: translateX(var(--__ac-progress-bar-translate));
-  background: var(--ax-bg-info-strong);
+  background: var(--ax-bg-strong);
   transform-origin: left;
   position: absolute;
   top: 0;
