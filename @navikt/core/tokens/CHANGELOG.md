@@ -1,5 +1,7 @@
 # @navikt/ds-tokens
 
+## 7.22.1
+
 ## 7.22.0
 
 ### Minor Changes
