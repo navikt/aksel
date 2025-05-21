@@ -112,6 +112,7 @@ const ClickablePeriod = React.memo(
     return (
       <>
         <button
+          data-color-role={status}
           {...restProps}
           type="button"
           ref={(r) => {

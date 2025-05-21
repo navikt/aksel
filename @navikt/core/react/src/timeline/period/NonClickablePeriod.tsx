@@ -27,6 +27,7 @@ const NonClickablePeriod = ({
   return (
     <div
       ref={periodRef}
+      data-color-role={status}
       {...restProps}
       className={cn(
         getConditionalClasses(cropped, direction, status),
