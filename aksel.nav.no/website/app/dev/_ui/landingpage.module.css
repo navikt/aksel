@@ -236,6 +236,7 @@
 
 .card {
   height: fit-content;
+  transition-property: opacity, transform;
 }
 
 .cardImageWrapper {

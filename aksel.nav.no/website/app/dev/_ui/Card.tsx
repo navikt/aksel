@@ -74,7 +74,9 @@ const Card = ({ article, visible, index }: CardProps) => {
         [`${styles.cardVisible}`]: visible,
         [`${styles.cardNotVisible}`]: !visible,
       })}
-      style={{ transitionDelay: `${index * 70}ms` }}
+      style={{
+        transitionDelay: `${index * 70}ms`,
+      }}
       autoLayout={false}
     >
       <VStack className={styles.cardContent}>
