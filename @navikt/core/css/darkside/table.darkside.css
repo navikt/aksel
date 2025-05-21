@@ -219,7 +219,7 @@
 & .aksel-table__toggle-expand-cell:hover > .aksel-table__toggle-expand-button,
 & .aksel-table__expandable-row--clickable:hover .aksel-table__toggle-expand-button {
   .aksel-table__row--selected & {
-    background-color: var(--ax-bg-accent-moderate-hoverA);
+    background-color: var(--ax-bg-moderate-hoverA);
   }
 }
 
