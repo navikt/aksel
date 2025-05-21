@@ -12,7 +12,7 @@ export type LatestT = {
   _type: "nytt_fra_aksel";
   _key: string;
   highlights: ArticleT[];
-  curatedResent: {
+  curatedRecent: {
     artikler: ArticleT[];
     bloggposts: ArticleT[];
     komponenter: ArticleT[];
@@ -88,9 +88,9 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
 
 function getList(block: LatestT) {
   return [
-    ...block.curatedResent.artikler,
-    ...block.curatedResent.bloggposts,
-    ...block.curatedResent.komponenter,
+    ...block.curatedRecent.artikler,
+    ...block.curatedRecent.bloggposts,
+    ...block.curatedRecent.komponenter,
   ].sort((a, b) => {
     return (
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()

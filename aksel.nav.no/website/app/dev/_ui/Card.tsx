@@ -52,17 +52,9 @@ const Card = ({ article, visible, index }: CardProps) => {
     "templates_artikkel",
   ].includes(article._type);
 
-  const statusImageUrl = urlForImage(article.status?.bilde)?.url();
+  const imageUrl = urlForImage(article.seo?.image)?.url();
   // TODO: use blur images? but <LinkCardImage> takes string URL for now
-  /* const statusImageBlurUrl = urlForImage(article.status?.bilde)
-    ?.width(24)
-    .height(24)
-    .blur(10)
-    .url(); */
-
-  const fallbackImageUrl = urlForImage(article.seo?.image)?.url();
-  // TODO: use blur images? but <LinkCardImage> takes string URL for now
-  /* const fallbackImageBlurUrl = urlForImage(article.seo?.image)
+  /* const imageBlurUrl = urlForImage(article.seo?.image)
     ?.width(24)
     .height(24)
     .blur(10)
@@ -90,10 +82,7 @@ const Card = ({ article, visible, index }: CardProps) => {
           >
             <LinkCardImage
               src={
-                statusImageUrl ||
-                fallbackImageUrl ||
-                getImage(article?.heading ?? "", "thumbnail") ||
-                ""
+                imageUrl || getImage(article?.heading ?? "", "thumbnail") || ""
               }
               alt={article.heading + " thumbnail"}
             />

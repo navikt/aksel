@@ -244,7 +244,7 @@ const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
         ${contributorsAll},
         "tema": undertema[]->tema->title,
       },
-      "curatedResent": {
+      "curatedRecent": {
         "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...4]{
           _type,
           _id,
