@@ -59,6 +59,31 @@ export const EndringsloggArtikkel = defineType({
       description:
         "Bildet vises øverst på kortet/siden og blir brukt som OG-bilde. Anbefalt størrelse er 1200x630px.",
       type: "image",
+      fields: [
+        defineField({
+          name: "dekorativt",
+          title: "Bildet er bare dekorativt",
+          description: "Gjemmer bildet fra skjermlesere for å minske støy",
+          type: "boolean",
+          initialValue: false,
+        }),
+        defineField({
+          name: "alt",
+          type: "string",
+          title: "Alternativ tekst",
+          description: "Beskriv bildet for skjermlesere",
+          hidden: ({ document }) => (document?.herobilde as any).dekorativt,
+          validation: (Rule) =>
+            Rule.custom((value, { document }) => {
+              if ((document?.herobilde as any).dekorativt) {
+                return true;
+              }
+              return value
+                ? true
+                : "Bildet må ha en alternativ tekst hvis det ikke skal være dekorativt";
+            }),
+        }),
+      ],
     }),
     defineField({
       title: "Innhold",
