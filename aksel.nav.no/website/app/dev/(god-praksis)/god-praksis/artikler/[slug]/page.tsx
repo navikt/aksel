@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { Image } from "sanity";
 import { TagFillIcon } from "@navikt/aksel-icons";
 import {
+  BodyLong,
   BodyShort,
   Box,
   HStack,
@@ -98,17 +99,18 @@ export default async function Page(props: Props) {
             {pageData.innholdstype}
           </BodyShort>
         )}
-        <Heading size="xlarge" level="1" data-aksel-heading-color>
+        <Heading
+          size="xlarge"
+          level="1"
+          data-aksel-heading-color
+          data-text-prose
+        >
           {pageData.heading}
         </Heading>
         {pageData.ingress && (
-          <BodyShort
-            size="large"
-            className={styles.pageIngress}
-            data-text-prose
-          >
+          <BodyLong size="large" className={styles.pageIngress} data-text-prose>
             {pageData.ingress}
-          </BodyShort>
+          </BodyLong>
         )}
         <BodyShort size="small" as="time" textColor="subtle">
           {`Oppdatert ${await dateStr(verifiedDate)}`}
