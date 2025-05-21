@@ -17,7 +17,7 @@
   }
 
   & .aksel-table__row--shade-on-hover.aksel-table__row--selected:hover {
-    background-color: var(--ax-bg-accent-moderate-hoverA);
+    background-color: var(--ax-bg-moderate-hoverA);
   }
 }
 
@@ -26,10 +26,10 @@
 }
 
 .aksel-table__row--selected {
-  background-color: var(--ax-bg-accent-softA);
+  background-color: var(--ax-bg-softA);
 
   & + .aksel-table__expanded-row {
-    background-color: var(--ax-bg-accent-softA);
+    background-color: var(--ax-bg-softA);
   }
 }
 
@@ -47,7 +47,7 @@
   }
 
   & .aksel-table__row--selected + .aksel-table__expanded-row:nth-child(4n) {
-    background-color: var(--ax-bg-accent-softA);
+    background-color: var(--ax-bg-softA);
   }
 }
 
@@ -113,7 +113,7 @@
 .aksel-table__sort-button {
   appearance: none;
   background: none;
-  color: var(--ax-text-accent-subtle);
+  color: var(--ax-text-subtle);
   border: none;
   cursor: pointer;
   margin: 0;
@@ -141,8 +141,8 @@
 
 .aksel-table__header-cell[aria-sort="ascending"] .aksel-table__sort-button,
 .aksel-table__header-cell[aria-sort="descending"] .aksel-table__sort-button {
-  background-color: var(--ax-bg-accent-moderate-pressedA);
-  color: var(--ax-text-accent);
+  background-color: var(--ax-bg-moderate-pressedA);
+  color: var(--ax-text-default);
 }
 
 .aksel-table__header-cell--align-right .aksel-table__sort-button {
