@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-ErrorSummary: Heading is now 'xsmall' with size='small'".
+ErrorSummary: Heading size is now 'xsmall' for non-medium sizes and remains 'small' when size='medium'.
