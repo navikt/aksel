@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import {
   Page as AkselPage,
   Bleed,
@@ -5,6 +6,7 @@ import {
   BoxNew,
   HGrid,
   Heading,
+  Link,
   VStack,
 } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
@@ -47,9 +49,14 @@ const Page = async () => {
           <HeroGradientBG />
           <main tabIndex={-1} id="hovedinnhold" className={styles.frontPage}>
             <div className={styles.mainBanner}>
-              <a href="/darkside" target="_blank">
+              <Link
+                href="/darkside"
+                target="_blank"
+                as={NextLink}
+                className={styles.bannerLink}
+              >
                 Vi trenger testere fra team i Nav for darkmode og theming!
-              </a>
+              </Link>
             </div>
 
             <BoxNew className={styles.forsidePageWrapper}>

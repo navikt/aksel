@@ -26,6 +26,10 @@
   text-decoration: underline;
 }
 
+.bannerLink {
+  color: var(--ax-text-contrast);
+}
+
 .frontPage {
   position: relative;
   background-color: transparent;
@@ -204,12 +208,7 @@
 
 .highlightLink {
   margin-block: var(--ax-space-8) var(--ax-space-20);
-  text-decoration: underline;
   color: var(--ax-text-neutral);
-
-  &:hover {
-    text-decoration: none;
-  }
 }
 
 .highlightAuthor {

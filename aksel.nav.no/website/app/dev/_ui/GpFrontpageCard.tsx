@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import { Image } from "sanity";
-import { BoxNew, HStack } from "@navikt/ds-react";
+import { BoxNew, HStack, Link } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
 import styles from "./landingpage.module.css";
@@ -45,15 +45,16 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
           <FallbackPictogram />
         )}
       </BoxNew>
-      <NextLink
+
+      <Link
         href={href}
-        passHref
         data-umami-event="navigere"
         data-umami-event-kilde="god praksis forside"
         className={styles.godPraksisCardItemLink}
+        as={NextLink}
       >
         {children}
-      </NextLink>
+      </Link>
     </HStack>
   );
 };
