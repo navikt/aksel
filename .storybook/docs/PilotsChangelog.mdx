@@ -4,6 +4,28 @@ import { Meta, Title } from "@storybook/blocks";
 
 # Darkside changelog
 
+## v7.23 (12.05.25)
+
+Updates to Button and Tag components.
+
+Removed classes for defining variants. Variant styling is now done using `data-variant`-attribute on the component.
+
+- As for color-selection, variant is translated to `data-color-role`-attribute on the component for "theming".
+
+```
+// Button.tsx | before
+<button
+  className="navds-button navds-button--primary-neutral"
+/>
+
+// Button.tsx | after
+<button
+  className="navds-button"
+  data-color-role="neutral"
+  data-variant="primary"
+/>
+```
+
 ## v7.22 (12.05.25)
 
 Updates to border-radius and text-icon tokens.

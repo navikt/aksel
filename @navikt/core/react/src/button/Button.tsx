@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { Loader } from "../loader";
 import { useRenameCSS } from "../theme/Theme";
 import { Label } from "../typography";
@@ -93,6 +94,8 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       return (
         <Component
           {...(Component !== "button" ? { role: "button" } : {})}
+          data-color-role={variantToRole(variant)}
+          data-variant={variantToSimplifiedVariant(variant)}
           {...filterProps}
           ref={ref}
           onKeyUp={composeEventHandlers(onKeyUp, handleKeyUp)}
@@ -125,5 +128,41 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       );
     },
   );
+
+function variantToRole(variant: ButtonProps["variant"]): GlobalColorRoles {
+  switch (variant) {
+    case "primary":
+    case "secondary":
+    case "tertiary":
+      return "accent";
+    case "primary-neutral":
+    case "secondary-neutral":
+    case "tertiary-neutral":
+      return "neutral";
+    case "danger":
+      return "danger";
+    default:
+      return "accent";
+  }
+}
+
+function variantToSimplifiedVariant(
+  variant: ButtonProps["variant"],
+): "primary" | "secondary" | "tertiary" {
+  switch (variant) {
+    case "primary":
+    case "primary-neutral":
+    case "danger":
+      return "primary";
+    case "secondary":
+    case "secondary-neutral":
+      return "secondary";
+    case "tertiary":
+    case "tertiary-neutral":
+      return "tertiary";
+    default:
+      return "primary";
+  }
+}
 
 export default Button;
