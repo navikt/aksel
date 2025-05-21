@@ -2,4 +2,4 @@
 "@navikt/ds-tokens": minor
 ---
 
-Darkside: Set accent as default base color theme.
+Darkside: Set accent color-role as the default color palette.
