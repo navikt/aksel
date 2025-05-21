@@ -10,7 +10,7 @@ export default ({ logEntry, index }) => {
     // Monthly additinal header
     // TODO: [endringslogg] Sticky example: aksel.nav.no/website/components/website-modules/search/parts/HitCollection.tsx#L78
     <li
-      key={index}
+      key={index + "-month-header"}
       style={{
         flexWrap: "nowrap",
         position: "sticky",
@@ -20,7 +20,7 @@ export default ({ logEntry, index }) => {
         zIndex: 1,
       }}
     >
-      <HStack>
+      <HStack style={{ flexWrap: "nowrap" }}>
         {/* Calendar icon + vertical line */}
         <VStack width="48px" align="center">
           <Box.New
@@ -58,7 +58,7 @@ export default ({ logEntry, index }) => {
         </VStack>
       </HStack>
       {/* Spacing + vertical line */}
-      <VStack width="48px" height="var(--ax-space-32)" align="center">
+      {/* <VStack width="48px" height="var(--ax-space-32)" align="center">
         <Box.New
           width="0px"
           height="1rem"
@@ -67,7 +67,7 @@ export default ({ logEntry, index }) => {
             borderLeft: "1px dashed var(--ax-border-neutral-subtle)",
           }}
         />
-      </VStack>
+      </VStack> */}
     </li>
   );
 };

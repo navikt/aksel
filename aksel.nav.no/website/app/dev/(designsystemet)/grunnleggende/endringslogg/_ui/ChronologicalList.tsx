@@ -13,7 +13,7 @@ import {
 } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { urlForImage } from "@/app/_sanity/utils";
-import { Bilde } from "@/app/_ui/bilde/Bilde";
+// import { Bilde } from "@/app/_ui/bilde/Bilde";
 import MonthHeader from "./MonthHeader";
 
 const areDifferentMonths = (currentDateString, previousDateString) => {
@@ -43,6 +43,17 @@ export default ({ list }) => {
             )) && <MonthHeader logEntry={item} index={index} />}
           {/* Log entry */}
           <li key={index}>
+            {/* Spacing + vertical line */}
+            <VStack width="48px" height="var(--ax-space-32)" align="center">
+              <Box.New
+                width="0px"
+                height="1rem"
+                flexGrow="1"
+                style={{
+                  borderLeft: "1px dashed var(--ax-border-neutral-subtle)",
+                }}
+              />
+            </VStack>
             <HStack style={{ flexWrap: "nowrap" }}>
               {/* Dot + vertical line */}
               <VStack
@@ -67,13 +78,16 @@ export default ({ list }) => {
                     borderRadius: "100%",
                   }}
                 />
-                <Box.New
-                  width="0px"
-                  flexGrow="1"
-                  style={{
-                    borderLeft: "1px dashed var(--ax-border-neutral-subtle)",
-                  }}
-                />
+
+                {index < list.length - 1 && (
+                  <Box.New
+                    width="0px"
+                    flexGrow="1"
+                    style={{
+                      borderLeft: "1px dashed var(--ax-border-neutral-subtle)",
+                    }}
+                  />
+                )}
               </VStack>
               {/* Log entry */}
               <VStack paddingInline="space-16" flexGrow="1">
@@ -87,33 +101,32 @@ export default ({ list }) => {
                     })}
                   </BodyShort>
                   {item.fremhevet && (
-                    // TODO: [endringslogg] Set correct background color on tag, --ABPink-700 is undefined
                     <Tag
                       size="xsmall"
                       variant="neutral-filled"
                       style={{
                         borderRadius: "var(--ax-radius-4)",
-                        backgroundColor: "var(--ABPink-700, #B72A71)",
+                        backgroundColor: "var(--aksel-brand-pink-700)",
                       }}
                     >
                       Fremhevet
                     </Tag>
                   )}
                 </HStack>
-                {/* TODO: [endringslogg] Set correct border color on tag, '--ABPink-700' is undefined */}
                 {/* TODO: [endringslogg] Ensure proper wrapping on mobile */}
                 {/* TODO: [endringslogg] Ensure slimmer margins on mobile */}
                 {/* TODO: [endringslogg] Hide lower part of log-entry and show 'Vis mer'-button when height>400px? */}
                 {/* TODO: [endringslogg] Add proper styling to 'fremhevet' */}
                 <VStack
                   style={{
-                    marginBottom: "var(--ax-space-64)",
+                    marginBottom: "var(--ax-space-32)",
                     ...(item.fremhevet
                       ? {
                           padding: "var(--ax-space-16)",
-                          border: "2px solid var(--ABPink-700, #B72A71)",
+                          border: "2px solid var(--aksel-brand-pink-700)",
                           borderRadius: "var(--ax-radius-12)",
-                          "--ax-text-brand-blue": "var(--ABPink-1000, #4E082D)",
+                          "--ax-text-brand-blue":
+                            "var(--aksel-brand-pink-1000)",
                         }
                       : {}),
                   }}
@@ -129,12 +142,12 @@ export default ({ list }) => {
                   </Heading>
                   {item.fremhevet && item.herobilde && (
                     <>
-                      <Bilde
+                      {/* <Bilde
                         value={{ ...item.herobilde }}
                         index={0} // Replace with the appropriate index if available
                         isInline={false} // Adjust based on your use case
                         renderNode={() => null} // Provide a proper renderNode function if needed
-                      />
+                      /> */}
                       {/* <img
                         className="rounded-[--ax-radius-12]"
                         // TODO: [endringslogg] Probably add herobilde.alt to sanity schema
@@ -144,7 +157,8 @@ export default ({ list }) => {
                         src={urlForImage(item.herobilde)?.auto("format").url()}
                       /> */}
                       <Image
-                        className="aspect-[1200/630] rounded-[--ax-radius-12] bg-[--ABPink-700,#B72A71] ring-1 ring-[--ax-border-neutral-subtle]"
+                        key={item.herobilde._key}
+                        className="aspect-[1200/630] rounded-[--ax-radius-12] bg-[--aksel-brand-pink-100] ring-1 ring-[--ax-border-neutral-subtle]"
                         alt={item.herobilde.alt}
                         loading="lazy"
                         decoding="async"
