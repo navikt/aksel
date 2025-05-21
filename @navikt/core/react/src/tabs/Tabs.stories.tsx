@@ -274,6 +274,12 @@ export const CustomIds = () => (
   </Tabs>
 );
 
+export const ColorRole = () => (
+  <div data-color-role="brand-magenta">
+    <Controlled />
+  </div>
+);
+
 export const Chromatic = {
   render: () => (
     <VStack gap="6" align="center">
