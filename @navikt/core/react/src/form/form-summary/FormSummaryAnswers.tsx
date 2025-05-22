@@ -18,6 +18,7 @@ export const FormSummaryAnswers = forwardRef<
   return (
     <dl
       ref={ref}
+      data-color-role="info"
       {...rest}
       className={cn("navds-form-summary__answers", className)}
     >
