@@ -121,6 +121,25 @@ export const Readonly: Story = {
   ),
 };
 
+export const ColorRole: Story = {
+  render: () => (
+    <div className="colgap" data-color-role="brand-magenta">
+      <div>
+        {/* @ts-expect-error Args are Partial here */}
+        <Switch {...Description.args} position="left" />
+      </div>
+      <div>
+        {/* @ts-expect-error Args are Partial here */}
+        <Disabled.render />
+      </div>
+      <div>
+        {/* @ts-expect-error Args are Partial here */}
+        <Loading.render />
+      </div>
+    </div>
+  ),
+};
+
 export const Chromatic: Story = {
   render: () => (
     <VStack gap="4" align="start">

@@ -65,7 +65,7 @@
   stroke-linecap: round;
   stroke-width: var(--__axc-loader-stroke-width);
 
-  &[data-variant="inverted"] {
+  .aksel-loader[data-variant="inverted"] & {
     stroke: var(--ax-border-subtle);
   }
 }
@@ -74,7 +74,7 @@
   stroke: var(--ax-border-subtleA);
   stroke-width: var(--__axc-loader-stroke-width);
 
-  &[data-variant="inverted"] {
+  .aksel-loader[data-variant="inverted"] & {
     stroke: var(--ax-border-strong);
   }
 }

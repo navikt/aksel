@@ -113,14 +113,17 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
   },
 );
 
-function variantToRole(variant: LoaderProps["variant"]): GlobalColorRoles {
+function variantToRole(
+  variant: LoaderProps["variant"],
+): GlobalColorRoles | undefined {
   switch (variant) {
     case "neutral":
       return "neutral";
-    case "interaction":
-      return "accent";
     case "inverted":
       return "neutral";
+    /* We assume "interaction" is the main app color in this instance */
+    case "interaction":
+      return undefined;
     default:
       return "neutral";
   }
