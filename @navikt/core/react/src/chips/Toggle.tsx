@@ -34,6 +34,7 @@ export const ToggleChips: OverridableComponent<
       variant,
       checkmark = true,
       as: Component = "button",
+      "data-color-role": colorRole,
       ...rest
     },
     ref,
@@ -50,7 +51,7 @@ export const ToggleChips: OverridableComponent<
 
     return (
       <Component
-        data-color-role={variantToRole(localVariant)}
+        data-color-role={colorRole ?? variantToRole(localVariant)}
         {...rest}
         ref={ref}
         className={cn("navds-chips__chip navds-chips__toggle", className, {

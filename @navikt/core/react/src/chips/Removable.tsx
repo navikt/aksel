@@ -31,6 +31,7 @@ export const RemovableChips = forwardRef<
       className,
       onClick,
       type = "button",
+      "data-color-role": colorRole,
       ...rest
     },
     ref,
@@ -49,7 +50,7 @@ export const RemovableChips = forwardRef<
 
     return (
       <button
-        data-color-role={variantToRole(localVariant)}
+        data-color-role={colorRole ?? variantToRole(localVariant)}
         {...rest}
         ref={ref}
         type={type}

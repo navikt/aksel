@@ -95,6 +95,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       toptextPosition,
       size = "medium",
       toptextHeadingLevel = "3",
+      "data-color-role": colorRole,
       ...rest
     }: ChatProps,
     ref,
@@ -112,7 +113,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
           `navds-chat--${size}`,
           `navds-chat--${variant}`,
         )}
-        data-color-role={variantToRole(variant)}
+        data-color-role={colorRole ?? variantToRole(variant)}
         {...rest}
         data-variant={variant}
       >

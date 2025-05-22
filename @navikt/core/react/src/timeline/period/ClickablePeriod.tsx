@@ -112,8 +112,8 @@ const ClickablePeriod = React.memo(
     return (
       <>
         <button
-          data-color-role={status}
           {...restProps}
+          data-color-role={restProps?.["data-color-role"] ?? status}
           type="button"
           ref={(r) => {
             firstFocus && addFocusable(r, index);

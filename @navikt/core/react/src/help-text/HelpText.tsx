@@ -44,7 +44,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
       title,
       onClick,
       wrapperClassName,
-      "data-color-role": dataColorRole = "info",
+      "data-color-role": colorRole = "info",
       ...rest
     },
     ref,
@@ -61,7 +61,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     return (
       <div
         className={cn("navds-help-text", wrapperClassName)}
-        data-color-role={dataColorRole}
+        data-color-role={colorRole}
       >
         <button
           {...rest}

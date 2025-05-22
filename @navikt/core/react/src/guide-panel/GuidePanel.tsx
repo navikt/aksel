@@ -35,13 +35,23 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
  * ```
  */
 export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
-  ({ children, className, illustration, poster, ...rest }, ref) => {
+  (
+    {
+      children,
+      className,
+      illustration,
+      poster,
+      "data-color-role": colorRole = "info",
+      ...rest
+    },
+    ref,
+  ) => {
     const { cn } = useRenameCSS();
     const themeContext = useThemeInternal(false);
 
     return (
       <div
-        data-color-role="info"
+        data-color-role={colorRole}
         {...rest}
         ref={ref}
         className={cn("navds-guide-panel", className, {

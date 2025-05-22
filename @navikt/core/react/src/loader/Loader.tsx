@@ -34,6 +34,10 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
    * @default "neutral"
    */
   variant?: "neutral" | "interaction" | "inverted";
+  /**
+   * Sets default 'base'-color for Loader
+   */
+  "data-color-role"?: GlobalColorRoles;
 }
 
 /* Workaround for @types/react v17/v18 feil */
@@ -61,6 +65,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
       transparent = false,
       variant = "neutral",
       id,
+      "data-color-role": colorRole,
       ...rest
     },
     ref,
@@ -85,7 +90,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
         focusable="false"
         viewBox="0 0 50 50"
         preserveAspectRatio="xMidYMid"
-        data-color-role={variantToRole(variant)}
+        data-color-role={colorRole ?? variantToRole(variant)}
         {...omit(rest, ["children"])}
         data-variant={variant}
       >
