@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { GlobalColorRoles } from "@navikt/ds-tokens/types";
-import { useRenameCSS } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 
 export interface ChipsToggleProps
@@ -39,18 +39,24 @@ export const ToggleChips: OverridableComponent<
     ref,
   ) => {
     const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal(false);
+    let localVariant: ChipsToggleProps["variant"] | undefined;
+
+    if (themeContext) {
+      localVariant = variant;
+    } else {
+      localVariant = variant ?? "action";
+    }
 
     return (
       <Component
-        data-color-role={variantToRole(variant)}
+        data-color-role={variantToRole(localVariant)}
         {...rest}
         ref={ref}
-        className={cn(
-          "navds-chips__chip navds-chips__toggle",
-          className,
-          `navds-chips__toggle--${variant}`,
-          { "navds-chips__toggle--with-checkmark": checkmark },
-        )}
+        className={cn("navds-chips__chip navds-chips__toggle", className, {
+          "navds-chips__toggle--with-checkmark": checkmark,
+          [`navds-chips__toggle--${localVariant}`]: localVariant,
+        })}
         aria-pressed={selected}
         data-pressed={selected}
       >
@@ -90,14 +96,16 @@ export const ToggleChips: OverridableComponent<
   },
 );
 
-function variantToRole(variant: ChipsToggleProps["variant"]): GlobalColorRoles {
+function variantToRole(
+  variant?: ChipsToggleProps["variant"],
+): GlobalColorRoles | undefined {
   switch (variant) {
     case "action":
       return "accent";
     case "neutral":
       return "neutral";
     default:
-      return "neutral";
+      return undefined;
   }
 }
 

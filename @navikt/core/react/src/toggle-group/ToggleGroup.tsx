@@ -116,7 +116,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               className={cn(
                 "navds-toggle-group",
                 `navds-toggle-group--${size}`,
-                `navds-toggle-group--${localVariant}`,
+                { [`navds-toggle-group--${localVariant}`]: localVariant },
               )}
               aria-describedby={
                 cl(userDescribedby, !!label && labelId) || undefined

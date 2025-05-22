@@ -531,7 +531,7 @@ export const Readonly: StoryFn = () => {
   );
 };
 
-export const Chromatic: StoryFn = () => {
+const ChromaticRender = ({ children }: { children?: React.ReactNode }) => {
   const H2 = (props: { children: string; style?: React.CSSProperties }) => (
     <h2 style={{ marginBottom: "-0.25rem", ...props.style }}>
       {props.children}
@@ -565,9 +565,23 @@ export const Chromatic: StoryFn = () => {
       <Disabled />
       <H2>Readonly</H2>
       <Readonly />
+      {children}
     </VStack>
   );
 };
+
+export const ColorRoles: StoryFn = () => (
+  <div data-color-role="brand-magenta">
+    <h2>ColorRoles</h2>
+    <ChromaticRender />
+  </div>
+);
+
+export const Chromatic: StoryFn = () => (
+  <ChromaticRender>
+    <ColorRoles />
+  </ChromaticRender>
+);
 
 Chromatic.parameters = {
   chromatic: {

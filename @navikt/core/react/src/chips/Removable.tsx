@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { GlobalColorRoles } from "@navikt/ds-tokens/types";
-import { useRenameCSS } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
@@ -26,7 +26,7 @@ export const RemovableChips = forwardRef<
   (
     {
       children,
-      variant = "action",
+      variant,
       onDelete,
       className,
       onClick,
@@ -36,18 +36,29 @@ export const RemovableChips = forwardRef<
     ref,
   ) => {
     const translate = useI18n("Chips");
+    const themeContext = useThemeInternal(false);
     const { cn } = useRenameCSS();
+
+    let localVariant: ChipsRemovableProps["variant"] | undefined;
+
+    if (themeContext) {
+      localVariant = variant;
+    } else {
+      localVariant = variant ?? "action";
+    }
 
     return (
       <button
-        data-color-role={variantToRole(variant)}
+        data-color-role={variantToRole(localVariant)}
         {...rest}
         ref={ref}
         type={type}
         className={cn(
           "navds-chips__chip navds-chips__removable navds-chips--icon-right",
           className,
-          `navds-chips__removable--${variant}`,
+          {
+            [`navds-chips__removable--${localVariant}`]: localVariant,
+          },
         )}
         aria-label={`${children} ${translate("Removable.labelSuffix")}`}
         onClick={composeEventHandlers(onClick, onDelete)}
@@ -62,15 +73,15 @@ export const RemovableChips = forwardRef<
 );
 
 function variantToRole(
-  variant: ChipsRemovableProps["variant"],
-): GlobalColorRoles {
+  variant?: ChipsRemovableProps["variant"],
+): GlobalColorRoles | undefined {
   switch (variant) {
     case "action":
       return "accent";
     case "neutral":
       return "neutral";
     default:
-      return "neutral";
+      return undefined;
   }
 }
 
