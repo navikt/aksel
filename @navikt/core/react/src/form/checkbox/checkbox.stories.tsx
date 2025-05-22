@@ -270,6 +270,36 @@ export const Disabled = () => (
   </div>
 );
 
+export const ColorRole = () => (
+  <div className="colspan" data-color-role="brand-magenta">
+    <Checkbox value="tekst">Checkboxtekst</Checkbox>
+    <Checkbox value="tekst" defaultChecked>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst" defaultChecked disabled>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst" defaultChecked readOnly>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst" error>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst" defaultChecked error>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst" disabled error>
+      Checkboxtekst
+    </Checkbox>
+    <CheckboxGroup legend="Hvilken frukt liker du?" error="Feilmelding">
+      <Checkbox value="tekst" defaultChecked>
+        Checkboxtekst
+      </Checkbox>
+      <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <div>
