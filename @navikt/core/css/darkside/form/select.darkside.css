@@ -63,7 +63,7 @@
   }
 }
 
-/* --------------------------- Select Error-state --------------------------- */
+/* --------------------------- Select Error --------------------------- */
 .aksel-select--error {
   > * select {
     box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
