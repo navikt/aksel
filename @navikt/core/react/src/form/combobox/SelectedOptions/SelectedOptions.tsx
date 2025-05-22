@@ -27,7 +27,12 @@ const Option = ({ option }: { option: ComboboxOption }) => {
 
   if (readOnly || inputProps.disabled) {
     return (
-      <Chips.Toggle data-color-role="neutral" checkmark={false} as="div">
+      <Chips.Toggle
+        data-color-role="neutral"
+        variant="neutral"
+        checkmark={false}
+        as="div"
+      >
         {option.label}
       </Chips.Toggle>
     );

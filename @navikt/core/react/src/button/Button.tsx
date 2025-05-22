@@ -130,12 +130,10 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
     },
   );
 
-function variantToRole(variant: ButtonProps["variant"]): GlobalColorRoles {
+function variantToRole(
+  variant: ButtonProps["variant"],
+): GlobalColorRoles | undefined {
   switch (variant) {
-    case "primary":
-    case "secondary":
-    case "tertiary":
-      return "accent";
     case "primary-neutral":
     case "secondary-neutral":
     case "tertiary-neutral":
@@ -143,7 +141,7 @@ function variantToRole(variant: ButtonProps["variant"]): GlobalColorRoles {
     case "danger":
       return "danger";
     default:
-      return "accent";
+      return undefined;
   }
 }
 

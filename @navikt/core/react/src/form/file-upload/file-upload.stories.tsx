@@ -254,6 +254,37 @@ TriggerWithButton.args = {
   maxSizeInBytes: 0,
 };
 
+export const ChromaticStories: StoryFn = () => (
+  <div>
+    <h2>Default</h2>
+    <Default />
+    <h2>Single</h2>
+    <Single />
+    <h2>Translation</h2>
+    <Translation />
+    <h2>TriggerWithButton</h2>
+    <TriggerWithButton />
+    <h2>DropzoneStates</h2>
+    <DropzoneStates />
+    <h2>DropzoneTranslation</h2>
+    <DropzoneTranslation />
+    <h2>ItemDescription</h2>
+    <ItemDescription />
+    <h2>ItemDownload</h2>
+    <ItemDownload />
+    <h2>ItemIcons</h2>
+    <ItemIcons />
+    <h2>ItemStates</h2>
+    <ItemStates />
+  </div>
+);
+
+export const ColorRoles = () => (
+  <div data-color-role="brand-magenta">
+    <ChromaticStories />
+  </div>
+);
+
 export const Chromatic: StoryFn = () => (
   <div>
     <h2>Default</h2>
@@ -276,6 +307,8 @@ export const Chromatic: StoryFn = () => (
     <ItemIcons />
     <h2>ItemStates</h2>
     <ItemStates />
+    <h2>ColorRoles</h2>
+    <ColorRoles />
   </div>
 );
 
