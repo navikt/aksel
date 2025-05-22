@@ -234,8 +234,11 @@ export const ColorRole = () => (
     <div>
       <Regular />
     </div>
+    <div data-color-role="brand-magenta">
+      <Regular />
+    </div>
     <div>
-      <Regular data-color-role="warning" />
+      <Regular data-color-role="brand-magenta" />
     </div>
   </div>
 );

@@ -31,7 +31,7 @@ export const ToggleChips: OverridableComponent<
       className,
       children,
       selected,
-      variant = "action",
+      variant,
       checkmark = true,
       as: Component = "button",
       ...rest
