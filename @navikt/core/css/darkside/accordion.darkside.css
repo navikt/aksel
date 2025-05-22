@@ -12,7 +12,7 @@
   position: relative;
   border-radius: var(--ax-radius-8);
   background: transparent;
-  color: var(--ax-text-accent-subtle);
+  color: var(--ax-text-subtle);
 
   > * {
     font-weight: var(--ax-font-weight-regular);
@@ -25,7 +25,7 @@
   }
 
   &:hover {
-    background-color: var(--ax-bg-accent-moderate-hoverA);
+    background-color: var(--ax-bg-moderate-hoverA);
 
     &::before,
     &::after {
@@ -33,8 +33,8 @@
     }
 
     > .aksel-accordion__icon-wrapper {
-      background-color: var(--ax-bg-accent-strong-hover);
-      color: var(--ax-text-accent-contrast);
+      background-color: var(--ax-bg-strong-hover);
+      color: var(--ax-text-contrast);
     }
 
     @media (forced-colors: active) {
@@ -95,8 +95,8 @@
   width: 22px;
   height: 22px;
   align-self: center;
-  background-color: var(--ax-bg-accent-moderateA);
-  color: var(--ax-text-accent-subtle);
+  background-color: var(--ax-bg-moderateA);
+  color: var(--ax-text-subtle);
 }
 
 .aksel-accordion__header-chevron {

@@ -1,4 +1,5 @@
 import React, { SVGProps, forwardRef } from "react";
+import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
 import { omit } from "../util";
 import { useId } from "../util/hooks";
@@ -33,6 +34,10 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
    * @default "neutral"
    */
   variant?: "neutral" | "interaction" | "inverted";
+  /**
+   * Sets default 'base'-color for Loader
+   */
+  "data-color-role"?: GlobalColorRoles;
 }
 
 /* Workaround for @types/react v17/v18 feil */
@@ -60,6 +65,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
       transparent = false,
       variant = "neutral",
       id,
+      "data-color-role": colorRole,
       ...rest
     },
     ref,
@@ -84,7 +90,9 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
         focusable="false"
         viewBox="0 0 50 50"
         preserveAspectRatio="xMidYMid"
+        data-color-role={colorRole ?? variantToRole(variant)}
         {...omit(rest, ["children"])}
+        data-variant={variant}
       >
         <title id={id ?? `loader-${internalId}`}>
           {title || translate("title")}
@@ -109,5 +117,21 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
     );
   },
 );
+
+function variantToRole(
+  variant: LoaderProps["variant"],
+): GlobalColorRoles | undefined {
+  switch (variant) {
+    case "neutral":
+      return "neutral";
+    case "inverted":
+      return "neutral";
+    /* We assume "interaction" is the main app color in this instance */
+    case "interaction":
+      return undefined;
+    default:
+      return "neutral";
+  }
+}
 
 export default Loader;

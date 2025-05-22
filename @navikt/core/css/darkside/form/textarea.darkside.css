@@ -16,13 +16,13 @@
   }
 
   &:hover {
-    border-color: var(--ax-border-accent-strong);
+    border-color: var(--ax-border-strong);
   }
 
   &:focus-visible {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;
-    border-color: var(--ax-border-accent-strong);
+    border-color: var(--ax-border-strong);
   }
 
   &:disabled {

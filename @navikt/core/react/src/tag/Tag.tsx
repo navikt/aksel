@@ -63,14 +63,25 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
  * ```
  */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
-  ({ children, className, variant, size = "medium", icon, ...rest }, ref) => {
+  (
+    {
+      children,
+      className,
+      variant,
+      size = "medium",
+      icon,
+      "data-color-role": colorRole,
+      ...rest
+    },
+    ref,
+  ) => {
     const { cn } = useRenameCSS();
     const filledVariant = variant?.endsWith("-filled") && "strong";
     const moderateVariant = variant?.endsWith("-moderate") && "moderate";
 
     return (
       <BodyShort
-        data-color-role={variantToRole(variant)}
+        data-color-role={colorRole ?? variantToRole(variant)}
         data-variant={filledVariant || moderateVariant || "outline"}
         {...rest}
         ref={ref}

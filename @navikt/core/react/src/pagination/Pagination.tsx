@@ -150,6 +150,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       srHeading,
       "aria-labelledby": ariaLabelledBy,
       renderItem: Item = PaginationItem,
+      "data-color-role": colorRole,
       ...rest
     },
     ref,
@@ -179,6 +180,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       <nav
         ref={ref}
         {...rest}
+        data-color-role={colorRole}
         aria-labelledby={
           srHeading ? cl(headingId, ariaLabelledBy) : ariaLabelledBy
         }
@@ -201,6 +203,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
         <ul className={cn("navds-pagination__list")}>
           <li>
             <Item
+              data-color-role={colorRole}
               className={cn("navds-pagination__prev-next", {
                 "navds-pagination--invisible": page === 1,
                 "navds-pagination--prev-next--with-text": prevNextTexts,
@@ -238,6 +241,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               ) : (
                 <li key={step}>
                   <Item
+                    data-color-role={colorRole}
                     /* Remember to update RenderItemProps if you make changes to props sent into Item */
                     onClick={() => onPageChange?.(n)}
                     selected={page === n}
@@ -252,6 +256,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           )}
           <li>
             <Item
+              data-color-role={colorRole}
               className={cn("navds-pagination__prev-next", {
                 "navds-pagination--invisible": page === count,
                 "navds-pagination--prev-next--with-text": prevNextTexts,

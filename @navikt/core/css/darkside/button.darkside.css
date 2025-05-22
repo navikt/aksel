@@ -84,6 +84,11 @@
       background-color: var(--ax-bg-moderate-pressedA);
     }
 
+    &[data-pressed="true"] {
+      background-color: var(--ax-bg-strong-pressed);
+      color: var(--ax-text-contrast);
+    }
+
     &:is(:disabled, .aksel-button--disabled) {
       color: var(--ax-text-subtle);
       background-color: transparent;

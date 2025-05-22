@@ -29,7 +29,12 @@ export const Portal = forwardRef<HTMLDivElement, PortalProps>(
     if (themeContext) {
       return root
         ? ReactDOM.createPortal(
-            <Theme theme={themeContext.theme} asChild hasBackground={false}>
+            <Theme
+              theme={themeContext.theme}
+              asChild
+              hasBackground={false}
+              data-color-role={themeContext.colorRole}
+            >
               <Component ref={ref} data-aksel-portal="" {...rest} />
             </Theme>,
             root,

@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--ax-bg-info-strong);
+  color: var(--ax-bg-strong);
   font-size: 1.25rem;
   padding: calc(var(--ax-space-4) / 2);
 }
@@ -17,10 +17,10 @@
 }
 
 .aksel-help-text__popover.aksel-popover {
-  background-color: var(--ax-bg-info-moderate);
+  background-color: var(--ax-bg-moderate);
   max-width: min(65ch, calc(100vw - var(--ax-space-24)));
   border-radius: var(--ax-radius-8);
-  border: 1px solid var(--ax-border-info);
+  border: 1px solid var(--ax-border-default);
 }
 
 .aksel-help-text__icon--filled {
@@ -33,11 +33,11 @@
 
 .aksel-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .aksel-help-text__icon--filled {
   display: inherit;
-  color: var(--ax-bg-info-strong-hover);
+  color: var(--ax-bg-strong-hover);
 }
 
 .aksel-help-text__button[aria-expanded="true"] > .aksel-help-text__icon--filled {
-  color: var(--ax-bg-info-strong-pressed);
+  color: var(--ax-bg-strong-pressed);
 }
 
 @media (forced-colors: active) {

@@ -35,6 +35,7 @@ export const Item: PaginationItemType = forwardRef(
       selected = false,
       className,
       page,
+      "data-color-role": colorRole,
       ...rest
     },
     ref,
@@ -46,8 +47,9 @@ export const Item: PaginationItemType = forwardRef(
       <Button
         as={Component}
         variant={themeContext ? "tertiary-neutral" : "tertiary"}
+        data-color-role={colorRole}
         aria-current={selected}
-        data-selected={selected}
+        data-pressed={selected}
         ref={ref}
         className={cn("navds-pagination__item", className, {
           "navds-pagination__item--selected": selected,

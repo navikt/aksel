@@ -6,7 +6,7 @@ import type { PeriodProps } from "../period/types";
 export const getConditionalClasses = (
   cropped: string,
   direction: string,
-  status: string,
+  status: PeriodProps["status"],
 ) => {
   /* Renaming to aksel-* happends where these are used, so no need to rename here */
   return cl(`navds-timeline__period navds-timeline__period--${status}`, {

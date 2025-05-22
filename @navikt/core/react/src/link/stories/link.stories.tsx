@@ -161,6 +161,17 @@ const Variants = () => (
   </VStack>
 );
 
+export const ColorRole = () => (
+  <VStack gap="3" data-color-role="brand-magenta">
+    <Link href="#">Ex aliqua incididunt</Link>
+    {["action", "neutral", "subtle"].map((variant) => (
+      <div key={variant}>
+        <LinkWrapper variant={variant} underline />
+      </div>
+    ))}
+  </VStack>
+);
+
 export const Chromatic = () => (
   <>
     <h2>Default</h2>
@@ -214,6 +225,10 @@ export const Chromatic = () => (
       <ConfirmationPanel error="demo" label="demo">
         <LinkWithIcon />
       </ConfirmationPanel>
+    </div>
+    <h2>ColorRole</h2>
+    <div>
+      <ColorRole />
     </div>
   </>
 );

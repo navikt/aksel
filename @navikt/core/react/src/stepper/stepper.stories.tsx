@@ -208,6 +208,12 @@ export const CompletedSteps: StoryFn<Story> = () => {
   );
 };
 
+export const ColorRole = () => (
+  <div data-color-role="brand-magenta">
+    <Vertical />
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <VStack gap="4">
@@ -226,6 +232,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Completed steps</h2>
         <CompletedSteps />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </VStack>
   ),

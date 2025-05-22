@@ -206,6 +206,19 @@ export const HtmlSize = () => (
   </div>
 );
 
+export const ColorRole = () => (
+  <div className="colgap" data-color-role="brand-magenta">
+    <div className="colgap">
+      <Search label="Søk" />
+      <Search label="Søk" variant="secondary" />
+      <Search label="Søk" variant="simple" />
+    </div>
+    <div>
+      <ErrorVariants />
+    </div>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: (...props) => (
     <div>
@@ -248,6 +261,10 @@ export const Chromatic: Story = {
       <div>
         <h2>HtmlSize</h2>
         <HtmlSize />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </div>
   ),

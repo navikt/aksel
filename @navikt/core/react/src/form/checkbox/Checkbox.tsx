@@ -27,6 +27,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "navds-checkbox--readonly": readOnly,
           },
         )}
+        data-color-role={hasError ? "danger" : props["data-color-role"]}
       >
         <input
           {...omit(props, [

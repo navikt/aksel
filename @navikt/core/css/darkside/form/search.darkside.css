@@ -110,7 +110,7 @@
   }
 
   &:hover:not(:disabled) {
-    --__axc-button-border-color: var(--ax-border-accent-strong);
+    --__axc-button-border-color: var(--ax-border-strong);
   }
 }
 
@@ -118,7 +118,7 @@
 .aksel-search:not(.aksel-search--error, .aksel-search--disabled)
   .aksel-search__wrapper:has(.aksel-search__input:is(:hover, :focus-visible))
   .aksel-search__button-search.aksel-button--secondary:not(:hover, :active) {
-  --__axc-button-border-color: var(--ax-border-accent-strong);
+  --__axc-button-border-color: var(--ax-border-strong);
 }
 
 /* --------------------------- Search Error-state --------------------------- */

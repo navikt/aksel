@@ -5,6 +5,12 @@
   display: flex;
   gap: var(--ax-space-12);
   align-items: center;
+  border-color: var(--ax-border-default);
+  background-color: var(--ax-bg-moderate);
+
+  & > .aksel-alert__icon {
+    color: var(--ax-text-decoration);
+  }
 
   @media (forced-colors: active) {
     border: 1px solid canvastext;
@@ -31,43 +37,6 @@
   > .aksel-alert__icon {
     margin-block-start: 0;
     height: var(--ax-font-line-height-large);
-  }
-}
-
-/* ----------------------------- Alert variants ----------------------------- */
-.aksel-alert--info {
-  border-color: var(--ax-border-info);
-  background-color: var(--ax-bg-info-moderate);
-
-  > .aksel-alert__icon {
-    color: var(--ax-text-info-decoration);
-  }
-}
-
-.aksel-alert--success {
-  border-color: var(--ax-border-success);
-  background-color: var(--ax-bg-success-moderate);
-
-  > .aksel-alert__icon {
-    color: var(--ax-text-success-decoration);
-  }
-}
-
-.aksel-alert--warning {
-  border-color: var(--ax-border-warning);
-  background-color: var(--ax-bg-warning-moderate);
-
-  > .aksel-alert__icon {
-    color: var(--ax-text-warning-decoration);
-  }
-}
-
-.aksel-alert--error {
-  border-color: var(--ax-border-danger);
-  background-color: var(--ax-bg-danger-moderate);
-
-  > .aksel-alert__icon {
-    color: var(--ax-text-danger-decoration);
   }
 }
 

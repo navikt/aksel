@@ -264,6 +264,17 @@ ModalStrictMode.parameters = {
   chromatic: { disable: true }, // Not reproducable in Chromatic
 };
 
+export const ColorRole = () => {
+  return (
+    <div data-color-role="brand-magenta">
+      <Description />
+      <MaxLength />
+      <WithError />
+      <Disabled />
+    </div>
+  );
+};
+
 export const Chromatic: Story = {
   render: (props) => (
     <div>
@@ -281,6 +292,7 @@ export const Chromatic: Story = {
       <Controlled />
       <Readonly />
       <AutoScrollbar label="autoscrollbar" />
+      <ColorRole />
     </div>
   ),
   parameters: {

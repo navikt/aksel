@@ -91,6 +91,27 @@ export const WrapperClassName: StoryFn = () => (
   </div>
 );
 
+export const ColorRole: StoryFn = () => {
+  const ref = useRef<HTMLButtonElement | null>(null);
+  useEffect(() => {
+    ref.current?.click();
+  }, []);
+
+  return (
+    <HelpText
+      ref={ref}
+      title="Show tooltip"
+      strategy="fixed"
+      data-color-role="brand-magenta"
+    >
+      Incididunt laborum eiusmod ullamco id aliquip officia ex irure aliqua
+      laboris id ea do nisi. Ex esse ad duis culpa non aliquip exercitation eu
+      culpa cupidatat nisi. Deserunt voluptate consectetur cillum elit qui ad
+      voluptate pariatur.
+    </HelpText>
+  );
+};
+
 export const Chromatic = () => {
   return (
     <div>
@@ -100,6 +121,8 @@ export const Chromatic = () => {
       <Open />
       <h2>WrapperClassName</h2>
       <WrapperClassName />
+      <h2>ColorRole</h2>
+      <ColorRole />
     </div>
   );
 };

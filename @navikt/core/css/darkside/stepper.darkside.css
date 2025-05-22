@@ -3,7 +3,7 @@
   --__axc-stepper-border-width: 2px;
   --__axc-stepper-line-length: 1rem;
 
-  color: var(--ax-text-accent-subtle);
+  color: var(--ax-text-subtle);
   font-weight: var(--ax-font-weight-bold);
   line-height: 1;
   list-style: none;
@@ -22,7 +22,7 @@
 }
 
 .aksel-stepper__line {
-  background-color: var(--ax-border-accent);
+  background-color: var(--ax-border-default);
   width: var(--__axc-stepper-border-width);
   height: 100%;
   min-height: var(--__axc-stepper-line-length);
@@ -108,7 +108,7 @@
 }
 
 .aksel-stepper__step[data-interactive="true"] {
-  color: var(--ax-text-accent-subtle);
+  color: var(--ax-text-subtle);
   border-radius: var(--ax-radius-4);
   text-decoration: none;
 
@@ -126,8 +126,8 @@
   }
 
   & .aksel-stepper__circle {
-    color: var(--ax-text-accent-subtle);
-    border-color: var(--ax-border-accent-strong);
+    color: var(--ax-text-subtle);
+    border-color: var(--ax-border-strong);
   }
 
   &[data-active="true"] {
@@ -136,17 +136,17 @@
     }
 
     & .aksel-stepper__circle {
-      color: var(--ax-text-accent-contrast);
-      background-color: var(--ax-bg-accent-strong-pressed);
-      border-color: var(--ax-bg-accent-strong-pressed);
+      color: var(--ax-text-contrast);
+      background-color: var(--ax-bg-strong-pressed);
+      border-color: var(--ax-bg-strong-pressed);
     }
   }
 
   &[data-active="false"] {
     &:hover {
       & .aksel-stepper__circle {
-        background-color: var(--ax-bg-accent-moderate-hoverA);
-        border-color: var(--ax-border-accent-strong);
+        background-color: var(--ax-bg-moderate-hoverA);
+        border-color: var(--ax-border-strong);
       }
     }
   }

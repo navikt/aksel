@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { GlobalColorRoles } from "@navikt/ds-tokens/types";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 
 export interface LinkProps
@@ -56,24 +57,60 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         as: Component = "a",
         className,
         underline = true,
-        variant = "action",
+        variant,
         inlineText = false,
+        "data-color-role": colorRole,
         ...rest
       },
       ref,
     ) => {
+      const themeContext = useThemeInternal(false);
       const { cn } = useRenameCSS();
+
+      /*
+       * We avoid defaulting to "action" in darkside.
+       */
+      let localVariant: LinkProps["variant"];
+
+      if (themeContext) {
+        localVariant = variant;
+      } else {
+        localVariant = variant ?? "action";
+      }
+
       return (
         <Component
+          data-color-role={colorRole ?? variantToRole(localVariant)}
+          data-variant={localVariant}
           {...rest}
           ref={ref}
-          className={cn("navds-link", className, `navds-link--${variant}`, {
-            "navds-link--remove-underline": !underline,
-            "navds-link--inline-text": inlineText,
-          })}
+          className={cn(
+            "navds-link",
+            className,
+            `navds-link--${localVariant}`,
+            {
+              "navds-link--remove-underline": !underline,
+              "navds-link--inline-text": inlineText,
+            },
+          )}
         />
       );
     },
   );
+
+function variantToRole(
+  variant?: LinkProps["variant"],
+): GlobalColorRoles | undefined {
+  switch (variant) {
+    case "action":
+      return "accent";
+    case "neutral":
+      return "neutral";
+    case "subtle":
+      return "neutral";
+    default:
+      return undefined;
+  }
+}
 
 export default Link;
