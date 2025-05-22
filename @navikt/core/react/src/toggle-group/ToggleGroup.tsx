@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { GlobalColorRoles } from "@navikt/ds-tokens/types";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { Label } from "../typography";
 import { useId } from "../util";
 import {
@@ -48,13 +49,15 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       value,
       defaultValue,
       "aria-describedby": userDescribedby,
-      variant = "action",
+      variant,
       fill = false,
+      "data-color-role": colorRole,
       ...rest
     },
     ref,
   ) => {
     const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal(false);
     const descendants = useToggleGroupDescendants();
 
     const toggleGroupContext = useToggleGroup({
@@ -81,6 +84,14 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       console.error("ToggleGroup needs either a value or defaultValue");
     }
 
+    let localVariant: ToggleGroupProps["variant"] | undefined;
+
+    if (themeContext) {
+      localVariant = variant;
+    } else {
+      localVariant = variant ?? "action";
+    }
+
     return (
       <ToggleGroupDescendantsProvider value={descendants}>
         <ToggleGroupProvider {...context}>
@@ -88,6 +99,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
             className={cn("navds-toggle-group__wrapper", className, {
               "navds-toggle-group__wrapper--fill": fill,
             })}
+            data-color-role={colorRole ?? variantToColorRole(localVariant)}
           >
             {label && (
               <Label
@@ -104,7 +116,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               className={cn(
                 "navds-toggle-group",
                 `navds-toggle-group--${size}`,
-                `navds-toggle-group--${variant}`,
+                `navds-toggle-group--${localVariant}`,
               )}
               aria-describedby={
                 cl(userDescribedby, !!label && labelId) || undefined
@@ -119,6 +131,19 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     );
   },
 ) as ToggleGroupComponent;
+
+function variantToColorRole(
+  variant?: ToggleGroupProps["variant"],
+): GlobalColorRoles | undefined {
+  switch (variant) {
+    case "action":
+      return "accent";
+    case "neutral":
+      return "neutral";
+    default:
+      return undefined;
+  }
+}
 
 ToggleGroup.Item = ToggleItem;
 

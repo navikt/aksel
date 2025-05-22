@@ -150,6 +150,31 @@ export const Small = () => {
   );
 };
 
+export const ColorRoles = () => {
+  const [activeValue, setActiveValue] = useState("ulest");
+  return (
+    <VStack gap="space-12" data-color-role="brand-magenta">
+      <ToggleGroup value={activeValue} onChange={setActiveValue}>
+        {Items()}
+      </ToggleGroup>
+      <ToggleGroup
+        value={activeValue}
+        onChange={setActiveValue}
+        variant="action"
+      >
+        {Items()}
+      </ToggleGroup>
+      <ToggleGroup
+        value={activeValue}
+        onChange={setActiveValue}
+        variant="neutral"
+      >
+        {Items()}
+      </ToggleGroup>
+    </VStack>
+  );
+};
+
 export const Chromatic = {
   render: () => (
     <VStack gap="6">
