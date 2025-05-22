@@ -166,20 +166,9 @@
   border-color: var(--ax-border-danger-strong);
 }
 
-/*
-.aksel-checkbox--error > .aksel-checkbox__input:not(:disabled, :checked, :indeterminate):hover + .aksel-checkbox__label::before,
-.aksel-radio--error > .aksel-radio__input:not(:disabled, :checked):hover + .aksel-radio__label::before {
-  background-color: var(--ax-bg-danger-moderate-hoverA);
-}
-
-.aksel-checkbox--error > .aksel-checkbox__input:is(:checked, :indeterminate):not(:disabled) + .aksel-checkbox__label::before {
-  background-color: var(--ax-bg-danger-strong-pressed);
-  border-color: var(--ax-bg-danger-strong-pressed);
-}
-
 .aksel-radio--error > .aksel-radio__input:checked + .aksel-radio__label::before {
   border-color: var(--ax-bg-danger-strong-pressed);
-} */
+}
 
 .aksel-checkbox--disabled,
 .aksel-radio--disabled {

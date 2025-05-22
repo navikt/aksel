@@ -347,6 +347,10 @@ export const Chromatic: Story = {
         <h2>Disabled</h2>
         <Disabled />
       </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
+      </div>
     </div>
   ),
   parameters: {
