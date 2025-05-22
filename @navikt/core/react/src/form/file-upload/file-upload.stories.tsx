@@ -254,7 +254,7 @@ TriggerWithButton.args = {
   maxSizeInBytes: 0,
 };
 
-export const ChromaticStories: StoryFn = () => (
+const ChromaticStories: StoryFn = () => (
   <div>
     <h2>Default</h2>
     <Default />
