@@ -16,7 +16,8 @@ export default ({ logEntry, index }) => {
         position: "sticky",
         top: "calc(var(--website-header-height))",
         paddingTop: "var(--ax-space-12)",
-        background: "linear-gradient(var(--ax-bg-default) 80%, transparent)",
+        background:
+          "linear-gradient(var(--ax-bg-default) calc(100% - var(--ax-space-12)), transparent)",
         zIndex: 1,
       }}
     >
@@ -33,6 +34,7 @@ export default ({ logEntry, index }) => {
               justifyContent: "center",
               alignItems: "center",
               borderRadius: "100%",
+              background: "var(--ax-bg-default) ",
             }}
           >
             <CalendarIcon width={24} height={24} />
@@ -46,7 +48,7 @@ export default ({ logEntry, index }) => {
           />
         </VStack>
         {/* Month + year */}
-        <VStack justify="center" paddingInline="space-12">
+        <VStack justify="center" paddingInline="space-12" flexGrow="1">
           <Heading size="small">
             {capitalizeFirstLetter(
               new Date(logEntry.endringsdato).toLocaleDateString("NO", {
@@ -57,17 +59,6 @@ export default ({ logEntry, index }) => {
           </Heading>
         </VStack>
       </HStack>
-      {/* Spacing + vertical line */}
-      {/* <VStack width="48px" height="var(--ax-space-32)" align="center">
-        <Box.New
-          width="0px"
-          height="1rem"
-          flexGrow="1"
-          style={{
-            borderLeft: "1px dashed var(--ax-border-neutral-subtle)",
-          }}
-        />
-      </VStack> */}
     </li>
   );
 };

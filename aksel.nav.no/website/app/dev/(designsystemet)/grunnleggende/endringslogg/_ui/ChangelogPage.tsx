@@ -14,7 +14,6 @@ export default async () => {
     ),
     params: { year: `${year}`, nextYear: `${year + 1}` },
   });
-  // const logsData = {};
   return (
     <>
       <VStack
