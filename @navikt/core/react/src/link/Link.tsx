@@ -69,7 +69,13 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
       /*
        * We avoid defaulting to "action" in darkside.
        */
-      const localVariant = themeContext ? variant : variant ?? "action";
+      let localVariant: LinkProps["variant"];
+
+      if (themeContext) {
+        localVariant = variant;
+      } else {
+        localVariant = variant ?? "action";
+      }
 
       return (
         <Component
