@@ -140,8 +140,10 @@ const formatRole = (group: TransformedToken["group"]): string => {
 
 export const formatDOCS: FormatFn = async ({ dictionary }) => {
   const ignoredTokenTypes = ["global-color", "opacity"];
+
   const tokens = dictionary.allTokens
     .filter((token) => token.type && !ignoredTokenTypes.includes(token.type))
+    .filter((token) => !token.docsIgnore)
     .map((token, index) => {
       const tokenNameWithoutPrefix = token.name.slice(2);
       const name = kebabCaseForAlpha(tokenNameWithoutPrefix);

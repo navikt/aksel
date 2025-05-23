@@ -100,7 +100,7 @@ export const accentSemanticTokenConfig = {
       type: "color",
       group: "text.accent",
       comment:
-        "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). Ikke godkjent på tekst altså.",
+        "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). **Ikke godkjent på tekst altså**.",
     },
     "accent-contrast": {
       value: "{ax.neutral.000.value}",

@@ -6,6 +6,7 @@
     "strict": true,
     "types": ["@figma/plugin-typings"],
     "moduleResolution": "Bundler",
+    "lib": ["ESNext"],
     "module": "Preserve"
   },
   "include": ["./stories", "./darkside/figma"]

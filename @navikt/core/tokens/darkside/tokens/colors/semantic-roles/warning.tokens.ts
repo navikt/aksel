@@ -100,7 +100,7 @@ export const warningSemanticTokenConfig = {
       type: "color",
       group: "text.warning",
       comment:
-        "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). Ikke godkjent på tekst altså.",
+        "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). **Ikke godkjent på tekst altså**.",
     },
     "warning-contrast": {
       value: "{ax.neutral.000.value}",
