@@ -80,6 +80,8 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
    * @default true
    */
   showArrow?: boolean;
+
+  className?: string;
 };
 
 const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
@@ -91,6 +93,7 @@ const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
       weight = "semibold",
       variant = "default",
       showArrow = true,
+      className,
     }: LinkCardTitleProps,
     forwardedRef,
   ) => {
@@ -103,6 +106,7 @@ const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
         className={cn(
           "aksel-link-card__title",
           `aksel-link-card__title--${weight}`,
+          className,
         )}
       >
         {children}

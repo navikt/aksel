@@ -116,7 +116,7 @@ export const Highlight = ({
             {article?.heading}
           </Link>
         </Heading>
-        <BodyLong className="mb-4" size="small">
+        <BodyLong className="mb-4" size="medium">
           {article?.ingress ?? article.seo?.meta}
         </BodyLong>
         {showFooter && getAuthors(article as any).length > 0 && (
