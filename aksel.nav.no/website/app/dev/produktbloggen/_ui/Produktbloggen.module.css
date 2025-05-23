@@ -154,7 +154,7 @@
   width: var(--ax-space-8);
   height: var(--ax-space-8);
   rotate: 45deg;
-  background-color: var(--ax-text-brand-blue-icon);
+  background-color: var(--ax-text-brand-blue-decoration);
   border-radius: var(--ax-space-1);
 }
 
