@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { BodyLong, Button, Link, VStack } from "@navikt/ds-react";
-import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
+import { LinkCardArrow } from "@/app/(dev)/(god-praksis)/_ui/link-card/LinkCard";
 import { clientConfig } from "@/sanity/config";
 import styles from "./SystemPanel.module.css";
 
