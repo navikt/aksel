@@ -60,7 +60,7 @@
   width: 100%;
   transition: background 1s;
   animation: 60s ease infinite rainbow-hype;
-  background: linear-gradient(196deg, var(--gradient-1) 18.43%, var(--gradient-2) 24%, transparent 70.98%);
+  background: linear-gradient(196deg, var(--gradient-1) 8.43%, var(--gradient-2) 24%, transparent 70.98%);
 
   /* temporary colors */
   --aksel-brand-logo: #004367;
