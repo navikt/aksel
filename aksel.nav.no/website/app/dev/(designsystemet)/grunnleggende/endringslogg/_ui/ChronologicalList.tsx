@@ -1,6 +1,6 @@
 "use client";
 
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
 import {
   BodyShort,
@@ -13,19 +13,18 @@ import {
 } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { urlForImage } from "@/app/_sanity/utils";
+import { capitalize } from "@/utils";
+import styles from "./Changelog.module.css";
 // import { Bilde } from "@/app/_ui/bilde/Bilde";
 import MonthHeader from "./MonthHeader";
 
-const areDifferentMonths = (currentDateString, previousDateString) => {
-  const currentDate = new Date(currentDateString);
-  const previousDate = new Date(previousDateString);
-  if (currentDate.getFullYear() !== previousDate.getFullYear()) {
+const isDifferentMonth = (firstDateStr, secondDateStr) => {
+  const firstDate = new Date(firstDateStr);
+  const secondDate = new Date(secondDateStr);
+  if (firstDate.getFullYear() !== secondDate.getFullYear()) {
     return true;
   }
-  return currentDate.getMonth() !== previousDate.getMonth();
-};
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  return firstDate.getMonth() !== secondDate.getMonth();
 };
 
 export default ({ list }) => {
@@ -37,12 +36,12 @@ export default ({ list }) => {
         <>
           {/* Monthly additinal header */}
           {(index === 0 ||
-            areDifferentMonths(
+            isDifferentMonth(
               item.endringsdato,
               list[index - 1].endringsdato,
             )) && <MonthHeader logEntry={item} index={index} />}
           {/* Log entry */}
-          <li key={index}>
+          <li key={"log-entry-" + index}>
             {/* Spacing + vertical line */}
             <VStack width="48px" height="var(--ax-space-32)" align="center">
               <Box.New
@@ -90,10 +89,29 @@ export default ({ list }) => {
                 )}
               </VStack>
               {/* Log entry */}
-              <VStack paddingInline="space-16" flexGrow="1">
+              <VStack
+                paddingInline="space-16"
+                flexGrow="1"
+                style={{
+                  ...(item.fremhevet
+                    ? {
+                        "--ax-text-brand-blue": "var(--aksel-brand-pink-1000)",
+                        "--ax-text-default": "var(--aksel-brand-pink-1000)",
+                      }
+                    : {}),
+                }}
+              >
                 <HStack justify="start" align="baseline" gap="space-16">
-                  <BodyShort size="small" spacing textColor="subtle">
-                    {capitalizeFirstLetter(item.endringstype)} •{" "}
+                  <BodyShort
+                    size="small"
+                    spacing
+                    className={
+                      item.fremhevet
+                        ? "text-[--aksel-brand-pink-900]"
+                        : "text-[--ax-text-default-subtle]"
+                    }
+                  >
+                    {capitalize(item.endringstype)} •{" "}
                     {new Date(item.endringsdato).toLocaleDateString("NO", {
                       day: "2-digit",
                       month: "long",
@@ -130,49 +148,54 @@ export default ({ list }) => {
                         }
                       : {}),
                   }}
-                  data-theme="fremhevet"
                 >
                   <Heading size="large" level="2" spacing>
                     <Link
-                      href={`/grunnleggende/endringslogg/${item.slug.current}`}
+                      href={`./endringslogg/${item.slug.current}`}
                       data-aksel-heading-color
                     >
                       {item.heading}
                     </Link>
                   </Heading>
                   {item.fremhevet && item.herobilde && (
-                    <>
-                      {/* <Bilde
-                        value={{ ...item.herobilde }}
-                        index={0} // Replace with the appropriate index if available
-                        isInline={false} // Adjust based on your use case
-                        renderNode={() => null} // Provide a proper renderNode function if needed
-                      /> */}
-                      {/* <img
-                        className="rounded-[--ax-radius-12]"
-                        // TODO: [endringslogg] Probably add herobilde.alt to sanity schema
-                        alt={item.herobilde.alt}
-                        loading="lazy"
-                        decoding="async"
-                        src={urlForImage(item.herobilde)?.auto("format").url()}
-                      /> */}
-                      <Image
-                        key={item.herobilde._key}
-                        className="aspect-[1200/630] rounded-[--ax-radius-12] bg-[--aksel-brand-pink-100] ring-1 ring-[--ax-border-neutral-subtle]"
-                        alt={item.herobilde.alt}
-                        loading="lazy"
-                        decoding="async"
-                        src={
-                          urlForImage(item.herobilde)?.auto("format").url() ||
-                          ""
-                        }
-                        width={1200}
-                        height={630}
-                      />
-                    </>
+                    <Image
+                      key={"hero-" + index}
+                      className={
+                        styles.herobilde +
+                        " aspect-[1200/630] rounded-[--ax-radius-12] bg-[--aksel-brand-pink-100] ring-1 ring-[--ax-border-neutral-subtle]" +
+                        (item.herobilde.bakgrunnsfarge
+                          ? ` bg-[${item.herobilde.bakgrunnsfarge}]`
+                          : "")
+                      }
+                      style={{
+                        "--herobilde-bg-color-first":
+                          item.herobilde.bakgrunnsfarge ||
+                          "var(--aksel-brand-pink-400)",
+                        "--herobilde-bg-color-last":
+                          item.herobilde.bakgrunnsfarge ||
+                          "var(--aksel-brand-pink-700)",
+                        "--herobilde-bg-degrees": "130deg",
+                        marginBottom: "var(--ax-space-16)",
+                      }}
+                      alt={item.herobilde.alt}
+                      loading="lazy"
+                      decoding="async"
+                      src={
+                        urlForImage(item.herobilde)?.auto("format").url() || ""
+                      }
+                      width={1200}
+                      height={630}
+                    />
                   )}
 
+                  {/* data-color-role="aksel-brand-pink" */}
                   <CustomPortableText
+                    data-color-role={item.fremhevet && "aksel-brand-pink"}
+                    style={{
+                      ...(item.fremhevet
+                        ? { color: "var(--aksel-brand-pink-1000)" }
+                        : {}),
+                    }}
                     value={item.innhold as PortableTextBlock[]}
                   />
                 </VStack>

@@ -8,9 +8,9 @@ const capitalizeFirstLetter = (string) => {
 export default ({ logEntry, index }) => {
   return (
     // Monthly additinal header
-    // TODO: [endringslogg] Sticky example: aksel.nav.no/website/components/website-modules/search/parts/HitCollection.tsx#L78
+    // TODO: [endringslogg] Fix sticky: Make montly header start a new section, with a new list of that month's entries
     <li
-      key={index + "-month-header"}
+      key={"month-header-" + index}
       style={{
         flexWrap: "nowrap",
         position: "sticky",

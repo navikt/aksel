@@ -1,0 +1,11 @@
+.herobilde {
+  aspect-ratio: 1200 / 630;
+  border-radius: var(--ax-radius-12);
+
+  --herobilde-bg-color-first: var(--ax-bg-default);
+  --herobilde-bg-color-last: var(--ax-bg-default);
+  --herobilde-bg-degrees: 0deg;
+
+  background: linear-gradient(var(--herobilde-bg-degrees), var(--herobilde-bg-color-first), var(--herobilde-bg-color-last));
+  box-shadow: 0 0 0 1px var(--ax-border-neutral-subtle);
+}
