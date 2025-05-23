@@ -80,6 +80,8 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
    * @default true
    */
   showArrow?: boolean;
+
+  className?: string;
 };
 
 const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
@@ -91,6 +93,7 @@ const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
       weight = "semibold",
       variant = "default",
       showArrow = true,
+      className,
     }: LinkCardTitleProps,
     forwardedRef,
   ) => {
@@ -103,6 +106,7 @@ const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
         className={cn(
           "aksel-link-card__title",
           `aksel-link-card__title--${weight}`,
+          className,
         )}
       >
         {children}
@@ -122,12 +126,13 @@ interface LinkCardAnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  * - Support OverridableComponent
  */
 const LinkCardAnchor = forwardRef<HTMLAnchorElement, LinkCardAnchorProps>(
-  ({ children, ...restProps }, forwardedRef) => {
+  ({ children, className, ...restProps }, forwardedRef) => {
     return (
       <a
         ref={forwardedRef}
         {...restProps}
-        className={cn("aksel-link-card__anchor")}
+        /* NOTE: or just prop for break-word instead of passing className? */
+        className={cn("aksel-link-card__anchor", className)}
       >
         {children}
       </a>

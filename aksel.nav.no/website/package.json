@@ -5,7 +5,7 @@
   "description": "Aksel.nav.no website",
   "author": "Aksel | Nav designsystem team",
   "scripts": {
-    "dev": "next --turbopack | pino-pretty",
+    "dev": "next | pino-pretty",
     "build": "yarn workspace playroom build:playroom && yarn update:searchindex && next build && yarn update:rss && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "update:searchindex": "yarn tsx --env-file-if-exists=.env ./scripts/create-index",
