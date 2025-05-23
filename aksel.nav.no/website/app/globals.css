@@ -4,7 +4,7 @@
 @import "@navikt/ds-css/darkside" layer(dsComponents);
 @import "tailwindcss/components" layer(twComponents);
 @import "tailwindcss/utilities" layer(twUtilities);
-@import "./dev/(god-praksis)/_ui/link-card/link-card.css" layer(dsComponents);
+@import "./(dev)/(god-praksis)/_ui/link-card/link-card.css" layer(dsComponents);
 
 :root {
   --website-header-height: 4rem;
