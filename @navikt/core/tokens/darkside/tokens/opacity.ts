@@ -9,6 +9,7 @@ export function opacityTokenConfig(theme: ColorTheme) {
         type: "opacity",
         comment: "Used for setting opacity on disabled elements.",
         figmaIgnore: true,
+        docsIgnore: true,
       },
     },
   } satisfies {
