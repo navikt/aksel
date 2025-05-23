@@ -53,7 +53,7 @@ export async function main() {
     );
     const text = currentChangelogEntry
       .substring(currentChangelogEntry.indexOf("\n") + 1)
-      .replace(/### /g, ""); // Make package names regular text instead of headings
+      .replace(/### /g, "## "); // Bump package names down to h2
     const heading = `Versjon ${version}`;
     const blocks = htmlToBlocks(converter.makeHtml(text), blockContentType, {
       parseHtml: (htmlStr) => new JSDOM(htmlStr).window._document,
