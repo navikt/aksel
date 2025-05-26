@@ -7,7 +7,7 @@ import { noCdnClient } from "../sanity/interface/client.server";
 
 main();
 
-export async function main() {
+async function main() {
   const token = process.env.SANITY_WRITE;
   if (!token) {
     throw new Error("Missing token 'SANITY_WRITE' for updating changelog");
