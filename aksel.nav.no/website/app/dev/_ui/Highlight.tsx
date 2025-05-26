@@ -24,23 +24,23 @@ export const Highlight = ({
 
   const date = useFormatedDate(article?.publishedAt ?? article._createdAt);
 
-  const imageUrl = urlFor(article.status?.bilde)
+  const imageUrl = urlForImage(article.status?.bilde)
     ?.quality(100)
     .auto("format")
     .url();
 
-  const imageBlurUrl = urlFor(article.status?.bilde)
+  const imageBlurUrl = urlForImage(article.status?.bilde)
     ?.width(24)
     .height(24)
     .blur(10)
     .url();
 
-  const seoImageUrl = urlFor(article?.seo?.image)
+  const seoImageUrl = urlForImage(article?.seo?.image)
     ?.quality(100)
     .auto("format")
     .url();
 
-  const seoImageBlurUrl = urlFor(article?.seo?.image)
+  const seoImageBlurUrl = urlForImage(article?.seo?.image)
     ?.width(24)
     .height(24)
     .blur(10)
