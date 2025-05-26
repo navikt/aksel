@@ -11,7 +11,6 @@ import {
   useFocus,
   useHover,
   useInteractions,
-  useRole,
 } from "@floating-ui/react";
 import { format } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
@@ -79,7 +78,6 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     });
     const focus = useFocus(context);
     const dismiss = useDismiss(context);
-    const role = useRole(context, { role: "dialog" });
 
     const { getFloatingProps, getReferenceProps } = useInteractions([
       hover,
@@ -112,6 +110,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             })}
             type="button"
             aria-expanded={children ? open : undefined}
+            aria-haspopup={children ? "true" : "false"}
             {...getReferenceProps({
               onKeyDown: (e) => {
                 rest?.onKeyDown?.(e as React.KeyboardEvent<HTMLButtonElement>);
