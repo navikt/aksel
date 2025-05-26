@@ -27,6 +27,7 @@ const isDifferentMonth = (firstDateStr, secondDateStr) => {
   return firstDate.getMonth() !== secondDate.getMonth();
 };
 
+// TODO: [endringslogg] Clean up styling, commit to a convention
 export default ({ list }) => {
   // TODO: [endringslogg] Remove before production
   console.dir(list);
@@ -133,8 +134,7 @@ export default ({ list }) => {
                 </HStack>
                 {/* TODO: [endringslogg] Ensure proper wrapping on mobile */}
                 {/* TODO: [endringslogg] Ensure slimmer margins on mobile */}
-                {/* TODO: [endringslogg] Hide lower part of log-entry and show 'Vis mer'-button when height>400px? */}
-                {/* TODO: [endringslogg] Add proper styling to 'fremhevet' */}
+                {/* TODO: [endringslogg] Show 'Vis mer'-button when log-entry height>400px(?) */}
                 <VStack
                   style={{
                     marginBottom: "var(--ax-space-32)",
@@ -188,9 +188,8 @@ export default ({ list }) => {
                     />
                   )}
 
-                  {/* data-color-role="aksel-brand-pink" */}
                   <CustomPortableText
-                    data-color-role={item.fremhevet && "aksel-brand-pink"}
+                    // data-color-role={item.fremhevet && "aksel-brand-pink"}
                     style={{
                       ...(item.fremhevet
                         ? { color: "var(--aksel-brand-pink-1000)" }
