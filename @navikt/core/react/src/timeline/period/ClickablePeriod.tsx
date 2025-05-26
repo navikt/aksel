@@ -167,6 +167,7 @@ const ClickablePeriod = React.memo(
               className={cn("navds-timeline__popover")}
               data-placement={placement}
               ref={refs.setFloating}
+              role="dialog"
               {...getFloatingProps()}
               style={floatingStyles}
             >

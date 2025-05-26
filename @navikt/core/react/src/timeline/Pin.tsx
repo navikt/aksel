@@ -83,7 +83,6 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
       hover,
       focus,
       dismiss,
-      role,
     ]);
 
     const mergedRef = useMergeRefs(refs.setReference, ref);
@@ -134,6 +133,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
               className={cn("navds-timeline__popover")}
               data-placement={placement}
               ref={refs.setFloating}
+              role="dialog"
               {...getFloatingProps()}
               style={floatingStyles}
             >
