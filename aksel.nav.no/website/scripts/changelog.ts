@@ -16,7 +16,7 @@ export async function main() {
   const changelog = fs
     .readFileSync("../../CHANGELOG.md", "utf-8")
     .split("\n## ");
-  changelog.shift(); // Remove the first part
+  changelog.shift(); // Remove the first item, it's the main heading.
 
   const converter = new showdown.Converter();
   converter.setOption("emoji", true);
