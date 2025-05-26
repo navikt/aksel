@@ -19,18 +19,21 @@ export default async () => {
   });
   // Bump headings to next heading-level for changelog list
   logEntries.forEach((logEntry) => {
-    logEntry.innhold.forEach((block) => {
-      if (block._type === "block") {
-        if (block.style === "h2") {
-          block.style = "h3";
-        } else if (block.style === "h3") {
-          block.style = "h4";
-        } else if (block.style === "h4") {
-          block.style = "h5";
+    if (logEntry.innhold?.length > 0)
+      logEntry.innhold.forEach((block) => {
+        if (block._type === "block") {
+          if (block.style === "h2") {
+            block.style = "h3";
+          } else if (block.style === "h3") {
+            block.style = "h4";
+          } else if (block.style === "h4") {
+            block.style = "h5";
+          }
         }
-      }
-    });
+      });
   });
+
+  // TODO: [endringslogg] Add filtering by year and category
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
