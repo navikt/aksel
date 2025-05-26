@@ -80,7 +80,7 @@ export const Hero = () => {
             {
               title: "Ikoner",
               desc: "900+ linje og fylte ikoner",
-              href: "/ikoner",
+              href: "/komponenter/ikoner",
             },
           ]}
         />
