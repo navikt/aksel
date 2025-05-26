@@ -2,6 +2,7 @@ import React from "react";
 import { Page, VStack } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
 import GettingStartedSection from "./GettingStartedSection";
+import ChangeLogNews from "./_ui/ChangeLogNews";
 import DSLandingPageHeading from "./_ui/DSLandingPageHeading";
 import DSLayersOverview from "./_ui/DSLayersOverview";
 import "./ds-forside.css";
@@ -27,6 +28,7 @@ const DesignsystemetPage = async () => {
             <GettingStartedSection />
           </VStack>
           <DSLayersOverview />
+          <ChangeLogNews />
         </VStack>
       </PageBlock>
     </Page>
