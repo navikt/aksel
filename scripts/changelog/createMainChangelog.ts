@@ -47,8 +47,6 @@ const upsertEntry = (
   },
   value: Node,
 ) => {
-  const v = lastSeenVersion.split(".");
-  lastSeenVersion = `${v[0]}.${v[1]}`;
   changelog[lastSeenVersion] ??= {};
 
   const raw_ast_nodes = changelog[lastSeenVersion][lastSeenPackage];
