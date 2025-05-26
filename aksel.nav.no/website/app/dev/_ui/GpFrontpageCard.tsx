@@ -48,8 +48,12 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
 
       <Link
         href={href}
-        data-umami-event="navigere"
-        data-umami-event-kilde="god praksis forside"
+        onClick={() =>
+            umamiTrack("navigere", {
+              kilde: "god praksis forside",
+              url: href,
+            })
+          }
         className={styles.godPraksisCardItemLink}
         as={NextLink}
       >
