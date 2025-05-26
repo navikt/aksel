@@ -4,8 +4,8 @@ import cl from "clsx";
 import { useEffect, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { BoxNew, Heading } from "@navikt/ds-react";
-import Card, { ArticleT } from "./Card";
-import { Highlight } from "./Highlight";
+import Card, { ArticleT } from "./FrontpageMasonryCard";
+import { Highlight } from "./HighlightedArticle";
 import styles from "./landingpage.module.css";
 
 export type LatestT = {

@@ -2,7 +2,7 @@ import { Image } from "sanity";
 import { BoxNew, HStack } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
-import { UmamiLink } from "./ClientLink";
+import { UmamiLink } from "../../_ui/UmamiLink";
 import { GodPraksisPictogram } from "./pictogram/GodPraksisPictogram";
 
 // NOTE: could perhaps avoid this "repeated type" we already get

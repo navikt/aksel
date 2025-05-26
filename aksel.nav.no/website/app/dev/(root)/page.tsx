@@ -10,18 +10,18 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
-import { sanityFetch } from "../_sanity/live";
+import { sanityFetch } from "../../_sanity/live";
 import {
   GOD_PRAKSIS_TEMA_QUERY,
   LANDINGSSIDE_LATEST_QUERY,
-} from "../_sanity/queries";
-import Footer from "../_ui/footer/Footer";
-import { Header } from "../_ui/header/Header";
+} from "../../_sanity/queries";
+import Footer from "../../_ui/footer/Footer";
+import { Header } from "../../_ui/header/Header";
 import "../globals.css";
 import { PauseAnimationProvider } from "./_ui/AnimationStopContext";
+import { Hero } from "./_ui/FrontpageHero";
 import { FrontpageLatest } from "./_ui/FrontpageLatest";
 import { GpFrontpageCard } from "./_ui/GpFrontpageCard";
-import { Hero } from "./_ui/Hero";
 import { HeroGradientBG } from "./_ui/HeroGradientBG";
 import styles from "./_ui/landingpage.module.css";
 

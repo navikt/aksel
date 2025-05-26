@@ -9,7 +9,7 @@ import {
   LinkCardAnchor,
   LinkCardDescription,
   LinkCardTitle,
-} from "../(god-praksis)/_ui/link-card/LinkCard";
+} from "../../(god-praksis)/_ui/link-card/LinkCard";
 import styles from "./landingpage.module.css";
 import { useShouldStopAnimation } from "./useShouldStopAnimation";
 

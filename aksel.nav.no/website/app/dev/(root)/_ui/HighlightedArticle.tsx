@@ -6,8 +6,8 @@ import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { getAuthors, getImage } from "@/utils";
-import { ArticleT } from "./Card";
-import { BetaTag, Tag } from "./Tag";
+import { ArticleT } from "./FrontpageMasonryCard";
+import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./landingpage.module.css";
 
 export const Highlight = ({

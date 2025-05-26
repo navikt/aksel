@@ -11,8 +11,8 @@ import {
   LinkCardDescription,
   LinkCardImage,
   LinkCardTitle,
-} from "../(god-praksis)/_ui/link-card/LinkCard";
-import { BetaTag, Tag } from "./Tag";
+} from "../../(god-praksis)/_ui/link-card/LinkCard";
+import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./landingpage.module.css";
 
 export type ArticleT = {
