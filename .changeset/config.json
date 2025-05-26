@@ -1,9 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
-  "changelog": [
-    "@svitejs/changesets-changelog-github-compact",
-    { "repo": "navikt/aksel" }
-  ],
+  "changelog": ["./generate-changelog-line.js", { "repo": "navikt/aksel" }],
   "commit": false,
   "fixed": [
     [
