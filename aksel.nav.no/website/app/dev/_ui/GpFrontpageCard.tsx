@@ -63,6 +63,4 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
   );
 };
 
-export default function Component(props: GpFrontpageCardProps) {
-  return <GpFrontpageCard {...props} />;
-}
+export { GpFrontpageCard }
