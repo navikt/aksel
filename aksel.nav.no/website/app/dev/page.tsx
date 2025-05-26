@@ -20,7 +20,7 @@ import { Header } from "../_ui/header/Header";
 import "../globals.css";
 import { PauseAnimationProvider } from "./_ui/AnimationStopContext";
 import { FrontpageLatest } from "./_ui/FrontpageLatest";
-import GpFrontpageCard from "./_ui/GpFrontpageCard";
+import { GpFrontpageCard } from "./_ui/GpFrontpageCard";
 import { Hero } from "./_ui/Hero";
 import { HeroGradientBG } from "./_ui/HeroGradientBG";
 import styles from "./_ui/landingpage.module.css";

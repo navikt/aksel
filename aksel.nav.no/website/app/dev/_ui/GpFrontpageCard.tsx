@@ -1,9 +1,8 @@
-import NextLink from "next/link";
 import { Image } from "sanity";
-import { BoxNew, HStack, Link } from "@navikt/ds-react";
+import { BoxNew, HStack } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
-import styles from "./landingpage.module.css";
+import { UmamiLink } from "./ClientLink";
 import { GodPraksisPictogram } from "./pictogram/GodPraksisPictogram";
 
 // NOTE: could perhaps avoid this "repeated type" we already get
@@ -45,22 +44,11 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
           <FallbackPictogram />
         )}
       </BoxNew>
-
-      <Link
-        href={href}
-        onClick={() =>
-            umamiTrack("navigere", {
-              kilde: "god praksis forside",
-              url: href,
-            })
-          }
-        className={styles.godPraksisCardItemLink}
-        as={NextLink}
-      >
+      <UmamiLink href={href} umamiKilde="God Praksis Forside">
         {children}
-      </Link>
+      </UmamiLink>
     </HStack>
   );
 };
 
-export { GpFrontpageCard }
+export { GpFrontpageCard };
