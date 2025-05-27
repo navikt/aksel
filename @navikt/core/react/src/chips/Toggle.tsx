@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { AkselColors } from "../types";
 import { OverridableComponent } from "../util/types";
 
 export interface ChipsToggleProps
@@ -99,7 +99,7 @@ export const ToggleChips: OverridableComponent<
 
 function variantToColor(
   variant?: ChipsToggleProps["variant"],
-): GlobalColorRoles | undefined {
+): AkselColors | undefined {
   switch (variant) {
     case "action":
       return "accent";

@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { Loader } from "../loader";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColors } from "../types";
 import { Label } from "../typography";
 import { omit } from "../util";
 import { composeEventHandlers } from "../util/composeEventHandlers";
@@ -132,7 +132,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
 
 function variantToColor(
   variant: ButtonProps["variant"],
-): GlobalColorRoles | undefined {
+): AkselColors | undefined {
   switch (variant) {
     case "primary-neutral":
     case "secondary-neutral":
