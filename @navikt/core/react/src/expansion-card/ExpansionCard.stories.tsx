@@ -266,7 +266,7 @@ export const ColorRole = () => (
         <Content />
       </ExpansionCard>
     </div>
-    <div data-color-role="brand-magenta">
+    <div data-color="brand-magenta">
       <ExpansionCard aria-label="bare description">
         <ExpansionCard.Header>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
@@ -280,10 +280,7 @@ export const ColorRole = () => (
     </div>
 
     <div>
-      <ExpansionCard
-        aria-label="bare description"
-        data-color-role="brand-magenta"
-      >
+      <ExpansionCard aria-label="bare description" data-color="brand-magenta">
         <ExpansionCard.Header>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>

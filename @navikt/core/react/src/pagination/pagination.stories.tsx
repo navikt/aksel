@@ -154,7 +154,7 @@ export const ColorRole = () => {
       boundaryCount={1}
       page={page}
       onPageChange={setPage}
-      data-color-role="brand-magenta"
+      data-color="brand-magenta"
     />
   );
 };

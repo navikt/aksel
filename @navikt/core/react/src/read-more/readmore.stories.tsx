@@ -85,7 +85,7 @@ export const BrandVolumeLow: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="4" data-color-role="brand-magenta">
+    <VStack gap="4" data-color="brand-magenta">
       <ReadMore size="large" header={Default.args?.header}>
         {Content}
       </ReadMore>

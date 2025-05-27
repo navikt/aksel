@@ -137,14 +137,14 @@ export const ColorRole: StoryFn = () => {
         value={60}
         valueMax={120}
         aria-labelledby="progress-bar-label-small"
-        data-color-role="brand-magenta"
+        data-color="brand-magenta"
       />
       <p id="progress-bar-label-small">Warning</p>
       <ProgressBar
         value={60}
         valueMax={120}
         aria-labelledby="progress-bar-label-small"
-        data-color-role="warning"
+        data-color="warning"
       />
     </div>
   );

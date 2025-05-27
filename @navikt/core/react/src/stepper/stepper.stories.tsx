@@ -209,7 +209,7 @@ export const CompletedSteps: StoryFn<Story> = () => {
 };
 
 export const ColorRole = () => (
-  <div data-color-role="brand-magenta">
+  <div data-color="brand-magenta">
     <Vertical />
   </div>
 );

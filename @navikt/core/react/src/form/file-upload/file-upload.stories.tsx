@@ -280,7 +280,7 @@ const ChromaticStories: StoryFn = () => (
 );
 
 export const ColorRoles = () => (
-  <div data-color-role="brand-magenta">
+  <div data-color="brand-magenta">
     <ChromaticStories />
   </div>
 );

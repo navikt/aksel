@@ -571,7 +571,7 @@ const ChromaticRender = ({ children }: { children?: React.ReactNode }) => {
 };
 
 export const ColorRoles: StoryFn = () => (
-  <div data-color-role="brand-magenta">
+  <div data-color="brand-magenta">
     <h2>ColorRoles</h2>
     <ChromaticRender />
   </div>

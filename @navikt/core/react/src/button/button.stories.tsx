@@ -170,7 +170,7 @@ export const ColorRoles: Story = {
           Button
         </Button>
       </HStack>
-      <HStack gap="2" data-color-role="danger">
+      <HStack gap="2" data-color="danger">
         <Button variant="primary" icon={<StarIcon />}>
           Button
         </Button>
@@ -182,17 +182,13 @@ export const ColorRoles: Story = {
         </Button>
       </HStack>
       <HStack gap="2">
-        <Button data-color-role="danger" variant="primary" icon={<StarIcon />}>
+        <Button data-color="danger" variant="primary" icon={<StarIcon />}>
           Button
         </Button>
-        <Button
-          data-color-role="danger"
-          variant="secondary"
-          icon={<StarIcon />}
-        >
+        <Button data-color="danger" variant="secondary" icon={<StarIcon />}>
           Button
         </Button>
-        <Button data-color-role="danger" variant="tertiary" icon={<StarIcon />}>
+        <Button data-color="danger" variant="tertiary" icon={<StarIcon />}>
           Button
         </Button>
       </HStack>

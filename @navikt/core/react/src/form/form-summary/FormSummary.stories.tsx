@@ -358,7 +358,7 @@ export const ColorRole: StoryFn<typeof FormSummary> = () => (
           <FormSummary.Label>{answer.label}</FormSummary.Label>
           <FormSummary.Value>
             {Array.isArray(answer.value) ? (
-              <FormSummary.Answers data-color-role="warning">
+              <FormSummary.Answers data-color="warning">
                 {answer.value.map((subAnswer, subIndex) => (
                   <FormSummary.Answer key={subIndex}>
                     <FormSummary.Label>{subAnswer.label}</FormSummary.Label>

@@ -207,7 +207,7 @@ export const HtmlSize = () => (
 );
 
 export const ColorRole = () => (
-  <div className="colgap" data-color-role="brand-magenta">
+  <div className="colgap" data-color="brand-magenta">
     <div className="colgap">
       <Search label="Søk" />
       <Search label="Søk" variant="secondary" />
