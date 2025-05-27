@@ -115,6 +115,10 @@ function KodeEksemplerIFrame(props: {
         code={current?.innhold?.trim()}
         base64={current?.sandboxEnabled ? current?.sandboxBase64 : undefined}
         link={iframeUrl}
+        reload={() => {
+          updateLoaded(false);
+          iframeRef.current?.contentWindow?.location.reload();
+        }}
       />
 
       {showCode && (
