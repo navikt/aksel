@@ -18,7 +18,7 @@
     border-radius: 1px;
   }
 
-  &[data-color-role="neutral"] {
+  &[data-color="neutral"] {
     color: var(--ax-text-default);
   }
 

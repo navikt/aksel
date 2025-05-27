@@ -9,6 +9,6 @@ declare module "react" {
     [key: `--__axc-${string}`]: string | number | undefined;
   }
   interface HTMLAttributes {
-    "data-color-role"?: GlobalColorRoles;
+    "data-color"?: GlobalColorRoles;
   }
 }

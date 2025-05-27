@@ -70,7 +70,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
       variant,
       size = "medium",
       icon,
-      "data-color-role": colorRole,
+      "data-color": color,
       ...rest
     },
     ref,
@@ -81,7 +81,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
 
     return (
       <BodyShort
-        data-color-role={colorRole ?? variantToRole(variant)}
+        data-color={color ?? variantToColor(variant)}
         data-variant={filledVariant || moderateVariant || "outline"}
         {...rest}
         ref={ref}
@@ -101,7 +101,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
   },
 );
 
-function variantToRole(variant: TagProps["variant"]): GlobalColorRoles {
+function variantToColor(variant: TagProps["variant"]): GlobalColorRoles {
   switch (variant) {
     case "warning":
     case "warning-filled":

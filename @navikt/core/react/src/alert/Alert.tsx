@@ -94,7 +94,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     return (
       <div
         {...rest}
-        data-color-role={variantToRole(variant)}
+        data-color={variantToRole(variant)}
         data-variant={variant}
         ref={ref}
         className={cn(

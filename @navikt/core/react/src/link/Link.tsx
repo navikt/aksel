@@ -59,7 +59,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         underline = true,
         variant,
         inlineText = false,
-        "data-color-role": colorRole,
+        "data-color": color,
         ...rest
       },
       ref,
@@ -80,7 +80,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
 
       return (
         <Component
-          data-color-role={colorRole ?? variantToRole(localVariant)}
+          data-color={color ?? variantToColor(localVariant)}
           data-variant={localVariant}
           {...rest}
           ref={ref}
@@ -98,7 +98,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
     },
   );
 
-function variantToRole(
+function variantToColor(
   variant?: LinkProps["variant"],
 ): GlobalColorRoles | undefined {
   switch (variant) {

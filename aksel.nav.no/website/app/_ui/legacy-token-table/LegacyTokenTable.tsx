@@ -28,10 +28,7 @@ function LegacyTokenTable(props: PortableTextComponentProps<Token_kategori>) {
   return (
     <>
       <BodyLong>
-        <strong
-          data-color-role="warning"
-          className={styles.legacyTokenTableWarning}
-        >
+        <strong data-color="warning" className={styles.legacyTokenTableWarning}>
           Deprecation warning:{" "}
         </strong>
         <span>

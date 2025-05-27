@@ -5,13 +5,13 @@ import { type SemanticColorRoles } from "../../../types";
  * This allows us themable to create themable CSS in this format:
  * @example
  * ```css
- * [data-color-role="accent"] {
+ * [data-color="accent"] {
  *   --ax-bg-soft: var(--ax-bg-accent-soft);
  *   --ax-bg-softA: var(--ax-bg-accent-softA);
  *   --ax-bg-moderate: var(--ax-bg-accent-moderate);
  * }
  *
- * [data-color-role="success"] {
+ * [data-color="success"] {
  *   --ax-bg-soft: var(--ax-bg-success-soft);
  *   --ax-bg-softA: var(--ax-bg-success-softA);
  *   --ax-bg-moderate: var(--ax-bg-success-moderate);

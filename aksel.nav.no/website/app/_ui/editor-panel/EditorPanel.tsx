@@ -44,48 +44,48 @@ const VariantConfig: Record<
   {
     heading: string;
     icon: JSX.Element;
-    colorRole: GlobalColorRoles | AkselBrandColors;
+    color: GlobalColorRoles | AkselBrandColors;
   }
 > = {
   tips: {
     heading: "Tips",
     icon: <LightBulbIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "brand-blue",
+    color: "brand-blue",
   },
   do: {
     heading: "Gjør",
     icon: <ThumbUpIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "brand-blue",
+    color: "brand-blue",
   },
   dont: {
     heading: "Unngå",
     icon: <ThumbDownIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "danger",
+    color: "danger",
   },
   caution: {
     heading: "Pass på",
     icon: <ExclamationmarkTriangleIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "warning",
+    color: "warning",
   },
   info: {
     heading: "Info",
     icon: <InformationSquareIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "brand-blue",
+    color: "brand-blue",
   },
   links: {
     heading: "Lenker",
     icon: <LinkIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "neutral",
+    color: "neutral",
   },
   attachment: {
     heading: "Vedlegg",
     icon: <DownloadIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "neutral",
+    color: "neutral",
   },
   "example-text": {
     heading: "Eksempeltekst",
     icon: <FileTextIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "neutral",
+    color: "neutral",
   },
 } as const;
 
@@ -98,7 +98,7 @@ function EditorPanel(props: EditorPanelProps) {
     <div
       data-block-margin="space-28"
       className={styles.editorPanel}
-      data-color-role={config.colorRole}
+      data-color={config.color}
     >
       <EditorPanelHeader
         variant={variant}
