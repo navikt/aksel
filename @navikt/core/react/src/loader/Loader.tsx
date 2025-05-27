@@ -34,6 +34,10 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
    * @default "neutral"
    */
   variant?: "neutral" | "interaction" | "inverted";
+  /**
+   * Overrides loader-color
+   */
+  "data-color"?: GlobalColorRoles;
 }
 
 /* Workaround for @types/react v17/v18 feil */
