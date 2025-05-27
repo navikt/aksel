@@ -109,7 +109,6 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             })}
             type="button"
             aria-expanded={children ? open : undefined}
-            aria-haspopup={children ? "true" : "false"}
             {...getReferenceProps({
               onKeyDown: (e) => {
                 rest?.onKeyDown?.(e as React.KeyboardEvent<HTMLButtonElement>);
