@@ -41,6 +41,9 @@
         "default": "./cjs/index.js"
       }
     },
+    "./types/theme": {
+      "types": "./esm/types/theme.d.ts"
+    },
     "./locales": {
       "import": {
         "types": "./esm/util/i18n/locales/index.d.ts",
