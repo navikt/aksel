@@ -126,7 +126,6 @@ const ClickablePeriod = React.memo(
           )}
           aria-expanded={children ? open : undefined}
           aria-current={isActive || undefined}
-          aria-haspopup={children ? "true" : "false"}
           {...getReferenceProps({
             onFocus: () => {
               initiate(index);
