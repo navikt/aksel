@@ -44,9 +44,6 @@
     "./types/theme": {
       "types": "./esm/types/theme.d.ts"
     },
-    "./types/colors": {
-      "types": "./esm/types/colors.d.ts"
-    },
     "./locales": {
       "import": {
         "types": "./esm/util/i18n/locales/index.d.ts",

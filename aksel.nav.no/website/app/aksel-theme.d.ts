@@ -4,7 +4,7 @@ import type {} from "@navikt/core/react/types/colors";
 // Create a similar .d.ts file in your project (e.g., aksel-custom.d.ts)
 // and ensure it's included in your tsconfig.json "include" array.
 
-declare module "@navikt/ds-react/types/colors" {
+declare module "@navikt/ds-react/types/theme" {
   export interface CustomAkselColors {
     "my-brand-primary": never;
     "project-specific-accent": never;
