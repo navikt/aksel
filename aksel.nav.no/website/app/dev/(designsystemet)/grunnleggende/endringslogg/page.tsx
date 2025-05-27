@@ -9,7 +9,7 @@ import ChronologicalList from "./_ui/ChronologicalList";
 import FilterChips from "./_ui/FilterChips";
 import SearchField from "./_ui/SearchField";
 
-export default async () => {
+export default async function Page() {
   const year = new Date().getFullYear();
   const { data: logEntries } = await sanityFetch({
     query: defineQuery(
@@ -63,4 +63,4 @@ export default async () => {
       <TokenTableOfContents />
     </DesignsystemetPageLayout>
   );
-};
+}

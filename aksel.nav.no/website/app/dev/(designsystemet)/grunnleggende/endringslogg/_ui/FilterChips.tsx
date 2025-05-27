@@ -5,7 +5,7 @@ import { Chips, Label, VStack } from "@navikt/ds-react";
 
 // import { Chips, Label, VStack } from "@navikt/ds-react";
 
-const FilterChips = () => {
+export default function FilterChips() {
   const startYear = 2022;
   const currentYear = new Date().getFullYear();
   const [selectedYear, setSelectedYear] = useState([`${currentYear}`]);
@@ -62,6 +62,4 @@ const FilterChips = () => {
       </VStack>
     </VStack>
   );
-};
-
-export default FilterChips;
+}

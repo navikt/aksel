@@ -12,11 +12,7 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-export default async (props: Props) => {
+export default async function (props: Props) {
   const { slug } = await props.params;
   const logEntry = (
     await sanityFetch({
@@ -32,9 +28,11 @@ export default async (props: Props) => {
       <VStack>
         <BodyShort
           size="medium"
-          className={logEntry.fremhevet && "text-[--aksel-brand-pink-900]"}
+          className={
+            logEntry.fremhevet ? styles["kategori-fremhevet"] : styles.kategori
+          }
         >
-          {capitalizeFirstLetter(logEntry.endringstype)}
+          {logEntry.endringstype}
         </BodyShort>
         <Heading
           size="xlarge"
@@ -56,14 +54,7 @@ export default async (props: Props) => {
             })}
           </BodyShort>
           {logEntry.fremhevet && (
-            <Tag
-              size="xsmall"
-              variant="neutral-filled"
-              style={{
-                borderRadius: "var(--ax-radius-4)",
-                backgroundColor: "var(--aksel-brand-pink-700)",
-              }}
-            >
+            <Tag size="xsmall" variant="neutral-filled" className={styles.tag}>
               Fremhevet
             </Tag>
           )}
@@ -71,21 +62,20 @@ export default async (props: Props) => {
         {logEntry.fremhevet && logEntry.herobilde && (
           <Image
             data-block-margin="space-28"
-            className={
-              styles.herobilde +
-              (logEntry.fremhevet && logEntry.bakgrunnsfarge
-                ? ` bg-[${logEntry.bakgrunnsfarge}]`
-                : "")
-            }
-            style={{
-              "--herobilde-bg-color-first":
-                logEntry.herobilde.bakgrunnsfarge ||
-                "var(--aksel-brand-pink-400)",
-              "--herobilde-bg-color-last":
-                logEntry.herobilde.bakgrunnsfarge ||
-                "var(--aksel-brand-pink-700)",
-              "--herobilde-bg-degrees": "130deg",
-            }}
+            className={styles.herobilde}
+            // style={{
+            //   backgroundColor:
+            //     logEntry.fremhevet && logEntry.herobilde?.bakgrunnsfarge
+            //       ? logEntry.herobilde.bakgrunnsfarge
+            //       : "",
+            //   "--herobilde-bg-color-first":
+            //     logEntry.herobilde.bakgrunnsfarge ||
+            //     "var(--aksel-brand-pink-400)",
+            //   "--herobilde-bg-color-last":
+            //     logEntry.herobilde.bakgrunnsfarge ||
+            //     "var(--aksel-brand-pink-700)",
+            //   "--herobilde-bg-degrees": "130deg",
+            // }}
             alt={logEntry.herobilde.alt}
             loading="lazy"
             decoding="async"
@@ -99,4 +89,4 @@ export default async (props: Props) => {
       <TokenTableOfContents />
     </DesignsystemetPageLayout>
   );
-};
+}

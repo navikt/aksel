@@ -1,11 +1,89 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+.month-header {
+  position: sticky;
+  top: var(--website-header-height);
+  background: linear-gradient(var(--ax-bg-default) calc(100% - var(--ax-space-12)), transparent);
+  z-index: 1;
+}
+
+.month-spacer {
+  height: var(--ax-space-12);
+}
+
+.timeline {
+  width: 0;
+  border-width: 1px;
+  border-style: dashed;
+  border-right: none;
+  border-color: var(--ax-border-neutral-subtle);
+}
+
+.bullet {
+  width: 16px;
+  height: 16px;
+  border-width: 4px;
+  border-radius: 100%;
+  background-color: var(--ax-border-neutral);
+  border-color: var(--ax-border-neutral-subtle);
+}
+
+.bullet-fremhevet {
+  background-color: var(--aksel-brand-pink-600);
+  border-color: var(--aksel-brand-pink-300);
+}
+
+.tag {
+  border-radius: var(--ax-radius-4);
+  background-color: var(--aksel-brand-pink-700);
+}
+
+.date {
+  text-transform: capitalize;
+  color: var(--ax-text-default-subtle);
+}
+
+.date-fremhevet {
+  text-transform: capitalize;
+  color: var(--aksel-brand-pink-900);
+}
+
+.kategori {
+  text-transform: capitalize;
+  color: var(--ax-text-brand-blue-subtle);
+}
+
+.kategori-fremhevet {
+  text-transform: capitalize;
+  color: var(--aksel-brand-pink-900);
+}
+
+.innhold-fremhevet {
+  --ax-text-brand-blue: var(--aksel-brand-pink-1000);
+  --ax-text-brand-blue-subtle: var(--aksel-brand-pink-1000);
+
+  color: var(--aksel-brand-pink-1000);
+  border: 2px solid var(--aksel-brand-pink-700);
+  border-radius: var(--ax-radius-12);
+}
+
 .herobilde {
   aspect-ratio: 1200 / 630;
   border-radius: var(--ax-radius-12);
+  box-shadow: 0 0 0 1px var(--ax-border-neutral-subtle);
 
-  --herobilde-bg-color-first: var(--ax-bg-default);
+  /* --herobilde-bg-color-first: var(--ax-bg-default);
   --herobilde-bg-color-last: var(--ax-bg-default);
   --herobilde-bg-degrees: 0deg;
 
-  background: linear-gradient(var(--herobilde-bg-degrees), var(--herobilde-bg-color-first), var(--herobilde-bg-color-last));
-  box-shadow: 0 0 0 1px var(--ax-border-neutral-subtle);
+  background: linear-gradient(var(--herobilde-bg-degrees), var(--herobilde-bg-color-first), var(--herobilde-bg-color-last)); */
+}
+
+/* Text utilities */
+.capitalized {
+  text-transform: capitalize;
+}
+
+/* Flexbox utilities */
+.nowrap {
+  flex-wrap: nowrap;
 }

@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Search } from "@navikt/ds-react";
 
-const SearchField = () => {
+export default function SearchField() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -36,6 +36,4 @@ const SearchField = () => {
       />
     </form>
   );
-};
-
-export default SearchField;
+}
