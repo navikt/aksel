@@ -26,7 +26,7 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
           {/* TODO: [endringslogg] Animate bullet on `fremhevet` items */}
           <Box.New
             className={`${styles.bullet}${
-              logEntry.fremhevet ? ` ${styles["bullet-fremhevet"]}` : ""
+              logEntry.fremhevet ? ` ${styles.bulletFremhevet}` : ""
             }`}
           />
           {!isLastEntry && <Box.New flexGrow="1" className={styles.timeline} />}
@@ -34,20 +34,32 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
         {/* Log entry */}
         <VStack paddingInline="space-16" flexGrow="1">
           <HStack justify="start" align="baseline" gap="space-16">
-            <BodyShort
-              size="small"
-              spacing
-              className={
-                logEntry.fremhevet ? styles["date-fremhevet"] : styles.date
-              }
-            >
-              {logEntry.endringstype} •{" "}
-              {new Date(logEntry.endringsdato).toLocaleDateString("NO", {
-                day: "2-digit",
-                month: "long",
-                year: "numeric",
-              })}
-            </BodyShort>
+            <HStack gap="space-4">
+              <BodyShort
+                size="small"
+                spacing
+                className={
+                  logEntry.fremhevet
+                    ? styles.kategoriFremhevet
+                    : styles.kategoriInList
+                }
+              >
+                {logEntry.endringstype} •
+              </BodyShort>
+              <BodyShort
+                size="small"
+                spacing
+                className={
+                  logEntry.fremhevet ? styles.dateFremhevet : styles.date
+                }
+              >
+                {new Date(logEntry.endringsdato).toLocaleDateString("NO", {
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </BodyShort>
+            </HStack>
             {logEntry.fremhevet && (
               <Tag
                 size="xsmall"
@@ -64,7 +76,7 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
           <VStack
             marginBlock="space-0 space-32"
             padding={logEntry.fremhevet ? "space-16" : "space-0"}
-            className={logEntry.fremhevet ? styles["innhold-fremhevet"] : ""}
+            className={logEntry.fremhevet ? styles.innholdFremhevet : ""}
           >
             <Heading size="large" level="2" spacing>
               <Link

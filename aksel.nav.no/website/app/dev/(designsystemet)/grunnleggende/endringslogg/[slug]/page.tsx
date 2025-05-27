@@ -29,7 +29,9 @@ export default async function (props: Props) {
         <BodyShort
           size="medium"
           className={
-            logEntry.fremhevet ? styles["kategori-fremhevet"] : styles.kategori
+            logEntry.fremhevet
+              ? styles.kategoriFremhevet
+              : styles.kategoriInArticle
           }
         >
           {logEntry.endringstype}
@@ -38,14 +40,14 @@ export default async function (props: Props) {
           size="xlarge"
           level="1"
           spacing
-          className={logEntry.fremhevet && "text-[--aksel-brand-pink-1000]"}
+          className={logEntry.fremhevet && styles.headingFremhevet}
         >
           {logEntry.heading}
         </Heading>
         <HStack gap="space-16" marginBlock="space-0 space-28">
           <BodyShort
             size="small"
-            className={logEntry.fremhevet && "text-[--aksel-brand-pink-900]"}
+            className={logEntry.fremhevet && styles.dateFremhevet}
           >
             {new Date(logEntry.endringsdato).toLocaleDateString("NO", {
               day: "2-digit",

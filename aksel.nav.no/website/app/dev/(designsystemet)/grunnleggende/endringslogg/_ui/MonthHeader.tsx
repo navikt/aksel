@@ -4,9 +4,9 @@ import MonthBubble from "./MonthBubble";
 
 export default function MonthHeader({ logEntry, index }) {
   return (
-    <li key={"month-header-" + index} className={styles["month-header"]}>
+    <li key={"month-header-" + index} className={styles.monthHeader}>
       <VStack>
-        <HStack className={styles["month-spacer"]}>
+        <HStack className={styles.monthSpacer}>
           {index > 0 && (
             <VStack width="48px" align="center">
               <Box.New flexGrow="1" className={styles.timeline} />
