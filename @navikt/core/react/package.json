@@ -44,6 +44,9 @@
     "./types/theme": {
       "types": "./esm/types/theme.d.ts"
     },
+    "./types/colors": {
+      "types": "./esm/types/colors.d.ts"
+    },
     "./locales": {
       "import": {
         "types": "./esm/util/i18n/locales/index.d.ts",
@@ -621,10 +624,11 @@
     "i18n-jsdoc": "tsx ./scripts/addJsdocToLocales.ts",
     "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
-    "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup",
+    "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup && yarn copy-types",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "TZ=UTC vitest run -c tests/vitest.config.ts",
-    "test:watch": "TZ=UTC vitest watch -c tests/vitest.config.ts"
+    "test:watch": "TZ=UTC vitest watch -c tests/vitest.config.ts",
+    "copy-types": "copyfiles -f ./src/types/theme.d.ts ./esm/types"
   },
   "dependencies": {
     "@floating-ui/react": "0.27.8",
@@ -643,6 +647,7 @@
     "@types/jscodeshift": "^0.11.11",
     "aksel": "workspace:^",
     "concurrently": "9.0.1",
+    "copyfiles": "^2.4.1",
     "fast-glob": "3.2.11",
     "jscodeshift": "^0.15.1",
     "jsdom": "26.1.0",

@@ -1,7 +1,7 @@
 "use client";
 
 import { ThemeProvider as NextThemeProvider, useTheme } from "next-themes";
-import { Theme } from "@navikt/ds-react";
+import { Button, Theme } from "@navikt/ds-react";
 
 type SupportedThemes = "light" | "dark";
 
@@ -19,7 +19,8 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
       themes={colorThemes}
       disableTransitionOnChange
     >
-      <Theme>{children}</Theme>
+      <Theme data-color="">{children}</Theme>
+      <Button data-color="">Test</Button>
     </NextThemeProvider>
   );
 }
