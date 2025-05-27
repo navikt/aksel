@@ -105,7 +105,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         <Heading
           className={cn("navds-error-summary__heading")}
           as={headingTag}
-          size="small"
+          size={size === "medium" ? "small" : "xsmall"}
           ref={headingRef}
           tabIndex={-1}
         >

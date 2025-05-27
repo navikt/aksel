@@ -11,7 +11,6 @@ import {
   useFocus,
   useHover,
   useInteractions,
-  useRole,
 } from "@floating-ui/react";
 import React, { useRef, useState } from "react";
 import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
@@ -91,13 +90,11 @@ const ClickablePeriod = React.memo(
     });
     const focus = useFocus(context);
     const dismiss = useDismiss(context);
-    const role = useRole(context, { role: "dialog" });
 
     const { getFloatingProps, getReferenceProps } = useInteractions([
       hover,
       focus,
       dismiss,
-      role,
     ]);
 
     const mergedRef = useMergeRefs(refs.setReference, periodRef);
@@ -130,6 +127,7 @@ const ClickablePeriod = React.memo(
           )}
           aria-expanded={children ? open : undefined}
           aria-current={isActive || undefined}
+          aria-haspopup={children ? "true" : "false"}
           {...getReferenceProps({
             onFocus: () => {
               initiate(index);
@@ -170,6 +168,7 @@ const ClickablePeriod = React.memo(
               className={cn("navds-timeline__popover")}
               data-placement={placement}
               ref={refs.setFloating}
+              role="dialog"
               {...getFloatingProps()}
               style={floatingStyles}
             >
