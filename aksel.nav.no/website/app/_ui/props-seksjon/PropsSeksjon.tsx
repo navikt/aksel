@@ -105,7 +105,7 @@ const PropEntry = ({
               /* We assume that if type starts with ", its an union-type */
               code={
                 (prop.type ?? "").startsWith('"') &&
-                !prop.defaultValue.startsWith('"')
+                !prop.defaultValue?.startsWith('"')
                   ? `"${prop.defaultValue}"`
                   : prop.defaultValue
               }
