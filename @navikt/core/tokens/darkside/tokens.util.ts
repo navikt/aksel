@@ -1,10 +1,10 @@
 import _ from "lodash";
-import type { GlobalColorRoles, SemanticColorRoles } from "../types";
+import type { AkselColors, SemanticColorRoles } from "../types";
 
 export type GlobalColorEntry = {
   value: string;
   type: "global-color";
-  group: GlobalColorRoles;
+  group: AkselColors;
 };
 
 export type TokenTypes =
@@ -30,7 +30,7 @@ export type FontGroups =
 export type BreakpointGroups = "mobile first" | "desktop first";
 
 export type TokenGroup =
-  | GlobalColorRoles
+  | AkselColors
   | SemanticTokenGroups
   | `${SemanticTokenGroups}.${SemanticColorRoles}`
   | FontGroups

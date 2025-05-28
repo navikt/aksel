@@ -1,21 +1,35 @@
-export type ColorTheme = "light" | "dark";
+export type {
+  AkselColorThemes,
+  AkselColors,
+  AkselMainColors,
+  AkselStatusColors,
+  AkselBrandColors,
+  AkselMetaColors,
+};
 
-export const ColorRolesList = [
-  "neutral",
-  "accent",
-  "success",
-  "warning",
-  "danger",
-  "info",
-  "brand-magenta",
-  "brand-beige",
-  "brand-blue",
-  "meta-purple",
-  "meta-lime",
-] as const;
+/* --------------------------------- Themes --------------------------------- */
+type AkselColorThemes = "light" | "dark";
 
-export type GlobalColorRoles = (typeof ColorRolesList)[number];
-export type SemanticColorRoles = GlobalColorRoles;
+/* ------------------------------ Main colors ----------------------------- */
+type AkselMainColors = "neutral" | "accent";
+
+/* ------------------------------ Status colors ----------------------------- */
+type AkselStatusColors = "info" | "success" | "warning" | "danger";
+
+/* ------------------------------ Brand colors ------------------------------ */
+type AkselBrandColors = "brand-magenta" | "brand-beige" | "brand-blue";
+
+/* ------------------------------ Meta colors ------------------------------ */
+type AkselMetaColors = "meta-purple" | "meta-lime";
+
+/* ------------------------------- All colors ------------------------------- */
+type AkselColors =
+  | AkselMainColors
+  | AkselStatusColors
+  | AkselBrandColors
+  | AkselMetaColors;
+
+export type SemanticColorRoles = AkselColors;
 
 export type GlobalColorScale =
   | "100"
@@ -35,13 +49,10 @@ export type GlobalColorScale =
   | "400A";
 
 export type GlobalColorKeys =
-  | `${Extract<GlobalColorRoles, "neutral">}-${Extract<
-      GlobalColorScale,
-      "000"
-    >}`
-  | `${GlobalColorRoles}-${Exclude<GlobalColorScale, "000">}`;
+  | `${Extract<AkselColors, "neutral">}-${Extract<GlobalColorScale, "000">}`
+  | `${AkselColors}-${Exclude<GlobalColorScale, "000">}`;
 
-/* Semantic tokens */
+/* ----------------------------- Semantic tokens ---------------------------- */
 
 export type StaticDefaultBgKeys =
   | "default"
