@@ -22,7 +22,7 @@ import { PauseAnimationProvider } from "./_ui/AnimationStopContext";
 import { Hero } from "./_ui/FrontpageHero";
 import { FrontpageLatest } from "./_ui/FrontpageLatest";
 import { GpFrontpageCard } from "./_ui/GpFrontpageCard";
-import { HeroGradientBG } from "./_ui/HeroGradientBG";
+import { MainWrapper } from "./_ui/MainWrapper";
 import styles from "./_ui/frontpage.module.css";
 
 const Page = async () => {
@@ -46,8 +46,8 @@ const Page = async () => {
         {/* insert context for AnimationContext wrap here */}
         <Header />
         <PauseAnimationProvider>
-          <HeroGradientBG />
-          <main tabIndex={-1} id="hovedinnhold" className={styles.frontPage}>
+          <MainWrapper>
+            <div className={styles.heroLinearBG} />
             <div className={styles.mainBanner}>
               <Link
                 href="/darkside"
@@ -123,7 +123,7 @@ const Page = async () => {
                 )}
               </PageBlock>
             </BoxNew>
-          </main>
+          </MainWrapper>
         </PauseAnimationProvider>
       </AkselPage>
     </>

@@ -4,14 +4,18 @@ import cl from "clsx";
 import styles from "./frontpage.module.css";
 import { useShouldStopAnimation } from "./useShouldStopAnimation";
 
-export const HeroGradientBG = () => {
+export const MainWrapper = ({ children }) => {
   const { shouldStopAnimation } = useShouldStopAnimation();
 
   return (
-    <div
-      className={cl(styles.heroLinearBG, {
+    <main
+      tabIndex={-1}
+      id="hovedinnhold"
+      className={cl(styles.frontPage, {
         "animation-stop": shouldStopAnimation,
       })}
-    />
+    >
+      {children}
+    </main>
   );
 };

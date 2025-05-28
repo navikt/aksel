@@ -41,7 +41,8 @@ const LinkCards = ({
 };
 
 export const Hero = () => {
-  const { reducedMotion, pause, setPause } = useShouldStopAnimation();
+  const { pause, reducedMotion, setPause, shouldStopAnimation } =
+    useShouldStopAnimation();
 
   return (
     <>
@@ -51,16 +52,12 @@ export const Hero = () => {
             level="1"
             size="xlarge"
             className={cl(styles.heroText, {
-              "animation-stop": reducedMotion || pause,
+              "animation-stop": shouldStopAnimation,
             })}
           >
             Aksel gjør det enklere å lage digitale produkter
           </Heading>
-          <div
-            className={cl(styles.cubeWrapper, {
-              "animation-stop": reducedMotion || pause,
-            })}
-          >
+          <div>
             <AkselCubeAnimated />
           </div>
         </div>
