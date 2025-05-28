@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { AkselColors } from "../types";
 import { OverridableComponent } from "../util/types";
 
 export interface LinkProps
@@ -59,7 +59,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         underline = true,
         variant,
         inlineText = false,
-        "data-color-role": colorRole,
+        "data-color": color,
         ...rest
       },
       ref,
@@ -80,7 +80,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
 
       return (
         <Component
-          data-color-role={colorRole ?? variantToRole(localVariant)}
+          data-color={color ?? variantToColor(localVariant)}
           data-variant={localVariant}
           {...rest}
           ref={ref}
@@ -98,9 +98,9 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
     },
   );
 
-function variantToRole(
+function variantToColor(
   variant?: LinkProps["variant"],
-): GlobalColorRoles | undefined {
+): AkselColors | undefined {
   switch (variant) {
     case "action":
       return "accent";

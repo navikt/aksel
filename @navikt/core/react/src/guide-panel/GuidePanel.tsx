@@ -41,7 +41,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
       className,
       illustration,
       poster,
-      "data-color-role": colorRole = "info",
+      "data-color": color = "info",
       ...rest
     },
     ref,
@@ -51,7 +51,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
 
     return (
       <div
-        data-color-role={colorRole}
+        data-color={color}
         {...rest}
         ref={ref}
         className={cn("navds-guide-panel", className, {

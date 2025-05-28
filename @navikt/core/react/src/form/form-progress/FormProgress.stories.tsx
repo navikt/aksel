@@ -152,7 +152,7 @@ export const Controlled: StoryFn = () => {
 };
 
 export const ColorRole: StoryFn = () => (
-  <div style={{ minHeight: 700 }} data-color-role="brand-magenta">
+  <div style={{ minHeight: 700 }} data-color="brand-magenta">
     <FormProgress totalSteps={7} activeStep={2} open>
       <FormProgress.Step href="#" completed>
         Start søknad

@@ -125,7 +125,7 @@ export const Chromatic: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <div data-color-role="meta-purple">
+    <div data-color="meta-purple">
       <Dropdown onSelect={(event) => console.log(event)} open>
         <Dropdown.Toggle>Toggle</Dropdown.Toggle>
         <Dropdown.Menu strategy="fixed">

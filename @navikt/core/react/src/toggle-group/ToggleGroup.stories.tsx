@@ -153,7 +153,7 @@ export const Small = () => {
 export const ColorRoles = () => {
   const [activeValue, setActiveValue] = useState("ulest");
   return (
-    <VStack gap="space-12" data-color-role="brand-magenta">
+    <VStack gap="space-12" data-color="brand-magenta">
       <ToggleGroup value={activeValue} onChange={setActiveValue}>
         {Items()}
       </ToggleGroup>

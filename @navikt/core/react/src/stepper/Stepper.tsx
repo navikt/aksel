@@ -110,7 +110,7 @@ export const Stepper: StepperComponent = forwardRef<
                 "navds-stepper__item--completed": stepProps.completed,
                 "navds-stepper__item--non-interactive": !isInteractive,
               })}
-              data-color-role={isInteractive ? undefined : "neutral"}
+              data-color={isInteractive ? undefined : "neutral"}
               key={index + (children?.toString?.() ?? "")}
             >
               <span

@@ -44,7 +44,7 @@
     background-color: transparent;
     color: var(--ax-text-subtle);
 
-    &[data-color-role="neutral"] {
+    &[data-color="neutral"] {
       color: var(--ax-text-default);
     }
 
@@ -62,7 +62,7 @@
       color: var(--ax-text-subtle);
       background-color: transparent;
 
-      &[data-color-role="neutral"] {
+      &[data-color="neutral"] {
         color: var(--ax-text-default);
       }
     }
@@ -72,7 +72,7 @@
     background-color: transparent;
     color: var(--ax-text-subtle);
 
-    &[data-color-role="neutral"] {
+    &[data-color="neutral"] {
       color: var(--ax-text-default);
     }
 
@@ -93,7 +93,7 @@
       color: var(--ax-text-subtle);
       background-color: transparent;
 
-      &[data-color-role="neutral"] {
+      &[data-color="neutral"] {
         color: var(--ax-text-default);
       }
     }

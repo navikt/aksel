@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { AkselColors } from "../types";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
@@ -31,7 +31,7 @@ export const RemovableChips = forwardRef<
       className,
       onClick,
       type = "button",
-      "data-color-role": colorRole,
+      "data-color": color,
       ...rest
     },
     ref,
@@ -50,7 +50,7 @@ export const RemovableChips = forwardRef<
 
     return (
       <button
-        data-color-role={colorRole ?? variantToRole(localVariant)}
+        data-color={color ?? variantToColor(localVariant)}
         {...rest}
         ref={ref}
         type={type}
@@ -73,9 +73,9 @@ export const RemovableChips = forwardRef<
   },
 );
 
-function variantToRole(
+function variantToColor(
   variant?: ChipsRemovableProps["variant"],
-): GlobalColorRoles | undefined {
+): AkselColors | undefined {
   switch (variant) {
     case "action":
       return "accent";

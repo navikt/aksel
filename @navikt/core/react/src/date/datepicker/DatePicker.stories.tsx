@@ -566,7 +566,7 @@ export const Chromatic: Story = {
 };
 
 export const ColorRole = () => (
-  <div data-color-role="meta-purple">
+  <div data-color="meta-purple">
     <UseDatepicker />
   </div>
 );

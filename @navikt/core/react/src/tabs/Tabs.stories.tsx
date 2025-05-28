@@ -275,7 +275,7 @@ export const CustomIds = () => (
 );
 
 export const ColorRole = () => (
-  <div data-color-role="brand-magenta">
+  <div data-color="brand-magenta">
     <Controlled />
   </div>
 );

@@ -162,7 +162,7 @@ const Variants = () => (
 );
 
 export const ColorRole = () => (
-  <VStack gap="3" data-color-role="brand-magenta">
+  <VStack gap="3" data-color="brand-magenta">
     <Link href="#">Ex aliqua incididunt</Link>
     {["action", "neutral", "subtle"].map((variant) => (
       <div key={variant}>

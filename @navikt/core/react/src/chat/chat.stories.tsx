@@ -233,7 +233,7 @@ export const ColorRole: Story = {
             name="Ls"
             timestamp="01.01.21 14:00"
             variant={variant}
-            data-color-role="meta-purple"
+            data-color="meta-purple"
           >
             <Chat.Bubble>
               Aute minim nisi sunt mollit duis sunt nulla minim non proident.

@@ -124,7 +124,7 @@ export const ColorRole: Story = {
         </GuidePanel>
       </div>
       <div>
-        <GuidePanel data-color-role="brand-magenta">
+        <GuidePanel data-color="brand-magenta">
           <BodyLong spacing>
             Duis et ex ad magna nostrud ut officia nulla cillum commodo sint
             irure elit nulla. Ad proident nulla ex sunt exercitation sunt Lorem

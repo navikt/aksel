@@ -6,9 +6,9 @@ import {
   XMarkIcon,
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { Button } from "../button";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColors } from "../types";
 import { BodyLong } from "../typography";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
@@ -94,7 +94,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     return (
       <div
         {...rest}
-        data-color-role={variantToRole(variant)}
+        data-color={variantToRole(variant)}
         data-variant={variant}
         ref={ref}
         className={cn(
@@ -145,7 +145,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   },
 );
 
-function variantToRole(variant: AlertProps["variant"]): GlobalColorRoles {
+function variantToRole(variant: AlertProps["variant"]): AkselColors {
   switch (variant) {
     case "warning":
       return "warning";

@@ -228,7 +228,7 @@ export const Disabled = () => (
 );
 
 export const ColorRole = () => (
-  <div className="colspan" data-color-role="brand-magenta">
+  <div className="colspan" data-color="brand-magenta">
     <div>
       <h2>Group</h2>
       <Group />

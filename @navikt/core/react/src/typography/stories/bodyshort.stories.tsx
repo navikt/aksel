@@ -160,11 +160,11 @@ export const ColorRole: Story = {
     <VStack gap="2">
       <BodyShort textColor="default">{lorem}</BodyShort>
       <BodyShort textColor="subtle">{lorem}</BodyShort>
-      <BodyShort data-color-role="brand-magenta">{lorem}</BodyShort>
-      <BodyShort data-color-role="brand-magenta" textColor="default">
+      <BodyShort data-color="brand-magenta">{lorem}</BodyShort>
+      <BodyShort data-color="brand-magenta" textColor="default">
         {lorem}
       </BodyShort>
-      <BodyShort data-color-role="brand-magenta" textColor="subtle">
+      <BodyShort data-color="brand-magenta" textColor="subtle">
         {lorem}
       </BodyShort>
     </VStack>

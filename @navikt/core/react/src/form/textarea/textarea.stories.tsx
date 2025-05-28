@@ -266,7 +266,7 @@ ModalStrictMode.parameters = {
 
 export const ColorRole = () => {
   return (
-    <div data-color-role="brand-magenta">
+    <div data-color="brand-magenta">
       <Description />
       <MaxLength />
       <WithError />

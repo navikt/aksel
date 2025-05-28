@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { AkselColors } from "../types";
 import { Label } from "../typography";
 import { useId } from "../util";
 import {
@@ -51,7 +51,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       "aria-describedby": userDescribedby,
       variant,
       fill = false,
-      "data-color-role": colorRole,
+      "data-color": color,
       ...rest
     },
     ref,
@@ -99,7 +99,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
             className={cn("navds-toggle-group__wrapper", className, {
               "navds-toggle-group__wrapper--fill": fill,
             })}
-            data-color-role={colorRole ?? variantToColorRole(localVariant)}
+            data-color={color ?? variantToColor(localVariant)}
           >
             {label && (
               <Label
@@ -132,9 +132,9 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
   },
 ) as ToggleGroupComponent;
 
-function variantToColorRole(
+function variantToColor(
   variant?: ToggleGroupProps["variant"],
-): GlobalColorRoles | undefined {
+): AkselColors | undefined {
   switch (variant) {
     case "action":
       return "accent";

@@ -17,7 +17,7 @@ export const FormSummaryAnswers = forwardRef<
     {
       children,
       className,
-      "data-color-role": colorRole = "info",
+      "data-color": color = "info",
       ...rest
     }: FormSummaryAnswersProps,
     ref,
@@ -27,7 +27,7 @@ export const FormSummaryAnswers = forwardRef<
     return (
       <dl
         ref={ref}
-        data-color-role={colorRole}
+        data-color={color}
         {...rest}
         className={cn("navds-form-summary__answers", className)}
       >

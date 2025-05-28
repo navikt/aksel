@@ -156,7 +156,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         <Button
           className={cn("navds-search__button-clear")}
           variant="tertiary"
-          data-color-role="neutral"
+          data-color="neutral"
           size={size === "medium" ? "small" : "xsmall"}
           icon={<XMarkIcon aria-hidden />}
           title={clearButtonLabel || translate("clear")}

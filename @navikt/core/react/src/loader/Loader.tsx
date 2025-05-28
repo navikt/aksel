@@ -1,6 +1,6 @@
 import React, { SVGProps, forwardRef } from "react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColors } from "../types";
 import { omit } from "../util";
 import { useId } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -35,9 +35,9 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
    */
   variant?: "neutral" | "interaction" | "inverted";
   /**
-   * Sets default 'base'-color for Loader
+   * Overrides loader-color
    */
-  "data-color-role"?: GlobalColorRoles;
+  "data-color"?: AkselColors;
 }
 
 /* Workaround for @types/react v17/v18 feil */
@@ -65,7 +65,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
       transparent = false,
       variant = "neutral",
       id,
-      "data-color-role": colorRole,
+      "data-color": color,
       ...rest
     },
     ref,
@@ -90,7 +90,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
         focusable="false"
         viewBox="0 0 50 50"
         preserveAspectRatio="xMidYMid"
-        data-color-role={colorRole ?? variantToRole(variant)}
+        data-color={color ?? variantToColor(variant)}
         {...omit(rest, ["children"])}
         data-variant={variant}
       >
@@ -118,9 +118,9 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
   },
 );
 
-function variantToRole(
+function variantToColor(
   variant: LoaderProps["variant"],
-): GlobalColorRoles | undefined {
+): AkselColors | undefined {
   switch (variant) {
     case "neutral":
       return "neutral";

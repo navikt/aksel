@@ -123,7 +123,7 @@ export const Readonly: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <div className="colgap" data-color-role="brand-magenta">
+    <div className="colgap" data-color="brand-magenta">
       <div>
         {/* @ts-expect-error Args are Partial here */}
         <Switch {...Description.args} position="left" />

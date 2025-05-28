@@ -271,7 +271,7 @@ export const Disabled = () => (
 );
 
 export const ColorRole = () => (
-  <div className="colspan" data-color-role="brand-magenta">
+  <div className="colspan" data-color="brand-magenta">
     <Checkbox value="tekst">Checkboxtekst</Checkbox>
     <Checkbox value="tekst" defaultChecked>
       Checkboxtekst

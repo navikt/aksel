@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { AkselColors } from "../types";
 import { OverridableComponent } from "../util/types";
 
 export interface ChipsToggleProps
@@ -34,7 +34,7 @@ export const ToggleChips: OverridableComponent<
       variant,
       checkmark = true,
       as: Component = "button",
-      "data-color-role": colorRole,
+      "data-color": color,
       ...rest
     },
     ref,
@@ -51,7 +51,7 @@ export const ToggleChips: OverridableComponent<
 
     return (
       <Component
-        data-color-role={colorRole ?? variantToRole(localVariant)}
+        data-color={color ?? variantToColor(localVariant)}
         {...rest}
         ref={ref}
         className={cn("navds-chips__chip navds-chips__toggle", className, {
@@ -97,9 +97,9 @@ export const ToggleChips: OverridableComponent<
   },
 );
 
-function variantToRole(
+function variantToColor(
   variant?: ChipsToggleProps["variant"],
-): GlobalColorRoles | undefined {
+): AkselColors | undefined {
   switch (variant) {
     case "action":
       return "accent";

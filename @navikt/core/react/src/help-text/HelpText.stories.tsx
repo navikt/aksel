@@ -102,7 +102,7 @@ export const ColorRole: StoryFn = () => {
       ref={ref}
       title="Show tooltip"
       strategy="fixed"
-      data-color-role="brand-magenta"
+      data-color="brand-magenta"
     >
       Incididunt laborum eiusmod ullamco id aliquip officia ex irure aliqua
       laboris id ea do nisi. Ex esse ad duis culpa non aliquip exercitation eu

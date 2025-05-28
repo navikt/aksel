@@ -87,38 +87,14 @@ export const Transparent = () => (
 export const ColorRole = () => (
   <div className="colgap">
     <div>
-      <Loader
-        data-color-role="brand-magenta"
-        size="3xlarge"
-        variant="neutral"
-      />
-      <Loader
-        data-color-role="brand-magenta"
-        size="3xlarge"
-        variant="inverted"
-      />
-      <Loader
-        data-color-role="brand-magenta"
-        size="3xlarge"
-        variant="interaction"
-      />
+      <Loader data-color="brand-magenta" size="3xlarge" variant="neutral" />
+      <Loader data-color="brand-magenta" size="3xlarge" variant="inverted" />
+      <Loader data-color="brand-magenta" size="3xlarge" variant="interaction" />
     </div>
     <div style={{ backgroundColor: "var(--ax-neutral-1000, #23262a)" }}>
-      <Loader
-        data-color-role="brand-magenta"
-        size="3xlarge"
-        variant="neutral"
-      />
-      <Loader
-        data-color-role="brand-magenta"
-        size="3xlarge"
-        variant="inverted"
-      />
-      <Loader
-        data-color-role="brand-magenta"
-        size="3xlarge"
-        variant="interaction"
-      />
+      <Loader data-color="brand-magenta" size="3xlarge" variant="neutral" />
+      <Loader data-color="brand-magenta" size="3xlarge" variant="inverted" />
+      <Loader data-color="brand-magenta" size="3xlarge" variant="interaction" />
     </div>
   </div>
 );

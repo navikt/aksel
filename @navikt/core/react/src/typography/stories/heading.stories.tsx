@@ -138,13 +138,13 @@ export const ColorRole: Story = {
       <Heading size="small" textColor="subtle">
         {lorem}
       </Heading>
-      <Heading size="small" data-color-role="brand-magenta">
+      <Heading size="small" data-color="brand-magenta">
         {lorem}
       </Heading>
-      <Heading size="small" data-color-role="brand-magenta" textColor="default">
+      <Heading size="small" data-color="brand-magenta" textColor="default">
         {lorem}
       </Heading>
-      <Heading size="small" data-color-role="brand-magenta" textColor="subtle">
+      <Heading size="small" data-color="brand-magenta" textColor="subtle">
         {lorem}
       </Heading>
     </VStack>

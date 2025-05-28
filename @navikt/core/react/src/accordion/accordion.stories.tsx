@@ -222,7 +222,7 @@ export const ColorRole: Story = {
         </Accordion>
         <h3>Magenta</h3>
         <h4>Magenta top level</h4>
-        <div data-color-role="brand-magenta">
+        <div data-color="brand-magenta">
           <Accordion>
             {[...Array(2)].map((_, y) => (
               <Item key={y} />
@@ -230,7 +230,7 @@ export const ColorRole: Story = {
           </Accordion>
         </div>
         <h4>Magenta component level</h4>
-        <Accordion data-color-role="brand-magenta">
+        <Accordion data-color="brand-magenta">
           {[...Array(2)].map((_, y) => (
             <Item key={y} />
           ))}

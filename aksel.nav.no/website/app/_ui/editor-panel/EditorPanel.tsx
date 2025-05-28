@@ -9,8 +9,7 @@ import {
   ThumbUpIcon,
 } from "@navikt/aksel-icons";
 import { Heading, Spacer } from "@navikt/ds-react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
-import { AkselBrandColors } from "@/app/theme";
+import { AkselColors } from "@navikt/ds-react/types/theme";
 import styles from "./EditorPanel.module.css";
 
 type EditorPanelProps = {
@@ -44,48 +43,48 @@ const VariantConfig: Record<
   {
     heading: string;
     icon: JSX.Element;
-    colorRole: GlobalColorRoles | AkselBrandColors;
+    color: AkselColors;
   }
 > = {
   tips: {
     heading: "Tips",
     icon: <LightBulbIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "brand-blue",
+    color: "brand-blue",
   },
   do: {
     heading: "Gjør",
     icon: <ThumbUpIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "brand-blue",
+    color: "brand-blue",
   },
   dont: {
     heading: "Unngå",
     icon: <ThumbDownIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "danger",
+    color: "danger",
   },
   caution: {
     heading: "Pass på",
     icon: <ExclamationmarkTriangleIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "warning",
+    color: "warning",
   },
   info: {
     heading: "Info",
     icon: <InformationSquareIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "brand-blue",
+    color: "brand-blue",
   },
   links: {
     heading: "Lenker",
     icon: <LinkIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "neutral",
+    color: "neutral",
   },
   attachment: {
     heading: "Vedlegg",
     icon: <DownloadIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "neutral",
+    color: "neutral",
   },
   "example-text": {
     heading: "Eksempeltekst",
     icon: <FileTextIcon aria-hidden fontSize="1.5rem" />,
-    colorRole: "neutral",
+    color: "neutral",
   },
 } as const;
 
@@ -98,7 +97,7 @@ function EditorPanel(props: EditorPanelProps) {
     <div
       data-block-margin="space-28"
       className={styles.editorPanel}
-      data-color-role={config.colorRole}
+      data-color={config.color}
     >
       <EditorPanelHeader
         variant={variant}

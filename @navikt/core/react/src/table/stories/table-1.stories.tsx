@@ -180,7 +180,7 @@ export const Selection = () => <SelectionTable />;
 export const SelectionSmall = () => <SelectionTable size="small" />;
 
 export const ColorRole = () => (
-  <div data-color-role="brand-magenta">
+  <div data-color="brand-magenta">
     <SelectionTable />
   </div>
 );
