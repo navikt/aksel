@@ -56,7 +56,7 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
   const imageUrl = urlForImage(data?.status?.bilde as Image)?.url();
 
   return (
-    <Box marginBlock="space-0 space-28" data-color-role={statusTag?.colorRole}>
+    <Box marginBlock="space-0 space-28" data-color={statusTag?.colorRole}>
       <DesignsystemetEyebrow type={data?._type} />
 
       <Box marginBlock="space-0 space-8" asChild>
@@ -80,11 +80,7 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
       )}
       <HStack gap="space-16" align="center" marginBlock="space-24 0">
         {statusTag && (
-          <Tag
-            variant="info"
-            size="xsmall"
-            data-color-role={statusTag.colorRole}
-          >
+          <Tag variant="info" size="xsmall" data-color={statusTag.colorRole}>
             {statusTag.text}
           </Tag>
         )}

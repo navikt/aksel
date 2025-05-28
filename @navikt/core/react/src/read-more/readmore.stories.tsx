@@ -83,6 +83,24 @@ export const BrandVolumeLow: Story = {
   },
 };
 
+export const ColorRole: Story = {
+  render: () => (
+    <VStack gap="4" data-color="brand-magenta">
+      <ReadMore size="large" header={Default.args?.header}>
+        {Content}
+      </ReadMore>
+      <ReadMore header={Default.args?.header}>{Content}</ReadMore>
+      <ReadMore size="small" header={Default.args?.header}>
+        {Content}
+      </ReadMore>
+    </VStack>
+  ),
+  args: {
+    ...Default.args,
+    open: true,
+  },
+};
+
 export const Chromatic: Story = {
   render: (...props) => {
     return (
@@ -115,6 +133,10 @@ export const Chromatic: Story = {
         <div>
           <h2>BrandVolumeLow</h2>
           {BrandVolumeLow?.render?.(...props)}
+        </div>
+        <div>
+          <h2>ColorRole</h2>
+          {ColorRole?.render?.(...props)}
         </div>
       </VStack>
     );

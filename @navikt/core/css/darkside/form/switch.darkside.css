@@ -68,11 +68,6 @@
   }
 }
 
-.aksel-switch__input:hover ~ .aksel-switch__label-wrapper,
-.aksel-switch__label-wrapper:hover {
-  color: var(--ax-text-accent-subtle);
-}
-
 .aksel-switch__input:disabled:hover ~ .aksel-switch__label-wrapper {
   color: inherit;
 }
@@ -89,20 +84,20 @@
   border: 2px solid var(--ax-border-neutral);
   transition-property: background-color, border-color;
   transition-duration: 100ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: ease;
 
   .aksel-switch--small > & {
     top: var(--ax-space-4);
   }
 
   .aksel-switch__input:checked ~ & {
-    background-color: var(--ax-bg-accent-strong-pressed);
-    border-color: var(--ax-bg-accent-strong-pressed);
+    background-color: var(--ax-bg-strong-pressed);
+    border-color: var(--ax-bg-strong-pressed);
   }
 
   .aksel-switch__input:hover:checked ~ & {
-    background-color: var(--ax-bg-accent-strong-hover);
-    border-color: var(--ax-bg-accent-strong-hover);
+    background-color: var(--ax-bg-strong-hover);
+    border-color: var(--ax-bg-strong-hover);
   }
 
   .aksel-switch__input:disabled ~ & {
@@ -111,8 +106,8 @@
   }
 
   .aksel-switch__input:checked:disabled ~ & {
-    background-color: var(--ax-bg-accent-strong-pressed);
-    border-color: var(--ax-bg-accent-strong-pressed);
+    background-color: var(--ax-bg-strong-pressed);
+    border-color: var(--ax-bg-strong-pressed);
   }
 
   .aksel-switch--standalone > .aksel-switch__input:focus ~ & {
@@ -139,7 +134,7 @@
   .aksel-switch__input:checked ~ .aksel-switch__track > & {
     background-color: var(--ax-bg-raised);
     transform: translateX(1.25rem);
-    color: var(--ax-text-accent-subtle);
+    color: var(--ax-text-subtle);
     width: 1.25rem;
     height: 1.25rem;
     left: 0;
@@ -207,11 +202,6 @@
     cursor: default;
   }
 
-  & > .aksel-switch__input:hover ~ .aksel-switch__label-wrapper,
-  & .aksel-switch__label-wrapper:hover {
-    color: var(--ax-text-neutral);
-  }
-
   & .aksel-switch__label {
     display: inline-flex;
   }
@@ -238,11 +228,6 @@
 
 /* ------------------------ Switch Forced colors mode ----------------------- */
 @media (forced-colors: active) {
-  .aksel-switch__input:hover ~ .aksel-switch__label-wrapper,
-  .aksel-switch__label-wrapper:hover {
-    color: highlight;
-  }
-
   .aksel-switch__thumb,
   .aksel-switch--readonly .aksel-switch__thumb {
     background-color: fieldtext !important;

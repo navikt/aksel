@@ -30,7 +30,7 @@ function GlobalSearchHitCollection({
         className={styles.searchSectionHeading}
         size="small"
         level="2"
-        data-color-role={doctypeToColorRole[tag ?? ""] ?? "neutral"}
+        data-color={doctypeToColorRole[tag ?? ""] ?? "neutral"}
       >
         {heading}
       </Heading>

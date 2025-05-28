@@ -76,7 +76,7 @@
 
   &:focus {
     outline: none;
-    background-color: var(--ax-bg-accent-moderate-hoverA);
+    background-color: var(--ax-bg-moderate-hoverA);
     color: var(--ax-text-neutral);
   }
 
@@ -98,7 +98,7 @@
   }
 
   &:focus {
-    background-color: var(--ax-bg-accent-moderate-hoverA);
+    background-color: var(--ax-bg-moderate-hoverA);
   }
 }
 

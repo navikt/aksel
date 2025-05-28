@@ -41,7 +41,7 @@ function GodPraksisFeedbackLogin() {
         href={`/oauth2/login?redirect=${pathname?.split(
           "#",
         )[0]}${encodeURIComponent("#scrollToFeedback")}`}
-        data-color-role="brand-blue"
+        data-color="brand-blue"
       >
         Logg inn med Nav SSO
       </Button>
@@ -168,7 +168,7 @@ function GodPraksisFeedbackForm({
         <Button
           onClick={() => setFormState({ value: "writing", error: null })}
           disabled={isPending}
-          data-color-role="brand-blue"
+          data-color="brand-blue"
         >
           Nytt innspill
         </Button>
@@ -220,11 +220,7 @@ function GodPraksisFeedbackForm({
           }}
         />
         <Box marginBlock="space-16 0" asChild>
-          <Button
-            type="submit"
-            data-color-role="brand-blue"
-            disabled={isPending}
-          >
+          <Button type="submit" data-color="brand-blue" disabled={isPending}>
             Send inn
           </Button>
         </Box>

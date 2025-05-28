@@ -227,6 +227,27 @@ export const Disabled = () => (
   </div>
 );
 
+export const ColorRole = () => (
+  <div className="colspan" data-color="brand-magenta">
+    <div>
+      <h2>Group</h2>
+      <Group />
+    </div>
+    <div>
+      <h2>GroupError</h2>
+      <GroupError />
+    </div>
+    <div>
+      <h2>Readonly</h2>
+      <Readonly />
+    </div>
+    <div>
+      <h2>Disabled</h2>
+      <Disabled />
+    </div>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <div>
@@ -265,6 +286,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Disabled</h2>
         <Disabled />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </div>
   ),

@@ -1,5 +1,5 @@
 .aksel-link {
-  color: var(--ax-text-accent-subtle);
+  color: var(--ax-text-subtle);
   display: inline-flex;
   align-items: center;
   gap: var(--ax-space-2);
@@ -16,6 +16,14 @@
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;
     border-radius: 1px;
+  }
+
+  &[data-color="neutral"] {
+    color: var(--ax-text-default);
+  }
+
+  &[data-variant="subtle"] {
+    color: var(--ax-text-subtle);
   }
 
   &.aksel-link--inline-text {
@@ -47,18 +55,6 @@
 .aksel-alert:not(.aksel-alert--inline),
 .aksel-confirmation-panel {
   & .aksel-link {
-    color: var(--ax-text-neutral);
+    color: var(--ax-text-default);
   }
-}
-
-.aksel-link--action {
-  color: var(--ax-text-accent-subtle);
-}
-
-.aksel-link--neutral {
-  color: var(--ax-text-neutral);
-}
-
-.aksel-link--subtle {
-  color: var(--ax-text-neutral-subtle);
 }

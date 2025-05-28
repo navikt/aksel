@@ -44,7 +44,7 @@
     background-color: transparent;
     color: var(--ax-text-subtle);
 
-    &[data-color-role="neutral"] {
+    &[data-color="neutral"] {
       color: var(--ax-text-default);
     }
 
@@ -62,7 +62,7 @@
       color: var(--ax-text-subtle);
       background-color: transparent;
 
-      &[data-color-role="neutral"] {
+      &[data-color="neutral"] {
         color: var(--ax-text-default);
       }
     }
@@ -72,7 +72,7 @@
     background-color: transparent;
     color: var(--ax-text-subtle);
 
-    &[data-color-role="neutral"] {
+    &[data-color="neutral"] {
       color: var(--ax-text-default);
     }
 
@@ -84,11 +84,16 @@
       background-color: var(--ax-bg-moderate-pressedA);
     }
 
+    &[data-pressed="true"] {
+      background-color: var(--ax-bg-strong-pressed);
+      color: var(--ax-text-contrast);
+    }
+
     &:is(:disabled, .aksel-button--disabled) {
       color: var(--ax-text-subtle);
       background-color: transparent;
 
-      &[data-color-role="neutral"] {
+      &[data-color="neutral"] {
         color: var(--ax-text-default);
       }
     }

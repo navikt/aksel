@@ -127,15 +127,6 @@ export const SpacingSmall: Story = {
   ),
 };
 
-export const Colors: Story = {
-  render: () => (
-    <VStack gap="2">
-      <BodyShort textColor="default">{lorem}</BodyShort>
-      <BodyShort textColor="subtle">{lorem}</BodyShort>
-    </VStack>
-  ),
-};
-
 export const Align: Story = {
   render: () => (
     <VStack gap="2">
@@ -164,6 +155,22 @@ export const OverrideTag: Story = {
   },
 };
 
+export const ColorRole: Story = {
+  render: () => (
+    <VStack gap="2">
+      <BodyShort textColor="default">{lorem}</BodyShort>
+      <BodyShort textColor="subtle">{lorem}</BodyShort>
+      <BodyShort data-color="brand-magenta">{lorem}</BodyShort>
+      <BodyShort data-color="brand-magenta" textColor="default">
+        {lorem}
+      </BodyShort>
+      <BodyShort data-color="brand-magenta" textColor="subtle">
+        {lorem}
+      </BodyShort>
+    </VStack>
+  ),
+};
+
 export const Chromatic: Story = {
   render: (...props) => (
     <div>
@@ -188,10 +195,7 @@ export const Chromatic: Story = {
         <h3>Spacing</h3>
         {SpacingSmall.render?.(...props)}
       </div>
-      <div>
-        <h2>Colors</h2>
-        {Colors.render?.(...props)}
-      </div>
+
       <div>
         <h2>Align</h2>
         {Align.render?.(...props)}
@@ -199,6 +203,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Override Tag</h2>
         {OverrideTag.render?.(...props)}
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        {ColorRole.render?.(...props)}
       </div>
     </div>
   ),

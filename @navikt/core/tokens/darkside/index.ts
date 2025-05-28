@@ -126,7 +126,7 @@ async function main() {
 /**
  * Creates smaller bundles for each role
  * ```
- * [data-color-role="accent"] {
+ * [data-color="accent"] {
  *   --ax-bg-soft: var(--ax-bg-accent-soft);
  *   --ax-bg-softA: var(--ax-bg-accent-softA);
  *   --ax-bg-moderate: var(--ax-bg-accent-moderate);
@@ -138,7 +138,7 @@ async function buildThemedRolesCSS() {
   /**
    * We set 'accent' as the default color palette.
    */
-  const rootSelector = `:root, [data-color-role=accent]`;
+  const rootSelector = `:root, [data-color=accent]`;
 
   for (const role of ColorRolesList) {
     const config = [
@@ -151,7 +151,7 @@ async function buildThemedRolesCSS() {
       /* mergeConfigs is strictly typed, so we use any until we potentially update types */
       tokens: tokensWithPrefix(mergeConfigs(config as any)),
       filename: `role-${role}.css`,
-      selector: role === "accent" ? rootSelector : `[data-color-role=${role}]`,
+      selector: role === "accent" ? rootSelector : `[data-color=${role}]`,
       filter: async (token) => token.type === "themed-role",
     });
   }

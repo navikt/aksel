@@ -77,7 +77,7 @@ function DesignsystemetOverviewCard({
   const statusTagWithoutStable = getStatusTag(page.status?.tag, true);
 
   return (
-    <LinkCard data-color-role={statusTag?.colorRole} autoLayout={false}>
+    <LinkCard data-color={statusTag?.colorRole} autoLayout={false}>
       <VStack gap="space-16">
         <Box position="relative" asChild>
           <Bleed marginInline="space-20" marginBlock="space-16 0">
@@ -89,7 +89,7 @@ function DesignsystemetOverviewCard({
                 <Tag
                   size="small"
                   variant="alt1-filled"
-                  data-color-role={statusTag?.colorRole}
+                  data-color={statusTag?.colorRole}
                 >
                   {statusTagWithoutStable.text}
                 </Tag>

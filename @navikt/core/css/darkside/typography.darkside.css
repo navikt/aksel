@@ -257,6 +257,24 @@
   width: 1px !important;
 }
 
+[data-color] {
+  &:where(.aksel-heading, .aksel-ingress, .aksel-body-long, .aksel-body-short, .aksel-label, .aksel-detail) {
+    color: var(--ax-text-default);
+  }
+}
+
+.aksel-typo--color-default {
+  color: var(--ax-text-neutral);
+
+  &[data-color] {
+    color: var(--ax-text-default);
+  }
+}
+
 .aksel-typo--color-subtle {
   color: var(--ax-text-neutral-subtle);
+
+  &[data-color] {
+    color: var(--ax-text-subtle);
+  }
 }

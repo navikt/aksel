@@ -14,7 +14,7 @@
   display: flex;
   align-items: flex-start;
   gap: var(--ax-space-4);
-  color: var(--ax-text-accent-subtle);
+  color: var(--ax-text-subtle);
   padding-inline: var(--__axc-read-more-pi-start) var(--__axc-read-more-pi-end);
   padding-block: var(--__axc-read-more-pb);
   text-align: start;
@@ -41,12 +41,12 @@
 
 .aksel-read-more[data-volume="high"] {
   & .aksel-read-more__button {
-    background-color: var(--ax-bg-accent-moderate);
+    background-color: var(--ax-bg-moderate);
     border-radius: var(--ax-radius-full);
 
     &:hover {
-      background-color: var(--ax-bg-accent-moderate-hoverA);
-      color: var(--ax-text-accent);
+      background-color: var(--ax-bg-moderate-hoverA);
+      color: var(--ax-text-default);
     }
   }
 

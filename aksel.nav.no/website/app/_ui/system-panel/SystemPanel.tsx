@@ -60,7 +60,7 @@ function SystemPanel(props: SystemPanelProps) {
     <div
       data-block-margin="space-28"
       className={styles.systemPanel}
-      data-color-role={config.colorRole}
+      data-color={config.colorRole}
     >
       <div className={styles.systemPanelContent}>
         <SystemPanelHeader variant={variant} />

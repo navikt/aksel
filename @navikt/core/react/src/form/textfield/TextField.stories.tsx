@@ -104,6 +104,16 @@ export const Readonly = () => {
   );
 };
 
+export const ColorRole = () => {
+  return (
+    <div className="colgap" data-color="brand-magenta">
+      <Description />
+      <WithError />
+      <Disabled />
+    </div>
+  );
+};
+
 export const Chromatic: Story = {
   render: () => (
     <div>
@@ -134,6 +144,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Readonly</h2>
         <Readonly />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </div>
   ),

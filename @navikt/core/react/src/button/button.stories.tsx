@@ -156,7 +156,7 @@ export const DisabledAsLink: Story = {
   render: () => <ButtonGrid disabled href="#" as="a" />,
 };
 
-export const ButtonWithColorRoles: Story = {
+export const ColorRoles: Story = {
   render: () => (
     <VStack gap="2">
       <HStack gap="2">
@@ -170,18 +170,25 @@ export const ButtonWithColorRoles: Story = {
           Button
         </Button>
       </HStack>
+      <HStack gap="2" data-color="danger">
+        <Button variant="primary" icon={<StarIcon />}>
+          Button
+        </Button>
+        <Button variant="secondary" icon={<StarIcon />}>
+          Button
+        </Button>
+        <Button variant="tertiary" icon={<StarIcon />}>
+          Button
+        </Button>
+      </HStack>
       <HStack gap="2">
-        <Button data-color-role="danger" variant="primary" icon={<StarIcon />}>
+        <Button data-color="danger" variant="primary" icon={<StarIcon />}>
           Button
         </Button>
-        <Button
-          data-color-role="danger"
-          variant="secondary"
-          icon={<StarIcon />}
-        >
+        <Button data-color="danger" variant="secondary" icon={<StarIcon />}>
           Button
         </Button>
-        <Button data-color-role="danger" variant="tertiary" icon={<StarIcon />}>
+        <Button data-color="danger" variant="tertiary" icon={<StarIcon />}>
           Button
         </Button>
       </HStack>
