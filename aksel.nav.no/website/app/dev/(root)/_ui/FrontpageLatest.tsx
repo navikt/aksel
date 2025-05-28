@@ -6,7 +6,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { BoxNew, Heading } from "@navikt/ds-react";
 import Card, { ArticleT } from "./FrontpageMasonryCard";
 import { Highlight } from "./HighlightedArticle";
-import styles from "./landingpage.module.css";
+import styles from "./frontpage.module.css";
 
 export type LatestT = {
   _type: "nytt_fra_aksel";

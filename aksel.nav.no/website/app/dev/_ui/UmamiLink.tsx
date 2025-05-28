@@ -3,7 +3,7 @@
 import NextLink from "next/link";
 import { Link, LinkProps } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import styles from "./landingpage.module.css";
+import styles from "./UmamiLink.module.css";
 
 export const UmamiLink = ({ ...props }: LinkProps & { umamiKilde: string }) => {
   return (
@@ -15,7 +15,7 @@ export const UmamiLink = ({ ...props }: LinkProps & { umamiKilde: string }) => {
           url: props.href!,
         })
       }
-      className={styles.godPraksisCardItemLink}
+      className={styles.umamiLink}
       as={NextLink}
     />
   );

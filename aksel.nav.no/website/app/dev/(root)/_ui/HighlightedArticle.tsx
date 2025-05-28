@@ -8,7 +8,7 @@ import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { getAuthors, getImage } from "@/utils";
 import { ArticleT } from "./FrontpageMasonryCard";
 import { BetaTag, Tag } from "./FrontpageTag";
-import styles from "./landingpage.module.css";
+import styles from "./frontpage.module.css";
 
 export const Highlight = ({
   article,

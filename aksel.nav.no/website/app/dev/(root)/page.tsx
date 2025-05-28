@@ -17,13 +17,13 @@ import {
 } from "../../_sanity/queries";
 import Footer from "../../_ui/footer/Footer";
 import { Header } from "../../_ui/header/Header";
-import "../globals.css";
+import "../../globals.css";
 import { PauseAnimationProvider } from "./_ui/AnimationStopContext";
 import { Hero } from "./_ui/FrontpageHero";
 import { FrontpageLatest } from "./_ui/FrontpageLatest";
 import { GpFrontpageCard } from "./_ui/GpFrontpageCard";
 import { HeroGradientBG } from "./_ui/HeroGradientBG";
-import styles from "./_ui/landingpage.module.css";
+import styles from "./_ui/frontpage.module.css";
 
 const Page = async () => {
   const [{ data: tema }, { data: latest }] = await Promise.all([

@@ -10,7 +10,7 @@ import {
   LinkCardDescription,
   LinkCardTitle,
 } from "../../(god-praksis)/_ui/link-card/LinkCard";
-import styles from "./landingpage.module.css";
+import styles from "../_ui/frontpage.module.css";
 import { useShouldStopAnimation } from "./useShouldStopAnimation";
 
 const LinkCards = ({

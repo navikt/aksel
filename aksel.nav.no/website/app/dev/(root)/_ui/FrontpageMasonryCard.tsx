@@ -13,7 +13,7 @@ import {
   LinkCardTitle,
 } from "../../(god-praksis)/_ui/link-card/LinkCard";
 import { BetaTag, Tag } from "./FrontpageTag";
-import styles from "./landingpage.module.css";
+import styles from "./frontpage.module.css";
 
 export type ArticleT = {
   _key: string;
