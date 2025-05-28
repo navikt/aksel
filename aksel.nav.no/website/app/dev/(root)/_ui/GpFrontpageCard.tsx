@@ -31,6 +31,7 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
       paddingInline={{ xs: "space-8", sm: "space-24" }}
       paddingBlock="space-16"
       align="center"
+      as="li"
     >
       <BoxNew
         position="relative"
