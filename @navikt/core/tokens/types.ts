@@ -1,14 +1,5 @@
 import { spaceInPixels } from "./internal-types";
 
-export type {
-  AkselColorThemes,
-  AkselColors,
-  AkselMainColors,
-  AkselStatusColors,
-  AkselBrandColors,
-  AkselMetaColors,
-};
-
 /* --------------------------------- Themes --------------------------------- */
 type AkselColorThemes = "light" | "dark";
 
@@ -31,22 +22,31 @@ type AkselColors =
   | AkselBrandColors
   | AkselMetaColors;
 
-/* ----------------------------- Semantic tokens ---------------------------- */
-export type StaticDefaultBgKeys =
+export type {
+  AkselColorThemes,
+  AkselColors,
+  AkselMainColors,
+  AkselStatusColors,
+  AkselBrandColors,
+  AkselMetaColors,
+};
+
+/* --------------------------- Backgrounds tokens --------------------------- */
+type AkselBaseBackgroundTokens =
   | "default"
   | "input"
   | "raised"
   | "sunken"
   | "overlay";
 
-export type StaticBgKeys =
+type AkselColoredStaticBackgroundTokens =
   | `${AkselColors}-soft`
   | `${AkselColors}-softA`
   | `${AkselColors}-moderate`
   | `${AkselColors}-moderateA`
   | `${AkselColors}-strong`;
 
-export type StatefulBgKeys =
+type AkselColoredStatefulBackgroundTokens =
   | `${AkselColors}-moderate-hover`
   | `${AkselColors}-moderate-hoverA`
   | `${AkselColors}-moderate-pressed`
@@ -54,29 +54,51 @@ export type StatefulBgKeys =
   | `${AkselColors}-strong-hover`
   | `${AkselColors}-strong-pressed`;
 
-export type DefaultTextColorKeys = "logo";
+export type {
+  AkselBaseBackgroundTokens,
+  AkselColoredStaticBackgroundTokens,
+  AkselColoredStatefulBackgroundTokens,
+};
 
-export type TextColorKeys =
+/* ------------------------------- Text tokens ------------------------------ */
+type AkselBaseTextTokens = "logo";
+
+type AkselColoredTextTokens =
   | AkselColors
   | `${AkselColors}-subtle`
   | `${AkselColors}-decoration`
   | `${AkselColors}-contrast`;
 
-export type BorderColorKeys = "focus";
+export type { AkselBaseTextTokens, AkselColoredTextTokens };
 
-export type BorderColorWithRoleKeys =
+/* ------------------------------ Border tokens ----------------------------- */
+type AkselBaseBorderTokens = "focus";
+
+type AkselColoredBorderTokens =
   | AkselColors
   | `${AkselColors}-subtle`
   | `${AkselColors}-subtleA`
   | `${AkselColors}-strong`;
 
-export type SpaceKeys = `space-${(typeof spaceInPixels)[number]}`;
+export type { AkselBaseBorderTokens, AkselColoredBorderTokens };
 
-export type ShadowKeys = "dialog";
+/* ------------------------------ Space tokens ------------------------------ */
+type AkselSpaceTokens = `space-${(typeof spaceInPixels)[number]}`;
 
-export type BorderRadiusKeys = "2" | "4" | "8" | "12" | "full";
+export type { AkselSpaceTokens };
 
-export type BreakPointKeys =
+/* ------------------------------ Shadow tokens ----------------------------- */
+type AkselShadowTokens = "dialog";
+
+export type { AkselShadowTokens };
+
+/* ------------------------------ Border Radius tokens --------------------- */
+type AkselBorderRadiusTokens = "2" | "4" | "8" | "12" | "full";
+
+export type { AkselBorderRadiusTokens };
+
+/* ------------------------------ Breakpoints tokens ------------------------ */
+type AkselBreakpointTokens =
   | "xs"
   | "sm"
   | "sm-down"
@@ -89,52 +111,26 @@ export type BreakPointKeys =
   | "2xl"
   | "2xl-down";
 
-/* Typo-tokens */
-export type FontFamilyKeys = "family";
+export type { AkselBreakpointTokens };
 
-export type FontSizeKeys =
-  | "size-heading-2xlarge"
-  | "size-heading-xlarge"
-  | "size-heading-large"
-  | "size-heading-medium"
-  | "size-heading-small"
-  | "size-heading-xsmall"
-  | "size-xlarge"
-  | "size-large"
-  | "size-medium"
-  | "size-small";
-
-export type FontLineHeightKeys =
-  | "line-height-heading-2xlarge"
-  | "line-height-heading-xlarge"
-  | "line-height-heading-large"
-  | "line-height-heading-medium"
-  | "line-height-heading-small"
-  | "line-height-heading-xsmall"
-  | "line-height-xlarge"
-  | "line-height-large"
-  | "line-height-medium";
-
-export type FontWeightKeys = "weight-bold" | "weight-regular";
-
-/* Legacy tokens */
-export type LegacyBorderRadiusKeys =
+/* ------------------------------ Legacy tokens ----------------------------- */
+type AkselLegacyBorderRadiusTokens =
   | "small"
   | "medium"
   | "large"
   | "xlarge"
   | "full";
 
-export type LegacyShadowKeys =
+type AkselLegacyShadowTokens =
   | "xsmall"
   | "small"
   | "medium"
   | "large"
   | "xlarge";
 
-export type LegacyBgColorKeys = "bg-default" | "bg-subtle";
+type AkselLegacyBgColorTokens = "bg-default" | "bg-subtle";
 
-export type LegacySurfaceColorKeys =
+type AkselLegacySurfaceColorTokens =
   | "surface-default"
   | "surface-selected"
   | "surface-subtle"
@@ -171,7 +167,7 @@ export type LegacySurfaceColorKeys =
   | "surface-alt-3-strong"
   | "surface-alt-3";
 
-export type LegacyBorderColorKeys =
+type AkselLegacyBorderColorTokens =
   | "border-default"
   | "border-strong"
   | "border-divider"
@@ -192,7 +188,7 @@ export type LegacyBorderColorKeys =
   | "border-alt-2"
   | "border-alt-3";
 
-export type LegacySpacingKeys =
+type AkselLegacySpacingTokens =
   | "0"
   | "05"
   | "1"
@@ -214,3 +210,12 @@ export type LegacySpacingKeys =
   | "20"
   | "24"
   | "32";
+
+export type {
+  AkselLegacyBorderRadiusTokens,
+  AkselLegacyShadowTokens,
+  AkselLegacyBgColorTokens,
+  AkselLegacySurfaceColorTokens,
+  AkselLegacyBorderColorTokens,
+  AkselLegacySpacingTokens,
+};
