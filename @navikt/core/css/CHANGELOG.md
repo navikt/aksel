@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.22.1
+
+### Patch Changes
+
+- Darkside: Let data-color-role override variant defined in Tag-component. ([#3795](https://github.com/navikt/aksel/pull/3795))
+
 ## 7.22.0
 
 ### Minor Changes

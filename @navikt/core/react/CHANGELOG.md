@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 7.22.1
+
+### Patch Changes
+
+- Timeline: Reverted regression that lead to 'aria-controls' being ignored when passed to Pin or Period. ([#3828](https://github.com/navikt/aksel/pull/3828))
+
+- Darkside: Let data-color-role override variant defined in Tag-component. ([#3795](https://github.com/navikt/aksel/pull/3795))
+
+- Timeline: Removed 'aria-haspopup' from pins and periods. ([#3834](https://github.com/navikt/aksel/pull/3834))
+
+- ErrorSummary: Heading size is now 'xsmall' for non-medium sizes and remains 'small' when size='medium'. ([#3806](https://github.com/navikt/aksel/pull/3806))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.22.1
+  - @navikt/aksel-icons@7.22.1
+
 ## 7.22.0
 
 ### Minor Changes
