@@ -1,5 +1,6 @@
 import Color from "colorjs.io";
-import { AkselColors, ColorTheme, GlobalColorScale } from "../../../types";
+import type { GlobalColorScale } from "../../../internal-types";
+import { AkselColorThemes, AkselColors } from "../../../types";
 import { GlobalColorEntry } from "../../tokens.util";
 import { GlobalConfigWithoutAlpha } from "./colors.types";
 import { semanticRootTokens } from "./semantic-root.tokens";
@@ -22,7 +23,7 @@ export function globalConfigWithAlphaTokens({
   theme,
 }: {
   config: GlobalConfigWithoutAlpha;
-  theme: ColorTheme;
+  theme: AkselColorThemes;
 }): GlobalConfigWithAlpha {
   const localConfig = structuredClone(globalConfig) as GlobalConfigWithAlpha;
 
@@ -51,7 +52,7 @@ export function globalConfigWithAlphaTokens({
   return localConfig;
 }
 
-function createAlphaColor(targetColor: string, theme: ColorTheme) {
+function createAlphaColor(targetColor: string, theme: AkselColorThemes) {
   const backgroundColor = semanticRootTokens(theme).bg.default.value;
 
   const [r, g, b, a] = getAlphaColor(

@@ -1,4 +1,5 @@
-import { AkselColors, GlobalColorScale } from "../../../types";
+import type { GlobalColorScale } from "../../../internal-types";
+import type { AkselColors } from "../../../types";
 import { GlobalColorEntry } from "../../tokens.util";
 
 export type GlobalConfigWithAlpha = Record<

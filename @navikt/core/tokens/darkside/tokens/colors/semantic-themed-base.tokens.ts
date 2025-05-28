@@ -1,4 +1,4 @@
-import { type SemanticColorRoles } from "../../../types";
+import type { AkselColors } from "../../../types";
 
 /**
  * This utility sets the semantic "role"-tokens for a given color role on the "base"-layer.
@@ -18,7 +18,7 @@ import { type SemanticColorRoles } from "../../../types";
  * }
  * ```
  */
-export function semanticThemedBaseTokens(role: SemanticColorRoles) {
+export function semanticThemedBaseTokens(role: AkselColors) {
   return {
     bg: {
       soft: {

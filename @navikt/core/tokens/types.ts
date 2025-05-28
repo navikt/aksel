@@ -29,31 +29,7 @@ type AkselColors =
   | AkselBrandColors
   | AkselMetaColors;
 
-export type SemanticColorRoles = AkselColors;
-
-export type GlobalColorScale =
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900"
-  | "1000"
-  | "000"
-  | "100A"
-  | "200A"
-  | "300A"
-  | "400A";
-
-export type GlobalColorKeys =
-  | `${Extract<AkselColors, "neutral">}-${Extract<GlobalColorScale, "000">}`
-  | `${AkselColors}-${Exclude<GlobalColorScale, "000">}`;
-
 /* ----------------------------- Semantic tokens ---------------------------- */
-
 export type StaticDefaultBgKeys =
   | "default"
   | "input"
@@ -62,35 +38,35 @@ export type StaticDefaultBgKeys =
   | "overlay";
 
 export type StaticBgKeys =
-  | `${SemanticColorRoles}-soft`
-  | `${SemanticColorRoles}-softA`
-  | `${SemanticColorRoles}-moderate`
-  | `${SemanticColorRoles}-moderateA`
-  | `${SemanticColorRoles}-strong`;
+  | `${AkselColors}-soft`
+  | `${AkselColors}-softA`
+  | `${AkselColors}-moderate`
+  | `${AkselColors}-moderateA`
+  | `${AkselColors}-strong`;
 
 export type StatefulBgKeys =
-  | `${SemanticColorRoles}-moderate-hover`
-  | `${SemanticColorRoles}-moderate-hoverA`
-  | `${SemanticColorRoles}-moderate-pressed`
-  | `${SemanticColorRoles}-moderate-pressedA`
-  | `${SemanticColorRoles}-strong-hover`
-  | `${SemanticColorRoles}-strong-pressed`;
+  | `${AkselColors}-moderate-hover`
+  | `${AkselColors}-moderate-hoverA`
+  | `${AkselColors}-moderate-pressed`
+  | `${AkselColors}-moderate-pressedA`
+  | `${AkselColors}-strong-hover`
+  | `${AkselColors}-strong-pressed`;
 
 export type DefaultTextColorKeys = "logo";
 
 export type TextColorKeys =
-  | SemanticColorRoles
-  | `${SemanticColorRoles}-subtle`
-  | `${SemanticColorRoles}-decoration`
-  | `${SemanticColorRoles}-contrast`;
+  | AkselColors
+  | `${AkselColors}-subtle`
+  | `${AkselColors}-decoration`
+  | `${AkselColors}-contrast`;
 
 export type BorderColorKeys = "focus";
 
 export type BorderColorWithRoleKeys =
-  | SemanticColorRoles
-  | `${SemanticColorRoles}-subtle`
-  | `${SemanticColorRoles}-subtleA`
-  | `${SemanticColorRoles}-strong`;
+  | AkselColors
+  | `${AkselColors}-subtle`
+  | `${AkselColors}-subtleA`
+  | `${AkselColors}-strong`;
 
 export const spaceInPixels = [
   0, 1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 80, 96,

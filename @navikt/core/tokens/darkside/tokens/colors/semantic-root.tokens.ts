@@ -1,6 +1,6 @@
 import {
+  type AkselColorThemes,
   type BorderColorKeys,
-  type ColorTheme,
   type DefaultTextColorKeys,
   type StaticDefaultBgKeys,
 } from "../../../types";
@@ -10,7 +10,7 @@ import { type StyleDictionaryToken } from "../../tokens.util";
  * Static root-layer for semantic tokens.
  * These tokens are the  "root"-layer in the sense that they are the only "unique" tokens in the semantic layer.
  */
-export function semanticRootTokens(theme: ColorTheme) {
+export function semanticRootTokens(theme: AkselColorThemes) {
   return {
     text: {
       logo: {
