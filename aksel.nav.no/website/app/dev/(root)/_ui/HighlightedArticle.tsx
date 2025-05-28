@@ -1,5 +1,5 @@
 import cl from "clsx";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import NextLink from "next/link";
 import { BodyLong, BodyShort, HStack, Heading, Link } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
@@ -67,6 +67,7 @@ export const Highlight = ({
               [`${styles.betaHue}`]: article?.status?.tag === "beta",
             })}
             decoding="auto"
+            alt={`thumbnail for ${article.heading}`}
           />
         ) : seoImageUrl ? (
           <Image
@@ -81,6 +82,7 @@ export const Highlight = ({
               [`${styles.betaHue}`]: article?.status?.tag === "beta",
             })}
             decoding="auto"
+            alt={`thumbnail for ${article.heading}`}
           />
         ) : (
           <Image
@@ -90,6 +92,7 @@ export const Highlight = ({
             aria-hidden
             className={styles.sectionImage}
             decoding="auto"
+            alt={`thumbnail for ${article.heading}`}
           />
         )}
       </div>
