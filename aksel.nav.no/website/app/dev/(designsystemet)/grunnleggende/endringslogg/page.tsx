@@ -9,14 +9,38 @@ import ChronologicalList from "./_ui/ChronologicalList";
 import FilterChips from "./_ui/FilterChips";
 import SearchField from "./_ui/SearchField";
 
-export default async function Page() {
-  const year = new Date().getFullYear();
-  const { data: logEntries } = await sanityFetch({
-    query: defineQuery(
-      `*[_type == "ds_endringslogg_artikkel" && endringsdato >= $year && endringsdato <= $nextYear]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold} | order(endringsdato desc)`,
-    ),
-    params: { year: `${year}`, nextYear: `${year + 1}` },
-  });
+const startYear = 2022;
+const currentYear = new Date().getFullYear();
+const years = Array.from(
+  { length: currentYear + 1 - startYear },
+  (_, value) => startYear + value,
+).reverse();
+const categories = ["Kode", "Design", "Dokumentasjon"];
+
+export default async function Page({ searchParams }) {
+  const { arstall: paramYear, kategori: paramCategory } = await searchParams;
+  const filterYear = years.includes(+paramYear)
+    ? +paramYear
+    : paramYear === "ingen"
+      ? null
+      : currentYear;
+  const filterCategory = categories.includes(paramCategory)
+    ? paramCategory
+    : null;
+  const { data: logEntries } = await sanityFetch(
+    filterYear
+      ? {
+          query: defineQuery(
+            `*[_type == "ds_endringslogg_artikkel" && endringsdato >= $year && endringsdato <= $nextYear]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold} | order(endringsdato desc)`,
+          ),
+          params: { year: `${filterYear}`, nextYear: `${filterYear + 1}` },
+        }
+      : {
+          query: defineQuery(
+            `*[_type == "ds_endringslogg_artikkel"]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold} | order(endringsdato desc)`,
+          ),
+        },
+  );
   // Bump headings to next heading-level for changelog list
   logEntries.forEach((logEntry) => {
     if (logEntry.innhold?.length > 0)
@@ -44,7 +68,14 @@ export default async function Page() {
         </Heading>
         <VStack gap="space-24" paddingBlock="space-12 space-0">
           <SearchField />
-          <FilterChips />
+          <FilterChips
+            years={years}
+            selectedYear={filterYear}
+            categories={categories}
+            selectedCategory={filterCategory}
+
+            // setSelectedYears={setSelectedYears}
+          />
         </VStack>
         <VStack paddingBlock="space-32 space-0">
           {logEntries?.length > 0 ? (
