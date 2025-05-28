@@ -1,4 +1,4 @@
-import { AkselColorTokens } from "./types";
+import { AkselColorTokens, AkselSpaceTokens } from "./types";
 
 type GlobalColorScale =
   | "100"
@@ -24,10 +24,34 @@ type GlobalColorKeys =
     >}`
   | `${AkselColorTokens}-${Exclude<GlobalColorScale, "000">}`;
 
-const spaceInPixels = [
-  0, 1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 80, 96,
-  128,
-] as const;
+type ExtractNumber<T> = T extends `space-${infer N extends number}` ? N : never;
+
+const spaceObject: Record<ExtractNumber<AkselSpaceTokens>, any> = {
+  "0": "",
+  "1": "",
+  "2": "",
+  "4": "",
+  "6": "",
+  "8": "",
+  "12": "",
+  "16": "",
+  "20": "",
+  "24": "",
+  "28": "",
+  "32": "",
+  "36": "",
+  "40": "",
+  "44": "",
+  "48": "",
+  "56": "",
+  "64": "",
+  "72": "",
+  "80": "",
+  "96": "",
+  "128": "",
+};
+
+const spaceInPixels = Object.keys(spaceObject).map(Number);
 
 /* ------------------------------ Font tokens ------------------------------- */
 type FontFamilyKeys = "family";

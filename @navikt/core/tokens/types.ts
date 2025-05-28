@@ -1,5 +1,3 @@
-import { spaceInPixels } from "./internal-types";
-
 /* --------------------------------- Themes --------------------------------- */
 type AkselColorThemes = "light" | "dark";
 
@@ -83,7 +81,29 @@ type AkselColoredBorderTokens =
 export type { AkselBaseBorderTokens, AkselColoredBorderTokens };
 
 /* ------------------------------ Space tokens ------------------------------ */
-type AkselSpaceTokens = `space-${(typeof spaceInPixels)[number]}`;
+type AkselSpaceTokens =
+  | `space-0`
+  | "space-1"
+  | "space-2"
+  | "space-4"
+  | "space-6"
+  | "space-8"
+  | "space-12"
+  | "space-16"
+  | "space-20"
+  | "space-24"
+  | "space-28"
+  | "space-32"
+  | "space-36"
+  | "space-40"
+  | "space-44"
+  | "space-48"
+  | "space-56"
+  | "space-64"
+  | "space-72"
+  | "space-80"
+  | "space-96"
+  | "space-128";
 
 export type { AkselSpaceTokens };
 
