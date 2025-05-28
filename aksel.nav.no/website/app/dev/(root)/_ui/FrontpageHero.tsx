@@ -93,9 +93,9 @@ export const Hero = () => {
             size="small"
             icon={
               pause ? (
-                <PlayFillIcon title="Start animasjon" />
+                <PlayFillIcon title="Start" />
               ) : (
-                <PauseFillIcon title="Stopp animasjon" />
+                <PauseFillIcon title="Stopp" />
               )
             }
             onClick={() => {
