@@ -2,7 +2,7 @@
 import type { Image } from "sanity";
 import { HandKnotIcon, ThumbDownIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { BodyShort, Box, HGrid } from "@navikt/ds-react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
+import { AkselColors } from "@navikt/ds-react/types/theme";
 import { Do_dont_block } from "@/app/_sanity/query-types";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { urlForImage } from "@/app/_sanity/utils";
@@ -58,7 +58,7 @@ function DoDont(props: ExtractPortableComponentProps<"do_dont">) {
 
 const NotchConfig: Record<
   NonNullable<Do_dont_block["variant"]>,
-  { icon: typeof HandKnotIcon; text: string; role: GlobalColorRoles }
+  { icon: typeof HandKnotIcon; text: string; role: AkselColors }
 > = {
   do: {
     icon: ThumbUpIcon,

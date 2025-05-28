@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { AkselColors } from "../types";
 import { Label } from "../typography";
 import { useId } from "../util";
 import {
@@ -134,7 +134,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
 
 function variantToColor(
   variant?: ToggleGroupProps["variant"],
-): GlobalColorRoles | undefined {
+): AkselColors | undefined {
   switch (variant) {
     case "action":
       return "accent";

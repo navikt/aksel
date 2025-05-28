@@ -3876,6 +3876,7 @@ __metadata:
     aksel: "workspace:^"
     clsx: "npm:^2.1.0"
     concurrently: "npm:9.0.1"
+    copyfiles: "npm:^2.4.1"
     date-fns: "npm:^4.0.0"
     fast-glob: "npm:3.2.11"
     jscodeshift: "npm:^0.15.1"

@@ -1,11 +1,7 @@
 import "react";
-import type { GlobalColorRoles } from "@navikt/ds-tokens/types";
-
-type AkselBrandColors = "aksel-brand-teal" | "aksel-brand-pink";
 
 declare module "react" {
   interface HTMLAttributes {
-    "data-color"?: GlobalColorRoles | AkselBrandColors;
     /**
      * Standarized margin for PortableText blocks.
      */
