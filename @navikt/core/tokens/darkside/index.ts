@@ -2,7 +2,7 @@ import fs from "fs";
 import { bundle } from "lightningcss";
 import StyleDictionary from "style-dictionary";
 import { DesignTokens, Filter } from "style-dictionary/types";
-import { AkselColors } from "../types";
+import { AkselColorTokens } from "../types";
 import {
   formatCJS,
   formatDOCS,
@@ -141,7 +141,7 @@ async function buildThemedRolesCSS() {
   const rootSelector = `:root, [data-color=accent]`;
 
   /* To avoid having to export this const from the "global" types, we declare it here locally so users dont get internal types */
-  const colors: Record<AkselColors, string> = {
+  const colors: Record<AkselColorTokens, string> = {
     neutral: "",
     accent: "",
     "brand-beige": "",
@@ -155,7 +155,7 @@ async function buildThemedRolesCSS() {
     "meta-lime": "",
   };
 
-  for (const role of Object.keys(colors) as AkselColors[]) {
+  for (const role of Object.keys(colors) as AkselColorTokens[]) {
     const config = [
       globalLightTokens,
       semanticRoleConfig[role],

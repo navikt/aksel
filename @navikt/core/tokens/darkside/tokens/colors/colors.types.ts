@@ -1,18 +1,18 @@
 import type { GlobalColorScale } from "../../../internal-types";
-import type { AkselColors } from "../../../types";
+import type { AkselColorTokens } from "../../../types";
 import { GlobalColorEntry } from "../../tokens.util";
 
 export type GlobalConfigWithAlpha = Record<
-  Extract<AkselColors, "neutral">,
+  Extract<AkselColorTokens, "neutral">,
   Record<GlobalColorScale, GlobalColorEntry>
 > &
   Record<
-    Exclude<AkselColors, "neutral">,
+    Exclude<AkselColorTokens, "neutral">,
     Record<Exclude<GlobalColorScale, "000">, GlobalColorEntry>
   >;
 
 export type GlobalConfigWithoutAlpha = Record<
-  AkselColors,
+  AkselColorTokens,
   Record<
     Exclude<GlobalColorScale, "000" | "100A" | "200A" | "300A" | "400A">,
     GlobalColorEntry

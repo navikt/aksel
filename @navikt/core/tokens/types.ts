@@ -4,31 +4,31 @@ import { spaceInPixels } from "./internal-types";
 type AkselColorThemes = "light" | "dark";
 
 /* ------------------------------ Main colors ----------------------------- */
-type AkselMainColors = "neutral" | "accent";
+type AkselMainColorTokens = "neutral" | "accent";
 
 /* ------------------------------ Status colors ----------------------------- */
-type AkselStatusColors = "info" | "success" | "warning" | "danger";
+type AkselStatusColorTokens = "info" | "success" | "warning" | "danger";
 
 /* ------------------------------ Brand colors ------------------------------ */
-type AkselBrandColors = "brand-magenta" | "brand-beige" | "brand-blue";
+type AkselBrandColorTokens = "brand-magenta" | "brand-beige" | "brand-blue";
 
 /* ------------------------------ Meta colors ------------------------------ */
-type AkselMetaColors = "meta-purple" | "meta-lime";
+type AkselMetaColorTokens = "meta-purple" | "meta-lime";
 
 /* ------------------------------- All colors ------------------------------- */
-type AkselColors =
-  | AkselMainColors
-  | AkselStatusColors
-  | AkselBrandColors
-  | AkselMetaColors;
+type AkselColorTokens =
+  | AkselMainColorTokens
+  | AkselStatusColorTokens
+  | AkselBrandColorTokens
+  | AkselMetaColorTokens;
 
 export type {
   AkselColorThemes,
-  AkselColors,
-  AkselMainColors,
-  AkselStatusColors,
-  AkselBrandColors,
-  AkselMetaColors,
+  AkselColorTokens,
+  AkselMainColorTokens,
+  AkselStatusColorTokens,
+  AkselBrandColorTokens,
+  AkselMetaColorTokens,
 };
 
 /* --------------------------- Backgrounds tokens --------------------------- */
@@ -40,19 +40,19 @@ type AkselBaseBackgroundTokens =
   | "overlay";
 
 type AkselColoredStaticBackgroundTokens =
-  | `${AkselColors}-soft`
-  | `${AkselColors}-softA`
-  | `${AkselColors}-moderate`
-  | `${AkselColors}-moderateA`
-  | `${AkselColors}-strong`;
+  | `${AkselColorTokens}-soft`
+  | `${AkselColorTokens}-softA`
+  | `${AkselColorTokens}-moderate`
+  | `${AkselColorTokens}-moderateA`
+  | `${AkselColorTokens}-strong`;
 
 type AkselColoredStatefulBackgroundTokens =
-  | `${AkselColors}-moderate-hover`
-  | `${AkselColors}-moderate-hoverA`
-  | `${AkselColors}-moderate-pressed`
-  | `${AkselColors}-moderate-pressedA`
-  | `${AkselColors}-strong-hover`
-  | `${AkselColors}-strong-pressed`;
+  | `${AkselColorTokens}-moderate-hover`
+  | `${AkselColorTokens}-moderate-hoverA`
+  | `${AkselColorTokens}-moderate-pressed`
+  | `${AkselColorTokens}-moderate-pressedA`
+  | `${AkselColorTokens}-strong-hover`
+  | `${AkselColorTokens}-strong-pressed`;
 
 export type {
   AkselBaseBackgroundTokens,
@@ -64,10 +64,10 @@ export type {
 type AkselBaseTextTokens = "logo";
 
 type AkselColoredTextTokens =
-  | AkselColors
-  | `${AkselColors}-subtle`
-  | `${AkselColors}-decoration`
-  | `${AkselColors}-contrast`;
+  | AkselColorTokens
+  | `${AkselColorTokens}-subtle`
+  | `${AkselColorTokens}-decoration`
+  | `${AkselColorTokens}-contrast`;
 
 export type { AkselBaseTextTokens, AkselColoredTextTokens };
 
@@ -75,10 +75,10 @@ export type { AkselBaseTextTokens, AkselColoredTextTokens };
 type AkselBaseBorderTokens = "focus";
 
 type AkselColoredBorderTokens =
-  | AkselColors
-  | `${AkselColors}-subtle`
-  | `${AkselColors}-subtleA`
-  | `${AkselColors}-strong`;
+  | AkselColorTokens
+  | `${AkselColorTokens}-subtle`
+  | `${AkselColorTokens}-subtleA`
+  | `${AkselColorTokens}-strong`;
 
 export type { AkselBaseBorderTokens, AkselColoredBorderTokens };
 
@@ -128,7 +128,7 @@ type AkselLegacyShadowTokens =
   | "large"
   | "xlarge";
 
-type AkselLegacyBgColorTokens = "bg-default" | "bg-subtle";
+type AkselLegacyBackgroundColorTokens = "bg-default" | "bg-subtle";
 
 type AkselLegacySurfaceColorTokens =
   | "surface-default"
@@ -214,7 +214,7 @@ type AkselLegacySpacingTokens =
 export type {
   AkselLegacyBorderRadiusTokens,
   AkselLegacyShadowTokens,
-  AkselLegacyBgColorTokens,
+  AkselLegacyBackgroundColorTokens,
   AkselLegacySurfaceColorTokens,
   AkselLegacyBorderColorTokens,
   AkselLegacySpacingTokens,

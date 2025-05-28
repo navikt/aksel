@@ -1,10 +1,10 @@
 import React, { forwardRef } from "react";
 import type {
-  BorderColorKeys,
-  BorderColorWithRoleKeys,
-  ShadowKeys,
-  StaticBgKeys,
-  StaticDefaultBgKeys,
+  AkselBaseBackgroundTokens,
+  AkselBaseBorderTokens,
+  AkselColoredBorderTokens,
+  AkselColoredStaticBackgroundTokens,
+  AkselShadowTokens,
 } from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
 import { useRenameCSS } from "../../theme/Theme";
@@ -28,13 +28,15 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
    * @see {@link StaticDefaultBgKeys} and {@link StaticBgKeys}
    */
-  background?: StaticDefaultBgKeys | StaticBgKeys;
+  background?: AkselBaseBackgroundTokens | AkselColoredStaticBackgroundTokens;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
    * @see {@link BorderColorKeys} and {@link BorderColorWithRoleKeys}
    */
-  borderColor?: Exclude<BorderColorKeys, "focus"> | BorderColorWithRoleKeys;
+  borderColor?:
+    | Exclude<AkselBaseBorderTokens, "focus">
+    | AkselColoredBorderTokens;
   /**
    * CSS `border-radius` property.
    * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
@@ -60,7 +62,7 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * shadow='small'
    * @see {@link ShadowKeys}
    */
-  shadow?: ShadowKeys;
+  shadow?: AkselShadowTokens;
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 

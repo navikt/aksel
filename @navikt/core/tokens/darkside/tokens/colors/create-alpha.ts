@@ -1,16 +1,16 @@
 import Color from "colorjs.io";
 import type { GlobalColorScale } from "../../../internal-types";
-import { AkselColorThemes, AkselColors } from "../../../types";
+import { AkselColorThemes, AkselColorTokens } from "../../../types";
 import { GlobalColorEntry } from "../../tokens.util";
 import { GlobalConfigWithoutAlpha } from "./colors.types";
 import { semanticRootTokens } from "./semantic-root.tokens";
 
 type GlobalConfigWithAlpha = Record<
-  Extract<AkselColors, "neutral">,
+  Extract<AkselColorTokens, "neutral">,
   Record<GlobalColorScale, GlobalColorEntry>
 > &
   Record<
-    Exclude<AkselColors, "neutral">,
+    Exclude<AkselColorTokens, "neutral">,
     Record<Exclude<GlobalColorScale, "000">, GlobalColorEntry>
   >;
 
@@ -28,7 +28,7 @@ export function globalConfigWithAlphaTokens({
   const localConfig = structuredClone(globalConfig) as GlobalConfigWithAlpha;
 
   Object.keys(globalConfig).forEach((key) => {
-    const _key = key as AkselColors;
+    const _key = key as AkselColorTokens;
     const scopedConfig = localConfig[_key];
 
     scopedConfig["100A"] = {

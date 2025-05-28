@@ -1,4 +1,7 @@
-import { type BorderRadiusKeys, LegacyBorderRadiusKeys } from "../../types";
+import {
+  AkselBorderRadiusTokens,
+  AkselLegacyBorderRadiusTokens,
+} from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 export const radiusTokenConfig = {
@@ -64,10 +67,13 @@ export const radiusTokenConfig = {
     },
   },
 } satisfies {
-  radius: Record<BorderRadiusKeys, StyleDictionaryToken<"global-radius">>;
+  radius: Record<
+    AkselBorderRadiusTokens,
+    StyleDictionaryToken<"global-radius">
+  >;
   border: {
     radius: Record<
-      LegacyBorderRadiusKeys,
+      AkselLegacyBorderRadiusTokens,
       StyleDictionaryToken<"global-radius">
     >;
   };

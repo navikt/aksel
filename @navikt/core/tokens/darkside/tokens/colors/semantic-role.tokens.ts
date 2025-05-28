@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { AkselColors } from "../../../types";
+import { AkselColorTokens } from "../../../types";
 import { type StyleDictionaryTokenConfig } from "../../tokens.util";
 import { accentSemanticTokenConfig } from "./semantic-roles/accent.tokens";
 import { brandBeigeSemanticTokenConfig } from "./semantic-roles/brand-beige.tokens";
@@ -13,7 +13,7 @@ import { neutralSemanticTokenConfig } from "./semantic-roles/neutral.tokens";
 import { successSemanticTokenConfig } from "./semantic-roles/success.tokens";
 import { warningSemanticTokenConfig } from "./semantic-roles/warning.tokens";
 
-const semanticRoleConfig: Record<AkselColors, any> = {
+const semanticRoleConfig: Record<AkselColorTokens, any> = {
   neutral: neutralSemanticTokenConfig,
   accent: accentSemanticTokenConfig,
   success: successSemanticTokenConfig,

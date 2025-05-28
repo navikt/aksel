@@ -1,4 +1,4 @@
-import type { AkselColorThemes, ShadowKeys } from "../../types";
+import type { AkselColorThemes, AkselShadowTokens } from "../../types";
 import type { StyleDictionaryToken } from "../tokens.util";
 
 export function shadowTokenConfig(theme: AkselColorThemes) {
@@ -16,6 +16,6 @@ export function shadowTokenConfig(theme: AkselColorThemes) {
       },
     },
   } satisfies {
-    shadow: Record<ShadowKeys, StyleDictionaryToken<"shadow">>;
+    shadow: Record<AkselShadowTokens, StyleDictionaryToken<"shadow">>;
   };
 }

@@ -1,8 +1,8 @@
 import {
+  type AkselBaseBackgroundTokens,
+  type AkselBaseBorderTokens,
+  type AkselBaseTextTokens,
   type AkselColorThemes,
-  type BorderColorKeys,
-  type DefaultTextColorKeys,
-  type StaticDefaultBgKeys,
 } from "../../../types";
 import { type StyleDictionaryToken } from "../../tokens.util";
 
@@ -80,8 +80,8 @@ export function semanticRootTokens(theme: AkselColorThemes) {
       },
     },
   } satisfies {
-    bg: Record<StaticDefaultBgKeys, StyleDictionaryToken<"color">>;
-    border: Record<BorderColorKeys, StyleDictionaryToken<"color">>;
-    text: Record<DefaultTextColorKeys, StyleDictionaryToken<"color">>;
+    bg: Record<AkselBaseBackgroundTokens, StyleDictionaryToken<"color">>;
+    border: Record<AkselBaseBorderTokens, StyleDictionaryToken<"color">>;
+    text: Record<AkselBaseTextTokens, StyleDictionaryToken<"color">>;
   };
 }
