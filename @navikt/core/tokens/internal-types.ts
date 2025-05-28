@@ -21,4 +21,10 @@ type GlobalColorKeys =
   | `${Extract<AkselColors, "neutral">}-${Extract<GlobalColorScale, "000">}`
   | `${AkselColors}-${Exclude<GlobalColorScale, "000">}`;
 
+const spaceInPixels = [
+  0, 1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 80, 96,
+  128,
+] as const;
+
+export { spaceInPixels };
 export type { GlobalColorScale, GlobalColorKeys };

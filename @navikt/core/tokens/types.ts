@@ -1,3 +1,5 @@
+import { spaceInPixels } from "./internal-types";
+
 export type {
   AkselColorThemes,
   AkselColors,
@@ -67,11 +69,6 @@ export type BorderColorWithRoleKeys =
   | `${AkselColors}-subtle`
   | `${AkselColors}-subtleA`
   | `${AkselColors}-strong`;
-
-export const spaceInPixels = [
-  0, 1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 80, 96,
-  128,
-] as const;
 
 export type SpaceKeys = `space-${(typeof spaceInPixels)[number]}`;
 

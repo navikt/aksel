@@ -1,4 +1,4 @@
-import { spaceInPixels } from "../../types";
+import { spaceInPixels } from "../../internal-types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 function pxToRem(px: number) {
