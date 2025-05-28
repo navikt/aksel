@@ -59,10 +59,10 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
 type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
   children: React.ReactNode;
   /**
-   * Heading tag
+   * Heading tag, only use "div" if you want a non header defining card (eg. you have a lot of them all at once, such as in a masonry grid)
    * @default "h3"
    */
-  as: "h2" | "h3" | "h4" | "h5" | "h6" | "span";
+  as: "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "div";
   /**
    *
    */

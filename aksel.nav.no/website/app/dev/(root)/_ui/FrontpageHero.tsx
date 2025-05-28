@@ -28,7 +28,7 @@ const LinkCards = ({
         {links.map((link) => {
           return (
             <LinkCard key={link.title}>
-              <LinkCardTitle as="h2">
+              <LinkCardTitle as="div">
                 <LinkCardAnchor href={link.href}>{link.title}</LinkCardAnchor>
               </LinkCardTitle>
               <LinkCardDescription>{link.desc}</LinkCardDescription>
