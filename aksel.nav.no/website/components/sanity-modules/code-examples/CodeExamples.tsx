@@ -2,6 +2,7 @@ import cl from "clsx";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import {
+  ArrowCirclepathIcon,
   CodeIcon,
   ExternalLinkIcon,
   LaptopIcon,
@@ -222,6 +223,17 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                     </Button>
                     {fil.sandboxEnabled && <Sandbox code={fil.sandboxBase64} />}
                     <CodeSandbox code={fil.innhold.trim()} />
+                    <Button
+                      variant="tertiary-neutral"
+                      size="small"
+                      icon={
+                        <ArrowCirclepathIcon title="Last inn eksempelet på nytt" />
+                      }
+                      onClick={() => {
+                        setUnloaded(true);
+                        iframeRef.current?.contentWindow?.location.reload();
+                      }}
+                    />
                     <Button
                       variant="tertiary-neutral"
                       size="small"

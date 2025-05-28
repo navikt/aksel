@@ -3,7 +3,7 @@ import { AkselTheme } from "@/sb-util";
 import Hero from "./TemaHero";
 
 const meta = {
-  title: "Layout/god-praksis/hero/TemaHero",
+  title: "Layout/god-praksis/hero/TemaHero (old)",
   component: Hero,
   tags: ["autodocs"],
   decorators: [AkselTheme],

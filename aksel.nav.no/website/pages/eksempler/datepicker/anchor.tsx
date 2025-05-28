@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, DatePicker } from "@navikt/ds-react";
+import { Button, DatePicker, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -7,9 +7,9 @@ const Example = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-96">
+    <VStack gap="4" minHeight="24rem">
       <DatePicker
-        onSelect={(val) => setDays(val)}
+        onSelect={setDays}
         mode="multiple"
         max={5}
         onClose={() => setOpen(false)}
@@ -17,14 +17,15 @@ const Example = () => {
       >
         <Button onClick={() => setOpen((x) => !x)}>Velg dager</Button>
       </DatePicker>
+
       {days && (
-        <Box paddingBlock="4 0">
+        <div>
           {days.map((day) => (
-            <div key={day.toString()}>{day.toISOString().split("T")[0]}</div>
+            <div key={day.toString()}>{day.toLocaleDateString()}</div>
           ))}
-        </Box>
+        </div>
       )}
-    </div>
+    </VStack>
   );
 };
 
