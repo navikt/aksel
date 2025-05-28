@@ -1,7 +1,7 @@
-import { type ColorTheme, ShadowKeys } from "../../types";
-import { type StyleDictionaryToken } from "../tokens.util";
+import type { AkselColorThemes, AkselShadowTokens } from "../../types";
+import type { StyleDictionaryToken } from "../tokens.util";
 
-export function shadowTokenConfig(theme: ColorTheme) {
+export function shadowTokenConfig(theme: AkselColorThemes) {
   return {
     shadow: {
       dialog: {
@@ -16,6 +16,6 @@ export function shadowTokenConfig(theme: ColorTheme) {
       },
     },
   } satisfies {
-    shadow: Record<ShadowKeys, StyleDictionaryToken<"shadow">>;
+    shadow: Record<AkselShadowTokens, StyleDictionaryToken<"shadow">>;
   };
 }

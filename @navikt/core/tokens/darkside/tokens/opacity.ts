@@ -1,7 +1,7 @@
-import { ColorTheme } from "../../types";
+import { AkselColorThemes } from "../../types";
 import { StyleDictionaryToken } from "../tokens.util";
 
-export function opacityTokenConfig(theme: ColorTheme) {
+export function opacityTokenConfig(theme: AkselColorThemes) {
   return {
     opacity: {
       disabled: {

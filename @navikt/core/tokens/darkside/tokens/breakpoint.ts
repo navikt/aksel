@@ -1,4 +1,4 @@
-import { type BreakPointKeys } from "../../types";
+import { type AkselBreakpointTokens } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 export const breakpointTokenConfig = {
@@ -71,5 +71,8 @@ export const breakpointTokenConfig = {
     },
   },
 } satisfies {
-  breakpoint: Record<BreakPointKeys, StyleDictionaryToken<"global-breakpoint">>;
+  breakpoint: Record<
+    AkselBreakpointTokens,
+    StyleDictionaryToken<"global-breakpoint">
+  >;
 };

@@ -1,27 +1,29 @@
 import type {
-  BorderRadiusKeys,
-  BreakPointKeys,
-  LegacyBgColorKeys,
-  LegacyBorderColorKeys,
-  LegacyBorderRadiusKeys,
-  LegacyShadowKeys,
-  LegacySpacingKeys,
-  LegacySurfaceColorKeys,
-  SpaceKeys,
+  AkselBorderRadiusTokens,
+  AkselBreakpointTokens,
+  AkselLegacyBackgroundColorTokens,
+  AkselLegacyBorderColorTokens,
+  AkselLegacyBorderRadiusTokens,
+  AkselLegacyShadowTokens,
+  AkselLegacySpacingTokens,
+  AkselLegacySurfaceColorTokens,
+  AkselSpaceTokens,
 } from "@navikt/ds-tokens/types";
 
-export type BackgroundColorToken = LegacyBgColorKeys;
-export type SurfaceColorToken = LegacySurfaceColorKeys;
-export type BorderColorToken = LegacyBorderColorKeys;
-export type ShadowToken = LegacyShadowKeys;
+export type BackgroundColorToken = AkselLegacyBackgroundColorTokens;
+export type SurfaceColorToken = AkselLegacySurfaceColorTokens;
+export type BorderColorToken = AkselLegacyBorderColorTokens;
+export type ShadowToken = AkselLegacyShadowTokens;
 
 export type BreakpointsAlias = Extract<
-  BreakPointKeys,
+  AkselBreakpointTokens,
   "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
 >;
 
-export type SpacingScale = LegacySpacingKeys | SpaceKeys;
-export type BorderRadiusScale = LegacyBorderRadiusKeys | BorderRadiusKeys;
+export type SpacingScale = AkselLegacySpacingTokens | AkselSpaceTokens;
+export type BorderRadiusScale =
+  | AkselLegacyBorderRadiusTokens
+  | AkselBorderRadiusTokens;
 
 export type SpaceDelimitedAttribute<T extends string> =
   | T
