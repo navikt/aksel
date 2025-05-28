@@ -11,13 +11,11 @@ const getMonthAndYear = (dateStr) => {
   });
 };
 
-// TODO: [endringslogg] Capitalize by text-transform instead of JS
-// TODO: [endringslogg] Clean up styling, commit to a convention
 type LogEntryType = {
   endringsdato: string;
-  // add other properties as needed
 };
 
+// TODO: [endringslogg] Clean up styling, commit to a convention
 export default function ChronologicalList({ list }: { list: LogEntryType[] }) {
   // TODO: [endringslogg] Remove before production
   console.dir(list);

@@ -86,7 +86,7 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
             className={logEntry.fremhevet ? styles.innholdFremhevet : ""}
             style={{
               overflow: "hidden",
-              maxHeight: expanded ? "unset" : "200px",
+              maxHeight: expanded ? "unset" : "10rem",
               maskImage: expanded
                 ? "unset"
                 : "linear-gradient(var(--ax-bg-default), 90%, transparent)",
@@ -132,8 +132,9 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
                 height={630}
               />
             )}
-
+            {/* TODO: [endringslogg] Fix space between headline and content in log entry */}
             <CustomPortableText
+              className="[&_h3]:!mt-0"
               value={logEntry.innhold as PortableTextBlock[]}
             />
           </VStack>
@@ -149,7 +150,7 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
               ...(logEntry.fremhevet
                 ? {
                     color: "var(--aksel-brand-pink-1000)",
-                    boxShadow: "var(--aksel-brand-pink-600)",
+                    "--ax-border-neutral": "var(--aksel-brand-pink-600)",
                   }
                 : {}),
             }}
