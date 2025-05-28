@@ -3,7 +3,7 @@ import { Link } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => (
-  <Link as={NextLink} href="#">
+  <Link as={NextLink} href="frameworks">
     Lenke til ny side
   </Link>
 );

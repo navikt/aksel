@@ -88,8 +88,8 @@ export function semanticThemedBaseTokens(role: SemanticColorRoles) {
         type: "themed-role",
         comment: "TODO: Sjur fyller ut",
       },
-      icon: {
-        value: `{ax.text.${role}-icon.value}`,
+      decoration: {
+        value: `{ax.text.${role}-decoration.value}`,
         type: "themed-role",
         comment: "TODO: Sjur fyller ut",
       },

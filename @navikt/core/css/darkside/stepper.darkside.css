@@ -98,7 +98,7 @@
   width: var(--__axc-stepper-circle-size);
   height: var(--__axc-stepper-circle-size);
   border: var(--__axc-stepper-border-width) solid currentColor;
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   line-height: 1;
 }
 
@@ -109,7 +109,7 @@
 
 .aksel-stepper__step[data-interactive="true"] {
   color: var(--ax-text-accent-subtle);
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-radius-4);
   text-decoration: none;
 
   & .aksel-stepper__content {

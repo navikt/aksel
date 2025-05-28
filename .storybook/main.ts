@@ -51,6 +51,15 @@ export default {
     "../aksel.nav.no/website/pages/templates/**/*.tsx",
   ],
   addons: [
+    {
+      name: "@storybook/addon-essentials",
+      options: {
+        actions: false,
+        controls: {
+          hideNoControlsWarning: true,
+        },
+      },
+    },
     "@storybook/addon-a11y",
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
@@ -59,15 +68,6 @@ export default {
       options: {
         loaderOptions: {
           injectStoryParameters: false,
-        },
-      },
-    },
-    {
-      name: "@storybook/addon-essentials",
-      options: {
-        actions: false,
-        controls: {
-          hideNoControlsWarning: true,
         },
       },
     },

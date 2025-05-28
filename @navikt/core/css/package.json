@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "7.21.1",
+  "version": "7.22.0",
   "description": "CSS for Nav Designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -28,9 +28,9 @@
     "test": "yarn build && vitest run"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^7.21.1",
+    "@navikt/ds-tokens": "^7.22.0",
     "autoprefixer": "^10.4.20",
-    "browserslist": "^4.24.4",
+    "browserslist": "^4.24.5",
     "cssnano": "7.0.6",
     "esbuild": "^0.25.4",
     "fast-glob": "3.2.11",

@@ -67,13 +67,10 @@ const formatCategory = (token: TransformedToken): string | undefined => {
       return token.attributes?.type
         ? colorTypes[token.attributes?.type as keyof typeof colorTypes]
         : (token.attributes?.type as string);
-      break;
     case "global-space":
       return "space";
-      break;
     case "global-radius":
       return "radius";
-      break;
     case "global-breakpoint":
       return "breakpoint";
     case "global-font":
@@ -143,8 +140,10 @@ const formatRole = (group: TransformedToken["group"]): string => {
 
 export const formatDOCS: FormatFn = async ({ dictionary }) => {
   const ignoredTokenTypes = ["global-color", "opacity"];
+
   const tokens = dictionary.allTokens
     .filter((token) => token.type && !ignoredTokenTypes.includes(token.type))
+    .filter((token) => !token.docsIgnore)
     .map((token, index) => {
       const tokenNameWithoutPrefix = token.name.slice(2);
       const name = kebabCaseForAlpha(tokenNameWithoutPrefix);

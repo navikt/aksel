@@ -6,6 +6,7 @@ import { ConsentBanner } from "@/web/ConsentBanner";
 import { CookieProvider } from "@/web/CookieProvider";
 import { SanityDataProvider } from "@/web/SanityDataProvider";
 import { Umami } from "@/web/Umami";
+import { ExampleTheming } from "@/web/examples/withDsExample.theme";
 import { BaseSEO } from "@/web/seo/BaseSEO";
 import "../components/styles/index.css";
 
@@ -22,23 +23,25 @@ function App({ Component, pageProps, router }: AppProps) {
     !router.pathname.startsWith("/eksempler/");
 
   return (
-    <CookieProvider>
-      <BaseSEO path={router.asPath} />
-      <Umami />
-      <ConsentBanner
-        hide={!useGlobalStyles}
-        defaultShow={pageProps.showCookieBanner}
-      />
-      {useGlobalStyles ? (
-        <SanityDataProvider id={pageProps?.id ?? pageProps?.page?._id}>
-          <div className="globalstyles">
-            <Component {...pageProps} />
-          </div>
-        </SanityDataProvider>
-      ) : (
-        <Component {...pageProps} />
-      )}
-    </CookieProvider>
+    <ExampleTheming>
+      <CookieProvider>
+        <BaseSEO path={router.asPath} />
+        <Umami />
+        <ConsentBanner
+          hide={!useGlobalStyles}
+          defaultShow={pageProps.showCookieBanner}
+        />
+        {useGlobalStyles ? (
+          <SanityDataProvider id={pageProps?.id ?? pageProps?.page?._id}>
+            <div className="globalstyles">
+              <Component {...pageProps} />
+            </div>
+          </SanityDataProvider>
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </CookieProvider>
+    </ExampleTheming>
   );
 }
 

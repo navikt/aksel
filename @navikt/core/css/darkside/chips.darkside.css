@@ -24,7 +24,7 @@
   margin: 0;
   padding: 0 var(--ax-space-12);
   text-decoration: none;
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   min-height: 2rem;
 
   &:focus-visible {
@@ -148,7 +148,7 @@
   font-size: 1.25rem;
   display: grid;
   place-items: center;
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
 }
 
 .aksel-chips--icon-left {

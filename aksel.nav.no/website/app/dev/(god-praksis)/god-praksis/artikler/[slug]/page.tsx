@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { Image } from "sanity";
 import { TagFillIcon } from "@navikt/aksel-icons";
 import {
+  BodyLong,
   BodyShort,
   Box,
   HStack,
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const { data: seoData } = await sanityFetch({
     query: GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
-    params: { slug: `god-praksis/artikler/${slug}` },
+    params: { slug: decodeURIComponent(`god-praksis/artikler/${slug}`) },
     stega: false,
   });
 
@@ -62,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page(props: Props) {
   const { slug } = await props.params;
 
-  const parsedSlug = `god-praksis/artikler/${slug}`;
+  const parsedSlug = decodeURIComponent(`god-praksis/artikler/${slug}`);
 
   const [{ data: pageData }, { data: toc }] = await Promise.all([
     sanityFetch({
@@ -98,17 +99,18 @@ export default async function Page(props: Props) {
             {pageData.innholdstype}
           </BodyShort>
         )}
-        <Heading size="xlarge" level="1" data-aksel-heading-color>
+        <Heading
+          size="xlarge"
+          level="1"
+          data-aksel-heading-color
+          data-text-prose
+        >
           {pageData.heading}
         </Heading>
         {pageData.ingress && (
-          <BodyShort
-            size="large"
-            className={styles.pageIngress}
-            data-text-prose
-          >
+          <BodyLong size="large" className={styles.pageIngress} data-text-prose>
             {pageData.ingress}
-          </BodyShort>
+          </BodyLong>
         )}
         <BodyShort size="small" as="time" textColor="subtle">
           {`Oppdatert ${await dateStr(verifiedDate)}`}

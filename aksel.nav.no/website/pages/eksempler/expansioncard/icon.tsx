@@ -45,7 +45,7 @@ const Innhold = () => (
         <dd>27 256 kr</dd>
       </div>
       <div className="flex justify-between border-b border-border-default py-1">
-        <dt>Omgregnet til årslønn</dt>
+        <dt>Omregnet til årslønn</dt>
         <dd>327 072 kr</dd>
       </div>
       <div className="flex justify-between border-b border-border-default py-1">

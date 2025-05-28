@@ -31,6 +31,7 @@ export interface ConfirmationPanelProps
 
 /**
  * A component that displays a confirmation checkbox with a label.
+ * @deprecated Use `Checkbox` instead. See [new pattern documentation](https://aksel.nav.no/monster-maler/soknadsdialog/introside-for-soknadsdialoger#8346a8cb849b) for more information.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/confirmationpanel)
  * @see 🏷️ {@link ConfirmationPanelProps}

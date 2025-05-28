@@ -47,7 +47,6 @@ export const config = {
       fontSize: prefixTokens(extractTokensForCategory("font-size")),
       lineHeight: prefixTokens(extractTokensForCategory("font-line-height")),
       fontFamily: prefixTokens(extractTokensForCategory("font-family")),
-      borderRadius: prefixTokens(extractTokensForCategory("border-radius")),
       opacity: prefixTokens(extractTokensForCategory("opacity")),
     },
   },
