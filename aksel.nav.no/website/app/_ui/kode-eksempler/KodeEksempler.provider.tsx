@@ -45,6 +45,7 @@ function KodeEksemplerProvider(props: {
   const searchParams = useSearchParams();
 
   const resizerRef = useRef<HTMLDivElement>(null);
+  const prevActiveExampleRef = useRef<FileT | null>(null);
 
   const [activeExample, setActiveExample] = useState<FileT | null>(
     dir?.filer?.[0] ?? null,
@@ -96,6 +97,19 @@ function KodeEksemplerProvider(props: {
       setActiveExample(foundMatch);
     }
   }, [dir?.filer, dir?.title, searchParams]);
+
+  useEffect(() => {
+    if (
+      activeExample &&
+      prevActiveExampleRef.current?.navn !== activeExample.navn
+    ) {
+      resizerRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+    prevActiveExampleRef.current = activeExample;
+  }, [activeExample]);
 
   return (
     <KodeEksemplerContext.Provider
