@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Chips, Label, VStack } from "@navikt/ds-react";
 
 export default function FilterChips({
@@ -9,10 +10,14 @@ export default function FilterChips({
   selectedCategory,
 }: {
   years: number[];
-  selectedYear: number;
+  selectedYear: number | null;
   categories: string[];
-  selectedCategory: string;
+  selectedCategory: string | null;
 }) {
+  const { push } = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams?.toString());
   return (
     <VStack gap="space-24">
       <VStack gap="space-8">
@@ -25,12 +30,12 @@ export default function FilterChips({
               checkmark={false}
               variant="neutral"
               onClick={() => {
-                // TODO: [endringslogg] Set up proper routing
                 if (selectedYear === year) {
-                  location.href = `endringslogg?arstall=ingen&kategori=${selectedCategory}`;
+                  params.set("arstall", "ingen");
                 } else {
-                  location.href = `endringslogg?arstall=${year}&kategori=${selectedCategory}`;
+                  params.set("arstall", `${year}`);
                 }
+                push(`${pathname}?${params.toString()}`, { scroll: false });
               }}
             >
               {`${year}`}
@@ -48,12 +53,12 @@ export default function FilterChips({
               checkmark={false}
               variant="neutral"
               onClick={() => {
-                // TODO: [endringslogg] Set up proper routing
-                if (category === selectedCategory) {
-                  location.href = `endringslogg?kategori=ingen&arstall=${selectedYear}`;
+                if (selectedCategory === category) {
+                  params.delete("kategori");
                 } else {
-                  location.href = `endringslogg?kategori=${category}&arstall=${selectedYear}`;
+                  params.set("kategori", `${category}`);
                 }
+                push(`${pathname}?${params.toString()}`, { scroll: false });
               }}
             >
               {category}

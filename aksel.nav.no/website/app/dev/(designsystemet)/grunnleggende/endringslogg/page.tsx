@@ -73,8 +73,6 @@ export default async function Page({ searchParams }) {
             selectedYear={filterYear}
             categories={categories}
             selectedCategory={filterCategory}
-
-            // setSelectedYears={setSelectedYears}
           />
         </VStack>
         <VStack paddingBlock="space-32 space-0">
