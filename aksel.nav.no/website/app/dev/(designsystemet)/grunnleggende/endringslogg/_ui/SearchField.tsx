@@ -11,9 +11,9 @@ export default function SearchField() {
   function handleSearch(query: string) {
     const params = new URLSearchParams(searchParams?.toString());
     if (query) {
-      params.set("filter", query);
+      params.set("fritekst", query);
     } else {
-      params.delete("filter");
+      params.delete("fritekst");
     }
     replace(`${pathname}${params.toString() ? `?${params.toString()}` : ""}`);
   }
@@ -26,7 +26,7 @@ export default function SearchField() {
     <form role="search" onSubmit={onSubmit}>
       <Search
         label="Søk i endringsloggen"
-        defaultValue={searchParams?.get("changelogQuery") || ""}
+        defaultValue={searchParams?.get("fritekst") || ""}
         onChange={handleSearch}
         name="changelogSearch"
         hideLabel

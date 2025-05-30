@@ -1,5 +1,5 @@
 import { defineQuery } from "next-sanity";
-import { BodyShort, Heading, VStack } from "@navikt/ds-react";
+import { Heading, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { DesignsystemetEyebrow } from "../../_ui/Designsystemet.eyebrow";
@@ -17,23 +17,12 @@ const years = Array.from(
 ).reverse();
 const categories = ["kode", "design", "dokumentasjon"];
 
-const queryFilter =
-  "{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold} | order(endringsdato desc)";
-const yearQuery = defineQuery(
-  `*[_type == "ds_endringslogg_artikkel" && endringsdato >= $year && endringsdato <= $nextYear]${queryFilter}`,
-);
-const categoryQuery = defineQuery(
-  `*[_type == "ds_endringslogg_artikkel" && endringstype == $category]${queryFilter}`,
-);
-const yearAndCategoryQuery = defineQuery(
-  `*[_type == "ds_endringslogg_artikkel" && endringstype == $category && endringsdato >= $year && endringsdato <= $nextYear]${queryFilter}`,
-);
-const generalQuery = defineQuery(
-  `*[_type == "ds_endringslogg_artikkel"]${queryFilter}`,
-);
-
 export default async function Page({ searchParams }) {
-  const { arstall: paramYear, kategori: paramCategory } = await searchParams;
+  const {
+    arstall: paramYear,
+    kategori: paramCategory,
+    fritekst: paramTextFilter,
+  } = await searchParams;
   const filterYear = years.includes(+paramYear)
     ? +paramYear
     : paramYear === "ingen"
@@ -42,29 +31,31 @@ export default async function Page({ searchParams }) {
   const filterCategory = categories.includes(paramCategory)
     ? paramCategory
     : null;
+  //TODO: [endringslogg] fritekst/paramTextFilter possibly dangerous, SANITIZE?
+  //TODO: [endringslogg] urldecode? sanity seems to handle it ok without, also does fuzzy match
+  const filterText = paramTextFilter;
 
-  const { data: logEntries } = await sanityFetch(
-    filterYear && filterCategory
-      ? {
-          query: yearAndCategoryQuery,
-          params: {
-            year: `${filterYear}`,
-            nextYear: `${filterYear + 1}`,
-            category: `${filterCategory}`,
-          },
-        }
-      : filterYear
-        ? {
-            query: yearQuery,
-            params: { year: `${filterYear}`, nextYear: `${filterYear + 1}` },
-          }
-        : filterCategory
-          ? {
-              query: categoryQuery,
-              params: { category: `${filterCategory}` },
-            }
-          : { query: generalQuery },
-  );
+  const yearFilter = " && endringsdato >= $year && endringsdato <= $nextYear";
+  const categoryFilter = " && endringstype == $category";
+  const textFilter =
+    " && [heading, endringsdato, endringstype, innhold[].children[].text] match $textFilter";
+  const sanityObject = {
+    query: defineQuery(
+      `*[_type == "ds_endringslogg_artikkel"${filterYear ? yearFilter : ""}${
+        filterCategory ? categoryFilter : ""
+      }${
+        filterText ? textFilter : ""
+      }]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold} | order(endringsdato desc)`,
+    ),
+    params: {
+      year: `${filterYear}`,
+      nextYear: `${filterYear && filterYear + 1}`,
+      category: `${filterCategory}`,
+      textFilter: `${paramTextFilter}*`,
+    },
+  };
+
+  const { data: logEntries } = await sanityFetch(sanityObject);
   // Bump headings to next heading-level for changelog list
   logEntries.forEach((logEntry) => {
     if (logEntry.innhold?.length > 0)
@@ -103,13 +94,7 @@ export default async function Page({ searchParams }) {
           {logEntries?.length > 0 ? (
             <ChronologicalList list={logEntries} />
           ) : (
-            <EmptyStateCard
-              actionComponent={
-                <BodyShort size="small">
-                  Det er ikke sluppet noen endringer i denne perioden.
-                </BodyShort>
-              }
-            />
+            <EmptyStateCard />
           )}
         </VStack>
       </VStack>
