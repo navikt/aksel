@@ -15,7 +15,22 @@ const years = Array.from(
   { length: currentYear + 1 - startYear },
   (_, value) => startYear + value,
 ).reverse();
-const categories = ["Kode", "Design", "Dokumentasjon"];
+const categories = ["kode", "design", "dokumentasjon"];
+
+const queryFilter =
+  "{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold} | order(endringsdato desc)";
+const yearQuery = defineQuery(
+  `*[_type == "ds_endringslogg_artikkel" && endringsdato >= $year && endringsdato <= $nextYear]${queryFilter}`,
+);
+const categoryQuery = defineQuery(
+  `*[_type == "ds_endringslogg_artikkel" && endringstype == $category]${queryFilter}`,
+);
+const yearAndCategoryQuery = defineQuery(
+  `*[_type == "ds_endringslogg_artikkel" && endringstype == $category && endringsdato >= $year && endringsdato <= $nextYear]${queryFilter}`,
+);
+const generalQuery = defineQuery(
+  `*[_type == "ds_endringslogg_artikkel"]${queryFilter}`,
+);
 
 export default async function Page({ searchParams }) {
   const { arstall: paramYear, kategori: paramCategory } = await searchParams;
@@ -27,19 +42,28 @@ export default async function Page({ searchParams }) {
   const filterCategory = categories.includes(paramCategory)
     ? paramCategory
     : null;
+
   const { data: logEntries } = await sanityFetch(
-    filterYear
+    filterYear && filterCategory
       ? {
-          query: defineQuery(
-            `*[_type == "ds_endringslogg_artikkel" && endringsdato >= $year && endringsdato <= $nextYear]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold} | order(endringsdato desc)`,
-          ),
-          params: { year: `${filterYear}`, nextYear: `${filterYear + 1}` },
+          query: yearAndCategoryQuery,
+          params: {
+            year: `${filterYear}`,
+            nextYear: `${filterYear + 1}`,
+            category: `${filterCategory}`,
+          },
         }
-      : {
-          query: defineQuery(
-            `*[_type == "ds_endringslogg_artikkel"]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold} | order(endringsdato desc)`,
-          ),
-        },
+      : filterYear
+        ? {
+            query: yearQuery,
+            params: { year: `${filterYear}`, nextYear: `${filterYear + 1}` },
+          }
+        : filterCategory
+          ? {
+              query: categoryQuery,
+              params: { category: `${filterCategory}` },
+            }
+          : { query: generalQuery },
   );
   // Bump headings to next heading-level for changelog list
   logEntries.forEach((logEntry) => {

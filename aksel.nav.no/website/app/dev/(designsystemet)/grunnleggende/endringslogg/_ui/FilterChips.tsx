@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Chips, Label, VStack } from "@navikt/ds-react";
+import styles from "./Changelog.module.css";
 
 export default function FilterChips({
   years,
@@ -52,6 +53,7 @@ export default function FilterChips({
               selected={category === selectedCategory}
               checkmark={false}
               variant="neutral"
+              className={styles.capitalized}
               onClick={() => {
                 if (selectedCategory === category) {
                   params.delete("kategori");

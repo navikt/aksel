@@ -11,9 +11,9 @@ export default function SearchField() {
   function handleSearch(query: string) {
     const params = new URLSearchParams(searchParams?.toString());
     if (query) {
-      params.set("changelogQuery", query);
+      params.set("filter", query);
     } else {
-      params.delete("changelogQuery");
+      params.delete("filter");
     }
     replace(`${pathname}${params.toString() ? `?${params.toString()}` : ""}`);
   }
