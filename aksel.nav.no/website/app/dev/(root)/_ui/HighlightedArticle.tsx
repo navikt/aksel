@@ -1,7 +1,14 @@
 import cl from "clsx";
 import Image from "next/image";
 import NextLink from "next/link";
-import { BodyLong, BodyShort, HStack, Heading, Link } from "@navikt/ds-react";
+import {
+  BodyLong,
+  BodyShort,
+  HGrid,
+  HStack,
+  Heading,
+  Link,
+} from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
@@ -12,7 +19,7 @@ import styles from "./frontpage.module.css";
 
 export const Highlight = ({
   article,
-  compact,
+  compact: singleHighlightedArticle,
 }: {
   article: ArticleT;
   compact: boolean;
@@ -47,12 +54,10 @@ export const Highlight = ({
     .url();
 
   return (
-    <section
+    <HGrid
       aria-label={`Fremhevet artikkel: ${article?.heading}`}
-      className={cl({
-        [`${styles.highlightSectionCompact}`]: compact,
-        [`${styles.highlightSection}`]: !compact,
-      })}
+      align="start"
+      gap={singleHighlightedArticle ? "space-32" : "space-24"}
     >
       <div className={styles.sectionImageWrapper}>
         {useStatusImage && imageUrl ? (
@@ -131,6 +136,6 @@ export const Highlight = ({
           </BodyShort>
         )}
       </div>
-    </section>
+    </HGrid>
   );
 };
