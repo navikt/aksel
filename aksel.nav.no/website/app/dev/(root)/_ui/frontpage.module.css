@@ -168,11 +168,6 @@
   margin-bottom: var(--ax-space-40);
 }
 
-.highlightWrapper {
-  display: grid;
-  gap: var(--ax-space-32);
-}
-
 .highlightSection {
   display: grid;
   align-content: flex-start;
@@ -288,10 +283,6 @@
 
 @media (min-width: 768px) {
   .highlightCompact {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .highlightWrapper {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

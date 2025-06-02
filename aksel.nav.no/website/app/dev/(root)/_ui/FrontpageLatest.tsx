@@ -1,9 +1,8 @@
 "use client";
 
-import cl from "clsx";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { BoxNew, Heading } from "@navikt/ds-react";
+import { BoxNew, HGrid, Heading } from "@navikt/ds-react";
 import Card, { ArticleT } from "./FrontpageMasonryCard";
 import { Highlight } from "./HighlightedArticle";
 import styles from "./frontpage.module.css";
@@ -74,15 +73,11 @@ const Latest = ({ block }: LatestArticlesProps) => {
 
 function Highlights({ highlights }: { highlights: ArticleT[] }) {
   return (
-    <div
-      className={cl({
-        [`${styles.highlightWrapper}`]: highlights?.length === 2,
-      })}
-    >
+    <HGrid gap="space-32" columns={{ xs: 1, md: 2 }}>
       {highlights.map((x, idx) => (
         <Highlight article={x} key={idx} compact={highlights.length === 1} />
       ))}
-    </div>
+    </HGrid>
   );
 }
 
