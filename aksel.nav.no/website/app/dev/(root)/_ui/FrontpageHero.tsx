@@ -83,7 +83,7 @@ export const Hero = () => {
         />
       </BoxNew>
       {!reducedMotion && (
-        <HStack justify="end">
+        <HStack justify="end" marginBlock="0 space-16">
           <Button
             className={styles.animationButton}
             variant="tertiary-neutral"

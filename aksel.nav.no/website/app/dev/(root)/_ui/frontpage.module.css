@@ -1,19 +1,8 @@
 .animationButton {
   background-color: var(--ax-bg-neutral-softA);
-  border-radius: var(--ax-border-radius-full);
-  margin-bottom: 16px;
-  color: var(--ax-text-neutral);
-
-  & span {
-    font-weight: var(--ax-font-weight-regular);
-  }
 
   &:hover {
     background-color: var(--ax-neutral-300A);
-  }
-
-  & svg {
-    color: var(--ax-neutral-700);
   }
 }
 
@@ -32,7 +21,6 @@
 
 .frontPage {
   position: relative;
-  background-color: transparent;
   overflow: hidden;
 }
 
