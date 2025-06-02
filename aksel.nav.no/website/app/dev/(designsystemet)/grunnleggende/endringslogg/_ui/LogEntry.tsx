@@ -18,7 +18,7 @@ import styles from "./Changelog.module.css";
 
 export default function LogEntry({ logEntry, index, isLastEntry = false }) {
   const [expanded, setExpanded] = useState(false);
-  const logEntryContainer = useRef(null);
+  const logEntryContainer = useRef<HTMLDivElement>(null);
   return (
     <li key={"log-entry-" + index}>
       <VStack width="48px" height="var(--ax-space-32)" align="center">
@@ -133,6 +133,7 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
               />
             )}
             {/* TODO: [endringslogg] Fix space between headline and content in log entry */}
+            {/* TODO: [endringslogg] Add transition animation on collapse */}
             <CustomPortableText
               className="[&_h3]:!mt-0"
               value={logEntry.innhold as PortableTextBlock[]}
@@ -154,18 +155,17 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
                   }
                 : {}),
             }}
-            onClick={(e) => {
-              e.stopPropagation();
+            onClick={() => {
               setExpanded((prev) => !prev);
               if (expanded) {
                 setTimeout(() => {
                   if (logEntryContainer.current) {
                     logEntryContainer.current.scrollIntoView({
-                      smooth: true,
-                      block: "start",
+                      behavior: "smooth",
+                      block: "nearest",
                     });
                   }
-                }, 100);
+                }, 1);
               }
             }}
           >

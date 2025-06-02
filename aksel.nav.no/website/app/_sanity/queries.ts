@@ -51,7 +51,6 @@ const DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY = defineQuery(
   `*[_type == "templates_landingsside"][0]`,
 );
 
-// TODO: [endringslogg] Add ds_endringslogg_artikkel if changelog entries should be included in global search
 const GLOBAL_SEARCH_QUERY_ALL = defineQuery(
   `*[_type in ["komponent_artikkel",
   "ds_artikkel",

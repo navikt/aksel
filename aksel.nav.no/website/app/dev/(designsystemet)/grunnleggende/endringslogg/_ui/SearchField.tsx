@@ -31,7 +31,7 @@ export default function SearchField() {
         name="changelogSearch"
         hideLabel
         variant="simple"
-        htmlSize="26"
+        htmlSize="24"
         autoComplete="off"
       />
     </form>
