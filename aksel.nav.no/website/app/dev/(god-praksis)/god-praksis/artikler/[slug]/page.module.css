@@ -25,7 +25,7 @@
 }
 
 .pageIngress {
-  margin-block: var(--ax-space-8) var(--ax-space-24);
+  margin-block: var(--ax-space-16) var(--ax-space-24);
 }
 
 .pageUndertemaTag {
@@ -34,7 +34,7 @@
   gap: var(--ax-space-2);
   padding-inline: var(--ax-space-8);
   min-height: 32px;
-  color: var(--ax-text-brand-blue-icon);
+  color: var(--ax-text-brand-blue-decoration);
   border: 1px solid var(--ax-border-brand-blue-subtleA);
   background: var(--ax-bg-brand-blue-moderate);
   border-radius: var(--ax-border-radius-full);
