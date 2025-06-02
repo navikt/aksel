@@ -287,6 +287,14 @@ const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
 }.blocks
 `);
 
+const LANDINGSSIDE_META_QUERY = defineQuery(
+  `*[_type == "aksel_forside"][0]{
+  "page": {
+    ...,
+  }
+}.page`,
+);
+
 /* ---------------------------- Standalone pages ---------------------------- */
 
 const SIDE_ARTICLE_BY_SLUG_QUERY = defineQuery(`
@@ -359,6 +367,7 @@ export {
   GRUNNLEGGENDE_BY_SLUG_QUERY,
   KOMPONENT_BY_SLUG_QUERY,
   LANDINGSSIDE_LATEST_QUERY,
+  LANDINGSSIDE_META_QUERY,
   METADATA_BY_SLUG_QUERY,
   MONSTER_MALER_BY_SLUG_QUERY,
   PRINSIPPER_BY_SLUG_QUERY,

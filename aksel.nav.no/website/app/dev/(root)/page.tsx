@@ -1,4 +1,6 @@
+import { Metadata } from "next";
 import NextLink from "next/link";
+import { Image } from "sanity";
 import {
   Page as AkselPage,
   Bleed,
@@ -10,10 +12,12 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
+import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { sanityFetch } from "../../_sanity/live";
 import {
   GOD_PRAKSIS_TEMA_QUERY,
   LANDINGSSIDE_LATEST_QUERY,
+  LANDINGSSIDE_META_QUERY,
 } from "../../_sanity/queries";
 import Footer from "../../_ui/footer/Footer";
 import { Header } from "../../_ui/header/Header";
@@ -24,6 +28,23 @@ import { FrontpageLatest } from "./_ui/FrontpageLatest";
 import { GpFrontpageCard } from "./_ui/GpFrontpageCard";
 import { MainWrapper } from "./_ui/MainWrapper";
 import styles from "./_ui/frontpage.module.css";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { data: seo } = await sanityFetch({
+    query: LANDINGSSIDE_META_QUERY,
+    stega: false,
+  });
+
+  return {
+    title: "God praksis",
+    description:
+      seo?.meta ??
+      `Mange som jobber med produktutvikling i Nav sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her.`,
+    openGraph: {
+      images: urlForOpenGraphImage(seo?.image as Image),
+    },
+  };
+}
 
 const Page = async () => {
   const [{ data: tema }, { data: latest }] = await Promise.all([

@@ -28,7 +28,7 @@
   position: relative;
   margin-inline: auto;
   padding-inline: 1.5rem;
-  margin-top: 112px;
+  margin-top: var(--ax-space-80);
   margin-bottom: var(--ax-space-48);
   display: grid;
   width: 100%;
@@ -242,14 +242,6 @@
   }
 }
 
-.cardLinkHeading {
-  text-decoration: underline;
-}
-
-.cardIngress {
-  margin-top: var(--ax-space-4);
-}
-
 .cardAuthor {
   display: flex;
   gap: var(--ax-space-8);
@@ -272,8 +264,8 @@
   }
 
   .heroText {
-    font-size: 56px;
-    line-height: 67px;
+    font-size: 3.5rem;
+    line-height: 1.2;
   }
 
   .sectionImage {
