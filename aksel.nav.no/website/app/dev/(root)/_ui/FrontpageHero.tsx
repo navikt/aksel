@@ -3,13 +3,13 @@
 import cl from "clsx";
 import { PauseFillIcon, PlayFillIcon } from "@navikt/aksel-icons";
 import { BoxNew, Button, HGrid, HStack, Heading } from "@navikt/ds-react";
-import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
 import {
   LinkCard,
   LinkCardAnchor,
   LinkCardDescription,
   LinkCardTitle,
 } from "../../(god-praksis)/_ui/link-card/LinkCard";
+import { AkselCubeAnimated } from "../../_ui/aksel-cube/AkselCube";
 import styles from "../_ui/frontpage.module.css";
 import { useShouldStopAnimation } from "./useShouldStopAnimation";
 
