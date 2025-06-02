@@ -227,21 +227,6 @@
   word-break: normal;
 }
 
-.cardLink {
-  margin-block-end: var(--ax-space-4);
-
-  &:focus {
-    outline: none;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: var(--ax-border-radius-large);
-  }
-}
-
 .cardAuthor {
   display: flex;
   gap: var(--ax-space-8);
