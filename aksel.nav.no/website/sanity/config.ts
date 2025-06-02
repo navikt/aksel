@@ -18,6 +18,7 @@ export const clientConfig: ClientConfig = {
 export const allArticleDocuments = [
   "komponent_artikkel",
   "ds_artikkel",
+  "ds_endringslogg_artikkel",
   "aksel_artikkel",
   "aksel_blogg",
   "aksel_prinsipp",

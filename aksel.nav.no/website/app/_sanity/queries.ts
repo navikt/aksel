@@ -55,6 +55,7 @@ const DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY = defineQuery(
 const GLOBAL_SEARCH_QUERY_ALL = defineQuery(
   `*[_type in ["komponent_artikkel",
   "ds_artikkel",
+  "ds_endringslogg_artikkel",
   "aksel_artikkel",
   "aksel_blogg",
   "aksel_prinsipp",
