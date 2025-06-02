@@ -152,11 +152,6 @@
   max-width: 600px;
 }
 
-.godPraksisCardList {
-  display: grid;
-  gap: var(--ax-space-32);
-}
-
 .akselPage {
   position: relative;
   z-index: 10;

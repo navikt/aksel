@@ -82,8 +82,8 @@ const Page = async () => {
                         <Heading
                           level="2"
                           size="xlarge"
-                          className={styles.godPraksisHeading}
                           spacing
+                          data-aksel-heading-color
                         >
                           God praksis
                         </Heading>
