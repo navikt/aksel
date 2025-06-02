@@ -61,7 +61,7 @@ export default async function (props: Props) {
             </Tag>
           )}
         </HStack>
-        {logEntry.fremhevet && logEntry.herobilde && (
+        {logEntry.fremhevet && logEntry.herobilde?.asset && (
           <Image
             data-block-margin="space-28"
             className={styles.herobilde}

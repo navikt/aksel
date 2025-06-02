@@ -104,7 +104,7 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
                 {logEntry.heading}
               </Link>
             </Heading>
-            {logEntry.fremhevet && logEntry.herobilde && (
+            {logEntry.fremhevet && logEntry.herobilde?.asset && (
               <Image
                 key={"hero-" + index}
                 data-block-margin="space-28"

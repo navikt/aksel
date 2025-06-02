@@ -31,8 +31,6 @@ export default async function Page({ searchParams }) {
   const filterCategory = categories.includes(paramCategory)
     ? paramCategory
     : null;
-  //TODO: [endringslogg] fritekst/paramTextFilter possibly dangerous, SANITIZE?
-  //TODO: [endringslogg] urldecode? sanity seems to handle it ok without, also does fuzzy match
   const filterText = paramTextFilter;
 
   const yearFilter = " && endringsdato >= $year && endringsdato <= $nextYear";
@@ -71,8 +69,6 @@ export default async function Page({ searchParams }) {
         }
       });
   });
-
-  // TODO: [endringslogg] Add filtering by year and category
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
