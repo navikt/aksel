@@ -105,6 +105,14 @@ export const EndringsloggArtikkel = defineType({
       type: "riktekst_grunnleggende",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      title: '"Vis mer"-knapp',
+      name: "visMer",
+      description:
+        'Skjuler deler av innholdet bak en "Vis mer"-knapp. OBS: Dobbeltsjekk at det er nok innhold til at det gir mening å bruke denne.',
+      type: "boolean",
+      initialValue: false,
+    }),
   ],
 
   preview: {
