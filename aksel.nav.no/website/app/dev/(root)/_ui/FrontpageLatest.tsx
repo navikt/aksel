@@ -1,7 +1,7 @@
 "use client";
 
 import cl from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { BoxNew, Heading } from "@navikt/ds-react";
 import Card, { ArticleT } from "./FrontpageMasonryCard";
@@ -39,7 +39,7 @@ const Latest = ({ block }: LatestArticlesProps) => {
     return () => observer.disconnect();
   }, []);
 
-  const articles = getList(block);
+  const articles = useMemo(() => getList(block), [block]);
 
   return (
     <>
