@@ -51,7 +51,7 @@ type ThemeContext = {
    * @default Inherits parent theme, or "light" if root
    */
   theme?: "light" | "dark";
-  colorRole?: AkselColors;
+  color?: AkselColors;
 };
 
 const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
@@ -70,7 +70,7 @@ export type ThemeProps = {
    * Sets default 'base'-color for application
    */
   "data-color"?: AkselColors;
-} & Omit<ThemeContext, "colorRole"> &
+} & Omit<ThemeContext, "color"> &
   AsChildProps;
 
 const Theme = forwardRef<HTMLDivElement, ThemeProps>(
@@ -83,7 +83,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
       asChild = false,
       theme = context?.theme,
       hasBackground: hasBackgroundProp = true,
-      "data-color": color = context?.colorRole,
+      "data-color": color = context?.color,
     } = props;
 
     const isRoot = context === undefined;
@@ -94,7 +94,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
     const SlotElement = asChild ? Slot : "div";
 
     return (
-      <ThemeProvider theme={theme} colorRole={color}>
+      <ThemeProvider theme={theme} color={color}>
         <RenameCSS>
           <SlotElement
             ref={ref}
