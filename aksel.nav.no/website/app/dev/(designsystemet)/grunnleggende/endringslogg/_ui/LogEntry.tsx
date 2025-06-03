@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -25,11 +27,11 @@ interface Props {
 
 export default function LogEntry({
   logEntry: {
-    fremhevet,
+    heading,
     slug,
     endringsdato,
     endringstype,
-    heading,
+    fremhevet,
     herobilde,
     innhold,
   },
@@ -73,10 +75,8 @@ export default function LogEntry({
                 spacing
                 className={fremhevet ? styles.dateFremhevet : styles.date}
               >
-                {new Date(endringsdato ?? Date.now()).toLocaleDateString("NO", {
-                  day: "2-digit",
-                  month: "long",
-                  year: "numeric",
+                {format(new Date(endringsdato || 0), "d. MMMM yyy", {
+                  locale: nb,
                 })}
               </BodyShort>
             </HStack>
@@ -155,10 +155,12 @@ export default function LogEntry({
               value={innhold as PortableTextBlock[]}
             />
           </VStack>
+          {/* TODO: [endringslogg] Add transition animation on collapse */}
           <Button
             size="small"
             variant="secondary-neutral"
             icon={expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
+            role="presentation"
             style={{
               position: "relative",
               alignSelf: "start",

@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+import { nb } from "date-fns/locale";
 import { PortableTextBlock, defineQuery } from "next-sanity";
 import Image from "next/image";
 import { BodyShort, HStack, Heading, Tag, VStack } from "@navikt/ds-react";
@@ -49,10 +51,8 @@ export default async function (props: Props) {
             size="small"
             className={logEntry.fremhevet && styles.dateFremhevet}
           >
-            {new Date(logEntry.endringsdato).toLocaleDateString("NO", {
-              day: "2-digit",
-              month: "long",
-              year: "numeric",
+            {format(new Date(logEntry.endringsdato), "d. MMMM yyy", {
+              locale: nb,
             })}
           </BodyShort>
           {logEntry.fremhevet && (

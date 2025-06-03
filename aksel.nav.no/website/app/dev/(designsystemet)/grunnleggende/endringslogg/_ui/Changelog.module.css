@@ -3,6 +3,10 @@
   height: var(--ax-space-12);
 }
 
+.monthContainer {
+  scroll-margin-top: var(--website-header-height);
+}
+
 .monthHeader {
   position: sticky;
   top: var(--website-header-height);

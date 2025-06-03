@@ -19,6 +19,7 @@ export default function FilterChips({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams?.toString());
+
   return (
     <VStack gap="space-24">
       <VStack gap="space-8">

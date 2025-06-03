@@ -1,11 +1,14 @@
+import { format } from "date-fns";
+import { nb } from "date-fns/locale";
 import { defineQuery } from "next-sanity";
 import { Heading, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
+import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { DesignsystemetEyebrow } from "../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
-import TokenTableOfContents from "../darkside/design-tokens/_ui/TokenTableOfContents";
 import ChronologicalList from "./_ui/ChronologicalList";
+import EndringsloggTableOfContents from "./_ui/EndringsloggTableOfContents";
 import FilterChips from "./_ui/FilterChips";
 import SearchField from "./_ui/SearchField";
 
@@ -23,6 +26,10 @@ const years = Array.from(
   (_, value) => startYear + value,
 ).reverse();
 const categories = ["kode", "design", "dokumentasjon"];
+
+const getMonthAndYear = (dateStr) => {
+  return format(new Date(dateStr), "MMMM yyy", { locale: nb });
+};
 
 export default async function Page({ searchParams }) {
   const {
@@ -79,6 +86,23 @@ export default async function Page({ searchParams }) {
       });
   });
 
+  const groupedByMonth = logEntries.reduce<ENDRINGSLOGG_QUERYResult[]>(
+    (acc, logEntry) => {
+      const monthKey = getMonthAndYear(logEntry.endringsdato);
+      const lastGroup = acc[acc.length - 1];
+      if (
+        !lastGroup ||
+        getMonthAndYear(lastGroup[0].endringsdato) !== monthKey
+      ) {
+        acc.push([logEntry]);
+      } else {
+        lastGroup.push(logEntry);
+      }
+      return acc;
+    },
+    [],
+  );
+
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <VStack>
@@ -97,13 +121,13 @@ export default async function Page({ searchParams }) {
         </VStack>
         <VStack paddingBlock="space-32 space-0">
           {logEntries?.length > 0 ? (
-            <ChronologicalList list={logEntries} />
+            <ChronologicalList list={groupedByMonth} />
           ) : (
             <EmptyStateCard />
           )}
         </VStack>
       </VStack>
-      <TokenTableOfContents />
+      <EndringsloggTableOfContents logEntries={groupedByMonth} />
     </DesignsystemetPageLayout>
   );
 }
