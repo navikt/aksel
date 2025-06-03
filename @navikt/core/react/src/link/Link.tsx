@@ -84,15 +84,11 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
           data-variant={localVariant}
           {...rest}
           ref={ref}
-          className={cn(
-            "navds-link",
-            className,
-            `navds-link--${localVariant}`,
-            {
-              "navds-link--remove-underline": !underline,
-              "navds-link--inline-text": inlineText,
-            },
-          )}
+          className={cn("navds-link", className, {
+            [`navds-link--${localVariant}`]: localVariant,
+            "navds-link--remove-underline": !underline,
+            "navds-link--inline-text": inlineText,
+          })}
         />
       );
     },
