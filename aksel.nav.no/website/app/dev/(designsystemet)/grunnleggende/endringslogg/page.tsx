@@ -56,7 +56,7 @@ export default async function Page({ searchParams }) {
       `*[_type == "ds_endringslogg_artikkel"${filterYear ? yearFilter : ""}${
         filterCategory ? categoryFilter : ""
       }${filterText ? textFilter : ""}]{${fields}} | order(endringsdato desc)`,
-    ),
+    ) as any,
     params: {
       year: `${filterYear}`,
       nextYear: `${filterYear && filterYear + 1}`,
@@ -66,7 +66,6 @@ export default async function Page({ searchParams }) {
   };
 
   const { data: logEntries } =
-    // @ts-expect-error - Can't generate types from a dynamically generated query, so we use a static one with the same fields.
     await sanityFetch<typeof ENDRINGSLOGG_QUERY>(sanityObject);
 
   // Bump headings to next heading-level for changelog list
