@@ -24,7 +24,6 @@ function FooterEdit() {
       } catch {
         setUser(false);
       }
-      setUser(false);
     };
     fetchUser();
   }, []);
