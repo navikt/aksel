@@ -8,6 +8,10 @@
   height: fit-content;
   border: 1px solid var(--ax-border-default);
 
+  &[data-color="neutral"] {
+    background-color: var(--ax-bg-raised);
+  }
+
   &:has(.aksel-expansioncard__header:hover) {
     box-shadow: 0 0 0 1px var(--ax-border-strong);
     border-color: var(--ax-border-strong);
