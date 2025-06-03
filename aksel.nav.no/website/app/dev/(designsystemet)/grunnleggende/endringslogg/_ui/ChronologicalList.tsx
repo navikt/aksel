@@ -1,5 +1,6 @@
 "use client";
 
+import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import LogEntry from "./LogEntry";
 import MonthHeader from "./MonthHeader";
 
@@ -11,24 +12,30 @@ const getMonthAndYear = (dateStr) => {
   });
 };
 
-type LogEntryType = {
-  endringsdato: string;
-};
+interface Props {
+  list: ENDRINGSLOGG_QUERYResult;
+}
 
 // TODO: [endringslogg] Clean up styling, commit to a convention
-export default function ChronologicalList({ list }: { list: LogEntryType[] }) {
+export default function ChronologicalList({ list }: Props) {
   // TODO: [endringslogg] Remove before production
   console.dir(list);
-  const groupedByMonth = list.reduce<LogEntryType[][]>((acc, logEntry) => {
-    const monthKey = getMonthAndYear(logEntry.endringsdato);
-    const lastGroup = acc[acc.length - 1];
-    if (!lastGroup || getMonthAndYear(lastGroup[0].endringsdato) !== monthKey) {
-      acc.push([logEntry]);
-    } else {
-      lastGroup.push(logEntry);
-    }
-    return acc;
-  }, []);
+  const groupedByMonth = list.reduce<ENDRINGSLOGG_QUERYResult[]>(
+    (acc, logEntry) => {
+      const monthKey = getMonthAndYear(logEntry.endringsdato);
+      const lastGroup = acc[acc.length - 1];
+      if (
+        !lastGroup ||
+        getMonthAndYear(lastGroup[0].endringsdato) !== monthKey
+      ) {
+        acc.push([logEntry]);
+      } else {
+        lastGroup.push(logEntry);
+      }
+      return acc;
+    },
+    [],
+  );
   console.dir(groupedByMonth);
 
   return (

@@ -9,6 +9,13 @@ import ChronologicalList from "./_ui/ChronologicalList";
 import FilterChips from "./_ui/FilterChips";
 import SearchField from "./_ui/SearchField";
 
+const fields =
+  "heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold";
+// It's not imported anywhere - Only for generating types
+export const ENDRINGSLOGG_QUERY = defineQuery(
+  `*[_type == "ds_endringslogg_artikkel"]{${fields}}`,
+);
+
 const startYear = 2022;
 const currentYear = new Date().getFullYear();
 const years = Array.from(
@@ -41,9 +48,7 @@ export default async function Page({ searchParams }) {
     query: defineQuery(
       `*[_type == "ds_endringslogg_artikkel"${filterYear ? yearFilter : ""}${
         filterCategory ? categoryFilter : ""
-      }${
-        filterText ? textFilter : ""
-      }]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold} | order(endringsdato desc)`,
+      }${filterText ? textFilter : ""}]{${fields}} | order(endringsdato desc)`,
     ),
     params: {
       year: `${filterYear}`,
@@ -53,10 +58,13 @@ export default async function Page({ searchParams }) {
     },
   };
 
-  const { data: logEntries } = await sanityFetch(sanityObject);
+  const { data: logEntries } =
+    // @ts-expect-error - Can't generate types from a dynamically generated query, so we use a static one with the same fields.
+    await sanityFetch<typeof ENDRINGSLOGG_QUERY>(sanityObject);
+
   // Bump headings to next heading-level for changelog list
   logEntries.forEach((logEntry) => {
-    if (logEntry.innhold?.length > 0)
+    if (logEntry.innhold && logEntry.innhold?.length > 0)
       logEntry.innhold.forEach((block) => {
         if (block._type === "block") {
           if (block.style === "h2") {
@@ -64,6 +72,7 @@ export default async function Page({ searchParams }) {
           } else if (block.style === "h3") {
             block.style = "h4";
           } else if (block.style === "h4") {
+            // @ts-expect-error TODO consider fixing this type error
             block.style = "h5";
           }
         }

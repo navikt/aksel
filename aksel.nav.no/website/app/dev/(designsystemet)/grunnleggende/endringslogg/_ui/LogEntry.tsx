@@ -13,10 +13,29 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
+import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import styles from "./Changelog.module.css";
 
-export default function LogEntry({ logEntry, index, isLastEntry = false }) {
+interface Props {
+  logEntry: ENDRINGSLOGG_QUERYResult[number];
+  index: number;
+  isLastEntry: boolean;
+}
+
+export default function LogEntry({
+  logEntry: {
+    fremhevet,
+    slug,
+    endringsdato,
+    endringstype,
+    heading,
+    herobilde,
+    innhold,
+  },
+  index,
+  isLastEntry = false,
+}: Props) {
   const [expanded, setExpanded] = useState(false);
   const logEntryContainer = useRef<HTMLDivElement>(null);
   return (
@@ -31,7 +50,7 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
           {/* TODO: [endringslogg] Animate bullet on `fremhevet` items */}
           <Box.New
             className={`${styles.bullet}${
-              logEntry.fremhevet ? ` ${styles.bulletFremhevet}` : ""
+              fremhevet ? ` ${styles.bulletFremhevet}` : ""
             }`}
           />
           {!isLastEntry && <Box.New flexGrow="1" className={styles.timeline} />}
@@ -44,28 +63,24 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
                 size="small"
                 spacing
                 className={
-                  logEntry.fremhevet
-                    ? styles.kategoriFremhevet
-                    : styles.kategoriInList
+                  fremhevet ? styles.kategoriFremhevet : styles.kategoriInList
                 }
               >
-                {logEntry.endringstype} •
+                {endringstype} •
               </BodyShort>
               <BodyShort
                 size="small"
                 spacing
-                className={
-                  logEntry.fremhevet ? styles.dateFremhevet : styles.date
-                }
+                className={fremhevet ? styles.dateFremhevet : styles.date}
               >
-                {new Date(logEntry.endringsdato).toLocaleDateString("NO", {
+                {new Date(endringsdato ?? Date.now()).toLocaleDateString("NO", {
                   day: "2-digit",
                   month: "long",
                   year: "numeric",
                 })}
               </BodyShort>
             </HStack>
-            {logEntry.fremhevet && (
+            {fremhevet && (
               <Tag
                 size="xsmall"
                 variant="neutral-filled"
@@ -82,8 +97,8 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
           <VStack
             ref={logEntryContainer}
             marginBlock="space-0 space-32"
-            padding={logEntry.fremhevet ? "space-16" : "space-0"}
-            className={logEntry.fremhevet ? styles.innholdFremhevet : ""}
+            padding={fremhevet ? "space-16" : "space-0"}
+            className={fremhevet ? styles.innholdFremhevet : ""}
             style={{
               overflow: "hidden",
               maxHeight: expanded ? "unset" : "10rem",
@@ -98,45 +113,46 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
           >
             <Heading size="large" level="2" spacing>
               <Link
-                href={`./endringslogg/${logEntry.slug.current}`}
+                href={`./endringslogg/${slug?.current}`}
                 data-aksel-heading-color
               >
-                {logEntry.heading}
+                {heading}
               </Link>
             </Heading>
-            {logEntry.fremhevet && logEntry.herobilde?.asset && (
+            {fremhevet && herobilde?.asset && (
               <Image
                 key={"hero-" + index}
                 data-block-margin="space-28"
                 className={styles.herobilde}
                 // style={{
                 //   backgroundColor:
-                //     logEntry.fremhevet && logEntry.herobilde?.bakgrunnsfarge
-                //       ? logEntry.herobilde.bakgrunnsfarge
+                //     fremhevet && herobilde?.bakgrunnsfarge
+                //       ? herobilde.bakgrunnsfarge
                 //       : "",
                 //   "--herobilde-bg-color-first":
-                //     logEntry.herobilde.bakgrunnsfarge ||
+                //     herobilde.bakgrunnsfarge ||
                 //     "var(--aksel-brand-pink-400)",
                 //   "--herobilde-bg-color-last":
-                //     logEntry.herobilde.bakgrunnsfarge ||
+                //     herobilde.bakgrunnsfarge ||
                 //     "var(--aksel-brand-pink-700)",
                 //   "--herobilde-bg-degrees": "130deg",
                 // }}
-                alt={logEntry.herobilde.alt}
+                aria-hidden={herobilde.dekorativt}
+                alt={herobilde.alt || ""}
                 loading="lazy"
                 decoding="async"
-                src={
-                  urlForImage(logEntry.herobilde)?.auto("format").url() || ""
-                }
+                // @ts-expect-error - TODO FIX!
+                src={urlForImage(herobilde)?.auto("format").url() || ""}
                 width={1200}
                 height={630}
               />
             )}
             {/* TODO: [endringslogg] Fix space between headline and content in log entry */}
             {/* TODO: [endringslogg] Add transition animation on collapse */}
+            {/* TODO: [endringslogg] See if we can avoid `as` here */}
             <CustomPortableText
               className="[&_h3]:!mt-0"
-              value={logEntry.innhold as PortableTextBlock[]}
+              value={innhold as PortableTextBlock[]}
             />
           </VStack>
           <Button
@@ -148,7 +164,7 @@ export default function LogEntry({ logEntry, index, isLastEntry = false }) {
               alignSelf: "start",
               backgroundColor: "Background",
               ...(expanded ? { top: "-20px" } : { top: "-20px" }),
-              ...(logEntry.fremhevet
+              ...(fremhevet
                 ? {
                     color: "var(--aksel-brand-pink-1000)",
                     "--ax-border-neutral": "var(--aksel-brand-pink-600)",
