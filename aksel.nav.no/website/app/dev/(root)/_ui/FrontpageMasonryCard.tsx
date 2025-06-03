@@ -1,5 +1,7 @@
 import cl from "clsx";
+import { Image } from "sanity";
 import { Detail, HStack, Stack, VStack } from "@navikt/ds-react";
+import { LANDINGSSIDE_LATEST_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
@@ -15,24 +17,15 @@ import {
 import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 
-export type ArticleT = {
-  _key: string;
-  _type: string;
-  _createdAt: string;
-  _updatedAt: string;
-  _id: string;
-  heading: string;
-  ingress?: string;
-  slug: { current: string };
-  seo?: {
-    meta?: string;
-    image?: any;
-  };
-  tema?: string[];
-  status?: { tag: string; bilde?: any };
-  publishedAt: string;
-  contributors?: { title: string }[];
-};
+// This type is a kind of "aggregate" for different articles (eg. status.tag)
+export type ArticleT =
+  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number] &
+    Partial<{
+      status: {
+        tag: "beta" | "new" | "ready" | "";
+      };
+      contributors?: { title: string }[];
+    }>;
 
 type CardProps = {
   article: ArticleT;
@@ -52,13 +45,7 @@ const Card = ({ article, visible, index }: CardProps) => {
     "templates_artikkel",
   ].includes(article._type);
 
-  const imageUrl = urlForImage(article.seo?.image)?.url();
-  // TODO: use blur images? but <LinkCardImage> takes string URL for now
-  /* const imageBlurUrl = urlForImage(article.seo?.image)
-    ?.width(24)
-    .height(24)
-    .blur(10)
-    .url(); */
+  const imageUrl = urlForImage(article.seo?.image as Image)?.url();
 
   return (
     <LinkCard
@@ -92,7 +79,6 @@ const Card = ({ article, visible, index }: CardProps) => {
           <Stack direction="column-reverse">
             <LinkCardTitle
               as="h2"
-              className={styles.cardLink}
               onClick={() =>
                 umamiTrack("navigere", {
                   kilde: "forsidekort",
@@ -129,7 +115,7 @@ const Card = ({ article, visible, index }: CardProps) => {
         <HStack gap="space-8">
           <Tag
             type={article._type}
-            text={article.tema ? article.tema[0] : undefined}
+            text={article.tema?.[0] ?? undefined}
             size="xsmall"
           />
           {article.status?.tag === "beta" && <BetaTag />}

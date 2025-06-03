@@ -30,18 +30,18 @@ import { MainWrapper } from "./_ui/MainWrapper";
 import styles from "./_ui/frontpage.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data: seo } = await sanityFetch({
+  const { data: page } = await sanityFetch({
     query: LANDINGSSIDE_META_QUERY,
     stega: false,
   });
 
   return {
-    title: "God praksis",
+    title: "Aksel",
     description:
-      seo?.meta ??
+      page?.seo?.meta ??
       `Mange som jobber med produktutvikling i Nav sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her.`,
     openGraph: {
-      images: urlForOpenGraphImage(seo?.image as Image),
+      images: urlForOpenGraphImage(page?.seo?.image as Image),
     },
   };
 }

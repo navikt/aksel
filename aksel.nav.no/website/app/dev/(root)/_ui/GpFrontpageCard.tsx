@@ -22,6 +22,15 @@ type GpFrontpageCardProps = {
   };
 };
 
+// export type GpFrontpageCardProps =
+//   NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number] &
+//     Partial<{
+//       status: {
+//         tag: "beta" | "new" | "ready" | "";
+//       };
+//       contributors?: { title: string }[];
+//     }>;
+
 const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
   const imageUrl = urlForImage(image as Image)?.url();
 
