@@ -81,7 +81,20 @@ function KodeEksemplerProvider(props: {
 
     const id = nameToId(dir?.title ?? "", exampleName);
     router.push(pathname + "?" + createQueryString(id), { scroll: false });
+    iframeRef.current?.focus({ preventScroll: true });
   };
+
+  useEffect(() => {
+    if (!searchParams?.get("demo")) {
+      return;
+    }
+
+    iframeRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
+    iframeRef.current?.focus({ preventScroll: true });
+  }, [searchParams]);
 
   useEffect(() => {
     const param = searchParams?.get("demo");
@@ -98,16 +111,6 @@ function KodeEksemplerProvider(props: {
       setActiveExample(foundMatch);
     }
   }, [dir?.filer, dir?.title, searchParams]);
-
-  useEffect(() => {
-    if (activeExample) {
-      iframeRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
-      iframeRef.current?.focus({ preventScroll: true });
-    }
-  }, [activeExample]);
 
   return (
     <KodeEksemplerContext.Provider
