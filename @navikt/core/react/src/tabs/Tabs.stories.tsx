@@ -309,6 +309,10 @@ export const Chromatic = {
           <Fill />
         </div>
       </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
+      </div>
     </VStack>
   ),
   parameters: {

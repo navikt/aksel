@@ -231,6 +231,10 @@ export const Chromatic = {
         <h3>Small</h3>
         <ExpandableSmall />
       </div>
+      <div>
+        <h3>ColorRole</h3>
+        <ColorRole />
+      </div>
     </VStack>
   ),
   parameters: {

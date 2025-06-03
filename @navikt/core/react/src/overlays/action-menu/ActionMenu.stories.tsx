@@ -676,4 +676,7 @@ export const ColorRole = {
       </div>
     );
   },
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

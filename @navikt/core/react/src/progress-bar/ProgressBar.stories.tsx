@@ -132,18 +132,18 @@ export const IndeterminateState: Story = {
 export const ColorRole: StoryFn = () => {
   return (
     <div>
-      <p id="progress-bar-label-small">Brand magenta</p>
+      <p id="progress-bar-label-magenta">Brand magenta</p>
       <ProgressBar
         value={60}
         valueMax={120}
-        aria-labelledby="progress-bar-label-small"
+        aria-labelledby="progress-bar-label-magenta"
         data-color="brand-magenta"
       />
-      <p id="progress-bar-label-small">Warning</p>
+      <p id="progress-bar-label-warning">Warning</p>
       <ProgressBar
         value={60}
         valueMax={120}
-        aria-labelledby="progress-bar-label-small"
+        aria-labelledby="progress-bar-label-warning"
         data-color="warning"
       />
     </div>
