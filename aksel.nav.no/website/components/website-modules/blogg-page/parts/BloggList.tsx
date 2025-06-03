@@ -44,7 +44,7 @@ export const BloggList = ({
 
         <div className="w-full">
           <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-            <Link className="text-aksel-heading underline hover:no-underline">
+            <Link className="text-aksel-heading underline hover:no-underline focus-visible:text-text-on-inverted">
               <Heading size="medium" level="2">
                 {blogg.heading}
               </Heading>
@@ -71,7 +71,7 @@ export const BloggList = ({
 
       <div className="w-full md:hidden">
         <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-          <Link className="text-aksel-heading underline hover:no-underline">
+          <Link className="text-aksel-heading underline hover:no-underline focus-visible:text-text-on-inverted">
             <Heading size="medium" level="2">
               {blogg.heading}
             </Heading>

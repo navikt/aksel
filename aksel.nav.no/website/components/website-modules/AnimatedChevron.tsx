@@ -18,7 +18,7 @@ export function AnimatedChevron({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
-      className={cl("text-deepblue-700", {
+      className={cl("text-deepblue-700 group-focus:text-text-on-inverted", {
         "scale-75": scale === "card",
         "scale-[60%]": scale === "inline",
       })}
