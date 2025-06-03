@@ -198,7 +198,7 @@ const GpPage = (props: PageProps["props"]) => {
                           <Link
                             href={`/god-praksis/${tema.slug}`}
                             as={NextLink}
-                            className="group mt-4 w-fit text-deepblue-700 focus:text-text-on-inverted"
+                            className="group mt-4 w-fit text-deepblue-700 focus-visible:text-text-on-inverted"
                             onClick={() =>
                               umamiTrack("navigere", {
                                 kilde: "god praksis forside",
