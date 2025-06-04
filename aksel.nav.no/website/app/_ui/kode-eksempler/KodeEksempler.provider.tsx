@@ -27,7 +27,8 @@ type KodeEksemplerContextT = {
   showCode: boolean;
   toggleShowCode: () => void;
   compact: boolean;
-  resizerRef?: React.RefObject<HTMLDivElement>;
+  resizerRef: React.RefObject<HTMLDivElement>;
+  iframeRef: React.RefObject<HTMLIFrameElement>;
 };
 
 const KodeEksemplerContext = createContext<KodeEksemplerContextT | null>(null);
@@ -45,6 +46,7 @@ function KodeEksemplerProvider(props: {
   const searchParams = useSearchParams();
 
   const resizerRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const [activeExample, setActiveExample] = useState<FileT | null>(
     dir?.filer?.[0] ?? null,
@@ -79,7 +81,20 @@ function KodeEksemplerProvider(props: {
 
     const id = nameToId(dir?.title ?? "", exampleName);
     router.push(pathname + "?" + createQueryString(id), { scroll: false });
+    iframeRef.current?.focus({ preventScroll: true });
   };
+
+  useEffect(() => {
+    if (!searchParams?.get("demo")) {
+      return;
+    }
+
+    iframeRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
+    iframeRef.current?.focus({ preventScroll: true });
+  }, [searchParams]);
 
   useEffect(() => {
     const param = searchParams?.get("demo");
@@ -110,6 +125,7 @@ function KodeEksemplerProvider(props: {
         toggleShowCode: () => setShowCode((prev) => !prev),
         compact,
         resizerRef,
+        iframeRef,
       }}
     >
       {children}
