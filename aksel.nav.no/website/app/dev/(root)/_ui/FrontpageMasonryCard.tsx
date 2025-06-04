@@ -25,6 +25,7 @@ export type ArticleT =
         tag: "beta" | "new" | "ready" | "";
       };
       contributors?: { title: string }[];
+      publishedAt?: string;
     }>;
 
 type CardProps = {
