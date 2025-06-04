@@ -168,6 +168,10 @@
   margin-bottom: var(--ax-space-40);
 }
 
+.highlight {
+  align-content: flex-start;
+}
+
 .highlightSection {
   display: grid;
   align-content: flex-start;

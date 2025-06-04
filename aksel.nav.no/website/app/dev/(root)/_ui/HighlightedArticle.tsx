@@ -57,6 +57,7 @@ export const Highlight = ({
     <HGrid
       aria-label={`Fremhevet artikkel: ${article?.heading}`}
       align="start"
+      className={styles.highlight}
       gap={singleHighlightedArticle ? "space-32" : "space-24"}
     >
       <div className={styles.sectionImageWrapper}>
