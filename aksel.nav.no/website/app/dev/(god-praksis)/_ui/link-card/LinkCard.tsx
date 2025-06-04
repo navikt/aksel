@@ -80,8 +80,6 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
    * @default true
    */
   showArrow?: boolean;
-
-  className?: string;
 };
 
 const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
