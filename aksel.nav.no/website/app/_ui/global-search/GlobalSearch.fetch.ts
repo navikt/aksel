@@ -92,10 +92,7 @@ function sanitizeSanityData(_data: SearchPageT[]): SearchPageT[] {
     content: mapContent(x.content),
     _type: x._type,
     heading: x.heading,
-    slug:
-      x._type !== "ds_endringslogg_artikkel"
-        ? x.slug
-        : `grunnleggende/endringslogg/${x.slug}`,
+    slug: x.slug,
     overrideString: x.overrideString,
     ingress: x.ingress,
     seo: x.seo,

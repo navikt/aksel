@@ -14,7 +14,6 @@ const globalSearchConfig: {
   aksel_blogg: { display: "Blogg", index: 4 },
   aksel_prinsipp: { display: "Prinsipper", index: 5 },
   aksel_standalone: { display: "Annet", index: 6, hidden: true },
-  ds_endringslogg_artikkel: { display: "Endringslogg", index: 7 },
 };
 
 interface SearchPageT {
