@@ -9,6 +9,7 @@ const Example = () => {
   return (
     <VStack gap="14">
       <VStack gap="5">
+        Size medium (default)
         <Chips size="medium">
           {options.map((option) => (
             <Chips.Toggle
@@ -43,6 +44,7 @@ const Example = () => {
       </VStack>
 
       <VStack gap="5">
+        Size small
         <Chips size="small">
           {options.map((option) => (
             <Chips.Toggle
@@ -84,7 +86,6 @@ const options = [
   "Nittedal",
   "Enebakk",
   "Hamar",
-  "Skedsmo",
   "Arendal",
   "Gjøvik",
 ];

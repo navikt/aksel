@@ -11,7 +11,6 @@ import {
   useFocus,
   useHover,
   useInteractions,
-  useRole,
 } from "@floating-ui/react";
 import { format } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
@@ -79,13 +78,11 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     });
     const focus = useFocus(context);
     const dismiss = useDismiss(context);
-    const role = useRole(context, { role: "dialog" });
 
     const { getFloatingProps, getReferenceProps } = useInteractions([
       hover,
       focus,
       dismiss,
-      role,
     ]);
 
     const mergedRef = useMergeRefs(refs.setReference, ref);
@@ -135,6 +132,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
               className={cn("navds-timeline__popover")}
               data-placement={placement}
               ref={refs.setFloating}
+              role="dialog"
               {...getFloatingProps()}
               style={floatingStyles}
             >

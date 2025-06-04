@@ -3,6 +3,7 @@
 import { getParameters } from "codesandbox-import-utils/lib/api/define";
 import { useId } from "react";
 import {
+  ArrowCirclepathIcon,
   CodeIcon,
   ExternalLinkIcon,
   LaptopIcon,
@@ -17,10 +18,12 @@ function KodeEksemplerToolbar({
   code,
   base64,
   link,
+  reload,
 }: {
   code?: string;
   base64?: string;
   link: string;
+  reload: () => void;
 }) {
   const { showCode, toggleShowCode, resizerRef } = useKodeEksempler();
 
@@ -75,6 +78,12 @@ function KodeEksemplerToolbar({
             icon={<PencilIcon title="Sandbox" />}
           />
           <CodeSandbox code={code} />
+          <Button
+            variant="tertiary-neutral"
+            size="small"
+            icon={<ArrowCirclepathIcon title="Last inn eksempelet på nytt" />}
+            onClick={reload}
+          />
           <Button
             variant="tertiary-neutral"
             size="small"

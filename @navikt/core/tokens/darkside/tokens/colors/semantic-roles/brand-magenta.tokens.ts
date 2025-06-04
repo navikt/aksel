@@ -100,7 +100,7 @@ export const brandMagentaSemanticTokenConfig = {
       type: "color",
       group: "text.brand-magenta",
       comment:
-        "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). Ikke godkjent på tekst altså.",
+        "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). **Ikke godkjent på tekst altså**.",
     },
     "brand-magenta-contrast": {
       value: "{ax.neutral.000.value}",

@@ -11,4 +11,11 @@
   /* Is tagged as legacy */
   --a-surface-neutral: red;
   --a-surface-subtle: orange;
+
+  /* Border-radius */
+  border-radius: var(--a-border-radius-small);
+  border-radius: var(--a-border-radius-medium);
+  border-radius: var(--a-border-radius-large);
+  border-radius: var(--a-border-radius-xlarge);
+  border-radius: var(--a-border-radius-full);
 }

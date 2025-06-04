@@ -100,7 +100,7 @@ export const brandBlueSemanticTokenConfig = {
       type: "color",
       group: "text.brand-blue",
       comment:
-        "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). Ikke godkjent på tekst altså.",
+        "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). **Ikke godkjent på tekst altså**.",
     },
     "brand-blue-contrast": {
       value: "{ax.neutral.000.value}",

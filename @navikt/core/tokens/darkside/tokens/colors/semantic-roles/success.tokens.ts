@@ -100,7 +100,7 @@ export const successSemanticTokenConfig = {
       type: "color",
       group: "text.success",
       comment:
-        "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). Ikke godkjent på tekst altså.",
+        "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). **Ikke godkjent på tekst altså**.",
     },
     "success-contrast": {
       value: "{ax.neutral.000.value}",

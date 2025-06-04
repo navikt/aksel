@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <BodyLong>
-      Officia incididunt <Link href="#">lenke til ny side</Link> occaecat
+      Officia incididunt <Link href="demo">lenke til ny side</Link> occaecat
       commodo id ad aliquip.
     </BodyLong>
   );
