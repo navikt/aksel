@@ -3,6 +3,7 @@ import {
   Bleed,
   BodyLong,
   Box,
+  HGrid,
   HStack,
   Heading,
   Tag,
@@ -55,13 +56,18 @@ function DesignsystemetOverviewPage({
         )}
       </div>
 
-      <ul className={styles.overviewGrid}>
+      <HGrid
+        as="ul"
+        columns="repeat(auto-fill, minmax(min(14rem, 100%), 1fr))"
+        gap="space-24"
+        marginBlock="space-48"
+      >
         {list.map((component) => (
           <li key={component.heading} className={styles.overviewLi}>
             <DesignsystemetOverviewCard page={component} />
           </li>
         ))}
-      </ul>
+      </HGrid>
     </DesignsystemetPageLayout>
   );
 }
