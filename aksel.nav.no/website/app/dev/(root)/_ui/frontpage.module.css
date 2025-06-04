@@ -223,10 +223,6 @@
   gap: var(--ax-space-16);
 }
 
-.cardAnchor {
-  word-break: normal;
-}
-
 .cardAuthor {
   display: flex;
   gap: var(--ax-space-8);

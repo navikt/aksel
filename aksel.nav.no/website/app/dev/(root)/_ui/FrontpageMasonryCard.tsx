@@ -86,10 +86,7 @@ const Card = ({ article, visible, index }: CardProps) => {
                 })
               }
             >
-              <LinkCardAnchor
-                href={`/${article.slug}`}
-                className={styles.cardAnchor}
-              >
+              <LinkCardAnchor href={`/${article.slug}`}>
                 {article.heading}
               </LinkCardAnchor>
             </LinkCardTitle>
