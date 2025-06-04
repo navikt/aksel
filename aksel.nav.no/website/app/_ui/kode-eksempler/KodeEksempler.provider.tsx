@@ -1,5 +1,6 @@
 "use client";
 
+import { stegaClean } from "next-sanity";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   createContext,
@@ -58,7 +59,7 @@ function KodeEksemplerProvider(props: {
   const createQueryString = useCallback(
     (value: string) => {
       const params = new URLSearchParams(searchParams?.toString());
-      params.set("demo", value);
+      params.set("demo", stegaClean(value));
 
       return params.toString();
     },
