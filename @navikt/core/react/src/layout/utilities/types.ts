@@ -1,29 +1,29 @@
 import type {
-  AkselBorderRadiusTokens,
-  AkselBreakpointTokens,
-  AkselLegacyBackgroundColorTokens,
-  AkselLegacyBorderColorTokens,
-  AkselLegacyBorderRadiusTokens,
-  AkselLegacyShadowTokens,
-  AkselLegacySpacingTokens,
-  AkselLegacySurfaceColorTokens,
-  AkselSpaceTokens,
+  AkselBorderRadiusToken,
+  AkselBreakpointToken,
+  AkselLegacyBackgroundColorToken,
+  AkselLegacyBorderColorToken,
+  AkselLegacyBorderRadiusToken,
+  AkselLegacyShadowToken,
+  AkselLegacySpacingToken,
+  AkselLegacySurfaceColorToken,
+  AkselSpaceToken,
 } from "@navikt/ds-tokens/types";
 
-export type BackgroundColorToken = AkselLegacyBackgroundColorTokens;
-export type SurfaceColorToken = AkselLegacySurfaceColorTokens;
-export type BorderColorToken = AkselLegacyBorderColorTokens;
-export type ShadowToken = AkselLegacyShadowTokens;
+export type BackgroundColorToken = AkselLegacyBackgroundColorToken;
+export type SurfaceColorToken = AkselLegacySurfaceColorToken;
+export type BorderColorToken = AkselLegacyBorderColorToken;
+export type ShadowToken = AkselLegacyShadowToken;
 
 export type BreakpointsAlias = Extract<
-  AkselBreakpointTokens,
+  AkselBreakpointToken,
   "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
 >;
 
-export type SpacingScale = AkselLegacySpacingTokens | AkselSpaceTokens;
+export type SpacingScale = AkselLegacySpacingToken | AkselSpaceToken;
 export type BorderRadiusScale =
-  | AkselLegacyBorderRadiusTokens
-  | AkselBorderRadiusTokens;
+  | AkselLegacyBorderRadiusToken
+  | AkselBorderRadiusToken;
 
 export type SpaceDelimitedAttribute<T extends string> =
   | T

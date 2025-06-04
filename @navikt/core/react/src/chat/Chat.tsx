@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
-import { AkselColors } from "../types";
+import { AkselColor } from "../types";
 import { BodyLong, HeadingProps } from "../typography";
 import Bubble from "./Bubble";
 
@@ -143,7 +143,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
   },
 ) as ChatComponent;
 
-function variantToColor(variant: ChatProps["variant"]): AkselColors {
+function variantToColor(variant: ChatProps["variant"]): AkselColor {
   switch (variant) {
     case "neutral":
       return "neutral";

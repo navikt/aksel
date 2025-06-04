@@ -1,4 +1,4 @@
-import { AkselColorTokens, AkselSpaceTokens } from "./types";
+import { AkselColorRole, AkselSpaceToken } from "./types";
 
 type GlobalColorScale =
   | "100"
@@ -18,15 +18,12 @@ type GlobalColorScale =
   | "400A";
 
 type GlobalColorKeys =
-  | `${Extract<AkselColorTokens, "neutral">}-${Extract<
-      GlobalColorScale,
-      "000"
-    >}`
-  | `${AkselColorTokens}-${Exclude<GlobalColorScale, "000">}`;
+  | `${Extract<AkselColorRole, "neutral">}-${Extract<GlobalColorScale, "000">}`
+  | `${AkselColorRole}-${Exclude<GlobalColorScale, "000">}`;
 
 type ExtractNumber<T> = T extends `space-${infer N extends number}` ? N : never;
 
-const spaceObject: Record<ExtractNumber<AkselSpaceTokens>, any> = {
+const spaceObject: Record<ExtractNumber<AkselSpaceToken>, any> = {
   "0": "",
   "1": "",
   "2": "",

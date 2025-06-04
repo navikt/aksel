@@ -1,4 +1,4 @@
-import { AkselColorTokens } from "@navikt/ds-tokens/types";
+import { AkselColorRole } from "@navikt/ds-tokens/types";
 
 export type RoleT<T> = {
   id: T;
@@ -8,7 +8,7 @@ export type RoleT<T> = {
 
 export type RootRoleT = RoleT<"root">;
 
-export type ColorRoleT = RoleT<AkselColorTokens> | RootRoleT;
+export type ColorRoleT = RoleT<AkselColorRole> | RootRoleT;
 
 export type FontRoleT = RoleT<"family" | "line-height" | "size" | "weight">;
 

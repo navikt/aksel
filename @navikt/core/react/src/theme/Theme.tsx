@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Slot } from "../slot/Slot";
-import { AkselColors } from "../types";
+import { AkselColor } from "../types";
 import { createContext } from "../util/create-context";
 import { AsChildProps } from "../util/types";
 
@@ -51,7 +51,7 @@ type ThemeContext = {
    * @default Inherits parent theme, or "light" if root
    */
   theme?: "light" | "dark";
-  colorRole?: AkselColors;
+  colorRole?: AkselColor;
 };
 
 const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
@@ -69,7 +69,7 @@ export type ThemeProps = {
   /**
    * Sets default 'base'-color for application
    */
-  "data-color"?: AkselColors;
+  "data-color"?: AkselColor;
 } & Omit<ThemeContext, "colorRole"> &
   AsChildProps;
 

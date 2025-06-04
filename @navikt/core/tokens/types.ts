@@ -1,87 +1,87 @@
 /* --------------------------------- Themes --------------------------------- */
-type AkselColorThemes = "light" | "dark";
+type AkselColorTheme = "light" | "dark";
 
 /* ------------------------------ Main colors ----------------------------- */
-type AkselMainColorTokens = "neutral" | "accent";
+type AkselMainColorRole = "neutral" | "accent";
 
 /* ------------------------------ Status colors ----------------------------- */
-type AkselStatusColorTokens = "info" | "success" | "warning" | "danger";
+type AkselStatusColorRole = "info" | "success" | "warning" | "danger";
 
 /* ------------------------------ Brand colors ------------------------------ */
-type AkselBrandColorTokens = "brand-magenta" | "brand-beige" | "brand-blue";
+type AkselBrandColorRole = "brand-magenta" | "brand-beige" | "brand-blue";
 
 /* ------------------------------ Meta colors ------------------------------ */
-type AkselMetaColorTokens = "meta-purple" | "meta-lime";
+type AkselMetaColorRole = "meta-purple" | "meta-lime";
 
 /* ------------------------------- All colors ------------------------------- */
-type AkselColorTokens =
-  | AkselMainColorTokens
-  | AkselStatusColorTokens
-  | AkselBrandColorTokens
-  | AkselMetaColorTokens;
+type AkselColorRole =
+  | AkselMainColorRole
+  | AkselStatusColorRole
+  | AkselBrandColorRole
+  | AkselMetaColorRole;
 
 export type {
-  AkselColorThemes,
-  AkselColorTokens,
-  AkselMainColorTokens,
-  AkselStatusColorTokens,
-  AkselBrandColorTokens,
-  AkselMetaColorTokens,
+  AkselColorTheme,
+  AkselColorRole,
+  AkselMainColorRole,
+  AkselStatusColorRole,
+  AkselBrandColorRole,
+  AkselMetaColorRole,
 };
 
 /* --------------------------- Backgrounds tokens --------------------------- */
-type AkselBaseBackgroundTokens =
+type AkselRootBackgroundToken =
   | "default"
   | "input"
   | "raised"
   | "sunken"
   | "overlay";
 
-type AkselColoredStaticBackgroundTokens =
-  | `${AkselColorTokens}-soft`
-  | `${AkselColorTokens}-softA`
-  | `${AkselColorTokens}-moderate`
-  | `${AkselColorTokens}-moderateA`
-  | `${AkselColorTokens}-strong`;
+type AkselColoredStatelessBackgroundToken =
+  | `${AkselColorRole}-soft`
+  | `${AkselColorRole}-softA`
+  | `${AkselColorRole}-moderate`
+  | `${AkselColorRole}-moderateA`
+  | `${AkselColorRole}-strong`;
 
-type AkselColoredStatefulBackgroundTokens =
-  | `${AkselColorTokens}-moderate-hover`
-  | `${AkselColorTokens}-moderate-hoverA`
-  | `${AkselColorTokens}-moderate-pressed`
-  | `${AkselColorTokens}-moderate-pressedA`
-  | `${AkselColorTokens}-strong-hover`
-  | `${AkselColorTokens}-strong-pressed`;
+type AkselColoredStatefulBackgroundToken =
+  | `${AkselColorRole}-moderate-hover`
+  | `${AkselColorRole}-moderate-hoverA`
+  | `${AkselColorRole}-moderate-pressed`
+  | `${AkselColorRole}-moderate-pressedA`
+  | `${AkselColorRole}-strong-hover`
+  | `${AkselColorRole}-strong-pressed`;
 
 export type {
-  AkselBaseBackgroundTokens,
-  AkselColoredStaticBackgroundTokens,
-  AkselColoredStatefulBackgroundTokens,
+  AkselRootBackgroundToken,
+  AkselColoredStatelessBackgroundToken,
+  AkselColoredStatefulBackgroundToken,
 };
 
 /* ------------------------------- Text tokens ------------------------------ */
-type AkselBaseTextTokens = "logo";
+type AkselRootTextToken = "logo";
 
-type AkselColoredTextTokens =
-  | AkselColorTokens
-  | `${AkselColorTokens}-subtle`
-  | `${AkselColorTokens}-decoration`
-  | `${AkselColorTokens}-contrast`;
+type AkselColoredTextToken =
+  | AkselColoredStatefulBackgroundToken
+  | `${AkselColoredStatefulBackgroundToken}-subtle`
+  | `${AkselColoredStatefulBackgroundToken}-decoration`
+  | `${AkselColoredStatefulBackgroundToken}-contrast`;
 
-export type { AkselBaseTextTokens, AkselColoredTextTokens };
+export type { AkselRootTextToken, AkselColoredTextToken };
 
 /* ------------------------------ Border tokens ----------------------------- */
-type AkselBaseBorderTokens = "focus";
+type AkselRootBorderToken = "focus";
 
-type AkselColoredBorderTokens =
-  | AkselColorTokens
-  | `${AkselColorTokens}-subtle`
-  | `${AkselColorTokens}-subtleA`
-  | `${AkselColorTokens}-strong`;
+type AkselColoredBorderToken =
+  | AkselColorRole
+  | `${AkselColorRole}-subtle`
+  | `${AkselColorRole}-subtleA`
+  | `${AkselColorRole}-strong`;
 
-export type { AkselBaseBorderTokens, AkselColoredBorderTokens };
+export type { AkselRootBorderToken, AkselColoredBorderToken };
 
 /* ------------------------------ Space tokens ------------------------------ */
-type AkselSpaceTokens =
+type AkselSpaceToken =
   | `space-0`
   | "space-1"
   | "space-2"
@@ -105,20 +105,20 @@ type AkselSpaceTokens =
   | "space-96"
   | "space-128";
 
-export type { AkselSpaceTokens };
+export type { AkselSpaceToken };
 
 /* ------------------------------ Shadow tokens ----------------------------- */
-type AkselShadowTokens = "dialog";
+type AkselShadowToken = "dialog";
 
-export type { AkselShadowTokens };
+export type { AkselShadowToken };
 
 /* ------------------------------ Border Radius tokens --------------------- */
-type AkselBorderRadiusTokens = "2" | "4" | "8" | "12" | "full";
+type AkselBorderRadiusToken = "2" | "4" | "8" | "12" | "full";
 
-export type { AkselBorderRadiusTokens };
+export type { AkselBorderRadiusToken };
 
 /* ------------------------------ Breakpoints tokens ------------------------ */
-type AkselBreakpointTokens =
+type AkselBreakpointToken =
   | "xs"
   | "sm"
   | "sm-down"
@@ -131,26 +131,26 @@ type AkselBreakpointTokens =
   | "2xl"
   | "2xl-down";
 
-export type { AkselBreakpointTokens };
+export type { AkselBreakpointToken };
 
 /* ------------------------------ Legacy tokens ----------------------------- */
-type AkselLegacyBorderRadiusTokens =
+type AkselLegacyBorderRadiusToken =
   | "small"
   | "medium"
   | "large"
   | "xlarge"
   | "full";
 
-type AkselLegacyShadowTokens =
+type AkselLegacyShadowToken =
   | "xsmall"
   | "small"
   | "medium"
   | "large"
   | "xlarge";
 
-type AkselLegacyBackgroundColorTokens = "bg-default" | "bg-subtle";
+type AkselLegacyBackgroundColorToken = "bg-default" | "bg-subtle";
 
-type AkselLegacySurfaceColorTokens =
+type AkselLegacySurfaceColorToken =
   | "surface-default"
   | "surface-selected"
   | "surface-subtle"
@@ -187,7 +187,7 @@ type AkselLegacySurfaceColorTokens =
   | "surface-alt-3-strong"
   | "surface-alt-3";
 
-type AkselLegacyBorderColorTokens =
+type AkselLegacyBorderColorToken =
   | "border-default"
   | "border-strong"
   | "border-divider"
@@ -208,7 +208,7 @@ type AkselLegacyBorderColorTokens =
   | "border-alt-2"
   | "border-alt-3";
 
-type AkselLegacySpacingTokens =
+type AkselLegacySpacingToken =
   | "0"
   | "05"
   | "1"
@@ -232,10 +232,10 @@ type AkselLegacySpacingTokens =
   | "32";
 
 export type {
-  AkselLegacyBorderRadiusTokens,
-  AkselLegacyShadowTokens,
-  AkselLegacyBackgroundColorTokens,
-  AkselLegacySurfaceColorTokens,
-  AkselLegacyBorderColorTokens,
-  AkselLegacySpacingTokens,
+  AkselLegacyBorderRadiusToken,
+  AkselLegacyShadowToken,
+  AkselLegacyBackgroundColorToken,
+  AkselLegacySurfaceColorToken,
+  AkselLegacyBorderColorToken,
+  AkselLegacySpacingToken,
 };

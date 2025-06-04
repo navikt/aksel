@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
-import { AkselColors } from "../types";
+import { AkselColor } from "../types";
 import { OverridableComponent } from "../util/types";
 
 export interface LinkProps
@@ -100,7 +100,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
 
 function variantToColor(
   variant?: LinkProps["variant"],
-): AkselColors | undefined {
+): AkselColor | undefined {
   switch (variant) {
     case "action":
       return "accent";

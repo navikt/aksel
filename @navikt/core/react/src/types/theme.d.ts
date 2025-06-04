@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import type { AkselColorTokens } from "@navikt/ds-tokens/types";
+import type { AkselColorRole } from "@navikt/ds-tokens/types";
 
 // biome-ignore lint/suspicious/noEmptyInterface: Users can/will augment this interface
 export interface CustomAkselColors {}
 
-export type AkselColors = AkselColorTokens | keyof CustomAkselColors;
+export type AkselColor = AkselColorRole | keyof CustomAkselColors;
 
 declare global {
   namespace React {
     interface HTMLAttributes {
-      "data-color"?: AkselColors | (string & {});
+      "data-color"?: AkselColor | (string & {});
     }
   }
 }
