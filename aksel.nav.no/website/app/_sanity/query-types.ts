@@ -935,7 +935,7 @@ export type Riktekst_grunnleggende = Array<
         _type: "span";
         _key: string;
       }>;
-      style?: "normal" | "h2" | "h3" | "h4";
+      style?: "normal" | "h2" | "h3" | "h4" | "h5";
       listItem?: "bullet" | "number";
       markDefs?: Array<
         | {
@@ -12410,7 +12410,7 @@ export type SITEMAP_ARTICLES_BY_TYPE_QUERYResult = Array<
 
 // Source: ../app/dev/(designsystemet)/grunnleggende/endringslogg/page.tsx
 // Variable: ENDRINGSLOGG_QUERY
-// Query: *[_type == "ds_endringslogg_artikkel"]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold}
+// Query: *[_type == "ds_endringslogg_artikkel"]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer}
 export type ENDRINGSLOGG_QUERYResult = Array<{
   heading: string | null;
   slug: Slug | null;
@@ -12432,6 +12432,7 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
     _type: "image";
   } | null;
   innhold: Riktekst_grunnleggende | null;
+  visMer: boolean | null;
 }>;
 
 declare module "@sanity/client" {
@@ -12462,6 +12463,6 @@ declare module "@sanity/client" {
     '*[_id == $id][0]{\n      "id": _id,\n      "title": heading,\n      "editors": contributors[]->email,\n      "slug": slug.current,\n      "contacts": undertema[]->tema->contacts[]->email\n    }': DOCUMENT_BY_ID_FOR_SLACK_QUERYResult;
     '\n{\n      "frontpage": *[_type == "aksel_forside"][0]._updatedAt,\n      "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,\n      "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,\n}\n  ': SITEMAP_LANDINGPAGES_QUERYResult;
     '\n  *[_type in $doctypes]{\n    "slug": slug.current,\n    _updatedAt\n  }\n  ': SITEMAP_ARTICLES_BY_TYPE_QUERYResult;
-    '*[_type == "ds_endringslogg_artikkel"]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold}': ENDRINGSLOGG_QUERYResult;
+    '*[_type == "ds_endringslogg_artikkel"]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer}': ENDRINGSLOGG_QUERYResult;
   }
 }

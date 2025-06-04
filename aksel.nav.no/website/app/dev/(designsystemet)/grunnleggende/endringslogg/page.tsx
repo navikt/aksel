@@ -13,7 +13,7 @@ import FilterChips from "./_ui/FilterChips";
 import SearchField from "./_ui/SearchField";
 
 const fields =
-  "heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold";
+  "heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer";
 // It's not imported anywhere - Only for generating types
 export const ENDRINGSLOGG_QUERY = defineQuery(
   `*[_type == "ds_endringslogg_artikkel"]{${fields}}`,
@@ -78,7 +78,6 @@ export default async function Page({ searchParams }) {
           } else if (block.style === "h3") {
             block.style = "h4";
           } else if (block.style === "h4") {
-            // @ts-expect-error TODO consider fixing this type error
             block.style = "h5";
           }
         }

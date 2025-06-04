@@ -36,6 +36,7 @@ export default function LogEntry({
     fremhevet,
     herobilde,
     innhold,
+    visMer,
   },
   index,
   isLastEntry = false,
@@ -135,40 +136,48 @@ export default function LogEntry({
                 {heading}
               </Link>
             </Heading>
-            <Button
-              size="small"
-              variant="secondary-neutral"
-              icon={<ChevronIcon />}
-              style={{
-                "--button-height": "2rem",
-                position: "absolute",
-                zIndex: 1,
-                backgroundColor: "var(--ax-bg-default)",
-                left: fremhevet ? "2rem" : "1rem",
-                ...(fremhevet
-                  ? {
-                      bottom: "calc(var(--button-height) + var(--ax-space-16))",
-                      color: "var(--aksel-brand-pink-1000)",
-                      "--ax-border-neutral": "var(--aksel-brand-pink-600)",
-                    }
-                  : {
-                      bottom: "var(--ax-space-32)",
-                    }),
-              }}
-              onClick={toggleExpansion}
-            >
-              {expanded ? "Vis mindre" : "Vis mer"}
-            </Button>
+            {visMer && (
+              <Button
+                size="small"
+                variant="secondary-neutral"
+                icon={<ChevronIcon />}
+                style={{
+                  "--button-height": "2rem",
+                  position: "absolute",
+                  zIndex: 1,
+                  backgroundColor: "var(--ax-bg-default)",
+                  left: fremhevet ? "2rem" : "1rem",
+                  ...(fremhevet
+                    ? {
+                        bottom:
+                          "calc(var(--button-height) + var(--ax-space-16))",
+                        color: "var(--aksel-brand-pink-1000)",
+                        "--ax-border-neutral": "var(--aksel-brand-pink-600)",
+                      }
+                    : {
+                        bottom: "var(--ax-space-32)",
+                      }),
+                }}
+                onClick={toggleExpansion}
+              >
+                {expanded ? "Vis mindre" : "Vis mer"}
+              </Button>
+            )}
             <div
-              style={{
-                overflow: "hidden",
-                maxHeight: expanded ? "unset" : "10rem",
-                maskImage: expanded
-                  ? "unset"
-                  : "linear-gradient(rgba(0 0 0 / 1), rgba(0 0 0 / 0) calc(100% - 0.5rem))",
-                marginBottom: expanded ? "calc(3rem" : "0",
-              }}
-              inert={expanded ? false : inertValue}
+              style={
+                visMer
+                  ? {
+                      overflow: "hidden",
+                      maxHeight: expanded ? "unset" : "10rem",
+                      maskImage: expanded
+                        ? "unset"
+                        : "linear-gradient(rgba(0 0 0 / 1), rgba(0 0 0 / 0) calc(100% - 0.5rem))",
+                      marginBottom: expanded ? "calc(3rem" : "0",
+                      padding: "1px",
+                    }
+                  : {}
+              }
+              inert={visMer && !expanded ? inertValue : false}
             >
               {fremhevet && herobilde?.asset && (
                 <Image
