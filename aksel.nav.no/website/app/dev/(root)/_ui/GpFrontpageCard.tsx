@@ -1,35 +1,16 @@
 import { Image } from "sanity";
 import { BoxNew, HStack } from "@navikt/ds-react";
+import { GOD_PRAKSIS_TEMA_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
 import { UmamiLink } from "../../_ui/UmamiLink";
 import { GodPraksisPictogram } from "./pictogram/GodPraksisPictogram";
 
-// NOTE: could perhaps avoid this "repeated type" we already get
-// from the sanity query results type? (send type down from parent
-// to this component somehow?)
 type GpFrontpageCardProps = {
   children: React.ReactNode;
   href: string;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-    };
-    alt?: string;
-    _type: "image";
-  };
+  image?: NonNullable<GOD_PRAKSIS_TEMA_QUERYResult[number]["seo"]>["image"];
 };
-
-// export type GpFrontpageCardProps =
-//   NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number] &
-//     Partial<{
-//       status: {
-//         tag: "beta" | "new" | "ready" | "";
-//       };
-//       contributors?: { title: string }[];
-//     }>;
 
 const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
   const imageUrl = urlForImage(image as Image)?.url();
