@@ -20,15 +20,31 @@ import styles from "./frontpage.module.css";
 // This type is a kind of "aggregate" for different articles (eg. status.tag)
 // "aksel_artikkel", "aksel_blogg", "ds_artikkel", "komponent_artikkel ...
 export type ArticleT =
-  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number] &
-    Partial<{
-      status: {
-        tag: "beta" | "new" | "ready" | "";
-        bilde?: Image;
-      };
-      contributors?: { title: string }[];
-      publishedAt?: string;
-    }>;
+  | NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number]
+  | NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["komponenter"][number]
+  | NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["bloggposts"][number];
+
+// &
+//     Partial<{
+//       status: {
+//         tag: "beta" | "new" | "ready" | "";
+//         bilde?: Image;
+//       };
+//       contributors?: { title: string }[];
+//       publishedAt?: string;
+//     }>;
+
+const isArticle = (
+  article: ArticleT,
+): article is NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number] => {
+  return article._type === "aksel_artikkel";
+};
+
+const isBlogg = (
+  article: ArticleT,
+): article is NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["bloggposts"][number] => {
+  return article._type === "aksel_blogg";
+};
 
 type CardProps = {
   article: ArticleT;
@@ -50,6 +66,17 @@ const Card = ({ article, visible, index }: CardProps) => {
 
   const imageUrl = urlForImage(article.seo?.image as Image)?.url();
 
+  const getStatusTag = () => {
+    if (isArticle(article) || isBlogg(article)) {
+      return "";
+    }
+    return article.status?.tag;
+  };
+
+  const hasIngress = () => {
+    return isArticle(article) || isBlogg(article);
+  };
+
   return (
     <LinkCard
       className={cl(styles.card, {
@@ -67,7 +94,7 @@ const Card = ({ article, visible, index }: CardProps) => {
             justify="center"
             width="100%"
             className={cl(`${styles.cardImageWrapper}`, {
-              [`${styles.betaHue}`]: article?.status?.tag === "beta",
+              [`${styles.betaHue}`]: getStatusTag() === "beta",
             })}
           >
             <LinkCardImage
@@ -94,7 +121,7 @@ const Card = ({ article, visible, index }: CardProps) => {
               </LinkCardAnchor>
             </LinkCardTitle>
           </Stack>
-          {article.ingress ? (
+          {hasIngress() ? (
             <LinkCardDescription>{article.ingress}</LinkCardDescription>
           ) : article.seo?.meta ? (
             <LinkCardDescription>{article.seo.meta}</LinkCardDescription>
