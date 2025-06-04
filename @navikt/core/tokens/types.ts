@@ -82,7 +82,7 @@ export type { AkselRootBorderToken, AkselColoredBorderToken };
 
 /* ------------------------------ Space tokens ------------------------------ */
 type AkselSpaceToken =
-  | `space-0`
+  | "space-0"
   | "space-1"
   | "space-2"
   | "space-4"
