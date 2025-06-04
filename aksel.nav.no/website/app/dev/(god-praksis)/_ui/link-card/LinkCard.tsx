@@ -129,7 +129,6 @@ const LinkCardAnchor = forwardRef<HTMLAnchorElement, LinkCardAnchorProps>(
       <a
         ref={forwardedRef}
         {...restProps}
-        /* NOTE: or just prop for break-word instead of passing className? */
         className={cn("aksel-link-card__anchor", className)}
       >
         {children}
