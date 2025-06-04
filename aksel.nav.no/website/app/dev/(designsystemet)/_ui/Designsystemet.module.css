@@ -28,7 +28,7 @@
   width: fit-content;
   margin: 0 auto;
   padding-block: var(--ax-space-56) var(--ax-space-128);
-  padding-inline: var(--ax-space-40);
+  padding-inline: var(--ax-space-16);
   display: grid;
   column-gap: var(--ax-space-40);
 
@@ -44,6 +44,12 @@
 
   &[data-layout="without-toc"] {
     grid-template-columns: minmax(0, 1200px);
+  }
+}
+
+@media (min-width: 768px) {
+  .pageLayoutMain {
+    padding-inline: var(--ax-space-40);
   }
 }
 

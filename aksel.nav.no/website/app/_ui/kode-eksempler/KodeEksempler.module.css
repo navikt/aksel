@@ -19,6 +19,7 @@
   resize: horizontal;
   overflow: hidden;
   box-shadow: var(--ax-shadow-dialog);
+  max-width: 100%;
 }
 
 .kodeExampleIframe {

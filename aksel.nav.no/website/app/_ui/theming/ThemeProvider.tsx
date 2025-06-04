@@ -14,8 +14,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
     <NextThemeProvider
       attribute="class"
       storageKey={LOCAL_STORAGE_KEY}
-      defaultTheme="light"
-      enableSystem={false}
+      enableSystem
       themes={colorThemes}
       disableTransitionOnChange
     >
