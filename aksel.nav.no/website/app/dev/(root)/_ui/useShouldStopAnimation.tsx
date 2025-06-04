@@ -11,6 +11,7 @@ export const useShouldStopAnimation = () => {
   );
 
   useClientLayoutEffect(() => {
+    // using safari on iOS seems to break VO
     const disableAnimations =
       navigator.userAgent.indexOf("Safari") !== -1 &&
       navigator.userAgent.indexOf("Chrome") === -1;

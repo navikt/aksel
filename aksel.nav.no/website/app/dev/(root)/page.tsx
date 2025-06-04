@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Aksel",
     description:
       page?.seo?.meta ??
-      `Mange som jobber med produktutvikling i Nav sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her.`,
+      `En samling ressurser fra ulike fagdisipliner som hjelper oss å skape bedre, universelt tilgjengelige og sammenhengende produkter i Nav.`,
     openGraph: {
       images: urlForOpenGraphImage(page?.seo?.image as Image),
     },
@@ -64,7 +64,6 @@ const Page = async () => {
         contentBlockPadding="none"
         className={styles.akselPage}
       >
-        {/* insert context for AnimationContext wrap here */}
         <Header />
         <PauseAnimationProvider>
           <MainWrapper>
