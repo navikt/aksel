@@ -66,7 +66,12 @@ const Example = () => {
 
   return (
     <VStack gap="space-12" minWidth="800px">
-      <HStack gap="space-8" align="center">
+      <HStack
+        gap="space-8"
+        align="center"
+        aria-controls="timeline-dynamic"
+        id="timeline-toolbar"
+      >
         <Spacer />
         <HStack gap="space-2" align="center">
           <Button
@@ -111,7 +116,12 @@ const Example = () => {
         </ToggleGroup>
       </HStack>
 
-      <Timeline startDate={currentWindow.start} endDate={currentWindow.end}>
+      <Timeline
+        startDate={currentWindow.start}
+        endDate={currentWindow.end}
+        id="timeline-dynamic"
+        aria-controls="timeline-toolbar"
+      >
         <Timeline.Row
           label="Person A"
           icon={<PersonSuitFillIcon aria-hidden fontSize="1.5rem" />}
