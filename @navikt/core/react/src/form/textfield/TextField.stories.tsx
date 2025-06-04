@@ -145,10 +145,6 @@ export const Chromatic: Story = {
         <h2>Readonly</h2>
         <Readonly />
       </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
     </div>
   ),
   parameters: {

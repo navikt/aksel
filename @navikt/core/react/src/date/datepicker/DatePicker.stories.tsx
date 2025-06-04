@@ -533,6 +533,10 @@ export const Chromatic: Story = {
         <StandaloneMultiple />
       </div>
       <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
+      </div>
+      <div>
         <h2>UserControlled</h2>
         <UserControlled />
       </div>
@@ -567,10 +571,6 @@ export const Chromatic: Story = {
       <div>
         <h2>WeekNumber</h2>
         <WeekNumber />
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
       </div>
     </div>
   ),

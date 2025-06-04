@@ -667,9 +667,7 @@ export const ColorRole = {
   render: (args, context) => {
     return (
       <div>
-        <h2>Default</h2>
-        <div>{Chromatic.render?.(args, context)}</div>
-        <h2>Themed</h2>
+        <h2>Themed with meta-purple</h2>
         <Theme data-color="meta-purple">
           {Chromatic.render?.(args, context)}
         </Theme>

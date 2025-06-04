@@ -292,7 +292,6 @@ export const Chromatic: Story = {
       <Controlled />
       <Readonly />
       <AutoScrollbar label="autoscrollbar" />
-      <ColorRole />
     </div>
   ),
   parameters: {
