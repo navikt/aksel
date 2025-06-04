@@ -105,7 +105,7 @@ const DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY = defineQuery(
   `*[_type == $docType && defined(kategori)]{
   _id,
   heading,
-  slug,
+  "slug": slug.current,
   status,
   kategori,
   sidebarindex
