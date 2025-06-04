@@ -8,7 +8,7 @@ import {
 } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { useRenameCSS } from "../theme/Theme";
-import { AkselColors } from "../types";
+import { AkselColor } from "../types";
 import { BodyLong } from "../typography";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
@@ -149,7 +149,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   },
 );
 
-function variantToRole(variant: AlertProps["variant"]): AkselColors {
+function variantToRole(variant: AlertProps["variant"]): AkselColor {
   switch (variant) {
     case "warning":
       return "warning";

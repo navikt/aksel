@@ -4,10 +4,10 @@ import type {} from "@navikt/core/react/types/theme";
 /**
  * @example
  * ```tsx
- * import type { AkselColors } from "@navikt/ds-react/types/theme";
+ * import type { AkselColor } from "@navikt/ds-react/types/theme";
  *
  * interface MyComponentProps {
- *   color: AkselColors;
+ *   color: AkselColor;
  * }
  *
  * const MyComponent = ({ color }: MyComponentProps) => {

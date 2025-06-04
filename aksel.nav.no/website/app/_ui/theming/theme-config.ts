@@ -1,9 +1,9 @@
 import { stegaClean } from "next-sanity";
-import { AkselColors } from "@navikt/ds-react/types/theme";
+import { AkselColor } from "@navikt/ds-react/types/theme";
 import { Komponent_artikkel } from "@/app/_sanity/query-types";
 import { AllArticleDocumentsT } from "@/sanity/config";
 
-const doctypeToColorRole: Record<AllArticleDocumentsT, AkselColors> = {
+const doctypeToColorRole: Record<AllArticleDocumentsT, AkselColor> = {
   ds_artikkel: "brand-blue",
   komponent_artikkel: "brand-blue",
   templates_artikkel: "brand-blue",
@@ -15,7 +15,7 @@ const doctypeToColorRole: Record<AllArticleDocumentsT, AkselColors> = {
 
 type StatusTagT = NonNullable<Komponent_artikkel["status"]>["tag"];
 
-const statusToColorRole: Record<NonNullable<StatusTagT>, AkselColors> = {
+const statusToColorRole: Record<NonNullable<StatusTagT>, AkselColor> = {
   beta: "meta-purple",
   deprecated: "neutral",
   new: "success",

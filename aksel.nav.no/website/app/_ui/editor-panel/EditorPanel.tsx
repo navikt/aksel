@@ -9,7 +9,7 @@ import {
   ThumbUpIcon,
 } from "@navikt/aksel-icons";
 import { Heading, Spacer } from "@navikt/ds-react";
-import { AkselColors } from "@navikt/ds-react/types/theme";
+import { AkselColor } from "@navikt/ds-react/types/theme";
 import styles from "./EditorPanel.module.css";
 
 type EditorPanelProps = {
@@ -43,7 +43,7 @@ const VariantConfig: Record<
   {
     heading: string;
     icon: JSX.Element;
-    color: AkselColors;
+    color: AkselColor;
   }
 > = {
   tips: {

@@ -1,6 +1,6 @@
 import React, { SVGProps, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
-import { AkselColors } from "../types";
+import { AkselColor } from "../types";
 import { omit } from "../util";
 import { useId } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -37,7 +37,7 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
   /**
    * Overrides loader-color
    */
-  "data-color"?: AkselColors;
+  "data-color"?: AkselColor;
 }
 
 /* Workaround for @types/react v17/v18 feil */
@@ -120,7 +120,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
 
 function variantToColor(
   variant: LoaderProps["variant"],
-): AkselColors | undefined {
+): AkselColor | undefined {
   switch (variant) {
     case "neutral":
       return "neutral";
