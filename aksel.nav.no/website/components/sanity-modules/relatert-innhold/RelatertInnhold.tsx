@@ -40,7 +40,7 @@ const RelatertInnhold = ({ node }: RelatertInnholdProps) => {
                   url: getHref(x),
                 })
               }
-              className="text-xl font-semibold text-gray-800 dark:text-text-on-inverted"
+              className="text-xl font-semibold text-gray-800 focus-within:text-text-on-inverted dark:text-text-on-inverted"
             >
               {x.title}
             </Link>

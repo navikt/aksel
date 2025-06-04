@@ -34,7 +34,7 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
       <NextLink
         href={href}
         passHref
-        className="navds-heading--small navds-link navds-heading flex-wrap break-all text-deepblue-700 no-underline hover:underline focus:outline-none"
+        className="navds-heading--small navds-link navds-heading flex-wrap break-all text-deepblue-700 no-underline hover:underline focus:outline-none focus-visible:text-text-on-inverted"
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "god praksis forside",

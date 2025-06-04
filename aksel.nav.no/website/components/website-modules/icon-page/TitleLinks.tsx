@@ -20,7 +20,7 @@ export const TitleLinks = () => (
         legacyBehavior
       >
         <DsLink
-          className="text-text-default no-underline hover:underline"
+          className="text-text-default no-underline hover:underline focus-visible:text-text-on-inverted"
           onClick={() =>
             umamiTrack("navigere", {
               kilde: "ikonside",
@@ -35,7 +35,7 @@ export const TitleLinks = () => (
     <Divider />
     <li className="flex items-center gap-1 leading-none">
       <DsLink
-        className="text-text-default no-underline hover:underline"
+        className="text-text-default no-underline hover:underline focus-visible:text-text-on-inverted"
         href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
         download="Ikonpakke"
         onClick={() =>
@@ -57,7 +57,7 @@ export const TitleLinks = () => (
         legacyBehavior
       >
         <DsLink
-          className="text-text-default no-underline hover:underline"
+          className="text-text-default no-underline hover:underline focus-visible:text-text-on-inverted"
           onClick={() =>
             umamiTrack("navigere", {
               kilde: "ikonside",
@@ -77,7 +77,7 @@ export const TitleLinks = () => (
         legacyBehavior
       >
         <DsLink
-          className="text-text-default no-underline hover:underline"
+          className="text-text-default no-underline hover:underline focus-visible:text-text-on-inverted"
           onClick={() =>
             umamiTrack("navigere", {
               kilde: "ikonside",
@@ -98,7 +98,7 @@ export const TitleLinks = () => (
         legacyBehavior
       >
         <DsLink
-          className="text-text-default no-underline hover:underline"
+          className="text-text-default no-underline hover:underline focus-visible:text-text-on-inverted"
           onClick={() =>
             umamiTrack("navigere", {
               kilde: "ikonside",
