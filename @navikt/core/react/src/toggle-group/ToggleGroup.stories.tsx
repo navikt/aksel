@@ -220,6 +220,10 @@ export const Chromatic = {
           {Items(true, true)}
         </ToggleGroup>
       </div>
+      <div>
+        <h2>ColorRoles</h2>
+        <ColorRoles />
+      </div>
     </VStack>
   ),
   parameters: {

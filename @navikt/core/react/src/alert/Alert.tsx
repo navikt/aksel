@@ -54,6 +54,10 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * **Requires closeButton to be true**.
    */
   onClose?: () => void;
+  /**
+   * Overriding Alert color is not supported.
+   */
+  "data-color"?: never;
 }
 
 const IconMap = {

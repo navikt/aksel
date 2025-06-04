@@ -212,29 +212,18 @@ export const Indent: Story = {
 
 export const ColorRole: Story = {
   render: () => {
+    const items = [...Array(2)].map((_, i) => <Item key={i} />);
     return (
       <div className="colgap">
         <h3>Default</h3>
-        <Accordion>
-          {[...Array(2)].map((_, y) => (
-            <Item key={y} />
-          ))}
-        </Accordion>
+        <Accordion>{items}</Accordion>
         <h3>Magenta</h3>
         <h4>Magenta top level</h4>
         <div data-color="brand-magenta">
-          <Accordion>
-            {[...Array(2)].map((_, y) => (
-              <Item key={y} />
-            ))}
-          </Accordion>
+          <Accordion>{items}</Accordion>
         </div>
         <h4>Magenta component level</h4>
-        <Accordion data-color="brand-magenta">
-          {[...Array(2)].map((_, y) => (
-            <Item key={y} />
-          ))}
-        </Accordion>
+        <Accordion data-color="brand-magenta">{items}</Accordion>
       </div>
     );
   },

@@ -168,7 +168,6 @@ export const ColorRole: StoryFn = () => (
       <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
       <FormProgress.Step href="#">Innsending</FormProgress.Step>
     </FormProgress>
-    <p>Noe innhold som dyttes ned</p>
   </div>
 );
 

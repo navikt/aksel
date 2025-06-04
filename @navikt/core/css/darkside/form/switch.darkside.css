@@ -95,6 +95,10 @@
     border-color: var(--ax-bg-strong-pressed);
   }
 
+  .aksel-switch__input:hover ~ & {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
   .aksel-switch__input:hover:checked ~ & {
     background-color: var(--ax-bg-strong-hover);
     border-color: var(--ax-bg-strong-hover);
@@ -155,11 +159,11 @@
 
 @media (hover: hover) and (pointer: fine) {
   .aksel-switch__input:hover:not(:disabled) ~ .aksel-switch__track > .aksel-switch__thumb {
-    transform: translateX(0.0625rem);
+    transform: translateX(0.17rem);
   }
 
   .aksel-switch__input:checked:hover:not(:disabled) ~ .aksel-switch__track > .aksel-switch__thumb {
-    transform: translateX(1.19rem);
+    transform: translateX(1.1rem);
   }
 }
 

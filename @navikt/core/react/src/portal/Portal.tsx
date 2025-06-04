@@ -33,7 +33,7 @@ export const Portal = forwardRef<HTMLDivElement, PortalProps>(
               theme={themeContext.theme}
               asChild
               hasBackground={false}
-              data-color={themeContext.colorRole}
+              data-color={themeContext.color}
             >
               <Component ref={ref} data-aksel-portal="" {...rest} />
             </Theme>,

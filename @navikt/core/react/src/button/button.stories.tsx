@@ -159,17 +159,7 @@ export const DisabledAsLink: Story = {
 export const ColorRoles: Story = {
   render: () => (
     <VStack gap="2">
-      <HStack gap="2">
-        <Button variant="primary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button variant="secondary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button variant="tertiary" icon={<StarIcon />}>
-          Button
-        </Button>
-      </HStack>
+      <h2>Variants + data-color on parent</h2>
       <HStack gap="2" data-color="danger">
         <Button variant="primary" icon={<StarIcon />}>
           Button
@@ -181,6 +171,7 @@ export const ColorRoles: Story = {
           Button
         </Button>
       </HStack>
+      <h2>Variants + data-color on button</h2>
       <HStack gap="2">
         <Button data-color="danger" variant="primary" icon={<StarIcon />}>
           Button
