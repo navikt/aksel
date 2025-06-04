@@ -53,7 +53,7 @@ export const HighlightedBlogg = ({
           )}
         </div>
         <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-          <Link className="text-aksel-heading underline hover:no-underline">
+          <Link className="text-aksel-heading underline hover:no-underline focus-visible:text-text-on-inverted">
             <Heading size="large" level="2">
               {blogg.heading}
             </Heading>
@@ -96,7 +96,7 @@ export const HighlightedBlogg = ({
           )}
         </div>
         <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-          <Link className="text-aksel-heading underline hover:no-underline">
+          <Link className="text-aksel-heading underline hover:no-underline focus-visible:text-text-on-inverted">
             <Heading size="large" level="2">
               {blogg.heading}
             </Heading>
