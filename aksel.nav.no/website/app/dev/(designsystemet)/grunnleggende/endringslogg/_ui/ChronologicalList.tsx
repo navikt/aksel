@@ -29,7 +29,7 @@ export default function ChronologicalList({ list }: Props) {
               )}
               aria-label={`Endringslogg ${format(
                 new Date(monthGroup[0].endringsdato || 0),
-                "MMMM-yyy",
+                "MMMM yyy",
                 { locale: nb },
               )}`}
               className={styles.monthContainer}

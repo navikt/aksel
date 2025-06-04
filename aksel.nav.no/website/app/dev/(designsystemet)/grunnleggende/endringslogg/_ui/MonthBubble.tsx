@@ -11,7 +11,7 @@ export default function () {
       borderWidth="1"
       borderColor="neutral-subtle"
     >
-      <CalendarIcon role="presentation" width={24} height={24} />
+      <CalendarIcon aria-hidden="true" width={24} height={24} />
     </Box.New>
   );
 }

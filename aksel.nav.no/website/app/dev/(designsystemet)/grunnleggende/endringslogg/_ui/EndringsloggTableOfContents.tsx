@@ -5,7 +5,6 @@ import { nb } from "date-fns/locale";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 
 export default function EndringsloggTableOfContents({ logEntries }) {
-  console.dir(logEntries);
   const toc = logEntries.map((entry) => {
     const yearMonthTag = format(new Date(entry[0].endringsdato), "MMMM-yyy", {
       locale: nb,

@@ -11,7 +11,7 @@
   position: sticky;
   top: var(--website-header-height);
   background: linear-gradient(var(--ax-bg-default) calc(100% - var(--ax-space-12)), transparent);
-  z-index: 1;
+  z-index: 2;
 }
 
 .timeline {
