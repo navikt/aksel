@@ -153,6 +153,8 @@ export default function LogEntry({
                           "calc(var(--button-height) + var(--ax-space-16))",
                         color: "var(--aksel-brand-pink-1000)",
                         "--ax-border-neutral": "var(--aksel-brand-pink-600)",
+                        "--ax-border-neutral-strong":
+                          "var(--aksel-brand-pink-600)",
                       }
                     : {
                         bottom: "var(--ax-space-32)",
@@ -168,9 +170,13 @@ export default function LogEntry({
                 visMer
                   ? {
                       overflow: "hidden",
-                      maxHeight: expanded ? "unset" : "10rem",
+                      maxHeight: !expanded
+                        ? fremhevet
+                          ? "16rem"
+                          : "6rem"
+                        : "",
                       maskImage: expanded
-                        ? "unset"
+                        ? ""
                         : "linear-gradient(rgba(0 0 0 / 1), rgba(0 0 0 / 0) calc(100% - 0.5rem))",
                       marginBottom: expanded ? "calc(3rem" : "0",
                       padding: "1px",
