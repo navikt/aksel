@@ -30,7 +30,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isEnabled } = await draftMode();
+  const { isEnabled: isDraftMode } = await draftMode();
 
   return (
     <html lang="no" suppressHydrationWarning>
@@ -50,7 +50,7 @@ export default async function RootLayout({
           {children}
         </ThemeProvider>
         <SanityLive />
-        {isEnabled && (
+        {isDraftMode && (
           <>
             <DisableDraftMode />
             <VisualEditing />
