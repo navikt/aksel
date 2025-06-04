@@ -18,11 +18,13 @@ import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 
 // This type is a kind of "aggregate" for different articles (eg. status.tag)
+// "aksel_artikkel", "aksel_blogg", "ds_artikkel", "komponent_artikkel ...
 export type ArticleT =
   NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number] &
     Partial<{
       status: {
         tag: "beta" | "new" | "ready" | "";
+        bilde?: Image;
       };
       contributors?: { title: string }[];
       publishedAt?: string;

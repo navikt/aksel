@@ -1,6 +1,7 @@
 import cl from "clsx";
-import Image from "next/image";
+import NextImage from "next/image";
 import NextLink from "next/link";
+import { Image } from "sanity";
 import {
   BodyLong,
   BodyShort,
@@ -27,27 +28,27 @@ export const Highlight = ({
   const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
   const useStatusImage =
     ["ds_artikkel", "komponent_artikkel"].includes(article._type) &&
-    article.status?.bilde;
+    (article.status?.bilde as Image);
 
   const date = useFormatedDate(article?.publishedAt ?? article._createdAt);
 
-  const imageUrl = urlForImage(article.status?.bilde)
+  const imageUrl = urlForImage(article.status?.bilde as Image)
     ?.quality(100)
     .auto("format")
     .url();
 
-  const imageBlurUrl = urlForImage(article.status?.bilde)
+  const imageBlurUrl = urlForImage(article.status?.bilde as Image)
     ?.width(24)
     .height(24)
     .blur(10)
     .url();
 
-  const seoImageUrl = urlForImage(article?.seo?.image)
+  const seoImageUrl = urlForImage(article?.seo?.image as Image)
     ?.quality(100)
     .auto("format")
     .url();
 
-  const seoImageBlurUrl = urlForImage(article?.seo?.image)
+  const seoImageBlurUrl = urlForImage(article?.seo?.image as Image)
     ?.width(24)
     .height(24)
     .blur(10)
@@ -62,7 +63,7 @@ export const Highlight = ({
     >
       <div className={styles.sectionImageWrapper}>
         {useStatusImage && imageUrl ? (
-          <Image
+          <NextImage
             src={imageUrl}
             blurDataURL={imageBlurUrl}
             placeholder="blur"
@@ -76,7 +77,7 @@ export const Highlight = ({
             alt={`thumbnail for ${article.heading}`}
           />
         ) : seoImageUrl ? (
-          <Image
+          <NextImage
             src={seoImageUrl}
             blurDataURL={seoImageBlurUrl}
             placeholder="blur"
@@ -91,7 +92,7 @@ export const Highlight = ({
             alt={`thumbnail for ${article.heading}`}
           />
         ) : (
-          <Image
+          <NextImage
             src={getImage(article?.heading ?? "", "thumbnail")}
             layout="fill"
             objectFit="contain"
@@ -104,10 +105,7 @@ export const Highlight = ({
       </div>
       <div>
         <HStack gap="space-8">
-          <Tag
-            type={article._type}
-            text={article.tema ? article.tema[0] : undefined}
-          />
+          <Tag type={article._type} text={article?.tema?.[0] ?? undefined} />
           {article.status?.tag === "beta" && <BetaTag />}
         </HStack>
         <Heading size="large" level="3">
@@ -116,10 +114,10 @@ export const Highlight = ({
             onClick={() =>
               umamiTrack("navigere", {
                 kilde: "global sok",
-                url: `/${article.slug.current}`,
+                url: `/${article.slug}`,
               })
             }
-            href={`/${article.slug.current}`}
+            href={`/${article.slug}`}
             className={styles.highlightLink}
           >
             {article?.heading}
