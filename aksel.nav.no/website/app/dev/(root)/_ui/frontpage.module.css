@@ -50,14 +50,14 @@
   animation: 60s ease infinite rainbow-hype;
   background: linear-gradient(196deg, var(--gradient-1) 8.43%, var(--gradient-2) 24%, transparent 70.98%);
 
-  /* temporary colors */
+  /* hardcoded color values to allow gradient animation to work (our tokens don't use @property) */
   --aksel-brand-logo: #004367;
-  --aksel-brand-teal-200: #0d2725; /* also lighter? */
+  --aksel-brand-teal-200: #0d2725;
   --aksel-brand-teal-300: #b7eee4;
   --aksel-brand-teal-400: #90e1d2;
   --aksel-brand-teal-800: #41ab9d;
   --meta-purple-subtleA: #c380fe;
-  --brand-blue-moderate: #00253c; /* lighter than 00253c? */
+  --brand-blue-moderate: #00253c;
 }
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
