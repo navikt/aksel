@@ -64,7 +64,7 @@
 
   &[data-state="active"] {
     --__axc-tabs-line-width: -4px;
-    --__axc-tabs-line-color: var(--ax-border-accent-strong);
+    --__axc-tabs-line-color: var(--ax-border-strong);
   }
 
   &:focus-visible {

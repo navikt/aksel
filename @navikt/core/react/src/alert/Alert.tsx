@@ -8,6 +8,7 @@ import {
 } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { BodyLong } from "../typography";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
@@ -53,6 +54,10 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * **Requires closeButton to be true**.
    */
   onClose?: () => void;
+  /**
+   * Overriding Alert color is not supported.
+   */
+  "data-color"?: never;
 }
 
 const IconMap = {
@@ -93,6 +98,8 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     return (
       <div
         {...rest}
+        data-color={variantToRole(variant)}
+        data-variant={variant}
         ref={ref}
         className={cn(
           className,
@@ -141,5 +148,20 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     );
   },
 );
+
+function variantToRole(variant: AlertProps["variant"]): AkselColor {
+  switch (variant) {
+    case "warning":
+      return "warning";
+    case "error":
+      return "danger";
+    case "info":
+      return "info";
+    case "success":
+      return "success";
+    default:
+      return "info";
+  }
+}
 
 export default Alert;

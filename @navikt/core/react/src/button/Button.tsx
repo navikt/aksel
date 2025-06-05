@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { Loader } from "../loader";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { Label } from "../typography";
 import { omit } from "../util";
 import { composeEventHandlers } from "../util/composeEventHandlers";
@@ -76,6 +76,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         icon,
         iconPosition = "left",
         onKeyUp,
+        "data-color": color,
         ...rest
       },
       ref,
@@ -94,7 +95,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       return (
         <Component
           {...(Component !== "button" ? { role: "button" } : {})}
-          data-color-role={variantToRole(variant)}
+          data-color={color ?? variantToColor(variant)}
           data-variant={variantToSimplifiedVariant(variant)}
           {...filterProps}
           ref={ref}
@@ -129,12 +130,10 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
     },
   );
 
-function variantToRole(variant: ButtonProps["variant"]): GlobalColorRoles {
+function variantToColor(
+  variant: ButtonProps["variant"],
+): AkselColor | undefined {
   switch (variant) {
-    case "primary":
-    case "secondary":
-    case "tertiary":
-      return "accent";
     case "primary-neutral":
     case "secondary-neutral":
     case "tertiary-neutral":
@@ -142,7 +141,7 @@ function variantToRole(variant: ButtonProps["variant"]): GlobalColorRoles {
     case "danger":
       return "danger";
     default:
-      return "accent";
+      return undefined;
   }
 }
 

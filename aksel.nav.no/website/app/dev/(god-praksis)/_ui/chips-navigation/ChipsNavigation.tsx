@@ -76,13 +76,13 @@ function GodPrakisChipsNavigation(props: GpChipNavigationProps) {
       gap={{ xs: "space-8", sm: "space-16 space-12" }}
       align="start"
     >
-      <HStack gap="space-4" align="center" asChild data-color-role="brand-blue">
+      <HStack gap="space-4" align="center" asChild data-color="brand-blue">
         <Heading level="2" size="xsmall" className={styles.chipsHeading}>
           <TagFillIcon aria-hidden fontSize="1.25rem" />
           Undertema
         </Heading>
       </HStack>
-      <HStack gap="space-8" align="center" asChild data-color-role="brand-blue">
+      <HStack gap="space-8" align="center" asChild data-color="brand-blue">
         <BodyShort size="small" as="ul">
           <li>
             <GodPrakisChipsNavigationButton
@@ -109,23 +109,13 @@ function GodPrakisChipsNavigation(props: GpChipNavigationProps) {
         </BodyShort>
       </HStack>
 
-      <HStack
-        gap="space-2"
-        align="center"
-        asChild
-        data-color-role="meta-purple"
-      >
+      <HStack gap="space-2" align="center" asChild data-color="meta-purple">
         <Heading level="2" size="xsmall" className={styles.chipsHeading}>
           <FileFillIcon aria-hidden fontSize="1.25rem" />
           Innholdstype
         </Heading>
       </HStack>
-      <HStack
-        gap="space-8"
-        align="center"
-        asChild
-        data-color-role="meta-purple"
-      >
+      <HStack gap="space-8" align="center" asChild data-color="meta-purple">
         <BodyShort size="small" as="ul">
           <li>
             <GodPrakisChipsNavigationButton

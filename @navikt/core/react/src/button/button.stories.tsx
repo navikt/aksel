@@ -156,38 +156,34 @@ export const DisabledAsLink: Story = {
   render: () => <ButtonGrid disabled href="#" as="a" />,
 };
 
-export const ButtonWithColorRoles: Story = {
-  render: () => (
-    <VStack gap="2">
-      <HStack gap="2">
-        <Button variant="primary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button variant="secondary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button variant="tertiary" icon={<StarIcon />}>
-          Button
-        </Button>
-      </HStack>
-      <HStack gap="2">
-        <Button data-color-role="danger" variant="primary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button
-          data-color-role="danger"
-          variant="secondary"
-          icon={<StarIcon />}
-        >
-          Button
-        </Button>
-        <Button data-color-role="danger" variant="tertiary" icon={<StarIcon />}>
-          Button
-        </Button>
-      </HStack>
-    </VStack>
-  ),
-};
+export const ColorRole = () => (
+  <VStack gap="2">
+    <h2>Variants + data-color on parent</h2>
+    <HStack gap="2" data-color="danger">
+      <Button variant="primary" icon={<StarIcon />}>
+        Button
+      </Button>
+      <Button variant="secondary" icon={<StarIcon />}>
+        Button
+      </Button>
+      <Button variant="tertiary" icon={<StarIcon />}>
+        Button
+      </Button>
+    </HStack>
+    <h2>Variants + data-color on button</h2>
+    <HStack gap="2">
+      <Button data-color="danger" variant="primary" icon={<StarIcon />}>
+        Button
+      </Button>
+      <Button data-color="danger" variant="secondary" icon={<StarIcon />}>
+        Button
+      </Button>
+      <Button data-color="danger" variant="tertiary" icon={<StarIcon />}>
+        Button
+      </Button>
+    </HStack>
+  </VStack>
+);
 
 export const InsideModal: Story = {
   render: () => {
@@ -256,6 +252,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Disabled</h2>
         <ButtonGrid disabled />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </VStack>
   ),
