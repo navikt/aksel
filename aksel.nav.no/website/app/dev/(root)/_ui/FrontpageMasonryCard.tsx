@@ -17,33 +17,27 @@ import {
 import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 
-// This type is a kind of "aggregate" for different articles (eg. status.tag)
-// "aksel_artikkel", "aksel_blogg", "ds_artikkel", "komponent_artikkel ...
-export type ArticleT =
-  | NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number]
-  | NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["komponenter"][number]
-  | NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["bloggposts"][number];
+type a =
+  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number];
+type b =
+  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["bloggposts"][number];
+type k =
+  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["komponenter"][number];
 
-// &
-//     Partial<{
-//       status: {
-//         tag: "beta" | "new" | "ready" | "";
-//         bilde?: Image;
-//       };
-//       contributors?: { title: string }[];
-//       publishedAt?: string;
-//     }>;
+export type ArticleT = a | k | b;
 
-const isArticle = (
-  article: ArticleT,
-): article is NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number] => {
+const isArticle = (article: ArticleT): article is a => {
   return article._type === "aksel_artikkel";
 };
 
-const isBlogg = (
-  article: ArticleT,
-): article is NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["bloggposts"][number] => {
+const isBlogg = (article: ArticleT): article is b => {
   return article._type === "aksel_blogg";
+};
+
+const isKomponent = (article: ArticleT): article is k => {
+  return ["komponent_artikkel", "ds_artikkel", "templates_artikkel"].includes(
+    article._type,
+  );
 };
 
 type CardProps = {
@@ -71,10 +65,6 @@ const Card = ({ article, visible, index }: CardProps) => {
       return "";
     }
     return article.status?.tag;
-  };
-
-  const hasIngress = () => {
-    return isArticle(article) || isBlogg(article);
   };
 
   return (
@@ -121,7 +111,7 @@ const Card = ({ article, visible, index }: CardProps) => {
               </LinkCardAnchor>
             </LinkCardTitle>
           </Stack>
-          {hasIngress() ? (
+          {isArticle(article) || isBlogg(article) ? (
             <LinkCardDescription>{article.ingress}</LinkCardDescription>
           ) : article.seo?.meta ? (
             <LinkCardDescription>{article.seo.meta}</LinkCardDescription>
@@ -132,7 +122,9 @@ const Card = ({ article, visible, index }: CardProps) => {
           <span className={styles.cardAuthor}>
             {article?.contributors && (
               <Detail as="span" weight="semibold">
-                {abbrName(article?.contributors[0]?.title)}
+                {abbrName(
+                  article.contributors[0].title ?? "Manglende Forfatter",
+                )}
               </Detail>
             )}
             <Detail as="span">{date}</Detail>
@@ -140,12 +132,16 @@ const Card = ({ article, visible, index }: CardProps) => {
         )}
 
         <HStack gap="space-8">
-          <Tag
-            type={article._type}
-            text={article.tema?.[0] ?? undefined}
-            size="xsmall"
-          />
-          {article.status?.tag === "beta" && <BetaTag />}
+          {isArticle(article) && (
+            <Tag
+              type={article._type}
+              text={article.tema?.[0] ?? undefined}
+              size="xsmall"
+            />
+          )}
+          {isKomponent(article) && article.status?.tag === "beta" && (
+            <BetaTag />
+          )}
         </HStack>
       </VStack>
     </LinkCard>
