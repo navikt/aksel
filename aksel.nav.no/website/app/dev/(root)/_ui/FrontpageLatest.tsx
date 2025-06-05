@@ -3,23 +3,20 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { BoxNew, HGrid, Heading } from "@navikt/ds-react";
-import { LANDINGSSIDE_LATEST_QUERYResult } from "@/app/_sanity/query-types";
 import Card, { ArticleT } from "./FrontpageMasonryCard";
 import { Highlight } from "./HighlightedArticle";
 import styles from "./frontpage.module.css";
 
-// export type LatestT = {
-//   _type: "nytt_fra_aksel";
-//   _key: string;
-//   highlights: ArticleT[];
-//   curatedRecent: {
-//     artikler: ArticleT[];
-//     bloggposts: ArticleT[];
-//     komponenter: ArticleT[];
-//   };
-// };
-
-export type LatestT = NonNullable<LANDINGSSIDE_LATEST_QUERYResult>;
+export type LatestT = {
+  _type: "nytt_fra_aksel";
+  _key: string;
+  highlights: ArticleT[];
+  curatedRecent: {
+    artikler: ArticleT[];
+    bloggposts: ArticleT[];
+    komponenter: ArticleT[];
+  };
+};
 
 type LatestArticlesProps = {
   block: LatestT;
@@ -91,7 +88,8 @@ function getList(block: LatestT) {
     ...block.curatedRecent.komponenter,
   ].sort((a, b) => {
     return (
-      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      new Date(b.publishedAt ?? "").getTime() -
+      new Date(a.publishedAt ?? "").getTime()
     );
   });
 }
