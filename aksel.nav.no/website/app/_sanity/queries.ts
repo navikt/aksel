@@ -238,6 +238,7 @@ const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
     _type == "nytt_fra_aksel"=>{
       highlights[]->{
         ...,
+        "slug": slug.current,
         "content": null,
         ${contributorsAll},
         "tema": undertema[]->tema->title,
