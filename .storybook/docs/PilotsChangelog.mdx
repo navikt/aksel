@@ -4,21 +4,32 @@ import { Meta, Title } from "@storybook/blocks";
 
 # Darkside changelog
 
-## v7.23 (12.05.25)
+## v7.23 (06.06.25)
 
-Updates to Button and Tag components.
+## Tokens
 
-Removed classes for defining variants. Variant styling is now done using `data-variant`-attribute on the component.
+Renamed `data-color-role` dynamic theme attribute to `data-color`.
 
-- As for color-selection, variant is translated to `data-color-role`-attribute on the component for "theming".
+## CSS
+
+Almost all CSS is either updated or refactored to use the new `data-color`-attribute for coloring.
+
+## React
+
+Updates to almost all components to use `data-color`-attribute for coloring, instead of using classes for defining colors where possible.
+
+## Types
+
+Updated names of all darkside spesific types exported from `@navikt/ds-tokens`.
 
 ```
+
 // Button.tsx | before
-<button
-  className="navds-button navds-button--primary-neutral"
-/>
+
+<button className="navds-button navds-button--primary-neutral" />
 
 // Button.tsx | after
+
 <button
   className="navds-button"
   data-color-role="neutral"
