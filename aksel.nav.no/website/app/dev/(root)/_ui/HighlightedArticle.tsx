@@ -14,7 +14,12 @@ import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { getAuthors, getImage } from "@/utils";
-import { ArticleT } from "./FrontpageMasonryCard";
+import {
+  ArticleT,
+  isArticle,
+  isBlogg,
+  isKomponent,
+} from "./FrontpageMasonryCard";
 import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 
@@ -27,17 +32,20 @@ export const Highlight = ({
 }) => {
   const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
   const useStatusImage =
-    ["ds_artikkel", "komponent_artikkel"].includes(article._type) &&
-    (article.status?.bilde as Image);
+    isKomponent(article) && (article.status?.bilde as Image);
 
   const date = useFormatedDate(article?.publishedAt ?? article._createdAt);
 
-  const imageUrl = urlForImage(article.status?.bilde as Image)
+  const imageUrl = urlForImage(
+    isKomponent(article) ? (article.status?.bilde as Image) : null,
+  )
     ?.quality(100)
     .auto("format")
     .url();
 
-  const imageBlurUrl = urlForImage(article.status?.bilde as Image)
+  const imageBlurUrl = urlForImage(
+    isKomponent(article) ? (article.status?.bilde as Image) : null,
+  )
     ?.width(24)
     .height(24)
     .blur(10)
@@ -53,6 +61,13 @@ export const Highlight = ({
     .height(24)
     .blur(10)
     .url();
+
+  const getStatusTag = () => {
+    if (isArticle(article) || isBlogg(article)) {
+      return "";
+    }
+    return article.status?.tag;
+  };
 
   return (
     <HGrid
@@ -86,7 +101,7 @@ export const Highlight = ({
             objectFit="cover"
             aria-hidden
             className={cl(`${styles.sectionImage}`, {
-              [`${styles.betaHue}`]: article?.status?.tag === "beta",
+              [`${styles.betaHue}`]: getStatusTag() === "beta",
             })}
             decoding="auto"
             alt={`thumbnail for ${article.heading}`}
@@ -105,8 +120,13 @@ export const Highlight = ({
       </div>
       <div>
         <HStack gap="space-8">
-          <Tag type={article._type} text={article?.tema?.[0] ?? undefined} />
-          {article.status?.tag === "beta" && <BetaTag />}
+          <Tag
+            type={article._type}
+            text={
+              isArticle(article) ? article?.tema?.[0] ?? undefined : undefined
+            }
+          />
+          {getStatusTag() === "beta" && <BetaTag />}
         </HStack>
         <Heading size="large" level="3">
           <Link
@@ -124,7 +144,8 @@ export const Highlight = ({
           </Link>
         </Heading>
         <BodyLong className="mb-4" size="medium">
-          {article?.ingress ?? article.seo?.meta}
+          {isArticle(article) ||
+            (isBlogg(article) && (article?.ingress ?? article.seo?.meta))}
         </BodyLong>
         {showFooter && getAuthors(article as any).length > 0 && (
           <BodyShort size="small" className={styles.highlightAuthor}>

@@ -26,15 +26,15 @@ type k =
 
 export type ArticleT = a | k | b;
 
-const isArticle = (article: ArticleT): article is a => {
+export const isArticle = (article: ArticleT): article is a => {
   return article._type === "aksel_artikkel";
 };
 
-const isBlogg = (article: ArticleT): article is b => {
+export const isBlogg = (article: ArticleT): article is b => {
   return article._type === "aksel_blogg";
 };
 
-const isKomponent = (article: ArticleT): article is k => {
+export const isKomponent = (article: ArticleT): article is k => {
   return ["komponent_artikkel", "ds_artikkel", "templates_artikkel"].includes(
     article._type,
   );
