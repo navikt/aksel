@@ -86,9 +86,12 @@ export type StyleDictionaryToken<T extends TokenTypes> = {
   )[];
   /**
    * In some cases, we want to hide tokens from the Figma plugin.
-   * Currently only relevant for shadow-tokens.
    */
   figmaIgnore?: boolean;
+  /**
+   * In some cases, we want to hide tokens from Token documentation
+   */
+  docsIgnore?: boolean;
 };
 
 export type StyleDictionaryTokenConfig<T extends TokenTypes> = {

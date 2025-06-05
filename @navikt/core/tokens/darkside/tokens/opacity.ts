@@ -9,6 +9,7 @@ export function opacityTokenConfig(theme: AkselColorTheme) {
         type: "opacity",
         comment: "Used for setting opacity on disabled elements.",
         figmaIgnore: true,
+        docsIgnore: true,
       },
     },
   } satisfies {

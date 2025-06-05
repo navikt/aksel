@@ -1,7 +1,7 @@
 "use client";
 
 import { stegaClean } from "next-sanity";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { BoxNew, HStack, Skeleton, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
@@ -19,8 +19,6 @@ function KodeEksemplerIFrame(props: {
 }) {
   const { dir } = props;
 
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
   const [frameState, setFrameState] = useState(300);
 
   const {
@@ -28,6 +26,7 @@ function KodeEksemplerIFrame(props: {
     showCode,
     compact,
     resizerRef,
+    iframeRef,
   } = useKodeEksempler();
 
   const handleExampleLoad = () => {
@@ -115,6 +114,10 @@ function KodeEksemplerIFrame(props: {
         code={current?.innhold?.trim()}
         base64={current?.sandboxEnabled ? current?.sandboxBase64 : undefined}
         link={iframeUrl}
+        reload={() => {
+          updateLoaded(false);
+          iframeRef.current?.contentWindow?.location.reload();
+        }}
       />
 
       {showCode && (
