@@ -26,31 +26,34 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
       return sidebarData;
     }
 
+    const isValidHit = (value: string): boolean => {
+      return value.toLowerCase().includes(filterText.toLowerCase());
+    };
+
     const sections: DesignsystemSidebarDataT = [];
 
     for (const section of sidebarData) {
       const pages: SidebarPageT[] = [];
+
       for (const link of section.links) {
-        if (itemIsSidebarGroup(link)) {
-          for (const page of link.pages) {
-            if (page.heading.toLowerCase().includes(filterText.toLowerCase())) {
-              pages.push(page);
-            }
-          }
+        if (!itemIsSidebarGroup(link)) {
+          isValidHit(link.heading) && pages.push(link);
           continue;
         }
 
-        if (link.heading.toLowerCase().includes(filterText.toLowerCase())) {
-          pages.push(link);
+        for (const page of link.pages) {
+          isValidHit(page.heading) && pages.push(page);
         }
       }
 
-      if (pages.length > 0) {
-        sections.push({
-          label: section.label,
-          links: pages,
-        });
+      if (pages.length === 0) {
+        continue;
       }
+
+      sections.push({
+        label: section.label,
+        links: pages,
+      });
     }
 
     return sections;
