@@ -41,6 +41,11 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
           continue;
         }
 
+        if (isValidHit(link.title)) {
+          pages.push(...link.pages);
+          continue;
+        }
+
         for (const page of link.pages) {
           isValidHit(page.heading) && pages.push(page);
         }
