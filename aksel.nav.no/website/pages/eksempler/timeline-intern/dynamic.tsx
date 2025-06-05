@@ -182,31 +182,34 @@ const Example = () => {
  */
 function getPeriods(startDate: Date, seed: number): TimelinePeriodProps[] {
   /* Seeded random to avoid hydration-errors */
-  const rand = seededRandom(startDate.getTime() + seed);
+  const rand = seededRandom(seed);
 
-  /* We generate periods based on accounting for the largest possible window */
-  const numPeriods = 12;
+  /* Calculate a range: 3 years before and 3 years after the startDate's year */
+  const yearsBack = 2;
+  const yearsForward = 2;
+  const startYear = startDate.getFullYear() - yearsBack;
+  const endYear = startDate.getFullYear() + yearsForward;
+
+  const rangeStart = new Date(startYear, 0, 1);
+  const rangeEnd = new Date(endYear, 11, 31);
+
   const periods: TimelinePeriodProps[] = [];
-  let lastEnd = 0;
+  let current = new Date(rangeStart);
 
-  for (let i = 0; i < numPeriods; i++) {
+  while (current < rangeEnd) {
     /* Arbitrary period-size to 'look ok' for all window-sizes  */
     const baseDuration = 10 + Math.floor(rand() * 10);
 
     /* Gap between periods of 0 -> 30 days */
     const baseGap = Math.floor(rand() * 30);
 
-    /**
-     * We make sure to avoid large overlaps between periods
-     * In reality this can and will happend, so should really be handled by the component itself...
-     */
-    const startOffset = lastEnd + baseGap;
-    const duration = baseDuration;
-    lastEnd = startOffset + duration;
-    const periodStart = new Date(startDate.getTime());
-    periodStart.setDate(periodStart.getDate() + startOffset);
-    const periodEnd = new Date(periodStart.getTime());
-    periodEnd.setDate(periodEnd.getDate() + duration);
+    const periodStart = new Date(current);
+    periodStart.setDate(periodStart.getDate() + baseGap);
+    const periodEnd = new Date(periodStart);
+    periodEnd.setDate(periodEnd.getDate() + baseDuration);
+
+    /* Stop if periodStart is after rangeEnd */
+    if (periodStart > rangeEnd) break;
 
     /* Randomly pick a status and icon for the period */
     const statusOptions = [
@@ -245,6 +248,9 @@ function getPeriods(startDate: Date, seed: number): TimelinePeriodProps[] {
       icon: pick.icon,
       statusLabel: pick.statusLabel,
     });
+
+    // Move current to the end of this period
+    current = new Date(periodEnd);
   }
 
   return periods;
