@@ -1,5 +1,6 @@
 ---
 "@navikt/ds-react": minor
+"@navikt/ds-css": minor
 ---
 
-Darkside: Adding type '@navikt/ds-react/types/theme' to your local 'tsconfig.json' types-field allows autocomplete for all available 'AkselColors' in attribute 'data-color'. [Read more about this in the documentation](http://aksel.nav.no/grunnleggende/darkside/theming).
+Darkside: All components has been updated to use 'data-color' attribute for coloring. As a side-effect, most component CSS is either updated or refactored.

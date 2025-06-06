@@ -23,7 +23,7 @@ import type {} from "@navikt/core/react/types/theme";
  * ```
  */
 declare module "@navikt/ds-react/types/theme" {
-  export interface CustomAkselColors {
+  export interface CustomAkselColor {
     "aksel-brand-teal": never;
     "aksel-brand-pink": never;
   }
