@@ -19,13 +19,18 @@ function DesignsystemSidebarSubNav(
   const isDarkside = title.toLowerCase() === "darkside";
 
   const isSectionActive = pages.some((page) => {
-    return pathName?.split("#")[0] === stegaClean(`/${page.slug}`);
+    return pathName?.split("#")[0] === stegaClean(`/dev/${page.slug}`);
   });
 
   const [open, setOpen] = useState(isSectionActive);
 
   return (
-    <li data-type={isDarkside ? "darkside" : "neutral"}>
+    <li
+      data-color-role={isDarkside ? "brand-magenta" : "brand-blue"}
+      data-active={isSectionActive}
+      data-highlight={isDarkside}
+      className={styles.navListSub}
+    >
       <button
         onClick={() => {
           setOpen(!open);

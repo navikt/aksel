@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { BodyShort, Detail } from "@navikt/ds-react";
+import { BodyShort, Box, Detail } from "@navikt/ds-react";
 import { DesignsystemSidebarSectionT } from "@/types";
 import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
@@ -18,7 +18,7 @@ function DesignsystemSidebarGroup(props: DesignsystemSidebarGroupT) {
   const LabelComponent = layout === "sidebar" ? Detail : BodyShort;
 
   return (
-    <li className={styles.navListGroup} data-layout={layout}>
+    <Box as="li" borderRadius="4" data-layout={layout}>
       <LabelComponent
         as="div"
         className={styles.navListGroupLabel}
@@ -50,7 +50,7 @@ function DesignsystemSidebarGroup(props: DesignsystemSidebarGroupT) {
           );
         })}
       </ul>
-    </li>
+    </Box>
   );
 }
 
