@@ -151,6 +151,9 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
   *[_type == $type && defined(slug.current)].slug.current
 `);
 
+const N_LATEST_CHANGE_LOGS_QUERY = defineQuery(`
+  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato }[0...$count]`);
+
 /* ------------------------------- God praksis ------------------------------ */
 const GOD_PRAKSIS_ALL_TEMA_QUERY =
   defineQuery(`*[_type == "gp.tema"] | order(lower(title)){
@@ -290,6 +293,7 @@ export {
   DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
   DOCUMENT_BY_ID_FOR_SLACK_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
+  N_LATEST_CHANGE_LOGS_QUERY,
   GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,

@@ -1,29 +1,28 @@
-import Link from "next/link";
-import { Bleed, BodyLong, HStack, Heading, VStack } from "@navikt/ds-react";
+import { format, parseISO } from "date-fns";
+import { nb } from "date-fns/locale";
+import {
+  Bleed,
+  BodyLong,
+  HStack,
+  Heading,
+  Link,
+  VStack,
+} from "@navikt/ds-react";
+import { N_LATEST_CHANGE_LOGS_QUERYResult } from "@/app/_sanity/query-types";
 import {
   LinkCard,
+  LinkCardAnchor,
   LinkCardDescription,
   LinkCardIcon,
   LinkCardTitle,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { GithubIcon } from "@/assets/Icons";
 
-const changes = [
-  {
-    title: "Aksel@7.16.0",
-    description: "6. februar 2025",
-  },
-  {
-    title: "Aksel@7.15.0",
-    description: "23. mars 2025",
-  },
-  {
-    title: "Aksel@7.14.0",
-    description: "14. april 2025",
-  },
-];
+type Props = {
+  entries: N_LATEST_CHANGE_LOGS_QUERYResult;
+};
 
-const ChangeLogNews = () => (
+const ChangeLogNews = ({ entries }: Props) => (
   <Bleed marginInline="full">
     <VStack gap="space-32" as="section">
       <VStack gap="space-8" align="center">
@@ -37,10 +36,20 @@ const ChangeLogNews = () => (
         </BodyLong>
       </VStack>
       <HStack gap="space-24">
-        {changes.map(({ title, description }) => (
-          <LinkCard key={title} hasArrow={false}>
-            <LinkCardTitle as="span">{title}</LinkCardTitle>
-            <LinkCardDescription>{description}</LinkCardDescription>
+        {entries.map(({ heading, slug, endringsdato }) => (
+          <LinkCard key={heading} hasArrow={false}>
+            <LinkCardTitle as="span">
+              <LinkCardAnchor
+                href={`/dev/grunnleggende/kode/endringslogg/${slug?.current}`}
+              >
+                {heading}
+              </LinkCardAnchor>
+            </LinkCardTitle>
+            {endringsdato && (
+              <LinkCardDescription>
+                {format(parseISO(endringsdato), "do MMMM yyyy", { locale: nb })}
+              </LinkCardDescription>
+            )}
             <LinkCardIcon>
               <GithubIcon width="32" height="32" aria-hidden="true" />
             </LinkCardIcon>
