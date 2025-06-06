@@ -46,11 +46,7 @@ function DesignsystemSidebarItem(props: {
       >
         {page.heading}
         {statusTag && (
-          <Tag
-            variant="info"
-            size="xsmall"
-            data-color-role={statusTag.colorRole}
-          >
+          <Tag variant="info" size="xsmall" data-color={statusTag.colorRole}>
             {statusTag.text}
           </Tag>
         )}

@@ -27,7 +27,7 @@ function DesignsystemSidebarSubNav(
 
   return (
     <li
-      data-color-role={isDarkside ? "brand-magenta" : "brand-blue"}
+      data-color={isDarkside ? "brand-magenta" : "brand-blue"}
       data-active={isSectionActive}
       data-highlight={isDarkside}
       className={styles.navListSub}

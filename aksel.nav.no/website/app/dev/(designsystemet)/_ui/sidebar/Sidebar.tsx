@@ -25,7 +25,7 @@ async function DesignsystemSidebar(props: SidebarProps) {
           as="ul"
           className={styles.navListUl}
           size={layout === "sidebar" ? "small" : "medium"}
-          data-color-role="brand-blue"
+          data-color="brand-blue"
         >
           {sidebarData.map((section, index) => {
             return (
