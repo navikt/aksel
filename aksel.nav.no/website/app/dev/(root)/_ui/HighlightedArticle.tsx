@@ -71,6 +71,7 @@ export const Highlight = ({
 
   return (
     <HGrid
+      as="section"
       aria-label={`Fremhevet artikkel: ${article?.heading}`}
       align="start"
       className={styles.highlight}
