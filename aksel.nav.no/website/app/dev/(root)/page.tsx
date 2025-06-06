@@ -24,7 +24,7 @@ import { Header } from "../../_ui/header/Header";
 import "../../globals.css";
 import { PauseAnimationProvider } from "./_ui/AnimationStopContext";
 import { Hero } from "./_ui/FrontpageHero";
-import { FrontpageLatest } from "./_ui/FrontpageLatest";
+import { FrontpageLatest, LatestT } from "./_ui/FrontpageLatest";
 import { GpFrontpageCard } from "./_ui/GpFrontpageCard";
 import { MainWrapper } from "./_ui/MainWrapper";
 import styles from "./_ui/frontpage.module.css";
@@ -138,7 +138,7 @@ const Page = async () => {
                     marginInline="full"
                     className={styles.cubeBlocker}
                   >
-                    <FrontpageLatest latest={latest} />
+                    <FrontpageLatest latest={latest as LatestT[]} />
                   </Bleed>
                 )}
               </PageBlock>
