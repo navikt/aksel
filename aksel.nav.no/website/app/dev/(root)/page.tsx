@@ -73,7 +73,7 @@ const Page = async () => {
                 href="/darkside"
                 target="_blank"
                 as={NextLink}
-                className={styles.bannerLink}
+                variant="neutral"
               >
                 Vi trenger testere fra team i Nav for darkmode og theming!
               </Link>
