@@ -7,7 +7,11 @@ const isPartOfText = (value: string, text: string) =>
   normalizeText(text).includes(normalizeText(value ?? ""));
 
 const getMatchingValuesFromList = (value: string, list: ComboboxOption[]) =>
-  list.filter((listItem) => isPartOfText(value, listItem.label));
+  list.filter(
+    (listItem) =>
+      isPartOfText(value, listItem.label) ||
+      (listItem.group && isPartOfText(value, listItem.group)),
+  );
 
 const getFirstValueStartingWith = (text: string, list: ComboboxOption[]) => {
   return list.find((listItem) =>
