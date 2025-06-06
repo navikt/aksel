@@ -34,7 +34,7 @@
 
 .aksel-guide {
   box-sizing: border-box;
-  border: 2px solid var(--ax-border-info);
+  border: 2px solid var(--ax-border-default);
   border-radius: var(--ax-radius-full);
   overflow: hidden;
   width: var(--__axc-guide-panel-guide-size);
@@ -50,7 +50,7 @@
 
 .aksel-guide-panel__content {
   background-color: var(--ax-bg-raised);
-  border: 2px solid var(--ax-border-info);
+  border: 2px solid var(--ax-border-default);
   border-radius: var(--ax-radius-12);
   position: relative;
 

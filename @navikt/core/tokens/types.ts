@@ -1,98 +1,124 @@
-export type ColorTheme = "light" | "dark";
+/* --------------------------------- Themes --------------------------------- */
+type AkselColorTheme = "light" | "dark";
 
-export const ColorRolesList = [
-  "neutral",
-  "accent",
-  "success",
-  "warning",
-  "danger",
-  "info",
-  "brand-magenta",
-  "brand-beige",
-  "brand-blue",
-  "meta-purple",
-  "meta-lime",
-] as const;
+/* ------------------------------ Main colors ----------------------------- */
+type AkselMainColorRole = "neutral" | "accent";
 
-export type GlobalColorRoles = (typeof ColorRolesList)[number];
-export type SemanticColorRoles = GlobalColorRoles;
+/* ------------------------------ Status colors ----------------------------- */
+type AkselStatusColorRole = "info" | "success" | "warning" | "danger";
 
-export type GlobalColorScale =
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900"
-  | "1000"
-  | "000"
-  | "100A"
-  | "200A"
-  | "300A"
-  | "400A";
+/* ------------------------------ Brand colors ------------------------------ */
+type AkselBrandColorRole = "brand-magenta" | "brand-beige" | "brand-blue";
 
-export type GlobalColorKeys =
-  | `${Extract<GlobalColorRoles, "neutral">}-${Extract<
-      GlobalColorScale,
-      "000"
-    >}`
-  | `${GlobalColorRoles}-${Exclude<GlobalColorScale, "000">}`;
+/* ------------------------------ Meta colors ------------------------------ */
+type AkselMetaColorRole = "meta-purple" | "meta-lime";
 
-/* Semantic tokens */
+/* ------------------------------- All colors ------------------------------- */
+type AkselColorRole =
+  | AkselMainColorRole
+  | AkselStatusColorRole
+  | AkselBrandColorRole
+  | AkselMetaColorRole;
 
-export type StaticDefaultBgKeys =
+export type {
+  AkselColorTheme,
+  AkselColorRole,
+  AkselMainColorRole,
+  AkselStatusColorRole,
+  AkselBrandColorRole,
+  AkselMetaColorRole,
+};
+
+/* --------------------------- Backgrounds tokens --------------------------- */
+type AkselRootBackgroundToken =
   | "default"
   | "input"
   | "raised"
   | "sunken"
   | "overlay";
 
-export type StaticBgKeys =
-  | `${SemanticColorRoles}-soft`
-  | `${SemanticColorRoles}-softA`
-  | `${SemanticColorRoles}-moderate`
-  | `${SemanticColorRoles}-moderateA`
-  | `${SemanticColorRoles}-strong`;
+type AkselColoredStatelessBackgroundToken =
+  | `${AkselColorRole}-soft`
+  | `${AkselColorRole}-softA`
+  | `${AkselColorRole}-moderate`
+  | `${AkselColorRole}-moderateA`
+  | `${AkselColorRole}-strong`;
 
-export type StatefulBgKeys =
-  | `${SemanticColorRoles}-moderate-hover`
-  | `${SemanticColorRoles}-moderate-hoverA`
-  | `${SemanticColorRoles}-moderate-pressed`
-  | `${SemanticColorRoles}-moderate-pressedA`
-  | `${SemanticColorRoles}-strong-hover`
-  | `${SemanticColorRoles}-strong-pressed`;
+type AkselColoredStatefulBackgroundToken =
+  | `${AkselColorRole}-moderate-hover`
+  | `${AkselColorRole}-moderate-hoverA`
+  | `${AkselColorRole}-moderate-pressed`
+  | `${AkselColorRole}-moderate-pressedA`
+  | `${AkselColorRole}-strong-hover`
+  | `${AkselColorRole}-strong-pressed`;
 
-export type DefaultTextColorKeys = "logo";
+export type {
+  AkselRootBackgroundToken,
+  AkselColoredStatelessBackgroundToken,
+  AkselColoredStatefulBackgroundToken,
+};
 
-export type TextColorKeys =
-  | SemanticColorRoles
-  | `${SemanticColorRoles}-subtle`
-  | `${SemanticColorRoles}-decoration`
-  | `${SemanticColorRoles}-contrast`;
+/* ------------------------------- Text tokens ------------------------------ */
+type AkselRootTextToken = "logo";
 
-export type BorderColorKeys = "focus";
+type AkselColoredTextToken =
+  | AkselColoredStatefulBackgroundToken
+  | `${AkselColoredStatefulBackgroundToken}-subtle`
+  | `${AkselColoredStatefulBackgroundToken}-decoration`
+  | `${AkselColoredStatefulBackgroundToken}-contrast`;
 
-export type BorderColorWithRoleKeys =
-  | SemanticColorRoles
-  | `${SemanticColorRoles}-subtle`
-  | `${SemanticColorRoles}-subtleA`
-  | `${SemanticColorRoles}-strong`;
+export type { AkselRootTextToken, AkselColoredTextToken };
 
-export const spaceInPixels = [
-  0, 1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 80, 96,
-  128,
-] as const;
+/* ------------------------------ Border tokens ----------------------------- */
+type AkselRootBorderToken = "focus";
 
-export type SpaceKeys = `space-${(typeof spaceInPixels)[number]}`;
+type AkselColoredBorderToken =
+  | AkselColorRole
+  | `${AkselColorRole}-subtle`
+  | `${AkselColorRole}-subtleA`
+  | `${AkselColorRole}-strong`;
 
-export type ShadowKeys = "dialog";
+export type { AkselRootBorderToken, AkselColoredBorderToken };
 
-export type BorderRadiusKeys = "2" | "4" | "8" | "12" | "full";
+/* ------------------------------ Space tokens ------------------------------ */
+type AkselSpaceToken =
+  | "space-0"
+  | "space-1"
+  | "space-2"
+  | "space-4"
+  | "space-6"
+  | "space-8"
+  | "space-12"
+  | "space-16"
+  | "space-20"
+  | "space-24"
+  | "space-28"
+  | "space-32"
+  | "space-36"
+  | "space-40"
+  | "space-44"
+  | "space-48"
+  | "space-56"
+  | "space-64"
+  | "space-72"
+  | "space-80"
+  | "space-96"
+  | "space-128";
 
-export type BreakPointKeys =
+export type { AkselSpaceToken };
+
+/* ------------------------------ Shadow tokens ----------------------------- */
+type AkselShadowToken = "dialog";
+
+export type { AkselShadowToken };
+
+/* ------------------------------ Border Radius tokens --------------------- */
+type AkselBorderRadiusToken = "2" | "4" | "8" | "12" | "full";
+
+export type { AkselBorderRadiusToken };
+
+/* ------------------------------ Breakpoints tokens ------------------------ */
+type AkselBreakpointToken =
   | "xs"
   | "sm"
   | "sm-down"
@@ -105,52 +131,26 @@ export type BreakPointKeys =
   | "2xl"
   | "2xl-down";
 
-/* Typo-tokens */
-export type FontFamilyKeys = "family";
+export type { AkselBreakpointToken };
 
-export type FontSizeKeys =
-  | "size-heading-2xlarge"
-  | "size-heading-xlarge"
-  | "size-heading-large"
-  | "size-heading-medium"
-  | "size-heading-small"
-  | "size-heading-xsmall"
-  | "size-xlarge"
-  | "size-large"
-  | "size-medium"
-  | "size-small";
-
-export type FontLineHeightKeys =
-  | "line-height-heading-2xlarge"
-  | "line-height-heading-xlarge"
-  | "line-height-heading-large"
-  | "line-height-heading-medium"
-  | "line-height-heading-small"
-  | "line-height-heading-xsmall"
-  | "line-height-xlarge"
-  | "line-height-large"
-  | "line-height-medium";
-
-export type FontWeightKeys = "weight-bold" | "weight-regular";
-
-/* Legacy tokens */
-export type LegacyBorderRadiusKeys =
+/* ------------------------------ Legacy tokens ----------------------------- */
+type AkselLegacyBorderRadiusToken =
   | "small"
   | "medium"
   | "large"
   | "xlarge"
   | "full";
 
-export type LegacyShadowKeys =
+type AkselLegacyShadowToken =
   | "xsmall"
   | "small"
   | "medium"
   | "large"
   | "xlarge";
 
-export type LegacyBgColorKeys = "bg-default" | "bg-subtle";
+type AkselLegacyBackgroundColorToken = "bg-default" | "bg-subtle";
 
-export type LegacySurfaceColorKeys =
+type AkselLegacySurfaceColorToken =
   | "surface-default"
   | "surface-selected"
   | "surface-subtle"
@@ -187,7 +187,7 @@ export type LegacySurfaceColorKeys =
   | "surface-alt-3-strong"
   | "surface-alt-3";
 
-export type LegacyBorderColorKeys =
+type AkselLegacyBorderColorToken =
   | "border-default"
   | "border-strong"
   | "border-divider"
@@ -208,7 +208,7 @@ export type LegacyBorderColorKeys =
   | "border-alt-2"
   | "border-alt-3";
 
-export type LegacySpacingKeys =
+type AkselLegacySpacingToken =
   | "0"
   | "05"
   | "1"
@@ -230,3 +230,12 @@ export type LegacySpacingKeys =
   | "20"
   | "24"
   | "32";
+
+export type {
+  AkselLegacyBorderRadiusToken,
+  AkselLegacyShadowToken,
+  AkselLegacyBackgroundColorToken,
+  AkselLegacySurfaceColorToken,
+  AkselLegacyBorderColorToken,
+  AkselLegacySpacingToken,
+};
