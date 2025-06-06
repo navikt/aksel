@@ -44,6 +44,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
       title,
       onClick,
       wrapperClassName,
+      "data-color": color = "info",
       ...rest
     },
     ref,
@@ -58,7 +59,10 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     const titleWithFallback = title || translate("title");
 
     return (
-      <div className={cn("navds-help-text", wrapperClassName)}>
+      <div
+        className={cn("navds-help-text", wrapperClassName)}
+        data-color={color}
+      >
         <button
           {...rest}
           ref={mergedRef}

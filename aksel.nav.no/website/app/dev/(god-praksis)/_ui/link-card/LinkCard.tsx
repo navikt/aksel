@@ -43,7 +43,7 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     return (
       <div
         ref={forwardedRef}
-        data-color-role="neutral"
+        data-color="neutral"
         {...restProps}
         className={cn("aksel-link-card", className)}
         data-arrow={hasArrow}
@@ -195,7 +195,7 @@ const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
           "aksel-link-card__icon--background": hasBackground,
         })}
         aria-hidden
-        data-color-role="neutral"
+        data-color="neutral"
         {...restProps}
       >
         {children}

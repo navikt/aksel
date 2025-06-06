@@ -73,11 +73,11 @@
 .aksel-form-summary__value .aksel-form-summary__answers {
   margin-top: var(--ax-space-8);
   padding: var(--ax-space-16);
-  background: var(--ax-bg-info-moderateA);
+  background: var(--ax-bg-moderateA);
   border-radius: var(--ax-radius-8);
-  border: 1px solid var(--ax-border-info-subtleA);
+  border: 1px solid var(--ax-border-subtleA);
 
   & .aksel-form-summary__answer {
-    border-color: var(--ax-border-info-subtleA);
+    border-color: var(--ax-border-subtleA);
   }
 }
