@@ -36,15 +36,15 @@
 }
 
 .navListSub {
-  border-radius: var(--ax-radius-4);
+  border-radius: var(--ax-radius-8);
 
   &[data-active="true"] {
-    background-color: var(--ax-bg-moderateA);
+    background-color: var(--ax-bg-moderate);
     box-shadow: inset 0 0 0 1px var(--ax-border-subtle);
   }
 
   &[data-highlight="true"] {
-    background-color: var(--ax-bg-moderateA);
+    background-color: var(--ax-bg-moderate);
     box-shadow: inset 0 0 0 1px var(--ax-border-subtle);
   }
 }
@@ -56,14 +56,10 @@
   justify-content: space-between;
   width: 100%;
   align-self: stretch;
-  border-radius: var(--ax-radius-4);
+  border-radius: var(--ax-radius-8);
   padding-block: var(--ax-space-4);
   padding-inline: var(--ax-space-8) var(--ax-space-4);
   min-height: 2rem;
-
-  &[aria-expanded="true"] + ul {
-    margin-bottom: var(--ax-space-6);
-  }
 
   &:hover {
     background-color: var(--ax-bg-moderate-hoverA);
@@ -121,7 +117,7 @@
 }
 
 .navListItemLink {
-  border-radius: var(--ax-radius-4);
+  border-radius: var(--ax-radius-8);
   display: block;
   display: flex;
   align-items: center;
