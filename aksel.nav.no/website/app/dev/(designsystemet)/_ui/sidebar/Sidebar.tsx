@@ -1,5 +1,5 @@
 import React from "react";
-import { BodyShort } from "@navikt/ds-react";
+import { BodyShort, BoxNew, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
@@ -20,27 +20,35 @@ async function DesignsystemSidebar(props: SidebarProps) {
 
   return (
     <nav aria-label="Sidemeny" className={styles.navList} data-layout={layout}>
-      <BodyShort
-        as="ul"
-        className={styles.navListUl}
-        size={layout === "sidebar" ? "small" : "medium"}
-      >
-        {sidebarData.map((section, index) => {
-          return (
-            <React.Fragment key={section.label}>
-              <DesignsystemSidebarGroup
-                key={section.label}
-                label={section.label}
-                links={section.links}
-                layout={layout}
-              />
-              {index !== sidebarData.length - 1 && (
-                <li aria-hidden className={styles.navListDivider} />
-              )}
-            </React.Fragment>
-          );
-        })}
-      </BodyShort>
+      <VStack gap="space-12" asChild>
+        <BodyShort
+          as="ul"
+          className={styles.navListUl}
+          size={layout === "sidebar" ? "small" : "medium"}
+          data-color="brand-blue"
+        >
+          {sidebarData.map((section, index) => {
+            return (
+              <React.Fragment key={section.label}>
+                <DesignsystemSidebarGroup
+                  key={section.label}
+                  label={section.label}
+                  links={section.links}
+                  layout={layout}
+                />
+                {index !== sidebarData.length - 1 && (
+                  <BoxNew
+                    as="li"
+                    aria-hidden
+                    borderWidth="1 0 0 0"
+                    borderColor="neutral-subtle"
+                  />
+                )}
+              </React.Fragment>
+            );
+          })}
+        </BodyShort>
+      </VStack>
     </nav>
   );
 }
