@@ -131,18 +131,20 @@ const Card = ({ article, visible, index }: CardProps) => {
           </span>
         )}
 
-        <HStack gap="space-8">
-          {isArticle(article) && (
+        {isArticle(article) && (
+          <HStack as="span">
             <Tag
               type={article._type}
               text={article.tema?.[0] ?? undefined}
               size="xsmall"
             />
-          )}
-          {isKomponent(article) && article.status?.tag === "beta" && (
+          </HStack>
+        )}
+        {isKomponent(article) && article.status?.tag === "beta" && (
+          <HStack as="span">
             <BetaTag />
-          )}
-        </HStack>
+          </HStack>
+        )}
       </VStack>
     </LinkCard>
   );
