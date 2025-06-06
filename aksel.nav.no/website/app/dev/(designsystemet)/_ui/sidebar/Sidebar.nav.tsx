@@ -73,6 +73,7 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
         clearButton={false}
         value={filterText}
         onChange={setFilterText}
+        autoComplete="off"
       />
       <nav aria-label="Sidemeny">
         <BodyShort
