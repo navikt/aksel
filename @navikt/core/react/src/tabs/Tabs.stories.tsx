@@ -274,6 +274,12 @@ export const CustomIds = () => (
   </Tabs>
 );
 
+export const ColorRole = () => (
+  <div data-color="brand-magenta">
+    <Controlled />
+  </div>
+);
+
 export const Chromatic = {
   render: () => (
     <VStack gap="6" align="center">
@@ -302,6 +308,10 @@ export const Chromatic = {
         <div style={{ minWidth: 600 }}>
           <Fill />
         </div>
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </VStack>
   ),

@@ -1,8 +1,8 @@
 import {
-  type BorderColorKeys,
-  type ColorTheme,
-  type DefaultTextColorKeys,
-  type StaticDefaultBgKeys,
+  type AkselColorTheme,
+  type AkselRootBackgroundToken,
+  type AkselRootBorderToken,
+  type AkselRootTextToken,
 } from "../../../types";
 import { type StyleDictionaryToken } from "../../tokens.util";
 
@@ -10,7 +10,7 @@ import { type StyleDictionaryToken } from "../../tokens.util";
  * Static root-layer for semantic tokens.
  * These tokens are the  "root"-layer in the sense that they are the only "unique" tokens in the semantic layer.
  */
-export function semanticRootTokens(theme: ColorTheme) {
+export function semanticRootTokens(theme: AkselColorTheme) {
   return {
     text: {
       logo: {
@@ -80,8 +80,8 @@ export function semanticRootTokens(theme: ColorTheme) {
       },
     },
   } satisfies {
-    bg: Record<StaticDefaultBgKeys, StyleDictionaryToken<"color">>;
-    border: Record<BorderColorKeys, StyleDictionaryToken<"color">>;
-    text: Record<DefaultTextColorKeys, StyleDictionaryToken<"color">>;
+    bg: Record<AkselRootBackgroundToken, StyleDictionaryToken<"color">>;
+    border: Record<AkselRootBorderToken, StyleDictionaryToken<"color">>;
+    text: Record<AkselRootTextToken, StyleDictionaryToken<"color">>;
   };
 }

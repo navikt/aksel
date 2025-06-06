@@ -111,7 +111,7 @@ export const Highlight = ({
               })
             }
             href={`/${article.slug.current}`}
-            className="mb-5 mt-2 text-text-default underline hover:no-underline"
+            className="mb-5 mt-2 text-text-default underline hover:no-underline focus-visible:text-text-on-inverted"
           >
             {article?.heading}
           </Link>

@@ -151,6 +151,26 @@ export const Controlled: StoryFn = () => {
   );
 };
 
+export const ColorRole: StoryFn = () => (
+  <div style={{ minHeight: 700 }} data-color="brand-magenta">
+    <FormProgress totalSteps={7} activeStep={2} open>
+      <FormProgress.Step href="#" completed>
+        Start søknad
+      </FormProgress.Step>
+      <FormProgress.Step href="#">Personopplysninger</FormProgress.Step>
+      <FormProgress.Step interactive={false}>
+        Saksopplysninger
+      </FormProgress.Step>
+      <FormProgress.Step interactive={false}>
+        Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
+      </FormProgress.Step>
+      <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
+      <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
+      <FormProgress.Step href="#">Innsending</FormProgress.Step>
+    </FormProgress>
+  </div>
+);
+
 export const Chromatic: StoryFn = () => (
   <VStack gap="10">
     <div>
@@ -158,6 +178,9 @@ export const Chromatic: StoryFn = () => (
     </div>
     <div>
       <Controlled />
+    </div>
+    <div>
+      <ColorRole />
     </div>
   </VStack>
 );
