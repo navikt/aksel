@@ -48,7 +48,21 @@ export default async function (props: Props) {
 
   const logEntry = logEntries[0];
 
-  // const tocByMap = logEntry.innhold.reduce((filtered, block) =>  bloc.style === 'h2' ? filtered.push({id: block._key, title: filtered. block.}))
+  // TODO: [endringslogg] Generate TOC from logEntry.innhold or get from Sanity with TOC_BY_SLUG_QUERY ???
+  // const tocByReduce = logEntry.innhold?.reduce(
+  //   (filtered, block) => {
+  //     console.dir(block);
+  //     if (block._type === "block" && block.style === "h2") {
+  //       filtered.push({
+  //         id: block._key,
+  //         title: block.children?.[0].text || "",
+  //       });
+  //     }
+  //     return filtered;
+  //   },
+  //   [] as { id: string; title: string }[],
+  // );
+
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <VStack>
@@ -110,7 +124,9 @@ export default async function (props: Props) {
           text: "Innspill til siden",
         }}
         showChangelogLink={true}
+        // TODO: [endringslogg] Generate TOC from logEntry.innhold or get from Sanity with TOC_BY_SLUG_QUERY ???
         toc={toc}
+        // toc={tocByReduce || []}
       />
     </DesignsystemetPageLayout>
   );

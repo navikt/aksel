@@ -3,6 +3,7 @@ import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
 import { useRef, useState, version } from "react";
+import type { Image as SanityImage } from "sanity";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,
@@ -68,7 +69,6 @@ export default function LogEntry({
         {/* Dot + vertical line */}
         <VStack width="16px" align="center" marginInline="space-16 space-0">
           <Box.New height="0.1rem" className={styles.timeline} />
-          {/* TODO: [endringslogg] Animate bullet on `fremhevet` items */}
           <Box.New
             className={`${styles.bullet}${
               fremhevet ? ` ${styles.bulletFremhevet}` : ""
@@ -111,6 +111,7 @@ export default function LogEntry({
             </HStack>
             {fremhevet && (
               <Tag
+                // data-color-role="aksel-brand-pink"
                 size="xsmall"
                 variant="neutral-filled"
                 className={styles.tag}
@@ -126,7 +127,13 @@ export default function LogEntry({
           <VStack
             marginBlock={fremhevet ? "space-0 space-32" : "space-0 space-64"}
             padding={fremhevet ? "space-16" : "space-0"}
-            className={fremhevet ? styles.innholdFremhevet : ""}
+            className={
+              (fremhevet ? styles.innholdFremhevet : "") +
+              " max-sm:-ml-12 max-sm:-mr-4 max-sm:bg-[var(--ax-bg-default)]"
+            }
+            // data-color-role="aksel-brand-pink"
+            // {...fremhevet ? { "data-color-role": "aksel-brand-pink" } : {}}
+            data-color-role={!fremhevet ? "brand-magenta" : undefined}
           >
             <Heading size="large" level="2" spacing>
               <Link
@@ -190,25 +197,15 @@ export default function LogEntry({
                   key={"hero-" + index}
                   data-block-margin="space-28"
                   className={styles.herobilde}
-                  // style={{
-                  //   backgroundColor:
-                  //     fremhevet && herobilde?.bakgrunnsfarge
-                  //       ? herobilde.bakgrunnsfarge
-                  //       : "",
-                  //   "--herobilde-bg-color-first":
-                  //     herobilde.bakgrunnsfarge ||
-                  //     "var(--aksel-brand-pink-400)",
-                  //   "--herobilde-bg-color-last":
-                  //     herobilde.bakgrunnsfarge ||
-                  //     "var(--aksel-brand-pink-700)",
-                  //   "--herobilde-bg-degrees": "130deg",
-                  // }}
                   aria-hidden={herobilde.dekorativt}
                   alt={herobilde.alt || ""}
                   loading="lazy"
                   decoding="async"
-                  // @ts-expect-error - TODO FIX!
-                  src={urlForImage(herobilde)?.auto("format").url() || ""}
+                  src={
+                    urlForImage(herobilde as SanityImage)
+                      ?.auto("format")
+                      .url() || ""
+                  }
                   width={1200}
                   height={630}
                 />

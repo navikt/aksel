@@ -45,12 +45,14 @@ export default async function Page({ searchParams }) {
   const filterCategory = categories.includes(paramCategory)
     ? paramCategory
     : null;
-  const filterText = paramTextFilter;
+  const filterText = paramTextFilter?.trim();
 
   const yearFilter = " && endringsdato >= $year && endringsdato <= $nextYear";
   const categoryFilter = " && endringstype == $category";
   const textFilter =
-    " && [heading, endringsdato, endringstype, innhold[].children[].text] match $textFilter";
+    // innhold[].caption refers captions on images in innhold
+    " && [heading, endringsdato, endringstype, innhold[].children[].text, innhold[].caption] match [$textFilter]";
+  // " && [heading, endringsdato, endringstype, pt::text(innhold[]), innhold[].caption] match [$textFilter]";
   const sanityObject = {
     query: defineQuery(
       `*[_type == "ds_endringslogg_artikkel"${filterYear ? yearFilter : ""}${
@@ -61,7 +63,7 @@ export default async function Page({ searchParams }) {
       year: `${filterYear}`,
       nextYear: `${filterYear && filterYear + 1}`,
       category: `${filterCategory}`,
-      textFilter: `${paramTextFilter}*`,
+      textFilter: filterText ? `*${filterText?.replace(/ /g, "* *")}*` : null,
     },
   };
 
