@@ -1,6 +1,7 @@
 import { loadCsf } from "@storybook/csf-tools";
 import { StorybookConfig } from "@storybook/react-vite";
 import { readFileSync } from "fs";
+import { InlineConfig } from "vite";
 import turbosnap from "vite-plugin-turbosnap";
 import TsconfigPathsPlugin from "vite-tsconfig-paths";
 
@@ -96,6 +97,7 @@ export default {
     const tsConfigPathsPluginOpts = { root: "aksel.nav.no/website/" };
 
     return mergeConfig(config, {
+      build: { cssMinify: "lightningcss" },
       plugins:
         configType === "PRODUCTION"
           ? [
@@ -105,6 +107,6 @@ export default {
               }),
             ]
           : [TsconfigPathsPlugin(tsConfigPathsPluginOpts)],
-    });
+    } satisfies InlineConfig);
   },
 } satisfies StorybookConfig;

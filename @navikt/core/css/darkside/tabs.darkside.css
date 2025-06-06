@@ -102,12 +102,10 @@
   padding: var(--ax-space-4) var(--ax-space-16);
 }
 
-.aksel-tabs__tab,
-.aksel-tabs__tab--small.aksel-tabs__tab--icon-only,
-.aksel-tabs__tab--small.aksel-tabs__tab-icon--top {
-  & svg {
-    font-size: 1.25rem;
-  }
+.aksel-tabs__tab svg,
+.aksel-tabs__tab--small.aksel-tabs__tab--icon-only svg,
+.aksel-tabs__tab--small.aksel-tabs__tab-icon--top svg {
+  font-size: 1.25rem;
 }
 
 .aksel-tabs__tab--small svg {

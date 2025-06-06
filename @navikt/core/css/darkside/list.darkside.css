@@ -38,22 +38,19 @@
 }
 
 /* SAFARI HACK START */
-/* stylelint-disable selector-type-no-unknown */
 
-_::-webkit-full-page-media,
-_:future,
-:root .aksel-list ol {
-  padding-left: 2.1rem;
-}
+/* biome-ignore lint/a11y/useGenericFontNames: Hack for targeting Safari */
+@supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
+  .aksel-list ol {
+    padding-left: 2.1rem;
+  }
 
-_::-webkit-full-page-media,
-_:future,
-:root .aksel-list ol .aksel-list__item {
-  padding-left: 0;
+  .aksel-list ol .aksel-list__item {
+    padding-left: 0;
+  }
 }
 
 /* SAFARI HACK END */
-/* stylelint-enable selector-type-no-unknown */
 
 .aksel-list__item {
   margin-block-end: var(--ax-space-8);
