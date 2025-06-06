@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 7.23.0
+
+### Minor Changes
+
+- Darkside: Renamed 'data-color-role' dynamic theme attribute to 'data-color'. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: Using attribute 'data-color' with one of the built-in colors from 'AkselColorRole' now allows re-coloring most components. [Read more about this in the documentation](http://aksel.nav.no/grunnleggende/darkside/theming). ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: All components has been updated to use 'data-color' attribute for coloring. As a side-effect, most component CSS is either updated or refactored. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
 ## 7.22.0
 
 ### Minor Changes
