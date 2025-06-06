@@ -81,7 +81,11 @@
 .aksel-link-card__description {
   grid-area: description;
   max-width: 400px;
-  display: grid;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
 
   [data-layout="auto"] & {
     margin-block-end: var(--ax-space-4);
