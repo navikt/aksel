@@ -65,7 +65,7 @@ export default async function Page() {
                   {links
                     .filter((page) => page.kategori === kat.value)
                     .map((component) => (
-                      <li key={component.heading}>
+                      <li key={component.slug}>
                         <DesignsystemetOverviewCard page={component} />
                       </li>
                     ))}
