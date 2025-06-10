@@ -4,10 +4,13 @@ import React, {
   ImgHTMLAttributes,
   SVGProps,
   forwardRef,
+  useRef,
 } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, Heading } from "../typography";
+import { createContext } from "../util/create-context";
+import { useMergeRefs } from "../util/hooks";
 
 /**
  * TODO:
@@ -16,6 +19,18 @@ import { BodyLong, Heading } from "../typography";
  */
 
 /* ------------------------------ LinkCard Root ----------------------------- */
+
+type LinkCardContextProps = {
+  anchorRef: React.RefObject<HTMLAnchorElement>;
+};
+
+const [LinkCardContextProvider, useLinkCardContext] =
+  createContext<LinkCardContextProps>({
+    name: "LinkCardContext",
+    errorMessage:
+      "useLinkCardContext must be used within an LinkCardContextProvider",
+  });
+
 interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
@@ -44,17 +59,35 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
   ) => {
     const { cn } = useRenameCSS();
 
+    const anchorRef = useRef<HTMLAnchorElement>(null);
+
     return (
-      <div
-        ref={forwardedRef}
-        data-color="neutral"
-        {...restProps}
-        className={cn("navds-link-card", className)}
-        data-arrow={hasArrow}
-        data-auto-layout={autoLayout}
-      >
-        {children}
-      </div>
+      <LinkCardContextProvider anchorRef={anchorRef}>
+        <div
+          ref={forwardedRef}
+          data-color="neutral"
+          {...restProps}
+          className={cn("navds-link-card", className)}
+          data-arrow={hasArrow}
+          data-auto-layout={autoLayout}
+          style={{ padding: "1rem", border: "1px solid black" }}
+          onClick={(e) => {
+            /* anchorRef.current?.click(); */
+            anchorRef.current?.dispatchEvent(
+              new MouseEvent("click", {
+                bubbles: false,
+                cancelable: true,
+                ctrlKey: e.ctrlKey,
+                metaKey: e.metaKey,
+                shiftKey: e.shiftKey,
+                altKey: e.altKey,
+              }),
+            );
+          }}
+        >
+          {children}
+        </div>
+      </LinkCardContextProvider>
     );
   },
 );
@@ -106,11 +139,18 @@ const LinkCardAnchor = forwardRef<HTMLAnchorElement, LinkCardAnchorProps>(
   ) => {
     const { cn } = useRenameCSS();
 
+    const { anchorRef } = useLinkCardContext();
+    const mergedRefs = useMergeRefs(forwardedRef, anchorRef);
+
     return (
       <a
-        ref={forwardedRef}
+        ref={mergedRefs}
         {...restProps}
         className={cn("navds-link-card__anchor", className)}
+        onClick={(e) => {
+          console.info("LinkCardAnchor clicked", e);
+          e.preventDefault();
+        }}
       >
         {children}
       </a>
