@@ -48,7 +48,7 @@ export default async function Page() {
       <div>
         {templatesKategorier
           .filter(
-            (kat) => links?.filter((x) => x.kategori === kat.value).length > 0,
+            (kat) => links?.some((x) => x.kategori === kat.value),
           )
           .map((kat) => {
             return (
