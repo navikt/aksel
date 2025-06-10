@@ -479,6 +479,16 @@ export const ModalDemo = () => {
 };
 ModalDemo.parameters = { chromatic: { pauseAnimationAtEnd: true } };
 
+export const ColorRole = () => (
+  <div data-color="meta-purple">
+    <DatePicker.Standalone
+      today={new Date("2006-07-01")}
+      defaultSelected={new Date("2006-07-08")}
+      onSelect={console.info}
+    />
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <div>
@@ -521,6 +531,10 @@ export const Chromatic: Story = {
       <div>
         <h2>StandaloneMultiple</h2>
         <StandaloneMultiple />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
       <div>
         <h2>UserControlled</h2>

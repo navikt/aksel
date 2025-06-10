@@ -212,6 +212,39 @@ export const Avatar: Story = {
   ),
 };
 
+export const ColorRole: Story = {
+  render: () => (
+    <VStack gap="4">
+      {VARIANTS.map((variant) => (
+        <React.Fragment key={variant}>
+          <h3>{variant}</h3>
+          <Chat
+            avatar="Ls"
+            name="Ls"
+            timestamp="01.01.21 14:00"
+            variant={variant}
+          >
+            <Chat.Bubble>
+              Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+            </Chat.Bubble>
+          </Chat>
+          <Chat
+            avatar="Ls"
+            name="Ls"
+            timestamp="01.01.21 14:00"
+            variant={variant}
+            data-color="meta-purple"
+          >
+            <Chat.Bubble>
+              Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+            </Chat.Bubble>
+          </Chat>
+        </React.Fragment>
+      ))}
+    </VStack>
+  ),
+};
+
 function Illustration() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 93">
@@ -302,6 +335,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Avatar</h2>
         {Avatar.render?.(...props)}
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        {ColorRole.render?.(...props)}
       </div>
     </div>
   ),

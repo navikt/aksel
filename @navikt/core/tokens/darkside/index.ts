@@ -2,7 +2,7 @@ import fs from "fs";
 import { bundle } from "lightningcss";
 import StyleDictionary from "style-dictionary";
 import { DesignTokens, Filter } from "style-dictionary/types";
-import { ColorRolesList } from "../types";
+import { AkselColorRole } from "../types";
 import {
   formatCJS,
   formatDOCS,
@@ -126,7 +126,7 @@ async function main() {
 /**
  * Creates smaller bundles for each role
  * ```
- * [data-color-role="accent"] {
+ * [data-color="accent"] {
  *   --ax-bg-soft: var(--ax-bg-accent-soft);
  *   --ax-bg-softA: var(--ax-bg-accent-softA);
  *   --ax-bg-moderate: var(--ax-bg-accent-moderate);
@@ -135,7 +135,27 @@ async function main() {
  * ```
  */
 async function buildThemedRolesCSS() {
-  for (const role of ColorRolesList) {
+  /**
+   * We set 'accent' as the default color palette.
+   */
+  const rootSelector = `:root, [data-color=accent]`;
+
+  /* To avoid having to export this const from the "global" types, we declare it here locally so users dont get internal types */
+  const colors: Record<AkselColorRole, string> = {
+    neutral: "",
+    accent: "",
+    "brand-beige": "",
+    "brand-blue": "",
+    "brand-magenta": "",
+    info: "",
+    success: "",
+    warning: "",
+    danger: "",
+    "meta-purple": "",
+    "meta-lime": "",
+  };
+
+  for (const role of Object.keys(colors) as AkselColorRole[]) {
     const config = [
       globalLightTokens,
       semanticRoleConfig[role],
@@ -146,7 +166,7 @@ async function buildThemedRolesCSS() {
       /* mergeConfigs is strictly typed, so we use any until we potentially update types */
       tokens: tokensWithPrefix(mergeConfigs(config as any)),
       filename: `role-${role}.css`,
-      selector: `[data-color-role=${role}]`,
+      selector: role === "accent" ? rootSelector : `[data-color=${role}]`,
       filter: async (token) => token.type === "themed-role",
     });
   }

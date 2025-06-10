@@ -28,6 +28,7 @@ const NonClickablePeriod = ({
     <div
       ref={periodRef}
       {...restProps}
+      data-color={restProps?.["data-color"] ?? status}
       className={cn(
         getConditionalClasses(cropped, direction, status),
         restProps?.className,
