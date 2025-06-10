@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import NextLink from "next/link";
 import { Image } from "sanity";
 import {
-  Page as AkselPage,
   Bleed,
   BodyLong,
   BoxNew,
@@ -11,8 +10,9 @@ import {
   Link,
   VStack,
 } from "@navikt/ds-react";
-import { PageBlock } from "@navikt/ds-react/Page";
+import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { sanityFetch } from "../../_sanity/live";
 import {
   GOD_PRAKSIS_TEMA_QUERY,
@@ -57,96 +57,93 @@ const Page = async () => {
   ]);
 
   return (
-    <>
-      <AkselPage
-        footer={<Footer />}
-        footerPosition="belowFold"
-        contentBlockPadding="none"
-        className={styles.akselPage}
-      >
-        <Header />
-        <PauseAnimationProvider>
-          <MainWrapper>
-            <div className={styles.heroLinearBG} />
-            <div className={styles.mainBanner}>
-              <Link
-                href="/darkside"
-                target="_blank"
-                as={NextLink}
-                variant="neutral"
+    <AkselPage
+      footer={<Footer />}
+      footerPosition="belowFold"
+      contentBlockPadding="none"
+      className={styles.akselPage}
+    >
+      <Header />
+      <PauseAnimationProvider>
+        <MainWrapper>
+          <div className={styles.heroLinearBG} />
+          <div className={styles.mainBanner}>
+            <Link
+              href="/darkside"
+              target="_blank"
+              as={NextLink}
+              variant="neutral"
+              data-link-card-anchor
+            >
+              Vi trenger testere fra team i Nav for darkmode og theming!
+              <LinkCardArrow />
+            </Link>
+          </div>
+
+          <BoxNew className={styles.forsidePageWrapper}>
+            <PageBlock width="xl" gutters>
+              <Hero />
+              {/* God praksis */}
+              <Bleed
+                /* TODO: maybe this fading & blocking of cubeanim should be baked into the cubeanim? */
+                className={styles.cubeFader}
+                marginInline="full"
+                reflectivePadding
               >
-                Vi trenger testere fra team i Nav for darkmode og theming!
-              </Link>
-            </div>
-
-            <BoxNew className={styles.forsidePageWrapper}>
-              <PageBlock width="xl" gutters>
-                <Hero />
-                {/* God praksis */}
-                <Bleed
-                  /* TODO: maybe this fading & blocking of cubeanim should be baked into the cubeanim? */
-                  className={styles.cubeFader}
-                  marginInline="full"
-                  reflectivePadding
+                <BoxNew
+                  background="raised"
+                  borderWidth="1"
+                  borderColor="neutral-subtleA"
+                  borderRadius="xlarge"
+                  paddingBlock={{ xs: "space-48" }}
+                  paddingInline={{ xs: "space-16", sm: "space-48" }}
                 >
-                  <BoxNew
-                    background="raised"
-                    borderWidth="1"
-                    borderColor="neutral-subtleA"
-                    borderRadius="xlarge"
-                    paddingBlock={{ xs: "space-48" }}
-                    paddingInline={{ xs: "space-16", sm: "space-48" }}
-                  >
-                    <VStack gap="space-12">
-                      <BoxNew paddingInline={{ xs: "2", sm: "6" }}>
-                        <Heading
-                          level="2"
-                          size="xlarge"
-                          spacing
-                          data-aksel-heading-color
-                        >
-                          God praksis
-                        </Heading>
-                        <BodyLong
-                          size="large"
-                          className={styles.godPraksisInfo}
-                        >
-                          Alle som jobber med produktutvikling i Nav sitter på
-                          kunnskap og erfaring som er nyttig for andre. Derfor
-                          deler vi god praksis med hverandre her.
-                        </BodyLong>
-                      </BoxNew>
+                  <VStack gap="space-12">
+                    <BoxNew paddingInline={{ xs: "2", sm: "6" }}>
+                      <Heading
+                        level="2"
+                        size="xlarge"
+                        spacing
+                        data-aksel-heading-color
+                      >
+                        God praksis
+                      </Heading>
+                      <BodyLong size="large" className={styles.godPraksisInfo}>
+                        Alle som jobber med produktutvikling i Nav sitter på
+                        kunnskap og erfaring som er nyttig for andre. Derfor
+                        deler vi god praksis med hverandre her.
+                      </BodyLong>
+                    </BoxNew>
 
-                      <HGrid as="ul" columns={{ md: 2, xl: 3 }}>
-                        {tema.map((t) => (
-                          <GpFrontpageCard
-                            key={t.title}
-                            href={`/god-praksis/${t.slug?.current}`}
-                            image={t.pictogram}
-                          >
-                            {t.title}
-                          </GpFrontpageCard>
-                        ))}
-                      </HGrid>
-                    </VStack>
-                  </BoxNew>
+                    <HGrid as="ul" columns={{ md: 2, xl: 3 }}>
+                      {tema.map((t) => (
+                        <GpFrontpageCard
+                          key={t.title}
+                          href={`/god-praksis/${t.slug?.current}`}
+                          image={t.pictogram}
+                        >
+                          {t.title}
+                        </GpFrontpageCard>
+                      ))}
+                    </HGrid>
+                  </VStack>
+                </BoxNew>
+              </Bleed>
+              {/* Siste fra Aksel */}
+              {latest && (
+                <Bleed
+                  reflectivePadding
+                  marginInline="full"
+                  className={styles.cubeBlocker}
+                >
+                  <FrontpageLatest latest={latest as LatestT[]} />
                 </Bleed>
-                {/* Siste fra Aksel */}
-                {latest && (
-                  <Bleed
-                    reflectivePadding
-                    marginInline="full"
-                    className={styles.cubeBlocker}
-                  >
-                    <FrontpageLatest latest={latest as LatestT[]} />
-                  </Bleed>
-                )}
-              </PageBlock>
-            </BoxNew>
-          </MainWrapper>
-        </PauseAnimationProvider>
-      </AkselPage>
-    </>
+              )}
+            </PageBlock>
+          </BoxNew>
+        </MainWrapper>
+      </PauseAnimationProvider>
+    </AkselPage>
   );
 };
 
