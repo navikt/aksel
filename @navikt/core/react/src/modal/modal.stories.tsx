@@ -150,16 +150,7 @@ export const EmptyHeader: StoryFn = () => (
 
 export const Small: StoryFn = () => (
   <>
-    <Modal
-      open
-      onClose={() => null}
-      width="small"
-      header={{
-        heading: "Simple header",
-        size: "small",
-      }}
-      size="small"
-    >
+    <Modal open onClose={() => null} width="small" size="small">
       <Modal.Body>
         <BodyLong size="small">Lorem ipsum dolor sit amet.</BodyLong>
       </Modal.Body>

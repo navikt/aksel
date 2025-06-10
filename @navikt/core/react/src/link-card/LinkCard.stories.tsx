@@ -4,7 +4,7 @@ import {
   LinkCard,
   LinkCardAnchor,
   LinkCardDescription,
-  LinkCardHeading,
+  LinkCardTitle,
 } from "./LinkCard";
 
 type Story = StoryObj<typeof LinkCard>;
@@ -20,17 +20,24 @@ export default {
 export const Default: StoryObj = {
   render: () => {
     return (
-      <LinkCard hasArrow={false}>
-        <LinkCardHeading as="h2">
-          <LinkCardAnchor href="https://aksel.nav.no/">Tittel</LinkCardAnchor>
-        </LinkCardHeading>
-        <LinkCardDescription>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-          placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
-          velit. Reprehenderit, ea vero voluptates temporibus laudantium
-          mollitia cum. Laboriosam, facilis.
-        </LinkCardDescription>
-      </LinkCard>
+      <div>
+        <LinkCard>
+          <LinkCardTitle as="span">
+            <LinkCardAnchor href="https://aksel.nav.no/">Tittel</LinkCardAnchor>
+          </LinkCardTitle>
+        </LinkCard>
+
+        <LinkCard>
+          <LinkCardTitle as="h2">
+            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
+          </LinkCardTitle>
+          <LinkCardDescription>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+            placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
+            velit.
+          </LinkCardDescription>
+        </LinkCard>
+      </div>
     );
   },
 };

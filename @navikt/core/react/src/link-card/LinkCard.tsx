@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, {
   AnchorHTMLAttributes,
   HTMLAttributes,
@@ -5,6 +8,7 @@ import React, {
   SVGProps,
   forwardRef,
   useRef,
+  useState,
 } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
@@ -30,6 +34,13 @@ const [LinkCardContextProvider, useLinkCardContext] =
     errorMessage:
       "useLinkCardContext must be used within an LinkCardContextProvider",
   });
+
+export type LinkCardStrucutredProps = {
+  title: string;
+  description?: string;
+  footer?: string;
+  href?: string;
+};
 
 interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -60,6 +71,11 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     const { cn } = useRenameCSS();
 
     const anchorRef = useRef<HTMLAnchorElement>(null);
+    const [isContextMenuOpen, setIsContextMenuOpen] = useState<boolean>(false);
+
+    function isTextSelected() {
+      return !!window.getSelection()?.toString();
+    }
 
     return (
       <LinkCardContextProvider anchorRef={anchorRef}>
@@ -71,18 +87,45 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
           data-arrow={hasArrow}
           data-auto-layout={autoLayout}
           style={{ padding: "1rem", border: "1px solid black" }}
+          onPointerDown={(e) => {
+            /**
+             * When user intends to invoke context menu, we want to make sure
+             * they can interact with the element as if it was a native link.
+             */
+            if (e.button == 2 || (e.button == 0 && e.ctrlKey)) {
+              setIsContextMenuOpen(true);
+            }
+          }}
+          onPointerUp={() => setIsContextMenuOpen(false)}
+          onPointerLeave={() => setIsContextMenuOpen(false)}
+          onPointerMove={() => {
+            if (!isContextMenuOpen) {
+              return;
+            }
+            setIsContextMenuOpen(false);
+          }}
+          data-context={isContextMenuOpen}
           onClick={(e) => {
-            /* anchorRef.current?.click(); */
-            anchorRef.current?.dispatchEvent(
-              new MouseEvent("click", {
-                bubbles: false,
-                cancelable: true,
-                ctrlKey: e.ctrlKey,
-                metaKey: e.metaKey,
-                shiftKey: e.shiftKey,
-                altKey: e.altKey,
-              }),
-            );
+            if (e.target === anchorRef.current || isTextSelected()) {
+              return;
+            }
+
+            const event = new MouseEvent("click", {
+              bubbles: true,
+              cancelable: true,
+              view: window,
+              ctrlKey: e.ctrlKey,
+              shiftKey: e.shiftKey,
+              altKey: e.altKey,
+              metaKey: e.metaKey,
+              button: e.button,
+              screenX: e.screenX,
+              screenY: e.screenY,
+              clientX: e.clientX,
+              clientY: e.clientY,
+            });
+
+            anchorRef.current?.dispatchEvent(event);
           }}
         >
           {children}
@@ -98,12 +141,12 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
   /**
    * Heading tag, only use "div" if you want a non header defining card
    * (eg. you have a lot of them all at once, such as in a grid)
-   * @default "div"
+   * @default "span"
    */
-  as: "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "div";
+  as: "span" | "h2" | "h3" | "h4" | "h5" | "h6";
 };
 
-const LinkCardHeading = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
+const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
   ({ children, as, className }: LinkCardTitleProps, forwardedRef) => {
     const { cn } = useRenameCSS();
 
@@ -112,7 +155,7 @@ const LinkCardHeading = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
         as={as}
         size="small"
         ref={forwardedRef}
-        className={cn("navds-link-card__title", className)}
+        className={cn("navds-link-card__heading", className)}
       >
         {children}
         {/* TODO: Consider hiding this based on root context */}
@@ -125,6 +168,8 @@ const LinkCardHeading = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
 /* ---------------------------- LinkCard Anchor ---------------------------- */
 interface LinkCardAnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
+  as?: any;
+  asChild?: any;
 }
 
 /**
@@ -149,7 +194,7 @@ const LinkCardAnchor = forwardRef<HTMLAnchorElement, LinkCardAnchorProps>(
         className={cn("navds-link-card__anchor", className)}
         onClick={(e) => {
           console.info("LinkCardAnchor clicked", e);
-          e.preventDefault();
+          /* e.preventDefault(); */
         }}
       >
         {children}
@@ -304,7 +349,7 @@ function aspectRatioClassName(aspectRatio?: ImageAspectRatio): string {
 
 export {
   LinkCard,
-  LinkCardHeading,
+  LinkCardTitle,
   LinkCardAnchor,
   LinkCardDescription,
   LinkCardFooter,
