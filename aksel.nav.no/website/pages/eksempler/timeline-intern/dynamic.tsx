@@ -173,12 +173,9 @@ const Example = () => {
 };
 
 /**
- * @internal Dont copy this code to your own project.
- * This code is only for generating example data
- *
- * Code for generating time periods in the example.
- * This part would normally not be part of your application code,
- * and fetch data from an API or similar.
+ * @internal Don't copy this code to your own project.
+ * This is only for generating time periods for the example.
+ * You would normally fetch this data from an API or similar.
  */
 function getPeriods(startDate: Date, seed: number): TimelinePeriodProps[] {
   /* Seeded random to avoid hydration-errors */
