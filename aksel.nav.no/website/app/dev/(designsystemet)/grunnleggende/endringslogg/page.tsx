@@ -7,17 +7,17 @@ import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { DesignsystemetEyebrow } from "../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
-import ChronologicalList from "./_ui/ChronologicalList";
 import EndringsloggTableOfContents from "./_ui/EndringsloggTableOfContents";
 import FilterChips from "./_ui/FilterChips";
+import LogEntryList from "./_ui/LogEntryList";
 import SearchField from "./_ui/SearchField";
+
+// TODO: [endringslogg] Clean up styling, commit to a convention
 
 const fields =
   "heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer";
-// It's not imported anywhere - Only for generating types
-export const ENDRINGSLOGG_QUERY = defineQuery(
-  `*[_type == "ds_endringslogg_artikkel"]{${fields}}`,
-);
+type ENDRINGSLOGG_QUERY =
+  `*[_type == "ds_endringslogg_artikkel"]{${typeof fields}}`;
 
 const startYear = 2022;
 const currentYear = new Date().getFullYear();
@@ -68,7 +68,7 @@ export default async function Page({ searchParams }) {
   };
 
   const { data: logEntries } =
-    await sanityFetch<typeof ENDRINGSLOGG_QUERY>(sanityObject);
+    await sanityFetch<ENDRINGSLOGG_QUERY>(sanityObject);
 
   // Bump headings to next heading-level for changelog list
   logEntries.forEach((logEntry) => {
@@ -121,7 +121,7 @@ export default async function Page({ searchParams }) {
         </VStack>
         <VStack paddingBlock="space-32 space-0">
           {logEntries?.length > 0 ? (
-            <ChronologicalList list={groupedByMonth} />
+            <LogEntryList list={groupedByMonth} />
           ) : (
             <EmptyStateCard />
           )}

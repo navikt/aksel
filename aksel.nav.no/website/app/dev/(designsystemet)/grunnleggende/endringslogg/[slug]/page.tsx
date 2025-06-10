@@ -6,10 +6,7 @@ import type { Image as SanityImage } from "sanity";
 import { BodyShort, HStack, Heading, Tag, VStack } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
-import {
-  ENDRINGSLOGG_QUERYResult,
-  TOC_BY_SLUG_QUERYResult,
-} from "@/app/_sanity/query-types";
+import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
@@ -18,12 +15,17 @@ import styles from "../_ui/Changelog.module.css";
 const ENDRINGSLOGG_QUERY = defineQuery(
   `*[_type == "ds_endringslogg_artikkel" && slug.current == $slug]{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold}`,
 );
-const TOC_BY_SLUG_QUERY = defineQuery(
-  `*[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0].innhold[style match 'h2']{
-  "id": _key,
-  "title": pt::text(@)
-}`,
-);
+
+export async function generateStaticParams() {
+  const { data: slugs } = await sanityFetch({
+    query: defineQuery(`
+  *[_type == "ds_endringslogg_artikkel" && defined(slug.current)].slug.current
+`),
+    stega: false,
+    perspective: "published",
+  });
+  return [slugs];
+}
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -32,36 +34,26 @@ type Props = {
 export default async function (props: Props) {
   const { slug } = await props.params;
 
-  const [{ data: logEntries }, { data: toc }]: [
-    { data: ENDRINGSLOGG_QUERYResult },
-    { data: TOC_BY_SLUG_QUERYResult },
-  ] = await Promise.all([
-    sanityFetch<typeof ENDRINGSLOGG_QUERY>({
+  const { data: logEntries }: { data: ENDRINGSLOGG_QUERYResult } =
+    await sanityFetch<typeof ENDRINGSLOGG_QUERY>({
       query: ENDRINGSLOGG_QUERY,
       params: { slug: `${slug}` },
-    }),
-    sanityFetch({
-      query: TOC_BY_SLUG_QUERY,
-      params: { slug },
-    }),
-  ]);
+    });
 
   const logEntry = logEntries[0];
 
-  // TODO: [endringslogg] Generate TOC from logEntry.innhold or get from Sanity with TOC_BY_SLUG_QUERY ???
-  // const tocByReduce = logEntry.innhold?.reduce(
-  //   (filtered, block) => {
-  //     console.dir(block);
-  //     if (block._type === "block" && block.style === "h2") {
-  //       filtered.push({
-  //         id: block._key,
-  //         title: block.children?.[0].text || "",
-  //       });
-  //     }
-  //     return filtered;
-  //   },
-  //   [] as { id: string; title: string }[],
-  // );
+  const toc = logEntry.innhold?.reduce(
+    (filtered, block) => {
+      if (block._type === "block" && block.style === "h2") {
+        filtered.push({
+          id: block._key,
+          title: block.children?.[0].text || "",
+        });
+      }
+      return filtered;
+    },
+    [] as { id: string; title: string }[],
+  );
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
@@ -116,6 +108,12 @@ export default async function (props: Props) {
           />
         )}
         <CustomPortableText value={logEntry.innhold as PortableTextBlock[]} />
+
+        <HStack>
+          <VStack></VStack>
+          <VStack></VStack>
+        </HStack>
+        {/* TODO: [endringslogg] Add similar content (prev and next, prev & prevprev if latest)*/}
       </VStack>
 
       <TableOfContents
@@ -124,9 +122,7 @@ export default async function (props: Props) {
           text: "Innspill til siden",
         }}
         showChangelogLink={true}
-        // TODO: [endringslogg] Generate TOC from logEntry.innhold or get from Sanity with TOC_BY_SLUG_QUERY ???
-        toc={toc}
-        // toc={tocByReduce || []}
+        toc={toc || []}
       />
     </DesignsystemetPageLayout>
   );

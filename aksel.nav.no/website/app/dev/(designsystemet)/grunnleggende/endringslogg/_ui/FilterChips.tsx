@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useOptimistic } from "react";
 import { Chips, Label, VStack } from "@navikt/ds-react";
 import styles from "./Changelog.module.css";
 
@@ -15,60 +16,81 @@ export default function FilterChips({
   categories: string[];
   selectedCategory: string | null;
 }) {
-  const { push } = useRouter();
+  const [optYear, expectYear] = useOptimistic(
+    selectedYear,
+    (_, optimisticValue: number | null) => optimisticValue,
+  );
+  const [optCategory, expectCategory] = useOptimistic(
+    selectedCategory,
+    (_, optimisticValue: string | null) => optimisticValue,
+  );
+  const { push, prefetch } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams?.toString());
 
-  return (
-    <VStack gap="space-24">
-      <VStack gap="space-8">
-        <Label>År</Label>
-        <Chips aria-label="Filtrer på år">
-          {years.map((year) => (
+  function getHref(option: string | number) {
+    const params = new URLSearchParams(searchParams?.toString());
+    if (typeof option === "number") {
+      params.set("arstall", `${option === optYear ? "ingen" : option}`);
+    } else if (typeof option === "string") {
+      if (option === optCategory) {
+        params.delete("kategori");
+      } else {
+        params.set("kategori", option);
+      }
+    }
+    return `${pathname}?${params.toString()}`;
+  }
+
+  const FilterGroup = ({
+    options,
+    selectedOption,
+    label,
+  }: {
+    options: (string | number)[];
+    selectedOption: string | number | null;
+    label: string;
+  }) => (
+    <VStack gap="space-8">
+      <Label>{label}</Label>
+      <Chips aria-label={`Filtrer på ${label.toLowerCase()}`}>
+        {options.map((option) => {
+          const href = getHref(option);
+          return (
             <Chips.Toggle
-              key={year}
-              selected={selectedYear === year}
-              checkmark={false}
-              variant="neutral"
-              onClick={() => {
-                if (selectedYear === year) {
-                  params.set("arstall", "ingen");
-                } else {
-                  params.set("arstall", `${year}`);
-                }
-                push(`${pathname}?${params.toString()}`, { scroll: false });
-              }}
-            >
-              {`${year}`}
-            </Chips.Toggle>
-          ))}
-        </Chips>
-      </VStack>
-      <VStack gap="space-8">
-        <Label>Kategori</Label>
-        <Chips aria-label="Filtrer på kategori">
-          {categories.map((category) => (
-            <Chips.Toggle
-              key={category}
-              selected={category === selectedCategory}
+              key={`${label.toLowerCase()}-chip-${option}`}
+              selected={selectedOption === option}
               checkmark={false}
               variant="neutral"
               className={styles.capitalized}
+              onMouseEnter={() => {
+                prefetch(href);
+              }}
               onClick={() => {
-                if (selectedCategory === category) {
-                  params.delete("kategori");
+                if (typeof option === "number") {
+                  expectYear(option);
                 } else {
-                  params.set("kategori", `${category}`);
+                  expectCategory(option);
                 }
-                push(`${pathname}?${params.toString()}`, { scroll: false });
+                push(href);
               }}
             >
-              {category}
+              {`${option}`}
             </Chips.Toggle>
-          ))}
-        </Chips>
-      </VStack>
+          );
+        })}
+      </Chips>
+    </VStack>
+  );
+
+  return (
+    <VStack gap="space-24">
+      <FilterGroup options={years} selectedOption={optYear} label="År" />
+      <FilterGroup
+        options={categories}
+        selectedOption={optCategory}
+        label="Kategori"
+      />
     </VStack>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
@@ -219,7 +221,6 @@ export default function LogEntry({
               />
             </div>
           </VStack>
-          {/* TODO: [endringslogg] Add transition animation on collapse */}
         </VStack>
       </HStack>
     </li>

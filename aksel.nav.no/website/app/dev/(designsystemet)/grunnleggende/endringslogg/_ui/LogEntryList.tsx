@@ -1,5 +1,3 @@
-"use client";
-
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
@@ -11,8 +9,7 @@ interface Props {
   list: ENDRINGSLOGG_QUERYResult[];
 }
 
-// TODO: [endringslogg] Clean up styling, commit to a convention
-export default function ChronologicalList({ list }: Props) {
+export default function LogEntryList({ list }: Props) {
   return (
     <ul>
       {list &&
