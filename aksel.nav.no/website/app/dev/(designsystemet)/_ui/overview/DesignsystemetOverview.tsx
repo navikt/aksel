@@ -9,15 +9,15 @@ import {
   Tag,
   VStack,
 } from "@navikt/ds-react";
-import { DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult } from "@/app/_sanity/query-types";
+import {
+  DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult,
+  DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult,
+} from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { ImageAsThemedSvg } from "@/app/_ui/image-as-svg/ImageAsSvg";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
-import {
-  DesignsystemetEyebrow,
-  DesignsystemetEyebrowProps,
-} from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
+import { DesignsystemetEyebrow } from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
 import {
   LinkCard,
@@ -30,20 +30,19 @@ type DesignsystemetOverviewPageProps = {
   title: string;
   ingress?: string;
   links: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult;
-} & Pick<DesignsystemetEyebrowProps, "type">;
+};
 
 function DesignsystemetOverviewPage({
   title,
   ingress,
   links,
-  type,
 }: DesignsystemetOverviewPageProps) {
   const list = sortDesignsystemetOverviewList(links);
 
   return (
     <DesignsystemetPageLayout>
       <div>
-        <DesignsystemetEyebrow type={type} />
+        <DesignsystemetEyebrow text="Oversikt" />
         <Heading level="1" size="xlarge" data-aksel-heading-color>
           {title}
         </Heading>
@@ -75,7 +74,9 @@ function DesignsystemetOverviewPage({
 function DesignsystemetOverviewCard({
   page,
 }: {
-  page: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult[number];
+  page:
+    | DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult[number]
+    | DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult[number];
 }) {
   const imageUrl = urlForImage(page.status?.bilde as Image)?.url();
 

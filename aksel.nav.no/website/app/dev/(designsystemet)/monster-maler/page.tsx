@@ -35,21 +35,22 @@ export default async function Page() {
 
   return (
     <DesignsystemetPageLayout>
-      <DesignsystemetEyebrow type="templates_artikkel" />
-      <Heading level="1" size="xlarge" data-aksel-heading-color>
-        Mønster og maler
-      </Heading>
-      <Box marginBlock="space-8 space-48" asChild>
-        <BodyLong size="large">
-          En samling maler og mønstre som kan brukes i NAVs digitale tjenester.
-        </BodyLong>
-      </Box>
+      <div>
+        <DesignsystemetEyebrow text="Oversikt" />
+        <Heading level="1" size="xlarge" data-aksel-heading-color>
+          Mønster og maler
+        </Heading>
+        <Box marginBlock="space-8 space-48" asChild>
+          <BodyLong size="large">
+            En samling maler og mønstre som kan brukes i NAVs digitale
+            tjenester.
+          </BodyLong>
+        </Box>
+      </div>
 
       <div>
         {templatesKategorier
-          .filter(
-            (kat) => links?.some((x) => x.kategori === kat.value),
-          )
+          .filter((kat) => links?.some((x) => x.kategori === kat.value))
           .map((kat) => {
             return (
               <div key={kat.title}>
@@ -64,9 +65,9 @@ export default async function Page() {
                 >
                   {links
                     .filter((page) => page.kategori === kat.value)
-                    .map((component) => (
-                      <li key={component.slug}>
-                        <DesignsystemetOverviewCard page={component} />
+                    .map((page) => (
+                      <li key={page.slug}>
+                        <DesignsystemetOverviewCard page={page} />
                       </li>
                     ))}
                 </HGrid>
