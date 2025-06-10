@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Heading } from "@navikt/ds-react";
+import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.provider";
 import { doctypeToColorRole } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { urlFor } from "@/sanity/interface";
@@ -47,12 +48,13 @@ function GlobalSearchLink(props: {
   hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
   tag?: Partial<SearchResultPageTypesT>;
 }) {
+  const context = useGlobalSearch();
   const { hit } = props;
 
   const href =
     "anchor" in hit && hit.anchor
-      ? `/${hit.item.slug}#${hit.anchor}`
-      : `/${hit.item.slug}`;
+      ? `/dev/${hit.item.slug}#${hit.anchor}`
+      : `/dev/${hit.item.slug}`;
 
   const imageUrl = urlFor(hit.item.status?.bilde)
     ?.auto("format")
@@ -69,6 +71,7 @@ function GlobalSearchLink(props: {
             onClick={() =>
               umamiTrack("navigere", { kilde: "global sok", url: href })
             }
+            onNavigate={() => context.closeSearch()}
             className={styles.searchLink}
             prefetch={false}
           >

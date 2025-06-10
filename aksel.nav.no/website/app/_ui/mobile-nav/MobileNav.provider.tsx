@@ -7,7 +7,10 @@ type MobileNavContextT = {
   toggleOpen: (toState?: boolean) => void;
 };
 
-const MobileNavContext = createContext<MobileNavContextT | null>(null);
+const MobileNavContext = createContext<MobileNavContextT>({
+  open: false,
+  toggleOpen: () => null,
+});
 
 function MobileNavProvider({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -28,10 +31,6 @@ function MobileNavProvider({ children }: { children: React.ReactNode }) {
 
 function useMobileNav() {
   const context = useContext(MobileNavContext);
-
-  if (!context) {
-    throw new Error("useMobileNav needs to be used within MobileNavProvider");
-  }
 
   return context;
 }

@@ -5,6 +5,7 @@ import { stegaClean } from "next-sanity";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BodyShort, Tag } from "@navikt/ds-react";
+import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { SidebarPageT } from "@/types";
@@ -17,6 +18,7 @@ function DesignsystemSidebarItem(props: {
 }) {
   const { page, isIndented = false, layout } = props;
   const pathName = usePathname();
+  const { toggleOpen } = useMobileNav();
 
   const active = pathName?.split("#")[0] === stegaClean(`/${page.slug}`);
   const statusTag = getStatusTag(page.tag, true);
@@ -32,6 +34,7 @@ function DesignsystemSidebarItem(props: {
       <Link
         /* TODO: Temp use /dev routing for testing */
         href={`/dev/${page.slug}`}
+        onNavigate={() => toggleOpen(false)}
         className={cl(styles.navListItemLink, {
           [styles.navListNotch]: active,
         })}
