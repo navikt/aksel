@@ -71,7 +71,7 @@
 }
 
 .aksel-guide-panel__content-inner {
-  padding: var(--ax-space-16);
+  padding: var(--ax-space-12) var(--ax-space-16);
   border-radius: var(--ax-radius-12);
   background-color: var(--ax-bg-raised);
   position: relative;
@@ -83,7 +83,7 @@
 
   @media (min-width: 480px) {
     & {
-      padding: var(--ax-space-20);
+      padding: var(--ax-space-16) var(--ax-space-20);
     }
 
     .aksel-guide-panel[data-responsive="true"] & {
