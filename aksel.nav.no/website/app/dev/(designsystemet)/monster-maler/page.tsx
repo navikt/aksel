@@ -42,7 +42,7 @@ export default async function Page() {
         </Heading>
         <Box marginBlock="space-8 space-48" asChild>
           <BodyLong size="large">
-            En samling maler og mønstre som kan brukes i NAVs digitale
+            En samling maler og mønstre som kan brukes i Navs digitale
             tjenester.
           </BodyLong>
         </Box>
