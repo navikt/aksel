@@ -1,12 +1,13 @@
 .promoTag {
   display: grid;
   grid-template-columns: auto 1fr auto;
+  padding-block: var(--ax-space-2);
   padding-right: var(--ax-space-8);
   gap: var(--ax-space-6);
   background-color: var(--aksel-brand-pink-200, #fde9f4);
   border: 1px solid var(--aksel-brand-pink-400A, #f96c7f42);
   border-radius: var(--ax-border-radius-xlarge);
-  color: var(--aksel-brand-pink-1000, #4e082d);
+  color: var(--ax-text-default, #4e082d);
   font-feature-settings:
     "liga" off,
     "clig" off;
@@ -22,7 +23,7 @@
   padding: 0 var(--ax-space-8);
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--aksel-brand-pink-600, #d33785);
-  margin-block: -1px;
+  margin-block: -3px;
   margin-inline-start: -1px;
   align-items: center;
 }
