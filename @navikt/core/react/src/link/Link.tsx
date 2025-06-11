@@ -22,7 +22,7 @@ export interface LinkProps
    * Variant of the component to use.
    * @default "action"
    */
-  variant?: "action" | "neutral" | "subtle";
+  variant?: "action" | "neutral" | "subtle" | "contrast";
   /**
    * Link text
    */

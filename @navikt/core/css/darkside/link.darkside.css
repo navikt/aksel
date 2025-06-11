@@ -26,6 +26,10 @@
     color: var(--ax-text-subtle);
   }
 
+  &[data-variant="contrast"] {
+    color: var(--ax-text-contrast);
+  }
+
   &.aksel-link--inline-text {
     display: inline;
 
