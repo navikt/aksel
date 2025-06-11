@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Darkside: Search now correctly respects 'clearbutton'-prop when set to false.
+Darkside: Search now correctly respects 'clearButton'-prop when set to false.
