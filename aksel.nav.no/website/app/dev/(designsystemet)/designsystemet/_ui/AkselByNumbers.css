@@ -1,5 +1,7 @@
 .akselByNumbers {
   position: relative;
+  background-color: var(--ax-bg-moderate);
+  border-color: var(--ax-border-subtle);
 
   &::after,
   &::before {
@@ -11,48 +13,41 @@
   }
 
   &::before {
+    background-color: var(--ax-bg-moderate);
     z-index: 2;
   }
 
-  &:nth-of-type(n) {
-    background-color: var(--ABTeal-200, #ccf6ed);
+  &::after {
+    background-color: var(--ax-bg-moderate-pressed);
+  }
 
+  &:nth-of-type(n) {
     &::after {
       clip-path: polygon(0% 28%, 15% 0%, 60% 0%, 85% 25%, 120% 25%, 77% 87%, 83% 100%, 0% 100%);
-      background-color: var(--ABTeal-400, #90e1d2);
     }
 
     &::before {
       clip-path: polygon(0% 31%, 17% -1%, 57.5% -1%, 84.5% 27%, 117% 27%, 75.5% 87%, 81.5% 100%, 0% 100%);
-      background-color: var(--ABTeal-200, #ccf6ed);
     }
   }
 
   &:nth-of-type(2n) {
-    background-color: var(--ax-bg-brand-blue-moderate);
-
     &::after {
       clip-path: polygon(0% 19%, 37% 19%, 50% 0%, 100% 0%, 100% 43%, 92% 30.5%, 46% 102.5%, 2% 98%);
-      background-color: var(--ax-border-brand-blue-subtle);
     }
 
     &::before {
       clip-path: polygon(0% 21%, 37.5% 21%, 53% -2%, 100% -2%, 100% 41%, 92% 28%, 46% 100%, 0% 100%);
-      background-color: var(--ax-bg-brand-blue-moderate);
     }
   }
 
   &:nth-of-type(3n) {
-    background-color: var(--ABPink-200, #fde9f4);
-
     &::after {
       clip-path: polygon(5% 40%, 35% 0%, 100% 0%, 100% 90%, 85% 90%, 80% 100%, 45% 100%, 0% 35%, 0 33%);
-      background-color: var(--ABPink-400, #fdc1e2);
     }
 
     &::before {
       clip-path: polygon(6% 41%, 37% 0%, 100% 0%, 100% 88%, 84.5% 88%, 78.5% 100%, 46.5% 100%, 0% 33%, 0 31%);
-      background-color: var(--ABPink-200, #fde9f4);
     }
   }
 
@@ -61,12 +56,11 @@
     z-index: 2;
   }
 
-  &__number {
+  .akselByNumbers__number {
     font-size: 56px;
-  }
-
-  &__unit {
-    font-size: var(--ax-font-size-heading-2xlarge);
+    display: flex;
+    gap: var(--ax-space-4);
+    align-items: baseline;
   }
 }
 

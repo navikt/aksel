@@ -38,40 +38,48 @@ const AkselByNumbers = () => (
         </BodyLong>
       </VStack>
       <HGrid gap="space-24" width="1024px" columns={3}>
-        {numbers.map(({ number, unit, description }, index) => (
-          <BoxNew
-            className="akselByNumbers"
-            key={description}
-            background="brand-blue-soft"
-            borderColor="brand-blue-subtle"
-            borderWidth="1"
-            borderRadius="xlarge"
-            paddingBlock="space-16"
-            paddingInline="space-20"
-            data-color={["brand-teal", "brand-blue", "brand-pink"][index]}
-            asChild
-          >
-            <VStack align="center">
-              <Heading as="h2" size="xlarge" className="akselByNumbers__number">
-                {number}
+        {numbers.map(({ number, unit, description }, index) => {
+          const dataColor = [
+            "aksel-brand-teal",
+            "aksel-brand-blue",
+            "aksel-brand-pink",
+          ][index];
+          return (
+            <BoxNew
+              className="akselByNumbers"
+              key={description}
+              borderWidth="1"
+              borderRadius="xlarge"
+              paddingBlock="space-16"
+              paddingInline="space-20"
+              data-color={dataColor}
+              asChild
+            >
+              <VStack align="center">
                 <Heading
-                  as="span"
+                  as="h2"
                   size="xlarge"
-                  textColor="subtle"
-                  className="akselByNumbers__unit"
-                  data-color-role={
-                    ["brand-teal", "brand-blue", "brand-pink"][index]
-                  }
+                  className="akselByNumbers__number"
+                  data-color={dataColor}
                 >
-                  {unit}
+                  {number}
+                  <Heading
+                    as="span"
+                    size="xlarge"
+                    textColor="subtle"
+                    className="akselByNumbers__unit"
+                    data-color={dataColor}
+                  >
+                    {unit}
+                  </Heading>
                 </Heading>
-              </Heading>
-              <BodyLong size="large" as="p">
-                {description}
-              </BodyLong>
-            </VStack>
-          </BoxNew>
-        ))}
+                <BodyLong size="large" as="p" data-color={dataColor}>
+                  {description}
+                </BodyLong>
+              </VStack>
+            </BoxNew>
+          );
+        })}
       </HGrid>
     </VStack>
   </Bleed>
