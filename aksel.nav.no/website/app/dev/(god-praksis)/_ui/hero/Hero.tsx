@@ -15,7 +15,7 @@ import {
   LinkCardIcon,
   LinkCardTitle,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
-import { GodPraksisPictogram } from "@/app/dev/(god-praksis)/_ui/pictogram/GodPraksisPictogram";
+import { GodPraksisPictogram } from "@/app/dev/(root)/_ui/pictogram/GodPraksisPictogram";
 import styles from "./Hero.module.css";
 
 type GpIntroHeroProps = {
@@ -101,7 +101,7 @@ async function GodPraksisTemaList() {
 
           return (
             <li key={tema.slug}>
-              <LinkCard data-color-role="brand-blue" hasArrow={false}>
+              <LinkCard data-color="brand-blue" hasArrow={false}>
                 <LinkCardIcon hasBackground={false}>
                   <GodPraksisPictogram url={url} />
                 </LinkCardIcon>

@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { Loader } from "../loader";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { Label } from "../typography";
 import { omit } from "../util";
 import { composeEventHandlers } from "../util/composeEventHandlers";
@@ -75,6 +76,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         icon,
         iconPosition = "left",
         onKeyUp,
+        "data-color": color,
         ...rest
       },
       ref,
@@ -93,6 +95,8 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       return (
         <Component
           {...(Component !== "button" ? { role: "button" } : {})}
+          data-color={color ?? variantToColor(variant)}
+          data-variant={variantToSimplifiedVariant(variant)}
           {...filterProps}
           ref={ref}
           onKeyUp={composeEventHandlers(onKeyUp, handleKeyUp)}
@@ -125,5 +129,39 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       );
     },
   );
+
+function variantToColor(
+  variant: ButtonProps["variant"],
+): AkselColor | undefined {
+  switch (variant) {
+    case "primary-neutral":
+    case "secondary-neutral":
+    case "tertiary-neutral":
+      return "neutral";
+    case "danger":
+      return "danger";
+    default:
+      return undefined;
+  }
+}
+
+function variantToSimplifiedVariant(
+  variant: ButtonProps["variant"],
+): "primary" | "secondary" | "tertiary" {
+  switch (variant) {
+    case "primary":
+    case "primary-neutral":
+    case "danger":
+      return "primary";
+    case "secondary":
+    case "secondary-neutral":
+      return "secondary";
+    case "tertiary":
+    case "tertiary-neutral":
+      return "tertiary";
+    default:
+      return "primary";
+  }
+}
 
 export default Button;

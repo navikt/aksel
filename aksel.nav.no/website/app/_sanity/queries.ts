@@ -227,6 +227,75 @@ const GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY = defineQuery(
   }`,
 );
 
+const GOD_PRAKSIS_TEMA_QUERY = defineQuery(
+  `*[_type == "gp.tema"] | order(lower(title))`,
+);
+
+const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
+*[_type == "aksel_forside"][0]{
+  blocks[]{
+    ...,
+    _type == "nytt_fra_aksel"=>{
+      highlights[]->{
+        ...,
+        "slug": slug.current,
+        "content": null,
+        ${contributorsAll},
+        "tema": undertema[]->tema->title,
+      },
+      "curatedRecent": {
+        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...4]{
+          _type,
+          _id,
+          heading,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          "slug": slug.current,
+          ingress,
+          seo,
+          ${contributorsAll}
+        },
+        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{
+          _type,
+          _id,
+          heading,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          "slug": slug.current,
+          "tema": undertema[]->tema->title,
+          ingress,
+          seo,
+          ${contributorsAll}
+        },
+        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...7]{
+          _type,
+          _id,
+          heading,
+          "slug": slug.current,
+          status,
+          kategori,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          seo,
+          ${contributorsAll}
+        },
+      },
+    }
+  }
+}.blocks
+`);
+
+const LANDINGSSIDE_META_QUERY = defineQuery(
+  `*[_type == "aksel_forside"][0]{
+  "page": {
+    ...,
+  }
+}.page`,
+);
+
 /* ---------------------------- Standalone pages ---------------------------- */
 
 const SIDE_ARTICLE_BY_SLUG_QUERY = defineQuery(`
@@ -291,12 +360,15 @@ export {
   DOCUMENT_BY_ID_FOR_SLACK_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
   GOD_PRAKSIS_ALL_TEMA_QUERY,
-  GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
+  GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
   GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
+  GOD_PRAKSIS_TEMA_QUERY,
   GRUNNLEGGENDE_BY_SLUG_QUERY,
   KOMPONENT_BY_SLUG_QUERY,
+  LANDINGSSIDE_LATEST_QUERY,
+  LANDINGSSIDE_META_QUERY,
   METADATA_BY_SLUG_QUERY,
   MONSTER_MALER_BY_SLUG_QUERY,
   PRINSIPPER_BY_SLUG_QUERY,

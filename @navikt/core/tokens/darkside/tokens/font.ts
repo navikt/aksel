@@ -3,7 +3,7 @@ import {
   type FontLineHeightKeys,
   type FontSizeKeys,
   type FontWeightKeys,
-} from "../../types";
+} from "../../internal-types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 const baseFontSize = 16;

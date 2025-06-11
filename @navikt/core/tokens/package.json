@@ -14,6 +14,7 @@
     "/dist",
     "/src",
     "types.ts",
+    "internal-types.ts",
     "docs.json",
     "token_docs.js",
     "!/dist/darkside",
