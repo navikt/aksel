@@ -3,11 +3,13 @@ import { HGrid, Heading } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
 import AkselLogo from "@/assets/Logo";
+import { FooterEdit } from "./Footer.edit";
 import styles from "./Footer.module.css";
 
-const Footer = () => {
+function Footer() {
   return (
     <footer className={`${styles.footer} dark`} id="aksel-footer">
+      <FooterEdit />
       <HGrid gap="space-24" asChild columns={{ xs: 1, md: 2, lg: 4 }}>
         <PageBlock width="2xl">
           <div className={styles.footerLogo}>
@@ -76,8 +78,7 @@ const Footer = () => {
       </HGrid>
     </footer>
   );
-};
-
+}
 type LinkBlockPropsT = {
   heading: string;
   links: { url: string; text: string; icon?: React.ReactNode }[];

@@ -1,8 +1,8 @@
 import type {
-  BorderRadiusKeys,
-  LegacyBorderRadiusKeys,
-  LegacySpacingKeys,
-  SpaceKeys,
+  AkselBorderRadiusToken,
+  AkselLegacyBorderRadiusToken,
+  AkselLegacySpacingToken,
+  AkselSpaceToken,
 } from "@navikt/ds-tokens/types";
 import { ResponsiveProp } from "./types";
 
@@ -34,8 +34,8 @@ export function getResponsiveValue<T = string>(
  * Temporary lookup for mapping legacy spacing tokens to new space tokens.
  */
 const legacySpacingTokenLookup: Record<
-  `--ax-spacing-${LegacySpacingKeys}`,
-  `--ax-${SpaceKeys}`
+  `--ax-spacing-${AkselLegacySpacingToken}`,
+  `--ax-${AkselSpaceToken}`
 > = {
   "--ax-spacing-32": "--ax-space-128",
   "--ax-spacing-24": "--ax-space-96",
@@ -61,8 +61,8 @@ const legacySpacingTokenLookup: Record<
 };
 
 const legacyBorderRadiusNameTokenLookup: Record<
-  `${LegacyBorderRadiusKeys}`,
-  `${BorderRadiusKeys}`
+  `${AkselLegacyBorderRadiusToken}`,
+  `${AkselBorderRadiusToken}`
 > = {
   full: "full",
   xlarge: "12",

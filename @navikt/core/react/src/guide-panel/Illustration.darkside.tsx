@@ -16,12 +16,7 @@ export const DarksideGudiepanelIllustration = () => {
       role="img"
     >
       <g clipPath="url(#clip0_1387_21067)">
-        <rect
-          width="80"
-          height="80"
-          rx="40"
-          fill="var(--ax-bg-info-moderate)"
-        />
+        <rect width="80" height="80" rx="40" fill="var(--ax-bg-moderate)" />
 
         <path
           fillRule="evenodd"
