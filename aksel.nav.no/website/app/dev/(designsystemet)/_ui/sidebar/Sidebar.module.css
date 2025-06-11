@@ -55,6 +55,11 @@
 
 .navListSub {
   border-radius: var(--ax-radius-8);
+  transition: background-color 150ms cubic-bezier(0.2, 0, 0, 1);
+
+  &:hover {
+    background-color: var(--ax-bg-soft);
+  }
 
   &[data-active="true"] {
     background-color: var(--ax-bg-moderate);
