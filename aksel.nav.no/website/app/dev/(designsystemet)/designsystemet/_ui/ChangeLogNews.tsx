@@ -40,7 +40,7 @@ const ChangeLogNews = ({ entries }: Props) => (
       </VStack>
       <HGrid gap="space-24" width="1024px" maxWidth="100%" columns={3}>
         {entries.map(({ heading, slug, endringsdato }) => (
-          <LinkCard key={heading} hasArrow={false}>
+          <LinkCard key={heading}>
             <LinkCardTitle as="span">
               <LinkCardAnchor
                 href={`/dev/grunnleggende/kode/endringslogg/${slug?.current}`}
