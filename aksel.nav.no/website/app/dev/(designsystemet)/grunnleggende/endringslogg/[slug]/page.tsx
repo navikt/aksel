@@ -24,7 +24,7 @@ export async function generateStaticParams() {
     stega: false,
     perspective: "published",
   });
-  return [slugs];
+  return slugs.map((slug: string) => ({ slug }));
 }
 
 type Props = {
