@@ -1,5 +1,68 @@
 .aksel-link-card {
-  color: inherit;
+  --__axc-link-card-padding-block: var(--ax-space-16);
+  --__axc-link-card-padding-inline: var(--ax-space-20);
+
+  border-radius: var(--ax-border-radius-xlarge);
+  text-decoration: none;
+  color: var(--ax-text-neutral);
+  transition-property: border-color, box-shadow, transform, background-color;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.15, 1, 0.3, 1);
   position: relative;
+  background-color: var(--ax-bg-raised);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  padding: var(--__axc-link-card-padding-block) var(--__axc-link-card-padding-inline);
+  height: 100%;
   cursor: pointer;
+
+  &:hover {
+    border-color: var(--ax-border-neutral);
+    box-shadow: 0 0 0 1px var(--ax-border-neutral);
+  }
+}
+
+.aksel-link-anchor__overlay {
+  cursor: pointer;
+
+  &:focus-within {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+@supports selector(:has(*)) {
+  .aksel-link-anchor__overlay:focus-within {
+    outline: unset;
+  }
+
+  .aksel-link-anchor__overlay:has(:focus-visible) {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.aksel-link-anchor {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 0.1em;
+  text-decoration-thickness: 0.05em;
+
+  &:hover,
+  .aksel-link-anchor__overlay:hover & {
+    text-decoration-thickness: 0.111em;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  .aksel-link-anchor__overlay &:focus-visible {
+    outline: none;
+  }
 }

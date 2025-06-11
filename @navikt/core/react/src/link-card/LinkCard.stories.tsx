@@ -1,6 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
+import { VStack } from "../layout/stack";
 import {
+  LinkAnchor,
+  LinkAnchorOverlay,
   LinkCard,
   LinkCardAnchor,
   LinkCardDescription,
@@ -20,7 +23,7 @@ export default {
 export const Default: StoryObj = {
   render: () => {
     return (
-      <div>
+      <VStack gap="space-8">
         <LinkCard>
           <LinkCardTitle as="span">
             <LinkCardAnchor href="https://aksel.nav.no/">Tittel</LinkCardAnchor>
@@ -37,7 +40,13 @@ export const Default: StoryObj = {
             velit.
           </LinkCardDescription>
         </LinkCard>
-      </div>
+        <LinkAnchor href="#">LINK ANCHOR</LinkAnchor>
+        <LinkAnchorOverlay asChild>
+          <div style={{ padding: "2rem", border: "1px solid red" }}>
+            <LinkAnchor href="#123">Custom LinkAnchor</LinkAnchor>
+          </div>
+        </LinkAnchorOverlay>
+      </VStack>
     );
   },
 };

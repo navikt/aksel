@@ -7,10 +7,11 @@ import React, {
   ImgHTMLAttributes,
   SVGProps,
   forwardRef,
+  useCallback,
   useRef,
-  useState,
 } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
+import { Slot } from "../slot/Slot";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, Heading } from "../typography";
 import { createContext } from "../util/create-context";
@@ -23,27 +24,7 @@ import { useMergeRefs } from "../util/hooks";
  */
 
 /* ------------------------------ LinkCard Root ----------------------------- */
-
-type LinkCardContextProps = {
-  anchorRef: React.RefObject<HTMLAnchorElement>;
-};
-
-const [LinkCardContextProvider, useLinkCardContext] =
-  createContext<LinkCardContextProps>({
-    name: "LinkCardContext",
-    errorMessage:
-      "useLinkCardContext must be used within an LinkCardContextProvider",
-  });
-
-export type LinkCardStrucutredProps = {
-  title: string;
-  description?: string;
-  footer?: string;
-  href?: string;
-};
-
-interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
+type LinkCardProps = LinkAnchorOverlayProps & {
   /**
    * @default true
    */
@@ -55,7 +36,7 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
    * @default true
    */
   autoLayout?: boolean;
-}
+};
 
 const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
   (
@@ -70,15 +51,8 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
   ) => {
     const { cn } = useRenameCSS();
 
-    const anchorRef = useRef<HTMLAnchorElement>(null);
-    const [isContextMenuOpen, setIsContextMenuOpen] = useState<boolean>(false);
-
-    function isTextSelected() {
-      return !!window.getSelection()?.toString();
-    }
-
     return (
-      <LinkCardContextProvider anchorRef={anchorRef}>
+      <LinkAnchorOverlay asChild>
         <div
           ref={forwardedRef}
           data-color="neutral"
@@ -87,50 +61,10 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
           data-arrow={hasArrow}
           data-auto-layout={autoLayout}
           style={{ padding: "1rem", border: "1px solid black" }}
-          onPointerDown={(e) => {
-            /**
-             * When user intends to invoke context menu, we want to make sure
-             * they can interact with the element as if it was a native link.
-             */
-            if (e.button == 2 || (e.button == 0 && e.ctrlKey)) {
-              setIsContextMenuOpen(true);
-            }
-          }}
-          onPointerUp={() => setIsContextMenuOpen(false)}
-          onPointerLeave={() => setIsContextMenuOpen(false)}
-          onPointerMove={() => {
-            if (!isContextMenuOpen) {
-              return;
-            }
-            setIsContextMenuOpen(false);
-          }}
-          data-context={isContextMenuOpen}
-          onClick={(e) => {
-            if (e.target === anchorRef.current || isTextSelected()) {
-              return;
-            }
-
-            const event = new MouseEvent("click", {
-              bubbles: true,
-              cancelable: true,
-              view: window,
-              ctrlKey: e.ctrlKey,
-              shiftKey: e.shiftKey,
-              altKey: e.altKey,
-              metaKey: e.metaKey,
-              button: e.button,
-              screenX: e.screenX,
-              screenY: e.screenY,
-              clientX: e.clientX,
-              clientY: e.clientY,
-            });
-
-            anchorRef.current?.dispatchEvent(event);
-          }}
         >
           {children}
         </div>
-      </LinkCardContextProvider>
+      </LinkAnchorOverlay>
     );
   },
 );
@@ -166,40 +100,11 @@ const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
 );
 
 /* ---------------------------- LinkCard Anchor ---------------------------- */
-interface LinkCardAnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  children: React.ReactNode;
-  as?: any;
-  asChild?: any;
-}
+type LinkCardAnchorProps = LinkAnchorProps;
 
-/**
- * TODO:
- * - Support OverridableComponent?
- * - Implement it so that clicking on container triggers this link with a click or similar.
- */
 const LinkCardAnchor = forwardRef<HTMLAnchorElement, LinkCardAnchorProps>(
-  (
-    { children, className, ...restProps }: LinkCardAnchorProps,
-    forwardedRef,
-  ) => {
-    const { cn } = useRenameCSS();
-
-    const { anchorRef } = useLinkCardContext();
-    const mergedRefs = useMergeRefs(forwardedRef, anchorRef);
-
-    return (
-      <a
-        ref={mergedRefs}
-        {...restProps}
-        className={cn("navds-link-card__anchor", className)}
-        onClick={(e) => {
-          console.info("LinkCardAnchor clicked", e);
-          /* e.preventDefault(); */
-        }}
-      >
-        {children}
-      </a>
-    );
+  (props: LinkCardAnchorProps, forwardedRef) => {
+    return <LinkAnchor ref={forwardedRef} {...props} />;
   },
 );
 
@@ -336,6 +241,104 @@ const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
   },
 );
 
+/* ------------------------ LinkCard Anchor utilities ----------------------- */
+type LinkAnchorOverlayContextProps = {
+  anchorRef: React.RefObject<HTMLAnchorElement>;
+};
+
+const [LinkOverlayContextProvider, useLinkOverlayContext] =
+  createContext<LinkAnchorOverlayContextProps>({
+    name: "LinkAnchorOverlayContext",
+  });
+
+interface LinkAnchorOverlayProps extends HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+  asChild?: boolean;
+}
+
+const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
+  (
+    { children, asChild, className, ...restProps }: LinkAnchorOverlayProps,
+    forwardedRef,
+  ) => {
+    const { cn } = useRenameCSS();
+    const anchorRef = useRef<HTMLAnchorElement>(null);
+
+    const isTextSelected = useCallback(() => {
+      return !!window.getSelection()?.toString();
+    }, []);
+
+    const Component = asChild ? Slot : "div";
+
+    return (
+      <LinkOverlayContextProvider anchorRef={anchorRef}>
+        <Component
+          ref={forwardedRef}
+          {...restProps}
+          className={cn("navds-link-anchor__overlay", className)}
+          onClick={(e) => {
+            if (e.target === anchorRef.current || isTextSelected()) {
+              return;
+            }
+
+            const event = new MouseEvent("click", {
+              bubbles: true,
+              cancelable: true,
+              view: window,
+              ctrlKey: e.ctrlKey,
+              shiftKey: e.shiftKey,
+              altKey: e.altKey,
+              metaKey: e.metaKey,
+              button: e.button,
+              screenX: e.screenX,
+              screenY: e.screenY,
+              clientX: e.clientX,
+              clientY: e.clientY,
+            });
+
+            anchorRef.current?.dispatchEvent(event);
+          }}
+        >
+          {children}
+        </Component>
+      </LinkOverlayContextProvider>
+    );
+  },
+);
+
+interface LinkAnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  children: React.ReactNode;
+  asChild?: boolean;
+}
+
+const LinkAnchor = forwardRef<HTMLAnchorElement, LinkAnchorProps>(
+  (
+    { children, asChild, className, ...restProps }: LinkAnchorProps,
+    forwardedRef,
+  ) => {
+    const { cn } = useRenameCSS();
+
+    const context = useLinkOverlayContext(false);
+    const mergedRefs = useMergeRefs(forwardedRef, context?.anchorRef);
+
+    const Component = asChild ? Slot : "a";
+
+    return (
+      <Component
+        ref={mergedRefs}
+        {...restProps}
+        className={cn("navds-link-anchor", className)}
+        onClick={(e) => {
+          console.info("LinkAnchor clicked", e);
+          /* e.preventDefault(); */
+        }}
+      >
+        {children}
+      </Component>
+    );
+  },
+);
+
 /* --------------------------- LinkCard utilities --------------------------- */
 function aspectRatioClassName(aspectRatio?: ImageAspectRatio): string {
   if (!aspectRatio) {
@@ -349,22 +352,24 @@ function aspectRatioClassName(aspectRatio?: ImageAspectRatio): string {
 
 export {
   LinkCard,
-  LinkCardTitle,
   LinkCardAnchor,
+  LinkCardArrow,
   LinkCardDescription,
   LinkCardFooter,
   LinkCardIcon,
-  LinkCardArrow,
   LinkCardImage,
+  LinkCardTitle,
+  LinkAnchor,
+  LinkAnchorOverlay,
 };
 
 export type {
-  LinkCardProps,
-  LinkCardTitleProps,
   LinkCardAnchorProps,
+  LinkCardArrowProps,
   LinkCardDescriptionProps,
   LinkCardFooterProps,
   LinkCardIconProps,
-  LinkCardArrowProps,
   LinkCardImageProps,
+  LinkCardProps,
+  LinkCardTitleProps,
 };
