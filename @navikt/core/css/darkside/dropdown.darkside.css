@@ -50,11 +50,11 @@
   color: var(--ax-text-neutral);
 
   &:hover {
-    background-color: var(--ax-bg-accent-moderate-hoverA);
+    background-color: var(--ax-bg-moderate-hoverA);
   }
 
   &:active {
-    background-color: var(--ax-bg-accent-moderate-pressedA);
+    background-color: var(--ax-bg-moderate-pressedA);
   }
 
   &:focus-visible {

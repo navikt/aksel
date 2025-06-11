@@ -48,6 +48,7 @@ function KodeEksemplerProvider(props: {
 
   const resizerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const prevSearchParam = useRef<string | null>(null);
 
   const [activeExample, setActiveExample] = useState<FileT | null>(
     dir?.filer?.[0] ?? null,
@@ -86,18 +87,6 @@ function KodeEksemplerProvider(props: {
   };
 
   useEffect(() => {
-    if (!searchParams?.get("demo")) {
-      return;
-    }
-
-    iframeRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-    });
-    iframeRef.current?.focus({ preventScroll: true });
-  }, [searchParams]);
-
-  useEffect(() => {
     const param = searchParams?.get("demo");
     if (!param) {
       return;
@@ -108,9 +97,23 @@ function KodeEksemplerProvider(props: {
       return param === `${id}`;
     });
 
-    if (foundMatch) {
-      setActiveExample(foundMatch);
+    if (!foundMatch) {
+      return;
     }
+
+    setActiveExample(foundMatch);
+
+    if (prevSearchParam.current === param) {
+      return;
+    }
+
+    prevSearchParam.current = param;
+
+    iframeRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
+    iframeRef.current?.focus({ preventScroll: true });
   }, [dir?.filer, dir?.title, searchParams]);
 
   return (

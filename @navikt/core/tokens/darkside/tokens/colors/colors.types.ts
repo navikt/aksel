@@ -1,17 +1,18 @@
-import { GlobalColorRoles, GlobalColorScale } from "../../../types";
+import type { GlobalColorScale } from "../../../internal-types";
+import type { AkselColorRole } from "../../../types";
 import { GlobalColorEntry } from "../../tokens.util";
 
 export type GlobalConfigWithAlpha = Record<
-  Extract<GlobalColorRoles, "neutral">,
+  Extract<AkselColorRole, "neutral">,
   Record<GlobalColorScale, GlobalColorEntry>
 > &
   Record<
-    Exclude<GlobalColorRoles, "neutral">,
+    Exclude<AkselColorRole, "neutral">,
     Record<Exclude<GlobalColorScale, "000">, GlobalColorEntry>
   >;
 
 export type GlobalConfigWithoutAlpha = Record<
-  GlobalColorRoles,
+  AkselColorRole,
   Record<
     Exclude<GlobalColorScale, "000" | "100A" | "200A" | "300A" | "400A">,
     GlobalColorEntry

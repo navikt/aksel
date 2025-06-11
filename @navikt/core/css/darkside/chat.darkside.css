@@ -3,6 +3,24 @@
   align-items: flex-end;
   gap: var(--ax-space-12);
   max-width: 40.75rem;
+
+  & .aksel-chat__bubble,
+  & .aksel-chat__avatar {
+    background-color: var(--ax-bg-moderateA);
+    border: 1px solid var(--ax-border-subtleA);
+  }
+
+  &[data-variant="subtle"] .aksel-chat__bubble,
+  &[data-variant="subtle"] .aksel-chat__avatar {
+    background-color: var(--ax-bg-softA);
+    border: 1px solid var(--ax-border-subtleA);
+  }
+
+  &[data-color="neutral"][data-variant="subtle"] .aksel-chat__bubble,
+  &[data-color="neutral"][data-variant="subtle"] .aksel-chat__avatar {
+    background-color: var(--ax-bg-raised);
+    border: 1px solid var(--ax-border-neutral-subtleA);
+  }
 }
 
 .aksel-chat--right {
@@ -21,9 +39,7 @@
 /* ------------------------------- Chat avatar ------------------------------ */
 .aksel-chat__avatar {
   align-items: center;
-  background-color: var(--ax-bg-raised);
   border-radius: var(--ax-radius-full);
-  border: 1px solid var(--ax-border-neutral-subtleA);
   color: var(--ax-text-neutral);
   display: flex;
   flex-shrink: 0;
@@ -56,32 +72,15 @@
 .aksel-chat__bubble {
   padding: var(--ax-space-20);
   width: fit-content;
-  background-color: var(--ax-bg-raised);
   display: flex;
   flex-direction: column;
   gap: var(--ax-space-8);
   border-radius: var(--ax-radius-12);
   border-bottom-left-radius: var(--ax-radius-2);
-  border: 1px solid var(--ax-border-neutral-subtleA);
 }
 
 .aksel-chat--small .aksel-chat__bubble {
   padding: var(--ax-space-16);
-}
-
-/* -------------------------- Chat bubble variants -------------------------- */
-.aksel-chat--info {
-  & .aksel-chat__bubble,
-  & .aksel-chat__avatar {
-    background-color: var(--ax-bg-info-moderate);
-  }
-}
-
-.aksel-chat--neutral {
-  & .aksel-chat__bubble,
-  & .aksel-chat__avatar {
-    background-color: var(--ax-bg-neutral-moderateA);
-  }
 }
 
 /* ------------------------------ Chat top text ----------------------------- */

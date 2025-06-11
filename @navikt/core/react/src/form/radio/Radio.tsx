@@ -21,6 +21,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         "navds-radio--disabled": inputProps.disabled,
         "navds-radio--readonly": readOnly,
       })}
+      data-color={hasError ? "danger" : props["data-color"]}
     >
       <input
         {...omit(props, ["children", "size", "description", "readOnly"])}

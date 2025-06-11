@@ -105,6 +105,43 @@ export const CustomIllustration: Story = {
   ),
 };
 
+export const ColorRole: Story = {
+  render: () => (
+    <VStack gap="space-40">
+      <div>
+        <GuidePanel>
+          <BodyLong spacing>
+            Duis et ex ad magna nostrud ut officia nulla cillum commodo sint
+            irure elit nulla. Ad proident nulla ex sunt exercitation sunt Lorem
+            non laboris ea ex cillum nulla consequat. Enim pariatur eiusmod quis
+            est fugiat officia nostrud dolore occaecat nisi.
+          </BodyLong>
+          <BodyLong>
+            Do esse magna nulla amet excepteur. Tempor laboris ipsum magna velit
+            dolore nulla id ex mollit. Deserunt ut esse laboris pariatur tempor
+            laborum veniam enim. Nisi deserunt officia minim enim.
+          </BodyLong>
+        </GuidePanel>
+      </div>
+      <div>
+        <GuidePanel data-color="brand-magenta">
+          <BodyLong spacing>
+            Duis et ex ad magna nostrud ut officia nulla cillum commodo sint
+            irure elit nulla. Ad proident nulla ex sunt exercitation sunt Lorem
+            non laboris ea ex cillum nulla consequat. Enim pariatur eiusmod quis
+            est fugiat officia nostrud dolore occaecat nisi.
+          </BodyLong>
+          <BodyLong>
+            Do esse magna nulla amet excepteur. Tempor laboris ipsum magna velit
+            dolore nulla id ex mollit. Deserunt ut esse laboris pariatur tempor
+            laborum veniam enim. Nisi deserunt officia minim enim.
+          </BodyLong>
+        </GuidePanel>
+      </div>
+    </VStack>
+  ),
+};
+
 export const Chromatic: Story = {
   render: (props, context) => (
     <div>
@@ -127,6 +164,10 @@ export const Chromatic: Story = {
       <div>
         <h2>CustomIllustration</h2>
         {CustomIllustration.render?.(props, context)}
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        {ColorRole.render?.(props, context)}
       </div>
     </div>
   ),

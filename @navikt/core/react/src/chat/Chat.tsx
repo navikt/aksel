@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { BodyLong, HeadingProps } from "../typography";
 import Bubble from "./Bubble";
 
@@ -94,6 +95,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       toptextPosition,
       size = "medium",
       toptextHeadingLevel = "3",
+      "data-color": color,
       ...rest
     }: ChatProps,
     ref,
@@ -111,7 +113,9 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
           `navds-chat--${size}`,
           `navds-chat--${variant}`,
         )}
+        data-color={color ?? variantToColor(variant)}
         {...rest}
+        data-variant={variant}
       >
         {avatar && (
           <div className={cn("navds-chat__avatar")} aria-hidden>
@@ -138,6 +142,19 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
     );
   },
 ) as ChatComponent;
+
+function variantToColor(variant: ChatProps["variant"]): AkselColor {
+  switch (variant) {
+    case "neutral":
+      return "neutral";
+    case "subtle":
+      return "neutral";
+    case "info":
+      return "info";
+    default:
+      return "neutral";
+  }
+}
 
 Chat.Bubble = Bubble;
 

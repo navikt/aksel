@@ -117,7 +117,7 @@ export default async function Page() {
                   href={`/god-praksis/${tema.slug}`}
                   as={NextLink}
                   data-link-card-anchor
-                  data-color-role="brand-blue"
+                  data-color="brand-blue"
                 >
                   {`Alt fra ${tema.title} `}
                   <LinkCardArrow />
