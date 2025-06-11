@@ -64,6 +64,7 @@
   &[data-highlight="true"] {
     background-color: var(--ax-bg-moderate);
     position: relative;
+    box-shadow: none;
 
     &::before {
       content: "";
@@ -93,20 +94,20 @@
         conic-gradient(
           from var(--border-angle-3) at 50% 20%,
           transparent,
-          var(--ax-border-default) 10%,
+          var(--ax-border-strong) 10%,
           transparent 50%,
           transparent
         ),
         conic-gradient(var(--ax-border-subtle));
       animation:
-        rotateBackground 18s linear infinite,
-        rotateBackground2 26s linear infinite,
-        rotateBackground3 13s linear infinite;
+        rotateAngle 36s linear infinite,
+        rotateAngle2 52s linear infinite,
+        rotateAngle3 26s linear infinite;
     }
   }
 }
 
-@keyframes rotateBackground {
+@keyframes rotateAngle {
   0% {
     --border-angle-1: 0deg;
   }
@@ -120,7 +121,7 @@
   }
 }
 
-@keyframes rotateBackground2 {
+@keyframes rotateAngle2 {
   0% {
     --border-angle-2: 0deg;
   }
@@ -134,7 +135,7 @@
   }
 }
 
-@keyframes rotateBackground3 {
+@keyframes rotateAngle3 {
   0% {
     --border-angle-3: 0deg;
   }
@@ -207,6 +208,7 @@
     top: 50%;
     transform: translateY(-50%);
     border-radius: var(--ax-radius-full);
+    pointer-events: none;
   }
 }
 
