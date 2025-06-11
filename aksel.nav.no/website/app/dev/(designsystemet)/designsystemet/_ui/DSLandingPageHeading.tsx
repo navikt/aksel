@@ -1,5 +1,5 @@
-import { BodyLong, Heading, VStack } from "@navikt/ds-react";
-import NewsTag from "./NewsTag";
+import { BodyLong, BoxNew, Heading, VStack } from "@navikt/ds-react";
+import PromoTag from "./promo-tag/PromoTag";
 
 type Props = {
   title: string;
@@ -7,17 +7,19 @@ type Props = {
 };
 
 const DSLandingPageHeading = ({ title, introText }: Props) => (
-  <VStack gap="space-16" maxWidth="600px" align="center">
-    <VStack gap="space-8">
-      <NewsTag />
-      <Heading level="1" size="xlarge">
-        {title}
-      </Heading>
+  <BoxNew maxWidth="text">
+    <VStack gap="space-16" maxWidth="600px" align="center">
+      <VStack gap="space-8" align="center">
+        <PromoTag />
+        <Heading level="1" size="xlarge" className="aksel__page-title">
+          {title}
+        </Heading>
+      </VStack>
+      <BodyLong size="large" as="p" align="center">
+        {introText}
+      </BodyLong>
     </VStack>
-    <BodyLong size="large" as="p" align="center">
-      {introText}
-    </BodyLong>
-  </VStack>
+  </BoxNew>
 );
 
 export default DSLandingPageHeading;

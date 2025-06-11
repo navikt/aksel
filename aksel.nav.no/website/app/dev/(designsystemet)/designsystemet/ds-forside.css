@@ -1,8 +1,14 @@
+.aksel__page-title {
+  font-size: 56px;
+}
+
 .aksel-layers-list {
   position: relative;
   list-style: none;
 
   .aksel-list__item {
+    margin-bottom: var(--ax-space-40);
+
     &:nth-of-type(1) {
       --ax-layer-background: var(--ax-bg-info-softA);
     }
@@ -57,14 +63,14 @@
           display: block;
           border-bottom: 2px dotted var(--ax-border-neutral);
           grid-column: 2 / 3;
-          margin-inline-end: -0.5rem;
+          margin-inline: -0.5rem;
         }
 
         &:last-of-type::after {
           grid-column: 3 / 4;
           content: "" / "";
           display: block;
-          border: var(--ax-border-info-subtleA);
+          border: 2px solid var(--ax-border-info-subtleA);
           background-color: var(--ax-layer-background);
           width: 10rem;
           height: 10rem;

@@ -60,6 +60,14 @@
     position: relative;
     z-index: 2;
   }
+
+  &__number {
+    font-size: 56px;
+  }
+
+  &__unit {
+    font-size: var(--ax-font-size-heading-2xlarge);
+  }
 }
 
 /**

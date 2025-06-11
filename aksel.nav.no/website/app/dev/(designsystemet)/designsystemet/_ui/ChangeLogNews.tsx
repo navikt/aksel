@@ -1,9 +1,10 @@
 import { format, parseISO } from "date-fns";
 import { nb } from "date-fns/locale";
+import NextLink from "next/link";
 import {
   Bleed,
   BodyLong,
-  HStack,
+  HGrid,
   Heading,
   Link,
   VStack,
@@ -31,11 +32,13 @@ const ChangeLogNews = ({ entries }: Props) => (
         </Heading>
         <BodyLong size="large" as="p">
           Siste endringer i kode.{" "}
-          <Link href="/dev/designsystemet/endringslogg">Se alle endringer</Link>
+          <Link as={NextLink} href="/dev/designsystemet/endringslogg">
+            Se alle endringer
+          </Link>
           .
         </BodyLong>
       </VStack>
-      <HStack gap="space-24">
+      <HGrid gap="space-24" width="1024px" maxWidth="100%" columns={3}>
         {entries.map(({ heading, slug, endringsdato }) => (
           <LinkCard key={heading} hasArrow={false}>
             <LinkCardTitle as="span">
@@ -55,7 +58,7 @@ const ChangeLogNews = ({ entries }: Props) => (
             </LinkCardIcon>
           </LinkCard>
         ))}
-      </HStack>
+      </HGrid>
     </VStack>
   </Bleed>
 );

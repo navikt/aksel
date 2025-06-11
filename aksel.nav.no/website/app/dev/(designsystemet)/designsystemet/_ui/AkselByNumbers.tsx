@@ -2,11 +2,11 @@ import {
   Bleed,
   BodyLong,
   BoxNew,
-  HStack,
+  HGrid,
   Heading,
   VStack,
 } from "@navikt/ds-react";
-import styles from "./AkselByNumbers.module.css";
+import "./AkselByNumbers.css";
 
 const numbers = [
   {
@@ -17,7 +17,7 @@ const numbers = [
   {
     number: 600,
     unit: "+",
-    description: "Løsnigner bruker Aksel",
+    description: "Løsninger bruker Aksel",
   },
   {
     number: 91.8,
@@ -31,16 +31,16 @@ const AkselByNumbers = () => (
     <VStack gap="space-32" as="section">
       <VStack gap="space-8" align="center">
         <Heading level="2" size="large">
-          Endringslogg
+          Aksel i tall
         </Heading>
         <BodyLong size="large" as="p">
-          Siste endringer i kode.
+          Aktiv forvaltning og økende bruk.
         </BodyLong>
       </VStack>
-      <HStack gap="space-24">
-        {numbers.map(({ number, unit, description }) => (
+      <HGrid gap="space-24" width="1024px" columns={3}>
+        {numbers.map(({ number, unit, description }, index) => (
           <BoxNew
-            className={styles.akselByNumbers}
+            className="akselByNumbers"
             key={description}
             background="brand-blue-soft"
             borderColor="brand-blue-subtle"
@@ -48,12 +48,23 @@ const AkselByNumbers = () => (
             borderRadius="xlarge"
             paddingBlock="space-16"
             paddingInline="space-20"
+            data-color={["brand-teal", "brand-blue", "brand-pink"][index]}
             asChild
           >
             <VStack align="center">
-              <Heading size="xlarge">
+              <Heading as="h2" size="xlarge" className="akselByNumbers__number">
                 {number}
-                {unit}
+                <Heading
+                  as="span"
+                  size="xlarge"
+                  textColor="subtle"
+                  className="akselByNumbers__unit"
+                  data-color-role={
+                    ["brand-teal", "brand-blue", "brand-pink"][index]
+                  }
+                >
+                  {unit}
+                </Heading>
               </Heading>
               <BodyLong size="large" as="p">
                 {description}
@@ -61,7 +72,7 @@ const AkselByNumbers = () => (
             </VStack>
           </BoxNew>
         ))}
-      </HStack>
+      </HGrid>
     </VStack>
   </Bleed>
 );

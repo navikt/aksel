@@ -1,5 +1,6 @@
 import {
   LinkCard,
+  LinkCardAnchor,
   LinkCardDescription,
   LinkCardIcon,
   LinkCardTitle,
@@ -9,13 +10,16 @@ type Props = {
   title: string;
   description: string;
   icon: React.ReactNode;
+  link: string;
 };
 
-const GettingStartedCard = ({ title, description, icon }: Props) => (
-  <LinkCard hasArrow={false}>
-    <LinkCardTitle as="h2">{title}</LinkCardTitle>
+const GettingStartedCard = ({ title, description, icon, link }: Props) => (
+  <LinkCard>
+    <LinkCardTitle as="h2">
+      <LinkCardAnchor href={link}>{title}</LinkCardAnchor>
+    </LinkCardTitle>
     <LinkCardDescription>{description}</LinkCardDescription>
-    <LinkCardIcon>{icon}</LinkCardIcon>
+    <LinkCardIcon data-color="brand-blue">{icon}</LinkCardIcon>
   </LinkCard>
 );
 
