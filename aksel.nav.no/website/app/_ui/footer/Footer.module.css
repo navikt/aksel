@@ -44,3 +44,24 @@
     outline-offset: 3px;
   }
 }
+
+.footerEdit {
+  position: absolute;
+  top: calc(var(--ax-space-40) * -1);
+  right: 0;
+  padding: var(--ax-space-8) var(--ax-space-16);
+  background: var(--ax-bg-brand-blue-moderate);
+  border-radius: var(--ax-radius-8) 0 0 0;
+
+  /* Avoids px-gap between bg */
+  box-shadow: 0 0 0 1px var(--ax-bg-brand-blue-moderate);
+
+  &:hover {
+    background: var(--ax-bg-brand-blue-moderate-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -4px;
+  }
+}

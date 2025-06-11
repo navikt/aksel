@@ -104,6 +104,16 @@ export const Readonly = () => {
   );
 };
 
+export const ColorRole = () => {
+  return (
+    <div className="colgap" data-color="brand-magenta">
+      <Description />
+      <WithError />
+      <Disabled />
+    </div>
+  );
+};
+
 export const Chromatic: Story = {
   render: () => (
     <div>

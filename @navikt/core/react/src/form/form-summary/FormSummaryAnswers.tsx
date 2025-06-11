@@ -12,18 +12,29 @@ export interface FormSummaryAnswersProps
 export const FormSummaryAnswers = forwardRef<
   HTMLDListElement,
   FormSummaryAnswersProps
->(({ children, className, ...rest }: FormSummaryAnswersProps, ref) => {
-  const { cn } = useRenameCSS();
+>(
+  (
+    {
+      children,
+      className,
+      "data-color": color = "info",
+      ...rest
+    }: FormSummaryAnswersProps,
+    ref,
+  ) => {
+    const { cn } = useRenameCSS();
 
-  return (
-    <dl
-      ref={ref}
-      {...rest}
-      className={cn("navds-form-summary__answers", className)}
-    >
-      {children}
-    </dl>
-  );
-});
+    return (
+      <dl
+        ref={ref}
+        data-color={color}
+        {...rest}
+        className={cn("navds-form-summary__answers", className)}
+      >
+        {children}
+      </dl>
+    );
+  },
+);
 
 export default FormSummaryAnswers;
