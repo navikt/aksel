@@ -85,7 +85,13 @@ const PAGE_ROUTES: Routes = {
   templates: {
     title: "Mønster og Maler",
     _type: "templates_artikkel",
-    root: [],
+    root: [
+      {
+        heading: "Oversikt",
+        slug: "monster-maler",
+        tag: "ready",
+      },
+    ],
   },
 } as const;
 
