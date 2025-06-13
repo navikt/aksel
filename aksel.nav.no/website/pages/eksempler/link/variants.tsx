@@ -4,13 +4,13 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <VStack gap="3" align="start">
-      <Link variant="action" href="variants">
+      <Link variant="action" href="/eksempel">
         Action variant
       </Link>
-      <Link variant="neutral" href="variants">
+      <Link variant="neutral" href="/eksempel">
         Neutral variant
       </Link>
-      <Link variant="subtle" href="variants">
+      <Link variant="subtle" href="/eksempel">
         Subtle variant
       </Link>
     </VStack>

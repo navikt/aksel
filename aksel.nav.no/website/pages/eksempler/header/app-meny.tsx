@@ -50,5 +50,5 @@ export default withDsExample(Example, { variant: "full" });
 
 export const args = {
   index: 4,
-  desc: "App-menyen inneholder lenker til andre interne systemer",
+  desc: "App-menyen inneholder lenker til andre interne systemer.",
 };
