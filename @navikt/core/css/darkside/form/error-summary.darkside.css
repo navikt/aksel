@@ -1,6 +1,6 @@
 .aksel-error-summary {
   background-color: var(--ax-bg-default);
-  padding: var(--ax-space-20);
+  padding: var(--ax-space-16) var(--ax-space-20);
   border: 4px solid var(--ax-border-danger);
   border-radius: var(--ax-radius-12);
   outline-offset: 3px;
@@ -18,7 +18,7 @@
 }
 
 .aksel-error-summary--small {
-  padding: var(--ax-space-16);
+  padding: var(--ax-space-12) var(--ax-space-16);
 
   & .aksel-error-summary__heading {
     scroll-margin-top: var(--ax-space-16);

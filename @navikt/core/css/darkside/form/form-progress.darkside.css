@@ -45,7 +45,7 @@
     margin-top: var(--ax-space-4);
     grid-template-rows: 1fr;
     visibility: visible;
-    padding-block: var(--ax-space-20);
+    padding-block: var(--ax-space-16);
     opacity: 1;
   }
 }
