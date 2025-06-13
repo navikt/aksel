@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { VStack } from "../layout/stack";
+import { LinkAnchor, LinkAnchorOverlay } from "./LinkAnchor";
 import {
-  LinkAnchor,
-  LinkAnchorOverlay,
   LinkCard,
   LinkCardAnchor,
   LinkCardDescription,
