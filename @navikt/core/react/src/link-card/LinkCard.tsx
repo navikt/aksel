@@ -15,11 +15,25 @@ type LinkCardProps = LinkAnchorOverlayProps & {
    * @default true
    */
   hasArrow?: boolean;
+  /**
+   * Adds a pressed state to the link card.
+   * This is useful for indicating that the current context is related to the card.
+   * Should be used in tandem with `aria-current`-attribute on `LinkCardAnchor`.
+   * @see https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-current
+   * @default false
+   */
+  isPressed?: boolean;
 };
 
 const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
   (
-    { children, className, hasArrow = true, ...restProps }: LinkCardProps,
+    {
+      children,
+      className,
+      isPressed = false,
+      hasArrow = true,
+      ...restProps
+    }: LinkCardProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
@@ -32,6 +46,7 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
           {...restProps}
           className={cn("navds-link-card", className)}
           data-arrow={hasArrow}
+          data-pressed={isPressed}
         >
           {children}
         </div>

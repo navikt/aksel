@@ -34,6 +34,12 @@
     box-shadow: 0 0 0 1px var(--ax-border-default);
   }
 
+  &[data-pressed="true"] {
+    /* background-color: var(--ax-bg-moderate); */
+    border-color: var(--ax-border-default);
+    box-shadow: 0 0 0 1px var(--ax-border-default);
+  }
+
   &[data-arrow="false"] .aksel-link-card__arrow {
     display: none;
   }

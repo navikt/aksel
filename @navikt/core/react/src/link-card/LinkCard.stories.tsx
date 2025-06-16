@@ -3,9 +3,8 @@ import React from "react";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { BoxNew } from "../layout/box";
 import { HGrid } from "../layout/grid";
-import { HStack } from "../layout/stack";
+import { HStack, VStack } from "../layout/stack";
 import { Tag } from "../tag";
-import { LinkAnchor, LinkAnchorOverlay } from "./LinkAnchor";
 import {
   LinkCard,
   LinkCardAnchor,
@@ -25,149 +24,6 @@ export default {
     chromatic: { disable: true },
   },
 } satisfies Meta<typeof LinkCard>;
-
-export const Default: Story = {
-  render: () => {
-    return (
-      <HGrid gap="space-32" columns="repeat(auto-fit, minmax(300px, 1fr))">
-        <LinkCard>
-          <LinkCardTitle as="span">
-            <LinkCardAnchor href="https://aksel.nav.no/">Tittel</LinkCardAnchor>
-          </LinkCardTitle>
-        </LinkCard>
-
-        <LinkCard hasArrow={false}>
-          <LinkCardTitle as="span">
-            <LinkCardAnchor href="https://aksel.nav.no/">
-              Tittel with no arrow
-            </LinkCardAnchor>
-          </LinkCardTitle>
-        </LinkCard>
-
-        <LinkCard>
-          <LinkCardTitle as="h2">
-            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
-          </LinkCardTitle>
-          <LinkCardDescription>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
-            velit.
-          </LinkCardDescription>
-        </LinkCard>
-
-        <LinkCard>
-          <LinkCardImage
-            src="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
-            alt="alt-test"
-          />
-          <LinkCardTitle as="h2">
-            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
-          </LinkCardTitle>
-          <LinkCardDescription>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
-            velit.
-          </LinkCardDescription>
-        </LinkCard>
-        <LinkCard>
-          <LinkCardImage
-            src="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
-            alt="alt-test"
-            aspectRatio="16/10"
-          />
-          <LinkCardTitle as="h2">
-            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
-          </LinkCardTitle>
-          <LinkCardDescription>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
-            velit.
-          </LinkCardDescription>
-        </LinkCard>
-        <LinkCard>
-          <LinkCardTitle as="h2">
-            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
-          </LinkCardTitle>
-          <LinkCardDescription>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
-            velit.
-          </LinkCardDescription>
-          <LinkCardFooter>
-            Footer Footer Footer Footer Footer Footer Footer Footer Footer
-            Footer Footer Footer
-          </LinkCardFooter>
-        </LinkCard>
-        <LinkCard>
-          <BoxNew
-            asChild
-            background="accent-moderateA"
-            padding="space-8"
-            borderRadius="12"
-          >
-            <LinkCardIcon>
-              <SparklesIcon fontSize="2rem" />
-            </LinkCardIcon>
-          </BoxNew>
-          <LinkCardTitle as="h2">
-            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
-          </LinkCardTitle>
-        </LinkCard>
-        <LinkCard>
-          <BoxNew
-            asChild
-            background="accent-moderateA"
-            padding="space-8"
-            borderRadius="12"
-          >
-            <LinkCardIcon>
-              <SparklesIcon fontSize="2rem" />
-            </LinkCardIcon>
-          </BoxNew>
-          <LinkCardTitle as="h2">
-            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
-          </LinkCardTitle>
-          <LinkCardDescription>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
-            velit.
-          </LinkCardDescription>
-        </LinkCard>
-
-        <LinkCard>
-          <BoxNew
-            asChild
-            background="accent-moderateA"
-            padding="space-8"
-            borderRadius="12"
-          >
-            <LinkCardIcon>
-              <SparklesIcon fontSize="2rem" />
-            </LinkCardIcon>
-          </BoxNew>
-          <LinkCardTitle as="h2">
-            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
-          </LinkCardTitle>
-          <LinkCardDescription>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
-            velit.
-          </LinkCardDescription>
-          <LinkCardFooter>
-            Footer Footer Footer Footer Footer Footer Footer Footer Footer
-            Footer Footer Footer
-          </LinkCardFooter>
-        </LinkCard>
-        <LinkAnchor href="#">LINK ANCHOR</LinkAnchor>
-        <LinkAnchorOverlay asChild>
-          <div style={{ padding: "2rem", border: "1px solid red" }}>
-            <LinkAnchor href="#123">Custom LinkAnchor</LinkAnchor>
-          </div>
-        </LinkAnchorOverlay>
-      </HGrid>
-    );
-  },
-};
 
 export const Title: Story = {
   render: () => (
@@ -388,6 +244,25 @@ export const ImageWithIcon: Story = {
   ),
 };
 
+export const Pressed: Story = {
+  render: () => (
+    <LinkCard isPressed>
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#" aria-current>
+          Title
+        </LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </LinkCardDescription>
+      <LinkCardFooter>
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
 export const GridWithTitle: Story = {
   render: (...args) => (
     <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
@@ -533,9 +408,162 @@ export const ColorRole: Story = {
   },
 };
 
+export const ColorRoleWithPressed: Story = {
+  render: () => (
+    <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
+      <LinkCard isPressed>
+        <IconDemo />
+        <LinkCardTitle>
+          <LinkCardAnchor href="/#">Default color</LinkCardAnchor>
+        </LinkCardTitle>
+        <LinkCardDescription>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </LinkCardDescription>
+        <LinkCardFooter>
+          <FooterContentDemo />
+        </LinkCardFooter>
+      </LinkCard>
+      <LinkCard isPressed data-color="brand-magenta">
+        <IconDemo />
+        <LinkCardTitle>
+          <LinkCardAnchor href="/#">Brand magenta</LinkCardAnchor>
+        </LinkCardTitle>
+        <LinkCardDescription>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </LinkCardDescription>
+        <LinkCardFooter>
+          <FooterContentDemo />
+        </LinkCardFooter>
+      </LinkCard>
+      <LinkCard isPressed data-color="brand-beige">
+        <IconDemo />
+        <LinkCardTitle>
+          <LinkCardAnchor href="/#">Brand beige</LinkCardAnchor>
+        </LinkCardTitle>
+        <LinkCardDescription>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </LinkCardDescription>
+        <LinkCardFooter>
+          <FooterContentDemo />
+        </LinkCardFooter>
+      </LinkCard>
+    </HGrid>
+  ),
+  parameters: {
+    layout: "padded",
+  },
+};
+
 /* Chromatic setup */
 export const Chromatic: Story = {
-  render: () => <div>Chromatic</div>,
+  render: (...args) => (
+    <VStack gap="space-16">
+      <div>
+        <h2>Title</h2>
+        {Title.render?.(...args)}
+      </div>
+      <div>
+        <h2>TitleWithMutliline</h2>
+        {TitleWithMutliline.render?.(...args)}
+      </div>
+      <div>
+        <h2>Description</h2>
+        {Description.render?.(...args)}
+      </div>
+      <div>
+        <h2>DescriptionWithMultiline</h2>
+        {DescriptionWithMultiline.render?.(...args)}
+      </div>
+      <div>
+        <h2>Footer</h2>
+        {Footer.render?.(...args)}
+      </div>
+      <div>
+        <h2>FooterWithMultiline</h2>
+        {FooterWithMultiline.render?.(...args)}
+      </div>
+      <div>
+        <h2>DescriptionAndFooter</h2>
+        {DescriptionAndFooter.render?.(...args)}
+      </div>
+      <div>
+        <h2>Icon</h2>
+        {Icon.render?.(...args)}
+      </div>
+      <div>
+        <h2>IconWithBackground</h2>
+        {IconWithBackground.render?.(...args)}
+      </div>
+      <div>
+        <h2>IconWithDescriptionAndFooter</h2>
+        {IconWithDescriptionAndFooter.render?.(...args)}
+      </div>
+      <div>
+        <h2>NoArrow</h2>
+        {NoArrow.render?.(...args)}
+      </div>
+      <div>
+        <h2>NoArrowWithRichContent</h2>
+        {NoArrowWithRichContent.render?.(...args)}
+      </div>
+      <div>
+        <h2>Image</h2>
+        {Image.render?.(...args)}
+      </div>
+      <div>
+        <h2>ImageWithAspectRatio</h2>
+        {ImageWithAspectRatio.render?.(...args)}
+      </div>
+      <div>
+        <h2>ImageWithArbitraryAspectRatio</h2>
+        {ImageWithArbitraryAspectRatio.render?.(...args)}
+      </div>
+      <div>
+        <h2>ImageWithIcon</h2>
+        {ImageWithIcon.render?.(...args)}
+      </div>
+      <div>
+        <h2>Pressed</h2>
+        {Pressed.render?.(...args)}
+      </div>
+      <div>
+        <h2>GridWithTitle</h2>
+        {GridWithTitle.render?.(...args)}
+      </div>
+      <div>
+        <h2>GridWithTitleAndMultiline</h2>
+        {GridWithTitleAndMultiline.render?.(...args)}
+      </div>
+      <div>
+        <h2>GridWithDescriptionAndFooter</h2>
+        {GridWithDescriptionAndFooter.render?.(...args)}
+      </div>
+      <div>
+        <h2>GridWithDifferentHeights</h2>
+        {GridWithDifferentHeights.render?.(...args)}
+      </div>
+      <div>
+        <h2>GridWithIcon</h2>
+        {GridWithIcon.render?.(...args)}
+      </div>
+      <div>
+        <h2>GridWithImage</h2>
+        {GridWithImage.render?.(...args)}
+      </div>
+      <div>
+        <h2>GridWithIconAndDescriptionAndFooter</h2>
+        {GridWithIconAndDescriptionAndFooter.render?.(...args)}
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        {ColorRole.render?.(...args)}
+      </div>
+      <div>
+        <h2>ColorRoleWithPressed</h2>
+        {ColorRoleWithPressed.render?.(...args)}
+      </div>
+    </VStack>
+  ),
   parameters: {
     chromatic: { disable: false },
   },
