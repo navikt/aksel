@@ -12,7 +12,7 @@ const Example = () => {
 
 /*
 
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 const ReactRouterExample = () => (
   <Button as={ReactRouterLink} to="#">
     Lenke
