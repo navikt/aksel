@@ -14,7 +14,7 @@ import { type DesignsystemSidebarDataT } from "./Sidebar.util";
 type SidebarNavProps = {
   layout?: "sidebar" | "mobile";
   sidebarData: DesignsystemSidebarDataT;
-} & React.HTMLAttributes<HTMLDivElement>;
+};
 
 function DesignsystemSidebarNav(props: SidebarNavProps) {
   const { layout = "sidebar", sidebarData } = props;
