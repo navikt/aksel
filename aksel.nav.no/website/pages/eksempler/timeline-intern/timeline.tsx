@@ -6,12 +6,12 @@ import {
   PiggybankIcon,
   VirusIcon,
 } from "@navikt/aksel-icons";
-import { Timeline, TimelinePeriodProps } from "@navikt/ds-react";
+import { Box, Timeline, TimelinePeriodProps } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="min-w-[800px]">
+    <Box marginInline="auto" maxWidth="800px">
       <Timeline>
         <Timeline.Row label="Person" icon={<PersonIcon aria-hidden />}>
           {person.map((p, i) => (
@@ -54,7 +54,7 @@ const Example = () => {
           ))}
         </Timeline.Row>
       </Timeline>
-    </div>
+    </Box>
   );
 };
 
@@ -125,7 +125,7 @@ const jobb: TimelinePeriodProps[] = [
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */
 export const Demo = {
