@@ -159,7 +159,8 @@ const AktivitetsplanPage = () => {
                       </Detail>
                       <Link
                         className="activity-card__link"
-                        to={`/aktivitetsplan/${id}`}
+                        to="/aktivitetsplan/$activityId/"
+                        params={{ activityId: id }}
                       >
                         <BlueDotHeader dot={hasChange} level={3}>
                           {title}
