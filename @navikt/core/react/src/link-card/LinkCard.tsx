@@ -1,14 +1,9 @@
-import React, {
-  HTMLAttributes,
-  ImgHTMLAttributes,
-  SVGProps,
-  forwardRef,
-} from "react";
-import { ArrowRightIcon } from "@navikt/aksel-icons";
+import React, { HTMLAttributes, ImgHTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, Heading } from "../typography";
 import {
   LinkAnchor,
+  LinkAnchorArrow,
   LinkAnchorOverlay,
   type LinkAnchorOverlayProps,
   LinkAnchorProps,
@@ -51,7 +46,6 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
           className={cn("navds-link-card", className)}
           data-arrow={hasArrow}
           data-auto-layout={autoLayout}
-          style={{ padding: "1rem", border: "1px solid black" }}
         >
           {children}
         </div>
@@ -80,11 +74,10 @@ const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
         as={as}
         size="small"
         ref={forwardedRef}
-        className={cn("navds-link-card__heading", className)}
+        className={cn("navds-link-card__title", className)}
       >
         {children}
-        {/* TODO: Consider hiding this based on root context */}
-        <LinkCardArrow />
+        <LinkAnchorArrow className={cn("navds-link-card__arrow")} />
       </Heading>
     );
   },
@@ -162,24 +155,6 @@ const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
   },
 );
 
-/* ---------------------------- LinkCard Arrow ---------------------------- */
-type LinkCardArrowProps = Omit<SVGProps<SVGSVGElement>, "ref">;
-
-const LinkCardArrow = forwardRef<SVGSVGElement, LinkCardArrowProps>(
-  ({ className, ...restProps }: LinkCardArrowProps, forwardedRef) => {
-    const { cn } = useRenameCSS();
-
-    return (
-      <ArrowRightIcon
-        ref={forwardedRef}
-        aria-hidden
-        className={cn("navds-link-card__arrow", className)}
-        {...restProps}
-      />
-    );
-  },
-);
-
 /* ---------------------------- LinkCard Image ---------------------------- */
 type ImageAspectRatio = "1:1" | "16:9" | "16:10" | "4:3";
 
@@ -246,7 +221,6 @@ function aspectRatioClassName(aspectRatio?: ImageAspectRatio): string {
 export {
   LinkCard,
   LinkCardAnchor,
-  LinkCardArrow,
   LinkCardDescription,
   LinkCardFooter,
   LinkCardIcon,
@@ -256,7 +230,6 @@ export {
 
 export type {
   LinkCardAnchorProps,
-  LinkCardArrowProps,
   LinkCardDescriptionProps,
   LinkCardFooterProps,
   LinkCardIconProps,

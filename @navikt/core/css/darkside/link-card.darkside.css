@@ -19,8 +19,63 @@
     border-color: var(--ax-border-neutral);
     box-shadow: 0 0 0 1px var(--ax-border-neutral);
   }
+
+  &[data-arrow="false"] .aksel-link-card__arrow {
+    display: none;
+  }
 }
 
+.aksel-link-card__title {
+  height: fit-content;
+  color: var(--ax-text-default);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ax-space-8);
+  width: 100%;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-wrap: wrap;
+
+  /* [data-layout="auto"] & {
+    margin-block-end: var(--ax-space-4);
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+  } */
+}
+
+.aksel-link-card__description {
+  /* [data-layout="auto"] & {
+    margin-block-end: var(--ax-space-4);
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+  } */
+}
+
+.aksel-link-card__footer {
+  margin-block: var(--ax-space-16) var(--ax-space-4);
+  grid-area: footer;
+  vertical-align: bottom;
+  align-self: flex-end;
+}
+
+.aksel-link-card__icon {
+  grid-area: icon;
+  width: max-content;
+  height: max-content;
+  display: grid;
+  place-content: center;
+  color: var(--ax-text-default);
+  align-self: flex-start;
+  margin-inline-end: var(--ax-space-20);
+}
+
+/* Link Anchor utilities */
 .aksel-link-anchor__overlay {
   cursor: pointer;
 
@@ -47,6 +102,10 @@
   text-underline-offset: 0.1em;
   text-decoration-thickness: 0.05em;
 
+  &:visited {
+    color: initial;
+  }
+
   &:hover,
   .aksel-link-anchor__overlay:hover & {
     text-decoration-thickness: 0.111em;
@@ -64,5 +123,16 @@
 
   .aksel-link-anchor__overlay &:focus-visible {
     outline: none;
+  }
+}
+
+.aksel-link-anchor__arrow {
+  transition: transform 200ms;
+  transform: translateX(0);
+  flex-shrink: 0;
+
+  .aksel-link-anchor:hover &,
+  .aksel-link-anchor__overlay:hover & {
+    transform: translateX(4px);
   }
 }

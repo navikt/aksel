@@ -1,10 +1,12 @@
 import React, {
   AnchorHTMLAttributes,
   HTMLAttributes,
+  SVGProps,
   forwardRef,
   useCallback,
   useRef,
 } from "react";
+import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { Slot } from "../slot/Slot";
 import { useRenameCSS } from "../theme/Theme";
 import { createContext } from "../util/create-context";
@@ -74,6 +76,7 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
   },
 );
 
+/* ------------------------------- LinkAnchor ------------------------------- */
 interface LinkAnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
   asChild?: boolean;
@@ -107,5 +110,23 @@ const LinkAnchor = forwardRef<HTMLAnchorElement, LinkAnchorProps>(
   },
 );
 
-export { LinkAnchorOverlay, LinkAnchor };
-export type { LinkAnchorOverlayProps, LinkAnchorProps };
+/* ---------------------------- LinkCard Arrow ---------------------------- */
+type LinkAnchorArrowProps = Omit<SVGProps<SVGSVGElement>, "ref">;
+
+const LinkAnchorArrow = forwardRef<SVGSVGElement, LinkAnchorArrowProps>(
+  ({ className, ...restProps }: LinkAnchorArrowProps, forwardedRef) => {
+    const { cn } = useRenameCSS();
+
+    return (
+      <ArrowRightIcon
+        ref={forwardedRef}
+        aria-hidden
+        className={cn("navds-link-anchor__arrow", className)}
+        {...restProps}
+      />
+    );
+  },
+);
+
+export { LinkAnchorOverlay, LinkAnchor, LinkAnchorArrow };
+export type { LinkAnchorOverlayProps, LinkAnchorProps, LinkAnchorArrowProps };
