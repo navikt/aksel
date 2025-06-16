@@ -47,7 +47,14 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
         }
 
         for (const page of link.pages) {
-          isValidHit(page.heading) && pages.push(page);
+          isValidHit(page.heading) &&
+            pages.push({
+              ...page,
+              heading:
+                page.heading === "Oversikt"
+                  ? `${page.heading} (${link.title})`
+                  : page.heading,
+            });
         }
       }
 
