@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { BodyShort, Detail } from "@navikt/ds-react";
+import { BodyShort, Detail, VStack } from "@navikt/ds-react";
 import { DesignsystemSidebarSectionT } from "@/types";
 import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
@@ -18,7 +18,7 @@ function DesignsystemSidebarGroup(props: DesignsystemSidebarGroupT) {
   const LabelComponent = layout === "sidebar" ? Detail : BodyShort;
 
   return (
-    <li className={styles.navListGroup} data-layout={layout}>
+    <li data-layout={layout}>
       <LabelComponent
         as="div"
         className={styles.navListGroupLabel}
@@ -27,7 +27,7 @@ function DesignsystemSidebarGroup(props: DesignsystemSidebarGroupT) {
       >
         {label}
       </LabelComponent>
-      <ul aria-labelledby={id}>
+      <VStack gap="space-4" as="ul" aria-labelledby={id}>
         {links.map((link) => {
           if (!("pages" in link)) {
             return (
@@ -49,7 +49,7 @@ function DesignsystemSidebarGroup(props: DesignsystemSidebarGroupT) {
             />
           );
         })}
-      </ul>
+      </VStack>
     </li>
   );
 }

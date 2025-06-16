@@ -4,7 +4,8 @@ import cl from "clsx";
 import { stegaClean } from "next-sanity";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { ChevronDownIcon, SparklesIcon } from "@navikt/aksel-icons";
+import { HStack } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { SidebarGroupedPagesT } from "@/types";
 import { DesignsystemSidebarItem } from "./Sidebar.item";
@@ -19,13 +20,18 @@ function DesignsystemSidebarSubNav(
   const isDarkside = title.toLowerCase() === "darkside";
 
   const isSectionActive = pages.some((page) => {
-    return pathName?.split("#")[0] === stegaClean(`/${page.slug}`);
+    return pathName?.split("#")[0] === stegaClean(`/dev/${page.slug}`);
   });
 
   const [open, setOpen] = useState(isSectionActive);
 
   return (
-    <li data-type={isDarkside ? "darkside" : "neutral"}>
+    <li
+      data-color={isDarkside ? "brand-magenta" : "brand-blue"}
+      data-active={isSectionActive}
+      data-highlight={isDarkside}
+      className={styles.navListSub}
+    >
       <button
         onClick={() => {
           setOpen(!open);
@@ -39,7 +45,11 @@ function DesignsystemSidebarSubNav(
         data-state={isSectionActive ? "active" : "inactive"}
         aria-expanded={open}
       >
-        {title}
+        <HStack as="span" gap="space-4" align="center">
+          {isDarkside && <SparklesIcon aria-hidden />}
+          {title}
+        </HStack>
+
         <ChevronDownIcon aria-hidden className={styles.navListSubButtonIcon} />
       </button>
       <ul hidden={!open}>
