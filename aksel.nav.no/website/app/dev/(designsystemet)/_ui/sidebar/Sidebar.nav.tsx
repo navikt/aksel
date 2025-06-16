@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { BodyShort, Search } from "@navikt/ds-react";
+import { BodyShort, BoxNew, Search, VStack } from "@navikt/ds-react";
 import {
   DesignsystemSidebarSectionT,
   SidebarGroupedPagesT,
@@ -81,28 +81,36 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
         onChange={setFilterText}
         autoComplete="off"
       />
-      <nav aria-label="Sidemeny">
-        <BodyShort
-          as="ul"
-          className={styles.navListUl}
-          size={layout === "sidebar" ? "small" : "medium"}
-        >
-          {filteredSidebarData.map((section, index) => {
-            return (
-              <React.Fragment key={section.label}>
-                <DesignsystemSidebarGroup
-                  key={section.label}
-                  label={section.label}
-                  links={section.links}
-                  layout={layout}
-                />
-                {index !== filteredSidebarData.length - 1 && (
-                  <li aria-hidden className={styles.navListDivider} />
-                )}
-              </React.Fragment>
-            );
-          })}
-        </BodyShort>
+      <nav aria-label="Sidemeny" data-layout={layout}>
+        <VStack gap="space-12" asChild>
+          <BodyShort
+            as="ul"
+            className={styles.navListUl}
+            size={layout === "sidebar" ? "small" : "medium"}
+            data-color="brand-blue"
+          >
+            {filteredSidebarData.map((section, index) => {
+              return (
+                <React.Fragment key={section.label}>
+                  <DesignsystemSidebarGroup
+                    key={section.label}
+                    label={section.label}
+                    links={section.links}
+                    layout={layout}
+                  />
+                  {index !== filteredSidebarData.length - 1 && (
+                    <BoxNew
+                      as="li"
+                      aria-hidden
+                      borderWidth="1 0 0 0"
+                      borderColor="neutral-subtle"
+                    />
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </BodyShort>
+        </VStack>
       </nav>
     </div>
   );

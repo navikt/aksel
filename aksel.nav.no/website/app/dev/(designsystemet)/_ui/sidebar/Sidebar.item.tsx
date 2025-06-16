@@ -19,7 +19,7 @@ function DesignsystemSidebarItem(props: {
   const { page, isIndented = false, layout } = props;
   const pathName = usePathname();
 
-  const active = pathName?.split("#")[0] === stegaClean(`/${page.slug}`);
+  const active = pathName?.split("#")[0] === stegaClean(`/dev/${page.slug}`);
   const statusTag = getStatusTag(page.tag, true);
 
   const isOverviewPage = page.heading.toLowerCase() === "oversikt";

@@ -19,6 +19,7 @@
 }
 
 .mobileNavMenuItem {
+  background-color: var(--ax-bg-neutral-moderate);
   padding-block: var(--ax-space-12);
   padding-inline: var(--ax-space-16);
   margin-inline-start: var(--ax-space-8);
@@ -44,7 +45,7 @@
   }
 
   &:hover {
-    background-color: var(--ax-bg-neutral-moderate-hoverA);
+    background-color: var(--ax-bg-neutral-moderate-hover);
   }
 
   & > span:empty {
