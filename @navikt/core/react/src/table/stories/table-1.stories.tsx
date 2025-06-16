@@ -179,6 +179,12 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
 export const Selection = () => <SelectionTable />;
 export const SelectionSmall = () => <SelectionTable size="small" />;
 
+export const ColorRole = () => (
+  <div data-color="brand-magenta">
+    <SelectionTable />
+  </div>
+);
+
 export const Chromatic = {
   render: () => (
     <VStack gap="8">
@@ -224,6 +230,10 @@ export const Chromatic = {
       <div>
         <h3>Small</h3>
         <ExpandableSmall />
+      </div>
+      <div>
+        <h3>ColorRole</h3>
+        <ColorRole />
       </div>
     </VStack>
   ),

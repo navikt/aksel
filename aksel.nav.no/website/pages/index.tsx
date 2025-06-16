@@ -4,6 +4,7 @@ import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
 import { useState } from "react";
 import {
+  ArrowRightIcon,
   CompassIcon,
   ComponentIcon,
   PaletteIcon,
@@ -15,6 +16,7 @@ import {
   Box,
   Button,
   HGrid,
+  HStack,
   Heading,
   Page,
   VStack,
@@ -111,9 +113,7 @@ const pageDataQuery = groq`*[_type == "aksel_forside"][0]{
   }
 }.page`;
 
-const temaQuery = groq`*[_type == "aksel_forside"][0]{
-  "tema": *[_type == "gp.tema"] | order(lower(title))
-      }.tema`;
+const temaQuery = groq`*[_type == "gp.tema"] | order(lower(title))`;
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx,
@@ -180,14 +180,27 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
       <Header />
       <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
         <div className="bg-[--ax-bg-neutral-moderateA] py-3 text-center text-lg backdrop-blur-sm">
-          <a
-            href="/darkside"
-            target="_blank"
-            rel="noreferrer"
-            className="rounded p-1 underline hover:decoration-2 focus:shadow-focus focus:outline-none"
+          <HStack
+            gap="space-4"
+            asChild
+            justify="center"
+            align="center"
+            marginInline="auto"
           >
-            Vi trenger testere fra team i Nav for darkmode og theming!
-          </a>
+            <a
+              href="/darkside"
+              target="_blank"
+              rel="noreferrer"
+              className="group w-fit rounded p-1 !underline hover:decoration-2 focus:shadow-focus focus:outline-none"
+            >
+              Vi trenger testere fra team i Nav for darkmode og theming!
+              <ArrowRightIcon
+                aria-hidden
+                fontSize="1.25rem"
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </a>
+          </HStack>
         </div>
         <div className="z-20 pb-28">
           <div className="relative mx-auto mb-12 mt-20 grid w-full place-items-center px-4 text-center sm:mt-36 sm:max-w-[632px] sm:px-6">

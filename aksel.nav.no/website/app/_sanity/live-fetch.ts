@@ -87,6 +87,8 @@ async function fetchAllSanityPages(): Promise<
     paths.push({ slug: `/monster-maler/${overviewPage}`, lastMod: null });
   });
 
+  paths.push({ slug: `/monster-maler`, lastMod: null });
+
   Object.values(PAGE_ROUTES).forEach((category) => {
     category.root.forEach((page) =>
       paths.push({ slug: `/${page.slug}`, lastMod: null }),

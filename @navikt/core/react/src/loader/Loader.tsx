@@ -1,5 +1,6 @@
 import React, { SVGProps, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { omit } from "../util";
 import { useId } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -33,6 +34,10 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
    * @default "neutral"
    */
   variant?: "neutral" | "interaction" | "inverted";
+  /**
+   * Overrides loader-color
+   */
+  "data-color"?: AkselColor;
 }
 
 /* Workaround for @types/react v17/v18 feil */
@@ -60,6 +65,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
       transparent = false,
       variant = "neutral",
       id,
+      "data-color": color,
       ...rest
     },
     ref,
@@ -84,7 +90,9 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
         focusable="false"
         viewBox="0 0 50 50"
         preserveAspectRatio="xMidYMid"
+        data-color={color ?? variantToColor(variant)}
         {...omit(rest, ["children"])}
+        data-variant={variant}
       >
         <title id={id ?? `loader-${internalId}`}>
           {title || translate("title")}
@@ -109,5 +117,21 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
     );
   },
 );
+
+function variantToColor(
+  variant: LoaderProps["variant"],
+): AkselColor | undefined {
+  switch (variant) {
+    case "neutral":
+      return "neutral";
+    case "inverted":
+      return "neutral";
+    /* We assume "interaction" is the main app color in this instance */
+    case "interaction":
+      return undefined;
+    default:
+      return "neutral";
+  }
+}
 
 export default Loader;

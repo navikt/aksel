@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { GlobalColorRoles } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { BodyShort } from "../typography";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
@@ -63,14 +63,25 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
  * ```
  */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
-  ({ children, className, variant, size = "medium", icon, ...rest }, ref) => {
+  (
+    {
+      children,
+      className,
+      variant,
+      size = "medium",
+      icon,
+      "data-color": color,
+      ...rest
+    },
+    ref,
+  ) => {
     const { cn } = useRenameCSS();
     const filledVariant = variant?.endsWith("-filled") && "strong";
     const moderateVariant = variant?.endsWith("-moderate") && "moderate";
 
     return (
       <BodyShort
-        data-color-role={variantToRole(variant)}
+        data-color={color ?? variantToColor(variant)}
         data-variant={filledVariant || moderateVariant || "outline"}
         {...rest}
         ref={ref}
@@ -90,7 +101,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
   },
 );
 
-function variantToRole(variant: TagProps["variant"]): GlobalColorRoles {
+function variantToColor(variant: TagProps["variant"]): AkselColor {
   switch (variant) {
     case "warning":
     case "warning-filled":

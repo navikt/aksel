@@ -192,7 +192,7 @@ address {
   --aksel-bg-brand-pink-soft: var(--aksel-brand-pink-100);
 }
 
-[data-color-role="aksel-brand-teal"] {
+[data-color="aksel-brand-teal"] {
   --ax-border-strong: var(--aksel-border-brand-teal-strong);
   --ax-border-subtleA: var(--aksel-border-brand-teal-subtleA);
   --ax-border-subtle: var(--aksel-border-brand-teal-subtle);
@@ -214,7 +214,7 @@ address {
   --ax-bg-soft: var(--aksel-bg-brand-teal-soft);
 }
 
-[data-color-role="aksel-brand-pink"] {
+[data-color="aksel-brand-pink"] {
   --ax-border-strong: var(--aksel-border-brand-pink-strong);
   --ax-border-subtleA: var(--aksel-border-brand-pink-subtleA);
   --ax-border-subtle: var(--aksel-border-brand-pink-subtle);
@@ -234,4 +234,17 @@ address {
   --ax-bg-moderate: var(--aksel-bg-brand-pink-moderate);
   --ax-bg-softA: var(--aksel-bg-brand-pink-softA);
   --ax-bg-soft: var(--aksel-bg-brand-pink-soft);
+}
+
+.animation-stop,
+.animation-stop *,
+.animation-stop *::before,
+.animation-stop *::after {
+  animation-delay: -1ms !important;
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  background-attachment: initial !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
 }

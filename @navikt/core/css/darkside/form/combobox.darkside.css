@@ -15,7 +15,7 @@
 
 .aksel-form-field:not(:is(.aksel-combobox--disabled, .aksel-combobox--readonly)) {
   & .aksel-combobox__wrapper:hover {
-    border-color: var(--ax-border-accent-strong);
+    border-color: var(--ax-border-strong);
   }
 }
 
@@ -86,7 +86,7 @@
   &:has(.aksel-combobox__input:focus-visible) {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;
-    border-color: var(--ax-border-accent-strong);
+    border-color: var(--ax-border-strong);
   }
 
   &:has(.aksel-combobox__input:focus-visible).aksel-combobox__wrapper-inner--virtually-unfocused {
@@ -225,10 +225,10 @@
   padding: 0;
 
   &:hover {
-    color: var(--ax-text-accent-subtle);
+    color: var(--ax-text-subtle);
 
     &:active {
-      color: var(--ax-text-accent);
+      color: var(--ax-text-default);
     }
   }
 }
@@ -341,7 +341,7 @@
 }
 
 .aksel-combobox__list-item--selected {
-  background-color: var(--ax-bg-accent-moderate-pressedA);
+  background-color: var(--ax-bg-moderate-pressedA);
 
   & p {
     font-weight: var(--ax-font-weight-bold);
@@ -349,9 +349,9 @@
 }
 
 .aksel-combobox__list-item--new-option {
-  border-bottom: 1px solid var(--ax-border-accent-subtleA);
+  border-bottom: 1px solid var(--ax-border-subtleA);
   border-radius: 0;
-  background: var(--ax-bg-accent-moderateA);
+  background: var(--ax-bg-moderateA);
   cursor: pointer;
   justify-content: flex-start;
   gap: 0.25rem;

@@ -32,6 +32,8 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [open, setOpen] = useState(false);
 
+  const isComicSans = useRef<boolean>(false);
+
   const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
   const [, startTransition] = useTransition();
 
@@ -69,6 +71,11 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
   const debouncedSearch = useMemo(
     () =>
       debounce((query: string) => {
+        if (!isComicSans.current && query.includes("comic")) {
+          isComicSans.current = true;
+          document.body.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
+        }
+
         startTransition(async () => {
           const newResults = await fuseGlobalSearch(query);
           setSearchResults(newResults);

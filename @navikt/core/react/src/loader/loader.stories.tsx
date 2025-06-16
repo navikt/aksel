@@ -61,7 +61,7 @@ export const Variant = () => (
       <Loader size="3xlarge" variant="inverted" />
       <Loader size="3xlarge" variant="interaction" />
     </div>
-    <div style={{ backgroundColor: "#23262a" }}>
+    <div style={{ backgroundColor: "var(--ax-neutral-1000, #23262a)" }}>
       <Loader size="3xlarge" variant="neutral" />
       <Loader size="3xlarge" variant="inverted" />
       <Loader size="3xlarge" variant="interaction" />
@@ -76,10 +76,25 @@ export const Transparent = () => (
       <Loader size="3xlarge" transparent variant="inverted" />
       <Loader size="3xlarge" transparent variant="interaction" />
     </div>
-    <div style={{ backgroundColor: "#23262a" }}>
+    <div style={{ backgroundColor: "var(--ax-neutral-1000, #23262a)" }}>
       <Loader size="3xlarge" transparent variant="neutral" />
       <Loader size="3xlarge" transparent variant="inverted" />
       <Loader size="3xlarge" transparent variant="interaction" />
+    </div>
+  </div>
+);
+
+export const ColorRole = () => (
+  <div className="colgap">
+    <div>
+      <Loader data-color="brand-magenta" size="3xlarge" variant="neutral" />
+      <Loader data-color="brand-magenta" size="3xlarge" variant="inverted" />
+      <Loader data-color="brand-magenta" size="3xlarge" variant="interaction" />
+    </div>
+    <div style={{ backgroundColor: "var(--ax-neutral-1000, #23262a)" }}>
+      <Loader data-color="brand-magenta" size="3xlarge" variant="neutral" />
+      <Loader data-color="brand-magenta" size="3xlarge" variant="inverted" />
+      <Loader data-color="brand-magenta" size="3xlarge" variant="interaction" />
     </div>
   </div>
 );
@@ -98,6 +113,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Transparent</h2>
         <Transparent />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </VStack>
   ),
