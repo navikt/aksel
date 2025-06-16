@@ -14,6 +14,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { ListItem } from "@navikt/ds-react/List";
+import "./DSLayersOverview.css";
 
 const DottedLine = () => (
   <div className="aksel__ds-frontpage__dotted-line" aria-hidden="true" />
