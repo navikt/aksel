@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-env --env-file --allow-net --watch main.ts",
+    "start": "deno run --allow-env --env-file --allow-net main.ts"
+  },
+  "imports": {
+    "@sanity/client": "npm:@sanity/client@7.5.0"
+  }
+}

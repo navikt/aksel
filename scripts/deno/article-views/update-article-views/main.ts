@@ -1,4 +1,4 @@
-import { clientConfig } from "../../../aksel.nav.no/website/sanity/config.ts";
+import { clientConfig } from "../../../../aksel.nav.no/website/sanity/config.ts";
 import { createClient, load, path } from "../deps.ts";
 import { queryArticleURLs, queryArticleViews } from "../queries.ts";
 import { amplitudeFetchJSON, hashString, sum_last_n } from "./utils.ts";
