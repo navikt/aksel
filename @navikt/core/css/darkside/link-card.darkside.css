@@ -11,7 +11,7 @@
   transition-timing-function: cubic-bezier(0, 0, 0, 1);
   position: relative;
   background-color: var(--ax-bg-raised);
-  border: 1px solid var(--ax-border-neutral-subtleA);
+  border: 1px solid var(--ax-border-subtleA);
   padding: var(--__axc-link-card-padding-block) var(--__axc-link-card-padding-inline);
   height: 100%;
   cursor: pointer;
@@ -30,8 +30,8 @@
   }
 
   &:hover {
-    border-color: var(--ax-border-neutral);
-    box-shadow: 0 0 0 1px var(--ax-border-neutral);
+    border-color: var(--ax-border-default);
+    box-shadow: 0 0 0 1px var(--ax-border-default);
   }
 
   &[data-arrow="false"] .aksel-link-card__arrow {
@@ -41,7 +41,7 @@
 
 .aksel-link-card__title {
   grid-area: title;
-  color: var(--ax-text-default);
+  color: var(--ax-text-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,6 +51,11 @@
   overflow-wrap: break-word;
   hyphens: auto;
   text-wrap: wrap;
+
+  .aksel-link-card[data-color="neutral"] &,
+  &[data-color="neutral"] {
+    color: var(--ax-text-default);
+  }
 }
 
 .aksel-link-card__description {
@@ -116,15 +121,11 @@
 }
 
 .aksel-link-anchor {
-  color: var(--ax-text-default);
   text-decoration: underline;
   text-decoration-color: currentColor;
   text-underline-offset: 0.1em;
   text-decoration-thickness: 0.05em;
-
-  &:visited {
-    color: var(--ax-text-default);
-  }
+  color: inherit;
 
   &:hover,
   .aksel-link-anchor__overlay:hover & {

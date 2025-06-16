@@ -502,10 +502,10 @@ export const ColorRole: Story = {
           <FooterContentDemo />
         </LinkCardFooter>
       </LinkCard>
-      <LinkCard data-color="accent">
+      <LinkCard data-color="brand-magenta">
         <IconDemo />
         <LinkCardTitle>
-          <LinkCardAnchor href="/#">Accent</LinkCardAnchor>
+          <LinkCardAnchor href="/#">Brand magenta</LinkCardAnchor>
         </LinkCardTitle>
         <LinkCardDescription>
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -559,9 +559,9 @@ function IconDemo() {
   return (
     <BoxNew
       asChild
-      background="accent-moderateA"
       padding="space-8"
       borderRadius="12"
+      style={{ backgroundColor: "var(--ax-bg-moderate)" }}
     >
       <LinkCardIcon>
         <SparklesIcon fontSize="2rem" />

@@ -132,7 +132,6 @@ const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
         ref={forwardedRef}
         className={cn("navds-link-card__icon", className)}
         aria-hidden
-        data-color="neutral"
         {...restProps}
       >
         {children}
