@@ -12,23 +12,18 @@ interface Props {
 export default function LogEntryList({ list }: Props) {
   return (
     <ul>
-      {list &&
-        list.map((monthGroup, monthIndex) => (
+      {list.map((monthGroup, monthIndex) => {
+        const monthAndYear = format(
+          new Date(monthGroup[0].endringsdato || 0),
+          "MMMM-yyy",
+          { locale: nb },
+        );
+        return (
           // TODO: [endringslogg] Add aria-label on all list items?
           <li key={"log-entry-month-" + monthIndex}>
             <ul
-              id={format(
-                new Date(monthGroup[0].endringsdato || 0),
-                "MMMM-yyy",
-                {
-                  locale: nb,
-                },
-              )}
-              aria-label={`Endringslogg ${format(
-                new Date(monthGroup[0].endringsdato || 0),
-                "MMMM yyy",
-                { locale: nb },
-              )}`}
+              id={monthAndYear}
+              aria-label={monthAndYear}
               className={styles.monthContainer}
             >
               <MonthHeader logEntry={monthGroup[0]} index={monthIndex} />
@@ -45,7 +40,8 @@ export default function LogEntryList({ list }: Props) {
               ))}
             </ul>
           </li>
-        ))}
+        );
+      })}
     </ul>
   );
 }

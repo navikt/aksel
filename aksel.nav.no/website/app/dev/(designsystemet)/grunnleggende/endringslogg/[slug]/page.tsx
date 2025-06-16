@@ -102,6 +102,7 @@ export default async function (props: Props) {
         <HStack gap="space-16" marginBlock="space-0 space-28">
           <BodyShort
             size="small"
+            textColor="subtle"
             className={logs.primary.fremhevet ? styles.dateFremhevet : ""}
           >
             {format(new Date(logs.primary.endringsdato || ""), "d. MMMM yyy", {
@@ -116,7 +117,6 @@ export default async function (props: Props) {
         </HStack>
         {logs.primary.fremhevet && logs.primary.herobilde?.asset && (
           <Image
-            data-block-margin="space-28"
             className={styles.herobilde}
             alt={logs.primary.herobilde.alt ? logs.primary.herobilde.alt : ""}
             loading="lazy"

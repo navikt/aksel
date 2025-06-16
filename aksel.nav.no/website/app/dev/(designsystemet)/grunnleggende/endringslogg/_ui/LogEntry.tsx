@@ -38,7 +38,6 @@ const Hero = ({
 }) => (
   <Image
     key={"hero-" + index}
-    data-block-margin="space-28"
     className={styles.herobilde}
     aria-hidden={herobilde?.dekorativt}
     alt={herobilde?.alt || ""}
@@ -120,6 +119,7 @@ export default function LogEntry({
         </VStack>
         {/* Log entry */}
         <VStack
+          gap="space-8"
           paddingInline="space-16"
           flexGrow="1"
           position="relative"
@@ -131,24 +131,24 @@ export default function LogEntry({
             align="baseline"
             gap={{ xs: "space-4", sm: "space-16" }}
           >
-            <HStack gap="space-4">
+            <HStack asChild gap="space-4">
               <BodyShort
                 size="small"
-                spacing
+                weight="semibold"
+                textColor="subtle"
                 className={
-                  fremhevet ? styles.kategoriFremhevet : styles.kategoriInList
+                  fremhevet
+                    ? styles.entryEyebrowFremhevet
+                    : styles.entryEyebrowNotFremhevet
                 }
               >
-                {endringstype} •
-              </BodyShort>
-              <BodyShort
-                size="small"
-                spacing
-                className={fremhevet ? styles.dateFremhevet : styles.date}
-              >
-                {format(new Date(endringsdato || 0), "d. MMMM yyy", {
-                  locale: nb,
-                })}
+                <span className={styles.capitalized}>{endringstype}</span>
+                <span>•</span>
+                <span>
+                  {format(new Date(endringsdato || 0), "d. MMMM yyy", {
+                    locale: nb,
+                  })}
+                </span>
               </BodyShort>
             </HStack>
             {fremhevet && (

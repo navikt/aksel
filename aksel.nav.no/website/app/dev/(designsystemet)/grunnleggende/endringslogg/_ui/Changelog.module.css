@@ -96,20 +96,18 @@
 .tag {
   border-radius: var(--ax-radius-4);
   background-color: var(--aksel-brand-pink-700);
-  margin-bottom: var(--ax-space-16);
-}
-
-.date {
-  color: var(--ax-text-default-subtle);
 }
 
 .dateFremhevet {
   color: var(--aksel-brand-pink-900);
 }
 
-.kategoriInList {
-  text-transform: capitalize;
-  color: var(--ax-text-default-subtle);
+.entryEyebrowFremhevet {
+  color: var(--aksel-brand-pink-900);
+}
+
+.entryEyebrowNotFremhevet {
+  font-size: var(--ax-font-size-small);
 }
 
 .kategoriInArticle {
@@ -143,6 +141,7 @@
   aspect-ratio: 1200 / 630;
   border-radius: var(--ax-radius-12);
   box-shadow: 0 0 0 1px var(--ax-border-neutral-subtle);
+  margin-bottom: var(--ax-space-28);
 
   /* --herobilde-bg-color-first: var(--ax-bg-default);
   --herobilde-bg-color-last: var(--ax-bg-default);
