@@ -23,7 +23,6 @@ async function DesignsystemSidebar(props: SidebarProps) {
       <VStack gap="space-12" asChild>
         <BodyShort
           as="ul"
-          className={styles.navListUl}
           size={layout === "sidebar" ? "small" : "medium"}
           data-color="brand-blue"
         >
