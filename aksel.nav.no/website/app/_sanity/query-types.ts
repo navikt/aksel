@@ -1825,6 +1825,7 @@ export type Ds_endringslogg_artikkel = {
     _type: "image";
   };
   innhold?: Riktekst_grunnleggende;
+  visMer?: boolean;
 };
 
 export type Grunnleggende_landingsside = {
@@ -2391,35 +2392,6 @@ export type Ds_artikkel = {
       _type: "image";
     };
   };
-};
-
-export type Ds_endringslogg_artikkel = {
-  _id: string;
-  _type: "ds_endringslogg_artikkel";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heading?: string;
-  slug?: Slug;
-  endringsdato?: string;
-  endringstype?: "design" | "dokumentasjon" | "kode";
-  fremhevet?: boolean;
-  herobilde?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    dekorativt?: boolean;
-    alt?: string;
-    _type: "image";
-  };
-  innhold?: Riktekst_grunnleggende;
-  visMer?: boolean;
 };
 
 export type Ds_props = {

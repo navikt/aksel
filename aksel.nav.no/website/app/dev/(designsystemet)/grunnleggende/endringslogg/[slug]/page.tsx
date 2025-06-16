@@ -2,8 +2,16 @@ import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { PortableTextBlock, defineQuery } from "next-sanity";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import type { Image as SanityImage } from "sanity";
-import { BodyShort, HStack, Heading, Tag, VStack } from "@navikt/ds-react";
+import {
+  BodyShort,
+  HGrid,
+  HStack,
+  Heading,
+  Tag,
+  VStack,
+} from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
@@ -11,10 +19,23 @@ import { urlForImage } from "@/app/_sanity/utils";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
 import styles from "../_ui/Changelog.module.css";
+import ChangelogLinkCard from "../_ui/ChangelogLinkCard";
 
-const ENDRINGSLOGG_QUERY = defineQuery(
-  `*[_type == "ds_endringslogg_artikkel" && slug.current == $slug]{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold}`,
-);
+const projection =
+  '{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold}';
+const ENDRINGSLOGG_WITH_NEIGHBORS_QUERY = `
+  *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{
+    "primary": ${projection},
+    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]${projection},
+    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]${projection}
+  }
+`;
+
+export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
+  primary: ENDRINGSLOGG_QUERYResult[number];
+  previous: ENDRINGSLOGG_QUERYResult[number];
+  next: ENDRINGSLOGG_QUERYResult[number];
+};
 
 export async function generateStaticParams() {
   const { data: slugs } = await sanityFetch({
@@ -34,15 +55,17 @@ type Props = {
 export default async function (props: Props) {
   const { slug } = await props.params;
 
-  const { data: logEntries }: { data: ENDRINGSLOGG_QUERYResult } =
-    await sanityFetch<typeof ENDRINGSLOGG_QUERY>({
-      query: ENDRINGSLOGG_QUERY,
+  const { data: logs }: { data: ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult } =
+    await sanityFetch<typeof ENDRINGSLOGG_WITH_NEIGHBORS_QUERY>({
+      query: defineQuery(ENDRINGSLOGG_WITH_NEIGHBORS_QUERY),
       params: { slug: `${slug}` },
     });
 
-  const logEntry = logEntries[0];
+  if (!logs?.primary) {
+    notFound();
+  }
 
-  const toc = logEntry.innhold?.reduce(
+  const toc = logs?.primary?.innhold?.reduce(
     (filtered, block) => {
       if (block._type === "block" && block.style === "h2") {
         filtered.push({
@@ -57,49 +80,49 @@ export default async function (props: Props) {
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <VStack>
+      <VStack marginBlock="space-0 space-28">
         <BodyShort
           size="medium"
           className={
-            logEntry.fremhevet
+            logs.primary.fremhevet
               ? styles.kategoriFremhevet
               : styles.kategoriInArticle
           }
         >
-          {logEntry.endringstype}
+          {logs.primary.endringstype}
         </BodyShort>
         <Heading
           size="xlarge"
           level="1"
           spacing
-          className={logEntry.fremhevet ? styles.headingFremhevet : ""}
+          className={logs.primary.fremhevet ? styles.headingFremhevet : ""}
         >
-          {logEntry.heading}
+          {logs.primary.heading}
         </Heading>
         <HStack gap="space-16" marginBlock="space-0 space-28">
           <BodyShort
             size="small"
-            className={logEntry.fremhevet ? styles.dateFremhevet : ""}
+            className={logs.primary.fremhevet ? styles.dateFremhevet : ""}
           >
-            {format(new Date(logEntry.endringsdato || ""), "d. MMMM yyy", {
+            {format(new Date(logs.primary.endringsdato || ""), "d. MMMM yyy", {
               locale: nb,
             })}
           </BodyShort>
-          {logEntry.fremhevet && (
+          {logs.primary.fremhevet && (
             <Tag size="xsmall" variant="neutral-filled" className={styles.tag}>
               Fremhevet
             </Tag>
           )}
         </HStack>
-        {logEntry.fremhevet && logEntry.herobilde?.asset && (
+        {logs.primary.fremhevet && logs.primary.herobilde?.asset && (
           <Image
             data-block-margin="space-28"
             className={styles.herobilde}
-            alt={logEntry.herobilde.alt ? logEntry.herobilde.alt : ""}
+            alt={logs.primary.herobilde.alt ? logs.primary.herobilde.alt : ""}
             loading="lazy"
             decoding="async"
             src={
-              urlForImage(logEntry.herobilde as SanityImage)
+              urlForImage(logs.primary.herobilde as SanityImage)
                 ?.auto("format")
                 .url() || ""
             }
@@ -107,15 +130,22 @@ export default async function (props: Props) {
             height={630}
           />
         )}
-        <CustomPortableText value={logEntry.innhold as PortableTextBlock[]} />
-
-        <HStack>
-          <VStack></VStack>
-          <VStack></VStack>
-        </HStack>
-        {/* TODO: [endringslogg] Add similar content (prev and next, prev & prevprev if latest)*/}
+        <CustomPortableText
+          value={logs.primary.innhold as PortableTextBlock[]}
+        />
       </VStack>
-
+      <HGrid
+        marginBlock="space-48 space-0"
+        gap="space-24"
+        columns={{ xs: 1, md: 2 }}
+      >
+        {logs.previous && (
+          <ChangelogLinkCard logEntry={logs.previous} label="Forrige endring" />
+        )}
+        {logs.next && (
+          <ChangelogLinkCard logEntry={logs.next} label="Neste endring" />
+        )}
+      </HGrid>
       <TableOfContents
         feedback={{
           name: "Endringslogg",

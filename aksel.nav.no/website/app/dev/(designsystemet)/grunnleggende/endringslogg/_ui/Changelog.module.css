@@ -65,9 +65,38 @@
   }
 }
 
+.logEntry {
+  /* header + monthSpacer + monthBubble + logEntrySpacer ^ */
+  scroll-margin-top: calc(var(--website-header-height) + var(--ax-space-12) + 48px + var(--ax-space-32));
+}
+
+.logEntryHighlight {
+  animation: highlightFade 1s ease 1;
+}
+
+@keyframes highlightFade {
+  0% {
+    box-shadow: none;
+    background-color: none;
+  }
+
+  50% {
+    /* box-shadow: 0 0 0 16px var(--ax-border-neutral-subtle);
+    background-color: var(--ax-border-neutral-subtle); */
+    box-shadow: 0 0 0 16px var(--aksel-brand-pink-100);
+    background-color: var(--aksel-brand-pink-100);
+  }
+
+  100% {
+    box-shadow: none;
+    background-color: none;
+  }
+}
+
 .tag {
   border-radius: var(--ax-radius-4);
   background-color: var(--aksel-brand-pink-700);
+  margin-bottom: var(--ax-space-16);
 }
 
 .date {
@@ -97,6 +126,10 @@
   color: var(--aksel-brand-pink-1000);
 }
 
+.innhold {
+  background-color: var(--ax-bg-default);
+}
+
 .innholdFremhevet {
   --ax-text-brand-blue: var(--aksel-brand-pink-1000);
   --ax-text-brand-blue-subtle: var(--aksel-brand-pink-1000);
@@ -116,6 +149,52 @@
   --herobilde-bg-degrees: 0deg;
 
   background: linear-gradient(var(--herobilde-bg-degrees), var(--herobilde-bg-color-first), var(--herobilde-bg-color-last)); */
+}
+
+.portableText > h3:first-of-type {
+  margin-top: 0;
+}
+
+.visMerButton {
+  --button-height: 2rem;
+
+  position: absolute;
+  left: 1rem;
+  bottom: var(--ax-space-32);
+  z-index: 1;
+  background-color: var(--ax-bg-default);
+}
+
+.visMerButtonFremhevet {
+  --ax-border-neutral: var(--aksel-brand-pink-600);
+  --ax-border-neutral-strong: var(--aksel-brand-pink-600);
+
+  left: 2rem;
+  bottom: calc(var(--button-height) + var(--ax-space-16));
+  color: var(--aksel-brand-pink-1000);
+}
+
+.visMerContainer {
+  interpolate-size: allow-keywords;
+  overflow: hidden;
+  padding: 1px;
+  transition: max-height 1s ease;
+}
+
+.visMerCollapsed {
+  max-height: 6rem;
+  margin-bottom: 0;
+  mask-image: linear-gradient(rgba(0 0 0/1), rgba(0 0 0/ 0) calc(100% - 0.5rem));
+}
+
+.visMerCollapsedFremhevet {
+  max-height: 16rem;
+}
+
+.visMerExpanded {
+  max-height: fit-content;
+  margin-bottom: 3rem;
+  transition: none;
 }
 
 /* Text utilities */

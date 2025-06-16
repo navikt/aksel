@@ -8,6 +8,7 @@ import { useRef, useState, version } from "react";
 import type { Image as SanityImage } from "sanity";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import {
+  Bleed,
   BodyShort,
   Box,
   Button,
@@ -28,6 +29,31 @@ interface Props {
   isLastEntry: boolean;
 }
 
+const Hero = ({
+  herobilde,
+  index,
+}: {
+  herobilde: ENDRINGSLOGG_QUERYResult[number]["herobilde"];
+  index: number;
+}) => (
+  <Image
+    key={"hero-" + index}
+    data-block-margin="space-28"
+    className={styles.herobilde}
+    aria-hidden={herobilde?.dekorativt}
+    alt={herobilde?.alt || ""}
+    loading="lazy"
+    decoding="async"
+    src={
+      urlForImage(herobilde as SanityImage)
+        ?.auto("format")
+        .url() || ""
+    }
+    width={1200}
+    height={630}
+  />
+);
+
 const inertValue = parseInt(version.split(".")[0]) > 18; // Support for inert was added in React 19
 
 export default function LogEntry({
@@ -47,31 +73,45 @@ export default function LogEntry({
   const logEntryContainer = useRef<HTMLDivElement>(null);
 
   const [expanded, setExpanded] = useState(false);
+  const [shouldFlash, setShouldFlash] = useState(false);
   const ChevronIcon = expanded ? ChevronUpIcon : ChevronDownIcon;
   const toggleExpansion = () => {
-    setExpanded((prev) => !prev);
+    setExpanded((previous) => !previous);
     if (expanded) {
-      setTimeout(() => {
-        if (logEntryContainer.current) {
-          logEntryContainer.current.scrollIntoView({
+      setShouldFlash(true);
+      // header + monthSpacer + monthBubble + logEntrySpacer
+      // generating this value dynamically from css is a bit complex
+      const scrollMarginTop = 64 + 12 + 48 + 32;
+      if (
+        logEntryContainer.current &&
+        logEntryContainer.current.getBoundingClientRect().top < scrollMarginTop
+      ) {
+        setTimeout(() => {
+          // setShouldFlash(true);
+          logEntryContainer.current?.scrollIntoView({
             behavior: "smooth",
-            block: "nearest",
+            block: "start",
           });
-        }
-      }, 1);
+        }, 1);
+      }
+    } else {
+      setShouldFlash(false);
     }
   };
 
   return (
     <li key={"log-entry-" + index}>
+      {/* logEntrySpacer, since sticky MonthHeader cuts off immediately below */}
       <VStack width="48px" height="var(--ax-space-32)" align="center">
-        <Box.New height="1rem" flexGrow="1" className={styles.timeline} />
+        <Box.New flexGrow="1" className={styles.timeline} />
       </VStack>
       <HStack className={styles.nowrap}>
+        {/* TODO: [endringslogg] Remove timeline and add divider on mobile */}
         {/* Dot + vertical line */}
         <VStack width="16px" align="center" marginInline="space-16 space-0">
-          <Box.New height="0.1rem" className={styles.timeline} />
+          {/* <Box.New height="0.1rem" className={styles.timeline} /> */}
           <Box.New
+            marginBlock="space-2 space-0"
             className={`${styles.bullet}${
               fremhevet ? ` ${styles.bulletFremhevet}` : ""
             }`}
@@ -84,13 +124,13 @@ export default function LogEntry({
           flexGrow="1"
           position="relative"
           ref={logEntryContainer}
-          style={{
-            scrollMarginTop:
-              // header + monthSpacer + monthBubble + logEntrySpacer ^
-              "calc(var(--website-header-height) + var(--ax-space-12) + 48px + var(--ax-space-32))",
-          }}
+          className={`${styles.logEntry}`}
         >
-          <HStack justify="start" align="baseline" gap="space-16">
+          <HStack
+            justify="start"
+            align="baseline"
+            gap={{ xs: "space-4", sm: "space-16" }}
+          >
             <HStack gap="space-4">
               <BodyShort
                 size="small"
@@ -113,114 +153,81 @@ export default function LogEntry({
             </HStack>
             {fremhevet && (
               <Tag
-                // data-color-role="aksel-brand-pink"
                 size="xsmall"
                 variant="neutral-filled"
+                // TODO: [endringslogg] Verify color shade
                 className={styles.tag}
+                // data-color="aksel-brand-pink"
               >
                 Fremhevet
               </Tag>
             )}
           </HStack>
-          {/* TODO: [endringslogg] Ensure proper wrapping on mobile */}
-          {/* TODO: [endringslogg] Ensure slimmer margins on mobile */}
-          {/* TODO: [endringslogg] Fix 'Vis mer' when fremhevet */}
-          {/* TODO: [endringslogg] Fix 'Vis mer' when short content wo/expansion */}
-          <VStack
-            marginBlock={fremhevet ? "space-0 space-32" : "space-0 space-64"}
-            padding={fremhevet ? "space-16" : "space-0"}
-            className={
-              (fremhevet ? styles.innholdFremhevet : "") +
-              " max-sm:-ml-12 max-sm:-mr-4 max-sm:bg-[var(--ax-bg-default)]"
-            }
-            // data-color-role="aksel-brand-pink"
-            // {...fremhevet ? { "data-color-role": "aksel-brand-pink" } : {}}
-            data-color-role={!fremhevet ? "brand-magenta" : undefined}
+          {/* TODO: [endringslogg] Decide 'Vis mer' transition on collapse */}
+          <Bleed
+            marginInline={{ xs: "space-48 space-16", sm: "space-0 space-0" }}
           >
-            <Heading size="large" level="2" spacing>
-              <Link
-                href={`./endringslogg/${slug?.current}`}
-                data-aksel-heading-color
-              >
-                {heading}
-              </Link>
-            </Heading>
-            {visMer && (
-              <Button
-                size="small"
-                variant="secondary-neutral"
-                icon={<ChevronIcon />}
-                style={{
-                  "--button-height": "2rem",
-                  position: "absolute",
-                  zIndex: 1,
-                  backgroundColor: "var(--ax-bg-default)",
-                  left: fremhevet ? "2rem" : "1rem",
-                  ...(fremhevet
-                    ? {
-                        bottom:
-                          "calc(var(--button-height) + var(--ax-space-16))",
-                        color: "var(--aksel-brand-pink-1000)",
-                        "--ax-border-neutral": "var(--aksel-brand-pink-600)",
-                        "--ax-border-neutral-strong":
-                          "var(--aksel-brand-pink-600)",
-                      }
-                    : {
-                        bottom: "var(--ax-space-32)",
-                      }),
-                }}
-                onClick={toggleExpansion}
-              >
-                {expanded ? "Vis mindre" : "Vis mer"}
-              </Button>
-            )}
-            <div
-              style={
-                visMer
-                  ? {
-                      overflow: "hidden",
-                      maxHeight: !expanded
-                        ? fremhevet
-                          ? "16rem"
-                          : "6rem"
-                        : "",
-                      maskImage: expanded
-                        ? ""
-                        : "linear-gradient(rgba(0 0 0 / 1), rgba(0 0 0 / 0) calc(100% - 0.5rem))",
-                      marginBottom: expanded ? "calc(3rem" : "0",
-                      padding: "1px",
-                    }
-                  : {}
-              }
-              inert={visMer && !expanded ? inertValue : false}
+            <VStack
+              marginBlock={fremhevet ? "space-0 space-32" : "space-0 space-64"}
+              padding={fremhevet ? "space-16" : "space-0"}
+              className={`${styles.innhold}${
+                fremhevet ? ` ${styles.innholdFremhevet}` : ""
+              } ${shouldFlash ? ` ${styles.logEntryHighlight}` : ""} `}
+              data-color={fremhevet ? "aksel-brand-pink" : ""}
             >
-              {fremhevet && herobilde?.asset && (
-                <Image
-                  key={"hero-" + index}
-                  data-block-margin="space-28"
-                  className={styles.herobilde}
-                  aria-hidden={herobilde.dekorativt}
-                  alt={herobilde.alt || ""}
-                  loading="lazy"
-                  decoding="async"
-                  src={
-                    urlForImage(herobilde as SanityImage)
-                      ?.auto("format")
-                      .url() || ""
-                  }
-                  width={1200}
-                  height={630}
-                />
+              <Heading size="large" level="2" spacing>
+                <Link
+                  href={`./endringslogg/${slug?.current}`}
+                  data-aksel-heading-color
+                >
+                  {heading}
+                </Link>
+              </Heading>
+              {visMer && (
+                <Button
+                  size="small"
+                  variant="secondary-neutral"
+                  icon={<ChevronIcon />}
+                  className={`${styles.visMerButton}${
+                    fremhevet ? ` ${styles.visMerButtonFremhevet}` : ""
+                  }`}
+                  onClick={toggleExpansion}
+                >
+                  {expanded ? "Vis mindre" : "Vis mer"}
+                </Button>
               )}
-              {/* TODO: [endringslogg] Fix space between headline and content in log entry */}
-              {/* TODO: [endringslogg] Add transition animation on collapse */}
-              {/* TODO: [endringslogg] See if we can avoid `as` here */}
-              <CustomPortableText
-                className="[&_h3]:!mt-0"
-                value={innhold as PortableTextBlock[]}
-              />
-            </div>
-          </VStack>
+              {visMer ? (
+                <div
+                  className={`${styles.visMerContainer} ${
+                    expanded ? styles.visMerExpanded : styles.visMerCollapsed
+                  }${
+                    !expanded && fremhevet
+                      ? ` ${styles.visMerCollapsedFremhevet}`
+                      : ""
+                  }`}
+                  inert={!expanded ? inertValue : false}
+                >
+                  {fremhevet && herobilde?.asset && (
+                    <Hero herobilde={herobilde} index={index} />
+                  )}
+                  <CustomPortableText
+                    className={styles.portableText}
+                    value={innhold as PortableTextBlock[]}
+                  />
+                </div>
+              ) : (
+                <>
+                  {fremhevet && herobilde?.asset && (
+                    <Hero herobilde={herobilde} index={index} />
+                  )}
+                  <CustomPortableText
+                    className={styles.portableText}
+                    value={innhold as PortableTextBlock[]}
+                  />
+                </>
+              )}
+            </VStack>
+          </Bleed>
         </VStack>
       </HStack>
     </li>

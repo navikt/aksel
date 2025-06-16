@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Search } from "@navikt/ds-react";
+import styles from "./SearchField.module.css";
 
 export default function SearchField() {
   const searchParams = useSearchParams();
@@ -31,8 +32,8 @@ export default function SearchField() {
         name="changelogSearch"
         hideLabel
         variant="simple"
-        htmlSize="24"
         autoComplete="off"
+        className={styles.searchField}
       />
     </form>
   );

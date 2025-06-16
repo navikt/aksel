@@ -5,14 +5,12 @@ import { Heading, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
+import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { DesignsystemetEyebrow } from "../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
-import EndringsloggTableOfContents from "./_ui/EndringsloggTableOfContents";
 import FilterChips from "./_ui/FilterChips";
 import LogEntryList from "./_ui/LogEntryList";
 import SearchField from "./_ui/SearchField";
-
-// TODO: [endringslogg] Clean up styling, commit to a convention
 
 const fields =
   "heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer";
@@ -37,33 +35,47 @@ export default async function Page({ searchParams }) {
     kategori: paramCategory,
     fritekst: paramTextFilter,
   } = await searchParams;
-  const filterYear = years.includes(+paramYear)
+  const yearFilter = years.includes(+paramYear)
     ? +paramYear
     : paramYear === "ingen"
       ? null
       : currentYear;
-  const filterCategory = categories.includes(paramCategory)
+  const categoryFilter = categories.includes(paramCategory)
     ? paramCategory
     : null;
-  const filterText = paramTextFilter?.trim();
+  const textFilter = paramTextFilter?.trim().split(" ");
 
-  const yearFilter = " && endringsdato >= $year && endringsdato <= $nextYear";
-  const categoryFilter = " && endringstype == $category";
-  const textFilter =
+  const yearQuery = yearFilter
+    ? " && endringsdato >= $year && endringsdato <= $nextYear"
+    : "";
+  const categoryQuery = categoryFilter ? " && endringstype == $category" : "";
+  const textQuery =
     // innhold[].caption refers captions on images in innhold
-    " && [heading, endringsdato, endringstype, innhold[].children[].text, innhold[].caption] match [$textFilter]";
-  // " && [heading, endringsdato, endringstype, pt::text(innhold[]), innhold[].caption] match [$textFilter]";
+    // "[heading, endringsdato, endringstype, pt::text(innhold[]), innhold[].caption]";
+    "[heading, endringsdato, endringstype, innhold[].children[].text, innhold[].caption]";
+
   const sanityObject = {
     query: defineQuery(
-      `*[_type == "ds_endringslogg_artikkel"${filterYear ? yearFilter : ""}${
-        filterCategory ? categoryFilter : ""
-      }${filterText ? textFilter : ""}]{${fields}} | order(endringsdato desc)`,
-    ) as any,
+      `*[_type == "ds_endringslogg_artikkel"${yearQuery}${categoryQuery}${
+        textFilter
+          ? textFilter.reduce(
+              (queryString, _, index) =>
+                `${queryString} && ${textQuery} match $textFilter${index}`,
+              "",
+            )
+          : ""
+      }]{${fields}} | order(endringsdato desc)`,
+    ) as ENDRINGSLOGG_QUERY,
     params: {
-      year: `${filterYear}`,
-      nextYear: `${filterYear && filterYear + 1}`,
-      category: `${filterCategory}`,
-      textFilter: filterText ? `*${filterText?.replace(/ /g, "* *")}*` : null,
+      year: `${yearFilter}`,
+      nextYear: `${yearFilter && yearFilter + 1}`,
+      category: `${categoryFilter}`,
+      ...(textFilter
+        ? textFilter?.reduce((acc, text, index) => {
+            acc[`textFilter${index}`] = `*${text}*`;
+            return acc;
+          }, {})
+        : {}),
     },
   };
 
@@ -103,6 +115,29 @@ export default async function Page({ searchParams }) {
     [],
   );
 
+  const toc = groupedByMonth.map((entry) => {
+    const monthYearTag = format(
+      new Date(entry[0].endringsdato || ""),
+      "MMMM-yyy",
+      {
+        locale: nb,
+      },
+    );
+    const monthYearLowercase = format(
+      new Date(entry[0].endringsdato || ""),
+      "MMMM yyy",
+      {
+        locale: nb,
+      },
+    );
+    const monthYear =
+      monthYearLowercase.charAt(0).toUpperCase() + monthYearLowercase.slice(1);
+    return {
+      id: monthYearTag,
+      title: monthYear,
+    };
+  });
+
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <VStack>
@@ -114,9 +149,9 @@ export default async function Page({ searchParams }) {
           <SearchField />
           <FilterChips
             years={years}
-            selectedYear={filterYear}
+            selectedYear={yearFilter}
             categories={categories}
-            selectedCategory={filterCategory}
+            selectedCategory={categoryFilter}
           />
         </VStack>
         <VStack paddingBlock="space-32 space-0">
@@ -127,7 +162,14 @@ export default async function Page({ searchParams }) {
           )}
         </VStack>
       </VStack>
-      <EndringsloggTableOfContents logEntries={groupedByMonth} />
+      <TableOfContents
+        feedback={{
+          name: "Endringslogg",
+          text: "Send innspill",
+        }}
+        showChangelogLink={true}
+        toc={toc}
+      />
     </DesignsystemetPageLayout>
   );
 }

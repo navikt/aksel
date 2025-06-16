@@ -20,6 +20,7 @@ export default function MonthHeader({ logEntry, index }: Props) {
   return (
     <li key={"month-header-" + index} className={styles.monthHeader}>
       <VStack>
+        {/* TODO: [endringslogg] Remove timeline and add divider on mobile */}
         <HStack className={styles.monthSpacer}>
           {index > 0 && (
             <VStack width="48px" align="center">
