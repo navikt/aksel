@@ -1,4 +1,5 @@
 import { parseInt } from "lodash";
+import Image from "next/image";
 import { SlugValue, defineField, defineType } from "sanity";
 import { showForDevsOnly } from "../../../util";
 
@@ -53,15 +54,24 @@ export const EditorialStaff = defineType({
   preview: {
     select: {
       title: "title",
-      avatar_url: "avatar_url",
+      avatar_id: "avatar_id",
     },
     prepare(selection) {
-      const { title, avatar_url } = selection;
+      const { title, avatar_id } = selection;
 
       return {
         title,
         subtitle: "Redaksjon",
-        media: () => <svg href={avatar_url} />,
+        media: () => (
+          <Image
+            src={`/avatars/${
+              avatar_id?.current.padStart(3, "0") ?? "broken"
+            }.svg`}
+            width="100"
+            height="100"
+            alt="avatar graphic"
+          />
+        ),
       };
     },
   },
