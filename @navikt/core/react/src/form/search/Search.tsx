@@ -270,7 +270,8 @@ function ClearButton({
   return themeContext ? (
     <Button
       className={cn("navds-search__button-clear")}
-      variant="tertiary-neutral"
+      variant="tertiary"
+      data-color="neutral"
       size={size === "medium" ? "small" : "xsmall"}
       icon={<XMarkIcon aria-hidden />}
       title={clearButtonLabel || translate("clear")}
