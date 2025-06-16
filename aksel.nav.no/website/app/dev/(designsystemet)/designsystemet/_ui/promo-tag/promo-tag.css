@@ -26,6 +26,7 @@
   margin-block: -3px;
   margin-inline-start: -1px;
   align-items: center;
+  color: var(--ax-text-contrast, #fff);
 }
 
 .promoTagArrow {

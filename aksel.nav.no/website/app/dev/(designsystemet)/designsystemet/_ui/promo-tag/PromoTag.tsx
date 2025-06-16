@@ -7,7 +7,7 @@ const PromoTag = () => {
   return (
     <Link href="#" data-color="aksel-brand-pink">
       <Detail as="span" className="promoTag" textColor="default">
-        <Detail as="span" textColor="contrast" className="promoTagLabel">
+        <Detail as="span" className="promoTagLabel">
           Nyhet
         </Detail>
         Ny versjon av Aksel er ute (darkside) 🎉

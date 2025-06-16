@@ -9,6 +9,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { GithubIcon, SlackIcon } from "@/assets/Icons";
+import "./SupportSection.css";
 
 const supportModules = [
   {
@@ -34,7 +35,7 @@ const supportModules = [
 ];
 
 const SupportSection = () => (
-  <VStack gap="space-16" align="center">
+  <VStack gap="space-16" align="center" className="support-section">
     <Heading level="2" size="large">
       Support
     </Heading>
@@ -52,15 +53,15 @@ const SupportSection = () => (
         >
           <VStack gap="space-40" align="start">
             <div>
-              <Heading size="medium" spacing textColor="contrast">
+              <Heading size="medium" spacing>
                 {title}
               </Heading>
-              <BodyLong size="medium" as="p" textColor="contrast">
+              <BodyLong size="medium" as="p">
                 {description}
               </BodyLong>
             </div>
             <HStack gap="space-8" align="start" asChild>
-              <Link as={NextLink} href={link.href} variant="contrast">
+              <Link as={NextLink} href={link.href}>
                 {link.icon}
                 {link.label}
               </Link>

@@ -1,0 +1,6 @@
+.support-section {
+  &,
+  .aksel-link {
+    color: var(--ax-text-contrast);
+  }
+}
