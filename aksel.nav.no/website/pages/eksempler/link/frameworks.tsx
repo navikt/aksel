@@ -10,7 +10,7 @@ const Example = () => (
 
 /*
 
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 const ReactRouterExample = () => (
   <Link as={ReactRouterLink} to="/eksempel">
     Lenke til ny side
