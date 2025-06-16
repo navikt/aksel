@@ -1,7 +1,7 @@
 {
   "tasks": {
-    "update-article-views": "deno run --watch ./update-article-views/main.ts",
-    "delete-article-views": "deno run --watch ./delete-article-views/main.ts"
+    "update-article-views": "deno run --env-file --allow-env --allow-net ./update-article-views/main.ts",
+    "delete-article-views": "deno run --env-file --allow-env ./delete-article-views/main.ts"
   },
   "imports": {
     "@sanity/client": "npm:@sanity/client@^6.28.3"
