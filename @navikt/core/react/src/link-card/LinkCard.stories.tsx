@@ -66,6 +66,41 @@ export const Default: StoryObj = {
             Footer Footer Footer
           </LinkCardFooter>
         </LinkCard>
+        <LinkCard>
+          <BoxNew
+            asChild
+            background="accent-moderateA"
+            padding="space-8"
+            borderRadius="12"
+          >
+            <LinkCardIcon>
+              <SparklesIcon fontSize="2rem" />
+            </LinkCardIcon>
+          </BoxNew>
+          <LinkCardTitle as="h2">
+            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
+          </LinkCardTitle>
+        </LinkCard>
+        <LinkCard>
+          <BoxNew
+            asChild
+            background="accent-moderateA"
+            padding="space-8"
+            borderRadius="12"
+          >
+            <LinkCardIcon>
+              <SparklesIcon fontSize="2rem" />
+            </LinkCardIcon>
+          </BoxNew>
+          <LinkCardTitle as="h2">
+            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
+          </LinkCardTitle>
+          <LinkCardDescription>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+            placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
+            velit.
+          </LinkCardDescription>
+        </LinkCard>
 
         <LinkCard>
           <BoxNew
