@@ -33,8 +33,12 @@
     "icon description"
     "icon footer";
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: min-content min-content min-content auto;
   align-items: center;
+
+  &:not(:has(.aksel-link-card__description, .aksel-link-card__footer)) {
+    grid-template-rows: auto 1fr;
+  }
 }
 
 .aksel-link-card__title {
@@ -74,6 +78,40 @@
   margin-inline-end: var(--ax-space-16);
 }
 
+.aksel-link-card__image-container {
+  display: block;
+  overflow: hidden;
+  grid-area: image;
+  border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
+  margin-block-start: calc(var(--__axc-link-card-padding-block) * -1);
+  margin-inline: calc(var(--__axc-link-card-padding-inline) * 1 * -1);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-block-end: var(--__axc-link-card-padding-block);
+}
+
+.aksel-link-card__image {
+  object-fit: cover;
+  display: block;
+  max-width: 100%;
+}
+
+.aksel-link-card__image--aspect-1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+.aksel-link-card__image--aspect-16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+.aksel-link-card__image--aspect-16-10 {
+  aspect-ratio: 16 / 10;
+}
+
+.aksel-link-card__image--aspect-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
 /* Link Anchor utilities */
 .aksel-link-anchor__overlay {
   cursor: pointer;
@@ -96,13 +134,14 @@
 }
 
 .aksel-link-anchor {
+  color: var(--ax-text-default);
   text-decoration: underline;
   text-decoration-color: currentColor;
   text-underline-offset: 0.1em;
   text-decoration-thickness: 0.05em;
 
   &:visited {
-    color: initial;
+    color: var(--ax-text-default);
   }
 
   &:hover,

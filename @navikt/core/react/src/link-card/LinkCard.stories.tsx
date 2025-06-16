@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { BoxNew } from "../layout/box";
+import { HGrid } from "../layout/grid";
 import { HStack, VStack } from "../layout/stack";
 import { Heading } from "../typography";
 import { LinkAnchor, LinkAnchorArrow, LinkAnchorOverlay } from "./LinkAnchor";
@@ -11,6 +12,7 @@ import {
   LinkCardDescription,
   LinkCardFooter,
   LinkCardIcon,
+  LinkCardImage,
   LinkCardTitle,
 } from "./LinkCard";
 
@@ -27,7 +29,7 @@ export default {
 export const Default: StoryObj = {
   render: () => {
     return (
-      <VStack gap="space-32">
+      <HGrid gap="space-32" columns="repeat(auto-fit, minmax(300px, 1fr))">
         <LinkCard>
           <LinkCardTitle as="span">
             <LinkCardAnchor href="https://aksel.nav.no/">Tittel</LinkCardAnchor>
@@ -43,6 +45,21 @@ export const Default: StoryObj = {
         </LinkCard>
 
         <LinkCard>
+          <LinkCardTitle as="h2">
+            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
+          </LinkCardTitle>
+          <LinkCardDescription>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+            placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
+            velit.
+          </LinkCardDescription>
+        </LinkCard>
+
+        <LinkCard>
+          <LinkCardImage
+            src="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
+            alt="alt-test"
+          />
           <LinkCardTitle as="h2">
             <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
           </LinkCardTitle>
@@ -132,7 +149,7 @@ export const Default: StoryObj = {
             <LinkAnchor href="#123">Custom LinkAnchor</LinkAnchor>
           </div>
         </LinkAnchorOverlay>
-      </VStack>
+      </HGrid>
     );
   },
 };
