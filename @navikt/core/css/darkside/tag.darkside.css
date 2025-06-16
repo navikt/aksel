@@ -21,7 +21,7 @@
 
   &[data-variant="outline"] {
     box-shadow: inset 0 0 0 1px var(--ax-border-default);
-    background: var(--ax-bg-moderateA);
+    background: var(--ax-bg-moderate);
     color: var(--ax-text-default);
 
     @media (forced-colors: active) {

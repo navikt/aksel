@@ -1,5 +1,31 @@
 # @navikt/ds-react
 
+## 7.23.0
+
+### Minor Changes
+
+- Datepicker: Upgraded 'react-day-picker' dependency to v9.7.0 from v9.6.1. ([#3820](https://github.com/navikt/aksel/pull/3820))
+
+- Darkside: Renamed 'data-color-role' dynamic theme attribute to 'data-color'. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: Using attribute 'data-color' with one of the built-in colors from 'AkselColorRole' now allows re-coloring most components. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: Adding type '@navikt/ds-react/types/theme' to your local 'tsconfig.json' types-field allows autocomplete for all available color-palettes in attribute 'data-color'. You can extend 'CustomAkselColor'-type to use your own color-palettes. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: All components has been updated to use 'data-color' attribute for coloring. As a side-effect, most component CSS is either updated or refactored. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+### Patch Changes
+
+- Timeline: Reverted regression that lead to 'aria-controls' being ignored when passed to Pin or Period. ([#3828](https://github.com/navikt/aksel/pull/3828))
+
+- Timeline: Removed 'aria-haspopup' from pins and periods. ([#3834](https://github.com/navikt/aksel/pull/3834))
+
+- ErrorSummary: Heading size is now 'xsmall' for non-medium sizes and remains 'small' when size='medium'. ([#3806](https://github.com/navikt/aksel/pull/3806))
+
+- Updated dependencies [[`77129e8`](https://github.com/navikt/aksel/commit/77129e8b6f178815439bea34881d0fe26cbd274c), [`77129e8`](https://github.com/navikt/aksel/commit/77129e8b6f178815439bea34881d0fe26cbd274c), [`0932335`](https://github.com/navikt/aksel/commit/0932335a9e1323d50eeaa85ccca1db11b31d297d)]:
+  - @navikt/ds-tokens@7.23.0
+  - @navikt/aksel-icons@7.23.0
+
 ## 7.22.0
 
 ### Minor Changes

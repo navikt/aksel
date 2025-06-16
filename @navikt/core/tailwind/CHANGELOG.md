@@ -1,5 +1,7 @@
 # @navikt/ds-tailwind
 
+## 7.23.0
+
 ## 7.22.0
 
 ### Minor Changes

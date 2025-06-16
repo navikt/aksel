@@ -6,6 +6,9 @@
   padding-inline: var(--ax-space-8);
   margin-left: var(--ax-space-16);
   color: var(--ax-text-neutral);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-24);
 
   &[data-layout="sidebar"] {
     width: 16rem;

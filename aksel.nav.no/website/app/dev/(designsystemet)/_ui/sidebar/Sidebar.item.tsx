@@ -4,7 +4,8 @@ import cl from "clsx";
 import { stegaClean } from "next-sanity";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BodyShort, Tag } from "@navikt/ds-react";
+import { SquareGridFillIcon, SquareGridIcon } from "@navikt/aksel-icons";
+import { BodyShort, HStack, Tag } from "@navikt/ds-react";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { SidebarPageT } from "@/types";
@@ -20,6 +21,8 @@ function DesignsystemSidebarItem(props: {
 
   const active = pathName?.split("#")[0] === stegaClean(`/dev/${page.slug}`);
   const statusTag = getStatusTag(page.tag, true);
+
+  const isOverviewPage = page.heading.toLowerCase() === "oversikt";
 
   return (
     <BodyShort
@@ -44,7 +47,15 @@ function DesignsystemSidebarItem(props: {
           })
         }
       >
-        {page.heading}
+        <HStack gap="space-4" align="center" as="span">
+          {isOverviewPage &&
+            (active ? (
+              <SquareGridFillIcon aria-hidden />
+            ) : (
+              <SquareGridIcon aria-hidden />
+            ))}
+          {page.heading}
+        </HStack>
         {statusTag && (
           <Tag variant="info" size="xsmall" data-color={statusTag.colorRole}>
             {statusTag.text}
