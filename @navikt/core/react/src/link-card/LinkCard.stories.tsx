@@ -70,6 +70,21 @@ export const Default: StoryObj = {
           </LinkCardDescription>
         </LinkCard>
         <LinkCard>
+          <LinkCardImage
+            src="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
+            alt="alt-test"
+            aspectRatio="16/10"
+          />
+          <LinkCardTitle as="h2">
+            <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
+          </LinkCardTitle>
+          <LinkCardDescription>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+            placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
+            velit.
+          </LinkCardDescription>
+        </LinkCard>
+        <LinkCard>
           <LinkCardTitle as="h2">
             <LinkCardAnchor href="/href">Tittel</LinkCardAnchor>
           </LinkCardTitle>

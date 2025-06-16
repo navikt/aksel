@@ -156,17 +156,23 @@ const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
 );
 
 /* ---------------------------- LinkCard Image ---------------------------- */
-type ImageAspectRatio = "1:1" | "16:9" | "16:10" | "4:3";
+type ImageAspectRatio = "1/1" | "16/9" | "16/10" | "4/3" | (string & {});
 
 interface LinkCardImageProps extends ImgHTMLAttributes<HTMLImageElement> {
-  src: string;
-  alt: string;
-  aspectRatio?: ImageAspectRatio;
   /**
-   * Ignores card padding
-   * @default false
+   * The src attribute holds the path to the image you want to embed.
    */
-  isInset?: boolean;
+  src: string;
+  /**
+   * The alt attribute holds a textual replacement for the image, which is mandatory and incredibly useful for accessibility — screen readers read the attribute value out to their users so they know what the image means.
+   * Alt text is also displayed on the page if the image can't be loaded for some reason: for example, network errors, content blocking, or link rot.
+   */
+  alt: string;
+  /**
+   * The aspect-ratio CSS property allows you to define the desired width-to-height ratio of an element's box.
+   * This means that even if the parent container or viewport size changes, the browser will adjust the element's dimensions to maintain the specified width-to-height ratio.
+   */
+  aspectRatio?: ImageAspectRatio;
 }
 
 const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
@@ -177,7 +183,7 @@ const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
       aspectRatio,
       width = aspectRatio ? "100%" : "",
       height = aspectRatio ? "100%" : "",
-      isInset = false,
+      style,
       ...restProps
     }: LinkCardImageProps,
     forwardedRef,
@@ -185,19 +191,15 @@ const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
     const { cn } = useRenameCSS();
 
     return (
-      <span
-        className={cn("navds-link-card__image-container", {
-          "navds-link-card__image-container--inset": isInset,
-        })}
-      >
+      <span className={cn("navds-link-card__image-container")}>
         <img
           ref={forwardedRef}
           {...restProps}
-          className={cn(
-            "navds-link-card__image",
-            className,
-            aspectRatioClassName(aspectRatio),
-          )}
+          style={{
+            aspectRatio: aspectRatio ? aspectRatio : undefined,
+            ...style,
+          }}
+          className={cn("navds-link-card__image", className)}
           alt={alt}
           width={width}
           height={height}
@@ -206,17 +208,6 @@ const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
     );
   },
 );
-
-/* --------------------------- LinkCard utilities --------------------------- */
-function aspectRatioClassName(aspectRatio?: ImageAspectRatio): string {
-  if (!aspectRatio) {
-    return "";
-  }
-
-  /* TODO: Dynamic classnames can't be used as is */
-  const [width, height] = aspectRatio.split(":").map(Number);
-  return `navds-link-card__image--aspect-${width}-${height}`;
-}
 
 export {
   LinkCard,
