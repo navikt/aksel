@@ -3,9 +3,9 @@ import React from "react";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { BoxNew } from "../layout/box";
 import { HGrid } from "../layout/grid";
-import { HStack, VStack } from "../layout/stack";
-import { Heading } from "../typography";
-import { LinkAnchor, LinkAnchorArrow, LinkAnchorOverlay } from "./LinkAnchor";
+import { HStack } from "../layout/stack";
+import { Tag } from "../tag";
+import { LinkAnchor, LinkAnchorOverlay } from "./LinkAnchor";
 import {
   LinkCard,
   LinkCardAnchor,
@@ -26,7 +26,7 @@ export default {
   },
 } satisfies Meta<typeof LinkCard>;
 
-export const Default: StoryObj = {
+export const Default: Story = {
   render: () => {
     return (
       <HGrid gap="space-32" columns="repeat(auto-fit, minmax(300px, 1fr))">
@@ -169,96 +169,403 @@ export const Default: StoryObj = {
   },
 };
 
-export const LinkAnchorDemo: StoryObj = {
-  render: () => {
-    return (
-      <VStack gap="space-8">
-        <HStack gap="space-4" align="center" asChild>
-          <LinkAnchor href="https://aksel.nav.no/">
-            LinkAnchor
-            <LinkAnchorArrow />
-          </LinkAnchor>
-        </HStack>
-        <HStack gap="space-4" align="center" asChild>
-          <LinkAnchor href="https://aksel.nav.no/">
-            LinkAnchor
-            <LinkAnchorArrow />
-          </LinkAnchor>
-        </HStack>
-        <HStack gap="space-4" align="center" asChild>
-          <LinkAnchor href="https://aksel.nav.no/">
-            LinkAnchor
-            <LinkAnchorArrow />
-          </LinkAnchor>
-        </HStack>
-        <HStack gap="space-4" align="center" asChild>
-          <LinkAnchor href="https://aksel.nav.no/">
-            LinkAnchor
-            <LinkAnchorArrow />
-          </LinkAnchor>
-        </HStack>
-      </VStack>
-    );
+export const Title: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const TitleWithMutliline: Story = {
+  render: () => (
+    <LinkCard style={{ maxWidth: 200 }}>
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit
+        </LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const Description: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+        placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
+        velit.
+      </LinkCardDescription>
+    </LinkCard>
+  ),
+};
+
+export const DescriptionWithMultiline: Story = {
+  render: () => (
+    <LinkCard style={{ maxWidth: 200 }}>
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </LinkCardDescription>
+    </LinkCard>
+  ),
+};
+
+export const Footer: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardFooter>
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
+export const FooterWithMultiline: Story = {
+  render: () => (
+    <LinkCard style={{ maxWidth: 200 }}>
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardFooter>
+        <FooterContentDemo />
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
+export const DescriptionAndFooter: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </LinkCardDescription>
+      <LinkCardFooter>
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
+export const Icon: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardIcon>
+        <SparklesIcon fontSize="2rem" />
+      </LinkCardIcon>
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const IconWithBackground: Story = {
+  render: () => (
+    <LinkCard>
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const IconWithDescriptionAndFooter: Story = {
+  render: () => (
+    <LinkCard>
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </LinkCardDescription>
+      <LinkCardFooter>
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
+export const NoArrow: Story = {
+  render: () => (
+    <LinkCard hasArrow={false}>
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const NoArrowWithRichContent: Story = {
+  render: () => (
+    <LinkCard hasArrow={false}>
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </LinkCardDescription>
+      <LinkCardFooter>
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
+export const Image: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardImage alt="alt-placeholder" src="https://picsum.photos/400" />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const ImageWithAspectRatio: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardImage
+        alt="alt-placeholder"
+        src="https://picsum.photos/400"
+        aspectRatio="16/10"
+      />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const ImageWithArbitraryAspectRatio: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardImage
+        alt="alt-placeholder"
+        src="https://picsum.photos/400"
+        aspectRatio="4/2"
+      />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const ImageWithIcon: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardImage
+        alt="alt-placeholder"
+        src="https://picsum.photos/400"
+        aspectRatio="16/10"
+      />
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const GridWithTitle: Story = {
+  render: (...args) => (
+    <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
+      {Title.render?.(...args)}
+      {Title.render?.(...args)}
+      {Title.render?.(...args)}
+    </HGrid>
+  ),
+  parameters: {
+    layout: "padded",
   },
 };
 
-export const LinkAnchorNavNoDemo: StoryObj = {
-  render: () => {
-    return (
-      <VStack gap="space-0">
-        <LinkAnchor href="https://aksel.nav.no/" asChild>
-          <BoxNew
-            borderWidth="1 0 0 0"
-            padding="space-8"
-            borderColor="neutral"
-            asChild
-          >
-            <HStack gap="space-8" align="center" asChild>
-              <Heading size="medium" as="a">
-                <LinkAnchorArrow />
-                LinkAnchor
-              </Heading>
-            </HStack>
-          </BoxNew>
-        </LinkAnchor>
-        <LinkAnchor href="https://aksel.nav.no/" asChild>
-          <BoxNew
-            borderWidth="1 0 0 0"
-            padding="space-8"
-            borderColor="neutral"
-            asChild
-          >
-            <HStack gap="space-8" align="center" asChild>
-              <Heading size="medium" as="a">
-                <LinkAnchorArrow />
-                LinkAnchor
-              </Heading>
-            </HStack>
-          </BoxNew>
-        </LinkAnchor>
-        <LinkAnchor href="https://aksel.nav.no/" asChild>
-          <BoxNew
-            borderWidth="1 0 1 0"
-            padding="space-8"
-            borderColor="neutral"
-            asChild
-          >
-            <HStack gap="space-8" align="center" asChild>
-              <Heading size="medium" as="a">
-                <LinkAnchorArrow />
-                LinkAnchor
-              </Heading>
-            </HStack>
-          </BoxNew>
-        </LinkAnchor>
-      </VStack>
-    );
+export const GridWithTitleAndMultiline: Story = {
+  render: (...args) => (
+    <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
+      {Title.render?.(...args)}
+      <LinkCard>
+        <LinkCardTitle>
+          <LinkCardAnchor href="/#">
+            Title with a rather long text that will most likely wrap across
+            multiple lines.
+          </LinkCardAnchor>
+        </LinkCardTitle>
+      </LinkCard>
+      {Title.render?.(...args)}
+    </HGrid>
+  ),
+  parameters: {
+    layout: "padded",
   },
 };
 
+export const GridWithDescriptionAndFooter: Story = {
+  render: (...args) => (
+    <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
+      {DescriptionAndFooter.render?.(...args)}
+      {DescriptionAndFooter.render?.(...args)}
+      {DescriptionAndFooter.render?.(...args)}
+    </HGrid>
+  ),
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const GridWithDifferentHeights: Story = {
+  render: (...args) => (
+    <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
+      {DescriptionAndFooter.render?.(...args)}
+      {Description.render?.(...args)}
+      {Title.render?.(...args)}
+      {Footer.render?.(...args)}
+    </HGrid>
+  ),
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const GridWithIcon: Story = {
+  render: (...args) => (
+    <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
+      {Icon.render?.(...args)}
+      {Icon.render?.(...args)}
+      {Icon.render?.(...args)}
+    </HGrid>
+  ),
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const GridWithImage: Story = {
+  render: (...args) => (
+    <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
+      {ImageWithAspectRatio.render?.(...args)}
+      {ImageWithAspectRatio.render?.(...args)}
+      {ImageWithAspectRatio.render?.(...args)}
+    </HGrid>
+  ),
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const GridWithIconAndDescriptionAndFooter: Story = {
+  render: (...args) => (
+    <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
+      {IconWithDescriptionAndFooter.render?.(...args)}
+      {IconWithDescriptionAndFooter.render?.(...args)}
+      {IconWithDescriptionAndFooter.render?.(...args)}
+    </HGrid>
+  ),
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const ColorRole: Story = {
+  render: () => (
+    <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
+      <LinkCard>
+        <IconDemo />
+        <LinkCardTitle>
+          <LinkCardAnchor href="/#">Default color</LinkCardAnchor>
+        </LinkCardTitle>
+        <LinkCardDescription>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </LinkCardDescription>
+        <LinkCardFooter>
+          <FooterContentDemo />
+        </LinkCardFooter>
+      </LinkCard>
+      <LinkCard data-color="accent">
+        <IconDemo />
+        <LinkCardTitle>
+          <LinkCardAnchor href="/#">Accent</LinkCardAnchor>
+        </LinkCardTitle>
+        <LinkCardDescription>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </LinkCardDescription>
+        <LinkCardFooter>
+          <FooterContentDemo />
+        </LinkCardFooter>
+      </LinkCard>
+      <LinkCard data-color="brand-beige">
+        <IconDemo />
+        <LinkCardTitle>
+          <LinkCardAnchor href="/#">Brand beige</LinkCardAnchor>
+        </LinkCardTitle>
+        <LinkCardDescription>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </LinkCardDescription>
+        <LinkCardFooter>
+          <FooterContentDemo />
+        </LinkCardFooter>
+      </LinkCard>
+    </HGrid>
+  ),
+  parameters: {
+    layout: "padded",
+  },
+};
+
+/* Chromatic setup */
 export const Chromatic: Story = {
   render: () => <div>Chromatic</div>,
   parameters: {
     chromatic: { disable: false },
   },
 };
+
+/* Utilities */
+function FooterContentDemo() {
+  return (
+    <HStack gap="space-8">
+      <Tag size="small" variant="info">
+        Tag 1
+      </Tag>
+      <Tag size="small" variant="neutral">
+        Tag 2
+      </Tag>
+    </HStack>
+  );
+}
+
+function IconDemo() {
+  return (
+    <BoxNew
+      asChild
+      background="accent-moderateA"
+      padding="space-8"
+      borderRadius="12"
+    >
+      <LinkCardIcon>
+        <SparklesIcon fontSize="2rem" />
+      </LinkCardIcon>
+    </BoxNew>
+  );
+}

@@ -73,7 +73,7 @@
   place-content: center;
   color: var(--ax-text-default);
   align-self: flex-start;
-  margin-inline-end: var(--ax-space-16);
+  margin-inline-end: var(--ax-space-20);
 }
 
 .aksel-link-card__image-container {

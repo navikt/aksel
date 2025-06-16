@@ -15,24 +15,11 @@ type LinkCardProps = LinkAnchorOverlayProps & {
    * @default true
    */
   hasArrow?: boolean;
-  /**
-   * Automatically applies layout styles when true.
-   * If false, you get full control over layout and spacing.
-   * This is useful for custom layouts.
-   * @default true
-   */
-  autoLayout?: boolean;
 };
 
 const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
   (
-    {
-      children,
-      className,
-      hasArrow = true,
-      autoLayout = true,
-      ...restProps
-    }: LinkCardProps,
+    { children, className, hasArrow = true, ...restProps }: LinkCardProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
@@ -45,7 +32,6 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
           {...restProps}
           className={cn("navds-link-card", className)}
           data-arrow={hasArrow}
-          data-auto-layout={autoLayout}
         >
           {children}
         </div>
@@ -62,11 +48,11 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
    * (eg. you have a lot of them all at once, such as in a grid)
    * @default "span"
    */
-  as: "span" | "h2" | "h3" | "h4" | "h5" | "h6";
+  as?: "span" | "h2" | "h3" | "h4" | "h5" | "h6";
 };
 
 const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
-  ({ children, as, className }: LinkCardTitleProps, forwardedRef) => {
+  ({ children, as = "span", className }: LinkCardTitleProps, forwardedRef) => {
     const { cn } = useRenameCSS();
 
     return (
