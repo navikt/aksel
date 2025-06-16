@@ -126,11 +126,9 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
 
     const { cn } = useRenameCSS();
 
-    const themeContext = useThemeInternal(false);
-
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMergeRefs(searchRef, ref);
-    const translate = useI18n("Search");
+
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
 
     const handleChange = (newValue: string) => {
@@ -150,33 +148,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
 
     const showClearButton =
       clearButton && !inputProps.disabled && (value ?? internalValue);
-
-    const ClearButton = () =>
-      themeContext ? (
-        <Button
-          className={cn("navds-search__button-clear")}
-          variant="tertiary"
-          data-color="neutral"
-          size={size === "medium" ? "small" : "xsmall"}
-          icon={<XMarkIcon aria-hidden />}
-          title={clearButtonLabel || translate("clear")}
-          hidden={!showClearButton}
-          onClick={(event) => handleClear({ trigger: "Click", event })}
-          type="button"
-        />
-      ) : (
-        <button
-          type="button"
-          onClick={(event) => handleClear({ trigger: "Click", event })}
-          className={cn("navds-search__button-clear")}
-          hidden={!showClearButton}
-        >
-          <span className={cn("navds-sr-only")}>
-            {clearButtonLabel || translate("clear")}
-          </span>
-          <XMarkIcon aria-hidden />
-        </button>
-      );
 
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -246,7 +217,13 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               )}
               {...(htmlSize ? { size: Number(htmlSize) } : {})}
             />
-            <ClearButton />
+            {showClearButton && (
+              <ClearButton
+                handleClear={handleClear}
+                size={size}
+                clearButtonLabel={clearButtonLabel}
+              />
+            )}
           </div>
           <SearchContext.Provider
             value={{
@@ -275,6 +252,45 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     );
   },
 ) as SearchComponent;
+
+type SearchClearButtonProps = Pick<SearchProps, "size" | "clearButtonLabel"> & {
+  handleClear: (clearEvent: SearchClearEvent) => void;
+};
+
+function ClearButton({
+  size,
+  clearButtonLabel,
+  handleClear,
+}: SearchClearButtonProps) {
+  const { cn } = useRenameCSS();
+
+  const themeContext = useThemeInternal(false);
+  const translate = useI18n("Search");
+
+  return themeContext ? (
+    <Button
+      className={cn("navds-search__button-clear")}
+      variant="tertiary"
+      data-color="neutral"
+      size={size === "medium" ? "small" : "xsmall"}
+      icon={<XMarkIcon aria-hidden />}
+      title={clearButtonLabel || translate("clear")}
+      onClick={(event) => handleClear({ trigger: "Click", event })}
+      type="button"
+    />
+  ) : (
+    <button
+      type="button"
+      onClick={(event) => handleClear({ trigger: "Click", event })}
+      className={cn("navds-search__button-clear")}
+    >
+      <span className={cn("navds-sr-only")}>
+        {clearButtonLabel || translate("clear")}
+      </span>
+      <XMarkIcon aria-hidden />
+    </button>
+  );
+}
 
 Search.Button = SearchButton;
 
