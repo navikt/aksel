@@ -7,20 +7,25 @@ const eyebrowMap = {
   templates_artikkel: "Maler",
 };
 
-type DesignsystemetEyebrowProps = {
-  type?: "komponent_artikkel" | "ds_artikkel" | "templates_artikkel";
-};
+type DesignsystemetEyebrowProps =
+  | {
+      type?: "komponent_artikkel" | "ds_artikkel" | "templates_artikkel";
+      text?: never;
+    }
+  | { type?: never; text: string };
 
-function DesignsystemetEyebrow({ type }: DesignsystemetEyebrowProps) {
-  if (!type) {
-    return null;
-  }
-
-  return (
+function DesignsystemetEyebrow({ type, text }: DesignsystemetEyebrowProps) {
+  if (type) {
     <BodyShort className={styles.pageHeaderEyebrow}>
       {eyebrowMap[type]}
-    </BodyShort>
-  );
+    </BodyShort>;
+  }
+
+  if (text) {
+    return <BodyShort className={styles.pageHeaderEyebrow}>{text}</BodyShort>;
+  }
+
+  return null;
 }
 
 export { DesignsystemetEyebrow };

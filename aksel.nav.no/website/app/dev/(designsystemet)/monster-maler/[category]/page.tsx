@@ -120,7 +120,6 @@ export default async function Page({ params }: Props) {
       title={currentCategory.title}
       ingress={landingPage?.[`ingress_${currentCategory.value}`]}
       links={categoryPages}
-      type="templates_artikkel"
     />
   );
 }
