@@ -7,7 +7,7 @@ import {
   LinkAnchorOverlay,
   type LinkAnchorOverlayProps,
   LinkAnchorProps,
-} from "./LinkAnchor";
+} from "../util/link-anchor";
 
 /* ------------------------------ LinkCard Root ----------------------------- */
 type LinkCardProps = LinkAnchorOverlayProps & {

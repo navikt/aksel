@@ -7,10 +7,10 @@ import React, {
   useRef,
 } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
-import { Slot } from "../slot/Slot";
-import { useRenameCSS } from "../theme/Theme";
-import { createContext } from "../util/create-context";
-import { useMergeRefs } from "../util/hooks";
+import { Slot } from "../../slot/Slot";
+import { useRenameCSS } from "../../theme/Theme";
+import { createContext } from "../create-context";
+import { useMergeRefs } from "../hooks/useMergeRefs";
 
 type LinkAnchorOverlayContextProps = {
   anchorRef: React.RefObject<HTMLAnchorElement>;
@@ -99,10 +99,6 @@ const LinkAnchor = forwardRef<HTMLAnchorElement, LinkAnchorProps>(
         ref={mergedRefs}
         {...restProps}
         className={cn("navds-link-anchor", className)}
-        onClick={(e) => {
-          console.info("LinkAnchor clicked", e);
-          /* e.preventDefault(); */
-        }}
       >
         {children}
       </Component>
