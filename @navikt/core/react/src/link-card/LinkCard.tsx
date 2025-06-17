@@ -37,14 +37,57 @@ interface LinkCardComponent
   extends React.ForwardRefExoticComponent<
     LinkCardProps & React.RefAttributes<HTMLDivElement>
   > {
+  /**
+   * @see 🏷️ {@link LinkCardTitleProps}
+   */
   Title: typeof LinkCardTitle;
+  /**
+   * @see 🏷️ {@link LinkCardAnchorProps}
+   */
   Anchor: typeof LinkCardAnchor;
+  /**
+   * @see 🏷️ {@link LinkCardDescriptionProps}
+   */
   Description: typeof LinkCardDescription;
+  /**
+   * @see 🏷️ {@link LinkCardFooterProps}
+   */
   Footer: typeof LinkCardFooter;
+  /**
+   * @see 🏷️ {@link LinkCardIconProps}
+   */
   Icon: typeof LinkCardIcon;
+  /**
+   * @see 🏷️ {@link LinkCardImageProps}
+   */
   Image: typeof LinkCardImage;
 }
 
+/**
+ * Accessible clickable card as a link.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/linkcard)
+ * @see 🏷️ {@link LinkCardProps}
+ *
+ *
+ * @example
+ * ```tsx
+ * <LinkCard>
+ *   <LinkCard.Icon>
+ *     <IconOrPictogram />
+ *   </LinkCard.Icon>
+ *   <LinkCard.Title>
+ *     <LinkCardAnchor href="/href">
+ *       LinkCard title
+ *     </LinkCardAnchor>
+ *   </LinkCard.Title>
+ *   <LinkCard.Description>
+ *     This is a description of the link card.
+ *   </LinkCard.Description>
+ *   <LinkCard.Footer>Footer content</LinkCard.Footer>
+ * </LinkCard>
+ * ```
+ */
 export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
   (
     {
