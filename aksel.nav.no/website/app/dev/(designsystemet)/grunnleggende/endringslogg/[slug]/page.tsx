@@ -14,7 +14,6 @@ import {
 } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
-import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
@@ -23,19 +22,13 @@ import ChangelogLinkCard from "../_ui/ChangelogLinkCard";
 
 const projection =
   '{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold}';
-const ENDRINGSLOGG_WITH_NEIGHBORS_QUERY = `
+const ENDRINGSLOGG_WITH_NEIGHBORS_QUERY = defineQuery(`
   *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{
     "primary": ${projection},
     "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]${projection},
     "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]${projection}
   }
-`;
-
-export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
-  primary: ENDRINGSLOGG_QUERYResult[number];
-  previous: ENDRINGSLOGG_QUERYResult[number];
-  next: ENDRINGSLOGG_QUERYResult[number];
-};
+`);
 
 export async function generateStaticParams() {
   const { data: slugs } = await sanityFetch({
@@ -55,11 +48,10 @@ type Props = {
 export default async function (props: Props) {
   const { slug } = await props.params;
 
-  const { data: logs }: { data: ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult } =
-    await sanityFetch<typeof ENDRINGSLOGG_WITH_NEIGHBORS_QUERY>({
-      query: defineQuery(ENDRINGSLOGG_WITH_NEIGHBORS_QUERY),
-      params: { slug: `${slug}` },
-    });
+  const { data: logs } = await sanityFetch({
+    query: ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
+    params: { slug },
+  });
 
   if (!logs?.primary) {
     notFound();
@@ -134,6 +126,7 @@ export default async function (props: Props) {
           value={logs.primary.innhold as PortableTextBlock[]}
         />
       </VStack>
+
       <HGrid
         marginBlock="space-48 space-0"
         gap="space-48 space-24"
@@ -146,6 +139,7 @@ export default async function (props: Props) {
           <ChangelogLinkCard logEntry={logs.next} label="Neste endring" />
         )}
       </HGrid>
+
       <TableOfContents
         feedback={{
           name: "Endringslogg",

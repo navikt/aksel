@@ -119,12 +119,6 @@ export type Riktekst_blogg = Array<
                   _ref: string;
                   _type: "reference";
                   _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "aksel_artikkel";
                 }
               | {
@@ -262,12 +256,6 @@ export type Riktekst_accordion = Array<
                   _ref: string;
                   _type: "reference";
                   _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "aksel_artikkel";
                 }
               | {
@@ -388,12 +376,6 @@ export type Riktekst_standalone = Array<
                   _type: "reference";
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                 }
               | {
                   _ref: string;
@@ -533,12 +515,6 @@ export type Riktekst_prinsipp = Array<
                   _ref: string;
                   _type: "reference";
                   _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "aksel_artikkel";
                 }
               | {
@@ -668,12 +644,6 @@ export type Riktekst_standard = Array<
                   _type: "reference";
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                 }
               | {
                   _ref: string;
@@ -813,12 +783,6 @@ export type Riktekst_templates = Array<
                   _ref: string;
                   _type: "reference";
                   _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "aksel_artikkel";
                 }
               | {
@@ -935,7 +899,7 @@ export type Riktekst_grunnleggende = Array<
         _type: "span";
         _key: string;
       }>;
-      style?: "normal" | "h2" | "h3" | "h4" | "h5";
+      style?: "normal" | "h2" | "h3" | "h4";
       listItem?: "bullet" | "number";
       markDefs?: Array<
         | {
@@ -951,12 +915,6 @@ export type Riktekst_grunnleggende = Array<
                   _type: "reference";
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                 }
               | {
                   _ref: string;
@@ -1106,12 +1064,6 @@ export type Riktekst_grunnleggende = Array<
                     _ref: string;
                     _type: "reference";
                     _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: "aksel_artikkel";
                   }
                 | {
@@ -1187,12 +1139,6 @@ export type Riktekst_enkel = Array<{
               _ref: string;
               _type: "reference";
               _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "aksel_artikkel";
             }
           | {
@@ -1257,12 +1203,6 @@ export type Riktekst_komponent = Array<
                   _type: "reference";
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                 }
               | {
                   _ref: string;
@@ -1594,12 +1534,6 @@ export type Relatert_innhold = {
           _type: "reference";
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "ds_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
         }
       | {
           _ref: string;
@@ -1999,12 +1933,6 @@ export type Publication_flow = {
                 _ref: string;
                 _type: "reference";
                 _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "aksel_artikkel";
               }
             | {
@@ -2072,12 +2000,6 @@ export type Publication_flow = {
                 _ref: string;
                 _type: "reference";
                 _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "aksel_artikkel";
               }
             | {
@@ -2140,12 +2062,6 @@ export type Publication_flow = {
                 _type: "reference";
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "ds_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
               }
             | {
                 _ref: string;
@@ -2221,12 +2137,6 @@ export type Skrivehjelp = {
                 _type: "reference";
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "ds_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
               }
             | {
                 _ref: string;
@@ -2465,12 +2375,6 @@ export type Aksel_artikkel = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "ds_artikkel";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
       }
     | {
         _ref: string;
@@ -2739,12 +2643,6 @@ export type Aksel_forside = {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "aksel_artikkel";
         }
       | {
@@ -2980,7 +2878,6 @@ export type AllSanitySchemaTypes =
   | Skrivehjelp
   | Komponent_artikkel
   | Ds_artikkel
-  | Ds_endringslogg_artikkel
   | Ds_props
   | Aksel_artikkel
   | Aksel_blogg
@@ -3222,7 +3119,7 @@ export type DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERYResult = {
   };
 } | null;
 // Variable: GLOBAL_SEARCH_QUERY_ALL
-// Query: *[_type in ["komponent_artikkel",  "ds_artikkel",  "ds_endringslogg_artikkel",  "aksel_artikkel",  "aksel_blogg",  "aksel_prinsipp",  "aksel_standalone",  "templates_artikkel"]]{    heading,    "slug": slug.current,    "tema": undertema[]->tema->title,    ingress,    status,    _type,    "intro": pt::text(intro.body),    content,    publishedAt,    seo}
+// Query: *[_type in ["komponent_artikkel",  "ds_artikkel",  "aksel_artikkel",  "aksel_blogg",  "aksel_prinsipp",  "aksel_standalone",  "templates_artikkel"]]{    heading,    "slug": slug.current,    "tema": undertema[]->tema->title,    ingress,    status,    _type,    "intro": pt::text(intro.body),    content,    publishedAt,    seo}
 export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
   | {
       heading: string | null;
@@ -3353,18 +3250,6 @@ export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
           _type: "image";
         };
       } | null;
-    }
-  | {
-      heading: string | null;
-      slug: string | null;
-      tema: null;
-      ingress: null;
-      status: null;
-      _type: "ds_endringslogg_artikkel";
-      intro: string;
-      content: null;
-      publishedAt: null;
-      seo: null;
     }
   | {
       heading: string | null;
@@ -3538,12 +3423,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                   _ref: string;
                   _type: "reference";
                   _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                 }
               | {
@@ -3646,12 +3525,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -3744,12 +3617,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                           }
                         | {
                             _ref: string;
@@ -3892,12 +3759,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -3997,12 +3858,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -4095,12 +3950,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                     _type: "reference";
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                   }
                 | {
                     _ref: string;
@@ -4204,12 +4053,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -4302,12 +4145,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                         }
                       | {
                           _ref: string;
@@ -4429,12 +4266,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                           }
                         | {
                             _ref: string;
@@ -4578,12 +4409,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -4714,12 +4539,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                       _type: "reference";
                       _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                     }
                   | {
                       _ref: string;
@@ -4963,6 +4782,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -4990,6 +4810,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -5019,6 +4840,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -5151,12 +4973,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -5249,12 +5065,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                           }
                         | {
                             _ref: string;
@@ -5397,12 +5207,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -5502,12 +5306,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -5583,12 +5381,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                       _type: "reference";
                       _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                     }
                   | {
                       _ref: string;
@@ -5695,12 +5487,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                     _ref: string;
                     _type: "reference";
                     _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                   }
                 | {
@@ -5799,12 +5585,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -5897,12 +5677,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                         }
                       | {
                           _ref: string;
@@ -6029,12 +5803,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -6131,12 +5899,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                       _type: "reference";
                       _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                     }
                   | {
                       _ref: string;
@@ -6293,12 +6055,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                       _type: "reference";
                       _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                     }
                   | {
                       _ref: string;
@@ -6471,12 +6227,6 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -6569,12 +6319,6 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                           }
                         | {
                             _ref: string;
@@ -6717,12 +6461,6 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -6822,12 +6560,6 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -6920,12 +6652,6 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                     _type: "reference";
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                   }
                 | {
                     _ref: string;
@@ -7029,12 +6755,6 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -7127,12 +6847,6 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                         }
                       | {
                           _ref: string;
@@ -7254,12 +6968,6 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                           }
                         | {
                             _ref: string;
@@ -7403,12 +7111,6 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -7503,12 +7205,6 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                       _type: "reference";
                       _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                     }
                   | {
                       _ref: string;
@@ -7658,12 +7354,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -7756,12 +7446,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                           }
                         | {
                             _ref: string;
@@ -7904,12 +7588,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -8009,12 +7687,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -8107,12 +7779,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                     _type: "reference";
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                   }
                 | {
                     _ref: string;
@@ -8250,12 +7916,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -8348,12 +8008,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                         }
                       | {
                           _ref: string;
@@ -8480,12 +8134,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -8587,12 +8235,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -8687,12 +8329,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                       _type: "reference";
                       _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                     }
                   | {
                       _ref: string;
@@ -9081,12 +8717,6 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -9179,12 +8809,6 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                           }
                         | {
                             _ref: string;
@@ -9327,12 +8951,6 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -9432,12 +9050,6 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -9530,12 +9142,6 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                     _type: "reference";
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                   }
                 | {
                     _ref: string;
@@ -9639,12 +9245,6 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -9737,12 +9337,6 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                         }
                       | {
                           _ref: string;
@@ -9869,12 +9463,6 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -9976,12 +9564,6 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -10076,12 +9658,6 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                       _type: "reference";
                       _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                     }
                   | {
                       _ref: string;
@@ -10931,12 +10507,6 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -11029,12 +10599,6 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                           }
                         | {
                             _ref: string;
@@ -11177,12 +10741,6 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -11282,12 +10840,6 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -11380,12 +10932,6 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                     _type: "reference";
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                   }
                 | {
                     _ref: string;
@@ -11489,12 +11035,6 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -11587,12 +11127,6 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                         }
                       | {
                           _ref: string;
@@ -11719,12 +11253,6 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -11826,12 +11354,6 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -11926,12 +11448,6 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                       _type: "reference";
                       _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                     }
                   | {
                       _ref: string;
@@ -12069,12 +11585,6 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -12167,12 +11677,6 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                           }
                         | {
                             _ref: string;
@@ -12315,12 +11819,6 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                               _ref: string;
                               _type: "reference";
                               _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                             }
                           | {
@@ -12420,12 +11918,6 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -12518,12 +12010,6 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                     _type: "reference";
                     _weak?: boolean;
                     [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                   }
                 | {
                     _ref: string;
@@ -12627,12 +12113,6 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -12725,12 +12205,6 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                         }
                       | {
                           _ref: string;
@@ -12857,12 +12331,6 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                             _ref: string;
                             _type: "reference";
                             _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                           }
                         | {
@@ -12964,12 +12432,6 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                       _ref: string;
                       _type: "reference";
                       _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "komponent_artikkel";
                     }
                   | {
@@ -13064,12 +12526,6 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                       _type: "reference";
                       _weak?: boolean;
                       [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
                     }
                   | {
                       _ref: string;
@@ -13192,6 +12648,78 @@ export type SITEMAP_ARTICLES_BY_TYPE_QUERYResult = Array<
     }
 >;
 
+// Source: ../app/dev/(designsystemet)/grunnleggende/endringslogg/[slug]/page.tsx
+// Variable: ENDRINGSLOGG_WITH_NEIGHBORS_QUERY
+// Query: *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{    "primary": {heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold},    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold},    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold}  }
+export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
+  primary: {
+    heading: string | null;
+    slug: string | null;
+    endringsdato: string | null;
+    endringstype: "design" | "dokumentasjon" | "kode" | null;
+    fremhevet: boolean | null;
+    herobilde: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      dekorativt?: boolean;
+      alt?: string;
+      _type: "image";
+    } | null;
+    innhold: Riktekst_grunnleggende | null;
+  };
+  previous: {
+    heading: string | null;
+    slug: string | null;
+    endringsdato: string | null;
+    endringstype: "design" | "dokumentasjon" | "kode" | null;
+    fremhevet: boolean | null;
+    herobilde: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      dekorativt?: boolean;
+      alt?: string;
+      _type: "image";
+    } | null;
+    innhold: Riktekst_grunnleggende | null;
+  } | null;
+  next: {
+    heading: string | null;
+    slug: string | null;
+    endringsdato: string | null;
+    endringstype: "design" | "dokumentasjon" | "kode" | null;
+    fremhevet: boolean | null;
+    herobilde: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      dekorativt?: boolean;
+      alt?: string;
+      _type: "image";
+    } | null;
+    innhold: Riktekst_grunnleggende | null;
+  } | null;
+} | null;
+
 // Source: ../app/dev/(designsystemet)/grunnleggende/endringslogg/page.tsx
 // Variable: ENDRINGSLOGG_QUERY
 // Query: *[_type == "ds_endringslogg_artikkel"]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer}
@@ -13228,7 +12756,7 @@ declare module "@sanity/client" {
     '*[_type == "komponenter_landingsside"][0]': DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERYResult;
     '*[_type == "grunnleggende_landingsside"][0]': DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERYResult;
     '*[_type == "templates_landingsside"][0]': DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERYResult;
-    '*[_type in ["komponent_artikkel",\n  "ds_artikkel",\n  "ds_endringslogg_artikkel",\n  "aksel_artikkel",\n  "aksel_blogg",\n  "aksel_prinsipp",\n  "aksel_standalone",\n  "templates_artikkel"]]{\n    heading,\n    "slug": slug.current,\n    "tema": undertema[]->tema->title,\n    ingress,\n    status,\n    _type,\n    "intro": pt::text(intro.body),\n    content,\n    publishedAt,\n    seo\n}': GLOBAL_SEARCH_QUERY_ALLResult;
+    '*[_type in ["komponent_artikkel",\n  "ds_artikkel",\n  "aksel_artikkel",\n  "aksel_blogg",\n  "aksel_prinsipp",\n  "aksel_standalone",\n  "templates_artikkel"]]{\n    heading,\n    "slug": slug.current,\n    "tema": undertema[]->tema->title,\n    ingress,\n    status,\n    _type,\n    "intro": pt::text(intro.body),\n    content,\n    publishedAt,\n    seo\n}': GLOBAL_SEARCH_QUERY_ALLResult;
     '*[_type == "komponent_artikkel" && slug.current == $slug][0]\n  {\n    ...,\n    intro{\n      ...,\n      body[]{\n        ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n      }\n    },\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n    },\n}': KOMPONENT_BY_SLUG_QUERYResult;
     '*[_type == $docType  && kategori == $category]\n  {\n    _id,\n    heading,\n    "slug": slug.current,\n    status,\n    kategori,\n    "sidebarindex": sidebarindex,\n    "description": seo.meta\n}': DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult;
     '*[_type == $docType && defined(kategori)]{\n  _id,\n  heading,\n  "slug": slug.current,\n  status,\n  kategori,\n  sidebarindex\n}': DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult;
@@ -13251,6 +12779,7 @@ declare module "@sanity/client" {
     '*[_id == $id][0]{\n      "id": _id,\n      "title": heading,\n      "editors": contributors[]->email,\n      "slug": slug.current,\n      "contacts": undertema[]->tema->contacts[]->email\n    }': DOCUMENT_BY_ID_FOR_SLACK_QUERYResult;
     '\n{\n      "frontpage": *[_type == "aksel_forside"][0]._updatedAt,\n      "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,\n      "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,\n}\n  ': SITEMAP_LANDINGPAGES_QUERYResult;
     '\n  *[_type in $doctypes]{\n    "slug": slug.current,\n    _updatedAt\n  }\n  ': SITEMAP_ARTICLES_BY_TYPE_QUERYResult;
+    '\n  *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{\n    "primary": {heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold},\n    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold},\n    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold}\n  }\n': ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult;
     '*[_type == "ds_endringslogg_artikkel"]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer}': ENDRINGSLOGG_QUERYResult;
   }
 }

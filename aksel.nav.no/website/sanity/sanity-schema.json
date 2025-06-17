@@ -596,32 +596,6 @@
                                       "optional": true
                                     }
                                   },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
                                   "dereferencesTo": "aksel_artikkel"
                                 },
                                 {
@@ -1385,32 +1359,6 @@
                                       "optional": true
                                     }
                                   },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
                                   "dereferencesTo": "aksel_artikkel"
                                 },
                                 {
@@ -2089,32 +2037,6 @@
                                     }
                                   },
                                   "dereferencesTo": "ds_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
                                 },
                                 {
                                   "type": "object",
@@ -2888,32 +2810,6 @@
                                       "optional": true
                                     }
                                   },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
                                   "dereferencesTo": "aksel_artikkel"
                                 },
                                 {
@@ -3637,32 +3533,6 @@
                                     }
                                   },
                                   "dereferencesTo": "ds_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
                                 },
                                 {
                                   "type": "object",
@@ -4436,32 +4306,6 @@
                                       "optional": true
                                     }
                                   },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
                                   "dereferencesTo": "aksel_artikkel"
                                 },
                                 {
@@ -5200,32 +5044,6 @@
                                     }
                                   },
                                   "dereferencesTo": "ds_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
                                 },
                                 {
                                   "type": "object",
@@ -6048,32 +5866,6 @@
                                               "optional": true
                                             }
                                           },
-                                          "dereferencesTo": "ds_endringslogg_artikkel"
-                                        },
-                                        {
-                                          "type": "object",
-                                          "attributes": {
-                                            "_ref": {
-                                              "type": "objectAttribute",
-                                              "value": {
-                                                "type": "string"
-                                              }
-                                            },
-                                            "_type": {
-                                              "type": "objectAttribute",
-                                              "value": {
-                                                "type": "string",
-                                                "value": "reference"
-                                              }
-                                            },
-                                            "_weak": {
-                                              "type": "objectAttribute",
-                                              "value": {
-                                                "type": "boolean"
-                                              },
-                                              "optional": true
-                                            }
-                                          },
                                           "dereferencesTo": "aksel_artikkel"
                                         },
                                         {
@@ -6484,32 +6276,6 @@
                                   "optional": true
                                 }
                               },
-                              "dereferencesTo": "ds_endringslogg_artikkel"
-                            },
-                            {
-                              "type": "object",
-                              "attributes": {
-                                "_ref": {
-                                  "type": "objectAttribute",
-                                  "value": {
-                                    "type": "string"
-                                  }
-                                },
-                                "_type": {
-                                  "type": "objectAttribute",
-                                  "value": {
-                                    "type": "string",
-                                    "value": "reference"
-                                  }
-                                },
-                                "_weak": {
-                                  "type": "objectAttribute",
-                                  "value": {
-                                    "type": "boolean"
-                                  },
-                                  "optional": true
-                                }
-                              },
                               "dereferencesTo": "aksel_artikkel"
                             },
                             {
@@ -6870,32 +6636,6 @@
                                     }
                                   },
                                   "dereferencesTo": "ds_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
                                 },
                                 {
                                   "type": "object",
@@ -8786,32 +8526,6 @@
                             "optional": true
                           }
                         },
-                        "dereferencesTo": "ds_endringslogg_artikkel"
-                      },
-                      {
-                        "type": "object",
-                        "attributes": {
-                          "_ref": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          },
-                          "_type": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string",
-                              "value": "reference"
-                            }
-                          },
-                          "_weak": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "boolean"
-                            },
-                            "optional": true
-                          }
-                        },
                         "dereferencesTo": "aksel_artikkel"
                       },
                       {
@@ -10033,6 +9747,13 @@
           "name": "riktekst_grunnleggende"
         },
         "optional": true
+      },
+      "visMer": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
       }
     }
   },
@@ -11066,32 +10787,6 @@
                                       "optional": true
                                     }
                                   },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
                                   "dereferencesTo": "aksel_artikkel"
                                 },
                                 {
@@ -11474,32 +11169,6 @@
                                       "optional": true
                                     }
                                   },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
                                   "dereferencesTo": "aksel_artikkel"
                                 },
                                 {
@@ -11857,32 +11526,6 @@
                                     }
                                   },
                                   "dereferencesTo": "ds_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
                                 },
                                 {
                                   "type": "object",
@@ -12302,32 +11945,6 @@
                                     }
                                   },
                                   "dereferencesTo": "ds_artikkel"
-                                },
-                                {
-                                  "type": "object",
-                                  "attributes": {
-                                    "_ref": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "_type": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "string",
-                                        "value": "reference"
-                                      }
-                                    },
-                                    "_weak": {
-                                      "type": "objectAttribute",
-                                      "value": {
-                                        "type": "boolean"
-                                      },
-                                      "optional": true
-                                    }
-                                  },
-                                  "dereferencesTo": "ds_endringslogg_artikkel"
                                 },
                                 {
                                   "type": "object",
@@ -13307,191 +12924,6 @@
     }
   },
   {
-    "name": "ds_endringslogg_artikkel",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "ds_endringslogg_artikkel"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "heading": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "slug": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "slug"
-        },
-        "optional": true
-      },
-      "endringsdato": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "endringstype": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "string",
-              "value": "design"
-            },
-            {
-              "type": "string",
-              "value": "dokumentasjon"
-            },
-            {
-              "type": "string",
-              "value": "kode"
-            }
-          ]
-        },
-        "optional": true
-      },
-      "fremhevet": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      },
-      "herobilde": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "asset": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "object",
-                "attributes": {
-                  "_ref": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  },
-                  "_type": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string",
-                      "value": "reference"
-                    }
-                  },
-                  "_weak": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "boolean"
-                    },
-                    "optional": true
-                  }
-                },
-                "dereferencesTo": "sanity.imageAsset"
-              },
-              "optional": true
-            },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
-              },
-              "optional": true
-            },
-            "hotspot": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "inline",
-                "name": "sanity.imageHotspot"
-              },
-              "optional": true
-            },
-            "crop": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "inline",
-                "name": "sanity.imageCrop"
-              },
-              "optional": true
-            },
-            "dekorativt": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "boolean"
-              },
-              "optional": true
-            },
-            "alt": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "_type": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string",
-                "value": "image"
-              }
-            }
-          }
-        },
-        "optional": true
-      },
-      "innhold": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_grunnleggende"
-        },
-        "optional": true
-      },
-      "visMer": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      }
-    }
-  },
-  {
     "name": "ds_props",
     "type": "document",
     "attributes": {
@@ -13916,32 +13348,6 @@
                   }
                 },
                 "dereferencesTo": "ds_artikkel"
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_ref": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  },
-                  "_type": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string",
-                      "value": "reference"
-                    }
-                  },
-                  "_weak": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "boolean"
-                    },
-                    "optional": true
-                  }
-                },
-                "dereferencesTo": "ds_endringslogg_artikkel"
               },
               {
                 "type": "object",
@@ -15452,32 +14858,6 @@
                           }
                         },
                         "dereferencesTo": "ds_artikkel"
-                      },
-                      {
-                        "type": "object",
-                        "attributes": {
-                          "_ref": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          },
-                          "_type": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string",
-                              "value": "reference"
-                            }
-                          },
-                          "_weak": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "boolean"
-                            },
-                            "optional": true
-                          }
-                        },
-                        "dereferencesTo": "ds_endringslogg_artikkel"
                       },
                       {
                         "type": "object",

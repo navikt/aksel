@@ -4,13 +4,13 @@ import { PortableTextBlock } from "next-sanity";
 import { version } from "react";
 import { BodyShort, BoxNew, Heading, Tag, VStack } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
+import { ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult } from "@/app/_sanity/query-types";
 import {
   LinkCard,
   LinkCardAnchor,
   LinkCardTitle,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { capitalize } from "@/utils";
-import type { ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult } from "../[slug]/page";
 import styles from "../_ui/Changelog.module.css";
 import { bumpHeadingLevels } from "./utils";
 
@@ -20,7 +20,7 @@ const ChangelogLinkCard = ({
   logEntry,
   label,
 }: {
-  logEntry: ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult["primary"];
+  logEntry: NonNullable<ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult>["primary"];
   label: string;
 }) => (
   <VStack gap="space-16">
