@@ -71,20 +71,24 @@
 }
 
 .logEntryHighlight {
-  animation: highlightFade 1s ease 1;
+  animation: highlightFade 1.5s ease 1;
+  border-radius: var(--ax-radius-12);
 }
 
 @keyframes highlightFade {
   0% {
     box-shadow: none;
-    background-color: none;
+    background-color: rgb(0 0 0 / 0);
   }
 
-  50% {
-    /* box-shadow: 0 0 0 16px var(--ax-border-neutral-subtle);
-    background-color: var(--ax-border-neutral-subtle); */
-    box-shadow: 0 0 0 16px var(--aksel-brand-pink-100);
-    background-color: var(--aksel-brand-pink-100);
+  10% {
+    box-shadow: none;
+    background-color: rgb(0 0 0 / 0);
+  }
+
+  60% {
+    box-shadow: 0 0 0 16px var(--ax-border-neutral-subtle);
+    background-color: var(--ax-border-neutral-subtle);
   }
 
   100% {
@@ -94,7 +98,6 @@
 }
 
 .tag {
-  border-radius: var(--ax-radius-4);
   background-color: var(--aksel-brand-pink-700);
 }
 

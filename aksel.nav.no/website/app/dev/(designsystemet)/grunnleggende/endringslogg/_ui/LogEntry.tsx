@@ -87,7 +87,7 @@ export default function LogEntry({
         setTimeout(() => {
           // setShouldFlash(true);
           logEntryContainer.current?.scrollIntoView({
-            behavior: "smooth",
+            behavior: "instant",
             block: "start",
           });
         }, 1);
