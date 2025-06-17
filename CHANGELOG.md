@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.23.1
+
+### @navikt/ds-react
+
+- Darkside: Search now correctly respects 'clearButton'-prop when set to false. ([#3854](https://github.com/navikt/aksel/pull/3854))
+
 ## 7.23.0
 
 ### @navikt/ds-react
