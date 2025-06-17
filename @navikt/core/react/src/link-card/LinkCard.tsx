@@ -25,7 +25,19 @@ type LinkCardProps = LinkAnchorOverlayProps & {
   isPressed?: boolean;
 };
 
-const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
+interface LinkCardComponent
+  extends React.ForwardRefExoticComponent<
+    LinkCardProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Title: typeof LinkCardTitle;
+  Anchor: typeof LinkCardAnchor;
+  Description: typeof LinkCardDescription;
+  Footer: typeof LinkCardFooter;
+  Icon: typeof LinkCardIcon;
+  Image: typeof LinkCardImage;
+}
+
+export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
   (
     {
       children,
@@ -53,7 +65,7 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
       </LinkAnchorOverlay>
     );
   },
-);
+) as LinkCardComponent;
 
 /* ---------------------------- LinkCard Title ---------------------------- */
 type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
@@ -66,7 +78,7 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
   as?: "span" | "h2" | "h3" | "h4" | "h5" | "h6";
 };
 
-const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
+export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
   ({ children, as = "span", className }: LinkCardTitleProps, forwardedRef) => {
     const { cn } = useRenameCSS();
 
@@ -87,18 +99,19 @@ const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
 /* ---------------------------- LinkCard Anchor ---------------------------- */
 type LinkCardAnchorProps = LinkAnchorProps;
 
-const LinkCardAnchor = forwardRef<HTMLAnchorElement, LinkCardAnchorProps>(
-  (props: LinkCardAnchorProps, forwardedRef) => {
-    return <LinkAnchor ref={forwardedRef} {...props} />;
-  },
-);
+export const LinkCardAnchor = forwardRef<
+  HTMLAnchorElement,
+  LinkCardAnchorProps
+>((props: LinkCardAnchorProps, forwardedRef) => {
+  return <LinkAnchor ref={forwardedRef} {...props} />;
+});
 
 /* ---------------------------- LinkCard Description ---------------------------- */
 interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const LinkCardDescription = forwardRef<
+export const LinkCardDescription = forwardRef<
   HTMLDivElement,
   LinkCardDescriptionProps
 >(({ children }: LinkCardDescriptionProps, forwardedRef) => {
@@ -121,7 +134,7 @@ interface LinkCardFooterProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const LinkCardFooter = forwardRef<HTMLDivElement, LinkCardFooterProps>(
+export const LinkCardFooter = forwardRef<HTMLDivElement, LinkCardFooterProps>(
   ({ children }: LinkCardFooterProps, forwardedRef) => {
     const { cn } = useRenameCSS();
 
@@ -138,7 +151,7 @@ interface LinkCardIconProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
+export const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
   ({ children, className, ...restProps }: LinkCardIconProps, forwardedRef) => {
     const { cn } = useRenameCSS();
 
@@ -175,7 +188,7 @@ interface LinkCardImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   aspectRatio?: ImageAspectRatio;
 }
 
-const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
+export const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
   (
     {
       className,
@@ -209,15 +222,12 @@ const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
   },
 );
 
-export {
-  LinkCard,
-  LinkCardAnchor,
-  LinkCardDescription,
-  LinkCardFooter,
-  LinkCardIcon,
-  LinkCardImage,
-  LinkCardTitle,
-};
+LinkCard.Title = LinkCardTitle;
+LinkCard.Anchor = LinkCardAnchor;
+LinkCard.Description = LinkCardDescription;
+LinkCard.Footer = LinkCardFooter;
+LinkCard.Icon = LinkCardIcon;
+LinkCard.Image = LinkCardImage;
 
 export type {
   LinkCardAnchorProps,
