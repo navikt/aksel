@@ -150,8 +150,15 @@
   background: linear-gradient(var(--herobilde-bg-degrees), var(--herobilde-bg-color-first), var(--herobilde-bg-color-last)); */
 }
 
-.portableText > h3:first-of-type {
+.portableTextFirstHeading > h3:first-of-type {
   margin-top: 0;
+}
+
+.portableTextInCard {
+  flex-grow: 1;
+  margin-bottom: var(--ax-space-16);
+  overflow: hidden;
+  mask-image: linear-gradient(rgba(0 0 0/1) 0%, rgba(0 0 0/1) calc(100% - 2rem), rgba(0 0 0/ 0) calc(100% - 0.5rem));
 }
 
 .visMerButton {

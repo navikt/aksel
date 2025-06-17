@@ -136,8 +136,8 @@ export default async function (props: Props) {
       </VStack>
       <HGrid
         marginBlock="space-48 space-0"
-        gap="space-24"
-        columns={{ xs: 1, md: 2 }}
+        gap="space-48 space-24"
+        columns={{ xs: 1, md: logs.previous && logs.next ? 2 : 1 }}
       >
         {logs.previous && (
           <ChangelogLinkCard logEntry={logs.previous} label="Forrige endring" />

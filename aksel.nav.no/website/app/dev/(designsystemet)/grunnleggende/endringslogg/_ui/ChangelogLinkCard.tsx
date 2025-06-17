@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
+import { version } from "react";
 import { BodyShort, BoxNew, Heading, Tag, VStack } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import {
@@ -11,6 +12,8 @@ import {
 import type { ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult } from "../[slug]/page";
 import styles from "../_ui/Changelog.module.css";
 import { bumpHeadingLevels } from "./utils";
+
+const inertValue = parseInt(version.split(".")[0]) > 18; // Support for inert was added in React 19
 
 const ChangelogLinkCard = ({
   logEntry,
@@ -31,14 +34,8 @@ const ChangelogLinkCard = ({
           </LinkCardAnchor>
         </LinkCardTitle>
         <CustomPortableText
-          className={styles.portableText}
-          // inert={true}
-          style={{
-            overflow: "hidden",
-
-            maskImage:
-              "linear-gradient(rgba(0 0 0/1) calc(100% - 5rem), rgba(0 0 0/ 0) calc(100% - 0.5rem))",
-          }}
+          className={`${styles.portableTextFirstHeading} ${styles.portableTextInCard}`}
+          inert={inertValue}
           value={bumpHeadingLevels(logEntry.innhold) as PortableTextBlock[]}
         />
         <BoxNew>

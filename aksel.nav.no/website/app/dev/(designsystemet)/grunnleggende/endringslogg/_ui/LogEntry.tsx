@@ -8,7 +8,6 @@ import { useRef, useState, version } from "react";
 import type { Image as SanityImage } from "sanity";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import {
-  Bleed,
   BodyShort,
   Box,
   Button,
@@ -164,70 +163,69 @@ export default function LogEntry({
             )}
           </HStack>
           {/* TODO: [endringslogg] Decide 'Vis mer' transition on collapse */}
-          <Bleed
-            marginInline={{ xs: "space-48 space-16", sm: "space-0 space-0" }}
+          {/* TODO: [endringslogg] Test correct focus/screen reader flow after collapse of 'Vis mer' */}
+          {/* TODO: [endringslogg] Move 'Vis mer' into standalone component */}
+          <VStack
+            marginBlock={fremhevet ? "space-0 space-32" : "space-0 space-64"}
+            padding={fremhevet ? "space-16" : "space-0"}
+            className={`${styles.innhold}${
+              fremhevet ? ` ${styles.innholdFremhevet}` : ""
+            } ${shouldFlash ? ` ${styles.logEntryHighlight}` : ""} `}
+            data-color={fremhevet ? "aksel-brand-pink" : ""}
           >
-            <VStack
-              marginBlock={fremhevet ? "space-0 space-32" : "space-0 space-64"}
-              padding={fremhevet ? "space-16" : "space-0"}
-              className={`${styles.innhold}${
-                fremhevet ? ` ${styles.innholdFremhevet}` : ""
-              } ${shouldFlash ? ` ${styles.logEntryHighlight}` : ""} `}
-              data-color={fremhevet ? "aksel-brand-pink" : ""}
-            >
-              <Heading size="large" level="2" spacing>
-                <Link
-                  href={`./endringslogg/${slug?.current}`}
-                  data-aksel-heading-color
-                >
-                  {heading}
-                </Link>
-              </Heading>
-              {visMer && (
-                <Button
-                  size="small"
-                  variant="secondary-neutral"
-                  icon={<ChevronIcon />}
-                  className={`${styles.visMerButton}${
-                    fremhevet ? ` ${styles.visMerButtonFremhevet}` : ""
-                  }`}
-                  onClick={toggleExpansion}
-                >
-                  {expanded ? "Vis mindre" : "Vis mer"}
-                </Button>
-              )}
-              {visMer ? (
-                <div
-                  className={`${styles.visMerContainer} ${
-                    expanded ? styles.visMerExpanded : styles.visMerCollapsed
-                  }${
-                    !expanded && fremhevet
-                      ? ` ${styles.visMerCollapsedFremhevet}`
-                      : ""
-                  }`}
-                  inert={!expanded ? inertValue : false}
-                >
-                  {fremhevet && herobilde?.asset && (
-                    <Hero herobilde={herobilde} index={index} />
-                  )}
-                  <CustomPortableText
-                    className={styles.portableText}
-                    value={innhold as PortableTextBlock[]}
-                  />
-                </div>
-              ) : (
-                <>
-                  {fremhevet && herobilde?.asset && (
-                    <Hero herobilde={herobilde} index={index} />
-                  )}
-                  <CustomPortableText
-                    className={styles.portableText}
-                    value={innhold as PortableTextBlock[]}
-                  />
-                </>
-              )}
-            </VStack>
-          </Bleed>
+            <Heading size="large" level="2" spacing>
+              <Link
+                href={`./endringslogg/${slug?.current}`}
+                data-aksel-heading-color
+              >
+                {heading}
+              </Link>
+            </Heading>
+            {visMer && (
+              <Button
+                size="small"
+                variant="secondary-neutral"
+                icon={<ChevronIcon />}
+                className={`${styles.visMerButton}${
+                  fremhevet ? ` ${styles.visMerButtonFremhevet}` : ""
+                }`}
+                onClick={toggleExpansion}
+              >
+                {expanded ? "Vis mindre" : "Vis mer"}
+              </Button>
+            )}
+
+            {visMer ? (
+              <div
+                className={`${styles.visMerContainer} ${
+                  expanded ? styles.visMerExpanded : styles.visMerCollapsed
+                }${
+                  !expanded && fremhevet
+                    ? ` ${styles.visMerCollapsedFremhevet}`
+                    : ""
+                }`}
+                inert={!expanded ? inertValue : false}
+              >
+                {fremhevet && herobilde?.asset && (
+                  <Hero herobilde={herobilde} index={index} />
+                )}
+                <CustomPortableText
+                  className={styles.portableTextFirstHeading}
+                  value={innhold as PortableTextBlock[]}
+                />
+              </div>
+            ) : (
+              <>
+                {fremhevet && herobilde?.asset && (
+                  <Hero herobilde={herobilde} index={index} />
+                )}
+                <CustomPortableText
+                  className={styles.portableTextFirstHeading}
+                  value={innhold as PortableTextBlock[]}
+                />
+              </>
+            )}
+          </VStack>
         </VStack>
       </HStack>
     </li>
