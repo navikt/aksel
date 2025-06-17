@@ -589,7 +589,10 @@ function IconDemo() {
       asChild
       padding="space-8"
       borderRadius="12"
-      style={{ backgroundColor: "var(--ax-bg-moderate)" }}
+      style={{
+        backgroundColor: "var(--ax-bg-moderateA)",
+        border: "1px solid var(--ax-border-subtleA)",
+      }}
     >
       <LinkCardIcon>
         <SparklesIcon fontSize="2rem" />
