@@ -6,6 +6,7 @@ import { sanityFetch } from "@/app/_sanity/live";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
+import { capitalize } from "@/utils";
 import { DesignsystemetEyebrow } from "../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
 import FilterChips from "./_ui/FilterChips";
@@ -14,8 +15,10 @@ import SearchField from "./_ui/SearchField";
 
 const fields =
   "heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer";
-type ENDRINGSLOGG_QUERY =
-  `*[_type == "ds_endringslogg_artikkel"]{${typeof fields}}`;
+// It's not imported anywhere - Only for generating types
+export const ENDRINGSLOGG_QUERY = defineQuery(
+  `*[_type == "ds_endringslogg_artikkel"]{${fields}}`,
+);
 
 const startYear = 2022;
 const currentYear = new Date().getFullYear();
@@ -25,8 +28,8 @@ const years = Array.from(
 ).reverse();
 const categories = ["kode", "design", "dokumentasjon"];
 
-const getMonthAndYear = (dateStr) => {
-  return format(new Date(dateStr), "MMMM yyy", { locale: nb });
+const getMonthAndYear = (dateStr: string | null) => {
+  return format(new Date(dateStr || 0), "MMMM yyy", { locale: nb });
 };
 
 export default async function Page({ searchParams }) {
@@ -65,7 +68,7 @@ export default async function Page({ searchParams }) {
             )
           : ""
       }]{${fields}} | order(endringsdato desc)`,
-    ) as ENDRINGSLOGG_QUERY,
+    ) as typeof ENDRINGSLOGG_QUERY,
     params: {
       year: `${yearFilter}`,
       nextYear: `${yearFilter && yearFilter + 1}`,
@@ -79,8 +82,7 @@ export default async function Page({ searchParams }) {
     },
   };
 
-  const { data: logEntries } =
-    await sanityFetch<ENDRINGSLOGG_QUERY>(sanityObject);
+  const { data: logEntries } = await sanityFetch(sanityObject);
 
   // Bump headings to next heading-level for changelog list
   logEntries.forEach((logEntry) => {
@@ -92,6 +94,7 @@ export default async function Page({ searchParams }) {
           } else if (block.style === "h3") {
             block.style = "h4";
           } else if (block.style === "h4") {
+            // @ts-expect-error - h5 cannot be selected in Sanity Studio
             block.style = "h5";
           }
         }
@@ -116,25 +119,14 @@ export default async function Page({ searchParams }) {
   );
 
   const toc = groupedByMonth.map((entry) => {
-    const monthYearTag = format(
-      new Date(entry[0].endringsdato || ""),
-      "MMMM-yyy",
-      {
-        locale: nb,
-      },
-    );
-    const monthYearLowercase = format(
+    const monthYear = format(
       new Date(entry[0].endringsdato || ""),
       "MMMM yyy",
-      {
-        locale: nb,
-      },
+      { locale: nb },
     );
-    const monthYear =
-      monthYearLowercase.charAt(0).toUpperCase() + monthYearLowercase.slice(1);
     return {
-      id: monthYearTag,
-      title: monthYear,
+      id: monthYear.replace(" ", "-"),
+      title: capitalize(monthYear),
     };
   });
 
