@@ -150,7 +150,13 @@ export const EmptyHeader: StoryFn = () => (
 
 export const Small: StoryFn = () => (
   <>
-    <Modal open onClose={() => null} width="small" size="small">
+    <Modal
+      aria-label="Small modal demo"
+      open
+      onClose={() => null}
+      width="small"
+      size="small"
+    >
       <Modal.Body>
         <BodyLong size="small">Lorem ipsum dolor sit amet.</BodyLong>
       </Modal.Body>
