@@ -57,7 +57,7 @@ export default async function (props: Props) {
     notFound();
   }
 
-  const toc = logs?.primary?.innhold?.reduce(
+  const toc = logs.primary.innhold?.reduce<{ id: string; title: string }[]>(
     (filtered, block) => {
       if (block._type === "block" && block.style === "h2") {
         filtered.push({
@@ -67,8 +67,11 @@ export default async function (props: Props) {
       }
       return filtered;
     },
-    [] as { id: string; title: string }[],
+    [],
   );
+
+  const { fremhevet, endringstype, heading, endringsdato, herobilde, innhold } =
+    logs.primary;
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
@@ -76,45 +79,43 @@ export default async function (props: Props) {
         <BodyShort
           size="medium"
           className={
-            logs.primary.fremhevet
-              ? styles.kategoriFremhevet
-              : styles.kategoriInArticle
+            fremhevet ? styles.kategoriFremhevet : styles.kategoriInArticle
           }
         >
-          {logs.primary.endringstype}
+          {endringstype}
         </BodyShort>
         <Heading
           size="xlarge"
           level="1"
           spacing
-          className={logs.primary.fremhevet ? styles.headingFremhevet : ""}
+          className={fremhevet ? styles.headingFremhevet : ""}
         >
-          {logs.primary.heading}
+          {heading}
         </Heading>
         <HStack gap="space-16" marginBlock="space-0 space-28">
           <BodyShort
             size="small"
             textColor="subtle"
-            className={logs.primary.fremhevet ? styles.dateFremhevet : ""}
+            className={fremhevet ? styles.dateFremhevet : ""}
           >
-            {format(new Date(logs.primary.endringsdato || ""), "d. MMMM yyy", {
+            {format(new Date(endringsdato || ""), "d. MMMM yyy", {
               locale: nb,
             })}
           </BodyShort>
-          {logs.primary.fremhevet && (
+          {fremhevet && (
             <Tag size="xsmall" variant="neutral-filled" className={styles.tag}>
               Fremhevet
             </Tag>
           )}
         </HStack>
-        {logs.primary.fremhevet && logs.primary.herobilde?.asset && (
+        {fremhevet && herobilde?.asset && (
           <Image
             className={styles.herobilde}
-            alt={logs.primary.herobilde.alt ? logs.primary.herobilde.alt : ""}
+            alt={herobilde.alt ? herobilde.alt : ""}
             loading="lazy"
             decoding="async"
             src={
-              urlForImage(logs.primary.herobilde as SanityImage)
+              urlForImage(herobilde as SanityImage)
                 ?.auto("format")
                 .url() || ""
             }
@@ -122,15 +123,13 @@ export default async function (props: Props) {
             height={630}
           />
         )}
-        <CustomPortableText
-          value={logs.primary.innhold as PortableTextBlock[]}
-        />
+        <CustomPortableText value={innhold as PortableTextBlock[]} />
       </VStack>
 
       <HGrid
         marginBlock="space-48 space-0"
         gap="space-48 space-24"
-        columns={{ xs: 1, md: logs.previous && logs.next ? 2 : 1 }}
+        columns={{ xs: 1, md: 2 }}
       >
         {logs.previous && (
           <ChangelogLinkCard logEntry={logs.previous} label="Forrige endring" />
