@@ -23,6 +23,11 @@ type LinkCardProps = LinkAnchorOverlayProps & {
    * @default false
    */
   isPressed?: boolean;
+  /**
+   * Changes padding and default description size.
+   * @default "medium"
+   */
+  size?: "small" | "medium";
 };
 
 interface LinkCardComponent
@@ -44,6 +49,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
       className,
       isPressed = false,
       hasArrow = true,
+      size = "medium",
       ...restProps
     }: LinkCardProps,
     forwardedRef,
@@ -52,16 +58,22 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
 
     return (
       <LinkAnchorOverlay asChild>
-        <div
+        <BodyLong
+          as="div"
+          size={size}
           ref={forwardedRef}
           data-color="neutral"
           {...restProps}
-          className={cn("navds-link-card", className)}
+          className={cn(
+            "navds-link-card",
+            className,
+            `navds-link-card--${size}`,
+          )}
           data-arrow={hasArrow}
           data-pressed={isPressed}
         >
           {children}
-        </div>
+        </BodyLong>
       </LinkAnchorOverlay>
     );
   },
@@ -117,7 +129,7 @@ export const LinkCardAnchor = forwardRef<
 interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * @default "medium"
+   * @default Inherits from LinkCard size
    */
   size?: BodyLongProps["size"];
 }
@@ -125,18 +137,26 @@ interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {
 export const LinkCardDescription = forwardRef<
   HTMLDivElement,
   LinkCardDescriptionProps
->(({ children, size = "medium" }: LinkCardDescriptionProps, forwardedRef) => {
+>(({ children, size }: LinkCardDescriptionProps, forwardedRef) => {
   const { cn } = useRenameCSS();
 
+  if (size) {
+    return (
+      <BodyLong
+        as="div"
+        size={size}
+        ref={forwardedRef}
+        className={cn("navds-link-card__description")}
+      >
+        {children}
+      </BodyLong>
+    );
+  }
+
   return (
-    <BodyLong
-      as="div"
-      size={size}
-      ref={forwardedRef}
-      className={cn("navds-link-card__description")}
-    >
+    <div ref={forwardedRef} className={cn("navds-link-card__description")}>
       {children}
-    </BodyLong>
+    </div>
   );
 });
 

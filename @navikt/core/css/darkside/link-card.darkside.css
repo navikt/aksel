@@ -44,6 +44,11 @@
   }
 }
 
+.aksel-link-card--small {
+  --__axc-link-card-padding-block: var(--ax-space-12);
+  --__axc-link-card-padding-inline: var(--ax-space-16);
+}
+
 .aksel-link-card__title {
   grid-area: title;
   color: var(--ax-text-subtle);

@@ -292,6 +292,57 @@ export const NoArrowWithRichContent: Story = {
   ),
 };
 
+export const SizeMedium: Story = {
+  render: () => (
+    <LinkCard size="medium">
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </LinkCardDescription>
+      <LinkCardFooter>
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
+export const SizeSmall: Story = {
+  render: () => (
+    <LinkCard size="small">
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </LinkCardDescription>
+      <LinkCardFooter>
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
+export const SizeWithSubComponentOverrides: Story = {
+  render: () => (
+    <LinkCard size="medium">
+      <IconDemo />
+      <LinkCardTitle size="large">
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription size="small">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </LinkCardDescription>
+      <LinkCardFooter>
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
 export const Image: Story = {
   render: () => (
     <LinkCard>
