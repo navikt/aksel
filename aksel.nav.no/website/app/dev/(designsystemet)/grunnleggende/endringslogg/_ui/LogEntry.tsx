@@ -103,7 +103,7 @@ export default function LogEntry({
       <VStack width="48px" height="var(--ax-space-32)" align="center">
         <Box.New flexGrow="1" className={styles.timeline} />
       </VStack>
-      <HStack className={styles.nowrap}>
+      <HStack wrap={false}>
         {/* TODO: [endringslogg] Remove timeline and add divider on mobile */}
         {/* Dot + vertical line */}
         <VStack width="16px" align="center" marginInline="space-16 space-0">
@@ -142,7 +142,8 @@ export default function LogEntry({
                 }
               >
                 <span className={styles.capitalized}>{endringstype}</span>
-                <span>•</span>
+                <span className="sr-only">.&nbsp;</span>
+                <span aria-hidden>•</span>
                 <span>
                   {format(new Date(endringsdato || 0), "d. MMMM yyy", {
                     locale: nb,

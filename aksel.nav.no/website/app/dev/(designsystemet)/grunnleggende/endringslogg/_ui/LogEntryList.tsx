@@ -11,37 +11,37 @@ interface Props {
 
 export default function LogEntryList({ list }: Props) {
   return (
-    <ul>
+    <dl>
       {list.map((monthGroup, monthIndex) => {
         const monthAndYear = format(
           new Date(monthGroup[0].endringsdato || 0),
-          "MMMM-yyy",
+          "MMMM yyy",
           { locale: nb },
         );
         return (
-          // TODO: [endringslogg] Add aria-label on all list items?
-          <li key={"log-entry-month-" + monthIndex}>
-            <ul
-              id={monthAndYear}
-              aria-label={monthAndYear}
-              className={styles.monthContainer}
-            >
-              <MonthHeader logEntry={monthGroup[0]} index={monthIndex} />
-              {monthGroup.map((logEntry, logIndex) => (
-                <LogEntry
-                  key={"log-entry-" + logIndex}
-                  logEntry={logEntry}
-                  index={logIndex}
-                  isLastEntry={
-                    monthIndex === list.length - 1 &&
-                    logIndex === monthGroup.length - 1
-                  }
-                />
-              ))}
-            </ul>
-          </li>
+          <div key={monthAndYear}>
+            <MonthHeader monthAndYear={monthAndYear} index={monthIndex} />
+            <dd>
+              <ul
+                id={monthAndYear.replace(" ", "-")}
+                className={styles.monthContainer}
+              >
+                {monthGroup.map((logEntry, logIndex) => (
+                  <LogEntry
+                    key={"log-entry-" + logIndex}
+                    logEntry={logEntry}
+                    index={logIndex}
+                    isLastEntry={
+                      monthIndex === list.length - 1 &&
+                      logIndex === monthGroup.length - 1
+                    }
+                  />
+                ))}
+              </ul>
+            </dd>
+          </div>
         );
       })}
-    </ul>
+    </dl>
   );
 }

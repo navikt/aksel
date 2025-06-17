@@ -207,8 +207,3 @@
 .capitalized {
   text-transform: capitalize;
 }
-
-/* Flexbox utilities */
-.nowrap {
-  flex-wrap: nowrap;
-}

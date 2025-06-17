@@ -1,44 +1,35 @@
 "use client";
 
-import { format } from "date-fns";
-import { nb } from "date-fns/locale";
 import { Box, HStack, Heading, VStack } from "@navikt/ds-react";
-import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import styles from "./Changelog.module.css";
 import MonthBubble from "./MonthBubble";
 
 type Props = {
-  logEntry: ENDRINGSLOGG_QUERYResult[0];
+  monthAndYear: string;
   index: number;
 };
 
-export default function MonthHeader({ logEntry, index }: Props) {
-  const date = format(new Date(logEntry.endringsdato || 0), "MMMM yyy", {
-    locale: nb,
-  });
-
+export default function MonthHeader({ monthAndYear, index }: Props) {
   return (
-    <li key={"month-header-" + index} className={styles.monthHeader}>
-      <VStack>
-        {/* TODO: [endringslogg] Remove timeline and add divider on mobile */}
-        <HStack className={styles.monthSpacer}>
-          {index > 0 && (
-            <VStack width="48px" align="center">
-              <Box.New flexGrow="1" className={styles.timeline} />
-            </VStack>
-          )}
-        </HStack>
-        <HStack className={styles.nowrap}>
+    <dt className={styles.monthHeader}>
+      {/* TODO: [endringslogg] Remove timeline and add divider on mobile */}
+      <HStack className={styles.monthSpacer}>
+        {index > 0 && (
           <VStack width="48px" align="center">
-            <MonthBubble />
+            <Box.New flexGrow="1" className={styles.timeline} />
           </VStack>
-          <VStack justify="center" paddingInline="space-12" flexGrow="1">
-            <Heading size="small" className={styles.capitalized}>
-              {date}
-            </Heading>
-          </VStack>
-        </HStack>
-      </VStack>
-    </li>
+        )}
+      </HStack>
+      <HStack wrap={false}>
+        <VStack asChild width="48px" align="center">
+          <MonthBubble />
+        </VStack>
+        <VStack asChild justify="center" paddingInline="space-12 0">
+          <Heading as="div" size="small" className={styles.capitalized}>
+            {monthAndYear}
+          </Heading>
+        </VStack>
+      </HStack>
+    </dt>
   );
 }
