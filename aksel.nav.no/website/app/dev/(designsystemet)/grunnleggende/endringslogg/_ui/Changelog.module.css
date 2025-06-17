@@ -205,8 +205,3 @@
   margin-bottom: 3rem;
   transition: none;
 }
-
-/* Text utilities */
-.capitalized {
-  text-transform: capitalize;
-}

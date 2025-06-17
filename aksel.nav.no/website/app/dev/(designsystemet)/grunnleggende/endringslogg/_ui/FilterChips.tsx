@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useOptimistic } from "react";
 import { Chips, Label, VStack } from "@navikt/ds-react";
-import styles from "./Changelog.module.css";
+import { capitalize } from "@/utils";
 
 export default function FilterChips({
   years,
@@ -52,17 +52,17 @@ export default function FilterChips({
     label: string;
   }) => (
     <VStack gap="space-8">
-      <Label>{label}</Label>
+      <Label as="div">{label}</Label>
+      {/* TODO: Revurder aria-label */}
       <Chips aria-label={`Filtrer på ${label.toLowerCase()}`}>
         {options.map((option) => {
           const href = getHref(option);
           return (
             <Chips.Toggle
-              key={`${label.toLowerCase()}-chip-${option}`}
+              key={option}
               selected={selectedOption === option}
               checkmark={false}
               variant="neutral"
-              className={styles.capitalized}
               onMouseEnter={() => {
                 prefetch(href);
               }}
@@ -75,7 +75,7 @@ export default function FilterChips({
                 push(href);
               }}
             >
-              {`${option}`}
+              {capitalize(option.toString())}
             </Chips.Toggle>
           );
         })}

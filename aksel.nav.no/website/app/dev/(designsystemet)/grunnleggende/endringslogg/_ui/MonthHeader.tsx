@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, HStack, Heading, VStack } from "@navikt/ds-react";
+import { capitalize } from "@/utils";
 import styles from "./Changelog.module.css";
 import MonthBubble from "./MonthBubble";
 
@@ -25,8 +26,8 @@ export default function MonthHeader({ monthAndYear, index }: Props) {
           <MonthBubble />
         </VStack>
         <VStack asChild justify="center" paddingInline="space-12 0">
-          <Heading as="div" size="small" className={styles.capitalized}>
-            {monthAndYear}
+          <Heading as="div" size="small">
+            {capitalize(monthAndYear)}
           </Heading>
         </VStack>
       </HStack>

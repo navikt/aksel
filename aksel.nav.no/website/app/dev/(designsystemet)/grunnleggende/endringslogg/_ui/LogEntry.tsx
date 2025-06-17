@@ -20,6 +20,7 @@ import {
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
+import { capitalize } from "@/utils";
 import styles from "./Changelog.module.css";
 
 interface Props {
@@ -141,7 +142,7 @@ export default function LogEntry({
                     : styles.entryEyebrowNotFremhevet
                 }
               >
-                <span className={styles.capitalized}>{endringstype}</span>
+                {capitalize(endringstype || "")}
                 <span className="sr-only">.&nbsp;</span>
                 <span aria-hidden>•</span>
                 <span>

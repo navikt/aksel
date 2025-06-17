@@ -9,6 +9,7 @@ import {
   LinkCardAnchor,
   LinkCardTitle,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
+import { capitalize } from "@/utils";
 import type { ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult } from "../[slug]/page";
 import styles from "../_ui/Changelog.module.css";
 import { bumpHeadingLevels } from "./utils";
@@ -46,12 +47,8 @@ const ChangelogLinkCard = ({
           </BodyShort>
         </BoxNew>
         <BoxNew>
-          <Tag
-            size="xsmall"
-            variant="info-moderate"
-            className={styles.capitalized}
-          >
-            {logEntry.endringstype}
+          <Tag size="xsmall" variant="info-moderate">
+            {capitalize(logEntry.endringstype || "")}
           </Tag>
         </BoxNew>
       </VStack>
