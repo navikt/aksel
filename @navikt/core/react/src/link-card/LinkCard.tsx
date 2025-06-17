@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, ImgHTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
-import { BodyLong, Heading } from "../typography";
+import { BodyLong, BodyLongProps, Heading, HeadingProps } from "../typography";
 import {
   LinkAnchor,
   LinkAnchorArrow,
@@ -76,16 +76,23 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
    * @default "span"
    */
   as?: "span" | "h2" | "h3" | "h4" | "h5" | "h6";
+  /**
+   * @default "small"
+   */
+  size?: HeadingProps["size"];
 };
 
 export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
-  ({ children, as = "span", className }: LinkCardTitleProps, forwardedRef) => {
+  (
+    { children, as = "span", size = "small", className }: LinkCardTitleProps,
+    forwardedRef,
+  ) => {
     const { cn } = useRenameCSS();
 
     return (
       <Heading
         as={as}
-        size="small"
+        size={size}
         ref={forwardedRef}
         className={cn("navds-link-card__title", className)}
       >
@@ -109,18 +116,22 @@ export const LinkCardAnchor = forwardRef<
 /* ---------------------------- LinkCard Description ---------------------------- */
 interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  /**
+   * @default "medium"
+   */
+  size?: BodyLongProps["size"];
 }
 
 export const LinkCardDescription = forwardRef<
   HTMLDivElement,
   LinkCardDescriptionProps
->(({ children }: LinkCardDescriptionProps, forwardedRef) => {
+>(({ children, size = "medium" }: LinkCardDescriptionProps, forwardedRef) => {
   const { cn } = useRenameCSS();
 
   return (
     <BodyLong
       as="div"
-      size="medium"
+      size={size}
       ref={forwardedRef}
       className={cn("navds-link-card__description")}
     >
