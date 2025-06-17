@@ -39,7 +39,7 @@ const SupportSection = () => (
     <Heading level="2" size="large">
       Support
     </Heading>
-    <HGrid gap="space-24" columns={2}>
+    <HGrid gap="space-24" columns={{ md: 2 }}>
       {supportModules.map(({ title, description, link }) => (
         <BoxNew
           key={title}

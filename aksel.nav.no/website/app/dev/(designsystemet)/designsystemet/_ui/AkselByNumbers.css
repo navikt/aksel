@@ -2,6 +2,7 @@
   position: relative;
   background-color: var(--ax-bg-moderate);
   border-color: var(--ax-border-subtle);
+  overflow: hidden;
 
   &::after,
   &::before {

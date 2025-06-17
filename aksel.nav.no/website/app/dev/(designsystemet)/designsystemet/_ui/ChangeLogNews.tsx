@@ -38,7 +38,11 @@ const ChangeLogNews = ({ entries }: Props) => (
           .
         </BodyLong>
       </VStack>
-      <HGrid gap="space-24" width="1024px" maxWidth="100%" columns={3}>
+      <HGrid
+        gap="space-24"
+        width={{ xs: "100%", md: "768px", xl: "1024px" }}
+        columns={{ xs: 1, md: 2, xl: 3 }}
+      >
         {entries.map(({ heading, slug, endringsdato }) => (
           <LinkCard key={heading}>
             <LinkCardTitle as="span">

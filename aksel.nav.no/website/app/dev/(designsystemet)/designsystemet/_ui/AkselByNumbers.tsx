@@ -27,7 +27,7 @@ const numbers = [
 ];
 
 const AkselByNumbers = () => (
-  <Bleed marginInline="full">
+  <Bleed marginInline={{ md: "full" }}>
     <VStack gap="space-32" as="section">
       <VStack gap="space-8" align="center">
         <Heading level="2" size="large">
@@ -37,7 +37,11 @@ const AkselByNumbers = () => (
           Aktiv forvaltning og økende bruk.
         </BodyLong>
       </VStack>
-      <HGrid gap="space-24" width="1024px" columns={3}>
+      <HGrid
+        gap="space-24"
+        width={{ md: "768px", xl: "1024px" }}
+        columns={{ md: 2, xl: 3 }}
+      >
         {numbers.map(({ number, unit, description }, index) => {
           const dataColor = [
             "aksel-brand-teal",

@@ -3,7 +3,11 @@ import { HGrid } from "@navikt/ds-react";
 import GettingStartedCard from "./GettingStartedCard";
 
 const GettingStartedSection = () => (
-  <HGrid gap="space-24" width="768px" columns={2}>
+  <HGrid
+    gap="space-24"
+    width={{ xs: "100%", md: "768px" }}
+    columns={{ xs: 1, md: 2 }}
+  >
     <GettingStartedCard
       title="Start med design"
       description="Figma-filer og kreative arenaer"

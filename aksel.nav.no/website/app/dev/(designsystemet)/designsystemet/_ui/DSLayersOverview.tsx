@@ -28,7 +28,7 @@ const DSLayersOverview = () => (
     borderRadius="xlarge"
     padding="space-40"
     maxWidth="768px"
-    width="100%"
+    width={{ md: "768px" }}
   >
     <VStack gap="space-24" align="center">
       <VStack align="center" gap="space-16">
@@ -44,7 +44,7 @@ const DSLayersOverview = () => (
         paddingBlock="space-24 0"
         maxWidth="600px"
         width="100%"
-        paddingInline="0 space-32"
+        paddingInline={{ xs: "0", md: "0 space-32" }}
       >
         <List className="aksel-layers-list">
           <ListItem icon={<SidebarLeftIcon fontSize="24" aria-hidden="true" />}>
