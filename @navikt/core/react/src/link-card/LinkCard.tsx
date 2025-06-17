@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, ImgHTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
-import { BodyLong, BodyLongProps, Heading, HeadingProps } from "../typography";
+import { BodyLong, Heading } from "../typography";
+import { createContext } from "../util/create-context";
 import {
   LinkAnchor,
   LinkAnchorArrow,
@@ -10,25 +11,27 @@ import {
 } from "../util/link-anchor";
 
 /* ------------------------------ LinkCard Root ----------------------------- */
+
 type LinkCardProps = LinkAnchorOverlayProps & {
   /**
    * @default true
    */
   hasArrow?: boolean;
   /**
-   * Adds a pressed state to the link card.
-   * This is useful for indicating that the current context is related to the card.
-   * Should be used in tandem with `aria-current`-attribute on `LinkCardAnchor`.
-   * @see https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-current
-   * @default false
-   */
-  isPressed?: boolean;
-  /**
    * Changes padding and default description size.
    * @default "medium"
    */
   size?: "small" | "medium";
 };
+
+type LinkCardContextProps = {
+  size: LinkCardProps["size"];
+};
+
+const [LinkCardContextProvider, useLinkCardContext] =
+  createContext<LinkCardContextProps>({
+    name: "LinkCardContextProvider",
+  });
 
 interface LinkCardComponent
   extends React.ForwardRefExoticComponent<
@@ -47,7 +50,6 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     {
       children,
       className,
-      isPressed = false,
       hasArrow = true,
       size = "medium",
       ...restProps
@@ -57,24 +59,25 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     const { cn } = useRenameCSS();
 
     return (
-      <LinkAnchorOverlay asChild>
-        <BodyLong
-          as="div"
-          size={size}
-          ref={forwardedRef}
-          data-color="neutral"
-          {...restProps}
-          className={cn(
-            "navds-link-card",
-            className,
-            `navds-link-card--${size}`,
-          )}
-          data-arrow={hasArrow}
-          data-pressed={isPressed}
-        >
-          {children}
-        </BodyLong>
-      </LinkAnchorOverlay>
+      <LinkCardContextProvider size={size}>
+        <LinkAnchorOverlay asChild>
+          <BodyLong
+            as="div"
+            size={size}
+            ref={forwardedRef}
+            data-color="neutral"
+            {...restProps}
+            className={cn(
+              "navds-link-card",
+              className,
+              `navds-link-card--${size}`,
+            )}
+            data-arrow={hasArrow}
+          >
+            {children}
+          </BodyLong>
+        </LinkAnchorOverlay>
+      </LinkCardContextProvider>
     );
   },
 ) as LinkCardComponent;
@@ -88,23 +91,18 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
    * @default "span"
    */
   as?: "span" | "h2" | "h3" | "h4" | "h5" | "h6";
-  /**
-   * @default "small"
-   */
-  size?: HeadingProps["size"];
 };
 
 export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
-  (
-    { children, as = "span", size = "small", className }: LinkCardTitleProps,
-    forwardedRef,
-  ) => {
+  ({ children, as = "span", className }: LinkCardTitleProps, forwardedRef) => {
     const { cn } = useRenameCSS();
+
+    const context = useLinkCardContext();
 
     return (
       <Heading
         as={as}
-        size={size}
+        size={context?.size === "medium" ? "small" : "xsmall"}
         ref={forwardedRef}
         className={cn("navds-link-card__title", className)}
       >
@@ -128,30 +126,13 @@ export const LinkCardAnchor = forwardRef<
 /* ---------------------------- LinkCard Description ---------------------------- */
 interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  /**
-   * @default Inherits from LinkCard size
-   */
-  size?: BodyLongProps["size"];
 }
 
 export const LinkCardDescription = forwardRef<
   HTMLDivElement,
   LinkCardDescriptionProps
->(({ children, size }: LinkCardDescriptionProps, forwardedRef) => {
+>(({ children }: LinkCardDescriptionProps, forwardedRef) => {
   const { cn } = useRenameCSS();
-
-  if (size) {
-    return (
-      <BodyLong
-        as="div"
-        size={size}
-        ref={forwardedRef}
-        className={cn("navds-link-card__description")}
-      >
-        {children}
-      </BodyLong>
-    );
-  }
 
   return (
     <div ref={forwardedRef} className={cn("navds-link-card__description")}>

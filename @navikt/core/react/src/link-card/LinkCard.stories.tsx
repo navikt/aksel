@@ -47,66 +47,6 @@ export const TitleWithMutliline: Story = {
   ),
 };
 
-export const TitleSizeXLarge: Story = {
-  render: () => (
-    <LinkCard>
-      <LinkCardTitle size="xlarge">
-        <LinkCardAnchor href="/#">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit
-        </LinkCardAnchor>
-      </LinkCardTitle>
-    </LinkCard>
-  ),
-};
-
-export const TitleSizeLarge: Story = {
-  render: () => (
-    <LinkCard>
-      <LinkCardTitle size="large">
-        <LinkCardAnchor href="/#">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit
-        </LinkCardAnchor>
-      </LinkCardTitle>
-    </LinkCard>
-  ),
-};
-
-export const TitleSizeMedium: Story = {
-  render: () => (
-    <LinkCard>
-      <LinkCardTitle size="medium">
-        <LinkCardAnchor href="/#">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit
-        </LinkCardAnchor>
-      </LinkCardTitle>
-    </LinkCard>
-  ),
-};
-
-export const TitleSizeSmall: Story = {
-  render: () => (
-    <LinkCard>
-      <LinkCardTitle size="small">
-        <LinkCardAnchor href="/#">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit
-        </LinkCardAnchor>
-      </LinkCardTitle>
-    </LinkCard>
-  ),
-};
-
-export const TitleSizeXSmall: Story = {
-  render: () => (
-    <LinkCard>
-      <LinkCardTitle size="xsmall">
-        <LinkCardAnchor href="/#">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit
-        </LinkCardAnchor>
-      </LinkCardTitle>
-    </LinkCard>
-  ),
-};
-
 export const Description: Story = {
   render: () => (
     <LinkCard>
@@ -130,51 +70,6 @@ export const DescriptionWithMultiline: Story = {
       </LinkCardTitle>
       <LinkCardDescription>
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </LinkCardDescription>
-    </LinkCard>
-  ),
-};
-
-export const DescriptionLarge: Story = {
-  render: () => (
-    <LinkCard>
-      <LinkCardTitle>
-        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
-      </LinkCardTitle>
-      <LinkCardDescription size="large">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-        placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
-        velit.
-      </LinkCardDescription>
-    </LinkCard>
-  ),
-};
-
-export const DescriptionMedium: Story = {
-  render: () => (
-    <LinkCard>
-      <LinkCardTitle>
-        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
-      </LinkCardTitle>
-      <LinkCardDescription size="medium">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-        placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
-        velit.
-      </LinkCardDescription>
-    </LinkCard>
-  ),
-};
-
-export const DescriptionSmall: Story = {
-  render: () => (
-    <LinkCard>
-      <LinkCardTitle>
-        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
-      </LinkCardTitle>
-      <LinkCardDescription size="small">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-        placeat eos nesciunt aut quae ad maiores incidunt ducimus veritatis
-        velit.
       </LinkCardDescription>
     </LinkCard>
   ),
@@ -326,23 +221,6 @@ export const SizeSmall: Story = {
   ),
 };
 
-export const SizeWithSubComponentOverrides: Story = {
-  render: () => (
-    <LinkCard size="medium">
-      <IconDemo />
-      <LinkCardTitle size="large">
-        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
-      </LinkCardTitle>
-      <LinkCardDescription size="small">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </LinkCardDescription>
-      <LinkCardFooter>
-        <FooterContentDemo />
-      </LinkCardFooter>
-    </LinkCard>
-  ),
-};
-
 export const Image: Story = {
   render: () => (
     <LinkCard>
@@ -396,25 +274,6 @@ export const ImageWithIcon: Story = {
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
       </LinkCardTitle>
-    </LinkCard>
-  ),
-};
-
-export const Pressed: Story = {
-  render: () => (
-    <LinkCard isPressed>
-      <IconDemo />
-      <LinkCardTitle>
-        <LinkCardAnchor href="/#" aria-current>
-          Title
-        </LinkCardAnchor>
-      </LinkCardTitle>
-      <LinkCardDescription>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </LinkCardDescription>
-      <LinkCardFooter>
-        <FooterContentDemo />
-      </LinkCardFooter>
     </LinkCard>
   ),
 };
@@ -564,52 +423,6 @@ export const ColorRole: Story = {
   },
 };
 
-export const ColorRoleWithPressed: Story = {
-  render: () => (
-    <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
-      <LinkCard isPressed>
-        <IconDemo />
-        <LinkCardTitle>
-          <LinkCardAnchor href="/#">Default color</LinkCardAnchor>
-        </LinkCardTitle>
-        <LinkCardDescription>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </LinkCardDescription>
-        <LinkCardFooter>
-          <FooterContentDemo />
-        </LinkCardFooter>
-      </LinkCard>
-      <LinkCard isPressed data-color="brand-magenta">
-        <IconDemo />
-        <LinkCardTitle>
-          <LinkCardAnchor href="/#">Brand magenta</LinkCardAnchor>
-        </LinkCardTitle>
-        <LinkCardDescription>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </LinkCardDescription>
-        <LinkCardFooter>
-          <FooterContentDemo />
-        </LinkCardFooter>
-      </LinkCard>
-      <LinkCard isPressed data-color="brand-beige">
-        <IconDemo />
-        <LinkCardTitle>
-          <LinkCardAnchor href="/#">Brand beige</LinkCardAnchor>
-        </LinkCardTitle>
-        <LinkCardDescription>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </LinkCardDescription>
-        <LinkCardFooter>
-          <FooterContentDemo />
-        </LinkCardFooter>
-      </LinkCard>
-    </HGrid>
-  ),
-  parameters: {
-    layout: "padded",
-  },
-};
-
 /* Chromatic setup */
 export const Chromatic: Story = {
   render: (...args) => (
@@ -623,26 +436,6 @@ export const Chromatic: Story = {
         {TitleWithMutliline.render?.(...args)}
       </div>
       <div>
-        <h2>TitleSizeXLarge</h2>
-        {TitleSizeLarge.render?.(...args)}
-      </div>
-      <div>
-        <h2>TitleSizeXLarge</h2>
-        {TitleSizeLarge.render?.(...args)}
-      </div>
-      <div>
-        <h2>TitleSizeMedium</h2>
-        {TitleSizeMedium.render?.(...args)}
-      </div>
-      <div>
-        <h2>TitleSizeSmall</h2>
-        {TitleSizeSmall.render?.(...args)}
-      </div>
-      <div>
-        <h2>TitleSizeXSmall</h2>
-        {TitleSizeXSmall.render?.(...args)}
-      </div>
-      <div>
         <h2>Description</h2>
         {Description.render?.(...args)}
       </div>
@@ -650,18 +443,7 @@ export const Chromatic: Story = {
         <h2>DescriptionWithMultiline</h2>
         {DescriptionWithMultiline.render?.(...args)}
       </div>
-      <div>
-        <h2>DescriptionLarge</h2>
-        {DescriptionLarge.render?.(...args)}
-      </div>
-      <div>
-        <h2>DescriptionMedium</h2>
-        {DescriptionMedium.render?.(...args)}
-      </div>
-      <div>
-        <h2>DescriptionSmall</h2>
-        {DescriptionSmall.render?.(...args)}
-      </div>
+
       <div>
         <h2>Footer</h2>
         {Footer.render?.(...args)}
@@ -695,6 +477,14 @@ export const Chromatic: Story = {
         {NoArrowWithRichContent.render?.(...args)}
       </div>
       <div>
+        <h2>SizeMedium</h2>
+        {SizeMedium.render?.(...args)}
+      </div>
+      <div>
+        <h2>SizeSmall</h2>
+        {SizeSmall.render?.(...args)}
+      </div>
+      <div>
         <h2>Image</h2>
         {Image.render?.(...args)}
       </div>
@@ -709,10 +499,6 @@ export const Chromatic: Story = {
       <div>
         <h2>ImageWithIcon</h2>
         {ImageWithIcon.render?.(...args)}
-      </div>
-      <div>
-        <h2>Pressed</h2>
-        {Pressed.render?.(...args)}
       </div>
       <div>
         <h2>GridWithTitle</h2>
@@ -745,10 +531,6 @@ export const Chromatic: Story = {
       <div>
         <h2>ColorRole</h2>
         {ColorRole.render?.(...args)}
-      </div>
-      <div>
-        <h2>ColorRoleWithPressed</h2>
-        {ColorRoleWithPressed.render?.(...args)}
       </div>
     </VStack>
   ),

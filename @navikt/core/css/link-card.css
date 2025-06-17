@@ -34,11 +34,6 @@
     box-shadow: 0 0 0 1px var(--a-border-default);
   }
 
-  &[data-pressed="true"] {
-    border-color: var(--a-border-default);
-    box-shadow: 0 0 0 1px var(--a-border-default);
-  }
-
   &[data-arrow="false"] .navds-link-card__arrow {
     display: none;
   }
@@ -66,8 +61,9 @@
 .navds-link-card__footer {
   grid-area: footer;
   margin-block-start: var(--a-spacing-4);
-  vertical-align: bottom;
+  display: flex;
   align-self: flex-end;
+  gap: var(--ax-space-8);
 }
 
 .navds-link-card__icon {
@@ -97,4 +93,13 @@
   object-fit: cover;
   display: block;
   max-width: 100%;
+}
+
+/* Scaling based on line-height, not font-size */
+.navds-link-card__arrow {
+  font-size: 28px;
+
+  .navds-link-card--small & {
+    font-size: 24px;
+  }
 }
