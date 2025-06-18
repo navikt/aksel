@@ -255,7 +255,11 @@ export const ImageWithAspectRatio: Story = {
   render: () => (
     <LinkCard>
       <LinkCardImage aspectRatio="16/10">
-        <img src="https://picsum.photos/400" alt="alt-placeholder" />
+        <img
+          src="https://picsum.photos/400"
+          alt="alt-placeholder"
+          width="400px"
+        />
       </LinkCardImage>
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
@@ -268,7 +272,11 @@ export const ImageWithArbitraryAspectRatio: Story = {
   render: () => (
     <LinkCard>
       <LinkCardImage aspectRatio="4/2">
-        <img src="https://picsum.photos/400" alt="alt-placeholder" />
+        <img
+          src="https://picsum.photos/400"
+          alt="alt-placeholder"
+          width="400px"
+        />
       </LinkCardImage>
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
@@ -281,7 +289,139 @@ export const ImageWithIcon: Story = {
   render: () => (
     <LinkCard>
       <LinkCardImage aspectRatio="16/10">
-        <img src="https://picsum.photos/400" alt="alt-placeholder" />
+        <img
+          src="https://picsum.photos/400"
+          alt="alt-placeholder"
+          width="400px"
+        />
+      </LinkCardImage>
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const ImageWithPictureTag: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardImage aspectRatio="16/10">
+        <picture>
+          <source
+            srcSet="https://picsum.photos/401"
+            width="401px"
+            media="(orientation: portrait)"
+          />
+          <img
+            src="https://picsum.photos/399"
+            alt="alt-placeholder"
+            width="399px"
+          />
+        </picture>
+      </LinkCardImage>
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const ImageEmulatingNextjsStatic: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardImage aspectRatio="16/10">
+        <span
+          style={{
+            boxSizing: "border-box",
+            display: "inline-block",
+            overflow: "hidden",
+            width: "400px",
+            height: "400px",
+            background: "none",
+            opacity: "1",
+            border: "0px",
+            margin: "0px",
+            padding: "0px",
+            position: "relative",
+          }}
+        >
+          <img
+            src="https://picsum.photos/400"
+            alt="alt-placeholder"
+            decoding="async"
+            sizes="100vw"
+            style={{
+              position: "absolute",
+              inset: "0px",
+              boxSizing: "border-box",
+              padding: "0px",
+              border: "none",
+              margin: "auto",
+              display: "block",
+              width: "0px",
+              height: "0px",
+              minWidth: "100%",
+              maxWidth: "100%",
+              minHeight: "100%",
+              maxHeight: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </span>
+      </LinkCardImage>
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const ImageEmulatingNextjsFill: Story = {
+  render: () => (
+    <LinkCard>
+      <LinkCardImage aspectRatio="16/10">
+        <span
+          style={{
+            boxSizing: "border-box",
+            display: "inline-block",
+            overflow: "hidden",
+            width: "initial",
+            height: "initial",
+            background: "none",
+            opacity: "1",
+            border: "0px",
+            margin: "0px",
+            padding: "0px",
+            position: "absolute",
+            inset: "0px",
+          }}
+        >
+          <img
+            src="https://picsum.photos/400"
+            alt="alt-placeholder"
+            decoding="async"
+            sizes="100vw"
+            style={{
+              position: "absolute",
+              inset: "0px",
+              boxSizing: "border-box",
+              padding: "0px",
+              border: "none",
+              margin: "auto",
+              display: "block",
+              width: "0px",
+              height: "0px",
+              minWidth: "100%",
+              maxWidth: "100%",
+              minHeight: "100%",
+              maxHeight: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </span>
       </LinkCardImage>
       <IconDemo />
       <LinkCardTitle>

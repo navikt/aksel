@@ -84,6 +84,7 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   margin-block-end: var(--__ac-link-card-padding-block);
+  position: relative;
 }
 
 .navds-link-card__image-container :is(img, picture) {
