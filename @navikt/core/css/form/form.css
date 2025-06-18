@@ -17,6 +17,10 @@
   color: var(--ac-form-description, var(--__ac-form-description, var(--a-text-subtle)));
 }
 
+.navds-form-field__description:empty {
+  display: none;
+}
+
 .navds-form-field--disabled {
   opacity: 0.3;
   cursor: not-allowed;

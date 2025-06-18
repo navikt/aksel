@@ -16,6 +16,7 @@ const LINKS = [
 
 function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
   variant = variant ? variant : "default";
+
   return (
     <header
       className={clsx(styles.header, {

@@ -1,5 +1,13 @@
 # @navikt/aksel-icons
 
+## 7.23.1
+
+## 7.23.0
+
+### Minor Changes
+
+- Icons: :tada: Added new icons 'SquareGrid' and 'SquareGridFill'. ([#3851](https://github.com/navikt/aksel/pull/3851))
+
 ## 7.22.0
 
 ## 7.21.1

@@ -213,7 +213,7 @@ function AfterPublish() {
       </Heading>
       <List>
         <List.Item>
-          Er artikkelen fortsatt relevant for produktteam i NAV?
+          Er artikkelen fortsatt relevant for produktteam i Nav?
         </List.Item>
         <List.Item>
           Har du oppdatert artikkelen dersom det er behov for det?

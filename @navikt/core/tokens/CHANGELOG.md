@@ -1,5 +1,15 @@
 # @navikt/ds-tokens
 
+## 7.23.1
+
+## 7.23.0
+
+### Minor Changes
+
+- Darkside: Renamed 'data-color-role' dynamic theme attribute to 'data-color'. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: 'Accent' is now set as the default color palette in components when no other options are set. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
 ## 7.22.0
 
 ### Minor Changes

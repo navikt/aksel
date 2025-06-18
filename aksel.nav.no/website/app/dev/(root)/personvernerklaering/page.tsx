@@ -23,15 +23,15 @@ export default async function Page() {
             Personvern og sikkerhet på aksel.nav.no
           </Heading>
           <BodyLong spacing>
-            Aksel er en nettside NAV Arbeids- og velferdsdirektoratet har
+            Aksel er en nettside Nav Arbeids- og velferdsdirektoratet har
             behandlingsansvaret for.
           </BodyLong>
           <BodyLong spacing>
             Denne personvernerklæringen er knyttet til behandlingen av
             personopplysninger på dette nettstedet. For utfyllende informasjon
-            om hvordan NAV behandler dine personopplysninger, kan du lese mer i{" "}
+            om hvordan Nav behandler dine personopplysninger, kan du lese mer i{" "}
             <Link href="https://www.nav.no/informasjonskapsler">
-              NAVs generelle personvernerklæring
+              Navs generelle personvernerklæring
             </Link>
             .
           </BodyLong>
@@ -54,7 +54,7 @@ export default async function Page() {
           <BodyLong spacing>
             Vi bruker informasjonskapsler til å forbedre brukeropplevelsen og
             innholdet. Når du besøker aksel.nav.no, sender nettleseren din
-            opplysninger til NAVs analyseverktøy. For hver side du åpner, lagres
+            opplysninger til Navs analyseverktøy. For hver side du åpner, lagres
             opplysninger om hvilken side du er på, hvilken side du kommer fra og
             går til, hvilken nettleser du bruker, om du bruker PC eller mobile
             løsninger m.m. Slik kan vi forbedre flyten og opplevelsen for alle
