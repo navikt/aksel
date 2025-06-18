@@ -4,3 +4,5 @@ designsystemet:
   pulls: "#aksel-issues-pr"
   # workflows: ""
   releases: "#aksel-github-releases"
+  config:
+    silenceDependabot: "always"
