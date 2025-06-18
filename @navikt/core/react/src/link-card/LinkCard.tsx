@@ -1,9 +1,4 @@
-import React, {
-  AnchorHTMLAttributes,
-  HTMLAttributes,
-  ImgHTMLAttributes,
-  forwardRef,
-} from "react";
+import React, { HTMLAttributes, ImgHTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, Heading } from "../typography";
 import { createContext } from "../util/create-context";
@@ -66,10 +61,6 @@ interface LinkCardComponent
    * @see 🏷️ {@link LinkCardImageProps}
    */
   Image: typeof LinkCardImage;
-  /**
-   * @see 🏷️ {@link LinkCardPrimitiveProps}
-   */
-  Primitive: typeof LinkCardPrimitive;
 }
 
 /**
@@ -286,87 +277,12 @@ export const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
   },
 );
 
-/* --------------------------- LinkCard Primitive --------------------------- */
-type LinkCardPrimitiveProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  /**
-   * LinkCard title, can be a string or any React node.
-   */
-  title: React.ReactNode;
-  /**
-   * Heading tag. Use "span" if you want a non header defining card
-   * (eg. you have a lot of them all at once, such as in a grid)
-   * @default "span"
-   */
-  as?: LinkCardTitleProps["as"];
-  /**
-   * @default true
-   */
-  hasArrow?: LinkCardProps["hasArrow"];
-  /**
-   * Changes padding and typo sizes.
-   * @default "medium"
-   */
-  size?: LinkCardProps["size"];
-  /**
-   * The href attribute specifies the URL of the page the link goes to.
-   */
-  href: string;
-  /**
-   * Optional description for the link card.
-   */
-  description?: React.ReactNode;
-  /**
-   * Optional footer for the link card.
-   */
-  footer?: React.ReactNode;
-  /**
-   * Optional icon to display in the link card.
-   */
-  icon?: React.ReactNode;
-};
-
-export const LinkCardPrimitive = forwardRef<
-  HTMLAnchorElement,
-  LinkCardPrimitiveProps
->(
-  (
-    {
-      title,
-      href,
-      icon,
-      description,
-      footer,
-      as,
-      size,
-      hasArrow,
-      ...restProps
-    }: LinkCardPrimitiveProps,
-    forwardedRef,
-  ) => {
-    return (
-      <LinkCard size={size} hasArrow={hasArrow}>
-        {icon && <LinkCardIcon>{icon}</LinkCardIcon>}
-        <LinkCardTitle as={as}>
-          <LinkCardAnchor ref={forwardedRef} href={href} {...restProps}>
-            {title}
-          </LinkCardAnchor>
-        </LinkCardTitle>
-        {description && (
-          <LinkCardDescription>{description}</LinkCardDescription>
-        )}
-        {footer && <LinkCardFooter>{footer}</LinkCardFooter>}
-      </LinkCard>
-    );
-  },
-);
-
 LinkCard.Title = LinkCardTitle;
 LinkCard.Anchor = LinkCardAnchor;
 LinkCard.Description = LinkCardDescription;
 LinkCard.Footer = LinkCardFooter;
 LinkCard.Icon = LinkCardIcon;
 LinkCard.Image = LinkCardImage;
-LinkCard.Primitive = LinkCardPrimitive;
 
 export type {
   LinkCardAnchorProps,
@@ -376,5 +292,4 @@ export type {
   LinkCardImageProps,
   LinkCardProps,
   LinkCardTitleProps,
-  LinkCardPrimitiveProps,
 };

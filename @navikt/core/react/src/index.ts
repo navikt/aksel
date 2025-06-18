@@ -159,7 +159,6 @@ export {
   type LinkCardAnchorProps,
   type LinkCardIconProps,
   type LinkCardImageProps,
-  type LinkCardPrimitiveProps,
 } from "./link-card";
 
 /**
