@@ -11,6 +11,7 @@ import { Slot } from "../../slot/Slot";
 import { useRenameCSS } from "../../theme/Theme";
 import { createContext } from "../create-context";
 import { useMergeRefs } from "../hooks/useMergeRefs";
+import { AsChildProps } from "../types";
 
 type LinkAnchorOverlayContextProps = {
   anchorRef: React.RefObject<HTMLAnchorElement>;
@@ -21,10 +22,7 @@ const [LinkAnchorContextProvider, useLinkAnchorContext] =
     name: "LinkAnchorOverlayContext",
   });
 
-interface LinkAnchorOverlayProps extends HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  asChild?: boolean;
-}
+type LinkAnchorOverlayProps = HTMLAttributes<HTMLDivElement> & AsChildProps;
 
 const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
   (
@@ -77,10 +75,7 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
 );
 
 /* ------------------------------- LinkAnchor ------------------------------- */
-interface LinkAnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  children: React.ReactNode;
-  asChild?: boolean;
-}
+type LinkAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & AsChildProps;
 
 const LinkAnchor = forwardRef<HTMLAnchorElement, LinkAnchorProps>(
   (

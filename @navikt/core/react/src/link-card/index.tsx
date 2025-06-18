@@ -1,3 +1,4 @@
+"use client";
 export {
   LinkCard,
   LinkCardTitle,
@@ -6,6 +7,7 @@ export {
   LinkCardAnchor,
   LinkCardIcon,
   LinkCardImage,
+  LinkCardPrimitive,
 } from "./LinkCard";
 
 export type {
@@ -16,4 +18,5 @@ export type {
   LinkCardAnchorProps,
   LinkCardIconProps,
   LinkCardImageProps,
+  LinkCardPrimitiveProps,
 } from "./LinkCard";

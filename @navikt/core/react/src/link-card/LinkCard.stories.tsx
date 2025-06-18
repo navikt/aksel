@@ -94,6 +94,20 @@ export const FooterWithMultiline: Story = {
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
       </LinkCardTitle>
+      <LinkCardFooter>
+        <Tag size="small" variant="info">
+          Tag 1
+        </Tag>
+        <Tag size="small" variant="neutral">
+          Tag 2
+        </Tag>
+        <Tag size="small" variant="neutral">
+          Tag 3
+        </Tag>
+        <Tag size="small" variant="neutral">
+          Tag 4
+        </Tag>
+      </LinkCardFooter>
     </LinkCard>
   ),
 };
@@ -278,6 +292,22 @@ export const ImageWithIcon: Story = {
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
       </LinkCardTitle>
     </LinkCard>
+  ),
+};
+
+export const Primitive: Story = {
+  render: () => <LinkCard.Primitive title="Title" href="/#" />,
+};
+
+export const PrimitiveWithSubComponents: Story = {
+  render: () => (
+    <LinkCard.Primitive
+      title="Title"
+      href="/#"
+      description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+      footer={<FooterContentDemo />}
+      icon={<SparklesIcon fontSize="2rem" />}
+    />
   ),
 };
 
