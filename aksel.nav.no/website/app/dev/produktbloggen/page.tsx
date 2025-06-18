@@ -57,7 +57,7 @@ export default async function Page() {
             Produktbloggen
           </Heading>
           <BodyLong className={styles.overviewSubtitle}>
-            Skriverier fra produktutviklingsmiljøet i NAV. Har du eller teamet
+            Skriverier fra produktutviklingsmiljøet i Nav. Har du eller teamet
             ditt noe å dele? Ta kontakt med Team Aksel!
           </BodyLong>
         </VStack>
