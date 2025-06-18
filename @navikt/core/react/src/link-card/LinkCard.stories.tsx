@@ -241,7 +241,9 @@ export const SizeSmall: Story = {
 export const Image: Story = {
   render: () => (
     <LinkCard>
-      <LinkCardImage alt="alt-placeholder" src="https://picsum.photos/400" />
+      <LinkCardImage>
+        <img src="https://picsum.photos/400" alt="alt-placeholder" />
+      </LinkCardImage>
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
       </LinkCardTitle>
@@ -252,11 +254,9 @@ export const Image: Story = {
 export const ImageWithAspectRatio: Story = {
   render: () => (
     <LinkCard>
-      <LinkCardImage
-        alt="alt-placeholder"
-        src="https://picsum.photos/400"
-        aspectRatio="16/10"
-      />
+      <LinkCardImage aspectRatio="16/10">
+        <img src="https://picsum.photos/400" alt="alt-placeholder" />
+      </LinkCardImage>
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
       </LinkCardTitle>
@@ -267,11 +267,9 @@ export const ImageWithAspectRatio: Story = {
 export const ImageWithArbitraryAspectRatio: Story = {
   render: () => (
     <LinkCard>
-      <LinkCardImage
-        alt="alt-placeholder"
-        src="https://picsum.photos/400"
-        aspectRatio="4/2"
-      />
+      <LinkCardImage aspectRatio="4/2">
+        <img src="https://picsum.photos/400" alt="alt-placeholder" />
+      </LinkCardImage>
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
       </LinkCardTitle>
@@ -282,11 +280,9 @@ export const ImageWithArbitraryAspectRatio: Story = {
 export const ImageWithIcon: Story = {
   render: () => (
     <LinkCard>
-      <LinkCardImage
-        alt="alt-placeholder"
-        src="https://picsum.photos/400"
-        aspectRatio="16/10"
-      />
+      <LinkCardImage aspectRatio="16/10">
+        <img src="https://picsum.photos/400" alt="alt-placeholder" />
+      </LinkCardImage>
       <IconDemo />
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>

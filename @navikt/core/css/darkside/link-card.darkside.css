@@ -102,10 +102,12 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   margin-block-end: var(--__axc-link-card-padding-block);
-}
 
-.aksel-link-card__image {
-  object-fit: cover;
-  display: block;
-  max-width: 100%;
+  & :is(img, picture) {
+    object-fit: cover;
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+  }
 }
