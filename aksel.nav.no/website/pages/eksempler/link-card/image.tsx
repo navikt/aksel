@@ -1,15 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
 import { LinkCard, Tag } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
     <LinkCard>
-      <LinkCard.Image
-        src="/images/og/blogg/image-2.png"
-        alt="Alt-tekst for bilde"
-        aspectRatio="16/6"
-        width="700px"
-      />
+      <LinkCard.Image aspectRatio="16/6">
+        <img
+          src="/images/og/blogg/image-2.png"
+          alt="Alt-tekst for bilde"
+          width="700"
+        />
+      </LinkCard.Image>
       <LinkCard.Title>
         <LinkCard.Anchor href="/eksempel">Sykepenger</LinkCard.Anchor>
       </LinkCard.Title>
