@@ -94,10 +94,6 @@ export const FooterWithMultiline: Story = {
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
       </LinkCardTitle>
-      <LinkCardFooter>
-        <FooterContentDemo />
-        <FooterContentDemo />
-      </LinkCardFooter>
     </LinkCard>
   ),
 };
@@ -112,7 +108,14 @@ export const DescriptionAndFooter: Story = {
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
       </LinkCardDescription>
       <LinkCardFooter>
-        <FooterContentDemo />
+        <HStack gap="space-8">
+          <Tag size="small" variant="info">
+            Tag 1
+          </Tag>
+          <Tag size="small" variant="neutral">
+            Tag 2
+          </Tag>
+        </HStack>
       </LinkCardFooter>
     </LinkCard>
   ),

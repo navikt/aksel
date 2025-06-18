@@ -108,12 +108,3 @@
   display: block;
   max-width: 100%;
 }
-
-/* Scaling based on line-height, not font-size */
-.aksel-link-card__arrow {
-  font-size: 28px;
-
-  .aksel-link-card--small & {
-    font-size: 24px;
-  }
-}

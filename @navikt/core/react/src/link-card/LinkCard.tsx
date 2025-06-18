@@ -6,13 +6,11 @@ import {
   LinkAnchor,
   LinkAnchorArrow,
   LinkAnchorOverlay,
-  type LinkAnchorOverlayProps,
   LinkAnchorProps,
 } from "../util/link-anchor";
 
 /* ------------------------------ LinkCard Root ----------------------------- */
-
-type LinkCardProps = LinkAnchorOverlayProps & {
+interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * @default true
    */
@@ -22,10 +20,11 @@ type LinkCardProps = LinkAnchorOverlayProps & {
    * @default "medium"
    */
   size?: "small" | "medium";
-};
+}
 
 type LinkCardContextProps = {
   size: LinkCardProps["size"];
+  hasArrow: LinkCardProps["hasArrow"];
 };
 
 const [LinkCardContextProvider, useLinkCardContext] =
@@ -77,9 +76,9 @@ interface LinkCardComponent
  *     <IconOrPictogram />
  *   </LinkCard.Icon>
  *   <LinkCard.Title>
- *     <LinkCardAnchor href="/href">
+ *     <LinkCard.Anchor href="/href">
  *       LinkCard title
- *     </LinkCardAnchor>
+ *     </LinkCard.Anchor>
  *   </LinkCard.Title>
  *   <LinkCard.Description>
  *     This is a description of the link card.
@@ -102,7 +101,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     const { cn } = useRenameCSS();
 
     return (
-      <LinkCardContextProvider size={size}>
+      <LinkCardContextProvider size={size} hasArrow={hasArrow}>
         <LinkAnchorOverlay asChild>
           <BodyLong
             as="div"
@@ -115,7 +114,6 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
               className,
               `navds-link-card--${size}`,
             )}
-            data-arrow={hasArrow}
           >
             {children}
           </BodyLong>
@@ -145,12 +143,16 @@ export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
     return (
       <Heading
         as={as}
-        size={context?.size === "medium" ? "small" : "xsmall"}
+        size={context.size === "medium" ? "small" : "xsmall"}
         ref={forwardedRef}
         className={cn("navds-link-card__title", className)}
       >
         {children}
-        <LinkAnchorArrow className={cn("navds-link-card__arrow")} />
+        {context.hasArrow && (
+          <LinkAnchorArrow
+            fontSize={context.size === "medium" ? "1.75rem" : "1.5rem"}
+          />
+        )}
       </Heading>
     );
   },
@@ -159,12 +161,7 @@ export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
 /* ---------------------------- LinkCard Anchor ---------------------------- */
 type LinkCardAnchorProps = LinkAnchorProps;
 
-export const LinkCardAnchor = forwardRef<
-  HTMLAnchorElement,
-  LinkCardAnchorProps
->((props: LinkCardAnchorProps, forwardedRef) => {
-  return <LinkAnchor ref={forwardedRef} {...props} />;
-});
+export const LinkCardAnchor = LinkAnchor;
 
 /* ---------------------------- LinkCard Description ---------------------------- */
 interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {

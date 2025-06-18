@@ -35,10 +35,6 @@
   box-shadow: 0 0 0 1px var(--a-border-default);
 }
 
-.navds-link-card[data-arrow="false"] .navds-link-card__arrow {
-  display: none;
-}
-
 .navds-link-card__title {
   grid-area: title;
   color: var(--a-text-default);
@@ -93,13 +89,4 @@
   object-fit: cover;
   display: block;
   max-width: 100%;
-}
-
-/* Scaling based on line-height, not font-size */
-.navds-link-card__arrow {
-  font-size: 28px;
-}
-
-.navds-link-card--small .navds-link-card__arrow {
-  font-size: 24px;
 }
