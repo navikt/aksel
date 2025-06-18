@@ -64,6 +64,7 @@
   display: flex;
   align-self: flex-end;
   gap: var(--a-spacing-2);
+  flex-wrap: wrap;
 }
 
 .navds-link-card__icon {

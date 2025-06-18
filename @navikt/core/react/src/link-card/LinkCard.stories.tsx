@@ -95,8 +95,18 @@ export const FooterWithMultiline: Story = {
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
       </LinkCardTitle>
       <LinkCardFooter>
-        <FooterContentDemo />
-        <FooterContentDemo />
+        <Tag size="small" variant="info">
+          Tag 1
+        </Tag>
+        <Tag size="small" variant="neutral">
+          Tag 2
+        </Tag>
+        <Tag size="small" variant="neutral">
+          Tag 3
+        </Tag>
+        <Tag size="small" variant="neutral">
+          Tag 4
+        </Tag>
       </LinkCardFooter>
     </LinkCard>
   ),
