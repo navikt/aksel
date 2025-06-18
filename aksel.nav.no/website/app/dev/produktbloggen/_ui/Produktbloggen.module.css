@@ -18,13 +18,17 @@
   margin-block: var(--ax-space-48);
 }
 
-.bloggPosts {
+.bloggMain {
+  max-width: 720px;
   margin-inline: auto;
-  margin-bottom: var(--ax-space-128);
-  display: grid;
-  width: 100%;
-  padding-inline: var(--ax-space-16);
-  max-width: var(--ax-breakpoint-2xl);
+}
+
+.bloggHeading {
+  margin-bottom: var(--ax-space-20);
+}
+
+.bloggDescription {
+  margin-bottom: var(--ax-space-40);
 }
 
 .remainingPosts {
