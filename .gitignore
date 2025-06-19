@@ -76,7 +76,6 @@ yarn-error.log
 
 # Transpiled package files
 packages/**/lib
-*.d.ts
 
 .vscode
 .nvim.lua
