@@ -14,7 +14,7 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * @default true
    */
-  hasArrow?: boolean;
+  arrow?: boolean;
   /**
    * Changes padding and typo sizes.
    * @default "medium"
@@ -24,7 +24,7 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
 
 type LinkCardContextProps = {
   size: LinkCardProps["size"];
-  hasArrow: LinkCardProps["hasArrow"];
+  arrow: LinkCardProps["arrow"];
 };
 
 const [LinkCardContextProvider, useLinkCardContext] =
@@ -92,7 +92,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     {
       children,
       className,
-      hasArrow = true,
+      arrow = true,
       size = "medium",
       ...restProps
     }: LinkCardProps,
@@ -101,7 +101,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     const { cn } = useRenameCSS();
 
     return (
-      <LinkCardContextProvider size={size} hasArrow={hasArrow}>
+      <LinkCardContextProvider size={size} arrow={arrow}>
         <LinkAnchorOverlay asChild>
           <BodyLong
             as="div"
@@ -148,7 +148,7 @@ export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
         className={cn("navds-link-card__title", className)}
       >
         {children}
-        {context.hasArrow && (
+        {context.arrow && (
           <LinkAnchorArrow
             fontSize={context.size === "medium" ? "1.75rem" : "1.5rem"}
           />

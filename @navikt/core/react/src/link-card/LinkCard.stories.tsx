@@ -178,7 +178,7 @@ export const IconWithDescriptionAndFooter: Story = {
 
 export const NoArrow: Story = {
   render: () => (
-    <LinkCard hasArrow={false}>
+    <LinkCard arrow={false}>
       <IconDemo />
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
@@ -189,7 +189,7 @@ export const NoArrow: Story = {
 
 export const NoArrowWithRichContent: Story = {
   render: () => (
-    <LinkCard hasArrow={false}>
+    <LinkCard arrow={false}>
       <IconDemo />
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>

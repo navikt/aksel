@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <LinkCard hasArrow={false}>
+    <LinkCard arrow={false}>
       <LinkCard.Title>
         <LinkCard.Anchor href="/eksempel">Sykepenger</LinkCard.Anchor>
       </LinkCard.Title>
