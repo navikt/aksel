@@ -9,6 +9,7 @@ import React, {
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { Slot } from "../../slot/Slot";
 import { useRenameCSS } from "../../theme/Theme";
+import { composeEventHandlers } from "../composeEventHandlers";
 import { createContext } from "../create-context";
 import { useMergeRefs } from "../hooks/useMergeRefs";
 import { AsChildProps } from "../types";
@@ -26,7 +27,13 @@ type LinkAnchorOverlayProps = HTMLAttributes<HTMLDivElement> & AsChildProps;
 
 const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
   (
-    { children, asChild, className, ...restProps }: LinkAnchorOverlayProps,
+    {
+      children,
+      asChild,
+      className,
+      onClick,
+      ...restProps
+    }: LinkAnchorOverlayProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
@@ -44,7 +51,7 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
           ref={forwardedRef}
           {...restProps}
           className={cn("navds-link-anchor__overlay", className)}
-          onClick={(e) => {
+          onClick={composeEventHandlers(onClick, (e) => {
             if (e.target === anchorRef.current || isTextSelected()) {
               return;
             }
@@ -65,7 +72,7 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
             });
 
             anchorRef.current?.dispatchEvent(event);
-          }}
+          })}
         >
           {children}
         </Component>

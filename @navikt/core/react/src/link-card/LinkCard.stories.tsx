@@ -431,22 +431,6 @@ export const ImageEmulatingNextjsFill: Story = {
   ),
 };
 
-export const Primitive: Story = {
-  render: () => <LinkCard.Primitive title="Title" href="/#" />,
-};
-
-export const PrimitiveWithSubComponents: Story = {
-  render: () => (
-    <LinkCard.Primitive
-      title="Title"
-      href="/#"
-      description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-      footer={<FooterContentDemo />}
-      icon={<SparklesIcon fontSize="2rem" />}
-    />
-  ),
-};
-
 export const GridWithTitle: Story = {
   render: (...args) => (
     <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
