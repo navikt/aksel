@@ -25,7 +25,8 @@
   border-radius: var(--ac-copybutton-border-radius, var(--a-border-radius-medium));
   padding: var(--__ac-copybutton-padding);
   display: grid;
-  place-content: center;
+  place-content: flex-start;
+  align-content: center;
 }
 
 @media (forced-colors: active) {
@@ -188,6 +189,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--a-spacing-2);
+  text-align: start;
 }
 
 .navds-copybutton--small > .navds-copybutton__content {
