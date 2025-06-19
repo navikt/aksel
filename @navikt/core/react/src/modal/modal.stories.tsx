@@ -151,10 +151,13 @@ export const EmptyHeader: StoryFn = () => (
 export const Small: StoryFn = () => (
   <>
     <Modal
-      aria-label="Small modal demo"
       open
       onClose={() => null}
       width="small"
+      header={{
+        heading: "Simple header",
+        size: "small",
+      }}
       size="small"
     >
       <Modal.Body>

@@ -97,19 +97,12 @@
   border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-}
+  position: relative;
 
-.aksel-link-card__image {
-  object-fit: cover;
-  display: block;
-  max-width: 100%;
-}
-
-/* Scaling based on line-height, not font-size */
-.aksel-link-card__arrow {
-  font-size: 28px;
-
-  .aksel-link-card--small & {
-    font-size: 24px;
+  & :is(img, picture) {
+    object-fit: cover;
+    display: block;
+    max-width: 100%;
+    height: 100%;
   }
 }

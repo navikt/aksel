@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ImgHTMLAttributes, forwardRef } from "react";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, Heading } from "../typography";
 import { createContext } from "../util/create-context";
@@ -6,13 +6,11 @@ import {
   LinkAnchor,
   LinkAnchorArrow,
   LinkAnchorOverlay,
-  type LinkAnchorOverlayProps,
   LinkAnchorProps,
 } from "../util/link-anchor";
 
 /* ------------------------------ LinkCard Root ----------------------------- */
-
-type LinkCardProps = LinkAnchorOverlayProps & {
+interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * @default true
    */
@@ -22,10 +20,11 @@ type LinkCardProps = LinkAnchorOverlayProps & {
    * @default "medium"
    */
   size?: "small" | "medium";
-};
+}
 
 type LinkCardContextProps = {
   size: LinkCardProps["size"];
+  hasArrow: LinkCardProps["hasArrow"];
 };
 
 const [LinkCardContextProvider, useLinkCardContext] =
@@ -102,7 +101,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     const { cn } = useRenameCSS();
 
     return (
-      <LinkCardContextProvider size={size}>
+      <LinkCardContextProvider size={size} hasArrow={hasArrow}>
         <LinkAnchorOverlay asChild>
           <BodyLong
             as="div"
@@ -115,7 +114,6 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
               className,
               `navds-link-card--${size}`,
             )}
-            data-arrow={hasArrow}
           >
             {children}
           </BodyLong>
@@ -145,12 +143,16 @@ export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
     return (
       <Heading
         as={as}
-        size={context?.size === "medium" ? "small" : "xsmall"}
+        size={context.size === "medium" ? "small" : "xsmall"}
         ref={forwardedRef}
         className={cn("navds-link-card__title", className)}
       >
         {children}
-        <LinkAnchorArrow className={cn("navds-link-card__arrow")} />
+        {context.hasArrow && (
+          <LinkAnchorArrow
+            fontSize={context.size === "medium" ? "1.75rem" : "1.5rem"}
+          />
+        )}
       </Heading>
     );
   },
@@ -159,12 +161,7 @@ export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
 /* ---------------------------- LinkCard Anchor ---------------------------- */
 type LinkCardAnchorProps = LinkAnchorProps;
 
-export const LinkCardAnchor = forwardRef<
-  HTMLAnchorElement,
-  LinkCardAnchorProps
->((props: LinkCardAnchorProps, forwardedRef) => {
-  return <LinkAnchor ref={forwardedRef} {...props} />;
-});
+export const LinkCardAnchor = LinkAnchor;
 
 /* ---------------------------- LinkCard Description ---------------------------- */
 interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {
@@ -226,16 +223,8 @@ export const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
 /* ---------------------------- LinkCard Image ---------------------------- */
 type ImageAspectRatio = "1/1" | "16/9" | "16/10" | "4/3" | (string & {});
 
-interface LinkCardImageProps extends ImgHTMLAttributes<HTMLImageElement> {
-  /**
-   * The src attribute holds the path to the image you want to embed.
-   */
-  src: string;
-  /**
-   * The alt attribute holds a textual replacement for the image, which is mandatory and incredibly useful for accessibility — screen readers read the attribute value out to their users so they know what the image means.
-   * Alt text is also displayed on the page if the image can't be loaded for some reason: for example, network errors, content blocking, or link rot.
-   */
-  alt: string;
+interface LinkCardImageProps extends HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
   /**
    * The aspect-ratio CSS property allows you to define the desired width-to-height ratio of an element's box.
    * This means that even if the parent container or viewport size changes, the browser will adjust the element's dimensions to maintain the specified width-to-height ratio.
@@ -243,14 +232,12 @@ interface LinkCardImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   aspectRatio?: ImageAspectRatio;
 }
 
-export const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
+export const LinkCardImage = forwardRef<HTMLDivElement, LinkCardImageProps>(
   (
     {
+      children,
       className,
-      alt,
       aspectRatio,
-      width = aspectRatio ? "100%" : "",
-      height = aspectRatio ? "100%" : "",
       style,
       ...restProps
     }: LinkCardImageProps,
@@ -259,20 +246,17 @@ export const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
     const { cn } = useRenameCSS();
 
     return (
-      <span className={cn("navds-link-card__image-container")}>
-        <img
-          ref={forwardedRef}
-          {...restProps}
-          style={{
-            aspectRatio: aspectRatio ? aspectRatio : undefined,
-            ...style,
-          }}
-          className={cn("navds-link-card__image", className)}
-          alt={alt}
-          width={width}
-          height={height}
-        />
-      </span>
+      <div
+        ref={forwardedRef}
+        className={cn("navds-link-card__image-container", className)}
+        style={{
+          ...style,
+          aspectRatio,
+        }}
+        {...restProps}
+      >
+        {children}
+      </div>
     );
   },
 );
