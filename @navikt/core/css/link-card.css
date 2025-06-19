@@ -29,6 +29,10 @@
   grid-template-rows: auto 1fr;
 }
 
+.navds-link-card:not(:has(.navds-link-card__description, .navds-link-card__footer)) .navds-link-card__icon {
+  align-self: center;
+}
+
 .navds-link-card:hover {
   border-color: var(--a-border-default);
   box-shadow: 0 0 0 1px var(--a-border-default);

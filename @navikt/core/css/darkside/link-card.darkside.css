@@ -25,6 +25,10 @@
 
   &:not(:has(.aksel-link-card__description, .aksel-link-card__footer)) {
     grid-template-rows: auto 1fr;
+
+    & .aksel-link-card__icon {
+      align-self: center;
+    }
   }
 
   &:hover {
