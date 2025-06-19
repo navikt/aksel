@@ -2,7 +2,7 @@ designsystemet:
   # commits: ""
   # issues: ""
   pulls: "#aksel-issues-pr"
-  # workflows: ""
+  workflows: "#aksel-issues-pr"
   releases: "#aksel-github-releases"
   config:
     silenceDependabot: "always"
