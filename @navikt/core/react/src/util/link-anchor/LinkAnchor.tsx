@@ -82,7 +82,27 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
 );
 
 /* ------------------------------- LinkAnchor ------------------------------- */
-type LinkAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & AsChildProps;
+type LinkAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> &
+  (
+    | {
+        children: React.ReactElement | false | null;
+        /**
+         * Renders the component and its child as a single element,
+         * merging the props of the component with the props of the child.
+         */
+        asChild: true;
+        as?: never;
+      }
+    | {
+        children: React.ReactNode;
+        /**
+         * Renders the component and its child as a single element,
+         * merging the props of the component with the props of the child.
+         */
+        asChild?: false;
+        href: string;
+      }
+  );
 
 const LinkAnchor = forwardRef<HTMLAnchorElement, LinkAnchorProps>(
   (
