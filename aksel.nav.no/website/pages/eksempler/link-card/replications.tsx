@@ -47,9 +47,11 @@ const Example = () => {
         </LinkCard.Footer>
       </LinkCard>
       <LinkCard>
-        <LinkCard.Icon>
-          <DemoPictogramTwo />
-        </LinkCard.Icon>
+        <VStack justify="center" height="100%" asChild>
+          <LinkCard.Icon>
+            <DemoPictogramTwo />
+          </LinkCard.Icon>
+        </VStack>
         <LinkCard.Title>
           <LinkCard.Anchor href="/eksempel">
             Trenger tilrettelegging på jobb eller i utdanning{" "}
