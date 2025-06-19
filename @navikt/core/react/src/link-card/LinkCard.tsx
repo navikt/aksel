@@ -134,6 +134,9 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
   as?: "span" | "h2" | "h3" | "h4" | "h5" | "h6";
 };
 
+/**
+ * @see 🏷️ {@link LinkCardTitleProps}
+ */
 export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
   ({ children, as = "span", className }: LinkCardTitleProps, forwardedRef) => {
     const { cn } = useRenameCSS();
@@ -161,6 +164,9 @@ export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
 /* ---------------------------- LinkCard Anchor ---------------------------- */
 type LinkCardAnchorProps = LinkAnchorProps;
 
+/**
+ * @see 🏷️ {@link LinkCardAnchorProps}
+ */
 export const LinkCardAnchor = LinkAnchor;
 
 /* ---------------------------- LinkCard Description ---------------------------- */
@@ -168,6 +174,9 @@ interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
+/**
+ * @see 🏷️ {@link LinkCardDescriptionProps}
+ */
 export const LinkCardDescription = forwardRef<
   HTMLDivElement,
   LinkCardDescriptionProps
@@ -186,6 +195,9 @@ interface LinkCardFooterProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
+/**
+ * @see 🏷️ {@link LinkCardFooterProps}
+ */
 export const LinkCardFooter = forwardRef<HTMLDivElement, LinkCardFooterProps>(
   ({ children }: LinkCardFooterProps, forwardedRef) => {
     const { cn } = useRenameCSS();
@@ -203,6 +215,9 @@ interface LinkCardIconProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
+/**
+ * @see 🏷️ {@link LinkCardIconProps}
+ */
 export const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
   ({ children, className, ...restProps }: LinkCardIconProps, forwardedRef) => {
     const { cn } = useRenameCSS();
@@ -232,6 +247,9 @@ interface LinkCardImageProps extends HTMLAttributes<HTMLDivElement> {
   aspectRatio?: ImageAspectRatio;
 }
 
+/**
+ * @see 🏷️ {@link LinkCardImageProps}
+ */
 export const LinkCardImage = forwardRef<HTMLDivElement, LinkCardImageProps>(
   (
     {
