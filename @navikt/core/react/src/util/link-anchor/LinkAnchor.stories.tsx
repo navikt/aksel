@@ -55,7 +55,7 @@ export const Overlay: Story = {
           <Box padding="space-24" borderWidth="1">
             <HStack gap="space-4" align="center" asChild>
               <LinkAnchor href="https://aksel.nav.no/">
-                Anchor
+                Anchors
                 <LinkAnchorArrow />
               </LinkAnchor>
             </HStack>

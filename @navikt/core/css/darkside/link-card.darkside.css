@@ -1,4 +1,3 @@
-/* stylelint-disable declaration-block-no-redundant-longhand-properties */
 .aksel-link-card {
   --__axc-link-card-padding-block: var(--ax-space-16);
   --__axc-link-card-padding-inline: var(--ax-space-20);
@@ -13,7 +12,6 @@
   background-color: var(--ax-bg-raised);
   border: 1px solid var(--ax-border-subtleA);
   padding: var(--__axc-link-card-padding-block) var(--__axc-link-card-padding-inline);
-  height: 100%;
   cursor: pointer;
   display: grid;
   grid-template-areas:
@@ -51,7 +49,6 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--ax-space-8);
-  width: 100%;
   word-break: normal;
   overflow-wrap: break-word;
   hyphens: auto;
@@ -93,15 +90,13 @@
 }
 
 .aksel-link-card__image-container {
-  display: block;
   overflow: hidden;
   grid-area: image;
-  margin-block-start: calc(var(--__axc-link-card-padding-block) * -1);
+  margin-block: calc(var(--__axc-link-card-padding-block) * -1) var(--__axc-link-card-padding-block);
   margin-inline: calc(var(--__axc-link-card-padding-inline) * 1 * -1);
   border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  margin-block-end: var(--__axc-link-card-padding-block);
   position: relative;
 
   & :is(img, picture) {

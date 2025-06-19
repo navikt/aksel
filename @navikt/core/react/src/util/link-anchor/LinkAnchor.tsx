@@ -3,7 +3,6 @@ import React, {
   HTMLAttributes,
   SVGProps,
   forwardRef,
-  useCallback,
   useRef,
 } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
@@ -38,10 +37,6 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
   ) => {
     const { cn } = useRenameCSS();
     const anchorRef = useRef<HTMLAnchorElement>(null);
-
-    const isTextSelected = useCallback(() => {
-      return !!window.getSelection()?.toString();
-    }, []);
 
     const Component = asChild ? Slot : "div";
 
@@ -82,7 +77,27 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
 );
 
 /* ------------------------------- LinkAnchor ------------------------------- */
-type LinkAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & AsChildProps;
+type LinkAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> &
+  (
+    | {
+        children: React.ReactElement | false | null;
+        /**
+         * Renders the component and its child as a single element,
+         * merging the props of the component with the props of the child.
+         */
+        asChild: true;
+        as?: never;
+      }
+    | {
+        children: React.ReactNode;
+        /**
+         * Renders the component and its child as a single element,
+         * merging the props of the component with the props of the child.
+         */
+        asChild?: false;
+        href: string;
+      }
+  );
 
 const LinkAnchor = forwardRef<HTMLAnchorElement, LinkAnchorProps>(
   (
@@ -108,7 +123,7 @@ const LinkAnchor = forwardRef<HTMLAnchorElement, LinkAnchorProps>(
   },
 );
 
-/* ---------------------------- LinkCard Arrow ---------------------------- */
+/* ---------------------------- LinkAnchor Arrow ---------------------------- */
 type LinkAnchorArrowProps = Omit<SVGProps<SVGSVGElement>, "ref">;
 
 const LinkAnchorArrow = forwardRef<SVGSVGElement, LinkAnchorArrowProps>(
@@ -126,5 +141,13 @@ const LinkAnchorArrow = forwardRef<SVGSVGElement, LinkAnchorArrowProps>(
   },
 );
 
-export { LinkAnchorOverlay, LinkAnchor, LinkAnchorArrow };
-export type { LinkAnchorOverlayProps, LinkAnchorProps, LinkAnchorArrowProps };
+/* -------------------------- LinkAnchor Utilities -------------------------- */
+function isTextSelected(): boolean {
+  if (typeof window === "undefined") {
+    return false;
+  }
+  return !!window.getSelection()?.toString();
+}
+
+export { LinkAnchor, LinkAnchorArrow, LinkAnchorOverlay };
+export type { LinkAnchorArrowProps, LinkAnchorOverlayProps, LinkAnchorProps };
