@@ -77,9 +77,9 @@ interface LinkCardComponent
  *     <IconOrPictogram />
  *   </LinkCard.Icon>
  *   <LinkCard.Title>
- *     <LinkCardAnchor href="/href">
+ *     <LinkCard.Anchor href="/href">
  *       LinkCard title
- *     </LinkCardAnchor>
+ *     </LinkCard.Anchor>
  *   </LinkCard.Title>
  *   <LinkCard.Description>
  *     This is a description of the link card.
