@@ -30,7 +30,7 @@ type withDsT = {
 
 export const withDsExample = (
   Component: ComponentType,
-  { variant, background, showBreakpoints, legacyOnly = true }: withDsT = {},
+  { variant, background, showBreakpoints, legacyOnly = false }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
     const [width, setWidth] = useState<number>();
