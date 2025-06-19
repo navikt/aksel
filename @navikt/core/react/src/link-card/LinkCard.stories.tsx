@@ -654,6 +654,14 @@ export const Chromatic: Story = {
         {ImageWithIcon.render?.(...args)}
       </div>
       <div>
+        <h2>ImageEmulatingNextjsFill</h2>
+        {ImageEmulatingNextjsFill.render?.(...args)}
+      </div>
+      <div>
+        <h2>ImageEmulatingNextjsStatic</h2>
+        {ImageEmulatingNextjsStatic.render?.(...args)}
+      </div>
+      <div>
         <h2>GridWithTitle</h2>
         {GridWithTitle.render?.(...args)}
       </div>
