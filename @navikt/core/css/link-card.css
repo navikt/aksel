@@ -13,7 +13,6 @@
   background-color: var(--a-surface-default);
   border: 1px solid var(--a-border-subtle);
   padding: var(--__ac-link-card-padding-block) var(--__ac-link-card-padding-inline);
-  height: 100%;
   cursor: pointer;
   display: grid;
   grid-template-areas:
@@ -46,7 +45,6 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--a-spacing-2);
-  width: 100%;
   word-break: normal;
   overflow-wrap: break-word;
   hyphens: auto;
@@ -75,19 +73,27 @@
   place-content: center;
   color: var(--a-text-default);
   align-self: flex-start;
-  margin-inline-end: var(--a-spacing-5);
+  margin-inline-end: var(--a-spacing-4);
+}
+
+.aksel-link-card--small {
+  --__ac-link-card-padding-block: var(--ax-space-12);
+  --__ac-link-card-padding-inline: var(--ax-space-16);
+}
+
+.aksel-link-card--small & {
+  margin-inline-end: var(--a-spacing-3);
 }
 
 .navds-link-card__image-container {
   display: block;
   overflow: hidden;
   grid-area: image;
-  margin-block-start: calc(var(--__ac-link-card-padding-block) * -1);
+  margin-block: calc(var(--__ac-link-card-padding-block) * -1) var(--__ac-link-card-padding-block);
   margin-inline: calc(var(--__ac-link-card-padding-inline) * 1 * -1);
   border-radius: calc(var(--a-border-radius-xlarge) - 1px);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  margin-block-end: var(--__ac-link-card-padding-block);
 }
 
 .navds-link-card__image {

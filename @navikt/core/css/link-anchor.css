@@ -3,7 +3,7 @@
 }
 
 .navds-link-anchor__overlay:focus-within {
-  outline: 3px solid var(--ax-border-focus);
+  outline: 3px solid var(--a-border-focus);
   outline-offset: 3px;
 }
 
@@ -13,7 +13,7 @@
   }
 
   .navds-link-anchor__overlay:has(:focus-visible) {
-    outline: 3px solid var(--ax-border-focus);
+    outline: 3px solid var(--a-border-focus);
     outline-offset: 3px;
   }
 }
@@ -31,12 +31,8 @@
   text-decoration-thickness: 0.111em;
 }
 
-.navds-link-anchor:focus {
-  outline: none;
-}
-
 .navds-link-anchor:focus-visible {
-  outline: 3px solid var(--ax-border-focus);
+  outline: 3px solid var(--a-border-focus);
   outline-offset: 3px;
   border-radius: 1px;
 }

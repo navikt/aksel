@@ -30,10 +30,6 @@
     text-decoration-thickness: 0.111em;
   }
 
-  &:focus {
-    outline: none;
-  }
-
   &:focus-visible {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;
