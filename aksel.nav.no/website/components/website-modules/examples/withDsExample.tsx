@@ -22,11 +22,15 @@ type withDsT = {
   variant?: "full" | "static" | "static-full" | "fullscreen";
   background?: "inverted" | "subtle";
   showBreakpoints?: boolean;
+  /**
+   * Hides theme switch and makes sure to not use `AkselTheme` wrapper.
+   */
+  legacyOnly?: boolean;
 };
 
 export const withDsExample = (
   Component: ComponentType,
-  { variant, background, showBreakpoints }: withDsT = {},
+  { variant, background, showBreakpoints, legacyOnly = true }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
     const [width, setWidth] = useState<number>();
@@ -91,7 +95,7 @@ export const withDsExample = (
 
     let Wrapper: string | ((props: any) => JSX.Element) = "div";
 
-    if (theme === "light" || theme === "dark") {
+    if ((theme === "light" || theme === "dark") && !legacyOnly) {
       Wrapper = (_props: any) => (
         <AkselTheme {..._props} hasBackground={false} />
       );
@@ -108,7 +112,7 @@ export const withDsExample = (
         })}
         style={{ background: getBg(background) }}
       >
-        <ExampleThemingSwitch />
+        {!legacyOnly && <ExampleThemingSwitch />}
         {showBreakpoints && <BreakpointText />}
         <div
           id="ds-example"
