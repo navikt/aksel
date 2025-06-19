@@ -41,10 +41,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--a-spacing-2);
-  word-break: normal;
-  overflow-wrap: break-word;
   hyphens: auto;
-  text-wrap: wrap;
 }
 
 .navds-link-card__description {

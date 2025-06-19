@@ -49,10 +49,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--ax-space-8);
-  word-break: normal;
-  overflow-wrap: break-word;
   hyphens: auto;
-  text-wrap: wrap;
 
   .aksel-link-card[data-color="neutral"] &,
   &[data-color="neutral"] {
