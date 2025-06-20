@@ -150,6 +150,16 @@ export { Select, type SelectProps } from "./form/select";
 export { Switch, type SwitchProps } from "./form/switch";
 export { Textarea, type TextareaProps } from "./form/textarea";
 export { TextField, type TextFieldProps } from "./form/textfield";
+export {
+  LinkCard,
+  type LinkCardProps,
+  type LinkCardTitleProps,
+  type LinkCardDescriptionProps,
+  type LinkCardFooterProps,
+  type LinkCardAnchorProps,
+  type LinkCardIconProps,
+  type LinkCardImageProps,
+} from "./link-card";
 
 /**
  * Theming

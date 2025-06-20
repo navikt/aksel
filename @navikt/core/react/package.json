@@ -264,6 +264,16 @@
         "default": "./cjs/link/index.js"
       }
     },
+    "./LinkCard": {
+      "import": {
+        "types": "./esm/link-card/index.d.ts",
+        "default": "./esm/link-card/index.js"
+      },
+      "require": {
+        "types": "./cjs/link-card/index.d.ts",
+        "default": "./cjs/link-card/index.js"
+      }
+    },
     "./LinkPanel": {
       "import": {
         "types": "./esm/link-panel/index.d.ts",
