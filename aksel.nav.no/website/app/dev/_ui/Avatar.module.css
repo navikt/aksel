@@ -21,6 +21,7 @@
       background-clip: content-box;
       position: relative;
       border-radius: inherit;
+      overflow: hidden;
     }
   }
 }

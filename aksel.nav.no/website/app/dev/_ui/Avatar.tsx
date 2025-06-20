@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { BodyShort, HStack } from "@navikt/ds-react";
 import styles from "./Avatar.module.css";
+import { InteractiveAvatarStack } from "./InteractiveAvatarStack";
 
 const MAX_AVATAR_COUNT = 30;
 
@@ -13,7 +14,7 @@ export const avatarUrl = (avatar_id: string) => {
   return `/avatars/${_avatar_id}.svg`;
 };
 
-type Avatar = {
+export type Avatar = {
   imageSrc: string;
   name: string;
   description: string;
@@ -31,17 +32,28 @@ const AvatarCircle = ({ avatar }: { avatar: Avatar }) => {
   );
 };
 
+/**
+ * When using `interactive`, the AvatarStack expects only a single avatar.
+ * (it will use the first in the array)
+ */
+type AvatarStackProps =
+  | {
+      avatars: Avatar[];
+      interactive?: false;
+    }
+  | {
+      avatars: [Avatar];
+      interactive?: true;
+    };
+
 export const AvatarStack = ({
   avatars,
   interactive = false,
-}: {
-  avatars: Avatar[];
-  interactive?: boolean;
-}) => {
+}: AvatarStackProps) => {
   const isMultiple = avatars.length > 1;
   const suffix = isMultiple ? `+ ${avatars.length - 1}` : null;
 
-  return (
+  const avatarStack = (
     <HStack gap="space-4" align="center">
       <ul className={styles.avatarList}>
         {avatars.map((avatar, idx) => {
@@ -58,4 +70,13 @@ export const AvatarStack = ({
       </BodyShort>
     </HStack>
   );
+
+  if (interactive) {
+    return (
+      <InteractiveAvatarStack popoverContent={avatars[0]}>
+        {avatarStack}
+      </InteractiveAvatarStack>
+    );
+  }
+  return avatarStack;
 };
