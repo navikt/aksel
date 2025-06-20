@@ -26,6 +26,7 @@
 
 .navds-switch--small > .navds-switch__input {
   height: 2rem;
+  width: 2.5rem;
   top: 0;
 }
 
@@ -47,11 +48,11 @@
 }
 
 .navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
-  padding: calc(var(--a-spacing-2) - var(--a-spacing-05)) 0 calc(var(--a-spacing-2) - var(--a-spacing-05)) 3.25rem;
+  padding: calc(var(--a-spacing-2) - var(--a-spacing-05)) 0 calc(var(--a-spacing-2) - var(--a-spacing-05)) 2.75rem;
 }
 
 .navds-switch--right.navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
-  padding: calc(var(--a-spacing-2) - var(--a-spacing-05)) 3.25rem calc(var(--a-spacing-2) - var(--a-spacing-05)) 0;
+  padding: calc(var(--a-spacing-2) - var(--a-spacing-05)) 2.75rem calc(var(--a-spacing-2) - var(--a-spacing-05)) 0;
 }
 
 .navds-switch--with-description,
@@ -84,7 +85,9 @@
 }
 
 .navds-switch--small > .navds-switch__track {
-  top: var(--a-spacing-1);
+  top: var(--a-spacing-1-alt);
+  width: 2.25rem;
+  height: 1.25rem;
 }
 
 .navds-switch--right > .navds-switch__input,
@@ -149,6 +152,11 @@
   justify-content: center;
 }
 
+.navds-switch--small .navds-switch__thumb {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
 .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(1.25rem);
   color: var(--ac-switch-thumb-icon-checked, var(--a-icon-action-selected));
@@ -159,12 +167,12 @@
   top: 0;
 }
 
-.navds-switch__input:checked ~ .navds-switch__track .navds-switch__checkmark {
-  visibility: visible;
-}
-
-.navds-switch__checkmark {
-  visibility: hidden;
+.navds-switch--small > .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
+  transform: translateX(1rem);
+  width: 1rem;
+  height: 1rem;
+  left: 0;
+  top: 0;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -175,6 +183,10 @@
   .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
     transform: translateX(1.125rem);
   }
+
+  .navds-switch--small > .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
+    transform: translateX(0.875rem);
+  }
 }
 
 .navds-switch__input:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
@@ -183,6 +195,10 @@
 
 .navds-switch__input:checked:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(1.25rem);
+}
+
+.navds-switch--small > .navds-switch__input:checked:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
+  transform: translateX(1rem);
 }
 
 /* Disabled */
