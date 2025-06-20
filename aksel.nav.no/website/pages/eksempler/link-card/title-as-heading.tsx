@@ -6,7 +6,7 @@ const Example = () => {
     <LinkCard>
       <LinkCard.Title as="h2">
         <LinkCard.Anchor href="/eksempel">
-          Sykepenger (im now a h2-element)
+          Sykepenger (dette er nå et h2-element)
         </LinkCard.Anchor>
       </LinkCard.Title>
       <LinkCard.Description>
