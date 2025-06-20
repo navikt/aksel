@@ -194,6 +194,20 @@ function blockComponents({
           {children}
         </Heading>,
       ),
+    h5: ({ children, value }) =>
+      withSanitizedBlock(
+        <Heading
+          className={styles.headingElement}
+          spacing
+          level="5"
+          size="xsmall"
+          id={value?._key}
+          data-level="5"
+          data-text-prose
+        >
+          {children}
+        </Heading>,
+      ),
   } satisfies Record<string, PortableTextBlockComponent>;
 }
 
