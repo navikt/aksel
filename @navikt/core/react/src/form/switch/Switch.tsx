@@ -166,11 +166,23 @@ const SwitchIcon = ({
   loading: SwitchProps["loading"];
 }) => {
   if (loading) {
+    let baseSize = 1;
+
+    if (size === "small") {
+      baseSize = 0.75;
+    }
+
+    if (checked) {
+      baseSize -= 0.0625;
+    }
+
     return (
       <Loader
-        size="xsmall"
+        size="small"
         aria-live="polite"
         variant={checked ? "interaction" : "inverted"}
+        width={`${baseSize}rem`}
+        height={`${baseSize}rem`}
       />
     );
   }
