@@ -35,10 +35,6 @@
     border-color: var(--ax-border-default);
     box-shadow: 0 0 0 1px var(--ax-border-default);
   }
-
-  &[data-arrow="false"] .aksel-link-card__arrow {
-    display: none;
-  }
 }
 
 .aksel-link-card--small {
