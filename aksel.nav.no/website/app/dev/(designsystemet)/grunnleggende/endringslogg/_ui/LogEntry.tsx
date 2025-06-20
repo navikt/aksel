@@ -1,12 +1,12 @@
 "use client";
 
+import cl from "clsx";
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
-import { useRef, useState, version } from "react";
+import { MutableRefObject, useRef } from "react";
 import type { Image as SanityImage } from "sanity";
-import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,
   Box,
@@ -22,6 +22,7 @@ import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { capitalize } from "@/utils";
 import styles from "./Changelog.module.css";
+import ShowMore from "./ShowMore";
 
 interface Props {
   logEntry: ENDRINGSLOGG_QUERYResult[number];
@@ -53,8 +54,6 @@ const Hero = ({
   />
 );
 
-const inertValue = parseInt(version.split(".")[0]) > 18; // Support for inert was added in React 19
-
 export default function LogEntry({
   logEntry: {
     heading,
@@ -71,49 +70,21 @@ export default function LogEntry({
 }: Props) {
   const logEntryContainer = useRef<HTMLDivElement>(null);
 
-  const [expanded, setExpanded] = useState(false);
-  const [shouldFlash, setShouldFlash] = useState(false);
-  const ChevronIcon = expanded ? ChevronUpIcon : ChevronDownIcon;
-  const toggleExpansion = () => {
-    setExpanded((previous) => !previous);
-    if (expanded) {
-      setShouldFlash(true);
-      // header + monthSpacer + monthBubble + logEntrySpacer
-      // generating this value dynamically from css is a bit complex
-      const scrollMarginTop = 64 + 12 + 48 + 32;
-      if (
-        logEntryContainer.current &&
-        logEntryContainer.current.getBoundingClientRect().top < scrollMarginTop
-      ) {
-        setTimeout(() => {
-          // setShouldFlash(true);
-          logEntryContainer.current?.scrollIntoView({
-            behavior: "instant",
-            block: "start",
-          });
-        }, 1);
-      }
-    } else {
-      setShouldFlash(false);
-    }
-  };
-
   return (
-    <li key={"log-entry-" + index}>
-      {/* logEntrySpacer, since sticky MonthHeader cuts off immediately below */}
+    <li>
+      {/* Log entry spacer.
+          MonthHeader (potentially immediately above) should have elements scroll immediately underneath itself, so we add a vertical timeline segment for appropriate spacing here */}
       <VStack width="48px" height="var(--ax-space-32)" align="center">
         <Box.New flexGrow="1" className={styles.timeline} />
       </VStack>
+      {/* TODO: [endringslogg] Remove timeline and add divider on mobile */}
       <HStack wrap={false}>
-        {/* TODO: [endringslogg] Remove timeline and add divider on mobile */}
         {/* Dot + vertical line */}
         <VStack width="16px" align="center" marginInline="space-16 space-0">
           {/* <Box.New height="0.1rem" className={styles.timeline} /> */}
           <Box.New
             marginBlock="space-2 space-0"
-            className={`${styles.bullet}${
-              fremhevet ? ` ${styles.bulletFremhevet}` : ""
-            }`}
+            className={cl(styles.bullet, fremhevet && styles.bulletFremhevet)}
           />
           {!isLastEntry && <Box.New flexGrow="1" className={styles.timeline} />}
         </VStack>
@@ -124,7 +95,7 @@ export default function LogEntry({
           flexGrow="1"
           position="relative"
           ref={logEntryContainer}
-          className={`${styles.logEntry}`}
+          className={styles.logEntry}
         >
           <HStack
             justify="start"
@@ -164,60 +135,62 @@ export default function LogEntry({
               </Tag>
             )}
           </HStack>
-          {/* TODO: [endringslogg] Decide 'Vis mer' transition on collapse */}
-          {/* TODO: [endringslogg] Test correct focus/screen reader flow after collapse of 'Vis mer' */}
-          {/* TODO: [endringslogg] Move 'Vis mer' into standalone component */}
           <VStack
             marginBlock={fremhevet ? "space-0 space-32" : "space-0 space-64"}
             padding={fremhevet ? "space-16" : "space-0"}
-            className={`${styles.innhold}${
-              fremhevet ? ` ${styles.innholdFremhevet}` : ""
-            } ${shouldFlash ? ` ${styles.logEntryHighlight}` : ""} `}
+            className={cl(styles.innhold, fremhevet && styles.innholdFremhevet)}
             data-color={fremhevet ? "aksel-brand-pink" : ""}
           >
-            <Heading size="large" level="2" spacing>
-              <Link
-                href={`./endringslogg/${slug?.current}`}
-                data-aksel-heading-color
-              >
-                {heading}
-              </Link>
-            </Heading>
-            {visMer && (
-              <Button
-                size="small"
-                variant="secondary-neutral"
-                icon={<ChevronIcon />}
-                className={`${styles.visMerButton}${
-                  fremhevet ? ` ${styles.visMerButtonFremhevet}` : ""
-                }`}
-                onClick={toggleExpansion}
-              >
-                {expanded ? "Vis mindre" : "Vis mer"}
-              </Button>
-            )}
-
             {visMer ? (
-              <div
-                className={`${styles.visMerContainer} ${
-                  expanded ? styles.visMerExpanded : styles.visMerCollapsed
-                }${
-                  !expanded && fremhevet
-                    ? ` ${styles.visMerCollapsedFremhevet}`
-                    : ""
-                }`}
-                inert={!expanded ? inertValue : false}
+              <ShowMore
+                scrollTargetRef={
+                  logEntryContainer as MutableRefObject<HTMLElement>
+                }
+                style={{
+                  scrollMarginTop:
+                    "calc(var(--website-header-height) + var(--ax-space-12) + 48px + var(--ax-space-32))",
+                }}
+                // scrollBackOnCollapse={false}
               >
-                {fremhevet && herobilde?.asset && (
-                  <Hero herobilde={herobilde} index={index} />
-                )}
-                <CustomPortableText
-                  className={styles.portableTextFirstHeading}
-                  value={innhold as PortableTextBlock[]}
-                />
-              </div>
+                <ShowMore.Heading>
+                  <Heading size="large" level="2" spacing>
+                    <Link
+                      href={`./endringslogg/${slug?.current}`}
+                      data-aksel-heading-color
+                    >
+                      {heading}
+                    </Link>
+                  </Heading>
+                </ShowMore.Heading>
+                <ShowMore.Content
+                  collapsedHeight={fremhevet ? "16rem" : "10rem"}
+                >
+                  {fremhevet && herobilde?.asset && (
+                    <Hero herobilde={herobilde} index={index} />
+                  )}
+                  <CustomPortableText
+                    className={styles.portableTextFirstHeading}
+                    value={innhold as PortableTextBlock[]}
+                  />
+                </ShowMore.Content>
+                <ShowMore.Button>
+                  <Button
+                    size="small"
+                    variant="secondary-neutral"
+                    className={cl(fremhevet && styles.showMoreButtonFremhevet)}
+                  />
+                </ShowMore.Button>
+              </ShowMore>
             ) : (
               <>
+                <Heading size="large" level="2" spacing>
+                  <Link
+                    href={`./endringslogg/${slug?.current}`}
+                    data-aksel-heading-color
+                  >
+                    {heading}
+                  </Link>
+                </Heading>
                 {fremhevet && herobilde?.asset && (
                   <Hero herobilde={herobilde} index={index} />
                 )}

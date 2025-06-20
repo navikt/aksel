@@ -28,7 +28,7 @@ export default function LogEntryList({ list }: Props) {
               >
                 {monthGroup.map((logEntry, logIndex) => (
                   <LogEntry
-                    key={"log-entry-" + logIndex}
+                    key={`log-entry-${monthIndex}-${logIndex}`}
                     logEntry={logEntry}
                     index={logIndex}
                     isLastEntry={
