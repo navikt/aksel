@@ -242,7 +242,7 @@ export const Image: Story = {
   render: () => (
     <LinkCard>
       <LinkCardImage>
-        <img src="https://picsum.photos/400" alt="alt-placeholder" />
+        <img src="https://picsum.photos/id/237/400" alt="alt-placeholder" />
       </LinkCardImage>
       <LinkCardTitle>
         <LinkCardAnchor href="/#">Title</LinkCardAnchor>
@@ -256,7 +256,7 @@ export const ImageWithAspectRatio: Story = {
     <LinkCard>
       <LinkCardImage aspectRatio="16/10">
         <img
-          src="https://picsum.photos/400"
+          src="https://picsum.photos/id/237/400"
           alt="alt-placeholder"
           width="400px"
         />
@@ -273,7 +273,7 @@ export const ImageWithArbitraryAspectRatio: Story = {
     <LinkCard>
       <LinkCardImage aspectRatio="4/2">
         <img
-          src="https://picsum.photos/400"
+          src="https://picsum.photos/id/237/400"
           alt="alt-placeholder"
           width="400px"
         />
@@ -290,7 +290,7 @@ export const ImageWithIcon: Story = {
     <LinkCard>
       <LinkCardImage aspectRatio="16/10">
         <img
-          src="https://picsum.photos/400"
+          src="https://picsum.photos/id/237/400"
           alt="alt-placeholder"
           width="400px"
         />
@@ -309,14 +309,14 @@ export const ImageWithPictureTag: Story = {
       <LinkCardImage aspectRatio="16/10">
         <picture>
           <source
-            srcSet="https://picsum.photos/401"
-            width="401px"
+            srcSet="https://picsum.photos/id/237/400"
+            width="400px"
             media="(orientation: portrait)"
           />
           <img
-            src="https://picsum.photos/399"
+            src="https://picsum.photos/id/231/400"
             alt="alt-placeholder"
-            width="399px"
+            width="400px"
           />
         </picture>
       </LinkCardImage>
@@ -348,7 +348,7 @@ export const ImageEmulatingNextjsStatic: Story = {
           }}
         >
           <img
-            src="https://picsum.photos/400"
+            src="https://picsum.photos/id/237/400"
             alt="alt-placeholder"
             decoding="async"
             sizes="100vw"
