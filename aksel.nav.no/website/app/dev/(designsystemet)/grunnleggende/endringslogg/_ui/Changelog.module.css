@@ -125,3 +125,7 @@
   margin-left: 1rem;
   margin-bottom: 1rem;
 }
+
+.divider {
+  color: var(--ax-border-neutral-subtleA);
+}

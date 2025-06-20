@@ -13,7 +13,9 @@ import {
   Button,
   HStack,
   Heading,
+  Hide,
   Link,
+  Show,
   Tag,
   VStack,
 } from "@navikt/ds-react";
@@ -27,6 +29,7 @@ import ShowMore from "./ShowMore";
 interface Props {
   logEntry: ENDRINGSLOGG_QUERYResult[number];
   index: number;
+  isLastOfMonth: boolean;
   isLastEntry: boolean;
 }
 
@@ -66,6 +69,7 @@ export default function LogEntry({
     visMer,
   },
   index,
+  isLastOfMonth = false,
   isLastEntry = false,
 }: Props) {
   const logEntryContainer = useRef<HTMLDivElement>(null);
@@ -75,23 +79,29 @@ export default function LogEntry({
       {/* Log entry spacer.
           MonthHeader (potentially immediately above) should have elements scroll immediately underneath itself, so we add a vertical timeline segment for appropriate spacing here */}
       <VStack width="48px" height="var(--ax-space-32)" align="center">
-        <Box.New flexGrow="1" className={styles.timeline} />
+        <Hide below="sm" asChild>
+          <Box.New flexGrow="1" className={styles.timeline} />
+        </Hide>
       </VStack>
       {/* TODO: [endringslogg] Remove timeline and add divider on mobile */}
       <HStack wrap={false}>
         {/* Dot + vertical line */}
-        <VStack width="16px" align="center" marginInline="space-16 space-0">
-          {/* <Box.New height="0.1rem" className={styles.timeline} /> */}
-          <Box.New
-            marginBlock="space-2 space-0"
-            className={cl(styles.bullet, fremhevet && styles.bulletFremhevet)}
-          />
-          {!isLastEntry && <Box.New flexGrow="1" className={styles.timeline} />}
-        </VStack>
+        <Hide below="sm" asChild>
+          <VStack width="16px" align="center" marginInline="space-16 space-0">
+            {/* <Box.New height="0.1rem" className={styles.timeline} /> */}
+            <Box.New
+              marginBlock="space-2 space-0"
+              className={cl(styles.bullet, fremhevet && styles.bulletFremhevet)}
+            />
+            {!isLastEntry && (
+              <Box.New flexGrow="1" className={styles.timeline} />
+            )}
+          </VStack>
+        </Hide>
         {/* Log entry */}
         <VStack
           gap="space-8"
-          paddingInline="space-16"
+          paddingInline={{ xs: "space-8", sm: "space-16" }}
           flexGrow="1"
           position="relative"
           ref={logEntryContainer}
@@ -203,6 +213,9 @@ export default function LogEntry({
           </VStack>
         </VStack>
       </HStack>
+      <Show below="sm" asChild>
+        {!isLastOfMonth && <hr className={styles.divider} />}
+      </Show>
     </li>
   );
 }

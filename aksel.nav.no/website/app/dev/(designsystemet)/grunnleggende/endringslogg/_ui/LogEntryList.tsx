@@ -35,6 +35,7 @@ export default function LogEntryList({ list }: Props) {
                       monthIndex === list.length - 1 &&
                       logIndex === monthGroup.length - 1
                     }
+                    isLastOfMonth={logIndex === monthGroup.length - 1}
                   />
                 ))}
               </ul>

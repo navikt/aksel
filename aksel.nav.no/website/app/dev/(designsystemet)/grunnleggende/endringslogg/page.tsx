@@ -150,6 +150,7 @@ export default async function Page({ searchParams }) {
           {logEntries?.length > 0 ? (
             <LogEntryList list={groupedByMonth} />
           ) : (
+            // TODO: [endringslogg] Should we preload only the 5-10 most recent entries, no year filter, and add a See more updates-button here as per figma sketches?
             <EmptyStateCard />
           )}
         </VStack>

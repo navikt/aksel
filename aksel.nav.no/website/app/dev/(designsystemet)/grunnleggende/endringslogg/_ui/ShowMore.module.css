@@ -16,13 +16,11 @@
 }
 
 .showMoreCollapsed {
-  max-height: 6rem;
   margin-bottom: 0;
-  mask-image: linear-gradient(rgba(0 0 0/1), rgba(0 0 0/ 0) calc(100% - 0.5rem));
+  mask-image: linear-gradient(rgba(0 0 0/1), rgba(0 0 0/1) 30%, rgba(0 0 0/ 0) calc(100% - 2.5rem));
 }
 
 .showMoreExpanded {
-  max-height: fit-content;
   margin-bottom: 3rem;
 }
 
