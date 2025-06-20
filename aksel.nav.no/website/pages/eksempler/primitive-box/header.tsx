@@ -104,6 +104,7 @@ function Pictogram() {
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "full",
+  legacyOnly: true,
 });
 
 /* Storybook story */

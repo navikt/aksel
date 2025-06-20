@@ -19,6 +19,7 @@ const Placeholder = () => <Box background="surface-alt-3" height="15rem" />;
 export default withDsExample(Example, {
   variant: "full",
   showBreakpoints: true,
+  legacyOnly: true,
 });
 
 /* Storybook story */

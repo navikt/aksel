@@ -33,6 +33,7 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
+  legacyOnly: true,
 });
 
 /* Storybook story */
