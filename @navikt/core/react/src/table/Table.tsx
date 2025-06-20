@@ -23,6 +23,11 @@ export interface TableProps
    */
   zebraStripes?: boolean;
   /**
+   * Allows the table to have a sticky header
+   * @default false
+   */
+  stickyHeader?: boolean;
+  /**
    * Sort state
    */
   sort?: SortState;
@@ -85,6 +90,7 @@ export const Table = forwardRef(
       size = "medium",
       onSortChange,
       sort,
+      stickyHeader = false,
       ...rest
     },
     ref,
@@ -97,6 +103,7 @@ export const Table = forwardRef(
           ref={ref}
           className={cn("navds-table", `navds-table--${size}`, className, {
             "navds-table--zebra-stripes": zebraStripes,
+            "navds-table--sticky-header": stickyHeader,
           })}
         />
       </TableContext.Provider>

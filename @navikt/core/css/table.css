@@ -4,8 +4,21 @@
   display: table;
 }
 
+.navds-table.navds-table--sticky-header {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
 .navds-table__header {
   display: table-header-group;
+}
+
+.navds-table--sticky-header .navds-table__header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--a-surface-default);
+  box-sizing: border-box;
 }
 
 .navds-table__body {
