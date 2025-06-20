@@ -24,6 +24,7 @@ export * from "./templates/landingsside";
 
 /* Admin tools */
 export * from "./admin/editors";
+export * from "./admin/editorialStaff";
 export * from "./admin/redirects";
 export * from "./admin/articleViews";
 export * from "./admin/cookies";

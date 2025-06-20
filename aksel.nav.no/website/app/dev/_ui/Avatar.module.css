@@ -1,0 +1,36 @@
+.avatarList {
+  display: flex;
+}
+
+.avatarItem {
+  &:not(:first-child) {
+    margin-left: calc(-1 * var(--ax-space-8));
+    border-radius: var(--ax-radius-full);
+    position: relative;
+
+    &::after {
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1px var(--ax-border-subtleA);
+      content: "";
+      position: absolute;
+    }
+
+    & .avatarImage {
+      box-shadow: 0 0 0 2px var(--ax-bg-default);
+      background-clip: content-box;
+      position: relative;
+      border-radius: inherit;
+      overflow: hidden;
+    }
+  }
+}
+
+.avatarName {
+  margin-block: var(--ax-space-1) 0;
+  margin-inline: var(--ax-space-2) 0;
+}
+
+.avatarNameSuffix {
+  margin-left: var(--ax-space-6);
+}

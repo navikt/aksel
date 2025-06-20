@@ -6,6 +6,7 @@ export const schema: SchemaPluginOptions = {
   types: [
     /* Documents */
     document.Editors,
+    document.EditorialStaff,
     document.Forside,
     document.Redirect,
     document.Skrivehjelp,

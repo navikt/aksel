@@ -2439,6 +2439,13 @@ export type Aksel_blogg = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "editor";
   }>;
+  editorial_staff_teams?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "editorial_staff";
+  }>;
   kategori?: "nytt-fra-teamene" | "da-vi-gjorde-dette" | "pa-reise";
   slug?: Slug;
   ingress?: string;
@@ -2746,6 +2753,17 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
+export type Editorial_staff = {
+  _id: string;
+  _type: "editorial_staff";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  avatar_id?: Slug;
+};
+
 export type Editor = {
   _id: string;
   _type: "editor";
@@ -2893,6 +2911,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
+  | Editorial_staff
   | Editor
   | Color
   | RgbaColor
@@ -2964,7 +2983,7 @@ export type DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult = Array<
     }
 >;
 // Variable: BLOGG_LANDINGSSIDE_BLOGS_QUERY
-// Query: *[_type == "blogg_landingsside"][0]{    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){      seo,      heading,      ingress,      publishedAt,      _createdAt,      _id,      "slug": slug.current,      contributors[]->{title}    }  }
+// Query: *[_type == "blogg_landingsside"][0]{    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){      seo,      heading,      ingress,      publishedAt,      _createdAt,      _id,      "slug": slug.current,      editorial_staff_teams[]->{title, description, avatar_id}    }  }
 export type BLOGG_LANDINGSSIDE_BLOGS_QUERYResult = {
   bloggposts: Array<{
     seo: {
@@ -2988,8 +3007,10 @@ export type BLOGG_LANDINGSSIDE_BLOGS_QUERYResult = {
     _createdAt: string;
     _id: string;
     slug: string | null;
-    contributors: Array<{
+    editorial_staff_teams: Array<{
       title: string | null;
+      description: string | null;
+      avatar_id: Slug | null;
     }> | null;
   }>;
 } | null;
@@ -4781,6 +4802,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -4808,6 +4830,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -4837,6 +4860,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -7277,6 +7301,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
   contributors: Array<{
     title: string | null;
   }> | null;
+  editorial_staff_teams?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "editorial_staff";
+  }>;
   kategori?: "da-vi-gjorde-dette" | "nytt-fra-teamene" | "pa-reise";
   slug: string | null;
   ingress?: string;
@@ -9906,6 +9937,13 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         contributors: Array<{
           title: string | null;
         }> | null;
+        editorial_staff_teams?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "editorial_staff";
+        }>;
         kategori?: "da-vi-gjorde-dette" | "nytt-fra-teamene" | "pa-reise";
         slug: string | null;
         ingress?: string;
@@ -12648,7 +12686,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {\n  _type,\n  heading,\n  "slug": slug.current,\n  kategori,\n  "tag": status.tag,\n  "sidebarindex": sidebarindex,\n}': DESIGNSYSTEM_SIDEBAR_QUERYResult;
     '*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {\n  _type,\n  overview_pages\n  }': DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult;
-    '\n  *[_type == "blogg_landingsside"][0]{\n    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){\n      seo,\n      heading,\n      ingress,\n      publishedAt,\n      _createdAt,\n      _id,\n      "slug": slug.current,\n      contributors[]->{title}\n    }\n  }': BLOGG_LANDINGSSIDE_BLOGS_QUERYResult;
+    '\n  *[_type == "blogg_landingsside"][0]{\n    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){\n      seo,\n      heading,\n      ingress,\n      publishedAt,\n      _createdAt,\n      _id,\n      "slug": slug.current,\n      editorial_staff_teams[]->{title, description, avatar_id}\n    }\n  }': BLOGG_LANDINGSSIDE_BLOGS_QUERYResult;
     '\n  *[_type == "blogg_landingsside"][0]{\n    "page": {...},\n  }': BLOGG_LANDINGSSIDE_PAGE_QUERYResult;
     '*[_type == "komponenter_landingsside"][0]': DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERYResult;
     '*[_type == "grunnleggende_landingsside"][0]': DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERYResult;

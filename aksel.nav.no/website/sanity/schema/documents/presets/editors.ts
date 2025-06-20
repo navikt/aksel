@@ -47,3 +47,13 @@ export const editorField = defineField({
     return [{ _ref: profile._id, _type: "reference" }];
   },
 });
+
+export const editorialStaffField = defineField({
+  title: "Redaksjoner",
+  description: "legg til redaksjoner som har bidratt",
+  name: "editorial_staff_teams",
+  type: "array",
+  of: [{ type: "reference", to: [{ type: "editorial_staff" }] }],
+  group: "settings",
+  validation: (Rule) => Rule.required(),
+});
