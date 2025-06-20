@@ -76,4 +76,8 @@ export const deprecations: DeprecatedList = [
     classes: ["navds-combobox__button-clear"],
     message: "Removed in v7.8.0",
   },
+  {
+    classes: ["navds-switch__checkmark"],
+    message: "Removed in v7.24.0 ",
+  },
 ];
