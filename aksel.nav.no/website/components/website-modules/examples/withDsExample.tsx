@@ -23,7 +23,7 @@ type withDsT = {
   background?: "inverted" | "subtle";
   showBreakpoints?: boolean;
   /**
-   * Hides theme switch and makes sure to not use `AkselTheme` wrapper.
+   * Hides theme switch, makes sure to not use `AkselTheme` wrapper and forces light-mode.
    */
   legacyOnly?: boolean;
 };
@@ -104,6 +104,8 @@ export const withDsExample = (
     return (
       <Wrapper
         className={cl(styles.container, {
+          /* Overrides global theme when showing legacy-examples */
+          light: legacyOnly,
           [styles.containerDefault]: !variant,
           [styles.containerStatic]: variant === "static",
           [styles.containerFull]: variant === "full",
@@ -112,7 +114,7 @@ export const withDsExample = (
         })}
         style={{ background: getBg(background) }}
       >
-        {!legacyOnly && <ExampleThemingSwitch />}
+        <ExampleThemingSwitch legacyOnly={legacyOnly} />
         {showBreakpoints && <BreakpointText />}
         <div
           id="ds-example"
