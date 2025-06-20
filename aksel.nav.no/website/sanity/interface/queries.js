@@ -164,6 +164,7 @@ ${defaultBlock},
 `;
 
 export const contributorsAll = `contributors[]->{title}`;
+export const editorialStaffAll = `editorial_staff_teams[]->{title, description, avatar_id}`;
 
 export const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
   heading,

@@ -1,0 +1,61 @@
+import Image from "next/image";
+import { BodyShort, HStack } from "@navikt/ds-react";
+import styles from "./Avatar.module.css";
+
+const MAX_AVATAR_COUNT = 30;
+
+export const avatarUrl = (avatar_id: string) => {
+  let _avatar_id = avatar_id;
+  if (!isNaN(parseInt(avatar_id))) {
+    _avatar_id =
+      `${parseInt(avatar_id) % MAX_AVATAR_COUNT}`.padStart(3, "0") ?? "broken";
+  }
+  return `/avatars/${_avatar_id}.svg`;
+};
+
+type Avatar = {
+  imageSrc: string;
+  name: string;
+  description: string;
+};
+
+const AvatarCircle = ({ avatar }: { avatar: Avatar }) => {
+  return (
+    <Image
+      className={styles.avatarImage}
+      width="24"
+      height="24"
+      alt={`Avatar for ${avatar.name}`}
+      src={avatar.imageSrc}
+    />
+  );
+};
+
+export const AvatarStack = ({
+  avatars,
+  interactive = false,
+}: {
+  avatars: Avatar[];
+  interactive?: boolean;
+}) => {
+  const isMultiple = avatars.length > 1;
+  const suffix = isMultiple ? `+ ${avatars.length - 1}` : null;
+
+  return (
+    <HStack gap="space-4" align="center">
+      <ul className={styles.avatarList}>
+        {avatars.map((avatar, idx) => {
+          return (
+            <li key={idx} className={styles.avatarItem}>
+              <AvatarCircle avatar={avatar} />
+            </li>
+          );
+        })}
+      </ul>
+      <BodyShort className={styles.avatarName} size="small">
+        {`${avatars[0].name}`}
+        {suffix && <span className={styles.avatarNameSuffix}>{suffix}</span>}
+      </BodyShort>
+    </HStack>
+  );
+};

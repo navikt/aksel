@@ -1,5 +1,9 @@
 import { defineQuery } from "next-sanity";
-import { contributorsAll, destructureBlocks } from "@/sanity/queries";
+import {
+  contributorsAll,
+  destructureBlocks,
+  editorialStaffAll,
+} from "@/sanity/queries";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
 
@@ -30,7 +34,7 @@ const BLOGG_LANDINGSSIDE_BLOGS_QUERY = defineQuery(`
       _createdAt,
       _id,
       "slug": slug.current,
-      ${contributorsAll}
+      ${editorialStaffAll}
     }
   }`);
 

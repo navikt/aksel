@@ -15,6 +15,7 @@ import {
   LinkCardFooter,
   LinkCardTitle,
 } from "../(god-praksis)/_ui/link-card/LinkCard";
+import { AvatarStack, avatarUrl } from "../_ui/Avatar";
 import styles from "./_ui/Produktbloggen.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -55,7 +56,15 @@ export default async function Page() {
         noe å dele? Ta kontakt med Team Aksel!
       </BodyLong>
       <HGrid columns={{ xs: 1, md: 2 }} gap="space-24">
-        {bloggPosts.map((bloggPost) => {
+        {bloggPosts.map((bloggPost, idx) => {
+          const avatars = bloggPost.editorial_staff_teams?.map((est) => {
+            return {
+              name: est.title ?? `${idx}`,
+              imageSrc: avatarUrl(est.avatar_id?.current ?? ""),
+              description: est.description ?? "",
+            };
+          });
+
           return (
             <LinkCard key={bloggPost._id}>
               <LinkCardTitle as="span">
@@ -64,7 +73,9 @@ export default async function Page() {
                 </LinkCardAnchor>
               </LinkCardTitle>
               <LinkCardDescription>{bloggPost.ingress}</LinkCardDescription>
-              <LinkCardFooter>avatars...</LinkCardFooter>
+              <LinkCardFooter>
+                {avatars && <AvatarStack avatars={avatars} />}
+              </LinkCardFooter>
             </LinkCard>
           );
         })}
