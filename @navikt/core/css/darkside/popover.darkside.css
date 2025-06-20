@@ -10,12 +10,12 @@
 }
 
 .aksel-popover__content {
-  padding: var(--ax-space-16);
+  padding: var(--ax-space-12) var(--ax-space-16);
 }
 
 @media (min-width: 480px) {
   .aksel-popover__content {
-    padding: var(--ax-space-20);
+    padding: var(--ax-space-16) var(--ax-space-20);
   }
 }
 
