@@ -78,7 +78,7 @@
   --__ac-link-card-padding-inline: var(--a-spacing-4);
 }
 
-.aksel-link-card--small & {
+.aksel-link-card--small .aksel-link-card__icon {
   margin-inline-end: var(--a-spacing-3);
 }
 
