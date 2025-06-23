@@ -1,4 +1,7 @@
-import React, { forwardRef, useCallback, useEffect } from "react";
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { forwardRef, useCallback, useEffect, useRef } from "react";
 import { Slot } from "../../slot/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
@@ -36,8 +39,8 @@ const DialogPrimitiveRoot = ({
   onOpenChange,
   open: _open,
 }: DialogPrimitiveProps) => {
-  const triggerRef = React.useRef<HTMLButtonElement>(null);
-  const contentRef = React.useRef<HTMLDialogElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const contentRef = useRef<HTMLDialogElement>(null);
 
   const [open, setOpen] = useControllableState({
     defaultValue: defaultOpen,
@@ -129,22 +132,67 @@ type DialogPrimitiveContentProps =
 const DialogPrimitiveContent = forwardRef<
   HTMLDialogElement,
   DialogPrimitiveContentProps
->(({ children, ...restProps }: DialogPrimitiveContentProps, forwardedRef) => {
-  const context = useDialogPrimitive();
+>(
+  (
+    {
+      children,
+      onMouseDown,
+      onClick,
+      ...restProps
+    }: DialogPrimitiveContentProps,
+    forwardedRef,
+  ) => {
+    const mouseClickEvent =
+      useRef<React.MouseEvent<HTMLDialogElement, MouseEvent>>();
 
-  const mergedRefs = useMergeRefs(forwardedRef, context.contentRef);
+    const localDialogRef = useRef<HTMLDialogElement>(null);
+    const context = useDialogPrimitive();
 
-  return (
-    <dialog
-      ref={mergedRefs}
-      data-state={getState(context.open)}
-      aria-labelledby={context.titleId}
-      {...restProps}
-    >
-      {children}
-    </dialog>
-  );
-});
+    const mergedRefs = useMergeRefs(
+      forwardedRef,
+      context.contentRef,
+      localDialogRef,
+    );
+
+    const handleDialogClick = (
+      dialogClickEvent: React.MouseEvent<HTMLDialogElement>,
+    ) => {
+      if (
+        dialogClickEvent.target !== localDialogRef.current ||
+        !mouseClickEvent.current
+      ) {
+        return;
+      }
+
+      const modalRect = localDialogRef.current.getBoundingClientRect();
+
+      /* Avoids drag-click outside of dialog */
+      if (
+        coordsAreInside(mouseClickEvent.current, modalRect) ||
+        coordsAreInside(dialogClickEvent, modalRect)
+      ) {
+        return;
+      }
+
+      context.onOpenChange(false);
+    };
+
+    return (
+      <dialog
+        ref={mergedRefs}
+        data-state={getState(context.open)}
+        aria-labelledby={context.titleId}
+        onMouseDown={composeEventHandlers(onMouseDown, (event) => {
+          mouseClickEvent.current = event;
+        })}
+        onClick={composeEventHandlers(onClick, handleDialogClick)}
+        {...restProps}
+      >
+        {children}
+      </dialog>
+    );
+  },
+);
 
 /* ------------------------- DialogPrimitive Close ------------------------- */
 type DialogPrimitiveCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -193,6 +241,21 @@ const DialogPrimitiveTitle = forwardRef<
 /* ------------------------ DialogPrimitive utilities ----------------------- */
 function getState(open: boolean) {
   return open ? "open" : "closed";
+}
+
+function coordsAreInside(
+  { clientX, clientY }: React.MouseEvent<HTMLDialogElement>,
+  { left, top, right, bottom }: DOMRect,
+) {
+  if (clientX < left || clientY < top) {
+    return false;
+  }
+
+  if (clientX > right || clientY > bottom) {
+    return false;
+  }
+
+  return true;
 }
 
 export {
