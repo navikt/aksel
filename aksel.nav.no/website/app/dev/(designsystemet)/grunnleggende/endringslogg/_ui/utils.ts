@@ -11,6 +11,7 @@ export const bumpHeadingLevels = (
       } else if (clone.style === "h3") {
         clone.style = "h4";
       } else if (clone.style === "h4") {
+        // @ts-expect-error - h5 cannot be selected in Sanity Studio
         clone.style = "h5";
       }
     }
