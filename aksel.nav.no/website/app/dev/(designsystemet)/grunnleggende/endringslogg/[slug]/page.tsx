@@ -21,6 +21,7 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
+import { capitalize } from "@/utils";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
 import styles from "../_ui/Changelog.module.css";
 import ChangelogLinkCard from "../_ui/ChangelogLinkCard";
@@ -90,17 +91,18 @@ export default async function (props: Props) {
       <VStack marginBlock="space-0 space-28">
         <BodyShort
           size="medium"
-          className={
-            fremhevet ? styles.kategoriFremhevet : styles.kategoriInArticle
-          }
+          textColor={fremhevet ? "default" : "subtle"}
+          data-color={fremhevet ? "aksel-brand-pink" : "aksel-brand-blue"}
+          // TODO: [endringslogg] 'subtle' is not 'aksel-brand-blue-sublte' despite textColor=sublte and data-color=aksel-brand-blue...
+          className={!fremhevet ? styles.kategoriInArticle : ""}
         >
-          {endringstype}
+          {capitalize(endringstype || "")}
         </BodyShort>
         <Heading
           size="xlarge"
           level="1"
           spacing
-          className={fremhevet ? styles.headingFremhevet : ""}
+          data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
         >
           {heading}
         </Heading>
@@ -108,14 +110,18 @@ export default async function (props: Props) {
           <BodyShort
             size="small"
             textColor="subtle"
-            className={fremhevet ? styles.dateFremhevet : ""}
+            data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
           >
             {format(new Date(endringsdato || ""), "d. MMMM yyy", {
               locale: nb,
             })}
           </BodyShort>
           {fremhevet && (
-            <Tag size="xsmall" variant="neutral-filled" className={styles.tag}>
+            <Tag
+              size="xsmall"
+              variant="neutral-filled"
+              data-color="aksel-brand-pink"
+            >
               Fremhevet
             </Tag>
           )}
@@ -135,7 +141,11 @@ export default async function (props: Props) {
             height={630}
           />
         )}
-        <CustomPortableText value={innhold as PortableTextBlock[]} />
+        {/* TODO: [endringslogg] Blue in non-fremehevet should be aksel-brand-blue, but ends up 'ax-bg-accent-strong' instead */}
+        <CustomPortableText
+          value={innhold as PortableTextBlock[]}
+          data-color="aksel-brand-blue"
+        />
       </VStack>
 
       <HGrid

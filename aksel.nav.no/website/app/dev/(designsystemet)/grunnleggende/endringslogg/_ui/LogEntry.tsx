@@ -116,11 +116,8 @@ export default function LogEntry({
                 size="small"
                 weight="semibold"
                 textColor="subtle"
-                className={
-                  fremhevet
-                    ? styles.entryEyebrowFremhevet
-                    : styles.entryEyebrowNotFremhevet
-                }
+                data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
+                className={!fremhevet ? styles.entryEyebrowNotFremhevet : ""}
               >
                 {capitalize(endringstype || "")}
                 <span className="sr-only">.&nbsp;</span>
@@ -136,9 +133,7 @@ export default function LogEntry({
               <Tag
                 size="xsmall"
                 variant="neutral-filled"
-                // TODO: [endringslogg] Verify color shade
-                className={styles.tag}
-                // data-color="aksel-brand-pink"
+                data-color="aksel-brand-pink"
               >
                 Fremhevet
               </Tag>
@@ -155,11 +150,6 @@ export default function LogEntry({
                 scrollTargetRef={
                   logEntryContainer as MutableRefObject<HTMLElement>
                 }
-                // style={{
-                //   scrollMarginTop:
-                //     "calc(var(--website-header-height) + var(--ax-space-96) + var(--ax-space-20))",
-                // }}
-                // scrollBackOnCollapse={false}
               >
                 <ShowMore.Heading>
                   <Heading size="large" level="2" spacing>

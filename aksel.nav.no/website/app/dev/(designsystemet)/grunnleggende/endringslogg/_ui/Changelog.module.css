@@ -32,14 +32,14 @@
 }
 
 .bulletFremhevet {
-  background-color: var(--aksel-brand-pink-600);
-  border-color: var(--aksel-brand-pink-300);
+  background-color: var(--aksel-bg-brand-pink-strong);
+  border-color: var(--aksel-bg-brand-pink-moderate);
   animation: pulseShadow 1.2s infinite;
 }
 
 @keyframes pulseShadow {
   0% {
-    box-shadow: 0 0 0 0 var(--aksel-brand-pink-600);
+    box-shadow: 0 0 0 0 var(--aksel-border-brand-pink);
   }
 
   70% {
@@ -56,15 +56,7 @@
   scroll-margin-top: calc(var(--website-header-height) + var(--ax-space-12) + 48px + var(--ax-space-32));
 }
 
-.tag {
-  background-color: var(--aksel-brand-pink-700);
-}
-
 .dateFremhevet {
-  color: var(--aksel-brand-pink-900);
-}
-
-.entryEyebrowFremhevet {
   color: var(--aksel-brand-pink-900);
 }
 
@@ -73,17 +65,7 @@
 }
 
 .kategoriInArticle {
-  text-transform: capitalize;
   color: var(--ax-text-brand-blue-subtle);
-}
-
-.kategoriFremhevet {
-  text-transform: capitalize;
-  color: var(--aksel-brand-pink-900);
-}
-
-.headingFremhevet {
-  color: var(--aksel-brand-pink-1000);
 }
 
 .innhold {
@@ -95,7 +77,7 @@
   --ax-text-brand-blue-subtle: var(--aksel-brand-pink-1000);
 
   color: var(--aksel-brand-pink-1000);
-  border: 2px solid var(--aksel-brand-pink-700);
+  border: 2px solid var(--aksel-border-brand-pink);
   border-radius: var(--ax-radius-12);
 }
 
