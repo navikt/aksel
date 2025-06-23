@@ -1,22 +1,17 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
-import { BodyLong, HGrid, Heading } from "@navikt/ds-react";
+import { BodyLong, Heading, Show, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   BLOGG_LANDINGSSIDE_BLOGS_QUERY,
   BLOGG_LANDINGSSIDE_PAGE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import {
-  LinkCard,
-  LinkCardAnchor,
-  LinkCardDescription,
-  LinkCardFooter,
-  LinkCardTitle,
-} from "../(god-praksis)/_ui/link-card/LinkCard";
-import { AvatarStack, avatarUrl } from "../_ui/Avatar";
+import { BloggList } from "./_ui/BloggList";
+import { HighlightedBlogg } from "./_ui/HighlightedBlogg";
 import styles from "./_ui/Produktbloggen.module.css";
+import { SimpleArticle } from "./_ui/SimpleArticle";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: pageData } = await sanityFetch({
@@ -44,42 +39,48 @@ export default async function Page() {
     notFound();
   }
 
-  const bloggPosts = pageData.bloggposts;
+  const remainingPosts = pageData?.bloggposts?.slice(
+    2,
+    pageData?.bloggposts.length,
+  );
 
   return (
-    <div className={styles.bloggMain}>
-      <Heading level="1" size="xlarge" className={styles.bloggHeading}>
-        Produktbloggen
-      </Heading>
-      <BodyLong size="large" className={styles.bloggDescription}>
-        Skriverier fra produktutviklingsmiljøet i NAV. Har du eller teamet ditt
-        noe å dele? Ta kontakt med Team Aksel!
-      </BodyLong>
-      <HGrid columns={{ xs: 1, md: 2 }} gap="space-24">
-        {bloggPosts.map((bloggPost, idx) => {
-          const avatars = bloggPost.editorial_staff_teams?.map((est) => {
-            return {
-              name: est.title ?? `${idx}`,
-              imageSrc: avatarUrl(est.avatar_id?.current ?? ""),
-              description: est.description ?? "",
-            };
-          });
+    <>
+      <div className={styles.bloggPosts}>
+        <VStack align="center">
+          <Heading
+            level="1"
+            size="xlarge"
+            spacing
+            className={styles.overviewTitle}
+          >
+            Produktbloggen
+          </Heading>
+          <BodyLong className={styles.overviewSubtitle}>
+            Skriverier fra produktutviklingsmiljøet i Nav. Har du eller teamet
+            ditt noe å dele? Ta kontakt med Team Aksel!
+          </BodyLong>
+        </VStack>
 
-          return (
-            <LinkCard key={bloggPost._id}>
-              <LinkCardTitle as="span">
-                <LinkCardAnchor href={bloggPost.slug ?? "#"}>
-                  {bloggPost.heading}
-                </LinkCardAnchor>
-              </LinkCardTitle>
-              <LinkCardDescription>{bloggPost.ingress}</LinkCardDescription>
-              <LinkCardFooter>
-                {avatars && <AvatarStack avatars={avatars} />}
-              </LinkCardFooter>
-            </LinkCard>
-          );
-        })}
-      </HGrid>
-    </div>
+        <div className={styles.latestBloggPosts}>
+          <HighlightedBlogg blogg={pageData.bloggposts[0]} />
+          <Show above="md">
+            <HighlightedBlogg blogg={pageData.bloggposts[1]} />
+          </Show>
+          <Show below="md">
+            <SimpleArticle blogg={pageData.bloggposts[1]} />
+          </Show>
+        </div>
+
+        {/* Flere blogger */}
+        {remainingPosts && (
+          <ul className={styles.remainingPosts}>
+            {remainingPosts.map((blogg) => (
+              <BloggList blogg={blogg} key={blogg._id} />
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 }
