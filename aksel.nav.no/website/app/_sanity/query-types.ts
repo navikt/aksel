@@ -12647,6 +12647,31 @@ export type SITEMAP_ARTICLES_BY_TYPE_QUERYResult = Array<
       _updatedAt: string;
     }
 >;
+// Variable: ENDRINGSLOGG_QUERY
+// Query: *[_type == "ds_endringslogg_artikkel"]{    heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer  }
+export type ENDRINGSLOGG_QUERYResult = Array<{
+  heading: string | null;
+  slug: Slug | null;
+  endringsdato: string | null;
+  endringstype: "design" | "dokumentasjon" | "kode" | null;
+  fremhevet: boolean | null;
+  herobilde: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    dekorativt?: boolean;
+    alt?: string;
+    _type: "image";
+  } | null;
+  innhold: Riktekst_grunnleggende | null;
+  visMer: boolean | null;
+}>;
 
 // Source: ../app/dev/(designsystemet)/grunnleggende/endringslogg/[slug]/page.tsx
 // Variable: ENDRINGSLOGG_WITH_NEIGHBORS_QUERY
@@ -12720,33 +12745,6 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
   } | null;
 } | null;
 
-// Source: ../app/dev/(designsystemet)/grunnleggende/endringslogg/page.tsx
-// Variable: ENDRINGSLOGG_QUERY
-// Query: *[_type == "ds_endringslogg_artikkel"]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer}
-export type ENDRINGSLOGG_QUERYResult = Array<{
-  heading: string | null;
-  slug: Slug | null;
-  endringsdato: string | null;
-  endringstype: "design" | "dokumentasjon" | "kode" | null;
-  fremhevet: boolean | null;
-  herobilde: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    dekorativt?: boolean;
-    alt?: string;
-    _type: "image";
-  } | null;
-  innhold: Riktekst_grunnleggende | null;
-  visMer: boolean | null;
-}>;
-
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {\n  _type,\n  heading,\n  "slug": slug.current,\n  kategori,\n  "tag": status.tag,\n  "sidebarindex": sidebarindex,\n}': DESIGNSYSTEM_SIDEBAR_QUERYResult;
@@ -12779,7 +12777,7 @@ declare module "@sanity/client" {
     '*[_id == $id][0]{\n      "id": _id,\n      "title": heading,\n      "editors": contributors[]->email,\n      "slug": slug.current,\n      "contacts": undertema[]->tema->contacts[]->email\n    }': DOCUMENT_BY_ID_FOR_SLACK_QUERYResult;
     '\n{\n      "frontpage": *[_type == "aksel_forside"][0]._updatedAt,\n      "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,\n      "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,\n}\n  ': SITEMAP_LANDINGPAGES_QUERYResult;
     '\n  *[_type in $doctypes]{\n    "slug": slug.current,\n    _updatedAt\n  }\n  ': SITEMAP_ARTICLES_BY_TYPE_QUERYResult;
+    '\n  *[_type == "ds_endringslogg_artikkel"]{\n    heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer\n  }\n  ': ENDRINGSLOGG_QUERYResult;
     '\n  *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{\n    "primary": {heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold},\n    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold},\n    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold}\n  }\n': ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult;
-    '*[_type == "ds_endringslogg_artikkel"]{heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer}': ENDRINGSLOGG_QUERYResult;
   }
 }

@@ -357,6 +357,12 @@ const SITEMAP_ARTICLES_BY_TYPE_QUERY = defineQuery(`
   }
   `);
 
+const ENDRINGSLOGG_QUERY = defineQuery(`
+  *[_type == "ds_endringslogg_artikkel"]{
+    heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer
+  }
+  `);
+
 /* --------------------------------- Exports -------------------------------- */
 export {
   BLOGG_BY_SLUG_QUERY,
@@ -370,6 +376,7 @@ export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
   DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
   DOCUMENT_BY_ID_FOR_SLACK_QUERY,
+  ENDRINGSLOGG_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
   GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,

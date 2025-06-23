@@ -3,6 +3,7 @@ import { nb } from "date-fns/locale";
 import { defineQuery } from "next-sanity";
 import { Heading, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
+import { ENDRINGSLOGG_QUERY } from "@/app/_sanity/queries";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
@@ -12,14 +13,7 @@ import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
 import FilterChips from "./_ui/FilterChips";
 import LogEntryList from "./_ui/LogEntryList";
 import SearchField from "./_ui/SearchField";
-
-const fields =
-  "heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer";
-// Not used in code, only for generating types
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ENDRINGSLOGG_QUERY = defineQuery(
-  `*[_type == "ds_endringslogg_artikkel"]{${fields}}`,
-);
+import { bumpHeadingLevels } from "./_ui/utils";
 
 const startYear = 2022;
 const currentYear = new Date().getFullYear();
@@ -68,7 +62,16 @@ export default async function Page({ searchParams }) {
               "",
             )
           : ""
-      }]{${fields}} | order(endringsdato desc)`,
+      }]{
+        heading,
+        slug,
+        endringsdato,
+        endringstype,
+        fremhevet,
+        herobilde,
+        innhold,
+        visMer
+      } | order(endringsdato desc)`,
     ) as typeof ENDRINGSLOGG_QUERY,
     params: {
       year: `${yearFilter}`,
@@ -85,25 +88,12 @@ export default async function Page({ searchParams }) {
 
   const { data: logEntries } = await sanityFetch(sanityObject);
 
-  // Bump headings to next heading-level for changelog list
   logEntries.forEach((logEntry) => {
-    if (logEntry.innhold && logEntry.innhold?.length > 0)
-      logEntry.innhold.forEach((block) => {
-        if (block._type === "block") {
-          if (block.style === "h2") {
-            block.style = "h3";
-          } else if (block.style === "h3") {
-            block.style = "h4";
-          } else if (block.style === "h4") {
-            // @ts-expect-error - h5 cannot be selected in Sanity Studio
-            block.style = "h5";
-          }
-        }
-      });
+    logEntry.innhold = bumpHeadingLevels(logEntry.innhold) || null;
   });
 
-  const groupedByMonth = logEntries.reduce<ENDRINGSLOGG_QUERYResult[]>(
-    (acc, logEntry) => {
+  const groupedByMonth = logEntries.reduce(
+    (acc: ENDRINGSLOGG_QUERYResult[], logEntry): ENDRINGSLOGG_QUERYResult[] => {
       const monthKey = getMonthAndYear(logEntry.endringsdato);
       const lastGroup = acc[acc.length - 1];
       if (
