@@ -1,9 +1,10 @@
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { defineQuery } from "next-sanity";
+import { Metadata } from "next/types";
 import { Heading, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
-import { ENDRINGSLOGG_QUERY } from "@/app/_sanity/queries";
+import { ENDRINGSLOGG_FIELDS, ENDRINGSLOGG_QUERY } from "@/app/_sanity/queries";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
@@ -14,6 +15,12 @@ import FilterChips from "./_ui/FilterChips";
 import LogEntryList from "./_ui/LogEntryList";
 import SearchField from "./_ui/SearchField";
 import { bumpHeadingLevels } from "./_ui/utils";
+
+export const metadata: Metadata = {
+  title: "Endringslogg",
+  description:
+    "Endringsloggen gir deg en oversikt over oppdatert kode, design og dokumentasjon.",
+};
 
 const startYear = 2022;
 const currentYear = new Date().getFullYear();
@@ -62,16 +69,7 @@ export default async function Page({ searchParams }) {
               "",
             )
           : ""
-      }]{
-        heading,
-        slug,
-        endringsdato,
-        endringstype,
-        fremhevet,
-        herobilde,
-        innhold,
-        visMer
-      } | order(endringsdato desc)`,
+      }]{${ENDRINGSLOGG_FIELDS}} | order(endringsdato desc)`,
     ) as typeof ENDRINGSLOGG_QUERY,
     params: {
       year: `${yearFilter}`,

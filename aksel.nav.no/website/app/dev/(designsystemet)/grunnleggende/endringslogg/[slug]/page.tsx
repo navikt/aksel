@@ -3,6 +3,7 @@ import { nb } from "date-fns/locale";
 import { PortableTextBlock, defineQuery } from "next-sanity";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Metadata } from "next/types";
 import type { Image as SanityImage } from "sanity";
 import {
   BodyShort,
@@ -14,21 +15,35 @@ import {
 } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
-import { urlForImage } from "@/app/_sanity/utils";
+import {
+  ENDRINGSLOGG_METADATA_BY_SLUG_QUERY,
+  ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
+} from "@/app/_sanity/queries";
+import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
 import styles from "../_ui/Changelog.module.css";
 import ChangelogLinkCard from "../_ui/ChangelogLinkCard";
 
-const projection =
-  '{heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold}';
-const ENDRINGSLOGG_WITH_NEIGHBORS_QUERY = defineQuery(`
-  *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{
-    "primary": ${projection},
-    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]${projection},
-    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]${projection}
-  }
-`);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+
+  const { data: pageData } = await sanityFetch({
+    query: ENDRINGSLOGG_METADATA_BY_SLUG_QUERY,
+    params: { slug },
+    stega: false,
+  });
+
+  return {
+    title: pageData?.heading,
+    keywords: pageData?.endringstype,
+    openGraph: {
+      type: "article",
+      publishedTime: pageData?.endringsdato || undefined,
+      images: urlForOpenGraphImage(pageData?.herobilde as SanityImage),
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const { data: slugs } = await sanityFetch({
