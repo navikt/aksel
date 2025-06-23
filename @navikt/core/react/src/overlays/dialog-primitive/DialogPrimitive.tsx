@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef, useCallback, useEffect } from "react";
 import { Slot } from "../../slot/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
@@ -21,21 +21,21 @@ const [DialogPrimitiveProvider, useDialogPrimitive] =
     hookName: "useDialogPrimitive",
   });
 
-type DialogPrimtiveProps = {
+type DialogPrimitiveProps = {
   children: React.ReactNode;
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
 };
 
-type DialogPrimitiveComponent = React.FC<DialogPrimtiveProps>;
+type DialogPrimitiveComponent = React.FC<DialogPrimitiveProps>;
 
-const DialogPrimtiveRoot = ({
+const DialogPrimitiveRoot = ({
   children,
   defaultOpen = false,
   onOpenChange,
   open: _open,
-}: DialogPrimtiveProps) => {
+}: DialogPrimitiveProps) => {
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const contentRef = React.useRef<HTMLDialogElement>(null);
 
@@ -45,26 +45,51 @@ const DialogPrimtiveRoot = ({
     value: _open,
   });
 
+  const instantStateToggle = useCallback(
+    (newOpen: boolean) => {
+      setOpen(newOpen);
+      if (newOpen) {
+        contentRef.current?.showModal();
+      } else {
+        contentRef.current?.close();
+      }
+    },
+    [setOpen],
+  );
+
+  useEffect(() => {
+    const isDomOpen = contentRef.current?.open;
+    if (open && !isDomOpen) {
+      contentRef.current?.showModal();
+      return;
+    } else if (!open && isDomOpen) {
+      contentRef.current?.close();
+      return;
+    }
+    console.info(
+      "DialogPrimitive: contentRef.current?.open is not in sync with open state",
+    );
+  }, [open]);
+
   return (
     <DialogPrimitiveProvider
       triggerRef={triggerRef}
       contentRef={contentRef}
       titleId={useId()}
       open={open}
-      onOpenChange={setOpen}
-      onOpenToggle={useCallback(
-        () => setOpen((prevOpen) => !prevOpen),
-        [setOpen],
-      )}
+      onOpenChange={instantStateToggle}
+      onOpenToggle={useCallback(() => {
+        instantStateToggle(!open);
+      }, [instantStateToggle, open])}
     >
       {children}
     </DialogPrimitiveProvider>
   );
 };
 
-const DialogPrimtive = DialogPrimtiveRoot as DialogPrimitiveComponent;
+const DialogPrimitive = DialogPrimitiveRoot as DialogPrimitiveComponent;
 
-/* ------------------------- DialogPrimtive Trigger ------------------------- */
+/* ------------------------- DialogPrimitive Trigger ------------------------- */
 type DialogPrimitiveTriggerProps =
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -97,7 +122,7 @@ const DialogPrimitiveTrigger = forwardRef<
   },
 );
 
-/* ------------------------- DialogPrimtive Content ------------------------- */
+/* ------------------------- DialogPrimitive Content ------------------------- */
 type DialogPrimitiveContentProps =
   React.DialogHTMLAttributes<HTMLDialogElement>;
 
@@ -107,17 +132,61 @@ const DialogPrimitiveContent = forwardRef<
 >(({ children, ...restProps }: DialogPrimitiveContentProps, forwardedRef) => {
   const context = useDialogPrimitive();
 
-  /*     const showProp = modal ? 'showModal' : 'show';
-   */
-  /*     useEffect(() => dialogRef.current?.[open ? showProp : 'close'](), [open]); // Toggle open based on prop
-   */
-
   const mergedRefs = useMergeRefs(forwardedRef, context.contentRef);
 
   return (
-    <dialog ref={mergedRefs} data-state={getState(context.open)} {...restProps}>
+    <dialog
+      ref={mergedRefs}
+      data-state={getState(context.open)}
+      aria-labelledby={context.titleId}
+      {...restProps}
+    >
       {children}
     </dialog>
+  );
+});
+
+/* ------------------------- DialogPrimitive Close ------------------------- */
+type DialogPrimitiveCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+const DialogPrimitiveClose = forwardRef<
+  HTMLButtonElement,
+  DialogPrimitiveCloseProps
+>(
+  (
+    { children, onClick, ...restProps }: DialogPrimitiveCloseProps,
+    forwardedRef,
+  ) => {
+    const context = useDialogPrimitive();
+
+    return (
+      <Slot
+        ref={forwardedRef}
+        type="button"
+        {...restProps}
+        onClick={composeEventHandlers(onClick, () =>
+          context.onOpenChange(false),
+        )}
+      >
+        {requireReactElement(children)}
+      </Slot>
+    );
+  },
+);
+
+/* ------------------------- DialogPrimitive Close ------------------------- */
+type DialogPrimitiveTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
+
+const DialogPrimitiveTitle = forwardRef<
+  HTMLHeadingElement,
+  DialogPrimitiveTitleProps
+>(({ children, ...restProps }: DialogPrimitiveTitleProps, forwardedRef) => {
+  const context = useDialogPrimitive();
+
+  return (
+    <h1 ref={forwardedRef} id={context.titleId} {...restProps}>
+      {children}
+    </h1>
   );
 });
 
@@ -126,4 +195,10 @@ function getState(open: boolean) {
   return open ? "open" : "closed";
 }
 
-export { DialogPrimtive, DialogPrimitiveTrigger, DialogPrimitiveContent };
+export {
+  DialogPrimitive,
+  DialogPrimitiveTrigger,
+  DialogPrimitiveContent,
+  DialogPrimitiveClose,
+  DialogPrimitiveTitle,
+};
