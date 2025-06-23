@@ -105,7 +105,7 @@ function DesignsystemetOverviewCard({
           </Bleed>
         </Box>
 
-        <LinkCardTitle as="h2">
+        <LinkCardTitle as="span">
           <HStack as="span" gap="space-8" align="center">
             <LinkCardAnchor href={`/${page?.slug}`}>
               {page?.heading}
