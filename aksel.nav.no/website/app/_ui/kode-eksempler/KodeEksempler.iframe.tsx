@@ -123,6 +123,7 @@ function KodeEksemplerIFrame(props: {
       {showCode && (
         <CodeBlock
           data-block-margin="space-0"
+          aria-label={`Kode for ${current?.title}`}
           tabs={[
             {
               text: "TSX",
