@@ -11,7 +11,7 @@ type DialogPrimitiveContextValue = {
   onOpenToggle: () => void;
   triggerRef: React.RefObject<HTMLButtonElement | null>;
   /* TODO: Link type directly to content-type? */
-  contentRef: React.RefObject<HTMLDivElement | null>;
+  contentRef: React.RefObject<HTMLDialogElement | null>;
   titleId: string;
 };
 
@@ -37,7 +37,7 @@ const DialogPrimtiveRoot = ({
   open: _open,
 }: DialogPrimtiveProps) => {
   const triggerRef = React.useRef<HTMLButtonElement>(null);
-  const contentRef = React.useRef<HTMLDivElement>(null);
+  const contentRef = React.useRef<HTMLDialogElement>(null);
 
   const [open, setOpen] = useControllableState({
     defaultValue: defaultOpen,
@@ -97,9 +97,33 @@ const DialogPrimitiveTrigger = forwardRef<
   },
 );
 
+/* ------------------------- DialogPrimtive Content ------------------------- */
+type DialogPrimitiveContentProps =
+  React.DialogHTMLAttributes<HTMLDialogElement>;
+
+const DialogPrimitiveContent = forwardRef<
+  HTMLDialogElement,
+  DialogPrimitiveContentProps
+>(({ children, ...restProps }: DialogPrimitiveContentProps, forwardedRef) => {
+  const context = useDialogPrimitive();
+
+  /*     const showProp = modal ? 'showModal' : 'show';
+   */
+  /*     useEffect(() => dialogRef.current?.[open ? showProp : 'close'](), [open]); // Toggle open based on prop
+   */
+
+  const mergedRefs = useMergeRefs(forwardedRef, context.contentRef);
+
+  return (
+    <dialog ref={mergedRefs} data-state={getState(context.open)} {...restProps}>
+      {children}
+    </dialog>
+  );
+});
+
 /* ------------------------ DialogPrimitive utilities ----------------------- */
 function getState(open: boolean) {
   return open ? "open" : "closed";
 }
 
-export { DialogPrimtive, DialogPrimitiveTrigger };
+export { DialogPrimtive, DialogPrimitiveTrigger, DialogPrimitiveContent };
