@@ -93,6 +93,11 @@
   color: var(--ax-text-brand-blue);
 }
 
+.bloggPosts {
+  margin: auto;
+  max-width: var(--ax-breakpoint-2xl);
+}
+
 /* sm */
 @media (min-width: 480px) {
   .bloggPosts {
