@@ -42,7 +42,12 @@
 }
 
 .articleBody {
-  margin-top: var(--ax-space-16);
+  margin-block: var(--ax-space-16);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 .articleBodySubtle {
