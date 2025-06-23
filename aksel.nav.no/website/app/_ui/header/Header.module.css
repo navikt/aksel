@@ -90,8 +90,9 @@
   padding: var(--ax-space-16);
   color: var(--ax-text-info-contrast);
   text-decoration: none;
+  border-end-end-radius: var(--ax-radius-8);
 
-  /* We move it further away and (just in case scale it to 0) 
+  /* We move it further away and (just in case scale it to 0)
   to avoid it showing when scroll "overshoots" */
   transform: translateY(-300%) scale(0);
 
