@@ -151,7 +151,6 @@ export default async function Page({ searchParams }) {
           name: "Endringslogg",
           text: "Send innspill",
         }}
-        showChangelogLink={true}
         toc={toc}
       />
     </DesignsystemetPageLayout>
