@@ -8291,7 +8291,7 @@ __metadata:
     prettier: "npm:3.1.1"
     prettier-plugin-tailwindcss: "npm:^0.6.11"
     react: "npm:^18.0.0"
-    react-docgen-typescript: "npm:2.2.2"
+    react-docgen-typescript: "npm:2.4.0"
     react-dom: "npm:^18.0.0"
     storybook: "npm:^8.6.14"
     storybook-addon-pseudo-states: "npm:^4.0.4"
@@ -20669,7 +20669,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-docgen-typescript@npm:2.2.2, react-docgen-typescript@npm:^2.2.2":
+"react-docgen-typescript@npm:2.4.0":
+  version: 2.4.0
+  resolution: "react-docgen-typescript@npm:2.4.0"
+  peerDependencies:
+    typescript: ">= 4.3.x"
+  checksum: 10/81e45bc012150dee50a9919a44597a436d45168f7a83febbbfef134c07e71c1a2f09fb6e1fc040f18bd6747f37b46d463a2b4a30177f6137e4ff49570bcaf253
+  languageName: node
+  linkType: hard
+
+"react-docgen-typescript@npm:^2.2.2":
   version: 2.2.2
   resolution: "react-docgen-typescript@npm:2.2.2"
   peerDependencies:
