@@ -71,5 +71,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  desc: "Standardstørrelsen 'medium' brukes både på eksterne og interne flater.",
+  desc: "Medium er standardstørrelsen på både eksterne og interne flater.",
 };

@@ -70,7 +70,7 @@
 }
 
 .aksel-chat__bubble {
-  padding: var(--ax-space-20);
+  padding: var(--ax-space-16) var(--ax-space-20);
   width: fit-content;
   display: flex;
   flex-direction: column;
@@ -80,7 +80,7 @@
 }
 
 .aksel-chat--small .aksel-chat__bubble {
-  padding: var(--ax-space-16);
+  padding: var(--ax-space-12) var(--ax-space-16);
 }
 
 /* ------------------------------ Chat top text ----------------------------- */

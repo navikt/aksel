@@ -38,6 +38,8 @@
 @import "./internalheader.darkside.css" layer(aksel.components);
 @import "./link.darkside.css" layer(aksel.components);
 @import "./link-panel.darkside.css" layer(aksel.components);
+@import "./link-anchor.darkside.css" layer(aksel.components);
+@import "./link-card.darkside.css" layer(aksel.components);
 @import "./loader.darkside.css" layer(aksel.components);
 @import "./modal.darkside.css" layer(aksel.components);
 @import "./pagination.darkside.css" layer(aksel.components);
