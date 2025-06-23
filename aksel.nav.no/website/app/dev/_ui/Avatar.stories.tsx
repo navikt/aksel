@@ -70,6 +70,10 @@ export const MissingImage: StoryFn = () => {
   );
 };
 
+export const NoData: StoryFn = () => {
+  return <AvatarStack avatars={[]} />;
+};
+
 export const InsideCard: StoryFn = () => {
   return (
     <HGrid gap="space-16" columns={2} maxWidth="800px">

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { BodyShort, HStack } from "@navikt/ds-react";
+import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
 import styles from "./Avatar.module.css";
 import { InteractiveAvatarStack } from "./InteractiveAvatarStack";
 
@@ -14,10 +15,24 @@ export const avatarUrl = (avatar_id: string) => {
   return `/avatars/${_avatar_id}.svg`;
 };
 
+type Blogg = NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][0];
+
 export type Avatar = {
   imageSrc: string;
   name: string;
   description: string;
+};
+
+export const queryToAvatars = (
+  queryResponseEditorialStaff: Blogg["editorial_staff_teams"],
+): Avatar[] => {
+  return (
+    queryResponseEditorialStaff?.map((queryData) => ({
+      name: queryData.title ?? "",
+      imageSrc: avatarUrl(queryData.avatar_id?.current ?? "missing"),
+      description: queryData.description ?? "",
+    })) ?? []
+  );
 };
 
 const AvatarCircle = ({ avatar }: { avatar: Avatar }) => {
@@ -52,6 +67,10 @@ export const AvatarStack = ({
 }: AvatarStackProps) => {
   const isMultiple = avatars.length > 1;
   const suffix = isMultiple ? `+ ${avatars.length - 1}` : null;
+
+  if (!Array.isArray(avatars) || avatars.length === 0) {
+    return null;
+  }
 
   const avatarStack = (
     <HStack gap="space-4" align="center">
