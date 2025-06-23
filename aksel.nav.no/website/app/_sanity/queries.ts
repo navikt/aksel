@@ -24,6 +24,19 @@ const DESIGNSYSTEM_OVERVIEW_PAGES_QUERY = defineQuery(
   }`,
 );
 
+const BLOGG_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "aksel_blogg" && slug.current == $slug][0]
+{
+  ...,
+  "slug": slug.current,
+  content[]{
+    ...,
+    ${destructureBlocks}
+  },
+  publishedAt,
+  ${editorialStaffAll}
+}`);
+
 const BLOGG_LANDINGSSIDE_BLOGS_QUERY = defineQuery(`
   *[_type == "blogg_landingsside"][0]{
     "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){
@@ -134,19 +147,6 @@ const MONSTER_MALER_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
-}`);
-
-const BLOGG_BY_SLUG_QUERY =
-  defineQuery(`*[_type == "aksel_blogg" && slug.current == $slug][0]
-{
-  ...,
-  "slug": slug.current,
-  content[]{
-    ...,
-    ${destructureBlocks}
-  },
-  ${contributorsAll},
-  publishedAt,
 }`);
 
 const TOC_BY_SLUG_QUERY =

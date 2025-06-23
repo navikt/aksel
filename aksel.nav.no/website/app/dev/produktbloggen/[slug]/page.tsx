@@ -3,7 +3,7 @@ import { PortableTextBlock } from "next-sanity";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
-import { BodyLong, BodyShort, Detail, HStack, Heading } from "@navikt/ds-react";
+import { BodyLong, BodyShort, HStack, Heading } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -12,7 +12,8 @@ import {
   SLUG_BY_TYPE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { abbrName, dateStr, getImage } from "@/utils";
+import { dateStr, getImage } from "@/utils";
+import { AvatarStack, queryToAvatars } from "../../_ui/Avatar";
 import styles from "../_ui/Produktbloggen.module.css";
 
 type Props = {
@@ -79,7 +80,7 @@ export default async function Page({ params }: Props) {
 
   const publishedAtRaw = pageData?.publishedAt ?? "";
   const publishDate = await dateStr(publishedAtRaw);
-  const authors = (pageData?.contributors as any)?.map((x) => x?.title) ?? [];
+  const avatars = queryToAvatars(pageData?.editorial_staff_teams ?? []);
 
   const imageUrl = urlForImage(pageData?.seo?.image as Image)
     ?.quality(100)
@@ -106,21 +107,18 @@ export default async function Page({ params }: Props) {
             </BodyLong>
           )}
           <div>
-            <HStack
-              justify="center"
-              align="center"
-              gap="space-8"
-              marginBlock="space-20 0"
-            >
-              <Detail as="span">{publishDate}</Detail>
-              {authors?.[0] && (
-                <>
-                  <span className={styles.diamond} />
-                  <BodyShort size="small" as="address">
-                    {authors?.[0]}
-                  </BodyShort>
-                </>
-              )}
+            <HStack justify="center" marginBlock="space-40 0">
+              <HStack justify="center">
+                {avatars.map((avatar) => {
+                  return (
+                    <AvatarStack
+                      key={avatar.name}
+                      interactive
+                      avatars={[avatar]}
+                    />
+                  );
+                })}
+              </HStack>
             </HStack>
           </div>
         </div>
@@ -162,21 +160,6 @@ export default async function Page({ params }: Props) {
       <div className={styles.articleEnd}>
         <div data-wrapper-prose>
           <div className={`${styles.diamond} ${styles.diamondCenter}`} />
-          {authors?.length > 0 && (
-            <Detail uppercase className={styles.authorText} as="p">
-              Bidragsytere
-            </Detail>
-          )}
-          {authors?.length > 0 && (
-            <BodyShort as="div" className={styles.author}>
-              {authors.map(abbrName).map((x, y) => (
-                <address key={x}>
-                  {x}
-                  {y !== authors.length - 1 && ", "}
-                </address>
-              ))}
-            </BodyShort>
-          )}
           <HStack justify="center">
             <BodyShort textColor="subtle">Publisert: {publishDate}</BodyShort>
           </HStack>
