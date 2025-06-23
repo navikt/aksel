@@ -110,13 +110,6 @@
   margin-top: 0;
 }
 
-.portableTextInCard {
-  flex-grow: 1;
-  margin-bottom: var(--ax-space-16);
-  overflow: hidden;
-  mask-image: linear-gradient(rgba(0 0 0/1) 0%, rgba(0 0 0/1) calc(100% - 2rem), rgba(0 0 0/ 0) calc(100% - 0.5rem));
-}
-
 .showMoreButtonFremhevet {
   --ax-border-neutral: var(--aksel-brand-pink-600);
   --ax-border-neutral-strong: var(--aksel-brand-pink-600);
