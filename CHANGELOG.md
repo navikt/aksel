@@ -1,5 +1,21 @@
 # Changelog
 
+## 7.23.2
+
+### @navikt/ds-css
+
+- Darkside: Outline Tag in high-contrast mode had wrong text-color. ([#3889](https://github.com/navikt/aksel/pull/3889))
+
+- Darkside: Update padding for all 'panel' type components. ([#3864](https://github.com/navikt/aksel/pull/3864))
+
+- Form components: Fix edge case where description container would take up space when empty ([#3866](https://github.com/navikt/aksel/pull/3866))
+
+## 7.23.1
+
+### @navikt/ds-react
+
+- Darkside: Search now correctly respects 'clearButton'-prop when set to false. ([#3854](https://github.com/navikt/aksel/pull/3854))
+
 ## 7.23.0
 
 ### @navikt/ds-react
