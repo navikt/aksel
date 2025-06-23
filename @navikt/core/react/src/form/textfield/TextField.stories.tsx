@@ -60,6 +60,12 @@ export const Description = () => {
   );
 };
 
+const EmptyComponent = () => null;
+
+export const EmptyDescription = () => (
+  <TextField label="Ipsum enim quis culpa" description={<EmptyComponent />} />
+);
+
 export const WithError = () => {
   return (
     <div className="colgap">
@@ -128,6 +134,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Description</h2>
         <Description />
+      </div>
+      <div>
+        <h2>EmptyDescription</h2>
+        <EmptyDescription />
       </div>
       <div>
         <h2>WithError</h2>
