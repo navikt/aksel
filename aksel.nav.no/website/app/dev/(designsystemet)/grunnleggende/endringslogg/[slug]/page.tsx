@@ -72,18 +72,15 @@ export default async function (props: Props) {
     notFound();
   }
 
-  const toc = logs.primary.innhold?.reduce<{ id: string; title: string }[]>(
-    (filtered, block) => {
-      if (block._type === "block" && block.style === "h2") {
-        filtered.push({
-          id: block._key,
-          title: block.children?.[0].text || "",
-        });
-      }
-      return filtered;
-    },
-    [],
-  );
+  const toc: { id: string; title: string }[] = [];
+  logs.primary.innhold?.forEach((block) => {
+    if (block._type === "block" && block.style === "h2") {
+      toc.push({
+        id: block._key,
+        title: block.children?.[0].text || "",
+      });
+    }
+  });
 
   const { fremhevet, endringstype, heading, endringsdato, herobilde, innhold } =
     logs.primary;
