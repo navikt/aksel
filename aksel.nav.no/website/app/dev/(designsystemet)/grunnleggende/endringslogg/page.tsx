@@ -15,8 +15,9 @@ import SearchField from "./_ui/SearchField";
 
 const fields =
   "heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer";
-// It's not imported anywhere - Only for generating types
-export const ENDRINGSLOGG_QUERY = defineQuery(
+// Not used in code, only for generating types
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ENDRINGSLOGG_QUERY = defineQuery(
   `*[_type == "ds_endringslogg_artikkel"]{${fields}}`,
 );
 
