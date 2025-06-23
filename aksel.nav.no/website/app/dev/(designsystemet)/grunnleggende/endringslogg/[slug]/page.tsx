@@ -144,7 +144,6 @@ export default async function (props: Props) {
           name: "Endringslogg",
           text: "Innspill til siden",
         }}
-        showChangelogLink={true}
         toc={toc || []}
       />
     </DesignsystemetPageLayout>
