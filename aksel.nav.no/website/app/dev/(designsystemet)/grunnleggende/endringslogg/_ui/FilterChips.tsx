@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useOptimistic } from "react";
+import { startTransition, useOptimistic } from "react";
 import { Chips, Label, VStack } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
 
@@ -68,9 +68,9 @@ export default function FilterChips({
               }}
               onClick={() => {
                 if (typeof option === "number") {
-                  expectYear(option);
+                  startTransition(() => expectYear(option));
                 } else {
-                  expectCategory(option);
+                  startTransition(() => expectCategory(option));
                 }
                 push(href);
               }}
