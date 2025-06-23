@@ -14,7 +14,6 @@ import { useTableOfContents } from "./useTableOfContents";
 type TableOfContentsProps = {
   toc: TOC_BY_SLUG_QUERYResult;
   variant?: "default" | "subtle";
-  showChangelogLink?: boolean;
   feedback?: {
     name?: string;
     text: string;
@@ -93,27 +92,25 @@ function TableOfContents({
 
 function TableOfContentsLinks({
   feedback,
-}: Pick<TableOfContentsProps, "showChangelogLink" | "feedback">) {
+}: Pick<TableOfContentsProps, "feedback">) {
   if (!feedback || !feedback.name) {
     return null;
   }
 
   return (
     <div className={styles.tocAsideLinks}>
-      {feedback?.name && (
-        <Button
-          as="a"
-          variant="secondary-neutral"
-          size="small"
-          icon={<SparklesIcon aria-hidden />}
-          href={`https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill%5D%20${feedback.name}`}
-          onClick={() => umamiTrack("feedback-designsystem", { kilde: "toc" })}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {`${feedback.text}`}
-        </Button>
-      )}
+      <Button
+        as="a"
+        variant="secondary-neutral"
+        size="small"
+        icon={<SparklesIcon aria-hidden />}
+        href={`https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill%5D%20${feedback.name}`}
+        onClick={() => umamiTrack("feedback-designsystem", { kilde: "toc" })}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {feedback.text}
+      </Button>
     </div>
   );
 }
