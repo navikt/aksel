@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="space-16" maxWidth="600px">
+    <VStack gap="space-16" maxWidth="600px" paddingBlock="space-24">
       <LinkCard data-color="accent">
         <LinkCard.Title>
           <LinkCard.Anchor href="/eksempel">Skatteetaten</LinkCard.Anchor>
