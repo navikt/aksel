@@ -1,13 +1,12 @@
 import { type Meta, type StoryFn } from "@storybook/react";
 import "@navikt/ds-css/darkside";
-import { VStack } from "@navikt/ds-react";
+import { HGrid, LinkCard, VStack } from "@navikt/ds-react";
 import {
-  LinkCard,
   LinkCardAnchor,
   LinkCardDescription,
   LinkCardFooter,
   LinkCardTitle,
-} from "../(god-praksis)/_ui/link-card/LinkCard";
+} from "@navikt/ds-react/LinkCard";
 import { AvatarStack } from "./Avatar";
 
 const dummyAvatar1 = {
@@ -73,15 +72,45 @@ export const MissingImage: StoryFn = () => {
 
 export const InsideCard: StoryFn = () => {
   return (
-    <LinkCard autoLayout={false}>
-      <LinkCardTitle as="h2">
-        <LinkCardAnchor href="#">This is a LinkCard</LinkCardAnchor>
-      </LinkCardTitle>
-      <LinkCardDescription>description</LinkCardDescription>
-      <LinkCardFooter>
-        <AvatarStack avatars={[dummyAvatar1, dummyAvatar2, dummyAvatar3]} />
-      </LinkCardFooter>
-    </LinkCard>
+    <HGrid gap="space-16" columns={2} maxWidth="800px">
+      <LinkCard>
+        <LinkCardTitle as="h2">
+          <LinkCardAnchor href="#">Aksel med oppgradert design</LinkCardAnchor>
+        </LinkCardTitle>
+        <LinkCardDescription>
+          Snart kommer en ny versjon av Aksel med flere stiloppgraderinger for
+          våre komponenter. Da får vi blant annet darkmode-støtte, forbedret
+          fargepalett, færre skygger og litt rundere hjørner.
+        </LinkCardDescription>
+        <LinkCardFooter>
+          <AvatarStack avatars={[dummyAvatar1]} />
+        </LinkCardFooter>
+      </LinkCard>
+      <LinkCard arrow={false}>
+        <LinkCardTitle as="h2">
+          <LinkCardAnchor href="#">
+            Hvordan produktstrategien samler teamet vårt
+          </LinkCardAnchor>
+        </LinkCardTitle>
+        <LinkCardDescription>
+          Produkstrategi er noe litt ullent. I denne artikkelen skriver vi litt
+          om hvordan Team Datajegerne jobber med dette og viser hvordan
+          strategien vår ser ut.
+        </LinkCardDescription>
+        <LinkCardFooter>
+          <AvatarStack avatars={[dummyAvatar1, dummyAvatar2, dummyAvatar3]} />
+        </LinkCardFooter>
+      </LinkCard>
+      <LinkCard>
+        <LinkCardTitle as="h2">
+          <LinkCardAnchor href="#">This is a LinkCard</LinkCardAnchor>
+        </LinkCardTitle>
+        <LinkCardDescription>description</LinkCardDescription>
+        <LinkCardFooter>
+          <AvatarStack avatars={[dummyAvatar1, dummyAvatar2, dummyAvatar3]} />
+        </LinkCardFooter>
+      </LinkCard>
+    </HGrid>
   );
 };
 
