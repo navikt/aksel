@@ -16,7 +16,7 @@ export default function MonthHeader({ monthAndYear, index }: Props) {
       <HStack className={styles.monthSpacer}>
         {index > 0 && (
           <VStack width="48px" align="center" hidden>
-            <Hide below="md" asChild>
+            <Hide below="sm" asChild>
               <Box.New flexGrow="1" className={styles.timeline} />
             </Hide>
           </VStack>

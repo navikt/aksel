@@ -76,19 +76,18 @@ export default function LogEntry({
 
   return (
     <li>
-      {/* Log entry spacer.
-          MonthHeader (potentially immediately above) should have elements scroll immediately underneath itself, so we add a vertical timeline segment for appropriate spacing here */}
+      {/* Log entry spacer
+          MonthHeader (potentially immediately above) should have elements scroll directly below itself, so we add a vertical timeline segment for appropriate spacing here */}
       <VStack width="48px" height="var(--ax-space-32)" align="center">
         <Hide below="sm" asChild>
           <Box.New flexGrow="1" className={styles.timeline} />
         </Hide>
       </VStack>
-      {/* TODO: [endringslogg] Remove timeline and add divider on mobile */}
+      {/* Log entry box */}
       <HStack wrap={false}>
         {/* Dot + vertical line */}
         <Hide below="sm" asChild>
           <VStack width="16px" align="center" marginInline="space-16 space-0">
-            {/* <Box.New height="0.1rem" className={styles.timeline} /> */}
             <Box.New
               marginBlock="space-2 space-0"
               className={cl(styles.bullet, fremhevet && styles.bulletFremhevet)}
@@ -156,10 +155,10 @@ export default function LogEntry({
                 scrollTargetRef={
                   logEntryContainer as MutableRefObject<HTMLElement>
                 }
-                style={{
-                  scrollMarginTop:
-                    "calc(var(--website-header-height) + var(--ax-space-12) + 48px + var(--ax-space-32))",
-                }}
+                // style={{
+                //   scrollMarginTop:
+                //     "calc(var(--website-header-height) + var(--ax-space-96) + var(--ax-space-20))",
+                // }}
                 // scrollBackOnCollapse={false}
               >
                 <ShowMore.Heading>
@@ -173,7 +172,7 @@ export default function LogEntry({
                   </Heading>
                 </ShowMore.Heading>
                 <ShowMore.Content
-                  collapsedHeight={fremhevet ? "16rem" : "10rem"}
+                  collapsedHeight={fremhevet ? "16rem" : "8rem"}
                 >
                   {fremhevet && herobilde?.asset && (
                     <Hero herobilde={herobilde} index={index} />

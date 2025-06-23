@@ -42,27 +42,26 @@ const ShowMoreContent = ({
   const { isExpanded } = useShowMoreContext();
   const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
 
-  const childrenClone: ReactElement[] = [];
-  React.Children.forEach(children, (child) => {
-    if (child && React.isValidElement(child)) {
-      const props: any = child.props || {};
-      const { className, ...restProps } = props;
-      childrenClone.push(
-        React.cloneElement(React.Children.only(child), {
-          className: cl(
-            styles.showMoreContainer,
-            isExpanded ? styles.showMoreExpanded : styles.showMoreCollapsed,
-            className,
-          ),
-          style: { maxHeight: isExpanded ? "fit-content" : collapsedHeight },
-          inert: !isExpanded ? inertValue : false,
-          ...restProps,
-        }),
-      );
-    }
-  });
+  if (Array.isArray(children)) {
+    children = <div>{children}</div>;
+  }
 
-  return childrenClone.length === 1 ? childrenClone[0] : childrenClone;
+  if (children && React.isValidElement(children)) {
+    const props: any = children.props || {};
+    const { className, ...restProps } = props;
+    return React.cloneElement(children, {
+      className: cl(
+        styles.showMoreContainer,
+        isExpanded ? styles.showMoreExpanded : styles.showMoreCollapsed,
+        className,
+      ),
+      style: {
+        maxHeight: isExpanded ? "fit-content" : collapsedHeight,
+      },
+      inert: !isExpanded ? inertValue : false,
+      ...restProps,
+    });
+  }
 };
 
 /* ShowMore component */

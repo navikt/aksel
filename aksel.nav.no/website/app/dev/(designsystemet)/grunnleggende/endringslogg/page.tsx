@@ -148,9 +148,9 @@ export default async function Page({ searchParams }) {
         </VStack>
         <VStack paddingBlock="space-32 space-0">
           {logEntries?.length > 0 ? (
+            // TODO: [endringslogg] Should we preload only the 5-10 most recent entries, no year filter, and add a See more updates-button here as per figma sketches?
             <LogEntryList list={groupedByMonth} />
           ) : (
-            // TODO: [endringslogg] Should we preload only the 5-10 most recent entries, no year filter, and add a See more updates-button here as per figma sketches?
             <EmptyStateCard />
           )}
         </VStack>
