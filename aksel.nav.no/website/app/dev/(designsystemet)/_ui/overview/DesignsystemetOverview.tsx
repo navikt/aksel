@@ -1,14 +1,11 @@
+import Link from "next/link";
 import type { Image } from "sanity";
+import { BodyLong, Box, HGrid, Heading, LinkCard, Tag } from "@navikt/ds-react";
 import {
-  Bleed,
-  BodyLong,
-  Box,
-  HGrid,
-  HStack,
-  Heading,
-  Tag,
-  VStack,
-} from "@navikt/ds-react";
+  LinkCardAnchor,
+  LinkCardImage,
+  LinkCardTitle,
+} from "@navikt/ds-react/LinkCard";
 import {
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult,
   DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult,
@@ -19,11 +16,6 @@ import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import { DesignsystemetEyebrow } from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
-import {
-  LinkCard,
-  LinkCardAnchor,
-  LinkCardTitle,
-} from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import styles from "./DesignsystemetOverview.module.css";
 
 type DesignsystemetOverviewPageProps = {
@@ -84,35 +76,30 @@ function DesignsystemetOverviewCard({
   const statusTagWithoutStable = getStatusTag(page.status?.tag, true);
 
   return (
-    <LinkCard data-color={statusTag?.colorRole} autoLayout={false}>
-      <VStack gap="space-16">
-        <Box position="relative" asChild>
-          <Bleed marginInline="space-20" marginBlock="space-16 0">
-            <span className={styles.overviewImageWrapper}>
-              <ImageAsThemedSvg url={imageUrl} size={200} />
-            </span>
-            {statusTagWithoutStable && (
-              <Box asChild position="absolute" bottom="space-8" left="space-8">
-                <Tag
-                  size="small"
-                  variant="alt1-filled"
-                  data-color={statusTag?.colorRole}
-                >
-                  {statusTagWithoutStable.text}
-                </Tag>
-              </Box>
-            )}
-          </Bleed>
-        </Box>
+    <LinkCard data-color={statusTag?.colorRole}>
+      <LinkCardImage
+        aspectRatio="16/10"
+        className={styles.overviewImageWrapper}
+      >
+        <ImageAsThemedSvg url={imageUrl} size={200} />
+        {statusTagWithoutStable && (
+          <Box asChild position="absolute" bottom="space-8" left="space-8">
+            <Tag
+              size="small"
+              variant="alt1-filled"
+              data-color={statusTag?.colorRole}
+            >
+              {statusTagWithoutStable.text}
+            </Tag>
+          </Box>
+        )}
+      </LinkCardImage>
 
-        <LinkCardTitle as="span">
-          <HStack as="span" gap="space-8" align="center">
-            <LinkCardAnchor href={`/${page?.slug}`}>
-              {page?.heading}
-            </LinkCardAnchor>
-          </HStack>
-        </LinkCardTitle>
-      </VStack>
+      <LinkCardTitle>
+        <LinkCardAnchor asChild>
+          <Link href={`/${page?.slug}`}>{page?.heading}</Link>
+        </LinkCardAnchor>
+      </LinkCardTitle>
     </LinkCard>
   );
 }
