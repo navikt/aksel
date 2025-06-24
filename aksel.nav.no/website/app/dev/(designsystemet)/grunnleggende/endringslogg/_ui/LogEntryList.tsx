@@ -30,7 +30,6 @@ export default function LogEntryList({ list }: Props) {
                   <LogEntry
                     key={`log-entry-${monthIndex}-${logIndex}`}
                     logEntry={logEntry}
-                    index={logIndex}
                     isLastEntry={
                       monthIndex === list.length - 1 &&
                       logIndex === monthGroup.length - 1

@@ -8,6 +8,7 @@ import { ENDRINGSLOGG_FIELDS, ENDRINGSLOGG_QUERY } from "@/app/_sanity/queries";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
+import { PageProps } from "@/app/dev/types";
 import { capitalize } from "@/utils";
 import { DesignsystemetEyebrow } from "../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
@@ -34,21 +35,21 @@ const getMonthAndYear = (dateStr: string | null) => {
   return format(new Date(dateStr || 0), "MMMM yyy", { locale: nb });
 };
 
-export default async function Page({ searchParams }) {
+export default async function Page({ searchParams }: PageProps) {
   const {
-    arstall: paramYear,
-    kategori: paramCategory,
-    fritekst: paramTextFilter,
+    arstall: paramYear = "",
+    kategori: paramCategory = "",
+    fritekst: paramTextFilter = "",
   } = await searchParams;
   const yearFilter = years.includes(+paramYear)
     ? +paramYear
     : paramYear === "ingen"
       ? null
       : currentYear;
-  const categoryFilter = categories.includes(paramCategory)
-    ? paramCategory
+  const categoryFilter = categories.includes(paramCategory.toString())
+    ? paramCategory.toString()
     : null;
-  const textFilter = paramTextFilter?.trim().split(" ");
+  const textFilter = paramTextFilter.toString().trim().split(" ");
 
   const yearQuery = yearFilter
     ? " && endringsdato >= $year && endringsdato <= $nextYear"

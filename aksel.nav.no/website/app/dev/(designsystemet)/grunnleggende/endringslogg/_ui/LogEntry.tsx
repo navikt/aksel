@@ -28,13 +28,10 @@ import ShowMore from "./ShowMore";
 
 const Hero = ({
   herobilde,
-  index,
 }: {
   herobilde: NonNullable<ENDRINGSLOGG_QUERYResult[number]["herobilde"]>;
-  index: number;
 }) => (
   <Image
-    key={"hero-" + index}
     className={styles.herobilde}
     aria-hidden={herobilde?.dekorativt}
     alt={herobilde?.alt || ""}
@@ -52,7 +49,6 @@ const Hero = ({
 
 interface Props {
   logEntry: ENDRINGSLOGG_QUERYResult[number];
-  index: number;
   isLastOfMonth: boolean;
   isLastEntry: boolean;
 }
@@ -68,7 +64,6 @@ export default function LogEntry({
     innhold,
     visMer,
   },
-  index,
   isLastOfMonth = false,
   isLastEntry = false,
 }: Props) {
@@ -165,7 +160,7 @@ export default function LogEntry({
                   collapsedHeight={fremhevet ? "16rem" : "8rem"}
                 >
                   {fremhevet && herobilde?.asset && (
-                    <Hero herobilde={herobilde} index={index} />
+                    <Hero herobilde={herobilde} />
                   )}
                   <CustomPortableText
                     className={cl(
@@ -200,7 +195,7 @@ export default function LogEntry({
                   </Link>
                 </Heading>
                 {fremhevet && herobilde?.asset && (
-                  <Hero herobilde={herobilde} index={index} />
+                  <Hero herobilde={herobilde} />
                 )}
                 <CustomPortableText
                   className={cl(

@@ -34,12 +34,13 @@ export interface ShowMoreContentProps
   children: ReactElement | (ReactElement | false | undefined | null)[];
 }
 
+const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
+
 const ShowMoreContent = ({
   collapsedHeight = "10rem",
   children,
 }: ShowMoreContentProps) => {
   const { isExpanded } = useShowMoreContext();
-  const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
 
   if (Array.isArray(children)) {
     children = <div>{children}</div>;
