@@ -146,6 +146,11 @@ const StyleMappings = {
     { component: "Label", main: typoCss },
     { component: "Link", main: "link.css", dependencies: [typoCss] },
     {
+      component: "LinkCard",
+      main: "link-card.css",
+      dependencies: [typoCss, "link-anchor.css"],
+    },
+    {
       component: "LinkPanel",
       main: "link-panel.css",
       dependencies: [typoCss, "panel.css"],

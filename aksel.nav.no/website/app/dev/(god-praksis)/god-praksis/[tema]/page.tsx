@@ -261,7 +261,7 @@ export default async function Page(props: Props) {
                     {articles.map((article) => (
                       <li key={article.slug}>
                         <LinkCard>
-                          <LinkCardTitle as="h2">
+                          <LinkCardTitle as="h3">
                             <LinkCardAnchor href={`/dev/${article.slug}`}>
                               {article.heading}
                             </LinkCardAnchor>

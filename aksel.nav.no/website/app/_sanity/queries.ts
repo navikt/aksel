@@ -112,6 +112,17 @@ const DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY =
     "description": seo.meta
 }`);
 
+const DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY = defineQuery(
+  `*[_type == $docType && defined(kategori)]{
+  _id,
+  heading,
+  "slug": slug.current,
+  status,
+  kategori,
+  sidebarindex
+}`,
+);
+
 const GRUNNLEGGENDE_BY_SLUG_QUERY =
   defineQuery(`*[_type == "ds_artikkel" && slug.current == $slug][0]
   {
@@ -369,6 +380,7 @@ export {
   DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
   DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
+  DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY,
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
   DESIGNSYSTEM_SIDEBAR_QUERY,
   DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,

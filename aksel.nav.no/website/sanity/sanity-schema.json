@@ -9740,7 +9740,7 @@
         },
         "optional": true
       },
-      "innhold": {
+      "content": {
         "type": "objectAttribute",
         "value": {
           "type": "inline",

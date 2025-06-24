@@ -1,6 +1,6 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
-import { Link, HashRouter as Router } from "react-router-dom";
+import { Link, HashRouter as Router } from "react-router";
 import { VStack } from "../layout/stack";
 import Pagination from "./Pagination";
 
