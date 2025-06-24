@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
-import { MutableRefObject, useRef } from "react";
+import { useRef } from "react";
 import type { Image as SanityImage } from "sanity";
 import {
   BodyShort,
@@ -26,18 +26,11 @@ import { capitalize } from "@/utils";
 import styles from "./Changelog.module.css";
 import ShowMore from "./ShowMore";
 
-interface Props {
-  logEntry: ENDRINGSLOGG_QUERYResult[number];
-  index: number;
-  isLastOfMonth: boolean;
-  isLastEntry: boolean;
-}
-
 const Hero = ({
   herobilde,
   index,
 }: {
-  herobilde: ENDRINGSLOGG_QUERYResult[number]["herobilde"];
+  herobilde: NonNullable<ENDRINGSLOGG_QUERYResult[number]["herobilde"]>;
   index: number;
 }) => (
   <Image
@@ -56,6 +49,13 @@ const Hero = ({
     height={630}
   />
 );
+
+interface Props {
+  logEntry: ENDRINGSLOGG_QUERYResult[number];
+  index: number;
+  isLastOfMonth: boolean;
+  isLastEntry: boolean;
+}
 
 export default function LogEntry({
   logEntry: {
@@ -147,11 +147,7 @@ export default function LogEntry({
             className={cl(fremhevet && styles.innholdFremhevetBorder)}
           >
             {visMer ? (
-              <ShowMore
-                scrollTargetRef={
-                  logEntryContainer as MutableRefObject<HTMLElement>
-                }
-              >
+              <ShowMore scrollTargetRef={logEntryContainer}>
                 <ShowMore.Heading>
                   <Heading size="large" level="2" spacing>
                     <Link

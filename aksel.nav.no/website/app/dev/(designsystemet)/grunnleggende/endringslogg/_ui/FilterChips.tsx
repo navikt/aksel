@@ -5,17 +5,19 @@ import { startTransition, useOptimistic } from "react";
 import { Chips, Label, VStack } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
 
+interface Props {
+  years: number[];
+  selectedYear: number | null;
+  categories: string[];
+  selectedCategory: string | null;
+}
+
 export default function FilterChips({
   years,
   selectedYear,
   categories,
   selectedCategory,
-}: {
-  years: number[];
-  selectedYear: number | null;
-  categories: string[];
-  selectedCategory: string | null;
-}) {
+}: Props) {
   const [optYear, expectYear] = useOptimistic(
     selectedYear,
     (_, optimisticValue: number | null) => optimisticValue,
@@ -26,10 +28,9 @@ export default function FilterChips({
   );
   const { push, prefetch } = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const params = new URLSearchParams(useSearchParams()?.toString());
 
   function getHref(option: string | number) {
-    const params = new URLSearchParams(searchParams?.toString());
     if (typeof option === "number") {
       params.set("arstall", `${option === optYear ? "ingen" : option}`);
     } else if (typeof option === "string") {
@@ -53,8 +54,7 @@ export default function FilterChips({
   }) => (
     <VStack gap="space-8">
       <Label as="div">{label}</Label>
-      {/* TODO: Revurder aria-label */}
-      <Chips aria-label={`Filtrer på ${label.toLowerCase()}`}>
+      <Chips>
         {options.map((option) => {
           const href = getHref(option);
           return (

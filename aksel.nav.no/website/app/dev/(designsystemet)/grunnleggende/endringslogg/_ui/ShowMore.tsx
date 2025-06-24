@@ -3,7 +3,6 @@
 import cl from "clsx";
 import React, {
   HTMLAttributes,
-  MutableRefObject,
   ReactElement,
   useEffect,
   useRef,
@@ -93,8 +92,7 @@ export interface ShowMoreProps
   /**
    * Alternative target to scroll into view after collapsing.
    */
-  // scrollTargetRef?: MutableRefObject<HTMLDivElement> | null;
-  scrollTargetRef?: MutableRefObject<HTMLElement>;
+  scrollTargetRef?: React.RefObject<HTMLElement>;
 }
 
 /**
