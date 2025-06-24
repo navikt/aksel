@@ -51,16 +51,23 @@ const DialogPrimitiveRoot = ({
   const instantStateToggle = useCallback(
     (newOpen: boolean) => {
       setOpen(newOpen);
+
+      if (_open !== undefined) {
+        console.warn(
+          "DialogPrimitive: open prop is controlled, instantStateToggle will not change the open state.",
+        );
+        return;
+      }
       if (newOpen) {
         contentRef.current?.showModal();
       } else {
         contentRef.current?.close();
       }
     },
-    [setOpen],
+    [_open, setOpen],
   );
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const isDomOpen = contentRef.current?.open;
     if (open && !isDomOpen) {
       contentRef.current?.showModal();
@@ -72,6 +79,14 @@ const DialogPrimitiveRoot = ({
     console.info(
       "DialogPrimitive: contentRef.current?.open is not in sync with open state",
     );
+  }, [open]); */
+
+  useEffect(() => {
+    if (open) {
+      contentRef.current?.showModal();
+    } else {
+      contentRef.current?.close();
+    }
   }, [open]);
 
   return (
@@ -138,6 +153,7 @@ const DialogPrimitiveContent = forwardRef<
       children,
       onMouseDown,
       onClick,
+      onClose,
       ...restProps
     }: DialogPrimitiveContentProps,
     forwardedRef,
@@ -186,6 +202,9 @@ const DialogPrimitiveContent = forwardRef<
           mouseClickEvent.current = event;
         })}
         onClick={composeEventHandlers(onClick, handleDialogClick)}
+        onClose={composeEventHandlers(onClose, () =>
+          context.onOpenChange(false),
+        )}
         {...restProps}
       >
         {children}

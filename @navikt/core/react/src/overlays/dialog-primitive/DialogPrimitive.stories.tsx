@@ -57,7 +57,7 @@ export const DefaultOpen: Story = {
 export const ControlledOpen: Story = {
   render: () => {
     return (
-      <DialogPrimitive open>
+      <DialogPrimitive open onOpenChange={() => null}>
         <DialogPrimitiveTrigger>
           <Button>Open Dialog</Button>
         </DialogPrimitiveTrigger>
