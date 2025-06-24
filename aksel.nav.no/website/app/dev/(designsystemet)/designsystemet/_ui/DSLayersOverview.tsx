@@ -36,9 +36,9 @@ const DSLayersOverview = ({ title, description }: Props) => (
     borderColor="brand-blue-subtle"
     borderWidth="1"
     borderRadius="xlarge"
-    padding="space-40"
+    padding={{ xs: "space-16", md: "space-40" }}
     maxWidth="768px"
-    width={{ md: "768px" }}
+    width="100%"
   >
     <VStack gap="space-24" align="center">
       <VStack align="center" gap="space-16" maxWidth="400px">

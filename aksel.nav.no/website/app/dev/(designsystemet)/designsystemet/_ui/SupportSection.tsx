@@ -35,7 +35,7 @@ const supportModules = [
 ];
 
 const SupportSection = () => (
-  <VStack gap="space-16" align="center" className="support-section">
+  <VStack gap="space-16" align="center">
     <Heading level="2" size="large">
       Support
     </Heading>
@@ -43,6 +43,7 @@ const SupportSection = () => (
       {supportModules.map(({ title, description, link }) => (
         <BoxNew
           key={title}
+          className="support-section"
           background="brand-blue-strong"
           borderColor="brand-blue-subtle"
           borderWidth="1"

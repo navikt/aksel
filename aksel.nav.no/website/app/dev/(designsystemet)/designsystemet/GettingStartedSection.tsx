@@ -17,11 +17,7 @@ type Props = {
 };
 
 const GettingStartedSection = ({ cards }: Props) => (
-  <HGrid
-    gap="space-24"
-    width={{ xs: "100%", md: "768px" }}
-    columns={{ xs: 1, md: 2 }}
-  >
+  <HGrid gap="space-24" width="100%" columns={{ xs: 1, md: 2 }}>
     {cards?.map(({ title, description, icon: iconType, link }) => {
       const icon =
         iconType === "Palette" ? (

@@ -1,3 +1,5 @@
+"use client";
+
 import { format, parseISO } from "date-fns";
 import { nb } from "date-fns/locale";
 import { BodyLong, HGrid, Heading, VStack } from "@navikt/ds-react";
@@ -40,11 +42,7 @@ const ChangeLogNews = ({ title, description, entries }: Props) => {
           </BodyLong>
         )}
       </VStack>
-      <HGrid
-        gap="space-24"
-        width={{ xs: "100%", md: "768px", xl: "1024px" }}
-        columns={{ xs: 1, md: 2, xl: 3 }}
-      >
+      <HGrid gap="space-24" columns={{ xs: 1, md: 2, xl: 3 }}>
         {entries.map(({ heading, slug, endringsdato }) => (
           <LinkCard key={heading}>
             <LinkCardTitle as="span">
@@ -56,7 +54,9 @@ const ChangeLogNews = ({ title, description, entries }: Props) => {
             </LinkCardTitle>
             {endringsdato && (
               <LinkCardDescription>
-                {format(parseISO(endringsdato), "do MMMM yyyy", { locale: nb })}
+                {format(parseISO(endringsdato), "do MMMM yyyy", {
+                  locale: nb,
+                })}
               </LinkCardDescription>
             )}
             <LinkCardIcon>
