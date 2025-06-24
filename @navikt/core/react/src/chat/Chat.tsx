@@ -122,7 +122,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
             {avatar}
           </div>
         )}
-        <ol className={cn("navds-chat__bubble-wrapper")}>
+        <ol className={cn("navds-chat__bubble-wrapper")} role="presentation">
           {React.Children.map(children, (child, i) => {
             if (React.isValidElement(child)) {
               return (
