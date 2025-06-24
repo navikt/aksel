@@ -62,7 +62,11 @@ async function extractJsx(
     }
 
     if (jsxCode) {
-      return await prettier.format(jsxCode, { parser: "typescript" });
+      const formatedCode = await prettier.format(jsxCode, {
+        parser: "typescript",
+      });
+
+      return formatedCode.trim().replace(/;$/, "").replace(/^;/, "");
     }
 
     return null;
