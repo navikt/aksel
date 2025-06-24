@@ -1,7 +1,12 @@
 import NextImage from "next/image";
 import Link from "next/link";
 import { Image } from "sanity";
-import { BodyLong, HStack, Heading, Stack } from "@navikt/ds-react";
+import { BodyLong, HStack, Heading, LinkCard, Stack } from "@navikt/ds-react";
+import {
+  LinkCardAnchor,
+  LinkCardIcon,
+  LinkCardTitle,
+} from "@navikt/ds-react/LinkCard";
 import { sanityFetch } from "@/app/_sanity/live";
 import { GOD_PRAKSIS_ALL_TEMA_QUERY } from "@/app/_sanity/queries";
 import { GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
@@ -9,12 +14,6 @@ import { urlForImage } from "@/app/_sanity/utils";
 import { GodPraksisHeroButton } from "@/app/dev/(god-praksis)/_ui/hero/Hero.button";
 import { GodPraksisHeroDialog } from "@/app/dev/(god-praksis)/_ui/hero/Hero.dialog";
 import { GodPraksisHeroProvider } from "@/app/dev/(god-praksis)/_ui/hero/Hero.provider";
-import {
-  LinkCard,
-  LinkCardAnchor,
-  LinkCardIcon,
-  LinkCardTitle,
-} from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { GodPraksisPictogram } from "@/app/dev/(root)/_ui/pictogram/GodPraksisPictogram";
 import styles from "./Hero.module.css";
 
@@ -101,13 +100,15 @@ async function GodPraksisTemaList() {
 
           return (
             <li key={tema.slug}>
-              <LinkCard data-color="brand-blue" hasArrow={false}>
-                <LinkCardIcon hasBackground={false}>
+              <LinkCard data-color="brand-blue" arrow={false}>
+                <LinkCardIcon>
                   <GodPraksisPictogram url={url} />
                 </LinkCardIcon>
                 <LinkCardTitle as="h2">
-                  <LinkCardAnchor href={`/god-praksis/${tema.slug}`}>
-                    {tema.title ?? ""}
+                  <LinkCardAnchor asChild>
+                    <Link href={`/god-praksis/${tema.slug}`}>
+                      {tema.title ?? ""}
+                    </Link>
                   </LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
