@@ -86,6 +86,8 @@
   "devDependencies": {
     "@axe-core/playwright": "4.10.0",
     "@babel/core": "^7.19.0",
+    "@babel/parser": "^7.27.5",
+    "@babel/traverse": "^7.27.4",
     "@next/bundle-analyzer": "15.2.3",
     "@next/eslint-plugin-next": "15.2.3",
     "@playwright/test": "1.48.1",
