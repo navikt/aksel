@@ -67,19 +67,14 @@ const DialogPrimitiveRoot = ({
     [_open, setOpen],
   );
 
-  /*  useEffect(() => {
+  useEffect(() => {
     const isDomOpen = contentRef.current?.open;
     if (open && !isDomOpen) {
       contentRef.current?.showModal();
-      return;
     } else if (!open && isDomOpen) {
       contentRef.current?.close();
-      return;
     }
-    console.info(
-      "DialogPrimitive: contentRef.current?.open is not in sync with open state",
-    );
-  }, [open]); */
+  }, [open]);
 
   useEffect(() => {
     if (open) {
@@ -180,6 +175,10 @@ const DialogPrimitiveContent = forwardRef<
         return;
       }
 
+      if (window.getSelection()?.toString()) {
+        return;
+      }
+
       const modalRect = localDialogRef.current.getBoundingClientRect();
 
       /* Avoids drag-click outside of dialog */
@@ -202,9 +201,11 @@ const DialogPrimitiveContent = forwardRef<
           mouseClickEvent.current = event;
         })}
         onClick={composeEventHandlers(onClick, handleDialogClick)}
-        onClose={composeEventHandlers(onClose, () =>
-          context.onOpenChange(false),
-        )}
+        onClose={composeEventHandlers(onClose, () => {
+          /* e.preventDefault(); */
+          context.onOpenChange(false);
+        })}
+        /* onKeyDown={(e) => e.preventDefault()} */
         {...restProps}
       >
         {children}
