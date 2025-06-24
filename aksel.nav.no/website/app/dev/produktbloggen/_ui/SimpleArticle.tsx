@@ -1,8 +1,9 @@
 import NextLink from "next/link";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
-import { AvatarStack, queryToAvatars } from "../../_ui/Avatar";
+import { AvatarStack } from "../../_ui/Avatar";
 import styles from "../_ui/Produktbloggen.module.css";
+import { queryToAvatars } from "./utils";
 
 type Blogg = NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][0];
 
