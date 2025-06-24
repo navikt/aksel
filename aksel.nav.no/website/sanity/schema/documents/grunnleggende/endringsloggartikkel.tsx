@@ -87,7 +87,7 @@ export const EndringsloggArtikkel = defineType({
     }),
     defineField({
       title: "Innhold",
-      name: "innhold",
+      name: "content",
       group: "innhold",
       description:
         'Dette innholdet vises på innlegget i endringsloggen. Er det "mye" innhold vil en "Vis mer"-knapp dukke opp.',
