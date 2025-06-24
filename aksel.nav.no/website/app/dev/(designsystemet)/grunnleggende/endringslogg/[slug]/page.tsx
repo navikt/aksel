@@ -91,7 +91,7 @@ export default async function (props: Props) {
       <VStack marginBlock="space-0 space-28">
         <BodyShort
           size="medium"
-          textColor={fremhevet ? "subtle" : "default"}
+          textColor="subtle"
           data-color={fremhevet ? "aksel-brand-pink" : "aksel-brand-blue"}
         >
           {capitalize(endringstype || "")}
