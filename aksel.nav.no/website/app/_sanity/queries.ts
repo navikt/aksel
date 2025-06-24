@@ -163,7 +163,7 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
 `);
 
 export const ENDRINGSLOGG_FIELDS =
-  'heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer';
+  'heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer';
 const ENDRINGSLOGG_QUERY = defineQuery(`
   *[_type == "ds_endringslogg_artikkel"]{
     ${ENDRINGSLOGG_FIELDS}

@@ -56,9 +56,9 @@ export default async function Page({ searchParams }: PageProps) {
     : "";
   const categoryQuery = categoryFilter ? " && endringstype == $category" : "";
   const textQuery =
-    // innhold[].caption refers captions on images in innhold
-    // "[heading, endringsdato, endringstype, pt::text(innhold[]), innhold[].caption]";
-    "[heading, endringsdato, endringstype, innhold[].children[].text, innhold[].caption]";
+    // content[].caption refers captions on images in content
+    // "[heading, endringsdato, endringstype, pt::text(content[]), content[].caption]";
+    "[heading, endringsdato, endringstype, content[].children[].text, content[].caption]";
 
   const sanityObject = {
     query: defineQuery(
@@ -88,7 +88,7 @@ export default async function Page({ searchParams }: PageProps) {
   const { data: logEntries } = await sanityFetch(sanityObject);
 
   logEntries.forEach((logEntry) => {
-    logEntry.innhold = bumpHeadingLevels(logEntry.innhold) || null;
+    logEntry.content = bumpHeadingLevels(logEntry.content) || null;
   });
 
   const groupedByMonth = logEntries.reduce(

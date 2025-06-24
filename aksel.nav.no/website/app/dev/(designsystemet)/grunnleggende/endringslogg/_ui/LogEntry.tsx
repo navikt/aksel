@@ -61,7 +61,7 @@ export default function LogEntry({
     endringstype,
     fremhevet,
     herobilde,
-    innhold,
+    content,
     visMer,
   },
   isLastOfMonth = false,
@@ -169,7 +169,7 @@ export default function LogEntry({
                       fremhevet && styles.innholdFremhevet,
                     )}
                     data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
-                    value={innhold as PortableTextBlock[]}
+                    value={content as PortableTextBlock[]}
                   />
                 </ShowMore.Content>
                 <ShowMore.Button>
@@ -204,7 +204,7 @@ export default function LogEntry({
                     fremhevet && styles.innholdFremhevet,
                   )}
                   data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
-                  value={innhold as PortableTextBlock[]}
+                  value={content as PortableTextBlock[]}
                 />
               </>
             )}

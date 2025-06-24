@@ -74,7 +74,7 @@ export default async function (props: Props) {
   }
 
   const toc: { id: string; title: string }[] = [];
-  logs.primary.innhold?.forEach((block) => {
+  logs.primary.content?.forEach((block) => {
     if (block._type === "block" && block.style === "h2") {
       toc.push({
         id: block._key,
@@ -83,7 +83,7 @@ export default async function (props: Props) {
     }
   });
 
-  const { fremhevet, endringstype, heading, endringsdato, herobilde, innhold } =
+  const { fremhevet, endringstype, heading, endringsdato, herobilde, content } =
     logs.primary;
 
   return (
@@ -140,7 +140,7 @@ export default async function (props: Props) {
           />
         )}
         <CustomPortableText
-          value={innhold as PortableTextBlock[]}
+          value={content as PortableTextBlock[]}
           data-color="neutral"
         />
       </VStack>
