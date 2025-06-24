@@ -91,10 +91,8 @@ export default async function (props: Props) {
       <VStack marginBlock="space-0 space-28">
         <BodyShort
           size="medium"
-          textColor={fremhevet ? "default" : "subtle"}
+          textColor={fremhevet ? "subtle" : "default"}
           data-color={fremhevet ? "aksel-brand-pink" : "aksel-brand-blue"}
-          // TODO: [endringslogg] 'subtle' is not 'aksel-brand-blue-sublte' despite textColor=sublte and data-color=aksel-brand-blue...
-          className={!fremhevet ? styles.kategoriInArticle : ""}
         >
           {capitalize(endringstype || "")}
         </BodyShort>
@@ -102,7 +100,7 @@ export default async function (props: Props) {
           size="xlarge"
           level="1"
           spacing
-          data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
+          data-color={fremhevet ? "aksel-brand-pink" : "aksel-brand-blue"}
         >
           {heading}
         </Heading>
@@ -141,10 +139,9 @@ export default async function (props: Props) {
             height={630}
           />
         )}
-        {/* TODO: [endringslogg] Blue in non-fremehevet should be aksel-brand-blue, but ends up 'ax-bg-accent-strong' instead */}
         <CustomPortableText
           value={innhold as PortableTextBlock[]}
-          data-color="aksel-brand-blue"
+          data-color="neutral"
         />
       </VStack>
 

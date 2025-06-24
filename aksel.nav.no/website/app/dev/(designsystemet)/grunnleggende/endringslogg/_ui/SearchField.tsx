@@ -20,7 +20,7 @@ export default function SearchField() {
   }
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault(); // Search performed onChange, so just prevent
+    event.preventDefault();
   }
 
   return (

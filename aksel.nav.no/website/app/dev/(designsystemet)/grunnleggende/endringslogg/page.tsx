@@ -123,7 +123,7 @@ export default async function Page({ searchParams }) {
     <DesignsystemetPageLayout layout="with-toc">
       <VStack>
         <DesignsystemetEyebrow type="ds_artikkel" />
-        <Heading level="1" size="xlarge" spacing>
+        <Heading level="1" size="xlarge" spacing data-aksel-heading-color>
           Endringslogg
         </Heading>
         <VStack gap="space-24" paddingBlock="space-12 space-0">
@@ -137,7 +137,6 @@ export default async function Page({ searchParams }) {
         </VStack>
         <VStack paddingBlock="space-32 space-0">
           {logEntries?.length > 0 ? (
-            // TODO: [endringslogg] Should we preload only the 5-10 most recent entries, no year filter, and add a See more updates-button here as per figma sketches?
             <LogEntryList list={groupedByMonth} />
           ) : (
             <EmptyStateCard />

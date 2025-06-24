@@ -1,5 +1,5 @@
 .searchField {
-  width: 20rem;
+  width: 15rem;
 
   @media (max-width: 479px) {
     width: 100%;

@@ -30,20 +30,17 @@
 
 @keyframes highlightFlash {
   10% {
-    /* box-shadow: none; */
-    outline: 0 solid transparent;
+    box-shadow: transparent;
     background-color: transparent;
   }
 
   60% {
-    /* box-shadow: 0 0 0 var(--ax-space-12) var(--ax-border-neutral-subtle); */
-    outline: var(--ax-space-12) solid var(--ax-border-neutral-subtle);
+    box-shadow: 0 0 0 var(--ax-space-12) var(--ax-border-neutral-subtle);
     background-color: var(--ax-border-neutral-subtle);
   }
 
   100% {
-    /* box-shadow: none; */
-    outline: 0 solid transparent;
+    box-shadow: transparent;
     background-color: transparent;
   }
 }

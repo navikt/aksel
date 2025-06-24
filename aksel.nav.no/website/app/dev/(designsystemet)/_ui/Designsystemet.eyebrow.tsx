@@ -16,9 +16,11 @@ type DesignsystemetEyebrowProps =
 
 function DesignsystemetEyebrow({ type, text }: DesignsystemetEyebrowProps) {
   if (type) {
-    <BodyShort className={styles.pageHeaderEyebrow}>
-      {eyebrowMap[type]}
-    </BodyShort>;
+    return (
+      <BodyShort className={styles.pageHeaderEyebrow}>
+        {eyebrowMap[type]}
+      </BodyShort>
+    );
   }
 
   if (text) {

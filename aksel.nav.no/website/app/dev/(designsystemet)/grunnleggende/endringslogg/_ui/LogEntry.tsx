@@ -77,13 +77,13 @@ export default function LogEntry({
   return (
     <li>
       {/* Log entry spacer
-          MonthHeader (potentially immediately above) should have elements scroll directly below itself, so we add a vertical timeline segment for appropriate spacing here */}
+          MonthHeader (potentially immediately above) should have elements scroll directly below itself, so we add a vertical timeline segment and appropriate spacing here */}
       <VStack width="48px" height="var(--ax-space-32)" align="center">
         <Hide below="sm" asChild>
           <Box.New flexGrow="1" className={styles.timeline} />
         </Hide>
       </VStack>
-      {/* Log entry box */}
+      {/* Log entry container */}
       <HStack wrap={false}>
         {/* Dot + vertical line */}
         <Hide below="sm" asChild>
@@ -106,6 +106,7 @@ export default function LogEntry({
           ref={logEntryContainer}
           className={styles.logEntry}
         >
+          {/* Category and date */}
           <HStack
             justify="start"
             align="baseline"
@@ -139,11 +140,11 @@ export default function LogEntry({
               </Tag>
             )}
           </HStack>
+          {/* Header and content */}
           <VStack
             marginBlock={fremhevet ? "space-0 space-32" : "space-0 space-64"}
             padding={fremhevet ? "space-16" : "space-0"}
-            className={cl(styles.innhold, fremhevet && styles.innholdFremhevet)}
-            data-color={fremhevet ? "aksel-brand-pink" : ""}
+            className={cl(fremhevet && styles.innholdFremhevetBorder)}
           >
             {visMer ? (
               <ShowMore
@@ -155,7 +156,10 @@ export default function LogEntry({
                   <Heading size="large" level="2" spacing>
                     <Link
                       href={`./endringslogg/${slug?.current}`}
-                      data-aksel-heading-color
+                      className={cl(
+                        styles.innhold,
+                        fremhevet && styles.innholdFremhevet,
+                      )}
                     >
                       {heading}
                     </Link>
@@ -168,7 +172,12 @@ export default function LogEntry({
                     <Hero herobilde={herobilde} index={index} />
                   )}
                   <CustomPortableText
-                    className={styles.portableTextFirstHeading}
+                    className={cl(
+                      styles.innhold,
+                      styles.portableTextFirstHeading,
+                      fremhevet && styles.innholdFremhevet,
+                    )}
+                    data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
                     value={innhold as PortableTextBlock[]}
                   />
                 </ShowMore.Content>
@@ -177,6 +186,7 @@ export default function LogEntry({
                     size="small"
                     variant="secondary-neutral"
                     className={cl(fremhevet && styles.showMoreButtonFremhevet)}
+                    data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
                   />
                 </ShowMore.Button>
               </ShowMore>
@@ -185,7 +195,10 @@ export default function LogEntry({
                 <Heading size="large" level="2" spacing>
                   <Link
                     href={`./endringslogg/${slug?.current}`}
-                    data-aksel-heading-color
+                    className={cl(
+                      styles.innhold,
+                      fremhevet && styles.innholdFremhevet,
+                    )}
                   >
                     {heading}
                   </Link>
@@ -194,7 +207,12 @@ export default function LogEntry({
                   <Hero herobilde={herobilde} index={index} />
                 )}
                 <CustomPortableText
-                  className={styles.portableTextFirstHeading}
+                  className={cl(
+                    styles.innhold,
+                    styles.portableTextFirstHeading,
+                    fremhevet && styles.innholdFremhevet,
+                  )}
+                  data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
                   value={innhold as PortableTextBlock[]}
                 />
               </>
