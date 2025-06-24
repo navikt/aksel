@@ -18,19 +18,20 @@ export default function FilterChips({
   categories,
   selectedCategory,
 }: Props) {
+  const { push, prefetch } = useRouter();
+
   const [optYear, expectYear] = useOptimistic(
     selectedYear,
-    (_, optimisticValue: number | null) => optimisticValue,
+    (_, optimisticYear: number | null) => optimisticYear,
   );
   const [optCategory, expectCategory] = useOptimistic(
     selectedCategory,
-    (_, optimisticValue: string | null) => optimisticValue,
+    (_, optimisticCategory: string | null) => optimisticCategory,
   );
-  const { push, prefetch } = useRouter();
   const pathname = usePathname();
-  const params = new URLSearchParams(useSearchParams()?.toString());
-
+  const searchParams = useSearchParams()?.toString();
   function getHref(option: string | number) {
+    const params = new URLSearchParams(searchParams?.toString());
     if (typeof option === "number") {
       params.set("arstall", `${option === optYear ? "ingen" : option}`);
     } else if (typeof option === "string") {

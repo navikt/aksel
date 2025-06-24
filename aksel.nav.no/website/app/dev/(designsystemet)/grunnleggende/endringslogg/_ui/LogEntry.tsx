@@ -142,7 +142,7 @@ export default function LogEntry({
             className={cl(fremhevet && styles.innholdFremhevetBorder)}
           >
             {visMer ? (
-              <ShowMore scrollTargetRef={logEntryContainer}>
+              <ShowMore as="div" scrollTargetRef={logEntryContainer}>
                 <ShowMore.Heading>
                   <Heading size="large" level="2" spacing>
                     <Link
