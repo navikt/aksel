@@ -400,7 +400,7 @@ export const ImageEmulatingNextjsFill: Story = {
           }}
         >
           <img
-            src="https://picsum.photos/400"
+            src="https://picsum.photos/id/866/400"
             alt="alt-placeholder"
             decoding="async"
             sizes="100vw"
