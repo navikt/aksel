@@ -1,19 +1,21 @@
 import cl from "clsx";
-import { Image } from "sanity";
-import { Detail, HStack, Stack, VStack } from "@navikt/ds-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Image as ImageType } from "sanity";
+import { Detail, HStack, LinkCard, VStack } from "@navikt/ds-react";
+import {
+  LinkCardAnchor,
+  LinkCardDescription,
+  LinkCardFooter,
+  LinkCardImage,
+  LinkCardTitle,
+} from "@navikt/ds-react/LinkCard";
 import { LANDINGSSIDE_LATEST_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { abbrName, getImage } from "@/utils";
-import {
-  LinkCard,
-  LinkCardAnchor,
-  LinkCardDescription,
-  LinkCardImage,
-  LinkCardTitle,
-} from "../../(god-praksis)/_ui/link-card/LinkCard";
 import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 
@@ -46,7 +48,7 @@ type CardProps = {
   index: number;
 };
 
-const Card = ({ article, visible, index }: CardProps) => {
+const Card = ({ article, visible }: CardProps) => {
   const date = useFormatedDate(article.publishedAt ?? article._updatedAt);
 
   const showAuthor = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
@@ -58,7 +60,7 @@ const Card = ({ article, visible, index }: CardProps) => {
     "templates_artikkel",
   ].includes(article._type);
 
-  const imageUrl = urlForImage(article.seo?.image as Image)?.url();
+  const imageUrl = urlForImage(article.seo?.image as ImageType)?.url();
 
   const getStatusTag = () => {
     if (isArticle(article) || isBlogg(article)) {
@@ -67,85 +69,81 @@ const Card = ({ article, visible, index }: CardProps) => {
     return article.status?.tag;
   };
 
+  const showFooter =
+    showAuthor ||
+    isArticle(article) ||
+    (isKomponent(article) && article.status?.tag === "beta");
+
   return (
-    <LinkCard
-      className={cl(styles.card, {
-        [`${styles.cardVisible}`]: visible,
-        [`${styles.cardNotVisible}`]: !visible,
-      })}
-      style={{
-        transitionDelay: `${index * 70}ms`,
-      }}
-      autoLayout={false}
-    >
-      <VStack className={styles.cardContent}>
-        {showImage && (
-          <HStack
-            justify="center"
-            width="100%"
-            className={cl(`${styles.cardImageWrapper}`, {
-              [`${styles.betaHue}`]: getStatusTag() === "beta",
-            })}
+    <LinkCard className={styles.card} data-visible={visible}>
+      {showImage && (
+        <LinkCardImage
+          aspectRatio="16/9"
+          className={cl(`${styles.cardImageWrapper}`, {
+            [`${styles.betaHue}`]: getStatusTag() === "beta",
+          })}
+        >
+          <Image
+            src={
+              imageUrl || getImage(article?.heading ?? "", "thumbnail") || ""
+            }
+            alt={article.heading + " thumbnail"}
+            fill
+          />
+        </LinkCardImage>
+      )}
+      <LinkCardTitle as="h2">
+        <LinkCardAnchor asChild>
+          <Link
+            onNavigate={() =>
+              umamiTrack("navigere", {
+                kilde: "forsidekort",
+                url: `/${article.slug}`,
+              })
+            }
+            href={`/${article.slug}`}
           >
-            <LinkCardImage
-              src={
-                imageUrl || getImage(article?.heading ?? "", "thumbnail") || ""
-              }
-              alt={article.heading + " thumbnail"}
-            />
-          </HStack>
-        )}
-        <div>
-          <Stack direction="column-reverse">
-            <LinkCardTitle
-              as="h2"
-              onClick={() =>
-                umamiTrack("navigere", {
-                  kilde: "forsidekort",
-                  url: `/${article.slug}`,
-                })
-              }
-            >
-              <LinkCardAnchor href={`/${article.slug}`}>
-                {article.heading}
-              </LinkCardAnchor>
-            </LinkCardTitle>
-          </Stack>
-          {isArticle(article) || isBlogg(article) ? (
-            <LinkCardDescription>{article.ingress}</LinkCardDescription>
-          ) : article.seo?.meta ? (
-            <LinkCardDescription>{article.seo.meta}</LinkCardDescription>
-          ) : null}
-        </div>
+            {article.heading}
+          </Link>
+        </LinkCardAnchor>
+      </LinkCardTitle>
+      {isArticle(article) || isBlogg(article) ? (
+        <LinkCardDescription>{article.ingress}</LinkCardDescription>
+      ) : article.seo?.meta ? (
+        <LinkCardDescription>{article.seo.meta}</LinkCardDescription>
+      ) : null}
 
-        {showAuthor && (
-          <span className={styles.cardAuthor}>
-            {article?.contributors && (
-              <Detail as="span" weight="semibold">
-                {abbrName(
-                  article.contributors[0].title ?? "Manglende Forfatter",
+      {showFooter && (
+        <VStack asChild gap="space-12" align="start">
+          <LinkCardFooter>
+            {showAuthor && (
+              <HStack as="span" gap="space-8">
+                {article?.contributors && (
+                  <Detail as="span" weight="semibold" textColor="subtle">
+                    {abbrName(
+                      article.contributors[0].title ?? "Manglende Forfatter",
+                    )}
+                  </Detail>
                 )}
-              </Detail>
+                <Detail as="span" textColor="subtle">
+                  {date}
+                </Detail>
+              </HStack>
             )}
-            <Detail as="span">{date}</Detail>
-          </span>
-        )}
 
-        {isArticle(article) && (
-          <HStack as="span">
-            <Tag
-              type={article._type}
-              text={article.tema?.[0] ?? undefined}
-              size="xsmall"
-            />
-          </HStack>
-        )}
-        {isKomponent(article) && article.status?.tag === "beta" && (
-          <HStack as="span">
-            <BetaTag />
-          </HStack>
-        )}
-      </VStack>
+            {isArticle(article) && (
+              <Tag
+                type={article._type}
+                text={article.tema?.[0] ?? undefined}
+                size="xsmall"
+              />
+            )}
+            {isKomponent(article) && article.status?.tag === "beta" && (
+              <BetaTag />
+            )}
+          </LinkCardFooter>
+        </VStack>
+      )}
     </LinkCard>
   );
 };
