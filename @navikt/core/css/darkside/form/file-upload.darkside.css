@@ -197,10 +197,6 @@ li.aksel-file-item {
   overflow-wrap: anywhere;
 }
 
-.aksel-file-item__button {
-  margin-left: auto;
-}
-
 .aksel-file-item__error {
   display: grid;
   transition-property: grid-template-rows, padding-top;
