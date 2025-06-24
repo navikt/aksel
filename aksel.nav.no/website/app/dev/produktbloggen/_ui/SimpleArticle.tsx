@@ -1,10 +1,13 @@
 import NextLink from "next/link";
-import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
-import { dateStr, getAuthors } from "@/utils";
+import { BodyLong, Heading, Link } from "@navikt/ds-react";
+import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
+import { AvatarStack, queryToAvatars } from "../../_ui/Avatar";
 import styles from "../_ui/Produktbloggen.module.css";
 
-export const SimpleArticle = async ({ blogg }: { blogg: any }) => {
-  const date = await dateStr(blogg?.publishedAt ?? blogg._createdAt);
+type Blogg = NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][0];
+
+export const SimpleArticle = async ({ blogg }: { blogg: Blogg }) => {
+  const avatars = queryToAvatars(blogg.editorial_staff_teams);
 
   return (
     <article>
@@ -18,18 +21,7 @@ export const SimpleArticle = async ({ blogg }: { blogg: any }) => {
       <BodyLong className={styles.articleBody} size="medium">
         {blogg?.ingress}
       </BodyLong>
-      {getAuthors(blogg).length > 0 ? (
-        <BodyShort size="small" className={styles.articleAuthor}>
-          <BodyShort as="span" size="small" weight="semibold">
-            {getAuthors(blogg)[0]}
-          </BodyShort>
-          <span>{date}</span>
-        </BodyShort>
-      ) : (
-        <BodyShort size="small" className={styles.articleBodySubtle}>
-          <span>{date}</span>
-        </BodyShort>
-      )}
+      <AvatarStack avatars={avatars} />
     </article>
   );
 };

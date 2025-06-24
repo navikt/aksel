@@ -1,5 +1,9 @@
 import { defineQuery } from "next-sanity";
-import { contributorsAll, destructureBlocks } from "@/sanity/queries";
+import {
+  contributorsAll,
+  destructureBlocks,
+  editorialStaffAll,
+} from "@/sanity/queries";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
 
@@ -20,6 +24,19 @@ const DESIGNSYSTEM_OVERVIEW_PAGES_QUERY = defineQuery(
   }`,
 );
 
+const BLOGG_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "aksel_blogg" && slug.current == $slug][0]
+{
+  ...,
+  "slug": slug.current,
+  content[]{
+    ...,
+    ${destructureBlocks}
+  },
+  publishedAt,
+  ${editorialStaffAll}
+}`);
+
 const BLOGG_LANDINGSSIDE_BLOGS_QUERY = defineQuery(`
   *[_type == "blogg_landingsside"][0]{
     "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){
@@ -30,7 +47,7 @@ const BLOGG_LANDINGSSIDE_BLOGS_QUERY = defineQuery(`
       _createdAt,
       _id,
       "slug": slug.current,
-      ${contributorsAll}
+      ${editorialStaffAll}
     }
   }`);
 
@@ -130,19 +147,6 @@ const MONSTER_MALER_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
-}`);
-
-const BLOGG_BY_SLUG_QUERY =
-  defineQuery(`*[_type == "aksel_blogg" && slug.current == $slug][0]
-{
-  ...,
-  "slug": slug.current,
-  content[]{
-    ...,
-    ${destructureBlocks}
-  },
-  ${contributorsAll},
-  publishedAt,
 }`);
 
 const TOC_BY_SLUG_QUERY =
