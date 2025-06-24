@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { Button } from "@navikt/ds-react";
 import { Popover, PopoverContent } from "@navikt/ds-react/Popover";
-import { Avatar } from "./Avatar";
+import { type Avatar } from "./Avatar";
 
 export const InteractiveAvatarStack = ({
   popoverContent,

@@ -65,7 +65,7 @@ export const Multiple: StoryFn = () => {
   );
 };
 
-export const WithBrokenLink: StoryFn = () => {
+export const MissingImage: StoryFn = () => {
   return (
     <AvatarStack avatars={[dummyAvatar1, dummyAvatarBroken, dummyAvatar2]} />
   );
