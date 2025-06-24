@@ -1,6 +1,7 @@
 export type FileArrayT = {
   _key: string;
   innhold: string;
+  kompaktInnhold: string | null;
   title: string;
   navn: string;
   index: number;
