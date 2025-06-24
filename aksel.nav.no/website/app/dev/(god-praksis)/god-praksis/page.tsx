@@ -92,7 +92,7 @@ export default async function Page() {
                   return (
                     <li key={article.slug}>
                       <LinkCard>
-                        <LinkCardTitle as="h2">
+                        <LinkCardTitle as="h3">
                           <LinkCardAnchor href={article.slug ?? ""}>
                             {article.heading}
                           </LinkCardAnchor>

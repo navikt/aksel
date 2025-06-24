@@ -1758,8 +1758,8 @@ export type Ds_endringslogg_artikkel = {
     alt?: string;
     _type: "image";
   };
-  innhold?: Riktekst_grunnleggende;
   visMer?: boolean;
+  content?: Riktekst_grunnleggende;
 };
 
 export type Grunnleggende_landingsside = {
