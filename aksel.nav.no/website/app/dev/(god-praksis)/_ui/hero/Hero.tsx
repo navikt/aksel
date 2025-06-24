@@ -100,7 +100,7 @@ async function GodPraksisTemaList() {
 
           return (
             <li key={tema.slug}>
-              <LinkCard data-color="brand-blue" arrow={false}>
+              <LinkCard arrow={false}>
                 <LinkCardIcon>
                   <GodPraksisPictogram url={url} />
                 </LinkCardIcon>

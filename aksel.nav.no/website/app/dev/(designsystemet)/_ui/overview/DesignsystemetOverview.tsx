@@ -76,10 +76,11 @@ function DesignsystemetOverviewCard({
   const statusTagWithoutStable = getStatusTag(page.status?.tag, true);
 
   return (
-    <LinkCard data-color={statusTag?.colorRole}>
+    <LinkCard>
       <LinkCardImage
         aspectRatio="16/10"
         className={styles.overviewImageWrapper}
+        data-color={statusTag?.colorRole}
       >
         <ImageAsThemedSvg url={imageUrl} size={200} />
         {statusTagWithoutStable && (

@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
-import { ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   HGrid,
@@ -22,6 +21,7 @@ import {
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { GodPraksisTaxonomyTag } from "@/app/dev/(god-praksis)/_ui/GodPraksisTaxonomyTag";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
 
@@ -115,11 +115,12 @@ export default async function Page() {
                 <Link
                   href={`/god-praksis/${tema.slug}`}
                   as={NextLink}
-                  data-link-card-anchor
+                  data-animated-arrow-anchor
                   data-color="brand-blue"
                 >
                   {`Alt fra ${tema.title} `}
-                  <ArrowRightIcon fontSize="1.25rem" />
+
+                  <AnimatedArrowRight />
                 </Link>
               </h3>
             </section>
