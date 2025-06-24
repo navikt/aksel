@@ -194,6 +194,7 @@ function blockComponents({
           {children}
         </Heading>,
       ),
+    // Special case: h5 cannot be selected in Sanity Studio, but it's used dynamically in Endringslogg
     h5: ({ children, value }) =>
       withSanitizedBlock(
         <Heading
