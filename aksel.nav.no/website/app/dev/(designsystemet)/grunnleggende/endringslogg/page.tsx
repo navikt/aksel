@@ -122,11 +122,12 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <VStack>
+      <div>
         <DesignsystemetEyebrow type="ds_artikkel" />
         <Heading level="1" size="xlarge" spacing data-aksel-heading-color>
           Endringslogg
         </Heading>
+
         <VStack gap="space-24" paddingBlock="space-12 space-0">
           <SearchField />
           <FilterChips
@@ -136,14 +137,8 @@ export default async function Page({ searchParams }: PageProps) {
             selectedCategory={categoryFilter}
           />
         </VStack>
-        <VStack paddingBlock="space-32 space-0">
-          {logEntries?.length > 0 ? (
-            <LogEntryList list={groupedByMonth} />
-          ) : (
-            <EmptyStateCard />
-          )}
-        </VStack>
-      </VStack>
+      </div>
+
       <TableOfContents
         feedback={{
           name: "Endringslogg",
@@ -151,6 +146,14 @@ export default async function Page({ searchParams }: PageProps) {
         }}
         toc={toc}
       />
+
+      <VStack paddingBlock="space-32 space-0">
+        {logEntries?.length > 0 ? (
+          <LogEntryList list={groupedByMonth} />
+        ) : (
+          <EmptyStateCard />
+        )}
+      </VStack>
     </DesignsystemetPageLayout>
   );
 }
