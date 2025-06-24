@@ -1,25 +1,44 @@
 import { CodeIcon, PaletteIcon } from "@navikt/aksel-icons";
 import { HGrid } from "@navikt/ds-react";
+import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
 import GettingStartedCard from "./GettingStartedCard";
 
-const GettingStartedSection = () => (
+type GettingStartedItem = NonNullable<
+  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_getting_started"]
+>[number];
+
+type Props = {
+  cards?: {
+    title: GettingStartedItem["title"];
+    description: GettingStartedItem["description"];
+    icon: GettingStartedItem["icon"];
+    link: GettingStartedItem["link"];
+  }[];
+};
+
+const GettingStartedSection = ({ cards }: Props) => (
   <HGrid
     gap="space-24"
     width={{ xs: "100%", md: "768px" }}
     columns={{ xs: 1, md: 2 }}
   >
-    <GettingStartedCard
-      title="Start med design"
-      description="Figma-filer og kreative arenaer"
-      icon={<PaletteIcon fontSize="48" />}
-      link="/grunnleggende/introduksjon/kom-i-gang-med-figma"
-    />
-    <GettingStartedCard
-      title="Start med utvikling"
-      description="Installasjon og tips"
-      icon={<CodeIcon fontSize="48" />}
-      link="/grunnleggende/introduksjon/kom-i-gang-med-kodepakkene"
-    />
+    {cards?.map(({ title, description, icon: iconType, link }) => {
+      const icon =
+        iconType === "Palette" ? (
+          <PaletteIcon fontSize="48" />
+        ) : iconType === "Code" ? (
+          <CodeIcon fontSize="48" />
+        ) : undefined;
+      return (
+        <GettingStartedCard
+          key={title}
+          title={title}
+          description={description}
+          icon={icon}
+          link={link}
+        />
+      );
+    })}
   </HGrid>
 );
 

@@ -1,16 +1,28 @@
 import Link from "next/link";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Detail } from "@navikt/ds-react";
+import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
 import "./promo-tag.css";
 
-const PromoTag = () => {
+type PromoTag = NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_forside_promo_tag"];
+
+type Props = {
+  label: NonNullable<PromoTag>["label"];
+  text: NonNullable<PromoTag>["text"];
+  link: NonNullable<PromoTag>["link"];
+};
+
+const PromoTag = ({ label = "Nyhet", text, link }: Props) => {
+  if (!text || !link) {
+    return null;
+  }
   return (
-    <Link href="#" data-color="aksel-brand-pink">
+    <Link href={link} data-color="aksel-brand-pink">
       <Detail as="span" className="promoTag" textColor="default">
         <Detail as="span" className="promoTagLabel">
-          Nyhet
+          {label}
         </Detail>
-        Ny versjon av Aksel er ute (darkside) 🎉
+        {text}
         <ChevronRightIcon
           fontSize="16px"
           aria-hidden="true"

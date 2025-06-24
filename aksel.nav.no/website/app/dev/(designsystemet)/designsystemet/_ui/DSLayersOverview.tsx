@@ -14,13 +14,23 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { ListItem } from "@navikt/ds-react/List";
+import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
 import "./DSLayersOverview.css";
+
+type DSLayersOverview = NonNullable<
+  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_layers_overview"]
+>;
+
+type Props = {
+  title: DSLayersOverview["title"];
+  description: DSLayersOverview["ingress"];
+};
 
 const DottedLine = () => (
   <div className="aksel__ds-frontpage__dotted-line" aria-hidden="true" />
 );
 
-const DSLayersOverview = () => (
+const DSLayersOverview = ({ title, description }: Props) => (
   <BoxNew
     background="brand-blue-soft"
     borderColor="brand-blue-subtle"
@@ -31,14 +41,17 @@ const DSLayersOverview = () => (
     width={{ md: "768px" }}
   >
     <VStack gap="space-24" align="center">
-      <VStack align="center" gap="space-16">
-        <Heading level="2" size="large">
-          Et fleksibelt system
-        </Heading>
-        <BodyLong size="large" as="p" align="center">
-          Aksel designsystemet består av flere lag
-          <br /> som kan brukes enkeltvis eller som en full pakke.
-        </BodyLong>
+      <VStack align="center" gap="space-16" maxWidth="400px">
+        {title && (
+          <Heading level="2" size="large">
+            {title}
+          </Heading>
+        )}
+        {description && (
+          <BodyLong size="large" as="p" align="center">
+            {description}
+          </BodyLong>
+        )}
       </VStack>
       <BoxNew
         paddingBlock="space-24 0"

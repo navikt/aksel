@@ -1,3 +1,4 @@
+import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
 import {
   LinkCard,
   LinkCardAnchor,
@@ -6,20 +7,26 @@ import {
   LinkCardTitle,
 } from "../../(god-praksis)/_ui/link-card/LinkCard";
 
+type GettingStartedItem = NonNullable<
+  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_getting_started"]
+>[number];
+
 type Props = {
-  title: string;
-  description: string;
+  title: GettingStartedItem["title"];
+  description: GettingStartedItem["description"];
   icon: React.ReactNode;
-  link: string;
+  link: GettingStartedItem["link"];
 };
 
 const GettingStartedCard = ({ title, description, icon, link }: Props) => (
   <LinkCard>
-    <LinkCardTitle as="h2">
-      <LinkCardAnchor href={link}>{title}</LinkCardAnchor>
-    </LinkCardTitle>
-    <LinkCardDescription>{description}</LinkCardDescription>
-    <LinkCardIcon data-color="brand-blue">{icon}</LinkCardIcon>
+    {title && (
+      <LinkCardTitle as="h2">
+        {link ? <LinkCardAnchor href={link}>{title}</LinkCardAnchor> : title}
+      </LinkCardTitle>
+    )}
+    {description && <LinkCardDescription>{description}</LinkCardDescription>}
+    {icon && <LinkCardIcon data-color="brand-blue">{icon}</LinkCardIcon>}
   </LinkCard>
 );
 

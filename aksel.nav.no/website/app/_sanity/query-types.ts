@@ -2617,6 +2617,74 @@ export type Redirect = {
   redirects?: number;
 };
 
+export type Aksel_ds_forside = {
+  _id: string;
+  _type: "aksel_ds_forside";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  ds_forside_title?: string;
+  ds_forside_ingress?: string;
+  ds_forside_promo_tag?: {
+    label?: string;
+    text?: string;
+    link?: string;
+  };
+  ds_getting_started?: Array<{
+    title?: string;
+    description?: string;
+    icon?: "Palette" | "Code";
+    link?: string;
+    _type: "link_card";
+    _key: string;
+  }>;
+  ds_layers_overview?: {
+    title?: string;
+    ingress?: string;
+  };
+  ds_changelog?: {
+    title?: string;
+    ingress?: string;
+  };
+  ds_aksel_in_numbers?: {
+    title?: string;
+    ingress?: string;
+    statistics?: Array<{
+      title?: string;
+      number?: number;
+      unit?: string;
+      _type: "statistic";
+      _key: string;
+    }>;
+  };
+  ds_support?: Array<{
+    title?: string;
+    description?: string;
+    link?: {
+      url?: string;
+      text?: string;
+      icon?: "Github" | "Slack";
+    };
+    _type: "support_card";
+    _key: string;
+  }>;
+  seo?: {
+    meta?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+};
+
 export type Aksel_forside = {
   _id: string;
   _type: "aksel_forside";
@@ -2887,6 +2955,7 @@ export type AllSanitySchemaTypes =
   | GpInnholdstype
   | Intro_komponent
   | Redirect
+  | Aksel_ds_forside
   | Aksel_forside
   | SanityImageCrop
   | SanityImageHotspot
@@ -2905,6 +2974,49 @@ export type AllSanitySchemaTypes =
   | TableRow;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../app/_sanity/queries.ts
+// Variable: DS_FRONT_PAGE_QUERY
+// Query: *[_type == "aksel_ds_forside"][0] {    ds_forside_title,    ds_forside_ingress,    ds_forside_promo_tag { label, text, link },    ds_getting_started[]{ description, icon, link, title },    ds_layers_overview,    ds_changelog,    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},    ds_support[]{description, link, title}  }
+export type DS_FRONT_PAGE_QUERYResult = {
+  ds_forside_title: string | null;
+  ds_forside_ingress: string | null;
+  ds_forside_promo_tag: {
+    label: string | null;
+    text: string | null;
+    link: string | null;
+  } | null;
+  ds_getting_started: Array<{
+    description: string | null;
+    icon: "Code" | "Palette" | null;
+    link: string | null;
+    title: string | null;
+  }> | null;
+  ds_layers_overview: {
+    title?: string;
+    ingress?: string;
+  } | null;
+  ds_changelog: {
+    title?: string;
+    ingress?: string;
+  } | null;
+  ds_aksel_in_numbers: {
+    ingress: string | null;
+    statistics: Array<{
+      number: number | null;
+      title: string | null;
+      unit: string | null;
+    }> | null;
+    title: string | null;
+  } | null;
+  ds_support: Array<{
+    description: string | null;
+    link: {
+      url?: string;
+      text?: string;
+      icon?: "Github" | "Slack";
+    } | null;
+    title: string | null;
+  }> | null;
+} | null;
 // Variable: DESIGNSYSTEM_SIDEBAR_QUERY
 // Query: *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {  _type,  heading,  "slug": slug.current,  kategori,  "tag": status.tag,  "sidebarindex": sidebarindex,}
 export type DESIGNSYSTEM_SIDEBAR_QUERYResult = Array<
@@ -12554,6 +12666,7 @@ export type SITEMAP_ARTICLES_BY_TYPE_QUERYResult = Array<
 
 declare module "@sanity/client" {
   interface SanityQueries {
+    '*[_type == "aksel_ds_forside"][0] {\n    ds_forside_title,\n    ds_forside_ingress,\n    ds_forside_promo_tag { label, text, link },\n    ds_getting_started[]{ description, icon, link, title },\n    ds_layers_overview,\n    ds_changelog,\n    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},\n    ds_support[]{description, link, title}\n  }': DS_FRONT_PAGE_QUERYResult;
     '*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {\n  _type,\n  heading,\n  "slug": slug.current,\n  kategori,\n  "tag": status.tag,\n  "sidebarindex": sidebarindex,\n}': DESIGNSYSTEM_SIDEBAR_QUERYResult;
     '*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {\n  _type,\n  overview_pages\n  }': DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult;
     '\n  *[_type == "blogg_landingsside"][0]{\n    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){\n      seo,\n      heading,\n      ingress,\n      publishedAt,\n      _createdAt,\n      _id,\n      "slug": slug.current,\n      contributors[]->{title}\n    }\n  }': BLOGG_LANDINGSSIDE_BLOGS_QUERYResult;

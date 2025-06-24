@@ -1,7 +1,10 @@
 import React from "react";
 import { VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
-import { N_LATEST_CHANGE_LOGS_QUERY } from "@/app/_sanity/queries";
+import {
+  DS_FRONT_PAGE_QUERY,
+  N_LATEST_CHANGE_LOGS_QUERY,
+} from "@/app/_sanity/queries";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
 import GettingStartedSection from "./GettingStartedSection";
 import AkselByNumbers from "./_ui/AkselByNumbers";
@@ -20,10 +23,20 @@ export const metadata = {
 };
 
 const DesignsystemetPage = async () => {
-  const { data: changeLogEntries } = await sanityFetch({
-    query: N_LATEST_CHANGE_LOGS_QUERY,
-    params: { count: 3 },
-  });
+  const [{ data: changeLogEntries }, { data: dsFrontPageData }] =
+    await Promise.all([
+      sanityFetch({
+        query: N_LATEST_CHANGE_LOGS_QUERY,
+        params: { count: 3 },
+      }),
+      sanityFetch({
+        query: DS_FRONT_PAGE_QUERY,
+      }),
+    ]);
+
+  if (dsFrontPageData === null) {
+    throw new Error("Kunne ikke hente data for Designsystemet forsiden");
+  }
 
   return (
     <DesignsystemetPageLayout layout="without-toc">
@@ -35,13 +48,23 @@ const DesignsystemetPage = async () => {
           align="center"
         >
           <DSLandingPageHeading
-            title="Aksel designsystemet"
-            introText="Aksel er designsystemet til Navs produktutvikling, en samling med designtokens, dokumenterte komponenter, maler og guider. En komplett plattform for å lage førsteklasses grensesnitt"
+            title={dsFrontPageData.ds_forside_title}
+            introText={dsFrontPageData.ds_forside_ingress}
+            promoTag={dsFrontPageData.ds_forside_promo_tag}
           />
-          <GettingStartedSection />
+          {dsFrontPageData.ds_getting_started && (
+            <GettingStartedSection cards={dsFrontPageData.ds_getting_started} />
+          )}
         </VStack>
-        <DSLayersOverview />
-        <ChangeLogNews entries={changeLogEntries} />
+        <DSLayersOverview
+          title={dsFrontPageData.ds_layers_overview?.title}
+          description={dsFrontPageData.ds_layers_overview?.ingress}
+        />
+        <ChangeLogNews
+          title={dsFrontPageData.ds_changelog?.title}
+          description={dsFrontPageData.ds_changelog?.ingress}
+          entries={changeLogEntries}
+        />
         <AkselByNumbers />
         <SupportSection />
       </VStack>

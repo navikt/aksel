@@ -1,15 +1,10 @@
 import { format, parseISO } from "date-fns";
 import { nb } from "date-fns/locale";
-import NextLink from "next/link";
+import { BodyLong, HGrid, Heading, VStack } from "@navikt/ds-react";
 import {
-  Bleed,
-  BodyLong,
-  HGrid,
-  Heading,
-  Link,
-  VStack,
-} from "@navikt/ds-react";
-import { N_LATEST_CHANGE_LOGS_QUERYResult } from "@/app/_sanity/query-types";
+  DS_FRONT_PAGE_QUERYResult,
+  N_LATEST_CHANGE_LOGS_QUERYResult,
+} from "@/app/_sanity/query-types";
 import {
   LinkCard,
   LinkCardAnchor,
@@ -18,25 +13,32 @@ import {
   LinkCardTitle,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { GithubIcon } from "@/assets/Icons";
+import { TextWithMarkdown } from "@/web/TextWithMarkdown";
+
+type ChangeLog = NonNullable<
+  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_changelog"]
+>;
 
 type Props = {
+  title: ChangeLog["title"];
+  description: ChangeLog["ingress"];
   entries: N_LATEST_CHANGE_LOGS_QUERYResult;
 };
 
-const ChangeLogNews = ({ entries }: Props) => (
-  <Bleed marginInline="full">
-    <VStack gap="space-32" as="section">
+const ChangeLogNews = ({ title, description, entries }: Props) => {
+  return (
+    <VStack gap="space-32" as="section" width="100%">
       <VStack gap="space-8" align="center">
-        <Heading level="2" size="large">
-          Endringslogg
-        </Heading>
-        <BodyLong size="large" as="p">
-          Siste endringer i kode.{" "}
-          <Link as={NextLink} href="/dev/designsystemet/endringslogg">
-            Se alle endringer
-          </Link>
-          .
-        </BodyLong>
+        {title && (
+          <Heading level="2" size="large">
+            {title}
+          </Heading>
+        )}
+        {description && (
+          <BodyLong size="large" as="p">
+            <TextWithMarkdown>{description}</TextWithMarkdown>
+          </BodyLong>
+        )}
       </VStack>
       <HGrid
         gap="space-24"
@@ -64,7 +66,7 @@ const ChangeLogNews = ({ entries }: Props) => (
         ))}
       </HGrid>
     </VStack>
-  </Bleed>
-);
+  );
+};
 
 export default ChangeLogNews;
