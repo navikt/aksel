@@ -163,24 +163,22 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
 `);
 
 export const ENDRINGSLOGG_FIELDS =
-  "heading, slug, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer";
+  'heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold, visMer';
 const ENDRINGSLOGG_QUERY = defineQuery(`
   *[_type == "ds_endringslogg_artikkel"]{
     ${ENDRINGSLOGG_FIELDS}
   }`);
 
-const ENDRINGSLOGG_SLUG_FIELDS =
-  'heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, innhold';
 const ENDRINGSLOGG_WITH_NEIGHBORS_QUERY = defineQuery(`
   *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{
     "primary": {
-      ${ENDRINGSLOGG_SLUG_FIELDS}
+      ${ENDRINGSLOGG_FIELDS}
     },
     "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{
-      ${ENDRINGSLOGG_SLUG_FIELDS}
+      ${ENDRINGSLOGG_FIELDS}
     },
     "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{
-      ${ENDRINGSLOGG_SLUG_FIELDS}
+      ${ENDRINGSLOGG_FIELDS}
     }
   }
 `);

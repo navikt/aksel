@@ -19,7 +19,7 @@ import { bumpHeadingLevels } from "./_ui/utils";
 export const metadata: Metadata = {
   title: "Endringslogg",
   description:
-    "Endringsloggen gir deg en oversikt over oppdatert kode, design og dokumentasjon.",
+    "Endringsloggen til Aksel gir deg en oversikt over oppdatert kode, design og dokumentasjon.",
 };
 
 const startYear = 2022;

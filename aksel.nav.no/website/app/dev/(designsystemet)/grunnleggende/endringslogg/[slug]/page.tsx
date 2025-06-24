@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
-import { PortableTextBlock, defineQuery } from "next-sanity";
+import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
@@ -18,6 +18,7 @@ import { sanityFetch } from "@/app/_sanity/live";
 import {
   ENDRINGSLOGG_METADATA_BY_SLUG_QUERY,
   ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
+  SLUG_BY_TYPE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
@@ -48,13 +49,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const { data: slugs } = await sanityFetch({
-    query: defineQuery(`
-  *[_type == "ds_endringslogg_artikkel" && defined(slug.current)].slug.current
-`),
+    query: SLUG_BY_TYPE_QUERY,
+    params: { type: "ds_endringslogg_artikkel" },
     stega: false,
     perspective: "published",
   });
-  return slugs.map((slug: string) => ({ slug }));
+  return slugs.filter((slug) => slug !== null).map((slug) => ({ slug }));
 }
 
 type Props = {

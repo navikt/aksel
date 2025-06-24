@@ -151,7 +151,7 @@ export default function LogEntry({
                 <ShowMore.Heading>
                   <Heading size="large" level="2" spacing>
                     <Link
-                      href={`./endringslogg/${slug?.current}`}
+                      href={`./endringslogg/${slug}`}
                       className={cl(
                         styles.innhold,
                         fremhevet && styles.innholdFremhevet,
@@ -190,7 +190,7 @@ export default function LogEntry({
               <>
                 <Heading size="large" level="2" spacing>
                   <Link
-                    href={`./endringslogg/${slug?.current}`}
+                    href={`./endringslogg/${slug}`}
                     className={cl(
                       styles.innhold,
                       fremhevet && styles.innholdFremhevet,
