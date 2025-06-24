@@ -37,13 +37,13 @@ const getMonthAndYear = (dateStr: string | null) => {
 
 export default async function Page({ searchParams }: PageProps) {
   const {
-    arstall: paramYear = "",
+    årstall: paramYear = "",
     kategori: paramCategory = "",
     fritekst: paramTextFilter = "",
   } = await searchParams;
   const yearFilter = years.includes(+paramYear)
     ? +paramYear
-    : paramYear === "ingen"
+    : paramYear === "alle"
       ? null
       : currentYear;
   const categoryFilter = categories.includes(paramCategory.toString())

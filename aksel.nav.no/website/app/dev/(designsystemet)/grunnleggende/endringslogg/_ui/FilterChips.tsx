@@ -33,7 +33,7 @@ export default function FilterChips({
   function getHref(option: string | number) {
     const params = new URLSearchParams(searchParams?.toString());
     if (typeof option === "number") {
-      params.set("arstall", `${option === optYear ? "ingen" : option}`);
+      params.set("årstall", `${option === optYear ? "alle" : option}`);
     } else if (typeof option === "string") {
       if (option === optCategory) {
         params.delete("kategori");

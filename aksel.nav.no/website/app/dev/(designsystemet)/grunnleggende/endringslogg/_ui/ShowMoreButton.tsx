@@ -55,7 +55,7 @@ const ShowMoreButton = ({
     {
       className: cl(styles.showMoreButton, className),
       onClick: toggleExpansion,
-      icon: <ChevronIcon />,
+      icon: <ChevronIcon aria-hidden />,
       ...restProps,
     },
     buttonText,

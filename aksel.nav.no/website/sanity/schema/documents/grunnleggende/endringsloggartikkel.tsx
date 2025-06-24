@@ -16,7 +16,6 @@ export const EndringsloggArtikkel = defineType({
       title: "URL",
       name: "slug",
       type: "slug",
-      // hidden: true,
       validation: (Rule) => Rule.required(),
       group: "settings",
       options: {
