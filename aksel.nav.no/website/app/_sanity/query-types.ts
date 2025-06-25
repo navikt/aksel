@@ -8595,11 +8595,12 @@ export type METADATA_BY_SLUG_QUERYResult =
 // Query: *[_type == $type && defined(slug.current)].slug.current
 export type SLUG_BY_TYPE_QUERYResult = Array<string | null>;
 // Variable: N_LATEST_CHANGE_LOGS_QUERY
-// Query: *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato }[0...$count]
+// Query: *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]
 export type N_LATEST_CHANGE_LOGS_QUERYResult = Array<{
   heading: string | null;
   slug: Slug | null;
   endringsdato: string | null;
+  endringstype: "design" | "dokumentasjon" | "kode" | null;
 }>;
 // Variable: GOD_PRAKSIS_ALL_TEMA_QUERY
 // Query: *[_type == "gp.tema"] | order(lower(title)){  title,  _updatedAt,  description,  pictogram,  "slug": slug.current,  "articles": *[_type=="aksel_artikkel"    && (^._id in undertema[]->tema._ref)] {      heading,      "slug": slug.current,      "undertema": undertema[]->{title, "temaTitle": tema->title},      "innholdstype": innholdstype->title,      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month    } | order(coalesce(views, -1) desc)[0...4]{      heading,      slug,      undertema,      innholdstype    },}
@@ -12786,7 +12787,7 @@ declare module "@sanity/client" {
     '*[slug.current == $slug][0].content[style match \'h2\'][]{\n  "id": _key,\n  "title": pt::text(@)\n}': TOC_BY_SLUG_QUERYResult;
     "*[slug.current == $slug][0]{\n  heading,\n  ingress,\n  publishedAt,\n  seo\n}": METADATA_BY_SLUG_QUERYResult;
     "\n  *[_type == $type && defined(slug.current)].slug.current\n": SLUG_BY_TYPE_QUERYResult;
-    '\n  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato }[0...$count]': N_LATEST_CHANGE_LOGS_QUERYResult;
+    '\n  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]': N_LATEST_CHANGE_LOGS_QUERYResult;
     '*[_type == "gp.tema"] | order(lower(title)){\n  title,\n  _updatedAt,\n  description,\n  pictogram,\n  "slug": slug.current,\n  "articles": *[_type=="aksel_artikkel"\n    && (^._id in undertema[]->tema._ref)] {\n      heading,\n      "slug": slug.current,\n      "undertema": undertema[]->{title, "temaTitle": tema->title},\n      "innholdstype": innholdstype->title,\n      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month\n    } | order(coalesce(views, -1) desc)[0...4]{\n      heading,\n      slug,\n      undertema,\n      innholdstype\n    },\n}': GOD_PRAKSIS_ALL_TEMA_QUERYResult;
     '*[_type == "godpraksis_landingsside"][0].seo': GOD_PRAKSIS_LANDING_PAGE_SEO_QUERYResult;
     '*[_type == "gp.tema" && slug.current == $slug][0]{\n    ...,\n    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{\n      title,\n      description\n    },\n  }': GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult;

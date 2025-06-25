@@ -174,7 +174,7 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
 `);
 
 const N_LATEST_CHANGE_LOGS_QUERY = defineQuery(`
-  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato }[0...$count]`);
+  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]`);
 
 /* ------------------------------- God praksis ------------------------------ */
 const GOD_PRAKSIS_ALL_TEMA_QUERY =
