@@ -108,9 +108,13 @@ const Card = ({ article, visible }: CardProps) => {
         </LinkCardAnchor>
       </LinkCardTitle>
       {isArticle(article) || isBlogg(article) ? (
-        <LinkCardDescription>{article.ingress}</LinkCardDescription>
+        <LinkCardDescription data-clamp-text="4-lines">
+          {article.ingress}
+        </LinkCardDescription>
       ) : article.seo?.meta ? (
-        <LinkCardDescription>{article.seo.meta}</LinkCardDescription>
+        <LinkCardDescription data-clamp-text="4-lines">
+          {article.seo.meta}
+        </LinkCardDescription>
       ) : null}
 
       {showFooter && (

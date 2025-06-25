@@ -32,6 +32,17 @@ body {
   }
 }
 
+[data-clamp-text] {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  &[data-clamp-text="4-lines"] {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+  }
+}
+
 [data-text-prose] {
   max-width: 670px;
 }
