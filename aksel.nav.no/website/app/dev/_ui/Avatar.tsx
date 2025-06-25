@@ -28,6 +28,8 @@ const AvatarCircle = ({ avatar }: { avatar: Avatar }) => {
       height="24"
       alt={`Avatar for ${avatar.name}`}
       src={avatar.imageSrc}
+      priority
+      loading="eager"
     />
   );
 };
