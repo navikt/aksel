@@ -2,18 +2,24 @@
 
 import { format, parseISO } from "date-fns";
 import { nb } from "date-fns/locale";
-import { BodyLong, HGrid, Heading, VStack } from "@navikt/ds-react";
 import {
-  DS_FRONT_PAGE_QUERYResult,
-  N_LATEST_CHANGE_LOGS_QUERYResult,
-} from "@/app/_sanity/query-types";
-import {
+  BodyLong,
+  BoxNew,
+  HGrid,
+  Heading,
   LinkCard,
+  VStack,
+} from "@navikt/ds-react";
+import {
   LinkCardAnchor,
   LinkCardDescription,
   LinkCardIcon,
   LinkCardTitle,
-} from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
+} from "@navikt/ds-react/LinkCard";
+import {
+  DS_FRONT_PAGE_QUERYResult,
+  N_LATEST_CHANGE_LOGS_QUERYResult,
+} from "@/app/_sanity/query-types";
 import { GithubIcon } from "@/assets/Icons";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import "./ChangeLogNews.css";
@@ -60,9 +66,16 @@ const ChangeLogNews = ({ title, description, entries }: Props) => {
                 })}
               </LinkCardDescription>
             )}
-            <LinkCardIcon className="aksel__changelog__icon">
-              <GithubIcon width="32" height="32" aria-hidden="true" />
-            </LinkCardIcon>
+            <BoxNew
+              asChild
+              padding="space-16"
+              borderRadius="12"
+              background="neutral-moderateA"
+            >
+              <LinkCardIcon className="aksel__changelog__icon">
+                <GithubIcon width="36" height="36" aria-hidden="true" />
+              </LinkCardIcon>
+            </BoxNew>
           </LinkCard>
         ))}
       </HGrid>

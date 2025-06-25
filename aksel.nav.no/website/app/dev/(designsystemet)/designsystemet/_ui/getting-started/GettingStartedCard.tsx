@@ -1,11 +1,11 @@
-import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
+import { BoxNew, LinkCard } from "@navikt/ds-react";
 import {
-  LinkCard,
   LinkCardAnchor,
   LinkCardDescription,
   LinkCardIcon,
   LinkCardTitle,
-} from "../../../../(god-praksis)/_ui/link-card/LinkCard";
+} from "@navikt/ds-react/LinkCard";
+import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
 import "./GettingStartedCard.css";
 
 type GettingStartedItem = NonNullable<
@@ -28,12 +28,19 @@ const GettingStartedCard = ({ title, description, icon, link }: Props) => (
     )}
     {description && <LinkCardDescription>{description}</LinkCardDescription>}
     {icon && (
-      <LinkCardIcon
-        className="aksel__getting-started__icon"
-        data-color="brand-blue"
+      <BoxNew
+        asChild
+        padding="space-8"
+        borderRadius="12"
+        background="neutral-moderateA"
       >
-        {icon}
-      </LinkCardIcon>
+        <LinkCardIcon
+          className="aksel__getting-started__icon"
+          data-color="brand-blue"
+        >
+          {icon}
+        </LinkCardIcon>
+      </BoxNew>
     )}
   </LinkCard>
 );
