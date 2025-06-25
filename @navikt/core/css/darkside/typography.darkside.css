@@ -278,11 +278,3 @@
     color: var(--ax-text-subtle);
   }
 }
-
-.aksel-typo--color-contrast {
-  color: var(--ax-text-neutral-contrast);
-
-  &[data-color] {
-    color: var(--ax-text-contrast);
-  }
-}
