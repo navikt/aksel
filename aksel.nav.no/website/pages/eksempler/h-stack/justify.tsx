@@ -60,7 +60,10 @@ const Placeholder = ({ text }: { text?: string }) => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { showBreakpoints: true });
+export default withDsExample(Example, {
+  showBreakpoints: true,
+  legacyOnly: true,
+});
 
 /* Storybook story */
 export const Demo = {
