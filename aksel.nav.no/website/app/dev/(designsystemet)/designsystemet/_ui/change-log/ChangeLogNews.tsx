@@ -1,5 +1,3 @@
-"use client";
-
 import { format, parseISO } from "date-fns";
 import { nb } from "date-fns/locale";
 import {
@@ -12,29 +10,31 @@ import {
 } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
-  LinkCardDescription,
+  LinkCardFooter,
   LinkCardIcon,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
-import {
-  DS_FRONT_PAGE_QUERYResult,
-  N_LATEST_CHANGE_LOGS_QUERYResult,
-} from "@/app/_sanity/query-types";
+import { sanityFetch } from "@/app/_sanity/live";
+import { N_LATEST_CHANGE_LOGS_QUERY } from "@/app/_sanity/queries";
 import { GithubIcon } from "@/assets/Icons";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import "./ChangeLogNews.css";
 
-type ChangeLog = NonNullable<
-  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_changelog"]
->;
-
-type Props = {
-  title: ChangeLog["title"];
-  description: ChangeLog["ingress"];
-  entries: N_LATEST_CHANGE_LOGS_QUERYResult;
+type ChangeLogNewsProps = {
+  title: string;
+  description?: string;
 };
 
-const ChangeLogNews = ({ title, description, entries }: Props) => {
+async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
+  const { data: changeLogEntries } = await sanityFetch({
+    query: N_LATEST_CHANGE_LOGS_QUERY,
+    params: { count: 3 },
+  });
+
+  if (changeLogEntries.length === 0) {
+    return null;
+  }
+
   return (
     <VStack gap="space-32" as="section" width="100%">
       <VStack gap="space-8" align="center">
@@ -50,7 +50,7 @@ const ChangeLogNews = ({ title, description, entries }: Props) => {
         )}
       </VStack>
       <HGrid gap="space-24" columns={{ xs: 1, md: 2, xl: 3 }}>
-        {entries.map(({ heading, slug, endringsdato }) => (
+        {changeLogEntries.map(({ heading, slug, endringsdato }) => (
           <LinkCard key={heading}>
             <LinkCardTitle as="span">
               <LinkCardAnchor
@@ -60,11 +60,11 @@ const ChangeLogNews = ({ title, description, entries }: Props) => {
               </LinkCardAnchor>
             </LinkCardTitle>
             {endringsdato && (
-              <LinkCardDescription>
+              <LinkCardFooter>
                 {format(parseISO(endringsdato), "do MMMM yyyy", {
                   locale: nb,
                 })}
-              </LinkCardDescription>
+              </LinkCardFooter>
             )}
             <BoxNew
               asChild
@@ -81,6 +81,6 @@ const ChangeLogNews = ({ title, description, entries }: Props) => {
       </HGrid>
     </VStack>
   );
-};
+}
 
-export default ChangeLogNews;
+export { ChangeLogNews };

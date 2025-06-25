@@ -1,14 +1,11 @@
 import React from "react";
 import { VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
-import {
-  DS_FRONT_PAGE_QUERY,
-  N_LATEST_CHANGE_LOGS_QUERY,
-} from "@/app/_sanity/queries";
+import { DS_FRONT_PAGE_QUERY } from "@/app/_sanity/queries";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
 import DSLandingPageHeading from "./_ui/DSLandingPageHeading";
 import AkselByNumbers from "./_ui/aksel-by-numbers/AkselByNumbers";
-import ChangeLogNews from "./_ui/change-log/ChangeLogNews";
+import { ChangeLogNews } from "./_ui/change-log/ChangeLogNews";
 import DSLayersOverview from "./_ui/ds-layers-overview/DSLayersOverview";
 import GettingStartedSection from "./_ui/getting-started/GettingStartedSection";
 import SupportSection from "./_ui/support-section/SupportSection";
@@ -23,16 +20,11 @@ export const metadata = {
 };
 
 const DesignsystemetPage = async () => {
-  const [{ data: changeLogEntries }, { data: dsFrontPageData }] =
-    await Promise.all([
-      sanityFetch({
-        query: N_LATEST_CHANGE_LOGS_QUERY,
-        params: { count: 3 },
-      }),
-      sanityFetch({
-        query: DS_FRONT_PAGE_QUERY,
-      }),
-    ]);
+  const [{ data: dsFrontPageData }] = await Promise.all([
+    sanityFetch({
+      query: DS_FRONT_PAGE_QUERY,
+    }),
+  ]);
 
   if (dsFrontPageData === null) {
     throw new Error("Kunne ikke hente data for Designsystemet forsiden");
@@ -61,9 +53,8 @@ const DesignsystemetPage = async () => {
           description={dsFrontPageData.ds_layers_overview?.ingress}
         />
         <ChangeLogNews
-          title={dsFrontPageData.ds_changelog?.title}
+          title={dsFrontPageData.ds_changelog?.title ?? "Endringslogg"}
           description={dsFrontPageData.ds_changelog?.ingress}
-          entries={changeLogEntries}
         />
         <AkselByNumbers
           title={dsFrontPageData.ds_aksel_in_numbers?.title}
