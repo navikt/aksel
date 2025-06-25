@@ -28,11 +28,3 @@
   align-items: center;
   color: var(--ax-text-contrast, #fff);
 }
-
-.promoTagArrow {
-  align-self: center;
-
-  .promoTag:hover & {
-    transform: translateX(4px);
-  }
-}

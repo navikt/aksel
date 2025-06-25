@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { Detail } from "@navikt/ds-react";
+import { Detail, HStack } from "@navikt/ds-react";
 import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
+import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import "./promo-tag.css";
 
 type PromoTag = NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_forside_promo_tag"];
@@ -18,17 +18,15 @@ const PromoTag = ({ label = "Nyhet", text, link }: Props) => {
   }
 
   return (
-    <Link href={link} data-color="aksel-brand-pink">
+    <Link href={link} data-color="aksel-brand-pink" data-animated-arrow-anchor>
       <Detail as="span" className="promoTag" textColor="default">
         <Detail as="span" className="promoTagLabel">
           {label}
         </Detail>
-        {text}
-        <ChevronRightIcon
-          fontSize="16px"
-          aria-hidden="true"
-          className="promoTagArrow"
-        />
+        <HStack gap="space-4" align="center" as="span" wrap={false}>
+          <span>{text}</span>
+          <AnimatedArrowRight />
+        </HStack>
       </Detail>
     </Link>
   );
