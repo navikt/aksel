@@ -176,6 +176,7 @@ const LinkCardFooter = forwardRef<HTMLDivElement, LinkCardFooterProps>(
 /* ---------------------------- LinkCard Icon ---------------------------- */
 interface LinkCardIconProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  className?: string;
   /**
    * Whether the icon should have a background
    * @default true
@@ -185,13 +186,18 @@ interface LinkCardIconProps extends HTMLAttributes<HTMLDivElement> {
 
 const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
   (
-    { children, hasBackground = true, ...restProps }: LinkCardIconProps,
+    {
+      children,
+      hasBackground = true,
+      className,
+      ...restProps
+    }: LinkCardIconProps,
     forwardedRef,
   ) => {
     return (
       <div
         ref={forwardedRef}
-        className={cn("aksel-link-card__icon", {
+        className={cn("aksel-link-card__icon", className, {
           "aksel-link-card__icon--background": hasBackground,
         })}
         aria-hidden

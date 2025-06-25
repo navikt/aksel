@@ -16,6 +16,7 @@ import {
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { GithubIcon } from "@/assets/Icons";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
+import "./ChangeLogNews.css";
 
 type ChangeLog = NonNullable<
   NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_changelog"]
@@ -59,7 +60,7 @@ const ChangeLogNews = ({ title, description, entries }: Props) => {
                 })}
               </LinkCardDescription>
             )}
-            <LinkCardIcon>
+            <LinkCardIcon className="aksel__changelog__icon">
               <GithubIcon width="32" height="32" aria-hidden="true" />
             </LinkCardIcon>
           </LinkCard>

@@ -5,7 +5,8 @@ import {
   LinkCardDescription,
   LinkCardIcon,
   LinkCardTitle,
-} from "../../(god-praksis)/_ui/link-card/LinkCard";
+} from "../../../(god-praksis)/_ui/link-card/LinkCard";
+import "./GettingStartedCard.css";
 
 type GettingStartedItem = NonNullable<
   NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_getting_started"]
@@ -26,7 +27,14 @@ const GettingStartedCard = ({ title, description, icon, link }: Props) => (
       </LinkCardTitle>
     )}
     {description && <LinkCardDescription>{description}</LinkCardDescription>}
-    {icon && <LinkCardIcon data-color="brand-blue">{icon}</LinkCardIcon>}
+    {icon && (
+      <LinkCardIcon
+        className="aksel__getting-started__icon"
+        data-color="brand-blue"
+      >
+        {icon}
+      </LinkCardIcon>
+    )}
   </LinkCard>
 );
 

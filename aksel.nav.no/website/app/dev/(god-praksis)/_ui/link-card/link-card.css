@@ -109,14 +109,14 @@
   height: max-content;
   display: grid;
   place-content: center;
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-default);
   align-self: flex-start;
   margin-inline-end: var(--ax-space-20);
 }
 
 .aksel-link-card__icon--background {
   background-color: var(--ax-bg-moderateA);
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-border-radius-full);
   padding: var(--ax-space-12);
 }
 
