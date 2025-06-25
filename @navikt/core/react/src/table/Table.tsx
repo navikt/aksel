@@ -23,7 +23,7 @@ export interface TableProps
    */
   zebraStripes?: boolean;
   /**
-   * Allows the table to have a sticky header
+   * Makes the header sticky
    * @default false
    */
   stickyHeader?: boolean;
