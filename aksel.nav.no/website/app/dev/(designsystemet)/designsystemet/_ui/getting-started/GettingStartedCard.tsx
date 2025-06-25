@@ -5,7 +5,7 @@ import {
   LinkCardDescription,
   LinkCardIcon,
   LinkCardTitle,
-} from "../../../(god-praksis)/_ui/link-card/LinkCard";
+} from "../../../../(god-praksis)/_ui/link-card/LinkCard";
 import "./GettingStartedCard.css";
 
 type GettingStartedItem = NonNullable<

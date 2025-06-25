@@ -10,8 +10,8 @@ import AkselByNumbers from "./_ui/AkselByNumbers";
 import ChangeLogNews from "./_ui/ChangeLogNews";
 import DSLandingPageHeading from "./_ui/DSLandingPageHeading";
 import DSLayersOverview from "./_ui/DSLayersOverview";
-import GettingStartedSection from "./_ui/GettingStartedSection";
 import SupportSection from "./_ui/SupportSection";
+import GettingStartedSection from "./_ui/getting-started/GettingStartedSection";
 import "./ds-forside.css";
 
 export const metadata = {
