@@ -18,7 +18,7 @@ type Props = {
 const DSLandingPageHeading = ({ title, introText, promoTag }: Props) => (
   <BoxNew maxWidth="text">
     <VStack gap="space-16" maxWidth="600px" align="center">
-      <VStack gap="space-8" align="center">
+      <VStack gap="space-16" align="center">
         {promoTag && (
           <PromoTag
             label={promoTag.label}
