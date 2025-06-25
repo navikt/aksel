@@ -1,7 +1,0 @@
-.aksel__getting-started__icon {
-  color: var(--ax-text-subtle);
-
-  &.aksel-link-card__icon--background {
-    border-radius: var(--ax-border-radius-large);
-  }
-}

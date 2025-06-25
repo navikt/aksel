@@ -1,41 +1,51 @@
 import { CodeIcon, PaletteIcon } from "@navikt/aksel-icons";
-import { HGrid } from "@navikt/ds-react";
+import { BoxNew, HGrid, LinkCard } from "@navikt/ds-react";
+import {
+  LinkCardAnchor,
+  LinkCardDescription,
+  LinkCardIcon,
+  LinkCardTitle,
+} from "@navikt/ds-react/LinkCard";
 import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
-import GettingStartedCard from "./GettingStartedCard";
 
-type GettingStartedItem = NonNullable<
-  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_getting_started"]
->[number];
-
-type Props = {
-  cards?: {
-    title: GettingStartedItem["title"];
-    description: GettingStartedItem["description"];
-    icon: GettingStartedItem["icon"];
-    link: GettingStartedItem["link"];
-  }[];
+type GettingStartedSectionProps = {
+  cards: NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_getting_started"];
 };
 
-const GettingStartedSection = ({ cards }: Props) => (
-  <HGrid gap="space-24" width="100%" columns={{ xs: 1, md: 2 }}>
-    {cards?.map(({ title, description, icon: iconType, link }) => {
-      const icon =
-        iconType === "Palette" ? (
-          <PaletteIcon fontSize="48" />
-        ) : iconType === "Code" ? (
-          <CodeIcon fontSize="48" />
-        ) : undefined;
-      return (
-        <GettingStartedCard
-          key={title}
-          title={title}
-          description={description}
-          icon={icon}
-          link={link}
-        />
-      );
-    })}
-  </HGrid>
-);
+function GettingStartedSection({ cards }: GettingStartedSectionProps) {
+  return (
+    <HGrid gap="space-24" width="100%" columns={{ xs: 1, md: 2 }}>
+      {cards?.map(({ title, description, icon: iconType, link }) => {
+        if (!title || !link || !iconType || !description) {
+          return null;
+        }
 
-export default GettingStartedSection;
+        const Icon = iconType === "Palette" ? PaletteIcon : CodeIcon;
+
+        return (
+          <LinkCard key={title}>
+            <LinkCardTitle as="h2">
+              <LinkCardAnchor href={link}>{title}</LinkCardAnchor>
+            </LinkCardTitle>
+            <LinkCardDescription>{description}</LinkCardDescription>
+            <BoxNew
+              asChild
+              padding="space-8"
+              borderRadius="12"
+              background="brand-blue-moderateA"
+            >
+              <LinkCardIcon
+                className="aksel__getting-started__icon"
+                data-color="brand-blue"
+              >
+                <Icon fontSize="48" color="var(--ax-text-subtle)" />
+              </LinkCardIcon>
+            </BoxNew>
+          </LinkCard>
+        );
+      })}
+    </HGrid>
+  );
+}
+
+export { GettingStartedSection };

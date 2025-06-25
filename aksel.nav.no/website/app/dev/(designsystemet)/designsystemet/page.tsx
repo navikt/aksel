@@ -1,5 +1,6 @@
 import React from "react";
 import { VStack } from "@navikt/ds-react";
+import { PageBlock } from "@navikt/ds-react/Page";
 import { sanityFetch } from "@/app/_sanity/live";
 import { DS_FRONT_PAGE_QUERY } from "@/app/_sanity/queries";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
@@ -7,7 +8,7 @@ import DSLandingPageHeading from "./_ui/DSLandingPageHeading";
 import AkselByNumbers from "./_ui/aksel-by-numbers/AkselByNumbers";
 import { ChangeLogNews } from "./_ui/change-log/ChangeLogNews";
 import DSLayersOverview from "./_ui/ds-layers-overview/DSLayersOverview";
-import GettingStartedSection from "./_ui/getting-started/GettingStartedSection";
+import { GettingStartedSection } from "./_ui/getting-started/GettingStartedSection";
 import SupportSection from "./_ui/support-section/SupportSection";
 import "./ds-forside.css";
 
@@ -33,20 +34,15 @@ const DesignsystemetPage = async () => {
   return (
     <DesignsystemetPageLayout layout="without-toc">
       <VStack align="center" gap="space-80" maxWidth="1024px">
-        <VStack
-          gap="space-48"
-          paddingBlock="space-24"
-          maxWidth="768px"
-          align="center"
-        >
-          <DSLandingPageHeading
-            title={dsFrontPageData.ds_forside_title}
-            introText={dsFrontPageData.ds_forside_ingress}
-            promoTag={dsFrontPageData.ds_forside_promo_tag}
-          />
-          {dsFrontPageData.ds_getting_started && (
+        <VStack asChild gap="space-48" paddingBlock="space-24" align="center">
+          <PageBlock width="md">
+            <DSLandingPageHeading
+              title={dsFrontPageData.ds_forside_title}
+              introText={dsFrontPageData.ds_forside_ingress}
+              promoTag={dsFrontPageData.ds_forside_promo_tag}
+            />
             <GettingStartedSection cards={dsFrontPageData.ds_getting_started} />
-          )}
+          </PageBlock>
         </VStack>
         <DSLayersOverview
           title={dsFrontPageData.ds_layers_overview?.title}
