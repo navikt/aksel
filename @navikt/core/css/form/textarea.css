@@ -32,6 +32,7 @@
   width: 100%;
   display: block;
   color: var(--ac-textarea-text, var(--__ac-textarea-text, var(--a-text-default)));
+  scroll-margin-block-start: 4rem;
 }
 
 .navds-textarea__input::placeholder {

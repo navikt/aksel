@@ -1,4 +1,5 @@
 import { Metadata, ResolvingMetadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
 import {
@@ -6,10 +7,16 @@ import {
   Box,
   Detail,
   HGrid,
-  HStack,
   Heading,
   VStack,
 } from "@navikt/ds-react";
+import {
+  LinkCard,
+  LinkCardAnchor,
+  LinkCardDescription,
+  LinkCardFooter,
+  LinkCardTitle,
+} from "@navikt/ds-react/LinkCard";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
@@ -20,13 +27,6 @@ import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { GodPraksisTaxonomyTag } from "@/app/dev/(god-praksis)/_ui/GodPraksisTaxonomyTag";
 import { GodPrakisChipsNavigation } from "@/app/dev/(god-praksis)/_ui/chips-navigation/ChipsNavigation";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
-import {
-  LinkCard,
-  LinkCardAnchor,
-  LinkCardDescription,
-  LinkCardFooter,
-  LinkCardTitle,
-} from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { dateStr } from "@/utils";
 
 /* We rely on seachparams for initial render, so need to force-dynamic */
@@ -262,8 +262,10 @@ export default async function Page(props: Props) {
                       <li key={article.slug}>
                         <LinkCard>
                           <LinkCardTitle as="h3">
-                            <LinkCardAnchor href={`/dev/${article.slug}`}>
-                              {article.heading}
+                            <LinkCardAnchor asChild>
+                              <Link href={`/dev/${article.slug}`}>
+                                {article.heading}
+                              </Link>
                             </LinkCardAnchor>
                           </LinkCardTitle>
 
@@ -284,14 +286,12 @@ export default async function Page(props: Props) {
                             </LinkCardDescription>
                           )}
                           <LinkCardFooter>
-                            <HStack gap="space-12">
-                              <GodPraksisTaxonomyTag type="undertema">
-                                {article.undertema}
-                              </GodPraksisTaxonomyTag>
-                              <GodPraksisTaxonomyTag type="innholdstype">
-                                {article.innholdstype}
-                              </GodPraksisTaxonomyTag>
-                            </HStack>
+                            <GodPraksisTaxonomyTag type="undertema">
+                              {article.undertema}
+                            </GodPraksisTaxonomyTag>
+                            <GodPraksisTaxonomyTag type="innholdstype">
+                              {article.innholdstype}
+                            </GodPraksisTaxonomyTag>
                           </LinkCardFooter>
                         </LinkCard>
                       </li>

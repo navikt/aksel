@@ -185,6 +185,32 @@ export const ColorRole = () => (
   </div>
 );
 
+export const StickyHeader = () => {
+  const rows = Array.from({ length: 100 }, (_, i) => (
+    <Table.Row key={i}>
+      <Table.HeaderCell>{i + 1}</Table.HeaderCell>
+      <Table.DataCell>Row {i + 1}</Table.DataCell>
+      <Table.DataCell>Row {i + 1}</Table.DataCell>
+      <Table.DataCell>Row {i + 1}</Table.DataCell>
+    </Table.Row>
+  ));
+  return (
+    <div style={{ maxHeight: 200, overflowY: "auto" }}>
+      <Table stickyHeader>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>ID</Table.HeaderCell>
+            <Table.HeaderCell>Fornavn</Table.HeaderCell>
+            <Table.HeaderCell>one</Table.HeaderCell>
+            <Table.HeaderCell>two</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>{rows}</Table.Body>
+      </Table>
+    </div>
+  );
+};
+
 export const Chromatic = {
   render: () => (
     <VStack gap="8">
