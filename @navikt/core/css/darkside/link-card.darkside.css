@@ -46,7 +46,7 @@
   grid-area: title;
   color: var(--ax-text-subtle);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--ax-space-8);
   hyphens: auto;

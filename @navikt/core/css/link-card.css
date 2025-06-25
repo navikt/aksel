@@ -42,7 +42,7 @@
   grid-area: title;
   color: var(--a-text-default);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--a-spacing-2);
   hyphens: auto;
