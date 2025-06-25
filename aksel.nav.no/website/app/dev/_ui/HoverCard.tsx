@@ -1,16 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { Button } from "@navikt/ds-react";
 import { Popover, PopoverContent } from "@navikt/ds-react/Popover";
-import { type Avatar } from "./Avatar";
 
-export const InteractiveAvatarStack = ({
+export const HoverCard = ({
   popoverContent,
   children,
 }: {
-  popoverContent: Avatar;
-  children: React.ReactNode;
+  popoverContent: ReactNode;
+  children: ReactNode;
 }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [openState, setOpenState] = useState(false);
@@ -30,7 +29,7 @@ export const InteractiveAvatarStack = ({
         onClose={() => setOpenState(false)}
         anchorEl={buttonRef.current}
       >
-        <PopoverContent>{popoverContent.description}</PopoverContent>
+        <PopoverContent>{popoverContent}</PopoverContent>
       </Popover>
     </>
   );

@@ -20,7 +20,7 @@
       box-shadow: 0 0 0 2px var(--ax-bg-default);
       background-clip: content-box;
       position: relative;
-      border-radius: inherit;
+      border-radius: var(--ax-radius-full);
       overflow: hidden;
     }
   }

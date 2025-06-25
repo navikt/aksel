@@ -1,39 +1,26 @@
 import { type Meta, type StoryFn } from "@storybook/react";
 import "@navikt/ds-css/darkside";
-import { HGrid, LinkCard, VStack } from "@navikt/ds-react";
+import {
+  Accordion,
+  BodyLong,
+  HGrid,
+  Heading,
+  LinkCard,
+  VStack,
+} from "@navikt/ds-react";
+import {
+  AccordionContent,
+  AccordionHeader,
+  AccordionItem,
+} from "@navikt/ds-react/Accordion";
 import {
   LinkCardAnchor,
   LinkCardDescription,
   LinkCardFooter,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
-import { AvatarStack } from "./Avatar";
-
-const dummyAvatar1 = {
-  name: "Team Aksel",
-  description: `En aksel er en maskindel, for det meste en stang, som roterer om sin egen akse og derved overfører kraft til andre maskindeler. 
-Akselens rotasjon skapes typisk av en motor eller tilføres fra et tannhjul eller en remskive. Et tannhjul eller en remskive er normalt også den enheten som viderefører energien fra akselen.
-`,
-  imageSrc: "/avatars/aksel.svg",
-};
-
-const dummyAvatar2 = {
-  name: "Team Nav.no",
-  description: `Nav er den sentrale delen av et hjul. Ytterst ligger kransen, og eikene eller skiven forbinder nav og krans.`,
-  imageSrc: "/avatars/001.svg",
-};
-
-const dummyAvatar3 = {
-  name: "Nais",
-  description: `Ordet "nais" er en direkte låneord fra engelsk "nice" og brukes i et uformelt språkbruk om noe som er "fint", "gøy", "greit" eller "behagelig". Det brukes ofte i muntlig og uformell skriftlig kommunikasjon.`,
-  imageSrc: "/avatars/002.svg",
-};
-
-const dummyAvatarBroken = {
-  name: "Team Ødelagt",
-  description: `Dette teamet mangler et bilde for avataren sin.`,
-  imageSrc: "/avatars/missing.svg",
-};
+import { Avatar, AvatarStack } from "./Avatar";
+import { HoverCard } from "./HoverCard";
 
 const meta = {
   title: "Website-modules/AvatarStack",
@@ -51,27 +38,154 @@ const meta = {
 
 export default meta;
 
-export const Single: StoryFn = () => {
-  return <AvatarStack avatars={[dummyAvatar1]} />;
+export const LoneAvatar: StoryFn = () => {
+  return (
+    <VStack gap="space-16">
+      <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+      <Avatar showName imageSrc="/avatars/aksel.svg" name="Team aksel" />
+    </VStack>
+  );
 };
 
-export const Multiple: StoryFn = () => {
+export const LoneAvatarInteractive: StoryFn = () => {
+  return (
+    <VStack gap="space-16">
+      <HoverCard
+        popoverContent={
+          <>
+            <Heading level="2" size="xlarge">
+              Team Aksel!!
+            </Heading>
+            <BodyLong>Dette teamet er et team!</BodyLong>
+            <Accordion>
+              <AccordionItem>
+                <AccordionHeader>
+                  Her kan man plassere hva som helst
+                </AccordionHeader>
+                <AccordionContent>Content 1</AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </>
+        }
+      >
+        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel"></Avatar>
+      </HoverCard>
+      <HoverCard
+        popoverContent={
+          <>
+            <Heading level="2" size="xlarge">
+              Team Aksel
+            </Heading>
+            <BodyLong>ReactNode content</BodyLong>
+            <Accordion>
+              <AccordionItem>
+                <AccordionHeader>
+                  Her kan man plassere hva som helst
+                </AccordionHeader>
+                <AccordionContent>Content 1</AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </>
+        }
+      >
+        <Avatar
+          showName
+          imageSrc="/avatars/aksel.svg"
+          name="Team aksel"
+        ></Avatar>
+      </HoverCard>
+    </VStack>
+  );
+};
+
+export const StackInteractive: StoryFn = () => {
+  return (
+    <HoverCard
+      popoverContent={
+        <>
+          <Heading level="2" size="xlarge">
+            Team Aksel
+          </Heading>
+          <BodyLong>ReactNode content</BodyLong>
+          <Accordion>
+            <AccordionItem>
+              <AccordionHeader>
+                Her kan man plassere hva som helst
+              </AccordionHeader>
+              <AccordionContent>Content 1</AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </>
+      }
+    >
+      <AvatarStack>
+        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        <Avatar imageSrc="/avatars/001.svg" name="Team Nav.no" />
+        <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+      </AvatarStack>
+    </HoverCard>
+  );
+};
+
+export const SingleStack: StoryFn = () => {
+  return (
+    <div>
+      <AvatarStack>
+        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+      </AvatarStack>
+    </div>
+  );
+};
+
+export const MultipleStack: StoryFn = () => {
   return (
     <VStack gap="space-8">
-      <AvatarStack avatars={[dummyAvatar1, dummyAvatar2, dummyAvatar3]} />
-      <AvatarStack avatars={[...Array(20).fill(dummyAvatar2), dummyAvatar3]} />
+      <AvatarStack>
+        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        <Avatar imageSrc="/avatars/001.svg" name="Team Nav.no" />
+        <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+      </AvatarStack>
+      <AvatarStack>
+        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        {[...Array(20)].map((counter) => (
+          <Avatar
+            key={counter}
+            name={`Team ${counter}`}
+            imageSrc="/avatars/003.svg"
+          />
+        ))}
+      </AvatarStack>
+      <AvatarStack showNames>
+        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        <Avatar imageSrc="/avatars/001.svg" name="Team Nav.no" />
+        <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+      </AvatarStack>
+      <AvatarStack showNames>
+        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        {[...Array(20)].map((counter) => (
+          <Avatar
+            key={counter}
+            name={`Team ${counter}`}
+            imageSrc="/avatars/003.svg"
+          />
+        ))}
+      </AvatarStack>
     </VStack>
   );
 };
 
 export const MissingImage: StoryFn = () => {
   return (
-    <AvatarStack avatars={[dummyAvatar1, dummyAvatarBroken, dummyAvatar2]} />
+    <AvatarStack>
+      <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+      <Avatar imageSrc="/avatars/missing.svg" name="Team Nav.no" />
+      <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+    </AvatarStack>
   );
 };
 
 export const NoData: StoryFn = () => {
-  return <AvatarStack avatars={[]} />;
+  return <AvatarStack />;
 };
 
 export const InsideCard: StoryFn = () => {
@@ -87,7 +201,9 @@ export const InsideCard: StoryFn = () => {
           fargepalett, færre skygger og litt rundere hjørner.
         </LinkCardDescription>
         <LinkCardFooter>
-          <AvatarStack avatars={[dummyAvatar1]} />
+          <AvatarStack showNames>
+            <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+          </AvatarStack>
         </LinkCardFooter>
       </LinkCard>
       <LinkCard arrow={false}>
@@ -102,7 +218,11 @@ export const InsideCard: StoryFn = () => {
           strategien vår ser ut.
         </LinkCardDescription>
         <LinkCardFooter>
-          <AvatarStack avatars={[dummyAvatar1, dummyAvatar2, dummyAvatar3]} />
+          <AvatarStack showNames>
+            <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+            <Avatar imageSrc="/avatars/001.svg" name="Team Nav.no" />
+            <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+          </AvatarStack>
         </LinkCardFooter>
       </LinkCard>
       <LinkCard>
@@ -111,13 +231,13 @@ export const InsideCard: StoryFn = () => {
         </LinkCardTitle>
         <LinkCardDescription>description</LinkCardDescription>
         <LinkCardFooter>
-          <AvatarStack avatars={[dummyAvatar1, dummyAvatar2, dummyAvatar3]} />
+          <AvatarStack showNames>
+            <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+            <Avatar imageSrc="/avatars/001.svg" name="Team Nav.no" />
+            <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+          </AvatarStack>
         </LinkCardFooter>
       </LinkCard>
     </HGrid>
   );
-};
-
-export const Interactive: StoryFn = () => {
-  return <AvatarStack interactive avatars={[dummyAvatar1]} />;
 };
