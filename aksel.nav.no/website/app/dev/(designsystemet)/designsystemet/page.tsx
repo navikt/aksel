@@ -7,11 +7,11 @@ import {
 } from "@/app/_sanity/queries";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
 import DSLandingPageHeading from "./_ui/DSLandingPageHeading";
-import SupportSection from "./_ui/SupportSection";
 import AkselByNumbers from "./_ui/aksel-by-numbers/AkselByNumbers";
 import ChangeLogNews from "./_ui/change-log/ChangeLogNews";
 import DSLayersOverview from "./_ui/ds-layers-overview/DSLayersOverview";
 import GettingStartedSection from "./_ui/getting-started/GettingStartedSection";
+import SupportSection from "./_ui/support-section/SupportSection";
 import "./ds-forside.css";
 
 export const metadata = {
