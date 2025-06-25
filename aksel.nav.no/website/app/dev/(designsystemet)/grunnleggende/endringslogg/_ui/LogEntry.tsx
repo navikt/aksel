@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
+import NextLink from "next/link";
 import { useRef } from "react";
 import type { Image as SanityImage } from "sanity";
 import {
@@ -146,11 +147,11 @@ export default function LogEntry({
                 <ShowMore.Heading>
                   <Heading size="large" level="2" spacing>
                     <Link
+                      as={NextLink}
                       href={`./endringslogg/${slug}`}
-                      className={cl(
-                        styles.innhold,
-                        fremhevet && styles.innholdFremhevet,
-                      )}
+                      className={
+                        fremhevet ? styles.innholdFremhevet : styles.innhold
+                      }
                     >
                       {heading}
                     </Link>
@@ -164,9 +165,8 @@ export default function LogEntry({
                   )}
                   <CustomPortableText
                     className={cl(
-                      styles.innhold,
+                      fremhevet ? styles.innholdFremhevet : styles.innhold,
                       styles.portableTextFirstHeading,
-                      fremhevet && styles.innholdFremhevet,
                     )}
                     data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
                     value={content as PortableTextBlock[]}
@@ -185,11 +185,11 @@ export default function LogEntry({
               <>
                 <Heading size="large" level="2" spacing>
                   <Link
+                    as={NextLink}
                     href={`./endringslogg/${slug}`}
-                    className={cl(
-                      styles.innhold,
-                      fremhevet && styles.innholdFremhevet,
-                    )}
+                    className={
+                      fremhevet ? styles.innholdFremhevet : styles.innhold
+                    }
                   >
                     {heading}
                   </Link>
@@ -199,9 +199,8 @@ export default function LogEntry({
                 )}
                 <CustomPortableText
                   className={cl(
-                    styles.innhold,
+                    fremhevet ? styles.innholdFremhevet : styles.innhold,
                     styles.portableTextFirstHeading,
-                    fremhevet && styles.innholdFremhevet,
                   )}
                   data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
                   value={content as PortableTextBlock[]}

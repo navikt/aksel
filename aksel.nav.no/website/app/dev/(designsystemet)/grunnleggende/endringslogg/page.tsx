@@ -21,13 +21,16 @@ export const metadata: Metadata = {
   title: "Endringslogg",
   description:
     "Endringsloggen til Aksel gir deg en oversikt over oppdatert kode, design og dokumentasjon.",
+  openGraph: {
+    images: "/images/og/blogg/image-9.png",
+  },
 };
 
 const startYear = 2022;
 const currentYear = new Date().getFullYear();
 const years = Array.from(
   { length: currentYear + 1 - startYear },
-  (_, value) => startYear + value,
+  (_, value) => `${startYear + value}`,
 ).reverse();
 const categories = ["kode", "design", "dokumentasjon"];
 
@@ -37,15 +40,15 @@ const getMonthAndYear = (dateStr: string | null) => {
 
 export default async function Page({ searchParams }: PageProps) {
   const {
-    årstall: paramYear = "",
+    periode: paramYear = "",
     kategori: paramCategory = "",
     fritekst: paramTextFilter = "",
   } = await searchParams;
-  const yearFilter = years.includes(+paramYear)
-    ? +paramYear
+  const yearFilter = years.includes(paramYear.toString())
+    ? paramYear
     : paramYear === "alle"
       ? null
-      : currentYear;
+      : currentYear.toString();
   const categoryFilter = categories.includes(paramCategory.toString())
     ? paramCategory.toString()
     : null;
@@ -74,7 +77,7 @@ export default async function Page({ searchParams }: PageProps) {
     ) as typeof ENDRINGSLOGG_QUERY,
     params: {
       year: `${yearFilter}`,
-      nextYear: `${yearFilter && yearFilter + 1}`,
+      nextYear: `${yearFilter && +yearFilter + 1}`,
       category: `${categoryFilter}`,
       ...(textFilter
         ? textFilter?.reduce((acc, text, index) => {

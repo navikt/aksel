@@ -4,6 +4,7 @@ import cl from "clsx";
 import React, {
   HTMLAttributes,
   ReactElement,
+  ReactNode,
   useEffect,
   useRef,
   useState,
@@ -31,7 +32,7 @@ export interface ShowMoreContentProps
   /**
    * Content. Is [inert](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inert) when collapsed.
    */
-  children: ReactElement | (ReactElement | false | undefined | null)[];
+  children: ReactNode;
 }
 
 const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19

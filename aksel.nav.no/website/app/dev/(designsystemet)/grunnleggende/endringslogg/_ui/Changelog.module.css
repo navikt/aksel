@@ -16,10 +16,7 @@
 
 .timeline {
   width: 0;
-  border-width: 1px;
-  border-style: dashed;
-  border-right: none;
-  border-color: var(--ax-border-neutral-subtle);
+  border: 0.5px dashed var(--ax-border-neutral-subtle);
 }
 
 .bullet {
@@ -65,7 +62,6 @@
   --ax-text-brand-blue-subtle: var(--ax-text-neutral-subtle);
 
   color: var(--ax-text-neutral);
-  background-color: var(--ax-bg-default);
 }
 
 .innholdFremhevet {

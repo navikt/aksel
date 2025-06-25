@@ -42,7 +42,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: "article",
       publishedTime: pageData?.endringsdato || undefined,
-      images: urlForOpenGraphImage(pageData?.herobilde as SanityImage),
+      images:
+        urlForOpenGraphImage(pageData?.herobilde as SanityImage) ||
+        "/images/og/blogg/image-9.png",
     },
   };
 }

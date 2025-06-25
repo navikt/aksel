@@ -6,8 +6,8 @@ import { Chips, Label, VStack } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
 
 interface Props {
-  years: number[];
-  selectedYear: number | null;
+  years: string[];
+  selectedYear: string | null;
   categories: string[];
   selectedCategory: string | null;
 }
@@ -22,7 +22,7 @@ export default function FilterChips({
 
   const [optYear, expectYear] = useOptimistic(
     selectedYear,
-    (_, optimisticYear: number | null) => optimisticYear,
+    (_, optimisticYear: string | null) => optimisticYear,
   );
   const [optCategory, expectCategory] = useOptimistic(
     selectedCategory,
@@ -30,11 +30,11 @@ export default function FilterChips({
   );
   const pathname = usePathname();
   const searchParams = useSearchParams()?.toString();
-  function getHref(option: string | number) {
+  function getHref(option: string, type: "category" | "period") {
     const params = new URLSearchParams(searchParams?.toString());
-    if (typeof option === "number") {
-      params.set("årstall", `${option === optYear ? "alle" : option}`);
-    } else if (typeof option === "string") {
+    if (type === "period") {
+      params.set("periode", `${option === optYear ? "alle" : option}`);
+    } else if (type === "category") {
       if (option === optCategory) {
         params.delete("kategori");
       } else {
@@ -45,11 +45,13 @@ export default function FilterChips({
   }
 
   const FilterGroup = ({
+    type,
     options,
     selectedOption,
     label,
   }: {
-    options: (string | number)[];
+    type: "category" | "period";
+    options: string[];
     selectedOption: string | number | null;
     label: string;
   }) => (
@@ -57,7 +59,7 @@ export default function FilterChips({
       <Label as="div">{label}</Label>
       <Chips>
         {options.map((option) => {
-          const href = getHref(option);
+          const href = getHref(option, type);
           return (
             <Chips.Toggle
               key={option}
@@ -86,8 +88,14 @@ export default function FilterChips({
 
   return (
     <VStack gap="space-24">
-      <FilterGroup options={years} selectedOption={optYear} label="År" />
       <FilterGroup
+        type="period"
+        options={years}
+        selectedOption={optYear}
+        label="År"
+      />
+      <FilterGroup
+        type="category"
         options={categories}
         selectedOption={optCategory}
         label="Kategori"
