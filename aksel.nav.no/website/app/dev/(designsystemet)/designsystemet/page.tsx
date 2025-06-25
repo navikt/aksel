@@ -33,43 +33,47 @@ const DesignsystemetPage = async () => {
 
   return (
     <DesignsystemetPageLayout layout="without-toc">
-      <VStack align="center" gap="space-80" maxWidth="1024px">
-        <VStack asChild gap="space-48" paddingBlock="space-24" align="center">
-          <PageBlock width="md">
-            <DSLandingPageHeading
-              title={dsFrontPageData.ds_forside_title}
-              introText={dsFrontPageData.ds_forside_ingress}
-              promoTag={dsFrontPageData.ds_forside_promo_tag}
-            />
-            <GettingStartedSection cards={dsFrontPageData.ds_getting_started} />
-          </PageBlock>
-        </VStack>
-        <DSLayersOverview
-          title={dsFrontPageData.ds_layers_overview?.title}
-          description={dsFrontPageData.ds_layers_overview?.ingress}
-        />
-        <ChangeLogNews
-          title={dsFrontPageData.ds_changelog?.title ?? "Endringslogg"}
-          description={dsFrontPageData.ds_changelog?.ingress}
-        />
-        <AkselByNumbers
-          title={dsFrontPageData.ds_aksel_in_numbers?.title}
-          description={dsFrontPageData.ds_aksel_in_numbers?.ingress}
-          entries={dsFrontPageData.ds_aksel_in_numbers?.statistics}
-        />
-        <SupportSection
-          entries={(dsFrontPageData.ds_support || []).map(
-            ({ title, description, link }) => ({
-              title,
-              description,
-              link: {
-                href: link?.url,
-                label: link?.text,
-                icon: link?.icon,
-              },
-            }),
-          )}
-        />
+      <VStack align="center" gap="space-80" asChild>
+        <PageBlock width="lg">
+          <VStack asChild gap="space-48" align="center">
+            <PageBlock width="md">
+              <DSLandingPageHeading
+                title={dsFrontPageData.ds_forside_title}
+                introText={dsFrontPageData.ds_forside_ingress}
+                promoTag={dsFrontPageData.ds_forside_promo_tag}
+              />
+              <GettingStartedSection
+                cards={dsFrontPageData.ds_getting_started}
+              />
+            </PageBlock>
+          </VStack>
+          <DSLayersOverview
+            title={dsFrontPageData.ds_layers_overview?.title}
+            description={dsFrontPageData.ds_layers_overview?.ingress}
+          />
+          <ChangeLogNews
+            title={dsFrontPageData.ds_changelog?.title ?? "Endringslogg"}
+            description={dsFrontPageData.ds_changelog?.ingress}
+          />
+          <AkselByNumbers
+            title={dsFrontPageData.ds_aksel_in_numbers?.title}
+            description={dsFrontPageData.ds_aksel_in_numbers?.ingress}
+            entries={dsFrontPageData.ds_aksel_in_numbers?.statistics}
+          />
+          <SupportSection
+            entries={(dsFrontPageData.ds_support || []).map(
+              ({ title, description, link }) => ({
+                title,
+                description,
+                link: {
+                  href: link?.url,
+                  label: link?.text,
+                  icon: link?.icon,
+                },
+              }),
+            )}
+          />
+        </PageBlock>
       </VStack>
     </DesignsystemetPageLayout>
   );
