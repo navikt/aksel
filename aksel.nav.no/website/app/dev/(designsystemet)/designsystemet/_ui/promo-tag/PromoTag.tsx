@@ -16,6 +16,7 @@ const PromoTag = ({ label = "Nyhet", text, link }: Props) => {
   if (!text || !link) {
     return null;
   }
+
   return (
     <Link href={link} data-color="aksel-brand-pink">
       <Detail as="span" className="promoTag" textColor="default">
