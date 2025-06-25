@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { BodyLong, Button, Link, VStack } from "@navikt/ds-react";
-import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
+import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { clientConfig } from "@/sanity/config";
 import styles from "./SystemPanel.module.css";
 
@@ -65,8 +65,8 @@ function SystemPanelOutdatedAction({ docId }: { docId?: string }) {
         size="small"
         variant="secondary-neutral"
         iconPosition="right"
-        data-link-card-anchor
-        icon={<LinkCardArrow />}
+        data-animated-arrow-anchor
+        icon={<AnimatedArrowRight />}
       >
         Kontroller innholdet nå
       </Button>

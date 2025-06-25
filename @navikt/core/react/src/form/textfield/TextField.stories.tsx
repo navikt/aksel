@@ -110,6 +110,20 @@ export const Readonly = () => {
   );
 };
 
+export const ScrollMargin = () => {
+  return (
+    <div style={{ minHeight: "200vh" }}>
+      <TextField
+        label="Bosted"
+        description="Skriv bosted i Norge"
+        value="Oslo"
+        id="smargin-test"
+      />
+      <a href="#smargin-test">Test scroll-margin</a>
+    </div>
+  );
+};
+
 export const ColorRole = () => {
   return (
     <div className="colgap" data-color="brand-magenta">

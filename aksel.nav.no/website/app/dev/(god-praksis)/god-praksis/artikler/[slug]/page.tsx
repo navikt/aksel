@@ -22,12 +22,12 @@ import {
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import { GodPraksisFeedback } from "@/app/dev/(god-praksis)/_ui/feedback/GodPraksisFeedback";
-import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { abbrName, dateStr } from "@/utils";
 import styles from "./page.module.css";
 
@@ -126,14 +126,14 @@ export default async function Page(props: Props) {
                 key={title}
                 className={styles.pageUndertemaTag}
                 href={href}
-                data-link-card-anchor
+                data-animated-arrow-anchor
                 data-umami-event="navigere"
                 data-umami-event-kilde="god praksis artikkel chips"
                 data-umami-event-url={href}
               >
                 <TagFillIcon aria-hidden fontSize="1.25rem" />
                 <span className={styles.pageUndertemaTagText}>{title}</span>
-                <LinkCardArrow />
+                <AnimatedArrowRight />
               </NextLink>
             );
           })}

@@ -1758,7 +1758,7 @@ export type Ds_endringslogg_artikkel = {
     alt?: string;
     _type: "image";
   };
-  innhold?: Riktekst_grunnleggende;
+  content?: Riktekst_grunnleggende;
 };
 
 export type Grunnleggende_landingsside = {
@@ -4781,6 +4781,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -4808,6 +4809,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -4837,6 +4839,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";

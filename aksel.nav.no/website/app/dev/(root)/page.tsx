@@ -12,7 +12,7 @@ import {
 } from "@navikt/ds-react";
 import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
+import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { sanityFetch } from "../../_sanity/live";
 import {
   GOD_PRAKSIS_TEMA_QUERY,
@@ -73,10 +73,10 @@ const Page = async () => {
               target="_blank"
               as={NextLink}
               variant="neutral"
-              data-link-card-anchor
+              data-animated-arrow-anchor
             >
               Vi trenger testere fra team i Nav for darkmode og theming!
-              <LinkCardArrow />
+              <AnimatedArrowRight />
             </Link>
           </div>
 

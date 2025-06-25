@@ -10,6 +10,7 @@
   width: 100%;
   display: block;
   color: var(--ax-text-neutral);
+  scroll-margin-block-start: 4rem;
 
   &::placeholder {
     color: var(--ax-text-neutral-subtle);

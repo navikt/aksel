@@ -5,26 +5,25 @@ import { Image } from "sanity";
 import {
   BodyLong,
   HGrid,
-  HStack,
   Heading,
   Link,
+  LinkCard,
   VStack,
 } from "@navikt/ds-react";
+import {
+  LinkCardAnchor,
+  LinkCardFooter,
+  LinkCardTitle,
+} from "@navikt/ds-react/LinkCard";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { GodPraksisTaxonomyTag } from "@/app/dev/(god-praksis)/_ui/GodPraksisTaxonomyTag";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
-import {
-  LinkCard,
-  LinkCardAnchor,
-  LinkCardArrow,
-  LinkCardFooter,
-  LinkCardTitle,
-} from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: seo } = await sanityFetch({
@@ -93,19 +92,19 @@ export default async function Page() {
                     <li key={article.slug}>
                       <LinkCard>
                         <LinkCardTitle as="h3">
-                          <LinkCardAnchor href={article.slug ?? ""}>
-                            {article.heading}
+                          <LinkCardAnchor asChild>
+                            <NextLink href={article.slug ?? ""}>
+                              {article.heading}
+                            </NextLink>
                           </LinkCardAnchor>
                         </LinkCardTitle>
                         <LinkCardFooter>
-                          <HStack gap="space-12">
-                            <GodPraksisTaxonomyTag type="undertema">
-                              {undertema}
-                            </GodPraksisTaxonomyTag>
-                            <GodPraksisTaxonomyTag type="innholdstype">
-                              {innholdstype}
-                            </GodPraksisTaxonomyTag>
-                          </HStack>
+                          <GodPraksisTaxonomyTag type="undertema">
+                            {undertema}
+                          </GodPraksisTaxonomyTag>
+                          <GodPraksisTaxonomyTag type="innholdstype">
+                            {innholdstype}
+                          </GodPraksisTaxonomyTag>
                         </LinkCardFooter>
                       </LinkCard>
                     </li>
@@ -116,11 +115,12 @@ export default async function Page() {
                 <Link
                   href={`/god-praksis/${tema.slug}`}
                   as={NextLink}
-                  data-link-card-anchor
+                  data-animated-arrow-anchor
                   data-color="brand-blue"
                 >
                   {`Alt fra ${tema.title} `}
-                  <LinkCardArrow />
+
+                  <AnimatedArrowRight />
                 </Link>
               </h3>
             </section>
