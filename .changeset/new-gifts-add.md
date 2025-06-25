@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Chat: 'ol'-tag now has role='presentation'.
+Chat: ol > li semantics replaced with 'div'.
