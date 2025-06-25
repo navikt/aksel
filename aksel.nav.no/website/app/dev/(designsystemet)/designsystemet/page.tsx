@@ -6,10 +6,10 @@ import {
   N_LATEST_CHANGE_LOGS_QUERY,
 } from "@/app/_sanity/queries";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
-import AkselByNumbers from "./_ui/AkselByNumbers";
 import DSLandingPageHeading from "./_ui/DSLandingPageHeading";
 import DSLayersOverview from "./_ui/DSLayersOverview";
 import SupportSection from "./_ui/SupportSection";
+import AkselByNumbers from "./_ui/aksel-by-numbers/AkselByNumbers";
 import ChangeLogNews from "./_ui/change-log/ChangeLogNews";
 import GettingStartedSection from "./_ui/getting-started/GettingStartedSection";
 import "./ds-forside.css";
