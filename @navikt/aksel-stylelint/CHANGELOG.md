@@ -1,5 +1,11 @@
 # @navikt/aksel-stylelint
 
+## 7.24.0
+
+### Patch Changes
+
+- Switch: Removed 'navds-switch\_\_checkmark' css class. ([#3892](https://github.com/navikt/aksel/pull/3892))
+
 ## 7.23.2
 
 ## 7.23.1
