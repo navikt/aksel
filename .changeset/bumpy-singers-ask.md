@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-Forms: Added build-in scroll-margin to TextField, Textarea and Select.
+Forms: Added built-in scroll-margin to TextField, Textarea and Select.
