@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Children, ReactNode } from "react";
+import { Children, ReactNode, isValidElement } from "react";
 import { BodyShort, HStack } from "@navikt/ds-react";
 import styles from "./Avatar.module.css";
 
@@ -65,6 +65,17 @@ export const AvatarStack = ({
   showNames = false,
 }: AvatarStackProps) => {
   // TODO: this creates the requirement that children _must_ be Avatar
+
+  Children.forEach(children, (child) => {
+    if (isValidElement(child)) {
+      if (child?.type !== Avatar) {
+        console.info("Child of AvatarStack must be Avatar");
+      }
+    } else {
+      console.info("Child of AvatarStack must be Avatar");
+    }
+  });
+
   const avatars = Children.toArray(children) as ReactNode[];
   if (avatars.length === 0) {
     return null;
@@ -86,7 +97,7 @@ export const AvatarStack = ({
       </ul>
       {showNames && (
         <BodyShort className={styles.avatarName} size="small">
-          {`${avatars && avatars[0]?.props.name}`}
+          {`${avatars && isValidElement(avatars[0]) && avatars[0]?.props.name}`}
           {suffix && <span className={styles.avatarNameSuffix}>{suffix}</span>}
         </BodyShort>
       )}
