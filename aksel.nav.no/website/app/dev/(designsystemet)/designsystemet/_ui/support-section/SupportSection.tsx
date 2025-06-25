@@ -10,7 +10,6 @@ import {
 } from "@navikt/ds-react";
 import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
 import { GithubIcon, SlackIcon } from "@/assets/Icons";
-import "./SupportSection.css";
 
 type SupportData = NonNullable<
   NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_support"]
@@ -49,7 +48,7 @@ const SupportSection = ({ entries }: Props) => (
         <BoxNew
           key={title}
           className="support-section"
-          background="brand-blue-strong"
+          background="brand-blue-soft"
           borderColor="brand-blue-subtle"
           borderWidth="1"
           borderRadius="xlarge"
@@ -72,7 +71,7 @@ const SupportSection = ({ entries }: Props) => (
             </div>
             {link.label && link.href && (
               <HStack gap="space-8" align="start" asChild>
-                <Link as={NextLink} href={link.href}>
+                <Link as={NextLink} href={link.href} variant="neutral">
                   <Icon icon={link.icon} />
                   {link.label}
                 </Link>
