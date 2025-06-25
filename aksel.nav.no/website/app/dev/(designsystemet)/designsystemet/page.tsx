@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import React from "react";
 import { VStack } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
@@ -21,14 +22,12 @@ export const metadata = {
 };
 
 const DesignsystemetPage = async () => {
-  const [{ data: dsFrontPageData }] = await Promise.all([
-    sanityFetch({
-      query: DS_FRONT_PAGE_QUERY,
-    }),
-  ]);
+  const { data: dsFrontPageData } = await sanityFetch({
+    query: DS_FRONT_PAGE_QUERY,
+  });
 
   if (dsFrontPageData === null) {
-    throw new Error("Kunne ikke hente data for Designsystemet forsiden");
+    notFound();
   }
 
   return (
