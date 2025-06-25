@@ -61,11 +61,7 @@ const DSLayersOverview = ({ title, description }: Props) => (
       >
         <List className="aksel-layers-list">
           <ListItem icon={<SidebarLeftIcon fontSize="24" aria-hidden="true" />}>
-            <Link
-              as={NextLink}
-              href="/dev/monster-maler/stotte/404-side"
-              variant="neutral"
-            >
+            <Link as={NextLink} href="/dev/monster-maler" variant="neutral">
               Mønster og maler
               <DottedLine />
             </Link>
