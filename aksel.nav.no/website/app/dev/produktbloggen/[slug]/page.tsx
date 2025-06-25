@@ -13,8 +13,9 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { dateStr, getImage } from "@/utils";
-import { AvatarStack, queryToAvatars } from "../../_ui/Avatar";
+import { AvatarStack } from "../../_ui/Avatar";
 import styles from "../_ui/Produktbloggen.module.css";
+import { queryToAvatars } from "../_ui/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;
