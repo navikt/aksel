@@ -59,6 +59,13 @@ export const EndringsloggArtikkel = defineType({
       description:
         "Bildet vises øverst på kortet/siden og blir brukt som OG-bilde. Anbefalt størrelse er 1200x630px.",
       type: "image",
+      validation: (Rule) =>
+        Rule.custom((value, { document }) => {
+          if (document?.fremhevet && !value?.asset?._ref) {
+            return "En fremhevet oppdatering må ha et herobilde";
+          }
+          return true;
+        }),
       fields: [
         defineField({
           name: "dekorativt",
@@ -75,24 +82,35 @@ export const EndringsloggArtikkel = defineType({
           hidden: ({ document }) => (document?.herobilde as any).dekorativt,
           validation: (Rule) =>
             Rule.custom((value, { document }) => {
-              if ((document?.herobilde as any).dekorativt) {
-                return true;
+              if (
+                document?.fremhevet &&
+                (document?.herobilde as any)?.asset &&
+                !(document?.herobilde as any)?.dekorativt &&
+                !value
+              ) {
+                return "Bildet må ha en alternativ tekst hvis det ikke skal være dekorativt";
               }
-              return value
-                ? true
-                : "Bildet må ha en alternativ tekst hvis det ikke skal være dekorativt";
+              return true;
             }),
         }),
       ],
     }),
     defineField({
       title: "Innhold",
-      name: "innhold",
+      name: "content",
       group: "innhold",
       description:
         'Dette innholdet vises på innlegget i endringsloggen. Er det "mye" innhold vil en "Vis mer"-knapp dukke opp.',
       type: "riktekst_grunnleggende",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      title: '"Vis mer"-knapp',
+      name: "visMer",
+      description:
+        'Skjuler deler av innholdet bak en "Vis mer"-knapp. OBS: Dobbeltsjekk at det er nok innhold til at det gir mening å bruke denne.',
+      type: "boolean",
+      initialValue: false,
     }),
   ],
 

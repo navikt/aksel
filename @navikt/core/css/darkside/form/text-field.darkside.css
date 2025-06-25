@@ -7,6 +7,7 @@
   min-height: 3rem;
   width: 100%;
   color: var(--ax-text-neutral);
+  scroll-margin-block-start: 4rem;
 
   &:hover {
     border-color: var(--ax-border-strong);

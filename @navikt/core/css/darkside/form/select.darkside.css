@@ -11,6 +11,7 @@
   position: relative;
   padding: var(--ax-space-8);
   padding-right: var(--ax-space-40);
+  scroll-margin-block-start: 4rem;
 
   &:hover {
     border-color: var(--ax-border-strong);
