@@ -13,7 +13,8 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { dateStr, getImage } from "@/utils";
-import { AvatarStack } from "../../_ui/Avatar";
+import { Avatar } from "../../_ui/Avatar";
+import { HoverCard } from "../../_ui/HoverCard";
 import styles from "../_ui/Produktbloggen.module.css";
 import { queryToAvatars } from "../_ui/utils";
 
@@ -81,7 +82,7 @@ export default async function Page({ params }: Props) {
 
   const publishedAtRaw = pageData?.publishedAt ?? "";
   const publishDate = await dateStr(publishedAtRaw);
-  const avatars = queryToAvatars(pageData?.editorial_staff_teams ?? []);
+  const avatars = queryToAvatars(pageData?.writers ?? []);
 
   const imageUrl = urlForImage(pageData?.seo?.image as Image)
     ?.quality(100)
@@ -112,11 +113,16 @@ export default async function Page({ params }: Props) {
               <HStack justify="center">
                 {avatars.map((avatar) => {
                   return (
-                    <AvatarStack
+                    <HoverCard
                       key={avatar.name}
-                      interactive
-                      avatars={[avatar]}
-                    />
+                      popoverContent={avatar.description}
+                    >
+                      <Avatar
+                        imageSrc={avatar.imageSrc}
+                        name={avatar.name}
+                        showName
+                      ></Avatar>
+                    </HoverCard>
                   );
                 })}
               </HStack>

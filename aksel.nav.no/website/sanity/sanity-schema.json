@@ -9747,6 +9747,13 @@
           "name": "riktekst_grunnleggende"
         },
         "optional": true
+      },
+      "visMer": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
       }
     }
   },
@@ -13664,7 +13671,7 @@
         },
         "optional": true
       },
-      "editorial_staff_teams": {
+      "writers": {
         "type": "objectAttribute",
         "value": {
           "type": "array",

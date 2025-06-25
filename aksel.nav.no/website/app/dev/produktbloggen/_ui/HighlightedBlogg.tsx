@@ -5,14 +5,14 @@ import { BodyLong, Heading, Hide, Link, Show } from "@navikt/ds-react";
 import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { getImage } from "@/utils";
-import { AvatarStack } from "../../_ui/Avatar";
+import { Avatar, AvatarStack } from "../../_ui/Avatar";
 import styles from "../_ui/Produktbloggen.module.css";
 import { queryToAvatars } from "./utils";
 
 type Blogg = NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][0];
 
 export const HighlightedBlogg = async ({ blogg }: { blogg: Blogg }) => {
-  const avatars = queryToAvatars(blogg.editorial_staff_teams);
+  const avatars = queryToAvatars(blogg.writers);
 
   const imageUrl = urlForImage(blogg?.seo?.image as Image)
     ?.quality(100)
@@ -57,7 +57,17 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: Blogg }) => {
           <BodyLong className={styles.articleBody} size="large">
             {blogg?.ingress}
           </BodyLong>
-          <AvatarStack avatars={avatars} />
+          <AvatarStack showNames>
+            {avatars.map((avatar) => {
+              return (
+                <Avatar
+                  key={avatar.name}
+                  imageSrc={avatar.imageSrc}
+                  name={avatar.name}
+                ></Avatar>
+              );
+            })}
+          </AvatarStack>
         </div>
       </Show>
       {/* Mobile view */}
@@ -99,7 +109,17 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: Blogg }) => {
           <BodyLong className={styles.articleBody} size="small">
             {blogg?.ingress}
           </BodyLong>
-          <AvatarStack avatars={avatars} />
+          <AvatarStack showNames>
+            {avatars.map((avatar) => {
+              return (
+                <Avatar
+                  key={avatar.name}
+                  imageSrc={avatar.imageSrc}
+                  name={avatar.name}
+                ></Avatar>
+              );
+            })}
+          </AvatarStack>
         </div>
       </Hide>
     </article>

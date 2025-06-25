@@ -1,14 +1,14 @@
 import NextLink from "next/link";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
-import { AvatarStack } from "../../_ui/Avatar";
+import { Avatar, AvatarStack } from "../../_ui/Avatar";
 import styles from "../_ui/Produktbloggen.module.css";
 import { queryToAvatars } from "./utils";
 
 type Blogg = NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][0];
 
 export const SimpleArticle = async ({ blogg }: { blogg: Blogg }) => {
-  const avatars = queryToAvatars(blogg.editorial_staff_teams);
+  const avatars = queryToAvatars(blogg.writers);
 
   return (
     <article>
@@ -22,7 +22,17 @@ export const SimpleArticle = async ({ blogg }: { blogg: Blogg }) => {
       <BodyLong className={styles.articleBody} size="medium">
         {blogg?.ingress}
       </BodyLong>
-      <AvatarStack avatars={avatars} />
+      <AvatarStack showNames>
+        {avatars.map((avatar) => {
+          return (
+            <Avatar
+              key={avatar.name}
+              imageSrc={avatar.imageSrc}
+              name={avatar.name}
+            ></Avatar>
+          );
+        })}
+      </AvatarStack>
     </article>
   );
 };

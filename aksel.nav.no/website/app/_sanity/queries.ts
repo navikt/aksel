@@ -2,7 +2,7 @@ import { defineQuery } from "next-sanity";
 import {
   contributorsAll,
   destructureBlocks,
-  editorialStaffAll,
+  writersAll,
 } from "@/sanity/queries";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
@@ -34,7 +34,7 @@ const BLOGG_BY_SLUG_QUERY =
     ${destructureBlocks}
   },
   publishedAt,
-  ${editorialStaffAll}
+  ${writersAll}
 }`);
 
 const BLOGG_LANDINGSSIDE_BLOGS_QUERY = defineQuery(`
@@ -47,7 +47,7 @@ const BLOGG_LANDINGSSIDE_BLOGS_QUERY = defineQuery(`
       _createdAt,
       _id,
       "slug": slug.current,
-      ${editorialStaffAll}
+      ${writersAll}
     }
   }`);
 
