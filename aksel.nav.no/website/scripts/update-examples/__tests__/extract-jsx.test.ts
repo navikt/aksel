@@ -30,6 +30,16 @@ test("extracts JSX fragment from Example function", async () => {
   );
 });
 
+test("extracts JSX fragment from implicit return Example function", async () => {
+  const code = `const Example = () => <div>Hello world</div>;`;
+  const result = await extractJsx(code);
+
+  expect(result).not.toBeNull();
+  expect(result?.replace(/\s/g, "")).toContain(
+    "<div>Hello world</div>".replace(/\s/g, ""),
+  );
+});
+
 test("returns null if Example has multiple returns", async () => {
   const code = `
     const Example = () => {
