@@ -122,22 +122,24 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
             {avatar}
           </div>
         )}
-        <ol className={cn("navds-chat__bubble-wrapper")}>
+        <BodyLong
+          as="div"
+          size={size}
+          className={cn("navds-chat__bubble-wrapper")}
+        >
           {React.Children.map(children, (child, i) => {
-            if (React.isValidElement(child)) {
-              return (
-                <BodyLong as="li" size={size}>
-                  {React.cloneElement(child, {
-                    name: name && i === 0 ? name : undefined,
-                    timestamp: timestamp && i === 0 ? timestamp : undefined,
-                    toptextHeadingLevel,
-                    ...child.props,
-                  })}
-                </BodyLong>
-              );
+            if (!React.isValidElement(child)) {
+              return null;
             }
+
+            return React.cloneElement(child, {
+              name: name && i === 0 ? name : undefined,
+              timestamp: timestamp && i === 0 ? timestamp : undefined,
+              toptextHeadingLevel,
+              ...child.props,
+            });
           })}
-        </ol>
+        </BodyLong>
       </div>
     );
   },
