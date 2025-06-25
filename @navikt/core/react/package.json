@@ -639,7 +639,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.27.8",
-    "@floating-ui/react-dom": "^2.0.9",
+    "@floating-ui/react-dom": "^2.1.3",
     "@navikt/aksel-icons": "^7.24.0",
     "@navikt/ds-tokens": "^7.24.0",
     "clsx": "^2.1.0",
