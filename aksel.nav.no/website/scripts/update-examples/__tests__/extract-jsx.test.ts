@@ -86,7 +86,7 @@ test("formats output using prettier", async () => {
 test("formats complex example", async () => {
   const result = await extractJsx(complexExample());
 
-  expect(result).toBeNull();
+  expect(result).not.toBeNull();
 });
 
 test("returns null on invalid code", async () => {

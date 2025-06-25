@@ -45,23 +45,29 @@ async function extractJsx(
           // Traverse the function body to find the return statement
           path.traverse({
             ReturnStatement(returnPath) {
-              returnCount++;
-              if (
-                returnPath.node.argument &&
-                (returnPath.node.argument.type === "JSXElement" ||
-                  returnPath.node.argument.type === "JSXFragment")
-              ) {
+              // Only count returns at the top level of the Example function
+              const functionParent = returnPath.getFunctionParent();
+              if (functionParent && functionParent.node === path.node.init) {
+                returnCount++;
                 if (
-                  returnPath.node.argument.start === null ||
-                  returnPath.node.argument.end === null
+                  returnPath.node.argument &&
+                  (returnPath.node.argument.type === "JSXElement" ||
+                    returnPath.node.argument.type === "JSXFragment")
                 ) {
-                  throw new Error("JSX element has no start or end position.");
-                }
+                  if (
+                    returnPath.node.argument.start === null ||
+                    returnPath.node.argument.end === null
+                  ) {
+                    throw new Error(
+                      "JSX element has no start or end position.",
+                    );
+                  }
 
-                jsxCode = code.slice(
-                  returnPath.node.argument.start,
-                  returnPath.node.argument.end,
-                );
+                  jsxCode = code.slice(
+                    returnPath.node.argument.start,
+                    returnPath.node.argument.end,
+                  );
+                }
               }
             },
           });
