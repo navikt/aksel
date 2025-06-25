@@ -138,7 +138,7 @@ function LinkCardLinks() {
   return (
     <VStack gap="space-16" width="100%">
       {Object.entries(Links).map(([key, { href, label, icon }]) => (
-        <BoxNew key={key} background="brand-blue-moderate" asChild>
+        <BoxNew key={key} background="brand-blue-moderateA" asChild>
           <LinkCard data-color="brand-blue">
             <LinkCardIcon>{icon}</LinkCardIcon>
             <LinkCardTitle data-color="neutral">

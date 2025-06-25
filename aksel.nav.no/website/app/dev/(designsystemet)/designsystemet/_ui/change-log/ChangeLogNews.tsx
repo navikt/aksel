@@ -1,6 +1,6 @@
 import { format, parseISO } from "date-fns";
 import { nb } from "date-fns/locale";
-import { FileTextIcon } from "@navikt/aksel-icons";
+import { FileTextIcon, SparklesIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   BoxNew,
@@ -30,7 +30,7 @@ type ChangeLogNewsProps = {
 async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
   const { data: changeLogEntries } = await sanityFetch({
     query: N_LATEST_CHANGE_LOGS_QUERY,
-    params: { count: 3 },
+    params: { count: 2 },
   });
 
   if (changeLogEntries.length === 0) {
@@ -73,6 +73,15 @@ async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
             </LinkCard>
           ),
         )}
+        <LinkCard>
+          <ChangelogIcon endringstype="sparkles" />
+          <LinkCardTitle as="span">
+            <LinkCardAnchor href="/dev/grunnleggende/kode/endringslogg">
+              Alle endringer
+            </LinkCardAnchor>
+          </LinkCardTitle>
+          <LinkCardFooter>Endringsloggen</LinkCardFooter>
+        </LinkCard>
       </HGrid>
     </VStack>
   );
@@ -81,7 +90,9 @@ async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
 function ChangelogIcon({
   endringstype,
 }: {
-  endringstype: N_LATEST_CHANGE_LOGS_QUERYResult[number]["endringstype"];
+  endringstype:
+    | N_LATEST_CHANGE_LOGS_QUERYResult[number]["endringstype"]
+    | "sparkles";
 }) {
   if (!endringstype) {
     return null;
@@ -99,6 +110,9 @@ function ChangelogIcon({
       break;
     case "kode":
       Icon = GithubIcon;
+      break;
+    case "sparkles":
+      Icon = SparklesIcon;
       break;
   }
 

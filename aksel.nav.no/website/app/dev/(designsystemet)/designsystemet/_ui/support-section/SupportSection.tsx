@@ -39,7 +39,7 @@ const Icon = ({ icon }: { icon: Props["entries"][number]["link"]["icon"] }) => {
 };
 
 const SupportSection = ({ entries }: Props) => (
-  <VStack gap="space-16" align="center">
+  <VStack gap="space-32" align="center">
     <Heading level="2" size="large">
       Support
     </Heading>
