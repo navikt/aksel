@@ -24,7 +24,11 @@ function ExampleTheming({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ExampleThemingSwitch() {
+function ExampleThemingSwitch({
+  legacyOnly = false,
+}: {
+  legacyOnly?: boolean;
+}) {
   const { theme, setTheme } = useTheme();
   const { query, isReady } = useRouter();
   const currentStylesheetRef = useRef<HTMLLinkElement | null>(null);
@@ -62,7 +66,7 @@ function ExampleThemingSwitch() {
   );
 
   useEffect(() => {
-    if (!shouldShow || !theme) {
+    if (!shouldShow || !theme || legacyOnly) {
       resetThemeLink();
       return;
     }
@@ -73,9 +77,9 @@ function ExampleThemingSwitch() {
     return () => {
       resetThemeLink();
     };
-  }, [createThemeLink, resetThemeLink, shouldShow, theme]);
+  }, [createThemeLink, legacyOnly, resetThemeLink, shouldShow, theme]);
 
-  if (!shouldShow) {
+  if (!shouldShow || legacyOnly) {
     return null;
   }
 
