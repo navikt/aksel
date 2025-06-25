@@ -6,11 +6,11 @@ import {
   N_LATEST_CHANGE_LOGS_QUERY,
 } from "@/app/_sanity/queries";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
-import GettingStartedSection from "./GettingStartedSection";
 import AkselByNumbers from "./_ui/AkselByNumbers";
 import ChangeLogNews from "./_ui/ChangeLogNews";
 import DSLandingPageHeading from "./_ui/DSLandingPageHeading";
 import DSLayersOverview from "./_ui/DSLayersOverview";
+import GettingStartedSection from "./_ui/GettingStartedSection";
 import SupportSection from "./_ui/SupportSection";
 import "./ds-forside.css";
 
@@ -65,8 +65,24 @@ const DesignsystemetPage = async () => {
           description={dsFrontPageData.ds_changelog?.ingress}
           entries={changeLogEntries}
         />
-        <AkselByNumbers />
-        <SupportSection />
+        <AkselByNumbers
+          title={dsFrontPageData.ds_aksel_in_numbers?.title}
+          description={dsFrontPageData.ds_aksel_in_numbers?.ingress}
+          entries={dsFrontPageData.ds_aksel_in_numbers?.statistics}
+        />
+        <SupportSection
+          entries={(dsFrontPageData.ds_support || []).map(
+            ({ title, description, link }) => ({
+              title,
+              description,
+              link: {
+                href: link?.url,
+                label: link?.text,
+                icon: link?.icon,
+              },
+            }),
+          )}
+        />
       </VStack>
     </DesignsystemetPageLayout>
   );

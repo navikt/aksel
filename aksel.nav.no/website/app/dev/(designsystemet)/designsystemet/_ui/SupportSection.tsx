@@ -8,39 +8,44 @@ import {
   Link,
   VStack,
 } from "@navikt/ds-react";
+import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
 import { GithubIcon, SlackIcon } from "@/assets/Icons";
 import "./SupportSection.css";
 
-const supportModules = [
-  {
-    title: "Rapporter en bug",
-    description:
-      "Om du har funnet en bug eller noe som ikke henger på greip kan du gi oss beskjed på GitHub.",
-    link: {
-      href: "#github",
-      label: "Rapporter en bug",
-      icon: <GithubIcon width="24" height="24" aria-hidden="true" />,
-    },
-  },
-  {
-    title: "Vi blir bedre sammen",
-    description:
-      "Bli med på Slack der alle hjelper hverandre med kode, design og gode råd.",
-    link: {
-      href: "#slack",
-      label: "Gå til kanalen",
-      icon: <SlackIcon width="24" height="24" aria-hidden="true" />,
-    },
-  },
-];
+type SupportData = NonNullable<
+  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_support"]
+>;
+type SupportLink = NonNullable<SupportData[number]["link"]>;
 
-const SupportSection = () => (
+type Props = {
+  entries: {
+    title: SupportData[number]["title"];
+    description: SupportData[number]["description"];
+    link: {
+      href: SupportLink["url"];
+      label: SupportLink["text"];
+      icon: SupportLink["icon"];
+    };
+  }[];
+};
+
+const Icon = ({ icon }: { icon: Props["entries"][number]["link"]["icon"] }) => {
+  if (icon === "Github") {
+    return <GithubIcon width="24" height="24" aria-hidden="true" />;
+  }
+  if (icon === "Slack") {
+    return <SlackIcon width="24" height="24" aria-hidden="true" />;
+  }
+  return null;
+};
+
+const SupportSection = ({ entries }: Props) => (
   <VStack gap="space-16" align="center">
     <Heading level="2" size="large">
       Support
     </Heading>
     <HGrid gap="space-24" columns={{ md: 2 }}>
-      {supportModules.map(({ title, description, link }) => (
+      {entries.map(({ title, description, link }) => (
         <BoxNew
           key={title}
           className="support-section"
@@ -54,19 +59,25 @@ const SupportSection = () => (
         >
           <VStack gap="space-40" align="start">
             <div>
-              <Heading size="medium" spacing>
-                {title}
-              </Heading>
-              <BodyLong size="medium" as="p">
-                {description}
-              </BodyLong>
+              {title && (
+                <Heading size="medium" spacing>
+                  {title}
+                </Heading>
+              )}
+              {description && (
+                <BodyLong size="medium" as="p">
+                  {description}
+                </BodyLong>
+              )}
             </div>
-            <HStack gap="space-8" align="start" asChild>
-              <Link as={NextLink} href={link.href}>
-                {link.icon}
-                {link.label}
-              </Link>
-            </HStack>
+            {link.label && link.href && (
+              <HStack gap="space-8" align="start" asChild>
+                <Link as={NextLink} href={link.href}>
+                  <Icon icon={link.icon} />
+                  {link.label}
+                </Link>
+              </HStack>
+            )}
           </VStack>
         </BoxNew>
       ))}
