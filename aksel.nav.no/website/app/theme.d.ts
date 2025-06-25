@@ -14,5 +14,9 @@ declare module "react" {
      * When set, adds branded colors to the heading.
      */
     "data-aksel-heading-color"?: boolean;
+    /**
+     * Adds line-clamping to the text.
+     */
+    "data-clamp-text"?: "4-lines";
   }
 }
