@@ -2,10 +2,23 @@
   width: 100%;
   border-collapse: collapse;
   display: table;
+
+  &.aksel-table--sticky-header {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
 }
 
 .aksel-table__header {
   display: table-header-group;
+
+  .aksel-table--sticky-header & {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--ax-bg-default);
+    box-sizing: border-box;
+  }
 }
 
 .aksel-table__body {
