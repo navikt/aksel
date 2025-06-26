@@ -4,12 +4,14 @@ import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import styles from "./PromoTag.module.css";
 
-type PromoTag = NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_forside_promo_tag"];
+type PromoTag = NonNullable<
+  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_forside_promo_tag"]
+>;
 
 type Props = {
-  label: NonNullable<PromoTag>["label"];
-  text: NonNullable<PromoTag>["text"];
-  link: NonNullable<PromoTag>["link"];
+  label: PromoTag["label"];
+  text: PromoTag["text"];
+  link: PromoTag["link"];
 };
 
 const PromoTag = ({ label = "Nyhet", text, link }: Props) => {

@@ -3,16 +3,17 @@ import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
 import PromoTag from "../promo-tag/PromoTag";
 import styles from "./DSLandingPageHeading.module.css";
 
-type PromoTagType =
-  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_forside_promo_tag"];
+type PromoTagType = NonNullable<
+  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_forside_promo_tag"]
+>;
 
 type Props = {
   title: NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_forside_title"];
   introText: NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_forside_ingress"];
   promoTag: {
-    label: NonNullable<PromoTagType>["label"];
-    text: NonNullable<PromoTagType>["text"];
-    link: NonNullable<PromoTagType>["link"];
+    label: PromoTagType["label"];
+    text: PromoTagType["text"];
+    link: PromoTagType["link"];
   } | null;
 };
 
