@@ -1,13 +1,17 @@
-import NextLink from "next/link";
 import {
-  BodyLong,
   BoxNew,
   HGrid,
   HStack,
   Heading,
-  Link,
+  LinkCard,
   VStack,
 } from "@navikt/ds-react";
+import {
+  LinkCardAnchor,
+  LinkCardDescription,
+  LinkCardFooter,
+  LinkCardTitle,
+} from "@navikt/ds-react/LinkCard";
 import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
 import { GithubIcon, SlackIcon } from "@/assets/Icons";
 
@@ -49,35 +53,31 @@ const SupportSection = ({ entries }: Props) => (
           key={title}
           className="support-section"
           background="brand-blue-soft"
-          borderColor="brand-blue-subtle"
           borderWidth="1"
           borderRadius="xlarge"
           paddingBlock="space-16"
           paddingInline="space-24"
-          data-color-role="brand-blue"
+          data-color="brand-blue"
+          asChild
         >
-          <VStack gap="space-40" align="start">
-            <div>
-              {title && (
-                <Heading size="medium" spacing>
-                  {title}
-                </Heading>
-              )}
-              {description && (
-                <BodyLong size="medium" as="p">
-                  {description}
-                </BodyLong>
-              )}
-            </div>
-            {link.label && link.href && (
-              <HStack gap="space-8" align="start" asChild>
-                <Link as={NextLink} href={link.href} variant="neutral">
-                  <Icon icon={link.icon} />
-                  {link.label}
-                </Link>
-              </HStack>
+          <LinkCard arrow={false}>
+            {title && (
+              <LinkCardTitle data-color="neutral">{title}</LinkCardTitle>
             )}
-          </VStack>
+            {description && (
+              <LinkCardDescription>{description}</LinkCardDescription>
+            )}
+            {link.label && link.href && (
+              <LinkCardFooter>
+                <LinkCardAnchor href={link.href}>
+                  <HStack gap="space-8" as="span" align="center">
+                    <Icon icon={link.icon} />
+                    {link.label}
+                  </HStack>
+                </LinkCardAnchor>
+              </LinkCardFooter>
+            )}
+          </LinkCard>
         </BoxNew>
       ))}
     </HGrid>
