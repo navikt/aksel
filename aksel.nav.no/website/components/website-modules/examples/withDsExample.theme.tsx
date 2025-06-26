@@ -93,7 +93,7 @@ function ExampleThemingSwitch({
         size="small"
       >
         <option value="legacy">Standard</option>
-        <option value="light">Ny lyst modus</option>
+        <option value="light">Ny lys modus</option>
         <option value="dark">Ny mørk modus</option>
       </Select>
     </Box>
