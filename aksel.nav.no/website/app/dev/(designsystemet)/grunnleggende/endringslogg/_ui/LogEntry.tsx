@@ -10,7 +10,7 @@ import { useRef } from "react";
 import type { Image as SanityImage } from "sanity";
 import {
   BodyShort,
-  Box,
+  BoxNew,
   Button,
   HStack,
   Heading,
@@ -76,7 +76,7 @@ export default function LogEntry({
           MonthHeader (potentially immediately above) should have elements scroll directly below itself, so we add a vertical timeline segment and appropriate spacing here */}
       <VStack width="48px" height="var(--ax-space-32)" align="center">
         <Hide below="sm" asChild>
-          <Box.New flexGrow="1" className={styles.timeline} />
+          <BoxNew flexGrow="1" className={styles.timeline} />
         </Hide>
       </VStack>
       {/* Log entry container */}
@@ -84,12 +84,12 @@ export default function LogEntry({
         {/* Dot + vertical line */}
         <Hide below="sm" asChild>
           <VStack width="16px" align="center" marginInline="space-16 space-0">
-            <Box.New
+            <BoxNew
               marginBlock="space-2 space-0"
               className={cl(styles.bullet, fremhevet && styles.bulletFremhevet)}
             />
             {!isLastEntry && (
-              <Box.New flexGrow="1" className={styles.timeline} />
+              <BoxNew flexGrow="1" className={styles.timeline} />
             )}
           </VStack>
         </Hide>
@@ -168,7 +168,7 @@ export default function LogEntry({
                       fremhevet ? styles.innholdFremhevet : styles.innhold,
                       styles.portableTextFirstHeading,
                     )}
-                    data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
+                    data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
                     value={content as PortableTextBlock[]}
                   />
                 </ShowMore.Content>
@@ -202,7 +202,7 @@ export default function LogEntry({
                     fremhevet ? styles.innholdFremhevet : styles.innhold,
                     styles.portableTextFirstHeading,
                   )}
-                  data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
+                  data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
                   value={content as PortableTextBlock[]}
                 />
               </>

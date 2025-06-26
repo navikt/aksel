@@ -17,7 +17,14 @@ import { ShowMoreContext, useShowMoreContext } from "./ShowMoreContext";
 /* Heading */
 
 const ShowMoreHeading = ({ children }) => {
-  return <>{children}</>;
+  const { shouldFlash } = useShowMoreContext();
+  const props: any = children.props || {};
+  const { className, ...restProps } = props;
+
+  return React.cloneElement(children, {
+    className: cl(shouldFlash && styles.focusFlash, className),
+    ...restProps,
+  });
 };
 
 /* Content */
@@ -104,7 +111,7 @@ export interface ShowMoreProps
  * ```jsx
  * <ShowMore>
  *   <ShowMore.Header>Optional heading text</ShowMore.Header>
- *   <ShowMore.Button><button>Toggle</button></ShowMore.Button>
+ *   <ShowMore.Button><button className="styles.myButton" /></ShowMore.Button>
  *   <ShowMore.Content>The stuff to truncate or show fully</ShowMore.Content>
  * </ShowMore>
  * ```
@@ -149,22 +156,31 @@ export const ShowMore = ({
     }
   }, [shouldScroll, scrollBackOnCollapse, scrollTargetRef]);
 
-  let heading, content, button;
+  let heading: ReactNode, content: ReactNode, button: ReactNode;
   React.Children.forEach(children, (child) => {
     if (React.isValidElement(child)) {
-      switch (child.type) {
-        case ShowMoreHeading:
-          heading = child;
-          break;
-        case ShowMoreContent:
-          content = child;
-          break;
-        case ShowMoreButton:
-          button = child;
-          break;
+      if (
+        child.type === ShowMoreHeading ||
+        (typeof child.type === "function" &&
+          child.type.name === "ShowMoreHeading")
+      ) {
+        heading = child;
+      } else if (
+        child.type === ShowMoreContent ||
+        (typeof child.type === "function" &&
+          child.type.name === "ShowMoreContent")
+      ) {
+        content = child;
+      } else if (
+        child.type === ShowMoreButton ||
+        (typeof child.type === "function" &&
+          child.type.name === "ShowMoreButton")
+      ) {
+        button = child;
       }
     }
   });
+
   if (!content) {
     throw new Error("ShowMore.Content is required as a child of ShowMore.");
   }
@@ -173,11 +189,7 @@ export const ShowMore = ({
     <ShowMoreContext.Provider value={contextValue}>
       <Component
         ref={internalScrollTargetRef}
-        className={cl(
-          styles.showMoreContainer,
-          shouldFlash ? styles.highlightFlash : "",
-          className,
-        )}
+        className={cl(styles.showMoreContainer, className)}
         {...restProps}
       >
         {heading}

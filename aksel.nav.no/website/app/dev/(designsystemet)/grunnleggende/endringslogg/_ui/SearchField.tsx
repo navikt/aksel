@@ -43,7 +43,7 @@ export default function SearchField() {
         defaultValue={searchParams?.get("fritekst") || ""}
         name="fritekst"
         hideLabel
-        variant="simple"
+        variant="secondary"
         htmlSize="20"
         autoComplete="off"
         onClear={() => handleSearch("")}

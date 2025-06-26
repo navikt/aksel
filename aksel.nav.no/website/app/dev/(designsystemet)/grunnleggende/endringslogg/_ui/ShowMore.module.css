@@ -24,23 +24,20 @@
   margin-bottom: 3rem;
 }
 
-.highlightFlash {
-  animation: highlightFlash 1.5s ease 1;
+.focusFlash {
+  animation: focusFlash 0.7s ease 1;
 }
 
-@keyframes highlightFlash {
-  10% {
-    box-shadow: transparent;
-    background-color: transparent;
+@keyframes focusFlash {
+  40% {
+    opacity: 1;
   }
 
-  60% {
-    box-shadow: 0 0 0 var(--ax-space-12) var(--ax-border-neutral-subtle);
-    background-color: var(--ax-border-neutral-subtle);
+  70% {
+    opacity: 0.5;
   }
 
   100% {
-    box-shadow: transparent;
-    background-color: transparent;
+    opacity: 1;
   }
 }

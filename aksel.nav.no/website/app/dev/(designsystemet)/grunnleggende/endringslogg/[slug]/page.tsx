@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: pageData?.endringsdato || undefined,
       images:
         urlForOpenGraphImage(pageData?.herobilde as SanityImage) ||
-        "/images/og/blogg/image-9.png",
+        "/images/og/endringslogg/OG-endringslogg.png",
     },
   };
 }
@@ -94,7 +94,7 @@ export default async function (props: Props) {
         <BodyShort
           size="medium"
           textColor="subtle"
-          data-color={fremhevet ? "aksel-brand-pink" : "aksel-brand-blue"}
+          data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
         >
           {capitalize(endringstype || "")}
         </BodyShort>
@@ -102,7 +102,7 @@ export default async function (props: Props) {
           size="xlarge"
           level="1"
           spacing
-          data-color={fremhevet ? "aksel-brand-pink" : "aksel-brand-blue"}
+          data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
         >
           {heading}
         </Heading>
@@ -110,7 +110,7 @@ export default async function (props: Props) {
           <BodyShort
             size="small"
             textColor="subtle"
-            data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
+            data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
           >
             {format(new Date(endringsdato || ""), "d. MMMM yyy", {
               locale: nb,
@@ -154,7 +154,7 @@ export default async function (props: Props) {
         )}
         <CustomPortableText
           value={content as PortableTextBlock[]}
-          data-color="neutral"
+          data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
         />
       </BoxNew>
 

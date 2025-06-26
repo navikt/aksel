@@ -17,12 +17,14 @@ import LogEntryList from "./_ui/LogEntryList";
 import SearchField from "./_ui/SearchField";
 import { bumpHeadingLevels } from "./_ui/utils";
 
+// TODO (stw) fix sidebar
+
 export const metadata: Metadata = {
   title: "Endringslogg",
   description:
     "Endringsloggen til Aksel gir deg en oversikt over oppdatert kode, design og dokumentasjon.",
   openGraph: {
-    images: "/images/og/blogg/image-9.png",
+    images: "/images/og/endringslogg/OG-endringslogg.png",
   },
 };
 
