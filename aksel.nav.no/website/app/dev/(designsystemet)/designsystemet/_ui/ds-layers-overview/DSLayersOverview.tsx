@@ -7,6 +7,7 @@ import {
 } from "@navikt/aksel-icons";
 import {
   BodyLong,
+  BodyShort,
   BoxNew,
   Heading,
   Link,
@@ -97,18 +98,24 @@ function IllustratedLinks() {
       <List className="aksel-layers-list">
         <ListItem icon={Links.monsterMaler.icon}>
           <Link as={NextLink} href={Links.monsterMaler.href} variant="neutral">
-            {Links.monsterMaler.label}
+            <BodyShort as="span" weight="semibold" size="large">
+              {Links.monsterMaler.label}
+            </BodyShort>
             <DottedLine />
           </Link>
         </ListItem>
         <ListItem icon={Links.komponenter.icon}>
           <div className="link-group">
             <Link as={NextLink} href={Links.komponenter.href} variant="neutral">
-              {Links.komponenter.label}
+              <BodyShort as="span" weight="semibold" size="large">
+                {Links.komponenter.label}
+              </BodyShort>
             </Link>{" "}
             og{" "}
             <Link as={NextLink} href={Links.ikoner.href} variant="neutral">
-              {Links.ikoner.label}
+              <BodyShort as="span" weight="semibold" size="large">
+                {Links.ikoner.label}
+              </BodyShort>
               <DottedLine />
             </Link>
           </div>
@@ -119,13 +126,17 @@ function IllustratedLinks() {
             href={Links.layoutPrimitives.href}
             variant="neutral"
           >
-            {Links.layoutPrimitives.label}
+            <BodyShort as="span" weight="semibold" size="large">
+              {Links.layoutPrimitives.label}
+            </BodyShort>
             <DottedLine />
           </Link>
         </ListItem>
         <ListItem icon={Links.designTokens.icon}>
           <Link as={NextLink} href={Links.designTokens.href} variant="neutral">
-            {Links.designTokens.label}
+            <BodyShort as="span" weight="semibold" size="large">
+              {Links.designTokens.label}
+            </BodyShort>
             <DottedLine />
           </Link>
         </ListItem>

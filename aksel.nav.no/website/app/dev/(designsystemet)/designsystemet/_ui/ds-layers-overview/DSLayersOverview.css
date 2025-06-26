@@ -26,10 +26,6 @@
     }
   }
 
-  .aksel-link {
-    font-weight: var(--ax-font-weight-bold);
-  }
-
   @media screen and (min-width: 768px) {
     .aksel-list__item {
       background-color: initial;
