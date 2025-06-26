@@ -7,11 +7,11 @@ import { Metadata } from "next/types";
 import type { Image as SanityImage } from "sanity";
 import {
   BodyShort,
+  BoxNew,
   HGrid,
   HStack,
   Heading,
   Tag,
-  VStack,
 } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -90,7 +90,7 @@ export default async function (props: Props) {
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <VStack marginBlock="space-0 space-28">
+      <div>
         <BodyShort
           size="medium"
           textColor="subtle"
@@ -126,6 +126,17 @@ export default async function (props: Props) {
             </Tag>
           )}
         </HStack>
+      </div>
+
+      <TableOfContents
+        feedback={{
+          name: "Endringslogg",
+          text: "Innspill til siden",
+        }}
+        toc={toc || []}
+      />
+
+      <BoxNew marginBlock="space-0 space-24">
         {fremhevet && herobilde?.asset && (
           <Image
             className={styles.herobilde}
@@ -145,10 +156,10 @@ export default async function (props: Props) {
           value={content as PortableTextBlock[]}
           data-color="neutral"
         />
-      </VStack>
+      </BoxNew>
 
       <HGrid
-        marginBlock="space-48 space-0"
+        marginBlock="space-28 0"
         gap="space-48 space-24"
         columns={{ xs: 1, md: 2 }}
       >
@@ -159,14 +170,6 @@ export default async function (props: Props) {
           <ChangelogLinkCard logEntry={logs.next} label="Neste endring" />
         )}
       </HGrid>
-
-      <TableOfContents
-        feedback={{
-          name: "Endringslogg",
-          text: "Innspill til siden",
-        }}
-        toc={toc || []}
-      />
     </DesignsystemetPageLayout>
   );
 }
