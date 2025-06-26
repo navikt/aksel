@@ -1,6 +1,7 @@
 import { BodyLong, BoxNew, Heading, VStack } from "@navikt/ds-react";
 import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
-import PromoTag from "./promo-tag/PromoTag";
+import PromoTag from "../promo-tag/PromoTag";
+import styles from "./DSLandingPageHeading.module.css";
 
 type PromoTagType =
   NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_forside_promo_tag"];
@@ -27,7 +28,7 @@ const DSLandingPageHeading = ({ title, introText, promoTag }: Props) => (
           />
         )}
         {title && (
-          <Heading level="1" size="xlarge" className="aksel__page-title">
+          <Heading level="1" size="xlarge" className={styles.AkselPageTitle}>
             {title}
           </Heading>
         )}

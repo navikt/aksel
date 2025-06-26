@@ -1,11 +1,11 @@
-.aksel__page-title {
+.AkselPageTitle {
   font-size: 2.5rem;
   line-height: 3.25rem;
   text-align: center;
 }
 
 @media screen and (min-width: 768px) {
-  .aksel__page-title {
+  .AkselPageTitle {
     font-size: 3.5rem;
     line-height: 4.1875rem;
   }
