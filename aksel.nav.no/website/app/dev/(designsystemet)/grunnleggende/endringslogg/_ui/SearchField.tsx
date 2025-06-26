@@ -10,6 +10,15 @@ export default function SearchField() {
   const { replace } = useRouter();
   const searchRef = useRef<HTMLInputElement>(null);
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const input = form.elements.namedItem(
+      "fritekst",
+    ) as HTMLInputElement | null;
+    handleSearch(input?.value ?? "");
+  }
+
   function handleSearch(query: string) {
     const params = new URLSearchParams(searchParams?.toString());
     if (query) {
@@ -20,10 +29,6 @@ export default function SearchField() {
     replace(`${pathname}${params.toString() ? `?${params.toString()}` : ""}`);
   }
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-
   useEffect(() => {
     if (searchRef.current) {
       searchRef.current.value = searchParams?.get("fritekst") || "";
@@ -31,17 +36,17 @@ export default function SearchField() {
   }, [searchParams]);
 
   return (
-    <form role="search" onSubmit={onSubmit}>
+    <form role="search" onSubmit={handleSubmit}>
       <Search
         ref={searchRef}
         label="Søk i endringsloggen"
         defaultValue={searchParams?.get("fritekst") || ""}
-        onChange={handleSearch}
-        name="changelogSearch"
+        name="fritekst"
         hideLabel
         variant="simple"
         htmlSize="20"
         autoComplete="off"
+        onClear={() => handleSearch("")}
       />
     </form>
   );
