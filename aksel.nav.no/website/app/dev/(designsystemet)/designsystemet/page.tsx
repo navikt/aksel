@@ -1,9 +1,12 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
+import { Image } from "sanity";
 import { VStack } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
 import { sanityFetch } from "@/app/_sanity/live";
 import { DS_FRONT_PAGE_QUERY } from "@/app/_sanity/queries";
+import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
 import AkselByNumbers from "./_ui/aksel-by-numbers/AkselByNumbers";
 import { ChangeLogNews } from "./_ui/change-log/ChangeLogNews";
@@ -12,13 +15,21 @@ import { GettingStartedSection } from "./_ui/getting-started/GettingStartedSecti
 import DSLandingPageHeading from "./_ui/page-heading/DSLandingPageHeading";
 import SupportSection from "./_ui/support-section/SupportSection";
 
-export const metadata = {
-  title: "Designsystemet",
-  description:
-    "Designsystemet Aksel er et felles design- og utviklingsrammeverk for Nav. " +
-    "Det inneholder retningslinjer, komponenter og verktøy for å bygge digitale tjenester " +
-    "som er brukervennlige, tilgjengelige og i tråd med Navs visuelle identitet.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { data: pageData } = await sanityFetch({
+    query: DS_FRONT_PAGE_QUERY,
+  });
+
+  const pageOgImage = urlForOpenGraphImage(pageData?.seo?.image as Image);
+
+  return {
+    title: pageData?.ds_forside_title,
+    description: pageData?.seo?.meta || pageData?.ds_forside_ingress,
+    openGraph: {
+      images: pageOgImage,
+    },
+  };
+}
 
 const DesignsystemetPage = async () => {
   const { data: dsFrontPageData } = await sanityFetch({

@@ -9,9 +9,10 @@ const DS_FRONT_PAGE_QUERY = defineQuery(`*[_type == "aksel_ds_forside"][0] {
     ds_forside_promo_tag { label, text, link },
     ds_getting_started[]{ description, icon, link, title },
     ds_layers_overview,
-    ds_changelog,
+    ds_changelog { title, ingress },
     ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},
-    ds_support[]{description, link, title}
+    ds_support[]{description, link, title},
+    seo { image, meta }
   }`);
 
 const DESIGNSYSTEM_SIDEBAR_QUERY =
