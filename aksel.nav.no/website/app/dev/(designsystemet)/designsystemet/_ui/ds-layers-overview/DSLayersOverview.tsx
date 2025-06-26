@@ -1,3 +1,4 @@
+import cl from "clsx";
 import NextLink from "next/link";
 import {
   ComponentIcon,
@@ -22,7 +23,7 @@ import {
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
 import { ListItem } from "@navikt/ds-react/List";
-import "./DSLayersOverview.css";
+import styles from "./DSLayersOverview.module.css";
 
 type DSLayersOverviewProps = {
   title: string;
@@ -95,24 +96,51 @@ function IllustratedLinks() {
       width="100%"
       paddingInline={{ xs: "0", md: "0 space-32" }}
     >
-      <List className="aksel-layers-list">
-        <ListItem icon={Links.monsterMaler.icon}>
-          <Link as={NextLink} href={Links.monsterMaler.href} variant="neutral">
+      <List className={styles.akselLayersList}>
+        <ListItem
+          className={cl(
+            styles.akselLayersListItem,
+            styles.akselLayersIllustrativeListItem,
+          )}
+          icon={Links.monsterMaler.icon}
+        >
+          <Link
+            as={NextLink}
+            className={styles.akselLayersLink}
+            href={Links.monsterMaler.href}
+            variant="neutral"
+          >
             <BodyShort as="span" weight="semibold" size="large">
               {Links.monsterMaler.label}
             </BodyShort>
             <DottedLine />
           </Link>
         </ListItem>
-        <ListItem icon={Links.komponenter.icon}>
-          <div className="link-group">
-            <Link as={NextLink} href={Links.komponenter.href} variant="neutral">
+        <ListItem
+          className={cl(
+            styles.akselLayersListItem,
+            styles.akselLayersIllustrativeListItem,
+          )}
+          icon={Links.komponenter.icon}
+        >
+          <div className={styles.akselLayersListItemLinkGroup}>
+            <Link
+              as={NextLink}
+              className={styles.akselLayersLink}
+              href={Links.komponenter.href}
+              variant="neutral"
+            >
               <BodyShort as="span" weight="semibold" size="large">
                 {Links.komponenter.label}
               </BodyShort>
             </Link>{" "}
             og{" "}
-            <Link as={NextLink} href={Links.ikoner.href} variant="neutral">
+            <Link
+              as={NextLink}
+              className={styles.akselLayersLink}
+              href={Links.ikoner.href}
+              variant="neutral"
+            >
               <BodyShort as="span" weight="semibold" size="large">
                 {Links.ikoner.label}
               </BodyShort>
@@ -120,9 +148,16 @@ function IllustratedLinks() {
             </Link>
           </div>
         </ListItem>
-        <ListItem icon={Links.layoutPrimitives.icon}>
+        <ListItem
+          className={cl(
+            styles.akselLayersListItem,
+            styles.akselLayersIllustrativeListItem,
+          )}
+          icon={Links.layoutPrimitives.icon}
+        >
           <Link
             as={NextLink}
+            className={styles.akselLayersLink}
             href={Links.layoutPrimitives.href}
             variant="neutral"
           >
@@ -132,8 +167,19 @@ function IllustratedLinks() {
             <DottedLine />
           </Link>
         </ListItem>
-        <ListItem icon={Links.designTokens.icon}>
-          <Link as={NextLink} href={Links.designTokens.href} variant="neutral">
+        <ListItem
+          className={cl(
+            styles.akselLayersListItem,
+            styles.akselLayersIllustrativeListItem,
+          )}
+          icon={Links.designTokens.icon}
+        >
+          <Link
+            as={NextLink}
+            className={styles.akselLayersLink}
+            href={Links.designTokens.href}
+            variant="neutral"
+          >
             <BodyShort as="span" weight="semibold" size="large">
               {Links.designTokens.label}
             </BodyShort>
@@ -150,7 +196,10 @@ function LinkCardLinks() {
     <VStack gap="space-16" width="100%">
       {Object.entries(Links).map(([key, { href, label, icon }]) => (
         <BoxNew key={key} background="brand-blue-moderateA" asChild>
-          <LinkCard data-color="brand-blue">
+          <LinkCard
+            className={styles.akselLayersCardListItem}
+            data-color="brand-blue"
+          >
             <LinkCardIcon>{icon}</LinkCardIcon>
             <LinkCardTitle data-color="neutral">
               <LinkCardAnchor href={href}>{label}</LinkCardAnchor>
@@ -163,9 +212,7 @@ function LinkCardLinks() {
 }
 
 function DottedLine() {
-  return (
-    <div className="aksel__ds-frontpage__dotted-line" aria-hidden="true" />
-  );
+  return <div className={styles.akselLayersDottedLine} aria-hidden="true" />;
 }
 
 export { DSLayersOverview };
