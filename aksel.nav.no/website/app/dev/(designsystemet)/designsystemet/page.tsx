@@ -16,9 +16,9 @@ import "./ds-forside.css";
 export const metadata = {
   title: "Designsystemet",
   description:
-    "Designsystemet Aksel er et felles design- og utviklingsrammeverk for NAV. " +
+    "Designsystemet Aksel er et felles design- og utviklingsrammeverk for Nav. " +
     "Det inneholder retningslinjer, komponenter og verktøy for å bygge digitale tjenester " +
-    "som er brukervennlige, tilgjengelige og i tråd med NAVs visuelle identitet.",
+    "som er brukervennlige, tilgjengelige og i tråd med Navs visuelle identitet.",
 };
 
 const DesignsystemetPage = async () => {
