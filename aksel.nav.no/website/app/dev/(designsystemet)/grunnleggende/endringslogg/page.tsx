@@ -135,7 +135,7 @@ export default async function Page({ searchParams }: PageProps) {
           <SearchField />
           <FilterChips
             years={years}
-            selectedYear={yearFilter}
+            selectedYear={yearFilter?.toString() || null}
             categories={categories}
             selectedCategory={categoryFilter}
           />
