@@ -107,7 +107,7 @@ function CodeBlockEditor(props: {
     codeSnippet.update(value, !expanded.current);
     expanded.toggle();
 
-    if (!expanded.current) {
+    if (expanded.current) {
       /* Scroll to the top of the code block when collapsed */
       queueMicrotask(() => {
         wrapperRef.current?.scrollIntoView({
