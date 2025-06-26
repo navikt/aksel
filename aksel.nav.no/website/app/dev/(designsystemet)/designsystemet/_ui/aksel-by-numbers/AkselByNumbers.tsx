@@ -1,6 +1,6 @@
 import { BodyLong, BoxNew, HGrid, Heading, VStack } from "@navikt/ds-react";
 import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
-import "./AkselByNumbers.css";
+import styles from "./AkselByNumbers.module.css";
 
 type AkselByNumbersData = NonNullable<
   NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_aksel_in_numbers"]
@@ -50,7 +50,7 @@ const AkselByNumbers = ({
           ][index];
           return (
             <BoxNew
-              className="akselByNumbers"
+              className={styles.akselByNumbers}
               key={numberTitle}
               borderWidth="1"
               borderRadius="xlarge"
@@ -64,7 +64,7 @@ const AkselByNumbers = ({
                   <Heading
                     as="h2"
                     size="xlarge"
-                    className="akselByNumbers__number"
+                    className={styles.akselByNumbers__number}
                     data-color={dataColor}
                   >
                     {number}
@@ -73,7 +73,6 @@ const AkselByNumbers = ({
                         as="span"
                         size="xlarge"
                         textColor="subtle"
-                        className="akselByNumbers__unit"
                         data-color={dataColor}
                       >
                         {unit}

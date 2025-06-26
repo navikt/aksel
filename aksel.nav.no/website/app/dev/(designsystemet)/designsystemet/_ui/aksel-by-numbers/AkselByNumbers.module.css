@@ -56,11 +56,11 @@
     position: relative;
     z-index: 2;
   }
+}
 
-  .akselByNumbers__number {
-    font-size: 56px;
-    display: flex;
-    gap: var(--ax-space-4);
-    align-items: baseline;
-  }
+.akselByNumbers__number {
+  font-size: 56px;
+  display: flex;
+  gap: var(--ax-space-4);
+  align-items: baseline;
 }
