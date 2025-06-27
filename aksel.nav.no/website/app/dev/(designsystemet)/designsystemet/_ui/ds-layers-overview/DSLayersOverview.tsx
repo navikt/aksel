@@ -83,7 +83,7 @@ const Links = {
     icon: <Density2Icon fontSize="24" aria-hidden="true" />,
   },
   designTokens: {
-    href: "/dev/grunnleggende/darkside/design-tokens",
+    href: "/dev/grunnleggende/styling/design-tokens",
     label: "Design tokens",
     icon: <TokenIcon fontSize="24" aria-hidden="true" />,
   },
