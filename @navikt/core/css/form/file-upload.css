@@ -196,10 +196,6 @@ li.navds-file-item {
   overflow-wrap: anywhere;
 }
 
-.navds-file-item__button {
-  margin-left: auto;
-}
-
 .navds-file-item__error {
   color: var(--a-text-danger);
   display: grid;
