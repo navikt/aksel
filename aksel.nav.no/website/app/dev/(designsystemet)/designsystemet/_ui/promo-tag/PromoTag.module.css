@@ -8,9 +8,6 @@
   border: 1px solid var(--aksel-brand-pink-400A, #f96c7f42);
   border-radius: var(--ax-border-radius-xlarge);
   color: var(--ax-text-default, #4e082d);
-  font-feature-settings:
-    "liga" off,
-    "clig" off;
 
   &:hover {
     background-color: var(--aksel-brand-pink-300, #fcdaee);
