@@ -1,6 +1,7 @@
 "use client";
 
 import cl from "clsx";
+import Link from "next/link";
 import { PauseFillIcon, PlayFillIcon } from "@navikt/aksel-icons";
 import { BoxNew, Button, HGrid, HStack, Heading } from "@navikt/ds-react";
 import {
@@ -8,7 +9,7 @@ import {
   LinkCardAnchor,
   LinkCardDescription,
   LinkCardTitle,
-} from "../../(god-praksis)/_ui/link-card/LinkCard";
+} from "@navikt/ds-react/LinkCard";
 import { AkselCubeAnimated } from "../../_ui/aksel-cube/AkselCube";
 import styles from "../_ui/frontpage.module.css";
 import { useShouldStopAnimation } from "./useShouldStopAnimation";
@@ -28,8 +29,10 @@ const LinkCards = ({
         {links.map((link) => {
           return (
             <LinkCard key={link.title}>
-              <LinkCardTitle as="div">
-                <LinkCardAnchor href={link.href}>{link.title}</LinkCardAnchor>
+              <LinkCardTitle>
+                <LinkCardAnchor asChild>
+                  <Link href={link.href}>{link.title}</Link>
+                </LinkCardAnchor>
               </LinkCardTitle>
               <LinkCardDescription>{link.desc}</LinkCardDescription>
             </LinkCard>

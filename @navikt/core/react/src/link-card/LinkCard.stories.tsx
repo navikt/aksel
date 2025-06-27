@@ -400,7 +400,7 @@ export const ImageEmulatingNextjsFill: Story = {
           }}
         >
           <img
-            src="https://picsum.photos/400"
+            src="https://picsum.photos/id/866/400"
             alt="alt-placeholder"
             decoding="async"
             sizes="100vw"
@@ -481,7 +481,19 @@ export const GridWithDifferentHeights: Story = {
   render: (...args) => (
     <HGrid gap="space-24" columns="repeat(auto-fit, minmax(300px, 1fr))">
       {DescriptionAndFooter.render?.(...args)}
-      {Description.render?.(...args)}
+      <LinkCard size="small">
+        <LinkCardTitle>
+          <LinkCardAnchor href="/#">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </LinkCardAnchor>
+        </LinkCardTitle>
+        <LinkCardDescription>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </LinkCardDescription>
+        <LinkCardFooter>
+          <FooterContentDemo />
+        </LinkCardFooter>
+      </LinkCard>
       {Title.render?.(...args)}
       {Footer.render?.(...args)}
     </HGrid>

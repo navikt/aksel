@@ -108,12 +108,12 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
             size={size}
             ref={forwardedRef}
             data-color="neutral"
-            {...restProps}
             className={cn(
               "navds-link-card",
               className,
               `navds-link-card--${size}`,
             )}
+            {...restProps}
           >
             {children}
           </BodyLong>
@@ -138,17 +138,21 @@ type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
  * @see 🏷️ {@link LinkCardTitleProps}
  */
 export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
-  ({ children, as = "span", className }: LinkCardTitleProps, forwardedRef) => {
+  (
+    { children, as = "span", className, ...restProps }: LinkCardTitleProps,
+    forwardedRef,
+  ) => {
     const { cn } = useRenameCSS();
 
     const context = useLinkCardContext();
 
     return (
       <Heading
+        ref={forwardedRef}
         as={as}
         size={context.size === "medium" ? "small" : "xsmall"}
-        ref={forwardedRef}
         className={cn("navds-link-card__title", className)}
+        {...restProps}
       >
         {children}
         {context.arrow && (
@@ -180,15 +184,24 @@ interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {
 export const LinkCardDescription = forwardRef<
   HTMLDivElement,
   LinkCardDescriptionProps
->(({ children }: LinkCardDescriptionProps, forwardedRef) => {
-  const { cn } = useRenameCSS();
+>(
+  (
+    { children, className, ...restProps }: LinkCardDescriptionProps,
+    forwardedRef,
+  ) => {
+    const { cn } = useRenameCSS();
 
-  return (
-    <div ref={forwardedRef} className={cn("navds-link-card__description")}>
-      {children}
-    </div>
-  );
-});
+    return (
+      <div
+        ref={forwardedRef}
+        className={cn("navds-link-card__description", className)}
+        {...restProps}
+      >
+        {children}
+      </div>
+    );
+  },
+);
 
 /* ---------------------------- LinkCard Footer ---------------------------- */
 interface LinkCardFooterProps extends HTMLAttributes<HTMLDivElement> {
@@ -199,11 +212,18 @@ interface LinkCardFooterProps extends HTMLAttributes<HTMLDivElement> {
  * @see 🏷️ {@link LinkCardFooterProps}
  */
 export const LinkCardFooter = forwardRef<HTMLDivElement, LinkCardFooterProps>(
-  ({ children }: LinkCardFooterProps, forwardedRef) => {
+  (
+    { children, className, ...restProps }: LinkCardFooterProps,
+    forwardedRef,
+  ) => {
     const { cn } = useRenameCSS();
 
     return (
-      <div ref={forwardedRef} className={cn("navds-link-card__footer")}>
+      <div
+        ref={forwardedRef}
+        className={cn("navds-link-card__footer", className)}
+        {...restProps}
+      >
         {children}
       </div>
     );
@@ -225,8 +245,8 @@ export const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
     return (
       <div
         ref={forwardedRef}
-        className={cn("navds-link-card__icon", className)}
         aria-hidden
+        className={cn("navds-link-card__icon", className)}
         {...restProps}
       >
         {children}

@@ -38,7 +38,11 @@
 .typoListIcon {
   transform: rotate(45deg);
 
+  [data-color] & > * {
+    fill: var(--ax-bg-strong);
+  }
+
   & > * {
-    fill: var(--ax-bg-strong, var(--ax-text-brand-blue-subtle));
+    fill: var(--ax-text-brand-blue-subtle);
   }
 }

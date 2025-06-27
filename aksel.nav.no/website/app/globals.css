@@ -4,7 +4,6 @@
 @import "@navikt/ds-css/darkside" layer(dsComponents);
 @import "tailwindcss/components" layer(twComponents);
 @import "tailwindcss/utilities" layer(twUtilities);
-@import "./dev/(god-praksis)/_ui/link-card/link-card.css" layer(dsComponents);
 
 :root {
   --website-header-height: 4rem;
@@ -30,6 +29,17 @@ body {
 
   &:last-child {
     margin-block-end: 0;
+  }
+}
+
+[data-clamp-text] {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  &[data-clamp-text="4-lines"] {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
   }
 }
 

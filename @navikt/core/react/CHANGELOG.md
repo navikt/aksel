@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 7.24.0
+
+### Minor Changes
+
+- LinkCard: :tada: Added new component 'LinkCard'. ([#3883](https://github.com/navikt/aksel/pull/3883))
+
+- Table: :tada: Added prop 'stickyHeader', allowing header to remain sticky while scrolling in table. ([#3893](https://github.com/navikt/aksel/pull/3893))
+
+### Patch Changes
+
+- Switch: Size='small' are now visually comparable to radio and checkbox in the same size. ([#3892](https://github.com/navikt/aksel/pull/3892))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.24.0
+  - @navikt/aksel-icons@7.24.0
+
 ## 7.23.2
 
 ### Patch Changes

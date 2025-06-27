@@ -84,7 +84,7 @@ async function main() {
           },
           endringsdato: new Date(),
           endringstype: "kode",
-          innhold: blocks,
+          content: blocks,
         })
         .then(() => {
           console.info("Created new changelog doc for version", version);
@@ -96,7 +96,7 @@ async function main() {
       // Update existing document
       await client
         .patch(existingDoc[0]._id)
-        .set({ innhold: blocks })
+        .set({ content: blocks })
         .commit()
         .then(() => {
           console.info("Updated changelog doc for version", version);

@@ -15,14 +15,11 @@
 }
 
 .overviewImageWrapper {
+  position: relative;
   display: grid;
   place-content: center;
-  width: 100%;
   overflow: hidden;
   height: min-content;
-  aspect-ratio: 16 / 10;
-  border-start-start-radius: calc(var(--ax-border-radius-xlarge) - 1px);
-  border-start-end-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   background: var(--ax-bg-soft);
 }
 
