@@ -58,7 +58,7 @@ async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
               <ChangelogIcon endringstype={endringstype} />
               <LinkCardTitle as="span">
                 <LinkCardAnchor
-                  href={`/dev/grunnleggende/kode/endringslogg/${slug?.current}`}
+                  href={`/dev/grunnleggende/endringslogg/${slug?.current}`}
                 >
                   {heading}
                 </LinkCardAnchor>
