@@ -1,0 +1,11 @@
+.trigger {
+  /* background-color: transparent; */
+  &:hover {
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: unset;
+  }
+}

@@ -3,6 +3,7 @@
 import { ReactNode, useRef, useState } from "react";
 import { Button } from "@navikt/ds-react";
 import { Popover, PopoverContent } from "@navikt/ds-react/Popover";
+import styles from "./HoverCard.module.css";
 
 export const HoverCard = ({
   popoverContent,
@@ -21,6 +22,7 @@ export const HoverCard = ({
         onClick={() => setOpenState(!openState)}
         aria-expanded={openState}
         variant="tertiary-neutral"
+        className={styles.trigger}
       >
         {children}
       </Button>
