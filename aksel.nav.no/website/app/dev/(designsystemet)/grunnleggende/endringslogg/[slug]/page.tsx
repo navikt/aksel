@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 
   return {
-    title: pageData?.heading,
+    title: `${pageData?.heading} - Endringslogg`,
     keywords: pageData?.endringstype,
     openGraph: {
       type: "article",
