@@ -91,24 +91,17 @@ function generateSidebar(
       })
       .filter((category) => category.pages.length > 0);
 
-    const endringslogg =
-      type === "grunnleggende"
-        ? [
-            {
-              heading: "Endringslogg",
-              slug: `${type}/endringslogg`,
-              tag: "ready" as "ready" | "new" | "beta" | "deprecated",
-            },
-          ]
-        : [];
-
     return {
       label: PAGE_ROUTES[type].title,
       links: [
-        ...PAGE_ROUTES[type].root,
+        ...PAGE_ROUTES[type].root.filter(
+          (route) => !route.order || route.order === "first",
+        ),
         ...standalonePages,
         ...groupedPages,
-        ...endringslogg,
+        ...PAGE_ROUTES[type].root.filter(
+          (route) => route.order && route.order === "last",
+        ),
       ],
     };
   });

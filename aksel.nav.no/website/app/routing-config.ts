@@ -15,6 +15,7 @@ type PageRoute = {
   slug: string;
   tag: string;
   heading: string;
+  order?: "first" | "last";
   /**
    * Since we cant include the search metadata in the sanity query, we need to manually add it here.
    */
@@ -54,7 +55,14 @@ const PAGE_ROUTES: Routes = {
   grunnleggende: {
     title: "Grunnleggende",
     _type: "ds_artikkel",
-    root: [],
+    root: [
+      {
+        heading: "Endringslogg",
+        slug: `grunnleggende/endringslogg`,
+        tag: "ready" as "ready" | "new" | "beta" | "deprecated",
+        order: "last",
+      },
+    ],
     nested: {
       darkside: [
         {
