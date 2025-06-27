@@ -93,7 +93,16 @@ function generateSidebar(
 
     return {
       label: PAGE_ROUTES[type].title,
-      links: [...PAGE_ROUTES[type].root, ...standalonePages, ...groupedPages],
+      links: [
+        ...PAGE_ROUTES[type].root.filter(
+          (route) => !route.order || route.order === "first",
+        ),
+        ...standalonePages,
+        ...groupedPages,
+        ...PAGE_ROUTES[type].root.filter(
+          (route) => route.order && route.order === "last",
+        ),
+      ],
     };
   });
 }

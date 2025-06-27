@@ -21,7 +21,10 @@ function DesignsystemSidebarItem(props: {
   const pathName = usePathname();
   const { toggleOpen } = useMobileNav();
 
-  const active = pathName?.split("#")[0] === stegaClean(`/dev/${page.slug}`);
+  const path = pathName?.split("#")[0] || "";
+  const cleanedSlug = stegaClean(`/dev/${page.slug}`);
+  const active =
+    path === cleanedSlug || (path.startsWith(cleanedSlug) && !isIndented);
   const statusTag = getStatusTag(page.tag, true);
 
   const isOverviewPage = page.heading.toLowerCase() === "oversikt";

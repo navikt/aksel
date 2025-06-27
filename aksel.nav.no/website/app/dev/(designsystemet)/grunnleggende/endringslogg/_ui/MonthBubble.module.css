@@ -1,0 +1,7 @@
+.bubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background: var(--ax-bg-default);
+}

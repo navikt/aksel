@@ -162,6 +162,35 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
   *[_type == $type && defined(slug.current)].slug.current
 `);
 
+export const ENDRINGSLOGG_FIELDS =
+  'heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer';
+const ENDRINGSLOGG_QUERY = defineQuery(`
+  *[_type == "ds_endringslogg_artikkel"]{
+    ${ENDRINGSLOGG_FIELDS}
+  }`);
+
+const ENDRINGSLOGG_WITH_NEIGHBORS_QUERY = defineQuery(`
+  *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{
+    "primary": {
+      ${ENDRINGSLOGG_FIELDS}
+    },
+    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{
+      ${ENDRINGSLOGG_FIELDS}
+    },
+    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{
+      ${ENDRINGSLOGG_FIELDS}
+    }
+  }
+`);
+
+const ENDRINGSLOGG_METADATA_BY_SLUG_QUERY =
+  defineQuery(`*[slug.current == $slug][0]{
+    heading,
+    endringsdato,
+    endringstype,
+    herobilde
+  }`);
+
 /* ------------------------------- God praksis ------------------------------ */
 const GOD_PRAKSIS_ALL_TEMA_QUERY =
   defineQuery(`*[_type == "gp.tema"] | order(lower(title)){
@@ -370,6 +399,9 @@ export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
   DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
   DOCUMENT_BY_ID_FOR_SLACK_QUERY,
+  ENDRINGSLOGG_METADATA_BY_SLUG_QUERY,
+  ENDRINGSLOGG_QUERY,
+  ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
   GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
