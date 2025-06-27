@@ -25759,6 +25759,7 @@ __metadata:
   dependencies:
     "@axe-core/playwright": "npm:4.10.0"
     "@babel/core": "npm:^7.19.0"
+    "@floating-ui/react": "npm:0.27.8"
     "@navikt/next-logger": "npm:2.0.0"
     "@navikt/oasis": "npm:3.2.1"
     "@next/bundle-analyzer": "npm:15.2.3"
