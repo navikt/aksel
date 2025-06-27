@@ -4,7 +4,7 @@ import { Avatar, avatarUrl } from "../../_ui/avatar/Avatar";
 type Blogg = NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][0];
 
 export const queryToAvatars = (
-  queryResponseEditorialStaff: Blogg["editorial_staff_teams"],
+  queryResponseEditorialStaff: Blogg["writers"],
 ): Avatar[] => {
   return (
     queryResponseEditorialStaff?.map((queryData) => ({
