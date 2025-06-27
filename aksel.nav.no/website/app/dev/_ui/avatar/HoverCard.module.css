@@ -27,7 +27,8 @@
   background: var(--ax-bg-raised);
   border-radius: var(--ax-radius-8);
   border-width: var(--ax-space-2);
-  border-color: var(--ax-neutral-400);
+  border-color: var(--ax-border-default);
   margin: var(--ax-space-8);
   padding: var(--ax-space-16);
+  z-index: var(--a-z-index-popover);
 }
