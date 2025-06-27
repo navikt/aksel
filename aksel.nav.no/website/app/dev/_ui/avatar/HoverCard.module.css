@@ -1,5 +1,4 @@
 .trigger {
-  /* background-color: transparent; */
   &:hover {
     background-color: transparent;
     text-decoration: underline;
@@ -8,4 +7,27 @@
   &:active {
     color: unset;
   }
+}
+
+@keyframes float-in {
+  0% {
+    opacity: 0;
+    margin-top: calc(var(--ax-space-8) + 6px);
+  }
+
+  100% {
+    opacity: 1;
+    margin-top: var(--ax-space-8);
+  }
+}
+
+.floating {
+  animation: float-in 0.1s linear;
+  transform: translateY(-8px);
+  background: var(--ax-bg-raised);
+  border-radius: var(--ax-radius-8);
+  border-width: var(--ax-space-2);
+  border-color: var(--ax-neutral-400);
+  margin: var(--ax-space-8);
+  padding: var(--ax-space-16);
 }
