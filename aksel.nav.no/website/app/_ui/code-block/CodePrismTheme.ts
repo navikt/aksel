@@ -1,14 +1,14 @@
 import { PrismTheme } from "prism-react-renderer";
 import {
   TextAccent,
-  TextBrandMagentaSubtle,
+  TextAccentSubtle,
   TextDangerSubtle,
   TextInfo,
   TextInfoSubtle,
   TextNeutral,
   TextNeutralSubtle,
-  TextSuccess,
   TextWarning,
+  TextWarningSubtle,
 } from "@navikt/ds-tokens/darkside-js";
 
 const AkselPrismTheme: PrismTheme = {
@@ -33,29 +33,33 @@ const AkselPrismTheme: PrismTheme = {
         "regex",
         "inserted",
       ],
-      style: { color: TextSuccess },
+      style: { color: TextAccentSubtle },
     },
     { types: ["constant"], style: { color: TextNeutral } },
-    { types: ["attr-name", "variable"], style: { color: TextAccent } },
+    { types: ["attr-name", "variable"], style: { color: TextWarningSubtle } },
     {
       types: ["deleted", "attr-value", "template-punctuation"],
       style: { color: TextNeutral },
     },
     {
       types: ["string"],
-      style: { color: TextBrandMagentaSubtle },
+      style: { color: TextAccentSubtle },
     },
     { types: ["selector"], style: { color: TextWarning } },
-    { types: ["tag"], style: { color: TextSuccess } },
-    { types: ["tag"], languages: ["markup"], style: { color: TextSuccess } },
+    { types: ["tag"], style: { color: TextWarningSubtle } },
+    {
+      types: ["tag"],
+      languages: ["markup"],
+      style: { color: TextWarningSubtle },
+    },
     { types: ["punctuation", "operator"], style: { color: TextNeutral } },
     {
       types: ["punctuation"],
       languages: ["markup"],
       style: { color: TextNeutralSubtle },
     },
-    { types: ["function"], style: { color: TextAccent } },
-    { types: ["class-name"], style: { color: TextSuccess } },
+    { types: ["function"], style: { color: TextAccentSubtle } },
+    { types: ["class-name"], style: { color: TextAccentSubtle } },
     { types: ["char"], style: { color: TextDangerSubtle } },
     { types: ["script"], style: { color: TextAccent } },
     { types: ["property-access"], style: { color: TextNeutral } },
