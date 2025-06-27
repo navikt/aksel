@@ -19,12 +19,12 @@
 }
 
 .bloggPosts {
-  margin-inline: auto;
-  margin-bottom: var(--ax-space-128);
   display: grid;
   width: 100%;
-  padding-inline: var(--ax-space-16);
   max-width: var(--ax-breakpoint-2xl);
+  margin-inline: auto;
+  margin-bottom: var(--ax-space-128);
+  padding-inline: var(--ax-space-16);
 }
 
 .remainingPosts {
@@ -38,7 +38,12 @@
 }
 
 .articleBody {
-  margin-top: var(--ax-space-16);
+  margin-block: var(--ax-space-16);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 .articleBodySubtle {
