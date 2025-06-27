@@ -20,7 +20,6 @@ import { N_LATEST_CHANGE_LOGS_QUERY } from "@/app/_sanity/queries";
 import { N_LATEST_CHANGE_LOGS_QUERYResult } from "@/app/_sanity/query-types";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
-import styles from "./ChangeLogNews.module.css";
 
 type ChangeLogNewsProps = {
   title: string;
@@ -123,8 +122,13 @@ function ChangelogIcon({
       borderRadius="12"
       background="neutral-moderateA"
     >
-      <LinkCardIcon className={styles.aksel__changelog__icon}>
-        <Icon width="2.25rem" height="2.25rem" aria-hidden="true" />
+      <LinkCardIcon>
+        <Icon
+          color="var(--ax-text-subtle)"
+          width="2.25rem"
+          height="2.25rem"
+          aria-hidden="true"
+        />
       </LinkCardIcon>
     </BoxNew>
   );
