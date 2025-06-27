@@ -44,6 +44,7 @@ export const Avatar = ({
         src={imageSrc}
         priority
         loading="eager"
+        aria-hidden={showName}
       />
       {showName && (
         <BodyShort className={styles.avatarName} size="small">
@@ -86,7 +87,7 @@ export const AvatarStack = ({
 
   const avatarStack = (
     <HStack gap="space-4" align="center">
-      <ul className={styles.avatarList}>
+      <HStack as="ul" aria-hidden={showNames}>
         {avatars.map((avatar, idx) => {
           return (
             <li key={idx} className={styles.avatarItem}>
@@ -94,7 +95,8 @@ export const AvatarStack = ({
             </li>
           );
         })}
-      </ul>
+      </HStack>
+
       {showNames && (
         <BodyShort className={styles.avatarName} size="small">
           {`${avatars && isValidElement(avatars[0]) && avatars[0]?.props.name}`}
