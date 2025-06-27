@@ -47,6 +47,7 @@ export default function SearchField() {
         htmlSize="20"
         autoComplete="off"
         onClear={() => handleSearch("")}
+        onChange={(v) => v === "" && handleSearch("")}
       />
     </form>
   );
