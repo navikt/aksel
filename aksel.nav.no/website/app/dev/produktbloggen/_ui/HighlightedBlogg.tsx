@@ -5,7 +5,7 @@ import { BodyLong, Heading, Hide, Link, Show } from "@navikt/ds-react";
 import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { getImage } from "@/utils";
-import { Avatar, AvatarStack } from "../../_ui/Avatar";
+import { Avatar, AvatarStack } from "../../_ui/avatar/Avatar";
 import styles from "../_ui/Produktbloggen.module.css";
 import { queryToAvatars } from "./utils";
 
