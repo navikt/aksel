@@ -35,6 +35,38 @@
 
 .navds-table__row--selected {
   background-color: var(--ac-table-row-selected, var(--a-surface-action-subtle));
+  box-shadow:
+    inset 1px 0 0 0 var(--a-border-action),
+    inset -1px 0 0 0 var(--a-border-action);
+}
+
+.navds-table__row--selected:first-of-type {
+  box-shadow:
+    inset 1px 0 0 0 var(--a-border-action),
+    inset -1px 0 0 0 var(--a-border-action),
+    inset 0 1px 0 0 var(--a-border-action);
+}
+
+.navds-table__row--selected :is(.navds-table__header-cell, .navds-table__data-cell) {
+  border-color: var(--a-border-action);
+}
+
+.navds-table__row--selected + .navds-table__expanded-row {
+  box-shadow:
+    inset 1px 0 0 0 var(--a-border-action),
+    inset -1px 0 0 0 var(--a-border-action);
+}
+
+.navds-table__row:has(+ .navds-table__row--selected) :is(.navds-table__header-cell, .navds-table__data-cell) {
+  border-color: var(--a-border-action);
+}
+
+.navds-table__row--selected.navds-table__expandable-row--open :is(.navds-table__header-cell, .navds-table__data-cell) {
+  border-color: transparent;
+}
+
+.navds-table__row--selected + .navds-table__expanded-row .navds-table__expanded-row-collapse {
+  border-color: var(--a-border-action);
 }
 
 .navds-table__body .navds-table__row--shade-on-hover.navds-table__row--selected:hover {
@@ -259,6 +291,10 @@
 
 .navds-table__expanded-row-collapse:not([style*="height: 0px;"]) {
   border-bottom: 1px solid var(--ac-table-row-border, var(--a-border-default));
+}
+
+.navds-table__expanded-row:has(+ .navds-table__row--selected) .navds-table__expanded-row-collapse {
+  border-color: var(--a-border-action);
 }
 
 .navds-table__expanded-row-content {
