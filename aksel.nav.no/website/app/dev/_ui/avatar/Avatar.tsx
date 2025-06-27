@@ -55,10 +55,6 @@ export const Avatar = ({
   );
 };
 
-/**
- * When using `interactive`, the AvatarStack expects only a single avatar.
- * (it will use the first in the array)
- */
 type AvatarStackProps = { children?: ReactNode; showNames?: boolean };
 
 export const AvatarStack = ({
