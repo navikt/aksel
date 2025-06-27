@@ -1,6 +1,7 @@
 import fs from "fs";
 import { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
+import { extractJsx } from "./extract-jsx";
 import { filterCode } from "./filter-code";
 import { getFiles } from "./get-files";
 import { processAndCompressForURI } from "./sandbox-process-base64";
@@ -41,6 +42,7 @@ export async function parseCodeFile(dirPath: string, file: string) {
 
   return {
     innhold: filteredCode,
+    kompaktInnhold: await extractJsx(filteredCode),
     title: args.title ?? fixName(file.replace(".tsx", "")),
     _key: file.split(".")[0],
     navn: file.replace(".tsx", ""),

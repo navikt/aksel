@@ -1848,6 +1848,7 @@ export type Kode_eksempler_fil = {
   filer?: Array<{
     title?: string;
     navn?: string;
+    kompaktInnhold?: string;
     innhold?: string;
     description?: string;
     index?: number;
@@ -4329,6 +4330,7 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
           filer?: Array<{
             title?: string;
             navn?: string;
+            kompaktInnhold?: string;
             innhold?: string;
             description?: string;
             index?: number;
@@ -7031,6 +7033,7 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
           filer?: Array<{
             title?: string;
             navn?: string;
+            kompaktInnhold?: string;
             innhold?: string;
             description?: string;
             index?: number;

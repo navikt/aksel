@@ -46,6 +46,11 @@ export const KodeEksempelDoc = defineType({
           fields: [
             { title: "Title", name: "title", type: "string" },
             { title: "Filnavn", name: "navn", type: "string" },
+            {
+              title: "Kompakt innhold",
+              name: "kompaktInnhold",
+              type: "string",
+            },
             { title: "Innhold", name: "innhold", type: "string" },
             { title: "Beskrivelse", name: "description", type: "text" },
             { title: "Index", name: "index", type: "number" },
