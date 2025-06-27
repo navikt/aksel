@@ -153,6 +153,7 @@ export default async function (props: Props) {
           />
         )}
         <CustomPortableText
+          className={styles.innhold}
           value={content as PortableTextBlock[]}
           data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
         />
