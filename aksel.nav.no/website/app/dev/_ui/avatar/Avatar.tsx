@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Children, ReactNode, isValidElement } from "react";
-import { BodyShort, HStack } from "@navikt/ds-react";
+import { BodyShort, BoxNew, HStack } from "@navikt/ds-react";
 import styles from "./Avatar.module.css";
 
 const MAX_AVATAR_COUNT = 30;
@@ -47,9 +47,9 @@ export const Avatar = ({
         aria-hidden={showName}
       />
       {showName && (
-        <BodyShort className={styles.avatarName} size="small">
-          {name}
-        </BodyShort>
+        <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BodyShort size="small">{name}</BodyShort>
+        </BoxNew>
       )}
     </HStack>
   );
@@ -94,10 +94,16 @@ export const AvatarStack = ({
       </HStack>
 
       {showNames && (
-        <BodyShort className={styles.avatarName} size="small">
-          {`${avatars && isValidElement(avatars[0]) && avatars[0]?.props.name}`}
-          {suffix && <span className={styles.avatarNameSuffix}>{suffix}</span>}
-        </BodyShort>
+        <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BodyShort size="small">
+            {`${
+              avatars && isValidElement(avatars[0]) && avatars[0]?.props.name
+            }`}
+            {suffix && (
+              <span className={styles.avatarNameSuffix}>{suffix}</span>
+            )}
+          </BodyShort>
+        </BoxNew>
       )}
     </HStack>
   );
