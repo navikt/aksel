@@ -76,7 +76,7 @@ async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
         <LinkCard>
           <ChangelogIcon endringstype="sparkles" />
           <LinkCardTitle as="span">
-            <LinkCardAnchor href="/dev/grunnleggende/kode/endringslogg">
+            <LinkCardAnchor href="/dev/grunnleggende/endringslogg">
               Alle endringer
             </LinkCardAnchor>
           </LinkCardTitle>
