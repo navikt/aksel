@@ -57,13 +57,6 @@
   font-size: var(--ax-font-size-small);
 }
 
-.innhold {
-  --ax-text-brand-blue: var(--ax-text-neutral);
-  --ax-text-brand-blue-subtle: var(--ax-text-neutral-subtle);
-
-  color: var(--ax-text-neutral);
-}
-
 .innholdFremhevet {
   --ax-text-brand-blue: var(--aksel-text-brand-pink);
   --ax-text-brand-blue-subtle: var(--aksel-text-brand-pink);

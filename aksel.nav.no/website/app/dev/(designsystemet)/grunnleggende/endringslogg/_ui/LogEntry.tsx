@@ -150,8 +150,9 @@ export default function LogEntry({
                       as={NextLink}
                       href={`./endringslogg/${slug}`}
                       className={
-                        fremhevet ? styles.innholdFremhevet : styles.innhold
+                        fremhevet ? styles.innholdFremhevet : undefined
                       }
+                      data-color="neutral"
                     >
                       {heading}
                     </Link>
@@ -165,7 +166,7 @@ export default function LogEntry({
                   )}
                   <CustomPortableText
                     className={cl(
-                      fremhevet ? styles.innholdFremhevet : styles.innhold,
+                      fremhevet ? styles.innholdFremhevet : undefined,
                       styles.portableTextFirstHeading,
                     )}
                     data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
@@ -187,9 +188,8 @@ export default function LogEntry({
                   <Link
                     as={NextLink}
                     href={`./endringslogg/${slug}`}
-                    className={
-                      fremhevet ? styles.innholdFremhevet : styles.innhold
-                    }
+                    className={fremhevet ? styles.innholdFremhevet : undefined}
+                    data-color="neutral"
                   >
                     {heading}
                   </Link>
@@ -199,10 +199,10 @@ export default function LogEntry({
                 )}
                 <CustomPortableText
                   className={cl(
-                    fremhevet ? styles.innholdFremhevet : styles.innhold,
+                    fremhevet ? styles.innholdFremhevet : undefined,
                     styles.portableTextFirstHeading,
                   )}
-                  data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
+                  data-color={fremhevet ? "aksel-brand-pink" : undefined}
                   value={content as PortableTextBlock[]}
                 />
               </>
