@@ -34,8 +34,8 @@ const Hero = ({
 }) => (
   <Image
     className={styles.herobilde}
-    aria-hidden={herobilde?.dekorativt}
-    alt={herobilde?.alt || ""}
+    aria-hidden={herobilde.dekorativt}
+    alt={herobilde.alt || ""}
     loading="lazy"
     decoding="async"
     src={

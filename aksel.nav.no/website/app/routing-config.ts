@@ -59,7 +59,7 @@ const PAGE_ROUTES: Routes = {
       {
         heading: "Endringslogg",
         slug: `grunnleggende/endringslogg`,
-        tag: "ready" as "ready" | "new" | "beta" | "deprecated",
+        tag: "ready",
         order: "last",
       },
     ],

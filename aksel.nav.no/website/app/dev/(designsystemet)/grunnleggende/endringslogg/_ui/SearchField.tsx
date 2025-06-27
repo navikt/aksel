@@ -12,7 +12,7 @@ export default function SearchField() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = event.target as HTMLFormElement;
+    const form = event.currentTarget;
     const input = form.elements.namedItem(
       "fritekst",
     ) as HTMLInputElement | null;
