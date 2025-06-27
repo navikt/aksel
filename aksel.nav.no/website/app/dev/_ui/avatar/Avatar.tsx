@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Children, ReactNode, isValidElement } from "react";
-import { BodyShort, HStack } from "@navikt/ds-react";
+import { BodyShort, BoxNew, HStack } from "@navikt/ds-react";
 import styles from "./Avatar.module.css";
 
 const MAX_AVATAR_COUNT = 30;
@@ -44,20 +44,17 @@ export const Avatar = ({
         src={imageSrc}
         priority
         loading="eager"
+        aria-hidden={showName}
       />
       {showName && (
-        <BodyShort className={styles.avatarName} size="small">
-          {name}
-        </BodyShort>
+        <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BodyShort size="small">{name}</BodyShort>
+        </BoxNew>
       )}
     </HStack>
   );
 };
 
-/**
- * When using `interactive`, the AvatarStack expects only a single avatar.
- * (it will use the first in the array)
- */
 type AvatarStackProps = { children?: ReactNode; showNames?: boolean };
 
 export const AvatarStack = ({
@@ -86,7 +83,7 @@ export const AvatarStack = ({
 
   const avatarStack = (
     <HStack gap="space-4" align="center">
-      <ul className={styles.avatarList}>
+      <HStack as="ul" aria-hidden={showNames}>
         {avatars.map((avatar, idx) => {
           return (
             <li key={idx} className={styles.avatarItem}>
@@ -94,12 +91,19 @@ export const AvatarStack = ({
             </li>
           );
         })}
-      </ul>
+      </HStack>
+
       {showNames && (
-        <BodyShort className={styles.avatarName} size="small">
-          {`${avatars && isValidElement(avatars[0]) && avatars[0]?.props.name}`}
-          {suffix && <span className={styles.avatarNameSuffix}>{suffix}</span>}
-        </BodyShort>
+        <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BodyShort size="small">
+            {`${
+              avatars && isValidElement(avatars[0]) && avatars[0]?.props.name
+            }`}
+            {suffix && (
+              <span className={styles.avatarNameSuffix}>{suffix}</span>
+            )}
+          </BodyShort>
+        </BoxNew>
       )}
     </HStack>
   );
