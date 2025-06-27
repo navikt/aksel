@@ -21,12 +21,6 @@
   }
 }
 
-.akselLayersCardListItem {
-  background-color: var(--ax-layer-background);
-  padding: var(--ax-space-24);
-  width: 100%;
-}
-
 .akselLayersIllustrativeListItem {
   margin-bottom: var(--ax-space-40);
 

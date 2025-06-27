@@ -196,10 +196,7 @@ function LinkCardLinks() {
     <VStack gap="space-16" width="100%">
       {Object.entries(Links).map(([key, { href, label, icon }]) => (
         <BoxNew key={key} background="brand-blue-moderateA" asChild>
-          <LinkCard
-            className={styles.akselLayersCardListItem}
-            data-color="brand-blue"
-          >
+          <LinkCard>
             <LinkCardIcon>{icon}</LinkCardIcon>
             <LinkCardTitle data-color="neutral">
               <LinkCardAnchor href={href}>{label}</LinkCardAnchor>
