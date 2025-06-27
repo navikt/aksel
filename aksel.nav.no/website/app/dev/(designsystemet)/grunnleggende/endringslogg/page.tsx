@@ -17,8 +17,6 @@ import LogEntryList from "./_ui/LogEntryList";
 import SearchField from "./_ui/SearchField";
 import { bumpHeadingLevels } from "./_ui/utils";
 
-// TODO (stw) fix sidebar
-
 export const metadata: Metadata = {
   title: "Endringslogg",
   description:
