@@ -1,5 +1,6 @@
 import { defineField } from "sanity";
 import { SANITY_API_VERSION } from "@/sanity/config";
+import { showForDevsOnly } from "../../../util";
 
 export const editorField = defineField({
   title: "Bidragsytere",
@@ -46,4 +47,15 @@ export const editorField = defineField({
 
     return [{ _ref: profile._id, _type: "reference" }];
   },
+});
+
+export const writersField = defineField({
+  title: "Redaksjoner",
+  description: "Legg til redaksjoner som har bidratt til artikkelen.",
+  name: "writers",
+  type: "array",
+  of: [{ type: "reference", to: [{ type: "editorial_staff" }] }],
+  group: "settings",
+  // validation: (Rule) => Rule.required(),
+  hidden: showForDevsOnly(),
 });
