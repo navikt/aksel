@@ -61,9 +61,9 @@ function TableOfContents({
                 size="small"
                 data-state={active ? "active" : "inactive"}
                 className={styles.tocNavListItem}
+                id={`toc-${node.id}`}
               >
                 <NextLink
-                  id={`toc-${node.id}`}
                   prefetch={false}
                   href={`#${node.id}`}
                   onClick={() => {
