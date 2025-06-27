@@ -1,4 +1,10 @@
-.promoTag {
+.promoTag:focus-visible {
+  outline: 3px solid var(--ax-border-focus);
+  outline-offset: 3px;
+  border-radius: var(--ax-border-radius-xlarge);
+}
+
+.promoTagContent {
   display: grid;
   grid-template-columns: auto 1fr auto;
   padding-block: var(--ax-space-2);

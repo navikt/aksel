@@ -20,8 +20,13 @@ const PromoTag = ({ label = "Nyhet", text, link }: Props) => {
   }
 
   return (
-    <Link href={link} data-color="aksel-brand-pink" data-animated-arrow-anchor>
-      <Detail as="span" className={styles.promoTag} textColor="default">
+    <Link
+      className={styles.promoTag}
+      href={link}
+      data-color="aksel-brand-pink"
+      data-animated-arrow-anchor
+    >
+      <Detail as="span" className={styles.promoTagContent} textColor="default">
         <Detail as="span" className={styles.promoTagLabel}>
           {label}
         </Detail>
