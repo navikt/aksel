@@ -42,7 +42,7 @@ function TableOfContents({
         Innhold på siden
       </Detail>
       <div className={styles.tocAsideContent}>
-        <TableOfContentsScroll />
+        <TableOfContentsScroll tocLength={toc.length} />
 
         {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
         <ul

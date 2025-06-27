@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useClientLayoutEffect } from "@navikt/ds-react";
 import styles from "./TableOfContents.module.css";
 
-function TableOfContentsScroll() {
+function TableOfContentsScroll({ tocLength }: { tocLength: number }) {
   const [scrollBlock, setScrollBlock] = useState({ start: "0", end: "0" });
   const pathName = usePathname();
 
@@ -39,7 +39,7 @@ function TableOfContentsScroll() {
     return () => {
       ref.removeEventListener("scroll", func);
     };
-  }, [pathName]);
+  }, [pathName, tocLength]);
 
   return (
     <>
