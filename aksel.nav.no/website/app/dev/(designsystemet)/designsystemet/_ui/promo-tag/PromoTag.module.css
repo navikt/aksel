@@ -1,3 +1,4 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
 .promoTag:focus-visible {
   outline: 3px solid var(--ax-border-focus);
   outline-offset: 3px;
@@ -11,13 +12,13 @@
   padding-right: var(--ax-space-8);
   gap: var(--ax-space-6);
   background-color: var(--aksel-bg-brand-pink-moderate);
-  border: 1px solid var(--aksel-brand-pink-400A, #f96c7f42);
+  border: 1px solid var(--aksel-border-brand-pink-subtleA);
   border-radius: var(--ax-border-radius-xlarge);
-  color: var(--ax-text-default, #4e082d);
+  color: var(--ax-text-default);
 
   &:hover {
-    background-color: var(--aksel-brand-pink-300, #fcdaee);
-    border-color: var(--aksel-brand-pink-500, #d33785);
+    background-color: var(--aksel-bg-brand-pink-moderate-hover);
+    border-color: var(--aksel-border-brand-pink);
   }
 }
 
@@ -25,9 +26,9 @@
   display: flex;
   padding: 0 var(--ax-space-8);
   border-radius: var(--ax-border-radius-xlarge);
-  background-color: var(--aksel-brand-pink-600, #d33785);
+  background-color: var(--aksel-bg-brand-pink-strong);
   margin-block: -3px;
   margin-inline-start: -1px;
   align-items: center;
-  color: var(--ax-text-contrast, #fff);
+  color: var(--ax-text-contrast);
 }
