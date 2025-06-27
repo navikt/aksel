@@ -24,7 +24,7 @@ import styles from "./ChangeLogNews.module.css";
 
 type ChangeLogNewsProps = {
   title: string;
-  description?: string;
+  description?: string | null;
 };
 
 async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
