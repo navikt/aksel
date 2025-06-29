@@ -53,8 +53,9 @@
     align-items: center;
     flex-grow: 1;
     width: 100%;
+    position: relative;
 
-    &:last-of-type::after {
+    &::after {
       grid-column: 3 / 4;
       content: "" / "";
       display: block;
