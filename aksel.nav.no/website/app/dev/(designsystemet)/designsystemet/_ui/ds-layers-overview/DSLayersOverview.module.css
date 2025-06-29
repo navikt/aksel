@@ -46,6 +46,10 @@
 }
 
 .akselLayersLink {
+  &:focus-visible {
+    outline: none;
+  }
+
   &:last-of-type {
     display: inline-grid;
     gap: 1rem;
@@ -75,6 +79,14 @@
         border-bottom-width: 3px;
       }
     }
+  }
+}
+
+.akselLayersLinkText {
+  :focus-visible & {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+    border-radius: var(--ax-border-radius-small);
   }
 }
 

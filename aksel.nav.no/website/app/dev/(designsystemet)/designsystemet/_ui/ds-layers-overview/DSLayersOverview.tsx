@@ -110,7 +110,12 @@ function IllustratedLinks() {
             href={Links.monsterMaler.href}
             variant="neutral"
           >
-            <BodyShort as="span" weight="semibold" size="large">
+            <BodyShort
+              className={styles.akselLayersLinkText}
+              as="span"
+              weight="semibold"
+              size="large"
+            >
               {Links.monsterMaler.label}
             </BodyShort>
             <DottedLine />
@@ -130,7 +135,12 @@ function IllustratedLinks() {
               href={Links.komponenter.href}
               variant="neutral"
             >
-              <BodyShort as="span" weight="semibold" size="large">
+              <BodyShort
+                className={styles.akselLayersLinkText}
+                as="span"
+                weight="semibold"
+                size="large"
+              >
                 {Links.komponenter.label}
               </BodyShort>
             </Link>{" "}
@@ -141,7 +151,12 @@ function IllustratedLinks() {
               href={Links.ikoner.href}
               variant="neutral"
             >
-              <BodyShort as="span" weight="semibold" size="large">
+              <BodyShort
+                className={styles.akselLayersLinkText}
+                as="span"
+                weight="semibold"
+                size="large"
+              >
                 {Links.ikoner.label}
               </BodyShort>
               <DottedLine />
@@ -161,7 +176,12 @@ function IllustratedLinks() {
             href={Links.layoutPrimitives.href}
             variant="neutral"
           >
-            <BodyShort as="span" weight="semibold" size="large">
+            <BodyShort
+              className={styles.akselLayersLinkText}
+              as="span"
+              weight="semibold"
+              size="large"
+            >
               {Links.layoutPrimitives.label}
             </BodyShort>
             <DottedLine />
@@ -180,7 +200,12 @@ function IllustratedLinks() {
             href={Links.designTokens.href}
             variant="neutral"
           >
-            <BodyShort as="span" weight="semibold" size="large">
+            <BodyShort
+              className={styles.akselLayersLinkText}
+              as="span"
+              weight="semibold"
+              size="large"
+            >
               {Links.designTokens.label}
             </BodyShort>
             <DottedLine />
