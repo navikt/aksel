@@ -1,6 +1,7 @@
 export * from "./blogg/artikkel";
 export * from "./blogg/landingsside";
 export * from "./forside";
+export * from "./designsystem-forside";
 export * from "./god-praksis/artikkel";
 export * from "./god-praksis/landingsside";
 export * from "./god-praksis/tema";

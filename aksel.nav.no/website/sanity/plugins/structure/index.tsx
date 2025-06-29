@@ -30,6 +30,7 @@ const filtered = [
   "media.tag",
   "editor",
   "aksel_forside",
+  "aksel_ds_forside",
   "redirect",
   "token_kategori",
   "kode_eksempler_fil",

@@ -1,0 +1,12 @@
+.AkselPageTitle {
+  font-size: 2.5rem;
+  line-height: 1.3;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .AkselPageTitle {
+    font-size: 3.5rem;
+    line-height: 4.1875rem;
+  }
+}
