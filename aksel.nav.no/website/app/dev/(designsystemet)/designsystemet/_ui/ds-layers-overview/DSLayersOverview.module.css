@@ -24,7 +24,8 @@
 .akselLayersIllustrativeListItem {
   margin-bottom: var(--ax-space-40);
 
-  &:has(.akselLayersLink:hover) {
+  &:has(.akselLayersLink:hover),
+  &:has(.akselLayersLink:focus-visible) {
     &:nth-of-type(1) {
       --ax-layer-background: var(--ax-bg-brand-blue-moderateA);
     }
@@ -74,9 +75,21 @@
       opacity: var(--ax-layer-background-opacity);
     }
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       .akselLayersDottedLine {
         border-bottom-width: 3px;
+      }
+    }
+  }
+
+  &:not(:last-of-type) {
+    &:hover,
+    &:focus-visible {
+      & + .akselLayersLink {
+        .akselLayersDottedLine {
+          border-bottom-width: 3px;
+        }
       }
     }
   }
