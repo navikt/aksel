@@ -2,8 +2,8 @@ import { Image } from "sanity";
 import { BoxNew, HStack } from "@navikt/ds-react";
 import { GOD_PRAKSIS_TEMA_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
+import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
-import { UmamiLink } from "../../_ui/UmamiLink";
 import { GodPraksisPictogram } from "./pictogram/GodPraksisPictogram";
 
 type GpFrontpageCardProps = {

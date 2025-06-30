@@ -10,7 +10,7 @@ import {
   LinkCardDescription,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
-import { AkselCubeAnimated } from "../../_ui/aksel-cube/AkselCube";
+import { AkselCubeAnimated } from "@/app/_ui/aksel-cube/AkselCube";
 import styles from "../_ui/frontpage.module.css";
 import { useShouldStopAnimation } from "./useShouldStopAnimation";
 
