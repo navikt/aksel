@@ -3,7 +3,9 @@ import "@navikt/ds-css/darkside";
 import {
   Accordion,
   BodyLong,
+  BodyShort,
   HGrid,
+  HStack,
   Heading,
   LinkCard,
   VStack,
@@ -20,7 +22,7 @@ import {
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
 import { Avatar, AvatarStack } from "./Avatar";
-import { HoverCard } from "./HoverCard";
+import { HoverCard, HoverCardGroup } from "./HoverCard";
 
 const meta = {
   title: "Website-modules/AvatarStack",
@@ -94,6 +96,59 @@ export const LoneAvatarInteractive: StoryFn = () => {
           name="Team aksel"
         ></Avatar>
       </HoverCard>
+      <HoverCardGroup>
+        <BodyShort>inside a HoverCardGroup</BodyShort>
+        <HStack gap="space-16">
+          <HoverCard
+            popoverContent={
+              <>
+                <Heading level="2" size="xlarge">
+                  Team Aksel
+                </Heading>
+                <BodyLong>ReactNode content</BodyLong>
+                <Accordion>
+                  <AccordionItem>
+                    <AccordionHeader>
+                      Her kan man plassere hva som helst
+                    </AccordionHeader>
+                    <AccordionContent>Content 1</AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </>
+            }
+          >
+            <Avatar
+              showName
+              imageSrc="/avatars/aksel.svg"
+              name="Team aksel"
+            ></Avatar>
+          </HoverCard>
+          <HoverCard
+            popoverContent={
+              <>
+                <Heading level="2" size="xlarge">
+                  Team Aksel
+                </Heading>
+                <BodyLong>ReactNode content</BodyLong>
+                <Accordion>
+                  <AccordionItem>
+                    <AccordionHeader>
+                      Her kan man plassere hva som helst
+                    </AccordionHeader>
+                    <AccordionContent>Content 1</AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </>
+            }
+          >
+            <Avatar
+              showName
+              imageSrc="/avatars/aksel.svg"
+              name="Team aksel"
+            ></Avatar>
+          </HoverCard>
+        </HStack>
+      </HoverCardGroup>
     </VStack>
   );
 };
