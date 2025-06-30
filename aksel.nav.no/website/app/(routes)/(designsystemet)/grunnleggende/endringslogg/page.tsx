@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   description:
     "Endringsloggen til Aksel gir deg en oversikt over oppdatert kode, design og dokumentasjon.",
   openGraph: {
-    images: "/images/og/endringslogg/OG-endringslogg.png",
+    images: "https://aksel.nav.no/images/og/endringslogg/OG-Endringslogg.png",
   },
 };
 
