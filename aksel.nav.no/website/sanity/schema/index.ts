@@ -8,6 +8,7 @@ export const schema: SchemaPluginOptions = {
     document.Editors,
     document.EditorialStaff,
     document.Forside,
+    document.DesignsystemForside,
     document.Redirect,
     document.Skrivehjelp,
     document.Publiseringsflyt,
