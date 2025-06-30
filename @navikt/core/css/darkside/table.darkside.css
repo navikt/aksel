@@ -36,13 +36,42 @@
 
 .aksel-table__row {
   display: table-row;
+
+  &:has(+ .aksel-table__row--selected) :is(.aksel-table__header-cell, .aksel-table__data-cell) {
+    border-color: var(--ax-border-default);
+  }
 }
 
 .aksel-table__row--selected {
   background-color: var(--ax-bg-softA);
+  box-shadow:
+    inset 1px 0 0 0 var(--ax-border-default),
+    inset -1px 0 0 0 var(--ax-border-default);
+
+  &:first-of-type {
+    box-shadow:
+      inset 1px 0 0 0 var(--ax-border-default),
+      inset -1px 0 0 0 var(--ax-border-default),
+      inset 0 1px 0 0 var(--ax-border-default);
+  }
 
   & + .aksel-table__expanded-row {
     background-color: var(--ax-bg-softA);
+    box-shadow:
+      inset 1px 0 0 0 var(--ax-border-default),
+      inset -1px 0 0 0 var(--ax-border-default);
+
+    & .aksel-table__expanded-row-collapse {
+      border-color: var(--ax-border-default);
+    }
+  }
+
+  & :is(.aksel-table__header-cell, .aksel-table__data-cell) {
+    border-color: var(--ax-border-default);
+  }
+
+  &.aksel-table__expandable-row--open :is(.aksel-table__header-cell, .aksel-table__data-cell) {
+    border-color: transparent;
   }
 }
 
@@ -256,6 +285,14 @@
 .aksel-table__expanded-row-collapse:not([style*="height: 0px;"]),
 .aksel-table__expanded-row-collapse[style*="transition:"] {
   border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+.aksel-table__expanded-row {
+  &:has(+ .aksel-table__row--selected) {
+    & .aksel-table__expanded-row-collapse {
+      border-color: var(--ax-border-default);
+    }
+  }
 }
 
 .aksel-table__expanded-row-content {
