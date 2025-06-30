@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import { BodyShort, BoxNew, Search, VStack } from "@navikt/ds-react";
+import React, { useId, useMemo, useState } from "react";
+import { BodyShort, Detail, Search, VStack } from "@navikt/ds-react";
 import {
   DesignsystemSidebarSectionT,
   SidebarGroupedPagesT,
   SidebarPageT,
 } from "@/types";
-import { DesignsystemSidebarGroup } from "./Sidebar.group";
+import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
+import { DesignsystemSidebarSubNav } from "./Sidebar.subnav";
 import { type DesignsystemSidebarDataT } from "./Sidebar.util";
 
 type SidebarNavProps = {
@@ -20,6 +21,9 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
   const { layout = "sidebar", sidebarData } = props;
 
   const [filterText, setFilterText] = useState<string>("");
+  const id = useId();
+
+  const LabelComponent = layout === "sidebar" ? Detail : BodyShort;
 
   const filteredSidebarData = useMemo(() => {
     if (!filterText) {
@@ -82,7 +86,7 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
         autoComplete="off"
       />
       <nav aria-label="Sidemeny" data-layout={layout}>
-        <VStack gap="space-12" asChild>
+        <VStack gap="space-24" asChild>
           <BodyShort
             as="ul"
             className={styles.navListUl}
@@ -91,22 +95,43 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
           >
             {filteredSidebarData.map((section, index) => {
               return (
-                <React.Fragment key={section.label}>
-                  <DesignsystemSidebarGroup
-                    key={section.label}
-                    label={section.label}
-                    links={section.links}
-                    layout={layout}
-                  />
-                  {index !== filteredSidebarData.length - 1 && (
-                    <BoxNew
-                      as="li"
-                      aria-hidden
-                      borderWidth="1 0 0 0"
-                      borderColor="neutral-subtle"
-                    />
-                  )}
-                </React.Fragment>
+                <li data-layout={layout} key={section.label}>
+                  <LabelComponent
+                    as="div"
+                    className={styles.navListGroupLabel}
+                    id={`${id}-${index}`}
+                    size={layout === "sidebar" ? "medium" : "small"}
+                  >
+                    {section.label}
+                  </LabelComponent>
+                  <VStack
+                    gap="space-4"
+                    as="ul"
+                    aria-labelledby={`${id}-${index}`}
+                  >
+                    {section.links.map((link) => {
+                      if (!("pages" in link)) {
+                        return (
+                          <DesignsystemSidebarItem
+                            key={link.slug}
+                            page={link}
+                            layout={layout}
+                          />
+                        );
+                      }
+
+                      return (
+                        <DesignsystemSidebarSubNav
+                          key={link.title}
+                          pages={link.pages}
+                          title={link.title}
+                          value={link.value}
+                          layout={layout}
+                        />
+                      );
+                    })}
+                  </VStack>
+                </li>
               );
             })}
           </BodyShort>
