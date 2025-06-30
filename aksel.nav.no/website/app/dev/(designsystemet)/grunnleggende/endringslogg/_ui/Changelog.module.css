@@ -16,7 +16,7 @@
 
 .timeline {
   width: 0;
-  border: 0.5px dashed var(--ax-border-neutral-subtle);
+  border: 1px dashed var(--ax-border-neutral-subtle);
 }
 
 .bullet {
