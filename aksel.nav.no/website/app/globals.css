@@ -124,15 +124,15 @@ address {
   --aksel-brand-logo: var(--ax-neutral-1000);
 
   /* Teal */
-  --aksel-brand-teal-100: #09201e;
-  --aksel-brand-teal-200: #0d2725;
-  --aksel-brand-teal-300: #112f2d;
-  --aksel-brand-teal-400: #173;
-  --aksel-brand-teal-500: #2f7771;
-  --aksel-brand-teal-600: #2f7771;
-  --aksel-brand-teal-700: #38a194;
-  --aksel-brand-teal-800: #41ab9d;
-  --aksel-brand-teal-900: #58bbac;
+  --aksel-brand-teal-100: #03211f;
+  --aksel-brand-teal-200: #042826;
+  --aksel-brand-teal-300: #06302d;
+  --aksel-brand-teal-400: #093c39;
+  --aksel-brand-teal-500: #067972;
+  --aksel-brand-teal-600: #008d82;
+  --aksel-brand-teal-700: #00a394;
+  --aksel-brand-teal-800: #00ae9d;
+  --aksel-brand-teal-900: #2fbfad;
   --aksel-brand-teal-1000: #c3f2e9;
   --aksel-brand-teal-100A: hsl(152deg 100% 10% / 0.36);
   --aksel-brand-teal-200A: hsl(146deg 98% 49% / 0.08);
