@@ -148,12 +148,12 @@ function CodeBlockEditor(props: {
         >
           {expanded.current ? (
             <>
-              <span>Skjul kode</span>
+              <span>Vis mindre kode</span>
               <ChevronDownUpIcon aria-hidden="true" />
             </>
           ) : (
             <>
-              <span>Vis kode</span>
+              <span>Vis all kode</span>
               <ChevronUpDownIcon aria-hidden="true" />
             </>
           )}
