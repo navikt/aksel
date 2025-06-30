@@ -19,8 +19,6 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
 
   const imageUrl = urlForImage(props?.value as Image)
     ?.auto("format")
-    // TODO: (stw) Remove before production
-    .dataset("development")
     .url();
 
   if (!imageUrl) {
