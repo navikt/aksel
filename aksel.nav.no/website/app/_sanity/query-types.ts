@@ -2440,6 +2440,13 @@ export type Aksel_blogg = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "editor";
   }>;
+  writers?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "editorial_staff";
+  }>;
   kategori?: "nytt-fra-teamene" | "da-vi-gjorde-dette" | "pa-reise";
   slug?: Slug;
   ingress?: string;
@@ -2618,6 +2625,74 @@ export type Redirect = {
   redirects?: number;
 };
 
+export type Aksel_ds_forside = {
+  _id: string;
+  _type: "aksel_ds_forside";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  ds_forside_title?: string;
+  ds_forside_ingress?: string;
+  ds_forside_promo_tag?: {
+    label?: string;
+    text?: string;
+    link?: string;
+  };
+  ds_getting_started?: Array<{
+    title?: string;
+    description?: string;
+    icon?: "Palette" | "Code";
+    link?: string;
+    _type: "link_card";
+    _key: string;
+  }>;
+  ds_layers_overview?: {
+    title?: string;
+    ingress?: string;
+  };
+  ds_changelog?: {
+    title?: string;
+    ingress?: string;
+  };
+  ds_aksel_in_numbers?: {
+    title?: string;
+    ingress?: string;
+    statistics?: Array<{
+      title?: string;
+      number?: number;
+      unit?: string;
+      _type: "statistic";
+      _key: string;
+    }>;
+  };
+  ds_support?: Array<{
+    title?: string;
+    description?: string;
+    link?: {
+      url?: string;
+      text?: string;
+      icon?: "Github" | "Slack";
+    };
+    _type: "support_card";
+    _key: string;
+  }>;
+  seo?: {
+    meta?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+};
+
 export type Aksel_forside = {
   _id: string;
   _type: "aksel_forside";
@@ -2745,6 +2820,17 @@ export type SanityImageMetadata = {
   blurHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
+};
+
+export type Editorial_staff = {
+  _id: string;
+  _type: "editorial_staff";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  avatar_id?: Slug;
 };
 
 export type Editor = {
@@ -2888,12 +2974,14 @@ export type AllSanitySchemaTypes =
   | GpInnholdstype
   | Intro_komponent
   | Redirect
+  | Aksel_ds_forside
   | Aksel_forside
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
+  | Editorial_staff
   | Editor
   | Color
   | RgbaColor
@@ -2906,6 +2994,64 @@ export type AllSanitySchemaTypes =
   | TableRow;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../app/_sanity/queries.ts
+// Variable: DS_FRONT_PAGE_QUERY
+// Query: *[_type == "aksel_ds_forside"][0] {    ds_forside_title,    ds_forside_ingress,    ds_forside_promo_tag { label, text, link },    ds_getting_started[]{ description, icon, link, title },    ds_layers_overview,    ds_changelog { title, ingress },    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},    ds_support[]{description, link, title},    seo { image, meta }  }
+export type DS_FRONT_PAGE_QUERYResult = {
+  ds_forside_title: string | null;
+  ds_forside_ingress: string | null;
+  ds_forside_promo_tag: {
+    label: string | null;
+    text: string | null;
+    link: string | null;
+  } | null;
+  ds_getting_started: Array<{
+    description: string | null;
+    icon: "Code" | "Palette" | null;
+    link: string | null;
+    title: string | null;
+  }> | null;
+  ds_layers_overview: {
+    title?: string;
+    ingress?: string;
+  } | null;
+  ds_changelog: {
+    title: string | null;
+    ingress: string | null;
+  } | null;
+  ds_aksel_in_numbers: {
+    ingress: string | null;
+    statistics: Array<{
+      number: number | null;
+      title: string | null;
+      unit: string | null;
+    }> | null;
+    title: string | null;
+  } | null;
+  ds_support: Array<{
+    description: string | null;
+    link: {
+      url?: string;
+      text?: string;
+      icon?: "Github" | "Slack";
+    } | null;
+    title: string | null;
+  }> | null;
+  seo: {
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    meta: string | null;
+  } | null;
+} | null;
 // Variable: DESIGNSYSTEM_SIDEBAR_QUERY
 // Query: *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {  _type,  heading,  "slug": slug.current,  kategori,  "tag": status.tag,  "sidebarindex": sidebarindex,}
 export type DESIGNSYSTEM_SIDEBAR_QUERYResult = Array<
@@ -7281,6 +7427,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
   contributors: Array<{
     title: string | null;
   }> | null;
+  writers?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "editorial_staff";
+  }>;
   kategori?: "da-vi-gjorde-dette" | "nytt-fra-teamene" | "pa-reise";
   slug: string | null;
   ingress?: string;
@@ -8616,6 +8769,14 @@ export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult =
       } | null;
     }
   | null;
+// Variable: N_LATEST_CHANGE_LOGS_QUERY
+// Query: *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]
+export type N_LATEST_CHANGE_LOGS_QUERYResult = Array<{
+  heading: string | null;
+  slug: Slug | null;
+  endringsdato: string | null;
+  endringstype: "design" | "dokumentasjon" | "kode" | null;
+}>;
 // Variable: GOD_PRAKSIS_ALL_TEMA_QUERY
 // Query: *[_type == "gp.tema"] | order(lower(title)){  title,  _updatedAt,  description,  pictogram,  "slug": slug.current,  "articles": *[_type=="aksel_artikkel"    && (^._id in undertema[]->tema._ref)] {      heading,      "slug": slug.current,      "undertema": undertema[]->{title, "temaTitle": tema->title},      "innholdstype": innholdstype->title,      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month    } | order(coalesce(views, -1) desc)[0...4]{      heading,      slug,      undertema,      innholdstype    },}
 export type GOD_PRAKSIS_ALL_TEMA_QUERYResult = Array<{
@@ -10043,6 +10204,13 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         contributors: Array<{
           title: string | null;
         }> | null;
+        writers?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "editorial_staff";
+        }>;
         kategori?: "da-vi-gjorde-dette" | "nytt-fra-teamene" | "pa-reise";
         slug: string | null;
         ingress?: string;
@@ -12783,6 +12951,7 @@ export type SITEMAP_ARTICLES_BY_TYPE_QUERYResult = Array<
 
 declare module "@sanity/client" {
   interface SanityQueries {
+    '*[_type == "aksel_ds_forside"][0] {\n    ds_forside_title,\n    ds_forside_ingress,\n    ds_forside_promo_tag { label, text, link },\n    ds_getting_started[]{ description, icon, link, title },\n    ds_layers_overview,\n    ds_changelog { title, ingress },\n    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},\n    ds_support[]{description, link, title},\n    seo { image, meta }\n  }': DS_FRONT_PAGE_QUERYResult;
     '*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {\n  _type,\n  heading,\n  "slug": slug.current,\n  kategori,\n  "tag": status.tag,\n  "sidebarindex": sidebarindex,\n}': DESIGNSYSTEM_SIDEBAR_QUERYResult;
     '*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {\n  _type,\n  overview_pages\n  }': DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult;
     '\n  *[_type == "blogg_landingsside"][0]{\n    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){\n      seo,\n      heading,\n      ingress,\n      publishedAt,\n      _createdAt,\n      _id,\n      "slug": slug.current,\n      contributors[]->{title}\n    }\n  }': BLOGG_LANDINGSSIDE_BLOGS_QUERYResult;
@@ -12803,6 +12972,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "ds_endringslogg_artikkel"]{\n    heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n  }': ENDRINGSLOGG_QUERYResult;
     '\n  *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{\n    "primary": {\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n    },\n    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n    },\n    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n    }\n  }\n': ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult;
     "*[slug.current == $slug][0]{\n    heading,\n    endringsdato,\n    endringstype,\n    herobilde\n  }": ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult;
+    '\n  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]': N_LATEST_CHANGE_LOGS_QUERYResult;
     '*[_type == "gp.tema"] | order(lower(title)){\n  title,\n  _updatedAt,\n  description,\n  pictogram,\n  "slug": slug.current,\n  "articles": *[_type=="aksel_artikkel"\n    && (^._id in undertema[]->tema._ref)] {\n      heading,\n      "slug": slug.current,\n      "undertema": undertema[]->{title, "temaTitle": tema->title},\n      "innholdstype": innholdstype->title,\n      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month\n    } | order(coalesce(views, -1) desc)[0...4]{\n      heading,\n      slug,\n      undertema,\n      innholdstype\n    },\n}': GOD_PRAKSIS_ALL_TEMA_QUERYResult;
     '*[_type == "godpraksis_landingsside"][0].seo': GOD_PRAKSIS_LANDING_PAGE_SEO_QUERYResult;
     '*[_type == "gp.tema" && slug.current == $slug][0]{\n    ...,\n    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{\n      title,\n      description\n    },\n  }': GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult;

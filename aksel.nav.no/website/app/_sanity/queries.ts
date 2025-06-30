@@ -3,6 +3,18 @@ import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
 
+const DS_FRONT_PAGE_QUERY = defineQuery(`*[_type == "aksel_ds_forside"][0] {
+    ds_forside_title,
+    ds_forside_ingress,
+    ds_forside_promo_tag { label, text, link },
+    ds_getting_started[]{ description, icon, link, title },
+    ds_layers_overview,
+    ds_changelog { title, ingress },
+    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},
+    ds_support[]{description, link, title},
+    seo { image, meta }
+  }`);
+
 const DESIGNSYSTEM_SIDEBAR_QUERY =
   defineQuery(`*[_type in [${DESIGNSYSTEM_TYPES}] && defined(kategori)] {
   _type,
@@ -190,6 +202,9 @@ const ENDRINGSLOGG_METADATA_BY_SLUG_QUERY =
     endringstype,
     herobilde
   }`);
+
+const N_LATEST_CHANGE_LOGS_QUERY = defineQuery(`
+  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]`);
 
 /* ------------------------------- God praksis ------------------------------ */
 const GOD_PRAKSIS_ALL_TEMA_QUERY =
@@ -391,6 +406,7 @@ export {
   BLOGG_BY_SLUG_QUERY,
   BLOGG_LANDINGSSIDE_BLOGS_QUERY,
   BLOGG_LANDINGSSIDE_PAGE_QUERY,
+  DS_FRONT_PAGE_QUERY,
   DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
   DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
@@ -403,6 +419,7 @@ export {
   ENDRINGSLOGG_QUERY,
   ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
+  N_LATEST_CHANGE_LOGS_QUERY,
   GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,

@@ -29,6 +29,12 @@ export function adminStructure(S: StructureBuilder) {
             .icon(ImageIcon)
             .id(`aksel_forside_dokument`),
 
+          S.documentListItem()
+            .title(`Forside Designsystemet`)
+            .schemaType(`aksel_ds_forside`)
+            .icon(ImageIcon)
+            .id(`aksel_ds_forside_dokument`),
+
           S.listItem()
             .title("Standalone-sider")
             .child(
