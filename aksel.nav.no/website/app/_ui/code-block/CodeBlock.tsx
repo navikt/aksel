@@ -111,7 +111,6 @@ function CodeBlockEditor(props: {
       /* Scroll to the top of the code block when collapsed */
       queueMicrotask(() => {
         wrapperRef.current?.scrollIntoView({
-          behavior: "smooth",
           block: "center",
         });
       });
