@@ -1,4 +1,11 @@
 .trigger {
+  border-radius: var(--ax-radius-4);
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+
   &:hover {
     background-color: transparent;
     text-decoration: underline;
