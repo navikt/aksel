@@ -57,7 +57,7 @@ export default function FilterGroup({
                 } else {
                   startTransition(() => expect(option));
                 }
-                push(href, {scroll: false});
+                push(href, { scroll: false });
               }}
             >
               {capitalize(option.toString())}
