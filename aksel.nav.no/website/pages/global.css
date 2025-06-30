@@ -2,5 +2,10 @@
 
 @import "tailwindcss/base" layer(twBase);
 @import "@navikt/ds-css" layer(dsComponents);
+@import "@navikt/ds-css/darkside" layer(dsComponents);
 @import "tailwindcss/components" layer(twComponents);
 @import "tailwindcss/utilities" layer(twUtilities);
+
+body {
+  background-color: var(--ax-bg-default);
+}
