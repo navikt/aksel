@@ -45,7 +45,7 @@ export default async function Page({ searchParams }: PageProps) {
     fritekst: paramTextFilter = "",
   } = await searchParams;
   const yearFilter = years.includes(paramYear.toString())
-    ? paramYear
+    ? paramYear.toString()
     : paramYear === "alle"
       ? null
       : currentYear.toString();
@@ -135,7 +135,7 @@ export default async function Page({ searchParams }: PageProps) {
           <SearchField />
           <FilterChips
             years={years}
-            selectedYear={yearFilter?.toString() || null}
+            selectedYear={yearFilter}
             categories={categories}
             selectedCategory={categoryFilter}
           />
