@@ -22,6 +22,10 @@
     margin-block-start: var(--ax-space-24);
   }
 
+  &[data-level="5"] {
+    margin-block-start: var(--ax-space-20);
+  }
+
   &:focus {
     outline: none;
   }
