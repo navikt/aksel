@@ -1,8 +1,10 @@
 "use client";
 
 import {
+  FloatingDelayGroup,
   safePolygon,
   useClick,
+  useDelayGroup,
   useFloating,
   useHover,
   useInteractions,
@@ -26,10 +28,12 @@ export const HoverCard = ({
 
   const click = useClick(context);
 
+  const { delay } = useDelayGroup(context);
+
   const hover = useHover(context, {
     handleClose: safePolygon(),
     restMs: 500,
-    delay: { close: 500 },
+    delay,
     move: false,
   });
 
@@ -59,5 +63,13 @@ export const HoverCard = ({
         </div>
       )}
     </>
+  );
+};
+
+export const HoverCardGroup = ({ children }: { children: ReactNode }) => {
+  return (
+    <FloatingDelayGroup delay={{ open: 700, close: 500 }}>
+      {children}
+    </FloatingDelayGroup>
   );
 };
