@@ -146,7 +146,7 @@ export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
 
   if (previews.includes(doc._type)) {
     const slug = (doc?.slug as any)?.current;
-    const previewUrl = `/dev/${slug}`;
+    const previewUrl = `/${slug}`;
     if (!slug) {
       return "";
     }
@@ -154,7 +154,7 @@ export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
   }
   if (landingsider.find((x) => x.name === doc._type)) {
     const slug = landingsider.find((x) => x.name === doc._type)?.url;
-    const previewUrl = `/dev/${slug}`;
+    const previewUrl = `/${slug}`;
     if (!slug) {
       return "";
     }
@@ -163,7 +163,7 @@ export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
 
   if ("gp.tema" === doc._type) {
     const slug = (doc?.slug as any)?.current;
-    const previewUrl = `/dev/god-praksis/${slug}`;
+    const previewUrl = `/god-praksis/${slug}`;
     if (!slug) {
       return "";
     }
@@ -181,7 +181,6 @@ export const defaultDocumentNode = (S, { schemaType }) => {
       S.view
         .component(Iframe)
         .options({
-          /* url: resolveProductionUrl, */
           url: {
             origin: "same-origin",
             preview: resolveProductionUrlAppdir,

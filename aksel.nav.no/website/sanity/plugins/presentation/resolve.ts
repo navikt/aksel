@@ -7,6 +7,10 @@ import {
 export const resolve: PresentationPluginOptions["resolve"] = {
   mainDocuments: defineDocuments([
     {
+      route: "/",
+      filter: `_id == "aksel_forside_dokument"`,
+    },
+    {
       route: "/komponenter/:category/:slug",
       resolve(ctx) {
         const { params } = ctx;
