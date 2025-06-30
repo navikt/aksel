@@ -15,7 +15,6 @@ async function extractJsx(
 
     let jsxCode = null;
     let returnCount = 0;
-    let hasMultipleReturns = false;
 
     traverse(ast, {
       VariableDeclarator(path) {
@@ -72,15 +71,12 @@ async function extractJsx(
             },
           });
 
-          if (returnCount > 1) {
-            hasMultipleReturns = true;
-          }
           path.stop();
         }
       },
     });
 
-    if (hasMultipleReturns) {
+    if (returnCount > 1) {
       return null;
     }
 
