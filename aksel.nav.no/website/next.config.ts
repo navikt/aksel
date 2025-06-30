@@ -134,11 +134,6 @@ const nextConfig: NextConfig = {
         destination: "/designsystemet",
         permanent: false,
       },
-      {
-        source: "/monster-maler",
-        destination: "/designsystemet",
-        permanent: false,
-      },
     ];
   },
 
