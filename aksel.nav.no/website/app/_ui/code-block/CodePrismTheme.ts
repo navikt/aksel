@@ -4,7 +4,6 @@ import {
   TextAccentSubtle,
   TextDangerSubtle,
   TextInfo,
-  TextInfoSubtle,
   TextNeutral,
   TextNeutralSubtle,
   TextWarning,
@@ -63,7 +62,11 @@ const AkselPrismTheme: PrismTheme = {
     { types: ["char"], style: { color: TextDangerSubtle } },
     { types: ["script"], style: { color: TextAccent } },
     { types: ["property-access"], style: { color: TextNeutral } },
-    { types: ["maybe-class-name"], style: { color: TextInfoSubtle } },
+    { types: ["maybe-class-name"], style: { color: TextAccent } },
+    {
+      types: ["imports", "maybe-class-name"],
+      style: { color: TextNeutral },
+    },
   ],
 };
 
