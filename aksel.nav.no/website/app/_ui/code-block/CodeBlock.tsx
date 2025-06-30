@@ -158,7 +158,7 @@ function CodeBlockEditor(props: {
         >
           {expanded.current ? (
             <>
-              <span>Skjul ekstra kode</span>
+              <span>Vis mindre kode</span>
               <ChevronDownUpIcon aria-hidden="true" />
             </>
           ) : (
