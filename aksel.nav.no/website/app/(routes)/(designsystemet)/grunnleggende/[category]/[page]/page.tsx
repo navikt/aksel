@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import type { Image } from "sanity";
+import { getStaticParamsSlugs } from "@/app/(routes)/(designsystemet)/slug";
 import { sanityFetch } from "@/app/_sanity/live";
 import { METADATA_BY_SLUG_QUERY } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { getStaticParamsSlugs } from "@/app/dev/(designsystemet)/slug";
 import { GrunnleggendePage } from "../_ui/GrunnleggendePage";
 
 type Props = {

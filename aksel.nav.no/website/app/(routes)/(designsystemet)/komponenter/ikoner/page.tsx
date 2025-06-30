@@ -1,7 +1,7 @@
 import { Metadata } from "next/types";
 import { z } from "zod";
 import meta from "@navikt/aksel-icons/metadata";
-import { IconPage } from "@/app/dev/(designsystemet)/_ui/icon-page/IconPage";
+import { IconPage } from "@/app/(routes)/(designsystemet)/_ui/icon-page/IconPage";
 
 export const dynamic = "force-dynamic";
 

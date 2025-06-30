@@ -1,8 +1,8 @@
 "use client";
 
 import { Box } from "@navikt/ds-react";
-import { GodPraksisHeroButton } from "@/app/dev/(god-praksis)/_ui/hero/Hero.button";
-import { useGodPraksisHeroContext } from "@/app/dev/(god-praksis)/_ui/hero/Hero.provider";
+import { GodPraksisHeroButton } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero.button";
+import { useGodPraksisHeroContext } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero.provider";
 import styles from "./Hero.module.css";
 
 function GodPraksisHeroDialog({ children }: { children: React.ReactNode }) {

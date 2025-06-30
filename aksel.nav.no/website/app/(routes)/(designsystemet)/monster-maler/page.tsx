@@ -1,15 +1,15 @@
 import { Metadata } from "next/types";
 import { Image } from "sanity";
 import { BodyLong, Box, HGrid, Heading } from "@navikt/ds-react";
+import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
+import { DesignsystemetPageLayout } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
+import { DesignsystemetOverviewCard } from "@/app/(routes)/(designsystemet)/_ui/overview/DesignsystemetOverview";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY,
   DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { DesignsystemetEyebrow } from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
-import { DesignsystemetPageLayout } from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
-import { DesignsystemetOverviewCard } from "@/app/dev/(designsystemet)/_ui/overview/DesignsystemetOverview";
 import { templatesKategorier } from "@/sanity/config";
 
 export async function generateMetadata(): Promise<Metadata> {

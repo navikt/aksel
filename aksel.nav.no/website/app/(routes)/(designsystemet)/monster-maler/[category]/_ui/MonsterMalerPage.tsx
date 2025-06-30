@@ -1,6 +1,10 @@
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import { Heading } from "@navikt/ds-react";
+import {
+  DesignsystemetPageHeader,
+  DesignsystemetPageLayout,
+} from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   MONSTER_MALER_BY_SLUG_QUERY,
@@ -13,10 +17,6 @@ import {
   WebsiteTable,
   WebsiteTableRow,
 } from "@/app/_ui/website-table/WebsiteTable";
-import {
-  DesignsystemetPageHeader,
-  DesignsystemetPageLayout,
-} from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
 
 async function MonsterMalerPage({ slug }: { slug: string }) {
   const [{ data: pageData }, { data: toc = [] }] = await Promise.all([

@@ -14,9 +14,9 @@ import {
   Link,
   VStack,
 } from "@navikt/ds-react";
+import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { DesignsystemetEyebrow } from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { FigmaIcon } from "@/assets/Icons";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
 import { IconPageButton } from "./IconPage.button";

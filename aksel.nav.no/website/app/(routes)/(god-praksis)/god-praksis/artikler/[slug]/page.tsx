@@ -15,6 +15,7 @@ import {
   Link,
   VStack,
 } from "@navikt/ds-react";
+import { GodPraksisFeedback } from "@/app/(routes)/(god-praksis)/_ui/feedback/GodPraksisFeedback";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -27,7 +28,6 @@ import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
-import { GodPraksisFeedback } from "@/app/dev/(god-praksis)/_ui/feedback/GodPraksisFeedback";
 import { abbrName, dateStr } from "@/utils";
 import styles from "./page.module.css";
 

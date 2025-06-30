@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronDownUpIcon, ChevronUpDownIcon } from "@navikt/aksel-icons";
-import { useGodPraksisHeroContext } from "@/app/dev/(god-praksis)/_ui/hero/Hero.provider";
+import { useGodPraksisHeroContext } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero.provider";
 import styles from "./Hero.module.css";
 
 function GodPraksisHeroButton({ inDialog }: { inDialog?: boolean }) {

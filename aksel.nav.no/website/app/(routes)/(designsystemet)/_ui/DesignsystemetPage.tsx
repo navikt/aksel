@@ -1,6 +1,7 @@
 import { PortableTextBlock } from "next-sanity";
 import { Image } from "sanity";
 import { BodyShort, Box, HStack, Heading, Tag } from "@navikt/ds-react";
+import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import {
   GRUNNLEGGENDE_BY_SLUG_QUERYResult,
   KOMPONENT_BY_SLUG_QUERYResult,
@@ -9,7 +10,6 @@ import {
 import { urlForImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
-import { DesignsystemetEyebrow } from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { dateStr } from "@/utils";
 import styles from "./Designsystemet.module.css";
 import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";

@@ -6,6 +6,8 @@ import {
   LinkCardImage,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
+import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
+import { DesignsystemetPageLayout } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
 import {
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult,
   DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult,
@@ -14,8 +16,6 @@ import { urlForImage } from "@/app/_sanity/utils";
 import { ImageAsThemedSvg } from "@/app/_ui/image-as-svg/ImageAsSvg";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
-import { DesignsystemetEyebrow } from "@/app/dev/(designsystemet)/_ui/Designsystemet.eyebrow";
-import { DesignsystemetPageLayout } from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
 import styles from "./DesignsystemetOverview.module.css";
 
 type DesignsystemetOverviewPageProps = {

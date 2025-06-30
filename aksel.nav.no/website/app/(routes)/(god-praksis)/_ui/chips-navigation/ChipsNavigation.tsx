@@ -1,6 +1,6 @@
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import { BodyShort, HGrid, HStack, Heading } from "@navikt/ds-react";
-import { GodPrakisChipsNavigationButton } from "@/app/dev/(god-praksis)/_ui/chips-navigation/ChipsNavigation.button";
+import { GodPrakisChipsNavigationButton } from "@/app/(routes)/(god-praksis)/_ui/chips-navigation/ChipsNavigation.button";
 import styles from "./ChipsNavigation.module.css";
 
 type GpChipNavigationProps = {

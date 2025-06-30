@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { stegaClean } from "next-sanity";
 import { notFound } from "next/navigation";
 import type { Image } from "sanity";
+import { DesignsystemetOverviewPage } from "@/app/(routes)/(designsystemet)/_ui/overview/DesignsystemetOverview";
+import { getStaticParamsSlugs } from "@/app/(routes)/(designsystemet)/slug";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
@@ -9,8 +11,6 @@ import {
   METADATA_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { DesignsystemetOverviewPage } from "@/app/dev/(designsystemet)/_ui/overview/DesignsystemetOverview";
-import { getStaticParamsSlugs } from "@/app/dev/(designsystemet)/slug";
 import { komponentKategorier, sanityCategoryLookup } from "@/sanity/config";
 import { KomponenterPage } from "./_ui/KomponenterPage";
 

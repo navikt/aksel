@@ -7,14 +7,14 @@ import {
   LinkCardIcon,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
+import { GodPraksisHeroButton } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero.button";
+import { GodPraksisHeroDialog } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero.dialog";
+import { GodPraksisHeroProvider } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero.provider";
+import { GodPraksisPictogram } from "@/app/(routes)/(root)/_ui/pictogram/GodPraksisPictogram";
 import { sanityFetch } from "@/app/_sanity/live";
 import { GOD_PRAKSIS_ALL_TEMA_QUERY } from "@/app/_sanity/queries";
 import { GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
-import { GodPraksisHeroButton } from "@/app/dev/(god-praksis)/_ui/hero/Hero.button";
-import { GodPraksisHeroDialog } from "@/app/dev/(god-praksis)/_ui/hero/Hero.dialog";
-import { GodPraksisHeroProvider } from "@/app/dev/(god-praksis)/_ui/hero/Hero.provider";
-import { GodPraksisPictogram } from "@/app/dev/(root)/_ui/pictogram/GodPraksisPictogram";
 import styles from "./Hero.module.css";
 
 type GpIntroHeroProps = {

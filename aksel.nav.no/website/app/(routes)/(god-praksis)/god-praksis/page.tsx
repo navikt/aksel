@@ -15,6 +15,8 @@ import {
   LinkCardFooter,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
+import { GodPraksisTaxonomyTag } from "@/app/(routes)/(god-praksis)/_ui/GodPraksisTaxonomyTag";
+import { GodPraksisIntroHero } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ALL_TEMA_QUERY,
@@ -22,8 +24,6 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
-import { GodPraksisTaxonomyTag } from "@/app/dev/(god-praksis)/_ui/GodPraksisTaxonomyTag";
-import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: seo } = await sanityFetch({
