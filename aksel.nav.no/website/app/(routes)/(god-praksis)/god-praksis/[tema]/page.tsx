@@ -256,44 +256,46 @@ export default async function Page(props: Props) {
                     key={title}
                     as="ul"
                     columns={{ xs: 1, md: 2 }}
-                    gap={{ xs: "space-12", md: "space-24" }}
+                    gap={{ xs: "space-16", md: "space-24" }}
                   >
                     {articles.map((article) => (
                       <li key={article.slug}>
-                        <LinkCard>
-                          <LinkCardTitle as="h3">
-                            <LinkCardAnchor asChild>
-                              <Link href={`/${article.slug}`}>
-                                {article.heading}
-                              </Link>
-                            </LinkCardAnchor>
-                          </LinkCardTitle>
+                        <Box asChild height="100%">
+                          <LinkCard>
+                            <LinkCardTitle as="h3">
+                              <LinkCardAnchor asChild>
+                                <Link href={`/${article.slug}`}>
+                                  {article.heading}
+                                </Link>
+                              </LinkCardAnchor>
+                            </LinkCardTitle>
 
-                          {article.description && (
-                            <LinkCardDescription>
-                              {article.displayDate && (
-                                <Box asChild marginBlock="0 space-8">
-                                  <Detail
-                                    as="time"
-                                    textColor="subtle"
-                                    uppercase
-                                  >
-                                    {article.displayDate}
-                                  </Detail>
-                                </Box>
-                              )}
-                              <p>{article.description}</p>
-                            </LinkCardDescription>
-                          )}
-                          <LinkCardFooter>
-                            <GodPraksisTaxonomyTag type="undertema">
-                              {article.undertema}
-                            </GodPraksisTaxonomyTag>
-                            <GodPraksisTaxonomyTag type="innholdstype">
-                              {article.innholdstype}
-                            </GodPraksisTaxonomyTag>
-                          </LinkCardFooter>
-                        </LinkCard>
+                            {article.description && (
+                              <LinkCardDescription>
+                                {article.displayDate && (
+                                  <Box asChild marginBlock="0 space-8">
+                                    <Detail
+                                      as="time"
+                                      textColor="subtle"
+                                      uppercase
+                                    >
+                                      {article.displayDate}
+                                    </Detail>
+                                  </Box>
+                                )}
+                                <p>{article.description}</p>
+                              </LinkCardDescription>
+                            )}
+                            <LinkCardFooter>
+                              <GodPraksisTaxonomyTag type="undertema">
+                                {article.undertema}
+                              </GodPraksisTaxonomyTag>
+                              <GodPraksisTaxonomyTag type="innholdstype">
+                                {article.innholdstype}
+                              </GodPraksisTaxonomyTag>
+                            </LinkCardFooter>
+                          </LinkCard>
+                        </Box>
                       </li>
                     ))}
                   </HGrid>

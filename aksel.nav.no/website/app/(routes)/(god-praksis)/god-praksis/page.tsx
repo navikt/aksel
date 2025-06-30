@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Image } from "sanity";
 import {
   BodyLong,
+  Box,
   HGrid,
   Heading,
   Link,
@@ -79,7 +80,7 @@ export default async function Page() {
               <HGrid
                 as="ul"
                 columns={{ xs: 1, md: 2 }}
-                gap={{ xs: "space-12", md: "space-24" }}
+                gap={{ xs: "space-16", md: "space-24" }}
                 marginBlock="0 space-24"
               >
                 {tema.articles.map((article) => {
@@ -90,23 +91,25 @@ export default async function Page() {
 
                   return (
                     <li key={article.slug}>
-                      <LinkCard>
-                        <LinkCardTitle as="h3">
-                          <LinkCardAnchor asChild>
-                            <NextLink href={article.slug ?? ""}>
-                              {article.heading}
-                            </NextLink>
-                          </LinkCardAnchor>
-                        </LinkCardTitle>
-                        <LinkCardFooter>
-                          <GodPraksisTaxonomyTag type="undertema">
-                            {undertema}
-                          </GodPraksisTaxonomyTag>
-                          <GodPraksisTaxonomyTag type="innholdstype">
-                            {innholdstype}
-                          </GodPraksisTaxonomyTag>
-                        </LinkCardFooter>
-                      </LinkCard>
+                      <Box asChild height="100%">
+                        <LinkCard>
+                          <LinkCardTitle as="h3">
+                            <LinkCardAnchor asChild>
+                              <NextLink href={article.slug ?? ""}>
+                                {article.heading}
+                              </NextLink>
+                            </LinkCardAnchor>
+                          </LinkCardTitle>
+                          <LinkCardFooter>
+                            <GodPraksisTaxonomyTag type="undertema">
+                              {undertema}
+                            </GodPraksisTaxonomyTag>
+                            <GodPraksisTaxonomyTag type="innholdstype">
+                              {innholdstype}
+                            </GodPraksisTaxonomyTag>
+                          </LinkCardFooter>
+                        </LinkCard>
+                      </Box>
                     </li>
                   );
                 })}
