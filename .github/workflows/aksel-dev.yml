@@ -1,4 +1,4 @@
-name: Deploy aksel.dev.nav.no
+name: Deploy aksel.ansatt.dev.nav.no
 on:
   workflow_dispatch:
   push:
