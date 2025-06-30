@@ -48,7 +48,7 @@ export const Avatar = ({
       />
       {showName && (
         <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
-          <BodyShort size="small">{name}</BodyShort>
+          <span className={styles.avatarName}>{name}</span>
         </BoxNew>
       )}
     </HStack>

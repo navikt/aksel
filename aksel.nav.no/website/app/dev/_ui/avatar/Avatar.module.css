@@ -27,8 +27,7 @@
 }
 
 .avatarName {
-  margin-block: var(--ax-space-1) 0;
-  margin-inline: var(--ax-space-2) 0;
+  color: var(--ax-text-neutral);
 }
 
 .avatarNameSuffix {
