@@ -14,7 +14,7 @@ import {
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { dateStr, getImage } from "@/utils";
 import { Avatar } from "../../_ui/avatar/Avatar";
-import { HoverCard } from "../../_ui/avatar/HoverCard";
+import { HoverCard, HoverCardGroup } from "../../_ui/avatar/HoverCard";
 import styles from "../_ui/Produktbloggen.module.css";
 import { queryToAvatars } from "../_ui/utils";
 
@@ -109,22 +109,24 @@ export default async function Page({ params }: Props) {
             </BodyLong>
           )}
           <div>
-            <HStack gap="space-32" justify="center" marginBlock="space-40 0">
-              {avatars.map((avatar) => {
-                return (
-                  <HoverCard
-                    key={avatar.name}
-                    popoverContent={avatar.description}
-                  >
-                    <Avatar
-                      imageSrc={avatar.imageSrc}
-                      name={avatar.name}
-                      showName
-                    ></Avatar>
-                  </HoverCard>
-                );
-              })}
-            </HStack>
+            <HoverCardGroup>
+              <HStack gap="space-32" justify="center" marginBlock="space-40 0">
+                {avatars.map((avatar) => {
+                  return (
+                    <HoverCard
+                      key={avatar.name}
+                      popoverContent={avatar.description}
+                    >
+                      <Avatar
+                        imageSrc={avatar.imageSrc}
+                        name={avatar.name}
+                        showName
+                      ></Avatar>
+                    </HoverCard>
+                  );
+                })}
+              </HStack>
+            </HoverCardGroup>
           </div>
         </div>
         <div className={styles.image}>
