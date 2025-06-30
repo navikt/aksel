@@ -1,10 +1,10 @@
 import { stegaClean } from "next-sanity";
 import "server-only";
+import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import {
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult,
   DESIGNSYSTEM_SIDEBAR_QUERYResult,
 } from "@/app/_sanity/query-types";
-import { PAGE_ROUTES } from "@/app/routing-config";
 import { sanityCategoryLookup } from "@/sanity/config";
 import { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
 
