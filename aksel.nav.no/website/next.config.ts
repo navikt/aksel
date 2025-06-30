@@ -113,33 +113,32 @@ const nextConfig: NextConfig = {
         destination: "/api/preview?slug=:slug*",
         permanent: true,
       },
-      /* ikon-page */
-      // {
-      //   source: "/ikoner",
-      //   destination: "/komponenter/ikoner",
-      //   permanent: true,
-      // },
-      // {
-      //   source: "/ikoner/:slug*",
-      //   destination: "/komponenter/ikoner",
-      //   permanent: true,
-      // },
-      /* landing-pages */
-      // {
-      //   source: "/grunnleggende",
-      //   destination: "/designsystemet",
-      //   permanent: true,
-      // },
-      // {
-      //   source: "/komponenter",
-      //   destination: "/designsystemet",
-      //   permanent: true,
-      // },
-      // {
-      //   source: "/monster-maler",
-      //   destination: "/designsystemet",
-      //   permanent: true,
-      // },
+
+      {
+        source: "/ikoner",
+        destination: "/komponenter/ikoner",
+        permanent: true,
+      },
+      {
+        source: "/ikoner/:slug*",
+        destination: "/komponenter/ikoner",
+        permanent: true,
+      },
+      {
+        source: "/grunnleggende",
+        destination: "/designsystemet",
+        permanent: false,
+      },
+      {
+        source: "/komponenter",
+        destination: "/designsystemet",
+        permanent: false,
+      },
+      {
+        source: "/monster-maler",
+        destination: "/designsystemet",
+        permanent: false,
+      },
     ];
   },
 
