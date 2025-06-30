@@ -22,7 +22,7 @@ function DesignsystemSidebarItem(props: {
   const { toggleOpen } = useMobileNav();
 
   const path = pathName?.split("#")[0] || "";
-  const cleanedSlug = stegaClean(`/dev/${page.slug}`);
+  const cleanedSlug = stegaClean(`/${page.slug}`);
   const active =
     path === cleanedSlug || (path.startsWith(cleanedSlug) && !isIndented);
   const statusTag = getStatusTag(page.tag, true);
@@ -38,8 +38,7 @@ function DesignsystemSidebarItem(props: {
       className={styles.navListItem}
     >
       <Link
-        /* TODO: Temp use /dev routing for testing */
-        href={`/dev/${page.slug}`}
+        href={`/${page.slug}`}
         onNavigate={() => toggleOpen(false)}
         className={cl(styles.navListItemLink, {
           [styles.navListNotch]: active,
@@ -49,7 +48,7 @@ function DesignsystemSidebarItem(props: {
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "sidebar",
-            url: `/dev/${page.slug}`,
+            url: `/${page.slug}`,
           })
         }
       >

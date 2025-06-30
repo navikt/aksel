@@ -63,27 +63,27 @@ const DSLayersOverview = ({ title, description }: DSLayersOverviewProps) => (
 
 const Links = {
   monsterMaler: {
-    href: "/dev/monster-maler",
+    href: "/monster-maler",
     label: "Mønster og maler",
     icon: <SidebarLeftIcon fontSize="24" aria-hidden="true" />,
   },
   komponenter: {
-    href: "/dev/komponenter/core",
+    href: "/komponenter/core",
     label: "Komponenter",
     icon: <ComponentIcon fontSize="24" aria-hidden="true" />,
   },
   ikoner: {
-    href: "/dev/komponenter/ikoner",
+    href: "/komponenter/ikoner",
     label: "Ikoner",
     icon: <ComponentIcon fontSize="24" aria-hidden="true" />,
   },
   layoutPrimitives: {
-    href: "/dev/komponenter/primitives",
+    href: "/komponenter/primitives",
     label: "Layout primitives",
     icon: <Density2Icon fontSize="24" aria-hidden="true" />,
   },
   designTokens: {
-    href: "/dev/grunnleggende/styling/design-tokens",
+    href: "/grunnleggende/styling/design-tokens",
     label: "Design tokens",
     icon: <TokenIcon fontSize="24" aria-hidden="true" />,
   },

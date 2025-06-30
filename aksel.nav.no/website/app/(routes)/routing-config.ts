@@ -8,8 +8,8 @@ import {
   komponentKategorier,
   templatesKategorier,
 } from "@/sanity/config";
-import { metadata as tokenMetadata } from "./(routes)/(designsystemet)/grunnleggende/darkside/design-tokens/page";
-import { metadata as iconsMetadata } from "./(routes)/(designsystemet)/komponenter/ikoner/page";
+import { metadata as tokenMetadata } from "./(designsystemet)/grunnleggende/darkside/design-tokens/page";
+import { metadata as iconsMetadata } from "./(designsystemet)/komponenter/ikoner/page";
 
 type PageRoute = {
   slug: string;

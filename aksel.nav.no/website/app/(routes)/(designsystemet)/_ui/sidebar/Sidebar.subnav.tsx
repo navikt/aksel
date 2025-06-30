@@ -20,7 +20,7 @@ function DesignsystemSidebarSubNav(
   const isDarkside = title.toLowerCase() === "darkside";
 
   const isSectionActive = pages.some((page) => {
-    return pathName?.split("#")[0] === stegaClean(`/dev/${page.slug}`);
+    return pathName?.split("#")[0] === stegaClean(`/${page.slug}`);
   });
 
   const [open, setOpen] = useState(isSectionActive);

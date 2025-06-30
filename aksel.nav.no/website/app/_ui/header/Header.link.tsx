@@ -11,11 +11,7 @@ type HeaderLinkProps = {
 };
 
 function HeaderLink({ name, href }: HeaderLinkProps) {
-  let pathname = usePathname();
-
-  if (pathname?.startsWith("/dev")) {
-    pathname = pathname.replace("/dev", "");
-  }
+  const pathname = usePathname();
 
   const isActive = () => {
     if (pathname?.startsWith(href)) {

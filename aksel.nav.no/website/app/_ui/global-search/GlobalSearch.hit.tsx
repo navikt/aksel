@@ -53,8 +53,8 @@ function GlobalSearchLink(props: {
 
   const href =
     "anchor" in hit && hit.anchor
-      ? `/dev/${hit.item.slug}#${hit.anchor}`
-      : `/dev/${hit.item.slug}`;
+      ? `/${hit.item.slug}#${hit.anchor}`
+      : `/${hit.item.slug}`;
 
   const imageUrl = urlFor(hit.item.status?.bilde)
     ?.auto("format")
