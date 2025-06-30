@@ -2,7 +2,7 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import "@navikt/ds-tokens/darkside-css";
 import { ExampleTheming } from "@/web/examples/withDsExample.theme";
-import "../components/styles/index.css";
+import "./global.css";
 
 function App({ Component, pageProps, router }: AppProps) {
   return (

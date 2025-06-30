@@ -1,0 +1,7 @@
+@layer twBase, dsComponents, twComponents, twUtilities;
+
+@import "tailwindcss/base" layer(twBase);
+@import "@navikt/ds-css" layer(dsComponents);
+@import "@navikt/ds-tokens/darkside-css" layer(dsComponents);
+@import "tailwindcss/components" layer(twComponents);
+@import "tailwindcss/utilities" layer(twUtilities);
