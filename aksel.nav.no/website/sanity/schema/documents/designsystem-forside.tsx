@@ -163,8 +163,7 @@ export const DesignsystemForside = defineType({
       ],
       initialValue: {
         title: "Endringslogg",
-        ingress:
-          "Se siste endringer i kode.",
+        ingress: "Se siste endringer i kode.",
       },
     }),
     defineField({

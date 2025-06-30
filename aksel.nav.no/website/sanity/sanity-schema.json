@@ -10278,6 +10278,13 @@
                 },
                 "optional": true
               },
+              "kompaktInnhold": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
               "innhold": {
                 "type": "objectAttribute",
                 "value": {
