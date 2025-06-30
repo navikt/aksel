@@ -31,6 +31,7 @@ export const Expandable = () => {
             key={row.name}
             togglePlacement="right"
             defaultOpen
+            selected={row.animal === "Mudkip"}
           >
             {columns.map(({ key }, index) =>
               index === 0 ? (
