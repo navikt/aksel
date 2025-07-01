@@ -11,7 +11,7 @@
   gap: var(--ax-space-24);
 
   &[data-layout="sidebar"] {
-    width: 20rem;
+    width: 18rem;
     padding-block: var(--ax-space-24) var(--ax-space-64);
     position: sticky;
     overflow: auto;
