@@ -1,47 +1,11 @@
 "use client";
 
 import cl from "clsx";
-import Link from "next/link";
 import { PauseFillIcon, PlayFillIcon } from "@navikt/aksel-icons";
-import { BoxNew, Button, HGrid, HStack, Heading } from "@navikt/ds-react";
-import {
-  LinkCard,
-  LinkCardAnchor,
-  LinkCardDescription,
-  LinkCardTitle,
-} from "@navikt/ds-react/LinkCard";
+import { Button, HStack, Heading } from "@navikt/ds-react";
 import { AkselCubeAnimated } from "@/app/_ui/aksel-cube/AkselCube";
 import styles from "../_ui/frontpage.module.css";
 import { useShouldStopAnimation } from "./useShouldStopAnimation";
-
-const LinkCards = ({
-  links,
-}: {
-  links: {
-    title: string;
-    desc: string;
-    href: string;
-  }[];
-}) => {
-  return (
-    <HStack justify="center">
-      <HGrid columns={{ xs: 1, md: 3 }} paddingInline="space-12" gap="space-12">
-        {links.map((link) => {
-          return (
-            <LinkCard key={link.title}>
-              <LinkCardTitle>
-                <LinkCardAnchor asChild>
-                  <Link href={link.href}>{link.title}</Link>
-                </LinkCardAnchor>
-              </LinkCardTitle>
-              <LinkCardDescription>{link.desc}</LinkCardDescription>
-            </LinkCard>
-          );
-        })}
-      </HGrid>
-    </HStack>
-  );
-};
 
 export const Hero = () => {
   const { pause, reducedMotion, setPause, shouldStopAnimation } =
@@ -49,7 +13,7 @@ export const Hero = () => {
 
   return (
     <>
-      <BoxNew paddingBlock={{ xs: "0 space-28", md: "0 space-72" }}>
+      <div>
         <div className={styles.hero}>
           <Heading
             level="1"
@@ -64,27 +28,7 @@ export const Hero = () => {
             <AkselCubeAnimated />
           </div>
         </div>
-
-        <LinkCards
-          links={[
-            {
-              title: "Komponenter",
-              desc: "Layout primitives og komponenter",
-              href: "/komponenter/core",
-            },
-            {
-              title: "Design Tokens",
-              desc: "Farger, spacing, radius, etc.",
-              href: "/grunnleggende/styling/design-tokens",
-            },
-            {
-              title: "Ikoner",
-              desc: "900+ linje- og fylte ikoner",
-              href: "/komponenter/ikoner",
-            },
-          ]}
-        />
-      </BoxNew>
+      </div>
       {!reducedMotion && (
         <HStack justify="end" marginBlock="0 space-16">
           <Button

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import NextLink from "next/link";
 import { Image } from "sanity";
+import { ComponentIcon, TokenIcon } from "@navikt/aksel-icons";
 import {
   Bleed,
   BodyLong,
@@ -9,8 +10,15 @@ import {
   HStack,
   Heading,
   Link,
+  LinkCard,
   VStack,
 } from "@navikt/ds-react";
+import {
+  LinkCardAnchor,
+  LinkCardDescription,
+  LinkCardIcon,
+  LinkCardTitle,
+} from "@navikt/ds-react/LinkCard";
 import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
@@ -84,7 +92,7 @@ const Page = async () => {
           <BoxNew className={styles.forsidePageWrapper}>
             <PageBlock width="xl" gutters>
               <Hero />
-              {/* God praksis */}
+              {/* Designsystemet */}
               <Bleed
                 /* TODO: maybe this fading & blocking of cubeanim should be baked into the cubeanim? */
                 className={styles.cubeFader}
@@ -100,7 +108,7 @@ const Page = async () => {
                   paddingInline={{ xs: "space-16", sm: "space-48" }}
                 >
                   <VStack gap="space-12">
-                    <BoxNew paddingInline={{ xs: "2", sm: "6" }}>
+                    <div>
                       <Heading
                         level="2"
                         size="xlarge"
@@ -109,7 +117,7 @@ const Page = async () => {
                       >
                         <Link
                           as={NextLink}
-                          href="/god-praksis"
+                          href="/designsystemet"
                           data-aksel-heading-color
                         >
                           <HStack
@@ -119,42 +127,160 @@ const Page = async () => {
                             width="fit-content"
                             data-animated-arrow-anchor
                           >
-                            <span>God praksis</span>
+                            <span>Designsystemet</span>
                             <AnimatedArrowRight fontSize="1.75rem" />
                           </HStack>
                         </Link>
                       </Heading>
                       <BodyLong size="large" className={styles.godPraksisInfo}>
-                        Alle som jobber med produktutvikling i Nav sitter på
-                        kunnskap og erfaring som er nyttig for andre. Derfor
-                        deler vi god praksis med hverandre her.
+                        Aksel er designsystemet til Navs produktutvikling
                       </BodyLong>
-                    </BoxNew>
+                    </div>
 
-                    <HGrid as="ul" columns={{ md: 2, xl: 3 }}>
-                      {tema.map((t) => (
-                        <GpFrontpageCard
-                          key={t.title}
-                          href={`/god-praksis/${t.slug?.current}`}
-                          image={t.pictogram}
+                    <HGrid
+                      marginBlock="space-32 0"
+                      gap="space-24"
+                      as="ul"
+                      columns={{ sm: 1, md: 3 }}
+                    >
+                      <LinkCard data-color="brand-blue">
+                        <BoxNew
+                          asChild
+                          padding="space-8"
+                          borderRadius="12"
+                          background="brand-blue-moderateA"
                         >
-                          {t.title}
-                        </GpFrontpageCard>
-                      ))}
+                          <LinkCardIcon>
+                            <ComponentIcon
+                              fontSize="3rem"
+                              color="var(--ax-text-subtle)"
+                            />
+                          </LinkCardIcon>
+                        </BoxNew>
+                        <LinkCardTitle data-color="neutral">
+                          <LinkCardAnchor asChild>
+                            <NextLink href="/komponenter/core">
+                              Komponenter
+                            </NextLink>
+                          </LinkCardAnchor>
+                        </LinkCardTitle>
+                        <LinkCardDescription>
+                          Komponenter og primitives
+                        </LinkCardDescription>
+                      </LinkCard>
+                      <LinkCard data-color="brand-blue">
+                        <BoxNew
+                          asChild
+                          padding="space-8"
+                          borderRadius="12"
+                          background="brand-blue-moderateA"
+                        >
+                          <LinkCardIcon>
+                            <TokenIcon
+                              fontSize="3rem"
+                              color="var(--ax-text-subtle)"
+                            />
+                          </LinkCardIcon>
+                        </BoxNew>
+                        <LinkCardTitle data-color="neutral">
+                          <LinkCardAnchor asChild>
+                            <NextLink href="/grunnleggende/styling/design-tokens">
+                              Design tokens
+                            </NextLink>
+                          </LinkCardAnchor>
+                        </LinkCardTitle>
+                        <LinkCardDescription>
+                          Farger, spacing, radius, etc.
+                        </LinkCardDescription>
+                      </LinkCard>
+                      <LinkCard data-color="brand-blue">
+                        <BoxNew
+                          asChild
+                          padding="space-8"
+                          borderRadius="12"
+                          background="brand-blue-moderateA"
+                        >
+                          <LinkCardIcon>
+                            <ComponentIcon
+                              fontSize="3rem"
+                              color="var(--ax-text-subtle)"
+                            />
+                          </LinkCardIcon>
+                        </BoxNew>
+                        <LinkCardTitle data-color="neutral">
+                          <LinkCardAnchor asChild>
+                            <NextLink href="/komponenter/ikoner">
+                              Ikoner
+                            </NextLink>
+                          </LinkCardAnchor>
+                        </LinkCardTitle>
+                        <LinkCardDescription>
+                          900+ linje- og fylte ikoner
+                        </LinkCardDescription>
+                      </LinkCard>
                     </HGrid>
                   </VStack>
                 </BoxNew>
               </Bleed>
+              {/* God praksis */}
+
+              <BoxNew
+                background="raised"
+                borderWidth="1"
+                borderColor="neutral-subtleA"
+                borderRadius="xlarge"
+                paddingBlock={{ xs: "space-48" }}
+                paddingInline={{ xs: "space-16", sm: "space-48" }}
+                marginBlock="space-64 0"
+              >
+                <VStack gap="space-12">
+                  <BoxNew paddingInline={{ xs: "2", sm: "6" }}>
+                    <Heading
+                      level="2"
+                      size="xlarge"
+                      spacing
+                      data-aksel-heading-color
+                    >
+                      <Link
+                        as={NextLink}
+                        href="/god-praksis"
+                        data-aksel-heading-color
+                      >
+                        <HStack
+                          as="span"
+                          gap="space-8"
+                          align="center"
+                          width="fit-content"
+                          data-animated-arrow-anchor
+                        >
+                          <span>God praksis</span>
+                          <AnimatedArrowRight fontSize="1.75rem" />
+                        </HStack>
+                      </Link>
+                    </Heading>
+                    <BodyLong size="large" className={styles.godPraksisInfo}>
+                      Alle som jobber med produktutvikling i Nav sitter på
+                      kunnskap og erfaring som er nyttig for andre. Derfor deler
+                      vi god praksis med hverandre her.
+                    </BodyLong>
+                  </BoxNew>
+
+                  <HGrid as="ul" columns={{ md: 2, xl: 3 }}>
+                    {tema.map((t) => (
+                      <GpFrontpageCard
+                        key={t.title}
+                        href={`/god-praksis/${t.slug?.current}`}
+                        image={t.pictogram}
+                      >
+                        {t.title}
+                      </GpFrontpageCard>
+                    ))}
+                  </HGrid>
+                </VStack>
+              </BoxNew>
+
               {/* Siste fra Aksel */}
-              {latest && (
-                <Bleed
-                  reflectivePadding
-                  marginInline="full"
-                  className={styles.cubeBlocker}
-                >
-                  <FrontpageLatest latest={latest as LatestT[]} />
-                </Bleed>
-              )}
+              {latest && <FrontpageLatest latest={latest as LatestT[]} />}
             </PageBlock>
           </BoxNew>
         </MainWrapper>
