@@ -67,6 +67,10 @@ const AkselPrismTheme: PrismTheme = {
       types: ["imports", "maybe-class-name"],
       style: { color: TextNeutral },
     },
+    {
+      types: ["token", "tag"],
+      style: { color: TextAccent },
+    },
   ],
 };
 
