@@ -25,7 +25,11 @@ function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
     <div className={styles.mobileNavMenuIntialView}>
       <BodyShort as="ul" className={styles.mobileNavMenuList}>
         <li>
-          <button className={styles.mobileNavMenuItem} onClick={toggleOpen}>
+          <button
+            className={styles.mobileNavMenuItem}
+            onClick={toggleOpen}
+            aria-expanded="false"
+          >
             Designsystemet
             <ArrowRightIcon aria-hidden fontSize="1.5rem" />
           </button>
@@ -54,7 +58,11 @@ function DesignsystemView({
 }) {
   return (
     <div className={styles.mobileNavSidebarMenu}>
-      <button className={styles.mobileNavMenuItem} onClick={toggleClose}>
+      <button
+        className={styles.mobileNavMenuItem}
+        onClick={toggleClose}
+        aria-expanded="true"
+      >
         <ArrowLeftIcon aria-hidden fontSize="1.5rem" />
         <span>Designsystemet</span>
         <span aria-hidden />
