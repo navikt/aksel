@@ -35,6 +35,7 @@ spec:
         - host: hnbe3yhs.apicdn.sanity.io
         - host: cdn.sanity.io
         - host: umami.nav.no
+        - host: raw.githubusercontent.com
       rules: []
   filesFrom:
     - emptyDir:
