@@ -73,7 +73,7 @@ const outputComplete: DesignsystemSidebarSectionT = [
         tag: "deprecated" as const,
       },
     ],
-    title: "Core",
+    title: "Komponenter",
     value: "core",
   },
 ];

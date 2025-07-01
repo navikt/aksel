@@ -79,7 +79,7 @@ export const Hero = () => {
             },
             {
               title: "Ikoner",
-              desc: "900+ linje og fylte ikoner",
+              desc: "900+ linje- og fylte ikoner",
               href: "/komponenter/ikoner",
             },
           ]}
