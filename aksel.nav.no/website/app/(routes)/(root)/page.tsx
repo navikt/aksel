@@ -106,14 +106,19 @@ const Page = async () => {
                         size="xlarge"
                         spacing
                         data-aksel-heading-color
-                        data-animated-arrow-anchor
                       >
                         <Link
                           as={NextLink}
                           href="/god-praksis"
                           data-aksel-heading-color
                         >
-                          <HStack as="span" gap="space-8" align="center">
+                          <HStack
+                            as="span"
+                            gap="space-8"
+                            align="center"
+                            width="fit-content"
+                            data-animated-arrow-anchor
+                          >
                             <span>God praksis</span>
                             <AnimatedArrowRight fontSize="1.75rem" />
                           </HStack>
