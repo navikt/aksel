@@ -40,9 +40,8 @@ function DesignsystemSidebarItem(props: {
       <Link
         href={`/${page.slug}`}
         onNavigate={() => toggleOpen(false)}
-        className={cl(styles.navListItemLink, {
-          [styles.navListNotch]: active,
-        })}
+        className={cl(styles.navListItemLink, styles.navListNotch)}
+        data-notch={active}
         prefetch={false}
         data-current={active}
         onClick={() =>

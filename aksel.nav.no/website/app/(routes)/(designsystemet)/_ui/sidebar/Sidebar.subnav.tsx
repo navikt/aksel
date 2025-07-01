@@ -29,7 +29,6 @@ function DesignsystemSidebarSubNav(
     <li
       data-color={isDarkside ? "brand-magenta" : "brand-blue"}
       data-active={isSectionActive}
-      data-highlight={isDarkside}
       className={styles.navListSub}
     >
       <button
@@ -39,10 +38,10 @@ function DesignsystemSidebarSubNav(
             kategori: title,
           });
         }}
-        className={cl(styles.navListSubButton, {
-          [styles.navListNotch]: isSectionActive && !open,
-        })}
+        className={cl(styles.navListSubButton, styles.navListNotch)}
+        data-notch={isSectionActive && !open}
         data-state={isSectionActive ? "active" : "inactive"}
+        data-open={open}
         aria-expanded={open}
       >
         <HStack as="span" gap="space-4" align="center">
