@@ -3,7 +3,7 @@
   position: relative;
   flex-shrink: 0;
   align-self: flex-start;
-  padding-inline: var(--ax-space-8);
+  padding-inline: var(--ax-space-8) var(--ax-space-16);
   margin-left: var(--ax-space-16);
   color: var(--ax-text-neutral);
   display: flex;
@@ -11,7 +11,7 @@
   gap: var(--ax-space-24);
 
   &[data-layout="sidebar"] {
-    width: 16rem;
+    width: 20rem;
     padding-block: var(--ax-space-24) var(--ax-space-64);
     position: sticky;
     overflow: auto;
@@ -89,8 +89,6 @@
 }
 
 .navListSubButtonIcon {
-  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1);
-
   .navListSubButton[aria-expanded="true"] > & {
     transform: rotateX(-180deg);
   }
@@ -104,32 +102,17 @@
     position: absolute;
     background-color: var(--ax-text-decoration);
     width: 0;
-    height: 1rem;
+    height: calc(100% - var(--ax-space-16));
     left: 4px;
     top: 50%;
     transform: translateY(-50%);
     border-radius: var(--ax-radius-full);
     pointer-events: none;
-    transition:
-      width 120ms ease-out,
-      height 120ms ease-out;
+    transition: width 120ms ease-out;
   }
 
   &[data-notch="true"]::before {
     width: 4px;
-  }
-
-  [data-nested="true"] & {
-    &::before {
-      width: 4px;
-      height: 4px;
-      background-color: var(--ax-text-neutral-subtle);
-    }
-
-    &[data-notch="true"]::before {
-      height: 1rem;
-      background-color: var(--ax-text-decoration);
-    }
   }
 }
 
@@ -168,8 +151,7 @@
   }
 
   [data-nested="true"] & {
-    padding-inline-start: var(--ax-space-12);
-    margin-inline-start: var(--ax-space-8);
+    margin-inline-start: var(--ax-space-12);
   }
 
   [data-state="active"][data-nested="true"] & {
