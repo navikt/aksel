@@ -70,7 +70,7 @@ export const Hero = () => {
             {
               title: "Komponenter",
               desc: "Layout primitives og komponenter",
-              href: "/komponenter",
+              href: "/komponenter/core",
             },
             {
               title: "Design Tokens",
