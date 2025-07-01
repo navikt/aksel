@@ -152,6 +152,7 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],
     largePageDataBytes: 128 * 2000,
   },
+  serverExternalPackages: ["@navikt/next-logger", "next-logger", "pino"],
 };
 
 module.exports =
