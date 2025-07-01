@@ -6,6 +6,7 @@ import {
   BodyLong,
   BoxNew,
   HGrid,
+  HStack,
   Heading,
   Link,
   VStack,
@@ -105,8 +106,18 @@ const Page = async () => {
                         size="xlarge"
                         spacing
                         data-aksel-heading-color
+                        data-animated-arrow-anchor
                       >
-                        God praksis
+                        <Link
+                          as={NextLink}
+                          href="/god-praksis"
+                          data-aksel-heading-color
+                        >
+                          <HStack as="span" gap="space-8" align="center">
+                            <span>God praksis</span>
+                            <AnimatedArrowRight fontSize="1.75rem" />
+                          </HStack>
+                        </Link>
                       </Heading>
                       <BodyLong size="large" className={styles.godPraksisInfo}>
                         Alle som jobber med produktutvikling i Nav sitter på
