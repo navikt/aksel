@@ -7,6 +7,7 @@ import {
   BodyLong,
   BoxNew,
   HGrid,
+  HStack,
   Heading,
   Link,
   LinkCard,
@@ -20,6 +21,7 @@ import {
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
 import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
+import { AnimationButton } from "@/app/(routes)/(root)/_ui/AnimationButton";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { sanityFetch } from "../../_sanity/live";
@@ -93,17 +95,14 @@ const Page = async () => {
             <PageBlock width="xl" gutters>
               <Hero />
               {/* Designsystemet */}
-              <Bleed
-                /* TODO: maybe this fading & blocking of cubeanim should be baked into the cubeanim? */
-                /* className={styles.cubeFader} */
-                marginInline="full"
-                reflectivePadding
-              >
+              <Bleed marginInline="full" reflectivePadding>
                 <BoxNew
                   paddingInline={{ xs: "space-0", sm: "space-48" }}
                   marginInline={{ xs: "space-0", md: "space-96" }}
-                  asChild
                 >
+                  <HStack justify="end" marginBlock="space-16">
+                    <AnimationButton />
+                  </HStack>
                   <HGrid gap="space-24" as="ul" columns={{ sm: 1, xl: 2 }}>
                     <BoxNew borderColor="brand-blue" asChild>
                       <LinkCard data-color="brand-blue" arrow={false}>
@@ -236,52 +235,57 @@ const Page = async () => {
 
               {/* God praksis */}
 
-              <BoxNew
-                background="raised"
-                borderWidth="1"
-                borderColor="neutral-subtleA"
-                borderRadius="xlarge"
-                paddingBlock={{ xs: "space-48" }}
-                paddingInline={{ xs: "space-16", sm: "space-48" }}
-                marginBlock="space-64 0"
+              <Bleed
+                marginInline="full"
+                reflectivePadding
+                className={styles.cubeFader}
               >
-                <VStack gap="space-12">
-                  <BoxNew>
-                    <Heading
-                      level="2"
-                      size="xlarge"
-                      spacing
-                      data-aksel-heading-color
-                    >
-                      <Link
-                        as={NextLink}
-                        href="/god-praksis"
+                <BoxNew
+                  background="raised"
+                  borderWidth="1"
+                  borderColor="neutral-subtleA"
+                  borderRadius="xlarge"
+                  paddingBlock={{ xs: "space-48" }}
+                  paddingInline={{ xs: "space-16", sm: "space-48" }}
+                  marginBlock="space-64 0"
+                >
+                  <VStack gap="space-12">
+                    <BoxNew>
+                      <Heading
+                        level="2"
+                        size="xlarge"
+                        spacing
                         data-aksel-heading-color
                       >
-                        God praksis
-                      </Link>
-                    </Heading>
-                    <BodyLong size="large" className={styles.godPraksisInfo}>
-                      Alle som jobber med produktutvikling i Nav sitter på
-                      kunnskap og erfaring som er nyttig for andre. Derfor deler
-                      vi god praksis med hverandre her.
-                    </BodyLong>
-                  </BoxNew>
+                        <Link
+                          as={NextLink}
+                          href="/god-praksis"
+                          data-aksel-heading-color
+                        >
+                          God praksis
+                        </Link>
+                      </Heading>
+                      <BodyLong size="large" className={styles.godPraksisInfo}>
+                        Alle som jobber med produktutvikling i Nav sitter på
+                        kunnskap og erfaring som er nyttig for andre. Derfor
+                        deler vi god praksis med hverandre her.
+                      </BodyLong>
+                    </BoxNew>
 
-                  <HGrid as="ul" columns={{ md: 2, xl: 3 }}>
-                    {tema.map((t) => (
-                      <GpFrontpageCard
-                        key={t.title}
-                        href={`/god-praksis/${t.slug?.current}`}
-                        image={t.pictogram}
-                      >
-                        {t.title}
-                      </GpFrontpageCard>
-                    ))}
-                  </HGrid>
-                </VStack>
-              </BoxNew>
-
+                    <HGrid as="ul" columns={{ md: 2, xl: 3 }}>
+                      {tema.map((t) => (
+                        <GpFrontpageCard
+                          key={t.title}
+                          href={`/god-praksis/${t.slug?.current}`}
+                          image={t.pictogram}
+                        >
+                          {t.title}
+                        </GpFrontpageCard>
+                      ))}
+                    </HGrid>
+                  </VStack>
+                </BoxNew>
+              </Bleed>
               {/* Siste fra Aksel */}
               {latest && <FrontpageLatest latest={latest as LatestT[]} />}
             </PageBlock>
