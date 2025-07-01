@@ -16,13 +16,7 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
   const imageUrl = urlForImage(image as Image)?.url();
 
   return (
-    <HStack
-      gap="space-8"
-      paddingInline={{ xs: "space-8", sm: "space-24" }}
-      paddingBlock="space-16"
-      align="center"
-      as="li"
-    >
+    <HStack gap="space-8" paddingBlock="space-16" align="center" as="li">
       <BoxNew
         position="relative"
         flexShrink="0"
