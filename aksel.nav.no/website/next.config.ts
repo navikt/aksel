@@ -110,10 +110,9 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/preview/:slug*",
-        destination: "/api/preview?slug=:slug*",
-        permanent: true,
+        destination: "/admin/presentation?preview=/:slug*",
+        permanent: false,
       },
-
       {
         source: "/ikoner",
         destination: "/komponenter/ikoner",
