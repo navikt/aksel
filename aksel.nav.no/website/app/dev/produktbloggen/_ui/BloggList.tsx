@@ -1,23 +1,18 @@
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { Image } from "sanity";
-import {
-  BodyLong,
-  BodyShort,
-  Heading,
-  Hide,
-  Link,
-  Show,
-} from "@navikt/ds-react";
+import { BodyLong, Heading, Hide, Link, Show } from "@navikt/ds-react";
+import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
-import { dateStr, getImage } from "@/utils";
+import { getImage } from "@/utils";
+import { Avatar, AvatarStack } from "../../_ui/avatar/Avatar";
 import styles from "../_ui/Produktbloggen.module.css";
+import { queryToAvatars } from "./utils";
 
-const getAuthors = (blog: any) =>
-  (blog?.contributors as any)?.map((x) => x?.title) ?? [];
+type Blogg = NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][0];
 
-export const BloggList = async ({ blogg }: { blogg: any }) => {
-  const date = await dateStr(blogg?.publishedAt ?? blogg._createdAt);
+export const BloggList = async ({ blogg }: { blogg: Blogg }) => {
+  const avatars = queryToAvatars(blogg.writers);
 
   const imageUrl = urlForImage(blogg?.seo?.image as Image)
     ?.quality(100)
@@ -67,18 +62,17 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
             <BodyLong className={styles.articleBody} size="medium">
               {blogg?.ingress}
             </BodyLong>
-            {getAuthors(blogg).length > 0 ? (
-              <BodyShort size="small" className={styles.articleAuthor}>
-                <BodyShort as="span" size="small" weight="semibold">
-                  {getAuthors(blogg)[0]}
-                </BodyShort>
-                <span>{date}</span>
-              </BodyShort>
-            ) : (
-              <BodyShort size="small" className={styles.articleBodySubtle}>
-                <span>{date}</span>
-              </BodyShort>
-            )}
+            <AvatarStack showNames>
+              {avatars.map((avatar) => {
+                return (
+                  <Avatar
+                    key={avatar.name}
+                    imageSrc={avatar.imageSrc}
+                    name={avatar.name}
+                  ></Avatar>
+                );
+              })}
+            </AvatarStack>
           </div>
         </div>
       </Show>
@@ -95,18 +89,17 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
           <BodyLong className={styles.articleBody} size="medium">
             {blogg?.ingress}
           </BodyLong>
-          {getAuthors(blogg).length > 0 ? (
-            <BodyShort size="small" className={styles.articleAuthor}>
-              <BodyShort as="span" size="small" weight="semibold">
-                {getAuthors(blogg)[0]}
-              </BodyShort>
-              <span>{date}</span>
-            </BodyShort>
-          ) : (
-            <BodyShort size="small" className={styles.articleBodySubtle}>
-              <span>{date}</span>
-            </BodyShort>
-          )}
+          <AvatarStack showNames>
+            {avatars.map((avatar) => {
+              return (
+                <Avatar
+                  key={avatar.name}
+                  imageSrc={avatar.imageSrc}
+                  name={avatar.name}
+                ></Avatar>
+              );
+            })}
+          </AvatarStack>
         </div>
       </Hide>
     </li>

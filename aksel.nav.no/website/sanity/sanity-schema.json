@@ -13678,7 +13678,7 @@
         },
         "optional": true
       },
-      "editorial_staff_teams": {
+      "writers": {
         "type": "objectAttribute",
         "value": {
           "type": "array",

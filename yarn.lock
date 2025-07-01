@@ -25853,6 +25853,7 @@ __metadata:
     "@babel/core": "npm:^7.19.0"
     "@babel/parser": "npm:^7.27.5"
     "@babel/traverse": "npm:^7.27.4"
+    "@floating-ui/react": "npm:0.27.8"
     "@navikt/next-logger": "npm:2.0.0"
     "@navikt/oasis": "npm:3.2.1"
     "@next/bundle-analyzer": "npm:15.2.3"

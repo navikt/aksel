@@ -1,21 +1,20 @@
 import NextImage from "next/image";
 import NextLink from "next/link";
-import {
-  BodyLong,
-  BodyShort,
-  Heading,
-  Hide,
-  Link,
-  Show,
-} from "@navikt/ds-react";
+import { Image } from "sanity";
+import { BodyLong, Heading, Hide, Link, Show } from "@navikt/ds-react";
+import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
-import { dateStr, getAuthors, getImage } from "@/utils";
+import { getImage } from "@/utils";
+import { Avatar, AvatarStack } from "../../_ui/avatar/Avatar";
 import styles from "../_ui/Produktbloggen.module.css";
+import { queryToAvatars } from "./utils";
 
-export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
-  const date = await dateStr(blogg?.publishedAt ?? blogg._createdAt);
+type Blogg = NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][0];
 
-  const imageUrl = urlForImage(blogg?.seo?.image)
+export const HighlightedBlogg = async ({ blogg }: { blogg: Blogg }) => {
+  const avatars = queryToAvatars(blogg.writers);
+
+  const imageUrl = urlForImage(blogg?.seo?.image as Image)
     ?.quality(100)
     .auto("format")
     .url();
@@ -58,14 +57,17 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
           <BodyLong className={styles.articleBody} size="large">
             {blogg?.ingress}
           </BodyLong>
-          {getAuthors(blogg).length > 0 && (
-            <BodyShort size="small" className={styles.articleAuthor}>
-              <BodyShort as="span" size="small" weight="semibold">
-                {getAuthors(blogg)[0]}
-              </BodyShort>
-              <span>{date}</span>
-            </BodyShort>
-          )}
+          <AvatarStack showNames>
+            {avatars.map((avatar) => {
+              return (
+                <Avatar
+                  key={avatar.name}
+                  imageSrc={avatar.imageSrc}
+                  name={avatar.name}
+                ></Avatar>
+              );
+            })}
+          </AvatarStack>
         </div>
       </Show>
       {/* Mobile view */}
@@ -107,14 +109,17 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
           <BodyLong className={styles.articleBody} size="small">
             {blogg?.ingress}
           </BodyLong>
-          {getAuthors(blogg).length > 0 && (
-            <BodyShort size="small" className={styles.articleAuthor}>
-              <BodyShort as="span" size="small" weight="semibold">
-                {getAuthors(blogg)[0]}
-              </BodyShort>
-              <span>{date}</span>
-            </BodyShort>
-          )}
+          <AvatarStack showNames>
+            {avatars.map((avatar) => {
+              return (
+                <Avatar
+                  key={avatar.name}
+                  imageSrc={avatar.imageSrc}
+                  name={avatar.name}
+                ></Avatar>
+              );
+            })}
+          </AvatarStack>
         </div>
       </Hide>
     </article>
