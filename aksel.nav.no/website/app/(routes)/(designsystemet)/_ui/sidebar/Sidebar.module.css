@@ -89,7 +89,7 @@
 }
 
 .navListSubButtonIcon {
-  .navListSubButton[aria-expanded="true"] > & {
+  .navListSubButton[aria-expanded="true"] & {
     transform: rotateX(-180deg);
   }
 }
