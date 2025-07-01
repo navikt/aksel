@@ -1,16 +1,10 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  MoonIcon,
-  SunIcon,
-} from "@navikt/aksel-icons";
-import { BodyShort, ToggleGroup } from "@navikt/ds-react";
+import { useState } from "react";
+import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
+import { BodyShort } from "@navikt/ds-react";
 import styles from "./MobileNav.module.css";
 
 function MobileNavMenu({ children }: { children: React.ReactNode }) {
@@ -27,13 +21,6 @@ function MobileNavMenu({ children }: { children: React.ReactNode }) {
 }
 
 function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
-  const { theme, setTheme } = useTheme();
-
-  /* https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch */
-  const [renderThemeToggle, setRenderThemeToggle] = useState(false);
-
-  useEffect(() => setRenderThemeToggle(true), []);
-
   return (
     <div className={styles.mobileNavMenuIntialView}>
       <BodyShort as="ul" className={styles.mobileNavMenuList}>
@@ -54,27 +41,6 @@ function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
           </Link>
         </li>
       </BodyShort>
-
-      {renderThemeToggle && (
-        <ToggleGroup
-          fill
-          onChange={setTheme}
-          value={theme}
-          variant="neutral"
-          className={styles.mobileNavMenuThemeToggle}
-        >
-          <ToggleGroup.Item
-            value="light"
-            icon={<SunIcon aria-hidden />}
-            label="Light"
-          />
-          <ToggleGroup.Item
-            value="dark"
-            icon={<MoonIcon aria-hidden />}
-            label="Dark"
-          />
-        </ToggleGroup>
-      )}
     </div>
   );
 }
