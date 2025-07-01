@@ -20,10 +20,8 @@ spec:
       memory: 256Mi
   liveness:
     path: /api/isAlive
-    initialDelay: 10
   readiness:
     path: /api/isAlive
-    initialDelay: 10
 
   accessPolicy:
     outbound:
