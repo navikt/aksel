@@ -8,13 +8,12 @@ export const SimpleArticle = async ({ blogg }: { blogg: any }) => {
 
   return (
     <article>
-      <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-        <Link className={styles.link}>
-          <Heading size="medium" level="2">
-            {blogg.heading}
-          </Heading>
-        </Link>
-      </NextLink>
+      <Link as={NextLink} className={styles.link} href={`/${blogg.slug}`}>
+        <Heading size="medium" level="2">
+          {blogg.heading}
+        </Heading>
+      </Link>
+
       <BodyLong className={styles.articleBody} size="medium">
         {blogg?.ingress}
       </BodyLong>

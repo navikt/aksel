@@ -57,44 +57,36 @@ function IconPage({
         </Box>
         <HStack as="ul" gap="space-16" marginBlock="space-24 0">
           <li className={styles.iconPageLinkLi}>
-            <NextLink
+            <Link
+              as={NextLink}
               href="https://www.figma.com/community/file/1214869602572392330"
-              passHref
-              legacyBehavior
+              variant="subtle"
+              onClick={() =>
+                umamiTrack("navigere", {
+                  kilde: "ikonside",
+                  url: "https://www.figma.com/community/file/1214869602572392330",
+                })
+              }
             >
-              <Link
-                variant="subtle"
-                onClick={() =>
-                  umamiTrack("navigere", {
-                    kilde: "ikonside",
-                    url: "https://www.figma.com/community/file/1214869602572392330",
-                  })
-                }
-              >
-                <FigmaIcon /> <span>Figma</span>
-              </Link>
-            </NextLink>
+              <FigmaIcon /> <span>Figma</span>
+            </Link>
           </li>
 
           <li className={styles.iconPageLinkLi}>
-            <NextLink
+            <Link
+              as={NextLink}
               href="/god-praksis/artikler/tilgjengelig-ikonbruk"
-              passHref
-              legacyBehavior
+              variant="subtle"
+              onClick={() =>
+                umamiTrack("navigere", {
+                  kilde: "ikonside",
+                  url: "/god-praksis/artikler/tilgjengelig-ikonbruk",
+                })
+              }
             >
-              <Link
-                variant="subtle"
-                onClick={() =>
-                  umamiTrack("navigere", {
-                    kilde: "ikonside",
-                    url: "/god-praksis/artikler/tilgjengelig-ikonbruk",
-                  })
-                }
-              >
-                <BrailleIcon aria-hidden fontSize="1.5rem" />{" "}
-                <span>Tilgjengelighet</span>
-              </Link>
-            </NextLink>
+              <BrailleIcon aria-hidden fontSize="1.5rem" />{" "}
+              <span>Tilgjengelighet</span>
+            </Link>
           </li>
           <li className={styles.iconPageLinkLi}>
             <Link

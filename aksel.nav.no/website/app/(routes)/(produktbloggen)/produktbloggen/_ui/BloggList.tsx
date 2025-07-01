@@ -57,13 +57,12 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
           </div>
 
           <div>
-            <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-              <Link className={styles.link}>
-                <Heading size="medium" level="2">
-                  {blogg.heading}
-                </Heading>
-              </Link>
-            </NextLink>
+            <Link as={NextLink} className={styles.link} href={`/${blogg.slug}`}>
+              <Heading size="medium" level="2">
+                {blogg.heading}
+              </Heading>
+            </Link>
+
             <BodyLong className={styles.articleBody} size="medium">
               {blogg?.ingress}
             </BodyLong>
@@ -85,13 +84,12 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
 
       <Hide asChild above="md">
         <div>
-          <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-            <Link className={styles.link}>
-              <Heading size="medium" level="2">
-                {blogg.heading}
-              </Heading>
-            </Link>
-          </NextLink>
+          <Link className={styles.link} href={`/${blogg.slug}`} as={NextLink}>
+            <Heading size="medium" level="2">
+              {blogg.heading}
+            </Heading>
+          </Link>
+
           <BodyLong className={styles.articleBody} size="medium">
             {blogg?.ingress}
           </BodyLong>
