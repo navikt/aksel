@@ -26,7 +26,7 @@ type PageRoute = {
 
 type Routes = {
   komponenter: {
-    title: "Komponenter";
+    title: "Byggeklosser";
     _type: "komponent_artikkel";
     root: PageRoute[];
     nested?: Partial<
@@ -77,7 +77,7 @@ const PAGE_ROUTES: Routes = {
     },
   },
   komponenter: {
-    title: "Komponenter",
+    title: "Byggeklosser",
     _type: "komponent_artikkel",
     root: [
       {

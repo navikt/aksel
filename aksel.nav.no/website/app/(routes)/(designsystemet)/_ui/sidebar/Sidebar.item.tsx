@@ -51,7 +51,6 @@ function DesignsystemSidebarItem(props: {
         onNavigate={() => toggleOpen(false)}
         className={cl(styles.navListItemLink, styles.navListNotch)}
         data-notch={active}
-        prefetch={false}
         data-current={active}
         onClick={() =>
           umamiTrack("navigere", {
