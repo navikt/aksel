@@ -3,8 +3,6 @@ import { z } from "zod";
 import meta from "@navikt/aksel-icons/metadata";
 import { IconPage } from "@/app/(routes)/(designsystemet)/_ui/icon-page/IconPage";
 
-export const dynamic = "force-dynamic";
-
 type Props = {
   params: Promise<{ category: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

@@ -15,20 +15,25 @@ function IconPageButton({
 }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const { replace, prefetch } = useRouter();
 
   const context = useIconPage();
 
   const isActive = iconName === activeIconName;
 
-  const handleClick = () => {
+  const getNextHref = () => {
     const params = new URLSearchParams(searchParams?.toString());
     if (isActive) {
       params.delete("iconName");
     } else {
       params.set("iconName", iconName);
     }
-    replace(`${pathname}?${params.toString()}`, { scroll: false });
+
+    return `${pathname}?${params.toString()}`;
+  };
+
+  const handleClick = () => {
+    replace(getNextHref(), { scroll: false });
   };
 
   return (
@@ -46,6 +51,7 @@ function IconPageButton({
         data-state={isActive ? "active" : "inactive"}
         aria-pressed={isActive}
         aria-controls={isActive ? "icon-page-sidepanel" : undefined}
+        onMouseEnter={() => prefetch(getNextHref())}
       >
         {icon}
       </button>
