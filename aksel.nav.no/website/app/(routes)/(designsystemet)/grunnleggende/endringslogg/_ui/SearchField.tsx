@@ -48,6 +48,7 @@ export default function SearchField() {
         autoComplete="off"
         onClear={() => handleSearch("")}
         onChange={(v) => v === "" && handleSearch("")}
+        data-color="neutral"
       />
     </form>
   );
