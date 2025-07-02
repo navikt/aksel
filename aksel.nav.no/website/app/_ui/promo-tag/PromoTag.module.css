@@ -55,25 +55,25 @@
 @keyframes rainbow-hype-moderate {
   0% {
     background-color: var(--ax-bg-meta-purple-moderateA);
-    border-color: var(--ax-border-meta-purple-subtleA);
+    border-color: var(--ax-border-meta-purple);
     color: var(--ax-text-meta-purple-pink);
   }
 
   33% {
     background-color: var(--aksel-bg-brand-teal-moderateA);
-    border-color: var(--aksel-border-brand-teal-subtleA);
+    border-color: var(--aksel-border-brand-teal);
     color: var(--aksel-text-brand-teal);
   }
 
   66% {
     background-color: var(--ax-bg-brand-blue-moderateA);
-    border-color: var(--ax-border-brand-blue-subtleA);
+    border-color: var(--ax-border-brand-blue);
     color: var(--ax-text-brand-blue);
   }
 
   100% {
     background-color: var(--ax-bg-meta-purple-moderateA);
-    border-color: var(--ax-border-meta-purple-subtleA);
+    border-color: var(--ax-border-meta-purple);
     color: var(--ax-text-meta-purple);
   }
 }
