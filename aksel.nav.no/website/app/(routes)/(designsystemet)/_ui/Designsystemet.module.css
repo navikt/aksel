@@ -81,6 +81,17 @@
   background-color: var(--ax-bg-moderate);
   margin-block-start: var(--ax-space-28);
   overflow: hidden;
+
+  & div {
+    height: 100%;
+    display: grid;
+    place-content: center;
+
+    & svg {
+      height: 100%;
+      max-width: 100%;
+    }
+  }
 }
 
 .thumbnailImage {
