@@ -38,6 +38,7 @@ function FooterEdit() {
       className={styles.footerEdit}
       target="_blank"
       rel="noopener noreferrer"
+      prefetch={false}
     >
       Rediger side
     </Link>

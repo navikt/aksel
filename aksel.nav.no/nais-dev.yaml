@@ -20,10 +20,8 @@ spec:
       memory: 256Mi
   liveness:
     path: /api/isAlive
-    initialDelay: 10
   readiness:
     path: /api/isAlive
-    initialDelay: 10
 
   accessPolicy:
     outbound:
@@ -37,6 +35,7 @@ spec:
         - host: hnbe3yhs.apicdn.sanity.io
         - host: cdn.sanity.io
         - host: umami.nav.no
+        - host: raw.githubusercontent.com
       rules: []
   filesFrom:
     - emptyDir:

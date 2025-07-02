@@ -1,0 +1,106 @@
+/* TODO: This might be a global style, so move it out if needed  */
+.websitePage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pageLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-inline: auto;
+  width: 100%;
+  z-index: 0;
+  position: relative;
+  max-width: 1920px;
+
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  min-height: calc(100vh - var(--website-header-height-width-border));
+}
+
+@media (min-width: 1024px) {
+  .pageLayout {
+    grid-template-columns: min-content 1fr;
+  }
+}
+
+.pageLayoutMain {
+  width: fit-content;
+  margin: 0 auto;
+  padding-block: var(--ax-space-56) var(--ax-space-128);
+  padding-inline: var(--ax-space-16);
+  display: grid;
+  column-gap: var(--ax-space-40);
+
+  /* TODO: For new icon-page: max-width: unsure, but right-panel is a little larger than TOC so adjust accordingly with designer */
+
+  /* TODO: For page-overview templates: max-width 1280px, only 1 column always since there is no TOC */
+  grid-template-columns: minmax(0, 960px);
+  grid-template-rows: min-content min-content;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  grid-template-areas:
+    "intro"
+    "content";
+
+  &[data-layout="without-toc"] {
+    grid-template-columns: minmax(0, 1200px);
+  }
+}
+
+@media (min-width: 768px) {
+  .pageLayoutMain {
+    padding-inline: var(--ax-space-40);
+  }
+}
+
+@media (min-width: 1280px) {
+  .pageLayoutMain[data-layout="with-toc"] {
+    grid-template-areas:
+      "intro aside"
+      "content aside";
+    grid-template-columns: minmax(0, 960px) min-content;
+  }
+}
+
+.pageHeaderHeading {
+  margin-block-end: var(--ax-space-4);
+}
+
+.pageHeaderEyebrow {
+  color: var(--ax-text-brand-blue-subtle);
+  margin-block-end: var(--ax-space-2);
+}
+
+.thumbnailContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 24 / 9;
+  border-radius: 16px;
+  background-color: var(--ax-bg-moderate);
+  margin-block-start: var(--ax-space-28);
+  overflow: hidden;
+
+  & div {
+    height: 100%;
+    display: grid;
+    place-content: center;
+
+    & svg {
+      height: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+.thumbnailImage {
+  z-index: 10;
+}
+
+.thumbnailCube {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

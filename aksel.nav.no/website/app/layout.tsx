@@ -54,7 +54,11 @@ export default async function RootLayout({
           <ConsentBanner />
           {children}
         </ThemeProvider>
-        <SanityLive />
+        <SanityLive
+          intervalOnGoAway={false}
+          refreshOnFocus={false}
+          refreshOnMount={false}
+        />
         {isDraftMode && (
           <>
             <DisableDraftMode />

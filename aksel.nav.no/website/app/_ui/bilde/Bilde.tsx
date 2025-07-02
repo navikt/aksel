@@ -19,8 +19,6 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
 
   const imageUrl = urlForImage(props?.value as Image)
     ?.auto("format")
-    // TODO: (stw) Remove before production
-    .dataset("development")
     .url();
 
   if (!imageUrl) {
@@ -60,9 +58,14 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
               {kilde?.link ? (
                 <>
                   {`${kilde?.prefix}: `}
-                  <NextLink href={kilde.link} passHref legacyBehavior>
-                    <Link className="break-normal">{kilde?.tekst}</Link>
-                  </NextLink>
+
+                  <Link
+                    as={NextLink}
+                    href={kilde.link}
+                    className="break-normal"
+                  >
+                    {kilde?.tekst}
+                  </Link>
                 </>
               ) : (
                 <>{`${kilde?.prefix}: ${kilde?.tekst}`}</>

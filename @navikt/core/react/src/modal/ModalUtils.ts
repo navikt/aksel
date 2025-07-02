@@ -27,7 +27,8 @@ export function getCloseHandler(
   return () => modalRef.current?.close();
 }
 
-export const BODY_CLASS = "navds-modal__document-body";
+export const BODY_CLASS_LEGACY = "navds-modal__document-body";
+export const BODY_CLASS = "aksel-modal__document-body";
 
 export function useBodyScrollLock(
   modalRef: React.RefObject<HTMLDialogElement>,
@@ -35,21 +36,37 @@ export function useBodyScrollLock(
   isNested: boolean,
 ) {
   React.useEffect(() => {
-    if (isNested) return;
-    if (!modalRef.current || !portalNode) return; // We check both to avoid running this twice when not using portal
-    if (modalRef.current.open) document.body.classList.add(BODY_CLASS); // In case `open` is true initially
+    if (isNested) {
+      return;
+    }
+
+    // We check both to avoid running this twice when not using portal
+    if (!modalRef.current || !portalNode) {
+      return;
+    }
+
+    // In case `open` is true initially
+    if (modalRef.current.open) {
+      document.body.classList.add(BODY_CLASS, BODY_CLASS_LEGACY);
+    }
 
     const observer = new MutationObserver(() => {
-      if (modalRef.current?.open) document.body.classList.add(BODY_CLASS);
-      else document.body.classList.remove(BODY_CLASS);
+      if (modalRef.current?.open) {
+        document.body.classList.add(BODY_CLASS, BODY_CLASS_LEGACY);
+      } else {
+        document.body.classList.remove(BODY_CLASS, BODY_CLASS_LEGACY);
+      }
     });
+
     observer.observe(modalRef.current, {
       attributes: true,
       attributeFilter: ["open"],
     });
+
     return () => {
       observer.disconnect();
-      document.body.classList.remove(BODY_CLASS); // In case modal is unmounted before it's closed
+      // In case modal is unmounted before it's closed
+      document.body.classList.remove(BODY_CLASS, BODY_CLASS_LEGACY);
     };
   }, [modalRef, portalNode, isNested]);
 }

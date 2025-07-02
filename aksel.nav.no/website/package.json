@@ -5,8 +5,8 @@
   "description": "Aksel.nav.no website",
   "author": "Aksel | Nav designsystem team",
   "scripts": {
-    "dev": "next | pino-pretty",
-    "dev-turbo": "next --turbo | pino-pretty",
+    "dev": "next | pino-pretty --messageKey=message",
+    "dev-turbo": "next --turbo | pino-pretty --messageKey=message",
     "build": "yarn workspace playroom build:playroom && yarn update:searchindex && next build && yarn update:rss && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "update:searchindex": "yarn tsx --env-file-if-exists=.env ./scripts/create-index",
@@ -35,8 +35,8 @@
     "cp:assets": "yarn cp:playroom && yarn cp:public && yarn cp:static"
   },
   "dependencies": {
+    "@navikt/next-logger": "4.1.4",
     "@floating-ui/react": "0.27.8",
-    "@navikt/next-logger": "2.0.0",
     "@navikt/oasis": "3.2.1",
     "@portabletext/react": "^3.2.1",
     "@sanity/client": "^7.0.0",
