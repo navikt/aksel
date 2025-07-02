@@ -5,7 +5,7 @@ import { stegaClean } from "next-sanity";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ChevronDownIcon, SparklesIcon } from "@navikt/aksel-icons";
-import { HStack, Tag } from "@navikt/ds-react";
+import { HStack } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { SidebarGroupedPagesT } from "@/types";
 import { DesignsystemSidebarItem } from "./Sidebar.item";
@@ -41,26 +41,16 @@ function DesignsystemSidebarSubNav(
         className={cl(styles.navListSubButton, styles.navListNotch)}
         data-notch={isSectionActive && !open}
         data-state={isSectionActive ? "active" : "inactive"}
+        data-highlight={isDarkside}
         data-open={open}
         aria-expanded={open}
       >
-        <span>{title}</span>
-        <HStack as="span" gap="space-4" align="center">
-          {isDarkside && (
-            <Tag
-              size="xsmall"
-              variant="success"
-              icon={<SparklesIcon aria-hidden />}
-              data-color="brand-magenta"
-            >
-              Ny
-            </Tag>
-          )}
-          <ChevronDownIcon
-            aria-hidden
-            className={styles.navListSubButtonIcon}
-          />
+        <HStack as="span" align="center" gap="space-8">
+          {title}
+          <SparklesIcon aria-hidden />
         </HStack>
+
+        <ChevronDownIcon aria-hidden className={styles.navListSubButtonIcon} />
       </button>
       <ul hidden={!open}>
         {pages.map((page) => (

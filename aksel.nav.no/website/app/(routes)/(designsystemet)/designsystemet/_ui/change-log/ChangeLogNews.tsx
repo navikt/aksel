@@ -1,5 +1,3 @@
-import { format, parseISO } from "date-fns";
-import { nb } from "date-fns/locale";
 import { FileTextIcon, SparklesIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -11,7 +9,6 @@ import {
 } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
-  LinkCardFooter,
   LinkCardIcon,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
@@ -29,7 +26,7 @@ type ChangeLogNewsProps = {
 async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
   const { data: changeLogEntries } = await sanityFetch({
     query: N_LATEST_CHANGE_LOGS_QUERY,
-    params: { count: 2 },
+    params: { count: 3 },
   });
 
   if (changeLogEntries.length === 0) {
@@ -50,37 +47,43 @@ async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
           </BodyLong>
         )}
       </VStack>
-      <HGrid gap="space-24" columns={{ xs: 1, md: 2, xl: 3 }}>
-        {changeLogEntries.map(
-          ({ heading, slug, endringsdato, endringstype }) => (
-            <LinkCard key={heading}>
-              <ChangelogIcon endringstype={endringstype} />
-              <LinkCardTitle as="span">
-                <LinkCardAnchor
-                  href={`/grunnleggende/endringslogg/${slug?.current}`}
-                >
-                  {heading}
-                </LinkCardAnchor>
-              </LinkCardTitle>
-              {endringsdato && (
-                <LinkCardFooter>
-                  {format(parseISO(endringsdato), "do MMMM yyyy", {
-                    locale: nb,
-                  })}
-                </LinkCardFooter>
-              )}
-            </LinkCard>
-          ),
-        )}
-        <LinkCard>
-          <ChangelogIcon endringstype="sparkles" />
-          <LinkCardTitle as="span">
-            <LinkCardAnchor href="/grunnleggende/endringslogg">
-              Alle endringer
-            </LinkCardAnchor>
-          </LinkCardTitle>
-          <LinkCardFooter>Endringsloggen</LinkCardFooter>
-        </LinkCard>
+      <HGrid gap="space-24" columns={{ xs: 1, md: 2 }}>
+        {changeLogEntries.map(({ heading, slug, endringstype }) => (
+          <LinkCard key={heading}>
+            <ChangelogIcon endringstype={endringstype} />
+            <LinkCardTitle as="span">
+              <LinkCardAnchor
+                href={`/grunnleggende/endringslogg/${slug?.current}`}
+              >
+                {heading}
+              </LinkCardAnchor>
+            </LinkCardTitle>
+          </LinkCard>
+        ))}
+        <BoxNew asChild borderColor="neutral">
+          <LinkCard>
+            <BoxNew
+              asChild
+              padding="space-16"
+              borderRadius="12"
+              background="neutral-strong"
+            >
+              <LinkCardIcon>
+                <SparklesIcon
+                  color="var(--ax-text-contrast)"
+                  width="2.25rem"
+                  height="2.25rem"
+                  aria-hidden="true"
+                />
+              </LinkCardIcon>
+            </BoxNew>
+            <LinkCardTitle as="span">
+              <LinkCardAnchor href="/grunnleggende/endringslogg">
+                Alle endringer
+              </LinkCardAnchor>
+            </LinkCardTitle>
+          </LinkCard>
+        </BoxNew>
       </HGrid>
     </VStack>
   );

@@ -86,6 +86,10 @@
   [data-layout="mobile"] & {
     padding-block: var(--ax-space-12);
   }
+
+  &[data-highlight="true"] {
+    color: var(--ax-text-subtle);
+  }
 }
 
 .navListSubButtonIcon {
