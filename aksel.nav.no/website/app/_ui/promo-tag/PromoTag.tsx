@@ -5,7 +5,11 @@ import { DS_PROMO_QUERY } from "@/app/_sanity/queries";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import styles from "./PromoTag.module.css";
 
-async function PromoTag() {
+type PromoTagProps = {
+  animated?: boolean;
+};
+
+async function PromoTag({ animated = false }: PromoTagProps) {
   const { data: promoData } = await sanityFetch({
     query: DS_PROMO_QUERY,
   });
@@ -24,13 +28,14 @@ async function PromoTag() {
       href={promoData.link}
       data-color="aksel-brand-pink"
       data-animated-arrow-anchor
+      data-animated={animated}
     >
       <Detail as="span" className={styles.promoTagContent} textColor="default">
         <Detail as="span" className={styles.promoTagLabel}>
           {promoData.label}
         </Detail>
         <HStack gap="space-4" align="center" as="span" wrap={false}>
-          <span>{promoData.text}</span>
+          <span className={styles.promoTagText}>{promoData.text}</span>
           <AnimatedArrowRight />
         </HStack>
       </Detail>

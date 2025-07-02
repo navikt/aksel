@@ -88,7 +88,9 @@ const Page = async () => {
                   paddingInline={{ xs: "space-0", sm: "space-48" }}
                   marginInline={{ xs: "space-0", md: "space-96" }}
                 >
-                  <PromoTag />
+                  <BoxNew paddingBlock="space-0 space-24" marginInline="auto">
+                    <PromoTag animated />
+                  </BoxNew>
                   <HStack justify="end" marginBlock="space-16">
                     <AnimationButton />
                   </HStack>
