@@ -42,19 +42,19 @@
 
 @keyframes rainbow-hype {
   0% {
-    --cube-stroke-color-dark: var(--ax-border-meta-purple-subtle);
-  }
-
-  33% {
-    --cube-stroke-color-dark: var(--aksel-brand-teal-400A);
-  }
-
-  66% {
     --cube-stroke-color-dark: var(--ax-border-brand-blue-subtleA);
   }
 
-  100% {
+  33% {
     --cube-stroke-color-dark: var(--ax-border-meta-purple-subtle);
+  }
+
+  66% {
+    --cube-stroke-color-dark: var(--aksel-brand-teal-400A);
+  }
+
+  100% {
+    --cube-stroke-color-dark: var(--ax-border-brand-blue-subtleA);
   }
 }
 

@@ -20,8 +20,8 @@
   background-color: var(--aksel-bg-brand-pink-moderateA);
   border: 1px solid;
   border-color: var(--aksel-border-brand-pink-subtleA);
-  border-radius: var(--ax-border-radius-xlarge);
   color: var(--aksel-text-brand-pink);
+  border-radius: var(--ax-border-radius-xlarge);
   backdrop-filter: blur(3px);
   text-underline-offset: 0.1em;
   text-decoration-thickness: 0.111em;
@@ -33,6 +33,9 @@
   }
 
   [data-animated="true"] & {
+    background-color: var(--ax-bg-brand-blue-moderateA);
+    border-color: var(--ax-border-brand-blue-subtleA);
+    color: var(--ax-text-brand-blue);
     animation: 60s ease infinite rainbow-hype-moderate;
   }
 }
@@ -48,51 +51,52 @@
   color: var(--ax-text-contrast);
 
   [data-animated="true"] & {
+    background-color: var(--ax-bg-brand-blue-strong);
     animation: 60s ease infinite rainbow-hype-strong;
   }
 }
 
 @keyframes rainbow-hype-moderate {
   0% {
-    background-color: var(--ax-bg-meta-purple-moderateA);
-    border-color: var(--ax-border-meta-purple);
-    color: var(--ax-text-meta-purple-pink);
-  }
-
-  33% {
-    background-color: var(--aksel-bg-brand-teal-moderateA);
-    border-color: var(--aksel-border-brand-teal);
-    color: var(--aksel-text-brand-teal);
-  }
-
-  66% {
     background-color: var(--ax-bg-brand-blue-moderateA);
     border-color: var(--ax-border-brand-blue);
     color: var(--ax-text-brand-blue);
   }
 
-  100% {
+  33% {
     background-color: var(--ax-bg-meta-purple-moderateA);
     border-color: var(--ax-border-meta-purple);
-    color: var(--ax-text-meta-purple);
+    color: var(--ax-text-meta-purple-pink);
+  }
+
+  66% {
+    background-color: var(--aksel-bg-brand-teal-moderateA);
+    border-color: var(--aksel-border-brand-teal);
+    color: var(--aksel-text-brand-teal);
+  }
+
+  100% {
+    background-color: var(--ax-bg-brand-blue-moderateA);
+    border-color: var(--ax-border-brand-blue);
+    color: var(--ax-text-brand-blue);
   }
 }
 
 @keyframes rainbow-hype-strong {
   0% {
-    background-color: var(--ax-bg-meta-purple-strong);
-  }
-
-  33% {
-    background-color: var(--aksel-bg-brand-teal-strong);
-  }
-
-  66% {
     background-color: var(--ax-bg-brand-blue-strong);
   }
 
-  100% {
+  33% {
     background-color: var(--ax-bg-meta-purple-strong);
+  }
+
+  66% {
+    background-color: var(--aksel-bg-brand-teal-strong);
+  }
+
+  100% {
+    background-color: var(--ax-bg-brand-blue-strong);
   }
 }
 

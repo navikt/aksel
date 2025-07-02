@@ -54,25 +54,25 @@
 @property --gradient-1 {
   syntax: "<color>";
   inherits: false;
-  initial-value: #dfcaf9;
+  initial-value: #c0d6e4;
 }
 
 @property --gradient-2 {
   syntax: "<color>";
   inherits: false;
-  initial-value: #ebdefc;
+  initial-value: #d7e6f0;
 }
 
 @property --gradient-dark {
   syntax: "<color>";
   inherits: false;
-  initial-value: #261e3b;
+  initial-value: #00253c;
 }
 
 @property --hero-text {
   syntax: "<color>";
   inherits: false;
-  initial-value: #ae8cdb;
+  initial-value: #156389;
 }
 
 .heroText {
@@ -90,31 +90,31 @@
 
 @keyframes rainbow-hype {
   0% {
-    --gradient-1: var(--ax-bg-meta-purple-moderate-pressed);
-    --gradient-2: var(--ax-bg-meta-purple-moderate-hover);
-    --gradient-dark: var(--ax-bg-meta-purple-moderate);
-    --hero-text: var(--ax-text-meta-purple-subtle);
-  }
-
-  33% {
-    --gradient-1: var(--aksel-brand-teal-400);
-    --gradient-2: var(--aksel-brand-teal-300);
-    --gradient-dark: var(--aksel-brand-teal-200);
-    --hero-text: var(--aksel-brand-teal-800);
-  }
-
-  66% {
     --gradient-1: var(--ax-bg-brand-blue-moderate-pressed);
     --gradient-2: var(--ax-bg-brand-blue-moderate-hover);
     --gradient-dark: var(--brand-blue-moderate);
     --hero-text: var(--ax-text-brand-blue-subtle);
   }
 
-  100% {
+  33% {
     --gradient-1: var(--ax-bg-meta-purple-moderate-pressed);
     --gradient-2: var(--ax-bg-meta-purple-moderate-hover);
     --gradient-dark: var(--ax-bg-meta-purple-moderate);
     --hero-text: var(--ax-text-meta-purple-subtle);
+  }
+
+  66% {
+    --gradient-1: var(--aksel-brand-teal-400);
+    --gradient-2: var(--aksel-brand-teal-300);
+    --gradient-dark: var(--aksel-brand-teal-200);
+    --hero-text: var(--aksel-brand-teal-800);
+  }
+
+  100% {
+    --gradient-1: var(--ax-bg-brand-blue-moderate-pressed);
+    --gradient-2: var(--ax-bg-brand-blue-moderate-hover);
+    --gradient-dark: var(--brand-blue-moderate);
+    --hero-text: var(--ax-text-brand-blue-subtle);
   }
 }
 

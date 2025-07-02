@@ -47,7 +47,7 @@ function DesignsystemSidebarSubNav(
       >
         <HStack as="span" align="center" gap="space-8">
           {title}
-          <SparklesIcon aria-hidden />
+          {isDarkside && <SparklesIcon aria-hidden />}
         </HStack>
 
         <ChevronDownIcon aria-hidden className={styles.navListSubButtonIcon} />
