@@ -6,15 +6,6 @@
   }
 }
 
-.mainBanner {
-  padding: var(--ax-space-12);
-  text-align: center;
-  text-decoration: underline;
-  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
-  background: var(--ax-bg-neutral-moderateA);
-  backdrop-filter: blur(3px);
-}
-
 .frontPage {
   position: relative;
   overflow: hidden;
@@ -24,8 +15,7 @@
   position: relative;
   margin-inline: auto;
   padding-inline: 1.5rem;
-  margin-top: var(--ax-space-80);
-  margin-bottom: var(--ax-space-64);
+  margin-block: var(--ax-space-80) var(--ax-space-64);
   display: grid;
   width: 100%;
   text-align: center;

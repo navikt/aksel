@@ -23,7 +23,7 @@ import {
 import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { AnimationButton } from "@/app/(routes)/(root)/_ui/AnimationButton";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
+import PromoTag from "@/app/_ui/promo-tag/PromoTag";
 import { sanityFetch } from "../../_sanity/live";
 import {
   GOD_PRAKSIS_TEMA_QUERY,
@@ -78,18 +78,6 @@ const Page = async () => {
       <PauseAnimationProvider>
         <MainWrapper>
           <div className={styles.heroLinearBG} />
-          <div className={styles.mainBanner}>
-            <Link
-              href="/darkside"
-              target="_blank"
-              as={NextLink}
-              variant="neutral"
-              data-animated-arrow-anchor
-            >
-              Vi trenger testere fra team i Nav for darkmode og theming!
-              <AnimatedArrowRight />
-            </Link>
-          </div>
 
           <BoxNew className={styles.forsidePageWrapper}>
             <PageBlock width="xl" gutters>
@@ -100,6 +88,7 @@ const Page = async () => {
                   paddingInline={{ xs: "space-0", sm: "space-48" }}
                   marginInline={{ xs: "space-0", md: "space-96" }}
                 >
+                  <PromoTag />
                   <HStack justify="end" marginBlock="space-16">
                     <AnimationButton />
                   </HStack>

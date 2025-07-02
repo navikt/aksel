@@ -1,8 +1,14 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
-.promoTag:focus-visible {
-  outline: 3px solid var(--ax-border-focus);
-  outline-offset: 3px;
+.promoTag {
   border-radius: var(--ax-border-radius-xlarge);
+  width: fit-content;
+  display: block;
+  margin-inline: auto;
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
 }
 
 .promoTagContent {
