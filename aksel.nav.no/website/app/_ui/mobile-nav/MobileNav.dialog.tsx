@@ -6,7 +6,7 @@ import styles from "./MobileNav.module.css";
 import { useMobileNav } from "./MobileNav.provider";
 
 function MobileNavDialog({ children }: { children: React.ReactNode }) {
-  const { open, toggleOpen } = useMobileNav();
+  const { open, toggleOpen, focusRef } = useMobileNav();
 
   return (
     <Modal
@@ -28,6 +28,9 @@ function MobileNavDialog({ children }: { children: React.ReactNode }) {
           onClick={() => toggleOpen(false)}
           variant="secondary-neutral"
           icon={<XMarkIcon title="Lukk" />}
+          ref={(ref) => {
+            focusRef.current = ref;
+          }}
         />
       </Modal.Header>
       {children}

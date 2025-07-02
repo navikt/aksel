@@ -5,18 +5,28 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeftIcon, ChevronDownIcon } from "@navikt/aksel-icons";
 import { HGrid, VStack } from "@navikt/ds-react";
+import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
 import styles from "./MobileNav.module.css";
 
 function MobileNavMenu({ children }: { children: React.ReactNode }) {
+  const { focusRef } = useMobileNav();
   const pathName = usePathname();
   const [open, setOpen] = useState(pathName?.startsWith("/designsystemet"));
 
+  const handleOpenToggle = (toState?: boolean) => {
+    setOpen(toState);
+
+    queueMicrotask(() => {
+      focusRef.current?.focus();
+    });
+  };
+
   return open ? (
-    <DesignsystemView toggleClose={() => setOpen(false)}>
+    <DesignsystemView toggleClose={() => handleOpenToggle(false)}>
       {children}
     </DesignsystemView>
   ) : (
-    <InitialView toggleOpen={() => setOpen(true)} />
+    <InitialView toggleOpen={() => handleOpenToggle(true)} />
   );
 }
 
@@ -67,7 +77,7 @@ function DesignsystemView({
           onClick={toggleClose}
           aria-expanded="true"
         >
-          <ArrowLeftIcon title="Åpne designsystem-meny" fontSize="1.5rem" />
+          <ArrowLeftIcon title="Lukk designsystem-meny" fontSize="1.5rem" />
         </button>
 
         <a
