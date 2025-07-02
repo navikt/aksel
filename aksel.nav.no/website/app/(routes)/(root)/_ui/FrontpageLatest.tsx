@@ -43,7 +43,7 @@ const Latest = ({ block }: LatestArticlesProps) => {
   return (
     <>
       <Heading level="2" size="xlarge" className={styles.latestHeading}>
-        Siste fra Aksel
+        Siste fra Aksel og produktteamene
       </Heading>
 
       {highlights && <Highlights highlights={block.highlights} />}
