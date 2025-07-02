@@ -133,8 +133,8 @@ const globalLightTokensNoAlpha: GlobalConfigWithoutAlpha = {
   "meta-lime": {
     "100": { value: "#f4f9d1", type: "global-color", group: "meta-lime" },
     "200": { value: "#ebf4a9", type: "global-color", group: "meta-lime" },
-    "300": { value: "#e0ec6b", type: "global-color", group: "meta-lime" },
-    "400": { value: "#d0dc00", type: "global-color", group: "meta-lime" },
+    "300": { value: "#e1ea9a", type: "global-color", group: "meta-lime" },
+    "400": { value: "#cfda6c", type: "global-color", group: "meta-lime" },
     "500": { value: "#878f00", type: "global-color", group: "meta-lime" },
     "600": { value: "#757c00", type: "global-color", group: "meta-lime" },
     "700": { value: "#646900", type: "global-color", group: "meta-lime" },
