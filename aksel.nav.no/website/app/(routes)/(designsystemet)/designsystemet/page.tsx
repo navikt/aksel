@@ -49,7 +49,6 @@ const DesignsystemetPage = async () => {
               <DSLandingPageHeading
                 title={dsFrontPageData.ds_forside_title}
                 introText={dsFrontPageData.ds_forside_ingress}
-                promoTag={dsFrontPageData.ds_forside_promo_tag}
               />
               <GettingStartedSection
                 cards={dsFrontPageData.ds_getting_started}

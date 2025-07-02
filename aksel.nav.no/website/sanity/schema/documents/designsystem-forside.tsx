@@ -30,6 +30,12 @@ export const DesignsystemForside = defineType({
       type: "object",
       fields: [
         defineField({
+          title: "Vis promo",
+          name: "show",
+          type: "boolean",
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
           title: "Label",
           name: "label",
           type: "string",
@@ -52,7 +58,7 @@ export const DesignsystemForside = defineType({
               scheme: ["http", "https"],
               allowRelative: true,
             }),
-          initialValue: "/dev/designsystemet",
+          initialValue: "/designsystemet",
         }),
       ],
     }),
