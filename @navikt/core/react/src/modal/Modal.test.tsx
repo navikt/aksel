@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React, { useState } from "react";
 import { describe, expect, test } from "vitest";
 import { Button, Modal } from "..";
-import { BODY_CLASS } from "./ModalUtils";
+import { BODY_CLASS, BODY_CLASS_LEGACY } from "./ModalUtils";
 
 const Test = () => {
   const [open, setOpen] = useState(true);
@@ -32,11 +32,15 @@ describe("Modal", () => {
   test("should toggle body class", async () => {
     render(<Test />);
     expect(document.body.classList).toContain(BODY_CLASS);
+    expect(document.body.classList).toContain(BODY_CLASS_LEGACY);
 
     fireEvent.click(screen.getByText("Close"));
-    await waitFor(() =>
-      expect(document.body.classList).not.toContain(BODY_CLASS),
-    );
+    await waitFor(() => {
+      expect(document.body.classList).not.toContain(BODY_CLASS);
+    });
+    await waitFor(() => {
+      expect(document.body.classList).not.toContain(BODY_CLASS_LEGACY);
+    });
   });
 
   test("should toggle body class when using portal", async () => {
@@ -46,10 +50,14 @@ describe("Modal", () => {
       </Modal>,
     );
     expect(document.body.classList).toContain(BODY_CLASS);
+    expect(document.body.classList).toContain(BODY_CLASS_LEGACY);
 
     fireEvent.click(screen.getByRole("button"));
     await waitFor(() =>
       expect(document.body.classList).not.toContain(BODY_CLASS),
+    );
+    await waitFor(() =>
+      expect(document.body.classList).not.toContain(BODY_CLASS_LEGACY),
     );
   });
 });
