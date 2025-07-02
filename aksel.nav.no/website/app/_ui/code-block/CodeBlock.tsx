@@ -1,7 +1,7 @@
 "use client";
 
 import { Highlight } from "prism-react-renderer";
-import { useId } from "react";
+import { useId, useRef } from "react";
 import { ChevronDownUpIcon, ChevronUpDownIcon } from "@navikt/aksel-icons";
 import { Button, CopyButton, HStack, Spacer, Tabs } from "@navikt/ds-react";
 import { TabsList, TabsPanel, TabsTab } from "@navikt/ds-react/Tabs";
@@ -92,6 +92,7 @@ function CodeBlockEditor(props: {
   extraCode?: string;
   lang: string;
 }) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const { value, code, extraCode, lang } = props;
   const { expanded, codeSnippet, useTabs, showLineNumbers, wrapCode } =
     useCodeBlock();
@@ -105,10 +106,19 @@ function CodeBlockEditor(props: {
   const handleExpandUpdate = () => {
     codeSnippet.update(value, !expanded.current);
     expanded.toggle();
+
+    if (expanded.current) {
+      /* Scroll to the top of the code block when collapsed */
+      queueMicrotask(() => {
+        wrapperRef.current?.scrollIntoView({
+          block: "center",
+        });
+      });
+    }
   };
 
   return (
-    <Wrapper value={value}>
+    <Wrapper value={value} ref={wrapperRef}>
       <Highlight
         code={visibleCode}
         language={getLanguage(lang)}
@@ -148,7 +158,7 @@ function CodeBlockEditor(props: {
         >
           {expanded.current ? (
             <>
-              <span>Skjul ekstra kode</span>
+              <span>Vis mindre kode</span>
               <ChevronDownUpIcon aria-hidden="true" />
             </>
           ) : (

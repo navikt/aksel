@@ -1,5 +1,33 @@
 import type { Preview } from "@storybook/react";
+import React from "react";
 import "../dist/tw.css";
+
+export const globalTypes = {
+  theme: {
+    name: "Theme",
+    description: "Global theme for components",
+    defaultValue: "light",
+    toolbar: {
+      icon: "paintbrush",
+      showName: true,
+      dynamicTitle: true,
+      items: [
+        { value: "light", title: "Light" },
+        { value: "dark", title: "Dark" },
+      ],
+    },
+  },
+};
+
+const withTheme = (Story, context) => {
+  const theme = context.parameters.theme || context.globals.theme || "light";
+
+  return (
+    <div className={theme === "dark" ? "dark" : ""}>
+      <Story />
+    </div>
+  );
+};
 
 const preview: Preview = {
   parameters: {
@@ -40,6 +68,7 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [withTheme],
 };
 
 export default preview;
