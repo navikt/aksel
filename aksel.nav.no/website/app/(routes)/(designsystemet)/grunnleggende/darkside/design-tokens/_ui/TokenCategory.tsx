@@ -1,7 +1,7 @@
 import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import { BodyShort, Heading, VStack } from "@navikt/ds-react";
-import { TextWithMarkdown } from "@/web/TextWithMarkdown";
+import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import TokenRolesChips from "./TokenRolesChips";
 import TokensList from "./TokensList";
 import { BreakpointRoleT, ColorRoleT, FontRoleT } from "./config";
@@ -52,7 +52,7 @@ const TokenCategory = ({
           </Heading>
           {description && (
             <BodyShort as="p">
-              <TextWithMarkdown>{description}</TextWithMarkdown>
+              <MarkdownText>{description}</MarkdownText>
             </BodyShort>
           )}
         </VStack>
@@ -88,7 +88,7 @@ const TokenCategory = ({
                 </Heading>
                 {role.description && (
                   <BodyShort as="p">
-                    <TextWithMarkdown>{role.description}</TextWithMarkdown>
+                    <MarkdownText>{role.description}</MarkdownText>
                   </BodyShort>
                 )}
               </VStack>
