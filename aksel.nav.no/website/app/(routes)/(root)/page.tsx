@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import NextLink from "next/link";
 import { Image } from "sanity";
-import { ComponentIcon, FaceLaughIcon, TokenIcon } from "@navikt/aksel-icons";
+import { ComponentIcon, TokenIcon } from "@navikt/aksel-icons";
 import {
   Bleed,
   BodyLong,
@@ -21,6 +21,7 @@ import {
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
 import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
+import { AnimatedFaceCard } from "@/app/(routes)/(root)/_ui/AnimatedFaceCard";
 import { AnimationButton } from "@/app/(routes)/(root)/_ui/AnimationButton";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import PromoTag from "@/app/_ui/promo-tag/PromoTag";
@@ -203,29 +204,7 @@ const Page = async () => {
                         Farger, spacing, radius, etc.
                       </LinkCardDescription>
                     </LinkCard>
-                    <LinkCard data-color="brand-blue" arrow={false}>
-                      <BoxNew
-                        asChild
-                        padding="space-8"
-                        borderRadius="12"
-                        background="brand-blue-moderateA"
-                      >
-                        <LinkCardIcon>
-                          <FaceLaughIcon
-                            fontSize="3rem"
-                            color="var(--ax-text-subtle)"
-                          />
-                        </LinkCardIcon>
-                      </BoxNew>
-                      <LinkCardTitle data-color="neutral">
-                        <LinkCardAnchor asChild>
-                          <NextLink href="/komponenter/ikoner">Ikoner</NextLink>
-                        </LinkCardAnchor>
-                      </LinkCardTitle>
-                      <LinkCardDescription>
-                        900+ linje- og fylte ikoner
-                      </LinkCardDescription>
-                    </LinkCard>
+                    <AnimatedFaceCard />
                   </HGrid>
                 </BoxNew>
               </Bleed>
