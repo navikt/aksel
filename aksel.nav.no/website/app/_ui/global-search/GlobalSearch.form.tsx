@@ -33,7 +33,7 @@ const GlobalSearchForm = () => {
           spellCheck={false}
           id="aksel-search-input"
           clearButton={false}
-          placeholder="Søk hele Aksel..."
+          placeholder="Søk gjennom hele Aksel..."
         />
       </form>
       <Button

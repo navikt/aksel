@@ -79,7 +79,7 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
     <div className={styles.navList} data-layout={layout}>
       <Search
         variant="simple"
-        size="small"
+        size={layout === "sidebar" ? "small" : "medium"}
         label="Filtrer navigasjon"
         clearButton={false}
         onChange={setFilterText}
