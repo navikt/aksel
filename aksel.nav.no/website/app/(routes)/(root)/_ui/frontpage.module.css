@@ -72,7 +72,7 @@
 @property --hero-text {
   syntax: "<color>";
   inherits: false;
-  initial-value: #156389;
+  initial-value: #7f9fb3;
 }
 
 .heroText {
