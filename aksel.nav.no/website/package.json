@@ -18,7 +18,7 @@
     "update:tokens": "yarn tsx --env-file-if-exists=.env ./scripts/update-tokens",
     "update:eksempler": "yarn tsx --env-file-if-exists=.env ./scripts/update-examples/update-sanity",
     "validate:eksempler": "yarn tsx ./scripts/update-examples/validate",
-    "update:changelog": "yarn tsx --env-file-if-exists=.env ./scripts/changelog && yarn tsx --env-file-if-exists=.env ./scripts/changelog_old",
+    "update:changelog": "yarn tsx --env-file-if-exists=.env ./scripts/changelog",
     "update:sanity": "yarn update:tokens && yarn update:props && yarn update:eksempler && yarn update:changelog",
     "analyze": "cross-env ANALYZE=true yarn build",
     "test": "vitest run -c config/vitest.config.ts",
