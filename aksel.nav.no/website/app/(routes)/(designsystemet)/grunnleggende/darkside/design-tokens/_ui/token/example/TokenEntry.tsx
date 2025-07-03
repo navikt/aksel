@@ -7,7 +7,7 @@ import {
   HGrid,
   VStack,
 } from "@navikt/ds-react";
-import { TextWithMarkdown } from "@/web/TextWithMarkdown";
+import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import { TokenForDocumentationT } from "../../types";
 import TokenPreview from "./TokenPreview";
 
@@ -48,7 +48,7 @@ const TokenEntry = ({
           </VStack>
           {token.comment && (
             <BodyShort size="small">
-              <TextWithMarkdown>{token.comment}</TextWithMarkdown>
+              <MarkdownText>{token.comment}</MarkdownText>
             </BodyShort>
           )}
         </VStack>

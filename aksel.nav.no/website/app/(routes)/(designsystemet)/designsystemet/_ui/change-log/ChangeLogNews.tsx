@@ -15,8 +15,8 @@ import {
 import { sanityFetch } from "@/app/_sanity/live";
 import { N_LATEST_CHANGE_LOGS_QUERY } from "@/app/_sanity/queries";
 import { N_LATEST_CHANGE_LOGS_QUERYResult } from "@/app/_sanity/query-types";
+import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
-import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 
 type ChangeLogNewsProps = {
   title: string;
@@ -43,7 +43,7 @@ async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
         )}
         {description && (
           <BodyLong size="large" as="p">
-            <TextWithMarkdown>{description}</TextWithMarkdown>
+            <MarkdownText>{description}</MarkdownText>
           </BodyLong>
         )}
       </VStack>

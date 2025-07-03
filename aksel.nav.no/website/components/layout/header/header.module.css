@@ -1,5 +1,0 @@
-/* stylelint-disable aksel/design-token-no-global-override */
-.akselTertiaryButton {
-  --a-text-action: var(--a-deepblue-800);
-  --a-text-action-on-action-subtle: var(--a-deepblue-800);
-}
