@@ -1760,6 +1760,21 @@ export type Ds_endringslogg_artikkel = {
   };
   content?: Riktekst_grunnleggende;
   visMer?: boolean;
+  seo?: {
+    meta?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
 };
 
 export type Grunnleggende_landingsside = {
@@ -8571,7 +8586,21 @@ export type METADATA_BY_SLUG_QUERYResult =
       heading: string | null;
       ingress: null;
       publishedAt: null;
-      seo: null;
+      seo: {
+        meta?: string;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      } | null;
     }
   | {
       heading: string | null;
@@ -8722,19 +8751,63 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
   } | null;
 } | null;
 // Variable: ENDRINGSLOGG_METADATA_BY_SLUG_QUERY
-// Query: *[slug.current == $slug][0]{    heading,    endringsdato,    endringstype,    herobilde  }
+// Query: *[slug.current == $slug][0]{    heading,    endringsdato,    endringstype,    herobilde,    seo  }
 export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult =
   | {
       heading: null;
       endringsdato: null;
       endringstype: null;
       herobilde: null;
+      seo: null;
+    }
+  | {
+      heading: null;
+      endringsdato: null;
+      endringstype: null;
+      herobilde: null;
+      seo: {
+        meta?: string;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      } | null;
     }
   | {
       heading: string | null;
       endringsdato: null;
       endringstype: null;
       herobilde: null;
+      seo: null;
+    }
+  | {
+      heading: string | null;
+      endringsdato: null;
+      endringstype: null;
+      herobilde: null;
+      seo: {
+        meta?: string;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      } | null;
     }
   | {
       heading: string | null;
@@ -8753,6 +8826,21 @@ export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult =
         dekorativt?: boolean;
         alt?: string;
         _type: "image";
+      } | null;
+      seo: {
+        meta?: string;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
       } | null;
     }
   | null;
@@ -12953,7 +13041,7 @@ declare module "@sanity/client" {
     "\n  *[_type == $type && defined(slug.current)].slug.current\n": SLUG_BY_TYPE_QUERYResult;
     '\n  *[_type == "ds_endringslogg_artikkel"]{\n    heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n  }': ENDRINGSLOGG_QUERYResult;
     '\n  *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{\n    "primary": {\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n    },\n    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n    },\n    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n    }\n  }\n': ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult;
-    "*[slug.current == $slug][0]{\n    heading,\n    endringsdato,\n    endringstype,\n    herobilde\n  }": ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult;
+    "*[slug.current == $slug][0]{\n    heading,\n    endringsdato,\n    endringstype,\n    herobilde,\n    seo\n  }": ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult;
     '\n  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]': N_LATEST_CHANGE_LOGS_QUERYResult;
     '*[_type == "gp.tema"] | order(lower(title)){\n  title,\n  _updatedAt,\n  description,\n  pictogram,\n  "slug": slug.current,\n  "articles": *[_type=="aksel_artikkel"\n    && (^._id in undertema[]->tema._ref)] {\n      heading,\n      "slug": slug.current,\n      "undertema": undertema[]->{title, "temaTitle": tema->title},\n      "innholdstype": innholdstype->title,\n      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month\n    } | order(coalesce(views, -1) desc)[0...4]{\n      heading,\n      slug,\n      undertema,\n      innholdstype\n    },\n}': GOD_PRAKSIS_ALL_TEMA_QUERYResult;
     '*[_type == "godpraksis_landingsside"][0].seo': GOD_PRAKSIS_LANDING_PAGE_SEO_QUERYResult;

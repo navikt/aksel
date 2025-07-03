@@ -2,6 +2,7 @@ import { defineField, defineType } from "sanity";
 import { FileCodeIcon, FileImageIcon, FileTextIcon } from "@navikt/aksel-icons";
 import { capitalize } from "@/utils";
 import SanityTabGroups from "../presets/groups";
+import BaseSEOPreset from "../presets/seo";
 import { titleField } from "../presets/title-field";
 
 export const EndringsloggArtikkel = defineType({
@@ -112,6 +113,7 @@ export const EndringsloggArtikkel = defineType({
       type: "boolean",
       initialValue: false,
     }),
+    BaseSEOPreset,
   ],
 
   preview: {
