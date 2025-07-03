@@ -1,10 +1,16 @@
-import { getCookieConsent } from "@/app/_ui/consent-banner/ConsentBanner.utils";
+"use client";
+
+import { useCookieConsent } from "@/app/_ui/cookie-consent/CookieConsent.Provider";
 import { UmamiScript } from "./Umami.script";
 
-async function Umami() {
-  const consent = await getCookieConsent();
+function Umami() {
+  const context = useCookieConsent();
 
-  return <UmamiScript enabled={consent === "accepted"} />;
+  if (!context.consentState.loaded) {
+    return null;
+  }
+
+  return <UmamiScript enabled={context.consentState.state === "accepted"} />;
 }
 
 export { Umami };

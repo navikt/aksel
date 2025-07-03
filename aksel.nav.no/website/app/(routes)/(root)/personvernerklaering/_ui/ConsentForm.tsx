@@ -2,30 +2,29 @@
 
 import { useState, useTransition } from "react";
 import { Button, Radio, RadioGroup, VStack } from "@navikt/ds-react";
-import {
-  acceptCookiesAction,
-  getCookieConsent,
-  rejectCookiesAction,
-} from "@/app/_ui/consent-banner/ConsentBanner.utils";
+import { useCookieConsent } from "@/app/_ui/cookie-consent/CookieConsent.Provider";
 
-function ConsentForm({
-  consent,
-}: {
-  consent: Awaited<ReturnType<typeof getCookieConsent>>;
-}) {
+function ConsentForm() {
   const [isPending, startTransition] = useTransition();
 
-  const defaultConsentState = defaultRadioValue(consent);
   const [disableSave, setDisableSave] = useState(true);
+
+  const context = useCookieConsent();
+
+  if (!context.consentState.loaded) {
+    return null;
+  }
+
+  const defaultConsentState = defaultRadioValue(context.consentState.state);
 
   const submitAction = async (formData: FormData) => {
     startTransition(async () => {
       setDisableSave(true);
 
       if (formData.get("acceptedTracking") === "tracking_yes") {
-        await acceptCookiesAction();
+        await context.acceptCookiesAction();
       } else if (formData.get("acceptedTracking") === "tracking_no") {
-        await rejectCookiesAction();
+        await context.rejectCookiesAction();
       }
     });
   };
@@ -51,7 +50,7 @@ function ConsentForm({
 }
 
 function defaultRadioValue(
-  consent: Awaited<ReturnType<typeof getCookieConsent>>,
+  consent: ReturnType<typeof useCookieConsent>["consentState"]["state"],
 ) {
   switch (consent) {
     case "accepted":

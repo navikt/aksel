@@ -1,5 +1,5 @@
 import { Metadata } from "next/types";
-import React from "react";
+import React, { Suspense } from "react";
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import { BodyLong, HStack, Heading, Link, VStack } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
@@ -53,9 +53,13 @@ const Page = async () => {
             </HStack>
           </VStack>
         </VStack>
-        <TokensPage />
+        <Suspense>
+          <TokensPage />
+        </Suspense>
       </VStack>
-      <TokenTableOfContents />
+      <Suspense>
+        <TokenTableOfContents />
+      </Suspense>
     </DesignsystemetPageLayout>
   );
 };

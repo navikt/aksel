@@ -1,6 +1,5 @@
 import { BodyLong, Box, Heading, Link } from "@navikt/ds-react";
 import { Page as DsPage, PageBlock } from "@navikt/ds-react/Page";
-import { getCookieConsent } from "@/app/_ui/consent-banner/ConsentBanner.utils";
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 import { ConsentForm } from "./_ui/ConsentForm";
@@ -12,8 +11,6 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const consent = await getCookieConsent();
-
   return (
     <DsPage footer={<Footer />} footerPosition="belowFold">
       <Header />
@@ -122,7 +119,7 @@ export default async function Page() {
           <Heading size="large" level="2" spacing data-aksel-heading-color>
             Mine valg
           </Heading>
-          <ConsentForm consent={consent} />
+          <ConsentForm />
         </PageBlock>
       </Box>
     </DsPage>
