@@ -77,16 +77,16 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
 
   return (
     <div className={styles.navList} data-layout={layout}>
-      <Search
-        variant="simple"
-        size={layout === "sidebar" ? "small" : "medium"}
-        label="Filtrer navigasjon"
-        clearButton={false}
-        onChange={setFilterText}
-        autoComplete="off"
-      />
       <nav aria-label="Sidemeny" data-layout={layout}>
-        <VStack gap="space-24" asChild>
+        <Search
+          variant="simple"
+          size={layout === "sidebar" ? "small" : "medium"}
+          label="Filtrer navigasjon"
+          clearButton={false}
+          onChange={setFilterText}
+          autoComplete="off"
+        />
+        <VStack gap="space-24" asChild marginBlock="space-24 space-0">
           <BodyShort
             as="ul"
             className={styles.navListUl}
