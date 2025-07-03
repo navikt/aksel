@@ -11,7 +11,7 @@
     "storybook:aksel": "yarn concurrently \"yarn watch:tw\" \"yarn storybook dev -c aksel.nav.no/website/.storybook -p 6007\"",
     "dev": "yarn workspace aksel.nav.no dev",
     "docgen": "yarn workspaces foreach -vv -pA run docgen",
-    "changelog": "deno run --allow-read --allow-write --no-config scripts/changelog/createMainChangelog.ts",
+    "changelog": "deno run --allow-read --allow-write --no-config scripts/deno/changelog/createMainChangelog.ts",
     "updateArticleViews": "deno run --allow-net --allow-env --allow-read --no-config scripts/article-views/update-article-views/main.ts",
     "chromatic": "npx chromatic --only-changed --build-script-name build:storybook-chromatic",
     "build:storybook-chromatic": "cross-env CHROMATIC=true storybook build",
