@@ -1,81 +1,60 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  MoonIcon,
-  SunIcon,
-} from "@navikt/aksel-icons";
-import { BodyShort, ToggleGroup } from "@navikt/ds-react";
+import { useState } from "react";
+import { ArrowLeftIcon, ChevronDownIcon } from "@navikt/aksel-icons";
+import { HGrid, VStack } from "@navikt/ds-react";
+import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
 import styles from "./MobileNav.module.css";
 
 function MobileNavMenu({ children }: { children: React.ReactNode }) {
+  const { focusRef } = useMobileNav();
   const pathName = usePathname();
   const [open, setOpen] = useState(pathName?.startsWith("/designsystemet"));
 
+  const handleOpenToggle = (toState?: boolean) => {
+    setOpen(toState);
+
+    queueMicrotask(() => {
+      focusRef.current?.focus();
+    });
+  };
+
   return open ? (
-    <DesignsystemView toggleClose={() => setOpen(false)}>
+    <DesignsystemView toggleClose={() => handleOpenToggle(false)}>
       {children}
     </DesignsystemView>
   ) : (
-    <InitialView toggleOpen={() => setOpen(true)} />
+    <InitialView toggleOpen={() => handleOpenToggle(true)} />
   );
 }
 
 function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
-  const { theme, setTheme } = useTheme();
-
-  /* https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch */
-  const [renderThemeToggle, setRenderThemeToggle] = useState(false);
-
-  useEffect(() => setRenderThemeToggle(true), []);
-
   return (
-    <div className={styles.mobileNavMenuIntialView}>
-      <BodyShort as="ul" className={styles.mobileNavMenuList}>
-        <li>
-          <button className={styles.mobileNavMenuItem} onClick={toggleOpen}>
-            Designsystemet
-            <ArrowRightIcon aria-hidden fontSize="1.5rem" />
-          </button>
-        </li>
-        <li>
-          <Link href="/god-praksis" className={styles.mobileNavMenuItem}>
-            God praksis
-          </Link>
-        </li>
-        <li>
-          <Link href="/produktbloggen" className={styles.mobileNavMenuItem}>
-            Bloggen
-          </Link>
-        </li>
-      </BodyShort>
-
-      {renderThemeToggle && (
-        <ToggleGroup
-          fill
-          onChange={setTheme}
-          value={theme}
-          variant="neutral"
-          className={styles.mobileNavMenuThemeToggle}
+    <VStack marginInline="space-8" position="relative">
+      <HGrid columns="1fr auto">
+        <a href="/designsystemet" className={styles.mobileNavItem}>
+          Designsystemet
+        </a>
+        <button
+          className={styles.mobileNavItem}
+          onClick={toggleOpen}
+          aria-expanded="false"
         >
-          <ToggleGroup.Item
-            value="light"
-            icon={<SunIcon aria-hidden />}
-            label="Light"
-          />
-          <ToggleGroup.Item
-            value="dark"
-            icon={<MoonIcon aria-hidden />}
-            label="Dark"
-          />
-        </ToggleGroup>
-      )}
-    </div>
+          <ChevronDownIcon title="Åpne designsystem-meny" fontSize="1.5rem" />
+        </button>
+      </HGrid>
+      <span className={styles.divider} />
+
+      <Link href="/god-praksis" className={styles.mobileNavItem}>
+        God praksis
+      </Link>
+      <span className={styles.divider} />
+      <Link href="/produktbloggen" className={styles.mobileNavItem}>
+        Bloggen
+      </Link>
+    </VStack>
   );
 }
 
@@ -87,12 +66,28 @@ function DesignsystemView({
   toggleClose: () => void;
 }) {
   return (
-    <div className={styles.mobileNavSidebarMenu}>
-      <button className={styles.mobileNavMenuItem} onClick={toggleClose}>
-        <ArrowLeftIcon aria-hidden fontSize="1.5rem" />
-        <span>Designsystemet</span>
-        <span aria-hidden />
-      </button>
+    <div>
+      <HGrid
+        columns="auto 1fr"
+        marginInline="space-8"
+        className={styles.mobileNavGroupSticky}
+      >
+        <button
+          className={styles.mobileNavItem}
+          onClick={toggleClose}
+          aria-expanded="true"
+        >
+          <ArrowLeftIcon title="Lukk designsystem-meny" fontSize="1.5rem" />
+        </button>
+
+        <a
+          href="/designsystemet"
+          className={`${styles.mobileNavItem} ${styles.mobileNavItemCentered}`}
+        >
+          Designsystemet
+        </a>
+      </HGrid>
+
       {children}
     </div>
   );

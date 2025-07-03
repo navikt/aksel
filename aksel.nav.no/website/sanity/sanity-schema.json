@@ -10046,13 +10046,6 @@
         },
         "optional": true
       },
-      "ingress_alpha": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "ingress_legacy": {
         "type": "objectAttribute",
         "value": {
@@ -12254,10 +12247,6 @@
             },
             {
               "type": "string",
-              "value": "alpha"
-            },
-            {
-              "type": "string",
               "value": "legacy"
             },
             {
@@ -13678,7 +13667,7 @@
         },
         "optional": true
       },
-      "editorial_staff_teams": {
+      "writers": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
@@ -14856,6 +14845,13 @@
         "value": {
           "type": "object",
           "attributes": {
+            "show": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": true
+            },
             "label": {
               "type": "objectAttribute",
               "value": {

@@ -48,8 +48,7 @@ export const workspaceConfig = defineConfig([
       visionTool(),
       colorInput(),
       nbNOLocale(),
-      /* TODO:  Uncomment when updated Aksel uses Prod-dataset */
-      /* presentationTool({
+      presentationTool({
         resolve,
         previewUrl: {
           previewMode: {
@@ -57,7 +56,7 @@ export const workspaceConfig = defineConfig([
             shareAccess: true,
           },
         },
-      }), */
+      }),
     ],
     releases: {
       enabled: false,

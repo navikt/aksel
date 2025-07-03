@@ -5,8 +5,8 @@
   "description": "Aksel.nav.no website",
   "author": "Aksel | Nav designsystem team",
   "scripts": {
-    "dev": "next | pino-pretty",
-    "dev-turbo": "next --turbo | pino-pretty",
+    "dev": "next | pino-pretty --messageKey=message",
+    "dev-turbo": "next --turbo | pino-pretty --messageKey=message",
     "build": "yarn workspace playroom build:playroom && yarn update:searchindex && next build && yarn update:rss && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "update:searchindex": "yarn tsx --env-file-if-exists=.env ./scripts/create-index",
@@ -18,7 +18,7 @@
     "update:tokens": "yarn tsx --env-file-if-exists=.env ./scripts/update-tokens",
     "update:eksempler": "yarn tsx --env-file-if-exists=.env ./scripts/update-examples/update-sanity",
     "validate:eksempler": "yarn tsx ./scripts/update-examples/validate",
-    "update:changelog": "yarn tsx --env-file-if-exists=.env ./scripts/changelog && yarn tsx --env-file-if-exists=.env ./scripts/changelog_old",
+    "update:changelog": "yarn tsx --env-file-if-exists=.env ./scripts/changelog",
     "update:sanity": "yarn update:tokens && yarn update:props && yarn update:eksempler && yarn update:changelog",
     "analyze": "cross-env ANALYZE=true yarn build",
     "test": "vitest run -c config/vitest.config.ts",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.27.8",
-    "@navikt/next-logger": "2.0.0",
+    "@navikt/next-logger": "4.1.4",
     "@navikt/oasis": "3.2.1",
     "@portabletext/react": "^3.2.1",
     "@sanity/client": "^7.0.0",

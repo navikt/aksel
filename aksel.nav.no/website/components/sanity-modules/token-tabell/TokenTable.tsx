@@ -1,9 +1,8 @@
 import NextLink from "next/link";
 import core from "@navikt/ds-css/tokens.json";
-import { Bleed, BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
+import { BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { TokenTableT } from "@/types";
-import ShowMore from "@/web/ShowMore";
 import { AkselTable, AkselTableRow } from "@/web/Table";
 
 type TokenTableProps = { node: TokenTableT };
@@ -17,21 +16,7 @@ const TokenTable = ({ node }: TokenTableProps) => {
   }
 
   const Wrapper = ({ children }) => {
-    if (Object.entries(tokens).length < 10) {
-      return <>{children}</>;
-    }
-    return (
-      <Bleed marginInline="4" marginBlock="4" asChild>
-        <ShowMore
-          as="section"
-          aria-label="Proptabell"
-          scrollBackOnCollapse
-          collapsedHeight="20rem"
-        >
-          {children}
-        </ShowMore>
-      </Bleed>
-    );
+    return <>{children}</>;
   };
 
   return (
