@@ -35,8 +35,8 @@
     "cp:assets": "yarn cp:playroom && yarn cp:public && yarn cp:static"
   },
   "dependencies": {
-    "@navikt/next-logger": "4.1.4",
     "@floating-ui/react": "0.27.8",
+    "@navikt/next-logger": "4.1.4",
     "@navikt/oasis": "3.2.1",
     "@portabletext/react": "^3.2.1",
     "@sanity/client": "^7.0.0",
