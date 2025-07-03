@@ -8,14 +8,12 @@ import {
   useMemo,
   useState,
 } from "react";
-import { getCookie } from "typescript-cookie";
-import {
-  acceptCookiesAction,
-  rejectCookiesAction,
-} from "@/app/_ui/cookie-consent/CookieConsent.actions";
+import { getCookie, setCookie } from "typescript-cookie";
+import { trackCookieConsent } from "@/app/_ui/cookie-consent/CookieConsent.actions";
 import {
   CONSENT_TRACKER_ID,
   CONSENT_TRACKER_STATE,
+  CURRENT_VERSION,
   CookieData,
 } from "@/app/_ui/cookie-consent/CookieConsent.config";
 
@@ -70,11 +68,11 @@ function CookieConsentProvider({ children }: { children: React.ReactNode }) {
   const contextValue = useMemo(() => {
     const actions = {
       acceptCookiesAction: async () => {
-        await acceptCookiesAction();
+        await updateCookieConsent("accepted");
         syncConsentState();
       },
       rejectCookiesAction: async () => {
-        await rejectCookiesAction();
+        await updateCookieConsent("rejected");
         syncConsentState();
       },
     };
@@ -99,6 +97,46 @@ function CookieConsentProvider({ children }: { children: React.ReactNode }) {
       {children}
     </CookieConsentContext.Provider>
   );
+}
+
+async function updateCookieConsent(newState: CONSENT_TRACKER_STATE) {
+  if (!validateConsentState(newState)) {
+    console.error(`Invalid state: ${newState}`);
+    return;
+  }
+
+  let createdAt = new Date().toISOString();
+
+  const oldCookieValue = getCookie(CONSENT_TRACKER_ID);
+  if (oldCookieValue) {
+    try {
+      const oldCookieData = JSON.parse(oldCookieValue) as CookieData;
+      createdAt = oldCookieData.createdAt;
+    } catch {
+      return console.error("Failed to parse old cookie data", oldCookieValue);
+    }
+  }
+
+  const cookieData: CookieData = {
+    createdAt,
+    updatedAt: new Date().toISOString(),
+    version: CURRENT_VERSION,
+    consents: {},
+  };
+
+  cookieData.consents.tracking = newState;
+
+  const cookieJson = JSON.stringify(cookieData);
+
+  setCookie(CONSENT_TRACKER_ID, cookieJson, {
+    expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+  });
+
+  await trackCookieConsent(newState);
+}
+
+function validateConsentState(state: string): state is CONSENT_TRACKER_STATE {
+  return ["accepted", "rejected", "undecided", "no_action"].includes(state);
 }
 
 function useCookieConsent() {
