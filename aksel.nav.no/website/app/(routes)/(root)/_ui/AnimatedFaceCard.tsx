@@ -24,6 +24,11 @@ function AnimatedFaceCard() {
 
   const handleMouseEnter = useCallback(() => {
     setState(0);
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
     intervalRef.current = setInterval(() => {
       setState((prev) => (prev + 1) % 4);
     }, 400);

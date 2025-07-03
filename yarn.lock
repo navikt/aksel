@@ -4153,10 +4153,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/next-logger@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@navikt/next-logger@npm:2.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F2.0.0%2F2635e5dce4180196bfeb61ad6fd51f63b7dc1670"
+"@navikt/next-logger@npm:4.1.4":
+  version: 4.1.4
+  resolution: "@navikt/next-logger@npm:4.1.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F4.1.4%2Fca5d61c38b05758bd24ca6b98e5fd329226670df"
   dependencies:
+    "@navikt/pino-logger": "npm:^4.1.4"
     pino-roll: "npm:3"
   peerDependencies:
     next: 14 || 15
@@ -4164,7 +4165,7 @@ __metadata:
   dependenciesMeta:
     pino-roll:
       optional: true
-  checksum: 10/16b65772df466dd4d0f6396faa78e9eceb8c303439b8551514af69a902f6ce7508673cb89493a48ab03ad32f23c5ee07c9ffa340e37b296f0d42949d70ef104f
+  checksum: 10/23e51ded82d92fd98d11f433beb9e5a5477ca0b0bf20688b5e2bb6dc68f5f69c9f8a913849fa5d56737d3745facb0da57455733d454ab9ff65d366ba48fe544a
   languageName: node
   linkType: hard
 
@@ -4176,6 +4177,23 @@ __metadata:
     openid-client: "npm:^5.6.4"
     prom-client: "npm:^15.1.0"
   checksum: 10/ac240ac670b8375ef086560f2da3688ea0f98a7cdd983644b2077f1b9fea0ed8c4c6b817ded6aa163a207f231b93074b3508e80ffbd4f4659708c87d1c26dde7
+  languageName: node
+  linkType: hard
+
+"@navikt/pino-logger@npm:^4.1.4":
+  version: 4.1.5
+  resolution: "@navikt/pino-logger@npm:4.1.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fpino-logger%2F4.1.5%2F5911c77581ba052ec69878f86e6de4634c980b57"
+  dependencies:
+    pino-roll: "npm:3"
+    pino-socket: "npm:7"
+  peerDependencies:
+    pino: 8 || 9
+  dependenciesMeta:
+    pino-roll:
+      optional: true
+    pino-socket:
+      optional: true
+  checksum: 10/2995fab68db26328f5d3e9b70ca781ccd7ecbb3bf45817d2ad613861f2a79d6011da5d1d75dc713ba0097f6a590fdec6b4030dd4f6527ab2ee06e90b6c7e192c
   languageName: node
   linkType: hard
 
@@ -8117,6 +8135,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"abbrev@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "abbrev@npm:2.0.0"
+  checksum: 10/ca0a54e35bea4ece0ecb68a47b312e1a9a6f772408d5bcb9051230aaa94b0460671c5b5c9cb3240eb5b7bc94c52476550eb221f65a0bbd0145bdc9f3113a6707
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^3.0.0":
   version: 3.0.1
   resolution: "abbrev@npm:3.0.1"
@@ -8983,6 +9008,15 @@ __metadata:
     babel-plugin-macros: "npm:^3.0.1"
     require-from-string: "npm:^2.0.2"
   checksum: 10/d4507d1f134a610b8a2d4de911afe147eba7aab782ea34e7b687e99bdfd2e28d2056e16b7fa4b66acb59bcbd681acc40e851a20f03f7be719ee4cc51fc88eee0
+  languageName: node
+  linkType: hard
+
+"backoff@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "backoff@npm:2.5.0"
+  dependencies:
+    precond: "npm:0.2"
+  checksum: 10/5286c3f02665f3347591e04728ba0755e76a45aa40e037f7db3f2029ede927bfe94755a03033e93cc971a4b6c6605d8cfe514433e362c5a86c0b5bbc5d47acce
   languageName: node
   linkType: hard
 
@@ -18251,6 +18285,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nopt@npm:^7.0.0":
+  version: 7.2.1
+  resolution: "nopt@npm:7.2.1"
+  dependencies:
+    abbrev: "npm:^2.0.0"
+  bin:
+    nopt: bin/nopt.js
+  checksum: 10/95a1f6dec8a81cd18cdc2fed93e6f0b4e02cf6bdb4501c848752c6e34f9883d9942f036a5e3b21a699047d8a448562d891e67492df68ec9c373e6198133337ae
+  languageName: node
+  linkType: hard
+
 "nopt@npm:^8.0.0":
   version: 8.1.0
   resolution: "nopt@npm:8.1.0"
@@ -19364,6 +19409,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pino-socket@npm:7":
+  version: 7.4.0
+  resolution: "pino-socket@npm:7.4.0"
+  dependencies:
+    backoff: "npm:^2.5.0"
+    nopt: "npm:^7.0.0"
+    pump: "npm:^3.0.0"
+    split2: "npm:^4.0.0"
+    through2: "npm:^4.0.2"
+  bin:
+    pino-socket: psock.js
+  checksum: 10/e26144400b2d75f5547f10898102aecbcc52355b5069587bea5bb5e1e431c2a8b0dd24cd6d623a21e34c62e0ff12883f4ebf185ad151cd6e9e2c7862cf9cece7
+  languageName: node
+  linkType: hard
+
 "pino-std-serializers@npm:^6.0.0":
   version: 6.2.2
   resolution: "pino-std-serializers@npm:6.2.2"
@@ -20210,6 +20270,13 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10/6d7e21a772e8b05bf102636918654dac097bac013f0dc8346b72ac3604fc16829646f94ea862acccd8f82e910b00e2c11c1f0ea276543565d278c7ca35516a7c
+  languageName: node
+  linkType: hard
+
+"precond@npm:0.2":
+  version: 0.2.3
+  resolution: "precond@npm:0.2.3"
+  checksum: 10/d5215e17cc812996f72ee57a684ff159709bdfa48538e71c361d17aecd750bf25f64f85ba2c49031860708e0e70ac4394b9c8280725f227b88bce0fe76f8389a
   languageName: node
   linkType: hard
 
@@ -25853,7 +25920,8 @@ __metadata:
     "@babel/core": "npm:^7.19.0"
     "@babel/parser": "npm:^7.27.5"
     "@babel/traverse": "npm:^7.27.4"
-    "@navikt/next-logger": "npm:2.0.0"
+    "@floating-ui/react": "npm:0.27.8"
+    "@navikt/next-logger": "npm:4.1.4"
     "@navikt/oasis": "npm:3.2.1"
     "@next/bundle-analyzer": "npm:15.2.3"
     "@next/eslint-plugin-next": "npm:15.2.3"
