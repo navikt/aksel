@@ -10,14 +10,15 @@ import {
   Show,
 } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
-import { dateStr, getImage } from "@/utils";
+import { formatDateString } from "@/ui-utils/format-date";
+import { getImage } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
 const getAuthors = (blog: any) =>
   (blog?.contributors as any)?.map((x) => x?.title) ?? [];
 
 export const BloggList = async ({ blogg }: { blogg: any }) => {
-  const date = await dateStr(blogg?.publishedAt ?? blogg._createdAt);
+  const date = formatDateString(blogg?.publishedAt ?? blogg._createdAt);
 
   const imageUrl = urlForImage(blogg?.seo?.image as Image)
     ?.quality(100)

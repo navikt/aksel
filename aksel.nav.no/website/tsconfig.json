@@ -42,6 +42,7 @@
       "@/app/CustomPortableText": [
         "./app/_ui/portable-text/CustomPortableText.tsx"
       ],
+      "@/ui-utils/*": ["./app/_ui/utils/*"],
       "@/app/*": ["./app/*"]
     },
     "plugins": [

@@ -1,4 +1,3 @@
-export * from "./date-string";
 export * from "./format-text";
 export * from "./generate-sidebar";
 export * from "./generate-tableofcontents";

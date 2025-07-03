@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { dateStr } from "@/utils";
+import { formatDateString } from "@/app/_ui/utils/format-date";
 
 export const useFormatedDate = (date?: string) => {
   const [_date, setDate] = useState<string | null>(null);
 
   useEffect(() => {
     if (!date) return;
-    const handleDate = async () => setDate(await dateStr(date));
+    const handleDate = async () => setDate(formatDateString(date));
     handleDate();
   }, [date]);
 

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { abbrName, capitalize, dateStr, isNew } from "../index";
+import { abbrName, capitalize, isNew } from "../index";
 
 describe("Utils test", () => {
   test("isNew", () => {
@@ -20,14 +20,6 @@ describe("Utils test", () => {
     expect(capitalize(str2)).toEqual("TESTSTR");
     expect(capitalize(str3)).toEqual("TESTSTR");
     expect(capitalize(str4)).toEqual("Teststr");
-  });
-
-  test("dateStr", { retry: 10, timeout: 8000 }, async () => {
-    const date = "2022-06-09T11:05:48Z";
-    const date2 = "2021-03-02T12:05:48Z";
-
-    expect(await dateStr(date)).toEqual("9. juni 2022");
-    expect(await dateStr(date2)).toEqual("2. mars 2021");
   });
 
   test("abbrName", () => {

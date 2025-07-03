@@ -1,10 +1,11 @@
 import NextLink from "next/link";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
-import { dateStr, getAuthors } from "@/utils";
+import { formatDateString } from "@/ui-utils/format-date";
+import { getAuthors } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
-export const SimpleArticle = async ({ blogg }: { blogg: any }) => {
-  const date = await dateStr(blogg?.publishedAt ?? blogg._createdAt);
+async function BloggArticleBlock({ blogg }: { blogg: any }) {
+  const date = formatDateString(blogg?.publishedAt ?? blogg._createdAt);
 
   return (
     <article>
@@ -31,4 +32,6 @@ export const SimpleArticle = async ({ blogg }: { blogg: any }) => {
       )}
     </article>
   );
-};
+}
+
+export { BloggArticleBlock };
