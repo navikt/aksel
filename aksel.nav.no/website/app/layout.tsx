@@ -51,7 +51,7 @@ export default async function RootLayout({
       </head>
       <body>
         <CookieConsentProvider>
-          <Umami />
+          <Umami isDraftMode={isDraftMode} />
           <ThemeProvider>
             <ConsentBanner />
             {children}
