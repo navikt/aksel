@@ -10,7 +10,7 @@ import {
 import { urlForImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
-import { dateStr } from "@/utils";
+import { formatDateString } from "@/ui-utils/format-date";
 import styles from "./Designsystemet.module.css";
 import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";
 import { KomponentLinks } from "./DesignsystemetPage.parts";
@@ -46,8 +46,7 @@ type DesignsystemetPageT = {
 };
 
 async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
-  /* TODO: refactor dateStr to appdir */
-  const updateDate = await dateStr(data?._updatedAt ?? data?._createdAt ?? "");
+  const updateDate = formatDateString(data?._updatedAt ?? data?._createdAt);
 
   const statusTag = getStatusTag(data?.status?.tag);
 

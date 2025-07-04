@@ -27,7 +27,7 @@ import {
 } from "@/app/_sanity/queries";
 import { GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { dateStr } from "@/utils";
+import { formatDateString } from "@/ui-utils/format-date";
 
 /* We rely on seachparams for initial render, so need to force-dynamic */
 export const dynamic = "force-dynamic";
@@ -127,7 +127,7 @@ export default async function Page(props: Props) {
         ...article,
         innholdstype: article.innholdstype,
         undertema: relevantUndertema,
-        displayDate: await dateStr(article.displayDate ?? ""),
+        displayDate: formatDateString(article.displayDate ?? ""),
       });
     }
   }

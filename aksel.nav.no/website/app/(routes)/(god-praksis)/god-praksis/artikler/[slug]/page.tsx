@@ -28,7 +28,8 @@ import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
-import { abbrName, dateStr } from "@/utils";
+import { formatDateString } from "@/ui-utils/format-date";
+import { abbrName } from "@/utils";
 import styles from "./page.module.css";
 
 type Props = {
@@ -113,7 +114,7 @@ export default async function Page(props: Props) {
           </BodyLong>
         )}
         <BodyShort size="small" as="time" textColor="subtle">
-          {`Oppdatert ${await dateStr(verifiedDate)}`}
+          {`Oppdatert ${formatDateString(verifiedDate)}`}
         </BodyShort>
         <HStack gap="space-8" marginBlock="space-16 space-48">
           {pageData.undertema?.map(({ tema, title }) => {

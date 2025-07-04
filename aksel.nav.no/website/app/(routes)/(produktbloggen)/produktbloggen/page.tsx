@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
 import { BodyLong, Heading, Show, VStack } from "@navikt/ds-react";
+import { BloggArticleBlock } from "@/app/(routes)/(produktbloggen)/produktbloggen/_ui/BloggArticleBlogg";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   BLOGG_LANDINGSSIDE_BLOGS_QUERY,
@@ -11,7 +12,6 @@ import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { BloggList } from "./_ui/BloggList";
 import { HighlightedBlogg } from "./_ui/HighlightedBlogg";
 import styles from "./_ui/Produktbloggen.module.css";
-import { SimpleArticle } from "./_ui/SimpleArticle";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: pageData } = await sanityFetch({
@@ -68,7 +68,7 @@ export default async function Page() {
             <HighlightedBlogg blogg={pageData.bloggposts[1]} />
           </Show>
           <Show below="md">
-            <SimpleArticle blogg={pageData.bloggposts[1]} />
+            <BloggArticleBlock blogg={pageData.bloggposts[1]} />
           </Show>
         </div>
 

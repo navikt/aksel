@@ -12,7 +12,8 @@ import {
   SLUG_BY_TYPE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { abbrName, dateStr, getImage } from "@/utils";
+import { formatDateString } from "@/ui-utils/format-date";
+import { abbrName, getImage } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
 type Props = {
@@ -78,7 +79,7 @@ export default async function Page({ params }: Props) {
   });
 
   const publishedAtRaw = pageData?.publishedAt ?? "";
-  const publishDate = await dateStr(publishedAtRaw);
+  const publishDate = formatDateString(publishedAtRaw);
   const authors = (pageData?.contributors as any)?.map((x) => x?.title) ?? [];
 
   const imageUrl = urlForImage(pageData?.seo?.image as Image)
