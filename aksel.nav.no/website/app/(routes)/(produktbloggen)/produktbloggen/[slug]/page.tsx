@@ -13,7 +13,8 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { formatDateString } from "@/ui-utils/format-date";
-import { abbrName, getImage } from "@/utils";
+import { abbrName } from "@/ui-utils/format-text";
+import { getImage } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
 type Props = {

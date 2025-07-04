@@ -1,9 +1,8 @@
 import { useContext, useState } from "react";
-import { useClientLayoutEffect } from "@navikt/ds-react/Utils";
-import { userPrefersReducedMotion } from "@/utils";
+import { useClientLayoutEffect } from "@navikt/ds-react";
 import { PauseAnimationContext } from "./AnimationStopContext";
 
-export const useShouldStopAnimation = () => {
+function useShouldStopAnimation() {
   const [reducedMotion, setReducedMotion] = useState(false);
 
   const { pauseAnimationState, setPauseAnimationState } = useContext(
@@ -31,4 +30,10 @@ export const useShouldStopAnimation = () => {
     setPause: setPauseAnimationState,
     reducedMotion,
   };
-};
+}
+
+function userPrefersReducedMotion() {
+  return !window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+}
+
+export { useShouldStopAnimation };

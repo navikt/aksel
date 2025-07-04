@@ -29,7 +29,7 @@ import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import { formatDateString } from "@/ui-utils/format-date";
-import { abbrName } from "@/utils";
+import { abbrName } from "@/ui-utils/format-text";
 import styles from "./page.module.css";
 
 type Props = {
