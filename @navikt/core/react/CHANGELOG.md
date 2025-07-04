@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 7.25.0
+
+### Minor Changes
+
+- FileUpload: Allow for custom buttons in FileUpload.Item. ([#3906](https://github.com/navikt/aksel/pull/3906))
+
+### Patch Changes
+
+- Chat: Removed ol > li semantics, replaced with 'div'. ([#3904](https://github.com/navikt/aksel/pull/3904))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.25.0
+  - @navikt/aksel-icons@7.25.0
+
 ## 7.24.0
 
 ### Minor Changes
