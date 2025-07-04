@@ -52,6 +52,11 @@ function TableOfContents({
           role="list"
         >
           {toc.map((node) => {
+            /* Filters out "empty" headings from CMS */
+            if (!node.id || !node.title) {
+              return null;
+            }
+
             const active = node.id === tocCtx.activeId;
 
             return (

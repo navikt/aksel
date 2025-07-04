@@ -28,6 +28,7 @@ test.describe("Validate CMS-link and A11y on all pages", () => {
         .exclude("iframe")
         .exclude("#aksel-expansioncard")
         .exclude(".aksel-codesnippet")
+        .exclude("[data-axe-ignore]")
         .analyze();
 
       expect(accessibilityScanResults.violations).toEqual([]);

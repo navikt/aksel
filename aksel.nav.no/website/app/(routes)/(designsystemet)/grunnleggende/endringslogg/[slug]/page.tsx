@@ -39,15 +39,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${pageData?.heading} - Endringslogg`,
     keywords: pageData?.endringstype,
+    description: pageData?.seo?.meta,
     openGraph: {
       type: "article",
       publishedTime: pageData?.endringsdato || undefined,
       images:
+        urlForOpenGraphImage(pageData?.seo?.image as SanityImage) ||
         urlForOpenGraphImage(pageData?.herobilde as SanityImage) ||
         "/images/og/endringslogg/OG-endringslogg.png",
     },
   };
 }
+
+/* export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { category, page } = await params;
+
+  const { data: pageData } = await sanityFetch({
+    query: METADATA_BY_SLUG_QUERY,
+    params: { slug: `komponenter/${category}/${page}` },
+    stega: false,
+  });
+
+  return {
+    title: pageData?.heading,
+    description: pageData?.seo?.meta,
+    openGraph: {
+      images: urlForOpenGraphImage(pageData?.seo?.image as Image),
+    },
+  };
+} */
 
 export async function generateStaticParams() {
   const { data: slugs } = await sanityFetch({

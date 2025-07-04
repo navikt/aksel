@@ -203,7 +203,8 @@ const ENDRINGSLOGG_METADATA_BY_SLUG_QUERY =
     heading,
     endringsdato,
     endringstype,
-    herobilde
+    herobilde,
+    seo
   }`);
 
 const N_LATEST_CHANGE_LOGS_QUERY = defineQuery(`

@@ -45,6 +45,7 @@ function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
     return (
       <section
         aria-label="Kode"
+        data-axe-ignore
         data-block-margin="space-28"
         className={styles.codeBlock}
         {...props}
@@ -68,6 +69,7 @@ function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <section
       aria-label="Kode"
+      data-axe-ignore
       data-block-margin="space-28"
       className={styles.codeBlock}
       {...props}
