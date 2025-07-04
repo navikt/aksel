@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.25.1
+
+### Patch Changes
+
+- Modal: When open, now updates body with correct className. ([#3922](https://github.com/navikt/aksel/pull/3922))
+
+- Search: Forward 'data-color' to SearchButton. ([#3922](https://github.com/navikt/aksel/pull/3922))
+
+- Updated dependencies [[`435f528`](https://github.com/navikt/aksel/commit/435f528d65713171533a6adfbd5f9cafd34539ba)]:
+  - @navikt/ds-tokens@7.25.1
+  - @navikt/aksel-icons@7.25.1
+
 ## 7.25.0
 
 ### Minor Changes
