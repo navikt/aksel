@@ -5,7 +5,7 @@ import { Heading } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import { SIDE_ARTICLE_BY_SLUG_QUERY } from "@/app/_sanity/queries";
-import { getImage } from "@/utils";
+import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: pageData?.heading,
     openGraph: {
-      images: getImage(pageData?.heading ?? "", "thumbnail"),
+      images: fallbackImageUrl(pageData?.heading ?? "", "thumbnail"),
     },
   };
 }

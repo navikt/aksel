@@ -9,8 +9,9 @@ import {
   Show,
 } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
+import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { formatDateString } from "@/ui-utils/format-date";
-import { getAuthors, getImage } from "@/utils";
+import { getAuthors } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
 export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
@@ -41,7 +42,7 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
               />
             ) : (
               <NextImage
-                src={getImage(blogg?.heading ?? "", "thumbnail")}
+                src={fallbackImageUrl(blogg?.heading ?? "", "thumbnail")}
                 decoding="sync"
                 fill={true}
                 sizes="100%"
@@ -88,7 +89,7 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
               />
             ) : (
               <NextImage
-                src={getImage(blogg?.heading ?? "", "thumbnail")}
+                src={fallbackImageUrl(blogg?.heading ?? "", "thumbnail")}
                 decoding="sync"
                 fill={true}
                 sizes="100%"

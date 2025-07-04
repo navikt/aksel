@@ -13,7 +13,8 @@ import {
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
-import { getAuthors, getImage } from "@/utils";
+import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
+import { getAuthors } from "@/utils";
 import {
   ArticleT,
   isArticle,
@@ -109,7 +110,7 @@ export const Highlight = ({
           />
         ) : (
           <NextImage
-            src={getImage(article?.heading ?? "", "thumbnail")}
+            src={fallbackImageUrl(article?.heading ?? "", "thumbnail")}
             layout="fill"
             objectFit="contain"
             aria-hidden

@@ -15,8 +15,8 @@ import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
+import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { abbrName } from "@/ui-utils/format-text";
-import { getImage } from "@/utils";
 import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 
@@ -86,7 +86,9 @@ const Card = ({ article, visible }: CardProps) => {
         >
           <Image
             src={
-              imageUrl || getImage(article?.heading ?? "", "thumbnail") || ""
+              imageUrl ||
+              fallbackImageUrl(article?.heading ?? "", "thumbnail") ||
+              ""
             }
             alt={article.heading + " thumbnail"}
             fill

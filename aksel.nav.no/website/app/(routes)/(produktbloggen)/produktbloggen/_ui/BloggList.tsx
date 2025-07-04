@@ -10,8 +10,8 @@ import {
   Show,
 } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
+import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { formatDateString } from "@/ui-utils/format-date";
-import { getImage } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
 const getAuthors = (blog: any) =>
@@ -46,7 +46,7 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
               />
             ) : (
               <NextImage
-                src={getImage(blogg?.heading ?? "", "thumbnail")}
+                src={fallbackImageUrl(blogg?.heading ?? "", "thumbnail")}
                 decoding="sync"
                 fill={true}
                 sizes="100%"
