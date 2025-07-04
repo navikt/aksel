@@ -1,5 +1,17 @@
 # Changelog
 
+## 7.25.1
+
+### @navikt/ds-tokens
+
+- Darkside: Updated Meta-lime 300 and 400. ([#3928](https://github.com/navikt/aksel/pull/3928))
+
+### @navikt/ds-react
+
+- Modal: When open, now updates body with correct className. ([#3922](https://github.com/navikt/aksel/pull/3922))
+
+- Search: Forward 'data-color' to SearchButton. ([#3922](https://github.com/navikt/aksel/pull/3922))
+
 ## 7.25.0
 
 ### @navikt/ds-css
