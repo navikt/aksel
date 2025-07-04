@@ -11,7 +11,6 @@ import {
 import { urlForImage } from "@/app/_sanity/utils";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { formatDateString } from "@/ui-utils/format-date";
-import { getAuthors } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
 export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
@@ -21,6 +20,9 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
     ?.quality(100)
     .auto("format")
     .url();
+
+  const authors =
+    blogg.contributors?.map((author) => author.title).filter(Boolean) ?? [];
 
   return (
     <article>
@@ -60,10 +62,10 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
           <BodyLong className={styles.articleBody} size="large">
             {blogg?.ingress}
           </BodyLong>
-          {getAuthors(blogg).length > 0 && (
+          {authors.length > 0 && (
             <BodyShort size="small" className={styles.articleAuthor}>
               <BodyShort as="span" size="small" weight="semibold">
-                {getAuthors(blogg)[0]}
+                {authors[0]}
               </BodyShort>
               <span>{date}</span>
             </BodyShort>
@@ -109,10 +111,10 @@ export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
           <BodyLong className={styles.articleBody} size="small">
             {blogg?.ingress}
           </BodyLong>
-          {getAuthors(blogg).length > 0 && (
+          {authors.length > 0 && (
             <BodyShort size="small" className={styles.articleAuthor}>
               <BodyShort as="span" size="small" weight="semibold">
-                {getAuthors(blogg)[0]}
+                {authors[0]}
               </BodyShort>
               <span>{date}</span>
             </BodyShort>
