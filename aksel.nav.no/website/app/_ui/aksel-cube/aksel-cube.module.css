@@ -7,7 +7,7 @@
 @property --cube-stroke-color-dark {
   syntax: "<color>";
   inherits: false;
-  initial-value: #3a2f55; /* our tokens are not typed with @property */
+  initial-value: #013956; /* our tokens are not typed with @property */
 }
 
 .animated {

@@ -23,7 +23,7 @@ import {
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
-import { capitalize } from "@/utils";
+import { capitalizeText } from "@/ui-utils/format-text";
 import styles from "./Changelog.module.css";
 import ShowMore from "./ShowMore";
 
@@ -116,7 +116,7 @@ export default function LogEntry({
                 data-color={fremhevet ? "aksel-brand-pink" : "neutral"}
                 className={!fremhevet ? styles.entryEyebrowNotFremhevet : ""}
               >
-                {capitalize(endringstype || "")}
+                {capitalizeText(endringstype || "")}
                 <span className="sr-only">.&nbsp;</span>
                 <span aria-hidden>•</span>
                 <span>

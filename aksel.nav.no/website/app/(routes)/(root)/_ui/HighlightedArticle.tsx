@@ -13,7 +13,7 @@ import {
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
-import { getAuthors, getImage } from "@/utils";
+import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import {
   ArticleT,
   isArticle,
@@ -69,6 +69,9 @@ export const Highlight = ({
     return article.status?.tag;
   };
 
+  const authors =
+    article.contributors?.map((author) => author.title).filter(Boolean) ?? [];
+
   return (
     <HGrid
       as="section"
@@ -109,7 +112,7 @@ export const Highlight = ({
           />
         ) : (
           <NextImage
-            src={getImage(article?.heading ?? "", "thumbnail")}
+            src={fallbackImageUrl(article?.heading ?? "", "thumbnail")}
             layout="fill"
             objectFit="contain"
             aria-hidden
@@ -148,11 +151,9 @@ export const Highlight = ({
           {isArticle(article) ||
             (isBlogg(article) && (article?.ingress ?? article.seo?.meta))}
         </BodyLong>
-        {showFooter && getAuthors(article as any).length > 0 && (
+        {showFooter && authors.length > 0 && (
           <BodyShort size="small" className={styles.highlightAuthor}>
-            <span className="font-semibold">
-              {getAuthors(article as any)[0]}
-            </span>
+            <span className="font-semibold">{authors[0]}</span>
             <span>{date}</span>
           </BodyShort>
         )}

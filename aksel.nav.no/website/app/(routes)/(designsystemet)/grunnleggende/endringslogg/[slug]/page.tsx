@@ -22,7 +22,7 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
-import { capitalize } from "@/utils";
+import { capitalizeText } from "@/ui-utils/format-text";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
 import styles from "../_ui/Changelog.module.css";
 import ChangelogLinkCard from "../_ui/ChangelogLinkCard";
@@ -116,7 +116,7 @@ export default async function (props: Props) {
           textColor="subtle"
           data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
         >
-          {capitalize(endringstype || "")}
+          {capitalizeText(endringstype || "")}
         </BodyShort>
         <Heading
           size="xlarge"

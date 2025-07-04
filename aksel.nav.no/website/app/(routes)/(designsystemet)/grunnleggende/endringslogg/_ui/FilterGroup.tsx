@@ -1,7 +1,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { startTransition, useOptimistic } from "react";
 import { Chips, Label, VStack } from "@navikt/ds-react";
-import { capitalize } from "@/utils";
+import { capitalizeText } from "@/ui-utils/format-text";
 
 export default function FilterGroup({
   type,
@@ -60,7 +60,7 @@ export default function FilterGroup({
                 push(href, { scroll: false });
               }}
             >
-              {capitalize(option.toString())}
+              {capitalizeText(option.toString())}
             </Chips.Toggle>
           );
         })}

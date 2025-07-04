@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { FileCodeIcon, FileImageIcon, FileTextIcon } from "@navikt/aksel-icons";
-import { capitalize } from "@/utils";
+import { capitalizeText } from "@/ui-utils/format-text";
 import SanityTabGroups from "../presets/groups";
 import BaseSEOPreset from "../presets/seo";
 import { titleField } from "../presets/title-field";
@@ -132,9 +132,9 @@ export const EndringsloggArtikkel = defineType({
       }
       return {
         title: heading,
-        subtitle: `${endringsdato.split("T")[0]} | ${capitalize(endringstype)}${
-          fremhevet ? " ⭐" : ""
-        }`,
+        subtitle: `${endringsdato.split("T")[0]} | ${capitalizeText(
+          endringstype,
+        )}${fremhevet ? " ⭐" : ""}`,
         media: typeToIcon[endringstype],
       };
     },

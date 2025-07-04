@@ -10,12 +10,9 @@ import {
   Show,
 } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
+import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { formatDateString } from "@/ui-utils/format-date";
-import { getImage } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
-
-const getAuthors = (blog: any) =>
-  (blog?.contributors as any)?.map((x) => x?.title) ?? [];
 
 export const BloggList = async ({ blogg }: { blogg: any }) => {
   const date = formatDateString(blogg?.publishedAt ?? blogg._createdAt);
@@ -23,6 +20,9 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
   const imageUrl = urlForImage(blogg?.seo?.image as Image)
     ?.quality(100)
     .url();
+
+  const authors =
+    blogg.contributors?.map((author) => author.title).filter(Boolean) ?? [];
 
   return (
     <li>
@@ -46,7 +46,7 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
               />
             ) : (
               <NextImage
-                src={getImage(blogg?.heading ?? "", "thumbnail")}
+                src={fallbackImageUrl(blogg?.heading ?? "", "thumbnail")}
                 decoding="sync"
                 fill={true}
                 sizes="100%"
@@ -67,10 +67,10 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
             <BodyLong className={styles.articleBody} size="medium">
               {blogg?.ingress}
             </BodyLong>
-            {getAuthors(blogg).length > 0 ? (
+            {authors.length > 0 ? (
               <BodyShort size="small" className={styles.articleAuthor}>
                 <BodyShort as="span" size="small" weight="semibold">
-                  {getAuthors(blogg)[0]}
+                  {authors[0]}
                 </BodyShort>
                 <span>{date}</span>
               </BodyShort>
@@ -94,10 +94,10 @@ export const BloggList = async ({ blogg }: { blogg: any }) => {
           <BodyLong className={styles.articleBody} size="medium">
             {blogg?.ingress}
           </BodyLong>
-          {getAuthors(blogg).length > 0 ? (
+          {authors.length > 0 ? (
             <BodyShort size="small" className={styles.articleAuthor}>
               <BodyShort as="span" size="small" weight="semibold">
-                {getAuthors(blogg)[0]}
+                {authors[0]}
               </BodyShort>
               <span>{date}</span>
             </BodyShort>

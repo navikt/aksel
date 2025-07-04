@@ -12,8 +12,9 @@ import {
   SLUG_BY_TYPE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { formatDateString } from "@/ui-utils/format-date";
-import { abbrName, getImage } from "@/utils";
+import { abbrName } from "@/ui-utils/format-text";
 import styles from "../_ui/Produktbloggen.module.css";
 
 type Props = {
@@ -141,7 +142,7 @@ export default async function Page({ params }: Props) {
             />
           ) : (
             <NextImage
-              src={getImage(pageData?.heading ?? "", "thumbnail")}
+              src={fallbackImageUrl(pageData?.heading ?? "", "thumbnail")}
               decoding="sync"
               fill={true}
               sizes="100%"

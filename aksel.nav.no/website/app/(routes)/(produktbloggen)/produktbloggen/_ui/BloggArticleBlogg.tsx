@@ -1,11 +1,13 @@
 import NextLink from "next/link";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { formatDateString } from "@/ui-utils/format-date";
-import { getAuthors } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
 async function BloggArticleBlock({ blogg }: { blogg: any }) {
   const date = formatDateString(blogg?.publishedAt ?? blogg._createdAt);
+
+  const authors =
+    blogg.contributors?.map((author) => author.title).filter(Boolean) ?? [];
 
   return (
     <article>
@@ -18,10 +20,10 @@ async function BloggArticleBlock({ blogg }: { blogg: any }) {
       <BodyLong className={styles.articleBody} size="medium">
         {blogg?.ingress}
       </BodyLong>
-      {getAuthors(blogg).length > 0 ? (
+      {authors.length > 0 ? (
         <BodyShort size="small" className={styles.articleAuthor}>
           <BodyShort as="span" size="small" weight="semibold">
-            {getAuthors(blogg)[0]}
+            {authors[0]}
           </BodyShort>
           <span>{date}</span>
         </BodyShort>
