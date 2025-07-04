@@ -8,7 +8,7 @@ import {
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
 import { ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult } from "@/app/_sanity/query-types";
-import { capitalize } from "@/utils";
+import { capitalizeText } from "@/ui-utils/format-text";
 
 const ChangelogLinkCard = ({
   logEntry,
@@ -37,7 +37,7 @@ const ChangelogLinkCard = ({
       </LinkCardDescription>
       <LinkCardFooter>
         <Tag size="xsmall" variant="info-moderate">
-          {capitalize(logEntry.endringstype || "")}
+          {capitalizeText(logEntry.endringstype || "")}
         </Tag>
       </LinkCardFooter>
     </LinkCard>

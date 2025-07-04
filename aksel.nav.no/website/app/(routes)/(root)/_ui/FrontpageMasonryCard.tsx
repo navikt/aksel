@@ -15,7 +15,8 @@ import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
-import { abbrName, getImage } from "@/utils";
+import { abbrName } from "@/ui-utils/format-text";
+import { getImage } from "@/utils";
 import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 

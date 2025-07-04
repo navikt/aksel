@@ -9,7 +9,7 @@ import { ENDRINGSLOGG_FIELDS, ENDRINGSLOGG_QUERY } from "@/app/_sanity/queries";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
-import { capitalize } from "@/utils";
+import { capitalizeText } from "@/ui-utils/format-text";
 import { DesignsystemetEyebrow } from "../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
 import FilterChips from "./_ui/FilterChips";
@@ -119,7 +119,7 @@ export default async function Page({ searchParams }: PageProps) {
     );
     return {
       id: monthYear.replace(" ", "-"),
-      title: capitalize(monthYear),
+      title: capitalizeText(monthYear),
     };
   });
 
