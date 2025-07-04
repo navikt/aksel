@@ -1,5 +1,4 @@
 import { Metadata } from "next/types";
-import React from "react";
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import { BodyLong, HStack, Heading, Link, VStack } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
@@ -7,6 +6,9 @@ import { DesignsystemetEyebrow } from "../../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
 import TokenTableOfContents from "./_ui/TokenTableOfContents";
 import TokensPage from "./_ui/TokensPage";
+
+/* Since page relies on searchparams for general navigation, we avoid Suspense by foce-dynamic */
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Design tokens",
