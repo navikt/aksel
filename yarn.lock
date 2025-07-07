@@ -4045,7 +4045,7 @@ __metadata:
     chalk: "npm:4.1.0"
     cli-progress: "npm:^3.12.0"
     clipboardy: "npm:^2.3.0"
-    commander: "npm:10.0.1"
+    commander: "npm:14.0.0"
     enquirer: "npm:^2.3.6"
     fast-glob: "npm:3.2.11"
     figlet: "npm:1.8.0"
@@ -10242,10 +10242,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:10.0.1":
-  version: 10.0.1
-  resolution: "commander@npm:10.0.1"
-  checksum: 10/8799faa84a30da985802e661cc9856adfaee324d4b138413013ef7f087e8d7924b144c30a1f1405475f0909f467665cd9e1ce13270a2f41b141dab0b7a58f3fb
+"commander@npm:14.0.0":
+  version: 14.0.0
+  resolution: "commander@npm:14.0.0"
+  checksum: 10/c05418bfc35a3e8b5c67bd9f75f5b773f386f9b85f83e70e7c926047f270929cb06cf13cd68f387dd6e7e23c6157de8171b28ba606abd3e6256028f1f789becf
   languageName: node
   linkType: hard
 
