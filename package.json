@@ -177,7 +177,7 @@
     "chromatic": "11.5.4",
     "concurrently": "9.0.1",
     "cross-env": "^7.0.0",
-    "eslint": "^8.50.0",
+    "eslint": "^9.30.1",
     "eslint-plugin-aksel-local": "*",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.0",
