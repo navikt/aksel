@@ -175,6 +175,7 @@ const StyleMappings = {
     },
     { component: "Panel", main: "panel.css" },
     { component: "Popover", main: "popover.css" },
+    { component: "Process", main: "process.css", dependencies: [typoCss] },
     { component: "ProgressBar", main: "progress-bar.css" },
     { component: "Provider", main: "" },
     { component: "Radio", main: formCss, dependencies: [typoCss] },

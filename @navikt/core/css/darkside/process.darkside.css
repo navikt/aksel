@@ -1,0 +1,257 @@
+.aksel-process {
+  --__axc-process-circle-size: 1.75rem;
+  --__axc-process-border-width: 2px;
+  --__axc-process-line-length: 1rem;
+
+  color: var(--ax-text-subtle);
+  font-weight: var(--ax-font-weight-bold);
+  line-height: 1;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.aksel-process__item {
+  display: grid;
+  grid-template-rows:
+    [line-1] auto [step-start] var(--__axc-process-circle-size)
+    [line-2 step-end] auto;
+  grid-template-columns: var(--__axc-process-circle-size) auto;
+  justify-items: flex-start;
+  gap: var(--ax-space-8);
+}
+
+.aksel-process__line {
+  background-color: var(--ax-border-default);
+  width: var(--__axc-process-border-width);
+  height: 100%;
+  min-height: var(--__axc-process-line-length);
+  justify-self: center;
+  grid-column: 1;
+
+  .aksel-process__item--non-interactive & {
+    background-color: var(--ax-border-neutral-strong);
+  }
+}
+
+/* Line before non-interactive step */
+.aksel-process__item:has(+ .aksel-process__item > .aksel-process__step[data-interactive="false"]) {
+  .aksel-process__line--2 {
+    background-color: var(--ax-border-neutral-strong);
+  }
+}
+
+.aksel-process__line--1 {
+  grid-row: line-1;
+  display: none;
+}
+
+.aksel-process__line--2 {
+  grid-row: line-2;
+
+  /* Hide last line under item */
+  .aksel-process__item:last-of-type & {
+    display: none;
+  }
+}
+
+.aksel-process__step {
+  grid-row: 2 / -1;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: [circle] var(--__axc-process-circle-size) [content] auto;
+  gap: var(--ax-space-8);
+  justify-content: flex-start;
+  cursor: pointer;
+  padding: var(--__axc-process-border-width);
+  margin: calc(var(--__axc-process-border-width) * -1) calc(var(--__axc-process-border-width) * -1)
+    var(--__axc-process-circle-size);
+  width: 100%;
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+
+    /* Isolate item to make outline show above line--2 */
+    isolation: isolate;
+  }
+
+  /* Remove last item bottom margin */
+  .aksel-process__item:last-child & {
+    margin-bottom: 0;
+  }
+
+  &:is(button) {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+  }
+}
+
+.aksel-process__circle {
+  grid-column: circle;
+  display: inline-grid;
+  place-items: center;
+  width: var(--__axc-process-circle-size);
+  height: var(--__axc-process-circle-size);
+  border: var(--__axc-process-border-width) solid currentColor;
+  border-radius: var(--ax-radius-full);
+  line-height: 1;
+}
+
+.aksel-process__circle--success {
+  background: none;
+  font-size: var(--__axc-process-circle-size);
+}
+
+.aksel-process__step[data-interactive="true"] {
+  color: var(--ax-text-subtle);
+  border-radius: var(--ax-radius-4);
+  text-decoration: none;
+
+  & .aksel-process__content {
+    text-decoration: underline;
+    text-underline-offset: 0.1em;
+    text-decoration-thickness: 0.05em;
+  }
+
+  &:hover,
+  &:active {
+    & .aksel-process__content {
+      text-decoration-thickness: 0.111em;
+    }
+  }
+
+  & .aksel-process__circle {
+    color: var(--ax-text-subtle);
+    border-color: var(--ax-border-strong);
+  }
+
+  &[data-active="true"] {
+    & .aksel-process__content {
+      text-decoration: none;
+    }
+
+    & .aksel-process__circle {
+      color: var(--ax-text-contrast);
+      background-color: var(--ax-bg-strong-pressed);
+      border-color: var(--ax-bg-strong-pressed);
+    }
+  }
+
+  &[data-active="false"] {
+    &:hover {
+      & .aksel-process__circle {
+        background-color: var(--ax-bg-moderate-hoverA);
+        border-color: var(--ax-border-strong);
+      }
+    }
+  }
+}
+
+.aksel-process__step[data-interactive="false"] {
+  color: var(--ax-text-neutral-subtle);
+  cursor: default;
+
+  & .aksel-process__circle {
+    border-color: var(--ax-border-neutral-strong);
+  }
+
+  &[data-active="true"] {
+    & .aksel-process__circle {
+      color: var(--ax-text-neutral-contrast);
+      background-color: var(--ax-bg-neutral-strong-pressed);
+      border-color: var(--ax-bg-neutral-strong-pressed);
+    }
+  }
+}
+
+.aksel-process__content {
+  min-width: fit-content;
+  line-height: 1.5;
+  grid-column: content;
+  padding-top: 0.035rem;
+}
+
+/* Horizontal */
+.aksel-process[data-orientation="horizontal"] {
+  display: flex;
+  align-items: flex-start;
+  text-align: center;
+
+  & .aksel-process__line {
+    height: var(--__axc-process-border-width);
+    width: 100%;
+    min-height: auto;
+    grid-row: 1;
+    display: block;
+    align-self: center;
+  }
+
+  & .aksel-process__line--1 {
+    grid-column: line-1;
+  }
+
+  & .aksel-process__line--2 {
+    grid-column: line-2;
+  }
+
+  & .aksel-process__item {
+    flex: 1 1 100%;
+    grid-template-columns:
+      [line-1-start] 1fr [step-start] auto [line-1-end] var(--__axc-process-circle-size)
+      [line-2-start] auto [step-end] 1fr [line-2-end];
+    grid-template-rows: var(--__axc-process-circle-size) auto;
+
+    &:first-of-type .aksel-process__line--1,
+    &:last-of-type .aksel-process__line--2 {
+      visibility: hidden;
+    }
+  }
+
+  & .aksel-process__step {
+    grid-row: 1 / -1;
+    grid-column: step;
+    display: grid;
+    grid-template-rows: [circle] var(--__axc-process-circle-size) [content] auto;
+    grid-template-columns:
+      [content-start] auto [circle] var(--__axc-process-circle-size)
+      [content-end] auto;
+    place-items: center center;
+    margin-bottom: 0;
+  }
+
+  & .aksel-process__circle {
+    grid-row: circle;
+    grid-column: 2;
+  }
+
+  & .aksel-process__content {
+    grid-row: content;
+    grid-column: 1 / -1;
+    max-width: 24ch;
+  }
+}
+
+@media (forced-colors: active) {
+  .aksel-process__circle.aksel-process__circle {
+    border: 0;
+    outline: 2px solid ButtonText;
+    outline-offset: 2px;
+  }
+
+  .aksel-process__line.aksel-process__line {
+    background-color: ButtonText;
+  }
+
+  .aksel-process__step[data-active="true"][data-interactive] {
+    .aksel-process__circle {
+      forced-color-adjust: none;
+      background-color: highlight;
+      color: highlighttext;
+    }
+  }
+}
