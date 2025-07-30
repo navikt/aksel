@@ -24,14 +24,11 @@ function ThemeButton() {
         variant="tertiary-neutral"
         icon={
           <>
-            <MoonIcon
-              style={{ display: "var(--website-theme-toggle-dark-display)" }}
-              title="Endre til mørkt"
-            />
-            <SunIcon
-              style={{ display: "var(--website-theme-toggle-light-display)" }}
-              title="Endre til lyst"
-            />
+            {theme === "dark" ? (
+              <MoonIcon title="Endre til lyst" />
+            ) : (
+              <SunIcon title="Endre til mørkt" />
+            )}
           </>
         }
         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
