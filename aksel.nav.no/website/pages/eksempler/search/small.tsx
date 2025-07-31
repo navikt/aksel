@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <form role="search">
       <Search
-        label="Søk alle NAV sine sider"
+        label="Søk i alle Nav sine sider"
         variant="secondary"
         size="small"
       />

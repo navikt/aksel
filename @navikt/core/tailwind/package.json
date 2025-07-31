@@ -1,21 +1,21 @@
 {
   "name": "@navikt/ds-tailwind",
-  "version": "7.3.0",
+  "version": "7.25.1",
   "description": "Tailwind config based on @navikt/ds-tokens",
-  "author": "Aksel | NAV designsystem team",
+  "author": "Aksel | Nav designsystem team",
   "keywords": [
     "tailwind",
     "design-tokens"
   ],
-  "main": "tailwind.config.js",
-  "types": "tailwind.config.d.ts",
   "license": "MIT",
   "files": [
     "tailwind.config.js",
-    "tailwind.config.d.ts"
+    "tailwind.config.d.ts",
+    "tailwind.darkside.config.js"
   ],
   "scripts": {
-    "build": "yarn tsx ./src",
+    "build": "tsx ./src && yarn build:darkside",
+    "build:darkside": "tsx darkside.ts",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -25,16 +25,40 @@
     "directory": "@navikt/core/tailwind"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^7.3.0",
-    "color": "4.2.3",
+    "@navikt/ds-tokens": "^7.25.1",
+    "color": "5.0.0",
     "lodash": "^4.17.21",
     "tailwindcss": "^3.3.3",
     "tsx": "^4.19.1",
-    "typescript": "5.5.4",
-    "vitest": "^1.2.2"
+    "typescript": "5.8.3",
+    "vitest": "^2.1.9"
   },
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "main": "tailwind.config.js",
+  "types": "tailwind.config.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.config.js"
+      },
+      "require": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.config.js"
+      }
+    },
+    "./darkside-tw3": {
+      "import": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.darkside.config.js"
+      },
+      "require": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.darkside.config.js"
+      }
+    }
   }
 }

@@ -93,6 +93,13 @@ module.exports = {
       },
     },
     {
+      files: ["**/app/**/query-types.ts"],
+      extends: ["plugin:@typescript-eslint/recommended"],
+      rules: {
+        "@typescript-eslint/array-type": "off",
+      },
+    },
+    {
       files: ["**/*.test.*", "**/__tests__/*"],
       plugins: ["@vitest"],
       extends: [
@@ -143,7 +150,11 @@ module.exports = {
       },
     },
     {
-      files: ["**/examples/__parts*/*.tsx"],
+      files: [
+        "**/examples/__parts*/*.tsx",
+        "**/pages/templates/**/*.tsx",
+        "**/pages/eksempler/**/*.tsx",
+      ],
       plugins: ["aksel-local"],
       rules: {
         "aksel-local/import-check": ["error"], // Only allow imports from @navikt and react
@@ -175,6 +186,8 @@ module.exports = {
     "esm",
     "cjs",
     "dist",
+    "@navikt/aksel/**/*.input.*",
+    "@navikt/aksel/**/*.output.*",
     "**/codemod/**/*.js",
     "!.storybook",
     "**/playwright-report/**",

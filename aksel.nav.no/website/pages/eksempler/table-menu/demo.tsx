@@ -1,5 +1,5 @@
-import { MenuElipsisHorizontalCircleIcon } from "@navikt/aksel-icons";
-import { Button, Dropdown, HStack, Link, Table } from "@navikt/ds-react";
+import { MenuElipsisVerticalCircleIcon } from "@navikt/aksel-icons";
+import { ActionMenu, Button, Table } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -22,34 +22,24 @@ const Example = () => {
             <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
             <Table.DataCell align="right">{percent}&nbsp;%</Table.DataCell>
             <Table.DataCell align="right">
-              <Dropdown defaultOpen={i === 0}>
-                <HStack justify="end">
+              <ActionMenu>
+                <ActionMenu.Trigger>
                   <Button
-                    as={Dropdown.Toggle}
-                    icon={<MenuElipsisHorizontalCircleIcon title="Meny" />}
+                    icon={<MenuElipsisVerticalCircleIcon title="Meny" />}
                     size="small"
-                    variant="tertiary"
+                    variant="tertiary-neutral"
                   />
-                </HStack>
-                <Dropdown.Menu>
-                  <Dropdown.Menu.GroupedList>
-                    <Dropdown.Menu.GroupedList.Item onClick={() => {}}>
-                      Legg på vent
-                    </Dropdown.Menu.GroupedList.Item>
-                    <Dropdown.Menu.GroupedList.Item onClick={() => {}}>
-                      Meld av
-                    </Dropdown.Menu.GroupedList.Item>
-                    <Dropdown.Menu.Divider />
-                    <Dropdown.Menu.GroupedList.Item
-                      as={Link}
-                      href="#"
-                      underline={false}
-                    >
-                      Annuller
-                    </Dropdown.Menu.GroupedList.Item>
-                  </Dropdown.Menu.GroupedList>
-                </Dropdown.Menu>
-              </Dropdown>
+                </ActionMenu.Trigger>
+                <ActionMenu.Content>
+                  <ActionMenu.Item onSelect={() => {}}>
+                    Legg på vent
+                  </ActionMenu.Item>
+                  <ActionMenu.Item onSelect={() => {}}>Meld av</ActionMenu.Item>
+                  <ActionMenu.Item as="a" href="#">
+                    Annuller
+                  </ActionMenu.Item>
+                </ActionMenu.Content>
+              </ActionMenu>
             </Table.DataCell>
           </Table.Row>
         ))}

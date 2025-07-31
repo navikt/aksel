@@ -1,0 +1,37 @@
+version: 2
+registries:
+  npm-github:
+    type: npm-registry
+    url: https://npm.pkg.github.com
+    token: ${{ secrets.READER_TOKEN }}
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    registries:
+      - npm-github
+    groups:
+      sanity:
+        patterns:
+          - "sanity"
+          - "@sanity/vision"
+          - "@sanity/schema"
+      eslint:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+      storybook:
+        patterns:
+          - "*storybook*"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    registries:
+      - npm-github

@@ -1,0 +1,64 @@
+.aksel-skeleton {
+  background-color: var(--ax-bg-neutral-moderateA);
+  height: 1.3em;
+  animation: akselSkeletonAnimation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  pointer-events: none;
+}
+
+.aksel-skeleton--inline {
+  display: inline-block;
+}
+
+.aksel-skeleton--has-children {
+  color: transparent;
+
+  & > * {
+    visibility: hidden;
+  }
+
+  &.aksel-skeleton--no-height {
+    height: auto;
+  }
+
+  &.aksel-skeleton--no-width {
+    width: fit-content;
+  }
+}
+
+.aksel-skeleton--text {
+  height: auto;
+  transform-origin: 0 55%;
+  transform: scale(1, 0.6);
+  border-radius: var(--ax-radius-8);
+
+  &:empty::before {
+    content: "\00a0";
+  }
+}
+
+.aksel-skeleton--circle {
+  border-radius: var(--ax-radius-full);
+}
+
+.aksel-skeleton--rectangle {
+  border-radius: 0;
+}
+
+.aksel-skeleton--rounded {
+  border-radius: var(--ax-radius-12);
+}
+
+@keyframes akselSkeletonAnimation {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (forced-colors: active) {
+  .aksel-skeleton {
+    forced-color-adjust: none;
+    background-color: canvastext;
+    animation-duration: 2s;
+    opacity: 0.2;
+  }
+}

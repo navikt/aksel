@@ -16,24 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup project
+        uses: ./.github/actions/setup
         with:
-          node-version: lts/*
-          cache: yarn
-      - name: set-env for yarn install to @navikt scope
-        shell: bash
-        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
 
-      - name: Install dependencies
-        run: yarn
-
-      - name: Run docgen
-        run: |
-          yarn boot
-          yarn docgen
-
-      - name: Create empty .env file (Can be removed when env-file-if-exists is implemented in node v22)
-        run: echo "" > ./aksel.nav.no/website/.env
+      - name: Run ts-docgen
+        run: yarn docgen
 
       - name: Update sanity sync
         env:
@@ -48,46 +37,21 @@ jobs:
       contents: "read"
       id-token: "write"
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          node-version: lts/*
-          cache: yarn
-      - name: set-env for yarn install to @navikt scope
-        shell: bash
-        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
+          fetch-depth: 1
 
-      - name: add tokens to .env
-        run: |
-          echo "USE_CDN_ASSETS=true" >> aksel.nav.no/website/.env
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Build packages
-        run: yarn boot
-
-      - name: Tests
-        run: yarn workspace website test
-
-      - name: Create empty .env file (Can be removed when env-file-if-exists is implemented in node v22)
-        run: echo "" > ./aksel.nav.no/website/.env
-
-      - name: Build application
-        env:
-          SANITY_READ: ${{ secrets.SANITY_READ }}
-          SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
-        run: yarn workspace aksel.nav.no build:next
-
-      - name: Upload static files to NAV CDN
-        uses: nais/deploy/actions/cdn-upload/v2@master
+      - name: Setup and build Next.js application
+        uses: ./.github/actions/build-website
         with:
-          team: designsystem
-          source: ./aksel.nav.no/website/.next/static
-          destination: "/website/_next"
-          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
-          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          use_cdn_assets: true
+          production: true
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
+          nais_id_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          nais_project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          sanity_read_token: ${{ secrets.SANITY_READ }}
+          sanity_read_no_drafts_token: ${{ secrets.SANITY_READ_NO_DRAFTS }}
 
       - name: Get complete tag
         run: echo "TAG=PROD-$( date +%s )" >> $GITHUB_ENV

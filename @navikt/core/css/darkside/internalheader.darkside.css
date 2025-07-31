@@ -1,0 +1,101 @@
+.aksel-internalheader {
+  display: flex;
+  align-self: stretch;
+  background: var(--ax-bg-raised);
+  min-height: 3rem;
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+@media (forced-colors: active) {
+  .aksel-internalheader {
+    background-color: ButtonFace;
+    border: solid 1px ButtonText;
+    color: ButtonText;
+  }
+}
+
+.aksel-internalheader__title {
+  border: none;
+  overflow: visible;
+  background: transparent;
+  font: inherit;
+  font-weight: var(--ax-font-weight-bold);
+  line-height: normal;
+  text-align: left;
+  padding-block: 0;
+  padding-inline: var(--ax-space-24) var(--ax-space-20);
+  border-right: 1px solid var(--ax-border-neutral-subtleA);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin: 0;
+  color: var(--ax-text-neutral);
+
+  &:is(button) {
+    cursor: pointer;
+  }
+
+  &:hover {
+    background: var(--ax-bg-neutral-moderate-hoverA);
+  }
+
+  &:is(:hover, :active):not(button, a) {
+    background: initial;
+  }
+}
+
+.aksel-internalheader__user {
+  padding: 0 var(--ax-space-20);
+  border-left: 1px solid var(--ax-border-neutral-subtleA);
+  display: flex;
+  align-items: center;
+}
+
+.aksel-internalheader__button {
+  border: none;
+  margin: 0;
+  padding: 0 var(--ax-space-12);
+  overflow: visible;
+  background: transparent;
+  font: inherit;
+  line-height: normal;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  gap: var(--ax-space-8);
+  border-left: 1px solid var(--ax-border-neutral-subtleA);
+  color: var(--ax-text-neutral);
+
+  &:hover {
+    background: var(--ax-bg-neutral-moderate-hoverA);
+  }
+}
+
+@media (forced-colors: active) {
+  .aksel-internalheader__button:hover {
+    background-color: highlighttext;
+    border-color: highlight;
+    color: highlight;
+    outline: 1px solid highlight;
+    isolation: isolate;
+  }
+}
+
+.aksel-internalheader__title,
+.aksel-internalheader__button {
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: -4px;
+  }
+
+  &:active {
+    background: var(--ax-bg-neutral-moderate-pressedA);
+  }
+}
+
+.aksel-internalheader__user-button {
+  padding-left: var(--ax-space-20);
+  gap: var(--ax-space-16);
+}

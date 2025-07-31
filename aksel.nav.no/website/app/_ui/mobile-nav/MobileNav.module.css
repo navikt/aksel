@@ -1,0 +1,59 @@
+.mobileNavItem {
+  padding-block: var(--ax-space-12);
+  padding-inline: var(--ax-space-12);
+  background-color: var(--ax-bg-raised);
+  color: var(--ax-text-neutral);
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 1px;
+    z-index: 1;
+  }
+}
+
+.mobileNavItemCentered {
+  padding-inline: var(--ax-space-12) var(--ax-space-48);
+  text-align: center;
+}
+
+.mobileNavGroupSticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+  margin-block-end: var(--ax-space-24);
+}
+
+.mobileNavSidebarMenu {
+  display: grid;
+  gap: var(--ax-space-24);
+}
+
+.mobileNavDialog {
+  max-height: 100dvh;
+  height: 100dvh;
+  right: 0;
+  left: auto;
+  bottom: auto;
+  overflow-y: scroll;
+  padding-inline-end: var(--ax-space-8);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  animation: none;
+}
+
+.mobileNavDialogHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block-start: var(--ax-space-8);
+  padding-inline-end: var(--ax-space-8);
+}
+
+.divider {
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+}

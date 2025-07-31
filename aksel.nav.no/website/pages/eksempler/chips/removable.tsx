@@ -7,36 +7,41 @@ const Example = () => {
 
   return (
     <VStack gap="10">
-      <Chips>
-        {filter.map((c) => (
-          <Chips.Removable
-            key={c}
-            onClick={() =>
-              setFilter((x) =>
-                x.length === 1 ? options : x.filter((y) => y !== c),
-              )
-            }
-          >
-            {c}
-          </Chips.Removable>
-        ))}
-      </Chips>
-
-      <Chips>
-        {filter.map((c) => (
-          <Chips.Removable
-            variant="neutral"
-            key={c}
-            onClick={() =>
-              setFilter((x) =>
-                x.length === 1 ? options : x.filter((y) => y !== c),
-              )
-            }
-          >
-            {c}
-          </Chips.Removable>
-        ))}
-      </Chips>
+      <VStack gap="3">
+        Variant action (default)
+        <Chips>
+          {filter.map((c) => (
+            <Chips.Removable
+              key={c}
+              onClick={() =>
+                setFilter((x) =>
+                  x.length === 1 ? options : x.filter((y) => y !== c),
+                )
+              }
+            >
+              {c}
+            </Chips.Removable>
+          ))}
+        </Chips>
+      </VStack>
+      <VStack gap="3">
+        Variant neutral
+        <Chips>
+          {filter.map((c) => (
+            <Chips.Removable
+              variant="neutral"
+              key={c}
+              onClick={() =>
+                setFilter((x) =>
+                  x.length === 1 ? options : x.filter((y) => y !== c),
+                )
+              }
+            >
+              {c}
+            </Chips.Removable>
+          ))}
+        </Chips>
+      </VStack>
     </VStack>
   );
 };
@@ -46,7 +51,6 @@ const options = [
   "Nittedal",
   "Enebakk",
   "Hamar",
-  "Skedsmo",
   "Arendal",
   "Gjøvik",
 ];

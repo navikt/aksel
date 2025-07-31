@@ -1,22 +1,8 @@
-import React, { SVGProps } from "react";
-import { useId } from "../util/hooks";
+import React from "react";
+import { useI18n } from "../util/i18n/i18n.hooks";
 
-interface SVGRProps {
-  title?: string;
-  titleId?: string;
-}
-
-export type DefaultIllustrationType = React.FunctionComponent<
-  SVGProps<SVGSVGElement> & SVGRProps
->;
-
-export const DefaultIllustration: DefaultIllustrationType = ({
-  title,
-  titleId: _titleId,
-  ...props
-}) => {
-  let titleId: string | undefined = useId();
-  titleId = title ? (_titleId ? _titleId : "title-" + titleId) : undefined;
+export const DefaultIllustration = () => {
+  const translate = useI18n("GuidePanel");
 
   return (
     <svg
@@ -25,13 +11,10 @@ export const DefaultIllustration: DefaultIllustrationType = ({
       viewBox="0 0 56 85"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      aria-label="NAV veileder illustrasjon"
+      aria-label={translate("illustrationLabel")}
       focusable={false}
       role="img"
-      aria-labelledby={titleId}
-      {...props}
     >
-      {title ? <title id={titleId}>{title}</title> : null}
       <path
         fillRule="evenodd"
         clipRule="evenodd"

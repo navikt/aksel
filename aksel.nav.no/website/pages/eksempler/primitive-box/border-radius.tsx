@@ -38,6 +38,7 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
+  legacyOnly: true,
 });
 
 /* Storybook story */
@@ -47,5 +48,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "'borderRadius' lar deg endre border-radius på Box basert på tokens. Du kan også enkelt endre border-radius basert på brekkpunkt.",
+  desc: "Propen 'borderRadius' lar deg sette border-radius basert på tokens. Du kan også enkelt endre border-radius basert på brekkpunkt.",
 };

@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 
 export interface FormSummaryAnswersProps
   extends React.HTMLAttributes<HTMLDListElement> {
@@ -12,14 +12,29 @@ export interface FormSummaryAnswersProps
 export const FormSummaryAnswers = forwardRef<
   HTMLDListElement,
   FormSummaryAnswersProps
->(({ children, className, ...rest }: FormSummaryAnswersProps, ref) => (
-  <dl
-    ref={ref}
-    {...rest}
-    className={cl("navds-form-summary__answers", className)}
-  >
-    {children}
-  </dl>
-));
+>(
+  (
+    {
+      children,
+      className,
+      "data-color": color = "info",
+      ...rest
+    }: FormSummaryAnswersProps,
+    ref,
+  ) => {
+    const { cn } = useRenameCSS();
+
+    return (
+      <dl
+        ref={ref}
+        data-color={color}
+        {...rest}
+        className={cn("navds-form-summary__answers", className)}
+      >
+        {children}
+      </dl>
+    );
+  },
+);
 
 export default FormSummaryAnswers;

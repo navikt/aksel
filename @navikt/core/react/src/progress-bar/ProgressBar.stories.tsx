@@ -100,7 +100,7 @@ Sizes.args = {
 
 export const IndeterminateState: Story = {
   render: () => {
-    const values = [0, 5, 10, 20];
+    const values = [0, 5.7, 10, 20];
     return (
       <>
         {values.map((value) => (
@@ -127,6 +127,27 @@ export const IndeterminateState: Story = {
       </>
     );
   },
+};
+
+export const ColorRole: StoryFn = () => {
+  return (
+    <div>
+      <p id="progress-bar-label-magenta">Brand magenta</p>
+      <ProgressBar
+        value={60}
+        valueMax={120}
+        aria-labelledby="progress-bar-label-magenta"
+        data-color="brand-magenta"
+      />
+      <p id="progress-bar-label-warning">Warning</p>
+      <ProgressBar
+        value={60}
+        valueMax={120}
+        aria-labelledby="progress-bar-label-warning"
+        data-color="warning"
+      />
+    </div>
+  );
 };
 
 export const Chromatic: Story = {

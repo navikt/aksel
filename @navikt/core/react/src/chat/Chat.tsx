@@ -1,6 +1,7 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
-import { BodyLong } from "../typography";
+import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
+import { BodyLong, HeadingProps } from "../typography";
 import Bubble from "./Bubble";
 
 export const VARIANTS = ["subtle", "info", "neutral"] as const;
@@ -47,6 +48,11 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    * @default "medium"
    */
   size?: (typeof SIZES)[number];
+  /**
+   * The heading level for the toptext.
+   * @default "3"
+   */
+  toptextHeadingLevel?: Exclude<HeadingProps["level"], "1">;
 }
 
 interface ChatComponent
@@ -88,45 +94,69 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       variant = "neutral",
       toptextPosition,
       size = "medium",
+      toptextHeadingLevel = "3",
+      "data-color": color,
       ...rest
     }: ChatProps,
     ref,
-  ) => (
-    <div
-      ref={ref}
-      className={cl(
-        "navds-chat",
-        className,
-        `navds-chat--${position}`,
-        `navds-chat--top-text-${toptextPosition ?? position}`,
-        `navds-chat--${size}`,
-        `navds-chat--${variant}`,
-      )}
-      {...rest}
-    >
-      {avatar && (
-        <div className="navds-chat__avatar" aria-hidden>
-          {avatar}
-        </div>
-      )}
-      <ol className="navds-chat__bubble-wrapper">
-        {React.Children.map(children, (child, i) => {
-          if (React.isValidElement(child)) {
-            return (
-              <BodyLong as="li" size={size}>
-                {React.cloneElement(child, {
-                  name: name && i === 0 ? name : undefined,
-                  timestamp: timestamp && i === 0 ? timestamp : undefined,
-                  ...child.props,
-                })}
-              </BodyLong>
-            );
-          }
-        })}
-      </ol>
-    </div>
-  ),
+  ) => {
+    const { cn } = useRenameCSS();
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "navds-chat",
+          className,
+          `navds-chat--${position}`,
+          `navds-chat--top-text-${toptextPosition ?? position}`,
+          `navds-chat--${size}`,
+          `navds-chat--${variant}`,
+        )}
+        data-color={color ?? variantToColor(variant)}
+        {...rest}
+        data-variant={variant}
+      >
+        {avatar && (
+          <div className={cn("navds-chat__avatar")} aria-hidden>
+            {avatar}
+          </div>
+        )}
+        <BodyLong
+          as="div"
+          size={size}
+          className={cn("navds-chat__bubble-wrapper")}
+        >
+          {React.Children.map(children, (child, i) => {
+            if (!React.isValidElement(child)) {
+              return null;
+            }
+
+            return React.cloneElement(child, {
+              name: name && i === 0 ? name : undefined,
+              timestamp: timestamp && i === 0 ? timestamp : undefined,
+              toptextHeadingLevel,
+              ...child.props,
+            });
+          })}
+        </BodyLong>
+      </div>
+    );
+  },
 ) as ChatComponent;
+
+function variantToColor(variant: ChatProps["variant"]): AkselColor {
+  switch (variant) {
+    case "neutral":
+      return "neutral";
+    case "subtle":
+      return "neutral";
+    case "info":
+      return "info";
+    default:
+      return "neutral";
+  }
+}
 
 Chat.Bubble = Bubble;
 

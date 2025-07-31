@@ -3,10 +3,10 @@ import { expect, userEvent, within } from "@storybook/test";
 import { setYear } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button } from "../../button";
-import { useMonthpicker } from "../hooks";
-import { DateInputProps } from "../parts/DateInput";
+import { DateInputProps } from "../Date.Input";
 import MonthPicker from "./MonthPicker";
-import { MonthPickerProps } from "./types";
+import { MonthPickerProps } from "./MonthPicker.types";
+import { useMonthpicker } from "./hooks/useMonthPicker";
 
 export default {
   title: "ds-react/Monthpicker",
@@ -25,11 +25,12 @@ export const Default: StoryFn<{
   const { inputProps, monthpickerProps } = useMonthpicker({
     disabled: [new Date("Apr 1 2022")],
     locale: props.locale,
+    onMonthChange: console.log,
   });
 
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker {...monthpickerProps} onMonthSelect={console.log}>
+      <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input
           label="Velg måned"
           variant="monthpicker"

@@ -127,37 +127,43 @@
   color: var(--ac-tag-neutral-moderate-text, var(--a-text-default));
 }
 
-.navds-tag--alt1 {
+.navds-tag--alt1,
+.navds-tag--outline.navds-tag--meta-purple {
   border-color: var(--ac-tag-alt-1-border, var(--a-border-alt-1));
   background-color: var(--ac-tag-alt-1-bg, var(--a-surface-alt-1-subtle));
   color: var(--ac-tag-alt-1-text, var(--a-text-default));
 }
 
-.navds-tag--alt1-filled {
+.navds-tag--alt1-filled,
+.navds-tag--strong.navds-tag--meta-purple {
   border-color: transparent;
   background-color: var(--ac-tag-alt-1-filled-bg, var(--a-surface-alt-1));
   color: var(--ac-tag-alt-1-filled-text, var(--a-text-on-alt-1));
 }
 
-.navds-tag--alt1-moderate {
+.navds-tag--alt1-moderate,
+.navds-tag--moderate.navds-tag--meta-purple {
   border-color: transparent;
   background-color: var(--ac-tag-alt-1-moderate-bg, var(--a-surface-alt-1-moderate));
   color: var(--ac-tag-alt-1-moderate-text, var(--a-text-default));
 }
 
-.navds-tag--alt2 {
+.navds-tag--alt2,
+.navds-tag--outline.navds-tag--meta-lime {
   border-color: var(--ac-tag-alt-2-border, var(--a-border-alt-2));
   background-color: var(--ac-tag-alt-2-bg, var(--a-surface-alt-2-subtle));
   color: var(--ac-tag-alt-2-text, var(--a-text-default));
 }
 
-.navds-tag--alt2-filled {
+.navds-tag--alt2-filled,
+.navds-tag--strong.navds-tag--meta-lime {
   border-color: transparent;
   background-color: var(--ac-tag-alt-2-filled-bg, var(--a-surface-alt-2));
   color: var(--ac-tag-alt-2-filled-text, var(--a-text-on-alt-2));
 }
 
-.navds-tag--alt2-moderate {
+.navds-tag--alt2-moderate,
+.navds-tag--moderate.navds-tag--meta-lime {
   border-color: transparent;
   background-color: var(--ac-tag-alt-2-moderate-bg, var(--a-surface-alt-2-moderate));
   color: var(--ac-tag-alt-2-moderate-text, var(--a-text-default));

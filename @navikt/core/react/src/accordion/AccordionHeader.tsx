@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { AccordionContext } from "./AccordionContext";
@@ -19,6 +19,9 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     const itemContext = useContext(AccordionItemContext);
     const accordionContext = useContext(AccordionContext);
 
+    const themeContext = useThemeInternal(false);
+    const { cn } = useRenameCSS();
+
     if (itemContext === null) {
       console.error(
         "<Accordion.Header> has to be used within an <Accordion.Item>, which in turn must be within an <Accordion>",
@@ -26,25 +29,32 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
       return null;
     }
 
+    let headingSize = accordionContext?.headingSize ?? "small";
+
+    if (themeContext) {
+      /* Fallback to "medium" Accordion-size if any other sizes are used */
+      headingSize = accordionContext?.size === "small" ? "xsmall" : "small";
+    }
+
     return (
       <button
         ref={ref}
         {...rest}
-        className={cl("navds-accordion__header", className)}
+        className={cn("navds-accordion__header", className)}
         onClick={composeEventHandlers(onClick, itemContext.toggleOpen)}
         aria-expanded={itemContext.open}
         type="button"
       >
-        <span className="navds-accordion__icon-wrapper">
+        <span className={cn("navds-accordion__icon-wrapper")}>
           <ChevronDownIcon
-            className="navds-accordion__header-chevron"
+            className={cn("navds-accordion__header-chevron")}
             aria-hidden
           />
         </span>
         <Heading
-          size={accordionContext?.headingSize ?? "small"}
+          size={headingSize}
           as="span"
-          className="navds-accordion__header-content"
+          className={cn("navds-accordion__header-content")}
         >
           {children}
         </Heading>

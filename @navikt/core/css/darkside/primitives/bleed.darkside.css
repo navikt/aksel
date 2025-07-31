@@ -1,0 +1,103 @@
+.aksel-bleed {
+  --__axc-bleed-margin-inline-xs: initial;
+  --__axc-bleed-margin-inline-sm: var(--__axc-bleed-margin-inline-xs);
+  --__axc-bleed-margin-inline-md: var(--__axc-bleed-margin-inline-sm);
+  --__axc-bleed-margin-inline-lg: var(--__axc-bleed-margin-inline-md);
+  --__axc-bleed-margin-inline-xl: var(--__axc-bleed-margin-inline-lg);
+  --__axc-bleed-margin-inline-2xl: var(--__axc-bleed-margin-inline-xl);
+  --__axc-bleed-margin-block-xs: initial;
+  --__axc-bleed-margin-block-sm: var(--__axc-bleed-margin-block-xs);
+  --__axc-bleed-margin-block-md: var(--__axc-bleed-margin-block-sm);
+  --__axc-bleed-margin-block-lg: var(--__axc-bleed-margin-block-md);
+  --__axc-bleed-margin-block-xl: var(--__axc-bleed-margin-block-lg);
+  --__axc-bleed-margin-block-2xl: var(--__axc-bleed-margin-block-xl);
+
+  /** defaults */
+  --__axc-bleed-margin-inline: var(--__axc-bleed-margin-inline-xs);
+  --__axc-bleed-margin-block: var(--__axc-bleed-margin-block-xs);
+
+  margin-inline: var(--__axc-bleed-margin-inline);
+  margin-block: var(--__axc-bleed-margin-block);
+}
+
+.aksel-bleed--padding {
+  --__axc-bleed-padding-inline-xs: initial;
+  --__axc-bleed-padding-inline-sm: var(--__axc-bleed-padding-inline-xs);
+  --__axc-bleed-padding-inline-md: var(--__axc-bleed-padding-inline-sm);
+  --__axc-bleed-padding-inline-lg: var(--__axc-bleed-padding-inline-md);
+  --__axc-bleed-padding-inline-xl: var(--__axc-bleed-padding-inline-lg);
+  --__axc-bleed-padding-inline-2xl: var(--__axc-bleed-padding-inline-xl);
+  --__axc-bleed-padding-block-xs: initial;
+  --__axc-bleed-padding-block-sm: var(--__axc-bleed-padding-block-xs);
+  --__axc-bleed-padding-block-md: var(--__axc-bleed-padding-block-sm);
+  --__axc-bleed-padding-block-lg: var(--__axc-bleed-padding-block-md);
+  --__axc-bleed-padding-block-xl: var(--__axc-bleed-padding-block-lg);
+  --__axc-bleed-padding-block-2xl: var(--__axc-bleed-padding-block-xl);
+
+  /** defaults */
+  --__axc-bleed-padding-inline: var(--__axc-bleed-padding-inline-xs);
+  --__axc-bleed-padding-block: var(--__axc-bleed-padding-block-xs);
+
+  padding-inline: var(--__axc-bleed-padding-inline);
+  padding-block: var(--__axc-bleed-padding-block);
+}
+
+@media (min-width: 480px) {
+  .aksel-bleed {
+    --__axc-bleed-margin-inline: var(--__axc-bleed-margin-inline-sm);
+    --__axc-bleed-margin-block: var(--__axc-bleed-margin-block-sm);
+  }
+
+  .aksel-bleed--padding {
+    --__axc-bleed-padding-inline: var(--__axc-bleed-padding-inline-sm);
+    --__axc-bleed-padding-block: var(--__axc-bleed-padding-block-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .aksel-bleed {
+    --__axc-bleed-margin-inline: var(--__axc-bleed-margin-inline-md);
+    --__axc-bleed-margin-block: var(--__axc-bleed-margin-block-md);
+  }
+
+  .aksel-bleed--padding {
+    --__axc-bleed-padding-inline: var(--__axc-bleed-padding-inline-md);
+    --__axc-bleed-padding-block: var(--__axc-bleed-padding-block-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .aksel-bleed {
+    --__axc-bleed-margin-inline: var(--__axc-bleed-margin-inline-lg);
+    --__axc-bleed-margin-block: var(--__axc-bleed-margin-block-lg);
+  }
+
+  .aksel-bleed--padding {
+    --__axc-bleed-padding-inline: var(--__axc-bleed-padding-inline-lg);
+    --__axc-bleed-padding-block: var(--__axc-bleed-padding-block-lg);
+  }
+}
+
+@media (min-width: 1280px) {
+  .aksel-bleed {
+    --__axc-bleed-margin-inline: var(--__axc-bleed-margin-inline-xl);
+    --__axc-bleed-margin-block: var(--__axc-bleed-margin-block-xl);
+  }
+
+  .aksel-bleed--padding {
+    --__axc-bleed-padding-inline: var(--__axc-bleed-padding-inline-xl);
+    --__axc-bleed-padding-block: var(--__axc-bleed-padding-block-xl);
+  }
+}
+
+@media (min-width: 1440px) {
+  .aksel-bleed {
+    --__axc-bleed-margin-inline: var(--__axc-bleed-margin-inline-2xl);
+    --__axc-bleed-margin-block: var(--__axc-bleed-margin-block-2xl);
+  }
+
+  .aksel-bleed--padding {
+    --__axc-bleed-padding-inline: var(--__axc-bleed-padding-inline-2xl);
+    --__axc-bleed-padding-block: var(--__axc-bleed-padding-block-2xl);
+  }
+}

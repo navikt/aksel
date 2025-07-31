@@ -3,13 +3,19 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Box background="surface-default" padding="6">
+    <Box
+      background="surface-default"
+      padding="6"
+      borderRadius="xlarge"
+      borderColor="border-subtle"
+      borderWidth="1"
+    >
       <BodyLong spacing>
         Hvis du er helt eller delvis arbeidsledig eller permittert, kan du ha
-        rett til pengestøtte fra NAV.
+        rett til pengestøtte fra Nav.
       </BodyLong>
       <BodyLong spacing>
-        NAV kan også gi deg råd og veiledning i situasjonen din.
+        Nav kan også gi deg råd og veiledning i situasjonen din.
       </BodyLong>
       <BodyLong spacing>
         Hvis du ikke får dagpenger kan du ha rett til tiltakspenger. Dette er en
@@ -23,8 +29,8 @@ const Example = () => {
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
-  showBreakpoints: true,
   background: "subtle",
+  legacyOnly: true,
 });
 
 /* Storybook story */
@@ -34,5 +40,5 @@ export const Demo = {
 
 export const args = {
   index: 9,
-  desc: "Box erstatter dagens Panel-komponent",
+  desc: "Box erstatter den avviklede komponenten Panel.",
 };

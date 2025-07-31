@@ -1,0 +1,21 @@
+.test {
+  margin: var(--ax-space-16);
+  padding: var(--ax-space-0);
+  padding: var(--ax-space-6);
+  padding: var(--ax-space-2);
+  /* Has replacement */
+  background-color: var(--ax-bg-neutral-soft);
+  /* Has no replacement */
+  background-color: var(--a-surface-transparent);
+
+  /* Is tagged as legacy */
+  --aksel-legacy__a-surface-neutral: red;
+  --aksel-legacy__a-surface-subtle: orange;
+
+  /* Border-radius */
+  border-radius: var(--ax-radius-2);
+  border-radius: var(--ax-radius-4);
+  border-radius: var(--ax-radius-8);
+  border-radius: var(--ax-radius-12);
+  border-radius: var(--ax-radius-full);
+}

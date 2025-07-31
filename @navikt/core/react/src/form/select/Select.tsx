@@ -1,9 +1,9 @@
-import cl from "clsx";
 import React, { SelectHTMLAttributes, forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
-import { ReadOnlyIcon } from "../ReadOnlyIcon";
+import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 
 export interface SelectProps
@@ -70,6 +70,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       ...rest
     } = props;
 
+    const { cn } = useRenameCSS();
+
     const readOnlyEventHandlers = {
       onMouseDown: (evt) => {
         // NOTE: does not prevent click
@@ -93,7 +95,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <div
-        className={cl(
+        className={cn(
           className,
           "navds-form-field",
           `navds-form-field--${size}`,
@@ -108,16 +110,16 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          className={cl("navds-form-field__label", {
+          className={cn("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
         >
-          <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
+          {readOnly && <ReadOnlyIconWithTitle />}
           {label}
         </Label>
         {!!description && (
           <BodyShort
-            className={cl("navds-form-field__description", {
+            className={cn("navds-form-field__description", {
               "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
@@ -127,13 +129,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             {description}
           </BodyShort>
         )}
-        <div className="navds-select__container" style={style}>
+        <div className={cn("navds-select__container")} style={style}>
           <select
             {...omit(rest, ["error", "errorId", "size", "readOnly"])}
             {...inputProps}
             {...readOnlyEventHandlers}
             ref={ref}
-            className={cl(
+            className={cn(
               "navds-select__input",
               "navds-body-short",
               `navds-body-short--${size ?? "medium"}`,
@@ -142,16 +144,21 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           >
             {children}
           </select>
-          <ChevronDownIcon className="navds-select__chevron" aria-hidden />
+          <ChevronDownIcon
+            className={cn("navds-select__chevron")}
+            aria-hidden
+          />
         </div>
         <div
-          className="navds-form-field__error"
+          className={cn("navds-form-field__error")}
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"
         >
           {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+            <ErrorMessage size={size} showIcon>
+              {props.error}
+            </ErrorMessage>
           )}
         </div>
       </div>

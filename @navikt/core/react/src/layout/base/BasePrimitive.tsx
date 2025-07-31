@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React from "react";
 import { Slot } from "../../slot/Slot";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -14,8 +14,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * padding='4'
-   * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * padding='space-16'
+   * padding={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   padding?: ResponsiveProp<SpacingScale>;
   /**
@@ -23,9 +23,9 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * paddingInline='4'
-   * paddingInline='4 5'
-   * paddingInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   * paddingInline='space-16'
+   * paddingInline='space-16 space-20'
+   * paddingInline={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24'}}
    */
   paddingInline?: ResponsiveProp<
     SpacingScale | `${SpacingScale} ${SpacingScale}`
@@ -35,9 +35,9 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * paddingBlock='4'
-   * paddingBlock='4 5'
-   * paddingBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * paddingBlock='space-16'
+   * paddingBlock='space-16 space-20'
+   * paddingBlock={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24'}}
    */
   paddingBlock?: ResponsiveProp<
     SpacingScale | `${SpacingScale} ${SpacingScale}`
@@ -47,8 +47,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * margin='4'
-   * margin={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * margin='space-16'
+   * margin={{xs: '0', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   margin?: ResponsiveProp<SpacingScale>;
   /**
@@ -56,9 +56,9 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * marginInline='4'
-   * marginInline='4 5'
-   * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   * marginInline='space-16'
+   * marginInline='space-16 space-20'
+   * marginInline={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24'}}
    */
   marginInline?: ResponsiveProp<
     | SpacingScale
@@ -72,9 +72,9 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * marginBlock='4'
-   * marginBlock='4 5'
-   * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * marginBlock='space-16'
+   * marginBlock='space-16 space-20'
+   * marginBlock={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24'}}
    */
   marginBlock?: ResponsiveProp<
     | SpacingScale
@@ -118,9 +118,9 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * inset='4'
-   * inset='4 5'
-   * inset={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   * inset='space-16'
+   * inset='space-16 space-20'
+   * inset={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24'}}
    */
   inset?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**
@@ -128,8 +128,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * top='4'
-   * top={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * top='space-16'
+   * top={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   top?: ResponsiveProp<SpacingScale>;
   /**
@@ -137,8 +137,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * right='4'
-   * right={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * right='space-16'
+   * right={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   right?: ResponsiveProp<SpacingScale>;
   /**
@@ -146,8 +146,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * bottom='4'
-   * bottom={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * bottom='space-16'
+   * bottom={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   bottom?: ResponsiveProp<SpacingScale>;
   /**
@@ -155,8 +155,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * left='4'
-   * left={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * left='space-16'
+   * left={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   left?: ResponsiveProp<SpacingScale>;
   /**
@@ -251,44 +251,48 @@ export const BasePrimitive = ({
   flexShrink,
   gridColumn,
 }: BasePrimitiveProps) => {
+  const themeContext = useThemeInternal(false);
+  const { cn } = useRenameCSS();
+  const prefix = themeContext ? "ax" : "a";
+
   const style: React.CSSProperties = {
     /* Padding */
-    ...getResponsiveProps("r", "p", "spacing", padding),
-    ...getResponsiveProps("r", "pi", "spacing", paddingInline),
-    ...getResponsiveProps("r", "pb", "spacing", paddingBlock),
+    ...getResponsiveProps(prefix, "r", "p", "spacing", padding),
+    ...getResponsiveProps(prefix, "r", "pi", "spacing", paddingInline),
+    ...getResponsiveProps(prefix, "r", "pb", "spacing", paddingBlock),
     /* Margin */
-    ...getResponsiveProps("r", "m", "spacing", margin),
-    ...getResponsiveProps("r", "mi", "spacing", marginInline),
-    ...getResponsiveProps("r", "mb", "spacing", marginBlock),
+    ...getResponsiveProps(prefix, "r", "m", "spacing", margin),
+    ...getResponsiveProps(prefix, "r", "mi", "spacing", marginInline),
+    ...getResponsiveProps(prefix, "r", "mb", "spacing", marginBlock),
     /* Width & height */
-    ...getResponsiveValue("r", "w", width),
-    ...getResponsiveValue("r", "minw", minWidth),
-    ...getResponsiveValue("r", "maxw", maxWidth),
-    ...getResponsiveValue("r", "h", height),
-    ...getResponsiveValue("r", "minh", minHeight),
-    ...getResponsiveValue("r", "maxh", maxHeight),
+    ...getResponsiveValue(prefix, "r", "w", width),
+    ...getResponsiveValue(prefix, "r", "minw", minWidth),
+    ...getResponsiveValue(prefix, "r", "maxw", maxWidth),
+    ...getResponsiveValue(prefix, "r", "h", height),
+    ...getResponsiveValue(prefix, "r", "minh", minHeight),
+    ...getResponsiveValue(prefix, "r", "maxh", maxHeight),
     /* Positon & inset */
-    ...getResponsiveValue("r", "position", position),
-    ...getResponsiveProps("r", "inset", "spacing", inset),
-    ...getResponsiveProps("r", "top", "spacing", top),
-    ...getResponsiveProps("r", "right", "spacing", right),
-    ...getResponsiveProps("r", "bottom", "spacing", bottom),
-    ...getResponsiveProps("r", "left", "spacing", left),
+    ...getResponsiveValue(prefix, "r", "position", position),
+    ...getResponsiveProps(prefix, "r", "inset", "spacing", inset),
+    ...getResponsiveProps(prefix, "r", "top", "spacing", top),
+    ...getResponsiveProps(prefix, "r", "right", "spacing", right),
+    ...getResponsiveProps(prefix, "r", "bottom", "spacing", bottom),
+    ...getResponsiveProps(prefix, "r", "left", "spacing", left),
     /* Overflow */
-    ...getResponsiveValue("r", "overflow", overflow),
-    ...getResponsiveValue("r", "overflowx", overflowX),
-    ...getResponsiveValue("r", "overflowy", overflowY),
+    ...getResponsiveValue(prefix, "r", "overflow", overflow),
+    ...getResponsiveValue(prefix, "r", "overflowx", overflowX),
+    ...getResponsiveValue(prefix, "r", "overflowy", overflowY),
     /* Flex */
-    ...getResponsiveValue("r", "flex-basis", flexBasis),
-    ...getResponsiveValue("r", "flex-grow", flexGrow),
-    ...getResponsiveValue("r", "flex-shrink", flexShrink),
+    ...getResponsiveValue(prefix, "r", "flex-basis", flexBasis),
+    ...getResponsiveValue(prefix, "r", "flex-grow", flexGrow),
+    ...getResponsiveValue(prefix, "r", "flex-shrink", flexShrink),
     /* Grid */
-    ...getResponsiveValue("r", "grid-column", gridColumn),
+    ...getResponsiveValue(prefix, "r", "grid-column", gridColumn),
   };
 
   return (
     <Slot
-      className={cl({
+      className={cn({
         className,
         "navds-r-p": padding,
         "navds-r-pi": paddingInline,

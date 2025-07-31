@@ -108,6 +108,7 @@ function propList() {
           required: val.required,
           type: val.type.name,
           ref: val.name === "ref",
+          deprecated: val.deprecated,
         };
       }),
     };

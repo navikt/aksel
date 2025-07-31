@@ -21,21 +21,33 @@ export const TemplatesArtikkel = defineType({
     oppdateringsvarsel,
     ...hiddenFields,
     titleField,
-    editorField,
+
     defineField({
       title: "Kategori",
       name: "kategori",
       type: "string",
       validation: (Rule) => Rule.required(),
       options: {
-        list: templatesKategorier.map((x) => ({
-          title: x.title,
-          value: x.value,
-        })),
+        list: [
+          ...templatesKategorier.map((x) => ({
+            title: x.title,
+            value: x.value,
+          })),
+          { title: "Frittstående", value: "standalone" },
+        ],
         layout: "radio",
       },
     }),
+    defineField({
+      title: "Sidebar index",
+      description:
+        "Overstyrer sortering av artikler i sidebar. Hvis feltet er tomt, sorteres den alfabetisk.",
+      name: "sidebarindex",
+      type: "number",
+      group: "settings",
+    }),
     kategoriSlug(prefix),
+    editorField,
     defineField({
       title: "Metadata",
       name: "status",
@@ -52,7 +64,7 @@ export const TemplatesArtikkel = defineType({
               { title: "Beta", value: "beta" },
               { title: "New", value: "new" },
               { title: "Stable", value: "ready" },
-              { title: "Deprecated", value: "deprecated" },
+              { title: "Legacy", value: "deprecated" },
             ],
             layout: "radio",
           },
@@ -74,14 +86,7 @@ export const TemplatesArtikkel = defineType({
       type: "url",
       group: "settings",
     }),
-    defineField({
-      title: "Sidebar index",
-      description:
-        "Overstyrer sortering av artikler i sidebar. Hvis feltet er tomt, sorteres den alfabetisk.",
-      name: "sidebarindex",
-      type: "number",
-      group: "settings",
-    }),
+
     defineField({
       title: "Innhold",
       description:

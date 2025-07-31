@@ -15,4 +15,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "Interaction-varianten er ment for interaktive elementer.",
 };

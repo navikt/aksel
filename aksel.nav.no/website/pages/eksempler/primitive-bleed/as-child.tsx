@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <DemoWrapper>
       <Bleed marginInline="10" asChild>
-        <Box padding="3" className="p" background="surface-alt-3-subtle">
+        <Box padding="3" background="surface-alt-3-subtle">
           <HStack justify="center">Med asChild</HStack>
         </Box>
       </Bleed>
@@ -24,9 +24,7 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, {
-  showBreakpoints: true,
-});
+export default withDsExample(Example, { legacyOnly: true });
 
 /* Storybook story */
 export const Demo = {
@@ -34,6 +32,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
-  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer dom-noder og forenkler output. For at Bleed + child-komponent skal fungere må child kunne ta inn 'className' og 'style' som prop.",
+  index: 5,
+  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer antall DOM-noder og forenkler output. [Les mer om asChild her](https://aksel.nav.no/grunnleggende/kode/layout-primitives#613715c234c8).",
 };

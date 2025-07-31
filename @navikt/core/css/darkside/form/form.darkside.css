@@ -1,0 +1,45 @@
+.aksel-form-field {
+  display: grid;
+  justify-items: start;
+  gap: var(--ax-space-8);
+}
+
+.aksel-form-field__description {
+  margin-top: -0.375rem;
+  color: var(--ax-text-neutral-subtle);
+
+  /* In case a component returning null is passed */
+  &:empty {
+    display: none;
+  }
+}
+
+.aksel-form-field--disabled {
+  opacity: var(--ax-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.aksel-form-field__error:empty {
+  display: none;
+}
+
+.aksel-form-field__subdescription {
+  color: var(--ax-text-neutral-subtle);
+}
+
+.aksel-form-field--readonly > :where(.aksel-form-field__label) {
+  display: inline-flex;
+}
+
+.aksel-form-field__readonly-icon {
+  margin-top: var(--ax-space-2);
+  margin-right: var(--ax-space-4);
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+@media (forced-colors: active) {
+  .aksel-form-field--disabled {
+    opacity: 1;
+  }
+}

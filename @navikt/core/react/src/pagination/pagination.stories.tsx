@@ -1,6 +1,6 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
-import { Link, HashRouter as Router } from "react-router-dom";
+import { Link, HashRouter as Router } from "react-router";
 import { VStack } from "../layout/stack";
 import Pagination from "./Pagination";
 
@@ -144,6 +144,21 @@ AsLink.decorators = [
   ),
 ];
 
+export const ColorRole = () => {
+  const [page, setPage] = useState(2);
+
+  return (
+    <Pagination
+      count={8}
+      siblingCount={1}
+      boundaryCount={1}
+      page={page}
+      onPageChange={setPage}
+      data-color="brand-magenta"
+    />
+  );
+};
+
 export const Chromatic: Story = {
   render: (props) => (
     <VStack gap="8">
@@ -170,6 +185,10 @@ export const Chromatic: Story = {
       <div>
         <h2>AsLink</h2>
         <AsLink {...props} />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </VStack>
   ),

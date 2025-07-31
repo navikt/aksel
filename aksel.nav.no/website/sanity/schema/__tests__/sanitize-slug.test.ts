@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { sanitizeSlug } from "../util";
+import { sanitizeSlug } from "../../util";
 
 describe("Testing sanitizeSlug function", () => {
   test("sanitizeSlug should return empty string if input is empty", () => {

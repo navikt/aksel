@@ -1,0 +1,42 @@
+.kodeEksemplerNavigation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-20);
+  margin-block-end: var(--ax-space-16);
+  max-width: 46rem;
+}
+
+.kodeExampleContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge) 0 0;
+  border: 1px solid var(--ax-border-neutral-subtle);
+  border-bottom: none;
+  background-color: var(--ax-bg-sunken);
+}
+
+.kodeExampleRezizer {
+  resize: horizontal;
+  overflow: hidden;
+  box-shadow: var(--ax-shadow-dialog);
+  max-width: 100%;
+}
+
+.kodeExampleIframe {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 200px);
+  background-color: var(--ax-bg-default);
+}
+
+.kodeEksemplerToolbar {
+  padding: var(--ax-space-4);
+  margin-block-end: var(--ax-space-8);
+  border: 1px solid var(--ax-border-neutral-subtle);
+  border-radius: 0 0 var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge);
+  background-color: var(--ax-bg-raised);
+}
+
+.kodeEksemplerCodeSandbox {
+  height: 2rem;
+}

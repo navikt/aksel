@@ -1,0 +1,39 @@
+.aksel-confirmation-panel__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-12);
+  padding: var(--ax-space-16);
+  border-radius: var(--ax-radius-8);
+  border: 1px solid var(--ax-border-default);
+  background-color: var(--ax-bg-moderate);
+  transition: background-color linear 100ms;
+  justify-self: stretch;
+  position: relative;
+}
+
+.aksel-confirmation-panel__content {
+  max-width: 80ch;
+}
+
+@media (forced-colors: active) {
+  .aksel-confirmation-panel__inner::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-left: 8px solid;
+    border-color: orange;
+    forced-color-adjust: none;
+    border-start-start-radius: calc(var(--ax-radius-8) - 1px);
+    border-end-start-radius: calc(var(--ax-radius-8) - 1px);
+  }
+
+  .aksel-confirmation-panel--checked .aksel-confirmation-panel__inner::before {
+    border-color: green;
+  }
+
+  .aksel-confirmation-panel--error .aksel-confirmation-panel__inner::before {
+    border-color: red;
+  }
+}

@@ -1,5 +1,4 @@
 import { readFileSync } from "node:fs";
-import { Node as PostCSSNode } from "postcss";
 import valueParser from "postcss-value-parser";
 import stylelint from "stylelint";
 import { isCustomProperty, tokenExists } from "../../utils";
@@ -35,7 +34,7 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
 const checkDeclValue = (
   value: string,
   postcssResult: stylelint.PostcssResult,
-  rootNode: PostCSSNode,
+  rootNode: stylelint.Problem["node"],
 ) => {
   valueParser(value).walk((node) => {
     if (
@@ -58,7 +57,7 @@ const checkDeclValue = (
 const checkDeclProp = (
   prop: string,
   postcssResult: stylelint.PostcssResult,
-  rootNode: PostCSSNode,
+  rootNode: stylelint.Problem["node"],
 ) => {
   if (
     isCustomProperty(prop) &&

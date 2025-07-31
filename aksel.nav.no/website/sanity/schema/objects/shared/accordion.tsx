@@ -1,6 +1,7 @@
+import React from "react";
 import { defineField, defineType } from "sanity";
 import { ChevronDownIcon, Density3Icon } from "@navikt/aksel-icons";
-import { Label } from "@navikt/ds-react";
+import { Box, HStack, Label } from "@navikt/ds-react";
 
 export const Accordion = defineType({
   name: "accordion",
@@ -48,17 +49,20 @@ export const Accordion = defineType({
   components: {
     preview: (val: any) => {
       return val?.list ? (
-        <div>
-          {val.list.map((x) => (
-            <div
-              key={x._key}
-              className="border-b-border flex w-full justify-between border-b px-4 py-2"
-            >
-              <span>{x.title}</span>
-              <ChevronDownIcon aria-hidden />
-            </div>
+        <Box paddingBlock="space-8" paddingInline="space-16">
+          <Label as="p">{`Accordion (${val.list.length} elementer)`}</Label>
+          {val.list.map((item, index) => (
+            <React.Fragment key={item.title}>
+              <Box paddingBlock="space-8">
+                <HStack gap="space-8" justify="space-between" align="center">
+                  <span>{item.title}</span>
+                  <ChevronDownIcon aria-hidden />
+                </HStack>
+              </Box>
+              {index !== val.list.length - 1 && <hr />}
+            </React.Fragment>
           ))}
-        </div>
+        </Box>
       ) : (
         <Label as="p">Accordion (0 elementer)</Label>
       );

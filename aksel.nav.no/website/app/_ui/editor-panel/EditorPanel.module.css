@@ -1,0 +1,21 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+.editorPanel {
+  border-radius: var(--ax-border-radius-xlarge);
+  border: 1px solid var(--ax-border-default);
+  overflow: hidden;
+}
+
+.editorPanelHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-4);
+  padding: var(--ax-space-8) var(--ax-space-20);
+  background: var(--ax-bg-moderateA);
+  border-bottom: 1px solid var(--ax-border-subtleA);
+  color: var(--ax-text-subtle);
+}
+
+.editorPanelContent {
+  padding-block: var(--ax-space-12) var(--ax-space-16);
+  padding-inline: var(--ax-space-20);
+}

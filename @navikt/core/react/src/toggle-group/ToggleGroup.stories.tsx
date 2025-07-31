@@ -4,6 +4,7 @@ import {
   EnvelopeClosedIcon,
   EnvelopeOpenIcon,
   InboxUpIcon,
+  SparklesIcon,
 } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
 import ToggleGroup from "./ToggleGroup";
@@ -43,6 +44,11 @@ const Items = (icon?: boolean, both?: boolean) => {
         value="ulest"
         icon={(both ?? icon) && <EnvelopeClosedIcon {...iconProps} />}
         label={hasLabel && "Uleste"}
+      />
+      <ToggleGroup.Item
+        value="ny"
+        icon={(both ?? icon) && <SparklesIcon {...iconProps} />}
+        label={hasLabel && "Ny"}
       />
       <ToggleGroup.Item
         value="lest"
@@ -144,6 +150,31 @@ export const Small = () => {
   );
 };
 
+export const ColorRoles = () => {
+  const [activeValue, setActiveValue] = useState("ulest");
+  return (
+    <VStack gap="space-12" data-color="brand-magenta">
+      <ToggleGroup value={activeValue} onChange={setActiveValue}>
+        {Items()}
+      </ToggleGroup>
+      <ToggleGroup
+        value={activeValue}
+        onChange={setActiveValue}
+        variant="action"
+      >
+        {Items()}
+      </ToggleGroup>
+      <ToggleGroup
+        value={activeValue}
+        onChange={setActiveValue}
+        variant="neutral"
+      >
+        {Items()}
+      </ToggleGroup>
+    </VStack>
+  );
+};
+
 export const Chromatic = {
   render: () => (
     <VStack gap="6">
@@ -188,6 +219,10 @@ export const Chromatic = {
         <ToggleGroup value="ulest" onChange={console.log} variant="neutral">
           {Items(true, true)}
         </ToggleGroup>
+      </div>
+      <div>
+        <h2>ColorRoles</h2>
+        <ColorRoles />
       </div>
     </VStack>
   ),

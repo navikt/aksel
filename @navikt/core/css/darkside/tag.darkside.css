@@ -1,0 +1,72 @@
+.aksel-tag {
+  --__axc-tag-icon-size: 1.5rem;
+  --__axc-tag-icon-margin: -2px;
+  --__axc-tag-border: ;
+  --__axc-tag-bg: ;
+  --__axc-tag-text: ;
+  --__axc-tag-text-strong: ;
+
+  border-radius: var(--ax-radius-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ax-space-2) var(--ax-space-8);
+  min-height: 2rem;
+  line-height: 1;
+  text-decoration: none;
+
+  &:has(.aksel-tag__icon--left) {
+    gap: var(--ax-space-2);
+  }
+
+  &[data-variant="outline"] {
+    box-shadow: inset 0 0 0 1px var(--ax-border-default);
+    background: var(--ax-bg-moderate);
+    color: var(--ax-text-default);
+  }
+
+  &[data-variant="moderate"] {
+    background: var(--ax-bg-moderateA);
+    color: var(--ax-text-default);
+
+    @media (forced-colors: active) {
+      box-shadow: inset 0 0 0 1px var(--ax-bg-strong);
+      color: canvastext;
+    }
+  }
+
+  &[data-variant="strong"] {
+    background: var(--ax-bg-strong);
+    color: var(--ax-text-contrast);
+
+    @media (forced-colors: active) {
+      color: canvas;
+    }
+  }
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    color: canvastext;
+  }
+}
+
+.aksel-tag--small {
+  min-height: 1.5rem;
+  padding: 0 var(--ax-space-6);
+
+  --__axc-tag-icon-size: 1.25rem;
+}
+
+.aksel-tag--xsmall {
+  min-height: 1.25rem;
+  padding: 0 var(--ax-space-4);
+
+  --__axc-tag-icon-size: 1rem;
+  --__axc-tag-icon-margin: -1px;
+}
+
+.aksel-tag__icon--left {
+  font-size: var(--__axc-tag-icon-size);
+  margin-inline-start: var(--__axc-tag-icon-margin);
+  display: flex;
+}

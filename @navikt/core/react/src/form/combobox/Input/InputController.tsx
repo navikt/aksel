@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import cl from "clsx";
 import React, { forwardRef } from "react";
-import { XMarkIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../../../theme/Theme";
 import { useMergeRefs } from "../../../util/hooks";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "../SelectedOptions/SelectedOptions";
@@ -11,7 +10,6 @@ import Input from "./Input";
 import { useInputContext } from "./Input.context";
 import ToggleListButton from "./ToggleListButton";
 
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 export const InputController = forwardRef<
   HTMLInputElement,
   Omit<
@@ -28,38 +26,48 @@ export const InputController = forwardRef<
   >
 >((props, ref) => {
   const {
-    clearButton = true,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
+    clearButton,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
     clearButtonLabel,
     toggleListButton = true,
-    toggleListButtonLabel,
     inputClassName,
     shouldShowSelectedOptions = true,
+
     ...rest
   } = props;
 
+  const { cn } = useRenameCSS();
+
   const {
-    clearInput,
     focusInput,
     inputProps,
-    value,
     size = "medium",
     inputRef,
     toggleOpenButtonRef,
     readOnly,
   } = useInputContext();
 
-  const { activeDecendantId } = useFilteredOptionsContext();
+  const { activeDecendantId, toggleIsListOpen } = useFilteredOptionsContext();
   const { selectedOptions } = useSelectedOptionsContext();
 
   const mergedInputRef = useMergeRefs(inputRef, ref);
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
-      className={cl("navds-combobox__wrapper-inner navds-text-field__input", {
+      className={cn("navds-combobox__wrapper-inner navds-text-field__input", {
         "navds-combobox__wrapper-inner--virtually-unfocused":
           activeDecendantId !== undefined,
       })}
-      onClick={focusInput}
+      onClick={() => {
+        if (inputProps.disabled || readOnly) {
+          return;
+        }
+
+        toggleIsListOpen(true);
+        focusInput();
+      }}
     >
       {!shouldShowSelectedOptions ? (
         <Input
@@ -81,27 +89,7 @@ export const InputController = forwardRef<
           />
         </SelectedOptions>
       )}
-      <div>
-        {value && clearButton && (
-          <button
-            type="button"
-            onClick={clearInput}
-            className="navds-combobox__button-clear"
-            tabIndex={-1}
-          >
-            <span className="navds-sr-only">
-              {clearButtonLabel ? clearButtonLabel : "Tøm"}
-            </span>
-            <XMarkIcon aria-hidden />
-          </button>
-        )}
-        {toggleListButton && (
-          <ToggleListButton
-            toggleListButtonLabel={toggleListButtonLabel}
-            ref={toggleOpenButtonRef}
-          />
-        )}
-      </div>
+      {toggleListButton && <ToggleListButton ref={toggleOpenButtonRef} />}
     </div>
   );
 });

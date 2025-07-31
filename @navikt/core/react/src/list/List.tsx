@@ -1,10 +1,10 @@
-import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading, HeadingProps } from "../typography";
-import { ListItem } from "./ListItem";
-import { ListContext } from "./context";
+import { ListItem } from "./List.Item";
+import { ListContext } from "./List.context";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type { ListItemProps, ListProps } from "./types";
+import type { ListItemProps, ListProps } from "./List.types";
 
 const headingSizeMap: Record<
   Exclude<ListProps["size"], undefined>,
@@ -48,15 +48,57 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
       as: ListTag = "ul",
       title,
       description,
-      headingTag = "h3",
+      headingTag,
       size,
+      "aria-label": _ariaLabel,
+      "aria-labelledby": _ariaLabelledBy,
       ...rest
     },
     ref,
   ) => {
     const { size: contextSize } = useContext(ListContext);
 
+    const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal(false);
+
     const listSize = size ?? contextSize;
+
+    if (themeContext) {
+      if (
+        process.env.NODE_ENV !== "production" &&
+        (title || description || headingTag)
+      ) {
+        console.warn(
+          "List: title, description and headingTag are deprecated and will not work with updated theme for Aksel.",
+        );
+      }
+
+      return (
+        <ListContext.Provider
+          value={{
+            listType: ListTag,
+            size: listSize,
+          }}
+        >
+          <BodyLong
+            as="div"
+            {...rest}
+            size={listSize}
+            ref={ref}
+            className={cn("navds-list", `navds-list--${listSize}`, className)}
+          >
+            <ListTag
+              role="list"
+              aria-label={_ariaLabel}
+              aria-labelledby={_ariaLabelledBy}
+            >
+              {children}
+            </ListTag>
+          </BodyLong>
+        </ListContext.Provider>
+      );
+    }
+
     return (
       <ListContext.Provider
         value={{
@@ -69,15 +111,21 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
           {...rest}
           size={listSize}
           ref={ref}
-          className={cl("navds-list", `navds-list--${listSize}`, className)}
+          className={cn("navds-list", `navds-list--${listSize}`, className)}
         >
           {title && (
-            <Heading size={headingSizeMap[listSize]} as={headingTag}>
+            <Heading size={headingSizeMap[listSize]} as={headingTag ?? "h3"}>
               {title}
             </Heading>
           )}
           {description && <BodyShort size={listSize}>{description}</BodyShort>}
-          <ListTag role="list">{children}</ListTag>
+          <ListTag
+            role="list"
+            aria-label={_ariaLabel}
+            aria-labelledby={_ariaLabelledBy}
+          >
+            {children}
+          </ListTag>
         </BodyLong>
       </ListContext.Provider>
     );

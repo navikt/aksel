@@ -5,32 +5,31 @@ const Example = () => {
   const selectedOptions = ["napoleonskake", "donut"];
 
   return (
-    <div>
-      <UNSAFE_Combobox
-        options={initialOptions}
-        label="Hva er dine favorittfrukter?"
-        description="Bare de fruktene som du spiser minst 5 av om dagen teller vi som en favorittfrukt."
-        selectedOptions={selectedOptions}
-        isMultiSelect
-        readOnly
-      />
-    </div>
+    <UNSAFE_Combobox
+      options={options}
+      label="Hva er dine favorittfrukter?"
+      description="Bare de fruktene som du spiser minst 5 av om dagen teller vi som en favorittfrukt."
+      selectedOptions={selectedOptions}
+      isMultiSelect
+      readOnly
+    />
   );
 };
 
-const initialOptions = [
-  "banana",
-  "apple",
-  "tangerine",
-  "pear",
-  "grape",
+const options = [
+  "ananas",
+  "banan",
+  "bringebær",
+  "drue",
+  "eple",
+  "grapefrukt",
+  "jordbær",
   "kiwi",
+  "mandarin",
   "mango",
-  "passion fruit",
-  "pineapple",
-  "strawberry",
-  "watermelon",
-  "grape fruit",
+  "pære",
+  "pasjonsfrukt",
+  "vannmelon",
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE

@@ -41,16 +41,15 @@ const Example = () => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, {
-  showBreakpoints: true,
-});
+export default withDsExample(Example);
 
 /* Storybook story */
 export const Demo = {
   render: Example,
+  legacyOnly: true,
 };
 
 export const args = {
   index: 7,
-  desc: "'shadow' lar deg endre box-shadow på Box basert på tokens.",
+  desc: "Propen 'shadow' lar deg sette box-shadow basert på tokens.",
 };

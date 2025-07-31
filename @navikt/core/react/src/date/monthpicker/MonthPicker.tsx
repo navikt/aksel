@@ -1,16 +1,20 @@
-import cl from "clsx";
-import React, { forwardRef, useRef, useState } from "react";
-import { DayPickerProvider } from "react-day-picker";
-import { useId } from "../../util/hooks";
+import React, { forwardRef, useState } from "react";
+import { useRenameCSS } from "../../theme/Theme";
+import { useControllableState, useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { DateContext, SharedMonthProvider } from "../context";
-import { MonthPickerInput } from "../parts/DateInput";
-import { DateWrapper } from "../parts/DateWrapper";
-import { getLocaleFromString } from "../utils";
-import MonthCaption from "./MonthCaption";
-import MonthPickerStandalone from "./MonthPickerStandalone";
-import MonthSelector from "./MonthSelector";
-import { MonthPickerProps } from "./types";
+import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
+import { DateDialog } from "../Date.Dialog";
+import { DateInputContextProvider, MonthPickerInput } from "../Date.Input";
+import {
+  DateTranslationContextProvider,
+  getLocaleFromString,
+  getTranslations,
+} from "../Date.locale";
+import { MonthPickerProvider } from "./MonthPicker.context";
+import { MonthPickerProps } from "./MonthPicker.types";
+import { MonthPickerCaption } from "./parts/MonthPicker.Caption";
+import { MonthPickerStandalone } from "./parts/MonthPicker.Standalone";
+import { MonthPickerTable } from "./parts/MonthPicker.Table";
 
 interface MonthPickerComponent
   extends React.ForwardRefExoticComponent<MonthPickerProps> {
@@ -67,7 +71,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       id,
       onClose,
       onOpenToggle,
-      locale = "nb",
+      locale,
+      translations,
       onMonthSelect,
       className,
       wrapperClassName,
@@ -78,20 +83,34 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     },
     ref,
   ) => {
-    const ariaId = useId(id);
-    const [open, setOpen] = useState(_open ?? false);
-
-    const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const mergedRef = useMergeRefs(wrapperRef, ref);
-
-    const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
-      defaultSelected,
+    const translate = useI18n(
+      "DatePicker",
+      translations,
+      getTranslations(locale),
     );
+    const { cn } = useRenameCSS();
+    const langProviderLocale = useDateLocale();
+    const ariaId = useId(id);
+
+    const [open, setOpen] = useControllableState({
+      defaultValue: false,
+      value: _open,
+      onChange: () => {
+        onOpenToggle?.();
+      },
+    });
+
+    /* We use state here to insure that anchor is defined if open is true on initial render */
+    const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
+    const mergedRef = useMergeRefs(setWrapperRef, ref);
 
     const handleSelect = (month?: Date) => {
-      !onMonthSelect && setSelectedMonth(month);
       onMonthSelect?.(month);
-      month && (onClose?.() ?? setOpen(false));
+
+      if (month) {
+        onClose?.();
+        setOpen(false);
+      }
     };
 
     if (dropdownCaption && (!fromDate || !toDate)) {
@@ -100,59 +119,54 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     }
 
     return (
-      <DateContext.Provider
-        value={{
-          open: _open ?? open,
-          onOpen: () => {
-            setOpen((x) => !x);
-            onOpenToggle?.();
-          },
-          ariaId,
-          defined: true,
-        }}
-      >
-        <div
-          ref={mergedRef}
-          className={cl("navds-date__wrapper", wrapperClassName)}
+      <DateTranslationContextProvider translate={translate}>
+        <DateInputContextProvider
+          open={open}
+          onOpen={() => setOpen((x) => !x)}
+          ariaId={ariaId}
+          defined={true}
         >
-          {children}
-          <DateWrapper
-            open={_open ?? open}
-            anchor={wrapperRef.current}
-            onClose={() => onClose?.() ?? setOpen(false)}
-            locale={locale}
-            variant="month"
-            popoverProps={{
-              id: ariaId,
-              strategy,
-            }}
+          <MonthPickerProvider
+            dropdownCaption={dropdownCaption}
+            defaultSelected={defaultSelected}
+            selected={selected}
+            disabled={disabled}
+            fromDate={fromDate}
+            toDate={toDate}
+            year={year}
+            onYearChange={onYearChange}
+            onMonthSelect={handleSelect}
+            locale={locale ? getLocaleFromString(locale) : langProviderLocale}
           >
-            <DayPickerProvider
-              initialProps={{
-                locale: getLocaleFromString(locale),
-                selected: selected ?? selectedMonth,
-                toDate,
-                fromDate,
-                month: selected ?? selectedMonth,
-              }}
+            <div
+              ref={mergedRef}
+              className={cn("navds-date__wrapper", wrapperClassName)}
             >
-              <div className={cl("rdp-month", className)}>
-                <SharedMonthProvider
-                  dropdownCaption={dropdownCaption}
-                  disabled={disabled}
-                  selected={selected ?? selectedMonth}
-                  onSelect={handleSelect}
-                  year={year}
-                  onYearChange={onYearChange}
-                >
-                  <MonthCaption />
-                  <MonthSelector />
-                </SharedMonthProvider>
-              </div>
-            </DayPickerProvider>
-          </DateWrapper>
-        </div>
-      </DateContext.Provider>
+              {children}
+              <DateDialog
+                open={open}
+                anchor={wrapperRef}
+                onClose={() => {
+                  onClose?.();
+                  open && setOpen(false);
+                }}
+                locale={locale}
+                translate={translate}
+                variant="month"
+                popoverProps={{
+                  id: ariaId,
+                  strategy,
+                }}
+              >
+                <div className={cn("rdp-month", className)}>
+                  <MonthPickerCaption />
+                  <MonthPickerTable />
+                </div>
+              </DateDialog>
+            </div>
+          </MonthPickerProvider>
+        </DateInputContextProvider>
+      </DateTranslationContextProvider>
     );
   },
 ) as MonthPickerComponent;

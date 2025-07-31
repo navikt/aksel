@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../theme/Theme";
 import { BodyLong } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -33,7 +33,7 @@ export interface ReadMoreProps
    * Changes fontsize for content.
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "large" | "medium" | "small";
 }
 
 /**
@@ -68,33 +68,38 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
       value: open,
       onChange: onOpenChange,
     });
 
+    const typoSize = size === "small" ? "small" : "medium";
+
     return (
       <div
-        className={cl(
+        className={cn(
           "navds-read-more",
           `navds-read-more--${size}`,
           className,
           { "navds-read-more--open": _open },
         )}
+        data-volume="low"
       >
         <button
           {...rest}
           ref={ref}
           type="button"
-          className={cl("navds-read-more__button", "navds-body-short", {
+          className={cn("navds-read-more__button", "navds-body-short", {
             "navds-body-short--small": size === "small",
           })}
           onClick={composeEventHandlers(onClick, () => _setOpen((x) => !x))}
           aria-expanded={_open}
+          data-state={_open ? "open" : "closed"}
         >
           <ChevronDownIcon
-            className="navds-read-more__expand-icon"
+            className={cn("navds-read-more__expand-icon")}
             aria-hidden
           />
           <span>{header}</span>
@@ -103,10 +108,11 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
         <BodyLong
           as="div"
           aria-hidden={!_open}
-          className={cl("navds-read-more__content", {
+          className={cn("navds-read-more__content", {
             "navds-read-more__content--closed": !_open,
           })}
-          size={size}
+          size={typoSize}
+          data-state={_open ? "open" : "closed"}
         >
           {children}
         </BodyLong>

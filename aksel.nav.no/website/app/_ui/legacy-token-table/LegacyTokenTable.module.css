@@ -1,0 +1,4 @@
+.legacyTokenTableWarning {
+  color: var(--ax-text-subtle);
+  font-weight: var(--ax-font-weight-bold);
+}

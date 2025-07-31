@@ -34,7 +34,7 @@ function parseIcon(svgString) {
   let icon = svgString;
   icon = icon.replace(`width="24"`, `width="1em"`);
   icon = icon.replace(`height="24"`, `height="1em"`);
-  icon = icon.replaceAll(`#23262A`, `currentColor`);
+  icon = icon.replaceAll(`#202733`, `currentColor`);
 
   return icon;
 }

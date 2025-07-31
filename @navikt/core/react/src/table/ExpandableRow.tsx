@@ -1,9 +1,10 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../theme/Theme";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
+import { useI18n } from "../util/i18n/i18n.hooks";
 import AnimateHeight from "./AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
@@ -20,7 +21,7 @@ export interface ExpandableRowProps extends Omit<RowProps, "content"> {
   togglePlacement?: "left" | "right";
   /**
    * Opens component if 'true', closes if 'false'
-   * Using this props removes automatic control of open-state
+   * Using this prop removes automatic control of open-state
    */
   open?: boolean;
   /**
@@ -47,6 +48,11 @@ export interface ExpandableRowProps extends Omit<RowProps, "content"> {
    * @default 999
    */
   colSpan?: number;
+  /**
+   * Optional left, right-gutter for content
+   * @default Same as `togglePlacement`
+   */
+  contentGutter?: "left" | "right" | "none";
 }
 
 export type ExpandableRowType = React.ForwardRefExoticComponent<
@@ -66,31 +72,32 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       expansionDisabled = false,
       expandOnRowClick = false,
       colSpan = 999,
+      contentGutter,
       onClick,
       ...rest
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
       value: open,
       onChange: onOpenChange,
     });
+    const translate = useI18n("global");
 
     const id = useId();
 
-    const expansionHandler = (e) => {
-      _setOpen((x) => !x);
-      e.stopPropagation();
+    const expansionHandler = (event: React.MouseEvent<HTMLElement>) => {
+      _setOpen((oldOpen) => !oldOpen);
+      event.stopPropagation();
     };
 
-    const onRowClick = (e) =>
-      !isInteractiveTarget(e.target) && expansionHandler(e);
-
-    const handleRowClick = (
-      e: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
-    ) => {
-      !expansionDisabled && expandOnRowClick && onRowClick(e);
+    const handleRowClick = (event: React.MouseEvent<HTMLTableRowElement>) => {
+      expandOnRowClick &&
+        !expansionDisabled &&
+        !isInteractiveTarget(event.target as HTMLElement) &&
+        expansionHandler(event);
     };
 
     return (
@@ -98,7 +105,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         <Row
           {...rest}
           ref={ref}
-          className={cl("navds-table__expandable-row", className, {
+          className={cn("navds-table__expandable-row", className, {
             "navds-table__expandable-row--open": _open,
             "navds-table__expandable-row--expansion-disabled":
               expansionDisabled,
@@ -108,35 +115,48 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         >
           {togglePlacement === "right" && children}
           <DataCell
-            className={cl("navds-table__toggle-expand-cell", {
+            className={cn("navds-table__toggle-expand-cell", {
               "navds-table__toggle-expand-cell--open": _open,
             })}
-            onClick={expansionHandler}
+            onClick={!expansionDisabled ? expansionHandler : () => null}
           >
             {!expansionDisabled && (
               <button
-                className="navds-table__toggle-expand-button"
+                className={cn("navds-table__toggle-expand-button")}
                 type="button"
                 aria-controls={id}
                 aria-expanded={_open}
                 onClick={expansionHandler}
               >
                 <ChevronDownIcon
-                  className="navds-table__expandable-icon"
-                  title={_open ? "Vis mindre" : "Vis mer"}
+                  className={cn("navds-table__expandable-icon")}
+                  title={_open ? translate("showLess") : translate("showMore")}
                 />
               </button>
             )}
           </DataCell>
           {togglePlacement === "left" && children}
         </Row>
-        <tr className="navds-table__expanded-row" aria-hidden={!_open} id={id}>
-          <td colSpan={colSpan} className="navds-table__expanded-row-cell">
+        <tr
+          data-state={_open ? "open" : "closed"}
+          className={cn("navds-table__expanded-row")}
+          aria-hidden={!_open}
+          id={id}
+        >
+          <td
+            colSpan={colSpan}
+            className={cn("navds-table__expanded-row-cell")}
+          >
             <AnimateHeight
-              className="navds-table__expanded-row-collapse"
-              innerClassName="navds-table__expanded-row-content"
+              className={cn("navds-table__expanded-row-collapse")}
+              innerClassName={cn(
+                `navds-table__expanded-row-content navds-table__expanded-row-content--gutter-${
+                  contentGutter ?? togglePlacement
+                }`,
+              )}
               height={_open ? "auto" : 0}
-              duration={250}
+              duration={150}
+              easing="cubic-bezier(0.39,0.57,0.56,1)"
             >
               {content}
             </AnimateHeight>

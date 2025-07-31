@@ -1,7 +1,7 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { ReadOnlyIcon } from "../ReadOnlyIcon";
+import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import ComboboxWrapper from "./ComboboxWrapper";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
@@ -17,6 +17,8 @@ export const Combobox = forwardRef<
   >
 >((props, ref) => {
   const { className, hideLabel = false, description, label, ...rest } = props;
+
+  const { cn } = useRenameCSS();
 
   const { toggleIsListOpen } = useFilteredOptionsContext();
 
@@ -42,17 +44,17 @@ export const Combobox = forwardRef<
       <Label
         htmlFor={inputProps.id}
         size={size}
-        className={cl("navds-form-field__label", {
+        className={cn("navds-form-field__label", {
           "navds-sr-only": hideLabel,
         })}
       >
-        <ReadOnlyIcon nativeReadOnly={false} readOnly={readOnly} />
+        {readOnly && <ReadOnlyIconWithTitle />}
         {label}
       </Label>
       {!!description && (
         <BodyShort
           as="div"
-          className={cl("navds-form-field__description", {
+          className={cn("navds-form-field__description", {
             "navds-sr-only": hideLabel,
           })}
           id={inputDescriptionId}
@@ -61,17 +63,21 @@ export const Combobox = forwardRef<
           {description}
         </BodyShort>
       )}
-      <div className="navds-combobox__wrapper">
+      <div className={cn("navds-combobox__wrapper")}>
         <InputController ref={ref} {...rest} />
         <FilteredOptions />
       </div>
       <div
-        className="navds-form-field__error"
+        className={cn("navds-form-field__error")}
         id={errorId}
         aria-relevant="additions removals"
         aria-live="polite"
       >
-        {showErrorMsg && <ErrorMessage size={size}>{error}</ErrorMessage>}
+        {showErrorMsg && (
+          <ErrorMessage size={size} showIcon>
+            {error}
+          </ErrorMessage>
+        )}
       </div>
     </ComboboxWrapper>
   );

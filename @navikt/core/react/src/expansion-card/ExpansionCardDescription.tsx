@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { BodyLong } from "../typography";
 import { ExpansionCardContext } from "./context";
 
@@ -12,6 +12,7 @@ export const ExpansionCardDescription = forwardRef<
   HTMLParagraphElement,
   ExpansionCardDescriptionProps
 >(({ className, ...rest }, ref) => {
+  const { cn } = useRenameCSS();
   const panelContext = useContext(ExpansionCardContext);
 
   if (panelContext === null) {
@@ -26,7 +27,7 @@ export const ExpansionCardDescription = forwardRef<
       {...rest}
       as="p"
       ref={ref}
-      className={cl("navds-link-panel__description", className)}
+      className={cn("navds-link-panel__description", className)}
       size={panelContext.size}
     />
   );

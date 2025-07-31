@@ -1,0 +1,10 @@
+.aksel-panel {
+  background-color: var(--ax-bg-default);
+  padding: var(--ax-space-16);
+  border-radius: var(--ax-radius-2);
+  border: 1px solid transparent;
+}
+
+.aksel-panel--border {
+  border-color: var(--ax-border-neutral);
+}

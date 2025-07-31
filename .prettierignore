@@ -1,6 +1,8 @@
 **/nais*.yaml
 **/nais*.yml
 **/codemod/**/tests/**/*.js
+**/@navikt/aksel/**/*.input.*
+**/@navikt/aksel/**/*.output.*
 node_modules
 .next
 dist

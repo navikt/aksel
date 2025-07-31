@@ -20,6 +20,8 @@ Disallow: /eksempler
 Disallow: /templates
 Disallow: /sandbox
 Disallow: /admin
+Disallow: /admin-dev
 Disallow: /gp
+Disallow: /dev
 
 Sitemap: https://aksel.nav.no/sitemap.xml

@@ -1,5 +1,3 @@
-import { format } from "date-fns";
-import { nb } from "date-fns/locale";
 import { Box, DatePicker, useDatepicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -15,9 +13,7 @@ const Example = () => {
       <DatePicker {...datepickerProps}>
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
-      <Box paddingBlock="4 0">
-        {selectedDay && format(selectedDay, "dd.MM.yyyy", { locale: nb })}
-      </Box>
+      <Box paddingBlock="4 0">{selectedDay?.toISOString().split("T")[0]}</Box>
     </div>
   );
 };

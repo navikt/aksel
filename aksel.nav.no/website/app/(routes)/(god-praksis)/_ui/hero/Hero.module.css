@@ -1,0 +1,127 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+.godPraksisHero {
+  border-radius: var(--ax-border-radius-xlarge);
+  border: 1px solid var(--ax-border-brand-blue-subtleA);
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(238deg, var(--ax-bg-brand-blue-soft) 20.83%, var(--ax-bg-brand-blue-moderate) 36.67%);
+  transition: margin 500ms;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .godPraksisHero {
+  background: linear-gradient(238deg, var(--ax-bg-brand-blue-softA) 20.83%, var(--ax-bg-neutral-soft) 36.67%);
+}
+
+.godPraksisHeroDescription {
+  margin-block-end: var(--ax-space-24);
+
+  &[data-collapsible="true"] {
+    margin-block-end: 0;
+  }
+}
+
+.godPraksisHeroTitle {
+  color: var(--ax-text-brand-blue);
+  margin-block-end: var(--ax-space-16);
+}
+
+.heroCube {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: clip;
+  border-radius: var(--ax-border-radius-xlarge);
+  box-sizing: content-box;
+}
+
+.heroCubeSvg {
+  position: absolute;
+  right: 0;
+  z-index: -10;
+  color: var(--ax-bg-brand-blue-softA);
+}
+
+.godPraksisTemaCard {
+  border-radius: var(--ax-border-radius-large);
+  border: 1px solid var(--ax-border-brand-blue-subtleA);
+  background: var(--ax-bg-raised);
+  color: var(--ax-text-brand-blue);
+  display: flex;
+  align-items: center;
+  padding-block: var(--ax-space-8);
+  padding-inline: var(--ax-space-12) var(--ax-space-24);
+  gap: var(--ax-space-12);
+  text-decoration-line: underline;
+  text-underline-offset: 0.1em;
+  text-decoration-thickness: 0.08em;
+
+  &:hover {
+    text-decoration-thickness: 0.15em;
+  }
+}
+
+.godPraksisHeroDialog {
+  position: absolute;
+  inset: -1px;
+  overflow: clip;
+  border-radius: var(--ax-border-radius-xlarge);
+  border: 1px solid var(--ax-border-brand-blue-subtle);
+  box-shadow: 0 0 0 1px var(--ax-border-brand-blue-subtle);
+  clip-path: circle(140% at var(--website-hero-selector-x) var(--website-hero-selector-y));
+  animation: clipExpand 1s cubic-bezier(0.3, 0.2, 0.15, 1);
+  height: fit-content;
+  min-height: 100%;
+  background: linear-gradient(238deg, var(--ax-bg-brand-blue-moderate) 20.83%, var(--ax-bg-brand-blue-moderate-hover) 36.67%);
+
+  &[data-hidden="true"] {
+    display: none;
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .godPraksisHeroDialog {
+  background: linear-gradient(238deg, var(--ax-bg-brand-blue-moderate) 20.83%, var(--ax-bg-brand-blue-soft) 36.67%);
+}
+
+@keyframes clipExpand {
+  0% {
+    clip-path: circle(5% at var(--website-hero-selector-x) var(--website-hero-selector-y));
+  }
+
+  100% {
+    clip-path: circle(140% at var(--website-hero-selector-x) var(--website-hero-selector-y));
+  }
+}
+
+.godPraksisHeroButton {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-2);
+  border-radius: var(--ax-border-radius-full);
+  padding-block: var(--ax-space-4);
+  margin-block-end: var(--ax-space-16);
+  padding-inline: var(--ax-space-16) var(--ax-space-8);
+  background: var(--ax-bg-brand-blue-strong);
+  color: var(--ax-text-brand-blue-contrast);
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+
+  &[data-open="true"] {
+    background: var(--ax-bg-brand-blue-strong-pressed);
+  }
+
+  &[data-hidden="true"] {
+    visibility: hidden;
+  }
+}
+
+.godPraksisHeroButtonIcon {
+  flex-shrink: 0;
+}

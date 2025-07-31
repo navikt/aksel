@@ -1,0 +1,67 @@
+.footer {
+  position: relative;
+  padding-inline: var(--ax-space-48);
+  padding-block: var(--ax-space-48);
+  background: var(--ax-bg-brand-blue-moderate);
+  color: var(--ax-text-neutral);
+}
+
+.footerLayout {
+  max-width: 1440px;
+  margin-inline: auto;
+  display: grid;
+  gap: var(--ax-space-24);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.footerLogo {
+  display: flex;
+  gap: var(--ax-space-16);
+  flex-direction: column;
+}
+
+.footerLinks {
+  display: grid;
+  gap: var(--ax-space-12);
+}
+
+.footerLink {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: var(--ax-space-4);
+  text-decoration: underline;
+  color: var(--ax-text-neutral);
+  text-underline-offset: 0.1em;
+  border-radius: 1px;
+
+  &:hover {
+    text-decoration-thickness: 0.111em;
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.footerEdit {
+  position: absolute;
+  top: calc(var(--ax-space-40) * -1);
+  right: 0;
+  padding: var(--ax-space-8) var(--ax-space-16);
+  background: var(--ax-bg-brand-blue-moderate);
+  border-radius: var(--ax-radius-8) 0 0 0;
+
+  /* Avoids px-gap between bg */
+  box-shadow: 0 0 0 1px var(--ax-bg-brand-blue-moderate);
+
+  &:hover {
+    background: var(--ax-bg-brand-blue-moderate-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -4px;
+  }
+}

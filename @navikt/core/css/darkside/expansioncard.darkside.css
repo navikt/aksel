@@ -1,0 +1,176 @@
+.aksel-expansioncard {
+  --__axc-expansioncard-border-radius: calc(var(--ax-radius-12) - 1px);
+  --__axc-expansioncard-padding-block: var(--ax-space-16);
+  --__axc-expansioncard-padding-inline: var(--ax-space-20);
+
+  border-radius: var(--ax-radius-12);
+  background-color: var(--ax-bg-softA);
+  height: fit-content;
+  border: 1px solid var(--ax-border-default);
+
+  &[data-color="neutral"] {
+    background-color: var(--ax-bg-raised);
+  }
+
+  &:has(.aksel-expansioncard__header:hover) {
+    box-shadow: 0 0 0 1px var(--ax-border-strong);
+    border-color: var(--ax-border-strong);
+  }
+}
+
+/* ------------------------ ExpansionCard Small-size ------------------------ */
+.aksel-expansioncard--small {
+  --__axc-expansioncard-padding-inline: var(--ax-space-16);
+  --__axc-expansioncard-padding-block: var(--ax-space-12);
+
+  & > .aksel-expansioncard__header .aksel-expansioncard__title--small {
+    margin-top: var(--ax-space-2);
+  }
+
+  & :is(.aksel-expansioncard__title--medium, .aksel-expansioncard__title--large) {
+    margin-top: 0;
+  }
+
+  & > .aksel-expansioncard__header > .aksel-expansioncard__header-button {
+    min-height: 2rem;
+    min-width: 2rem;
+  }
+}
+
+/* -------------------------- ExpansionCard Header -------------------------- */
+.aksel-expansioncard__header {
+  width: 100%;
+  display: flex;
+  gap: var(--ax-space-16);
+  padding: var(--__axc-expansioncard-padding-block) var(--__axc-expansioncard-padding-inline);
+  border-radius: var(--__axc-expansioncard-border-radius);
+  background-color: transparent;
+  position: relative;
+  justify-content: space-between;
+
+  &:hover {
+    background-color: var(--ax-bg-moderate-hoverA);
+  }
+
+  &[data-open="true"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    /* Divider between header and content */
+    &::after {
+      content: "";
+      background-color: var(--ax-border-subtleA);
+      bottom: 0;
+      left: var(--__axc-expansioncard-padding-inline);
+      height: 1px;
+      width: calc(100% - 2 * var(--__axc-expansioncard-padding-inline));
+      position: absolute;
+      opacity: 1;
+    }
+
+    &:hover::after {
+      opacity: 0;
+    }
+  }
+}
+
+/* --------------------- ExpansionCard Header typography -------------------- */
+.aksel-expansioncard__title--small {
+  margin-top: 0.625rem;
+}
+
+.aksel-expansioncard__title--medium {
+  margin-top: var(--ax-space-8);
+}
+
+.aksel-expansioncard__title--large {
+  margin-top: var(--ax-space-4);
+}
+
+/* ----------------------- ExpansionCard Header Button ---------------------- */
+.aksel-expansioncard__header-button {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--ax-radius-8);
+  min-height: 3rem;
+  min-width: 3rem;
+  font-size: 1.5rem;
+  align-self: flex-start;
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+  }
+
+  /* Makes the whole header clickable */
+  &::after {
+    inset: 0;
+    z-index: 1;
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+
+    /* Avoid @media print from styling after-element */
+    opacity: 0;
+  }
+}
+
+.aksel-expansioncard__header:hover > .aksel-expansioncard__header-button {
+  background-color: var(--ax-bg-moderate-hoverA);
+}
+
+.aksel-expansioncard__header-chevron {
+  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.aksel-expansioncard__header[data-open="true"] .aksel-expansioncard__header-chevron {
+  transform: rotateX(-180deg);
+}
+
+/* Even if animation always takes 250ms, the perceived effect of current timing function makes the 'closing'-animation take longer */
+.aksel-expansioncard__header[data-open="false"] .aksel-expansioncard__header-chevron {
+  transition-duration: 400ms;
+}
+
+/* -------------------------- ExpansionCard Content ------------------------- */
+.aksel-expansioncard__content {
+  border-end-end-radius: var(--__axc-expansioncard-border-radius);
+  border-end-start-radius: var(--__axc-expansioncard-border-radius);
+  padding-inline: var(--__axc-expansioncard-padding-inline);
+  padding-block: 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  transition-property: visibility, padding-block, grid-template-rows;
+  overflow: hidden;
+
+  &[data-open="true"] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    padding-block: var(--__axc-expansioncard-padding-block);
+
+    & .aksel-expansioncard__content-inner {
+      opacity: 1;
+    }
+  }
+}
+
+.aksel-expansioncard__content-inner {
+  min-height: 0;
+  opacity: 0;
+  transition: opacity 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ---------------- ExpansionCard No Animation (defaultOpen) ---------------- */
+.aksel-expansioncard--no-animation {
+  & :is(.aksel-expansioncard__content, .aksel-expansioncard__content-inner) {
+    transition: none;
+  }
+}

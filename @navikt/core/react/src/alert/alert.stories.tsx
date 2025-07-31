@@ -96,8 +96,8 @@ export const Inline: StoryFn = () => {
       <Alert variant="info" inline>
         Id elit esse enim reprehenderit enim nisi veniam nostrud. Id elit esse
         enim reprehenderit enim nisi veniam nostrud. Id elit esse enim
-        reprehenderit enim nisi veniam nostrud. Id elit esse enim reprehenderit
-        enim nisi veniam nostrud.
+        reprehenderit enim nisi veniam nostrud.{" "}
+        <Link href="#">Id elit esse enim reprehenderit</Link>
       </Alert>
       <Alert variant="info" size="small" inline>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
@@ -105,8 +105,8 @@ export const Inline: StoryFn = () => {
       <Alert variant="info" size="small" inline>
         Id elit esse enim reprehenderit enim nisi veniam nostrud. Id elit esse
         enim reprehenderit enim nisi veniam nostrud. Id elit esse enim
-        reprehenderit enim nisi veniam nostrud. Id elit esse enim reprehenderit
-        enim nisi veniam nostrud.
+        reprehenderit enim nisi veniam nostrud.{" "}
+        <Link href="#">Id elit esse enim reprehenderit</Link>
       </Alert>
     </VStack>
   );

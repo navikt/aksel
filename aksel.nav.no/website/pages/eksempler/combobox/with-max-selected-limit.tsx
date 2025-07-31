@@ -8,34 +8,32 @@ const Example = () => {
     options[1],
   ]);
   return (
-    <div>
-      <UNSAFE_Combobox
-        label="Hva er de kuleste transportmidlene? (velg opptil 3)"
-        options={options}
-        isMultiSelect
-        maxSelected={{ limit: 3 }}
-        selectedOptions={selectedOptions}
-        onToggleSelected={(option, isSelected) =>
-          isSelected
-            ? setSelectedOptions([...selectedOptions, option])
-            : setSelectedOptions(selectedOptions.filter((o) => o !== option))
-        }
-      />
-    </div>
+    <UNSAFE_Combobox
+      label="Hva er de kuleste transportmidlene? (Velg opptil 3)"
+      options={options}
+      isMultiSelect
+      maxSelected={3}
+      selectedOptions={selectedOptions}
+      onToggleSelected={(option, isSelected) =>
+        isSelected
+          ? setSelectedOptions([...selectedOptions, option])
+          : setSelectedOptions(selectedOptions.filter((o) => o !== option))
+      }
+    />
   );
 };
 
 const options = [
-  "car",
-  "bus",
-  "train",
+  "bil",
+  "buss",
+  "tog",
   "skateboard",
-  "bicycle",
-  "motorcycle",
-  "boat",
-  "airplane",
-  "helicopter",
-  "truck",
+  "sykkel",
+  "motorsykkel",
+  "båt",
+  "fly",
+  "helikopter",
+  "lastebil",
   "van",
   "scooter",
 ];
@@ -50,5 +48,5 @@ export const Demo = {
 
 export const args = {
   index: 7,
-  desc: "Ved å sette en grense for maks antall valgte vil brukeren få opp en beskjed om at hen ikke kan velge flere når grensen er nådd. Resterende valg vil også bli inaktive.",
+  desc: "Ved å sette en grense for maks antall valg vil brukeren få opp en beskjed om at hen ikke kan velge flere når grensen er nådd. Resterende alternativer blir inaktive.",
 };

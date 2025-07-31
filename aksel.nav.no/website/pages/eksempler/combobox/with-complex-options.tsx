@@ -8,23 +8,21 @@ const Example = () => {
     options[1].value,
   ]);
   return (
-    <div>
-      <UNSAFE_Combobox
-        label="Velg temakoder (opptil 3)"
-        options={options.map((o) => ({
-          label: `${o.label} [${o.value}]`,
-          value: o.value,
-        }))}
-        isMultiSelect
-        maxSelected={{ limit: 3 }}
-        selectedOptions={selectedOptions}
-        onToggleSelected={(option, isSelected) =>
-          isSelected
-            ? setSelectedOptions([...selectedOptions, option])
-            : setSelectedOptions(selectedOptions.filter((o) => o !== option))
-        }
-      />
-    </div>
+    <UNSAFE_Combobox
+      label="Velg opptil 3 temakoder"
+      options={options.map((o) => ({
+        label: `${o.label} [${o.value}]`,
+        value: o.value,
+      }))}
+      isMultiSelect
+      maxSelected={3}
+      selectedOptions={selectedOptions}
+      onToggleSelected={(option, isSelected) =>
+        isSelected
+          ? setSelectedOptions([...selectedOptions, option])
+          : setSelectedOptions(selectedOptions.filter((o) => o !== option))
+      }
+    />
   );
 };
 

@@ -254,7 +254,7 @@ TriggerWithButton.args = {
   maxSizeInBytes: 0,
 };
 
-export const Chromatic: StoryFn = () => (
+const ChromaticStories: StoryFn = () => (
   <div>
     <h2>Default</h2>
     <Default />
@@ -278,6 +278,14 @@ export const Chromatic: StoryFn = () => (
     <ItemStates />
   </div>
 );
+
+export const ColorRoles = () => (
+  <div data-color="brand-magenta">
+    <ChromaticStories />
+  </div>
+);
+
+export const Chromatic: StoryFn = () => <ChromaticStories />;
 
 Chromatic.parameters = {
   chromatic: { disable: false },

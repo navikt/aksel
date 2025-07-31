@@ -1,5 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { OverridableComponent } from "../util/types";
 
 export interface LinkProps
@@ -56,21 +57,56 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         as: Component = "a",
         className,
         underline = true,
-        variant = "action",
+        variant,
         inlineText = false,
+        "data-color": color,
         ...rest
       },
       ref,
-    ) => (
-      <Component
-        {...rest}
-        ref={ref}
-        className={cl("navds-link", className, `navds-link--${variant}`, {
-          "navds-link--remove-underline": !underline,
-          "navds-link--inline-text": inlineText,
-        })}
-      />
-    ),
+    ) => {
+      const themeContext = useThemeInternal(false);
+      const { cn } = useRenameCSS();
+
+      /*
+       * We avoid defaulting to "action" in darkside.
+       */
+      let localVariant: LinkProps["variant"];
+
+      if (themeContext) {
+        localVariant = variant;
+      } else {
+        localVariant = variant ?? "action";
+      }
+
+      return (
+        <Component
+          data-color={color ?? variantToColor(localVariant)}
+          data-variant={localVariant}
+          {...rest}
+          ref={ref}
+          className={cn("navds-link", className, {
+            [`navds-link--${localVariant}`]: localVariant,
+            "navds-link--remove-underline": !underline,
+            "navds-link--inline-text": inlineText,
+          })}
+        />
+      );
+    },
   );
+
+function variantToColor(
+  variant?: LinkProps["variant"],
+): AkselColor | undefined {
+  switch (variant) {
+    case "action":
+      return "accent";
+    case "neutral":
+      return "neutral";
+    case "subtle":
+      return "neutral";
+    default:
+      return undefined;
+  }
+}
 
 export default Link;

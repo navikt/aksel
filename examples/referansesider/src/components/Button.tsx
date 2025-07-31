@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 
 const ScButton = styled.button`
   display: inline-block;
@@ -24,11 +24,11 @@ const ScButton = styled.button`
   }
 
   &[data-variant="secondary"] {
-    color: ${tokens.TextAccent};
+    color: ${tokens.TextAccentSubtle};
     box-shadow: inset 0 0 0 2px ${tokens.BorderAccent};
 
     &:hover {
-      background-color: ${tokens.BgAccentHover};
+      background-color: ${tokens.BgAccentModerateHover};
     }
 
     &:active {

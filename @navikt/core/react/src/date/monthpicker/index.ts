@@ -1,9 +1,9 @@
 "use client";
-export { useMonthpicker, type MonthValidationT } from "../hooks";
+export { useMonthpicker, type MonthValidationT } from "./hooks/useMonthPicker";
 export { default as MonthPicker } from "./MonthPicker";
-export { type MonthPickerProps } from "./types";
+export type { MonthPickerProps } from "./MonthPicker.types";
 export {
   MonthPickerStandalone,
   type MonthPickerStandaloneProps,
-} from "./MonthPickerStandalone";
-export { MonthPickerInput } from "../parts/DateInput";
+} from "./parts/MonthPicker.Standalone";
+export { MonthPickerInput } from "../Date.Input";

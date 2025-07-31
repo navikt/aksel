@@ -1,0 +1,116 @@
+.akselLayersList {
+  position: relative;
+  list-style: none;
+}
+
+.akselLayersListItem {
+  &:nth-of-type(1) {
+    --ax-layer-background: var(--ax-bg-info-softA);
+  }
+
+  &:nth-of-type(2) {
+    --ax-layer-background: var(--ax-bg-brand-blue-moderateA);
+  }
+
+  &:nth-of-type(3) {
+    --ax-layer-background: var(--ax-bg-info-moderateA);
+  }
+
+  &:nth-of-type(4) {
+    --ax-layer-background: var(--ax-bg-brand-blue-moderate-pressedA);
+  }
+}
+
+.akselLayersIllustrativeListItem {
+  margin-bottom: var(--ax-space-40);
+
+  &:has(.akselLayersLink:hover),
+  &:has(.akselLayersLink:focus-visible) {
+    &:nth-of-type(1) {
+      --ax-layer-background: var(--ax-bg-brand-blue-moderateA);
+    }
+
+    &:nth-of-type(2) {
+      --ax-layer-background: var(--ax-bg-info-moderate-pressedA);
+      --ax-layer-background-opacity: 0.6;
+    }
+
+    &:nth-of-type(3) {
+      --ax-layer-background: var(--ax-bg-brand-blue-moderate-pressedA);
+    }
+
+    &:nth-of-type(4) {
+      --ax-layer-background: var(--ax-bg-brand-blue-strong-pressed);
+      --ax-layer-background-opacity: 0.4;
+    }
+  }
+}
+
+.akselLayersLink {
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:last-of-type {
+    display: inline-grid;
+    gap: 1rem;
+    grid-template-columns: auto 1fr 11.5rem;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    position: relative;
+
+    &::after {
+      grid-column: 3 / 4;
+      content: "" / "";
+      display: block;
+      border: 2px solid var(--ax-border-info-subtleA);
+      background-color: var(--ax-layer-background);
+      width: 10rem;
+      height: 10rem;
+      transform: rotateX(67deg) rotateZ(45deg);
+      position: absolute;
+      right: 0;
+      border-radius: var(--ax-border-radius-large);
+      opacity: var(--ax-layer-background-opacity);
+    }
+
+    &:hover,
+    &:focus-visible {
+      .akselLayersDottedLine {
+        border-bottom-width: 3px;
+      }
+    }
+  }
+
+  &:not(:last-of-type) {
+    &:hover,
+    &:focus-visible {
+      & + .akselLayersLink {
+        .akselLayersDottedLine {
+          border-bottom-width: 3px;
+        }
+      }
+    }
+  }
+}
+
+.akselLayersLinkText {
+  :focus-visible & {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+    border-radius: var(--ax-border-radius-small);
+  }
+}
+
+.akselLayersListItemLinkGroup {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.akselLayersDottedLine {
+  display: block;
+  border-bottom: 2px dotted var(--ax-border-neutral);
+  grid-column: 2 / 3;
+  margin-inline: -0.5rem;
+}

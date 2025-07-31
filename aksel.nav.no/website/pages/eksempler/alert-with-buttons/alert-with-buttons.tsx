@@ -16,10 +16,10 @@ const Example = () => {
           Informasjon om ansvaret ditt
         </Heading>
         <BodyLong spacing>
-          Det er viktig at du gjennomfører denne aktiviteten med NAV.
+          Det er viktig at du gjennomfører denne aktiviteten med Nav.
         </BodyLong>
         <BodyLong spacing>
-          Gjør du ikke det, kan det medføre at stønaden du mottar fra NAV
+          Gjør du ikke det, kan det medføre at stønaden du mottar fra Nav
           bortfaller for en periode eller stanses. Hvis du ikke kan gjennomføre
           aktiviteten, ber vi deg ta kontakt med veilederen din så snart som
           mulig.

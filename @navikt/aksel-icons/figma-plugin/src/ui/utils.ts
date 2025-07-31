@@ -1,9 +1,9 @@
-import meta from "@navikt/aksel-icons/metadata";
+import { AkselIcon } from "@navikt/aksel-icons/metadata";
 
 const subCategorizeIcons = (
-  icons: (typeof meta)[1][],
-): { sub_category: string; icons: (typeof meta)[1][] }[] => {
-  const categories: { sub_category: string; icons: (typeof meta)[1][] }[] = [];
+  icons: AkselIcon[],
+): { sub_category: string; icons: AkselIcon[] }[] => {
+  const categories: { sub_category: string; icons: AkselIcon[] }[] = [];
 
   for (const icon of icons) {
     const i = categories.findIndex(
@@ -19,14 +19,14 @@ const subCategorizeIcons = (
 };
 
 export const categorizeIcons = (
-  icons: (typeof meta)[1][],
+  icons: AkselIcon[],
 ): {
   category: string;
-  sub_categories: { sub_category: string; icons: (typeof meta)[1][] }[];
+  sub_categories: { sub_category: string; icons: AkselIcon[] }[];
 }[] => {
   const categories: {
     category: string;
-    icons: (typeof meta)[1][];
+    icons: AkselIcon[];
   }[] = [];
 
   for (const icon of icons) {
@@ -42,14 +42,14 @@ export const categorizeIcons = (
     .map((x) => ({ ...x, sub_categories: subCategorizeIcons(x.icons) }));
 };
 
-const noFill = (icon: (typeof meta)[1], icons: (typeof meta)[1][]) => {
+const noFill = (icon: AkselIcon, icons: AkselIcon[]) => {
   const foundFill = icons.find(
     (x) => x.name.endsWith("Fill") && x.name.replace("Fill", "") === icon.name,
   );
   return !foundFill;
 };
 
-export const getFillIcon = (icons: (typeof meta)[1][]) => {
+export const getFillIcon = (icons: AkselIcon[]) => {
   return icons.filter(
     (x, _, z) => x.variant.toLowerCase() === "fill" || noFill(x, z),
   );

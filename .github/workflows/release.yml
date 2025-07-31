@@ -30,16 +30,16 @@ jobs:
         with:
           node-version: lts/*
           cache: yarn
-      - name: set-env for yarn install to @navikt scope
-        shell: bash
-        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
+          cache-dependency-path: "**/yarn.lock"
 
-      - uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v2
         with:
           deno-version: v1.x
 
       - name: Install dependencies
         run: yarn
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: Create release Pull Request or publish to NPM
         id: changesets
@@ -78,7 +78,7 @@ jobs:
         if: steps.changesets.outputs.published == 'true'
         run: yarn zip:icons
 
-      - name: Upload updated icon.zip to NAV CDN
+      - name: Upload updated icon.zip to Nav CDN
         if: steps.changesets.outputs.published == 'true'
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:
@@ -94,7 +94,7 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_ENV
           echo "Version of @navikt/ds-css: ${{ env.version }}"
 
-      - name: Upload CSS to NAV CDN
+      - name: Upload CSS to Nav CDN
         if: steps.changesets.outputs.published == 'true'
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:

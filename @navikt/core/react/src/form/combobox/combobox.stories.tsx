@@ -38,15 +38,8 @@ const options = [
   "grapefruit",
 ];
 
-export const Default: StoryFn<ComboboxProps & { maxSelected?: number }> = ({
-  maxSelected,
-  ...rest
-}) => (
-  <UNSAFE_Combobox
-    {...rest}
-    maxSelected={maxSelected && { limit: maxSelected }}
-    id="combobox"
-  />
+export const Default: StoryFn<ComboboxProps> = (props) => (
+  <UNSAFE_Combobox {...props} id="combobox" />
 );
 Default.args = {
   options,
@@ -80,6 +73,9 @@ Default.argTypes = {
     options: ["medium", "small"],
     defaultValue: "medium",
     control: { type: "radio" },
+  },
+  toggleListButton: {
+    control: { type: "boolean" },
   },
 };
 
@@ -177,8 +173,8 @@ const complexOptions = [
 ];
 
 export const WithAddNewOptions: StoryFn = ({ open }: { open?: boolean }) => {
-  const [value, setValue] = useState<string | undefined>("hello");
   const comboboxRef = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState<string | undefined>("hello");
   return (
     <UNSAFE_Combobox
       id="combobox-with-add-new-options"
@@ -210,6 +206,7 @@ export const MultiSelectWithAddNewOptions: StoryFn = ({
       options={options}
       allowNewValues={true}
       value={value}
+      shouldAutocomplete={true}
       selectedOptions={selectedOptions}
       onChange={setValue}
       onToggleSelected={(option, isSelected) =>
@@ -418,7 +415,7 @@ export const MaxSelectedOptions: StoryFn = ({ open }: { open?: boolean }) => {
       id="combobox-with-max-selected-options"
       label="Komboboks med begrenset antall valg"
       options={options}
-      maxSelected={{ limit: 2 }}
+      maxSelected={2}
       selectedOptions={selectedOptions}
       onToggleSelected={(option, isSelected) =>
         isSelected
@@ -534,7 +531,7 @@ export const Readonly: StoryFn = () => {
   );
 };
 
-export const Chromatic: StoryFn = () => {
+const ChromaticRender = ({ children }: { children?: React.ReactNode }) => {
   const H2 = (props: { children: string; style?: React.CSSProperties }) => (
     <h2 style={{ marginBottom: "-0.25rem", ...props.style }}>
       {props.children}
@@ -568,9 +565,23 @@ export const Chromatic: StoryFn = () => {
       <Disabled />
       <H2>Readonly</H2>
       <Readonly />
+      {children}
     </VStack>
   );
 };
+
+export const ColorRoles: StoryFn = () => (
+  <div data-color="brand-magenta">
+    <h2>ColorRoles</h2>
+    <ChromaticRender />
+  </div>
+);
+
+export const Chromatic: StoryFn = () => (
+  <ChromaticRender>
+    <ColorRoles />
+  </ChromaticRender>
+);
 
 Chromatic.parameters = {
   chromatic: {

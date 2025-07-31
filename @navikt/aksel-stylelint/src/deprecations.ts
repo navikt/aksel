@@ -72,4 +72,12 @@ export const deprecations: DeprecatedList = [
     classes: ["navds-list--nested", "navds-list__item-content"],
     message: "Removed in v7.1.1",
   },
+  {
+    classes: ["navds-combobox__button-clear"],
+    message: "Removed in v7.8.0",
+  },
+  {
+    classes: ["navds-switch__checkmark"],
+    message: "Removed in v7.24.0",
+  },
 ];

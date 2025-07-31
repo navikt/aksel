@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { getResponsiveProps } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -17,9 +17,9 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * The `full` value is used to extend the margin to the full width of the parent.
    *
    * @example
-   * marginInline='4'
-   * marginInline='4 5'
-   * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6', "2xl": '12'}}
+   * marginInline='space-16'
+   * marginInline='space-16 space-20'
+   * marginInline={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24', "2xl": 'space-32'}}
    */
   marginInline?: ResponsiveProp<
     BleedSpacingInline | `${BleedSpacingInline} ${BleedSpacingInline}`
@@ -33,9 +33,9 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * This prop does **not** accept the `full` value.
    *
    * @example
-   * marginBlock='4'
-   * marginBlock='4 5'
-   * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6', "2xl": '12'}}
+   * marginBlock='space-16'
+   * marginBlock='space-16 space-20'
+   * marginBlock={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24', "2xl": 'space-32'}}
    */
   marginBlock?: ResponsiveProp<
     BleedSpacingBlock | `${BleedSpacingBlock} ${BleedSpacingBlock}`
@@ -80,9 +80,14 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     },
     ref,
   ) => {
+    const themeContext = useThemeInternal(false);
+    const { cn } = useRenameCSS();
+    const prefix = themeContext ? "ax" : "a";
+
     let style: React.CSSProperties = {
       ..._style,
       ...getResponsiveProps(
+        prefix,
         "bleed",
         "margin-inline",
         "spacing",
@@ -92,6 +97,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       ),
 
       ...getResponsiveProps(
+        prefix,
         "bleed",
         "margin-block",
         "spacing",
@@ -105,6 +111,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       style = {
         ...style,
         ...getResponsiveProps(
+          prefix,
           "bleed",
           "padding-inline",
           "spacing",
@@ -113,6 +120,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
           ["0", "full", "px"],
         ),
         ...getResponsiveProps(
+          prefix,
           "bleed",
           "padding-block",
           "spacing",
@@ -128,7 +136,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     return (
       <Comp
         {...rest}
-        className={cl("navds-bleed", className, {
+        className={cn("navds-bleed", className, {
           "navds-bleed--padding": reflectivePadding,
         })}
         ref={ref}

@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <form role="search">
-      <Search label="Søk alle NAV sine sider" variant="simple" />
+      <Search label="Søk i alle Nav sine sider" variant="simple" />
     </form>
   );
 };

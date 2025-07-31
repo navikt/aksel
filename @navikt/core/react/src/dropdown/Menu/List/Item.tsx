@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { useRenameCSS } from "../../../theme/Theme";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { OverridableComponent } from "../../../util/types";
 import { DropdownContext } from "../../context";
@@ -14,16 +14,17 @@ export interface ListItemProps extends React.ButtonHTMLAttributes<HTMLElement> {
 export const ListItem: OverridableComponent<ListItemProps, HTMLButtonElement> =
   forwardRef(
     ({ as: Component = "button", className, onClick, ...rest }, ref) => {
+      const { cn } = useRenameCSS();
       const context = useContext(DropdownContext);
 
       return (
-        <li className="navds-dropdown__list-item">
+        <li className={cn("navds-dropdown__list-item")}>
           <Component
             {...rest}
             value={rest.children}
             onClick={composeEventHandlers(onClick, context?.onSelect)}
             ref={ref}
-            className={cl(
+            className={cn(
               "navds-dropdown__item",
               "navds-body-short",
               "navds-body-short--small",

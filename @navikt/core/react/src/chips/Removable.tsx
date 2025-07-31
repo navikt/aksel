@@ -1,8 +1,9 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { composeEventHandlers } from "../util/composeEventHandlers";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 
 export interface ChipsRemovableProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,11 +17,6 @@ export interface ChipsRemovableProps
    * Click callback
    */
   onDelete?: () => void;
-  /**
-   * Replaces label read for screen-readers
-   * @default "slett"
-   */
-  removeLabel?: string;
 }
 
 export const RemovableChips = forwardRef<
@@ -30,39 +26,64 @@ export const RemovableChips = forwardRef<
   (
     {
       children,
-      variant = "action",
+      variant,
       onDelete,
-      removeLabel,
       className,
       onClick,
       type = "button",
+      "data-color": color,
       ...rest
     },
     ref,
   ) => {
     const translate = useI18n("Chips");
+    const themeContext = useThemeInternal(false);
+    const { cn } = useRenameCSS();
+
+    let localVariant: ChipsRemovableProps["variant"] | undefined;
+
+    if (themeContext) {
+      localVariant = variant;
+    } else {
+      localVariant = variant ?? "action";
+    }
+
     return (
       <button
+        data-color={color ?? variantToColor(localVariant)}
         {...rest}
         ref={ref}
         type={type}
-        className={cl(
+        className={cn(
           "navds-chips__chip navds-chips__removable navds-chips--icon-right",
           className,
-          `navds-chips__removable--${variant}`,
+          {
+            [`navds-chips__removable--${localVariant}`]: localVariant,
+          },
         )}
-        aria-label={`${children} ${
-          removeLabel ?? translate("Removable.labelSuffix")
-        }`}
+        aria-label={`${children} ${translate("Removable.labelSuffix")}`}
         onClick={composeEventHandlers(onClick, onDelete)}
       >
-        <span className="navds-chips__chip-text">{children}</span>
-        <span className="navds-chips__removable-icon">
+        <span className={cn("navds-chips__chip-text")}>{children}</span>
+        <span className={cn("navds-chips__removable-icon")}>
           <XMarkIcon aria-hidden />
         </span>
       </button>
     );
   },
 );
+
+function variantToColor(
+  variant?: ChipsRemovableProps["variant"],
+): AkselColor | undefined {
+  switch (variant) {
+    case "action":
+      return "accent";
+    case "neutral":
+      return "neutral";
+    default:
+      return undefined;
+  }
+}
 
 export default RemovableChips;

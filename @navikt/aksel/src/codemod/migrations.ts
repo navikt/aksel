@@ -97,6 +97,40 @@ export const migrations: {
         "Remember to update use of `variant`-prop to match previous use of colors. If needed the component exposes css-variables for custom overrides",
     },
   ],
+  spacing: [
+    {
+      description:
+        "Updates all Primitives to use new `space`-tokens. (Works with old and new system)",
+      value: "primitive-spacing",
+      path: "spacing/primitives-spacing/spacing",
+    },
+    {
+      description:
+        "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
+      value: "token-spacing",
+      path: "spacing/token-spacing/spacing",
+    },
+    {
+      description:
+        "Updates js-tokens to use new `space`-tokens. (Works with old and new system)",
+      value: "token-spacing-js",
+      path: "spacing/token-spacing-js/spacing",
+    },
+  ],
+  darkside: [
+    {
+      description: "marks deprecated prop usage with comments.",
+      value: "prop-deprecate",
+      path: "darkside/prop-deprecate/prop-deprecate",
+    },
+    {
+      description:
+        "Update Box to to BoxNew (future Box) using the new token system",
+      value: "box-to-boxnew",
+      path: "darkside/box-to-boxnew/box-to-boxnew",
+     warning: "Remember to check if 'aksel box migration'-comment were added to any files after migration. This comment will help you find and update Box-instances where we could not resolve the update for you.",
+    },
+  ],
 };
 
 export function getMigrationPath(str: string) {

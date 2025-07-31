@@ -44,7 +44,7 @@ export class AkselVariablesInterface {
     this.updateGlobalColorCollection(this.config.colors.dark.global);
     this.updateSemanticColorCollection(this.config.colors);
     this.updateScaleCollection(this.config.radius);
-    this.updateScaleCollection(this.config.spacing);
+    this.updateScaleCollection(this.config.space);
     console.info("Variables updated!");
   }
 
@@ -86,7 +86,8 @@ export class AkselVariablesInterface {
       this.Figma.setVariableMetadata(variable, {
         codeSyntax: token.code,
         description: token.comment ?? "",
-        hiddenFromPublishing: collection.hiddenFromPublishing,
+        /* We always hide global colors from publishing in figma */
+        hiddenFromPublishing: true,
         scopes: token.scopes,
       });
     }
@@ -97,7 +98,7 @@ export class AkselVariablesInterface {
   private updateScaleCollection(
     globalScale:
       | ScopedFigmaTokenConfig["radius"]
-      | ScopedFigmaTokenConfig["spacing"],
+      | ScopedFigmaTokenConfig["space"],
   ): void {
     const collection =
       this.Figma.getCollection(globalScale.name) ??

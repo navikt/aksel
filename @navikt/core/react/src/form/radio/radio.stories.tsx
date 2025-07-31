@@ -72,26 +72,43 @@ export const GroupError = () => {
   const [isValueSelected, setValueSelected] = useState(false);
   return (
     <>
-      <button>Stop her</button>
-      <RadioGroup
-        legend="Velg din aldersgruppe"
-        description="Informasjonen blir brukt for å gi deg bedre søketreff."
-        error={!isValueSelected ? "Du må velge en aldersgruppe" : undefined}
-      >
-        <Radio onChange={() => setValueSelected(true)} value="0-20">
-          0-20 år
-        </Radio>
-        <Radio
-          onChange={() => setValueSelected(true)}
-          value="21-45"
-          description="Gjelder fra året man blir 21"
+      <div>
+        <h2>Static error</h2>
+        <RadioGroup
+          legend="Velg din aldersgruppe"
+          description="Informasjonen blir brukt for å gi deg bedre søketreff."
+          error="Du må velge en aldersgruppe"
+          defaultValue="21-45"
         >
-          21-45 år
-        </Radio>
-        <Radio onChange={() => setValueSelected(true)} value="46-100">
-          46-100 år
-        </Radio>
-      </RadioGroup>
+          <Radio value="0-20">0-20 år</Radio>
+          <Radio value="21-45" description="Gjelder fra året man blir 21">
+            21-45 år
+          </Radio>
+          <Radio value="46-100">46-100 år</Radio>
+        </RadioGroup>
+      </div>
+      <div>
+        <h2>Dynamic error</h2>
+        <RadioGroup
+          legend="Velg din aldersgruppe"
+          description="Informasjonen blir brukt for å gi deg bedre søketreff."
+          error={!isValueSelected ? "Du må velge en aldersgruppe" : undefined}
+        >
+          <Radio onChange={() => setValueSelected(true)} value="0-20">
+            0-20 år
+          </Radio>
+          <Radio
+            onChange={() => setValueSelected(true)}
+            value="21-45"
+            description="Gjelder fra året man blir 21"
+          >
+            21-45 år
+          </Radio>
+          <Radio onChange={() => setValueSelected(true)} value="46-100">
+            46-100 år
+          </Radio>
+        </RadioGroup>
+      </div>
     </>
   );
 };
@@ -187,6 +204,50 @@ export const Readonly = () => (
   </div>
 );
 
+export const Disabled = () => (
+  <div className="colgap">
+    <RadioGroup
+      legend="Hvilken frukt liker du?"
+      defaultValue={["banan"]}
+      disabled
+    >
+      <Radio value="banan">Banan</Radio>
+      <Radio value="eple">Eple</Radio>
+      <Radio value="druer">Druer</Radio>
+    </RadioGroup>
+    <RadioGroup
+      legend="Hvilken frukt liker du?"
+      error="feilmelding"
+      defaultValue="eple"
+      disabled
+    >
+      <Radio value="eple">Eple</Radio>
+      <Radio value="banan">Banan</Radio>
+    </RadioGroup>
+  </div>
+);
+
+export const ColorRole = () => (
+  <div className="colspan" data-color="brand-magenta">
+    <div>
+      <h2>Group</h2>
+      <Group />
+    </div>
+    <div>
+      <h2>GroupError</h2>
+      <GroupError />
+    </div>
+    <div>
+      <h2>Readonly</h2>
+      <Readonly />
+    </div>
+    <div>
+      <h2>Disabled</h2>
+      <Disabled />
+    </div>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <div>
@@ -221,6 +282,14 @@ export const Chromatic: Story = {
       <div>
         <h2>Readonly</h2>
         <Readonly />
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        <Disabled />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </div>
   ),

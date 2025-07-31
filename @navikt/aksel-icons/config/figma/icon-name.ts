@@ -7,8 +7,7 @@ export const resolveName = (icon: PublishedComponent) => {
   if (isVariant) {
     const variant = icon.name.replace("Variant=", "").replace("Stroke", "");
 
-    /* @ts-expect-error Figma now includes the key:value pair `containingStateGroup: { name: string, nodeId: string }` */
-    const actualName = icon.containing_frame?.containingStateGroup?.name;
+    const actualName = icon.containing_frame?.containingComponentSet?.name;
     const name = `${actualName}${variant}`;
     return `${startCase(camelCase(name)).replace(/ /g, "")}.svg`;
   }

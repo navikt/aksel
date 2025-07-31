@@ -36,3 +36,7 @@
 .containerStaticFull {
   padding-block: 1.5rem;
 }
+
+.containerFullscreen {
+  padding: 0;
+}

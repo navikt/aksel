@@ -1,0 +1,118 @@
+.aksel-guide-panel {
+  --__axc-guide-panel-guide-size: 5rem;
+
+  position: relative;
+  display: flex;
+  width: fit-content;
+
+  &[data-poster="true"],
+  &[data-responsive="true"] {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &[data-poster="false"] {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  &[data-poster="false"][data-responsive="false"] {
+    --__axc-guide-panel-guide-size: 3.75rem;
+  }
+
+  @media (min-width: 480px) {
+    &[data-poster="false"][data-responsive="false"] {
+      --__axc-guide-panel-guide-size: 5rem;
+    }
+
+    &[data-responsive="true"] {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+}
+
+.aksel-guide {
+  box-sizing: border-box;
+  border: 2px solid var(--ax-border-default);
+  border-radius: var(--ax-radius-full);
+  overflow: hidden;
+  width: var(--__axc-guide-panel-guide-size);
+  height: var(--__axc-guide-panel-guide-size);
+  flex-shrink: 0;
+}
+
+.aksel-guide svg,
+.aksel-guide img {
+  height: 100%;
+  width: 100%;
+}
+
+.aksel-guide-panel__content {
+  background-color: var(--ax-bg-raised);
+  border: 2px solid var(--ax-border-default);
+  border-radius: var(--ax-radius-12);
+  position: relative;
+
+  .aksel-guide-panel:is([data-poster="true"], [data-responsive="true"]) > & {
+    margin-top: var(--ax-space-20);
+  }
+
+  .aksel-guide-panel[data-poster="false"] > & {
+    margin-left: var(--ax-space-20);
+  }
+
+  @media (min-width: 480px) {
+    .aksel-guide-panel[data-responsive="true"] > & {
+      margin-top: 0;
+      margin-left: var(--ax-space-20);
+    }
+  }
+}
+
+.aksel-guide-panel__content-inner {
+  padding: var(--ax-space-12) var(--ax-space-16);
+  border-radius: var(--ax-radius-12);
+  background-color: var(--ax-bg-raised);
+  position: relative;
+  height: 100%;
+
+  .aksel-guide-panel[data-poster="false"] & {
+    min-height: var(--__axc-guide-panel-guide-size);
+  }
+
+  @media (min-width: 480px) {
+    & {
+      padding: var(--ax-space-16) var(--ax-space-20);
+    }
+
+    .aksel-guide-panel[data-responsive="true"] & {
+      min-height: var(--__axc-guide-panel-guide-size);
+    }
+  }
+}
+
+.aksel-guide-panel__tail {
+  position: absolute;
+  z-index: 0;
+
+  .aksel-guide-panel:is([data-poster="true"], [data-responsive="true"]) & {
+    left: 50%;
+    top: calc(var(--ax-space-16) * -1 - 2px);
+    transform: translateX(-48%);
+  }
+
+  .aksel-guide-panel[data-poster="false"] & {
+    top: calc(var(--__axc-guide-panel-guide-size) / 2);
+    left: calc(var(--ax-space-20) * -1 - 2px);
+    transform: translateY(-48%) rotateZ(-90deg) scaleX(-1);
+  }
+
+  @media (min-width: 480px) {
+    .aksel-guide-panel[data-responsive="true"] & {
+      top: calc(var(--__axc-guide-panel-guide-size) / 2);
+      left: calc(var(--ax-space-20) * -1 - 2px);
+      transform: translateY(-48%) rotateZ(-90deg) scaleX(-1);
+    }
+  }
+}

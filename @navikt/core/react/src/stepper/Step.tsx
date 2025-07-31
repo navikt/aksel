@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { Label } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { OverridableComponent } from "../util/types";
@@ -37,6 +37,7 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
       },
       ref,
     ) => {
+      const { cn } = useRenameCSS();
       const context = useStepperContext();
 
       const { activeStep } = context;
@@ -54,16 +55,23 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
           {...rest}
           aria-current={activeStep === context.index ? "step" : undefined}
           ref={ref}
-          className={cl("navds-stepper__step", className, {
+          className={cn("navds-stepper__step", className, {
             "navds-stepper__step--active": activeStep === context.index,
             "navds-stepper__step--behind": activeStep > context.index,
             "navds-stepper__step--non-interactive": !isInteractive,
             "navds-stepper__step--completed": completed,
           })}
+          data-active={activeStep === context.index}
+          data-completed={completed}
+          data-interactive={isInteractive}
           onClick={composeEventHandlers(onClick, handleStepClick)}
         >
           {completed ? (
-            <span className="navds-stepper__circle navds-stepper__circle--success">
+            <span
+              className={cn(
+                "navds-stepper__circle navds-stepper__circle--success",
+              )}
+            >
               <svg
                 width="14"
                 height="10"
@@ -82,14 +90,14 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
             </span>
           ) : (
             <Label
-              className="navds-stepper__circle"
+              className={cn("navds-stepper__circle")}
               as="span"
               aria-hidden="true"
             >
               {context.index + 1}
             </Label>
           )}
-          <Label as="span" className="navds-stepper__content">
+          <Label as="span" className={cn("navds-stepper__content")}>
             {children}
           </Label>
         </Comp>

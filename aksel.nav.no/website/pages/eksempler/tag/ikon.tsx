@@ -4,23 +4,23 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="2" align="start">
+    <HStack gap="3" align="start">
       <Tag variant="neutral-moderate" icon={<ComponentIcon aria-hidden />}>
-        Ikon
+        Medium
       </Tag>
       <Tag
         size="small"
         variant="neutral-moderate"
         icon={<ComponentIcon aria-hidden />}
       >
-        Ikon
+        Small
       </Tag>
       <Tag
         size="xsmall"
         variant="neutral-moderate"
         icon={<ComponentIcon aria-hidden />}
       >
-        Ikon
+        Xsmall
       </Tag>
     </HStack>
   );

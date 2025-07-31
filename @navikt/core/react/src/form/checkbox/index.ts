@@ -4,4 +4,4 @@ export {
   default as CheckboxGroup,
   type CheckboxGroupProps,
 } from "./CheckboxGroup";
-export { type CheckboxProps } from "./types";
+export type { CheckboxProps } from "./types";

@@ -25,11 +25,7 @@ export {
 } from "./date/monthpicker";
 export { Dropdown, type DropdownProps } from "./dropdown";
 export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
-export {
-  GuidePanel,
-  GuidePanelDefaultIllustration,
-  type GuidePanelProps,
-} from "./guide-panel";
+export { GuidePanel, type GuidePanelProps } from "./guide-panel";
 export { HelpText, type HelpTextProps } from "./help-text";
 export {
   InternalHeader,
@@ -40,7 +36,7 @@ export {
   type InternalHeaderUserProps,
 } from "./internal-header";
 export { Bleed, type BleedProps } from "./layout/bleed";
-export { Box, type BoxProps } from "./layout/box";
+export { Box, type BoxProps, BoxNew, type BoxNewProps } from "./layout/box";
 export { HGrid, type HGridProps } from "./layout/grid";
 export { Page, type PageBlockProps, type PageProps } from "./layout/page";
 export { Hide, Show, type ResponsiveProps } from "./layout/responsive";
@@ -154,6 +150,21 @@ export { Select, type SelectProps } from "./form/select";
 export { Switch, type SwitchProps } from "./form/switch";
 export { Textarea, type TextareaProps } from "./form/textarea";
 export { TextField, type TextFieldProps } from "./form/textfield";
+export {
+  LinkCard,
+  type LinkCardProps,
+  type LinkCardTitleProps,
+  type LinkCardDescriptionProps,
+  type LinkCardFooterProps,
+  type LinkCardAnchorProps,
+  type LinkCardIconProps,
+  type LinkCardImageProps,
+} from "./link-card";
+
+/**
+ * Theming
+ */
+export { Theme, type ThemeProps } from "./theme";
 
 /**
  * @deprecated

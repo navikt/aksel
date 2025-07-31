@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -50,25 +50,29 @@ export const BodyShort: OverridableComponent<
       ...rest
     },
     ref,
-  ) => (
-    <Component
-      {...rest}
-      ref={ref}
-      className={cl(
-        className,
-        "navds-body-short",
-        `navds-body-short--${size}`,
-        typoClassNames({
-          spacing,
-          truncate,
-          weight,
-          align,
-          visuallyHidden,
-          textColor,
-        }),
-      )}
-    />
-  ),
+  ) => {
+    const { cn } = useRenameCSS();
+
+    return (
+      <Component
+        {...rest}
+        ref={ref}
+        className={cn(
+          className,
+          "navds-body-short",
+          `navds-body-short--${size}`,
+          typoClassNames({
+            spacing,
+            truncate,
+            weight,
+            align,
+            visuallyHidden,
+            textColor,
+          }),
+        )}
+      />
+    );
+  },
 );
 
 export default BodyShort;

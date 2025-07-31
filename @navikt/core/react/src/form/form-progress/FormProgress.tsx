@@ -5,8 +5,9 @@ import Collapsible from "../../collapsible/Collapsible";
 import { HStack } from "../../layout/stack";
 import { ProgressBar } from "../../progress-bar";
 import { Stepper, StepperStepProps } from "../../stepper";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
-import { useI18n } from "../../util/i18n/i18n.context";
+import { useI18n } from "../../util/i18n/i18n.hooks";
 import { ComponentTranslation } from "../../util/i18n/i18n.types";
 
 export interface FormProgressProps
@@ -91,6 +92,7 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
     }: FormProgressProps,
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const translate = useI18n("FormProgress", translations);
 
     return (
@@ -99,36 +101,36 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
           aria-hidden
           value={activeStep}
           valueMax={totalSteps}
-          className="navds-form-progress__bar"
+          className={cn("navds-form-progress__bar")}
         />
 
         <Collapsible lazy open={open} onOpenChange={onOpenChange}>
           <HStack justify="space-between" align="center">
             <BodyShort as="span">
-              {translate("step", {
-                replacements: { activeStep, totalSteps },
-              })}
+              {translate("step", { activeStep, totalSteps })}
             </BodyShort>
             <Collapsible.Trigger asChild aria-expanded={undefined}>
               <Button
                 variant="tertiary"
                 size="small"
-                className="navds-form-progress__button"
+                className={cn("navds-form-progress__button")}
                 icon={<ChevronDownIcon aria-hidden />}
               >
-                <span className="navds-form-progress__btn-txt-hide">
+                <span className={cn("navds-form-progress__btn-txt-hide")}>
                   {translate("hideAllSteps")}
                 </span>
-                <span className="navds-form-progress__btn-txt-show">
+                <span className={cn("navds-form-progress__btn-txt-show")}>
                   {translate("showAllSteps")}
                 </span>
               </Button>
             </Collapsible.Trigger>
           </HStack>
 
-          <Collapsible.Content className="navds-form-progress__collapsible">
-            <div className="navds-form-progress__collapsible-content">
-              <div className="navds-form-progress__stepper">
+          <Collapsible.Content
+            className={cn("navds-form-progress__collapsible")}
+          >
+            <div className={cn("navds-form-progress__collapsible-content")}>
+              <div className={cn("navds-form-progress__stepper")}>
                 <Stepper
                   activeStep={activeStep}
                   onStepChange={onStepChange}

@@ -1,4 +1,3 @@
-import cl from "clsx";
 import React, {
   ButtonHTMLAttributes,
   forwardRef,
@@ -7,17 +6,16 @@ import React, {
   useState,
 } from "react";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
+import { Button, ButtonProps } from "../button";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { Label } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import copy from "../util/copy";
+import { useI18n } from "../util/i18n/i18n.hooks";
 
 export interface CopyButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
-  /**
-   * `"xsmall"` should _only_ be used in tables.
-   * @default "medium"
-   */
-  size?: "medium" | "small" | "xsmall";
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">,
+    Pick<ButtonProps, "iconPosition" | "size"> {
   /**
    * @default "neutral"
    */
@@ -32,7 +30,7 @@ export interface CopyButtonProps
   text?: string;
   /**
    * Text shown when button is clicked.
-   * Only set if used with `text`-prop.
+   * Will be used as accessible label (title) if `text`-prop is not set.
    * @default "Kopiert!"
    */
   activeText?: string;
@@ -62,16 +60,6 @@ export interface CopyButtonProps
    * @default "Kopier"
    */
   title?: string;
-  /**
-   * Accessible label for icon in active-state (ignored if text is set).
-   * @default "Kopiert"
-   */
-  activeTitle?: string;
-  /**
-   * Icon position in button.
-   * @default "left"
-   */
-  iconPosition?: "left" | "right";
 }
 
 /**
@@ -91,23 +79,27 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       className,
       copyText,
       text,
-      activeText = "Kopiert!",
+      activeText,
       variant = "neutral",
-      size = "medium",
       onActiveChange,
       icon,
       activeIcon,
       activeDuration = 2000,
-      title = "Kopier",
-      activeTitle = "Kopiert",
+      title,
       iconPosition = "left",
       onClick,
+      size = "medium",
       ...rest
     },
     ref,
   ) => {
     const [active, setActive] = useState(false);
     const timeoutRef = useRef<number>();
+    const translate = useI18n("CopyButton");
+
+    const { cn } = useRenameCSS();
+
+    const themeContext = useThemeInternal(false);
 
     useEffect(() => {
       return () => {
@@ -127,31 +119,57 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       }, activeDuration);
     };
 
+    const activeString = activeText || translate("activeText");
+
     const copyIcon = (
-      <span className="navds-copybutton__icon">
+      <LegacyIconWrapper useLegacy={!themeContext}>
         {active
           ? activeIcon ?? (
               <CheckmarkIcon
                 aria-hidden={!!text}
-                title={text ? undefined : activeTitle}
+                title={text ? undefined : activeString}
+                className={
+                  themeContext ? cn("navds-copybutton__icon") : undefined
+                }
               />
             )
           : icon ?? (
               <FilesIcon
                 aria-hidden={!!text}
-                title={text ? undefined : title}
+                title={text ? undefined : title || translate("title")}
+                className={
+                  themeContext ? cn("navds-copybutton__icon") : undefined
+                }
               />
             )}
-      </span>
+      </LegacyIconWrapper>
     );
+
+    if (themeContext) {
+      return (
+        <Button
+          ref={ref}
+          type="button"
+          className={cn("navds-copybutton", className)}
+          {...rest}
+          variant={variant === "action" ? "tertiary" : "tertiary-neutral"}
+          onClick={composeEventHandlers(onClick, handleClick)}
+          iconPosition={iconPosition}
+          icon={copyIcon}
+          data-active={active}
+          size={size}
+        >
+          {text ? (active ? activeString : text) : null}
+        </Button>
+      );
+    }
 
     return (
       <button
         ref={ref}
         type="button"
         {...rest}
-        aria-live="polite"
-        className={cl(
+        className={cn(
           "navds-copybutton",
           className,
           `navds-copybutton--${size}`,
@@ -164,31 +182,33 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         )}
         onClick={composeEventHandlers(onClick, handleClick)}
       >
-        <span className="navds-copybutton__content">
+        <span className={cn("navds-copybutton__content")}>
           {iconPosition === "left" && copyIcon}
-          {text &&
-            (active ? (
-              <Label
-                as="span"
-                size={size === "medium" ? "medium" : "small"}
-                aria-live="polite"
-              >
-                {activeText}
-              </Label>
-            ) : (
-              <Label
-                as="span"
-                size={size === "medium" ? "medium" : "small"}
-                aria-live="polite"
-              >
-                {text}
-              </Label>
-            ))}
+          {text && (
+            <Label as="span" size={size === "medium" ? "medium" : "small"}>
+              {active ? activeString : text}
+            </Label>
+          )}
           {iconPosition === "right" && copyIcon}
         </span>
       </button>
     );
   },
 );
+
+function LegacyIconWrapper({
+  children,
+  useLegacy,
+}: {
+  children: React.ReactNode;
+  useLegacy: boolean;
+}) {
+  const { cn } = useRenameCSS();
+
+  if (!useLegacy) {
+    return children;
+  }
+  return <span className={cn("navds-copybutton__icon")}>{children}</span>;
+}
 
 export default CopyButton;

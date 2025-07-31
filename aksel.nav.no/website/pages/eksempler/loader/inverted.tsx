@@ -10,4 +10,5 @@ export default withDsExample(Example, { background: "inverted" });
 
 export const args = {
   index: 2,
+  desc: "Inverted-varianten passer bedre på mørkere flater.",
 };

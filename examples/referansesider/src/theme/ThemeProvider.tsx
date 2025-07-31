@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
-import { type Theme, ThemeProviderContext } from "./ThemeContext";
+import { Theme } from "@navikt/ds-react/Theme";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
+import { ThemeProviderContext, type Theme as ThemeType } from "./ThemeContext";
 
 const ScDiv = styled.div`
   background-color: ${tokens.BgDefault};
@@ -9,7 +10,7 @@ const ScDiv = styled.div`
 
 type ThemeProviderProps = {
   children: React.ReactNode;
-  defaultTheme?: Theme;
+  defaultTheme?: ThemeType;
   storageKey?: string;
 };
 
@@ -19,8 +20,8 @@ export function ThemeProvider({
   storageKey = "referanseapp-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
+  const [theme, setTheme] = useState<ThemeType>(
+    () => (localStorage.getItem(storageKey) as ThemeType) || defaultTheme,
   );
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export function ThemeProvider({
 
   const value = {
     theme,
-    setTheme: (_theme: Theme) => {
+    setTheme: (_theme: ThemeType) => {
       localStorage.setItem(storageKey, _theme);
       setTheme(_theme);
     },
@@ -41,7 +42,9 @@ export function ThemeProvider({
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
-      <ScDiv>{children}</ScDiv>
+      <Theme theme={value.theme}>
+        <ScDiv>{children}</ScDiv>
+      </Theme>
     </ThemeProviderContext.Provider>
   );
 }

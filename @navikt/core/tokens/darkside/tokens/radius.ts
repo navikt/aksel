@@ -1,11 +1,82 @@
-import { StyleDictionaryTokenConfig } from "../util";
+import {
+  AkselBorderRadiusToken,
+  AkselLegacyBorderRadiusToken,
+} from "../../types";
+import { type StyleDictionaryToken } from "../tokens.util";
 
-export const radiusTokenConfig: StyleDictionaryTokenConfig<"global-radius"> = {
-  "border-radius": {
-    small: { value: "2px", type: "global-radius" },
-    medium: { value: "4px", type: "global-radius" },
-    large: { value: "8px", type: "global-radius" },
-    xlarge: { value: "12px", type: "global-radius" },
-    full: { value: "9999px", type: "global-radius" },
+export const radiusTokenConfig = {
+  radius: {
+    "2": {
+      value: "2px",
+      type: "global-radius",
+      comment: "TODO: Sjur fyller ut",
+    },
+    "4": {
+      value: "4px",
+      type: "global-radius",
+      comment: "TODO: Sjur fyller ut",
+    },
+    "8": {
+      value: "8px",
+      type: "global-radius",
+      comment: "TODO: Sjur fyller ut",
+    },
+    "12": {
+      value: "12px",
+      type: "global-radius",
+      comment: "TODO: Sjur fyller ut",
+    },
+    full: {
+      value: "9999px",
+      type: "global-radius",
+      comment: "TODO: Sjur fyller ut",
+    },
   },
+  border: {
+    radius: {
+      full: {
+        value: "9999px",
+        type: "global-radius",
+        comment: "TODO: Sjur fyller ut",
+        figmaIgnore: true,
+        docsIgnore: true,
+      },
+      small: {
+        value: "2px",
+        type: "global-radius",
+        comment: "TODO: Sjur fyller ut",
+        figmaIgnore: true,
+        docsIgnore: true,
+      },
+      medium: {
+        value: "4px",
+        type: "global-radius",
+        comment: "TODO: Sjur fyller ut",
+        figmaIgnore: true,
+        docsIgnore: true,
+      },
+      large: {
+        value: "8px",
+        type: "global-radius",
+        comment: "TODO: Sjur fyller ut",
+        figmaIgnore: true,
+        docsIgnore: true,
+      },
+      xlarge: {
+        value: "12px",
+        type: "global-radius",
+        comment: "TODO: Sjur fyller ut",
+        figmaIgnore: true,
+        docsIgnore: true,
+      },
+    },
+  },
+} satisfies {
+  radius: Record<AkselBorderRadiusToken, StyleDictionaryToken<"global-radius">>;
+  border: {
+    radius: Record<
+      AkselLegacyBorderRadiusToken,
+      StyleDictionaryToken<"global-radius">
+    >;
+  };
 };

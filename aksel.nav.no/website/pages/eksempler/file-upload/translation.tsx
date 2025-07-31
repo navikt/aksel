@@ -47,4 +47,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
+  desc: "Med translations API-et kan du endre tekstene i komponentene.",
 };

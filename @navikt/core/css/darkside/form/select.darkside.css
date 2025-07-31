@@ -1,0 +1,122 @@
+.aksel-select__input {
+  appearance: none;
+  background-color: var(--ax-bg-input);
+  border-radius: var(--ax-radius-8);
+  border: 1px solid var(--ax-border-neutral);
+  color: var(--ax-text-neutral);
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 3rem;
+  display: inline-block;
+  position: relative;
+  padding: var(--ax-space-8);
+  padding-right: var(--ax-space-40);
+  scroll-margin-block-start: 4rem;
+
+  &:hover {
+    border-color: var(--ax-border-strong);
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+    border-color: var(--ax-border-strong);
+  }
+
+  @media (forced-colors: active) {
+    & {
+      background-color: ButtonFace;
+      border-color: ButtonText;
+      color: ButtonText;
+    }
+  }
+}
+
+.aksel-select__container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  color: var(--ax-text-neutral);
+}
+
+/* ------------------------------- Select Icon ------------------------------ */
+.aksel-select__chevron {
+  position: absolute;
+  font-size: 1.5rem;
+  right: var(--ax-space-8);
+  pointer-events: none;
+  align-self: center;
+  color: var(--ax-text-neutral);
+
+  @media (forced-colors: active) {
+    & {
+      color: ButtonText;
+    }
+  }
+}
+
+/* ------------------------------ Select Sizing ----------------------------- */
+.aksel-form-field--small {
+  & .aksel-select__input {
+    min-height: 2rem;
+    padding-block: 0;
+  }
+}
+
+/* --------------------------- Select Error --------------------------- */
+.aksel-select--error {
+  > * select {
+    box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
+    border-color: var(--ax-border-danger-strong);
+  }
+
+  > * select:hover,
+  > * select:focus {
+    box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
+    border-color: var(--ax-border-danger-strong);
+  }
+}
+
+/* ----------------------------- Select disabled ---------------------------- */
+.aksel-select__input:disabled {
+  background-color: var(--ax-bg-input);
+  border: 1px solid var(--ax-border-neutral);
+  box-shadow: none;
+  cursor: not-allowed;
+
+  /* Chrome-fix */
+  opacity: 1;
+  color: var(--ax-text-neutral);
+
+  & > option {
+    color: var(--ax-text-neutral);
+  }
+
+  @media (forced-colors: active) {
+    & + .aksel-select__chevron {
+      color: GrayText;
+    }
+  }
+}
+
+/* ----------------------------- Select Readonly ---------------------------- */
+.aksel-select--readonly {
+  & .aksel-select__input {
+    background-color: var(--ax-bg-neutral-moderate);
+    border-color: var(--ax-border-neutral-subtleA);
+    cursor: default;
+
+    @media (forced-colors: active) {
+      &:is(:hover, :focus) {
+        background-color: ButtonFace;
+        border-color: ButtonText;
+        color: ButtonText;
+      }
+    }
+  }
+
+  & .aksel-select__chevron {
+    color: var(--ax-text-neutral-subtle);
+  }
+}

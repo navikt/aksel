@@ -32,6 +32,7 @@
   width: 100%;
   display: block;
   color: var(--ac-textarea-text, var(--__ac-textarea-text, var(--a-text-default)));
+  scroll-margin-block-start: 4rem;
 }
 
 .navds-textarea__input::placeholder {
@@ -111,16 +112,13 @@
 /**
   Error handling
 */
-.navds-textarea--error .navds-textarea__input:not(:hover, :focus-visible, :disabled) {
+.navds-textarea--error .navds-textarea__input:not(:hover, :disabled) {
   box-shadow: 0 0 0 1px var(--ac-textarea-error-border, var(--__ac-textarea-error-border, var(--a-border-danger)));
   border-color: var(--ac-textarea-error-border, var(--__ac-textarea-error-border, var(--a-border-danger)));
 }
 
-@supports not selector(:focus-visible) {
-  .navds-textarea--error .navds-textarea__input:not(:hover, :focus, :disabled) {
-    box-shadow: 0 0 0 1px var(--ac-textarea-error-border, var(--__ac-textarea-error-border, var(--a-border-danger)));
-    border-color: var(--ac-textarea-error-border, var(--__ac-textarea-error-border, var(--a-border-danger)));
-  }
+.navds-textarea--error .navds-textarea__input:focus-visible {
+  box-shadow: var(--a-shadow-focus);
 }
 
 .navds-textarea__input:disabled {

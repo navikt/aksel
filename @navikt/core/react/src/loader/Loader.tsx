@@ -1,7 +1,9 @@
-import cl from "clsx";
 import React, { SVGProps, forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { omit } from "../util";
 import { useId } from "../util/hooks";
+import { useI18n } from "../util/i18n/i18n.hooks";
 
 export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
   /**
@@ -19,7 +21,7 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
     | "xsmall";
   /**
    * Title prop on svg
-   * @default "venter..."
+   * @default "Venter…"
    */
   title?: React.ReactNode;
   /**
@@ -32,6 +34,10 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
    * @default "neutral"
    */
   variant?: "neutral" | "interaction" | "inverted";
+  /**
+   * Overrides loader-color
+   */
+  "data-color"?: AkselColor;
 }
 
 /* Workaround for @types/react v17/v18 feil */
@@ -47,7 +53,7 @@ export type LoaderType = React.ForwardRefExoticComponent<
  *
  * @example
  * ```jsx
- * <Loader size="3xlarge" title="Venter..." />
+ * <Loader size="3xlarge" title="Venter…" />
  * ```
  */
 export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
@@ -55,21 +61,24 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
     {
       className,
       size = "medium",
-      title = "venter...",
+      title,
       transparent = false,
       variant = "neutral",
       id,
+      "data-color": color,
       ...rest
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const internalId = useId();
+    const translate = useI18n("Loader");
 
     return (
       <svg
         aria-labelledby={id ?? `loader-${internalId}`}
         ref={ref}
-        className={cl(
+        className={cn(
           "navds-loader",
           className,
           `navds-loader--${size}`,
@@ -81,11 +90,15 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
         focusable="false"
         viewBox="0 0 50 50"
         preserveAspectRatio="xMidYMid"
+        data-color={color ?? variantToColor(variant)}
         {...omit(rest, ["children"])}
+        data-variant={variant}
       >
-        <title id={id ?? `loader-${internalId}`}>{title}</title>
+        <title id={id ?? `loader-${internalId}`}>
+          {title || translate("title")}
+        </title>
         <circle
-          className="navds-loader__background"
+          className={cn("navds-loader__background")}
           xmlns="http://www.w3.org/2000/svg"
           cx="25"
           cy="25"
@@ -93,7 +106,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
           fill="none"
         />
         <circle
-          className="navds-loader__foreground"
+          className={cn("navds-loader__foreground")}
           cx="25"
           cy="25"
           r="20"
@@ -104,5 +117,21 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
     );
   },
 );
+
+function variantToColor(
+  variant: LoaderProps["variant"],
+): AkselColor | undefined {
+  switch (variant) {
+    case "neutral":
+      return "neutral";
+    case "inverted":
+      return "neutral";
+    /* We assume "interaction" is the main app color in this instance */
+    case "interaction":
+      return undefined;
+    default:
+      return "neutral";
+  }
+}
 
 export default Loader;

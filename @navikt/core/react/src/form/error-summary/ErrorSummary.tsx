@@ -1,8 +1,9 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, Heading } from "../../typography";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
+import { useI18n } from "../../util/i18n/i18n.hooks";
 import ErrorSummaryItem from "./ErrorSummaryItem";
 
 export interface ErrorSummaryProps
@@ -60,7 +61,7 @@ interface ErrorSummaryComponent
  *     Felt må fylles ut med alder
  *   </ErrorSummary.Item>
  *   <ErrorSummary.Item href="#2">
- *     Tekstfeltet må ha en godkjent e-mail
+ *     Tekstfeltet må ha en godkjent e-post
  *   </ErrorSummary.Item>
  * </ErrorSummary>
  * ```
@@ -72,11 +73,14 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       className,
       size = "medium",
       headingTag = "h2",
-      heading = "Du må rette disse feilene før du kan fortsette:",
+      heading,
       ...rest
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+
+    const translate = useI18n("ErrorSummary");
     const wrapperRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -86,7 +90,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       <div
         ref={mergedRef}
         {...rest}
-        className={cl(
+        className={cn(
           className,
           "navds-error-summary",
           `navds-error-summary--${size}`,
@@ -99,15 +103,19 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         })}
       >
         <Heading
-          className="navds-error-summary__heading"
+          className={cn("navds-error-summary__heading")}
           as={headingTag}
-          size="small"
+          size={size === "medium" ? "small" : "xsmall"}
           ref={headingRef}
           tabIndex={-1}
         >
-          {heading}
+          {heading ?? translate("heading")}
         </Heading>
-        <BodyShort as="ul" size={size} className="navds-error-summary__list">
+        <BodyShort
+          as="ul"
+          size={size}
+          className={cn("navds-error-summary__list")}
+        >
           {children}
         </BodyShort>
       </div>

@@ -1,0 +1,83 @@
+.aksel-form-summary {
+  overflow: hidden;
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  border-radius: var(--ax-radius-12);
+  background: var(--ax-bg-raised);
+}
+
+.aksel-form-summary__header {
+  background: var(--ax-bg-neutral-moderateA);
+  padding: var(--ax-space-16) var(--ax-space-20);
+  display: flex;
+  justify-content: space-between;
+  gap: 0 var(--ax-space-12);
+}
+
+@media (max-width: 479px) {
+  .aksel-form-summary__header {
+    padding: var(--ax-space-12) var(--ax-space-16);
+    flex-direction: column;
+  }
+}
+
+.aksel-form-summary__edit {
+  flex-shrink: 0;
+  margin-top: var(--ax-space-4);
+  align-self: flex-start;
+}
+
+.aksel-form-summary > .aksel-form-summary__answers {
+  border-top: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+.aksel-form-summary__answers {
+  padding: var(--ax-space-16) var(--ax-space-20) var(--ax-space-20) var(--ax-space-20);
+  margin: 0;
+}
+
+@media (max-width: 479px) {
+  .aksel-form-summary__answers {
+    padding: var(--ax-space-12) var(--ax-space-16) var(--ax-space-16) var(--ax-space-16);
+  }
+}
+
+.aksel-form-summary__answer:not(:last-child) {
+  margin-bottom: var(--ax-space-16);
+  padding-bottom: var(--ax-space-16);
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+.aksel-form-summary__answer:has(.aksel-form-summary__answer) {
+  padding-bottom: var(--ax-space-24);
+}
+
+.aksel-form-summary__answer:has(.aksel-form-summary__answer):last-child {
+  padding-bottom: 0;
+}
+
+@media (max-width: 479px) {
+  .aksel-form-summary__answer:not(:last-child) {
+    margin-bottom: var(--ax-space-12);
+    padding-bottom: var(--ax-space-12);
+  }
+
+  .aksel-form-summary__answer:has(.aksel-form-summary__answer) {
+    padding-bottom: var(--ax-space-20);
+  }
+}
+
+.aksel-form-summary__value:first-of-type {
+  margin-top: var(--ax-space-4);
+}
+
+.aksel-form-summary__value .aksel-form-summary__answers {
+  margin-top: var(--ax-space-8);
+  padding: var(--ax-space-16);
+  background: var(--ax-bg-moderateA);
+  border-radius: var(--ax-radius-8);
+  border: 1px solid var(--ax-border-subtleA);
+
+  & .aksel-form-summary__answer {
+    border-color: var(--ax-border-subtleA);
+  }
+}

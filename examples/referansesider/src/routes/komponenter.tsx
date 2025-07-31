@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
+import { Link } from "@navikt/ds-react/Link";
 import { Button } from "../components/Button";
-import { Link } from "../components/Link";
 import { Page } from "../components/Page";
 
 export const Route = createFileRoute("/komponenter")({
@@ -24,9 +24,6 @@ function ComponentPage() {
         </Section>
         <Section aria-label="Link">
           <Link href="#">Når du har sykepenger</Link>
-          <Link href="#" inverted>
-            Når du har sykepenger
-          </Link>
         </Section>
       </div>
     </Page>

@@ -33,6 +33,7 @@ export const Props = defineType({
           title: "Prop",
           name: "prop",
           type: "object",
+
           fields: [
             {
               title: "Name",
@@ -63,6 +64,27 @@ export const Props = defineType({
               title: "isRef",
               name: "ref",
               type: "boolean",
+            },
+            {
+              title: "return",
+              name: "return",
+              type: "string",
+            },
+            {
+              title: "Example",
+              name: "example",
+              type: "string",
+            },
+            {
+              title: "Params",
+              name: "params",
+              type: "array",
+              of: [{ type: "string" }],
+            },
+            {
+              title: "Deprecated",
+              name: "deprecated",
+              type: "string",
             },
           ],
         },

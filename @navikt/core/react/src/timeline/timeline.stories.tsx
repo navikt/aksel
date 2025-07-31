@@ -1,13 +1,20 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import * as React from "react";
 import { useState } from "react";
-import { CheckmarkCircleFillIcon } from "@navikt/aksel-icons";
+import {
+  CheckmarkCircleFillIcon,
+  ExclamationmarkTriangleFillIcon,
+  XMarkOctagonFillIcon,
+} from "@navikt/aksel-icons";
+import { VStack } from "../layout/stack";
+import { Provider } from "../provider";
+import en from "../util/i18n/locales/en";
 import Timeline from "./Timeline";
 
 export default {
   title: "ds-react/Timeline",
   component: Timeline,
-  argTypes: {},
+  parameters: { chromatic: { disable: true } },
 } satisfies Meta<typeof Timeline>;
 
 const DummyLabel = () => {
@@ -42,6 +49,7 @@ const row1 = [
     end: new Date("Mar 15 2022"),
     status: "danger",
     onSelectPeriod: () => console.info("PERIOD SELECTED!"),
+    icon: <XMarkOctagonFillIcon aria-hidden />,
     statusLabel: "Sykemeldt",
   },
   {
@@ -67,7 +75,7 @@ const row1 = [
     start: new Date("Jul 1 2022"),
     end: new Date("Jul 31 2022"),
     status: "warning",
-    icon: <CheckmarkCircleFillIcon aria-hidden />,
+    icon: <ExclamationmarkTriangleFillIcon aria-hidden />,
     onSelectPeriod: () => console.info("PERIOD SELECTED!"),
     statusLabel: "Sykemeldt",
   },
@@ -76,7 +84,7 @@ const row1 = [
     start: new Date("Aug 1 2022"),
     end: new Date("Aug 30 2022"),
     status: "warning",
-    icon: <CheckmarkCircleFillIcon aria-hidden />,
+    icon: <ExclamationmarkTriangleFillIcon aria-hidden />,
     statusLabel: "Sykemeldt",
   },
 ];
@@ -88,7 +96,7 @@ const row2 = [
     end: new Date("May 25 2022"),
     status: "warning",
     onSelectPeriod: () => console.info("PERIOD SELECTED!"),
-    icon: <CheckmarkCircleFillIcon aria-hidden />,
+    icon: <ExclamationmarkTriangleFillIcon aria-hidden />,
     children: <DummyLabel />,
   },
   {
@@ -102,10 +110,10 @@ const row2 = [
   },
 ];
 
-export const Default = () => {
+export const Default: StoryFn = (props) => {
   return (
     <div style={{ width: "80vw" }}>
-      <Timeline>
+      <Timeline {...props}>
         <Timeline.Row
           label="Row 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
@@ -142,8 +150,22 @@ export const Default = () => {
     </div>
   );
 };
+Default.argTypes = {
+  direction: {
+    options: ["left", "right"],
+    control: { type: "select" },
+  },
+};
 
-export const WithPins = () => {
+export const English: StoryFn = () => {
+  return (
+    <Provider locale={en}>
+      <Default />
+    </Provider>
+  );
+};
+
+export const WithPins: StoryFn = () => {
   return (
     <div style={{ width: "80vw" }}>
       <Timeline>
@@ -183,7 +205,7 @@ export const WithPins = () => {
           })}
         </Timeline.Row>
       </Timeline>
-      <div style={{ height: "8rem" }} />
+      <div style={{ height: "6rem" }} />
       <Timeline>
         <Timeline.Pin date={new Date("Apr 15 2022")}>Pin 1</Timeline.Pin>
         <Timeline.Pin date={new Date("Jun 12 2022")}>Pin 2</Timeline.Pin>
@@ -257,7 +279,7 @@ export const WithPins = () => {
   );
 };
 
-export const WithZoom = () => {
+export const WithZoom: StoryFn = () => {
   return (
     <div style={{ width: "80vw" }}>
       <Timeline>
@@ -303,7 +325,7 @@ export const WithZoom = () => {
   );
 };
 
-export const ActivePeriod = () => {
+export const ActivePeriod: StoryFn = () => {
   const [activePeriod, setActivePeriod] = useState(row1[0]);
 
   return (
@@ -364,6 +386,7 @@ export const ActivePeriod = () => {
             end={new Date("Aug 20 2022")}
             status="info"
             icon={<CheckmarkCircleFillIcon aria-hidden />}
+            placement="bottom"
           />
         </Timeline.Row>
       </Timeline>
@@ -371,36 +394,45 @@ export const ActivePeriod = () => {
   );
 };
 
-export const WithDayLabels = () => {
+export const WithDayLabels: StoryFn = () => {
+  const component = (
+    <Timeline>
+      <Timeline.Row
+        label="Row 1"
+        icon={<CheckmarkCircleFillIcon aria-hidden />}
+      >
+        <Timeline.Period
+          start={new Date("Feb 4 2022")}
+          end={new Date("Feb 13 2022")}
+          status="success"
+        />
+      </Timeline.Row>
+      <Timeline.Row
+        label="Row 2"
+        icon={<CheckmarkCircleFillIcon aria-hidden />}
+      >
+        <Timeline.Period
+          start={new Date("Feb 17 2022")}
+          end={new Date("Feb 22 2022")}
+          status="warning"
+        />
+      </Timeline.Row>
+    </Timeline>
+  );
+
   return (
-    <div style={{ width: "80vw" }}>
-      <Timeline>
-        <Timeline.Row
-          label="Row 1"
-          icon={<CheckmarkCircleFillIcon aria-hidden />}
-        >
-          <Timeline.Period
-            start={new Date("Feb 4 2022")}
-            end={new Date("Feb 13 2022")}
-            status="success"
-          />
-        </Timeline.Row>
-        <Timeline.Row
-          label="Row 2"
-          icon={<CheckmarkCircleFillIcon aria-hidden />}
-        >
-          <Timeline.Period
-            start={new Date("Feb 17 2022")}
-            end={new Date("Feb 22 2022")}
-            status="warning"
-          />
-        </Timeline.Row>
-      </Timeline>
-    </div>
+    <VStack gap="8" width="80vw">
+      {component}
+
+      <div>
+        <h3>EN:</h3>
+        <Provider locale={en}>{component}</Provider>
+      </div>
+    </VStack>
   );
 };
 
-export const WithYearLabels = () => {
+export const WithYearLabels: StoryFn = () => {
   return (
     <div style={{ width: "80vw" }}>
       <Timeline>
@@ -429,7 +461,7 @@ export const WithYearLabels = () => {
   );
 };
 
-export const ContentDemo = () => {
+export const ContentDemo: StoryFn = () => {
   const [activePeriod, setActivePeriod] = useState<any>(undefined);
 
   return (
@@ -513,3 +545,22 @@ export const ContentDemo = () => {
     </div>
   );
 };
+
+export const Chromatic = () => (
+  <>
+    <Default />
+    <h2>English</h2>
+    <English />
+    <h2>WithPins</h2>
+    <WithPins />
+    <h2>WithZoom</h2>
+    <WithZoom />
+    <h2 style={{ clear: "right" }}>ActivePeriod</h2>
+    <ActivePeriod />
+    <h2>WithDayLabels</h2>
+    <WithDayLabels />
+    <h2>WithYearLabels</h2>
+    <WithYearLabels />
+  </>
+);
+Chromatic.parameters = { chromatic: { disable: false } };

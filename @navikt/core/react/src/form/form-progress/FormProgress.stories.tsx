@@ -1,7 +1,8 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
 import VStack from "../../layout/stack/VStack";
-import UNSAFE_AkselLanguageProvider from "../../provider/i18n/LanguageProvider";
+import { Provider } from "../../provider";
+import en from "../../util/i18n/locales/en";
 import FormProgress, { FormProgressProps } from "./FormProgress";
 
 export default {
@@ -27,7 +28,7 @@ export const Default: StoryFn<ControllableProps> = (props) => (
         Saksopplysninger
       </FormProgress.Step>
       <FormProgress.Step interactive={false}>
-        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
       </FormProgress.Step>
       <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
       <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
@@ -41,14 +42,12 @@ Default.args = { activeStep: 2, totalSteps: 7, interactiveSteps: true };
 export const ProvidedTranslations: StoryFn = () => {
   const translations = {
     FormProgress: {
-      step: "Step {activeStep} of {totalSteps}",
-      showAllSteps: "Show all steps",
-      hideAllSteps: "Hide all steps",
+      step: "Step {activeStep}/{totalSteps}",
     },
   };
 
   return (
-    <UNSAFE_AkselLanguageProvider translations={translations}>
+    <Provider locale={en} translations={translations}>
       <FormProgress activeStep={2} totalSteps={7} interactiveSteps>
         <FormProgress.Step href="#" completed>
           Start søknad
@@ -58,19 +57,19 @@ export const ProvidedTranslations: StoryFn = () => {
           Saksopplysninger
         </FormProgress.Step>
         <FormProgress.Step interactive={false}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </FormProgress.Step>
         <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
         <FormProgress.Step href="#">Innsending</FormProgress.Step>
       </FormProgress>
-    </UNSAFE_AkselLanguageProvider>
+    </Provider>
   );
 };
 
 export const DefaultTranslations: StoryFn = () => {
   return (
-    <UNSAFE_AkselLanguageProvider>
+    <Provider>
       <FormProgress activeStep={2} totalSteps={7} interactiveSteps>
         <FormProgress.Step href="#" completed>
           Start søknad
@@ -80,22 +79,22 @@ export const DefaultTranslations: StoryFn = () => {
           Saksopplysninger
         </FormProgress.Step>
         <FormProgress.Step interactive={false}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </FormProgress.Step>
         <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
         <FormProgress.Step href="#">Innsending</FormProgress.Step>
       </FormProgress>
-    </UNSAFE_AkselLanguageProvider>
+    </Provider>
   );
 };
 
 export const ComponentTranslations: StoryFn = () => {
   const globalTranslations = {
     FormProgress: {
-      step: "Step {activeStep} of {totalSteps}",
-      showAllSteps: "Show all steps",
-      hideAllSteps: "Hide all steps",
+      step: "Step {activeStep}/{totalSteps}",
+      showAllSteps: "Show all",
+      hideAllSteps: "Hide all",
     },
   };
   const translations = {
@@ -104,7 +103,7 @@ export const ComponentTranslations: StoryFn = () => {
     hideAllSteps: "Fela öll skref",
   };
   return (
-    <UNSAFE_AkselLanguageProvider translations={globalTranslations}>
+    <Provider locale={en} translations={globalTranslations}>
       <FormProgress
         translations={translations}
         activeStep={2}
@@ -119,13 +118,13 @@ export const ComponentTranslations: StoryFn = () => {
           Saksopplysninger
         </FormProgress.Step>
         <FormProgress.Step interactive={false}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </FormProgress.Step>
         <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
         <FormProgress.Step href="#">Innsending</FormProgress.Step>
       </FormProgress>
-    </UNSAFE_AkselLanguageProvider>
+    </Provider>
   );
 };
 
@@ -152,6 +151,26 @@ export const Controlled: StoryFn = () => {
   );
 };
 
+export const ColorRole: StoryFn = () => (
+  <div style={{ minHeight: 700 }} data-color="brand-magenta">
+    <FormProgress totalSteps={7} activeStep={2} open>
+      <FormProgress.Step href="#" completed>
+        Start søknad
+      </FormProgress.Step>
+      <FormProgress.Step href="#">Personopplysninger</FormProgress.Step>
+      <FormProgress.Step interactive={false}>
+        Saksopplysninger
+      </FormProgress.Step>
+      <FormProgress.Step interactive={false}>
+        Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
+      </FormProgress.Step>
+      <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
+      <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
+      <FormProgress.Step href="#">Innsending</FormProgress.Step>
+    </FormProgress>
+  </div>
+);
+
 export const Chromatic: StoryFn = () => (
   <VStack gap="10">
     <div>
@@ -159,6 +178,9 @@ export const Chromatic: StoryFn = () => (
     </div>
     <div>
       <Controlled />
+    </div>
+    <div>
+      <ColorRole />
     </div>
   </VStack>
 );

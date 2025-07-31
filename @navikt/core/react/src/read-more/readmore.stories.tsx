@@ -37,6 +37,13 @@ export const Default: Story = {
   },
 };
 
+export const Large: Story = {
+  args: {
+    ...Default.args,
+    size: "large",
+  },
+};
+
 export const Small: Story = {
   args: {
     ...Default.args,
@@ -58,8 +65,44 @@ export const Open: Story = {
   },
 };
 
+export const BrandVolumeLow: Story = {
+  render: () => (
+    <VStack gap="4">
+      <ReadMore size="large" header={Default.args?.header}>
+        {Content}
+      </ReadMore>
+      <ReadMore header={Default.args?.header}>{Content}</ReadMore>
+      <ReadMore size="small" header={Default.args?.header}>
+        {Content}
+      </ReadMore>
+    </VStack>
+  ),
+  args: {
+    ...Default.args,
+    open: true,
+  },
+};
+
+export const ColorRole: Story = {
+  render: () => (
+    <VStack gap="4" data-color="brand-magenta">
+      <ReadMore size="large" header={Default.args?.header}>
+        {Content}
+      </ReadMore>
+      <ReadMore header={Default.args?.header}>{Content}</ReadMore>
+      <ReadMore size="small" header={Default.args?.header}>
+        {Content}
+      </ReadMore>
+    </VStack>
+  ),
+  args: {
+    ...Default.args,
+    open: true,
+  },
+};
+
 export const Chromatic: Story = {
-  render: () => {
+  render: (...props) => {
     return (
       <VStack gap="4">
         <div>
@@ -73,6 +116,11 @@ export const Chromatic: Story = {
           <ReadMore {...Small.args} />
         </div>
         <div>
+          <h2>Large</h2>
+          {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
+          <ReadMore {...Large.args} />
+        </div>
+        <div>
           <h2>DefaultOpen</h2>
           {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
           <ReadMore {...DefaultOpen.args} />
@@ -81,6 +129,14 @@ export const Chromatic: Story = {
           <h2>Controlled open</h2>
           {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
           <ReadMore {...Open.args} />
+        </div>
+        <div>
+          <h2>BrandVolumeLow</h2>
+          {BrandVolumeLow?.render?.(...props)}
+        </div>
+        <div>
+          <h2>ColorRole</h2>
+          {ColorRole?.render?.(...props)}
         </div>
       </VStack>
     );

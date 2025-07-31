@@ -7,7 +7,7 @@ const OBJECT_NOTATION_MATCHER = /(\w+)/g;
 
 export function get(
   keypath: string | string[],
-  ...objs: (PartialTranslations | undefined)[]
+  objs: (PartialTranslations | undefined)[],
 ) {
   const keys = Array.isArray(keypath) ? keypath : getKeypath(keypath);
 
@@ -32,7 +32,7 @@ export function get(
   }
 
   throw new Error(
-    "Error translating key. The keypath does not resolve to a string.",
+    `Error translating key. Keypath '${keypath}' does not resolve to a string.`,
   );
 }
 

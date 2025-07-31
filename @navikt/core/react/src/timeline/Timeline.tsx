@@ -1,5 +1,6 @@
 import { endOfDay, isSameDay, startOfDay } from "date-fns";
 import React, { forwardRef, useMemo, useRef, useState } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { AxisLabels } from "./AxisLabels";
 import Pin, { PinType } from "./Pin";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
@@ -39,6 +40,7 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Templates for label texts. The templates are passed to the date-fns `format` function.
    * Defaults to { day: "dd.MM", month: "MMM yy", year: "yyyy" }.
+   * @deprecated Use `<Provider />`-component
    */
   axisLabelTemplates?: AxisLabelTemplates;
 }
@@ -94,6 +96,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const isMultipleRows = Array.isArray(children);
 
     const firstFocusabled = useRef<
@@ -212,7 +215,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         }}
       >
         <div {...rest} ref={ref}>
-          <div className="navds-timeline">
+          <div className={cn("navds-timeline")}>
             <AxisLabels templates={axisLabelTemplates} />
 
             {pins.map((PinChild, i) => (

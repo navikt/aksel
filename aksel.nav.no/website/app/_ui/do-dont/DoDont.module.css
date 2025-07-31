@@ -1,0 +1,32 @@
+.doDont {
+  border: 1px solid var(--ax-border-default);
+  border-radius: var(--ax-border-radius-xlarge);
+  height: fit-content;
+}
+
+.doDontNotch {
+  padding: var(--ax-space-12) var(--ax-space-16);
+  color: var(--ax-text-subtle);
+  background-color: var(--ax-bg-moderate);
+  box-shadow: 0 1px 0 0 var(--ax-border-subtleA);
+  border-radius: calc(var(--ax-border-radius-xlarge) - 1px) calc(var(--ax-border-radius-xlarge) - 1px) 0 0;
+  display: flex;
+  gap: var(--ax-space-6);
+  position: relative;
+  z-index: 1;
+}
+
+.doDontImage {
+  width: 100%;
+  position: relative;
+  background-color: var(--ax-bg-default);
+}
+
+.doDontDescription {
+  padding: var(--ax-space-12) var(--ax-space-16);
+  color: var(--ax-text-neutral);
+  background-color: var(--ax-bg-neutral-softA);
+  border-radius: 0 0 calc(var(--ax-border-radius-xlarge) - 1px) calc(var(--ax-border-radius-xlarge) - 1px);
+  box-shadow: 0 -1px 0 0 var(--ax-border-neutral-subtleA);
+  position: relative;
+}

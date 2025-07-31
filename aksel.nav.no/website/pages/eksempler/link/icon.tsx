@@ -6,7 +6,7 @@ const Example = () => {
   return (
     <BodyLong>
       Officia incididunt{" "}
-      <Link href="#">
+      <Link href="/eksempel">
         lenke til ny side
         <PrinterSmallIcon title="Skriv ut dokument" />
       </Link>{" "}

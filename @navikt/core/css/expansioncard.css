@@ -121,6 +121,7 @@
   min-width: 3rem;
   font-size: 1.5rem;
   align-self: flex-start;
+  padding: 0;
 }
 
 .navds-expansioncard--small > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-button) {
@@ -171,6 +172,9 @@
   height: 100%;
   width: 100%;
   cursor: pointer;
+
+  /* Avoid @media print from styling after-element */
+  opacity: 0;
 }
 
 /*************************

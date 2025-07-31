@@ -1,12 +1,25 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../theme/Theme";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util";
+import { useI18n } from "../util/i18n/i18n.hooks";
 import PaginationItem, {
   PaginationItemProps,
   PaginationItemType,
 } from "./PaginationItem";
+
+interface RenderItemProps
+  extends Pick<
+    PaginationItemProps,
+    "className" | "disabled" | "selected" | "icon" | "iconPosition"
+  > {
+  children: React.ReactNode;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  page: number;
+  size: Exclude<PaginationProps["size"], undefined>;
+}
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -45,9 +58,9 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   prevNextTexts?: boolean;
   /**
    * Override pagination item rendering.
-   * @default (item: PaginationItemProps) => <PaginationItem {...item} />
+   * @default PaginationItem
    */
-  renderItem?: (item: PaginationItemProps) => ReturnType<React.FC>;
+  renderItem?: (item: RenderItemProps) => ReturnType<React.FC>;
   /**
    * Pagination heading. We recommend adding heading instead of `aria-label` to help assistive technologies with an extra navigation-stop.
    */
@@ -101,6 +114,12 @@ export const getSteps = ({
 };
 
 /**
+ * TODO: These classes can be removed in darkside update
+ * - navds-pagination--prev-next--with-text
+ * - navds-pagination__prev-next
+ */
+
+/**
  * A component that displays pagination controls.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/pagination)
@@ -110,7 +129,7 @@ export const getSteps = ({
  * ```jsx
  * <Pagination
  *   page={pageState}
- *   onPageChange={(x) => setPageState(x)}
+ *   onPageChange={setPageState}
  *   count={9}
  *   boundaryCount={1}
  *   siblingCount={1}
@@ -130,14 +149,15 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       prevNextTexts = false,
       srHeading,
       "aria-labelledby": ariaLabelledBy,
-      renderItem: Item = (item: PaginationItemProps) => (
-        <PaginationItem {...item} />
-      ),
+      renderItem: Item = PaginationItem,
+      "data-color": color,
       ...rest
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const headingId = useId();
+    const translate = useI18n("Pagination");
 
     if (page < 1) {
       console.error("page cannot be less than 1");
@@ -160,10 +180,11 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       <nav
         ref={ref}
         {...rest}
+        data-color={color}
         aria-labelledby={
           srHeading ? cl(headingId, ariaLabelledBy) : ariaLabelledBy
         }
-        className={cl(
+        className={cn(
           "navds-pagination",
           `navds-pagination--${size}`,
           className,
@@ -179,10 +200,11 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             {srHeading.text}
           </Heading>
         )}
-        <ul className="navds-pagination__list">
+        <ul className={cn("navds-pagination__list")}>
           <li>
             <Item
-              className={cl("navds-pagination__prev-next", {
+              data-color={color}
+              className={cn("navds-pagination__prev-next", {
                 "navds-pagination--invisible": page === 1,
                 "navds-pagination--prev-next--with-text": prevNextTexts,
               })}
@@ -194,18 +216,21 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 <ChevronLeftIcon
                   {...(prevNextTexts
                     ? { "aria-hidden": true }
-                    : { title: "Forrige" })}
+                    : { title: translate("previous") })}
                 />
               }
             >
-              {prevNextTexts && `Forrige`}
+              {prevNextTexts && translate("previous")}
             </Item>
           </li>
           {getSteps({ page, count, siblingCount, boundaryCount }).map(
             (step, i) => {
               const n = Number(step);
               return Number.isNaN(n) ? (
-                <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
+                <li
+                  className={cn("navds-pagination__ellipsis")}
+                  key={`${step}${i}`}
+                >
                   <BodyShort
                     size={size === "xsmall" ? "small" : size}
                     as="span"
@@ -216,6 +241,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               ) : (
                 <li key={step}>
                   <Item
+                    data-color={color}
+                    /* Remember to update RenderItemProps if you make changes to props sent into Item */
                     onClick={() => onPageChange?.(n)}
                     selected={page === n}
                     page={n}
@@ -229,7 +256,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           )}
           <li>
             <Item
-              className={cl("navds-pagination__prev-next", {
+              data-color={color}
+              className={cn("navds-pagination__prev-next", {
                 "navds-pagination--invisible": page === count,
                 "navds-pagination--prev-next--with-text": prevNextTexts,
               })}
@@ -241,12 +269,12 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 <ChevronRightIcon
                   {...(prevNextTexts
                     ? { "aria-hidden": true }
-                    : { title: "Neste" })}
+                    : { title: translate("next") })}
                 />
               }
               iconPosition="right"
             >
-              {prevNextTexts && `Neste`}
+              {prevNextTexts && translate("next")}
             </Item>
           </li>
         </ul>

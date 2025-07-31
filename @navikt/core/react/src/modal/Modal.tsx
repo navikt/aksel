@@ -1,9 +1,9 @@
 import { useFloatingPortalNode } from "@floating-ui/react";
-import cl from "clsx";
-import React, { forwardRef, useContext, useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { DateContext } from "../date/context";
+import { useDateInputContext } from "../date/Date.Input";
 import { useProvider } from "../provider/Provider";
+import { useRenameCSS } from "../theme/Theme";
 import { Detail, Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
@@ -20,8 +20,6 @@ import {
 } from "./ModalUtils";
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
 import { ModalProps } from "./types";
-
-const polyfillClassName = "navds-modal--polyfilled";
 
 interface ModalComponent
   extends React.ForwardRefExoticComponent<
@@ -99,6 +97,10 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     }: ModalProps,
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+
+    const polyfillClassName = useRef(cn("navds-modal--polyfilled"));
+
     const modalRef = useRef<HTMLDialogElement>(null);
     const mergedRef = useMergeRefs(modalRef, ref);
 
@@ -106,7 +108,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const rootElement = useProvider()?.rootElement;
     const portalNode = useFloatingPortalNode({ root: rootElement });
 
-    const dateContext = useContext(DateContext);
+    const dateContext = useDateInputContext(false);
     const isNested = useModalContext(false) !== undefined;
     if (isNested && !dateContext) {
       console.error("Modals should not be nested");
@@ -120,7 +122,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         dialogPolyfill.registerDialog(modalRef.current);
 
         // Force-add the "polyfilled" class in case of SSR (needPolyfill will always be false on the server)
-        modalRef.current.classList.add(polyfillClassName);
+        modalRef.current.classList.add(polyfillClassName.current);
       }
       // We set autofocus on the dialog element to prevent the default behavior where first focusable element gets focus when modal is opened.
       // This is mainly to fix an edge case where having a Tooltip as the first focusable element would make it activate when you open the modal.
@@ -147,8 +149,8 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
 
-    const mergedClassName = cl("navds-modal", className, {
-      [polyfillClassName]: needPolyfill,
+    const mergedClassName = cn("navds-modal", className, {
+      [polyfillClassName.current]: needPolyfill,
       "navds-modal--autowidth": !width,
       [`navds-modal--${width}`]: isWidthPreset,
       "navds-modal--top": placement === "top" && !needPolyfill,
@@ -238,7 +240,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
           {header && (
             <ModalHeader>
               {header.label && (
-                <Detail className="navds-modal__label">{header.label}</Detail>
+                <Detail className={cn("navds-modal__label")}>
+                  {header.label}
+                </Detail>
               )}
               <Heading
                 size={header.size ?? "medium"}
@@ -246,7 +250,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
                 id={ariaLabelId}
               >
                 {header.icon && (
-                  <span className="navds-modal__header-icon">
+                  <span className={cn("navds-modal__header-icon")}>
                     {header.icon}
                   </span>
                 )}

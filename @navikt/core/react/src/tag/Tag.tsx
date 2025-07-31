@@ -1,5 +1,6 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { BodyShort } from "../typography";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
@@ -32,6 +33,14 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
     | "alt3"
     | "alt3-filled"
     | "alt3-moderate";
+
+  /* Temp hide these until naming is resolved */
+  // | "meta-purple"
+  // | "meta-purple-filled"
+  // | "meta-purple-moderate"
+  // | "meta-lime"
+  // | "meta-lime-filled"
+  // | "meta-lime-moderate";
   /**
    * @default "medium"
    */
@@ -54,23 +63,80 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
  * ```
  */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
-  ({ children, className, variant, size = "medium", icon, ...rest }, ref) => (
-    <BodyShort
-      {...rest}
-      ref={ref}
-      as="span"
-      size={size === "medium" ? "medium" : "small"}
-      className={cl(
-        "navds-tag",
-        className,
-        `navds-tag--${variant}`,
-        `navds-tag--${size}`,
-      )}
-    >
-      {icon && <span className="navds-tag__icon--left">{icon}</span>}
-      {children}
-    </BodyShort>
-  ),
+  (
+    {
+      children,
+      className,
+      variant,
+      size = "medium",
+      icon,
+      "data-color": color,
+      ...rest
+    },
+    ref,
+  ) => {
+    const { cn } = useRenameCSS();
+    const filledVariant = variant?.endsWith("-filled") && "strong";
+    const moderateVariant = variant?.endsWith("-moderate") && "moderate";
+
+    return (
+      <BodyShort
+        data-color={color ?? variantToColor(variant)}
+        data-variant={filledVariant || moderateVariant || "outline"}
+        {...rest}
+        ref={ref}
+        as="span"
+        size={size === "medium" ? "medium" : "small"}
+        className={cn(
+          "navds-tag",
+          className,
+          `navds-tag--${variant}`,
+          `navds-tag--${size}`,
+        )}
+      >
+        {icon && <span className={cn("navds-tag__icon--left")}>{icon}</span>}
+        {children}
+      </BodyShort>
+    );
+  },
 );
+
+function variantToColor(variant: TagProps["variant"]): AkselColor {
+  switch (variant) {
+    case "warning":
+    case "warning-filled":
+    case "warning-moderate":
+      return "warning";
+    case "error":
+    case "error-filled":
+    case "error-moderate":
+      return "danger";
+    case "info":
+    case "info-filled":
+    case "info-moderate":
+    case "alt3":
+    case "alt3-filled":
+    case "alt3-moderate":
+      return "info";
+    case "success":
+    case "success-filled":
+    case "success-moderate":
+      return "success";
+    case "neutral":
+    case "neutral-filled":
+    case "neutral-moderate":
+      return "neutral";
+    case "alt1":
+    case "alt1-filled":
+    case "alt1-moderate":
+      return "meta-purple";
+    case "alt2":
+    case "alt2-filled":
+    case "alt2-moderate":
+      return "meta-lime";
+    default:
+      return "neutral";
+  }
+}
 
 export default Tag;

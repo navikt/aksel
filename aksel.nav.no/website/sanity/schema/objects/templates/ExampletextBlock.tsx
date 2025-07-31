@@ -1,6 +1,5 @@
 import { defineField, defineType } from "sanity";
 import { Chat2Icon } from "@navikt/aksel-icons";
-import AkselExampletextBlock from "@/cms/exampletext-block/ExampletextBlock";
 import { ExpansionCardT } from "../shared/expansion-card";
 
 type ExampletextBlockT = {
@@ -52,23 +51,14 @@ export const ExampletextBlock = defineType({
       type: "text",
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      title: "Bruk ReadMore",
-      name: "readMore",
-      type: "boolean",
-    }),
   ],
   preview: {
     select: {
       title: "title",
       text: "text",
     },
-  },
-  components: {
-    preview: (values) => (
-      <AkselExampletextBlock
-        node={{ ...values, title: values.title?.toString() }}
-      />
-    ),
+    prepare: ({ title, text }) => {
+      return { title, subtitle: "Eksempel/Standard tekst", description: text };
+    },
   },
 });

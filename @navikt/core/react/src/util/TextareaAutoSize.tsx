@@ -167,19 +167,23 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         });
       };
 
-      const handleResize = debounce(() => {
-        renders.current = 0;
+      const handleResize = debounce(
+        () => {
+          renders.current = 0;
 
-        if (inputRef.current?.style.height || inputRef.current?.style.width) {
-          // User has resized manually
-          if (inputRef.current?.style.overflow === "hidden") {
-            setState((oldState) => ({ ...oldState, overflow: false })); // The state update isn't important, we just need to trigger a rerender
+          if (inputRef.current?.style.height || inputRef.current?.style.width) {
+            // User has resized manually
+            if (inputRef.current?.style.overflow === "hidden") {
+              setState((oldState) => ({ ...oldState, overflow: false })); // The state update isn't important, we just need to trigger a rerender
+            }
+            return;
           }
-          return;
-        }
 
-        syncHeightWithFlushSync();
-      });
+          syncHeightWithFlushSync();
+        },
+        166,
+        true,
+      );
 
       const input = inputRef.current!;
       const containerWindow = ownerWindow(input);
@@ -224,6 +228,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
 
     const mainStyle: React.CSSProperties = {
       "--__ac-textarea-height": state.outerHeightStyle + "px",
+      "--__axc-textarea-height": state.outerHeightStyle + "px",
       // Need a large enough difference to allow scrolling.
       // This prevents infinite rendering loop.
       overflow:

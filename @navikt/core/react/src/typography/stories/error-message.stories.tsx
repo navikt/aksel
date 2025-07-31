@@ -93,6 +93,19 @@ export const OverrideTag: Story = {
   },
 };
 
+export const WithIcon: Story = {
+  render: () => (
+    <VStack gap="2">
+      <ErrorMessage size="medium" showIcon>
+        {lorem}
+      </ErrorMessage>
+      <ErrorMessage size="small" showIcon>
+        {lorem}
+      </ErrorMessage>
+    </VStack>
+  ),
+};
+
 export const Chromatic: Story = {
   render: (...props) => (
     <div>
@@ -113,6 +126,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Override Tag</h2>
         {OverrideTag.render?.(...props)}
+      </div>
+      <div>
+        <h2>With Icon</h2>
+        {WithIcon.render?.(...props)}
       </div>
     </div>
   ),

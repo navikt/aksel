@@ -1,37 +1,21 @@
-import { StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { Accordion, AccordionProps } from ".";
-import AccordionContent from "./AccordionContent";
-import AccordionHeader from "./AccordionHeader";
-import AccordionItem from "./AccordionItem";
 
 export default {
   title: "ds-react/Accordion",
   component: Accordion,
-  subcomponents: {
-    AccordionItem,
-    AccordionContent,
-    AccordionHeader,
-  },
   parameters: {
     chromatic: { disable: true },
   },
   decorators: [
     (Story) => (
-      <div
-        style={{
-          width: "600px",
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-        }}
-      >
+      <div style={{ width: "500px", minHeight: "100vh" }}>
         <Story />
       </div>
     ),
   ],
-};
+} satisfies Meta<typeof Accordion>;
 
 type Story = StoryObj<typeof Accordion>;
 
@@ -60,46 +44,21 @@ const SmallContent = () => (
   </Accordion.Content>
 );
 
-const Item = (props) => {
-  const [open, setOpen] = useState(false);
-
-  if (props.defaultOpen) {
-    return (
-      <Accordion.Item
-        defaultOpen={props.defaultOpen}
-        onOpenChange={console.log}
-      >
-        <Accordion.Header>Accordion header text</Accordion.Header>
-        <SmallContent />
-      </Accordion.Item>
-    );
-  }
-
-  return props.controlled ? (
-    <Accordion.Item open={open} onOpenChange={console.log}>
-      <Accordion.Header onClick={() => setOpen(!open)}>
-        Accordion header text
-      </Accordion.Header>
-      <Content />
-    </Accordion.Item>
-  ) : (
-    <Accordion.Item onOpenChange={console.log}>
-      <Accordion.Header>Accordion header text</Accordion.Header>
-      <Content />
-    </Accordion.Item>
-  );
-};
+const Item = ({ defaultOpen = false }) => (
+  <Accordion.Item defaultOpen={defaultOpen} onOpenChange={console.log}>
+    <Accordion.Header>Accordion header text</Accordion.Header>
+    {defaultOpen ? <SmallContent /> : <Content />}
+  </Accordion.Item>
+);
 
 export const Controls: Story = {
-  render: ({ ...props }) => {
+  render: (props) => {
     return (
-      <div style={{ width: 500 }}>
-        <Accordion {...props}>
-          {[...Array(4)].map((_, y) => (
-            <Item key={y} {...props} />
-          ))}
-        </Accordion>
-      </div>
+      <Accordion {...props}>
+        {[...Array(4)].map((_, y) => (
+          <Item key={y} />
+        ))}
+      </Accordion>
     );
   },
   argTypes: {
@@ -128,13 +87,11 @@ export const Controls: Story = {
 export const DefaultOpen: Story = {
   render: () => {
     return (
-      <div style={{ width: 500 }}>
-        <Accordion>
-          {[...Array(4)].map((_, y) => (
-            <Item key={y} defaultOpen={y === 2} />
-          ))}
-        </Accordion>
-      </div>
+      <Accordion>
+        {[...Array(4)].map((_, y) => (
+          <Item key={y} defaultOpen={y === 2} />
+        ))}
+      </Accordion>
     );
   },
 };
@@ -142,7 +99,7 @@ export const DefaultOpen: Story = {
 export const Variants: Story = {
   render: () => {
     return (
-      <div style={{ width: 500 }} className="colgap">
+      <div className="colgap">
         <h3>Default</h3>
         <Accordion>
           {[...Array(2)].map((_, y) => (
@@ -166,22 +123,20 @@ export const ControlledState: Story = {
     const [open2, setOpen2] = useState(false);
 
     return (
-      <div style={{ width: 500 }}>
-        <Accordion>
-          <Accordion.Item open={open}>
-            <Accordion.Header onClick={() => setOpen(!open)}>
-              Accordion header text
-            </Accordion.Header>
-            <Content />
-          </Accordion.Item>
-          <Accordion.Item open={open2}>
-            <Accordion.Header onClick={() => setOpen2(!open2)}>
-              Accordion header text
-            </Accordion.Header>
-            <Content />
-          </Accordion.Item>
-        </Accordion>
-      </div>
+      <Accordion>
+        <Accordion.Item open={open}>
+          <Accordion.Header onClick={() => setOpen(!open)}>
+            Accordion header text
+          </Accordion.Header>
+          <Content />
+        </Accordion.Item>
+        <Accordion.Item open={open2}>
+          <Accordion.Header onClick={() => setOpen2(!open2)}>
+            Accordion header text
+          </Accordion.Header>
+          <Content />
+        </Accordion.Item>
+      </Accordion>
     );
   },
 };
@@ -216,7 +171,7 @@ const headingSizes: AccordionProps["headingSize"][] = [
 
 export const Size: Story = {
   render: () => (
-    <div style={{ width: 500 }} className="colgap">
+    <div className="colgap">
       {sizes.map((size) => (
         <SingleHeaderAccordion key={size} size={size} />
       ))}
@@ -226,7 +181,7 @@ export const Size: Story = {
 
 export const HeadingSize: Story = {
   render: () => (
-    <div style={{ width: 500 }} className="colgap">
+    <div className="colgap">
       {headingSizes.map((size) => (
         <SingleHeaderAccordion key={size} headingSize={size} />
       ))}
@@ -237,19 +192,38 @@ export const HeadingSize: Story = {
 export const Indent: Story = {
   render: () => {
     return (
-      <div style={{ width: 500 }} className="colgap">
-        <h3>No indent</h3>
+      <div className="colgap">
+        <h3>Indent</h3>
         <Accordion indent>
           {[...Array(2)].map((_, y) => (
             <Item key={y} defaultOpen />
           ))}
         </Accordion>
-        <h3>Indent</h3>
+        <h3>No indent</h3>
         <Accordion indent={false}>
           {[...Array(2)].map((_, y) => (
             <Item key={y} defaultOpen />
           ))}
         </Accordion>
+      </div>
+    );
+  },
+};
+
+export const ColorRole: Story = {
+  render: () => {
+    const items = [...Array(2)].map((_, i) => <Item key={i} />);
+    return (
+      <div className="colgap">
+        <h3>Default</h3>
+        <Accordion>{items}</Accordion>
+        <h3>Magenta</h3>
+        <h4>Magenta top level</h4>
+        <div data-color="brand-magenta">
+          <Accordion>{items}</Accordion>
+        </div>
+        <h4>Magenta component level</h4>
+        <Accordion data-color="brand-magenta">{items}</Accordion>
       </div>
     );
   },
@@ -277,6 +251,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Indent</h2>
         {Indent.render?.(...props)}
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        {ColorRole.render?.(...props)}
       </div>
     </div>
   ),

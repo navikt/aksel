@@ -12,13 +12,11 @@ const Example = () => {
         activeStep={2}
         interactive={false}
       >
-        <Stepper.Step href="#" completed>
-          Søknad mottatt
-        </Stepper.Step>
-        <Stepper.Step href="#">Behandling opprettet</Stepper.Step>
-        <Stepper.Step href="#">Forslag til vedtak</Stepper.Step>
-        <Stepper.Step href="#">Vedtak fattet</Stepper.Step>
-        <Stepper.Step href="#">Vedtak skrevet til Arena</Stepper.Step>
+        <Stepper.Step completed>Søknad mottatt</Stepper.Step>
+        <Stepper.Step>Behandling opprettet</Stepper.Step>
+        <Stepper.Step>Forslag til vedtak</Stepper.Step>
+        <Stepper.Step>Vedtak fattet</Stepper.Step>
+        <Stepper.Step>Vedtak skrevet til Arena</Stepper.Step>
       </Stepper>
     </>
   );

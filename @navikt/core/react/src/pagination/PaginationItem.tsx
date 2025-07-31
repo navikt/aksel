@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Button, ButtonProps } from "../button";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 
 export interface PaginationItemProps extends ButtonProps {
@@ -35,17 +35,23 @@ export const Item: PaginationItemType = forwardRef(
       selected = false,
       className,
       page,
+      "data-color": color,
       ...rest
     },
     ref,
   ) => {
+    const themeContext = useThemeInternal(false);
+    const { cn } = useRenameCSS();
+
     return (
       <Button
         as={Component}
-        variant="tertiary"
+        variant={themeContext ? "tertiary-neutral" : "tertiary"}
+        data-color={color}
         aria-current={selected}
+        data-pressed={selected}
         ref={ref}
-        className={cl("navds-pagination__item", className, {
+        className={cn("navds-pagination__item", className, {
           "navds-pagination__item--selected": selected,
         })}
         data-page={page}

@@ -1,0 +1,111 @@
+.aksel-chat {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--ax-space-12);
+  max-width: 40.75rem;
+
+  & .aksel-chat__bubble,
+  & .aksel-chat__avatar {
+    background-color: var(--ax-bg-moderateA);
+    border: 1px solid var(--ax-border-subtleA);
+  }
+
+  &[data-variant="subtle"] .aksel-chat__bubble,
+  &[data-variant="subtle"] .aksel-chat__avatar {
+    background-color: var(--ax-bg-softA);
+    border: 1px solid var(--ax-border-subtleA);
+  }
+
+  &[data-color="neutral"][data-variant="subtle"] .aksel-chat__bubble,
+  &[data-color="neutral"][data-variant="subtle"] .aksel-chat__avatar {
+    background-color: var(--ax-bg-raised);
+    border: 1px solid var(--ax-border-neutral-subtleA);
+  }
+}
+
+.aksel-chat--right {
+  flex-direction: row-reverse;
+
+  & .aksel-chat__bubble-wrapper {
+    align-items: flex-end;
+  }
+
+  & .aksel-chat__bubble {
+    border-radius: var(--ax-radius-12);
+    border-bottom-right-radius: var(--ax-radius-2);
+  }
+}
+
+/* ------------------------------- Chat avatar ------------------------------ */
+.aksel-chat__avatar {
+  align-items: center;
+  border-radius: var(--ax-radius-full);
+  color: var(--ax-text-neutral);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  overflow: hidden;
+  height: 2.5rem;
+  width: 2.5rem;
+  line-height: 2.5rem; /* Makes text properly vertically centered in Chrome */
+  font-size: 1.06rem;
+  letter-spacing: 0.024rem;
+
+  & svg {
+    align-self: center;
+    width: 100%;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+  }
+}
+
+/* ------------------------------- Chat bubble ------------------------------ */
+.aksel-chat__bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-12);
+}
+
+.aksel-chat__bubble {
+  padding: var(--ax-space-16) var(--ax-space-20);
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-8);
+  border-radius: var(--ax-radius-12);
+  border-bottom-left-radius: var(--ax-radius-2);
+}
+
+.aksel-chat--small .aksel-chat__bubble {
+  padding: var(--ax-space-12) var(--ax-space-16);
+}
+
+/* ------------------------------ Chat top text ----------------------------- */
+.aksel-chat__top-text {
+  color: var(--ax-text-neutral);
+  display: flex;
+  gap: var(--ax-space-8);
+  align-items: baseline;
+  font-weight: normal;
+  margin: 0;
+}
+
+.aksel-chat--right .aksel-chat__top-text {
+  align-self: flex-end;
+}
+
+.aksel-chat--top-text-left .aksel-chat__top-text {
+  align-self: flex-start;
+}
+
+.aksel-chat--top-text-right .aksel-chat__top-text {
+  align-self: flex-end;
+}
+
+.aksel-chat--left .aksel-chat__top-text--right {
+  align-self: flex-end;
+}
+
+.aksel-chat--right .aksel-chat__top-text--left {
+  align-self: flex-start;
+}

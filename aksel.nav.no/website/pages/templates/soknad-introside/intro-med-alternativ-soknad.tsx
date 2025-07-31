@@ -35,7 +35,7 @@ function Example() {
         <VStack as="main" gap="8">
           <Bleed
             marginInline={{ lg: "24" }}
-            data-aksel-template="form-intropage-v1"
+            data-aksel-template="form-intropage-v2"
           >
             <Stack
               gap="6"
@@ -47,7 +47,7 @@ function Example() {
                 <ApplicationPictogram />
               </Show>
               <VStack gap="1">
-                <BodyShort size="small">NAV 10-07.03 (om relevant)</BodyShort>
+                <BodyShort size="small">Nav 10-07.03 (om relevant)</BodyShort>
                 <Heading level="1" size="xlarge">
                   Søknad om [ytelse]
                 </Heading>
@@ -205,7 +205,7 @@ function Example() {
             </BodyLong>
             <Box paddingBlock="4 8">
               <Checkbox>
-                Jeg vil svare så godt jeg kan på spørsmålene i søknaden.
+                Jeg bekrefter at jeg vil svare så riktig som jeg kan.
               </Checkbox>
             </Box>
             <Button
@@ -218,7 +218,12 @@ function Example() {
           </div>
         </VStack>
       </Page.Block>
-      <Env />
+      <Env
+        languages={[
+          { locale: "nb", url: "https://www.nav.no" },
+          { locale: "en", url: "https://www.nav.no/en" },
+        ]}
+      />
     </Page>
   );
 }

@@ -1,13 +1,4 @@
 /**
-* Makes it easier for user to use FileItem in semantic lists
-*/
-.navds-file-upload :is(ul, li) {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/**
  * FileUpload.Dropzone
  */
 
@@ -163,6 +154,13 @@
 /**
  * FileUpload.Item
  */
+.navds-file-upload :is(ul, li),
+ul:has(> li.navds-file-item),
+li.navds-file-item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
 .navds-file-item__inner {
   outline: 1px solid var(--a-border-subtle);
@@ -195,11 +193,7 @@
 }
 
 .navds-file-item__file-info {
-  word-break: break-word;
-}
-
-.navds-file-item__button {
-  margin-left: auto;
+  overflow-wrap: anywhere;
 }
 
 .navds-file-item__error {

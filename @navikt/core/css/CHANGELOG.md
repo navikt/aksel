@@ -1,5 +1,294 @@
 # @navikt/ds-css
 
+## 7.25.1
+
+## 7.25.0
+
+### Minor Changes
+
+- FileUpload: Allow for custom buttons in FileUpload.Item. ([#3906](https://github.com/navikt/aksel/pull/3906))
+
+### Patch Changes
+
+- Table: Selected rows are now highlighted with outline. ([#3898](https://github.com/navikt/aksel/pull/3898))
+
+- Chat: Removed ol > li semantics, replaced with 'div'. ([#3904](https://github.com/navikt/aksel/pull/3904))
+
+## 7.24.0
+
+### Minor Changes
+
+- LinkCard: :tada: Added new component 'LinkCard'. ([#3883](https://github.com/navikt/aksel/pull/3883))
+
+- Table: :tada: Added prop 'stickyHeader', allowing header to remain sticky while scrolling in table. ([#3893](https://github.com/navikt/aksel/pull/3893))
+
+### Patch Changes
+
+- Forms: Added built-in scroll-margin to TextField, Textarea and Select. ([#3897](https://github.com/navikt/aksel/pull/3897))
+
+- Switch: Size='small' are now visually comparable to radio and checkbox in the same size. ([#3892](https://github.com/navikt/aksel/pull/3892))
+
+## 7.23.2
+
+### Patch Changes
+
+- Darkside: Outline Tag in high-contrast mode had wrong text-color. ([#3889](https://github.com/navikt/aksel/pull/3889))
+
+- Darkside: Update padding for all 'panel' type components. ([#3864](https://github.com/navikt/aksel/pull/3864))
+
+- Form components: Fix edge case where description container would take up space when empty ([#3866](https://github.com/navikt/aksel/pull/3866))
+
+## 7.23.1
+
+## 7.23.0
+
+### Minor Changes
+
+- Darkside: Renamed 'data-color-role' dynamic theme attribute to 'data-color'. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: Using attribute 'data-color' with one of the built-in colors from 'AkselColorRole' now allows re-coloring most components. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: All components has been updated to use 'data-color' attribute for coloring. As a side-effect, most component CSS is either updated or refactored. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+### Patch Changes
+
+- Tag: Outline-variant now uses bg-moderate, replacing bg-moderateA. ([#3865](https://github.com/navikt/aksel/pull/3865))
+
+- Darkside: Fix icon size in small Tabs ([#3850](https://github.com/navikt/aksel/pull/3850))
+
+- List: Fix issue with incorrect padding in Safari ([#3850](https://github.com/navikt/aksel/pull/3850))
+
+## 7.22.0
+
+### Minor Changes
+
+- Darkside: Components now use new `radius`-tokens, replacing `border-radius`-tokens. ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+## 7.21.1
+
+### Patch Changes
+
+- Timeline: Add focus-markings to Popover dialogs. ([#3768](https://github.com/navikt/aksel/pull/3768))
+
+## 7.21.0
+
+### Patch Changes
+
+- Darkside: Update Chips.Toggle hover-border. ([#3738](https://github.com/navikt/aksel/pull/3738))
+
+## 7.20.0
+
+### Minor Changes
+
+- Combobox: Use option-value as `id` instead of `label`. ([#3735](https://github.com/navikt/aksel/pull/3735))
+
+## 7.19.1
+
+### Patch Changes
+
+- Combobox: Singleselect selected value now uses the complete input-width when possible. ([#3734](https://github.com/navikt/aksel/pull/3734))
+
+## 7.19.0
+
+### Patch Changes
+
+- Darkside: Togglegroup now has bg-input background. ([#3715](https://github.com/navikt/aksel/pull/3715))
+
+- Combobox: Fix wrapping issue when ToggleListButton is hidden ([#3727](https://github.com/navikt/aksel/pull/3727))
+
+## 7.18.0
+
+### Patch Changes
+
+- Table: Disabled expansion-rows now has same hover-effect as other rows. ([#3702](https://github.com/navikt/aksel/pull/3702))
+
+## 7.17.4
+
+### Patch Changes
+
+- Modal: Updated animations for reduced movement. ([#3671](https://github.com/navikt/aksel/pull/3671))
+
+## 7.17.3
+
+### Patch Changes
+
+- Darkside: Synced padding with Figma. ([#3651](https://github.com/navikt/aksel/pull/3651))
+
+## 7.17.2
+
+### Patch Changes
+
+- Darkside: Removed stacking backgrounds with transparency in Combobox. ([`e769eed`](https://github.com/navikt/aksel/commit/e769eed269d327403b89935502f8fe431eca8cc9))
+
+## 7.17.1
+
+### Patch Changes
+
+- ExpansionCard: Fixed bug where `@media print` would hide header content. ([#3634](https://github.com/navikt/aksel/pull/3634))
+
+## 7.17.0
+
+## 7.16.1
+
+## 7.16.0
+
+### Minor Changes
+
+- Darkside: All classNames are now starts with `.aksel` instead of `.navds`. ([#3586](https://github.com/navikt/aksel/pull/3586))
+
+## 7.15.0
+
+## 7.14.3
+
+### Patch Changes
+
+- Darkside: Changed outline-offset for tabpanel from -4px to -3px. ([`06fecf2`](https://github.com/navikt/aksel/commit/06fecf2af1972a5d06ea452fc5b7431b064e1fc0))
+
+## 7.14.2
+
+## 7.14.1
+
+## 7.14.0
+
+### Minor Changes
+
+- DatePicker: Updated `date.css` to support `react-day-picker v9`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+### Patch Changes
+
+- Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
+
+## 7.13.0
+
+### Patch Changes
+
+- Darkside: Added support for `ConfirmationpPanel`, `Linkpanel`, `Panel` and `Dropdown`. Note that all of these will be deprecated in the future. ([#3581](https://github.com/navikt/aksel/pull/3581))
+
+## 7.12.2
+
+## 7.12.1
+
+## 7.12.0
+
+## 7.11.0
+
+### Patch Changes
+
+- ExpansionCard: Removed dynamic padding on button-element. ([#3532](https://github.com/navikt/aksel/pull/3532))
+
+- Modal: Defaults to `margin: auto` for tailwind 4 support. ([#3532](https://github.com/navikt/aksel/pull/3532))
+
+## 7.10.0
+
+### Minor Changes
+
+- Table: New prop `contentGutter` added to `ExpandableRow`-component. This allows user more control for content layout inside expandable element. ([#3507](https://github.com/navikt/aksel/pull/3507))
+
+### Patch Changes
+
+- Button: Using `<Loader />` within `icon`-prop now supported. ([#3515](https://github.com/navikt/aksel/pull/3515))
+
+- Combobox: Always render `maxSelected` message when `isMultiSelect` is set. ([#3506](https://github.com/navikt/aksel/pull/3506))
+
+## 7.9.2
+
+### Patch Changes
+
+- Table: Removed border-bottom for HeaderCell used in ExpandableRow. ([#3503](https://github.com/navikt/aksel/pull/3503))
+
+## 7.9.1
+
+### Patch Changes
+
+- Link: :bug: Use inside Alert got wrong text-color while focused or active. ([#3489](https://github.com/navikt/aksel/pull/3489))
+
+## 7.9.0
+
+### Minor Changes
+
+- ErrorSummary: :sparkles: new prop to prefix error with a warning icon. ([#3445](https://github.com/navikt/aksel/pull/3445))
+  All form components: replace dot with warning icon in error message.
+
+### Patch Changes
+
+- Switch: Update switch to better reflect unchecked state. ([#3468](https://github.com/navikt/aksel/pull/3468))
+
+- Select: :bug: Focus-border no longer cancels out error-border. ([#3465](https://github.com/navikt/aksel/pull/3465))
+
+- Textarea: :bug: Focus-border no longer cancels out error-border. ([#3465](https://github.com/navikt/aksel/pull/3465))
+
+## 7.8.1
+
+### Patch Changes
+
+- Alert: Link-components used within Alert variant='inline' now preserves default coloring ([#3461](https://github.com/navikt/aksel/pull/3461))
+
+- Table: :fire: Removed cursor 'pointer' when 'ExpandableRow' is disabled. ([#3462](https://github.com/navikt/aksel/pull/3462))
+
+## 7.8.0
+
+### Minor Changes
+
+- Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+### Patch Changes
+
+- CSS: Resolved regression where the complete stylesheet was included in scoped 'components.css' file. ([#3427](https://github.com/navikt/aksel/pull/3427))
+
+## 7.7.0
+
+## 7.6.0
+
+### Minor Changes
+
+- ReadMore: Added size 'large'. ([#3372](https://github.com/navikt/aksel/pull/3372))
+
+### Patch Changes
+
+- Select: Now shows focus-outline when ':focus' is set trough pointer or label in all browsers. Chrome and Firefox handles `:focus-visible` differently for 'select', previously causing outline-border not to show in Firefox. ([#3415](https://github.com/navikt/aksel/pull/3415))
+
+- Modal: Don't add scroll shadow when polyfilled ([#3408](https://github.com/navikt/aksel/pull/3408))
+
+- Modal: Now shows up while screensharing with Vergic ([#3407](https://github.com/navikt/aksel/pull/3407))
+
+- FileUpload: Remove browser styling from FileUpload.Item when used in list. ([#3413](https://github.com/navikt/aksel/pull/3413))
+
+- Combobox: Single-select now shows cursor closer to selected item. ([#3384](https://github.com/navikt/aksel/pull/3384))
+
+## 7.5.3
+
+## 7.5.2
+
+### Patch Changes
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
+## 7.5.1
+
+## 7.5.0
+
+## 7.4.3
+
+### Patch Changes
+
+- Table.ColumnHeader: Inherit text alignment in button ([#3319](https://github.com/navikt/aksel/pull/3319))
+
+## 7.4.2
+
+## 7.4.1
+
+### Patch Changes
+
+- Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
+
+## 7.4.0
+
+## 7.3.1
+
+### Patch Changes
+
+- Updated to Selectors Level 4 syntax. ([#3250](https://github.com/navikt/aksel/pull/3250))
+
 ## 7.3.0
 
 ### Minor Changes

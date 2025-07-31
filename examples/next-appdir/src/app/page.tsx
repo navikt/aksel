@@ -13,7 +13,7 @@ import {
 import { Select } from "@navikt/ds-react/Select";
 import { Tooltip } from "@navikt/ds-react/Tooltip";
 import { omit } from "@navikt/ds-react/Utils";
-import { ClientComponent } from "./client";
+import { ClientComponent, MyDatePicker } from "./client";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -84,7 +84,7 @@ export default function Home() {
           <Accordion.AccordionContent>
             Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha
             hatt en pensjonsgivende inntekt som tilsvarer x G, året før du fikk
-            nedsatt arbeidsevnen. NAV kan gjøre <a href="#Unntak">unntak</a>.
+            nedsatt arbeidsevnen. Nav kan gjøre <a href="#Unntak">unntak</a>.
           </Accordion.AccordionContent>
         </Accordion.AccordionItem>
         <Accordion.AccordionItem>
@@ -116,6 +116,9 @@ export default function Home() {
         <Checkbox value="Midterst">Midterst</Checkbox>
         <Checkbox value="Fremst">Fremst</Checkbox>
       </CheckboxGroup>
+
+      <MyDatePicker />
+
       <div className={styles.center}>
         <Image
           className={styles.logo}

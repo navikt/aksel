@@ -3,23 +3,23 @@ import { Link } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => (
-  <Link as={NextLink} href="#">
+  <Link as={NextLink} href="/eksempel">
     Lenke til ny side
   </Link>
 );
 
 /*
 
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 const ReactRouterExample = () => (
-  <Link as={ReactRouterLink} to="#">
+  <Link as={ReactRouterLink} to="/eksempel">
     Lenke til ny side
   </Link>
 );
 
 import { Link as RemixLink } from "@remix-run/react";
 const RemixExample = () => (
-  <Link as={RemixLink} to="#">
+  <Link as={RemixLink} to="/eksempel">
     Lenke til ny side
   </Link>
 );

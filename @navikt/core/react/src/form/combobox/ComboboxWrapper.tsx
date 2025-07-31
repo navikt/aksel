@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { useRef, useState } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { useInputContext } from "./Input/Input.context";
 
 type ComboboxWrapperProps = {
@@ -22,33 +22,33 @@ const ComboboxWrapper = ({
   inputSize,
   toggleIsListOpen,
 }: ComboboxWrapperProps) => {
+  const { cn } = useRenameCSS();
   const { toggleOpenButtonRef, clearInput, readOnly } = useInputContext();
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
 
-  function onFocusInsideWrapper(e) {
+  function onFocusInsideWrapper(event: React.FocusEvent<HTMLDivElement>) {
     if (
-      !wrapperRef.current?.contains(e.relatedTarget) &&
-      toggleOpenButtonRef?.current !== e.target
+      !wrapperRef.current?.contains(event.relatedTarget) &&
+      toggleOpenButtonRef?.current !== event.target
     ) {
-      toggleIsListOpen(true);
       setHasFocusWithin(true);
     }
   }
 
-  function onBlurWrapper(e) {
-    if (!wrapperRef.current?.contains(e.relatedTarget)) {
+  function onBlurWrapper(event: React.FocusEvent<HTMLDivElement>) {
+    if (!wrapperRef.current?.contains(event.relatedTarget)) {
       toggleIsListOpen(false);
       setHasFocusWithin(false);
-      clearInput(e);
+      clearInput(event);
     }
   }
 
   return (
     <div
       ref={wrapperRef}
-      className={cl(
+      className={cn(
         className,
         "navds-form-field",
         `navds-form-field--${inputSize}`,

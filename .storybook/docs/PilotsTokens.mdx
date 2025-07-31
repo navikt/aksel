@@ -1,0 +1,193 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Docs/Become a Pilot team/4.Tokens" />
+
+# Tokens
+
+## Spacing scale
+
+We have updated our spacing-scale to now be named `space` and for the values to reflect 1-1 the px-value.
+To migrate old `--a-spacing-X`-tokens, you can just take the value and 4x it to get the new `--ax-space-X`-token.
+
+```diff
+// Old
+--a-spacing-4: 1rem;
+
+// New
+--ax-space-16: 1rem;
+```
+
+```css
+--ax-space-0: 0rem;
+--ax-space-1: 0.0625rem;
+--ax-space-2: 0.125rem;
+--ax-space-4: 0.25rem;
+--ax-space-6: 0.375rem;
+--ax-space-8: 0.5rem;
+--ax-space-12: 0.75rem;
+--ax-space-16: 1rem;
+--ax-space-20: 1.25rem;
+--ax-space-24: 1.5rem;
+--ax-space-28: 1.75rem;
+--ax-space-32: 2rem;
+--ax-space-36: 2.25rem;
+--ax-space-40: 2.5rem;
+--ax-space-44: 2.75rem;
+--ax-space-48: 3rem;
+--ax-space-56: 3.5rem;
+--ax-space-64: 4rem;
+--ax-space-72: 4.5rem;
+--ax-space-80: 5rem;
+--ax-space-96: 6rem;
+--ax-space-128: 8rem;
+```
+
+## Global tokens
+
+Our global colors are Neutral, Accent, Success, Info, Warning, Danger, Brand-magenta, Brand-beige, Brand-blue, Meta-purple and Meta-lime.
+
+Beside `neutral` that has a `000`-token,
+all other color-tokens are named after the following pattern:
+
+```css
+--ax-[role]-000 // Neutral only
+--ax-[role]-100
+--ax-[role]-100A
+--ax-[role]-200
+--ax-[role]-200A
+--ax-[role]-300
+--ax-[role]-300A
+--ax-[role]-400
+--ax-[role]-400A
+--ax-[role]-500
+--ax-[role]-600
+--ax-[role]-700
+--ax-[role]-800
+--ax-[role]-900
+--ax-[role]-1000
+```
+
+## Semantic tokens
+
+We have two sets of semantic tokens, one for unique cases and one for all the roles.
+
+```css
+// Unique tokens
+--ax-bg-default   // Main page background.
+--ax-bg-input     // Background for input-fields.
+--ax-bg-overlay   // Background for overlays like Modal.
+--ax-bg-sunken    // Background for sunken sections to highlight ex. Cards.
+--ax-bg-raised    // Background for raised elements, like cards or dialogs.
+--ax-text-logo    // Nav-logo color.
+--ax-border-focus // Outline-color for focus-states.
+```
+
+For the remaning tokens, they are equal between all the global roles. This means that if you know the token for one role, you know it for all the roles.
+
+```css
+// Backgrounds
+
+// Soft is used for subtle backgrounds without state.
+--ax-bg-[role]-soft
+--ax-bg-[role]-softA
+
+// Moderate is used for subtle elements, with the option for states.
+// Should be used with a border in most cases to separate from the background.
+// Think Secondary-buttons, Alerts
+--ax-bg-[role]-moderate
+--ax-bg-[role]-moderateA
+--ax-bg-[role]-moderate-hover
+--ax-bg-[role]-moderate-hoverA
+--ax-bg-[role]-moderate-pressed
+--ax-bg-[role]-moderate-pressedA
+
+// Strong is used for elements that should stand out, with the option for states.
+// Think Primary-buttons, Checkbox, Chips
+// Text on strong should use contrast version of the color.
+--ax-bg-[role]-strong
+--ax-bg-[role]-strong-hover
+--ax-bg-[role]-strong-pressed
+
+// Text
+--ax-text-[role]
+--ax-text-[role]-subtle
+--ax-text-[role]-icon
+--ax-text-[role]-contrast
+
+// Borders
+--ax-border-[role]
+--ax-border-[role]-subtle
+--ax-border-[role]-subtleA
+--ax-border-[role]-strong
+```
+
+### Example use
+
+```css
+.alert--success {
+  background-color: var(--ax-bg-success-moderate);
+  border: var(--ax-border-success);
+}
+
+.alert--info {
+  background-color: var(--ax-bg-info-moderate);
+  border: var(--ax-border-info);
+}
+```
+
+## Shadows
+
+We now have only one shadow-token:
+
+```css
+--ax-shadow-dialog
+```
+
+## Z-index
+
+We have removed the `--a-z-index`-tokens.
+
+## Font-tokens, breakpoints etc
+
+The remaining tokens are kept the same as the old system, but now with updated prefix.
+
+```css
+--ax-font-weight-regular
+--ax-font-weight-bold
+--ax-font-size-small
+--ax-font-size-medium
+--ax-font-size-large
+--ax-font-size-xlarge
+--ax-font-size-heading-xsmall
+--ax-font-size-heading-small
+--ax-font-size-heading-medium
+--ax-font-size-heading-large
+--ax-font-size-heading-xlarge
+--ax-font-size-heading-2xlarge
+--ax-font-line-height-medium
+--ax-font-line-height-large
+--ax-font-line-height-xlarge
+--ax-font-line-height-heading-xsmall
+--ax-font-line-height-heading-small
+--ax-font-line-height-heading-medium
+--ax-font-line-height-heading-large
+--ax-font-line-height-heading-xlarge
+--ax-font-line-height-heading-2xlarge
+--ax-font-family
+--ax-breakpoint-2xl-down
+--ax-breakpoint-2xl
+--ax-breakpoint-xl-down
+--ax-breakpoint-xl
+--ax-breakpoint-lg-down
+--ax-breakpoint-lg
+--ax-breakpoint-md-down
+--ax-breakpoint-md
+--ax-breakpoint-sm-down
+--ax-breakpoint-sm
+--ax-breakpoint-xs
+--ax-border-radius-full
+--ax-border-radius-xlarge
+--ax-border-radius-large
+--ax-border-radius-medium
+--ax-border-radius-small
+```

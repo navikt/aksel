@@ -33,7 +33,7 @@ const Example = () => {
 
 /*
 
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 const ReactRouterExample = () => {
   const navigate = useNavigate();
   ...
@@ -61,4 +61,5 @@ export const Demo = {
 
 export const args = {
   index: 7,
+  sandbox: false,
 };

@@ -6,11 +6,11 @@ import {
   shift,
   useFloating,
 } from "@floating-ui/react";
-import cl from "clsx";
-import React, { HTMLAttributes, forwardRef, useContext, useRef } from "react";
-import { DateContext } from "../date/context";
+import React, { HTMLAttributes, forwardRef, useRef } from "react";
+import { useDateInputContext } from "../date/Date.Input";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
@@ -118,11 +118,14 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useModalContext(false) !== undefined;
-    const isInDatepicker = useContext(DateContext) !== null;
+    const datepickerContext = useDateInputContext(false);
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
-    const chosenFlip = isInDatepicker ? false : _flip;
+    const chosenFlip = datepickerContext ? false : _flip;
+
+    const themeContext = useThemeInternal(false);
 
     const {
       update,
@@ -135,7 +138,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       placement,
       open,
       middleware: [
-        flOffset(offset ?? (arrow ? 16 : 4)),
+        flOffset(offset ?? (themeContext ? 8 : arrow ? 16 : 4)),
         chosenFlip &&
           flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         shift({ padding: 12 }),
@@ -179,7 +182,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         <div
           ref={floatingRef}
           {...rest}
-          className={cl("navds-popover", className, {
+          className={cn("navds-popover", className, {
             "navds-popover--hidden": !open || !anchorEl,
           })}
           style={{ ...rest.style, ...floatingStyles }}
@@ -187,7 +190,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           aria-hidden={!open || !anchorEl}
         >
           {children}
-          {arrow && (
+          {/* Hide arrow in new design, prop will be removed in breaking change update */}
+          {arrow && !themeContext && (
             <div
               ref={(node) => {
                 arrowRef.current = node;
@@ -197,7 +201,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
                 ...(arrowY != null ? { top: arrowY } : {}),
                 ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
               }}
-              className="navds-popover__arrow"
+              className={cn("navds-popover__arrow")}
             />
           )}
         </div>

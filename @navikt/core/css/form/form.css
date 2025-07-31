@@ -17,17 +17,8 @@
   color: var(--ac-form-description, var(--__ac-form-description, var(--a-text-subtle)));
 }
 
-.navds-form-field .navds-error-message,
-.navds-fieldset .navds-error-message,
-.navds-file-item .navds-error-message {
-  display: flex;
-  gap: var(--a-spacing-2);
-}
-
-.navds-form-field .navds-error-message::before,
-.navds-fieldset .navds-error-message::before,
-.navds-file-item .navds-error-message::before {
-  content: "•";
+.navds-form-field__description:empty {
+  display: none;
 }
 
 .navds-form-field--disabled {

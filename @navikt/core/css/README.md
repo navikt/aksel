@@ -1,11 +1,11 @@
 # Aksel styling
 
-CSS for NAVs designsystem.
+CSS for Nav's design system.
 
-- Css tokens (Colors, border, shadows etc)
-- Component-styling for `@navikt/ds-react` packages
+- Css tokens (Colors, border, shadows etc.)
+- Component styling for `@navikt/ds-react` packages
 - Normalize.css v8
-- Font-loading
+- Font loading
 
 ## Installation
 
@@ -16,7 +16,7 @@ CSS for NAVs designsystem.
 
 ## Usage
 
-Import styles once to make it accessible for your entire project. Typically you will add the following line to your root .tsx file.
+Import styles once to make it accessible for your entire project. Typically you will add the following line to your root .tsx file:
 
 ```javascript
 import "@navikt/ds-css";
@@ -26,7 +26,7 @@ function App() {
 }
 ```
 
-But you can import it in a .css-file
+But you can import it in a .css-file as well:
 
 ```css
 @import "@navikt/ds-css";

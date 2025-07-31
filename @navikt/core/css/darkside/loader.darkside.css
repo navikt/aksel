@@ -1,0 +1,115 @@
+.aksel-loader {
+  width: 1.5rem;
+  display: inline-block;
+  position: relative;
+  animation: loader-rotate 1.8s linear infinite;
+  stroke-width: 6;
+
+  --__axc-loader-stroke-width: 5.9;
+
+  &.aksel-loader--3xlarge {
+    width: 5.5rem;
+    stroke-width: 5;
+
+    --__axc-loader-stroke-width: 4.8;
+  }
+
+  &.aksel-loader--2xlarge {
+    width: 4rem;
+    stroke-width: 6;
+
+    --__axc-loader-stroke-width: 5.8;
+  }
+
+  &.aksel-loader--xlarge {
+    width: 2.5rem;
+    stroke-width: 6;
+
+    --__axc-loader-stroke-width: 5.8;
+  }
+
+  &.aksel-loader--large {
+    width: 2rem;
+    stroke-width: 7;
+
+    --__axc-loader-stroke-width: 6.8;
+  }
+
+  &.aksel-loader--medium {
+    width: 1.5rem;
+    stroke-width: 7;
+
+    --__axc-loader-stroke-width: 6.8;
+  }
+
+  &.aksel-loader--small {
+    width: 1.25rem;
+    stroke-width: 8;
+
+    --__axc-loader-stroke-width: 7.8;
+  }
+
+  &.aksel-loader--xsmall {
+    width: 1rem;
+    stroke-width: 8;
+
+    --__axc-loader-stroke-width: 7.8;
+  }
+}
+
+.aksel-loader__foreground {
+  animation: loader-dasharray 1.5s ease-in-out infinite;
+  stroke-dasharray: 80px, 200px;
+  stroke-dashoffset: 0;
+  stroke: var(--ax-border-strong);
+  stroke-linecap: round;
+  stroke-width: var(--__axc-loader-stroke-width);
+
+  .aksel-loader[data-variant="inverted"] & {
+    stroke: var(--ax-border-subtle);
+  }
+}
+
+.aksel-loader__background {
+  stroke: var(--ax-border-subtleA);
+  stroke-width: var(--__axc-loader-stroke-width);
+
+  .aksel-loader[data-variant="inverted"] & {
+    stroke: var(--ax-border-strong);
+  }
+}
+
+.aksel-loader--transparent {
+  & .aksel-loader__background {
+    stroke: transparent;
+  }
+}
+
+@keyframes loader-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-dasharray {
+  0% {
+    stroke-dasharray: 1px, 200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -120px;
+  }
+}
+
+@media (forced-colors: active) {
+  .aksel-loader__background {
+    stroke: canvastext;
+  }
+}

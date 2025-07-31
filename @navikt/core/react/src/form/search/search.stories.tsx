@@ -105,6 +105,21 @@ export const ErrorVariants = () => (
   </div>
 );
 
+export const Disabled = () => (
+  <div className="rowgap">
+    <div className="colgap">
+      <Search disabled label="Søk" />
+      <Search disabled label="Søk" variant="secondary" />
+      <Search disabled label="Søk" variant="simple" />
+    </div>
+    <div className="colgap">
+      <Search disabled error="errormsg" label="Søk" />
+      <Search disabled error="errormsg" label="Søk" variant="secondary" />
+      <Search disabled error="errormsg" label="Søk" variant="simple" />
+    </div>
+  </div>
+);
+
 export const Placeholder = () => (
   <div className="rowgap">
     <div className="colgap">
@@ -191,6 +206,19 @@ export const HtmlSize = () => (
   </div>
 );
 
+export const ColorRole = () => (
+  <div className="colgap" data-color="brand-magenta">
+    <div className="colgap">
+      <Search label="Søk" />
+      <Search label="Søk" variant="secondary" />
+      <Search label="Søk" variant="simple" />
+    </div>
+    <div>
+      <ErrorVariants />
+    </div>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: (...props) => (
     <div>
@@ -211,6 +239,10 @@ export const Chromatic: Story = {
         <ErrorVariants />
       </div>
       <div>
+        <h2>Disabled</h2>
+        <Disabled />
+      </div>
+      <div>
         <h2>Placeholder</h2>
         <Placeholder />
       </div>
@@ -229,6 +261,10 @@ export const Chromatic: Story = {
       <div>
         <h2>HtmlSize</h2>
         <HtmlSize />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </div>
   ),

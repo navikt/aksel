@@ -18,15 +18,15 @@
 }
 
 .navds-box-border-radius {
-  --__ac-box-border-radius-xs: initial;
-  --__ac-box-border-radius-sm: var(--__ac-box-border-radius-xs);
-  --__ac-box-border-radius-md: var(--__ac-box-border-radius-sm);
-  --__ac-box-border-radius-lg: var(--__ac-box-border-radius-md);
-  --__ac-box-border-radius-xl: var(--__ac-box-border-radius-lg);
-  --__ac-box-border-radius-2xl: var(--__ac-box-border-radius-xl);
-  --__ac-box-border-radius: var(--__ac-box-border-radius-xs);
+  --__ac-box-radius-xs: initial;
+  --__ac-box-radius-sm: var(--__ac-box-radius-xs);
+  --__ac-box-radius-md: var(--__ac-box-radius-sm);
+  --__ac-box-radius-lg: var(--__ac-box-radius-md);
+  --__ac-box-radius-xl: var(--__ac-box-radius-lg);
+  --__ac-box-radius-2xl: var(--__ac-box-radius-xl);
+  --__ac-box-radius: var(--__ac-box-radius-xs);
 
-  border-radius: var(--__ac-box-border-radius);
+  border-radius: var(--__ac-box-radius);
 }
 
 .navds-box-shadow {
@@ -37,30 +37,30 @@
 
 @media (min-width: 480px) {
   .navds-box-border-radius {
-    --__ac-box-border-radius: var(--__ac-box-border-radius-sm);
+    --__ac-box-radius: var(--__ac-box-radius-sm);
   }
 }
 
 @media (min-width: 768px) {
   .navds-box-border-radius {
-    --__ac-box-border-radius: var(--__ac-box-border-radius-md);
+    --__ac-box-radius: var(--__ac-box-radius-md);
   }
 }
 
 @media (min-width: 1024px) {
   .navds-box-border-radius {
-    --__ac-box-border-radius: var(--__ac-box-border-radius-lg);
+    --__ac-box-radius: var(--__ac-box-radius-lg);
   }
 }
 
 @media (min-width: 1280px) {
   .navds-box-border-radius {
-    --__ac-box-border-radius: var(--__ac-box-border-radius-xl);
+    --__ac-box-radius: var(--__ac-box-radius-xl);
   }
 }
 
 @media (min-width: 1440px) {
   .navds-box-border-radius {
-    --__ac-box-border-radius: var(--__ac-box-border-radius-2xl);
+    --__ac-box-radius: var(--__ac-box-radius-2xl);
   }
 }

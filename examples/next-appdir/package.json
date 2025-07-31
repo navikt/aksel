@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "rimraf .next && yarn && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -12,8 +12,9 @@
     "@navikt/aksel-icons": "file:./../../@navikt/aksel-icons",
     "@navikt/ds-css": "file:./../../@navikt/core/css",
     "@navikt/ds-react": "file:./../../@navikt/core/react",
-    "@next/bundle-analyzer": "^14.1.0",
-    "next": "14.2.12",
+    "@navikt/ds-tokens": "file:./../../@navikt/core/tokens",
+    "@next/bundle-analyzer": "^15.3.3",
+    "next": "15.3.3",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -21,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "typescript": "5.5.4"
+    "rimraf": "^6.0.1",
+    "typescript": "5.8.3"
   }
 }

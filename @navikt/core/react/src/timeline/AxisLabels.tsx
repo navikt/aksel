@@ -1,4 +1,5 @@
 import {
+  Locale,
   addDays,
   addMonths,
   addYears,
@@ -13,9 +14,11 @@ import {
   startOfYear,
   subDays,
 } from "date-fns";
-import { nb as nbLocale } from "date-fns/locale";
 import React from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { Detail } from "../typography/Detail";
+import { useDateLocale, useI18n } from "../util/i18n/i18n.hooks";
+import { TFunction } from "../util/i18n/i18n.types";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { isVisible } from "./utils";
 import { horizontalPositionAndWidth } from "./utils/calc";
@@ -26,7 +29,8 @@ export const dayLabels = (
   end: Date,
   totalDays: number,
   direction: "left" | "right",
-  template: string = "dd.MM",
+  template: string,
+  locale: Locale,
 ): AxisLabel[] => {
   const increment = Math.ceil(totalDays / 10);
   const lastDay = startOfDay(end);
@@ -44,7 +48,7 @@ export const dayLabels = (
       return {
         direction,
         horizontalPosition,
-        label: format(day, template, { locale: nbLocale }),
+        label: format(day, template, { locale }),
         date: day,
         width,
       };
@@ -56,7 +60,8 @@ export const monthLabels = (
   start: Date,
   end: Date,
   direction: "left" | "right",
-  template: string = "MMM yy",
+  template: string,
+  locale: Locale,
 ): AxisLabel[] => {
   const startMonth = startOfMonth(start);
   const endMonth = endOfMonth(end);
@@ -72,7 +77,7 @@ export const monthLabels = (
     return {
       direction,
       horizontalPosition,
-      label: format(month, template, { locale: nbLocale }),
+      label: format(month, template, { locale }),
       date: month,
       width,
     };
@@ -83,7 +88,8 @@ export const yearLabels = (
   start: Date,
   end: Date,
   direction: "left" | "right",
-  template: string = "yyyy",
+  template: string,
+  locale: Locale,
 ): AxisLabel[] => {
   const firstYear = startOfYear(start);
   const lastYear = endOfYear(end);
@@ -99,29 +105,33 @@ export const yearLabels = (
     return {
       direction,
       horizontalPosition,
-      label: format(year, template, { locale: nbLocale }),
+      label: format(year, template, { locale }),
       date: year,
       width,
     };
   });
 };
 
-const axisLabels = (
+const getLabels = (
   start: Date,
   end: Date,
   direction: "left" | "right",
-  templates?: AxisLabelTemplates,
+  locale: Locale,
+  translate: TFunction<"Timeline">,
 ): AxisLabel[] => {
   const totalDays = differenceInDays(end, start);
   if (totalDays < 40) {
-    return dayLabels(start, end, totalDays, direction, templates?.day);
+    const dayTemplate = translate("dayFormat");
+    return dayLabels(start, end, totalDays, direction, dayTemplate, locale);
   }
 
   if (totalDays < 370) {
-    return monthLabels(start, end, direction, templates?.month);
+    const monthTemplate = translate("monthFormat");
+    return monthLabels(start, end, direction, monthTemplate, locale);
   }
 
-  return yearLabels(start, end, direction, templates?.year);
+  const yearTemplate = translate("yearFormat");
+  return yearLabels(start, end, direction, yearTemplate, locale);
 };
 
 export const AxisLabels = ({
@@ -130,15 +140,23 @@ export const AxisLabels = ({
   templates?: AxisLabelTemplates;
 }) => {
   const { endDate, startDate, direction } = useTimelineContext();
-  const labels = axisLabels(startDate, endDate, direction, templates).filter(
-    isVisible,
-  );
+
+  const translate = useI18n("Timeline", {
+    dayFormat: templates?.day,
+    monthFormat: templates?.month,
+    yearFormat: templates?.year,
+  });
+  const locale = useDateLocale();
+
+  const labels = getLabels(startDate, endDate, direction, locale, translate);
+
+  const { cn } = useRenameCSS();
 
   return (
-    <div className="navds-timeline__axislabels" aria-hidden="true">
-      {labels.map((etikett) => (
+    <div className={cn("navds-timeline__axislabels")} aria-hidden="true">
+      {labels.filter(isVisible).map((etikett) => (
         <Detail
-          className="navds-timeline__axislabels-label"
+          className={cn("navds-timeline__axislabels-label")}
           as="div"
           key={etikett.label}
           style={{

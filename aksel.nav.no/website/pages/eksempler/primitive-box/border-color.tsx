@@ -5,25 +5,25 @@ const Example = () => {
   return (
     <VStack gap="4">
       <Box
+        padding="4"
         background="surface-alt-3-subtle"
         borderColor="border-alt-3"
-        padding="4"
         borderWidth="4"
       >
         Alt-3
       </Box>
       <Box
+        padding="4"
         background="surface-info-subtle"
         borderColor="border-info"
-        padding="4"
         borderWidth="4"
       >
         Info
       </Box>
       <Box
+        padding="4"
         background="surface-success-subtle"
         borderColor="border-success"
-        padding="4"
         borderWidth="4"
       >
         Success
@@ -34,7 +34,7 @@ const Example = () => {
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
-  showBreakpoints: true,
+  legacyOnly: true,
 });
 
 /* Storybook story */
@@ -44,5 +44,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "'borderColor' lar deg endre border-color på Box basert på tokens",
+  desc: "Propen 'borderColor' lar deg endre border-color basert på tokens.",
 };

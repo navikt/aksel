@@ -1,8 +1,9 @@
-import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, ButtonProps } from "../../button";
+import { useRenameCSS } from "../../theme/Theme";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
+import { useI18n } from "../../util/i18n/i18n.hooks";
 import { SearchContext } from "./context";
 
 export interface SearchButtonProps
@@ -19,6 +20,8 @@ export type SearchButtonType = React.ForwardRefExoticComponent<
 
 const SearchButton: SearchButtonType = forwardRef(
   ({ className, children, disabled, onClick, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
+    const translate = useI18n("Search");
     const context = useContext(SearchContext);
 
     if (context === null) {
@@ -35,12 +38,14 @@ const SearchButton: SearchButtonType = forwardRef(
         ref={ref}
         size={size}
         variant={variant === "secondary" ? "secondary" : "primary"}
-        className={cl("navds-search__button-search", className)}
+        className={cn("navds-search__button-search", className)}
         disabled={context?.disabled ?? disabled}
         onClick={composeEventHandlers(onClick, handleClick)}
         icon={
           <MagnifyingGlassIcon
-            {...(children ? { "aria-hidden": true } : { title: "Søk" })}
+            {...(children
+              ? { "aria-hidden": true }
+              : { title: translate("search") })}
           />
         }
       >

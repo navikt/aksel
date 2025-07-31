@@ -34,7 +34,7 @@ function Example() {
         <VStack as="main" gap="8">
           <Bleed
             marginInline={{ lg: "24" }}
-            data-aksel-template="form-intropage-v1"
+            data-aksel-template="form-intropage-v2"
           >
             <Stack
               gap="6"
@@ -67,7 +67,7 @@ function Example() {
                 Du tjener opp alderspensjon fra inntekt og botid i Norge.
               </List.Item>
               <List.Item>
-                Du kan jobbe samtidig som du tar ut alderspensjon fra NAV.
+                Du kan jobbe samtidig som du tar ut alderspensjon fra Nav.
               </List.Item>
               <List.Item>
                 Det er ulike regler for alderspensjon avhengig av når du er
@@ -118,7 +118,7 @@ function Example() {
                 ut pensjon.
               </List.Item>
               <List.Item>
-                Du kan søke opptil fire måneder før du skal ta ut pensjon. NAV
+                Du kan søke opptil fire måneder før du skal ta ut pensjon. Nav
                 må ha mottatt søknaden senest måneden før uttak. Det er ikke
                 mulig å søke tilbake i tid, fordi alderspensjon først kan
                 innvilges fra måneden etter at søknad er fremsatt. Du må alltid
@@ -188,7 +188,7 @@ function Example() {
             </BodyLong>
             <Box paddingBlock="4 8">
               <Checkbox>
-                Jeg vil svare så godt jeg kan på spørsmålene i søknaden.
+                Jeg bekrefter at jeg vil svare så riktig som jeg kan.
               </Checkbox>
             </Box>
             <Button

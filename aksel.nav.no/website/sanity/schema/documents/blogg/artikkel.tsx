@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { bloggKategorier } from "../../../config";
 import { artikkelPreview } from "../presets/artikkel-preview";
-import { editorField } from "../presets/editors";
+import { editorField, writersField } from "../presets/editors";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { ingressField } from "../presets/ingress";
@@ -21,6 +21,7 @@ export const Blogg = defineType({
     ...hiddenFields,
     titleField,
     editorField,
+    writersField,
     defineField({
       title: "Kategori",
       name: "kategori",
@@ -39,7 +40,7 @@ export const Blogg = defineType({
       description:
         "Innholdet i artikkelen er riktekst. Tips: klikk på ikon i høyre hjørne for å skrive i fullskjerm.",
       name: "content",
-      type: "riktekst_standard",
+      type: "riktekst_blogg",
       group: "innhold",
     }),
     BaseSEOPreset,

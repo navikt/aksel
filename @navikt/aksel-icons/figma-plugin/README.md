@@ -2,9 +2,9 @@
 
 # Aksel Icons plugin
 
-Pluginen gir deg mulighet til å se gjennom og hente ut alle ikonene i fra ikonpakken `@navikt/aksel-icons`. Du slipper da å hente nye oppdateringer fra Figma Community.
+Pluginen gir deg mulighet til å se gjennom og hente ut alle ikonene fra ikonpakken `@navikt/aksel-icons`. Du slipper da å hente nye oppdateringer fra Figma Community.
 
-Referer til [ikon-dokumentasjonen](https://aksel.nav.no/ikoner) for å se alle ikonene.
+Gå til [ikon-dokumentasjonen](https://aksel.nav.no/ikoner) for å se alle ikonene.
 Har du ønsker om nye ikoner, eller ønsker å bidra med å lage nye, lag et issue på [GitHub-repoet for designsystemet](https://github.com/navikt/aksel).
 
 ## Quickstart

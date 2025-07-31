@@ -8,12 +8,8 @@ export const ingressField = defineField({
   type: "text",
   group: "innhold",
   rows: 3,
-  validation: (Rule) =>
-    Rule.required()
-      .max(210)
-      .error("Side må ha en ingress og kortere enn 210 tegn."),
-  options: {
-    //@ts-expect-error - maxLength is a custom prop not officially supported
-    maxLength: 210,
-  },
+  validation: (Rule) => [
+    Rule.required().min(10),
+    Rule.max(210).warning("Ingress bør være kortere enn 210 tegn."),
+  ],
 });

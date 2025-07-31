@@ -16,6 +16,8 @@
 @import "help-text.css";
 @import "internalheader.css";
 @import "link.css";
+@import "link-anchor.css";
+@import "link-card.css";
 @import "loader.css";
 @import "modal.css";
 @import "pagination.css";

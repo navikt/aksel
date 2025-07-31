@@ -179,6 +179,38 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
 export const Selection = () => <SelectionTable />;
 export const SelectionSmall = () => <SelectionTable size="small" />;
 
+export const ColorRole = () => (
+  <div data-color="brand-magenta">
+    <SelectionTable />
+  </div>
+);
+
+export const StickyHeader = () => {
+  const rows = Array.from({ length: 100 }, (_, i) => (
+    <Table.Row key={i}>
+      <Table.HeaderCell>{i + 1}</Table.HeaderCell>
+      <Table.DataCell>Row {i + 1}</Table.DataCell>
+      <Table.DataCell>Row {i + 1}</Table.DataCell>
+      <Table.DataCell>Row {i + 1}</Table.DataCell>
+    </Table.Row>
+  ));
+  return (
+    <div style={{ maxHeight: 200, overflowY: "auto" }}>
+      <Table stickyHeader>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>ID</Table.HeaderCell>
+            <Table.HeaderCell>Fornavn</Table.HeaderCell>
+            <Table.HeaderCell>one</Table.HeaderCell>
+            <Table.HeaderCell>two</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>{rows}</Table.Body>
+      </Table>
+    </div>
+  );
+};
+
 export const Chromatic = {
   render: () => (
     <VStack gap="8">
@@ -224,6 +256,10 @@ export const Chromatic = {
       <div>
         <h3>Small</h3>
         <ExpandableSmall />
+      </div>
+      <div>
+        <h3>ColorRole</h3>
+        <ColorRole />
       </div>
     </VStack>
   ),

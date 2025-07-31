@@ -1,0 +1,24 @@
+.aksel-popover {
+  z-index: 1000;
+  background: var(--ax-bg-raised);
+  box-shadow: var(--ax-shadow-dialog);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  border-radius: var(--ax-radius-12);
+
+  /* Creates a small gutter between screen-edges on smaller devices */
+  max-width: calc(100vw - var(--ax-space-24));
+}
+
+.aksel-popover__content {
+  padding: var(--ax-space-12) var(--ax-space-16);
+}
+
+@media (min-width: 480px) {
+  .aksel-popover__content {
+    padding: var(--ax-space-16) var(--ax-space-20);
+  }
+}
+
+.aksel-popover--hidden {
+  display: none;
+}

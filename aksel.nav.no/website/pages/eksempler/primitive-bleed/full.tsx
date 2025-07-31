@@ -1,32 +1,34 @@
-import { Bleed, Box, HStack } from "@navikt/ds-react";
+import { Bleed, BodyLong, Box, HStack, Page } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <DemoWrapper>
+    <Page.Block width="text">
+      <BodyLong spacing>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at
+        maximus mauris. Sed nec fermentum orci, vel tempus tortor. Praesent
+        lectus neque, hendrerit et sollicitudin quis, imperdiet vel est.
+      </BodyLong>
+
       <Bleed marginInline="full" asChild>
-        <Box padding="3" className="p" background="surface-alt-3-subtle">
-          <HStack justify="center">Full</HStack>
+        <Box padding="3" marginBlock="0 7" background="surface-alt-3-subtle">
+          <HStack justify="center">
+            Bleed med marginInline=&quot;full&quot;
+          </HStack>
         </Box>
       </Bleed>
-    </DemoWrapper>
+
+      <BodyLong>
+        Sed euismod mi nec purus euismod scelerisque. Nam tristique tincidunt
+        nisi ultricies sollicitudin. Etiam maximus ex sit amet turpis vestibulum
+        pharetra.
+      </BodyLong>
+    </Page.Block>
   );
 };
 
-function DemoWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <Box background="surface-alt-3" padding="5" borderRadius="large">
-      <Box background="surface-subtle" padding="5" borderRadius="medium">
-        {children}
-      </Box>
-    </Box>
-  );
-}
-
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, {
-  showBreakpoints: true,
-});
+export default withDsExample(Example, { legacyOnly: true });
 
 /* Storybook story */
 export const Demo = {
@@ -34,6 +36,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 3,
-  desc: "I noen tilfeller må du også sette 'overflow-x: hidden;' på body for å unngå horisontal scrollbar. Full lar Bleed bryte ut av parent og dekke hele skjermbredden. Dette kan være nyttig for 'Heroes' eller lignende elementer som ønsker å bryte ut av parent-layout",
+  index: 1,
+  desc: "Med marginInline=full kan du få enkeltelementer til å dekke hele skjermbredden mens resten av innholdet følger bredden satt av parent-container som vanlig. OBS: Du må kanskje sette 'overflow-x: hidden' på body for å unngå horisontal scrollbar.",
 };

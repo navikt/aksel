@@ -15,7 +15,7 @@ interface InputContextValue extends FormFieldType {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   shouldAutocomplete?: boolean;
-  toggleOpenButtonRef: React.RefObject<HTMLButtonElement>;
+  toggleOpenButtonRef: React.RefObject<HTMLDivElement>;
   hideCaret: boolean;
   setHideCaret: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -72,7 +72,7 @@ const InputProvider = ({ children, value: props }: Props) => {
     "comboboxfield",
   );
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const toggleOpenButtonRef = useRef<HTMLButtonElement>(null);
+  const toggleOpenButtonRef = useRef<HTMLDivElement>(null);
   const [internalValue, setInternalValue] = useState<string>(defaultValue);
   const [hideCaret, setHideCaret] = useState(false);
 
@@ -93,7 +93,7 @@ const InputProvider = ({ children, value: props }: Props) => {
   );
 
   const clearInput = useCallback(
-    (event: React.PointerEvent | React.KeyboardEvent | React.MouseEvent) => {
+    (event: React.PointerEvent | React.KeyboardEvent | React.FocusEvent) => {
       onClear?.(event);
       externalOnChange?.("");
       setInternalValue("");

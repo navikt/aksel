@@ -11,11 +11,12 @@ import {
   useFocus,
   useHover,
   useInteractions,
-  useRole,
 } from "@floating-ui/react";
 import { format } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
+import { useI18n } from "../util/i18n/i18n.hooks";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
 import { TimelineComponentTypes } from "./utils/types.internal";
@@ -41,9 +42,14 @@ export interface PinType
 
 export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
   ({ date, children, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
     const { startDate, endDate, direction } = useTimelineContext();
     const [open, setOpen] = useState(false);
     const arrowRef = useRef<HTMLDivElement | null>(null);
+    const translate = useI18n("Timeline");
+
+    const themeContext = useThemeInternal(false);
+    const showArrow = !themeContext;
 
     const {
       context,
@@ -57,7 +63,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
       onOpenChange: (_open) => setOpen(_open),
       whileElementsMounted: autoUpdate,
       middleware: [
-        offset(16),
+        offset(showArrow ? 16 : 8),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
@@ -72,13 +78,11 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     });
     const focus = useFocus(context);
     const dismiss = useDismiss(context);
-    const role = useRole(context, { role: "dialog" });
 
     const { getFloatingProps, getReferenceProps } = useInteractions([
       hover,
       focus,
       dismiss,
-      role,
     ]);
 
     const mergedRef = useMergeRefs(refs.setReference, ref);
@@ -93,14 +97,16 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     return (
       <>
         <div
-          className="navds-timeline__pin-wrapper"
+          className={cn("navds-timeline__pin-wrapper")}
           style={{ [direction]: `${position(date, startDate, endDate)}%` }}
         >
           <button
             {...rest}
             ref={mergedRef}
-            className="navds-timeline__pin-button"
-            aria-label={`pin:${format(date, "dd.MM.yyyy")}`}
+            className={cn("navds-timeline__pin-button")}
+            aria-label={translate("Pin.pin", {
+              date: format(date, translate("dateFormat")),
+            })}
             type="button"
             aria-expanded={children ? open : undefined}
             {...getReferenceProps({
@@ -123,23 +129,25 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             returnFocus={false}
           >
             <div
-              className="navds-timeline__popover"
+              className={cn("navds-timeline__popover")}
               data-placement={placement}
               ref={refs.setFloating}
+              role="dialog"
               {...getFloatingProps()}
-              tabIndex={undefined}
               style={floatingStyles}
             >
               {children}
-              <div
-                ref={arrowRef}
-                style={{
-                  ...(arrowX != null ? { left: arrowX } : {}),
-                  ...(arrowY != null ? { top: arrowY } : {}),
-                  ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
-                }}
-                className="navds-timeline__popover-arrow"
-              />
+              {showArrow && (
+                <div
+                  ref={arrowRef}
+                  style={{
+                    ...(arrowX != null ? { left: arrowX } : {}),
+                    ...(arrowY != null ? { top: arrowY } : {}),
+                    ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
+                  }}
+                  className={cn("navds-timeline__popover-arrow")}
+                />
+              )}
             </div>
           </FloatingFocusManager>
         )}

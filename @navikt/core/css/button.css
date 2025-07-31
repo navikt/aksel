@@ -109,7 +109,7 @@
   margin-right: var(--ac-button-icon-margin);
 }
 
-.navds-button__icon:only-child {
+.navds-button--icon-only .navds-button__icon {
   margin: 0;
 }
 
@@ -497,6 +497,10 @@
 }
 
 /* Loader overrides */
+.navds-button > .navds-loader {
+  position: absolute;
+}
+
 .navds-button .navds-loader .navds-loader__foreground {
   stroke: var(--ac-button-loader-stroke, currentColor);
 }
@@ -504,6 +508,10 @@
 .navds-button--primary .navds-loader .navds-loader__background,
 .navds-button--danger .navds-loader .navds-loader__background {
   stroke: var(--ac-button-primary-loader-stroke-bg, rgb(255 255 255 / 0.3));
+}
+
+.navds-button--loading > :not(.navds-loader) {
+  visibility: hidden;
 }
 
 @media (forced-colors: active) {

@@ -12,12 +12,16 @@ spec:
   port: 3000
   ingresses:
     - "https://aksel.ansatt.dev.nav.no"
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 256Mi
   liveness:
     path: /api/isAlive
-    initialDelay: 10
   readiness:
     path: /api/isAlive
-    initialDelay: 10
 
   accessPolicy:
     outbound:
@@ -30,6 +34,8 @@ spec:
         - host: apicdn.sanity.io
         - host: hnbe3yhs.apicdn.sanity.io
         - host: cdn.sanity.io
+        - host: umami.nav.no
+        - host: raw.githubusercontent.com
       rules: []
   filesFrom:
     - emptyDir:

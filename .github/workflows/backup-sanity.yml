@@ -16,20 +16,18 @@ jobs:
         with:
           node-version: lts/*
           cache: yarn
-      - name: set-env for yarn install to @navikt scope
-        shell: bash
-        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
+          cache-dependency-path: "**/yarn.lock"
 
       - name: Install dependencies
         run: cd aksel.nav.no/website && yarn
-
-      - name: Create empty .env file (Can be removed when env-file-if-exists is implemented in node v22)
-        run: echo "" > ./aksel.nav.no/website/.env
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: Export dataset
+        run: cd aksel.nav.no/website && yarn backup
         env:
           SANITY_READ: ${{ secrets.SANITY_READ }}
-        run: cd aksel.nav.no/website && yarn backup
+
       - name: Upload GCP bucket
         uses: "google-github-actions/auth@v2"
         with:

@@ -1,26 +1,37 @@
+import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import urls from "./sitemap-urls.json";
 
-test.describe("Check for errors in all pages", () => {
+test.describe("Validate CMS-link and A11y on all pages", () => {
   for (const url of urls) {
-    test(`Check page ${url}`, async ({ page }) => {
+    if (url === "/grunnleggende/kode/endringslogg") {
+      continue; // Axe times out when checking this page. Skip temporarily until the new changelog page is ready.
+    }
+
+    test(`Page ${url}`, async ({ page }) => {
       await page.goto(`http://localhost:3000${url}`);
       await page.waitForLoadState("domcontentloaded");
 
-      expect(await page.locator(".vk-errorboundary").count()).toEqual(0);
-      expect(await page.locator(".should-not-be-found").count()).toEqual(0);
-      expect(await page.locator("#vk-notFoundId").count()).toEqual(0);
+      /**
+       * Check for error-boundary, 500, 404 and error-pages
+       */
+      expect(await page.locator(".vk-error").count()).toEqual(0);
 
-      const linkList = page.locator("a");
-      for (let i = 0; i < (await linkList.count()); i++) {
-        expect(await linkList.nth(i).getAttribute("href")).not.toBeNull();
-        expect(await linkList.nth(i).getAttribute("href")).not.toBe(
-          "/[object%20Object]",
-        );
-        expect(await linkList.nth(i).getAttribute("href")).not.toBe(
-          "/undefined",
-        );
-      }
+      /**
+       * Validates a11y
+       */
+      const accessibilityScanResults = await new AxeBuilder({ page })
+        .disableRules([
+          "scrollable-region-focusable",
+          "landmark-complementary-is-top-level", // https://github.com/navikt/team-aksel/issues/643
+        ])
+        .exclude("iframe")
+        .exclude("#aksel-expansioncard")
+        .exclude(".aksel-codesnippet")
+        .exclude("[data-axe-ignore]")
+        .analyze();
+
+      expect(accessibilityScanResults.violations).toEqual([]);
     });
   }
 });

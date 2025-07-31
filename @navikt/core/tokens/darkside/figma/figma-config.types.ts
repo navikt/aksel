@@ -1,4 +1,4 @@
-import { StyleDictionaryToken, TokenTypes } from "../util";
+import { type StyleDictionaryToken, type TokenTypes } from "../tokens.util";
 
 export type FigmaToken = Omit<StyleDictionaryToken<TokenTypes>, "value"> & {
   name: string;
@@ -20,7 +20,7 @@ export type FigmaTokenConfig = {
   timestamp: string;
   colors: { light: ColorThemeEntry; dark: ColorThemeEntry };
   radius: FigmaConfigEntry;
-  spacing: FigmaConfigEntry;
+  space: FigmaConfigEntry;
 };
 
 type ColorThemeEntry = {

@@ -22,14 +22,14 @@
     "@svgr/core": "^8.1.0",
     "@types/node": "^18.15.11",
     "@types/postcss-url": "^10.0.4",
-    "@types/react": "^18.0.0",
+    "@types/react": "^18.3.11",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^4.2.1",
     "postcss": "^8.4.31",
     "postcss-url": "^10.1.3",
-    "typescript": "5.5.4",
-    "vite": "^5.4.6",
-    "vite-plugin-singlefile": "^1.0.0",
+    "typescript": "5.8.3",
+    "vite": "^6.1.6",
+    "vite-plugin-singlefile": "^2.2.0",
     "vite-plugin-svgr": "^4.2.0"
   }
 }

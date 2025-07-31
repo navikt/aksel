@@ -2,6 +2,8 @@ import { StoryObj } from "@storybook/react";
 import React from "react";
 import { StarIcon as BaseStarIcon } from "@navikt/aksel-icons";
 import { HStack, VStack } from "../layout/stack";
+import { Modal } from "../modal";
+import { BodyLong } from "../typography";
 import { Button } from "./index";
 
 export default {
@@ -154,6 +156,80 @@ export const DisabledAsLink: Story = {
   render: () => <ButtonGrid disabled href="#" as="a" />,
 };
 
+export const ColorRole = () => (
+  <VStack gap="2">
+    <h2>Variants + data-color on parent</h2>
+    <HStack gap="2" data-color="danger">
+      <Button variant="primary" icon={<StarIcon />}>
+        Button
+      </Button>
+      <Button variant="secondary" icon={<StarIcon />}>
+        Button
+      </Button>
+      <Button variant="tertiary" icon={<StarIcon />}>
+        Button
+      </Button>
+    </HStack>
+    <h2>Variants + data-color on button</h2>
+    <HStack gap="2">
+      <Button data-color="danger" variant="primary" icon={<StarIcon />}>
+        Button
+      </Button>
+      <Button data-color="danger" variant="secondary" icon={<StarIcon />}>
+        Button
+      </Button>
+      <Button data-color="danger" variant="tertiary" icon={<StarIcon />}>
+        Button
+      </Button>
+    </HStack>
+  </VStack>
+);
+
+export const InsideModal: Story = {
+  render: () => {
+    const ref = React.useRef<HTMLDialogElement>(null);
+
+    return (
+      <div className="py-16">
+        <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
+
+        <Modal ref={ref} header={{ heading: "Overskrift" }}>
+          <Modal.Body>
+            <BodyLong>
+              Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
+              incididunt dolor do ad ut. Incididunt eiusmod nostrud deserunt
+              duis laborum. Proident aute culpa qui nostrud velit adipisicing
+              minim. Consequat aliqua aute dolor do sit Lorem nisi mollit velit.
+              Aliqua exercitation non minim minim pariatur sunt laborum ipsum.
+              Exercitation nostrud est laborum magna non non aliqua qui esse.
+            </BodyLong>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button loading type="button" onClick={() => ref.current?.close()}>
+              Primær
+            </Button>
+            <Button
+              loading
+              type="button"
+              variant="secondary"
+              onClick={() => ref.current?.close()}
+            >
+              Sekundær
+            </Button>
+            <Button
+              type="button"
+              variant="tertiary"
+              onClick={() => ref.current?.close()}
+            >
+              Tertiær
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  },
+};
+
 export const Chromatic: Story = {
   render: () => (
     <VStack gap="6" align="center">
@@ -176,6 +252,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Disabled</h2>
         <ButtonGrid disabled />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </VStack>
   ),

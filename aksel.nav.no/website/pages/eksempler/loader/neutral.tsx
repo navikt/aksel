@@ -15,4 +15,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  desc: "Neutral-varianten blir ofte brukt for innholdslasting.",
 };

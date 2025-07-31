@@ -6,11 +6,14 @@ export const schema: SchemaPluginOptions = {
   types: [
     /* Documents */
     document.Editors,
+    document.EditorialStaff,
     document.Forside,
+    document.DesignsystemForside,
     document.Redirect,
     document.Skrivehjelp,
     document.Publiseringsflyt,
     document.ArticleViews,
+    document.CookieTracker,
 
     /* Komponentsider */
     document.KodeEksempelDoc,
@@ -22,6 +25,7 @@ export const schema: SchemaPluginOptions = {
     /* Grunnleggende */
     document.GrunnleggendeLandingSide,
     document.GrunnleggendeArtikkel,
+    document.EndringsloggArtikkel,
 
     /* Møster og Maler */
     document.TemplatesLandingSide,
@@ -61,6 +65,8 @@ export const schema: SchemaPluginOptions = {
     object.Tips,
     object.UnikSidemodul,
     object.Attachment,
+    object.Language,
+    object.CompareImages,
 
     /* Riktekst */
     object.RiktekstKomponent,
@@ -71,20 +77,16 @@ export const schema: SchemaPluginOptions = {
     object.RiktekstPrinsipp,
     object.RiktekstStandalone,
     object.RiktekstAccordion,
+    object.RiktekstBlogg,
 
     /* Komponentsider */
     object.PropsSeksjon,
     object.KodeEksempler,
-    object.TastaturUU,
     object.TokenTabell,
     object.KomponentIntro,
 
     /* Templatesider */
     object.ExampletextBlock,
-
-    /* Prinsipper */
-    object.HeroBilde,
-    object.InnholdsKort,
   ],
   templates: [
     {

@@ -122,3 +122,35 @@ export const Chromatic: Story = {
     chromatic: { disable: false, delay: 300 },
   },
 };
+
+export const ColorRole: Story = {
+  render: () => (
+    <div data-color="meta-purple">
+      <Dropdown onSelect={(event) => console.log(event)} open>
+        <Dropdown.Toggle>Toggle</Dropdown.Toggle>
+        <Dropdown.Menu strategy="fixed">
+          <Dropdown.Menu.GroupedList>
+            <Dropdown.Menu.GroupedList.Heading>
+              Systemer og oppslagsverk
+            </Dropdown.Menu.GroupedList.Heading>
+            <Dropdown.Menu.GroupedList.Item
+              onClick={() => console.log("GroupedList.Item-click")}
+            >
+              Gosys
+            </Dropdown.Menu.GroupedList.Item>
+          </Dropdown.Menu.GroupedList>
+          <Dropdown.Menu.Divider />
+          <Dropdown.Menu.List>
+            <Dropdown.Menu.List.Item onClick={() => console.log("Item-click")}>
+              Gosys
+            </Dropdown.Menu.List.Item>
+            <Dropdown.Menu.List.Item>Psys</Dropdown.Menu.List.Item>
+            <Dropdown.Menu.List.Item disabled>
+              Infotrygd
+            </Dropdown.Menu.List.Item>
+          </Dropdown.Menu.List>
+        </Dropdown.Menu>
+      </Dropdown>
+    </div>
+  ),
+};

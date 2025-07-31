@@ -1,18 +1,17 @@
 import { defineField, defineType } from "sanity";
 import { LinkIcon } from "@navikt/aksel-icons";
-import AkselRelatertInnhold from "@/cms/relatert-innhold/RelatertInnhold";
 import { allArticleDocsRef } from "../../../config";
 
 export const RelatertInnhold = defineType({
   name: "relatert_innhold",
-  title: "Relaterte lenker",
-  description: "Liste med relevante lenker til innholdet",
+  title: "Lenkeliste",
+  description: "Relevante lenker til innholdet",
   type: "object",
   icon: () => <LinkIcon aria-hidden />,
   fields: [
     defineField({
       title: "Tittel",
-      description: "'Relevante lenker' brukes som default",
+      description: "'Lenker' brukes som standard tittel",
       name: "title",
       type: "string",
     }),
@@ -71,13 +70,22 @@ export const RelatertInnhold = defineType({
       ],
     }),
   ],
-  components: {
+  /* components: {
     preview: (values) => <AkselRelatertInnhold node={values as any} />,
-  },
+  }, */
   preview: {
     select: {
       lenker: "lenker",
       title: "title",
+    },
+    prepare: ({ title, lenker }) => {
+      const lenkerCount = lenker?.length || 0;
+      return {
+        title: `${title || "Lenker"} (${lenkerCount} lenke${
+          lenkerCount === 1 ? "" : "r"
+        })`,
+        subtitle: "Lenkeliste modul",
+      };
     },
   },
 });

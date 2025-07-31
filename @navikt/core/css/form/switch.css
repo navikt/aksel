@@ -26,6 +26,7 @@
 
 .navds-switch--small > .navds-switch__input {
   height: 2rem;
+  width: 2.5rem;
   top: 0;
 }
 
@@ -47,11 +48,11 @@
 }
 
 .navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
-  padding: calc(var(--a-spacing-2) - var(--a-spacing-05)) 0 calc(var(--a-spacing-2) - var(--a-spacing-05)) 3.25rem;
+  padding: calc(var(--a-spacing-2) - var(--a-spacing-05)) 0 calc(var(--a-spacing-2) - var(--a-spacing-05)) 2.75rem;
 }
 
 .navds-switch--right.navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
-  padding: calc(var(--a-spacing-2) - var(--a-spacing-05)) 3.25rem calc(var(--a-spacing-2) - var(--a-spacing-05)) 0;
+  padding: calc(var(--a-spacing-2) - var(--a-spacing-05)) 2.75rem calc(var(--a-spacing-2) - var(--a-spacing-05)) 0;
 }
 
 .navds-switch--with-description,
@@ -72,16 +73,21 @@
 .navds-switch__track {
   width: 2.75rem;
   height: 1.5rem;
-  background-color: var(--ac-switch-bg, var(--a-surface-neutral));
+  background-color: var(--ac-switch-bg, var(--a-surface-default));
+  border: 2px solid var(--a-border-default);
   position: absolute;
   top: var(--a-spacing-3);
   left: 0;
   border-radius: var(--a-border-radius-full);
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: background-color, border-color;
+  transition-duration: 100ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navds-switch--small > .navds-switch__track {
-  top: var(--a-spacing-1);
+  top: var(--a-spacing-1-alt);
+  width: 2.25rem;
+  height: 1.25rem;
 }
 
 .navds-switch--right > .navds-switch__input,
@@ -92,18 +98,20 @@
 
 .navds-switch__input:checked ~ .navds-switch__track {
   background-color: var(--ac-switch-checked-bg, var(--a-surface-action-selected));
+  border-color: var(--ac-switch-checked-bg, var(--a-surface-action-selected));
 }
 
 .navds-switch__input:hover ~ .navds-switch__track {
-  background-color: var(--ac-switch-hover-bg, var(--a-surface-neutral-hover));
+  background-color: var(--ac-switch-hover-bg, var(--a-surface-subtle));
 }
 
-.navds-switch__input:hover:checked ~ .navds-switch__track {
+.navds-switch__input:hover:checked:not(:disabled) ~ .navds-switch__track {
   background-color: var(--ac-switch-checked-hover-bg, var(--a-surface-action-selected-hover));
+  border-color: var(--ac-switch-checked-hover-bg, var(--a-surface-action-selected-hover));
 }
 
 .navds-switch__input:disabled ~ .navds-switch__track {
-  background-color: var(--ac-switch-bg, var(--a-surface-neutral));
+  background-color: var(--ac-switch-bg, var(--a-surface-default));
 }
 
 .navds-switch__input:checked:disabled ~ .navds-switch__track {
@@ -129,24 +137,42 @@
 
 /* Thumb */
 .navds-switch__thumb {
-  background-color: var(--ac-switch-thumb-bg, var(--a-surface-default));
+  background-color: var(--ac-switch-thumb-bg, var(--a-surface-neutral));
   color: var(--ac-switch-thumb-icon, var(--a-icon-subtle));
   border-radius: var(--a-border-radius-full);
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.125rem;
+  height: 1.125rem;
   position: absolute;
   transform: translateX(0);
-  left: var(--a-spacing-05);
-  top: var(--a-spacing-05);
+  left: 0.0625rem;
+  top: 0.0625rem;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.navds-switch--small .navds-switch__thumb {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
 .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(1.25rem);
   color: var(--ac-switch-thumb-icon-checked, var(--a-icon-action-selected));
+  background-color: var(--a-surface-default);
+  width: 1.25rem;
+  height: 1.25rem;
+  left: 0;
+  top: 0;
+}
+
+.navds-switch--small > .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
+  transform: translateX(1rem);
+  width: 1rem;
+  height: 1rem;
+  left: 0;
+  top: 0;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -157,6 +183,10 @@
   .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
     transform: translateX(1.125rem);
   }
+
+  .navds-switch--small > .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
+    transform: translateX(0.875rem);
+  }
 }
 
 .navds-switch__input:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
@@ -165,6 +195,10 @@
 
 .navds-switch__input:checked:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(1.25rem);
+}
+
+.navds-switch--small > .navds-switch__input:checked:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
+  transform: translateX(1rem);
 }
 
 /* Disabled */
@@ -187,6 +221,7 @@
 .navds-switch--readonly > .navds-switch__input:checked ~ .navds-switch__track,
 .navds-switch--readonly > .navds-switch__input:checked:hover ~ .navds-switch__track {
   background-color: var(--a-surface-neutral-moderate);
+  border-color: var(--a-border-subtle);
 }
 
 .navds-switch--readonly > .navds-switch__label-wrapper,
@@ -204,12 +239,12 @@
 }
 
 .navds-switch--readonly .navds-switch__thumb {
-  background-color: var(--a-surface-subtle);
-  box-shadow: 0 0 0 2px var(--a-border-default);
+  background-color: var(--a-surface-neutral);
 }
 
 .navds-switch--readonly > .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
-  color: var(--a-icon-subtle);
+  color: var(--a-icon-on-neutral);
+  background-color: var(--a-surface-neutral);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -229,7 +264,9 @@
   }
 
   .navds-switch__thumb,
-  .navds-switch--readonly .navds-switch__thumb {
+  .navds-switch--readonly .navds-switch__thumb,
+  .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb,
+  .navds-switch--readonly .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
     background-color: fieldtext;
   }
 
@@ -238,11 +275,8 @@
     color: field;
   }
 
-  .navds-switch__track {
-    width: calc(2.75rem + 4px);
-    height: calc(1.5rem + 4px);
-    top: var(--a-spacing-3);
-    border: 2px solid fieldtext;
+  .navds-switch--disabled:not(.navds-switch--loading) .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
+    background-color: graytext;
   }
 
   .navds-switch__input:focus-visible ~ .navds-switch__track {
@@ -256,6 +290,7 @@
 
   .navds-switch--disabled:not(.navds-switch--loading) .navds-switch__thumb {
     background-color: graytext;
+    border-color: graytext;
   }
 
   .navds-switch--disabled:not(.navds-switch--loading) .navds-switch__track {

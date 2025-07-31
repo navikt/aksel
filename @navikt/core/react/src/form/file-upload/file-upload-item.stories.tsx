@@ -1,7 +1,10 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
+import { MenuElipsisVerticalCircleIcon } from "@navikt/aksel-icons";
 import { FileItem, FileUpload } from ".";
+import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
+import { ActionMenu } from "../../overlays/action-menu";
 
 const meta: Meta<typeof FileUpload.Item> = {
   title: "ds-react/FileUpload/Item",
@@ -116,6 +119,34 @@ export const States: StoryFn = () => {
         }}
       />
     </div>
+  );
+};
+
+export const CustomButton: StoryFn = () => {
+  return (
+    <FileUpload.Item
+      file={{ name: "custom button.png", size: 200000 }}
+      button={
+        <ActionMenu>
+          <ActionMenu.Trigger>
+            <Button
+              variant="tertiary-neutral"
+              icon={<MenuElipsisVerticalCircleIcon aria-hidden />}
+            />
+          </ActionMenu.Trigger>
+          <ActionMenu.Content>
+            <ActionMenu.Group label="Systemer og oppslagsverk">
+              <ActionMenu.Item onSelect={console.info}>
+                Action one
+              </ActionMenu.Item>
+              <ActionMenu.Item onSelect={console.info}>
+                Action two
+              </ActionMenu.Item>
+            </ActionMenu.Group>
+          </ActionMenu.Content>
+        </ActionMenu>
+      }
+    />
   );
 };
 

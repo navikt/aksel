@@ -1,0 +1,152 @@
+.aksel-chips {
+  display: flex;
+  gap: var(--ax-space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.aksel-chips li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: block;
+}
+
+.aksel-chips__chip {
+  all: unset;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ax-space-2);
+  margin: 0;
+  padding: 0 var(--ax-space-12);
+  text-decoration: none;
+  border-radius: var(--ax-radius-full);
+  min-height: 2rem;
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.aksel-chips--readonly {
+  .aksel-chips__chip {
+    background-color: var(--ax-bg-neutral-moderateA);
+  }
+}
+
+.aksel-chips--small {
+  .aksel-chips__chip {
+    min-height: 1.5rem;
+    padding: 0 var(--ax-space-8);
+  }
+
+  .aksel-chips__toggle-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .aksel-chips__toggle--with-checkmark {
+    padding-left: var(--ax-space-4);
+  }
+
+  .aksel-chips__removable-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .aksel-chips__removable-icon > svg {
+    width: 1rem;
+  }
+
+  .aksel-chips--icon-right {
+    padding-right: var(--ax-space-2);
+  }
+}
+
+/* ------------------------------ Chips Toggle ------------------------------ */
+.aksel-chips__toggle {
+  box-shadow: inset 0 0 0 1px var(--ax-border-subtleA);
+  background-color: var(--ax-bg-moderate);
+  color: var(--ax-text-default);
+  transition: box-shadow 200ms cubic-bezier(0.15, 1, 0.3, 1);
+
+  &:hover {
+    background-color: var(--ax-bg-moderate-hover);
+    box-shadow: inset 0 0 0 1px var(--ax-border-default);
+  }
+
+  &[data-pressed="true"] {
+    box-shadow: none;
+    background-color: var(--ax-bg-strong-pressed);
+    color: var(--ax-text-contrast);
+
+    &:hover {
+      background-color: var(--ax-bg-strong-hover);
+    }
+  }
+}
+
+.aksel-chips--medium .aksel-chips__toggle--with-checkmark {
+  padding-left: var(--ax-space-6);
+}
+
+/* -------------------------- start old CSS --------------------------  */
+
+/* ----------------------------- Chips removable ---------------------------- */
+.aksel-chips__removable {
+  gap: 0;
+  background: var(--ax-bg-strong-pressed);
+  color: var(--ax-text-contrast);
+
+  &:hover {
+    background: var(--ax-bg-strong-hover);
+  }
+}
+
+.aksel-chips__removable-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--ax-radius-full);
+}
+
+.aksel-chips--icon-left {
+  padding-left: var(--ax-space-6);
+}
+
+.aksel-chips--icon-right {
+  padding-right: var(--ax-space-6);
+}
+
+@media (forced-colors: active) {
+  .aksel-chips__chip {
+    border: 1px solid transparent;
+
+    &:hover {
+      background-color: highlighttext;
+      color: highlight;
+    }
+  }
+
+  .aksel-chips__chip:where([data-pressed="true"], :active, :hover) > span {
+    forced-color-adjust: none;
+  }
+
+  .aksel-chips__toggle[data-pressed="true"] {
+    background-color: selecteditem;
+    color: selecteditemtext;
+    border: 1px solid selecteditem;
+
+    &:hover {
+      background-color: selecteditemtext;
+      color: selecteditem;
+    }
+  }
+}

@@ -20,11 +20,17 @@ const Example = () => {
             Felt må fylles ut med alder
           </ErrorSummary.Item>
           <ErrorSummary.Item href="#2">
-            Tekstfeltet må ha en godkjent e-mail
+            Tekstfeltet må ha en godkjent e-post
           </ErrorSummary.Item>
         </ErrorSummary>
       )}
-      <Button onClick={() => setHasError(!hasError)}>Test fokus</Button>
+      <Button
+        onClick={() => {
+          hasError ? errorRef.current?.focus() : setHasError(true);
+        }}
+      >
+        Test fokus
+      </Button>
     </VStack>
   );
 };
@@ -39,5 +45,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Sett fokus på ErrorSummary ved submit. Hvis du gjør en ny sidelasting kan du også sette en `id` og referere til den i URLens hash.",
+  desc: "Eksempel på hvordan du kan sette fokus på ErrorSummary ved submit. Hvis du gjør en ny sidelasting kan du også sette en `id` og referere til den i URLens hash. Se [Mønster for skjemavalidering](/monster-maler/soknadsdialog/monster-for-skjemavalidering) for et mer fullstendig eksempel.",
 };

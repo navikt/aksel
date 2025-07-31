@@ -4,6 +4,7 @@ import {
   EyeIcon,
   FileTextIcon,
   ImageIcon,
+  PieChartIcon,
 } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
 
@@ -27,6 +28,12 @@ export function adminStructure(S: StructureBuilder) {
             .schemaType(`aksel_forside`)
             .icon(ImageIcon)
             .id(`aksel_forside_dokument`),
+
+          S.documentListItem()
+            .title(`Forside Designsystemet`)
+            .schemaType(`aksel_ds_forside`)
+            .icon(ImageIcon)
+            .id(`aksel_ds_forside_dokument`),
 
           S.listItem()
             .title("Standalone-sider")
@@ -73,6 +80,11 @@ export function adminStructure(S: StructureBuilder) {
             .schemaType(`skrivehjelp`)
             .icon(FileTextIcon)
             .id(`skrivehjelp`),
+          S.documentListItem()
+            .title(`Cookie banner`)
+            .schemaType(`cookie_tracker`)
+            .icon(PieChartIcon)
+            .id(`cookie_tracker`),
           S.documentListItem()
             .title(`Publiseringsflyt`)
             .schemaType(`publication_flow`)

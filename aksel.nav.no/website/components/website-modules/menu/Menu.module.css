@@ -1,7 +1,0 @@
-.menuListItem {
-  padding-inline: var(--a-spacing-2);
-}
-
-.menuList .menuList .menuListItem {
-  padding-inline-start: var(--a-spacing-5);
-}

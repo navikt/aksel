@@ -1,0 +1,36 @@
+.aksel-pagination {
+  position: relative;
+}
+
+.aksel-pagination__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: var(--ax-space-12);
+
+  & li {
+    list-style: none;
+    display: flex;
+  }
+}
+
+.aksel-pagination__ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  cursor: default;
+}
+
+.aksel-pagination--small .aksel-pagination__ellipsis {
+  width: 2rem;
+}
+
+.aksel-pagination--xsmall .aksel-pagination__ellipsis {
+  width: 1.5rem;
+}
+
+.aksel-pagination--invisible {
+  visibility: hidden;
+}

@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { ComponentTranslation } from "../../util/i18n/i18n.types";
 import { FileUploadLocaleContextProvider } from "./FileUpload.context";
 import Trigger from "./parts/Trigger";
@@ -125,9 +125,10 @@ interface FileUploadComponent
  */
 export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
   ({ children, className, translations, ...rest }: FileUploadProps, ref) => {
+    const { cn } = useRenameCSS();
     return (
       <FileUploadLocaleContextProvider translations={translations}>
-        <div ref={ref} {...rest} className={cl("navds-file-upload", className)}>
+        <div ref={ref} {...rest} className={cn("navds-file-upload", className)}>
           {children}
         </div>
       </FileUploadLocaleContextProvider>

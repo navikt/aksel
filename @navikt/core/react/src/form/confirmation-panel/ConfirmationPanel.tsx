@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyLong, ErrorMessage } from "../../typography";
 import { useId } from "../../util/hooks";
 import { Checkbox, CheckboxProps } from "../checkbox";
@@ -30,6 +31,7 @@ export interface ConfirmationPanelProps
 
 /**
  * A component that displays a confirmation checkbox with a label.
+ * @deprecated Use `Checkbox` instead. See [new pattern documentation](https://aksel.nav.no/monster-maler/soknadsdialog/introside-for-soknadsdialoger#8346a8cb849b) for more information.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/confirmationpanel)
  * @see 🏷️ {@link ConfirmationPanelProps}
@@ -50,6 +52,7 @@ export const ConfirmationPanel = forwardRef<
   HTMLInputElement,
   ConfirmationPanelProps
 >(({ className, children, label, ...props }, ref) => {
+  const { cn } = useRenameCSS();
   const { errorId, showErrorMsg, hasError, size, inputProps } = useFormField(
     props,
     "confirmation-panel",
@@ -57,19 +60,26 @@ export const ConfirmationPanel = forwardRef<
 
   const id = useId();
 
+  const currentColor = hasError
+    ? "danger"
+    : props.checked
+      ? "success"
+      : "warning";
+
   return (
     <div
-      className={cl("navds-confirmation-panel", "navds-form-field", className, {
+      className={cn("navds-confirmation-panel", "navds-form-field", className, {
         "navds-confirmation-panel--small": size === "small",
         "navds-confirmation-panel--error": hasError,
         "navds-confirmation-panel--checked": !!props.checked,
       })}
+      data-color={currentColor}
     >
-      <div className="navds-confirmation-panel__inner">
+      <div className={cn("navds-confirmation-panel__inner")}>
         {children && (
           <BodyLong
             size={props.size}
-            className="navds-confirmation-panel__content"
+            className={cn("navds-confirmation-panel__content")}
             id={`confirmation-panel-${id}`}
             as="div"
           >
@@ -90,8 +100,12 @@ export const ConfirmationPanel = forwardRef<
           {label}
         </Checkbox>
       </div>
-      <div className="navds-form-field__error" id={errorId} role="alert">
-        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
+      <div className={cn("navds-form-field__error")} id={errorId} role="alert">
+        {showErrorMsg && (
+          <ErrorMessage size={size} showIcon>
+            {props.error}
+          </ErrorMessage>
+        )}
       </div>
     </div>
   );

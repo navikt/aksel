@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -12,14 +12,18 @@ export interface FormSummaryHeaderProps
 export const FormSummaryHeader = forwardRef<
   HTMLDivElement,
   FormSummaryHeaderProps
->(({ children, className, ...rest }, ref) => (
-  <header
-    ref={ref}
-    {...rest}
-    className={cl("navds-form-summary__header", className)}
-  >
-    {children}
-  </header>
-));
+>(({ children, className, ...rest }, ref) => {
+  const { cn } = useRenameCSS();
+
+  return (
+    <header
+      ref={ref}
+      {...rest}
+      className={cn("navds-form-summary__header", className)}
+    >
+      {children}
+    </header>
+  );
+});
 
 export default FormSummaryHeader;

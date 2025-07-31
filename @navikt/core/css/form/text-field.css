@@ -25,6 +25,7 @@
   min-height: 3rem;
   width: 100%;
   color: var(--ac-textfield-text, var(--__ac-textfield-text, var(--a-text-default)));
+  scroll-margin-block-start: 4rem;
 }
 
 .navds-text-field__input[size] {

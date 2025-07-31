@@ -44,7 +44,7 @@ function Example() {
               </Show>
               <VStack gap="1">
                 <BodyShort size="small">
-                  NAV 10-07.03 (Om søknaden har ID)
+                  Nav 10-07.03 (Om søknaden har ID)
                 </BodyShort>
                 <Heading level="1" size="xlarge">
                   Søknad om [ytelse]
@@ -156,7 +156,12 @@ function Example() {
           <FormNavigation />
         </VStack>
       </Page.Block>
-      <Env />
+      <Env
+        languages={[
+          { locale: "nb", url: "https://www.nav.no" },
+          { locale: "en", url: "https://www.nav.no/en" },
+        ]}
+      />
     </Page>
   );
 }

@@ -1,0 +1,15 @@
+.aksel-theme {
+  color: var(--ax-text-neutral);
+
+  &[data-background="true"] {
+    background-color: var(--ax-bg-default);
+  }
+
+  &.light {
+    color-scheme: light;
+  }
+
+  &.dark {
+    color-scheme: dark;
+  }
+}

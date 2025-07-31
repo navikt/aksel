@@ -9,13 +9,18 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "noImplicitAny": false,
     "incremental": true,
-    "types": ["node"],
+    "types": [
+      "node",
+      "umami",
+      "@navikt/ds-react/types/theme",
+      "./app/theme.d.ts"
+    ],
     "paths": {
       "@/sb-util": ["./.storybook/utils.tsx"],
       "@/types": ["./components/types/index.ts"],
@@ -33,7 +38,12 @@
       "@/sanity/config": ["./sanity/config.ts"],
       "@/sanity/client.server": ["./sanity/interface/client.server.ts"],
       "@/sanity/interface": ["./sanity/interface/interface.ts"],
-      "@/sanity/queries": ["./sanity/interface/queries.js"]
+      "@/sanity/queries": ["./sanity/interface/queries.js"],
+      "@/app/CustomPortableText": [
+        "./app/_ui/portable-text/CustomPortableText.tsx"
+      ],
+      "@/ui-utils/*": ["./app/_ui/utils/*"],
+      "@/app/*": ["./app/*"]
     },
     "plugins": [
       {

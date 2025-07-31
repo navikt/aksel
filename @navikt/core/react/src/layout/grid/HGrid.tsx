@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { OverridableComponent, omit } from "../../util";
 import BasePrimitive, {
   PRIMITIVE_PROPS,
@@ -25,9 +25,9 @@ export type HGridProps = React.HTMLAttributes<HTMLDivElement> & {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * gap="6"
-   * gap="8 4"
-   * gap={{ sm: "2", md: "2", lg: "6", xl: "6"}}
+   * gap="space-20"
+   * gap="space-32 space-16"
+   * gap={{ sm: "space-8", md: "space-12", lg: "space-20", xl: "space-24"}}
    */
   gap?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**
@@ -77,11 +77,15 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       },
       ref,
     ) => {
+      const themeContext = useThemeInternal(false);
+      const prefix = themeContext ? "ax" : "a";
+      const { cn } = useRenameCSS();
+
       const styles: React.CSSProperties = {
         ...style,
-        "--__ac-hgrid-align": align,
-        ...getResponsiveProps(`hgrid`, "gap", "spacing", gap),
-        ...getResponsiveValue(`hgrid`, "columns", formatGrid(columns)),
+        [`--__${prefix}c-hgrid-align`]: align,
+        ...getResponsiveProps(prefix, `hgrid`, "gap", "spacing", gap),
+        ...getResponsiveValue(prefix, `hgrid`, "columns", formatGrid(columns)),
       };
 
       const Comp = asChild ? Slot : Component;
@@ -91,7 +95,7 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
           <Comp
             {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
-            className={cl("navds-hgrid", className, {
+            className={cn("navds-hgrid", className, {
               "navds-hgrid-gap": gap,
               "navds-hgrid-align": align,
             })}

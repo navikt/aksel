@@ -10,11 +10,16 @@ const Slot = React.forwardRef<HTMLElement, SlotProps>((props, forwardedRef) => {
   const { children, ...slotProps } = props;
 
   if (React.isValidElement(children)) {
+    const childRef = Object.prototype.propertyIsEnumerable.call(
+      children.props,
+      "ref",
+    )
+      ? (children.props as any).ref // React 19 (children.ref still works, but gives a warning)
+      : (children as any).ref; // React <19
+
     return React.cloneElement<any>(children, {
-      ...mergeProps(slotProps, children.props),
-      ref: forwardedRef
-        ? mergeRefs([forwardedRef, (children as any).ref])
-        : (children as any).ref,
+      ...mergeProps(slotProps, children.props as any),
+      ref: forwardedRef ? mergeRefs([forwardedRef, childRef]) : childRef,
     });
   }
 

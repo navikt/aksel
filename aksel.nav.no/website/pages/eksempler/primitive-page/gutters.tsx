@@ -1,32 +1,36 @@
-import { Box, Page } from "@navikt/ds-react";
+import { HStack, Heading, Page } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
+import {
+  Env,
+  Footer,
+  Header,
+  useDekorator,
+} from "../../../components/website-modules/examples/__parts/Dekorator";
+import { Content } from "../../../components/website-modules/examples/__parts/PageDemoContent";
 
 const Example = () => {
+  useDekorator();
+
   return (
-    <Page
-      footer={
-        <Page.Block gutters as="footer">
-          <Box background="surface-neutral-moderate" padding="8">
-            Footer
-          </Box>
+    <Page footer={<Footer />}>
+      <Header />
+      <HStack gap="4">
+        <Page.Block as="main" width="xl" gutters>
+          <Content>
+            <Heading level="1" size="large">
+              Page.Block med gutter
+            </Heading>
+          </Content>
         </Page.Block>
-      }
-    >
-      <Page.Block gutters as="header">
-        <Box background="surface-neutral-moderate" padding="8">
-          Header
-        </Box>
-      </Page.Block>
-      <Page.Block gutters as="main">
-        <Box background="surface-alt-3-moderate" paddingBlock="16" padding="8">
-          Med gutter
-        </Box>
-      </Page.Block>
-      <Page.Block as="main">
-        <Box background="surface-alt-3-subtle" paddingBlock="16" padding="8">
-          Uten gutter
-        </Box>
-      </Page.Block>
+        <Page.Block as="main" width="xl">
+          <Content>
+            <Heading level="1" size="large">
+              Page.Block uten gutter
+            </Heading>
+          </Content>
+        </Page.Block>
+      </HStack>
+      <Env />
     </Page>
   );
 };
@@ -34,7 +38,7 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
-  variant: "full",
+  variant: "fullscreen",
 });
 
 /* Storybook story */
@@ -45,5 +49,5 @@ export const Demo = {
 export const args = {
   index: 2,
   title: "Gutters",
-  desc: "Gutters-prop på Page.Block setter responsive gutters (padding-inline)",
+  desc: "Propen `gutters` på Page.Block setter responsive gutters (padding-inline).",
 };

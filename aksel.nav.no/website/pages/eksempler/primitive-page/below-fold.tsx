@@ -1,27 +1,27 @@
-import { Box, Page } from "@navikt/ds-react";
+import { Heading, Page } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
+import {
+  Env,
+  Footer,
+  Header,
+  useDekorator,
+} from "../../../components/website-modules/examples/__parts/Dekorator";
+import { Content } from "../../../components/website-modules/examples/__parts/PageDemoContent";
 
 const Example = () => {
+  useDekorator();
+
   return (
-    <Page
-      footerPosition="belowFold"
-      footer={
-        <Box as="footer" background="surface-neutral-moderate" padding="8">
-          <Page.Block gutters>Footer</Page.Block>
-        </Box>
-      }
-    >
-      <Box as="header" background="surface-neutral-moderate" padding="8">
-        <Page.Block gutters>Header</Page.Block>
-      </Box>
-      <Box
-        as="main"
-        background="surface-alt-3-moderate"
-        padding="8"
-        paddingBlock="16"
-      >
-        <Page.Block gutters>Content</Page.Block>
-      </Box>
+    <Page footerPosition="belowFold" footer={<Footer />}>
+      <Header />
+      <Page.Block as="main" width="xl" gutters>
+        <Content>
+          <Heading level="1" size="large">
+            Page.Block
+          </Heading>
+        </Content>
+      </Page.Block>
+      <Env />
     </Page>
   );
 };
@@ -29,7 +29,7 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
-  variant: "full",
+  variant: "fullscreen",
 });
 
 /* Storybook story */
@@ -40,5 +40,5 @@ export const Demo = {
 export const args = {
   index: 1,
   title: "Footer belowFold",
-  desc: "Sikrer at footer aldri vil vises før man begynner å scrolle. Dette hjelper med å redusere layout-shifts ved navigering mellom sider.",
+  desc: "`footerPosition=belowFold` sikrer at footer aldri vil vises før man begynner å scrolle. Dette hjelper med å redusere layout-shifts ved navigering mellom sider.",
 };

@@ -1,7 +1,14 @@
 import { useMemoObservable } from "react-rx";
 import { type SanityDocument, useDocumentStore, useFormValue } from "sanity";
 import { TagFillIcon } from "@navikt/aksel-icons";
-import { BodyLong, Heading } from "@navikt/ds-react";
+import {
+  BodyLong,
+  BoxNew,
+  HStack,
+  Heading,
+  ReadMore,
+  VStack,
+} from "@navikt/ds-react";
 import { TemaContacts } from "./TemaContacts";
 
 type MetadataT = {
@@ -33,35 +40,41 @@ export function UndertemaHighlight(props) {
   return (
     <div>
       <div>{props.renderDefault(props)}</div>
-      <div className="mt-4 space-y-4">
+      <VStack gap="space-16" marginBlock="space-4 space-0">
         {results.toReversed().map((res) => {
           return (
-            <div
+            <BoxNew
               key={res._id}
-              className="rounded-md bg-surface-subtle p-4 dark:bg-gray-900"
+              background="neutral-soft"
+              borderWidth="1"
+              borderColor="neutral-subtleA"
+              borderRadius="medium"
+              padding="space-16"
+              marginBlock="space-4 space-0"
             >
-              <div className="inline-flex items-center gap-1 text-teal-700 dark:text-teal-300">
-                <TagFillIcon aria-hidden fontSize="1rem" className="shrink-0" />
+              <HStack
+                gap="space-4"
+                marginBlock="space-0 space-4"
+                align="center"
+              >
+                <TagFillIcon aria-hidden fontSize="1.25rem" />
                 <Heading level="3" size="small">
                   {`${res.title} (undertema)`}
                 </Heading>
-              </div>
-              {res.description && (
-                <BodyLong className="mt-2">{res.description}</BodyLong>
-              )}
-              <div className="ml-2 mt-3 border-l-4 border-border-default pl-4 dark:border-white">
-                <Heading level="4" size="xsmall">
-                  {res.tema.title} (tema)
-                </Heading>
-                {res.tema.description && (
-                  <BodyLong className="mt-2">{res.tema.description}</BodyLong>
-                )}
-              </div>
-            </div>
+              </HStack>
+              <VStack gap="space-8">
+                {res.description && <BodyLong>{res.description}</BodyLong>}
+                <ReadMore header={`${res.tema.title} (tema)`}>
+                  {res.tema.description && (
+                    <BodyLong>{res.tema.description}</BodyLong>
+                  )}
+                </ReadMore>
+              </VStack>
+            </BoxNew>
           );
         })}
         <TemaContacts />
-      </div>
+      </VStack>
     </div>
   );
 }

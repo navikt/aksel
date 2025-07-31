@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, MonthPicker } from "@navikt/ds-react";
+import { Button, MonthPicker, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -7,7 +7,7 @@ const Example = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-96">
+    <VStack gap="4" minHeight="16rem">
       <MonthPicker
         onMonthSelect={setMonth}
         onClose={() => setOpen(false)}
@@ -15,8 +15,16 @@ const Example = () => {
       >
         <Button onClick={() => setOpen((x) => !x)}>Velg måned</Button>
       </MonthPicker>
-      {month && <div className="pt-4">{month.getMonth()}</div>}
-    </div>
+
+      {month && (
+        <div>
+          {month.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+          })}
+        </div>
+      )}
+    </VStack>
   );
 };
 

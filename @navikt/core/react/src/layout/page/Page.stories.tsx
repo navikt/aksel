@@ -1,6 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react";
 import React, { useEffect } from "react";
-import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import { Box } from "../box";
 import { HGrid } from "../grid";
 import { VStack } from "../stack";
@@ -43,7 +42,7 @@ Default.argTypes = {
   },
   background: {
     control: "radio",
-    options: Object.keys(bgColors.a),
+    options: ["bg-default", "bg-subtle"],
   },
   belowFold: {
     control: "boolean",

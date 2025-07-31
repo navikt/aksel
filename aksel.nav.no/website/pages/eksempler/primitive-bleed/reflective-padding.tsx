@@ -5,15 +5,16 @@ const Example = () => {
   return (
     <DemoWrapper>
       <Bleed marginInline="10" asChild reflectivePadding>
-        <Box className="p" background="surface-alt-3-subtle">
+        <Box background="surface-alt-3-subtle">
           reflectivePadding lar innhold forbli der det ville vært uten Bleed
         </Box>
       </Bleed>
       <Bleed marginInline="10" asChild>
-        <Box className="p" background="surface-alt-3-subtle">
-          Uten reflectivePadding
+        <Box background="surface-alt-3-subtle">
+          Bleed uten reflectivePadding
         </Box>
       </Bleed>
+      <Box background="surface-alt-3-subtle">Uten Bleed</Box>
     </DemoWrapper>
   );
 };
@@ -29,9 +30,7 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, {
-  showBreakpoints: true,
-});
+export default withDsExample(Example, { legacyOnly: true });
 
 /* Storybook story */
 export const Demo = {
@@ -39,5 +38,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 4,
 };

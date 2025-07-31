@@ -1,0 +1,78 @@
+.aksel-list ul,
+.aksel-list ol {
+  padding: 0;
+  margin: 0;
+}
+
+.aksel-list {
+  & .aksel-list :where(ul, ol) {
+    margin-block: var(--ax-space-8) 0;
+  }
+
+  & ol {
+    list-style: decimal; /* This is the default value, but some frameworks have `ol,ul { list-style:none }` */
+    padding-left: 1.7rem;
+
+    & > .aksel-list__item {
+      padding-left: 0.3rem;
+    }
+
+    & li::marker {
+      font-weight: var(--ax-font-weight-bold);
+    }
+  }
+
+  & ul {
+    & > .aksel-list__item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--ax-space-8);
+    }
+
+    & > li > .aksel-list__item-marker {
+      display: flex;
+      align-items: center;
+      height: var(--ax-font-line-height-xlarge);
+    }
+  }
+}
+
+/* SAFARI HACK START */
+
+/* biome-ignore lint/a11y/useGenericFontNames: Hack for targeting Safari */
+@supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
+  .aksel-list ol {
+    padding-left: 2.1rem;
+  }
+
+  .aksel-list ol .aksel-list__item {
+    padding-left: 0;
+  }
+}
+
+/* SAFARI HACK END */
+
+.aksel-list__item {
+  margin-block-end: var(--ax-space-8);
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+}
+
+.aksel-list__item-marker {
+  width: 1.5rem;
+}
+
+.aksel-list--small ul > li > .aksel-list__item-marker {
+  height: var(--ax-font-line-height-large);
+}
+
+.aksel-list__item-marker--bullet {
+  padding-left: 0.8rem;
+}
+
+.aksel-list__item-marker--icon {
+  font-size: 1.5rem;
+  justify-content: center;
+}

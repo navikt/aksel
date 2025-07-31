@@ -1,8 +1,8 @@
-import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { OverridableComponent, useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
@@ -332,44 +332,59 @@ export const ActionMenuTrigger = forwardRef<
 interface ActionMenuContentProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "id"> {
   children?: React.ReactNode;
+  align?: "start" | "end";
 }
 
 export const ActionMenuContent = forwardRef<
   HTMLDivElement,
   ActionMenuContentProps
->(({ children, className, style, ...rest }: ActionMenuContentProps, ref) => {
-  const context = useActionMenuContext();
+>(
+  (
+    {
+      children,
+      className,
+      style,
+      align = "start",
+      ...rest
+    }: ActionMenuContentProps,
+    ref,
+  ) => {
+    const context = useActionMenuContext();
+    const { cn } = useRenameCSS();
 
-  return (
-    <Menu.Portal rootElement={context.rootElement} asChild>
-      <Menu.Content
-        ref={ref}
-        id={context.contentId}
-        aria-labelledby={context.triggerId}
-        className={cl("navds-action-menu__content", className)}
-        {...rest}
-        align="start"
-        sideOffset={4}
-        collisionPadding={10}
-        onCloseAutoFocus={() => {
-          context.triggerRef.current?.focus();
-        }}
-        safeZone={{ anchor: context.triggerRef.current }}
-        style={{
-          ...style,
-          ...{
-            "--__ac-action-menu-content-transform-origin":
-              "var(--ac-floating-transform-origin)",
-            "--__ac-action-menu-content-available-height":
-              "var(--ac-floating-available-height)",
-          },
-        }}
-      >
-        <div className="navds-action-menu__content-inner">{children}</div>
-      </Menu.Content>
-    </Menu.Portal>
-  );
-});
+    return (
+      <Menu.Portal rootElement={context.rootElement} asChild>
+        <Menu.Content
+          ref={ref}
+          id={context.contentId}
+          aria-labelledby={context.triggerId}
+          className={cn("navds-action-menu__content", className)}
+          {...rest}
+          align={align}
+          sideOffset={4}
+          collisionPadding={10}
+          onCloseAutoFocus={() => {
+            context.triggerRef.current?.focus();
+          }}
+          safeZone={{ anchor: context.triggerRef.current }}
+          style={{
+            ...style,
+            ...{
+              "--__ac-action-menu-content-transform-origin":
+                "var(--ac-floating-transform-origin)",
+              "--__ac-action-menu-content-available-height":
+                "var(--ac-floating-available-height)",
+            },
+          }}
+        >
+          <div className={cn("navds-action-menu__content-inner")}>
+            {children}
+          </div>
+        </Menu.Content>
+      </Menu.Portal>
+    );
+  },
+);
 
 /* -------------------------------------------------------------------------- */
 /*                              ActionMenuLabel                               */
@@ -380,11 +395,12 @@ interface ActionMenuLabelProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
   ({ children, className, ...rest }: ActionMenuLabelProps, ref) => {
+    const { cn } = useRenameCSS();
     return (
       <div
         ref={ref}
         {...rest}
-        className={cl("navds-action-menu__label", className)}
+        className={cn("navds-action-menu__label", className)}
       >
         {children}
       </div>
@@ -428,12 +444,13 @@ export const ActionMenuGroup = forwardRef<
   ActionMenuGroupProps
 >(({ children, className, label, ...rest }: ActionMenuGroupProps, ref) => {
   const labelId = useId();
+  const { cn } = useRenameCSS();
 
   return (
     <Menu.Group
       ref={ref}
       {...rest}
-      className={cl("navds-action-menu__group", className)}
+      className={cn("navds-action-menu__group", className)}
       asChild={false}
       aria-labelledby={label ? labelId : undefined}
     >
@@ -457,10 +474,12 @@ type MarkerProps = {
 };
 
 const Marker = ({ children, className, placement }: MarkerProps) => {
+  const { cn } = useRenameCSS();
+
   return (
     <div
       aria-hidden
-      className={cl(
+      className={cn(
         className,
         "navds-action-menu__marker",
         `navds-action-menu__marker--${placement}`,
@@ -476,6 +495,7 @@ type ShortcutProps = {
 };
 
 const Shortcut = ({ children }: ShortcutProps) => {
+  const { cn } = useRenameCSS();
   /**
    * Assumes the user will input either a single keyboard key
    * or keys separated by "+"
@@ -485,7 +505,7 @@ const Shortcut = ({ children }: ShortcutProps) => {
   return (
     <Marker placement="right">
       {parsed.map((char, index) => (
-        <span key={char + index} className="navds-action-menu__shortcut">
+        <span key={char + index} className={cn("navds-action-menu__shortcut")}>
           {char}
         </span>
       ))}
@@ -531,10 +551,12 @@ export const ActionMenuItem: OverridableComponent<
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+
     return (
       <Menu.Item
         {...rest}
-        className={cl("navds-action-menu__item", className, {
+        className={cn("navds-action-menu__item", className, {
           "navds-action-menu__item--danger": variant === "danger",
           "navds-action-menu__item--has-icon": icon,
         })}
@@ -544,7 +566,10 @@ export const ActionMenuItem: OverridableComponent<
         <Component ref={ref}>
           {children}
           {icon && (
-            <Marker placement="left" className="navds-action-menu__marker-icon">
+            <Marker
+              placement="left"
+              className={cn("navds-action-menu__marker-icon")}
+            >
               {icon}
             </Marker>
           )}
@@ -587,6 +612,8 @@ export const ActionMenuCheckboxItem = forwardRef<
     }: ActionMenuCheckboxItemProps,
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+
     return (
       <Menu.CheckboxItem
         ref={ref}
@@ -598,7 +625,7 @@ export const ActionMenuCheckboxItem = forwardRef<
           event.preventDefault();
         })}
         asChild={false}
-        className={cl(
+        className={cn(
           "navds-action-menu__item navds-action-menu__item--has-icon",
           className,
         )}
@@ -606,22 +633,22 @@ export const ActionMenuCheckboxItem = forwardRef<
       >
         {children}
         <Marker placement="left">
-          <Menu.ItemIndicator className="navds-action-menu__indicator">
+          <Menu.ItemIndicator className={cn("navds-action-menu__indicator")}>
             <svg
               width="1em"
               height="1em"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="navds-action-menu__indicator-icon"
+              className={cn("navds-action-menu__indicator-icon")}
               aria-hidden
             >
-              <g className="navds-action-menu__indicator-icon--unchecked">
+              <g className={cn("navds-action-menu__indicator-icon--unchecked")}>
                 <rect
                   width="24"
                   height="24"
                   rx="4"
-                  fill="var(--a-border-default)"
+                  fill="var(--ax-border-neutral, var(--a-border-default))"
                 />
                 <rect
                   x="1"
@@ -629,16 +656,20 @@ export const ActionMenuCheckboxItem = forwardRef<
                   width="22"
                   height="22"
                   rx="3"
-                  fill="var(--a-surface-default)"
+                  fill="var(--ax-bg-default, var(--a-surface-default))"
                   strokeWidth="2"
                 />
               </g>
-              <g className="navds-action-menu__indicator-icon--indeterminate">
+              <g
+                className={cn(
+                  "navds-action-menu__indicator-icon--indeterminate",
+                )}
+              >
                 <rect
                   width="24"
                   height="24"
                   rx="4"
-                  fill="var(--a-surface-action-selected)"
+                  fill="var(--ax-bg-strong-pressed, var(--a-surface-action-selected))"
                 />
                 <rect
                   x="6"
@@ -646,19 +677,19 @@ export const ActionMenuCheckboxItem = forwardRef<
                   width="12"
                   height="4"
                   rx="1"
-                  fill="var(--a-surface-default)"
+                  fill="var(--ax-bg-default, var(--a-surface-default))"
                 />
               </g>
-              <g className="navds-action-menu__indicator-icon--checked">
+              <g className={cn("navds-action-menu__indicator-icon--checked")}>
                 <rect
                   width="24"
                   height="24"
                   rx="4"
-                  fill="var(--a-surface-action-selected)"
+                  fill="var(--ax-bg-strong-pressed, var(--a-surface-action-selected))"
                 />
                 <path
                   d="M10.0352 13.4148L16.4752 7.40467C17.0792 6.83965 18.029 6.86933 18.5955 7.47478C19.162 8.08027 19.1296 9.03007 18.5245 9.59621L11.0211 16.5993C10.741 16.859 10.3756 17 10.0002 17C9.60651 17 9.22717 16.8462 8.93914 16.5611L6.43914 14.0611C5.85362 13.4756 5.85362 12.5254 6.43914 11.9399C7.02467 11.3544 7.97483 11.3544 8.56036 11.9399L10.0352 13.4148Z"
-                  fill="var(--a-surface-default)"
+                  fill="var(--ax-bg-default, var(--a-surface-default))"
                 />
               </g>
             </svg>
@@ -723,6 +754,9 @@ export const ActionMenuRadioItem = forwardRef<
     { children, className, onSelect, ...rest }: ActionMenuRadioItemProps,
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal(false);
+
     return (
       <Menu.RadioItem
         ref={ref}
@@ -734,29 +768,29 @@ export const ActionMenuRadioItem = forwardRef<
           event.preventDefault();
         })}
         asChild={false}
-        className={cl(
+        className={cn(
           "navds-action-menu__item navds-action-menu__item--has-icon",
           className,
         )}
       >
         {children}
         <Marker placement="left">
-          <Menu.ItemIndicator className="navds-action-menu__indicator">
+          <Menu.ItemIndicator className={cn("navds-action-menu__indicator")}>
             <svg
               width="1em"
               height="1em"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="navds-action-menu__indicator-icon"
+              className={cn("navds-action-menu__indicator-icon")}
               aria-hidden
             >
-              <g className="navds-action-menu__indicator-icon--unchecked">
+              <g className={cn("navds-action-menu__indicator-icon--unchecked")}>
                 <rect
                   width="24"
                   height="24"
                   rx="12"
-                  fill="var(--a-border-default)"
+                  fill="var(--ax-border-neutral, var(--a-border-default))"
                 />
                 <rect
                   x="1"
@@ -765,32 +799,51 @@ export const ActionMenuRadioItem = forwardRef<
                   height="22"
                   rx="11"
                   strokeWidth="2"
-                  fill="var(--a-surface-default)"
+                  fill="var(--ax-bg-default, var(--a-surface-default))"
                 />
               </g>
-              <g className="navds-action-menu__indicator-icon--checked">
-                <rect
-                  x="1"
-                  y="1"
-                  width="22"
-                  height="22"
-                  rx="11"
-                  fill="var(--a-surface-default)"
-                />
-                <rect
-                  x="1"
-                  y="1"
-                  width="22"
-                  height="22"
-                  rx="11"
-                  stroke="var(--a-surface-action-selected)"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
-                  fill="var(--a-surface-action-selected)"
-                />
-              </g>
+              {themeContext ? (
+                <g className={cn("navds-action-menu__indicator-icon--checked")}>
+                  <rect
+                    width="24"
+                    height="24"
+                    rx="12"
+                    fill="var(--ax-bg-strong-pressed)"
+                  />
+                  <rect
+                    x="8"
+                    y="8"
+                    width="8"
+                    height="8"
+                    rx="4"
+                    fill="var(--ax-bg-default, var(--a-surface-default))"
+                  />
+                </g>
+              ) : (
+                <g className={cn("navds-action-menu__indicator-icon--checked")}>
+                  <rect
+                    x="1"
+                    y="1"
+                    width="22"
+                    height="22"
+                    rx="11"
+                    fill="var(--ax-bg-default, var(--a-surface-default))"
+                  />
+                  <rect
+                    x="1"
+                    y="1"
+                    width="22"
+                    height="22"
+                    rx="11"
+                    stroke="var(--ax-bg-strong-pressed, var(--a-surface-action-selected))"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
+                    fill="var(--ax-bg-strong-pressed, var(--a-surface-action-selected))"
+                  />
+                </g>
+              )}
             </svg>
           </Menu.ItemIndicator>
         </Marker>
@@ -810,12 +863,14 @@ export const ActionMenuDivider = forwardRef<
   ActionMenuDividerElement,
   ActionMenuDividerProps
 >(({ className, ...rest }: ActionMenuDividerProps, ref) => {
+  const { cn } = useRenameCSS();
+
   return (
     <Menu.Divider
       ref={ref}
       asChild={false}
       {...rest}
-      className={cl("navds-action-menu__divider", className)}
+      className={cn("navds-action-menu__divider", className)}
     />
   );
 });
@@ -867,12 +922,14 @@ export const ActionMenuSubTrigger = forwardRef<
   ActionMenuSubTriggerElement,
   ActionMenuSubTriggerProps
 >(({ children, className, icon, ...rest }: ActionMenuSubTriggerProps, ref) => {
+  const { cn } = useRenameCSS();
+
   return (
     <Menu.SubTrigger
       ref={ref}
       {...rest}
       asChild={false}
-      className={cl(
+      className={cn(
         "navds-action-menu__item navds-action-menu__sub-trigger",
         className,
         { "navds-action-menu__item--has-icon": icon },
@@ -880,11 +937,17 @@ export const ActionMenuSubTrigger = forwardRef<
     >
       {children}
       {icon && (
-        <Marker placement="left" className="navds-action-menu__marker-icon">
+        <Marker
+          placement="left"
+          className={cn("navds-action-menu__marker-icon")}
+        >
           {icon}
         </Marker>
       )}
-      <Marker placement="right" className="navds-action-menu__marker-icon">
+      <Marker
+        placement="right"
+        className={cn("navds-action-menu__marker-icon")}
+      >
         <ChevronRightIcon aria-hidden />
       </Marker>
     </Menu.SubTrigger>
@@ -905,6 +968,7 @@ export const ActionMenuSubContent = forwardRef<
   ActionMenuSubContentElement,
   ActionMenuSubContentProps
 >(({ children, className, style, ...rest }: ActionMenuSubContentProps, ref) => {
+  const { cn } = useRenameCSS();
   const context = useActionMenuContext();
 
   return (
@@ -915,7 +979,7 @@ export const ActionMenuSubContent = forwardRef<
         sideOffset={1}
         collisionPadding={10}
         {...rest}
-        className={cl(
+        className={cn(
           "navds-action-menu__content navds-action-menu__sub-content",
           className,
         )}
@@ -934,7 +998,7 @@ export const ActionMenuSubContent = forwardRef<
           },
         }}
       >
-        <div className="navds-action-menu__content-inner">{children}</div>
+        <div className={cn("navds-action-menu__content-inner")}>{children}</div>
       </Menu.SubContent>
     </Menu.Portal>
   );
@@ -955,11 +1019,11 @@ ActionMenu.SubTrigger = ActionMenuSubTrigger;
 ActionMenu.SubContent = ActionMenuSubContent;
 
 export type {
-  ActionMenuItemProps,
   ActionMenuCheckboxItemProps,
   ActionMenuContentProps,
   ActionMenuDividerProps,
   ActionMenuGroupProps,
+  ActionMenuItemProps,
   ActionMenuLabelProps,
   ActionMenuProps,
   ActionMenuRadioGroupProps,

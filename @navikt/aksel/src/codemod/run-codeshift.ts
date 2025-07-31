@@ -3,6 +3,7 @@ import { Command } from "commander";
 import fg from "fast-glob";
 import * as jscodeshift from "jscodeshift/src/Runner";
 import path from "path";
+import { GLOB_IGNORE_PATTERNS, getDefaultGlob } from "./codeshift.utils";
 import { getMigrationPath, getWarning } from "./migrations";
 
 const ignoreNodeModules = [
@@ -25,7 +26,7 @@ export async function runCodeshift(
 
   const filepaths = fg.sync([options.glob ?? getDefaultGlob(options?.ext)], {
     cwd: process.cwd(),
-    ignore: ignoreNodeModules,
+    ignore: GLOB_IGNORE_PATTERNS,
   });
 
   console.info("\nRunning migration:", chalk.green("input"));
@@ -53,16 +54,4 @@ export async function runCodeshift(
   } catch (error) {
     program.error(chalk.red("Error:", error.message));
   }
-}
-
-function getDefaultGlob(ext: string): string {
-  const defaultExt = "js,ts,jsx,tsx,css,scss,less";
-  return `**/*.{${cleanExtensions(ext ?? defaultExt).join(",")}}`;
-}
-
-function cleanExtensions(ext: string): string[] {
-  return ext
-    .split(",")
-    .map((e) => e.trim())
-    .map((e) => e.replace(".", ""));
 }

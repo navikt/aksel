@@ -8,7 +8,7 @@ const Example = () => {
       <ExpansionCard.Header>
         <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
         <ExpansionCard.Description>
-          Du er registerert som mottaker av sykepenger fra NAV
+          Du er registrert som mottaker av sykepenger fra Nav
         </ExpansionCard.Description>
       </ExpansionCard.Header>
       <ExpansionCard.Content>
@@ -25,7 +25,7 @@ const Innhold = () => (
     </Label>
     <BodyLong spacing>
       Vi har registrert at du får sykepenger fra Bedriften AS, som skal ha
-      pengene tilbake fra NAV. Selv om pengene går til arbeidsgiveren din, er vi
+      pengene tilbake fra Nav. Selv om pengene går til arbeidsgiveren din, er vi
       forpliktet til å vise deg informasjonen fordi det handler om deg.
     </BodyLong>
     <Label as="p" spacing>
@@ -37,7 +37,7 @@ const Innhold = () => (
         <dd>27 256 kr</dd>
       </div>
       <div className="flex justify-between border-b border-border-default py-1">
-        <dt>Omgregnet til årslønn</dt>
+        <dt>Omregnet til årslønn</dt>
         <dd>327 072 kr</dd>
       </div>
       <div className="flex justify-between border-b border-border-default py-1">

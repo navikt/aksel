@@ -35,7 +35,7 @@ function Example() {
         <VStack as="main" gap="8">
           <Bleed
             marginInline={{ lg: "24" }}
-            data-aksel-template="form-intropage-v1"
+            data-aksel-template="form-intropage-v2"
           >
             <Stack
               gap="6"
@@ -158,7 +158,7 @@ function Example() {
             </BodyLong>
             <Box paddingBlock="4 8">
               <Checkbox>
-                Jeg vil svare så godt jeg kan på spørsmålene i søknaden.
+                Jeg bekrefter at jeg vil svare så riktig som jeg kan.
               </Checkbox>
             </Box>
             <Button

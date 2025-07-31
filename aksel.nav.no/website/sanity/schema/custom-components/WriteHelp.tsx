@@ -1,6 +1,7 @@
+import { PortableTextBlock } from "next-sanity";
 import { useClient } from "sanity";
 import useSWR from "swr";
-import { SanityBlockContent } from "@/sanity-block";
+import { CustomPortableText } from "@/app/CustomPortableText";
 import { SANITY_API_VERSION } from "@/sanity/config";
 
 export const WriteHelp = () => {
@@ -15,7 +16,7 @@ export const WriteHelp = () => {
 
   const content = data?.content;
 
-  return <SanityBlockContent blocks={content ?? []} />;
+  return <CustomPortableText value={(content ?? []) as PortableTextBlock[]} />;
 };
 
 export default WriteHelp;

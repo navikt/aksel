@@ -1,6 +1,6 @@
-# Kode eksempler
+# Kode-eksempler
 
-Kode eksempler som blir vist på komponentsider @ aksel.nav.no
+Kode-eksempler som blir vist på komponentsider @ aksel.nav.no
 
 ## Anatomi
 

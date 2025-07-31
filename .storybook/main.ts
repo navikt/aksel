@@ -1,6 +1,7 @@
 import { loadCsf } from "@storybook/csf-tools";
 import { StorybookConfig } from "@storybook/react-vite";
 import { readFileSync } from "fs";
+import { InlineConfig } from "vite";
 import turbosnap from "vite-plugin-turbosnap";
 import TsconfigPathsPlugin from "vite-tsconfig-paths";
 
@@ -46,12 +47,21 @@ export default {
   staticDirs: ["./public"],
   stories: () => [
     "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "./*.mdx",
+    "./docs/*.mdx",
+    "./docs/*.stories.tsx",
     "../aksel.nav.no/website/pages/templates/**/*.tsx",
   ],
   addons: [
+    {
+      name: "@storybook/addon-essentials",
+      options: {
+        actions: false,
+        controls: {
+          hideNoControlsWarning: true,
+        },
+      },
+    },
     "@storybook/addon-a11y",
-    "@whitespace/storybook-addon-html",
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
     {
@@ -62,16 +72,11 @@ export default {
         },
       },
     },
-    {
-      name: "@storybook/addon-essentials",
-      options: {
-        actions: false,
-        controls: {
-          hideNoControlsWarning: true,
-        },
-      },
-    },
-    "storybook-addon-pseudo-states",
+    /**
+     * https://github.com/chromaui/storybook-addon-pseudo-states/issues/101
+     * Currently disabled to avoid interference with darkmode update
+     */
+    /* "storybook-addon-pseudo-states", */
   ],
   framework: {
     name: "@storybook/react-vite",
@@ -92,6 +97,7 @@ export default {
     const tsConfigPathsPluginOpts = { root: "aksel.nav.no/website/" };
 
     return mergeConfig(config, {
+      build: { cssMinify: "lightningcss" },
       plugins:
         configType === "PRODUCTION"
           ? [
@@ -101,6 +107,6 @@ export default {
               }),
             ]
           : [TsconfigPathsPlugin(tsConfigPathsPluginOpts)],
-    });
+    } satisfies InlineConfig);
   },
 } satisfies StorybookConfig;

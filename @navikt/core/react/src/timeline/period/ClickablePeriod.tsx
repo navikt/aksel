@@ -11,16 +11,16 @@ import {
   useFocus,
   useHover,
   useInteractions,
-  useRole,
 } from "@floating-ui/react";
-import cl from "clsx";
 import React, { useRef, useState } from "react";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
+import { useI18n } from "../../util/i18n/i18n.hooks";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
-import { PeriodProps } from "./types";
+import type { PeriodProps } from "./types";
 
 interface TimelineClickablePeriodProps extends PeriodProps {
   onSelectPeriod?: (
@@ -28,6 +28,11 @@ interface TimelineClickablePeriodProps extends PeriodProps {
   ) => void;
   isActive?: boolean;
   periodRef: React.ForwardedRef<HTMLButtonElement>;
+  /**
+   * Default orientation of popover
+   * @default "top"
+   */
+  placement?: "top" | "bottom";
 }
 
 const ClickablePeriod = React.memo(
@@ -47,11 +52,16 @@ const ClickablePeriod = React.memo(
     restProps,
     periodRef,
   }: TimelineClickablePeriodProps) => {
+    const { cn } = useRenameCSS();
     const [open, setOpen] = useState(false);
     const { index } = useRowContext();
     const { firstFocus } = usePeriodContext();
     const { initiate, addFocusable } = useTimelineContext();
     const arrowRef = useRef<HTMLDivElement | null>(null);
+    const translate = useI18n("Timeline");
+
+    const themeContext = useThemeInternal(false);
+    const showArrow = !themeContext;
 
     const {
       context,
@@ -60,12 +70,12 @@ const ClickablePeriod = React.memo(
       refs,
       floatingStyles,
     } = useFloating({
-      placement: "top",
+      placement: restProps?.placement ?? "top",
       open,
       onOpenChange: (_open) => setOpen(_open),
       whileElementsMounted: autoUpdate,
       middleware: [
-        offset(16),
+        offset(showArrow ? 16 : 8),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
@@ -80,13 +90,11 @@ const ClickablePeriod = React.memo(
     });
     const focus = useFocus(context);
     const dismiss = useDismiss(context);
-    const role = useRole(context, { role: "dialog" });
 
     const { getFloatingProps, getReferenceProps } = useInteractions([
       hover,
       focus,
       dismiss,
-      role,
     ]);
 
     const mergedRef = useMergeRefs(refs.setReference, periodRef);
@@ -102,13 +110,14 @@ const ClickablePeriod = React.memo(
       <>
         <button
           {...restProps}
+          data-color={restProps?.["data-color"] ?? status}
           type="button"
           ref={(r) => {
             firstFocus && addFocusable(r, index);
             mergedRef(r);
           }}
-          aria-label={ariaLabel(start, end, status, statusLabel)}
-          className={cl(
+          aria-label={ariaLabel(start, end, status, statusLabel, translate)}
+          className={cn(
             "navds-timeline__period--clickable",
             getConditionalClasses(cropped, direction, status),
             restProps?.className,
@@ -145,7 +154,7 @@ const ClickablePeriod = React.memo(
             },
           })}
         >
-          <span className="navds-timeline__period--inner">{icon}</span>
+          <span className={cn("navds-timeline__period--inner")}>{icon}</span>
         </button>
         {children && open && (
           <FloatingFocusManager
@@ -155,22 +164,25 @@ const ClickablePeriod = React.memo(
             returnFocus={false}
           >
             <div
-              className="navds-timeline__popover"
+              className={cn("navds-timeline__popover")}
               data-placement={placement}
               ref={refs.setFloating}
+              role="dialog"
               {...getFloatingProps()}
               style={floatingStyles}
             >
               {children}
-              <div
-                ref={arrowRef}
-                style={{
-                  ...(arrowX != null ? { left: arrowX } : {}),
-                  ...(arrowY != null ? { top: arrowY } : {}),
-                  ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
-                }}
-                className="navds-timeline__popover-arrow"
-              />
+              {showArrow && (
+                <div
+                  ref={arrowRef}
+                  style={{
+                    ...(arrowX != null ? { left: arrowX } : {}),
+                    ...(arrowY != null ? { top: arrowY } : {}),
+                    ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
+                  }}
+                  className={cn("navds-timeline__popover-arrow")}
+                />
+              )}
             </div>
           </FloatingFocusManager>
         )}

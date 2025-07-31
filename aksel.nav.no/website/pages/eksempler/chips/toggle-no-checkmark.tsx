@@ -7,32 +7,37 @@ const Example = () => {
 
   return (
     <VStack gap="10">
-      <Chips>
-        {options.map((label, id) => (
-          <Chips.Toggle
-            checkmark={false}
-            key={label}
-            selected={selected === id}
-            onClick={() => setSelected(id)}
-          >
-            {label}
-          </Chips.Toggle>
-        ))}
-      </Chips>
-
-      <Chips>
-        {options.map((label, id) => (
-          <Chips.Toggle
-            checkmark={false}
-            variant="neutral"
-            key={label}
-            selected={selected === id}
-            onClick={() => setSelected(id)}
-          >
-            {label}
-          </Chips.Toggle>
-        ))}
-      </Chips>
+      <VStack gap="3">
+        Variant action (default)
+        <Chips>
+          {options.map((label, id) => (
+            <Chips.Toggle
+              checkmark={false}
+              key={label}
+              selected={selected === id}
+              onClick={() => setSelected(id)}
+            >
+              {label}
+            </Chips.Toggle>
+          ))}
+        </Chips>
+      </VStack>
+      <VStack gap="3">
+        Variant neutral
+        <Chips>
+          {options.map((label, id) => (
+            <Chips.Toggle
+              checkmark={false}
+              variant="neutral"
+              key={label}
+              selected={selected === id}
+              onClick={() => setSelected(id)}
+            >
+              {label}
+            </Chips.Toggle>
+          ))}
+        </Chips>
+      </VStack>
     </VStack>
   );
 };

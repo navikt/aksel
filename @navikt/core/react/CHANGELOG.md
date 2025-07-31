@@ -1,5 +1,582 @@
 # @navikt/ds-react
 
+## 7.25.1
+
+### Patch Changes
+
+- Modal: When open, now updates body with correct className. ([#3922](https://github.com/navikt/aksel/pull/3922))
+
+- Search: Forward 'data-color' to SearchButton. ([#3922](https://github.com/navikt/aksel/pull/3922))
+
+- Updated dependencies [[`435f528`](https://github.com/navikt/aksel/commit/435f528d65713171533a6adfbd5f9cafd34539ba)]:
+  - @navikt/ds-tokens@7.25.1
+  - @navikt/aksel-icons@7.25.1
+
+## 7.25.0
+
+### Minor Changes
+
+- FileUpload: Allow for custom buttons in FileUpload.Item. ([#3906](https://github.com/navikt/aksel/pull/3906))
+
+### Patch Changes
+
+- Chat: Removed ol > li semantics, replaced with 'div'. ([#3904](https://github.com/navikt/aksel/pull/3904))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.25.0
+  - @navikt/aksel-icons@7.25.0
+
+## 7.24.0
+
+### Minor Changes
+
+- LinkCard: :tada: Added new component 'LinkCard'. ([#3883](https://github.com/navikt/aksel/pull/3883))
+
+- Table: :tada: Added prop 'stickyHeader', allowing header to remain sticky while scrolling in table. ([#3893](https://github.com/navikt/aksel/pull/3893))
+
+### Patch Changes
+
+- Switch: Size='small' are now visually comparable to radio and checkbox in the same size. ([#3892](https://github.com/navikt/aksel/pull/3892))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.24.0
+  - @navikt/aksel-icons@7.24.0
+
+## 7.23.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.23.2
+  - @navikt/aksel-icons@7.23.2
+
+## 7.23.1
+
+### Patch Changes
+
+- Darkside: Search now correctly respects 'clearButton'-prop when set to false. ([#3854](https://github.com/navikt/aksel/pull/3854))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.23.1
+  - @navikt/aksel-icons@7.23.1
+
+## 7.23.0
+
+### Minor Changes
+
+- Datepicker: Upgraded 'react-day-picker' dependency to v9.7.0 from v9.6.1. ([#3820](https://github.com/navikt/aksel/pull/3820))
+
+- Darkside: Renamed 'data-color-role' dynamic theme attribute to 'data-color'. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: Using attribute 'data-color' with one of the built-in colors from 'AkselColorRole' now allows re-coloring most components. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: Adding type '@navikt/ds-react/types/theme' to your local 'tsconfig.json' types-field allows autocomplete for all available color-palettes in attribute 'data-color'. You can extend 'CustomAkselColor'-type to use your own color-palettes. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: All components has been updated to use 'data-color' attribute for coloring. As a side-effect, most component CSS is either updated or refactored. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+### Patch Changes
+
+- Timeline: Reverted regression that lead to 'aria-controls' being ignored when passed to Pin or Period. ([#3828](https://github.com/navikt/aksel/pull/3828))
+
+- Timeline: Removed 'aria-haspopup' from pins and periods. ([#3834](https://github.com/navikt/aksel/pull/3834))
+
+- ErrorSummary: Heading size is now 'xsmall' for non-medium sizes and remains 'small' when size='medium'. ([#3806](https://github.com/navikt/aksel/pull/3806))
+
+- Updated dependencies [[`77129e8`](https://github.com/navikt/aksel/commit/77129e8b6f178815439bea34881d0fe26cbd274c), [`77129e8`](https://github.com/navikt/aksel/commit/77129e8b6f178815439bea34881d0fe26cbd274c), [`0932335`](https://github.com/navikt/aksel/commit/0932335a9e1323d50eeaa85ccca1db11b31d297d)]:
+  - @navikt/ds-tokens@7.23.0
+  - @navikt/aksel-icons@7.23.0
+
+## 7.22.0
+
+### Minor Changes
+
+- Box: Add support for new `radius`-tokens that will replace `borderRadius`-tokens when `darkside` is set as main. ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+### Patch Changes
+
+- ConfirmationPanel: Now tagged as deprecated. [See documentation](https://aksel.nav.no/komponenter/legacy/confirmationpanel#99622218e7f0) for more information. ([#3789](https://github.com/navikt/aksel/pull/3789))
+
+- Updated dependencies [[`1619b52`](https://github.com/navikt/aksel/commit/1619b52008c0bb5a994d4ccfccbd5620b45e6da8)]:
+  - @navikt/ds-tokens@7.22.0
+  - @navikt/aksel-icons@7.22.0
+
+## 7.21.1
+
+### Patch Changes
+
+- ExpansionCard: Omit `onToggle` from extending `HTMLAttributes<HTMLDivElement>` to avoid overlapping with popover api. ([#3773](https://github.com/navikt/aksel/pull/3773))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.21.1
+  - @navikt/aksel-icons@7.21.1
+
+## 7.21.0
+
+### Minor Changes
+
+- Chat: Add 'toptextHeadingLevel'-prop to allow changing h-level based on semantics. ([#3739](https://github.com/navikt/aksel/pull/3739))
+
+### Patch Changes
+
+- Updated dependencies [[`8ea18b0`](https://github.com/navikt/aksel/commit/8ea18b07a3bec913e04fc274983da83daca86983)]:
+  - @navikt/aksel-icons@7.21.0
+  - @navikt/ds-tokens@7.21.0
+
+## 7.20.0
+
+### Minor Changes
+
+- Combobox: Use option-value as `id` instead of `label`. ([#3735](https://github.com/navikt/aksel/pull/3735))
+
+- Timeline: Add `placement`-prop for periods for more fine-grained control over Popover-placement. ([#3736](https://github.com/navikt/aksel/pull/3736))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.20.0
+  - @navikt/aksel-icons@7.20.0
+
+## 7.19.1
+
+### Patch Changes
+
+- Darkside: Using `Page`-component would always give errors when using new `Theme`-component. ([`208adb8`](https://github.com/navikt/aksel/commit/208adb8b3f1a93a872782a8f309fed65b6b112d2))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.19.1
+  - @navikt/aksel-icons@7.19.1
+
+## 7.19.0
+
+### Minor Changes
+
+- Darkside: `<Theme />`-component no longer defaults to `light`-theme className when no theme is provided. ([#3720](https://github.com/navikt/aksel/pull/3720))
+
+### Patch Changes
+
+- Updated dependencies [[`d77e7e2`](https://github.com/navikt/aksel/commit/d77e7e203e522ed3a7fcdef5ca6abe6169314fb6)]:
+  - @navikt/ds-tokens@7.19.0
+  - @navikt/aksel-icons@7.19.0
+
+## 7.18.0
+
+### Minor Changes
+
+- Darkside: Throw error if invalid Box-props are used with new Theme instead of warnings. ([#3697](https://github.com/navikt/aksel/pull/3697))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.18.0
+  - @navikt/aksel-icons@7.18.0
+
+## 7.17.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.4
+  - @navikt/aksel-icons@7.17.4
+
+## 7.17.3
+
+### Patch Changes
+
+- Datepicker: Fixed a bug where while ranged datepicker, setting `from` to `undefined` while `to` were defined did not allow selecting new dates. ([#3655](https://github.com/navikt/aksel/pull/3655))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.3
+  - @navikt/aksel-icons@7.17.3
+
+## 7.17.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.2
+  - @navikt/aksel-icons@7.17.2
+
+## 7.17.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.1
+  - @navikt/aksel-icons@7.17.1
+
+## 7.17.0
+
+### Minor Changes
+
+- List: aria-label and aria-labelledby is forwarded to list-element. ([#3626](https://github.com/navikt/aksel/pull/3626))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.0
+  - @navikt/aksel-icons@7.17.0
+
+## 7.16.1
+
+### Patch Changes
+
+- React 19: Resolve unknown-type in Slot. ([#3627](https://github.com/navikt/aksel/pull/3627))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.16.1
+  - @navikt/aksel-icons@7.16.1
+
+## 7.16.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.16.0
+  - @navikt/aksel-icons@7.16.0
+
+## 7.15.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.15.0
+  - @navikt/aksel-icons@7.15.0
+
+## 7.14.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.14.3
+  - @navikt/aksel-icons@7.14.3
+
+## 7.14.2
+
+### Patch Changes
+
+- Updated dependencies [[`441d8b7`](https://github.com/navikt/aksel/commit/441d8b732cb4820e6fe37ad87200c5b5eb31e5cf)]:
+  - @navikt/ds-tokens@7.14.2
+  - @navikt/aksel-icons@7.14.2
+
+## 7.14.1
+
+### Patch Changes
+
+- Datepicker: Fixed regression where some fromDate/toDate instances lead to that date ending up as disabled. ([#3602](https://github.com/navikt/aksel/pull/3602))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.14.1
+  - @navikt/aksel-icons@7.14.1
+
+## 7.14.0
+
+### Minor Changes
+
+- DatePicker: Refactored locally to support `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- MonthPicker: Refactored locally and no longer depends on `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- Dependencies: `react-day-picker` bumped to `v9.5.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- Dependencies: `date-fns` bumped to `^4.0.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+### Patch Changes
+
+- Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
+
+- Updated dependencies [[`5937d08`](https://github.com/navikt/aksel/commit/5937d085c0bee19fe3625574d58aadffee0c6cf9)]:
+  - @navikt/aksel-icons@7.14.0
+  - @navikt/ds-tokens@7.14.0
+
+## 7.13.0
+
+### Patch Changes
+
+- Darkside: Added support for `ConfirmationpPanel`, `Linkpanel`, `Panel` and `Dropdown`. Note that all of these will be deprecated in the future. ([#3581](https://github.com/navikt/aksel/pull/3581))
+
+- Updated dependencies [[`636eb05`](https://github.com/navikt/aksel/commit/636eb05bf56ba2c8513704c61882fde369c2e67b)]:
+  - @navikt/aksel-icons@7.13.0
+  - @navikt/ds-tokens@7.13.0
+
+## 7.12.2
+
+### Patch Changes
+
+- Box: Added export for `BoxNew`. ([`8576400`](https://github.com/navikt/aksel/commit/857640026368153b64171f1cf954b9abac493ee8))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.2
+  - @navikt/aksel-icons@7.12.2
+
+## 7.12.1
+
+### Patch Changes
+
+- Theme: Theme-prop is now optional. ([`f269311`](https://github.com/navikt/aksel/commit/f269311dbbeb09e8fa0ba93a19aa430f0dd17255))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.1
+  - @navikt/aksel-icons@7.12.1
+
+## 7.12.0
+
+### Minor Changes
+
+- List: Marked `title`, `headingTag` and `description` properties as deprecated. These will not be supported in future versions and should be migrated from when possible. ([#3537](https://github.com/navikt/aksel/pull/3537))
+
+### Patch Changes
+
+- Table: Updated sorting icons for ascending and descending. ([#3536](https://github.com/navikt/aksel/pull/3536))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.0
+  - @navikt/aksel-icons@7.12.0
+
+## 7.11.0
+
+### Patch Changes
+
+- Updated dependencies [[`6c81fc0`](https://github.com/navikt/aksel/commit/6c81fc0b239a02499412d350af65389833d59b26)]:
+  - @navikt/aksel-icons@7.11.0
+  - @navikt/ds-tokens@7.11.0
+
+## 7.10.0
+
+### Minor Changes
+
+- Table: New prop `contentGutter` added to `ExpandableRow`-component. This allows user more control for content layout inside expandable element. ([#3507](https://github.com/navikt/aksel/pull/3507))
+
+### Patch Changes
+
+- Combobox: Always render `maxSelected` message when `isMultiSelect` is set. ([#3506](https://github.com/navikt/aksel/pull/3506))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.10.0
+  - @navikt/aksel-icons@7.10.0
+
+## 7.9.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.9.2
+  - @navikt/aksel-icons@7.9.2
+
+## 7.9.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.9.1
+  - @navikt/aksel-icons@7.9.1
+
+## 7.9.0
+
+### Minor Changes
+
+- ErrorSummary: :sparkles: new prop to prefix error with a warning icon. ([#3445](https://github.com/navikt/aksel/pull/3445))
+  All form components: replace dot with warning icon in error message.
+
+### Patch Changes
+
+- Button: Fix edge-case where setting "loading={true}" in a Modal caused the button to get 0 width and not show spinner ([#3252](https://github.com/navikt/aksel/pull/3252))
+
+- Switch: Update switch to better reflect unchecked state. ([#3468](https://github.com/navikt/aksel/pull/3468))
+
+- Textarea: resize immediately upon receiving resize event (eg. inside modal opening). ([#3463](https://github.com/navikt/aksel/pull/3463))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.9.0
+  - @navikt/aksel-icons@7.9.0
+
+## 7.8.1
+
+### Patch Changes
+
+- Combobox: Only open dropdown-list onClick, not onFocus. ([#3440](https://github.com/navikt/aksel/pull/3440))
+
+- Combobox: Fix issue where you could select more options than defined in maxSelected ([#3434](https://github.com/navikt/aksel/pull/3434))
+
+- Timeline: In cases where earliest found date were after current date, timeline-start ended up defaulting to current date. ([#3458](https://github.com/navikt/aksel/pull/3458))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.8.1
+  - @navikt/aksel-icons@7.8.1
+
+## 7.8.0
+
+### Minor Changes
+
+- Chips.Removable: Removed prop `removeLabel` ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- i18n: :sparkles: Implemented i18n support for all components. Components come with support for nb, nn and en locales ([Docs](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517)) ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+- Combobox: Changed prop `maxSelected` to number ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+- DatePicker/MonthPicker: Added new `translations` prop and deprecated `locale` prop ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+### Patch Changes
+
+- Timeline: Deprecated prop `axisLabelTemplates`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change the date formats. ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Search: Deprecated prop `clearButtonLabel`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change the label. ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Textarea: Deprecated prop `i18n`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change these texts. ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.8.0
+  - @navikt/aksel-icons@7.8.0
+
+## 7.7.0
+
+### Minor Changes
+
+- CopyButton: Removed prop `activeTitle`. Use `activeText` instead. ([#3426](https://github.com/navikt/aksel/pull/3426))
+
+- Combobox: :boom: Removed prop `toggleListButtonLabel` ([#3409](https://github.com/navikt/aksel/pull/3409))
+
+### Patch Changes
+
+- Combobox: Hid buttons from screen readers, added `title` on clear button, removed sr-only text on toggle list button. ([#3409](https://github.com/navikt/aksel/pull/3409))
+
+- InternalHeader.UserButton: Remove `title`-attribute on icon and improved types. ([#3424](https://github.com/navikt/aksel/pull/3424))
+
+- CopyButton: Fix issue where state changes are announced multiple times using VO in Chrome ([#3374](https://github.com/navikt/aksel/pull/3374))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.7.0
+  - @navikt/aksel-icons@7.7.0
+
+## 7.6.0
+
+### Minor Changes
+
+- ActionMenu: Added 'align'-prop to 'ActionMenu.Content'. This allows menu to 'start' or 'end' align in reference to anchor. ([#3414](https://github.com/navikt/aksel/pull/3414))
+
+- ReadMore: Added size 'large'. ([#3372](https://github.com/navikt/aksel/pull/3372))
+
+### Patch Changes
+
+- DatePicker/MonthPicker: Remove pointerEvents=none on CalendarIcon so that the title shows up as tooltip on hover ([#3390](https://github.com/navikt/aksel/pull/3390))
+
+- Combobox: Single-select now shows cursor closer to selected item. ([#3384](https://github.com/navikt/aksel/pull/3384))
+
+- Updated dependencies [[`9c5b32f`](https://github.com/navikt/aksel/commit/9c5b32f9bae885585b5f50b637505017482b1d59)]:
+  - @navikt/aksel-icons@7.6.0
+  - @navikt/ds-tokens@7.6.0
+
+## 7.5.3
+
+### Patch Changes
+
+- Allow RC versions of React 19 through peerDependencies ([#3391](https://github.com/navikt/aksel/pull/3391))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.3
+  - @navikt/aksel-icons@7.5.3
+
+## 7.5.2
+
+### Patch Changes
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.2
+  - @navikt/aksel-icons@7.5.2
+
+## 7.5.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.1
+  - @navikt/aksel-icons@7.5.1
+
+## 7.5.0
+
+### Minor Changes
+
+- React: Allow all react versions above 17.0.0 trough peerDependencies. ([#3334](https://github.com/navikt/aksel/pull/3334))
+
+### Patch Changes
+
+- Datepicker: Use of 'open'-prop set to 'true' on first render could lead to the dialog not opening. ([#3333](https://github.com/navikt/aksel/pull/3333))
+
+- Updated dependencies [[`47a4dd6`](https://github.com/navikt/aksel/commit/47a4dd6c4c37a9ced9df1f21529e8a6244b342b1)]:
+  - @navikt/aksel-icons@7.5.0
+  - @navikt/ds-tokens@7.5.0
+
+## 7.4.3
+
+### Patch Changes
+
+- Pagination: More precise type for renderItem ([#3275](https://github.com/navikt/aksel/pull/3275))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.3
+  - @navikt/aksel-icons@7.4.3
+
+## 7.4.2
+
+### Patch Changes
+
+- Combobox: Pressing 'Enter' after canceling autocomplete could result in using matching options in list. ([#3306](https://github.com/navikt/aksel/pull/3306))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.2
+  - @navikt/aksel-icons@7.4.2
+
+## 7.4.1
+
+### Patch Changes
+
+- Tabs.List: Remove redundant icon titles ([#3282](https://github.com/navikt/aksel/pull/3282))
+
+- Combobox: onToggleSelected is now called with correct value when autocomplete and new values are allowed. ([#3287](https://github.com/navikt/aksel/pull/3287))
+
+- Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
+
+- Search: Remove redundant role attribute ([#3280](https://github.com/navikt/aksel/pull/3280))
+
+- Monthpicker: Add allowed input format 'MMyyyy'. ([#3285](https://github.com/navikt/aksel/pull/3285))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.1
+  - @navikt/aksel-icons@7.4.1
+
+## 7.4.0
+
+### Minor Changes
+
+- Combobox: Enable option to add a new value while autocompleting and highlight matches in FilteredOptions. ([#3225](https://github.com/navikt/aksel/pull/3225))
+
+### Patch Changes
+
+- Date/MonthPicker: Upgrade react-day-picker to fix issue with React 19 ([#3268](https://github.com/navikt/aksel/pull/3268))
+
+- Combobox: Don't scroll when browsing list with mouse ([#3265](https://github.com/navikt/aksel/pull/3265))
+
+- Avoid warning about element.ref in React 19 ([#3268](https://github.com/navikt/aksel/pull/3268))
+
+- Checkbox: Remove redundant attribute aria-checked ([#3274](https://github.com/navikt/aksel/pull/3274))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.0
+  - @navikt/aksel-icons@7.4.0
+
+## 7.3.1
+
+### Patch Changes
+
+- Combobox: :bug: Remove virtual focus on input blur instead of moving it ([#3261](https://github.com/navikt/aksel/pull/3261))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.3.1
+  - @navikt/aksel-icons@7.3.1
+
 ## 7.3.0
 
 ### Minor Changes

@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import Body from "./Body";
 import ColumnHeader from "./ColumnHeader";
 import DataCell from "./DataCell";
@@ -22,6 +22,11 @@ export interface TableProps
    * @default false
    */
   zebraStripes?: boolean;
+  /**
+   * Makes the header sticky
+   * @default false
+   */
+  stickyHeader?: boolean;
   /**
    * Sort state
    */
@@ -85,20 +90,25 @@ export const Table = forwardRef(
       size = "medium",
       onSortChange,
       sort,
+      stickyHeader = false,
       ...rest
     },
     ref,
-  ) => (
-    <TableContext.Provider value={{ onSortChange, sort }}>
-      <table
-        {...rest}
-        ref={ref}
-        className={cl("navds-table", `navds-table--${size}`, className, {
-          "navds-table--zebra-stripes": zebraStripes,
-        })}
-      />
-    </TableContext.Provider>
-  ),
+  ) => {
+    const { cn } = useRenameCSS();
+    return (
+      <TableContext.Provider value={{ onSortChange, sort }}>
+        <table
+          {...rest}
+          ref={ref}
+          className={cn("navds-table", `navds-table--${size}`, className, {
+            "navds-table--zebra-stripes": zebraStripes,
+            "navds-table--sticky-header": stickyHeader,
+          })}
+        />
+      </TableContext.Provider>
+    );
+  },
 ) as TableType;
 
 Table.Header = Header;

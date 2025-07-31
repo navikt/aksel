@@ -1,0 +1,66 @@
+.aksel-box-bg {
+  --__axc-box-background: initial;
+
+  background-color: var(--__axc-box-background);
+}
+
+.aksel-box-border-color {
+  --__axc-box-border-color: initial;
+
+  border-color: var(--__axc-box-border-color);
+}
+
+.aksel-box-border-width {
+  --__axc-box-border-width: initial;
+
+  border-style: solid;
+  border-width: var(--__axc-box-border-width, 0);
+}
+
+.aksel-box-radius {
+  --__axc-box-radius-xs: initial;
+  --__axc-box-radius-sm: var(--__axc-box-radius-xs);
+  --__axc-box-radius-md: var(--__axc-box-radius-sm);
+  --__axc-box-radius-lg: var(--__axc-box-radius-md);
+  --__axc-box-radius-xl: var(--__axc-box-radius-lg);
+  --__axc-box-radius-2xl: var(--__axc-box-radius-xl);
+  --__axc-box-radius: var(--__axc-box-radius-xs);
+
+  border-radius: var(--__axc-box-radius);
+}
+
+.aksel-box-shadow {
+  --__axc-box-shadow: initial;
+
+  box-shadow: var(--__axc-box-shadow);
+}
+
+@media (min-width: 480px) {
+  .aksel-box-radius {
+    --__axc-box-radius: var(--__axc-box-radius-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .aksel-box-radius {
+    --__axc-box-radius: var(--__axc-box-radius-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .aksel-box-radius {
+    --__axc-box-radius: var(--__axc-box-radius-lg);
+  }
+}
+
+@media (min-width: 1280px) {
+  .aksel-box-radius {
+    --__axc-box-radius: var(--__axc-box-radius-xl);
+  }
+}
+
+@media (min-width: 1440px) {
+  .aksel-box-radius {
+    --__axc-box-radius: var(--__axc-box-radius-2xl);
+  }
+}

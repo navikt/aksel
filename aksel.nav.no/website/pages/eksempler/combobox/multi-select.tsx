@@ -3,27 +3,25 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div>
-      <UNSAFE_Combobox
-        label="Hva er de kuleste transportmidlene?"
-        options={initialOptions}
-        isMultiSelect
-      />
-    </div>
+    <UNSAFE_Combobox
+      label="Hva er de kuleste transportmidlene?"
+      options={options}
+      isMultiSelect
+    />
   );
 };
 
-const initialOptions = [
-  "car",
-  "bus",
-  "train",
+const options = [
+  "bil",
+  "buss",
+  "tog",
   "skateboard",
-  "bicycle",
-  "motorcycle",
-  "boat",
-  "airplane",
-  "helicopter",
-  "truck",
+  "sykkel",
+  "motorsykkel",
+  "båt",
+  "fly",
+  "helikopter",
+  "lastebil",
   "van",
   "scooter",
 ];
@@ -38,5 +36,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "Ved Multi Select kan brukeren velge flere valg fra listen.",
+  desc: "Med `isMultiSelect` kan brukeren velge flere alternativer fra nedtrekkslisten.",
 };

@@ -27,7 +27,8 @@
 }
 
 .navds-form-progress__collapsible[hidden] {
-  display: grid;
+  /* CSS-resets sets 'hidden' to display non with imporant */
+  display: grid !important;
 }
 
 .navds-form-progress__collapsible[data-state="open"] {

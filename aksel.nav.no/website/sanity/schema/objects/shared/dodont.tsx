@@ -1,6 +1,5 @@
 import { defineField, defineType } from "sanity";
-import { CheckmarkCircleIcon } from "@navikt/aksel-icons";
-import AkselDoDont from "@/cms/do-dont/DoDont";
+import { CheckmarkCircleIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 
 export const DoDont = defineType({
   title: "Do / Dont",
@@ -16,12 +15,17 @@ export const DoDont = defineType({
       validation: (Rule) => Rule.required().max(4),
     }),
   ],
-  components: {
-    preview: (values) => (<AkselDoDont node={values as any} />) as any,
-  },
   preview: {
     select: {
       blokker: "blokker",
+    },
+    prepare: ({ blokker }: any) => {
+      const imgOneAlt = blokker?.[0]?.alt;
+      return {
+        title: imgOneAlt ? `Bilde 1: ${imgOneAlt}` : `Bilder`,
+        subtitle: "Do-dont modul",
+        media: ThumbUpIcon,
+      };
     },
   },
 });

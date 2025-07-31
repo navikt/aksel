@@ -1,14 +1,17 @@
 import { readFileSync, writeFileSync } from "fs";
 
-const cssFilePath = "./dist/tokens.css";
+const cssFilePaths = ["./dist/tokens.css", "./dist/darkside/tokens.css"];
 const packageJsonPath = "./package.json";
 
 const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8"));
 const version = packageJson.version;
 
-let cssContent = readFileSync(cssFilePath, "utf8");
+for (const path of cssFilePaths) {
+  let cssContent = readFileSync(path, "utf8");
 
-if (!cssContent.includes("--a-version")) {
-  cssContent = cssContent.replace("{", `{\n  --a-version: "${version}";`);
-  writeFileSync(cssFilePath, cssContent);
+  cssContent = cssContent.replace(
+    ":root, :host {",
+    `:root, :host {\n  --ax-version: "${version}";`,
+  );
+  writeFileSync(path, cssContent);
 }

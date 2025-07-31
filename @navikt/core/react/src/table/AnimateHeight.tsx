@@ -1,5 +1,6 @@
 /* https://github.com/Stanko/react-animate-height/blob/v3/src/index.tsx */
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import { useRenameCSS } from "../theme/Theme";
 
 // ------------------ Types
 
@@ -67,6 +68,7 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   height,
   ...props
 }) => {
+  const { cn } = useRenameCSS();
   // ------------------ Initialization
   const prevHeight = useRef<Height>(height);
   const contentElement = useRef<HTMLDivElement>(null);
@@ -227,10 +229,10 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   const ariaHidden = hasAriaHiddenProp ? props["aria-hidden"] : height === 0;
 
   return (
-    <div {...props} className={className} style={componentStyle}>
+    <div {...props} className={cn(className)} style={componentStyle}>
       <div
         aria-hidden={ariaHidden}
-        className={innerClassName}
+        className={cn(innerClassName)}
         ref={contentElement}
       >
         {children}

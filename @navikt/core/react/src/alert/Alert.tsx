@@ -1,4 +1,3 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import {
   CheckmarkCircleFillIcon,
@@ -8,8 +7,10 @@ import {
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../button";
+import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { BodyLong } from "../typography";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -53,6 +54,10 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * **Requires closeButton to be true**.
    */
   onClose?: () => void;
+  /**
+   * Overriding Alert color is not supported.
+   */
+  "data-color"?: never;
 }
 
 const IconMap = {
@@ -87,13 +92,16 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const translate = useI18n("Alert");
     const Icon = IconMap[variant];
     return (
       <div
         {...rest}
+        data-color={variantToRole(variant)}
+        data-variant={variant}
         ref={ref}
-        className={cl(
+        className={cn(
           className,
           "navds-alert",
           `navds-alert--${variant}`,
@@ -105,11 +113,11 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
           },
         )}
       >
-        <Icon title={translate(variant)} className="navds-alert__icon" />
+        <Icon title={translate(variant)} className={cn("navds-alert__icon")} />
         <BodyLong
           as="div"
           size={size}
-          className={cl(
+          className={cn(
             "navds-alert__wrapper",
             contentMaxWidth && "navds-alert__wrapper--maxwidth",
           )}
@@ -117,9 +125,9 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
           {children}
         </BodyLong>
         {closeButton && !inline && (
-          <div className="navds-alert__button-wrapper">
+          <div className={cn("navds-alert__button-wrapper")}>
             <Button
-              className="navds-alert__button"
+              className={cn("navds-alert__button")}
               size="small"
               variant="tertiary-neutral"
               onClick={onClose}
@@ -140,5 +148,20 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     );
   },
 );
+
+function variantToRole(variant: AlertProps["variant"]): AkselColor {
+  switch (variant) {
+    case "warning":
+      return "warning";
+    case "error":
+      return "danger";
+    case "info":
+      return "info";
+    case "success":
+      return "success";
+    default:
+      return "info";
+  }
+}
 
 export default Alert;

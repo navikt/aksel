@@ -1,13 +1,12 @@
 import {
   BulletListIcon,
-  CodeIcon,
   ExternalLinkIcon,
   FileTextIcon,
   LinkIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
-import InlineCode from "@/web/InlineCode";
-import KBD from "@/web/KBD";
+import { Kbd } from "@/app/_ui/kbd/Kbd";
+import { Code } from "@/app/_ui/typography/Code";
 import { allArticleDocsRef } from "../../../config";
 import {
   ExternalLinkRenderer,
@@ -18,7 +17,7 @@ export const styles = [
   {
     title: "Avsnitt",
     value: "normal",
-    component: (props) => <p className="text-lg">{props.children}</p>,
+    component: (props) => <p>{props.children}</p>,
   },
 ];
 
@@ -43,38 +42,30 @@ export const block = {
       {
         title: "Strong",
         value: "strong",
-        icon: () => (
-          <span className="font-semibold" aria-label="bold">
-            B
-          </span>
+        component: ({ children }) => (
+          <strong style={{ fontWeight: 600 }}>{children}</strong>
         ),
       },
       {
         title: "Italic",
         value: "em",
-        icon: () => (
-          <span className="italic" aria-label="italic">
-            i
-          </span>
-        ),
       },
       {
         title: "Inline-Kode",
         value: "code",
-        icon: () => <CodeIcon aria-label="Kode" />,
-        component: ({ children }) => <InlineCode>{children}</InlineCode>,
+        component: ({ children }) => <Code>{children}</Code>,
       },
       {
         title: "Quote",
         value: "quote",
-        icon: () => <span className="font-semibold">Q</span>,
+        icon: () => <span>Q</span>,
         component: ({ children }) => <q>{children}</q>,
       },
       {
         title: "Keyboard",
         value: "kbd",
         icon: () => <kbd>KBD</kbd>,
-        component: ({ children }) => <KBD>{children}</KBD>,
+        component: ({ children }) => <Kbd>{children}</Kbd>,
       },
     ],
     annotations: [
@@ -128,26 +119,26 @@ export const block = {
 export const headingStyles = [
   ...block.styles,
   {
-    title: "H2",
+    title: "Heading 2",
     value: "h2",
   },
   {
-    title: "H3",
+    title: "Heading 3",
     value: "h3",
   },
   {
-    title: "H4",
+    title: "Heading 4",
     value: "h4",
   },
 ];
 
 const Riktekst = (
   type:
+    | "blogg"
     | "god-praksis"
     | "grunnleggende"
     | "templates"
     | "komponent"
-    | "prinsipp"
     | "standard"
     | "standalone"
     | "accordion",
@@ -165,6 +156,7 @@ const Riktekst = (
     "tabell_v2",
     "video",
     "exampletext_block",
+    "language",
   ];
 
   const accordion = [
@@ -179,16 +171,11 @@ const Riktekst = (
     "exampletext_block",
   ];
 
-  const komponent = [
-    "props_seksjon",
-    "tastatur_modul",
-    "kode_eksempler",
-    "token_ref",
-  ];
+  const komponent = ["props_seksjon", "kode_eksempler", "token_ref"];
 
   const templates = ["kode_eksempler", "exampletext_block"];
-
   const grunnleggende = ["spesial_seksjon", "attachment", "props_seksjon"];
+  const blogg = ["compare_images"];
 
   fields.push(...standard);
 
@@ -199,14 +186,14 @@ const Riktekst = (
     case "grunnleggende":
       fields.push(...grunnleggende);
       break;
-    case "prinsipp":
-      fields.push("innholdskort");
-      break;
     case "accordion":
       fields = [...accordion];
       break;
     case "templates":
       fields.push(...templates);
+      break;
+    case "blogg":
+      fields.push(...blogg);
       break;
     default:
       break;
@@ -235,7 +222,7 @@ export const RiktekstPrinsipp = {
   title: "Riktekst Aksel",
   name: "riktekst_prinsipp",
   type: "array",
-  of: Riktekst("prinsipp"),
+  of: Riktekst("standard"),
   icon: () => <FileTextIcon aria-hidden />,
 };
 
@@ -265,7 +252,7 @@ export const RiktekstEnkel = {
 
 export const RiktekstAccordion = {
   title: "Riktekst",
-  name: "riktekst_accordion",
+  name: "riktekst_accordion", // NB: Used in expansion-card
   type: "array",
   of: Riktekst("accordion"),
   icon: () => <FileTextIcon aria-hidden />,
@@ -284,5 +271,13 @@ export const RiktekstTemplates = {
   name: "riktekst_templates",
   type: "array",
   of: Riktekst("templates"),
+  icon: () => <FileTextIcon aria-hidden />,
+};
+
+export const RiktekstBlogg = {
+  title: "Riktekst",
+  name: "riktekst_blogg",
+  type: "array",
+  of: Riktekst("blogg"),
   icon: () => <FileTextIcon aria-hidden />,
 };

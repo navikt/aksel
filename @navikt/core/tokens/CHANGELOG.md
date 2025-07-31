@@ -1,5 +1,121 @@
 # @navikt/ds-tokens
 
+## 7.25.1
+
+### Patch Changes
+
+- Darkside: Updated Meta-lime 300 and 400. ([#3928](https://github.com/navikt/aksel/pull/3928))
+
+## 7.25.0
+
+## 7.24.0
+
+## 7.23.2
+
+## 7.23.1
+
+## 7.23.0
+
+### Minor Changes
+
+- Darkside: Renamed 'data-color-role' dynamic theme attribute to 'data-color'. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+- Darkside: 'Accent' is now set as the default color palette in components when no other options are set. ([#3849](https://github.com/navikt/aksel/pull/3849))
+
+## 7.22.0
+
+### Minor Changes
+
+- Border-radius: Add new `radius`-tokens that will replace `border-radius`-tokens. T-shirt sizing is replaced with numbers reflecting its value. `--a-border-radius-medium` is now `--ax-radius-4`. Until darkside-theming is mainlined, we will continue to support both new and legacy border-radius side by side. ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+## 7.21.1
+
+## 7.21.0
+
+## 7.20.0
+
+## 7.19.1
+
+## 7.19.0
+
+### Patch Changes
+
+- Darkside: Update global 'meta-purple' color. ([#3703](https://github.com/navikt/aksel/pull/3703))
+
+## 7.18.0
+
+## 7.17.4
+
+## 7.17.3
+
+## 7.17.2
+
+## 7.17.1
+
+## 7.17.0
+
+## 7.16.1
+
+## 7.16.0
+
+## 7.15.0
+
+## 7.14.3
+
+## 7.14.2
+
+### Patch Changes
+
+- Darkside: :lipstick: Bumped `bg-raised` token to `neutral-200` in darkmode. ([`441d8b7`](https://github.com/navikt/aksel/commit/441d8b732cb4820e6fe37ad87200c5b5eb31e5cf))
+
+## 7.14.1
+
+## 7.14.0
+
+## 7.13.0
+
+## 7.12.2
+
+## 7.12.1
+
+## 7.12.0
+
+## 7.11.0
+
+## 7.10.0
+
+## 7.9.2
+
+## 7.9.1
+
+## 7.9.0
+
+## 7.8.1
+
+## 7.8.0
+
+## 7.7.0
+
+## 7.6.0
+
+## 7.5.3
+
+## 7.5.2
+
+## 7.5.1
+
+## 7.5.0
+
+## 7.4.3
+
+## 7.4.2
+
+## 7.4.1
+
+## 7.4.0
+
+## 7.3.1
+
 ## 7.3.0
 
 ## 7.2.1

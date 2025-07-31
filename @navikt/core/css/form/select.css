@@ -11,6 +11,7 @@
   position: relative;
   padding: 0.5rem;
   padding-right: 2rem;
+  scroll-margin-block-start: 4rem;
 }
 
 @media (forced-colors: active) {
@@ -22,7 +23,7 @@
     box-shadow: none;
   }
 
-  .navds-select__input.navds-select__input.navds-select__input:focus-visible {
+  .navds-select__input.navds-select__input.navds-select__input:focus {
     outline: 2px solid highlight;
     outline-offset: 2px;
   }
@@ -33,17 +34,10 @@
   cursor: pointer;
 }
 
-.navds-select__input:focus-visible {
+.navds-select__input:focus {
   outline: none;
   border-color: var(--ac-select-active-border, var(--a-border-action-selected));
   box-shadow: var(--a-shadow-focus);
-}
-
-@supports not selector(:focus-visible) {
-  .navds-select__input:focus {
-    outline: none;
-    box-shadow: var(--a-shadow-focus);
-  }
 }
 
 .navds-select__container {
@@ -80,9 +74,13 @@
 /**
   Error handling
 */
-.navds-select--error > * select:not(:hover, :focus, :disabled) {
+.navds-select--error > * .navds-select__input:not(:hover, :disabled) {
   box-shadow: 0 0 0 1px var(--ac-select-error-border, var(--a-surface-danger));
   border-color: var(--ac-select-error-border, var(--a-surface-danger));
+}
+
+.navds-select--error .navds-select__input:focus {
+  box-shadow: var(--a-shadow-focus);
 }
 
 /**

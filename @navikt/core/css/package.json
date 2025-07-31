@@ -1,8 +1,8 @@
 {
   "name": "@navikt/ds-css",
-  "version": "7.3.0",
-  "description": "CSS for NAV Designsystem",
-  "author": "Aksel | NAV designsystem team",
+  "version": "7.25.1",
+  "description": "CSS for Nav Designsystem",
+  "author": "Aksel | Nav designsystem team",
   "keywords": [
     "css"
   ],
@@ -18,31 +18,44 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/aksel.git"
+    "url": "git+https://github.com/navikt/aksel.git",
+    "directory": "@navikt/core/css"
   },
-  "main": "./dist/index.css",
   "scripts": {
-    "build": "node config/bundle.js",
-    "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\"",
-    "css:get-version": "node config/get-version.js"
+    "build": "node config/bundle.js && yarn build:darkside",
+    "css:get-version": "node config/get-version.js",
+    "build:darkside": "tsx ./config/bundle.darkside.ts",
+    "test": "yarn build && vitest run"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^7.3.0",
+    "@navikt/ds-tokens": "^7.25.1",
     "autoprefixer": "^10.4.20",
-    "cssnano": "6.0.0",
+    "browserslist": "^4.25.0",
+    "cssnano": "7.0.6",
+    "esbuild": "^0.25.5",
     "fast-glob": "3.2.11",
+    "lightningcss": "^1.29.3",
     "lodash": "^4.17.21",
-    "nodemon": "^3.0.1",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^9.0.0",
     "postcss-combine-duplicated-selectors": "10.0.3",
-    "postcss-import": "^14.1.0"
+    "postcss-import": "^14.1.0",
+    "tsx": "^4.19.1",
+    "vitest": "^2.1.9"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "main": "./dist/index.css",
+  "exports": {
+    ".": "./dist/index.css",
+    "./dist/*": "./dist/*",
+    "./darkside": "./dist/darkside/index.css",
+    "./tokens.json": "./tokens.json",
+    "./config/_mappings": "./config/_mappings.js"
+  }
 }

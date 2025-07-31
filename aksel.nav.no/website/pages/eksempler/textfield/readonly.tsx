@@ -2,7 +2,14 @@ import { TextField } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  return <TextField label="Har du noen tilbakemeldinger?" readOnly />;
+  return (
+    <TextField
+      label="Adresse"
+      description="Hentet fra Folkeregisteret"
+      value="Portveien 2"
+      readOnly
+    />
+  );
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE

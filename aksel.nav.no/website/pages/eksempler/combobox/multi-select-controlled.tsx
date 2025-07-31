@@ -4,10 +4,6 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [value, setValue] = useState("");
-  const mockPersistUserAddedValues = (option, isSelected) => {
-    console.info("custom option", { option, isSelected });
-  };
-
   const [selectedOptions, setSelectedOptions] = useState(
     initialSelectedOptions,
   );
@@ -15,6 +11,9 @@ const Example = () => {
     () => initialOptions.filter((option) => option.includes(value)),
     [value],
   );
+  const mockPersistUserAddedValues = (option: string, isSelected: boolean) => {
+    console.info("custom option", { option, isSelected });
+  };
 
   const onToggleSelected = (
     option: string,
@@ -32,19 +31,17 @@ const Example = () => {
   };
 
   return (
-    <div>
-      <UNSAFE_Combobox
-        allowNewValues
-        label="Hvilke land har du besøkt de siste 6 ukene? Velg opptil flere."
-        filteredOptions={filteredOptions}
-        isMultiSelect
-        onChange={setValue}
-        onToggleSelected={onToggleSelected}
-        selectedOptions={selectedOptions}
-        options={initialOptions}
-        value={value}
-      />
-    </div>
+    <UNSAFE_Combobox
+      allowNewValues
+      label="Hvilke land har du besøkt de siste 6 ukene?"
+      filteredOptions={filteredOptions}
+      isMultiSelect
+      onChange={setValue}
+      onToggleSelected={onToggleSelected}
+      selectedOptions={selectedOptions}
+      options={initialOptions}
+      value={value}
+    />
   );
 };
 
@@ -77,5 +74,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Du kan overstyre blant annet value, selectedOptions, filteredOptions.",
+  desc: "Du kan overstyre blant annet value, selectedOptions og filteredOptions.",
 };

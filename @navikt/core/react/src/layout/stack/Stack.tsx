@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
@@ -46,9 +46,9 @@ export type StackProps = HTMLAttributes<HTMLDivElement> & {
    * or an object of spacing tokens for different breakpoints.
    *
    * @example
-   * gap='4'
-   * gap='8 4'
-   * gap={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * gap='space-16'
+   * gap='space-32 space-16'
+   * gap={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   gap?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**
@@ -83,12 +83,16 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       },
       ref,
     ) => {
+      const themeContext = useThemeInternal(false);
+      const prefix = themeContext ? "ax" : "a";
+      const { cn } = useRenameCSS();
+
       const style: React.CSSProperties = {
         ..._style,
-        ...getResponsiveProps(`stack`, "gap", "spacing", gap),
-        ...getResponsiveValue(`stack`, "direction", direction),
-        ...getResponsiveValue(`stack`, "align", align),
-        ...getResponsiveValue(`stack`, "justify", justify),
+        ...getResponsiveProps(prefix, `stack`, "gap", "spacing", gap),
+        ...getResponsiveValue(prefix, `stack`, "direction", direction),
+        ...getResponsiveValue(prefix, `stack`, "align", align),
+        ...getResponsiveValue(prefix, `stack`, "justify", justify),
       };
 
       const Comp = asChild ? Slot : Component;
@@ -99,7 +103,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
             {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
             style={style}
-            className={cl("navds-stack", className, {
+            className={cn("navds-stack", className, {
               "navds-vstack": direction === "column",
               "navds-hstack": direction === "row",
               "navds-stack-gap": gap,

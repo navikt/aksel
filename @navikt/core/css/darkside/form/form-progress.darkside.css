@@ -1,0 +1,55 @@
+.aksel-form-progress__bar {
+  margin-bottom: var(--ax-space-8);
+}
+
+.aksel-form-progress__button {
+  &:focus-visible {
+    z-index: 1;
+  }
+
+  &[data-state="open"] {
+    & svg {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.aksel-form-progress__button[data-state="closed"] .aksel-form-progress__btn-txt-hide,
+.aksel-form-progress__button[data-state="open"] .aksel-form-progress__btn-txt-show {
+  display: none;
+}
+
+.aksel-form-progress__collapsible {
+  display: grid;
+  visibility: hidden;
+  overflow: hidden;
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  border-radius: var(--ax-radius-12);
+  background: var(--ax-bg-raised);
+  padding-inline: var(--ax-space-20);
+  padding-block: 0;
+  opacity: 0.001;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  transition-property: margin-top, opacity, visibility, padding-block-start, grid-template-rows;
+  grid-template-rows: 0fr;
+
+  /* border-block leaves 2px of space when closes, so offset 2px with margin */
+  margin-top: -2px;
+
+  &[hidden] {
+    display: grid;
+  }
+
+  &[data-state="open"] {
+    margin-top: var(--ax-space-4);
+    grid-template-rows: 1fr;
+    visibility: visible;
+    padding-block: var(--ax-space-16);
+    opacity: 1;
+  }
+}
+
+.aksel-form-progress__collapsible-content {
+  min-height: 0;
+}

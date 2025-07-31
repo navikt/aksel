@@ -1,18 +1,14 @@
 import lodash from "lodash";
 import StyleDictionary from "style-dictionary";
-import { Dictionary, TransformedToken } from "style-dictionary/types";
+import { type Dictionary, type TransformedToken } from "style-dictionary/types";
 import { createPropertyFormatter, getReferences } from "style-dictionary/utils";
-import {
-  darkModeTokens,
-  lightModeTokens,
-  scaleTokens,
-} from "../create-configuration";
-import { transformCSS } from "../sd-format";
+import { transformCSS } from "../style-dictionary.formats";
+import { darkModeTokens, lightModeTokens, scaleTokens } from "../tokens.config";
 import {
   type SemanticTokenGroups,
   type StyleDictionaryToken,
   type TokenTypes,
-} from "../util";
+} from "../tokens.util";
 import type { FigmaToken } from "./figma-config.types";
 
 const config = {
@@ -46,21 +42,23 @@ export const getTokensForCollection = async (
 
   const dictionary = await SD.getPlatformTokens(collection);
 
-  return dictionary.allTokens.map((token) => {
-    const reference = getReferences(token.original, dictionary.tokens);
-    /*
-     * Currently only supports 1 level of references.
-     */
-    return reference.length > 0
-      ? prepareToken(
-          {
-            ...(token as TransformedTokenWithScopes),
-            alias: createTokenName(reference[0]),
-          },
-          dictionary,
-        )
-      : prepareToken(token as TransformedTokenWithScopes, dictionary);
-  });
+  return dictionary.allTokens
+    .filter((token) => !token.figmaIgnore)
+    .map((token) => {
+      const reference = getReferences(token.original, dictionary.tokens);
+      /*
+       * Currently only supports 1 level of references.
+       */
+      return reference.length > 0
+        ? prepareToken(
+            {
+              ...(token as TransformedTokenWithScopes),
+              alias: createTokenName(reference[0]),
+            },
+            dictionary,
+          )
+        : prepareToken(token as TransformedTokenWithScopes, dictionary);
+    });
 };
 
 type TransformedTokenWithScopes = TransformedToken & {
@@ -100,7 +98,7 @@ function prepareToken(
  * @see https://www.figma.com/plugin-docs/api/properties/figma-util-rgba
  */
 export function figmaValue(token: TransformedToken): string | number {
-  if (isRadiusToken(token) || isSpacingToken(token)) {
+  if (isRadiusToken(token) || isSpaceToken(token)) {
     const float = parseFloat(token.value.replace("px", "").replace("rem", ""));
 
     /*
@@ -135,7 +133,7 @@ function figmaSettings(token: TransformedTokenWithScopes): {
     setting = createFigmaSettings("COLOR", ["SHAPE_FILL", "TEXT_FILL"]);
   } else if (isRadiusToken(token)) {
     setting = createFigmaSettings("FLOAT", ["CORNER_RADIUS"]);
-  } else if (isSpacingToken(token)) {
+  } else if (isSpaceToken(token)) {
     setting = createFigmaSettings("FLOAT", ["GAP"]);
   }
 
@@ -190,8 +188,8 @@ export function createTokenName(token: TransformedToken) {
     return "Radius " + name;
   }
 
-  if (isSpacingToken(token)) {
-    return "Spacing " + name;
+  if (isSpaceToken(token)) {
+    return "Space " + name;
   }
 
   return name;
@@ -238,7 +236,7 @@ export function isRadiusToken(token: TransformedToken | FigmaToken): boolean {
   return type === "global-radius";
 }
 
-export function isSpacingToken(token: TransformedToken | FigmaToken): boolean {
+export function isSpaceToken(token: TransformedToken | FigmaToken): boolean {
   const type = token.type as TokenTypes;
-  return type === "global-spacing";
+  return type === "global-space";
 }

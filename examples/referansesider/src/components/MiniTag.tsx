@@ -1,34 +1,34 @@
 import styled from "styled-components";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 
 const bgMap = {
-  info: tokens.BgInfo,
-  warning: tokens.BgWarning,
-  success: tokens.BgSuccess,
-  neutral: tokens.BgNeutral,
+  info: tokens.BgInfoSoft,
+  warning: tokens.BgWarningSoft,
+  success: tokens.BgSuccessSoft,
+  neutral: tokens.BgNeutralModerate,
   ["info-moderate"]: tokens.BgInfoModerate,
   ["warning-moderate"]: tokens.BgWarningModerate,
   ["success-moderate"]: tokens.BgSuccessModerate,
-  ["neutral-moderate"]: tokens.BgNeutralModerate,
+  ["neutral-moderate"]: tokens.BgDefault,
   ["info-strong"]: tokens.BgInfoStrong,
   ["warning-strong"]: tokens.BgWarningStrong,
   ["success-strong"]: tokens.BgSuccessStrong,
-  ["neutral-strong"]: tokens.BgNeutralStrong,
+  ["neutral-strong"]: tokens.BgNeutralModeratePressed,
 };
 
 const fgMap = {
-  info: tokens.TextInfo,
-  warning: tokens.TextWarning,
-  success: tokens.TextSuccess,
-  neutral: tokens.TextNeutral,
-  ["info-moderate"]: tokens.TextInfoStrong,
-  ["warning-moderate"]: tokens.TextWarningStrong,
-  ["success-moderate"]: tokens.TextSuccessStrong,
-  ["neutral-moderate"]: tokens.TextNeutralStrong,
-  ["info-strong"]: tokens.TextInfoStrong,
-  ["warning-strong"]: tokens.TextWarningStrong,
-  ["success-strong"]: tokens.TextSuccessStrong,
-  ["neutral-strong"]: tokens.TextNeutralStrong,
+  info: tokens.TextInfoSubtle,
+  warning: tokens.TextWarningSubtle,
+  success: tokens.TextSuccessSubtle,
+  neutral: tokens.BgNeutralModerate,
+  ["info-moderate"]: tokens.TextInfo,
+  ["warning-moderate"]: tokens.TextWarning,
+  ["success-moderate"]: tokens.TextSuccess,
+  ["neutral-moderate"]: tokens.BgDefault,
+  ["info-strong"]: tokens.TextInfo,
+  ["warning-strong"]: tokens.TextWarning,
+  ["success-strong"]: tokens.TextSuccess,
+  ["neutral-strong"]: tokens.BgNeutralModeratePressed,
 };
 
 const borderMap = {

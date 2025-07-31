@@ -1,16 +1,17 @@
-import cl from "clsx";
 import React, {
   InputHTMLAttributes,
   forwardRef,
   useCallback,
   useRef,
 } from "react";
+import { useRenameCSS } from "../../../theme/Theme";
 import { omit } from "../../../util";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import { ComboboxOption } from "../types";
 import { useInputContext } from "./Input.context";
 
 interface InputProps
@@ -37,6 +38,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     { inputClassName, shouldShowSelectedOptions, placeholder, onBlur, ...rest },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+
     const internalRef = useRef<HTMLInputElement>(null);
     const mergedRefs = useMergeRefs(ref, internalRef);
     const {
@@ -74,7 +77,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const onEnter = useCallback(
       (event: React.KeyboardEvent) => {
-        const isTextInSelectedOptions = (text: string) =>
+        const isSelected = (text: string) =>
           selectedOptions.some(
             (option) =>
               option.label.toLocaleLowerCase() === text.toLocaleLowerCase(),
@@ -84,30 +87,47 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           event.preventDefault();
           // Selecting a value from the dropdown / FilteredOptions
           toggleOption(currentOption, event);
-          if (!isMultiSelect && !isTextInSelectedOptions(currentOption.label)) {
+          if (!isMultiSelect && !isSelected(currentOption.label)) {
             toggleIsListOpen(false);
           }
-        } else if (isTextInSelectedOptions(value)) {
+        } else if (isSelected(value)) {
           event.preventDefault();
           // Trying to set the same value that is already set, so just clearing the input
           clearInput(event);
         } else if ((allowNewValues || shouldAutocomplete) && value !== "") {
           event.preventDefault();
-          // Autocompleting or adding a new value
-          const selectedValue =
-            allowNewValues && isValueNew
-              ? { label: value, value }
-              : filteredOptionsUtil.getFirstValueStartingWith(
-                  value,
-                  filteredOptions,
-                ) || filteredOptions[0];
 
-          if (!selectedValue) {
-            return;
+          const autoCompletedOption =
+            filteredOptionsUtil.getFirstValueStartingWith(
+              value,
+              filteredOptions,
+            );
+
+          /*
+           * User can have matching results, while not using the autocomplete result
+           * E.g. User types "Oslo", list has is "Oslo kommune", but user hits backspace, canceling autocomplete.
+           */
+          const autoCompleteMatchesValue =
+            filteredOptionsUtil.normalizeText(value) ===
+            filteredOptionsUtil.normalizeText(autoCompletedOption?.label ?? "");
+
+          let optionToToggle: ComboboxOption | undefined;
+
+          if (
+            shouldAutocomplete &&
+            autoCompletedOption &&
+            autoCompleteMatchesValue
+          ) {
+            optionToToggle = autoCompletedOption;
+          } else if (allowNewValues && isValueNew) {
+            optionToToggle = { label: value, value };
           }
 
-          toggleOption(selectedValue, event);
-          if (!isMultiSelect && !isTextInSelectedOptions(selectedValue.label)) {
+          if (!optionToToggle) {
+            return;
+          }
+          toggleOption(optionToToggle, event);
+          if (!isMultiSelect && !isSelected(optionToToggle.label)) {
             toggleIsListOpen(false);
           }
         }
@@ -177,10 +197,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (value !== searchTerm) {
             setValue(searchTerm);
           }
-          if (virtualFocus.activeElement === null || !isListOpen) {
+          if (!isListOpen) {
             toggleIsListOpen(true);
+            setTimeout(virtualFocus.moveFocusDown, 0); // Wait until list is visible so that scrollIntoView works
+          } else {
+            virtualFocus.moveFocusDown();
           }
-          virtualFocus.moveFocusDown();
         } else if (e.key === "ArrowUp") {
           if (value !== "" && value !== searchTerm) {
             onChange(value);
@@ -199,19 +221,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           virtualFocus.moveFocusToTop();
         } else if (e.key === "End") {
           e.preventDefault();
-          if (virtualFocus.activeElement === null || !isListOpen) {
+          if (!isListOpen) {
             toggleIsListOpen(true);
+            setTimeout(virtualFocus.moveFocusToBottom, 0); // Wait until list is visible so that scrollIntoView works
+          } else {
+            virtualFocus.moveFocusToBottom();
           }
-          virtualFocus.moveFocusToBottom();
         } else if (e.key === "PageUp") {
           e.preventDefault();
           virtualFocus.moveFocusUpBy(6);
         } else if (e.key === "PageDown") {
           e.preventDefault();
-          if (virtualFocus.activeElement === null || !isListOpen) {
+          if (!isListOpen) {
             toggleIsListOpen(true);
+            setTimeout(() => virtualFocus.moveFocusDownBy(6), 0); // Wait until list is visible so that scrollIntoView works
+          } else {
+            virtualFocus.moveFocusDownBy(6);
           }
-          virtualFocus.moveFocusDownBy(6);
         }
       },
       [
@@ -261,7 +287,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           }
         })}
         onClick={() => {
-          setHideCaret(!!maxSelected?.isLimitReached);
+          setHideCaret(maxSelected.isLimitReached);
           value !== searchTerm && onChange(value);
         }}
         onInput={onChangeHandler}
@@ -269,7 +295,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onKeyDown={handleKeyDown}
         autoComplete="off"
         placeholder={selectedOptions.length ? undefined : placeholder}
-        className={cl(
+        className={cn(
           inputClassName,
           "navds-combobox__input",
           "navds-body-short",

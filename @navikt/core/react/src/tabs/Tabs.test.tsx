@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { describe, expect, test } from "vitest";
@@ -154,19 +154,11 @@ describe("Tabs", () => {
     expect(screen.getByTestId("tab2")).toHaveFocus();
 
     /* Move focus to tabPanel */
-    // eslint-disable-next-line testing-library/no-unnecessary-act
-    await act(async () => {
-      /* Tablist handles tabbing with setTimeout, so we need to use act */
-      await userEvent.tab();
-    });
-
+    await userEvent.tab();
     expect(screen.getByTestId("tabpanel1")).toHaveFocus();
-    /* Move focus back to tablist, now tab1 should have focus */
 
-    // eslint-disable-next-line testing-library/no-unnecessary-act
-    await act(async () => {
-      await userEvent.tab({ shift: true });
-    });
+    /* Move focus back to tablist, now tab1 should have focus */
+    await userEvent.tab({ shift: true });
     expect(screen.getByTestId("tab1")).toHaveFocus();
   });
 });

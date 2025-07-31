@@ -7,14 +7,14 @@ import {
   PiggybankIcon,
   VirusIcon,
 } from "@navikt/aksel-icons";
-import { Timeline, TimelinePeriodProps } from "@navikt/ds-react";
+import { Box, Timeline, TimelinePeriodProps } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [activePeriod, setActivePeriod] = useState<string | null>(null);
 
   return (
-    <div className="min-w-[800px]">
+    <Box marginInline="auto" maxWidth="800px">
       <Timeline>
         <Timeline.Pin date={new Date("Mar 15 2022")}>
           <p>Utbetalt: 12 345 kr</p>
@@ -65,7 +65,7 @@ const Example = () => {
           (p) => p.id === activePeriod,
         )?.start}`}</div>
       )}
-    </div>
+    </Box>
   );
 };
 
@@ -144,7 +144,7 @@ const jobb: TimelinePeriodProps[] = [
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */
 export const Demo = {

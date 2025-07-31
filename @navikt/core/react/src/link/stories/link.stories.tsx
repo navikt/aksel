@@ -161,6 +161,17 @@ const Variants = () => (
   </VStack>
 );
 
+export const ColorRole = () => (
+  <VStack gap="3" data-color="brand-magenta">
+    <Link href="#">Ex aliqua incididunt</Link>
+    {["action", "neutral", "subtle"].map((variant) => (
+      <div key={variant}>
+        <LinkWrapper variant={variant} underline />
+      </div>
+    ))}
+  </VStack>
+);
+
 export const Chromatic = () => (
   <>
     <h2>Default</h2>
@@ -215,11 +226,16 @@ export const Chromatic = () => (
         <LinkWithIcon />
       </ConfirmationPanel>
     </div>
+    <h2>ColorRole</h2>
+    <div>
+      <ColorRole />
+    </div>
   </>
 );
 Chromatic.parameters = { chromatic: { disable: false } };
 
-export const ChromaticHover = () => (
+/* See .storybook/main.ts comment for explanation */
+/* export const ChromaticHover = () => (
   <>
     <h2>With icon</h2>
     <LinkWithIcon />
@@ -245,9 +261,10 @@ export const ChromaticHover = () => (
 ChromaticHover.parameters = {
   chromatic: { disable: false },
   pseudo: { hover: true },
-};
+}; */
 
-export const ChromaticFocusVisible = () => (
+/* See .storybook/main.ts comment for explanation */
+/* export const ChromaticFocusVisible = () => (
   <>
     <h2>With icon</h2>
     <LinkWithIcon />
@@ -273,9 +290,10 @@ export const ChromaticFocusVisible = () => (
 ChromaticFocusVisible.parameters = {
   chromatic: { disable: false },
   pseudo: { focusVisible: true },
-};
+}; */
 
-export const ChromaticActive = () => (
+/* See .storybook/main.ts comment for explanation */
+/* export const ChromaticActive = () => (
   <>
     <h2>With icon</h2>
     <LinkWithIcon />
@@ -301,4 +319,4 @@ export const ChromaticActive = () => (
 ChromaticActive.parameters = {
   chromatic: { disable: false },
   pseudo: { active: true },
-};
+}; */

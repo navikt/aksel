@@ -1,5 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { OverridableComponent } from "../util/types";
 
 export interface ChipsToggleProps
@@ -30,29 +31,40 @@ export const ToggleChips: OverridableComponent<
       className,
       children,
       selected,
-      variant = "action",
+      variant,
       checkmark = true,
       as: Component = "button",
+      "data-color": color,
       ...rest
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal(false);
+    let localVariant: ChipsToggleProps["variant"] | undefined;
+
+    if (themeContext) {
+      localVariant = variant;
+    } else {
+      localVariant = variant ?? "action";
+    }
+
     return (
       <Component
+        data-color={color ?? variantToColor(localVariant)}
         {...rest}
         ref={ref}
-        className={cl(
-          "navds-chips__chip navds-chips__toggle",
-          className,
-          `navds-chips__toggle--${variant}`,
-          { "navds-chips__toggle--with-checkmark": checkmark },
-        )}
+        className={cn("navds-chips__chip navds-chips__toggle", className, {
+          "navds-chips__toggle--with-checkmark": checkmark,
+          [`navds-chips__toggle--${localVariant}`]: localVariant,
+        })}
         aria-pressed={selected}
+        data-pressed={selected}
       >
         {checkmark && (
           <svg
             aria-hidden
-            className="navds-chips__toggle-icon"
+            className={cn("navds-chips__toggle-icon")}
             width="1.25em"
             height="1.25em"
             viewBox="0 0 20 20"
@@ -73,15 +85,29 @@ export const ToggleChips: OverridableComponent<
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M10 3.125C6.20304 3.125 3.125 6.20304 3.125 10C3.125 13.797 6.20304 16.875 10 16.875C13.797 16.875 16.875 13.797 16.875 10C16.875 6.20304 13.797 3.125 10 3.125ZM1.875 10C1.875 5.51269 5.51269 1.875 10 1.875C14.4873 1.875 18.125 5.51269 18.125 10C18.125 14.4873 14.4873 18.125 10 18.125C5.51269 18.125 1.875 14.4873 1.875 10Z"
-                fill="var(--ac-chip-toggle-circle-border, var(--a-border-default))"
+                /* After removing old fallbacks, change to currentColor */
+                fill="var(--ax-text-default, var(--ac-chip-toggle-circle-border, var(--a-border-default)))"
               />
             )}
           </svg>
         )}
-        <span className="navds-chips__chip-text">{children}</span>
+        <span className={cn("navds-chips__chip-text")}>{children}</span>
       </Component>
     );
   },
 );
+
+function variantToColor(
+  variant?: ChipsToggleProps["variant"],
+): AkselColor | undefined {
+  switch (variant) {
+    case "action":
+      return "accent";
+    case "neutral":
+      return "neutral";
+    default:
+      return undefined;
+  }
+}
 
 export default ToggleChips;

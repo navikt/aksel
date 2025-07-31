@@ -66,5 +66,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Her kan du teste ulike 'placement'-verdier. Legg merke til at Popover overstyrer valget hvis hvis det ikke er plass i den retningen.",
+  desc: "Her kan du teste ulike 'placement'-verdier. Popover styrer selv plassering hvis det ikke er plass i valgt retning.",
 };

@@ -15,13 +15,13 @@ export function gpStructure(S: StructureBuilder) {
       S.list()
         .title("God Praksis")
         .items([
+          ...godPraksisPanes(S),
+          S.divider(),
           S.documentListItem()
             .title(`Landingsside`)
             .icon(HouseIcon)
             .schemaType(`godpraksis_landingsside`)
             .id(`godpraksis_landingsside_id1`),
-          S.divider(),
-          ...godPraksisPanes(S),
         ]),
     );
 }
@@ -52,33 +52,9 @@ function godPraksisPanes(S: StructureBuilder) {
       },
     }),
     S.divider(),
-    S.documentTypeListItem("gp.tema").title("Tema"),
-    S.listItem({
-      id: "tema_view",
-      title: "Undertema",
-      schemaType: "gp.tema.undertema",
-      child: () =>
-        S.documentTypeList("gp.tema")
-          .child((id) => {
-            return S.documentTypeList("gp.tema.undertema")
-              .title("Undertema")
-              .filter("_type == $type && tema._ref == $id")
-              .apiVersion(SANITY_API_VERSION)
-              .params({ type: "gp.tema.undertema", id })
-              .schemaType("gp.tema.undertema")
-              .initialValueTemplates([
-                S.initialValueTemplateItem("gp.tema.undertema.by.tema", {
-                  id,
-                }),
-              ]);
-          })
-          .initialValueTemplates([]),
-    }),
-    S.documentTypeListItem("gp.innholdstype").title("Innholdstyper"),
-    S.divider(),
     S.listItem({
       id: "article_tema_complete_view",
-      title: "Tema -> Artikler",
+      title: "Artikler via tema",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("gp.tema")
@@ -93,7 +69,7 @@ function godPraksisPanes(S: StructureBuilder) {
     }),
     S.listItem({
       id: "article_undertema_view",
-      title: "Tema -> Undertema -> Artikler",
+      title: "Artikler via undertema",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("gp.tema")
@@ -122,7 +98,7 @@ function godPraksisPanes(S: StructureBuilder) {
     }),
     S.listItem({
       id: "article_innholdstype_view",
-      title: "Innholdstype -> Artikler",
+      title: "Artikler via innholdstype",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("gp.innholdstype")
@@ -142,9 +118,33 @@ function godPraksisPanes(S: StructureBuilder) {
           .initialValueTemplates([]),
     }),
     S.divider(),
+    S.documentTypeListItem("gp.tema").title("Tema"),
+    S.listItem({
+      id: "tema_view",
+      title: "Undertema",
+      schemaType: "gp.tema.undertema",
+      child: () =>
+        S.documentTypeList("gp.tema")
+          .child((id) => {
+            return S.documentTypeList("gp.tema.undertema")
+              .title("Undertema")
+              .filter("_type == $type && tema._ref == $id")
+              .apiVersion(SANITY_API_VERSION)
+              .params({ type: "gp.tema.undertema", id })
+              .schemaType("gp.tema.undertema")
+              .initialValueTemplates([
+                S.initialValueTemplateItem("gp.tema.undertema.by.tema", {
+                  id,
+                }),
+              ]);
+          })
+          .initialValueTemplates([]),
+    }),
+    S.documentTypeListItem("gp.innholdstype").title("Innholdstyper"),
+    S.divider(),
     S.listItem({
       id: "article_no_undertema_view",
-      title: "Uten undertema",
+      title: "Artikler uten undertema",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("aksel_artikkel")
@@ -157,7 +157,7 @@ function godPraksisPanes(S: StructureBuilder) {
 
     S.listItem({
       id: "article_no_innholdstype_view",
-      title: "Uten innholdstype",
+      title: "Artikler uten innholdstype",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("aksel_artikkel")
@@ -169,7 +169,7 @@ function godPraksisPanes(S: StructureBuilder) {
     }),
     S.listItem({
       id: "article_gp_outdated_tema",
-      title: "Trenger oppdatering",
+      title: "Artikler som trenger oppdatering",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("gp.tema")

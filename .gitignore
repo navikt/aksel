@@ -76,9 +76,9 @@ yarn-error.log
 
 # Transpiled package files
 packages/**/lib
-*.d.ts
 
 .vscode
+.nvim.lua
 # File created on build in nav-frontend-core
 *-exports.less
 

@@ -25,12 +25,12 @@ jobs:
         with:
           node-version: lts/*
           cache: yarn
-      - name: set-env for yarn install to @navikt scope
-        shell: bash
-        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
+          cache-dependency-path: "**/yarn.lock"
 
       - name: Install dependencies
         run: yarn
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: Build tokens
         run: yarn workspace @navikt/ds-tokens build

@@ -1,0 +1,97 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+
+.codeBlock {
+  background: var(--ax-bg-default);
+  border-radius: var(--ax-border-radius-xlarge);
+  overflow: hidden;
+  border: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+.codeBlockPre {
+  border-top: 1px solid var(--ax-border-neutral-subtleA);
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+  padding: var(--ax-space-8);
+  font-size: var(--ax-font-size-medium);
+  font-family: var(--aksel-font-mono);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &[data-overflow="false"] {
+    overflow-y: auto;
+    max-height: calc(1rem * 1.33 * 18 - var(--ax-space-8) * 2);
+  }
+
+  &[data-wrap="true"] {
+    white-space: pre-wrap;
+  }
+
+  &[data-line-numbers="true"] {
+    & code {
+      position: relative;
+    }
+
+    & .codeBlockLine {
+      margin-left: var(--ax-space-40);
+
+      &::before {
+        content: var(--line);
+        width: 1.5rem;
+        text-align: right;
+        user-select: none;
+        color: var(--ax-text-neutral-subtle);
+        font-family: var(--aksel-font-mono);
+        font-size: var(--ax-font-size-small);
+        display: inline-block;
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+}
+
+.codeBlockLine {
+  margin-left: var(--ax-space-20);
+}
+
+.codeBlockHeader {
+  background-color: var(--ax-bg-neutral-moderate);
+  padding-inline: var(--ax-space-16) var(--ax-space-8);
+  display: flex;
+
+  /* Overrides box-shadow on Aksel tablist */
+  & > div {
+    box-shadow: none;
+  }
+}
+
+.codeBlockHeaderItem {
+  min-height: 3rem;
+  padding: var(--ax-space-12) var(--ax-space-16);
+  color: var(--ax-text-neutral);
+}
+
+.codeBlockExpander {
+  color: var(--ax-text-neutral);
+  background-color: var(--ax-bg-neutral-moderate);
+  width: 100%;
+  display: flex;
+  gap: var(--ax-space-4);
+  justify-content: center;
+  align-items: center;
+  padding-block: var(--ax-space-4);
+  padding-inline: var(--ax-space-8);
+  min-height: 2rem;
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -4px;
+  }
+}

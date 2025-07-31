@@ -230,6 +230,76 @@ export const Readonly = () => (
   </div>
 );
 
+export const Disabled = () => (
+  <div className="colgap">
+    <CheckboxGroup
+      legend="Hvilken frukt liker du?"
+      defaultValue={["banan"]}
+      disabled
+    >
+      <Checkbox value="banan">Banan</Checkbox>
+      <Checkbox value="eple">Eple</Checkbox>
+      <Checkbox value="druer" indeterminate>
+        Druer
+      </Checkbox>
+    </CheckboxGroup>
+    <CheckboxGroup
+      legend="Hvilken frukt liker du?"
+      error="Feilmelding"
+      defaultValue={["Eple"]}
+      disabled
+    >
+      <Checkbox value="eple" description="Epler kommer i 4 varianter">
+        Eple
+      </Checkbox>
+      <Checkbox value="banan">Banan</Checkbox>
+    </CheckboxGroup>
+    <hr />
+    <Checkbox value="tekst1" disabled>
+      Eple single
+    </Checkbox>
+    <Checkbox value="tekst1" checked disabled>
+      Banan single
+    </Checkbox>
+    <Checkbox value="tekst1" error disabled>
+      Pineapple single
+    </Checkbox>
+    <Checkbox value="tekst1" error checked disabled>
+      Peach single
+    </Checkbox>
+  </div>
+);
+
+export const ColorRole = () => (
+  <div className="colspan" data-color="brand-magenta">
+    <Checkbox value="tekst">Checkboxtekst</Checkbox>
+    <Checkbox value="tekst" defaultChecked>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst" defaultChecked disabled>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst" defaultChecked readOnly>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst" error>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst" defaultChecked error>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst" disabled error>
+      Checkboxtekst
+    </Checkbox>
+    <CheckboxGroup legend="Hvilken frukt liker du?" error="Feilmelding">
+      <Checkbox value="tekst" defaultChecked>
+        Checkboxtekst
+      </Checkbox>
+      <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <div>
@@ -272,6 +342,14 @@ export const Chromatic: Story = {
       <div>
         <h2>Readonly</h2>
         <Readonly />
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        <Disabled />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </div>
   ),

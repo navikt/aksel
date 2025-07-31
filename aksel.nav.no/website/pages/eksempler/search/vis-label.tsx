@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <form role="search">
       <Search
-        label="Søk alle NAV sine sider"
+        label="Søk i alle Nav sine sider"
         description="Her kan du søke på forskjellige ting, f.eks. søknadsskjemaer."
         variant="secondary"
         hideLabel={false}

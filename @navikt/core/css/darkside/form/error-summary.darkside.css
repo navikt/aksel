@@ -1,0 +1,49 @@
+.aksel-error-summary {
+  background-color: var(--ax-bg-default);
+  padding: var(--ax-space-16) var(--ax-space-20);
+  border: 4px solid var(--ax-border-danger);
+  border-radius: var(--ax-radius-12);
+  outline-offset: 3px;
+
+  &:focus-visible,
+  &:has(.aksel-error-summary__heading:focus-visible) {
+    outline: 3px solid var(--ax-border-focus);
+  }
+}
+
+@supports not selector(:focus-visible) {
+  .aksel-error-summary:focus {
+    outline: 3px solid var(--ax-border-focus);
+  }
+}
+
+.aksel-error-summary--small {
+  padding: var(--ax-space-12) var(--ax-space-16);
+
+  & .aksel-error-summary__heading {
+    scroll-margin-top: var(--ax-space-16);
+  }
+
+  & > .aksel-error-summary__list {
+    margin: var(--ax-space-8) 0;
+    gap: var(--ax-space-8);
+    padding-left: var(--ax-space-20);
+  }
+}
+
+.aksel-error-summary__heading {
+  scroll-margin-top: var(--ax-space-24);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.aksel-error-summary__list {
+  margin: var(--ax-space-12) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-12);
+  padding-left: var(--ax-space-24);
+  list-style: inherit;
+}

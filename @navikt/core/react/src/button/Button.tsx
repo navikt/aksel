@@ -1,11 +1,10 @@
-import cl from "clsx";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { Loader } from "../loader";
+import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { Label } from "../typography";
 import { omit } from "../util";
 import { composeEventHandlers } from "../util/composeEventHandlers";
-import { useClientLayoutEffect } from "../util/hooks";
-import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { OverridableComponent } from "../util/types";
 
 export interface ButtonProps
@@ -74,37 +73,21 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         size = "medium",
         loading = false,
         disabled,
-        style,
         icon,
         iconPosition = "left",
+        onKeyUp,
+        "data-color": color,
         ...rest
       },
       ref,
     ) => {
-      const buttonRef = useRef<HTMLButtonElement | null>(null);
-      const [widthOverride, setWidthOverride] = useState<number>();
-
-      const mergedRef = useMergeRefs(buttonRef, ref);
-
-      useClientLayoutEffect(() => {
-        if (loading) {
-          const requestID = window.requestAnimationFrame(() => {
-            setWidthOverride(
-              buttonRef?.current?.getBoundingClientRect()?.width,
-            );
-          });
-          return () => {
-            setWidthOverride(undefined);
-            cancelAnimationFrame(requestID);
-          };
-        }
-      }, [loading, children]);
+      const { cn } = useRenameCSS();
 
       const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
-        disabled ?? widthOverride ? omit(rest, ["href"]) : rest;
+        disabled || loading ? omit(rest, ["href"]) : rest;
 
       const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (e.key === " " && !disabled && !widthOverride) {
+        if (e.key === " " && !disabled && !loading) {
           e.currentTarget.click();
         }
       };
@@ -112,46 +95,73 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       return (
         <Component
           {...(Component !== "button" ? { role: "button" } : {})}
+          data-color={color ?? variantToColor(variant)}
+          data-variant={variantToSimplifiedVariant(variant)}
           {...filterProps}
-          ref={mergedRef}
-          onKeyUp={composeEventHandlers(filterProps.onKeyUp, handleKeyUp)}
-          className={cl(
+          ref={ref}
+          onKeyUp={composeEventHandlers(onKeyUp, handleKeyUp)}
+          className={cn(
             className,
             "navds-button",
             `navds-button--${variant}`,
             `navds-button--${size}`,
             {
-              "navds-button--loading": widthOverride,
+              "navds-button--loading": loading,
               "navds-button--icon-only": !!icon && !children,
-              "navds-button--disabled": disabled ?? widthOverride,
+              "navds-button--disabled": disabled ?? loading,
             },
           )}
-          style={{
-            ...style,
-            width: widthOverride,
-          }}
-          disabled={disabled ?? widthOverride ? true : undefined}
+          disabled={disabled ?? loading ? true : undefined}
         >
-          {widthOverride ? (
-            <Loader size={size} />
-          ) : (
-            <>
-              {icon && iconPosition === "left" && (
-                <span className="navds-button__icon">{icon}</span>
-              )}
-              {children && (
-                <Label as="span" size={size === "medium" ? "medium" : "small"}>
-                  {children}
-                </Label>
-              )}
-              {icon && iconPosition === "right" && (
-                <span className="navds-button__icon">{icon}</span>
-              )}
-            </>
+          {icon && iconPosition === "left" && (
+            <span className={cn("navds-button__icon")}>{icon}</span>
+          )}
+          {loading && <Loader size={size} />}
+          {children && (
+            <Label as="span" size={size === "medium" ? "medium" : "small"}>
+              {children}
+            </Label>
+          )}
+          {icon && iconPosition === "right" && (
+            <span className={cn("navds-button__icon")}>{icon}</span>
           )}
         </Component>
       );
     },
   );
+
+function variantToColor(
+  variant: ButtonProps["variant"],
+): AkselColor | undefined {
+  switch (variant) {
+    case "primary-neutral":
+    case "secondary-neutral":
+    case "tertiary-neutral":
+      return "neutral";
+    case "danger":
+      return "danger";
+    default:
+      return undefined;
+  }
+}
+
+function variantToSimplifiedVariant(
+  variant: ButtonProps["variant"],
+): "primary" | "secondary" | "tertiary" {
+  switch (variant) {
+    case "primary":
+    case "primary-neutral":
+    case "danger":
+      return "primary";
+    case "secondary":
+    case "secondary-neutral":
+      return "secondary";
+    case "tertiary":
+    case "tertiary-neutral":
+      return "tertiary";
+    default:
+      return "primary";
+  }
+}
 
 export default Button;

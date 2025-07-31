@@ -77,7 +77,6 @@ export interface AkselGodPraksisDocT
 export interface AkselPrinsippDocT
   extends DocumentT<"aksel_prinsipp">,
     ArticleT {
-  hero_bilde: any;
   prinsipp: { prinsippvalg: string; hovedside: boolean };
 }
 
@@ -145,6 +144,7 @@ export interface AkselTemplatesDocT extends DocumentT<"ds_artikkel">, ArticleT {
 }
 
 export type SidebarInputNodeT = {
+  _type: string;
   heading: string;
   slug: string;
   kategori: string;
@@ -152,22 +152,27 @@ export type SidebarInputNodeT = {
   sidebarindex: number | null;
 };
 
-export type SidebarOutputNodeT = Pick<
-  SidebarInputNodeT,
-  "heading" | "slug" | "tag"
->;
+export type SidebarPageT = Pick<SidebarInputNodeT, "heading" | "slug" | "tag">;
 
-export type SidebarT = {
-  pages: SidebarOutputNodeT[];
+export type SidebarGroupedPagesT = {
   title: string;
   value: string;
-}[];
+  pages: SidebarPageT[];
+};
+
+export type DesignsystemSidebarSectionT = (
+  | SidebarPageT
+  | SidebarGroupedPagesT
+)[];
 
 export type ArticleListT = {
   _id: string;
   heading: string;
   slug: { current: string };
-  kategori: (typeof komponentKategorier)[number]["value"];
+  kategori:
+    | (typeof komponentKategorier)[number]["value"]
+    | (typeof grunnleggendeKategorier)[number]["value"]
+    | (typeof templatesKategorier)[number]["value"];
   status: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     unsafe?: boolean;
@@ -227,10 +232,6 @@ export interface TableT {
   rows?: ArrayObjectT<{ cells: string[] }>[];
 }
 
-export interface UUTableT {
-  tastatur?: ArrayObjectT<{ key: string; action: string }>[];
-}
-
 export interface TokenTableT {
   title: string;
   kategori: string;
@@ -248,17 +249,12 @@ export interface BildeT {
     link?: string;
   };
   dekorativt?: boolean;
+  border?: boolean;
   background?: {
     rgb: { a: number; b: number; g: number; r: number };
     alpha: number;
   };
 }
-
-export type InnholdsKortPrinsipperT = ArrayObjectT<{
-  title: string;
-  lenke: string;
-  body: any[];
-}>;
 
 export interface RelatertInnholdT {
   title?: string;
@@ -279,6 +275,7 @@ export type CodeExampleSchemaT = {
   filer: {
     title: string;
     innhold: string;
+    kompaktInnhold?: string | null;
     navn: string;
     index: number;
     description?: string;
@@ -317,6 +314,7 @@ export type PropTableT = ArrayObjectT<{
       required?: boolean;
       type?: string;
       ref?: boolean;
+      deprecated?: string;
     }>[];
   };
 }>;

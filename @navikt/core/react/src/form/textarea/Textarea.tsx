@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import TextareaAutosize from "../../util/TextareaAutoSize";
@@ -9,9 +10,6 @@ import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "./../useFormField";
 import Counter from "./TextareaCounter";
 
-/**
- * TODO: Mulighet for lokalisering av sr-only/counter text
- */
 export interface TextareaProps
   extends FormFieldProps,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -57,6 +55,7 @@ export interface TextareaProps
   UNSAFE_autoScrollbar?: boolean;
   /**
    * i18n-translations for counter-text
+   * @deprecated Use `<Provider />`-component
    */
   i18n?: {
     /** @default tegn igjen */
@@ -101,6 +100,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...rest
     } = props;
 
+    const { cn } = useRenameCSS();
+
     const maxLengthId = useId();
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
@@ -122,7 +123,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     return (
       <div
-        className={cl(
+        className={cn(
           className,
           "navds-form-field",
           `navds-form-field--${size}`,
@@ -140,16 +141,16 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          className={cl("navds-form-field__label", {
+          className={cn("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
         >
-          <ReadOnlyIcon readOnly={readOnly} />
+          {readOnly && <ReadOnlyIcon />}
           {label}
         </Label>
         {!!description && (
           <BodyShort
-            className={cl("navds-form-field__description", {
+            className={cn("navds-form-field__description", {
               "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
@@ -172,7 +173,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           autoScrollbar={UNSAFE_autoScrollbar}
           ref={ref}
           readOnly={readOnly}
-          className={cl(
+          className={cn(
             "navds-textarea__input",
             "navds-body-short",
             `navds-body-short--${size ?? "medium"}`,
@@ -180,26 +181,24 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...(describedBy ? { "aria-describedby": describedBy } : {})}
         />
         {hasMaxLength && !readOnly && !inputProps.disabled && (
-          <>
-            <span id={maxLengthId} className="navds-sr-only">
-              {`Tekstområde med plass til ${maxLength} tegn.`}
-            </span>
-            <Counter
-              maxLength={maxLength}
-              currentLength={props.value?.length ?? uncontrolledValue.length}
-              size={size}
-              i18n={i18n}
-            />
-          </>
+          <Counter
+            maxLengthId={maxLengthId}
+            maxLength={maxLength}
+            currentLength={props.value?.length ?? uncontrolledValue.length}
+            size={size}
+            i18n={i18n}
+          />
         )}
         <div
-          className="navds-form-field__error"
+          className={cn("navds-form-field__error")}
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"
         >
           {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+            <ErrorMessage size={size} showIcon>
+              {props.error}
+            </ErrorMessage>
           )}
         </div>
       </div>

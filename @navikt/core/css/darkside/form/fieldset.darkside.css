@@ -1,0 +1,43 @@
+.aksel-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.aksel-fieldset > :not(:first-child, :empty) {
+  margin-top: var(--ax-space-8);
+}
+
+.aksel-fieldset__description {
+  color: var(--ax-text-neutral-subtle);
+}
+
+.aksel-fieldset > .aksel-fieldset__description:not(:empty) {
+  margin-top: 0.125rem;
+}
+
+/* Applied when hideLegend is applied to fieldset */
+.aksel-fieldset > .aksel-sr-only + :not(:first-child, :empty) {
+  margin-top: 0;
+}
+
+.aksel-fieldset__legend {
+  padding: 0;
+}
+
+.aksel-fieldset--readonly > :where(.aksel-fieldset__legend) {
+  display: inline-flex;
+}
+
+.aksel-fieldset:disabled > .aksel-fieldset__legend,
+.aksel-fieldset:disabled > .aksel-fieldset__description {
+  opacity: var(--ax-opacity-disabled);
+}
+
+@media (forced-colors: active) {
+  .aksel-fieldset:disabled > .aksel-fieldset__legend,
+  .aksel-fieldset:disabled > .aksel-fieldset__description {
+    opacity: 1;
+  }
+}

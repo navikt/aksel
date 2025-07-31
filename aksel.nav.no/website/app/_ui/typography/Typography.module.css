@@ -1,0 +1,48 @@
+/* className="bg-surface-neutral-subtle px-1 py-05 font-mono text-sm font-semibold" */
+
+.typoCode {
+  border-radius: var(--ax-border-radius-small);
+  background-color: var(--ax-bg-neutral-softA);
+  padding: var(--ax-space-2) var(--ax-space-4);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  font-family: var(--website-font-mono);
+  display: inline;
+  box-shadow: inset 0 0 0 1px var(--ax-border-neutral-subtleA);
+  font-size: 0.8em;
+
+  &[data-highlighted="true"] {
+    background-color: var(--ax-bg-brand-blue-moderateA);
+    box-shadow: inset 0 0 0 1px var(--ax-border-brand-blue-subtleA);
+  }
+
+  &[data-strikethrough="true"] {
+    text-decoration-line: line-through;
+  }
+}
+
+/* className="list-margin max-w-text" */
+.typoList {
+  max-width: 600px;
+
+  /* stylelint-disable-next-line aksel/no-class-override */
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+  :global(.aksel-body-long.aksel-typo--spacing) + & {
+    margin-top: -1rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: var(--ax-space-16);
+  }
+}
+
+.typoListIcon {
+  transform: rotate(45deg);
+
+  [data-color] & > * {
+    fill: var(--ax-bg-strong);
+  }
+
+  & > * {
+    fill: var(--ax-text-brand-blue-subtle);
+  }
+}

@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -45,24 +45,28 @@ export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
         ...rest
       },
       ref,
-    ) => (
-      <Component
-        {...rest}
-        ref={ref}
-        className={cl(
-          className,
-          "navds-label",
-          typoClassNames({
-            spacing,
-            visuallyHidden,
-            textColor,
-          }),
-          {
-            "navds-label--small": size === "small",
-          },
-        )}
-      />
-    ),
+    ) => {
+      const { cn } = useRenameCSS();
+
+      return (
+        <Component
+          {...rest}
+          ref={ref}
+          className={cn(
+            className,
+            "navds-label",
+            typoClassNames({
+              spacing,
+              visuallyHidden,
+              textColor,
+            }),
+            {
+              "navds-label--small": size === "small",
+            },
+          )}
+        />
+      );
+    },
   );
 
 export default Label;

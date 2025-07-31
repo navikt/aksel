@@ -124,7 +124,13 @@ const StyleMappings = {
     {
       component: "FileUpload",
       main: formCss,
-      dependencies: [typoCss, "button.css", "loader.css", "link.css"],
+      dependencies: [
+        typoCss,
+        "button.css",
+        "loader.css",
+        "link.css",
+        primitivesCss,
+      ],
     },
     {
       component: "GuidePanel",
@@ -145,6 +151,11 @@ const StyleMappings = {
     },
     { component: "Label", main: typoCss },
     { component: "Link", main: "link.css", dependencies: [typoCss] },
+    {
+      component: "LinkCard",
+      main: "link-card.css",
+      dependencies: [typoCss, "link-anchor.css"],
+    },
     {
       component: "LinkPanel",
       main: "link-panel.css",

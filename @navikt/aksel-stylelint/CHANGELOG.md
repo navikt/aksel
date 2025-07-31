@@ -1,5 +1,107 @@
 # @navikt/aksel-stylelint
 
+## 7.25.1
+
+## 7.25.0
+
+## 7.24.0
+
+### Patch Changes
+
+- Switch: Removed 'navds-switch\_\_checkmark' css class. ([#3892](https://github.com/navikt/aksel/pull/3892))
+
+## 7.23.2
+
+## 7.23.1
+
+## 7.23.0
+
+## 7.22.0
+
+## 7.21.1
+
+## 7.21.0
+
+## 7.20.0
+
+## 7.19.1
+
+## 7.19.0
+
+## 7.18.0
+
+## 7.17.4
+
+## 7.17.3
+
+## 7.17.2
+
+## 7.17.1
+
+## 7.17.0
+
+## 7.16.1
+
+## 7.16.0
+
+## 7.15.0
+
+## 7.14.3
+
+## 7.14.2
+
+## 7.14.1
+
+## 7.14.0
+
+## 7.13.0
+
+## 7.12.2
+
+## 7.12.1
+
+## 7.12.0
+
+## 7.11.0
+
+## 7.10.0
+
+## 7.9.2
+
+## 7.9.1
+
+## 7.9.0
+
+## 7.8.1
+
+## 7.8.0
+
+### Minor Changes
+
+- Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+## 7.7.0
+
+## 7.6.0
+
+## 7.5.3
+
+## 7.5.2
+
+## 7.5.1
+
+## 7.5.0
+
+## 7.4.3
+
+## 7.4.2
+
+## 7.4.1
+
+## 7.4.0
+
+## 7.3.1
+
 ## 7.3.0
 
 ## 7.2.1

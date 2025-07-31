@@ -1,6 +1,7 @@
 import fs from "fs";
 import { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
+import { extractJsx } from "./extract-jsx";
 import { filterCode } from "./filter-code";
 import { getFiles } from "./get-files";
 import { processAndCompressForURI } from "./sandbox-process-base64";
@@ -35,14 +36,21 @@ export async function parseCodeFile(dirPath: string, file: string) {
   const args = extractArgs(code, filePath);
   const filteredCode = await filterCode(code, filePath);
 
+  const encodedCode = processAndCompressForURI(filteredCode);
+  const urlBaseLength = "https://aksel.nav.no/sandbox/preview/index.html?code="
+    .length;
+
   return {
     innhold: filteredCode,
+    kompaktInnhold: await extractJsx(filteredCode),
     title: args.title ?? fixName(file.replace(".tsx", "")),
     _key: file.split(".")[0],
     navn: file.replace(".tsx", ""),
     description: args.desc,
     index: args.index ?? 1,
     sandboxBase64: processAndCompressForURI(filteredCode),
-    sandboxEnabled: args.sandbox ?? true,
+    /* We are limited to ~2048 characters in url, so disable story if to long */
+    sandboxEnabled:
+      urlBaseLength + encodedCode.length < 2048 ? args.sandbox ?? true : false,
   };
 }

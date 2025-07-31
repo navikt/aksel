@@ -40,22 +40,22 @@ export const Default = {
             >
               <MenuGridIcon
                 style={{ fontSize: "1.5rem" }}
-                title="MenuGridIconer og oppslagsverk"
+                title="Systemer og oppslagsverk"
               />
             </InternalHeader.Button>
             <Dropdown.Menu strategy="fixed">
               <Dropdown.Menu.List>
                 <Dropdown.Menu.List.Item>
                   <span>A.Inntekt</span>
-                  <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+                  <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
                 </Dropdown.Menu.List.Item>
                 <Dropdown.Menu.List.Item>
                   <span>Aa-registeret</span>
-                  <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+                  <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
                 </Dropdown.Menu.List.Item>
                 <Dropdown.Menu.List.Item>
                   <span>Gosys</span>
-                  <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+                  <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
                 </Dropdown.Menu.List.Item>
               </Dropdown.Menu.List>
             </Dropdown.Menu>
@@ -86,7 +86,7 @@ export const Default = {
               }}
             >
               <BodyShort title="Ola Normann">KH</BodyShort>
-              <ChevronDownIcon />
+              <ChevronDownIcon title="Brukermeny" />
             </InternalHeader.Button>
             <Dropdown.Menu strategy="fixed">
               <div>
@@ -172,7 +172,7 @@ export const UserWithMenu = () => (
         }}
       >
         <BodyShort title="Ola Normann">KH</BodyShort>
-        <ChevronDownIcon />
+        <ChevronDownIcon title="Brukermeny" />
       </InternalHeader.Button>
       <Dropdown.Menu strategy="fixed">
         <div>
@@ -208,27 +208,55 @@ export const UserWithMenuGridIconMenu = () => (
       >
         <MenuGridIcon
           style={{ fontSize: "1.5rem" }}
-          title="MenuGridIconer og oppslagsverk"
+          title="Systemer og oppslagsverk"
         />
       </InternalHeader.Button>
       <Dropdown.Menu strategy="fixed">
         <Dropdown.Menu.List>
           <Dropdown.Menu.List.Item>
             <span>A.Inntekt</span>
-            <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+            <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
           </Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item>
             <span>Aa-registeret</span>
-            <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+            <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
           </Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item>
             <span>Gosys</span>
-            <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+            <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
           </Dropdown.Menu.List.Item>
         </Dropdown.Menu.List>
       </Dropdown.Menu>
     </Dropdown>
     <InternalHeader.User name="Ola Normann" description="id: 123456" />
+  </InternalHeader>
+);
+
+export const UserButton = () => (
+  <InternalHeader style={{ width: 600 }}>
+    <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
+    <Spacer />
+    <Dropdown>
+      <InternalHeader.UserButton
+        as={Dropdown.Toggle}
+        name="Ola N."
+        description="Enhet: Skien"
+      />
+      <Dropdown.Menu>
+        <dl>
+          <BodyShort as="dt" size="small">
+            Ola Normann
+          </BodyShort>
+          <Detail as="dd">D123456</Detail>
+        </dl>
+        <Dropdown.Menu.Divider />
+        <Dropdown.Menu.List>
+          <Dropdown.Menu.List.Item>
+            Logg ut <Spacer /> <LeaveIcon aria-hidden fontSize="1.5rem" />
+          </Dropdown.Menu.List.Item>
+        </Dropdown.Menu.List>
+      </Dropdown.Menu>
+    </Dropdown>
   </InternalHeader>
 );
 
@@ -258,6 +286,10 @@ export const Chromatic: Story = {
       <div>
         <h2>UserWithMenuGridIconMenu</h2>
         <UserWithMenuGridIconMenu />
+      </div>
+      <div>
+        <h2>UserButton</h2>
+        <UserButton />
       </div>
     </VStack>
   ),

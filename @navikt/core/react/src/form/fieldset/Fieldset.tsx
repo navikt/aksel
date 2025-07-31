@@ -1,8 +1,9 @@
 import cl from "clsx";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
-import { ReadOnlyIcon } from "../ReadOnlyIcon";
+import { ReadOnlyIcon, ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps } from "../useFormField";
 import { FieldsetContext } from "./context";
 import { useFieldset } from "./useFieldset";
@@ -42,6 +43,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       inputDescriptionId,
     } = useFieldset(props);
 
+    const { cn } = useRenameCSS();
     const fieldset = useContext(FieldsetContext);
 
     const {
@@ -72,7 +74,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           {...omit(rest, ["errorId", "error", "size", "readOnly"])}
           {...omit(inputProps, ["aria-describedby", "aria-invalid"])}
           ref={ref}
-          className={cl(
+          className={cn(
             className,
             "navds-fieldset",
             `navds-fieldset--${size}`,
@@ -85,16 +87,17 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           <Label
             size={size}
             as="legend"
-            className={cl("navds-fieldset__legend", {
+            className={cn("navds-fieldset__legend", {
               "navds-sr-only": !!hideLegend,
             })}
           >
-            <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={nativeReadOnly} />
+            {readOnly &&
+              (nativeReadOnly ? <ReadOnlyIcon /> : <ReadOnlyIconWithTitle />)}
             {legend}
           </Label>
           {!!description && (
             <BodyShort
-              className={cl("navds-fieldset__description", {
+              className={cn("navds-fieldset__description", {
                 "navds-sr-only": !!hideLegend,
               })}
               id={inputDescriptionId}
@@ -109,10 +112,12 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             id={errorId}
             aria-relevant="additions removals"
             aria-live="polite"
-            className="navds-fieldset__error"
+            className={cn("navds-fieldset__error")}
           >
             {showErrorMsg && (
-              <ErrorMessage size={size}>{props.error}</ErrorMessage>
+              <ErrorMessage size={size} showIcon>
+                {props.error}
+              </ErrorMessage>
             )}
           </div>
         </fieldset>

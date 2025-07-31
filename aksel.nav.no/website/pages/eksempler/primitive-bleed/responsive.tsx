@@ -4,10 +4,10 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <DemoWrapper>
-      <Bleed marginInline={{ xs: "8", md: "12", lg: "16" }} asChild>
-        <Box padding="3" className="p" background="surface-alt-3-subtle">
+      <Bleed marginInline={{ xs: "8", sm: "12", md: "16" }} asChild>
+        <Box padding="3" background="surface-alt-3-subtle">
           <HStack justify="center">
-            <BodyLong>xs: 8, md: 12, lg: 16</BodyLong>
+            <BodyLong>xs: 8, sm: 12, md: 16</BodyLong>
           </HStack>
         </Box>
       </Bleed>
@@ -20,7 +20,7 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
     <Box
       background="surface-alt-3"
       paddingBlock="4"
-      paddingInline={{ xs: "4", md: "8", lg: "12" }}
+      paddingInline={{ xs: "4", sm: "8", md: "12" }}
       borderRadius="large"
     >
       <Box background="surface-subtle" padding="4" borderRadius="medium">
@@ -33,6 +33,7 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
+  legacyOnly: true,
 });
 
 /* Storybook story */
@@ -41,6 +42,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  desc: "Margin block/inline er begge reponsive, som lar deg endre negativ margin dynamiskt basert på brekkpunkter.",
+  index: 3,
+  desc: "Både marginBlock og marginInline er reponsive, slik at du kan sette negativ margin dynamisk basert på brekkpunkter.",
 };

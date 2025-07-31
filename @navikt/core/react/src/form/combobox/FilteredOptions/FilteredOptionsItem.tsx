@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React from "react";
 import { CheckmarkIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../../../theme/Theme";
 import { BodyShort } from "../../../typography";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -9,10 +9,26 @@ import { ComboboxOption } from "../types";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
+const useTextHighlight = (text: string, searchTerm: string) => {
+  const indexOfHighlightedText = text
+    .toLowerCase()
+    .indexOf(searchTerm.toLowerCase());
+  const start = text.substring(0, indexOfHighlightedText);
+  const highlight = text.substring(
+    indexOfHighlightedText,
+    indexOfHighlightedText + searchTerm.length,
+  );
+  const end = text.substring(indexOfHighlightedText + searchTerm.length);
+  return [start, highlight, end];
+};
+
 const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
+  const { cn } = useRenameCSS();
+
   const {
     inputProps: { id },
     size,
+    searchTerm,
   } = useInputContext();
   const {
     setIsMouseLastUsedInputDevice,
@@ -22,32 +38,30 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
   } = useFilteredOptionsContext();
   const { isMultiSelect, maxSelected, selectedOptions, toggleOption } =
     useSelectedOptionsContext();
+  const [start, highlight, end] = useTextHighlight(option.label, searchTerm);
 
   const isDisabled = (_option: ComboboxOption) =>
-    maxSelected?.isLimitReached && !isInList(_option.value, selectedOptions);
+    maxSelected.isLimitReached && !isInList(_option.value, selectedOptions);
+
+  const optionId = filteredOptionsUtil.getOptionId(id, option.value);
+  const isActive = activeDecendantId === optionId;
+
   return (
     <li
-      className={cl("navds-combobox__list-item", {
-        "navds-combobox__list-item--focus":
-          activeDecendantId ===
-          filteredOptionsUtil.getOptionId(id, option.label),
+      className={cn("navds-combobox__list-item", {
+        "navds-combobox__list-item--focus": isActive,
         "navds-combobox__list-item--selected": isInList(
           option.value,
           selectedOptions,
         ),
       })}
       data-no-focus={isDisabled(option) || undefined}
-      id={filteredOptionsUtil.getOptionId(id, option.label)}
-      key={option.label}
+      id={optionId}
+      key={optionId}
       tabIndex={-1}
       onMouseMove={() => {
-        if (
-          activeDecendantId !==
-          filteredOptionsUtil.getOptionId(id, option.label)
-        ) {
-          virtualFocus.moveFocusToElement(
-            filteredOptionsUtil.getOptionId(id, option.label),
-          );
+        if (!isActive) {
+          virtualFocus.moveFocusToElement(optionId);
           setIsMouseLastUsedInputDevice(true);
         }
       }}
@@ -64,7 +78,12 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
       aria-selected={isInList(option.value, selectedOptions)}
       aria-disabled={isDisabled(option) || undefined}
     >
-      <BodyShort size={size}>{option.label}</BodyShort>
+      {/* Aria-label is used to fix testing-library wrongly evaluating the accessible name of the option when highlighting text */}
+      <BodyShort size={size} aria-label={option.label}>
+        {start}
+        {highlight && <mark>{highlight}</mark>}
+        {end}
+      </BodyShort>
       {isInList(option.value, selectedOptions) && <CheckmarkIcon />}
     </li>
   );

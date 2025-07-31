@@ -5,6 +5,8 @@ import "./index.css";
 import { routeTree } from "./routeTree.gen";
 import { ThemeProvider } from "./theme/ThemeProvider";
 
+// import { ThemeProvider } from "./theme/ThemeProvider";
+
 const router = createRouter({ routeTree, trailingSlash: "always" });
 
 declare module "@tanstack/react-router" {

@@ -77,8 +77,6 @@ const Example = () => {
             })}
           />
           <RadioGroup
-            id="transportmiddel"
-            tabIndex={-1}
             legend="Transportmiddel"
             error={errors.transportmiddel?.message}
             onChange={() => trigger("transportmiddel")}
@@ -87,6 +85,7 @@ const Example = () => {
             {["Bil", "Gange", "Kollektivtransport"].map((value) => (
               <Radio
                 key={value}
+                id={value === "Bil" ? "transportmiddel" : undefined}
                 value={value}
                 {...register("transportmiddel", {
                   required: "Du må velge et transportmiddel.",
@@ -148,4 +147,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
+  sandbox: false,
 };

@@ -1,9 +1,9 @@
-import cl from "clsx";
 import React, { MouseEvent, forwardRef } from "react";
-import { ExclamationmarkTriangleIcon } from "@navikt/aksel-icons";
-import { BodyShort } from "../../../../typography";
+import { Spacer } from "../../../../layout/stack";
+import { useRenameCSS } from "../../../../theme/Theme";
+import { BodyShort, ErrorMessage } from "../../../../typography";
 import { OverridableComponent } from "../../../../util";
-import { useI18n } from "../../../../util/i18n/i18n.context";
+import { useI18n } from "../../../../util/i18n/i18n.hooks";
 import { ComponentTranslation } from "../../../../util/i18n/i18n.types";
 import { useFileUploadTranslation } from "../../FileUpload.context";
 import { FileItem } from "./Item.types";
@@ -52,11 +52,13 @@ export interface FileUploadItemProps
   /**
    * Props for the action button.
    */
-  button?: {
-    action: "delete" | "retry";
-    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
-    id?: string;
-  };
+  button?:
+    | {
+        action: "delete" | "retry";
+        onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+        id?: string;
+      }
+    | React.ReactNode;
   /**
    * i18n-API for customizing texts and labels
    */
@@ -81,6 +83,7 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
       }: FileUploadItemProps,
       ref,
     ) => {
+      const { cn } = useRenameCSS();
       const context = useFileUploadTranslation(false);
       const translate = useI18n(
         "FileUpload",
@@ -100,43 +103,43 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
         return description ?? formatFileSize(file);
       }
 
+      const renderButton = status === "idle" && button;
+      const renderCustomButton = isCustomButton(button);
+
       return (
         <Component
           ref={ref}
           {...rest}
-          className={cl("navds-file-item", className, {
+          className={cn("navds-file-item", className, {
             "navds-file-item--error": showError,
           })}
         >
-          <div className="navds-file-item__inner">
+          <div className={cn("navds-file-item__inner")}>
             <ItemIcon
               isLoading={status !== "idle"}
               file={file}
               showError={showError}
             />
-            <div className="navds-file-item__file-info">
+            <div className={cn("navds-file-item__file-info")}>
               <ItemName file={file} href={href} onClick={onFileClick} />
               <BodyShort as="div" size="small">
                 {getStatusText()}
               </BodyShort>
               <div
-                className="navds-file-item__error"
+                className={cn("navds-file-item__error")}
                 aria-relevant="additions removals"
                 aria-live="polite"
               >
                 {showError && (
-                  <BodyShort
-                    size="small"
-                    className="navds-file-item__error-content"
-                  >
-                    <ExclamationmarkTriangleIcon aria-hidden />
+                  <ErrorMessage size="small" showIcon>
                     {error}
-                  </BodyShort>
+                  </ErrorMessage>
                 )}
               </div>
             </div>
+            {renderButton && <Spacer />}
 
-            {status === "idle" && button && (
+            {renderButton && !renderCustomButton && (
               <ItemButton
                 {...button}
                 title={translate(
@@ -146,10 +149,17 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
                 )}
               />
             )}
+            {renderButton && renderCustomButton && button}
           </div>
         </Component>
       );
     },
   );
+
+function isCustomButton(
+  button: FileUploadItemProps["button"],
+): button is React.ReactNode {
+  return React.isValidElement(button);
+}
 
 export default Item;

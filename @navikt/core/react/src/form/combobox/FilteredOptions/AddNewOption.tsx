@@ -1,7 +1,8 @@
-import cl from "clsx";
 import React from "react";
 import { PlusIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../../../theme/Theme";
 import { BodyShort, Label } from "../../../typography";
+import { useI18n } from "../../../util/i18n/i18n.hooks";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList, toComboboxOption } from "../combobox-utils";
@@ -9,19 +10,26 @@ import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const AddNewOption = () => {
+  const { cn } = useRenameCSS();
+
   const {
     inputProps: { id },
     size,
-    value,
+    searchTerm,
   } = useInputContext();
+
   const {
     setIsMouseLastUsedInputDevice,
     toggleIsListOpen,
     activeDecendantId,
     virtualFocus,
   } = useFilteredOptionsContext();
+
   const { isMultiSelect, selectedOptions, toggleOption } =
     useSelectedOptionsContext();
+
+  const translate = useI18n("Combobox");
+
   return (
     <li
       tabIndex={-1}
@@ -34,12 +42,12 @@ const AddNewOption = () => {
         }
       }}
       onPointerUp={(event) => {
-        toggleOption(toComboboxOption(value), event);
-        if (!isMultiSelect && !isInList(value, selectedOptions))
+        toggleOption(toComboboxOption(searchTerm), event);
+        if (!isMultiSelect && !isInList(searchTerm, selectedOptions))
           toggleIsListOpen(false);
       }}
       id={filteredOptionsUtil.getAddNewOptionId(id)}
-      className={cl(
+      className={cn(
         "navds-combobox__list-item navds-combobox__list-item--new-option",
         {
           "navds-combobox__list-item--new-option--focus":
@@ -51,9 +59,9 @@ const AddNewOption = () => {
     >
       <PlusIcon aria-hidden />
       <BodyShort size={size}>
-        Legg til{" "}
+        {translate("addOption")}{" "}
         <Label as="span" size={size}>
-          &#8220;{value}&#8221;
+          &#8220;{searchTerm}&#8221;
         </Label>
       </BodyShort>
     </li>

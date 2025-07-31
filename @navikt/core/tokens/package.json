@@ -1,24 +1,27 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "7.3.0",
-  "description": "Design-tokens for NAV designsystem",
-  "author": "Aksel | NAV designsystem team",
+  "version": "7.25.1",
+  "description": "Design-tokens for Nav designsystem",
+  "author": "Aksel | Nav designsystem team",
   "keywords": [
     "css",
     "less",
     "javascript",
     "design-tokens"
   ],
-  "main": "dist/tokens.css",
   "license": "MIT",
   "files": [
     "/dist",
     "/src",
-    "/tailwind",
-    "docs.json"
+    "types.ts",
+    "internal-types.ts",
+    "docs.json",
+    "token_docs.js",
+    "!/dist/darkside",
+    "/dist/darkside/tokens*"
   ],
   "scripts": {
-    "build": "tsx ./config/build.ts > /dev/null && tsx ./config/version-tag.ts && yarn build:darkside",
+    "build": "tsx ./config/build.ts > /dev/null && yarn build:darkside && tsx ./config/version-tag.ts",
     "build:darkside": "tsx ./darkside && yarn build:figma-config && yarn build:plugin",
     "build:figma-config": "tsx ./darkside/figma",
     "build:plugin-dev": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"development\\\" --outfile='darkside/figma/plugin/plugin.js'",
@@ -33,18 +36,36 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.100.2",
-    "color": "4.2.3",
     "colorjs.io": "^0.5.2",
-    "esbuild": "^0.24.0",
-    "lightningcss": "^1.27.0",
+    "esbuild": "^0.25.5",
+    "lightningcss": "^1.29.3",
     "lodash": "^4.17.21",
     "style-dictionary": "^4.1.1",
     "tsx": "^4.19.1",
-    "typescript": "5.5.4",
-    "vitest": "^1.2.2"
+    "typescript": "5.8.3",
+    "vitest": "^2.1.9"
   },
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "main": "dist/tokens.css",
+  "exports": {
+    ".": "./dist/tokens.css",
+    "./types": "./types.ts",
+    "./docs.json": "./docs.json",
+    "./token_docs": "./token_docs.js",
+    "./dist/*": {
+      "types": "./dist/tokens.d.ts",
+      "default": "./dist/*"
+    },
+    "./darkside-css": "./dist/darkside/tokens.css",
+    "./darkside-js": {
+      "types": "./dist/darkside/tokens.d.ts",
+      "import": "./dist/darkside/tokens.js",
+      "require": "./dist/darkside/tokens-cjs.js"
+    },
+    "./darkside-scss": "./dist/darkside/tokens.scss",
+    "./darkside-less": "./dist/darkside/tokens.less"
   }
 }

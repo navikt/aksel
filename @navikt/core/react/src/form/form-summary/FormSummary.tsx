@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import FormSummaryAnswer from "./FormSummaryAnswer";
 import FormSummaryAnswers from "./FormSummaryAnswers";
 import FormSummaryEditLink from "./FormSummaryEditLink";
@@ -87,8 +87,10 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
  */
 export const FormSummary = forwardRef<HTMLDivElement, FormSummaryProps>(
   ({ children, className, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
+
     return (
-      <div ref={ref} {...rest} className={cl("navds-form-summary", className)}>
+      <div ref={ref} {...rest} className={cn("navds-form-summary", className)}>
         {children}
       </div>
     );

@@ -10,16 +10,10 @@ const views = () => {
     list.push(
       defineField({
         title: `Ingress ${kat.title}`,
+        description: "Støtter markdown-lenker",
         name: `ingress_${kat.value}`,
         type: "text",
         rows: 2,
-      }),
-    );
-    list.push(
-      defineField({
-        title: `Intro ${kat.title}`,
-        name: `intro_${kat.value}`,
-        type: "riktekst_standard",
       }),
     );
   });
@@ -37,6 +31,20 @@ export const TemplatesLandingSide = defineType({
       name: "intro",
       type: "text",
     }),
+    {
+      title: "Oversikt-sider",
+      name: "overview_pages",
+      description:
+        "Legger til en ny side 'Oversikt' i menyen som lister ut alle artiklene i kategorien.",
+      type: "array",
+      of: [{ type: "string" }],
+      options: {
+        list: templatesKategorier.map((kat) => ({
+          title: kat.title,
+          value: kat.value,
+        })),
+      },
+    },
     ...views(),
     BaseSEOPreset,
   ],

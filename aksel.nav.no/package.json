@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Website for Aksel.nav.no",
-  "author": "Aksel | NAV designsystem team",
+  "author": "Aksel | Nav designsystem team",
   "scripts": {
     "dev": "yarn workspace website dev",
     "build:next": "yarn workspace website build",
@@ -15,10 +15,10 @@
     "playroom"
   ],
   "dependencies": {
-    "@navikt/aksel-icons": "^7.3.0",
-    "@navikt/ds-css": "^7.3.0",
-    "@navikt/ds-react": "^7.3.0",
-    "@navikt/ds-tailwind": "^7.3.0",
-    "@navikt/ds-tokens": "^7.3.0"
+    "@navikt/aksel-icons": "^7.25.1",
+    "@navikt/ds-css": "^7.25.1",
+    "@navikt/ds-react": "^7.25.1",
+    "@navikt/ds-tailwind": "^7.25.1",
+    "@navikt/ds-tokens": "^7.25.1"
   }
 }

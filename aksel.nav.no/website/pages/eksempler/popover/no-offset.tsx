@@ -40,4 +40,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
+  desc: "Offset er avstanden mellom elementet og popoveren, og kan overstyres.",
 };

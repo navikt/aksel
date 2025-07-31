@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { OverridableComponent } from "../../util";
 import { BackgroundColorToken } from "../utilities/types";
 import { PageBlock } from "./parts/PageBlock";
@@ -14,6 +14,7 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * Background color.
    * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#753d1cf4d1d6).
    * @default "bg-default"
+   * @deprecated Use `<Box asChild background="...">` wrapped around `<Page>`.
    */
   background?: BackgroundColorToken;
   /**
@@ -46,15 +47,24 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
         footer,
         children,
         footerPosition,
-        background = "bg-default",
+        background,
         contentBlockPadding = "end",
         ...rest
       },
       ref,
     ) => {
+      const themeContext = useThemeInternal(false);
+      const { cn } = useRenameCSS();
+
+      if (process.env.NODE_ENV !== "production" && themeContext && background) {
+        console.warn(
+          `Prop \`background\` is deprecated and cannot be used with theme-support. Instead wrap component with \`<Box asChild background>\``,
+        );
+      }
+
       const style: React.CSSProperties = {
         ..._style,
-        "--__ac-page-background": `var(--a-${background})`,
+        "--__ac-page-background": `var(--a-${background ?? "bg-default"})`,
       };
 
       const belowFold = footerPosition === "belowFold";
@@ -62,12 +72,12 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       return (
         <Component
           {...rest}
-          className={cl("navds-page", className)}
+          className={cn("navds-page", className)}
           ref={ref}
           style={style}
         >
           <div
-            className={cl({
+            className={cn({
               "navds-page__content--fullheight": belowFold,
               "navds-page__content--grow": !belowFold,
               "navds-page__content--padding": contentBlockPadding === "end",

@@ -101,8 +101,6 @@ const Example = () => {
             error={errors.fødselsnummer}
           />
           <RadioGroup
-            id="transportmiddel"
-            tabIndex={-1}
             legend="Transportmiddel"
             value={values.transportmiddel}
             onChange={(newValue) => {
@@ -111,7 +109,9 @@ const Example = () => {
             }}
             error={errors.transportmiddel}
           >
-            <Radio value="car">Bil</Radio>
+            <Radio value="car" id="transportmiddel">
+              Bil
+            </Radio>
             <Radio value="walking">Gange</Radio>
             <Radio value="public">Kollektivtransport</Radio>
           </RadioGroup>

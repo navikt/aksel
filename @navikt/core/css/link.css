@@ -30,7 +30,7 @@
   text-decoration: underline;
 }
 
-.navds-alert .navds-link,
+.navds-alert:not(.navds-alert--inline) .navds-link:not(:active, :focus-visible),
 .navds-confirmation-panel .navds-link {
   color: var(--a-text-default);
 }

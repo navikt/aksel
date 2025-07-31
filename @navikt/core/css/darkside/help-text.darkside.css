@@ -1,0 +1,55 @@
+.aksel-help-text__button {
+  margin: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: var(--ax-radius-full);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--ax-bg-strong);
+  font-size: 1.25rem;
+  padding: calc(var(--ax-space-4) / 2);
+}
+
+.aksel-help-text__icon {
+  border-radius: var(--ax-radius-full);
+}
+
+.aksel-help-text__popover.aksel-popover {
+  background-color: var(--ax-bg-moderate);
+  max-width: min(65ch, calc(100vw - var(--ax-space-24)));
+  border-radius: var(--ax-radius-8);
+  border: 1px solid var(--ax-border-default);
+}
+
+.aksel-help-text__icon--filled {
+  display: none;
+}
+
+.aksel-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .aksel-help-text__icon {
+  display: none;
+}
+
+.aksel-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .aksel-help-text__icon--filled {
+  display: inherit;
+  color: var(--ax-bg-strong-hover);
+}
+
+.aksel-help-text__button[aria-expanded="true"] > .aksel-help-text__icon--filled {
+  color: var(--ax-bg-strong-pressed);
+}
+
+@media (forced-colors: active) {
+  .aksel-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .aksel-help-text__icon {
+    display: inherit;
+  }
+
+  .aksel-help-text__button:hover > .aksel-help-text__icon {
+    color: highlight;
+  }
+
+  .aksel-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .aksel-help-text__icon--filled {
+    display: none;
+  }
+}

@@ -1,32 +1,28 @@
-import { Box, Page } from "@navikt/ds-react";
+import { Heading, Page } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
+import {
+  Env,
+  Footer,
+  Header,
+  useDekorator,
+} from "../../../components/website-modules/examples/__parts/Dekorator";
+import { Content } from "../../../components/website-modules/examples/__parts/PageDemoContent";
 
 const Example = () => {
+  useDekorator();
+
   return (
-    <Page
-      footer={
-        <Box background="surface-neutral-moderate" padding="8" as="footer">
-          <Page.Block gutters width="lg">
-            Footer
-          </Page.Block>
-        </Box>
-      }
-    >
-      <Box background="surface-neutral-moderate" padding="8" as="header">
-        <Page.Block gutters width="lg">
-          Header
-        </Page.Block>
-      </Box>
-      <Box
-        background="surface-alt-3-moderate"
-        padding="8"
-        paddingBlock="16"
-        as="main"
-      >
-        <Page.Block gutters width="lg">
-          Content
-        </Page.Block>
-      </Box>
+    <Page footer={<Footer />}>
+      <Header />
+
+      <Page.Block as="main" width="xl" gutters>
+        <Content>
+          <Heading level="1" size="large">
+            Page.Block
+          </Heading>
+        </Content>
+      </Page.Block>
+      <Env />
     </Page>
   );
 };
@@ -34,7 +30,7 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
-  variant: "full",
+  variant: "fullscreen",
 });
 
 /* Storybook story */
@@ -45,5 +41,5 @@ export const Demo = {
 export const args = {
   index: 0,
   title: "Standard",
-  desc: "Page gjør det enklere å bygge opp layout med riktig maksbredde og gutters.",
+  desc: "`Page.Block` kan også brukes i header og footer for å sikre at innholdet er sentrert og har samme maksbredde som resten av innholdet.",
 };

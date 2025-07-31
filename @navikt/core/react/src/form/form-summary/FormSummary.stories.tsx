@@ -181,7 +181,7 @@ const answers = [
   {
     label: "Fortell din livshistorie",
     value: `Det hele startet da jeg ble født en kald vinterdag i desember.
-     Jeg var en litt spesiell baby, for jeg hadde masse hår på hodet. Mamma 
+     Jeg var en litt spesiell baby, for jeg hadde masse hår på hodet. Mamma
      og pappa ble veldig overrasket da de så meg for første gang. De hadde egentlig
      forventet at jeg skulle være helt normal og kjedelig. Du vil kanskje ikke høre resten
      av historien min, for den er ganske lang og kjedelig...`,
@@ -343,6 +343,39 @@ export const CommaSeparated: StoryFn<typeof FormSummary> = () => (
   </FormSummary>
 );
 
+export const ColorRole: StoryFn<typeof FormSummary> = () => (
+  <FormSummary>
+    <FormSummary.Header>
+      <FormSummary.Heading level="2">
+        Diverse informasjon om forskjellige ting og tang. Kjekt å vite.
+      </FormSummary.Heading>
+      <FormSummary.EditLink href="#" />
+    </FormSummary.Header>
+
+    <FormSummary.Answers>
+      {answers.map((answer, index) => (
+        <FormSummary.Answer key={index}>
+          <FormSummary.Label>{answer.label}</FormSummary.Label>
+          <FormSummary.Value>
+            {Array.isArray(answer.value) ? (
+              <FormSummary.Answers data-color="warning">
+                {answer.value.map((subAnswer, subIndex) => (
+                  <FormSummary.Answer key={subIndex}>
+                    <FormSummary.Label>{subAnswer.label}</FormSummary.Label>
+                    <FormSummary.Value>{subAnswer.value}</FormSummary.Value>
+                  </FormSummary.Answer>
+                ))}
+              </FormSummary.Answers>
+            ) : (
+              answer.value
+            )}
+          </FormSummary.Value>
+        </FormSummary.Answer>
+      ))}
+    </FormSummary.Answers>
+  </FormSummary>
+);
+
 export const Chromatic: StoryObj<typeof FormSummary> = {
   render: () => (
     <div>
@@ -369,6 +402,10 @@ export const Chromatic: StoryObj<typeof FormSummary> = {
       <div>
         <h2>Comma Separated</h2>
         <CommaSeparated>{null}</CommaSeparated>
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole>{null}</ColorRole>
       </div>
     </div>
   ),

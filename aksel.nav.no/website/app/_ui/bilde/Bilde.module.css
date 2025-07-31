@@ -1,0 +1,45 @@
+.doDontNotch {
+  padding: var(--ax-space-12) var(--ax-space-16);
+  color: var(--ax-text-default);
+  background-color: var(--ax-bg-moderate);
+  border: 1px solid var(--ax-border-subtleA);
+  border-bottom: 0;
+  border-radius: var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge) 0 0;
+  display: flex;
+  gap: var(--ax-space-6);
+}
+
+.doDontDescription {
+  padding: var(--ax-space-12) var(--ax-space-16);
+  color: var(--ax-text-neutral);
+  background-color: var(--ax-bg-neutral-moderate);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  border-top: 0;
+  border-radius: 0 0 var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge);
+}
+
+.doDontImage {
+  position: relative;
+  border-inline: 1px solid var(--ax-border-neutral-subtleA);
+  background-color: var(--ax-bg-default);
+}
+
+.bildeFigure {
+  margin-inline: auto;
+  border-radius: var(--ax-border-radius-large);
+}
+
+.bildeImage {
+  margin-inline: auto;
+  padding: 0;
+  border-radius: var(--ax-border-radius-large);
+  background-color: var(--bilde-background, var(--ax-bg-neutral-softA));
+
+  &[data-image-border="true"] {
+    box-shadow: 0 0 0 1px var(--ax-border-neutral-subtleA);
+  }
+
+  &[data-image-size="small"] {
+    max-width: min(100%, 600px);
+  }
+}

@@ -10,11 +10,17 @@ function Footer() {
 
 const MILJO_URL = "https://www.nav.no/dekoratoren";
 
-function Env() {
+function Env({ languages }: { languages?: { locale: string; url: string }[] }) {
   return (
     <div
       id="decorator-env"
-      data-src={`${MILJO_URL}/env?context=privatperson&simple=true&availableLanguages=[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}]`}
+      data-src={`${MILJO_URL}/env?context=privatperson&simple=true${
+        languages
+          ? `&availableLanguages=[${languages
+              .map((language) => JSON.stringify(language))
+              .join(",")}]`
+          : ""
+      }`}
     />
   );
 }

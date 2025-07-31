@@ -1,0 +1,66 @@
+name: "Build website"
+description: "Builds Nextjs-website and published CDN-asssets to GCP if needed"
+inputs:
+  use_cdn_assets:
+    description: "Use CDN assets, and upload build to GCP"
+    required: true
+  npm_auth_token:
+    description: "NPM Auth Token"
+    required: true
+  nais_id_provider:
+    description: "NAIS_WORKLOAD_IDENTITY_PROVIDER token"
+    required: true
+  nais_project_id:
+    description: "NAIS_MANAGEMENT_PROJECT_ID token"
+    required: true
+  sanity_read_token:
+    description: "Sanity read-only token allowing published and un-published documents"
+    required: true
+  sanity_read_no_drafts_token:
+    description: "Sanity read-only token allowing only published documents"
+    required: true
+  production:
+    description: "Toggle to differentiate production build (inject stuff based on this)"
+    default: false
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup project
+      uses: ./.github/actions/setup
+      with:
+        npm_auth_token: ${{ inputs.npm_auth_token }}
+
+    - name: Run website tests
+      run: yarn workspace website test
+      shell: bash
+
+    - name: Make Next.js app use CDN assets
+      if: ${{ inputs.use_cdn_assets == 'true' }}
+      run: |
+        echo "USE_CDN_ASSETS=true" >> aksel.nav.no/website/.env
+      shell: bash
+
+    - name: Set production env var
+      if: ${{ inputs.production == 'true' }}
+      run: |
+        echo "PRODUCTION=true" >> aksel.nav.no/website/.env
+      shell: bash
+
+    - name: Build Next.js website
+      run: yarn build:next
+      env:
+        SANITY_READ: ${{ inputs.sanity_read_token }}
+        SANITY_READ_NO_DRAFTS: ${{ inputs.sanity_read_no_drafts_token }}
+      shell: bash
+
+    - name: Upload static files to Nav CDN
+      if: ${{ inputs.use_cdn_assets == 'true' }}
+      uses: nais/deploy/actions/cdn-upload/v2@master
+      with:
+        team: designsystem
+        source: ./aksel.nav.no/website/.next/static
+        destination: "/website/_next"
+        project_id: ${{ inputs.nais_project_id }}
+        identity_provider: ${{ inputs.nais_id_provider }}

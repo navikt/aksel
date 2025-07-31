@@ -14,16 +14,22 @@
   max-height: 100%;
   max-width: 100%;
   color: var(--a-text-default);
+  margin: auto;
+
+  /* In case Modal is opened with `show()`, in eg. Vergic screensharing */
+  inset: 0;
+  z-index: 9999;
 }
 
 .navds-modal[open] {
   display: flex;
   flex-direction: column;
-  animation: akselModalFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
+  animation: akselModalFadeIn 0.7s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .navds-modal--polyfilled {
   top: 50%;
+  bottom: unset; /* Overrides inset: 0 from .navds-modal */
   transform: translate(0, -50%);
 
   /* From polyfill (dialog-polyfill/dist/dialog-polyfill.css): */
@@ -88,7 +94,7 @@
    * We can add ::backdrop to tokens.css when we remove the polyfill.
    */
   background: var(--ac-modal-backdrop, rgb(2 20 49 / 0.49));
-  animation: akselModalBackdropFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
+  animation: akselModalBackdropFadeIn 0.7s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .navds-modal--polyfilled + .backdrop /* Cannot be combined with ::backdrop selector */ {
@@ -132,6 +138,9 @@
   overflow: auto;
   overscroll-behavior: contain;
   position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
+}
+
+.navds-modal:not(.navds-modal--polyfilled) .navds-modal__body {
   background:
     linear-gradient(var(--__ac-modal-bg) 30%, transparent) top,
     linear-gradient(transparent, var(--__ac-modal-bg) 60%) bottom,
@@ -180,7 +189,7 @@
 @keyframes akselModalFadeIn {
   0% {
     opacity: 0.0001; /* Safari will not set focus inside the modal when it opens if we set this to 0 */
-    transform: translate3d(0, calc(5% + 4px), 0);
+    transform: translate3d(0, 4px, 0);
   }
 
   50% {
@@ -193,11 +202,15 @@
 }
 
 @keyframes akselModalBackdropFadeIn {
-  from {
-    opacity: 0;
+  0% {
+    opacity: 0.0001;
   }
 
-  to {
+  50% {
+    opacity: 1;
+  }
+
+  100% {
     opacity: 1;
   }
 }

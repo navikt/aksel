@@ -26,6 +26,7 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
+  legacyOnly: true,
 });
 
 /* Storybook story */
@@ -35,5 +36,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "'paddingInline' gir deg mer kontroll over horisontal padding",
+  desc: "Propen 'paddingInline' gir deg mer kontroll over horisontal padding.",
 };

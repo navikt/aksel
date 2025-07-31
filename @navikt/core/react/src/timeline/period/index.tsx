@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
-import { TimelineComponentTypes } from "../utils/types.internal";
+import type { TimelineComponentTypes } from "../utils/types.internal";
 import ClickablePeriod from "./ClickablePeriod";
 import NonClickablePeriod from "./NonClickablePeriod";
 
@@ -43,6 +43,11 @@ export interface TimelinePeriodProps
    * Make sure only one period is active at a time.
    */
   isActive?: boolean;
+  /**
+   * Default orientation of popover
+   * @default "top"
+   */
+  placement?: "top" | "bottom";
 }
 
 export interface PeriodType
@@ -54,7 +59,7 @@ export interface PeriodType
 }
 
 export const Period = forwardRef<HTMLDivElement, TimelinePeriodProps>(
-  ({ icon }, ref) => {
+  ({ icon }: TimelinePeriodProps, ref) => {
     const { periods } = useRowContext();
     const { periodId, restProps } = usePeriodContext();
 

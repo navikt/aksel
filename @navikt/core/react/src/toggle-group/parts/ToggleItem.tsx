@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography/BodyShort";
 import { useToggleGroupContext } from "../ToggleGroup.context";
 import { useToggleItem } from "./useToggleItem";
@@ -62,6 +62,7 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
     },
     forwardedRef,
   ) => {
+    const { cn } = useRenameCSS();
     const itemCtx = useToggleItem(
       { value, onClick, onFocus, disabled: false, onKeyDown },
       forwardedRef,
@@ -72,10 +73,11 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
       <button
         {...rest}
         ref={itemCtx.ref}
-        className={cl("navds-toggle-group__button", className)}
+        className={cn("navds-toggle-group__button", className)}
         type="button"
         role="radio"
         aria-checked={itemCtx.isSelected}
+        data-selected={itemCtx.isSelected}
         tabIndex={itemCtx.isFocused ? 0 : -1}
         onClick={itemCtx.onClick}
         onFocus={itemCtx.onFocus}
@@ -83,7 +85,7 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
       >
         <BodyShort
           as="span"
-          className="navds-toggle-group__button-inner"
+          className={cn("navds-toggle-group__button-inner")}
           size={ctx?.size}
         >
           {children ?? (

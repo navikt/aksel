@@ -1,5 +1,107 @@
 # @navikt/ds-tailwind
 
+## 7.25.1
+
+## 7.25.0
+
+## 7.24.0
+
+## 7.23.2
+
+## 7.23.1
+
+## 7.23.0
+
+## 7.22.0
+
+### Minor Changes
+
+- Border-radius: Removed `rounded`-value based on aksel token-config. Use built-in values from tailwindcss as replacement [Tailwindcss docs](https://tailwindcss.com/docs/border-radius). ([#3784](https://github.com/navikt/aksel/pull/3784))
+
+## 7.21.1
+
+## 7.21.0
+
+## 7.20.0
+
+## 7.19.1
+
+## 7.19.0
+
+## 7.18.0
+
+## 7.17.4
+
+## 7.17.3
+
+## 7.17.2
+
+## 7.17.1
+
+## 7.17.0
+
+## 7.16.1
+
+## 7.16.0
+
+## 7.15.0
+
+## 7.14.3
+
+## 7.14.2
+
+## 7.14.1
+
+## 7.14.0
+
+## 7.13.0
+
+### Patch Changes
+
+- Tailwind: Added `darkside`-support with import `@navikt/ds-tailwind/darkside-tw3`. ([#3580](https://github.com/navikt/aksel/pull/3580))
+
+## 7.12.2
+
+## 7.12.1
+
+## 7.12.0
+
+## 7.11.0
+
+## 7.10.0
+
+## 7.9.2
+
+## 7.9.1
+
+## 7.9.0
+
+## 7.8.1
+
+## 7.8.0
+
+## 7.7.0
+
+## 7.6.0
+
+## 7.5.3
+
+## 7.5.2
+
+## 7.5.1
+
+## 7.5.0
+
+## 7.4.3
+
+## 7.4.2
+
+## 7.4.1
+
+## 7.4.0
+
+## 7.3.1
+
 ## 7.3.0
 
 ## 7.2.1

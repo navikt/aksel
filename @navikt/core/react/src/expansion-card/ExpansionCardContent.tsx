@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { BodyLong } from "../typography";
 import { ExpansionCardContext } from "./context";
 
@@ -12,6 +12,7 @@ const ExpansionCardContent = forwardRef<
   HTMLDivElement,
   ExpansionCardContentProps
 >(({ children, className, ...rest }, ref) => {
+  const { cn } = useRenameCSS();
   const panelContext = useContext(ExpansionCardContext);
 
   if (panelContext === null) {
@@ -26,13 +27,14 @@ const ExpansionCardContent = forwardRef<
       {...rest}
       ref={ref}
       as="div"
-      className={cl("navds-expansioncard__content", className, {
+      className={cn("navds-expansioncard__content", className, {
         "navds-expansioncard__content--closed": !panelContext.open,
       })}
       aria-hidden={!panelContext.open}
       size={panelContext.size}
+      data-open={panelContext.open}
     >
-      <div className="navds-expansioncard__content-inner">{children}</div>
+      <div className={cn("navds-expansioncard__content-inner")}>{children}</div>
     </BodyLong>
   );
 });

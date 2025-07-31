@@ -1,6 +1,5 @@
 import Avatar from "boring-avatars";
-import { SanityDocument } from "sanity";
-import { Iframe } from "sanity-plugin-iframe-pane";
+import { Iframe, IframeOptions, UrlResolver } from "sanity-plugin-iframe-pane";
 import { StructureResolver } from "sanity/structure";
 import { LightBulbIcon } from "@navikt/aksel-icons";
 import {
@@ -24,12 +23,14 @@ const filtered = [
   "ds_artikkel",
   "komponent_artikkel",
   "grunnleggende_landingsside",
+  "ds_endringslogg_artikkel",
   "templates_landingsside",
   "templates_artikkel",
   "komponenter_landingsside",
   "media.tag",
   "editor",
   "aksel_forside",
+  "aksel_ds_forside",
   "redirect",
   "token_kategori",
   "kode_eksempler_fil",
@@ -47,6 +48,7 @@ const filtered = [
   "gp.tema",
   "gp.tema.undertema",
   "gp.innholdstype",
+  "cookie_tracker",
 ];
 
 export const structure: StructureResolver = async (
@@ -135,13 +137,16 @@ export const structure: StructureResolver = async (
     ]);
 };
 
-export const resolveProductionUrl = (
-  doc: SanityDocument & { slug?: { current?: string } },
-) => {
+export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
   const rootPath = `${window.location.protocol}//${window.location.host}`;
+
+  if (!doc?._type) {
+    return rootPath;
+  }
+
   if (previews.includes(doc._type)) {
-    const slug = doc?.slug?.current;
-    const previewUrl = `/preview/${slug}`;
+    const slug = (doc?.slug as any)?.current;
+    const previewUrl = `/${slug}`;
     if (!slug) {
       return "";
     }
@@ -149,7 +154,7 @@ export const resolveProductionUrl = (
   }
   if (landingsider.find((x) => x.name === doc._type)) {
     const slug = landingsider.find((x) => x.name === doc._type)?.url;
-    const previewUrl = `/preview/${slug}`;
+    const previewUrl = `/${slug}`;
     if (!slug) {
       return "";
     }
@@ -157,13 +162,15 @@ export const resolveProductionUrl = (
   }
 
   if ("gp.tema" === doc._type) {
-    const slug = doc.slug?.current;
-    const previewUrl = `/preview/god-praksis/${slug}`;
+    const slug = (doc?.slug as any)?.current;
+    const previewUrl = `/god-praksis/${slug}`;
     if (!slug) {
       return "";
     }
     return `${rootPath}${previewUrl}`;
   }
+
+  return rootPath;
 };
 
 export const defaultDocumentNode = (S, { schemaType }) => {
@@ -174,7 +181,11 @@ export const defaultDocumentNode = (S, { schemaType }) => {
       S.view
         .component(Iframe)
         .options({
-          url: (doc: SanityDocument) => resolveProductionUrl(doc),
+          url: {
+            origin: "same-origin",
+            preview: resolveProductionUrlAppdir,
+            draftMode: "/api/draft-mode/enable",
+          } satisfies IframeOptions["url"],
           reload: { button: true },
           attributes: {
             allow: "fullscreen",

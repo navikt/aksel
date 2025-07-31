@@ -1,55 +1,25 @@
-import { HGrid } from "@navikt/ds-react";
+import { Box, HGrid } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Background>
+    <Box background="surface-alt-3-subtle">
       <HGrid gap="6" columns={3}>
-        <Placeholder height="240px" />
-        <Placeholder height="240px" />
-        <Placeholder height="240px" />
+        <Placeholder />
+        <Placeholder />
+        <Placeholder />
       </HGrid>
-    </Background>
+    </Box>
   );
 };
 
-const Placeholder = ({ height = "auto", width = "auto" }) => {
-  return (
-    <div
-      style={{
-        display: "inherit",
-        background: "var(--a-deepblue-500)",
-        height: height ?? undefined,
-        width: width ?? undefined,
-      }}
-    />
-  );
-};
-
-const Background = ({
-  children,
-  width = "100%",
-}: {
-  children: React.ReactNode;
-  width?: string;
-}) => {
-  return (
-    <div
-      style={{
-        background: "var(--a-deepblue-100)",
-        width,
-        height: "auto",
-      }}
-    >
-      {children}
-    </div>
-  );
-};
+const Placeholder = () => <Box background="surface-alt-3" height="15rem" />;
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   variant: "full",
   showBreakpoints: true,
+  legacyOnly: true,
 });
 
 /* Storybook story */
@@ -59,5 +29,4 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  desc: "HGrid lar deg enkelt dele innholdet opp i kolonner. Basert på CSS-grid",
 };

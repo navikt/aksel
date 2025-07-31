@@ -1,0 +1,281 @@
+.aksel-switch {
+  position: relative;
+  min-height: 3rem;
+  width: fit-content;
+}
+
+.aksel-switch--small {
+  min-height: 2rem;
+}
+
+/* ------------------------------ Switch Input ------------------------------ */
+.aksel-switch__input {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  width: 3rem;
+  height: 3rem;
+  opacity: 0;
+  top: 0;
+
+  .aksel-switch--small > & {
+    height: 2rem;
+    width: 2.5rem;
+    top: 0;
+  }
+}
+
+/* -------------------------- Switch content/label -------------------------- */
+.aksel-switch__label-wrapper {
+  cursor: pointer;
+  color: var(--ax-text-neutral);
+}
+
+.aksel-switch__content {
+  --__axc-switch-block-padding: 0.75rem;
+  --__axc-switch-inline-padding: 3.25rem;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-2);
+  padding: var(--__axc-switch-block-padding) 0 var(--__axc-switch-block-padding) var(--__axc-switch-inline-padding);
+
+  .aksel-switch--right & {
+    padding: var(--__axc-switch-block-padding) var(--__axc-switch-inline-padding) var(--__axc-switch-block-padding) 0;
+  }
+
+  .aksel-switch--small & {
+    --__axc-switch-block-padding: 0.375rem;
+    --__axc-switch-inline-padding: 2.75rem;
+  }
+
+  &.aksel-switch--with-description {
+    padding-bottom: 0;
+  }
+
+  .aksel-switch__input:focus ~ .aksel-switch__label-wrapper > &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: calc(100% - var(--__axc-switch-block-padding) * 2);
+    border-radius: var(--ax-radius-4);
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+    pointer-events: none;
+  }
+
+  .aksel-switch__input:focus ~ .aksel-switch__label-wrapper > &.aksel-switch--with-description::after {
+    height: calc(100% - var(--__axc-switch-block-padding) * 1);
+  }
+}
+
+.aksel-switch__input:disabled:hover ~ .aksel-switch__label-wrapper {
+  color: inherit;
+}
+
+/* ------------------------------ Switch Track ------------------------------ */
+.aksel-switch__track {
+  width: 2.75rem;
+  height: 1.5rem;
+  background-color: var(--ax-bg-input);
+  position: absolute;
+  top: var(--ax-space-12);
+  left: 0;
+  border-radius: var(--ax-radius-full);
+  border: 2px solid var(--ax-border-neutral);
+  transition-property: background-color, border-color;
+  transition-duration: 100ms;
+  transition-timing-function: ease;
+
+  .aksel-switch--small > & {
+    top: var(--ax-space-6);
+    width: 2.25rem;
+    height: 1.25rem;
+  }
+
+  .aksel-switch__input:checked ~ & {
+    background-color: var(--ax-bg-strong-pressed);
+    border-color: var(--ax-bg-strong-pressed);
+  }
+
+  .aksel-switch__input:hover ~ & {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  .aksel-switch__input:hover:checked ~ & {
+    background-color: var(--ax-bg-strong-hover);
+    border-color: var(--ax-bg-strong-hover);
+  }
+
+  .aksel-switch__input:disabled ~ & {
+    background-color: var(--ax-bg-input);
+    border-color: var(--ax-border-neutral);
+  }
+
+  .aksel-switch__input:checked:disabled ~ & {
+    background-color: var(--ax-bg-strong-pressed);
+    border-color: var(--ax-bg-strong-pressed);
+  }
+
+  .aksel-switch--standalone > .aksel-switch__input:focus ~ & {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+/* ------------------------------ Switch Thumb ------------------------------ */
+.aksel-switch__thumb {
+  background-color: var(--ax-bg-neutral-strong);
+  border-radius: var(--ax-radius-full);
+  width: 1.125rem;
+  height: 1.125rem;
+  position: absolute;
+  transform: translateX(0);
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0.0625rem;
+  top: 0.0625rem;
+
+  .aksel-switch--small & {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .aksel-switch__input:checked ~ .aksel-switch__track > & {
+    background-color: var(--ax-bg-raised);
+    transform: translateX(1.25rem);
+    color: var(--ax-text-subtle);
+    width: 1.25rem;
+    height: 1.25rem;
+    left: 0;
+    top: 0;
+  }
+
+  .aksel-switch--small > .aksel-switch__input:checked ~ .aksel-switch__track > & {
+    transform: translateX(1rem);
+    width: 1rem;
+    height: 1rem;
+    left: 0;
+    top: 0;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .aksel-switch__input:hover:not(:disabled) ~ .aksel-switch__track > .aksel-switch__thumb {
+    transform: translateX(0.17rem);
+  }
+
+  .aksel-switch__input:checked:hover:not(:disabled) ~ .aksel-switch__track > .aksel-switch__thumb {
+    transform: translateX(1.1rem);
+  }
+
+  .aksel-switch--small > .aksel-switch__input:checked:hover:not(:disabled) ~ .aksel-switch__track > .aksel-switch__thumb {
+    transform: translateX(0.875rem);
+  }
+}
+
+.aksel-switch--right {
+  width: auto;
+
+  & .aksel-switch__input,
+  & .aksel-switch__track {
+    right: 0;
+    left: auto;
+  }
+}
+
+/* -------------------------- Switch Disabled-state ------------------------- */
+.aksel-switch__input:disabled {
+  appearance: none;
+}
+
+.aksel-switch--disabled:not(.aksel-switch--loading) {
+  opacity: var(--ax-opacity-disabled);
+}
+
+.aksel-switch__input:disabled,
+.aksel-switch__input:disabled ~ .aksel-switch__label-wrapper {
+  cursor: not-allowed;
+}
+
+/* -------------------------- Switch Readonly state ------------------------- */
+.aksel-switch--readonly {
+  & > .aksel-switch__track,
+  & > .aksel-switch__input:hover ~ .aksel-switch__track,
+  & > .aksel-switch__input:checked ~ .aksel-switch__track,
+  & > .aksel-switch__input:checked:hover ~ .aksel-switch__track {
+    background-color: var(--ax-bg-neutral-moderate);
+    border-color: var(--ax-border-neutral-subtleA);
+  }
+
+  & > .aksel-switch__label-wrapper,
+  & > .aksel-switch__input {
+    cursor: default;
+  }
+
+  & .aksel-switch__label {
+    display: inline-flex;
+  }
+
+  & .aksel-switch__thumb {
+    background-color: var(--ax-bg-neutral-strong);
+  }
+
+  & > .aksel-switch__input:checked ~ .aksel-switch__track > .aksel-switch__thumb {
+    background-color: var(--ax-bg-neutral-strong);
+    color: var(--ax-text-neutral-contrast);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    & > .aksel-switch__input:hover ~ .aksel-switch__track > .aksel-switch__thumb {
+      transform: translateX(0);
+    }
+
+    & > .aksel-switch__input:checked:hover ~ .aksel-switch__track > .aksel-switch__thumb {
+      transform: translateX(1.25rem);
+    }
+
+    &.aksel-switch--small > .aksel-switch__input:checked:hover ~ .aksel-switch__track > .aksel-switch__thumb {
+      transform: translateX(1rem);
+    }
+  }
+}
+
+/* ------------------------ Switch Forced colors mode ----------------------- */
+@media (forced-colors: active) {
+  .aksel-switch__thumb,
+  .aksel-switch--readonly .aksel-switch__thumb {
+    background-color: fieldtext !important;
+  }
+
+  .aksel-switch__input:checked ~ .aksel-switch__track > .aksel-switch__thumb,
+  .aksel-switch--readonly .aksel-switch__input:checked ~ .aksel-switch__track > .aksel-switch__thumb {
+    color: field;
+  }
+
+  .aksel-switch__input:focus ~ .aksel-switch__label-wrapper > .aksel-switch__content::after,
+  .aksel-switch--standalone > .aksel-switch__input:focus ~ .aksel-switch__track {
+    outline: 3px solid highlight;
+  }
+
+  .aksel-switch--disabled:not(.aksel-switch--loading) {
+    opacity: 1;
+  }
+
+  .aksel-switch--disabled:not(.aksel-switch--loading) .aksel-switch__thumb {
+    background-color: graytext !important;
+  }
+
+  .aksel-switch--disabled:not(.aksel-switch--loading) .aksel-switch__track {
+    border-color: graytext !important;
+  }
+
+  .aksel-switch--disabled:not(.aksel-switch--loading) .aksel-switch__label-wrapper,
+  .aksel-switch--disabled:not(.aksel-switch--loading) .aksel-switch__label-wrapper:hover {
+    color: graytext !important;
+  }
+}

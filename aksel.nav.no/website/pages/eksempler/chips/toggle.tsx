@@ -7,42 +7,47 @@ const Example = () => {
 
   return (
     <VStack gap="10">
-      <Chips>
-        {options.map((option) => (
-          <Chips.Toggle
-            key={option}
-            selected={selected.includes(option)}
-            onClick={() =>
-              setSelected(
-                selected.includes(option)
-                  ? selected.filter((x) => x !== option)
-                  : [...selected, option],
-              )
-            }
-          >
-            {option}
-          </Chips.Toggle>
-        ))}
-      </Chips>
-
-      <Chips>
-        {options.map((option) => (
-          <Chips.Toggle
-            variant="neutral"
-            key={option}
-            selected={selected.includes(option)}
-            onClick={() =>
-              setSelected(
-                selected.includes(option)
-                  ? selected.filter((x) => x !== option)
-                  : [...selected, option],
-              )
-            }
-          >
-            {option}
-          </Chips.Toggle>
-        ))}
-      </Chips>
+      <VStack gap="3">
+        Variant action (default)
+        <Chips>
+          {options.map((option) => (
+            <Chips.Toggle
+              key={option}
+              selected={selected.includes(option)}
+              onClick={() =>
+                setSelected(
+                  selected.includes(option)
+                    ? selected.filter((x) => x !== option)
+                    : [...selected, option],
+                )
+              }
+            >
+              {option}
+            </Chips.Toggle>
+          ))}
+        </Chips>
+      </VStack>
+      <VStack gap="3">
+        Variant neutral
+        <Chips>
+          {options.map((option) => (
+            <Chips.Toggle
+              variant="neutral"
+              key={option}
+              selected={selected.includes(option)}
+              onClick={() =>
+                setSelected(
+                  selected.includes(option)
+                    ? selected.filter((x) => x !== option)
+                    : [...selected, option],
+                )
+              }
+            >
+              {option}
+            </Chips.Toggle>
+          ))}
+        </Chips>
+      </VStack>
     </VStack>
   );
 };
@@ -52,7 +57,6 @@ const options = [
   "Nittedal",
   "Enebakk",
   "Hamar",
-  "Skedsmo",
   "Arendal",
   "Gjøvik",
 ];

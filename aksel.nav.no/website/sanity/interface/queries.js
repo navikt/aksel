@@ -8,6 +8,14 @@ markDefs[]{
   },
 }`;
 
+const language = `_type == "language" =>{
+  ...,
+  body[]{
+    ...,
+    ${markDef}
+  }
+}`;
+
 const alert = `_type == "alert" =>{
   ...,
   body[]{
@@ -50,11 +58,6 @@ const relatertInnhold = `_type == "relatert_innhold" =>{
   }
 }`;
 
-const innholdsKort = `_type == "innholdskort" =>{
-  ...,
-  "lenke": lenke->slug.current,
-}`;
-
 const liveSeksjon = `_type == "live_demo" =>{
   ...,
   "sandbox_ref": sandbox_ref->{...},
@@ -66,13 +69,6 @@ const installSeksjon = `_type == "installasjon_seksjon" =>{
 }`;
 
 const defaultBlock = `
- _type == "riktekst_blokk" =>{
-    ...,
-    body[]{
-      ...,
-      ${markDef}
-    }
- },
  _type == "bilde" =>{
     ...,
     floating_text[]{
@@ -118,6 +114,7 @@ const accordionBlock = `_type == "accordion"=>{
     ...,
     content[]{
       ...,
+      ${markDef},
       ${defaultBlock}
     }
   }
@@ -135,18 +132,7 @@ const expansionCardBlock = `_type == "expansioncard"=>{
 
 const spesialSeksjon = `_type == "spesial_seksjon" =>{
   ...,
-  modul == "komponentoversikt" =>{
-    "komponenter": *[_type == 'komponent_artikkel' && !(_id in path("drafts.**"))]{
-      _id,
-      heading,
-      "ingress": intro.body,
-      status,
-      slug,
-    }
-  },
-  modul == "token_kategori" =>{
-    "token": token_ref->{...}
-}
+  "token": token_ref->{...}
 }`;
 
 const propsSeksjon = `_type == "props_seksjon" =>{
@@ -160,6 +146,7 @@ const propsSeksjon = `_type == "props_seksjon" =>{
 const tokenRef = `_type == "token_ref"=>@->`;
 
 export const destructureBlocks = `
+${language},
 ${alert},
 ${attachment},
 ${tips},
@@ -167,7 +154,6 @@ ${tokenRef},
 ${markDef},
 ${introSeksjon},
 ${relatertInnhold},
-${innholdsKort},
 ${liveSeksjon},
 ${propsSeksjon},
 ${installSeksjon},
@@ -178,6 +164,7 @@ ${defaultBlock},
 `;
 
 export const contributorsAll = `contributors[]->{title}`;
+export const writersAll = `writers[]->{title, description, avatar_id}`;
 
 export const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
   heading,

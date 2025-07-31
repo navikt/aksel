@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "7.3.0",
+  "version": "7.25.1",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -8,11 +8,12 @@
     "react",
     "typescript",
     "javascript",
-    "NAV"
+    "Nav"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/aksel.git"
+    "url": "git+https://github.com/navikt/aksel.git",
+    "directory": "@navikt/core/react"
   },
   "sideEffects": false,
   "typings": "./esm/index.d.ts",
@@ -38,6 +39,19 @@
       "require": {
         "types": "./cjs/index.d.ts",
         "default": "./cjs/index.js"
+      }
+    },
+    "./types/theme": {
+      "types": "./esm/types/theme.d.ts"
+    },
+    "./locales": {
+      "import": {
+        "types": "./esm/util/i18n/locales/index.d.ts",
+        "default": "./esm/util/i18n/locales/index.js"
+      },
+      "require": {
+        "types": "./cjs/util/i18n/locales/index.d.ts",
+        "default": "./cjs/util/i18n/locales/index.js"
       }
     },
     "./Accordion": {
@@ -248,6 +262,16 @@
       "require": {
         "types": "./cjs/link/index.d.ts",
         "default": "./cjs/link/index.js"
+      }
+    },
+    "./LinkCard": {
+      "import": {
+        "types": "./esm/link-card/index.d.ts",
+        "default": "./esm/link-card/index.js"
+      },
+      "require": {
+        "types": "./cjs/link-card/index.d.ts",
+        "default": "./cjs/link-card/index.js"
       }
     },
     "./LinkPanel": {
@@ -590,50 +614,67 @@
         "default": "./cjs/form/form-progress/index.js"
       }
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./Theme": {
+      "import": {
+        "types": "./esm/theme/index.d.ts",
+        "default": "./esm/theme/index.js"
+      },
+      "require": {
+        "types": "./cjs/theme/index.d.ts",
+        "default": "./cjs/theme/index.js"
+      }
+    }
   },
   "scripts": {
-    "docgen": "yarn tsx ../../../scripts/docgen.ts",
+    "docgen": "tsx ../../../scripts/docgen.ts",
+    "i18n-jsdoc": "tsx ./scripts/addJsdocToLocales.ts",
     "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" ",
+    "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup && yarn copy-types",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "TZ=UTC vitest run -c tests/vitest.config.ts",
-    "test:watch": "vitest watch"
+    "test:watch": "TZ=UTC vitest watch -c tests/vitest.config.ts",
+    "copy-types": "copyfiles -f ./src/types/theme.d.ts ./esm/types"
   },
   "dependencies": {
-    "@floating-ui/react": "0.25.4",
+    "@floating-ui/react": "0.27.8",
     "@floating-ui/react-dom": "^2.0.9",
-    "@navikt/aksel-icons": "^7.3.0",
-    "@navikt/ds-tokens": "^7.3.0",
+    "@navikt/aksel-icons": "^7.25.1",
+    "@navikt/ds-tokens": "^7.25.1",
     "clsx": "^2.1.0",
-    "date-fns": "^3.0.0",
-    "react-day-picker": "8.10.0"
+    "date-fns": "^4.0.0",
+    "react-day-picker": "9.7.0"
   },
   "devDependencies": {
-    "@testing-library/dom": "9.3.4",
-    "@testing-library/jest-dom": "^5.16.0",
-    "@testing-library/react": "^15.0.7",
-    "@testing-library/user-event": "^14.2.0",
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/jscodeshift": "^0.11.11",
+    "aksel": "workspace:^",
     "concurrently": "9.0.1",
+    "copyfiles": "^2.4.1",
     "fast-glob": "3.2.11",
-    "jsdom": "24.0.0",
+    "jscodeshift": "^0.15.1",
+    "jsdom": "26.1.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^6.3.0",
+    "react-router": "^7.6.2",
     "rimraf": "6.0.1",
-    "swr": "^1.1.2",
-    "tsc-alias": "1.8.8",
+    "swr": "^2.3.2",
+    "tsc-alias": "1.8.16",
     "tsx": "^4.19.1",
-    "typescript": "5.5.4",
-    "vitest": "^1.2.2"
+    "typescript": "5.8.3",
+    "vitest": "^2.1.9"
   },
   "peerDependencies": {
-    "@types/react": "^17.0.30 || ^18.0.0",
-    "react": "^17.0.0 || ^18.0.0"
+    "@types/react": ">=17.0.30",
+    "react": ">=17.0.0 || >19.0.0-rc"
   },
   "peerDependenciesMeta": {
     "@types/react": {
       "optional": true
     }
-  }
+  },
+  "_comment": "The 'aksel' dependency tells yarn to install the root deps when installing deps for this package. Helps make it possible to contribute without access to GPR."
 }

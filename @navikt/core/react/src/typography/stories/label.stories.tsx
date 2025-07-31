@@ -71,15 +71,6 @@ export const SpacingSmall: Story = {
   ),
 };
 
-export const Colors: Story = {
-  render: () => (
-    <VStack gap="2">
-      <Label textColor="default">{lorem}</Label>
-      <Label textColor="subtle">{lorem}</Label>
-    </VStack>
-  ),
-};
-
 export const OverrideTag: Story = {
   render: () => (
     <div>
@@ -96,6 +87,22 @@ export const OverrideTag: Story = {
     expect(defaultLabel.tagName).toEqual("LABEL");
     expect(legendLabel.tagName).toEqual("LEGEND");
   },
+};
+
+export const ColorRole: Story = {
+  render: () => (
+    <VStack gap="2">
+      <Label textColor="default">{lorem}</Label>
+      <Label textColor="subtle">{lorem}</Label>
+      <Label data-color="brand-magenta">{lorem}</Label>
+      <Label data-color="brand-magenta" textColor="default">
+        {lorem}
+      </Label>
+      <Label data-color="brand-magenta" textColor="subtle">
+        {lorem}
+      </Label>
+    </VStack>
+  ),
 };
 
 export const Chromatic: Story = {
@@ -116,12 +123,12 @@ export const Chromatic: Story = {
         {SpacingSmall.render?.(...props)}
       </div>
       <div>
-        <h2>Colors</h2>
-        {Colors.render?.(...props)}
-      </div>
-      <div>
         <h2>Override Tag</h2>
         {OverrideTag.render?.(...props)}
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        {ColorRole.render?.(...props)}
       </div>
     </div>
   ),

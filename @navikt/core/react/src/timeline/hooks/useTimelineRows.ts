@@ -134,17 +134,33 @@ export const useTimelineRows = (
     [rows, startDate, endDate, direction],
   );
 
-const earliestDate = (earliest: Date, period: Period) =>
-  period.start < earliest ? period.start : earliest;
+export const useEarliestDate = ({
+  startDate,
+  rows,
+}: {
+  startDate?: Date;
+  rows: Pick<Period, "start">[][];
+}) =>
+  useMemo(() => {
+    if (startDate) {
+      return startDate;
+    }
 
-const earliestFomDate = (rader: Period[][]) =>
-  rader.flat().reduce(earliestDate, new Date());
+    const startDates = rows
+      .flat()
+      .filter((period) => period.start)
+      .map((period) => period.start);
 
-export const useEarliestDate = ({ startDate, rows }: any) =>
-  useMemo(
-    () => (startDate ? startDate : earliestFomDate(rows)),
-    [startDate, rows],
-  );
+    if (startDates.length === 0) {
+      return new Date();
+    }
+
+    const earliestDate = startDates.reduce((earliest, current) =>
+      current < earliest ? current : earliest,
+    );
+
+    return earliestDate;
+  }, [startDate, rows]);
 
 const latestDate = (latest: Date, period: Period) =>
   period.end > latest ? period.end : latest;

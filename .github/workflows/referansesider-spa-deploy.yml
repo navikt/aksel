@@ -15,16 +15,16 @@ jobs:
       id-token: "write"
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          node-version: lts/*
-          cache: yarn
+          fetch-depth: 1
 
-      - run: yarn install
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-      - run: yarn boot
+      - name: Setup project
+        uses: ./.github/actions/setup
+        with:
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
+
       - run: cd ./examples/referansesider && yarn && yarn build
       - uses: nais/deploy/actions/spa-deploy/v2@master
         with:
@@ -35,3 +35,4 @@ jobs:
           environment: dev
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          cache_invalidation: true

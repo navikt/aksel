@@ -139,7 +139,7 @@ function Example() {
             <FormSummary.Answers>
               <FormSummary.Answer>
                 <FormSummary.Label>
-                  Har du mottatt dagpenger fra NAV i løpet av de siste 52 ukene?
+                  Har du mottatt dagpenger fra Nav i løpet av de siste 52 ukene?
                 </FormSummary.Label>
                 <FormSummary.Value>Nei</FormSummary.Value>
               </FormSummary.Answer>
@@ -290,7 +290,7 @@ function Example() {
             <FormSummary.Answers>
               <FormSummary.Answer>
                 <FormSummary.Label>
-                  Mottar du eller har du søkt om ytelser fra andre enn NAV?
+                  Mottar du eller har du søkt om ytelser fra andre enn Nav?
                 </FormSummary.Label>
                 <FormSummary.Value>Nei</FormSummary.Value>
               </FormSummary.Answer>

@@ -1,0 +1,15 @@
+.kbd {
+  white-space: nowrap;
+  display: inline-block;
+  color: var(--ax-text-neutral);
+  background: var(--ax-bg-default);
+  border: 1px solid var(--ax-border-neutral-subtle);
+  border-bottom: 2px solid var(--ax-border-neutral-subtle);
+  padding: 0.05em 0.35em 0.1em;
+  line-height: inherit;
+  box-shadow: none;
+  border-radius: var(--ax-border-radius-medium);
+  text-transform: capitalize;
+  font-weight: var(--ax-font-weight-bold);
+  font-family: var(--ax-font-family);
+}

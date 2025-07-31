@@ -7,23 +7,14 @@ import Stepper from "./Stepper";
 const meta: Meta<typeof Stepper> = {
   title: "ds-react/Stepper",
   component: Stepper,
-  argTypes: {
-    orientation: {
-      control: { type: "radio" },
-      options: ["horizontal", "vertical"],
-    },
-    activeStep: {
-      control: { type: "number" },
-    },
-  },
   parameters: {
     chromatic: { disable: true },
   },
 };
 
-type Story = StoryObj<typeof Stepper>;
-
 export default meta;
+
+type Story = StoryObj<typeof Stepper>;
 
 const storyTexts = [
   "Minimize backwards overflow agile. Horsehead offer commitment to the cause nor copy and paste from stack overflow problem territories, innovation is hot right now for can you slack it to me?. High touch client table the discussion , and get buy-in so manage expectations loop back, please advise soonest. We need a paradigm shift dogpile that, and i need to pee and then go to another meeting for let's prioritize the low-hanging fruit.",
@@ -35,7 +26,7 @@ const storyTexts = [
   "Move the needle a loss a day will keep you focus yet can you put it into a banner that is not alarming, but eye catching and not too giant or strategic fit, nor it is all exactly as i said, but i don't like it or streamline. We've bootstrapped the model. This proposal is a win-win situation which will cause a stellar paradigm shift, and produce a multi-fold increase in deliverables the horse is out of the barn usabiltiy, for going forward but going forward.",
 ];
 
-export const Default = ({ asButton, ...props }) => {
+export const Default = ({ asButton, completed, ...props }) => {
   const [activeStep, setActiveStep] = useState(1);
 
   const newProps = {
@@ -46,32 +37,48 @@ export const Default = ({ asButton, ...props }) => {
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Stepper
-        aria-labelledby="stepper-heading"
         activeStep={activeStep}
         onStepChange={setActiveStep}
         orientation="vertical"
         {...props}
       >
-        <Stepper.Step {...newProps} completed={props.completed}>
+        <Stepper.Step {...newProps} completed={completed}>
           Start søknad
         </Stepper.Step>
-        <Stepper.Step {...newProps}>Personopplysninger</Stepper.Step>
-        <Stepper.Step {...newProps} completed={props.completed}>
+        <Stepper.Step {...newProps} completed={completed}>
+          Personopplysninger
+        </Stepper.Step>
+        <Stepper.Step {...newProps} completed={completed}>
           Saksopplysninger
         </Stepper.Step>
-        <Stepper.Step {...newProps} completed={props.completed}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som må beskrives og
+        <Stepper.Step {...newProps} completed={completed}>
+          Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og
           forklares i sitt fulle i denne labelen
         </Stepper.Step>
-        <Stepper.Step {...newProps}>Vedlegg</Stepper.Step>
-        <Stepper.Step {...newProps}>Oppsummering</Stepper.Step>
-        <Stepper.Step {...newProps}>Innsending</Stepper.Step>
+        <Stepper.Step {...newProps} completed={completed}>
+          Vedlegg
+        </Stepper.Step>
+        <Stepper.Step {...newProps} completed={completed}>
+          Oppsummering
+        </Stepper.Step>
+        <Stepper.Step {...newProps} completed={completed}>
+          Innsending
+        </Stepper.Step>
       </Stepper>
       <BodyLong style={{ marginTop: "5rem" }}>
         {storyTexts[activeStep]}
       </BodyLong>
     </div>
   );
+};
+Default.argTypes = {
+  orientation: {
+    control: { type: "radio" },
+    options: ["horizontal", "vertical"],
+  },
+  activeStep: {
+    control: { type: "number" },
+  },
 };
 Default.args = {
   asButton: false,
@@ -84,7 +91,6 @@ export const Horizontal: StoryFn<Story> = () => {
   const props = { onClick: (e) => e.preventDefault(), href: "#" };
   return (
     <Stepper
-      aria-labelledby="stepper-heading"
       activeStep={activeStep}
       onStepChange={setActiveStep}
       orientation="horizontal"
@@ -93,7 +99,7 @@ export const Horizontal: StoryFn<Story> = () => {
       <Stepper.Step {...props}>Personopplysninger</Stepper.Step>
       <Stepper.Step {...props}>Saksopplysninger</Stepper.Step>
       <Stepper.Step {...props}>
-        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
       </Stepper.Step>
       <Stepper.Step {...props}>Vedlegg</Stepper.Step>
       <Stepper.Step {...props}>Oppsummering</Stepper.Step>
@@ -107,7 +113,6 @@ export const Vertical: StoryFn<Story> = () => {
   const props = { onClick: (e) => e.preventDefault(), href: "#" };
   return (
     <Stepper
-      aria-labelledby="stepper-heading"
       activeStep={activeStep}
       onStepChange={setActiveStep}
       orientation="vertical"
@@ -116,7 +121,7 @@ export const Vertical: StoryFn<Story> = () => {
       <Stepper.Step {...props}>Personopplysninger</Stepper.Step>
       <Stepper.Step {...props}>Saksopplysninger</Stepper.Step>
       <Stepper.Step {...props}>
-        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
       </Stepper.Step>
       <Stepper.Step {...props}>Vedlegg</Stepper.Step>
       <Stepper.Step {...props}>Oppsummering</Stepper.Step>
@@ -128,33 +133,23 @@ export const Vertical: StoryFn<Story> = () => {
 export const DisplayOnly: StoryFn<Story> = () => {
   return (
     <div className="colgap">
-      <Stepper
-        aria-labelledby="stepper-heading"
-        activeStep={2}
-        orientation="vertical"
-        interactive={false}
-      >
+      <Stepper activeStep={2} orientation="vertical" interactive={false}>
         <Stepper.Step completed>Start søknad</Stepper.Step>
         <Stepper.Step completed>Personopplysninger</Stepper.Step>
         <Stepper.Step>Saksopplysninger</Stepper.Step>
         <Stepper.Step>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </Stepper.Step>
         <Stepper.Step>Vedlegg</Stepper.Step>
         <Stepper.Step>Oppsummering</Stepper.Step>
         <Stepper.Step>Innsending</Stepper.Step>
       </Stepper>
-      <Stepper
-        aria-labelledby="stepper-heading"
-        activeStep={3}
-        orientation="vertical"
-        interactive={false}
-      >
+      <Stepper activeStep={3} orientation="vertical" interactive={false}>
         <Stepper.Step completed>Start søknad</Stepper.Step>
         <Stepper.Step completed>Personopplysninger</Stepper.Step>
         <Stepper.Step>Saksopplysninger</Stepper.Step>
         <Stepper.Step>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </Stepper.Step>
         <Stepper.Step>Vedlegg</Stepper.Step>
         <Stepper.Step>Oppsummering</Stepper.Step>
@@ -169,7 +164,6 @@ export const CompletedSteps: StoryFn<Story> = () => {
   return (
     <div className="colgap">
       <Stepper
-        aria-labelledby="stepper-heading"
         activeStep={activeStep}
         orientation="vertical"
         onStepChange={(step) => setActiveStep(step)}
@@ -178,14 +172,15 @@ export const CompletedSteps: StoryFn<Story> = () => {
         <Stepper.Step completed>Personopplysninger</Stepper.Step>
         <Stepper.Step completed={activeStep > 3}>Saksopplysninger</Stepper.Step>
         <Stepper.Step completed={activeStep >= 4}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </Stepper.Step>
-        <Stepper.Step completed={activeStep > 5}>Vedlegg</Stepper.Step>
+        <Stepper.Step completed={activeStep > 5} interactive={false}>
+          Vedlegg
+        </Stepper.Step>
         <Stepper.Step completed={activeStep > 6}>Oppsummering</Stepper.Step>
         <Stepper.Step completed={activeStep > 7}>Innsending</Stepper.Step>
       </Stepper>
       <Stepper
-        aria-labelledby="stepper-heading"
         activeStep={activeStep - 1}
         orientation="vertical"
         onStepChange={(step) => setActiveStep(step)}
@@ -196,7 +191,7 @@ export const CompletedSteps: StoryFn<Story> = () => {
         </Stepper.Step>
         <Stepper.Step completed={activeStep > 3}>Saksopplysninger</Stepper.Step>
         <Stepper.Step completed={activeStep >= 4}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </Stepper.Step>
         <Stepper.Step completed={activeStep > 5}>Vedlegg</Stepper.Step>
         <Stepper.Step completed={activeStep > 6}>Oppsummering</Stepper.Step>
@@ -205,6 +200,12 @@ export const CompletedSteps: StoryFn<Story> = () => {
     </div>
   );
 };
+
+export const ColorRole = () => (
+  <div data-color="brand-magenta">
+    <Vertical />
+  </div>
+);
 
 export const Chromatic: Story = {
   render: () => (
@@ -224,6 +225,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Completed steps</h2>
         <CompletedSteps />
+      </div>
+      <div>
+        <h2>ColorRole</h2>
+        <ColorRole />
       </div>
     </VStack>
   ),
