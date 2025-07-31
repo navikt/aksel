@@ -6,7 +6,7 @@ import { SparklesIcon } from "@navikt/aksel-icons";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
 import { TOC_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { removeEmojies } from "@/utils";
+import { removeEmojiesFromText } from "@/ui-utils/format-text";
 import styles from "./TableOfContents.module.css";
 import { TableOfContentsScroll } from "./TableOfContents.scroll";
 import { useTableOfContents } from "./useTableOfContents";
@@ -52,6 +52,11 @@ function TableOfContents({
           role="list"
         >
           {toc.map((node) => {
+            /* Filters out "empty" headings from CMS */
+            if (!node.id || !node.title) {
+              return null;
+            }
+
             const active = node.id === tocCtx.activeId;
 
             return (
@@ -78,7 +83,7 @@ function TableOfContents({
                   })}
                   data-current={active}
                 >
-                  {removeEmojies(node.title).trim()}
+                  {removeEmojiesFromText(node.title).trim()}
                 </NextLink>
               </BodyShort>
             );

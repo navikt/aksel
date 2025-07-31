@@ -180,6 +180,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/generator@npm:^7.27.3":
+  version: 7.27.5
+  resolution: "@babel/generator@npm:7.27.5"
+  dependencies:
+    "@babel/parser": "npm:^7.27.5"
+    "@babel/types": "npm:^7.27.3"
+    "@jridgewell/gen-mapping": "npm:^0.3.5"
+    "@jridgewell/trace-mapping": "npm:^0.3.25"
+    jsesc: "npm:^3.0.2"
+  checksum: 10/f5e6942670cb32156b3ac2d75ce09b373558823387f15dd1413c27fe9eb5756a7c6011fc7f956c7acc53efb530bfb28afffa24364d46c4e9ffccc4e5c8b3b094
+  languageName: node
+  linkType: hard
+
 "@babel/helper-annotate-as-pure@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/helper-annotate-as-pure@npm:7.27.1"
@@ -419,6 +432,17 @@ __metadata:
   bin:
     parser: ./bin/babel-parser.js
   checksum: 10/133b4ccfbc01d4f36b0945937aabff87026c29fda6dcd3c842053a672e50f2487a101a3acd150bbaa2eecd33f3bd35650f95b806567c926f93b2af35c2b615c9
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^7.27.4, @babel/parser@npm:^7.27.5":
+  version: 7.27.5
+  resolution: "@babel/parser@npm:7.27.5"
+  dependencies:
+    "@babel/types": "npm:^7.27.3"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 10/0ad671be7994dba7d31ec771bd70ea5090aa34faf73e93b1b072e3c0a704ab69f4a7a68ebfb9d6a7fa455e0aa03dfa65619c4df6bae1cf327cba925b1d233fc4
   languageName: node
   linkType: hard
 
@@ -1438,7 +1462,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/template@npm:^7.24.7, @babel/template@npm:^7.27.1":
+"@babel/template@npm:^7.24.7, @babel/template@npm:^7.27.1, @babel/template@npm:^7.27.2":
   version: 7.27.2
   resolution: "@babel/template@npm:7.27.2"
   dependencies:
@@ -1482,6 +1506,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/traverse@npm:^7.27.4":
+  version: 7.27.4
+  resolution: "@babel/traverse@npm:7.27.4"
+  dependencies:
+    "@babel/code-frame": "npm:^7.27.1"
+    "@babel/generator": "npm:^7.27.3"
+    "@babel/parser": "npm:^7.27.4"
+    "@babel/template": "npm:^7.27.2"
+    "@babel/types": "npm:^7.27.3"
+    debug: "npm:^4.3.1"
+    globals: "npm:^11.1.0"
+  checksum: 10/4debb80b9068a46e188e478272f3b6820e16d17e2651e82d0a0457176b0c3b2489994f0a0d6e8941ee90218b0a8a69fe52ba350c1aa66eb4c72570d6b2405f91
+  languageName: node
+  linkType: hard
+
 "@babel/types@npm:7.17.0":
   version: 7.17.0
   resolution: "@babel/types@npm:7.17.0"
@@ -1499,6 +1538,16 @@ __metadata:
     "@babel/helper-string-parser": "npm:^7.27.1"
     "@babel/helper-validator-identifier": "npm:^7.27.1"
   checksum: 10/81f8ada28c4b29695d7d4c4cbfaa5ec3138ccebbeb26628c7c3cc570fdc84f28967c9e68caf4977d51ff4f4d3159c88857ef278317f84f3515dd65e5b8a74995
+  languageName: node
+  linkType: hard
+
+"@babel/types@npm:^7.27.3":
+  version: 7.27.6
+  resolution: "@babel/types@npm:7.27.6"
+  dependencies:
+    "@babel/helper-string-parser": "npm:^7.27.1"
+    "@babel/helper-validator-identifier": "npm:^7.27.1"
+  checksum: 10/174741c667775680628a09117828bbeffb35ea543f59bf80649d0d60672f7815a0740ddece3cca87516199033a039166a6936434131fce2b6a820227e64f91ae
   languageName: node
   linkType: hard
 
@@ -3942,7 +3991,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.24.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@npm:^7.25.1, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3973,8 +4022,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": "npm:^7.24.0"
-    "@navikt/ds-tokens": "npm:^7.24.0"
+    "@navikt/ds-css": "npm:^7.25.1"
+    "@navikt/ds-tokens": "npm:^7.25.1"
     concurrently: "npm:9.0.1"
     postcss-selector-parser: "npm:^6.0.13"
     postcss-value-parser: "npm:^4.2.0"
@@ -3989,8 +4038,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": "npm:^7.24.0"
-    "@navikt/ds-tokens": "npm:^7.24.0"
+    "@navikt/ds-css": "npm:^7.25.1"
+    "@navikt/ds-tokens": "npm:^7.25.1"
     "@types/cli-progress": "npm:3.11.6"
     axios: "npm:1.9.0"
     chalk: "npm:4.1.0"
@@ -4013,11 +4062,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@npm:*, @navikt/ds-css@npm:^7.24.0, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@npm:*, @navikt/ds-css@npm:^7.25.1, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.24.0"
+    "@navikt/ds-tokens": "npm:^7.25.1"
     autoprefixer: "npm:^10.4.20"
     browserslist: "npm:^4.25.0"
     cssnano: "npm:7.0.6"
@@ -4035,14 +4084,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.24.0, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.25.1, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.24.0"
-    "@navikt/ds-tokens": "npm:^7.24.0"
+    "@navikt/aksel-icons": "npm:^7.25.1"
+    "@navikt/ds-tokens": "npm:^7.25.1"
     "@testing-library/dom": "npm:10.4.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.3.0"
@@ -4074,11 +4123,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@npm:^7.24.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@npm:^7.25.1, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.24.0"
+    "@navikt/ds-tokens": "npm:^7.25.1"
     color: "npm:5.0.0"
     lodash: "npm:^4.17.21"
     tailwindcss: "npm:^3.3.3"
@@ -4088,7 +4137,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@npm:^7.24.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@npm:^7.25.1, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -4104,10 +4153,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/next-logger@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@navikt/next-logger@npm:2.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F2.0.0%2F2635e5dce4180196bfeb61ad6fd51f63b7dc1670"
+"@navikt/next-logger@npm:4.1.4":
+  version: 4.1.4
+  resolution: "@navikt/next-logger@npm:4.1.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F4.1.4%2Fca5d61c38b05758bd24ca6b98e5fd329226670df"
   dependencies:
+    "@navikt/pino-logger": "npm:^4.1.4"
     pino-roll: "npm:3"
   peerDependencies:
     next: 14 || 15
@@ -4115,7 +4165,7 @@ __metadata:
   dependenciesMeta:
     pino-roll:
       optional: true
-  checksum: 10/16b65772df466dd4d0f6396faa78e9eceb8c303439b8551514af69a902f6ce7508673cb89493a48ab03ad32f23c5ee07c9ffa340e37b296f0d42949d70ef104f
+  checksum: 10/23e51ded82d92fd98d11f433beb9e5a5477ca0b0bf20688b5e2bb6dc68f5f69c9f8a913849fa5d56737d3745facb0da57455733d454ab9ff65d366ba48fe544a
   languageName: node
   linkType: hard
 
@@ -4127,6 +4177,23 @@ __metadata:
     openid-client: "npm:^5.6.4"
     prom-client: "npm:^15.1.0"
   checksum: 10/ac240ac670b8375ef086560f2da3688ea0f98a7cdd983644b2077f1b9fea0ed8c4c6b817ded6aa163a207f231b93074b3508e80ffbd4f4659708c87d1c26dde7
+  languageName: node
+  linkType: hard
+
+"@navikt/pino-logger@npm:^4.1.4":
+  version: 4.1.5
+  resolution: "@navikt/pino-logger@npm:4.1.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fpino-logger%2F4.1.5%2F5911c77581ba052ec69878f86e6de4634c980b57"
+  dependencies:
+    pino-roll: "npm:3"
+    pino-socket: "npm:7"
+  peerDependencies:
+    pino: 8 || 9
+  dependenciesMeta:
+    pino-roll:
+      optional: true
+    pino-socket:
+      optional: true
+  checksum: 10/2995fab68db26328f5d3e9b70ca781ccd7ecbb3bf45817d2ad613861f2a79d6011da5d1d75dc713ba0097f6a590fdec6b4030dd4f6527ab2ee06e90b6c7e192c
   languageName: node
   linkType: hard
 
@@ -8068,6 +8135,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"abbrev@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "abbrev@npm:2.0.0"
+  checksum: 10/ca0a54e35bea4ece0ecb68a47b312e1a9a6f772408d5bcb9051230aaa94b0460671c5b5c9cb3240eb5b7bc94c52476550eb221f65a0bbd0145bdc9f3113a6707
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^3.0.0":
   version: 3.0.1
   resolution: "abbrev@npm:3.0.1"
@@ -8242,11 +8316,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": "npm:^7.24.0"
-    "@navikt/ds-css": "npm:^7.24.0"
-    "@navikt/ds-react": "npm:^7.24.0"
-    "@navikt/ds-tailwind": "npm:^7.24.0"
-    "@navikt/ds-tokens": "npm:^7.24.0"
+    "@navikt/aksel-icons": "npm:^7.25.1"
+    "@navikt/ds-css": "npm:^7.25.1"
+    "@navikt/ds-react": "npm:^7.25.1"
+    "@navikt/ds-tailwind": "npm:^7.25.1"
+    "@navikt/ds-tokens": "npm:^7.25.1"
   languageName: unknown
   linkType: soft
 
@@ -8934,6 +9008,15 @@ __metadata:
     babel-plugin-macros: "npm:^3.0.1"
     require-from-string: "npm:^2.0.2"
   checksum: 10/d4507d1f134a610b8a2d4de911afe147eba7aab782ea34e7b687e99bdfd2e28d2056e16b7fa4b66acb59bcbd681acc40e851a20f03f7be719ee4cc51fc88eee0
+  languageName: node
+  linkType: hard
+
+"backoff@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "backoff@npm:2.5.0"
+  dependencies:
+    precond: "npm:0.2"
+  checksum: 10/5286c3f02665f3347591e04728ba0755e76a45aa40e037f7db3f2029ede927bfe94755a03033e93cc971a4b6c6605d8cfe514433e362c5a86c0b5bbc5d47acce
   languageName: node
   linkType: hard
 
@@ -18202,6 +18285,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nopt@npm:^7.0.0":
+  version: 7.2.1
+  resolution: "nopt@npm:7.2.1"
+  dependencies:
+    abbrev: "npm:^2.0.0"
+  bin:
+    nopt: bin/nopt.js
+  checksum: 10/95a1f6dec8a81cd18cdc2fed93e6f0b4e02cf6bdb4501c848752c6e34f9883d9942f036a5e3b21a699047d8a448562d891e67492df68ec9c373e6198133337ae
+  languageName: node
+  linkType: hard
+
 "nopt@npm:^8.0.0":
   version: 8.1.0
   resolution: "nopt@npm:8.1.0"
@@ -19315,6 +19409,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pino-socket@npm:7":
+  version: 7.4.0
+  resolution: "pino-socket@npm:7.4.0"
+  dependencies:
+    backoff: "npm:^2.5.0"
+    nopt: "npm:^7.0.0"
+    pump: "npm:^3.0.0"
+    split2: "npm:^4.0.0"
+    through2: "npm:^4.0.2"
+  bin:
+    pino-socket: psock.js
+  checksum: 10/e26144400b2d75f5547f10898102aecbcc52355b5069587bea5bb5e1e431c2a8b0dd24cd6d623a21e34c62e0ff12883f4ebf185ad151cd6e9e2c7862cf9cece7
+  languageName: node
+  linkType: hard
+
 "pino-std-serializers@npm:^6.0.0":
   version: 6.2.2
   resolution: "pino-std-serializers@npm:6.2.2"
@@ -20161,6 +20270,13 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10/6d7e21a772e8b05bf102636918654dac097bac013f0dc8346b72ac3604fc16829646f94ea862acccd8f82e910b00e2c11c1f0ea276543565d278c7ca35516a7c
+  languageName: node
+  linkType: hard
+
+"precond@npm:0.2":
+  version: 0.2.3
+  resolution: "precond@npm:0.2.3"
+  checksum: 10/d5215e17cc812996f72ee57a684ff159709bdfa48538e71c361d17aecd750bf25f64f85ba2c49031860708e0e70ac4394b9c8280725f227b88bce0fe76f8389a
   languageName: node
   linkType: hard
 
@@ -25802,7 +25918,10 @@ __metadata:
   dependencies:
     "@axe-core/playwright": "npm:4.10.0"
     "@babel/core": "npm:^7.19.0"
-    "@navikt/next-logger": "npm:2.0.0"
+    "@babel/parser": "npm:^7.27.5"
+    "@babel/traverse": "npm:^7.27.4"
+    "@floating-ui/react": "npm:0.27.8"
+    "@navikt/next-logger": "npm:4.1.4"
     "@navikt/oasis": "npm:3.2.1"
     "@next/bundle-analyzer": "npm:15.2.3"
     "@next/eslint-plugin-next": "npm:15.2.3"

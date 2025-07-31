@@ -275,6 +275,7 @@ export type CodeExampleSchemaT = {
   filer: {
     title: string;
     innhold: string;
+    kompaktInnhold?: string | null;
     navn: string;
     index: number;
     description?: string;

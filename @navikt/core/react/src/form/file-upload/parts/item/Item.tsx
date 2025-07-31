@@ -1,4 +1,5 @@
 import React, { MouseEvent, forwardRef } from "react";
+import { Spacer } from "../../../../layout/stack";
 import { useRenameCSS } from "../../../../theme/Theme";
 import { BodyShort, ErrorMessage } from "../../../../typography";
 import { OverridableComponent } from "../../../../util";
@@ -51,11 +52,13 @@ export interface FileUploadItemProps
   /**
    * Props for the action button.
    */
-  button?: {
-    action: "delete" | "retry";
-    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
-    id?: string;
-  };
+  button?:
+    | {
+        action: "delete" | "retry";
+        onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+        id?: string;
+      }
+    | React.ReactNode;
   /**
    * i18n-API for customizing texts and labels
    */
@@ -100,6 +103,9 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
         return description ?? formatFileSize(file);
       }
 
+      const renderButton = status === "idle" && button;
+      const renderCustomButton = isCustomButton(button);
+
       return (
         <Component
           ref={ref}
@@ -131,8 +137,9 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
                 )}
               </div>
             </div>
+            {renderButton && <Spacer />}
 
-            {status === "idle" && button && (
+            {renderButton && !renderCustomButton && (
               <ItemButton
                 {...button}
                 title={translate(
@@ -142,10 +149,17 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
                 )}
               />
             )}
+            {renderButton && renderCustomButton && button}
           </div>
         </Component>
       );
     },
   );
+
+function isCustomButton(
+  button: FileUploadItemProps["button"],
+): button is React.ReactNode {
+  return React.isValidElement(button);
+}
 
 export default Item;

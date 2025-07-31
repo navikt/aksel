@@ -121,6 +121,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       onChange,
       onSearchClick,
       htmlSize,
+      "data-color": dataColor,
       ...rest
     } = props;
 
@@ -170,6 +171,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
             "navds-search--with-size": htmlSize,
           },
         )}
+        data-color={dataColor}
       >
         <Label
           htmlFor={inputProps.id}
@@ -233,7 +235,9 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               handleClick,
             }}
           >
-            {children ? children : variant !== "simple" && <SearchButton />}
+            {children
+              ? children
+              : variant !== "simple" && <SearchButton data-color={dataColor} />}
           </SearchContext.Provider>
         </div>
         <div

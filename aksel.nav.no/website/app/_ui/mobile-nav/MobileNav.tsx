@@ -1,4 +1,4 @@
-import { DesignsystemSidebar } from "@/app/dev/(designsystemet)/_ui/sidebar/Sidebar";
+import { DesignsystemSidebar } from "@/app/(routes)/(designsystemet)/_ui/sidebar/Sidebar";
 import { MobileNavButton } from "./MobileNav.button";
 import { MobileNavDialog } from "./MobileNav.dialog";
 import { MobileNavMenu } from "./MobileNav.menu";

@@ -72,6 +72,8 @@ function KodeEksemplerIFrame(props: {
     `/${demoVariant}/${dir.title}/${current?.navn}?darkside=true`,
   );
 
+  const hasJSXSnippet = !!current?.kompaktInnhold;
+
   return (
     <div>
       <div className={styles.kodeExampleContainer}>
@@ -129,7 +131,10 @@ function KodeEksemplerIFrame(props: {
               text: "TSX",
               value: "example",
               lang: "tsx",
-              code: current?.innhold ?? "",
+              code:
+                (hasJSXSnippet ? current?.kompaktInnhold : current?.innhold) ??
+                "",
+              extraCode: hasJSXSnippet ? current?.innhold : undefined,
             },
           ]}
         />

@@ -56,7 +56,11 @@ function WebsiteTableRow({
   return (
     <tr className={styles.websiteTableTr}>
       {tr.map((x, xi) => (
-        <td key={xi} data-hide="sm" className={styles.websiteTableTd}>
+        <td
+          key={xi}
+          data-hide={x.hideOnSm ?? "false"}
+          className={styles.websiteTableTd}
+        >
           {x.text}
         </td>
       ))}

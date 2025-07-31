@@ -1,5 +1,5 @@
 import Avatar from "boring-avatars";
-import { Iframe, UrlResolver } from "sanity-plugin-iframe-pane";
+import { Iframe, IframeOptions, UrlResolver } from "sanity-plugin-iframe-pane";
 import { StructureResolver } from "sanity/structure";
 import { LightBulbIcon } from "@navikt/aksel-icons";
 import {
@@ -137,42 +137,6 @@ export const structure: StructureResolver = async (
     ]);
 };
 
-export const resolveProductionUrl: UrlResolver = (doc) => {
-  const rootPath = `${window.location.protocol}//${window.location.host}`;
-
-  if (!doc?._type) {
-    return rootPath;
-  }
-
-  if (previews.includes(doc._type)) {
-    const slug = (doc?.slug as any)?.current;
-    const previewUrl = `/preview/${slug}`;
-    if (!slug) {
-      return "";
-    }
-    return `${rootPath}${previewUrl}`;
-  }
-  if (landingsider.find((x) => x.name === doc._type)) {
-    const slug = landingsider.find((x) => x.name === doc._type)?.url;
-    const previewUrl = `/preview/${slug}`;
-    if (!slug) {
-      return "";
-    }
-    return `${rootPath}${previewUrl}`;
-  }
-
-  if ("gp.tema" === doc._type) {
-    const slug = (doc?.slug as any)?.current;
-    const previewUrl = `/preview/god-praksis/${slug}`;
-    if (!slug) {
-      return "";
-    }
-    return `${rootPath}${previewUrl}`;
-  }
-
-  return rootPath;
-};
-
 export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
   const rootPath = `${window.location.protocol}//${window.location.host}`;
 
@@ -182,7 +146,7 @@ export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
 
   if (previews.includes(doc._type)) {
     const slug = (doc?.slug as any)?.current;
-    const previewUrl = `/dev/${slug}`;
+    const previewUrl = `/${slug}`;
     if (!slug) {
       return "";
     }
@@ -190,7 +154,7 @@ export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
   }
   if (landingsider.find((x) => x.name === doc._type)) {
     const slug = landingsider.find((x) => x.name === doc._type)?.url;
-    const previewUrl = `/dev/${slug}`;
+    const previewUrl = `/${slug}`;
     if (!slug) {
       return "";
     }
@@ -199,7 +163,7 @@ export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
 
   if ("gp.tema" === doc._type) {
     const slug = (doc?.slug as any)?.current;
-    const previewUrl = `/dev/god-praksis/${slug}`;
+    const previewUrl = `/god-praksis/${slug}`;
     if (!slug) {
       return "";
     }
@@ -217,13 +181,11 @@ export const defaultDocumentNode = (S, { schemaType }) => {
       S.view
         .component(Iframe)
         .options({
-          url: resolveProductionUrl,
-          /* TODO: Enable when appdir is moved to main */
-          /* url: {
+          url: {
             origin: "same-origin",
             preview: resolveProductionUrlAppdir,
             draftMode: "/api/draft-mode/enable",
-          } satisfies IframeOptions["url"], */
+          } satisfies IframeOptions["url"],
           reload: { button: true },
           attributes: {
             allow: "fullscreen",

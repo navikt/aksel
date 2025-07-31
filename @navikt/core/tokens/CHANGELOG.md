@@ -1,5 +1,13 @@
 # @navikt/ds-tokens
 
+## 7.25.1
+
+### Patch Changes
+
+- Darkside: Updated Meta-lime 300 and 400. ([#3928](https://github.com/navikt/aksel/pull/3928))
+
+## 7.25.0
+
 ## 7.24.0
 
 ## 7.23.2

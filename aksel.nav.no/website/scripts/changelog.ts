@@ -64,6 +64,7 @@ async function main() {
     const existingDoc = await client.fetch(
       `*[_type == "ds_endringslogg_artikkel" && slug.current == $slug]`,
       { slug },
+      { perspective: "published" },
     );
     if (existingDoc.length > 1) {
       throw new Error(

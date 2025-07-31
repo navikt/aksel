@@ -6,7 +6,6 @@ const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_arti
 const DS_FRONT_PAGE_QUERY = defineQuery(`*[_type == "aksel_ds_forside"][0] {
     ds_forside_title,
     ds_forside_ingress,
-    ds_forside_promo_tag { label, text, link },
     ds_getting_started[]{ description, icon, link, title },
     ds_layers_overview,
     ds_changelog { title, ingress },
@@ -14,6 +13,10 @@ const DS_FRONT_PAGE_QUERY = defineQuery(`*[_type == "aksel_ds_forside"][0] {
     ds_support[]{description, link, title},
     seo { image, meta }
   }`);
+
+const DS_PROMO_QUERY = defineQuery(
+  `*[_type == "aksel_ds_forside"][0].ds_forside_promo_tag`,
+);
 
 const DESIGNSYSTEM_SIDEBAR_QUERY =
   defineQuery(`*[_type in [${DESIGNSYSTEM_TYPES}] && defined(kategori)] {
@@ -200,7 +203,8 @@ const ENDRINGSLOGG_METADATA_BY_SLUG_QUERY =
     heading,
     endringsdato,
     endringstype,
-    herobilde
+    herobilde,
+    seo
   }`);
 
 const N_LATEST_CHANGE_LOGS_QUERY = defineQuery(`
@@ -438,4 +442,5 @@ export {
   SITEMAP_LANDINGPAGES_QUERY,
   SLUG_BY_TYPE_QUERY,
   TOC_BY_SLUG_QUERY,
+  DS_PROMO_QUERY,
 };
