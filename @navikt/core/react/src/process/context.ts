@@ -1,10 +1,10 @@
 import { createContext } from "../util/create-context";
+import { ProcessProps } from "./Process";
 
 interface ProcessContextValue {
-  onStepChange: (step: number) => void;
-  lastIndex: number;
-  interactive: boolean;
+  variant: ProcessProps["variant"];
   activeStep: number;
+  lastIndex: number;
   index: number;
 }
 

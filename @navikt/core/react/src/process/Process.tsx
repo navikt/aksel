@@ -3,11 +3,28 @@ import { useRenameCSS } from "../theme/Theme";
 import Step, { ProcessStepProps } from "./Step";
 import { ProcessContextProvider } from "./context";
 
+// TODO (stw): ✅ Process-component requirements
+// Presentation:
+// - ✅ Bubble (dot, number or icon) - tied to variant
+// - ✅ Line (dashed or solid) - tied to state
+// - ✅ Content
+//   - Title
+//   - Date (optional)
+//   - Description (optional)
+//   - Custom component(s) (optional)
+
+// Variants:
+// - ✅ Dots
+// - ✅ Numbered: dev specified, with fallback
+// - ✅ Icons: dev specified, with fallback
+
+// State:
+// - ✅ CurrentStep/ActiveStep:
+//   - stepIndex < ActiveStep -> 'completed'
+//   - stepIndex = ActiveStep -> 'current'
+//   - stepIndex > ActiveStep -> 'uncompleted'
+
 export interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
-  /**
-   * `<Process.Step />` elements.
-   */
-  children: React.ReactNode;
   /**
    * Current active step.
    *
@@ -15,16 +32,15 @@ export interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   activeStep: number;
   /**
-   * Callback for next `activeStep`.
-   *
-   * Process index starts at 1, not 0.
+   * `<Process.Step />` elements.
    */
-  onStepChange?: (step: number) => void;
+  children: React.ReactNode;
   /**
-   * Makes Process non-interactive if false.
-   * @default true
+   * Variant of the bullets to use: a small solid bubble,
+   * a bubble that fits a number inside, or a bubble that fits an icon inside
+   * @default "default"
    */
-  interactive?: boolean;
+  variant?: "default" | "number" | "icon";
 }
 
 interface ProcessComponent
@@ -53,7 +69,6 @@ interface ProcessComponent
  *   <Process
  *     aria-labelledby="Process-heading"
  *     activeStep={activeStep}
- *     onStepChange={setActiveStep}
  *   >
  *     <Process.Step href="#">Start søknad</Process.Step>
  *     <Process.Step href="#">Saksopplysninger</Process.Step>
@@ -65,65 +80,66 @@ interface ProcessComponent
 export const Process: ProcessComponent = forwardRef<
   HTMLOListElement,
   ProcessProps
->(
-  (
-    {
-      children,
-      className,
-      activeStep,
-      onStepChange = () => {},
-      interactive = true,
-      ...rest
-    },
-    ref,
-  ) => {
-    const { cn } = useRenameCSS();
-    activeStep = activeStep - 1;
-    return (
-      // TODO: (stw) Add component level props: 'variant=default|number|icon'
-      <ol {...rest} ref={ref} className={cn("navds-process", className)}>
-        {React.Children.map(children, (step, index) => {
-          const stepProps: Partial<ProcessStepProps> =
-            React.isValidElement<ProcessStepProps>(step) ? step.props : {};
+>(({ variant = "default", children, className, activeStep, ...rest }, ref) => {
+  const { cn } = useRenameCSS();
+  activeStep = activeStep - 1;
+  return (
+    <ol
+      // TODO (stw): data-color set on higher level? Otherwise set to 'info'
+      data-color="info"
+      {...rest}
+      ref={ref}
+      className={cn("navds-process", className)}
+    >
+      {React.Children.map(children, (step, index) => {
+        const stepProps: Partial<ProcessStepProps> =
+          React.isValidElement<ProcessStepProps>(step) ? step.props : {};
 
-          const isInteractive = stepProps.interactive ?? interactive;
-
-          return (
-            // TODO: (stw) Add step level props: 'showDate=T|F, showDescription=T|F, showSlot=T|F, showLine=T|F'
-            // TODO: (stw) Or: 'showDate=date|F, showDescription=description|F, showSlot=slot|F, showLine=T|F'
-            <li
-              className={cn("navds-process__item", {
-                /* TODO: Remove these 3 classNames in darkmode update (stw: ???) */
-                "navds-process__item--behind": activeStep > index,
-                "navds-process__item--completed": stepProps.completed,
-                "navds-process__item--non-interactive": !isInteractive,
-              })}
-              data-color={isInteractive ? undefined : "neutral"}
-              key={index + (children?.toString?.() ?? "")}
+        return (
+          <li
+            className={cn("navds-process__item", {
+              /* TODO: Remove these 3 classNames in darkmode update (stw: ???) */
+              "navds-process__item--behind": activeStep > index,
+            })}
+            key={index + (children?.toString?.() ?? "")}
+            style={{
+              gap:
+                stepProps.variant !== "default" || variant !== "default"
+                  ? "var(--ax-space-8)"
+                  : "0",
+            }}
+          >
+            <span
+              className={cn(
+                "navds-process__line navds-process__line--1",
+                index >= activeStep && "navds-process__line--uncompleted",
+              )}
+            />
+            {/* TODO (stw): Add step level props: 'showDate=T|F, showDescription=T|F, showSlot=T|F, showLine=T|F' */}
+            {/* TODO (stw): Or: 'showDate=date|F, showDescription=description|F, showSlot=slot|F, showLine=T|F' */}
+            {/* TODO (stw): Pass step-props with context */}
+            <ProcessContextProvider
+              variant={variant}
+              activeStep={activeStep}
+              lastIndex={React.Children.count(children)}
+              index={index}
             >
+              {step}
+            </ProcessContextProvider>
+            {!stepProps.hideLine && (
               <span
-                className={cn("navds-process__line navds-process__line--1")}
+                className={cn(
+                  "navds-process__line navds-process__line--2",
+                  index >= activeStep && "navds-process__line--uncompleted",
+                )}
               />
-              {/* TODO: (stw) Pass step-props with context */}
-              <ProcessContextProvider
-                interactive={interactive}
-                activeStep={activeStep}
-                lastIndex={React.Children.count(children)}
-                index={index}
-                onStepChange={onStepChange}
-              >
-                {step}
-              </ProcessContextProvider>
-              <span
-                className={cn("navds-process__line navds-process__line--2")}
-              />
-            </li>
-          );
-        })}
-      </ol>
-    );
-  },
-) as ProcessComponent;
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  );
+}) as ProcessComponent;
 
 Process.Step = Step;
 

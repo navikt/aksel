@@ -1,38 +1,63 @@
 import React, { forwardRef } from "react";
+import { CheckmarkIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
 import { Label } from "../typography";
-import { composeEventHandlers } from "../util/composeEventHandlers";
 import { OverridableComponent } from "../util/types";
 import { useProcessContext } from "./context";
 
 export interface ProcessStepProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
-   * Text content by indicator.
+   * Title
    */
-  children: string;
+  title: string;
   /**
-   * Makes step-indicator a checkmark.
+   * Date/timestamp to display under the title
+   */
+  date?: string;
+  /**
+   * Descriptive plaintext
+   */
+  description?: string;
+  /**
+   * Content to display beside the line under the title (and date and/or
+   * description, if provided)
+   */
+  children?: React.ReactNode;
+  /**
+   * Variant of the bullets to use: a small solid bubble,
+   * a bubble that fits a number inside, or a bubble that fits an icon inside
+   * @default "default"
+   */
+  variant?: "default" | "number" | "icon";
+  /**
+   * icon
+   * @default CheckmarkIcon
+   */
+  icon?: React.ReactNode;
+  /**
+   * numbers
+   */
+  number?: number;
+  /**
+   * Hide the line
    * @default false
    */
-  completed?: boolean;
-  /**
-   * Makes step non-interactive if false. Step will be set to a `<div>`, overriding `as`-prop.
-   * @default true
-   */
-  interactive?: boolean;
+  hideLine?: boolean;
 }
 
-export const Step: OverridableComponent<ProcessStepProps, HTMLAnchorElement> =
+export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
   forwardRef(
     (
       {
-        className,
+        title,
+        date,
+        description,
         children,
-        as: Component = "a",
-        completed = false,
-        interactive,
-        onClick,
+        variant,
+        icon,
+        number,
+        className,
         ...rest
       },
       ref,
@@ -40,67 +65,65 @@ export const Step: OverridableComponent<ProcessStepProps, HTMLAnchorElement> =
       const { cn } = useRenameCSS();
       const context = useProcessContext();
 
-      const { activeStep } = context;
+      const { activeStep, index } = context;
+      const negotiatedVariant = variant || context.variant || "default";
 
-      const isInteractive = interactive ?? context?.interactive;
-
-      const Comp = isInteractive ? Component : "div";
-
-      const handleStepClick = () => {
-        isInteractive && context.onStepChange(context.index + 1);
-      };
+      if (icon === undefined) {
+        if (index <= activeStep) {
+          icon = <CheckmarkIcon />;
+        } else {
+          // TODO (stw): Should default uncompleted with icon show a CheckmarkIcon on no background, no icon at all, or a different icon indicated 'unselected' or 'incomplete'?
+          icon = <CheckmarkIcon />;
+          // icon = <NotePencilIcon />;
+        }
+      }
 
       return (
-        <Comp
+        <div
           {...rest}
           aria-current={activeStep === context.index ? "step" : undefined}
           ref={ref}
-          className={cn("navds-process__step", className, {
-            "navds-process__step--active": activeStep === context.index,
-            "navds-process__step--behind": activeStep > context.index,
-            "navds-process__step--non-interactive": !isInteractive,
-            "navds-process__step--completed": completed,
-          })}
-          data-active={activeStep === context.index}
-          data-completed={completed}
-          data-interactive={isInteractive}
-          onClick={composeEventHandlers(onClick, handleStepClick)}
+          className={cn("navds-process__step", className)}
         >
-          {completed ? (
-            <span
-              className={cn(
-                "navds-process__circle navds-process__circle--success",
-              )}
-            >
-              <svg
-                width="14"
-                height="10"
-                viewBox="0 0 14 10"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                focusable={false}
-                role="presentation"
-                aria-hidden
-              >
-                <path
-                  d="M4.93563 6.41478L11.3755 0.404669C11.9796 -0.160351 12.9294 -0.130672 13.4959 0.47478C14.0624 1.08027 14.0299 2.03007 13.4249 2.59621L5.92151 9.59934C5.64138 9.85904 5.27598 10 4.90064 10C4.5069 10 4.12756 9.84621 3.83953 9.56111L1.33953 7.06111C0.75401 6.47558 0.75401 5.52542 1.33953 4.93989C1.92506 4.35437 2.87522 4.35437 3.46075 4.93989L4.93563 6.41478Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </span>
-          ) : (
-            <Label
-              className={cn("navds-process__circle")}
-              as="span"
-              aria-hidden="true"
-            >
-              {context.index + 1}
-            </Label>
-          )}
+          <span
+            className={cn("navds-process__circle", {
+              "navds-process__circle--completed": context.index < activeStep,
+              "navds-process__circle--current": context.index === activeStep,
+              "navds-process__circle--uncompleted": context.index > activeStep,
+            })}
+            style={{
+              "--__axc-process-circle-size":
+                negotiatedVariant !== "default" ? "1.75rem" : "1rem",
+              "--navds-process-circle-size":
+                negotiatedVariant !== "default" ? "1.75rem" : "1rem",
+              marginTop:
+                negotiatedVariant === "default" ? "calc(.75rem / 2)" : "",
+            }}
+            aria-hidden={negotiatedVariant === "number"}
+          >
+            {negotiatedVariant === "icon" && icon}
+            {negotiatedVariant === "number" &&
+              (number ? number : context.index + 1)}
+          </span>
+
+          {/*** Content ***/}
           <Label as="span" className={cn("navds-process__content")}>
-            {children}
+            {title}
           </Label>
-        </Comp>
+          {date && (
+            <span style={{ minWidth: "fit-content", gridColumn: "content" }}>
+              {date}
+            </span>
+          )}
+          {description && (
+            <span style={{ minWidth: "fit-content", gridColumn: "content" }}>
+              {description}
+            </span>
+          )}
+          <div style={{ minWidth: "fit-content", gridColumn: "content" }}>
+            {children}
+          </div>
+        </div>
       );
     },
   );

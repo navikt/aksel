@@ -3,18 +3,13 @@
   --navds-process-border-width: 2px;
   --navds-process-line-length: 1rem;
 
+  /* TODO (stw): Should the next 2 lines be removed? Ref process.darkside.css */
   color: var(--ac-process-text, var(--a-surface-action));
   font-weight: 600;
   line-height: 1;
   list-style: none;
   padding-left: 0;
   margin: 0;
-}
-
-.navds-process--horizontal {
-  display: flex;
-  align-items: flex-start;
-  text-align: center;
 }
 
 .navds-process__item {
@@ -24,25 +19,25 @@
     [line-2 step-end] auto;
   grid-template-columns: var(--navds-process-circle-size) auto;
   justify-items: flex-start;
-  gap: 0.5rem;
+  gap: var(--a-spacing-2);
 }
 
 .navds-process__line {
-  background-color: var(--ac-process-line, var(--a-border-default));
-  width: var(--navds-process-border-width);
+  width: 0;
+  border: calc(var(--navds-process-border-width) / 2) solid var(--a-border-default);
   height: 100%;
   min-height: var(--navds-process-line-length);
   justify-self: center;
   grid-column: 1;
 }
 
-.navds-process__step--behind.navds-process__step--completed + .navds-process__line {
+/* .navds-process__step--behind.navds-process__step--completed + .navds-process__line {
   background-color: var(--ac-process-line-completed, var(--a-border-selected));
 }
 
 .navds-process__item--behind.navds-process__item--completed + .navds-process__item > .navds-process__line--1 {
   background-color: var(--ac-process-line-completed, var(--a-border-selected));
-}
+} */
 
 .navds-process__line--1 {
   grid-row: line-1;
@@ -51,10 +46,15 @@
 
 .navds-process__line--2 {
   grid-row: line-2;
+
+  .navds-process__item:last-of-type & {
+    display: none;
+  }
 }
 
-:where(.navds-process__item:last-of-type) .navds-process__line--2 {
-  display: none;
+.navds-process__line--uncompleted {
+  border-style: dashed;
+  border-color: var(--a-border-subtle);
 }
 
 .navds-process__step {
@@ -65,15 +65,18 @@
   gap: var(--a-spacing-2);
   justify-content: flex-start;
   text-decoration: none;
-  cursor: pointer;
   padding: var(--navds-process-border-width);
-  margin: calc(var(--navds-process-border-width) * -1) calc(var(--navds-process-border-width) * -1) 1.75rem;
+  margin: calc(var(--navds-process-border-width) * -1) calc(var(--navds-process-border-width) * -1)
+    var(--navds-process-circle-size);
+  width: 100%;
+
+  /* remove last item bottom margin */
+  .navds-process__item:last-child & {
+    margin-bottom: 0;
+  }
 }
 
-.navds-process__item:last-child .navds-process__step {
-  margin-bottom: 0;
-}
-
+/* TODO (stw): Test with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */
 @media (forced-colors: active) {
   .navds-process__step {
     background-color: ButtonFace;
@@ -109,52 +112,33 @@
   }
 }
 
-button.navds-process__step {
-  appearance: none;
-  border: none;
-  background-color: transparent;
-  font: inherit;
-  color: inherit;
-  text-align: inherit;
-}
-
-.navds-process__step--non-interactive {
-  color: var(--ac-process-non-interactive, var(--a-text-subtle));
-  cursor: default;
-}
-
-:where(.navds-process__step):focus-visible {
-  outline: none;
-  box-shadow: var(--a-shadow-focus);
-  isolation: isolate;
-}
-
-@supports not selector(:focus-visible) {
-  .navds-process__step:focus {
-    outline: none;
-    box-shadow: var(--a-shadow-focus);
-    isolation: isolate;
-  }
-}
-
 .navds-process__circle {
   grid-column: circle;
   display: inline-grid;
+  place-self: baseline center;
   place-items: center;
-  flex-shrink: 0;
   width: var(--navds-process-circle-size);
   height: var(--navds-process-circle-size);
-  border: var(--navds-process-border-width) solid currentColor;
-  border-radius: var(--a-border-radius-full);
   line-height: 1;
+  border-radius: var(--a-border-radius-full);
+  border: var(--navds-process-border-width) solid currentColor;
 }
 
-.navds-process__circle--success {
-  border: none;
-  background: none;
-  font-size: 1.75rem;
+.navds-process__circle--completed {
   color: var(--a-text-on-action);
-  background-color: var(--ac-process-text, var(--a-surface-action));
+  background: var(--a-surface-action);
+}
+
+.navds-process__circle--current {
+  color: var(--a-text-on-inverted);
+  background: var(--a-surface-action);
+  outline: 2px solid var(--a-surface-action);
+  outline-offset: 2px;
+}
+
+.navds-process__circle--uncompleted {
+  color: var(--a-text-subtle);
+  border-color: var(--a-border-subtle);
 }
 
 .navds-process__content {
@@ -162,60 +146,6 @@ button.navds-process__step {
   line-height: 1.5;
   grid-column: content;
   padding-top: 0.035rem;
-}
-
-/* Horizontal */
-:where(.navds-process--horizontal) .navds-process__item {
-  flex: 1 1 100%;
-  grid-template-columns:
-    [line-1-start] 1fr [step-start] auto [line-1-end] var(--navds-process-circle-size)
-    [line-2-start] auto [step-end] 1fr [line-2-end];
-  grid-template-rows: var(--navds-process-circle-size) auto;
-}
-
-:where(.navds-process--horizontal) .navds-process__line {
-  height: var(--navds-process-border-width);
-  width: 100%;
-  min-height: auto;
-  grid-row: 1;
-  display: block;
-  align-self: center;
-}
-
-:where(.navds-process--horizontal) .navds-process__line--1 {
-  grid-column: line-1;
-}
-
-:where(.navds-process--horizontal) .navds-process__line--2 {
-  grid-column: line-2;
-}
-
-:where(.navds-process--horizontal .navds-process__item:first-of-type) .navds-process__line--1,
-:where(.navds-process--horizontal .navds-process__item:last-of-type) .navds-process__line--2 {
-  visibility: hidden;
-}
-
-:where(.navds-process--horizontal) .navds-process__step {
-  grid-row: 1 / -1;
-  grid-column: step;
-  display: grid;
-  grid-template-rows: [circle] var(--navds-process-circle-size) [content] auto;
-  grid-template-columns:
-    [content-start] auto [circle] var(--navds-process-circle-size)
-    [content-end] auto;
-  place-items: center center;
-  margin-bottom: 0;
-}
-
-:where(.navds-process--horizontal) .navds-process__circle {
-  grid-row: circle;
-  grid-column: 2;
-}
-
-:where(.navds-process--horizontal) .navds-process__content {
-  grid-row: content;
-  grid-column: 1 / -1;
-  max-width: 24ch;
 }
 
 /* Active step */
@@ -247,35 +177,6 @@ button.navds-process__step {
 
 :where(.navds-process__step:not(.navds-process__step--active):hover) .navds-process__circle--success {
   background-color: var(--ac-process-text, var(--a-surface-action-hover));
-}
-
-/* Non-interactive */
-:where(.navds-process__step--non-interactive.navds-process__step--active) .navds-process__content {
-  color: var(--ac-process-non-interactive-active, var(--a-text-default));
-}
-
-.navds-process__step--non-interactive.navds-process__step--behind.navds-process__step--completed + .navds-process__line {
-  background-color: var(--ac-process-non-interactive-line-completed, var(--a-border-strong));
-}
-
-.navds-process__item--non-interactive.navds-process__item--behind.navds-process__item--completed
-  + .navds-process__item
-  > .navds-process__line--1 {
-  background-color: var(--ac-process-non-interactive-line-completed, var(--a-border-strong));
-}
-
-:where(.navds-process__step--non-interactive.navds-process__step--active) .navds-process__circle {
-  background-color: var(--ac-process-non-interactive-active-bg, var(--a-surface-inverted));
-  border-color: var(--ac-process-non-interactive-active-border, var(--a-surface-inverted));
-  color: var(--ac-process-non-interactive-active-text, var(--a-text-on-inverted));
-}
-
-:where(.navds-process__step--non-interactive:hover) .navds-process__circle {
-  background-color: transparent;
-}
-
-:where(.navds-process__step--non-interactive.navds-process__step--active:hover) .navds-process__circle {
-  background-color: var(--ac-process-non-interactive-active-bg, var(--a-surface-inverted));
 }
 
 :where(.navds-process__step--completed.navds-process__step--active) .navds-process__circle {

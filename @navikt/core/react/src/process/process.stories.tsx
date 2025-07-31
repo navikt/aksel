@@ -1,7 +1,17 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
+import {
+  CalculatorFillIcon,
+  CaptionsIcon,
+  FileCheckmarkIcon,
+  GavelSoundBlockIcon,
+  NotePencilIcon,
+  PaperclipIcon,
+  PaperplaneIcon,
+  TasklistStartFillIcon,
+  WalletFillIcon,
+} from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
-import { BodyLong } from "../typography";
 import Process from "./Process";
 
 const meta: Meta<typeof Process> = {
@@ -16,157 +26,258 @@ export default meta;
 
 type Story = StoryObj<typeof Process>;
 
-const storyTexts = [
-  "Minimize backwards overflow agile. Horsehead offer commitment to the cause nor copy and paste from stack overflow problem territories, innovation is hot right now for can you slack it to me?. High touch client table the discussion , and get buy-in so manage expectations loop back, please advise soonest. We need a paradigm shift dogpile that, and i need to pee and then go to another meeting for let's prioritize the low-hanging fruit.",
-  "Customer centric sorry i didn't get your email proceduralize, and first-order optimal strategies. I dont care if you got some copy, why you dont use officeipsumcom or something like that ? wheelhouse. Viral engagement new economy, this proposal is a win-win situation which will cause a stellar paradigm shift, and produce a multi-fold increase in deliverables Bob called an all-hands this afternoon. Fire up your browser touch base innovation is hot right now so this medium needs to be more dynamic.",
-  "Touch base define the underlying principles that drive decisions and strategy for your design language. I have zero cycles for this. Cadence social currency, for low engagement execute . Deliverables rehydrate the team or let's circle back to that those options are already baked in with this model teams were able to drive adoption and awareness we need to start advertising on social media circle back. Through the lens of face time.",
-  "Take five, punch the tree, and come back in here with a clear head those options are already baked in with this model ultimate measure of success and we need to crystallize a plan yet open door policy who's responsible for the ask for this request? what do you feel you would bring to the table if you were hired for this position. Wiggle room guerrilla marketing shelfware. Code feature creep can we parallel path lose client to 10:00 meeting hire the best manage expectations root-and-branch review.",
-  "Curate downselect tread it daily cc me on that due diligence, or close the loop. All hands on deck my supervisor didn't like the latest revision you gave me can you switch back to the first revision? ping me or game-plan, yet make it a priority, on this journey win-win. Our competitors are jumping the shark we need to build it so that it scales post launch future-proof can we align on lunch orders. Deliverables message the initiative.",
-  "Out of scope poop, so pre launch. I just wanted to give you a heads-up wiggle room cc me on that I have been doing some research this morning and we need to better, nor dog and pony show prioritize these line items so UX. Big data upstream selling circle back, in an ideal world. Get all your ducks in a row land it in region so code so one-sheet. Action item we need to think big start small and scale fast to energize our clients. Cta due diligence, for this vendor is incompetent nor forcing function and circle back and low engagement.",
-  "Move the needle a loss a day will keep you focus yet can you put it into a banner that is not alarming, but eye catching and not too giant or strategic fit, nor it is all exactly as i said, but i don't like it or streamline. We've bootstrapped the model. This proposal is a win-win situation which will cause a stellar paradigm shift, and produce a multi-fold increase in deliverables the horse is out of the barn usabiltiy, for going forward but going forward.",
-];
-
-export const Default = ({ asButton, completed, ...props }) => {
-  const [activeStep, setActiveStep] = useState(3);
-
+export const Default = ({
+  activeStep,
+  step4Title,
+  step4Date,
+  step4Description,
+  step4Variant,
+  step4Number,
+  step4HideLine,
+  ...props
+}) => {
   const newProps = {
     onClick: (e) => e.preventDefault(),
-    ...(asButton ? { as: "button" } : { href: "#" }),
+    ...{ href: "#" },
   };
 
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
-      <Process activeStep={activeStep} onStepChange={setActiveStep} {...props}>
-        <Process.Step {...newProps} completed={completed}>
-          Start søknad
+      <Process activeStep={activeStep} {...props}>
+        <Process.Step {...newProps} title="Start søknad" />
+        <Process.Step {...newProps} title="Personopplysninger" />
+        <Process.Step {...newProps} title="Saksopplysninger" />
+        <Process.Step
+          {...newProps}
+          title={step4Title}
+          date={step4Date}
+          description={step4Description}
+          variant={step4Variant}
+          icon={<GavelSoundBlockIcon />}
+          number={step4Number}
+          hideLine={step4HideLine}
+        >
+          <h2>Heading 2</h2>
+          <p>
+            Paragraph. Take five, punch the tree, and come back in here with a
+            clear head those options are already baked in with this model
+            ultimate measure of success and we need to crystallize a plan yet
+            open door policy who is responsible for the ask for this request?
+            what do you feel you would bring to the table if you were hired for
+            this position. Wiggle room guerrilla marketing shelfware. Code
+            feature creep can we parallel path lose client to 10:00 meeting hire
+            the best manage expectations root-and-branch review.
+          </p>
+          <button>Click here!</button>
+          <h4>Table</h4>
+          <table>
+            <tr>
+              <td>A1</td>
+              <td>B1</td>
+            </tr>
+            <tr>
+              <td>A2</td>
+              <td>B2</td>
+            </tr>
+          </table>
+          <hr />
         </Process.Step>
-        <Process.Step {...newProps} completed={completed}>
-          Personopplysninger
-        </Process.Step>
-        <Process.Step {...newProps} completed={completed}>
-          Saksopplysninger
-        </Process.Step>
-        <Process.Step {...newProps} completed={completed}>
-          Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og
-          forklares i sitt fulle i denne labelen
-        </Process.Step>
-        <Process.Step {...newProps} completed={completed}>
-          Vedlegg
-        </Process.Step>
-        <Process.Step {...newProps} completed={completed}>
-          Oppsummering
-        </Process.Step>
-        <Process.Step {...newProps} completed={completed}>
-          Innsending
-        </Process.Step>
+        <Process.Step {...newProps} title="Vedlegg" />
+        <Process.Step {...newProps} title="Oppsummering" />
+        <Process.Step {...newProps} title="Innsending" />
       </Process>
-      <BodyLong style={{ marginTop: "5rem" }}>
-        {storyTexts[activeStep]}
-      </BodyLong>
     </div>
   );
 };
 Default.argTypes = {
+  // activeStep: {
+  //   control: { type: "range", min: 1, max: 7, step: 1 },
+  // },
   activeStep: {
-    control: { type: "number" },
+    control: "inline-radio",
+    options: [1, 2, 3, 4, 5, 6, 7],
+  },
+  variant: {
+    control: "inline-radio",
+    options: ["default", "icon", "number"],
+  },
+  step4Title: { name: "Step 4: Title" },
+  step4Date: { name: "Step 4: Date" },
+  step4Description: { name: "Step 4: Description" },
+  step4HideLine: { name: "Step 4: Hide line" },
+  step4Variant: {
+    name: "Step 4: Variant",
+    control: "inline-radio",
+    options: ["default", "icon", "number", undefined],
+  },
+  step4Number: {
+    name: "Step 4: Number",
+    control: "select",
+    options: [undefined, -5, 1, 2, 3, 4, 9, 11, 345],
   },
 };
 Default.args = {
-  asButton: false,
-  interactive: true,
-  completed: false,
+  activeStep: 3,
+  variant: "default",
+  step4Title:
+    "Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og forklares i sitt fulle i denne labelen",
+  step4Date: new Date().toDateString(),
+  step4Description:
+    "Description of customer centric sorry i didn't get your email proceduralize, and first-order optimal strategies. I dont care if you got some copy, why you dont use officeipsumcom or something like that ? wheelhouse. Viral engagement new economy, this proposal is a win-win situation which will cause a stellar paradigm shift, and produce a multi-fold increase in deliverables Bob called an all-hands this afternoon. Fire up your browser touch base innovation is hot right now so this medium needs to be more dynamic.",
+  step4HideLine: true,
+  step4Variant: "default",
+  step4Number: 9,
 };
 
-export const Vertical: StoryFn<Story> = () => {
-  const [activeStep, setActiveStep] = useState(2);
+export const Variants: StoryFn<Story> = () => {
+  const [activeStep] = useState(2);
   const props = { onClick: (e) => e.preventDefault(), href: "#" };
   return (
-    <Process activeStep={activeStep} onStepChange={setActiveStep}>
-      <Process.Step {...props}>Start søknad</Process.Step>
-      <Process.Step {...props}>Personopplysninger</Process.Step>
-      <Process.Step {...props}>Saksopplysninger</Process.Step>
-      <Process.Step {...props}>
-        Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
-      </Process.Step>
-      <Process.Step {...props}>Vedlegg</Process.Step>
-      <Process.Step {...props}>Oppsummering</Process.Step>
-      <Process.Step {...props}>Innsending</Process.Step>
-    </Process>
-  );
-};
+    <div style={{ display: "flex", gap: "4rem" }}>
+      <div>
+        <h3>default</h3>
+        <Process activeStep={activeStep}>
+          <Process.Step {...props} title="Start søknad" />
+          <Process.Step {...props} title="Personopplysninger" />
+          <Process.Step {...props} title="Saksopplysninger" />
+          <Process.Step
+            {...props}
+            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+          />
+          <Process.Step {...props} title="Vedlegg" />
+          <Process.Step
+            {...props}
+            variant="icon"
+            icon={<WalletFillIcon />}
+            title="Oppsummering"
+          />
+          <Process.Step {...props} title="Innsending" />
+        </Process>
+      </div>
 
-export const DisplayOnly: StoryFn<Story> = () => {
-  return (
-    <div className="colgap">
-      <Process activeStep={2} interactive={false}>
-        <Process.Step completed>Start søknad</Process.Step>
-        <Process.Step completed>Personopplysninger</Process.Step>
-        <Process.Step>Saksopplysninger</Process.Step>
-        <Process.Step>
-          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
-        </Process.Step>
-        <Process.Step>Vedlegg</Process.Step>
-        <Process.Step>Oppsummering</Process.Step>
-        <Process.Step>Innsending</Process.Step>
-      </Process>
-      <Process activeStep={3} interactive={false}>
-        <Process.Step completed>Start søknad</Process.Step>
-        <Process.Step completed>Personopplysninger</Process.Step>
-        <Process.Step>Saksopplysninger</Process.Step>
-        <Process.Step>
-          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
-        </Process.Step>
-        <Process.Step>Vedlegg</Process.Step>
-        <Process.Step>Oppsummering</Process.Step>
-        <Process.Step>Innsending</Process.Step>
-      </Process>
+      <div>
+        <h3>number</h3>
+        <Process variant="number" activeStep={activeStep}>
+          <Process.Step {...props} title="Start søknad" />
+          <Process.Step {...props} title="Personopplysninger" />
+          <Process.Step {...props} title="Saksopplysninger" />
+          <Process.Step
+            {...props}
+            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+          />
+          <Process.Step {...props} title="Vedlegg" />
+          <Process.Step {...props} title="Oppsummering" />
+          <Process.Step {...props} title="Innsending" />
+        </Process>
+      </div>
+      <div>
+        <h3>icon</h3>
+        <Process variant="icon" activeStep={activeStep}>
+          <Process.Step {...props} title="Start søknad" />
+          <Process.Step {...props} title="Personopplysninger" />
+          <Process.Step {...props} title="Saksopplysninger" />
+          <Process.Step
+            {...props}
+            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+          />
+          <Process.Step {...props} title="Vedlegg" />
+          <Process.Step {...props} title="Oppsummering" />
+          <Process.Step {...props} title="Innsending" />
+        </Process>
+      </div>
     </div>
   );
 };
 
-export const CompletedSteps: StoryFn<Story> = () => {
-  const [activeStep, setActiveStep] = useState(3);
+export const Icons: StoryFn<Story> = () => {
+  const [activeStep] = useState(4);
+  const props = { onClick: (e) => e.preventDefault(), href: "#" };
   return (
-    <div className="colgap">
-      <Process
-        activeStep={activeStep}
-        onStepChange={(step) => setActiveStep(step)}
-      >
-        <Process.Step completed={activeStep > 1}>Start søknad</Process.Step>
-        <Process.Step completed>Personopplysninger</Process.Step>
-        <Process.Step completed={activeStep > 3}>Saksopplysninger</Process.Step>
-        <Process.Step completed={activeStep >= 4}>
-          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
-        </Process.Step>
-        <Process.Step completed={activeStep > 5} interactive={false}>
-          Vedlegg
-        </Process.Step>
-        <Process.Step completed={activeStep > 6}>Oppsummering</Process.Step>
-        <Process.Step completed={activeStep > 7}>Innsending</Process.Step>
-      </Process>
-      <Process
-        activeStep={activeStep - 1}
-        onStepChange={(step) => setActiveStep(step)}
-      >
-        <Process.Step completed={activeStep > 1}>Start søknad</Process.Step>
-        <Process.Step completed={activeStep > 2}>
-          Personopplysninger
-        </Process.Step>
-        <Process.Step completed={activeStep > 3}>Saksopplysninger</Process.Step>
-        <Process.Step completed={activeStep >= 4}>
-          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
-        </Process.Step>
-        <Process.Step completed={activeStep > 5}>Vedlegg</Process.Step>
-        <Process.Step completed={activeStep > 6}>Oppsummering</Process.Step>
-        <Process.Step completed={activeStep > 7}>Innsending</Process.Step>
-      </Process>
+    <div style={{ display: "flex", gap: "4rem" }}>
+      <div>
+        <h3>Default icons</h3>
+        <Process activeStep={activeStep} variant="icon">
+          <Process.Step {...props} title="Start søknad" />
+          <Process.Step {...props} title="Personopplysninger" />
+          <Process.Step {...props} title="Saksopplysninger" />
+          <Process.Step
+            {...props}
+            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+          />
+          <Process.Step {...props} title="Vedlegg" />
+          <Process.Step {...props} title="Oppsummering" />
+          <Process.Step {...props} title="Innsending" />
+        </Process>
+      </div>
+
+      <div>
+        <h3>Explicit icons per step</h3>
+        <Process activeStep={activeStep} variant="icon">
+          <Process.Step
+            {...props}
+            icon={<TasklistStartFillIcon />}
+            title="Start søknad"
+          />
+          <Process.Step
+            {...props}
+            icon={<WalletFillIcon />}
+            title="Personopplysninger"
+          />
+          <Process.Step
+            {...props}
+            icon={<GavelSoundBlockIcon />}
+            title="Saksopplysninger"
+          />
+          <Process.Step
+            {...props}
+            icon={<CaptionsIcon />}
+            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+          />
+          <Process.Step {...props} icon={<PaperclipIcon />} title="Vedlegg" />
+          <Process.Step
+            {...props}
+            icon={<CalculatorFillIcon />}
+            title="Oppsummering"
+          />
+          <Process.Step
+            {...props}
+            icon={<PaperplaneIcon />}
+            title="Innsending"
+          />
+        </Process>
+      </div>
+
+      <div>
+        <h3>Mix</h3>
+        <Process activeStep={activeStep} variant="icon">
+          <Process.Step {...props} title="Start søknad" />
+          <Process.Step {...props} title="Personopplysninger" />
+          <Process.Step
+            {...props}
+            icon={<FileCheckmarkIcon />}
+            title="Saksopplysninger"
+          />
+          <Process.Step
+            {...props}
+            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+          />
+          <Process.Step {...props} icon={<PaperclipIcon />} title="Vedlegg" />
+          <Process.Step {...props} icon="" title="Oppsummering" />
+          <Process.Step
+            {...props}
+            icon={<NotePencilIcon />}
+            title="Innsending"
+          />
+        </Process>
+      </div>
     </div>
   );
 };
 
+// TODO (stw): data-color is overridden inside Process because it currently uses data-color='info' to conform with Figma-sketches
 export const ColorRole = () => (
   <div data-color="brand-magenta">
-    <Vertical />
+    <Variants />
   </div>
 );
 
@@ -174,16 +285,12 @@ export const Chromatic: Story = {
   render: () => (
     <VStack gap="4">
       <div>
-        <h2>Vertical</h2>
-        <Vertical />
+        <h2>Variants</h2>
+        <Variants />
       </div>
       <div>
-        <h2>Display only</h2>
-        <DisplayOnly />
-      </div>
-      <div>
-        <h2>Completed steps</h2>
-        <CompletedSteps />
+        <h2>Icons</h2>
+        <Icons />
       </div>
       <div>
         <h2>ColorRole</h2>
