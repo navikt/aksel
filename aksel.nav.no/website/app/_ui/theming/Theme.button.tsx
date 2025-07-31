@@ -1,39 +1,27 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { MoonIcon, SunIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 
 function ThemeButton() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
 
   return (
-    <>
-      <style id="theme-button">{`
-        :root, .light {
-          --website-theme-toggle-light-display: block;
-          --website-theme-toggle-dark-display: none;
-        }
-
-        .dark {
-          --website-theme-toggle-light-display: none;
-          --website-theme-toggle-dark-display: block;
-        }
-      `}</style>
-      <Button
-        variant="tertiary-neutral"
-        icon={
-          <>
-            {theme === "dark" ? (
-              <MoonIcon title="Endre til lyst" />
-            ) : (
-              <SunIcon title="Endre til mørkt" />
-            )}
-          </>
-        }
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      />
-    </>
+    <Button
+      variant="tertiary-neutral"
+      icon={
+        isMounted && resolvedTheme === "dark" ? (
+          <MoonIcon title="Endre til lyst" />
+        ) : (
+          <SunIcon title="Endre til mørkt" />
+        )
+      }
+      onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
+    />
   );
 }
 
