@@ -26,5 +26,3 @@ export function renderStoriesForChromatic(
     },
   };
 }
-
-// Usage: export const Chromatic = renderStoriesForChromatic({ Story1, Story2, Story3 })
