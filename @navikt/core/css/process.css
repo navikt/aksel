@@ -1,11 +1,10 @@
 .navds-process {
-  --navds-process-circle-size: 1.75rem;
+  --navds-process-circle-large: 1.75rem;
+  --navds-process-circle-small: 1rem;
+  --navds-process-circle-size: var(--navds-process-circle-large);
   --navds-process-border-width: 2px;
   --navds-process-line-length: 1rem;
 
-  /* TODO (stw): Should the next 2 lines be removed? Ref process.darkside.css */
-  color: var(--ac-process-text, var(--a-surface-action));
-  font-weight: 600;
   line-height: 1;
   list-style: none;
   padding-left: 0;
@@ -22,6 +21,10 @@
   gap: var(--a-spacing-2);
 }
 
+.navds-process__item-no-gap {
+  gap: 0;
+}
+
 .navds-process__line {
   width: 0;
   border: calc(var(--navds-process-border-width) / 2) solid var(--a-border-default);
@@ -30,14 +33,6 @@
   justify-self: center;
   grid-column: 1;
 }
-
-/* .navds-process__step--behind.navds-process__step--completed + .navds-process__line {
-  background-color: var(--ac-process-line-completed, var(--a-border-selected));
-}
-
-.navds-process__item--behind.navds-process__item--completed + .navds-process__item > .navds-process__line--1 {
-  background-color: var(--ac-process-line-completed, var(--a-border-selected));
-} */
 
 .navds-process__line--1 {
   grid-row: line-1;
@@ -64,20 +59,66 @@
   grid-template-columns: [circle] var(--navds-process-circle-size) [content] auto;
   gap: var(--a-spacing-2);
   justify-content: flex-start;
-  text-decoration: none;
   padding: var(--navds-process-border-width);
   margin: calc(var(--navds-process-border-width) * -1) calc(var(--navds-process-border-width) * -1)
     var(--navds-process-circle-size);
   width: 100%;
 
-  /* remove last item bottom margin */
   .navds-process__item:last-child & {
     margin-bottom: 0;
   }
 }
 
+.navds-process__circle {
+  grid-column: circle;
+  display: inline-grid;
+  place-self: baseline center;
+  place-items: center;
+  width: var(--navds-process-circle-size);
+  height: var(--navds-process-circle-size);
+  line-height: 1;
+  border-radius: var(--a-border-radius-full);
+  border: var(--navds-process-border-width) solid var(--a-surface-action);
+}
+
+.navds-process__circle--small {
+  --navds-process-circle-size: var(--navds-process-circle-small);
+}
+
+.navds-process__circle--margin {
+  margin-top: calc((var(--navds-process-circle-large) - var(--navds-process-circle-small)) / 2);
+}
+
+.navds-process__circle--completed {
+  color: var(--a-text-on-action);
+  background: var(--a-surface-action);
+}
+
+.navds-process__circle--current {
+  color: var(--a-text-on-inverted);
+  background: var(--a-surface-action);
+  outline: 2px solid var(--a-surface-action);
+  outline-offset: 2px;
+}
+
+.navds-process__circle--uncompleted {
+  color: var(--a-text-subtle);
+  border-color: var(--a-border-subtle);
+}
+
+.navds-process__content {
+  min-width: fit-content;
+  grid-column: content;
+}
+
+.navds-process__content-title {
+  line-height: 1.5;
+  padding-top: 0.035rem;
+}
+
 /* TODO (stw): Test with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */
-@media (forced-colors: active) {
+
+/* @media (forced-colors: active) {
   .navds-process__step {
     background-color: ButtonFace;
     color: ButtonText;
@@ -110,100 +151,16 @@
   .navds-process__line {
     background-color: ButtonText;
   }
-}
+} */
 
-.navds-process__circle {
-  grid-column: circle;
-  display: inline-grid;
-  place-self: baseline center;
-  place-items: center;
-  width: var(--navds-process-circle-size);
-  height: var(--navds-process-circle-size);
-  line-height: 1;
-  border-radius: var(--a-border-radius-full);
-  border: var(--navds-process-border-width) solid currentColor;
-}
+@media (forced-colors: active) {
+  .navds-process__circle.navds-process__circle {
+    border: 0;
+    outline: 2px solid ButtonText;
+    outline-offset: 2px;
+  }
 
-.navds-process__circle--completed {
-  color: var(--a-text-on-action);
-  background: var(--a-surface-action);
-}
-
-.navds-process__circle--current {
-  color: var(--a-text-on-inverted);
-  background: var(--a-surface-action);
-  outline: 2px solid var(--a-surface-action);
-  outline-offset: 2px;
-}
-
-.navds-process__circle--uncompleted {
-  color: var(--a-text-subtle);
-  border-color: var(--a-border-subtle);
-}
-
-.navds-process__content {
-  min-width: fit-content;
-  line-height: 1.5;
-  grid-column: content;
-  padding-top: 0.035rem;
-}
-
-/* Active step */
-:where(.navds-process__step--active) .navds-process__content {
-  color: var(--ac-process-active, var(--a-text-action-selected));
-}
-
-.navds-process__step:hover:where(:not(.navds-process__step--non-interactive)) {
-  color: var(--ac-process-hover-active, var(--a-text-action-hover));
-}
-
-:where(.navds-process__step:hover) .navds-process__content {
-  text-decoration: underline;
-}
-
-:where(.navds-process__step--non-interactive:hover, .navds-process__step--active:hover) .navds-process__content {
-  text-decoration: none;
-}
-
-:where(.navds-process__step--active) .navds-process__circle {
-  background-color: var(--ac-process-active-bg, var(--a-surface-action-selected));
-  border-color: var(--ac-process-active-border, var(--a-border-action-selected));
-  color: var(--ac-process-active-text, var(--a-text-on-action));
-}
-
-:where(.navds-process__step:not(.navds-process__step--active):hover) .navds-process__circle {
-  background-color: var(--ac-process-hover-bg, var(--a-surface-action-subtle-hover));
-}
-
-:where(.navds-process__step:not(.navds-process__step--active):hover) .navds-process__circle--success {
-  background-color: var(--ac-process-text, var(--a-surface-action-hover));
-}
-
-:where(.navds-process__step--completed.navds-process__step--active) .navds-process__circle {
-  background-color: inherit;
-  color: var(--ac-process-active-completed, var(--a-text-action-selected));
-}
-
-:where(.navds-process__step--completed.navds-process__step--active) .navds-process__circle--success {
-  color: var(--a-text-on-action);
-  background-color: var(--ac-process-active-completed, var(--a-surface-action-selected));
-}
-
-:where(.navds-process__step--non-interactive, .navds-process__step--non-interactive:hover) .navds-process__circle--success {
-  color: var(--a-text-on-inverted);
-  background-color: var(--ac-process-non-interactive-completed-bg, var(--a-surface-neutral));
-}
-
-:where(.navds-process__step--non-interactive.navds-process__step--active) .navds-process__circle--success {
-  color: var(--a-text-on-inverted);
-  background-color: var(--ac-process-non-interactive-active-completed, var(--a-surface-inverted));
-}
-
-:where(.navds-process__step--completed.navds-process__step--active.navds-process__step--non-interactive) .navds-process__circle {
-  color: var(--ac-process-non-interactive-active-completed, var(--a-text-default));
-}
-
-:where(.navds-process__step--completed.navds-process__step--active.navds-process__step--non-interactive)
-  .navds-process__circle--success {
-  color: var(--ac-process-non-interactive-active-completed, var(--a-text-on-inverted));
+  .navds-process__line.navds-process__line {
+    background-color: ButtonText;
+  }
 }

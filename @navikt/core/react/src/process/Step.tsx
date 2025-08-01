@@ -66,7 +66,7 @@ export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
       const context = useProcessContext();
 
       const { activeStep, index } = context;
-      const negotiatedVariant = variant || context.variant || "default";
+      const resolvedVariant = variant || context.variant || "default";
 
       if (icon === undefined) {
         if (index <= activeStep) {
@@ -90,39 +90,31 @@ export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
               "navds-process__circle--completed": context.index < activeStep,
               "navds-process__circle--current": context.index === activeStep,
               "navds-process__circle--uncompleted": context.index > activeStep,
+              "navds-process__circle--small": resolvedVariant === "default",
+              "navds-process__circle--margin": resolvedVariant === "default",
             })}
-            style={{
-              "--__axc-process-circle-size":
-                negotiatedVariant !== "default" ? "1.75rem" : "1rem",
-              "--navds-process-circle-size":
-                negotiatedVariant !== "default" ? "1.75rem" : "1rem",
-              marginTop:
-                negotiatedVariant === "default" ? "calc(.75rem / 2)" : "",
-            }}
-            aria-hidden={negotiatedVariant === "number"}
+            aria-hidden={resolvedVariant === "number"}
           >
-            {negotiatedVariant === "icon" && icon}
-            {negotiatedVariant === "number" &&
+            {resolvedVariant === "icon" && icon}
+            {resolvedVariant === "number" &&
               (number ? number : context.index + 1)}
           </span>
 
           {/*** Content ***/}
-          <Label as="span" className={cn("navds-process__content")}>
+          <Label
+            as="span"
+            className={cn(
+              "navds-process__content",
+              "navds-process__content-title",
+            )}
+          >
             {title}
           </Label>
-          {date && (
-            <span style={{ minWidth: "fit-content", gridColumn: "content" }}>
-              {date}
-            </span>
-          )}
+          {date && <span className={cn("navds-process__content")}>{date}</span>}
           {description && (
-            <span style={{ minWidth: "fit-content", gridColumn: "content" }}>
-              {description}
-            </span>
+            <span className={cn("navds-process__content")}>{description}</span>
           )}
-          <div style={{ minWidth: "fit-content", gridColumn: "content" }}>
-            {children}
-          </div>
+          <div className={cn("navds-process__content")}>{children}</div>
         </div>
       );
     },

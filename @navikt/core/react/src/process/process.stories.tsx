@@ -34,6 +34,7 @@ export const Default = ({
   step4Variant,
   step4Number,
   step4HideLine,
+  step4Icon,
   ...props
 }) => {
   const newProps = {
@@ -53,7 +54,7 @@ export const Default = ({
           date={step4Date}
           description={step4Description}
           variant={step4Variant}
-          icon={<GavelSoundBlockIcon />}
+          icon={step4Icon === "<Icon/>" ? <GavelSoundBlockIcon /> : step4Icon}
           number={step4Number}
           hideLine={step4HideLine}
         >
@@ -115,6 +116,11 @@ Default.argTypes = {
     control: "select",
     options: [undefined, -5, 1, 2, 3, 4, 9, 11, 345],
   },
+  step4Icon: {
+    name: "Step 4: Icon",
+    control: "radio",
+    options: ["<Icon/>", "", undefined],
+  },
 };
 Default.args = {
   activeStep: 3,
@@ -127,6 +133,7 @@ Default.args = {
   step4HideLine: true,
   step4Variant: "default",
   step4Number: 9,
+  step4Icon: "<Icon/>",
 };
 
 export const Variants: StoryFn<Story> = () => {

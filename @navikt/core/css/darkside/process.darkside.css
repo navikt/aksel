@@ -1,5 +1,7 @@
 .aksel-process {
-  --__axc-process-circle-size: 1.75rem;
+  --__axc-process-circle-large: 1.75rem;
+  --__axc-process-circle-small: 1rem;
+  --__axc-process-circle-size: var(--__axc-process-circle-large);
   --__axc-process-border-width: 2px;
   --__axc-process-line-length: 1rem;
 
@@ -17,6 +19,10 @@
   grid-template-columns: var(--__axc-process-circle-size) auto;
   justify-items: flex-start;
   gap: var(--ax-space-8);
+}
+
+.aksel-process__item-no-gap {
+  gap: 0;
 }
 
 .aksel-process__line {
@@ -58,7 +64,6 @@
     var(--__axc-process-circle-size);
   width: 100%;
 
-  /* Remove last item bottom margin */
   .aksel-process__item:last-child & {
     margin-bottom: 0;
   }
@@ -74,6 +79,14 @@
   line-height: 1;
   border-radius: var(--ax-radius-full);
   border: var(--__axc-process-border-width) solid var(--ax-border-default);
+}
+
+.aksel-process__circle--small {
+  --__axc-process-circle-size: var(--__axc-process-circle-small);
+}
+
+.aksel-process__circle--margin {
+  margin-top: calc((var(--__axc-process-circle-large) - var(--__axc-process-circle-small)) / 2);
 }
 
 .aksel-process__circle--completed {
@@ -95,8 +108,11 @@
 
 .aksel-process__content {
   min-width: fit-content;
-  line-height: 1.5;
   grid-column: content;
+}
+
+.aksel-process__content-title {
+  line-height: 1.5;
   padding-top: 0.035rem;
 }
 

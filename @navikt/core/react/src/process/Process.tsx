@@ -97,17 +97,13 @@ export const Process: ProcessComponent = forwardRef<
 
         return (
           <li
-            className={cn("navds-process__item", {
-              /* TODO: Remove these 3 classNames in darkmode update (stw: ???) */
-              "navds-process__item--behind": activeStep > index,
-            })}
+            className={cn(
+              "navds-process__item",
+              (stepProps.variant === "default" ||
+                (stepProps.variant === undefined && variant === "default")) &&
+                "navds-process__item-no-gap",
+            )}
             key={index + (children?.toString?.() ?? "")}
-            style={{
-              gap:
-                stepProps.variant !== "default" || variant !== "default"
-                  ? "var(--ax-space-8)"
-                  : "0",
-            }}
           >
             <span
               className={cn(
