@@ -28,6 +28,8 @@ type Story = StoryObj<typeof Process>;
 
 export const Default = ({
   activeStep,
+  completedIcon,
+  uncompletedIcon,
   step4Title,
   step4Date,
   step4Description,
@@ -44,7 +46,16 @@ export const Default = ({
 
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
-      <Process activeStep={activeStep} {...props}>
+      <Process
+        activeStep={activeStep}
+        completedIcon={
+          completedIcon === "<Icon/>" ? <FileCheckmarkIcon /> : completedIcon
+        }
+        uncompletedIcon={
+          uncompletedIcon === "<Icon/>" ? <NotePencilIcon /> : uncompletedIcon
+        }
+        {...props}
+      >
         <Process.Step {...newProps} title="Start søknad" />
         <Process.Step {...newProps} title="Personopplysninger" />
         <Process.Step {...newProps} title="Saksopplysninger" />
@@ -91,16 +102,21 @@ export const Default = ({
   );
 };
 Default.argTypes = {
-  // activeStep: {
-  //   control: { type: "range", min: 1, max: 7, step: 1 },
-  // },
+  variant: {
+    control: "inline-radio",
+    options: ["default", "icon", "number"],
+  },
   activeStep: {
     control: "inline-radio",
     options: [1, 2, 3, 4, 5, 6, 7],
   },
-  variant: {
+  completedIcon: {
     control: "inline-radio",
-    options: ["default", "icon", "number"],
+    options: ["<Icon/>", "empty string", undefined],
+  },
+  uncompletedIcon: {
+    control: "inline-radio",
+    options: ["<Icon/>", "empty string", undefined],
   },
   step4Title: { name: "Step 4: Title" },
   step4Date: { name: "Step 4: Date" },
@@ -118,13 +134,15 @@ Default.argTypes = {
   },
   step4Icon: {
     name: "Step 4: Icon",
-    control: "radio",
-    options: ["<Icon/>", "", undefined],
+    control: "inline-radio",
+    options: ["<Icon/>", "empty string", undefined],
   },
 };
 Default.args = {
-  activeStep: 3,
   variant: "default",
+  activeStep: 3,
+  completedIcon: undefined,
+  uncompletedIcon: undefined,
   step4Title:
     "Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og forklares i sitt fulle i denne labelen",
   step4Date: new Date().toDateString(),
@@ -152,12 +170,7 @@ export const Variants: StoryFn<Story> = () => {
             title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
           />
           <Process.Step {...props} title="Vedlegg" />
-          <Process.Step
-            {...props}
-            variant="icon"
-            icon={<WalletFillIcon />}
-            title="Oppsummering"
-          />
+          <Process.Step {...props} title="Oppsummering" />
           <Process.Step {...props} title="Innsending" />
         </Process>
       </div>
@@ -218,7 +231,28 @@ export const Icons: StoryFn<Story> = () => {
       </div>
 
       <div>
-        <h3>Explicit icons per step</h3>
+        <h3>Process-icons</h3>
+        <Process
+          activeStep={activeStep}
+          variant="icon"
+          completedIcon={<FileCheckmarkIcon />}
+          uncompletedIcon={<NotePencilIcon />}
+        >
+          <Process.Step {...props} title="Start søknad" />
+          <Process.Step {...props} title="Personopplysninger" />
+          <Process.Step {...props} title="Saksopplysninger" />
+          <Process.Step
+            {...props}
+            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+          />
+          <Process.Step {...props} title="Vedlegg" />
+          <Process.Step {...props} title="Oppsummering" />
+          <Process.Step {...props} title="Innsending" />
+        </Process>
+      </div>
+
+      <div>
+        <h3>Step-icons</h3>
         <Process activeStep={activeStep} variant="icon">
           <Process.Step
             {...props}
@@ -256,25 +290,30 @@ export const Icons: StoryFn<Story> = () => {
 
       <div>
         <h3>Mix</h3>
-        <Process activeStep={activeStep} variant="icon">
-          <Process.Step {...props} title="Start søknad" />
-          <Process.Step {...props} title="Personopplysninger" />
+        <Process
+          activeStep={activeStep}
+          variant="icon"
+          completedIcon={<FileCheckmarkIcon />}
+          uncompletedIcon={<NotePencilIcon />}
+        >
+          <Process.Step {...props} title="Process-level completed icon" />
+          <Process.Step {...props} title="Process-level completed icon" />
           <Process.Step
             {...props}
-            icon={<FileCheckmarkIcon />}
-            title="Saksopplysninger"
+            icon={<CalculatorFillIcon />}
+            title="Step override"
           />
           <Process.Step
             {...props}
             title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
           />
-          <Process.Step {...props} icon={<PaperclipIcon />} title="Vedlegg" />
-          <Process.Step {...props} icon="" title="Oppsummering" />
           <Process.Step
             {...props}
-            icon={<NotePencilIcon />}
-            title="Innsending"
+            icon={<PaperclipIcon />}
+            title="Step override"
           />
+          <Process.Step {...props} icon="" title="Step override (blank)" />
+          <Process.Step {...props} title="Process-level uncompleted icon" />
         </Process>
       </div>
     </div>

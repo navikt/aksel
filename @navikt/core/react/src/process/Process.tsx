@@ -3,27 +3,7 @@ import { useRenameCSS } from "../theme/Theme";
 import Step, { ProcessStepProps } from "./Step";
 import { ProcessContextProvider } from "./context";
 
-// TODO (stw): ✅ Process-component requirements
-// Presentation:
-// - ✅ Bubble (dot, number or icon) - tied to variant
-// - ✅ Line (dashed or solid) - tied to state
-// - ✅ Content
-//   - Title
-//   - Date (optional)
-//   - Description (optional)
-//   - Custom component(s) (optional)
-
-// Variants:
-// - ✅ Dots
-// - ✅ Numbered: dev specified, with fallback
-// - ✅ Icons: dev specified, with fallback
-
-// State:
-// - ✅ CurrentStep/ActiveStep:
-//   - stepIndex < ActiveStep -> 'completed'
-//   - stepIndex = ActiveStep -> 'current'
-//   - stepIndex > ActiveStep -> 'uncompleted'
-
+// TODO (stw): Does it make sense to support legacy with a new component?
 export interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * Current active step.
@@ -34,13 +14,28 @@ export interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * `<Process.Step />` elements.
    */
-  children: React.ReactNode;
+  // children: React.ReactNode;
+  children: React.ReactElement<typeof Step>[];
   /**
    * Variant of the bullets to use: a small solid bubble,
    * a bubble that fits a number inside, or a bubble that fits an icon inside
    * @default "default"
    */
   variant?: "default" | "number" | "icon";
+  /**
+   * If variant is set to "icon", the icon used for all completed steps will be
+   * "CheckmarkIcon", unless it is overridden here with a new default for all
+   * completed steps, or the specific step is assigned an icon.
+   * @default <CheckmarkIcon />
+   */
+  completedIcon?: React.ReactNode;
+  /**
+   * If variant is set to "icon", all uncompleted steps will be blank
+   * unless it is overridden here with a new default for all
+   * completed steps, or the specific step is assigned an icon.
+   * @default undefined
+   */
+  uncompletedIcon?: React.ReactNode;
 }
 
 interface ProcessComponent
@@ -80,62 +75,77 @@ interface ProcessComponent
 export const Process: ProcessComponent = forwardRef<
   HTMLOListElement,
   ProcessProps
->(({ variant = "default", children, className, activeStep, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-  activeStep = activeStep - 1;
-  return (
-    <ol
-      // TODO (stw): data-color set on higher level? Otherwise set to 'info'
-      data-color="info"
-      {...rest}
-      ref={ref}
-      className={cn("navds-process", className)}
-    >
-      {React.Children.map(children, (step, index) => {
-        const stepProps: Partial<ProcessStepProps> =
-          React.isValidElement<ProcessStepProps>(step) ? step.props : {};
+>(
+  (
+    {
+      variant = "default",
+      children,
+      className,
+      activeStep,
+      completedIcon,
+      uncompletedIcon,
+      ...rest
+    },
+    ref,
+  ) => {
+    const { cn } = useRenameCSS();
+    activeStep = activeStep - 1;
+    return (
+      <ol
+        // TODO (stw): data-color set on higher level? Otherwise set to 'info'
+        data-color="info"
+        {...rest}
+        ref={ref}
+        className={cn("navds-process", className)}
+      >
+        {React.Children.map(children, (step, index) => {
+          const stepProps: Partial<ProcessStepProps> =
+            React.isValidElement<ProcessStepProps>(step) ? step.props : {};
 
-        return (
-          <li
-            className={cn(
-              "navds-process__item",
-              (stepProps.variant === "default" ||
-                (stepProps.variant === undefined && variant === "default")) &&
-                "navds-process__item-no-gap",
-            )}
-            key={index + (children?.toString?.() ?? "")}
-          >
-            <span
+          return (
+            <li
               className={cn(
-                "navds-process__line navds-process__line--1",
-                index >= activeStep && "navds-process__line--uncompleted",
+                "navds-process__item",
+                (stepProps.variant === "default" ||
+                  (stepProps.variant === undefined && variant === "default")) &&
+                  "navds-process__item-no-gap",
               )}
-            />
-            {/* TODO (stw): Add step level props: 'showDate=T|F, showDescription=T|F, showSlot=T|F, showLine=T|F' */}
-            {/* TODO (stw): Or: 'showDate=date|F, showDescription=description|F, showSlot=slot|F, showLine=T|F' */}
-            {/* TODO (stw): Pass step-props with context */}
-            <ProcessContextProvider
-              variant={variant}
-              activeStep={activeStep}
-              lastIndex={React.Children.count(children)}
-              index={index}
+              key={index + (children?.toString?.() ?? "")}
             >
-              {step}
-            </ProcessContextProvider>
-            {!stepProps.hideLine && (
               <span
                 className={cn(
-                  "navds-process__line navds-process__line--2",
+                  "navds-process__line navds-process__line--1",
                   index >= activeStep && "navds-process__line--uncompleted",
                 )}
               />
-            )}
-          </li>
-        );
-      })}
-    </ol>
-  );
-}) as ProcessComponent;
+              {/* TODO (stw): Add step level props: 'showDate=T|F, showDescription=T|F, showSlot=T|F, showLine=T|F' */}
+              {/* TODO (stw): Or: 'showDate=date|F, showDescription=description|F, showSlot=slot|F, showLine=T|F' */}
+              {/* TODO (stw): Pass step-props with context */}
+              <ProcessContextProvider
+                variant={variant}
+                activeStep={activeStep}
+                lastIndex={React.Children.count(children)}
+                index={index}
+                completedIcon={completedIcon}
+                uncompletedIcon={uncompletedIcon}
+              >
+                {step}
+              </ProcessContextProvider>
+              {!stepProps.hideLine && (
+                <span
+                  className={cn(
+                    "navds-process__line navds-process__line--2",
+                    index >= activeStep && "navds-process__line--uncompleted",
+                  )}
+                />
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    );
+  },
+) as ProcessComponent;
 
 Process.Step = Step;
 

@@ -32,7 +32,7 @@ export interface ProcessStepProps
   variant?: "default" | "number" | "icon";
   /**
    * icon
-   * @default CheckmarkIcon
+   * @default <CheckmarkIcon />
    */
   icon?: React.ReactNode;
   /**
@@ -65,16 +65,14 @@ export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
       const { cn } = useRenameCSS();
       const context = useProcessContext();
 
-      const { activeStep, index } = context;
+      const { activeStep, index, completedIcon, uncompletedIcon } = context;
       const resolvedVariant = variant || context.variant || "default";
 
       if (icon === undefined) {
         if (index <= activeStep) {
-          icon = <CheckmarkIcon />;
+          icon = completedIcon || <CheckmarkIcon />;
         } else {
-          // TODO (stw): Should default uncompleted with icon show a CheckmarkIcon on no background, no icon at all, or a different icon indicated 'unselected' or 'incomplete'?
-          icon = <CheckmarkIcon />;
-          // icon = <NotePencilIcon />;
+          icon = uncompletedIcon || "";
         }
       }
 
