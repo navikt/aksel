@@ -1,6 +1,5 @@
 import NextImage from "next/image";
 import Link from "next/link";
-import { Image } from "sanity";
 import { BodyLong, HStack, Heading, LinkCard, Stack } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
@@ -30,7 +29,7 @@ async function GodPraksisIntroHero({
   image,
   isCollapsible = false,
 }: GpIntroHeroProps) {
-  const imageUrl = urlForImage(image as Image)?.url();
+  const imageUrl = urlForImage(image)?.url();
 
   return (
     <GodPraksisHeroProvider>
@@ -96,7 +95,7 @@ async function GodPraksisTemaList() {
         as="ul"
       >
         {filteredTemaList.map((tema) => {
-          const url = urlForImage(tema.pictogram as Image)?.url();
+          const url = urlForImage(tema.pictogram)?.url();
 
           return (
             <li key={tema.slug}>

@@ -8,12 +8,17 @@ import {
   Link,
   Show,
 } from "@navikt/ds-react";
+import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { formatDateString } from "@/ui-utils/format-date";
 import styles from "../_ui/Produktbloggen.module.css";
 
-export const HighlightedBlogg = async ({ blogg }: { blogg: any }) => {
+interface Props {
+  blogg: NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][number];
+}
+
+export const HighlightedBlogg = async ({ blogg }: Props) => {
   const date = formatDateString(blogg?.publishedAt ?? blogg._createdAt);
 
   const imageUrl = urlForImage(blogg?.seo?.image)

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { Image } from "sanity";
 import { BodyLong, Box, HGrid, Heading, LinkCard, Tag } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
@@ -70,7 +69,7 @@ function DesignsystemetOverviewCard({
     | DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult[number]
     | DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult[number];
 }) {
-  const imageUrl = urlForImage(page.status?.bilde as Image)?.url();
+  const imageUrl = urlForImage(page.status?.bilde)?.url();
 
   const statusTag = getStatusTag(page.status?.tag);
   const statusTagWithoutStable = getStatusTag(page.status?.tag, true);

@@ -1,7 +1,6 @@
 import cl from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { Image as ImageType } from "sanity";
 import { Detail, HStack, LinkCard, VStack } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
@@ -61,7 +60,7 @@ const Card = ({ article, visible }: CardProps) => {
     "templates_artikkel",
   ].includes(article._type);
 
-  const imageUrl = urlForImage(article.seo?.image as ImageType)?.url();
+  const imageUrl = urlForImage(article.seo?.image)?.url();
 
   const getStatusTag = () => {
     if (isArticle(article) || isBlogg(article)) {

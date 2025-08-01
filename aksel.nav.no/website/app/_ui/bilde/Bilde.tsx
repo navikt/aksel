@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import NextLink from "next/link";
-import type { Image } from "sanity";
 import { BodyLong, HGrid, Link } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { urlForImage } from "@/app/_sanity/utils";
@@ -17,7 +16,7 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
     kilde,
   } = props.value;
 
-  const imageUrl = urlForImage(props?.value as Image)
+  const imageUrl = urlForImage(props?.value)
     ?.auto("format")
     .url();
 

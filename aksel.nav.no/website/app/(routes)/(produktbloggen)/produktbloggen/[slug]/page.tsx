@@ -2,7 +2,6 @@ import { Metadata, ResolvingMetadata } from "next";
 import { PortableTextBlock } from "next-sanity";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
-import { Image } from "sanity";
 import { BodyLong, BodyShort, Detail, HStack, Heading } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -55,7 +54,7 @@ export async function generateMetadata(
   });
 
   const ogImages = (await parent).openGraph?.images || [];
-  const pageOgImage = urlForOpenGraphImage(pageData?.seo?.image as Image);
+  const pageOgImage = urlForOpenGraphImage(pageData?.seo?.image);
 
   pageOgImage && ogImages.unshift(pageOgImage);
 
@@ -83,7 +82,7 @@ export default async function Page({ params }: Props) {
   const publishDate = formatDateString(publishedAtRaw);
   const authors = (pageData?.contributors as any)?.map((x) => x?.title) ?? [];
 
-  const imageUrl = urlForImage(pageData?.seo?.image as Image)
+  const imageUrl = urlForImage(pageData?.seo?.image)
     ?.quality(100)
     .url();
 
