@@ -131,14 +131,12 @@ export const Process: ProcessComponent = forwardRef<
               >
                 {step}
               </ProcessContextProvider>
-              {!stepProps.hideLine && (
-                <span
-                  className={cn(
-                    "navds-process__line navds-process__line--2",
-                    index >= activeStep && "navds-process__line--uncompleted",
-                  )}
-                />
-              )}
+              <span
+                className={cn(
+                  "navds-process__line navds-process__line--2",
+                  index >= activeStep && "navds-process__line--uncompleted",
+                )}
+              />
             </li>
           );
         })}

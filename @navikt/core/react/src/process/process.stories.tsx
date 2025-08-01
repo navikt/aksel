@@ -33,9 +33,9 @@ export const Default = ({
   step4Title,
   step4Date,
   step4Description,
+  step4ShowSlot,
   step4Variant,
   step4Number,
-  step4HideLine,
   step4Icon,
   ...props
 }) => {
@@ -49,10 +49,22 @@ export const Default = ({
       <Process
         activeStep={activeStep}
         completedIcon={
-          completedIcon === "<Icon/>" ? <FileCheckmarkIcon /> : completedIcon
+          completedIcon === "<Icon/>" ? (
+            <FileCheckmarkIcon />
+          ) : completedIcon === "<empty string>" ? (
+            ""
+          ) : (
+            completedIcon
+          )
         }
         uncompletedIcon={
-          uncompletedIcon === "<Icon/>" ? <NotePencilIcon /> : uncompletedIcon
+          uncompletedIcon === "<Icon/>" ? (
+            <NotePencilIcon />
+          ) : uncompletedIcon === "<empty string>" ? (
+            ""
+          ) : (
+            uncompletedIcon
+          )
         }
         {...props}
       >
@@ -65,34 +77,47 @@ export const Default = ({
           date={step4Date}
           description={step4Description}
           variant={step4Variant}
-          icon={step4Icon === "<Icon/>" ? <GavelSoundBlockIcon /> : step4Icon}
+          icon={
+            step4Icon === "<Icon/>" ? (
+              <GavelSoundBlockIcon />
+            ) : step4Icon === "<empty string>" ? (
+              ""
+            ) : (
+              step4Icon
+            )
+          }
           number={step4Number}
-          hideLine={step4HideLine}
         >
-          <h2>Heading 2</h2>
-          <p>
-            Paragraph. Take five, punch the tree, and come back in here with a
-            clear head those options are already baked in with this model
-            ultimate measure of success and we need to crystallize a plan yet
-            open door policy who is responsible for the ask for this request?
-            what do you feel you would bring to the table if you were hired for
-            this position. Wiggle room guerrilla marketing shelfware. Code
-            feature creep can we parallel path lose client to 10:00 meeting hire
-            the best manage expectations root-and-branch review.
-          </p>
-          <button>Click here!</button>
-          <h4>Table</h4>
-          <table>
-            <tr>
-              <td>A1</td>
-              <td>B1</td>
-            </tr>
-            <tr>
-              <td>A2</td>
-              <td>B2</td>
-            </tr>
-          </table>
-          <hr />
+          {step4ShowSlot && (
+            <>
+              <hr />
+              <h2>Heading 2</h2>
+              <p>
+                Paragraph. Take five, punch the tree, and come back in here with
+                a clear head those options are already baked in with this model
+                ultimate measure of success and we need to crystallize a plan
+                yet open door policy who is responsible for the ask for this
+                request? what do you feel you would bring to the table if you
+                were hired for this position. Wiggle room guerrilla marketing
+                shelfware. Code feature creep can we parallel path lose client
+                to 10:00 meeting hire the best manage expectations
+                root-and-branch review.
+              </p>
+              <button>Click here!</button>
+              <h4>Table</h4>
+              <table>
+                <tr>
+                  <td>A1</td>
+                  <td>B1</td>
+                </tr>
+                <tr>
+                  <td>A2</td>
+                  <td>B2</td>
+                </tr>
+              </table>
+              <hr />
+            </>
+          )}
         </Process.Step>
         <Process.Step {...newProps} title="Vedlegg" />
         <Process.Step {...newProps} title="Oppsummering" />
@@ -112,16 +137,16 @@ Default.argTypes = {
   },
   completedIcon: {
     control: "inline-radio",
-    options: ["<Icon/>", "empty string", undefined],
+    options: ["<Icon/>", "<empty string>", undefined],
   },
   uncompletedIcon: {
     control: "inline-radio",
-    options: ["<Icon/>", "empty string", undefined],
+    options: ["<Icon/>", "<empty string>", undefined],
   },
   step4Title: { name: "Step 4: Title" },
   step4Date: { name: "Step 4: Date" },
   step4Description: { name: "Step 4: Description" },
-  step4HideLine: { name: "Step 4: Hide line" },
+  step4ShowSlot: { name: "Step 4: Show slot" },
   step4Variant: {
     name: "Step 4: Variant",
     control: "inline-radio",
@@ -135,7 +160,7 @@ Default.argTypes = {
   step4Icon: {
     name: "Step 4: Icon",
     control: "inline-radio",
-    options: ["<Icon/>", "empty string", undefined],
+    options: ["<Icon/>", "<empty string>", undefined],
   },
 };
 Default.args = {
@@ -148,8 +173,8 @@ Default.args = {
   step4Date: new Date().toDateString(),
   step4Description:
     "Description of customer centric sorry i didn't get your email proceduralize, and first-order optimal strategies. I dont care if you got some copy, why you dont use officeipsumcom or something like that ? wheelhouse. Viral engagement new economy, this proposal is a win-win situation which will cause a stellar paradigm shift, and produce a multi-fold increase in deliverables Bob called an all-hands this afternoon. Fire up your browser touch base innovation is hot right now so this medium needs to be more dynamic.",
-  step4HideLine: true,
-  step4Variant: "default",
+  step4ShowSlot: true,
+  step4Variant: "icon",
   step4Number: 9,
   step4Icon: "<Icon/>",
 };

@@ -10,7 +10,7 @@ export interface ProcessStepProps
   /**
    * Title
    */
-  title: string;
+  title?: string;
   /**
    * Date/timestamp to display under the title
    */
@@ -39,11 +39,6 @@ export interface ProcessStepProps
    * numbers
    */
   number?: number;
-  /**
-   * Hide the line
-   * @default false
-   */
-  hideLine?: boolean;
 }
 
 export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
@@ -99,15 +94,17 @@ export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
           </span>
 
           {/*** Content ***/}
-          <Label
-            as="span"
-            className={cn(
-              "navds-process__content",
-              "navds-process__content-title",
-            )}
-          >
-            {title}
-          </Label>
+          {title && (
+            <Label
+              as="span"
+              className={cn(
+                "navds-process__content",
+                "navds-process__content-title",
+              )}
+            >
+              {title}
+            </Label>
+          )}
           {date && <span className={cn("navds-process__content")}>{date}</span>}
           {description && (
             <span className={cn("navds-process__content")}>{description}</span>
