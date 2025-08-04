@@ -4,7 +4,6 @@ import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import type { Image as SanityImage } from "sanity";
 import {
   BodyShort,
   BoxNew,
@@ -44,8 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: pageData?.endringsdato || undefined,
       images:
-        urlForOpenGraphImage(pageData?.seo?.image as SanityImage) ||
-        urlForOpenGraphImage(pageData?.herobilde as SanityImage) ||
+        urlForOpenGraphImage(pageData?.seo?.image) ||
+        urlForOpenGraphImage(pageData?.herobilde) ||
         "/images/og/endringslogg/OG-endringslogg.png",
     },
   };
@@ -64,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: pageData?.heading,
     description: pageData?.seo?.meta,
     openGraph: {
-      images: urlForOpenGraphImage(pageData?.seo?.image as Image),
+      images: urlForOpenGraphImage(pageData?.seo?.image),
     },
   };
 } */
@@ -163,11 +162,7 @@ export default async function (props: Props) {
             alt={herobilde.alt ? herobilde.alt : ""}
             loading="lazy"
             decoding="async"
-            src={
-              urlForImage(herobilde as SanityImage)
-                ?.auto("format")
-                .url() || ""
-            }
+            src={urlForImage(herobilde)?.auto("format").url() || ""}
             width={1200}
             height={630}
           />

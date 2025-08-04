@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
-import { Image } from "sanity";
 import { VStack } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -20,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
     query: DS_FRONT_PAGE_QUERY,
   });
 
-  const pageOgImage = urlForOpenGraphImage(pageData?.seo?.image as Image);
+  const pageOgImage = urlForOpenGraphImage(pageData?.seo?.image);
 
   return {
     title: pageData?.ds_forside_title,

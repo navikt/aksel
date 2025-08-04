@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
-import { Image } from "sanity";
 import { BodyLong, BodyShort, HStack, Heading, VStack } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -25,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: seoData?.heading,
     description: seoData?.seo?.meta,
     openGraph: {
-      images: urlForOpenGraphImage(seoData?.seo?.image as Image),
+      images: urlForOpenGraphImage(seoData?.seo?.image),
     },
   };
 }

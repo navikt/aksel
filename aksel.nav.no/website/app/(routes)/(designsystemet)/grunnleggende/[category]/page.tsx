@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { stegaClean } from "next-sanity";
 import { notFound } from "next/navigation";
-import type { Image } from "sanity";
 import { DesignsystemetOverviewPage } from "@/app/(routes)/(designsystemet)/_ui/overview/DesignsystemetOverview";
 import { getStaticParamsSlugs } from "@/app/(routes)/(designsystemet)/slug";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -34,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: pageData?.heading,
       description: pageData?.seo?.meta,
       openGraph: {
-        images: urlForOpenGraphImage(pageData?.seo?.image as Image),
+        images: urlForOpenGraphImage(pageData?.seo?.image),
       },
     };
   }
@@ -50,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: currentCategory?.title,
     description: page?.seo?.meta,
     openGraph: {
-      images: urlForOpenGraphImage(page?.seo?.image as Image),
+      images: urlForOpenGraphImage(page?.seo?.image),
     },
   };
 }
