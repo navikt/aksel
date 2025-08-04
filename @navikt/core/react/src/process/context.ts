@@ -1,8 +1,8 @@
 import { createContext } from "../util/create-context";
-import { ProcessProps } from "./Process";
+import { ProcessVariant } from "./ProcessVariant";
 
 interface ProcessContextValue {
-  variant: ProcessProps["variant"];
+  variant: ProcessVariant;
   activeStep: number;
   lastIndex: number;
   index: number;

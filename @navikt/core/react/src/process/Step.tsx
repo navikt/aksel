@@ -5,8 +5,7 @@ import { Label } from "../typography";
 import { OverridableComponent } from "../util/types";
 import { useProcessContext } from "./context";
 
-export interface ProcessStepProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface ProcessStepProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Title
    */
@@ -42,7 +41,7 @@ export interface ProcessStepProps
 }
 
 export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
-  forwardRef(
+  forwardRef<HTMLDivElement, ProcessStepProps>(
     (
       {
         title,

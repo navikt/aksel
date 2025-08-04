@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import { ProcessVariant } from "./ProcessVariant";
 import Step, { ProcessStepProps } from "./Step";
 import { ProcessContextProvider } from "./context";
 
@@ -20,7 +21,7 @@ export interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * a bubble that fits a number inside, or a bubble that fits an icon inside
    * @default "default"
    */
-  variant?: "default" | "number" | "icon";
+  variant?: ProcessVariant;
   /**
    * If variant is set to "icon", the icon used for all completed steps will be
    * "CheckmarkIcon", unless it is overridden here with a new default for all
