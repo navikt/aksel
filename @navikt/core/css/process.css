@@ -115,51 +115,21 @@
   padding-top: 0.035rem;
 }
 
-/* TODO (stw): Test with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */
-
-/* @media (forced-colors: active) {
-  .navds-process__step {
-    background-color: ButtonFace;
-    color: ButtonText;
-  }
-
-  .navds-process__circle.navds-process__circle {
-    border: 0;
-  }
-
-  .navds-process__step .navds-process__circle {
-    forced-color-adjust: none;
-    background-color: ButtonText;
-    border-color: ButtonText;
-    color: ButtonFace;
-  }
-
-  .navds-process__step.navds-process__step:focus-visible {
-    box-shadow: none;
-    outline: 2px solid highlight;
-    outline-offset: 2px;
-  }
-
-  .navds-process__step.navds-process__step--active .navds-process__circle {
-    forced-color-adjust: none;
-    background-color: highlight;
-    border-color: highlighttext;
-    color: highlighttext;
-  }
-
-  .navds-process__line {
-    background-color: ButtonText;
-  }
-} */
-
+/* TODO (stw): Test on Windows with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */
 @media (forced-colors: active) {
   .navds-process__circle.navds-process__circle {
-    border: 0;
-    outline: 2px solid ButtonText;
-    outline-offset: 2px;
+    forced-color-adjust: none;
+    color: ButtonFace;
+    background-color: ButtonText;
+    border-color: ButtonText;
   }
 
-  .navds-process__line.navds-process__line {
-    background-color: ButtonText;
+  .navds-process__circle--current.navds-process__circle--current {
+    outline-color: ButtonText;
+  }
+
+  .navds-process__circle--uncompleted.navds-process__circle--uncompleted {
+    background-color: ButtonFace;
+    color: ButtonText;
   }
 }

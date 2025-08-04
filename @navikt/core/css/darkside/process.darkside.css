@@ -115,15 +115,21 @@
   padding-top: 0.035rem;
 }
 
-/* TODO (stw): Test with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */
+/* TODO (stw): Test on Windows with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */
 @media (forced-colors: active) {
-  .aksel-process__circle.aksel-process__circle {
-    border: 0;
-    outline: 2px solid ButtonText;
-    outline-offset: 2px;
+  .aksel-process__circle {
+    forced-color-adjust: none;
+    color: ButtonFace;
+    background-color: ButtonText;
+    border-color: ButtonText;
   }
 
-  .aksel-process__line.aksel-process__line {
-    background-color: ButtonText;
+  .aksel-process__circle--current {
+    outline-color: ButtonText;
+  }
+
+  .aksel-process__circle--uncompleted {
+    background-color: ButtonFace;
+    color: ButtonText;
   }
 }
