@@ -35,6 +35,7 @@ module.exports = tseslint.config([
     "**/.next",
     "examples/referansesider",
     "examples/astro/.astro",
+    ".yarn",
   ]),
   js.configs.recommended,
   reactPlugin.configs.flat.recommended,
@@ -42,6 +43,8 @@ module.exports = tseslint.config([
   reactHooks.configs["recommended-latest"],
   jsxA11y.flatConfigs.recommended,
   storybook.configs["flat/recommended"],
+  importPlugin.flatConfigs.recommended,
+  importPlugin.flatConfigs.typescript,
   {
     settings: { react: { version: "detect" } }, // Allows eslint-plugin-react to detect installed react-version
     languageOptions: {
@@ -57,20 +60,17 @@ module.exports = tseslint.config([
       ],
       "react/prop-types": "off", // Temporary
       "react/display-name": "off", // Temporary
+      "import/no-unresolved": "off",
+      "import/no-named-as-default": "off", // Temporary
     },
   },
   {
     files: ["**/*.{ts,tsx}"],
-    extends: [
-      tseslint.configs.recommended,
-      importPlugin.flatConfigs.recommended,
-      importPlugin.flatConfigs.typescript,
-    ],
+    extends: [tseslint.configs.recommended],
     linterOptions: {
       reportUnusedDisableDirectives: true,
     },
     rules: {
-      "import/no-unresolved": "off",
       "array-callback-return": "error",
       "object-shorthand": "error",
       "no-else-return": "error",
@@ -94,7 +94,6 @@ module.exports = tseslint.config([
           ],
         },
       ],
-      "import/no-named-as-default": "off", // Temporary
       "@typescript-eslint/no-shadow": ["error", { hoist: "all" }], // TODO: Consider { builtinGlobals: true }
       "@typescript-eslint/no-explicit-any": "off", // Temporary
       "@typescript-eslint/array-type": "error",
