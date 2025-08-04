@@ -3,23 +3,19 @@ import { Heading, Process } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep] = useState(1);
 
   return (
     <>
       <Heading size="medium" spacing level="2" id="process-heading">
         Steg
       </Heading>
-      <Process
-        aria-labelledby="process-heading"
-        activeStep={activeStep}
-        onStepChange={setActiveStep}
-      >
-        <Process.Step href="#">Innledning</Process.Step>
-        <Process.Step href="#">Saksopplysninger</Process.Step>
-        <Process.Step href="#">Begrunnelse</Process.Step>
-        <Process.Step href="#">Oppsummering</Process.Step>
-        <Process.Step href="#">Bekreftelse</Process.Step>
+      <Process aria-labelledby="process-heading" activeStep={activeStep}>
+        <Process.Step>Innledning</Process.Step>
+        <Process.Step>Saksopplysninger</Process.Step>
+        <Process.Step>Begrunnelse</Process.Step>
+        <Process.Step>Oppsummering</Process.Step>
+        <Process.Step>Bekreftelse</Process.Step>
       </Process>
     </>
   );
