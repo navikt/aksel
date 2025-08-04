@@ -80,8 +80,8 @@ export const Process: ProcessComponent = forwardRef<
           <li
             className={cn(
               "navds-process__item",
-              (stepProps.variant === "default" ||
-                (stepProps.variant === undefined && variant === "default")) &&
+              variant === "default" &&
+                !stepProps.icon &&
                 "navds-process__item-no-gap",
             )}
             key={index + (children?.toString?.() ?? "")}

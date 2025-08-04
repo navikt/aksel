@@ -24,45 +24,26 @@ export interface ProcessStepProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children?: React.ReactNode;
   /**
-   * Variant of the bullets to use: a small solid bubble,
-   * a bubble that fits a number inside, or a bubble that fits an icon inside
-   * @default "default"
-   */
-  variant?: "default" | "number" | "icon";
-  /**
    * icon
    * @default <CheckmarkIcon />
    */
   icon?: React.ReactNode;
-  /**
-   * numbers
-   */
-  number?: number;
 }
 
 export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
   forwardRef<HTMLDivElement, ProcessStepProps>(
-    (
-      {
-        title,
-        date,
-        description,
-        children,
-        variant,
-        icon,
-        number,
-        className,
-        ...rest
-      },
-      ref,
-    ) => {
+    ({ title, date, description, children, icon, className, ...rest }, ref) => {
       const { cn } = useRenameCSS();
       const context = useProcessContext();
 
       const { activeStep, index } = context;
-      const resolvedVariant = variant || context.variant || "default";
+      const resolvedVariant = context.variant || "default";
 
-      if (icon === undefined && index <= activeStep) {
+      if (
+        resolvedVariant === "icon" &&
+        index <= activeStep &&
+        icon === undefined
+      ) {
         icon = <CheckmarkIcon />;
       }
 
@@ -78,14 +59,14 @@ export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
               "navds-process__circle--completed": context.index < activeStep,
               "navds-process__circle--current": context.index === activeStep,
               "navds-process__circle--uncompleted": context.index > activeStep,
-              "navds-process__circle--small": resolvedVariant === "default",
-              "navds-process__circle--margin": resolvedVariant === "default",
+              "navds-process__circle--small":
+                resolvedVariant === "default" && !icon,
+              "navds-process__circle--margin":
+                resolvedVariant === "default" && !icon,
             })}
             aria-hidden={resolvedVariant === "number"}
           >
-            {resolvedVariant === "icon" && icon}
-            {resolvedVariant === "number" &&
-              (number ? number : context.index + 1)}
+            {icon || (resolvedVariant === "number" && context.index + 1)}
           </span>
 
           {/*** Content ***/}

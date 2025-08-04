@@ -30,8 +30,6 @@ export const Default = ({
   step4Date,
   step4Description,
   step4ShowSlot,
-  step4Variant,
-  step4Number,
   step4Icon,
   ...props
 }) => {
@@ -43,7 +41,7 @@ export const Default = ({
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Process activeStep={activeStep} {...props}>
-        <Process.Step {...newProps}>Some desc</Process.Step>
+        <Process.Step {...newProps} title="Start søknad" />
         <Process.Step {...newProps} title="Personopplysninger" />
         <Process.Step {...newProps} title="Saksopplysninger" />
         <Process.Step
@@ -51,7 +49,6 @@ export const Default = ({
           title={step4Title}
           date={step4Date}
           description={step4Description}
-          variant={step4Variant}
           icon={
             step4Icon === "<Icon/>" ? (
               <GavelSoundBlockIcon />
@@ -61,7 +58,6 @@ export const Default = ({
               step4Icon
             )
           }
-          number={step4Number}
         >
           {step4ShowSlot && (
             <>
@@ -114,16 +110,6 @@ Default.argTypes = {
   step4Date: { name: "Step 4: Date" },
   step4Description: { name: "Step 4: Description" },
   step4ShowSlot: { name: "Step 4: Show slot" },
-  step4Variant: {
-    name: "Step 4: Variant",
-    control: "inline-radio",
-    options: ["default", "icon", "number", undefined],
-  },
-  step4Number: {
-    name: "Step 4: Number",
-    control: "select",
-    options: [undefined, -5, 1, 2, 3, 4, 9, 11, 345],
-  },
   step4Icon: {
     name: "Step 4: Icon",
     control: "inline-radio",
@@ -139,8 +125,6 @@ Default.args = {
   step4Description:
     "Description of customer centric sorry i didn't get your email proceduralize, and first-order optimal strategies. I dont care if you got some copy, why you dont use officeipsumcom or something like that ? wheelhouse. Viral engagement new economy, this proposal is a win-win situation which will cause a stellar paradigm shift, and produce a multi-fold increase in deliverables Bob called an all-hands this afternoon. Fire up your browser touch base innovation is hot right now so this medium needs to be more dynamic.",
   step4ShowSlot: true,
-  step4Variant: "icon",
-  step4Number: 9,
   step4Icon: "<Icon/>",
 };
 
