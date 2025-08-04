@@ -59,15 +59,11 @@ export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
       const { cn } = useRenameCSS();
       const context = useProcessContext();
 
-      const { activeStep, index, completedIcon, uncompletedIcon } = context;
+      const { activeStep, index } = context;
       const resolvedVariant = variant || context.variant || "default";
 
-      if (icon === undefined) {
-        if (index <= activeStep) {
-          icon = completedIcon || <CheckmarkIcon />;
-        } else {
-          icon = uncompletedIcon || "";
-        }
+      if (icon === undefined && index <= activeStep) {
+        icon = <CheckmarkIcon />;
       }
 
       return (

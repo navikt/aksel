@@ -6,8 +6,6 @@ interface ProcessContextValue {
   activeStep: number;
   lastIndex: number;
   index: number;
-  completedIcon?: React.ReactNode;
-  uncompletedIcon?: React.ReactNode;
 }
 
 export const [ProcessContextProvider, useProcessContext] =

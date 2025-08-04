@@ -3,9 +3,7 @@ import React, { useState } from "react";
 import {
   CalculatorFillIcon,
   CaptionsIcon,
-  FileCheckmarkIcon,
   GavelSoundBlockIcon,
-  NotePencilIcon,
   PaperclipIcon,
   PaperplaneIcon,
   TasklistStartFillIcon,
@@ -28,8 +26,6 @@ type Story = StoryObj<typeof Process>;
 
 export const Default = ({
   activeStep,
-  completedIcon,
-  uncompletedIcon,
   step4Title,
   step4Date,
   step4Description,
@@ -46,29 +42,8 @@ export const Default = ({
 
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
-      <Process
-        activeStep={activeStep}
-        completedIcon={
-          completedIcon === "<Icon/>" ? (
-            <FileCheckmarkIcon />
-          ) : completedIcon === "<empty string>" ? (
-            ""
-          ) : (
-            completedIcon
-          )
-        }
-        uncompletedIcon={
-          uncompletedIcon === "<Icon/>" ? (
-            <NotePencilIcon />
-          ) : uncompletedIcon === "<empty string>" ? (
-            ""
-          ) : (
-            uncompletedIcon
-          )
-        }
-        {...props}
-      >
-        <Process.Step {...newProps} title="Start søknad" />
+      <Process activeStep={activeStep} {...props}>
+        <Process.Step {...newProps}>Some desc</Process.Step>
         <Process.Step {...newProps} title="Personopplysninger" />
         <Process.Step {...newProps} title="Saksopplysninger" />
         <Process.Step
@@ -133,15 +108,7 @@ Default.argTypes = {
   },
   activeStep: {
     control: "inline-radio",
-    options: [1, 2, 3, 4, 5, 6, 7],
-  },
-  completedIcon: {
-    control: "inline-radio",
-    options: ["<Icon/>", "<empty string>", undefined],
-  },
-  uncompletedIcon: {
-    control: "inline-radio",
-    options: ["<Icon/>", "<empty string>", undefined],
+    options: [0, 1, 2, 3, 4, 5, 6, 7, 8],
   },
   step4Title: { name: "Step 4: Title" },
   step4Date: { name: "Step 4: Date" },
@@ -166,8 +133,6 @@ Default.argTypes = {
 Default.args = {
   variant: "default",
   activeStep: 3,
-  completedIcon: undefined,
-  uncompletedIcon: undefined,
   step4Title:
     "Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og forklares i sitt fulle i denne labelen",
   step4Date: new Date().toDateString(),
@@ -257,12 +222,7 @@ export const Icons: StoryFn<Story> = () => {
 
       <div>
         <h3>Process-icons</h3>
-        <Process
-          activeStep={activeStep}
-          variant="icon"
-          completedIcon={<FileCheckmarkIcon />}
-          uncompletedIcon={<NotePencilIcon />}
-        >
+        <Process activeStep={activeStep} variant="icon">
           <Process.Step {...props} title="Start søknad" />
           <Process.Step {...props} title="Personopplysninger" />
           <Process.Step {...props} title="Saksopplysninger" />
@@ -315,12 +275,7 @@ export const Icons: StoryFn<Story> = () => {
 
       <div>
         <h3>Mix</h3>
-        <Process
-          activeStep={activeStep}
-          variant="icon"
-          completedIcon={<FileCheckmarkIcon />}
-          uncompletedIcon={<NotePencilIcon />}
-        >
+        <Process activeStep={activeStep} variant="icon">
           <Process.Step {...props} title="Process-level completed icon" />
           <Process.Step {...props} title="Process-level completed icon" />
           <Process.Step
