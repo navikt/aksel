@@ -118,9 +118,6 @@ export const Process: ProcessComponent = forwardRef<
                   index >= activeStep && "navds-process__line--uncompleted",
                 )}
               />
-              {/* TODO (stw): Add step level props: 'showDate=T|F, showDescription=T|F, showSlot=T|F, showLine=T|F' */}
-              {/* TODO (stw): Or: 'showDate=date|F, showDescription=description|F, showSlot=slot|F, showLine=T|F' */}
-              {/* TODO (stw): Pass step-props with context */}
               <ProcessContextProvider
                 variant={variant}
                 activeStep={activeStep}
