@@ -3,7 +3,6 @@ import { useRenameCSS } from "../theme/Theme";
 import Step, { ProcessStepProps } from "./Step";
 import { ProcessContextProvider } from "./context";
 
-// TODO (stw): Does it make sense to support legacy with a new component?
 export interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * Current active step.
