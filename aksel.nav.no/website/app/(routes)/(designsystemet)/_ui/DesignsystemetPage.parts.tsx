@@ -76,12 +76,12 @@ function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
         </Link>
       )}
       <Link
-        href="/grunnleggende/kode/endringslogg"
+        href="/grunnleggende/endringslogg"
         variant="subtle"
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "komponent-header",
-            url: "/grunnleggende/kode/endringslogg",
+            url: "/grunnleggende/endringslogg",
           })
         }
       >
