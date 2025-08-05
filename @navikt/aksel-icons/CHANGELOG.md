@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 7.26.0
+
+### Minor Changes
+
+- Icons: New icons 'ChatAdd' and 'Theme'. ([#3958](https://github.com/navikt/aksel/pull/3958))
+
 ## 7.25.2
 
 ## 7.25.1

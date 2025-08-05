@@ -1,5 +1,13 @@
 # @navikt/aksel
 
+## 7.26.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.26.0
+  - @navikt/ds-tokens@7.26.0
+
 ## 7.25.2
 
 ### Patch Changes
