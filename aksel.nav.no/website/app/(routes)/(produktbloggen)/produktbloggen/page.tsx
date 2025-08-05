@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Image } from "sanity";
 import { BodyLong, Heading, Show, VStack } from "@navikt/ds-react";
 import { BloggArticleBlock } from "@/app/(routes)/(produktbloggen)/produktbloggen/_ui/BloggArticleBlogg";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -18,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
     query: BLOGG_LANDINGSSIDE_PAGE_QUERY,
   });
 
-  const pageOgImage = urlForOpenGraphImage(pageData?.page.seo?.image as Image);
+  const pageOgImage = urlForOpenGraphImage(pageData?.page.seo?.image);
 
   return {
     title: "Produktbloggen",

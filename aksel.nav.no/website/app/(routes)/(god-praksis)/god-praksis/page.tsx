@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
-import { Image } from "sanity";
 import {
   BodyLong,
   Box,
@@ -38,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
       seo?.meta ??
       `Mange som jobber med produktutvikling i Nav sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her.`,
     openGraph: {
-      images: urlForOpenGraphImage(seo?.image as Image),
+      images: urlForOpenGraphImage(seo?.image),
     },
   };
 }

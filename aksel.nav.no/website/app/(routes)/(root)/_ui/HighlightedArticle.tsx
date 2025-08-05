@@ -1,7 +1,6 @@
 import cl from "clsx";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { Image } from "sanity";
 import {
   BodyLong,
   BodyShort,
@@ -31,32 +30,31 @@ export const Highlight = ({
   compact: boolean;
 }) => {
   const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
-  const useStatusImage =
-    isKomponent(article) && (article.status?.bilde as Image);
+  const useStatusImage = isKomponent(article) && article.status?.bilde;
 
   const date = useFormatedDate(article?.publishedAt ?? article._createdAt);
 
   const imageUrl = urlForImage(
-    isKomponent(article) ? (article.status?.bilde as Image) : null,
+    isKomponent(article) ? article.status?.bilde : null,
   )
     ?.quality(100)
     .auto("format")
     .url();
 
   const imageBlurUrl = urlForImage(
-    isKomponent(article) ? (article.status?.bilde as Image) : null,
+    isKomponent(article) ? article.status?.bilde : null,
   )
     ?.width(24)
     .height(24)
     .blur(10)
     .url();
 
-  const seoImageUrl = urlForImage(article?.seo?.image as Image)
+  const seoImageUrl = urlForImage(article?.seo?.image)
     ?.quality(100)
     .auto("format")
     .url();
 
-  const seoImageBlurUrl = urlForImage(article?.seo?.image as Image)
+  const seoImageBlurUrl = urlForImage(article?.seo?.image)
     ?.width(24)
     .height(24)
     .blur(10)
