@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { CheckmarkIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
-import { Label } from "../typography";
+import { BodyLong, BodyShort, Label } from "../typography";
 import { OverridableComponent } from "../util/types";
 import { useProcessContext } from "./context";
 
@@ -81,9 +81,19 @@ export const Step: OverridableComponent<ProcessStepProps, HTMLDivElement> =
               {title}
             </Label>
           )}
-          {date && <span className={cn("navds-process__content")}>{date}</span>}
+          {date && (
+            <BodyShort
+              size="small"
+              textColor="subtle"
+              className={cn("navds-process__content")}
+            >
+              {date}
+            </BodyShort>
+          )}
           {description && (
-            <span className={cn("navds-process__content")}>{description}</span>
+            <BodyLong size="medium" className={cn("navds-process__content")}>
+              {description}
+            </BodyLong>
           )}
           <div className={cn("navds-process__content")}>{children}</div>
         </div>

@@ -38,12 +38,27 @@ export const Default = ({
     ...{ href: "#" },
   };
 
+  const date = new Date();
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Process activeStep={activeStep} {...props}>
-        <Process.Step {...newProps} title="Start søknad" />
-        <Process.Step {...newProps} title="Personopplysninger" />
-        <Process.Step {...newProps} title="Saksopplysninger" />
+        <Process.Step
+          {...newProps}
+          title="Start søknad"
+          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+        />
+        <Process.Step
+          {...newProps}
+          title="Personopplysninger"
+          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          description="Send inn personopplysninger"
+        />
+        <Process.Step
+          {...newProps}
+          title="Saksopplysninger"
+          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          description="Send inn saksopplysninger"
+        />
         <Process.Step
           {...newProps}
           title={step4Title}
@@ -90,9 +105,24 @@ export const Default = ({
             </>
           )}
         </Process.Step>
-        <Process.Step {...newProps} title="Vedlegg" />
-        <Process.Step {...newProps} title="Oppsummering" />
-        <Process.Step {...newProps} title="Innsending" />
+        <Process.Step
+          {...newProps}
+          title="Vedlegg"
+          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          description="Send inn vedlegg"
+        />
+        <Process.Step
+          {...newProps}
+          title="Oppsummering"
+          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          description="Les oppsummering"
+        />
+        <Process.Step
+          {...newProps}
+          title="Innsending"
+          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          description="Send inn søknaden"
+        />
       </Process>
     </div>
   );

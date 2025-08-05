@@ -57,10 +57,10 @@
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: [circle] var(--__axc-process-circle-size) [content] auto;
-  gap: var(--ax-space-16);
+  gap: var(--ax-space-8) var(--ax-space-16);
   justify-content: flex-start;
   padding: var(--__axc-process-border-width);
-  margin: calc(var(--__axc-process-border-width) * -1) calc(var(--__axc-process-border-width) * -1) 0;
+  margin: calc(var(--__axc-process-border-width) * -1) calc(var(--__axc-process-border-width) * -1) var(--ax-space-8);
   width: 100%;
 
   .aksel-process__item:last-child & {
