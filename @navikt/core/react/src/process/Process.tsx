@@ -14,11 +14,13 @@ export interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * `<Process.Step />` elements.
    */
-  // children: React.ReactNode;
   children: React.ReactElement<typeof Step>[];
   /**
-   * Variant of the bullets to use: a small solid bubble,
-   * a bubble that fits a number inside, or a bubble that fits an icon inside
+   * Styling variant for the step indicators:
+   * - "default": Small bullet-like circles
+   * - "number": Large circles with sequential numbers
+   * - "icon": Large circles with checkmarks for completed steps
+   *
    * @default "default"
    */
   variant?: ProcessVariant;
@@ -36,7 +38,7 @@ interface ProcessComponent
 }
 
 /**
- * A component that displays a Process with clickable steps.
+ * A component that presents a Process as a vertical line of steps.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/Process)
  * @see 🏷️ {@link ProcessProps}
@@ -51,9 +53,25 @@ interface ProcessComponent
  *     aria-labelledby="Process-heading"
  *     activeStep={activeStep}
  *   >
- *     <Process.Step href="#">Start søknad</Process.Step>
- *     <Process.Step href="#">Saksopplysninger</Process.Step>
- *     <Process.Step href="#">Vedlegg</Process.Step>
+ *     <Process.Step
+ *       title="Start søknad"
+ *       date="21. august 2025"
+ *     />
+ *     <Process.Step
+ *       title="Saksopplysninger"
+ *       date="22. august 2025"
+ *       description="Saksopplysninger er sendt inn"
+ *     />
+ *     <Process.Step
+ *       title="Vedlegg"
+ *       date="25. august 2025"
+ *       description="Vedlegg er lastet opp"
+ *     />
+ *     <Process.Step
+ *       title="Vedtak"
+ *       date="8. september 2025"
+ *       description="Det er gjort endelig vedtak i saken"
+ *     />
  *   </Process>
  * </>
  * ```

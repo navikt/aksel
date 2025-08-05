@@ -11,20 +11,28 @@ export interface ProcessStepProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   title?: string;
   /**
-   * Date/timestamp to display under the title
+   * Date to display under the title
    */
   date?: string;
   /**
-   * Descriptive plaintext
+   * A description of the step
    */
   description?: string;
   /**
-   * Content to display beside the line under the title (and date and/or
+   * Rich content to display under the title (and date and/or
    * description, if provided)
    */
   children?: React.ReactNode;
   /**
-   * icon
+   * Icon to display inside the circle.
+   *
+   * Providing an icon will override the variant set on the parent Process for
+   * this step, forcing a large circle with the specified icon for this step
+   * only.
+   *
+   * If no icon is provided and the variant is "icon", a <CheckmarkIcon /> will
+   * be used by default.
+   *
    * @default <CheckmarkIcon />
    */
   icon?: React.ReactNode;

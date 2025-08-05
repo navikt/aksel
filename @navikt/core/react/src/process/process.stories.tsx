@@ -314,7 +314,6 @@ export const Icons: StoryFn<Story> = () => {
   );
 };
 
-// TODO (stw): data-color is overridden inside Process because it currently uses data-color='info' to conform with Figma-sketches
 export const ColorRole = () => (
   <Process data-color="brand-magenta" variant="icon" activeStep={4}>
     <Process.Step title="Start søknad" />
