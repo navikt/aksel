@@ -281,11 +281,7 @@ export const Icons: StoryFn<Story> = () => {
         <Process activeStep={activeStep} variant="icon">
           <Process.Step {...props} title="Process-level completed icon" />
           <Process.Step {...props} title="Process-level completed icon" />
-          <Process.Step
-            {...props}
-            icon={<CalculatorFillIcon />}
-            title="Step override"
-          />
+          <Process.Step {...props} icon="" title="Step override (blank)" />
           <Process.Step
             {...props}
             title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
@@ -295,7 +291,11 @@ export const Icons: StoryFn<Story> = () => {
             icon={<PaperclipIcon />}
             title="Step override"
           />
-          <Process.Step {...props} icon="" title="Step override (blank)" />
+          <Process.Step
+            {...props}
+            icon={<CalculatorFillIcon />}
+            title="Step override"
+          />
           <Process.Step {...props} title="Process-level uncompleted icon" />
         </Process>
       </div>
