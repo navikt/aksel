@@ -7,15 +7,26 @@ const Example = () => {
 
   return (
     <>
-      <Heading size="medium" spacing level="2" id="process-heading">
-        Steg
+      <Heading size="medium" spacing level="2" id="Process-heading">
+        Søknadssteg
       </Heading>
-      <Process aria-labelledby="process-heading" activeStep={activeStep}>
-        <Process.Step>Innledning</Process.Step>
-        <Process.Step>Saksopplysninger</Process.Step>
-        <Process.Step>Begrunnelse</Process.Step>
-        <Process.Step>Oppsummering</Process.Step>
-        <Process.Step>Bekreftelse</Process.Step>
+      <Process aria-labelledby="Process-heading" activeStep={activeStep}>
+        <Process.Step title="Start søknad" date="21. august 2025" />
+        <Process.Step
+          title="Saksopplysninger"
+          date="22. august 2025"
+          description="Saksopplysninger er sendt inn"
+        />
+        <Process.Step
+          title="Vedlegg"
+          date="25. august 2025"
+          description="Vedlegg er lastet opp"
+        />
+        <Process.Step
+          title="Vedtak"
+          date="8. september 2025"
+          description="Det er gjort endelig vedtak i saken"
+        />
       </Process>
     </>
   );
