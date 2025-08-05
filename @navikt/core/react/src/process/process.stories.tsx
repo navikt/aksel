@@ -240,22 +240,6 @@ export const Icons: StoryFn<Story> = () => {
       </div>
 
       <div>
-        <h3>Process-icons</h3>
-        <Process activeStep={activeStep} variant="icon">
-          <Process.Step {...props} title="Start søknad" />
-          <Process.Step {...props} title="Personopplysninger" />
-          <Process.Step {...props} title="Saksopplysninger" />
-          <Process.Step
-            {...props}
-            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
-          />
-          <Process.Step {...props} title="Vedlegg" />
-          <Process.Step {...props} title="Oppsummering" />
-          <Process.Step {...props} title="Innsending" />
-        </Process>
-      </div>
-
-      <div>
         <h3>Step-icons</h3>
         <Process activeStep={activeStep} variant="icon">
           <Process.Step
