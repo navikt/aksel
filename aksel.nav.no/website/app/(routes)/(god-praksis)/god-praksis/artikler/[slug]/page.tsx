@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import { PortableTextBlock } from "next-sanity";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
-import { Image } from "sanity";
 import { TagFillIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -45,9 +44,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     stega: false,
   });
 
-  const pageOgImage = urlForOpenGraphImage(seoData?.seo?.image as Image);
+  const pageOgImage = urlForOpenGraphImage(seoData?.seo?.image);
   const fallbackOgImage = urlForOpenGraphImage(
-    seoData?.undertema?.[0]?.tema?.image as Image,
+    seoData?.undertema?.[0]?.tema?.image,
   );
 
   return {

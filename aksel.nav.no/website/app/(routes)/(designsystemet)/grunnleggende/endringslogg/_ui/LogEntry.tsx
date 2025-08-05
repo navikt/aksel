@@ -7,7 +7,6 @@ import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRef } from "react";
-import type { Image as SanityImage } from "sanity";
 import {
   BodyShort,
   BoxNew,
@@ -38,11 +37,7 @@ const Hero = ({
     alt={herobilde.alt || ""}
     loading="lazy"
     decoding="async"
-    src={
-      urlForImage(herobilde as SanityImage)
-        ?.auto("format")
-        .url() || ""
-    }
+    src={urlForImage(herobilde)?.auto("format").url() || ""}
     width={1200}
     height={630}
   />

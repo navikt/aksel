@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { Image } from "sanity";
 import { BodyShort } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { urlForImage } from "@/app/_sanity/utils";
@@ -15,12 +14,8 @@ function CompareImages(props: ExtractPortableComponentProps<"compare_images">) {
     return null;
   }
 
-  const imageOneUrl = urlForImage(image_1 as Image)
-    ?.auto("format")
-    .url();
-  const imageTwoUrl = urlForImage(image_2 as Image)
-    ?.auto("format")
-    .url();
+  const imageOneUrl = urlForImage(image_1)?.auto("format").url();
+  const imageTwoUrl = urlForImage(image_2)?.auto("format").url();
 
   if (!imageOneUrl || !imageTwoUrl) {
     return null;
