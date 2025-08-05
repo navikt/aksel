@@ -66,7 +66,6 @@ export const Process: ProcessComponent = forwardRef<
   activeStep = activeStep - 1;
   return (
     <ol
-      // TODO (stw): data-color set on higher level? Otherwise set to 'info'
       data-color="info"
       {...rest}
       ref={ref}
