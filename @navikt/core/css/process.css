@@ -41,10 +41,10 @@
 
 .navds-process__line--2 {
   grid-row: line-2;
+}
 
-  .navds-process__item:last-of-type & {
-    display: none;
-  }
+:where(.navds-process__item:last-of-type) .navds-process__line--2 {
+  display: none;
 }
 
 .navds-process__line--uncompleted {
@@ -62,10 +62,10 @@
   padding: var(--navds-process-border-width);
   margin: calc(var(--navds-process-border-width) * -1) calc(var(--navds-process-border-width) * -1) var(--a-spacing-2);
   width: 100%;
+}
 
-  .navds-process__item:last-child & {
-    margin-bottom: 0;
-  }
+:where(.navds-process__item:last-child) .navds-process__step {
+  margin-bottom: 0;
 }
 
 .navds-process__circle {
