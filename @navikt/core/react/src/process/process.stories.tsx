@@ -1,4 +1,5 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { format } from "date-fns";
 import React, { useState } from "react";
 import {
   CalculatorFillIcon,
@@ -24,6 +25,11 @@ export default meta;
 
 type Story = StoryObj<typeof Process>;
 
+const getDateAfter = (days) => {
+  const date = new Date();
+  return format(new Date(date.setDate(date.getDate() + days)), "d. MMMM yyy");
+};
+
 export const Default = ({
   activeStep,
   step4Title,
@@ -38,25 +44,24 @@ export const Default = ({
     ...{ href: "#" },
   };
 
-  const date = new Date();
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Process activeStep={activeStep} {...props}>
         <Process.Step
           {...newProps}
           title="Start søknad"
-          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          date={getDateAfter(0)}
         />
         <Process.Step
           {...newProps}
           title="Personopplysninger"
-          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          date={getDateAfter(3)}
           description="Send inn personopplysninger"
         />
         <Process.Step
           {...newProps}
           title="Saksopplysninger"
-          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          date={getDateAfter(6)}
           description="Send inn saksopplysninger"
         />
         <Process.Step
@@ -108,19 +113,19 @@ export const Default = ({
         <Process.Step
           {...newProps}
           title="Vedlegg"
-          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          date={getDateAfter(12)}
           description="Send inn vedlegg"
         />
         <Process.Step
           {...newProps}
           title="Oppsummering"
-          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          date={getDateAfter(15)}
           description="Les oppsummering"
         />
         <Process.Step
           {...newProps}
           title="Innsending"
-          date={new Date(date.setDate(date.getDate() + 3)).toDateString()}
+          date={getDateAfter(18)}
           description="Send inn søknaden"
         />
       </Process>
@@ -151,7 +156,7 @@ Default.args = {
   activeStep: 3,
   step4Title:
     "Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og forklares i sitt fulle i denne labelen",
-  step4Date: new Date().toDateString(),
+  step4Date: getDateAfter(9),
   step4Description:
     "Description of customer centric sorry i didn't get your email proceduralize, and first-order optimal strategies. I dont care if you got some copy, why you dont use officeipsumcom or something like that ? wheelhouse. Viral engagement new economy, this proposal is a win-win situation which will cause a stellar paradigm shift, and produce a multi-fold increase in deliverables Bob called an all-hands this afternoon. Fire up your browser touch base innovation is hot right now so this medium needs to be more dynamic.",
   step4ShowSlot: true,
