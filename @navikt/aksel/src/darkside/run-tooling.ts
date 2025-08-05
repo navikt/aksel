@@ -205,7 +205,6 @@ async function runCodeshift(
   await jscodeshift.run(codemodPath, filepaths, {
     babel: true,
     ignorePattern: GLOB_IGNORE_PATTERNS,
-    extensions: "tsx,ts,jsx,js",
     parser: "tsx",
     verbose: 2,
     runInBand: true,
