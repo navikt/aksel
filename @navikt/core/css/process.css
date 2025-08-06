@@ -1,6 +1,6 @@
 .navds-process {
-  --navds-process-circle-large: 1.75rem;
-  --navds-process-circle-small: 1rem;
+  --navds-process-circle-large: 32px;
+  --navds-process-circle-small: 16px;
   --navds-process-circle-size: var(--navds-process-circle-large);
   --navds-process-border-width: 2px;
   --navds-process-line-length: 1rem;
@@ -75,6 +75,7 @@
   place-items: center;
   width: var(--navds-process-circle-size);
   height: var(--navds-process-circle-size);
+  font-size: 1.5rem;
   line-height: 1;
   border-radius: var(--a-border-radius-full);
   border: var(--navds-process-border-width) solid var(--a-border-info);

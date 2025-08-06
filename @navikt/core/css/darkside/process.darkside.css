@@ -1,6 +1,6 @@
 .aksel-process {
-  --__axc-process-circle-large: 1.75rem;
-  --__axc-process-circle-small: 1rem;
+  --__axc-process-circle-large: 32px;
+  --__axc-process-circle-small: 16px;
   --__axc-process-circle-size: var(--__axc-process-circle-large);
   --__axc-process-border-width: 2px;
   --__axc-process-line-length: 1rem;
@@ -75,6 +75,7 @@
   place-items: center;
   width: var(--__axc-process-circle-size);
   height: var(--__axc-process-circle-size);
+  font-size: 1.5rem;
   line-height: 1;
   border-radius: var(--ax-radius-full);
   border: var(--__axc-process-border-width) solid var(--ax-border-default);
