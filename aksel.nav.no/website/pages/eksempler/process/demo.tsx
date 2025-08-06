@@ -12,21 +12,15 @@ const Example = () => {
       </Heading>
       <Process aria-labelledby="Process-heading" activeStep={activeStep}>
         <Process.Step title="Start søknad" date="21. august 2025" />
-        <Process.Step
-          title="Saksopplysninger"
-          date="22. august 2025"
-          description="Saksopplysninger er sendt inn"
-        />
-        <Process.Step
-          title="Vedlegg"
-          date="25. august 2025"
-          description="Vedlegg er lastet opp"
-        />
-        <Process.Step
-          title="Vedtak"
-          date="8. september 2025"
-          description="Det er gjort endelig vedtak i saken"
-        />
+        <Process.Step title="Saksopplysninger" date="22. august 2025">
+          Saksopplysninger er sendt inn
+        </Process.Step>
+        <Process.Step title="Vedlegg" date="25. august 2025">
+          Vedlegg er lastet opp
+        </Process.Step>
+        <Process.Step title="Vedtak" date="8. september 2025">
+          Det er gjort endelig vedtak i saken
+        </Process.Step>
       </Process>
     </>
   );
