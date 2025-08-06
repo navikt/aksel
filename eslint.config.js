@@ -29,7 +29,6 @@ module.exports = tseslint.config([
     "@navikt/aksel/**/*.input.*",
     "@navikt/aksel/**/*.output.*",
     "**/codemod/**/*.js",
-    "!**/.storybook",
     "**/playwright-report/**/*",
     "**/tokens/**/plugin.js",
     "**/.next",
