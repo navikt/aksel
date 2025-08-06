@@ -101,6 +101,7 @@ export const Process: ProcessComponent = forwardRef<
                 !stepProps.icon &&
                 "navds-process__item-no-gap",
             )}
+            data-color={stepProps["data-color"]}
             key={index + (children?.toString?.() ?? "")}
           >
             <span

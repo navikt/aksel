@@ -32,6 +32,7 @@
   min-height: var(--__axc-process-line-length);
   justify-self: center;
   grid-column: 1;
+  border-radius: var(--__axc-process-border-width) / var(--__axc-process-border-width);
 }
 
 .aksel-process__line--1 {
@@ -57,10 +58,10 @@
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: [circle] var(--__axc-process-circle-size) [content] auto;
-  gap: var(--ax-space-8) var(--ax-space-16);
+  gap: var(--ax-space-16);
   justify-content: flex-start;
   padding: var(--__axc-process-border-width);
-  margin: calc(var(--__axc-process-border-width) * -1) calc(var(--__axc-process-border-width) * -1) var(--ax-space-8);
+  margin: calc(var(--__axc-process-border-width) * -1) calc(var(--__axc-process-border-width) * -1) var(--ax-space-16);
   width: 100%;
 
   .aksel-process__item:last-child & {
@@ -83,15 +84,25 @@
 
 .aksel-process__circle--small {
   --__axc-process-circle-size: var(--__axc-process-circle-small);
+
+  margin-top: calc((var(--__axc-process-circle-large) - var(--__axc-process-circle-small)) / 2);
 }
 
-.aksel-process__circle--margin {
-  margin-top: calc((var(--__axc-process-circle-large) - var(--__axc-process-circle-small)) / 2);
+.aksel-process__circle[data-completed="true"] {
+  color: var(--ax-text-contrast);
+  background: var(--ax-bg-strong);
 }
 
 .aksel-process__circle--completed {
   color: var(--ax-text-contrast);
   background: var(--ax-bg-strong);
+}
+
+.aksel-process__circle[data-current="true"] {
+  color: var(--ax-text-contrast);
+  background: var(--ax-bg-strong);
+  outline: 2px solid var(--ax-border-default);
+  outline-offset: 2px;
 }
 
 .aksel-process__circle--current {
@@ -113,7 +124,12 @@
 
 .aksel-process__content-title {
   line-height: 1.5;
-  padding-top: 0.035rem;
+  padding-top: var(--ax-space-4);
+  padding-bottom: var(--ax-space-4);
+}
+
+.aksel-process__content-date:first-child {
+  padding-top: var(--ax-space-6);
 }
 
 /* TODO (stw): Test on Windows with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */

@@ -32,6 +32,7 @@
   min-height: var(--navds-process-line-length);
   justify-self: center;
   grid-column: 1;
+  border-radius: var(--navds-process-border-width) / var(--navds-process-border-width);
 }
 
 .navds-process__line--1 {
@@ -57,10 +58,10 @@
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: [circle] var(--navds-process-circle-size) [content] auto;
-  gap: var(--a-spacing-2) var(--a-spacing-4);
+  gap: var(--a-spacing-4);
   justify-content: flex-start;
   padding: var(--navds-process-border-width);
-  margin: calc(var(--navds-process-border-width) * -1) calc(var(--navds-process-border-width) * -1) var(--a-spacing-2);
+  margin: calc(var(--navds-process-border-width) * -1) calc(var(--navds-process-border-width) * -1) var(--a-spacing-4);
   width: 100%;
 }
 
@@ -83,10 +84,13 @@
 
 .navds-process__circle--small {
   --navds-process-circle-size: var(--navds-process-circle-small);
+
+  margin-top: calc((var(--navds-process-circle-large) - var(--navds-process-circle-small)) / 2);
 }
 
-.navds-process__circle--margin {
-  margin-top: calc((var(--navds-process-circle-large) - var(--navds-process-circle-small)) / 2);
+.navds-process__circle[data-completed="true"] {
+  color: var(--a-text-on-action);
+  background: var(--a-border-info);
 }
 
 .navds-process__circle--completed {
@@ -94,11 +98,23 @@
   background: var(--a-border-info);
 }
 
+.navds-process__circle[data-current="true"] {
+  color: var(--a-text-on-inverted);
+  background: var(--a-border-info);
+  outline: 2px solid var(--a-border-info);
+  outline-offset: 2px;
+}
+
 .navds-process__circle--current {
   color: var(--a-text-on-inverted);
   background: var(--a-border-info);
   outline: 2px solid var(--a-border-info);
   outline-offset: 2px;
+}
+
+.navds-process__circle[data-completed="false"] {
+  color: var(--a-text-subtle);
+  border-color: var(--a-border-default);
 }
 
 .navds-process__circle--uncompleted {
@@ -113,7 +129,12 @@
 
 .navds-process__content-title {
   line-height: 1.5;
-  padding-top: 0.035rem;
+  padding-top: var(--a-spacing-1);
+  padding-bottom: var(--a-spacing-1);
+}
+
+.navds-process__content-date:first-child {
+  padding-top: var(--a-spacing-1-alt);
 }
 
 /* TODO (stw): Test on Windows with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */

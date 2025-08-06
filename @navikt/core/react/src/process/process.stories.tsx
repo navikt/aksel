@@ -34,41 +34,24 @@ export const Default = ({
   activeStep,
   step4Title,
   step4Date,
-  step4Description,
   step4ShowSlot,
   step4Icon,
+  step4Completed,
   ...props
 }) => {
-  const newProps = {
-    onClick: (e) => e.preventDefault(),
-    ...{ href: "#" },
-  };
-
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Process activeStep={activeStep} {...props}>
+        <Process.Step title="Start søknad" date={getDateAfter(0)} />
+        <Process.Step title="Personopplysninger" date={getDateAfter(3)}>
+          Send inn personopplysninger
+        </Process.Step>
+        <Process.Step title="Saksopplysninger" date={getDateAfter(6)}>
+          Send inn saksopplysninger
+        </Process.Step>
         <Process.Step
-          {...newProps}
-          title="Start søknad"
-          date={getDateAfter(0)}
-        />
-        <Process.Step
-          {...newProps}
-          title="Personopplysninger"
-          date={getDateAfter(3)}
-          description="Send inn personopplysninger"
-        />
-        <Process.Step
-          {...newProps}
-          title="Saksopplysninger"
-          date={getDateAfter(6)}
-          description="Send inn saksopplysninger"
-        />
-        <Process.Step
-          {...newProps}
           title={step4Title}
           date={step4Date}
-          description={step4Description}
           icon={
             step4Icon === "<Icon/>" ? (
               <GavelSoundBlockIcon />
@@ -78,6 +61,7 @@ export const Default = ({
               step4Icon
             )
           }
+          completed={step4Completed}
         >
           {step4ShowSlot && (
             <>
@@ -110,45 +94,42 @@ export const Default = ({
             </>
           )}
         </Process.Step>
-        <Process.Step
-          {...newProps}
-          title="Vedlegg"
-          date={getDateAfter(12)}
-          description="Send inn vedlegg"
-        />
-        <Process.Step
-          {...newProps}
-          title="Oppsummering"
-          date={getDateAfter(15)}
-          description="Les oppsummering"
-        />
-        <Process.Step
-          {...newProps}
-          title="Innsending"
-          date={getDateAfter(18)}
-          description="Send inn søknaden"
-        />
+        <Process.Step title="Vedlegg" date={getDateAfter(12)}>
+          Send inn vedlegg
+        </Process.Step>
+        <Process.Step title="Oppsummering" date={getDateAfter(15)}>
+          Les oppsummering
+        </Process.Step>
+        <Process.Step title="Innsending" date={getDateAfter(18)}>
+          Send inn søknaden
+        </Process.Step>
       </Process>
     </div>
   );
 };
 Default.argTypes = {
   variant: {
+    name: "'variant'-prop",
     control: "inline-radio",
     options: ["default", "icon", "number"],
   },
   activeStep: {
+    name: "'activeStep'-prop",
     control: "inline-radio",
     options: [0, 1, 2, 3, 4, 5, 6, 7, 8],
   },
-  step4Title: { name: "Step 4: Title" },
-  step4Date: { name: "Step 4: Date" },
-  step4Description: { name: "Step 4: Description" },
-  step4ShowSlot: { name: "Step 4: Show slot" },
+  step4Title: { name: "Step 4: 'title'-prop" },
+  step4Date: { name: "Step 4: 'date'-prop" },
+  step4ShowSlot: { name: "Step 4: Add dummy slot" },
   step4Icon: {
-    name: "Step 4: Icon",
+    name: "Step 4: 'icon'-prop",
     control: "inline-radio",
     options: ["<Icon/>", "<empty string>", undefined],
+  },
+  step4Completed: {
+    name: "Step 4: 'completed'-prop",
+    control: "inline-radio",
+    options: [true, false, undefined],
   },
 };
 Default.args = {
@@ -157,10 +138,9 @@ Default.args = {
   step4Title:
     "Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og forklares i sitt fulle i denne labelen",
   step4Date: getDateAfter(9),
-  step4Description:
-    "Description of customer centric sorry i didn't get your email proceduralize, and first-order optimal strategies. I dont care if you got some copy, why you dont use officeipsumcom or something like that ? wheelhouse. Viral engagement new economy, this proposal is a win-win situation which will cause a stellar paradigm shift, and produce a multi-fold increase in deliverables Bob called an all-hands this afternoon. Fire up your browser touch base innovation is hot right now so this medium needs to be more dynamic.",
   step4ShowSlot: true,
   step4Icon: "<Icon/>",
+  step4Completed: undefined,
 };
 
 export const Variants: StoryFn<Story> = () => {
