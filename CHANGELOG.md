@@ -1,5 +1,17 @@
 # Changelog
 
+## 7.26.0
+
+### @navikt/aksel-icons
+
+- Icons: New icons 'ChatAdd' and 'Theme'. ([#3958](https://github.com/navikt/aksel/pull/3958))
+
+## 7.25.2
+
+### @navikt/aksel
+
+- CLI: Codemods now respect filepath globs instead of ignoring some based on file-extension. ([#3955](https://github.com/navikt/aksel/pull/3955))
+
 ## 7.25.1
 
 ### @navikt/ds-tokens
@@ -114,10 +126,6 @@
 
 ## 7.22.0
 
-### @navikt/aksel
-
-- Darkside: Added migration-support for border-radius token update. ([#3784](https://github.com/navikt/aksel/pull/3784))
-
 ### @navikt/ds-tokens
 
 - Border-radius: Add new `radius`-tokens that will replace `border-radius`-tokens. T-shirt sizing is replaced with numbers reflecting its value. `--a-border-radius-medium` is now `--ax-radius-4`. Until darkside-theming is mainlined, we will continue to support both new and legacy border-radius side by side. ([#3784](https://github.com/navikt/aksel/pull/3784))
@@ -135,6 +143,10 @@
 - Box: Add support for new `radius`-tokens that will replace `borderRadius`-tokens when `darkside` is set as main. ([#3784](https://github.com/navikt/aksel/pull/3784))
 
 * ConfirmationPanel: Now tagged as deprecated. [See documentation](https://aksel.nav.no/komponenter/legacy/confirmationpanel#99622218e7f0) for more information. ([#3789](https://github.com/navikt/aksel/pull/3789))
+
+### @navikt/aksel
+
+- Darkside: Added migration-support for border-radius token update. ([#3784](https://github.com/navikt/aksel/pull/3784))
 
 ## 7.21.1
 
@@ -740,10 +752,6 @@
 
 ## 6.16.1
 
-### @navikt/aksel
-
-- Aksel-CLI: Bump jscodeshift-add-imports to 1.0.11. ([#3099](https://github.com/navikt/aksel/pull/3099))
-
 ### @navikt/ds-css
 
 - Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
@@ -755,6 +763,10 @@
 - :adhesive_bandage: Combobox: Placeholder goes away when an option is selected ([#3101](https://github.com/navikt/aksel/pull/3101))
 
 - Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
+
+### @navikt/aksel
+
+- Aksel-CLI: Bump jscodeshift-add-imports to 1.0.11. ([#3099](https://github.com/navikt/aksel/pull/3099))
 
 ## 6.16.0
 
@@ -958,10 +970,6 @@
 
 ## 6.6.0
 
-### @navikt/aksel
-
-- Aksel CLI: Fjernet deprecated komponenter fra css oversikt. ([#2860](https://github.com/navikt/aksel/pull/2860))
-
 ### @navikt/ds-css
 
 - :sparkles: Ny komponent FormSummary ([#2802](https://github.com/navikt/aksel/pull/2802))
@@ -971,6 +979,10 @@
 - :sparkles: Ny komponent FormSummary ([#2802](https://github.com/navikt/aksel/pull/2802))
 
 * Combobox: Prevents "Enter" while Combobox is focused from submitting form. ([#2861](https://github.com/navikt/aksel/pull/2861))
+
+### @navikt/aksel
+
+- Aksel CLI: Fjernet deprecated komponenter fra css oversikt. ([#2860](https://github.com/navikt/aksel/pull/2860))
 
 ## 6.5.0
 
@@ -1096,10 +1108,6 @@
 
 ## 6.0.0
 
-### @navikt/aksel
-
-- Chat: Fjernet deprecated props `backgroundColor` og `avatarBgColor`. Bruk prop `variant` som erstatning. ([#2623](https://github.com/navikt/aksel/pull/2623))
-
 ### @navikt/ds-tokens
 
 - Tokens: La til nytt brekkpunkt `2xl` for `1440px`. Alle primitives er oppdatert for å reflektere oppdateringen. Brukere av Tailwind vil måtte sjekke at overskriving av `screen: "2xl"` ikke brekker app. ([#2623](https://github.com/navikt/aksel/pull/2623))
@@ -1149,6 +1157,10 @@
 - ESM: ds-react og aksel-icons støtter nå native ESM 🎉 ([#2623](https://github.com/navikt/aksel/pull/2623))
 
 * SSR: ds-react og aksel-icons støtter nå `use client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### @navikt/aksel
+
+- Chat: Fjernet deprecated props `backgroundColor` og `avatarBgColor`. Bruk prop `variant` som erstatning. ([#2623](https://github.com/navikt/aksel/pull/2623))
 
 ### @navikt/aksel-stylelint
 
@@ -2215,12 +2227,6 @@
 
 ## 4.0.0
 
-### @navikt/aksel
-
-- Codemod for migrering av Datepicker/Monthpicker ut av Beta. `npx @navikt/aksel codemod v4-date` ([PR](https://github.com/navikt/aksel/pull/2026))
-
-- Codemods for migrering fra `@navikt/ds-react-internal` til `@navikt/ds-react` [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h3b8538e1981d) ([PR](https://github.com/navikt/aksel/pull/2026))
-
 ### @navikt/ds-css
 
 - All styling fra `@navikt/ds-css-internal` er flyttet til `@navikt/ds-css`. ([PR](https://github.com/navikt/aksel/pull/2026))
@@ -2236,6 +2242,12 @@
 - Datepicker og Monthpicker er ute av beta. [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h4ef68ae743b0) ([PR](https://github.com/navikt/aksel/pull/2026))
 
 - Komponenter i `@navikt/ds-react-internal` er flyttet over til `@navikt/ds-react`. [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h3b8538e1981d) ([PR](https://github.com/navikt/aksel/pull/2026))
+
+### @navikt/aksel
+
+- Codemod for migrering av Datepicker/Monthpicker ut av Beta. `npx @navikt/aksel codemod v4-date` ([PR](https://github.com/navikt/aksel/pull/2026))
+
+- Codemods for migrering fra `@navikt/ds-react-internal` til `@navikt/ds-react` [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h3b8538e1981d) ([PR](https://github.com/navikt/aksel/pull/2026))
 
 ## 3.4.2
 

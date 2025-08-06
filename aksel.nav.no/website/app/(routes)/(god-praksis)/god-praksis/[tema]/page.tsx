@@ -1,7 +1,6 @@
 import { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Image } from "sanity";
 import {
   BodyLong,
   Box,
@@ -50,7 +49,7 @@ export async function generateMetadata(
   });
 
   const ogImages = (await parent).openGraph?.images || [];
-  const pageOgImage = urlForOpenGraphImage(seoData?.seo?.image as Image);
+  const pageOgImage = urlForOpenGraphImage(seoData?.seo?.image);
 
   pageOgImage && ogImages.unshift(pageOgImage);
 

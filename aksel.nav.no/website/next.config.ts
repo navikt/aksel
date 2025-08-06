@@ -133,6 +133,17 @@ const nextConfig: NextConfig = {
         destination: "/designsystemet",
         permanent: false,
       },
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "design.nav.no",
+          },
+        ],
+        permanent: false,
+        destination: "https://aksel.nav.no/:path*",
+      },
     ];
   },
 

@@ -1,42 +1,29 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { MoonIcon, SunIcon } from "@navikt/aksel-icons";
-import { Button } from "@navikt/ds-react";
+import { useEffect, useState } from "react";
+import { ThemeIcon } from "@navikt/aksel-icons";
+import { Button, Tooltip } from "@navikt/ds-react";
 
 function ThemeButton() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
 
   return (
-    <>
-      <style id="theme-button">{`
-        :root, .light {
-          --website-theme-toggle-light-display: block;
-          --website-theme-toggle-dark-display: none;
-        }
-
-        .dark {
-          --website-theme-toggle-light-display: none;
-          --website-theme-toggle-dark-display: block;
-        }
-      `}</style>
+    <Tooltip
+      content={
+        isMounted && resolvedTheme === "dark"
+          ? "Endre til lyst tema"
+          : "Endre til mørkt tema"
+      }
+    >
       <Button
         variant="tertiary-neutral"
-        icon={
-          <>
-            <MoonIcon
-              style={{ display: "var(--website-theme-toggle-dark-display)" }}
-              title="Endre til mørkt"
-            />
-            <SunIcon
-              style={{ display: "var(--website-theme-toggle-light-display)" }}
-              title="Endre til lyst"
-            />
-          </>
-        }
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+        icon={<ThemeIcon aria-hidden />}
+        onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
       />
-    </>
+    </Tooltip>
   );
 }
 
