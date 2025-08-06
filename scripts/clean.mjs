@@ -1,6 +1,6 @@
+import { execSync, spawnSync } from "child_process";
 import FastGlob from "fast-glob";
-import { existsSync, lstatSync, readdirSync, rmdirSync, unlinkSync } from "fs";
-import { join } from "path";
+import { rmSync } from "fs";
 
 /**
  * This script is used to clean up build artifacts.
@@ -26,7 +26,7 @@ for (const globPattern of globPatterns) {
   });
   folders.forEach((folder) => {
     console.info(`Deleting folder ${folder}`);
-    deleteFolder(folder);
+    rmSync(folder, { recursive: true });
   });
 }
 
@@ -37,39 +37,30 @@ if (!process.argv.includes("--reset")) {
   process.exit(0);
 }
 
+if (process.platform === "win32") {
+  const tasklist = execSync("tasklist").toString();
+  const nodeCount = (tasklist.match(/node\.exe/g) || []).length;
+  if (nodeCount > 1) {
+    console.warn(
+      `There are ${nodeCount} node.exe processes running. You might want to close them before trying to delete node_modules.`,
+    );
+  }
+  spawnSync("pause", { shell: true, stdio: [0, 1, 2] });
+}
+
 console.group("Cleaning up node_modules. This may take a while...");
 
 const nodeModulesFolders = FastGlob.sync("**/node_modules", {
   onlyDirectories: true,
-}).filter((dir) => {
-  // Avoid deleting nested node_modules
-  return !dir.match(/node_modules\/.*\/node_modules/);
+  ignore: ["**/node_modules/**/node_modules"],
 });
 
 for (const folder of nodeModulesFolders) {
   console.info(`Deleting dir ${folder}`);
-  deleteFolder(folder);
+  rmSync(folder, { recursive: true });
 }
 
 console.groupEnd();
 console.info(
   `\nCompleted dir cleanup, remember to run 'yarn install' & 'yarn boot'!`,
 );
-
-function deleteFolder(folder) {
-  if (!existsSync(folder)) {
-    throw new Error(`path: ${folder} does not exist`);
-  }
-  if (!lstatSync(folder).isDirectory()) {
-    throw new Error(`path: ${folder} is not a directory`);
-  }
-  readdirSync(folder).forEach((file) => {
-    const currentPath = join(folder, file);
-    if (lstatSync(currentPath).isDirectory()) {
-      deleteFolder(currentPath);
-    } else {
-      unlinkSync(currentPath);
-    }
-  });
-  rmdirSync(folder);
-}
