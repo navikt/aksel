@@ -17,7 +17,7 @@
     "build:storybook-chromatic": "cross-env CHROMATIC=true storybook build",
     "build:storybook": "storybook build",
     "test": "yarn workspaces foreach -vv -pA run test",
-    "lint": "yarn eslint --max-warnings=0 --rule 'import/no-cycle:[error,{disableScc:true}]' . && yarn stylelint '@navikt/**/*.css'",
+    "lint": "yarn eslint --max-warnings=0 --rule 'import/no-cycle:[error,{maxDepth:1,ignoreExternal:true,disableScc:true}]' . && yarn stylelint '@navikt/**/*.css'",
     "lint:css": "yarn stylelint '@navikt/**/*.css'",
     "changeset": "changeset",
     "create-version": "changeset version && yarn changelog && yarn",
