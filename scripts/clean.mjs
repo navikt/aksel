@@ -52,7 +52,7 @@ console.group("Cleaning up node_modules. This may take a while...");
 
 const nodeModulesFolders = FastGlob.sync("**/node_modules", {
   onlyDirectories: true,
-  ignore: ["**/node_modules/**/node_modules"],
+  ignore: ["**/node_modules/**/node_modules"], // Ignore nested node_modules
 });
 
 for (const folder of nodeModulesFolders) {
