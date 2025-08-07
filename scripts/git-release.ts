@@ -9,10 +9,8 @@ main();
 async function main() {
   const changelogFile = fs.readFileSync("../CHANGELOG.md", "utf-8");
 
-  const newestEntry = changelogFile.split("\n## ");
-  newestEntry.shift(); // Remove the first item, it's the main heading.
-
-  const releaseLines = newestEntry[0].trim().split("\n");
+  const newestEntry = changelogFile.split("\n## ")[1]; // The first item is the main heading.
+  const releaseLines = newestEntry.trim().split("\n");
 
   const version = releaseLines[0];
   // Remove the version line and the empty line before the actual release notes.
