@@ -15,7 +15,7 @@ async function main() {
   const releaseLines = newestEntry[0].trim().split("\n");
 
   const version = releaseLines[0];
-  // Remove the version line and the separator (usually an empty line) before the actual release notes.
+  // Remove the version line and the empty line before the actual release notes.
   releaseLines.splice(0, 2);
   const releaseNotes = releaseLines.join("\n").trim();
 
