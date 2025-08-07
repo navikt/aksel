@@ -1,5 +1,4 @@
 import { Metadata } from "next/types";
-import { Image } from "sanity";
 import { BodyLong, Box, HGrid, Heading } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
@@ -22,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Mønster og maler",
     description: page?.seo?.meta,
     openGraph: {
-      images: urlForOpenGraphImage(page?.seo?.image as Image),
+      images: urlForOpenGraphImage(page?.seo?.image),
     },
   };
 }

@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import NextLink from "next/link";
-import { Image } from "sanity";
 import { ComponentIcon, TokenIcon } from "@navikt/aksel-icons";
 import {
   Bleed,
@@ -53,7 +52,7 @@ export async function generateMetadata(): Promise<Metadata> {
       page?.seo?.meta ??
       `En samling ressurser fra ulike fagdisipliner som hjelper oss å skape bedre, universelt tilgjengelige og sammenhengende produkter i Nav.`,
     openGraph: {
-      images: urlForOpenGraphImage(page?.seo?.image as Image),
+      images: urlForOpenGraphImage(page?.seo?.image),
     },
   };
 }

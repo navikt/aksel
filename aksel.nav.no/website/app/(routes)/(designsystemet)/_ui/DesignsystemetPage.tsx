@@ -1,5 +1,4 @@
 import { PortableTextBlock } from "next-sanity";
-import { Image } from "sanity";
 import { BodyShort, Box, HStack, Heading, Tag } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import {
@@ -52,7 +51,7 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
 
   const isComponentPage = data?._type === "komponent_artikkel";
 
-  const imageUrl = urlForImage(data?.status?.bilde as Image)?.url();
+  const imageUrl = urlForImage(data?.status?.bilde)?.url();
 
   return (
     <Box marginBlock="space-0 space-28" data-color={statusTag?.colorRole}>

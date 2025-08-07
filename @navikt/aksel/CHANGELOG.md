@@ -1,5 +1,23 @@
 # @navikt/aksel
 
+## 7.26.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.26.0
+  - @navikt/ds-tokens@7.26.0
+
+## 7.25.2
+
+### Patch Changes
+
+- CLI: Codemods now respect filepath globs instead of ignoring some based on file-extension. ([#3955](https://github.com/navikt/aksel/pull/3955))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.25.2
+  - @navikt/ds-tokens@7.25.2
+
 ## 7.25.1
 
 ### Patch Changes

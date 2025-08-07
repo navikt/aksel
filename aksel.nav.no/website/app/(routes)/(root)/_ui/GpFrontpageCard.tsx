@@ -1,4 +1,3 @@
-import { Image } from "sanity";
 import { BoxNew, HStack } from "@navikt/ds-react";
 import { GOD_PRAKSIS_TEMA_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
@@ -12,7 +11,7 @@ type GpFrontpageCardProps = {
 };
 
 const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
-  const imageUrl = urlForImage(image as Image)?.url();
+  const imageUrl = urlForImage(image)?.url();
 
   return (
     <HStack gap="space-8" paddingBlock="space-16" align="center" as="li">
