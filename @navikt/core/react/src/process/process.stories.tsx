@@ -37,6 +37,7 @@ export const Default = ({
   step4ShowSlot,
   step4Icon,
   step4Completed,
+  step4HideContent,
   ...props
 }) => {
   return (
@@ -62,6 +63,7 @@ export const Default = ({
             )
           }
           completed={step4Completed}
+          hideContent={step4HideContent}
         >
           {step4ShowSlot && (
             <>
@@ -131,16 +133,23 @@ Default.argTypes = {
     control: "inline-radio",
     options: [true, false, undefined],
   },
+  step4HideContent: {
+    name: "Step 4: 'hideContent'-prop",
+    control: "inline-radio",
+    options: [true, false, undefined],
+  },
 };
 Default.args = {
-  variant: "default",
   activeStep: 3,
+  variant: "default",
+  hideCompletedContent: true,
   step4Title:
     "Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og forklares i sitt fulle i denne labelen",
   step4Date: getDateAfter(9),
   step4ShowSlot: true,
   step4Icon: "<Icon/>",
   step4Completed: undefined,
+  step4HideContent: undefined,
 };
 
 export const Variants: StoryFn<Story> = () => {

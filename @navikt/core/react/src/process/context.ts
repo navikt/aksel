@@ -2,10 +2,11 @@ import { createContext } from "../util/create-context";
 import { ProcessVariant } from "./ProcessVariant";
 
 interface ProcessContextValue {
-  variant: ProcessVariant;
   activeStep: number;
-  lastIndex: number;
   index: number;
+  lastIndex: number;
+  variant: ProcessVariant;
+  hideCompletedContent: boolean;
 }
 
 export const [ProcessContextProvider, useProcessContext] =

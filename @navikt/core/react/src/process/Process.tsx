@@ -24,6 +24,14 @@ export interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * @default "default"
    */
   variant?: ProcessVariant;
+  /**
+   * Hide the content of steps that are completed.
+   * Does not apply to the active step.
+   * Can be overridden by setting the 'hideContent'-prop on individual steps.
+   *
+   * @default false
+   */
+  hideCompletedContent?: boolean;
 }
 
 interface ProcessComponent
@@ -52,26 +60,31 @@ interface ProcessComponent
  *   <Process
  *     aria-labelledby="Process-heading"
  *     activeStep={activeStep}
+ *     variant="number"
+ *     hideCompletedContent={true}
  *   >
- *     <Process.Step
- *       title="Start søknad"
- *       date="21. august 2025"
- *     />
+ *     <Process.Step title="Start søknad" date="21. august 2025" />
  *     <Process.Step
  *       title="Saksopplysninger"
  *       date="22. august 2025"
- *       description="Saksopplysninger er sendt inn"
- *     />
+ *       icon={<PaperclipIcon />}
+ *     >
+ *       Saksopplysninger er sendt inn
+ *     </Process.Step>
  *     <Process.Step
  *       title="Vedlegg"
  *       date="25. august 2025"
- *       description="Vedlegg er lastet opp"
- *     />
- *     <Process.Step
- *       title="Vedtak"
- *       date="8. september 2025"
- *       description="Det er gjort endelig vedtak i saken"
- *     />
+ *       hideContent={false}
+ *     >
+ *       <h2> Vedlegg er lastet opp </h2>
+ *       <p>
+ *         Dokumentasjon av saksopplysninger er lastet opp og tilgjengelig for
+ *         saksbehandler.
+ *       </p>
+ *     </Process.Step>
+ *     <Process.Step title="Vedtak" date="8. september 2025">
+ *       Det er gjort endelig vedtak i saken
+ *     </Process.Step>
  *   </Process>
  * </>
  * ```
@@ -79,57 +92,70 @@ interface ProcessComponent
 export const Process: ProcessComponent = forwardRef<
   HTMLOListElement,
   ProcessProps
->(({ variant = "default", children, className, activeStep, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-  activeStep = activeStep - 1;
-  return (
-    <ol
-      data-color="info"
-      {...rest}
-      ref={ref}
-      className={cn("navds-process", className)}
-    >
-      {React.Children.map(children, (step, index) => {
-        const stepProps: Partial<ProcessStepProps> =
-          React.isValidElement<ProcessStepProps>(step) ? step.props : {};
+>(
+  (
+    {
+      activeStep,
+      children,
+      variant = "default",
+      hideCompletedContent = false,
+      className,
+      ...rest
+    },
+    ref,
+  ) => {
+    const { cn } = useRenameCSS();
+    activeStep = activeStep - 1;
+    return (
+      <ol
+        data-color="info"
+        {...rest}
+        ref={ref}
+        className={cn("navds-process", className)}
+      >
+        {React.Children.map(children, (step, index) => {
+          const stepProps: Partial<ProcessStepProps> =
+            React.isValidElement<ProcessStepProps>(step) ? step.props : {};
 
-        return (
-          <li
-            className={cn(
-              "navds-process__item",
-              variant === "default" &&
-                !stepProps.icon &&
-                "navds-process__item-no-gap",
-            )}
-            data-color={stepProps["data-color"]}
-            key={index + (children?.toString?.() ?? "")}
-          >
-            <span
+          return (
+            <li
               className={cn(
-                "navds-process__line navds-process__line--1",
-                index >= activeStep && "navds-process__line--uncompleted",
+                "navds-process__item",
+                variant === "default" &&
+                  !stepProps.icon &&
+                  "navds-process__item-no-gap",
               )}
-            />
-            <ProcessContextProvider
-              variant={variant}
-              activeStep={activeStep}
-              lastIndex={React.Children.count(children)}
-              index={index}
+              data-color={stepProps["data-color"]}
+              key={index + (children?.toString?.() ?? "")}
             >
-              {step}
-            </ProcessContextProvider>
-            <span
-              className={cn(
-                "navds-process__line navds-process__line--2",
-                index >= activeStep && "navds-process__line--uncompleted",
-              )}
-            />
-          </li>
-        );
-      })}
-    </ol>
-  );
-}) as ProcessComponent;
+              <span
+                className={cn(
+                  "navds-process__line navds-process__line--1",
+                  index >= activeStep && "navds-process__line--uncompleted",
+                )}
+              />
+              <ProcessContextProvider
+                activeStep={activeStep}
+                index={index}
+                lastIndex={React.Children.count(children)}
+                variant={variant}
+                hideCompletedContent={hideCompletedContent}
+              >
+                {step}
+              </ProcessContextProvider>
+              <span
+                className={cn(
+                  "navds-process__line navds-process__line--2",
+                  index >= activeStep && "navds-process__line--uncompleted",
+                )}
+              />
+            </li>
+          );
+        })}
+      </ol>
+    );
+  },
+) as ProcessComponent;
 
 Process.Step = Step;
 

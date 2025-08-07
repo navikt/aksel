@@ -88,31 +88,24 @@
   margin-top: calc((var(--__axc-process-circle-large) - var(--__axc-process-circle-small)) / 2);
 }
 
+.aksel-process__circle[data-active="true"] {
+  /* color: var(--ax-text-contrast);
+  background: var(--ax-bg-strong); */
+  outline: 2px solid var(--ax-border-default);
+  outline-offset: 2px;
+}
+
 .aksel-process__circle[data-completed="true"] {
   color: var(--ax-text-contrast);
   background: var(--ax-bg-strong);
 }
 
-.aksel-process__circle--completed {
+.aksel-process__circle[data-active="true"].aksel-process__circle[data-completed="true"] {
   color: var(--ax-text-contrast);
   background: var(--ax-bg-strong);
 }
 
-.aksel-process__circle[data-current="true"] {
-  color: var(--ax-text-contrast);
-  background: var(--ax-bg-strong);
-  outline: 2px solid var(--ax-border-default);
-  outline-offset: 2px;
-}
-
-.aksel-process__circle--current {
-  color: var(--ax-text-contrast);
-  background: var(--ax-bg-strong);
-  outline: 2px solid var(--ax-border-default);
-  outline-offset: 2px;
-}
-
-.aksel-process__circle--uncompleted {
+.aksel-process__circle[data-completed="false"] {
   color: var(--ax-text-neutral-decoration);
   border-color: var(--ax-border-neutral);
 }
@@ -134,18 +127,23 @@
 
 /* TODO (stw): Test on Windows with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */
 @media (forced-colors: active) {
-  .aksel-process__circle {
+  .aksel-process__circle.aksel-process__circle {
     forced-color-adjust: none;
     color: ButtonFace;
     background-color: ButtonText;
     border-color: ButtonText;
   }
 
-  .aksel-process__circle--current {
+  .aksel-process__circle[data-active="true"] {
     outline-color: ButtonText;
   }
 
-  .aksel-process__circle--uncompleted {
+  .aksel-process__circle[data-active="true"].aksel-process__circle[data-completed="true"] {
+    color: ButtonFace;
+    background-color: ButtonText;
+  }
+
+  .aksel-process__circle[data-completed="false"] {
     background-color: ButtonFace;
     color: ButtonText;
   }

@@ -35,18 +35,30 @@ export interface ProcessStepProps extends React.HTMLAttributes<HTMLDivElement> {
    *
    * If not set, it will default to true for every step before and including
    * activeStep, and false for every step after activeStep.
-   *
    */
   completed?: boolean;
+  /**
+   * Hide the content section of the step.
+   * Useful for overriding the Process-level 'hideCompletedContent'-prop.
+   */
+  hideContent?: boolean;
 }
 
 export const Step = forwardRef<HTMLDivElement, ProcessStepProps>(
-  ({ title, date, children, icon, completed, className, ...rest }, ref) => {
+  (
+    { title, date, children, icon, completed, hideContent, className, ...rest },
+    ref,
+  ) => {
     const { cn } = useRenameCSS();
-    const { activeStep, index, variant = "default" } = useProcessContext();
-    const resolvedCompleted = completed ?? index <= activeStep;
+    const {
+      activeStep,
+      index,
+      variant = "default",
+      hideCompletedContent,
+    } = useProcessContext();
+    completed = completed ?? index <= activeStep;
 
-    if (variant === "icon" && resolvedCompleted && icon === undefined) {
+    if (variant === "icon" && completed && icon === undefined) {
       icon = (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -77,8 +89,8 @@ export const Step = forwardRef<HTMLDivElement, ProcessStepProps>(
           className={cn("navds-process__circle", {
             "navds-process__circle--small": variant === "default" && !icon,
           })}
-          data-completed={resolvedCompleted}
-          data-current={index === activeStep}
+          data-active={index === activeStep}
+          data-completed={completed}
           aria-hidden={variant !== "default"}
         >
           {icon || (variant === "number" && index + 1)}
@@ -100,11 +112,15 @@ export const Step = forwardRef<HTMLDivElement, ProcessStepProps>(
               {date}
             </BodyShort>
           )}
-          {children && typeof children === "string" ? (
-            <BodyLong size="medium">{children}</BodyLong>
-          ) : (
-            children
-          )}
+          {!(
+            hideContent ??
+            (hideCompletedContent && completed && index !== activeStep)
+          ) &&
+            (children && typeof children === "string" ? (
+              <BodyLong size="medium">{children}</BodyLong>
+            ) : (
+              children
+            ))}
         </div>
       </div>
     );
