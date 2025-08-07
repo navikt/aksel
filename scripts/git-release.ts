@@ -1,4 +1,4 @@
-import { execSync } from "child_process";
+import { spawnSync } from "child_process";
 import fs from "fs";
 import simpleGit from "simple-git";
 
@@ -30,10 +30,23 @@ async function main() {
   }
 
   try {
-    execSync(
-      `gh release create ${tagName} --title "v${version}" --notes "${releaseNotes}"`,
+    const result = spawnSync(
+      "gh",
+      [
+        "release",
+        "create",
+        tagName,
+        "--title",
+        `v${version}`,
+        "--notes",
+        releaseNotes,
+      ],
       { stdio: "inherit" },
     );
+
+    if (result.error) {
+      throw result.error;
+    }
   } catch (error) {
     console.error("Error creating GitHub release:", error);
   }
