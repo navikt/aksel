@@ -152,7 +152,9 @@ button.navds-stepper__step {
 .navds-stepper__circle--success {
   border: none;
   background: none;
-  font-size: 1.75rem;
+  font-size: var(--navds-stepper-circle-size);
+  width: var(--navds-stepper-circle-size);
+  height: var(--navds-stepper-circle-size);
   color: var(--a-text-on-action);
   background-color: var(--ac-stepper-text, var(--a-surface-action));
 }
