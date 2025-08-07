@@ -1,5 +1,5 @@
 .aksel-stepper {
-  --__axc-stepper-circle-size: 1.75rem;
+  --__axc-stepper-circle-size: 2rem;
   --__axc-stepper-border-width: 2px;
   --__axc-stepper-line-length: 1rem;
 
@@ -173,7 +173,7 @@
   min-width: fit-content;
   line-height: 1.5;
   grid-column: content;
-  padding-top: 0.035rem;
+  padding-top: 0.145rem;
 }
 
 /* Horizontal */

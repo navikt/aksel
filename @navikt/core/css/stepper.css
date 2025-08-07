@@ -1,5 +1,5 @@
 .navds-stepper {
-  --navds-stepper-circle-size: 1.75rem;
+  --navds-stepper-circle-size: 2rem;
   --navds-stepper-border-width: 2px;
   --navds-stepper-line-length: 1rem;
 
@@ -161,7 +161,7 @@ button.navds-stepper__step {
   min-width: fit-content;
   line-height: 1.5;
   grid-column: content;
-  padding-top: 0.035rem;
+  padding-top: 0.145rem;
 }
 
 /* Horizontal */
