@@ -21,7 +21,7 @@
     "lint:css": "yarn stylelint '@navikt/**/*.css'",
     "changeset": "changeset",
     "create-version": "changeset version && yarn changelog && yarn",
-    "release": "yarn boot && yarn docgen && changeset publish",
+    "release": "yarn boot && yarn docgen && changeset publish && yarn script:git-release",
     "biome:lint": "yarn biome lint ."
   },
   "workspaces": [
@@ -31,7 +31,8 @@
     "@navikt/aksel-stylelint",
     "@navikt/aksel",
     "aksel.nav.no",
-    "scripts/eslint"
+    "scripts/eslint",
+    "scripts"
   ],
   "prettier": {
     "plugins": [
