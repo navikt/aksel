@@ -67,7 +67,8 @@
   text-decoration: none;
   cursor: pointer;
   padding: var(--navds-stepper-border-width);
-  margin: calc(var(--navds-stepper-border-width) * -1) calc(var(--navds-stepper-border-width) * -1) 1.75rem;
+  margin: calc(var(--navds-stepper-border-width) * -1) calc(var(--navds-stepper-border-width) * -1)
+    var(--navds-stepper-circle-size);
 }
 
 .navds-stepper__item:last-child .navds-stepper__step {
@@ -141,6 +142,7 @@ button.navds-stepper__step {
   grid-column: circle;
   display: inline-grid;
   place-items: center;
+  place-content: center;
   flex-shrink: 0;
   width: var(--navds-stepper-circle-size);
   height: var(--navds-stepper-circle-size);

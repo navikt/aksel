@@ -95,6 +95,7 @@
   grid-column: circle;
   display: inline-grid;
   place-items: center;
+  place-content: center;
   width: var(--__axc-stepper-circle-size);
   height: var(--__axc-stepper-circle-size);
   border: var(--__axc-stepper-border-width) solid currentColor;
