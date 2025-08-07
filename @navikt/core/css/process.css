@@ -1,6 +1,6 @@
 .navds-process {
-  --navds-process-circle-large: 32px;
-  --navds-process-circle-small: 16px;
+  --navds-process-circle-large: 2rem;
+  --navds-process-circle-small: 1rem;
   --navds-process-circle-size: var(--navds-process-circle-large);
   --navds-process-border-width: 2px;
   --navds-process-line-length: 1rem;
@@ -76,7 +76,6 @@
   place-items: center;
   width: var(--navds-process-circle-size);
   height: var(--navds-process-circle-size);
-  font-size: 1.5rem;
   line-height: 1;
   border-radius: var(--a-border-radius-full);
   border: var(--navds-process-border-width) solid var(--a-border-info);
@@ -86,6 +85,10 @@
   --navds-process-circle-size: var(--navds-process-circle-small);
 
   margin-top: calc((var(--navds-process-circle-large) - var(--navds-process-circle-small)) / 2);
+}
+
+.navds-process__circle--icon {
+  font-size: 1.5rem;
 }
 
 .navds-process__circle[data-active="true"] {
@@ -117,7 +120,7 @@
 
 .navds-process__content-title {
   line-height: 1.5;
-  padding-top: var(--a-spacing-1);
+  padding-top: 0.145rem;
   padding-bottom: var(--a-spacing-1);
 }
 

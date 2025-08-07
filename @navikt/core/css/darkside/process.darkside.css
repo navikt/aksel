@@ -1,6 +1,6 @@
 .aksel-process {
-  --__axc-process-circle-large: 32px;
-  --__axc-process-circle-small: 16px;
+  --__axc-process-circle-large: 2rem;
+  --__axc-process-circle-small: 1rem;
   --__axc-process-circle-size: var(--__axc-process-circle-large);
   --__axc-process-border-width: 2px;
   --__axc-process-line-length: 1rem;
@@ -76,7 +76,6 @@
   place-items: center;
   width: var(--__axc-process-circle-size);
   height: var(--__axc-process-circle-size);
-  font-size: 1.5rem;
   line-height: 1;
   border-radius: var(--ax-radius-full);
   border: var(--__axc-process-border-width) solid var(--ax-border-default);
@@ -86,6 +85,10 @@
   --__axc-process-circle-size: var(--__axc-process-circle-small);
 
   margin-top: calc((var(--__axc-process-circle-large) - var(--__axc-process-circle-small)) / 2);
+}
+
+.aksel-process__circle--icon {
+  font-size: 1.5rem;
 }
 
 .aksel-process__circle[data-active="true"] {
@@ -117,7 +120,7 @@
 
 .aksel-process__content-title {
   line-height: 1.5;
-  padding-top: var(--ax-space-4);
+  padding-top: 0.145rem;
   padding-bottom: var(--ax-space-4);
 }
 

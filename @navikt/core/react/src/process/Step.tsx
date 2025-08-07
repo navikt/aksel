@@ -88,6 +88,7 @@ export const Step = forwardRef<HTMLDivElement, ProcessStepProps>(
         <span
           className={cn("navds-process__circle", {
             "navds-process__circle--small": variant === "default" && !icon,
+            "navds-process__circle--icon": icon,
           })}
           data-active={index === activeStep}
           data-completed={completed}
