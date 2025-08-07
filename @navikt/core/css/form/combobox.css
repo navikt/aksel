@@ -180,7 +180,7 @@
   }
 }
 
-@supports not selector(:has) {
+@supports not selector(:has(*)) {
   .navds-combobox--focused .navds-combobox__wrapper-inner {
     box-shadow: var(--a-shadow-focus);
     outline: 3px solid transparent;
