@@ -105,7 +105,7 @@ module.exports = tseslint.config([
   },
 
   {
-    files: ["**/*.stories.ts?(x)"],
+    files: ["**/*.stories.ts?(x)", "scripts/*.ts"],
     rules: {
       "no-console": "off",
     },
