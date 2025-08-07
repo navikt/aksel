@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { Accordion, AccordionProps } from ".";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 
 export default {
   title: "ds-react/Accordion",
@@ -229,36 +230,11 @@ export const ColorRole: Story = {
   },
 };
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Variants</h2>
-        {Variants.render?.(...props)}
-      </div>
-      <div>
-        <h2>Size</h2>
-        {Size.render?.(...props)}
-      </div>
-      <div>
-        <h2>HeadingSize</h2>
-        {HeadingSize.render?.(...props)}
-      </div>
-      <div>
-        <h2>DefaultOpen</h2>
-        {DefaultOpen.render?.(...props)}
-      </div>
-      <div>
-        <h2>Indent</h2>
-        {Indent.render?.(...props)}
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        {ColorRole.render?.(...props)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Variants,
+  Size,
+  HeadingSize,
+  DefaultOpen,
+  Indent,
+  ColorRole,
+});
