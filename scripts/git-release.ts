@@ -19,7 +19,7 @@ async function main() {
 
   console.log(`Creating release for version: ${version}`);
 
-  const tagName = `release-v${version}`;
+  const tagName = `v${version}`;
 
   /* Release will fail if tag is duplicated */
   const tagExists = await gitTagExists(tagName);
