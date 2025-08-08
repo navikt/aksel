@@ -2,6 +2,7 @@
   border: 1px solid var(--ax-border-default);
   border-radius: var(--ax-border-radius-xlarge);
   height: fit-content;
+  overflow: hidden;
 }
 
 .doDontNotch {
