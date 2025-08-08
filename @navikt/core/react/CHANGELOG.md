@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.27.0
+
+### Minor Changes
+
+- Darkside: Using 'Theme' to set current color-theme now works when root-node does not set light or dark class. ([#3961](https://github.com/navikt/aksel/pull/3961))
+
+### Patch Changes
+
+- Updated dependencies [[`3d9c55e`](https://github.com/navikt/aksel/commit/3d9c55ed7d0a09b4c470bf76907b7ad10b5355d3), [`92985b8`](https://github.com/navikt/aksel/commit/92985b881460747164da3b15f8e1aa0f444c1375)]:
+  - @navikt/aksel-icons@7.27.0
+  - @navikt/ds-tokens@7.27.0
+
 ## 7.26.0
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 7.27.0
+
+### Patch Changes
+
+- Icons: ChatAdd did not have 'currentColor' on parts of shape. ([#3963](https://github.com/navikt/aksel/pull/3963))
+
 ## 7.26.0
 
 ### Minor Changes

@@ -1,5 +1,23 @@
 # Changelog
 
+## 7.27.0
+
+### @navikt/ds-tokens
+
+- Darkside: Using 'Theme' to set current color-theme now works when root-node does not set light or dark class. ([#3961](https://github.com/navikt/aksel/pull/3961))
+
+### @navikt/ds-css
+
+- Combobox: Focus styling did not check for `:has` selector-support correctly. ([#3965](https://github.com/navikt/aksel/pull/3965))
+
+### @navikt/ds-react
+
+- Darkside: Using 'Theme' to set current color-theme now works when root-node does not set light or dark class. ([#3961](https://github.com/navikt/aksel/pull/3961))
+
+### @navikt/aksel-icons
+
+- Icons: ChatAdd did not have 'currentColor' on parts of shape. ([#3963](https://github.com/navikt/aksel/pull/3963))
+
 ## 7.26.0
 
 ### @navikt/aksel-icons

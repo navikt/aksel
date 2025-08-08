@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.27.0
+
+### Patch Changes
+
+- Combobox: Focus styling did not check for `:has` selector-support correctly. ([#3965](https://github.com/navikt/aksel/pull/3965))
+
 ## 7.26.0
 
 ## 7.25.2
