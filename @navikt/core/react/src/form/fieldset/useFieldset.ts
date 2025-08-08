@@ -1,17 +1,19 @@
-import { useFormField } from "../useFormField";
+import cl from "clsx";
+import { type FormFieldProps, useFormField } from "../useFormField";
 
 /**
  * Handles props for Fieldset in context with parent Fieldset.
  */
-export const useFieldset = (props) => {
+export const useFieldset = (props: FormFieldProps) => {
   const formField = useFormField(props, "fieldset");
-  const { inputProps } = formField;
 
   return {
     ...formField,
     inputProps: {
-      "aria-invalid": inputProps["aria-invalid"],
-      "aria-describedby": inputProps["aria-describedby"],
+      "aria-describedby":
+        cl(props["aria-describedby"], {
+          [formField.inputDescriptionId]: props.description,
+        }) || undefined,
     },
   };
 };
