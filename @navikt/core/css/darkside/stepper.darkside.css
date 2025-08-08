@@ -105,7 +105,7 @@
 
 .aksel-stepper__circle--success {
   background: none;
-  font-size: var(--__axc-stepper-circle-size);
+  font-size: calc(var(--__axc-stepper-circle-size) * 0.75);
 }
 
 .aksel-stepper__step[data-interactive="true"] {
