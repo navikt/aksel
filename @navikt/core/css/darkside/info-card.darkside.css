@@ -1,0 +1,28 @@
+.aksel-info-card {
+  display: grid;
+  border-radius: var(--ax-border-radius-xlarge);
+  border: 1px solid var(--ax-border-default);
+}
+
+.aksel-info-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ax-space-8);
+  padding: var(--ax-space-8) var(--ax-space-20);
+  border-bottom: 1px solid var(--ax-border-subtleA);
+  background: var(--ax-bg-moderate);
+  border-start-start-radius: calc(var(--ax-border-radius-xlarge) - 1px);
+  border-start-end-radius: calc(var(--ax-border-radius-xlarge) - 1px);
+  color: var(--ax-text-subtle);
+}
+
+.aksel-info-card__icon {
+  font-size: 1.5rem;
+  margin-top: var(--ax-space-2);
+  display: grid;
+}
+
+.aksel-info-card__content {
+  padding-block: var(--ax-space-12) var(--ax-space-16);
+  padding-inline: var(--ax-space-20);
+}
