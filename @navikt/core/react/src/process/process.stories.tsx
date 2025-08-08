@@ -120,6 +120,11 @@ Default.argTypes = {
     control: "inline-radio",
     options: [0, 1, 2, 3, 4, 5, 6, 7, 8],
   },
+  hideCompletedContent: {
+    name: "'hideCompletedContent'-prop",
+    control: "inline-radio",
+    options: [true, false, undefined],
+  },
   step4Title: { name: "Step 4: 'title'-prop" },
   step4Date: { name: "Step 4: 'date'-prop" },
   step4ShowSlot: { name: "Step 4: Add dummy slot" },

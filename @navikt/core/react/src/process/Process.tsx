@@ -9,8 +9,10 @@ export interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * Current active step.
    *
    * Process index starts at 1, not 0.
+   *
+   * @default 0
    */
-  activeStep: number;
+  activeStep?: number;
   /**
    * `<Process.Step />` elements.
    */
@@ -95,7 +97,7 @@ export const Process: ProcessComponent = forwardRef<
 >(
   (
     {
-      activeStep,
+      activeStep = 0,
       children,
       variant = "default",
       hideCompletedContent = false,
