@@ -3,6 +3,17 @@ import { InformationSquareFillIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { Heading } from "../typography";
+import { createContext } from "../util/create-context";
+
+type InfoCardContext = {
+  size: "medium" | "small";
+};
+
+const [InfoCardContextProvider, useInfoCardContext] =
+  createContext<InfoCardContext>({
+    name: "InfoCardContext",
+    errorMessage: "useInfoCardContext must be used within an InfoCard",
+  });
 
 interface InfoCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -10,7 +21,7 @@ interface InfoCardProps extends React.HTMLAttributes<HTMLDivElement> {
    * Changes the size of the InfoCard.
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: InfoCardContext["size"];
   /**
    * Overrides card color
    */
@@ -37,7 +48,9 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
         className={cn(className, "navds-info-card", `navds-info-card--${size}`)}
         data-color={dataColor}
       >
-        {children}
+        <InfoCardContextProvider size={size}>
+          {children}
+        </InfoCardContextProvider>
       </div>
     );
   },
@@ -54,7 +67,7 @@ interface InfoCardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const InfoCardHeader = forwardRef<HTMLDivElement, InfoCardHeaderProps>(
   (
-    { children, className, ...restProps }: InfoCardHeaderProps,
+    { children, className, icon, ...restProps }: InfoCardHeaderProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
@@ -65,8 +78,8 @@ export const InfoCardHeader = forwardRef<HTMLDivElement, InfoCardHeaderProps>(
         {...restProps}
         className={cn(className, "navds-info-card__header")}
       >
-        <div className={cn("navds-info-card__icon")}>
-          <InformationSquareFillIcon aria-hidden />
+        <div className={cn("navds-info-card__icon")} aria-hidden>
+          {icon ?? <InformationSquareFillIcon />}
         </div>
         {children}
       </div>
@@ -90,13 +103,14 @@ export const InfoCardTitle = forwardRef<HTMLHeadingElement, InfoCardTitleProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
+    const { size } = useInfoCardContext();
 
     return (
       <Heading
         ref={forwardedRef}
         {...restProps}
         as={as}
-        size="small"
+        size={size === "medium" ? "small" : "xsmall"}
         className={cn(className, "navds-info-card__title")}
       >
         {children}

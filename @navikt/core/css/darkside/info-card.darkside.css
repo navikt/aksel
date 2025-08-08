@@ -14,15 +14,38 @@
   border-start-start-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   border-start-end-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   color: var(--ax-text-subtle);
+
+  .aksel-info-card--small & {
+    padding: var(--ax-space-8) var(--ax-space-16);
+  }
+
+  &:only-child {
+    border-bottom: none;
+    border-end-start-radius: calc(var(--ax-border-radius-xlarge) - 1px);
+    border-end-end-radius: calc(var(--ax-border-radius-xlarge) - 1px);
+  }
 }
 
 .aksel-info-card__icon {
   font-size: 1.5rem;
-  margin-top: var(--ax-space-2);
+  margin-top: var(--ax-space-4);
   display: grid;
+
+  .aksel-info-card--small & {
+    font-size: 1.25rem;
+  }
+}
+
+.aksel-info-card__title {
+  padding-block: var(--ax-space-2);
 }
 
 .aksel-info-card__content {
   padding-block: var(--ax-space-12) var(--ax-space-16);
   padding-inline: var(--ax-space-20);
+
+  .aksel-info-card--small & {
+    padding-block: var(--ax-space-8) var(--ax-space-12);
+    padding-inline: var(--ax-space-16);
+  }
 }
