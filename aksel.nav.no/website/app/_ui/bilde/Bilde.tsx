@@ -28,11 +28,7 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
     `rgba(${background.rgb?.r},${background.rgb?.g},${background.rgb?.b},${background.rgb?.a})`;
 
   return (
-    <figure
-      data-block-margin="space-28"
-      className={styles.bildeFigure}
-      data-text-prose
-    >
+    <figure data-block-margin="space-28" className={styles.bildeFigure}>
       <img
         data-image-border={border}
         className={`light ${styles.bildeImage}`}
