@@ -47,5 +47,10 @@ declare module "react" {
      * Adds line-clamping to the text.
      */
     "data-clamp-text"?: "4-lines";
+    /**
+     * Some components may need changes based on the page-type.
+     * This is used to apply specific styles based on the page type.
+     */
+    "data-page-layout"?: "centered" | "left-aligned";
   }
 }

@@ -153,7 +153,7 @@ export default async function Page({ params }: Props) {
         </div>
       </div>
 
-      <div className={styles.customBlockWrapper}>
+      <div className={styles.customBlockWrapper} data-page-layout="centered">
         <CustomPortableText
           data-wrapper-prose
           value={(pageData?.content ?? []) as PortableTextBlock[]}
