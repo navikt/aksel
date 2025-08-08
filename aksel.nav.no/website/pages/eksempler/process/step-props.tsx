@@ -1,34 +1,21 @@
-import { useState } from "react";
 import { PaperclipIcon } from "@navikt/aksel-icons";
 import { BodyLong, Heading, Process } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [activeStep] = useState(3);
-
   return (
     <>
-      <Heading size="medium" spacing level="2" id="Process-heading">
-        Søknadssteg
-      </Heading>
-      <Process
-        aria-labelledby="Process-heading"
-        activeStep={activeStep}
-        variant="number"
-        hideCompletedContent={true}
-      >
-        <Process.Step title="Start søknad" date="21. august 2025" />
-        <Process.Step
-          title="Saksopplysninger"
-          date="22. august 2025"
-          icon={<PaperclipIcon />}
-        >
-          Saksopplysninger er sendt inn
+      <Process activeStep={99}>
+        <Process.Step title="Start søknad" />
+        <Process.Step date="11. august 2025" />
+        <Process.Step title="Personopplysninger" date="20. august 2025" />
+        <Process.Step title="Saksopplysniner" date="22. august 2025">
+          Send inn saksopplysninger
         </Process.Step>
         <Process.Step
           title="Vedlegg"
           date="25. august 2025"
-          hideContent={false}
+          icon={<PaperclipIcon />}
         >
           <Heading size="small">Vedlegg er lastet opp</Heading>
           <BodyLong>
@@ -37,9 +24,16 @@ const Example = () => {
           </BodyLong>
         </Process.Step>
         <Process.Step
+          title="Saksbehandlingsfrist"
+          date="25. september 2025"
+          hideContent={true}
+        >
+          Frist for å samle inn saksinformasjon og gjøre vedtak.
+        </Process.Step>
+        <Process.Step
           title="Vedtak"
           date="8. september 2025"
-          hideContent={true}
+          hideContent={false}
         >
           Det er gjort endelig vedtak i saken
         </Process.Step>

@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { PaperclipIcon } from "@navikt/aksel-icons";
-import { BodyLong, Heading, Process } from "@navikt/ds-react";
+import { BodyLong, Button, HStack, Heading, Process } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [activeStep] = useState(3);
-
+  const [activeStep, setActiveStep] = useState(0);
   return (
     <>
-      <Heading size="medium" spacing level="2" id="Process-heading">
-        Søknadssteg
-      </Heading>
+      <HStack gap="4">
+        <Button onClick={() => setActiveStep(0)}>activeStep=0</Button>
+        <Button onClick={() => setActiveStep(3)}>activeStep=3</Button>
+        <Button onClick={() => setActiveStep(5)}>activeStep=5</Button>
+      </HStack>
+
       <Process
         aria-labelledby="Process-heading"
         activeStep={activeStep}
