@@ -85,7 +85,10 @@ export const Step = forwardRef<HTMLDivElement, ProcessStepProps>(
         ref={ref}
         className={cn("navds-process__step", className)}
       >
-        <span
+        <BodyShort
+          as="span"
+          size="medium"
+          weight="semibold"
           className={cn("navds-process__circle", {
             "navds-process__circle--small": variant === "default" && !icon,
             "navds-process__circle--icon": icon,
@@ -95,7 +98,7 @@ export const Step = forwardRef<HTMLDivElement, ProcessStepProps>(
           aria-hidden={variant !== "default"}
         >
           {icon || (variant === "number" && index + 1)}
-        </span>
+        </BodyShort>
 
         <div className={cn("navds-process__content")}>
           {title && (

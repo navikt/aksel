@@ -88,7 +88,7 @@
 }
 
 .navds-process__circle--icon {
-  font-size: 1.5rem;
+  font-size: calc(var(--navds-process-circle-size) * 0.75);
 }
 
 .navds-process__circle[data-active="true"] {
@@ -128,7 +128,6 @@
   padding-top: var(--a-spacing-1-alt);
 }
 
-/* TODO (stw): Test on Windows with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */
 @media (forced-colors: active) {
   .navds-process__circle.navds-process__circle {
     forced-color-adjust: none;

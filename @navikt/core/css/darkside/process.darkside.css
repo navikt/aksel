@@ -88,7 +88,7 @@
 }
 
 .aksel-process__circle--icon {
-  font-size: 1.5rem;
+  font-size: calc(var(--__axc-process-circle-size) * 0.75);
 }
 
 .aksel-process__circle[data-active="true"] {
@@ -128,7 +128,6 @@
   padding-top: var(--ax-space-6);
 }
 
-/* TODO (stw): Test on Windows with forced-colors -> chrome dev tools -> Ctrl-Shift-P -> forced-colors: active (or enable in ...-menu -> More tools -> Rendering) */
 @media (forced-colors: active) {
   .aksel-process__circle.aksel-process__circle {
     forced-color-adjust: none;
