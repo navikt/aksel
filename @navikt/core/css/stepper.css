@@ -165,7 +165,7 @@ button.navds-stepper__step {
   min-width: fit-content;
   line-height: 1.5;
   grid-column: content;
-  padding-top: 0.145rem;
+  padding-top: 0.16rem;
 }
 
 /* Horizontal */
