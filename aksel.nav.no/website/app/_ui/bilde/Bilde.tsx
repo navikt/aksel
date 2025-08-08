@@ -28,7 +28,11 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
     `rgba(${background.rgb?.r},${background.rgb?.g},${background.rgb?.b},${background.rgb?.a})`;
 
   return (
-    <figure data-block-margin="space-28" className={styles.bildeFigure}>
+    <figure
+      data-block-margin="space-28"
+      className={styles.bildeFigure}
+      data-text-prose
+    >
       <img
         data-image-border={border}
         className={`light ${styles.bildeImage}`}
@@ -41,15 +45,12 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
       {caption && (
         <HGrid
           as="figcaption"
-          marginBlock="space-12 0"
+          marginBlock="space-8 0"
           marginInline="space-12"
           gap="space-4"
+          className={styles.bildeCaption}
         >
-          <BodyLong
-            as="span"
-            size="small"
-            align={kilde?.har_kilde ? "start" : "center"}
-          >
+          <BodyLong as="span" size="small">
             {caption}
           </BodyLong>
           {kilde?.har_kilde && (
