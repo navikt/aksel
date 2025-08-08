@@ -84,7 +84,7 @@ export const useFormField = (
       "Aksel: Use of 'required' in form-elements is heavily discuouraged. Docs about why here:",
     );
     console.warn(
-      "https://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#h3bfe00453471",
+      "https://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#dc7a536235fa",
     );
   }
 
@@ -100,10 +100,9 @@ export const useFormField = (
       ...ariaInvalid,
       "aria-describedby":
         cl(props["aria-describedby"], {
-          [inputDescriptionId]:
-            !!props?.description && typeof props?.description === "string",
+          [inputDescriptionId]: props.description,
           [errorId]: showErrorMsg,
-          [fieldset?.errorId ?? ""]: hasError && !!fieldset?.error,
+          [fieldset?.errorId ?? ""]: hasError && fieldset?.error,
         }) || undefined,
 
       disabled,
