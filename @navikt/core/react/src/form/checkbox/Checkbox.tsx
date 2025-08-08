@@ -2,7 +2,6 @@ import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
-import { useId } from "../../util/hooks";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { CheckboxProps } from "./types";
 import useCheckbox from "./useCheckbox";
@@ -11,9 +10,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const { cn } = useRenameCSS();
     const { inputProps, hasError, size, readOnly, nested } = useCheckbox(props);
-
-    const labelId = useId();
-    const descriptionId = useId();
 
     return (
       <div
@@ -54,13 +50,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               ref.current = el;
             }
           }}
-          aria-labelledby={cn(
-            labelId,
-            !!props["aria-labelledby"] && props["aria-labelledby"],
-            {
-              [descriptionId]: props.description,
-            },
-          )}
         />
         <label htmlFor={inputProps.id} className={cn("navds-checkbox__label")}>
           <span className={cn("navds-checkbox__icon")}>
@@ -88,10 +77,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           >
             <BodyShort
               as="span"
-              id={labelId}
               size={size}
               className={cn("navds-checkbox__label-text")}
-              aria-hidden
             >
               {!nested && readOnly && <ReadOnlyIconWithTitle />}
               {props.children}
@@ -99,12 +86,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {props.description && (
               <BodyShort
                 as="span"
-                id={descriptionId}
                 size={size}
                 className={cn(
                   "navds-form-field__subdescription navds-checkbox__description",
                 )}
-                aria-hidden
               >
                 {props.description}
               </BodyShort>
