@@ -38,7 +38,7 @@
     "@navikt/ds-css": "^7.27.0",
     "@navikt/ds-tokens": "^7.27.0",
     "concurrently": "9.0.1",
-    "postcss-selector-parser": "^6.0.13",
+    "postcss-selector-parser": "^7.1.0",
     "postcss-value-parser": "^4.2.0",
     "stylelint": "^16.19.1",
     "stylelint-test-rule-node": "^0.4.0",

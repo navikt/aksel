@@ -4105,7 +4105,7 @@ __metadata:
     "@navikt/ds-css": "npm:^7.27.0"
     "@navikt/ds-tokens": "npm:^7.27.0"
     concurrently: "npm:9.0.1"
-    postcss-selector-parser: "npm:^6.0.13"
+    postcss-selector-parser: "npm:^7.1.0"
     postcss-value-parser: "npm:^4.2.0"
     stylelint: "npm:^16.19.1"
     stylelint-test-rule-node: "npm:^0.4.0"
@@ -20395,7 +20395,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-selector-parser@npm:^6.0.13, postcss-selector-parser@npm:^6.0.4, postcss-selector-parser@npm:^6.1.1, postcss-selector-parser@npm:^6.1.2":
+"postcss-selector-parser@npm:^6.0.4, postcss-selector-parser@npm:^6.1.1, postcss-selector-parser@npm:^6.1.2":
   version: 6.1.2
   resolution: "postcss-selector-parser@npm:6.1.2"
   dependencies:
