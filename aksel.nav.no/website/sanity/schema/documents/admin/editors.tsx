@@ -42,17 +42,23 @@ export const Editors = defineType({
       validation: (Rule) => Rule.email(),
       hidden: showForDevsOnly(),
     }),
+    defineField({
+      title: "Migrert til redaksjon",
+      name: "migratedToEditorialStaff",
+      type: "boolean",
+    }),
   ],
   preview: {
     select: {
       title: "title",
+      migratedToEditorialStaff: "migratedToEditorialStaff",
     },
     prepare(selection) {
-      const { title } = selection;
+      const { title, migratedToEditorialStaff } = selection;
 
       return {
         title,
-        subtitle: "Forfatter",
+        subtitle: `${migratedToEditorialStaff ? "Migrert |" : ""} Forfatter`,
         media: () => (
           <Avatar
             size={100}

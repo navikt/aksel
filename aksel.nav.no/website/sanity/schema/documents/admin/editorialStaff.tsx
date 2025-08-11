@@ -50,6 +50,13 @@ export const EditorialStaff = defineType({
         return { current: `${max + 1}` };
       },
     }),
+
+    defineField({
+      title: "Bidragsytere",
+      name: "legacy_contributors",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "editor" }] }],
+    }),
   ],
   preview: {
     select: {
