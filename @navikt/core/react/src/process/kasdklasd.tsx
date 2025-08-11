@@ -11,7 +11,7 @@ import {
   WalletFillIcon,
 } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
-import Process from "./Process";
+import { Process } from "./Process";
 
 const meta: Meta<typeof Process> = {
   title: "ds-react/Process",
