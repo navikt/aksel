@@ -1,6 +1,7 @@
 "use client";
 
 import cl from "clsx";
+import { stegaClean } from "next-sanity";
 import NextLink from "next/link";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
@@ -83,7 +84,7 @@ function TableOfContents({
                   })}
                   data-current={active}
                 >
-                  {removeEmojiesFromText(node.title).trim()}
+                  {removeEmojiesFromText(stegaClean(node.title)).trim()}
                 </NextLink>
               </BodyShort>
             );

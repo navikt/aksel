@@ -1,5 +1,5 @@
 .navds-stepper {
-  --navds-stepper-circle-size: 1.75rem;
+  --navds-stepper-circle-size: 2rem;
   --navds-stepper-border-width: 2px;
   --navds-stepper-line-length: 1rem;
 
@@ -67,7 +67,8 @@
   text-decoration: none;
   cursor: pointer;
   padding: var(--navds-stepper-border-width);
-  margin: calc(var(--navds-stepper-border-width) * -1) calc(var(--navds-stepper-border-width) * -1) 1.75rem;
+  margin: calc(var(--navds-stepper-border-width) * -1) calc(var(--navds-stepper-border-width) * -1)
+    var(--navds-stepper-circle-size);
 }
 
 .navds-stepper__item:last-child .navds-stepper__step {
@@ -141,6 +142,7 @@ button.navds-stepper__step {
   grid-column: circle;
   display: inline-grid;
   place-items: center;
+  place-content: center;
   flex-shrink: 0;
   width: var(--navds-stepper-circle-size);
   height: var(--navds-stepper-circle-size);
@@ -152,7 +154,9 @@ button.navds-stepper__step {
 .navds-stepper__circle--success {
   border: none;
   background: none;
-  font-size: 1.75rem;
+  font-size: calc(var(--navds-stepper-circle-size) * 0.75);
+  width: var(--navds-stepper-circle-size);
+  height: var(--navds-stepper-circle-size);
   color: var(--a-text-on-action);
   background-color: var(--ac-stepper-text, var(--a-surface-action));
 }
@@ -161,7 +165,7 @@ button.navds-stepper__step {
   min-width: fit-content;
   line-height: 1.5;
   grid-column: content;
-  padding-top: 0.035rem;
+  padding-top: 0.16rem;
 }
 
 /* Horizontal */
