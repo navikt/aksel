@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.27.1
+
+### Patch Changes
+
+- Radio/Checkbox: :bug: Fix issue where label was not announced by screen readers in Firefox ([#3973](https://github.com/navikt/aksel/pull/3973))
+
+- Stepper: Increase size of circle from 28px to 32px to sync with new Process component. ([#3968](https://github.com/navikt/aksel/pull/3968))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.27.1
+  - @navikt/aksel-icons@7.27.1
+
 ## 7.27.0
 
 ### Minor Changes
