@@ -123,7 +123,7 @@ export const Process: ProcessComponent = forwardRef<
     ref,
   ) => {
     const { cn } = useRenameCSS();
-    activeStep = activeStep - 1;
+
     return (
       <ol
         data-color="info"
@@ -132,42 +132,16 @@ export const Process: ProcessComponent = forwardRef<
         className={cn("navds-process", className)}
       >
         {React.Children.map(children, (step, index) => {
-          const stepProps: Partial<ProcessStepProps> =
-            React.isValidElement<ProcessStepProps>(step) ? step.props : {};
-
           return (
-            <li
-              className={cn(
-                "navds-process__item",
-                variant === "default" &&
-                  !stepProps.icon &&
-                  "navds-process__item-no-gap",
-              )}
-              data-color={stepProps["data-color"]}
-              key={index + (children?.toString?.() ?? "")}
+            <ProcessContextProvider
+              activeStep={activeStep - 1}
+              index={index}
+              lastIndex={React.Children.count(children)}
+              variant={variant}
+              hideCompletedContent={hideCompletedContent}
             >
-              <span
-                className={cn(
-                  "navds-process__line navds-process__line--1",
-                  index >= activeStep && "navds-process__line--uncompleted",
-                )}
-              />
-              <ProcessContextProvider
-                activeStep={activeStep}
-                index={index}
-                lastIndex={React.Children.count(children)}
-                variant={variant}
-                hideCompletedContent={hideCompletedContent}
-              >
-                {step}
-              </ProcessContextProvider>
-              <span
-                className={cn(
-                  "navds-process__line navds-process__line--2",
-                  index >= activeStep && "navds-process__line--uncompleted",
-                )}
-              />
-            </li>
+              {step}
+            </ProcessContextProvider>
           );
         })}
       </ol>
@@ -176,7 +150,7 @@ export const Process: ProcessComponent = forwardRef<
 ) as ProcessComponent;
 
 /* ------------------------------ Process Step ------------------------------ */
-interface ProcessStepProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
    * Title
    */
@@ -217,7 +191,7 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLDivElement> {
   hideContent?: boolean;
 }
 
-export const ProcessStep = forwardRef<HTMLDivElement, ProcessStepProps>(
+export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
   (
     { title, date, children, icon, completed, hideContent, className, ...rest },
     ref,
@@ -229,80 +203,106 @@ export const ProcessStep = forwardRef<HTMLDivElement, ProcessStepProps>(
       variant = "default",
       hideCompletedContent,
     } = useProcessContext();
+
     completed = completed ?? index <= activeStep;
 
-    if (variant === "icon" && completed && icon === undefined) {
-      icon = (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="1em"
-          height="1em"
-          viewBox="0 0 24 24"
-          fill="none"
-          focusable={false}
-          role="img"
-          aria-hidden
-        >
-          <path
-            d="M10.0352 13.4148L16.4752 7.40467C17.0792 6.83965 18.029 6.86933 18.5955 7.47478C19.162 8.08027 19.1296 9.03007 18.5245 9.59621L11.0211 16.5993C10.741 16.859 10.3756 17 10.0002 17C9.60651 17 9.22717 16.8462 8.93914 16.5611L6.43914 14.0611C5.85362 13.4756 5.85362 12.5254 6.43914 11.9399C7.02467 11.3544 7.97483 11.3544 8.56036 11.9399L10.0352 13.4148Z"
-            fill="currentColor"
-          />
-        </svg>
-      );
+    if (variant === "icon" && completed && !icon) {
+      icon = <CheckmarkIcon />;
     }
 
     return (
-      <div
-        {...rest}
-        aria-current={index === activeStep}
+      <li
         ref={ref}
-        className={cn("navds-process__step", className)}
+        aria-current={index === activeStep}
+        {...rest}
+        className={cn(
+          "navds-process__item",
+          className,
+          variant === "default" && !icon && "navds-process__item-no-gap",
+        )}
+        key={index + (children?.toString?.() ?? "")}
       >
-        <BodyShort
-          as="span"
-          size="medium"
-          weight="semibold"
-          className={cn("navds-process__circle", {
-            "navds-process__circle--small": variant === "default" && !icon,
-            "navds-process__circle--icon": icon,
-          })}
-          data-active={index === activeStep}
-          data-completed={completed}
-          aria-hidden={variant !== "default"}
-        >
-          {icon || (variant === "number" && index + 1)}
-        </BodyShort>
+        <span
+          className={cn(
+            "navds-process__line navds-process__line--1",
+            index >= activeStep && "navds-process__line--uncompleted",
+          )}
+        />
+        <div className={cn("navds-process__step")}>
+          <BodyShort
+            as="span"
+            size="medium"
+            weight="semibold"
+            className={cn("navds-process__circle", {
+              "navds-process__circle--small": variant === "default" && !icon,
+              "navds-process__circle--icon": icon,
+            })}
+            data-active={index === activeStep}
+            data-completed={completed}
+            aria-hidden={variant !== "default"}
+          >
+            {icon || (variant === "number" && index + 1)}
+          </BodyShort>
 
-        <div className={cn("navds-process__content")}>
-          {title && (
-            <Label as="div" className={cn("navds-process__content-title")}>
-              {title}
-            </Label>
-          )}
-          {date && (
-            <BodyShort
-              size="small"
-              spacing
-              textColor="subtle"
-              className={cn("navds-process__content-date")}
-            >
-              {date}
-            </BodyShort>
-          )}
-          {!(
-            hideContent ??
-            (hideCompletedContent && completed && index !== activeStep)
-          ) &&
-            (children && typeof children === "string" ? (
-              <BodyLong size="medium">{children}</BodyLong>
-            ) : (
-              children
-            ))}
+          <div className={cn("navds-process__content")}>
+            {title && (
+              <Label as="div" className={cn("navds-process__content-title")}>
+                {title}
+              </Label>
+            )}
+            {date && (
+              <BodyShort
+                size="small"
+                spacing
+                textColor="subtle"
+                className={cn("navds-process__content-date")}
+              >
+                {date}
+              </BodyShort>
+            )}
+            {!(
+              hideContent ??
+              (hideCompletedContent && completed && index !== activeStep)
+            ) &&
+              (children && typeof children === "string" ? (
+                <BodyLong size="medium">{children}</BodyLong>
+              ) : (
+                children
+              ))}
+          </div>
         </div>
-      </div>
+        <span
+          className={cn(
+            "navds-process__line navds-process__line--2",
+            index >= activeStep && "navds-process__line--uncompleted",
+          )}
+        />
+      </li>
     );
   },
 );
+
+/* --------------------------- Proccess Utilities --------------------------- */
+
+function CheckmarkIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      fill="none"
+      focusable={false}
+      role="img"
+      aria-hidden
+    >
+      <path
+        d="M10.0352 13.4148L16.4752 7.40467C17.0792 6.83965 18.029 6.86933 18.5955 7.47478C19.162 8.08027 19.1296 9.03007 18.5245 9.59621L11.0211 16.5993C10.741 16.859 10.3756 17 10.0002 17C9.60651 17 9.22717 16.8462 8.93914 16.5611L6.43914 14.0611C5.85362 13.4756 5.85362 12.5254 6.43914 11.9399C7.02467 11.3544 7.97483 11.3544 8.56036 11.9399L10.0352 13.4148Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
 
 /* -------------------------- Process exports ------------------------- */
 Process.Step = ProcessStep;
