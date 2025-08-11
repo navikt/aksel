@@ -99,6 +99,7 @@ export const useFormField = (
       id,
       ...ariaInvalid,
       "aria-describedby":
+        // We check that description is string to avoid adding it if it's a ReadMore.
         cl(props["aria-describedby"], {
           [inputDescriptionId]:
             props.description && typeof props.description === "string",

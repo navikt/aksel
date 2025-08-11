@@ -10,6 +10,8 @@ export const useFieldset = (props: FormFieldProps) => {
   return {
     ...formField,
     inputProps: {
+      // We don't include errorId here, because it will be included on each radio/checkbox inside.
+      // We check that description is string to avoid adding it if it's a ReadMore.
       "aria-describedby":
         cl(props["aria-describedby"], {
           [formField.inputDescriptionId]:
