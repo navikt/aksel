@@ -10815,18 +10815,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-env@npm:^7.0.0":
-  version: 7.0.3
-  resolution: "cross-env@npm:7.0.3"
-  dependencies:
-    cross-spawn: "npm:^7.0.1"
-  bin:
-    cross-env: src/bin/cross-env.js
-    cross-env-shell: src/bin/cross-env-shell.js
-  checksum: 10/e99911f0d31c20e990fd92d6fd001f4b01668a303221227cc5cb42ed155f086351b1b3bd2699b200e527ab13011b032801f8ce638e6f09f854bdf744095e604c
-  languageName: node
-  linkType: hard
-
 "cross-spawn-async@npm:^2.1.1":
   version: 2.2.5
   resolution: "cross-spawn-async@npm:2.2.5"
@@ -10850,7 +10838,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.1, cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.5, cross-spawn@npm:^7.0.6":
+"cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.5, cross-spawn@npm:^7.0.6":
   version: 7.0.6
   resolution: "cross-spawn@npm:7.0.6"
   dependencies:
@@ -26203,7 +26191,7 @@ __metadata:
     clsx: "npm:^2.1.0"
     codesandbox-import-utils: "npm:^2.2.3"
     copyfiles: "npm:^2.4.1"
-    cross-env: "npm:^7.0.0"
+    cross-env: "npm:^10.0.0"
     date-fns: "npm:^4.0.0"
     fuse.js: "npm:^7.0.0"
     isomorphic-dompurify: "npm:2.23.0"
