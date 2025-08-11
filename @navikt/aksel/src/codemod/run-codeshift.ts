@@ -39,7 +39,6 @@ export async function runCodeshift(
     await jscodeshift.run(codemodPath, filepaths, {
       babel: true,
       ignorePattern: ignoreNodeModules,
-      extensions: "tsx,ts,jsx,js",
       parser: "tsx",
       verbose: 2,
       runInBand: true,

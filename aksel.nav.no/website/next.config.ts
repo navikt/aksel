@@ -110,36 +110,40 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/preview/:slug*",
-        destination: "/api/preview?slug=:slug*",
+        destination: "/admin/presentation?preview=/:slug*",
+        permanent: false,
+      },
+      {
+        source: "/ikoner",
+        destination: "/komponenter/ikoner",
         permanent: true,
       },
-      /* ikon-page */
-      // {
-      //   source: "/ikoner",
-      //   destination: "/komponenter/ikoner",
-      //   permanent: true,
-      // },
-      // {
-      //   source: "/ikoner/:slug*",
-      //   destination: "/komponenter/ikoner",
-      //   permanent: true,
-      // },
-      /* landing-pages */
-      // {
-      //   source: "/grunnleggende",
-      //   destination: "/designsystemet",
-      //   permanent: true,
-      // },
-      // {
-      //   source: "/komponenter",
-      //   destination: "/designsystemet",
-      //   permanent: true,
-      // },
-      // {
-      //   source: "/monster-maler",
-      //   destination: "/designsystemet",
-      //   permanent: true,
-      // },
+      {
+        source: "/ikoner/:slug*",
+        destination: "/komponenter/ikoner",
+        permanent: true,
+      },
+      {
+        source: "/grunnleggende",
+        destination: "/designsystemet",
+        permanent: false,
+      },
+      {
+        source: "/komponenter",
+        destination: "/designsystemet",
+        permanent: false,
+      },
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "design.nav.no",
+          },
+        ],
+        permanent: false,
+        destination: "https://aksel.nav.no/:path*",
+      },
     ];
   },
 
@@ -158,6 +162,7 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],
     largePageDataBytes: 128 * 2000,
   },
+  serverExternalPackages: ["@navikt/next-logger", "next-logger", "pino"],
 };
 
 module.exports =

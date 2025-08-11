@@ -1,9 +1,9 @@
 import groupBy from "lodash/groupBy";
 import NodeCache from "node-cache";
 import "server-only";
+import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import { client } from "@/app/_sanity/client";
 import { GLOBAL_SEARCH_QUERY_ALL } from "@/app/_sanity/queries";
-import { PAGE_ROUTES } from "@/app/routing-config";
 import { SearchPageT } from "./GlobalSearch.config";
 
 /**

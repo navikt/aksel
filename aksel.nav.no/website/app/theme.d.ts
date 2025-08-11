@@ -1,4 +1,33 @@
 import "react";
+import type {} from "@navikt/core/react/types/theme";
+
+/**
+ * @example
+ * ```tsx
+ * import type { AkselColor } from "@navikt/ds-react/types/theme";
+ *
+ * interface MyComponentProps {
+ *   color: AkselColor;
+ * }
+ *
+ * const MyComponent = ({ color }: MyComponentProps) => {
+ *  return <div data-color={color}>Hello World</div>;
+ *};
+ * // Valid usage:
+ * const component1 = <MyComponent color="danger" />; // Predefined color
+ * const component2 = <MyComponent color="my-brand-primary" />; // Custom color
+ * const component3 = <MyComponent color="project-specific-accent" />; // Custom color
+ *
+ * // Invalid usage (TypeScript will error if tsconfig is set up correctly):
+ * // const component4 = <MyComponent color="non-existent-color" />;
+ * ```
+ */
+declare module "@navikt/ds-react/types/theme" {
+  export interface CustomAkselColor {
+    "aksel-brand-teal": never;
+    "aksel-brand-pink": never;
+  }
+}
 
 declare module "react" {
   interface HTMLAttributes {
@@ -18,5 +47,10 @@ declare module "react" {
      * Adds line-clamping to the text.
      */
     "data-clamp-text"?: "4-lines";
+    /**
+     * Some components may need changes based on the page-type.
+     * This is used to apply specific styles based on the page type.
+     */
+    "data-page-layout"?: "centered" | "left-aligned";
   }
 }

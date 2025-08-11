@@ -1,0 +1,13 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aksel repo scripts",
+  "scripts": {
+    "script:git-release": "tsx ./git-release"
+  },
+  "devDependencies": {
+    "simple-git": "^3.28.0",
+    "tsx": "^4.19.1"
+  }
+}

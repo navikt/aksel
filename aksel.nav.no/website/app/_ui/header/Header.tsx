@@ -10,7 +10,7 @@ import styles from "./Header.module.css";
 
 const LINKS = [
   { name: "God praksis", href: "/god-praksis" },
-  { name: "Designsystemet", href: "/komponenter-2" },
+  { name: "Designsystemet", href: "/designsystemet" },
   { name: "Bloggen", href: "/produktbloggen" },
 ];
 

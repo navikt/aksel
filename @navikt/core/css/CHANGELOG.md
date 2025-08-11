@@ -1,5 +1,35 @@
 # @navikt/ds-css
 
+## 7.27.1
+
+### Patch Changes
+
+- Stepper: Increase size of circle from 28px to 32px to sync with new Process component. ([#3968](https://github.com/navikt/aksel/pull/3968))
+
+## 7.27.0
+
+### Patch Changes
+
+- Combobox: Focus styling did not check for `:has` selector-support correctly. ([#3965](https://github.com/navikt/aksel/pull/3965))
+
+## 7.26.0
+
+## 7.25.2
+
+## 7.25.1
+
+## 7.25.0
+
+### Minor Changes
+
+- FileUpload: Allow for custom buttons in FileUpload.Item. ([#3906](https://github.com/navikt/aksel/pull/3906))
+
+### Patch Changes
+
+- Table: Selected rows are now highlighted with outline. ([#3898](https://github.com/navikt/aksel/pull/3898))
+
+- Chat: Removed ol > li semantics, replaced with 'div'. ([#3904](https://github.com/navikt/aksel/pull/3904))
+
 ## 7.24.0
 
 ### Minor Changes

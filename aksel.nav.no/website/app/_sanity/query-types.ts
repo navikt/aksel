@@ -1760,6 +1760,21 @@ export type Ds_endringslogg_artikkel = {
   };
   content?: Riktekst_grunnleggende;
   visMer?: boolean;
+  seo?: {
+    meta?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
 };
 
 export type Grunnleggende_landingsside = {
@@ -1809,7 +1824,6 @@ export type Komponenter_landingsside = {
   overview_pages?: Array<string>;
   ingress_primitives?: string;
   ingress_core?: string;
-  ingress_alpha?: string;
   ingress_legacy?: string;
   seo?: {
     meta?: string;
@@ -2195,7 +2209,7 @@ export type Komponent_artikkel = {
   };
   publishedAt?: string;
   heading?: string;
-  kategori?: "primitives" | "core" | "alpha" | "legacy" | "standalone";
+  kategori?: "primitives" | "core" | "legacy" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
   contributors?: Array<{
@@ -2635,6 +2649,7 @@ export type Aksel_ds_forside = {
   ds_forside_title?: string;
   ds_forside_ingress?: string;
   ds_forside_promo_tag?: {
+    show?: boolean;
     label?: string;
     text?: string;
     link?: string;
@@ -2996,15 +3011,10 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../app/_sanity/queries.ts
 // Variable: DS_FRONT_PAGE_QUERY
-// Query: *[_type == "aksel_ds_forside"][0] {    ds_forside_title,    ds_forside_ingress,    ds_forside_promo_tag { label, text, link },    ds_getting_started[]{ description, icon, link, title },    ds_layers_overview,    ds_changelog { title, ingress },    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},    ds_support[]{description, link, title},    seo { image, meta }  }
+// Query: *[_type == "aksel_ds_forside"][0] {    ds_forside_title,    ds_forside_ingress,    ds_getting_started[]{ description, icon, link, title },    ds_layers_overview,    ds_changelog { title, ingress },    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},    ds_support[]{description, link, title},    seo { image, meta }  }
 export type DS_FRONT_PAGE_QUERYResult = {
   ds_forside_title: string | null;
   ds_forside_ingress: string | null;
-  ds_forside_promo_tag: {
-    label: string | null;
-    text: string | null;
-    link: string | null;
-  } | null;
   ds_getting_started: Array<{
     description: string | null;
     icon: "Code" | "Palette" | null;
@@ -3053,6 +3063,14 @@ export type DS_FRONT_PAGE_QUERYResult = {
     meta: string | null;
   } | null;
 } | null;
+// Variable: DS_PROMO_QUERY
+// Query: *[_type == "aksel_ds_forside"][0].ds_forside_promo_tag
+export type DS_PROMO_QUERYResult = {
+  show?: boolean;
+  label?: string;
+  text?: string;
+  link?: string;
+} | null;
 // Variable: DESIGNSYSTEM_SIDEBAR_QUERY
 // Query: *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {  _type,  heading,  "slug": slug.current,  kategori,  "tag": status.tag,  "sidebarindex": sidebarindex,}
 export type DESIGNSYSTEM_SIDEBAR_QUERYResult = Array<
@@ -3076,13 +3094,7 @@ export type DESIGNSYSTEM_SIDEBAR_QUERYResult = Array<
       _type: "komponent_artikkel";
       heading: string | null;
       slug: string | null;
-      kategori:
-        | "alpha"
-        | "core"
-        | "legacy"
-        | "primitives"
-        | "standalone"
-        | null;
+      kategori: "core" | "legacy" | "primitives" | "standalone" | null;
       tag: "beta" | "deprecated" | "new" | "ready" | null;
       sidebarindex: number | null;
     }
@@ -4315,7 +4327,6 @@ export type DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERYResult = {
   overview_pages?: Array<string>;
   ingress_primitives?: string;
   ingress_core?: string;
-  ingress_alpha?: string;
   ingress_legacy?: string;
   seo?: {
     meta?: string;
@@ -4629,7 +4640,7 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
   };
   publishedAt?: string;
   heading?: string;
-  kategori?: "alpha" | "core" | "legacy" | "primitives" | "standalone";
+  kategori?: "core" | "legacy" | "primitives" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
   contributors?: Array<{
@@ -5950,37 +5961,6 @@ export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult = Array<
       slug: string | null;
       status: {
         tag?: "beta" | "deprecated" | "new" | "ready";
-        unsafe?: boolean;
-        internal?: boolean;
-        bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
-      kategori:
-        | "alpha"
-        | "core"
-        | "legacy"
-        | "primitives"
-        | "standalone"
-        | null;
-      sidebarindex: number | null;
-      description: string | null;
-    }
-  | {
-      _id: string;
-      heading: string | null;
-      slug: string | null;
-      status: {
-        tag?: "beta" | "deprecated" | "new" | "ready";
         bilde?: {
           asset?: {
             _ref: string;
@@ -6026,6 +6006,31 @@ export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult = Array<
         };
       } | null;
       kategori: "brev" | "soknadsdialog" | "standalone" | "stotte" | null;
+      sidebarindex: number | null;
+      description: string | null;
+    }
+  | {
+      _id: string;
+      heading: string | null;
+      slug: string | null;
+      status: {
+        tag?: "beta" | "deprecated" | "new" | "ready";
+        unsafe?: boolean;
+        internal?: boolean;
+        bilde?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      } | null;
+      kategori: "core" | "legacy" | "primitives" | "standalone" | null;
       sidebarindex: number | null;
       description: string | null;
     }
@@ -6056,36 +6061,6 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
       slug: string | null;
       status: {
         tag?: "beta" | "deprecated" | "new" | "ready";
-        unsafe?: boolean;
-        internal?: boolean;
-        bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
-      kategori:
-        | "alpha"
-        | "core"
-        | "legacy"
-        | "primitives"
-        | "standalone"
-        | null;
-      sidebarindex: number | null;
-    }
-  | {
-      _id: string;
-      heading: string | null;
-      slug: string | null;
-      status: {
-        tag?: "beta" | "deprecated" | "new" | "ready";
         bilde?: {
           asset?: {
             _ref: string;
@@ -6130,6 +6105,30 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
         };
       } | null;
       kategori: "brev" | "soknadsdialog" | "standalone" | "stotte" | null;
+      sidebarindex: number | null;
+    }
+  | {
+      _id: string;
+      heading: string | null;
+      slug: string | null;
+      status: {
+        tag?: "beta" | "deprecated" | "new" | "ready";
+        unsafe?: boolean;
+        internal?: boolean;
+        bilde?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      } | null;
+      kategori: "core" | "legacy" | "primitives" | "standalone" | null;
       sidebarindex: number | null;
     }
   | {
@@ -8591,7 +8590,21 @@ export type METADATA_BY_SLUG_QUERYResult =
       heading: string | null;
       ingress: null;
       publishedAt: null;
-      seo: null;
+      seo: {
+        meta?: string;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      } | null;
     }
   | {
       heading: string | null;
@@ -8742,19 +8755,63 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
   } | null;
 } | null;
 // Variable: ENDRINGSLOGG_METADATA_BY_SLUG_QUERY
-// Query: *[slug.current == $slug][0]{    heading,    endringsdato,    endringstype,    herobilde  }
+// Query: *[slug.current == $slug][0]{    heading,    endringsdato,    endringstype,    herobilde,    seo  }
 export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult =
   | {
       heading: null;
       endringsdato: null;
       endringstype: null;
       herobilde: null;
+      seo: null;
+    }
+  | {
+      heading: null;
+      endringsdato: null;
+      endringstype: null;
+      herobilde: null;
+      seo: {
+        meta?: string;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      } | null;
     }
   | {
       heading: string | null;
       endringsdato: null;
       endringstype: null;
       herobilde: null;
+      seo: null;
+    }
+  | {
+      heading: string | null;
+      endringsdato: null;
+      endringstype: null;
+      herobilde: null;
+      seo: {
+        meta?: string;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      } | null;
     }
   | {
       heading: string | null;
@@ -8773,6 +8830,21 @@ export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult =
         dekorativt?: boolean;
         alt?: string;
         _type: "image";
+      } | null;
+      seo: {
+        meta?: string;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
       } | null;
     }
   | null;
@@ -10355,7 +10427,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         };
         publishedAt?: string;
         heading?: string;
-        kategori?: "alpha" | "core" | "legacy" | "primitives" | "standalone";
+        kategori?: "core" | "legacy" | "primitives" | "standalone";
         sidebarindex?: number;
         slug: string | null;
         contributors: Array<{
@@ -10586,13 +10658,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
               _type: "image";
             };
           } | null;
-          kategori:
-            | "alpha"
-            | "core"
-            | "legacy"
-            | "primitives"
-            | "standalone"
-            | null;
+          kategori: "core" | "legacy" | "primitives" | "standalone" | null;
           _createdAt: string;
           _updatedAt: string;
           publishedAt: string | null;
@@ -12958,7 +13024,8 @@ export type SITEMAP_ARTICLES_BY_TYPE_QUERYResult = Array<
 
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "aksel_ds_forside"][0] {\n    ds_forside_title,\n    ds_forside_ingress,\n    ds_forside_promo_tag { label, text, link },\n    ds_getting_started[]{ description, icon, link, title },\n    ds_layers_overview,\n    ds_changelog { title, ingress },\n    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},\n    ds_support[]{description, link, title},\n    seo { image, meta }\n  }': DS_FRONT_PAGE_QUERYResult;
+    '*[_type == "aksel_ds_forside"][0] {\n    ds_forside_title,\n    ds_forside_ingress,\n    ds_getting_started[]{ description, icon, link, title },\n    ds_layers_overview,\n    ds_changelog { title, ingress },\n    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},\n    ds_support[]{description, link, title},\n    seo { image, meta }\n  }': DS_FRONT_PAGE_QUERYResult;
+    '*[_type == "aksel_ds_forside"][0].ds_forside_promo_tag': DS_PROMO_QUERYResult;
     '*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {\n  _type,\n  heading,\n  "slug": slug.current,\n  kategori,\n  "tag": status.tag,\n  "sidebarindex": sidebarindex,\n}': DESIGNSYSTEM_SIDEBAR_QUERYResult;
     '*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {\n  _type,\n  overview_pages\n  }': DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult;
     '*[_type == "aksel_blogg" && slug.current == $slug][0]\n{\n  ...,\n  "slug": slug.current,\n  content[]{\n    ...,\n    \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n  },\n  publishedAt,\n  writers[]->{title, description, avatar_id}\n}': BLOGG_BY_SLUG_QUERYResult;
@@ -12978,7 +13045,7 @@ declare module "@sanity/client" {
     "\n  *[_type == $type && defined(slug.current)].slug.current\n": SLUG_BY_TYPE_QUERYResult;
     '\n  *[_type == "ds_endringslogg_artikkel"]{\n    heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n  }': ENDRINGSLOGG_QUERYResult;
     '\n  *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{\n    "primary": {\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n    },\n    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n    },\n    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content, visMer\n    }\n  }\n': ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult;
-    "*[slug.current == $slug][0]{\n    heading,\n    endringsdato,\n    endringstype,\n    herobilde\n  }": ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult;
+    "*[slug.current == $slug][0]{\n    heading,\n    endringsdato,\n    endringstype,\n    herobilde,\n    seo\n  }": ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult;
     '\n  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]': N_LATEST_CHANGE_LOGS_QUERYResult;
     '*[_type == "gp.tema"] | order(lower(title)){\n  title,\n  _updatedAt,\n  description,\n  pictogram,\n  "slug": slug.current,\n  "articles": *[_type=="aksel_artikkel"\n    && (^._id in undertema[]->tema._ref)] {\n      heading,\n      "slug": slug.current,\n      "undertema": undertema[]->{title, "temaTitle": tema->title},\n      "innholdstype": innholdstype->title,\n      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month\n    } | order(coalesce(views, -1) desc)[0...4]{\n      heading,\n      slug,\n      undertema,\n      innholdstype\n    },\n}': GOD_PRAKSIS_ALL_TEMA_QUERYResult;
     '*[_type == "godpraksis_landingsside"][0].seo': GOD_PRAKSIS_LANDING_PAGE_SEO_QUERYResult;

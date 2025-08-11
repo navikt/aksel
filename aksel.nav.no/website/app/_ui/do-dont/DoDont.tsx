@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import type { Image } from "sanity";
 import { HandKnotIcon, ThumbDownIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { BodyShort, Box, HGrid } from "@navikt/ds-react";
 import { AkselColor } from "@navikt/ds-react/types/theme";
@@ -22,9 +21,7 @@ function DoDont(props: ExtractPortableComponentProps<"do_dont">) {
       gap="space-24"
     >
       {blokker.map((block) => {
-        const imageUrl = urlForImage(block.picture as Image)
-          ?.auto("format")
-          .url();
+        const imageUrl = urlForImage(block.picture)?.auto("format").url();
 
         if (!imageUrl || !block.variant) {
           return null;

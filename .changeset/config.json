@@ -23,7 +23,8 @@
   "ignore": [
     "aksel.nav.no",
     "aksel-icons-figma-plugin",
-    "eslint-plugin-aksel-local"
+    "eslint-plugin-aksel-local",
+    "scripts"
   ],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {

@@ -1,4 +1,5 @@
 import "server-only";
+import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
@@ -8,7 +9,6 @@ import {
   SITEMAP_ARTICLES_BY_TYPE_QUERY,
   SITEMAP_LANDINGPAGES_QUERY,
 } from "@/app/_sanity/queries";
-import { PAGE_ROUTES } from "@/app/routing-config";
 import { allArticleDocuments } from "@/sanity/config";
 
 async function fetchAllSanityPages(): Promise<

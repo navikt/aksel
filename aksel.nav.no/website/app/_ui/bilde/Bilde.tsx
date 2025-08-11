@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import NextLink from "next/link";
-import type { Image } from "sanity";
 import { BodyLong, HGrid, Link } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { urlForImage } from "@/app/_sanity/utils";
@@ -17,10 +16,8 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
     kilde,
   } = props.value;
 
-  const imageUrl = urlForImage(props?.value as Image)
+  const imageUrl = urlForImage(props?.value)
     ?.auto("format")
-    // TODO: (stw) Remove before production
-    .dataset("development")
     .url();
 
   if (!imageUrl) {
@@ -44,15 +41,12 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
       {caption && (
         <HGrid
           as="figcaption"
-          marginBlock="space-12 0"
+          marginBlock="space-8 0"
           marginInline="space-12"
           gap="space-4"
+          className={styles.bildeCaption}
         >
-          <BodyLong
-            as="span"
-            size="small"
-            align={kilde?.har_kilde ? "start" : "center"}
-          >
+          <BodyLong as="span" size="small">
             {caption}
           </BodyLong>
           {kilde?.har_kilde && (
@@ -60,9 +54,14 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
               {kilde?.link ? (
                 <>
                   {`${kilde?.prefix}: `}
-                  <NextLink href={kilde.link} passHref legacyBehavior>
-                    <Link className="break-normal">{kilde?.tekst}</Link>
-                  </NextLink>
+
+                  <Link
+                    as={NextLink}
+                    href={kilde.link}
+                    className="break-normal"
+                  >
+                    {kilde?.tekst}
+                  </Link>
                 </>
               ) : (
                 <>{`${kilde?.prefix}: ${kilde?.tekst}`}</>

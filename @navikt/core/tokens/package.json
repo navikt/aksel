@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "7.24.0",
+  "version": "7.27.1",
   "description": "Design-tokens for Nav designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@figma/plugin-typings": "^1.100.2",
     "colorjs.io": "^0.5.2",
-    "esbuild": "^0.25.5",
+    "esbuild": "^0.25.8",
     "lightningcss": "^1.29.3",
     "lodash": "^4.17.21",
     "style-dictionary": "^4.1.1",

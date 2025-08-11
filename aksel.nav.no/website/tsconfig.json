@@ -19,7 +19,7 @@
       "node",
       "umami",
       "@navikt/ds-react/types/theme",
-      "./app/aksel-theme.d.ts"
+      "./app/theme.d.ts"
     ],
     "paths": {
       "@/sb-util": ["./.storybook/utils.tsx"],
@@ -42,6 +42,7 @@
       "@/app/CustomPortableText": [
         "./app/_ui/portable-text/CustomPortableText.tsx"
       ],
+      "@/ui-utils/*": ["./app/_ui/utils/*"],
       "@/app/*": ["./app/*"]
     },
     "plugins": [

@@ -4,12 +4,11 @@ import { draftMode } from "next/headers";
 import "@navikt/ds-tokens/darkside-css";
 import { SanityLive } from "@/app/_sanity/live";
 import { ConsentBanner } from "@/app/_ui/consent-banner/ConsentBanner";
+import { CookieConsentProvider } from "@/app/_ui/cookie-consent/CookieConsent.Provider";
 import { DisableDraftMode } from "@/app/_ui/disable-draft-mode/DisableDraftMode";
 import { ThemeProvider } from "@/app/_ui/theming/ThemeProvider";
 import { Umami } from "@/app/_ui/umami/Umami";
 import "./globals.css";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
@@ -19,6 +18,8 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  metadataBase: new URL("https://aksel.nav.no/"),
+
   alternates: {
     types: {
       "application/rss+xml": "https://aksel.nav.no/rss/produktbloggen-rss.xml",
@@ -49,12 +50,18 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <Umami />
-        <ThemeProvider>
-          <ConsentBanner />
-          {children}
-        </ThemeProvider>
-        <SanityLive />
+        <CookieConsentProvider>
+          <Umami isDraftMode={isDraftMode} />
+          <ThemeProvider>
+            <ConsentBanner />
+            {children}
+          </ThemeProvider>
+        </CookieConsentProvider>
+        <SanityLive
+          intervalOnGoAway={false}
+          refreshOnFocus={false}
+          refreshOnMount={false}
+        />
         {isDraftMode && (
           <>
             <DisableDraftMode />

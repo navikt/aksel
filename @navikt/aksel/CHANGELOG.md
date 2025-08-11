@@ -1,5 +1,55 @@
 # @navikt/aksel
 
+## 7.27.1
+
+### Patch Changes
+
+- Updated dependencies [[`e694aba`](https://github.com/navikt/aksel/commit/e694aba9dd2184e64274f89cc15f34cd8b56d25a)]:
+  - @navikt/ds-css@7.27.1
+  - @navikt/ds-tokens@7.27.1
+
+## 7.27.0
+
+### Patch Changes
+
+- Updated dependencies [[`703a071`](https://github.com/navikt/aksel/commit/703a0713fdbc67f20674eedbfbfc8093bac76060), [`92985b8`](https://github.com/navikt/aksel/commit/92985b881460747164da3b15f8e1aa0f444c1375)]:
+  - @navikt/ds-css@7.27.0
+  - @navikt/ds-tokens@7.27.0
+
+## 7.26.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.26.0
+  - @navikt/ds-tokens@7.26.0
+
+## 7.25.2
+
+### Patch Changes
+
+- CLI: Codemods now respect filepath globs instead of ignoring some based on file-extension. ([#3955](https://github.com/navikt/aksel/pull/3955))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.25.2
+  - @navikt/ds-tokens@7.25.2
+
+## 7.25.1
+
+### Patch Changes
+
+- Updated dependencies [[`435f528`](https://github.com/navikt/aksel/commit/435f528d65713171533a6adfbd5f9cafd34539ba)]:
+  - @navikt/ds-tokens@7.25.1
+  - @navikt/ds-css@7.25.1
+
+## 7.25.0
+
+### Patch Changes
+
+- Updated dependencies [[`f3de775`](https://github.com/navikt/aksel/commit/f3de77539fbf1e8e00de905730a2e742b263c9c7), [`8b62b2b`](https://github.com/navikt/aksel/commit/8b62b2b1e46251e9e61319be869b77f9b5f5e212), [`94726fc`](https://github.com/navikt/aksel/commit/94726fc60615d7ed2de776620b27f8e40fb61688)]:
+  - @navikt/ds-css@7.25.0
+  - @navikt/ds-tokens@7.25.0
+
 ## 7.24.0
 
 ### Patch Changes
