@@ -12,7 +12,8 @@ export const useFieldset = (props: FormFieldProps) => {
     inputProps: {
       "aria-describedby":
         cl(props["aria-describedby"], {
-          [formField.inputDescriptionId]: props.description,
+          [formField.inputDescriptionId]:
+            props.description && typeof props.description === "string",
         }) || undefined,
     },
   };
