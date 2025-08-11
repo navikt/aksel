@@ -15,6 +15,8 @@ export {
   type DatePickerStandaloneProps,
   type DateValidationT,
   type RangeValidationT,
+  type UseDatepickerOptions,
+  type UseRangeDatepickerOptions,
 } from "./date/datepicker";
 export {
   MonthPicker,
