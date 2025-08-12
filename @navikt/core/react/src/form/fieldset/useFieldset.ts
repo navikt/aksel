@@ -1,17 +1,22 @@
-import { useFormField } from "../useFormField";
+import cl from "clsx";
+import { type FormFieldProps, useFormField } from "../useFormField";
 
 /**
  * Handles props for Fieldset in context with parent Fieldset.
  */
-export const useFieldset = (props) => {
+export const useFieldset = (props: FormFieldProps) => {
   const formField = useFormField(props, "fieldset");
-  const { inputProps } = formField;
 
   return {
     ...formField,
     inputProps: {
-      "aria-invalid": inputProps["aria-invalid"],
-      "aria-describedby": inputProps["aria-describedby"],
+      // We don't include errorId here, because it will be included on each radio/checkbox inside.
+      // We check that description is string to avoid adding it if it's a ReadMore.
+      "aria-describedby":
+        cl(props["aria-describedby"], {
+          [formField.inputDescriptionId]:
+            props.description && typeof props.description === "string",
+        }) || undefined,
     },
   };
 };

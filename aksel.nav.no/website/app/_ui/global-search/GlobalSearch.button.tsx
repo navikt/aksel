@@ -1,7 +1,8 @@
 "use client";
 
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { BodyShort, Button, Hide, Show } from "@navikt/ds-react";
+import { Button, Detail, HStack, Hide, Show } from "@navikt/ds-react";
+import { Kbd } from "@/app/_ui/kbd/Kbd";
 import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
@@ -23,12 +24,15 @@ function GlobalSearchButton() {
       onClick={openSearch}
     >
       {showChildContent && (
-        <>
-          Søk{" "}
-          <BodyShort size="small" as="span">
-            (ctrl + k)
-          </BodyShort>
-        </>
+        <HStack gap="space-8" as="span">
+          Søk
+          <HStack gap="space-2" asChild aria-hidden>
+            <Detail as="span">
+              <Kbd>Ctrl</Kbd>
+              <Kbd>k</Kbd>
+            </Detail>
+          </HStack>
+        </HStack>
       )}
     </Button>
   );

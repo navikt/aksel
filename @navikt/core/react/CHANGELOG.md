@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.28.0
+
+### Patch Changes
+
+- Types: Exported `UseRangeDatepickerOptions` and `UseDatepickerOptions` types from Datepicker hooks. ([#3983](https://github.com/navikt/aksel/pull/3983))
+
+- Updated dependencies [[`b24ebb3`](https://github.com/navikt/aksel/commit/b24ebb3499c70480e53127836e1eed5b3d210d3e)]:
+  - @navikt/aksel-icons@7.28.0
+  - @navikt/ds-tokens@7.28.0
+
 ## 7.27.1
 
 ### Patch Changes
