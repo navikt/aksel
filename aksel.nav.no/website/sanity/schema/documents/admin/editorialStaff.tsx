@@ -1,6 +1,7 @@
 import { parseInt } from "lodash";
 import Image from "next/image";
 import { SlugValue, defineField, defineType } from "sanity";
+import { SANITY_API_VERSION } from "@/sanity/config";
 import { showForDevsOnly } from "../../../util";
 
 export const EditorialStaff = defineType({
@@ -30,7 +31,7 @@ export const EditorialStaff = defineType({
       type: "slug",
       hidden: showForDevsOnly(),
       initialValue: async (params, context) => {
-        const client = context.getClient({ apiVersion: "2025-06-16" });
+        const client = context.getClient({ apiVersion: SANITY_API_VERSION });
 
         let slugs: SlugValue[] = await client.fetch(
           `*[_type == "editorial_staff"].avatar_id`,
