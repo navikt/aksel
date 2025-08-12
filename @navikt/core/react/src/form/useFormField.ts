@@ -112,16 +112,19 @@ export const useFormField = (
   };
 };
 
-export function containsReadMore(children: React.ReactNode) {
+export function containsReadMore(
+  children: React.ReactNode,
+  checkNested = true,
+): boolean {
   if (React.isValidElement(children)) {
     if (children.type === ReadMore) {
       return true;
     }
-    if (children.props.children) {
-      return containsReadMore(children.props.children);
+    if (children.props.children && checkNested) {
+      return containsReadMore(children.props.children, false);
     }
   } else if (Array.isArray(children)) {
-    return children.some(containsReadMore);
+    return children.some((child) => containsReadMore(child, checkNested));
   }
   return false;
 }
