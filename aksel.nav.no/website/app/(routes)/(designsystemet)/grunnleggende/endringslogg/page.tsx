@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { defineQuery } from "next-sanity";
 import { Metadata } from "next/types";
+import { coerce as semverCoerce, valid as semverValid } from "semver";
 import { Heading, VStack } from "@navikt/ds-react";
 import { PageProps } from "@/app/(routes)/next-types";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -52,6 +53,25 @@ export default async function Page({ searchParams }: PageProps) {
   const categoryFilter = categories.includes(paramCategory.toString())
     ? paramCategory.toString()
     : null;
+
+  /**
+   * Proposed change
+   * - Check if paramTextFilter is a valid semver version range with `validRange`:  console.info("valid", semverValidRange(">=1.0.0 <2.0.0"));
+   * - If it is, assume we want to filter by semver version
+   * - - We probably want to ignore periode and kategori filters when this is true
+   * - If it is not, treat it as a regular text filter
+   * - When true we need to do a few things:
+   * - - Fetch all "code" entries: Only need title and _id
+   * - - Filter the entries by semver version range using `satisfies`: console.info(semverSatisfies("1.0.1", ">=1.0.0 <2.0.0"));
+   * - - Now we can fetch the full entries for the filtered results.
+   * - - @note: Might be just as fast to fetch code all entries, needs to be tested.
+   *
+   */
+  const isSemverSearch = semverValid(
+    semverCoerce(paramTextFilter.toString().trim()),
+  );
+  console.warn("isSemver:", isSemverSearch, paramTextFilter.toString().trim());
+
   const textFilter = paramTextFilter.toString().trim().split(" ");
 
   const yearQuery = yearFilter
