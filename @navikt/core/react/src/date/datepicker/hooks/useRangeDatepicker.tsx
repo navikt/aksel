@@ -38,7 +38,7 @@ const getValidationMessage = (from = {}, to = {}): RangeValidationT => ({
   },
 });
 
-interface UseRangeDatepickerOptions
+export interface UseRangeDatepickerOptions
   extends Omit<
     UseDatepickerOptions,
     "defaultSelected" | "onDateChange" | "onValidate"
