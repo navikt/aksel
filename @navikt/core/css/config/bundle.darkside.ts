@@ -148,7 +148,6 @@ async function bundleDarkside() {
 
   /* ------------------------------ /global build ----------------------------- */
   for (const style of StyleMappings.baseline) {
-    // eslint-disable-next-line no-inner-declarations
     function parser(input: string) {
       return input
         .split("\n")
@@ -217,7 +216,6 @@ async function bundleDarkside() {
   }
 
   for (const componentLine of componentFiles()) {
-    // eslint-disable-next-line no-inner-declarations
     function parser(input: string) {
       return input
         .split("\n")

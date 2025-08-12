@@ -1,5 +1,45 @@
 # @navikt/ds-react
 
+## 7.27.1
+
+### Patch Changes
+
+- Radio/Checkbox: :bug: Fix issue where label was not announced by screen readers in Firefox ([#3973](https://github.com/navikt/aksel/pull/3973))
+
+- Stepper: Increase size of circle from 28px to 32px to sync with new Process component. ([#3968](https://github.com/navikt/aksel/pull/3968))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.27.1
+  - @navikt/aksel-icons@7.27.1
+
+## 7.27.0
+
+### Minor Changes
+
+- Darkside: Using 'Theme' to set current color-theme now works when root-node does not set light or dark class. ([#3961](https://github.com/navikt/aksel/pull/3961))
+
+### Patch Changes
+
+- Updated dependencies [[`3d9c55e`](https://github.com/navikt/aksel/commit/3d9c55ed7d0a09b4c470bf76907b7ad10b5355d3), [`92985b8`](https://github.com/navikt/aksel/commit/92985b881460747164da3b15f8e1aa0f444c1375)]:
+  - @navikt/aksel-icons@7.27.0
+  - @navikt/ds-tokens@7.27.0
+
+## 7.26.0
+
+### Patch Changes
+
+- Updated dependencies [[`ab84fea`](https://github.com/navikt/aksel/commit/ab84fea35878ff7272abf2389f3d3c7121abfb47)]:
+  - @navikt/aksel-icons@7.26.0
+  - @navikt/ds-tokens@7.26.0
+
+## 7.25.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.25.2
+  - @navikt/aksel-icons@7.25.2
+
 ## 7.25.1
 
 ### Patch Changes

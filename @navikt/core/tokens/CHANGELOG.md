@@ -1,5 +1,17 @@
 # @navikt/ds-tokens
 
+## 7.27.1
+
+## 7.27.0
+
+### Minor Changes
+
+- Darkside: Using 'Theme' to set current color-theme now works when root-node does not set light or dark class. ([#3961](https://github.com/navikt/aksel/pull/3961))
+
+## 7.26.0
+
+## 7.25.2
+
 ## 7.25.1
 
 ### Patch Changes

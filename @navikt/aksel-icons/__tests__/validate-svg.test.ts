@@ -59,6 +59,16 @@ describe(`Each icons has a valid code`, () => {
         });
       });
 
+      test(`has valid fill`, () => {
+        const nodes = selectAll("*", iconAst);
+
+        nodes.forEach((n) => {
+          if (n.properties?.fill && n.properties.fill !== "none") {
+            expect(n.properties.fill).toEqual("#202733");
+          }
+        });
+      });
+
       test(`has valid stroke-width`, () => {
         const nodes = selectAll("*", iconAst);
         nodes.forEach((n) => {

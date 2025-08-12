@@ -138,7 +138,7 @@ async function buildThemedRolesCSS() {
   /**
    * We set 'accent' as the default color palette.
    */
-  const rootSelector = `:root, [data-color=accent]`;
+  const rootSelector = `:root, [data-color=accent], [data-color=""]`;
 
   /* To avoid having to export this const from the "global" types, we declare it here locally so users dont get internal types */
   const colors: Record<AkselColorRole, string> = {

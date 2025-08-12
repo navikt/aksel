@@ -41,15 +41,12 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
       {caption && (
         <HGrid
           as="figcaption"
-          marginBlock="space-12 0"
+          marginBlock="space-8 0"
           marginInline="space-12"
           gap="space-4"
+          className={styles.bildeCaption}
         >
-          <BodyLong
-            as="span"
-            size="small"
-            align={kilde?.har_kilde ? "start" : "center"}
-          >
+          <BodyLong as="span" size="small">
             {caption}
           </BodyLong>
           {kilde?.har_kilde && (
