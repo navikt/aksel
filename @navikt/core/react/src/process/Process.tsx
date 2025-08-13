@@ -6,11 +6,16 @@ import { createContext } from "../util/create-context";
 type ProcessVariant = "default" | "number" | "icon";
 
 interface ProcessContextValue {
-  index: number;
   lastIndex: number;
   variant: ProcessVariant;
   hideCompletedContent: boolean;
   activeStep?: number;
+}
+
+interface ProcessStepContextValue {
+  index: number;
+  active: boolean;
+  lineActive: boolean;
 }
 
 const [ProcessContextProvider, useProcessContext] =
@@ -18,6 +23,14 @@ const [ProcessContextProvider, useProcessContext] =
     hookName: "useProcessContext",
     providerName: "ProcessContextProvider",
     name: "ProcessContext",
+    errorMessage: "<Process.Step> has to be used within <Process>",
+  });
+
+const [ProcessStepContextProvider, useProcessStepContext] =
+  createContext<ProcessStepContextValue>({
+    hookName: "useProcessStepContext",
+    providerName: "ProcessStepContextProvider",
+    name: "ProcessStepContext",
     errorMessage: "<Process.Step> has to be used within <Process>",
   });
 
@@ -30,6 +43,11 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * Index of current active step, all elements before this index will be highlighted.
    */
   activeStep?: number;
+  /**
+   * If true, the active items direction is reversed without reversing items order
+   * @default false
+   */
+  reverseActiveDirection?: boolean;
   /**
    * Styling variant for the step indicators:
    * - "default": Small bullet-like circles
@@ -110,37 +128,53 @@ export const Process: ProcessComponent = forwardRef<
   (
     {
       children,
-      activeStep,
+      className,
+      reverseActiveDirection = false,
+      activeStep = -1,
       variant = "default",
       hideCompletedContent = false,
-      className,
       ...restProps
     }: ProcessProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
 
+    const childrenCount = React.Children.count(children);
+
     return (
-      <ol
-        data-color="info"
-        {...restProps}
-        ref={forwardedRef}
-        className={cn("navds-process", className)}
+      <ProcessContextProvider
+        hideCompletedContent={hideCompletedContent}
+        variant={variant}
+        activeStep={activeStep}
+        lastIndex={childrenCount - 1}
       >
-        {React.Children.map(children, (step, index) => {
-          return (
-            <ProcessContextProvider
-              activeStep={activeStep}
-              index={index}
-              lastIndex={React.Children.count(children)}
-              variant={variant}
-              hideCompletedContent={hideCompletedContent}
-            >
-              {step}
-            </ProcessContextProvider>
-          );
-        })}
-      </ol>
+        <ol
+          data-color="info"
+          {...restProps}
+          ref={forwardedRef}
+          className={cn("navds-process", className)}
+        >
+          {React.Children.map(children, (step, index) => {
+            return (
+              <ProcessStepContextProvider
+                index={index}
+                active={
+                  reverseActiveDirection
+                    ? activeStep >= childrenCount - index - 1
+                    : activeStep >= index
+                }
+                lineActive={
+                  reverseActiveDirection
+                    ? activeStep >= childrenCount - index - 1
+                    : activeStep - 1 >= index
+                }
+              >
+                {step}
+              </ProcessStepContextProvider>
+            );
+          })}
+        </ol>
+      </ProcessContextProvider>
     );
   },
 ) as ProcessComponent;
@@ -175,9 +209,6 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
   icon?: React.ReactNode;
   /**
    * Set this step as completed.
-   *
-   * If not set, it will default to true for every step before and including
-   * activeStep, and false for every step after activeStep.
    */
   completed?: boolean;
   /**
@@ -189,18 +220,26 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
 
 export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
   (
-    { title, date, children, icon, completed, hideContent, className, ...rest },
-    ref,
+    {
+      title,
+      date,
+      children,
+      icon,
+      completed,
+      hideContent,
+      className,
+      ...restProps
+    }: ProcessStepProps,
+    forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
     const {
-      activeStep = 0,
-      index,
+      activeStep,
       variant = "default",
       hideCompletedContent,
     } = useProcessContext();
 
-    completed = completed ?? index <= activeStep;
+    const { index, active, lineActive } = useProcessStepContext();
 
     if (variant === "icon" && completed && !icon) {
       icon = <CheckmarkIcon />;
@@ -208,22 +247,22 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
 
     return (
       <li
-        ref={ref}
+        ref={forwardedRef}
         aria-current={index === activeStep}
-        {...rest}
+        {...restProps}
         className={cn(
           "navds-process__item",
           className,
           variant === "default" && !icon && "navds-process__item-no-gap",
         )}
-        key={index + (children?.toString?.() ?? "")}
       >
-        <span
+        {/* Line above */}
+        {/* <span
           className={cn(
             "navds-process__line navds-process__line--1",
             index >= activeStep && "navds-process__line--uncompleted",
           )}
-        />
+        /> */}
         <div className={cn("navds-process__step")}>
           <BodyShort
             as="span"
@@ -233,7 +272,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
               "navds-process__circle--small": variant === "default" && !icon,
               "navds-process__circle--icon": icon,
             })}
-            data-active={index === activeStep}
+            data-active={active}
             data-completed={completed}
             aria-hidden={variant !== "default"}
           >
@@ -268,10 +307,9 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
           </div>
         </div>
         <span
-          className={cn(
-            "navds-process__line navds-process__line--2",
-            index >= activeStep && "navds-process__line--uncompleted",
-          )}
+          className={cn("navds-process__line navds-process__line--2", {
+            "navds-process__line--uncompleted": !lineActive,
+          })}
         />
       </li>
     );
