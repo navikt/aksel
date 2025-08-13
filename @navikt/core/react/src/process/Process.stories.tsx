@@ -43,8 +43,12 @@ export const Default = ({
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Process activeStep={activeStep} {...props}>
-        <Process.Step title="Start søknad" date={getDateAfter(0)} />
-        <Process.Step title="Personopplysninger" date={getDateAfter(3)}>
+        <Process.Step title="Start søknad" date={getDateAfter(0)} completed />
+        <Process.Step
+          title="Personopplysninger"
+          date={getDateAfter(3)}
+          completed
+        >
           Send inn personopplysninger
         </Process.Step>
         <Process.Step title="Saksopplysninger" date={getDateAfter(6)}>
@@ -155,6 +159,7 @@ Default.args = {
   step4Icon: "<Icon/>",
   step4Completed: undefined,
   step4HideContent: undefined,
+  endless: false,
 };
 
 export const Variants: StoryFn<Story> = () => {

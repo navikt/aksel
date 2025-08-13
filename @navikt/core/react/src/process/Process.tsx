@@ -10,6 +10,7 @@ interface ProcessContextValue {
   variant: ProcessVariant;
   hideCompletedContent: boolean;
   activeStep?: number;
+  endless: boolean;
 }
 
 interface ProcessStepContextValue {
@@ -65,6 +66,11 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * @default false
    */
   hideCompletedContent?: boolean;
+  /**
+   * When true, the last step will have a line that continues.
+   * @default false
+   */
+  endless?: boolean;
 }
 
 interface ProcessComponent
@@ -133,6 +139,7 @@ export const Process: ProcessComponent = forwardRef<
       activeStep = -1,
       variant = "default",
       hideCompletedContent = false,
+      endless = false,
       ...restProps
     }: ProcessProps,
     forwardedRef,
@@ -147,6 +154,7 @@ export const Process: ProcessComponent = forwardRef<
         variant={variant}
         activeStep={activeStep}
         lastIndex={childrenCount - 1}
+        endless={endless}
       >
         <ol
           data-color="info"
@@ -239,10 +247,13 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
+
     const {
       activeStep,
       variant = "default",
       hideCompletedContent,
+      endless,
+      lastIndex,
     } = useProcessContext();
 
     const { index, active, lineActive } = useProcessStepContext();
@@ -260,12 +271,6 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
           "navds-process__item-no-gap": variant === "default" && !icon,
         })}
       >
-        {/* Line above */}
-        {/* <span
-          className={cn(
-            "navds-process__line navds-process__line--1",
-          )}
-        /> */}
         <div className={cn("navds-process__step")}>
           <BodyShort
             as="span"
@@ -276,6 +281,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
               "navds-process__circle--icon": icon,
             })}
             data-active={active}
+            data-current={index === activeStep}
             data-completed={completed}
             aria-hidden={variant !== "default"}
           >
@@ -309,13 +315,15 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
               ))}
           </div>
         </div>
-        <span
-          className={cn(
-            "navds-process__line navds-process__line--2",
-            `navds-process__line--${lineVariant}`,
-          )}
-          data-line-active={lineActive}
-        />
+        {lastIndex > index || endless ? (
+          <span
+            className={cn(
+              "navds-process__line navds-process__line-end",
+              `navds-process__line--${lineVariant}`,
+            )}
+            data-line-active={lineActive}
+          />
+        ) : null}
       </li>
     );
   },
