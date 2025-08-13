@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { useContext } from "react";
+import { ReadMore } from "../read-more/ReadMore";
 import { useId } from "../util/hooks";
 import { FieldsetContext } from "./fieldset/context";
 
@@ -99,10 +100,9 @@ export const useFormField = (
       id,
       ...ariaInvalid,
       "aria-describedby":
-        // We check that description is string to avoid adding it if it's a ReadMore.
         cl(props["aria-describedby"], {
           [inputDescriptionId]:
-            props.description && typeof props.description === "string",
+            props.description && !containsReadMore(props.description),
           [errorId]: showErrorMsg,
           [fieldset?.errorId ?? ""]: hasError && fieldset?.error,
         }) || undefined,
@@ -111,3 +111,20 @@ export const useFormField = (
     },
   };
 };
+
+export function containsReadMore(
+  children: React.ReactNode,
+  checkNested = true,
+): boolean {
+  if (React.isValidElement(children)) {
+    if (children.type === ReadMore) {
+      return true;
+    }
+    if (children.props.children && checkNested) {
+      return containsReadMore(children.props.children, false);
+    }
+  } else if (Array.isArray(children)) {
+    return children.some((child) => containsReadMore(child, checkNested));
+  }
+  return false;
+}
