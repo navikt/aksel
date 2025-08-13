@@ -281,7 +281,6 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
               "navds-process__circle--icon": icon,
             })}
             data-active={active}
-            data-current={index === activeStep}
             data-completed={completed}
             aria-hidden={variant !== "default"}
           >

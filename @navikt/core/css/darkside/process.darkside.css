@@ -90,11 +90,6 @@
   font-size: calc(var(--__axc-process-circle-size) * 0.75);
 }
 
-.aksel-process__circle[data-current="true"] {
-  outline: 2px solid var(--ax-border-default);
-  outline-offset: 2px;
-}
-
 .aksel-process__circle[data-completed="true"] {
   color: var(--ax-text-contrast);
   background: var(--ax-bg-strong);
