@@ -2,6 +2,7 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { format } from "date-fns";
 import React, { useState } from "react";
 import {
+  BooksIcon,
   CalculatorFillIcon,
   CaptionsIcon,
   GavelSoundBlockIcon,
@@ -57,7 +58,7 @@ export const Default = ({
         <Process.Step
           title={step4Title}
           date={step4Date}
-          icon={
+          bullet={
             step4Icon === "<Icon/>" ? (
               <GavelSoundBlockIcon />
             ) : step4Icon === "<empty string>" ? (
@@ -114,11 +115,6 @@ export const Default = ({
   );
 };
 Default.argTypes = {
-  variant: {
-    name: "'variant'-prop",
-    control: "inline-radio",
-    options: ["default", "icon", "number"],
-  },
   activeStep: {
     name: "'activeStep'-prop",
     control: "inline-radio",
@@ -150,7 +146,6 @@ Default.argTypes = {
 };
 Default.args = {
   activeStep: 3,
-  variant: "default",
   hideCompletedContent: true,
   step4Title:
     "Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og forklares i sitt fulle i denne labelen",
@@ -185,32 +180,50 @@ export const Variants: StoryFn<Story> = () => {
 
       <div>
         <h3>number</h3>
-        <Process variant="number" activeStep={activeStep}>
-          <Process.Step {...props} title="Start søknad" />
-          <Process.Step {...props} title="Personopplysninger" />
-          <Process.Step {...props} title="Saksopplysninger" />
+        <Process activeStep={activeStep}>
+          <Process.Step {...props} bullet={0} title="Start søknad" />
+          <Process.Step {...props} bullet={1} title="Personopplysninger" />
+          <Process.Step {...props} bullet={2} title="Saksopplysninger" />
           <Process.Step
             {...props}
+            bullet={3}
             title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
           />
-          <Process.Step {...props} title="Vedlegg" />
-          <Process.Step {...props} title="Oppsummering" />
-          <Process.Step {...props} title="Innsending" />
+          <Process.Step {...props} bullet={4} title="Vedlegg" />
+          <Process.Step {...props} bullet={5} title="Oppsummering" />
+          <Process.Step {...props} bullet={6} title="Innsending" />
         </Process>
       </div>
       <div>
         <h3>icon</h3>
-        <Process variant="icon" activeStep={activeStep}>
-          <Process.Step {...props} title="Start søknad" />
-          <Process.Step {...props} title="Personopplysninger" />
-          <Process.Step {...props} title="Saksopplysninger" />
+        <Process activeStep={activeStep}>
+          <Process.Step
+            {...props}
+            title="Start søknad"
+            bullet={<BooksIcon />}
+          />
+          <Process.Step
+            {...props}
+            title="Personopplysninger"
+            bullet={<BooksIcon />}
+          />
+          <Process.Step
+            {...props}
+            title="Saksopplysninger"
+            bullet={<BooksIcon />}
+          />
           <Process.Step
             {...props}
             title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+            bullet={<BooksIcon />}
           />
-          <Process.Step {...props} title="Vedlegg" />
-          <Process.Step {...props} title="Oppsummering" />
-          <Process.Step {...props} title="Innsending" />
+          <Process.Step {...props} title="Vedlegg" bullet={<BooksIcon />} />
+          <Process.Step
+            {...props}
+            title="Oppsummering"
+            bullet={<BooksIcon />}
+          />
+          <Process.Step {...props} title="Innsending" bullet={<BooksIcon />} />
         </Process>
       </div>
     </div>
@@ -221,92 +234,63 @@ export const Icons: StoryFn<Story> = () => {
   const [activeStep] = useState(4);
   const props = { onClick: (e) => e.preventDefault(), href: "#" };
   return (
-    <div style={{ display: "flex", gap: "4rem" }}>
-      <div>
-        <h3>Default icons</h3>
-        <Process activeStep={activeStep} variant="icon">
-          <Process.Step {...props} title="Start søknad" />
-          <Process.Step {...props} title="Personopplysninger" />
-          <Process.Step {...props} title="Saksopplysninger" />
-          <Process.Step
-            {...props}
-            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
-          />
-          <Process.Step {...props} title="Vedlegg" />
-          <Process.Step {...props} title="Oppsummering" />
-          <Process.Step {...props} title="Innsending" />
-        </Process>
-      </div>
-
-      <div>
-        <h3>Step-icons</h3>
-        <Process activeStep={activeStep} variant="icon">
-          <Process.Step
-            {...props}
-            icon={<TasklistStartFillIcon />}
-            title="Start søknad"
-          />
-          <Process.Step
-            {...props}
-            icon={<WalletFillIcon />}
-            title="Personopplysninger"
-          />
-          <Process.Step
-            {...props}
-            icon={<GavelSoundBlockIcon />}
-            title="Saksopplysninger"
-          />
-          <Process.Step
-            {...props}
-            icon={<CaptionsIcon />}
-            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
-          />
-          <Process.Step {...props} icon={<PaperclipIcon />} title="Vedlegg" />
-          <Process.Step
-            {...props}
-            icon={<CalculatorFillIcon />}
-            title="Oppsummering"
-          />
-          <Process.Step
-            {...props}
-            icon={<PaperplaneIcon />}
-            title="Innsending"
-          />
-        </Process>
-      </div>
-
-      <div>
-        <h3>Mix</h3>
-        <Process activeStep={activeStep} variant="icon">
-          <Process.Step {...props} title="Process-level completed icon" />
-          <Process.Step {...props} title="Process-level completed icon" />
-          <Process.Step {...props} icon="" title="Step override (blank)" />
-          <Process.Step
-            {...props}
-            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
-          />
-          <Process.Step
-            {...props}
-            icon={<PaperclipIcon />}
-            title="Step override"
-          />
-          <Process.Step
-            {...props}
-            icon={<CalculatorFillIcon />}
-            title="Step override"
-          />
-          <Process.Step {...props} title="Process-level uncompleted icon" />
-        </Process>
-      </div>
+    <div>
+      <h3>Step-icons</h3>
+      <Process activeStep={activeStep}>
+        <Process.Step
+          {...props}
+          bullet={<TasklistStartFillIcon />}
+          title="Start søknad"
+        />
+        <Process.Step
+          {...props}
+          bullet={<WalletFillIcon />}
+          title="Personopplysninger"
+        />
+        <Process.Step
+          {...props}
+          bullet={<GavelSoundBlockIcon />}
+          title="Saksopplysninger"
+        />
+        <Process.Step
+          {...props}
+          bullet={<CaptionsIcon />}
+          title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+        />
+        <Process.Step {...props} bullet={<PaperclipIcon />} title="Vedlegg" />
+        <Process.Step
+          {...props}
+          bullet={<CalculatorFillIcon />}
+          title="Oppsummering"
+        />
+        <Process.Step
+          {...props}
+          bullet={<PaperplaneIcon />}
+          title="Innsending"
+        />
+      </Process>
     </div>
   );
 };
 
+export const SubSteps = () => (
+  <Process activeStep={4}>
+    <Process.Step title="Start step 1" bullet={<CalculatorFillIcon />} />
+    <Process.Step title="Sub-step 1" />
+    <Process.Step title="Sub-step 2" />
+    <Process.Step title="Sub-step 3" />
+    <Process.Step title="Start step 2" bullet={<CalculatorFillIcon />} />
+    <Process.Step title="Sub-step 1" />
+    <Process.Step title="Sub-step 2" />
+    <Process.Step title="Sub-step 3" />
+  </Process>
+);
+
 export const ColorRole = () => (
-  <Process data-color="brand-magenta" variant="icon" activeStep={4}>
+  <Process data-color="brand-magenta" activeStep={4}>
     <Process.Step title="Start søknad" />
-    <Process.Step title="Personopplysninger" />
-    <Process.Step title="Saksopplysninger" />
+    <Process.Step title="Personopplysninger" bullet={<CalculatorFillIcon />} />
+    <Process.Step title="Saksopplysninger" bullet={4} />
     <Process.Step title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst" />
     <Process.Step title="Vedlegg" />
     <Process.Step title="Oppsummering" />

@@ -3,11 +3,10 @@ import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Label } from "../typography";
 import { createContext } from "../util/create-context";
 
-type ProcessVariant = "default" | "number" | "icon";
+// type ProcessVariant = "default" | "number" | "icon";
 
 interface ProcessContextValue {
   lastIndex: number;
-  variant: ProcessVariant;
   hideCompletedContent: boolean;
   activeStep?: number;
   endless: boolean;
@@ -57,7 +56,7 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    *
    * @default "default"
    */
-  variant?: ProcessVariant;
+  /* variant?: ProcessVariant; */
   /**
    * Hide the content of steps that are completed.
    * Does not apply to the active step.
@@ -137,7 +136,6 @@ export const Process: ProcessComponent = forwardRef<
       className,
       reverseActiveDirection = false,
       activeStep = -1,
-      variant = "default",
       hideCompletedContent = false,
       endless = false,
       ...restProps
@@ -151,7 +149,6 @@ export const Process: ProcessComponent = forwardRef<
     return (
       <ProcessContextProvider
         hideCompletedContent={hideCompletedContent}
-        variant={variant}
         activeStep={activeStep}
         lastIndex={childrenCount - 1}
         endless={endless}
@@ -203,18 +200,9 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
    */
   date?: string;
   /**
-   * Icon to display inside the circle.
-   *
-   * Providing an icon will override the variant set on the parent Process for
-   * this step, forcing a large circle with the specified icon for this step
-   * only.
-   *
-   * If no icon is provided and the variant is "icon", a <CheckmarkIcon /> will
-   * be used by default.
-   *
-   * @default <CheckmarkIcon />
+   * Icon or number to display inside the circle.
    */
-  icon?: React.ReactNode;
+  bullet?: React.ReactNode;
   /**
    * Set this step as completed.
    */
@@ -237,7 +225,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
       title,
       date,
       children,
-      icon,
+      bullet,
       completed,
       hideContent,
       lineVariant = "solid",
@@ -248,19 +236,10 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
   ) => {
     const { cn } = useRenameCSS();
 
-    const {
-      activeStep,
-      variant = "default",
-      hideCompletedContent,
-      endless,
-      lastIndex,
-    } = useProcessContext();
+    const { activeStep, hideCompletedContent, endless, lastIndex } =
+      useProcessContext();
 
     const { index, active, lineActive } = useProcessStepContext();
-
-    if (variant === "icon" && completed && !icon) {
-      icon = <CheckmarkIcon />;
-    }
 
     return (
       <li
@@ -268,7 +247,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
         aria-current={index === activeStep}
         {...restProps}
         className={cn("navds-process__item", className, {
-          "navds-process__item--small": variant === "default" && !icon,
+          "navds-process__item--small": bullet === undefined,
         })}
       >
         <div className={cn("navds-process__step")}>
@@ -276,15 +255,12 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
             as="span"
             size="medium"
             weight="semibold"
-            className={cn("navds-process__circle", {
-              "navds-process__circle--small": variant === "default" && !icon,
-              "navds-process__circle--icon": icon,
-            })}
+            className={cn("navds-process__circle")}
             data-active={active}
             data-completed={completed}
-            aria-hidden={variant !== "default"}
+            aria-hidden
           >
-            {icon || (variant === "number" && index + 1)}
+            {bullet}
           </BodyShort>
 
           <div className={cn("navds-process__content")}>
@@ -329,26 +305,6 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
 );
 
 /* --------------------------- Proccess Utilities --------------------------- */
-
-function CheckmarkIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 24 24"
-      fill="none"
-      focusable={false}
-      role="img"
-      aria-hidden
-    >
-      <path
-        d="M10.0352 13.4148L16.4752 7.40467C17.0792 6.83965 18.029 6.86933 18.5955 7.47478C19.162 8.08027 19.1296 9.03007 18.5245 9.59621L11.0211 16.5993C10.741 16.859 10.3756 17 10.0002 17C9.60651 17 9.22717 16.8462 8.93914 16.5611L6.43914 14.0611C5.85362 13.4756 5.85362 12.5254 6.43914 11.9399C7.02467 11.3544 7.97483 11.3544 8.56036 11.9399L10.0352 13.4148Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
 
 /* -------------------------- Process exports ------------------------- */
 Process.Step = ProcessStep;
