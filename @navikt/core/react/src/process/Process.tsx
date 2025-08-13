@@ -267,9 +267,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
         ref={forwardedRef}
         aria-current={index === activeStep}
         {...restProps}
-        className={cn("navds-process__item", className, {
-          "navds-process__item-no-gap": variant === "default" && !icon,
-        })}
+        className={cn("navds-process__item", className)}
       >
         <div className={cn("navds-process__step")}>
           <BodyShort

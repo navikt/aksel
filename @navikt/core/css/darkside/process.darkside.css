@@ -18,17 +18,11 @@
     [line-2 step-end] auto;
   grid-template-columns: var(--__axc-process-circle-size) auto;
   justify-items: flex-start;
-  gap: var(--ax-space-8);
-}
-
-.aksel-process__item-no-gap {
-  gap: 0;
 }
 
 .aksel-process__line {
   width: 0;
   border: calc(var(--__axc-process-border-width) / 2) solid;
-  border-radius: var(--ax-radius-full);
   height: 100%;
   min-height: var(--__axc-process-line-length);
   justify-self: center;
@@ -77,7 +71,9 @@
   height: var(--__axc-process-circle-size);
   line-height: 1;
   border-radius: var(--ax-radius-full);
-  border: var(--__axc-process-border-width) solid var(--ax-border-default);
+  border: var(--__axc-process-border-width) solid;
+  color: var(--ax-text-neutral-decoration);
+  border-color: var(--ax-border-neutral-subtleA);
 }
 
 .aksel-process__circle--small {
