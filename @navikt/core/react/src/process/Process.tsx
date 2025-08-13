@@ -173,8 +173,8 @@ export const Process: ProcessComponent = forwardRef<
                 }
                 lineActive={
                   reverseActiveDirection
-                    ? activeStep >= childrenCount - index - 1
-                    : activeStep - 1 >= index
+                    ? activeStep >= childrenCount - index
+                    : activeStep >= index
                 }
               >
                 {step}
