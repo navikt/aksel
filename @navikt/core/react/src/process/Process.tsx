@@ -6,11 +6,11 @@ import { createContext } from "../util/create-context";
 type ProcessVariant = "default" | "number" | "icon";
 
 interface ProcessContextValue {
-  activeStep: number;
   index: number;
   lastIndex: number;
   variant: ProcessVariant;
   hideCompletedContent: boolean;
+  activeStep?: number;
 }
 
 const [ProcessContextProvider, useProcessContext] =
@@ -23,17 +23,13 @@ const [ProcessContextProvider, useProcessContext] =
 
 interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
-   * Current active step.
-   *
-   * Process index starts at 1, not 0.
-   *
-   * @default 0
-   */
-  activeStep?: number;
-  /**
    * `<Process.Step />` elements.
    */
   children: React.ReactElement<typeof ProcessStep>[];
+  /**
+   * Index of current active step, all elements before this index will be highlighted.
+   */
+  activeStep?: number;
   /**
    * Styling variant for the step indicators:
    * - "default": Small bullet-like circles
@@ -113,28 +109,28 @@ export const Process: ProcessComponent = forwardRef<
 >(
   (
     {
-      activeStep = 0,
       children,
+      activeStep,
       variant = "default",
       hideCompletedContent = false,
       className,
-      ...rest
-    },
-    ref,
+      ...restProps
+    }: ProcessProps,
+    forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
 
     return (
       <ol
         data-color="info"
-        {...rest}
-        ref={ref}
+        {...restProps}
+        ref={forwardedRef}
         className={cn("navds-process", className)}
       >
         {React.Children.map(children, (step, index) => {
           return (
             <ProcessContextProvider
-              activeStep={activeStep - 1}
+              activeStep={activeStep}
               index={index}
               lastIndex={React.Children.count(children)}
               variant={variant}
@@ -152,6 +148,11 @@ export const Process: ProcessComponent = forwardRef<
 /* ------------------------------ Process Step ------------------------------ */
 interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
+   * Rich content to display under the title (and date and/or
+   * description, if provided)
+   */
+  children?: React.ReactNode;
+  /**
    * Title
    */
   title?: string;
@@ -159,11 +160,6 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
    * Date to display under the title
    */
   date?: string;
-  /**
-   * Rich content to display under the title (and date and/or
-   * description, if provided)
-   */
-  children?: React.ReactNode;
   /**
    * Icon to display inside the circle.
    *
@@ -198,7 +194,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
   ) => {
     const { cn } = useRenameCSS();
     const {
-      activeStep,
+      activeStep = 0,
       index,
       variant = "default",
       hideCompletedContent,
