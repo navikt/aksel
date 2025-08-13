@@ -216,6 +216,11 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
    * Useful for overriding the Process-level 'hideCompletedContent'-prop.
    */
   hideContent?: boolean;
+  /**
+   * Changes line style for the step.
+   * @default "solid"
+   */
+  lineVariant?: "solid" | "dashed";
 }
 
 export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
@@ -227,6 +232,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
       icon,
       completed,
       hideContent,
+      lineVariant = "solid",
       className,
       ...restProps
     }: ProcessStepProps,
@@ -250,17 +256,14 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
         ref={forwardedRef}
         aria-current={index === activeStep}
         {...restProps}
-        className={cn(
-          "navds-process__item",
-          className,
-          variant === "default" && !icon && "navds-process__item-no-gap",
-        )}
+        className={cn("navds-process__item", className, {
+          "navds-process__item-no-gap": variant === "default" && !icon,
+        })}
       >
         {/* Line above */}
         {/* <span
           className={cn(
             "navds-process__line navds-process__line--1",
-            index >= activeStep && "navds-process__line--uncompleted",
           )}
         /> */}
         <div className={cn("navds-process__step")}>
@@ -307,9 +310,11 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
           </div>
         </div>
         <span
-          className={cn("navds-process__line navds-process__line--2", {
-            "navds-process__line--uncompleted": !lineActive,
-          })}
+          className={cn(
+            "navds-process__line navds-process__line--2",
+            `navds-process__line--${lineVariant}`,
+          )}
+          data-line-active={lineActive}
         />
       </li>
     );

@@ -27,12 +27,17 @@
 
 .aksel-process__line {
   width: 0;
-  border: calc(var(--__axc-process-border-width) / 2) solid var(--ax-border-default);
+  border: calc(var(--__axc-process-border-width) / 2) solid;
+  border-radius: var(--ax-radius-full);
   height: 100%;
   min-height: var(--__axc-process-line-length);
   justify-self: center;
   grid-column: 1;
-  border-radius: var(--__axc-process-border-width) / var(--__axc-process-border-width);
+  border-color: var(--ax-border-neutral-subtle);
+
+  &[data-line-active="true"] {
+    border-color: var(--ax-border-default);
+  }
 }
 
 .aksel-process__line--1 {
@@ -48,9 +53,12 @@
   }
 }
 
-.aksel-process__line--uncompleted {
+.aksel-process__line--solid {
+  border-style: solid;
+}
+
+.aksel-process__line--dashed {
   border-style: dashed;
-  border-color: var(--ax-border-neutral);
 }
 
 .aksel-process__step {
