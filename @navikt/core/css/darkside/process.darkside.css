@@ -1,9 +1,10 @@
 .aksel-process {
+  --__axc-process-circle-base: 2rem;
   --__axc-process-circle-large: 2rem;
   --__axc-process-circle-small: 1rem;
   --__axc-process-circle-size: var(--__axc-process-circle-large);
   --__axc-process-border-width: 2px;
-  --__axc-process-line-length: 1rem;
+  --__axc-process-line-length: 2rem;
 
   line-height: 1;
   list-style: none;
@@ -16,14 +17,19 @@
   grid-template-rows:
     [line-1] auto [step-start] var(--__axc-process-circle-size)
     [line-2 step-end] auto;
-  grid-template-columns: var(--__axc-process-circle-size) auto;
+  grid-template-columns: var(--__axc-process-circle-base) auto;
   justify-items: flex-start;
+}
+
+.aksel-process__item--small {
+  --__axc-process-circle-size: var(--__axc-process-circle-small);
+
+  margin-block-start: calc((var(--__axc-process-circle-small) / 2) * -1);
 }
 
 .aksel-process__line {
   width: 0;
   border: calc(var(--__axc-process-border-width) / 2) solid;
-  height: 100%;
   min-height: var(--__axc-process-line-length);
   justify-self: center;
   grid-column: 1;
@@ -36,6 +42,10 @@
 
 .aksel-process__line-end {
   grid-row: line-2;
+
+  .aksel-process__item--small & {
+    margin-block-start: calc(var(--__axc-process-circle-size) / 2);
+  }
 }
 
 .aksel-process__line--solid {
@@ -50,7 +60,7 @@
   grid-row: 2 / -1;
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: [circle] var(--__axc-process-circle-size) [content] auto;
+  grid-template-columns: [circle] var(--__axc-process-circle-base) [content] auto;
   gap: var(--ax-space-16);
   justify-content: flex-start;
   padding: var(--__axc-process-border-width);
