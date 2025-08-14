@@ -254,7 +254,10 @@ export const InteractiveDemo: StoryFn<Story> = () => {
   };
 
   return (
-    <Process activeStep={activeStep > 1 ? activeStep + 2 : activeStep}>
+    <Process
+      style={{ maxWidth: "40rem" }}
+      activeStep={activeStep > 1 ? activeStep + 2 : activeStep}
+    >
       <Process.Step
         bullet={isDone(0) ? <CheckmarkIcon /> : <SparklesFillIcon />}
         title="Step one"

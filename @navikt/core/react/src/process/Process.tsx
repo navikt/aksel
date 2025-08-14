@@ -418,6 +418,9 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
   },
 );
 
+/* TODO: Create a Process.Checkmark icons */
+/* TODO: Fix border-gradient on dashed line */
+
 /* -------------------------- Process exports ------------------------- */
 Process.Step = ProcessStep;
 

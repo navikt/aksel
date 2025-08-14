@@ -45,7 +45,7 @@
 
   &[data-line-active="true"] {
     border-color: var(--ax-border-default);
-    border-image: linear-gradient(to top, var(--ax-border-neutral-subtle), var(--ax-border-default));
+    border-image: linear-gradient(to bottom, var(--ax-border-default) 50%, var(--ax-border-neutral-subtle) 100%);
     border-image-slice: 1;
   }
 
