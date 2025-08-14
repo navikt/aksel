@@ -50,24 +50,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-/* export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { category, page } = await params;
-
-  const { data: pageData } = await sanityFetch({
-    query: METADATA_BY_SLUG_QUERY,
-    params: { slug: `komponenter/${category}/${page}` },
-    stega: false,
-  });
-
-  return {
-    title: pageData?.heading,
-    description: pageData?.seo?.meta,
-    openGraph: {
-      images: urlForOpenGraphImage(pageData?.seo?.image),
-    },
-  };
-} */
-
 export async function generateStaticParams() {
   const { data: slugs } = await sanityFetch({
     query: SLUG_BY_TYPE_QUERY,
