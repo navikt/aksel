@@ -79,30 +79,28 @@ export default function SearchField() {
           open={openState}
           onClose={() => setOpenState(false)}
           anchorEl={settingsButtonRef.current}
+          placement="bottom"
         >
           <PopoverContent>
             <VStack maxWidth="50ch">
               <BodyLong>
-                Dette er et <em>smart</em> søkefelt, og vanlig opprørsel er at
-                om du søker tall som <em>ser ut som</em> en{" "}
-                <Link href="https://semver.org">semver</Link> versjon, så får du{" "}
-                <em>bare</em> treff på releases som matcher gitt semver range.
+                Dette søkefeltet støtter <em>smart søkesyntaks</em> for søking i
+                releases etter <Link href="https://semver.org">semver</Link>.
+              </BodyLong>
+              <BodyLong className={styles.spaced}>
+                For å bruke denne funksjonen så må du starte søket ditt med{" "}
+                <Code>semver</Code> slik som dette:
+              </BodyLong>
+              <Code>semver 7.3</Code>
+              <BodyLong>eller</BodyLong>
+              <Code>semver ^2.2 || &gt;=3.2.1 &lt;4</Code>
+              <BodyLong className={styles.spaced}>
                 Semver-søk støtter{" "}
                 <Link href="https://github.com/npm/node-semver?tab=readme-ov-file#ranges">
                   range syntax
                 </Link>
                 .
               </BodyLong>
-              <BodyLong className={styles.spaced}>for eksempel:</BodyLong>
-              <Code>7.3</Code>
-              <BodyLong>eller</BodyLong>
-              <Code>^2.2 || &gt;=3.2.1 &lt;4</Code>
-              <BodyLong className={styles.spaced}>
-                For å skru av <em>smarte</em> features og heller gjøre et
-                &quot;dumt&quot; text-only søk så kan du starte søket med{" "}
-                <Code>! </Code>, som dette:
-              </BodyLong>
-              <Code>! 27</Code>
             </VStack>
           </PopoverContent>
         </Popover>
