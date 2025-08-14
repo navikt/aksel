@@ -45,6 +45,12 @@
 
   &[data-line-active="true"] {
     border-color: var(--ax-border-default);
+    border-image: linear-gradient(to top, var(--ax-border-neutral-subtle), var(--ax-border-default));
+    border-image-slice: 1;
+  }
+
+  &[data-current="false"] {
+    border-image: none;
   }
 }
 

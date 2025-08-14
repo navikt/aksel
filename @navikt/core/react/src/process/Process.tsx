@@ -221,7 +221,12 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
             {!hideContent && <ProcessContent>{children}</ProcessContent>}
           </div>
         </div>
-        {lastIndex > index && <ProcessLine lineVariant={lineVariant} />}
+        {lastIndex > index && (
+          <ProcessLine
+            lineVariant={lineVariant}
+            data-current={index === activeStep}
+          />
+        )}
       </li>
     );
   },
