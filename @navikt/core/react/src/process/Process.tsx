@@ -170,7 +170,7 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
    */
   timestamp?: string;
   /**
-   * Icon or number to display inside the circle.
+   * Icon or number to display inside the bullet.
    */
   bullet?: React.ReactNode;
   /**
@@ -354,7 +354,7 @@ const ProcessBullet = forwardRef<HTMLSpanElement, ProcessBulletProps>(
         {...restProps}
         as="span"
         weight="semibold"
-        className={cn("navds-process__circle", className)}
+        className={cn("navds-process__bullet", className)}
         data-active={_active ?? active}
         aria-hidden
       >
@@ -396,13 +396,6 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
     const { cn } = useRenameCSS();
     const { lineActive } = useProcessStepContext();
 
-    <span
-      className={cn(
-        "navds-process__line navds-process__line-end",
-        `navds-process__line--${lineVariant}`,
-      )}
-      data-line-active={_lineActive ?? lineActive}
-    />;
     return (
       <span
         ref={forwardedRef}
@@ -412,6 +405,7 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
           className,
           `navds-process__line--${lineVariant}`,
         )}
+        data-line-active={_lineActive ?? lineActive}
       >
         {children}
       </span>

@@ -1,7 +1,11 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { format } from "date-fns";
 import React from "react";
-import { GavelSoundBlockIcon, SparklesFillIcon } from "@navikt/aksel-icons";
+import {
+  CheckmarkIcon,
+  GavelSoundBlockIcon,
+  SparklesFillIcon,
+} from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { HStack, VStack } from "../layout/stack";
 import { Process } from "./Process";
@@ -245,12 +249,17 @@ export const InteractiveDemo: StoryFn<Story> = () => {
     });
   };
 
+  const isDone = (step: number) => {
+    return activeStep > step;
+  };
+
   return (
     <Process activeStep={activeStep > 1 ? activeStep + 2 : activeStep}>
       <Process.Step
-        bullet={<SparklesFillIcon />}
+        bullet={isDone(0) ? <CheckmarkIcon /> : <SparklesFillIcon />}
         title="Step one"
         timestamp={getDateAfter(3)}
+        data-color={isDone(0) ? "success" : "info"}
       >
         {activeStep === 0 && (
           <div>
@@ -269,9 +278,10 @@ export const InteractiveDemo: StoryFn<Story> = () => {
         )}
       </Process.Step>
       <Process.Step
-        bullet={<SparklesFillIcon />}
+        bullet={isDone(1) ? <CheckmarkIcon /> : <SparklesFillIcon />}
         title="Step two"
         timestamp={getDateAfter(2)}
+        data-color={isDone(1) ? "success" : "info"}
       >
         {activeStep === 1 && (
           <div>
@@ -292,9 +302,19 @@ export const InteractiveDemo: StoryFn<Story> = () => {
           </div>
         )}
       </Process.Step>
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Step three">
+      <Process.Step
+        title="Substep 1"
+        data-color={isDone(1) ? "success" : "info"}
+      />
+      <Process.Step
+        title="Substep 2"
+        data-color={isDone(1) ? "success" : "info"}
+      />
+      <Process.Step
+        bullet={isDone(2) ? <CheckmarkIcon /> : <SparklesFillIcon />}
+        title="Step three"
+        data-color={isDone(2) ? "success" : "info"}
+      >
         {activeStep === 2 && (
           <div>
             <div>
@@ -316,9 +336,10 @@ export const InteractiveDemo: StoryFn<Story> = () => {
       </Process.Step>
 
       <Process.Step
-        bullet={<SparklesFillIcon />}
+        bullet={isDone(3) ? <CheckmarkIcon /> : <SparklesFillIcon />}
         title="Step four"
         timestamp={getDateAfter(1)}
+        data-color={isDone(3) ? "success" : "info"}
       >
         {activeStep === 3 && (
           <div>
@@ -339,7 +360,11 @@ export const InteractiveDemo: StoryFn<Story> = () => {
           </div>
         )}
       </Process.Step>
-      <Process.Step bullet={<SparklesFillIcon />} title="Step five">
+      <Process.Step
+        bullet={isDone(4) ? <CheckmarkIcon /> : <SparklesFillIcon />}
+        title="Step five"
+        data-color={isDone(4) ? "success" : "info"}
+      >
         {activeStep === 4 && (
           <div>
             <div>
@@ -359,7 +384,11 @@ export const InteractiveDemo: StoryFn<Story> = () => {
           </div>
         )}
       </Process.Step>
-      <Process.Step bullet={<SparklesFillIcon />} title="Step six">
+      <Process.Step
+        bullet={isDone(5) ? <CheckmarkIcon /> : <SparklesFillIcon />}
+        title="Step six"
+        data-color={isDone(5) ? "success" : "info"}
+      >
         {activeStep === 5 && (
           <div>
             <div>

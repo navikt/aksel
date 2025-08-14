@@ -27,7 +27,7 @@
       margin-block-start: calc(var(--__axc-process-circle-size) / 2);
     }
 
-    & .aksel-process__circle {
+    & .aksel-process__bullet {
       --__axc-process-circle-size: var(--__axc-process-circle-small);
 
       margin-top: calc((var(--__axc-process-circle-large) - var(--__axc-process-circle-small)) / 2);
@@ -64,7 +64,7 @@
   grid-row: 2 / -1;
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: [circle] var(--__axc-process-circle-base) [content] auto;
+  grid-template-columns: [bullet] var(--__axc-process-circle-base) [content] auto;
   gap: var(--ax-space-16);
   justify-content: flex-start;
   padding: var(--__axc-process-border-width);
@@ -76,8 +76,8 @@
   }
 }
 
-.aksel-process__circle {
-  grid-column: circle;
+.aksel-process__bullet {
+  grid-column: bullet;
   display: inline-grid;
   place-self: baseline center;
   place-items: center;
@@ -88,17 +88,24 @@
   border: var(--__axc-process-border-width) solid;
   color: var(--ax-text-neutral-subtle);
   border-color: var(--ax-border-neutral-subtleA);
+  transition-property: background, border-color;
+  transition-duration: 70ms;
+  transition-timing-function: linear;
 
   & svg {
     height: min(calc(var(--__axc-process-circle-size) * 0.75), 1.5rem);
     width: min(calc(var(--__axc-process-circle-size) * 0.75), 1.5rem);
   }
-}
 
-.aksel-process__circle[data-active="true"] {
-  color: var(--ax-text-contrast);
-  background: var(--ax-bg-strong);
-  border-color: transparent;
+  &[data-active="true"] {
+    color: var(--ax-text-contrast);
+    background: var(--ax-bg-strong);
+    border-color: transparent;
+  }
+
+  &[data-active="false"] {
+    transition: none;
+  }
 }
 
 .aksel-process__content {
@@ -116,14 +123,14 @@
 }
 
 @media (forced-colors: active) {
-  .aksel-process__circle.aksel-process__circle {
+  .aksel-process__bullet.aksel-process__bullet {
     forced-color-adjust: none;
     color: ButtonFace;
     background-color: ButtonText;
     border-color: ButtonText;
   }
 
-  .aksel-process__circle[data-active="true"] {
+  .aksel-process__bullet[data-active="true"] {
     outline-color: ButtonText;
   }
 }
