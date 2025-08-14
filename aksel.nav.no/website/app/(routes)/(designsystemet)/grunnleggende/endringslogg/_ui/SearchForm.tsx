@@ -10,10 +10,10 @@ export const SearchForm = ({
   params,
 }: {
   params: {
-    years;
-    paramYear;
-    categories;
-    paramCategory;
+    years: string[];
+    paramYear: string;
+    categories: string[];
+    paramCategory: string;
   };
 }) => {
   const semverState = useState<boolean>(false);
