@@ -67,7 +67,7 @@ export default async function Page({ searchParams }: PageProps) {
 
   if (isSemverSearch) {
     textFilter.shift();
-    const semverRange = semverValidRange(textFilter.join());
+    const semverRange = semverValidRange(textFilter.join(" "));
     console.warn("isSemver:", isSemverSearch, semverRange);
 
     // OPTIMIZE: we fetch all for now and filter those after sanity request
