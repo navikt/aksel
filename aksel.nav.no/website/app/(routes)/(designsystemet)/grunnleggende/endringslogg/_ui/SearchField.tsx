@@ -87,6 +87,7 @@ export default function SearchField() {
             onClick={() => {
               setSemverSearch(!semverSearch);
             }}
+            defaultChecked={!!searchParams?.get("semver")}
             checked={semverSearch}
           >
             semver søk
