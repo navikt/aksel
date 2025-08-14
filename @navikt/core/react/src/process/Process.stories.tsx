@@ -1,17 +1,9 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { format } from "date-fns";
-import React, { useState } from "react";
-import {
-  BooksIcon,
-  CalculatorFillIcon,
-  CaptionsIcon,
-  GavelSoundBlockIcon,
-  PaperclipIcon,
-  PaperplaneIcon,
-  TasklistStartFillIcon,
-  WalletFillIcon,
-} from "@navikt/aksel-icons";
-import { VStack } from "../layout/stack";
+import React from "react";
+import { GavelSoundBlockIcon, SparklesFillIcon } from "@navikt/aksel-icons";
+import { Button } from "../button";
+import { HStack, VStack } from "../layout/stack";
 import { Process } from "./Process";
 
 const meta: Meta<typeof Process> = {
@@ -19,6 +11,7 @@ const meta: Meta<typeof Process> = {
   component: Process,
   parameters: {
     chromatic: { disable: true },
+    layout: "padded",
   },
 };
 
@@ -157,165 +150,264 @@ Default.args = {
   endless: false,
 };
 
-export const Variants: StoryFn<Story> = () => {
-  const [activeStep] = useState(2);
-  const props = { onClick: (e) => e.preventDefault(), href: "#" };
+export const NumberedBullets: StoryFn<Story> = () => {
   return (
-    <div style={{ display: "flex", gap: "4rem" }}>
-      <div>
-        <h3>default</h3>
-        <Process activeStep={activeStep}>
-          <Process.Step {...props} title="Start søknad" />
-          <Process.Step {...props} title="Personopplysninger" />
-          <Process.Step {...props} title="Saksopplysninger" />
-          <Process.Step
-            {...props}
-            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
-          />
-          <Process.Step {...props} title="Vedlegg" />
-          <Process.Step {...props} title="Oppsummering" />
-          <Process.Step {...props} title="Innsending" />
-        </Process>
-      </div>
+    <Process activeStep={3}>
+      <Process.Step bullet={0} title="Start søknad" />
+      <Process.Step bullet={1} title="Personopplysninger" />
+      <Process.Step title="Substep 1" />
+      <Process.Step title="Substep 2" />
+      <Process.Step title="Substep 3" />
+      <Process.Step bullet={2} title="Saksopplysninger" />
 
-      <div>
-        <h3>number</h3>
-        <Process activeStep={activeStep}>
-          <Process.Step {...props} bullet={0} title="Start søknad" />
-          <Process.Step {...props} bullet={1} title="Personopplysninger" />
-          <Process.Step {...props} bullet={2} title="Saksopplysninger" />
-          <Process.Step
-            {...props}
-            bullet={3}
-            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
-          />
-          <Process.Step {...props} bullet={4} title="Vedlegg" />
-          <Process.Step {...props} bullet={5} title="Oppsummering" />
-          <Process.Step {...props} bullet={6} title="Innsending" />
-        </Process>
-      </div>
-      <div>
-        <h3>icon</h3>
-        <Process activeStep={activeStep}>
-          <Process.Step
-            {...props}
-            title="Start søknad"
-            bullet={<BooksIcon />}
-          />
-          <Process.Step
-            {...props}
-            title="Personopplysninger"
-            bullet={<BooksIcon />}
-          />
-          <Process.Step
-            {...props}
-            title="Saksopplysninger"
-            bullet={<BooksIcon />}
-          />
-          <Process.Step
-            {...props}
-            title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
-            bullet={<BooksIcon />}
-          />
-          <Process.Step {...props} title="Vedlegg" bullet={<BooksIcon />} />
-          <Process.Step
-            {...props}
-            title="Oppsummering"
-            bullet={<BooksIcon />}
-          />
-          <Process.Step {...props} title="Innsending" bullet={<BooksIcon />} />
-        </Process>
-      </div>
-    </div>
+      <Process.Step
+        bullet={3}
+        title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+      />
+      <Process.Step title="Substep 1" />
+      <Process.Step title="Substep 2" />
+      <Process.Step title="Substep 3" />
+      <Process.Step bullet={4} title="Vedlegg" />
+      <Process.Step bullet={5} title="Oppsummering" />
+    </Process>
   );
 };
 
-export const Icons: StoryFn<Story> = () => {
-  const [activeStep] = useState(4);
-  const props = { onClick: (e) => e.preventDefault(), href: "#" };
+export const IconBullets: StoryFn<Story> = () => {
   return (
-    <div>
-      <h3>Step-icons</h3>
-      <Process activeStep={activeStep}>
-        <Process.Step
-          {...props}
-          bullet={<TasklistStartFillIcon />}
-          title="Start søknad"
-        />
-        <Process.Step
-          {...props}
-          bullet={<WalletFillIcon />}
-          title="Personopplysninger"
-        />
-        <Process.Step
-          {...props}
-          bullet={<GavelSoundBlockIcon />}
-          title="Saksopplysninger"
-        />
-        <Process.Step
-          {...props}
-          bullet={<CaptionsIcon />}
-          title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
-        />
-        <Process.Step {...props} bullet={<PaperclipIcon />} title="Vedlegg" />
-        <Process.Step
-          {...props}
-          bullet={<CalculatorFillIcon />}
-          title="Oppsummering"
-        />
-        <Process.Step
-          {...props}
-          bullet={<PaperplaneIcon />}
-          title="Innsending"
-        />
-      </Process>
-    </div>
+    <Process activeStep={3}>
+      <Process.Step bullet={<SparklesFillIcon />} title="Start søknad" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Personopplysninger" />
+      <Process.Step title="Substep 1" />
+      <Process.Step title="Substep 2" />
+      <Process.Step title="Substep 3" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Saksopplysninger" />
+
+      <Process.Step
+        bullet={<SparklesFillIcon />}
+        title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+      />
+      <Process.Step title="Substep 1" />
+      <Process.Step title="Substep 2" />
+      <Process.Step title="Substep 3" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Vedlegg" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Oppsummering" />
+    </Process>
   );
 };
 
-export const SubSteps = () => (
-  <Process activeStep={4}>
-    <Process.Step title="Start step 1" bullet={<CalculatorFillIcon />} />
-    <Process.Step title="Sub-step 1" />
-    <Process.Step title="Sub-step 2" />
-    <Process.Step title="Sub-step 3" />
-    <Process.Step title="Start step 2" bullet={<CalculatorFillIcon />} />
-    <Process.Step title="Sub-step 1" />
-    <Process.Step title="Sub-step 2" />
-    <Process.Step title="Sub-step 3" />
-  </Process>
-);
+export const Content: StoryFn<Story> = () => {
+  return (
+    <Process activeStep={3}>
+      <Process.Step bullet={<SparklesFillIcon />} title="Start søknad">
+        <ContentOne />
+      </Process.Step>
+      <Process.Step bullet={<SparklesFillIcon />} title="Personopplysninger" />
+      <Process.Step title="Substep 1" />
+      <Process.Step title="Substep 2" />
+      <Process.Step title="Substep 3" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Saksopplysninger" />
 
-export const ColorRole = () => (
-  <Process data-color="brand-magenta" activeStep={4}>
-    <Process.Step title="Start søknad" />
-    <Process.Step title="Personopplysninger" bullet={<CalculatorFillIcon />} />
-    <Process.Step title="Saksopplysninger" bullet={4} />
-    <Process.Step title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst" />
-    <Process.Step title="Vedlegg" />
-    <Process.Step title="Oppsummering" />
-    <Process.Step title="Innsending" />
-  </Process>
-);
+      <Process.Step
+        bullet={<SparklesFillIcon />}
+        title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+      >
+        <ContentTwo />
+      </Process.Step>
+      <Process.Step title="Substep 1" />
+      <Process.Step title="Substep 2" />
+      <Process.Step title="Substep 3" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Vedlegg" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Oppsummering" />
+    </Process>
+  );
+};
+
+export const InteractiveDemo: StoryFn<Story> = () => {
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  const handleStepClick = (direction: 1 | -1) => {
+    setActiveStep((prevStep) => {
+      const newStep = prevStep + direction;
+      if (newStep < 0) return 0;
+      if (newStep > 5) return 5;
+      return newStep;
+    });
+  };
+
+  return (
+    <Process activeStep={activeStep > 1 ? activeStep + 2 : activeStep}>
+      <Process.Step bullet={<SparklesFillIcon />} title="Step one">
+        {activeStep === 0 && (
+          <div>
+            <div>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              sint commodi omnis autem provident velit accusantium fugit vitae
+              veritatis, error aut culpa, vero animi molestiae, ab sunt
+              laboriosam eligendi distinctio.
+            </div>
+            <HStack gap="space-8" marginBlock="space-12">
+              <Button size="small" onClick={() => handleStepClick(1)}>
+                Next Step
+              </Button>
+            </HStack>
+          </div>
+        )}
+      </Process.Step>
+      <Process.Step bullet={<SparklesFillIcon />} title="Step two">
+        {activeStep === 1 && (
+          <div>
+            <div>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              sint commodi omnis autem provident velit accusantium fugit vitae
+              veritatis, error aut culpa, vero animi molestiae, ab sunt
+              laboriosam eligendi distinctio.
+            </div>
+            <HStack gap="space-8" marginBlock="space-12">
+              <Button size="small" onClick={() => handleStepClick(-1)}>
+                Previous Step
+              </Button>
+              <Button size="small" onClick={() => handleStepClick(1)}>
+                Next Step
+              </Button>
+            </HStack>
+          </div>
+        )}
+      </Process.Step>
+      <Process.Step title="Substep 1" />
+      <Process.Step title="Substep 2" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Step three">
+        {activeStep === 2 && (
+          <div>
+            <div>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              sint commodi omnis autem provident velit accusantium fugit vitae
+              veritatis, error aut culpa, vero animi molestiae, ab sunt
+              laboriosam eligendi distinctio.
+            </div>
+            <HStack gap="space-8" marginBlock="space-12">
+              <Button size="small" onClick={() => handleStepClick(-1)}>
+                Previous Step
+              </Button>
+              <Button size="small" onClick={() => handleStepClick(1)}>
+                Next Step
+              </Button>
+            </HStack>
+          </div>
+        )}
+      </Process.Step>
+
+      <Process.Step bullet={<SparklesFillIcon />} title="Step four">
+        {activeStep === 3 && (
+          <div>
+            <div>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              sint commodi omnis autem provident velit accusantium fugit vitae
+              veritatis, error aut culpa, vero animi molestiae, ab sunt
+              laboriosam eligendi distinctio.
+            </div>
+            <HStack gap="space-8" marginBlock="space-12">
+              <Button size="small" onClick={() => handleStepClick(-1)}>
+                Previous Step
+              </Button>
+              <Button size="small" onClick={() => handleStepClick(1)}>
+                Next Step
+              </Button>
+            </HStack>
+          </div>
+        )}
+      </Process.Step>
+      <Process.Step bullet={<SparklesFillIcon />} title="Step five">
+        {activeStep === 4 && (
+          <div>
+            <div>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              sint commodi omnis autem provident velit accusantium fugit vitae
+              veritatis, error aut culpa, vero animi molestiae, ab sunt
+              laboriosam eligendi distinctio.
+            </div>
+            <HStack gap="space-8" marginBlock="space-12">
+              <Button size="small" onClick={() => handleStepClick(-1)}>
+                Previous Step
+              </Button>
+              <Button size="small" onClick={() => handleStepClick(1)}>
+                Next Step
+              </Button>
+            </HStack>
+          </div>
+        )}
+      </Process.Step>
+      <Process.Step bullet={<SparklesFillIcon />} title="Step six">
+        {activeStep === 5 && (
+          <div>
+            <div>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              sint commodi omnis autem provident velit accusantium fugit vitae
+              veritatis, error aut culpa, vero animi molestiae, ab sunt
+              laboriosam eligendi distinctio.
+            </div>
+            <HStack gap="space-8" marginBlock="space-12">
+              <Button size="small" onClick={() => handleStepClick(-1)}>
+                Previous Step
+              </Button>
+            </HStack>
+          </div>
+        )}
+      </Process.Step>
+    </Process>
+  );
+};
+
+export const ReverseActiveOrder: StoryFn<Story> = () => {
+  return (
+    <Process activeStep={3} reverseActiveDirection>
+      <Process.Step bullet={<SparklesFillIcon />} title="Start søknad" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Personopplysninger" />
+      <Process.Step title="Substep 1" />
+      <Process.Step title="Substep 2" />
+      <Process.Step title="Substep 3" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Saksopplysninger" />
+
+      <Process.Step
+        bullet={<SparklesFillIcon />}
+        title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+      />
+      <Process.Step title="Substep 1" />
+      <Process.Step title="Substep 2" />
+      <Process.Step title="Substep 3" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Vedlegg" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Oppsummering" />
+    </Process>
+  );
+};
 
 export const Chromatic: Story = {
-  render: () => (
-    <VStack gap="4">
-      <div>
-        <h2>Variants</h2>
-        <Variants />
-      </div>
-      <div>
-        <h2>Icons</h2>
-        <Icons />
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
-    </VStack>
-  ),
+  render: () => <VStack gap="4">TEMP</VStack>,
   parameters: {
     chromatic: { disable: false },
   },
 };
+
+function ContentOne() {
+  return (
+    <div>
+      <h2>Vedlegg er lastet opp</h2>
+      <p>
+        Dokumentasjon av saksopplysninger er lastet opp og tilgjengelig for
+        saksbehandler.
+      </p>
+    </div>
+  );
+}
+
+function ContentTwo() {
+  return (
+    <div>
+      <h2>Vedtak er gjort</h2>
+      <p>
+        Saksbehandler har gjort endelig vedtak i saken og det er sendt ut varsel
+        til søker.
+      </p>
+    </div>
+  );
+}

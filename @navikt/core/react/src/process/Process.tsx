@@ -49,15 +49,6 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   reverseActiveDirection?: boolean;
   /**
-   * Styling variant for the step indicators:
-   * - "default": Small bullet-like circles
-   * - "number": Large circles with sequential numbers
-   * - "icon": Large circles with checkmarks for completed steps
-   *
-   * @default "default"
-   */
-  /* variant?: ProcessVariant; */
-  /**
    * Hide the content of steps that are completed.
    * Does not apply to the active step.
    * Can be overridden by setting the 'hideContent'-prop on individual steps.
@@ -170,7 +161,7 @@ export const Process: ProcessComponent = forwardRef<
                 }
                 lineActive={
                   reverseActiveDirection
-                    ? activeStep >= childrenCount - index
+                    ? activeStep >= childrenCount - index - 1
                     : activeStep >= index
                 }
               >
