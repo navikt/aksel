@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { defineQuery } from "next-sanity";
 import { Metadata } from "next/types";
-import { coerce as semverCoerce, valid as semverValid } from "semver";
+import { validRange as semverValidRange } from "semver";
 import { Heading, VStack } from "@navikt/ds-react";
 import { PageProps } from "@/app/(routes)/next-types";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -67,9 +67,7 @@ export default async function Page({ searchParams }: PageProps) {
    * - - @note: Might be just as fast to fetch code all entries, needs to be tested.
    *
    */
-  const isSemverSearch = semverValid(
-    semverCoerce(paramTextFilter.toString().trim()),
-  );
+  const isSemverSearch = semverValidRange(paramTextFilter.toString().trim());
   console.warn("isSemver:", isSemverSearch, paramTextFilter.toString().trim());
 
   const textFilter = paramTextFilter.toString().trim().split(" ");
