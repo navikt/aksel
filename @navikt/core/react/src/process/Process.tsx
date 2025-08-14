@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
-import { BodyLong, BodyShort, Label } from "../typography";
+import { BodyLong, BodyShort, Heading } from "../typography";
 import { createContext } from "../util/create-context";
 
 // type ProcessVariant = "default" | "number" | "icon";
@@ -8,7 +8,6 @@ import { createContext } from "../util/create-context";
 interface ProcessContextValue {
   lastIndex: number;
   activeStep?: number;
-  endless: boolean;
 }
 
 interface ProcessStepContextValue {
@@ -47,11 +46,6 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * @default false
    */
   reverseActiveDirection?: boolean;
-  /**
-   * When true, the last step will have a line that continues.
-   * @default false
-   */
-  endless?: boolean;
 }
 
 interface ProcessComponent
@@ -116,7 +110,6 @@ export const Process: ProcessComponent = forwardRef<
       className,
       reverseActiveDirection = false,
       activeStep = -1,
-      endless = false,
       ...restProps
     }: ProcessProps,
     forwardedRef,
@@ -129,7 +122,6 @@ export const Process: ProcessComponent = forwardRef<
       <ProcessContextProvider
         activeStep={activeStep}
         lastIndex={childrenCount - 1}
-        endless={endless}
       >
         <ol
           data-color="info"
@@ -208,64 +200,224 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
   ) => {
     const { cn } = useRenameCSS();
 
-    const { activeStep, endless, lastIndex } = useProcessContext();
+    const { activeStep, lastIndex } = useProcessContext();
 
-    const { index, active, lineActive } = useProcessStepContext();
+    const { index } = useProcessStepContext();
 
     return (
       <li
         ref={forwardedRef}
         aria-current={index === activeStep}
         {...restProps}
-        className={cn("navds-process__item", className, {
-          "navds-process__item--small": bullet === undefined,
-        })}
+        className={cn("navds-process__item", className)}
+        data-dot={bullet === undefined}
       >
         <div className={cn("navds-process__step")}>
-          <BodyShort
-            as="span"
-            weight="semibold"
-            className={cn("navds-process__circle")}
-            data-active={active}
-            aria-hidden
-          >
-            {bullet}
-          </BodyShort>
+          <ProcessBullet>{bullet}</ProcessBullet>
 
           <div className={cn("navds-process__content")}>
-            {title && (
-              <Label as="div" className={cn("navds-process__content-title")}>
-                {title}
-              </Label>
-            )}
-            {timestamp && (
-              <BodyShort
-                size="small"
-                spacing
-                textColor="subtle"
-                className={cn("navds-process__content-date")}
-              >
-                {timestamp}
-              </BodyShort>
-            )}
-            {!hideContent && <BodyLong>{children}</BodyLong>}
+            {title && <ProcessTitle>{title}</ProcessTitle>}
+            {timestamp && <ProcessTimestamp>{timestamp}</ProcessTimestamp>}
+            {!hideContent && <ProcessContent>{children}</ProcessContent>}
           </div>
         </div>
-        {lastIndex > index || endless ? (
-          <span
-            className={cn(
-              "navds-process__line navds-process__line-end",
-              `navds-process__line--${lineVariant}`,
-            )}
-            data-line-active={lineActive}
-          />
-        ) : null}
+        {lastIndex > index && <ProcessLine lineVariant={lineVariant} />}
       </li>
     );
   },
 );
 
-/* --------------------------- Proccess Utilities --------------------------- */
+/* ------------------------------ Process Title ----------------------------- */
+interface ProcessTitleProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Title content.
+   */
+  children: React.ReactNode;
+  /**
+   * Additional class names to apply to the title.
+   */
+  className?: string;
+}
+
+const ProcessTitle = forwardRef<HTMLDivElement, ProcessTitleProps>(
+  ({ children, className, ...restProps }: ProcessTitleProps, forwardedRef) => {
+    const { cn } = useRenameCSS();
+
+    return (
+      <Heading
+        ref={forwardedRef}
+        size="small"
+        {...restProps}
+        as="div"
+        className={cn("navds-process__content-title", className)}
+      >
+        {children}
+      </Heading>
+    );
+  },
+);
+
+/* ---------------------------- Process timestamp --------------------------- */
+interface ProcessTimestampProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Timestamp content.
+   */
+  children: React.ReactNode;
+  /**
+   * Additional class names to apply to the timestamp.
+   */
+  className?: string;
+}
+
+const ProcessTimestamp = forwardRef<HTMLDivElement, ProcessTimestampProps>(
+  (
+    { children, className, ...restProps }: ProcessTimestampProps,
+    forwardedRef,
+  ) => {
+    const { cn } = useRenameCSS();
+
+    return (
+      <BodyShort
+        ref={forwardedRef}
+        spacing
+        {...restProps}
+        size="small"
+        textColor="subtle"
+        as="div"
+        className={cn("navds-process__timestamp", className)}
+      >
+        {children}
+      </BodyShort>
+    );
+  },
+);
+
+/* ----------------------------- Process Content ---------------------------- */
+interface ProcessContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Content content.
+   */
+  children: React.ReactNode;
+  /**
+   * Additional class names to apply to the content.
+   */
+  className?: string;
+}
+
+const ProcessContent = forwardRef<HTMLDivElement, ProcessContentProps>(
+  (
+    { children, className, ...restProps }: ProcessContentProps,
+    forwardedRef,
+  ) => {
+    return (
+      <BodyLong
+        ref={forwardedRef}
+        {...restProps}
+        as="div"
+        className={className}
+      >
+        {children}
+      </BodyLong>
+    );
+  },
+);
+
+/* ----------------------------- Process Bullet ----------------------------- */
+interface ProcessBulletProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /**
+   * Bullet content.
+   */
+  children: React.ReactNode;
+  /**
+   * Additional class names to apply to the bullet.
+   */
+  className?: string;
+  /**
+   * If true, the bullet is active.
+   * @default Controlled by Process Step
+   */
+  active?: boolean;
+}
+
+const ProcessBullet = forwardRef<HTMLSpanElement, ProcessBulletProps>(
+  (
+    { children, className, active: _active, ...restProps }: ProcessBulletProps,
+    forwardedRef,
+  ) => {
+    const { cn } = useRenameCSS();
+
+    const { active } = useProcessStepContext();
+
+    return (
+      <BodyShort
+        ref={forwardedRef}
+        {...restProps}
+        as="span"
+        weight="semibold"
+        className={cn("navds-process__circle", className)}
+        data-active={_active ?? active}
+        aria-hidden
+      >
+        {children}
+      </BodyShort>
+    );
+  },
+);
+
+/* ------------------------------ Process Line ------------------------------ */
+interface ProcessLineProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /**
+   * Additional class names to apply to the line.
+   */
+  className?: string;
+  /**
+   * Changes line style for the step.
+   * @default "solid"
+   */
+  lineVariant?: "solid" | "dashed";
+  /**
+   * If true, the line is active.
+   * @default Controlled by Process Step
+   */
+  lineActive?: boolean;
+}
+
+const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
+  (
+    {
+      children,
+      className,
+      lineVariant = "solid",
+      lineActive: _lineActive,
+      ...restProps
+    }: ProcessLineProps,
+    forwardedRef,
+  ) => {
+    const { cn } = useRenameCSS();
+    const { lineActive } = useProcessStepContext();
+
+    <span
+      className={cn(
+        "navds-process__line navds-process__line-end",
+        `navds-process__line--${lineVariant}`,
+      )}
+      data-line-active={_lineActive ?? lineActive}
+    />;
+    return (
+      <span
+        ref={forwardedRef}
+        {...restProps}
+        className={cn(
+          "navds-process__line navds-process__line-end",
+          className,
+          `navds-process__line--${lineVariant}`,
+        )}
+      >
+        {children}
+      </span>
+    );
+  },
+);
 
 /* -------------------------- Process exports ------------------------- */
 Process.Step = ProcessStep;

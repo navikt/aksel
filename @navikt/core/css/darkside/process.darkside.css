@@ -1,14 +1,12 @@
 .aksel-process {
   --__axc-process-circle-base: 2rem;
-  --__axc-process-circle-large: 2rem;
+  --__axc-process-circle-large: var(--__axc-process-circle-base);
   --__axc-process-circle-small: 1rem;
   --__axc-process-circle-size: var(--__axc-process-circle-large);
   --__axc-process-border-width: 2px;
-  --__axc-process-line-length: 2rem;
 
-  line-height: 1;
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   margin: 0;
 }
 
@@ -19,18 +17,28 @@
     [line-2 step-end] auto;
   grid-template-columns: var(--__axc-process-circle-base) auto;
   justify-items: flex-start;
-}
 
-.aksel-process__item--small {
-  --__axc-process-circle-size: var(--__axc-process-circle-small);
+  &[data-dot="true"] {
+    --__axc-process-circle-size: var(--__axc-process-circle-small);
 
-  margin-block-start: calc((var(--__axc-process-circle-small) / 2) * -1);
+    margin-block-start: calc((var(--__axc-process-circle-small) / 2) * -1);
+
+    & .aksel-process__line-end {
+      margin-block-start: calc(var(--__axc-process-circle-size) / 2);
+    }
+
+    & .aksel-process__circle {
+      --__axc-process-circle-size: var(--__axc-process-circle-small);
+
+      margin-top: calc((var(--__axc-process-circle-large) - var(--__axc-process-circle-small)) / 2);
+    }
+  }
 }
 
 .aksel-process__line {
   width: 0;
   border: calc(var(--__axc-process-border-width) / 2) solid;
-  min-height: var(--__axc-process-line-length);
+  min-height: 2rem;
   justify-self: center;
   grid-column: 1;
   border-color: var(--ax-border-neutral-subtle);
@@ -42,10 +50,6 @@
 
 .aksel-process__line-end {
   grid-row: line-2;
-
-  .aksel-process__item--small & {
-    margin-block-start: calc(var(--__axc-process-circle-size) / 2);
-  }
 }
 
 .aksel-process__line--solid {
@@ -85,12 +89,6 @@
   color: var(--ax-text-neutral-subtle);
   border-color: var(--ax-border-neutral-subtleA);
 
-  .aksel-process__item--small & {
-    --__axc-process-circle-size: var(--__axc-process-circle-small);
-
-    margin-top: calc((var(--__axc-process-circle-large) - var(--__axc-process-circle-small)) / 2);
-  }
-
   & svg {
     height: min(calc(var(--__axc-process-circle-size) * 0.75), 1.5rem);
     width: min(calc(var(--__axc-process-circle-size) * 0.75), 1.5rem);
@@ -109,12 +107,11 @@
 }
 
 .aksel-process__content-title {
-  line-height: 1.5;
   padding-top: 0.16rem;
   padding-bottom: var(--ax-space-4);
 }
 
-.aksel-process__content-date:first-child {
+.aksel-process__timestamp:first-child {
   padding-top: var(--ax-space-6);
 }
 

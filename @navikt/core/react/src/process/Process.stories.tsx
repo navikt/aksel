@@ -220,7 +220,11 @@ export const InteractiveDemo: StoryFn<Story> = () => {
 
   return (
     <Process activeStep={activeStep > 1 ? activeStep + 2 : activeStep}>
-      <Process.Step bullet={<SparklesFillIcon />} title="Step one">
+      <Process.Step
+        bullet={<SparklesFillIcon />}
+        title="Step one"
+        timestamp={getDateAfter(3)}
+      >
         {activeStep === 0 && (
           <div>
             <div>
@@ -237,7 +241,11 @@ export const InteractiveDemo: StoryFn<Story> = () => {
           </div>
         )}
       </Process.Step>
-      <Process.Step bullet={<SparklesFillIcon />} title="Step two">
+      <Process.Step
+        bullet={<SparklesFillIcon />}
+        title="Step two"
+        timestamp={getDateAfter(2)}
+      >
         {activeStep === 1 && (
           <div>
             <div>
@@ -280,7 +288,11 @@ export const InteractiveDemo: StoryFn<Story> = () => {
         )}
       </Process.Step>
 
-      <Process.Step bullet={<SparklesFillIcon />} title="Step four">
+      <Process.Step
+        bullet={<SparklesFillIcon />}
+        title="Step four"
+        timestamp={getDateAfter(1)}
+      >
         {activeStep === 3 && (
           <div>
             <div>
