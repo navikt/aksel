@@ -7,7 +7,6 @@ import { createContext } from "../util/create-context";
 
 interface ProcessContextValue {
   lastIndex: number;
-  hideCompletedContent: boolean;
   activeStep?: number;
   endless: boolean;
 }
@@ -49,14 +48,6 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   reverseActiveDirection?: boolean;
   /**
-   * Hide the content of steps that are completed.
-   * Does not apply to the active step.
-   * Can be overridden by setting the 'hideContent'-prop on individual steps.
-   *
-   * @default false
-   */
-  hideCompletedContent?: boolean;
-  /**
    * When true, the last step will have a line that continues.
    * @default false
    */
@@ -89,20 +80,18 @@ interface ProcessComponent
  *     aria-labelledby="Process-heading"
  *     activeStep={activeStep}
  *     variant="number"
- *     hideCompletedContent={true}
  *   >
- *     <Process.Step title="Start søknad" date="21. august 2025" />
+ *     <Process.Step title="Start søknad" timestamp="21. august 2025" />
  *     <Process.Step
  *       title="Saksopplysninger"
- *       date="22. august 2025"
+ *       timestamp="22. august 2025"
  *       icon={<PaperclipIcon />}
  *     >
  *       Saksopplysninger er sendt inn
  *     </Process.Step>
  *     <Process.Step
  *       title="Vedlegg"
- *       date="25. august 2025"
- *       hideContent={false}
+ *       timestamp="25. august 2025"
  *     >
  *       <h2> Vedlegg er lastet opp </h2>
  *       <p>
@@ -110,7 +99,7 @@ interface ProcessComponent
  *         saksbehandler.
  *       </p>
  *     </Process.Step>
- *     <Process.Step title="Vedtak" date="8. september 2025">
+ *     <Process.Step title="Vedtak" timestamp="8. september 2025">
  *       Det er gjort endelig vedtak i saken
  *     </Process.Step>
  *   </Process>
@@ -127,7 +116,6 @@ export const Process: ProcessComponent = forwardRef<
       className,
       reverseActiveDirection = false,
       activeStep = -1,
-      hideCompletedContent = false,
       endless = false,
       ...restProps
     }: ProcessProps,
@@ -139,7 +127,6 @@ export const Process: ProcessComponent = forwardRef<
 
     return (
       <ProcessContextProvider
-        hideCompletedContent={hideCompletedContent}
         activeStep={activeStep}
         lastIndex={childrenCount - 1}
         endless={endless}
@@ -187,20 +174,15 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
    */
   title?: string;
   /**
-   * Date to display under the title
+   * Timestamp or date to display under the title.
    */
-  date?: string;
+  timestamp?: string;
   /**
    * Icon or number to display inside the circle.
    */
   bullet?: React.ReactNode;
   /**
-   * Set this step as completed.
-   */
-  completed?: boolean;
-  /**
    * Hide the content section of the step.
-   * Useful for overriding the Process-level 'hideCompletedContent'-prop.
    */
   hideContent?: boolean;
   /**
@@ -214,10 +196,9 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
   (
     {
       title,
-      date,
+      timestamp,
       children,
       bullet,
-      completed,
       hideContent,
       lineVariant = "solid",
       className,
@@ -227,8 +208,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
   ) => {
     const { cn } = useRenameCSS();
 
-    const { activeStep, hideCompletedContent, endless, lastIndex } =
-      useProcessContext();
+    const { activeStep, endless, lastIndex } = useProcessContext();
 
     const { index, active, lineActive } = useProcessStepContext();
 
@@ -244,11 +224,9 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
         <div className={cn("navds-process__step")}>
           <BodyShort
             as="span"
-            size="medium"
             weight="semibold"
             className={cn("navds-process__circle")}
             data-active={active}
-            data-completed={completed}
             aria-hidden
           >
             {bullet}
@@ -260,25 +238,17 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
                 {title}
               </Label>
             )}
-            {date && (
+            {timestamp && (
               <BodyShort
                 size="small"
                 spacing
                 textColor="subtle"
                 className={cn("navds-process__content-date")}
               >
-                {date}
+                {timestamp}
               </BodyShort>
             )}
-            {!(
-              hideContent ??
-              (hideCompletedContent && completed && index !== activeStep)
-            ) &&
-              (children && typeof children === "string" ? (
-                <BodyLong size="medium">{children}</BodyLong>
-              ) : (
-                children
-              ))}
+            {!hideContent && <BodyLong>{children}</BodyLong>}
           </div>
         </div>
         {lastIndex > index || endless ? (

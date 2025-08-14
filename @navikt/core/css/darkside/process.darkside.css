@@ -103,8 +103,6 @@
   border-color: transparent;
 }
 
-/* .aksel-process__circle[data-completed="true"] */
-
 .aksel-process__content {
   min-width: fit-content;
   grid-column: content;
@@ -130,15 +128,5 @@
 
   .aksel-process__circle[data-active="true"] {
     outline-color: ButtonText;
-  }
-
-  .aksel-process__circle[data-active="true"].aksel-process__circle[data-completed="true"] {
-    color: ButtonFace;
-    background-color: ButtonText;
-  }
-
-  .aksel-process__circle[data-completed="false"] {
-    background-color: ButtonFace;
-    color: ButtonText;
   }
 }

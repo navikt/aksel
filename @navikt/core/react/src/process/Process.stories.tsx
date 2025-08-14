@@ -30,27 +30,22 @@ export const Default = ({
   step4Date,
   step4ShowSlot,
   step4Icon,
-  step4Completed,
   step4HideContent,
   ...props
 }) => {
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Process activeStep={activeStep} {...props}>
-        <Process.Step title="Start søknad" date={getDateAfter(0)} completed />
-        <Process.Step
-          title="Personopplysninger"
-          date={getDateAfter(3)}
-          completed
-        >
+        <Process.Step title="Start søknad" timestamp={getDateAfter(0)} />
+        <Process.Step title="Personopplysninger" timestamp={getDateAfter(3)}>
           Send inn personopplysninger
         </Process.Step>
-        <Process.Step title="Saksopplysninger" date={getDateAfter(6)}>
+        <Process.Step title="Saksopplysninger" timestamp={getDateAfter(6)}>
           Send inn saksopplysninger
         </Process.Step>
         <Process.Step
           title={step4Title}
-          date={step4Date}
+          timestamp={step4Date}
           bullet={
             step4Icon === "<Icon/>" ? (
               <GavelSoundBlockIcon />
@@ -60,7 +55,6 @@ export const Default = ({
               step4Icon
             )
           }
-          completed={step4Completed}
           hideContent={step4HideContent}
         >
           {step4ShowSlot && (
@@ -94,13 +88,13 @@ export const Default = ({
             </>
           )}
         </Process.Step>
-        <Process.Step title="Vedlegg" date={getDateAfter(12)}>
+        <Process.Step title="Vedlegg" timestamp={getDateAfter(12)}>
           Send inn vedlegg
         </Process.Step>
-        <Process.Step title="Oppsummering" date={getDateAfter(15)}>
+        <Process.Step title="Oppsummering" timestamp={getDateAfter(15)}>
           Les oppsummering
         </Process.Step>
-        <Process.Step title="Innsending" date={getDateAfter(18)}>
+        <Process.Step title="Innsending" timestamp={getDateAfter(18)}>
           Send inn søknaden
         </Process.Step>
       </Process>
@@ -113,11 +107,6 @@ Default.argTypes = {
     control: "inline-radio",
     options: [0, 1, 2, 3, 4, 5, 6, 7, 8],
   },
-  hideCompletedContent: {
-    name: "'hideCompletedContent'-prop",
-    control: "inline-radio",
-    options: [true, false, undefined],
-  },
   step4Title: { name: "Step 4: 'title'-prop" },
   step4Date: { name: "Step 4: 'date'-prop" },
   step4ShowSlot: { name: "Step 4: Add dummy slot" },
@@ -126,11 +115,7 @@ Default.argTypes = {
     control: "inline-radio",
     options: ["<Icon/>", "<empty string>", undefined],
   },
-  step4Completed: {
-    name: "Step 4: 'completed'-prop",
-    control: "inline-radio",
-    options: [true, false, undefined],
-  },
+
   step4HideContent: {
     name: "Step 4: 'hideContent'-prop",
     control: "inline-radio",
@@ -139,13 +124,11 @@ Default.argTypes = {
 };
 Default.args = {
   activeStep: 3,
-  hideCompletedContent: true,
   step4Title:
     "Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og forklares i sitt fulle i denne labelen",
   step4Date: getDateAfter(9),
   step4ShowSlot: true,
   step4Icon: "<Icon/>",
-  step4Completed: undefined,
   step4HideContent: undefined,
   endless: false,
 };
