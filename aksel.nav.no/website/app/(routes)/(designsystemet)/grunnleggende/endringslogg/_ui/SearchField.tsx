@@ -81,7 +81,7 @@ export default function SearchField() {
           anchorEl={settingsButtonRef.current}
         >
           <PopoverContent>
-            <VStack width="50ch">
+            <VStack maxWidth="50ch">
               <BodyLong>
                 Dette er et <em>smart</em> søkefelt, og vanlig opprørsel er at
                 om du søker tall som <em>ser ut som</em> en{" "}
