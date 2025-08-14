@@ -48,6 +48,7 @@ export default async function Page({ searchParams }: PageProps) {
     periode: paramYear = "",
     kategori: paramCategory = "",
     fritekst: paramTextFilter = "",
+    semver: paramSemver = false,
   } = await searchParams;
   const yearFilter = years.includes(paramYear.toString())
     ? paramYear.toString()
@@ -58,15 +59,14 @@ export default async function Page({ searchParams }: PageProps) {
     ? paramCategory.toString()
     : null;
 
+  const isSemverSearch = !!paramSemver;
+
   const searchText = paramTextFilter.toString().trim();
   const textFilter = searchText.split(" ");
 
   let logEntries: ENDRINGSLOGG_QUERYResult = [];
 
-  const isSemverSearch = textFilter[0] === "semver";
-
   if (isSemverSearch) {
-    textFilter.shift();
     const semverRange = semverValidRange(textFilter.join(" "));
     console.warn("isSemver:", isSemverSearch, semverRange);
 

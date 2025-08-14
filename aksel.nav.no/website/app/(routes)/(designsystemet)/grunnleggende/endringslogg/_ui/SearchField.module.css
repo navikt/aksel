@@ -5,3 +5,7 @@
 .spaced {
   margin-top: 2ch;
 }
+
+.code {
+  width: fit-content;
+}

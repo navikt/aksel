@@ -1,12 +1,14 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BodyLong,
+  Checkbox,
   HStack,
-  HelpText,
+  Heading,
   Link,
+  ReadMore,
   Search,
   VStack,
 } from "@navikt/ds-react";
@@ -18,6 +20,9 @@ export default function SearchField() {
   const pathname = usePathname();
   const { replace } = useRouter();
   const searchRef = useRef<HTMLInputElement>(null);
+
+  const semverRef = useRef<HTMLInputElement>(null);
+  const [semverSearch, setSemverSearch] = useState<boolean>();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -35,6 +40,13 @@ export default function SearchField() {
     } else {
       params.delete("fritekst");
     }
+
+    if (semverSearch) {
+      params.set("semver", "true");
+    } else {
+      params.delete("semver");
+    }
+
     replace(`${pathname}${params.toString() ? `?${params.toString()}` : ""}`);
   }
 
@@ -44,37 +56,57 @@ export default function SearchField() {
     }
   }, [searchParams]);
 
+  useEffect(() => {
+    if (semverRef.current) {
+      semverRef.current.checked = !!searchParams?.get("semver") || false;
+    }
+  }, [searchParams]);
+
   return (
     <form role="search" onSubmit={handleSubmit}>
-      <HStack align="center" gap="space-12">
-        <Search
-          ref={searchRef}
-          label="Søk i endringsloggen"
-          defaultValue={searchParams?.get("fritekst") || ""}
-          name="fritekst"
-          hideLabel
-          variant="secondary"
-          htmlSize="20"
-          autoComplete="off"
-          onClear={() => handleSearch("")}
-          onChange={(v) => v === "" && handleSearch("")}
-          data-color="neutral"
-          className={styles.searchField}
-        />
-        <HelpText title="Søke-syntaks">
+      <VStack gap="space-12">
+        <HStack align="center" gap="space-12">
+          <Search
+            ref={searchRef}
+            label="Søk i endringsloggen"
+            defaultValue={searchParams?.get("fritekst") || ""}
+            name="fritekst"
+            hideLabel
+            variant="secondary"
+            htmlSize="20"
+            autoComplete="off"
+            onClear={() => handleSearch("")}
+            onChange={(v) => v === "" && handleSearch("")}
+            data-color="neutral"
+            className={styles.searchField}
+          />
+
+          <Checkbox
+            ref={semverRef}
+            value="semver"
+            onClick={() => {
+              setSemverSearch(!semverSearch);
+            }}
+            checked={semverSearch}
+          >
+            semver søk
+          </Checkbox>
+        </HStack>
+        <ReadMore header="Søke-syntaks">
           <VStack maxWidth="50ch">
+            <Heading size="small" level="2">
+              Semver søk
+            </Heading>
             <BodyLong>
-              Dette søkefeltet støtter <em>smart søke-syntaks</em> for søking i
-              blant annet releases etter{" "}
-              <Link href="https://semver.org">semver</Link>.
+              For søking i releases etter{" "}
+              <Link href="https://semver.org">semver</Link>. Da vil søket
+              ignorere alle andre filtre som <Code>År</Code> og{" "}
+              <Code>Kategori</Code>
             </BodyLong>
-            <BodyLong className={styles.spaced}>
-              For å bruke denne funksjonen så må du starte søket ditt med{" "}
-              <Code>semver</Code> slik som dette:
-            </BodyLong>
-            <Code>semver 7.3</Code>
-            <BodyLong>eller</BodyLong>
-            <Code>semver ^2.2 || &gt;=3.2.1 &lt;4</Code>
+            <BodyLong className={styles.spaced}>For eksempel:</BodyLong>
+            <Code className={styles.code}>7.3</Code>
+            <BodyLong>eller:</BodyLong>
+            <Code className={styles.code}>^2.2 || &gt;=3.2.1 &lt;4</Code>
             <BodyLong className={styles.spaced}>
               Semver-søk støtter{" "}
               <Link href="https://github.com/npm/node-semver?tab=readme-ov-file#ranges">
@@ -83,8 +115,8 @@ export default function SearchField() {
               .
             </BodyLong>
           </VStack>
-        </HelpText>
-      </HStack>
+        </ReadMore>
+      </VStack>
     </form>
   );
 }
