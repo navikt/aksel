@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import {
   BodyLong,
   Checkbox,
@@ -15,14 +15,18 @@ import {
 import { Code } from "@/app/_ui/typography/Code";
 import styles from "./SearchField.module.css";
 
-export default function SearchField() {
+export default function SearchField({
+  semverSearchState,
+}: {
+  semverSearchState: [boolean, Dispatch<SetStateAction<boolean>>]; // no ReturnType<typeof useState<boolean>>; ?
+}) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
   const searchRef = useRef<HTMLInputElement>(null);
 
   const semverRef = useRef<HTMLInputElement>(null);
-  const [semverSearch, setSemverSearch] = useState<boolean>();
+  const [semverSearch, setSemverSearch] = semverSearchState;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -56,12 +60,6 @@ export default function SearchField() {
     }
   }, [searchParams]);
 
-  useEffect(() => {
-    if (semverRef.current) {
-      semverRef.current.checked = !!searchParams?.get("semver") || false;
-    }
-  }, [searchParams]);
-
   return (
     <form role="search" onSubmit={handleSubmit}>
       <VStack gap="space-12">
@@ -75,8 +73,8 @@ export default function SearchField() {
             variant="secondary"
             htmlSize="20"
             autoComplete="off"
-            onClear={() => handleSearch("")}
-            onChange={(v) => v === "" && handleSearch("")}
+            // onClear={() => handleSearch("")} // TODO: do we want smarter behaviour?
+            // onChange={(v) => v === "" && handleSearch("")} // TODO: do we want smarter behaviour?
             data-color="neutral"
             className={styles.searchField}
           />

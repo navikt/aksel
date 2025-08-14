@@ -17,9 +17,8 @@ import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { capitalizeText } from "@/ui-utils/format-text";
 import { DesignsystemetEyebrow } from "../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
-import FilterChips from "./_ui/FilterChips";
 import LogEntryList from "./_ui/LogEntryList";
-import SearchField from "./_ui/SearchField";
+import { SearchForm } from "./_ui/SearchForm";
 import { bumpHeadingLevels } from "./_ui/utils";
 
 export const metadata: Metadata = {
@@ -165,15 +164,7 @@ export default async function Page({ searchParams }: PageProps) {
           Endringslogg
         </Heading>
 
-        <VStack gap="space-24" paddingBlock="space-12 space-0">
-          <SearchField />
-          <FilterChips
-            years={years}
-            selectedYear={yearFilter}
-            categories={categories}
-            selectedCategory={categoryFilter}
-          />
-        </VStack>
+        <SearchForm params={{ years, paramYear, categories, paramCategory }} />
       </div>
 
       <TableOfContents
