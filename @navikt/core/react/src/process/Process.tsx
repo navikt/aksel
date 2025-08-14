@@ -209,10 +209,10 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
         ref={forwardedRef}
         aria-current={index === activeStep}
         {...restProps}
-        className={cn("navds-process__item", className)}
+        className={cn("navds-process__step", className)}
         data-dot={bullet === undefined}
       >
-        <div className={cn("navds-process__step")}>
+        <div className={cn("navds-process__item")}>
           <ProcessBullet>{bullet}</ProcessBullet>
 
           <div className={cn("navds-process__content")}>

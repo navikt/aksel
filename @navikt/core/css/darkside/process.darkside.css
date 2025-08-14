@@ -10,7 +10,7 @@
   margin: 0;
 }
 
-.aksel-process__item {
+.aksel-process__step {
   display: grid;
   grid-template-rows:
     [line-1] auto [step-start] var(--__axc-process-circle-size)
@@ -60,7 +60,7 @@
   border-style: dashed;
 }
 
-.aksel-process__step {
+.aksel-process__item {
   grid-row: 2 / -1;
   grid-column: 1 / -1;
   display: grid;
@@ -71,7 +71,7 @@
   margin: calc(var(--__axc-process-border-width) * -1) calc(var(--__axc-process-border-width) * -1) var(--ax-space-16);
   width: 100%;
 
-  .aksel-process__item:last-child & {
+  .aksel-process__step:last-child & {
     margin-bottom: 0;
   }
 }
