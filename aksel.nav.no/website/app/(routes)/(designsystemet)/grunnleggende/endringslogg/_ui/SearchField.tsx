@@ -1,18 +1,15 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { QuestionmarkCircleIcon } from "@navikt/aksel-icons";
+import { useEffect, useRef } from "react";
 import {
   BodyLong,
-  Button,
   HStack,
+  HelpText,
   Link,
-  Popover,
   Search,
   VStack,
 } from "@navikt/ds-react";
-import { PopoverContent } from "@navikt/ds-react/Popover";
 import { Code } from "@/app/_ui/typography/Code";
 import styles from "./SearchField.module.css";
 
@@ -21,9 +18,6 @@ export default function SearchField() {
   const pathname = usePathname();
   const { replace } = useRouter();
   const searchRef = useRef<HTMLInputElement>(null);
-
-  const settingsButtonRef = useRef(null);
-  const [openState, setOpenState] = useState(false);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -52,7 +46,7 @@ export default function SearchField() {
 
   return (
     <form role="search" onSubmit={handleSubmit}>
-      <HStack gap="space-12">
+      <HStack align="center" gap="space-12">
         <Search
           ref={searchRef}
           label="Søk i endringsloggen"
@@ -67,46 +61,29 @@ export default function SearchField() {
           data-color="neutral"
           className={styles.searchField}
         />
-        <Button
-          ref={settingsButtonRef}
-          variant="tertiary"
-          type="button"
-          onClick={() => setOpenState(!openState)}
-          aria-expanded={openState}
-          icon={<QuestionmarkCircleIcon aria-hidden />}
-        >
-          Søke-syntaks
-        </Button>
-        <Popover
-          open={openState}
-          onClose={() => setOpenState(false)}
-          anchorEl={settingsButtonRef.current}
-          placement="bottom"
-        >
-          <PopoverContent>
-            <VStack maxWidth="50ch">
-              <BodyLong>
-                Dette søkefeltet støtter <em>smart søke-syntaks</em> for søking
-                i blant annet releases etter{" "}
-                <Link href="https://semver.org">semver</Link>.
-              </BodyLong>
-              <BodyLong className={styles.spaced}>
-                For å bruke denne funksjonen så må du starte søket ditt med{" "}
-                <Code>semver</Code> slik som dette:
-              </BodyLong>
-              <Code>semver 7.3</Code>
-              <BodyLong>eller</BodyLong>
-              <Code>semver ^2.2 || &gt;=3.2.1 &lt;4</Code>
-              <BodyLong className={styles.spaced}>
-                Semver-søk støtter{" "}
-                <Link href="https://github.com/npm/node-semver?tab=readme-ov-file#ranges">
-                  range syntax
-                </Link>
-                .
-              </BodyLong>
-            </VStack>
-          </PopoverContent>
-        </Popover>
+        <HelpText title="Søke-syntaks">
+          <VStack maxWidth="50ch">
+            <BodyLong>
+              Dette søkefeltet støtter <em>smart søke-syntaks</em> for søking i
+              blant annet releases etter{" "}
+              <Link href="https://semver.org">semver</Link>.
+            </BodyLong>
+            <BodyLong className={styles.spaced}>
+              For å bruke denne funksjonen så må du starte søket ditt med{" "}
+              <Code>semver</Code> slik som dette:
+            </BodyLong>
+            <Code>semver 7.3</Code>
+            <BodyLong>eller</BodyLong>
+            <Code>semver ^2.2 || &gt;=3.2.1 &lt;4</Code>
+            <BodyLong className={styles.spaced}>
+              Semver-søk støtter{" "}
+              <Link href="https://github.com/npm/node-semver?tab=readme-ov-file#ranges">
+                range syntax
+              </Link>
+              .
+            </BodyLong>
+          </VStack>
+        </HelpText>
       </HStack>
     </form>
   );
