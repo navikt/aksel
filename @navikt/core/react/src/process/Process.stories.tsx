@@ -179,6 +179,33 @@ export const IconBullets: StoryFn<Story> = () => {
   );
 };
 
+export const LineVariants: StoryFn<Story> = () => {
+  return (
+    <Process activeStep={3}>
+      <Process.Step bullet={<SparklesFillIcon />} title="Start søknad" />
+      <Process.Step
+        bullet={<SparklesFillIcon />}
+        title="Personopplysninger"
+        lineVariant="dashed"
+      />
+      <Process.Step title="Substep 1" lineVariant="dashed" />
+      <Process.Step title="Substep 2" lineVariant="dashed" />
+      <Process.Step title="Substep 3" lineVariant="dashed" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Saksopplysninger" />
+
+      <Process.Step
+        bullet={<SparklesFillIcon />}
+        title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+      />
+      <Process.Step title="Substep 1" />
+      <Process.Step title="Substep 2" />
+      <Process.Step title="Substep 3" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Vedlegg" />
+      <Process.Step bullet={<SparklesFillIcon />} title="Oppsummering" />
+    </Process>
+  );
+};
+
 export const Content: StoryFn<Story> = () => {
   return (
     <Process activeStep={3}>
