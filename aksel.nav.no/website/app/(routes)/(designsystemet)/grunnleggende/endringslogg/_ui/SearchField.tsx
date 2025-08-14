@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { QuestionmarkCircleIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   Button,
@@ -51,7 +52,7 @@ export default function SearchField() {
 
   return (
     <form role="search" onSubmit={handleSubmit}>
-      <HStack>
+      <HStack gap="space-12">
         <Search
           ref={searchRef}
           label="Søk i endringsloggen"
@@ -72,8 +73,9 @@ export default function SearchField() {
           type="button"
           onClick={() => setOpenState(!openState)}
           aria-expanded={openState}
+          icon={<QuestionmarkCircleIcon aria-hidden />}
         >
-          Søkeinstillinger
+          Søke-syntaks
         </Button>
         <Popover
           open={openState}
@@ -84,8 +86,9 @@ export default function SearchField() {
           <PopoverContent>
             <VStack maxWidth="50ch">
               <BodyLong>
-                Dette søkefeltet støtter <em>smart søkesyntaks</em> for søking i
-                releases etter <Link href="https://semver.org">semver</Link>.
+                Dette søkefeltet støtter <em>smart søke-syntaks</em> for søking
+                i blant annet releases etter{" "}
+                <Link href="https://semver.org">semver</Link>.
               </BodyLong>
               <BodyLong className={styles.spaced}>
                 For å bruke denne funksjonen så må du starte søket ditt med{" "}
