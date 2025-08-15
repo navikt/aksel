@@ -143,8 +143,8 @@
   padding: 0;
 }
 
-.aksel-table .aksel-checkbox__input:focus + .aksel-checkbox__label::after,
-.aksel-table .aksel-radio__input:focus + .aksel-radio__label::after {
+.aksel-table tr:not(.aksel-table__expanded-row) .aksel-checkbox__input:focus + .aksel-checkbox__label::after,
+.aksel-table tr:not(.aksel-table__expanded-row) .aksel-radio__input:focus + .aksel-radio__label::after {
   height: 100%;
 }
 

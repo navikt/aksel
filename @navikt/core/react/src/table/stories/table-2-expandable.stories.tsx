@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../../button";
 import { Checkbox } from "../../form/checkbox";
+import { Radio, RadioGroup } from "../../form/radio";
 import { Link } from "../../link";
 import Table from "../Table";
 
@@ -222,6 +223,11 @@ const data = [
       <>
         Ola Conny Brakkestad sier hei. Her er litt innhold med en{" "}
         <Link href="#">link.</Link>
+        <RadioGroup legend="Velg din aldersgruppe.">
+          <Radio value="10">10-20 år</Radio>
+          <Radio value="20">21-45 år</Radio>
+          <Radio value="40">46-80 år</Radio>
+        </RadioGroup>
       </>
     ),
   },
