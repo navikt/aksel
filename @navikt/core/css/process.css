@@ -1,152 +1,130 @@
-.navds-process {
-  --navds-process-circle-large: 2rem;
-  --navds-process-circle-small: 1rem;
-  --navds-process-circle-size: var(--navds-process-circle-large);
-  --navds-process-border-width: 2px;
-  --navds-process-line-length: 1rem;
+.aksel-process {
+  --__ac-process-circle-base: 2rem;
+  --__ac-process-circle-large: var(--__ac-process-circle-base);
+  --__ac-process-circle-small: 1rem;
+  --__ac-process-circle-size: var(--__ac-process-circle-large);
+  --__ac-process-border-width: 2px;
 
-  line-height: 1;
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   margin: 0;
 }
 
-.navds-process__item {
+.aksel-process__step {
   display: grid;
   grid-template-rows:
-    [line-1] auto [step-start] var(--navds-process-circle-size)
+    [line-1] auto [step-start] var(--__ac-process-circle-size)
     [line-2 step-end] auto;
-  grid-template-columns: var(--navds-process-circle-size) auto;
+  grid-template-columns: var(--__ac-process-circle-base) auto;
   justify-items: flex-start;
-  gap: var(--a-spacing-2);
+
+  &[data-dot="true"] {
+    --__ac-process-circle-size: var(--__ac-process-circle-small);
+
+    margin-block-start: calc((var(--__ac-process-circle-small) / 2) * -1);
+
+    & .aksel-process__line-end {
+      margin-block-start: calc(var(--__ac-process-circle-size) / 2);
+    }
+
+    & .aksel-process__bullet {
+      --__ac-process-circle-size: var(--__ac-process-circle-small);
+
+      margin-top: calc((var(--__ac-process-circle-large) - var(--__ac-process-circle-small)) / 2);
+    }
+  }
 }
 
-.navds-process__item-no-gap {
-  gap: 0;
-}
-
-.navds-process__line {
+.aksel-process__line {
   width: 0;
-  border: calc(var(--navds-process-border-width) / 2) solid var(--a-border-info);
-  height: 100%;
-  min-height: var(--navds-process-line-length);
+  border: calc(var(--__ac-process-border-width) / 2) solid;
+  min-height: 2rem;
   justify-self: center;
   grid-column: 1;
-  border-radius: var(--navds-process-border-width) / var(--navds-process-border-width);
+  border-color: var(--ax-border-neutral-subtle);
+
+  &[data-line-active="true"] {
+    border-color: var(--ax-border-default);
+    border-image: linear-gradient(to bottom, var(--ax-border-default) 50%, var(--ax-border-neutral-subtle) 100%);
+    border-image-slice: 1;
+  }
+
+  &[data-current="false"] {
+    border-image: none;
+  }
 }
 
-.navds-process__line--1 {
-  grid-row: line-1;
-  display: none;
-}
-
-.navds-process__line--2 {
+.aksel-process__line-end {
   grid-row: line-2;
 }
 
-:where(.navds-process__item:last-of-type) .navds-process__line--2 {
-  display: none;
-}
-
-.navds-process__line--uncompleted {
-  border-style: dashed;
-  border-color: var(--a-border-default);
-}
-
-.navds-process__step {
+.aksel-process__item {
   grid-row: 2 / -1;
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: [circle] var(--navds-process-circle-size) [content] auto;
-  gap: var(--a-spacing-4);
+  grid-template-columns: [bullet] var(--__ac-process-circle-base) [content] auto;
+  gap: var(--ax-space-16);
   justify-content: flex-start;
-  padding: var(--navds-process-border-width);
-  margin: calc(var(--navds-process-border-width) * -1) calc(var(--navds-process-border-width) * -1) var(--a-spacing-4);
+  padding: var(--__ac-process-border-width);
+  margin: calc(var(--__ac-process-border-width) * -1) calc(var(--__ac-process-border-width) * -1) var(--ax-space-16);
   width: 100%;
+
+  .aksel-process__step:last-child & {
+    margin-bottom: 0;
+  }
 }
 
-:where(.navds-process__item:last-child) .navds-process__step {
-  margin-bottom: 0;
-}
-
-.navds-process__circle {
-  grid-column: circle;
+.aksel-process__bullet {
+  grid-column: bullet;
   display: inline-grid;
   place-self: baseline center;
   place-items: center;
-  width: var(--navds-process-circle-size);
-  height: var(--navds-process-circle-size);
+  width: var(--__ac-process-circle-size);
+  height: var(--__ac-process-circle-size);
   line-height: 1;
-  border-radius: var(--a-border-radius-full);
-  border: var(--navds-process-border-width) solid var(--a-border-info);
+  border-radius: var(--ax-radius-full);
+  border: var(--__ac-process-border-width) solid;
+  color: var(--ax-text-neutral-subtle);
+  border-color: var(--ax-border-neutral-subtleA);
+  transition-property: background, border-color;
+  transition-duration: 70ms;
+  transition-timing-function: linear;
+
+  & svg {
+    height: min(calc(var(--__ac-process-circle-size) * 0.75), 1.5rem);
+    width: min(calc(var(--__ac-process-circle-size) * 0.75), 1.5rem);
+  }
+
+  &[data-active="true"] {
+    color: var(--ax-text-contrast);
+    background: var(--ax-bg-strong);
+    border-color: transparent;
+  }
+
+  &[data-active="false"] {
+    transition: none;
+  }
 }
 
-.navds-process__circle--small {
-  --navds-process-circle-size: var(--navds-process-circle-small);
-
-  margin-top: calc((var(--navds-process-circle-large) - var(--navds-process-circle-small)) / 2);
-}
-
-.navds-process__circle--icon {
-  font-size: calc(var(--navds-process-circle-size) * 0.75);
-}
-
-.navds-process__circle[data-active="true"] {
-  /* color: var(--a-text-on-inverted);
-  background: var(--a-border-info); */
-  outline: 2px solid var(--a-border-info);
-  outline-offset: 2px;
-}
-
-.navds-process__circle[data-completed="true"] {
-  color: var(--a-text-on-action);
-  background: var(--a-border-info);
-}
-
-.navds-process__circle[data-active="true"].navds-process__circle[data-completed="true"] {
-  color: var(--a-text-on-inverted);
-  background: var(--a-border-info);
-}
-
-.navds-process__circle[data-completed="false"] {
-  color: var(--a-text-subtle);
-  border-color: var(--a-border-default);
-}
-
-.navds-process__content {
+.aksel-process__body {
   min-width: fit-content;
   grid-column: content;
 }
 
-.navds-process__content-title {
-  line-height: 1.5;
+.aksel-process__title {
   padding-top: 0.16rem;
-  padding-bottom: var(--a-spacing-1);
-}
-
-.navds-process__content-date:first-child {
-  padding-top: var(--a-spacing-1-alt);
+  padding-bottom: var(--ax-space-4);
 }
 
 @media (forced-colors: active) {
-  .navds-process__circle.navds-process__circle {
+  .aksel-process__bullet.aksel-process__bullet {
     forced-color-adjust: none;
     color: ButtonFace;
     background-color: ButtonText;
     border-color: ButtonText;
   }
 
-  .navds-process__circle[data-active="true"] {
+  .aksel-process__bullet[data-active="true"] {
     outline-color: ButtonText;
-  }
-
-  .navds-process__circle[data-active="true"].navds-process__circle[data-completed="true"] {
-    color: ButtonFace;
-    background-color: ButtonText;
-  }
-
-  .navds-process__circle[data-completed="false"] {
-    background-color: ButtonFace;
-    color: ButtonText;
   }
 }
