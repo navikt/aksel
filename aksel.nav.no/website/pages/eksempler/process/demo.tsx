@@ -1,47 +1,60 @@
-import { useState } from "react";
-import { PaperclipIcon } from "@navikt/aksel-icons";
-import { BodyLong, Heading, Process } from "@navikt/ds-react";
+import { ChildHairEyesIcon, FileIcon } from "@navikt/aksel-icons";
+import { Heading, Link, Process } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [activeStep] = useState(3);
-
   return (
     <>
-      <Heading size="medium" spacing level="2" id="Process-heading">
-        Søknadssteg
+      <Heading size="medium" level="2" id="Process-heading" visuallyHidden>
+        Søknadssteg med tilhørende tittel
       </Heading>
-      <Process
-        aria-labelledby="Process-heading"
-        activeStep={activeStep}
-        variant="number"
-        hideCompletedContent={true}
-      >
-        <Process.Step title="Start søknad" date="21. august 2025" />
+      <Process aria-labelledby="Process-heading" activeStep={4}>
         <Process.Step
-          title="Saksopplysninger"
-          date="22. august 2025"
-          icon={<PaperclipIcon />}
+          title="Barnet ble født"
+          timestamp="04. august 2025"
+          bullet={<Process.Checkmark />}
+        />
+        <Process.Step
+          title="Du søkte om FORELDREPENGER"
+          timestamp="22. august 2025"
+          bullet={<Process.Checkmark />}
         >
-          Saksopplysninger er sendt inn
+          <Link href="/eksempel">
+            <FileIcon aria-hidden fontSize={24} />
+            Søknad om foreldrepenger ved fødsel
+          </Link>
         </Process.Step>
         <Process.Step
-          title="Vedlegg"
-          date="25. august 2025"
-          hideContent={false}
+          title="Søknaden din ble innvilget"
+          timestamp="25. august 2025"
+          bullet={<Process.Checkmark />}
         >
-          <Heading size="small">Vedlegg er lastet opp</Heading>
-          <BodyLong>
-            Dokumentasjon av saksopplysninger er lastet opp og tilgjengelig for
-            saksbehandler.
-          </BodyLong>
+          <Link href="/eksempel">
+            <FileIcon aria-hidden fontSize={24} />
+            Innvilgelsesbrev Foreldrepenger
+          </Link>
         </Process.Step>
         <Process.Step
-          title="Vedtak"
-          date="8. september 2025"
-          hideContent={true}
+          title="Du har fått et svar på søknaden din"
+          timestamp="8. september 2025"
         >
-          Det er gjort endelig vedtak i saken
+          <Link href="/eksempel">
+            <FileIcon aria-hidden fontSize={24} />
+            Opphør Foreldrepenger
+          </Link>
+        </Process.Step>
+        <Process.Step
+          title="Nav har etterspurt opplysninger"
+          timestamp="8. september 2025"
+        />
+        <Process.Step
+          title="Barnet fyller 3 år"
+          timestamp="22. august 2028"
+          bullet={<ChildHairEyesIcon />}
+        >
+          Du må ta ut foreldrepengene før barnet fyller 3 år. Venter dere nytt
+          barn, må dere ta ut foreldrepengene før ny foreldrepengeperiode
+          starter.
         </Process.Step>
       </Process>
     </>
@@ -49,7 +62,9 @@ const Example = () => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, {
+  variant: "static",
+});
 
 /* Storybook story */
 export const VariantNumber = {
