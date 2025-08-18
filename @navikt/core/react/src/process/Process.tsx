@@ -11,8 +11,6 @@ import { useId } from "../util";
 import { createContext } from "../util/create-context";
 import { useMergeRefs } from "../util/hooks";
 
-// type ProcessVariant = "default" | "number" | "icon";
-
 interface ProcessContextValue {
   lastIndex: number;
   activeStep?: number;
@@ -47,7 +45,7 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   children: React.ReactElement<typeof ProcessStep>[];
   /**
-   * Index of current active step, all elements before this index will be highlighted.
+   * Index of current active step, currently active element and all previous elements before this index will be highlighted.
    */
   activeStep?: number;
 }
@@ -67,9 +65,10 @@ interface ProcessComponent
 }
 
 /**
- * A component that presents a Process as a vertical line of steps.
+ * A component that presents a Process as a vertical line of events.
+ * Each event can contain information, actions, links or status indicators.
  *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/Process)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/process)
  * @see 🏷️ {@link ProcessProps}
  *
  * @example
@@ -81,7 +80,6 @@ interface ProcessComponent
  *   <Process
  *     aria-labelledby="Process-heading"
  *     activeStep={activeStep}
- *     variant="number"
  *   >
  *     <Process.Step title="Start søknad" timestamp="21. august 2025" />
  *     <Process.Step
@@ -95,7 +93,7 @@ interface ProcessComponent
  *       title="Vedlegg"
  *       timestamp="25. august 2025"
  *     >
- *       <h2> Vedlegg er lastet opp </h2>
+ *       <h3> Vedlegg er lastet opp </h3>
  *       <p>
  *         Dokumentasjon av saksopplysninger er lastet opp og tilgjengelig for
  *         saksbehandler.
@@ -119,7 +117,6 @@ export const Process: ProcessComponent = forwardRef<
     const { cn } = useRenameCSS();
 
     const rootRef = useRef<HTMLOListElement>(null);
-
     const mergedRef = useMergeRefs(forwardedRef, rootRef);
 
     const childrenCount = React.Children.count(children);
@@ -173,16 +170,15 @@ export const Process: ProcessComponent = forwardRef<
 /* ------------------------------ Process Step ------------------------------ */
 interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
-   * Rich content to display under the title (and date and/or
-   * description, if provided)
+   * Rich content to display under the title and timeline a if provided.
    */
   children?: React.ReactNode;
   /**
-   * Title
+   * Step title.
    */
   title?: string;
   /**
-   * Timestamp or date to display under the title.
+   * Timestamp or date to display for event.
    */
   timestamp?: string;
   /**
@@ -210,12 +206,10 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
+    const stepId = useId();
 
     const { activeStep, lastIndex, rootId } = useProcessContext();
-
     const { index } = useProcessStepContext();
-
-    const stepId = useId();
 
     const isActive = index === activeStep;
 
@@ -233,7 +227,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
         <div className={cn("navds-process__item")}>
           <ProcessBullet>{bullet}</ProcessBullet>
 
-          <div className={cn("navds-process__content")}>
+          <div className={cn("navds-process__body")}>
             {title && <ProcessTitle>{title}</ProcessTitle>}
             {timestamp && <ProcessTimestamp>{timestamp}</ProcessTimestamp>}
             {!hideContent && <ProcessContent>{children}</ProcessContent>}
@@ -263,7 +257,7 @@ const ProcessTitle = forwardRef<HTMLDivElement, ProcessTitleProps>(
         size="small"
         {...restProps}
         as="div"
-        className={cn("navds-process__content-title", className)}
+        className={cn("navds-process__title", className)}
       >
         {children}
       </Heading>
@@ -315,12 +309,14 @@ const ProcessContent = forwardRef<HTMLDivElement, ProcessContentProps>(
     { children, className, ...restProps }: ProcessContentProps,
     forwardedRef,
   ) => {
+    const { cn } = useRenameCSS();
+
     return (
       <BodyLong
         ref={forwardedRef}
         {...restProps}
         as="div"
-        className={className}
+        className={cn("navds-process__content", className)}
       >
         {children}
       </BodyLong>
@@ -334,7 +330,6 @@ interface ProcessBulletProps extends React.HTMLAttributes<HTMLSpanElement> {
    * Bullet content.
    */
   children: React.ReactNode;
-
   /**
    * If true, the bullet is active.
    * @default Controlled by Process Step
@@ -405,31 +400,32 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
 /* ------------------------------ Process Line ------------------------------ */
 type ProcessCheckmarkProps = Omit<SVGProps<SVGSVGElement>, "ref">;
 
-const ProcessCheckmark = forwardRef<SVGSVGElement, ProcessCheckmarkProps>(
-  ({ className, ...restProps }: ProcessCheckmarkProps, forwardedRef) => {
-    const { cn } = useRenameCSS();
-    return (
-      <svg
-        ref={forwardedRef}
-        {...restProps}
-        className={cn("navds-process__checkmark", className)}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M9.53518 13.4148L15.9751 7.40467C16.5792 6.83965 17.5289 6.86933 18.0954 7.47478C18.6619 8.08027 18.6295 9.03007 18.0244 9.59621L10.5211 16.5993C10.2409 16.859 9.87553 17 9.50019 17C9.10645 17 8.72711 16.8462 8.43908 16.5611L5.93908 14.0611C5.35356 13.4756 5.35356 12.5254 5.93908 11.9399C6.52461 11.3544 7.47477 11.3544 8.0603 11.9399L9.53518 13.4148Z"
-          fill="currentColor"
-        />
-      </svg>
-    );
-  },
-);
+export const ProcessCheckmark = forwardRef<
+  SVGSVGElement,
+  ProcessCheckmarkProps
+>(({ className, ...restProps }: ProcessCheckmarkProps, forwardedRef) => {
+  const { cn } = useRenameCSS();
+  return (
+    <svg
+      ref={forwardedRef}
+      {...restProps}
+      className={cn("navds-process__checkmark", className)}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="M9.53518 13.4148L15.9751 7.40467C16.5792 6.83965 17.5289 6.86933 18.0954 7.47478C18.6619 8.08027 18.6295 9.03007 18.0244 9.59621L10.5211 16.5993C10.2409 16.859 9.87553 17 9.50019 17C9.10645 17 8.72711 16.8462 8.43908 16.5611L5.93908 14.0611C5.35356 13.4756 5.35356 12.5254 5.93908 11.9399C6.52461 11.3544 7.47477 11.3544 8.0603 11.9399L9.53518 13.4148Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+});
 
 /* -------------------------- Process exports ------------------------- */
 Process.Step = ProcessStep;
 Process.Checkmark = ProcessCheckmark;
 
-export type { ProcessProps, ProcessStepProps };
+export type { ProcessProps, ProcessStepProps, ProcessCheckmarkProps };

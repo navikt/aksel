@@ -106,12 +106,12 @@
   }
 }
 
-.aksel-process__content {
+.aksel-process__body {
   min-width: fit-content;
   grid-column: content;
 }
 
-.aksel-process__content-title {
+.aksel-process__title {
   padding-top: 0.16rem;
   padding-bottom: var(--ax-space-4);
 }
