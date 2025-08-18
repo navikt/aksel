@@ -58,14 +58,6 @@
   grid-row: line-2;
 }
 
-.aksel-process__line--solid {
-  border-style: solid;
-}
-
-.aksel-process__line--dashed {
-  border-style: dashed;
-}
-
 .aksel-process__item {
   grid-row: 2 / -1;
   grid-column: 1 / -1;

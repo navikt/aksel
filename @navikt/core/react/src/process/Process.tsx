@@ -41,11 +41,6 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * Index of current active step, all elements before this index will be highlighted.
    */
   activeStep?: number;
-  /**
-   * If true, the active items direction is reversed without reversing items order
-   * @default false
-   */
-  reverseActiveDirection?: boolean;
 }
 
 interface ProcessComponent
@@ -105,13 +100,7 @@ export const Process: ProcessComponent = forwardRef<
   ProcessProps
 >(
   (
-    {
-      children,
-      className,
-      reverseActiveDirection = false,
-      activeStep = -1,
-      ...restProps
-    }: ProcessProps,
+    { children, className, activeStep = -1, ...restProps }: ProcessProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
@@ -133,16 +122,8 @@ export const Process: ProcessComponent = forwardRef<
             return (
               <ProcessStepContextProvider
                 index={index}
-                active={
-                  reverseActiveDirection
-                    ? activeStep >= childrenCount - index - 1
-                    : activeStep >= index
-                }
-                lineActive={
-                  reverseActiveDirection
-                    ? activeStep >= childrenCount - index - 1
-                    : activeStep >= index
-                }
+                active={activeStep >= index}
+                lineActive={activeStep >= index}
               >
                 {step}
               </ProcessStepContextProvider>
@@ -177,11 +158,6 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
    * Hide the content section of the step.
    */
   hideContent?: boolean;
-  /**
-   * Changes line style for the step.
-   * @default "solid"
-   */
-  lineVariant?: "solid" | "dashed";
 }
 
 export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
@@ -192,7 +168,6 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
       children,
       bullet,
       hideContent,
-      lineVariant = "solid",
       className,
       ...restProps
     }: ProcessStepProps,
@@ -222,10 +197,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
           </div>
         </div>
         {lastIndex > index && (
-          <ProcessLine
-            lineVariant={lineVariant}
-            data-current={index === activeStep}
-          />
+          <ProcessLine data-current={index === activeStep} />
         )}
       </li>
     );
@@ -376,11 +348,6 @@ interface ProcessLineProps extends React.HTMLAttributes<HTMLSpanElement> {
    */
   className?: string;
   /**
-   * Changes line style for the step.
-   * @default "solid"
-   */
-  lineVariant?: "solid" | "dashed";
-  /**
    * If true, the line is active.
    * @default Controlled by Process Step
    */
@@ -392,7 +359,6 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
     {
       children,
       className,
-      lineVariant = "solid",
       lineActive: _lineActive,
       ...restProps
     }: ProcessLineProps,
@@ -405,11 +371,7 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
       <span
         ref={forwardedRef}
         {...restProps}
-        className={cn(
-          "navds-process__line navds-process__line-end",
-          className,
-          `navds-process__line--${lineVariant}`,
-        )}
+        className={cn("navds-process__line navds-process__line-end", className)}
         data-line-active={_lineActive ?? lineActive}
       >
         {children}
