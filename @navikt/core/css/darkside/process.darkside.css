@@ -116,10 +116,6 @@
   padding-bottom: var(--ax-space-4);
 }
 
-.aksel-process__timestamp:first-child {
-  padding-top: var(--ax-space-6);
-}
-
 @media (forced-colors: active) {
   .aksel-process__bullet.aksel-process__bullet {
     forced-color-adjust: none;

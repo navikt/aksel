@@ -1,11 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { format } from "date-fns";
 import React from "react";
-import {
-  CheckmarkIcon,
-  GavelSoundBlockIcon,
-  SparklesFillIcon,
-} from "@navikt/aksel-icons";
+import { GavelSoundBlockIcon, SparklesFillIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { HStack, VStack } from "../layout/stack";
 import { Process } from "./Process";
@@ -183,33 +179,6 @@ export const IconBullets: StoryFn<Story> = () => {
   );
 };
 
-export const LineVariants: StoryFn<Story> = () => {
-  return (
-    <Process activeStep={3}>
-      <Process.Step bullet={<SparklesFillIcon />} title="Start søknad" />
-      <Process.Step
-        bullet={<SparklesFillIcon />}
-        title="Personopplysninger"
-        lineVariant="dashed"
-      />
-      <Process.Step title="Substep 1" lineVariant="dashed" />
-      <Process.Step title="Substep 2" lineVariant="dashed" />
-      <Process.Step title="Substep 3" lineVariant="dashed" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Saksopplysninger" />
-
-      <Process.Step
-        bullet={<SparklesFillIcon />}
-        title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
-      />
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step title="Substep 3" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Vedlegg" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Oppsummering" />
-    </Process>
-  );
-};
-
 export const Content: StoryFn<Story> = () => {
   return (
     <Process activeStep={3}>
@@ -259,7 +228,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
       activeStep={activeStep > 1 ? activeStep + 2 : activeStep}
     >
       <Process.Step
-        bullet={isDone(0) ? <CheckmarkIcon /> : <SparklesFillIcon />}
+        bullet={isDone(0) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step one"
         timestamp={getDateAfter(3)}
       >
@@ -280,7 +249,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
         )}
       </Process.Step>
       <Process.Step
-        bullet={isDone(1) ? <CheckmarkIcon /> : <SparklesFillIcon />}
+        bullet={isDone(1) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step two"
         timestamp={getDateAfter(2)}
       >
@@ -306,7 +275,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
       <Process.Step title="Substep 1" />
       <Process.Step title="Substep 2" />
       <Process.Step
-        bullet={isDone(2) ? <CheckmarkIcon /> : <SparklesFillIcon />}
+        bullet={isDone(2) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step three"
       >
         {activeStep === 2 && (
@@ -330,7 +299,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
       </Process.Step>
 
       <Process.Step
-        bullet={isDone(3) ? <CheckmarkIcon /> : <SparklesFillIcon />}
+        bullet={isDone(3) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step four"
         timestamp={getDateAfter(1)}
       >
@@ -354,7 +323,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
         )}
       </Process.Step>
       <Process.Step
-        bullet={isDone(4) ? <CheckmarkIcon /> : <SparklesFillIcon />}
+        bullet={isDone(4) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step five"
       >
         {activeStep === 4 && (
@@ -377,7 +346,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
         )}
       </Process.Step>
       <Process.Step
-        bullet={isDone(5) ? <CheckmarkIcon /> : <SparklesFillIcon />}
+        bullet={isDone(5) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step six"
       >
         {activeStep === 5 && (
@@ -396,29 +365,6 @@ export const InteractiveDemo: StoryFn<Story> = () => {
           </div>
         )}
       </Process.Step>
-    </Process>
-  );
-};
-
-export const ReverseActiveOrder: StoryFn<Story> = () => {
-  return (
-    <Process activeStep={3} reverseActiveDirection>
-      <Process.Step bullet={<SparklesFillIcon />} title="Start søknad" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Personopplysninger" />
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step title="Substep 3" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Saksopplysninger" />
-
-      <Process.Step
-        bullet={<SparklesFillIcon />}
-        title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
-      />
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step title="Substep 3" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Vedlegg" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Oppsummering" />
     </Process>
   );
 };

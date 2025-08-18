@@ -1,4 +1,10 @@
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, {
+  SVGProps,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
@@ -54,6 +60,10 @@ interface ProcessComponent
    * @see 🏷️ {@link ProcessStepProps}
    */
   Step: typeof ProcessStep;
+  /**
+   * @see 🏷️ {@link ProcessCheckmarkProps}
+   */
+  Checkmark: typeof ProcessCheckmark;
 }
 
 /**
@@ -241,10 +251,6 @@ interface ProcessTitleProps extends React.HTMLAttributes<HTMLDivElement> {
    * Title content.
    */
   children: React.ReactNode;
-  /**
-   * Additional class names to apply to the title.
-   */
-  className?: string;
 }
 
 const ProcessTitle = forwardRef<HTMLDivElement, ProcessTitleProps>(
@@ -271,10 +277,6 @@ interface ProcessTimestampProps extends React.HTMLAttributes<HTMLDivElement> {
    * Timestamp content.
    */
   children: React.ReactNode;
-  /**
-   * Additional class names to apply to the timestamp.
-   */
-  className?: string;
 }
 
 const ProcessTimestamp = forwardRef<HTMLDivElement, ProcessTimestampProps>(
@@ -288,10 +290,10 @@ const ProcessTimestamp = forwardRef<HTMLDivElement, ProcessTimestampProps>(
       <BodyShort
         ref={forwardedRef}
         spacing
+        as="div"
         {...restProps}
         size="small"
         textColor="subtle"
-        as="div"
         className={cn("navds-process__timestamp", className)}
       >
         {children}
@@ -306,10 +308,6 @@ interface ProcessContentProps extends React.HTMLAttributes<HTMLDivElement> {
    * Content content.
    */
   children: React.ReactNode;
-  /**
-   * Additional class names to apply to the content.
-   */
-  className?: string;
 }
 
 const ProcessContent = forwardRef<HTMLDivElement, ProcessContentProps>(
@@ -336,10 +334,7 @@ interface ProcessBulletProps extends React.HTMLAttributes<HTMLSpanElement> {
    * Bullet content.
    */
   children: React.ReactNode;
-  /**
-   * Additional class names to apply to the bullet.
-   */
-  className?: string;
+
   /**
    * If true, the bullet is active.
    * @default Controlled by Process Step
@@ -375,10 +370,6 @@ const ProcessBullet = forwardRef<HTMLSpanElement, ProcessBulletProps>(
 /* ------------------------------ Process Line ------------------------------ */
 interface ProcessLineProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
-   * Additional class names to apply to the line.
-   */
-  className?: string;
-  /**
    * If true, the line is active.
    * @default Controlled by Process Step
    */
@@ -411,10 +402,34 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
   },
 );
 
-/* TODO: Create a Process.Checkmark icons */
-/* TODO: Fix border-gradient on dashed line */
+/* ------------------------------ Process Line ------------------------------ */
+type ProcessCheckmarkProps = Omit<SVGProps<SVGSVGElement>, "ref">;
+
+const ProcessCheckmark = forwardRef<SVGSVGElement, ProcessCheckmarkProps>(
+  ({ className, ...restProps }: ProcessCheckmarkProps, forwardedRef) => {
+    const { cn } = useRenameCSS();
+    return (
+      <svg
+        ref={forwardedRef}
+        {...restProps}
+        className={cn("navds-process__checkmark", className)}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          d="M9.53518 13.4148L15.9751 7.40467C16.5792 6.83965 17.5289 6.86933 18.0954 7.47478C18.6619 8.08027 18.6295 9.03007 18.0244 9.59621L10.5211 16.5993C10.2409 16.859 9.87553 17 9.50019 17C9.10645 17 8.72711 16.8462 8.43908 16.5611L5.93908 14.0611C5.35356 13.4756 5.35356 12.5254 5.93908 11.9399C6.52461 11.3544 7.47477 11.3544 8.0603 11.9399L9.53518 13.4148Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  },
+);
 
 /* -------------------------- Process exports ------------------------- */
 Process.Step = ProcessStep;
+Process.Checkmark = ProcessCheckmark;
 
 export type { ProcessProps, ProcessStepProps };
