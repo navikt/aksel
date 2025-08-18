@@ -43,7 +43,7 @@
   grid-column: 1;
   border-color: var(--ax-border-neutral-subtle);
 
-  &[data-line-active="true"] {
+  &[data-active="true"] {
     border-color: var(--ax-border-default);
     border-image: linear-gradient(to bottom, var(--ax-border-default) 50%, var(--ax-border-neutral-subtle) 100%);
     border-image-slice: 1;
@@ -117,14 +117,17 @@
 }
 
 @media (forced-colors: active) {
-  .aksel-process__bullet.aksel-process__bullet {
-    forced-color-adjust: none;
-    color: ButtonFace;
-    background-color: ButtonText;
-    border-color: ButtonText;
+  .aksel-process__bullet {
+    transition: none;
   }
 
   .aksel-process__bullet[data-active="true"] {
     outline-color: ButtonText;
+    background-color: ButtonText;
+    color: ButtonFace;
+  }
+
+  .aksel-process__line[data-active="true"] {
+    border-image: none;
   }
 }

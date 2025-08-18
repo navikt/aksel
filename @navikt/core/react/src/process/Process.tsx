@@ -389,7 +389,7 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
         ref={forwardedRef}
         {...restProps}
         className={cn("navds-process__line navds-process__line-end", className)}
-        data-line-active={_lineActive ?? lineActive}
+        data-active={_lineActive ?? lineActive}
       >
         {children}
       </span>
