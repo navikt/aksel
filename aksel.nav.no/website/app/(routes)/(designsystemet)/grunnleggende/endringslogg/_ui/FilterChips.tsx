@@ -6,9 +6,7 @@ import FilterGroup from "./FilterGroup";
 
 interface Props {
   years: string[];
-  selectedYear: string | null;
   categories: string[];
-  selectedCategory: string | null;
   categorySelectedState: [string, Dispatch<SetStateAction<string>>];
   yearSelectedState: [string, Dispatch<SetStateAction<string>>];
 }
