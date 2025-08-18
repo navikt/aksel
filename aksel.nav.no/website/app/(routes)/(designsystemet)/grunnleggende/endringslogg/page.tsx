@@ -67,7 +67,6 @@ export default async function Page({ searchParams }: PageProps) {
 
   if (isSemverSearch) {
     const semverRange = semverValidRange(textFilter.join(" "));
-    console.warn("isSemver:", isSemverSearch, semverRange);
 
     // OPTIMIZE: we fetch all for now and filter those after sanity request
     const sanityObject = {
@@ -164,7 +163,7 @@ export default async function Page({ searchParams }: PageProps) {
           Endringslogg
         </Heading>
 
-        <SearchForm params={{ years, paramYear, categories, paramCategory }} />
+        <SearchForm params={{ years, categories }} />
       </div>
 
       <TableOfContents

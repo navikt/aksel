@@ -6,9 +6,8 @@ import {
   BodyLong,
   Checkbox,
   HStack,
-  Heading,
+  HelpText,
   Link,
-  ReadMore,
   Search,
   VStack,
 } from "@navikt/ds-react";
@@ -17,8 +16,12 @@ import styles from "./SearchField.module.css";
 
 export default function SearchField({
   semverSearchState,
+  categorySelectedState,
+  yearSelectedState,
 }: {
   semverSearchState: [boolean, Dispatch<SetStateAction<boolean>>]; // no ReturnType<typeof useState<boolean>>; ?
+  categorySelectedState: [string, Dispatch<SetStateAction<string>>];
+  yearSelectedState: [string, Dispatch<SetStateAction<string>>];
 }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -27,6 +30,10 @@ export default function SearchField({
 
   const semverRef = useRef<HTMLInputElement>(null);
   const [semverSearch, setSemverSearch] = semverSearchState;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [categorySelected, setCategorySelected] = categorySelectedState;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [yearSelected, setYearSelected] = yearSelectedState;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -51,6 +58,18 @@ export default function SearchField({
       params.delete("semver");
     }
 
+    if (yearSelected) {
+      params.set("periode", yearSelected);
+    } else {
+      params.delete("periode");
+    }
+
+    if (categorySelected) {
+      params.set("kategori", categorySelected);
+    } else {
+      params.delete("kategori");
+    }
+
     replace(`${pathname}${params.toString() ? `?${params.toString()}` : ""}`);
   }
 
@@ -63,7 +82,7 @@ export default function SearchField({
   return (
     <form role="search" onSubmit={handleSubmit}>
       <VStack gap="space-12">
-        <HStack align="center" gap="space-12">
+        <HStack align="center" gap="space-24">
           <Search
             ref={searchRef}
             label="Søk i endringsloggen"
@@ -78,43 +97,41 @@ export default function SearchField({
             data-color="neutral"
             className={styles.searchField}
           />
-
-          <Checkbox
-            ref={semverRef}
-            value="semver"
-            onClick={() => {
-              setSemverSearch(!semverSearch);
-            }}
-            defaultChecked={!!searchParams?.get("semver")}
-            checked={semverSearch}
-          >
-            semver søk
-          </Checkbox>
+          <HStack align="center" gap="space-4">
+            <Checkbox
+              ref={semverRef}
+              value="semver"
+              onClick={() => {
+                setSemverSearch(!semverSearch);
+              }}
+              defaultChecked={!!searchParams?.get("semver")}
+              checked={semverSearch}
+            >
+              semver søk
+            </Checkbox>
+            <HelpText title="Søke-syntaks" placement="bottom">
+              <VStack maxWidth="50ch">
+                <BodyLong>
+                  For søking i releases etter{" "}
+                  <Link href="https://semver.org">semver</Link>. Da vil søket
+                  ignorere alle andre filtre som <Code>År</Code> og{" "}
+                  <Code>Kategori</Code>.
+                </BodyLong>
+                <BodyLong className={styles.spaced}>For eksempel:</BodyLong>
+                <Code className={styles.code}>7.3</Code>
+                <BodyLong>eller:</BodyLong>
+                <Code className={styles.code}>^2.2 || &gt;=3.2.1 &lt;4</Code>
+                <BodyLong className={styles.spaced}>
+                  Semver-søk støtter{" "}
+                  <Link href="https://github.com/npm/node-semver?tab=readme-ov-file#ranges">
+                    range syntax
+                  </Link>
+                  .
+                </BodyLong>
+              </VStack>
+            </HelpText>
+          </HStack>
         </HStack>
-        <ReadMore header="Søke-syntaks">
-          <VStack maxWidth="50ch">
-            <Heading size="small" level="2">
-              Semver søk
-            </Heading>
-            <BodyLong>
-              For søking i releases etter{" "}
-              <Link href="https://semver.org">semver</Link>. Da vil søket
-              ignorere alle andre filtre som <Code>År</Code> og{" "}
-              <Code>Kategori</Code>
-            </BodyLong>
-            <BodyLong className={styles.spaced}>For eksempel:</BodyLong>
-            <Code className={styles.code}>7.3</Code>
-            <BodyLong>eller:</BodyLong>
-            <Code className={styles.code}>^2.2 || &gt;=3.2.1 &lt;4</Code>
-            <BodyLong className={styles.spaced}>
-              Semver-søk støtter{" "}
-              <Link href="https://github.com/npm/node-semver?tab=readme-ov-file#ranges">
-                range syntax
-              </Link>
-              .
-            </BodyLong>
-          </VStack>
-        </ReadMore>
       </VStack>
     </form>
   );

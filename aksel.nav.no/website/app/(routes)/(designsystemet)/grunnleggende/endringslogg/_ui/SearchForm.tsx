@@ -11,16 +11,22 @@ export const SearchForm = ({
 }: {
   params: {
     years: string[];
-    paramYear: string;
     categories: string[];
-    paramCategory: string;
   };
 }) => {
   const semverState = useState<boolean>(false);
+  const categorySelectedState = useState<string>("");
+  const yearSelectedState = useState<string>("");
+
   const [semverSearch, setSemverSearch] = semverState;
+  // const [categorySelected, setCategorySelected] = categorySelectedState;
+  // const [yearSelected, setYearSelected] = yearSelectedState;
+
+  // redirect to new URL based on state contents from here (parent controls) -> pass triggers to children (formInput only == KISS)
+
   const searchParams = useSearchParams();
 
-  const { years, paramYear, categories, paramCategory } = params;
+  const { years, categories } = params;
 
   useEffect(() => {
     setSemverSearch(!!searchParams?.get("semver") || false);
@@ -28,13 +34,17 @@ export const SearchForm = ({
 
   return (
     <VStack gap="space-24" paddingBlock="space-12 space-0">
-      <SearchField semverSearchState={semverState} />
+      <SearchField
+        semverSearchState={semverState}
+        yearSelectedState={yearSelectedState}
+        categorySelectedState={categorySelectedState}
+      />
       {!semverSearch && (
         <FilterChips
           years={years}
-          selectedYear={paramYear}
           categories={categories}
-          selectedCategory={paramCategory}
+          yearSelectedState={yearSelectedState}
+          categorySelectedState={categorySelectedState}
         />
       )}
     </VStack>
