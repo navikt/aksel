@@ -1,13 +1,16 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
+import { useId } from "../util";
 import { createContext } from "../util/create-context";
+import { useMergeRefs } from "../util/hooks";
 
 // type ProcessVariant = "default" | "number" | "icon";
 
 interface ProcessContextValue {
   lastIndex: number;
   activeStep?: number;
+  rootId: string;
 }
 
 interface ProcessStepContextValue {
@@ -100,23 +103,45 @@ export const Process: ProcessComponent = forwardRef<
   ProcessProps
 >(
   (
-    { children, className, activeStep = -1, ...restProps }: ProcessProps,
+    { children, className, activeStep = -1, id, ...restProps }: ProcessProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
 
+    const rootRef = useRef<HTMLOListElement>(null);
+
+    const mergedRef = useMergeRefs(forwardedRef, rootRef);
+
     const childrenCount = React.Children.count(children);
+    const _childId = useId();
+    const rootId = useId();
+
+    const [childId, setChildId] = useState<string | undefined>(_childId);
+
+    useEffect(() => {
+      const root = rootRef.current;
+      if (!root || activeStep < 0) {
+        return;
+      }
+      const currentActiveStep = root.querySelector(
+        '[data-process-step][aria-current="true"]',
+      );
+      setChildId(currentActiveStep?.id);
+    }, [activeStep]);
 
     return (
       <ProcessContextProvider
         activeStep={activeStep}
         lastIndex={childrenCount - 1}
+        rootId={id ?? rootId}
       >
         <ol
+          ref={mergedRef}
           data-color="info"
+          id={id ?? rootId}
           {...restProps}
-          ref={forwardedRef}
           className={cn("navds-process", className)}
+          aria-controls={activeStep >= 0 ? childId : undefined}
         >
           {React.Children.map(children, (step, index) => {
             return (
@@ -169,23 +194,31 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
       bullet,
       hideContent,
       className,
+      id,
       ...restProps
     }: ProcessStepProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
 
-    const { activeStep, lastIndex } = useProcessContext();
+    const { activeStep, lastIndex, rootId } = useProcessContext();
 
     const { index } = useProcessStepContext();
+
+    const stepId = useId();
+
+    const isActive = index === activeStep;
 
     return (
       <li
         ref={forwardedRef}
-        aria-current={index === activeStep}
+        aria-current={isActive}
+        aria-controls={isActive ? rootId : undefined}
+        id={id ?? stepId}
         {...restProps}
         className={cn("navds-process__step", className)}
         data-dot={bullet === undefined}
+        data-process-step=""
       >
         <div className={cn("navds-process__item")}>
           <ProcessBullet>{bullet}</ProcessBullet>
@@ -196,9 +229,7 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
             {!hideContent && <ProcessContent>{children}</ProcessContent>}
           </div>
         </div>
-        {lastIndex > index && (
-          <ProcessLine data-current={index === activeStep} />
-        )}
+        {lastIndex > index && <ProcessLine data-current={isActive} />}
       </li>
     );
   },
