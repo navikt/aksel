@@ -8,7 +8,7 @@ const Example = () => {
       <Heading size="medium" level="2" id="Process-heading" visuallyHidden>
         Søknadssteg med tilhørende tittel
       </Heading>
-      <Process aria-labelledby="Process-heading" activeStep={5}>
+      <Process aria-labelledby="Process-heading" activeStep={2}>
         <Process.Step
           title="Barnet ble født"
           timestamp="04. august 2025"

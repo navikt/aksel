@@ -20,6 +20,7 @@ const Example = () => {
           icon={<ChevronLeftIcon aria-hidden />}
           disabled={activeStep < 0}
           size="small"
+          data-color="info"
         >
           Forrige steg
         </Button>
@@ -28,6 +29,7 @@ const Example = () => {
           icon={<ChevronRightIcon aria-hidden />}
           disabled={activeStep >= 5}
           size="small"
+          data-color="info"
         >
           Neste steg
         </Button>
