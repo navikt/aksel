@@ -4,7 +4,11 @@ import fg from "fast-glob";
 import * as jscodeshift from "jscodeshift/src/Runner";
 import path from "path";
 import { GLOB_IGNORE_PATTERNS, getDefaultGlob } from "./codeshift.utils";
-import { getMigrationPath, getWarning } from "./migrations";
+import {
+  getIgnoredFilextensions,
+  getMigrationPath,
+  getWarning,
+} from "./migrations";
 
 const ignoreNodeModules = [
   "**/node_modules/**",
@@ -35,8 +39,18 @@ export async function runCodeshift(
 
   const warning = getWarning(input);
 
+  const unsafeExtensions = getIgnoredFilextensions(input);
+
+  let safeFilepaths = filepaths;
+
+  if (unsafeExtensions.length > 0) {
+    safeFilepaths = filepaths.filter(
+      (f) => !unsafeExtensions.some((ext) => f.endsWith(`.${ext}`)),
+    );
+  }
+
   try {
-    await jscodeshift.run(codemodPath, filepaths, {
+    await jscodeshift.run(codemodPath, safeFilepaths, {
       babel: true,
       ignorePattern: ignoreNodeModules,
       parser: "tsx",
