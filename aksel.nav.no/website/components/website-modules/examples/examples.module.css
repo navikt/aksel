@@ -40,3 +40,9 @@
 .containerFullscreen {
   padding: 0;
 }
+
+@media (max-width: 820px) {
+  .container {
+    padding-block: 3rem;
+  }
+}
