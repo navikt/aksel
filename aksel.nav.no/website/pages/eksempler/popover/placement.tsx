@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BodyLong, Heading, Popover, Select } from "@navikt/ds-react";
+import { BodyLong, Box, Heading, Popover, Select } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -7,7 +7,7 @@ const Example = () => {
   const [placement, setPlacement] = useState<Option>(options[0]);
 
   return (
-    <div className="py-32">
+    <Box paddingBlock="space-128">
       <Select
         ref={setAnchor}
         label="Velg 'placement'"
@@ -35,7 +35,7 @@ const Example = () => {
           </BodyLong>
         </Popover.Content>
       </Popover>
-    </div>
+    </Box>
   );
 };
 

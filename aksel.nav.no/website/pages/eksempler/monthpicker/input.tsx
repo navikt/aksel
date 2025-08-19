@@ -13,7 +13,9 @@ const Example = () => {
       <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input {...inputProps} label="Velg måned" />
       </MonthPicker>
-      {selectedMonth && <div className="pt-4">{selectedMonth.getMonth()}</div>}
+      {selectedMonth && (
+        <Box paddingBlock="space-16">{selectedMonth.getMonth()}</Box>
+      )}
     </Box>
   );
 };

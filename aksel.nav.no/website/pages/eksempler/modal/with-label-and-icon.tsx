@@ -1,13 +1,13 @@
 import { useRef } from "react";
 import { FileIcon } from "@navikt/aksel-icons";
-import { BodyLong, Button, Modal } from "@navikt/ds-react";
+import { BodyLong, Box, Button, Modal } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
-    <div className="py-16">
+    <Box paddingBlock="space-64">
       <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
       <Modal
@@ -48,7 +48,7 @@ const Example = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </Box>
   );
 };
 

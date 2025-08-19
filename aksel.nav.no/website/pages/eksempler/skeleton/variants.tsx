@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="2" className="w-48">
+    <VStack gap="2" width="12rem">
       {/* variant="text" kan endre størelse med justering av font-size */}
       <Skeleton variant="text" width="60%" />
 

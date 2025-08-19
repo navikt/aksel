@@ -1,4 +1,4 @@
-import { Heading, Skeleton } from "@navikt/ds-react";
+import { Box, Heading, Skeleton } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -7,7 +7,7 @@ const Example = () => {
       {loaded ? (
         <span>Loaded</span>
       ) : (
-        <div className="w-48">
+        <Box width="12rem">
           <Skeleton variant="circle" width={80} height={80} />
           <Heading as={Skeleton} size="large">
             Card-title
@@ -15,7 +15,7 @@ const Example = () => {
           <Skeleton variant="text" width="100%" />
           <Skeleton variant="text" width="100%" />
           <Skeleton variant="text" width="80%" />
-        </div>
+        </Box>
       )}
     </>
   );

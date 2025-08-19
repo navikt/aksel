@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Box padding="6" borderRadius="large" shadow="xsmall" className="w-56">
+    <Box padding="6" borderRadius="large" shadow="xsmall" width="14rem">
       <Skeleton variant="circle" width={60} height={60} />
       <Skeleton variant="text" width="100%" />
       <Skeleton variant="text" width="100%" />
