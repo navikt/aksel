@@ -237,7 +237,9 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
           <div className={cn("navds-process__body")}>
             {title && <ProcessTitle>{title}</ProcessTitle>}
             {timestamp && <ProcessTimestamp>{timestamp}</ProcessTimestamp>}
-            {!hideContent && <ProcessContent>{children}</ProcessContent>}
+            {!hideContent && !!children && (
+              <ProcessContent>{children}</ProcessContent>
+            )}
           </div>
         </div>
         {lastIndex > index && <ProcessLine data-current={isActive} />}
