@@ -126,10 +126,9 @@ export const Process: ProcessComponent = forwardRef<
     const mergedRef = useMergeRefs(forwardedRef, rootRef);
 
     const childrenCount = React.Children.count(children);
-    const _childId = useId();
     const rootId = useId();
 
-    const [childId, setChildId] = useState<string | undefined>(_childId);
+    const [childId, setChildId] = useState<string | undefined>();
 
     useEffect(() => {
       const root = rootRef.current;
@@ -155,7 +154,7 @@ export const Process: ProcessComponent = forwardRef<
           role="list"
           {...restProps}
           className={cn("navds-process", className)}
-          aria-controls={activeStep >= 0 ? childId : undefined}
+          aria-controls={childId}
         >
           {React.Children.map(children, (step, index) => {
             return (
