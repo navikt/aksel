@@ -3,12 +3,12 @@ import {
   EnvelopeOpenIcon,
   PaperplaneIcon,
 } from "@navikt/aksel-icons";
-import { ToggleGroup } from "@navikt/ds-react";
+import { ToggleGroup, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
+    <VStack gap="space-24">
       <ToggleGroup defaultValue="lest" onChange={console.info}>
         <ToggleGroup.Item
           value="ulest"
@@ -23,6 +23,7 @@ const Example = () => {
           icon={<PaperplaneIcon title="Sendt" />}
         />
       </ToggleGroup>
+
       <ToggleGroup
         defaultValue="lest"
         onChange={console.info}
@@ -41,7 +42,7 @@ const Example = () => {
           icon={<PaperplaneIcon title="Sendt" />}
         />
       </ToggleGroup>
-    </div>
+    </VStack>
   );
 };
 
