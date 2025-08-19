@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert variant="info">Info - Formidler viktig informasjon.</Alert>
       <Alert variant="success">
         Success - Bekrefter at en oppgave er fullført som forventet.

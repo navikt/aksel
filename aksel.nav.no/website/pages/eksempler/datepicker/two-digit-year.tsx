@@ -13,7 +13,9 @@ const Example = () => {
       <DatePicker {...datepickerProps}>
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
-      <Box paddingBlock="4 0">{selectedDay?.toISOString().split("T")[0]}</Box>
+      <Box paddingBlock="space-16 space-0">
+        {selectedDay?.toISOString().split("T")[0]}
+      </Box>
     </Box>
   );
 };

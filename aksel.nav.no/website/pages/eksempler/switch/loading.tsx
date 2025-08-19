@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Switch loading>Varsle med SMS</Switch>
       <Switch loading checked>
         Varsle med SMS

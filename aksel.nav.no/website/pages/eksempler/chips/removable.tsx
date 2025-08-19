@@ -6,8 +6,8 @@ const Example = () => {
   const [filter, setFilter] = useState(options);
 
   return (
-    <VStack gap="10">
-      <VStack gap="3">
+    <VStack gap="space-40">
+      <VStack gap="space-12">
         Variant action (default)
         <Chips>
           {filter.map((c) => (
@@ -24,7 +24,7 @@ const Example = () => {
           ))}
         </Chips>
       </VStack>
-      <VStack gap="3">
+      <VStack gap="space-12">
         Variant neutral
         <Chips>
           {filter.map((c) => (

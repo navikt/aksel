@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <p id="progress-bar-label-small">Fremdrift (liten versjon)</p>
       <ProgressBar
         value={1}
@@ -11,7 +11,6 @@ const Example = () => {
         size="small"
         aria-labelledby="progress-bar-label-small"
       />
-
       <p id="progress-bar-label-medium">Fremdrift (medium versjon)</p>
       <ProgressBar
         value={6}
@@ -19,7 +18,6 @@ const Example = () => {
         size="medium"
         aria-labelledby="progress-bar-label-medium"
       />
-
       <p id="progress-bar-label-large">Fremdrift (stor versjon)</p>
       <ProgressBar
         value={11}

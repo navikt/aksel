@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="3" align="start">
+    <VStack gap="space-12" align="start">
       <Link variant="action" href="/eksempel">
         Action variant
       </Link>

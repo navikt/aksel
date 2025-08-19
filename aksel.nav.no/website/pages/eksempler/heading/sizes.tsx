@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Heading size="xlarge">
         Dette er en overskrift i xlarge (Desktop: 40px, Mobil: 32px)
       </Heading>

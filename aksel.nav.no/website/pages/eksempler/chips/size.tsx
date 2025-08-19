@@ -7,8 +7,8 @@ const Example = () => {
   const [filter, setFilter] = useState(options);
 
   return (
-    <VStack gap="14">
-      <VStack gap="5">
+    <VStack gap="space-56">
+      <VStack gap="space-20">
         Size medium (default)
         <Chips size="medium">
           {options.map((option) => (
@@ -42,8 +42,7 @@ const Example = () => {
           ))}
         </Chips>
       </VStack>
-
-      <VStack gap="5">
+      <VStack gap="space-20">
         Size small
         <Chips size="small">
           {options.map((option) => (

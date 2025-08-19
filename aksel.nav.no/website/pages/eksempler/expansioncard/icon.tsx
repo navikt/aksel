@@ -15,7 +15,7 @@ const Example = () => {
   return (
     <ExpansionCard aria-label="Demo med ikon">
       <ExpansionCard.Header>
-        <HStack wrap={false} gap="4" align="center">
+        <HStack wrap={false} gap="space-16" align="center">
           <div>
             <PlantIcon aria-hidden fontSize="3rem" />
           </div>
@@ -48,7 +48,7 @@ const Innhold = () => (
     <BodyShort spacing weight="semibold">
       Slik beregner vi sykepengene
     </BodyShort>
-    <VStack as="dl" gap="space-4" paddingBlock="0 space-24">
+    <VStack as="dl" gap="space-4" paddingBlock="space-0 space-24">
       <Box asChild borderWidth="0 0 1 0">
         <HStack paddingBlock="space-4" justify="space-between">
           <dt>Beregnet månedslønn</dt>
@@ -70,7 +70,7 @@ const Innhold = () => (
         </HStack>
       </Box>
     </VStack>
-    <Box paddingBlock="space-24 0">
+    <Box paddingBlock="space-24 space-0">
       <Box asChild>
         <HStack paddingBlock="space-4" justify="space-between">
           <dt>Utbetalinger totalt</dt>

@@ -3,8 +3,8 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
-      <HStack gap="3">
+    <VStack gap="space-16">
+      <HStack gap="space-12">
         <Tag size="medium" variant="neutral">
           Medium
         </Tag>
@@ -15,8 +15,7 @@ const Example = () => {
           Medium
         </Tag>
       </HStack>
-
-      <HStack gap="3">
+      <HStack gap="space-12">
         <Tag size="small" variant="neutral">
           Small
         </Tag>
@@ -27,8 +26,7 @@ const Example = () => {
           Small
         </Tag>
       </HStack>
-
-      <HStack gap="3">
+      <HStack gap="space-12">
         <Tag size="xsmall" variant="neutral">
           xsmall
         </Tag>

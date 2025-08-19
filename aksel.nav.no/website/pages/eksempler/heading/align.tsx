@@ -5,7 +5,7 @@ const Example = () => {
   const lorem = "Hva kan vi hjelpe deg med?";
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <div>
         <Descriptor>Start</Descriptor>
         <Heading align="start" size="medium">
