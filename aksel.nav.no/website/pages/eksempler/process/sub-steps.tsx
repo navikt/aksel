@@ -1,4 +1,8 @@
-import { EnvelopeOpenIcon } from "@navikt/aksel-icons";
+import {
+  BabyWrappedIcon,
+  EnvelopeOpenIcon,
+  TasklistSendIcon,
+} from "@navikt/aksel-icons";
 import { Heading, Process } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -12,12 +16,12 @@ const Example = () => {
         <Process.Step
           title="Barnet ble født"
           timestamp="04. august 2025"
-          bullet={<Process.Checkmark />}
+          bullet={<BabyWrappedIcon />}
         />
         <Process.Step
           title="Du søkte om FORELDREPENGER"
           timestamp="22. august 2025"
-          bullet={<Process.Checkmark />}
+          bullet={<TasklistSendIcon />}
         />
         <Process.Step
           title="Du la til 2 vedlegg"
@@ -47,7 +51,7 @@ export default withDsExample(Example, {
 });
 
 /* Storybook story */
-export const VariantNumber = {
+export const Demo = {
   render: Example,
 };
 

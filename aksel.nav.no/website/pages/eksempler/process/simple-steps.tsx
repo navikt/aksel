@@ -32,7 +32,7 @@ export default withDsExample(Example, {
 });
 
 /* Storybook story */
-export const VariantNumber = {
+export const Demo = {
   render: Example,
 };
 

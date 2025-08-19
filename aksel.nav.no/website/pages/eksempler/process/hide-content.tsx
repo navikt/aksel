@@ -1,10 +1,10 @@
 import React from "react";
 import {
+  BabyWrappedIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  ChildEyesIcon,
-  DocPencilIcon,
   EnvelopeOpenIcon,
+  TasklistSendIcon,
 } from "@navikt/aksel-icons";
 import { Button, HStack, Process } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
@@ -38,12 +38,12 @@ const Example = () => {
         <Process.Step
           title="Barnet ble født"
           timestamp="04. august 2025"
-          bullet={activeStep > 0 ? <Process.Checkmark /> : <ChildEyesIcon />}
+          bullet={<BabyWrappedIcon />}
         />
         <Process.Step
           title="Du søkte om FORELDREPENGER"
           timestamp="22. august 2025"
-          bullet={activeStep > 3 ? <Process.Checkmark /> : <DocPencilIcon />}
+          bullet={<TasklistSendIcon />}
           hideContent={activeStep > 3}
         >
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
@@ -86,7 +86,7 @@ export default withDsExample(Example, {
 });
 
 /* Storybook story */
-export const VariantNumber = {
+export const Demo = {
   render: Example,
 };
 
