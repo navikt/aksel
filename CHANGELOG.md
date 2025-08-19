@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.28.1
+
+### @navikt/ds-react
+
+- Form components: Improved a11y when using JSX in description ([#3990](https://github.com/navikt/aksel/pull/3990))
+
+- Fieldset/CheckboxGroup/RadioGroup: Connect description to fieldset with `aria-describedby` ([#3974](https://github.com/navikt/aksel/pull/3974))
+
 ## 7.28.0
 
 ### @navikt/ds-react
