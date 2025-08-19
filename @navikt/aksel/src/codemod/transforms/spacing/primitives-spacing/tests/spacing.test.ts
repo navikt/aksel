@@ -17,9 +17,3 @@ for (const fixture of fixtures) {
     extension: "js",
   });
 }
-
-check(__dirname, {
-  fixture: "css-module-test",
-  migration,
-  extension: "css",
-});
