@@ -2,6 +2,11 @@ import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { defineQuery } from "next-sanity";
 import { Metadata } from "next/types";
+import {
+  coerce as semverCoerce,
+  satisfies as semverSatisfies,
+  validRange as semverValidRange,
+} from "semver";
 import { Heading, VStack } from "@navikt/ds-react";
 import { PageProps } from "@/app/(routes)/next-types";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -12,9 +17,8 @@ import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { capitalizeText } from "@/ui-utils/format-text";
 import { DesignsystemetEyebrow } from "../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
-import FilterChips from "./_ui/FilterChips";
 import LogEntryList from "./_ui/LogEntryList";
-import SearchField from "./_ui/SearchField";
+import { SearchForm } from "./_ui/SearchForm";
 import { bumpHeadingLevels } from "./_ui/utils";
 
 export const metadata: Metadata = {
@@ -43,6 +47,7 @@ export default async function Page({ searchParams }: PageProps) {
     periode: paramYear = "",
     kategori: paramCategory = "",
     fritekst: paramTextFilter = "",
+    semver: paramSemver = false,
   } = await searchParams;
   const yearFilter = years.includes(paramYear.toString())
     ? paramYear.toString()
@@ -52,43 +57,70 @@ export default async function Page({ searchParams }: PageProps) {
   const categoryFilter = categories.includes(paramCategory.toString())
     ? paramCategory.toString()
     : null;
-  const textFilter = paramTextFilter.toString().trim().split(" ");
 
-  const yearQuery = yearFilter
-    ? " && endringsdato >= $year && endringsdato <= $nextYear"
-    : "";
-  const categoryQuery = categoryFilter ? " && endringstype == $category" : "";
-  const textQuery =
-    // content[].caption refers captions on images in content
-    // "[heading, endringsdato, endringstype, pt::text(content[]), content[].caption]";
-    "[heading, endringsdato, endringstype, content[].children[].text, content[].caption]";
+  const isSemverSearch = !!paramSemver;
 
-  const sanityObject = {
-    query: defineQuery(
-      `*[_type == "ds_endringslogg_artikkel"${yearQuery}${categoryQuery}${
-        textFilter
-          ? textFilter.reduce(
-              (queryString, _, index) =>
-                `${queryString} && ${textQuery} match $textFilter${index}`,
-              "",
-            )
-          : ""
-      }]{${ENDRINGSLOGG_FIELDS}} | order(endringsdato desc)`,
-    ) as typeof ENDRINGSLOGG_QUERY,
-    params: {
-      year: `${yearFilter}`,
-      nextYear: `${yearFilter && +yearFilter + 1}`,
-      category: `${categoryFilter}`,
-      ...(textFilter
-        ? textFilter?.reduce((acc, text, index) => {
-            acc[`textFilter${index}`] = `*${text}*`;
-            return acc;
-          }, {})
-        : {}),
-    },
-  };
+  const searchText = paramTextFilter.toString().trim();
+  const textFilter = searchText.split(" ");
 
-  const { data: logEntries } = await sanityFetch(sanityObject);
+  let logEntries: ENDRINGSLOGG_QUERYResult = [];
+
+  if (isSemverSearch) {
+    const semverRange = semverValidRange(textFilter.join(" "));
+
+    // OPTIMIZE: we fetch all for now and filter those after sanity request
+    const sanityObject = {
+      query: defineQuery(
+        `*[_type == "ds_endringslogg_artikkel" && endringstype == "kode"]{
+          ${ENDRINGSLOGG_FIELDS}
+        } | order(endringsdato desc)`,
+      ) as typeof ENDRINGSLOGG_QUERY,
+    };
+
+    logEntries = (await sanityFetch(sanityObject)).data;
+    logEntries = logEntries.filter((entry) => {
+      return semverSatisfies(
+        semverCoerce(entry.heading) || "",
+        semverRange || "",
+      );
+    });
+  } else {
+    const yearQuery = yearFilter
+      ? " && endringsdato >= $year && endringsdato <= $nextYear"
+      : "";
+    const categoryQuery = categoryFilter ? " && endringstype == $category" : "";
+    const textQuery =
+      // content[].caption refers captions on images in content
+      // "[heading, endringsdato, endringstype, pt::text(content[]), content[].caption]";
+      "[heading, endringsdato, endringstype, content[].children[].text, content[].caption]";
+
+    const sanityObject = {
+      query: defineQuery(
+        `*[_type == "ds_endringslogg_artikkel"${yearQuery}${categoryQuery}${
+          textFilter
+            ? textFilter.reduce(
+                (queryString, _, index) =>
+                  `${queryString} && ${textQuery} match $textFilter${index}`,
+                "",
+              )
+            : ""
+        }]{${ENDRINGSLOGG_FIELDS}} | order(endringsdato desc)`,
+      ) as typeof ENDRINGSLOGG_QUERY,
+      params: {
+        year: `${yearFilter}`,
+        nextYear: `${yearFilter && +yearFilter + 1}`,
+        category: `${categoryFilter}`,
+        ...(textFilter
+          ? textFilter?.reduce((acc, text, index) => {
+              acc[`textFilter${index}`] = `*${text}*`;
+              return acc;
+            }, {})
+          : {}),
+      },
+    };
+
+    logEntries = (await sanityFetch(sanityObject)).data;
+  }
 
   logEntries.forEach((logEntry) => {
     logEntry.content = bumpHeadingLevels(logEntry.content) || null;
@@ -131,15 +163,7 @@ export default async function Page({ searchParams }: PageProps) {
           Endringslogg
         </Heading>
 
-        <VStack gap="space-24" paddingBlock="space-12 space-0">
-          <SearchField />
-          <FilterChips
-            years={years}
-            selectedYear={yearFilter}
-            categories={categories}
-            selectedCategory={categoryFilter}
-          />
-        </VStack>
+        <SearchForm params={{ years, categories }} />
       </div>
 
       <TableOfContents
