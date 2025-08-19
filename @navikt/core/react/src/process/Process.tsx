@@ -248,140 +248,100 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
 );
 
 /* ------------------------------ Process Title ----------------------------- */
-interface ProcessTitleProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ProcessTitleProps {
   /**
    * Title content.
    */
   children: React.ReactNode;
 }
 
-const ProcessTitle = forwardRef<HTMLDivElement, ProcessTitleProps>(
-  ({ children, className, ...restProps }: ProcessTitleProps, forwardedRef) => {
-    const { cn } = useRenameCSS();
+const ProcessTitle = ({ children }: ProcessTitleProps) => {
+  const { cn } = useRenameCSS();
 
-    return (
-      <Heading
-        ref={forwardedRef}
-        size="small"
-        {...restProps}
-        as="div"
-        className={cn("navds-process__title", className)}
-      >
-        {children}
-      </Heading>
-    );
-  },
-);
+  return (
+    <Heading size="small" as="div" className={cn("navds-process__title")}>
+      {children}
+    </Heading>
+  );
+};
 
 /* ---------------------------- Process timestamp --------------------------- */
-interface ProcessTimestampProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ProcessTimestampProps {
   /**
    * Timestamp content.
    */
   children: React.ReactNode;
 }
 
-const ProcessTimestamp = forwardRef<HTMLDivElement, ProcessTimestampProps>(
-  (
-    { children, className, ...restProps }: ProcessTimestampProps,
-    forwardedRef,
-  ) => {
-    const { cn } = useRenameCSS();
+const ProcessTimestamp = ({ children }: ProcessTimestampProps) => {
+  const { cn } = useRenameCSS();
 
-    return (
-      <BodyShort
-        ref={forwardedRef}
-        spacing
-        as="div"
-        {...restProps}
-        size="small"
-        textColor="subtle"
-        className={cn("navds-process__timestamp", className)}
-      >
-        {children}
-      </BodyShort>
-    );
-  },
-);
+  return (
+    <BodyShort
+      spacing
+      as="div"
+      size="small"
+      textColor="subtle"
+      className={cn("navds-process__timestamp")}
+    >
+      {children}
+    </BodyShort>
+  );
+};
 
 /* ----------------------------- Process Content ---------------------------- */
-interface ProcessContentProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ProcessContentProps {
   /**
    * Content content.
    */
   children: React.ReactNode;
 }
 
-const ProcessContent = forwardRef<HTMLDivElement, ProcessContentProps>(
-  (
-    { children, className, ...restProps }: ProcessContentProps,
-    forwardedRef,
-  ) => {
-    const { cn } = useRenameCSS();
+const ProcessContent = ({ children }: ProcessContentProps) => {
+  const { cn } = useRenameCSS();
 
-    return (
-      <BodyLong
-        ref={forwardedRef}
-        {...restProps}
-        as="div"
-        className={cn("navds-process__content", className)}
-      >
-        {children}
-      </BodyLong>
-    );
-  },
-);
+  return (
+    <BodyLong as="div" className={cn("navds-process__content")}>
+      {children}
+    </BodyLong>
+  );
+};
 
 /* ----------------------------- Process Bullet ----------------------------- */
-interface ProcessBulletProps extends React.HTMLAttributes<HTMLSpanElement> {
+interface ProcessBulletProps {
   /**
    * Bullet content.
    */
   children: React.ReactNode;
 }
 
-const ProcessBullet = forwardRef<HTMLSpanElement, ProcessBulletProps>(
-  ({ children, className, ...restProps }: ProcessBulletProps, forwardedRef) => {
-    const { cn } = useRenameCSS();
+const ProcessBullet = ({ children }: ProcessBulletProps) => {
+  const { cn } = useRenameCSS();
 
-    const { active } = useProcessStepContext();
+  const { active } = useProcessStepContext();
 
-    return (
-      <BodyShort
-        ref={forwardedRef}
-        {...restProps}
-        as="span"
-        weight="semibold"
-        className={cn("navds-process__bullet", className)}
-        data-active={active}
-        aria-hidden
-      >
-        {children}
-      </BodyShort>
-    );
-  },
-);
+  return (
+    <BodyShort
+      as="span"
+      weight="semibold"
+      className={cn("navds-process__bullet")}
+      data-active={active}
+      aria-hidden
+    >
+      {children}
+    </BodyShort>
+  );
+};
 
 /* ------------------------------ Process Line ------------------------------ */
-type ProcessLineProps = React.HTMLAttributes<HTMLSpanElement>;
+const ProcessLine = () => {
+  const { cn } = useRenameCSS();
+  const { lineActive } = useProcessStepContext();
 
-const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
-  ({ children, className, ...restProps }: ProcessLineProps, forwardedRef) => {
-    const { cn } = useRenameCSS();
-    const { lineActive } = useProcessStepContext();
-
-    return (
-      <span
-        ref={forwardedRef}
-        {...restProps}
-        className={cn("navds-process__line", className)}
-        data-active={lineActive}
-      >
-        {children}
-      </span>
-    );
-  },
-);
+  return (
+    <span className={cn("navds-process__line")} data-active={lineActive} />
+  );
+};
 
 /* ---------------------------- Process Checkmark --------------------------- */
 type ProcessCheckmarkProps = Omit<SVGProps<SVGSVGElement>, "ref">;
@@ -417,4 +377,4 @@ export const ProcessCheckmark = forwardRef<
 Process.Step = ProcessStep;
 Process.Checkmark = ProcessCheckmark;
 
-export type { ProcessProps, ProcessStepProps, ProcessCheckmarkProps };
+export type { ProcessCheckmarkProps, ProcessProps, ProcessStepProps };
