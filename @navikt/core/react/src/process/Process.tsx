@@ -180,6 +180,10 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
    */
   children?: React.ReactNode;
   /**
+   * Hide the content section of the step.
+   */
+  hideContent?: boolean;
+  /**
    * Step title.
    */
   title?: string;
@@ -191,10 +195,6 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
    * Icon or number to display inside the bullet.
    */
   bullet?: React.ReactNode;
-  /**
-   * Hide the content section of the step.
-   */
-  hideContent?: boolean;
 }
 
 export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
@@ -338,18 +338,10 @@ interface ProcessBulletProps extends React.HTMLAttributes<HTMLSpanElement> {
    * Bullet content.
    */
   children: React.ReactNode;
-  /**
-   * If true, the bullet is active.
-   * @default Controlled by Process Step
-   */
-  active?: boolean;
 }
 
 const ProcessBullet = forwardRef<HTMLSpanElement, ProcessBulletProps>(
-  (
-    { children, className, active: _active, ...restProps }: ProcessBulletProps,
-    forwardedRef,
-  ) => {
+  ({ children, className, ...restProps }: ProcessBulletProps, forwardedRef) => {
     const { cn } = useRenameCSS();
 
     const { active } = useProcessStepContext();
@@ -361,7 +353,7 @@ const ProcessBullet = forwardRef<HTMLSpanElement, ProcessBulletProps>(
         as="span"
         weight="semibold"
         className={cn("navds-process__bullet", className)}
-        data-active={_active ?? active}
+        data-active={active}
         aria-hidden
       >
         {children}
@@ -382,7 +374,7 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
       <span
         ref={forwardedRef}
         {...restProps}
-        className={cn("navds-process__line navds-process__line-end", className)}
+        className={cn("navds-process__line", className)}
         data-active={lineActive}
       >
         {children}

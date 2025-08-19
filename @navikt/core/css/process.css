@@ -23,7 +23,7 @@
 
     margin-block-start: calc((var(--__ac-process-circle-small) / 2) * -1);
 
-    & .navds-process__line-end {
+    & .navds-process__line {
       margin-block-start: calc(var(--__ac-process-circle-size) / 2);
     }
 
@@ -41,6 +41,7 @@
   min-height: 2rem;
   justify-self: center;
   grid-column: 1;
+  grid-row: line-2;
   border-color: var(--a-border-subtle);
 
   &[data-active="true"] {
@@ -52,10 +53,6 @@
   &[data-current="false"] {
     border-image: none;
   }
-}
-
-.navds-process__line-end {
-  grid-row: line-2;
 }
 
 .navds-process__item {

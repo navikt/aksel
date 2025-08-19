@@ -23,7 +23,7 @@
 
     margin-block-start: calc((var(--__axc-process-circle-small) / 2) * -1);
 
-    & .aksel-process__line-end {
+    & .aksel-process__line {
       margin-block-start: calc(var(--__axc-process-circle-size) / 2);
     }
 
@@ -41,6 +41,7 @@
   min-height: 2rem;
   justify-self: center;
   grid-column: 1;
+  grid-row: line-2;
   border-color: var(--ax-border-neutral-subtle);
 
   &[data-active="true"] {
@@ -52,10 +53,6 @@
   &[data-current="false"] {
     border-image: none;
   }
-}
-
-.aksel-process__line-end {
-  grid-row: line-2;
 }
 
 .aksel-process__item {

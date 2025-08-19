@@ -231,22 +231,21 @@ export const InteractiveDemo: StoryFn<Story> = () => {
         bullet={isDone(0) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step one"
         timestamp={getDateAfter(3)}
+        hideContent={activeStep === 0}
       >
-        {activeStep === 0 && (
+        <div>
           <div>
-            <div>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla
-              sint commodi omnis autem provident velit accusantium fugit vitae
-              veritatis, error aut culpa, vero animi molestiae, ab sunt
-              laboriosam eligendi distinctio.
-            </div>
-            <HStack gap="space-8" marginBlock="space-12">
-              <Button size="small" onClick={() => handleStepClick(1)}>
-                Next Step
-              </Button>
-            </HStack>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla sint
+            commodi omnis autem provident velit accusantium fugit vitae
+            veritatis, error aut culpa, vero animi molestiae, ab sunt laboriosam
+            eligendi distinctio.
           </div>
-        )}
+          <HStack gap="space-8" marginBlock="space-12">
+            <Button size="small" onClick={() => handleStepClick(1)}>
+              Next Step
+            </Button>
+          </HStack>
+        </div>
       </Process.Step>
       <Process.Step
         bullet={isDone(1) ? <Process.Checkmark /> : <SparklesFillIcon />}
