@@ -177,7 +177,7 @@ export const Process: ProcessComponent = forwardRef<
 /* ------------------------------ Process Step ------------------------------ */
 interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
-   * Rich content to display under the title and timeline a if provided.
+   * Rich content to display under the title and timestamp if provided.
    */
   children?: React.ReactNode;
   /**
