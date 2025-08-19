@@ -35,12 +35,12 @@ const Example = () => {
         </Button>
       </HStack>
       <Process activeStep={activeStep}>
-        <Process.Step
+        <Process.Event
           title="Barnet ble født"
           timestamp="04. august 2025"
           bullet={<BabyWrappedIcon />}
         />
-        <Process.Step
+        <Process.Event
           title="Du søkte om FORELDREPENGER"
           timestamp="22. august 2025"
           bullet={<TasklistSendIcon />}
@@ -50,31 +50,31 @@ const Example = () => {
           excepturi velit magni explicabo blanditiis dicta reiciendis commodi
           impedit, necessitatibus delectus natus? Rem quisquam delectus beatae
           perferendis deleniti officiis eveniet dolorem!
-        </Process.Step>
-        <Process.Step
+        </Process.Event>
+        <Process.Event
           title="Du la til 2 vedlegg"
           timestamp="23. august 2025 KL 09.05"
         />
-        <Process.Step
+        <Process.Event
           title="Du la til 4 vedlegg"
           timestamp="23. august 2025 KL 11.30"
         />
-        <Process.Step
+        <Process.Event
           title="Du har fått et svar på søknaden din"
           timestamp="25. august 2025"
           bullet={<EnvelopeOpenIcon />}
         >
           Rem quisquam delectus beatae perferendis deleniti officiis eveniet
           dolorem!
-        </Process.Step>
-        <Process.Step
+        </Process.Event>
+        <Process.Event
           title="Nav har etterspurt opplysninger"
           timestamp="8. september 2025"
         >
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
           excepturi velit magni explicabo blanditiis dicta reiciendis commodi
           impedit.
-        </Process.Step>
+        </Process.Event>
       </Process>
     </>
   );

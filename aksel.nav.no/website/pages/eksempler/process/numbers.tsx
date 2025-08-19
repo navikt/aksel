@@ -8,11 +8,11 @@ const Example = () => {
         Hva skjer etter at du har sendt inn søknad til oss?
       </Heading>
       <Process aria-labelledby="Process-heading" activeStep={2}>
-        <Process.Step title="Legeerklæring" bullet={1} />
-        <Process.Step title="Inntektsmelding fra arbeidsgiver" bullet={2} />
-        <Process.Step title="Vi behandler søknaden din" bullet={3} />
-        <Process.Step title="Når søknaden er ferdig behandlet" bullet={4} />
-        <Process.Step title="Utbetaling" bullet={5} />
+        <Process.Event title="Legeerklæring" bullet={1} />
+        <Process.Event title="Inntektsmelding fra arbeidsgiver" bullet={2} />
+        <Process.Event title="Vi behandler søknaden din" bullet={3} />
+        <Process.Event title="Når søknaden er ferdig behandlet" bullet={4} />
+        <Process.Event title="Utbetaling" bullet={5} />
       </Process>
     </>
   );

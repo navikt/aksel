@@ -23,7 +23,7 @@ interface ProcessContextValue {
   rootId: string;
 }
 
-interface ProcessStepContextValue {
+interface ProcessEventContextValue {
   index: number;
   active: boolean;
   lineActive: boolean;
@@ -34,22 +34,22 @@ const [ProcessContextProvider, useProcessContext] =
     hookName: "useProcessContext",
     providerName: "ProcessContextProvider",
     name: "ProcessContext",
-    errorMessage: "<Process.Step> has to be used within <Process>",
+    errorMessage: "<Process.Event> has to be used within <Process>",
   });
 
-const [ProcessStepContextProvider, useProcessStepContext] =
-  createContext<ProcessStepContextValue>({
-    hookName: "useProcessStepContext",
-    providerName: "ProcessStepContextProvider",
-    name: "ProcessStepContext",
-    errorMessage: "<Process.Step> has to be used within <Process>",
+const [ProcessEventContextProvider, useProcessEventContext] =
+  createContext<ProcessEventContextValue>({
+    hookName: "useProcessEventContext",
+    providerName: "ProcessEventContextProvider",
+    name: "ProcessEventContext",
+    errorMessage: "<Process.Event> has to be used within <Process>",
   });
 
 interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
-   * `<Process.Step />` elements.
+   * `<Process.Event />` elements.
    */
-  children: React.ReactElement<typeof ProcessStep>[];
+  children: React.ReactElement<typeof ProcessEvent>[];
   /**
    * Index of current active step. This step and all steps before it will be highlighted.
    */
@@ -61,9 +61,9 @@ interface ProcessComponent
     ProcessProps & React.RefAttributes<HTMLOListElement>
   > {
   /**
-   * @see 🏷️ {@link ProcessStepProps}
+   * @see 🏷️ {@link ProcessEventProps}
    */
-  Step: typeof ProcessStep;
+  Event: typeof ProcessEvent;
   /**
    * @see 🏷️ {@link ProcessCheckmarkProps}
    */
@@ -87,15 +87,15 @@ interface ProcessComponent
  *     aria-labelledby="Process-heading"
  *     activeStep={activeStep}
  *   >
- *     <Process.Step title="Start søknad" timestamp="21. august 2025" />
- *     <Process.Step
+ *     <Process.Event title="Start søknad" timestamp="21. august 2025" />
+ *     <Process.Event
  *       title="Saksopplysninger"
  *       timestamp="22. august 2025"
  *       icon={<PaperclipIcon />}
  *     >
  *       Saksopplysninger er sendt inn
- *     </Process.Step>
- *     <Process.Step
+ *     </Process.Event>
+ *     <Process.Event
  *       title="Vedlegg"
  *       timestamp="25. august 2025"
  *     >
@@ -104,10 +104,10 @@ interface ProcessComponent
  *         Dokumentasjon av saksopplysninger er lastet opp og tilgjengelig for
  *         saksbehandler.
  *       </p>
- *     </Process.Step>
- *     <Process.Step title="Vedtak" timestamp="8. september 2025">
+ *     </Process.Event>
+ *     <Process.Event title="Vedtak" timestamp="8. september 2025">
  *       Det er gjort endelig vedtak i saken
- *     </Process.Step>
+ *     </Process.Event>
  *   </Process>
  * </>
  * ```
@@ -158,13 +158,13 @@ export const Process: ProcessComponent = forwardRef<
         >
           {React.Children.map(children, (step, index) => {
             return (
-              <ProcessStepContextProvider
+              <ProcessEventContextProvider
                 index={index}
                 active={activeStep >= index}
                 lineActive={activeStep >= index}
               >
                 {step}
-              </ProcessStepContextProvider>
+              </ProcessEventContextProvider>
             );
           })}
         </ol>
@@ -174,7 +174,7 @@ export const Process: ProcessComponent = forwardRef<
 ) as ProcessComponent;
 
 /* ------------------------------ Process Step ------------------------------ */
-interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
+interface ProcessEventProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
    * Rich content to display under the title and timestamp if provided.
    */
@@ -197,7 +197,7 @@ interface ProcessStepProps extends React.HTMLAttributes<HTMLLIElement> {
   bullet?: React.ReactNode;
 }
 
-export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
+export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
   (
     {
       title,
@@ -208,14 +208,14 @@ export const ProcessStep = forwardRef<HTMLLIElement, ProcessStepProps>(
       className,
       id,
       ...restProps
-    }: ProcessStepProps,
+    }: ProcessEventProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
     const stepId = useId();
 
     const { activeStep, lastIndex, rootId } = useProcessContext();
-    const { index } = useProcessStepContext();
+    const { index } = useProcessEventContext();
 
     const isActive = index === activeStep;
 
@@ -318,7 +318,7 @@ interface ProcessBulletProps {
 const ProcessBullet = ({ children }: ProcessBulletProps) => {
   const { cn } = useRenameCSS();
 
-  const { active } = useProcessStepContext();
+  const { active } = useProcessEventContext();
 
   return (
     <BodyShort
@@ -336,7 +336,7 @@ const ProcessBullet = ({ children }: ProcessBulletProps) => {
 /* ------------------------------ Process Line ------------------------------ */
 const ProcessLine = () => {
   const { cn } = useRenameCSS();
-  const { lineActive } = useProcessStepContext();
+  const { lineActive } = useProcessEventContext();
 
   return (
     <span className={cn("navds-process__line")} data-active={lineActive} />
@@ -374,7 +374,7 @@ export const ProcessCheckmark = forwardRef<
 });
 
 /* -------------------------- Process exports ------------------------- */
-Process.Step = ProcessStep;
+Process.Event = ProcessEvent;
 Process.Checkmark = ProcessCheckmark;
 
-export type { ProcessCheckmarkProps, ProcessProps, ProcessStepProps };
+export type { ProcessCheckmarkProps, ProcessProps, ProcessEventProps };

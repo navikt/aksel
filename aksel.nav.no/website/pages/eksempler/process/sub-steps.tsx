@@ -13,30 +13,30 @@ const Example = () => {
         Søknadssteg med tilhørende tittel
       </Heading>
       <Process aria-labelledby="Process-heading" activeStep={2}>
-        <Process.Step
+        <Process.Event
           title="Barnet ble født"
           timestamp="04. august 2025"
           bullet={<BabyWrappedIcon />}
         />
-        <Process.Step
+        <Process.Event
           title="Du søkte om FORELDREPENGER"
           timestamp="22. august 2025"
           bullet={<TasklistSendIcon />}
         />
-        <Process.Step
+        <Process.Event
           title="Du la til 2 vedlegg"
           timestamp="23. august 2025 KL 09.05"
         />
-        <Process.Step
+        <Process.Event
           title="Du la til 4 vedlegg"
           timestamp="23. august 2025 KL 11.30"
         />
-        <Process.Step
+        <Process.Event
           title="Du har fått et svar på søknaden din"
           timestamp="25. august 2025"
           bullet={<EnvelopeOpenIcon />}
         />
-        <Process.Step
+        <Process.Event
           title="Nav har etterspurt opplysninger"
           timestamp="8. september 2025"
         />

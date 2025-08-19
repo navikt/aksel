@@ -8,19 +8,19 @@ const Example = () => {
         Søknadssteg med tilhørende tittel
       </Heading>
       <Process aria-labelledby="Process-heading" activeStep={4}>
-        <Process.Step title="02. Jan. 2020. klokken 10:21">
+        <Process.Event title="02. Jan. 2020. klokken 10:21">
           Din utbetalingsplan har blitt oppdatert, les vedtaket for mer
           informasjon
-        </Process.Step>
-        <Process.Step title="27. Des. 2019. klokken 14:48">
+        </Process.Event>
+        <Process.Event title="27. Des. 2019. klokken 14:48">
           <BodyShort>Livsopphold, Husleie er ferdig behandlet</BodyShort>
           <BodyShort textColor="subtle" size="small">
             Et brev fra veileder følger med denne hendelsen
           </BodyShort>
-        </Process.Step>
-        <Process.Step title="21. Des. 2019. klokken 16:52">
+        </Process.Event>
+        <Process.Event title="21. Des. 2019. klokken 16:52">
           Du har sendt 10 vedlegg til NAV
-        </Process.Step>
+        </Process.Event>
       </Process>
     </>
   );

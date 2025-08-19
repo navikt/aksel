@@ -8,27 +8,27 @@ const Example = () => {
         Dette har skjedd i saken
       </Heading>
       <Process aria-labelledby="Process-heading" activeStep={2}>
-        <Process.Step
+        <Process.Event
           title="Søknad om livsopphold er ferdig behandlet"
           bullet={<Process.Checkmark />}
           timestamp="04. august 2025 kl. 14.30"
         />
-        <Process.Step
+        <Process.Event
           title="Du leverte etterspurte dokumenter"
           bullet={<Process.Checkmark />}
           timestamp="04. august 2025 kl. 14.55"
         />
-        <Process.Step
+        <Process.Event
           title="Nav trenger felre opplysninger i saken din"
           bullet={<Process.Checkmark />}
           timestamp="08. august 2025 kl. 11.10"
         />
-        <Process.Step
+        <Process.Event
           title="Søknad om livsopphold er under behandling"
           bullet={<Process.Checkmark />}
           timestamp="11. august 2025 kl. 09.48"
         />
-        <Process.Step
+        <Process.Event
           title="Søknad med vedlegg er sendt til Hamar"
           bullet={5}
         />

@@ -36,14 +36,14 @@ export const Default = ({
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Process activeStep={activeStep} {...props}>
-        <Process.Step title="Start søknad" timestamp={getDateAfter(0)} />
-        <Process.Step title="Personopplysninger" timestamp={getDateAfter(3)}>
+        <Process.Event title="Start søknad" timestamp={getDateAfter(0)} />
+        <Process.Event title="Personopplysninger" timestamp={getDateAfter(3)}>
           Send inn personopplysninger
-        </Process.Step>
-        <Process.Step title="Saksopplysninger" timestamp={getDateAfter(6)}>
+        </Process.Event>
+        <Process.Event title="Saksopplysninger" timestamp={getDateAfter(6)}>
           Send inn saksopplysninger
-        </Process.Step>
-        <Process.Step
+        </Process.Event>
+        <Process.Event
           title={step4Title}
           timestamp={step4Date}
           bullet={
@@ -87,16 +87,16 @@ export const Default = ({
               <hr />
             </>
           )}
-        </Process.Step>
-        <Process.Step title="Vedlegg" timestamp={getDateAfter(12)}>
+        </Process.Event>
+        <Process.Event title="Vedlegg" timestamp={getDateAfter(12)}>
           Send inn vedlegg
-        </Process.Step>
-        <Process.Step title="Oppsummering" timestamp={getDateAfter(15)}>
+        </Process.Event>
+        <Process.Event title="Oppsummering" timestamp={getDateAfter(15)}>
           Les oppsummering
-        </Process.Step>
-        <Process.Step title="Innsending" timestamp={getDateAfter(18)}>
+        </Process.Event>
+        <Process.Event title="Innsending" timestamp={getDateAfter(18)}>
           Send inn søknaden
-        </Process.Step>
+        </Process.Event>
       </Process>
     </div>
   );
@@ -136,22 +136,22 @@ Default.args = {
 export const NumberedBullets: StoryFn<Story> = () => {
   return (
     <Process activeStep={3}>
-      <Process.Step bullet={0} title="Start søknad" />
-      <Process.Step bullet={1} title="Personopplysninger" />
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step title="Substep 3" />
-      <Process.Step bullet={2} title="Saksopplysninger" />
+      <Process.Event bullet={0} title="Start søknad" />
+      <Process.Event bullet={1} title="Personopplysninger" />
+      <Process.Event title="Substep 1" />
+      <Process.Event title="Substep 2" />
+      <Process.Event title="Substep 3" />
+      <Process.Event bullet={2} title="Saksopplysninger" />
 
-      <Process.Step
+      <Process.Event
         bullet={3}
         title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
       />
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step title="Substep 3" />
-      <Process.Step bullet={4} title="Vedlegg" />
-      <Process.Step bullet={5} title="Oppsummering" />
+      <Process.Event title="Substep 1" />
+      <Process.Event title="Substep 2" />
+      <Process.Event title="Substep 3" />
+      <Process.Event bullet={4} title="Vedlegg" />
+      <Process.Event bullet={5} title="Oppsummering" />
     </Process>
   );
 };
@@ -159,22 +159,22 @@ export const NumberedBullets: StoryFn<Story> = () => {
 export const IconBullets: StoryFn<Story> = () => {
   return (
     <Process activeStep={3}>
-      <Process.Step bullet={<SparklesFillIcon />} title="Start søknad" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Personopplysninger" />
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step title="Substep 3" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Saksopplysninger" />
+      <Process.Event bullet={<SparklesFillIcon />} title="Start søknad" />
+      <Process.Event bullet={<SparklesFillIcon />} title="Personopplysninger" />
+      <Process.Event title="Substep 1" />
+      <Process.Event title="Substep 2" />
+      <Process.Event title="Substep 3" />
+      <Process.Event bullet={<SparklesFillIcon />} title="Saksopplysninger" />
 
-      <Process.Step
+      <Process.Event
         bullet={<SparklesFillIcon />}
         title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
       />
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step title="Substep 3" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Vedlegg" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Oppsummering" />
+      <Process.Event title="Substep 1" />
+      <Process.Event title="Substep 2" />
+      <Process.Event title="Substep 3" />
+      <Process.Event bullet={<SparklesFillIcon />} title="Vedlegg" />
+      <Process.Event bullet={<SparklesFillIcon />} title="Oppsummering" />
     </Process>
   );
 };
@@ -182,26 +182,26 @@ export const IconBullets: StoryFn<Story> = () => {
 export const Content: StoryFn<Story> = () => {
   return (
     <Process activeStep={3}>
-      <Process.Step bullet={<SparklesFillIcon />} title="Start søknad">
+      <Process.Event bullet={<SparklesFillIcon />} title="Start søknad">
         <ContentOne />
-      </Process.Step>
-      <Process.Step bullet={<SparklesFillIcon />} title="Personopplysninger" />
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step title="Substep 3" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Saksopplysninger" />
+      </Process.Event>
+      <Process.Event bullet={<SparklesFillIcon />} title="Personopplysninger" />
+      <Process.Event title="Substep 1" />
+      <Process.Event title="Substep 2" />
+      <Process.Event title="Substep 3" />
+      <Process.Event bullet={<SparklesFillIcon />} title="Saksopplysninger" />
 
-      <Process.Step
+      <Process.Event
         bullet={<SparklesFillIcon />}
         title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
       >
         <ContentTwo />
-      </Process.Step>
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step title="Substep 3" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Vedlegg" />
-      <Process.Step bullet={<SparklesFillIcon />} title="Oppsummering" />
+      </Process.Event>
+      <Process.Event title="Substep 1" />
+      <Process.Event title="Substep 2" />
+      <Process.Event title="Substep 3" />
+      <Process.Event bullet={<SparklesFillIcon />} title="Vedlegg" />
+      <Process.Event bullet={<SparklesFillIcon />} title="Oppsummering" />
     </Process>
   );
 };
@@ -227,7 +227,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
       style={{ maxWidth: "40rem" }}
       activeStep={activeStep > 1 ? activeStep + 2 : activeStep}
     >
-      <Process.Step
+      <Process.Event
         bullet={isDone(0) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step one"
         timestamp={getDateAfter(3)}
@@ -246,8 +246,8 @@ export const InteractiveDemo: StoryFn<Story> = () => {
             </Button>
           </HStack>
         </div>
-      </Process.Step>
-      <Process.Step
+      </Process.Event>
+      <Process.Event
         bullet={isDone(1) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step two"
         timestamp={getDateAfter(2)}
@@ -270,10 +270,10 @@ export const InteractiveDemo: StoryFn<Story> = () => {
             </HStack>
           </div>
         )}
-      </Process.Step>
-      <Process.Step title="Substep 1" />
-      <Process.Step title="Substep 2" />
-      <Process.Step
+      </Process.Event>
+      <Process.Event title="Substep 1" />
+      <Process.Event title="Substep 2" />
+      <Process.Event
         bullet={isDone(2) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step three"
       >
@@ -295,9 +295,9 @@ export const InteractiveDemo: StoryFn<Story> = () => {
             </HStack>
           </div>
         )}
-      </Process.Step>
+      </Process.Event>
 
-      <Process.Step
+      <Process.Event
         bullet={isDone(3) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step four"
         timestamp={getDateAfter(1)}
@@ -320,8 +320,8 @@ export const InteractiveDemo: StoryFn<Story> = () => {
             </HStack>
           </div>
         )}
-      </Process.Step>
-      <Process.Step
+      </Process.Event>
+      <Process.Event
         bullet={isDone(4) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step five"
       >
@@ -343,8 +343,8 @@ export const InteractiveDemo: StoryFn<Story> = () => {
             </HStack>
           </div>
         )}
-      </Process.Step>
-      <Process.Step
+      </Process.Event>
+      <Process.Event
         bullet={isDone(5) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step six"
       >
@@ -363,7 +363,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
             </HStack>
           </div>
         )}
-      </Process.Step>
+      </Process.Event>
     </Process>
   );
 };
