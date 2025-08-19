@@ -51,7 +51,7 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   children: React.ReactElement<typeof ProcessStep>[];
   /**
-   * Index of current active step, currently active element and all previous elements before this index will be highlighted.
+   * Index of current active step. This step and all steps before it will be highlighted.
    */
   activeStep?: number;
 }
