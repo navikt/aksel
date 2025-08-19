@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react";
-import React from "react";
-import "../dist/tw.css";
+import "@navikt/ds-css";
+import "@navikt/ds-css/darkside";
+import { Theme } from "@navikt/ds-react";
 
 export const globalTypes = {
   theme: {
@@ -17,6 +18,19 @@ export const globalTypes = {
       ],
     },
   },
+  mode: {
+    name: "Darkside",
+    defaultValue: "darkside",
+    toolbar: {
+      icon: "paintbrush",
+      showName: true,
+      dynamicTitle: true,
+      items: [
+        { value: "legacy", title: "Legacy CSS" },
+        { value: "darkside", title: "Darkside CSS" },
+      ],
+    },
+  },
 };
 
 const withTheme = (Story, context) => {
@@ -24,6 +38,23 @@ const withTheme = (Story, context) => {
 
   return (
     <div className={theme === "dark" ? "dark" : ""}>
+      <Story />
+    </div>
+  );
+};
+
+const withDarkside = (Story, context) => {
+  const isDarkside = context.globals.mode === "darkside";
+
+  if (isDarkside) {
+    return (
+      <Theme>
+        <Story />
+      </Theme>
+    );
+  }
+  return (
+    <div>
       <Story />
     </div>
   );
@@ -68,7 +99,7 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [withTheme],
+  decorators: [withTheme, withDarkside],
 };
 
 export default preview;
