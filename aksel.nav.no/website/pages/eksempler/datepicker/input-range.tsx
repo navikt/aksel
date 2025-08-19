@@ -9,7 +9,7 @@ const Example = () => {
     });
 
   return (
-    <div className="min-h-96">
+    <Box minHeight="24rem">
       <DatePicker {...datepickerProps}>
         <HStack wrap gap="4" justify="center">
           <DatePicker.Input {...fromInputProps} label="Fra" />
@@ -22,7 +22,7 @@ const Example = () => {
           <div>{selectedRange?.to?.toISOString().split("T")[0]}</div>
         </Box>
       )}
-    </div>
+    </Box>
   );
 };
 
