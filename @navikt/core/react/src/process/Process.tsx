@@ -406,7 +406,7 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
   },
 );
 
-/* ------------------------------ Process Line ------------------------------ */
+/* ---------------------------- Process Checkmark --------------------------- */
 type ProcessCheckmarkProps = Omit<SVGProps<SVGSVGElement>, "ref">;
 
 export const ProcessCheckmark = forwardRef<
