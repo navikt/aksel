@@ -1,3 +1,9 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
+
+/**
+ * `<ol />` elements with `list-style: none;` tends to be ignored by voiceover on Safari.
+ * To resolve this, we add `role="list"` to the `<ol />` element.
+ */
 import React, {
   SVGProps,
   forwardRef,
@@ -146,6 +152,7 @@ export const Process: ProcessComponent = forwardRef<
           ref={mergedRef}
           data-color="info"
           id={id ?? rootId}
+          role="list"
           {...restProps}
           className={cn("navds-process", className)}
           aria-controls={activeStep >= 0 ? childId : undefined}
