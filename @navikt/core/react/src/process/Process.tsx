@@ -371,24 +371,10 @@ const ProcessBullet = forwardRef<HTMLSpanElement, ProcessBulletProps>(
 );
 
 /* ------------------------------ Process Line ------------------------------ */
-interface ProcessLineProps extends React.HTMLAttributes<HTMLSpanElement> {
-  /**
-   * If true, the line is active.
-   * @default Controlled by Process Step
-   */
-  lineActive?: boolean;
-}
+type ProcessLineProps = React.HTMLAttributes<HTMLSpanElement>;
 
 const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
-  (
-    {
-      children,
-      className,
-      lineActive: _lineActive,
-      ...restProps
-    }: ProcessLineProps,
-    forwardedRef,
-  ) => {
+  ({ children, className, ...restProps }: ProcessLineProps, forwardedRef) => {
     const { cn } = useRenameCSS();
     const { lineActive } = useProcessStepContext();
 
@@ -397,7 +383,7 @@ const ProcessLine = forwardRef<HTMLSpanElement, ProcessLineProps>(
         ref={forwardedRef}
         {...restProps}
         className={cn("navds-process__line navds-process__line-end", className)}
-        data-active={_lineActive ?? lineActive}
+        data-active={lineActive}
       >
         {children}
       </span>
