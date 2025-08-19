@@ -27,11 +27,7 @@ const Example = () => {
         />
       </ToggleGroup>
 
-      <ToggleGroup
-        defaultValue="lest"
-        onChange={console.info}
-        variant="neutral"
-      >
+      <ToggleGroup defaultValue="lest" onChange={console.info} size="small">
         <ToggleGroup.Item
           value="ulest"
           icon={<EnvelopeClosedIcon aria-hidden />}
