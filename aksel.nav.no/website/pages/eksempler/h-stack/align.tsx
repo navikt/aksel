@@ -34,10 +34,10 @@ const Example = () => {
       </HStack>
       <HStack gap="space-12" align="baseline">
         <Placeholder text="baseline" />
-        <Placeholder text="text" padding="space-0" />
-        <Placeholder text="text" padding="space-0 space-0 1rem" />
-        <Placeholder text="text" padding="1rem space-0 space-0" />
-        <Placeholder text="text" padding="space-0" />
+        <Placeholder text="text" padding="0" />
+        <Placeholder text="text" padding="0 0 1rem" />
+        <Placeholder text="text" padding="1rem 0 0" />
+        <Placeholder text="text" padding="0" />
       </HStack>
     </VStack>
   );
