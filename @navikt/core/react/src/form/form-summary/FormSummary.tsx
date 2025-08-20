@@ -3,6 +3,7 @@ import { useRenameCSS } from "../../theme/Theme";
 import FormSummaryAnswer from "./FormSummaryAnswer";
 import FormSummaryAnswers from "./FormSummaryAnswers";
 import FormSummaryEditLink from "./FormSummaryEditLink";
+import FormSummaryFooter from "./FormSummaryFooter";
 import FormSummaryHeader from "./FormSummaryHeader";
 import FormSummaryHeading from "./FormSummaryHeading";
 import FormSummaryLabel from "./FormSummaryLabel";
@@ -40,6 +41,10 @@ interface FormSummaryComponent
    * Corresponds to the answer in the form. To be used in the `FormSummary.Answer` component.
    */
   Value: typeof FormSummaryValue;
+  /**
+   * Footer component for the form summary, typically used for additional information or actions.
+   */
+  Footer: typeof FormSummaryFooter;
 }
 
 export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
@@ -61,6 +66,9 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
    *       <FormSummary.Value>Ola Nordmann</FormSummary.Value>
    *     </FormSummary.Answer>
    *   </FormSummary.Answers>
+   *   <FormSummary.Footer>
+   *     <FormSummary.EditLink href="#" />
+   *   </FormSummary.Footer>
    * </FormSummary>
    */
   children: React.ReactNode;
@@ -83,6 +91,9 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
  *       <FormSummary.Value>Ola Nordmann</FormSummary.Value>
  *     </FormSummary.Answer>
  *   </FormSummary.Answers>
+ *   <FormSummary.Footer>
+ *     <FormSummary.EditLink href="#" />
+ *   </FormSummary.Footer>
  * </FormSummary>
  */
 export const FormSummary = forwardRef<HTMLDivElement, FormSummaryProps>(
@@ -104,5 +115,6 @@ FormSummary.Answers = FormSummaryAnswers;
 FormSummary.Answer = FormSummaryAnswer;
 FormSummary.Label = FormSummaryLabel;
 FormSummary.Value = FormSummaryValue;
+FormSummary.Footer = FormSummaryFooter;
 
 export default FormSummary;
