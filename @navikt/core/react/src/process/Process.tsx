@@ -5,7 +5,6 @@
  * To resolve this, we add `role="list"` to the `<ol />` element.
  */
 import React, { SVGProps, forwardRef, useRef } from "react";
-import { Box } from "../layout/box";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
@@ -162,15 +161,12 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
           <div className={cn("navds-process__body")}>
             {title && <ProcessTitle>{title}</ProcessTitle>}
             {isActive && (
-              <Box marginBlock="0 space-4">
-                <BodyShort
-                  size="small"
-                  data-color={isActive ? "info" : "neutral"}
-                  textColor="subtle"
-                >
-                  Aktiv
-                </BodyShort>
-              </Box>
+              <BodyShort
+                size="small"
+                className={cn("navds-process__active-label")}
+              >
+                Aktiv
+              </BodyShort>
             )}
             {timestamp && <ProcessTimestamp>{timestamp}</ProcessTimestamp>}
             {!hideContent && !!children && (

@@ -107,7 +107,7 @@
   }
 
   .aksel-process__event[data-status="active"] & {
-    outline: 4px solid var(--ax-bg-moderateA);
+    outline: 4px solid var(--ax-bg-moderate);
   }
 
   .aksel-process__event[data-status="inactive"] & {
@@ -121,8 +121,20 @@
 }
 
 .aksel-process__title {
-  padding-top: 0.16rem;
-  padding-bottom: var(--ax-space-4);
+  padding-block: 0.16rem var(--ax-space-4);
+
+  .aksel-process__event[data-status="active"] & {
+    padding-block-end: 0;
+  }
+}
+
+.aksel-process__active-label {
+  margin-block: 0 var(--ax-space-4);
+  color: var(--ax-text-subtle);
+
+  &:last-of-type {
+    margin-block-end: 0;
+  }
 }
 
 @media (forced-colors: active) {
