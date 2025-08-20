@@ -122,6 +122,11 @@ interface ProcessEventProps extends React.HTMLAttributes<HTMLLIElement> {
    * @default "inactive"
    */
   status?: "active" | "completed" | "inactive";
+  /**
+   * Hides the "aktiv"-label when the event is active.
+   * @default false
+   */
+  hideStatusLabel?: boolean;
 }
 
 export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
@@ -135,6 +140,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
       className,
       id,
       status = "inactive",
+      hideStatusLabel = false,
       ...restProps
     }: ProcessEventProps,
     forwardedRef,
@@ -156,11 +162,11 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
         data-status={status}
       >
         <div className={cn("navds-process__item")}>
-          <ProcessBullet data-current={isActive}>{bullet}</ProcessBullet>
+          <ProcessBullet>{bullet}</ProcessBullet>
 
           <div className={cn("navds-process__body")}>
             {title && <ProcessTitle>{title}</ProcessTitle>}
-            {isActive && (
+            {isActive && !hideStatusLabel && (
               <BodyShort
                 size="small"
                 className={cn("navds-process__active-label")}
@@ -174,7 +180,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
             )}
           </div>
         </div>
-        <ProcessLine data-current={isActive} />
+        <ProcessLine />
       </li>
     );
   },

@@ -57,6 +57,10 @@
   .navds-process__event:not([data-status="active"]) & {
     border-image: none;
   }
+
+  .navds-process__event:last-of-type & {
+    display: none;
+  }
 }
 
 .navds-process__item {
@@ -119,7 +123,7 @@
 .navds-process__title {
   padding-block: 0.16rem var(--a-spacing-1);
 
-  .navds-process__event[data-status="active"] & {
+  .navds-process__event[data-status="active"] &:has(+ .navds-process__active-label) {
     padding-block-end: 0;
   }
 }

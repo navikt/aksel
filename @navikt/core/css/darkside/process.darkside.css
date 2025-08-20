@@ -123,7 +123,7 @@
 .aksel-process__title {
   padding-block: 0.16rem var(--ax-space-4);
 
-  .aksel-process__event[data-status="active"] & {
+  .aksel-process__event[data-status="active"] &:has(+ .aksel-process__active-label) {
     padding-block-end: 0;
   }
 }
