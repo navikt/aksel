@@ -11,6 +11,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Box } from "../layout/box";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
@@ -195,6 +196,11 @@ interface ProcessEventProps extends React.HTMLAttributes<HTMLLIElement> {
    * Icon or number to display inside the bullet.
    */
   bullet?: React.ReactNode;
+  /**
+   * Current event status.
+   * @default "inactive"
+   */
+  status?: "active" | "completed" | "inactive";
 }
 
 export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
@@ -207,6 +213,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
       hideContent,
       className,
       id,
+      status = "inactive",
       ...restProps
     }: ProcessEventProps,
     forwardedRef,
@@ -229,12 +236,24 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
         className={cn("navds-process__event", className)}
         data-dot={bullet === undefined}
         data-process-step=""
+        data-status={status}
       >
         <div className={cn("navds-process__item")}>
           <ProcessBullet data-current={isActive}>{bullet}</ProcessBullet>
 
           <div className={cn("navds-process__body")}>
             {title && <ProcessTitle>{title}</ProcessTitle>}
+            {isActive && (
+              <Box marginBlock="0 space-4">
+                <BodyShort
+                  size="small"
+                  data-color={isActive ? "info" : "neutral"}
+                  textColor="subtle"
+                >
+                  {isActive ? "Aktiv" : (activeStep ?? 0) >= index ? "" : ""}
+                </BodyShort>
+              </Box>
+            )}
             {timestamp && <ProcessTimestamp>{timestamp}</ProcessTimestamp>}
             {!hideContent && !!children && (
               <ProcessContent>{children}</ProcessContent>
@@ -313,13 +332,9 @@ interface ProcessBulletProps {
    * Bullet content.
    */
   children: React.ReactNode;
-  "data-current": boolean;
 }
 
-const ProcessBullet = ({
-  children,
-  "data-current": dataCurret,
-}: ProcessBulletProps) => {
+const ProcessBullet = ({ children }: ProcessBulletProps) => {
   const { cn } = useRenameCSS();
 
   const { active } = useProcessEventContext();
@@ -330,7 +345,6 @@ const ProcessBullet = ({
       weight="semibold"
       className={cn("navds-process__bullet")}
       data-active={active}
-      data-current={dataCurret}
       aria-hidden
     >
       {children}
@@ -339,21 +353,10 @@ const ProcessBullet = ({
 };
 
 /* ------------------------------ Process Line ------------------------------ */
-type ProcessLineProps = {
-  "data-current": boolean;
-};
-
-const ProcessLine = ({ "data-current": dataCurret }: ProcessLineProps) => {
+const ProcessLine = () => {
   const { cn } = useRenameCSS();
-  const { lineActive } = useProcessEventContext();
 
-  return (
-    <span
-      className={cn("navds-process__line")}
-      data-active={lineActive}
-      data-current={dataCurret}
-    />
-  );
+  return <span className={cn("navds-process__line")} />;
 };
 
 /* ---------------------------- Process Checkmark --------------------------- */

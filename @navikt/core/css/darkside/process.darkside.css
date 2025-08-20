@@ -44,13 +44,17 @@
   grid-row: line-2;
   border-color: var(--ax-border-neutral-subtle);
 
-  &[data-active="true"] {
+  .aksel-process__event[data-status="active"] & {
     border-color: var(--ax-border-default);
     border-image: linear-gradient(to bottom, var(--ax-border-default) 70%, var(--ax-border-neutral-subtle) 90%);
     border-image-slice: 1;
   }
 
-  &[data-current="false"] {
+  .aksel-process__event[data-status="completed"] & {
+    border-color: var(--ax-border-default);
+  }
+
+  .aksel-process__event:not([data-status="active"]) & {
     border-image: none;
   }
 }
@@ -92,17 +96,17 @@
     width: min(calc(var(--__axc-process-circle-size) * 0.75), 1.5rem);
   }
 
-  &[data-active="true"] {
+  .aksel-process__event:is([data-status="completed"], [data-status="active"]) & {
     color: var(--ax-text-contrast);
     background: var(--ax-bg-strong);
     border-color: transparent;
   }
 
-  &[data-current="true"] {
-    outline: 5px solid var(--ax-bg-moderateA);
+  .aksel-process__event[data-status="active"] & {
+    outline: 4px solid var(--ax-bg-moderateA);
   }
 
-  &[data-active="false"] {
+  .aksel-process__event[data-status="inactive"] & {
     transition: none;
   }
 }
@@ -122,13 +126,13 @@
     transition: none;
   }
 
-  .aksel-process__bullet[data-active="true"] {
+  .aksel-process__event:is([data-status="completed"], [data-status="active"]) .aksel-process__bullet {
     outline-color: ButtonText;
     background-color: ButtonText;
     color: ButtonFace;
   }
 
-  .aksel-process__line[data-active="true"] {
+  .aksel-process__event:is([data-status="active"]) .aksel-process__line {
     border-image: none;
   }
 }

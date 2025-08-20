@@ -181,13 +181,21 @@ export const IconBullets: StoryFn<Story> = () => {
 
 export const Content: StoryFn<Story> = () => {
   return (
-    <Process activeStep={3}>
-      <Process.Event bullet={<SparklesFillIcon />} title="Start søknad">
+    <Process>
+      <Process.Event
+        status="completed"
+        bullet={<SparklesFillIcon />}
+        title="Start søknad"
+      >
         <ContentOne />
       </Process.Event>
-      <Process.Event bullet={<SparklesFillIcon />} title="Personopplysninger" />
-      <Process.Event title="Substep 1" />
-      <Process.Event title="Substep 2" />
+      <Process.Event
+        status="completed"
+        bullet={<SparklesFillIcon />}
+        title="Personopplysninger"
+      />
+      <Process.Event status="completed" title="Substep 1" />
+      <Process.Event status="active" title="Substep 2" />
       <Process.Event title="Substep 3" />
       <Process.Event bullet={<SparklesFillIcon />} title="Saksopplysninger" />
 
@@ -222,6 +230,16 @@ export const InteractiveDemo: StoryFn<Story> = () => {
     return activeStep > step;
   };
 
+  const getEventState = (step: number) => {
+    if (activeStep === step) {
+      return "active";
+    }
+    if (isDone(step)) {
+      return "completed";
+    }
+    return "inactive";
+  };
+
   return (
     <Process
       style={{ maxWidth: "40rem" }}
@@ -232,6 +250,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
         title="Step one"
         timestamp={getDateAfter(3)}
         hideContent={activeStep > 0}
+        status={getEventState(0)}
       >
         <div>
           <div>
@@ -251,6 +270,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
         bullet={isDone(1) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step two"
         timestamp={getDateAfter(2)}
+        status={getEventState(1)}
       >
         {activeStep === 1 && (
           <div>
@@ -271,11 +291,18 @@ export const InteractiveDemo: StoryFn<Story> = () => {
           </div>
         )}
       </Process.Event>
-      <Process.Event title="Substep 1" />
-      <Process.Event title="Substep 2" />
+      <Process.Event
+        title="Substep 1"
+        status={activeStep > 1 ? "completed" : "inactive"}
+      />
+      <Process.Event
+        title="Substep 2"
+        status={activeStep > 1 ? "completed" : "inactive"}
+      />
       <Process.Event
         bullet={isDone(2) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step three"
+        status={getEventState(2)}
       >
         {activeStep === 2 && (
           <div>
@@ -301,6 +328,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
         bullet={isDone(3) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step four"
         timestamp={getDateAfter(1)}
+        status={getEventState(3)}
       >
         {activeStep === 3 && (
           <div>
@@ -324,6 +352,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
       <Process.Event
         bullet={isDone(4) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step five"
+        status={getEventState(4)}
       >
         {activeStep === 4 && (
           <div>
@@ -347,6 +376,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
       <Process.Event
         bullet={isDone(5) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step six"
+        status={getEventState(5)}
       >
         {activeStep === 5 && (
           <div>
