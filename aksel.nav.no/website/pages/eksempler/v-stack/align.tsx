@@ -39,9 +39,9 @@ const Example = () => {
       <div>
         <VStack gap="space-12" align="baseline">
           <Placeholder text="baseline" />
-          <Placeholder text="text" padding="space-0" />
-          <Placeholder text="text" padding="space-0" />
-          <Placeholder text="text" padding="space-0" />
+          <Placeholder text="text" padding="0" />
+          <Placeholder text="text" padding="0" />
+          <Placeholder text="text" padding="0" />
         </VStack>
       </div>
     </HStack>
