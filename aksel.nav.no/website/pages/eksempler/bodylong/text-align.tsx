@@ -6,15 +6,13 @@ const Example = () => {
     "Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til barnebidrag fra en eller begge foreldre mens du fullfører videregående skole eller tilsvarende.";
 
   return (
-    <VStack gap="5">
+    <VStack gap="space-20">
       <BodyLong align="start">
         <b>Start:</b> {exampleText}
       </BodyLong>
-
       <BodyLong align="center">
         <b>Center:</b> {exampleText}
       </BodyLong>
-
       <BodyLong align="end">
         <b>End:</b> {exampleText}
       </BodyLong>

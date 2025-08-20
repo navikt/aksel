@@ -14,7 +14,7 @@ const Example = () => {
   return (
     <Page footer={<Footer />}>
       <Header />
-      <HStack gap="4">
+      <HStack gap="space-16">
         <Page.Block as="main" width="xl" gutters>
           <Content>
             <Heading level="1" size="large">

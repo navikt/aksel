@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="6">
+    <HStack gap="space-24">
       <Button icon={<PencilIcon aria-hidden />}>Rediger</Button>
       <Button icon={<PencilIcon title="Rediger" />} />
       <Button iconPosition="right" icon={<PencilIcon aria-hidden />}>

@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="16">
+    <HStack gap="space-64">
       <Loader size="3xlarge" title="Venter..." />
       <Loader size="2xlarge" title="Venter..." />
       <Loader size="xlarge" title="Venter..." />

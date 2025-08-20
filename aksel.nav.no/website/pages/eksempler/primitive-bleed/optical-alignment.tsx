@@ -4,26 +4,25 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="6" align="start">
-      <HStack gap="2" align="center">
+    <VStack gap="space-24" align="start">
+      <HStack gap="space-8" align="center">
         Med
         <Box
-          paddingBlock="1"
-          paddingInline="2"
+          paddingBlock="space-4"
+          paddingInline="space-8"
           background="surface-alt-3-subtle"
           borderRadius="full"
         >
-          <Bleed marginBlock="px 0" asChild>
+          <Bleed marginBlock="space-1 space-0" asChild>
             <MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />
           </Bleed>
         </Box>
       </HStack>
-
-      <HStack gap="2" align="center">
+      <HStack gap="space-8" align="center">
         Uten
         <Box
-          paddingBlock="1"
-          paddingInline="2"
+          paddingBlock="space-4"
+          paddingInline="space-8"
           background="surface-alt-3-subtle"
           borderRadius="full"
         >

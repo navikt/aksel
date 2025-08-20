@@ -20,7 +20,7 @@ const Example = () => {
   const rejectedFiles = files.filter((f): f is FileRejected => f.error);
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       <FileUpload.Dropzone
         label="Last opp filer til søknaden"
         description={`Du kan laste opp Word- og PDF-filer. Maks 3 filer. Maks størrelse ${MAX_SIZE_MB} MB.`}
@@ -29,13 +29,12 @@ const Example = () => {
         fileLimit={{ max: MAX_FILES, current: acceptedFiles.length }}
         onSelect={(newFiles) => setFiles([...files, ...newFiles])}
       />
-
       {acceptedFiles.length > 0 && (
-        <VStack gap="2">
+        <VStack gap="space-8">
           <Heading level="3" size="xsmall">
             {`Vedlegg (${acceptedFiles.length})`}
           </Heading>
-          <VStack as="ul" gap="3">
+          <VStack as="ul" gap="space-12">
             {acceptedFiles.map((file, index) => (
               <FileUpload.Item
                 as="li"
@@ -51,11 +50,11 @@ const Example = () => {
         </VStack>
       )}
       {rejectedFiles.length > 0 && (
-        <VStack gap="2">
+        <VStack gap="space-8">
           <Heading level="3" size="xsmall">
             Vedlegg med feil
           </Heading>
-          <VStack as="ul" gap="3">
+          <VStack as="ul" gap="space-12">
             {rejectedFiles.map((rejected, index) => (
               <FileUpload.Item
                 as="li"

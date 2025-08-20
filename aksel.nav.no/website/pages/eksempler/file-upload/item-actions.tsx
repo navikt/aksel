@@ -2,7 +2,7 @@ import { FileUpload, Heading, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => (
-  <VStack gap="6">
+  <VStack gap="space-24">
     <div>
       <Heading size="small">retry</Heading>
       <FileUpload.Item

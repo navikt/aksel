@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DatePicker, useDatepicker } from "@navikt/ds-react";
+import { Box, DatePicker, useDatepicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -13,7 +13,7 @@ const Example = () => {
   });
 
   return (
-    <div className="min-h-96">
+    <Box minHeight="24rem">
       <DatePicker {...datepickerProps}>
         <DatePicker.Input
           {...inputProps}
@@ -21,7 +21,7 @@ const Example = () => {
           error={hasError && "Noe er feil"}
         />
       </DatePicker>
-    </div>
+    </Box>
   );
 };
 

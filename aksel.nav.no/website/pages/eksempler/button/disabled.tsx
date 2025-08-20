@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="2">
+    <HStack gap="space-8">
       <Button disabled variant="primary">
         Primary
       </Button>

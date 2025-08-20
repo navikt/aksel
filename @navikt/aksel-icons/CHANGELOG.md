@@ -1,5 +1,13 @@
 # @navikt/aksel-icons
 
+## 7.28.1
+
+## 7.28.0
+
+### Minor Changes
+
+- Icons: :tada: New icons 'ArrowCirclepathReverse' and 'ArrowsAllDirections'. ([#3979](https://github.com/navikt/aksel/pull/3979))
+
 ## 7.27.1
 
 ## 7.27.0

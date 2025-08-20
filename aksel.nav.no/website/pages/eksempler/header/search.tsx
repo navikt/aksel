@@ -1,12 +1,14 @@
-import { InternalHeader, Search, Spacer } from "@navikt/ds-react";
+import { HStack, InternalHeader, Search, Spacer } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
     <InternalHeader>
       <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
-      <form
-        className="self-center px-5"
+      <HStack
+        as="form"
+        paddingInline="space-20"
+        align="center"
         onSubmit={(e) => {
           e.preventDefault();
           console.info("Search!");
@@ -18,7 +20,7 @@ const Example = () => {
           variant="simple"
           placeholder="Søk"
         />
-      </form>
+      </HStack>
       <Spacer />
       <InternalHeader.User name="Ola Normann" />
     </InternalHeader>
@@ -27,6 +29,11 @@ const Example = () => {
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
 
 export const args = {
   index: 5,

@@ -9,20 +9,20 @@ const Example = () => {
     });
 
   return (
-    <div className="min-h-96">
+    <Box minHeight="24rem">
       <DatePicker {...datepickerProps}>
-        <HStack wrap gap="4" justify="center">
+        <HStack wrap gap="space-16" justify="center">
           <DatePicker.Input {...fromInputProps} label="Fra" />
           <DatePicker.Input {...toInputProps} label="Til" />
         </HStack>
       </DatePicker>
       {selectedRange && (
-        <Box paddingBlock="4 0">
+        <Box paddingBlock="space-16 space-0">
           <div>{selectedRange?.from?.toISOString().split("T")[0]}</div>
           <div>{selectedRange?.to?.toISOString().split("T")[0]}</div>
         </Box>
       )}
-    </div>
+    </Box>
   );
 };
 

@@ -13,13 +13,13 @@ const Example = () => (
       },
     }}
   >
-    <VStack gap="6">
+    <VStack gap="space-24">
       <FileUpload.Dropzone label="Last opp bilder" onSelect={console.info} />
       <div>
         <Heading level="3" size="xsmall" spacing>
           Vedlegg
         </Heading>
-        <VStack as="ul" gap="2">
+        <VStack as="ul" gap="space-8">
           <FileUpload.Item
             as="li"
             file={{ name: "eksempel.png", size: 200000 }}

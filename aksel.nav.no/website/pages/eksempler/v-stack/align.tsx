@@ -3,9 +3,9 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="12">
+    <HStack gap="space-48">
       <div>
-        <VStack gap="3" align="center">
+        <VStack gap="space-12" align="center">
           <Placeholder text="center" />
           <Placeholder />
           <Placeholder />
@@ -13,7 +13,7 @@ const Example = () => {
         </VStack>
       </div>
       <div>
-        <VStack gap="3" align="end">
+        <VStack gap="space-12" align="end">
           <Placeholder text="end" />
           <Placeholder />
           <Placeholder />
@@ -21,7 +21,7 @@ const Example = () => {
         </VStack>
       </div>
       <div>
-        <VStack gap="3" align="start">
+        <VStack gap="space-12" align="start">
           <Placeholder text="start" />
           <Placeholder />
           <Placeholder />
@@ -29,7 +29,7 @@ const Example = () => {
         </VStack>
       </div>
       <div>
-        <VStack gap="3" align="stretch">
+        <VStack gap="space-12" align="stretch">
           <Placeholder text="stretch" />
           <Placeholder />
           <Placeholder />
@@ -37,7 +37,7 @@ const Example = () => {
         </VStack>
       </div>
       <div>
-        <VStack gap="3" align="baseline">
+        <VStack gap="space-12" align="baseline">
           <Placeholder text="baseline" />
           <Placeholder text="text" padding="0" />
           <Placeholder text="text" padding="0" />

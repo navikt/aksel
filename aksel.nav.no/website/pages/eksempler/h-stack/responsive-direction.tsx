@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <Stack
-      gap="4"
+      gap="space-16"
       direction={{ xs: "column", md: "row" }}
       align={{ xs: "center", md: "start" }}
     >

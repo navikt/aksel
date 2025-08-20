@@ -1,6 +1,7 @@
 "use client";
 
 import { getParameters } from "codesandbox-import-utils/lib/api/define";
+import { stegaClean } from "next-sanity";
 import { useId } from "react";
 import {
   ArrowCirclepathIcon,
@@ -68,15 +69,17 @@ function KodeEksemplerToolbar({
           >
             {showCode ? "Skjul" : "Vis"} kode
           </Button>
-          <Button
-            href={`/sandbox/index.html?code=${base64}`}
-            rel="noreferrer"
-            target="_blank"
-            as="a"
-            variant="tertiary-neutral"
-            size="small"
-            icon={<PencilIcon title="Sandbox" />}
-          />
+          {base64 && (
+            <Button
+              href={`/sandbox/index.html?code=${stegaClean(base64)}`}
+              rel="noreferrer"
+              target="_blank"
+              as="a"
+              variant="tertiary-neutral"
+              size="small"
+              icon={<PencilIcon title="Sandbox" />}
+            />
+          )}
           <CodeSandbox code={code} />
           <Button
             variant="tertiary-neutral"

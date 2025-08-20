@@ -3,25 +3,25 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="12">
-      <VStack gap="3">
+    <HStack gap="space-48">
+      <VStack gap="space-12">
         <Heading size="small">Neutral</Heading>
-        <HStack gap="3">
+        <HStack gap="space-12">
           <CopyButton copyText="3.14" />
           <CopyButton copyText="3.14" text="Kopier" />
         </HStack>
-        <HStack gap="8">
+        <HStack gap="space-32">
           <CopyButton copyText="3.14" size="small" />
           <CopyButton copyText="3.14" size="small" text="Kopier" />
         </HStack>
       </VStack>
-      <VStack gap="3">
+      <VStack gap="space-12">
         <Heading size="small">Action</Heading>
-        <HStack gap="3">
+        <HStack gap="space-12">
           <CopyButton copyText="3.14" variant="action" />
           <CopyButton copyText="3.14" variant="action" text="Kopier" />
         </HStack>
-        <HStack gap="8">
+        <HStack gap="space-32">
           <CopyButton copyText="3.14" variant="action" size="small" />
           <CopyButton
             copyText="3.14"

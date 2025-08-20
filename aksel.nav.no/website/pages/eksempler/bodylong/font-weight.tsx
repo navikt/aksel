@@ -6,7 +6,7 @@ const Example = () => {
     "Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til barnebidrag fra en eller begge foreldre mens du fullfører videregående skole eller tilsvarende.";
 
   return (
-    <VStack gap="5">
+    <VStack gap="space-20">
       <BodyLong weight="regular">Regular (default): {exampleText}</BodyLong>
       <BodyLong weight="semibold">Semibold: {exampleText}</BodyLong>
     </VStack>

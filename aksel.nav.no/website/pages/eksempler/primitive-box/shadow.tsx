@@ -3,10 +3,10 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <Box
         background="surface-subtle"
-        padding="4"
+        padding="space-16"
         borderRadius="large"
         shadow="xsmall"
       >
@@ -14,7 +14,7 @@ const Example = () => {
       </Box>
       <Box
         background="surface-subtle"
-        padding="4"
+        padding="space-16"
         borderRadius="large"
         shadow="small"
       >
@@ -22,7 +22,7 @@ const Example = () => {
       </Box>
       <Box
         background="surface-subtle"
-        padding="4"
+        padding="space-16"
         borderRadius="large"
         shadow="medium"
       >
@@ -30,7 +30,7 @@ const Example = () => {
       </Box>
       <Box
         background="surface-subtle"
-        padding="4"
+        padding="space-16"
         borderRadius="large"
         shadow="large"
       >

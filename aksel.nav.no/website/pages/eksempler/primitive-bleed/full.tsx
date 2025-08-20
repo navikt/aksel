@@ -9,15 +9,17 @@ const Example = () => {
         maximus mauris. Sed nec fermentum orci, vel tempus tortor. Praesent
         lectus neque, hendrerit et sollicitudin quis, imperdiet vel est.
       </BodyLong>
-
       <Bleed marginInline="full" asChild>
-        <Box padding="3" marginBlock="0 7" background="surface-alt-3-subtle">
+        <Box
+          padding="space-12"
+          marginBlock="space-0 space-28"
+          background="surface-alt-3-subtle"
+        >
           <HStack justify="center">
             Bleed med marginInline=&quot;full&quot;
           </HStack>
         </Box>
       </Bleed>
-
       <BodyLong>
         Sed euismod mi nec purus euismod scelerisque. Nam tristique tincidunt
         nisi ultricies sollicitudin. Etiam maximus ex sit amet turpis vestibulum
