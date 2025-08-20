@@ -51,7 +51,7 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   children: React.ReactElement<typeof ProcessEvent>[];
   /**
-   * Index of current active step. This step and all steps before it will be highlighted.
+   * Index of current active event. This event and all steps before it will be highlighted.
    */
   activeStep?: number;
 }
@@ -231,7 +231,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
         data-process-step=""
       >
         <div className={cn("navds-process__item")}>
-          <ProcessBullet>{bullet}</ProcessBullet>
+          <ProcessBullet data-current={isActive}>{bullet}</ProcessBullet>
 
           <div className={cn("navds-process__body")}>
             {title && <ProcessTitle>{title}</ProcessTitle>}
@@ -313,9 +313,13 @@ interface ProcessBulletProps {
    * Bullet content.
    */
   children: React.ReactNode;
+  "data-current": boolean;
 }
 
-const ProcessBullet = ({ children }: ProcessBulletProps) => {
+const ProcessBullet = ({
+  children,
+  "data-current": dataCurret,
+}: ProcessBulletProps) => {
   const { cn } = useRenameCSS();
 
   const { active } = useProcessEventContext();
@@ -326,6 +330,7 @@ const ProcessBullet = ({ children }: ProcessBulletProps) => {
       weight="semibold"
       className={cn("navds-process__bullet")}
       data-active={active}
+      data-current={dataCurret}
       aria-hidden
     >
       {children}
@@ -334,12 +339,20 @@ const ProcessBullet = ({ children }: ProcessBulletProps) => {
 };
 
 /* ------------------------------ Process Line ------------------------------ */
-const ProcessLine = () => {
+type ProcessLineProps = {
+  "data-current": boolean;
+};
+
+const ProcessLine = ({ "data-current": dataCurret }: ProcessLineProps) => {
   const { cn } = useRenameCSS();
   const { lineActive } = useProcessEventContext();
 
   return (
-    <span className={cn("navds-process__line")} data-active={lineActive} />
+    <span
+      className={cn("navds-process__line")}
+      data-active={lineActive}
+      data-current={dataCurret}
+    />
   );
 };
 

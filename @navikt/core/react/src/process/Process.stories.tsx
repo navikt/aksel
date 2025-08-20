@@ -231,7 +231,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
         bullet={isDone(0) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step one"
         timestamp={getDateAfter(3)}
-        hideContent={activeStep === 0}
+        hideContent={activeStep > 0}
       >
         <div>
           <div>
