@@ -14,13 +14,15 @@ const Example = () => {
       <Heading size="medium" level="2" id="Process-heading" visuallyHidden>
         Søknadssteg med tilhørende tittel
       </Heading>
-      <Process aria-labelledby="Process-heading" activeStep={4}>
+      <Process aria-labelledby="Process-heading">
         <Process.Event
+          status="completed"
           title="Barnet ble født"
           timestamp="04. august 2025"
           bullet={<BabyWrappedIcon />}
         />
         <Process.Event
+          status="completed"
           title="Du søkte om FORELDREPENGER"
           timestamp="22. august 2025"
           bullet={<TasklistSendIcon />}
@@ -31,6 +33,7 @@ const Example = () => {
           </Link>
         </Process.Event>
         <Process.Event
+          status="completed"
           title="Søknaden din ble innvilget"
           timestamp="25. august 2025"
           bullet={<ThumbUpIcon />}
@@ -41,6 +44,7 @@ const Example = () => {
           </Link>
         </Process.Event>
         <Process.Event
+          status="completed"
           title="Du har fått et svar på søknaden din"
           timestamp="8. september 2025"
         >
@@ -50,6 +54,7 @@ const Example = () => {
           </Link>
         </Process.Event>
         <Process.Event
+          status="active"
           title="Nav har etterspurt opplysninger"
           timestamp="8. september 2025"
         />

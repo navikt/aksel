@@ -12,6 +12,18 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   const [activeStep, setActiveStep] = React.useState(0);
 
+  const getEventStatus = (step: number) => {
+    if (step < activeStep) {
+      return "completed";
+    }
+
+    if (step === activeStep) {
+      return "active";
+    }
+
+    return "inactive";
+  };
+
   return (
     <>
       <HStack gap="space-8" justify="center" marginBlock="0 space-32">
@@ -34,17 +46,19 @@ const Example = () => {
           Neste steg
         </Button>
       </HStack>
-      <Process activeStep={activeStep}>
+      <Process>
         <Process.Event
           title="Barnet ble født"
           timestamp="04. august 2025"
           bullet={<BabyWrappedIcon />}
+          status={getEventStatus(0)}
         />
         <Process.Event
           title="Du søkte om FORELDREPENGER"
           timestamp="22. august 2025"
           bullet={<TasklistSendIcon />}
           hideContent={activeStep > 3}
+          status={getEventStatus(1)}
         >
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
           excepturi velit magni explicabo blanditiis dicta reiciendis commodi
@@ -54,15 +68,18 @@ const Example = () => {
         <Process.Event
           title="Du la til 2 vedlegg"
           timestamp="23. august 2025 KL 09.05"
+          status={getEventStatus(2)}
         />
         <Process.Event
           title="Du la til 4 vedlegg"
           timestamp="23. august 2025 KL 11.30"
+          status={getEventStatus(3)}
         />
         <Process.Event
           title="Du har fått et svar på søknaden din"
           timestamp="25. august 2025"
           bullet={<EnvelopeOpenIcon />}
+          status={getEventStatus(4)}
         >
           Rem quisquam delectus beatae perferendis deleniti officiis eveniet
           dolorem!
@@ -70,6 +87,7 @@ const Example = () => {
         <Process.Event
           title="Nav har etterspurt opplysninger"
           timestamp="8. september 2025"
+          status={getEventStatus(5)}
         >
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
           excepturi velit magni explicabo blanditiis dicta reiciendis commodi
