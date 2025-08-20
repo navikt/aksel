@@ -1,7 +1,6 @@
 import type { Preview } from "@storybook/react";
-import "@navikt/ds-css";
-import "@navikt/ds-css/darkside";
-import { Theme } from "@navikt/ds-react";
+import { Box, Theme } from "@navikt/ds-react";
+import "./aksel-storybook.css";
 
 export const globalTypes = {
   theme: {
@@ -48,8 +47,10 @@ const withDarkside = (Story, context) => {
 
   if (isDarkside) {
     return (
-      <Theme>
-        <Story />
+      <Theme hasBackground>
+        <Box padding="space-16">
+          <Story />
+        </Box>
       </Theme>
     );
   }
@@ -99,7 +100,7 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [withTheme, withDarkside],
+  decorators: [withDarkside, withTheme],
 };
 
 export default preview;

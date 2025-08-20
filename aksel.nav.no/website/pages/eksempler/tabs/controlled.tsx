@@ -31,17 +31,17 @@ const Example = () => {
       </Tabs.List>
       <Tabs.Panel value="logg">
         <Box width="100%" height="6rem" padding="space-16">
-          Logg-tag
+          Logg-tab
         </Box>
       </Tabs.Panel>
       <Tabs.Panel value="inbox">
         <Box width="100%" height="6rem" padding="space-16">
-          Inbox-tag
+          Inbox-tab
         </Box>
       </Tabs.Panel>
       <Tabs.Panel value="sendt">
         <Box width="100%" height="6rem" padding="space-16">
-          Sendt-tag
+          Sendt-tab
         </Box>
       </Tabs.Panel>
     </Tabs>
