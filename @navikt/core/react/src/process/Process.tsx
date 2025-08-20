@@ -173,14 +173,14 @@ export const Process: ProcessComponent = forwardRef<
   },
 ) as ProcessComponent;
 
-/* ------------------------------ Process Step ------------------------------ */
+/* ------------------------------ Process Event ------------------------------ */
 interface ProcessEventProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
    * Rich content to display under the title and timestamp if provided.
    */
   children?: React.ReactNode;
   /**
-   * Hide the content section of the step.
+   * Hide the content section of the event.
    */
   hideContent?: boolean;
   /**
@@ -212,7 +212,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
-    const stepId = useId();
+    const eventId = useId();
 
     const { activeStep, lastIndex, rootId } = useProcessContext();
     const { index } = useProcessEventContext();
@@ -224,9 +224,9 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
         ref={forwardedRef}
         aria-current={isActive}
         aria-controls={isActive ? rootId : undefined}
-        id={id ?? stepId}
+        id={id ?? eventId}
         {...restProps}
-        className={cn("navds-process__step", className)}
+        className={cn("navds-process__event", className)}
         data-dot={bullet === undefined}
         data-process-step=""
       >

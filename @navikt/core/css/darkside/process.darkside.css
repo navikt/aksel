@@ -10,7 +10,7 @@
   margin: 0;
 }
 
-.aksel-process__step {
+.aksel-process__event {
   display: grid;
   grid-template-rows:
     [line-1] auto [step-start] var(--__axc-process-circle-size)
@@ -46,7 +46,7 @@
 
   &[data-active="true"] {
     border-color: var(--ax-border-default);
-    border-image: linear-gradient(to bottom, var(--ax-border-default) 25%, var(--ax-border-neutral-subtle) 90%);
+    border-image: linear-gradient(to bottom, var(--ax-border-default) 70%, var(--ax-border-neutral-subtle) 90%);
     border-image-slice: 1;
   }
 
@@ -66,7 +66,7 @@
   margin: calc(var(--__axc-process-border-width) * -1) calc(var(--__axc-process-border-width) * -1) var(--ax-space-16);
   width: 100%;
 
-  .aksel-process__step:last-child & {
+  .aksel-process__event:last-child & {
     margin-bottom: 0;
   }
 }
