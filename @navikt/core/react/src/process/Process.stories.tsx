@@ -4,6 +4,8 @@ import React from "react";
 import { SparklesFillIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { HStack, VStack } from "../layout/stack";
+import { Provider } from "../provider";
+import { en } from "../util/i18n/locales";
 import { Process } from "./Process";
 
 const meta: Meta<typeof Process> = {
@@ -144,6 +146,44 @@ export const HideStatusLabel: StoryFn<Story> = () => {
       <Process.Event title="Vedlegg" />
       <Process.Event title="Oppsummering" />
     </Process>
+  );
+};
+
+export const Translation: StoryFn<Story> = () => {
+  return (
+    <div>
+      <div>
+        <h3>Nb</h3>
+        <Process>
+          <Process.Event status="completed" title="Start søknad" />
+          <Process.Event status="active" title="Saksopplysninger" />
+          <Process.Event title="Vedlegg" />
+        </Process>
+      </div>
+      <div>
+        <h3>En</h3>
+        <Provider locale={en}>
+          <Process>
+            <Process.Event status="completed" title="Start søknad" />
+            <Process.Event status="active" title="Saksopplysninger" />
+            <Process.Event title="Vedlegg" />
+          </Process>
+        </Provider>
+      </div>
+      <div>
+        <h3>Custom</h3>
+        <Provider
+          locale={en}
+          translations={{ Process: { statusLabel: "Under arbeid" } }}
+        >
+          <Process>
+            <Process.Event status="completed" title="Start søknad" />
+            <Process.Event status="active" title="Saksopplysninger" />
+            <Process.Event title="Vedlegg" />
+          </Process>
+        </Provider>
+      </div>
+    </div>
   );
 };
 
@@ -342,6 +382,18 @@ export const Chromatic: Story = {
       <div>
         <h2>Content</h2>
         <Content />
+      </div>
+      <div>
+        <h2>SimpleBullets</h2>
+        <SimpleBullets />
+      </div>
+      <div>
+        <h2>HideStatusLabel</h2>
+        <HideStatusLabel />
+      </div>
+      <div>
+        <h2>Translation</h2>
+        <Translation />
       </div>
       <div>
         <h2>Interactive Demo</h2>
