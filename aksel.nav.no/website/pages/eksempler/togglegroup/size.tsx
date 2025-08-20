@@ -3,12 +3,12 @@ import {
   EnvelopeOpenIcon,
   PaperplaneIcon,
 } from "@navikt/aksel-icons";
-import { ToggleGroup } from "@navikt/ds-react";
+import { ToggleGroup, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
+    <VStack gap="space-24">
       <ToggleGroup defaultValue="lest" onChange={console.info}>
         <ToggleGroup.Item
           value="ulest"
@@ -26,11 +26,8 @@ const Example = () => {
           label="Sendt"
         />
       </ToggleGroup>
-      <ToggleGroup
-        defaultValue="lest"
-        onChange={console.info}
-        variant="neutral"
-      >
+
+      <ToggleGroup defaultValue="lest" onChange={console.info} size="small">
         <ToggleGroup.Item
           value="ulest"
           icon={<EnvelopeClosedIcon aria-hidden />}
@@ -47,7 +44,7 @@ const Example = () => {
           label="Sendt"
         />
       </ToggleGroup>
-    </div>
+    </VStack>
   );
 };
 

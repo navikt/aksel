@@ -37,6 +37,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "default" | "neutral";
   /**
    * @default "small"
+   * @deprecated `size`-prop will be the only prop to control the size of the accordion.
    */
   headingSize?: "large" | "medium" | "small" | "xsmall";
   /**
