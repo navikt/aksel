@@ -3,9 +3,8 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Box id="toppen" paddingBlock="4">
+    <Box id="toppen" paddingBlock="space-16">
       <Link href="#anker">Hopp til anker</Link>
-
       <BodyLong id="anker" style={{ margin: "1600px 0" }}>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus quae
         iure nihil. Voluptatem enim ratione sit consequuntur ab quibusdam rem

@@ -5,7 +5,7 @@ const Example = () => {
   const exampleText = "Du må gjøre en filtrering for å se brukere i listen.";
 
   return (
-    <VStack gap="5">
+    <VStack gap="space-20">
       <Detail align="start">Start: {exampleText}</Detail>
       <Detail align="center">Center: {exampleText}</Detail>
       <Detail align="end">End: {exampleText}</Detail>

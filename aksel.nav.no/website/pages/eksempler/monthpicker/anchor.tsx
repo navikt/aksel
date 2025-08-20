@@ -7,7 +7,7 @@ const Example = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <VStack gap="4" minHeight="16rem">
+    <VStack gap="space-16" minHeight="16rem">
       <MonthPicker
         onMonthSelect={setMonth}
         onClose={() => setOpen(false)}
@@ -15,7 +15,6 @@ const Example = () => {
       >
         <Button onClick={() => setOpen((x) => !x)}>Velg måned</Button>
       </MonthPicker>
-
       {month && (
         <div>
           {month.toLocaleDateString(undefined, {

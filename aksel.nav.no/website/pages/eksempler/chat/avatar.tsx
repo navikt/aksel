@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="10">
+    <VStack gap="space-40">
       <Chat
         avatar={<PersonHeadsetIcon />}
         name="EVA"

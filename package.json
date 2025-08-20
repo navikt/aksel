@@ -8,7 +8,7 @@
     "boot": "yarn workspaces foreach -vv -pA --topological-dev --no-private run build",
     "clean": "node scripts/clean.mjs",
     "storybook": "storybook dev -p 6006",
-    "storybook:aksel": "yarn concurrently \"yarn watch:tw\" \"yarn storybook dev -c aksel.nav.no/website/.storybook -p 6007\"",
+    "storybook:aksel": "yarn storybook dev -c aksel.nav.no/website/.storybook -p 6007",
     "dev": "yarn workspace aksel.nav.no dev",
     "docgen": "yarn workspaces foreach -vv -pA run docgen",
     "changelog": "deno run --allow-read --allow-write --no-config scripts/changelog/createMainChangelog.ts",

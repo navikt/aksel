@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="2" style={{ maxHeight: "80vh" }}>
+    <VStack gap="space-8" style={{ maxHeight: "80vh" }}>
       <Textarea label="Din melding" maxLength={300} UNSAFE_autoScrollbar />
       <div>
         <Button>Send</Button>

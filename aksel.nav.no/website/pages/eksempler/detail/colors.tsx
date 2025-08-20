@@ -5,7 +5,7 @@ const Example = () => {
   const exampleText = "Du må gjøre en filtrering for å se brukere i listen.";
 
   return (
-    <VStack gap="5">
+    <VStack gap="space-20">
       <Detail textColor="default">Default: {exampleText}</Detail>
       <Detail textColor="subtle">Subtle: {exampleText}</Detail>
     </VStack>

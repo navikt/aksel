@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <Box background="surface-alt-3-subtle">
       <HGrid
-        gap="6"
+        gap="space-24"
         columns={{ xs: "repeat(auto-fit, minmax(10rem, 1fr))", md: 4 }}
       >
         <Placeholder />

@@ -3,19 +3,22 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
-      <Box background="surface-neutral" paddingInline="4">
-        <Box background="surface-alt-3-subtle" padding="2">
+    <VStack gap="space-16">
+      <Box background="surface-neutral" paddingInline="space-16">
+        <Box background="surface-alt-3-subtle" padding="space-8">
           Padding inline
         </Box>
       </Box>
-      <Box background="surface-neutral" paddingInline="4 16">
-        <Box background="surface-alt-3-subtle" padding="2">
+      <Box background="surface-neutral" paddingInline="space-16 space-64">
+        <Box background="surface-alt-3-subtle" padding="space-8">
           Forskjellig inlineStart og inlineEnd
         </Box>
       </Box>
-      <Box background="surface-neutral" paddingInline={{ xs: "4", md: "6 16" }}>
-        <Box background="surface-alt-3-subtle" padding="2">
+      <Box
+        background="surface-neutral"
+        paddingInline={{ xs: "space-16", md: "space-24 space-64" }}
+      >
+        <Box background="surface-alt-3-subtle" padding="space-8">
           Dynamisk paddingInline
         </Box>
       </Box>

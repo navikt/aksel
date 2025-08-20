@@ -3,13 +3,13 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="6" align="center">
-      <HStack gap="2">
+    <VStack gap="space-24" align="center">
+      <HStack gap="space-8">
         <Button variant="primary">Primary</Button>
         <Button variant="secondary">Secondary</Button>
         <Button variant="tertiary">Tertiary</Button>
       </HStack>
-      <HStack gap="2">
+      <HStack gap="space-8">
         <Button variant="primary" size="small">
           Primary
         </Button>
@@ -20,7 +20,7 @@ const Example = () => {
           Tertiary
         </Button>
       </HStack>
-      <HStack gap="2">
+      <HStack gap="space-8">
         <Button variant="primary" size="xsmall">
           Primary
         </Button>
