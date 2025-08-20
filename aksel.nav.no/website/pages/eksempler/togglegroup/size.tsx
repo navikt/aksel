@@ -12,33 +12,36 @@ const Example = () => {
       <ToggleGroup defaultValue="lest" onChange={console.info}>
         <ToggleGroup.Item
           value="ulest"
-          icon={<EnvelopeClosedIcon title="Ulest" />}
+          icon={<EnvelopeClosedIcon aria-hidden />}
+          label="Ulest"
         />
         <ToggleGroup.Item
           value="lest"
-          icon={<EnvelopeOpenIcon title="Lest" />}
+          icon={<EnvelopeOpenIcon aria-hidden />}
+          label="Lest"
         />
         <ToggleGroup.Item
           value="sendt"
-          icon={<PaperplaneIcon title="Sendt" />}
+          icon={<PaperplaneIcon aria-hidden />}
+          label="Sendt"
         />
       </ToggleGroup>
-      <ToggleGroup
-        defaultValue="lest"
-        onChange={console.info}
-        variant="neutral"
-      >
+
+      <ToggleGroup defaultValue="lest" onChange={console.info} size="small">
         <ToggleGroup.Item
           value="ulest"
-          icon={<EnvelopeClosedIcon title="Ulest" />}
+          icon={<EnvelopeClosedIcon aria-hidden />}
+          label="Ulest"
         />
         <ToggleGroup.Item
           value="lest"
-          icon={<EnvelopeOpenIcon title="Lest" />}
+          icon={<EnvelopeOpenIcon aria-hidden />}
+          label="Lest"
         />
         <ToggleGroup.Item
           value="sendt"
-          icon={<PaperplaneIcon title="Sendt" />}
+          icon={<PaperplaneIcon aria-hidden />}
+          label="Sendt"
         />
       </ToggleGroup>
     </VStack>
@@ -54,5 +57,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 0,
 };

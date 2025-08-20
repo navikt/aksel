@@ -26,6 +26,7 @@ const Example = () => {
           label="Sendt"
         />
       </ToggleGroup>
+
       <ToggleGroup
         defaultValue="lest"
         onChange={console.info}
@@ -60,5 +61,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 1,
+  desc: "Neutral brukes til handlinger som man ønsker å tone ned.",
 };

@@ -55,5 +55,4 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Small brukes på interne flater der det er behov for et mer komprimert grensesnitt.",
 };

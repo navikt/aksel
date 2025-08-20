@@ -72,6 +72,7 @@
     "sanity": "3.88.3",
     "sanity-plugin-iframe-pane": "^3.2.1",
     "sanity-plugin-media": "^3.0.2",
+    "semver": "^7.7.2",
     "server-only": "^0.0.1",
     "sharp": "0.33.5",
     "styled-components": "^6.0.0",
