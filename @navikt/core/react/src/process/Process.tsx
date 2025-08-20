@@ -9,6 +9,7 @@ import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
 import { useMergeRefs } from "../util/hooks";
+import { useI18n } from "../util/i18n/i18n.hooks";
 
 interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
@@ -145,6 +146,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
     }: ProcessEventProps,
     forwardedRef,
   ) => {
+    const translate = useI18n("Process");
     const { cn } = useRenameCSS();
     const eventId = useId();
 
@@ -171,7 +173,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
                 size="small"
                 className={cn("navds-process__active-label")}
               >
-                Aktiv
+                {translate("activeLabel")}
               </BodyShort>
             )}
             {timestamp && <ProcessTimestamp>{timestamp}</ProcessTimestamp>}

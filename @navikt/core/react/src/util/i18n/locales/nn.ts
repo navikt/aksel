@@ -93,6 +93,9 @@ export default {
     previous: "Førre",
     next: "Neste",
   },
+  Process: {
+    activeLabel: "Aktiv",
+  },
   ProgressBar: {
     progress: "{current} av {max}",
     progressUnknown:

@@ -93,6 +93,9 @@ export default {
     previous: "Previous",
     next: "Next",
   },
+  Process: {
+    activeLabel: "Active",
+  },
   ProgressBar: {
     progress: "{current} of {max}",
     progressUnknown:
