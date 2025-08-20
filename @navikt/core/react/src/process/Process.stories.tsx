@@ -1,7 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { format } from "date-fns";
 import React from "react";
-import { GavelSoundBlockIcon, SparklesFillIcon } from "@navikt/aksel-icons";
+import { SparklesFillIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { HStack, VStack } from "../layout/stack";
 import { Process } from "./Process";
@@ -24,131 +24,23 @@ const getDateAfter = (days) => {
   return format(new Date(date.setDate(date.getDate() + days)), "d. MMMM yyy");
 };
 
-export const Default = ({
-  activeStep,
-  step4Title,
-  step4Date,
-  step4ShowSlot,
-  step4Icon,
-  step4HideContent,
-  ...props
-}) => {
-  return (
-    <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
-      <Process activeStep={activeStep} {...props}>
-        <Process.Event title="Start søknad" timestamp={getDateAfter(0)} />
-        <Process.Event title="Personopplysninger" timestamp={getDateAfter(3)}>
-          Send inn personopplysninger
-        </Process.Event>
-        <Process.Event title="Saksopplysninger" timestamp={getDateAfter(6)}>
-          Send inn saksopplysninger
-        </Process.Event>
-        <Process.Event
-          title={step4Title}
-          timestamp={step4Date}
-          bullet={
-            step4Icon === "<Icon/>" ? (
-              <GavelSoundBlockIcon />
-            ) : step4Icon === "<empty string>" ? (
-              ""
-            ) : (
-              step4Icon
-            )
-          }
-          hideContent={step4HideContent}
-        >
-          {step4ShowSlot && (
-            <>
-              <hr />
-              <h2>Heading 2</h2>
-              <p>
-                Paragraph. Take five, punch the tree, and come back in here with
-                a clear head those options are already baked in with this model
-                ultimate measure of success and we need to crystallize a plan
-                yet open door policy who is responsible for the ask for this
-                request? what do you feel you would bring to the table if you
-                were hired for this position. Wiggle room guerrilla marketing
-                shelfware. Code feature creep can we parallel path lose client
-                to 10:00 meeting hire the best manage expectations
-                root-and-branch review.
-              </p>
-              <button>Click here!</button>
-              <h4>Table</h4>
-              <table>
-                <tr>
-                  <td>A1</td>
-                  <td>B1</td>
-                </tr>
-                <tr>
-                  <td>A2</td>
-                  <td>B2</td>
-                </tr>
-              </table>
-              <hr />
-            </>
-          )}
-        </Process.Event>
-        <Process.Event title="Vedlegg" timestamp={getDateAfter(12)}>
-          Send inn vedlegg
-        </Process.Event>
-        <Process.Event title="Oppsummering" timestamp={getDateAfter(15)}>
-          Les oppsummering
-        </Process.Event>
-        <Process.Event title="Innsending" timestamp={getDateAfter(18)}>
-          Send inn søknaden
-        </Process.Event>
-      </Process>
-    </div>
-  );
-};
-Default.argTypes = {
-  activeStep: {
-    name: "'activeStep'-prop",
-    control: "inline-radio",
-    options: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-  },
-  step4Title: { name: "Step 4: 'title'-prop" },
-  step4Date: { name: "Step 4: 'date'-prop" },
-  step4ShowSlot: { name: "Step 4: Add dummy slot" },
-  step4Icon: {
-    name: "Step 4: 'icon'-prop",
-    control: "inline-radio",
-    options: ["<Icon/>", "<empty string>", undefined],
-  },
-
-  step4HideContent: {
-    name: "Step 4: 'hideContent'-prop",
-    control: "inline-radio",
-    options: [true, false, undefined],
-  },
-};
-Default.args = {
-  activeStep: 3,
-  step4Title:
-    "Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og forklares i sitt fulle i denne labelen",
-  step4Date: getDateAfter(9),
-  step4ShowSlot: true,
-  step4Icon: "<Icon/>",
-  step4HideContent: undefined,
-  endless: false,
-};
-
 export const NumberedBullets: StoryFn<Story> = () => {
   return (
-    <Process activeStep={3}>
-      <Process.Event bullet={0} title="Start søknad" />
-      <Process.Event bullet={1} title="Personopplysninger" />
-      <Process.Event title="Substep 1" />
-      <Process.Event title="Substep 2" />
-      <Process.Event title="Substep 3" />
-      <Process.Event bullet={2} title="Saksopplysninger" />
+    <Process>
+      <Process.Event status="completed" bullet={0} title="Start søknad" />
+      <Process.Event status="completed" bullet={1} title="Personopplysninger" />
+      <Process.Event status="completed" title="Substep 1" />
+      <Process.Event status="completed" title="Substep 2" />
+      <Process.Event status="completed" title="Substep 3" />
+      <Process.Event status="completed" bullet={2} title="Saksopplysninger" />
 
       <Process.Event
         bullet={3}
         title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+        status="completed"
       />
-      <Process.Event title="Substep 1" />
-      <Process.Event title="Substep 2" />
+      <Process.Event status="completed" title="Substep 1" />
+      <Process.Event status="active" title="Substep 2" />
       <Process.Event title="Substep 3" />
       <Process.Event bullet={4} title="Vedlegg" />
       <Process.Event bullet={5} title="Oppsummering" />
@@ -158,20 +50,33 @@ export const NumberedBullets: StoryFn<Story> = () => {
 
 export const IconBullets: StoryFn<Story> = () => {
   return (
-    <Process activeStep={3}>
-      <Process.Event bullet={<SparklesFillIcon />} title="Start søknad" />
-      <Process.Event bullet={<SparklesFillIcon />} title="Personopplysninger" />
-      <Process.Event title="Substep 1" />
-      <Process.Event title="Substep 2" />
-      <Process.Event title="Substep 3" />
-      <Process.Event bullet={<SparklesFillIcon />} title="Saksopplysninger" />
+    <Process>
+      <Process.Event
+        status="completed"
+        bullet={<SparklesFillIcon />}
+        title="Start søknad"
+      />
+      <Process.Event
+        status="completed"
+        bullet={<SparklesFillIcon />}
+        title="Personopplysninger"
+      />
+      <Process.Event status="completed" title="Substep 1" />
+      <Process.Event status="completed" title="Substep 2" />
+      <Process.Event status="completed" title="Substep 3" />
+      <Process.Event
+        status="completed"
+        bullet={<SparklesFillIcon />}
+        title="Saksopplysninger"
+      />
 
       <Process.Event
         bullet={<SparklesFillIcon />}
         title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst"
+        status="completed"
       />
-      <Process.Event title="Substep 1" />
-      <Process.Event title="Substep 2" />
+      <Process.Event status="completed" title="Substep 1" />
+      <Process.Event status="active" title="Substep 2" />
       <Process.Event title="Substep 3" />
       <Process.Event bullet={<SparklesFillIcon />} title="Vedlegg" />
       <Process.Event bullet={<SparklesFillIcon />} title="Oppsummering" />
@@ -215,7 +120,7 @@ export const Content: StoryFn<Story> = () => {
 };
 
 export const InteractiveDemo: StoryFn<Story> = () => {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(1);
 
   const handleStepClick = (direction: 1 | -1) => {
     setActiveStep((prevStep) => {
@@ -241,10 +146,7 @@ export const InteractiveDemo: StoryFn<Story> = () => {
   };
 
   return (
-    <Process
-      style={{ maxWidth: "40rem" }}
-      activeStep={activeStep > 1 ? activeStep + 2 : activeStep}
-    >
+    <Process style={{ maxWidth: "40rem" }}>
       <Process.Event
         bullet={isDone(0) ? <Process.Checkmark /> : <SparklesFillIcon />}
         title="Step one"
@@ -399,7 +301,26 @@ export const InteractiveDemo: StoryFn<Story> = () => {
 };
 
 export const Chromatic: Story = {
-  render: () => <VStack gap="4">TEMP</VStack>,
+  render: () => (
+    <VStack gap="4">
+      <div>
+        <h2>Numbered Bullets</h2>
+        <NumberedBullets />
+      </div>
+      <div>
+        <h2>Icon Bullets</h2>
+        <IconBullets />
+      </div>
+      <div>
+        <h2>Content</h2>
+        <Content />
+      </div>
+      <div>
+        <h2>Interactive Demo</h2>
+        <InteractiveDemo />
+      </div>
+    </VStack>
+  ),
   parameters: {
     chromatic: { disable: false },
   },

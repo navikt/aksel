@@ -4,57 +4,18 @@
  * `<ol />` elements with `list-style: none;` tends to be ignored by voiceover on Safari.
  * To resolve this, we add `role="list"` to the `<ol />` element.
  */
-import React, {
-  SVGProps,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { SVGProps, forwardRef, useRef } from "react";
 import { Box } from "../layout/box";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
-import { createContext } from "../util/create-context";
 import { useMergeRefs } from "../util/hooks";
-
-interface ProcessContextValue {
-  lastIndex: number;
-  activeStep?: number;
-  rootId: string;
-}
-
-interface ProcessEventContextValue {
-  index: number;
-  active: boolean;
-  lineActive: boolean;
-}
-
-const [ProcessContextProvider, useProcessContext] =
-  createContext<ProcessContextValue>({
-    hookName: "useProcessContext",
-    providerName: "ProcessContextProvider",
-    name: "ProcessContext",
-    errorMessage: "<Process.Event> has to be used within <Process>",
-  });
-
-const [ProcessEventContextProvider, useProcessEventContext] =
-  createContext<ProcessEventContextValue>({
-    hookName: "useProcessEventContext",
-    providerName: "ProcessEventContextProvider",
-    name: "ProcessEventContext",
-    errorMessage: "<Process.Event> has to be used within <Process>",
-  });
 
 interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * `<Process.Event />` elements.
    */
   children: React.ReactElement<typeof ProcessEvent>[];
-  /**
-   * Index of current active event. This event and all steps before it will be highlighted.
-   */
-  activeStep?: number;
 }
 
 interface ProcessComponent
@@ -116,63 +77,24 @@ interface ProcessComponent
 export const Process: ProcessComponent = forwardRef<
   HTMLOListElement,
   ProcessProps
->(
-  (
-    { children, className, activeStep = -1, id, ...restProps }: ProcessProps,
-    forwardedRef,
-  ) => {
-    const { cn } = useRenameCSS();
+>(({ children, className, ...restProps }: ProcessProps, forwardedRef) => {
+  const { cn } = useRenameCSS();
 
-    const rootRef = useRef<HTMLOListElement>(null);
-    const mergedRef = useMergeRefs(forwardedRef, rootRef);
+  const rootRef = useRef<HTMLOListElement>(null);
+  const mergedRef = useMergeRefs(forwardedRef, rootRef);
 
-    const childrenCount = React.Children.count(children);
-    const rootId = useId();
-
-    const [childId, setChildId] = useState<string | undefined>();
-
-    useEffect(() => {
-      const root = rootRef.current;
-      if (!root || activeStep < 0) {
-        return;
-      }
-      const currentActiveStep = root.querySelector(
-        '[data-process-step][aria-current="true"]',
-      );
-      setChildId(currentActiveStep?.id);
-    }, [activeStep]);
-
-    return (
-      <ProcessContextProvider
-        activeStep={activeStep}
-        lastIndex={childrenCount - 1}
-        rootId={id ?? rootId}
-      >
-        <ol
-          ref={mergedRef}
-          data-color="info"
-          id={id ?? rootId}
-          role="list"
-          {...restProps}
-          className={cn("navds-process", className)}
-          aria-controls={childId}
-        >
-          {React.Children.map(children, (step, index) => {
-            return (
-              <ProcessEventContextProvider
-                index={index}
-                active={activeStep >= index}
-                lineActive={activeStep >= index}
-              >
-                {step}
-              </ProcessEventContextProvider>
-            );
-          })}
-        </ol>
-      </ProcessContextProvider>
-    );
-  },
-) as ProcessComponent;
+  return (
+    <ol
+      ref={mergedRef}
+      data-color="info"
+      role="list"
+      {...restProps}
+      className={cn("navds-process", className)}
+    >
+      {children}
+    </ol>
+  );
+}) as ProcessComponent;
 
 /* ------------------------------ Process Event ------------------------------ */
 interface ProcessEventProps extends React.HTMLAttributes<HTMLLIElement> {
@@ -221,16 +143,12 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
     const { cn } = useRenameCSS();
     const eventId = useId();
 
-    const { activeStep, lastIndex, rootId } = useProcessContext();
-    const { index } = useProcessEventContext();
-
-    const isActive = index === activeStep;
+    const isActive = status === "active";
 
     return (
       <li
         ref={forwardedRef}
         aria-current={isActive}
-        aria-controls={isActive ? rootId : undefined}
         id={id ?? eventId}
         {...restProps}
         className={cn("navds-process__event", className)}
@@ -250,7 +168,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
                   data-color={isActive ? "info" : "neutral"}
                   textColor="subtle"
                 >
-                  {isActive ? "Aktiv" : (activeStep ?? 0) >= index ? "" : ""}
+                  Aktiv
                 </BodyShort>
               </Box>
             )}
@@ -260,7 +178,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
             )}
           </div>
         </div>
-        {lastIndex > index && <ProcessLine data-current={isActive} />}
+        <ProcessLine data-current={isActive} />
       </li>
     );
   },
@@ -337,14 +255,11 @@ interface ProcessBulletProps {
 const ProcessBullet = ({ children }: ProcessBulletProps) => {
   const { cn } = useRenameCSS();
 
-  const { active } = useProcessEventContext();
-
   return (
     <BodyShort
       as="span"
       weight="semibold"
       className={cn("navds-process__bullet")}
-      data-active={active}
       aria-hidden
     >
       {children}
@@ -393,4 +308,4 @@ export const ProcessCheckmark = forwardRef<
 Process.Event = ProcessEvent;
 Process.Checkmark = ProcessCheckmark;
 
-export type { ProcessCheckmarkProps, ProcessProps, ProcessEventProps };
+export type { ProcessCheckmarkProps, ProcessEventProps, ProcessProps };

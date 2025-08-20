@@ -57,6 +57,10 @@
   .aksel-process__event:not([data-status="active"]) & {
     border-image: none;
   }
+
+  .aksel-process__event:last-of-type & {
+    display: none;
+  }
 }
 
 .aksel-process__item {
