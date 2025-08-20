@@ -119,6 +119,34 @@ export const Content: StoryFn<Story> = () => {
   );
 };
 
+export const SimpleBullets: StoryFn<Story> = () => {
+  return (
+    <Process>
+      <Process.Event status="completed" title="Start søknad" />
+      <Process.Event status="completed" title="Personopplysninger" />
+      <Process.Event status="active" title="Saksopplysninger" />
+
+      <Process.Event title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst" />
+      <Process.Event title="Vedlegg" />
+      <Process.Event title="Oppsummering" />
+    </Process>
+  );
+};
+
+export const HideStatusLabel: StoryFn<Story> = () => {
+  return (
+    <Process hideStatusLabel>
+      <Process.Event status="completed" title="Start søknad" />
+      <Process.Event status="completed" title="Personopplysninger" />
+      <Process.Event status="active" title="Saksopplysninger" />
+
+      <Process.Event title="Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst" />
+      <Process.Event title="Vedlegg" />
+      <Process.Event title="Oppsummering" />
+    </Process>
+  );
+};
+
 export const InteractiveDemo: StoryFn<Story> = () => {
   const [activeStep, setActiveStep] = React.useState(1);
 

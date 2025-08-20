@@ -8,6 +8,7 @@ import React, { SVGProps, forwardRef, useRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
+import { createContext } from "../util/create-context";
 import { useMergeRefs } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
@@ -16,7 +17,23 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * `<Process.Event />` elements.
    */
   children: React.ReactElement<typeof ProcessEvent>[];
+  /**
+   * Hides the "aktiv"-label when the event is active.
+   * @default false
+   */
+  hideStatusLabel?: boolean;
 }
+
+type ProcessContextProps = Pick<ProcessProps, "hideStatusLabel">;
+
+const [ProcessContextProvider, useProcessContext] =
+  createContext<ProcessContextProps>({
+    providerName: "ProcessContextProvider",
+    hookName: "useProcessContext",
+    name: "ProcessContext",
+    errorMessage:
+      "`<Process.Event />` must be used within a `<Process />` component.",
+  });
 
 interface ProcessComponent
   extends React.ForwardRefExoticComponent<
@@ -77,24 +94,36 @@ interface ProcessComponent
 export const Process: ProcessComponent = forwardRef<
   HTMLOListElement,
   ProcessProps
->(({ children, className, ...restProps }: ProcessProps, forwardedRef) => {
-  const { cn } = useRenameCSS();
+>(
+  (
+    {
+      children,
+      className,
+      hideStatusLabel = false,
+      ...restProps
+    }: ProcessProps,
+    forwardedRef,
+  ) => {
+    const { cn } = useRenameCSS();
 
-  const rootRef = useRef<HTMLOListElement>(null);
-  const mergedRef = useMergeRefs(forwardedRef, rootRef);
+    const rootRef = useRef<HTMLOListElement>(null);
+    const mergedRef = useMergeRefs(forwardedRef, rootRef);
 
-  return (
-    <ol
-      ref={mergedRef}
-      data-color="info"
-      role="list"
-      {...restProps}
-      className={cn("navds-process", className)}
-    >
-      {children}
-    </ol>
-  );
-}) as ProcessComponent;
+    return (
+      <ol
+        ref={mergedRef}
+        data-color="info"
+        role="list"
+        {...restProps}
+        className={cn("navds-process", className)}
+      >
+        <ProcessContextProvider hideStatusLabel={hideStatusLabel}>
+          {children}
+        </ProcessContextProvider>
+      </ol>
+    );
+  },
+) as ProcessComponent;
 
 /* ------------------------------ Process Event ------------------------------ */
 interface ProcessEventProps extends React.HTMLAttributes<HTMLLIElement> {
@@ -123,11 +152,6 @@ interface ProcessEventProps extends React.HTMLAttributes<HTMLLIElement> {
    * @default "inactive"
    */
   status?: "active" | "completed" | "inactive";
-  /**
-   * Hides the "aktiv"-label when the event is active.
-   * @default false
-   */
-  hideStatusLabel?: boolean;
 }
 
 export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
@@ -141,7 +165,6 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
       className,
       id,
       status = "inactive",
-      hideStatusLabel = false,
       ...restProps
     }: ProcessEventProps,
     forwardedRef,
@@ -149,6 +172,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
     const translate = useI18n("Process");
     const { cn } = useRenameCSS();
     const eventId = useId();
+    const context = useProcessContext();
 
     const isActive = status === "active";
 
@@ -168,12 +192,12 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
 
           <div className={cn("navds-process__body")}>
             {title && <ProcessTitle>{title}</ProcessTitle>}
-            {isActive && !hideStatusLabel && (
+            {isActive && !context.hideStatusLabel && (
               <BodyShort
                 size="small"
                 className={cn("navds-process__active-label")}
               >
-                {translate("activeLabel")}
+                {translate("statusLabel")}
               </BodyShort>
             )}
             {timestamp && <ProcessTimestamp>{timestamp}</ProcessTimestamp>}

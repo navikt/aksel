@@ -100,7 +100,7 @@ export default {
     next: "Neste",
   },
   Process: {
-    activeLabel: "Aktiv",
+    statusLabel: "Aktiv",
   },
   ProgressBar: {
     progress: "{current} av {max}",
