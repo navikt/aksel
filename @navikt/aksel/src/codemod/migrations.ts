@@ -183,10 +183,12 @@ export function getWarning(str: string) {
     .find((x) => x.value === str)?.warning;
 }
 
-export function getIgnoredFilextensions(str: string) {
-  return Object.values(migrations)
-    .flat()
-    .find((x) => x.value === str)?.ignoredExtensions;
+export function getIgnoredFileExtensions(str: string) {
+  return (
+    Object.values(migrations)
+      .flat()
+      .find((x) => x.value === str)?.ignoredExtensions ?? []
+  );
 }
 
 export function getMigrationNames() {

@@ -5,7 +5,7 @@ import * as jscodeshift from "jscodeshift/src/Runner";
 import path from "path";
 import { GLOB_IGNORE_PATTERNS, getDefaultGlob } from "./codeshift.utils";
 import {
-  getIgnoredFilextensions,
+  getIgnoredFileExtensions,
   getMigrationPath,
   getWarning,
 } from "./migrations";
@@ -39,7 +39,7 @@ export async function runCodeshift(
 
   const warning = getWarning(input);
 
-  const unsafeExtensions = getIgnoredFilextensions(input);
+  const unsafeExtensions = getIgnoredFileExtensions(input);
 
   let safeFilepaths = filepaths;
 
