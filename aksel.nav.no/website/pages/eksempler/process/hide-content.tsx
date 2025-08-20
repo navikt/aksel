@@ -42,6 +42,7 @@ const Example = () => {
           disabled={activeStep >= 5}
           size="small"
           data-color="info"
+          iconPosition="right"
         >
           Neste steg
         </Button>

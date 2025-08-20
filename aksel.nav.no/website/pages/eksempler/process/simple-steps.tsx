@@ -7,7 +7,7 @@ const Example = () => {
       <Heading size="medium" level="2" id="Process-heading" visuallyHidden>
         Søknadssteg med tilhørende tittel
       </Heading>
-      <Process aria-labelledby="Process-heading" activeStep={4}>
+      <Process aria-labelledby="Process-heading">
         <Process.Event title="02. Jan. 2020. klokken 10:21">
           Din utbetalingsplan har blitt oppdatert, les vedtaket for mer
           informasjon

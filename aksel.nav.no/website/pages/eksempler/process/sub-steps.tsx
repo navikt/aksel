@@ -12,31 +12,37 @@ const Example = () => {
       <Heading size="medium" level="2" id="Process-heading" visuallyHidden>
         Søknadssteg med tilhørende tittel
       </Heading>
-      <Process aria-labelledby="Process-heading" activeStep={2}>
+      <Process aria-labelledby="Process-heading">
         <Process.Event
+          status="completed"
           title="Barnet ble født"
           timestamp="04. august 2025"
           bullet={<BabyWrappedIcon />}
         />
         <Process.Event
+          status="completed"
           title="Du søkte om FORELDREPENGER"
           timestamp="22. august 2025"
           bullet={<TasklistSendIcon />}
         />
         <Process.Event
+          status="completed"
           title="Du la til 2 vedlegg"
           timestamp="23. august 2025 KL 09.05"
         />
         <Process.Event
+          status="completed"
           title="Du la til 4 vedlegg"
           timestamp="23. august 2025 KL 11.30"
         />
         <Process.Event
+          status="completed"
           title="Du har fått et svar på søknaden din"
           timestamp="25. august 2025"
           bullet={<EnvelopeOpenIcon />}
         />
         <Process.Event
+          status="active"
           title="Nav har etterspurt opplysninger"
           timestamp="8. september 2025"
         />
