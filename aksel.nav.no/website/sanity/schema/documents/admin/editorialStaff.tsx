@@ -51,12 +51,24 @@ export const EditorialStaff = defineType({
         return { current: `${max + 1}` };
       },
     }),
-
     defineField({
       title: "Bidragsytere",
       name: "legacy_contributors",
       type: "array",
       of: [{ type: "reference", to: [{ type: "editor" }] }],
+    }),
+    defineField({
+      title: "Type",
+      name: "type",
+      description: "Hva slags type redaksjon er dette? (f.eks. Miljø, Team)",
+      type: "string",
+      options: {
+        list: [
+          { title: "Team", value: "team" },
+          { title: "Miljø", value: "miljø" },
+        ],
+      },
+      validation: (Rule) => Rule.required().error("Må velge type"),
     }),
   ],
   preview: {
