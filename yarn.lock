@@ -4196,7 +4196,7 @@ __metadata:
     react-dom: "npm:^18.0.0"
     react-router: "npm:^7.6.2"
     rimraf: "npm:6.0.1"
-    swr: "npm:^2.3.2"
+    swr: "npm:^2.3.6"
     tsc-alias: "npm:1.8.16"
     tsx: "npm:^4.19.1"
     typescript: "npm:5.8.3"
@@ -24114,15 +24114,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swr@npm:^2.3.2":
-  version: 2.3.3
-  resolution: "swr@npm:2.3.3"
+"swr@npm:^2.3.6":
+  version: 2.3.6
+  resolution: "swr@npm:2.3.6"
   dependencies:
     dequal: "npm:^2.0.3"
     use-sync-external-store: "npm:^1.4.0"
   peerDependencies:
     react: ^16.11.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10/11cd5d1acbc62cf0e092e0d19f1d67b2e6ecb542602250f3277eb235750cd3285291bae9a8264c1f5b3973890f75234c104a0baf1ac6059aadc700ecba100fcc
+  checksum: 10/9948b2d92827c6118b6a66d067fbfd311950d6456180fa7be8ec59aab58634da3d2ba117535ca793c801cf0d676a392c5e48c46f5baf7050b813943d93344388
   languageName: node
   linkType: hard
 
@@ -26151,7 +26151,7 @@ __metadata:
     showdown: "npm:^2.1.0"
     start-server-and-test: "npm:^2.0.3"
     styled-components: "npm:^6.0.0"
-    swr: "npm:^2.3.2"
+    swr: "npm:^2.3.6"
     tailwindcss: "npm:^3.3.3"
     tinycolor2: "npm:^1.6.0"
     tsconfig-paths-webpack-plugin: "npm:^4.2.0"
