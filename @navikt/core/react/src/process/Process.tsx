@@ -4,12 +4,19 @@
  * `<ol />` elements with `list-style: none;` tends to be ignored by voiceover on Safari.
  * To resolve this, we add `role="list"` to the `<ol />` element.
  */
-import React, { SVGProps, forwardRef, useRef } from "react";
+import React, {
+  SVGProps,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
 import { createContext } from "../util/create-context";
-import { useMergeRefs } from "../util/hooks";
+import { useCallbackRef, useMergeRefs } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
@@ -24,7 +31,10 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   hideStatusLabel?: boolean;
 }
 
-type ProcessContextProps = Pick<ProcessProps, "hideStatusLabel">;
+type ProcessContextProps = Pick<ProcessProps, "hideStatusLabel"> & {
+  rootId: string;
+  syncAriaControls: () => void;
+};
 
 const [ProcessContextProvider, useProcessContext] =
   createContext<ProcessContextProps>({
@@ -100,14 +110,50 @@ export const Process: ProcessComponent = forwardRef<
       children,
       className,
       hideStatusLabel = false,
+      id,
       ...restProps
     }: ProcessProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
 
+    const rootId = useId(id);
+
     const rootRef = useRef<HTMLOListElement>(null);
     const mergedRef = useMergeRefs(forwardedRef, rootRef);
+
+    const [activeChildId, setActiveChildId] = useState<string | undefined>(
+      undefined,
+    );
+
+    const syncAriaControls = useCallback(() => {
+      const activeChildren = rootRef.current?.querySelectorAll(
+        '[data-process-event][aria-current="true"]',
+      );
+
+      if (!activeChildren) {
+        setActiveChildId(undefined);
+        return;
+      }
+
+      if (activeChildren.length > 1) {
+        if (process.env.NODE_ENV !== "production") {
+          console.warn(
+            "Aksel: Found multiple `<Process.Event />` elements with `status='active'`. Only one event should be active at a time.",
+            rootRef.current,
+          );
+        }
+        setActiveChildId(undefined);
+        return;
+      }
+
+      if (activeChildren.length === 1) {
+        const lastActiveChild = activeChildren[activeChildren.length - 1];
+        setActiveChildId(lastActiveChild.id);
+      } else {
+        setActiveChildId(undefined);
+      }
+    }, []);
 
     return (
       <ol
@@ -116,8 +162,14 @@ export const Process: ProcessComponent = forwardRef<
         role="list"
         {...restProps}
         className={cn("navds-process", className)}
+        id={rootId}
+        aria-controls={activeChildId}
       >
-        <ProcessContextProvider hideStatusLabel={hideStatusLabel}>
+        <ProcessContextProvider
+          hideStatusLabel={hideStatusLabel}
+          rootId={rootId}
+          syncAriaControls={syncAriaControls}
+        >
           {children}
         </ProcessContextProvider>
       </ol>
@@ -172,7 +224,11 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
     const translate = useI18n("Process");
     const { cn } = useRenameCSS();
     const eventId = useId();
-    const context = useProcessContext();
+    const { syncAriaControls, hideStatusLabel, rootId } = useProcessContext();
+
+    const sync = useCallbackRef(syncAriaControls);
+
+    useEffect(() => sync(), [status, sync]);
 
     const isActive = status === "active";
 
@@ -182,9 +238,10 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
         aria-current={isActive}
         id={id ?? eventId}
         {...restProps}
+        aria-controls={isActive ? rootId : undefined}
         className={cn("navds-process__event", className)}
         data-dot={bullet === undefined}
-        data-process-step=""
+        data-process-event=""
         data-status={status}
       >
         <div className={cn("navds-process__item")}>
@@ -192,7 +249,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
 
           <div className={cn("navds-process__body")}>
             {title && <ProcessTitle>{title}</ProcessTitle>}
-            {isActive && !context.hideStatusLabel && (
+            {isActive && !hideStatusLabel && (
               <BodyShort
                 size="small"
                 className={cn("navds-process__active-label")}
