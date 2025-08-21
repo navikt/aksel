@@ -16,13 +16,21 @@
   cursor: pointer;
   display: grid;
   grid-template-areas:
-    "image image"
-    "icon title"
-    "icon description"
-    "icon footer";
+    "image image image"
+    "icon title arrow"
+    "icon description arrow"
+    "icon footer arrow";
   grid-template-columns: auto 1fr;
   grid-template-rows: min-content min-content min-content auto;
   align-items: center;
+}
+
+.navds-link-card[data-alig-arrow="baseline"] {
+  grid-template-areas:
+    "image image image"
+    "icon title arrow"
+    "icon description description"
+    "icon footer footer";
 }
 
 .navds-link-card:not(:has(.navds-link-card__description, .navds-link-card__footer)) {
@@ -45,10 +53,6 @@
 .navds-link-card__title {
   grid-area: title;
   color: var(--a-text-default);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--a-spacing-2);
   hyphens: auto;
 }
 
@@ -103,4 +107,17 @@
   display: block;
   max-width: 100%;
   height: 100%;
+}
+
+.navds-link-card__arrow {
+  grid-area: arrow;
+  margin-inline-start: var(--a-spacing-2);
+}
+
+.navds-link-card__arrow[data-alig-arrow="baseline"] {
+  align-self: baseline;
+}
+
+.navds-link-card__arrow[data-alig-arrow="center"] {
+  align-self: center;
 }
