@@ -6,6 +6,15 @@ function capitalizeText(inputString: string): string {
 }
 
 /**
+ * Capitalize and space between each fragment
+ */
+const humanizeText = (str) =>
+  str
+    .split(/[-_\s]+/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+
+/**
  * Abbreviate a name while keeping the first and last names intact.
  */
 function abbrName(name: string): string {
@@ -28,4 +37,4 @@ function removeEmojiesFromText(inputString: string) {
     .trim();
 }
 
-export { abbrName, capitalizeText, removeEmojiesFromText };
+export { abbrName, capitalizeText, removeEmojiesFromText, humanizeText };

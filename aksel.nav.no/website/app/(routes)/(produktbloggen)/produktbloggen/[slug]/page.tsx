@@ -123,6 +123,7 @@ export default async function Page({ params }: Props) {
                       <Avatar
                         imageSrc={avatar.imageSrc}
                         name={avatar.name}
+                        type={avatar.type}
                         showName
                       ></Avatar>
                     </HoverCard>

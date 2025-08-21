@@ -66,6 +66,7 @@ export const HighlightedBlogg = async ({ blogg }: Props) => {
                   key={avatar.name}
                   imageSrc={avatar.imageSrc}
                   name={avatar.name}
+                  type={avatar.type}
                 ></Avatar>
               );
             })}
@@ -117,6 +118,7 @@ export const HighlightedBlogg = async ({ blogg }: Props) => {
                 <Avatar
                   key={avatar.name}
                   imageSrc={avatar.imageSrc}
+                  type={avatar.type}
                   name={avatar.name}
                 ></Avatar>
               );

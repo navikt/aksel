@@ -28,6 +28,7 @@ export const BloggArticleBlock = async ({ blogg }: { blogg: Blogg }) => {
               key={avatar.name}
               imageSrc={avatar.imageSrc}
               name={avatar.name}
+              type={avatar.type}
             ></Avatar>
           );
         })}
