@@ -204,6 +204,34 @@ export const NoArrowWithRichContent: Story = {
   ),
 };
 
+export const CenteredArrow: Story = {
+  render: () => (
+    <LinkCard arrowPosition="center">
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const CenteredArrowWithRichContent: Story = {
+  render: () => (
+    <LinkCard arrowPosition="center">
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </LinkCardDescription>
+      <LinkCardFooter>
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
 export const SizeMedium: Story = {
   render: () => (
     <LinkCard size="medium">

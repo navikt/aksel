@@ -1,10 +1,3 @@
-/**
- * TODO:
- * - Add stories for centered arrow
- * - Check that all cases actually work
- * - Add margin-left to arrow only when inside a LinkCard
- * - Add icon top feature
- */
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, Heading } from "../typography";
@@ -26,7 +19,7 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
    * Adjusts arrow position.
    * @default "baseline"
    */
-  iconPosition?: "baseline" | "center";
+  arrowPosition?: "baseline" | "center";
   /**
    * Changes padding and typo sizes.
    * @default "medium"
@@ -105,7 +98,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
       children,
       className,
       arrow = true,
-      iconPosition = "baseline",
+      arrowPosition = "baseline",
       size = "medium",
       ...restProps
     }: LinkCardProps,
@@ -121,7 +114,6 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
             size={size}
             ref={forwardedRef}
             data-color="neutral"
-            data-alig-arrow={iconPosition}
             className={cn(
               "navds-link-card",
               className,
@@ -134,6 +126,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
               <LinkAnchorArrow
                 fontSize={size === "medium" ? "1.75rem" : "1.5rem"}
                 className={cn("navds-link-card__arrow")}
+                data-alig-arrow={arrowPosition}
               />
             )}
           </BodyLong>

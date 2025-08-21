@@ -41,6 +41,10 @@
     & .aksel-link-card__icon {
       align-self: center;
     }
+
+    & .aksel-link-card__arrow {
+      align-self: center;
+    }
   }
 
   &:hover {
@@ -114,6 +118,13 @@
 
 .aksel-link-card__arrow {
   grid-area: arrow;
-  align-self: baseline;
   margin-inline-start: var(--ax-space-8);
+
+  &[data-alig-arrow="baseline"] {
+    align-self: baseline;
+  }
+
+  &[data-alig-arrow="center"] {
+    align-self: center;
+  }
 }
