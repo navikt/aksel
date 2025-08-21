@@ -9,7 +9,8 @@ body,
 /* ---------------------------- Inline utilities ---------------------------- */
 [hidden] {
   /* CSS-layers reverses "!important" ordering, so we can't set this to important if we want to override it later. */
-  display: none;
+
+  /* display: none; */
 }
 
 /* https://web.dev/prefers-reduced-motion/ */

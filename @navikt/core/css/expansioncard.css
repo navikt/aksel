@@ -196,7 +196,10 @@
 }
 
 .navds-expansioncard__content--closed {
-  display: none;
+  padding: 0;
+  border: none;
+
+  /* TODO: Fix animation in Chrome */
 }
 
 :where(.navds-expansioncard__header):hover + .navds-expansioncard__content {
