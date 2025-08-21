@@ -2854,7 +2854,7 @@ export type Editorial_staff = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "editor";
   }>;
-  type?: "team" | "milj\xF8";
+  type?: "team" | "miljoe";
 };
 
 export type Editor = {
