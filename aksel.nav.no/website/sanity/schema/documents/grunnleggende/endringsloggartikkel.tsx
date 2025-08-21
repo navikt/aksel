@@ -17,6 +17,7 @@ export const EndringsloggArtikkel = defineType({
       title: "URL",
       name: "slug",
       type: "slug",
+      description: "Inkluder gjerne dato eller versjon",
       validation: (Rule) => Rule.required(),
       group: "settings",
       options: {
