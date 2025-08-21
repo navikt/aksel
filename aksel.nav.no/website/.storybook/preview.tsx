@@ -1,6 +1,5 @@
 import type { Preview } from "@storybook/react";
 import React from "react";
-import "../dist/tw.css";
 
 export const globalTypes = {
   theme: {

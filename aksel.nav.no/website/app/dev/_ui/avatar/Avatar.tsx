@@ -52,12 +52,12 @@ export const Avatar = ({
         aria-hidden={showName}
       />
       {showName && (
-        <VStack gap="space-4">
+        <VStack align="start">
           <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
-            <span>{humanizeText(type)}</span>
+            <Detail textColor="subtle">{humanizeText(type)}</Detail>
           </BoxNew>
           <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
-            <span className={styles.avatarName}>{name}</span>
+            <BodyShort className={styles.avatarName}>{`${name}`}</BodyShort>
           </BoxNew>
         </VStack>
       )}
