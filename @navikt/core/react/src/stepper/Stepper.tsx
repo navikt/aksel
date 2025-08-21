@@ -26,8 +26,8 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   onStepChange?: (step: number) => void;
   /**
-   * @deprecated Use `interactive` prop on `<Stepper.Step />` instead for individual steps. For completely static steppers, use `Process` component instead.
    * Makes stepper non-interactive if false.
+   * @deprecated Use `interactive` prop on `<Stepper.Step />` instead for individual steps. For completely static steppers, use `Process` component instead.
    * @default true
    */
   interactive?: boolean;
