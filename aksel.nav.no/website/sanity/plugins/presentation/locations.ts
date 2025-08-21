@@ -6,11 +6,12 @@ import {
 } from "sanity/presentation";
 
 export const locations: DocumentLocationResolver = (params, context) => {
-  if (params.type === "editor") {
-    // Listen to all documents that reference this editor
+  // Handle both editor and editorial_staff types
+  if (params.type === "editor" || params.type === "editorial_staff") {
+    // Listen to all documents that reference this document
     const doc$ = context.documentStore.listenQuery(
-      `*[_type != 'editor' && references($id)]{_type, slug, title, heading, "tema": undertema[]->tema->title}`,
-      { id: params.id },
+      `*[_type != $type && references($id)]{_type, slug, title, heading, "tema": undertema[]->tema->title}`,
+      { id: params.id, type: params.type },
       { perspective: "previewDrafts" },
     ) as Observable<
       | {
@@ -37,12 +38,11 @@ export const locations: DocumentLocationResolver = (params, context) => {
         const foundLocations = docs
           .filter((doc) => doc.slug?.current)
           .map((doc) => {
+            const displayTitle = doc.heading || doc.title || "Untitled";
+            const temaInfo = doc.tema ? ` (tema: ${doc.tema.join(", ")})` : "";
+
             return {
-              title: doc.heading
-                ? `${doc.heading} ${
-                    doc.tema ? `(tema:${doc.tema.join("tema:, ")})` : ""
-                  }`
-                : "Untitled",
+              title: `${displayTitle}${temaInfo}`,
               href: `/${doc.slug?.current}`,
             };
           });
