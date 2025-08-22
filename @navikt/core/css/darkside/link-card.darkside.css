@@ -23,7 +23,7 @@
   grid-template-rows: min-content min-content min-content auto;
   align-items: center;
 
-  &[data-alig-arrow="baseline"] {
+  &[data-align-arrow="baseline"] {
     grid-template-areas:
       "image image image"
       "icon title arrow"
@@ -120,11 +120,11 @@
   grid-area: arrow;
   margin-inline-start: var(--ax-space-8);
 
-  &[data-alig-arrow="baseline"] {
+  &[data-align-arrow="baseline"] {
     align-self: baseline;
   }
 
-  &[data-alig-arrow="center"] {
+  &[data-align-arrow="center"] {
     align-self: center;
   }
 }

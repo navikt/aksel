@@ -25,7 +25,7 @@
   align-items: center;
 }
 
-.navds-link-card[data-alig-arrow="baseline"] {
+.navds-link-card[data-align-arrow="baseline"] {
   grid-template-areas:
     "image image image"
     "icon title arrow"
@@ -114,10 +114,10 @@
   margin-inline-start: var(--a-spacing-2);
 }
 
-.navds-link-card__arrow[data-alig-arrow="baseline"] {
+.navds-link-card__arrow[data-align-arrow="baseline"] {
   align-self: baseline;
 }
 
-.navds-link-card__arrow[data-alig-arrow="center"] {
+.navds-link-card__arrow[data-align-arrow="center"] {
   align-self: center;
 }

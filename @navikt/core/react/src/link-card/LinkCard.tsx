@@ -126,7 +126,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
               <LinkAnchorArrow
                 fontSize={size === "medium" ? "1.75rem" : "1.5rem"}
                 className={cn("navds-link-card__arrow")}
-                data-alig-arrow={arrowPosition}
+                data-align-arrow={arrowPosition}
               />
             )}
           </BodyLong>
