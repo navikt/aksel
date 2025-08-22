@@ -116,7 +116,6 @@
 }
 
 .aksel-process__body {
-  min-width: fit-content;
   grid-column: content;
 }
 

@@ -21,7 +21,7 @@ export default meta;
 
 type Story = StoryObj<typeof Process>;
 
-const getDateAfter = (days) => {
+const getDateAfter = (days: number) => {
   const date = new Date();
   return format(new Date(date.setDate(date.getDate() + days)), "d. MMMM yyy");
 };
