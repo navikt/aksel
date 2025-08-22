@@ -91,7 +91,7 @@
   border: var(--__ac-process-border-width) solid;
   color: var(--a-text-subtle);
   border-color: var(--a-border-subtle);
-  transition-property: background, border-color;
+  transition-property: background, border-color, color;
   transition-duration: 70ms;
   transition-timing-function: linear;
 

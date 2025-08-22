@@ -28,7 +28,7 @@ const Example = () => {
         />
         <Process.Event
           status="completed"
-          title="Søknad om livsopphold er under behandling"
+          title="Søknad om livsopphold er sendt videre for behandling"
           bullet={<Process.Checkmark />}
           timestamp="11. august 2025 kl. 09.48"
         />
