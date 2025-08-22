@@ -114,7 +114,7 @@ function KodeEksemplerIFrame(props: {
 
       <KodeEksemplerToolbar
         code={current?.innhold?.trim()}
-        base64={current?.sandboxEnabled ? current?.sandboxBase64 : undefined}
+        base64={current?.sandboxBase64}
         link={iframeUrl}
         reload={() => {
           updateLoaded(false);
