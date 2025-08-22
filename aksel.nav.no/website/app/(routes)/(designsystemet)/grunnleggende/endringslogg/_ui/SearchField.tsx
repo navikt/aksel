@@ -18,16 +18,18 @@ export default function SearchField({
   semverSearchState,
   searchInputState,
   onSearch,
+  onSemverToggle,
 }: {
   semverSearchState: [boolean, Dispatch<SetStateAction<boolean>>];
   searchInputState: [string, Dispatch<SetStateAction<string>>];
   onSearch: CallableFunction;
+  onSemverToggle: CallableFunction;
 }) {
   const searchParams = useSearchParams();
   const searchRef = useRef<HTMLInputElement>(null);
   const semverRef = useRef<HTMLInputElement>(null);
 
-  const [semverSearch, setSemverSearch] = semverSearchState;
+  const [semverSearch] = semverSearchState;
   const [searchInput, setSearchInput] = searchInputState;
 
   // Only get initial value from URL params
@@ -75,7 +77,7 @@ export default function SearchField({
               value="semver"
               onClick={() => {
                 setSearchInput("");
-                setSemverSearch(!semverSearch);
+                onSemverToggle();
               }}
               defaultChecked={!!searchParams?.get("semver")}
               checked={semverSearch}
