@@ -48,7 +48,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       label,
       value,
       defaultValue,
-      "aria-describedby": userDescribedby,
+      "aria-labelledby": userLabelledby,
       variant,
       fill = false,
       "data-color": color,
@@ -103,6 +103,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
           >
             {label && (
               <Label
+                as="div"
                 size={size}
                 className={cn("navds-toggle-group__label")}
                 id={labelId}
@@ -118,8 +119,8 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
                 `navds-toggle-group--${size}`,
                 { [`navds-toggle-group--${localVariant}`]: localVariant },
               )}
-              aria-describedby={
-                cl(userDescribedby, !!label && labelId) || undefined
+              aria-labelledby={
+                cl(userLabelledby, !!label && labelId) || undefined
               }
               role="radiogroup"
             >
