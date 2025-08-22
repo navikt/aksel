@@ -16,41 +16,36 @@ import styles from "./SearchField.module.css";
 
 export default function SearchField({
   semverSearchState,
-  categorySelectedState,
-  yearSelectedState,
   searchInputState,
+  onSearch,
 }: {
-  semverSearchState: [boolean, Dispatch<SetStateAction<boolean>>]; // no ReturnType<typeof useState<boolean>>; ?
-  categorySelectedState: [string, Dispatch<SetStateAction<string>>];
-  yearSelectedState: [string, Dispatch<SetStateAction<string>>];
+  semverSearchState: [boolean, Dispatch<SetStateAction<boolean>>];
   searchInputState: [string, Dispatch<SetStateAction<string>>];
+  onSearch: CallableFunction;
 }) {
   const searchParams = useSearchParams();
   const searchRef = useRef<HTMLInputElement>(null);
-
   const semverRef = useRef<HTMLInputElement>(null);
+
   const [semverSearch, setSemverSearch] = semverSearchState;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [categorySelected, setCategorySelected] = categorySelectedState;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [yearSelected, setYearSelected] = yearSelectedState;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchInput, setSearchInput] = searchInputState;
+
+  // Only get initial value from URL params
+  const fritekstParam = searchParams?.get("fritekst") || "";
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = event.currentTarget;
-    const input = form.elements.namedItem(
-      "fritekst",
-    ) as HTMLInputElement | null;
-    setSearchInput(input?.value ?? "");
+    onSearch();
   }
 
+  // Only sync URL to input on initial load/page refresh
   useEffect(() => {
-    if (searchRef.current) {
-      searchRef.current.value = searchParams?.get("fritekst") || "";
+    if (searchRef.current && !searchInput && fritekstParam) {
+      searchRef.current.value = fritekstParam;
+      setSearchInput(fritekstParam);
     }
-  }, [searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <form role="search" onSubmit={handleSubmit}>
@@ -59,21 +54,18 @@ export default function SearchField({
           <Search
             ref={searchRef}
             label="Søk i endringsloggen"
-            defaultValue={searchParams?.get("fritekst") || ""}
+            value={searchInput}
             name="fritekst"
             hideLabel
             variant="secondary"
             htmlSize="20"
             autoComplete="off"
+            onChange={(value) => {
+              setSearchInput(value);
+            }}
             onClear={() => {
               setSearchInput("");
             }}
-            // onChange={() => {
-            // TODO: feels a bit jank? (backspace + start typing -> sudden refresh)
-            // if (v === "") {
-            //   setSearchInput("");
-            // }
-            //  }}
             data-color="neutral"
             className={styles.searchField}
           />
