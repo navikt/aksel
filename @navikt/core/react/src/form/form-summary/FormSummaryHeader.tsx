@@ -1,5 +1,7 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../theme/Theme";
+import { useWarnIfContainsComponent } from "../../util/usageWarnings";
+import FormSummaryEditLink from "./FormSummaryEditLink";
 
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -14,6 +16,12 @@ export const FormSummaryHeader = forwardRef<
   FormSummaryHeaderProps
 >(({ children, className, ...rest }, ref) => {
   const { cn } = useRenameCSS();
+
+  useWarnIfContainsComponent(
+    children,
+    FormSummaryEditLink,
+    "<FormSummary.EditLink> should be placed inside <FormSummary.Footer> instead of <FormSummary.Header>.",
+  );
 
   return (
     <header
