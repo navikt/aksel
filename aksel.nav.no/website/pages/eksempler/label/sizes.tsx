@@ -6,9 +6,8 @@ const Example = () => {
     "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
 
   return (
-    <VStack gap="5">
+    <VStack gap="space-20">
       <Label>Medium (18px): {exampleText}</Label>
-
       <Label size="small">Small (16px): {exampleText}</Label>
     </VStack>
   );

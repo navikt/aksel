@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <Box
       background="surface-default"
-      padding="6"
+      padding="space-24"
       borderRadius="xlarge"
       borderColor="border-subtle"
       borderWidth="1"

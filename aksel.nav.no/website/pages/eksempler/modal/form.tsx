@@ -1,12 +1,12 @@
 import { useRef } from "react";
-import { Button, Modal, TextField } from "@navikt/ds-react";
+import { Box, Button, Modal, TextField } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
-    <div className="py-12">
+    <Box paddingBlock="space-48">
       <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
       <Modal ref={ref} header={{ heading: "Skjema" }} width={400}>
@@ -26,7 +26,7 @@ const Example = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </Box>
   );
 };
 

@@ -1,11 +1,11 @@
-import { Heading, VStack } from "@navikt/ds-react";
+import { BodyShort, Box, Heading, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const lorem = "Hva kan vi hjelpe deg med?";
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <div>
         <Descriptor>Default</Descriptor>
         <Heading textColor="default" size="medium">
@@ -24,11 +24,15 @@ const Example = () => {
 };
 
 function Descriptor({ children }) {
-  return <p className="mb-3 text-xl font-semibold">{children}</p>;
+  return (
+    <BodyShort size="large" weight="semibold">
+      {children}
+    </BodyShort>
+  );
 }
 
 function Divider() {
-  return <hr className="border-border-subtle" />;
+  return <Box as="hr" borderWidth="0 0 1 0" width="100%" />;
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE

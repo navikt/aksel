@@ -4,12 +4,12 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <DemoWrapper>
-      <Bleed marginInline="10" asChild reflectivePadding>
+      <Bleed marginInline="space-40" asChild reflectivePadding>
         <Box background="surface-alt-3-subtle">
           reflectivePadding lar innhold forbli der det ville vært uten Bleed
         </Box>
       </Bleed>
-      <Bleed marginInline="10" asChild>
+      <Bleed marginInline="space-40" asChild>
         <Box background="surface-alt-3-subtle">
           Bleed uten reflectivePadding
         </Box>
@@ -21,9 +21,9 @@ const Example = () => {
 
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <Box background="surface-alt-3" padding="5" borderRadius="large">
-      <Box background="surface-subtle" padding="5" borderRadius="medium">
-        <VStack gap="4">{children}</VStack>
+    <Box background="surface-alt-3" padding="space-20" borderRadius="large">
+      <Box background="surface-subtle" padding="space-20" borderRadius="medium">
+        <VStack gap="space-16">{children}</VStack>
       </Box>
     </Box>
   );

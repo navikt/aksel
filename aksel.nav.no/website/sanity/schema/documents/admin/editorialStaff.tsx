@@ -63,9 +63,10 @@ export const EditorialStaff = defineType({
       description: "Hva slags type redaksjon er dette? (f.eks. Miljø, Team)",
       type: "string",
       options: {
+        layout: "radio",
         list: [
           { title: "Team", value: "team" },
-          { title: "Miljø", value: "miljø" },
+          { title: "Miljø", value: "miljoe" },
         ],
       },
       validation: (Rule) => Rule.required().error("Må velge type"),

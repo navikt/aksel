@@ -4,7 +4,15 @@ import { Placeholder } from "../../../components/website-modules/examples/__part
 
 const Example = () => {
   return (
-    <VStack gap={{ xs: "2", sm: "6", md: "10", lg: "14", xl: "18" }}>
+    <VStack
+      gap={{
+        xs: "space-8",
+        sm: "space-24",
+        md: "space-40",
+        lg: "space-56",
+        xl: "space-72",
+      }}
+    >
       <Placeholder />
       <Placeholder />
       <Placeholder />

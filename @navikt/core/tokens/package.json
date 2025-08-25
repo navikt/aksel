@@ -37,7 +37,7 @@
   "devDependencies": {
     "@figma/plugin-typings": "^1.100.2",
     "colorjs.io": "^0.5.2",
-    "esbuild": "^0.25.8",
+    "esbuild": "^0.25.9",
     "lightningcss": "^1.29.3",
     "lodash": "^4.17.21",
     "style-dictionary": "^4.1.1",

@@ -19,7 +19,7 @@ const Example = () => {
   };
 
   return (
-    <VStack as="form" gap="8" onSubmit={handleSubmit(onValidSubmit)}>
+    <VStack as="form" gap="space-32" onSubmit={handleSubmit(onValidSubmit)}>
       <Controller
         control={control}
         rules={{ required: "Du må velge minst ett transportmiddel." }}

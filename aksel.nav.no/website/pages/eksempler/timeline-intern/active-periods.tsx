@@ -50,13 +50,13 @@ const Example = () => {
         </Timeline.Row>
       </Timeline>
       {activePeriod && (
-        <div
+        <Box
           aria-controls={activePeriod}
           id="timeline-panel"
-          className="mt-8"
+          marginBlock="space-32 space-0"
         >{`${activePeriod}: ${[...person, ...jobb].find(
           (p) => p.id === activePeriod,
-        )?.start}`}</div>
+        )?.start}`}</Box>
       )}
     </Box>
   );

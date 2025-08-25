@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <Box background="surface-alt-3-subtle">
-      <HStack gap="3" wrap={false}>
+      <HStack gap="space-12" wrap={false}>
         <Placeholder />
         <Spacer />
         <Placeholder />
