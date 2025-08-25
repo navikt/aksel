@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
 import {
   EnvelopeClosedIcon,
@@ -7,23 +7,13 @@ import {
   SparklesIcon,
 } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import ToggleGroup from "./ToggleGroup";
+import { ToggleGroupProps } from "./ToggleGroup.types";
 
 const meta: Meta<typeof ToggleGroup> = {
   title: "ds-react/ToggleGroup",
   component: ToggleGroup,
-  argTypes: {
-    size: {
-      options: ["medium", "small"],
-      control: {
-        type: "radio",
-      },
-    },
-    variant: {
-      options: ["action", "neutral"],
-      control: { type: "radio" },
-    },
-  },
   parameters: {
     chromatic: { disable: true },
   },
@@ -64,7 +54,12 @@ const Items = (icon?: boolean, both?: boolean) => {
   );
 };
 
-export const Default = (props) => {
+interface Props extends Pick<ToggleGroupProps, "size" | "variant"> {
+  icon: boolean;
+  text: boolean;
+  label: boolean;
+}
+export const Default: StoryFn<Props> = (props) => {
   const [activeValue, setActiveValue] = useState("ulest");
   return (
     <ToggleGroup
@@ -81,11 +76,30 @@ export const Default = (props) => {
     </ToggleGroup>
   );
 };
-
+Default.argTypes = {
+  size: {
+    options: ["medium", "small"],
+    control: {
+      type: "radio",
+    },
+  },
+  variant: {
+    options: ["action", "neutral"],
+    control: { type: "radio" },
+  },
+};
 Default.args = {
   icon: true,
   text: true,
   label: false,
+};
+
+export const Label = () => {
+  return (
+    <ToggleGroup label="Innboks" value="ulest" onChange={() => {}}>
+      {Items()}
+    </ToggleGroup>
+  );
 };
 
 export const Compositions = () => {
@@ -146,6 +160,14 @@ export const Small = () => {
       <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
         {Items(true)}
       </ToggleGroup>
+      <ToggleGroup
+        size="small"
+        fill
+        value={activeValue}
+        onChange={setActiveValue}
+      >
+        {Items(true)}
+      </ToggleGroup>
     </VStack>
   );
 };
@@ -175,58 +197,10 @@ export const ColorRoles = () => {
   );
 };
 
-export const Chromatic = {
-  render: () => (
-    <VStack gap="6">
-      <div>
-        <h2>Text</h2>
-        <ToggleGroup value="ulest" onChange={console.log}>
-          {Items()}
-        </ToggleGroup>
-      </div>
-      <div>
-        <h2>Icon</h2>
-        <ToggleGroup value="ulest" onChange={console.log}>
-          {Items(true)}
-        </ToggleGroup>
-      </div>
-      <div>
-        <h2>Text + icon</h2>
-        <ToggleGroup value="ulest" onChange={console.log}>
-          {Items(true, true)}
-        </ToggleGroup>
-      </div>
-      <div style={{ minWidth: 600 }}>
-        <h2>Fill</h2>
-        <ToggleGroup value="ulest" onChange={console.log} fill>
-          {Items(true, true)}
-        </ToggleGroup>
-      </div>
-      <div>
-        <h2>Small</h2>
-        <ToggleGroup value="ulest" onChange={console.log} size="small">
-          {Items(true, true)}
-        </ToggleGroup>
-      </div>
-      <div>
-        <h2>Small + fill</h2>
-        <ToggleGroup value="ulest" onChange={console.log} size="small" fill>
-          {Items(true, true)}
-        </ToggleGroup>
-      </div>
-      <div>
-        <h2>Neutral</h2>
-        <ToggleGroup value="ulest" onChange={console.log} variant="neutral">
-          {Items(true, true)}
-        </ToggleGroup>
-      </div>
-      <div>
-        <h2>ColorRoles</h2>
-        <ColorRoles />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Label,
+  Compositions,
+  Variants,
+  Small,
+  ColorRoles,
+});
