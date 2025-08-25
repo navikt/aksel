@@ -1,6 +1,6 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
 import { Preview } from "@storybook/react";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 // @ts-expect-error - Temporary
 import darksideCss from "../@navikt/core/css/darkside/index.css?inline";
 // @ts-expect-error - Temporary
@@ -52,6 +52,21 @@ const LanguageDecorator = ({ children, language }) => {
   return children;
 };
 
+const TypoDecorator = ({ children, font }) => {
+  useEffect(() => {
+    let fontVariable: string | null = null;
+
+    if (font === "robotoflex") {
+      fontVariable = `"Roboto Flex", sans-serif`;
+    }
+
+    document.body.style.setProperty("--ax-font-family", fontVariable);
+    document.body.style.setProperty("--a-font-family", fontVariable);
+  }, [font]);
+
+  return children;
+};
+
 export default {
   parameters: {
     options: {
@@ -99,13 +114,29 @@ export default {
         dynamicTitle: true,
       },
     },
+    font: {
+      toolbar: {
+        icon: "edit",
+        items: [
+          { value: "sourcesans", title: "Source sans 3" },
+          { value: "robotoflex", title: "Roboto flex" },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
 
   initialGlobals: {
     mode: "default",
+    font: "sourcesans",
   },
 
   decorators: [
+    (StoryFn, context) => (
+      <TypoDecorator font={context.globals.font}>
+        <StoryFn />
+      </TypoDecorator>
+    ),
     (StoryFn, context) => (
       <ModeDecorator mode={context.globals.mode} theme={context.globals.theme}>
         <StoryFn />
