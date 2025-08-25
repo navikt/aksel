@@ -171,23 +171,32 @@ export const migrations: {
   ],
 };
 
-export function getMigrationPath(str: string) {
+/**
+ * Extracts `path` field for a given migration.
+ */
+export function getMigrationPath(migrationName: string) {
   return Object.values(migrations)
     .flat()
-    .find((x) => x.value === str)?.path;
+    .find((x) => x.value === migrationName)?.path;
 }
 
-export function getWarning(str: string) {
+/**
+ * Extracts `warning` field for a given migration.
+ */
+export function getWarning(migrationName: string) {
   return Object.values(migrations)
     .flat()
-    .find((x) => x.value === str)?.warning;
+    .find((x) => x.value === migrationName)?.warning;
 }
 
-export function getIgnoredFileExtensions(str: string) {
+/**
+ * Extracts `ignoredExtensions` field for a given migration.
+ */
+export function getIgnoredFileExtensions(migrationName: string) {
   return (
     Object.values(migrations)
       .flat()
-      .find((x) => x.value === str)?.ignoredExtensions ?? []
+      .find((x) => x.value === migrationName)?.ignoredExtensions ?? []
   );
 }
 
