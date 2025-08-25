@@ -670,6 +670,14 @@ export const Chromatic: Story = {
         {NoArrowWithRichContent.render?.(...args)}
       </div>
       <div>
+        <h2>CenteredArrow</h2>
+        {CenteredArrow.render?.(...args)}
+      </div>
+      <div>
+        <h2>CenteredArrowWithRichContent</h2>
+        {CenteredArrowWithRichContent.render?.(...args)}
+      </div>
+      <div>
         <h2>SizeMedium</h2>
         {SizeMedium.render?.(...args)}
       </div>
