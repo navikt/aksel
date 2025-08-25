@@ -42,7 +42,7 @@
       align-self: center;
     }
 
-    & .aksel-link-card__arrow {
+    &[data-align-arrow="baseline"] .aksel-link-card__arrow {
       align-self: center;
     }
   }
@@ -120,11 +120,11 @@
   grid-area: arrow;
   margin-inline-start: var(--ax-space-8);
 
-  &[data-align-arrow="baseline"] {
+  .aksel-link-card[data-align-arrow="baseline"] & {
     align-self: baseline;
   }
 
-  &[data-align-arrow="center"] {
+  .aksel-link-card[data-align-arrow="center"] & {
     align-self: center;
   }
 }
