@@ -1,7 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { Dispatch, SetStateAction } from "react";
 import {
   BodyLong,
   Checkbox,
@@ -15,46 +14,28 @@ import { Code } from "@/app/_ui/typography/Code";
 import styles from "./SearchField.module.css";
 
 export default function SearchField({
-  semverSearchState,
+  semverSearch,
   searchInputState,
   onSearch,
   onSemverToggle,
 }: {
-  semverSearchState: [boolean, Dispatch<SetStateAction<boolean>>];
+  semverSearch: boolean;
   searchInputState: [string, Dispatch<SetStateAction<string>>];
   onSearch: CallableFunction;
   onSemverToggle: CallableFunction;
 }) {
-  const searchParams = useSearchParams();
-  const searchRef = useRef<HTMLInputElement>(null);
-  const semverRef = useRef<HTMLInputElement>(null);
-
-  const [semverSearch] = semverSearchState;
   const [searchInput, setSearchInput] = searchInputState;
-
-  // Only get initial value from URL params
-  const fritekstParam = searchParams?.get("fritekst") || "";
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     onSearch();
   }
 
-  // Only sync URL to input on initial load/page refresh
-  useEffect(() => {
-    if (searchRef.current && !searchInput && fritekstParam) {
-      searchRef.current.value = fritekstParam;
-      setSearchInput(fritekstParam);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <form role="search" onSubmit={handleSubmit}>
       <VStack gap="space-12">
         <HStack align="center" gap="space-24">
           <Search
-            ref={searchRef}
             label="Søk i endringsloggen"
             value={searchInput}
             name="fritekst"
@@ -73,13 +54,11 @@ export default function SearchField({
           />
           <HStack align="center" gap="space-4">
             <Checkbox
-              ref={semverRef}
               value="semver"
               onClick={() => {
                 setSearchInput("");
                 onSemverToggle();
               }}
-              defaultChecked={!!searchParams?.get("semver")}
               checked={semverSearch}
             >
               Semver-søk
