@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Fieldset: Use `aria-labelledby` instead of `aria-describedby` for improved screen reader experience
+Fieldset: Improved screen reader experience by using `aria-labelledby` for both legend and description
