@@ -1,4 +1,3 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { AkselColor } from "../types";
@@ -48,7 +47,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       label,
       value,
       defaultValue,
-      "aria-labelledby": userLabelledby,
       variant,
       fill = false,
       "data-color": color,
@@ -112,6 +110,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               </Label>
             )}
             <div
+              aria-labelledby={label ? labelId : undefined}
               {...rest}
               ref={ref}
               className={cn(
@@ -119,9 +118,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
                 `navds-toggle-group--${size}`,
                 { [`navds-toggle-group--${localVariant}`]: localVariant },
               )}
-              aria-labelledby={
-                cl(userLabelledby, !!label && labelId) || undefined
-              }
               role="radiogroup"
             >
               {children}
