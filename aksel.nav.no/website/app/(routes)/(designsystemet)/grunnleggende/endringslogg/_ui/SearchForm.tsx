@@ -113,7 +113,7 @@ export const SearchForm = ({
         <FilterChips
           years={years}
           categories={categories}
-          yearSelectedState={[year || "2025", handleYearSelection]}
+          yearSelectedState={[year || years[0], handleYearSelection]}
           categorySelectedState={[category, handleCategorySelection]}
         />
       )}
