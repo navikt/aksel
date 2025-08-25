@@ -11,7 +11,7 @@
 //    - url sync of all form state (also those that don't trigger a sync)
 //    - form submission
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { startTransition, useEffect, useOptimistic, useState } from "react";
 import { VStack } from "@navikt/ds-react";
 import FilterChips from "./FilterChips";
 import SearchField from "./SearchField";
@@ -24,150 +24,90 @@ export const SearchForm = ({
     categories: string[];
   };
 }) => {
-  const searchInputState = useState<string>("");
-  const semverState = useState<boolean>(false);
-  const categorySelectedState = useState<string>("");
-  const yearSelectedState = useState<string>("");
+  const searchParams = useSearchParams();
+  const urlParams = new URLSearchParams(searchParams?.toString());
 
-  const [searchInput] = searchInputState;
-  const [semverSearch, setSemverSearch] = semverState;
-  const [categorySelected] = categorySelectedState;
-  const [yearSelected] = yearSelectedState;
+  const [searchInput, setSearchInput] = useState(
+    urlParams.get("fritekst") || "",
+  );
+  const [semverSearch, setSemverSearch] = useOptimistic(
+    urlParams.has("semver"),
+    (_, optimisticValue: boolean) => optimisticValue,
+  );
+  const [category, setCategory] = useOptimistic(
+    urlParams.get("kategori") || "",
+    (_, optimisticValue: string) => optimisticValue,
+  );
+  const [year, setYear] = useOptimistic(
+    urlParams.get("periode") || "",
+    (_, optimisticValue: string) => optimisticValue,
+  );
 
   const pathname = usePathname();
   const { replace } = useRouter();
-  const searchParams = useSearchParams();
 
-  // Use a ref to track if we're handling a semver toggle to prevent race conditions
-  const isSemverToggling = useRef(false);
+  const updateSearchParam = (param: string, newValue: string) => {
+    const newParams = new URLSearchParams();
 
-  const updateUrlParams = useCallback(
-    (options: { includeSearchInput?: boolean; clearSearch?: boolean } = {}) => {
-      const { includeSearchInput = false, clearSearch = false } = options;
-      const params_url = new URLSearchParams(searchParams?.toString());
-
-      // Handle search input based on flags
-      if (clearSearch) {
-        params_url.delete("fritekst");
-      } else if (includeSearchInput) {
-        if (searchInput) {
-          params_url.set("fritekst", searchInput);
-        } else {
-          params_url.delete("fritekst");
-        }
+    if (param !== "semver") {
+      if (searchInput) {
+        newParams.set("fritekst", searchInput);
       }
-      // If not including search input and not clearing, preserve existing fritekst param
-
-      // Always update filter params
       if (semverSearch) {
-        params_url.set("semver", "true");
-      } else {
-        params_url.delete("semver");
+        newParams.set("semver", "true");
       }
-
-      if (yearSelected) {
-        params_url.set("periode", yearSelected);
-      } else {
-        params_url.delete("periode");
+      if (year) {
+        newParams.set("periode", year);
       }
-
-      if (categorySelected) {
-        params_url.set("kategori", categorySelected);
-      } else {
-        params_url.delete("kategori");
+      if (category) {
+        newParams.set("kategori", category);
       }
+    }
 
-      replace(
-        `${pathname}${
-          params_url.toString() ? `?${params_url.toString()}` : ""
-        }`,
-      );
-    },
-    [
-      replace,
-      pathname,
-      searchInput,
-      semverSearch,
-      yearSelected,
-      categorySelected,
-      searchParams,
-    ],
-  );
+    if (newValue) {
+      newParams.set(param, newValue);
+    } else {
+      newParams.delete(param);
+    }
 
-  const handleTextSearch = useCallback(() => {
-    updateUrlParams({ includeSearchInput: true });
-  }, [updateUrlParams]);
+    replace(
+      `${pathname}${newParams.toString() ? `?${newParams.toString()}` : ""}`,
+    );
+  };
 
-  const handleSemverToggle = useCallback(() => {
-    isSemverToggling.current = true;
-    setSemverSearch((prev) => {
-      const newState = !prev;
+  const handleTextSearch = () => {
+    updateSearchParam("fritekst", searchInput);
+  };
 
-      // Update URL immediately with the new state
-      const params_url = new URLSearchParams(searchParams?.toString());
-      params_url.delete("fritekst"); // Always clear search when toggling semver
+  const handleSemverToggle = () => {
+    updateSearchParam("semver", semverSearch ? "" : "true");
+    startTransition(() => setSemverSearch(!semverSearch));
+  };
 
-      if (newState) {
-        params_url.set("semver", "true");
-      } else {
-        params_url.delete("semver");
-      }
+  const handleYearSelection = (newYear: string) => {
+    updateSearchParam("periode", newYear || "alle");
+    startTransition(() => setYear(newYear || "alle"));
+  };
 
-      if (yearSelected) {
-        params_url.set("periode", yearSelected);
-      } else {
-        params_url.delete("periode");
-      }
-
-      if (categorySelected) {
-        params_url.set("kategori", categorySelected);
-      } else {
-        params_url.delete("kategori");
-      }
-
-      replace(
-        `${pathname}${
-          params_url.toString() ? `?${params_url.toString()}` : ""
-        }`,
-      );
-
-      // Reset flag after a short delay
-      setTimeout(() => {
-        isSemverToggling.current = false;
-      }, 0);
-
-      return newState;
-    });
-  }, [
-    setSemverSearch,
-    searchParams,
-    yearSelected,
-    categorySelected,
-    pathname,
-    replace,
-  ]);
+  const handleCategorySelection = (newCategory: string) => {
+    updateSearchParam("kategori", newCategory);
+    startTransition(() => setCategory(newCategory));
+  };
 
   const { years, categories } = params;
 
-  // Sync semver state from URL only if we're not in the middle of toggling
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to run this when urlParams changes
   useEffect(() => {
-    if (!isSemverToggling.current) {
-      setSemverSearch(!!searchParams?.get("semver"));
+    if (!urlParams.has("fritekst")) {
+      setSearchInput(""); // In case you clear the URL params by clicking on "Endringslogg" again in the menu
     }
-  }, [searchParams, setSemverSearch]);
-
-  // Update URL when filters change (but not search input or semver)
-  useEffect(() => {
-    if (!isSemverToggling.current) {
-      updateUrlParams();
-    }
-  }, [updateUrlParams, categorySelected, yearSelected]);
+  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <VStack gap="space-24" paddingBlock="space-12 space-0">
       <SearchField
-        semverSearchState={semverState}
-        searchInputState={searchInputState}
+        semverSearch={semverSearch}
+        searchInputState={[searchInput, setSearchInput]}
         onSearch={handleTextSearch}
         onSemverToggle={handleSemverToggle}
       />
@@ -175,8 +115,8 @@ export const SearchForm = ({
         <FilterChips
           years={years}
           categories={categories}
-          yearSelectedState={yearSelectedState}
-          categorySelectedState={categorySelectedState}
+          yearSelectedState={[year || years[0], handleYearSelection]}
+          categorySelectedState={[category, handleCategorySelection]}
         />
       )}
     </VStack>
