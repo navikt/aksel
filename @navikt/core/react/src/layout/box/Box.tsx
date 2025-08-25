@@ -173,7 +173,8 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
               "navds-box-bg": background,
               "navds-box-border-color": borderColor,
               "navds-box-border-width": borderWidth,
-              "navds-box-border-radius": borderRadius,
+              "navds-box-border-radius": borderRadius && !themeContext,
+              "navds-box-radius": borderRadius && themeContext,
               "navds-box-shadow": shadow,
             })}
           >
