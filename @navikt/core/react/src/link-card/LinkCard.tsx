@@ -29,7 +29,6 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
 
 type LinkCardContextProps = {
   size: LinkCardProps["size"];
-  arrow: LinkCardProps["arrow"];
 };
 
 const [LinkCardContextProvider, useLinkCardContext] =
@@ -107,7 +106,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     const { cn } = useRenameCSS();
 
     return (
-      <LinkCardContextProvider size={size} arrow={arrow}>
+      <LinkCardContextProvider size={size}>
         <LinkAnchorOverlay asChild>
           <BodyLong
             as="div"
