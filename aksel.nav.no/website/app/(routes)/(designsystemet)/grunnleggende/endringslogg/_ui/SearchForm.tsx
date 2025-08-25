@@ -49,17 +49,19 @@ export const SearchForm = ({
   const updateSearchParam = (param: string, newValue: string) => {
     const newParams = new URLSearchParams();
 
-    if (searchInput) {
-      newParams.set("fritekst", searchInput);
-    }
-    if (semverSearch) {
-      newParams.set("semver", "true");
-    }
-    if (year) {
-      newParams.set("periode", year);
-    }
-    if (category) {
-      newParams.set("kategori", category);
+    if (param !== "semver") {
+      if (searchInput) {
+        newParams.set("fritekst", searchInput);
+      }
+      if (semverSearch) {
+        newParams.set("semver", "true");
+      }
+      if (year) {
+        newParams.set("periode", year);
+      }
+      if (category) {
+        newParams.set("kategori", category);
+      }
     }
 
     if (newValue) {

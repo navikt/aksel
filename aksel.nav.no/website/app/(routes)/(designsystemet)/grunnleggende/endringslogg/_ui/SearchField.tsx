@@ -43,12 +43,7 @@ export default function SearchField({
             variant="secondary"
             htmlSize="20"
             autoComplete="off"
-            onChange={(value) => {
-              setSearchInput(value);
-            }}
-            onClear={() => {
-              setSearchInput("");
-            }}
+            onChange={setSearchInput}
             data-color="neutral"
             className={styles.searchField}
           />
@@ -56,7 +51,6 @@ export default function SearchField({
             <Checkbox
               value="semver"
               onClick={() => {
-                setSearchInput("");
                 onSemverToggle();
               }}
               checked={semverSearch}
