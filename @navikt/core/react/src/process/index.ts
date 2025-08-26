@@ -4,6 +4,4 @@ export {
   type ProcessProps,
   ProcessEvent,
   type ProcessEventProps,
-  ProcessCheckmark,
-  type ProcessCheckmarkProps,
 } from "./Process";

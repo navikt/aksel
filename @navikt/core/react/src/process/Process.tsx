@@ -1,11 +1,4 @@
-/* eslint-disable jsx-a11y/no-redundant-roles */
-
-/**
- * `<ol />` elements with `list-style: none;` tends to be ignored by voiceover on Safari.
- * To resolve this, we add `role="list"` to the `<ol />` element.
- */
 import React, {
-  SVGProps,
   forwardRef,
   useCallback,
   useEffect,
@@ -53,10 +46,6 @@ interface ProcessComponent
    * @see 🏷️ {@link ProcessEventProps}
    */
   Event: typeof ProcessEvent;
-  /**
-   * @see 🏷️ {@link ProcessCheckmarkProps}
-   */
-  Checkmark: typeof ProcessCheckmark;
 }
 
 /**
@@ -156,9 +145,13 @@ export const Process: ProcessComponent = forwardRef<
     }, []);
 
     return (
+      // `<ol />` elements with `list-style: none;` tends to be ignored by voiceover on Safari.
+      // To resolve this, we add `role="list"` to the `<ol />` element.
+      // eslint-disable-next-line jsx-a11y/no-redundant-roles
       <ol
         ref={mergedRef}
         data-color="info"
+        // biome-ignore lint/a11y/noRedundantRoles: See comment above
         role="list"
         {...restProps}
         className={cn("navds-process", className)}
@@ -201,9 +194,9 @@ interface ProcessEventProps extends React.HTMLAttributes<HTMLLIElement> {
   bullet?: React.ReactNode;
   /**
    * Current event status.
-   * @default "inactive"
+   * @default "uncompleted"
    */
-  status?: "active" | "completed" | "inactive";
+  status?: "active" | "completed" | "uncompleted";
 }
 
 export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
@@ -216,7 +209,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
       hideContent,
       className,
       id,
-      status = "inactive",
+      status = "uncompleted",
       ...restProps
     }: ProcessEventProps,
     forwardedRef,
@@ -227,8 +220,8 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
     const { syncAriaControls, hideStatusText, rootId } = useProcessContext();
 
     // syncAriaControls is already memoized with useCallback
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(syncAriaControls, [status]);
+    // biome-ignore lint/correctness/useExhaustiveDependencies: We want to run this only when status changes
+    useEffect(syncAriaControls, [status]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isActive = status === "active";
 
@@ -359,38 +352,7 @@ const ProcessLine = () => {
   return <span className={cn("navds-process__line")} />;
 };
 
-/* ---------------------------- Process Checkmark --------------------------- */
-type ProcessCheckmarkProps = Omit<SVGProps<SVGSVGElement>, "ref">;
-
-export const ProcessCheckmark = forwardRef<
-  SVGSVGElement,
-  ProcessCheckmarkProps
->(({ className, ...restProps }: ProcessCheckmarkProps, forwardedRef) => {
-  const { cn } = useRenameCSS();
-  return (
-    <svg
-      ref={forwardedRef}
-      {...restProps}
-      className={cn("navds-process__checkmark", className)}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      role="img"
-      focusable="false"
-      aria-hidden
-    >
-      <path
-        d="M9.53518 13.4148L15.9751 7.40467C16.5792 6.83965 17.5289 6.86933 18.0954 7.47478C18.6619 8.08027 18.6295 9.03007 18.0244 9.59621L10.5211 16.5993C10.2409 16.859 9.87553 17 9.50019 17C9.10645 17 8.72711 16.8462 8.43908 16.5611L5.93908 14.0611C5.35356 13.4756 5.35356 12.5254 5.93908 11.9399C6.52461 11.3544 7.47477 11.3544 8.0603 11.9399L9.53518 13.4148Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-});
-
 /* -------------------------- Process exports ------------------------- */
 Process.Event = ProcessEvent;
-Process.Checkmark = ProcessCheckmark;
 
-export type { ProcessCheckmarkProps, ProcessEventProps, ProcessProps };
+export type { ProcessEventProps, ProcessProps };

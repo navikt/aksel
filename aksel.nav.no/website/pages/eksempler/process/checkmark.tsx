@@ -1,3 +1,4 @@
+import { CheckmarkHeavyIcon } from "@navikt/aksel-icons";
 import { Process } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -7,25 +8,25 @@ const Example = () => {
       <Process.Event
         status="completed"
         title="Søknad om livsopphold er ferdig behandlet"
-        bullet={<Process.Checkmark />}
+        bullet={<CheckmarkHeavyIcon />}
         timestamp="04. august 2025 kl. 14.30"
       />
       <Process.Event
         status="completed"
         title="Du leverte etterspurte dokumenter"
-        bullet={<Process.Checkmark />}
+        bullet={<CheckmarkHeavyIcon />}
         timestamp="04. august 2025 kl. 14.55"
       />
       <Process.Event
         status="completed"
         title="Nav trenger flere opplysninger i saken din"
-        bullet={<Process.Checkmark />}
+        bullet={<CheckmarkHeavyIcon />}
         timestamp="08. august 2025 kl. 11.10"
       />
       <Process.Event
         status="completed"
         title="Søknad om livsopphold er sendt videre for behandling"
-        bullet={<Process.Checkmark />}
+        bullet={<CheckmarkHeavyIcon />}
         timestamp="11. august 2025 kl. 09.48"
       />
       <Process.Event
@@ -49,5 +50,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Process inneholder en egen `<Process.Checkmark />` komponent i tilfeller der du ønsker å vise at et steg er fullført.",
+  desc: "Hvis du ønsker å ha en hake på fullførte steg så kan du bruke `<CheckmarkHeavyIcon />`.",
 };
