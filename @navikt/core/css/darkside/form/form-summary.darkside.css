@@ -81,3 +81,14 @@
     border-color: var(--ax-border-subtleA);
   }
 }
+
+.aksel-form-summary__footer {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ax-space-8);
+  flex: 1 0 0;
+  padding: var(--ax-space-16) var(--ax-space-20);
+  background: var(--ax-bg-raised);
+  border-radius: 0 0 var(--ax-radius-12) var(--ax-radius-12);
+  border-top: 1px solid var(--ax-border-neutral-subtleA);
+}

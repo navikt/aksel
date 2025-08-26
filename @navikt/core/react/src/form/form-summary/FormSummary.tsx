@@ -14,7 +14,7 @@ interface FormSummaryComponent
     FormSummaryProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
-   * Must include `<FormSummary.Heading>` and optionally `<FormSummary.EditLink>`.
+   * Must include `<FormSummary.Heading>`.
    */
   Header: typeof FormSummaryHeader;
   /**
@@ -22,7 +22,7 @@ interface FormSummaryComponent
    */
   Heading: typeof FormSummaryHeading;
   /**
-   * Link to edit the answers to use in the `FormSummary.Header` component. Should link to the relevant part of the form.
+   * Link to edit the answers to use in the `FormSummary.Footer` component. Should link to the relevant part of the form.
    */
   EditLink: typeof FormSummaryEditLink;
   /**
@@ -42,7 +42,7 @@ interface FormSummaryComponent
    */
   Value: typeof FormSummaryValue;
   /**
-   * Footer component for the form summary, typically used for additional information or actions.
+   * Footer component for the form summary, if applicable this is a good place for `<FormSummary.EditLink>`.
    */
   Footer: typeof FormSummaryFooter;
 }
@@ -58,7 +58,6 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
    * <FormSummary>
    *   <FormSummary.Header>
    *     <FormSummary.Heading level="2">HeadingTekst</FormSummary.Heading>
-   *     <FormSummary.EditLink href="#" />
    *   </FormSummary.Header>
    *   <FormSummary.Answers>
    *     <FormSummary.Answer>
@@ -83,7 +82,6 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
  * <FormSummary>
  *   <FormSummary.Header>
  *     <FormSummary.Heading level="2">HeadingTekst</FormSummary.Heading>
- *     <FormSummary.EditLink href="#" />
  *   </FormSummary.Header>
  *   <FormSummary.Answers>
  *     <FormSummary.Answer>
