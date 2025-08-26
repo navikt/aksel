@@ -5,29 +5,27 @@ import FilterGroup from "./FilterGroup";
 
 interface Props {
   years: string[];
-  selectedYear: string | null;
   categories: string[];
-  selectedCategory: string | null;
+  categorySelectedState: [string, (newValue: string) => void];
+  yearSelectedState: [string, (newValue: string) => void];
 }
 
 export default function FilterChips({
   years,
-  selectedYear,
   categories,
-  selectedCategory,
+  yearSelectedState,
+  categorySelectedState,
 }: Props) {
   return (
     <VStack gap="space-24">
       <FilterGroup
-        type="period"
         options={years}
-        selectedOption={selectedYear}
+        selectedState={yearSelectedState}
         label="År"
       />
       <FilterGroup
-        type="category"
         options={categories}
-        selectedOption={selectedCategory}
+        selectedState={categorySelectedState}
         label="Kategori"
       />
     </VStack>

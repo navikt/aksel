@@ -1,4 +1,4 @@
-import { MonthPicker, useMonthpicker } from "@navikt/ds-react";
+import { Box, MonthPicker, useMonthpicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -9,12 +9,14 @@ const Example = () => {
   });
 
   return (
-    <div className="min-h-96">
+    <Box minHeight="24rem">
       <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input {...inputProps} label="Velg måned" />
       </MonthPicker>
-      {selectedMonth && <div className="pt-4">{selectedMonth.getMonth()}</div>}
-    </div>
+      {selectedMonth && (
+        <Box paddingBlock="space-16">{selectedMonth.getMonth()}</Box>
+      )}
+    </Box>
   );
 };
 

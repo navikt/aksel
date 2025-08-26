@@ -1,12 +1,21 @@
 import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
-import { BodyLong, ExpansionCard, HStack, Label, Link } from "@navikt/ds-react";
+import {
+  BodyLong,
+  BodyShort,
+  Box,
+  ExpansionCard,
+  HStack,
+  Label,
+  Link,
+  VStack,
+} from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
     <ExpansionCard aria-label="Demo med ikon">
       <ExpansionCard.Header>
-        <HStack wrap={false} gap="4" align="center">
+        <HStack wrap={false} gap="space-16" align="center">
           <div>
             <PlantIcon aria-hidden fontSize="3rem" />
           </div>
@@ -36,38 +45,52 @@ const Innhold = () => (
       pengene tilbake fra Nav. Selv om pengene går til arbeidsgiveren din, er vi
       forpliktet til å vise deg informasjonen fordi det handler om deg.
     </BodyLong>
-    <Label as="p" spacing>
+    <BodyShort spacing weight="semibold">
       Slik beregner vi sykepengene
-    </Label>
-    <dl className="grid gap-1 border-b border-border-subtle pb-6">
-      <div className="flex justify-between border-b border-border-default py-1">
-        <dt>Beregnet månedslønn</dt>
-        <dd>27 256 kr</dd>
-      </div>
-      <div className="flex justify-between border-b border-border-default py-1">
-        <dt>Omregnet til årslønn</dt>
-        <dd>327 072 kr</dd>
-      </div>
-      <div className="flex justify-between border-b border-border-default py-1">
-        <dt className="font-semibold">Daglig sykepengebeløp</dt>
-        <dd>1 258 kr</dd>
-      </div>
-    </dl>
-    <dl className="pt-6">
-      <div className="flex justify-between border-b border-border-default py-1">
-        <dt>Utbetalinger totalt</dt>
-        <dd>5 dager</dd>
-      </div>
-      <div className="flex justify-between border-b border-border-default py-1">
-        <dt className="font-semibold">Sykepengebeløp</dt>
-        <dd>5 384 kr</dd>
-      </div>
-    </dl>
-    <BodyLong spacing className="mt-4">
+    </BodyShort>
+    <VStack as="dl" gap="space-4" paddingBlock="space-0 space-24">
+      <Box asChild borderWidth="0 0 1 0">
+        <HStack paddingBlock="space-4" justify="space-between">
+          <dt>Beregnet månedslønn</dt>
+          <dd>27 256 kr</dd>
+        </HStack>
+      </Box>
+      <Box asChild borderWidth="0 0 1 0">
+        <HStack paddingBlock="space-4" justify="space-between">
+          <dt>Omregnet til årslønn</dt>
+          <dd>327 072 kr</dd>
+        </HStack>
+      </Box>
+      <Box asChild>
+        <HStack paddingBlock="space-4" justify="space-between">
+          <BodyShort as="dt" weight="semibold">
+            Daglig sykepengebeløp
+          </BodyShort>
+          <dd>1 258 kr</dd>
+        </HStack>
+      </Box>
+    </VStack>
+    <Box paddingBlock="space-24 space-0">
+      <Box asChild>
+        <HStack paddingBlock="space-4" justify="space-between">
+          <dt>Utbetalinger totalt</dt>
+          <dd>5 dager</dd>
+        </HStack>
+      </Box>
+      <Box asChild>
+        <HStack paddingBlock="space-4" justify="space-between">
+          <BodyShort as="dt" weight="semibold">
+            Sykepengebeløp
+          </BodyShort>
+          <dd>5 384 kr</dd>
+        </HStack>
+      </Box>
+    </Box>
+    <BodyLong spacing>
       * Fra dette beløpet blir det trukket skatt og eventuelt andre trekk før
       utbetalingen.
     </BodyLong>
-    <div className="grid w-fit gap-2">
+    <HStack gap="space-8">
       <Link href="#">
         Se tidligere utbetalinger{" "}
         <ExternalLinkIcon aria-hidden fontSize="1.5rem" />
@@ -76,7 +99,7 @@ const Innhold = () => (
         Les mer om utregningen{" "}
         <ExternalLinkIcon aria-hidden fontSize="1.5rem" />
       </Link>
-    </div>
+    </HStack>
   </>
 );
 

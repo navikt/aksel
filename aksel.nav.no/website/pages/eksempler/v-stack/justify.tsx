@@ -8,20 +8,20 @@ const Example = () => {
       height="18rem"
       background="surface-alt-3-subtle"
     >
-      <HStack gap="2" wrap={false}>
-        <VStack justify="center" gap="1">
+      <HStack gap="space-8" wrap={false}>
+        <VStack justify="center" gap="space-4">
           <Placeholder text="center" />
           <Placeholder />
           <Placeholder />
         </VStack>
         <Divider />
-        <VStack justify="end" gap="1">
+        <VStack justify="end" gap="space-4">
           <Placeholder text="end" />
           <Placeholder />
           <Placeholder />
         </VStack>
         <Divider />
-        <VStack justify="start" gap="1">
+        <VStack justify="start" gap="space-4">
           <Placeholder text="start" />
           <Placeholder />
           <Placeholder />
@@ -53,7 +53,7 @@ const Placeholder = ({ text }: { text?: string }) => (
   <Box
     background="surface-alt-3"
     borderRadius="medium"
-    padding="2"
+    padding="space-8"
     style={{ color: "var(--a-text-on-action)" }}
   >
     {text}

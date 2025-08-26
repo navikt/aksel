@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react";
-import React from "react";
-import "../dist/tw.css";
+import { Box, Theme } from "@navikt/ds-react";
+import "./aksel-storybook.css";
 
 export const globalTypes = {
   theme: {
@@ -17,6 +17,19 @@ export const globalTypes = {
       ],
     },
   },
+  mode: {
+    name: "Darkside",
+    defaultValue: "darkside",
+    toolbar: {
+      icon: "paintbrush",
+      showName: true,
+      dynamicTitle: true,
+      items: [
+        { value: "legacy", title: "Legacy CSS" },
+        { value: "darkside", title: "Darkside CSS" },
+      ],
+    },
+  },
 };
 
 const withTheme = (Story, context) => {
@@ -24,6 +37,25 @@ const withTheme = (Story, context) => {
 
   return (
     <div className={theme === "dark" ? "dark" : ""}>
+      <Story />
+    </div>
+  );
+};
+
+const withDarkside = (Story, context) => {
+  const isDarkside = context.globals.mode === "darkside";
+
+  if (isDarkside) {
+    return (
+      <Theme hasBackground>
+        <Box padding="space-16">
+          <Story />
+        </Box>
+      </Theme>
+    );
+  }
+  return (
+    <div>
       <Story />
     </div>
   );
@@ -68,7 +100,7 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [withTheme],
+  decorators: [withDarkside, withTheme],
 };
 
 export default preview;

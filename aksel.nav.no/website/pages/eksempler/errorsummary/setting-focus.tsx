@@ -13,7 +13,7 @@ const Example = () => {
   }, [hasError]);
 
   return (
-    <VStack gap="12" align="start">
+    <VStack gap="space-48" align="start">
       {hasError && (
         <ErrorSummary ref={errorRef}>
           <ErrorSummary.Item href="#1">

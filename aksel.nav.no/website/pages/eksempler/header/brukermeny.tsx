@@ -43,6 +43,11 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 3,
   desc: "Brukernavnet kan være en Dropdown som inneholder logg ut-lenke og info om brukeren (fullt navn, identnummer og eventuelt annen relevant info).",

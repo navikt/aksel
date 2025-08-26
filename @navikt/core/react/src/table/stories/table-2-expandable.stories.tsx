@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../../button";
-import { Checkbox } from "../../form/checkbox";
+import { Checkbox, CheckboxGroup } from "../../form/checkbox";
+import { Radio, RadioGroup } from "../../form/radio";
 import { Link } from "../../link";
 import Table from "../Table";
 
@@ -175,6 +176,46 @@ export const ExpandableContentGutter = () => {
           contentGutter="none"
         >
           <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+        </Table.ExpandableRow>
+      </Table.Body>
+    </Table>
+  );
+};
+
+export const ExpandableWithCheckboxesAndRadios = () => {
+  return (
+    <Table zebraStripes>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell></Table.HeaderCell>
+          <Table.HeaderCell>Cell</Table.HeaderCell>
+          <Table.HeaderCell>Cell</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        <Table.ExpandableRow
+          defaultOpen
+          content={
+            <RadioGroup legend="Radiogruppe">
+              <Radio value="1">Alternativ 1</Radio>
+              <Radio value="2">Alternativ 2</Radio>
+            </RadioGroup>
+          }
+        >
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+        </Table.ExpandableRow>
+        <Table.ExpandableRow
+          defaultOpen
+          content={
+            <CheckboxGroup legend="Sjekkboksgruppe">
+              <Checkbox value="1">Alternativ 1</Checkbox>
+              <Checkbox value="2">Alternativ 2</Checkbox>
+            </CheckboxGroup>
+          }
+        >
           <Table.DataCell>Cell</Table.DataCell>
           <Table.DataCell>Cell</Table.DataCell>
         </Table.ExpandableRow>

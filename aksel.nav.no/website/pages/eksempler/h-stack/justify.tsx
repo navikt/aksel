@@ -4,38 +4,38 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <Box background="surface-alt-3-subtle" width="18rem">
-      <VStack gap="12">
-        <HStack gap="3" justify="center">
+      <VStack gap="space-48">
+        <HStack gap="space-12" justify="center">
           <Placeholder text="center" />
           <Placeholder />
           <Placeholder />
           <Placeholder />
         </HStack>
-        <HStack gap="3" justify="end">
+        <HStack gap="space-12" justify="end">
           <Placeholder text="end" />
           <Placeholder />
           <Placeholder />
           <Placeholder />
         </HStack>
-        <HStack gap="3" justify="start">
+        <HStack gap="space-12" justify="start">
           <Placeholder text="start" />
           <Placeholder />
           <Placeholder />
           <Placeholder />
         </HStack>
-        <HStack gap="3" justify="space-around">
+        <HStack gap="space-12" justify="space-around">
           <Placeholder text="around" />
           <Placeholder />
           <Placeholder />
           <Placeholder />
         </HStack>
-        <HStack gap="3" justify="space-between">
+        <HStack gap="space-12" justify="space-between">
           <Placeholder text="between" />
           <Placeholder />
           <Placeholder />
           <Placeholder />
         </HStack>
-        <HStack gap="3" justify="space-evenly">
+        <HStack gap="space-12" justify="space-evenly">
           <Placeholder text="evenly" />
           <Placeholder />
           <Placeholder />
@@ -51,7 +51,7 @@ const Placeholder = ({ text }: { text?: string }) => {
     <Box
       background="surface-alt-3"
       borderRadius="medium"
-      padding="2"
+      padding="space-8"
       style={{ color: "var(--a-text-on-action)" }}
     >
       {text}

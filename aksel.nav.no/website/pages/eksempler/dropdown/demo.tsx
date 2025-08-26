@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Button, Dropdown } from "@navikt/ds-react";
+import { Box, Button, Dropdown } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="min-h-32">
+    <Box minHeight="8rem">
       <Dropdown>
         <Button as={Dropdown.Toggle}>Toggle</Button>
         <Dropdown.Menu>
@@ -34,7 +34,7 @@ const Example = () => {
           </Dropdown.Menu.List>
         </Dropdown.Menu>
       </Dropdown>
-    </div>
+    </Box>
   );
 };
 

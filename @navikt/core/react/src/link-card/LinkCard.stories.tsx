@@ -204,6 +204,34 @@ export const NoArrowWithRichContent: Story = {
   ),
 };
 
+export const CenteredArrow: Story = {
+  render: () => (
+    <LinkCard arrowPosition="center">
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+    </LinkCard>
+  ),
+};
+
+export const CenteredArrowWithRichContent: Story = {
+  render: () => (
+    <LinkCard arrowPosition="center">
+      <IconDemo />
+      <LinkCardTitle>
+        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+      </LinkCardTitle>
+      <LinkCardDescription>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </LinkCardDescription>
+      <LinkCardFooter>
+        <FooterContentDemo />
+      </LinkCardFooter>
+    </LinkCard>
+  ),
+};
+
 export const SizeMedium: Story = {
   render: () => (
     <LinkCard size="medium">
@@ -640,6 +668,14 @@ export const Chromatic: Story = {
       <div>
         <h2>NoArrowWithRichContent</h2>
         {NoArrowWithRichContent.render?.(...args)}
+      </div>
+      <div>
+        <h2>CenteredArrow</h2>
+        {CenteredArrow.render?.(...args)}
+      </div>
+      <div>
+        <h2>CenteredArrowWithRichContent</h2>
+        {CenteredArrowWithRichContent.render?.(...args)}
       </div>
       <div>
         <h2>SizeMedium</h2>

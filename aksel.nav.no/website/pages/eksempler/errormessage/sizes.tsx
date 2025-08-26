@@ -5,9 +5,8 @@ const Example = () => {
   const exampeText = "Du må fylle ut tekstfeltet før innsending.";
 
   return (
-    <VStack gap="5">
+    <VStack gap="space-20">
       <ErrorMessage>Medium (18px): {exampeText}</ErrorMessage>
-
       <ErrorMessage size="small">Small (16px): {exampeText}</ErrorMessage>
     </VStack>
   );

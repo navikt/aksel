@@ -16,37 +16,40 @@ const Example = () => {
       as="header"
       borderWidth="0 0 4 0"
       borderColor="border-success"
-      paddingBlock="12 0"
+      paddingBlock="space-48 space-0"
     >
-      <div className="max-w-5xl">
-        <Box background="surface-default" paddingInline="4" paddingBlock="0 6">
-          <HStack align="start" gap="8">
+      <Box
+        maxWidth="64rem"
+        background="surface-default"
+        paddingInline="space-16"
+        paddingBlock="space-0 space-24"
+      >
+        <HStack align="start" gap="space-32">
+          <Hide below="md">
+            <Pictogram />
+          </Hide>
+
+          <VStack gap={{ xs: "space-16", md: "space-20" }}>
+            <Heading level="1" size="xlarge">
+              Dagpenger
+            </Heading>
+
             <Hide below="md">
-              <Pictogram />
+              <HStack gap="space-16" align="center">
+                <BodyShort size="small">PENGESTØTTE</BodyShort>
+                <span aria-hidden="true">|</span>
+                <Detail>Oppdatert 5. juli 2023</Detail>
+              </HStack>
             </Hide>
-
-            <VStack gap={{ xs: "4", md: "5" }}>
-              <Heading level="1" size="xlarge">
-                Dagpenger
-              </Heading>
-
-              <Hide below="md">
-                <HStack gap="4" align="center">
-                  <BodyShort size="small">PENGESTØTTE</BodyShort>
-                  <span aria-hidden="true">|</span>
-                  <Detail>Oppdatert 5. juli 2023</Detail>
-                </HStack>
-              </Hide>
-              <Show below="md">
-                <VStack gap="2">
-                  <BodyShort size="small">PENGESTØTTE</BodyShort>
-                  <Detail>Oppdatert 24. august 2023</Detail>
-                </VStack>
-              </Show>
-            </VStack>
-          </HStack>
-        </Box>
-      </div>
+            <Show below="md">
+              <VStack gap="space-8">
+                <BodyShort size="small">PENGESTØTTE</BodyShort>
+                <Detail>Oppdatert 24. august 2023</Detail>
+              </VStack>
+            </Show>
+          </VStack>
+        </HStack>
+      </Box>
     </Box>
   );
 };

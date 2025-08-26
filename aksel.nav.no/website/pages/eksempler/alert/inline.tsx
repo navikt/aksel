@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert inline variant="info">
         Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha hatt
         en pensjonsgivende inntekt som tilsvarer x G, året før du fikk nedsatt

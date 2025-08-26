@@ -1,5 +1,29 @@
 # @navikt/ds-react
 
+## 7.29.0
+
+### Minor Changes
+
+- Stepper: Mark `interactive`-prop as deprecated. For completely static 'Steppers', consider using the new `Process`-component. ([#4007](https://github.com/navikt/aksel/pull/4007))
+
+- LinkCard: Added new prop `arrowPosition` for centering the arrow if necessary. ([#4021](https://github.com/navikt/aksel/pull/4021))
+
+- Process: :tada: New component Process! The component consists of a vertical line of events where each event can contain information, actions, links or status indicators. [You can find the documentation here :memo:](https://aksel.nav.no/komponenter/core/process). ([#3950](https://github.com/navikt/aksel/pull/3950))
+
+### Patch Changes
+
+- ToggleGroup: Improved screen reader experience by using `aria-labelledby` instead of `aria-describedby` for the label ([#4028](https://github.com/navikt/aksel/pull/4028))
+
+- Accordion: Mark `headingSize` as deprecated. ([#3993](https://github.com/navikt/aksel/pull/3993))
+
+- Fieldset: Improved screen reader experience by using `aria-labelledby` for both legend and description ([#4029](https://github.com/navikt/aksel/pull/4029))
+
+- Box: Fixed bug where darkside-css did not properly apply border-radius. ([#4009](https://github.com/navikt/aksel/pull/4009))
+
+- Updated dependencies [[`887b474`](https://github.com/navikt/aksel/commit/887b47431b88d0ca5e42cb605252abe502dba64a)]:
+  - @navikt/aksel-icons@7.29.0
+  - @navikt/ds-tokens@7.29.0
+
 ## 7.28.1
 
 ### Patch Changes

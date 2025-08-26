@@ -2,7 +2,7 @@ import { FileUpload, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => (
-  <VStack gap="12">
+  <VStack gap="space-48">
     <FileUpload.Dropzone
       label="Last opp filer"
       onSelect={console.info}

@@ -7,7 +7,7 @@ const Example = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <VStack gap="4" minHeight="24rem">
+    <VStack gap="space-16" minHeight="24rem">
       <DatePicker
         onSelect={setDays}
         mode="multiple"
@@ -17,7 +17,6 @@ const Example = () => {
       >
         <Button onClick={() => setOpen((x) => !x)}>Velg dager</Button>
       </DatePicker>
-
       {days && (
         <div>
           {days.map((day) => (

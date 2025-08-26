@@ -3,11 +3,11 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Box
         background="surface-subtle"
         borderColor="border-alt-3"
-        padding="4"
+        padding="space-16"
         borderWidth="2"
         borderRadius="xlarge"
       >
@@ -16,7 +16,7 @@ const Example = () => {
       <Box
         background="surface-subtle"
         borderColor="border-alt-3"
-        padding="4"
+        padding="space-16"
         borderWidth="2"
         borderRadius="xlarge xlarge 0 0"
       >
@@ -25,7 +25,7 @@ const Example = () => {
       <Box
         background="surface-subtle"
         borderColor="border-alt-3"
-        padding="4"
+        padding="space-16"
         borderWidth="2"
         borderRadius={{ md: "large" }}
       >
