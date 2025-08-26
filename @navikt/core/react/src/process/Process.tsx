@@ -25,13 +25,13 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   children: React.ReactElement<typeof ProcessEvent>[];
   /**
-   * Hides the "aktiv"-label when the event is active.
+   * Hides the "aktiv"-text when the event is active.
    * @default false
    */
-  hideStatusLabel?: boolean;
+  hideStatusText?: boolean;
 }
 
-type ProcessContextProps = Pick<ProcessProps, "hideStatusLabel"> & {
+type ProcessContextProps = Pick<ProcessProps, "hideStatusText"> & {
   rootId: string;
   syncAriaControls: () => void;
 };
@@ -109,7 +109,7 @@ export const Process: ProcessComponent = forwardRef<
     {
       children,
       className,
-      hideStatusLabel = false,
+      hideStatusText = false,
       id,
       ...restProps
     }: ProcessProps,
@@ -166,7 +166,7 @@ export const Process: ProcessComponent = forwardRef<
         aria-controls={activeChildId}
       >
         <ProcessContextProvider
-          hideStatusLabel={hideStatusLabel}
+          hideStatusText={hideStatusText}
           rootId={rootId}
           syncAriaControls={syncAriaControls}
         >
@@ -224,7 +224,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
     const translate = useI18n("Process");
     const { cn } = useRenameCSS();
     const eventId = useId();
-    const { syncAriaControls, hideStatusLabel, rootId } = useProcessContext();
+    const { syncAriaControls, hideStatusText, rootId } = useProcessContext();
 
     // syncAriaControls is already memoized with useCallback
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -249,12 +249,12 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
 
           <div className={cn("navds-process__body")}>
             {title && <ProcessTitle>{title}</ProcessTitle>}
-            {isActive && !hideStatusLabel && (
+            {isActive && !hideStatusText && (
               <BodyShort
                 size="small"
                 className={cn("navds-process__active-label")}
               >
-                {translate("statusLabel")}
+                {translate("active")}
               </BodyShort>
             )}
             {timestamp && <ProcessTimestamp>{timestamp}</ProcessTimestamp>}

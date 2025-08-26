@@ -136,9 +136,9 @@ export const SimpleBullets: Story = {
   ),
 };
 
-export const HideStatusLabel: Story = {
+export const HideStatusText: Story = {
   render: () => (
-    <Process hideStatusLabel>
+    <Process hideStatusText>
       <Process.Event status="completed" title="Start søknad" />
       <Process.Event status="completed" title="Personopplysninger" />
       <Process.Event status="active" title="Saksopplysninger" />
@@ -175,7 +175,7 @@ export const Translation: Story = {
         <h3>Custom</h3>
         <Provider
           locale={en}
-          translations={{ Process: { statusLabel: "Under arbeid" } }}
+          translations={{ Process: { active: "Under arbeid" } }}
         >
           <Process>
             <Process.Event status="completed" title="Start søknad" />
@@ -376,7 +376,7 @@ export const Chromatic = renderStoriesForChromatic({
   IconBullets,
   Content,
   SimpleBullets,
-  HideStatusLabel,
+  HideStatusText,
   Translation,
   InteractiveDemo,
 });
