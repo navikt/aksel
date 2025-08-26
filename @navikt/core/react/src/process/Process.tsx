@@ -16,7 +16,7 @@ import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
 import { createContext } from "../util/create-context";
-import { useCallbackRef, useMergeRefs } from "../util/hooks";
+import { useMergeRefs } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
@@ -226,9 +226,9 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
     const eventId = useId();
     const { syncAriaControls, hideStatusLabel, rootId } = useProcessContext();
 
-    const sync = useCallbackRef(syncAriaControls);
-
-    useEffect(() => sync(), [status, sync]);
+    // syncAriaControls is already memoized with useCallback
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(syncAriaControls, [status]);
 
     const isActive = status === "active";
 

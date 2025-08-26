@@ -22,7 +22,7 @@ const Example = () => {
         />
         <Process.Event
           status="completed"
-          title="Nav trenger felre opplysninger i saken din"
+          title="Nav trenger flere opplysninger i saken din"
           bullet={<Process.Checkmark />}
           timestamp="08. august 2025 kl. 11.10"
         />
