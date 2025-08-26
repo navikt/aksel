@@ -50,5 +50,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Vi anbefaler å bruke `<CheckmarkHeavyIcon />` når du ønsker å vise at et steg er fullført.",
+  desc: "Hvis du ønsker å ha en hake på fullførte steg så kan du bruke `<CheckmarkHeavyIcon />`.",
 };
