@@ -1,0 +1,153 @@
+.aksel-process {
+  --__axc-process-circle-base: 2rem;
+  --__axc-process-circle-large: var(--__axc-process-circle-base);
+  --__axc-process-circle-small: 1rem;
+  --__axc-process-circle-size: var(--__axc-process-circle-large);
+  --__axc-process-border-width: 2px;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.aksel-process__event {
+  display: grid;
+  grid-template-rows:
+    [line-1] auto [step-start] var(--__axc-process-circle-size)
+    [line-2 step-end] auto;
+  grid-template-columns: var(--__axc-process-circle-base) auto;
+  justify-items: flex-start;
+
+  &[data-dot="true"] {
+    --__axc-process-circle-size: var(--__axc-process-circle-small);
+
+    margin-block-start: calc((var(--__axc-process-circle-small) / 2) * -1);
+
+    & .aksel-process__line {
+      margin-block-start: calc(var(--__axc-process-circle-size) / 2);
+    }
+
+    & .aksel-process__bullet {
+      --__axc-process-circle-size: var(--__axc-process-circle-small);
+
+      margin-top: calc((var(--__axc-process-circle-large) - var(--__axc-process-circle-small)) / 2);
+    }
+  }
+}
+
+.aksel-process__line {
+  width: 0;
+  border: calc(var(--__axc-process-border-width) / 2) solid;
+  min-height: 2rem;
+  justify-self: center;
+  grid-column: 1;
+  grid-row: line-2;
+  border-color: var(--ax-border-neutral-subtle);
+
+  .aksel-process__event[data-status="active"] & {
+    border-color: var(--ax-border-default);
+    border-image: linear-gradient(to bottom, var(--ax-border-default) 70%, var(--ax-border-neutral-subtle) 90%);
+    border-image-slice: 1;
+  }
+
+  .aksel-process__event[data-status="completed"] & {
+    border-color: var(--ax-border-default);
+  }
+
+  .aksel-process__event:not([data-status="active"]) & {
+    border-image: none;
+  }
+
+  .aksel-process__event:last-of-type & {
+    display: none;
+  }
+}
+
+.aksel-process__item {
+  grid-row: 2 / -1;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: [bullet] var(--__axc-process-circle-base) [content] auto;
+  gap: var(--ax-space-16);
+  justify-content: flex-start;
+  padding: var(--__axc-process-border-width);
+  margin: calc(var(--__axc-process-border-width) * -1) calc(var(--__axc-process-border-width) * -1) var(--ax-space-16);
+  width: 100%;
+
+  .aksel-process__event:last-child & {
+    margin-bottom: 0;
+  }
+}
+
+.aksel-process__bullet {
+  grid-column: bullet;
+  display: inline-grid;
+  place-self: baseline center;
+  place-items: center;
+  width: var(--__axc-process-circle-size);
+  height: var(--__axc-process-circle-size);
+  line-height: 1;
+  border-radius: var(--ax-radius-full);
+  border: var(--__axc-process-border-width) solid;
+  color: var(--ax-text-neutral-subtle);
+  border-color: var(--ax-border-neutral-subtleA);
+  transition-property: background, border-color;
+  transition-duration: 70ms;
+  transition-timing-function: linear;
+
+  & svg {
+    height: min(calc(var(--__axc-process-circle-size) * 0.75), 1.5rem);
+    width: min(calc(var(--__axc-process-circle-size) * 0.75), 1.5rem);
+  }
+
+  .aksel-process__event:is([data-status="completed"], [data-status="active"]) & {
+    color: var(--ax-text-contrast);
+    background: var(--ax-bg-strong);
+    border-color: transparent;
+  }
+
+  .aksel-process__event[data-status="active"] & {
+    outline: 4px solid var(--ax-bg-moderate);
+  }
+
+  .aksel-process__event[data-status="inactive"] & {
+    transition: none;
+  }
+}
+
+.aksel-process__body {
+  grid-column: content;
+}
+
+.aksel-process__title {
+  padding-block: 0.16rem var(--ax-space-4);
+
+  .aksel-process__event[data-status="active"] &:has(+ .aksel-process__active-label) {
+    padding-block-end: 0;
+  }
+}
+
+.aksel-process__active-label {
+  margin-block: 0 var(--ax-space-4);
+  color: var(--ax-text-subtle);
+
+  &:last-of-type {
+    margin-block-end: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .aksel-process__bullet {
+    transition: none;
+  }
+
+  .aksel-process__event:is([data-status="completed"], [data-status="active"]) .aksel-process__bullet {
+    outline-color: ButtonText;
+    background-color: ButtonText;
+    color: ButtonFace;
+  }
+
+  .aksel-process__event:is([data-status="active"]) .aksel-process__line {
+    border-image: none;
+  }
+}
