@@ -2,12 +2,11 @@
 
 import { useSearchParams } from "next/navigation";
 import React from "react";
-import { BodyShort, Link, VStack } from "@navikt/ds-react";
+import { BodyShort, Box, Link, VStack } from "@navikt/ds-react";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import TokenCategory from "./TokenCategory";
 import { TOKEN_CATEGORIES } from "./config";
 import { searchTokens } from "./toolbar/SearchField.utils";
-import Toolbar from "./toolbar/Toolbar";
 
 const TokensPage = () => {
   const searchParams = useSearchParams();
@@ -16,8 +15,7 @@ const TokensPage = () => {
     filteredTokens.some((token) => token.category === id),
   );
   return (
-    <VStack gap="space-8">
-      <Toolbar />
+    <Box marginBlock="space-40 0">
       {filteredTokens.length === 0 && (
         <EmptyStateCard
           actionComponent={
@@ -58,7 +56,7 @@ const TokensPage = () => {
           );
         })}
       </VStack>
-    </VStack>
+    </Box>
   );
 };
 
