@@ -110,7 +110,7 @@
     outline: 4px solid var(--a-surface-alt-3-subtle);
   }
 
-  .navds-process__event[data-status="inactive"] & {
+  .navds-process__event[data-status="uncompleted"] & {
     transition: none;
   }
 }

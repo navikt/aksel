@@ -110,7 +110,7 @@
     outline: 4px solid var(--ax-bg-moderate);
   }
 
-  .aksel-process__event[data-status="inactive"] & {
+  .aksel-process__event[data-status="uncompleted"] & {
     transition: none;
   }
 }
