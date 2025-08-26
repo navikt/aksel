@@ -8,7 +8,7 @@ import TokenTableOfContents from "./_ui/TokenTableOfContents";
 import TokensPage from "./_ui/TokensPage";
 import Toolbar from "./_ui/toolbar/Toolbar";
 
-/* Since page relies on searchparams for general navigation, we avoid Suspense by foce-dynamic */
+/* Since page relies on searchparams for general navigation, we avoid Suspense by force-dynamic */
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
