@@ -23,6 +23,7 @@ export const Default: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
       <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
+      <FormSummary.EditLink href="#" />
     </FormSummary.Header>
 
     <FormSummary.Answers>

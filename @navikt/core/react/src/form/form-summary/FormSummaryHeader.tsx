@@ -6,7 +6,7 @@ import FormSummaryEditLink from "./FormSummaryEditLink";
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Must include `<FormSummary.Heading>` and optionally `<FormSummary.EditLink>`.
+   * Must include `<FormSummary.Heading>`.
    */
   children: React.ReactNode;
 }
