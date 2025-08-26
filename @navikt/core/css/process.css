@@ -46,7 +46,7 @@
 
   .navds-process__event[data-status="active"] & {
     border-color: var(--a-border-alt-3);
-    border-image: linear-gradient(to bottom, var(--a-border-alt-3) 70%, var(--a-border-subtle) 90%);
+    border-image: linear-gradient(to bottom, var(--a-border-alt-3) 50%, var(--a-border-subtle) 90%);
     border-image-slice: 1;
   }
 

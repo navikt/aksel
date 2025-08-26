@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { format } from "date-fns";
 import React from "react";
-import { SparklesFillIcon } from "@navikt/aksel-icons";
+import { CheckmarkHeavyIcon, SparklesFillIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { HStack } from "../layout/stack";
 import { Provider } from "../provider";
@@ -212,13 +212,13 @@ export const InteractiveDemo: Story = {
       if (isDone(step)) {
         return "completed";
       }
-      return "inactive";
+      return "uncompleted";
     };
 
     return (
       <Process style={{ maxWidth: "40rem" }}>
         <Process.Event
-          bullet={isDone(0) ? <Process.Checkmark /> : <SparklesFillIcon />}
+          bullet={isDone(0) ? <CheckmarkHeavyIcon /> : <SparklesFillIcon />}
           title="Step one"
           timestamp={getDateAfter(3)}
           hideContent={activeStep > 0}
@@ -239,7 +239,7 @@ export const InteractiveDemo: Story = {
           </div>
         </Process.Event>
         <Process.Event
-          bullet={isDone(1) ? <Process.Checkmark /> : <SparklesFillIcon />}
+          bullet={isDone(1) ? <CheckmarkHeavyIcon /> : <SparklesFillIcon />}
           title="Step two"
           timestamp={getDateAfter(2)}
           status={getEventState(1)}
@@ -265,14 +265,14 @@ export const InteractiveDemo: Story = {
         </Process.Event>
         <Process.Event
           title="Substep 1"
-          status={activeStep > 1 ? "completed" : "inactive"}
+          status={activeStep > 1 ? "completed" : "uncompleted"}
         />
         <Process.Event
           title="Substep 2"
-          status={activeStep > 1 ? "completed" : "inactive"}
+          status={activeStep > 1 ? "completed" : "uncompleted"}
         />
         <Process.Event
-          bullet={isDone(2) ? <Process.Checkmark /> : <SparklesFillIcon />}
+          bullet={isDone(2) ? <CheckmarkHeavyIcon /> : <SparklesFillIcon />}
           title="Step three"
           status={getEventState(2)}
         >
@@ -297,7 +297,7 @@ export const InteractiveDemo: Story = {
         </Process.Event>
 
         <Process.Event
-          bullet={isDone(3) ? <Process.Checkmark /> : <SparklesFillIcon />}
+          bullet={isDone(3) ? <CheckmarkHeavyIcon /> : <SparklesFillIcon />}
           title="Step four"
           timestamp={getDateAfter(1)}
           status={getEventState(3)}
@@ -322,7 +322,7 @@ export const InteractiveDemo: Story = {
           )}
         </Process.Event>
         <Process.Event
-          bullet={isDone(4) ? <Process.Checkmark /> : <SparklesFillIcon />}
+          bullet={isDone(4) ? <CheckmarkHeavyIcon /> : <SparklesFillIcon />}
           title="Step five"
           status={getEventState(4)}
         >
@@ -346,7 +346,7 @@ export const InteractiveDemo: Story = {
           )}
         </Process.Event>
         <Process.Event
-          bullet={isDone(5) ? <Process.Checkmark /> : <SparklesFillIcon />}
+          bullet={isDone(5) ? <CheckmarkHeavyIcon /> : <SparklesFillIcon />}
           title="Step six"
           status={getEventState(5)}
         >
