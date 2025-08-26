@@ -1,6 +1,5 @@
 // import { usePathname, useRouter, useSearchParams } from "next/navigation";
 // import { startTransition, useOptimistic } from "react";
-import { Dispatch, SetStateAction } from "react";
 import { Chips, Label, VStack } from "@navikt/ds-react";
 import { capitalizeText } from "@/ui-utils/format-text";
 
@@ -12,7 +11,7 @@ export default function FilterGroup({
 }: {
   // type: "category" | "period";
   options: string[];
-  selectedState: [string, Dispatch<SetStateAction<string>>];
+  selectedState: [string, (newState: string) => void];
   label: string;
 }) {
   // const { push, prefetch } = useRouter();
