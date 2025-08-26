@@ -109,4 +109,10 @@ export default {
           : [TsconfigPathsPlugin(tsConfigPathsPluginOpts)],
     } satisfies InlineConfig);
   },
+  /* Lets us preview Roboto-flex font in storybook. */
+  previewHead: (head) => `
+  ${head}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">`,
 } satisfies StorybookConfig;

@@ -107,7 +107,7 @@ export default function SearchField({
               defaultChecked={!!searchParams?.get("semver")}
               checked={semverSearch}
             >
-              semver søk
+              Semver-søk
             </Checkbox>
             <HelpText title="Søke-syntaks" placement="bottom">
               <VStack maxWidth="50ch">

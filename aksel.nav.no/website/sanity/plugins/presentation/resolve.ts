@@ -1,8 +1,8 @@
 import {
   PresentationPluginOptions,
   defineDocuments,
-  defineLocations,
 } from "sanity/presentation";
+import { locations } from "./locations";
 
 export const resolve: PresentationPluginOptions["resolve"] = {
   mainDocuments: defineDocuments([
@@ -72,49 +72,52 @@ export const resolve: PresentationPluginOptions["resolve"] = {
     },
     /* TODO: Add support for misc pages (frontpage, landing-pages, god-praksis, god-praksis/tema etc) */
   ]),
-  locations: {
-    komponent_artikkel: defineLocations({
-      select: {
-        title: "heading",
-        slug: "slug.current",
-      },
-      resolve: (doc) => ({
-        locations: [
-          {
-            title: doc?.title || "Untitled",
-            href: `/${doc?.slug}`,
-          },
-        ],
+  locations,
+
+  /* TODO: Re-add locations for all article-documents. Temp removed to accomedate editor-migrations 21.08.2025 */
+  /* return {
+      komponent_artikkel: defineLocations({
+        select: {
+          title: "heading",
+          slug: "slug.current",
+        },
+        resolve: (doc) => ({
+          locations: [
+            {
+              title: doc?.title || "Untitled",
+              href: `/${doc?.slug}`,
+            },
+          ],
+        }),
       }),
-    }),
-    ds_artikkel: defineLocations({
-      select: {
-        title: "heading",
-        slug: "slug.current",
-      },
-      resolve: (doc) => ({
-        locations: [
-          {
-            title: doc?.title || "Untitled",
-            href: `/${doc?.slug}`,
-          },
-        ],
+      ds_artikkel: defineLocations({
+        select: {
+          title: "heading",
+          slug: "slug.current",
+        },
+        resolve: (doc) => ({
+          locations: [
+            {
+              title: doc?.title || "Untitled",
+              href: `/${doc?.slug}`,
+            },
+          ],
+        }),
       }),
-    }),
-    templates_artikkel: defineLocations({
-      select: {
-        title: "heading",
-        slug: "slug.current",
-      },
-      resolve: (doc) => ({
-        locations: [
-          {
-            title: doc?.title || "Untitled",
-            href: `/${doc?.slug}`,
-          },
-        ],
+      templates_artikkel: defineLocations({
+        select: {
+          title: "heading",
+          slug: "slug.current",
+        },
+        resolve: (doc) => ({
+          locations: [
+            {
+              title: doc?.title || "Untitled",
+              href: `/${doc?.slug}`,
+            },
+          ],
+        }),
       }),
-    }),
-    /* TODO: Add support for blogg, god-praksis and all other missing documents */
-  },
+    };
+  }, */
 };
