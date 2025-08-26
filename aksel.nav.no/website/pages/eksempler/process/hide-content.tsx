@@ -21,7 +21,7 @@ const Example = () => {
       return "active";
     }
 
-    return "inactive";
+    return "uncompleted";
   };
 
   return (
