@@ -1,5 +1,67 @@
 # Aksel - GitHub Copilot Instructions
 
+## General Code Guidelines Copilot Instructions
+
+- Always verify information before presenting it. Do not make assumptions or speculate without clear evidence.
+- Make changes file by file and allow for review of mistakes.
+- Never use apologies or give feedback about understanding in comments or documentation.
+- Don't suggest whitespace changes or summarize changes made.
+- Only implement changes explicitly requested; do not invent changes.
+- Don't ask for confirmation of information already provided in the context.
+- Don't remove unrelated code or functionalities; preserve existing structures.
+- Provide all edits in a single chunk per file, not in multiple steps.
+- Don't ask the user to verify implementations visible in the provided context.
+- Don't suggest updates or changes to files when there are no actual modifications needed.
+- Always provide links to real files, not context-generated files.
+- Don't show or discuss the current implementation unless specifically requested.
+- Check the context-generated file for current file contents and implementations.
+- Prefer descriptive, explicit variable names for readability.
+- Adhere to the existing coding style in the project.
+- Prioritize code performance and security in suggestions.
+- Suggest or include unit tests for new or modified code.
+- Implement robust error handling and logging where necessary.
+- Make sure logging does not expose sensitive information.
+- Make sure logging follows current workspace conventions.
+- Encourage modular design for maintainability and reusability.
+- Ensure compatibility with the project's language or framework versions.
+- Replace hardcoded values with named constants.
+
+### Code Writing Standards
+
+- Follow established code-writing standards for your language (spacing, comments, naming).
+- Extend standards with internal rules for folder and function naming if needed.
+
+### Comment Usage
+
+- Use comments sparingly and only when meaningful.
+- Avoid commenting on obvious code; focus on explaining "why" and potential pitfalls.
+
+### Conditional Encapsulation
+
+- Encapsulate nested if/else logic into functions with descriptive names for clarity.
+
+### DRY Principle
+
+- Avoid code duplication; reuse code via functions, classes, modules, or libraries.
+- Modify code in one place when updating logic.
+
+### Function Length & Responsibility
+
+- Write short, focused functions (single responsibility principle).
+- Break up long or complex functions into smaller ones.
+
+### General Code Style & Readability
+
+- Write code that is readable, understandable, and maintainable.
+- Prioritize clarity and adhere to coding standards.
+- Regularly review and refactor code for structure and maintainability.
+
+### Naming Conventions
+
+- Use meaningful, descriptive names for variables, functions, and classes.
+- Names should reflect purpose, behavior, and usage.
+- Prefer specific names that reveal intent without needing comments.
+
 ## Repository Overview
 
 Aksel is NAV's design system providing React components, CSS, design tokens, icons, and related tooling. The repository is a monorepo using Yarn workspaces that contains both the design system packages and the documentation website (aksel.nav.no).
@@ -136,7 +198,7 @@ yarn changeset             # Create new version entry for releases
 
 ```
 src/
-├── index.ts                # Main exports
+├── index.ts               # Main exports
 └── component/
     ├── index.ts           # Component exports
     ├── component.tsx      # Component implementation
@@ -192,3 +254,25 @@ src/
 6. **CSS Token Validation**: Stylelint enforces design token usage and prevents deprecated class usage.
 
 7. **Git Workflow**: Push to `main` deploys to production, `next` branch deploys to staging (aksel.dev.nav.no).
+
+## Next.js App Router Copilot Instructions
+
+### Best Practices
+
+- Use server components by default.
+- Implement client components only when necessary.
+- Utilize the new file-based routing system.
+- Use `layout.js` for shared layouts.
+- Implement `loading.js` for loading states.
+- Use `error.js` for error handling.
+- Utilize route handlers for API routes.
+
+### Additional Guidelines
+
+- Use TypeScript for type safety.
+- Implement proper metadata for SEO.
+- Use the Next.js Image component for optimized images.
+- Use CSS Modules for styling.
+- Implement proper error boundaries.
+- Follow Next.js naming conventions for special files.
+- Use environment variables for configuration.
