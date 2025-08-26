@@ -44,7 +44,6 @@ const Example = () => {
         <Process.Event
           status="active"
           title="Nav har etterspurt opplysninger"
-          timestamp="8. september 2025"
         />
       </Process>
     </>
