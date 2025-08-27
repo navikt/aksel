@@ -1,5 +1,19 @@
 # @navikt/ds-css
 
+## 7.29.0
+
+### Minor Changes
+
+- LinkCard: Added new prop `arrowPosition` for centering the arrow if necessary. ([#4021](https://github.com/navikt/aksel/pull/4021))
+
+- Process: :tada: New component Process! The component consists of a vertical line of events where each event can contain information, actions, links or status indicators. [You can find the documentation here :memo:](https://aksel.nav.no/komponenter/core/process). ([#3950](https://github.com/navikt/aksel/pull/3950))
+
+### Patch Changes
+
+- Darkside: Fix issue with focus outline on checkbox in expandable table row content ([#3998](https://github.com/navikt/aksel/pull/3998))
+
+- Darkside: Fix arrow in Tooltip ([#4018](https://github.com/navikt/aksel/pull/4018))
+
 ## 7.28.1
 
 ## 7.28.0
