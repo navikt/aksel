@@ -280,7 +280,7 @@ const GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY = defineQuery(
         "image": seo.image
       }
     },
-    ${contributorsAll},
+    ${writersAll},
     relevante_artikler[]->{
       heading,
       ingress,
