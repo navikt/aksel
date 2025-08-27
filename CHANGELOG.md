@@ -1,5 +1,41 @@
 # Changelog
 
+## 7.29.0
+
+### @navikt/ds-css
+
+- LinkCard: Added new prop `arrowPosition` for centering the arrow if necessary. ([#4021](https://github.com/navikt/aksel/pull/4021))
+
+- Process: :tada: New component Process! The component consists of a vertical line of events where each event can contain information, actions, links or status indicators. [You can find the documentation here :memo:](https://aksel.nav.no/komponenter/core/process). ([#3950](https://github.com/navikt/aksel/pull/3950))
+
+* Darkside: Fix issue with focus outline on checkbox in expandable table row content ([#3998](https://github.com/navikt/aksel/pull/3998))
+
+* Darkside: Fix arrow in Tooltip ([#4018](https://github.com/navikt/aksel/pull/4018))
+
+### @navikt/ds-react
+
+- Stepper: Mark `interactive`-prop as deprecated. For completely static 'Steppers', consider using the new `Process`-component. ([#4007](https://github.com/navikt/aksel/pull/4007))
+
+- LinkCard: Added new prop `arrowPosition` for centering the arrow if necessary. ([#4021](https://github.com/navikt/aksel/pull/4021))
+
+- Process: :tada: New component Process! The component consists of a vertical line of events where each event can contain information, actions, links or status indicators. [You can find the documentation here :memo:](https://aksel.nav.no/komponenter/core/process). ([#3950](https://github.com/navikt/aksel/pull/3950))
+
+* ToggleGroup: Improved screen reader experience by using `aria-labelledby` instead of `aria-describedby` for the label ([#4028](https://github.com/navikt/aksel/pull/4028))
+
+* Accordion: Mark `headingSize` as deprecated. ([#3993](https://github.com/navikt/aksel/pull/3993))
+
+* Fieldset: Improved screen reader experience by using `aria-labelledby` for both legend and description ([#4029](https://github.com/navikt/aksel/pull/4029))
+
+* Box: Fixed bug where darkside-css did not properly apply border-radius. ([#4009](https://github.com/navikt/aksel/pull/4009))
+
+### @navikt/aksel
+
+- CLI: Codemods now only run on relevant files. This resolves cases where codemods for js/ts-files tried and failed to parse css/scss/less-files. ([#4016](https://github.com/navikt/aksel/pull/4016))
+
+### @navikt/aksel-icons
+
+- Icons: :tada: New icons `CheckmarkHeavy` and `PageBreak`. ([#4038](https://github.com/navikt/aksel/pull/4038))
+
 ## 7.28.1
 
 ### @navikt/ds-react
