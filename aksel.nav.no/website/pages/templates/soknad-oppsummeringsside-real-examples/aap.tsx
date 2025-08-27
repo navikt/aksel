@@ -10,7 +10,6 @@ import {
   Heading,
   Link,
   Page,
-  Show,
   Stack,
   VStack,
 } from "@navikt/ds-react";
@@ -33,14 +32,18 @@ function Example() {
         <VStack gap="8">
           <Bleed marginInline={{ lg: "24" }}>
             <Stack
-              gap="6"
-              direction={{ sm: "row-reverse", lg: "row" }}
-              justify={{ sm: "space-between", lg: "start" }}
+              gap={{ xs: "3", lg: "6" }}
+              direction={{ xs: "column", lg: "row" }}
+              justify={{ xs: "space-between", lg: "start" }}
               wrap={false}
             >
-              <Show above="sm">
+              <Box
+                width={{ xs: "64px", lg: "96px" }}
+                height={{ xs: "64px", lg: "96px" }}
+                asChild
+              >
                 <ApplicationPictogram />
-              </Show>
+              </Box>
               <Heading level="1" size="xlarge">
                 Søknad om arbeidsavklaringspenger (AAP)
               </Heading>
