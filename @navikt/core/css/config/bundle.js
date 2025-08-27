@@ -9,6 +9,7 @@ const cssImports = require("postcss-import");
 const nesting = require("postcss-nesting");
 const cssnano = require("cssnano");
 const getDirName = require("path").dirname;
+const lightningcss = require("lightningcss");
 
 const version = require("../package.json").version;
 const {
@@ -43,6 +44,18 @@ async function run() {
   await bundleFragments();
   await bundleMinified();
   copyToVersionFolder();
+  validate();
+}
+
+function validate() {
+  try {
+    lightningcss.transform({
+      filename: "",
+      code: fs.readFileSync("dist/index.css"),
+    });
+  } catch (error) {
+    throw new Error(`Error validating CSS: ${error}`);
+  }
 }
 
 async function bundleMonolith() {
