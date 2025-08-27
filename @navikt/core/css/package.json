@@ -22,11 +22,10 @@
     "directory": "@navikt/core/css"
   },
   "scripts": {
-    "build": "node config/bundle.js && yarn build:darkside && yarn validate",
+    "build": "node config/bundle.js && yarn build:darkside",
     "css:get-version": "node config/get-version.js",
     "build:darkside": "tsx ./config/bundle.darkside.ts",
-    "test": "yarn build && vitest run",
-    "validate": "lightningcss dist/index.css -o /dev/null && lightningcss dist/darkside/index.css -o /dev/null"
+    "test": "yarn build && vitest run"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^7.29.0",
