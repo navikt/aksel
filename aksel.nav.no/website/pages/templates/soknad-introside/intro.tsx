@@ -39,7 +39,6 @@ function Example() {
             <Stack
               gap={{ xs: "3", lg: "6" }}
               direction={{ xs: "column", lg: "row" }}
-              justify={{ xs: "space-between", lg: "start" }}
               wrap={false}
             >
               <Box
