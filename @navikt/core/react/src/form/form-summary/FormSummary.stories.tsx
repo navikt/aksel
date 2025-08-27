@@ -448,17 +448,6 @@ export const _DevWarning_MisuseInHeaderExample: StoryFn<
       <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
       {/* Intentional to trigger warning */}
       <FormSummary.EditLink href="#" />
-      {/* Intentional to trigger error */}
-      <FormSummary.Answers>
-        <FormSummary.Answer>
-          <FormSummary.Label>Adresse</FormSummary.Label>
-          <FormSummary.Value>
-            Gate 123
-            <br />
-            1234 Sted
-          </FormSummary.Value>
-        </FormSummary.Answer>
-      </FormSummary.Answers>
     </FormSummary.Header>
     <FormSummary.Answers>
       <FormSummary.Answer>
