@@ -13304,7 +13304,7 @@
         },
         "optional": true
       },
-      "contributors": {
+      "writers": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
@@ -13332,7 +13332,7 @@
                 "optional": true
               }
             },
-            "dereferencesTo": "editor",
+            "dereferencesTo": "editorial_staff",
             "rest": {
               "type": "object",
               "attributes": {
