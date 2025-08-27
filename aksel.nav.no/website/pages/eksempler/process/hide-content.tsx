@@ -58,7 +58,7 @@ const Example = () => {
           title="Du søkte om FORELDREPENGER"
           timestamp="22. august 2025"
           bullet={<TasklistSendIcon />}
-          hideContent={activeStep > 3}
+          hideContent={activeStep > 3 || activeStep < 1}
           status={getEventStatus(1)}
         >
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
@@ -80,6 +80,7 @@ const Example = () => {
           title="Du har fått et svar på søknaden din"
           timestamp="25. august 2025"
           bullet={<EnvelopeOpenIcon />}
+          hideContent={activeStep < 4}
           status={getEventStatus(4)}
         >
           Rem quisquam delectus beatae perferendis deleniti officiis eveniet
@@ -89,6 +90,7 @@ const Example = () => {
           title="Nav har etterspurt opplysninger"
           timestamp="8. september 2025"
           status={getEventStatus(5)}
+          hideContent={activeStep < 5}
         >
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
           excepturi velit magni explicabo blanditiis dicta reiciendis commodi
