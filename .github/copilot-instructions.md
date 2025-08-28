@@ -10,6 +10,8 @@ This file tells Copilot how to work inside the Aksel monorepo. Prefer existing p
 - When touching packages under `@navikt/*`, also update exports and stories nearby.
 - Add or adjust tests and stories when behavior/visuals change.
 - Link files with repo paths like `@navikt/react/src/...` or `aksel.nav.no/website/...`.
+- Keep changes focused and minimal; avoid drive-by rewrites or formatting churn.
+- Preserve public APIs unless the request explicitly calls for a breaking change (add a changeset if user-facing).
 
 ## General code guidelines (Copilot)
 
@@ -21,6 +23,7 @@ This file tells Copilot how to work inside the Aksel monorepo. Prefer existing p
 - Favor performance and security; add robust error handling and safe logging.
 - Keep functions small and focused; remove duplication.
 - Replace hardcoded values with named constants when reasonable.
+- Prefer composition over deep inheritance; keep modules cohesive.
 
 ## Repository overview
 
@@ -101,12 +104,21 @@ Common failure causes:
 - TypeScript errors in dependent workspaces
 - Stylelint token checks failing due to missing token imports
 
+Quality gates to check locally before opening a PR:
+
+- Build: `yarn boot` succeeds without TS errors.
+- Lint/format: `yarn lint` (and optional `yarn biome:lint`) passes.
+- Tests: `yarn test` for changed workspaces are green.
+- Storybook/website (when UI changes): boots locally without errors.
+
 ## Tests
 
 - Framework: Vitest (jsdom where needed)
 - Website config: `aksel.nav.no/website/config/vitest.config.ts`
 - Test locations: `**/__tests__/**` and `**/*.test.*`
 - Add tests for new behavior and keep existing tests passing
+- Prefer small, focused tests. Cover the happy path and 1–2 edge cases.
+- Use Testing Library queries that reflect user intent (role/name), avoid brittle selectors.
 
 ## Linting and formatting
 
@@ -115,6 +127,7 @@ Common failure causes:
 - Tokens are validated via Stylelint and `csstools/value-no-unknown-custom-properties`
 - Biome config: `biome.json` (optional extra lint/format)
 - Prettier uses import-sort; website adds Tailwind plugin via override
+- Avoid disabling lint rules unless necessary; if you must, comment why.
 
 ## Packages and exports
 
@@ -135,6 +148,8 @@ When adding/editing components in `@navikt/react`:
 - Update exports in `src/index.ts` and per-component `index.ts`
 - Add/maintain stories and tests next to the component
 - Follow existing props, theming, and token patterns
+- Keep props stable; prefer additive changes. Deprecate before removal when possible.
+- Ensure tree-shakeability; avoid side effects at module top-level.
 
 ## Common workflows
 
@@ -145,6 +160,15 @@ Add a new component
 3. Export from the package `index.ts`
 4. Run `yarn boot` and fix types/lint
 5. Create a changeset (`yarn changeset`)
+
+Component change checklist (quick):
+
+- [ ] Implementation updated under `@navikt/react/src/...`
+- [ ] Exports updated (`src/index.ts` and component `index.ts`)
+- [ ] Stories updated/added and render without errors
+- [ ] Tests updated/added and passing (Vitest)
+- [ ] Tokens/CSS use existing variables and layers (no hard-coded values)
+- [ ] Changeset added if user-facing (version bump and notes)
 
 Modify an existing component
 
@@ -172,6 +196,8 @@ Troubleshooting
 - Prefer server components where already used; mark client components with `"use client"` only when needed.
 - Use Next Image, metadata APIs, and established utilities already in `aksel.nav.no/website`.
 - Logging uses Next logger/pino; follow patterns in `aksel.nav.no/website` (see `next-logger.config.js`).
+- Use existing route conventions and file organization; don’t mix `app/` and `pages/` in the same hierarchy.
+- For Tailwind, prefer the shared preset `@navikt/ds-tailwind` and follow website `tailwind.config.js` patterns.
 
 ## Versioning and releases
 
@@ -188,7 +214,7 @@ Troubleshooting
 - Versioning: “Run yarn changeset, then yarn create-version”
 - Theming: “Import @navikt/ds-css/darkside in global CSS and ensure tokens via @navikt/ds-tokens/darkside-css”
 
-## Code reivews (for Copilot)
+## Code reviews (for Copilot)
 
 - Summarize the pull-request on maximum two sentences
 - Avoid listing all changes, focus on the most important ones
@@ -200,3 +226,9 @@ Troubleshooting
 - When components are changed, ensure stories and tests are updated accordingly
 - When components are changed, make sure related examples for website and playroom are updated
 - Make sure changes made to packages under `@navikt/` has a related changeset where relevant
+
+### Extra review tips
+
+- Watch for unnecessary bundle impact (large deps, dynamic imports, side effects).
+- Confirm a11y basics: semantic elements, labels, focus order, keyboard support.
+- Check security footguns: unsafe HTML, unescaped data, leaking env vars, weak CSP assumptions.
