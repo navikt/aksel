@@ -4168,8 +4168,7 @@ __metadata:
     cssnano: "npm:7.0.6"
     esbuild: "npm:^0.25.9"
     fast-glob: "npm:3.2.11"
-    lightningcss: "npm:^1.29.3"
-    lightningcss-cli: "npm:^1.29.3"
+    lightningcss: "npm:^1.30.1"
     lodash: "npm:^4.17.21"
     normalize.css: "npm:^8.0.1"
     postcss: "npm:^8.4.31"
@@ -4242,7 +4241,7 @@ __metadata:
     "@figma/plugin-typings": "npm:^1.100.2"
     colorjs.io: "npm:^0.5.2"
     esbuild: "npm:^0.25.9"
-    lightningcss: "npm:^1.29.3"
+    lightningcss: "npm:^1.30.1"
     lodash: "npm:^4.17.21"
     style-dictionary: "npm:^4.1.1"
     tsx: "npm:^4.19.1"
@@ -16451,118 +16450,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lightningcss-cli-darwin-arm64@npm:1.30.1":
-  version: 1.30.1
-  resolution: "lightningcss-cli-darwin-arm64@npm:1.30.1"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"lightningcss-cli-darwin-x64@npm:1.30.1":
-  version: 1.30.1
-  resolution: "lightningcss-cli-darwin-x64@npm:1.30.1"
-  conditions: os=darwin & cpu=x64
-  languageName: node
-  linkType: hard
-
-"lightningcss-cli-freebsd-x64@npm:1.30.1":
-  version: 1.30.1
-  resolution: "lightningcss-cli-freebsd-x64@npm:1.30.1"
-  conditions: os=freebsd & cpu=x64
-  languageName: node
-  linkType: hard
-
-"lightningcss-cli-linux-arm-gnueabihf@npm:1.30.1":
-  version: 1.30.1
-  resolution: "lightningcss-cli-linux-arm-gnueabihf@npm:1.30.1"
-  conditions: os=linux & cpu=arm
-  languageName: node
-  linkType: hard
-
-"lightningcss-cli-linux-arm64-gnu@npm:1.30.1":
-  version: 1.30.1
-  resolution: "lightningcss-cli-linux-arm64-gnu@npm:1.30.1"
-  conditions: os=linux & cpu=arm64 & libc=glibc
-  languageName: node
-  linkType: hard
-
-"lightningcss-cli-linux-arm64-musl@npm:1.30.1":
-  version: 1.30.1
-  resolution: "lightningcss-cli-linux-arm64-musl@npm:1.30.1"
-  conditions: os=linux & cpu=arm64 & libc=musl
-  languageName: node
-  linkType: hard
-
-"lightningcss-cli-linux-x64-gnu@npm:1.30.1":
-  version: 1.30.1
-  resolution: "lightningcss-cli-linux-x64-gnu@npm:1.30.1"
-  conditions: os=linux & cpu=x64 & libc=glibc
-  languageName: node
-  linkType: hard
-
-"lightningcss-cli-linux-x64-musl@npm:1.30.1":
-  version: 1.30.1
-  resolution: "lightningcss-cli-linux-x64-musl@npm:1.30.1"
-  conditions: os=linux & cpu=x64 & libc=musl
-  languageName: node
-  linkType: hard
-
-"lightningcss-cli-win32-arm64-msvc@npm:1.30.1":
-  version: 1.30.1
-  resolution: "lightningcss-cli-win32-arm64-msvc@npm:1.30.1"
-  conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"lightningcss-cli-win32-x64-msvc@npm:1.30.1":
-  version: 1.30.1
-  resolution: "lightningcss-cli-win32-x64-msvc@npm:1.30.1"
-  conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
-"lightningcss-cli@npm:^1.29.3":
-  version: 1.30.1
-  resolution: "lightningcss-cli@npm:1.30.1"
-  dependencies:
-    detect-libc: "npm:^2.0.3"
-    lightningcss-cli-darwin-arm64: "npm:1.30.1"
-    lightningcss-cli-darwin-x64: "npm:1.30.1"
-    lightningcss-cli-freebsd-x64: "npm:1.30.1"
-    lightningcss-cli-linux-arm-gnueabihf: "npm:1.30.1"
-    lightningcss-cli-linux-arm64-gnu: "npm:1.30.1"
-    lightningcss-cli-linux-arm64-musl: "npm:1.30.1"
-    lightningcss-cli-linux-x64-gnu: "npm:1.30.1"
-    lightningcss-cli-linux-x64-musl: "npm:1.30.1"
-    lightningcss-cli-win32-arm64-msvc: "npm:1.30.1"
-    lightningcss-cli-win32-x64-msvc: "npm:1.30.1"
-  dependenciesMeta:
-    lightningcss-cli-darwin-arm64:
-      optional: true
-    lightningcss-cli-darwin-x64:
-      optional: true
-    lightningcss-cli-freebsd-x64:
-      optional: true
-    lightningcss-cli-linux-arm-gnueabihf:
-      optional: true
-    lightningcss-cli-linux-arm64-gnu:
-      optional: true
-    lightningcss-cli-linux-arm64-musl:
-      optional: true
-    lightningcss-cli-linux-x64-gnu:
-      optional: true
-    lightningcss-cli-linux-x64-musl:
-      optional: true
-    lightningcss-cli-win32-arm64-msvc:
-      optional: true
-    lightningcss-cli-win32-x64-msvc:
-      optional: true
-  bin:
-    lightningcss: lightningcss
-  checksum: 10/684116000ac8b3bc5be605cbf48d827cb1c24f2702d877a383519c28542674a37363f67e99cd088750787f3321afcef2a757689a291203cf39ccfff43927486e
-  languageName: node
-  linkType: hard
-
 "lightningcss-darwin-arm64@npm:1.30.1":
   version: 1.30.1
   resolution: "lightningcss-darwin-arm64@npm:1.30.1"
@@ -16633,7 +16520,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lightningcss@npm:^1.29.3":
+"lightningcss@npm:^1.30.1":
   version: 1.30.1
   resolution: "lightningcss@npm:1.30.1"
   dependencies:
@@ -22840,14 +22727,15 @@ __metadata:
   linkType: hard
 
 "sha.js@npm:^2.4.0, sha.js@npm:^2.4.11, sha.js@npm:^2.4.8":
-  version: 2.4.11
-  resolution: "sha.js@npm:2.4.11"
+  version: 2.4.12
+  resolution: "sha.js@npm:2.4.12"
   dependencies:
-    inherits: "npm:^2.0.1"
-    safe-buffer: "npm:^5.0.1"
+    inherits: "npm:^2.0.4"
+    safe-buffer: "npm:^5.2.1"
+    to-buffer: "npm:^1.2.0"
   bin:
-    sha.js: ./bin.js
-  checksum: 10/d833bfa3e0a67579a6ce6e1bc95571f05246e0a441dd8c76e3057972f2a3e098465687a4369b07e83a0375a88703577f71b5b2e966809e67ebc340dbedb478c7
+    sha.js: bin.js
+  checksum: 10/39c0993592c2ab34eb2daae2199a2a1d502713765aecb611fd97c0c4ab7cd53e902d628e1962aaf384bafd28f55951fef46dcc78799069ce41d74b03aa13b5a7
   languageName: node
   linkType: hard
 
@@ -25153,21 +25041,21 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>":
   version: 5.6.2
-  resolution: "typescript@patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=74658d"
+  resolution: "typescript@patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=8c6c40"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/060a7349adf698477b411be4ace470aee6c2c1bd99917fdf5d33697c17ec55c64fe724eb10399387530b50e9913b41528dd8bfcca0a5fc8f8bac63fbb4580a2e
+  checksum: 10/8bfc7ca0d9feca4c3fcbd6c70741abfcd714197d6448e68225ae71e462447d904d3bfba49759a8fbe4956d87f054e2d346833c8349c222daa594a2626d4e1be8
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A>=5.0.0#optional!builtin<compat/typescript>":
   version: 5.8.3
-  resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=74658d"
+  resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/98470634034ec37fd9ea61cc82dcf9a27950d0117a4646146b767d085a2ec14b137aae9642a83d1c62732d7fdcdac19bb6288b0bb468a72f7a06ae4e1d2c72c9
+  checksum: 10/b9b1e73dabac5dc730c041325dbd9c99467c1b0d239f1b74ec3b90d831384af3e2ba973946232df670519147eb51a2c20f6f96163cea2b359f03de1e2091cc4f
   languageName: node
   linkType: hard
 
