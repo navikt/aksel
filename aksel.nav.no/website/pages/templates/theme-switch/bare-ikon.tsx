@@ -14,7 +14,7 @@ function Example() {
 
   return (
     <ActionMenu>
-      <Tooltip content="Bytt fargetema" placement="top">
+      <Tooltip content="Bytt fargetema" placement="bottom">
         <ActionMenu.Trigger>
           <Button
             variant="secondary-neutral"
