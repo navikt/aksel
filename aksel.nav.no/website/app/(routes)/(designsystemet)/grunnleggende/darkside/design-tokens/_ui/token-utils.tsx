@@ -7,7 +7,9 @@ const sortTokens = (a: TokenForDocumentationT, b: TokenForDocumentationT) => {
     case "textColor": {
       if ((a.role || "") > (b.role || "")) {
         return 1;
-      } else if ((a.role || "") < (b.role || "")) {
+      }
+
+      if ((a.role || "") < (b.role || "")) {
         return -1;
       }
       return 0;

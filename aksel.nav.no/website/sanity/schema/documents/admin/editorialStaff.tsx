@@ -1,4 +1,4 @@
-import { parseInt } from "lodash";
+import { parseInt as lodashParseInt } from "lodash";
 import Image from "next/image";
 import { SlugValue, defineField, defineType } from "sanity";
 import { SANITY_API_VERSION } from "@/sanity/config";
@@ -41,7 +41,7 @@ export const EditorialStaff = defineType({
 
         let max = 0;
         for (const slug of slugs) {
-          const curr = parseInt(slug.current ?? "0");
+          const curr = lodashParseInt(slug.current ?? "0");
 
           if (curr > max) {
             max = curr;

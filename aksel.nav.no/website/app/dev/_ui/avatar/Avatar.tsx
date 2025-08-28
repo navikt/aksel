@@ -7,7 +7,7 @@ const MAX_AVATAR_COUNT = 30;
 
 export const avatarUrl = (avatar_id: string) => {
   let _avatar_id = avatar_id;
-  if (!isNaN(parseInt(avatar_id))) {
+  if (!Number.isNaN(parseInt(avatar_id))) {
     _avatar_id =
       `${parseInt(avatar_id) % MAX_AVATAR_COUNT}`.padStart(3, "0") ?? "broken";
   }
