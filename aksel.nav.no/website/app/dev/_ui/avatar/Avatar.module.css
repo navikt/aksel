@@ -28,6 +28,7 @@
 
 .avatarName {
   color: var(--ax-text-neutral);
+  margin-top: calc(-1 * var(--ax-space-4));
 }
 
 .avatarNameSuffix {

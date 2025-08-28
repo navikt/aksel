@@ -1,7 +1,7 @@
 import cl from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { Detail, HStack, LinkCard, VStack } from "@navikt/ds-react";
+import { HStack, LinkCard, VStack } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
   LinkCardDescription,
@@ -12,31 +12,33 @@ import {
 import { LANDINGSSIDE_LATEST_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
+import { Avatar, AvatarStack, avatarUrl } from "@/app/dev/_ui/avatar/Avatar";
 import ErrorBoundary from "@/error-boundary";
-import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
-import { abbrName } from "@/ui-utils/format-text";
+import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 
-type a =
+type gp_article =
   NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number];
-type b =
+type blogg_article =
   NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["bloggposts"][number];
-type k =
+type component_article =
   NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["komponenter"][number];
 
-export type ArticleT = a | k | b;
+export type ArticleT = gp_article | component_article | blogg_article;
 
-export const isArticle = (article: ArticleT): article is a => {
+export const isArticle = (article: ArticleT): article is gp_article => {
   return article._type === "aksel_artikkel";
 };
 
-export const isBlogg = (article: ArticleT): article is b => {
+export const isBlogg = (article: ArticleT): article is blogg_article => {
   return article._type === "aksel_blogg";
 };
 
-export const isKomponent = (article: ArticleT): article is k => {
+export const isKomponent = (
+  article: ArticleT,
+): article is component_article => {
   return ["komponent_artikkel", "ds_artikkel", "templates_artikkel"].includes(
     article._type,
   );
@@ -49,10 +51,6 @@ type CardProps = {
 };
 
 const Card = ({ article, visible }: CardProps) => {
-  const date = useFormatedDate(article.publishedAt ?? article._updatedAt);
-
-  const showAuthor = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
-
   const showImage = [
     "ds_artikkel",
     "komponent_artikkel",
@@ -68,11 +66,6 @@ const Card = ({ article, visible }: CardProps) => {
     }
     return article.status?.tag;
   };
-
-  const showFooter =
-    showAuthor ||
-    isArticle(article) ||
-    (isKomponent(article) && article.status?.tag === "beta");
 
   return (
     <LinkCard className={styles.card} data-visible={visible}>
@@ -119,21 +112,27 @@ const Card = ({ article, visible }: CardProps) => {
         </LinkCardDescription>
       ) : null}
 
-      {showFooter && (
+      {(isArticle(article) ||
+        isBlogg(article) ||
+        (isKomponent(article) && article.status?.tag === "beta")) && (
         <VStack asChild gap="space-12" align="start">
           <LinkCardFooter>
-            {showAuthor && (
+            {isBlogg(article) && (
               <HStack as="span" gap="space-8">
-                {article?.contributors && (
-                  <Detail as="span" weight="semibold" textColor="subtle">
-                    {abbrName(
-                      article.contributors[0].title ?? "Manglende Forfatter",
-                    )}
-                  </Detail>
-                )}
-                <Detail as="span" textColor="subtle">
-                  {date}
-                </Detail>
+                <AvatarStack showNames>
+                  {article.writers?.map((writer) => {
+                    return (
+                      <Avatar
+                        type={humanizeRedaksjonType(writer.type ?? "")}
+                        name={writer.title ?? ""}
+                        key={writer.title}
+                        imageSrc={avatarUrl(
+                          writer.avatar_id?.current ?? "missing",
+                        )}
+                      />
+                    );
+                  })}
+                </AvatarStack>
               </HStack>
             )}
 
