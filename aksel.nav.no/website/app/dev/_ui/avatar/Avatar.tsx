@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Children, ReactNode, isValidElement } from "react";
 import { BodyShort, BoxNew, Detail, HStack, VStack } from "@navikt/ds-react";
-import { humanizeText } from "@/ui-utils/format-text";
 import styles from "./Avatar.module.css";
 
 const MAX_AVATAR_COUNT = 30;
@@ -32,7 +31,7 @@ export const Avatar = ({
   imageSrc: string;
   /** Avatar must always have a name, as it becomes the image alt attribute. */
   name: string;
-  /** Avatar type, shown in the eyebrow alongside the name */
+  /** Avatar type, a name grouping. Shown in the eyebrow alongside the name */
   type: string;
   /** The name of what the avatar represents. */
   children?: ReactNode;
@@ -54,7 +53,7 @@ export const Avatar = ({
       {showName && (
         <VStack align="start">
           <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
-            <Detail textColor="subtle">{humanizeText(type)}</Detail>
+            <Detail textColor="subtle">{type}</Detail>
           </BoxNew>
           <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
             <BodyShort className={styles.avatarName}>{`${name}`}</BodyShort>
@@ -110,9 +109,7 @@ export const AvatarStack = ({
       {showNames && (
         <VStack>
           <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
-            <Detail textColor="subtle">
-              {humanizeText(firstAvatar.props.type)}
-            </Detail>
+            <Detail textColor="subtle">{firstAvatar.props.type}</Detail>
           </BoxNew>
           <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
             <BodyShort className={styles.avatarName}>

@@ -14,6 +14,17 @@ const humanizeText = (str) =>
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");
 
+export const humanizeRedaksjonType = (type: string) => {
+  switch (type) {
+    case "miljoe":
+      return "Miljø";
+    case "team":
+      return "Team";
+    default:
+      return humanizeText(type);
+  }
+};
+
 /**
  * Abbreviate a name while keeping the first and last names intact.
  */

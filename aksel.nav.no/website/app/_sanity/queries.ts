@@ -317,7 +317,7 @@ const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
           "slug": slug.current,
           ingress,
           seo,
-          ${contributorsAll}
+          ${writersAll}
         },
         "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{
           _type,
@@ -330,6 +330,7 @@ const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
           "tema": undertema[]->tema->title,
           ingress,
           seo,
+          ${writersAll},
           ${contributorsAll}
         },
         "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...7]{

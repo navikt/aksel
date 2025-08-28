@@ -1,4 +1,5 @@
 import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
+import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 import { Avatar, avatarUrl } from "../../../../dev/_ui/avatar/Avatar";
 
 type Blogg =
@@ -10,7 +11,7 @@ export const queryToAvatars = (
   return (
     queryResponseEditorialStaff?.map((queryData) => ({
       name: queryData.title ?? "",
-      type: queryData.type ?? "",
+      type: humanizeRedaksjonType(queryData.type ?? ""),
       imageSrc: avatarUrl(queryData.avatar_id?.current ?? "missing"),
       description: queryData.description ?? "",
     })) ?? []

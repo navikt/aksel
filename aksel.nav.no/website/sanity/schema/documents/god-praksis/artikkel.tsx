@@ -3,7 +3,7 @@ import { SANITY_API_VERSION } from "@/sanity/config";
 import { InnholdstypeHighlight } from "../../custom-components/gp/InnholdstypeHighlight";
 import { UndertemaHighlight } from "../../custom-components/gp/UndertemaHighlight";
 import { artikkelPreview } from "../presets/artikkel-preview";
-import { writersField } from "../presets/editors";
+import { editorField, writersField } from "../presets/editors";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { ingressField } from "../presets/ingress";
@@ -80,6 +80,7 @@ export const GodPraksisArtikkel = defineType({
       ],
     }),
     titleField,
+    editorField,
     writersField,
     sanitySlug(prefix, 3),
     ingressField,

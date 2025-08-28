@@ -29,6 +29,7 @@ import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import { Avatar, avatarUrl } from "@/app/dev/_ui/avatar/Avatar";
 import { formatDateString } from "@/ui-utils/format-date";
+import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 import styles from "./page.module.css";
 
 type Props = {
@@ -152,7 +153,7 @@ export default async function Page(props: Props) {
               {pageData.writers?.map((writer) => {
                 return (
                   <Avatar
-                    type={writer.type ?? ""}
+                    type={humanizeRedaksjonType(writer.type ?? "")}
                     name={writer.title ?? ""}
                     key={writer.title}
                     imageSrc={avatarUrl(writer.avatar_id?.current ?? "missing")}
