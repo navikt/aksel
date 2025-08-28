@@ -25,6 +25,21 @@ This file tells Copilot how to work inside the Aksel monorepo. Prefer existing p
 - Replace hardcoded values with named constants when reasonable.
 - Prefer composition over deep inheritance; keep modules cohesive.
 
+## Inline chat and editor completions
+
+- Default tone: short and answer-first. Aim for 1–3 concise sentences before any code.
+- Show only what changes. Provide minimal diffs/snippets; don’t paste whole files or unrelated lines.
+- Keep edits scoped to a single file unless explicitly asked to touch more.
+- Use existing APIs, utilities, tokens, and patterns. Don’t add new deps unless requested.
+- Preserve style: imports, naming, types, JSX patterns, token usage, CSS layers.
+- Reference files and symbols with repo-relative paths and backticks, e.g. `@navikt/ds-react/src/...`.
+- Extract requirements into a tiny checklist and proceed. Ask a question only when truly blocked.
+- Avoid heavy formatting: bullets are OK; skip tables; use code fences only for code.
+- For tests/visual changes: add/update the closest test/story next to the changed file.
+- For Next.js: don’t mix `app/` and `pages/` in the same hierarchy; prefer server components where used; add "use client" only when required.
+- For CSS/tokens: never hard-code colors/spacing; use tokens and existing layers.
+- For performance/security: avoid unnecessary re-renders, side effects at module top-level, unsafe HTML, and leaking env vars.
+
 ## Repository overview
 
 Aksel is NAV’s design system: React components, CSS, design tokens, icons, tooling, and the documentation site. It’s a Yarn 4 workspaces monorepo.
