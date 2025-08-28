@@ -9,7 +9,7 @@
     "clean:reset": "node scripts/clean.mjs --reset",
     "test": "yarn workspaces foreach -vv -pA run test",
     "dev": "yarn workspace aksel.nav.no dev",
-    "lint": "yarn lint:eslint && yarn lint:css",
+    "lint": "yarn lint:eslint && yarn lint:css && yarn lint:biome",
     "lint:eslint": "yarn eslint --max-warnings=0 --rule 'import/no-cycle:[error,{ignoreExternal:true,disableScc:true}]' .",
     "lint:css": "yarn stylelint '@navikt/**/*.css'",
     "lint:biome": "yarn biome lint .",
