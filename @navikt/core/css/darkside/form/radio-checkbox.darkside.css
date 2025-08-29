@@ -136,10 +136,10 @@
   transform: translate(0.25rem, -10%);
 }
 
-/* Tailwind sets all svg to block */
 .aksel-checkbox__icon > svg {
-  display: inline;
-  vertical-align: initial;
+  display: block;
+  width: 0.8125rem;
+  height: 0.625rem;
 }
 
 .aksel-checkbox--small > .aksel-checkbox__input:checked + .aksel-checkbox__label::before {
