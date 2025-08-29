@@ -1,0 +1,153 @@
+.navds-process {
+  --__ac-process-circle-base: 2rem;
+  --__ac-process-circle-large: var(--__ac-process-circle-base);
+  --__ac-process-circle-small: 1rem;
+  --__ac-process-circle-size: var(--__ac-process-circle-large);
+  --__ac-process-border-width: 2px;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navds-process__event {
+  display: grid;
+  grid-template-rows:
+    [line-1] auto [step-start] var(--__ac-process-circle-size)
+    [line-2 step-end] auto;
+  grid-template-columns: var(--__ac-process-circle-base) auto;
+  justify-items: flex-start;
+
+  &[data-dot="true"] {
+    --__ac-process-circle-size: var(--__ac-process-circle-small);
+
+    margin-block-start: calc((var(--__ac-process-circle-small) / 2) * -1);
+
+    & .navds-process__line {
+      margin-block-start: calc(var(--__ac-process-circle-size) / 2);
+    }
+
+    & .navds-process__bullet {
+      --__ac-process-circle-size: var(--__ac-process-circle-small);
+
+      margin-top: calc((var(--__ac-process-circle-large) - var(--__ac-process-circle-small)) / 2);
+    }
+  }
+}
+
+.navds-process__line {
+  width: 0;
+  border: calc(var(--__ac-process-border-width) / 2) solid;
+  min-height: 2rem;
+  justify-self: center;
+  grid-column: 1;
+  grid-row: line-2;
+  border-color: var(--a-border-subtle);
+
+  .navds-process__event[data-status="active"] & {
+    border-color: var(--a-border-alt-3);
+    border-image: linear-gradient(to bottom, var(--a-border-alt-3) 50%, var(--a-border-subtle) 90%);
+    border-image-slice: 1;
+  }
+
+  .navds-process__event[data-status="completed"] & {
+    border-color: var(--a-border-alt-3);
+  }
+
+  .navds-process__event:not([data-status="active"]) & {
+    border-image: none;
+  }
+
+  .navds-process__event:last-of-type & {
+    display: none;
+  }
+}
+
+.navds-process__item {
+  grid-row: 2 / -1;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: [bullet] var(--__ac-process-circle-base) [content] auto;
+  gap: var(--a-spacing-4);
+  justify-content: flex-start;
+  padding: var(--__ac-process-border-width);
+  margin: calc(var(--__ac-process-border-width) * -1) calc(var(--__ac-process-border-width) * -1) var(--a-spacing-4);
+  width: 100%;
+
+  .navds-process__event:last-child & {
+    margin-bottom: 0;
+  }
+}
+
+.navds-process__bullet {
+  grid-column: bullet;
+  display: inline-grid;
+  place-self: baseline center;
+  place-items: center;
+  width: var(--__ac-process-circle-size);
+  height: var(--__ac-process-circle-size);
+  line-height: 1;
+  border-radius: var(--a-border-radius-full);
+  border: var(--__ac-process-border-width) solid;
+  color: var(--a-text-subtle);
+  border-color: var(--a-border-subtle);
+  transition-property: background, border-color, color;
+  transition-duration: 70ms;
+  transition-timing-function: linear;
+
+  & svg {
+    height: min(calc(var(--__ac-process-circle-size) * 0.75), 1.5rem);
+    width: min(calc(var(--__ac-process-circle-size) * 0.75), 1.5rem);
+  }
+
+  .navds-process__event:is([data-status="completed"], [data-status="active"]) & {
+    color: var(--a-text-on-alt-3);
+    background: var(--a-surface-alt-3);
+    border-color: transparent;
+  }
+
+  .navds-process__event[data-status="active"] & {
+    outline: 4px solid var(--a-surface-alt-3-subtle);
+  }
+
+  .navds-process__event[data-status="uncompleted"] & {
+    transition: none;
+  }
+}
+
+.navds-process__body {
+  grid-column: content;
+}
+
+.navds-process__title {
+  padding-block: 0.16rem var(--a-spacing-1);
+
+  .navds-process__event[data-status="active"] &:has(+ .navds-process__active-label) {
+    padding-block-end: 0;
+  }
+}
+
+.navds-process__active-label {
+  margin-block: 0 var(--a-spacing-1);
+  color: var(--a-surface-alt-3);
+
+  &:last-of-type {
+    margin-block-end: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .navds-process__bullet {
+    transition: none;
+  }
+
+  .navds-process__event:is([data-status="completed"], [data-status="active"]) .navds-process__bullet {
+    outline-color: ButtonText;
+    background-color: ButtonText;
+    color: ButtonFace;
+  }
+
+  .navds-process__event:is([data-status="active"]) .navds-process__line {
+    border-image: none;
+  }
+}

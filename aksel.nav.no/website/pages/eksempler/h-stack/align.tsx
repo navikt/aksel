@@ -3,36 +3,36 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="12">
-      <HStack gap="3" align="center">
+    <VStack gap="space-48">
+      <HStack gap="space-12" align="center">
         <Placeholder text="center" />
         <Placeholder />
         <Placeholder />
         <Placeholder />
         <Placeholder />
       </HStack>
-      <HStack gap="3" align="end">
+      <HStack gap="space-12" align="end">
         <Placeholder text="end" />
         <Placeholder />
         <Placeholder />
         <Placeholder />
         <Placeholder />
       </HStack>
-      <HStack gap="3" align="start">
+      <HStack gap="space-12" align="start">
         <Placeholder text="start" />
         <Placeholder />
         <Placeholder />
         <Placeholder />
         <Placeholder />
       </HStack>
-      <HStack gap="3" align="stretch">
+      <HStack gap="space-12" align="stretch">
         <Placeholder text="stretch" />
         <Placeholder />
         <Placeholder />
         <Placeholder />
         <Placeholder />
       </HStack>
-      <HStack gap="3" align="baseline">
+      <HStack gap="space-12" align="baseline">
         <Placeholder text="baseline" />
         <Placeholder text="text" padding="0" />
         <Placeholder text="text" padding="0 0 1rem" />

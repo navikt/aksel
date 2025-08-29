@@ -3,6 +3,7 @@ import { HGrid, Heading } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
 import AkselLogo from "@/assets/Logo";
+import { SANITY_DATASET } from "@/sanity/config";
 import { FooterEdit } from "./Footer.edit";
 import styles from "./Footer.module.css";
 
@@ -17,6 +18,9 @@ function Footer() {
             <div>
               <p>&copy; {new Date().getFullYear()} Nav</p>
               <p>Arbeids- og velferdsetaten</p>
+              {SANITY_DATASET !== "production" && (
+                <p>Dataset: {SANITY_DATASET}</p>
+              )}
             </div>
           </div>
           <LinkBlock

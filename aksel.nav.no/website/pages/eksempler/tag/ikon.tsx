@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="3" align="start">
+    <HStack gap="space-12" align="start">
       <Tag variant="neutral-moderate" icon={<ComponentIcon aria-hidden />}>
         Medium
       </Tag>

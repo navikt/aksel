@@ -3,14 +3,17 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
-      <Box background="surface-neutral" padding="4">
-        <Box background="surface-alt-3-subtle" padding="2">
+    <VStack gap="space-16">
+      <Box background="surface-neutral" padding="space-16">
+        <Box background="surface-alt-3-subtle" padding="space-8">
           Statisk padding
         </Box>
       </Box>
-      <Box background="surface-neutral" padding={{ xs: "2", md: "6" }}>
-        <Box background="surface-alt-3-subtle" padding="2">
+      <Box
+        background="surface-neutral"
+        padding={{ xs: "space-8", md: "space-24" }}
+      >
+        <Box background="surface-alt-3-subtle" padding="space-8">
           Dynamisk padding
         </Box>
       </Box>

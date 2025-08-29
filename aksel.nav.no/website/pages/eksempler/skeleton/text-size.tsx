@@ -3,14 +3,12 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Skeleton variant="text" width="100%" />
-
       {/* 'as'-prop kan brukes på all typografien vår med Skeleton */}
       <Heading as={Skeleton} size="xlarge" width="100%">
         Placeholder
       </Heading>
-
       <div style={{ fontSize: "5rem" }}>
         <Skeleton variant="text" width="100%" />
       </div>

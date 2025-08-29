@@ -6,7 +6,7 @@ const Example = () => {
   const [files, setFiles] = useState<FileObject[]>([]);
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       <FileUpload.Dropzone
         label="Last opp fødselsattest"
         fileLimit={{ max: 1, current: files.length }}

@@ -4,12 +4,12 @@ import {
   ArrowRightIcon,
   ArrowUpIcon,
 } from "@navikt/aksel-icons";
-import { Button, Tooltip } from "@navikt/ds-react";
+import { Button, Tooltip, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
+    <VStack gap="space-16">
       <Tooltip content="Skriv ut dokument">
         <Button icon={<ArrowUpIcon aria-hidden />} />
       </Tooltip>
@@ -22,7 +22,7 @@ const Example = () => {
       <Tooltip content="Skriv ut dokument" placement="left">
         <Button icon={<ArrowLeftIcon aria-hidden />} />
       </Tooltip>
-    </div>
+    </VStack>
   );
 };
 

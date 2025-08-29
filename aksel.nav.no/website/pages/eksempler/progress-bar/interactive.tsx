@@ -32,7 +32,7 @@ const Example = () => {
           {starWarsQuotes[value]}
         </BodyShort>
       </div>
-      <HStack gap="20">
+      <HStack gap="space-80">
         <Button
           onClick={() =>
             setValue(

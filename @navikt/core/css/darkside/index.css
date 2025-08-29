@@ -53,6 +53,7 @@
 @import "./read-more.darkside.css" layer(aksel.components);
 @import "./progress-bar.darkside.css" layer(aksel.components);
 @import "./skeleton.darkside.css" layer(aksel.components);
+@import "./process.darkside.css" layer(aksel.components);
 @import "./stepper.darkside.css" layer(aksel.components);
 @import "./table.darkside.css" layer(aksel.components);
 @import "./tabs.darkside.css" layer(aksel.components);

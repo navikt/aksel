@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { HStack } from "../../../layout/stack";
 import { createDescendantContext } from "./useDescendant";
 

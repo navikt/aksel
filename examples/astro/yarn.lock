@@ -38,10 +38,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/internal-helpers@npm:0.6.1":
-  version: 0.6.1
-  resolution: "@astrojs/internal-helpers@npm:0.6.1"
-  checksum: 10/e18a0e52e9d35659fb6b4e641a52cbffba26405a322b1232ea73af74e69d12cf59722ec53c6fcdcd454f543628c3ff229ea166d49d5e7c88d3947182d86090e0
+"@astrojs/internal-helpers@npm:0.7.2":
+  version: 0.7.2
+  resolution: "@astrojs/internal-helpers@npm:0.7.2"
+  checksum: 10/70e11b51eca9999414c52706a20f8bf0a892d5d54cb2f2350e1c40af563a010f834939cefc603b076e0abf5067a1b128e07085aed484770714359da756ee5828
   languageName: node
   linkType: hard
 
@@ -81,11 +81,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/markdown-remark@npm:6.3.2":
-  version: 6.3.2
-  resolution: "@astrojs/markdown-remark@npm:6.3.2"
+"@astrojs/markdown-remark@npm:6.3.6":
+  version: 6.3.6
+  resolution: "@astrojs/markdown-remark@npm:6.3.6"
   dependencies:
-    "@astrojs/internal-helpers": "npm:0.6.1"
+    "@astrojs/internal-helpers": "npm:0.7.2"
     "@astrojs/prism": "npm:3.3.0"
     github-slugger: "npm:^2.0.0"
     hast-util-from-html: "npm:^2.0.3"
@@ -100,26 +100,26 @@ __metadata:
     remark-rehype: "npm:^11.1.2"
     remark-smartypants: "npm:^3.0.2"
     shiki: "npm:^3.2.1"
-    smol-toml: "npm:^1.3.1"
+    smol-toml: "npm:^1.3.4"
     unified: "npm:^11.0.5"
     unist-util-remove-position: "npm:^5.0.0"
     unist-util-visit: "npm:^5.0.0"
     unist-util-visit-parents: "npm:^6.0.1"
     vfile: "npm:^6.0.3"
-  checksum: 10/0d01ef4331a72e302712e5e7f7d3aabcc674e3289e94849849f0fc529d921dfab93c675181641a8aa629e58b7547a6e88b50ba5afcab5c11c024a01bd49dc490
+  checksum: 10/b0f337ef876ce32b679c2d0a9abe40ccad4b361a9aa952ec2aa1ca263fbeaff9dcfe2c2f8ae7735d05081234950a74918205615e9e50d34b64c7c69ab75b6f40
   languageName: node
   linkType: hard
 
-"@astrojs/node@npm:^9.2.2":
-  version: 9.2.2
-  resolution: "@astrojs/node@npm:9.2.2"
+"@astrojs/node@npm:^9.4.1":
+  version: 9.4.2
+  resolution: "@astrojs/node@npm:9.4.2"
   dependencies:
-    "@astrojs/internal-helpers": "npm:0.6.1"
+    "@astrojs/internal-helpers": "npm:0.7.2"
     send: "npm:^1.2.0"
     server-destroy: "npm:^1.0.1"
   peerDependencies:
     astro: ^5.3.0
-  checksum: 10/06eb7401eed4e1d043d264b7e93982feb046ba2a40035a621e42a9ad77260e6cca671ee78d0864fb2a72ce7f24a959cacfbea5063852be8dce01e2ff81f0ff16
+  checksum: 10/76bda0df1857f2ede34e781489183156a1eb07cec81318f8960ab941c1ccdb7571ae2435efdbed2e842c305e85eebe08d8d4dfa2d2ae4be21468fa70b4f2ff61
   languageName: node
   linkType: hard
 
@@ -922,34 +922,34 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:./../../@navikt/aksel-icons::locator=irregular-iron%40workspace%3A.":
-  version: 7.22.0
-  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=e234eb&locator=irregular-iron%40workspace%3A."
-  checksum: 10/0b3fee8c52a7a569bed1679655b28a4d0cf488bb5bcb1c0cc4da8ff8bbae078e4a734808fc1d1d1eea6e20e1c41c7dfe27b1396cbff8496a4ab2e9832e9a842b
+  version: 7.28.1
+  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=c766a2&locator=irregular-iron%40workspace%3A."
+  checksum: 10/b9690fdeaec44030030531bf5b94bca5eeec6da34ace8cf79be9d94d5a4b8c2e6185344e4af8159051a3d4dd762b7c9e12b07efd85d0634bcd8cc8da5cbb5480
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.22.0":
-  version: 7.23.0
-  resolution: "@navikt/aksel-icons@npm:7.23.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.23.0%2F41e82a2c05930c785bffcd475bf73dbf87ed98ad"
-  checksum: 10/82d89f2c69ae47f1c86cb9bd1b39c22d967c701485aaf4d25a3b0ba5128b0fca8714e62fa03780fb488b9c103702cc41f2c3e8131c05c189b83375c57ebc99bf
+"@navikt/aksel-icons@npm:^7.28.1":
+  version: 7.28.1
+  resolution: "@navikt/aksel-icons@npm:7.28.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.28.1%2Fa17d463dfd055d17cb8ed24b48e264ce055b39aa"
+  checksum: 10/f552e9f3581621d888a893448332ea3d1f05e265130cdf16fafec75e296801acabb92c22bef5a79bfb1833cee9228388d0dc638d990a836cc4737afc68e6d15a
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=irregular-iron%40workspace%3A.":
-  version: 7.22.0
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=1062c5&locator=irregular-iron%40workspace%3A."
-  checksum: 10/40987171bcaa30092c7a4ef0ffb22c8234a9dd4882395cd592dae83b5fbc15f23af2f09f12cbf895def7643ed8664934ee562f844e0fd7cfba68f8f50fe00e2b
+  version: 7.28.1
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=5d2dd5&locator=irregular-iron%40workspace%3A."
+  checksum: 10/292637ade726cb5c6b01c28fd5d136243b013311549f64eb02314269f05293e69f8aed1fa38c937ec180217fb0b2b8582b7759981da918f6f4e74658433fa1b9
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=irregular-iron%40workspace%3A.":
-  version: 7.22.0
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=ac4a27&locator=irregular-iron%40workspace%3A."
+  version: 7.28.1
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=3ad3d5&locator=irregular-iron%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.22.0"
-    "@navikt/ds-tokens": "npm:^7.22.0"
+    "@navikt/aksel-icons": "npm:^7.28.1"
+    "@navikt/ds-tokens": "npm:^7.28.1"
     clsx: "npm:^2.1.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
@@ -959,14 +959,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/91928968a2d5e3a54477c2398b3cf0018dd1321605079928cc5cf625d0510d2f6cd39410e67a0da921af4cdd53b2108921358d8b60644efbb43e0c0a90dcf12b
+  checksum: 10/f0a463f5728f3af76494b4f3d74324d02608f689a7766aacba950002fe9a7d5c1a8ccae890941c23bc455eb07060ad866b9314f362821da7938113e6b3d87a38
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^7.22.0":
-  version: 7.23.0
-  resolution: "@navikt/ds-tokens@npm:7.23.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.23.0%2F460e7809aa24dc7f5ed939f6fe74136c349bb0ec"
-  checksum: 10/d696649be20da190bb30a4e7edfcb034f01ee288b9c1b07c3082e92896ac3bfda383fd385cf010c6b7ec363ddf9fa49939b0cbe6b8dd540b0da23e3a90e5780e
+"@navikt/ds-tokens@npm:^7.28.1":
+  version: 7.28.1
+  resolution: "@navikt/ds-tokens@npm:7.28.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.28.1%2Fb8f8bac92b64d3966d823cc46bb586d0ec059e90"
+  checksum: 10/e03afaca79f6271ed9b692692a8a2ef75a9908a36e6695a6613eb9886c222286d940f0420e389e9bbebd4a60d1e6340b43f0964c74966b8103e98bec770d2792
   languageName: node
   linkType: hard
 
@@ -1641,13 +1641,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^5.9.3":
-  version: 5.9.3
-  resolution: "astro@npm:5.9.3"
+"astro@npm:^5.13.1":
+  version: 5.13.2
+  resolution: "astro@npm:5.13.2"
   dependencies:
     "@astrojs/compiler": "npm:^2.12.2"
-    "@astrojs/internal-helpers": "npm:0.6.1"
-    "@astrojs/markdown-remark": "npm:6.3.2"
+    "@astrojs/internal-helpers": "npm:0.7.2"
+    "@astrojs/markdown-remark": "npm:6.3.6"
     "@astrojs/telemetry": "npm:3.3.0"
     "@capsizecss/unpack": "npm:^2.4.0"
     "@oslojs/encoding": "npm:^1.1.0"
@@ -1691,6 +1691,7 @@ __metadata:
     semver: "npm:^7.7.1"
     sharp: "npm:^0.33.3"
     shiki: "npm:^3.2.1"
+    smol-toml: "npm:^1.3.4"
     tinyexec: "npm:^0.3.2"
     tinyglobby: "npm:^0.2.12"
     tsconfck: "npm:^3.1.5"
@@ -1704,7 +1705,7 @@ __metadata:
     xxhash-wasm: "npm:^1.1.0"
     yargs-parser: "npm:^21.1.1"
     yocto-spinner: "npm:^0.2.1"
-    zod: "npm:^3.24.2"
+    zod: "npm:^3.24.4"
     zod-to-json-schema: "npm:^3.24.5"
     zod-to-ts: "npm:^1.2.0"
   dependenciesMeta:
@@ -1712,7 +1713,7 @@ __metadata:
       optional: true
   bin:
     astro: astro.js
-  checksum: 10/143a0286cac40d9bec2f141df0e551858e37513f13c4e433504af0bfa32b0f0fab70392f586575975f88b8f58ad17a5f22831ee2b8a651bd8fa6e027d402a985
+  checksum: 10/78a60821f5ff4069d9d65d22183c5999f7e7265071170a33a2d8667bbd814af128d7b33e977c253901999cb293fd574b4a5cbe52593aad2347086194c41b82a8
   languageName: node
   linkType: hard
 
@@ -2898,14 +2899,14 @@ __metadata:
   resolution: "irregular-iron@workspace:."
   dependencies:
     "@astrojs/check": "npm:^0.9.4"
-    "@astrojs/node": "npm:^9.2.2"
+    "@astrojs/node": "npm:^9.4.1"
     "@astrojs/react": "npm:^4.3.0"
     "@navikt/aksel-icons": "file:./../../@navikt/aksel-icons"
     "@navikt/ds-css": "file:./../../@navikt/core/css"
     "@navikt/ds-react": "file:./../../@navikt/core/react"
     "@types/react": "npm:^18.3.11"
     "@types/react-dom": "npm:^18.2.18"
-    astro: "npm:^5.9.3"
+    astro: "npm:^5.13.1"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     typescript: "npm:5.8.3"
@@ -4751,10 +4752,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"smol-toml@npm:^1.3.1":
-  version: 1.3.4
-  resolution: "smol-toml@npm:1.3.4"
-  checksum: 10/795db36448db6b353ea1171fad8b72ae2fea3b5f9aa48d2f4c79699e10bdca74d59202f6715ff738fae817bf1f80e0c38c4d3ddf8b812cac26cc6255eaa0caa2
+"smol-toml@npm:^1.3.4":
+  version: 1.4.1
+  resolution: "smol-toml@npm:1.4.1"
+  checksum: 10/dcec7703d26b8b6e7ad361096f099259cbac7651371b38d5eb5a87353026a63d4d5558b8ced92bf867975b66fc8447161db8d58804fde400a225f635bfbdd0b4
   languageName: node
   linkType: hard
 
@@ -5867,10 +5868,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.24.2":
-  version: 3.25.64
-  resolution: "zod@npm:3.25.64"
-  checksum: 10/5538573d880291c18ff93b92879effd1673943c78c7f957b190d0ebf456a2742d6acd510c955679a269570a2d076e7608dc6aa797f5ef8cfc162893abaf9c4db
+"zod@npm:^3.24.4":
+  version: 3.25.76
+  resolution: "zod@npm:3.25.76"
+  checksum: 10/f0c963ec40cd96858451d1690404d603d36507c1fc9682f2dae59ab38b578687d542708a7fdbf645f77926f78c9ed558f57c3d3aa226c285f798df0c4da16995
   languageName: node
   linkType: hard
 

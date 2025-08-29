@@ -6,8 +6,11 @@ const postcss = require("postcss");
 const autoprefixer = require("autoprefixer");
 const combineSelectors = require("postcss-combine-duplicated-selectors");
 const cssImports = require("postcss-import");
+const nesting = require("postcss-nesting");
 const cssnano = require("cssnano");
 const getDirName = require("path").dirname;
+const lightningcss = require("lightningcss");
+
 const version = require("../package.json").version;
 const {
   StyleMappings,
@@ -41,6 +44,18 @@ async function run() {
   await bundleFragments();
   await bundleMinified();
   copyToVersionFolder();
+  validate();
+}
+
+function validate() {
+  try {
+    lightningcss.transform({
+      filename: "",
+      code: fs.readFileSync("dist/index.css"),
+    });
+  } catch (error) {
+    throw new Error(`Error validating CSS: ${error}`);
+  }
 }
 
 async function bundleMonolith() {
@@ -48,7 +63,11 @@ async function bundleMonolith() {
   const indexDist = path.resolve(__dirname, `../${rootDir}/index.css`);
 
   const css = fs.readFileSync(indexSrc);
-  const result = await postcss([cssImports, combineSelectors]).process(css, {
+  const result = await postcss([
+    cssImports,
+    nesting(),
+    combineSelectors,
+  ]).process(css, {
     from: indexSrc,
     to: indexDist,
   });
@@ -74,13 +93,14 @@ async function bundleComponents() {
     })
     .join("\n");
 
-  const result = await postcss([cssImports, combineSelectors]).process(
-    cssString,
-    {
-      from: indexSrc,
-      to: indexDist,
-    },
-  );
+  const result = await postcss([
+    cssImports,
+    nesting(),
+    combineSelectors,
+  ]).process(cssString, {
+    from: indexSrc,
+    to: indexDist,
+  });
 
   fs.writeFileSync(indexDist, result.css);
 }
@@ -95,7 +115,11 @@ async function bundleFragments() {
 
   for (let file of files) {
     const css = fs.readFileSync(file.input, { encoding: "utf-8" });
-    const result = await postcss([cssImports, combineSelectors]).process(css, {
+    const result = await postcss([
+      cssImports,
+      nesting(),
+      combineSelectors,
+    ]).process(css, {
       from: file.input,
       to: file.output,
     });

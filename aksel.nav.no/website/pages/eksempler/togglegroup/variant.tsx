@@ -3,26 +3,30 @@ import {
   EnvelopeOpenIcon,
   PaperplaneIcon,
 } from "@navikt/aksel-icons";
-import { ToggleGroup } from "@navikt/ds-react";
+import { ToggleGroup, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
+    <VStack gap="space-16">
       <ToggleGroup defaultValue="lest" onChange={console.info}>
         <ToggleGroup.Item
           value="ulest"
-          icon={<EnvelopeClosedIcon title="Ulest" />}
+          icon={<EnvelopeClosedIcon aria-hidden />}
+          label="Ulest"
         />
         <ToggleGroup.Item
           value="lest"
-          icon={<EnvelopeOpenIcon title="Lest" />}
+          icon={<EnvelopeOpenIcon aria-hidden />}
+          label="Lest"
         />
         <ToggleGroup.Item
           value="sendt"
-          icon={<PaperplaneIcon title="Sendt" />}
+          icon={<PaperplaneIcon aria-hidden />}
+          label="Sendt"
         />
       </ToggleGroup>
+
       <ToggleGroup
         defaultValue="lest"
         onChange={console.info}
@@ -30,18 +34,21 @@ const Example = () => {
       >
         <ToggleGroup.Item
           value="ulest"
-          icon={<EnvelopeClosedIcon title="Ulest" />}
+          icon={<EnvelopeClosedIcon aria-hidden />}
+          label="Ulest"
         />
         <ToggleGroup.Item
           value="lest"
-          icon={<EnvelopeOpenIcon title="Lest" />}
+          icon={<EnvelopeOpenIcon aria-hidden />}
+          label="Lest"
         />
         <ToggleGroup.Item
           value="sendt"
-          icon={<PaperplaneIcon title="Sendt" />}
+          icon={<PaperplaneIcon aria-hidden />}
+          label="Sendt"
         />
       </ToggleGroup>
-    </div>
+    </VStack>
   );
 };
 
@@ -54,5 +61,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 1,
+  desc: "Neutral brukes til handlinger som man ønsker å tone ned.",
 };

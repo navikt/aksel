@@ -6,6 +6,7 @@ import * as jscodeshift from "jscodeshift/src/Runner";
 import path from "path";
 import {
   GLOB_IGNORE_PATTERNS,
+  SupportedCodemodExtensions,
   getDefaultGlob,
 } from "../codemod/codeshift.utils";
 import { validateGit } from "../codemod/validation";
@@ -162,6 +163,13 @@ async function executeTask(
   }
 }
 
+const JS_EXTENSIONS = [
+  "js",
+  "jsx",
+  "ts",
+  "tsx",
+] satisfies SupportedCodemodExtensions[];
+
 /**
  * Filter files based on the selected task
  */
@@ -170,7 +178,15 @@ function getScopedFilesForTask(
   filepaths: string[],
   status: any,
 ): string[] {
-  return filepaths.filter((f) => {
+  let safeFilepaths = filepaths;
+
+  if (task === "js-tokens") {
+    safeFilepaths = filepaths.filter((f) =>
+      JS_EXTENSIONS.some((ext) => f.endsWith(`.${ext}`)),
+    );
+  }
+
+  return safeFilepaths.filter((f) => {
     switch (task) {
       case "css-tokens":
         return !!status.css.legacy.find((config) => config.fileName === f);

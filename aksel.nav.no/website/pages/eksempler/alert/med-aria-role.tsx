@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert variant="info">
         Hvilken ARIA role og hvilken Alert-variant man bruker er knyttet til
         viktigheten av innholdet. I Info-varianten bør det ikke være nødvendig å

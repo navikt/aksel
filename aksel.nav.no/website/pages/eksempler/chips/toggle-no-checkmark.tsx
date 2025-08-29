@@ -6,8 +6,8 @@ const Example = () => {
   const [selected, setSelected] = useState(3);
 
   return (
-    <VStack gap="10">
-      <VStack gap="3">
+    <VStack gap="space-40">
+      <VStack gap="space-12">
         Variant action (default)
         <Chips>
           {options.map((label, id) => (
@@ -22,7 +22,7 @@ const Example = () => {
           ))}
         </Chips>
       </VStack>
-      <VStack gap="3">
+      <VStack gap="space-12">
         Variant neutral
         <Chips>
           {options.map((label, id) => (

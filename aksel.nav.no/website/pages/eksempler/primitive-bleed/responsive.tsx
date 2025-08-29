@@ -4,8 +4,11 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <DemoWrapper>
-      <Bleed marginInline={{ xs: "8", sm: "12", md: "16" }} asChild>
-        <Box padding="3" background="surface-alt-3-subtle">
+      <Bleed
+        marginInline={{ xs: "space-32", sm: "space-48", md: "space-64" }}
+        asChild
+      >
+        <Box padding="space-12" background="surface-alt-3-subtle">
           <HStack justify="center">
             <BodyLong>xs: 8, sm: 12, md: 16</BodyLong>
           </HStack>
@@ -19,11 +22,11 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
     <Box
       background="surface-alt-3"
-      paddingBlock="4"
-      paddingInline={{ xs: "4", sm: "8", md: "12" }}
+      paddingBlock="space-16"
+      paddingInline={{ xs: "space-16", sm: "space-32", md: "space-48" }}
       borderRadius="large"
     >
-      <Box background="surface-subtle" padding="4" borderRadius="medium">
+      <Box background="surface-subtle" padding="space-16" borderRadius="medium">
         {children}
       </Box>
     </Box>

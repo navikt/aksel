@@ -15,6 +15,8 @@ export {
   type DatePickerStandaloneProps,
   type DateValidationT,
   type RangeValidationT,
+  type UseDatepickerOptions,
+  type UseRangeDatepickerOptions,
 } from "./date/datepicker";
 export {
   MonthPicker,
@@ -56,6 +58,7 @@ export { Modal, type ModalProps } from "./modal";
 export { Pagination, type PaginationProps } from "./pagination";
 export { Popover, type PopoverProps } from "./popover";
 export { Portal, type PortalProps } from "./portal";
+export { Process, type ProcessProps } from "./process";
 export { ProgressBar, type ProgressBarProps } from "./progress-bar";
 export { Provider, type ProviderProps } from "./provider";
 export { ReadMore, type ReadMoreProps } from "./read-more";

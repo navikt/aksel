@@ -20,6 +20,12 @@
   flex-wrap: wrap;
 }
 
+.storyheading {
+  font-size: 18px;
+  background: lightblue;
+  padding: 2px 4px;
+}
+
 .sbdocs-content:not(.sb-unstyled) :is(p, li) {
   font-size: 1.125rem;
 }

@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
 import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { omit } from "../../util";
+import { omit, useId } from "../../util";
 import { ReadOnlyIcon, ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps } from "../useFormField";
 import { FieldsetContext } from "./context";
@@ -33,6 +33,7 @@ export interface FieldsetProps
 
 export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   (props, ref) => {
+    const legendId = useId();
     const {
       inputProps,
       errorId,
@@ -41,7 +42,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       size,
       readOnly,
       inputDescriptionId,
-    } = useFieldset(props);
+    } = useFieldset(props, legendId);
 
     const { cn } = useRenameCSS();
     const fieldset = useContext(FieldsetContext);
@@ -72,7 +73,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       >
         <fieldset
           {...omit(rest, ["errorId", "error", "size", "readOnly"])}
-          {...omit(inputProps, ["aria-describedby", "aria-invalid"])}
+          {...inputProps}
           ref={ref}
           className={cn(
             className,
@@ -85,6 +86,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           )}
         >
           <Label
+            id={legendId}
             size={size}
             as="legend"
             className={cn("navds-fieldset__legend", {
