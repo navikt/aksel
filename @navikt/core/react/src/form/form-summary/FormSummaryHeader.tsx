@@ -1,29 +1,21 @@
-import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import React from "react";
+import { SlotWarningProvider } from "../../util/slotWarningProvider";
 
+/**
+ * Header slot for section heading and actions in `FormSummary`.
+ */
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Must include `<FormSummary.Heading>` and optionally `<FormSummary.EditLink>`.
-   */
   children: React.ReactNode;
 }
 
-export const FormSummaryHeader = forwardRef<
-  HTMLDivElement,
-  FormSummaryHeaderProps
->(({ children, className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
-  return (
-    <header
-      ref={ref}
-      {...rest}
-      className={cn("navds-form-summary__header", className)}
-    >
-      {children}
-    </header>
-  );
-});
+export const FormSummaryHeader = ({
+  children,
+  ...rest
+}: FormSummaryHeaderProps) => (
+  <SlotWarningProvider name="FormSummary.Header">
+    <div {...rest}>{children}</div>
+  </SlotWarningProvider>
+);
 
 export default FormSummaryHeader;
