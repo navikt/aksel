@@ -2,6 +2,8 @@
   display: grid;
   border-radius: var(--ax-border-radius-xlarge);
   border: 1px solid var(--ax-border-default);
+  overflow: clip;
+  position: relative;
 }
 
 .aksel-info-card__header {
@@ -11,8 +13,6 @@
   padding: var(--ax-space-8) var(--ax-space-20);
   border-bottom: 1px solid var(--ax-border-subtleA);
   background: var(--ax-bg-moderate);
-  border-start-start-radius: calc(var(--ax-border-radius-xlarge) - 1px);
-  border-start-end-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   color: var(--ax-text-subtle);
 
   .aksel-info-card--small & {
@@ -21,8 +21,6 @@
 
   &:only-child {
     border-bottom: none;
-    border-end-start-radius: calc(var(--ax-border-radius-xlarge) - 1px);
-    border-end-end-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   }
 }
 
@@ -41,11 +39,50 @@
 }
 
 .aksel-info-card__content {
-  padding-block: var(--ax-space-12) var(--ax-space-16);
+  --__axc-info-card-padding-block-end-base: var(--ax-space-16);
+  --__axc-info-card-padding-block-end-small: var(--ax-space-12);
+
+  padding-block: var(--ax-space-12) var(--__axc-info-card-padding-block-end-base);
   padding-inline: var(--ax-space-20);
 
   .aksel-info-card--small & {
-    padding-block: var(--ax-space-8) var(--ax-space-12);
+    padding-block: var(--ax-space-8) var(--__axc-info-card-padding-block-end-small);
     padding-inline: var(--ax-space-16);
   }
+}
+
+.aksel-info-card__collapsible-content {
+  --gradient-start: calc(var(--ax-space-12) + 48px);
+
+  position: relative;
+  background: var(--ax-bg-default);
+
+  &::after {
+    content: "";
+    inset: auto 0 0;
+    mask-image: linear-gradient(to top, rgb(0 0 0) var(--gradient-start), rgb(0 0 0) var(--gradient-start), rgb(0 0 0 / 0) 100%);
+    position: absolute;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out 0.1s;
+    height: calc(var(--gradient-start) + 48px);
+    background-color: inherit;
+  }
+
+  &[data-expanded="true"] {
+    max-height: none;
+
+    --__axc-info-card-padding-block-end-base: var(--ax-space-64);
+    --__axc-info-card-padding-block-end-small: var(--ax-space-56);
+
+    &::after {
+      opacity: 0;
+    }
+  }
+}
+
+.aksel-info-card__button {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }

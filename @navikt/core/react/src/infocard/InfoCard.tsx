@@ -1,12 +1,18 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState, version } from "react";
 import { InformationSquareFillIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { Heading } from "../typography";
 import { createContext } from "../util/create-context";
+import { useMergeRefs } from "../util/hooks";
+
+const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
 
 type InfoCardContext = {
   size: "medium" | "small";
+  open: boolean;
+  toggleOpen: () => void;
+  contentRef: React.RefObject<HTMLDivElement | null>;
 };
 
 const [InfoCardContextProvider, useInfoCardContext] =
@@ -41,6 +47,29 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
   ) => {
     const { cn } = useRenameCSS();
 
+    const [open, setOpen] = useState(false);
+    const contentRef = React.useRef<HTMLDivElement | null>(null);
+
+    const handleExpandToggle = () => {
+      if (open) {
+        setOpen(false);
+        if (contentRef.current) {
+          contentRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+        return;
+      }
+
+      setOpen(true);
+
+      /* We need to wait for the "inert"-attrb to dissapear before we can focus the element */
+      queueMicrotask(() => {
+        contentRef.current?.focus();
+      });
+    };
+
     return (
       <div
         ref={forwardedRef}
@@ -48,7 +77,12 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
         className={cn(className, "navds-info-card", `navds-info-card--${size}`)}
         data-color={dataColor}
       >
-        <InfoCardContextProvider size={size}>
+        <InfoCardContextProvider
+          size={size}
+          open={open}
+          toggleOpen={handleExpandToggle}
+          contentRef={contentRef}
+        >
           {children}
         </InfoCardContextProvider>
       </div>
@@ -142,5 +176,68 @@ export const InfoCardContent = forwardRef<HTMLDivElement, InfoCardContentProps>(
     );
   },
 );
+
+interface InfoCardCollapsibleContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+export const InfoCardCollapsibleContent = forwardRef<
+  HTMLDivElement,
+  InfoCardCollapsibleContentProps
+>(
+  (
+    { children, className, ...restProps }: InfoCardCollapsibleContentProps,
+    forwardedRef,
+  ) => {
+    const { cn } = useRenameCSS();
+    const { open, contentRef } = useInfoCardContext();
+
+    const mergedRef = useMergeRefs(forwardedRef, contentRef);
+
+    return (
+      <div
+        ref={mergedRef}
+        {...restProps}
+        className={cn(
+          className,
+          "navds-info-card__content",
+          "navds-info-card__collapsible-content",
+        )}
+        data-expanded={open}
+        /* @ts-expect-error: Inert not officially supported on older react-elements */
+        inert={!open ? inertValue : undefined}
+        tabIndex={-1}
+      >
+        {children}
+      </div>
+    );
+  },
+);
+
+interface InfoCardExpandButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: React.ReactNode;
+}
+
+export const InfoCardExpandButton = forwardRef<
+  HTMLButtonElement,
+  InfoCardExpandButtonProps
+>(({ className, ...restProps }: InfoCardExpandButtonProps, forwardedRef) => {
+  const { cn } = useRenameCSS();
+
+  const { open, toggleOpen } = useInfoCardContext();
+
+  return (
+    <button
+      ref={forwardedRef}
+      {...restProps}
+      className={cn(className, "navds-info-card__button")}
+      onClick={toggleOpen}
+    >
+      {open ? "Vis mindre" : "Vis mer"}
+    </button>
+  );
+});
 
 export default InfoCard;

@@ -10,7 +10,9 @@ import {
 import { Button } from "../button";
 import { Spacer, VStack } from "../layout/stack";
 import InfoCard, {
+  InfoCardCollapsibleContent,
   InfoCardContent,
+  InfoCardExpandButton,
   InfoCardHeader,
   InfoCardTitle,
 } from "./InfoCard";
@@ -161,6 +163,27 @@ export const WrappingTitle: Story = {
           </InfoCardTitle>
         </InfoCardHeader>
         <DemoContent />
+      </InfoCard>
+    );
+  },
+};
+
+export const CollapsibleContent: Story = {
+  render: () => {
+    return (
+      <InfoCard style={{ maxWidth: "30rem" }}>
+        <InfoCardHeader>
+          <InfoCardTitle>InfoCard Title</InfoCardTitle>
+        </InfoCardHeader>
+        <InfoCardCollapsibleContent>
+          <button>Interactive content</button>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
+          tempore corrupti asperiores praesentium? Asperiores, doloribus?
+          Molestias, laudantium saepe. Nihil in alias praesentium maxime iure
+          ipsam? Accusantium libero quia quis!
+          <button>Interactive content</button>
+        </InfoCardCollapsibleContent>
+        <InfoCardExpandButton />
       </InfoCard>
     );
   },
