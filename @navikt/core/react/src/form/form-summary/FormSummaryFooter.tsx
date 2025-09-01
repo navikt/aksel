@@ -18,6 +18,7 @@ export const FormSummaryFooter = forwardRef<
   return (
     <div
       ref={ref}
+      data-color="info"
       {...rest}
       className={cn("navds-form-summary__footer", className)}
     >
