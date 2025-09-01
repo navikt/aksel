@@ -9,6 +9,7 @@ import { useTransitionStatus } from "./useTransitionStatus";
 
 type AnimationType = "css-transition" | "css-animation" | "none" | null;
 /* TODO: https://github.com/mui/base-ui/blob/master/packages/react/src/utils/useOpenChangeComplete.tsx#L10 */
+/* TODO: https://github.com/mui/base-ui/blob/3f743cafd37e75526bbc1f2323369d6547f12eaa/packages/react/src/collapsible/panel/useCollapsiblePanel.ts#L30 */
 
 interface Dimensions {
   height: number | undefined;
@@ -36,9 +37,7 @@ interface UseCollapsibleRootProps {
   disabled: boolean;
 }
 
-function useCollapsibleRoot(
-  input: UseCollapsibleRootProps,
-): useCollapsibleRoot.ReturnValue {
+function useCollapsibleRoot(input: UseCollapsibleRootProps) {
   const {
     open: openParam,
     defaultOpen = false,
@@ -187,51 +186,3 @@ function useCollapsibleRoot(
 }
 
 export { useCollapsibleRoot };
-
-export namespace useCollapsibleRoot {
-  export interface ReturnValue {
-    abortControllerRef: React.RefObject<AbortController | null>;
-    animationTypeRef: React.RefObject<AnimationType>;
-    /**
-     * Whether the component should ignore user interaction.
-     */
-    disabled: boolean;
-    handleTrigger: () => void;
-    /**
-     * The height of the panel.
-     */
-    height: number | undefined;
-    /**
-     * Whether the collapsible panel is currently mounted.
-     */
-    mounted: boolean;
-    /**
-     * Whether the collapsible panel is currently open.
-     */
-    open: boolean;
-    panelId: React.HTMLAttributes<Element>["id"];
-    panelRef: React.RefObject<HTMLElement | null>;
-    runOnceAnimationsFinish: (
-      fnToExecute: () => void,
-      signal?: AbortSignal | null,
-    ) => void;
-    setDimensions: React.Dispatch<React.SetStateAction<Dimensions>>;
-    setHiddenUntilFound: React.Dispatch<React.SetStateAction<boolean>>;
-    setKeepMounted: React.Dispatch<React.SetStateAction<boolean>>;
-    setMounted: (open: boolean) => void;
-    setOpen: (open: boolean) => void;
-    setPanelIdState: (id: string | undefined) => void;
-    setVisible: React.Dispatch<React.SetStateAction<boolean>>;
-    transitionDimensionRef: React.RefObject<"height" | "width" | null>;
-    transitionStatus: TransitionStatus;
-    /**
-     * The visible state of the panel used to determine the `[hidden]` attribute
-     * only when CSS keyframe animations are used.
-     */
-    visible: boolean;
-    /**
-     * The width of the panel.
-     */
-    width: number | undefined;
-  }
-}

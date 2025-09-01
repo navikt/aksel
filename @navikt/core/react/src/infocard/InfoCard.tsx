@@ -206,7 +206,7 @@ export const InfoCardCollapsibleContent = forwardRef<
         )}
         data-expanded={open}
         /* @ts-expect-error: Inert not officially supported on older react-elements */
-        inert={!open ? inertValue : undefined}
+        inert={!open ? inertValue : false}
         tabIndex={-1}
       >
         {children}
