@@ -141,8 +141,11 @@
 
 /* Tailwind sets all svg to block */
 .navds-checkbox__icon > svg {
-  display: inline;
-  vertical-align: initial;
+  display: block;
+
+  /* Safari does not support inline rem-values in SVG */
+  width: 0.8125rem;
+  height: 0.625rem;
 }
 
 .navds-checkbox--small > .navds-checkbox__input:checked + .navds-checkbox__label::before {
