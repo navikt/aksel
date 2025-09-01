@@ -2,4 +2,4 @@
 "@navikt/ds-css": patch
 ---
 
-Darkside: Styling fixes on Radio and Checkbox
+Darkside: Fix styling for small readOnly checked Radio
