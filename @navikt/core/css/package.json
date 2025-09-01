@@ -22,11 +22,10 @@
     "directory": "@navikt/core/css"
   },
   "scripts": {
-    "build": "node config/bundle.js && yarn build:darkside && yarn validate",
+    "build": "node config/bundle.js && yarn build:darkside",
     "css:get-version": "node config/get-version.js",
     "build:darkside": "tsx ./config/bundle.darkside.ts",
-    "test": "yarn build && vitest run",
-    "validate": "yarn lightningcss dist/index.css -o /dev/null && yarn lightningcss dist/darkside/index.css -o /dev/null"
+    "test": "yarn build && vitest run"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^7.29.0",
@@ -35,8 +34,7 @@
     "cssnano": "7.0.6",
     "esbuild": "^0.25.9",
     "fast-glob": "3.2.11",
-    "lightningcss": "^1.29.3",
-    "lightningcss-cli": "^1.29.3",
+    "lightningcss": "^1.30.1",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.31",

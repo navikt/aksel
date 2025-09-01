@@ -1,8 +1,9 @@
 /* eslint-disable testing-library/no-unnecessary-act -- https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning */
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import React, { useId } from "react";
+import React from "react";
 import { describe, expect, test, vi } from "vitest";
+import { useId } from "../../../util";
 import nb from "../../../util/i18n/locales/nb";
 import { ComboboxProps, UNSAFE_Combobox } from "../index";
 
