@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../theme/Theme";
-import { SlotWarningProvider } from "../../util/slotWarningProvider";
 
 /**
  * Footer slot for actions in `FormSummary`.
@@ -15,16 +14,15 @@ export const FormSummaryFooter = forwardRef<
   FormSummaryFooterProps
 >(({ children, className, ...rest }, ref) => {
   const { cn } = useRenameCSS();
+
   return (
-    <SlotWarningProvider name="FormSummary.Footer">
-      <div
-        ref={ref}
-        {...rest}
-        className={cn("navds-form-summary__footer", className)}
-      >
-        {children}
-      </div>
-    </SlotWarningProvider>
+    <div
+      ref={ref}
+      {...rest}
+      className={cn("navds-form-summary__footer", className)}
+    >
+      {children}
+    </div>
   );
 });
 

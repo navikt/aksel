@@ -443,50 +443,30 @@ export const Chromatic: StoryObj<typeof FormSummary> = {
 export const _DevWarning_MisuseInHeaderExample: StoryFn<
   typeof FormSummary
 > = () => (
-  <FormSummary>
-    <FormSummary.Header>
-      <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
-      {/* Intentional to trigger warning */}
-      <FormSummary.EditLink href="#" />
-    </FormSummary.Header>
-    <FormSummary.Answers>
-      <FormSummary.Answer>
-        <FormSummary.Label>Navn</FormSummary.Label>
-        <FormSummary.Value>Ola Nordmann</FormSummary.Value>
-      </FormSummary.Answer>
-
-      <FormSummary.Answer>
-        <FormSummary.Label>Fødselsnummer</FormSummary.Label>
-        <FormSummary.Value>12345678910</FormSummary.Value>
-      </FormSummary.Answer>
-
-      <FormSummary.Answer>
-        <FormSummary.Label>Barn nr. 1</FormSummary.Label>
-        <FormSummary.Value>
-          <FormSummary.Answers>
-            <FormSummary.Answer>
-              <FormSummary.Label>Navn</FormSummary.Label>
-              <FormSummary.Value>Kari Nordmann</FormSummary.Value>
-            </FormSummary.Answer>
-            <FormSummary.Answer>
-              <FormSummary.Label>Kjønn</FormSummary.Label>
-              <FormSummary.Value>Jente</FormSummary.Value>
-            </FormSummary.Answer>
-            <FormSummary.Answer>
-              <FormSummary.Label>Alder</FormSummary.Label>
-              <FormSummary.Value>6</FormSummary.Value>
-            </FormSummary.Answer>
-          </FormSummary.Answers>
-        </FormSummary.Value>
-      </FormSummary.Answer>
-    </FormSummary.Answers>
-    <FormSummary.Footer>
-      <FormSummary.EditLink href="#" />
-    </FormSummary.Footer>
-  </FormSummary>
+  <VStack gap="space-16">
+    <FormSummary>
+      <FormSummary.Header>
+        <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
+        {/* Intentional to trigger warning */}
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Header>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
+    </FormSummary>
+    <FormSummary>
+      <FormSummary.Header>
+        <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
+        {/* Intentional to trigger warning */}
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Header>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
+    </FormSummary>
+  </VStack>
 );
 
 _DevWarning_MisuseInHeaderExample.parameters = {
   docs: { disable: true },
-  chromatic: { disableSnapshot: true },
 };
