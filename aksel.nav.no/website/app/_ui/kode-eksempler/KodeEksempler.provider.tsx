@@ -113,8 +113,23 @@ function KodeEksemplerProvider(props: {
       behavior: "smooth",
       block: "nearest",
     });
+    console.warn("HH scrolling nearest");
+
     iframeRef.current?.focus({ preventScroll: true });
   }, [dir?.filer, dir?.title, searchParams]);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Only run on first render
+  useEffect(() => {
+    //const param = searchParams?.get("demo");
+    if (!searchParams?.get("demo")) {
+      return;
+    }
+    console.warn("HH SCROLLING CENTER");
+    iframeRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <KodeEksemplerContext.Provider
