@@ -97,7 +97,7 @@
   border-radius: 1px;
   position: absolute;
   transform: translate(var(--ax-space-6), -50%);
-  top: var(--ax-space-24);
+  top: 50%;
   pointer-events: none;
 }
 
