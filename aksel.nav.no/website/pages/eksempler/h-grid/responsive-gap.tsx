@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <Box background="surface-alt-3-subtle">
-      <HGrid gap={{ xs: "2", md: "8" }} columns={3}>
+      <HGrid gap={{ xs: "space-8", md: "space-32" }} columns={3}>
         <Placeholder />
         <Placeholder />
         <Placeholder />

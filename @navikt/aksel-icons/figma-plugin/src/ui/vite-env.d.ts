@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 declare module "*.svg?component" {
-  import * as React from "react";
+  import React from "react";
 
   const ReactComponent: React.FunctionComponent<
     React.ComponentProps<"svg"> & { title?: string }

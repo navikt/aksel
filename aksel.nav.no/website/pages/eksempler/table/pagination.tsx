@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pagination, Table } from "@navikt/ds-react";
+import { Pagination, Table, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -10,7 +10,7 @@ const Example = () => {
   sortData = sortData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
   return (
-    <div className="grid gap-4">
+    <VStack gap="space-16">
       <Table size="medium">
         <Table.Header>
           <Table.Row>
@@ -37,7 +37,7 @@ const Example = () => {
         count={Math.ceil(data.length / rowsPerPage)}
         size="small"
       />
-    </div>
+    </VStack>
   );
 };
 

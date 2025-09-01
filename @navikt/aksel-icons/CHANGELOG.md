@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 7.29.0
+
+### Minor Changes
+
+- Icons: :tada: New icons `CheckmarkHeavy` and `PageBreak`. ([#4038](https://github.com/navikt/aksel/pull/4038))
+
 ## 7.28.1
 
 ## 7.28.0

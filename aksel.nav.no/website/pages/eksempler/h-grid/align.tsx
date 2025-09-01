@@ -3,16 +3,16 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="12">
-      <HGrid gap="4" columns={2} align="start">
+    <VStack gap="space-48">
+      <HGrid gap="space-16" columns={2} align="start">
         <Placeholder height="10rem">Start</Placeholder>
         <Placeholder />
       </HGrid>
-      <HGrid gap="4" columns={2} align="center">
+      <HGrid gap="space-16" columns={2} align="center">
         <Placeholder height="10rem">Center</Placeholder>
         <Placeholder />
       </HGrid>
-      <HGrid gap="4" columns={2} align="end">
+      <HGrid gap="space-16" columns={2} align="end">
         <Placeholder height="10rem">End</Placeholder>
         <Placeholder />
       </HGrid>

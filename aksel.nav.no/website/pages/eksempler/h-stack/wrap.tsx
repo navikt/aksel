@@ -4,11 +4,11 @@ import { Placeholder } from "../../../components/website-modules/examples/__part
 
 const Example = () => {
   return (
-    <Box maxWidth="385px" padding="2" background="bg-subtle">
-      <VStack gap="3">
+    <Box maxWidth="385px" padding="space-8" background="bg-subtle">
+      <VStack gap="space-12">
         <div>
           <Heading size="xsmall">wrap=true (default)</Heading>
-          <HStack gap="2 4">
+          <HStack gap="space-8 space-16">
             <Placeholder />
             <Placeholder />
             <Placeholder />
@@ -21,7 +21,7 @@ const Example = () => {
 
         <div>
           <Heading size="xsmall">wrap=false</Heading>
-          <HStack gap="2 4" wrap={false}>
+          <HStack gap="space-8 space-16" wrap={false}>
             <Placeholder />
             <Placeholder />
             <Placeholder />

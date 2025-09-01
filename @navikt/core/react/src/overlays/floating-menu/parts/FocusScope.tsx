@@ -1,5 +1,4 @@
-import * as React from "react";
-import { forwardRef, useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { Slot } from "../../../slot/Slot";
 import { useCallbackRef, useMergeRefs } from "../../../util/hooks";
 

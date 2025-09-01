@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="10">
+    <VStack gap="space-40">
       <Chat avatar="EVA" name="EVA" timestamp="01.01.21 14:00">
         <Chat.Bubble>Hei! Mitt navn er Eva.</Chat.Bubble>
         <Chat.Bubble>Hva kan jeg hjelpe deg med?</Chat.Bubble>

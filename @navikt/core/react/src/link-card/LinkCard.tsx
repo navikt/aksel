@@ -16,6 +16,11 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
    */
   arrow?: boolean;
   /**
+   * Adjusts arrow position.
+   * @default "baseline"
+   */
+  arrowPosition?: "baseline" | "center";
+  /**
    * Changes padding and typo sizes.
    * @default "medium"
    */
@@ -24,7 +29,6 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
 
 type LinkCardContextProps = {
   size: LinkCardProps["size"];
-  arrow: LinkCardProps["arrow"];
 };
 
 const [LinkCardContextProvider, useLinkCardContext] =
@@ -93,6 +97,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
       children,
       className,
       arrow = true,
+      arrowPosition = "baseline",
       size = "medium",
       ...restProps
     }: LinkCardProps,
@@ -101,7 +106,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     const { cn } = useRenameCSS();
 
     return (
-      <LinkCardContextProvider size={size} arrow={arrow}>
+      <LinkCardContextProvider size={size}>
         <LinkAnchorOverlay asChild>
           <BodyLong
             as="div"
@@ -113,9 +118,16 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
               className,
               `navds-link-card--${size}`,
             )}
+            data-align-arrow={arrowPosition}
             {...restProps}
           >
             {children}
+            {arrow && (
+              <LinkAnchorArrow
+                fontSize={size === "medium" ? "1.75rem" : "1.5rem"}
+                className={cn("navds-link-card__arrow")}
+              />
+            )}
           </BodyLong>
         </LinkAnchorOverlay>
       </LinkCardContextProvider>
@@ -155,11 +167,6 @@ export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
         {...restProps}
       >
         {children}
-        {context.arrow && (
-          <LinkAnchorArrow
-            fontSize={context.size === "medium" ? "1.75rem" : "1.5rem"}
-          />
-        )}
       </Heading>
     );
   },

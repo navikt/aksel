@@ -5,6 +5,7 @@ module.exports = {
   ref: true,
   icon: true,
   titleProp: true,
+  jsxRuntime: "automatic",
   svgProps: {
     focusable: false,
     role: "img",

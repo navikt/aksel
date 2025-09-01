@@ -10,7 +10,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <Alert variant="warning">
         <Heading spacing size="small" level="3">
           Informasjon om ansvaret ditt
@@ -26,11 +26,10 @@ const Example = () => {
         </BodyLong>
         <Button variant="secondary-neutral">Ok, jeg har lest beskjeden</Button>
       </Alert>
-
       <Alert size="small" variant="info">
-        <VStack gap="3">
+        <VStack gap="space-12">
           Det har kommet nye opplysninger. Vil du ta dem i bruk?
-          <HStack gap="4">
+          <HStack gap="space-16">
             <Button size="small" variant="secondary-neutral">
               Ja
             </Button>

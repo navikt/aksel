@@ -15,5 +15,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Small brukes på interne flater der det er behov for et mer komprimert grensesnitt. Small bør brukes sparsomt på sider som brukes fra mobil, da det er viktig at touch-flaten er stor nok.",
+  desc: "Small bør brukes sparsomt på sider som brukes fra mobil, da det er viktig at touch-flaten er stor nok.",
 };

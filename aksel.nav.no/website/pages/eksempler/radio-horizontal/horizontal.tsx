@@ -4,7 +4,11 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <RadioGroup legend="Har du barn?">
-      <Stack gap="0 6" direction={{ xs: "column", sm: "row" }} wrap={false}>
+      <Stack
+        gap="space-0 space-24"
+        direction={{ xs: "column", sm: "row" }}
+        wrap={false}
+      >
         <Radio value="1">Ja</Radio>
         <Radio value="0">Nei</Radio>
       </Stack>

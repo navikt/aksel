@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Switch readOnly>Slå på notifikasjoner</Switch>
       <Switch readOnly checked>
         Slå på notifikasjoner

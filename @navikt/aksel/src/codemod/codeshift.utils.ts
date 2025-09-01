@@ -7,11 +7,21 @@ const GLOB_IGNORE_PATTERNS = [
   "**/__snapshots__/**",
 ];
 
+type SupportedCodemodExtensions =
+  | "js"
+  | "ts"
+  | "jsx"
+  | "tsx"
+  | "css"
+  | "scss"
+  | "less";
+
 /**
  * Utility function to generate the default glob pattern
  */
 function getDefaultGlob(ext: string): string {
   const defaultExt = "js,ts,jsx,tsx,css,scss,less";
+
   return `**/*.{${cleanExtensions(ext ?? defaultExt).join(",")}}`;
 }
 
@@ -26,3 +36,5 @@ function cleanExtensions(ext: string): string[] {
 }
 
 export { GLOB_IGNORE_PATTERNS, getDefaultGlob, cleanExtensions };
+
+export type { SupportedCodemodExtensions };

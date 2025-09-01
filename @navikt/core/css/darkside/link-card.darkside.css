@@ -15,13 +15,21 @@
   cursor: pointer;
   display: grid;
   grid-template-areas:
-    "image image"
-    "icon title"
-    "icon description"
-    "icon footer";
+    "image image image"
+    "icon title arrow"
+    "icon description arrow"
+    "icon footer arrow";
   grid-template-columns: auto 1fr;
   grid-template-rows: min-content min-content min-content auto;
   align-items: center;
+
+  &[data-align-arrow="baseline"] {
+    grid-template-areas:
+      "image image image"
+      "icon title arrow"
+      "icon description description"
+      "icon footer footer";
+  }
 
   &:not(:has(.aksel-link-card__description, .aksel-link-card__footer)) {
     grid-template-rows: auto 1fr;
@@ -31,6 +39,10 @@
     }
 
     & .aksel-link-card__icon {
+      align-self: center;
+    }
+
+    &[data-align-arrow="baseline"] .aksel-link-card__arrow {
       align-self: center;
     }
   }
@@ -49,10 +61,6 @@
 .aksel-link-card__title {
   grid-area: title;
   color: var(--ax-text-subtle);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--ax-space-8);
   hyphens: auto;
 
   .aksel-link-card[data-color="neutral"] &,
@@ -105,5 +113,18 @@
     display: block;
     max-width: 100%;
     height: 100%;
+  }
+}
+
+.aksel-link-card__arrow {
+  grid-area: arrow;
+  margin-inline-start: var(--ax-space-8);
+
+  .aksel-link-card[data-align-arrow="baseline"] & {
+    align-self: baseline;
+  }
+
+  .aksel-link-card[data-align-arrow="center"] & {
+    align-self: center;
   }
 }

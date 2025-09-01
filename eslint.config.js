@@ -178,4 +178,103 @@ module.exports = tseslint.config([
       "react/react-in-jsx-scope": "off",
     },
   },
+  {
+    files: ["@navikt/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "react",
+              importNames: [
+                // React 18
+                "useId",
+                "useInsertionEffect",
+                "useSyncExternalStore",
+                "useDeferredValue",
+                "useTransition",
+                "startTransition",
+                // React 19
+                "useOptimistic",
+                "useActionState",
+                "use",
+                "cache",
+                "useEffectEvent",
+              ],
+              message:
+                "We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
+            },
+            // react-dom 18+
+            {
+              name: "react-dom/client",
+              importNames: ["createRoot", "hydrateRoot"],
+              message: "React 18+ API not allowed (targeting React 17).",
+            },
+          ],
+        },
+      ],
+
+      "no-restricted-properties": [
+        "error",
+        // React 18
+        {
+          object: "React",
+          property: "useId",
+          message: "React 18+ API not allowed (targeting React 17).",
+        },
+        {
+          object: "React",
+          property: "useInsertionEffect",
+          message: "React 18+ API not allowed (targeting React 17).",
+        },
+        {
+          object: "React",
+          property: "useSyncExternalStore",
+          message: "React 18+ API not allowed (targeting React 17).",
+        },
+        {
+          object: "React",
+          property: "useDeferredValue",
+          message: "React 18+ API not allowed (targeting React 17).",
+        },
+        {
+          object: "React",
+          property: "useTransition",
+          message: "React 18+ API not allowed (targeting React 17).",
+        },
+        {
+          object: "React",
+          property: "startTransition",
+          message: "React 18+ API not allowed (targeting React 17).",
+        },
+        // React 19
+        {
+          object: "React",
+          property: "useOptimistic",
+          message: "React 19+ API not allowed (targeting React 17).",
+        },
+        {
+          object: "React",
+          property: "useActionState",
+          message: "React 19+ API not allowed (targeting React 17).",
+        },
+        {
+          object: "React",
+          property: "use",
+          message: "React 19+ API not allowed (targeting React 17).",
+        },
+        {
+          object: "React",
+          property: "cache",
+          message: "React 19+ API not allowed (targeting React 17).",
+        },
+        {
+          object: "React",
+          property: "useEffectEvent",
+          message: "React 19+ API not allowed (targeting React 17).",
+        },
+      ],
+    },
+  },
 ]);

@@ -13,8 +13,8 @@ const Example = () => {
 };
 
 const Row = ({ children, text }: any) => (
-  <Box borderColor="border-subtle" borderWidth="0 0 1" paddingBlock="1">
-    <HGrid columns="1fr 4fr auto" gap="2" align="center">
+  <Box borderColor="border-subtle" borderWidth="0 0 1" paddingBlock="space-4">
+    <HGrid columns="1fr 4fr auto" gap="space-8" align="center">
       <span>{text}</span>
       <span>{children}</span>
       <CopyButton size="small" copyText={children} />
