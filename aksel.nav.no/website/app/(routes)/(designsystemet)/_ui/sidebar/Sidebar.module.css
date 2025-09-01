@@ -35,7 +35,7 @@
   padding-block: var(--ax-space-2);
   padding-inline-start: var(--ax-space-8);
   font-weight: var(--ax-font-weight-bold);
-  color: var(--ax-text-neutral);
+  color: var(--ax-text-neutral-subtle);
 }
 
 .navListSub {
