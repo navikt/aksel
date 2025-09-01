@@ -192,6 +192,9 @@ export const Indeterminate = () => {
           Child 2
         </Checkbox>
       </div>
+      <Checkbox indeterminate description="With description">
+        Indeterminate medium
+      </Checkbox>
       <Checkbox indeterminate size="small" description="With description">
         Indeterminate small
       </Checkbox>
