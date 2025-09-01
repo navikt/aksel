@@ -141,6 +141,8 @@
 /* Tailwind sets all svg to block */
 .navds-checkbox__icon > svg {
   display: block;
+
+  /* Safari does not support inline rem-values in SVG */
   width: 0.8125rem;
   height: 0.625rem;
 }

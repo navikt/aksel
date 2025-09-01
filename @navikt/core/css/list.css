@@ -75,6 +75,7 @@
   color: var(--ac-list-marker-ul-color, var(--ac-list-marker-color, var(--a-icon-default)));
 }
 
+/* Safari does not support inline rem-values in SVG */
 .navds-list__item-marker--bullet > svg {
   width: 0.375rem;
   height: 0.375rem;
