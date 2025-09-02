@@ -109,12 +109,12 @@ function KodeEksemplerProvider(props: {
 
     prevSearchParam.current = param;
 
-    setTimeout(() => {
+    queueMicrotask(() => {
       iframeRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
       });
-    }, 1);
+    });
 
     iframeRef.current?.focus({ preventScroll: true });
   }, [dir?.filer, dir?.title, searchParams]);
