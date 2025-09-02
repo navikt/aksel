@@ -52,6 +52,7 @@ export function useAnimationsFinished(
       ) {
         fnToExecute();
       } else {
+        /* console.info(element, element.getAnimations()); */
         frame.request(() => {
           function exec() {
             if (!element) {

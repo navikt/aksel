@@ -56,6 +56,14 @@
 
   position: relative;
   background: var(--ax-bg-default);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  height: var(--__axc-info-card-height);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  width: var(--__axc-info-card-width);
+  transition: all ease-in-out;
+  transition-duration: 0.5s;
+  display: block;
+  overflow: hidden;
 
   &::after {
     content: "";
@@ -68,12 +76,10 @@
     background-color: inherit;
   }
 
+  --__axc-info-card-padding-block-end-base: var(--ax-space-64);
+  --__axc-info-card-padding-block-end-small: var(--ax-space-56);
+
   &[data-expanded="true"] {
-    max-height: none;
-
-    --__axc-info-card-padding-block-end-base: var(--ax-space-64);
-    --__axc-info-card-padding-block-end-small: var(--ax-space-56);
-
     &::after {
       opacity: 0;
     }
