@@ -110,7 +110,6 @@ function KodeEksemplerProvider(props: {
     prevSearchParam.current = param;
 
     setTimeout(() => {
-      console.warn("HH scrolling nearest");
       iframeRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
