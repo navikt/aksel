@@ -183,11 +183,7 @@ export const TestInsideAccordion = () => (
 
 export const Readonly = () => (
   <div className="colgap">
-    <RadioGroup
-      legend="Hvilken frukt liker du?"
-      defaultValue={["banan"]}
-      readOnly
-    >
+    <RadioGroup legend="Hvilken frukt liker du?" defaultValue="banan" readOnly>
       <Radio value="banan">Banan</Radio>
       <Radio value="eple">Eple</Radio>
       <Radio value="druer">Druer</Radio>
@@ -197,6 +193,7 @@ export const Readonly = () => (
       error="feilmelding"
       defaultValue="eple"
       readOnly
+      size="small"
     >
       <Radio value="eple">Eple</Radio>
       <Radio value="banan">Banan</Radio>
@@ -206,13 +203,11 @@ export const Readonly = () => (
 
 export const Disabled = () => (
   <div className="colgap">
-    <RadioGroup
-      legend="Hvilken frukt liker du?"
-      defaultValue={["banan"]}
-      disabled
-    >
+    <RadioGroup legend="Hvilken frukt liker du?" defaultValue="banan" disabled>
       <Radio value="banan">Banan</Radio>
-      <Radio value="eple">Eple</Radio>
+      <Radio value="eple" description="Rød, grønn eller gul.">
+        Eple
+      </Radio>
       <Radio value="druer">Druer</Radio>
     </RadioGroup>
     <RadioGroup

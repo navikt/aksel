@@ -143,6 +143,18 @@
   padding: 0;
 }
 
+.aksel-table tr:not(.aksel-table__expanded-row) .aksel-checkbox__label > .aksel-checkbox__icon-indeterminate {
+  top: var(--ax-space-12);
+}
+
+.aksel-table
+  tr:not(.aksel-table__expanded-row)
+  .aksel-checkbox--small
+  .aksel-checkbox__label
+  > .aksel-checkbox__icon-indeterminate {
+  top: 0.6rem;
+}
+
 .aksel-table tr:not(.aksel-table__expanded-row) .aksel-checkbox__input:focus + .aksel-checkbox__label::after {
   height: 100%;
 }
