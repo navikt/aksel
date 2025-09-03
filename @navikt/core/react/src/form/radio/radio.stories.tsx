@@ -159,7 +159,7 @@ export const GroupDescription = () => (
 );
 
 export const UUDemo = () => (
-  <div className="colgap">
+  <VStack gap="space-16">
     <RadioGroup
       legend="Hvilken frukt vil du ha?"
       description="Du kan bare velge en frukt"
@@ -182,7 +182,7 @@ export const UUDemo = () => (
       <Radio value="2">Juli</Radio>
       <Radio value="3">Juni</Radio>
     </RadioGroup>
-  </div>
+  </VStack>
 );
 
 /**

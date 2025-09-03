@@ -249,7 +249,7 @@ export const Indeterminate = () => {
 };
 
 export const Readonly = () => (
-  <div className="colgap">
+  <VStack gap="space-16">
     <CheckboxGroup
       legend="Hvilken frukt liker du?"
       defaultValue={["banan"]}
@@ -278,11 +278,11 @@ export const Readonly = () => (
         Druer
       </Checkbox>
     </CheckboxGroup>
-  </div>
+  </VStack>
 );
 
 export const Disabled = () => (
-  <div className="colgap">
+  <VStack gap="space-16">
     <CheckboxGroup
       legend="Hvilken frukt liker du?"
       defaultValue={["banan"]}
@@ -311,7 +311,7 @@ export const Disabled = () => (
         Druer
       </Checkbox>
     </CheckboxGroup>
-  </div>
+  </VStack>
 );
 
 export const ColorRole = () => (
