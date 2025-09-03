@@ -2,7 +2,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import { PortableTextBlock } from "next-sanity";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
-import { BodyLong, BodyShort, HStack, Heading } from "@navikt/ds-react";
+import { BodyLong, BodyShort, HStack, Heading, VStack } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -98,7 +98,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <div className={styles.preamble}>
-        <div className={styles.intro}>
+        <VStack align="center" className={styles.intro}>
           <Heading level="1" size="xlarge" className={styles.articleTitle}>
             {pageData.heading}
           </Heading>
@@ -107,8 +107,14 @@ export default async function Page({ params }: Props) {
               {pageData?.ingress}
             </BodyLong>
           )}
+          <div className={`${styles.horizontalLine}`} />
+          <div data-wrapper-prose>
+            <BodyShort className={`${styles.publishDate}`} textColor="subtle">
+              Publisert: {publishDate}
+            </BodyShort>
+          </div>
           <div>
-            <HStack gap="space-32" justify="center" marginBlock="space-40 0">
+            <HStack gap="space-32" justify="center" marginBlock="space-16 0">
               {avatars.map((avatar) => {
                 return (
                   <Avatar
@@ -122,7 +128,7 @@ export default async function Page({ params }: Props) {
               })}
             </HStack>
           </div>
-        </div>
+        </VStack>
         <div className={styles.image}>
           {imageUrl ? (
             <NextImage
@@ -156,15 +162,6 @@ export default async function Page({ params }: Props) {
           data-wrapper-prose
           value={(pageData?.content ?? []) as PortableTextBlock[]}
         />
-      </div>
-
-      <div className={styles.articleEnd}>
-        <div data-wrapper-prose>
-          <div className={`${styles.diamond} ${styles.diamondCenter}`} />
-          <HStack justify="center">
-            <BodyShort textColor="subtle">Publisert: {publishDate}</BodyShort>
-          </HStack>
-        </div>
       </div>
     </>
   );

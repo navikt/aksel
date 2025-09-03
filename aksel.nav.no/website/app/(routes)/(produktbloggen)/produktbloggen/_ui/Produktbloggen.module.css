@@ -155,23 +155,16 @@
   line-height: var(--ax-font-line-height-heading-medium);
 }
 
-.diamond {
-  width: var(--ax-space-8);
-  height: var(--ax-space-8);
-  rotate: 45deg;
-  background-color: var(--ax-text-brand-blue-decoration);
-  border-radius: var(--ax-space-1);
-}
-
-.diamondCenter {
-  margin-inline: auto;
-  margin-bottom: var(--ax-space-40);
+.horizontalLine {
+  width: var(--ax-space-48);
+  border-bottom: solid 1px var(--ax-border-neutral-subtleA);
+  margin-block: var(--ax-space-20);
 }
 
 .image {
   aspect-ratio: 16 / 9;
   position: relative;
-  margin-block: var(--ax-space-64) 0;
+  margin-block: var(--ax-space-40) 0;
   margin-inline: auto;
   border-radius: var(--ax-border-radius-xlarge);
   width: 100%;
@@ -199,12 +192,6 @@
 .customBlockWrapper {
   margin-top: var(--ax-space-64);
   padding-inline: var(--ax-space-16);
-}
-
-.articleEnd {
-  padding-inline: var(--ax-space-16);
-  margin-top: var(--ax-space-64);
-  color: var(--ax-text-brand-blue);
 }
 
 .authorText {
