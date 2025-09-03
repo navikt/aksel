@@ -110,7 +110,7 @@ export default async function Page({ params }: Props) {
           <div className={`${styles.horizontalLine}`} />
           <div data-wrapper-prose>
             <BodyShort className={`${styles.publishDate}`} textColor="subtle">
-              Publisert: {publishDate}
+              {publishDate}
             </BodyShort>
           </div>
           <div>
