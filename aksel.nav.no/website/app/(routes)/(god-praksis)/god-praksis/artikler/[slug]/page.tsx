@@ -172,7 +172,7 @@ export default async function Page(props: Props) {
                     <WebsiteListItem key={item.heading} icon>
                       <Link
                         variant="neutral"
-                        href={item.slug?.current}
+                        href={`/${item.slug?.current}`}
                         data-umami-event="navigere"
                         data-umami-event-kilde="les ogsaa"
                         data-umami-event-url={item.slug?.current ?? ""}
