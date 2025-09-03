@@ -1,26 +1,31 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
+import VStack from "../../layout/stack/VStack";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import Checkbox from "./Checkbox";
-import CheckboxGroup from "./CheckboxGroup";
+import CheckboxGroup, { CheckboxGroupProps } from "./CheckboxGroup";
 
 const meta: Meta<typeof Checkbox> = {
   title: "ds-react/Checkbox",
-  component: Checkbox,
-  argTypes: {
-    size: {
-      options: ["medium", "small"],
-      control: { type: "radio" },
-    },
-  },
+  component: CheckboxGroup,
+  subcomponents: { Checkbox },
   parameters: {
     chromatic: { disable: true },
   },
 };
 export default meta;
 
-type Story = StoryObj<typeof Checkbox>;
+interface Props extends CheckboxGroupProps {
+  controlled?: boolean;
+  error?: boolean;
+  checkboxChildren?: string;
+  checkboxDescription?: boolean;
+  checkboxError?: boolean;
+  checkboxIndeterminate?: boolean;
+  checkboxHideLabel?: boolean;
+}
 
-export const Default = (props) => {
+export const Default: StoryFn<Props> = (props) => {
   const [state, setState] = useState(["checkbox1"]);
 
   return (
@@ -31,42 +36,42 @@ export const Default = (props) => {
         value={props.controlled ? state : undefined}
         onChange={props.controlled ? setState : undefined}
         hideLegend={props.hideLegend}
-        error={props.errorGroup ? "Errormelding for checkboxgruppe" : undefined}
-        size={props?.size}
+        error={props.error ? "Errormelding for checkboxgruppe" : undefined}
+        size={props.size}
       >
         <Checkbox
           value="checkbox1"
-          indeterminate={props.indeterminate}
-          hideLabel={props.hideLabel}
+          indeterminate={props.checkboxIndeterminate}
+          hideLabel={props.checkboxHideLabel}
         >
-          {props.children || "Apple"}
+          {props.checkboxChildren || "Apple"}
         </Checkbox>
         <Checkbox
           value="checkbox2"
-          error={props.errorSingle}
+          error={props.checkboxError}
           description={
             props.checkboxDescription
               ? "Quis laborum culpa enim amet cillum veniam."
               : undefined
           }
-          indeterminate={props.indeterminate}
-          hideLabel={props.hideLabel}
+          indeterminate={props.checkboxIndeterminate}
+          hideLabel={props.checkboxHideLabel}
         >
-          {props.children || "Orange"}
+          {props.checkboxChildren || "Orange"}
         </Checkbox>
         <Checkbox
           value="checkbox3"
-          indeterminate={props.indeterminate}
-          hideLabel={props.hideLabel}
+          indeterminate={props.checkboxIndeterminate}
+          hideLabel={props.checkboxHideLabel}
         >
-          {props.children || "Banana"}
+          {props.checkboxChildren || "Banana"}
         </Checkbox>
         <Checkbox
           value="checkbox4"
-          indeterminate={props.indeterminate}
-          hideLabel={props.hideLabel}
+          indeterminate={props.checkboxIndeterminate}
+          hideLabel={props.checkboxHideLabel}
         >
-          {props.children || "Melon"}
+          {props.checkboxChildren || "Melon"}
         </Checkbox>
       </CheckboxGroup>
     </div>
@@ -75,96 +80,134 @@ export const Default = (props) => {
 Default.args = {
   controlled: false,
   legend: "Legend-tekst",
-  checkboxDescription: false,
-  hideLabel: false,
   hideLegend: false,
-  errorSingle: false,
-  errorGroup: false,
-  children: "",
   description: "",
+  error: false,
+  checkboxChildren: "",
+  checkboxDescription: false,
+  checkboxError: false,
+  checkboxIndeterminate: false,
+  checkboxHideLabel: false,
+};
+Default.argTypes = {
+  size: {
+    options: ["medium", "small"],
+    control: { type: "radio" },
+  },
 };
 
 export const Group = () => (
-  <CheckboxGroup legend="Group legend" defaultValue={["tekst2"]}>
-    <Checkbox value="tekst">Checkboxtekst</Checkbox>
-    <Checkbox value="tekst2">Checkboxtekst</Checkbox>
-  </CheckboxGroup>
+  <VStack gap="space-16">
+    <CheckboxGroup legend="Group legend" defaultValue={["tekst2"]}>
+      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+      <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+    <CheckboxGroup legend="Group legend" defaultValue={["tekst2"]} size="small">
+      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+      <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+  </VStack>
 );
 
 export const GroupError = () => (
-  <CheckboxGroup
-    legend="Group legend"
-    defaultValue={["tekst2"]}
-    error="Group errormelding"
-  >
-    <Checkbox value="tekst">Checkboxtekst</Checkbox>
-    <Checkbox value="tekst2">Checkboxtekst</Checkbox>
-  </CheckboxGroup>
-);
-
-export const GroupSmall = () => (
-  <CheckboxGroup legend="Group legend" defaultValue={["tekst2"]} size="small">
-    <Checkbox value="tekst">Checkboxtekst</Checkbox>
-    <Checkbox value="tekst2">Checkboxtekst</Checkbox>
-  </CheckboxGroup>
+  <VStack gap="space-16">
+    <CheckboxGroup
+      legend="Group legend"
+      defaultValue={["tekst2"]}
+      error="Group errormelding"
+    >
+      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+      <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+    <CheckboxGroup
+      legend="Group legend"
+      defaultValue={["tekst2"]}
+      error="Group errormelding"
+      size="small"
+    >
+      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+      <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+  </VStack>
 );
 
 export const GroupDescription = () => (
-  <CheckboxGroup
-    legend="Group legend"
-    defaultValue={["tekst2"]}
-    description="Group description"
-  >
-    <Checkbox value="tekst">Checkboxtekst</Checkbox>
-    <Checkbox value="tekst2">Checkboxtekst</Checkbox>
-  </CheckboxGroup>
+  <VStack gap="space-16">
+    <CheckboxGroup legend="Group legend" description="Group description">
+      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+    <CheckboxGroup
+      legend="Group legend"
+      description="Group description"
+      size="small"
+    >
+      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+  </VStack>
 );
 
 export const Single = () => (
-  <div className="colspan">
-    <Checkbox value="tekst">Checkboxtekst</Checkbox>
-    <Checkbox value="tekst" defaultChecked>
+  <>
+    <Checkbox value="v">Checkboxtekst</Checkbox>
+    <Checkbox value="v" size="small">
       Checkboxtekst
     </Checkbox>
-  </div>
+    <Checkbox value="v" defaultChecked>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" defaultChecked size="small">
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" description="Beskrivelse">
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" description="Beskrivelse" size="small">
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" readOnly>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" readOnly size="small">
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" checked readOnly>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" checked readOnly size="small">
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" error>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" error size="small">
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" disabled>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" disabled size="small">
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" checked disabled>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" checked disabled size="small">
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="v" error disabled>
+      Checkboxtekst (error)
+    </Checkbox>
+    <Checkbox value="v" error disabled size="small">
+      Checkboxtekst (error)
+    </Checkbox>
+    <Checkbox value="v" error checked disabled>
+      Checkboxtekst (error)
+    </Checkbox>
+    <Checkbox value="v" error checked disabled size="small">
+      Checkboxtekst (error)
+    </Checkbox>
+  </>
 );
-
-export const SingleSmall = () => (
-  <div className="colspan">
-    <Checkbox value="tekst" size="small">
-      Checkboxtekst
-    </Checkbox>
-    <Checkbox value="tekst" defaultChecked size="small">
-      Checkboxtekst
-    </Checkbox>
-  </div>
-);
-
-export const SingleDescription = () => {
-  const [isValueSelected, setValueSelected] = useState(false);
-  return (
-    <CheckboxGroup
-      legend="Hvor vil du sitte?"
-      className="colspan"
-      error={!isValueSelected ? "Du må velge en sitteplass" : undefined}
-    >
-      <Checkbox
-        onChange={() => setValueSelected(true)}
-        value="foran"
-        description="Tilgjengelig med rullestol"
-      >
-        Foran
-      </Checkbox>
-      <Checkbox
-        onChange={() => setValueSelected(true)}
-        value="tekst"
-        description="Adgang via trapp med to trinn"
-      >
-        Bak
-      </Checkbox>
-    </CheckboxGroup>
-  );
-};
 
 export const Indeterminate = () => {
   const [checked, setChecked] = useState([true, false]);
@@ -195,6 +238,9 @@ export const Indeterminate = () => {
       <Checkbox indeterminate description="With description">
         Indeterminate medium
       </Checkbox>
+      <Checkbox indeterminate size="small">
+        Indeterminate small
+      </Checkbox>
       <Checkbox indeterminate size="small" description="With description">
         Indeterminate small
       </Checkbox>
@@ -210,7 +256,9 @@ export const Readonly = () => (
       readOnly
     >
       <Checkbox value="banan">Banan</Checkbox>
-      <Checkbox value="eple">Eple</Checkbox>
+      <Checkbox value="eple" description="Epler kommer i 4 varianter">
+        Eple
+      </Checkbox>
       <Checkbox value="druer" indeterminate>
         Druer
       </Checkbox>
@@ -218,21 +266,18 @@ export const Readonly = () => (
     <CheckboxGroup
       legend="Hvilken frukt liker du?"
       error="feilmelding"
-      defaultValue={["Eple"]}
+      defaultValue={["banan"]}
       readOnly
+      size="small"
     >
+      <Checkbox value="banan">Banan</Checkbox>
       <Checkbox value="eple" description="Epler kommer i 4 varianter">
         Eple
       </Checkbox>
-      <Checkbox value="banan">Banan</Checkbox>
+      <Checkbox value="druer" indeterminate>
+        Druer
+      </Checkbox>
     </CheckboxGroup>
-    <hr />
-    <Checkbox value="tekst1" readOnly>
-      Eple single
-    </Checkbox>
-    <Checkbox value="tekst1" checked readOnly>
-      Banan single
-    </Checkbox>
   </div>
 );
 
@@ -244,7 +289,9 @@ export const Disabled = () => (
       disabled
     >
       <Checkbox value="banan">Banan</Checkbox>
-      <Checkbox value="eple">Eple</Checkbox>
+      <Checkbox value="eple" description="Epler kommer i 4 varianter">
+        Eple
+      </Checkbox>
       <Checkbox value="druer" indeterminate>
         Druer
       </Checkbox>
@@ -252,32 +299,23 @@ export const Disabled = () => (
     <CheckboxGroup
       legend="Hvilken frukt liker du?"
       error="Feilmelding"
-      defaultValue={["Eple"]}
+      defaultValue={["banan"]}
       disabled
+      size="small"
     >
+      <Checkbox value="banan">Banan</Checkbox>
       <Checkbox value="eple" description="Epler kommer i 4 varianter">
         Eple
       </Checkbox>
-      <Checkbox value="banan">Banan</Checkbox>
+      <Checkbox value="druer" indeterminate>
+        Druer
+      </Checkbox>
     </CheckboxGroup>
-    <hr />
-    <Checkbox value="tekst1" disabled>
-      Eple single
-    </Checkbox>
-    <Checkbox value="tekst1" checked disabled>
-      Banan single
-    </Checkbox>
-    <Checkbox value="tekst1" error disabled>
-      Pineapple single
-    </Checkbox>
-    <Checkbox value="tekst1" error checked disabled>
-      Peach single
-    </Checkbox>
   </div>
 );
 
 export const ColorRole = () => (
-  <div className="colspan" data-color="brand-magenta">
+  <div data-color="brand-magenta">
     <Checkbox value="tekst">Checkboxtekst</Checkbox>
     <Checkbox value="tekst" defaultChecked>
       Checkboxtekst
@@ -306,60 +344,37 @@ export const ColorRole = () => (
   </div>
 );
 
-export const Chromatic: Story = {
-  render: () => (
-    <div>
-      <div>
-        <h2>Default</h2>
-        <Default />
-      </div>
-      <div>
-        <h2>Group</h2>
-        <Group />
-      </div>
-      <div>
-        <h2>GroupError</h2>
-        <GroupError />
-      </div>
-      <div>
-        <h2>GroupSmall</h2>
-        <GroupSmall />
-      </div>
-      <div>
-        <h2>GroupDescription</h2>
-        <GroupDescription />
-      </div>
-      <div>
-        <h2>Single</h2>
-        <Single />
-      </div>
-      <div>
-        <h2>SingleSmall</h2>
-        <SingleSmall />
-      </div>
-      <div>
-        <h2>SingleDescription</h2>
-        <SingleDescription />
-      </div>
-      <div>
-        <h2>Indeterminate</h2>
-        <Indeterminate />
-      </div>
-      <div>
-        <h2>Readonly</h2>
-        <Readonly />
-      </div>
-      <div>
-        <h2>Disabled</h2>
-        <Disabled />
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Group,
+  GroupError,
+  GroupDescription,
+  Single,
+  Indeterminate,
+  Readonly,
+  Disabled,
+  ColorRole,
+});
+
+export const ChromaticLight = renderStoriesForChromatic({
+  Group,
+  GroupError,
+  GroupDescription,
+  Single,
+  Indeterminate,
+  Readonly,
+  Disabled,
+  ColorRole,
+});
+ChromaticLight.globals = { theme: "light", mode: "darkside" };
+
+export const ChromaticDark = renderStoriesForChromatic({
+  Group,
+  GroupError,
+  GroupDescription,
+  Single,
+  Indeterminate,
+  Readonly,
+  Disabled,
+  ColorRole,
+});
+ChromaticDark.globals = { theme: "dark", mode: "darkside" };
