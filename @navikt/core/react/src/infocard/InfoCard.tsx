@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useState, version } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { InformationSquareFillIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
@@ -7,12 +7,12 @@ import { createContext } from "../util/create-context";
 import { useClientLayoutEffect, useMergeRefs } from "../util/hooks";
 import { useOpenChangeComplete } from "./collapsible/useOpenChangeComplete";
 
-const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
+// const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
 
 type InfoCardContext = {
   size: "medium" | "small";
   open: boolean;
-  toggleOpen: () => void;
+  toggleOpen: (newState?: boolean) => void;
   contentRef: React.RefObject<HTMLDivElement | null>;
 };
 
@@ -51,8 +51,8 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
     const [open, setOpen] = useState(false);
     const contentRef = React.useRef<HTMLDivElement | null>(null);
 
-    const handleExpandToggle = () => {
-      if (open) {
+    const handleExpandToggle = (newState?: boolean) => {
+      if (newState || open) {
         setOpen(false);
         if (contentRef.current) {
           contentRef.current.scrollIntoView({
@@ -183,7 +183,8 @@ interface InfoCardCollapsibleContentProps
   children: React.ReactNode;
 }
 
-type Dimension = { width: number | undefined; height: number | undefined };
+type Height = number | undefined;
+const COLLAPSED_HEIGHT = 120;
 
 export const InfoCardCollapsibleContent = forwardRef<
   HTMLDivElement,
@@ -194,54 +195,36 @@ export const InfoCardCollapsibleContent = forwardRef<
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
-    const localRef = useRef<HTMLDivElement | null>(null);
+    const panelRef = useRef<HTMLDivElement | null>(null);
     const { open, contentRef } = useInfoCardContext();
 
-    const mergedRef = useMergeRefs(forwardedRef, contentRef, localRef);
+    const mergedRef = useMergeRefs(forwardedRef, contentRef, panelRef);
 
-    const [{ width, height }, setDimensions] = useState<Dimension>({
-      height: 120,
-      width: undefined,
-    });
+    const [height, setDimensions] = useState<Height>(COLLAPSED_HEIGHT);
 
-    // Measure when opening; clamp to collapsed height when closing
     useClientLayoutEffect(() => {
-      const el = localRef.current;
+      const el = panelRef.current;
       if (!el) return;
 
       if (open) {
-        setDimensions({
-          height: el.scrollHeight,
-          width: el.scrollWidth,
-        });
+        setDimensions(el.scrollHeight);
       } else {
-        setDimensions((prev) => ({
-          height: 120,
-          width: prev.width,
-        }));
+        setDimensions(COLLAPSED_HEIGHT);
       }
     }, [open]);
 
-    /* 137
-    201
-     */
     useOpenChangeComplete({
       open,
       ref: contentRef,
       onComplete: () => {
-        // Keep numeric height after opening to allow closing animation (px -> px).
-        // Only reset after closing if you need to, but keep it numeric here.
         if (!open) {
-          setDimensions({ height: 120, width: undefined });
+          setDimensions(COLLAPSED_HEIGHT);
         }
       },
     });
 
-    // Always provide a numeric height so the browser can animate it
-    const h = height ?? 120;
     const style: React.CSSProperties = {
-      "--__axc-info-card-height": `${h}px`,
-      "--__axc-info-card-width": width ? `${width}px` : "auto",
+      "--__axc-info-card-height": `${height ?? COLLAPSED_HEIGHT}px`,
     };
 
     return (
@@ -282,7 +265,7 @@ export const InfoCardExpandButton = forwardRef<
       ref={forwardedRef}
       {...restProps}
       className={cn(className, "navds-info-card__button")}
-      onClick={toggleOpen}
+      onClick={() => toggleOpen()}
     >
       {open ? "Vis mindre" : "Vis mer"}
     </button>

@@ -4,6 +4,9 @@
   border: 1px solid var(--ax-border-default);
   overflow: clip;
   position: relative;
+
+  --__axc-info-card-width: initial;
+  --__axc-info-card-height: initial;
 }
 
 .aksel-info-card__header {
@@ -53,17 +56,17 @@
 
 .aksel-info-card__collapsible-content {
   --gradient-start: calc(var(--ax-space-12) + 48px);
+  --__axc-info-card-padding-block-end-base: var(--ax-space-64);
+  --__axc-info-card-padding-block-end-small: var(--ax-space-56);
 
+  overflow: hidden;
+  height: var(--__axc-info-card-height);
+  width: var(--__axc-info-card-width);
   position: relative;
   background: var(--ax-bg-default);
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  height: var(--__axc-info-card-height);
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  width: var(--__axc-info-card-width);
-  transition: all ease-in-out;
+  transition-timing-function: ease-in-out;
+  transition-property: height, padding-block;
   transition-duration: 0.5s;
-  display: block;
-  overflow: hidden;
 
   &::after {
     content: "";
@@ -75,9 +78,6 @@
     height: calc(var(--gradient-start) + 48px);
     background-color: inherit;
   }
-
-  --__axc-info-card-padding-block-end-base: var(--ax-space-64);
-  --__axc-info-card-padding-block-end-small: var(--ax-space-56);
 
   &[data-expanded="true"] {
     &::after {
