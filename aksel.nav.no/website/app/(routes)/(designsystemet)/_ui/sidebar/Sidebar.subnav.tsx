@@ -3,7 +3,7 @@
 import cl from "clsx";
 import { stegaClean } from "next-sanity";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { ChevronDownIcon, SparklesIcon } from "@navikt/aksel-icons";
 import { HStack } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
@@ -16,6 +16,7 @@ function DesignsystemSidebarSubNav(
 ) {
   const { pages, title, layout } = props;
   const pathName = usePathname();
+  const ref = useRef<HTMLUListElement>(null);
 
   const isDarkside = title.toLowerCase() === "darkside";
 
@@ -23,7 +24,13 @@ function DesignsystemSidebarSubNav(
     return pathName?.split("#")[0] === stegaClean(`/${page.slug}`);
   });
 
-  const [open, setOpen] = useState(isSectionActive);
+  //const [open, setOpen] = useState(isSectionActive);
+  const open = ref.current?.hidden === false; // TODO: Toggling open does not trigger rerender
+
+  useEffect(() => {
+    if (!ref.current) return;
+    if (isSectionActive) ref.current.hidden = false;
+  }, [isSectionActive]);
 
   return (
     <li
@@ -33,7 +40,10 @@ function DesignsystemSidebarSubNav(
     >
       <button
         onClick={() => {
-          setOpen(!open);
+          //setOpen(!open);
+          if (!ref.current) return;
+          // @ts-expect-error - "until-found" is not supported in all browsers yet, and not in React.
+          ref.current.hidden = ref.current.hidden ? false : "until-found";
           umamiTrack("sidebar-subnav", {
             kategori: title,
           });
@@ -52,7 +62,7 @@ function DesignsystemSidebarSubNav(
 
         <ChevronDownIcon aria-hidden className={styles.navListSubButtonIcon} />
       </button>
-      <ul hidden={!open}>
+      <ul ref={ref} hidden>
         {pages.map((page) => (
           <DesignsystemSidebarItem
             key={page.heading}
