@@ -1,3 +1,5 @@
+import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
+
 /**
  * Capitalize the first letter of a string.
  */
@@ -14,7 +16,11 @@ const humanizeText = (str) =>
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");
 
-export const humanizeRedaksjonType = (type: string) => {
+type RedaksjonTypeValue = NonNullable<
+  NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][number]["writers"]
+>[number]["type"];
+
+export const humanizeRedaksjonType = (type: RedaksjonTypeValue) => {
   switch (type) {
     case "miljoe":
       return "Miljø";
