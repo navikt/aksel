@@ -274,27 +274,30 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Empty Answers</FormSummary.Heading>
-        <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
       <FormSummary.Answers>{null}</FormSummary.Answers>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
     </FormSummary>
 
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Empty Answer</FormSummary.Heading>
-        <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
       <FormSummary.Answers>
         <FormSummary.Answer>{null}</FormSummary.Answer>
       </FormSummary.Answers>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
     </FormSummary>
 
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Empty Label & Value</FormSummary.Heading>
-        <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
       <FormSummary.Answers>
@@ -303,12 +306,14 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
           <FormSummary.Value>{null}</FormSummary.Value>
         </FormSummary.Answer>
       </FormSummary.Answers>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
     </FormSummary>
 
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Empty Value</FormSummary.Heading>
-        <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
       <FormSummary.Answers>
@@ -466,7 +471,3 @@ export const _DevWarning_MisuseInHeaderExample: StoryFn<
     </FormSummary>
   </VStack>
 );
-
-_DevWarning_MisuseInHeaderExample.parameters = {
-  docs: { disable: true },
-};

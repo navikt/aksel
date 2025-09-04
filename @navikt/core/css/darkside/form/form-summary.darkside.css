@@ -83,10 +83,6 @@
 }
 
 .aksel-form-summary__footer {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--ax-space-8);
-  flex: 1 0 0;
   padding: var(--ax-space-16) var(--ax-space-20);
   background: var(--ax-bg-raised);
   border-top: 1px solid var(--ax-border-neutral-subtleA);

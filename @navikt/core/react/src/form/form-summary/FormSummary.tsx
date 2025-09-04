@@ -53,22 +53,7 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
    *
    *  - `<FormSummary.Header>`
    *  - `<FormSummary.Answers>`
-   *
-   * @example
-   * <FormSummary>
-   *   <FormSummary.Header>
-   *     <FormSummary.Heading level="2">HeadingTekst</FormSummary.Heading>
-   *   </FormSummary.Header>
-   *   <FormSummary.Answers>
-   *     <FormSummary.Answer>
-   *       <FormSummary.Label>Navn</FormSummary.Label>
-   *       <FormSummary.Value>Ola Nordmann</FormSummary.Value>
-   *     </FormSummary.Answer>
-   *   </FormSummary.Answers>
-   *   <FormSummary.Footer>
-   *     <FormSummary.EditLink href="#" />
-   *   </FormSummary.Footer>
-   * </FormSummary>
+   *  - `<FormSummary.Footer>` (optional)
    */
   children: React.ReactNode;
 }
