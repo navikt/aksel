@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Children, ReactNode, isValidElement } from "react";
-import { BodyShort, BoxNew, HStack } from "@navikt/ds-react";
+import { BodyShort, BoxNew, Detail, HStack, VStack } from "@navikt/ds-react";
 import styles from "./Avatar.module.css";
 
 const MAX_AVATAR_COUNT = 30;
@@ -17,29 +17,33 @@ export const avatarUrl = (avatar_id: string) => {
 export type Avatar = {
   imageSrc: string;
   name: string;
+  type: string;
   description: string;
 };
 
 export const Avatar = ({
   imageSrc,
   name,
+  type,
   showName = false,
 }: {
   /** URL to image for the avatar graphic. */
   imageSrc: string;
   /** Avatar must always have a name, as it becomes the image alt attribute. */
   name: string;
+  /** Avatar type, a name grouping. Shown in the eyebrow alongside the name */
+  type: string;
   /** The name of what the avatar represents. */
   children?: ReactNode;
-  /** Whether or not to show the name next to the avatar. */
+  /** Whether or not to show the name (and eyebrow) next to the avatar. */
   showName?: boolean;
 }) => {
   return (
     <HStack gap="space-4" align="center">
       <Image
         className={styles.avatarImage}
-        width="24"
-        height="24"
+        width="32"
+        height="32"
         alt={`Avatar for ${name}`}
         src={imageSrc}
         priority
@@ -47,9 +51,19 @@ export const Avatar = ({
         aria-hidden={showName}
       />
       {showName && (
-        <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
-          <span className={styles.avatarName}>{name}</span>
-        </BoxNew>
+        <VStack align="start">
+          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+            <Detail as="span" textColor="subtle">
+              {type}
+            </Detail>
+          </BoxNew>
+          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+            <BodyShort
+              as="span"
+              className={styles.avatarName}
+            >{`${name}`}</BodyShort>
+          </BoxNew>
+        </VStack>
       )}
     </HStack>
   );
@@ -77,6 +91,10 @@ export const AvatarStack = ({
   if (avatars.length === 0) {
     return null;
   }
+  const firstAvatar = avatars && isValidElement(avatars[0]) && avatars[0];
+  if (!firstAvatar) {
+    return null;
+  }
 
   const isMultiple = avatars.length > 1;
   const suffix = isMultiple ? `+ ${avatars.length - 1}` : null;
@@ -94,16 +112,19 @@ export const AvatarStack = ({
       </HStack>
 
       {showNames && (
-        <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
-          <BodyShort size="small">
-            {`${
-              avatars && isValidElement(avatars[0]) && avatars[0]?.props.name
-            }`}
-            {suffix && (
-              <span className={styles.avatarNameSuffix}>{suffix}</span>
-            )}
-          </BodyShort>
-        </BoxNew>
+        <VStack>
+          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+            <Detail textColor="subtle">{firstAvatar.props.type}</Detail>
+          </BoxNew>
+          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+            <BodyShort className={styles.avatarName}>
+              {`${firstAvatar.props.name}`}
+              {suffix && (
+                <span className={styles.avatarNameSuffix}>{suffix}</span>
+              )}
+            </BodyShort>
+          </BoxNew>
+        </VStack>
       )}
     </HStack>
   );

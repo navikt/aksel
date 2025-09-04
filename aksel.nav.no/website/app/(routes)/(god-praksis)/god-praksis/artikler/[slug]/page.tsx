@@ -23,12 +23,13 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
+import { Avatar, avatarUrl } from "@/app/_ui/avatar/Avatar";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import { formatDateString } from "@/ui-utils/format-date";
-import { abbrName } from "@/ui-utils/format-text";
+import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 import styles from "./page.module.css";
 
 type Props = {
@@ -86,10 +87,7 @@ export default async function Page(props: Props) {
     pageData?._updatedAt;
 
   const outdated = differenceInMonths(new Date(), new Date(verifiedDate)) >= 12;
-  const authors =
-    pageData?.contributors
-      ?.filter((auth) => !!auth.title)
-      .map((auth) => auth.title ?? "") ?? [];
+  const writers = pageData.writers ?? [];
 
   return (
     <article className={styles.pageArticle}>
@@ -146,20 +144,23 @@ export default async function Page(props: Props) {
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
 
-        {authors?.length > 0 && (
+        {writers.length > 0 && (
           <VStack gap="space-8" marginBlock="space-48">
             <Label data-aksel-heading-color as="p">
               Medvirkende
             </Label>
-            <HStack gap="space-4" asChild>
-              <BodyShort textColor="subtle" as="div">
-                {authors.map(abbrName).map((x, y) => (
-                  <address key={x}>
-                    {x}
-                    {y !== authors.length - 1 && ", "}
-                  </address>
-                ))}
-              </BodyShort>
+            <HStack gap="space-4">
+              {pageData.writers?.map((writer) => {
+                return (
+                  <Avatar
+                    type={humanizeRedaksjonType(writer.type)}
+                    name={writer.title ?? ""}
+                    key={writer.title}
+                    imageSrc={avatarUrl(writer.avatar_id?.current ?? "missing")}
+                    showName
+                  />
+                );
+              })}
             </HStack>
           </VStack>
         )}
