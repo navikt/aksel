@@ -1,3 +1,4 @@
+import { uuid } from "@sanity/uuid";
 import { config } from "dotenv";
 import { createClient } from "next-sanity";
 import { resolve } from "path";
@@ -6,8 +7,10 @@ import { clientConfig } from "@/sanity/config";
 
 const to_migrate = ["aksel_artikkel", "aksel_blogg"];
 
+const dupes = new Set<string>();
+
 // Fetch all editorial_staff data upfront and build the mapping
-const editorToEditorialStaffMap = {};
+const editorToEditorialStaffMap = new Map<string, string[]>();
 
 // Load .env file from two folders up
 config({ path: resolve(process.cwd(), "../../.env") });
@@ -32,14 +35,21 @@ config({ path: resolve(process.cwd(), "../../.env") });
 
   // Build the editor -> editorial_staff mapping in memory
   editorialStaffDocs.forEach((editorialStaff) => {
-    if (editorialStaff.legacy_contributors) {
-      editorialStaff.legacy_contributors.forEach((contributorRef) => {
-        // Only use the first editorial_staff found for each editor
-        if (!editorToEditorialStaffMap[contributorRef]) {
-          editorToEditorialStaffMap[contributorRef] = editorialStaff._id;
-        }
-      });
+    if (!editorialStaff.legacy_contributors) {
+      return;
     }
+
+    editorialStaff.legacy_contributors.forEach((contributorRef) => {
+      if (!editorToEditorialStaffMap.has(contributorRef)) {
+        editorToEditorialStaffMap.set(contributorRef, [editorialStaff._id]);
+        return;
+      }
+      const existing = editorToEditorialStaffMap.get(contributorRef);
+
+      if (existing) {
+        existing.push(editorialStaff._id);
+      }
+    });
   });
 
   console.log(
@@ -71,7 +81,7 @@ export default defineMigration({
           (contributor) =>
             contributor._type === "reference" && contributor._ref,
         )
-        .map((contributor) => contributor._ref);
+        .map((contributor) => contributor._ref) as string[];
 
       if (editorIds.length === 0) {
         return;
@@ -82,44 +92,68 @@ export default defineMigration({
       const processedEditorialStaff = new Set();
 
       // Preserve any existing writers that are already editorial_staff references
-      if (doc.writers && Array.isArray(doc.writers)) {
+      /* if (doc.writers && Array.isArray(doc.writers)) {
         doc.writers.forEach((writer) => {
           if (writer._type === "reference" && writer._ref) {
             newWriters.push(writer);
             processedEditorialStaff.add(writer._ref);
           }
         });
-      }
+      } */
 
       // Map contributors (editors) to editorial_staff using our pre-built mapping
-      doc.contributors.forEach((contributor) => {
-        if (contributor._type === "reference" && contributor._ref) {
-          const editorialStaffId = editorToEditorialStaffMap[contributor._ref];
+      editorIds.forEach((contributor_ref) => {
+        const editorialStaffIdArray =
+          editorToEditorialStaffMap.get(contributor_ref);
 
-          if (
-            editorialStaffId &&
-            !processedEditorialStaff.has(editorialStaffId)
-          ) {
-            // Add editorial_staff reference (avoid duplicates)
-            newWriters.push({
-              _type: "reference",
-              _ref: editorialStaffId,
-              _key:
-                contributor._key ||
-                `editorial-staff-${Date.now()}-${Math.random()
-                  .toString(36)
-                  .substr(2, 9)}`,
-            });
-            processedEditorialStaff.add(editorialStaffId);
-          }
+        if (editorialStaffIdArray === undefined) {
+          throw new Error(
+            `No editorial_staff found for contributor_ref: ${contributor_ref}`,
+          );
+        }
+
+        /* TODO: Handle after */
+        if (editorialStaffIdArray.length > 1) {
+          console.info("Duplicated id:", doc._id);
+          dupes.add(doc._id);
+          return;
+        }
+
+        const staffId = editorialStaffIdArray[0];
+
+        if (!processedEditorialStaff.has(staffId)) {
+          // Add editorial_staff reference (avoid duplicates)
+          newWriters.push({
+            _type: "reference",
+            _ref: staffId,
+            _key: uuid(),
+          });
+          processedEditorialStaff.add(staffId);
         }
       });
 
       // Apply patch if we found matching editorial_staff documents
       if (newWriters.length > 0) {
-        console.log(
+        /* console.log(
           `Migrating document ${doc._id}: Found ${doc.contributors.length} contributors -> Setting ${newWriters.length} writers (editorial_staff)`,
-        );
+        ); */
+        console.info([...dupes.keys()]);
+        console.info("Total dupes:", dupes.size);
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
+        console.info("\n\n\n");
         return at("writers", set(newWriters));
       }
     },
