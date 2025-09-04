@@ -39,7 +39,7 @@ type CompositionWarningForbiddenProps = {
    */
   name: CompositionName;
   /**
-   * Warning message to display if invalid.
+   * Warning message to display if the child is found.
    */
   message: string;
 };
