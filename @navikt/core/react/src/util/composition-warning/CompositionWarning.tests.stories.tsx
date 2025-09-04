@@ -34,12 +34,8 @@ function ConsoleWarnCapture({ children }: PropsWithChildren) {
 
   return (
     <div>
-      <div data-testid="warn-count" style={{ display: "none" }}>
-        {count}
-      </div>
-      <div data-testid="last-message" style={{ display: "none" }}>
-        {lastMessage}
-      </div>
+      <div data-testid="warn-count">{`Console warnings: ${count}`}</div>
+      <div data-testid="last-message">{`Laste msg: ${lastMessage}`}</div>
       {children}
     </div>
   );
