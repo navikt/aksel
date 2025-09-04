@@ -1,4 +1,6 @@
+import { config } from "dotenv";
 import { createClient } from "next-sanity";
+import { resolve } from "path";
 import { at, defineMigration, set } from "sanity/migrate";
 import { clientConfig } from "@/sanity/config";
 
@@ -7,8 +9,15 @@ const to_migrate = ["aksel_artikkel", "aksel_blogg"];
 // Fetch all editorial_staff data upfront and build the mapping
 const editorToEditorialStaffMap = {};
 
+// Load .env file from two folders up
+config({ path: resolve(process.cwd(), "../../.env") });
+
 (async () => {
-  const client = createClient({ ...clientConfig, dataset: "development" });
+  const client = createClient({
+    ...clientConfig,
+    dataset: "development",
+    token: process.env.SANITY_READ,
+  });
 
   console.log("Fetching all editorial_staff documents...");
 
@@ -18,6 +27,8 @@ const editorToEditorialStaffMap = {};
       "legacy_contributors": legacy_contributors[]._ref
     }
   `);
+
+  console.log(editorialStaffDocs);
 
   // Build the editor -> editorial_staff mapping in memory
   editorialStaffDocs.forEach((editorialStaff) => {
@@ -36,20 +47,15 @@ const editorToEditorialStaffMap = {};
       Object.keys(editorToEditorialStaffMap).length
     } editors -> editorial_staff`,
   );
+  console.log(editorToEditorialStaffMap);
 })();
-
-console.log(editorToEditorialStaffMap);
 
 // Define the migration with the pre-loaded data
 export default defineMigration({
   title: "migrateEditorsToEditorialStaff",
-
+  documentTypes: to_migrate,
   migrate: {
     document(doc, context) {
-      if (!to_migrate.includes(doc._type)) {
-        return;
-      }
-
       // Only process documents that have a contributors field (the old editorField)
       if (
         !doc.contributors ||
