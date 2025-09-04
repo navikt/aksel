@@ -11,8 +11,8 @@ import {
 } from "@navikt/ds-react/LinkCard";
 import { LANDINGSSIDE_LATEST_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
+import { Avatar, AvatarStack, avatarUrl } from "@/app/_ui/avatar/Avatar";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { Avatar, AvatarStack, avatarUrl } from "@/app/dev/_ui/avatar/Avatar";
 import ErrorBoundary from "@/error-boundary";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";

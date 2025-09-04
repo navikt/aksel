@@ -23,11 +23,11 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
+import { Avatar, avatarUrl } from "@/app/_ui/avatar/Avatar";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
-import { Avatar, avatarUrl } from "@/app/dev/_ui/avatar/Avatar";
 import { formatDateString } from "@/ui-utils/format-date";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 import styles from "./page.module.css";
