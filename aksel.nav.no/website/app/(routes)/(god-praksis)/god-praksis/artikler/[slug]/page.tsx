@@ -149,7 +149,7 @@ export default async function Page(props: Props) {
             <Label data-aksel-heading-color as="p">
               Medvirkende
             </Label>
-            <HStack gap="space-4">
+            <HStack gap="space-32">
               {pageData.writers?.map((writer) => {
                 return (
                   <Avatar
