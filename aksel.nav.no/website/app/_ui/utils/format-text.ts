@@ -7,15 +7,6 @@ function capitalizeText(inputString: string): string {
   return inputString.charAt(0).toUpperCase() + inputString.slice(1);
 }
 
-/**
- * Capitalize and space between each fragment
- */
-const humanizeText = (str) =>
-  str
-    .split(/[-_\s]+/)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(" ");
-
 type RedaksjonTypeValue = NonNullable<
   NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][number]["writers"]
 >[number]["type"];
@@ -27,7 +18,11 @@ export const humanizeRedaksjonType = (type: RedaksjonTypeValue) => {
     case "team":
       return "Team";
     default:
-      return humanizeText(type);
+      if (process.env.NODE_ENV === "production") {
+        console.warn(`unexpected RedaksjonTypeValue: ${type}`);
+      }
+
+      return null;
   }
 };
 
@@ -54,4 +49,4 @@ function removeEmojiesFromText(inputString: string) {
     .trim();
 }
 
-export { abbrName, capitalizeText, removeEmojiesFromText, humanizeText };
+export { abbrName, capitalizeText, removeEmojiesFromText };
