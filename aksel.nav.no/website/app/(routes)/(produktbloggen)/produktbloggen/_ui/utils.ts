@@ -11,7 +11,7 @@ export const queryToAvatars = (
   return (
     queryResponseEditorialStaff?.map((queryData) => ({
       name: queryData.title ?? "",
-      type: humanizeRedaksjonType(queryData.type ?? ""),
+      type: humanizeRedaksjonType(queryData.type),
       imageSrc: avatarUrl(queryData.avatar_id?.current ?? "missing"),
       description: queryData.description ?? "",
     })) ?? []

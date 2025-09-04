@@ -153,7 +153,7 @@ export default async function Page(props: Props) {
               {pageData.writers?.map((writer) => {
                 return (
                   <Avatar
-                    type={humanizeRedaksjonType(writer.type ?? "")}
+                    type={humanizeRedaksjonType(writer.type)}
                     name={writer.title ?? ""}
                     key={writer.title}
                     imageSrc={avatarUrl(writer.avatar_id?.current ?? "missing")}

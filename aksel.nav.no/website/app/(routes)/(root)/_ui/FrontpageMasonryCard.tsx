@@ -123,7 +123,7 @@ const Card = ({ article, visible }: CardProps) => {
                   {article.writers?.map((writer) => {
                     return (
                       <Avatar
-                        type={humanizeRedaksjonType(writer.type ?? "")}
+                        type={humanizeRedaksjonType(writer.type)}
                         name={writer.title ?? ""}
                         key={writer.title}
                         imageSrc={avatarUrl(
