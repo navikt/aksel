@@ -8,12 +8,32 @@ type Blogg =
 export const queryToAvatars = (
   queryResponseEditorialStaff: Blogg["writers"],
 ): Avatar[] => {
-  return (
-    queryResponseEditorialStaff?.map((queryData) => ({
-      name: queryData.title ?? "",
-      type: humanizeRedaksjonType(queryData.type),
-      imageSrc: avatarUrl(queryData.avatar_id?.current ?? "missing"),
-      description: queryData.description ?? "",
-    })) ?? []
-  );
+  // Manual filtering with loop iteration
+  const filteredStaff: {
+    name: string;
+    type: string;
+    imageSrc: string;
+    description: string;
+  }[] = [];
+
+  if (!queryResponseEditorialStaff) {
+    return [];
+  }
+
+  for (const queryData of queryResponseEditorialStaff) {
+    if (
+      queryData.title &&
+      queryData.type &&
+      queryData.avatar_id?.current &&
+      queryData.description
+    ) {
+      filteredStaff.push({
+        name: queryData.title,
+        type: humanizeRedaksjonType(queryData.type),
+        imageSrc: avatarUrl(queryData.avatar_id.current),
+        description: queryData.description,
+      });
+    }
+  }
+  return filteredStaff;
 };
