@@ -20,6 +20,9 @@ type CompositionName = string;
 const isDev = process.env.NODE_ENV !== "production";
 
 type CompositionWarningContextType = {
+  /**
+   * Name of the slot component we want to check.
+   */
   name: CompositionName;
 };
 
