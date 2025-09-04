@@ -7,7 +7,7 @@
  *
  * Usage:
  * - Wrap slot components with <CompositionWarning.Root name="FormSummary.Header">...</CompositionWarning.Root>
- * - In child: `<CompositionWarningForbidden.Forbidden name="FormSummary.Header" />` to forbid slot.
+ * - In child: `<CompositionWarning.Forbidden name="FormSummary.Header" />` to forbid slot.
  *
  * This is guidance only: warnings are logged to the console in development, never enforced at runtime.
  */
