@@ -30,28 +30,27 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block width="text" gutters>
-        <VStack as="main" gap="8">
-          <Bleed
-            marginInline={{ lg: "24" }}
-            data-aksel-template="form-intropage-v3"
+        <VStack as="main" gap="8" data-aksel-template="form-intropage-v3">
+          <Stack
+            gap={{ xs: "3", lg: "6" }}
+            direction={{ xs: "column", lg: "row" }}
+            wrap={false}
+            position="relative"
           >
-            <Stack
-              gap={{ xs: "3", lg: "6" }}
-              direction={{ xs: "column", lg: "row" }}
-              wrap={false}
-            >
+            <Bleed asChild marginInline={{ lg: "32" }}>
               <Box
                 width={{ xs: "64px", lg: "96px" }}
                 height={{ xs: "64px", lg: "96px" }}
                 asChild
+                position={{ xs: "relative", lg: "absolute" }}
               >
                 <ApplicationPictogram />
               </Box>
-              <Heading level="1" size="xlarge">
-                Søknad om arbeidsavklaringspenger (AAP)
-              </Heading>
-            </Stack>
-          </Bleed>
+            </Bleed>
+            <Heading level="1" size="xlarge">
+              Søknad om arbeidsavklaringspenger (AAP)
+            </Heading>
+          </Stack>
           <GuidePanel poster>
             <Heading level="2" size="medium" spacing>
               Hei, Luke Skywalker!

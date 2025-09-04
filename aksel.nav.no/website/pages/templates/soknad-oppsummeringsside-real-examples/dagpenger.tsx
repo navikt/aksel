@@ -30,24 +30,26 @@ function Example() {
       <Header />
       <Page.Block as="main" width="text" gutters>
         <VStack gap="8">
-          <Bleed marginInline={{ lg: "24" }}>
-            <Stack
-              gap={{ xs: "3", lg: "6" }}
-              direction={{ xs: "column", lg: "row" }}
-              wrap={false}
-            >
+          <Stack
+            gap={{ xs: "3", lg: "6" }}
+            direction={{ xs: "column", lg: "row" }}
+            wrap={false}
+            position="relative"
+          >
+            <Bleed asChild marginInline={{ lg: "32" }}>
               <Box
                 width={{ xs: "64px", lg: "96px" }}
                 height={{ xs: "64px", lg: "96px" }}
                 asChild
+                position={{ xs: "relative", lg: "absolute" }}
               >
                 <ApplicationPictogram />
               </Box>
-              <Heading level="1" size="xlarge">
-                Søknad om dagpenger
-              </Heading>
-            </Stack>
-          </Bleed>
+            </Bleed>
+            <Heading level="1" size="xlarge">
+              Søknad om dagpenger
+            </Heading>
+          </Stack>
 
           <div data-aksel-template="form-summarypage-v3">
             <Link href="#">

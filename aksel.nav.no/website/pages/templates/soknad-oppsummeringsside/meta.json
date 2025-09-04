@@ -2,7 +2,7 @@
   "version": 3,
   "changelog": [
     {
-      "description": "Oppdatert header: Piktogram blir nå plassert over tittel på mobil, og størrelse på piktogram er endret til 96px på desktop og 64 på mobil. `Box`, `Stack` rundt `<ApplicationPictogram />` og selve `<ApplicationPictogram />` trengs å synkroniseres.",
+      "description": "Oppdatert header: Piktogram blir nå plassert over tittel på mobil, og størrelse på piktogram er endret til 96px på desktop og 64 på mobil. Hele header-seksjonen bør synkroniseres.",
       "date": "04.09.2025",
       "version": 3
     },
