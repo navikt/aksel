@@ -7,11 +7,14 @@ import { CompositionWarning } from "../../util/composition-warning";
  */
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Must include `<FormSummary.Heading>`.
+   */
   children: React.ReactNode;
 }
 
 export const FormSummaryHeader = forwardRef<
-  HTMLHeadingElement,
+  HTMLDivElement,
   FormSummaryHeaderProps
 >(({ children, className, ...rest }: FormSummaryHeaderProps, ref) => {
   const { cn } = useRenameCSS();

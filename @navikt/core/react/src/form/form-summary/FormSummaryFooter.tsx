@@ -6,6 +6,9 @@ import { useRenameCSS } from "../../theme/Theme";
  */
 export interface FormSummaryFooterProps
   extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Should include `<FormSummary.EditLink>`.
+   */
   children: React.ReactNode;
 }
 
