@@ -16,7 +16,7 @@ interface Props {
 export const HighlightedBlogg = async ({ blogg }: Props) => {
   const avatars = queryToAvatars(blogg.writers);
 
-  const imageUrl = urlForImage(blogg?.seo?.image as Image)
+  const imageUrl = urlForImage(blogg?.seo?.image)
     ?.quality(100)
     .auto("format")
     .url();
