@@ -22,7 +22,6 @@
 
 .aksel-form-summary__edit {
   flex-shrink: 0;
-  margin-top: var(--ax-space-4);
   align-self: flex-start;
 }
 
@@ -83,6 +82,7 @@
 }
 
 .aksel-form-summary__footer {
+  display: flex;
   padding: var(--ax-space-16) var(--ax-space-20);
   background: var(--ax-bg-raised);
   border-top: 1px solid var(--ax-border-neutral-subtleA);

@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { PencilIcon } from "@navikt/aksel-icons";
 import { Link } from "../../link";
 import { useRenameCSS } from "../../theme/Theme";
 import { CompositionWarning } from "../../util/composition-warning";
@@ -39,6 +40,7 @@ export const FormSummaryEditLink: OverridableComponent<
         {...rest}
         className={cn("navds-form-summary__edit", className)}
       >
+        <PencilIcon aria-hidden fontSize="1.5rem" />
         {children || translate("editAnswer")}
       </Link>
     </CompositionWarning.Forbidden>
