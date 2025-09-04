@@ -21,8 +21,7 @@ export const humanizeRedaksjonType = (type: RedaksjonTypeValue) => {
       if (process.env.NODE_ENV === "production") {
         console.warn(`unexpected RedaksjonTypeValue: ${type}`);
       }
-
-      return null;
+      return type ?? "bad value";
   }
 };
 
