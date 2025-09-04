@@ -11,6 +11,7 @@ on:
     paths:
       - "@navikt/**"
       - "aksel.nav.no/website/pages/templates/**"
+      - ".storybook/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
