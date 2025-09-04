@@ -35,7 +35,7 @@ const [CompositionWarning, useCompositionWarning] =
 type CompositionWarningForbiddenProps = {
   children?: React.ReactElement;
   /**
-   * Name of the composition that is forbidden.
+   * Name of the parent slot component where the child is not allowed.
    */
   name: CompositionName;
   /**
