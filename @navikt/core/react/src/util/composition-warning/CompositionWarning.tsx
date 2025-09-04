@@ -17,20 +17,7 @@ import { createContext } from "../create-context";
 
 type CompositionName = string;
 
-/**
- * Allows developers to manually enable usage warnings in any browser environment
- * (excluding production) by setting `window.__AKSEL_DEBUG_WARNINGS__ = true`
- * in the browser console. Useful for local debugging when NODE_ENV is not "development".
- */
-const forcedDebug =
-  typeof window !== "undefined" &&
-  (window as any).__AKSEL_DEBUG_WARNINGS__ === true &&
-  process.env.NODE_ENV !== "production";
-
-/**
- * Enables warnings only in development or when forcedDebug is set.
- */
-const isDev = forcedDebug || process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV !== "production";
 
 type CompositionWarningContextType = {
   name: CompositionName;
