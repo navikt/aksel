@@ -53,10 +53,15 @@ export const Avatar = ({
       {showName && (
         <VStack align="start">
           <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
-            <Detail textColor="subtle">{type}</Detail>
+            <Detail as="span" textColor="subtle">
+              {type}
+            </Detail>
           </BoxNew>
           <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
-            <BodyShort className={styles.avatarName}>{`${name}`}</BodyShort>
+            <BodyShort
+              as="span"
+              className={styles.avatarName}
+            >{`${name}`}</BodyShort>
           </BoxNew>
         </VStack>
       )}
