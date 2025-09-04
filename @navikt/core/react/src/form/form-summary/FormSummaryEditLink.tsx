@@ -31,7 +31,7 @@ export const FormSummaryEditLink: OverridableComponent<
   return (
     <CompositionWarning.Forbidden
       name="FormSummary.Header"
-      message="<FormSummary.EditLink> should not be placed in <FormSummary.Header>. See: https://aksel.nav.no/komponenter/core/formsummary"
+      message="<FormSummary.EditLink> should not be placed in <FormSummary.Header> anymore. See https://aksel.nav.no/komponenter/core/formsummary"
     >
       <Link
         ref={ref}
