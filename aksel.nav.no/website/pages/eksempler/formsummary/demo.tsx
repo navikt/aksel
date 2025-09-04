@@ -61,6 +61,7 @@ const Example = () => {
           <FormSummary.Value>SMS</FormSummary.Value>
         </FormSummary.Answer>
       </FormSummary.Answers>
+
       <FormSummary.Footer>
         <FormSummary.EditLink href="/eksempel" />
       </FormSummary.Footer>
