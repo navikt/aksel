@@ -96,7 +96,7 @@ export const BloggList = async ({ blogg }: { blogg: Blogg }) => {
                   imageSrc={avatar.imageSrc}
                   name={avatar.name}
                   type={avatar.type}
-                ></Avatar>
+                />
               );
             })}
           </AvatarStack>
