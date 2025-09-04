@@ -10,7 +10,6 @@
   --website-header-height-width-border: calc(var(--website-header-height) + 1px);
   --website-font-mono: ui-monospace, "Menlo", "Monaco", "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono",
     "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-  --a-z-index-popover: 1000;
 }
 
 /* Prevents scroll-rubberbanding on Apple devices  */
