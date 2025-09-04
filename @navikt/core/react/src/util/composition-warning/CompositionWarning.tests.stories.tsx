@@ -23,7 +23,7 @@ function ConsoleWarnCapture({ children }: PropsWithChildren) {
       if (args.length > 0) {
         setLastMessage(String(args[0]));
       }
-      return original.apply(console, args as unknown as [any]);
+      return original.apply(console, args);
     };
 
     console.warn = override;
