@@ -11,11 +11,11 @@ import {
   SLUG_BY_TYPE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { queryToAvatars } from "@/app/dev/_ui/avatar/utils";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { formatDateString } from "@/ui-utils/format-date";
 import { Avatar } from "../../../../dev/_ui/avatar/Avatar";
 import styles from "../_ui/Produktbloggen.module.css";
-import { queryToAvatars } from "../_ui/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;
