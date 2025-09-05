@@ -55,6 +55,5 @@ export const writersField = defineField({
   type: "array",
   of: [{ type: "reference", to: [{ type: "editorial_staff" }] }],
   group: "settings",
-  // validation: (Rule) => Rule.required(),
-  // hidden: showForDevsOnly(),
+  validation: (Rule) => Rule.required(),
 });
