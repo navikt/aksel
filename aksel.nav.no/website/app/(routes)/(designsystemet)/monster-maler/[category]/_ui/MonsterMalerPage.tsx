@@ -19,7 +19,7 @@ import {
 } from "@/app/_ui/website-table/WebsiteTable";
 
 async function MonsterMalerPage({ slug }: { slug: string }) {
-  const [{ data: pageData }, { data: toc = [] }] = await Promise.all([
+  const [{ data: pageData }, toc] = await Promise.all([
     sanityFetch({
       query: MONSTER_MALER_BY_SLUG_QUERY,
       params: { slug },
@@ -27,7 +27,7 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
     sanityFetch({
       query: TOC_BY_SLUG_QUERY,
       params: { slug },
-    }),
+    }).then((res) => res.data || []),
   ]);
 
   if (!pageData) {
@@ -45,7 +45,11 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
           name: pageData.heading,
           text: "Send innspill",
         }}
-        toc={toc}
+        toc={
+          metadata?.changelog
+            ? [...toc, { id: "changelog", title: "Endringer" }]
+            : toc
+        }
       />
       <CustomPortableText
         value={pageData.content as PortableTextBlock[]}
