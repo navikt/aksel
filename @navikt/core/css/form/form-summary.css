@@ -20,7 +20,7 @@
   }
 }
 
-.navds-form-summary__edit {
+.navds-form-summary__header .navds-form-summary__edit {
   flex-shrink: 0;
   align-self: flex-start;
 }
