@@ -37,19 +37,19 @@ export const useRadio = (props: RadioProps) => {
         radioGroup?.value === undefined
           ? undefined
           : radioGroup?.value === props.value,
-      onChange: (e) => {
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
         if (readOnly) {
           return;
         }
-        props.onChange?.(e);
+        props.onChange?.(event);
         radioGroup?.onChange?.(props.value);
       },
-      onClick: (e) => {
+      onClick: (event: React.MouseEvent<HTMLInputElement>) => {
         if (readOnly) {
-          e.preventDefault();
+          event.preventDefault();
           return;
         }
-        props?.onClick?.(e);
+        props?.onClick?.(event);
       },
       required: radioGroup?.required,
       type: "radio",
