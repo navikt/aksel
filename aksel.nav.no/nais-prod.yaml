@@ -23,7 +23,7 @@ spec:
     limits:
       memory: 1Gi
     requests:
-      cpu: 100m
+      cpu: 172m
       memory: 896Mi
   liveness:
     path: /api/isAlive
