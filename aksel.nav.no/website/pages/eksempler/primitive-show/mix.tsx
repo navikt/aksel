@@ -27,5 +27,4 @@ export const Demo = {
 export const args = {
   index: 2,
   desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet i koden.",
-  sandbox: false,
 };

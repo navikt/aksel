@@ -187,6 +187,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  sandbox: false,
   title: "Pass av barn",
 };
