@@ -25,6 +25,9 @@ interface ModalComponent
   extends React.ForwardRefExoticComponent<
     ModalProps & React.RefAttributes<HTMLDialogElement>
   > {
+  Root: React.ForwardRefExoticComponent<
+    ModalProps & React.RefAttributes<HTMLDialogElement>
+  >;
   Header: typeof ModalHeader;
   Body: typeof ModalBody;
   Footer: typeof ModalFooter;
@@ -272,6 +275,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
   },
 ) as ModalComponent;
 
+Modal.Root = Modal;
 Modal.Header = ModalHeader;
 Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;

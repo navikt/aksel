@@ -10,6 +10,12 @@ interface AccordionComponent
     AccordionProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
+   * @see 🏷️ {@link AccordionProps}
+   */
+  Root: React.ForwardRefExoticComponent<
+    AccordionProps & React.RefAttributes<HTMLDivElement>
+  >;
+  /**
    * @see 🏷️ {@link AccordionItemProps}
    */
   Item: React.ForwardRefExoticComponent<
@@ -113,6 +119,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   },
 ) as AccordionComponent;
 
+Accordion.Root = Accordion;
 Accordion.Header = AccordionHeader;
 Accordion.Content = AccordionContent;
 Accordion.Item = AccordionItem;
