@@ -4,7 +4,11 @@ import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { Heading } from "../typography";
 import { createContext } from "../util/create-context";
-import { useClientLayoutEffect, useMergeRefs } from "../util/hooks";
+import {
+  useClientLayoutEffect,
+  useControllableState,
+  useMergeRefs,
+} from "../util/hooks";
 import { inertValue } from "./collapsible/inertValue";
 import { useOpenChangeComplete } from "./collapsible/useOpenChangeComplete";
 
@@ -34,6 +38,14 @@ interface InfoCardProps extends React.HTMLAttributes<HTMLDivElement> {
    * Overrides card color
    */
   "data-color"?: AkselColor;
+  /**
+   * Controlled open state
+   */
+  open?: boolean;
+  /**
+   * Callback fired when the open state changes
+   */
+  onOpenChange?: (open: boolean) => void;
 }
 
 export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
@@ -43,14 +55,21 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
       className,
       size = "medium",
       "data-color": dataColor = "info",
+      open: openProp,
+      onOpenChange,
       ...restProps
     }: InfoCardProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
 
-    const [open, setOpen] = useState(false);
     const contentRef = React.useRef<HTMLDivElement | null>(null);
+
+    const [open, setOpen] = useControllableState({
+      value: openProp,
+      defaultValue: false,
+      onChange: onOpenChange,
+    });
 
     const handleExpandToggle = (newState?: boolean) => {
       if (newState || open) {

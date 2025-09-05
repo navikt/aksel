@@ -4,6 +4,7 @@
   border: 1px solid var(--ax-border-default);
   overflow: clip;
   position: relative;
+  height: fit-content;
 
   --__axc-info-card-width: initial;
   --__axc-info-card-height: 120px;
