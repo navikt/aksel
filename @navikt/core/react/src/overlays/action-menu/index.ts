@@ -1,6 +1,7 @@
 "use client";
 export {
   ActionMenu,
+  ActionMenu as ActionMenuRoot,
   ActionMenuCheckboxItem,
   ActionMenuContent,
   ActionMenuGroup,
@@ -14,6 +15,7 @@ export {
   ActionMenuSubTrigger,
   ActionMenuTrigger,
   type ActionMenuItemProps,
+  type ActionMenuProps as ActionMenuRootProps,
   type ActionMenuCheckboxItemProps,
   type ActionMenuContentProps,
   type ActionMenuGroupProps,

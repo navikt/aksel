@@ -18,6 +18,25 @@ type VirtualFocusProps = {
   loop?: boolean;
 };
 
+interface VirtualFocusComponent extends React.FC<VirtualFocusProps> {
+  /**
+   * @see 🏷️ {@link VirtualFocusProps}
+   */
+  Root: React.FC<VirtualFocusProps>;
+  /**
+   * @see 🏷️ {@link VirtualFocusAnchor}
+   */
+  Anchor: typeof VirtualFocusAnchor;
+  /**
+   * @see 🏷️ {@link VirtualFocusContent}
+   */
+  Content: typeof VirtualFocusContent;
+  /**
+   * @see 🏷️ {@link VirtualFocusItem}
+   */
+  Item: typeof VirtualFocusItem;
+}
+
 /**
  * A component that manages a virtual focus using the 'up' and 'down'
  * arrow keys as well as selection with 'Return'.
@@ -64,7 +83,7 @@ type VirtualFocusProps = {
  * </VirtualFocus>
  * ```
  */
-export const VirtualFocus = ({ children, loop = false }: VirtualFocusProps) => {
+export const VirtualFocus: VirtualFocusComponent = ({ children, loop = false }: VirtualFocusProps) => {
   const descendants = useVirtualFocusDescendantInitializer();
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
 
@@ -82,6 +101,7 @@ export const VirtualFocus = ({ children, loop = false }: VirtualFocusProps) => {
   );
 };
 
+VirtualFocus.Root = VirtualFocus;
 VirtualFocus.Anchor = VirtualFocusAnchor;
 VirtualFocus.Item = VirtualFocusItem;
 VirtualFocus.Content = VirtualFocusContent;

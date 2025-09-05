@@ -46,6 +46,10 @@ type ActionMenuProps = {
 
 interface ActionMenuComponent extends React.FC<ActionMenuProps> {
   /**
+   * @see 🏷️ {@link ActionMenuProps}
+   */
+  Root: React.FC<ActionMenuProps>;
+  /**
    * Acts as a trigger and anchor for the menu.
    * Must be wrapped around a button. If you use your own component, make sure to forward ref and props.
    * @example
@@ -1005,6 +1009,7 @@ export const ActionMenuSubContent = forwardRef<
 });
 
 /* -------------------------------------------------------------------------- */
+ActionMenu.Root = ActionMenu;
 ActionMenu.Trigger = ActionMenuTrigger;
 ActionMenu.Content = ActionMenuContent;
 ActionMenu.Group = ActionMenuGroup;

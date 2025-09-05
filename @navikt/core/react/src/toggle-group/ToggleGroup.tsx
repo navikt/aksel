@@ -17,6 +17,12 @@ interface ToggleGroupComponent
     ToggleGroupProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
+   * @see 🏷️ {@link ToggleGroupProps}
+   */
+  Root: React.ForwardRefExoticComponent<
+    ToggleGroupProps & React.RefAttributes<HTMLDivElement>
+  >;
+  /**
    * @see 🏷️ {@link ToggleItem}
    */
   Item: typeof ToggleItem;
@@ -142,6 +148,7 @@ function variantToColor(
   }
 }
 
+ToggleGroup.Root = ToggleGroup;
 ToggleGroup.Item = ToggleItem;
 
 export default ToggleGroup;

@@ -13,6 +13,12 @@ interface FormSummaryComponent
     FormSummaryProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
+   * @see 🏷️ {@link FormSummaryProps}
+   */
+  Root: React.ForwardRefExoticComponent<
+    FormSummaryProps & React.RefAttributes<HTMLDivElement>
+  >;
+  /**
    * Must include `<FormSummary.Heading>` and optionally `<FormSummary.EditLink>`.
    */
   Header: typeof FormSummaryHeader;
@@ -97,6 +103,7 @@ export const FormSummary = forwardRef<HTMLDivElement, FormSummaryProps>(
   },
 ) as FormSummaryComponent;
 
+FormSummary.Root = FormSummary;
 FormSummary.Header = FormSummaryHeader;
 FormSummary.Heading = FormSummaryHeading;
 FormSummary.EditLink = FormSummaryEditLink;

@@ -1,10 +1,33 @@
 "use client";
 export { Accordion, type AccordionProps, AccordionRoot, AccordionHeader, AccordionContent, AccordionItem } from "./accordion";
-export { ActionMenu, type ActionMenuProps } from "./overlays/action-menu";
+export { 
+  ActionMenu, 
+  type ActionMenuProps,
+  ActionMenuRoot,
+  ActionMenuTrigger,
+  ActionMenuContent,
+  ActionMenuItem,
+  ActionMenuGroup,
+  ActionMenuLabel,
+  ActionMenuCheckboxItem,
+  ActionMenuRadioGroup,
+  ActionMenuRadioItem,
+  ActionMenuDivider,
+  ActionMenuSub,
+  ActionMenuSubTrigger,
+  ActionMenuSubContent
+} from "./overlays/action-menu";
 export { Alert, type AlertProps } from "./alert";
 export { Button, type ButtonProps, ButtonRoot } from "./button";
 export { Chat, type ChatProps } from "./chat";
 export { Chips, type ChipsProps } from "./chips";
+export { 
+  Collapsible,
+  type CollapsibleProps,
+  CollapsibleRoot,
+  CollapsibleTrigger,
+  CollapsibleContent
+} from "./collapsible";
 export { CopyButton, type CopyButtonProps } from "./copybutton";
 export {
   DatePicker,
@@ -26,7 +49,15 @@ export {
   type MonthValidationT,
 } from "./date/monthpicker";
 export { Dropdown, type DropdownProps } from "./dropdown";
-export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
+export { 
+  ExpansionCard, 
+  type ExpansionCardProps,
+  ExpansionCardRoot,
+  ExpansionCardHeader,
+  ExpansionCardContent,
+  ExpansionCardTitle,
+  ExpansionCardDescription
+} from "./expansion-card";
 export { GuidePanel, type GuidePanelProps } from "./guide-panel";
 export { HelpText, type HelpTextProps } from "./help-text";
 export {
@@ -55,8 +86,18 @@ export { Link, type LinkProps } from "./link";
 export { List, ListRoot, ListItem, type ListProps, type ListItemProps } from "./list";
 export { Loader, type LoaderProps } from "./loader";
 export { Modal, ModalRoot, ModalBody, ModalFooter, ModalHeader, type ModalProps } from "./modal";
-export { Pagination, type PaginationProps } from "./pagination";
-export { Popover, type PopoverProps } from "./popover";
+export { 
+  Pagination, 
+  type PaginationProps,
+  PaginationRoot,
+  PaginationItem
+} from "./pagination";
+export { 
+  Popover, 
+  type PopoverProps,
+  PopoverRoot,
+  PopoverContent
+} from "./popover";
 export { Portal, type PortalProps } from "./portal";
 export { Process, type ProcessProps } from "./process";
 export { ProgressBar, type ProgressBarProps } from "./progress-bar";
@@ -94,7 +135,12 @@ export {
   type TimelineRowProps,
   type TimelineZoomButtonProps,
 } from "./timeline";
-export { ToggleGroup, type ToggleGroupProps } from "./toggle-group";
+export { 
+  ToggleGroup, 
+  type ToggleGroupProps,
+  ToggleGroupRoot,
+  ToggleGroupItem
+} from "./toggle-group";
 export { Tooltip, type TooltipProps } from "./tooltip";
 export {
   BodyLong,
@@ -148,7 +194,18 @@ export {
   type FileUploadTriggerProps,
   type FilesPartitioned,
 } from "./form/file-upload";
-export { FormSummary, type FormSummaryProps } from "./form/form-summary";
+export { 
+  FormSummary, 
+  type FormSummaryProps,
+  FormSummaryRoot,
+  FormSummaryAnswer,
+  FormSummaryAnswers,
+  FormSummaryEditLink,
+  FormSummaryHeader,
+  FormSummaryHeading,
+  FormSummaryLabel,
+  FormSummaryValue
+} from "./form/form-summary";
 export { FormProgress, type FormProgressProps } from "./form/form-progress";
 export {
   Radio,
@@ -182,3 +239,19 @@ export { Theme, type ThemeProps } from "./theme";
  */
 export { LinkPanel, type LinkPanelProps } from "./link-panel";
 export { Panel, type PanelProps } from "./panel";
+
+/**
+ * Namespace exports for multipart components (better tree-shaking and RSC compatibility)
+ */
+export * as Accordion from "./accordion/namespace";
+export * as Button from "./button/namespace";
+export * as Table from "./table/namespace";
+export * as Modal from "./modal/namespace";
+export * as List from "./list/namespace";
+export * as Pagination from "./pagination/namespace";
+export * as FormSummary from "./form/form-summary/namespace";
+export * as ToggleGroup from "./toggle-group/namespace";
+export * as ActionMenu from "./overlays/action-menu/namespace";
+export * as Collapsible from "./collapsible/namespace";
+export * as Popover from "./popover/namespace";
+export * as ExpansionCard from "./expansion-card/namespace";

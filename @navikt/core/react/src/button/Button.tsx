@@ -70,8 +70,7 @@ interface ButtonComponent
  * <Button>Klikk meg</Button>
  * ```
  */
-export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
-  forwardRef<HTMLButtonElement, ButtonProps & { as?: React.ElementType }>(
+export const Button = forwardRef(
     (
       {
         as: Component = "button",
@@ -91,8 +90,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
     ) => {
       const { cn } = useRenameCSS();
 
-      const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
-        disabled || loading ? omit(rest, ["href"]) : rest;
+      const filterProps = disabled || loading ? omit(rest, ["href"] as any) : rest;
 
       const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
         if (e.key === " " && !disabled && !loading) {
@@ -136,7 +134,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         </Component>
       );
     },
-  );
+  ) as OverridableComponent<ButtonProps, HTMLButtonElement> as ButtonComponent;
 
 // Add Root property for namespace usage
 (Button as ButtonComponent).Root = Button;

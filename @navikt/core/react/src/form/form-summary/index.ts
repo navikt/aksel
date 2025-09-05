@@ -1,6 +1,10 @@
 "use client";
 export { default as FormSummary, type FormSummaryProps } from "./FormSummary";
 export {
+  default as FormSummaryRoot,
+  type FormSummaryProps as FormSummaryRootProps,
+} from "./FormSummary";
+export {
   default as FormSummaryAnswer,
   type FormSummaryAnswerProps,
 } from "./FormSummaryAnswer";

@@ -23,6 +23,12 @@ interface ExpansionCardComponent
     ExpansionCardProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
+   * @see 🏷️ {@link ExpansionCardProps}
+   */
+  Root: React.ForwardRefExoticComponent<
+    ExpansionCardProps & React.RefAttributes<HTMLDivElement>
+  >;
+  /**
    * @see 🏷️ {@link ExpansionCardHeaderProps}
    */
   Header: React.ForwardRefExoticComponent<
@@ -157,6 +163,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
   },
 ) as ExpansionCardComponent;
 
+ExpansionCard.Root = ExpansionCard;
 ExpansionCard.Header = ExpansionCardHeader;
 ExpansionCard.Content = ExpansionCardContent;
 ExpansionCard.Title = ExpansionCardTitle;

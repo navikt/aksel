@@ -14,6 +14,12 @@ interface CollapsibleComponent
     CollapsibleProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
+   * @see 🏷️ {@link CollapsibleProps}
+   */
+  Root: React.ForwardRefExoticComponent<
+    CollapsibleProps & React.RefAttributes<HTMLDivElement>
+  >;
+  /**
    * @see 🏷️ {@link CollapsibleTriggerProps}
    */
   Trigger: typeof CollapsibleTrigger;
@@ -94,6 +100,7 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
   },
 ) as CollapsibleComponent;
 
+Collapsible.Root = Collapsible;
 Collapsible.Trigger = CollapsibleTrigger;
 Collapsible.Content = CollapsibleContent;
 

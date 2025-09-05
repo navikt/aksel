@@ -78,6 +78,12 @@ interface PopoverComponent
   extends React.ForwardRefExoticComponent<
     PopoverProps & React.RefAttributes<HTMLDivElement>
   > {
+  /**
+   * @see 🏷️ {@link PopoverProps}
+   */
+  Root: React.ForwardRefExoticComponent<
+    PopoverProps & React.RefAttributes<HTMLDivElement>
+  >;
   Content: PopoverContentType;
 }
 
@@ -210,6 +216,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   },
 ) as PopoverComponent;
 
+Popover.Root = Popover;
 Popover.Content = PopoverContent;
 
 export default Popover;
