@@ -64,7 +64,7 @@ export const WarnsOnMatch: Story = {
     const countEl = canvas.getByTestId("warn-count");
     const msgEl = canvas.getByTestId("last-message");
 
-    expect(countEl.textContent).toBe("1");
+    expect(countEl.textContent).toBe("Console warnings: 1");
     expect(msgEl.textContent).toContain(
       "[Aksel] This child is forbidden in FormSummary.Header",
     );
@@ -90,7 +90,7 @@ export const NoWarnOnMismatch: Story = {
     await flush();
 
     const countEl = canvas.getByTestId("warn-count");
-    expect(countEl.textContent).toBe("0");
+    expect(countEl.textContent).toBe("Console warnings: 0");
   },
 };
 
@@ -111,6 +111,6 @@ export const NoWarnWithoutProvider: Story = {
     await flush();
 
     const countEl = canvas.getByTestId("warn-count");
-    expect(countEl.textContent).toBe("0");
+    expect(countEl.textContent).toBe("Console warnings: 0");
   },
 };

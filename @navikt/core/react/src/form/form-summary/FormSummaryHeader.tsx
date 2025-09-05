@@ -2,9 +2,6 @@ import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../theme/Theme";
 import { CompositionWarning } from "../../util/composition-warning";
 
-/**
- * Header slot for section heading and actions in `FormSummary`.
- */
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
