@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useCallback, useRef, useState } from "react";
 import { InformationSquareFillIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
@@ -71,25 +71,28 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
       onChange: onOpenChange,
     });
 
-    const handleExpandToggle = (newState?: boolean) => {
-      if (newState || open) {
-        setOpen(false);
-        if (contentRef.current) {
-          contentRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
+    const handleExpandToggle = useCallback(
+      (newState?: boolean) => {
+        if (newState || open) {
+          setOpen(false);
+          if (contentRef.current) {
+            contentRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+          return;
         }
-        return;
-      }
 
-      setOpen(true);
+        setOpen(true);
 
-      /* We need to wait for the "inert"-attrb to dissapear before we can focus the element */
-      queueMicrotask(() => {
-        contentRef.current?.focus();
-      });
-    };
+        /* We need to wait for the "inert"-attrb to dissapear before we can focus the element */
+        queueMicrotask(() => {
+          contentRef.current?.focus();
+        });
+      },
+      [open, setOpen],
+    );
 
     return (
       <div
