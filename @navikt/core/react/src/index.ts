@@ -1,8 +1,8 @@
 "use client";
-export { Accordion, type AccordionProps } from "./accordion";
+export { Accordion, type AccordionProps, AccordionRoot, AccordionHeader, AccordionContent, AccordionItem } from "./accordion";
 export { ActionMenu, type ActionMenuProps } from "./overlays/action-menu";
 export { Alert, type AlertProps } from "./alert";
-export { Button, type ButtonProps } from "./button";
+export { Button, type ButtonProps, ButtonRoot } from "./button";
 export { Chat, type ChatProps } from "./chat";
 export { Chips, type ChipsProps } from "./chips";
 export { CopyButton, type CopyButtonProps } from "./copybutton";
@@ -52,9 +52,9 @@ export {
   type VStackProps,
 } from "./layout/stack";
 export { Link, type LinkProps } from "./link";
-export { List, type ListProps, type ListItemProps } from "./list";
+export { List, ListRoot, ListItem, type ListProps, type ListItemProps } from "./list";
 export { Loader, type LoaderProps } from "./loader";
-export { Modal, type ModalProps } from "./modal";
+export { Modal, ModalRoot, ModalBody, ModalFooter, ModalHeader, type ModalProps } from "./modal";
 export { Pagination, type PaginationProps } from "./pagination";
 export { Popover, type PopoverProps } from "./popover";
 export { Portal, type PortalProps } from "./portal";
@@ -66,6 +66,14 @@ export { Skeleton, type SkeletonProps } from "./skeleton";
 export { Stepper, type StepperProps } from "./stepper";
 export {
   Table,
+  TableRoot,
+  TableBody,
+  TableColumnHeader, 
+  TableDataCell,
+  TableExpandableRow,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
   type BodyProps,
   type ColumnHeaderProps,
   type DataCellProps,

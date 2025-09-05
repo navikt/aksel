@@ -74,6 +74,9 @@ interface PaginationType
   extends React.ForwardRefExoticComponent<
     PaginationProps & React.RefAttributes<HTMLElement>
   > {
+  Root: React.ForwardRefExoticComponent<
+    PaginationProps & React.RefAttributes<HTMLElement>
+  >;
   Item: PaginationItemType;
 }
 
@@ -283,6 +286,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
   },
 ) as PaginationType;
 
+Pagination.Root = Pagination;
 Pagination.Item = PaginationItem;
 
 export default Pagination;

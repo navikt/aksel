@@ -20,6 +20,12 @@ export interface ListComponent
     ListProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
+   * @see 🏷️ {@link ListProps}
+   */
+  Root: React.ForwardRefExoticComponent<
+    ListProps & React.RefAttributes<HTMLDivElement>
+  >;
+  /**
    * @see 🏷️ {@link ListItemProps}
    */
   Item: typeof ListItem;
@@ -132,6 +138,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
   },
 ) as ListComponent;
 
+List.Root = List;
 List.Item = ListItem;
 
 export default List;
