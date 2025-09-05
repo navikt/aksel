@@ -13,6 +13,10 @@ export {
   type FormSummaryEditProps,
 } from "./FormSummaryEditLink";
 export {
+  default as FormSummaryFooter,
+  type FormSummaryFooterProps,
+} from "./FormSummaryFooter";
+export {
   default as FormSummaryHeader,
   type FormSummaryHeaderProps,
 } from "./FormSummaryHeader";

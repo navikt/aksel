@@ -23,7 +23,6 @@ export const Default: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
       <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
-      <FormSummary.EditLink href="#" />
     </FormSummary.Header>
 
     <FormSummary.Answers>
@@ -99,6 +98,9 @@ export const Default: StoryFn<typeof FormSummary> = () => (
         <FormSummary.Value>SMS</FormSummary.Value>
       </FormSummary.Answer>
     </FormSummary.Answers>
+    <FormSummary.Footer>
+      <FormSummary.EditLink href="#" />
+    </FormSummary.Footer>
   </FormSummary>
 );
 
@@ -108,10 +110,6 @@ export const LongTexts: StoryFn<typeof FormSummary> = () => (
       <FormSummary.Heading level="2">
         Arbeidsforhold som du har i eller utenfor EØS-området
       </FormSummary.Heading>
-      <FormSummary.EditLink href="#">
-        <LinkIcon />
-        Jeg vil endre dette svaret
-      </FormSummary.EditLink>
     </FormSummary.Header>
     <FormSummary.Answers>
       <FormSummary.Answer>
@@ -152,6 +150,12 @@ export const LongTexts: StoryFn<typeof FormSummary> = () => (
         </FormSummary.Value>
       </FormSummary.Answer>
     </FormSummary.Answers>
+    <FormSummary.Footer>
+      <FormSummary.EditLink href="#">
+        <LinkIcon />
+        Jeg vil endre dette svaret
+      </FormSummary.EditLink>
+    </FormSummary.Footer>
   </FormSummary>
 );
 
@@ -230,7 +234,6 @@ export const RealisticUsage: StoryFn<typeof FormSummary> = () => (
       <FormSummary.Heading level="2">
         Diverse informasjon om forskjellige ting og tang. Kjekt å vite.
       </FormSummary.Heading>
-      <FormSummary.EditLink href="#" />
     </FormSummary.Header>
 
     <FormSummary.Answers>
@@ -254,6 +257,9 @@ export const RealisticUsage: StoryFn<typeof FormSummary> = () => (
         </FormSummary.Answer>
       ))}
     </FormSummary.Answers>
+    <FormSummary.Footer>
+      <FormSummary.EditLink href="#" />
+    </FormSummary.Footer>
   </FormSummary>
 );
 
@@ -262,34 +268,36 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Just Header</FormSummary.Heading>
-        <FormSummary.EditLink href="#" />
       </FormSummary.Header>
     </FormSummary>
 
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Empty Answers</FormSummary.Heading>
-        <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
       <FormSummary.Answers>{null}</FormSummary.Answers>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
     </FormSummary>
 
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Empty Answer</FormSummary.Heading>
-        <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
       <FormSummary.Answers>
         <FormSummary.Answer>{null}</FormSummary.Answer>
       </FormSummary.Answers>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
     </FormSummary>
 
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Empty Label & Value</FormSummary.Heading>
-        <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
       <FormSummary.Answers>
@@ -298,12 +306,14 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
           <FormSummary.Value>{null}</FormSummary.Value>
         </FormSummary.Answer>
       </FormSummary.Answers>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
     </FormSummary>
 
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Empty Value</FormSummary.Heading>
-        <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
       <FormSummary.Answers>
@@ -312,6 +322,9 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
           <FormSummary.Value>{null}</FormSummary.Value>
         </FormSummary.Answer>
       </FormSummary.Answers>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
     </FormSummary>
   </VStack>
 );
@@ -320,7 +333,6 @@ export const CommaSeparated: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
       <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
-      <FormSummary.EditLink href="#" />
     </FormSummary.Header>
 
     <FormSummary.Answers>
@@ -340,6 +352,9 @@ export const CommaSeparated: StoryFn<typeof FormSummary> = () => (
         <FormSummary.Value>Say hello to my little friend.</FormSummary.Value>
       </FormSummary.Answer>
     </FormSummary.Answers>
+    <FormSummary.Footer>
+      <FormSummary.EditLink href="#" />
+    </FormSummary.Footer>
   </FormSummary>
 );
 
@@ -349,7 +364,6 @@ export const ColorRole: StoryFn<typeof FormSummary> = () => (
       <FormSummary.Heading level="2">
         Diverse informasjon om forskjellige ting og tang. Kjekt å vite.
       </FormSummary.Heading>
-      <FormSummary.EditLink href="#" />
     </FormSummary.Header>
 
     <FormSummary.Answers>
@@ -373,6 +387,9 @@ export const ColorRole: StoryFn<typeof FormSummary> = () => (
         </FormSummary.Answer>
       ))}
     </FormSummary.Answers>
+    <FormSummary.Footer>
+      <FormSummary.EditLink href="#" />
+    </FormSummary.Footer>
   </FormSummary>
 );
 
@@ -427,3 +444,30 @@ export const Chromatic: StoryObj<typeof FormSummary> = {
     },
   },
 };
+
+export const _DevWarning_MisuseInHeaderExample: StoryFn<
+  typeof FormSummary
+> = () => (
+  <VStack gap="space-16">
+    <FormSummary>
+      <FormSummary.Header>
+        <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
+        {/* Intentional to trigger warning */}
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Header>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
+    </FormSummary>
+    <FormSummary>
+      <FormSummary.Header>
+        <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
+        {/* Intentional to trigger warning */}
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Header>
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="#" />
+      </FormSummary.Footer>
+    </FormSummary>
+  </VStack>
+);

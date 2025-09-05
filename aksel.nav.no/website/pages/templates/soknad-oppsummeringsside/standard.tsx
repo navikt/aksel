@@ -84,7 +84,6 @@ function Example() {
           <FormSummary>
             <FormSummary.Header>
               <FormSummary.Heading level="2">Om deg</FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -112,12 +111,14 @@ function Example() {
                 <FormSummary.Value>mail@tull.tøys</FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormSummary>
             <FormSummary.Header>
               <FormSummary.Heading level="2">Barnetillegg</FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -151,6 +152,9 @@ function Example() {
                 </FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormNavigation />
