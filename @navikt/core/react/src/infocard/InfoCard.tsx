@@ -206,7 +206,7 @@ interface InfoCardCollapsibleContentProps
   children: React.ReactNode;
 }
 
-type Height = number | undefined;
+type Height = number | "auto" | undefined;
 // const COLLAPSED_HEIGHT = 120;
 
 export const InfoCardCollapsibleContent = forwardRef<
@@ -220,39 +220,74 @@ export const InfoCardCollapsibleContent = forwardRef<
     const { cn } = useRenameCSS();
     const panelRef = useRef<HTMLDivElement | null>(null);
     const { open, contentRef } = useInfoCardContext();
+    /* Avoid animating first render */
     const shouldCancelInitialOpenTransitionRef = useRef(open);
+    /* Avoids first render from animating */
+    /* TODO: Look into merging with `shouldCancelInitialOpenTransitionRef` */
+    const initialOpenMount = useRef(!open);
 
     const mergedRef = useMergeRefs(forwardedRef, contentRef, panelRef);
 
-    const [height, setDimensions] = useState<Height>();
+    const [height, setDimensions] = useState<Height>(() =>
+      open ? "auto" : undefined,
+    );
 
     useClientLayoutEffect(() => {
       if (!panelRef.current) {
         return;
       }
+      console.info("useLayoutEffect", panelRef.current);
+
       if (shouldCancelInitialOpenTransitionRef.current) {
         shouldCancelInitialOpenTransitionRef.current = false;
+        if (open) {
+          setDimensions("auto");
+        }
         return;
       }
 
       if (open) {
         setDimensions(panelRef.current.scrollHeight);
+        return;
       }
+
+      if (initialOpenMount.current) {
+        initialOpenMount.current = false;
+        return;
+      }
+
+      setDimensions(panelRef.current.scrollHeight);
     }, [open]);
 
     useOpenChangeComplete({
       open,
       ref: contentRef,
       onComplete: () => {
-        if (!open) {
+        if (open) {
+          setDimensions("auto");
+        } else {
           setDimensions(undefined);
         }
       },
     });
 
     const style: React.CSSProperties = {
-      "--__axc-info-card-height": height ? `${height}px` : undefined,
+      "--__axc-info-card-height":
+        height === undefined
+          ? undefined
+          : height === "auto"
+            ? "auto"
+            : `${height}px`,
     };
+
+    console.info(
+      height === undefined
+        ? undefined
+        : height === "auto"
+          ? "auto"
+          : `${height}px`,
+      panelRef.current,
+    );
 
     return (
       <div
