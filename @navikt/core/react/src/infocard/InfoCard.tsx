@@ -5,6 +5,7 @@ import { AkselColor } from "../types";
 import { Heading } from "../typography";
 import { createContext } from "../util/create-context";
 import { useClientLayoutEffect, useMergeRefs } from "../util/hooks";
+import { inertValue } from "./collapsible/inertValue";
 import { useOpenChangeComplete } from "./collapsible/useOpenChangeComplete";
 
 // const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
@@ -184,7 +185,7 @@ interface InfoCardCollapsibleContentProps
 }
 
 type Height = number | undefined;
-const COLLAPSED_HEIGHT = 120;
+// const COLLAPSED_HEIGHT = 120;
 
 export const InfoCardCollapsibleContent = forwardRef<
   HTMLDivElement,
@@ -197,19 +198,23 @@ export const InfoCardCollapsibleContent = forwardRef<
     const { cn } = useRenameCSS();
     const panelRef = useRef<HTMLDivElement | null>(null);
     const { open, contentRef } = useInfoCardContext();
+    const shouldCancelInitialOpenTransitionRef = useRef(open);
 
     const mergedRef = useMergeRefs(forwardedRef, contentRef, panelRef);
 
-    const [height, setDimensions] = useState<Height>(COLLAPSED_HEIGHT);
+    const [height, setDimensions] = useState<Height>();
 
     useClientLayoutEffect(() => {
-      const el = panelRef.current;
-      if (!el) return;
+      if (!panelRef.current) {
+        return;
+      }
+      if (shouldCancelInitialOpenTransitionRef.current) {
+        shouldCancelInitialOpenTransitionRef.current = false;
+        return;
+      }
 
       if (open) {
-        setDimensions(el.scrollHeight);
-      } else {
-        setDimensions(COLLAPSED_HEIGHT);
+        setDimensions(panelRef.current.scrollHeight);
       }
     }, [open]);
 
@@ -218,13 +223,13 @@ export const InfoCardCollapsibleContent = forwardRef<
       ref: contentRef,
       onComplete: () => {
         if (!open) {
-          setDimensions(COLLAPSED_HEIGHT);
+          setDimensions(undefined);
         }
       },
     });
 
     const style: React.CSSProperties = {
-      "--__axc-info-card-height": `${height ?? COLLAPSED_HEIGHT}px`,
+      "--__axc-info-card-height": height ? `${height}px` : undefined,
     };
 
     return (
@@ -237,9 +242,10 @@ export const InfoCardCollapsibleContent = forwardRef<
           "navds-info-card__collapsible-content",
         )}
         data-expanded={open}
-        /* inert={!open ? inertValue : false} */
         tabIndex={-1}
         style={style}
+        /* @ts-expect-error: React does not handle inert well across versions. */
+        inert={inertValue(!open)}
       >
         {children}
       </div>

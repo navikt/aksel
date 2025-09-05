@@ -6,7 +6,7 @@
   position: relative;
 
   --__axc-info-card-width: initial;
-  --__axc-info-card-height: initial;
+  --__axc-info-card-height: 120px;
 }
 
 .aksel-info-card__header {
