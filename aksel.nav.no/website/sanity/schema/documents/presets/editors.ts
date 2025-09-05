@@ -1,6 +1,5 @@
 import { defineField } from "sanity";
 import { SANITY_API_VERSION } from "@/sanity/config";
-import { showForDevsOnly } from "../../../util";
 
 export const editorField = defineField({
   title: "Bidragsytere",
@@ -56,6 +55,5 @@ export const writersField = defineField({
   type: "array",
   of: [{ type: "reference", to: [{ type: "editorial_staff" }] }],
   group: "settings",
-  // validation: (Rule) => Rule.required(),
-  hidden: showForDevsOnly(),
+  validation: (Rule) => Rule.required(),
 });
