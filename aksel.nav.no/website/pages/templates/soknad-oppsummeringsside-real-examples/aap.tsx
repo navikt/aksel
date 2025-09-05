@@ -84,7 +84,6 @@ function Example() {
           <FormSummary>
             <FormSummary.Header>
               <FormSummary.Heading level="2">Om deg</FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -110,6 +109,9 @@ function Example() {
                 <FormSummary.Value>mail@nomail.example</FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormSummary>
@@ -136,7 +138,6 @@ function Example() {
               <FormSummary.Heading level="2">
                 Bosted og jobb
               </FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -152,12 +153,14 @@ function Example() {
                 <FormSummary.Value>Nei</FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormSummary>
             <FormSummary.Header>
               <FormSummary.Heading level="2">Yrkesskade</FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -168,6 +171,9 @@ function Example() {
                 <FormSummary.Value>Nei</FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormSummary>
@@ -175,7 +181,6 @@ function Example() {
               <FormSummary.Heading level="2">
                 Kontaktperson for helseopplysninger
               </FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -193,12 +198,14 @@ function Example() {
                 </FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormSummary>
             <FormSummary.Header>
               <FormSummary.Heading level="2">Barnetillegg</FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -232,12 +239,14 @@ function Example() {
                 </FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormSummary>
             <FormSummary.Header>
               <FormSummary.Heading level="2">Student</FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -245,12 +254,14 @@ function Example() {
                 <FormSummary.Value>Nei</FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormSummary>
             <FormSummary.Header>
               <FormSummary.Heading level="2">Utbetalinger</FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -267,6 +278,9 @@ function Example() {
                 <FormSummary.Value>Ingen av disse</FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormSummary>
@@ -274,7 +288,6 @@ function Example() {
               <FormSummary.Heading level="2">
                 Vedlegg og tilleggsopplysninger
               </FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -282,6 +295,9 @@ function Example() {
                 <FormSummary.Value>Ingen vedlegg</FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormNavigation />
