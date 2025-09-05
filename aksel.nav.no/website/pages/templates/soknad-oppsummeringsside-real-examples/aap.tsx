@@ -117,7 +117,6 @@ function Example() {
           <FormSummary>
             <FormSummary.Header>
               <FormSummary.Heading level="2">Startdato</FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -131,6 +130,9 @@ function Example() {
                 <FormSummary.Value>Nei</FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="#" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormSummary>
