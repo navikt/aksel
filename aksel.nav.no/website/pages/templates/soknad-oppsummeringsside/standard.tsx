@@ -11,7 +11,6 @@ import {
   Heading,
   Link,
   Page,
-  Show,
   Stack,
   VStack,
 } from "@navikt/ds-react";
@@ -32,28 +31,33 @@ function Example() {
       <Header />
       <Page.Block as="main" width="text" gutters>
         <VStack gap="8">
-          <Bleed marginInline={{ lg: "24" }}>
-            <Stack
-              gap="6"
-              direction={{ sm: "row-reverse", lg: "row" }}
-              justify={{ sm: "space-between", lg: "start" }}
-              wrap={false}
-            >
-              <Show above="sm">
+          <Stack
+            gap={{ xs: "3", lg: "6" }}
+            direction={{ xs: "column", lg: "row" }}
+            wrap={false}
+            position="relative"
+          >
+            <Bleed asChild marginInline={{ lg: "32" }}>
+              <Box
+                width={{ xs: "64px", lg: "96px" }}
+                height={{ xs: "64px", lg: "96px" }}
+                asChild
+                position={{ xs: "relative", lg: "absolute" }}
+              >
                 <ApplicationPictogram />
-              </Show>
-              <VStack gap="1">
-                <BodyShort size="small">
-                  Nav 10-07.03 (Om søknaden har ID)
-                </BodyShort>
-                <Heading level="1" size="xlarge">
-                  Søknad om [ytelse]
-                </Heading>
-              </VStack>
-            </Stack>
-          </Bleed>
+              </Box>
+            </Bleed>
+            <VStack gap="1">
+              <BodyShort size="small">
+                Nav 10-07.03 (Om søknaden har ID)
+              </BodyShort>
+              <Heading level="1" size="xlarge">
+                Søknad om [ytelse]
+              </Heading>
+            </VStack>
+          </Stack>
 
-          <div data-aksel-template="form-summarypage-v2">
+          <div data-aksel-template="form-summarypage-v3">
             <Link href="#">
               <ArrowLeftIcon aria-hidden /> Forrige steg
             </Link>

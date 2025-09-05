@@ -13,7 +13,6 @@ import {
   Link,
   List,
   Page,
-  Show,
   Stack,
   VStack,
 } from "@navikt/ds-react";
@@ -32,25 +31,28 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block width="text" gutters>
-        <VStack as="main" gap="8">
-          <Bleed
-            marginInline={{ lg: "24" }}
-            data-aksel-template="form-intropage-v2"
+        <VStack as="main" gap="8" data-aksel-template="form-intropage-v3">
+          <Stack
+            gap={{ xs: "3", lg: "6" }}
+            direction={{ xs: "column", lg: "row" }}
+            wrap={false}
+            position="relative"
           >
-            <Stack
-              gap="6"
-              direction={{ sm: "row-reverse", lg: "row" }}
-              justify={{ sm: "space-between", lg: "start" }}
-              wrap={false}
-            >
-              <Show above="sm">
+            <Bleed asChild marginInline={{ lg: "32" }}>
+              <Box
+                width={{ xs: "64px", lg: "96px" }}
+                height={{ xs: "64px", lg: "96px" }}
+                asChild
+                position={{ xs: "relative", lg: "absolute" }}
+              >
                 <ApplicationPictogram />
-              </Show>
-              <Heading level="1" size="xlarge">
-                Søknad om støtte til pass av barn
-              </Heading>
-            </Stack>
-          </Bleed>
+              </Box>
+            </Bleed>
+            <Heading level="1" size="xlarge">
+              Søknad om støtte til pass av barn
+            </Heading>
+          </Stack>
+
           <GuidePanel poster>
             <Heading level="2" size="medium" spacing>
               Hei, Luke Skywalker!
