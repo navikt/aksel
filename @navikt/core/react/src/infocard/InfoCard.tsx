@@ -1,4 +1,10 @@
-import React, { forwardRef, useCallback, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { InformationSquareFillIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
@@ -19,6 +25,7 @@ type InfoCardContext = {
   open: boolean;
   toggleOpen: (newState?: boolean) => void;
   contentRef: React.RefObject<HTMLDivElement | null>;
+  hiddenUntilFound: boolean;
 };
 
 const [InfoCardContextProvider, useInfoCardContext] =
@@ -46,6 +53,11 @@ interface InfoCardProps extends React.HTMLAttributes<HTMLDivElement> {
    * Callback fired when the open state changes
    */
   onOpenChange?: (open: boolean) => void;
+  /**
+   * If true, the content will be hidden with the `hidden="until-found"` attribute when collapsed.
+   * @default true
+   */
+  hiddenUntilFound?: boolean;
 }
 
 export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
@@ -57,6 +69,7 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
       "data-color": dataColor = "info",
       open: openProp,
       onOpenChange,
+      hiddenUntilFound = true,
       ...restProps
     }: InfoCardProps,
     forwardedRef,
@@ -106,6 +119,7 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
           open={open}
           toggleOpen={handleExpandToggle}
           contentRef={contentRef}
+          hiddenUntilFound={hiddenUntilFound}
         >
           {children}
         </InfoCardContextProvider>
@@ -219,7 +233,8 @@ export const InfoCardCollapsibleContent = forwardRef<
   ) => {
     const { cn } = useRenameCSS();
     const panelRef = useRef<HTMLDivElement | null>(null);
-    const { open, contentRef } = useInfoCardContext();
+    const { open, contentRef, hiddenUntilFound, toggleOpen } =
+      useInfoCardContext();
     /* Avoid animating first render */
     const shouldCancelInitialOpenTransitionRef = useRef(open);
     /* Avoids first render from animating */
@@ -271,6 +286,51 @@ export const InfoCardCollapsibleContent = forwardRef<
       },
     });
 
+    useClientLayoutEffect(() => {
+      const panel = panelRef.current;
+
+      if (!hiddenUntilFound || !panel) {
+        return;
+      }
+
+      if (!open) {
+        /**
+         * React only supports a boolean for the `hidden` attribute and forces
+         * legit string values to booleans so we have to force it back in the DOM
+         * when necessary: https://github.com/facebook/react/issues/24740
+         */
+        panel.setAttribute("hidden", "until-found");
+        panel.style.display = "block";
+        panel.style.contentVisibility = "visible";
+        return;
+      }
+      panel.removeAttribute("hidden");
+    }, [hiddenUntilFound, panelRef, open]);
+
+    useEffect(
+      function registerBeforeMatchListener() {
+        console.info("beforematch event fired before");
+        const panel = panelRef.current;
+        if (!panel) {
+          console.info("no panel");
+          return undefined;
+        }
+
+        function handleBeforeMatch() {
+          /* isBeforeMatchRef.current = true; */
+          console.info("beforematch event fired");
+          toggleOpen(true);
+        }
+
+        panel.addEventListener("beforematch", handleBeforeMatch);
+
+        return () => {
+          panel.removeEventListener("beforematch", handleBeforeMatch);
+        };
+      },
+      [toggleOpen],
+    );
+
     const style: React.CSSProperties = {
       "--__axc-info-card-height":
         height === undefined
@@ -279,15 +339,6 @@ export const InfoCardCollapsibleContent = forwardRef<
             ? "auto"
             : `${height}px`,
     };
-
-    console.info(
-      height === undefined
-        ? undefined
-        : height === "auto"
-          ? "auto"
-          : `${height}px`,
-      panelRef.current,
-    );
 
     return (
       <div
