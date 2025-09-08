@@ -2,9 +2,6 @@
 .aksel-radio {
   --__axc-radio-checkbox-marker-size: 1.5rem;
   --__axc-radio-checkbox-marker-target: 2.75rem; /* We want the click area to be a bit larger than the visible radio/checkbox */
-  --__axc-radio-checkbox-marker-padding: calc(
-    (var(--__axc-radio-checkbox-marker-target) - var(--__axc-radio-checkbox-marker-size)) / 2
-  );
 
   position: relative;
   width: fit-content;
@@ -51,6 +48,14 @@
   grid-column-start: 2;
 }
 
+/* Spacing between marker and text */
+.aksel-checkbox__label,
+.aksel-radio__label,
+.aksel-checkbox__description,
+.aksel-radio__description {
+  padding-left: var(--ax-space-8);
+}
+
 /* Checkbox has a wrapper around input and checkmark svg (consider creating the checkmark with css in the future) */
 .aksel-checkbox__input-wrapper {
   position: relative;
@@ -64,18 +69,12 @@
   appearance: none;
   cursor: pointer;
   outline: none;
-  box-sizing: content-box;
   width: var(--__axc-radio-checkbox-marker-size);
   height: var(--__axc-radio-checkbox-marker-size);
-  padding: var(--__axc-radio-checkbox-marker-padding);
-  margin: calc(-1 * var(--__axc-radio-checkbox-marker-padding));
-}
-
-/* Spacing between marker and label */
-.aksel-checkbox:not(.aksel-checkbox--hidelabel) .aksel-checkbox__input,
-.aksel-radio__input {
-  margin-right: 0;
-  padding-right: var(--ax-space-8);
+  background-color: var(--ax-bg-input);
+  border: 2px solid var(--ax-border-neutral);
+  border-radius: var(--ax-radius-4);
+  position: relative;
 }
 
 /* Visible marker */
@@ -83,15 +82,11 @@
 .aksel-radio__input::before {
   content: "";
   position: absolute;
-  border-radius: var(--ax-radius-4);
-  background-color: var(--ax-bg-input);
-  width: var(--__axc-radio-checkbox-marker-size);
-  height: var(--__axc-radio-checkbox-marker-size);
-  border: 2px solid var(--ax-border-neutral);
+  inset: calc(-1 * (var(--__axc-radio-checkbox-marker-target) - var(--__axc-radio-checkbox-marker-size)) / 2);
 }
 
 /* Radio marker should be round */
-.aksel-radio__input::before {
+.aksel-radio__input {
   border-radius: var(--ax-radius-full);
 }
 
@@ -113,13 +108,13 @@
 }
 
 /* Checkbox marker colors in checked/indeterminate state */
-.aksel-checkbox__input:where(:checked, :indeterminate)::before {
+.aksel-checkbox__input:where(:checked, :indeterminate) {
   background-color: var(--ax-bg-strong-pressed);
   border-color: var(--ax-bg-strong-pressed);
 }
 
 /* Checkbox marker colors in checked/indeterminate + hover state (unless disabled) */
-.aksel-checkbox__input:where(:checked, :indeterminate):not(:disabled):hover::before {
+.aksel-checkbox__input:where(:checked, :indeterminate):not(:disabled):hover {
   border-color: var(--ax-bg-strong-hover);
   background-color: var(--ax-bg-strong-hover);
 }
@@ -146,26 +141,26 @@
 }
 
 /* Radio marker colors in checked state */
-.aksel-radio__input:checked::before {
+.aksel-radio__input:checked {
   background-color: var(--ax-bg-input);
   border: 8px solid var(--ax-bg-strong-pressed);
 }
 
 /* Small Radio dot size in checked state */
-.aksel-radio--small > .aksel-radio__input:checked::before {
+.aksel-radio--small > .aksel-radio__input:checked {
   border-width: 7px;
 }
 
 /* Marker colors in unchecked hover state (unless disabled) */
-.aksel-checkbox__input:hover:not(:disabled, :checked, :indeterminate)::before,
-.aksel-radio__input:hover:not(:disabled, :checked)::before {
+.aksel-checkbox__input:hover:not(:disabled, :checked, :indeterminate),
+.aksel-radio__input:hover:not(:disabled, :checked) {
   border-color: var(--ax-border-strong);
   background-color: var(--ax-bg-moderate-hoverA);
 }
 
 /* Marker colors in unchecked error state (unless disabled) */
-.aksel-checkbox--error .aksel-checkbox__input:not(:disabled, :checked, :indeterminate)::before,
-.aksel-radio--error > .aksel-radio__input:not(:disabled, :checked)::before {
+.aksel-checkbox--error .aksel-checkbox__input:not(:disabled, :checked, :indeterminate),
+.aksel-radio--error > .aksel-radio__input:not(:disabled, :checked) {
   border-color: var(--ax-border-danger-strong);
 }
 
@@ -188,8 +183,8 @@
 }
 
 /* Marker colors in readonly state (`:not(:disabled)` is just to get same specificity as (hence override) hover colors) */
-.aksel-checkbox--readonly .aksel-checkbox__input:not(:disabled)::before,
-.aksel-radio--readonly > .aksel-radio__input:not(:disabled)::before {
+.aksel-checkbox--readonly .aksel-checkbox__input:not(:disabled),
+.aksel-radio--readonly > .aksel-radio__input:not(:disabled) {
   background-color: var(--ax-bg-neutral-moderate);
   border-color: var(--ax-border-neutral-subtle);
 }
@@ -212,7 +207,7 @@
 }
 
 /* Radio marker colors in readonly + checked state */
-.aksel-radio--readonly > .aksel-radio__input:checked::before {
+.aksel-radio--readonly > .aksel-radio__input:checked {
   background-color: var(--ax-bg-neutral-strong);
   border-width: 0;
   box-shadow:
@@ -221,7 +216,7 @@
 }
 
 /* Small Radio dot size in readonly + checked state */
-.aksel-radio--small.aksel-radio--readonly > .aksel-radio__input:checked::before {
+.aksel-radio--small.aksel-radio--readonly > .aksel-radio__input:checked {
   box-shadow:
     inset 0 0 0 2px var(--ax-border-neutral-subtle),
     inset 0 0 0 7px var(--ax-bg-neutral-moderate);
@@ -241,8 +236,8 @@
   }
 
   /* Marker border color on hover (unless readonly/disabled) */
-  .aksel-checkbox:not(.aksel-checkbox--readonly) .aksel-checkbox__input:hover:not(:disabled)::before,
-  .aksel-radio:not(.aksel-radio--readonly) > .aksel-radio__input:hover:not(:disabled)::before {
+  .aksel-checkbox:not(.aksel-checkbox--readonly) .aksel-checkbox__input:hover:not(:disabled),
+  .aksel-radio:not(.aksel-radio--readonly) > .aksel-radio__input:hover:not(:disabled) {
     border-color: highlight;
   }
 
@@ -252,12 +247,12 @@
   }
 
   /* Radio dot size in readonly + checked state */
-  .aksel-radio--readonly > .aksel-radio__input:checked::before {
+  .aksel-radio--readonly > .aksel-radio__input:checked {
     border-width: 8px;
   }
 
   /* Small Radio dot size in readonly + checked state */
-  .aksel-radio--small.aksel-radio--readonly > .aksel-radio__input:checked::before {
+  .aksel-radio--small.aksel-radio--readonly > .aksel-radio__input:checked {
     border-width: 7px;
   }
 
@@ -268,8 +263,8 @@
   }
 
   /* Marker colors in disabled state */
-  .aksel-checkbox--disabled .aksel-checkbox__input::before,
-  .aksel-radio--disabled .aksel-radio__input::before {
+  .aksel-checkbox--disabled .aksel-checkbox__input,
+  .aksel-radio--disabled .aksel-radio__input {
     border-color: graytext;
     background-color: field;
   }
