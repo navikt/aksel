@@ -8,11 +8,9 @@ import {
   XMarkIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { HStack, Spacer, VStack } from "../layout/stack";
+import { Spacer, VStack } from "../layout/stack";
 import InfoCard, {
-  InfoCardCollapsibleContent,
   InfoCardContent,
-  InfoCardExpandButton,
   InfoCardHeader,
   InfoCardTitle,
 } from "./InfoCard";
@@ -164,60 +162,6 @@ export const WrappingTitle: Story = {
         </InfoCardHeader>
         <DemoContent />
       </InfoCard>
-    );
-  },
-};
-
-function CollapsibleContentDemo() {
-  return (
-    <InfoCardCollapsibleContent>
-      <button>Interactive content</button>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
-      tempore corrupti asperiores praesentium? Asperiores, doloribus? Molestias,
-      laudantium saepe. Nihil in alias praesentium maxime iure ipsam?
-      Accusantium libero quia quis!
-      <button>Interactive content</button>
-    </InfoCardCollapsibleContent>
-  );
-}
-
-export const CollapsibleContent: Story = {
-  render: () => {
-    const [open, setOpen] = React.useState(false);
-    const [openDefault, setOpenDefault] = React.useState(true);
-
-    return (
-      <HStack gap="space-24" justify="center">
-        <InfoCard style={{ maxWidth: "30rem" }}>
-          <InfoCardHeader>
-            <InfoCardTitle>InfoCard UnControlled</InfoCardTitle>
-          </InfoCardHeader>
-          <CollapsibleContentDemo />
-          <InfoCardExpandButton />
-        </InfoCard>
-        <InfoCard
-          style={{ maxWidth: "30rem" }}
-          open={open}
-          onOpenChange={setOpen}
-        >
-          <InfoCardHeader>
-            <InfoCardTitle>InfoCard Controlled</InfoCardTitle>
-          </InfoCardHeader>
-          <CollapsibleContentDemo />
-          <InfoCardExpandButton />
-        </InfoCard>
-        <InfoCard
-          style={{ maxWidth: "30rem" }}
-          open={openDefault}
-          onOpenChange={setOpenDefault}
-        >
-          <InfoCardHeader>
-            <InfoCardTitle>InfoCard Controlled default-open</InfoCardTitle>
-          </InfoCardHeader>
-          <CollapsibleContentDemo />
-          <InfoCardExpandButton />
-        </InfoCard>
-      </HStack>
     );
   },
 };
