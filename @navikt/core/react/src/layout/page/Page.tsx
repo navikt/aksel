@@ -56,7 +56,11 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       const themeContext = useThemeInternal(false);
       const { cn } = useRenameCSS();
 
-      if (process.env.NODE_ENV !== "production" && themeContext && background) {
+      if (
+        process.env.NODE_ENV !== "production" &&
+        themeContext?.isDarkside &&
+        background
+      ) {
         console.warn(
           `Prop \`background\` is deprecated and cannot be used with theme-support. Instead wrap component with \`<Box asChild background>\``,
         );

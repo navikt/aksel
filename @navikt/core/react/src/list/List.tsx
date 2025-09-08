@@ -63,7 +63,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
 
     const listSize = size ?? contextSize;
 
-    if (themeContext) {
+    if (themeContext?.isDarkside) {
       if (
         process.env.NODE_ENV !== "production" &&
         (title || description || headingTag)

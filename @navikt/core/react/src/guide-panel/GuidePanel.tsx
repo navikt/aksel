@@ -64,14 +64,14 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
       >
         <div className={cn("navds-guide")}>
           {illustration ??
-            (themeContext ? (
+            (themeContext?.isDarkside ? (
               <DarksideGudiepanelIllustration />
             ) : (
               <DefaultIllustration />
             ))}
         </div>
         <div className={cn("navds-guide-panel__content")}>
-          {themeContext && (
+          {themeContext?.isDarkside && (
             <svg
               viewBox="0 0 33 22"
               width="33"
@@ -96,7 +96,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
               />
             </svg>
           )}
-          {themeContext ? (
+          {themeContext?.isDarkside ? (
             <div className={cn("navds-guide-panel__content-inner")}>
               {children}
             </div>

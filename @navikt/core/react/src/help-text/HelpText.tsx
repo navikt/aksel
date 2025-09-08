@@ -81,8 +81,8 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           anchorEl={buttonRef.current}
           placement={placement}
           strategy={strategy}
-          offset={themeContext ? 8 : 12}
-          arrow={!themeContext}
+          offset={themeContext?.isDarkside ? 8 : 12}
+          arrow={!themeContext?.isDarkside}
         >
           <Popover.Content className={cn("navds-body-short")}>
             {children}

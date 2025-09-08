@@ -122,14 +122,16 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     const activeString = activeText || translate("activeText");
 
     const copyIcon = (
-      <LegacyIconWrapper useLegacy={!themeContext}>
+      <LegacyIconWrapper useLegacy={!themeContext?.isDarkside}>
         {active
           ? activeIcon ?? (
               <CheckmarkIcon
                 aria-hidden={!!text}
                 title={text ? undefined : activeString}
                 className={
-                  themeContext ? cn("navds-copybutton__icon") : undefined
+                  themeContext?.isDarkside
+                    ? cn("navds-copybutton__icon")
+                    : undefined
                 }
               />
             )
@@ -138,14 +140,16 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
                 aria-hidden={!!text}
                 title={text ? undefined : title || translate("title")}
                 className={
-                  themeContext ? cn("navds-copybutton__icon") : undefined
+                  themeContext?.isDarkside
+                    ? cn("navds-copybutton__icon")
+                    : undefined
                 }
               />
             )}
       </LegacyIconWrapper>
     );
 
-    if (themeContext) {
+    if (themeContext?.isDarkside) {
       return (
         <Button
           ref={ref}

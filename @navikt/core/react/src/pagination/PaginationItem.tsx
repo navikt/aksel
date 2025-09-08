@@ -46,7 +46,7 @@ export const Item: PaginationItemType = forwardRef(
     return (
       <Button
         as={Component}
-        variant={themeContext ? "tertiary-neutral" : "tertiary"}
+        variant={themeContext?.isDarkside ? "tertiary-neutral" : "tertiary"}
         data-color={color}
         aria-current={selected}
         data-pressed={selected}

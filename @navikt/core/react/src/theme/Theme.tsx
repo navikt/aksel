@@ -45,6 +45,8 @@ const RenameCSS = ({ children }: { children: React.ReactNode }) => {
 /* -------------------------------------------------------------------------- */
 /*                               Theme provider                               */
 /* -------------------------------------------------------------------------- */
+const DEFAULT_COLOR: AkselColor = "accent";
+
 type ThemeContext = {
   /**
    * Color theme
@@ -52,12 +54,21 @@ type ThemeContext = {
    */
   theme?: "light" | "dark";
   color?: AkselColor;
+  /**
+   * Indicates if Theme-component is used or not.
+   * @default false
+   */
+  isDarkside: boolean;
 };
 
 const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
   hookName: "useTheme",
   name: "ThemeProvider",
   providerName: "ThemeProvider",
+  defaultValue: {
+    color: DEFAULT_COLOR,
+    isDarkside: false,
+  },
 });
 
 export type ThemeProps = {
@@ -70,7 +81,7 @@ export type ThemeProps = {
    * Sets default 'base'-color for application
    */
   "data-color"?: AkselColor;
-} & Omit<ThemeContext, "color"> &
+} & Omit<ThemeContext, "color" | "isDarkside"> &
   AsChildProps;
 
 const Theme = forwardRef<HTMLDivElement, ThemeProps>(
@@ -86,7 +97,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
       "data-color": color = context?.color,
     } = props;
 
-    const isRoot = context === undefined;
+    const isRoot = !context?.isDarkside;
 
     const hasBackground =
       hasBackgroundProp ?? (isRoot && props.theme !== undefined);
@@ -94,7 +105,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
     const SlotElement = asChild ? Slot : "div";
 
     return (
-      <ThemeProvider theme={theme} color={color}>
+      <ThemeProvider theme={theme} color={color} isDarkside={true}>
         <RenameCSS>
           <SlotElement
             ref={ref}

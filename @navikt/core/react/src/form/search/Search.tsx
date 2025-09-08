@@ -271,7 +271,7 @@ function ClearButton({
   const themeContext = useThemeInternal(false);
   const translate = useI18n("Search");
 
-  return themeContext ? (
+  return themeContext?.isDarkside ? (
     <Button
       className={cn("navds-search__button-clear")}
       variant="tertiary"

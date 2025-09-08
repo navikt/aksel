@@ -2,7 +2,9 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { PlantIcon } from "@navikt/aksel-icons";
 import { ExpansionCard, ExpansionCardProps } from ".";
+import { Checkbox } from "../form/checkbox";
 import { VStack } from "../layout/stack";
+import { Link } from "../link";
 import { BodyLong } from "../typography";
 
 const meta: Meta<typeof ExpansionCard> = {
@@ -38,6 +40,8 @@ const Content = () => (
       På ditt faste arbeidssted vil du ha yrkesskadedekning også i hvilepauser,
       lunsjpauser, trimaktiviteter og lignende i arbeidstiden.
     </BodyLong>
+    <Link href="#">LENKE</Link>
+    <Checkbox>Label</Checkbox>
     <BodyLong spacing>
       Som hovedregel er du som arbeidstaker ikke yrkesskadedekket på veien til
       og fra arbeid eller første og siste oppdragssted. Du er heller ikke

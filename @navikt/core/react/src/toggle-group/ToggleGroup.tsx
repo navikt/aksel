@@ -84,7 +84,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
 
     let localVariant: ToggleGroupProps["variant"] | undefined;
 
-    if (themeContext) {
+    if (themeContext?.isDarkside) {
       localVariant = variant;
     } else {
       localVariant = variant ?? "action";

@@ -84,7 +84,7 @@ export const InternalHeader = forwardRef(({ className, ...rest }, ref) => {
   /*
    * Component is always in "dark" mode, so we manually override global theme.
    */
-  if (themeContext) {
+  if (themeContext?.isDarkside) {
     return (
       <Theme theme="dark" asChild hasBackground={false}>
         <header
