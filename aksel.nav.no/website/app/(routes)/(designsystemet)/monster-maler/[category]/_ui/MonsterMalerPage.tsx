@@ -47,7 +47,7 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
         }}
         toc={
           metadata?.changelog
-            ? [...toc, { id: "changelog", title: "Endringer" }]
+            ? [...toc, { id: "changelog", title: "Endringslogg" }]
             : toc
         }
       />
@@ -65,7 +65,7 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
             size="large"
             data-level="2"
           >
-            Endringer
+            Endringslogg
           </Heading>
           <WebsiteTable
             th={[{ text: "Dato" }, { text: "Versjon" }, { text: "Endringer" }]}
