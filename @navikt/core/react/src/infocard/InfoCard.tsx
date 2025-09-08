@@ -15,6 +15,7 @@ const [InfoCardContextProvider, useInfoCardContext] =
     errorMessage: "useInfoCardContext must be used within an InfoCard",
   });
 
+/* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/alert_role */
 interface InfoCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
