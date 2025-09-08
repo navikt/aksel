@@ -66,11 +66,6 @@ export const Highlight = ({
     return article.status?.tag;
   };
 
-  // Use type guards to properly access contributors
-  const authors = isArticle(article)
-    ? article.contributors?.map((author) => author.title).filter(Boolean) ?? []
-    : [];
-
   return (
     <HGrid
       as="section"
