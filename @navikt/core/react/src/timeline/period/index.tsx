@@ -33,9 +33,7 @@ export interface TimelinePeriodProps
    * Callback when selecting a period.
    */
   onSelectPeriod?: (
-    event:
-      | React.MouseEvent<HTMLButtonElement>
-      | React.KeyboardEvent<HTMLButtonElement>,
+    event: React.MouseEvent<Element> | React.KeyboardEvent<Element>,
   ) => void;
   /**
    * Content displayed in Popover on click.
