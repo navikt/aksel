@@ -6,7 +6,6 @@ const Example = () => {
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
-        <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
       <FormSummary.Answers>
@@ -52,7 +51,7 @@ const Example = () => {
         <FormSummary.Answer>
           <FormSummary.Label>Kontaktinformasjon</FormSummary.Label>
           <FormSummary.Value>
-            <Link>Fyll ut kontaktinformasjon</Link>
+            <Link href="/eksempel">Fyll ut kontaktinformasjon</Link>
           </FormSummary.Value>
         </FormSummary.Answer>
 
@@ -62,6 +61,10 @@ const Example = () => {
           <FormSummary.Value>SMS</FormSummary.Value>
         </FormSummary.Answer>
       </FormSummary.Answers>
+
+      <FormSummary.Footer>
+        <FormSummary.EditLink href="/eksempel" />
+      </FormSummary.Footer>
     </FormSummary>
   );
 };
