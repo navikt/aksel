@@ -41,6 +41,9 @@ export interface TableType
   extends React.ForwardRefExoticComponent<
     TableProps & React.RefAttributes<HTMLTableElement>
   > {
+  Root: React.ForwardRefExoticComponent<
+    TableProps & React.RefAttributes<HTMLTableElement>
+  >;
   Header: typeof Header;
   Body: typeof Body;
   Row: typeof Row;
@@ -111,6 +114,7 @@ export const Table = forwardRef(
   },
 ) as TableType;
 
+Table.Root = Table;
 Table.Header = Header;
 Table.Body = Body;
 Table.Row = Row;

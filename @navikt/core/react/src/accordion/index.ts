@@ -12,3 +12,6 @@ export {
   default as AccordionItem,
   type AccordionItemProps,
 } from "./AccordionItem";
+
+// Individual named exports for tree-shaking (new multipart namespace pattern)
+export { default as AccordionRoot, type AccordionProps as AccordionRootProps } from "./Accordion";
