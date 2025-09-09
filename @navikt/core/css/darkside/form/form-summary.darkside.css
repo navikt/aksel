@@ -87,3 +87,9 @@
   background: var(--ax-bg-raised);
   border-top: 1px solid var(--ax-border-neutral-subtleA);
 }
+
+@media (max-width: 479px) {
+  .aksel-form-summary__footer {
+    padding: var(--ax-space-12) var(--ax-space-16);
+  }
+}

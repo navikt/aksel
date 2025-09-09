@@ -1,6 +1,5 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
-import { LinkIcon } from "@navikt/aksel-icons";
 import { VStack } from "../../layout/stack";
 import { Link } from "../../link";
 import FormSummary from "./FormSummary";
@@ -152,7 +151,6 @@ export const LongTexts: StoryFn<typeof FormSummary> = () => (
     </FormSummary.Answers>
     <FormSummary.Footer>
       <FormSummary.EditLink href="#">
-        <LinkIcon />
         Jeg vil endre dette svaret
       </FormSummary.EditLink>
     </FormSummary.Footer>
