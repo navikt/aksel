@@ -97,12 +97,13 @@
   border-radius: 1px;
   position: absolute;
   transform: translate(var(--ax-space-6), -50%);
-  top: 50%;
+  top: var(--ax-space-24);
   pointer-events: none;
 }
 
 .aksel-checkbox--small .aksel-checkbox__input:indeterminate + .aksel-checkbox__label > .aksel-checkbox__icon-indeterminate {
   transform: translate(var(--ax-space-4), -50%);
+  top: var(--ax-space-16);
   height: 0.1875rem;
 }
 
@@ -136,10 +137,12 @@
   transform: translate(0.25rem, -10%);
 }
 
-/* Tailwind sets all svg to block */
 .aksel-checkbox__icon > svg {
-  display: inline;
-  vertical-align: initial;
+  display: block;
+
+  /* Safari does not support inline rem-values in SVG */
+  width: 0.8125rem;
+  height: 0.625rem;
 }
 
 .aksel-checkbox--small > .aksel-checkbox__input:checked + .aksel-checkbox__label::before {
@@ -215,6 +218,12 @@
   box-shadow:
     inset 0 0 0 2px var(--ax-border-neutral-subtle),
     inset 0 0 0 8px var(--ax-bg-neutral-moderate);
+}
+
+.aksel-radio--small.aksel-radio--readonly > .aksel-radio__input:checked + .aksel-radio__label::before {
+  box-shadow:
+    inset 0 0 0 2px var(--ax-border-neutral-subtle),
+    inset 0 0 0 7px var(--ax-bg-neutral-moderate);
 }
 
 .aksel-checkbox--readonly > .aksel-checkbox__input:indeterminate + .aksel-checkbox__label > .aksel-checkbox__icon-indeterminate {

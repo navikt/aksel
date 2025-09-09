@@ -141,6 +141,18 @@
   padding: 0;
 }
 
+.navds-table :not(.navds-checkboxes) > .navds-checkbox .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
+  top: var(--a-spacing-3);
+}
+
+.navds-table
+  :not(.navds-checkboxes)
+  > .navds-checkbox--small
+  .navds-checkbox__input:indeterminate
+  + .navds-checkbox__label::after {
+  top: 0.6rem;
+}
+
 .navds-table__header-cell[aria-sort] {
   padding: 0;
 }

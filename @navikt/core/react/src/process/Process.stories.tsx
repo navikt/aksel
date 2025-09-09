@@ -23,7 +23,7 @@ export default meta;
 type Story = StoryObj<typeof Process>;
 
 const getDateAfter = (days: number) => {
-  const date = new Date();
+  const date = new Date("August 25, 2025");
   return format(new Date(date.setDate(date.getDate() + days)), "d. MMMM yyy");
 };
 
@@ -241,7 +241,7 @@ export const InteractiveDemo: Story = {
         <Process.Event
           bullet={isDone(1) ? <CheckmarkHeavyIcon /> : <SparklesFillIcon />}
           title="Step two"
-          timestamp={getDateAfter(2)}
+          timestamp={getDateAfter(4)}
           status={getEventState(1)}
         >
           {activeStep === 1 && (
@@ -299,7 +299,7 @@ export const InteractiveDemo: Story = {
         <Process.Event
           bullet={isDone(3) ? <CheckmarkHeavyIcon /> : <SparklesFillIcon />}
           title="Step four"
-          timestamp={getDateAfter(1)}
+          timestamp={getDateAfter(5)}
           status={getEventState(3)}
         >
           {activeStep === 3 && (

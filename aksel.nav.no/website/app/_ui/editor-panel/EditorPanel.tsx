@@ -98,6 +98,7 @@ function EditorPanel(props: EditorPanelProps) {
       data-block-margin="space-28"
       className={styles.editorPanel}
       data-color={config.color}
+      data-text-prose
     >
       <EditorPanelHeader
         variant={variant}
@@ -105,9 +106,7 @@ function EditorPanel(props: EditorPanelProps) {
         headingTag={headingTag}
         actionComponent={actionComponent}
       />
-      <div data-text-prose className={styles.editorPanelContent}>
-        {children}
-      </div>
+      <div className={styles.editorPanelContent}>{children}</div>
     </div>
   );
 }

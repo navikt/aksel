@@ -52,14 +52,11 @@ const LanguageDecorator = ({ children, language }) => {
   return children;
 };
 
+const fonts = ["Source Sans 3", "Roboto Flex", "Noto Sans", "Open Sans"];
+
 const TypoDecorator = ({ children, font }) => {
   useEffect(() => {
-    let fontVariable: string | null = null;
-
-    if (font === "robotoflex") {
-      fontVariable = `"Roboto Flex", sans-serif`;
-    }
-
+    const fontVariable = fonts.includes(font) ? `"${font}", sans-serif` : null;
     document.body.style.setProperty("--ax-font-family", fontVariable);
     document.body.style.setProperty("--a-font-family", fontVariable);
   }, [font]);
@@ -117,10 +114,7 @@ export default {
     font: {
       toolbar: {
         icon: "edit",
-        items: [
-          { value: "sourcesans", title: "Source sans 3" },
-          { value: "robotoflex", title: "Roboto flex" },
-        ],
+        items: fonts.map((font) => ({ value: font, title: font })),
         dynamicTitle: true,
       },
     },
@@ -128,7 +122,7 @@ export default {
 
   initialGlobals: {
     mode: "default",
-    font: "sourcesans",
+    font: "Source Sans 3",
   },
 
   decorators: [

@@ -1,5 +1,7 @@
 # @navikt/aksel-icons
 
+## 7.29.1
+
 ## 7.29.0
 
 ### Minor Changes

@@ -244,5 +244,4 @@ export const args = {
   index: 0,
   title: "Standard",
   desc: "Introsiden skal informere brukeren om hva de kan søke på, hvordan de søker og hva som skjer etter at de har sendt inn søknaden.",
-  sandbox: false,
 };

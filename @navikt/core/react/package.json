@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "7.29.0",
+  "version": "7.29.1",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -650,8 +650,8 @@
   "dependencies": {
     "@floating-ui/react": "0.27.8",
     "@floating-ui/react-dom": "^2.0.9",
-    "@navikt/aksel-icons": "^7.29.0",
-    "@navikt/ds-tokens": "^7.29.0",
+    "@navikt/aksel-icons": "^7.29.1",
+    "@navikt/ds-tokens": "^7.29.1",
     "clsx": "^2.1.0",
     "date-fns": "^4.0.0",
     "react-day-picker": "9.7.0"
