@@ -166,6 +166,28 @@ export const WrappingTitle: Story = {
   },
 };
 
+export const AriaTest: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <div>
+        <Button onClick={() => setOpen((x) => !x)}>Toggle</Button>
+        {open && (
+          <InfoCard>
+            <InfoCardHeader>
+              <InfoCardTitle role="alert">ALERT TITLE</InfoCardTitle>
+            </InfoCardHeader>
+            <DemoContent />
+          </InfoCard>
+        )}
+      </div>
+    );
+  },
+  parameters: {
+    layout: "padded",
+  },
+};
+
 /* export const Chromatic: Story = {
   render: () => (
     <div>
