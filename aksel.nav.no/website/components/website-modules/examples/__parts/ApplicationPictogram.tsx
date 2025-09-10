@@ -7,7 +7,6 @@ const ApplicationPictogram = (props: React.SVGProps<SVGSVGElement>) => (
     height="96"
     viewBox="0 0 72 72"
     fill="none"
-    style={{ flexShrink: 0 }}
     aria-hidden
     {...props}
   >
