@@ -3,6 +3,7 @@ import React from "react";
 import {
   ChevronDownIcon,
   ExclamationmarkTriangleFillIcon,
+  InformationSquareIcon,
   LinkIcon,
   ThumbDownFillIcon,
   ThumbUpFillIcon,
@@ -10,9 +11,11 @@ import {
 import { Button } from "../button";
 import { Spacer, VStack } from "../layout/stack";
 import { Link } from "../link";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import InfoCard, {
   InfoCardContent,
   InfoCardHeader,
+  InfoCardIcon,
   InfoCardTitle,
 } from "./InfoCard";
 
@@ -33,6 +36,9 @@ export const Default: Story = {
     return (
       <InfoCard data-color={props["data-color"]} size={props.size}>
         <InfoCardHeader>
+          <InfoCardIcon>
+            <InformationSquareIcon />
+          </InfoCardIcon>
           <InfoCardTitle>{props.title}</InfoCardTitle>
         </InfoCardHeader>
         <InfoCardContent>{props.children}</InfoCardContent>
@@ -70,6 +76,9 @@ export const SizeSmall: Story = {
     return (
       <InfoCard size="small">
         <InfoCardHeader>
+          <InfoCardIcon>
+            <InformationSquareIcon />
+          </InfoCardIcon>
           <InfoCardTitle>InfoCard Title</InfoCardTitle>
         </InfoCardHeader>
         <DemoContent />
@@ -83,6 +92,9 @@ export const OnlyHeader: Story = {
     return (
       <InfoCard>
         <InfoCardHeader>
+          <InfoCardIcon>
+            <InformationSquareIcon />
+          </InfoCardIcon>
           <InfoCardTitle>InfoCard Title</InfoCardTitle>
         </InfoCardHeader>
       </InfoCard>
@@ -96,30 +108,45 @@ export const Compositions: Story = {
       <VStack gap="space-16">
         <InfoCard data-color="info">
           <InfoCardHeader>
+            <InfoCardIcon>
+              <InformationSquareIcon />
+            </InfoCardIcon>
             <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
           </InfoCardHeader>
           <DemoContent />
         </InfoCard>
         <InfoCard data-color="success">
-          <InfoCardHeader icon={<ThumbUpFillIcon />}>
+          <InfoCardHeader>
+            <InfoCardIcon>
+              <ThumbUpFillIcon />
+            </InfoCardIcon>
             <InfoCardTitle>Gjør dette: InfoCard title</InfoCardTitle>
           </InfoCardHeader>
           <DemoContent />
         </InfoCard>
         <InfoCard data-color="brand-magenta">
-          <InfoCardHeader icon={<ThumbDownFillIcon />}>
+          <InfoCardHeader>
+            <InfoCardIcon>
+              <ThumbDownFillIcon />
+            </InfoCardIcon>
             <InfoCardTitle>Unngå dette: InfoCard title</InfoCardTitle>
           </InfoCardHeader>
           <DemoContent />
         </InfoCard>
         <InfoCard data-color="warning">
-          <InfoCardHeader icon={<ExclamationmarkTriangleFillIcon />}>
+          <InfoCardHeader>
+            <InfoCardIcon>
+              <ExclamationmarkTriangleFillIcon />
+            </InfoCardIcon>
             <InfoCardTitle>Pass på: InfoCard title</InfoCardTitle>
           </InfoCardHeader>
           <DemoContent />
         </InfoCard>
         <InfoCard data-color="neutral">
-          <InfoCardHeader icon={<LinkIcon />}>
+          <InfoCardHeader>
+            <InfoCardIcon>
+              <LinkIcon />
+            </InfoCardIcon>
             <InfoCardTitle>Lenker: InfoCard title</InfoCardTitle>
           </InfoCardHeader>
           <DemoContent />
@@ -136,6 +163,9 @@ export const CustomHeaders: Story = {
       <VStack gap="space-24">
         <InfoCard>
           <InfoCardHeader>
+            <InfoCardIcon>
+              <InformationSquareIcon />
+            </InfoCardIcon>
             <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
             <Spacer />
             <Button
@@ -151,6 +181,9 @@ export const CustomHeaders: Story = {
         </InfoCard>
         <InfoCard>
           <InfoCardHeader>
+            <InfoCardIcon>
+              <InformationSquareIcon />
+            </InfoCardIcon>
             <Link href="#">
               <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
             </Link>
@@ -170,6 +203,9 @@ export const WrappingTitle: Story = {
     return (
       <InfoCard>
         <InfoCardHeader>
+          <InfoCardIcon>
+            <InformationSquareIcon />
+          </InfoCardIcon>
           <InfoCardTitle>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
             tempore corrupti asperiores praesentium? Asperiores, doloribus?
@@ -183,17 +219,14 @@ export const WrappingTitle: Story = {
   },
 };
 
-/* export const Chromatic: Story = {
-  render: () => (
-    <div>
-      <h2>Default</h2>
-      <Default />
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-}; */
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  SizeSmall,
+  OnlyHeader,
+  Compositions,
+  CustomHeaders,
+  WrappingTitle,
+});
 
 function DemoContent() {
   return (
