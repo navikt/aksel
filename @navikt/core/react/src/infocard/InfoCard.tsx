@@ -149,6 +149,8 @@ export const InfoCardContent = forwardRef<HTMLDivElement, InfoCardContentProps>(
     return (
       <div
         ref={forwardedRef}
+        /* TODO: Replace with solution from https://github.com/navikt/aksel/pull/4075 */
+        data-color=""
         {...restProps}
         className={cn(className, "navds-info-card__content")}
       >

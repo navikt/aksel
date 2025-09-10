@@ -233,8 +233,9 @@ function DemoContent() {
     <InfoCardContent>
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure unde,
       repudiandae, deleniti exercitationem quod aut veniam sint officiis
-      necessitatibus nulla nostrum voluptatem facilis! Commodi, nobis tempora
-      quibusdam temporibus nulla quam
+      necessitatibus nulla nostrum voluptatem <Link href="#">Test</Link>
+      facilis! Commodi, nobis tempora quibusdam temporibus nulla quam.{" "}
+      <Button size="small">test</Button>
     </InfoCardContent>
   );
 }
