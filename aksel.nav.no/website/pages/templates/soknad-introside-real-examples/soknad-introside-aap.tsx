@@ -12,8 +12,6 @@ import {
   Link,
   List,
   Page,
-  Show,
-  Stack,
   VStack,
 } from "@navikt/ds-react";
 import ApplicationPictogram from "../../../components/website-modules/examples/__parts/ApplicationPictogram";
@@ -31,25 +29,22 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block width="text" gutters>
-        <VStack as="main" gap="8">
-          <Bleed
-            marginInline={{ lg: "24" }}
-            data-aksel-template="form-intropage-v2"
-          >
-            <Stack
-              gap="6"
-              direction={{ sm: "row-reverse", lg: "row" }}
-              justify={{ sm: "space-between", lg: "start" }}
-              wrap={false}
-            >
-              <Show above="sm">
+        <VStack as="main" gap="8" data-aksel-template="form-intropage-v3">
+          <VStack gap="3">
+            <Bleed asChild marginInline={{ lg: "32" }}>
+              <Box
+                width={{ xs: "64px", lg: "96px" }}
+                height={{ xs: "64px", lg: "96px" }}
+                asChild
+                position={{ xs: "relative", lg: "absolute" }}
+              >
                 <ApplicationPictogram />
-              </Show>
-              <Heading level="1" size="xlarge">
-                Søknad om arbeidsavklaringspenger (AAP)
-              </Heading>
-            </Stack>
-          </Bleed>
+              </Box>
+            </Bleed>
+            <Heading level="1" size="xlarge">
+              Søknad om arbeidsavklaringspenger (AAP)
+            </Heading>
+          </VStack>
           <GuidePanel poster>
             <Heading level="2" size="medium" spacing>
               Hei, Luke Skywalker!
