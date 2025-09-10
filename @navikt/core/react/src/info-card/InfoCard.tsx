@@ -14,8 +14,10 @@ const [InfoCardContextProvider, useInfoCardContext] =
     errorMessage: "useInfoCardContext must be used within an InfoCard",
   });
 
-/* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/alert_role */
 interface InfoCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * InfoCard content.
+   */
   children: React.ReactNode;
   /**
    * Changes the size of the InfoCard.
@@ -28,7 +30,30 @@ interface InfoCardProps extends React.HTMLAttributes<HTMLDivElement> {
   "data-color"?: AkselColor;
 }
 
-export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
+interface InfoCardComponent
+  extends React.ForwardRefExoticComponent<
+    InfoCardProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Header: typeof InfoCardHeader;
+  Title: typeof InfoCardTitle;
+  Content: typeof InfoCardContent;
+}
+
+/**
+ * A component for displaying informational content in a card format.
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/infocard)
+ * @see 🏷️ {@link InfoCardProps}
+ * @example
+ * ```jsx
+ *  <InfoCard data-color="info">
+ *    <InfoCard.Header icon={<InformationSquareIcon />}>
+ *      <InfoCard.Title>Info tittel</InfoCard.Title>
+ *    </InfoCard.Header>
+ *    <InfoCard.Content>Innhold</InfoCard.Content>
+ *  </InfoCard>
+ * ```
+ */
+const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
   (
     {
       children,
@@ -54,7 +79,7 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
       </div>
     );
   },
-);
+) as InfoCardComponent;
 
 /* ----------------------------- InfoCardHeader ----------------------------- */
 interface InfoCardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -65,7 +90,18 @@ interface InfoCardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode;
 }
 
-export const InfoCardHeader = forwardRef<HTMLDivElement, InfoCardHeaderProps>(
+/**
+ * @see 🏷️ {@link InfoCardHeaderProps}
+ * @example
+ * ```jsx
+ *  <InfoCard>
+ *    <InfoCard.Header icon={<InformationSquareIcon />}>
+ *      <InfoCard.Title>Info tittel</InfoCard.Title>
+ *    </InfoCard.Header>
+ *  </InfoCard>
+ * ```
+ */
+const InfoCardHeader = forwardRef<HTMLDivElement, InfoCardHeaderProps>(
   (
     { children, className, icon, ...restProps }: InfoCardHeaderProps,
     forwardedRef,
@@ -99,7 +135,19 @@ interface InfoCardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
-export const InfoCardTitle = forwardRef<HTMLHeadingElement, InfoCardTitleProps>(
+/**
+ * Title component for InfoCard. Remember to use correct heading-level with the `as` prop.
+ * @see 🏷️ {@link InfoCardTitleProps}
+ * @example
+ * ```jsx
+ *  <InfoCard>
+ *    <InfoCard.Header >
+ *      <InfoCard.Title as="h2">Info tittel</InfoCard.Title>
+ *    </InfoCard.Header>
+ *  </InfoCard>
+ * ```
+ */
+const InfoCardTitle = forwardRef<HTMLHeadingElement, InfoCardTitleProps>(
   (
     { children, className, as = "h2", ...restProps }: InfoCardTitleProps,
     forwardedRef,
@@ -126,7 +174,20 @@ interface InfoCardContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const InfoCardContent = forwardRef<HTMLDivElement, InfoCardContentProps>(
+/**
+ * @see 🏷️ {@link InfoCardContentProps}
+ * @example
+ * ```jsx
+ *  <InfoCard>
+ *    <InfoCard.Header >
+ *      <InfoCard.Title>Info tittel</InfoCard.Title>
+ *    </InfoCard.Header>
+ *
+ *    <InfoCard.Content>Innhold</InfoCard.Content>
+ *  </InfoCard>
+ * ```
+ */
+const InfoCardContent = forwardRef<HTMLDivElement, InfoCardContentProps>(
   (
     { children, className, ...restProps }: InfoCardContentProps,
     forwardedRef,
@@ -147,4 +208,14 @@ export const InfoCardContent = forwardRef<HTMLDivElement, InfoCardContentProps>(
   },
 );
 
-export default InfoCard;
+InfoCard.Header = InfoCardHeader;
+InfoCard.Title = InfoCardTitle;
+InfoCard.Content = InfoCardContent;
+
+export { InfoCard, InfoCardHeader, InfoCardTitle, InfoCardContent };
+export type {
+  InfoCardProps,
+  InfoCardHeaderProps,
+  InfoCardTitleProps,
+  InfoCardContentProps,
+};

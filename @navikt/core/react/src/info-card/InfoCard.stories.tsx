@@ -12,7 +12,8 @@ import { Button } from "../button";
 import { Spacer, VStack } from "../layout/stack";
 import { Link } from "../link";
 import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
-import InfoCard, {
+import {
+  InfoCard,
   InfoCardContent,
   InfoCardHeader,
   InfoCardTitle,
