@@ -141,7 +141,7 @@ interface InfoCardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
  * @example
  * ```jsx
  *  <InfoCard>
- *    <InfoCard.Header >
+ *    <InfoCard.Header>
  *      <InfoCard.Title as="h2">Info tittel</InfoCard.Title>
  *    </InfoCard.Header>
  *  </InfoCard>
@@ -179,7 +179,7 @@ interface InfoCardContentProps extends React.HTMLAttributes<HTMLDivElement> {
  * @example
  * ```jsx
  *  <InfoCard>
- *    <InfoCard.Header >
+ *    <InfoCard.Header>
  *      <InfoCard.Title>Info tittel</InfoCard.Title>
  *    </InfoCard.Header>
  *
