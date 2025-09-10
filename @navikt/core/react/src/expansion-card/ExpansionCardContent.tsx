@@ -34,7 +34,9 @@ const ExpansionCardContent = forwardRef<
       size={panelContext.size}
       data-open={panelContext.open}
     >
-      <div className={cn("navds-expansioncard__content-inner")}>{children}</div>
+      <div className={cn("navds-expansioncard__content-inner")}>
+        {children} Random change to trigger Chromatic
+      </div>
     </BodyLong>
   );
 });
