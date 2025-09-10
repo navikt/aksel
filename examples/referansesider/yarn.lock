@@ -785,27 +785,27 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
-  version: 7.23.0
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=ffc353&locator=referansesider%40workspace%3A."
-  checksum: 10/e83ac68ce25484bf2d0c4de81a6ac330a5dadd17f4ed482beeeda556b74674f5df2bfe1701cae4c2040f722dc8687ad8cd1eaee75ebaf3fc962ae67e3917c073
+  version: 7.29.1
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=385629&locator=referansesider%40workspace%3A."
+  checksum: 10/76b3064e070fa4fabfc77fb71431b3195d2fbb7ad9418ee8af05040a78536ae5042631d4ad3027a6a58f35811ce9efe899286edbd73e38d05578c2d4f9f34c99
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
-  version: 7.23.0
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=6fb9f9&locator=referansesider%40workspace%3A."
-  checksum: 10/57cd688022f3d78d0a2d2d0e41cce9d1e3ec3b11c8eac5fdb18328b5abffe3a3fbbbfe060b3467aaae8e6b0ff7a0fa16371ea82e6e38a3f204adbadb04f70253
+  version: 7.29.1
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=0169fd&locator=referansesider%40workspace%3A."
+  checksum: 10/fd0e0bc2c08cc7042a587c748da1c1f4a7c499360b71c088694f24b134590f6bacb54f55ec717117d37fbe8d5763f7a01d721750aef7f7a3e611815a4e309f71
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:../../@navikt/core/react::locator=referansesider%40workspace%3A.":
-  version: 7.23.0
-  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=37b04b&locator=referansesider%40workspace%3A."
+  version: 7.29.1
+  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=88cc7c&locator=referansesider%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.23.0"
-    "@navikt/ds-tokens": "npm:^7.23.0"
+    "@navikt/aksel-icons": "npm:^7.29.1"
+    "@navikt/ds-tokens": "npm:^7.29.1"
     clsx: "npm:^2.1.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
@@ -815,14 +815,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/2b29e77c016e34b2fd8a95e761e75e381c2b43e50cd9c62b8ea6dcab6502cf9d7b5b979fa50e027c05eff43a01bc44288e3861c73762ee74fa2a5c8afd949dd6
+  checksum: 10/0c7a2a31a8e71577bf0bfc9f7ba10f95c5d7a4e0e4e6367510318ebd76c82f74cc455bec4619be38cec94c6da7b1c18ff8699d391d6249fb9063e7060b6efd03
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
-  version: 7.23.0
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=47bd43&locator=referansesider%40workspace%3A."
-  checksum: 10/1e3b28a22d52a6836ac2723c6bb2b25b2464acd42bf2575baccaec4375dd0bafbe25eeb6fd093d4ce0a5641499d86446bda68bec9348b87dd3500b9d0050d1d8
+  version: 7.29.1
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=ceb7bc&locator=referansesider%40workspace%3A."
+  checksum: 10/91bd0b3e3d37f76e1cd56419e207ef3cdacf597d82fe9df9bc5609d7eab32182a39dcb322d1255b92c95525af57dfc3271fb7d970f6b98bfa93a7abd50c68bcf
   languageName: node
   linkType: hard
 
@@ -3464,7 +3464,7 @@ __metadata:
     tailwindcss: "npm:^3.4.17"
     typescript: "npm:5.8.3"
     typescript-eslint: "npm:^8.34.0"
-    vite: "npm:^6.3.5"
+    vite: "npm:^6.3.6"
   languageName: unknown
   linkType: soft
 
@@ -4063,11 +4063,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>":
   version: 5.8.3
-  resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=74658d"
+  resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/98470634034ec37fd9ea61cc82dcf9a27950d0117a4646146b767d085a2ec14b137aae9642a83d1c62732d7fdcdac19bb6288b0bb468a72f7a06ae4e1d2c72c9
+  checksum: 10/b9b1e73dabac5dc730c041325dbd9c99467c1b0d239f1b74ec3b90d831384af3e2ba973946232df670519147eb51a2c20f6f96163cea2b359f03de1e2091cc4f
   languageName: node
   linkType: hard
 
@@ -4139,9 +4139,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.3.5":
-  version: 6.3.5
-  resolution: "vite@npm:6.3.5"
+"vite@npm:^6.3.6":
+  version: 6.3.6
+  resolution: "vite@npm:6.3.6"
   dependencies:
     esbuild: "npm:^0.25.0"
     fdir: "npm:^6.4.4"
@@ -4190,7 +4190,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/7bc3a1c5ef79413ad70daeeaf69b76cd1218d16aa18ed8ee08d74648ef17284f4a17c11f5cf42b573b6dc5e3d5f115110b67b1d23c2c699cfe404757764a634a
+  checksum: 10/8b8b6fe12318ca457396bf2053df7056cf4810f1d4a43b36b6afe59860e32b749c0685a290fe8a973b0d3da179ceec4c30cebbd3c91d0c47fbcf6436b17bdeef
   languageName: node
   linkType: hard
 
