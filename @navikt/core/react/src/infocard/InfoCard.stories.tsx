@@ -15,7 +15,6 @@ import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import InfoCard, {
   InfoCardContent,
   InfoCardHeader,
-  InfoCardIcon,
   InfoCardTitle,
 } from "./InfoCard";
 
@@ -35,10 +34,7 @@ export const Default: Story = {
   render: (props) => {
     return (
       <InfoCard data-color={props["data-color"]} size={props.size}>
-        <InfoCardHeader>
-          <InfoCardIcon>
-            <InformationSquareIcon />
-          </InfoCardIcon>
+        <InfoCardHeader icon={<InformationSquareIcon />}>
           <InfoCardTitle>{props.title}</InfoCardTitle>
         </InfoCardHeader>
         <InfoCardContent>{props.children}</InfoCardContent>
@@ -75,10 +71,7 @@ export const SizeSmall: Story = {
   render: () => {
     return (
       <InfoCard size="small">
-        <InfoCardHeader>
-          <InfoCardIcon>
-            <InformationSquareIcon />
-          </InfoCardIcon>
+        <InfoCardHeader icon={<InformationSquareIcon />}>
           <InfoCardTitle>InfoCard Title</InfoCardTitle>
         </InfoCardHeader>
         <DemoContent />
@@ -91,10 +84,7 @@ export const OnlyHeader: Story = {
   render: () => {
     return (
       <InfoCard>
-        <InfoCardHeader>
-          <InfoCardIcon>
-            <InformationSquareIcon />
-          </InfoCardIcon>
+        <InfoCardHeader icon={<InformationSquareIcon />}>
           <InfoCardTitle>InfoCard Title</InfoCardTitle>
         </InfoCardHeader>
       </InfoCard>
@@ -107,46 +97,31 @@ export const Compositions: Story = {
     return (
       <VStack gap="space-16">
         <InfoCard data-color="info">
-          <InfoCardHeader>
-            <InfoCardIcon>
-              <InformationSquareIcon />
-            </InfoCardIcon>
+          <InfoCardHeader icon={<InformationSquareIcon />}>
             <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
           </InfoCardHeader>
           <DemoContent />
         </InfoCard>
         <InfoCard data-color="success">
-          <InfoCardHeader>
-            <InfoCardIcon>
-              <ThumbUpFillIcon />
-            </InfoCardIcon>
+          <InfoCardHeader icon={<ThumbUpFillIcon />}>
             <InfoCardTitle>Gjør dette: InfoCard title</InfoCardTitle>
           </InfoCardHeader>
           <DemoContent />
         </InfoCard>
         <InfoCard data-color="brand-magenta">
-          <InfoCardHeader>
-            <InfoCardIcon>
-              <ThumbDownFillIcon />
-            </InfoCardIcon>
+          <InfoCardHeader icon={<ThumbDownFillIcon />}>
             <InfoCardTitle>Unngå dette: InfoCard title</InfoCardTitle>
           </InfoCardHeader>
           <DemoContent />
         </InfoCard>
         <InfoCard data-color="warning">
-          <InfoCardHeader>
-            <InfoCardIcon>
-              <ExclamationmarkTriangleFillIcon />
-            </InfoCardIcon>
+          <InfoCardHeader icon={<ExclamationmarkTriangleFillIcon />}>
             <InfoCardTitle>Pass på: InfoCard title</InfoCardTitle>
           </InfoCardHeader>
           <DemoContent />
         </InfoCard>
         <InfoCard data-color="neutral">
-          <InfoCardHeader>
-            <InfoCardIcon>
-              <LinkIcon />
-            </InfoCardIcon>
+          <InfoCardHeader icon={<LinkIcon />}>
             <InfoCardTitle>Lenker: InfoCard title</InfoCardTitle>
           </InfoCardHeader>
           <DemoContent />
@@ -162,10 +137,7 @@ export const CustomHeaders: Story = {
     return (
       <VStack gap="space-24">
         <InfoCard>
-          <InfoCardHeader>
-            <InfoCardIcon>
-              <InformationSquareIcon />
-            </InfoCardIcon>
+          <InfoCardHeader icon={<InformationSquareIcon />}>
             <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
             <Spacer />
             <Button
@@ -180,10 +152,7 @@ export const CustomHeaders: Story = {
           {open && <DemoContent />}
         </InfoCard>
         <InfoCard>
-          <InfoCardHeader>
-            <InfoCardIcon>
-              <InformationSquareIcon />
-            </InfoCardIcon>
+          <InfoCardHeader icon={<InformationSquareIcon />}>
             <Link href="#">
               <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
             </Link>
@@ -202,10 +171,7 @@ export const WrappingTitle: Story = {
   render: () => {
     return (
       <InfoCard>
-        <InfoCardHeader>
-          <InfoCardIcon>
-            <InformationSquareIcon />
-          </InfoCardIcon>
+        <InfoCardHeader icon={<InformationSquareIcon />}>
           <InfoCardTitle>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
             tempore corrupti asperiores praesentium? Asperiores, doloribus?

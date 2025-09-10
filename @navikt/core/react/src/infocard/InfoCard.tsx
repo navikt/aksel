@@ -59,11 +59,15 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
 /* ----------------------------- InfoCardHeader ----------------------------- */
 interface InfoCardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  /**
+   * Icon to display in the header.
+   */
+  icon?: React.ReactNode;
 }
 
 export const InfoCardHeader = forwardRef<HTMLDivElement, InfoCardHeaderProps>(
   (
-    { children, className, ...restProps }: InfoCardHeaderProps,
+    { children, className, icon, ...restProps }: InfoCardHeaderProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
@@ -74,6 +78,11 @@ export const InfoCardHeader = forwardRef<HTMLDivElement, InfoCardHeaderProps>(
         {...restProps}
         className={cn(className, "navds-info-card__header")}
       >
+        {icon && (
+          <div className={cn("navds-info-card__icon")} aria-hidden>
+            {icon}
+          </div>
+        )}
         {children}
       </div>
     );
@@ -108,28 +117,6 @@ export const InfoCardTitle = forwardRef<HTMLHeadingElement, InfoCardTitleProps>(
       >
         {children}
       </Heading>
-    );
-  },
-);
-
-/* ----------------------------- InfoCardIcon ----------------------------- */
-interface InfoCardIconProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-}
-
-export const InfoCardIcon = forwardRef<HTMLDivElement, InfoCardIconProps>(
-  ({ children, className, ...restProps }: InfoCardIconProps, forwardedRef) => {
-    const { cn } = useRenameCSS();
-
-    return (
-      <div
-        ref={forwardedRef}
-        {...restProps}
-        className={cn(className, "navds-info-card__icon")}
-        aria-hidden
-      >
-        {children}
-      </div>
     );
   },
 );
