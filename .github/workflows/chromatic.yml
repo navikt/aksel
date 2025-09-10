@@ -57,7 +57,7 @@ jobs:
         id: vars
         shell: bash
         run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Find Comment
         if: github.event_name != 'push' && !contains(github.event.head_commit.message, '[ci skip]')
