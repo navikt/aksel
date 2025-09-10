@@ -1,27 +1,32 @@
 .aksel-info-card {
   display: grid;
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   border: 1px solid var(--ax-border-default);
   overflow: clip;
   position: relative;
   height: fit-content;
 
-  --__axc-info-card-width: initial;
-  --__axc-info-card-height: 120px;
+  --__axc-info-card-header-p: var(--ax-space-8) var(--ax-space-20);
+  --__axc-info-card-content-p: var(--ax-space-12) var(--ax-space-20) var(--ax-space-16) var(--ax-space-20);
+  --__axc-info-card-icon-mt: var(--ax-space-4);
+  --__axc-info-card-title-pb: var(--ax-space-2);
+}
+
+.aksel-info-card--small {
+  --__axc-info-card-header-p: var(--ax-space-8) var(--ax-space-16);
+  --__axc-info-card-content-p: var(--ax-space-8) var(--ax-space-16) var(--ax-space-12) var(--ax-space-16);
+  --__axc-info-card-icon-mt: var(--ax-space-2);
+  --__axc-info-card-title-pb: var(--ax-space-0);
 }
 
 .aksel-info-card__header {
   display: flex;
   align-items: flex-start;
   gap: var(--ax-space-8);
-  padding: var(--ax-space-8) var(--ax-space-20);
   border-bottom: 1px solid var(--ax-border-subtleA);
   background: var(--ax-bg-moderate);
   color: var(--ax-text-subtle);
-
-  .aksel-info-card--small & {
-    padding: var(--ax-space-8) var(--ax-space-16);
-  }
+  padding: var(--__axc-info-card-header-p);
 
   &:only-child {
     border-bottom: none;
@@ -30,7 +35,7 @@
 
 .aksel-info-card__icon {
   font-size: 1.5rem;
-  margin-top: var(--ax-space-4);
+  margin-top: var(--__axc-info-card-icon-mt);
   display: grid;
 
   .aksel-info-card--small & {
@@ -39,18 +44,10 @@
 }
 
 .aksel-info-card__title {
-  padding-block: var(--ax-space-2);
+  padding-block: var(--__axc-info-card-title-pb);
 }
 
 .aksel-info-card__content {
-  --__axc-info-card-padding-block-end-base: var(--ax-space-16);
-  --__axc-info-card-padding-block-end-small: var(--ax-space-12);
-
-  padding-block: var(--ax-space-12) var(--__axc-info-card-padding-block-end-base);
-  padding-inline: var(--ax-space-20);
-
-  .aksel-info-card--small & {
-    padding-block: var(--ax-space-8) var(--__axc-info-card-padding-block-end-small);
-    padding-inline: var(--ax-space-16);
-  }
+  padding: var(--__axc-info-card-content-p);
+  background-color: var(--ax-bg-default);
 }
