@@ -13,7 +13,6 @@ import {
   Link,
   List,
   Page,
-  Stack,
   VStack,
 } from "@navikt/ds-react";
 import ApplicationPictogram from "../../../components/website-modules/examples/__parts/ApplicationPictogram";
@@ -32,12 +31,7 @@ function Example() {
       <Header />
       <Page.Block width="text" gutters>
         <VStack as="main" gap="8" data-aksel-template="form-intropage-v3">
-          <Stack
-            gap={{ xs: "3", lg: "6" }}
-            direction={{ xs: "column", lg: "row" }}
-            wrap={false}
-            position="relative"
-          >
+          <VStack gap="3">
             <Bleed asChild marginInline={{ lg: "32" }}>
               <Box
                 width={{ xs: "64px", lg: "96px" }}
@@ -54,7 +48,7 @@ function Example() {
                 Søknad om [ytelse]
               </Heading>
             </VStack>
-          </Stack>
+          </VStack>
 
           <GuidePanel poster>
             <Heading level="2" size="medium" spacing>

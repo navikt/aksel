@@ -10,7 +10,6 @@ import {
   Heading,
   Link,
   Page,
-  Stack,
   VStack,
 } from "@navikt/ds-react";
 import FormNavigation from "../../../components/website-modules/examples/__parts-inline/FormNavigation";
@@ -30,12 +29,7 @@ function Example() {
       <Header />
       <Page.Block as="main" width="text" gutters>
         <VStack gap="8">
-          <Stack
-            gap={{ xs: "3", lg: "6" }}
-            direction={{ xs: "column", lg: "row" }}
-            wrap={false}
-            position="relative"
-          >
+          <VStack gap="3">
             <Bleed asChild marginInline={{ lg: "32" }}>
               <Box
                 width={{ xs: "64px", lg: "96px" }}
@@ -49,7 +43,7 @@ function Example() {
             <Heading level="1" size="xlarge">
               Søknad om dagpenger
             </Heading>
-          </Stack>
+          </VStack>
 
           <div data-aksel-template="form-summarypage-v3">
             <Link href="#">
