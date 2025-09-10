@@ -85,7 +85,7 @@ const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
 interface InfoCardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * Icon to display in the header.
+   * Icon to display in `Header`.
    */
   icon?: React.ReactNode;
 }
