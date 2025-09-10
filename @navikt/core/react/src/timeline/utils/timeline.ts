@@ -1,82 +1,71 @@
 import React, { ReactNode } from "react";
+import type { TimelinePeriod, TimelineRow, TimelineRowProps } from "..";
 import { omit } from "../../util";
+import { getChildRef } from "../../util/getChildRef";
 import { Period } from "./types.external";
 
-type ParsedChild = {
-  label?: string;
+type TimelineRowPropsWithRef = React.ComponentProps<typeof TimelineRow>;
+type TimelinePeriodPropsWithRef = React.ComponentProps<typeof TimelinePeriod>;
+
+type ParsedRow = {
+  label: string;
   icon?: React.ReactNode;
-  headingTag: string;
+  headingTag?: string;
   periods: Omit<Period, "id" | "endInclusive">[];
-  restProps: any;
-  ref: any;
+  restProps: Omit<TimelineRowProps, "label" | "icon" | "headingTag">;
+  ref?: React.Ref<HTMLOListElement>;
 };
 
 export const parseRows = (rowChildren: ReactNode[]) => {
-  const parsedChildren: ParsedChild[] = [];
-  rowChildren?.forEach((r: React.ReactNode) => {
-    const periods: ParsedChild["periods"] = [];
-    if (React.isValidElement(r) && r?.props?.children) {
-      if (Array.isArray(r.props.children)) {
-        for (let i = 0; i < r.props.children.length; i++) {
-          const p = r.props.children[i];
+  const parsedChildren: ParsedRow[] = [];
 
-          periods.push({
-            start: p?.props?.start,
-            end: p?.props?.end,
-            status: p?.props?.status || "neutral",
-            onSelectPeriod: p.props?.onSelectPeriod,
-            label: r.props.label,
-            icon: p.props.icon,
-            children: p.props.children,
-            isActive: p.props.isActive,
-            statusLabel: p.props.statusLabel,
-            restProps: omit(p.props, [
-              "start",
-              "end",
-              "status",
-              "onSelectPeriod",
-              "label",
-              "icon",
-              "children",
-              "isActive",
-              "statusLabel",
-            ]),
-            ref: p?.ref,
-          });
-        }
-      } else {
-        periods.push({
-          start: r.props.children.props.start,
-          end: r.props.children.props.end,
-          status: r.props.children.props?.status || "neutral",
-          onSelectPeriod: r.props.children.props?.onSelectPeriod,
-          label: r.props.label,
-          icon: r.props.children.props?.icon,
-          children: r.props.children.props?.children,
-          statusLabel: r.props.children.props?.statusLabel,
-          restProps: omit(r.props.children.props, [
-            "start",
-            "end",
-            "status",
-            "onSelectPeriod",
-            "label",
-            "icon",
-            "children",
-            "isActive",
-            "statusLabel",
-          ]),
-          ref: r.props?.children?.ref,
-        });
-      }
-      parsedChildren.push({
-        label: r.props.label,
-        icon: r.props.icon,
-        headingTag: r.props.headingTag,
-        periods,
-        restProps: omit(r.props, ["label", "icon", "headingTag"]),
-        ref: (r as any)?.ref,
-      });
+  rowChildren?.forEach((row: React.ReactNode) => {
+    const periods: ParsedRow["periods"] = [];
+
+    if (
+      !React.isValidElement<TimelineRowPropsWithRef>(row) ||
+      !row.props.children
+    ) {
+      return;
     }
+
+    React.Children.toArray(row.props.children).forEach((period) => {
+      if (!React.isValidElement<TimelinePeriodPropsWithRef>(period)) {
+        return;
+      }
+
+      periods.push({
+        start: period.props.start,
+        end: period.props.end,
+        status: period.props.status || "neutral",
+        onSelectPeriod: period.props.onSelectPeriod,
+        icon: period.props.icon,
+        children: period.props.children,
+        isActive: period.props.isActive,
+        statusLabel: period.props.statusLabel,
+        restProps: omit(period.props, [
+          "start",
+          "end",
+          "status",
+          "onSelectPeriod",
+          "icon",
+          "children",
+          "isActive",
+          "statusLabel",
+          "placement",
+        ]),
+        ref: getChildRef(period),
+      });
+    });
+
+    parsedChildren.push({
+      label: row.props.label,
+      icon: row.props.icon,
+      headingTag: row.props.headingTag,
+      periods,
+      restProps: omit(row.props, ["label", "icon", "headingTag"]),
+      ref: getChildRef(row),
+    });
   });
 
   return parsedChildren;
