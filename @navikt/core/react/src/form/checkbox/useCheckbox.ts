@@ -40,19 +40,19 @@ const useCheckbox = (props: CheckboxProps) => {
       defaultChecked: checkboxGroup?.defaultValue
         ? checkboxGroup.defaultValue.includes(props.value)
         : props.defaultChecked,
-      onChange: (e) => {
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
         if (readOnly) {
           return;
         }
-        props.onChange?.(e);
+        props.onChange?.(event);
         checkboxGroup?.toggleValue(props.value);
       },
-      onClick: (e) => {
+      onClick: (event: React.MouseEvent<HTMLInputElement>) => {
         if (readOnly) {
-          e.preventDefault();
+          event.preventDefault();
           return;
         }
-        props?.onClick?.(e);
+        props?.onClick?.(event);
       },
     },
   };
