@@ -1,14 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import {
+  ChevronDownIcon,
   ExclamationmarkTriangleFillIcon,
   LinkIcon,
   ThumbDownFillIcon,
   ThumbUpFillIcon,
-  XMarkIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Spacer, VStack } from "../layout/stack";
+import { Link } from "../link";
 import InfoCard, {
   InfoCardContent,
   InfoCardHeader,
@@ -128,23 +129,39 @@ export const Compositions: Story = {
   },
 };
 
-export const CustomHeader: Story = {
+export const CustomHeaders: Story = {
   render: () => {
+    const [open, setOpen] = React.useState(false);
     return (
-      <InfoCard>
-        <InfoCardHeader>
-          <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
-          <Spacer />
-          <Button
-            icon={<XMarkIcon aria-hidden />}
-            data-color="neutral"
-            variant="tertiary"
-            size="small"
-          />
-        </InfoCardHeader>
-        <DemoContent />
-      </InfoCard>
+      <VStack gap="space-24">
+        <InfoCard>
+          <InfoCardHeader>
+            <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
+            <Spacer />
+            <Button
+              icon={<ChevronDownIcon aria-hidden />}
+              data-color="neutral"
+              variant="tertiary"
+              size="small"
+              style={{ rotate: open ? "180deg" : "0deg" }}
+              onClick={() => setOpen((prev) => !prev)}
+            />
+          </InfoCardHeader>
+          {open && <DemoContent />}
+        </InfoCard>
+        <InfoCard>
+          <InfoCardHeader>
+            <Link href="#">
+              <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
+            </Link>
+          </InfoCardHeader>
+          {open && <DemoContent />}
+        </InfoCard>
+      </VStack>
     );
+  },
+  parameters: {
+    layout: "padded",
   },
 };
 
@@ -163,28 +180,6 @@ export const WrappingTitle: Story = {
         <DemoContent />
       </InfoCard>
     );
-  },
-};
-
-export const AriaTest: Story = {
-  render: () => {
-    const [open, setOpen] = React.useState(false);
-    return (
-      <div>
-        <Button onClick={() => setOpen((x) => !x)}>Toggle</Button>
-        {open && (
-          <InfoCard>
-            <InfoCardHeader>
-              <InfoCardTitle role="alert">ALERT TITLE</InfoCardTitle>
-            </InfoCardHeader>
-            <DemoContent />
-          </InfoCard>
-        )}
-      </div>
-    );
-  },
-  parameters: {
-    layout: "padded",
   },
 };
 
