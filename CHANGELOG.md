@@ -1,5 +1,23 @@
 # Changelog
 
+## 7.30.0
+
+### @navikt/ds-react
+
+- FormSummary: Changed `FormSummary.Header`-component to `<div />` instead of `<header />`. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+- FormSummary: Added new component `<FormSummary.Footer />`, we now require `<FormSummary.EditLink />` to be placed in footer instead of header. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+* Datepicker: Fix regression causing clickable weeknumber to have no applied styles in Darkside. ([#4081](https://github.com/navikt/aksel/pull/4081))
+
+* Timeline: Adjusted type for `onSelectPeriod()` and fixed warning when using refs in React 19 ([#4076](https://github.com/navikt/aksel/pull/4076))
+
+### @navikt/ds-css
+
+- FormSummary: Changed `FormSummary.Header`-component to `<div />` instead of `<header />`. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+- FormSummary: Added new component `<FormSummary.Footer />`, we now require `<FormSummary.EditLink />` to be placed in footer instead of header. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
 ## 7.29.1
 
 ### @navikt/ds-react
