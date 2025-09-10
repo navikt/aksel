@@ -19,7 +19,7 @@ import {
 } from "@/app/_ui/website-table/WebsiteTable";
 
 async function MonsterMalerPage({ slug }: { slug: string }) {
-  const [{ data: pageData }, { data: toc = [] }] = await Promise.all([
+  const [{ data: pageData }, toc] = await Promise.all([
     sanityFetch({
       query: MONSTER_MALER_BY_SLUG_QUERY,
       params: { slug },
@@ -27,7 +27,7 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
     sanityFetch({
       query: TOC_BY_SLUG_QUERY,
       params: { slug },
-    }),
+    }).then((res) => res.data || []),
   ]);
 
   if (!pageData) {
@@ -45,7 +45,11 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
           name: pageData.heading,
           text: "Send innspill",
         }}
-        toc={toc}
+        toc={
+          metadata?.changelog
+            ? [...toc, { id: "changelog", title: "Endringslogg" }]
+            : toc
+        }
       />
       <CustomPortableText
         value={pageData.content as PortableTextBlock[]}
@@ -61,7 +65,7 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
             size="large"
             data-level="2"
           >
-            Endringer
+            Endringslogg
           </Heading>
           <WebsiteTable
             th={[{ text: "Dato" }, { text: "Versjon" }, { text: "Endringer" }]}

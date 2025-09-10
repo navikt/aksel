@@ -21,7 +21,9 @@ export interface Period {
   start: Date;
   endInclusive: Date;
   status?: PeriodStatus;
-  onSelectPeriod?: () => void;
+  onSelectPeriod?: (
+    e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>,
+  ) => void;
   icon?: React.ReactNode;
   children?: React.ReactNode;
   isActive?: boolean;

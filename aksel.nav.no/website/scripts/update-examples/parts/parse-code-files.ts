@@ -49,8 +49,8 @@ export async function parseCodeFile(dirPath: string, file: string) {
     description: args.desc,
     index: args.index ?? 1,
     sandboxBase64: processAndCompressForURI(filteredCode),
-    /* We are limited to ~2048 characters in url, so disable story if to long */
+    /* We are limited to ~8000 characters in url, so disable story if too long */
     sandboxEnabled:
-      urlBaseLength + encodedCode.length < 2048 ? args.sandbox ?? true : false,
+      urlBaseLength + encodedCode.length < 8000 ? args.sandbox ?? true : false,
   };
 }

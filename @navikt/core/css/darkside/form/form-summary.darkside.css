@@ -20,9 +20,8 @@
   }
 }
 
-.aksel-form-summary__edit {
+.aksel-form-summary__header .aksel-form-summary__edit {
   flex-shrink: 0;
-  margin-top: var(--ax-space-4);
   align-self: flex-start;
 }
 
@@ -79,5 +78,18 @@
 
   & .aksel-form-summary__answer {
     border-color: var(--ax-border-subtleA);
+  }
+}
+
+.aksel-form-summary__footer {
+  display: flex;
+  padding: var(--ax-space-16) var(--ax-space-20);
+  background: var(--ax-bg-raised);
+  border-top: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+@media (max-width: 479px) {
+  .aksel-form-summary__footer {
+    padding: var(--ax-space-12) var(--ax-space-16);
   }
 }

@@ -190,7 +190,7 @@ export const InsideModal: Story = {
     const ref = React.useRef<HTMLDialogElement>(null);
 
     return (
-      <div className="py-16">
+      <>
         <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
         <Modal ref={ref} header={{ heading: "Overskrift" }}>
@@ -225,7 +225,7 @@ export const InsideModal: Story = {
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
+      </>
     );
   },
 };

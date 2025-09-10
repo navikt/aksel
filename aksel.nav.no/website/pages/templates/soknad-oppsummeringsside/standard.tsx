@@ -11,8 +11,6 @@ import {
   Heading,
   Link,
   Page,
-  Show,
-  Stack,
   VStack,
 } from "@navikt/ds-react";
 import FormNavigation from "../../../components/website-modules/examples/__parts-inline/FormNavigation";
@@ -32,28 +30,28 @@ function Example() {
       <Header />
       <Page.Block as="main" width="text" gutters>
         <VStack gap="8">
-          <Bleed marginInline={{ lg: "24" }}>
-            <Stack
-              gap="6"
-              direction={{ sm: "row-reverse", lg: "row" }}
-              justify={{ sm: "space-between", lg: "start" }}
-              wrap={false}
-            >
-              <Show above="sm">
+          <VStack gap="3">
+            <Bleed asChild marginInline={{ lg: "32" }}>
+              <Box
+                width={{ xs: "64px", lg: "96px" }}
+                height={{ xs: "64px", lg: "96px" }}
+                asChild
+                position={{ xs: "relative", lg: "absolute" }}
+              >
                 <ApplicationPictogram />
-              </Show>
-              <VStack gap="1">
-                <BodyShort size="small">
-                  Nav 10-07.03 (Om søknaden har ID)
-                </BodyShort>
-                <Heading level="1" size="xlarge">
-                  Søknad om [ytelse]
-                </Heading>
-              </VStack>
-            </Stack>
-          </Bleed>
+              </Box>
+            </Bleed>
+            <VStack gap="1">
+              <BodyShort size="small">
+                Nav 10-07.03 (Om søknaden har ID)
+              </BodyShort>
+              <Heading level="1" size="xlarge">
+                Søknad om [ytelse]
+              </Heading>
+            </VStack>
+          </VStack>
 
-          <div data-aksel-template="form-summarypage-v2">
+          <div data-aksel-template="form-summarypage-v3">
             <Link href="#">
               <ArrowLeftIcon aria-hidden /> Forrige steg
             </Link>
@@ -84,7 +82,6 @@ function Example() {
           <FormSummary>
             <FormSummary.Header>
               <FormSummary.Heading level="2">Om deg</FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -112,12 +109,14 @@ function Example() {
                 <FormSummary.Value>mail@tull.tøys</FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormSummary>
             <FormSummary.Header>
               <FormSummary.Heading level="2">Barnetillegg</FormSummary.Heading>
-              <FormSummary.EditLink href="#" />
             </FormSummary.Header>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -151,6 +150,9 @@ function Example() {
                 </FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+              <FormSummary.EditLink href="/eksempel" />
+            </FormSummary.Footer>
           </FormSummary>
 
           <FormNavigation />
@@ -198,5 +200,4 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  sandbox: false,
 };

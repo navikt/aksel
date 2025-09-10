@@ -1,5 +1,23 @@
 # @navikt/ds-css
 
+## 7.30.0
+
+### Minor Changes
+
+- FormSummary: Changed `FormSummary.Header`-component to `<div />` instead of `<header />`. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+- FormSummary: Added new component `<FormSummary.Footer />`, we now require `<FormSummary.EditLink />` to be placed in footer instead of header. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+## 7.29.1
+
+### Patch Changes
+
+- Checkbox, List: Updated SVG-usage to avoid using rem-values directly on `width` and `height`-attributes. ([#4048](https://github.com/navikt/aksel/pull/4048))
+
+- Darkside: Fix styling for small readOnly checked Radio ([#4051](https://github.com/navikt/aksel/pull/4051))
+
+- Checkbox: Fix styling for indeterminate state with description ([#4051](https://github.com/navikt/aksel/pull/4051))
+
 ## 7.29.0
 
 ### Minor Changes

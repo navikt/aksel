@@ -2,7 +2,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import { PortableTextBlock } from "next-sanity";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
-import { BodyLong, BodyShort, Detail, HStack, Heading } from "@navikt/ds-react";
+import { BodyLong, BodyShort, HStack, Heading, VStack } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -11,9 +11,10 @@ import {
   SLUG_BY_TYPE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { Avatar } from "@/app/_ui/avatar/Avatar";
+import { queryToAvatars } from "@/app/_ui/avatar/utils";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { formatDateString } from "@/ui-utils/format-date";
-import { abbrName } from "@/ui-utils/format-text";
 import styles from "../_ui/Produktbloggen.module.css";
 
 type Props = {
@@ -79,8 +80,8 @@ export default async function Page({ params }: Props) {
   });
 
   const publishedAtRaw = pageData?.publishedAt ?? "";
+  const avatars = queryToAvatars(pageData?.writers ?? []);
   const publishDate = formatDateString(publishedAtRaw);
-  const authors = (pageData?.contributors as any)?.map((x) => x?.title) ?? [];
 
   const imageUrl = urlForImage(pageData?.seo?.image)
     ?.quality(100)
@@ -97,7 +98,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <div className={styles.preamble}>
-        <div className={styles.intro}>
+        <VStack align="center" className={styles.intro}>
           <Heading level="1" size="xlarge" className={styles.articleTitle}>
             {pageData.heading}
           </Heading>
@@ -106,25 +107,28 @@ export default async function Page({ params }: Props) {
               {pageData?.ingress}
             </BodyLong>
           )}
+          <div className={`${styles.horizontalLine}`} />
+          <div data-wrapper-prose>
+            <BodyShort className={`${styles.publishDate}`} textColor="subtle">
+              {publishDate}
+            </BodyShort>
+          </div>
           <div>
-            <HStack
-              justify="center"
-              align="center"
-              gap="space-8"
-              marginBlock="space-20 0"
-            >
-              <Detail as="span">{publishDate}</Detail>
-              {authors?.[0] && (
-                <>
-                  <span className={styles.diamond} />
-                  <BodyShort size="small" as="address">
-                    {authors?.[0]}
-                  </BodyShort>
-                </>
-              )}
+            <HStack gap="space-32" justify="center" marginBlock="space-16 0">
+              {avatars.map((avatar) => {
+                return (
+                  <Avatar
+                    key={avatar.name}
+                    imageSrc={avatar.imageSrc}
+                    name={avatar.name}
+                    type={avatar.type}
+                    showName
+                  ></Avatar>
+                );
+              })}
             </HStack>
           </div>
-        </div>
+        </VStack>
         <div className={styles.image}>
           {imageUrl ? (
             <NextImage
@@ -158,30 +162,6 @@ export default async function Page({ params }: Props) {
           data-wrapper-prose
           value={(pageData?.content ?? []) as PortableTextBlock[]}
         />
-      </div>
-
-      <div className={styles.articleEnd}>
-        <div data-wrapper-prose>
-          <div className={`${styles.diamond} ${styles.diamondCenter}`} />
-          {authors?.length > 0 && (
-            <Detail uppercase className={styles.authorText} as="p">
-              Bidragsytere
-            </Detail>
-          )}
-          {authors?.length > 0 && (
-            <BodyShort as="div" className={styles.author}>
-              {authors.map(abbrName).map((x, y) => (
-                <address key={x}>
-                  {x}
-                  {y !== authors.length - 1 && ", "}
-                </address>
-              ))}
-            </BodyShort>
-          )}
-          <HStack justify="center">
-            <BodyShort textColor="subtle">Publisert: {publishDate}</BodyShort>
-          </HStack>
-        </div>
       </div>
     </>
   );

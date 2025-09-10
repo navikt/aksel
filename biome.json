@@ -16,6 +16,9 @@
       "cssModules": true
     }
   },
+  "files": {
+    "maxSize": 2000000
+  },
   "linter": {
     "enabled": true,
     "rules": {

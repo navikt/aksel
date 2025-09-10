@@ -1,9 +1,29 @@
+import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
+
 /**
  * Capitalize the first letter of a string.
  */
 function capitalizeText(inputString: string): string {
   return inputString.charAt(0).toUpperCase() + inputString.slice(1);
 }
+
+type RedaksjonTypeValue = NonNullable<
+  NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][number]["writers"]
+>[number]["type"];
+
+export const humanizeRedaksjonType = (type: RedaksjonTypeValue) => {
+  switch (type) {
+    case "miljoe":
+      return "Miljø";
+    case "team":
+      return "Team";
+    default:
+      if (process.env.NODE_ENV === "production") {
+        console.warn(`unexpected RedaksjonTypeValue: ${type}`);
+      }
+      return type ?? "bad value";
+  }
+};
 
 /**
  * Abbreviate a name while keeping the first and last names intact.
@@ -21,6 +41,7 @@ function abbrName(name: string): string {
 function removeEmojiesFromText(inputString: string) {
   return inputString
     .replace(
+      // biome-ignore lint/suspicious/noMisleadingCharacterClass: False positive
       /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF]|[\uFE00-\uFE0F])/g,
       "",
     )

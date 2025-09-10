@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { bloggKategorier } from "../../../config";
 import { artikkelPreview } from "../presets/artikkel-preview";
-import { editorField, writersField } from "../presets/editors";
+import { writersField } from "../presets/editors";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { ingressField } from "../presets/ingress";
@@ -20,7 +20,6 @@ export const Blogg = defineType({
   fields: [
     ...hiddenFields,
     titleField,
-    editorField,
     writersField,
     defineField({
       title: "Kategori",

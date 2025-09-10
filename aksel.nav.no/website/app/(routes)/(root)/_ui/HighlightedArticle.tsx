@@ -29,7 +29,6 @@ export const Highlight = ({
   article: ArticleT;
   compact: boolean;
 }) => {
-  const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
   const useStatusImage = isKomponent(article) && article.status?.bilde;
 
   const date = useFormatedDate(article?.publishedAt ?? article._createdAt);
@@ -67,8 +66,10 @@ export const Highlight = ({
     return article.status?.tag;
   };
 
-  const authors =
-    article.contributors?.map((author) => author.title).filter(Boolean) ?? [];
+  // Use type guards to properly access contributors
+  const authors = isArticle(article)
+    ? article.contributors?.map((author) => author.title).filter(Boolean) ?? []
+    : [];
 
   return (
     <HGrid
@@ -88,7 +89,8 @@ export const Highlight = ({
             layout="fill"
             aria-hidden
             className={cl(`${styles.sectionImage}`, {
-              [`${styles.betaHue}`]: article?.status?.tag === "beta",
+              [`${styles.betaHue}`]:
+                isKomponent(article) && article.status?.tag === "beta",
             })}
             decoding="auto"
             alt={`thumbnail for ${article.heading}`}
@@ -125,7 +127,7 @@ export const Highlight = ({
           <Tag
             type={article._type}
             text={
-              isArticle(article) ? article?.tema?.[0] ?? undefined : undefined
+              isArticle(article) ? article.tema?.[0] ?? undefined : undefined
             }
           />
           {getStatusTag() === "beta" && <BetaTag />}
@@ -146,10 +148,10 @@ export const Highlight = ({
           </Link>
         </Heading>
         <BodyLong className="mb-4" size="medium">
-          {isArticle(article) ||
-            (isBlogg(article) && (article?.ingress ?? article.seo?.meta))}
+          {(isArticle(article) || isBlogg(article)) &&
+            (article.ingress ?? article.seo?.meta)}
         </BodyLong>
-        {showFooter && authors.length > 0 && (
+        {(isArticle(article) || isBlogg(article)) && authors.length > 0 && (
           <BodyShort size="small" className={styles.highlightAuthor}>
             <span className="font-semibold">{authors[0]}</span>
             <span>{date}</span>

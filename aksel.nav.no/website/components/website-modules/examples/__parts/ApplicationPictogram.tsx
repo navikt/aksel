@@ -1,14 +1,14 @@
 import React from "react";
 
-const ApplicationPictogram = () => (
+const ApplicationPictogram = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="72"
-    height="72"
+    width="96"
+    height="96"
     viewBox="0 0 72 72"
     fill="none"
-    style={{ flexShrink: 0 }}
     aria-hidden
+    {...props}
   >
     <rect x="23.25" y="22.5" width="26.25" height="9" fill="#CCE2F0" />
     <rect x="23.25" y="36.75" width="26.25" height="9" fill="#CCE2F0" />

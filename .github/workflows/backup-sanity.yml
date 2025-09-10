@@ -12,7 +12,7 @@ jobs:
         with:
           fetch-depth: 0 # Required to retrieve git history
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: lts/*
           cache: yarn
@@ -29,10 +29,10 @@ jobs:
           SANITY_READ: ${{ secrets.SANITY_READ }}
 
       - name: Upload GCP bucket
-        uses: "google-github-actions/auth@v2"
+        uses: "google-github-actions/auth@v3"
         with:
           credentials_json: "${{ secrets.gcp_credentials_prod }}"
-      - uses: "google-github-actions/upload-cloud-storage@v2"
+      - uses: "google-github-actions/upload-cloud-storage@v3"
         with:
           path: ./aksel.nav.no/website
           destination: "aksel-website-prod/backups"
