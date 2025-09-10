@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 7.30.0
+
+### Minor Changes
+
+- FormSummary: Changed `FormSummary.Header`-component to `<div />` instead of `<header />`. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+- FormSummary: Added new component `<FormSummary.Footer />`, we now require `<FormSummary.EditLink />` to be placed in footer instead of header. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
 ## 7.29.1
 
 ### Patch Changes
