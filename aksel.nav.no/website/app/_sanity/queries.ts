@@ -381,9 +381,7 @@ const PRINSIPPER_BY_SLUG_QUERY = defineQuery(`
 const DOCUMENT_BY_ID_FOR_SLACK_QUERY = defineQuery(`*[_id == $id][0]{
       "id": _id,
       "title": heading,
-      "editors": contributors[]->email,
       "slug": slug.current,
-      "contacts": undertema[]->tema->contacts[]->email
     }`);
 
 /* --------------------------------- Sitemap -------------------------------- */
