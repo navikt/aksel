@@ -8476,7 +8476,7 @@ __metadata:
     "@svitejs/changesets-changelog-github-compact": "npm:^1.1.0"
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"
     "@vitest/eslint-plugin": "npm:^1.3.4"
-    chromatic: "npm:11.5.4"
+    chromatic: "npm:13.1.4"
     concurrently: "npm:9.0.1"
     cross-env: "npm:^10.0.0"
     eslint: "npm:^9.35.0"
@@ -10001,9 +10001,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:11.5.4":
-  version: 11.5.4
-  resolution: "chromatic@npm:11.5.4"
+"chromatic@npm:13.1.4":
+  version: 13.1.4
+  resolution: "chromatic@npm:13.1.4"
   peerDependencies:
     "@chromatic-com/cypress": ^0.*.* || ^1.0.0
     "@chromatic-com/playwright": ^0.*.* || ^1.0.0
@@ -10016,7 +10016,7 @@ __metadata:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: 10/7d89292a2f3470f57f342d64776c915c6a27e83b0fc422d2bb9018ea0d838b330c81373dd188b27f48eb1adb0b3aafb6a750f9720bdb29e478932c92c3978fd1
+  checksum: 10/5cc553b7dc5aeb54a48529f1170c1b409962a523761d681dd47d212eef0541c0c670786fcc232dcecbd7665bb4292ccaaf92f6c739e7f85ddfd2060b6c515d11
   languageName: node
   linkType: hard
 
