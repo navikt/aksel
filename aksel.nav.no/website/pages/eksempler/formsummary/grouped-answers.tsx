@@ -6,6 +6,7 @@ const Example = () => {
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
+        <FormSummary.EditLink href="/eksempel" />
       </FormSummary.Header>
 
       <FormSummary.Answers>
@@ -49,9 +50,6 @@ const Example = () => {
           </FormSummary.Value>
         </FormSummary.Answer>
       </FormSummary.Answers>
-      <FormSummary.Footer>
-        <FormSummary.EditLink href="/eksempel" />
-      </FormSummary.Footer>
     </FormSummary>
   );
 };
