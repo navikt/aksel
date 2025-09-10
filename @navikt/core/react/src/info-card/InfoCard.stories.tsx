@@ -1,13 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import {
-  ChevronDownIcon,
-  ExclamationmarkTriangleFillIcon,
-  InformationSquareIcon,
-  LinkIcon,
-  ThumbDownFillIcon,
-  ThumbUpFillIcon,
-} from "@navikt/aksel-icons";
+import { ChevronDownIcon, InformationSquareIcon } from "@navikt/aksel-icons";
+import type { AkselColorRole } from "@navikt/ds-tokens/types";
 import { Button } from "../button";
 import { Spacer, VStack } from "../layout/stack";
 import { Link } from "../link";
@@ -93,40 +87,32 @@ export const OnlyHeader: Story = {
   },
 };
 
+const colors: AkselColorRole[] = [
+  "info",
+  "success",
+  "warning",
+  "danger",
+  "brand-magenta",
+  "brand-blue",
+  "brand-beige",
+  "neutral",
+  "accent",
+  "meta-purple",
+  "meta-lime",
+];
+
 export const Compositions: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        <InfoCard data-color="info">
-          <InfoCardHeader icon={<InformationSquareIcon />}>
-            <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
-          </InfoCardHeader>
-          <DemoContent />
-        </InfoCard>
-        <InfoCard data-color="success">
-          <InfoCardHeader icon={<ThumbUpFillIcon />}>
-            <InfoCardTitle>Gjør dette: InfoCard title</InfoCardTitle>
-          </InfoCardHeader>
-          <DemoContent />
-        </InfoCard>
-        <InfoCard data-color="brand-magenta">
-          <InfoCardHeader icon={<ThumbDownFillIcon />}>
-            <InfoCardTitle>Unngå dette: InfoCard title</InfoCardTitle>
-          </InfoCardHeader>
-          <DemoContent />
-        </InfoCard>
-        <InfoCard data-color="warning">
-          <InfoCardHeader icon={<ExclamationmarkTriangleFillIcon />}>
-            <InfoCardTitle>Pass på: InfoCard title</InfoCardTitle>
-          </InfoCardHeader>
-          <DemoContent />
-        </InfoCard>
-        <InfoCard data-color="neutral">
-          <InfoCardHeader icon={<LinkIcon />}>
-            <InfoCardTitle>Lenker: InfoCard title</InfoCardTitle>
-          </InfoCardHeader>
-          <DemoContent />
-        </InfoCard>
+        {colors.map((color) => (
+          <InfoCard data-color={color} key={color}>
+            <InfoCardHeader icon={<InformationSquareIcon />}>
+              <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
+            </InfoCardHeader>
+            <DemoContent />
+          </InfoCard>
+        ))}
       </VStack>
     );
   },
