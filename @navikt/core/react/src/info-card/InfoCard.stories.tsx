@@ -30,9 +30,11 @@ export const Default: Story = {
     return (
       <InfoCard data-color={props["data-color"]} size={props.size}>
         <InfoCardHeader icon={<InformationSquareIcon />}>
-          <InfoCardTitle>{props.title}</InfoCardTitle>
+          <InfoCardTitle>{props.title ?? "InfoCard title"}</InfoCardTitle>
         </InfoCardHeader>
-        <InfoCardContent>{props.children}</InfoCardContent>
+        <InfoCardContent>
+          {props.children ?? "InfoCard content"}
+        </InfoCardContent>
       </InfoCard>
     );
   },

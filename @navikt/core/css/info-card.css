@@ -1,0 +1,143 @@
+.navds-info-card {
+  display: grid;
+  border-radius: var(--a-border-radius-xlarge);
+  border: 1px solid;
+  overflow: clip;
+  position: relative;
+  height: fit-content;
+
+  --__ac-info-card-header-p: var(--a-spacing-2) var(--a-spacing-5);
+  --__ac-info-card-content-p: var(--a-spacing-3) var(--a-spacing-5) var(--a-spacing-4) var(--a-spacing-5);
+  --__ac-info-card-icon-mt: var(--a-spacing-1);
+  --__ac-info-card-title-pb: var(--a-spacing-05);
+}
+
+/* TODO: border-color */
+
+.navds-info-card--small {
+  --__ac-info-card-header-p: var(--a-spacing-2) var(--a-spacing-4);
+  --__ac-info-card-content-p: var(--a-spacing-2) var(--a-spacing-4) var(--a-spacing-3) var(--a-spacing-4);
+  --__ac-info-card-icon-mt: var(--a-spacing-05);
+  --__ac-info-card-title-pb: 0;
+}
+
+.navds-info-card[data-color="accent"] {
+  border-color: var(--a-border-action);
+
+  --__ac-info-card-header-bg: var(--a-surface-action-subtle);
+  --__ac-info-card-header-border: var(--a-blue-200);
+  --__ac-info-card-header-text: var(--a-blue-700);
+}
+
+.navds-info-card[data-color="neutral"] {
+  border-color: var(--a-gray-600);
+
+  --__ac-info-card-header-bg: var(--a-surface-neutral-subtle);
+  --__ac-info-card-header-border: var(--a-gray-200);
+  --__ac-info-card-header-text: var(--a-gray-700);
+}
+
+.navds-info-card[data-color="info"] {
+  border-color: var(--a-border-info);
+
+  --__ac-info-card-header-bg: var(--a-surface-info-subtle);
+  --__ac-info-card-header-border: var(--a-lightblue-200);
+  --__ac-info-card-header-text: var(--a-lightblue-800);
+}
+
+.navds-info-card[data-color="success"] {
+  border-color: var(--a-border-success);
+
+  --__ac-info-card-header-bg: var(--a-surface-success-subtle);
+  --__ac-info-card-header-border: var(--a-green-200);
+  --__ac-info-card-header-text: var(--a-green-700);
+}
+
+.navds-info-card[data-color="warning"] {
+  border-color: var(--a-border-warning);
+
+  --__ac-info-card-header-bg: var(--a-surface-warning-subtle);
+  --__ac-info-card-header-border: var(--a-orange-200);
+  --__ac-info-card-header-text: var(--a-orange-800);
+}
+
+.navds-info-card[data-color="danger"] {
+  border-color: var(--a-border-danger);
+
+  --__ac-info-card-header-bg: var(--a-surface-danger-subtle);
+  --__ac-info-card-header-border: var(--a-red-200);
+  --__ac-info-card-header-text: var(--a-red-700);
+}
+
+.navds-info-card[data-color="brand-magenta"] {
+  border-color: var(--a-border-alt-1);
+
+  --__ac-info-card-header-bg: var(--a-surface-alt-1-subtle);
+  --__ac-info-card-header-border: var(--a-purple-200);
+  --__ac-info-card-header-text: var(--a-purple-700);
+}
+
+.navds-info-card[data-color="brand-beige"] {
+  border-color: var(--a-border-warning);
+
+  --__ac-info-card-header-bg: var(--a-surface-warning-subtle);
+  --__ac-info-card-header-border: var(--a-orange-200);
+  --__ac-info-card-header-text: var(--a-orange-800);
+}
+
+.navds-info-card[data-color="brand-blue"] {
+  border-color: var(--a-border-alt-3);
+
+  --__ac-info-card-header-bg: var(--a-surface-alt-3-subtle);
+  --__ac-info-card-header-border: var(--a-deepblue-200);
+  --__ac-info-card-header-text: var(--a-deepblue-700);
+}
+
+.navds-info-card[data-color="meta-lime"] {
+  border-color: var(--a-border-alt-2);
+
+  --__ac-info-card-header-bg: var(--a-surface-alt-2-subtle);
+  --__ac-info-card-header-border: var(--a-limegreen-200);
+  --__ac-info-card-header-text: var(--a-limegreen-800);
+}
+
+.navds-info-card[data-color="meta-purple"] {
+  border-color: var(--a-border-alt-1);
+
+  --__ac-info-card-header-bg: var(--a-surface-alt-1-subtle);
+  --__ac-info-card-header-border: var(--a-purple-200);
+  --__ac-info-card-header-text: var(--a-purple-700);
+}
+
+.navds-info-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--a-spacing-2);
+  border-bottom: 1px solid var(--__ac-info-card-header-border);
+  background: var(--__ac-info-card-header-bg);
+  color: var(--__ac-info-card-header-text);
+  padding: var(--__ac-info-card-header-p);
+
+  &:only-child {
+    border-bottom: none;
+  }
+}
+
+.navds-info-card__icon {
+  font-size: 1.5rem;
+  margin-top: var(--__ac-info-card-icon-mt);
+  display: grid;
+
+  .navds-info-card--small & {
+    font-size: 1.25rem;
+  }
+}
+
+.navds-info-card__title {
+  padding-block: var(--__ac-info-card-title-pb);
+}
+
+.navds-info-card__content {
+  padding: var(--__ac-info-card-content-p);
+  background-color: var(--a-bg-default);
+}
