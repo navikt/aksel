@@ -65,6 +65,8 @@
 /* The input acts as a container for the marker (since the click area should be larger than the visible marker) */
 .aksel-checkbox__input,
 .aksel-radio__input {
+  --__axc-radio-checkbox-marker-border: 2px;
+
   -webkit-appearance: none; /* Safari <= 15.3 */
   appearance: none;
   cursor: pointer;
@@ -72,7 +74,7 @@
   width: var(--__axc-radio-checkbox-marker-size);
   height: var(--__axc-radio-checkbox-marker-size);
   background-color: var(--ax-bg-input);
-  border: 2px solid var(--ax-border-neutral);
+  border: var(--__axc-radio-checkbox-marker-border) solid var(--ax-border-neutral);
   border-radius: var(--ax-radius-4);
   position: relative;
 }
@@ -82,7 +84,10 @@
 .aksel-radio__input::before {
   content: "";
   position: absolute;
-  inset: calc(-1 * (var(--__axc-radio-checkbox-marker-target) - var(--__axc-radio-checkbox-marker-size)) / 2);
+  inset: calc(
+    -1 * (var(--__axc-radio-checkbox-marker-border) +
+          (var(--__axc-radio-checkbox-marker-target) - var(--__axc-radio-checkbox-marker-size)) / 2)
+  );
 }
 
 /* Radio marker should be round */
@@ -142,13 +147,15 @@
 
 /* Radio marker colors in checked state */
 .aksel-radio__input:checked {
+  --__axc-radio-checkbox-marker-border: 8px;
+
+  border-color: var(--ax-bg-strong-pressed);
   background-color: var(--ax-bg-input);
-  border: 8px solid var(--ax-bg-strong-pressed);
 }
 
 /* Small Radio dot size in checked state */
 .aksel-radio--small > .aksel-radio__input:checked {
-  border-width: 7px;
+  --__axc-radio-checkbox-marker-border: 7px;
 }
 
 /* Marker colors in unchecked hover state (unless disabled) */
@@ -208,8 +215,9 @@
 
 /* Radio marker colors in readonly + checked state */
 .aksel-radio--readonly > .aksel-radio__input:checked {
+  --__axc-radio-checkbox-marker-border: 0px; /* Needs unit for calc() to work */
+
   background-color: var(--ax-bg-neutral-strong);
-  border-width: 0;
   box-shadow:
     inset 0 0 0 2px var(--ax-border-neutral-subtle),
     inset 0 0 0 8px var(--ax-bg-neutral-moderate);
@@ -248,12 +256,12 @@
 
   /* Radio dot size in readonly + checked state */
   .aksel-radio--readonly > .aksel-radio__input:checked {
-    border-width: 8px;
+    --__axc-radio-checkbox-marker-border: 8px;
   }
 
   /* Small Radio dot size in readonly + checked state */
   .aksel-radio--small.aksel-radio--readonly > .aksel-radio__input:checked {
-    border-width: 7px;
+    --__axc-radio-checkbox-marker-border: 7px;
   }
 
   /* Turn off disabled state transparency */
