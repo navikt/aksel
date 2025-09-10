@@ -1,8 +1,6 @@
 import React from "react";
 
-const ApplicationPictogram = ({
-  ...restProps
-}: Omit<React.SVGProps<SVGSVGElement>, "ref">) => (
+const ApplicationPictogram = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="96"
@@ -11,7 +9,7 @@ const ApplicationPictogram = ({
     fill="none"
     style={{ flexShrink: 0 }}
     aria-hidden
-    {...restProps}
+    {...props}
   >
     <rect x="23.25" y="22.5" width="26.25" height="9" fill="#CCE2F0" />
     <rect x="23.25" y="36.75" width="26.25" height="9" fill="#CCE2F0" />
