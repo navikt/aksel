@@ -159,3 +159,7 @@
   padding: var(--__axc-base-alert-content-p);
   background-color: var(--ax-bg-default);
 }
+
+.aksel-base-alert__close-button {
+  margin-left: auto;
+}

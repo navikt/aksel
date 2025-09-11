@@ -1,11 +1,15 @@
 import React, { forwardRef } from "react";
+import { XMarkIcon } from "@navikt/aksel-icons";
+import { Button } from "../../button";
 import { useRenameCSS } from "../../theme/Theme";
 import { AkselColor } from "../../types";
 import { Heading } from "../../typography";
 import { createContext } from "../../util/create-context";
+import { useI18n } from "../../util/i18n/i18n.hooks";
 
 type BaseAlert = {
   size: "medium" | "small";
+  statusType: "alert" | "message";
 };
 
 const [BaseAlertProvider, useBaseAlert] = createContext<BaseAlert>({
@@ -36,15 +40,10 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   global?: boolean;
-}
-
-interface BaseAlertComponent
-  extends React.ForwardRefExoticComponent<
-    BaseAlertProps & React.RefAttributes<HTMLDivElement>
-  > {
-  Header: typeof BaseAlertHeader;
-  Title: typeof BaseAlertTitle;
-  Content: typeof BaseAlertContent;
+  /**
+   * Changes the semantics of the alert. Use "alert" for important information that needs user attention, and "message" for less important information.
+   */
+  statusType: BaseAlert["statusType"];
 }
 
 const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
@@ -56,6 +55,7 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
       "data-color": dataColor,
       type,
       global = false,
+      statusType,
       ...restProps
     }: BaseAlertProps,
     forwardedRef,
@@ -72,11 +72,13 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
         data-type={type}
         data-global={global}
       >
-        <BaseAlertProvider size={size}>{children}</BaseAlertProvider>
+        <BaseAlertProvider size={size} statusType={statusType}>
+          {children}
+        </BaseAlertProvider>
       </div>
     );
   },
-) as BaseAlertComponent;
+);
 
 /* ----------------------------- BaseAlertHeader ----------------------------- */
 interface BaseAlertHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -205,15 +207,63 @@ const BaseAlertContent = forwardRef<HTMLDivElement, BaseAlertContentProps>(
   },
 );
 
-BaseAlert.Header = BaseAlertHeader;
-BaseAlert.Title = BaseAlertTitle;
-BaseAlert.Content = BaseAlertContent;
+/* ----------------------------- BaseAlertCloseButton ---------------------------- */
+type BaseAlertCloseButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+/**
+ * @see 🏷️ {@link BaseAlertCloseButtonProps}
+ * @example
+ * ```jsx
+ *  <BaseAlert>
+ *    <BaseAlert.Header>
+ *      <BaseAlert.Title>Info tittel</BaseAlert.Title>
+ *      <BaseAlert.CloseButton aria-label="Lukk varsel">
+ *    </BaseAlert.Header>
+ *  </BaseAlert>
+ * ```
+ */
+const BaseAlertCloseButton = forwardRef<
+  HTMLButtonElement,
+  BaseAlertCloseButtonProps
+>(
+  (
+    { children, className, ...restProps }: BaseAlertCloseButtonProps,
+    forwardedRef,
+  ) => {
+    const { cn } = useRenameCSS();
+    const translate = useI18n("Alert");
+    const { statusType } = useBaseAlert();
+
+    return (
+      <Button
+        ref={forwardedRef}
+        {...restProps}
+        data-color="neutral"
+        variant="tertiary-neutral"
+        className={cn(className, "navds-base-alert__close-button")}
+        type="button"
+        icon={
+          <XMarkIcon
+            title={
+              statusType === "alert"
+                ? translate("closeAlert")
+                : translate("closeMessage")
+            }
+          />
+        }
+      >
+        {children}
+      </Button>
+    );
+  },
+);
 
 export {
   BaseAlert as Root,
   BaseAlertHeader as Header,
   BaseAlertTitle as Title,
   BaseAlertContent as Content,
+  BaseAlertCloseButton as CloseButton,
 };
 
 export type {
@@ -221,4 +271,5 @@ export type {
   BaseAlertHeaderProps as HeaderProps,
   BaseAlertTitleProps as TitleProps,
   BaseAlertContentProps as ContentProps,
+  BaseAlertCloseButtonProps as CloseButtonProps,
 };

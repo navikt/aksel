@@ -1,7 +1,10 @@
 import React, { forwardRef } from "react";
 import { BaseAlert } from "../base-alert";
 
-type InfoCardProps = Omit<BaseAlert.RootProps, "type" | "global">;
+type InfoCardProps = Omit<
+  BaseAlert.RootProps,
+  "type" | "global" | "statusType"
+>;
 
 interface InfoCardComponent
   extends React.ForwardRefExoticComponent<
@@ -38,6 +41,7 @@ const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
         {...restProps}
         type="moderate"
         global={false}
+        statusType="message"
       />
     );
   },
