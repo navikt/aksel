@@ -97,6 +97,9 @@
   --__axc-base-alert-icon-mt: var(--ax-space-4);
   --__axc-base-alert-title-pb: var(--ax-space-2);
   --__axc-base-alert-icon-size: 1.5rem;
+  --__axc-base-alert-header-max-width: 37.5rem;
+
+  background: var(--ax-bg-strong);
 
   &[data-size="small"] {
     --__axc-base-alert-header-p: var(--ax-space-8) var(--ax-space-8) var(--ax-space-8) var(--ax-space-16);
@@ -129,6 +132,10 @@
   padding: var(--__axc-base-alert-header-p);
   border-bottom: 1px solid;
 
+  /* TODO: Update padding */
+  padding-left: max(var(--ax-space-20), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
+  padding-right: max(var(--ax-space-8), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
+
   .aksel-base-alert[data-type="moderate"] & {
     background: var(--ax-bg-moderate);
     color: var(--ax-text-subtle);
@@ -159,6 +166,12 @@
 .aksel-base-alert__content {
   padding: var(--__axc-base-alert-content-p);
   background-color: var(--ax-bg-default);
+
+  .aksel-base-alert[data-global="true"] & {
+    /* TODO: Update padding */
+    padding-left: max(var(--ax-space-20), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
+    padding-right: max(var(--ax-space-8), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
+  }
 }
 
 .aksel-base-alert__close-button {

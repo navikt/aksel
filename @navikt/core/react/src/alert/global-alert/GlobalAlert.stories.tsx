@@ -18,6 +18,7 @@ const meta: Meta<typeof GlobalAlert> = {
   component: GlobalAlert,
   parameters: {
     chromatic: { disable: true },
+    layout: "fullscreen",
   },
 };
 
