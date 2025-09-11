@@ -6391,19 +6391,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/next-loader@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "@sanity/next-loader@npm:2.1.2"
+"@sanity/next-loader@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@sanity/next-loader@npm:3.0.0"
   dependencies:
-    "@sanity/client": "npm:^7.8.2"
+    "@sanity/client": "npm:^7.11.1"
     "@sanity/comlink": "npm:^3.0.9"
     "@sanity/presentation-comlink": "npm:^1.0.29"
     dequal: "npm:^2.0.3"
     use-effect-event: "npm:^2.0.3"
   peerDependencies:
-    next: ^14.1 || ^15
+    next: ^15.1
     react: ^18.3 || ^19
-  checksum: 10/1a7c891877f66a258137fa01e52e25949800eb7f061e577c34384fc9e5e573c3748d00a03c076c3f2ffbf08e30a2644bc921b90caa5e7ad934963c33d28337b0
+    react-dom: ^18.3 || ^19
+  checksum: 10/ecfab3662c4e642f973abfbc7653e5be3f17f6e3a0a3016bf6afe5c903bdad38c62db28c1197efb042d0727bb19fa63a637a6362a22c29814ceb91ff114b513f
   languageName: node
   linkType: hard
 
@@ -15541,7 +15542,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"groq@npm:4.8.0, groq@npm:^4.7.0":
+"groq@npm:4.8.0":
   version: 4.8.0
   resolution: "groq@npm:4.8.0"
   checksum: 10/44ff703f4bb585ce0dc2b032442d0927617b409c1b863194dbef888b997a014d0d07e9e4977fc4463a510366d86dc3ef2a0e8e768a17827c2c7ffe227e3566ed
@@ -15552,6 +15553,13 @@ __metadata:
   version: 3.88.3
   resolution: "groq@npm:3.88.3"
   checksum: 10/cb8322754697019f53e0a5d59a57eee03a27d241e140f75fbdefb3a6504a415feaf26002663f22bf67ac0b3d454dfeeaa2abe3ba3e8065ea07f9fb3ba5362aa3
+  languageName: node
+  linkType: hard
+
+"groq@npm:^4.8.1":
+  version: 4.8.1
+  resolution: "groq@npm:4.8.1"
+  checksum: 10/e0ad8c6d095f76b5c00e7bab44b456fcb67be7c1ed94235e310bcbfff566b52ef61b44a6e3537a0186571c9e5ed190d1331b7e8f9933c67ffc400777d09b8c72
   languageName: node
   linkType: hard
 
@@ -19498,25 +19506,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-sanity@npm:10.1.4":
-  version: 10.1.4
-  resolution: "next-sanity@npm:10.1.4"
+"next-sanity@npm:11.1.0":
+  version: 11.1.0
+  resolution: "next-sanity@npm:11.1.0"
   dependencies:
     "@portabletext/react": "npm:^4.0.3"
     "@sanity/client": "npm:^7.11.1"
-    "@sanity/next-loader": "npm:^2.1.2"
+    "@sanity/next-loader": "npm:^3.0.0"
     "@sanity/preview-url-secret": "npm:^2.1.15"
     "@sanity/visual-editing": "npm:^3.0.5"
-    groq: "npm:^4.7.0"
+    groq: "npm:^4.8.1"
     history: "npm:^5.3.0"
   peerDependencies:
     "@sanity/client": ^7.11.1
     next: ^15.1
     react: ^18.3 || ^19
     react-dom: ^18.3 || ^19
-    sanity: ^4.7.0
+    sanity: ^4.8.1
     styled-components: ^6.1
-  checksum: 10/b8cf0ba7650953882c5a5bcc4135270ecb683fb0a551ea13c614c30ebbbbea9887616b41d292596d3c5d9a02c76aa5259b191fb6f81a9f500c21ea2b43a05113
+  checksum: 10/93e6faaae506d397359de6ee248115f5cef379ea85945ac8fc4cdea98a403ffe1f06412796cf21fa0dc5a295a38b92590baa3a44b24abb511d4287446f1711c2
   languageName: node
   linkType: hard
 
@@ -27626,7 +27634,7 @@ __metadata:
     lz-string: "npm:^1.5.0"
     next: "npm:15.5.2"
     next-logger: "npm:^5.0.1"
-    next-sanity: "npm:10.1.4"
+    next-sanity: "npm:11.1.0"
     next-themes: "npm:^0.4.6"
     node-cache: "npm:^5.1.2"
     pino: "npm:^8.21.0"
