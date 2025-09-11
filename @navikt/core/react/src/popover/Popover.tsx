@@ -138,7 +138,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       placement,
       open,
       middleware: [
-        flOffset(offset ?? (themeContext ? 8 : arrow ? 16 : 4)),
+        flOffset(offset ?? (themeContext?.isDarkside ? 8 : arrow ? 16 : 4)),
         chosenFlip &&
           flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         shift({ padding: 12 }),
@@ -191,7 +191,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         >
           {children}
           {/* Hide arrow in new design, prop will be removed in breaking change update */}
-          {arrow && !themeContext && (
+          {arrow && !themeContext?.isDarkside && (
             <div
               ref={(node) => {
                 arrowRef.current = node;

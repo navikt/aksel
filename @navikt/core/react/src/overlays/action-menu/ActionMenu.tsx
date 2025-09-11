@@ -802,7 +802,7 @@ export const ActionMenuRadioItem = forwardRef<
                   fill="var(--ax-bg-default, var(--a-surface-default))"
                 />
               </g>
-              {themeContext ? (
+              {themeContext?.isDarkside ? (
                 <g className={cn("navds-action-menu__indicator-icon--checked")}>
                   <rect
                     width="24"

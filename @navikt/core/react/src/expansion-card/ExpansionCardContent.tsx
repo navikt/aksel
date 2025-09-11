@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { BodyLong } from "../typography";
 import { ExpansionCardContext } from "./context";
 
@@ -14,6 +14,7 @@ const ExpansionCardContent = forwardRef<
 >(({ children, className, ...rest }, ref) => {
   const { cn } = useRenameCSS();
   const panelContext = useContext(ExpansionCardContext);
+  const themeContext = useThemeInternal(false);
 
   if (panelContext === null) {
     console.error(
@@ -24,6 +25,7 @@ const ExpansionCardContent = forwardRef<
 
   return (
     <BodyLong
+      data-color={themeContext?.color}
       {...rest}
       ref={ref}
       as="div"

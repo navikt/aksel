@@ -49,7 +49,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     const translate = useI18n("Timeline");
 
     const themeContext = useThemeInternal(false);
-    const showArrow = !themeContext;
+    const showArrow = !themeContext?.isDarkside;
 
     const {
       context,

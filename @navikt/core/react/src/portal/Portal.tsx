@@ -26,7 +26,7 @@ export const Portal = forwardRef<HTMLDivElement, PortalProps>(
      * Portal can be mounted outside of theme-classNames.
      * If a theme is present, we want to make sure that theme cascades to portaled element.
      */
-    if (themeContext) {
+    if (themeContext?.isDarkside) {
       return root
         ? ReactDOM.createPortal(
             <Theme

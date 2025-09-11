@@ -253,7 +253,7 @@ export const BasePrimitive = ({
 }: BasePrimitiveProps) => {
   const themeContext = useThemeInternal(false);
   const { cn } = useRenameCSS();
-  const prefix = themeContext ? "ax" : "a";
+  const prefix = themeContext?.isDarkside ? "ax" : "a";
 
   const style: React.CSSProperties = {
     /* Padding */
