@@ -23,5 +23,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Icon-propen lar deg bytte ikon i default state",
+  desc: "`icon`-propen lar deg bytte ikon i vanlig tilstand.",
 };

@@ -20,5 +20,5 @@ export const Demo = {
 
 export const args = {
   index: 8,
-  desc: "Tooltip kan hjelpe med å gi mer kontekst om hva man kopierer. Testing med skjermleser har vist at endringer av teksten i Tooltip ikke konsekvent blir fanget opp av skjermlesere. Teksten bør derfor være statisk.",
+  desc: "Tooltip kan hjelpe med å gi mer kontekst om hva man kopierer. Teksten bør være statisk, blant annet fordi endringer i Tooltip ikke konsekvent blir fanget opp av skjermlesere.",
 };
