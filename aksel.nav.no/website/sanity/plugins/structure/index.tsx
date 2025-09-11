@@ -1,4 +1,3 @@
-import Avatar from "boring-avatars";
 import { Iframe, IframeOptions, UrlResolver } from "sanity-plugin-iframe-pane";
 import { StructureResolver } from "sanity/structure";
 import { LightBulbIcon } from "@navikt/aksel-icons";
@@ -28,7 +27,6 @@ const filtered = [
   "templates_artikkel",
   "komponenter_landingsside",
   "media.tag",
-  "editor",
   "aksel_forside",
   "aksel_ds_forside",
   "redirect",
@@ -51,41 +49,10 @@ const filtered = [
   "cookie_tracker",
 ];
 
-export const structure: StructureResolver = async (
-  S,
-  { currentUser, getClient },
-) => {
-  const editor = await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
-    `*[_type == "editor" && ($mail == lower(email) || $mail == lower(alt_email))][0]`,
-    { mail: currentUser?.email.toLowerCase() ?? "" },
-  );
-
+export const structure: StructureResolver = async (S) => {
   return S.list()
     .title("Innhold")
     .items([
-      ...(editor
-        ? [
-            S.listItem()
-              .title(editor?.title ?? "Profilside")
-              .icon(() => (
-                <Avatar
-                  size="1100"
-                  name={editor?.title ?? "Profilside"}
-                  variant="beam"
-                  colors={[
-                    "#D1DAB9",
-                    "#92BEA5",
-                    "#6F646C",
-                    "#671045",
-                    "#31233E",
-                  ]}
-                />
-              ))
-              .child(S.document().schemaType("editor").documentId(editor._id)),
-            S.divider(),
-          ]
-        : []),
-
       gpStructure(S),
       grunnleggendeStructure(S),
       komponenterStructure(S),
@@ -123,9 +90,6 @@ export const structure: StructureResolver = async (
             ]),
         ),
       S.divider(),
-      S.listItem()
-        .title("Forfattere")
-        .child(S.documentTypeList("editor").title("Forfattere")),
       adminStructure(S),
 
       /**

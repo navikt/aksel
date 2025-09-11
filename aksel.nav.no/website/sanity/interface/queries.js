@@ -163,7 +163,6 @@ ${expansionCardBlock},
 ${defaultBlock},
 `;
 
-export const contributorsAll = `contributors[]->{title}`;
 export const writersAll = `writers[]->{title, description, avatar_id, type}`;
 
 export const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {

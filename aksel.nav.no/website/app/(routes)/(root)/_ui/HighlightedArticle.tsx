@@ -1,17 +1,9 @@
 import cl from "clsx";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import {
-  BodyLong,
-  BodyShort,
-  HGrid,
-  HStack,
-  Heading,
-  Link,
-} from "@navikt/ds-react";
+import { BodyLong, HGrid, HStack, Heading, Link } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import {
   ArticleT,
@@ -30,8 +22,6 @@ export const Highlight = ({
   compact: boolean;
 }) => {
   const useStatusImage = isKomponent(article) && article.status?.bilde;
-
-  const date = useFormatedDate(article?.publishedAt ?? article._createdAt);
 
   const imageUrl = urlForImage(
     isKomponent(article) ? article.status?.bilde : null,
@@ -65,11 +55,6 @@ export const Highlight = ({
     }
     return article.status?.tag;
   };
-
-  // Use type guards to properly access contributors
-  const authors = isArticle(article)
-    ? article.contributors?.map((author) => author.title).filter(Boolean) ?? []
-    : [];
 
   return (
     <HGrid
@@ -151,12 +136,6 @@ export const Highlight = ({
           {(isArticle(article) || isBlogg(article)) &&
             (article.ingress ?? article.seo?.meta)}
         </BodyLong>
-        {(isArticle(article) || isBlogg(article)) && authors.length > 0 && (
-          <BodyShort size="small" className={styles.highlightAuthor}>
-            <span className="font-semibold">{authors[0]}</span>
-            <span>{date}</span>
-          </BodyShort>
-        )}
       </div>
     </HGrid>
   );

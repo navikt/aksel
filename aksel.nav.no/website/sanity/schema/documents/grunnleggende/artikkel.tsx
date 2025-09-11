@@ -1,7 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { grunnleggendeKategorier } from "../../../config";
 import { artikkelPreview } from "../presets/artikkel-preview";
-import { editorField } from "../presets/editors";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
@@ -47,7 +46,6 @@ export const GrunnleggendeArtikkel = defineType({
       group: "settings",
     }),
     kategoriSlug(prefix),
-    editorField,
     defineField({
       title: "Metadata",
       name: "status",

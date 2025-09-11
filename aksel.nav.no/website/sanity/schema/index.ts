@@ -5,7 +5,6 @@ import * as object from "./objects";
 export const schema: SchemaPluginOptions = {
   types: [
     /* Documents */
-    document.Editors,
     document.EditorialStaff,
     document.Forside,
     document.DesignsystemForside,

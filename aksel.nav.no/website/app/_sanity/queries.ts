@@ -1,9 +1,5 @@
 import { defineQuery } from "next-sanity";
-import {
-  contributorsAll,
-  destructureBlocks,
-  writersAll,
-} from "@/sanity/queries";
+import { destructureBlocks, writersAll } from "@/sanity/queries";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
 
@@ -303,7 +299,6 @@ const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
         ...,
         "slug": slug.current,
         "content": null,
-        ${contributorsAll},
         "tema": undertema[]->tema->title,
       },
       "curatedRecent": {
@@ -330,8 +325,7 @@ const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
           "tema": undertema[]->tema->title,
           ingress,
           seo,
-          ${writersAll},
-          ${contributorsAll}
+          ${writersAll}
         },
         "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...7]{
           _type,
@@ -343,8 +337,7 @@ const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
           _createdAt,
           _updatedAt,
           publishedAt,
-          seo,
-          ${contributorsAll}
+          seo
         },
       },
     }
@@ -380,8 +373,7 @@ const PRINSIPPER_BY_SLUG_QUERY = defineQuery(`
   content[]{
     ...,
     ${destructureBlocks}
-  },
-  ${contributorsAll}
+  }
 }`);
 
 /* --------------------------------- Slack --------------------------------- */
@@ -389,9 +381,7 @@ const PRINSIPPER_BY_SLUG_QUERY = defineQuery(`
 const DOCUMENT_BY_ID_FOR_SLACK_QUERY = defineQuery(`*[_id == $id][0]{
       "id": _id,
       "title": heading,
-      "editors": contributors[]->email,
       "slug": slug.current,
-      "contacts": undertema[]->tema->contacts[]->email
     }`);
 
 /* --------------------------------- Sitemap -------------------------------- */

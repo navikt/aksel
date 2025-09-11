@@ -1,15 +1,10 @@
 "use server";
 
-import {
-  SectionBlock,
-  UsersLookupByEmailResponse,
-  WebClient,
-} from "@slack/web-api";
+import { WebClient } from "@slack/web-api";
 import { logger } from "@navikt/next-logger";
 import { verifyUserLoggedIn } from "@/app/_auth/rcs";
 import { client } from "@/app/_sanity/client";
 import { DOCUMENT_BY_ID_FOR_SLACK_QUERY } from "@/app/_sanity/queries";
-import { lookupSlackUserByEmail } from "./actions.utils";
 import { zodFormDataSchema } from "./actions.zod";
 
 type FormState =
@@ -67,66 +62,6 @@ async function sendFeedbackAction(
     };
   }
 
-  // Collect all emails to look up (auth user + editors)
-  const emailsToLookup = [
-    authUser.user.email,
-    ...(sanityDocument.editors || []),
-    ...(sanityDocument.contacts || []),
-  ];
-
-  // Remove duplicates
-  const uniqueEmails = [...new Set(emailsToLookup)].filter(isNonNullable);
-
-  // Lookup all users in parallel
-  const slackUsers = await Promise.all(
-    uniqueEmails.map((email) => lookupSlackUserByEmail(email)),
-  );
-
-  // Filter out null results and create a map for easy access
-  const slackUserMap = new Map<
-    string,
-    NonNullable<UsersLookupByEmailResponse["user"]>
-  >();
-
-  slackUsers.forEach((user, index) => {
-    if (user) {
-      slackUserMap.set(uniqueEmails[index], user);
-    }
-  });
-
-  if (slackUserMap.size === 0) {
-    logger.error(`Feedback: No slack users found for emails.`);
-    return {
-      value: "error",
-      error: "Fant ingen slack-brukere",
-    };
-  }
-
-  const senderSlackUser = slackUserMap.get(authUser.user.email);
-
-  const slackProfileForEditorsIds =
-    sanityDocument.editors
-      ?.filter(isNonNullable)
-      .map((email) => slackUserMap.get(email))
-      .filter(isNonNullable)
-      .map((user) => user.id)
-      .filter(isNonNullable) ?? [];
-
-  const slackProfileForTemaContactsIds =
-    sanityDocument.contacts
-      ?.filter(isNonNullable)
-      .map((email) => slackUserMap.get(email))
-      .filter(isNonNullable)
-      .map((user) => user.id)
-      .filter(isNonNullable) ?? [];
-
-  const recieverSlackIdList = [
-    ...new Set([
-      ...slackProfileForEditorsIds,
-      ...slackProfileForTemaContactsIds,
-    ]),
-  ];
-
   let postMessageError = false;
 
   await slackClient.chat
@@ -142,23 +77,9 @@ async function sendFeedbackAction(
             title: sanityDocument.title ?? "",
           },
           feedback: validatedFormData.data.feedback,
-          recievers: recieverSlackIdList,
-          sender: {
-            email: authUser.user.email,
-            slackId: senderSlackUser?.id,
-          },
+          recievers: [],
+          sender: authUser.user.email,
         }),
-        ...(recieverSlackIdList.length === 0
-          ? [
-              {
-                type: "section",
-                text: {
-                  type: "mrkdwn",
-                  text: ":exclamation: Denne artikkelen har ingen redaktører eller temakontater. @here",
-                },
-              } satisfies SectionBlock,
-            ]
-          : []),
       ],
     })
     .catch((e) => {
@@ -167,33 +88,6 @@ async function sendFeedbackAction(
         `Feedback: Error when sending slackbot feedback to private channel: ${e}`,
       );
     });
-
-  for (const slackId of recieverSlackIdList) {
-    await slackClient.chat
-      .postMessage({
-        channel: slackId,
-        text: `Tilbakemelding: ${validatedFormData.data.feedback}`,
-        blocks: slackBlock({
-          article: {
-            id: sanityDocument.id ?? "",
-            slug: sanityDocument.slug ?? "",
-            title: sanityDocument.title ?? "",
-          },
-          feedback: validatedFormData.data.feedback,
-          recievers: recieverSlackIdList,
-          sender: {
-            email: authUser.user.email,
-            slackId: senderSlackUser?.id,
-          },
-        }),
-      })
-      .catch((e) => {
-        postMessageError = true;
-        logger.error(
-          `Feedback: Error when sending slackbot feedback to private channel: ${e}`,
-        );
-      });
-  }
 
   if (postMessageError) {
     return {
@@ -205,18 +99,14 @@ async function sendFeedbackAction(
   return { value: "ok", error: null };
 }
 
-function isNonNullable<T>(value: T): value is NonNullable<T> {
-  return value !== null && value !== undefined;
-}
-
 type SlackBlockT = {
   feedback: string;
   article: { slug: string; title: string; id: string };
   recievers: string[];
-  sender: { email: string; slackId?: string };
+  sender: string;
 };
 
-function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
+function slackBlock({ feedback, article, sender }: SlackBlockT) {
   return [
     {
       type: "header",
@@ -258,11 +148,7 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
                 bold: true,
               },
             },
-            {
-              ...(sender.slackId
-                ? { type: "user", user_id: sender.slackId }
-                : { type: "text", text: sender.email }),
-            },
+            { type: "text", text: sender },
             {
               type: "text",
               text: "\n\nArtikkel:\n",
@@ -284,16 +170,6 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
             },
           ],
         },
-        {
-          type: "rich_text_list",
-          style: "bullet",
-          indent: 0,
-          border: 0,
-          elements: recievers.map((reciever) => ({
-            type: "rich_text_section",
-            elements: [{ type: "user", user_id: reciever }],
-          })),
-        },
       ],
     },
     {
@@ -312,7 +188,7 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
           text: ":pencil2: Rediger",
           emoji: true,
         },
-        url: `https://aksel.nav.no/admin/prod/intent/edit/id=${article.id}`,
+        url: `https://aksel.nav.no/admin/intent/edit/id=${article.id}`,
       },
     },
     {

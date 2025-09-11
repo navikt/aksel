@@ -9,10 +9,6 @@ export type ResolveSlugT<T> = Omit<T, "slug"> & {
   slug: string;
 };
 
-export type ResolveContributorsT<T> = Omit<T, "contributors"> & {
-  contributors: { title: string }[];
-};
-
 export type ResolveRelatedArticlesT<T> = Omit<T, "relevante_artikler"> & {
   relevante_artikler?: {
     heading: string;
@@ -40,9 +36,6 @@ type ArticleT = {
   slug: {
     current: string;
   };
-  contributors: {
-    _ref: string;
-  }[];
   ingress: string;
   content: any[];
   seo?: {
@@ -53,7 +46,7 @@ type ArticleT = {
 
 export interface AkselStandaloneDocT
   extends DocumentT<"aksel_standalone">,
-    Omit<ArticleT, "ingress" | "contributors" | "seo"> {}
+    Omit<ArticleT, "ingress" | "seo"> {}
 
 export interface AkselBloggFrontpageT extends DocumentT<"blogg_landingsside"> {
   intro: any[];

@@ -37,7 +37,7 @@ export const Tema = defineType({
       title: "Temakontakter",
       name: "contacts",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "editor" }] }],
+      of: [{ type: "reference", to: [{ type: "editorial_staff" }] }],
     }),
     defineField({
       name: "alias",

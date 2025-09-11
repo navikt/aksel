@@ -1,8 +1,5 @@
-import { groq } from "next-sanity";
 import { StructureBuilder } from "sanity/structure";
 import { SANITY_API_VERSION, allArticleDocuments } from "@/sanity/config";
-
-export const editorIsContributorFilter = groq`(lower($mail) in (contributors[]->{"email": lower(email)})[].email || lower($mail) in (contributors[]->{"email": lower(alt_email)})[].email)`;
 
 export function listPublishedArticles(
   S: StructureBuilder,
@@ -17,9 +14,7 @@ export function listPublishedArticles(
 
       return S.documentTypeList(type)
         .title("Artikler")
-        .filter(
-          `_type == $type && !(_id in path("drafts.**")) && ${editorIsContributorFilter}`,
-        )
+        .filter(`_type == $type && !(_id in path("drafts.**"))`)
         .apiVersion(SANITY_API_VERSION)
         .params({ type, mail })
         .initialValueTemplates([]);
@@ -40,9 +35,7 @@ export function listMyDraftArticles(
 
       return S.documentTypeList(type)
         .title("Artikler")
-        .filter(
-          `_type == $type && _id in path("drafts.**") && ${editorIsContributorFilter}`,
-        )
+        .filter(`_type == $type && _id in path("drafts.**")`)
         .apiVersion(SANITY_API_VERSION)
         .params({ type, mail })
         .initialValueTemplates([]);
