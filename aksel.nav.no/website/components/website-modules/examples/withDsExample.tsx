@@ -1,6 +1,8 @@
 import cl from "clsx";
 import { useTheme } from "next-themes";
-import { ComponentType, useEffect, useState } from "react";
+import Head from "next/head";
+import { usePathname } from "next/navigation";
+import { ComponentType, useSyncExternalStore } from "react";
 import {
   LaptopIcon,
   MobileIcon,
@@ -33,73 +35,14 @@ export const withDsExample = (
   { variant, background, showBreakpoints, legacyOnly = false }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
-    const [width, setWidth] = useState<number>();
     const { theme } = useTheme();
+    const pathname = usePathname() || "///";
+    const pathParts = pathname.split("/");
 
-    useEffect(() => {
-      const updateWidth = () => {
-        setWidth(window.innerWidth);
-      };
-      window.addEventListener("resize", updateWidth);
-      updateWidth();
-
-      return () => {
-        window.removeEventListener("resize", updateWidth);
-      };
-    }, []);
-
-    const BreakpointText = () => {
-      let breakpoint = "";
-      let Icon = LaptopIcon;
-      if (!width) {
-        Icon = MonitorIcon;
-        breakpoint = "xl";
-      } else if (width < 480) {
-        Icon = MobileSmallIcon;
-        breakpoint = "xs";
-      } else if (width < 768) {
-        Icon = MobileIcon;
-        breakpoint = "sm";
-      } else if (width < 1024) {
-        Icon = TabletIcon;
-        breakpoint = "md";
-      } else if (width < 1280) {
-        Icon = LaptopIcon;
-        breakpoint = "lg";
-      } else {
-        Icon = MonitorIcon;
-        breakpoint = "xl";
-      }
-      return (
-        <Box
-          asChild
-          position="absolute"
-          left="0"
-          top="0"
-          borderRadius="0 0 medium 0"
-          padding="space-4"
-        >
-          <HStack
-            gap="space-2"
-            align="center"
-            style={{ background: getBg(background) }}
-          >
-            <Icon aria-hidden fontSize="1.5rem" /> {`${breakpoint}`}
-            <Box marginInline="space-8 space-0" asChild>
-              <BodyShort textColor="subtle">{width}px</BodyShort>
-            </Box>
-          </HStack>
-        </Box>
-      );
-    };
-
-    let Wrapper: string | ((props: any) => JSX.Element) = "div";
-
-    if ((theme === "light" || theme === "dark") && !legacyOnly) {
-      Wrapper = (_props: any) => (
-        <AkselTheme {..._props} hasBackground={false} />
-      );
-    }
+    const Wrapper =
+      (theme === "light" || theme === "dark") && !legacyOnly
+        ? (_props: any) => <AkselTheme {..._props} hasBackground={false} />
+        : "div";
 
     return (
       <Wrapper
@@ -114,14 +57,21 @@ export const withDsExample = (
         })}
         style={{ background: getBg(background) }}
       >
+        <Head>
+          <title>
+            {pathParts[2]}: {pathParts[3]} -{" "}
+            {pathParts[1] === "templates" ? "Mønster/maler" : "Kodeeksempel"} -
+            aksel.nav.no
+          </title>
+        </Head>
         <ExampleThemingSwitch legacyOnly={legacyOnly} />
         {showBreakpoints && <BreakpointText />}
-        <div
+        <main
           id="ds-example"
           className={variant === "static" ? styles.exampleStatic : undefined}
         >
           <Component {...props} />
-        </div>
+        </main>
       </Wrapper>
     );
   };
@@ -144,3 +94,59 @@ function getBg(background: withDsT["background"]): string {
       return "var(--ax-bg-default)";
   }
 }
+
+const BreakpointText = () => {
+  const width = useSyncExternalStore(
+    subscribeToResize,
+    () => window.innerWidth,
+    () => 0,
+  );
+
+  let Icon = MonitorIcon;
+  let breakpoint = "xl";
+  if (!width) {
+    Icon = MonitorIcon;
+    breakpoint = "xl";
+  } else if (width < 480) {
+    Icon = MobileSmallIcon;
+    breakpoint = "xs";
+  } else if (width < 768) {
+    Icon = MobileIcon;
+    breakpoint = "sm";
+  } else if (width < 1024) {
+    Icon = TabletIcon;
+    breakpoint = "md";
+  } else if (width < 1280) {
+    Icon = LaptopIcon;
+    breakpoint = "lg";
+  }
+
+  return (
+    <Box
+      asChild
+      position="absolute"
+      left="0"
+      top="0"
+      borderRadius="0 0 medium 0"
+      padding="space-4"
+    >
+      <HStack
+        gap="space-2"
+        align="center"
+        style={{ background: "var(--ax-bg-default)" }}
+      >
+        <Icon aria-hidden fontSize="1.5rem" /> {breakpoint}
+        <Box marginInline="space-8 space-0" asChild>
+          <BodyShort textColor="subtle">{width}px</BodyShort>
+        </Box>
+      </HStack>
+    </Box>
+  );
+};
+
+const subscribeToResize = (onChange: () => void) => {
+  window.addEventListener("resize", onChange);
+  return () => {
+    window.removeEventListener("resize", onChange);
+  };
+};

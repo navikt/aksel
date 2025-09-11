@@ -1,5 +1,33 @@
 # @navikt/ds-react
 
+## 7.30.0
+
+### Minor Changes
+
+- FormSummary: Changed `FormSummary.Header`-component to `<div />` instead of `<header />`. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+- FormSummary: Added new component `<FormSummary.Footer />`, we now require `<FormSummary.EditLink />` to be placed in footer instead of header. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+### Patch Changes
+
+- Datepicker: Fix regression causing clickable weeknumber to have no applied styles in Darkside. ([#4081](https://github.com/navikt/aksel/pull/4081))
+
+- Timeline: Adjusted type for `onSelectPeriod()` and fixed warning when using refs in React 19 ([#4076](https://github.com/navikt/aksel/pull/4076))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.30.0
+  - @navikt/aksel-icons@7.30.0
+
+## 7.29.1
+
+### Patch Changes
+
+- Checkbox, List: Updated SVG-usage to avoid using rem-values directly on `width` and `height`-attributes. ([#4048](https://github.com/navikt/aksel/pull/4048))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.29.1
+  - @navikt/aksel-icons@7.29.1
+
 ## 7.29.0
 
 ### Minor Changes

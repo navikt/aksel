@@ -43,8 +43,13 @@ export default meta;
 export const LoneAvatar: StoryFn = () => {
   return (
     <VStack gap="space-16">
-      <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
-      <Avatar showName imageSrc="/avatars/aksel.svg" name="Team aksel" />
+      <Avatar type="Team" imageSrc="/avatars/aksel.svg" name="Team aksel" />
+      <Avatar
+        type="Miljø"
+        showName
+        imageSrc="/avatars/aksel.svg"
+        name="Team aksel"
+      />
     </VStack>
   );
 };
@@ -70,7 +75,11 @@ export const LoneAvatarInteractive: StoryFn = () => {
           </>
         }
       >
-        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel"></Avatar>
+        <Avatar
+          type="Team"
+          imageSrc="/avatars/aksel.svg"
+          name="Team aksel"
+        ></Avatar>
       </HoverCard>
       <HoverCard
         popoverContent={
@@ -91,6 +100,7 @@ export const LoneAvatarInteractive: StoryFn = () => {
         }
       >
         <Avatar
+          type="Team"
           showName
           imageSrc="/avatars/aksel.svg"
           name="Team aksel"
@@ -118,6 +128,7 @@ export const LoneAvatarInteractive: StoryFn = () => {
             }
           >
             <Avatar
+              type="Team"
               showName
               imageSrc="/avatars/aksel.svg"
               name="Team aksel"
@@ -142,6 +153,7 @@ export const LoneAvatarInteractive: StoryFn = () => {
             }
           >
             <Avatar
+              type="Team"
               showName
               imageSrc="/avatars/aksel.svg"
               name="Team aksel"
@@ -174,9 +186,9 @@ export const StackInteractive: StoryFn = () => {
       }
     >
       <AvatarStack>
-        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
-        <Avatar imageSrc="/avatars/001.svg" name="Team Nav.no" />
-        <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+        <Avatar type="Team" imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        <Avatar type="Team" imageSrc="/avatars/001.svg" name="Team Nav.no" />
+        <Avatar type="Team" imageSrc="/avatars/002.svg" name="Team Nais" />
       </AvatarStack>
     </HoverCard>
   );
@@ -186,7 +198,7 @@ export const SingleStack: StoryFn = () => {
   return (
     <div>
       <AvatarStack>
-        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        <Avatar type="Team" imageSrc="/avatars/aksel.svg" name="Team aksel" />
       </AvatarStack>
     </div>
   );
@@ -196,14 +208,15 @@ export const MultipleStack: StoryFn = () => {
   return (
     <VStack gap="space-8">
       <AvatarStack>
-        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
-        <Avatar imageSrc="/avatars/001.svg" name="Team Nav.no" />
-        <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+        <Avatar type="Team" imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        <Avatar type="Team" imageSrc="/avatars/001.svg" name="Team Nav.no" />
+        <Avatar type="Team" imageSrc="/avatars/002.svg" name="Team Nais" />
       </AvatarStack>
       <AvatarStack>
-        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        <Avatar type="Team" imageSrc="/avatars/aksel.svg" name="Team aksel" />
         {[...Array(20)].map((counter) => (
           <Avatar
+            type="Team"
             key={counter}
             name={`Team ${counter}`}
             imageSrc="/avatars/003.svg"
@@ -211,14 +224,15 @@ export const MultipleStack: StoryFn = () => {
         ))}
       </AvatarStack>
       <AvatarStack showNames>
-        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
-        <Avatar imageSrc="/avatars/001.svg" name="Team Nav.no" />
-        <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+        <Avatar type="Team" imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        <Avatar type="Team" imageSrc="/avatars/001.svg" name="Team Nav.no" />
+        <Avatar type="Team" imageSrc="/avatars/002.svg" name="Team Nais" />
       </AvatarStack>
       <AvatarStack showNames>
-        <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+        <Avatar type="Team" imageSrc="/avatars/aksel.svg" name="Team aksel" />
         {[...Array(20)].map((counter) => (
           <Avatar
+            type="Team"
             key={counter}
             name={`Team ${counter}`}
             imageSrc="/avatars/003.svg"
@@ -232,9 +246,9 @@ export const MultipleStack: StoryFn = () => {
 export const MissingImage: StoryFn = () => {
   return (
     <AvatarStack>
-      <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
-      <Avatar imageSrc="/avatars/missing.svg" name="Team Nav.no" />
-      <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+      <Avatar type="Team" imageSrc="/avatars/aksel.svg" name="Team aksel" />
+      <Avatar type="Team" imageSrc="/avatars/missing.svg" name="Team Nav.no" />
+      <Avatar type="Team" imageSrc="/avatars/002.svg" name="Team Nais" />
     </AvatarStack>
   );
 };
@@ -257,7 +271,11 @@ export const InsideCard: StoryFn = () => {
         </LinkCardDescription>
         <LinkCardFooter>
           <AvatarStack showNames>
-            <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
+            <Avatar
+              type="Team"
+              imageSrc="/avatars/aksel.svg"
+              name="Team aksel"
+            />
           </AvatarStack>
         </LinkCardFooter>
       </LinkCard>
@@ -274,9 +292,17 @@ export const InsideCard: StoryFn = () => {
         </LinkCardDescription>
         <LinkCardFooter>
           <AvatarStack showNames>
-            <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
-            <Avatar imageSrc="/avatars/001.svg" name="Team Nav.no" />
-            <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+            <Avatar
+              type="Team"
+              imageSrc="/avatars/aksel.svg"
+              name="Team aksel"
+            />
+            <Avatar
+              type="Team"
+              imageSrc="/avatars/001.svg"
+              name="Team Nav.no"
+            />
+            <Avatar type="Team" imageSrc="/avatars/002.svg" name="Team Nais" />
           </AvatarStack>
         </LinkCardFooter>
       </LinkCard>
@@ -287,9 +313,17 @@ export const InsideCard: StoryFn = () => {
         <LinkCardDescription>description</LinkCardDescription>
         <LinkCardFooter>
           <AvatarStack showNames>
-            <Avatar imageSrc="/avatars/aksel.svg" name="Team aksel" />
-            <Avatar imageSrc="/avatars/001.svg" name="Team Nav.no" />
-            <Avatar imageSrc="/avatars/002.svg" name="Team Nais" />
+            <Avatar
+              type="Team"
+              imageSrc="/avatars/aksel.svg"
+              name="Team aksel"
+            />
+            <Avatar
+              type="Team"
+              imageSrc="/avatars/001.svg"
+              name="Team Nav.no"
+            />
+            <Avatar type="Team" imageSrc="/avatars/002.svg" name="Team Nais" />
           </AvatarStack>
         </LinkCardFooter>
       </LinkCard>

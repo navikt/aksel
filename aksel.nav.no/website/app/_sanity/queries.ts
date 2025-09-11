@@ -1,5 +1,9 @@
 import { defineQuery } from "next-sanity";
-import { contributorsAll, destructureBlocks } from "@/sanity/queries";
+import {
+  contributorsAll,
+  destructureBlocks,
+  writersAll,
+} from "@/sanity/queries";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
 
@@ -35,6 +39,19 @@ const DESIGNSYSTEM_OVERVIEW_PAGES_QUERY = defineQuery(
   }`,
 );
 
+const BLOGG_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "aksel_blogg" && slug.current == $slug][0]
+{
+  ...,
+  "slug": slug.current,
+  content[]{
+    ...,
+    ${destructureBlocks}
+  },
+  publishedAt,
+  ${writersAll}
+}`);
+
 const BLOGG_LANDINGSSIDE_BLOGS_QUERY = defineQuery(`
   *[_type == "blogg_landingsside"][0]{
     "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){
@@ -45,7 +62,7 @@ const BLOGG_LANDINGSSIDE_BLOGS_QUERY = defineQuery(`
       _createdAt,
       _id,
       "slug": slug.current,
-      ${contributorsAll}
+      ${writersAll}
     }
   }`);
 
@@ -145,19 +162,6 @@ const MONSTER_MALER_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
-}`);
-
-const BLOGG_BY_SLUG_QUERY =
-  defineQuery(`*[_type == "aksel_blogg" && slug.current == $slug][0]
-{
-  ...,
-  "slug": slug.current,
-  content[]{
-    ...,
-    ${destructureBlocks}
-  },
-  ${contributorsAll},
-  publishedAt,
 }`);
 
 const TOC_BY_SLUG_QUERY =
@@ -276,7 +280,7 @@ const GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY = defineQuery(
         "image": seo.image
       }
     },
-    ${contributorsAll},
+    ${writersAll},
     relevante_artikler[]->{
       heading,
       ingress,
@@ -313,7 +317,7 @@ const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
           "slug": slug.current,
           ingress,
           seo,
-          ${contributorsAll}
+          ${writersAll}
         },
         "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{
           _type,
@@ -326,6 +330,7 @@ const LANDINGSSIDE_LATEST_QUERY = defineQuery(`
           "tema": undertema[]->tema->title,
           ingress,
           seo,
+          ${writersAll},
           ${contributorsAll}
         },
         "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...7]{
