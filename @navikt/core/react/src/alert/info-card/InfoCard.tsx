@@ -3,7 +3,7 @@ import { BaseAlert } from "../base-alert";
 
 type InfoCardProps = Omit<
   BaseAlert.RootProps,
-  "type" | "global" | "statusType"
+  "type" | "global" | "statusType" | "variant"
 >;
 
 interface InfoCardComponent

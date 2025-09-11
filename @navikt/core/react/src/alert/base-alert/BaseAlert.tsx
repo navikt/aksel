@@ -1,5 +1,10 @@
 import React, { forwardRef } from "react";
-import { XMarkIcon } from "@navikt/aksel-icons";
+import {
+  CheckmarkCircleFillIcon,
+  ExclamationmarkTriangleFillIcon,
+  XMarkIcon,
+  XMarkOctagonFillIcon,
+} from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { useRenameCSS } from "../../theme/Theme";
 import { AkselColor } from "../../types";
@@ -10,6 +15,7 @@ import { useI18n } from "../../util/i18n/i18n.hooks";
 type BaseAlert = {
   size: "medium" | "small";
   statusType: "alert" | "message";
+  variant?: "success" | "warning" | "error";
 };
 
 const [BaseAlertProvider, useBaseAlert] = createContext<BaseAlert>({
@@ -44,6 +50,10 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * Changes the semantics of the alert. Use "alert" for important information that needs user attention, and "message" for less important information.
    */
   statusType: BaseAlert["statusType"];
+  /**
+   * Type of alert
+   */
+  variant?: BaseAlert["variant"];
 }
 
 const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
@@ -56,11 +66,14 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
       type,
       global = false,
       statusType,
+      variant,
       ...restProps
     }: BaseAlertProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
+
+    const alertColor = variant ? variantToDataColor(variant) : dataColor;
 
     return (
       <div
@@ -68,11 +81,15 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
         {...restProps}
         className={cn(className, "navds-base-alert")}
         data-size={size}
-        data-color={dataColor}
+        data-color={alertColor}
         data-type={type}
         data-global={global}
       >
-        <BaseAlertProvider size={size} statusType={statusType}>
+        <BaseAlertProvider
+          size={size}
+          statusType={statusType}
+          variant={variant}
+        >
           {children}
         </BaseAlertProvider>
       </div>
@@ -106,6 +123,7 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
+    const { variant } = useBaseAlert();
 
     return (
       <div
@@ -113,9 +131,9 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
         {...restProps}
         className={cn(className, "navds-base-alert__header")}
       >
-        {icon && (
+        {(variant || icon) && (
           <div className={cn("navds-base-alert__icon")} aria-hidden>
-            {icon}
+            {variant ? <VariantIcon variant={variant} /> : icon}
           </div>
         )}
         {children}
@@ -257,6 +275,35 @@ const BaseAlertCloseButton = forwardRef<
     );
   },
 );
+
+/* -------------------------- BaseAlert Utilities -------------------------- */
+function VariantIcon({ variant }: { variant: BaseAlertProps["variant"] }) {
+  switch (variant) {
+    case "success":
+      return <CheckmarkCircleFillIcon />;
+    case "warning":
+      return <ExclamationmarkTriangleFillIcon />;
+    case "error":
+      return <XMarkOctagonFillIcon />;
+  }
+
+  return null;
+}
+
+function variantToDataColor(
+  variant: BaseAlertProps["variant"],
+): AkselColor | undefined {
+  switch (variant) {
+    case "success":
+      return "success";
+    case "warning":
+      return "warning";
+    case "error":
+      return "danger";
+  }
+
+  return undefined;
+}
 
 export {
   BaseAlert as Root,
