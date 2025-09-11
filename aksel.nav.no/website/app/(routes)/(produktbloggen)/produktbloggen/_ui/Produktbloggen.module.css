@@ -146,6 +146,12 @@
   text-wrap: balance;
   font-size: 3rem;
   color: var(--ax-text-brand-blue);
+  hyphens: auto;
+
+  @media (max-width: 480px) {
+    font-size: 2.5rem;
+    line-height: var(--ax-font-line-height-heading-2xlarge);
+  }
 }
 
 .bodyLong1 {
