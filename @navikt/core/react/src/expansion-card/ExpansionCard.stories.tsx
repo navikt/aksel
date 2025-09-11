@@ -41,7 +41,7 @@ const Content = () => (
       lunsjpauser, trimaktiviteter og lignende i arbeidstiden.
     </BodyLong>
     <Link href="#">LENKE</Link>
-    <Checkbox>Label</Checkbox>
+    <Checkbox checked>Label</Checkbox>
     <BodyLong spacing>
       Som hovedregel er du som arbeidstaker ikke yrkesskadedekket på veien til
       og fra arbeid eller første og siste oppdragssted. Du er heller ikke
