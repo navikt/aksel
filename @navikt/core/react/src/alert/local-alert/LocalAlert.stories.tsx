@@ -147,6 +147,7 @@ export const WrappingTitle: Story = {
             Molestias, laudantium saepe. Nihil in alias praesentium maxime iure
             ipsam? Accusantium libero quia quis!
           </LocalAlertTitle>
+          <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
         </LocalAlertHeader>
         <DemoContent />
       </LocalAlert>
