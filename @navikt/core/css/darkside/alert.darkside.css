@@ -90,6 +90,7 @@
   overflow: clip;
   position: relative;
   height: fit-content;
+  box-sizing: content-box;
 
   --__axc-base-alert-header-p: var(--ax-space-8) var(--ax-space-20);
   --__axc-base-alert-content-p: var(--ax-space-12) var(--ax-space-20) var(--ax-space-16) var(--ax-space-20);
@@ -104,11 +105,13 @@
   }
 
   &[data-type="moderate"] {
-    border: 1px solid var(--ax-border-default);
+    outline: 1px solid var(--ax-border-default);
+    outline-offset: -1px;
   }
 
   &[data-type="strong"] {
-    border: 4px solid var(--ax-border-default);
+    outline: 4px solid var(--ax-border-default);
+    outline-offset: -4px;
   }
 
   /* TODO: Add centering */

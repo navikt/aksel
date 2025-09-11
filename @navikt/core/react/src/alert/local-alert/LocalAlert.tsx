@@ -16,6 +16,7 @@ interface LocalAlertComponent
   Header: typeof LocalAlertHeader;
   Title: typeof LocalAlertTitle;
   Content: typeof LocalAlertContent;
+  CloseButton: typeof LocalAlertCloseButton;
 }
 
 /**a
@@ -98,14 +99,40 @@ type LocalAlertContentProps = BaseAlert.ContentProps;
  */
 const LocalAlertContent = BaseAlert.Content;
 
+/* ----------------------------- LocalAlertCloseButton ---------------------------- */
+type LocalAlertCloseButtonProps = BaseAlert.CloseButtonProps;
+
+/**
+ * @see 🏷️ {@link LocalAlertCloseButtonProps}
+ * @example
+ * ```jsx
+ *  <LocalAlert>
+ *    <LocalAlert.Header>
+ *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
+ *     <LocalAlert.CloseButton onClick={() => alert("Lukket!")} />
+ *    </LocalAlert.Header>
+ *
+ *  </LocalAlert>
+ * ```
+ */
+const LocalAlertCloseButton = BaseAlert.CloseButton;
+
 LocalAlert.Header = LocalAlertHeader;
 LocalAlert.Title = LocalAlertTitle;
 LocalAlert.Content = LocalAlertContent;
+LocalAlert.CloseButton = LocalAlertCloseButton;
 
-export { LocalAlert, LocalAlertContent, LocalAlertHeader, LocalAlertTitle };
+export {
+  LocalAlert,
+  LocalAlertContent,
+  LocalAlertHeader,
+  LocalAlertTitle,
+  LocalAlertCloseButton,
+};
 export type {
   LocalAlertContentProps,
   LocalAlertHeaderProps,
   LocalAlertProps,
   LocalAlertTitleProps,
+  LocalAlertCloseButtonProps,
 };

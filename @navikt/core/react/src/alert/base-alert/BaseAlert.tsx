@@ -260,6 +260,7 @@ const BaseAlertCloseButton = forwardRef<
         variant="tertiary-neutral"
         className={cn(className, "navds-base-alert__close-button")}
         type="button"
+        size="small"
         icon={
           <XMarkIcon
             title={

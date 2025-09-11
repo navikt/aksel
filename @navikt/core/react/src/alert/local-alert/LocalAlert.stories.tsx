@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { ChevronDownIcon, InformationSquareIcon } from "@navikt/aksel-icons";
+import { InformationSquareIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { Spacer, VStack } from "../../layout/stack";
+import { VStack } from "../../layout/stack";
 import { Link } from "../../link";
 import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import {
   LocalAlert,
+  LocalAlertCloseButton,
   LocalAlertContent,
   LocalAlertHeader,
   LocalAlertTitle,
@@ -100,35 +101,16 @@ export const Compositions: Story = {
   },
 };
 
-export const CustomHeaders: Story = {
+export const CloseButton: Story = {
   render: () => {
-    const [open, setOpen] = React.useState(false);
     return (
-      <VStack gap="space-24">
-        <LocalAlert variant="success">
-          <LocalAlertHeader icon={<InformationSquareIcon />}>
-            <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
-            <Spacer />
-            <Button
-              icon={<ChevronDownIcon aria-hidden />}
-              data-color="neutral"
-              variant="tertiary"
-              size="small"
-              style={{ rotate: open ? "180deg" : "0deg" }}
-              onClick={() => setOpen((prev) => !prev)}
-            />
-          </LocalAlertHeader>
-          {open && <DemoContent />}
-        </LocalAlert>
-        <LocalAlert variant="success">
-          <LocalAlertHeader icon={<InformationSquareIcon />}>
-            <Link href="#">
-              <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
-            </Link>
-          </LocalAlertHeader>
-          {open && <DemoContent />}
-        </LocalAlert>
-      </VStack>
+      <LocalAlert variant="success">
+        <LocalAlertHeader icon={<InformationSquareIcon />}>
+          <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
+          <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
+        </LocalAlertHeader>
+        <DemoContent />
+      </LocalAlert>
     );
   },
   parameters: {
@@ -159,7 +141,7 @@ export const Chromatic = renderStoriesForChromatic({
   SizeSmall,
   OnlyHeader,
   Compositions,
-  CustomHeaders,
+  CloseButton,
   WrappingTitle,
 });
 
