@@ -243,39 +243,32 @@ type BaseAlertCloseButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 const BaseAlertCloseButton = forwardRef<
   HTMLButtonElement,
   BaseAlertCloseButtonProps
->(
-  (
-    { children, className, ...restProps }: BaseAlertCloseButtonProps,
-    forwardedRef,
-  ) => {
-    const { cn } = useRenameCSS();
-    const translate = useI18n("Alert");
-    const { statusType } = useBaseAlert();
+>(({ className, ...restProps }: BaseAlertCloseButtonProps, forwardedRef) => {
+  const { cn } = useRenameCSS();
+  const translate = useI18n("Alert");
+  const { statusType } = useBaseAlert();
 
-    return (
-      <Button
-        ref={forwardedRef}
-        {...restProps}
-        data-color="neutral"
-        variant="tertiary-neutral"
-        className={cn(className, "navds-base-alert__close-button")}
-        type="button"
-        size="small"
-        icon={
-          <XMarkIcon
-            title={
-              statusType === "alert"
-                ? translate("closeAlert")
-                : translate("closeMessage")
-            }
-          />
-        }
-      >
-        {children}
-      </Button>
-    );
-  },
-);
+  return (
+    <Button
+      ref={forwardedRef}
+      {...restProps}
+      data-color="neutral"
+      variant="tertiary-neutral"
+      className={cn(className, "navds-base-alert__close-button")}
+      type="button"
+      size="small"
+      icon={
+        <XMarkIcon
+          title={
+            statusType === "alert"
+              ? translate("closeAlert")
+              : translate("closeMessage")
+          }
+        />
+      }
+    />
+  );
+});
 
 /* -------------------------- BaseAlert Utilities -------------------------- */
 function VariantIcon({ variant }: { variant: BaseAlertProps["variant"] }) {

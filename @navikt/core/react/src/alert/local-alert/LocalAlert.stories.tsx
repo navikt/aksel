@@ -63,6 +63,7 @@ export const SizeSmall: Story = {
       <LocalAlert variant="success" size="small">
         <LocalAlertHeader icon={<InformationSquareIcon />}>
           <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
+          <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
         </LocalAlertHeader>
         <DemoContent />
       </LocalAlert>
@@ -73,11 +74,19 @@ export const SizeSmall: Story = {
 export const OnlyHeader: Story = {
   render: () => {
     return (
-      <LocalAlert variant="success">
-        <LocalAlertHeader icon={<InformationSquareIcon />}>
-          <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
-        </LocalAlertHeader>
-      </LocalAlert>
+      <VStack gap="space-16">
+        <LocalAlert variant="success">
+          <LocalAlertHeader icon={<InformationSquareIcon />}>
+            <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
+          </LocalAlertHeader>
+        </LocalAlert>
+        <LocalAlert variant="success">
+          <LocalAlertHeader icon={<InformationSquareIcon />}>
+            <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
+            <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
+          </LocalAlertHeader>
+        </LocalAlert>
+      </VStack>
     );
   },
 };
@@ -104,13 +113,22 @@ export const Compositions: Story = {
 export const CloseButton: Story = {
   render: () => {
     return (
-      <LocalAlert variant="success">
-        <LocalAlertHeader icon={<InformationSquareIcon />}>
-          <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
-          <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
-        </LocalAlertHeader>
-        <DemoContent />
-      </LocalAlert>
+      <VStack gap="space-16">
+        <LocalAlert variant="success">
+          <LocalAlertHeader icon={<InformationSquareIcon />}>
+            <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
+            <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
+          </LocalAlertHeader>
+          <DemoContent />
+        </LocalAlert>
+        <LocalAlert variant="success" size="small">
+          <LocalAlertHeader icon={<InformationSquareIcon />}>
+            <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
+            <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
+          </LocalAlertHeader>
+          <DemoContent />
+        </LocalAlert>
+      </VStack>
     );
   },
   parameters: {
