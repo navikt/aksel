@@ -36,7 +36,6 @@
 @import "./guide-panel.darkside.css" layer(aksel.components);
 @import "./help-text.darkside.css" layer(aksel.components);
 @import "./internalheader.darkside.css" layer(aksel.components);
-@import "./info-card.darkside.css" layer(aksel.components);
 @import "./link.darkside.css" layer(aksel.components);
 @import "./link-panel.darkside.css" layer(aksel.components);
 @import "./link-anchor.darkside.css" layer(aksel.components);

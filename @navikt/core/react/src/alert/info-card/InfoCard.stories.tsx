@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { ChevronDownIcon, InformationSquareIcon } from "@navikt/aksel-icons";
 import type { AkselColorRole } from "@navikt/ds-tokens/types";
-import { Button } from "../button";
-import { Spacer, VStack } from "../layout/stack";
-import { Link } from "../link";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { Button } from "../../button";
+import { Spacer, VStack } from "../../layout/stack";
+import { Link } from "../../link";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import {
   InfoCard,
   InfoCardContent,

@@ -82,3 +82,80 @@
     }
   }
 }
+
+/* -------------------- InfoCard, LocalAlert, GlobalAlert ------------------- */
+.aksel-base-alert {
+  display: grid;
+  border-radius: var(--ax-radius-12);
+  overflow: clip;
+  position: relative;
+  height: fit-content;
+
+  --__axc-base-alert-header-p: var(--ax-space-8) var(--ax-space-20);
+  --__axc-base-alert-content-p: var(--ax-space-12) var(--ax-space-20) var(--ax-space-16) var(--ax-space-20);
+  --__axc-base-alert-icon-mt: var(--ax-space-4);
+  --__axc-base-alert-title-pb: var(--ax-space-2);
+
+  &[data-size="small"] {
+    --__axc-base-alert-header-p: var(--ax-space-8) var(--ax-space-16);
+    --__axc-base-alert-content-p: var(--ax-space-8) var(--ax-space-16) var(--ax-space-12) var(--ax-space-16);
+    --__axc-base-alert-icon-mt: var(--ax-space-2);
+    --__axc-base-alert-title-pb: var(--ax-space-0);
+  }
+
+  &[data-type="moderate"] {
+    border: 1px solid var(--ax-border-default);
+  }
+
+  &[data-type="strong"] {
+    border: 4px solid var(--ax-border-default);
+  }
+
+  /* TODO: Add centering */
+  &[data-global="true"] {
+    border-radius: 0;
+  }
+}
+
+.aksel-base-alert__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ax-space-8);
+  padding: var(--__axc-base-alert-header-p);
+  border-bottom: 1px solid;
+
+  .aksel-base-alert[data-type="moderate"] & {
+    background: var(--ax-bg-moderate);
+    color: var(--ax-text-subtle);
+    border-color: var(--ax-border-subtleA);
+  }
+
+  .aksel-base-alert[data-type="strong"] & {
+    background: var(--ax-bg-strong);
+    color: var(--ax-text-contrast);
+    border-color: transparent;
+  }
+
+  &:only-child {
+    border-bottom: none;
+  }
+}
+
+.aksel-base-alert__icon {
+  font-size: 1.5rem;
+  margin-top: var(--__axc-base-alert-icon-mt);
+  display: grid;
+
+  .aksel-base-alert--small & {
+    font-size: 1.25rem;
+  }
+}
+
+.aksel-base-alert__title {
+  padding-block: var(--__axc-base-alert-title-pb);
+}
+
+.aksel-base-alert__content {
+  padding: var(--__axc-base-alert-content-p);
+  background-color: var(--ax-bg-default);
+}

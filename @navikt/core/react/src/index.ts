@@ -163,13 +163,13 @@ export {
   type LinkCardIconProps,
   type LinkCardImageProps,
 } from "./link-card";
-export {
+/* export {
   InfoCard,
   type InfoCardProps,
   type InfoCardHeaderProps,
   type InfoCardTitleProps,
   type InfoCardContentProps,
-} from "./info-card";
+} from "./info-card"; */
 
 /**
  * Theming
