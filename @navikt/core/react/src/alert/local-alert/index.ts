@@ -1,14 +1,14 @@
 "use client";
 export {
-  InfoCard,
-  InfoCardHeader,
-  InfoCardTitle,
-  InfoCardContent,
-} from "./InfoCard";
+  LocalAlert,
+  LocalAlertHeader,
+  LocalAlertTitle,
+  LocalAlertContent,
+} from "./LocalAlert";
 
 export type {
-  InfoCardProps,
-  InfoCardHeaderProps,
-  InfoCardTitleProps,
-  InfoCardContentProps,
-} from "./InfoCard";
+  LocalAlertProps,
+  LocalAlertHeaderProps,
+  LocalAlertTitleProps,
+  LocalAlertContentProps,
+} from "./LocalAlert";

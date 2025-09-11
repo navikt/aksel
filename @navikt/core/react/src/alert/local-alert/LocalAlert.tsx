@@ -25,9 +25,9 @@ interface LocalAlertComponent
  * @see 🏷️ {@link LocalAlertProps}
  * @example
  * ```jsx
- *  <LocalAlert data-color="info">
- *    <LocalAlert.Header icon={<InformationSquareIcon />}>
- *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
+ *  <LocalAlert variant="error">
+ *    <LocalAlert.Header>
+ *      <LocalAlert.Title>Alert tittel</LocalAlert.Title>
  *    </LocalAlert.Header>
  *    <LocalAlert.Content>Innhold</LocalAlert.Content>
  *  </LocalAlert>
