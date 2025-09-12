@@ -63,7 +63,11 @@ type GlobalAlertHeaderProps = Omit<BaseAlert.HeaderProps, "icon">;
  *  </GlobalAlert>
  * ```
  */
-const GlobalAlertHeader = BaseAlert.Header;
+const GlobalAlertHeader = forwardRef<HTMLDivElement, GlobalAlertHeaderProps>(
+  (props, forwardedRef) => {
+    return <BaseAlert.Header ref={forwardedRef} {...props} />;
+  },
+);
 
 /* ----------------------------- GlobalAlertTitle ----------------------------- */
 type GlobalAlertTitleProps = BaseAlert.TitleProps;

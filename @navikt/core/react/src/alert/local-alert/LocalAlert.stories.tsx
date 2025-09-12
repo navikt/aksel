@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { InformationSquareIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Link } from "../../link";
@@ -135,7 +134,7 @@ export const CloseButton: Story = {
           <DemoContent />
         </LocalAlert>
         <LocalAlert variant="announcement" size="small">
-          <LocalAlertHeader icon={<InformationSquareIcon />}>
+          <LocalAlertHeader>
             <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
             <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
           </LocalAlertHeader>

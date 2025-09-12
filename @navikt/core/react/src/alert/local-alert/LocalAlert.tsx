@@ -63,7 +63,11 @@ type LocalAlertHeaderProps = Omit<BaseAlert.HeaderProps, "icon">;
  *  </LocalAlert>
  * ```
  */
-const LocalAlertHeader = BaseAlert.Header;
+const LocalAlertHeader = forwardRef<HTMLDivElement, LocalAlertHeaderProps>(
+  (props, forwardedRef) => {
+    return <BaseAlert.Header ref={forwardedRef} {...props} />;
+  },
+);
 
 /* ----------------------------- LocalAlertTitle ----------------------------- */
 type LocalAlertTitleProps = BaseAlert.TitleProps;
