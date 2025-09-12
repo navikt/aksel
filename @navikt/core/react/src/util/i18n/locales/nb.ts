@@ -20,6 +20,7 @@ export default {
     info: "Informasjon",
     success: "Suksess",
     warning: "Advarsel",
+    announcement: "Kunngjøring",
   },
   Chips: {
     Removable: {
