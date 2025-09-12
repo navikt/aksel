@@ -12,7 +12,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const descriptionId = useId();
   const themeContext = useThemeInternal(false);
 
-  if (themeContext) {
+  if (themeContext?.isDarkside) {
     return (
       <div
         className={cn(props.className, "navds-radio", `navds-radio--${size}`, {
