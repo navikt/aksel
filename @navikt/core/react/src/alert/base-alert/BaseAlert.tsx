@@ -13,13 +13,14 @@ import { Heading } from "../../typography";
 import { createContext } from "../../util/create-context";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 
-type BaseAlert = {
+type BaseAlertContextProps = {
   size: "medium" | "small";
   statusType: "alert" | "message";
   variant?: "announcement" | "success" | "warning" | "error";
+  color: AkselColor | undefined;
 };
 
-const [BaseAlertProvider, useBaseAlert] = createContext<BaseAlert>({
+const [BaseAlertProvider, useBaseAlert] = createContext<BaseAlertContextProps>({
   name: "BaseAlert",
   errorMessage: "useBaseAlert must be used within an BaseAlertProvider",
 });
@@ -33,7 +34,7 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * Changes the size of the BaseAlert.
    * @default "medium"
    */
-  size?: BaseAlert["size"];
+  size?: BaseAlertContextProps["size"];
   /**
    * Overrides color
    */
@@ -50,11 +51,11 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Changes the semantics of the alert. Use "alert" for important information that needs user attention, and "message" for less important information.
    */
-  statusType: BaseAlert["statusType"];
+  statusType: BaseAlertContextProps["statusType"];
   /**
    * Type of alert
    */
-  variant?: BaseAlert["variant"];
+  variant?: BaseAlertContextProps["variant"];
 }
 
 const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
@@ -90,6 +91,7 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
           size={size}
           statusType={statusType}
           variant={variant}
+          color={alertColor}
         >
           {children}
         </BaseAlertProvider>
@@ -124,12 +126,13 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
-    const { variant } = useBaseAlert();
+    const { variant, color } = useBaseAlert();
 
     return (
       <div
         ref={forwardedRef}
         {...restProps}
+        data-color={color}
         className={cn(className, "navds-base-alert__header")}
       >
         {(variant || icon) && (
@@ -172,7 +175,7 @@ const BaseAlertTitle = forwardRef<HTMLHeadingElement, BaseAlertTitleProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
-    const { size } = useBaseAlert();
+    const { size, color } = useBaseAlert();
 
     return (
       <Heading
@@ -181,6 +184,7 @@ const BaseAlertTitle = forwardRef<HTMLHeadingElement, BaseAlertTitleProps>(
         as={as}
         size={size === "medium" ? "small" : "xsmall"}
         className={cn(className, "navds-base-alert__title")}
+        data-color={color}
       >
         {children}
       </Heading>
@@ -216,9 +220,9 @@ const BaseAlertContent = forwardRef<HTMLDivElement, BaseAlertContentProps>(
     return (
       <div
         ref={forwardedRef}
+        {...restProps}
         /* TODO: Replace with solution from https://github.com/navikt/aksel/pull/4075 */
         data-color=""
-        {...restProps}
         className={cn(className, "navds-base-alert__content")}
       >
         {children}
@@ -306,11 +310,13 @@ function variantToDataColor(
 }
 
 export {
+  BaseAlert as Root,
   BaseAlertCloseButton as CloseButton,
   BaseAlertContent as Content,
   BaseAlertHeader as Header,
-  BaseAlert as Root,
   BaseAlertTitle as Title,
+  VariantIcon,
+  variantToDataColor,
 };
 
 export type {
