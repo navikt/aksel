@@ -6,7 +6,7 @@ import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic"
 import { InlineAlert } from "./InlineAlert";
 
 const meta: Meta<typeof InlineAlert> = {
-  title: "ds-react/InlineAlert",
+  title: "ds-react/Alert/InlineAlert",
   component: InlineAlert,
   parameters: {
     chromatic: { disable: true },
@@ -80,6 +80,22 @@ export const Chromatic = renderStoriesForChromatic({
   WrappingTitle,
   SizeSmall,
 });
+
+export const ChromaticLight = renderStoriesForChromatic({
+  Default,
+  Compositions,
+  WrappingTitle,
+  SizeSmall,
+});
+ChromaticLight.globals = { theme: "light", mode: "darkside" };
+
+export const ChromaticDark = renderStoriesForChromatic({
+  Default,
+  Compositions,
+  WrappingTitle,
+  SizeSmall,
+});
+ChromaticDark.globals = { theme: "dark", mode: "darkside" };
 
 function DemoContent() {
   return (

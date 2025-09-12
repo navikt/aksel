@@ -14,7 +14,7 @@ import {
 } from "./InfoCard";
 
 const meta: Meta<typeof InfoCard> = {
-  title: "ds-react/InfoCard",
+  title: "ds-react/Alert/InfoCard",
   component: InfoCard,
   parameters: {
     chromatic: { disable: true },
@@ -182,6 +182,26 @@ export const Chromatic = renderStoriesForChromatic({
   CustomHeaders,
   WrappingTitle,
 });
+
+export const ChromaticLight = renderStoriesForChromatic({
+  Default,
+  SizeSmall,
+  OnlyHeader,
+  Compositions,
+  CustomHeaders,
+  WrappingTitle,
+});
+ChromaticLight.globals = { theme: "light", mode: "darkside" };
+
+export const ChromaticDark = renderStoriesForChromatic({
+  Default,
+  SizeSmall,
+  OnlyHeader,
+  Compositions,
+  CustomHeaders,
+  WrappingTitle,
+});
+ChromaticDark.globals = { theme: "dark", mode: "darkside" };
 
 function DemoContent() {
   return (

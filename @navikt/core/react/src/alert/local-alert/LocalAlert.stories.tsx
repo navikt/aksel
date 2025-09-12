@@ -13,7 +13,7 @@ import {
 } from "./LocalAlert";
 
 const meta: Meta<typeof LocalAlert> = {
-  title: "ds-react/LocalAlert",
+  title: "ds-react/Alert/LocalAlert",
   component: LocalAlert,
   parameters: {
     chromatic: { disable: true },
@@ -173,6 +173,26 @@ export const Chromatic = renderStoriesForChromatic({
   CloseButton,
   WrappingTitle,
 });
+
+export const ChromaticLight = renderStoriesForChromatic({
+  Default,
+  SizeSmall,
+  OnlyHeader,
+  Compositions,
+  CloseButton,
+  WrappingTitle,
+});
+ChromaticLight.globals = { theme: "light", mode: "darkside" };
+
+export const ChromaticDark = renderStoriesForChromatic({
+  Default,
+  SizeSmall,
+  OnlyHeader,
+  Compositions,
+  CloseButton,
+  WrappingTitle,
+});
+ChromaticDark.globals = { theme: "dark", mode: "darkside" };
 
 function DemoContent() {
   return (
