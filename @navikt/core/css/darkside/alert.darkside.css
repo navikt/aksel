@@ -99,8 +99,6 @@
   --__axc-base-alert-icon-size: 1.5rem;
   --__axc-base-alert-header-max-width: 37.5rem;
 
-  background: var(--ax-bg-strong);
-
   &[data-size="small"] {
     --__axc-base-alert-pi: var(--ax-space-16);
     --__axc-base-alert-content-p: var(--ax-space-8) var(--ax-space-16) var(--ax-space-12) var(--ax-space-16);

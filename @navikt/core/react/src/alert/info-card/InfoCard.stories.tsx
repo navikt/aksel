@@ -110,7 +110,7 @@ export const Compositions: Story = {
         {colors.map((color) => (
           <InfoCard data-color={color} key={color}>
             <InfoCardHeader icon={<InformationSquareIcon />}>
-              <InfoCardTitle>Info: InfoCard title</InfoCardTitle>
+              <InfoCardTitle>{color}: InfoCard title</InfoCardTitle>
             </InfoCardHeader>
             <DemoContent />
           </InfoCard>
