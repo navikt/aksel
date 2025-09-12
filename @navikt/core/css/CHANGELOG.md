@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.30.1
+
+### Patch Changes
+
+- Darkside: Improved screen reader experience in Radio and Checkbox by moving description out of label ([#4066](https://github.com/navikt/aksel/pull/4066))
+
 ## 7.30.0
 
 ### Minor Changes
