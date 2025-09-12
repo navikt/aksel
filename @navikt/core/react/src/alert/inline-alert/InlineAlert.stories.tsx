@@ -11,7 +11,6 @@ const meta: Meta<typeof InlineAlert> = {
   component: InlineAlert,
   parameters: {
     chromatic: { disable: true },
-    layout: "padded",
   },
 };
 
