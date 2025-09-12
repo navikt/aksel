@@ -1,5 +1,5 @@
 import { Metadata, Viewport } from "next";
-import { VisualEditing } from "next-sanity";
+import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 import "@navikt/ds-tokens/darkside-css";
 import { SanityLive } from "@/app/_sanity/live";

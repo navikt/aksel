@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: lts/*
           cache: yarn
-          cache-dependency-path: "**/yarn.lock"
+          cache-dependency-path: "yarn.lock"
 
       - uses: denoland/setup-deno@v2
         with:

@@ -14,7 +14,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const descriptionId = useId();
     const themeContext = useThemeInternal(false);
 
-    if (themeContext) {
+    if (themeContext?.isDarkside) {
       return (
         <div
           className={cn(

@@ -24,5 +24,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "ActiveIcon-propen lar deg endre ikon i active state",
+  desc: "`activeIcon`-propen lar deg endre ikon i aktivert tilstand.",
 };

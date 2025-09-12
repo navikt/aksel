@@ -72,7 +72,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
        */
       let localVariant: LinkProps["variant"];
 
-      if (themeContext) {
+      if (themeContext?.isDarkside) {
         localVariant = variant;
       } else {
         localVariant = variant ?? "action";

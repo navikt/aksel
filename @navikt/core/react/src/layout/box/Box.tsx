@@ -113,7 +113,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
 
       if (
         process.env.NODE_ENV !== "production" &&
-        themeContext &&
+        themeContext?.isDarkside &&
         (background || borderColor || shadow)
       ) {
         let errorText = ``;
@@ -131,7 +131,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
         );
       }
 
-      const prefix = themeContext ? "ax" : "a";
+      const prefix = themeContext?.isDarkside ? "ax" : "a";
 
       const style: React.CSSProperties = {
         ..._style,
@@ -173,8 +173,9 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
               "navds-box-bg": background,
               "navds-box-border-color": borderColor,
               "navds-box-border-width": borderWidth,
-              "navds-box-border-radius": borderRadius && !themeContext,
-              "navds-box-radius": borderRadius && themeContext,
+              "navds-box-border-radius":
+                borderRadius && !themeContext?.isDarkside,
+              "navds-box-radius": borderRadius && themeContext?.isDarkside,
               "navds-box-shadow": shadow,
             })}
           >
