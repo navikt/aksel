@@ -1,10 +1,14 @@
 import React, { forwardRef } from "react";
 import {
   CheckmarkCircleFillIcon,
+  CheckmarkCircleIcon,
   ExclamationmarkTriangleFillIcon,
+  ExclamationmarkTriangleIcon,
   MegaphoneSpeakingFillIcon,
+  MegaphoneSpeakingIcon,
   XMarkIcon,
   XMarkOctagonFillIcon,
+  XMarkOctagonIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { useRenameCSS } from "../../theme/Theme";
@@ -175,7 +179,7 @@ const BaseAlertTitle = forwardRef<HTMLHeadingElement, BaseAlertTitleProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
-    const { size, color } = useBaseAlert();
+    const { size } = useBaseAlert();
 
     return (
       <Heading
@@ -184,7 +188,6 @@ const BaseAlertTitle = forwardRef<HTMLHeadingElement, BaseAlertTitleProps>(
         as={as}
         size={size === "medium" ? "small" : "xsmall"}
         className={cn(className, "navds-base-alert__title")}
-        data-color={color}
       >
         {children}
       </Heading>
@@ -277,16 +280,26 @@ const BaseAlertCloseButton = forwardRef<
 });
 
 /* -------------------------- BaseAlert Utilities -------------------------- */
-function VariantIcon({ variant }: { variant: BaseAlertProps["variant"] }) {
+function VariantIcon({
+  variant,
+  fill = true,
+}: {
+  variant: BaseAlertProps["variant"];
+  fill?: boolean;
+}) {
   switch (variant) {
     case "announcement":
-      return <MegaphoneSpeakingFillIcon />;
+      return fill ? <MegaphoneSpeakingFillIcon /> : <MegaphoneSpeakingIcon />;
     case "success":
-      return <CheckmarkCircleFillIcon />;
+      return fill ? <CheckmarkCircleFillIcon /> : <CheckmarkCircleIcon />;
     case "warning":
-      return <ExclamationmarkTriangleFillIcon />;
+      return fill ? (
+        <ExclamationmarkTriangleFillIcon />
+      ) : (
+        <ExclamationmarkTriangleIcon />
+      );
     case "error":
-      return <XMarkOctagonFillIcon />;
+      return fill ? <XMarkOctagonFillIcon /> : <XMarkOctagonIcon />;
   }
 
   return null;

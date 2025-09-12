@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Link } from "../../link";
 import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
@@ -87,9 +86,8 @@ function DemoContent() {
     <span>
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure unde,
       repudiandae, deleniti exercitationem quod aut veniam sint officiis
-      necessitatibus nulla nostrum voluptatem <Link href="#">Test</Link>
-      facilis! Commodi, nobis tempora quibusdam temporibus nulla quam.{" "}
-      <Button size="small">test</Button>
+      necessitatibus nulla nostrum voluptatem <Link href="#">Test</Link>{" "}
+      facilis! Commodi, nobis tempora quibusdam temporibus nulla quam.
     </span>
   );
 }

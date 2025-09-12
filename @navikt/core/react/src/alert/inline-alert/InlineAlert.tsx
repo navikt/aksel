@@ -44,7 +44,7 @@ const InlineAlert = forwardRef<HTMLDivElement, InlineAlertProps>(
         size={size}
       >
         <span className={cn("navds-base-alert__inline-icon")}>
-          <BaseAlert.VariantIcon variant={variant} />
+          <BaseAlert.VariantIcon variant={variant} fill={false} />
         </span>
         <span data-color="">{children}</span>
       </BodyShort>
