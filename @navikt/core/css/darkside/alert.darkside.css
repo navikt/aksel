@@ -137,7 +137,7 @@
 
   .aksel-base-alert[data-type="moderate"] & {
     background: var(--ax-bg-moderate);
-    color: var(--ax-text-default);
+    color: var(--ax-text-subtle);
     border-color: var(--ax-border-subtleA);
   }
 
