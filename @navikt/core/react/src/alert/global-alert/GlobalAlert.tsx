@@ -38,11 +38,11 @@ const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
     return (
       <BaseAlert.Root
         ref={forwardedRef}
-        role={variant === "success" ? "status" : "alert"}
+        role={variant === "announcement" ? "status" : "alert"}
         {...restProps}
         type="strong"
         global
-        statusType={variant === "success" ? "message" : "alert"}
+        statusType={variant === "announcement" ? "message" : "alert"}
         variant={variant}
       />
     );
@@ -50,7 +50,7 @@ const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
 ) as GlobalAlertComponent;
 
 /* ----------------------------- GlobalAlertHeader ----------------------------- */
-type GlobalAlertHeaderProps = BaseAlert.HeaderProps;
+type GlobalAlertHeaderProps = Omit<BaseAlert.HeaderProps, "icon">;
 
 /**
  * @see 🏷️ {@link GlobalAlertHeaderProps}

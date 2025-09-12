@@ -130,6 +130,7 @@
   gap: var(--ax-space-8);
   padding: var(--ax-space-8) var(--__axc-base-alert-pi);
   border-bottom: 1px solid;
+  z-index: 1;
 
   .aksel-base-alert[data-global="true"] & {
     padding-inline: max(var(--__axc-base-alert-pi), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
@@ -174,6 +175,10 @@
 .aksel-base-alert__close-button {
   margin-left: auto;
   z-index: 1;
+
+  &:focus-visible {
+    outline-color: var(--ax-bg-default);
+  }
 
   &.aksel-base-alert__close-button.aksel-base-alert__close-button {
     color: var(--ax-text-neutral-contrast);

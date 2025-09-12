@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import {
   CheckmarkCircleFillIcon,
   ExclamationmarkTriangleFillIcon,
+  MegaphoneSpeakingFillIcon,
   XMarkIcon,
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
@@ -15,7 +16,7 @@ import { useI18n } from "../../util/i18n/i18n.hooks";
 type BaseAlert = {
   size: "medium" | "small";
   statusType: "alert" | "message";
-  variant?: "success" | "warning" | "error";
+  variant?: "announcement" | "success" | "warning" | "error";
 };
 
 const [BaseAlertProvider, useBaseAlert] = createContext<BaseAlert>({
@@ -133,7 +134,8 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
       >
         {(variant || icon) && (
           <div className={cn("navds-base-alert__icon")} aria-hidden>
-            {variant ? <VariantIcon variant={variant} /> : icon}
+            {/* Icon can be manually set to null */}
+            {icon !== undefined ? icon : <VariantIcon variant={variant} />}
           </div>
         )}
         {children}
@@ -273,6 +275,8 @@ const BaseAlertCloseButton = forwardRef<
 /* -------------------------- BaseAlert Utilities -------------------------- */
 function VariantIcon({ variant }: { variant: BaseAlertProps["variant"] }) {
   switch (variant) {
+    case "announcement":
+      return <MegaphoneSpeakingFillIcon />;
     case "success":
       return <CheckmarkCircleFillIcon />;
     case "warning":
@@ -288,6 +292,8 @@ function variantToDataColor(
   variant: BaseAlertProps["variant"],
 ): AkselColor | undefined {
   switch (variant) {
+    case "announcement":
+      return "neutral";
     case "success":
       return "success";
     case "warning":
@@ -296,21 +302,21 @@ function variantToDataColor(
       return "danger";
   }
 
-  return undefined;
+  return "neutral";
 }
 
 export {
-  BaseAlert as Root,
-  BaseAlertHeader as Header,
-  BaseAlertTitle as Title,
-  BaseAlertContent as Content,
   BaseAlertCloseButton as CloseButton,
+  BaseAlertContent as Content,
+  BaseAlertHeader as Header,
+  BaseAlert as Root,
+  BaseAlertTitle as Title,
 };
 
 export type {
-  BaseAlertProps as RootProps,
-  BaseAlertHeaderProps as HeaderProps,
-  BaseAlertTitleProps as TitleProps,
-  BaseAlertContentProps as ContentProps,
   BaseAlertCloseButtonProps as CloseButtonProps,
+  BaseAlertContentProps as ContentProps,
+  BaseAlertHeaderProps as HeaderProps,
+  BaseAlertProps as RootProps,
+  BaseAlertTitleProps as TitleProps,
 };

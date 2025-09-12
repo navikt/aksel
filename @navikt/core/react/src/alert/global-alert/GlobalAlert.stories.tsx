@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { InformationSquareIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Link } from "../../link";
@@ -18,7 +17,7 @@ const meta: Meta<typeof GlobalAlert> = {
   component: GlobalAlert,
   parameters: {
     chromatic: { disable: true },
-    layout: "fullscreen",
+    layout: "padded",
   },
 };
 
@@ -30,7 +29,7 @@ export const Default: Story = {
   render: (props) => {
     return (
       <GlobalAlert variant={props.variant} size={props.size}>
-        <GlobalAlertHeader icon={<InformationSquareIcon />}>
+        <GlobalAlertHeader>
           <GlobalAlertTitle>
             {props.title ?? "GlobalAlert title"}
           </GlobalAlertTitle>
@@ -46,7 +45,7 @@ export const Default: Story = {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
     title: "GlobalAlert Title",
     size: "medium",
-    variant: "success",
+    variant: "announcement",
   },
   argTypes: {
     size: {
@@ -55,7 +54,7 @@ export const Default: Story = {
     },
     variant: {
       control: { type: "select" },
-      options: ["error", "warning", "success"],
+      options: ["error", "warning", "announcement", "success"],
     },
   },
 };
@@ -63,8 +62,8 @@ export const Default: Story = {
 export const SizeSmall: Story = {
   render: () => {
     return (
-      <GlobalAlert variant="success" size="small">
-        <GlobalAlertHeader icon={<InformationSquareIcon />}>
+      <GlobalAlert variant="announcement" size="small">
+        <GlobalAlertHeader>
           <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
           <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
         </GlobalAlertHeader>
@@ -78,13 +77,24 @@ export const OnlyHeader: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        <GlobalAlert variant="success">
-          <GlobalAlertHeader icon={<InformationSquareIcon />}>
+        <GlobalAlert variant="announcement">
+          <GlobalAlertHeader>
             <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
           </GlobalAlertHeader>
         </GlobalAlert>
-        <GlobalAlert variant="success">
-          <GlobalAlertHeader icon={<InformationSquareIcon />}>
+        <GlobalAlert variant="announcement">
+          <GlobalAlertHeader>
+            <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
+            <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+          </GlobalAlertHeader>
+        </GlobalAlert>
+        <GlobalAlert variant="announcement" size="small">
+          <GlobalAlertHeader>
+            <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
+          </GlobalAlertHeader>
+        </GlobalAlert>
+        <GlobalAlert variant="announcement" size="small">
+          <GlobalAlertHeader>
             <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
             <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
           </GlobalAlertHeader>
@@ -94,7 +104,7 @@ export const OnlyHeader: Story = {
   },
 };
 
-const variants = ["success", "warning", "error"] as const;
+const variants = ["announcement", "warning", "error", "success"] as const;
 
 export const Compositions: Story = {
   render: () => {
@@ -102,8 +112,8 @@ export const Compositions: Story = {
       <VStack gap="space-16">
         {variants.map((variant) => (
           <GlobalAlert variant={variant} key={variant}>
-            <GlobalAlertHeader icon={<InformationSquareIcon />}>
-              <GlobalAlertTitle>Info: GlobalAlert title</GlobalAlertTitle>
+            <GlobalAlertHeader>
+              <GlobalAlertTitle>{variant} GlobalAlert title</GlobalAlertTitle>
               <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
             </GlobalAlertHeader>
             <DemoContent />
@@ -118,15 +128,15 @@ export const CloseButton: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        <GlobalAlert variant="success">
-          <GlobalAlertHeader icon={<InformationSquareIcon />}>
+        <GlobalAlert variant="announcement">
+          <GlobalAlertHeader>
             <GlobalAlertTitle>Info: GlobalAlert title</GlobalAlertTitle>
             <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
           </GlobalAlertHeader>
           <DemoContent />
         </GlobalAlert>
-        <GlobalAlert variant="success" size="small">
-          <GlobalAlertHeader icon={<InformationSquareIcon />}>
+        <GlobalAlert variant="announcement" size="small">
+          <GlobalAlertHeader>
             <GlobalAlertTitle>Info: GlobalAlert title</GlobalAlertTitle>
             <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
           </GlobalAlertHeader>
@@ -143,8 +153,8 @@ export const CloseButton: Story = {
 export const WrappingTitle: Story = {
   render: () => {
     return (
-      <GlobalAlert variant="success">
-        <GlobalAlertHeader icon={<InformationSquareIcon />}>
+      <GlobalAlert variant="announcement">
+        <GlobalAlertHeader>
           <GlobalAlertTitle>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
             tempore corrupti asperiores praesentium? Asperiores, doloribus?

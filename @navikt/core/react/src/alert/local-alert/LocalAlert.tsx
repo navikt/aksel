@@ -38,11 +38,11 @@ const LocalAlert = forwardRef<HTMLDivElement, LocalAlertProps>(
     return (
       <BaseAlert.Root
         ref={forwardedRef}
-        role={variant === "success" ? "status" : "alert"}
+        role={variant === "announcement" ? "status" : "alert"}
         {...restProps}
         type="strong"
         global={false}
-        statusType={variant === "success" ? "message" : "alert"}
+        statusType={variant === "announcement" ? "message" : "alert"}
         variant={variant}
       />
     );
@@ -50,7 +50,7 @@ const LocalAlert = forwardRef<HTMLDivElement, LocalAlertProps>(
 ) as LocalAlertComponent;
 
 /* ----------------------------- LocalAlertHeader ----------------------------- */
-type LocalAlertHeaderProps = BaseAlert.HeaderProps;
+type LocalAlertHeaderProps = Omit<BaseAlert.HeaderProps, "icon">;
 
 /**
  * @see 🏷️ {@link LocalAlertHeaderProps}
