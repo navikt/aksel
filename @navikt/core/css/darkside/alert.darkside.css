@@ -130,7 +130,6 @@
   gap: var(--ax-space-8);
   padding: var(--ax-space-8) var(--__axc-base-alert-pi);
   border-bottom: 1px solid;
-  z-index: 1;
 
   .aksel-base-alert[data-global="true"] & {
     padding-inline: max(var(--__axc-base-alert-pi), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
@@ -138,7 +137,7 @@
 
   .aksel-base-alert[data-type="moderate"] & {
     background: var(--ax-bg-moderate);
-    color: var(--ax-text-subtle);
+    color: var(--ax-text-default);
     border-color: var(--ax-border-subtleA);
   }
 
@@ -146,6 +145,7 @@
     background: var(--ax-bg-strong);
     color: var(--ax-text-contrast);
     border-bottom: none;
+    z-index: 1;
   }
 
   &:only-child {

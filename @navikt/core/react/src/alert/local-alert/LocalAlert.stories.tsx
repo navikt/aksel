@@ -31,6 +31,7 @@ export const Default: Story = {
       <LocalAlert variant={props.variant ?? "announcement"} size={props.size}>
         <LocalAlertHeader>
           <LocalAlertTitle>{props.title ?? "LocalAlert title"}</LocalAlertTitle>
+          <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
         </LocalAlertHeader>
         <LocalAlertContent>
           {props.children ?? "LocalAlert content"}
