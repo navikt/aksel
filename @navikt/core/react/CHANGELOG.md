@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.30.1
+
+### Patch Changes
+
+- Darkside: ExpansionCardContent now defaults to app-color defined in `Theme`, fixing a regression causing all content to be colored `neutral`. ([#4075](https://github.com/navikt/aksel/pull/4075))
+
+- Darkside: Improved screen reader experience in Radio and Checkbox by moving description out of label ([#4066](https://github.com/navikt/aksel/pull/4066))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.30.1
+  - @navikt/aksel-icons@7.30.1
+
 ## 7.30.0
 
 ### Minor Changes
