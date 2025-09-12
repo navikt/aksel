@@ -7,7 +7,7 @@ interface InlineAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * InlineAlert variant.
    */
-  variant: Exclude<BaseAlert.RootProps["variant"], "announcement">;
+  variant: NonNullable<Exclude<BaseAlert.RootProps["variant"], "announcement">>;
   /**
    * InlineAlert size.
    * @default "medium"
@@ -39,7 +39,6 @@ const InlineAlert = forwardRef<HTMLDivElement, InlineAlertProps>(
   ) => {
     const { cn } = useRenameCSS();
     const themeContext = useThemeInternal(false);
-    /* const translate = useI18n("Alert"); */
 
     return (
       <BodyShort
@@ -54,11 +53,7 @@ const InlineAlert = forwardRef<HTMLDivElement, InlineAlertProps>(
         data-size={size}
       >
         <span className={cn("navds-base-alert__inline-icon")}>
-          <BaseAlert.VariantIcon
-            variant={variant}
-            fill={false}
-            /* title={translate(variant)} */
-          />
+          <BaseAlert.VariantIcon variant={variant} fill={false} />
         </span>
         <span data-color={themeContext?.color}>{children}</span>
       </BodyShort>

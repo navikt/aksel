@@ -140,7 +140,10 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
         className={cn(className, "navds-base-alert__header")}
       >
         {(variant || icon) && (
-          <div className={cn("navds-base-alert__icon")} aria-hidden>
+          <div
+            className={cn("navds-base-alert__icon")}
+            aria-hidden={icon !== undefined}
+          >
             {/* Icon can be manually set to null */}
             {icon !== undefined ? icon : <VariantIcon variant={variant} />}
           </div>
@@ -280,6 +283,26 @@ const BaseAlertCloseButton = forwardRef<
 });
 
 /* -------------------------- BaseAlert Utilities -------------------------- */
+
+const VARIANT_ICONS = {
+  announcement: {
+    fill: MegaphoneSpeakingFillIcon,
+    outline: MegaphoneSpeakingIcon,
+  },
+  success: {
+    fill: CheckmarkCircleFillIcon,
+    outline: CheckmarkCircleIcon,
+  },
+  warning: {
+    fill: ExclamationmarkTriangleFillIcon,
+    outline: ExclamationmarkTriangleIcon,
+  },
+  error: {
+    fill: XMarkOctagonFillIcon,
+    outline: XMarkOctagonIcon,
+  },
+} as const;
+
 function VariantIcon({
   variant,
   fill = true,
@@ -287,22 +310,17 @@ function VariantIcon({
   variant: BaseAlertProps["variant"];
   fill?: boolean;
 }) {
-  switch (variant) {
-    case "announcement":
-      return fill ? <MegaphoneSpeakingFillIcon /> : <MegaphoneSpeakingIcon />;
-    case "success":
-      return fill ? <CheckmarkCircleFillIcon /> : <CheckmarkCircleIcon />;
-    case "warning":
-      return fill ? (
-        <ExclamationmarkTriangleFillIcon />
-      ) : (
-        <ExclamationmarkTriangleIcon />
-      );
-    case "error":
-      return fill ? <XMarkOctagonFillIcon /> : <XMarkOctagonIcon />;
+  const translate = useI18n("Alert");
+
+  if (!variant) {
+    return null;
   }
 
-  return null;
+  const Icon = fill
+    ? VARIANT_ICONS[variant].fill
+    : VARIANT_ICONS[variant].outline;
+
+  return <Icon title={translate(variant)} />;
 }
 
 function variantToDataColor(
