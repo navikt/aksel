@@ -92,8 +92,8 @@
   height: fit-content;
   box-sizing: content-box;
 
-  --__axc-base-alert-header-p: var(--ax-space-8) var(--ax-space-8) var(--ax-space-8) var(--ax-space-20);
-  --__axc-base-alert-content-p: var(--ax-space-12) var(--ax-space-20) var(--ax-space-16) var(--ax-space-20);
+  --__axc-base-alert-pi: var(--ax-space-20);
+  --__axc-base-alert-content-p: var(--ax-space-12) var(--__axc-base-alert-pi) var(--ax-space-16) var(--__axc-base-alert-pi);
   --__axc-base-alert-icon-mt: var(--ax-space-4);
   --__axc-base-alert-title-pb: var(--ax-space-2);
   --__axc-base-alert-icon-size: 1.5rem;
@@ -102,7 +102,7 @@
   background: var(--ax-bg-strong);
 
   &[data-size="small"] {
-    --__axc-base-alert-header-p: var(--ax-space-8) var(--ax-space-8) var(--ax-space-8) var(--ax-space-16);
+    --__axc-base-alert-pi: var(--ax-space-16);
     --__axc-base-alert-content-p: var(--ax-space-8) var(--ax-space-16) var(--ax-space-12) var(--ax-space-16);
     --__axc-base-alert-icon-mt: var(--ax-space-6);
     --__axc-base-alert-title-pb: var(--ax-space-4);
@@ -119,7 +119,6 @@
     outline-offset: -4px;
   }
 
-  /* TODO: Add centering */
   &[data-global="true"] {
     border-radius: 0;
   }
@@ -129,12 +128,12 @@
   display: flex;
   align-items: flex-start;
   gap: var(--ax-space-8);
-  padding: var(--__axc-base-alert-header-p);
+  padding: var(--ax-space-8) var(--__axc-base-alert-pi);
   border-bottom: 1px solid;
 
-  /* TODO: Update padding */
-  padding-left: max(var(--ax-space-20), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
-  padding-right: max(var(--ax-space-8), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
+  .aksel-base-alert[data-global="true"] & {
+    padding-inline: max(var(--__axc-base-alert-pi), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
+  }
 
   .aksel-base-alert[data-type="moderate"] & {
     background: var(--ax-bg-moderate);
@@ -168,9 +167,7 @@
   background-color: var(--ax-bg-default);
 
   .aksel-base-alert[data-global="true"] & {
-    /* TODO: Update padding */
-    padding-left: max(var(--ax-space-20), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
-    padding-right: max(var(--ax-space-8), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
+    padding-inline: max(var(--__axc-base-alert-pi), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
   }
 }
 

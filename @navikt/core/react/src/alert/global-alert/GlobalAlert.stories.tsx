@@ -104,6 +104,7 @@ export const Compositions: Story = {
           <GlobalAlert variant={variant} key={variant}>
             <GlobalAlertHeader icon={<InformationSquareIcon />}>
               <GlobalAlertTitle>Info: GlobalAlert title</GlobalAlertTitle>
+              <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
             </GlobalAlertHeader>
             <DemoContent />
           </GlobalAlert>
