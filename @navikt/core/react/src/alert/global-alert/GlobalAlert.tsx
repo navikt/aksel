@@ -13,9 +13,60 @@ interface GlobalAlertComponent
   extends React.ForwardRefExoticComponent<
     GlobalAlertProps & React.RefAttributes<HTMLDivElement>
   > {
+  /**
+   * @see 🏷️ {@link GlobalAlertHeaderProps}
+   * @example
+   * ```jsx
+   *  <GlobalAlert>
+   *    <GlobalAlert.Header icon={<InformationSquareIcon />}>
+   *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
+   *    </GlobalAlert.Header>
+   *  </GlobalAlert>
+   * ```
+   */
   Header: typeof GlobalAlertHeader;
+
+  /**
+   * Title component for GlobalAlert. Remember to use correct heading-level with the `as` prop.
+   * @see 🏷️ {@link GlobalAlertTitleProps}
+   * @example
+   * ```jsx
+   *  <GlobalAlert>
+   *    <GlobalAlert.Header>
+   *      <GlobalAlert.Title as="h2">Info tittel</GlobalAlert.Title>
+   *    </GlobalAlert.Header>
+   *  </GlobalAlert>
+   * ```
+   */
   Title: typeof GlobalAlertTitle;
+
+  /**
+   * @see 🏷️ {@link GlobalAlertContentProps}
+   * @example
+   * ```jsx
+   *  <GlobalAlert>
+   *    <GlobalAlert.Header>
+   *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
+   *    </GlobalAlert.Header>
+   *
+   *    <GlobalAlert.Content>Innhold</GlobalAlert.Content>
+   *  </GlobalAlert>
+   * ```
+   */
   Content: typeof GlobalAlertContent;
+
+  /**
+   * @see 🏷️ {@link GlobalAlertCloseButtonProps}
+   * @example
+   * ```jsx
+   *  <GlobalAlert>
+   *    <GlobalAlert.Header>
+   *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
+   *     <GlobalAlert.CloseButton onClick={() => alert("Lukket!")} />
+   *    </GlobalAlert.Header>
+   *  </GlobalAlert>
+   * ```
+   */
   CloseButton: typeof GlobalAlertCloseButton;
 }
 

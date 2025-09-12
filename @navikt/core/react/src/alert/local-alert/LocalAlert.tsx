@@ -13,9 +13,61 @@ interface LocalAlertComponent
   extends React.ForwardRefExoticComponent<
     LocalAlertProps & React.RefAttributes<HTMLDivElement>
   > {
+  /**
+   * @see 🏷️ {@link LocalAlertHeaderProps}
+   * @example
+   * ```jsx
+   *  <LocalAlert>
+   *    <LocalAlert.Header>
+   *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
+   *    </LocalAlert.Header>
+   *  </LocalAlert>
+   * ```
+   */
   Header: typeof LocalAlertHeader;
+
+  /**
+   * Title component for LocalAlert. Remember to use correct heading-level with the `as` prop.
+   * @see 🏷️ {@link LocalAlertTitleProps}
+   * @example
+   * ```jsx
+   *  <LocalAlert>
+   *    <LocalAlert.Header>
+   *      <LocalAlert.Title as="h2">Info tittel</LocalAlert.Title>
+   *    </LocalAlert.Header>
+   *  </LocalAlert>
+   * ```
+   */
   Title: typeof LocalAlertTitle;
+
+  /**
+   * @see 🏷️ {@link LocalAlertContentProps}
+   * @example
+   * ```jsx
+   *  <LocalAlert>
+   *    <LocalAlert.Header>
+   *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
+   *    </LocalAlert.Header>
+   *
+   *    <LocalAlert.Content>Innhold</LocalAlert.Content>
+   *  </LocalAlert>
+   * ```
+   */
   Content: typeof LocalAlertContent;
+
+  /**
+   * @see 🏷️ {@link LocalAlertCloseButtonProps}
+   * @example
+   * ```jsx
+   *  <LocalAlert>
+   *    <LocalAlert.Header>
+   *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
+   *     <LocalAlert.CloseButton onClick={() => alert("Lukket!")} />
+   *    </LocalAlert.Header>
+   *
+   *  </LocalAlert>
+   * ```
+   */
   CloseButton: typeof LocalAlertCloseButton;
 }
 
@@ -57,7 +109,7 @@ type LocalAlertHeaderProps = Omit<BaseAlert.HeaderProps, "icon">;
  * @example
  * ```jsx
  *  <LocalAlert>
- *    <LocalAlert.Header icon={<InformationSquareIcon />}>
+ *    <LocalAlert.Header>
  *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
  *    </LocalAlert.Header>
  *  </LocalAlert>

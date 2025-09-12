@@ -1,10 +1,17 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
 import { BaseAlert } from "../base-alert";
 
 interface InlineAlertProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * InlineAlert variant.
+   */
   variant: Exclude<BaseAlert.RootProps["variant"], "announcement">;
+  /**
+   * InlineAlert size.
+   * @default "medium"
+   */
   size?: "medium" | "small";
 }
 
@@ -15,7 +22,7 @@ interface InlineAlertProps extends React.HTMLAttributes<HTMLDivElement> {
  * @example
  * ```jsx
  *  <InlineAlert variant="error">
- *   Inline Errormessage
+ *    Inline Errormessage
  *  </InlineAlert>
  * ```
  */
@@ -31,22 +38,29 @@ const InlineAlert = forwardRef<HTMLDivElement, InlineAlertProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal(false);
+    /* const translate = useI18n("Alert"); */
 
     return (
       <BodyShort
         ref={forwardedRef}
         role={variant === "success" ? "status" : "alert"}
         className={cn("navds-base-alert__inline", className)}
-        {...restProps}
         data-color={BaseAlert.variantToDataColor(variant)}
+        {...restProps}
+        size={size}
+        as="div"
         data-variant={variant}
         data-size={size}
-        size={size}
       >
         <span className={cn("navds-base-alert__inline-icon")}>
-          <BaseAlert.VariantIcon variant={variant} fill={false} />
+          <BaseAlert.VariantIcon
+            variant={variant}
+            fill={false}
+            /* title={translate(variant)} */
+          />
         </span>
-        <span data-color="">{children}</span>
+        <span data-color={themeContext?.color}>{children}</span>
       </BodyShort>
     );
   },

@@ -10,8 +10,46 @@ interface InfoCardComponent
   extends React.ForwardRefExoticComponent<
     InfoCardProps & React.RefAttributes<HTMLDivElement>
   > {
+  /**
+   * @see 🏷️ {@link InfoCardHeaderProps}
+   * @example
+   * ```jsx
+   *  <InfoCard>
+   *    <InfoCard.Header icon={<InformationSquareIcon />}>
+   *      <InfoCard.Title>Info tittel</InfoCard.Title>
+   *    </InfoCard.Header>
+   *  </InfoCard>
+   * ```
+   */
   Header: typeof InfoCardHeader;
+
+  /**
+   * Title component for InfoCard. Remember to use correct heading-level with the `as` prop.
+   * @see 🏷️ {@link InfoCardTitleProps}
+   * @example
+   * ```jsx
+   *  <InfoCard>
+   *    <InfoCard.Header>
+   *      <InfoCard.Title as="h2">Info tittel</InfoCard.Title>
+   *    </InfoCard.Header>
+   *  </InfoCard>
+   * ```
+   */
   Title: typeof InfoCardTitle;
+
+  /**
+   * @see 🏷️ {@link InfoCardContentProps}
+   * @example
+   * ```jsx
+   *  <InfoCard>
+   *    <InfoCard.Header>
+   *      <InfoCard.Title>Info tittel</InfoCard.Title>
+   *    </InfoCard.Header>
+   *
+   *    <InfoCard.Content>Innhold</InfoCard.Content>
+   *  </InfoCard>
+   * ```
+   */
   Content: typeof InfoCardContent;
 }
 

@@ -11,7 +11,7 @@ import {
   XMarkOctagonIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { useRenameCSS } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { AkselColor } from "../../types";
 import { Heading } from "../../typography";
 import { createContext } from "../../util/create-context";
@@ -219,13 +219,13 @@ const BaseAlertContent = forwardRef<HTMLDivElement, BaseAlertContentProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal(false);
 
     return (
       <div
         ref={forwardedRef}
+        data-color={themeContext?.color}
         {...restProps}
-        /* TODO: Replace with solution from https://github.com/navikt/aksel/pull/4075 */
-        data-color=""
         className={cn(className, "navds-base-alert__content")}
       >
         {children}

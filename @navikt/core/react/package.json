@@ -626,12 +626,42 @@
     },
     "./InfoCard": {
       "import": {
-        "types": "./esm/info-card/index.d.ts",
-        "default": "./esm/info-card/index.js"
+        "types": "./esm/alert/info-card/index.d.ts",
+        "default": "./esm/alert/info-card/index.js"
       },
       "require": {
-        "types": "./cjs/info-card/index.d.ts",
-        "default": "./cjs/info-card/index.js"
+        "types": "./cjs/alert/info-card/index.d.ts",
+        "default": "./cjs/alert/info-card/index.js"
+      }
+    },
+    "./LocalAlert": {
+      "import": {
+        "types": "./esm/alert/local-alert/index.d.ts",
+        "default": "./esm/alert/local-alert/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/local-alert/index.d.ts",
+        "default": "./cjs/alert/local-alert/index.js"
+      }
+    },
+    "./GlobalAlert": {
+      "import": {
+        "types": "./esm/alert/global-alert/index.d.ts",
+        "default": "./esm/alert/global-alert/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/global-alert/index.d.ts",
+        "default": "./cjs/alert/global-alert/index.js"
+      }
+    },
+    "./InlineAlert": {
+      "import": {
+        "types": "./esm/alert/inline-alert/index.d.ts",
+        "default": "./esm/alert/inline-alert/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/inline-alert/index.d.ts",
+        "default": "./cjs/alert/inline-alert/index.js"
       }
     },
     "./package.json": "./package.json",
