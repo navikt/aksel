@@ -7,7 +7,7 @@ import {
   OverlayDrawer,
   OverlayPortal,
   OverlayTrigger,
-} from "./Overlay";
+} from "./index";
 
 const meta: Meta<typeof Overlay> = {
   title: "ds-react/Overlay",
