@@ -99,7 +99,7 @@
   .aksel-guide-panel:is([data-poster="true"], [data-responsive="true"]) & {
     left: 50%;
     top: calc(var(--ax-space-16) * -1 - 2px);
-    transform: translateX(-48%);
+    transform: translateX(-25%);
   }
 
   .aksel-guide-panel[data-poster="false"] & {
