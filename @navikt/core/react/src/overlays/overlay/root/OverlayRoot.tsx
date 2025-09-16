@@ -1,5 +1,6 @@
 import React from "react";
 import { useControllableState } from "../../../util/hooks/useControllableState";
+import { useTransitionStatus } from "../hooks/useTransitionStatus";
 import {
   OverlayContextProvider,
   OverlayRootContextProvider,
@@ -31,6 +32,9 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     defaultValue: defaultOpen,
     value: openParam,
   });
+
+  const { mounted, setMounted, transitionStatus } = useTransitionStatus(open);
+  /* TODO: Next up: Copy over useEventCallback */
 
   /*
 

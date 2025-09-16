@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * Source: https://github.com/mui/base-ui/blob/6fd69008d83561dbe75ff89acf270f0fac3e0049/packages/react/src/utils/useTransitionStatus.ts
+ * Originally based on https://github.com/floating-ui/floating-ui/blob/7c33a3d0198a9b523d54ae2c37cedb315a309452/packages/react/src/hooks/useTransition.ts
+ * Changes only made to comments and exports.
+ */
 import { useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import { useClientLayoutEffect } from "../../../util";
