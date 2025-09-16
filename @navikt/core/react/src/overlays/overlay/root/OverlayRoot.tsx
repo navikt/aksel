@@ -1,5 +1,9 @@
 import React from "react";
-import { OverlayRootContextProvider } from "./useOverlayRoot";
+import { useControllableState } from "../../../util/hooks/useControllableState";
+import {
+  OverlayContextProvider,
+  OverlayRootContextProvider,
+} from "./OverlayRoot.context";
 
 /**
  * ..
@@ -16,11 +20,33 @@ import { OverlayRootContextProvider } from "./useOverlayRoot";
  * - Handle nested overlays
  */
 const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
-  const { children, dismissible = true } = props;
+  const {
+    children,
+    dismissible = true,
+    defaultOpen = false,
+    open: openParam,
+  } = props;
+
+  const [open, setOpen] = useControllableState({
+    defaultValue: defaultOpen,
+    value: openParam,
+  });
+
+  /*
+
+  const popupRef = useRef<HTMLDivElement | null>(null);
+  const backdropRef = useRef<HTMLDivElement | null>(null);
+  const internalBackdropRef = useRef<HTMLDivElement | null>(null);
+
+
+  const [triggerElement, setTriggerElement] = useState<Element | null>(null);
+  const [popupElement, setPopupElement] = useState<HtmlElement | null>(null); */
 
   return (
     <OverlayRootContextProvider dismissible={dismissible}>
-      {children}
+      <OverlayContextProvider open={open} setOpen={setOpen}>
+        {children}
+      </OverlayContextProvider>
     </OverlayRootContextProvider>
   );
 };
