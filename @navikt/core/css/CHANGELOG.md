@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 7.30.2
+
+### Patch Changes
+
+- Darkside: Adjust visually-hidden typography css ([#4103](https://github.com/navikt/aksel/pull/4103))
+
+- Darkside: Adjusted arrow on GuidePanel poster variant ([#4101](https://github.com/navikt/aksel/pull/4101))
+
 ## 7.30.1
 
 ### Patch Changes
