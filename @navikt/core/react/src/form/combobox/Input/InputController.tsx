@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { forwardRef } from "react";
+import { Floating } from "../../../overlays/floating/Floating";
 import { useRenameCSS } from "../../../theme/Theme";
 import { useMergeRefs } from "../../../util/hooks";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
@@ -54,42 +57,43 @@ export const InputController = forwardRef<
   const mergedInputRef = useMergeRefs(inputRef, ref);
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <div
-      className={cn("navds-combobox__wrapper-inner navds-text-field__input", {
-        "navds-combobox__wrapper-inner--virtually-unfocused":
-          activeDecendantId !== undefined,
-      })}
-      onClick={() => {
-        if (inputProps.disabled || readOnly) {
-          return;
-        }
+    <Floating.Anchor asChild>
+      <div
+        className={cn("navds-combobox__wrapper-inner navds-text-field__input", {
+          "navds-combobox__wrapper-inner--virtually-unfocused":
+            activeDecendantId !== undefined,
+        })}
+        onClick={() => {
+          if (inputProps.disabled || readOnly) {
+            return;
+          }
 
-        toggleIsListOpen(true);
-        focusInput();
-      }}
-    >
-      {!shouldShowSelectedOptions ? (
-        <Input
-          id={inputProps.id}
-          ref={mergedInputRef}
-          inputClassName={inputClassName}
-          readOnly={readOnly}
-          {...rest}
-        />
-      ) : (
-        <SelectedOptions selectedOptions={selectedOptions} size={size}>
+          toggleIsListOpen(true);
+          focusInput();
+        }}
+      >
+        {!shouldShowSelectedOptions ? (
           <Input
             id={inputProps.id}
             ref={mergedInputRef}
             inputClassName={inputClassName}
-            shouldShowSelectedOptions={shouldShowSelectedOptions}
             readOnly={readOnly}
             {...rest}
           />
-        </SelectedOptions>
-      )}
-      {toggleListButton && <ToggleListButton ref={toggleOpenButtonRef} />}
-    </div>
+        ) : (
+          <SelectedOptions selectedOptions={selectedOptions} size={size}>
+            <Input
+              id={inputProps.id}
+              ref={mergedInputRef}
+              inputClassName={inputClassName}
+              shouldShowSelectedOptions={shouldShowSelectedOptions}
+              readOnly={readOnly}
+              {...rest}
+            />
+          </SelectedOptions>
+        )}
+        {toggleListButton && <ToggleListButton ref={toggleOpenButtonRef} />}
+      </div>
+    </Floating.Anchor>
   );
 });

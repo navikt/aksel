@@ -1,4 +1,5 @@
 import React from "react";
+import { Floating } from "../../../overlays/floating/Floating";
 import { useRenameCSS } from "../../../theme/Theme";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -38,13 +39,16 @@ const FilteredOptions = () => {
     filteredOptions.length > 0; // Render filtered options
 
   return (
-    <div
+    <Floating.Content
       className={cn("navds-combobox__list", {
         "navds-combobox__list--closed": !isListOpen,
         "navds-combobox__list--with-hover": isMouseLastUsedInputDevice,
       })}
       id={filteredOptionsUtil.getFilteredOptionsId(id)}
       tabIndex={-1}
+      sideOffset={8}
+      side="bottom"
+      avoidCollisions={false}
     >
       {shouldRenderNonSelectables && (
         <div
@@ -74,7 +78,7 @@ const FilteredOptions = () => {
           ))}
         </ul>
       )}
-    </div>
+    </Floating.Content>
   );
 };
 
