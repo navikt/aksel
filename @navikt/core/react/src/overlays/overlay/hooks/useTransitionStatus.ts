@@ -1,10 +1,5 @@
 "use client";
 
-/**
- * Source: https://github.com/mui/base-ui/blob/6fd69008d83561dbe75ff89acf270f0fac3e0049/packages/react/src/utils/useTransitionStatus.ts
- * Originally based on https://github.com/floating-ui/floating-ui/blob/7c33a3d0198a9b523d54ae2c37cedb315a309452/packages/react/src/hooks/useTransition.ts
- * Changes only made to comments and exports.
- */
 import { useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import { useClientLayoutEffect } from "../../../util";
@@ -13,16 +8,34 @@ import { AnimationFrame } from "./useAnimationFrame";
 type TransitionStatus = "starting" | "ending" | "idle" | undefined;
 
 /**
- * Creates a lifecycle for transition states between open and closed.
- * This is useful for animating mount and unmount sequences, most used
- * in overlays like modals, popovers and tooltips, but also in accordion,
- * tabs and other components that transition between visible states.
+ * Transition status state machine for components that animate between an
+ * `open` boolean and actual mount/unmount. Keeps the element mounted while
+ * exit animations run and introduces an optional stable `idle` phase.
  *
- * The goal is to provide a "mounted"-state that can differ from "open" based on the transition state.
- * This allows components to stay mounted while animating out, even if they are not "open".
+ * Adapted from MUI Base + Floating UI examples:
+ *  - * Source: https://github.com/mui/base-ui/blob/6fd69008d83561dbe75ff89acf270f0fac3e0049/packages/react/src/utils/useTransitionStatus.ts
+ *  - * Originally based on https://github.com/floating-ui/floating-ui/blob/7c33a3d0198a9b523d54ae2c37cedb315a309452/packages/react/src/hooks/useTransition.ts
  *
- * @param open - Determines if the element is open.
- * @param enableIdleState - Enables the `'idle'` state between `'starting'` and `'ending'`
+ * States (transitionStatus):
+ *  - "starting"  : just entered (initial frame of enter) OR re-entering to reach "idle".
+ *  - "idle"       : stable open (only when `enableIdleState === true`).
+ *  - "ending"     : exit animation is running; element still mounted.
+ *  - undefined    : closed (unmounted) OR stable open when idle state is disabled.
+ *                   When `enableIdleState` is false we clear the label after
+ *                   the first frame so styling can rely purely on `mounted`.
+ *
+ * Distinction:
+ *  - `mounted` tells you whether to render DOM.
+ *  - `transitionStatus` tells you which phase-specific classes to apply.
+ *
+ * Frame separation: state changes that must trigger CSS transitions are
+ * scheduled with `requestAnimationFrame` so the browser sees distinct style
+ * mutations across frames (avoids missed transitions due to batching).
+ *
+ * @param open              Controls visibility lifecycle.
+ * @param enableIdleState   Insert a persistent "idle" phase after entering.
+ * @param deferEndingState  Delay starting the exit phase by one frame to allow
+ *                          measurement / layout work before applying exit styles.
  */
 function useTransitionStatus(
   open: boolean,
@@ -34,43 +47,23 @@ function useTransitionStatus(
     open && enableIdleState ? "idle" : undefined,
   );
 
-  /*
-   * Transition: opening -> element not yet mounted. Mount immediately and
-   * mark as "starting" so enter animation classes/styles can apply on first paint.
-   */
+  /* Opening: mount immediately and label as "starting" for the first frame. */
   if (open && !mounted) {
     setMounted(true);
     setTransitionStatus("starting");
   }
 
-  /**
-   * Transition: closing (no defer) -> element is still mounted and we haven't
-   * started the exit animation. Move directly to "ending" so exit animation can begin.
-   */
+  /* Closing (no defer): begin exit animation right away. */
   if (!open && mounted && transitionStatus !== "ending" && !deferEndingState) {
     setTransitionStatus("ending");
   }
 
-  /**
-   * Transition cleanup: after consumer unmounts (mounted === false) following an
-   * "ending" phase, reset status to undefined (fully closed / at rest).
-   */
+  /* Cleanup: after unmount post-exit ensure status returns to undefined. */
   if (!open && !mounted && transitionStatus === "ending") {
     setTransitionStatus(undefined);
   }
 
-  /*
-   * Deferred closing: when `open` becomes false but `deferEndingState` is true we wait
-   * one animation frame before switching to "ending". This gives consumers a frame to
-   * perform measurements or other synchronous work (e.g. reading layout) before exit
-   * classes/styles are applied, helping ensure CSS transitions fire reliably and
-   * reducing layout thrash.
-   *
-   * Example usage: Measure accordion-content height before applying "ending" styles
-   * that might set height to 0px. This ensures the browser sees a height change
-   * and can animate it, where otherwise it might skip the transition if the height
-   * was 0px already when "ending" was applied.
-   */
+  /* Deferred closing: provide one frame to measure / flush layout before exit styles. */
   useClientLayoutEffect(() => {
     if (!open && mounted && transitionStatus !== "ending" && deferEndingState) {
       const frame = AnimationFrame.request(() => {
@@ -85,14 +78,7 @@ function useTransitionStatus(
     return undefined;
   }, [open, mounted, transitionStatus, deferEndingState]);
 
-  /*
-   * Enter stabilization (no idle state): when opened without `enableIdleState`, we
-   * keep `transitionStatus === "starting"` for exactly one animation frame so CSS
-   * enter animations can trigger. On the next frame we synchronously (flushSync)
-   * clear the status to `undefined`, signalling the overlay is fully "open" with
-   * no transition label. Using `flushSync` inside the rAF ensures React commits the
-   * status change promptly so subsequent work in the same frame observes the stable state.
-   */
+  /* Enter (no idle): hold "starting" for one frame, then clear label (stable open). */
   useClientLayoutEffect(() => {
     if (!open || enableIdleState) {
       return undefined;
@@ -109,15 +95,7 @@ function useTransitionStatus(
     };
   }, [enableIdleState, open]);
 
-  /*
-   * Idle transition: when `enableIdleState` is true we (re)enter with "starting"
-   * then promote to "idle" on the next frame, providing a stable labeled phase
-   * distinct from the initial animation. This allows different styling between
-   * the animated entrance and the persisted open state.
-   *
-   * Example: Accordion content might animate in with "starting", then
-   * persist with "idle" to allow different styling of the content when open, like "auto" height to allow for resizing.
-   */
+  /* Idle flow: first frame = "starting", next frame = "idle" (persistent open styling). */
   useClientLayoutEffect(() => {
     if (!open || !enableIdleState) {
       return undefined;

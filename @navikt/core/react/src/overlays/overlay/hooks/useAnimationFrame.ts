@@ -1,8 +1,27 @@
 "use client";
 
 /**
- * Source: Source: https://github.com/mui/base-ui/blob/6fd69008d83561dbe75ff89acf270f0fac3e0049/packages/utils/src/useAnimationFrame.ts
- * Some modifications made to appease linting rules and comments for clarity.
+ * Frame batching + lightweight per-instance "next frame" debounce utility.
+ *
+ * Inspiration:
+ *  - https://github.com/mui/base-ui/blob/6fd69008d83561dbe75ff89acf270f0fac3e0049/packages/utils/src/useAnimationFrame.ts
+ *
+ * Goals:
+ *  - Batch many `requestAnimationFrame` callbacks into a single native rAF per frame.
+ *  - Provide O(1) cancel (mark slot null instead of splicing).
+ *  - Offer a per-instance helper (`AnimationFrame`) that always runs the latest scheduled
+ *    callback at most once in the upcoming frame ("next-frame debounce").
+ *  - Remain robust in test environments where the rAF implementation may change mid-run.
+ *
+ * Why this exists instead of calling `requestAnimationFrame` directly everywhere:
+ *  - Reduces overhead when many subsystems schedule + cancel in quick succession.
+ *  - Ensures all batched callbacks within a frame observe an identical timestamp argument.
+ *  - Simplifies cleanup in React components (`useAnimationFrame` returns an object with a
+ *    stable disposal function).
+ *
+ * Terminology:
+ *  - "scheduler" holds a transient list of callbacks for the next frame only.
+ *  - After a frame fires, the list resets; any new `request()` calls schedule a *new* frame.
  */
 import { useOnMount } from "./useOnMount";
 import { useRefWithInit } from "./useRefWithInit";
@@ -13,21 +32,12 @@ const EMPTY = null;
 
 let LAST_RAF = globalThis.requestAnimationFrame;
 
-/**
- * Stores an array of callbacks to be called on the next animation frame.
- * Only the first scheduled frame will request an 'animationFrame', all
- * others will be called in the same frame.
- *
- * This allows for batching of multiple updates in the same frame and keeps
- * the number of rAF calls to a minimum.
- *
- * The cancel method is also O(1), optimizing for cases where callbacks
- * are requested and then cancelled before they get to run often.
- *
- * **Why**:
- * - Rapid request/cancel loops become cheap, reducing garbage collection and function allocation churn.
- * - Provides both a global batching API (static request/cancel) and a per-instance debounce API.
- * - Predictable behavior under test environments with swapped timers.
+/*
+ * Core scheduler: accumulates callbacks for the *next* frame only.
+ * - First enqueued callback schedules the browser rAF.
+ * - Additional callbacks piggy‑back; only one native call per frame.
+ * - Cancel uses nulling (sparse array) -> O(1) and avoids re-indexing.
+ * - After firing, internal arrays reset so memory does not grow unbounded.
  */
 class AnimationScheduler {
   callbacks = [] as (FrameRequestCallback | null)[];
@@ -43,7 +53,7 @@ class AnimationScheduler {
     const currentCallbacks = this.callbacks;
     const currentCallbacksCount = this.callbacksCount;
 
-    /* Reset before iterating since callbacks could call `requestAnimationFrame`. */
+    /* Reset before iterating: a callback may enqueue more work for a *future* frame. */
     this.callbacks = [];
     this.callbacksCount = 0;
     this.startId = this.nextId;
@@ -61,9 +71,8 @@ class AnimationScheduler {
     this.callbacks.push(fn);
     this.callbacksCount += 1;
 
-    /* In a test environment with fake timers, a fake `requestAnimationFrame` can be called
-     * but there's no guarantee that the animation frame will actually run before the fake
-     * timers are teared, which leaves `isScheduled` set, but won't run `tick()`. */
+    /* Test env note: rAF polyfills can swap implementation; reschedule if it changed
+     * to avoid a stale `isScheduled` flag when timers are flushed without a frame. */
     let didRAFChange = false;
     if (process.env.NODE_ENV === "test" && LAST_RAF !== requestAnimationFrame) {
       LAST_RAF = requestAnimationFrame;
@@ -80,18 +89,15 @@ class AnimationScheduler {
   cancel(id: AnimationFrameId) {
     const index = id - this.startId;
 
-    /*
-     * If index < 0: the callback has already been invoked trough `tick()`.
-     * If index >= callbacks.length: Callback has already been cancelled or invoked.
+    /* Index guard:
+     *  - < 0  => already executed in an earlier frame
+     *  - >= length => already cancelled or executed
      */
     if (index < 0 || index >= this.callbacks.length) {
       return;
     }
 
-    /*
-     * Since we dont actually remove the callback, just set it to null it will be ran as a 'noop'-operation
-     * in `tick()`. This is to keep the cancel operation O(1), and is cheaper than removing it.
-     */
+    /* Null instead of splice to keep cancel O(1); tick skips null (cheap sparse iteration). */
     this.callbacks[index] = null;
     this.callbacksCount -= 1;
   }
@@ -114,11 +120,7 @@ class AnimationFrame {
 
   currentId: AnimationFrameId | null = EMPTY;
 
-  /*
-   * Executes `fn` after `delay`, clearing any previously scheduled call.
-   * One could call this a "next-frame debounce".
-   * This allows components to schedule multiple requests, but only have it run once a frame.
-   */
+  /* Next-frame debounce: latest scheduled fn wins; runs once in the next frame. */
   request(fn: () => void) {
     this.cancel();
     this.currentId = scheduler.request(() => {
@@ -134,21 +136,13 @@ class AnimationFrame {
     }
   };
 
-  /**
-   * Cleanup function to be used to make sure any scheduled animation frames are cleared.
-   * @example
-   * ```
-   * useEffect(*.disposeEffect, [])
-   * ```
-   */
+  /** Disposal helper for React effects to cancel any pending frame. */
   disposeEffect = () => {
     return this.cancel;
   };
 }
 
-/**
- * A `requestAnimationFrame` with automatic cleanup and mount-guard.
- */
+/** Hook returning a stable next-frame debouncer (with automatic unmount cleanup). */
 function useAnimationFrame() {
   const timeout = useRefWithInit(AnimationFrame.create).current;
 
