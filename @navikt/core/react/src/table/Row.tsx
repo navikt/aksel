@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { composeEventHandlers } from "../util/composeEventHandlers";
+import { isElementInteractiveTarget } from "./Table.utils";
 
 export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
@@ -41,7 +42,7 @@ export const Row: RowType = forwardRef(
       if (!onRowSelect) {
         return;
       }
-      if (isInteractiveTarget(event.target as HTMLElement)) {
+      if (isElementInteractiveTarget(event.target as HTMLElement)) {
         return;
       }
       event.stopPropagation();
@@ -61,20 +62,5 @@ export const Row: RowType = forwardRef(
     );
   },
 );
-
-function isInteractiveTarget(elm: HTMLElement) {
-  if (elm.nodeName === "TD" || elm.nodeName === "TH" || !elm.parentElement) {
-    return false;
-  }
-  if (
-    ["BUTTON", "DETAILS", "LABEL", "SELECT", "TEXTAREA", "INPUT", "A"].includes(
-      elm.nodeName,
-    )
-  ) {
-    return true;
-  }
-
-  return isInteractiveTarget(elm.parentElement);
-}
 
 export default Row;

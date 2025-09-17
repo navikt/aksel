@@ -8,6 +8,7 @@ import { useI18n } from "../util/i18n/i18n.hooks";
 import AnimateHeight from "./AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
+import { isElementInteractiveTarget } from "./Table.utils";
 
 export interface ExpandableRowProps
   extends Omit<RowProps, "content" | "onRowClick"> {
@@ -97,7 +98,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     const handleRowClick = (event: React.MouseEvent<HTMLTableRowElement>) => {
       expandOnRowClick &&
         !expansionDisabled &&
-        !isInteractiveTarget(event.target as HTMLElement) &&
+        !isElementInteractiveTarget(event.target as HTMLElement) &&
         expansionHandler(event);
     };
 
@@ -167,20 +168,5 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     );
   },
 );
-
-function isInteractiveTarget(elm: HTMLElement) {
-  if (elm.nodeName === "TD" || elm.nodeName === "TH" || !elm.parentElement) {
-    return false;
-  }
-  if (
-    ["BUTTON", "DETAILS", "LABEL", "SELECT", "TEXTAREA", "INPUT", "A"].includes(
-      elm.nodeName,
-    )
-  ) {
-    return true;
-  }
-
-  return isInteractiveTarget(elm.parentElement);
-}
 
 export default ExpandableRow;
