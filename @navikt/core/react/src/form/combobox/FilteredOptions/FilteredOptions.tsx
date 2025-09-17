@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Floating } from "../../../overlays/floating/Floating";
-import { useRenameCSS } from "../../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../../theme/Theme";
+import { useClientLayoutEffect } from "../../../util";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import AddNewOption from "./AddNewOption";
@@ -13,6 +14,7 @@ import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const FilteredOptions = () => {
   const { cn } = useRenameCSS();
+  const themeContext = useThemeInternal(false);
   const {
     inputProps: { id },
   } = useInputContext();
@@ -26,6 +28,16 @@ const FilteredOptions = () => {
     isMouseLastUsedInputDevice,
     isValueNew,
   } = useFilteredOptionsContext();
+  const [localOpen, setLocalOpen] = useState(isListOpen);
+
+  /**
+   * This is a dirty hack to make the positioning-logic in Floating base the "flip" on the static 290px max-height,
+   * instead of the dynamic one based on available space. Without this, the list won't flip to top when there's
+   * not enough space below the input.
+   */
+  useClientLayoutEffect(() => {
+    queueMicrotask(() => setLocalOpen(isListOpen));
+  }, [isListOpen]);
 
   const { maxSelected, isMultiSelect } = useSelectedOptionsContext();
 
@@ -38,6 +50,8 @@ const FilteredOptions = () => {
     (allowNewValues && isValueNew && !maxSelected.isLimitReached) || // Render add new option
     filteredOptions.length > 0; // Render filtered options
 
+  const height = themeContext?.isDarkside ? "316px" : "290px";
+
   return (
     <Floating.Content
       className={cn("navds-combobox__list", {
@@ -48,7 +62,14 @@ const FilteredOptions = () => {
       tabIndex={-1}
       sideOffset={8}
       side="bottom"
-      avoidCollisions={false}
+      fallbackPlacements={["top"]}
+      enabled={isListOpen}
+      style={{
+        maxHeight: localOpen
+          ? `min(${height}, var(--ac-floating-available-height))`
+          : `${height}`,
+      }}
+      autoUpdateWhileMounted={false}
     >
       {shouldRenderNonSelectables && (
         <div

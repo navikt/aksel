@@ -1,5 +1,4 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
-/* stylelint-disable aksel/design-token-exists */
 .navds-combobox__wrapper {
   --__ac-combobox-icon-size: 1.5rem;
   --__ac-combobox-wrapper-inner-padding: var(--a-spacing-2);
@@ -241,10 +240,8 @@
 /* dropdown & non selectable dropdown items */
 
 .navds-combobox__list {
+  /* stylelint-disable-next-line aksel/design-token-exists */
   width: var(--ac-floating-anchor-width);
-
-  /* stylelint-disable-next-line declaration-property-value-no-unknown */
-  max-height: min(290px, var(--ac-floating-available-height));
   overflow-y: auto;
   border: 1px solid var(--ac-combobox-list-border-color, var(--a-border-divider));
   display: flex;

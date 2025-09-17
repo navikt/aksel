@@ -461,12 +461,7 @@ export const InModal: StoryFn = () => {
   return (
     <>
       <Button onClick={() => modalRef.current?.showModal()}>Åpne modal</Button>
-      <Modal
-        ref={modalRef}
-        header={{ heading: "Overskrift" }}
-        width="medium"
-        style={{ height: "auto" }}
-      >
+      <Modal ref={modalRef} header={{ heading: "Overskrift" }} width="medium">
         <Modal.Body style={{ height: "100% " }}>
           <p>
             Modalen skal ikke lukke seg om man trykker Escape mens virtuelt
