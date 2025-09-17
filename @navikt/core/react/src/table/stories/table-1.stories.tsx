@@ -98,7 +98,13 @@ export const SizeSmall = () => <TableComponent size="small" />;
 
 export const Buttons = () => <TableComponent size="small" button />;
 
-const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
+const SelectionTable = ({
+  size = "medium",
+  onRowSelect = false,
+}: {
+  size?: "small" | "medium";
+  onRowSelect?: boolean;
+}) => {
   const useToggleList = (initialState) => {
     const [list, setList] = useState(initialState);
 
@@ -113,7 +119,7 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
     ];
   };
 
-  const [selectedRows, toggleSelectedRow] = useToggleList([]);
+  const [selectedRows, toggleSelectedRow] = useToggleList(["2"]);
 
   return (
     <Table size={size} zebraStripes>
@@ -122,8 +128,18 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
           <Table.DataCell>
             <Checkbox
               size={size}
-              indeterminate
-              onChange={() => toggleSelectedRow("all")}
+              indeterminate={selectedRows.length === 1}
+              onChange={() => {
+                if (selectedRows.length === 2) {
+                  selectedRows.forEach((id) => toggleSelectedRow(id));
+                } else {
+                  ["1", "2"].forEach((id) => {
+                    if (!selectedRows.includes(id)) {
+                      toggleSelectedRow(id);
+                    }
+                  });
+                }
+              }}
             >
               Select all
             </Checkbox>
@@ -133,7 +149,10 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
           <Table.HeaderCell scope="col">Country</Table.HeaderCell>
           <Table.HeaderCell scope="col">Points</Table.HeaderCell>
         </Table.Row>
-        <Table.Row selected={selectedRows.includes("1")}>
+        <Table.Row
+          selected={selectedRows.includes("1")}
+          onRowSelect={onRowSelect ? () => toggleSelectedRow("1") : undefined}
+        >
           <Table.DataCell>
             <Checkbox
               size={size}
@@ -152,12 +171,15 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
           <Table.DataCell>USA</Table.DataCell>
           <Table.DataCell>38</Table.DataCell>
         </Table.Row>
-        <Table.Row selected>
+        <Table.Row
+          selected={selectedRows.includes("2")}
+          onRowSelect={onRowSelect ? () => toggleSelectedRow("2") : undefined}
+        >
           <Table.DataCell>
             <Checkbox
               size={size}
               hideLabel
-              checked
+              checked={selectedRows.includes("2")}
               onChange={() => toggleSelectedRow("2")}
               aria-labelledby={`x_r2-${size}`}
             >
@@ -178,6 +200,7 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
 
 export const Selection = () => <SelectionTable />;
 export const SelectionSmall = () => <SelectionTable size="small" />;
+export const SelectionInteractiveRow = () => <SelectionTable onRowSelect />;
 
 export const ColorRole = () => (
   <div data-color="brand-magenta">

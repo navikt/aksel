@@ -9,7 +9,8 @@ import AnimateHeight from "./AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
 
-export interface ExpandableRowProps extends Omit<RowProps, "content"> {
+export interface ExpandableRowProps
+  extends Omit<RowProps, "content" | "onRowClick"> {
   /**
    * Content of the expanded row
    */

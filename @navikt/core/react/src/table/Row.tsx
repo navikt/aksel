@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import { composeEventHandlers } from "../util/composeEventHandlers";
 
 export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
@@ -12,6 +13,10 @@ export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
    * @default true
    */
   shadeOnHover?: boolean;
+  /**
+   * Click handler for row.
+   */
+  onRowSelect?: (event: React.MouseEvent<HTMLTableRowElement>) => void;
 }
 
 export type RowType = React.ForwardRefExoticComponent<
@@ -19,8 +24,30 @@ export type RowType = React.ForwardRefExoticComponent<
 >;
 
 export const Row: RowType = forwardRef(
-  ({ className, selected = false, shadeOnHover = true, ...rest }, ref) => {
+  (
+    {
+      className,
+      selected = false,
+      shadeOnHover = true,
+      onClick,
+      onRowSelect,
+      ...rest
+    },
+    ref,
+  ) => {
     const { cn } = useRenameCSS();
+
+    const handleRowClick = (event: React.MouseEvent<HTMLTableRowElement>) => {
+      if (!onRowSelect) {
+        return;
+      }
+      if (isInteractiveTarget(event.target as HTMLElement)) {
+        return;
+      }
+      event.stopPropagation();
+      onRowSelect(event);
+    };
+
     return (
       <tr
         {...rest}
@@ -29,9 +56,25 @@ export const Row: RowType = forwardRef(
           "navds-table__row--selected": selected,
           "navds-table__row--shade-on-hover": shadeOnHover,
         })}
+        onClick={composeEventHandlers(onClick, handleRowClick)}
       />
     );
   },
 );
+
+function isInteractiveTarget(elm: HTMLElement) {
+  if (elm.nodeName === "TD" || elm.nodeName === "TH" || !elm.parentElement) {
+    return false;
+  }
+  if (
+    ["BUTTON", "DETAILS", "LABEL", "SELECT", "TEXTAREA", "INPUT", "A"].includes(
+      elm.nodeName,
+    )
+  ) {
+    return true;
+  }
+
+  return isInteractiveTarget(elm.parentElement);
+}
 
 export default Row;
