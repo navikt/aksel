@@ -14,7 +14,7 @@
  * Guarantees: stable identity; latest logic executed; no calls from uncommitted renders; dev
  * error if invoked during render; safe when `callback` is undefined (no-op).
  */
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { useRefWithInit } from "./useRefWithInit";
 
 /* https://github.com/mui/material-ui/issues/41190#issuecomment-2040873379 */
@@ -26,7 +26,7 @@ const useSafeInsertionEffect =
   // React 17 doesn't have useInsertionEffect.
   useInsertionEffect &&
   // Preact replaces useInsertionEffect with useLayoutEffect and fires too late.
-  useInsertionEffect !== React.useLayoutEffect
+  useInsertionEffect !== useLayoutEffect
     ? useInsertionEffect
     : (fn: any) => fn();
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 const EMPTY_DEPENDENCY = [] as unknown[];
 
@@ -9,5 +9,5 @@ const EMPTY_DEPENDENCY = [] as unknown[];
  */
 export function useOnMount(fn: React.EffectCallback) {
   /* eslint-disable react-hooks/exhaustive-deps */
-  React.useEffect(fn, EMPTY_DEPENDENCY);
+  useEffect(fn, EMPTY_DEPENDENCY);
 }
