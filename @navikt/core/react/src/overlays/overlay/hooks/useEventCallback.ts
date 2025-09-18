@@ -4,8 +4,9 @@
  * Stable event callback: returns a function whose identity never changes but always
  * invokes the latest `callback`. Avoids stale closures without re‑creating handlers.
  *
- * Why not `useCallback`? Its identity depends on a deps array: omit deps ⇒ stale; include deps ⇒
- * new function each render. This hook decouples identity from freshness.
+ * Why not `useCallback`? Its identity depends on a deps array:
+ * - omit deps -> stale; include deps -> new function each render.
+ * - This hook decouples identity from freshness.
  *
  * How it works: a single stable "trampoline" function delegates to a mutable ref. The current
  * `callback` is promoted from `next` in an insertion/layout phase effect so abandoned concurrent
