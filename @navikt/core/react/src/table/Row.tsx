@@ -45,7 +45,6 @@ export const Row: RowType = forwardRef(
       if (isElementInteractiveTarget(event.target as HTMLElement)) {
         return;
       }
-      event.stopPropagation();
       onRowSelect(event);
     };
 
