@@ -20,7 +20,7 @@ interface useOpenChangeCompleteParameters {
    * Element whose animations/transition we observe. Should be stable while the
    * open/close animation runs (typically the root animated node).
    */
-  ref: React.RefObject<HTMLElement | null>;
+  ref?: React.RefObject<HTMLElement | null>;
   /**
    * Called exactly once per open-change cycle after animations finish OR
    * immediately if animations are disabled / unsupported.
@@ -37,7 +37,12 @@ interface useOpenChangeCompleteParameters {
 export function useOpenChangeComplete(
   parameters: useOpenChangeCompleteParameters,
 ) {
-  const { enabled = true, open, ref, onComplete: onCompleteParam } = parameters;
+  const {
+    enabled = true,
+    open,
+    ref = null,
+    onComplete: onCompleteParam,
+  } = parameters;
 
   const openRef = useLatestRef(open);
   const onComplete = useEventCallback(onCompleteParam);
