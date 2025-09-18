@@ -246,7 +246,6 @@
   border-radius: var(--ax-radius-8);
   background-color: var(--ax-bg-raised);
   color: var(--ax-text-neutral);
-  overscroll-behavior: contain;
   box-shadow: var(--ax-shadow-dialog);
 
   & .aksel-combobox__list-options {
@@ -393,6 +392,10 @@
 
   .aksel-combobox__selected-options {
     gap: var(--ax-space-4);
+  }
+
+  .aksel-combobox__list {
+    overscroll-behavior: contain;
   }
 }
 
