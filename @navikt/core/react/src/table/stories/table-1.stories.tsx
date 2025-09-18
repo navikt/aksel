@@ -100,10 +100,10 @@ export const Buttons = () => <TableComponent size="small" button />;
 
 const SelectionTable = ({
   size = "medium",
-  onRowSelect = false,
+  onRowClick = false,
 }: {
   size?: "small" | "medium";
-  onRowSelect?: boolean;
+  onRowClick?: boolean;
 }) => {
   const useToggleList = (initialState) => {
     const [list, setList] = useState(initialState);
@@ -151,7 +151,7 @@ const SelectionTable = ({
         </Table.Row>
         <Table.Row
           selected={selectedRows.includes("1")}
-          onRowSelect={onRowSelect ? () => toggleSelectedRow("1") : undefined}
+          onRowClick={onRowClick ? () => toggleSelectedRow("1") : undefined}
         >
           <Table.DataCell>
             <Checkbox
@@ -173,7 +173,7 @@ const SelectionTable = ({
         </Table.Row>
         <Table.Row
           selected={selectedRows.includes("2")}
-          onRowSelect={onRowSelect ? () => toggleSelectedRow("2") : undefined}
+          onRowClick={onRowClick ? () => toggleSelectedRow("2") : undefined}
         >
           <Table.DataCell>
             <Checkbox
@@ -200,7 +200,7 @@ const SelectionTable = ({
 
 export const Selection = () => <SelectionTable />;
 export const SelectionSmall = () => <SelectionTable size="small" />;
-export const SelectionInteractiveRow = () => <SelectionTable onRowSelect />;
+export const SelectionInteractiveRow = () => <SelectionTable onRowClick />;
 
 export const ColorRole = () => (
   <div data-color="brand-magenta">

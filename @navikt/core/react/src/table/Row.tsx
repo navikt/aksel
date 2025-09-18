@@ -15,9 +15,10 @@ export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
    */
   shadeOnHover?: boolean;
   /**
-   * Click handler for row.
+   * Click handler for row. This differs from onClick by not being called
+   * when clicking on interactive elements within the row (buttons, links, inputs etc).
    */
-  onRowSelect?: (event: React.MouseEvent<HTMLTableRowElement>) => void;
+  onRowClick?: (event: React.MouseEvent<HTMLTableRowElement>) => void;
 }
 
 export type RowType = React.ForwardRefExoticComponent<
@@ -31,7 +32,7 @@ export const Row: RowType = forwardRef(
       selected = false,
       shadeOnHover = true,
       onClick,
-      onRowSelect,
+      onRowClick,
       ...rest
     },
     ref,
@@ -39,13 +40,13 @@ export const Row: RowType = forwardRef(
     const { cn } = useRenameCSS();
 
     const handleRowClick = (event: React.MouseEvent<HTMLTableRowElement>) => {
-      if (!onRowSelect) {
+      if (!onRowClick) {
         return;
       }
       if (isElementInteractiveTarget(event.target as HTMLElement)) {
         return;
       }
-      onRowSelect(event);
+      onRowClick(event);
     };
 
     return (
