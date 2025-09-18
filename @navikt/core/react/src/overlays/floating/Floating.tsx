@@ -18,6 +18,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
 import { createContext } from "../../util/create-context";
 import {
@@ -26,6 +27,7 @@ import {
   useMergeRefs,
 } from "../../util/hooks";
 import { AsChildProps } from "../../util/types";
+import { useOpenChangeComplete } from "../overlay/hooks/useOpenChangeComplete";
 import {
   type Align,
   type Measurable,
@@ -230,6 +232,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     forwardedRef,
   ) => {
     const context = useFloatingContext();
+    const modalContext = useModalContext(false);
 
     const arrowDefaults = {
       padding: 5,
@@ -353,14 +356,19 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
           floatingElements.floating,
           update,
         );
-        queueMicrotask(() => {
-          update();
-        });
+
         return () => {
           cleanup();
         };
       }
     }, [autoUpdateWhileMounted, enabled, floatingElements, update]);
+
+    useOpenChangeComplete({
+      enabled: !!modalContext?.ref,
+      open: enabled,
+      ref: modalContext?.ref,
+      onComplete: update,
+    });
 
     const [placedSide, placedAlign] = getSideAndAlignFromPlacement(placement);
 
