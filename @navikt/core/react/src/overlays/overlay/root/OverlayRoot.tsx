@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useControllableState } from "../../../util/hooks/useControllableState";
+import { useEventCallback } from "../hooks/useEventCallback";
+import { useOpenChangeComplete } from "../hooks/useOpenChangeComplete";
 import { useTransitionStatus } from "../hooks/useTransitionStatus";
 import {
   OverlayContextProvider,
@@ -16,9 +18,8 @@ import {
  */
 /**
  * TODO: Root state and context provider for overlay components
- * - Manages open/close state
- * - Provides context to children
  * - Handle nested overlays
+ * - Test canceable opening/closing
  */
 const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
   const {
@@ -26,19 +27,20 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     dismissible = true,
     defaultOpen = false,
     open: openParam,
+    onOpenChange,
+    onOpenChangeComplete,
   } = props;
 
-  const [open, setOpen] = useControllableState({
+  const [open, setOpenControlled] = useControllableState({
     defaultValue: defaultOpen,
     value: openParam,
   });
 
   const { mounted, setMounted, transitionStatus } = useTransitionStatus(open);
-  /* TODO: Next up: Copy over useEventCallback */
-
-  /*
 
   const popupRef = useRef<HTMLDivElement | null>(null);
+
+  /*
   const backdropRef = useRef<HTMLDivElement | null>(null);
   const internalBackdropRef = useRef<HTMLDivElement | null>(null);
 
@@ -46,9 +48,42 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
   const [triggerElement, setTriggerElement] = useState<Element | null>(null);
   const [popupElement, setPopupElement] = useState<HtmlElement | null>(null); */
 
+  const setOpen = useEventCallback(
+    (nextOpen: boolean, originalEvent: Event) => {
+      onOpenChange?.(nextOpen, originalEvent);
+
+      if (originalEvent.defaultPrevented) {
+        return;
+      }
+
+      setOpenControlled(nextOpen);
+    },
+  );
+
+  const handleUnmount = useEventCallback(() => {
+    setMounted(false);
+    onOpenChangeComplete?.(false);
+  });
+
+  useOpenChangeComplete({
+    open,
+    ref: popupRef,
+    onComplete() {
+      if (!open) {
+        handleUnmount();
+      }
+    },
+  });
+
   return (
     <OverlayRootContextProvider dismissible={dismissible}>
-      <OverlayContextProvider open={open} setOpen={setOpen}>
+      <OverlayContextProvider
+        open={open}
+        setOpen={setOpen}
+        mounted={mounted}
+        transitionStatus={transitionStatus}
+        popupRef={popupRef}
+      >
         {children}
       </OverlayContextProvider>
     </OverlayRootContextProvider>
@@ -81,7 +116,7 @@ interface OverlayProps {
   /**
    * Event handler called when the dialog is opened or closed.
    */
-  onOpenChange?: (open: boolean) => void;
+  onOpenChange?: (open: boolean, event: Event) => void;
   /**
    * Event handler called after any animations complete when the dialog is opened or closed.
    */

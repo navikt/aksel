@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
+import { useMergeRefs } from "../../../util/hooks";
 import { OverlayInternalBackdrop } from "../backdrop/OverlayInternalBackdrop";
 import { useOverlayContext } from "../root/OverlayRoot.context";
 
@@ -20,18 +21,19 @@ interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
   ({ children, className, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
-    const { open } = useOverlayContext();
+    const { mounted, popupRef } = useOverlayContext();
+
+    const mergedRefs = useMergeRefs(forwardedRef, popupRef);
 
     return (
       <>
-        {/* TODO: Use mounted-prop */}
-        {open && (
+        {mounted && (
           <OverlayInternalBackdrop /* ref={internalBackdropRef} inert={inertValue(!open)} */
           />
         )}
         <div
           {...restProps}
-          ref={forwardedRef}
+          ref={mergedRefs}
           className={cn(className)}
           /* Handle in CSS */
           style={{

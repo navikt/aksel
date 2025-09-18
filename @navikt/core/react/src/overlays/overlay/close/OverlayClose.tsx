@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
+import { useEventCallback } from "../hooks/useEventCallback";
 import { useOverlayContext } from "../root/OverlayRoot.context";
 
 interface OverlayCloseProps
@@ -24,12 +25,15 @@ const OverlayClose = forwardRef<HTMLButtonElement, OverlayCloseProps>(
 
     const { open, setOpen } = useOverlayContext();
 
-    /* TODO: Put into useEventCallback */
-    const handleClick = () => {
-      if (open) {
-        setOpen(false);
-      }
-    };
+    const handleClick = useEventCallback(
+      (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        console.info("OverlayClose2: Closing overlay");
+        if (open) {
+          console.info("OverlayClose1: Closing overlay");
+          setOpen(false, event.nativeEvent);
+        }
+      },
+    );
 
     return (
       <button

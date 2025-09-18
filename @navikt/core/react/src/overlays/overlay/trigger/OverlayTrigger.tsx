@@ -31,7 +31,7 @@ const OverlayTrigger = forwardRef<HTMLButtonElement, OverlayTriggerProps>(
         ref={forwardedRef}
         className={cn(className)}
         data-popup-open={open}
-        onClick={() => setOpen(!open)}
+        onClick={(event) => setOpen(!open, event.nativeEvent)}
       >
         {children}
       </button>

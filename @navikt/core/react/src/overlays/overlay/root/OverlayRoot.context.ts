@@ -1,4 +1,5 @@
 import { createContext } from "../../../util/create-context";
+import type { TransitionStatus } from "../hooks/useTransitionStatus";
 
 interface OverlayRootContextT {
   /**
@@ -21,7 +22,19 @@ interface OverlayContextT {
   /**
    * Event handler called when the dialog is opened or closed.
    */
-  setOpen: (open: boolean) => void;
+  setOpen: (open: boolean, originalEvent: Event) => void;
+  /**
+   * The transition status of the overlay
+   */
+  transitionStatus: TransitionStatus;
+  /**
+   * Whether the overlay has been mounted (opened)
+   */
+  mounted: boolean;
+  /**
+   * The ref to the Overlay-element.
+   */
+  popupRef: React.RefObject<HTMLElement | null>;
 }
 
 const [OverlayContextProvider, useOverlayContext] =

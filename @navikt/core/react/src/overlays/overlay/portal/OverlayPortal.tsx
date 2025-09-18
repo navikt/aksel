@@ -18,20 +18,13 @@ type OverlayPortalProps = PortalProps & {
  */
 /**
  * TODO: Renders overlay in a portal (at the end of the DOM), and acts as a wrapper
- * - Needs to use Provider context for Portal-node to attach to
  */
 const OverlayPortal = forwardRef<MenuPortalElement, OverlayPortalProps>(
   ({ children, className, rootElement, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
-    const { open } = useOverlayContext();
+    const { mounted } = useOverlayContext();
 
-    /* const { mounted } = useDialogContext();
-
-    const shouldRender = mounted || keepMounted;
-
-     */
-
-    const shouldRender = open;
+    const shouldRender = mounted; /* || keepMounted */
 
     if (!shouldRender) {
       return null;
