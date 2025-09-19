@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
+import { useMergeRefs } from "../../../util/hooks";
 import { useOverlayContext } from "../root/OverlayRoot.context";
 
 interface OverlayTriggerProps
@@ -23,12 +24,14 @@ const OverlayTrigger = forwardRef<HTMLButtonElement, OverlayTriggerProps>(
   ({ children, className, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
 
-    const { open, setOpen } = useOverlayContext();
+    const { open, setOpen, setTriggerElement } = useOverlayContext();
+
+    const mergedRefs = useMergeRefs(forwardedRef, setTriggerElement);
 
     return (
       <button
         {...restProps}
-        ref={forwardedRef}
+        ref={mergedRefs}
         className={cn(className)}
         data-popup-open={open}
         onClick={(event) => setOpen(!open, event.nativeEvent)}

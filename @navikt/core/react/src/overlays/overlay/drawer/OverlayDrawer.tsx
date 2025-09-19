@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { useMergeRefs } from "../../../util/hooks";
+import { DismissableLayer } from "../../dismissablelayer/DismissableLayer";
 import { OverlayInternalBackdrop } from "../backdrop/OverlayInternalBackdrop";
 import { useOverlayContext } from "../root/OverlayRoot.context";
 
@@ -21,9 +22,16 @@ interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
   ({ children, className, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
-    const { mounted, popupRef } = useOverlayContext();
+    const {
+      mounted,
+      popupRef,
+      setPopupElement,
+      triggerElement,
+      setOpen,
+      open,
+    } = useOverlayContext();
 
-    const mergedRefs = useMergeRefs(forwardedRef, popupRef);
+    const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
 
     return (
       <>
@@ -31,22 +39,40 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
           <OverlayInternalBackdrop /* ref={internalBackdropRef} inert={inertValue(!open)} */
           />
         )}
-        <div
-          {...restProps}
-          ref={mergedRefs}
-          className={cn(className)}
-          /* Handle in CSS */
-          style={{
-            position: "fixed",
-            width: "26rem",
-            top: "50%",
-            left: "50%",
-            background: "gray",
-            padding: 32,
+        <DismissableLayer
+          asChild
+          safeZone={{
+            dismissable: popupRef.current,
+            anchor: triggerElement,
           }}
+          onDismiss={(event) => {
+            open && setOpen(false, event);
+          }}
+          preventDefaultEscapeEvent={false}
+          /* enabled={open} */
+          /**
+           * TODO:
+           * - If we should allow "outside" interaction, we need to manage
+           * focus and pointer-events more carefully than just onDismiss
+           */
         >
-          {children}
-        </div>
+          <div
+            {...restProps}
+            ref={mergedRefs}
+            className={cn(className)}
+            /* Handle in CSS */
+            style={{
+              position: "fixed",
+              width: "26rem",
+              top: "50%",
+              left: "50%",
+              background: "gray",
+              padding: 32,
+            }}
+          >
+            {children}
+          </div>
+        </DismissableLayer>
       </>
     );
   },

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useControllableState } from "../../../util/hooks/useControllableState";
 import { useEventCallback } from "../hooks/useEventCallback";
 import { useOpenChangeComplete } from "../hooks/useOpenChangeComplete";
@@ -43,16 +43,16 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
   /*
   const backdropRef = useRef<HTMLDivElement | null>(null);
   const internalBackdropRef = useRef<HTMLDivElement | null>(null);
-
+   */
 
   const [triggerElement, setTriggerElement] = useState<Element | null>(null);
-  const [popupElement, setPopupElement] = useState<HtmlElement | null>(null); */
+  const [popupElement, setPopupElement] = useState<HTMLElement | null>(null);
 
   const setOpen = useEventCallback(
-    (nextOpen: boolean, originalEvent: Event) => {
+    (nextOpen: boolean, originalEvent?: Event) => {
       onOpenChange?.(nextOpen, originalEvent);
 
-      if (originalEvent.defaultPrevented) {
+      if (originalEvent?.defaultPrevented) {
         return;
       }
 
@@ -75,6 +75,16 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     },
   });
 
+  /* useScrollLock({
+    enabled: open && modal === true,
+    mounted,
+    open,
+    referenceElement: popupElement,
+  }); */
+
+  /* const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = React.useState(0);
+  const isTopmost = ownNestedOpenDialogs === 0; */
+
   return (
     <OverlayRootContextProvider dismissible={dismissible}>
       <OverlayContextProvider
@@ -83,6 +93,9 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
         mounted={mounted}
         transitionStatus={transitionStatus}
         popupRef={popupRef}
+        setPopupElement={setPopupElement}
+        setTriggerElement={setTriggerElement}
+        triggerElement={triggerElement}
       >
         {children}
       </OverlayContextProvider>
@@ -116,7 +129,7 @@ interface OverlayProps {
   /**
    * Event handler called when the dialog is opened or closed.
    */
-  onOpenChange?: (open: boolean, event: Event) => void;
+  onOpenChange?: (open: boolean, event?: Event) => void;
   /**
    * Event handler called after any animations complete when the dialog is opened or closed.
    */

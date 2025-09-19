@@ -35,6 +35,18 @@ interface OverlayContextT {
    * The ref to the Overlay-element.
    */
   popupRef: React.RefObject<HTMLElement | null>;
+  /**
+   * Callback to register the Popup element DOM node.
+   */
+  setPopupElement: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
+  /**
+   * Callback to register the Trigger element DOM node.
+   */
+  setTriggerElement: React.Dispatch<React.SetStateAction<Element | null>>;
+  /**
+   * The Trigger element DOM node.
+   */
+  triggerElement: Element | null;
 }
 
 const [OverlayContextProvider, useOverlayContext] =
