@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useControllableState } from "../../../util/hooks/useControllableState";
 import { useEventCallback } from "../hooks/useEventCallback";
 import { useOpenChangeComplete } from "../hooks/useOpenChangeComplete";
+import { useScrollLock } from "../hooks/useScrollLock";
 import { useTransitionStatus } from "../hooks/useTransitionStatus";
 import {
   OverlayContextProvider,
@@ -29,6 +30,7 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     open: openParam,
     onOpenChange,
     onOpenChangeComplete,
+    modal = true,
   } = props;
 
   const [open, setOpenControlled] = useControllableState({
@@ -75,12 +77,12 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     },
   });
 
-  /* useScrollLock({
+  useScrollLock({
     enabled: open && modal === true,
     mounted,
     open,
     referenceElement: popupElement,
-  }); */
+  });
 
   /* const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = React.useState(0);
   const isTopmost = ownNestedOpenDialogs === 0; */
