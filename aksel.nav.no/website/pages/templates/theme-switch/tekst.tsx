@@ -32,12 +32,7 @@ function Example() {
             aria-current={theme === "light"}
             onSelect={() => setTheme("light")}
           >
-            <HStack
-              gap="space-24"
-              as="span"
-              justify="space-between"
-              align="center"
-            >
+            <HStack gap="space-24" align="center">
               <span>Lyst modus</span>
               {theme === "light" && (
                 <CheckmarkIcon aria-hidden fontSize="1.25rem" />
@@ -49,12 +44,7 @@ function Example() {
             aria-current={theme === "dark"}
             onSelect={() => setTheme("dark")}
           >
-            <HStack
-              gap="space-24"
-              as="span"
-              justify="space-between"
-              align="center"
-            >
+            <HStack gap="space-24" justify="space-between" align="center">
               <span>Mørkt modus</span>
               {theme === "dark" && (
                 <CheckmarkIcon aria-hidden fontSize="1.25rem" />
