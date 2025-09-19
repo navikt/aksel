@@ -1,5 +1,13 @@
 # @navikt/aksel
 
+## 7.30.2
+
+### Patch Changes
+
+- Updated dependencies [[`38d1376`](https://github.com/navikt/aksel/commit/38d1376331be4f68552c950f2b65b44a6eddc19d), [`3b68c61`](https://github.com/navikt/aksel/commit/3b68c61651e36bfa948fcd700fb0c45753939f5c)]:
+  - @navikt/ds-css@7.30.2
+  - @navikt/ds-tokens@7.30.2
+
 ## 7.30.1
 
 ### Patch Changes
