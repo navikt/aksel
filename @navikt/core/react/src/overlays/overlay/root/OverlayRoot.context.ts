@@ -47,6 +47,10 @@ interface OverlayContextT {
    * The Trigger element DOM node.
    */
   triggerElement: Element | null;
+  /**
+   * The nesting level of the overlay (0 = top level)
+   */
+  nestedLevel: number;
 }
 
 const [OverlayContextProvider, useOverlayContext] =

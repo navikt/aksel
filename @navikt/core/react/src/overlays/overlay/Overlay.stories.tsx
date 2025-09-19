@@ -75,20 +75,17 @@ const DrawerStyle = (
     bottom: 0;
     right:0;
     width: 24rem;
+    max-width: 100vw;
     padding: 1.5rem;
     border-radius: 0.5rem;
     background-color: var(--ax-bg-neutral-soft);
     transition: all 300ms;
     padding: 4rem;
 
-    &[data-starting-style] {
+    &[data-starting-style], &[data-ending-style] {
       transform: translateX(100%);
     }
-
-    &[data-ending-style] {
-      transform: translateY(-100%);
-    }
-    }
+  }
   `}
   </style>
 );

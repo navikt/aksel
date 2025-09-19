@@ -30,6 +30,7 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       setOpen,
       open,
       transitionStatus,
+      nestedLevel,
     } = useOverlayContext();
 
     const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
@@ -37,6 +38,10 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
     const transitionAttrb = transitionStatus
       ? { [`data-${transitionStatus}-style`]: true }
       : {};
+
+    const nestedToken: React.CSSProperties = {
+      "--__axc-overlay-nested-level": nestedLevel,
+    };
 
     return (
       <>
@@ -66,6 +71,7 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
             ref={mergedRefs}
             className={cn(className)}
             {...transitionAttrb}
+            style={nestedToken}
           >
             {children}
           </div>

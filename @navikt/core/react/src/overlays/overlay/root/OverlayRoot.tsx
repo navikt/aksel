@@ -7,6 +7,7 @@ import { useTransitionStatus } from "../hooks/useTransitionStatus";
 import {
   OverlayContextProvider,
   OverlayRootContextProvider,
+  useOverlayContext,
 } from "./OverlayRoot.context";
 
 /**
@@ -84,6 +85,8 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     referenceElement: popupElement,
   });
 
+  const overlayContext = useOverlayContext(false);
+
   /* const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = React.useState(0);
   const isTopmost = ownNestedOpenDialogs === 0; */
 
@@ -98,6 +101,7 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
         setPopupElement={setPopupElement}
         setTriggerElement={setTriggerElement}
         triggerElement={triggerElement}
+        nestedLevel={(overlayContext?.nestedLevel ?? 0) + 1}
       >
         {children}
       </OverlayContextProvider>
