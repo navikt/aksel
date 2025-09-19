@@ -22,7 +22,7 @@ type OverlayBackdropProps = Omit<
 const OverlayBackdrop = forwardRef<HTMLDivElement, OverlayBackdropProps>(
   ({ className, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
-    const { open, transitionStatus } = useOverlayContext();
+    const { mounted, transitionStatus } = useOverlayContext();
 
     const transitionAttrb = transitionStatus
       ? { [`data-${transitionStatus}-style`]: true }
@@ -34,8 +34,7 @@ const OverlayBackdrop = forwardRef<HTMLDivElement, OverlayBackdropProps>(
         ref={forwardedRef}
         className={cn(className)}
         role="presentation"
-        /* TODO: Use mounted */
-        hidden={!open}
+        hidden={!mounted}
         style={{
           userSelect: "none",
           WebkitUserSelect: "none",
