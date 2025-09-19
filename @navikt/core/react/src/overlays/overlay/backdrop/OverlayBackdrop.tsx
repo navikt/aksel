@@ -22,7 +22,11 @@ type OverlayBackdropProps = Omit<
 const OverlayBackdrop = forwardRef<HTMLDivElement, OverlayBackdropProps>(
   ({ className, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
-    const { open } = useOverlayContext();
+    const { open, transitionStatus } = useOverlayContext();
+
+    const transitionAttrb = transitionStatus
+      ? { [`data-${transitionStatus}`]: true }
+      : {};
 
     return (
       <div
@@ -36,6 +40,7 @@ const OverlayBackdrop = forwardRef<HTMLDivElement, OverlayBackdropProps>(
           userSelect: "none",
           WebkitUserSelect: "none",
         }}
+        {...transitionAttrb}
       />
     );
   },

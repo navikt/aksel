@@ -29,9 +29,14 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       triggerElement,
       setOpen,
       open,
+      transitionStatus,
     } = useOverlayContext();
 
     const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
+
+    const transitionAttrb = transitionStatus
+      ? { [`data-${transitionStatus}`]: true }
+      : {};
 
     return (
       <>
@@ -69,6 +74,7 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
               background: "gray",
               padding: 32,
             }}
+            {...transitionAttrb}
           >
             {children}
           </div>
