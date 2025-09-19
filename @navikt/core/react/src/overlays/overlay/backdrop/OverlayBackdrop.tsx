@@ -25,7 +25,7 @@ const OverlayBackdrop = forwardRef<HTMLDivElement, OverlayBackdropProps>(
     const { open, transitionStatus } = useOverlayContext();
 
     const transitionAttrb = transitionStatus
-      ? { [`data-${transitionStatus}`]: true }
+      ? { [`data-${transitionStatus}-style`]: true }
       : {};
 
     return (

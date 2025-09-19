@@ -35,7 +35,7 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
     const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
 
     const transitionAttrb = transitionStatus
-      ? { [`data-${transitionStatus}`]: true }
+      ? { [`data-${transitionStatus}-style`]: true }
       : {};
 
     return (
@@ -65,15 +65,6 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
             {...restProps}
             ref={mergedRefs}
             className={cn(className)}
-            /* Handle in CSS */
-            style={{
-              position: "fixed",
-              width: "26rem",
-              top: "50%",
-              left: "50%",
-              background: "gray",
-              padding: 32,
-            }}
             {...transitionAttrb}
           >
             {children}
