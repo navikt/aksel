@@ -2,8 +2,10 @@ import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { useMergeRefs } from "../../../util/hooks";
 import { DismissableLayer } from "../../dismissablelayer/DismissableLayer";
+import { FocusScope } from "../FocusScope";
 import { OverlayInternalBackdrop } from "../backdrop/OverlayInternalBackdrop";
 import { useOverlayContext } from "../root/OverlayRoot.context";
+import { useFocusGuards } from "../useFocusGuard";
 
 interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -35,6 +37,8 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
 
     const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
 
+    useFocusGuards();
+
     const transitionAttrb = transitionStatus
       ? { [`data-${transitionStatus}-style`]: true }
       : {};
@@ -49,33 +53,41 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
           <OverlayInternalBackdrop /* ref={internalBackdropRef} inert={inertValue(!open)} */
           />
         )}
-        <DismissableLayer
-          asChild
-          safeZone={{
-            dismissable: popupRef.current,
-            anchor: triggerElement,
-          }}
-          onDismiss={(event) => {
-            open && setOpen(false, event);
-          }}
-          preventDefaultEscapeEvent={false}
-          /* enabled={open} */
-          /**
-           * TODO:
-           * - If we should allow "outside" interaction, we need to manage
-           * focus and pointer-events more carefully than just onDismiss
-           */
+        <FocusScope
+          loop
+          trapped={open}
+          /* Focus trigger */
+          /* onMountAutoFocus={onOpenAutoFocus}
+          onUnmountAutoFocus={onCloseAutoFocus} */
         >
-          <div
-            {...restProps}
-            ref={mergedRefs}
-            className={cn(className)}
-            {...transitionAttrb}
-            style={nestedToken}
+          <DismissableLayer
+            asChild
+            safeZone={{
+              dismissable: popupRef.current,
+              anchor: triggerElement,
+            }}
+            onDismiss={(event) => {
+              open && setOpen(false, event);
+            }}
+            preventDefaultEscapeEvent={false}
+            /* enabled={open} */
+            /**
+             * TODO:
+             * - If we should allow "outside" interaction, we need to manage
+             * focus and pointer-events more carefully than just onDismiss
+             */
           >
-            {children}
-          </div>
-        </DismissableLayer>
+            <div
+              {...restProps}
+              ref={mergedRefs}
+              className={cn(className)}
+              {...transitionAttrb}
+              style={nestedToken}
+            >
+              {children}
+            </div>
+          </DismissableLayer>
+        </FocusScope>
       </>
     );
   },

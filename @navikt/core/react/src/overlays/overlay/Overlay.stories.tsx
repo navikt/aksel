@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React, { useState } from "react";
 import {
   Overlay,
   OverlayBackdrop,
@@ -32,17 +32,78 @@ type Story = StoryObj<typeof Overlay>;
 
 export const Default: Story = {
   render: () => (
-    <Overlay>
-      <OverlayTrigger>Open Overlay</OverlayTrigger>
-      <OverlayPortal>
-        <OverlayBackdrop className="backdropCSS" />
-        <OverlayDrawer className="drawerCSS">
-          Drawer content
-          <OverlayClose>Close</OverlayClose>
-        </OverlayDrawer>
-      </OverlayPortal>
-    </Overlay>
+    <div>
+      <button onClick={() => alert("after")}>Before overlay</button>
+      <Overlay>
+        <OverlayTrigger>Open Overlay</OverlayTrigger>
+        <OverlayPortal>
+          <OverlayBackdrop className="backdropCSS" />
+          <OverlayDrawer className="drawerCSS">
+            Drawer content
+            <OverlayClose>Close</OverlayClose>
+          </OverlayDrawer>
+        </OverlayPortal>
+      </Overlay>
+      <button onClick={() => alert("after")}>after overlay</button>
+    </div>
   ),
+};
+
+export const NestedDrawers: Story = {
+  render: () => (
+    <div>
+      <button onClick={() => alert("after")}>Before overlay</button>
+      <Overlay>
+        <OverlayTrigger>Open Overlay</OverlayTrigger>
+        <OverlayPortal>
+          <OverlayBackdrop className="backdropCSS" />
+          <OverlayDrawer className="drawerCSS">
+            Drawer content
+            <OverlayClose>Close</OverlayClose>
+            <Overlay>
+              <OverlayTrigger>Open Overlay nested</OverlayTrigger>
+              <OverlayPortal>
+                <OverlayBackdrop className="backdropCSS" />
+                <OverlayDrawer className="drawerCSS">
+                  Drawer content
+                  <OverlayClose>Close</OverlayClose>
+                </OverlayDrawer>
+              </OverlayPortal>
+            </Overlay>
+          </OverlayDrawer>
+        </OverlayPortal>
+      </Overlay>
+      <button onClick={() => alert("after")}>after overlay</button>
+    </div>
+  ),
+};
+
+/**
+ * We need to know that closing without trigger autofocuses the right element on close
+ */
+export const NonTriggerImplementation: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <div>
+        <button onClick={() => alert("after")}>Before overlay</button>
+        <button id="trigger" onClick={() => setOpen((x) => !x)}>
+          Toggle drawer
+        </button>
+        <Overlay open={open} onOpenChange={(x) => setOpen(x)}>
+          <OverlayPortal>
+            <OverlayBackdrop className="backdropCSS" />
+            <OverlayDrawer className="drawerCSS">
+              Drawer content
+              <OverlayClose>Close</OverlayClose>
+            </OverlayDrawer>
+          </OverlayPortal>
+        </Overlay>
+        <button onClick={() => alert("after")}>after overlay</button>
+      </div>
+    );
+  },
 };
 
 const BackDropStyle = (

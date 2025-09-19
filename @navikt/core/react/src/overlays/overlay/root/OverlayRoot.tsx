@@ -78,6 +78,10 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     },
   });
 
+  /**
+   * TODO: Consider moving to Drawer-element itself
+   * - This allows us to keep Overlayroot more generic and move modal logic closer to the actual modal element
+   */
   useScrollLock({
     enabled: open && modal === true,
     mounted,

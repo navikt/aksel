@@ -41,4 +41,6 @@ const isIOS =
     ? true
     : /iP(hone|ad|od)|iOS/.test(nav.platform);
 
-export { isWebKit, isIOS };
+const isSafari = hasNavigator && /apple/i.test(navigator.vendor);
+
+export { isWebKit, isIOS, isSafari };
