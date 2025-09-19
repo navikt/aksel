@@ -42,9 +42,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
                 "readOnly",
               ])}
               {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
-              aria-describedby={cl(inputProps["aria-describedby"], {
-                [descriptionId]: props.description,
-              })}
+              aria-describedby={
+                cl(inputProps["aria-describedby"], {
+                  [descriptionId]: props.description,
+                }) || undefined
+              }
               type="checkbox"
               className={cn("navds-checkbox__input")}
               ref={(el) => {
