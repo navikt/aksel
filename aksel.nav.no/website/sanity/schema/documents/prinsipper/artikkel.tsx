@@ -1,6 +1,5 @@
 import { defineField, defineType } from "sanity";
 import { SANITY_API_VERSION, prinsippKategorier } from "../../../config";
-import { editorField } from "../presets/editors";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { ingressField } from "../presets/ingress";
@@ -30,7 +29,6 @@ export const Prinsipp = defineType({
   fields: [
     ...hiddenFields,
     titleField,
-    editorField,
     defineField({
       title: "URL",
       name: "slug",
