@@ -71,6 +71,7 @@ const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>(
     }).current;
 
     // Takes care of trapping focus if focus is moved outside programmatically for example
+    /* TODO: Create test for this case for "trap-focus"-modal prop. We should allow outside-click, while still requiring focus inside */
     React.useEffect(() => {
       if (trapped) {
         function handleFocusIn(event: FocusEvent) {
@@ -143,6 +144,9 @@ const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>(
           previouslyFocusedElement,
         );
 
+        /**
+         * TODO: Handle edgecase with browser and pointer for autofocus
+         */
         if (!hasFocusedCandidate) {
           const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
           container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
