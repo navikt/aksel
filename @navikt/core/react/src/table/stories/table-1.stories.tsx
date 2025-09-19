@@ -267,10 +267,6 @@ export const Chromatic = {
         <h3>Selection small</h3>
         <SelectionSmall />
       </div>
-      <div>
-        <h3>Selection interactive row</h3>
-        <SelectionInteractiveRow />
-      </div>
       <h2>Expandable</h2>
       <div>
         <h3>Large</h3>
