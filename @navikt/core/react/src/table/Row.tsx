@@ -58,6 +58,7 @@ export const Row: RowType = forwardRef(
           "navds-table__row--shade-on-hover": shadeOnHover,
         })}
         onClick={composeEventHandlers(onClick, handleRowClick)}
+        data-interactive={!!onRowClick}
       />
     );
   },
