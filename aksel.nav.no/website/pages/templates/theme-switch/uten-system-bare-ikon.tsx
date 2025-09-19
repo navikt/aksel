@@ -18,7 +18,7 @@ function Example() {
         data-color="neutral"
         icon={<ThemeIcon aria-hidden />}
         onClick={() => {
-          theme === "light" ? setTheme("dark") : setTheme("light");
+          theme === "dark" ? setTheme("light") : setTheme("dark");
         }}
       />
     </Tooltip>
