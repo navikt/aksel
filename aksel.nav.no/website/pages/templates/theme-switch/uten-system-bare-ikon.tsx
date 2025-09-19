@@ -9,7 +9,7 @@ function Example() {
   return (
     <Tooltip
       content={
-        theme === "light" ? "Endre til lyst tema" : "Endre til mørkt tema"
+        theme === "dark" ? "Endre til lyst tema" : "Endre til mørkt tema"
       }
       placement="bottom"
     >
