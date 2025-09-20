@@ -40,7 +40,7 @@ let LAST_RAF = globalThis.requestAnimationFrame;
  * - After firing, internal arrays reset so memory does not grow unbounded.
  */
 class AnimationScheduler {
-  callbacks = [] as (FrameRequestCallback | null)[];
+  callbacks: (FrameRequestCallback | null)[] = [];
 
   callbacksCount = 0;
   nextId = 1;
