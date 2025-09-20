@@ -77,7 +77,7 @@ export function useAnimationsFinished(
           if (!element) {
             return;
           }
-          // Collect animations present at this moment; we don't continuously observe—
+          // Collect animations present at this moment; we don't continuously observe
           // if new animations start after these settle, caller should invoke again.
           Promise.allSettled(
             element.getAnimations().map((anim) => anim.finished),
