@@ -25,6 +25,11 @@ interface DismissableLayerBaseProps {
    */
   disableOutsidePointerEvents?: boolean;
   /**
+   * When true, onDismiss called from escape key run `event.preventDefault()`.
+   * @default true
+   */
+  preventDefaultEscapeEvent?: boolean;
+  /**
    * Event handler called when the escape key is down.
    * Can be prevented.
    */
@@ -50,7 +55,7 @@ interface DismissableLayerBaseProps {
   /**
    * Handler called when the `DismissableLayer` should be dismissed
    */
-  onDismiss?: () => void;
+  onDismiss?: (event: Event) => void;
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
    * `safeZone.dismissable` is only needed when its element does not have a `tabIndex` since it will not receive focus-events.
@@ -132,6 +137,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       safeZone,
       disableOutsidePointerEvents = false,
       enabled = true,
+      preventDefaultEscapeEvent = true,
       ...rest
     }: DismissableLayerProps,
     ref,
@@ -276,7 +282,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
        * Both `onPointerDownOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
        */
       if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
+        onDismiss(event);
       }
     }, ownerDocument);
 
@@ -300,7 +306,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
        * Both `onFocusOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
        */
       if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
+        onDismiss(event);
       }
     }, ownerDocument);
 
@@ -328,8 +334,8 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
        * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
        */
       if (!event.defaultPrevented && onDismiss) {
-        event.preventDefault();
-        onDismiss();
+        preventDefaultEscapeEvent && event.preventDefault();
+        onDismiss(event);
       }
     }, ownerDocument);
 
