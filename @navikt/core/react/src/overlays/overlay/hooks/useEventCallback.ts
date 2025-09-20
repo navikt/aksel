@@ -58,7 +58,7 @@ function createStableCallback() {
   const stable: Stable<Callback> = {
     next: undefined,
     callback: assertNotCalled,
-    trampoline: (...args: []) => stable.callback?.(...args),
+    trampoline: (...args: any[]) => stable.callback?.(...args),
     effect: () => {
       stable.callback = stable.next;
     },
