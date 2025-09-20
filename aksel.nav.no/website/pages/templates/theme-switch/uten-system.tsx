@@ -1,10 +1,10 @@
 import { ThemeIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
-import { useTheme } from "@/app/_ui/theming/ThemeProvider";
+import { useThemeExample } from "@/web/examples/ThemeExample.context";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 function Example() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useThemeExample();
 
   return (
     <Button
@@ -30,4 +30,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  sandboxEnabled: false,
 };

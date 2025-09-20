@@ -6,11 +6,11 @@ import {
   ThemeIcon,
 } from "@navikt/aksel-icons";
 import { ActionMenu, Button, HStack } from "@navikt/ds-react";
-import { useTheme } from "@/app/_ui/theming/ThemeProvider";
+import { useThemeExample } from "@/web/examples/ThemeExample.context";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 function Example() {
-  const { theme, setTheme, systemTheme } = useTheme();
+  const { theme, setTheme } = useThemeExample();
 
   return (
     <ActionMenu>
@@ -33,7 +33,7 @@ function Example() {
             onSelect={() => setTheme("light")}
           >
             <HStack gap="space-24" align="center">
-              <span>Lyst modus</span>
+              <span>Lys</span>
               {theme === "light" && (
                 <CheckmarkIcon aria-hidden fontSize="1.25rem" />
               )}
@@ -45,19 +45,23 @@ function Example() {
             onSelect={() => setTheme("dark")}
           >
             <HStack gap="space-24" justify="space-between" align="center">
-              <span>Mørkt modus</span>
+              <span>Mørk</span>
               {theme === "dark" && (
                 <CheckmarkIcon aria-hidden fontSize="1.25rem" />
               )}
             </HStack>
           </ActionMenu.Item>
-          <ActionMenu.Divider />
           <ActionMenu.Item
             icon={<MonitorIcon />}
             aria-current={theme === "system"}
-            onSelect={() => setTheme(systemTheme ?? "light")}
+            onSelect={() => setTheme("system")}
           >
-            Systemfarger
+            <HStack gap="space-24" justify="space-between" align="center">
+              <span>System</span>
+              {theme === "system" && (
+                <CheckmarkIcon aria-hidden fontSize="1.25rem" />
+              )}
+            </HStack>
           </ActionMenu.Item>
         </ActionMenu.Group>
       </ActionMenu.Content>
@@ -75,4 +79,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  sandboxEnabled: false,
 };
