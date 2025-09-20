@@ -65,7 +65,7 @@ export function useAnimationsFinished(
       // Fast path: no Web Animations API support OR animations globally disabled.
       if (
         typeof element.getAnimations !== "function" ||
-        // Flag hook for test envs / reduced-motion scenarios.
+        // Flag hook for test envs.
         (globalThis as any).AKSEL_ANIMATIONS_DISABLED
       ) {
         fnToExecute();
