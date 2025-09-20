@@ -83,8 +83,9 @@ export function useAnimationsFinished(
             element.getAnimations().map((anim) => anim.finished),
           ).then(() => {
             if (signal?.aborted) return;
-            // Ensure any state updates inside callback are flushed synchronously
-            // so layout/focus work depending on them sees consistent tree.
+            // Ensure any state updates inside the callback are flushed synchronously,
+            // guaranteeing that dependent logic observes the current
+            // tree rather than a stale in-progress update.
             ReactDOM.flushSync(fnToExecute);
           });
         }
