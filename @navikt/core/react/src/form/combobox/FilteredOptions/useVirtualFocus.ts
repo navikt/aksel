@@ -64,6 +64,7 @@ const useVirtualFocus = (
 
   const moveFocusDown = () => {
     const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
+
     if (!activeElement) {
       setActiveAndScrollToElement(elementsAbleToReceiveFocus[0]);
       return;

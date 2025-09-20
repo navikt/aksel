@@ -1,3 +1,4 @@
+/* stylelint-disable aksel/design-token-exists */
 .aksel-combobox__wrapper {
   --__axc-combobox-icon-size: 1.5rem;
   --__axc-combobox-wrapper-inner-padding: var(--ax-space-8);
@@ -236,20 +237,15 @@
 /* dropdown & non selectable dropdown items */
 
 .aksel-combobox__list {
-  max-height: 316px;
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  width: var(--ac-floating-anchor-width);
   overflow: clip;
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  top: calc(100% + var(--ax-space-8));
   border: 1px solid var(--ax-border-neutral-subtleA);
   display: flex;
   flex-direction: column;
   border-radius: var(--ax-radius-8);
   background-color: var(--ax-bg-raised);
   color: var(--ax-text-neutral);
-  overscroll-behavior: contain;
   box-shadow: var(--ax-shadow-dialog);
 
   & .aksel-combobox__list-options {
@@ -396,6 +392,10 @@
 
   .aksel-combobox__selected-options {
     gap: var(--ax-space-4);
+  }
+
+  .aksel-combobox__list {
+    overscroll-behavior: contain;
   }
 }
 

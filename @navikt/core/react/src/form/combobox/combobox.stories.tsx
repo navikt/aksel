@@ -461,13 +461,8 @@ export const InModal: StoryFn = () => {
   return (
     <>
       <Button onClick={() => modalRef.current?.showModal()}>Åpne modal</Button>
-      <Modal
-        ref={modalRef}
-        header={{ heading: "Overskrift" }}
-        width="medium"
-        style={{ height: "auto" }}
-      >
-        <Modal.Body style={{ height: "100% " }}>
+      <Modal ref={modalRef} header={{ heading: "Overskrift" }} width="medium">
+        <Modal.Body>
           <p>
             Modalen skal ikke lukke seg om man trykker Escape mens virtuelt
             fokus er i Combobox sin nedtrekksliste eller om inputfeltet
@@ -475,11 +470,19 @@ export const InModal: StoryFn = () => {
           </p>
           <UNSAFE_Combobox
             options={options}
-            label="Hva er dine favorittfrukter?"
+            label="Hva er din favorittfrukt?"
           />
         </Modal.Body>
       </Modal>
     </>
+  );
+};
+
+export const OnBottom: StoryFn = () => {
+  return (
+    <div style={{ marginTop: "calc(100vh - 120px)" }}>
+      <UNSAFE_Combobox options={options} label="Hva er din favorittfrukt?" />
+    </div>
   );
 };
 
