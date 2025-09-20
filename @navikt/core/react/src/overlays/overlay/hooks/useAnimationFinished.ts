@@ -56,15 +56,10 @@ export function useAnimationsFinished(
         return;
       }
 
-      let element: HTMLElement;
-      if ("current" in elementOrRef) {
-        if (elementOrRef.current == null) {
-          return;
-        }
-
-        element = elementOrRef.current;
-      } else {
-        element = elementOrRef;
+      const element =
+        "current" in elementOrRef ? elementOrRef.current : elementOrRef;
+      if (element == null) {
+        return;
       }
 
       // Fast path: no Web Animations API support OR animations globally disabled.
