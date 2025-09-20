@@ -55,7 +55,7 @@ export function useEventCallback<T extends Callback>(
 }
 
 function createStableCallback() {
-  const stable: Stable<any> = {
+  const stable: Stable<Callback> = {
     next: undefined,
     callback: assertNotCalled,
     trampoline: (...args: []) => stable.callback?.(...args),
