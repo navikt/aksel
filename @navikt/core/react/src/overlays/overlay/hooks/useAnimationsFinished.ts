@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { useAnimationFrame } from "./useAnimationFrame";
 import { useEventCallback } from "./useEventCallback";
 
 /**
@@ -34,7 +33,22 @@ export function useAnimationsFinished(
   elementOrRef: React.RefObject<HTMLElement | null> | HTMLElement | null,
   waitForNextTick = false,
 ) {
-  const frame = useAnimationFrame()!;
+  const rootFrameRef = React.useRef<number | null>(null);
+  const nestedFrameRef = React.useRef<number | null>(null);
+
+  const cancelScheduled = useCallback(() => {
+    for (const ref of [rootFrameRef, nestedFrameRef]) {
+      if (ref.current !== null) {
+        cancelAnimationFrame(ref.current);
+        ref.current = null;
+      }
+    }
+  }, []);
+
+  /* Unmount cleanup */
+  useEffect(() => {
+    return () => cancelScheduled();
+  }, [cancelScheduled]);
 
   return useEventCallback(
     (
@@ -50,7 +64,7 @@ export function useAnimationsFinished(
       signal: AbortSignal | null = null,
     ) => {
       // Cancel any in-flight scheduling from a previous invocation (next-frame debounce semantics)
-      frame.cancel();
+      cancelScheduled();
 
       if (elementOrRef == null) {
         return;
@@ -72,7 +86,7 @@ export function useAnimationsFinished(
         return;
       }
 
-      frame.request(() => {
+      rootFrameRef.current = requestAnimationFrame(() => {
         function exec() {
           if (!element) {
             return;
@@ -93,7 +107,7 @@ export function useAnimationsFinished(
         // Some animations (e.g. triggered by a class applied this same frame) only
         // become observable after an extra frame; opt-in via flag.
         if (waitForNextTick) {
-          frame.request(exec);
+          nestedFrameRef.current = requestAnimationFrame(exec);
         } else {
           exec();
         }
