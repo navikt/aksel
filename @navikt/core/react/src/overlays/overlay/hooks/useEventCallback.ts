@@ -48,17 +48,17 @@ type Stable<T extends Callback> = {
 export function useEventCallback<T extends Callback>(
   callback: T | undefined,
 ): T {
-  const stable = useRefWithInit(createStableCallback).current!;
+  const stable = useRefWithInit(createStableCallback).current as Stable<T>;
   stable.next = callback;
   useSafeInsertionEffect(stable.effect);
   return stable.trampoline;
 }
 
 function createStableCallback() {
-  const stable: Stable<any> = {
+  const stable: Stable<Callback> = {
     next: undefined,
     callback: assertNotCalled,
-    trampoline: (...args: []) => stable.callback?.(...args),
+    trampoline: (...args: any[]) => stable.callback?.(...args),
     effect: () => {
       stable.callback = stable.next;
     },

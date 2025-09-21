@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { useAnimationFrame } from "./useAnimationFrame";
 import { useEventCallback } from "./useEventCallback";
 
 /**
@@ -34,7 +33,22 @@ export function useAnimationsFinished(
   elementOrRef: React.RefObject<HTMLElement | null> | HTMLElement | null,
   waitForNextTick = false,
 ) {
-  const frame = useAnimationFrame()!;
+  const rootFrameRef = React.useRef<number | null>(null);
+  const nestedFrameRef = React.useRef<number | null>(null);
+
+  const cancelScheduled = useCallback(() => {
+    for (const ref of [rootFrameRef, nestedFrameRef]) {
+      if (ref.current !== null) {
+        cancelAnimationFrame(ref.current);
+        ref.current = null;
+      }
+    }
+  }, []);
+
+  /* Unmount cleanup */
+  useEffect(() => {
+    return () => cancelScheduled();
+  }, [cancelScheduled]);
 
   return useEventCallback(
     (
@@ -50,46 +64,42 @@ export function useAnimationsFinished(
       signal: AbortSignal | null = null,
     ) => {
       // Cancel any in-flight scheduling from a previous invocation (next-frame debounce semantics)
-      frame.cancel();
+      cancelScheduled();
 
       if (elementOrRef == null) {
         return;
       }
 
-      let element: HTMLElement;
-      if ("current" in elementOrRef) {
-        if (elementOrRef.current == null) {
-          return;
-        }
-
-        element = elementOrRef.current;
-      } else {
-        element = elementOrRef;
+      const element =
+        "current" in elementOrRef ? elementOrRef.current : elementOrRef;
+      if (element == null) {
+        return;
       }
 
       // Fast path: no Web Animations API support OR animations globally disabled.
       if (
         typeof element.getAnimations !== "function" ||
-        // Flag hook for test envs / reduced-motion scenarios.
+        // Flag hook for test envs.
         (globalThis as any).AKSEL_ANIMATIONS_DISABLED
       ) {
         fnToExecute();
         return;
       }
 
-      frame.request(() => {
+      rootFrameRef.current = requestAnimationFrame(() => {
         function exec() {
           if (!element) {
             return;
           }
-          // Collect animations present at this moment; we don't continuously observe—
+          // Collect animations present at this moment; we don't continuously observe
           // if new animations start after these settle, caller should invoke again.
           Promise.allSettled(
             element.getAnimations().map((anim) => anim.finished),
           ).then(() => {
             if (signal?.aborted) return;
-            // Ensure any state updates inside callback are flushed synchronously
-            // so layout/focus work depending on them sees consistent tree.
+            // Ensure any state updates inside the callback are flushed synchronously,
+            // guaranteeing that dependent logic observes the current
+            // tree rather than a stale in-progress update.
             ReactDOM.flushSync(fnToExecute);
           });
         }
@@ -97,7 +107,7 @@ export function useAnimationsFinished(
         // Some animations (e.g. triggered by a class applied this same frame) only
         // become observable after an extra frame; opt-in via flag.
         if (waitForNextTick) {
-          frame.request(exec);
+          nestedFrameRef.current = requestAnimationFrame(exec);
         } else {
           exec();
         }

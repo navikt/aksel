@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useAnimationsFinished } from "./useAnimationFinished";
+import { useAnimationsFinished } from "./useAnimationsFinished";
 import { useEventCallback } from "./useEventCallback";
 import { useLatestRef } from "./useLatestRef";
 

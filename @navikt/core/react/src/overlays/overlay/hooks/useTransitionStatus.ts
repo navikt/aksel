@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import { useClientLayoutEffect } from "../../../util";
-import { AnimationFrame } from "./useAnimationFrame";
 
 type TransitionStatus = "starting" | "ending" | "idle" | undefined;
 
@@ -66,12 +65,12 @@ function useTransitionStatus(
   /* Deferred closing: provide one frame to measure / flush layout before exit styles. */
   useClientLayoutEffect(() => {
     if (!open && mounted && transitionStatus !== "ending" && deferEndingState) {
-      const frame = AnimationFrame.request(() => {
+      const frame = requestAnimationFrame(() => {
         setTransitionStatus("ending");
       });
 
       return () => {
-        AnimationFrame.cancel(frame);
+        cancelAnimationFrame(frame);
       };
     }
 
@@ -84,14 +83,14 @@ function useTransitionStatus(
       return undefined;
     }
 
-    const frame = AnimationFrame.request(() => {
+    const frame = requestAnimationFrame(() => {
       ReactDOM.flushSync(() => {
         setTransitionStatus(undefined);
       });
     });
 
     return () => {
-      AnimationFrame.cancel(frame);
+      cancelAnimationFrame(frame);
     };
   }, [enableIdleState, open]);
 
@@ -105,12 +104,12 @@ function useTransitionStatus(
       setTransitionStatus("starting");
     }
 
-    const frame = AnimationFrame.request(() => {
+    const frame = requestAnimationFrame(() => {
       setTransitionStatus("idle");
     });
 
     return () => {
-      AnimationFrame.cancel(frame);
+      cancelAnimationFrame(frame);
     };
   }, [enableIdleState, open, mounted, setTransitionStatus, transitionStatus]);
 
