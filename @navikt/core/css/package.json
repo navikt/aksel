@@ -38,7 +38,6 @@
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.31",
-    "postcss-cli": "^9.0.0",
     "postcss-combine-duplicated-selectors": "10.0.3",
     "postcss-import": "^14.1.0",
     "postcss-nesting": "13.0.2",
