@@ -1,4 +1,10 @@
-import React from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Slot } from "../../slot/Slot";
 import { useMergeRefs } from "../../util/hooks";
 import { useEventCallback } from "./hooks/useEventCallback";
@@ -43,7 +49,7 @@ interface FocusScopeProps extends React.HTMLAttributes<HTMLDivElement> {
   onUnmountAutoFocus?: (event: Event) => void;
 }
 
-const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>(
+const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
   (props, forwardedRef) => {
     const {
       loop = false,
@@ -52,15 +58,15 @@ const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>(
       onUnmountAutoFocus: onUnmountAutoFocusProp,
       ...scopeProps
     } = props;
-    const [container, setContainer] = React.useState<HTMLElement | null>(null);
+    const [container, setContainer] = useState<HTMLElement | null>(null);
     const onMountAutoFocus = useEventCallback(onMountAutoFocusProp);
     const onUnmountAutoFocus = useEventCallback(onUnmountAutoFocusProp);
-    const lastFocusedElementRef = React.useRef<HTMLElement | null>(null);
+    const lastFocusedElementRef = useRef<HTMLElement | null>(null);
     const composedRefs = useMergeRefs(forwardedRef, (node) =>
       setContainer(node),
     );
 
-    const focusScope = React.useRef({
+    const focusScope = useRef({
       paused: false,
       pause() {
         this.paused = true;
@@ -72,7 +78,7 @@ const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>(
 
     // Takes care of trapping focus if focus is moved outside programmatically for example
     /* TODO: Create test for this case for "trap-focus"-modal prop. We should allow outside-click, while still requiring focus inside */
-    React.useEffect(() => {
+    useEffect(() => {
       if (trapped) {
         function handleFocusIn(event: FocusEvent) {
           if (focusScope.paused || !container) return;
@@ -135,7 +141,7 @@ const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>(
       }
     }, [trapped, container, focusScope.paused]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (container) {
         focusScopesStack.add(focusScope);
         const previouslyFocusedElement =
@@ -195,7 +201,7 @@ const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>(
     }, [container, onMountAutoFocus, onUnmountAutoFocus, focusScope]);
 
     // Takes care of looping focus (when tabbing whilst at the edges)
-    const handleKeyDown = React.useCallback(
+    const handleKeyDown = useCallback(
       (event: React.KeyboardEvent) => {
         if (!loop && !trapped) return;
         if (focusScope.paused) return;
