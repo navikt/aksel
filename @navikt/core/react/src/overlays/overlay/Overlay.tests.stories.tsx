@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
 import React from "react";
+import { Button } from "../../button";
 import { Provider } from "../../provider";
 import {
   Overlay,
@@ -35,6 +36,31 @@ const meta: Meta<typeof Overlay> = {
 export default meta;
 type Story = StoryObj<BaseOverlayProps>;
 
+/* ----------------------------- State handling ----------------------------- */
+
+export const CancelClose: Story = {
+  render: BaseOverlayComponent,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    /* TODO: Extract this to util? */
+    globalThis.AKSEL_ANIMATIONS_DISABLED = true;
+    const drawer = canvas.getByTestId("drawer");
+    const closeButton = canvas.getByText("Close");
+
+    await userEvent.click(closeButton);
+    // Overlay should remain open
+    expect(drawer).toBeInTheDocument();
+    globalThis.AKSEL_ANIMATIONS_DISABLED = false;
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+      onOpenChange: (_, event) => event?.preventDefault(),
+    },
+  },
+};
+
+/* ---------------------------- CloseButton tests --------------------------- */
 export const CloseButton: Story = {
   render: BaseOverlayComponent,
   play: async ({ canvasElement, args }) => {
@@ -74,9 +100,40 @@ export const CloseButtonDisabled: Story = {
   },
 };
 
+export const CloseButtonDisabledSlot: Story = {
+  render: BaseOverlayComponent,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    const closeButton = canvas.getByText("Close");
+
+    await userEvent.click(closeButton);
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+      onOpenChange: fn(),
+    },
+    closeButtonProps: {
+      asChild: true,
+      children: (
+        <Button disabled id="slot">
+          Close
+        </Button>
+      ),
+    },
+  },
+};
+
+/* ------------------------------- Test setup ------------------------------- */
 type BaseOverlayProps = {
-  rootProps?: Omit<OverlayProps, "children">;
-  closeButtonProps?: Omit<OverlayCloseProps, "children">;
+  rootProps?: Omit<OverlayProps, "children"> & { children?: React.ReactNode };
+  closeButtonProps?: Omit<OverlayCloseProps, "children"> & {
+    /* Has to override AsChild type */
+    children?: any;
+  };
 };
 
 function BaseOverlayComponent({
@@ -91,7 +148,7 @@ function BaseOverlayComponent({
         <OverlayDrawer className="drawerCSS" data-testid="drawer">
           Drawer content
           <OverlayClose data-testid="close" {...closeButtonProps}>
-            Close
+            {closeButtonProps?.children ?? "Close"}
           </OverlayClose>
         </OverlayDrawer>
       </OverlayPortal>

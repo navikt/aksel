@@ -1,12 +1,12 @@
 import React, { forwardRef } from "react";
+import { Slot } from "../../../slot/Slot";
 import { useRenameCSS } from "../../../theme/Theme";
+import type { AsChild } from "../../../util/types/AsChild";
 import { useEventCallback } from "../hooks/useEventCallback";
 import { useOverlayContext } from "../root/OverlayRoot.context";
 
-interface OverlayCloseProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-}
+type OverlayCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  AsChild;
 
 /**
  * @see 🏷️ {@link OverlayCloseProps}
@@ -20,7 +20,7 @@ interface OverlayCloseProps
  * - Acts as close, but for close
  */
 const OverlayClose = forwardRef<HTMLButtonElement, OverlayCloseProps>(
-  ({ children, className, ...restProps }, forwardedRef) => {
+  ({ children, className, asChild = false, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
 
     const { open, setOpen } = useOverlayContext();
@@ -33,18 +33,18 @@ const OverlayClose = forwardRef<HTMLButtonElement, OverlayCloseProps>(
       },
     );
 
+    const Component = asChild ? Slot : "button";
+
     return (
-      <button
+      <Component
         {...restProps}
         ref={forwardedRef}
         className={cn(className)}
         data-popup-open={open}
         onClick={handleClick}
-        /* TODO: Placeholder for testing */
-        id="close"
       >
         {children}
-      </button>
+      </Component>
     );
   },
 );
