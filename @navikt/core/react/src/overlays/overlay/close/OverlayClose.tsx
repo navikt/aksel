@@ -27,9 +27,7 @@ const OverlayClose = forwardRef<HTMLButtonElement, OverlayCloseProps>(
 
     const handleClick = useEventCallback(
       (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        console.info("OverlayClose2: Closing overlay");
         if (open) {
-          console.info("OverlayClose1: Closing overlay");
           setOpen(false, event.nativeEvent);
         }
       },
