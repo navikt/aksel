@@ -42,6 +42,8 @@ const OverlayClose = forwardRef<HTMLButtonElement, OverlayCloseProps>(
         className={cn(className)}
         data-popup-open={open}
         onClick={handleClick}
+        /* TODO: Placeholder for testing */
+        id="close"
       >
         {children}
       </button>

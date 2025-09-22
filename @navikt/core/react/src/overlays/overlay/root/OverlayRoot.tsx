@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import { useControllableState } from "../../../util/hooks/useControllableState";
 import { useEventCallback } from "../hooks/useEventCallback";
 import { useOpenChangeComplete } from "../hooks/useOpenChangeComplete";
-import { useScrollLock } from "../hooks/useScrollLock";
 import { useTransitionStatus } from "../hooks/useTransitionStatus";
 import {
   OverlayContextProvider,
@@ -31,7 +30,6 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     open: openParam,
     onOpenChange,
     onOpenChangeComplete,
-    modal = true,
   } = props;
 
   const [open, setOpenControlled] = useControllableState({
@@ -78,17 +76,6 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     },
   });
 
-  /**
-   * TODO: Consider moving to Drawer-element itself
-   * - This allows us to keep Overlayroot more generic and move modal logic closer to the actual modal element
-   */
-  useScrollLock({
-    enabled: open && modal === true,
-    mounted,
-    open,
-    referenceElement: popupElement,
-  });
-
   const overlayContext = useOverlayContext(false);
 
   /* const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = React.useState(0);
@@ -103,6 +90,7 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
         transitionStatus={transitionStatus}
         popupRef={popupRef}
         setPopupElement={setPopupElement}
+        popupElement={popupElement}
         setTriggerElement={setTriggerElement}
         triggerElement={triggerElement}
         nestedLevel={(overlayContext?.nestedLevel ?? 0) + 1}
@@ -126,16 +114,6 @@ interface OverlayProps {
    * @default false
    */
   defaultOpen?: boolean;
-  /**
-   * TODO: This prop might not make sense on Root?
-   * - Can/should we even support trap-focus?
-   * Determines if the dialog enters a modal state when open.
-   * - `true`: user interaction is limited to just the dialog: focus is trapped, document page scroll is locked, and pointer interactions on outside elements are disabled.
-   * - `false`: user interaction with the rest of the document is allowed.
-   * - `'trap-focus'`: focus is trapped inside the dialog, but document page scroll is not locked and pointer interactions outside of it remain enabled.
-   * @default true
-   */
-  modal?: boolean | "trap-focus";
   /**
    * Event handler called when the dialog is opened or closed.
    */

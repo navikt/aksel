@@ -106,6 +106,60 @@ export const NonTriggerImplementation: Story = {
   },
 };
 
+export const TrapFocusOutsideClick: Story = {
+  render: () => {
+    const [count, setCount] = useState(0);
+
+    return (
+      <div style={{ height: "150vh" }}>
+        <button id="counter" onClick={() => setCount((x) => x + 1)}>
+          Counter: {count}
+        </button>
+        <Overlay>
+          <OverlayTrigger>Open Overlay</OverlayTrigger>
+          <OverlayPortal>
+            <OverlayDrawer className="drawerCSS" modal="trap-focus">
+              Drawer content
+              <OverlayClose>Close</OverlayClose>
+            </OverlayDrawer>
+          </OverlayPortal>
+        </Overlay>
+      </div>
+    );
+  },
+};
+
+export const NestedTrapFocusOutsideClick: Story = {
+  render: () => {
+    const [count, setCount] = useState(0);
+
+    return (
+      <div style={{ height: "150vh" }}>
+        <button id="counter" onClick={() => setCount((x) => x + 1)}>
+          Counter: {count}
+        </button>
+        <Overlay>
+          <OverlayTrigger>Open Overlay</OverlayTrigger>
+          <OverlayPortal>
+            <OverlayDrawer className="drawerCSS" modal="trap-focus">
+              <Overlay>
+                <OverlayTrigger>Open Overlay2</OverlayTrigger>
+                <OverlayPortal>
+                  <OverlayDrawer className="drawerCSS" modal="trap-focus">
+                    Drawer content2
+                    <OverlayClose>Close2</OverlayClose>
+                  </OverlayDrawer>
+                </OverlayPortal>
+              </Overlay>
+              <OverlayClose>Close</OverlayClose>
+            </OverlayDrawer>
+          </OverlayPortal>
+        </Overlay>
+      </div>
+    );
+  },
+};
+
 const BackDropStyle = (
   <style>
     {`

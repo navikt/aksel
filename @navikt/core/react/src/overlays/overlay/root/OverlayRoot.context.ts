@@ -40,6 +40,10 @@ interface OverlayContextT {
    */
   setPopupElement: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
   /**
+   * The Popup element DOM node.
+   */
+  popupElement: HTMLElement | null;
+  /**
    * Callback to register the Trigger element DOM node.
    */
   setTriggerElement: React.Dispatch<React.SetStateAction<Element | null>>;
