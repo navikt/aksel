@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 7.31.0
+
+### Minor Changes
+
+- Table: Add 'onRowClick' callback-prop to allow for selecting rows by clicking the row itself. ([#4107](https://github.com/navikt/aksel/pull/4107))
+
+- Combobox: Dropdown-element is now position='fixed', allowing for better placement on smaller screens and inside Modals. ([#4106](https://github.com/navikt/aksel/pull/4106))
+
+### Patch Changes
+
+- Darkside: Avoid empty aria-describedby in Radio and Checkbox ([#4111](https://github.com/navikt/aksel/pull/4111))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.31.0
+  - @navikt/aksel-icons@7.31.0
+
 ## 7.30.1
 
 ### Patch Changes
