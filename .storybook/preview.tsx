@@ -52,7 +52,7 @@ const LanguageDecorator = ({ children, language }) => {
   return children;
 };
 
-const fonts = ["Source Sans 3", "Roboto Flex", "Noto Sans", "Open Sans"];
+const fonts = ["Source Sans 3", "Open Sans"];
 
 const TypoDecorator = ({ children, font }) => {
   useEffect(() => {
