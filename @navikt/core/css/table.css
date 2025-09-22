@@ -29,6 +29,10 @@
   display: table-row;
 }
 
+.navds-table__row[data-interactive="true"]:hover {
+  cursor: pointer;
+}
+
 .navds-table__body .navds-table__row--shade-on-hover:hover {
   background-color: var(--ac-table-row-hover, var(--a-bg-subtle));
 }
