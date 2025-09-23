@@ -40,17 +40,15 @@ type Story = StoryObj<BaseOverlayProps>;
 
 export const CancelClose: Story = {
   render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    /* TODO: Extract this to util? */
-    globalThis.AKSEL_ANIMATIONS_DISABLED = true;
     const drawer = canvas.getByTestId("drawer");
     const closeButton = canvas.getByText("Close");
 
     await userEvent.click(closeButton);
     // Overlay should remain open
     expect(drawer).toBeInTheDocument();
-    globalThis.AKSEL_ANIMATIONS_DISABLED = false;
   },
   args: {
     rootProps: {
@@ -165,6 +163,13 @@ function PortalContainer({ children }: { children: React.ReactNode }) {
       <div id="portal-container" ref={setContainer} />
     </Provider>
   );
+}
+
+function withoutAnimations() {
+  globalThis.AKSEL_ANIMATIONS_DISABLED = true;
+  return () => {
+    globalThis.AKSEL_ANIMATIONS_DISABLED = false;
+  };
 }
 
 const BackDropStyle = (
