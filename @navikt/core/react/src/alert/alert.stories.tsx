@@ -6,7 +6,7 @@ import { BodyLong, Heading } from "../typography";
 import Alert, { AlertProps } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
-  title: "ds-react/Alert",
+  title: "ds-react/Alert/Legacy",
   component: Alert,
   parameters: {
     chromatic: { disable: true },
