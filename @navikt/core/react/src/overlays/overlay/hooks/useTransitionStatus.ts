@@ -17,9 +17,9 @@ type TransitionStatus = "entering" | "exiting" | "idle" | undefined;
  *
  * States (transitionStatus):
  *  - "entering"  : just entered (initial frame of enter) OR re-entering to reach "idle".
- *  - "idle"       : stable open (only when `enableIdleState === true`).
- *  - "exiting"     : exit animation is running; element still mounted.
- *  - undefined    : closed (unmounted) OR stable open when idle state is disabled.
+ *  - "idle"      : stable open (only when `enableIdleState === true`).
+ *  - "exiting"   : exit animation is running; element still mounted.
+ *  - undefined   : closed (unmounted) OR stable open when idle state is disabled.
  *                   When `enableIdleState` is false we clear the label after
  *                   the first frame so styling can rely purely on `mounted`.
  *
@@ -104,16 +104,24 @@ function useTransitionStatus(
     };
   }, [enableIdleState, open]);
 
-  /* Idle flow: first frame = "entering", next frame = "idle" (persistent open styling). */
   useClientLayoutEffect(() => {
     if (!open || !enableIdleState) {
       return undefined;
     }
 
+    /*
+     * We can enter this state by re-opening before exiting-state was finished
+     * (open → close → open in quick succession).
+     */
     if (open && mounted && transitionStatus !== "idle") {
       setTransitionStatus("entering");
     }
 
+    /**
+     * Next frame, after "entering", switch to persistent "idle" state.
+     * By delaying to the next frame we ensure any "entering" styles are
+     * applied and the transition can run.
+     */
     const frame = requestAnimationFrame(() => {
       setTransitionStatus("idle");
     });
