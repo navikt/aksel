@@ -42,7 +42,6 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       setOpen,
       open,
       transitionStatus,
-      nestedLevel,
       popupElement,
     } = useOverlayContext();
 
@@ -60,10 +59,6 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
     const transitionAttrb = transitionStatus
       ? { [`data-${transitionStatus}-style`]: true }
       : {};
-
-    const nestedToken: React.CSSProperties = {
-      "--__axc-overlay-nested-level": nestedLevel,
-    };
 
     return (
       <FocusScope
@@ -95,7 +90,6 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
             ref={mergedRefs}
             className={cn(className)}
             {...transitionAttrb}
-            style={nestedToken}
           >
             {children}
           </div>

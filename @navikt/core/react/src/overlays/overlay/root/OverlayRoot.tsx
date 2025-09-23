@@ -41,11 +41,6 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
 
   const popupRef = useRef<HTMLDivElement | null>(null);
 
-  /*
-  const backdropRef = useRef<HTMLDivElement | null>(null);
-  const internalBackdropRef = useRef<HTMLDivElement | null>(null);
-   */
-
   const [triggerElement, setTriggerElement] = useState<Element | null>(null);
   const [popupElement, setPopupElement] = useState<HTMLElement | null>(null);
 
@@ -93,7 +88,7 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
         popupElement={popupElement}
         setTriggerElement={setTriggerElement}
         triggerElement={triggerElement}
-        nestedLevel={(overlayContext?.nestedLevel ?? 0) + 1}
+        nested={!!overlayContext}
       >
         {children}
       </OverlayContextProvider>

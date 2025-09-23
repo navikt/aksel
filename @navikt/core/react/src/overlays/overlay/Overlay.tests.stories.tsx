@@ -119,6 +119,27 @@ export const NestedEscapeClose: Story = {
   },
 };
 
+/* --------------------------------- Backdrop -------------------------------- */
+/* Only root-level backdrop should render */
+export const BackdropRenderOnlyRoot: Story = {
+  render: BaseOverlayComponent,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const triggerButton = canvas.getByText("Open Overlay Nested");
+    await userEvent.click(triggerButton);
+
+    expect(canvas.getByTestId("drawer-nested")).toBeInTheDocument();
+    expect(canvas.queryByTestId("backdrop-nested")).not.toBeInTheDocument();
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+    },
+    nested: true,
+  },
+};
+
 /* --------------------------------- Trigger -------------------------------- */
 export const TriggerOpenOnClick: Story = {
   render: BaseOverlayComponent,

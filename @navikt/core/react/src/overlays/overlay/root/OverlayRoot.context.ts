@@ -52,9 +52,9 @@ interface OverlayContextT {
    */
   triggerElement: Element | null;
   /**
-   * The nesting level of the overlay (0 = top level)
+   * Declares if this overlay is nested inside another overlay.
    */
-  nestedLevel: number;
+  nested: boolean;
 }
 
 const [OverlayContextProvider, useOverlayContext] =
