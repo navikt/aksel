@@ -1,11 +1,11 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { AkselColor } from "../../../types";
-import { baseAlertVariantToDataColor } from "../utils/BaseAlertUtils";
 import {
   type BaseAlertContextProps,
   BaseAlertProvider,
 } from "./BaseAlertRoot.context";
+import { baseAlertVariantToDataColor } from "./BaseAlertRoot.utils";
 
 interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
