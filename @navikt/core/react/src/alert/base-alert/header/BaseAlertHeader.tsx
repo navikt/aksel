@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { useBaseAlert } from "../root/BaseAlertRoot.context";
-import { BaseAlertVariantIcon } from "../utils/BaseAlertUtils";
+import { BaseAlertVariantIcon } from "../root/BaseAlertRoot.utils";
 
 interface BaseAlertHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

@@ -5,7 +5,7 @@ import { BaseAlert } from "../base-alert";
 import {
   BaseAlertVariantIcon,
   baseAlertVariantToDataColor,
-} from "../base-alert/utils/BaseAlertUtils";
+} from "../base-alert/root/BaseAlertRoot.utils";
 
 interface InlineAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
