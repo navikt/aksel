@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import { useClientLayoutEffect } from "../../../util";
 
-type TransitionStatus = "starting" | "ending" | "idle" | undefined;
+type TransitionStatus = "entering" | "exiting" | "idle" | undefined;
 
 /**
  * Transition status state machine for components that animate between an
@@ -16,9 +16,9 @@ type TransitionStatus = "starting" | "ending" | "idle" | undefined;
  *  - Originally based on https://github.com/floating-ui/floating-ui/blob/7c33a3d0198a9b523d54ae2c37cedb315a309452/packages/react/src/hooks/useTransition.ts
  *
  * States (transitionStatus):
- *  - "starting"  : just entered (initial frame of enter) OR re-entering to reach "idle".
+ *  - "entering"  : just entered (initial frame of enter) OR re-entering to reach "idle".
  *  - "idle"       : stable open (only when `enableIdleState === true`).
- *  - "ending"     : exit animation is running; element still mounted.
+ *  - "exiting"     : exit animation is running; element still mounted.
  *  - undefined    : closed (unmounted) OR stable open when idle state is disabled.
  *                   When `enableIdleState` is false we clear the label after
  *                   the first frame so styling can rely purely on `mounted`.
@@ -33,40 +33,50 @@ type TransitionStatus = "starting" | "ending" | "idle" | undefined;
  *
  * @param open              Controls visibility lifecycle.
  * @param enableIdleState   Insert a persistent "idle" phase after entering.
- * @param deferEndingState  Delay starting the exit phase by one frame to allow
+ * @param deferExitingState  Delay entering the exit phase by one frame to allow
  *                          measurement / layout work before applying exit styles.
  */
 function useTransitionStatus(
   open: boolean,
   enableIdleState: boolean = false,
-  deferEndingState: boolean = false,
+  deferExitingState: boolean = false,
 ) {
   const [mounted, setMounted] = useState(open);
   const [transitionStatus, setTransitionStatus] = useState<TransitionStatus>(
     open && enableIdleState ? "idle" : undefined,
   );
 
-  /* Opening: mount immediately and label as "starting" for the first frame. */
+  /* Opening: mount immediately and label as "entering" for the first frame. */
   if (open && !mounted) {
     setMounted(true);
-    setTransitionStatus("starting");
+    setTransitionStatus("entering");
   }
 
   /* Closing (no defer): begin exit animation right away. */
-  if (!open && mounted && transitionStatus !== "ending" && !deferEndingState) {
-    setTransitionStatus("ending");
+  if (
+    !open &&
+    mounted &&
+    transitionStatus !== "exiting" &&
+    !deferExitingState
+  ) {
+    setTransitionStatus("exiting");
   }
 
   /* Cleanup: after unmount post-exit ensure status returns to undefined. */
-  if (!open && !mounted && transitionStatus === "ending") {
+  if (!open && !mounted && transitionStatus === "exiting") {
     setTransitionStatus(undefined);
   }
 
   /* Deferred closing: provide one frame to measure / flush layout before exit styles. */
   useClientLayoutEffect(() => {
-    if (!open && mounted && transitionStatus !== "ending" && deferEndingState) {
+    if (
+      !open &&
+      mounted &&
+      transitionStatus !== "exiting" &&
+      deferExitingState
+    ) {
       const frame = requestAnimationFrame(() => {
-        setTransitionStatus("ending");
+        setTransitionStatus("exiting");
       });
 
       return () => {
@@ -75,9 +85,9 @@ function useTransitionStatus(
     }
 
     return undefined;
-  }, [open, mounted, transitionStatus, deferEndingState]);
+  }, [open, mounted, transitionStatus, deferExitingState]);
 
-  /* Enter (no idle): hold "starting" for one frame, then clear label (stable open). */
+  /* Enter (no idle): hold "entering" for one frame, then clear label (stable open). */
   useClientLayoutEffect(() => {
     if (!open || enableIdleState) {
       return undefined;
@@ -94,14 +104,14 @@ function useTransitionStatus(
     };
   }, [enableIdleState, open]);
 
-  /* Idle flow: first frame = "starting", next frame = "idle" (persistent open styling). */
+  /* Idle flow: first frame = "entering", next frame = "idle" (persistent open styling). */
   useClientLayoutEffect(() => {
     if (!open || !enableIdleState) {
       return undefined;
     }
 
     if (open && mounted && transitionStatus !== "idle") {
-      setTransitionStatus("starting");
+      setTransitionStatus("entering");
     }
 
     const frame = requestAnimationFrame(() => {
