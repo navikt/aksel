@@ -56,19 +56,19 @@ interface LocalAlertComponent
   Content: typeof LocalAlertContent;
 
   /**
-   * @see 🏷️ {@link LocalAlertCloseButtonProps}
+   * @see 🏷️ {@link LocalAlertCloseProps}
    * @example
    * ```jsx
    *  <LocalAlert>
    *    <LocalAlert.Header>
    *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
-   *     <LocalAlert.CloseButton onClick={() => alert("Lukket!")} />
+   *     <LocalAlert.Close onClick={() => alert("Lukket!")} />
    *    </LocalAlert.Header>
    *
    *  </LocalAlert>
    * ```
    */
-  CloseButton: typeof LocalAlertCloseButton;
+  Close: typeof LocalAlertClose;
 }
 
 /**a
@@ -156,40 +156,40 @@ type LocalAlertContentProps = BaseAlert.ContentProps;
  */
 const LocalAlertContent = BaseAlert.Content;
 
-/* ----------------------------- LocalAlertCloseButton ---------------------------- */
-type LocalAlertCloseButtonProps = BaseAlert.CloseButtonProps;
+/* ----------------------------- LocalAlertClose ---------------------------- */
+type LocalAlertCloseProps = BaseAlert.CloseProps;
 
 /**
- * @see 🏷️ {@link LocalAlertCloseButtonProps}
+ * @see 🏷️ {@link LocalAlertCloseProps}
  * @example
  * ```jsx
  *  <LocalAlert>
  *    <LocalAlert.Header>
  *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
- *     <LocalAlert.CloseButton onClick={() => alert("Lukket!")} />
+ *     <LocalAlert.Close onClick={() => alert("Lukket!")} />
  *    </LocalAlert.Header>
  *
  *  </LocalAlert>
  * ```
  */
-const LocalAlertCloseButton = BaseAlert.CloseButton;
+const LocalAlertClose = BaseAlert.Close;
 
 LocalAlert.Header = LocalAlertHeader;
 LocalAlert.Title = LocalAlertTitle;
 LocalAlert.Content = LocalAlertContent;
-LocalAlert.CloseButton = LocalAlertCloseButton;
+LocalAlert.Close = LocalAlertClose;
 
 export {
   LocalAlert,
   LocalAlertContent,
   LocalAlertHeader,
   LocalAlertTitle,
-  LocalAlertCloseButton,
+  LocalAlertClose,
 };
 export type {
   LocalAlertContentProps,
   LocalAlertHeaderProps,
   LocalAlertProps,
   LocalAlertTitleProps,
-  LocalAlertCloseButtonProps,
+  LocalAlertCloseProps,
 };

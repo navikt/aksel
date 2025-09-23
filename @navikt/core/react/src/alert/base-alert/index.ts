@@ -1,2 +1,2 @@
 "use client";
-export * as BaseAlert from "./BaseAlert";
+export * as BaseAlert from "./namespace";

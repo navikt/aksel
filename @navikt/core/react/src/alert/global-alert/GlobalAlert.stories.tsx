@@ -6,7 +6,7 @@ import { Link } from "../../link";
 import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import {
   GlobalAlert,
-  GlobalAlertCloseButton,
+  GlobalAlertClose,
   GlobalAlertContent,
   GlobalAlertHeader,
   GlobalAlertTitle,
@@ -33,7 +33,7 @@ export const Default: Story = {
           <GlobalAlertTitle>
             {props.title ?? "GlobalAlert title"}
           </GlobalAlertTitle>
-          <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+          <GlobalAlertClose onClick={() => alert("Lukket!")} />
         </GlobalAlertHeader>
         <GlobalAlertContent>
           {props.children ?? "GlobalAlert content"}
@@ -66,7 +66,7 @@ export const SizeSmall: Story = {
       <GlobalAlert variant="announcement" size="small">
         <GlobalAlertHeader>
           <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
-          <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+          <GlobalAlertClose onClick={() => alert("Lukket!")} />
         </GlobalAlertHeader>
         <DemoContent />
       </GlobalAlert>
@@ -86,7 +86,7 @@ export const OnlyHeader: Story = {
         <GlobalAlert variant="announcement">
           <GlobalAlertHeader>
             <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
-            <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+            <GlobalAlertClose onClick={() => alert("Lukket!")} />
           </GlobalAlertHeader>
         </GlobalAlert>
         <GlobalAlert variant="announcement" size="small">
@@ -97,7 +97,7 @@ export const OnlyHeader: Story = {
         <GlobalAlert variant="announcement" size="small">
           <GlobalAlertHeader>
             <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
-            <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+            <GlobalAlertClose onClick={() => alert("Lukket!")} />
           </GlobalAlertHeader>
         </GlobalAlert>
       </VStack>
@@ -115,7 +115,7 @@ export const Compositions: Story = {
           <GlobalAlert variant={variant} key={variant}>
             <GlobalAlertHeader>
               <GlobalAlertTitle>{variant} GlobalAlert title</GlobalAlertTitle>
-              <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+              <GlobalAlertClose onClick={() => alert("Lukket!")} />
             </GlobalAlertHeader>
             <DemoContent />
           </GlobalAlert>
@@ -132,14 +132,14 @@ export const CloseButton: Story = {
         <GlobalAlert variant="announcement">
           <GlobalAlertHeader>
             <GlobalAlertTitle>Info: GlobalAlert title</GlobalAlertTitle>
-            <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+            <GlobalAlertClose onClick={() => alert("Lukket!")} />
           </GlobalAlertHeader>
           <DemoContent />
         </GlobalAlert>
         <GlobalAlert variant="announcement" size="small">
           <GlobalAlertHeader>
             <GlobalAlertTitle>Info: GlobalAlert title</GlobalAlertTitle>
-            <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+            <GlobalAlertClose onClick={() => alert("Lukket!")} />
           </GlobalAlertHeader>
           <DemoContent />
         </GlobalAlert>
@@ -162,7 +162,7 @@ export const WrappingTitle: Story = {
             Molestias, laudantium saepe. Nihil in alias praesentium maxime iure
             ipsam? Accusantium libero quia quis!
           </GlobalAlertTitle>
-          <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+          <GlobalAlertClose onClick={() => alert("Lukket!")} />
         </GlobalAlertHeader>
         <DemoContent />
       </GlobalAlert>

@@ -2,6 +2,10 @@ import React, { forwardRef } from "react";
 import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
 import { BaseAlert } from "../base-alert";
+import {
+  BaseAlertVariantIcon,
+  baseAlertVariantToDataColor,
+} from "../base-alert/utils/BaseAlertUtils";
 
 interface InlineAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -45,7 +49,7 @@ const InlineAlert = forwardRef<HTMLDivElement, InlineAlertProps>(
         ref={forwardedRef}
         role={variant === "success" ? "status" : "alert"}
         className={cn("navds-base-alert__inline", className)}
-        data-color={BaseAlert.variantToDataColor(variant)}
+        data-color={baseAlertVariantToDataColor(variant)}
         {...restProps}
         size={size}
         as="div"
@@ -53,7 +57,7 @@ const InlineAlert = forwardRef<HTMLDivElement, InlineAlertProps>(
         data-size={size}
       >
         <span className={cn("navds-base-alert__inline-icon")}>
-          <BaseAlert.VariantIcon variant={variant} fill={false} />
+          <BaseAlertVariantIcon variant={variant} fill={false} />
         </span>
         <span data-color={themeContext?.color}>{children}</span>
       </BodyShort>

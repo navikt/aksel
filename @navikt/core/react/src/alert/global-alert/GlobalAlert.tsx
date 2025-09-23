@@ -56,18 +56,18 @@ interface GlobalAlertComponent
   Content: typeof GlobalAlertContent;
 
   /**
-   * @see 🏷️ {@link GlobalAlertCloseButtonProps}
+   * @see 🏷️ {@link GlobalAlertCloseProps}
    * @example
    * ```jsx
    *  <GlobalAlert>
    *    <GlobalAlert.Header>
    *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
-   *     <GlobalAlert.CloseButton onClick={() => alert("Lukket!")} />
+   *     <GlobalAlert.Close onClick={() => alert("Lukket!")} />
    *    </GlobalAlert.Header>
    *  </GlobalAlert>
    * ```
    */
-  CloseButton: typeof GlobalAlertCloseButton;
+  Close: typeof GlobalAlertClose;
 }
 
 /**
@@ -155,40 +155,40 @@ type GlobalAlertContentProps = BaseAlert.ContentProps;
  */
 const GlobalAlertContent = BaseAlert.Content;
 
-/* ----------------------------- GlobalAlertCloseButton ---------------------------- */
-type GlobalAlertCloseButtonProps = BaseAlert.CloseButtonProps;
+/* ----------------------------- GlobalAlertClose ---------------------------- */
+type GlobalAlertCloseProps = BaseAlert.CloseProps;
 
 /**
- * @see 🏷️ {@link GlobalAlertCloseButtonProps}
+ * @see 🏷️ {@link GlobalAlertCloseProps}
  * @example
  * ```jsx
  *  <GlobalAlert>
  *    <GlobalAlert.Header>
  *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
- *     <GlobalAlert.CloseButton onClick={() => alert("Lukket!")} />
+ *     <GlobalAlert.Close onClick={() => alert("Lukket!")} />
  *    </GlobalAlert.Header>
  *
  *  </GlobalAlert>
  * ```
  */
-const GlobalAlertCloseButton = BaseAlert.CloseButton;
+const GlobalAlertClose = BaseAlert.Close;
 
 GlobalAlert.Header = GlobalAlertHeader;
 GlobalAlert.Title = GlobalAlertTitle;
 GlobalAlert.Content = GlobalAlertContent;
-GlobalAlert.CloseButton = GlobalAlertCloseButton;
+GlobalAlert.Close = GlobalAlertClose;
 
 export {
   GlobalAlert,
   GlobalAlertContent,
   GlobalAlertHeader,
   GlobalAlertTitle,
-  GlobalAlertCloseButton,
+  GlobalAlertClose,
 };
 export type {
   GlobalAlertContentProps,
   GlobalAlertHeaderProps,
   GlobalAlertProps,
   GlobalAlertTitleProps,
-  GlobalAlertCloseButtonProps,
+  GlobalAlertCloseProps,
 };
