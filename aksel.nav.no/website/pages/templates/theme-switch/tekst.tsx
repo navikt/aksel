@@ -6,7 +6,7 @@ import {
   ThemeIcon,
 } from "@navikt/aksel-icons";
 import { ActionMenu, Button, HStack } from "@navikt/ds-react";
-import { useThemeExample } from "@/web/examples/ThemeExample.context";
+import { useThemeExample } from "@/web/examples/useThemeExample";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 function Example() {
