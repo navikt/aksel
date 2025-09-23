@@ -12,8 +12,8 @@ type TransitionStatus = "starting" | "ending" | "idle" | undefined;
  * exit animations run and introduces an optional stable `idle` phase.
  *
  * Adapted from MUI Base + Floating UI examples:
- *  - * Source: https://github.com/mui/base-ui/blob/6fd69008d83561dbe75ff89acf270f0fac3e0049/packages/react/src/utils/useTransitionStatus.ts
- *  - * Originally based on https://github.com/floating-ui/floating-ui/blob/7c33a3d0198a9b523d54ae2c37cedb315a309452/packages/react/src/hooks/useTransition.ts
+ *  - Source: https://github.com/mui/base-ui/blob/6fd69008d83561dbe75ff89acf270f0fac3e0049/packages/react/src/utils/useTransitionStatus.ts
+ *  - Originally based on https://github.com/floating-ui/floating-ui/blob/7c33a3d0198a9b523d54ae2c37cedb315a309452/packages/react/src/hooks/useTransition.ts
  *
  * States (transitionStatus):
  *  - "starting"  : just entered (initial frame of enter) OR re-entering to reach "idle".
