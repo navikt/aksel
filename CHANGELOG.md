@@ -1,5 +1,23 @@
 # Changelog
 
+## 7.31.0
+
+### @navikt/ds-react
+
+- Table: Add 'onRowClick' callback-prop to allow for selecting rows by clicking the row itself. ([#4107](https://github.com/navikt/aksel/pull/4107))
+
+- Combobox: Dropdown-element is now position='fixed', allowing for better placement on smaller screens and inside Modals. ([#4106](https://github.com/navikt/aksel/pull/4106))
+
+* Darkside: Avoid empty aria-describedby in Radio and Checkbox ([#4111](https://github.com/navikt/aksel/pull/4111))
+
+### @navikt/ds-css
+
+- Combobox: Dropdown-element is now position='fixed', allowing for better placement on smaller screens and inside Modals. ([#4106](https://github.com/navikt/aksel/pull/4106))
+
+* Darkside: Adjust visually-hidden typography css ([#4103](https://github.com/navikt/aksel/pull/4103))
+
+* Darkside: Adjusted arrow on GuidePanel poster variant ([#4101](https://github.com/navikt/aksel/pull/4101))
+
 ## 7.30.1
 
 ### @navikt/ds-react

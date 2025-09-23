@@ -54,7 +54,7 @@ Related files: `package.json`, `eslint.config.js`, `biome.json`, `tsconfig.json`
 ## Prerequisites
 
 - Yarn 4 via Corepack is expected by the repo (`packageManager` field).
-- Some maintenance scripts use Deno (for example `scripts/changelog/createMainChangelog.ts`). Install Deno if you run those.
+- Some maintenance scripts use Deno (for example `scripts/deno/changelog/createMainChangelog.ts`). Install Deno if you run those.
 - Most packages are public. If you encounter 401s from GitHub Packages in a custom setup, set `NPM_AUTH_TOKEN` with `read:packages`.
 
 For limited installs (no website), you can focus core packages:
@@ -219,7 +219,7 @@ Troubleshooting
 - Use Changesets: `yarn changeset` and the root scripts:
   - `yarn create-version` (applies versions, updates changelog, reinstalls)
   - `yarn release` (boots, docgen, publish, git release helper)
-- Main changelog script: `scripts/changelog/createMainChangelog.ts`
+- Main changelog script: `scripts/deno/changelog/createMainChangelog.ts`
 
 ## Answer snippets (for Copilot)
 

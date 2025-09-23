@@ -40,6 +40,10 @@
   &:has(+ .aksel-table__row--selected) :is(.aksel-table__header-cell, .aksel-table__data-cell) {
     border-color: var(--ax-border-default);
   }
+
+  &[data-interactive="true"]:hover {
+    cursor: pointer;
+  }
 }
 
 .aksel-table__row--selected {
