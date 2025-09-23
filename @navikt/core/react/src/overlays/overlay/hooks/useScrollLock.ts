@@ -1,7 +1,6 @@
 import { useClientLayoutEffect } from "../../../util";
 import { isIOS, isWebKit } from "../../../util/detectBrowser";
 import { ownerDocument, ownerWindow } from "../../../util/owner";
-import { AnimationFrame } from "./useAnimationFrame";
 import { Timeout } from "./useTimeout";
 
 let originalHtmlStyles: Partial<CSSStyleDeclaration> = {};
@@ -37,7 +36,7 @@ function preventScrollStandard(referenceElement: Element | null) {
 
   let scrollTop = 0;
   let scrollLeft = 0;
-  const resizeFrame = AnimationFrame.create();
+  let resizeRaf = 0;
 
   // Pinch-zoom in Safari causes a shift. Just don't lock scroll if there's any pinch-zoom.
   if (isWebKit && (win.visualViewport?.scale ?? 1) !== 1) {
@@ -144,14 +143,19 @@ function preventScrollStandard(referenceElement: Element | null) {
 
   function handleResize() {
     cleanup();
-    resizeFrame.request(lockScroll);
+    if (resizeRaf) {
+      cancelAnimationFrame(resizeRaf);
+    }
+    resizeRaf = requestAnimationFrame(lockScroll);
   }
 
   lockScroll();
   win.addEventListener("resize", handleResize);
 
   return () => {
-    resizeFrame.cancel();
+    if (resizeRaf) {
+      cancelAnimationFrame(resizeRaf);
+    }
     cleanup();
     win.removeEventListener("resize", handleResize);
   };

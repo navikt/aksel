@@ -1,6 +1,6 @@
 "use client";
 
-import { useOnMount } from "./useOnMount";
+import { useEffect } from "react";
 import { useRefWithInit } from "./useRefWithInit";
 
 type TimeoutId = number;
@@ -47,7 +47,8 @@ class Timeout {
 function useTimeout() {
   const timeout = useRefWithInit(Timeout.create).current!;
 
-  useOnMount(timeout.disposeEffect);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(timeout.disposeEffect, []);
 
   return timeout;
 }

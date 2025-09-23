@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useControllableState } from "../../../util/hooks/useControllableState";
 import { useEventCallback } from "../hooks/useEventCallback";
-import { useOpenChangeComplete } from "../hooks/useOpenChangeComplete";
+import { useOpenChangeAnimationComplete } from "../hooks/useOpenChangeAnimationComplete";
 import { useTransitionStatus } from "../hooks/useTransitionStatus";
 import {
   OverlayContextProvider,
@@ -20,7 +20,6 @@ import {
 /**
  * TODO: Root state and context provider for overlay components
  * - Handle nested overlays
- * - Test canceable opening/closing
  */
 const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
   const {
@@ -61,7 +60,7 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     onOpenChangeComplete?.(false);
   });
 
-  useOpenChangeComplete({
+  useOpenChangeAnimationComplete({
     open,
     ref: popupRef,
     onComplete() {
