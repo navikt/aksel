@@ -58,6 +58,67 @@ export const CancelClose: Story = {
   },
 };
 
+export const CancelEscapeClose: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByTestId("drawer");
+
+    await userEvent.keyboard("{Escape}");
+    // Overlay should remain open
+    expect(drawer).toBeInTheDocument();
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+      onOpenChange: (_, event) => event?.preventDefault(),
+    },
+  },
+};
+
+export const EscapeClose: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    await userEvent.keyboard("{Escape}");
+
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+    },
+  },
+};
+
+export const NestedEscapeClose: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const triggerButton = canvas.getByText("Open Overlay Nested");
+    await userEvent.click(triggerButton);
+
+    expect(canvas.getByTestId("drawer-nested")).toBeInTheDocument();
+    await userEvent.keyboard("{Escape}");
+    expect(canvas.queryByTestId("drawer-nested")).not.toBeInTheDocument();
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    await userEvent.keyboard("{Escape}");
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+    },
+    nested: true,
+  },
+};
+
 /* --------------------------------- Trigger -------------------------------- */
 export const TriggerOpenOnClick: Story = {
   render: BaseOverlayComponent,
@@ -206,12 +267,14 @@ type BaseOverlayProps = {
     /* Has to override AsChild type */
     children?: any;
   };
+  nested?: boolean;
 };
 
 function BaseOverlayComponent({
   closeButtonProps,
   triggerButtonProps,
   rootProps,
+  nested,
 }: BaseOverlayProps) {
   return (
     <Overlay {...rootProps}>
@@ -221,7 +284,30 @@ function BaseOverlayComponent({
       <OverlayPortal data-testid="portal">
         <OverlayBackdrop className="backdropCSS" data-testid="backdrop" />
         <OverlayDrawer className="drawerCSS" data-testid="drawer">
-          Drawer content
+          {nested ? (
+            <Overlay>
+              <OverlayTrigger data-testid="trigger-nested">
+                Open Overlay Nested
+              </OverlayTrigger>
+              <OverlayPortal data-testid="portal-nested">
+                <OverlayBackdrop
+                  className="backdropCSS"
+                  data-testid="backdrop-nested"
+                />
+                <OverlayDrawer
+                  className="drawerCSS"
+                  data-testid="drawer-nested"
+                >
+                  Drawer content Nested
+                  <OverlayClose data-testid="close-nested">
+                    Close Nested
+                  </OverlayClose>
+                </OverlayDrawer>
+              </OverlayPortal>
+            </Overlay>
+          ) : (
+            "Drawer content"
+          )}
           <OverlayClose data-testid="close" {...closeButtonProps}>
             {closeButtonProps?.children ?? "Close"}
           </OverlayClose>
