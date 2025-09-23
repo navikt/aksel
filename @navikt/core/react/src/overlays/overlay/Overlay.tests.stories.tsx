@@ -12,6 +12,7 @@ import {
   OverlayPortal,
   type OverlayProps,
   OverlayTrigger,
+  type OverlayTriggerProps,
 } from "./index";
 
 const meta: Meta<typeof Overlay> = {
@@ -37,7 +38,6 @@ export default meta;
 type Story = StoryObj<BaseOverlayProps>;
 
 /* ----------------------------- State handling ----------------------------- */
-
 export const CancelClose: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
@@ -54,6 +54,76 @@ export const CancelClose: Story = {
     rootProps: {
       defaultOpen: true,
       onOpenChange: (_, event) => event?.preventDefault(),
+    },
+  },
+};
+
+/* --------------------------------- Trigger -------------------------------- */
+export const TriggerOpenOnClick: Story = {
+  render: BaseOverlayComponent,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    const triggerButton = canvas.getByText("Open Overlay");
+
+    await userEvent.click(triggerButton);
+    // Overlay should remain open
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).toHaveBeenCalledOnce();
+  },
+  args: {
+    rootProps: {
+      onOpenChange: fn(),
+    },
+  },
+};
+
+export const TriggerDisabled: Story = {
+  render: BaseOverlayComponent,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+
+    const triggerButton = canvas.getByText("Open Overlay");
+    await userEvent.click(triggerButton);
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+  },
+  args: {
+    triggerButtonProps: { disabled: true },
+    rootProps: {
+      onOpenChange: fn(),
+    },
+  },
+};
+
+export const TriggerDisabledSlot: Story = {
+  render: BaseOverlayComponent,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    const triggerButton = canvas.getByText("Open Overlay");
+    await userEvent.click(triggerButton);
+
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+  },
+  args: {
+    triggerButtonProps: {
+      disabled: true,
+      asChild: true,
+      children: (
+        <Button disabled id="slot">
+          Open Overlay
+        </Button>
+      ),
+    },
+    rootProps: {
+      onOpenChange: fn(),
     },
   },
 };
@@ -132,15 +202,22 @@ type BaseOverlayProps = {
     /* Has to override AsChild type */
     children?: any;
   };
+  triggerButtonProps?: Omit<OverlayTriggerProps, "children"> & {
+    /* Has to override AsChild type */
+    children?: any;
+  };
 };
 
 function BaseOverlayComponent({
   closeButtonProps,
+  triggerButtonProps,
   rootProps,
 }: BaseOverlayProps) {
   return (
     <Overlay {...rootProps}>
-      <OverlayTrigger data-testid="trigger">Open Overlay</OverlayTrigger>
+      <OverlayTrigger data-testid="trigger" {...triggerButtonProps}>
+        {triggerButtonProps?.children ?? "Open Overlay"}
+      </OverlayTrigger>
       <OverlayPortal data-testid="portal">
         <OverlayBackdrop className="backdropCSS" data-testid="backdrop" />
         <OverlayDrawer className="drawerCSS" data-testid="drawer">
