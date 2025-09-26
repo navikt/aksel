@@ -36,5 +36,5 @@ export const Demo = {
 
 export const args = {
   index: 7,
-  desc: "Før du velger å bruke range, vurder om to separate datepickere i single mode er bedre. Range fungerer best for korte perioder innenfor en måned.",
+  desc: "Før du velger å bruke range mode, vurder om to separate datepickere i single mode er bedre. Range fungerer best for korte perioder innenfor en måned.",
 };
