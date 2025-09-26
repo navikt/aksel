@@ -2,7 +2,7 @@ import React, { HTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { BodyLong, HeadingProps } from "../typography";
-import Bubble from "./Bubble";
+import Bubble, { type ChatBubbleProps } from "./Bubble";
 
 export const VARIANTS = ["subtle", "info", "neutral"] as const;
 export const POSITIONS = ["left", "right"] as const;
@@ -60,7 +60,7 @@ interface ChatComponent
     ChatProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
-   * @see 🏷️ {@link BubbleProps}
+   * @see 🏷️ {@link ChatBubbleProps}
    */
   Bubble: typeof Bubble;
 }
@@ -128,7 +128,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
           className={cn("navds-chat__bubble-wrapper")}
         >
           {React.Children.map(children, (child, i) => {
-            if (!React.isValidElement(child)) {
+            if (!React.isValidElement<ChatBubbleProps>(child)) {
               return null;
             }
 

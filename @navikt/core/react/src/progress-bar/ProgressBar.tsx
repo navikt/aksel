@@ -95,7 +95,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   ) => {
     const { cn } = useRenameCSS();
     const translateX = 100 - (Math.round(value) / valueMax) * 100;
-    const onTimeoutRef = useRef<() => void>();
+    const onTimeoutRef = useRef<() => void>(undefined);
     onTimeoutRef.current = simulated?.onTimeout;
     const translate = useI18n("ProgressBar");
 

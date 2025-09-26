@@ -116,7 +116,7 @@ export function containsReadMore(
   children: React.ReactNode,
   checkNested = true,
 ): boolean {
-  if (React.isValidElement(children)) {
+  if (React.isValidElement<{ children?: any }>(children)) {
     if (children.type === ReadMore) {
       return true;
     }

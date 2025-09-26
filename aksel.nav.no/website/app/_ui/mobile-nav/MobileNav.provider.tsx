@@ -1,17 +1,11 @@
 "use client";
 
-import {
-  MutableRefObject,
-  createContext,
-  useContext,
-  useRef,
-  useState,
-} from "react";
+import { RefObject, createContext, useContext, useRef, useState } from "react";
 
 type MobileNavContextT = {
   open: boolean;
   toggleOpen: (toState?: boolean) => void;
-  focusRef: MutableRefObject<HTMLButtonElement | null>;
+  focusRef: RefObject<HTMLButtonElement | null>;
 };
 
 const MobileNavContext = createContext<MobileNavContextT>({
