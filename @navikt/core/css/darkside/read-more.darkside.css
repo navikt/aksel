@@ -70,6 +70,11 @@
   margin-left: calc(var(--__axc-read-more-pi-start) + var(--__axc-read-more-icon-size) / 2 - 1px);
   padding-left: calc(var(--__axc-read-more-icon-size) / 2 - 1px + var(--ax-space-4));
 
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+
   &[data-state="closed"] {
     display: none;
   }

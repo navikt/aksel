@@ -26,11 +26,11 @@ export interface ReadMoreProps
    */
   defaultOpen?: boolean;
   /**
-   * Callback for current open-state
+   * Callback for current open-state.
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Changes fontsize for content.
+   * Changes font size for content.
    * @default "medium"
    */
   size?: "large" | "medium" | "small";
@@ -42,14 +42,7 @@ export interface ReadMoreProps
  * @see 🏷️ {@link ReadMoreProps}
  *
  * @example
- * // Default
  * <ReadMore header="Dette regnes som helsemessige begrensninger">
- *  Med helsemessige begrensninger mener vi funksjonshemming, sykdom...
- * </ReadMore>
- *
- * @example
- * // Litt mindre versjon
- * <ReadMore size="small" header="Dette regnes som helsemessige begrensninger">
  *   Med helsemessige begrensninger mener vi funksjonshemming, sykdom...
  * </ReadMore>
  */
@@ -65,7 +58,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       size = "medium",
       onOpenChange,
       ...rest
-    },
+    }: ReadMoreProps,
     ref,
   ) => {
     const { cn } = useRenameCSS();
@@ -107,7 +100,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
 
         <BodyLong
           as="div"
-          aria-hidden={!_open}
+          tabIndex={0}
           className={cn("navds-read-more__content", {
             "navds-read-more__content--closed": !_open,
           })}
