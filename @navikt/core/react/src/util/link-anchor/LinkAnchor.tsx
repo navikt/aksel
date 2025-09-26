@@ -14,7 +14,7 @@ import { useMergeRefs } from "../hooks/useMergeRefs";
 import { AsChildProps } from "../types";
 
 type LinkAnchorOverlayContextProps = {
-  anchorRef: React.RefObject<HTMLAnchorElement>;
+  anchorRef: React.RefObject<HTMLAnchorElement | null>;
 };
 
 const [LinkAnchorContextProvider, useLinkAnchorContext] =

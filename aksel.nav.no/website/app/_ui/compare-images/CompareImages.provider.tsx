@@ -13,12 +13,12 @@ import { Color } from "@/app/_sanity/query-types";
 
 type CompareImagesContextT = {
   container: {
-    ref: React.RefObject<HTMLDivElement>;
+    ref: React.RefObject<HTMLDivElement | null>;
     onPointerDown?: (event: React.PointerEvent<HTMLDivElement>) => void;
     styles?: CSSProperties;
   };
   handle: {
-    ref: React.RefObject<HTMLButtonElement>;
+    ref: React.RefObject<HTMLButtonElement | null>;
     onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
   };
 

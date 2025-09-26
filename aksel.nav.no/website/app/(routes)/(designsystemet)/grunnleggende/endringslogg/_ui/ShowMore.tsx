@@ -101,7 +101,7 @@ export interface ShowMoreProps
   /**
    * Alternative target to scroll into view after collapsing.
    */
-  scrollTargetRef?: React.RefObject<HTMLElement>;
+  scrollTargetRef?: React.RefObject<HTMLElement | null>;
 }
 
 /**

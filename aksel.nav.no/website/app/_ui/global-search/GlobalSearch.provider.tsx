@@ -20,7 +20,7 @@ type SearchContextType = {
   open: boolean;
   openSearch: () => void;
   closeSearch: () => void;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
   queryResults: ActionReturnT | null;
   updateSearch: (query: string) => void;
   resetSearch: () => void;
