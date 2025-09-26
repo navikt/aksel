@@ -15,7 +15,7 @@ interface InputContextValue extends FormFieldType {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   shouldAutocomplete?: boolean;
-  toggleOpenButtonRef: React.RefObject<HTMLDivElement | null>;
+  toggleOpenButtonRef: React.MutableRefObject<HTMLDivElement | null>;
   hideCaret: boolean;
   setHideCaret: React.Dispatch<React.SetStateAction<boolean>>;
 }
