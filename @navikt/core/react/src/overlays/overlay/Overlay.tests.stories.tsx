@@ -367,8 +367,7 @@ const BackDropStyle = (
     transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
 
 
-    &[data-starting-style],
-    &[data-ending-style] {
+    &[data-entering-style], &[data-exiting-style] {
       opacity: 0;
     }
     }
@@ -393,7 +392,7 @@ const DrawerStyle = (
     transition: all 300ms;
     padding: 4rem;
 
-    &[data-starting-style], &[data-ending-style] {
+    &[data-entering-style], &[data-exiting-style] {
       transform: translateX(100%);
     }
   }
