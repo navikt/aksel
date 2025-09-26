@@ -34,6 +34,14 @@ interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 /**
  * TODO: Drawer that slides in from the side
  * - Implemented as `dialog`-element
+ *
+ *
+ * TODO: Dismissablelayer
+ * - Modal === true
+ *   - Close on all outside CLICK, not pointerdown
+ *
+ * - Modal === "trap-focus"
+ *  - Close on Outside pointerdown, unless backdrop is present, in that case only close on outside CLICK
  */
 const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
   (
