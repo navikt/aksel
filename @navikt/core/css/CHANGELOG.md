@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.31.1
+
+### Patch Changes
+
+- Process: Adjusted active-marking ([#4118](https://github.com/navikt/aksel/pull/4118))
+
 ## 7.31.0
 
 ### Minor Changes
