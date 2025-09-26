@@ -5,7 +5,6 @@ import { useOpenChangeAnimationComplete } from "../hooks/useOpenChangeAnimationC
 import { useTransitionStatus } from "../hooks/useTransitionStatus";
 import {
   OverlayContextProvider,
-  OverlayRootContextProvider,
   useOverlayContext,
 } from "./OverlayRoot.context";
 
@@ -24,7 +23,6 @@ import {
 const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
   const {
     children,
-    dismissible = true,
     defaultOpen = false,
     open: openParam,
     onOpenChange,
@@ -76,22 +74,20 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
   const isTopmost = ownNestedOpenDialogs === 0; */
 
   return (
-    <OverlayRootContextProvider dismissible={dismissible}>
-      <OverlayContextProvider
-        open={open}
-        setOpen={setOpen}
-        mounted={mounted}
-        transitionStatus={transitionStatus}
-        popupRef={popupRef}
-        setPopupElement={setPopupElement}
-        popupElement={popupElement}
-        setTriggerElement={setTriggerElement}
-        triggerElement={triggerElement}
-        nested={!!overlayContext}
-      >
-        {children}
-      </OverlayContextProvider>
-    </OverlayRootContextProvider>
+    <OverlayContextProvider
+      open={open}
+      setOpen={setOpen}
+      mounted={mounted}
+      transitionStatus={transitionStatus}
+      popupRef={popupRef}
+      setPopupElement={setPopupElement}
+      popupElement={popupElement}
+      setTriggerElement={setTriggerElement}
+      triggerElement={triggerElement}
+      nested={!!overlayContext}
+    >
+      {children}
+    </OverlayContextProvider>
   );
 };
 
@@ -116,11 +112,6 @@ interface OverlayProps {
    * Event handler called after any animations complete when the dialog is opened or closed.
    */
   onOpenChangeComplete?: (open: boolean) => void;
-  /**
-   * Determines if the dialog should close on outside clicks.
-   * @default true
-   */
-  dismissible?: boolean;
 }
 
 export { Overlay };

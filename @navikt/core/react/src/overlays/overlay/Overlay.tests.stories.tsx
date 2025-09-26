@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, within } from "@storybook/test";
+import { expect, fireEvent, fn, userEvent, within } from "@storybook/test";
 import React from "react";
 import { Button } from "../../button";
 import { Provider } from "../../provider";
@@ -9,6 +9,7 @@ import {
   OverlayClose,
   type OverlayCloseProps,
   OverlayDrawer,
+  type OverlayDrawerProps,
   OverlayPortal,
   type OverlayProps,
   OverlayTrigger,
@@ -116,6 +117,80 @@ export const NestedEscapeClose: Story = {
       defaultOpen: true,
     },
     nested: true,
+  },
+};
+
+export const OutsideClickClose: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    await userEvent.click(document.documentElement);
+
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).toHaveBeenCalledOnce();
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+      onOpenChange: fn(),
+    },
+  },
+};
+
+export const OutsideClickNoClose: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    await userEvent.click(document.documentElement);
+
+    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+      onOpenChange: fn(),
+    },
+    drawerProps: {
+      closeOnOutsideClick: false,
+    },
+  },
+};
+
+/* Close should only happend on onClick */
+export const OutsideClickIntentionalClose: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    await fireEvent.pointerDown(document.documentElement);
+    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+
+    await userEvent.click(document.documentElement);
+
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).toHaveBeenCalledOnce();
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+      onOpenChange: fn(),
+    },
   },
 };
 
@@ -280,6 +355,9 @@ export const CloseButtonDisabledSlot: Story = {
 /* ------------------------------- Test setup ------------------------------- */
 type BaseOverlayProps = {
   rootProps?: Omit<OverlayProps, "children"> & { children?: React.ReactNode };
+  drawerProps?: Omit<OverlayDrawerProps, "children"> & {
+    children?: React.ReactNode;
+  };
   closeButtonProps?: Omit<OverlayCloseProps, "children"> & {
     /* Has to override AsChild type */
     children?: any;
@@ -295,6 +373,7 @@ function BaseOverlayComponent({
   closeButtonProps,
   triggerButtonProps,
   rootProps,
+  drawerProps,
   nested,
 }: BaseOverlayProps) {
   return (
@@ -304,7 +383,11 @@ function BaseOverlayComponent({
       </OverlayTrigger>
       <OverlayPortal data-testid="portal">
         <OverlayBackdrop className="backdropCSS" data-testid="backdrop" />
-        <OverlayDrawer className="drawerCSS" data-testid="drawer">
+        <OverlayDrawer
+          className="drawerCSS"
+          data-testid="drawer"
+          {...drawerProps}
+        >
           {nested ? (
             <Overlay>
               <OverlayTrigger data-testid="trigger-nested">

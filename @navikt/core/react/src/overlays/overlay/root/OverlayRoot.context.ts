@@ -1,19 +1,6 @@
 import { createContext } from "../../../util/create-context";
 import type { TransitionStatus } from "../hooks/useTransitionStatus";
 
-interface OverlayRootContextT {
-  /**
-   * Determines whether the dialog should close on outside clicks.
-   */
-  dismissible: boolean;
-}
-
-const [OverlayRootContextProvider, useOverlayRootContext] =
-  createContext<OverlayRootContextT>({
-    name: "OverlayRootContext",
-    errorMessage: "useOverlayRootContext must be used within Overlay root",
-  });
-
 interface OverlayContextT {
   /**
    * Whether the dialog is currently open.
@@ -63,9 +50,4 @@ const [OverlayContextProvider, useOverlayContext] =
     errorMessage: "useOverlayContext must be used within Overlay",
   });
 
-export {
-  OverlayRootContextProvider,
-  useOverlayRootContext,
-  OverlayContextProvider,
-  useOverlayContext,
-};
+export { OverlayContextProvider, useOverlayContext };

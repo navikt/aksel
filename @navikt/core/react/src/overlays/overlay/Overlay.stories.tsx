@@ -160,6 +160,25 @@ export const NestedTrapFocusOutsideClick: Story = {
   },
 };
 
+export const IgnoreOutsideClick: Story = {
+  render: () => (
+    <div>
+      <button onClick={() => alert("after")}>Before overlay</button>
+      <Overlay>
+        <OverlayTrigger>Open Overlay</OverlayTrigger>
+        <OverlayPortal>
+          <OverlayBackdrop className="backdropCSS" />
+          <OverlayDrawer className="drawerCSS" closeOnOutsideClick={false}>
+            Drawer content
+            <OverlayClose>Close</OverlayClose>
+          </OverlayDrawer>
+        </OverlayPortal>
+      </Overlay>
+      <button onClick={() => alert("after")}>after overlay</button>
+    </div>
+  ),
+};
+
 const BackDropStyle = (
   <style>
     {`

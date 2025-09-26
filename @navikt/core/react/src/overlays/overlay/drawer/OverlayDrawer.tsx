@@ -10,15 +10,19 @@ import { useFocusGuards } from "../useFocusGuard";
 interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * TODO: This prop might not make sense on Root?
+   * TODO:
    * - Can/should we even support trap-focus?
    * Determines if the dialog enters a modal state when open.
    * - `true`: user interaction is limited to just the dialog: focus is trapped, document page scroll is locked, and pointer interactions on outside elements are disabled.
-   * - `false`: user interaction with the rest of the document is allowed.
    * - `'trap-focus'`: focus is trapped inside the dialog, but document page scroll is not locked and pointer interactions outside of it remain enabled.
    * @default true
    */
-  modal?: boolean | "trap-focus";
+  modal?: true | "trap-focus";
+  /**
+   * Determines if the dialog should close on outside clicks.
+   * @default true
+   */
+  closeOnOutsideClick?: boolean;
 }
 
 /**
@@ -32,7 +36,16 @@ interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
  * - Implemented as `dialog`-element
  */
 const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
-  ({ children, className, modal = true, ...restProps }, forwardedRef) => {
+  (
+    {
+      children,
+      className,
+      modal = true,
+      closeOnOutsideClick = true,
+      ...restProps
+    },
+    forwardedRef,
+  ) => {
     const { cn } = useRenameCSS();
     const {
       mounted,
@@ -78,9 +91,14 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
             open && setOpen(false, event);
           }}
           preventDefaultEscapeEvent={false}
-          disableOutsidePointerEvents={false}
-          onInteractOutside={(event) => {
-            if (modal !== true) {
+          disableOutsidePointerEvents={modal === true}
+          onPointerDownOutside={(event) => {
+            if (modal !== true || !closeOnOutsideClick) {
+              event.preventDefault();
+            }
+          }}
+          onFocusOutside={(event) => {
+            if (modal === "trap-focus") {
               event.preventDefault();
             }
           }}
