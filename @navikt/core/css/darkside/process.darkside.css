@@ -107,7 +107,10 @@
   }
 
   .aksel-process__event[data-status="active"] & {
-    outline: 4px solid var(--ax-bg-moderate);
+    z-index: 1;
+    box-shadow: 0 0 0 2px var(--ax-bg-default);
+    outline: 2px solid var(--ax-bg-strong);
+    outline-offset: 2px;
   }
 
   .aksel-process__event[data-status="uncompleted"] & {
@@ -145,6 +148,11 @@
     outline-color: ButtonText;
     background-color: ButtonText;
     color: ButtonFace;
+    forced-color-adjust: none;
+  }
+
+  .aksel-process__event[data-status="active"] .aksel-process__bullet {
+    box-shadow: 0 0 0 2px Canvas;
   }
 
   .aksel-process__event:is([data-status="active"]) .aksel-process__line {
