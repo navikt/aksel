@@ -118,7 +118,11 @@ export const TrapFocusOutsideClick: Story = {
         <Overlay>
           <OverlayTrigger>Open Overlay</OverlayTrigger>
           <OverlayPortal>
-            <OverlayDrawer className="drawerCSS" modal="trap-focus">
+            <OverlayDrawer
+              className="drawerCSS"
+              modal="trap-focus"
+              closeOnOutsideClick={false}
+            >
               Drawer content
               <OverlayClose>Close</OverlayClose>
             </OverlayDrawer>

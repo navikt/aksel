@@ -93,12 +93,19 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
           preventDefaultEscapeEvent={false}
           disableOutsidePointerEvents={modal === true}
           onPointerDownOutside={(event) => {
-            if (modal !== true || !closeOnOutsideClick) {
+            /* TODO: Also check for backdrop here */
+            if (modal === true || !closeOnOutsideClick) {
               event.preventDefault();
             }
           }}
           onFocusOutside={(event) => {
             if (modal === "trap-focus") {
+              event.preventDefault();
+            }
+          }}
+          enablePointerUpOutside
+          onPointerUpOutside={(event) => {
+            if (modal !== true || !closeOnOutsideClick) {
               event.preventDefault();
             }
           }}
