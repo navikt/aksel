@@ -105,14 +105,14 @@
   .aksel-guide-panel[data-poster="false"] & {
     top: calc(var(--__axc-guide-panel-guide-size) / 2);
     left: calc(var(--ax-space-20) * -1 - 2px);
-    transform: translateY(-48%) rotateZ(-90deg) scaleX(-1);
+    transform: translateY(-15%) rotateZ(-90deg) scaleX(-1);
   }
 
   @media (min-width: 480px) {
     .aksel-guide-panel[data-responsive="true"] & {
       top: calc(var(--__axc-guide-panel-guide-size) / 2);
       left: calc(var(--ax-space-20) * -1 - 2px);
-      transform: translateY(-48%) rotateZ(-90deg) scaleX(-1);
+      transform: translateY(-15%) rotateZ(-90deg) scaleX(-1);
     }
   }
 }
