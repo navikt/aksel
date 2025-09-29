@@ -31,10 +31,7 @@ function LegacyTokenTable(props: PortableTextComponentProps<Token_kategori>) {
         <strong data-color="warning" className={styles.legacyTokenTableWarning}>
           Deprecation warning:{" "}
         </strong>
-        <span>
-          I det nye systemet for theming og darkmode, er komponent-tokens
-          fjernet.{" "}
-        </span>
+        I det nye systemet for theming og darkmode, er komponent-tokens fjernet.{" "}
         <Link href="/grunnleggende/darkside/theming">
           Les mer om det nye themingsystemet.
         </Link>
