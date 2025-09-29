@@ -43,7 +43,7 @@ export const ToggleChips: OverridableComponent<
     const themeContext = useThemeInternal(false);
     let localVariant: ChipsToggleProps["variant"] | undefined;
 
-    if (themeContext) {
+    if (themeContext?.isDarkside) {
       localVariant = variant;
     } else {
       localVariant = variant ?? "action";

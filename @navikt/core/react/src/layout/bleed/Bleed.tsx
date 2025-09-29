@@ -82,7 +82,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
   ) => {
     const themeContext = useThemeInternal(false);
     const { cn } = useRenameCSS();
-    const prefix = themeContext ? "ax" : "a";
+    const prefix = themeContext?.isDarkside ? "ax" : "a";
 
     let style: React.CSSProperties = {
       ..._style,

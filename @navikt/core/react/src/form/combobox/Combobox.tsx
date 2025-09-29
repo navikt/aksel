@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { Floating } from "../../overlays/floating/Floating";
 import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
@@ -34,52 +35,54 @@ export const Combobox = forwardRef<
   } = useInputContext();
 
   return (
-    <ComboboxWrapper
-      className={className}
-      hasError={hasError}
-      inputProps={inputProps}
-      inputSize={size}
-      toggleIsListOpen={toggleIsListOpen}
-    >
-      <Label
-        htmlFor={inputProps.id}
-        size={size}
-        className={cn("navds-form-field__label", {
-          "navds-sr-only": hideLabel,
-        })}
+    <Floating>
+      <ComboboxWrapper
+        className={className}
+        hasError={hasError}
+        inputProps={inputProps}
+        inputSize={size}
+        toggleIsListOpen={toggleIsListOpen}
       >
-        {readOnly && <ReadOnlyIconWithTitle />}
-        {label}
-      </Label>
-      {!!description && (
-        <BodyShort
-          as="div"
-          className={cn("navds-form-field__description", {
+        <Label
+          htmlFor={inputProps.id}
+          size={size}
+          className={cn("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
-          id={inputDescriptionId}
-          size={size}
         >
-          {description}
-        </BodyShort>
-      )}
-      <div className={cn("navds-combobox__wrapper")}>
-        <InputController ref={ref} {...rest} />
-        <FilteredOptions />
-      </div>
-      <div
-        className={cn("navds-form-field__error")}
-        id={errorId}
-        aria-relevant="additions removals"
-        aria-live="polite"
-      >
-        {showErrorMsg && (
-          <ErrorMessage size={size} showIcon>
-            {error}
-          </ErrorMessage>
+          {readOnly && <ReadOnlyIconWithTitle />}
+          {label}
+        </Label>
+        {!!description && (
+          <BodyShort
+            as="div"
+            className={cn("navds-form-field__description", {
+              "navds-sr-only": hideLabel,
+            })}
+            id={inputDescriptionId}
+            size={size}
+          >
+            {description}
+          </BodyShort>
         )}
-      </div>
-    </ComboboxWrapper>
+        <div className={cn("navds-combobox__wrapper")}>
+          <InputController ref={ref} {...rest} />
+          <FilteredOptions />
+        </div>
+        <div
+          className={cn("navds-form-field__error")}
+          id={errorId}
+          aria-relevant="additions removals"
+          aria-live="polite"
+        >
+          {showErrorMsg && (
+            <ErrorMessage size={size} showIcon>
+              {error}
+            </ErrorMessage>
+          )}
+        </div>
+      </ComboboxWrapper>
+    </Floating>
   );
 });
 

@@ -18,6 +18,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
 import { createContext } from "../../util/create-context";
 import {
@@ -26,6 +27,7 @@ import {
   useMergeRefs,
 } from "../../util/hooks";
 import { AsChildProps } from "../../util/types";
+import { useOpenChangeAnimationComplete } from "../overlay/hooks/useOpenChangeAnimationComplete";
 import {
   type Align,
   type Measurable,
@@ -188,7 +190,17 @@ interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   collisionPadding?: number | Partial<Record<Side, number>>;
   hideWhenDetached?: boolean;
   updatePositionStrategy?: "optimized" | "always";
+  fallbackPlacements?: FlipOptions["fallbackPlacements"];
   onPlaced?: () => void;
+  /**
+   * @default true
+   */
+  enabled?: boolean;
+  /**
+   * Only use this option if your floating element is conditionally rendered, not hidden with CSS.
+   * @default true
+   */
+  autoUpdateWhileMounted?: boolean;
   arrow?: {
     className?: string;
     padding?: number;
@@ -212,11 +224,15 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       updatePositionStrategy = "optimized",
       onPlaced,
       arrow: _arrow,
+      fallbackPlacements,
+      enabled = true,
+      autoUpdateWhileMounted = true,
       ...contentProps
     }: FloatingContentProps,
     forwardedRef,
   ) => {
     const context = useFloatingContext();
+    const modalContext = useModalContext(false);
 
     const arrowDefaults = {
       padding: 5,
@@ -256,68 +272,103 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       altBoundary: hasExplicitBoundaries,
       /* https://floating-ui.com/docs/flip#fallbackaxissidedirection */
       fallbackAxisSideDirection: "end",
+      fallbackPlacements,
     };
 
-    const { refs, floatingStyles, placement, isPositioned, middlewareData } =
-      useFloating({
-        // default to `fixed` strategy so users don't have to pick and we also avoid focus scroll issues
-        strategy: "fixed",
-        placement: desiredPlacement,
-        whileElementsMounted: (...args) => {
-          const cleanup = autoUpdate(...args, {
-            animationFrame: updatePositionStrategy === "always",
-          });
-          return cleanup;
-        },
-        elements: {
-          reference: context.anchor,
-        },
-        middleware: [
-          offset({
-            mainAxis: sideOffset + arrowHeight,
-            alignmentAxis: alignOffset,
+    const {
+      refs,
+      floatingStyles,
+      placement,
+      isPositioned,
+      middlewareData,
+      elements: floatingElements,
+      update,
+    } = useFloating({
+      open: enabled,
+      // default to `fixed` strategy so users don't have to pick and we also avoid focus scroll issues
+      strategy: "fixed",
+      placement: desiredPlacement,
+      whileElementsMounted: autoUpdateWhileMounted
+        ? (...args) => {
+            const cleanup = autoUpdate(...args, {
+              animationFrame: updatePositionStrategy === "always",
+            });
+            return cleanup;
+          }
+        : undefined,
+      elements: {
+        reference: context.anchor,
+      },
+      middleware: [
+        offset({
+          mainAxis: sideOffset + arrowHeight,
+          alignmentAxis: alignOffset,
+        }),
+        avoidCollisions &&
+          shift({
+            mainAxis: true,
+            crossAxis: false,
+            limiter: limitShift(),
           }),
-          avoidCollisions &&
-            shift({
-              mainAxis: true,
-              crossAxis: false,
-              limiter: limitShift(),
-            }),
-          avoidCollisions && flip({ ...detectOverflowOptions }),
-          size({
-            ...detectOverflowOptions,
-            apply: ({ elements, rects, availableWidth, availableHeight }) => {
-              const { width: anchorWidth, height: anchorHeight } =
-                rects.reference;
-              const contentStyle = elements.floating.style;
-              /**
-               * Allows styling and animations based on the available space.
-               */
-              contentStyle.setProperty(
-                "--ac-floating-available-width",
-                `${availableWidth}px`,
-              );
-              contentStyle.setProperty(
-                "--ac-floating-available-height",
-                `${availableHeight}px`,
-              );
-              contentStyle.setProperty(
-                "--ac-floating-anchor-width",
-                `${anchorWidth}px`,
-              );
-              contentStyle.setProperty(
-                "--ac-floating-anchor-height",
-                `${anchorHeight}px`,
-              );
-            },
-          }),
-          arrow &&
-            floatingArrow({ element: arrow, padding: arrowDefaults.padding }),
-          transformOrigin({ arrowWidth, arrowHeight }),
-          hideWhenDetached &&
-            hide({ strategy: "referenceHidden", ...detectOverflowOptions }),
-        ],
-      });
+        avoidCollisions && flip({ ...detectOverflowOptions }),
+        size({
+          ...detectOverflowOptions,
+          apply: ({ elements, rects, availableWidth, availableHeight }) => {
+            const { width: anchorWidth, height: anchorHeight } =
+              rects.reference;
+            const contentStyle = elements.floating.style;
+            /**
+             * Allows styling and animations based on the available space.
+             */
+            contentStyle.setProperty(
+              "--ac-floating-available-width",
+              `${availableWidth}px`,
+            );
+            contentStyle.setProperty(
+              "--ac-floating-available-height",
+              `${availableHeight}px`,
+            );
+            contentStyle.setProperty(
+              "--ac-floating-anchor-width",
+              `${anchorWidth}px`,
+            );
+            contentStyle.setProperty(
+              "--ac-floating-anchor-height",
+              `${anchorHeight}px`,
+            );
+          },
+        }),
+        arrow &&
+          floatingArrow({ element: arrow, padding: arrowDefaults.padding }),
+        transformOrigin({ arrowWidth, arrowHeight }),
+        hideWhenDetached &&
+          hide({ strategy: "referenceHidden", ...detectOverflowOptions }),
+      ],
+    });
+
+    useEffect(() => {
+      if (autoUpdateWhileMounted || !enabled) {
+        return;
+      }
+      if (floatingElements.reference && floatingElements.floating) {
+        const cleanup = autoUpdate(
+          floatingElements.reference,
+          floatingElements.floating,
+          update,
+        );
+
+        return () => {
+          cleanup();
+        };
+      }
+    }, [autoUpdateWhileMounted, enabled, floatingElements, update]);
+
+    useOpenChangeAnimationComplete({
+      enabled: !!modalContext?.ref,
+      open: enabled,
+      ref: modalContext?.ref,
+      onComplete: update,
+    });
 
     const [placedSide, placedAlign] = getSideAndAlignFromPlacement(placement);
 

@@ -3,7 +3,11 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <CopyButton copyText="3.14" text="Kopier XYZ" activeText="Kopierte XYZ" />
+    <CopyButton
+      copyText="3.14"
+      text="Kopier lenke"
+      activeText="Kopierte lenke"
+    />
   );
 };
 

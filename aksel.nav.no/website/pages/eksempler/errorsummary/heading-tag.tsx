@@ -27,4 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
+  desc: "Ved behov kan overskriftsnivået endres med `headingTag`-propen.",
 };

@@ -1,5 +1,61 @@
 # @navikt/ds-react
 
+## 7.31.0
+
+### Minor Changes
+
+- Table: Add 'onRowClick' callback-prop to allow for selecting rows by clicking the row itself. ([#4107](https://github.com/navikt/aksel/pull/4107))
+
+- Combobox: Dropdown-element is now position='fixed', allowing for better placement on smaller screens and inside Modals. ([#4106](https://github.com/navikt/aksel/pull/4106))
+
+### Patch Changes
+
+- Darkside: Avoid empty aria-describedby in Radio and Checkbox ([#4111](https://github.com/navikt/aksel/pull/4111))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.31.0
+  - @navikt/aksel-icons@7.31.0
+
+## 7.30.1
+
+### Patch Changes
+
+- Darkside: ExpansionCardContent now defaults to app-color defined in `Theme`, fixing a regression causing all content to be colored `neutral`. ([#4075](https://github.com/navikt/aksel/pull/4075))
+
+- Darkside: Improved screen reader experience in Radio and Checkbox by moving description out of label ([#4066](https://github.com/navikt/aksel/pull/4066))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.30.1
+  - @navikt/aksel-icons@7.30.1
+
+## 7.30.0
+
+### Minor Changes
+
+- FormSummary: Changed `FormSummary.Header`-component to `<div />` instead of `<header />`. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+- FormSummary: Added new component `<FormSummary.Footer />`, we now require `<FormSummary.EditLink />` to be placed in footer instead of header. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+### Patch Changes
+
+- Datepicker: Fix regression causing clickable weeknumber to have no applied styles in Darkside. ([#4081](https://github.com/navikt/aksel/pull/4081))
+
+- Timeline: Adjusted type for `onSelectPeriod()` and fixed warning when using refs in React 19 ([#4076](https://github.com/navikt/aksel/pull/4076))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.30.0
+  - @navikt/aksel-icons@7.30.0
+
+## 7.29.1
+
+### Patch Changes
+
+- Checkbox, List: Updated SVG-usage to avoid using rem-values directly on `width` and `height`-attributes. ([#4048](https://github.com/navikt/aksel/pull/4048))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.29.1
+  - @navikt/aksel-icons@7.29.1
+
 ## 7.29.0
 
 ### Minor Changes

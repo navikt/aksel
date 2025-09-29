@@ -4,13 +4,13 @@ WORKDIR /app
 RUN chown -R deno:deno /app
 USER deno
 
-COPY scripts/article-views/deps.ts scripts/article-views/deps.ts
-RUN deno cache scripts/article-views/deps.ts
+COPY scripts/deno/article-views/deps.ts scripts/article-views/deps.ts
+RUN deno cache scripts/deno/article-views/deps.ts
 
 # this COPY should copy over .env created in github action
 # only copies over what exists in the docker context 
 # check out the accompanying .dockerignore
 COPY . .
-RUN deno cache scripts/article-views/update-article-views/main.ts
+RUN deno cache scripts/deno/article-views/update-article-views/main.ts
 
-CMD ["run", "--allow-net", "--allow-env", "--allow-read", "scripts/article-views/update-article-views/main.ts"]
+CMD ["run", "--allow-net", "--allow-env", "--allow-read", "scripts/deno/article-views/update-article-views/main.ts"]

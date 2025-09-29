@@ -16,18 +16,19 @@ export interface Positioned {
 
 export interface Period {
   id: string;
-  label?: string;
   start: Date;
   endInclusive: Date;
   status?: PeriodStatus;
-  onSelectPeriod?: () => void;
+  onSelectPeriod?: (
+    e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>,
+  ) => void;
   icon?: React.ReactNode;
   children?: React.ReactNode;
   end: Date;
   isActive?: boolean;
   statusLabel?: string;
   restProps?: any;
-  ref?: Element;
+  ref?: React.Ref<HTMLDivElement | HTMLButtonElement>;
 }
 
 export interface PositionedPeriod extends Period, Positioned {

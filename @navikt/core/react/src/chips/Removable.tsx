@@ -42,7 +42,7 @@ export const RemovableChips = forwardRef<
 
     let localVariant: ChipsRemovableProps["variant"] | undefined;
 
-    if (themeContext) {
+    if (themeContext?.isDarkside) {
       localVariant = variant;
     } else {
       localVariant = variant ?? "action";

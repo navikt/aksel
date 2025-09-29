@@ -1,5 +1,41 @@
 # @navikt/ds-css
 
+## 7.31.0
+
+### Minor Changes
+
+- Combobox: Dropdown-element is now position='fixed', allowing for better placement on smaller screens and inside Modals. ([#4106](https://github.com/navikt/aksel/pull/4106))
+
+### Patch Changes
+
+- Darkside: Adjust visually-hidden typography css ([#4103](https://github.com/navikt/aksel/pull/4103))
+
+- Darkside: Adjusted arrow on GuidePanel poster variant ([#4101](https://github.com/navikt/aksel/pull/4101))
+
+## 7.30.1
+
+### Patch Changes
+
+- Darkside: Improved screen reader experience in Radio and Checkbox by moving description out of label ([#4066](https://github.com/navikt/aksel/pull/4066))
+
+## 7.30.0
+
+### Minor Changes
+
+- FormSummary: Changed `FormSummary.Header`-component to `<div />` instead of `<header />`. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+- FormSummary: Added new component `<FormSummary.Footer />`, we now require `<FormSummary.EditLink />` to be placed in footer instead of header. ([#4032](https://github.com/navikt/aksel/pull/4032))
+
+## 7.29.1
+
+### Patch Changes
+
+- Checkbox, List: Updated SVG-usage to avoid using rem-values directly on `width` and `height`-attributes. ([#4048](https://github.com/navikt/aksel/pull/4048))
+
+- Darkside: Fix styling for small readOnly checked Radio ([#4051](https://github.com/navikt/aksel/pull/4051))
+
+- Checkbox: Fix styling for indeterminate state with description ([#4051](https://github.com/navikt/aksel/pull/4051))
+
 ## 7.29.0
 
 ### Minor Changes

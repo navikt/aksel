@@ -13,13 +13,6 @@ export const newDocumentsCreator: NewDocumentOptionsResolver = (
 ) => {
   if (creationContext.type === "global") {
     const templates = {
-      profil: [
-        {
-          title: "Profilside",
-          id: "profilRole",
-          templateId: "editor",
-        },
-      ],
       god_praksis_forfatter: [
         {
           title: "God praksis artikkel",

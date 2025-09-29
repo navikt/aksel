@@ -28,8 +28,8 @@ type KodeEksemplerContextT = {
   showCode: boolean;
   toggleShowCode: () => void;
   compact: boolean;
-  resizerRef: React.RefObject<HTMLDivElement>;
-  iframeRef: React.RefObject<HTMLIFrameElement>;
+  resizerRef: React.MutableRefObject<HTMLDivElement | null>;
+  iframeRef: React.MutableRefObject<HTMLIFrameElement | null>;
 };
 
 const KodeEksemplerContext = createContext<KodeEksemplerContextT | null>(null);
@@ -109,10 +109,13 @@ function KodeEksemplerProvider(props: {
 
     prevSearchParam.current = param;
 
-    iframeRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
+    queueMicrotask(() => {
+      iframeRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
     });
+
     iframeRef.current?.focus({ preventScroll: true });
   }, [dir?.filer, dir?.title, searchParams]);
 

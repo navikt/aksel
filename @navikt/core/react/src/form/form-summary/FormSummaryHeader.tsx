@@ -1,10 +1,11 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../theme/Theme";
+import { CompositionWarning } from "../../util/composition-warning";
 
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Must include `<FormSummary.Heading>` and optionally `<FormSummary.EditLink>`.
+   * Must include `<FormSummary.Heading>`.
    */
   children: React.ReactNode;
 }
@@ -12,17 +13,19 @@ export interface FormSummaryHeaderProps
 export const FormSummaryHeader = forwardRef<
   HTMLDivElement,
   FormSummaryHeaderProps
->(({ children, className, ...rest }, ref) => {
+>(({ children, className, ...rest }: FormSummaryHeaderProps, ref) => {
   const { cn } = useRenameCSS();
 
   return (
-    <header
-      ref={ref}
-      {...rest}
-      className={cn("navds-form-summary__header", className)}
-    >
-      {children}
-    </header>
+    <CompositionWarning.Root name="FormSummary.Header">
+      <div
+        ref={ref}
+        {...rest}
+        className={cn("navds-form-summary__header", className)}
+      >
+        {children}
+      </div>
+    </CompositionWarning.Root>
   );
 });
 

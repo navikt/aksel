@@ -13,8 +13,6 @@ import {
   Link,
   List,
   Page,
-  Show,
-  Stack,
   VStack,
 } from "@navikt/ds-react";
 import ApplicationPictogram from "../../../components/website-modules/examples/__parts/ApplicationPictogram";
@@ -32,28 +30,26 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block width="text" gutters>
-        <VStack as="main" gap="8">
-          <Bleed
-            marginInline={{ lg: "24" }}
-            data-aksel-template="form-intropage-v2"
-          >
-            <Stack
-              gap="6"
-              direction={{ sm: "row-reverse", lg: "row" }}
-              justify={{ sm: "space-between", lg: "start" }}
-              wrap={false}
-            >
-              <Show above="sm">
+        <VStack as="main" gap="8" data-aksel-template="form-intropage-v3">
+          <VStack gap="3">
+            <Bleed asChild marginInline={{ lg: "32" }}>
+              <Box
+                width={{ xs: "64px", lg: "96px" }}
+                height={{ xs: "64px", lg: "96px" }}
+                asChild
+                position={{ xs: "relative", lg: "absolute" }}
+              >
                 <ApplicationPictogram />
-              </Show>
-              <VStack gap="1">
-                <BodyShort size="small">Nav 10-07.03 (om relevant)</BodyShort>
-                <Heading level="1" size="xlarge">
-                  Søknad om [ytelse]
-                </Heading>
-              </VStack>
-            </Stack>
-          </Bleed>
+              </Box>
+            </Bleed>
+            <VStack gap="1">
+              <BodyShort size="small">Nav 10-07.03 (om relevant)</BodyShort>
+              <Heading level="1" size="xlarge">
+                Søknad om [ytelse]
+              </Heading>
+            </VStack>
+          </VStack>
+
           <GuidePanel poster>
             <Heading level="2" size="medium" spacing>
               Hei, [Navn Navnesen]!
@@ -241,5 +237,4 @@ export const args = {
   index: 2,
   title: "Alternativ søknad",
   desc: "I noen tilfeller finnes det søknader som dekker litt andre behov. For å redusere sjansen for at brukere søker på feil ytelse, så kan du inkludere en seksjon som sier hva du kan søke på i denne søknaden, og eventuelt hva du må bruke en annen søknad for.",
-  sandbox: false,
 };

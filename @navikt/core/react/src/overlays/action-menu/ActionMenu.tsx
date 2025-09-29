@@ -16,7 +16,7 @@ import { Menu, MenuPortalProps } from "../floating-menu/Menu";
 /* -------------------------------------------------------------------------- */
 type ActionMenuContextValue = {
   triggerId: string;
-  triggerRef: React.RefObject<HTMLButtonElement>;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
   contentId: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -802,7 +802,7 @@ export const ActionMenuRadioItem = forwardRef<
                   fill="var(--ax-bg-default, var(--a-surface-default))"
                 />
               </g>
-              {themeContext ? (
+              {themeContext?.isDarkside ? (
                 <g className={cn("navds-action-menu__indicator-icon--checked")}>
                   <rect
                     width="24"

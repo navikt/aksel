@@ -101,7 +101,7 @@ export interface ShowMoreProps
   /**
    * Alternative target to scroll into view after collapsing.
    */
-  scrollTargetRef?: React.RefObject<HTMLElement>;
+  scrollTargetRef?: React.RefObject<HTMLElement | null>;
 }
 
 /**
@@ -156,7 +156,10 @@ export const ShowMore = ({
     }
   }, [shouldScroll, scrollBackOnCollapse, scrollTargetRef]);
 
-  let heading: ReactNode, content: ReactNode, button: ReactNode;
+  let heading: ReactNode;
+  let content: ReactNode;
+  let button: ReactNode;
+
   React.Children.forEach(children, (child) => {
     if (React.isValidElement(child)) {
       if (

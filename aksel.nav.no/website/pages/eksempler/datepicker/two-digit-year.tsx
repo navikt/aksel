@@ -13,9 +13,7 @@ const Example = () => {
       <DatePicker {...datepickerProps}>
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
-      <Box paddingBlock="space-16 space-0">
-        {selectedDay?.toISOString().split("T")[0]}
-      </Box>
+      <Box paddingBlock="space-16 space-0">{selectedDay?.toDateString()}</Box>
     </Box>
   );
 };
@@ -30,5 +28,5 @@ export const Demo = {
 
 export const args = {
   index: 10,
-  desc: "Prop 'allowTwoDigitYear' legger til støtte for 'yy'-format. Tilgjengelig year-range vil være 80 år bakover og 19 år framover. I 2024 tilsvarer det 1944-2043.",
+  desc: "Propen `allowTwoDigitYear` gjør det mulig å skrive årstallet på 'yy'-format. Mulige årstall vil være 80 år bakover og 19 år framover. I 2025 tilsvarer det 1945-2044.",
 };

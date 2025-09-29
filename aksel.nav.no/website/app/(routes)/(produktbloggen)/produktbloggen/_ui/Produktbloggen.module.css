@@ -19,12 +19,12 @@
 }
 
 .bloggPosts {
-  margin-inline: auto;
-  margin-bottom: var(--ax-space-128);
   display: grid;
   width: 100%;
-  padding-inline: var(--ax-space-16);
   max-width: var(--ax-breakpoint-2xl);
+  margin-inline: auto;
+  margin-bottom: var(--ax-space-128);
+  padding-inline: var(--ax-space-16);
 }
 
 .remainingPosts {
@@ -38,7 +38,12 @@
 }
 
 .articleBody {
-  margin-top: var(--ax-space-16);
+  margin-block: var(--ax-space-16);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 .articleBodySubtle {
@@ -141,6 +146,12 @@
   text-wrap: balance;
   font-size: 3rem;
   color: var(--ax-text-brand-blue);
+  hyphens: auto;
+
+  @media (max-width: 480px) {
+    font-size: 2.5rem;
+    line-height: var(--ax-font-line-height-heading-2xlarge);
+  }
 }
 
 .bodyLong1 {
@@ -150,23 +161,16 @@
   line-height: var(--ax-font-line-height-heading-medium);
 }
 
-.diamond {
-  width: var(--ax-space-8);
-  height: var(--ax-space-8);
-  rotate: 45deg;
-  background-color: var(--ax-text-brand-blue-decoration);
-  border-radius: var(--ax-space-1);
-}
-
-.diamondCenter {
-  margin-inline: auto;
-  margin-bottom: var(--ax-space-40);
+.horizontalLine {
+  width: var(--ax-space-48);
+  border-bottom: solid 1px var(--ax-border-neutral-subtleA);
+  margin-block: var(--ax-space-20);
 }
 
 .image {
   aspect-ratio: 16 / 9;
   position: relative;
-  margin-block: var(--ax-space-64) 0;
+  margin-block: var(--ax-space-40) 0;
   margin-inline: auto;
   border-radius: var(--ax-border-radius-xlarge);
   width: 100%;
@@ -194,12 +198,6 @@
 .customBlockWrapper {
   margin-top: var(--ax-space-64);
   padding-inline: var(--ax-space-16);
-}
-
-.articleEnd {
-  padding-inline: var(--ax-space-16);
-  margin-top: var(--ax-space-64);
-  color: var(--ax-text-brand-blue);
 }
 
 .authorText {

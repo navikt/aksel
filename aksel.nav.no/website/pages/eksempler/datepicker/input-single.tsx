@@ -12,9 +12,7 @@ const Example = () => {
       <DatePicker {...datepickerProps}>
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
-      <Box paddingBlock="space-16 space-0">
-        {selectedDay?.toISOString().split("T")[0]}
-      </Box>
+      <Box paddingBlock="space-16 space-0">{selectedDay?.toDateString()}</Box>
     </Box>
   );
 };
@@ -29,5 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Vi anbefaler å bruke useDatepicker-hook hvis man har et input-felt",
+  desc: "Vi anbefaler å bruke `useDatepicker`-hooken hvis du har et input-felt.",
 };

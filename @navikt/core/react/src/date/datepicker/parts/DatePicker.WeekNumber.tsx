@@ -76,7 +76,9 @@ const DatePickerWeekNumber = ({
             );
           }}
           icon={
-            <span className="navds-date__weeknumber-number">{weekNumber}</span>
+            <span className={cn("navds-date__weeknumber-number")}>
+              {weekNumber}
+            </span>
           }
         />
       </td>

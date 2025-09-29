@@ -1,11 +1,6 @@
 import { StructureBuilder } from "sanity/structure";
 import { HouseIcon, PencilBoardIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
-import {
-  editorIsContributorFilter,
-  listMyDraftArticles,
-  listPublishedArticles,
-} from "./structure.util";
 
 export function gpStructure(S: StructureBuilder) {
   return S.listItem()
@@ -28,27 +23,19 @@ export function gpStructure(S: StructureBuilder) {
 
 function godPraksisPanes(S: StructureBuilder) {
   return [
-    listPublishedArticles(S, "aksel_artikkel"),
-    listMyDraftArticles(S, "aksel_artikkel"),
-
     S.listItem({
-      id: "my_gp_outdated",
-      title: "Mine artikler som trenger oppdatering",
-      schemaType: "aksel_artikkel",
-      child: (_, { structureContext }) => {
-        const mail = structureContext.currentUser?.email;
-
-        return S.documentTypeList("aksel_artikkel")
-          .title("Artikler")
-          .filter(
-            `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*365) && ${editorIsContributorFilter}`,
-          )
-          .apiVersion(SANITY_API_VERSION)
-          .params({ type: "aksel_artikkel", mail })
-          .initialValueTemplates([])
-          .defaultOrdering([
-            { field: "updateInfo.lastVerified", direction: "asc" },
-          ]);
+      id: "article_redaksjon_complete_view",
+      title: "Artikler via redaksjon",
+      schemaType: "editorial_staff",
+      child: () => {
+        return S.documentTypeList("editorial_staff").child((id) => {
+          return S.documentTypeList("aksel_artikkel")
+            .title("Artikler")
+            .filter(`_type == $type && $id in writers[]._ref`)
+            .apiVersion(SANITY_API_VERSION)
+            .params({ type: "aksel_artikkel", id })
+            .initialValueTemplates([]);
+        });
       },
     }),
     S.divider(),
