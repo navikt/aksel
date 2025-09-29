@@ -194,6 +194,150 @@ export const OutsideClickIntentionalClose: Story = {
   },
 };
 
+/* ----------------------------- Focus handling ----------------------------- */
+export const TrapFocusWithOutsideClick: Story = {
+  render: (props) => {
+    const [counter, setCounter] = React.useState(0);
+    return (
+      <div>
+        <button
+          data-testid="counter"
+          onClick={() => setCounter((x) => x + 1)}
+        >{`Counter ${counter}`}</button>
+        <BaseOverlayComponent {...props} />
+      </div>
+    );
+  },
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    const closeButton = canvas.getByText("Close");
+    expect(closeButton).toHaveFocus();
+
+    await fireEvent.click(document.body);
+    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(closeButton).toHaveFocus();
+
+    const counterButton = canvas.getByTestId("counter");
+    await userEvent.click(counterButton);
+    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(closeButton).toHaveFocus();
+    expect(counterButton).toHaveTextContent("Counter 1");
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+      onOpenChange: fn(),
+    },
+    drawerProps: {
+      modal: "trap-focus",
+      closeOnOutsideClick: false,
+    },
+    backdrop: false,
+  },
+};
+
+export const TrapFocusWithFocusBlur: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    const closeButton = canvas.getByText("Close");
+    expect(closeButton).toHaveFocus();
+
+    await fireEvent.focus(document.body);
+    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(closeButton).toHaveFocus();
+
+    await fireEvent.blur(closeButton);
+    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(closeButton).toHaveFocus();
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+      onOpenChange: fn(),
+    },
+    drawerProps: {
+      modal: "trap-focus",
+      closeOnOutsideClick: false,
+    },
+    backdrop: false,
+  },
+};
+
+export const FocusLock: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    const closeButton = canvas.getByText("Close");
+    const testButton = canvas.getByText("Focus test");
+    expect(closeButton).toHaveFocus();
+
+    await userEvent.tab();
+    expect(testButton).toHaveFocus();
+
+    await userEvent.tab();
+    expect(closeButton).toHaveFocus();
+
+    await userEvent.tab({ shift: true });
+    expect(testButton).toHaveFocus();
+  },
+  args: {
+    rootProps: {
+      defaultOpen: true,
+      onOpenChange: fn(),
+    },
+    drawerProps: {
+      children: <button data-testid="next-button">Focus test</button>,
+    },
+  },
+};
+
+export const FocusTriggerOnClose: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    const openButton = canvas.getByText("Open Overlay");
+    await userEvent.click(openButton);
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    const closeButton = canvas.getByText("Close");
+    expect(closeButton).toHaveFocus();
+
+    await userEvent.click(closeButton);
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(2);
+
+    expect(openButton).toHaveFocus();
+  },
+  args: {
+    rootProps: {
+      onOpenChange: fn(),
+    },
+  },
+};
+
 /* --------------------------------- Backdrop -------------------------------- */
 /* Only root-level backdrop should render */
 export const BackdropRenderOnlyRoot: Story = {
@@ -367,6 +511,7 @@ type BaseOverlayProps = {
     children?: any;
   };
   nested?: boolean;
+  backdrop?: boolean;
 };
 
 function BaseOverlayComponent({
@@ -375,6 +520,7 @@ function BaseOverlayComponent({
   rootProps,
   drawerProps,
   nested,
+  backdrop = true,
 }: BaseOverlayProps) {
   return (
     <Overlay {...rootProps}>
@@ -382,7 +528,9 @@ function BaseOverlayComponent({
         {triggerButtonProps?.children ?? "Open Overlay"}
       </OverlayTrigger>
       <OverlayPortal data-testid="portal">
-        <OverlayBackdrop className="backdropCSS" data-testid="backdrop" />
+        {backdrop && (
+          <OverlayBackdrop className="backdropCSS" data-testid="backdrop" />
+        )}
         <OverlayDrawer
           className="drawerCSS"
           data-testid="drawer"
@@ -415,6 +563,7 @@ function BaseOverlayComponent({
           <OverlayClose data-testid="close" {...closeButtonProps}>
             {closeButtonProps?.children ?? "Close"}
           </OverlayClose>
+          {drawerProps?.children}
         </OverlayDrawer>
       </OverlayPortal>
     </Overlay>
