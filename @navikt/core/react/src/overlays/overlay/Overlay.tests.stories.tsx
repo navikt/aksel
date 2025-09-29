@@ -338,6 +338,66 @@ export const FocusTriggerOnClose: Story = {
   },
 };
 
+/**
+ * By default, when trigger is not the one causing Drawer to open, the autofocus will go to body
+ * We override this in `onUnmountAutoFocus` callback
+ */
+export const FocusTriggerOnCloseWhenDefaultOpen: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    const closeButton = canvas.getByText("Close");
+    expect(closeButton).toHaveFocus();
+
+    await userEvent.click(closeButton);
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(1);
+
+    const openButton = canvas.getByText("Open Overlay");
+    expect(openButton).toHaveFocus();
+  },
+  args: {
+    rootProps: {
+      onOpenChange: fn(),
+      defaultOpen: true,
+    },
+  },
+};
+
+export const FocusWithNoTrigger: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+
+    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    const closeButton = canvas.getByText("Close");
+    expect(closeButton).toHaveFocus();
+
+    await userEvent.click(closeButton);
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(1);
+
+    expect(document.body).toHaveFocus();
+  },
+  args: {
+    rootProps: {
+      onOpenChange: fn(),
+      defaultOpen: true,
+    },
+    triggerButtonProps: {
+      style: { display: "none" },
+    },
+  },
+};
+
 /* --------------------------------- Backdrop -------------------------------- */
 /* Only root-level backdrop should render */
 export const BackdropRenderOnlyRoot: Story = {

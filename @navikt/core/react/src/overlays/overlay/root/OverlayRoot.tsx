@@ -38,7 +38,9 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
 
   const popupRef = useRef<HTMLDivElement | null>(null);
 
-  const [triggerElement, setTriggerElement] = useState<Element | null>(null);
+  const [triggerElement, setTriggerElement] = useState<HTMLElement | null>(
+    null,
+  );
   const [popupElement, setPopupElement] = useState<HTMLElement | null>(null);
 
   const setOpen = useEventCallback(

@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { useMergeRefs } from "../../../util/hooks";
 import { DismissableLayer } from "../../dismissablelayer/DismissableLayer";
@@ -66,6 +66,9 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       popupElement,
     } = useOverlayContext();
 
+    const hasInteractedOutsideRef = useRef(false);
+    const hasPointerDownOutsideRef = useRef(false);
+
     const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
 
     useFocusGuards();
@@ -87,7 +90,19 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
         trapped={open}
         /* Focus trigger */
         /* onMountAutoFocus={onOpenAutoFocus}
-          onUnmountAutoFocus={onCloseAutoFocus} */
+         */
+        onUnmountAutoFocus={(event) => {
+          if (!event.defaultPrevented) {
+            if (!hasInteractedOutsideRef.current) {
+              triggerElement?.focus();
+            }
+            /* Always prevent auto focus because we either focus manually or want user agent focus */
+            event.preventDefault();
+          }
+
+          hasInteractedOutsideRef.current = false;
+          hasPointerDownOutsideRef.current = false;
+        }}
       >
         <DismissableLayer
           asChild
@@ -100,6 +115,37 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
           }}
           preventDefaultEscapeEvent={false}
           disableOutsidePointerEvents={modal === true}
+          onInteractOutside={(event) => {
+            if (!event.defaultPrevented) {
+              hasInteractedOutsideRef.current = true;
+              if (event.detail.originalEvent?.type === "pointerdown") {
+                hasPointerDownOutsideRef.current = true;
+              }
+            }
+
+            /**
+             * Since trigger might be set up to close the dialog on click,
+             * we need to prevent dismissing when clicking the trigger to avoid double close events (potentially re-triggering open)
+             */
+            const target = event.target as HTMLElement;
+            const targetIsTrigger = triggerElement?.contains(target);
+            if (targetIsTrigger) {
+              event.preventDefault();
+            }
+
+            /**
+             * On Safari if the trigger is inside a container with tabIndex={0}, when clicked
+             * we will get the pointer down outside event on the trigger, but then a subsequent
+             * focus outside event on the container, we ignore any focus outside event when we've
+             * already had a pointer down outside event.
+             */
+            if (
+              event.detail.originalEvent.type === "focusin" &&
+              hasPointerDownOutsideRef.current
+            ) {
+              event.preventDefault();
+            }
+          }}
           onPointerDownOutside={(event) => {
             /* TODO: Also check for backdrop here */
             if (modal === true || !closeOnOutsideClick) {

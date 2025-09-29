@@ -33,11 +33,11 @@ interface OverlayContextT {
   /**
    * Callback to register the Trigger element DOM node.
    */
-  setTriggerElement: React.Dispatch<React.SetStateAction<Element | null>>;
+  setTriggerElement: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
   /**
    * The Trigger element DOM node.
    */
-  triggerElement: Element | null;
+  triggerElement: HTMLElement | null;
   /**
    * Declares if this overlay is nested inside another overlay.
    */
