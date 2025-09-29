@@ -54,7 +54,7 @@ function Example() {
           <ActionMenu.Item
             icon={<MonitorIcon />}
             aria-current={theme === "system"}
-            onSelect={() => setTheme("light")}
+            onSelect={() => setTheme("system")}
           >
             <HStack gap="space-24" align="center">
               System
