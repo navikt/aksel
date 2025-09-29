@@ -16,7 +16,7 @@ export const coordsAreInside = (
 };
 
 export function getCloseHandler(
-  modalRef: React.RefObject<HTMLDialogElement>,
+  modalRef: React.RefObject<HTMLDialogElement | null>,
   header: ModalProps["header"],
   onBeforeClose: ModalProps["onBeforeClose"],
 ) {
@@ -31,7 +31,7 @@ export const BODY_CLASS_LEGACY = "navds-modal__document-body";
 export const BODY_CLASS = "aksel-modal__document-body";
 
 export function useBodyScrollLock(
-  modalRef: React.RefObject<HTMLDialogElement>,
+  modalRef: React.RefObject<HTMLDialogElement | null>,
   portalNode: HTMLElement | null,
   isNested: boolean,
 ) {
