@@ -398,6 +398,8 @@ export const FocusWithNoTrigger: Story = {
   },
 };
 
+/* TODO: Test for autofocusing previous focused item if modal is controlled */
+
 /* --------------------------------- Backdrop -------------------------------- */
 /* Only root-level backdrop should render */
 export const BackdropRenderOnlyRoot: Story = {
