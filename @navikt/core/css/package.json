@@ -41,7 +41,7 @@
     "postcss-combine-duplicated-selectors": "10.0.3",
     "postcss-import": "^14.1.0",
     "postcss-nesting": "13.0.2",
-    "tsx": "^4.19.1",
+    "tsx": "^4.20.6",
     "vitest": "^2.1.9"
   },
   "browserslist": [
