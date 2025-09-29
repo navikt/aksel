@@ -13,6 +13,7 @@ import BaseSEOPreset from "../presets/seo";
 import { skrivehjelp } from "../presets/skrivehjelp";
 import { sanitySlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
+import { validateHeadingLevels } from "../presets/validate-heading-levels";
 
 const prefix = "god-praksis/artikler/";
 
@@ -90,6 +91,9 @@ export const GodPraksisArtikkel = defineType({
       name: "content",
       type: "riktekst_standard",
       group: "innhold",
+      validation: (Rule) => {
+        return Rule.custom(validateHeadingLevels);
+      },
     }),
     relevanteArtiklerField,
     BaseSEOPreset,

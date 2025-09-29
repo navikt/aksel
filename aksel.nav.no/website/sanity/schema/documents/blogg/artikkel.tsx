@@ -8,6 +8,7 @@ import { ingressField } from "../presets/ingress";
 import BaseSEOPreset from "../presets/seo";
 import { sanitySlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
+import { validateHeadingLevels } from "../presets/validate-heading-levels";
 
 const prefix = "produktbloggen/";
 
@@ -41,6 +42,9 @@ export const Blogg = defineType({
       name: "content",
       type: "riktekst_blogg",
       group: "innhold",
+      validation: (Rule) => {
+        return Rule.custom(validateHeadingLevels);
+      },
     }),
     BaseSEOPreset,
   ],
