@@ -56,7 +56,7 @@ function Example() {
             aria-current={theme === "system"}
             onSelect={() => setTheme("system")}
           >
-            <HStack gap="space-24" justify="space-between" align="center">
+            <HStack gap="space-24" align="center">
               System
               {theme === "system" && (
                 <CheckmarkIcon aria-hidden fontSize="1.25rem" />
