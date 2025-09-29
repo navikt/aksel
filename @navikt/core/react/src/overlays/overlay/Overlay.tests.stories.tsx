@@ -82,12 +82,10 @@ export const EscapeClose: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    const { expectOpen, expectClosed } = drawerTestUtils(canvasElement);
+    expectOpen();
     await userEvent.keyboard("{Escape}");
-
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expectClosed();
   },
   args: {
     rootProps: {
@@ -647,6 +645,20 @@ function withoutAnimations() {
   globalThis.AKSEL_ANIMATIONS_DISABLED = true;
   return () => {
     globalThis.AKSEL_ANIMATIONS_DISABLED = false;
+  };
+}
+
+/**
+ * Small helper for drawer-related test interactions to reduce repeated boilerplate.
+ * We start with a single test (EscapeClose) using this; others can migrate incrementally.
+ */
+function drawerTestUtils(canvasElement: HTMLElement) {
+  const canvas = within(canvasElement);
+  return {
+    canvas,
+    expectOpen: () => expect(canvas.getByTestId("drawer")).toBeInTheDocument(),
+    expectClosed: () =>
+      expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument(),
   };
 }
 
