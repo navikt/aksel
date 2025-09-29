@@ -269,9 +269,6 @@ export const RiktekstAccordion = {
   type: "array",
   of: Riktekst("accordion"),
   icon: () => <FileTextIcon aria-hidden />,
-  validation: (Rule) => {
-    return Rule.custom(validateHeadingLevels);
-  },
 };
 
 export const RiktekstStandalone = {
