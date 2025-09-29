@@ -57,7 +57,7 @@ function Example() {
             onSelect={() => setTheme("system")}
           >
             <HStack gap="space-24" justify="space-between" align="center">
-              <span>System</span>
+              System
               {theme === "system" && (
                 <CheckmarkIcon aria-hidden fontSize="1.25rem" />
               )}
