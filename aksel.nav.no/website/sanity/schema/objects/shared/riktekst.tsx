@@ -12,6 +12,7 @@ import {
   ExternalLinkRenderer,
   InternalLinkRenderer,
 } from "../../custom-components/LinkRenderer";
+import { validateHeadingLevels } from "../../documents/presets/validate-heading-levels";
 
 export const styles = [
   {
@@ -216,6 +217,9 @@ export const RiktekstStandard = {
   type: "array",
   of: Riktekst("standard"),
   icon: () => <FileTextIcon aria-hidden />,
+  validation: (Rule) => {
+    return Rule.custom(validateHeadingLevels);
+  },
 };
 
 export const RiktekstPrinsipp = {
@@ -224,6 +228,9 @@ export const RiktekstPrinsipp = {
   type: "array",
   of: Riktekst("standard"),
   icon: () => <FileTextIcon aria-hidden />,
+  validation: (Rule) => {
+    return Rule.custom(validateHeadingLevels);
+  },
 };
 
 export const RiktekstGrunnleggende = {
@@ -232,6 +239,9 @@ export const RiktekstGrunnleggende = {
   type: "array",
   of: Riktekst("grunnleggende"),
   icon: () => <FileTextIcon aria-hidden />,
+  validation: (Rule) => {
+    return Rule.custom(validateHeadingLevels);
+  },
 };
 
 export const RiktekstKomponent = {
@@ -240,6 +250,9 @@ export const RiktekstKomponent = {
   type: "array",
   of: Riktekst("komponent"),
   icon: () => <FileTextIcon aria-hidden />,
+  validation: (Rule) => {
+    return Rule.custom(validateHeadingLevels);
+  },
 };
 
 export const RiktekstEnkel = {
@@ -256,6 +269,9 @@ export const RiktekstAccordion = {
   type: "array",
   of: Riktekst("accordion"),
   icon: () => <FileTextIcon aria-hidden />,
+  validation: (Rule) => {
+    return Rule.custom(validateHeadingLevels);
+  },
 };
 
 export const RiktekstStandalone = {
@@ -264,6 +280,9 @@ export const RiktekstStandalone = {
   type: "array",
   of: Riktekst("standalone"),
   icon: () => <FileTextIcon aria-hidden />,
+  validation: (Rule) => {
+    return Rule.custom(validateHeadingLevels);
+  },
 };
 
 export const RiktekstTemplates = {
@@ -272,6 +291,9 @@ export const RiktekstTemplates = {
   type: "array",
   of: Riktekst("templates"),
   icon: () => <FileTextIcon aria-hidden />,
+  validation: (Rule) => {
+    return Rule.custom(validateHeadingLevels);
+  },
 };
 
 export const RiktekstBlogg = {
@@ -280,4 +302,7 @@ export const RiktekstBlogg = {
   type: "array",
   of: Riktekst("blogg"),
   icon: () => <FileTextIcon aria-hidden />,
+  validation: (Rule) => {
+    return Rule.custom(validateHeadingLevels);
+  },
 };
