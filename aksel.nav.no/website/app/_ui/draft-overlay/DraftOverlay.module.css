@@ -1,0 +1,20 @@
+.draftOverlay {
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--ax-space-16);
+  padding: var(--ax-space-12);
+  border-radius: var(--ax-radius-12) var(--ax-radius-12) 0 0;
+  background-color: var(--ax-bg-neutral-soft);
+  width: fit-content;
+  margin-inline: auto;
+  border: 1px solid var(--ax-border-neutral-strong);
+  border-bottom: 0;
+  flex-wrap: wrap;
+  row-gap: var(--ax-space-4);
+}

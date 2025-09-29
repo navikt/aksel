@@ -1,11 +1,10 @@
 import { Metadata, Viewport } from "next";
-import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 import "@navikt/ds-tokens/darkside-css";
 import { SanityLive } from "@/app/_sanity/live";
 import { ConsentBanner } from "@/app/_ui/consent-banner/ConsentBanner";
 import { CookieConsentProvider } from "@/app/_ui/cookie-consent/CookieConsent.Provider";
-import { DisableDraftMode } from "@/app/_ui/disable-draft-mode/DisableDraftMode";
+import { DraftOverlay } from "@/app/_ui/draft-overlay/DraftOverlay";
 import { ThemeProvider } from "@/app/_ui/theming/ThemeProvider";
 import { Umami } from "@/app/_ui/umami/Umami";
 import "./globals.css";
@@ -55,6 +54,7 @@ export default async function RootLayout({
           <ThemeProvider>
             <ConsentBanner />
             {children}
+            {isDraftMode && <DraftOverlay />}
           </ThemeProvider>
         </CookieConsentProvider>
         <SanityLive
@@ -62,12 +62,6 @@ export default async function RootLayout({
           refreshOnFocus={false}
           refreshOnMount={false}
         />
-        {isDraftMode && (
-          <>
-            <DisableDraftMode />
-            <VisualEditing />
-          </>
-        )}
       </body>
     </html>
   );
