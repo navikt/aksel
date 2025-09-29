@@ -26137,22 +26137,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:^4.19.1":
-  version: 4.19.4
-  resolution: "tsx@npm:4.19.4"
-  dependencies:
-    esbuild: "npm:~0.25.0"
-    fsevents: "npm:~2.3.3"
-    get-tsconfig: "npm:^4.7.5"
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    tsx: dist/cli.mjs
-  checksum: 10/4dde315aeda70b9cadfecbc8d05b1625f5831018b9cb2db25cbbd03c5f5ee9c59cdc6652a0fd8492176b50944a5af1d5af352b944d024f4a719f58d6f2ac3a7f
-  languageName: node
-  linkType: hard
-
 "tsx@npm:^4.20.6":
   version: 4.20.6
   resolution: "tsx@npm:4.20.6"
@@ -27563,7 +27547,7 @@ __metadata:
     tailwindcss: "npm:^3.3.3"
     tinycolor2: "npm:^1.6.0"
     tsconfig-paths-webpack-plugin: "npm:^4.2.0"
-    tsx: "npm:^4.19.1"
+    tsx: "npm:^4.20.6"
     typescript: "npm:5.8.3"
     typescript-cookie: "npm:^1.0.6"
     vitest: "npm:^2.1.9"
