@@ -33,9 +33,11 @@ function LegacyTokenTable(props: PortableTextComponentProps<Token_kategori>) {
         </strong>
         <span>
           I det nye systemet for theming og darkmode, er komponent-tokens
-          fjernet. Mer dokumentasjon for dette kommer,{" "}
+          fjernet.{" "}
         </span>
-        <Link href="/darkside">midlertidig dokumentasjon finner du her.</Link>
+        <Link href="/grunnleggende/darkside/theming">
+          Les mer om det nye themingsystemet.
+        </Link>
       </BodyLong>
       <WebsiteTable th={[{ text: "Token" }, { text: "Fallback" }]}>
         {Object.entries(tokens).map(([key, val]) => (
