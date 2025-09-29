@@ -4815,7 +4815,7 @@ __metadata:
     js-yaml: "npm:^4.1.0"
     lodash: "npm:^4.17.21"
     prettier: "npm:3.1.1"
-    react: "npm:^18.0.0"
+    react: "npm:^19.1.1"
     rehype-parse: "npm:9.0.1"
     tsc-alias: "npm:1.8.16"
     tsx: "npm:^4.19.1"
@@ -4913,7 +4913,7 @@ __metadata:
     jscodeshift: "npm:^0.15.1"
     jsdom: "npm:26.1.0"
     react-day-picker: "npm:9.7.0"
-    react-dom: "npm:^18.0.0"
+    react-dom: "npm:^19.1.1"
     react-router: "npm:^7.6.2"
     rimraf: "npm:6.0.1"
     swr: "npm:^2.3.6"
@@ -9553,8 +9553,8 @@ __metadata:
     fuse.js: "npm:^7.0.0"
     postcss: "npm:^8.4.31"
     postcss-url: "npm:^10.1.3"
-    react: "npm:^18.0.0"
-    react-dom: "npm:^18.0.0"
+    react: "npm:^19.1.1"
+    react-dom: "npm:^19.1.1"
     typescript: "npm:5.8.3"
     vite: "npm:^6.3.6"
     vite-plugin-singlefile: "npm:^2.2.0"
@@ -9614,9 +9614,9 @@ __metadata:
     lint-staged: "npm:16.1.5"
     prettier: "npm:3.1.1"
     prettier-plugin-tailwindcss: "npm:^0.6.11"
-    react: "npm:^18.0.0"
+    react: "npm:^19.1.1"
     react-docgen-typescript: "npm:2.2.2"
-    react-dom: "npm:^18.0.0"
+    react-dom: "npm:^19.1.1"
     storybook: "npm:^8.6.14"
     storybook-addon-pseudo-states: "npm:^4.0.4"
     stylelint: "npm:^16.19.1"
@@ -22220,6 +22220,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-dom@npm:^19.1.1":
+  version: 19.1.1
+  resolution: "react-dom@npm:19.1.1"
+  dependencies:
+    scheduler: "npm:^0.26.0"
+  peerDependencies:
+    react: ^19.1.1
+  checksum: 10/9005415d2175b1f1eb4a544ad04afb29691bb7b6dd43bbdaa09932146b310b73bd4552bc772ad78fa481f409eada1560cf887606c83c1a53a922c1e30f1b3a34
+  languageName: node
+  linkType: hard
+
 "react-dropzone@npm:^11.3.1":
   version: 11.7.1
   resolution: "react-dropzone@npm:11.7.1"
@@ -22555,6 +22566,13 @@ __metadata:
   dependencies:
     loose-envify: "npm:^1.1.0"
   checksum: 10/261137d3f3993eaa2368a83110466fc0e558bc2c7f7ae7ca52d94f03aac945f45146bd85e5f481044db1758a1dbb57879e2fcdd33924e2dde1bdc550ce73f7bf
+  languageName: node
+  linkType: hard
+
+"react@npm:^19.1.1":
+  version: 19.1.1
+  resolution: "react@npm:19.1.1"
+  checksum: 10/9801530fdc939e1a7a499422e930515b2400809cb39c2872984e99f832d233f61659a693871183dac3155c2f9b2c9dcf4440a56bd18983277ae92860e38c3a61
   languageName: node
   linkType: hard
 
