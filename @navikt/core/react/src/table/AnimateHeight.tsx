@@ -73,8 +73,8 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   const prevHeight = useRef<Height>(height);
   const contentElement = useRef<HTMLDivElement>(null);
 
-  const animationClassesTimeoutID = useRef<Timeout>();
-  const timeoutID = useRef<Timeout>();
+  const animationClassesTimeoutID = useRef<Timeout>(undefined);
+  const timeoutID = useRef<Timeout>(undefined);
 
   const initialHeight = useRef<Height>(height);
   const initialOverflow = useRef<Overflow>("visible");

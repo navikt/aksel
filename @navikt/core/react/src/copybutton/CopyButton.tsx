@@ -94,7 +94,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     ref,
   ) => {
     const [active, setActive] = useState(false);
-    const timeoutRef = useRef<number>();
+    const timeoutRef = useRef<number>(undefined);
     const translate = useI18n("CopyButton");
 
     const { cn } = useRenameCSS();

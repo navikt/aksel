@@ -8,14 +8,14 @@ interface InputContextValue extends FormFieldType {
   clearInput: NonNullable<ComboboxProps["onClear"]>;
   error?: ComboboxProps["error"];
   focusInput: () => void;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
   value: string;
   setValue: (text: string) => void;
   onChange: (newValue: string) => void;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   shouldAutocomplete?: boolean;
-  toggleOpenButtonRef: React.RefObject<HTMLDivElement>;
+  toggleOpenButtonRef: React.MutableRefObject<HTMLDivElement | null>;
   hideCaret: boolean;
   setHideCaret: React.Dispatch<React.SetStateAction<boolean>>;
 }
