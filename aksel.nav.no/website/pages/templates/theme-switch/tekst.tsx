@@ -33,7 +33,7 @@ function Example() {
             onSelect={() => setTheme("light")}
           >
             <HStack gap="space-24" align="center">
-              <span>Lys</span>
+              Lyst
               {theme === "light" && (
                 <CheckmarkIcon aria-hidden fontSize="1.25rem" />
               )}
