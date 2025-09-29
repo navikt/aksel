@@ -2,6 +2,7 @@ import React from "react";
 import { defineField, defineType } from "sanity";
 import { ChevronDownIcon, Density3Icon } from "@navikt/aksel-icons";
 import { Box, HStack, Label } from "@navikt/ds-react";
+import { validateNestedHeadingLevels } from "../../documents/presets/validate-heading-levels";
 
 export const Accordion = defineType({
   name: "accordion",
@@ -34,6 +35,10 @@ export const Accordion = defineType({
               title: "Innhold",
               name: "content",
               type: "riktekst_standard",
+              validation: (Rule) => [
+                Rule.required().error("Accordion må ha innhold"),
+                Rule.custom(validateNestedHeadingLevels),
+              ],
             },
           ],
         },

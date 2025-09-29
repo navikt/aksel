@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { validateNestedHeadingLevels } from "../../documents/presets/validate-heading-levels";
 
 export type ExpansionCardT = {
   _key: string;
@@ -52,8 +53,10 @@ export const ExpansionCard = defineType({
         "Hvis du bruker Heading, husk å dobbelsjekke heading-nivået.",
       name: "body",
       type: "riktekst_accordion",
-      validation: (Rule) =>
+      validation: (Rule) => [
         Rule.required().error("ExpansionCard må ha innhold"),
+        Rule.custom(validateNestedHeadingLevels),
+      ],
     }),
   ],
   preview: {
