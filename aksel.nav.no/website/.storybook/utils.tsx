@@ -1,4 +1,4 @@
-export function AkselTheme(Story) {
+export function AkselTheme(Story: () => JSX.Element) {
   return <div className="aksel-artikkel group/aksel">{Story()}</div>;
 }
 

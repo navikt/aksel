@@ -1,6 +1,6 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { fireEvent, within } from "@storybook/test";
+import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { fireEvent, within } from "storybook/test";
 import { ImageIcon } from "@navikt/aksel-icons";
 import { type FileObject, FileUpload, type FilesPartitioned } from ".";
 

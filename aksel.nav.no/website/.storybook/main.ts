@@ -1,15 +1,18 @@
-import { loadCsf } from "@storybook/csf-tools";
 import type { StorybookConfig } from "@storybook/nextjs";
 import { readFileSync } from "fs";
-import { resolve } from "path";
+import { createRequire } from "node:module";
+import { dirname, join, resolve } from "path";
+import { loadCsf } from "storybook/internal/csf-tools";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+
+const require = createRequire(import.meta.url);
 
 const indexRegex = /export const args = {\s+index: (\d+),/;
 
 const sbConfig: StorybookConfig = {
   experimental_indexers: (indexers) => {
     // Changes here might need to be reflected in .storybook/main.ts
-    const customIndexer = async (fileName: string, opts) => {
+    const customIndexer = async (fileName: string, opts: any) => {
       let code = readFileSync(fileName, "utf-8").toString();
 
       const isTemplate = fileName.toLowerCase().includes("templates");
@@ -48,22 +51,22 @@ const sbConfig: StorybookConfig = {
       },
     ];
   },
+
   staticDirs: ["../public"],
+
   stories: [
     "../**/*.mdx",
     "../**/*.stories.@(ts|tsx)",
     "../pages/eksempler/**/*.tsx",
     "../pages/templates/**/*.tsx",
   ],
+
   addons: [
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    "@storybook/addon-a11y",
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-docs"),
   ],
-  framework: "@storybook/nextjs",
-  docs: {
-    autodocs: "tag",
-  },
+  framework: getAbsolutePath("@storybook/nextjs"),
+
   webpackFinal: (async (config) => {
     if (!config?.resolve) {
       return config;
@@ -77,3 +80,7 @@ const sbConfig: StorybookConfig = {
   }) satisfies StorybookConfig["webpackFinal"],
 };
 export default sbConfig;
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, "package.json")));
+}

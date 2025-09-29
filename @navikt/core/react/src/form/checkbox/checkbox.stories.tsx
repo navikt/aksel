@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import VStack from "../../layout/stack/VStack";
 import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";

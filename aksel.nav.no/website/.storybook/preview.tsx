@@ -1,4 +1,4 @@
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/nextjs";
 import { Box, Theme } from "@navikt/ds-react";
 import "./aksel-storybook.css";
 
@@ -32,7 +32,7 @@ export const globalTypes = {
   },
 };
 
-const withTheme = (Story, context) => {
+const withTheme = (Story: () => JSX.Element, context: any) => {
   const theme = context.parameters.theme || context.globals.theme || "light";
 
   return (
@@ -42,7 +42,7 @@ const withTheme = (Story, context) => {
   );
 };
 
-const withDarkside = (Story, context) => {
+const withDarkside = (Story: () => JSX.Element, context: any) => {
   const isDarkside = context.globals.mode === "darkside";
 
   if (isDarkside) {
@@ -88,7 +88,7 @@ const preview: Preview = {
       ],
     },
     options: {
-      storySort: (a, b) => {
+      storySort: (a: { name: string }, b: { name: string }) => {
         const aIndex = parseInt(a.name.split(" | ")[0]);
         const bIndex = parseInt(b.name.split(" | ")[0]);
 
