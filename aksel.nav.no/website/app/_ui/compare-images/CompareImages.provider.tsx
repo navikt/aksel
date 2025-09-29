@@ -18,7 +18,7 @@ type CompareImagesContextT = {
     styles?: CSSProperties;
   };
   handle: {
-    ref: React.RefObject<HTMLButtonElement | null>;
+    ref: React.MutableRefObject<HTMLButtonElement | null>;
     onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
   };
 
