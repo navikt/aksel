@@ -13,7 +13,7 @@ import { Color } from "@/app/_sanity/query-types";
 
 type CompareImagesContextT = {
   container: {
-    ref: React.RefObject<HTMLDivElement | null>;
+    ref: React.MutableRefObject<HTMLDivElement | null>;
     onPointerDown?: (event: React.PointerEvent<HTMLDivElement>) => void;
     styles?: CSSProperties;
   };
