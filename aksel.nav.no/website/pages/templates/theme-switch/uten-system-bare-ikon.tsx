@@ -1,3 +1,4 @@
+import React from "react";
 import { ThemeIcon } from "@navikt/aksel-icons";
 import { Button, Tooltip } from "@navikt/ds-react";
 import { useThemeExample } from "@/web/examples/useThemeExample";
