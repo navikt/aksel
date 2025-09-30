@@ -96,8 +96,11 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
             if (!hasInteractedOutsideRef.current) {
               triggerElement?.focus();
             }
-            /* Always prevent auto focus because we either focus manually or want user agent focus */
-            event.preventDefault();
+
+            /* Allows focus to stay on element one interacted with outside. */
+            if (hasInteractedOutsideRef.current) {
+              event.preventDefault();
+            }
           }
 
           hasInteractedOutsideRef.current = false;

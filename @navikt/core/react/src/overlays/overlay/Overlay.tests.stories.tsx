@@ -396,7 +396,89 @@ export const FocusWithNoTrigger: Story = {
   },
 };
 
-/* TODO: Test for autofocusing previous focused item if modal is controlled */
+/**
+ * Overlay should focus previously focused element when closed if there is no trigger
+ */
+export const FocusPreviousFocusedItemIfNoTrigger: Story = {
+  render: (props) => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <div>
+        <button data-testid="custom-trigger" onClick={() => setOpen((x) => !x)}>
+          Toggle open
+        </button>
+        <BaseOverlayComponent
+          {...props}
+          rootProps={{ open, onOpenChange: (newOpen) => setOpen(newOpen) }}
+        />
+      </div>
+    );
+  },
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const customTrigger = canvas.getByText("Toggle open");
+    await userEvent.click(customTrigger);
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    const closeButton = canvas.getByText("Close");
+    await userEvent.click(closeButton);
+
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+
+    expect(customTrigger).toHaveFocus();
+  },
+  args: {
+    triggerButtonProps: {
+      style: { display: "none" },
+    },
+  },
+};
+
+/**
+ * Overlay should focus previously focused element when closed if there is no trigger
+ */
+export const FocusClickedItemOutsideWhenClosing: Story = {
+  render: (props) => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <div>
+        <button data-testid="custom-trigger" onClick={() => setOpen((x) => !x)}>
+          Toggle open
+        </button>
+        <button data-testid="placeholder-button">Click me</button>
+        <BaseOverlayComponent
+          {...props}
+          rootProps={{ open, onOpenChange: (newOpen) => setOpen(newOpen) }}
+        />
+      </div>
+    );
+  },
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const customTrigger = canvas.getByText("Toggle open");
+    await userEvent.click(customTrigger);
+    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+
+    const placeholderButton = canvas.getByText("Click me");
+    await userEvent.click(placeholderButton);
+
+    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expect(placeholderButton).toHaveFocus();
+  },
+  args: {
+    triggerButtonProps: {
+      style: { display: "none" },
+    },
+    drawerProps: {
+      modal: "trap-focus",
+    },
+    backdrop: false,
+  },
+};
 
 /* --------------------------------- Backdrop -------------------------------- */
 /* Only root-level backdrop should render */
