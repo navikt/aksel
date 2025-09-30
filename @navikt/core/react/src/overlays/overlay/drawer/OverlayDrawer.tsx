@@ -1,5 +1,6 @@
 import React, { forwardRef, useRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
+import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks";
 import { DismissableLayer } from "../../dismissablelayer/DismissableLayer";
 import { FocusScope } from "../FocusScope";
@@ -23,6 +24,16 @@ interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default true
    */
   closeOnOutsideClick?: boolean;
+  /**
+   * Event handler called when the dialog opens, used to manage focus.
+   * Can be prevented with `event.preventDefault()`.
+   */
+  onOpenAutoFocus?: (event: Event) => void;
+  /**
+   * Event handler called when the dialog closes, used to manage focus.
+   * Can be prevented with `event.preventDefault()`.
+   */
+  onCloseAutoFocus?: (event: Event) => void;
 }
 
 /**
@@ -50,6 +61,8 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       className,
       modal = true,
       closeOnOutsideClick = true,
+      onOpenAutoFocus,
+      onCloseAutoFocus,
       ...restProps
     },
     forwardedRef,
@@ -88,10 +101,8 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       <FocusScope
         loop
         trapped={open}
-        /* Focus trigger */
-        /* onMountAutoFocus={onOpenAutoFocus}
-         */
-        onUnmountAutoFocus={(event) => {
+        onMountAutoFocus={onOpenAutoFocus}
+        onUnmountAutoFocus={composeEventHandlers(onCloseAutoFocus, (event) => {
           if (!event.defaultPrevented) {
             if (!hasInteractedOutsideRef.current) {
               triggerElement?.focus();
@@ -105,7 +116,7 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
 
           hasInteractedOutsideRef.current = false;
           hasPointerDownOutsideRef.current = false;
-        }}
+        })}
       >
         <DismissableLayer
           asChild
@@ -150,7 +161,7 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
             }
           }}
           onPointerDownOutside={(event) => {
-            /* TODO: Also check for backdrop here */
+            /* TODO: Also check for backdrop here (if it exsists) */
             if (modal === true || !closeOnOutsideClick) {
               event.preventDefault();
             }
