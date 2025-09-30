@@ -539,6 +539,69 @@ export const FocusClickedItemOutsideWhenClosing: Story = {
   },
 };
 
+export const FocusAutoOnOpen: Story = {
+  render: BaseOverlayComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const { canvas, expectDrawerOpen } = testUtils(canvasElement, args);
+
+    const triggerButton = canvas.getByText("Open Overlay");
+
+    await userEvent.click(triggerButton);
+    expectDrawerOpen();
+
+    expect(canvas.getByText("Autofocus")).toHaveFocus();
+  },
+  args: {
+    drawerProps: {
+      children: <button data-testid="autofocus-anchor">Autofocus</button>,
+      onOpenAutoFocus: (event) => {
+        const el = document.querySelector(
+          '[data-testid="autofocus-anchor"]',
+        ) as HTMLElement;
+        el?.focus();
+        event.preventDefault();
+      },
+    },
+  },
+};
+
+export const FocusAutoOnClose: Story = {
+  render: (props) => {
+    return (
+      <div>
+        <button data-testid="autofocus-anchor">Autofocus</button>
+        <BaseOverlayComponent {...props} />
+      </div>
+    );
+  },
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const { canvas, expectDrawerOpen, expectDrawerClosed } = testUtils(
+      canvasElement,
+      args,
+    );
+
+    expectDrawerOpen();
+    await userEvent.keyboard("{Escape}");
+    expectDrawerClosed();
+    expect(canvas.getByText("Autofocus")).toHaveFocus();
+  },
+  args: {
+    rootProps: { defaultOpen: true },
+    drawerProps: {
+      children: <button data-testid="autofocus-anchor">Autofocus</button>,
+      onCloseAutoFocus: (event) => {
+        const el = document.querySelector(
+          '[data-testid="autofocus-anchor"]',
+        ) as HTMLElement;
+        el?.focus();
+        event.preventDefault();
+      },
+    },
+  },
+};
+
 /* --------------------------------- Backdrop -------------------------------- */
 /* Only root-level backdrop should render */
 export const BackdropRenderOnlyRoot: Story = {
