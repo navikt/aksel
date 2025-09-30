@@ -118,7 +118,11 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       if (elToFocus) {
         event.preventDefault();
         elToFocus?.focus();
+        return;
       }
+      /* TODO: We could decide to always focus container on open instead of close-button */
+      /* popupRef.current?.focus({ preventScroll: true });
+      event.preventDefault(); */
     });
 
     const handleUnmountFocus = useEventCallback((event: Event) => {
