@@ -5,7 +5,7 @@ import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic"
 import Checkbox from "./Checkbox";
 import CheckboxGroup, { CheckboxGroupProps } from "./CheckboxGroup";
 
-const meta: Meta<typeof Checkbox> = {
+const meta: Meta<typeof CheckboxGroup> = {
   title: "ds-react/Checkbox",
   component: CheckboxGroup,
   subcomponents: { Checkbox },

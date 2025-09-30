@@ -9,7 +9,7 @@ import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic"
 import Radio from "./Radio";
 import RadioGroup, { RadioGroupProps } from "./RadioGroup";
 
-const meta: Meta<typeof Radio> = {
+const meta: Meta<typeof RadioGroup> = {
   title: "ds-react/Radio",
   component: RadioGroup,
   subcomponents: { Radio },
