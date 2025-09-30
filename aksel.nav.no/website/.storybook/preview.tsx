@@ -1,3 +1,4 @@
+import { withThemeByClassName } from "@storybook/addon-themes";
 import type { Preview } from "@storybook/nextjs";
 import { Box, Theme } from "@navikt/ds-react";
 import "./aksel-storybook.css";
@@ -30,16 +31,6 @@ export const globalTypes = {
       ],
     },
   },
-};
-
-const withTheme = (Story: () => JSX.Element, context: any) => {
-  const theme = context.parameters.theme || context.globals.theme || "light";
-
-  return (
-    <div className={theme === "dark" ? "dark" : ""}>
-      <Story />
-    </div>
-  );
 };
 
 const withDarkside = (Story: () => JSX.Element, context: any) => {
@@ -79,7 +70,16 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [withDarkside, withTheme],
+  decorators: [
+    withDarkside,
+    withThemeByClassName({
+      themes: {
+        light: "light",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+    }),
+  ],
 };
 
 export default preview;
