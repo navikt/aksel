@@ -88,7 +88,9 @@ const preview: Preview = {
       ],
     },
     options: {
-      storySort: (a: { name: string }, b: { name: string }) => {
+      // The `a` and `b` arguments in this function have a type of `import('storybook/internal/types').IndexEntry`.
+      // @ts-expect-error - Cannot add types b.c. the function is executed in a JavaScript environment.
+      storySort: (a, b) => {
         const aIndex = parseInt(a.name.split(" | ")[0]);
         const bIndex = parseInt(b.name.split(" | ")[0]);
 
