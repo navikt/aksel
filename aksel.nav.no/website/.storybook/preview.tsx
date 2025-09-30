@@ -4,20 +4,6 @@ import { Box, Theme } from "@navikt/ds-react";
 import "./aksel-storybook.css";
 
 export const globalTypes = {
-  theme: {
-    name: "Theme",
-    description: "Global theme for components",
-    defaultValue: "light",
-    toolbar: {
-      icon: "paintbrush",
-      showName: true,
-      dynamicTitle: true,
-      items: [
-        { value: "light", title: "Light" },
-        { value: "dark", title: "Dark" },
-      ],
-    },
-  },
   mode: {
     name: "Darkside",
     defaultValue: "darkside",
@@ -54,7 +40,6 @@ const withDarkside = (Story: () => JSX.Element, context: any) => {
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
     options: {
       // The `a` and `b` arguments in this function have a type of `import('storybook/internal/types').IndexEntry`.
       // @ts-expect-error - Cannot add types b.c. the function is executed in a JavaScript environment.
