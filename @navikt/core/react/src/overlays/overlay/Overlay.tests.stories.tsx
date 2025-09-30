@@ -555,12 +555,10 @@ export const FocusAutoOnOpen: Story = {
   args: {
     drawerProps: {
       children: <button data-testid="autofocus-anchor">Autofocus</button>,
-      onOpenAutoFocus: (event) => {
-        const el = document.querySelector(
+      onOpenAutoFocus: () => {
+        return document.querySelector(
           '[data-testid="autofocus-anchor"]',
         ) as HTMLElement;
-        el?.focus();
-        event.preventDefault();
       },
     },
   },
@@ -591,12 +589,10 @@ export const FocusAutoOnClose: Story = {
     rootProps: { defaultOpen: true },
     drawerProps: {
       children: <button data-testid="autofocus-anchor">Autofocus</button>,
-      onCloseAutoFocus: (event) => {
-        const el = document.querySelector(
+      onCloseAutoFocus: () => {
+        return document.querySelector(
           '[data-testid="autofocus-anchor"]',
         ) as HTMLElement;
-        el?.focus();
-        event.preventDefault();
       },
     },
   },

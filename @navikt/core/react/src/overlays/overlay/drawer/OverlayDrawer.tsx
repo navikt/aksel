@@ -1,9 +1,9 @@
 import React, { forwardRef, useRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
-import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks";
 import { DismissableLayer } from "../../dismissablelayer/DismissableLayer";
 import { FocusScope } from "../FocusScope";
+import { useEventCallback } from "../hooks/useEventCallback";
 import { useScrollLock } from "../hooks/useScrollLock";
 import { useOverlayContext } from "../root/OverlayRoot.context";
 import { useFocusGuards } from "../useFocusGuard";
@@ -28,12 +28,16 @@ interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Event handler called when the dialog opens, used to manage focus.
    * Can be prevented with `event.preventDefault()`.
    */
-  onOpenAutoFocus?: (event: Event) => void;
+  onOpenAutoFocus?:
+    | React.RefObject<HTMLElement | null>
+    | (() => HTMLElement | null | undefined);
   /**
    * Event handler called when the dialog closes, used to manage focus.
    * Can be prevented with `event.preventDefault()`.
    */
-  onCloseAutoFocus?: (event: Event) => void;
+  onCloseAutoFocus?:
+    | React.RefObject<HTMLElement | null>
+    | (() => HTMLElement | null | undefined);
 }
 
 /**
@@ -97,26 +101,68 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       ? { [`data-${transitionStatus}-style`]: true }
       : {};
 
+    const handleInitialFocus = useEventCallback((event: Event) => {
+      const resolvedInitialFocus =
+        typeof onOpenAutoFocus === "function"
+          ? onOpenAutoFocus()
+          : onOpenAutoFocus;
+
+      let elToFocus: HTMLElement | null | undefined;
+
+      if (resolvedInitialFocus && "current" in resolvedInitialFocus) {
+        elToFocus = resolvedInitialFocus.current;
+      } else {
+        elToFocus = resolvedInitialFocus;
+      }
+
+      if (elToFocus) {
+        event.preventDefault();
+        elToFocus?.focus();
+      }
+    });
+
+    const handleUnmountFocus = useEventCallback((event: Event) => {
+      const resolvedUnmountFocus =
+        typeof onCloseAutoFocus === "function"
+          ? onCloseAutoFocus()
+          : onCloseAutoFocus;
+
+      let elToFocus: HTMLElement | null | undefined;
+
+      if (resolvedUnmountFocus && "current" in resolvedUnmountFocus) {
+        elToFocus = resolvedUnmountFocus.current;
+      } else {
+        elToFocus = resolvedUnmountFocus;
+      }
+
+      /* User handles unmount focus */
+      if (elToFocus) {
+        event.preventDefault();
+        elToFocus?.focus();
+
+        hasInteractedOutsideRef.current = false;
+        hasPointerDownOutsideRef.current = false;
+        return;
+      }
+
+      if (!hasInteractedOutsideRef.current) {
+        triggerElement?.focus();
+      }
+
+      /* Allows focus to stay on element one interacted with outside. */
+      if (hasInteractedOutsideRef.current) {
+        event.preventDefault();
+      }
+      hasInteractedOutsideRef.current = false;
+      hasPointerDownOutsideRef.current = false;
+    });
+
     return (
       <FocusScope
         loop
         trapped={open}
-        onMountAutoFocus={onOpenAutoFocus}
-        onUnmountAutoFocus={composeEventHandlers(onCloseAutoFocus, (event) => {
-          if (!event.defaultPrevented) {
-            if (!hasInteractedOutsideRef.current) {
-              triggerElement?.focus();
-            }
-
-            /* Allows focus to stay on element one interacted with outside. */
-            if (hasInteractedOutsideRef.current) {
-              event.preventDefault();
-            }
-          }
-
-          hasInteractedOutsideRef.current = false;
-          hasPointerDownOutsideRef.current = false;
-        })}
+        onMountAutoFocus={handleInitialFocus}
+        onUnmountAutoFocus={handleUnmountFocus}
       >
         <DismissableLayer
           asChild
