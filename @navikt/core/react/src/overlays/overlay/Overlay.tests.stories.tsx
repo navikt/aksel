@@ -38,16 +38,32 @@ const meta: Meta<typeof Overlay> = {
 export default meta;
 type Story = StoryObj<BaseOverlayProps>;
 
+function testUtils(canvasElement: HTMLElement, args: BaseOverlayProps) {
+  const canvas = within(canvasElement);
+  return {
+    canvas,
+    expectDrawerOpen: () =>
+      expect(canvas.getByTestId("drawer")).toBeInTheDocument(),
+    expectDrawerClosed: () =>
+      expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument(),
+    expectOpenedCalls: (n: number) => {
+      expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(n);
+    },
+    clickCloseButton: async () => {
+      await userEvent.click(canvas.getByText("Close"));
+    },
+  };
+}
+
 /* ----------------------------- State handling ----------------------------- */
 export const CancelClose: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+  play: async ({ canvasElement, args }) => {
+    const { canvas, clickCloseButton } = testUtils(canvasElement, args);
     const drawer = canvas.getByTestId("drawer");
-    const closeButton = canvas.getByText("Close");
 
-    await userEvent.click(closeButton);
+    await clickCloseButton();
     // Overlay should remain open
     expect(drawer).toBeInTheDocument();
   },
@@ -62,13 +78,12 @@ export const CancelClose: Story = {
 export const CancelEscapeClose: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const drawer = canvas.getByTestId("drawer");
+  play: async ({ canvasElement, args }) => {
+    const { expectDrawerOpen } = testUtils(canvasElement, args);
 
     await userEvent.keyboard("{Escape}");
     // Overlay should remain open
-    expect(drawer).toBeInTheDocument();
+    expectDrawerOpen();
   },
   args: {
     rootProps: {
@@ -81,11 +96,14 @@ export const CancelEscapeClose: Story = {
 export const EscapeClose: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
-  play: async ({ canvasElement }) => {
-    const { expectOpen, expectClosed } = drawerTestUtils(canvasElement);
-    expectOpen();
+  play: async ({ canvasElement, args }) => {
+    const { expectDrawerOpen, expectDrawerClosed } = testUtils(
+      canvasElement,
+      args,
+    );
+    expectDrawerOpen();
     await userEvent.keyboard("{Escape}");
-    expectClosed();
+    expectDrawerClosed();
   },
   args: {
     rootProps: {
@@ -97,8 +115,11 @@ export const EscapeClose: Story = {
 export const NestedEscapeClose: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+  play: async ({ canvasElement, args }) => {
+    const { canvas, expectDrawerOpen, expectDrawerClosed } = testUtils(
+      canvasElement,
+      args,
+    );
 
     const triggerButton = canvas.getByText("Open Overlay Nested");
     await userEvent.click(triggerButton);
@@ -106,9 +127,9 @@ export const NestedEscapeClose: Story = {
     expect(canvas.getByTestId("drawer-nested")).toBeInTheDocument();
     await userEvent.keyboard("{Escape}");
     expect(canvas.queryByTestId("drawer-nested")).not.toBeInTheDocument();
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectDrawerOpen();
     await userEvent.keyboard("{Escape}");
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expectDrawerClosed();
   },
   args: {
     rootProps: {
@@ -122,15 +143,16 @@ export const OutsideClickClose: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { expectDrawerOpen, expectDrawerClosed, expectOpenedCalls } =
+      testUtils(canvasElement, args);
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectOpenedCalls(0);
+    expectDrawerOpen();
 
     await userEvent.click(document.documentElement);
 
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
-    expect(args.rootProps?.onOpenChange).toHaveBeenCalledOnce();
+    expectDrawerClosed();
+    expectOpenedCalls(1);
   },
   args: {
     rootProps: {
@@ -144,15 +166,18 @@ export const OutsideClickNoClose: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { expectDrawerOpen, expectOpenedCalls } = testUtils(
+      canvasElement,
+      args,
+    );
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectOpenedCalls(0);
+    expectDrawerOpen();
 
     await userEvent.click(document.documentElement);
 
-    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectDrawerOpen();
+    expectOpenedCalls(0);
   },
   args: {
     rootProps: {
@@ -170,19 +195,20 @@ export const OutsideClickIntentionalClose: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { expectDrawerOpen, expectDrawerClosed, expectOpenedCalls } =
+      testUtils(canvasElement, args);
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectOpenedCalls(0);
+    expectDrawerOpen();
 
     await fireEvent.pointerDown(document.documentElement);
-    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectDrawerOpen();
+    expectOpenedCalls(0);
 
     await userEvent.click(document.documentElement);
 
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
-    expect(args.rootProps?.onOpenChange).toHaveBeenCalledOnce();
+    expectDrawerClosed();
+    expectOpenedCalls(1);
   },
   args: {
     rootProps: {
@@ -208,23 +234,26 @@ export const TrapFocusWithOutsideClick: Story = {
   },
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
+      canvasElement,
+      args,
+    );
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectOpenedCalls(0);
+    expectDrawerOpen();
 
     const closeButton = canvas.getByText("Close");
     expect(closeButton).toHaveFocus();
 
     await fireEvent.click(document.body);
-    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectDrawerOpen();
+    expectOpenedCalls(0);
     expect(closeButton).toHaveFocus();
 
     const counterButton = canvas.getByTestId("counter");
     await userEvent.click(counterButton);
-    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectDrawerOpen();
+    expectOpenedCalls(0);
     expect(closeButton).toHaveFocus();
     expect(counterButton).toHaveTextContent("Counter 1");
   },
@@ -245,22 +274,27 @@ export const TrapFocusWithFocusBlur: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
+      canvasElement,
+      args,
+    );
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectOpenedCalls(0);
+    expectDrawerOpen();
 
     const closeButton = canvas.getByText("Close");
     expect(closeButton).toHaveFocus();
 
     await fireEvent.focus(document.body);
-    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectDrawerOpen();
+    expectOpenedCalls(0);
     expect(closeButton).toHaveFocus();
 
     await fireEvent.blur(closeButton);
     expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectDrawerOpen();
+
+    expectOpenedCalls(0);
     expect(closeButton).toHaveFocus();
   },
   args: {
@@ -280,10 +314,13 @@ export const FocusLock: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
+      canvasElement,
+      args,
+    );
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectOpenedCalls(0);
+    expectDrawerOpen();
 
     const closeButton = canvas.getByText("Close");
     const testButton = canvas.getByText("Focus test");
@@ -313,18 +350,24 @@ export const FocusTriggerOnClose: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const {
+      canvas,
+      expectDrawerOpen,
+      expectDrawerClosed,
+      expectOpenedCalls,
+      clickCloseButton,
+    } = testUtils(canvasElement, args);
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectOpenedCalls(0);
     const openButton = canvas.getByText("Open Overlay");
     await userEvent.click(openButton);
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectDrawerOpen();
 
     const closeButton = canvas.getByText("Close");
     expect(closeButton).toHaveFocus();
 
-    await userEvent.click(closeButton);
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    await clickCloseButton();
+    expectDrawerClosed();
     expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(2);
 
     expect(openButton).toHaveFocus();
@@ -344,16 +387,22 @@ export const FocusTriggerOnCloseWhenDefaultOpen: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const {
+      canvas,
+      expectDrawerOpen,
+      expectDrawerClosed,
+      expectOpenedCalls,
+      clickCloseButton,
+    } = testUtils(canvasElement, args);
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectOpenedCalls(0);
+    expectDrawerOpen();
 
     const closeButton = canvas.getByText("Close");
     expect(closeButton).toHaveFocus();
 
-    await userEvent.click(closeButton);
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    await clickCloseButton();
+    expectDrawerClosed();
     expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(1);
 
     const openButton = canvas.getByText("Open Overlay");
@@ -371,16 +420,22 @@ export const FocusWithNoTrigger: Story = {
   render: BaseOverlayComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const {
+      canvas,
+      expectDrawerOpen,
+      expectDrawerClosed,
+      expectOpenedCalls,
+      clickCloseButton,
+    } = testUtils(canvasElement, args);
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectOpenedCalls(0);
+    expectDrawerOpen();
 
     const closeButton = canvas.getByText("Close");
     expect(closeButton).toHaveFocus();
 
-    await userEvent.click(closeButton);
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    await clickCloseButton();
+    expectDrawerClosed();
     expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(1);
 
     expect(document.body).toHaveFocus();
@@ -415,17 +470,18 @@ export const FocusPreviousFocusedItemIfNoTrigger: Story = {
     );
   },
   beforeEach: withoutAnimations,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+  play: async ({ canvasElement, args }) => {
+    const { canvas, expectDrawerOpen, expectDrawerClosed, clickCloseButton } =
+      testUtils(canvasElement, args);
 
     const customTrigger = canvas.getByText("Toggle open");
     await userEvent.click(customTrigger);
     expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectDrawerOpen();
 
-    const closeButton = canvas.getByText("Close");
-    await userEvent.click(closeButton);
+    await clickCloseButton();
 
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expectDrawerClosed();
 
     expect(customTrigger).toHaveFocus();
   },
@@ -456,17 +512,20 @@ export const FocusClickedItemOutsideWhenClosing: Story = {
     );
   },
   beforeEach: withoutAnimations,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+  play: async ({ canvasElement, args }) => {
+    const { canvas, expectDrawerOpen, expectDrawerClosed } = testUtils(
+      canvasElement,
+      args,
+    );
 
     const customTrigger = canvas.getByText("Toggle open");
     await userEvent.click(customTrigger);
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
+    expectDrawerOpen();
 
     const placeholderButton = canvas.getByText("Click me");
     await userEvent.click(placeholderButton);
 
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expectDrawerClosed();
     expect(placeholderButton).toHaveFocus();
   },
   args: {
@@ -484,8 +543,8 @@ export const FocusClickedItemOutsideWhenClosing: Story = {
 /* Only root-level backdrop should render */
 export const BackdropRenderOnlyRoot: Story = {
   render: BaseOverlayComponent,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+  play: async ({ canvasElement, args }) => {
+    const { canvas } = testUtils(canvasElement, args);
 
     const triggerButton = canvas.getByText("Open Overlay Nested");
     await userEvent.click(triggerButton);
@@ -505,15 +564,18 @@ export const BackdropRenderOnlyRoot: Story = {
 export const TriggerOpenOnClick: Story = {
   render: BaseOverlayComponent,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
+      canvasElement,
+      args,
+    );
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectOpenedCalls(0);
     const triggerButton = canvas.getByText("Open Overlay");
 
     await userEvent.click(triggerButton);
     // Overlay should remain open
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
-    expect(args.rootProps?.onOpenChange).toHaveBeenCalledOnce();
+    expectDrawerOpen();
+    expectOpenedCalls(1);
   },
   args: {
     rootProps: {
@@ -525,15 +587,18 @@ export const TriggerOpenOnClick: Story = {
 export const TriggerDisabled: Story = {
   render: BaseOverlayComponent,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { canvas, expectDrawerClosed, expectOpenedCalls } = testUtils(
+      canvasElement,
+      args,
+    );
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectOpenedCalls(0);
 
     const triggerButton = canvas.getByText("Open Overlay");
     await userEvent.click(triggerButton);
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
+    expectDrawerClosed();
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectOpenedCalls(0);
   },
   args: {
     triggerButtonProps: { disabled: true },
@@ -546,14 +611,17 @@ export const TriggerDisabled: Story = {
 export const TriggerDisabledSlot: Story = {
   render: BaseOverlayComponent,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { canvas, expectDrawerClosed, expectOpenedCalls } = testUtils(
+      canvasElement,
+      args,
+    );
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectOpenedCalls(0);
     const triggerButton = canvas.getByText("Open Overlay");
     await userEvent.click(triggerButton);
 
-    expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument();
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectDrawerClosed();
+    expectOpenedCalls(0);
   },
   args: {
     triggerButtonProps: {
@@ -575,13 +643,15 @@ export const TriggerDisabledSlot: Story = {
 export const CloseButton: Story = {
   render: BaseOverlayComponent,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { expectOpenedCalls, clickCloseButton } = testUtils(
+      canvasElement,
+      args,
+    );
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    const closeButton = canvas.getByText("Close");
+    expectOpenedCalls(0);
 
-    await userEvent.click(closeButton);
-    expect(args.rootProps?.onOpenChange).toHaveBeenCalledOnce();
+    await clickCloseButton();
+    expectOpenedCalls(1);
   },
   args: {
     rootProps: {
@@ -594,13 +664,15 @@ export const CloseButton: Story = {
 export const CloseButtonDisabled: Story = {
   render: BaseOverlayComponent,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { clickCloseButton, expectOpenedCalls } = testUtils(
+      canvasElement,
+      args,
+    );
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    const closeButton = canvas.getByText("Close");
+    expectOpenedCalls(0);
 
-    await userEvent.click(closeButton);
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    await clickCloseButton();
+    expectOpenedCalls(0);
   },
   args: {
     rootProps: {
@@ -614,13 +686,14 @@ export const CloseButtonDisabled: Story = {
 export const CloseButtonDisabledSlot: Story = {
   render: BaseOverlayComponent,
   play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
+    const { expectOpenedCalls, clickCloseButton } = testUtils(
+      canvasElement,
+      args,
+    );
 
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
-    const closeButton = canvas.getByText("Close");
-
-    await userEvent.click(closeButton);
-    expect(args.rootProps?.onOpenChange).not.toHaveBeenCalled();
+    expectOpenedCalls(0);
+    await clickCloseButton();
+    expectOpenedCalls(0);
   },
   args: {
     rootProps: {
@@ -727,20 +800,6 @@ function withoutAnimations() {
   globalThis.AKSEL_ANIMATIONS_DISABLED = true;
   return () => {
     globalThis.AKSEL_ANIMATIONS_DISABLED = false;
-  };
-}
-
-/**
- * Small helper for drawer-related test interactions to reduce repeated boilerplate.
- * We start with a single test (EscapeClose) using this; others can migrate incrementally.
- */
-function drawerTestUtils(canvasElement: HTMLElement) {
-  const canvas = within(canvasElement);
-  return {
-    canvas,
-    expectOpen: () => expect(canvas.getByTestId("drawer")).toBeInTheDocument(),
-    expectClosed: () =>
-      expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument(),
   };
 }
 
