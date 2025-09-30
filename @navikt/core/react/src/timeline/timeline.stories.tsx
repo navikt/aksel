@@ -8,7 +8,9 @@ import {
 import { VStack } from "../layout/stack";
 import { Provider } from "../provider";
 import en from "../util/i18n/locales/en";
-import Timeline from "./Timeline";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import Timeline, { type TimelineProps } from "./Timeline";
+import type { PeriodProps } from "./period/types";
 
 export default {
   title: "ds-react/Timeline",
@@ -33,7 +35,12 @@ const DummyLabel = () => {
   );
 };
 
-const row1 = [
+type ExamplePeriod = Pick<
+  PeriodProps,
+  "start" | "end" | "status" | "icon" | "statusLabel" | "children"
+> & { id: string; onSelectPeriod?: () => void; label?: string };
+
+const row1: ExamplePeriod[] = [
   {
     id: "1",
     start: new Date("Jan 1 2022"),
@@ -88,7 +95,7 @@ const row1 = [
   },
 ];
 
-const row2 = [
+const row2: ExamplePeriod[] = [
   {
     id: "7",
     start: new Date("May 13 2022"),
@@ -109,46 +116,48 @@ const row2 = [
   },
 ];
 
-export const Default: StoryFn = (props) => {
-  return (
-    <div style={{ width: "80vw" }}>
-      <Timeline {...props}>
-        <Timeline.Row
-          label="Row 1"
-          icon={<CheckmarkCircleFillIcon aria-hidden />}
-        >
-          {row1.map((p: any) => {
-            return (
-              <Timeline.Period
-                key={p.id}
-                start={p.start}
-                end={p.end}
-                status={p.status}
-                icon={p.icon}
-              />
-            );
-          })}
-        </Timeline.Row>
-        <Timeline.Row
-          label="Row 2"
-          icon={<CheckmarkCircleFillIcon aria-hidden />}
-        >
-          {row2.map((p: any) => {
-            return (
-              <Timeline.Period
-                key={p.id}
-                start={p.start}
-                end={p.end}
-                status={p.status}
-                icon={p.icon}
-              />
-            );
-          })}
-        </Timeline.Row>
-      </Timeline>
-    </div>
-  );
-};
+const DefaultStoryComponent = (props: Pick<TimelineProps, "direction">) => (
+  <div style={{ width: "80vw" }}>
+    <Timeline {...props}>
+      <Timeline.Row
+        label="Row 1"
+        icon={<CheckmarkCircleFillIcon aria-hidden />}
+      >
+        {row1.map((p) => {
+          return (
+            <Timeline.Period
+              key={p.id}
+              start={p.start}
+              end={p.end}
+              status={p.status}
+              icon={p.icon}
+            />
+          );
+        })}
+      </Timeline.Row>
+      <Timeline.Row
+        label="Row 2"
+        icon={<CheckmarkCircleFillIcon aria-hidden />}
+      >
+        {row2.map((p) => {
+          return (
+            <Timeline.Period
+              key={p.id}
+              start={p.start}
+              end={p.end}
+              status={p.status}
+              icon={p.icon}
+            />
+          );
+        })}
+      </Timeline.Row>
+    </Timeline>
+  </div>
+);
+
+export const Default: StoryFn<typeof Timeline> = (props) => (
+  <DefaultStoryComponent {...props} />
+);
 Default.argTypes = {
   direction: {
     options: ["left", "right"],
@@ -159,7 +168,7 @@ Default.argTypes = {
 export const English: StoryFn = () => {
   return (
     <Provider locale={en}>
-      <Default />
+      <DefaultStoryComponent />
     </Provider>
   );
 };
@@ -175,7 +184,7 @@ export const WithPins: StoryFn = () => {
           label="Row 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row1.map((p: any) => {
+          {row1.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -191,7 +200,7 @@ export const WithPins: StoryFn = () => {
           label="Row 2"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row2.map((p: any) => {
+          {row2.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -213,7 +222,7 @@ export const WithPins: StoryFn = () => {
           label="Row 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row1.map((p: any) => {
+          {row1.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -229,7 +238,7 @@ export const WithPins: StoryFn = () => {
           label="Row 2"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row2.map((p: any) => {
+          {row2.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -245,7 +254,7 @@ export const WithPins: StoryFn = () => {
           label="Row 2"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row2.map((p: any) => {
+          {row2.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -261,7 +270,7 @@ export const WithPins: StoryFn = () => {
           label="Row 2"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row2.map((p: any) => {
+          {row2.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -286,7 +295,7 @@ export const WithZoom: StoryFn = () => {
           label="Row 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row1.map((p: any) => {
+          {row1.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -302,7 +311,7 @@ export const WithZoom: StoryFn = () => {
           label="Row 2"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row2.map((p: any) => {
+          {row2.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -320,6 +329,7 @@ export const WithZoom: StoryFn = () => {
           <Timeline.Zoom.Button label="9 mnd" interval="month" count={9} />
         </Timeline.Zoom>
       </Timeline>
+      <div style={{ clear: "right" }} />
     </div>
   );
 };
@@ -337,7 +347,7 @@ export const ActivePeriod: StoryFn = () => {
           label="Rad 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row1.map((p: any) => {
+          {row1.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -359,7 +369,7 @@ export const ActivePeriod: StoryFn = () => {
           })}
         </Timeline.Row>
         <Timeline.Row label="Rad 2">
-          {row2.map((p: any) => {
+          {row2.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -461,7 +471,7 @@ export const WithYearLabels: StoryFn = () => {
 };
 
 export const ContentDemo: StoryFn = () => {
-  const [activePeriod, setActivePeriod] = useState<any>(undefined);
+  const [activePeriod, setActivePeriod] = useState<ExamplePeriod>();
 
   return (
     <div style={{ width: "80vw" }}>
@@ -476,7 +486,7 @@ export const ContentDemo: StoryFn = () => {
           label="Rad 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row1.map((p: any) => {
+          {row1.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -502,7 +512,7 @@ export const ContentDemo: StoryFn = () => {
           })}
         </Timeline.Row>
         <Timeline.Row label="Rad 2">
-          {row2.map((p: any) => {
+          {row2.map((p) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -545,21 +555,12 @@ export const ContentDemo: StoryFn = () => {
   );
 };
 
-export const Chromatic = () => (
-  <>
-    <Default />
-    <h2>English</h2>
-    <English />
-    <h2>WithPins</h2>
-    <WithPins />
-    <h2>WithZoom</h2>
-    <WithZoom />
-    <h2 style={{ clear: "right" }}>ActivePeriod</h2>
-    <ActivePeriod />
-    <h2>WithDayLabels</h2>
-    <WithDayLabels />
-    <h2>WithYearLabels</h2>
-    <WithYearLabels />
-  </>
-);
-Chromatic.parameters = { chromatic: { disable: false } };
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  English,
+  WithPins,
+  WithZoom,
+  ActivePeriod,
+  WithDayLabels,
+  WithYearLabels,
+});
