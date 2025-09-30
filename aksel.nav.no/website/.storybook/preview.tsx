@@ -64,29 +64,6 @@ const withDarkside = (Story: () => JSX.Element, context: any) => {
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
-      },
-    },
-    backgrounds: {
-      default: "default",
-      values: [
-        {
-          name: "default",
-          value: "var(--a-surface-default)",
-        },
-        {
-          name: "god-praksis",
-          value: "var(--a-surface-subtle)",
-        },
-        {
-          name: "blogg",
-          value: "var(--a-amber-50)",
-        },
-      ],
-    },
     options: {
       // The `a` and `b` arguments in this function have a type of `import('storybook/internal/types').IndexEntry`.
       // @ts-expect-error - Cannot add types b.c. the function is executed in a JavaScript environment.
