@@ -38,8 +38,8 @@ export const Default: Story = {
         <OverlayTrigger>Open Overlay</OverlayTrigger>
         <OverlayPortal>
           <OverlayBackdrop className="backdropCSS" />
-          <OverlayDrawer className="drawerCSS">
-            Drawer content
+          <OverlayDrawer className="drawerCSS" aria-labelledby="ha">
+            <h1 id="ha">Heading text</h1>
             <OverlayClose>Close</OverlayClose>
           </OverlayDrawer>
         </OverlayPortal>

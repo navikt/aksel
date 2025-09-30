@@ -121,8 +121,8 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
         return;
       }
       /* TODO: We could decide to always focus container on open instead of close-button */
-      /* popupRef.current?.focus({ preventScroll: true });
-      event.preventDefault(); */
+      popupRef.current?.focus({ preventScroll: true });
+      event.preventDefault();
     });
 
     const handleUnmountFocus = useEventCallback((event: Event) => {
@@ -232,6 +232,7 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
             {...restProps}
             ref={mergedRefs}
             className={cn(className)}
+            role="dialog"
             {...transitionAttrb}
           >
             {children}
