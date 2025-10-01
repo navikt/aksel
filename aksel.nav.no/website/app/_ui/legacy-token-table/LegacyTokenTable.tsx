@@ -31,11 +31,10 @@ function LegacyTokenTable(props: PortableTextComponentProps<Token_kategori>) {
         <strong data-color="warning" className={styles.legacyTokenTableWarning}>
           Deprecation warning:{" "}
         </strong>
-        <span>
-          I det nye systemet for theming og darkmode, er komponent-tokens
-          fjernet. Mer dokumentasjon for dette kommer,{" "}
-        </span>
-        <Link href="/darkside">midlertidig dokumentasjon finner du her.</Link>
+        I det nye systemet for theming og darkmode, er komponent-tokens fjernet.{" "}
+        <Link href="/grunnleggende/darkside/theming">
+          Les mer om det nye themingsystemet.
+        </Link>
       </BodyLong>
       <WebsiteTable th={[{ text: "Token" }, { text: "Fallback" }]}>
         {Object.entries(tokens).map(([key, val]) => (
