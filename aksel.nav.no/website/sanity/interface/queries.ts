@@ -1,5 +1,3 @@
-import { sanityCategoryLookup } from "../config";
-
 const markDef = `
 markDefs[]{
   ...,
@@ -164,20 +162,3 @@ ${defaultBlock},
 `;
 
 export const writersAll = `"writers": array::compact(writers[]->{title, description, avatar_id, type})`;
-
-export const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
-  heading,
-  "slug": slug.current,
-  kategori,
-  "tag": status.tag,
-  "sidebarindex": sidebarindex,
-}`;
-
-export const landingPageQuery = (t) => {
-  const kat = sanityCategoryLookup(t);
-
-  return `"page": *[_type == "${t}_landingsside"][0]{
-    ...,
-    ${kat.map((x) => `intro_${x.value}[]{...,${destructureBlocks}}`).join(",")}
-  }`;
-};
