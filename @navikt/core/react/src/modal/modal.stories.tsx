@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect, useRef, useState } from "react";
 import { FileIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";

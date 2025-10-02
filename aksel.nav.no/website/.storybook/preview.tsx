@@ -1,22 +1,9 @@
-import type { Preview } from "@storybook/react";
+import { withThemeByClassName } from "@storybook/addon-themes";
+import type { Preview } from "@storybook/nextjs";
 import { Box, Theme } from "@navikt/ds-react";
 import "./aksel-storybook.css";
 
 export const globalTypes = {
-  theme: {
-    name: "Theme",
-    description: "Global theme for components",
-    defaultValue: "light",
-    toolbar: {
-      icon: "paintbrush",
-      showName: true,
-      dynamicTitle: true,
-      items: [
-        { value: "light", title: "Light" },
-        { value: "dark", title: "Dark" },
-      ],
-    },
-  },
   mode: {
     name: "Darkside",
     defaultValue: "darkside",
@@ -32,17 +19,7 @@ export const globalTypes = {
   },
 };
 
-const withTheme = (Story, context) => {
-  const theme = context.parameters.theme || context.globals.theme || "light";
-
-  return (
-    <div className={theme === "dark" ? "dark" : ""}>
-      <Story />
-    </div>
-  );
-};
-
-const withDarkside = (Story, context) => {
+const withDarkside = (Story: () => JSX.Element, context: any) => {
   const isDarkside = context.globals.mode === "darkside";
 
   if (isDarkside) {
@@ -63,31 +40,9 @@ const withDarkside = (Story, context) => {
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
-      },
-    },
-    backgrounds: {
-      default: "default",
-      values: [
-        {
-          name: "default",
-          value: "var(--a-surface-default)",
-        },
-        {
-          name: "god-praksis",
-          value: "var(--a-surface-subtle)",
-        },
-        {
-          name: "blogg",
-          value: "var(--a-amber-50)",
-        },
-      ],
-    },
     options: {
+      // The `a` and `b` arguments in this function have a type of `import('storybook/internal/types').IndexEntry`.
+      // @ts-expect-error - Cannot add types b.c. the function is executed in a JavaScript environment.
       storySort: (a, b) => {
         const aIndex = parseInt(a.name.split(" | ")[0]);
         const bIndex = parseInt(b.name.split(" | ")[0]);
@@ -100,7 +55,16 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [withDarkside, withTheme],
+  decorators: [
+    withDarkside,
+    withThemeByClassName({
+      themes: {
+        light: "light",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+    }),
+  ],
 };
 
 export default preview;

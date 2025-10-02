@@ -40,9 +40,9 @@ export const withDsExample = (
     const pathParts = pathname.split("/");
 
     const Wrapper =
-      (theme === "light" || theme === "dark") && !legacyOnly
-        ? (_props: any) => <AkselTheme {..._props} hasBackground={false} />
-        : "div";
+      legacyOnly || theme === "legacy"
+        ? "div"
+        : (_props: any) => <AkselTheme {..._props} hasBackground={false} />;
 
     return (
       <Wrapper

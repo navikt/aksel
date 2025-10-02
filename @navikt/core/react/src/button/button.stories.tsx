@@ -1,4 +1,4 @@
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { StarIcon as BaseStarIcon } from "@navikt/aksel-icons";
 import { HStack, VStack } from "../layout/stack";

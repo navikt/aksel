@@ -1,5 +1,5 @@
-import { expect, fn, userEvent, within } from "@storybook/test";
 import React from "react";
+import { expect, fn, userEvent, within } from "storybook/test";
 import Table from "../../Table";
 
 export default {

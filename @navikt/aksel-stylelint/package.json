@@ -40,9 +40,9 @@
     "concurrently": "9.0.1",
     "postcss-selector-parser": "^7.1.0",
     "postcss-value-parser": "^4.2.0",
-    "stylelint": "^16.19.1",
+    "stylelint": "^16.24.0",
     "stylelint-test-rule-node": "^0.4.0",
-    "tsx": "^4.19.1",
+    "tsx": "^4.20.6",
     "typescript": "5.8.3"
   }
 }

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { format } from "date-fns";
 import React from "react";
 import { CheckmarkHeavyIcon, SparklesFillIcon } from "@navikt/aksel-icons";

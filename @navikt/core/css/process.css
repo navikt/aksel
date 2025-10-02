@@ -107,7 +107,10 @@
   }
 
   .navds-process__event[data-status="active"] & {
-    outline: 4px solid var(--a-surface-alt-3-subtle);
+    z-index: 1;
+    box-shadow: 0 0 0 2px var(--a-surface-default);
+    outline: 2px solid var(--a-surface-alt-3);
+    outline-offset: 2px;
   }
 
   .navds-process__event[data-status="uncompleted"] & {
@@ -145,6 +148,11 @@
     outline-color: ButtonText;
     background-color: ButtonText;
     color: ButtonFace;
+    forced-color-adjust: none;
+  }
+
+  .navds-process__event[data-status="active"] .navds-process__bullet {
+    box-shadow: 0 0 0 2px Canvas;
   }
 
   .navds-process__event:is([data-status="active"]) .navds-process__line {

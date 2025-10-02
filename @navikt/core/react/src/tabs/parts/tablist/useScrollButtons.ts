@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { debounce } from "../../../util";
 
-export function useScrollButtons(listRef: React.RefObject<HTMLDivElement>) {
+export function useScrollButtons(
+  listRef: React.RefObject<HTMLDivElement | null>,
+) {
   const [displayScroll, setDisplayScroll] = useState({
     start: false,
     end: false,

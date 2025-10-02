@@ -1,16 +1,20 @@
-import { loadCsf } from "@storybook/csf-tools";
 import { StorybookConfig } from "@storybook/react-vite";
 import { readFileSync } from "fs";
+import { createRequire } from "node:module";
+import { dirname, join } from "node:path";
+import { loadCsf } from "storybook/internal/csf-tools";
 import { InlineConfig } from "vite";
 import turbosnap from "vite-plugin-turbosnap";
 import TsconfigPathsPlugin from "vite-tsconfig-paths";
+
+const require = createRequire(import.meta.url);
 
 const indexRegex = /export const args = {\s+index: (\d+),/;
 
 export default {
   experimental_indexers: (indexers) => {
     // Changes here might need to be reflected in aksel.nav.no/website/.storybook/main.ts
-    const customIndexer = async (fileName: string, opts) => {
+    const customIndexer = async (fileName: string, opts: any) => {
       let code = readFileSync(fileName, "utf-8").toString();
 
       const matches = indexRegex.exec(code);
@@ -44,47 +48,27 @@ export default {
       },
     ];
   },
+
   staticDirs: ["./public"],
+
   stories: () => [
     "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "./docs/*.mdx",
     "./docs/*.stories.tsx",
     "../aksel.nav.no/website/pages/templates/**/*.tsx",
   ],
+
   addons: [
-    {
-      name: "@storybook/addon-essentials",
-      options: {
-        actions: false,
-        controls: {
-          hideNoControlsWarning: true,
-        },
-      },
-    },
-    "@storybook/addon-a11y",
-    "@storybook/addon-interactions",
-    "@storybook/addon-themes",
-    {
-      name: "@storybook/addon-storysource",
-      options: {
-        loaderOptions: {
-          injectStoryParameters: false,
-        },
-      },
-    },
-    /**
-     * https://github.com/chromaui/storybook-addon-pseudo-states/issues/101
-     * Currently disabled to avoid interference with darkmode update
-     */
-    /* "storybook-addon-pseudo-states", */
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-themes"),
+    getAbsolutePath("@storybook/addon-docs"),
   ],
+
   framework: {
-    name: "@storybook/react-vite",
+    name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
-  docs: {
-    autodocs: "tag",
-  },
+
   typescript: {
     check: false,
     reactDocgen: false,
@@ -109,10 +93,19 @@ export default {
           : [TsconfigPathsPlugin(tsConfigPathsPluginOpts)],
     } satisfies InlineConfig);
   },
+
   /* Lets us preview Roboto-flex font in storybook. */
   previewHead: (head) => `
   ${head}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">`,
+
+  features: {
+    actions: false,
+  },
 } satisfies StorybookConfig;
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, "package.json")));
+}
