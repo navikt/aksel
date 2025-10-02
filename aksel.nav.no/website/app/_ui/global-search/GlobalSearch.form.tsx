@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Search } from "@navikt/ds-react";
 import styles from "./GlobalSearch.module.css";
@@ -11,17 +12,23 @@ const GlobalSearchForm = () => {
     useGlobalSearch();
 
   const searchParams = useSearchParams();
-  /**
-   * Todo: Select or focus input on initial open
-   * setTimeout(() => {
-         console.log(inputRef.current);
-         if (query) {
-           inputRef.current?.select();
-         } else {
-           inputRef.current?.focus();
-         }
-       }, 0);
-   */
+
+  const ranOnceRef = useRef(false);
+
+  useEffect(() => {
+    if (ranOnceRef.current) {
+      return;
+    }
+
+    ranOnceRef.current = true;
+    if (inputRef.current) {
+      if (searchParams?.get("query")) {
+        inputRef.current.select();
+      } else {
+        inputRef.current.focus();
+      }
+    }
+  }, [inputRef, searchParams]);
 
   return (
     <div className={styles.searchForm}>
