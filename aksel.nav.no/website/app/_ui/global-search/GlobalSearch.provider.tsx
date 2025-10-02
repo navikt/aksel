@@ -23,7 +23,7 @@ type SearchContextType = {
   closeSearch: () => void;
   inputRef: React.MutableRefObject<HTMLInputElement | null>;
   queryResults: ActionReturnT | null;
-  updateSearch: (query: string) => void;
+  updateQuery: (query: string) => void;
   resetSearch: () => void;
 };
 
@@ -31,14 +31,29 @@ const SearchContext = createContext<SearchContextType | null>(null);
 
 function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const { setParam, clearParam, paramValue } = useParamState("query");
-
-  const [open, setOpen] = useState<boolean>(false);
   const shouldInitialOpenRef = useRef<boolean>(true);
 
+  const [open, setOpen] = useState<boolean>(false);
   const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
+
   const [, startTransition] = useTransition();
+  const { setParam, clearParam, paramValue } = useParamState("query");
+
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((query: string) => {
+        maybeEnableComicSans(query);
+
+        umamiTrack("sok", {});
+        setParam(query);
+      }, 200),
+    [setParam],
+  );
+
+  const resetSearch = useCallback(() => {
+    debouncedSearch.clear();
+    clearParam();
+  }, [clearParam, debouncedSearch]);
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -61,31 +76,23 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", listener);
   }, [open]);
 
-  const debouncedSearch = useMemo(
-    () =>
-      debounce((query: string) => {
-        if (query.includes("comic")) {
-          document.body.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
-        }
-
-        umamiTrack("sok", {});
-        setParam(query);
-      }),
-    [setParam],
-  );
-
   // When the query param changes, fetch new results.
   useEffect(() => {
     if (!paramValue) {
       setSearchResults(null);
       shouldInitialOpenRef.current = false;
+
       return;
     }
 
     startTransition(async () => {
       const newResults = await fuseGlobalSearch(paramValue);
+
       setSearchResults(newResults);
 
+      /*
+       * We use a ref to ensure the dialog only auto-opens after results are in to avoid CLS.
+       */
       if (shouldInitialOpenRef.current) {
         setOpen(true);
         shouldInitialOpenRef.current = false;
@@ -93,26 +100,30 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     });
   }, [paramValue]);
 
-  const resetSearch = useCallback(() => {
-    debouncedSearch.clear();
-    clearParam();
-  }, [clearParam, debouncedSearch]);
+  const contextValue = useMemo(
+    () => ({
+      open,
+      closeSearch: () => setOpen(false),
+      openSearch: () => setOpen(true),
+      inputRef,
+      queryResults: searchResult,
+      updateQuery: debouncedSearch,
+      resetSearch,
+    }),
+    [open, searchResult, debouncedSearch, resetSearch],
+  );
 
   return (
-    <SearchContext.Provider
-      value={{
-        open,
-        closeSearch: () => setOpen(false),
-        openSearch: () => setOpen(true),
-        inputRef,
-        queryResults: searchResult,
-        updateSearch: debouncedSearch,
-        resetSearch,
-      }}
-    >
+    <SearchContext.Provider value={contextValue}>
       {children}
     </SearchContext.Provider>
   );
+}
+
+function maybeEnableComicSans(query: string) {
+  if (query.includes("comic")) {
+    document.body.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
+  }
 }
 
 function useGlobalSearch() {

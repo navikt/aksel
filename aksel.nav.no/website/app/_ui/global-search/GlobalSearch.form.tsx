@@ -8,27 +8,21 @@ import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
 const GlobalSearchForm = () => {
-  const { inputRef, closeSearch, updateSearch, resetSearch } =
-    useGlobalSearch();
-
   const searchParams = useSearchParams();
-
-  const ranOnceRef = useRef(false);
+  const initialQuery = useRef(searchParams?.get("query") ?? "");
+  const { inputRef, closeSearch, updateQuery, resetSearch } = useGlobalSearch();
 
   useEffect(() => {
-    if (ranOnceRef.current) {
+    if (!inputRef.current) {
       return;
     }
-
-    ranOnceRef.current = true;
-    if (inputRef.current) {
-      if (searchParams?.get("query")) {
-        inputRef.current.select();
-      } else {
-        inputRef.current.focus();
-      }
+    if (initialQuery.current) {
+      /* Defer to ensure defaultValue is applied */
+      queueMicrotask(() => inputRef.current?.select());
+    } else {
+      inputRef.current.focus();
     }
-  }, [inputRef, searchParams]);
+  }, [inputRef]);
 
   return (
     <div className={styles.searchForm}>
@@ -39,7 +33,7 @@ const GlobalSearchForm = () => {
           aria-autocomplete="both"
           variant="simple"
           defaultValue={searchParams?.get("query")?.toString()}
-          onChange={updateSearch}
+          onChange={updateQuery}
           onClear={resetSearch}
           onKeyDown={(e) => {
             /* Avoids sideeffects when clearing Search */
