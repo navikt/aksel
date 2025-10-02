@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { mergeRefs } from "../../util/hooks/useMergeRefs";
 import {
@@ -35,6 +35,8 @@ export function useToggleItem<P extends UseToggleItemProps>(
     disabled,
     value,
   });
+
+  const rafId = useRef<number | null>(null);
 
   const isSelected = value === selectedValue;
 
@@ -90,11 +92,21 @@ export function useToggleItem<P extends UseToggleItemProps>(
          * Imperative focus during keydown is risky so we prevent React's batching updates
          * to avoid potential bugs. See: https://github.com/facebook/react/issues/20332
          */
-        selectedValue && setTimeout(() => setFocusedValue(selectedValue));
+        if (selectedValue) {
+          rafId.current = requestAnimationFrame(() =>
+            setFocusedValue(selectedValue),
+          );
+        }
       }
     },
     [descendants, focusedValue, selectedValue, setFocusedValue],
   );
+
+  useEffect(() => {
+    return () => {
+      rafId.current && cancelAnimationFrame(rafId.current);
+    };
+  }, []);
 
   return {
     ref: mergeRefs([register, ref]),
