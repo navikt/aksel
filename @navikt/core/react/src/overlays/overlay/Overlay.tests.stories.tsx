@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { expect, fireEvent, fn, userEvent, within } from "@storybook/test";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { expect, fireEvent, fn, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { Provider } from "../../provider";
 import {
