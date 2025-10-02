@@ -2,7 +2,7 @@
  * Returns the owner document of a given element.
  */
 function ownerDocument(node: Element | null) {
-  return node?.ownerDocument || document;
+  return node?.ownerDocument || globalThis?.document;
 }
 
 /**
