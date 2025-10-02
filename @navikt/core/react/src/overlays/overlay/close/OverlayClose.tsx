@@ -14,11 +14,6 @@ type OverlayCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
  * ```jsx
  * ```
  */
-/**
- * TODO: Closes overlay on click.
- * - Closebutton
- * - Acts as close, but for close
- */
 const OverlayClose = forwardRef<HTMLButtonElement, OverlayCloseProps>(
   ({ children, className, asChild = false, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();

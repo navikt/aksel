@@ -16,9 +16,6 @@ type OverlayPortalProps = PortalProps & {
  * ```jsx
  * ```
  */
-/**
- * TODO: Renders overlay in a portal (at the end of the DOM), and acts as a wrapper
- */
 const OverlayPortal = forwardRef<MenuPortalElement, OverlayPortalProps>(
   ({ children, className, rootElement, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();

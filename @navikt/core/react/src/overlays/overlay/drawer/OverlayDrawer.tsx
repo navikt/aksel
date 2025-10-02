@@ -120,7 +120,9 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
         elToFocus?.focus();
         return;
       }
+
       /* TODO: We could decide to always focus container on open instead of close-button */
+      /* This avoids having to check for "what" opened it. If touch, we want to focus the container always to avoid keyboard auto-opening in some mobile-devices */
       popupRef.current?.focus({ preventScroll: true });
       event.preventDefault();
     });

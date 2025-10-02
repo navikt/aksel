@@ -14,11 +14,6 @@ type OverlayTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
  * ```jsx
  * ```
  */
-/**
- * TODO:
- * - Button that triggers the overlay to open
- * - Should get back focus on close if `dialog` is used for overlay
- */
 const OverlayTrigger = forwardRef<HTMLButtonElement, OverlayTriggerProps>(
   ({ children, className, asChild = false, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
