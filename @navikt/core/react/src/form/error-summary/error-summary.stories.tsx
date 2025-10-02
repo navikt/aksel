@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { expect, userEvent, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useRef } from "react";
+import { expect, userEvent, within } from "storybook/test";
 import { VStack } from "../../layout/stack";
 import { ErrorSummary } from "./ErrorSummary";
 

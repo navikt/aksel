@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect } from "react";
 import { Box } from "../box";
 import { HGrid } from "../grid";
