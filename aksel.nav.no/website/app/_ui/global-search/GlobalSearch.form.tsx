@@ -11,6 +11,17 @@ const GlobalSearchForm = () => {
     useGlobalSearch();
 
   const searchParams = useSearchParams();
+  /**
+   * Todo: Select or focus input on initial open
+   * setTimeout(() => {
+         console.log(inputRef.current);
+         if (query) {
+           inputRef.current?.select();
+         } else {
+           inputRef.current?.focus();
+         }
+       }, 0);
+   */
 
   return (
     <div className={styles.searchForm}>

@@ -6,12 +6,19 @@ import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
-  const { open, closeSearch } = useGlobalSearch();
+  const { open, closeSearch, resetSearch } = useGlobalSearch();
+
+  if (!open) {
+    return null;
+  }
 
   return (
     <Modal
       open={open}
-      onClose={closeSearch}
+      onClose={() => {
+        closeSearch();
+        resetSearch();
+      }}
       placement="top"
       onKeyDown={(e) => {
         /* Avoids sideeffects when closing Modal */

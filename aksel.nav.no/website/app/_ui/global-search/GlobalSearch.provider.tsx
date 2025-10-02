@@ -31,13 +31,14 @@ const SearchContext = createContext<SearchContextType | null>(null);
 
 function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [open, setOpen] = useState(false);
+  const searchParams = useSearchParams();
+  const [open, setOpen] = useState<boolean>(false);
+  const shouldInitialOpenRef = useRef<boolean>(true);
 
   const isComicSans = useRef<boolean>(false);
 
   const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
   const [, startTransition] = useTransition();
-  const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
@@ -62,13 +63,9 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", listener);
   }, [open]);
 
-  const openSearch = () => {
+  const openSearch = useCallback(() => {
     setOpen(true);
-    searchResult?.query
-      ? /* When re-opening search for user so they can start new search instantly */
-        inputRef.current?.select()
-      : inputRef.current?.focus();
-  };
+  }, []);
 
   const closeSearch = () => setOpen(false);
 
@@ -100,19 +97,29 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     const query = searchParams?.get("query") ?? "";
     if (!query) {
       setSearchResults(null);
+      shouldInitialOpenRef.current = false;
       return;
     }
     startTransition(async () => {
       const newResults = await fuseGlobalSearch(query);
       setSearchResults(newResults);
+
+      if (shouldInitialOpenRef.current) {
+        openSearch();
+        shouldInitialOpenRef.current = false;
+      }
     });
-  }, [searchParams]);
+  }, [openSearch, searchParams]);
 
   const resetSearch = useCallback(() => {
     debouncedSearch.clear();
     const params = new URLSearchParams(searchParams ?? undefined);
     params.delete("query");
     replace(`${pathname}?${params.toString()}`);
+
+    if (inputRef.current?.value) {
+      inputRef.current.value = "";
+    }
   }, [debouncedSearch, pathname, replace, searchParams]);
 
   return (
