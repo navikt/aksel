@@ -14,12 +14,6 @@ type OverlayBackdropProps = Omit<
  * ```jsx
  * ```
  */
-/**
- * TODO: Semi-transparent backdrop that covers the screen behind the overlay
- * - Closes overlay on click?
- * - Opt in? Can this be a prop on "Portal", where you can set backdrop=true/false? If false, you can use this to override backdrop then.
- * - Hide nested backdrops
- */
 const OverlayBackdrop = forwardRef<HTMLDivElement, OverlayBackdropProps>(
   ({ className, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
