@@ -1,13 +1,28 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Search } from "@navikt/ds-react";
 import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
 const GlobalSearchForm = () => {
-  const { inputRef, closeSearch, updateSearch, resetSearch } =
-    useGlobalSearch();
+  const searchParams = useSearchParams();
+  const initialQuery = useRef(searchParams?.get("query") ?? "");
+  const { inputRef, closeSearch, updateQuery, resetSearch } = useGlobalSearch();
+
+  useEffect(() => {
+    if (!inputRef.current) {
+      return;
+    }
+    if (initialQuery.current) {
+      /* Defer to ensure defaultValue is applied */
+      queueMicrotask(() => inputRef.current?.select());
+    } else {
+      inputRef.current.focus();
+    }
+  }, [inputRef]);
 
   return (
     <div className={styles.searchForm}>
@@ -17,7 +32,8 @@ const GlobalSearchForm = () => {
           label="Globalt søk"
           aria-autocomplete="both"
           variant="simple"
-          onChange={updateSearch}
+          defaultValue={searchParams?.get("query")?.toString()}
+          onChange={updateQuery}
           onClear={resetSearch}
           onKeyDown={(e) => {
             /* Avoids sideeffects when clearing Search */

@@ -11,6 +11,7 @@ import {
   useTransition,
 } from "react";
 import { debounce } from "@navikt/ds-react";
+import { useParamState } from "@/app/_ui/global-search/useParamState";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { fuseGlobalSearch } from "./GlobalSearch.actions";
 
@@ -22,7 +23,7 @@ type SearchContextType = {
   closeSearch: () => void;
   inputRef: React.MutableRefObject<HTMLInputElement | null>;
   queryResults: ActionReturnT | null;
-  updateSearch: (query: string) => void;
+  updateQuery: (query: string) => void;
   resetSearch: () => void;
 };
 
@@ -30,12 +31,29 @@ const SearchContext = createContext<SearchContextType | null>(null);
 
 function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [open, setOpen] = useState(false);
+  const shouldInitialOpenRef = useRef<boolean>(true);
 
-  const isComicSans = useRef<boolean>(false);
-
+  const [open, setOpen] = useState<boolean>(false);
   const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
+
   const [, startTransition] = useTransition();
+  const { setParam, clearParam, paramValue } = useParamState("query");
+
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((query: string) => {
+        maybeEnableComicSans(query);
+
+        umamiTrack("sok", {});
+        setParam(query);
+      }, 200),
+    [setParam],
+  );
+
+  const resetSearch = useCallback(() => {
+    debouncedSearch.clear();
+    clearParam();
+  }, [clearParam, debouncedSearch]);
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -58,53 +76,53 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", listener);
   }, [open]);
 
-  const openSearch = () => {
-    setOpen(true);
-    searchResult?.query
-      ? /* When re-opening search for user so they can start new search instantly */
-        inputRef.current?.select()
-      : inputRef.current?.focus();
-  };
+  useEffect(() => {
+    if (!paramValue) {
+      setSearchResults(null);
+      shouldInitialOpenRef.current = false;
 
-  const closeSearch = () => setOpen(false);
+      return;
+    }
 
-  const debouncedSearch = useMemo(
-    () =>
-      debounce((query: string) => {
-        if (!isComicSans.current && query.includes("comic")) {
-          isComicSans.current = true;
-          document.body.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
-        }
+    startTransition(async () => {
+      const newResults = await fuseGlobalSearch(paramValue);
 
-        startTransition(async () => {
-          const newResults = await fuseGlobalSearch(query);
-          setSearchResults(newResults);
-        });
-        umamiTrack("sok", {});
-      }),
-    [],
+      setSearchResults(newResults);
+
+      /*
+       * We use a ref to ensure the dialog only auto-opens after results are in to avoid CLS.
+       */
+      if (shouldInitialOpenRef.current) {
+        setOpen(true);
+        shouldInitialOpenRef.current = false;
+      }
+    });
+  }, [paramValue]);
+
+  const contextValue = useMemo(
+    () => ({
+      open,
+      closeSearch: () => setOpen(false),
+      openSearch: () => setOpen(true),
+      inputRef,
+      queryResults: searchResult,
+      updateQuery: debouncedSearch,
+      resetSearch,
+    }),
+    [open, searchResult, debouncedSearch, resetSearch],
   );
 
-  const resetSearch = useCallback(() => {
-    debouncedSearch.clear();
-    setSearchResults(null);
-  }, [debouncedSearch]);
-
   return (
-    <SearchContext.Provider
-      value={{
-        open,
-        closeSearch,
-        openSearch,
-        inputRef,
-        queryResults: searchResult,
-        updateSearch: debouncedSearch,
-        resetSearch,
-      }}
-    >
+    <SearchContext.Provider value={contextValue}>
       {children}
     </SearchContext.Provider>
   );
+}
+
+function maybeEnableComicSans(query: string) {
+  if (query.includes("comic")) {
+    document.body.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
+  }
 }
 
 function useGlobalSearch() {
