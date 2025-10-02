@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
+import type { Meta, StoryObj } from "storybook/react";
 import {
   Overlay,
   OverlayBackdrop,
@@ -47,6 +47,70 @@ export const Default: Story = {
       <button onClick={() => alert("after")}>after overlay</button>
     </div>
   ),
+};
+
+export const DemoDefaultFocusDialog: Story = {
+  render: () => (
+    <div>
+      <button onClick={() => alert("after")}>Before overlay focus-trap</button>
+      <Overlay>
+        <OverlayTrigger>Open Overlay</OverlayTrigger>
+        <OverlayPortal>
+          <OverlayBackdrop className="backdropCSS" />
+          <OverlayDrawer className="drawerCSS" aria-labelledby="ha">
+            <h1 id="ha">Headingtekst som er h1</h1>
+            <OverlayClose>Close</OverlayClose>
+            <p>
+              Dette er vanlig innhold i en dialog. Innholdet kommer etter en
+              tittel (h1) og en lukkeknapp. Etter dette innholdet kommer en
+              annen knapp som ikke gjør noe, men er der for å teste
+              fokushåndtering.
+            </p>
+            <button>Knapp for fokushåndtering</button>
+            <p>Og enda mer tekst for å fylle opp dialogen. Lorem ipsum ...</p>
+          </OverlayDrawer>
+        </OverlayPortal>
+      </Overlay>
+      <button onClick={() => alert("after")}>after overlay focus-trap</button>
+    </div>
+  ),
+};
+
+export const DemoCloseButtonFocusDialog: Story = {
+  render: () => {
+    const closeRef = React.useRef<HTMLButtonElement>(null);
+    return (
+      <div>
+        <button onClick={() => alert("after")}>
+          Before overlay focus-trap
+        </button>
+        <Overlay>
+          <OverlayTrigger>Open Overlay</OverlayTrigger>
+          <OverlayPortal>
+            <OverlayBackdrop className="backdropCSS" />
+            <OverlayDrawer
+              className="drawerCSS"
+              aria-labelledby="ha"
+              onOpenAutoFocus={closeRef}
+            >
+              <h1 id="ha">Headingtekst som er h1</h1>
+              <OverlayClose ref={closeRef}>Close</OverlayClose>
+              <p>
+                Denne skiller seg litt ut da autofokus var satt på lukkeknappen
+                som er etter heading. Dette er vanlig innhold i en dialog.
+                Innholdet kommer etter en tittel (h1) og en lukkeknapp. Etter
+                dette innholdet kommer en annen knapp som ikke gjør noe, men er
+                der for å teste fokushåndtering.
+              </p>
+              <button>Knapp for fokushåndtering</button>
+              <p>Og enda mer tekst for å fylle opp dialogen. Lorem ipsum ...</p>
+            </OverlayDrawer>
+          </OverlayPortal>
+        </Overlay>
+        <button onClick={() => alert("after")}>after overlay focus-trap</button>
+      </div>
+    );
+  },
 };
 
 export const NestedDrawers: Story = {
