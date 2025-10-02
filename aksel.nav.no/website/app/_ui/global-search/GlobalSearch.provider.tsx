@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   createContext,
   useCallback,
@@ -12,6 +11,7 @@ import {
   useTransition,
 } from "react";
 import { debounce } from "@navikt/ds-react";
+import { useParamState } from "@/app/_ui/global-search/useParamState";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { fuseGlobalSearch } from "./GlobalSearch.actions";
 
@@ -31,16 +31,14 @@ const SearchContext = createContext<SearchContextType | null>(null);
 
 function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const searchParams = useSearchParams();
+
+  const { setParam, clearParam, paramValue } = useParamState("query");
+
   const [open, setOpen] = useState<boolean>(false);
   const shouldInitialOpenRef = useRef<boolean>(true);
 
-  const isComicSans = useRef<boolean>(false);
-
   const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
   const [, startTransition] = useTransition();
-  const pathname = usePathname();
-  const { replace } = useRouter();
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -63,71 +61,49 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", listener);
   }, [open]);
 
-  const openSearch = useCallback(() => {
-    setOpen(true);
-  }, []);
-
-  const closeSearch = () => setOpen(false);
-
-  // Debounced URL + tracking updater; actual results come from effect reacting to URL.
   const debouncedSearch = useMemo(
     () =>
       debounce((query: string) => {
-        if (!isComicSans.current && query.includes("comic")) {
-          isComicSans.current = true;
+        if (query.includes("comic")) {
           document.body.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
         }
 
         umamiTrack("sok", {});
-
-        const params = new URLSearchParams(searchParams ?? undefined);
-        if (query) {
-          params.set("query", query);
-        } else {
-          params.delete("query");
-        }
-
-        replace(`${pathname}?${params.toString()}`);
+        setParam(query);
       }),
-    [pathname, replace, searchParams],
+    [setParam],
   );
 
   // When the query param changes, fetch new results.
   useEffect(() => {
-    const query = searchParams?.get("query") ?? "";
-    if (!query) {
+    if (!paramValue) {
       setSearchResults(null);
       shouldInitialOpenRef.current = false;
       return;
     }
+
     startTransition(async () => {
-      const newResults = await fuseGlobalSearch(query);
+      const newResults = await fuseGlobalSearch(paramValue);
       setSearchResults(newResults);
 
       if (shouldInitialOpenRef.current) {
-        openSearch();
+        setOpen(true);
         shouldInitialOpenRef.current = false;
       }
     });
-  }, [openSearch, searchParams]);
+  }, [paramValue]);
 
   const resetSearch = useCallback(() => {
     debouncedSearch.clear();
-    const params = new URLSearchParams(searchParams ?? undefined);
-    params.delete("query");
-    replace(`${pathname}?${params.toString()}`);
-
-    if (inputRef.current?.value) {
-      inputRef.current.value = "";
-    }
-  }, [debouncedSearch, pathname, replace, searchParams]);
+    clearParam();
+  }, [clearParam, debouncedSearch]);
 
   return (
     <SearchContext.Provider
       value={{
         open,
-        closeSearch,
-        openSearch,
+        closeSearch: () => setOpen(false),
+        openSearch: () => setOpen(true),
         inputRef,
         queryResults: searchResult,
         updateSearch: debouncedSearch,
