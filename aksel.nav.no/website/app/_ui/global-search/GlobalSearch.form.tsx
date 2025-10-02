@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Search } from "@navikt/ds-react";
 import styles from "./GlobalSearch.module.css";
@@ -9,6 +10,8 @@ const GlobalSearchForm = () => {
   const { inputRef, closeSearch, updateSearch, resetSearch } =
     useGlobalSearch();
 
+  const searchParams = useSearchParams();
+
   return (
     <div className={styles.searchForm}>
       <form role="search" onSubmit={(e) => e.preventDefault()}>
@@ -17,6 +20,7 @@ const GlobalSearchForm = () => {
           label="Globalt søk"
           aria-autocomplete="both"
           variant="simple"
+          defaultValue={searchParams?.get("query")?.toString()}
           onChange={updateSearch}
           onClear={resetSearch}
           onKeyDown={(e) => {

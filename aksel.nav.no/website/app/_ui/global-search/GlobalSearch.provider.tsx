@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   createContext,
   useCallback,
@@ -36,6 +37,9 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
 
   const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
   const [, startTransition] = useTransition();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -68,6 +72,7 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
 
   const closeSearch = () => setOpen(false);
 
+  // Debounced URL + tracking updater; actual results come from effect reacting to URL.
   const debouncedSearch = useMemo(
     () =>
       debounce((query: string) => {
@@ -76,19 +81,39 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
           document.body.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
         }
 
-        startTransition(async () => {
-          const newResults = await fuseGlobalSearch(query);
-          setSearchResults(newResults);
-        });
         umamiTrack("sok", {});
+
+        const params = new URLSearchParams(searchParams ?? undefined);
+        if (query) {
+          params.set("query", query);
+        } else {
+          params.delete("query");
+        }
+
+        replace(`${pathname}?${params.toString()}`);
       }),
-    [],
+    [pathname, replace, searchParams],
   );
+
+  // When the query param changes, fetch new results.
+  useEffect(() => {
+    const query = searchParams?.get("query") ?? "";
+    if (!query) {
+      setSearchResults(null);
+      return;
+    }
+    startTransition(async () => {
+      const newResults = await fuseGlobalSearch(query);
+      setSearchResults(newResults);
+    });
+  }, [searchParams]);
 
   const resetSearch = useCallback(() => {
     debouncedSearch.clear();
-    setSearchResults(null);
-  }, [debouncedSearch]);
+    const params = new URLSearchParams(searchParams ?? undefined);
+    params.delete("query");
+    replace(`${pathname}?${params.toString()}`);
+  }, [debouncedSearch, pathname, replace, searchParams]);
 
   return (
     <SearchContext.Provider
