@@ -8,6 +8,7 @@ import React, {
 import { Slot } from "../../slot/Slot";
 import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
+import { ownerDocument } from "../../util/owner";
 import { AsChild } from "../../util/types/AsChild";
 import {
   CustomFocusEvent,
@@ -158,11 +159,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
 
     const mergedRefs = useMergeRefs(setNode, register, ref);
 
-    /**
-     * In some cases the `node.ownerDocument` can differ from global document.
-     * This can happend when portaling elements or using web-components
-     */
-    const ownerDocument = node?.ownerDocument ?? globalThis?.document;
+    const ownerDoc = ownerDocument(node);
 
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
@@ -278,7 +275,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       if (!event.defaultPrevented && onDismiss) {
         onDismiss();
       }
-    }, ownerDocument);
+    }, ownerDoc);
 
     const focusOutside = useFocusOutside((event) => {
       if (!enabled) {
@@ -302,7 +299,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       if (!event.defaultPrevented && onDismiss) {
         onDismiss();
       }
-    }, ownerDocument);
+    }, ownerDoc);
 
     useEscapeKeydown((event) => {
       if (!enabled) {
@@ -331,7 +328,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
         event.preventDefault();
         onDismiss();
       }
-    }, ownerDocument);
+    }, ownerDoc);
 
     /**
      * If `disableOutsidePointerEvents` is true,
@@ -343,23 +340,17 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       if (!node || !enabled || !disableOutsidePointerEvents) return;
 
       if (bodyLockCount === 0) {
-        originalBodyPointerEvents = ownerDocument.body.style.pointerEvents;
-        ownerDocument.body.style.pointerEvents = "none";
+        originalBodyPointerEvents = ownerDoc.body.style.pointerEvents;
+        ownerDoc.body.style.pointerEvents = "none";
       }
       bodyLockCount++;
       return () => {
         if (bodyLockCount === 1) {
-          ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
+          ownerDoc.body.style.pointerEvents = originalBodyPointerEvents;
         }
         bodyLockCount--;
       };
-    }, [
-      node,
-      ownerDocument,
-      disableOutsidePointerEvents,
-      descendants,
-      enabled,
-    ]);
+    }, [node, ownerDoc, disableOutsidePointerEvents, descendants, enabled]);
 
     /**
      * To make sure pointerEvents are enabled for all parents and siblings when the layer is removed from the DOM

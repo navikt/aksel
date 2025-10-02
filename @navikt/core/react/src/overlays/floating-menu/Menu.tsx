@@ -324,8 +324,9 @@ const MenuContentInternal = forwardRef<
             descendants={descendants}
             onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
               // only focus first item when using keyboard
-              if (!rootContext.isUsingKeyboardRef.current)
+              if (!rootContext.isUsingKeyboardRef.current) {
                 event.preventDefault();
+              }
             })}
           >
             <Floating.Content
