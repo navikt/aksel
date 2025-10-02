@@ -1,7 +1,7 @@
 "use client";
 
 import { useClientLayoutEffect } from "../../../util";
-import { useRefWithInit } from "./useRefWithInit";
+import { useRefWithInit } from "../../../util/hooks/useRefWithInit";
 
 export function useLatestRef<T>(value: T) {
   const latest = useRefWithInit(createLatestRef, value).current!;
