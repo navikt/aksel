@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
+import { useMergeRefs } from "../../../util/hooks";
 import { useOverlayContext } from "../root/OverlayRoot.context";
 
 type OverlayBackdropProps = Omit<
@@ -22,7 +23,10 @@ type OverlayBackdropProps = Omit<
 const OverlayBackdrop = forwardRef<HTMLDivElement, OverlayBackdropProps>(
   ({ className, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
-    const { mounted, transitionStatus, nested } = useOverlayContext();
+    const { mounted, transitionStatus, nested, backdropRef } =
+      useOverlayContext();
+
+    const mergedRefs = useMergeRefs(forwardedRef, backdropRef);
 
     const transitionAttrb = transitionStatus
       ? { [`data-${transitionStatus}-style`]: true }
@@ -37,7 +41,7 @@ const OverlayBackdrop = forwardRef<HTMLDivElement, OverlayBackdropProps>(
     return (
       <div
         {...restProps}
-        ref={forwardedRef}
+        ref={mergedRefs}
         className={cn(className)}
         role="presentation"
         style={{

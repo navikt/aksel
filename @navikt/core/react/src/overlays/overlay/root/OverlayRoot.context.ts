@@ -23,6 +23,10 @@ interface OverlayContextT {
    */
   popupRef: React.RefObject<HTMLElement | null>;
   /**
+   * The ref to the Backdrop-element.
+   */
+  backdropRef: React.RefObject<HTMLElement | null>;
+  /**
    * Callback to register the Popup element DOM node.
    */
   setPopupElement: React.Dispatch<React.SetStateAction<HTMLElement | null>>;

@@ -37,6 +37,7 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
   const { mounted, setMounted, transitionStatus } = useTransitionStatus(open);
 
   const popupRef = useRef<HTMLDivElement | null>(null);
+  const backdropRef = useRef<HTMLDivElement | null>(null);
 
   const [triggerElement, setTriggerElement] = useState<HTMLElement | null>(
     null,
@@ -82,6 +83,7 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
       mounted={mounted}
       transitionStatus={transitionStatus}
       popupRef={popupRef}
+      backdropRef={backdropRef}
       setPopupElement={setPopupElement}
       popupElement={popupElement}
       setTriggerElement={setTriggerElement}
