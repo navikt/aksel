@@ -163,7 +163,7 @@ ${expansionCardBlock},
 ${defaultBlock},
 `;
 
-export const writersAll = `writers[]->{title, description, avatar_id, type}`;
+export const writersAll = `"writers": array::compact(writers[]->{title, description, avatar_id, type})`;
 
 export const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
   heading,
