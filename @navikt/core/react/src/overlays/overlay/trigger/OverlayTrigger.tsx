@@ -26,11 +26,13 @@ const OverlayTrigger = forwardRef<HTMLButtonElement, OverlayTriggerProps>(
 
     return (
       <Component
+        type="button"
         {...restProps}
         ref={mergedRefs}
         className={cn(className)}
         data-popup-open={open}
         onClick={(event) => setOpen(!open, event.nativeEvent)}
+        aria-haspopup="dialog"
       >
         {children}
       </Component>

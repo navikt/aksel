@@ -32,6 +32,7 @@ const OverlayClose = forwardRef<HTMLButtonElement, OverlayCloseProps>(
 
     return (
       <Component
+        type="button"
         {...restProps}
         ref={forwardedRef}
         className={cn(className)}
