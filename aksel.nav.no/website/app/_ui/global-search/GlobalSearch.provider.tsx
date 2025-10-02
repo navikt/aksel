@@ -76,7 +76,6 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", listener);
   }, [open]);
 
-  // When the query param changes, fetch new results.
   useEffect(() => {
     if (!paramValue) {
       setSearchResults(null);
