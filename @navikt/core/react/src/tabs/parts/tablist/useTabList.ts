@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
 import { useTabsContext, useTabsDescendantsContext } from "../../Tabs.context";
 
 /**
@@ -10,8 +10,6 @@ export function useTabList() {
     useTabsContext();
 
   const descendants = useTabsDescendantsContext();
-
-  const rafId = useRef<number | null>(null);
 
   /**
    * Implements rowing-tabindex for horizontal tabs
@@ -63,21 +61,11 @@ export function useTabList() {
          * Imperative focus during keydown is risky so we prevent React's batching updates
          * to avoid potential bugs. See: https://github.com/facebook/react/issues/20332
          */
-        if (selectedValue) {
-          rafId.current = requestAnimationFrame(() =>
-            setFocusedValue(selectedValue),
-          );
-        }
+        selectedValue && setTimeout(() => setFocusedValue(selectedValue));
       }
     },
     [descendants, focusedValue, loop, selectedValue, setFocusedValue],
   );
-
-  useEffect(() => {
-    return () => {
-      rafId.current && cancelAnimationFrame(rafId.current);
-    };
-  }, []);
 
   return { onKeyDown };
 }
