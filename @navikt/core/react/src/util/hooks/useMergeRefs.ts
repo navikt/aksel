@@ -1,20 +1,20 @@
 /* https://github.com/radix-ui/primitives/blob/main/packages/react/compose-refs/src/composeRefs.tsx */
 import React from "react";
 
-type PossibleRef<T> = React.LegacyRef<T> | undefined;
+type PossibleRef<T> = React.Ref<T> | undefined;
 
 // https://github.com/gregberge/react-merge-refs
 /**
  * Use `useMergeRefs`
  * @internal
  */
-export function mergeRefs<T>(refs: PossibleRef<T>[]): React.RefCallback<T> {
-  return (value) => {
+export function mergeRefs<T>(refs: PossibleRef<T>[]) {
+  return (instance: T | null) => {
     refs.forEach((ref) => {
       if (typeof ref === "function") {
-        ref(value);
+        ref(instance);
       } else if (ref !== null && ref !== undefined) {
-        (ref as React.MutableRefObject<T | null>).current = value;
+        (ref as React.MutableRefObject<T | null>).current = instance;
       }
     });
   };

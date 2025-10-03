@@ -70,7 +70,13 @@ const Template = (props) => {
 
   return (
     <>
-      <Button ref={(el) => setAnchorEl(el)}>X</Button>
+      <Button
+        ref={(el) => {
+          setAnchorEl(el);
+        }}
+      >
+        X
+      </Button>
       <Popover {...props} open anchorEl={anchorEl}>
         <Popover.Content>
           Velit in consequat Lorem
