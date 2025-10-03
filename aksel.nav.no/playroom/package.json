@@ -15,6 +15,6 @@
     "style-loader": "^3.3.3"
   },
   "dependencies": {
-    "react": "^18.0.0"
+    "react": "^19.1.1"
   }
 }
