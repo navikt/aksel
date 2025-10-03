@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react";
+import type { Meta } from "@storybook/react-vite";
 import React from "react";
 import { BodyLong } from "../../typography";
 import { Box } from "../box";

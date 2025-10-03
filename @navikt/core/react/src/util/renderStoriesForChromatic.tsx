@@ -1,4 +1,4 @@
-import { Args, StoryObj } from "@storybook/react";
+import { Args, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { Renderer, StoryContext } from "storybook/internal/types";
 

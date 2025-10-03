@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { isSameDay } from "date-fns";
 import React, { useState } from "react";
 import { Button } from "../../button";

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { Accordion } from "../../accordion";
 import AccordionContent from "../../accordion/AccordionContent";
@@ -9,7 +9,7 @@ import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic"
 import Radio from "./Radio";
 import RadioGroup, { RadioGroupProps } from "./RadioGroup";
 
-const meta: Meta<typeof Radio> = {
+const meta: Meta<typeof RadioGroup> = {
   title: "ds-react/Radio",
   component: RadioGroup,
   subcomponents: { Radio },

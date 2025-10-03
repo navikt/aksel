@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { format, setYear } from "date-fns";
 import { nb } from "date-fns/locale";
 import React from "react";
+import { expect, fn, userEvent, within } from "storybook/test";
 import MonthPicker from "./MonthPicker";
 
 export default {

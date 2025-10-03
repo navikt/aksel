@@ -1,4 +1,4 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { PlantIcon } from "@navikt/aksel-icons";
 import { ExpansionCard, ExpansionCardProps } from ".";

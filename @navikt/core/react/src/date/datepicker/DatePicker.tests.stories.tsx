@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { expect, userEvent, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { addMonths, format } from "date-fns";
 import { nb } from "date-fns/locale";
 import React from "react";
+import { expect, userEvent, within } from "storybook/test";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./hooks/useDatepicker";
 import { useRangeDatepicker } from "./hooks/useRangeDatepicker";
