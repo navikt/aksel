@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
+import { Suspense } from "react";
 import { Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
@@ -70,7 +71,9 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
           </Box>
         </Show>
         <HStack align="center" gap="2">
-          <GlobalSearch />
+          <Suspense>
+            <GlobalSearch />
+          </Suspense>
           <Show below="lg">
             <MobileNav />
           </Show>
