@@ -57,11 +57,7 @@ export default async function RootLayout({
             {children}
           </ThemeProvider>
         </CookieConsentProvider>
-        <SanityLive
-          intervalOnGoAway={false}
-          refreshOnFocus={false}
-          refreshOnMount={false}
-        />
+        <SanityLive />
         {isDraftMode && (
           <>
             <DisableDraftMode />
