@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 7.32.0
+
+### Patch Changes
+
+- ReadMore: You can now reach the content by tabbing ([#4116](https://github.com/navikt/aksel/pull/4116))
+
+- Darkside: Adjust GuidePanel arrow position ([#4120](https://github.com/navikt/aksel/pull/4120))
+
+- Process: Adjusted active-marking ([#4118](https://github.com/navikt/aksel/pull/4118))
+
 ## 7.31.0
 
 ### Minor Changes
