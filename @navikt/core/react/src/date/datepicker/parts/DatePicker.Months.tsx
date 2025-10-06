@@ -15,6 +15,7 @@ import { Select } from "../../../form/select";
 import { useRenameCSS } from "../../../theme/Theme";
 import { BodyShort } from "../../../typography";
 import { omit } from "../../../util";
+import { useMedia } from "../../../util/hooks";
 import { useDateTranslationContext } from "../../Date.locale";
 import {
   calendarRange,
@@ -44,6 +45,9 @@ const DatePickerMonths = ({
   const { cn } = useRenameCSS();
   const translate = useDateTranslationContext().translate;
 
+  const compactMonthLabel =
+    useMedia("screen and (max-width: 479px)", false) ?? false;
+
   const handleMonthChange = useCallback(
     (date: Date, e: ChangeEvent<HTMLSelectElement>) => {
       const selectedMonth = Number(e.target.value);
@@ -69,8 +73,15 @@ const DatePickerMonths = ({
     today: dayPickerProps.today,
   });
 
-  const months = getMonthOptions(calendarMonth.date, navStart, navEnd, locale);
-  const dropdownYears = getYearOptions(navStart, navEnd, locale);
+  const months = getMonthOptions({
+    displayMonth: calendarMonth.date,
+    navStart,
+    navEnd,
+    locale,
+    compactLabel: compactMonthLabel,
+  });
+
+  const dropdownYears = getYearOptions({ navStart, navEnd, locale });
 
   return (
     <div {...omit(rest, ["displayIndex"])}>
