@@ -1,10 +1,12 @@
 "use client";
 
 import { BodyShort, Box, Heading, Modal } from "@navikt/ds-react";
-import { useGlobalSearchResults } from "@/app/_ui/global-search/GlobalSearch.search-provider";
+import {
+  useGlobalSearch,
+  useGlobalSearchResults,
+} from "@/app/_ui/global-search/GlobalSearch.context";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import styles from "./GlobalSearch.module.css";
-import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
   const { open, closeSearch } = useGlobalSearch();

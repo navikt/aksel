@@ -4,12 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Heading } from "@navikt/ds-react";
-import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.provider";
+import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.context";
+import type {
+  SearchHitT,
+  SearchResultPageTypesT,
+} from "@/app/_ui/global-search/server/GlobalSearch.config";
 import { doctypeToColorRole } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { urlFor } from "@/sanity/interface";
 import { StatusTag } from "@/web/StatusTag";
-import { SearchHitT, SearchResultPageTypesT } from "./GlobalSearch.config";
 import styles from "./GlobalSearch.module.css";
 
 function GlobalSearchHitCollection({

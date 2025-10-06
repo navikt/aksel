@@ -1,21 +1,55 @@
-import { Suspense } from "react";
-import { GlobalSearchResultProvider } from "@/app/_ui/global-search/GlobalSearch.search-provider";
+"use client";
+
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { GlobalSearchResultProvider } from "@/app/_ui/global-search/GlobalSearch.provider";
 import { GlobalSearchButton } from "./GlobalSearch.button";
+import { GlobalSearchContext } from "./GlobalSearch.context";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
 import { GlobalSearchForm } from "./GlobalSearch.form";
 import styles from "./GlobalSearch.module.css";
-import { GlobalSearchProvider } from "./GlobalSearch.provider";
 import {
   GlobalSearchEmptySearchState,
   GlobalSearchEmptyState,
-  GlobalSearchPreload,
   GlobalSearchResultsView,
 } from "./GlobalSearch.results";
 
-async function GlobalSearch() {
+function GlobalSearch() {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [open, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const listener = (event: KeyboardEvent) => {
+      if (
+        (event.key === "k" || event.key === "b") &&
+        (event.metaKey || event.ctrlKey) &&
+        !event.shiftKey
+      ) {
+        event.preventDefault();
+        if (open) {
+          inputRef.current?.select();
+        } else {
+          setOpen(true);
+        }
+      }
+    };
+
+    document.addEventListener("keydown", listener);
+
+    return () => document.removeEventListener("keydown", listener);
+  }, [open]);
+
+  const contextValue = useMemo(
+    () => ({
+      open,
+      closeSearch: () => setOpen(false),
+      openSearch: () => setOpen(true),
+      inputRef,
+    }),
+    [open],
+  );
+
   return (
-    <GlobalSearchProvider>
-      <GlobalSearchPreload />
+    <GlobalSearchContext.Provider value={contextValue}>
       <GlobalSearchButton />
       <Suspense>
         <GlobalSearchResultProvider>
@@ -29,7 +63,7 @@ async function GlobalSearch() {
           </GlobalSearchDialog>
         </GlobalSearchResultProvider>
       </Suspense>
-    </GlobalSearchProvider>
+    </GlobalSearchContext.Provider>
   );
 }
 

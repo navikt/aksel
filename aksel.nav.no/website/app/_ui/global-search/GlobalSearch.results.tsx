@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
 import { BodyShort, Heading } from "@navikt/ds-react";
-import { useGlobalSearchResults } from "@/app/_ui/global-search/GlobalSearch.search-provider";
-import { preloadSearchIndex } from "./GlobalSearch.actions";
-import { globalSearchConfig } from "./GlobalSearch.config";
+import { useGlobalSearchResults } from "@/app/_ui/global-search/GlobalSearch.context";
+import { globalSearchConfig } from "@/app/_ui/global-search/server/GlobalSearch.config";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
 import styles from "./GlobalSearch.module.css";
 
@@ -38,18 +36,6 @@ function GlobalSearchResultsView() {
       </div>
     </section>
   );
-}
-
-/**
- * Preload the searchindex cache, so that the first search is faster.
- *
- */
-function GlobalSearchPreload() {
-  useEffect(() => {
-    void preloadSearchIndex();
-  }, []);
-
-  return null;
 }
 
 function GlobalSearchEmptySearchState() {
@@ -279,6 +265,5 @@ function GlobalSearchEmptyState() {
 export {
   GlobalSearchEmptySearchState,
   GlobalSearchEmptyState,
-  GlobalSearchPreload,
   GlobalSearchResultsView,
 };
