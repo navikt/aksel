@@ -65,6 +65,10 @@ const FilteredOptions = () => {
         dismissable: floatingRef.current,
       }}
       onDismiss={() => localOpen && toggleIsListOpen(false)}
+      onEscapeKeyDown={(event) => {
+        /* We handle this manually in Input */
+        event.preventDefault();
+      }}
       enabled={localOpen}
     >
       <Floating.Content
