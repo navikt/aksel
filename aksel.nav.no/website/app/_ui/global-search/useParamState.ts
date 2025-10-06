@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useRef } from "react";
 
 interface UseParamStateResult {
   paramValue: string;
@@ -60,11 +60,9 @@ function useParamState(param: string): UseParamStateResult {
     lastAppliedRef.current = "";
   }, [buildUrl, currentValue, replace]);
 
-  const paramValue = useMemo(() => currentValue, [currentValue]);
-
   return {
-    paramValue,
-    hasParam: paramValue !== "",
+    paramValue: currentValue,
+    hasParam: currentValue !== "",
     setParam,
     clearParam,
     buildUrl,
