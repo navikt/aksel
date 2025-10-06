@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Search } from "@navikt/ds-react";
+import { useGlobalSearchResults } from "@/app/_ui/global-search/GlobalSearch.search-provider";
 import { useParamState } from "@/app/_ui/global-search/useParamState";
 import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";
@@ -10,7 +11,8 @@ import { useGlobalSearch } from "./GlobalSearch.provider";
 const GlobalSearchForm = () => {
   const { paramValue } = useParamState("query");
   const initialQuery = useRef(!!paramValue);
-  const { inputRef, closeSearch, updateQuery, resetSearch } = useGlobalSearch();
+  const { inputRef, closeSearch } = useGlobalSearch();
+  const { updateQuery, resetSearch } = useGlobalSearchResults();
 
   useEffect(() => {
     if (!inputRef.current) {

@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { GlobalSearchResultProvider } from "@/app/_ui/global-search/GlobalSearch.search-provider";
 import { GlobalSearchButton } from "./GlobalSearch.button";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
 import { GlobalSearchForm } from "./GlobalSearch.form";
@@ -15,14 +17,18 @@ async function GlobalSearch() {
     <GlobalSearchProvider>
       <GlobalSearchPreload />
       <GlobalSearchButton />
-      <GlobalSearchDialog>
-        <GlobalSearchForm />
-        <div className={styles.searchResults}>
-          <GlobalSearchEmptyState />
-          <GlobalSearchEmptySearchState />
-          <GlobalSearchResultsView />
-        </div>
-      </GlobalSearchDialog>
+      <Suspense>
+        <GlobalSearchResultProvider>
+          <GlobalSearchDialog>
+            <GlobalSearchForm />
+            <div className={styles.searchResults}>
+              <GlobalSearchEmptyState />
+              <GlobalSearchEmptySearchState />
+              <GlobalSearchResultsView />
+            </div>
+          </GlobalSearchDialog>
+        </GlobalSearchResultProvider>
+      </Suspense>
     </GlobalSearchProvider>
   );
 }
