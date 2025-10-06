@@ -39,10 +39,7 @@ const options = [
 ];
 
 export const Default: StoryFn<ComboboxProps> = (props) => (
-  <div>
-    <button>test</button>
-    <UNSAFE_Combobox {...props} id="combobox" />
-  </div>
+  <UNSAFE_Combobox {...props} id="combobox" />
 );
 Default.args = {
   options,
