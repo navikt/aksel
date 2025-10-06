@@ -70,7 +70,7 @@ jobs:
 
       - name: Create or update comment
         if: github.event_name != 'push' && !contains(github.event.head_commit.message, '[ci skip]')
-        uses: peter-evans/create-or-update-comment@v4
+        uses: peter-evans/create-or-update-comment@v5
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
