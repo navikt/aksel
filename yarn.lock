@@ -3875,7 +3875,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/react-dom@npm:^2.0.9, @floating-ui/react-dom@npm:^2.1.2":
+"@floating-ui/react-dom@npm:^2.1.2":
   version: 2.1.2
   resolution: "@floating-ui/react-dom@npm:2.1.2"
   dependencies:
@@ -5137,7 +5137,7 @@ __metadata:
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
-    "@floating-ui/react-dom": "npm:^2.0.9"
+    "@floating-ui/react-dom": "npm:^2.1.6"
     "@navikt/aksel-icons": "npm:^7.32.1"
     "@navikt/ds-tokens": "npm:^7.32.1"
     "@testing-library/dom": "npm:10.4.0"
