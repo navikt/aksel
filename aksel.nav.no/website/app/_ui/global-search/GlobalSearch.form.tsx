@@ -58,7 +58,10 @@ const GlobalSearchForm = () => {
       </form>
       <Button
         variant="tertiary-neutral"
-        onClick={closeSearch}
+        onClick={() => {
+          closeSearch();
+          resetSearch();
+        }}
         icon={<XMarkIcon title="Lukk" />}
       />
     </div>
