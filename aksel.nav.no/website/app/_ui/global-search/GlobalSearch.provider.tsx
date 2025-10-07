@@ -51,6 +51,14 @@ function GlobalSearchResultProvider({
     clearParam();
   }, [clearParam, debouncedSearch]);
 
+  const clearDebounce = useCallback(() => {
+    debouncedSearch.clear();
+  }, [debouncedSearch]);
+
+  useEffect(() => {
+    return debouncedSearch.clear();
+  }, [debouncedSearch]);
+
   useEffect(() => {
     if (!paramValue) {
       setSearchResults(null);
@@ -87,8 +95,9 @@ function GlobalSearchResultProvider({
       queryResults: searchResult,
       updateQuery: debouncedSearch,
       resetSearch,
+      clearDebounce,
     }),
-    [searchResult, debouncedSearch, resetSearch],
+    [searchResult, debouncedSearch, resetSearch, clearDebounce],
   );
 
   return (

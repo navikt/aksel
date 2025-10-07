@@ -29,6 +29,7 @@ type SearchResultContextType = {
   queryResults: GlobalSearchActionReturnT | null;
   updateQuery: (query: string) => void;
   resetSearch: () => void;
+  clearDebounce: () => void;
 };
 
 const GlobalSearchResultContext = createContext<SearchResultContextType | null>(

@@ -4,7 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Heading } from "@navikt/ds-react";
-import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.context";
+import {
+  useGlobalSearch,
+  useGlobalSearchResults,
+} from "@/app/_ui/global-search/GlobalSearch.context";
 import type {
   SearchHitT,
   SearchResultPageTypesT,
@@ -52,6 +55,7 @@ function GlobalSearchLink(props: {
   tag?: Partial<SearchResultPageTypesT>;
 }) {
   const context = useGlobalSearch();
+  const { clearDebounce } = useGlobalSearchResults();
   const { hit } = props;
 
   const href =
@@ -74,7 +78,10 @@ function GlobalSearchLink(props: {
             onClick={() =>
               umamiTrack("navigere", { kilde: "global sok", url: href })
             }
-            onNavigate={() => context.closeSearch()}
+            onNavigate={() => {
+              context.closeSearch();
+              clearDebounce();
+            }}
             className={styles.searchLink}
             prefetch={false}
           >
