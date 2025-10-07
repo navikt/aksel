@@ -23,7 +23,7 @@ interface FocusScopeProps extends React.HTMLAttributes<HTMLDivElement> {
    * When `true`, tabbing from last item will focus first tabbable
    * and shift+tab from first item will focus last tababble element.
    *
-   * - Links, i.e. `<a>` elements, are not considered tabbable for the purpose of looping.
+   * - Links (`<a>` elements), are not considered tabbable for the purpose of looping.
    * - Hidden inputs (i.e. `<input type="hidden">`) are not considered tabbable.
    * - Elements that are `display: none` or `visibility: hidden` are not considered tabbable.
    * - Elements with `tabIndex < 0` are not considered tabbable.
@@ -66,7 +66,7 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
     const mergedRefs = useMergeRefs(forwardedRef, (node) => setContainer(node));
     const [container, setContainer] = useState<HTMLElement | null>(null);
 
-    const focusScope = useRef({
+    const focusScope = useRef<FocusScopeAPI>({
       paused: false,
       pause() {
         this.paused = true;
@@ -167,9 +167,18 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
 
         /* If user does not manually prevent event and handle focus themselves */
         if (!mountEvent.defaultPrevented) {
-          focusFirst(removeLinks(getTabbableCandidates(container)), {
-            select: true,
-          });
+          /**
+           * Attempts focusing the first element in a list of candidates.
+           * Stops when focus has actually moved.
+           */
+          const candidates = removeLinks(getTabbableCandidates(container));
+          const previouslyFocusedElement = document.activeElement;
+          for (const candidate of candidates) {
+            focus(candidate, { select: true });
+            if (document.activeElement !== previouslyFocusedElement) {
+              return;
+            }
+          }
 
           /* focusFirst might not find any cadidates, so we fall back to focusing container */
           if (document.activeElement === currentActiveElement) {
@@ -270,35 +279,20 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
 );
 
 /* ---------------------------- FocusScope utils ---------------------------- */
-
 /**
- * Attempts focusing the first element in a list of candidates.
- * Stops when focus has actually moved.
- */
-function focusFirst(candidates: HTMLElement[], { select = false } = {}) {
-  const previouslyFocusedElement = document.activeElement;
-  for (const candidate of candidates) {
-    focus(candidate, { select });
-    if (document.activeElement !== previouslyFocusedElement) return;
-  }
-}
-
-/**
- * Returns the first and last tabbable elements inside a container.
+ * Returns the first and last tabbable elements inside a container as a tuple.
  */
 function getTabbableEdges(container: HTMLElement) {
   const candidates = getTabbableCandidates(container);
-  const first = findVisible(candidates, container);
-  const last = findVisible(candidates.reverse(), container);
-  return [first, last] as const;
+  return [
+    findFirstVisible(candidates, container),
+    findFirstVisible(candidates.reverse(), container),
+  ] as const;
 }
 
 /**
  * Returns a list of potential tabbable candidates.
- *
- * NOTE: This is only a close approximation. For example it doesn't take into account cases like when
- * elements are not visible. This cannot be worked out easily by just reading a property, but rather
- * necessitate runtime knowledge (computed styles, etc). We deal with these cases separately.
+ * We do not take into account tabindex values.
  *
  * See: https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker
  * Credit: https://github.com/discord/focus-layers/blob/master/src/util/wrapFocus.tsx#L1
@@ -308,19 +302,25 @@ function getTabbableCandidates(container: HTMLElement) {
   const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, {
     acceptNode: (node: any) => {
       const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
-      if (node.disabled || node.hidden || isHiddenInput)
+      if (node.disabled || node.hidden || isHiddenInput) {
         return NodeFilter.FILTER_SKIP;
-      // `.tabIndex` is not the same as the `tabindex` attribute. It works on the
-      // runtime's understanding of tabbability, so this automatically accounts
-      // for any kind of element that could be tabbed to.
+      }
+
+      /**
+       * `.tabIndex` is not the same as the `tabindex` attribute. It works on the
+       * runtime's understanding of tabbability, so this automatically accounts
+       * for any kind of element that could be tabbed to.
+       */
       return node.tabIndex >= 0
         ? NodeFilter.FILTER_ACCEPT
         : NodeFilter.FILTER_SKIP;
     },
   });
-  while (walker.nextNode()) nodes.push(walker.currentNode as HTMLElement);
-  // we do not take into account the order of nodes with positive `tabIndex` as it
-  // hinders accessibility to have tab order different from visual order.
+
+  while (walker.nextNode()) {
+    nodes.push(walker.currentNode as HTMLElement);
+  }
+
   return nodes;
 }
 
@@ -328,65 +328,70 @@ function getTabbableCandidates(container: HTMLElement) {
  * Returns the first visible element in a list.
  * NOTE: Only checks visibility up to the `container`.
  */
-function findVisible(elements: HTMLElement[], container: HTMLElement) {
+function findFirstVisible(elements: HTMLElement[], container: HTMLElement) {
   for (const element of elements) {
-    // we stop checking if it's hidden at the `container` level (excluding)
-    if (!isHidden(element, { upTo: container })) return element;
+    if (!isHidden(element, { upTo: container })) {
+      return element;
+    }
   }
 }
 
 function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
-  if (getComputedStyle(node).visibility === "hidden") return true;
+  if (getComputedStyle(node).visibility === "hidden") {
+    return true;
+  }
+
   while (node) {
-    // we stop at `upTo` (excluding it)
-    if (upTo !== undefined && node === upTo) return false;
-    if (getComputedStyle(node).display === "none") return true;
+    /* we stop at `upTo` */
+    if (upTo !== undefined && node === upTo) {
+      return false;
+    }
+    if (getComputedStyle(node).display === "none") {
+      return true;
+    }
     node = node.parentElement as HTMLElement;
   }
   return false;
 }
 
-function isSelectableInput(
-  element: any,
-): element is FocusableTarget & { select: () => void } {
-  return element instanceof HTMLInputElement && "select" in element;
-}
-
 function focus(element?: FocusableTarget | null, { select = false } = {}) {
-  // only focus if that element is focusable
-  if (element?.focus) {
-    const previouslyFocusedElement = document.activeElement;
-    // NOTE: we prevent scrolling on focus, to minimize jarring transitions for users
-    element.focus({ preventScroll: true });
-    // only select if its not the same element, it supports selection and we need to select
-    if (
-      element !== previouslyFocusedElement &&
-      isSelectableInput(element) &&
-      select
-    )
-      element.select();
+  if (!element?.focus) {
+    return;
   }
+
+  const previouslyFocusedElement = document.activeElement;
+  /* Prevent scrolling on focus, to minimize jarring transitions */
+  element.focus({ preventScroll: true });
+
+  if (!select) {
+    return;
+  }
+
+  /* By default, inputs that gets focus should select its contents */
+  if (
+    element !== previouslyFocusedElement &&
+    element instanceof HTMLInputElement &&
+    "select" in element
+  )
+    element.select();
 }
 
-/* -------------------------------------------------------------------------------------------------
- * FocusScope stack
- * -----------------------------------------------------------------------------------------------*/
-
+/* ---------------------------- FocusScope stack ---------------------------- */
 type FocusScopeAPI = { paused: boolean; pause(): void; resume(): void };
 const focusScopesStack = createFocusScopesStack();
 
 function createFocusScopesStack() {
-  /** A stack of focus scopes, with the active one at the top */
+  /* A stack of focus scopes, with the active one at the top */
   let stack: FocusScopeAPI[] = [];
 
   return {
     add(focusScope: FocusScopeAPI) {
-      // pause the currently active focus scope (at the top of the stack)
+      /* Pause the currently active focus scope (at the top of the stack) */
       const activeFocusScope = stack[0];
       if (focusScope !== activeFocusScope) {
         activeFocusScope?.pause();
       }
-      // remove in case it already exists (because we'll re-add it at the top of the stack)
+      /* remove in case it already exists (because we'll re-add it at the top of the stack) */
       stack = arrayRemove(stack, focusScope);
       stack.unshift(focusScope);
     },
@@ -411,7 +416,5 @@ function removeLinks(items: HTMLElement[]) {
   return items.filter((item) => item.tagName !== "A");
 }
 
-const Root = FocusScope;
-
-export { FocusScope, Root };
+export { FocusScope };
 export type { FocusScopeProps };
