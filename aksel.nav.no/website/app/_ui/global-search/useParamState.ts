@@ -39,13 +39,13 @@ function useParamState(param: string): UseParamStateResult {
       const isClearing = normalized === "";
 
       /* Exit early if value matches the last applied (rapid calls before snapshot updates) */
-      if ((isClearing ? "" : normalized) === lastAppliedRef.current) {
+      if (normalized === lastAppliedRef.current) {
         return;
       }
 
       const nextUrl = buildUrl(isClearing ? null : normalized);
       replace(nextUrl);
-      lastAppliedRef.current = isClearing ? "" : normalized;
+      lastAppliedRef.current = normalized;
     },
     [buildUrl, replace],
   );
