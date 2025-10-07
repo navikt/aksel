@@ -18,13 +18,11 @@ export function getMonthOptions({
   navStart,
   navEnd,
   locale,
-  compactLabel,
 }: {
   displayMonth: Date;
   navStart: Date | undefined;
   navEnd: Date | undefined;
   locale: Locale;
-  compactLabel: boolean;
 }):
   | {
       value: number;
@@ -38,7 +36,7 @@ export function getMonthOptions({
   });
 
   const options = months.map((month) => {
-    const label = format(month, compactLabel ? "LLL" : "LLLL", {
+    const label = format(month, "LLLL", {
       locale,
     }).replace(".", "");
     const value = getMonth(month);
