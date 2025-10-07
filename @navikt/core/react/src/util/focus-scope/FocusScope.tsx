@@ -148,25 +148,31 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
       };
     }, [trapped, container, focusScope.paused]);
 
+    /* Handles autofocus on mount and unmount */
     useEffect(() => {
       if (!container) {
         return;
       }
 
       focusScopesStack.add(focusScope);
-      const previouslyFocusedElement =
-        document.activeElement as HTMLElement | null;
-      const hasFocusedCandidate = container.contains(previouslyFocusedElement);
+      const currentActiveElement = document.activeElement as HTMLElement | null;
+      const containsActiveElement =
+        currentActiveElement && container.contains(currentActiveElement);
 
-      if (!hasFocusedCandidate) {
+      /* We only autofocus on mount if container does not contain active element */
+      if (!containsActiveElement) {
         const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
         container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
         container.dispatchEvent(mountEvent);
+
+        /* If user does not manually prevent event and handle focus themselves */
         if (!mountEvent.defaultPrevented) {
           focusFirst(removeLinks(getTabbableCandidates(container)), {
             select: true,
           });
-          if (document.activeElement === previouslyFocusedElement) {
+
+          /* focusFirst might not find any cadidates, so we fall back to focusing container */
+          if (document.activeElement === currentActiveElement) {
             focus(container);
           }
         }
@@ -175,9 +181,11 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
       return () => {
         container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
 
-        // We hit a react bug (fixed in v17) with focusing in unmount.
-        // We need to delay the focus a little to get around it for now.
-        // See: https://github.com/facebook/react/issues/17894
+        /**
+         * https://github.com/facebook/react/issues/17894
+         * We delay to next tick to avoid issues with React's event system
+         * where calling `focus` inside a effect cleanup causes React to not call onFocus handlers.
+         */
         setTimeout(() => {
           const unmountEvent = new CustomEvent(
             AUTOFOCUS_ON_UNMOUNT,
@@ -185,12 +193,14 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
           );
           container.addEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
           container.dispatchEvent(unmountEvent);
+
+          /* If user does not manually prevent event and handle focus themselves */
           if (!unmountEvent.defaultPrevented) {
-            focus(previouslyFocusedElement ?? document.body, {
+            focus(currentActiveElement ?? document.body, {
               select: true,
             });
           }
-          // we need to remove the listener after we `dispatchEvent`
+          /* Since this is inside a cleanup, we need to instantly remove the listener ourselves */
           container.removeEventListener(
             AUTOFOCUS_ON_UNMOUNT,
             onUnmountAutoFocus,
@@ -201,34 +211,46 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
       };
     }, [container, onMountAutoFocus, onUnmountAutoFocus, focusScope]);
 
-    // Takes care of looping focus (when tabbing whilst at the edges)
+    /* Takes care of looping focus */
     const handleKeyDown = useCallback(
       (event: React.KeyboardEvent) => {
-        if (!loop && !trapped) return;
-        if (focusScope.paused) return;
+        if ((!loop && !trapped) || focusScope.paused) {
+          return;
+        }
 
         const isTabKey =
           event.key === "Tab" &&
           !event.altKey &&
           !event.ctrlKey &&
           !event.metaKey;
+
         const focusedElement = document.activeElement as HTMLElement | null;
 
         if (isTabKey && focusedElement) {
           const containerTarget = event.currentTarget as HTMLElement;
           const [first, last] = getTabbableEdges(containerTarget);
-          const hasTabbableElementsInside = first && last;
 
-          // we can only wrap focus if we have tabbable edges
-          if (!hasTabbableElementsInside) {
-            if (focusedElement === containerTarget) event.preventDefault();
-          } else {
-            if (!event.shiftKey && focusedElement === last) {
+          /* We can only wrap focus if we have tabbable edges */
+          if (!(first && last)) {
+            /* No need to do anything if active element is the expected focus-target */
+            if (focusedElement === containerTarget) {
               event.preventDefault();
-              if (loop) focus(first, { select: true });
-            } else if (event.shiftKey && focusedElement === first) {
-              event.preventDefault();
-              if (loop) focus(last, { select: true });
+            }
+            return;
+          }
+
+          /**
+           * Since we are either trapped OR looping, we will either do nothing (trapped), or focus first element (looping).
+           */
+          if (!event.shiftKey && focusedElement === last) {
+            event.preventDefault();
+            if (loop) {
+              focus(first, { select: true });
+            }
+          } else if (event.shiftKey && focusedElement === first) {
+            event.preventDefault();
+            if (loop) {
+              focus(last, { select: true });
             }
           }
         }
@@ -247,9 +269,7 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
   },
 );
 
-/* -------------------------------------------------------------------------------------------------
- * Utils
- * -----------------------------------------------------------------------------------------------*/
+/* ---------------------------- FocusScope utils ---------------------------- */
 
 /**
  * Attempts focusing the first element in a list of candidates.
