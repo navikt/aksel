@@ -69,8 +69,14 @@ const DatePickerMonths = ({
     today: dayPickerProps.today,
   });
 
-  const months = getMonthOptions(calendarMonth.date, navStart, navEnd, locale);
-  const dropdownYears = getYearOptions(navStart, navEnd, locale);
+  const months = getMonthOptions({
+    displayMonth: calendarMonth.date,
+    navStart,
+    navEnd,
+    locale,
+  });
+
+  const dropdownYears = getYearOptions({ navStart, navEnd, locale });
 
   return (
     <div {...omit(rest, ["displayIndex"])}>
