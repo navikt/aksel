@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+// eslint-disable-next-line storybook/use-storybook-testing-library
+import { act } from "@testing-library/react";
 import React, { useState } from "react";
 import { expect, fireEvent, userEvent, within } from "storybook/test";
 import { VStack } from "../../layout/stack";
@@ -102,6 +104,9 @@ export const Trapped: Story = {
     await fireEvent.click(outsideElement);
     expect(first).toHaveFocus();
 
+    await fireEvent.focus(document.body);
+    expect(first).toHaveFocus();
+
     /* Blurring would normally set focus to body. We want to avoid this */
     fireEvent.blur(first);
     expect(first).toHaveFocus();
@@ -136,6 +141,25 @@ export const ReFocusPrevTrappedItem: Story = {
   },
 };
 
+export const RemoveFocusedItemWhenTrapped: Story = {
+  render: BaseFocusScopeComponent,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const first = canvas.getByLabelText(Field_ONE);
+
+    await act(async () => {
+      first.remove();
+    });
+
+    /* By default, container is focused when focused item is removed */
+    expect(canvas.getByTestId("focus-scope")).toHaveFocus();
+  },
+  args: {
+    trapped: true,
+  },
+};
+
 export const MountAutofocus: Story = {
   render: BaseFocusScopeComponent,
   play: async ({ canvasElement }) => {
@@ -153,14 +177,7 @@ export const MountAutofocus: Story = {
 
 export const MountAutofocusAvoidLink: Story = {
   render: BaseFocusScopeComponent,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const showButton = canvas.getByText("show");
-    await userEvent.click(showButton);
-    const first = canvas.getByLabelText(Field_ONE);
-    expect(first).toHaveFocus();
-  },
+  play: MountAutofocus.play,
   args: {
     showByDefault: false,
     firstChild: <a href="/">link</a>,
@@ -169,14 +186,7 @@ export const MountAutofocusAvoidLink: Story = {
 
 export const MountAutofocusAvoidHiddenInput: Story = {
   render: BaseFocusScopeComponent,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const showButton = canvas.getByText("show");
-    await userEvent.click(showButton);
-    const first = canvas.getByLabelText(Field_ONE);
-    expect(first).toHaveFocus();
-  },
+  play: MountAutofocus.play,
   args: {
     showByDefault: false,
     firstChild: <input hidden type="text" />,
@@ -185,14 +195,7 @@ export const MountAutofocusAvoidHiddenInput: Story = {
 
 export const MountAutofocusAvoidNegativeTabIndex: Story = {
   render: BaseFocusScopeComponent,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const showButton = canvas.getByText("show");
-    await userEvent.click(showButton);
-    const first = canvas.getByLabelText(Field_ONE);
-    expect(first).toHaveFocus();
-  },
+  play: MountAutofocus.play,
   args: {
     showByDefault: false,
     firstChild: <div tabIndex={-1}>content</div>,
@@ -292,7 +295,7 @@ function BaseFocusScopeComponent({
         <button>outside-button-start</button>
       </div>
       {show && (
-        <FocusScope {...props}>
+        <FocusScope {...props} data-testid="focus-scope">
           <VStack
             gap="space-4"
             as="form"
