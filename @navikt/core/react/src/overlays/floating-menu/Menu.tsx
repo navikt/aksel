@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import { Portal } from "../../portal";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
+import { FocusScope } from "../../util/focus-scope/FocusScope";
 import { useCallbackRef, useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating } from "../floating/Floating";
-import { FocusScope } from "./parts/FocusScope";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
 import {
   SlottedDivElement,
@@ -243,7 +243,7 @@ type DismissableLayerProps = React.ComponentPropsWithoutRef<
 >;
 
 type MenuContentInternalPrivateProps = {
-  onOpenAutoFocus?: FocusScopeProps["onMountHandler"];
+  onOpenAutoFocus?: FocusScopeProps["onMountAutoFocus"];
   onDismiss?: DismissableLayerProps["onDismiss"];
   disableOutsidePointerEvents?: DismissableLayerProps["disableOutsidePointerEvents"];
 };
@@ -258,7 +258,7 @@ interface MenuContentInternalProps
    * Event handler called when auto-focusing after close.
    * Can be prevented.
    */
-  onCloseAutoFocus?: FocusScopeProps["onUnmountHandler"];
+  onCloseAutoFocus?: FocusScopeProps["onUnmountAutoFocus"];
   onEntryFocus?: RovingFocusProps["onEntryFocus"];
   onEscapeKeyDown?: DismissableLayerProps["onEscapeKeyDown"];
   onPointerDownOutside?: DismissableLayerProps["onPointerDownOutside"];
@@ -301,13 +301,15 @@ const MenuContentInternal = forwardRef<
 
     return (
       <FocusScope
-        onMountHandler={composeEventHandlers(onOpenAutoFocus, (event) => {
+        onMountAutoFocus={composeEventHandlers(onOpenAutoFocus, (event) => {
           // when opening, explicitly focus the content area only and leave
           // `onEntryFocus` in  control of focusing first item
           event.preventDefault();
           contentRef.current?.focus({ preventScroll: true });
         })}
-        onUnmountHandler={onCloseAutoFocus}
+        onUnmountAutoFocus={onCloseAutoFocus}
+        trapped={false}
+        loop={false}
       >
         <DismissableLayer
           asChild
