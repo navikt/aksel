@@ -11,7 +11,6 @@ type ComboboxWrapperProps = {
   };
   readOnly?: boolean;
   inputSize: string;
-  toggleIsListOpen: (isListOpen: boolean) => void;
 };
 
 const ComboboxWrapper = ({
@@ -20,7 +19,6 @@ const ComboboxWrapper = ({
   hasError,
   inputProps,
   inputSize,
-  toggleIsListOpen,
 }: ComboboxWrapperProps) => {
   const { cn } = useRenameCSS();
   const { toggleOpenButtonRef, clearInput, readOnly } = useInputContext();
@@ -39,7 +37,6 @@ const ComboboxWrapper = ({
 
   function onBlurWrapper(event: React.FocusEvent<HTMLDivElement>) {
     if (!wrapperRef.current?.contains(event.relatedTarget)) {
-      toggleIsListOpen(false);
       setHasFocusWithin(false);
       clearInput(event);
     }

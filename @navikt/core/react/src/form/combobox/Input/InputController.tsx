@@ -49,6 +49,7 @@ export const InputController = forwardRef<
     inputRef,
     toggleOpenButtonRef,
     readOnly,
+    setAnchorRef,
   } = useInputContext();
 
   const { activeDecendantId, toggleIsListOpen } = useFilteredOptionsContext();
@@ -57,7 +58,7 @@ export const InputController = forwardRef<
   const mergedInputRef = useMergeRefs(inputRef, ref);
 
   return (
-    <Floating.Anchor asChild>
+    <Floating.Anchor asChild ref={setAnchorRef}>
       <div
         className={cn("navds-combobox__wrapper-inner navds-text-field__input", {
           "navds-combobox__wrapper-inner--virtually-unfocused":
