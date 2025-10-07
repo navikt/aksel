@@ -1,7 +1,7 @@
 /* https://github.com/radix-ui/primitives/blob/main/packages/react/compose-refs/src/composeRefs.tsx */
 import React from "react";
 
-type PossibleRef<T> = React.RefAttributes<T>["ref"] | undefined;
+type PossibleRef<T> = React.Ref<T> | undefined;
 
 // https://github.com/gregberge/react-merge-refs
 /**
