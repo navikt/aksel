@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, fireEvent, userEvent, within } from "storybook/test";
+import { VStack } from "../../layout/stack";
 import { FocusScope, type FocusScopeProps } from "./FocusScope";
 
 const meta: Meta<typeof FocusScope> = {
@@ -13,7 +14,7 @@ const meta: Meta<typeof FocusScope> = {
 
 export default meta;
 
-type Story = StoryObj<typeof FocusScope>;
+type Story = StoryObj<typeof BaseFocusScopeComponent>;
 
 const Field_ONE = "Name";
 const Field_TWO = "Email";
@@ -136,15 +137,7 @@ export const ReFocusPrevTrappedItem: Story = {
 };
 
 export const MountAutofocus: Story = {
-  render: () => {
-    const [show, setShow] = useState(false);
-    return (
-      <>
-        <button onClick={() => setShow(true)}>show</button>
-        {show && <BaseFocusScopeComponent />}
-      </>
-    );
-  },
+  render: BaseFocusScopeComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -154,27 +147,12 @@ export const MountAutofocus: Story = {
     expect(first).toHaveFocus();
   },
   args: {
-    trapped: true,
+    showByDefault: false,
   },
 };
 
 export const MountAutofocusAvoidLink: Story = {
-  render: (props) => {
-    const [show, setShow] = useState(false);
-    return (
-      <>
-        <button onClick={() => setShow(true)}>show</button>
-        {show && (
-          <FocusScope {...props}>
-            <form>
-              <a href="/">link</a>
-              <TestField label={Field_ONE} />
-            </form>
-          </FocusScope>
-        )}
-      </>
-    );
-  },
+  render: BaseFocusScopeComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -182,26 +160,15 @@ export const MountAutofocusAvoidLink: Story = {
     await userEvent.click(showButton);
     const first = canvas.getByLabelText(Field_ONE);
     expect(first).toHaveFocus();
+  },
+  args: {
+    showByDefault: false,
+    firstChild: <a href="/">link</a>,
   },
 };
 
 export const MountAutofocusAvoidHiddenInput: Story = {
-  render: (props) => {
-    const [show, setShow] = useState(false);
-    return (
-      <>
-        <button onClick={() => setShow(true)}>show</button>
-        {show && (
-          <FocusScope {...props}>
-            <form>
-              <input hidden type="text" />
-              <TestField label={Field_ONE} />
-            </form>
-          </FocusScope>
-        )}
-      </>
-    );
-  },
+  render: BaseFocusScopeComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -209,26 +176,15 @@ export const MountAutofocusAvoidHiddenInput: Story = {
     await userEvent.click(showButton);
     const first = canvas.getByLabelText(Field_ONE);
     expect(first).toHaveFocus();
+  },
+  args: {
+    showByDefault: false,
+    firstChild: <input hidden type="text" />,
   },
 };
 
 export const MountAutofocusAvoidNegativeTabIndex: Story = {
-  render: (props) => {
-    const [show, setShow] = useState(false);
-    return (
-      <>
-        <button onClick={() => setShow(true)}>show</button>
-        {show && (
-          <FocusScope {...props}>
-            <form>
-              <div tabIndex={-1}>content</div>
-              <TestField label={Field_ONE} />
-            </form>
-          </FocusScope>
-        )}
-      </>
-    );
-  },
+  render: BaseFocusScopeComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -237,18 +193,14 @@ export const MountAutofocusAvoidNegativeTabIndex: Story = {
     const first = canvas.getByLabelText(Field_ONE);
     expect(first).toHaveFocus();
   },
+  args: {
+    showByDefault: false,
+    firstChild: <div tabIndex={-1}>content</div>,
+  },
 };
 
 export const MountAutofocusPrevented: Story = {
-  render: (props) => {
-    const [show, setShow] = useState(false);
-    return (
-      <>
-        <button onClick={() => setShow(true)}>show</button>
-        {show && <BaseFocusScopeComponent {...props} />}
-      </>
-    );
-  },
+  render: BaseFocusScopeComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -262,15 +214,7 @@ export const MountAutofocusPrevented: Story = {
 };
 
 export const FocusPrevActiveItemOnUnmount: Story = {
-  render: (props) => {
-    const [show, setShow] = useState(false);
-    return (
-      <>
-        <button onClick={() => setShow((x) => !x)}>show</button>
-        {show && <BaseFocusScopeComponent {...props} />}
-      </>
-    );
-  },
+  render: BaseFocusScopeComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -281,19 +225,13 @@ export const FocusPrevActiveItemOnUnmount: Story = {
     await userEvent.click(showButton);
     expect(showButton).toHaveFocus();
   },
+  args: {
+    showByDefault: false,
+  },
 };
 
 export const FocusBodyOnUnmount: Story = {
-  render: (props) => {
-    const [show, setShow] = useState(false);
-    return (
-      <>
-        {!show && <button onClick={() => setShow(true)}>show</button>}
-        {show && <BaseFocusScopeComponent {...props} />}
-        {show && <button onClick={() => setShow(false)}>hide</button>}
-      </>
-    );
-  },
+  render: BaseFocusScopeComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -301,23 +239,19 @@ export const FocusBodyOnUnmount: Story = {
     await userEvent.click(showButton);
     expect(canvas.getByLabelText(Field_ONE)).toHaveFocus();
 
+    showButton.remove();
+
     const hideButton = canvas.getByText("hide");
     await userEvent.click(hideButton);
     expect(document.body).toHaveFocus();
   },
+  args: {
+    showByDefault: false,
+  },
 };
 
 export const UnmountAutofocusPrevented: Story = {
-  render: (props) => {
-    const [show, setShow] = useState(false);
-    return (
-      <>
-        {!show && <button onClick={() => setShow(true)}>show</button>}
-        {show && <BaseFocusScopeComponent {...props} />}
-        {show && <button onClick={() => setShow(false)}>hide</button>}
-      </>
-    );
-  },
+  render: BaseFocusScopeComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -333,24 +267,52 @@ export const UnmountAutofocusPrevented: Story = {
   },
   args: {
     onUnmountAutoFocus: (event) => event.preventDefault(),
+    showByDefault: false,
   },
 };
 
 /* ------------------------------- Test utils ------------------------------- */
-function BaseFocusScopeComponent(props: FocusScopeProps) {
+function BaseFocusScopeComponent({
+  showByDefault = true,
+  firstChild,
+  ...props
+}: FocusScopeProps & {
+  showByDefault?: boolean;
+  firstChild?: React.ReactNode;
+}) {
+  const [show, setShow] = useState(showByDefault);
+
   return (
-    <div>
-      <button>outside-button-start</button>
-      <FocusScope {...props}>
-        <form>
-          <TestField label={Field_ONE} />
-          <TestField label={Field_TWO} />
-          <button>{BUTTON_THREE}</button>
-        </form>
-      </FocusScope>
+    <VStack gap="space-12" className="sb-focus-scope-tests">
+      <style>
+        {`.sb-focus-scope-tests :where(:focus, :focus-visible) { outline: 4px solid black; outline-offset: 2px; z-index: 2; }`}
+      </style>
+      <div>
+        <button onClick={() => setShow(true)}>show</button>
+        <button>outside-button-start</button>
+      </div>
+      {show && (
+        <FocusScope {...props}>
+          <VStack
+            gap="space-4"
+            as="form"
+            align="start"
+            padding="space-8"
+            style={{ border: "1px solid black" }}
+          >
+            {firstChild}
+            <TestField label={Field_ONE} />
+            <TestField label={Field_TWO} />
+            <button>{BUTTON_THREE}</button>
+          </VStack>
+        </FocusScope>
+      )}
       <TestField label="outside" />
-      <button>outside-button-end</button>
-    </div>
+      <div>
+        <button>outside-button-end</button>
+        {show && <button onClick={() => setShow(false)}>hide</button>}
+      </div>
+    </VStack>
   );
 }
 
