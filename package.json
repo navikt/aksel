@@ -15,7 +15,7 @@
     "lint:biome": "yarn biome lint .",
     "storybook": "WITH_WEBSITE=true storybook dev -p 6006",
     "storybook:aksel": "yarn storybook dev -c aksel.nav.no/website/.storybook -p 6007",
-    "storybook:test": "vitest run --project=storybook --silent",
+    "storybook:test": "vitest run --config ./.storybook/vitest.config.ts --project=storybook --silent",
     "build:storybook": "storybook build",
     "chromatic": "npx chromatic --only-changed --build-script-name build:storybook-chromatic",
     "build:storybook-chromatic": "cross-env CHROMATIC=true storybook build",
