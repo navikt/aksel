@@ -56,7 +56,7 @@ export default {
 
   staticDirs: ["./public"],
 
-  stories: resolveStoriePaths,
+  stories: resolveStoriesPaths,
 
   addons: [
     getAbsolutePath("@storybook/addon-a11y"),
