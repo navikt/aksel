@@ -23,7 +23,7 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement;
   /**
    * When `true`, tabbing from last item will focus first tabbable
-   * and shift+tab from first item will focus last tababble element.
+   * and shift+tab from first item will focus last tabbable element.
    *
    * - Links (`<a>` elements), are not considered tabbable for the purpose of looping.
    * - Hidden inputs (i.e. `<input type="hidden">`) are not considered tabbable.
