@@ -15,14 +15,10 @@ const Example = () => {
       >
         <Button onClick={() => setOpen((x) => !x)}>Velg måned</Button>
       </MonthPicker>
-      {month && (
-        <div>
-          {month.toLocaleDateString(undefined, {
-            year: "numeric",
-            month: "long",
-          })}
-        </div>
-      )}
+      {month?.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "long",
+      })}
     </VStack>
   );
 };

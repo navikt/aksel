@@ -1,4 +1,4 @@
-import { Box, MonthPicker, useMonthpicker } from "@navikt/ds-react";
+import { MonthPicker, VStack, useMonthpicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -9,14 +9,15 @@ const Example = () => {
   });
 
   return (
-    <Box minHeight="24rem">
+    <VStack gap="space-16" minHeight="24rem">
       <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input {...inputProps} label="Velg måned" />
       </MonthPicker>
-      {selectedMonth && (
-        <Box paddingBlock="space-16">{selectedMonth.getMonth()}</Box>
-      )}
-    </Box>
+      {selectedMonth?.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "2-digit",
+      })}
+    </VStack>
   );
 };
 
@@ -30,5 +31,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Vi anbefaler å bruke useMonthpicker-hook hvis man har et input-felt",
+  desc: "Vi anbefaler å bruke `useMonthpicker`-hooken hvis du har et input-felt.",
 };
