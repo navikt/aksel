@@ -9,6 +9,11 @@ on:
     paths:
       - "aksel.nav.no/**"
 
+permissions:
+  actions: read
+  contents: read
+  packages: write
+
 jobs:
   prebuild-app-for-playwright:
     name: "Prebuild app for Playwright tests"
