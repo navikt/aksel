@@ -13,6 +13,7 @@ export default defineConfig({
           storybookTest({
             configDir: "./.storybook",
             tags: { exclude: ["skip-test"] },
+            storybookScript: "yarn storybook --ci",
           }),
         ],
         test: {
