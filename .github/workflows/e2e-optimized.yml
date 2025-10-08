@@ -73,17 +73,17 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Run Playwright
-        env:
-          SANITY_READ: ${{ secrets.SANITY_READ }}
-          SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
-        run: yarn e2e:docker --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
-
       - name: Install dependencies
         run: yarn --immutable
         shell: bash
         env:
           NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
+      - name: Run Playwright
+        env:
+          SANITY_READ: ${{ secrets.SANITY_READ }}
+          SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
+        run: yarn e2e:docker --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
