@@ -28,8 +28,8 @@ type KodeEksemplerContextT = {
   showCode: boolean;
   toggleShowCode: () => void;
   compact: boolean;
-  resizerRef: React.RefObject<HTMLDivElement>;
-  iframeRef: React.RefObject<HTMLIFrameElement>;
+  resizerRef: React.MutableRefObject<HTMLDivElement | null>;
+  iframeRef: React.MutableRefObject<HTMLIFrameElement | null>;
 };
 
 const KodeEksemplerContext = createContext<KodeEksemplerContextT | null>(null);

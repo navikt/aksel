@@ -1,6 +1,6 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { expect, userEvent, within } from "@storybook/test";
+import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";

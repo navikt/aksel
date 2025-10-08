@@ -67,6 +67,7 @@ const useVirtualFocus = (
 
     if (!activeElement) {
       setActiveAndScrollToElement(elementsAbleToReceiveFocus[0]);
+
       return;
     }
     const _currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);

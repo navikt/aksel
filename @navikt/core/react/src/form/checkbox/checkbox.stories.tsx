@@ -1,11 +1,11 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import VStack from "../../layout/stack/VStack";
 import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import Checkbox from "./Checkbox";
 import CheckboxGroup, { CheckboxGroupProps } from "./CheckboxGroup";
 
-const meta: Meta<typeof Checkbox> = {
+const meta: Meta<typeof CheckboxGroup> = {
   title: "ds-react/Checkbox",
   component: CheckboxGroup,
   subcomponents: { Checkbox },

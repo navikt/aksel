@@ -8,16 +8,18 @@ interface InputContextValue extends FormFieldType {
   clearInput: NonNullable<ComboboxProps["onClear"]>;
   error?: ComboboxProps["error"];
   focusInput: () => void;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
   value: string;
   setValue: (text: string) => void;
   onChange: (newValue: string) => void;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   shouldAutocomplete?: boolean;
-  toggleOpenButtonRef: React.RefObject<HTMLDivElement>;
+  toggleOpenButtonRef: React.MutableRefObject<HTMLDivElement | null>;
   hideCaret: boolean;
   setHideCaret: React.Dispatch<React.SetStateAction<boolean>>;
+  anchorRef: HTMLDivElement | null;
+  setAnchorRef: React.Dispatch<React.SetStateAction<HTMLDivElement | null>>;
 }
 
 const [InputContextProvider, useInputContext] =
@@ -75,6 +77,7 @@ const InputProvider = ({ children, value: props }: Props) => {
   const toggleOpenButtonRef = useRef<HTMLDivElement>(null);
   const [internalValue, setInternalValue] = useState<string>(defaultValue);
   const [hideCaret, setHideCaret] = useState(false);
+  const [anchorRef, setAnchorRef] = useState<HTMLDivElement | null>(null);
 
   const value = useMemo(
     () => String(externalValue ?? internalValue),
@@ -127,6 +130,8 @@ const InputProvider = ({ children, value: props }: Props) => {
     toggleOpenButtonRef,
     hideCaret,
     setHideCaret,
+    anchorRef,
+    setAnchorRef,
   };
 
   return (

@@ -1,4 +1,4 @@
-import type { Meta, StoryFn, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { ComponentIcon } from "@navikt/aksel-icons";
 import { Tag, TagProps } from ".";

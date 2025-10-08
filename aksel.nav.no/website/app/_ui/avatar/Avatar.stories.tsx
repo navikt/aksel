@@ -1,4 +1,4 @@
-import { type Meta, type StoryFn } from "@storybook/react";
+import { type Meta, type StoryFn } from "@storybook/nextjs";
 import "@navikt/ds-css/darkside";
 import {
   Accordion,

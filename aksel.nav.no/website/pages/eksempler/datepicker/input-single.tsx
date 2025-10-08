@@ -27,5 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Vi anbefaler å bruke useDatepicker-hook hvis man har et input-felt",
+  desc: "Vi anbefaler å bruke `useDatepicker`-hooken hvis du har et input-felt.",
 };

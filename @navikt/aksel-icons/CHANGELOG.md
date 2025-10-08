@@ -1,5 +1,15 @@
 # @navikt/aksel-icons
 
+## 7.32.1
+
+## 7.32.0
+
+### Minor Changes
+
+- Icons: Updated `SignLanguageTwoHands`-design. ([#4115](https://github.com/navikt/aksel/pull/4115))
+
+- Icons: :tada: Added some new icons `ChairTable`, `Footprint`, `Lifebuoy`, `OpenBook`, `OpenMagazine` and `Slide`. ([#4115](https://github.com/navikt/aksel/pull/4115))
+
 ## 7.31.0
 
 ## 7.30.1

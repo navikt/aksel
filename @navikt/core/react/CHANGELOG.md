@@ -1,5 +1,23 @@
 # @navikt/ds-react
 
+## 7.32.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.32.1
+  - @navikt/aksel-icons@7.32.1
+
+## 7.32.0
+
+### Patch Changes
+
+- ReadMore: You can now reach the content by tabbing ([#4116](https://github.com/navikt/aksel/pull/4116))
+
+- Updated dependencies [[`ca4880e`](https://github.com/navikt/aksel/commit/ca4880ee162b882d8bf52d8e27c4c8d82349765e), [`ca4880e`](https://github.com/navikt/aksel/commit/ca4880ee162b882d8bf52d8e27c4c8d82349765e)]:
+  - @navikt/aksel-icons@7.32.0
+  - @navikt/ds-tokens@7.32.0
+
 ## 7.31.0
 
 ### Minor Changes

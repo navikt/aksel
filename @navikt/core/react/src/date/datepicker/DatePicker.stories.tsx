@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { isSameDay } from "date-fns";
 import React, { useState } from "react";
 import { Button } from "../../button";
@@ -489,6 +489,33 @@ export const ColorRole = () => (
     />
   </div>
 );
+
+export const ChromaticSmallMobile: Story = {
+  render: () => {
+    const { datepickerProps, inputProps } = useDatepicker({
+      fromDate: new Date("Jan 10 2020"),
+      toDate: new Date("Jan 11 2020"),
+    });
+
+    return (
+      <DatePicker {...datepickerProps} dropdownCaption open>
+        <DatePicker.Input {...inputProps} label="Velg dato" />
+      </DatePicker>
+    );
+  },
+  parameters: {
+    chromatic: {
+      disable: false,
+      modes: {
+        sm: {
+          viewport: {
+            width: 320,
+          },
+        },
+      },
+    },
+  },
+};
 
 export const Chromatic: Story = {
   render: () => (
