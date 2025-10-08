@@ -111,7 +111,7 @@ function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, "package.json")));
 }
 
-function resolveStoriePaths() {
+function resolveStoriesPaths() {
   const paths = [
     "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "./docs/*.mdx",
