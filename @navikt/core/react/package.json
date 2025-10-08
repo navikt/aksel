@@ -643,7 +643,7 @@
     "clean": "rimraf cjs esm",
     "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup && yarn copy-types",
     "watch": "tsc --watch -p tsconfig.esm.json",
-    "test": "TZ=UTC vitest run -c tests/vitest.config.ts",
+    "test": "TZ=UTC vitest run -c tests/vitest.config.ts --silent",
     "test:watch": "TZ=UTC vitest watch -c tests/vitest.config.ts",
     "copy-types": "copyfiles -f ./src/types/theme.d.ts ./esm/types"
   },
@@ -674,7 +674,7 @@
     "swr": "^2.3.6",
     "tsc-alias": "1.8.16",
     "tsx": "^4.20.6",
-    "typescript": "5.8.3",
+    "typescript": "5.9.3",
     "vitest": "^3.2.4"
   },
   "peerDependencies": {

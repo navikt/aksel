@@ -60,13 +60,13 @@ describe("format-file-size", () => {
 
 function createLargeMockFile(sizeInBytes: number): File {
   const chunkSize = 1024 * 1024; // 1MB chunk size
-  const chunks: Uint8Array[] = [];
+  const chunks: ArrayBuffer[] = [];
 
   for (let i = 0; i < sizeInBytes; i += chunkSize) {
     const size = Math.min(chunkSize, sizeInBytes - i);
     const chunk = new Uint8Array(size);
     chunk.fill("a".charCodeAt(0));
-    chunks.push(chunk);
+    chunks.push(chunk.buffer);
   }
 
   const blob = new Blob(chunks, { type: "text/plain" });
