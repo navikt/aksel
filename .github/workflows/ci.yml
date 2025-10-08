@@ -44,7 +44,7 @@ jobs:
         run: yarn validate:eksempler
 
   test:
-    name: "Unit tests"
+    name: "Tests: Unit and integration"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -61,7 +61,7 @@ jobs:
         run: yarn test
 
   ui:
-    name: "UI tests"
+    name: "Tests: UI tests"
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.56.0-noble
@@ -77,4 +77,4 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Test UI
-        run: storybook:test
+        run: yarn storybook:test
