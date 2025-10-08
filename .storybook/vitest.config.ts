@@ -23,6 +23,7 @@ export default defineConfig({
             headless: true,
             provider: "playwright",
             instances: [{ browser: "chromium" }],
+            fileParallelism: true,
           },
           setupFiles: ["./.storybook/vitest.setup.ts"],
         },
