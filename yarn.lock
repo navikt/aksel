@@ -27493,6 +27493,7 @@ __metadata:
     boring-avatars: "npm:1.10.1"
     clsx: "npm:^2.1.0"
     codesandbox-import-utils: "npm:^2.2.3"
+    concurrently: "npm:9.0.1"
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^10.0.0"
     date-fns: "npm:^4.0.0"
