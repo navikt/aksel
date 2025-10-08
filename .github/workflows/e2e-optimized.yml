@@ -13,6 +13,7 @@ permissions:
   actions: read
   contents: read
   packages: write
+  id-token: write
 
 jobs:
   prebuild-app-for-playwright:
@@ -80,10 +81,11 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: Run Playwright
+        shell: bash
+        run: yarn e2e:docker --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           SANITY_READ: ${{ secrets.SANITY_READ }}
           SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
-        run: yarn e2e:docker --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
