@@ -9,16 +9,18 @@ import { Slot } from "../../slot/Slot";
 import { useMergeRefs } from "../../util/hooks";
 import { useEventCallback } from "../hooks/useEventCallback";
 
-const AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
-const AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
+const AUTOFOCUS_ON_MOUNT = "focusBoundary.autoFocusOnMount";
+const AUTOFOCUS_ON_UNMOUNT = "focusBoundary.autoFocusOnUnmount";
 const EVENT_OPTIONS = { bubbles: false, cancelable: true };
 
-type FocusableTarget = HTMLElement | { focus(): void };
-
 /* -------------------------------------------------------------------------- */
-/*                                 FocusScope                                 */
+/*                                 FocusBoundary                                 */
 /* -------------------------------------------------------------------------- */
-interface FocusScopeProps extends React.HTMLAttributes<HTMLDivElement> {
+interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * FocusBoundary expects a single child element since its a slotted component.
+   */
+  children: React.ReactElement;
   /**
    * When `true`, tabbing from last item will focus first tabbable
    * and shift+tab from first item will focus last tababble element.
@@ -31,7 +33,7 @@ interface FocusScopeProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   loop?: boolean;
   /**
-   * When `true`, focus cannot escape the focus scope via keyboard,
+   * When `true`, focus cannot escape the focus boundary via keyboard,
    * pointer, or a programmatic focus.
    * @defaultValue false
    */
@@ -48,25 +50,25 @@ interface FocusScopeProps extends React.HTMLAttributes<HTMLDivElement> {
   onUnmountAutoFocus?: (event: Event) => void;
 }
 
-const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
+const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
   (
     {
       loop = false,
       trapped = false,
       onMountAutoFocus: onMountAutoFocusProp,
       onUnmountAutoFocus: onUnmountAutoFocusProp,
-      ...scopeProps
-    }: FocusScopeProps,
+      ...restProps
+    }: FocusBoundaryProps,
     forwardedRef,
   ) => {
     const onMountAutoFocus = useEventCallback(onMountAutoFocusProp);
     const onUnmountAutoFocus = useEventCallback(onUnmountAutoFocusProp);
 
     const lastFocusedElementRef = useRef<HTMLElement | null>(null);
-    const mergedRefs = useMergeRefs(forwardedRef, (node) => setContainer(node));
     const [container, setContainer] = useState<HTMLElement | null>(null);
+    const mergedRefs = useMergeRefs(forwardedRef, setContainer);
 
-    const focusScope = useRef<FocusScopeAPI>({
+    const focusBoundary = useRef<FocusBoundaryAPI>({
       paused: false,
       pause() {
         this.paused = true;
@@ -83,7 +85,7 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
       }
 
       function handleFocusIn(event: FocusEvent) {
-        if (focusScope.paused || container === null) {
+        if (focusBoundary.paused || container === null) {
           return;
         }
 
@@ -96,7 +98,7 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
       }
 
       function handleFocusOut(event: FocusEvent) {
-        if (focusScope.paused || container === null) {
+        if (focusBoundary.paused || container === null) {
           return;
         }
         const relatedTarget = event.relatedTarget as HTMLElement | null;
@@ -130,7 +132,10 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
        * to keep focus trapped correctly instead.
        */
       const handleMutations = (mutations: MutationRecord[]) => {
-        if (document.activeElement !== document.body) return;
+        if (document.activeElement !== document.body) {
+          return;
+        }
+
         if (mutations.some((mutation) => mutation.removedNodes.length > 0)) {
           focus(container);
         }
@@ -146,7 +151,7 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
         document.removeEventListener("focusout", handleFocusOut);
         observer.disconnect();
       };
-    }, [trapped, container, focusScope.paused]);
+    }, [trapped, container, focusBoundary.paused]);
 
     /* Handles autofocus on mount and unmount */
     useEffect(() => {
@@ -154,7 +159,7 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
         return;
       }
 
-      focusScopesStack.add(focusScope);
+      focusBoundarysStack.add(focusBoundary);
       const currentActiveElement = document.activeElement as HTMLElement | null;
       const containsActiveElement =
         currentActiveElement && container.contains(currentActiveElement);
@@ -215,15 +220,15 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
             onUnmountAutoFocus,
           );
 
-          focusScopesStack.remove(focusScope);
+          focusBoundarysStack.remove(focusBoundary);
         }, 0);
       };
-    }, [container, onMountAutoFocus, onUnmountAutoFocus, focusScope]);
+    }, [container, onMountAutoFocus, onUnmountAutoFocus, focusBoundary]);
 
     /* Takes care of looping focus */
     const handleKeyDown = useCallback(
       (event: React.KeyboardEvent) => {
-        if ((!loop && !trapped) || focusScope.paused) {
+        if ((!loop && !trapped) || focusBoundary.paused) {
           return;
         }
 
@@ -233,7 +238,7 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
           !event.ctrlKey &&
           !event.metaKey;
 
-        const focusedElement = document.activeElement as HTMLElement | null;
+        const focusedElement = document.activeElement;
 
         if (isTabKey && focusedElement) {
           const containerTarget = event.currentTarget as HTMLElement;
@@ -264,13 +269,13 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
           }
         }
       },
-      [loop, trapped, focusScope.paused],
+      [loop, trapped, focusBoundary.paused],
     );
 
     return (
       <Slot
         tabIndex={-1}
-        {...scopeProps}
+        {...restProps}
         ref={mergedRefs}
         onKeyDown={handleKeyDown}
       />
@@ -278,7 +283,7 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
   },
 );
 
-/* ---------------------------- FocusScope utils ---------------------------- */
+/* ---------------------------- FocusBoundary utils ---------------------------- */
 /**
  * Returns the first and last tabbable elements inside a container as a tuple.
  */
@@ -354,7 +359,7 @@ function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
   return false;
 }
 
-function focus(element?: FocusableTarget | null, { select = false } = {}) {
+function focus(element?: HTMLElement | null, { select = false } = {}) {
   if (!element?.focus) {
     return;
   }
@@ -376,28 +381,28 @@ function focus(element?: FocusableTarget | null, { select = false } = {}) {
     element.select();
 }
 
-/* ---------------------------- FocusScope stack ---------------------------- */
-type FocusScopeAPI = { paused: boolean; pause(): void; resume(): void };
-const focusScopesStack = createFocusScopesStack();
+/* ---------------------------- FocusBoundary stack ---------------------------- */
+type FocusBoundaryAPI = { paused: boolean; pause(): void; resume(): void };
+const focusBoundarysStack = createFocusBoundarysStack();
 
-function createFocusScopesStack() {
-  /* A stack of focus scopes, with the active one at the top */
-  let stack: FocusScopeAPI[] = [];
+function createFocusBoundarysStack() {
+  /* A stack of focus-boundaries, with the active one at the top */
+  let stack: FocusBoundaryAPI[] = [];
 
   return {
-    add(focusScope: FocusScopeAPI) {
-      /* Pause the currently active focus scope (at the top of the stack) */
-      const activeFocusScope = stack[0];
-      if (focusScope !== activeFocusScope) {
-        activeFocusScope?.pause();
+    add(focusBoundary: FocusBoundaryAPI) {
+      /* Pause the currently active focus-boundary (at the top of the stack) */
+      const activeFocusBoundary = stack[0];
+      if (focusBoundary !== activeFocusBoundary) {
+        activeFocusBoundary?.pause();
       }
       /* remove in case it already exists (because we'll re-add it at the top of the stack) */
-      stack = arrayRemove(stack, focusScope);
-      stack.unshift(focusScope);
+      stack = arrayRemove(stack, focusBoundary);
+      stack.unshift(focusBoundary);
     },
 
-    remove(focusScope: FocusScopeAPI) {
-      stack = arrayRemove(stack, focusScope);
+    remove(focusBoundary: FocusBoundaryAPI) {
+      stack = arrayRemove(stack, focusBoundary);
       stack[0]?.resume();
     },
   };
@@ -416,5 +421,5 @@ function removeLinks(items: HTMLElement[]) {
   return items.filter((item) => item.tagName !== "A");
 }
 
-export { FocusScope };
-export type { FocusScopeProps };
+export { FocusBoundary };
+export type { FocusBoundaryProps };

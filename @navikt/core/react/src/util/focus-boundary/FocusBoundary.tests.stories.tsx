@@ -4,11 +4,11 @@ import { act } from "@testing-library/react";
 import React, { useState } from "react";
 import { expect, fireEvent, userEvent, within } from "storybook/test";
 import { VStack } from "../../layout/stack";
-import { FocusScope, type FocusScopeProps } from "./FocusScope";
+import { FocusBoundary, type FocusBoundaryProps } from "./FocusBoundary";
 
-const meta: Meta<typeof FocusScope> = {
-  title: "Utilities/FocusScope/Tests",
-  component: FocusScope,
+const meta: Meta<typeof FocusBoundary> = {
+  title: "Utilities/FocusBoundary/Tests",
+  component: FocusBoundary,
   parameters: {
     chromatic: { disable: true },
   },
@@ -16,14 +16,14 @@ const meta: Meta<typeof FocusScope> = {
 
 export default meta;
 
-type Story = StoryObj<typeof BaseFocusScopeComponent>;
+type Story = StoryObj<typeof BaseFocusBoundaryComponent>;
 
 const Field_ONE = "Name";
 const Field_TWO = "Email";
 const BUTTON_THREE = "Submit";
 
 export const Loop: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -55,7 +55,7 @@ export const Loop: Story = {
 };
 
 export const TrappedNoLoop: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -88,7 +88,7 @@ export const TrappedNoLoop: Story = {
 };
 
 export const Trapped: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -117,7 +117,7 @@ export const Trapped: Story = {
 };
 
 export const ReFocusPrevTrappedItem: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -142,7 +142,7 @@ export const ReFocusPrevTrappedItem: Story = {
 };
 
 export const RemoveFocusedItemWhenTrapped: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -161,7 +161,7 @@ export const RemoveFocusedItemWhenTrapped: Story = {
 };
 
 export const MountAutofocus: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -176,7 +176,7 @@ export const MountAutofocus: Story = {
 };
 
 export const MountAutofocusAvoidLink: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: MountAutofocus.play,
   args: {
     showByDefault: false,
@@ -185,7 +185,7 @@ export const MountAutofocusAvoidLink: Story = {
 };
 
 export const MountAutofocusAvoidHiddenInput: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: MountAutofocus.play,
   args: {
     showByDefault: false,
@@ -194,7 +194,7 @@ export const MountAutofocusAvoidHiddenInput: Story = {
 };
 
 export const MountAutofocusAvoidNegativeTabIndex: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: MountAutofocus.play,
   args: {
     showByDefault: false,
@@ -203,7 +203,7 @@ export const MountAutofocusAvoidNegativeTabIndex: Story = {
 };
 
 export const MountAutofocusPrevented: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -217,7 +217,7 @@ export const MountAutofocusPrevented: Story = {
 };
 
 export const FocusPrevActiveItemOnUnmount: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -234,7 +234,7 @@ export const FocusPrevActiveItemOnUnmount: Story = {
 };
 
 export const FocusBodyOnUnmount: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -254,7 +254,7 @@ export const FocusBodyOnUnmount: Story = {
 };
 
 export const UnmountAutofocusPrevented: Story = {
-  render: BaseFocusScopeComponent,
+  render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -275,11 +275,11 @@ export const UnmountAutofocusPrevented: Story = {
 };
 
 /* ------------------------------- Test utils ------------------------------- */
-function BaseFocusScopeComponent({
+function BaseFocusBoundaryComponent({
   showByDefault = true,
   firstChild,
   ...props
-}: FocusScopeProps & {
+}: FocusBoundaryProps & {
   showByDefault?: boolean;
   firstChild?: React.ReactNode;
 }) {
@@ -295,7 +295,7 @@ function BaseFocusScopeComponent({
         <button>outside-button-start</button>
       </div>
       {show && (
-        <FocusScope {...props} data-testid="focus-scope">
+        <FocusBoundary {...props} data-testid="focus-scope">
           <VStack
             gap="space-4"
             as="form"
@@ -308,7 +308,7 @@ function BaseFocusScopeComponent({
             <TestField label={Field_TWO} />
             <button>{BUTTON_THREE}</button>
           </VStack>
-        </FocusScope>
+        </FocusBoundary>
       )}
       <TestField label="outside" />
       <div>

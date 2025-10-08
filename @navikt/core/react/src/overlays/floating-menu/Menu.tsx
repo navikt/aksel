@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Portal } from "../../portal";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
-import { FocusScope } from "../../util/focus-scope/FocusScope";
+import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { useCallbackRef, useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
@@ -237,7 +237,7 @@ const MenuRootContentModal = forwardRef<
 
 /* -------------------------- Menu content internals ------------------------- */
 type MenuContentInternalElement = React.ElementRef<typeof Floating.Content>;
-type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
+type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusBoundary>;
 type DismissableLayerProps = React.ComponentPropsWithoutRef<
   typeof DismissableLayer
 >;
@@ -300,7 +300,7 @@ const MenuContentInternal = forwardRef<
     );
 
     return (
-      <FocusScope
+      <FocusBoundary
         onMountAutoFocus={composeEventHandlers(onOpenAutoFocus, (event) => {
           // when opening, explicitly focus the content area only and leave
           // `onEntryFocus` in  control of focusing first item
@@ -365,7 +365,7 @@ const MenuContentInternal = forwardRef<
             />
           </RovingFocus>
         </DismissableLayer>
-      </FocusScope>
+      </FocusBoundary>
     );
   },
 );
