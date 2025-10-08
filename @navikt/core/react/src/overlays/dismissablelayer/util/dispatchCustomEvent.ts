@@ -4,12 +4,16 @@ type CustomFocusEvent = CustomEvent<{ originalEvent: FocusEvent }>;
 type CustomPointerDownEvent = CustomEvent<{
   originalEvent: PointerEvent;
 }>;
+type CustomPointerUpEvent = CustomEvent<{
+  originalEvent: PointerEvent;
+}>;
 
-export type { CustomFocusEvent, CustomPointerDownEvent };
+export type { CustomFocusEvent, CustomPointerDownEvent, CustomPointerUpEvent };
 
 export const CUSTOM_EVENTS = {
   FOCUS_OUTSIDE: "AKSEL_FOCUS_OUTSIDE",
   POINTER_DOWN_OUTSIDE: "AKSEL_POINTER_DOWN_OUTSIDE",
+  POINTER_UP_OUTSIDE: "AKSEL_POINTER_UP_OUTSIDE",
 };
 
 /**
