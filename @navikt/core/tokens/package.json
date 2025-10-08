@@ -42,7 +42,7 @@
     "lodash": "^4.17.21",
     "style-dictionary": "^4.1.1",
     "tsx": "^4.20.6",
-    "typescript": "5.8.3",
+    "typescript": "5.9.3",
     "vitest": "^3.2.4"
   },
   "publishConfig": {
