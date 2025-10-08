@@ -12,6 +12,7 @@
     "e2e": "yarn build && yarn start-server-and-test 'yarn start' http://localhost:3000 'yarn playwright'",
     "e2e:full": "yarn build && yarn generate-testpaths && start-server-and-test start http://localhost:3000 playwright",
     "e2e:ci-full": "yarn generate-testpaths && start-server-and-test start http://localhost:3000 playwright",
+    "e2e:docker": "yarn generate-testpaths && playwright test",
     "update:rss": "yarn tsx --env-file-if-exists=.env ./scripts/generate-rss-feed",
     "update:props": "yarn tsx --env-file-if-exists=.env ./scripts/update-props",
     "update:tokens": "yarn tsx --env-file-if-exists=.env ./scripts/update-tokens",
