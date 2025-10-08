@@ -61,7 +61,7 @@ jobs:
         run: yarn test
 
   ui:
-    name: "Tests: UI tests"
+    name: "Tests: UI"
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.56.0-noble
