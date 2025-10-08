@@ -11148,7 +11148,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.2.5, classnames@npm:^2.3.2":
+"classnames@npm:^2.2.5":
   version: 2.5.1
   resolution: "classnames@npm:2.5.1"
   checksum: 10/58eb394e8817021b153bb6e7d782cfb667e4ab390cb2e9dac2fc7c6b979d1cc2b2a733093955fc5c94aa79ef5c8c89f11ab77780894509be6afbb91dddd79d15
@@ -15126,17 +15126,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fuse.js@npm:^7.0.0":
+"fuse.js@npm:^7.0.0, fuse.js@npm:^7.1.0":
   version: 7.1.0
   resolution: "fuse.js@npm:7.1.0"
   checksum: 10/9f9105e54372897a46cb3e04074f0db5bd0a428320d4618276a57e6142d7502235a556f05cf87aa3c5d6d9c6fdfa06b901b78379c48aa0951672ccbc4a1bfe70
-  languageName: node
-  linkType: hard
-
-"fuzzy@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "fuzzy@npm:0.1.3"
-  checksum: 10/3cf399457f3f9832af5d72bdbf354b287d977fca6bd800fb457579a9ccf8d8faa297f70ab7fada0147591e022d817532072ab07f69490b84f5dda96051e8c3ab
   languageName: node
   linkType: hard
 
@@ -20906,9 +20899,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playroom@npm:^0.42.0":
-  version: 0.42.0
-  resolution: "playroom@npm:0.42.0"
+"playroom@npm:^0.44.3":
+  version: 0.44.3
+  resolution: "playroom@npm:0.44.3"
   dependencies:
     "@babel/core": "npm:^7.20.5"
     "@babel/parser": "npm:^7.23.4"
@@ -20927,7 +20920,6 @@ __metadata:
     "@vanilla-extract/sprinkles": "npm:^1.5.1"
     "@vanilla-extract/webpack-plugin": "npm:^2.3.6"
     babel-loader: "npm:^9.1.0"
-    classnames: "npm:^2.3.2"
     clsx: "npm:^2.1.1"
     codemirror: "npm:^5.65.10"
     command-line-args: "npm:^5.2.1"
@@ -20936,7 +20928,7 @@ __metadata:
     css-loader: "npm:^6.7.2"
     dedent: "npm:^1.5.1"
     find-up: "npm:^5.0.0"
-    fuzzy: "npm:^0.1.3"
+    fuse.js: "npm:^7.1.0"
     history: "npm:^5.3.0"
     html-webpack-plugin: "npm:^5.5.0"
     localforage: "npm:^1.10.0"
@@ -20947,9 +20939,8 @@ __metadata:
     portfinder: "npm:^1.0.32"
     prettier: "npm:^2.8.1"
     prop-types: "npm:^15.8.1"
-    re-resizable: "npm:^6.11.2"
     react-docgen-typescript: "npm:^2.2.2"
-    react-helmet: "npm:^6.1.0"
+    react-error-boundary: "npm:^4.0.13"
     react-transition-group: "npm:^4.4.5"
     read-pkg-up: "npm:^7.0.1"
     scope-eval: "npm:^1.0.0"
@@ -20965,7 +20956,7 @@ __metadata:
     react-dom: ^18 || ^19
   bin:
     playroom: bin/cli.cjs
-  checksum: 10/43df0a650aab526ca76a4214bb2bf64492a5436528daa698f1155fddb0130276b1b7568c370994f51d90d8d7df194080d2362bffaff7f966e9c8846a687f9f87
+  checksum: 10/bb6d9dc8eb809109f36b1b3847190219eb7b4698945b6cc7e4826095c760e5ee3e5da1212515755452bcd3f57f1e79ddc1943a6ef9f9b05ffd44d62e26586bea
   languageName: node
   linkType: hard
 
@@ -20979,7 +20970,7 @@ __metadata:
     babel-loader: "npm:^9.1.3"
     babel-plugin-preval: "npm:^5.1.0"
     css-loader: "npm:^6.8.1"
-    playroom: "npm:^0.42.0"
+    playroom: "npm:^0.44.3"
     react: "npm:^18.0.0"
     style-loader: "npm:^3.3.3"
   languageName: unknown
@@ -22101,16 +22092,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"re-resizable@npm:^6.11.2":
-  version: 6.11.2
-  resolution: "re-resizable@npm:6.11.2"
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10/3b814c61b77af294862bd36382b6f2e7f9a90a86f3696fd93780d39d2534c1fcbab68f63b088fc1e1935b1b9dba6c1ab8f61f4f4e6e5d16e86e5805bae40cfb6
-  languageName: node
-  linkType: hard
-
 "react-clientside-effect@npm:^1.2.7":
   version: 1.2.8
   resolution: "react-clientside-effect@npm:1.2.8"
@@ -22251,7 +22232,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-fast-compare@npm:^3.1.1, react-fast-compare@npm:^3.2.2":
+"react-error-boundary@npm:^4.0.13":
+  version: 4.1.2
+  resolution: "react-error-boundary@npm:4.1.2"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.5"
+  peerDependencies:
+    react: ">=16.13.1"
+  checksum: 10/a8b59e5ef891bb6c48874d12c72bbd1a9292a56751adeee5666e228bd3a4913084329a9c21f7baafa0df68dc6d25e18883edb25946ce5763981885cbb93786eb
+  languageName: node
+  linkType: hard
+
+"react-fast-compare@npm:^3.2.2":
   version: 3.2.2
   resolution: "react-fast-compare@npm:3.2.2"
   checksum: 10/a6826180ba75cefba1c8d3ac539735f9b627ca05d3d307fe155487f5d0228d376dac6c9708d04a283a7b9f9aee599b637446635b79c8c8753d0b4eece56c125c
@@ -22288,20 +22280,6 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10/f880eba6ae0c51b4b31920058234005c90fe1ed4d9f20b07c563e97e773affe0695dc6b2f00f68c0d4ba4442ad381f608dc88dfda59efd0901ce3ee677a460f6
-  languageName: node
-  linkType: hard
-
-"react-helmet@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "react-helmet@npm:6.1.0"
-  dependencies:
-    object-assign: "npm:^4.1.1"
-    prop-types: "npm:^15.7.2"
-    react-fast-compare: "npm:^3.1.1"
-    react-side-effect: "npm:^2.1.0"
-  peerDependencies:
-    react: ">=16.3.0"
-  checksum: 10/eff25231384bb0a229870a0552839953a59af17f0ff5e8bca1b8c8fdf19a329e4c00c7fa2fcedc8be5d73f5c7bebb30cf9a32ea58efc7c8f726a10dba51f48a2
   languageName: node
   linkType: hard
 
@@ -22523,15 +22501,6 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10/c0c4d798e9b1f654b56c26bffb149ab811d24ca0950c1e8c3675438065628561eb132c6a5982cea893a288a0e9af6f9d9db290f4e53da71570dada0c1147f146
-  languageName: node
-  linkType: hard
-
-"react-side-effect@npm:^2.1.0":
-  version: 2.1.2
-  resolution: "react-side-effect@npm:2.1.2"
-  peerDependencies:
-    react: ^16.3.0 || ^17.0.0 || ^18.0.0
-  checksum: 10/8c31aaec5b383d942ff1775b12c45022239d1250d1a00a238bac3c07e0fe266c71991e2814ae16a5d9b855bcd96ba95817d48ab3f34738f0bb32036ebb1abb1a
   languageName: node
   linkType: hard
 
