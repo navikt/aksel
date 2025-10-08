@@ -12,7 +12,7 @@ export default defineConfig({
           // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
           storybookTest({
             configDir: "./.storybook",
-            tags: { exclude: ["skip-test"] },
+            tags: { exclude: ["skip-test"], include: ["play-fn"] },
             storybookScript: "yarn storybook --ci",
           }),
         ],
