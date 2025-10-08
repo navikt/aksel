@@ -6,7 +6,7 @@ import {
 } from "next-sanity/hooks";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useSyncExternalStore, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { Button, Switch } from "@navikt/ds-react";
 import styles from "./DraftOverlay.module.css";
 import { disableDraftModeAction } from "./actions";
@@ -17,22 +17,21 @@ function DraftOverlay() {
   const environment = useDraftModeEnvironment();
   const pathname = usePathname();
   const isPresentation = useIsPresentationTool();
-  const isIFrame = useIsInIframe();
+  const isIFrame = typeof window !== "undefined" && window.self !== window.top;
 
   const [enableVisualEditing, setEnableVisualEditing] = useState(false);
 
-  if (isPresentation) {
-    return null;
-  }
-
   /**
-   * Only show the disable draft mode button when outside of Presentation Tool
-   * and no need to show it inside the admin panel.
+   * Only show the disable draft mode panel when outside of Presentation Tool
+   * - If in Iframe (e.g. embedded preview in Sanity Studio) we hide it
+   * - If in /admin path (e.g. Sanity Studio) we hide it
+   * - If not in live environment, something is loading or an error occurred, so we hide it
    */
   if (
     (environment !== "live" && environment !== "unknown") ||
     pathname?.startsWith("/admin") ||
-    isIFrame
+    isIFrame ||
+    isPresentation
   ) {
     return null;
   }
@@ -65,19 +64,5 @@ function DraftOverlay() {
     </>
   );
 }
-
-export const useIsInIframe = () => {
-  const isIframe = useSyncExternalStore(
-    () => {
-      return () => {};
-    },
-    () => {
-      return typeof window !== "undefined" && window.self !== window.top;
-    },
-    () => false,
-  );
-
-  return isIframe;
-};
 
 export { DraftOverlay };
