@@ -185,7 +185,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
             }
           }
 
-          /* focusFirst might not find any cadidates, so we fall back to focusing container */
+          /* focusFirst might not find any candidates, so we fall back to focusing container */
           if (document.activeElement === currentActiveElement) {
             focus(container);
           }
