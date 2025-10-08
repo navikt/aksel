@@ -59,9 +59,9 @@ export const withDsExample = (
       >
         <Head>
           <title>
-            {pathParts[2]}: {pathParts[3]} -{" "}
-            {pathParts[1] === "templates" ? "Mønster/maler" : "Kodeeksempel"} -
-            aksel.nav.no
+            {`${pathParts[2]}: ${pathParts[3]} - ${
+              pathParts[1] === "templates" ? "Mønster/maler" : "Kodeeksempel"
+            } - aksel.nav.no`}
           </title>
         </Head>
         <ExampleThemingSwitch legacyOnly={legacyOnly} />
