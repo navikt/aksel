@@ -63,6 +63,10 @@ jobs:
       testapp:
         image: ${{ needs.prebuild-app-for-playwright.outputs.image }}
         ports: ["3000:3000"]
+        env:
+          SANITY_READ: ${{ secrets.SANITY_READ }}
+          SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
+
     strategy:
       fail-fast: false
       matrix:
