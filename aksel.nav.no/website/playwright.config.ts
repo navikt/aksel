@@ -12,7 +12,7 @@ const PORT = 3000;
 
 const opts: OptionsType = process.env.CI
   ? {
-      baseURL: `http://localhost:3000`,
+      baseURL: `http://localhost:${PORT}`,
       timeout: 30 * 1000,
       server: undefined,
     }
@@ -55,6 +55,11 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices["Desktop Chrome"],
       },
+      testMatch: [/.*\.e2e\.(ts|tsx)/],
+    },
+    {
+      name: "Mobile Chrome",
+      use: { ...devices["Pixel 5"] },
       testMatch: [/.*\.e2e\.(ts|tsx)/],
     },
   ],
