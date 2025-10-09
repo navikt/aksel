@@ -19,9 +19,7 @@ export default function debounce<T extends unknown[]>(
     timeout.start(wait, later);
   }
 
-  debounced.clear = () => {
-    timeout.clear();
-  };
+  debounced.clear = timeout.clear;
 
   return debounced;
 }
