@@ -3,16 +3,14 @@
 import { useEffect } from "react";
 import { useRefWithInit } from "./useRefWithInit";
 
-type TimeoutId = number;
-
-const EMPTY = 0 as TimeoutId;
+const EMPTY = 0;
 
 class Timeout {
   static create() {
     return new Timeout();
   }
 
-  currentId: TimeoutId = EMPTY;
+  currentId: number = EMPTY;
 
   /**
    * Executes `fn` after `delay`, clearing any previously scheduled call.
@@ -31,7 +29,7 @@ class Timeout {
 
   clear = () => {
     if (this.currentId !== EMPTY) {
-      clearTimeout(this.currentId as TimeoutId);
+      clearTimeout(this.currentId);
       this.currentId = EMPTY;
     }
   };
