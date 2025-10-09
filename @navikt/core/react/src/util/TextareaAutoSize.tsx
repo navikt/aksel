@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { useClientLayoutEffect } from "../util/hooks";
 import debounce from "./debounce";
 import { useMergeRefs } from "./hooks/useMergeRefs";
+import { ownerWindow } from "./owner";
 
 type State = {
   outerHeightStyle: number;
@@ -33,15 +34,6 @@ const checkState = (
     );
   }
   return prevState;
-};
-
-/**
- * https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/ownerDocument/ownerDocument.ts
- * https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/ownerWindow/ownerWindow.ts
- */
-const ownerWindow = (node: Node | undefined): Window => {
-  const doc = node?.ownerDocument || document;
-  return doc.defaultView || window;
 };
 
 function getStyleValue(value: string) {

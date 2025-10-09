@@ -1,5 +1,7 @@
-import React, { HTMLAttributes, forwardRef, useEffect, useRef } from "react";
+import React, { HTMLAttributes, forwardRef, useEffect } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import { useLatestRef } from "../util/hooks/useLatestRef";
+import { useTimeout } from "../util/hooks/useTimeout";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 interface ProgressBarPropsBase
@@ -95,19 +97,19 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   ) => {
     const { cn } = useRenameCSS();
     const translateX = 100 - (Math.round(value) / valueMax) * 100;
-    const onTimeoutRef = useRef<() => void>(undefined);
-    onTimeoutRef.current = simulated?.onTimeout;
+    const onTimeoutRef = useLatestRef(simulated?.onTimeout);
+
     const translate = useI18n("ProgressBar");
+    const timeout = useTimeout();
 
     useEffect(() => {
-      if (simulated?.seconds && onTimeoutRef.current) {
-        const timeout = setTimeout(
-          onTimeoutRef.current,
-          simulated.seconds * 1000,
-        );
-        return () => clearTimeout(timeout);
+      if (!simulated?.seconds || !onTimeoutRef.current) {
+        return;
       }
-    }, [simulated?.seconds]);
+
+      timeout.start(simulated.seconds * 1000, onTimeoutRef.current);
+      return timeout.clear;
+    }, [onTimeoutRef, simulated?.seconds, timeout]);
 
     return (
       /* biome-ignore lint/a11y/useFocusableInteractive: Progressbar is not interactive. */
