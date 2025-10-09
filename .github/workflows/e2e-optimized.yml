@@ -60,7 +60,7 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.56.0-noble
     services:
-      app:
+      testapp:
         image: ${{ needs.prebuild-app-for-playwright.outputs.image }}
         ports: ["3000:3000"]
         env:
