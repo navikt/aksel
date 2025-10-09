@@ -9,7 +9,7 @@ test.describe("Validate CMS-link and A11y on all pages", () => {
     }
 
     test(`Page ${url}`, async ({ page }) => {
-      await page.goto(`http://testapp:3000${url}`);
+      await page.goto(`/${url}`);
       await page.waitForLoadState("domcontentloaded");
 
       /**
