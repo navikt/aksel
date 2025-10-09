@@ -12,7 +12,7 @@ const PORT = 3000;
 
 const opts: OptionsType = process.env.CI
   ? {
-      baseURL: `http://testapp:3000`,
+      baseURL: `http://localhost:3000`,
       timeout: 30 * 1000,
       server: undefined,
     }
