@@ -13,7 +13,7 @@ const PORT = 3000;
 const opts: OptionsType = process.env.CI
   ? {
       /* Service container in e2e action */
-      baseURL: `app:${PORT}`,
+      baseURL: `https://app:${PORT}`,
       timeout: 30 * 1000,
       server: undefined,
     }
