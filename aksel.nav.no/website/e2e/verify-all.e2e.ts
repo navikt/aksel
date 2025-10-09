@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import urls from "./sitemap-urls.json";
 
 test.describe("Validate CMS-link and A11y on all pages", () => {
-  for (const url of urls.slice(0, 20)) {
+  for (const url of urls) {
     if (url === "/grunnleggende/kode/endringslogg") {
       continue; // Axe times out when checking this page. Skip temporarily until the new changelog page is ready.
     }
