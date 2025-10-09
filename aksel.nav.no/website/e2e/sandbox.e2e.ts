@@ -6,7 +6,7 @@ const previewUrl =
 
 test.describe("Check website sandbox", () => {
   test("Check if sandbox is loading for preview", async ({ page }) => {
-    await page.goto(previewUrl);
+    await page.goto(`http://app:3000${previewUrl}`);
     await page.waitForLoadState("domcontentloaded");
 
     const count = await page.locator("#sandbox-wrapper").count();
