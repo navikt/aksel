@@ -84,7 +84,6 @@ export function usePointerDownOutside(
     });
 
     return () => {
-      timeout.clear();
       ownerDocument.removeEventListener("pointerdown", handlePointerDown);
       ownerDocument.removeEventListener("click", handleClickRef.current);
     };

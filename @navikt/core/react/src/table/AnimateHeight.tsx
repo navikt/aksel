@@ -197,6 +197,7 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
 
     prevHeight.current = height;
 
+    /* We need to manually clear here since we cant guarantee the `.start()` getting called after `height` changes */
     return () => {
       animationTimeout.clear();
       animationClassTimeout.clear();
