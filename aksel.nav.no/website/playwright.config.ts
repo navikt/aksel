@@ -12,7 +12,7 @@ const PORT = 3000;
 
 const opts: OptionsType = process.env.CI
   ? {
-      /* Service container in e2e action */
+      /* Service container in e2e workflow action */
       baseURL: `http://testapp:${PORT}`,
       timeout: 30 * 1000,
       server: undefined,
@@ -21,10 +21,10 @@ const opts: OptionsType = process.env.CI
       baseURL: `http://localhost:${PORT}`,
       timeout: 120 * 2 * 1000,
       server: {
-        command: "yarn dev",
+        command: "yarn serve:next",
         url: `http://localhost:${PORT}`,
         timeout: 120 * 1000,
-        reuseExistingServer: !process.env.CI,
+        reuseExistingServer: true,
         stderr: "pipe",
         stdout: "pipe",
       },
@@ -42,7 +42,7 @@ const config: PlaywrightTestConfig = {
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 2 : undefined,
+  workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? "blob" : "html",
   use: {
     baseURL: opts.baseURL,
@@ -58,11 +58,15 @@ const config: PlaywrightTestConfig = {
       },
       testMatch: [/.*\.e2e\.(ts|tsx)/],
     },
-    {
-      name: "Mobile Chrome",
-      use: { ...devices["Pixel 5"] },
-      testMatch: [/.*\.e2e\.(ts|tsx)/],
-    },
+    ...(!process.env.CI
+      ? [
+          {
+            name: "Mobile Chrome",
+            use: { ...devices["Pixel 5"] },
+            testMatch: [/.*\.e2e\.(ts|tsx)/],
+          },
+        ]
+      : []),
   ],
 };
 
