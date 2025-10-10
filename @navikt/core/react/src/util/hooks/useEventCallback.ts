@@ -16,7 +16,7 @@
  * error if invoked during render; safe when `callback` is undefined (no-op).
  */
 import React, { useLayoutEffect } from "react";
-import { useRefWithInit } from "../../../util/hooks/useRefWithInit";
+import { useRefWithInit } from "./useRefWithInit";
 
 /* https://github.com/mui/material-ui/issues/41190#issuecomment-2040873379 */
 const useInsertionEffect = (React as any)[

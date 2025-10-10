@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { useEventCallback } from "./useEventCallback";
+import { useEventCallback } from "../../../util/hooks/useEventCallback";
 
 /**
  * Returns a stable function that, when invoked, waits for all current CSS/Web Animations
