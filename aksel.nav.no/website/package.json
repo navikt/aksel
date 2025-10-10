@@ -9,7 +9,7 @@
     "dev-turbo": "next --turbo | pino-pretty --messageKey=message",
     "build": "concurrently \"yarn workspace playroom build:playroom\" \"yarn next build\" \"yarn update:rss\" && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
-    "e2e:dev": "yarn generate-testpaths && yarn build:next && playwright test --ui",
+    "e2e:dev": "yarn generate-testpaths && playwright test --ui",
     "e2e:docker": "yarn generate-testpaths && playwright test",
     "update:rss": "yarn tsx --env-file-if-exists=.env ./scripts/generate-rss-feed",
     "update:props": "yarn tsx --env-file-if-exists=.env ./scripts/update-props",

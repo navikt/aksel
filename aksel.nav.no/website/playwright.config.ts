@@ -21,7 +21,7 @@ const opts: OptionsType = process.env.CI
       baseURL: `http://localhost:${PORT}`,
       timeout: 120 * 2 * 1000,
       server: {
-        command: "yarn serve:next",
+        command: "yarn dev",
         url: `http://localhost:${PORT}`,
         timeout: 120 * 1000,
         reuseExistingServer: true,
@@ -58,15 +58,11 @@ const config: PlaywrightTestConfig = {
       },
       testMatch: [/.*\.e2e\.(ts|tsx)/],
     },
-    ...(!process.env.CI
-      ? [
-          {
-            name: "Mobile Chrome",
-            use: { ...devices["Pixel 5"] },
-            testMatch: [/.*\.e2e\.(ts|tsx)/],
-          },
-        ]
-      : []),
+    {
+      name: "Mobile Chrome",
+      use: { ...devices["Pixel 5"] },
+      testMatch: [/.*\.e2e\.(ts|tsx)/],
+    },
   ],
 };
 

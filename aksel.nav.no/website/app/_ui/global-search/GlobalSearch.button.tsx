@@ -17,7 +17,7 @@ function GlobalSearchButton() {
         <MagnifyingGlassIcon
           className={styles.searchButtonIcon}
           aria-label="Åpne søk"
-          aria-hidden
+          aria-hidden={showChildContent}
         />
       }
       iconPosition="left"
