@@ -30,7 +30,7 @@ export const WithUseRef: StoryFn = () => {
   const ref2 = useRef<HTMLDialogElement>(null);
 
   return (
-    <div>
+    <div style={{ height: "200vh" }}>
       <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
       <Modal
         open={ref.current ? undefined : true /* initially open */}
