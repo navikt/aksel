@@ -71,6 +71,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
         </Show>
         <HStack align="center" gap="2">
           <GlobalSearch />
+
           <Show below="lg">
             <MobileNav />
           </Show>

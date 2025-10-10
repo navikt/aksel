@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "7.32.0",
+  "version": "7.32.1",
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
@@ -85,8 +85,8 @@
     "rehype-parse": "9.0.1",
     "tsc-alias": "1.8.16",
     "tsx": "^4.20.6",
-    "typescript": "5.8.3",
+    "typescript": "5.9.3",
     "unified": "11.0.5",
-    "vitest": "^2.1.9"
+    "vitest": "^3.2.4"
   }
 }

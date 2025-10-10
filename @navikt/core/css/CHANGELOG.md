@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.32.1
+
+### Patch Changes
+
+- Darkside: Adjustments for DatePicker on very small devices ([#4142](https://github.com/navikt/aksel/pull/4142))
+
 ## 7.32.0
 
 ### Patch Changes

@@ -1,17 +1,28 @@
 "use client";
 
 import { BodyShort, Box, Heading, Modal } from "@navikt/ds-react";
+import {
+  useGlobalSearch,
+  useGlobalSearchResults,
+} from "@/app/_ui/global-search/GlobalSearch.context";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import styles from "./GlobalSearch.module.css";
-import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
   const { open, closeSearch } = useGlobalSearch();
+  const { resetSearch } = useGlobalSearchResults();
+
+  if (!open) {
+    return null;
+  }
 
   return (
     <Modal
       open={open}
-      onClose={closeSearch}
+      onClose={() => {
+        closeSearch();
+        resetSearch();
+      }}
       placement="top"
       onKeyDown={(e) => {
         /* Avoids sideeffects when closing Modal */

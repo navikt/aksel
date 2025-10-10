@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-stylelint",
-  "version": "7.32.0",
+  "version": "7.32.1",
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/grunnleggende/kode/stylelint",
   "repository": {
@@ -35,14 +35,14 @@
     "dev": "yarn watch:lint"
   },
   "devDependencies": {
-    "@navikt/ds-css": "^7.32.0",
-    "@navikt/ds-tokens": "^7.32.0",
+    "@navikt/ds-css": "^7.32.1",
+    "@navikt/ds-tokens": "^7.32.1",
     "concurrently": "9.0.1",
     "postcss-selector-parser": "^7.1.0",
     "postcss-value-parser": "^4.2.0",
     "stylelint": "^16.24.0",
     "stylelint-test-rule-node": "^0.4.0",
     "tsx": "^4.20.6",
-    "typescript": "5.8.3"
+    "typescript": "5.9.3"
   }
 }

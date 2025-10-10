@@ -1,6 +1,14 @@
 .aksel-date {
   padding: var(--ax-space-16);
 
+  .rdp-table {
+    border-collapse: separate; /* Some CSS-resets sets border-collapse:collapse on tables */
+  }
+
+  .rdp-cell {
+    padding: 1px; /* Some CSS-resets sets padding:0 on all items */
+  }
+
   .rdp-day_range_middle {
     &.rdp-day_disabled {
       color: var(--ax-text-neutral);
@@ -112,6 +120,12 @@
 
   .aksel-date__modal-body > & {
     padding: 0;
+  }
+
+  @media (max-width: 360px) {
+    .aksel-date__modal-body > & {
+      margin-inline: -12px;
+    }
   }
 }
 

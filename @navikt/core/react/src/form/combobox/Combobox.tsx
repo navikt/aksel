@@ -5,7 +5,6 @@ import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import ComboboxWrapper from "./ComboboxWrapper";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
-import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
 import { useInputContext } from "./Input/Input.context";
 import { InputController } from "./Input/InputController";
 import { ComboboxProps } from "./types";
@@ -20,8 +19,6 @@ export const Combobox = forwardRef<
   const { className, hideLabel = false, description, label, ...rest } = props;
 
   const { cn } = useRenameCSS();
-
-  const { toggleIsListOpen } = useFilteredOptionsContext();
 
   const {
     error,
@@ -41,7 +38,6 @@ export const Combobox = forwardRef<
         hasError={hasError}
         inputProps={inputProps}
         inputSize={size}
-        toggleIsListOpen={toggleIsListOpen}
       >
         <Label
           htmlFor={inputProps.id}

@@ -18,6 +18,8 @@ interface InputContextValue extends FormFieldType {
   toggleOpenButtonRef: React.MutableRefObject<HTMLDivElement | null>;
   hideCaret: boolean;
   setHideCaret: React.Dispatch<React.SetStateAction<boolean>>;
+  anchorRef: HTMLDivElement | null;
+  setAnchorRef: React.Dispatch<React.SetStateAction<HTMLDivElement | null>>;
 }
 
 const [InputContextProvider, useInputContext] =
@@ -75,6 +77,7 @@ const InputProvider = ({ children, value: props }: Props) => {
   const toggleOpenButtonRef = useRef<HTMLDivElement>(null);
   const [internalValue, setInternalValue] = useState<string>(defaultValue);
   const [hideCaret, setHideCaret] = useState(false);
+  const [anchorRef, setAnchorRef] = useState<HTMLDivElement | null>(null);
 
   const value = useMemo(
     () => String(externalValue ?? internalValue),
@@ -127,6 +130,8 @@ const InputProvider = ({ children, value: props }: Props) => {
     toggleOpenButtonRef,
     hideCaret,
     setHideCaret,
+    anchorRef,
+    setAnchorRef,
   };
 
   return (

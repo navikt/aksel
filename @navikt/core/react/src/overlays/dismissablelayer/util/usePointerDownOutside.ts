@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useCallbackRef } from "../../../util/hooks";
+import { useTimeout } from "../../../util/hooks/useTimeout";
 import {
   CUSTOM_EVENTS,
   CustomPointerDownEvent,
@@ -19,6 +20,7 @@ export function usePointerDownOutside(
   const handlePointerDownOutside = useCallbackRef(callback) as EventListener;
   const isPointerInsideReactTreeRef = useRef(false);
   const handleClickRef = useRef<typeof handlePointerDownOutside>(() => {});
+  const timeout = useTimeout();
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {
@@ -77,16 +79,15 @@ export function usePointerDownOutside(
      *   })
      * });
      */
-    const timerId = window.setTimeout(() => {
+    timeout.start(0, () => {
       ownerDocument.addEventListener("pointerdown", handlePointerDown);
-    }, 0);
+    });
 
     return () => {
-      window.clearTimeout(timerId);
       ownerDocument.removeEventListener("pointerdown", handlePointerDown);
       ownerDocument.removeEventListener("click", handleClickRef.current);
     };
-  }, [ownerDocument, handlePointerDownOutside]);
+  }, [ownerDocument, handlePointerDownOutside, timeout]);
 
   return {
     // ensures we check React component tree (not just DOM tree)

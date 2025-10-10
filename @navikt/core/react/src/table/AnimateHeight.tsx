@@ -1,11 +1,11 @@
 /* https://github.com/Stanko/react-animate-height/blob/v3/src/index.tsx */
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import { useTimeout } from "../util/hooks/useTimeout";
 
 // ------------------ Types
 
 export type Height = "auto" | number | `${number}%`;
-type Timeout = ReturnType<typeof setTimeout>;
 type Overflow = "auto" | "visible" | "hidden" | undefined;
 
 // ------------------ Helpers
@@ -73,8 +73,8 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   const prevHeight = useRef<Height>(height);
   const contentElement = useRef<HTMLDivElement>(null);
 
-  const animationClassesTimeoutID = useRef<Timeout>(undefined);
-  const timeoutID = useRef<Timeout>(undefined);
+  const animationClassTimeout = useTimeout();
+  const animationTimeout = useTimeout();
 
   const initialHeight = useRef<Height>(height);
   const initialOverflow = useRef<Overflow>("visible");
@@ -157,33 +157,29 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
       setOverflow("hidden");
       setUseTransitions(!isCurrentHeightAuto);
 
-      // Clear timeouts
-      clearTimeout(timeoutID.current as Timeout);
-      clearTimeout(animationClassesTimeoutID.current as Timeout);
-
       if (isCurrentHeightAuto) {
         // When animating from 'auto' we use a short timeout to start animation
         // after setting fixed height above
         timeoutUseTransitions = true;
 
         // Short timeout to allow rendering of the initial animation state first
-        timeoutID.current = setTimeout(() => {
+        animationTimeout.start(50, () => {
           setCurrentHeight(timeoutHeight);
           setOverflow(timeoutOverflow);
           setUseTransitions(timeoutUseTransitions);
-        }, 50);
+        });
 
         // Set static classes and remove transitions when animation ends
-        animationClassesTimeoutID.current = setTimeout(() => {
+        animationClassTimeout.start(totalDuration, () => {
           setUseTransitions(false);
 
           // ANIMATION ENDS
           // Hide content if height is 0 (to prevent tabbing into it)
           hideContent(contentElement.current, timeoutHeight);
-        }, totalDuration);
+        });
       } else {
         // Set end height, classes and remove transitions when animation is complete
-        timeoutID.current = setTimeout(() => {
+        animationTimeout.start(totalDuration, () => {
           setCurrentHeight(timeoutHeight);
           setOverflow(timeoutOverflow);
           setUseTransitions(false);
@@ -195,15 +191,16 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
             // Hide content if height is 0 (to prevent tabbing into it)
             hideContent(contentElement.current, newHeight); // TODO solve newHeight = 0
           }
-        }, totalDuration);
+        });
       }
     }
 
     prevHeight.current = height;
 
+    /* We need to manually clear here since we cant guarantee the `.start()` getting called after `height` changes */
     return () => {
-      clearTimeout(timeoutID.current as Timeout);
-      clearTimeout(animationClassesTimeoutID.current as Timeout);
+      animationTimeout.clear();
+      animationClassTimeout.clear();
     };
 
     // This should be explicitly run only on height change

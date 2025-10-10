@@ -2,9 +2,9 @@
 
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, Detail, HStack, Hide, Show } from "@navikt/ds-react";
+import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.context";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import styles from "./GlobalSearch.module.css";
-import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchButton() {
   const { openSearch } = useGlobalSearch();

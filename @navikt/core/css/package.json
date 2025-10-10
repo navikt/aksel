@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "7.32.0",
+  "version": "7.32.1",
   "description": "CSS for Nav Designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -28,7 +28,7 @@
     "test": "yarn build && vitest run"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^7.32.0",
+    "@navikt/ds-tokens": "^7.32.1",
     "autoprefixer": "^10.4.20",
     "browserslist": "^4.25.0",
     "cssnano": "7.1.1",
@@ -42,7 +42,7 @@
     "postcss-import": "^14.1.0",
     "postcss-nesting": "13.0.2",
     "tsx": "^4.20.6",
-    "vitest": "^2.1.9"
+    "vitest": "^3.2.4"
   },
   "browserslist": [
     ">0.2%",
