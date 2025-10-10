@@ -1,5 +1,4 @@
-import React from "react";
-import { ownerDocument } from "../util/owner";
+import React, { useEffect } from "react";
 import type { ModalProps } from "./types";
 
 export interface MouseCoordinates {
@@ -28,48 +27,31 @@ export function getCloseHandler(
   return () => modalRef.current?.close();
 }
 
-export const BODY_CLASS_LEGACY = "navds-modal__document-body";
-export const BODY_CLASS = "aksel-modal__document-body";
+function useIsModalOpen(modalRef: HTMLDialogElement | null) {
+  const [isOpen, setIsOpen] = React.useState(false);
 
-export function useBodyScrollLock(
-  modalRef: React.RefObject<HTMLDialogElement | null>,
-  portalNode: HTMLElement | null,
-  isNested: boolean,
-) {
-  React.useEffect(() => {
-    if (isNested) {
+  useEffect(() => {
+    if (!modalRef) {
       return;
     }
 
-    // We check both to avoid running this twice when not using portal
-    if (!modalRef.current || !portalNode) {
-      return;
-    }
-
-    const ownerDoc = ownerDocument(modalRef.current);
-
-    // In case `open` is true initially
-    if (modalRef.current.open) {
-      ownerDoc.body.classList.add(BODY_CLASS, BODY_CLASS_LEGACY);
-    }
+    setIsOpen(modalRef.open);
 
     const observer = new MutationObserver(() => {
-      if (modalRef.current?.open) {
-        ownerDoc.body.classList.add(BODY_CLASS, BODY_CLASS_LEGACY);
-      } else {
-        ownerDoc.body.classList.remove(BODY_CLASS, BODY_CLASS_LEGACY);
-      }
+      setIsOpen(!!modalRef.open);
     });
 
-    observer.observe(modalRef.current, {
+    observer.observe(modalRef, {
       attributes: true,
       attributeFilter: ["open"],
     });
 
     return () => {
       observer.disconnect();
-      // In case modal is unmounted before it's closed
-      ownerDoc.body.classList.remove(BODY_CLASS, BODY_CLASS_LEGACY);
     };
-  }, [modalRef, portalNode, isNested]);
+  }, [modalRef]);
+
+  return isOpen;
 }
+
+export { useIsModalOpen };

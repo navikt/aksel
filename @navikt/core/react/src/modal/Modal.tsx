@@ -8,6 +8,7 @@ import { Detail, Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
+import { useScrollLock } from "../util/hooks/useScrollLock";
 import { ModalContextProvider, useModalContext } from "./Modal.context";
 import ModalBody from "./ModalBody";
 import ModalFooter from "./ModalFooter";
@@ -16,7 +17,7 @@ import {
   MouseCoordinates,
   coordsAreInside,
   getCloseHandler,
-  useBodyScrollLock,
+  useIsModalOpen,
 } from "./ModalUtils";
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
 import { ModalProps } from "./types";
@@ -110,6 +111,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 
     const dateContext = useDateInputContext(false);
     const isNested = useModalContext(false) !== undefined;
+
+    const isModalOpen = useIsModalOpen(modalRef.current);
+
     if (isNested && !dateContext) {
       console.error("Modals should not be nested");
     }
@@ -144,7 +148,12 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
     }, [portalNode, open]);
 
-    useBodyScrollLock(modalRef, portalNode, isNested);
+    useScrollLock({
+      enabled: isModalOpen,
+      mounted: isModalOpen,
+      open: isModalOpen,
+      referenceElement: modalRef.current,
+    });
 
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
