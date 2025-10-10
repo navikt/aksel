@@ -1,3 +1,5 @@
+const hasNavigator = typeof navigator !== "undefined";
+
 interface NavigatorUAData {
   brands: { brand: string; version: string }[];
   mobile: boolean;
@@ -28,8 +30,6 @@ function getNavigatorData(): { platform: string; maxTouchPoints: number } {
 
 const nav = getNavigatorData();
 
-const hasNavigator = typeof navigator !== "undefined";
-
 const isSafari = hasNavigator && /apple/i.test(navigator.vendor);
 
 const isWebKit =
@@ -38,7 +38,7 @@ const isWebKit =
     : CSS.supports("-webkit-backdrop-filter:none");
 
 const isIOS =
-  /* iPads can claim to be MacIntel */
+  /*  */
   nav.platform === "MacIntel" && nav.maxTouchPoints > 1
     ? true
     : /iP(hone|ad|od)|iOS/.test(nav.platform);
