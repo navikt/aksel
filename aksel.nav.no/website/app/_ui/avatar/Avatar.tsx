@@ -1,3 +1,4 @@
+import { stegaClean } from "next-sanity";
 import Image from "next/image";
 import { Children, ReactNode, isValidElement } from "react";
 import { BodyShort, BoxNew, Detail, HStack, VStack } from "@navikt/ds-react";
@@ -6,10 +7,10 @@ import styles from "./Avatar.module.css";
 const MAX_AVATAR_COUNT = 30;
 
 export const avatarUrl = (avatar_id: string) => {
-  let _avatar_id = avatar_id;
-  if (!Number.isNaN(parseInt(avatar_id))) {
+  let _avatar_id = stegaClean(avatar_id);
+  if (!Number.isNaN(parseInt(_avatar_id))) {
     _avatar_id =
-      `${parseInt(avatar_id) % MAX_AVATAR_COUNT}`.padStart(3, "0") ?? "broken";
+      `${parseInt(_avatar_id) % MAX_AVATAR_COUNT}`.padStart(3, "0") ?? "broken";
   }
   return `/avatars/${_avatar_id}.svg`;
 };
