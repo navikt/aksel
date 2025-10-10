@@ -1,6 +1,7 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import { Slot } from "../../../slot/Slot";
 import { useCallbackRef, useMergeRefs } from "../../../util/hooks";
+import { ownerDocument } from "../../../util/owner";
 
 const AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
 const AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
@@ -44,8 +45,8 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
     useEffect(() => {
       if (!container) return;
 
-      const ownerDocument = container.ownerDocument ?? globalThis?.document;
-      const hasFocus = container.contains(ownerDocument.activeElement);
+      const ownerDoc = ownerDocument(container);
+      const hasFocus = container.contains(ownerDoc.activeElement);
 
       if (!hasFocus) {
         const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);

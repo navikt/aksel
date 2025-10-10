@@ -70,9 +70,10 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           className={cn(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}
+          aria-label={titleWithFallback}
         >
-          <HelpTextIcon title={titleWithFallback} />
-          <HelpTextIcon filled title={titleWithFallback} />
+          <HelpTextIcon />
+          <HelpTextIcon filled />
         </button>
         <Popover
           onClose={() => setOpen(false)}
