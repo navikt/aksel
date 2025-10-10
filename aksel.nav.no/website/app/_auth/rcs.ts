@@ -42,7 +42,6 @@ async function verifyUserLoggedIn(): Promise<
 
   const token = getToken(requestHeaders);
   if (!token) {
-    logger.info("Found no token");
     return {
       ok: false,
       user: null,

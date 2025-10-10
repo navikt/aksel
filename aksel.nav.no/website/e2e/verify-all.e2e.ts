@@ -4,12 +4,8 @@ import urls from "./sitemap-urls.json";
 
 test.describe("Validate CMS-link and A11y on all pages", () => {
   for (const url of urls) {
-    if (url === "/grunnleggende/kode/endringslogg") {
-      continue; // Axe times out when checking this page. Skip temporarily until the new changelog page is ready.
-    }
-
     test(`Page ${url}`, async ({ page }) => {
-      await page.goto(`http://localhost:3000${url}`);
+      await page.goto(url);
       await page.waitForLoadState("domcontentloaded");
 
       /**
