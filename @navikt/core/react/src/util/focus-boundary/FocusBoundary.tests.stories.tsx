@@ -225,7 +225,8 @@ export const FocusPrevActiveItemOnUnmount: Story = {
     await userEvent.click(showButton);
     expect(canvas.getByLabelText(Field_ONE)).toHaveFocus();
 
-    await userEvent.click(showButton);
+    const hideButton = canvas.getByText("hide");
+    await userEvent.click(hideButton);
     expect(showButton).toHaveFocus();
   },
   args: {

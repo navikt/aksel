@@ -169,9 +169,10 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       }
 
       focusBoundarysStack.add(focusBoundary);
-      const currentActiveElement = document.activeElement as HTMLElement | null;
+      const initialFocusedElement =
+        document.activeElement as HTMLElement | null;
       const containsActiveElement =
-        currentActiveElement && container.contains(currentActiveElement);
+        initialFocusedElement && container.contains(initialFocusedElement);
 
       /* We only autofocus on mount if container does not contain active element */
       if (!containsActiveElement) {
@@ -195,7 +196,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
           }
 
           /* focusFirst might not find any candidates, so we fall back to focusing container */
-          if (document.activeElement === currentActiveElement) {
+          if (document.activeElement === initialFocusedElement) {
             focus(container);
           }
         }
@@ -219,7 +220,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
 
           /* If consumer does not manually prevent event and handle focus themselves */
           if (!unmountEvent.defaultPrevented) {
-            focus(currentActiveElement ?? document.body, {
+            focus(initialFocusedElement ?? document.body, {
               select: true,
             });
           }
