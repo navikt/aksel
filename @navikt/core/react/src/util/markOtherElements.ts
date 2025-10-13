@@ -1,7 +1,7 @@
 /**
  * Modified version of `aria-hidden`-package.
  * - Removed "inert"-functionality.
- * - Made aria-hodden optional (default: false).
+ * - Made aria-hidden optional (default: false).
  * https://github.com/theKashey/aria-hidden/blob/720e8a8e1cfa047bd299a929d95d47ac860a5c1a/src/index.ts
  */
 import { ownerDocument } from "./owner";
