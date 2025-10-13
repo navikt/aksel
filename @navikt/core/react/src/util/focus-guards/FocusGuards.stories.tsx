@@ -1,23 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useEffect, useRef } from "react";
-import { useFocusGuards } from "./useFocusGuard";
+import { FocusGuards } from "./FocusGuards";
 
 export default {
-  title: "Utilities/Hooks",
+  title: "Utilities/FocusGuards",
+  component: FocusGuards,
   parameters: {
     chromatic: { disable: true },
   },
 } satisfies Meta;
 
-export const UseFocusGuard: StoryObj = {
+export const FocusGuard: StoryObj = {
   render: () => {
-    useFocusGuards();
-
     const ref = useRef<HTMLButtonElement | null>(null);
     useEffect(() => {
       const focusButton = () => {
         ref.current?.focus();
-        console.count("Re-focus");
       };
 
       document.addEventListener("focusout", focusButton);
@@ -28,24 +26,23 @@ export const UseFocusGuard: StoryObj = {
     }, []);
 
     return (
-      <div>
+      <FocusGuards>
         <p>
           Since FocusGuards are enabled, we are able to intercept focusout-event
           and re-focus button before we end up leaving the DOM. Both tab and
           shift+tab should therefore stay on button,.
         </p>
         <button ref={ref}>MainFocusButton</button>
-      </div>
+      </FocusGuards>
     );
   },
 };
 
-export const UseFocusGuardDisabled: StoryObj = {
+export const FocusGuardDisabled: StoryObj = {
   render: () => {
     const ref = useRef<HTMLButtonElement | null>(null);
     useEffect(() => {
       const focusButton = () => {
-        console.log("left");
         ref.current?.focus();
       };
 
