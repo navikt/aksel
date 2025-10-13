@@ -17,6 +17,7 @@ export const UseFocusGuard: StoryObj = {
     useEffect(() => {
       const focusButton = () => {
         ref.current?.focus();
+        console.count("Re-focus");
       };
 
       document.addEventListener("focusout", focusButton);

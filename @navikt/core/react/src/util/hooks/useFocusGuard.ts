@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { isSafari } from "../detectBrowser";
 
 /* Number of components that want focus guards */
 let count = 0;
@@ -41,15 +40,6 @@ function createFocusGuard() {
   element.style.position = "fixed";
   element.style.pointerEvents = "none";
 
-  /**
-   * Unlike other screen readers such as NVDA and JAWS, the virtual cursor
-   * on VoiceOver does trigger the onFocus event, so we can use the focus
-   * trap element. On Safari, only buttons trigger the onFocus event.
-   */
-  if (isSafari) {
-    element.role = "button";
-    element.ariaHidden = "true";
-  }
   return element;
 }
 
