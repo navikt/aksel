@@ -60,6 +60,35 @@ describe("markOtherElements util", () => {
     expect(preHidden.hasAttribute("data-aksel-inert")).toBe(false);
   });
 
+  test("treats shadow-hosted avoid elements as connected to host", () => {
+    document.body.innerHTML = `
+      <div id="root"></div>
+    `;
+    const root = document.getElementById("root") as HTMLElement;
+
+    const host = document.createElement("div");
+    host.id = "shadow-host";
+    const shadow = host.attachShadow({ mode: "open" });
+    const shadowTarget = document.createElement("button");
+    shadowTarget.id = "shadow-target";
+    shadow.appendChild(shadowTarget);
+
+    const sibling = document.createElement("div");
+    sibling.id = "outside";
+
+    root.append(host, sibling);
+
+    const undo = markOtherElements([shadowTarget]);
+
+    expect(sibling.hasAttribute("data-aksel-inert")).toBe(true);
+    expect(host.hasAttribute("data-aksel-inert")).toBe(false);
+
+    undo();
+
+    expect(sibling.hasAttribute("data-aksel-inert")).toBe(false);
+    expect(host.hasAttribute("data-aksel-inert")).toBe(false);
+  });
+
   test("maintains counters across nested calls until final undo", () => {
     document.body.innerHTML = `
       <div id="root">
