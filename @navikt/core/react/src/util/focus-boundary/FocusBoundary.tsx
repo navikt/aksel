@@ -179,7 +179,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
         container.dispatchEvent(mountEvent);
 
-        /* If user does not manually prevent event and handle focus themselves */
+        /* If consumer does not manually prevent event and handle focus themselves */
         if (!mountEvent.defaultPrevented) {
           /**
            * Attempts focusing the first element in a list of candidates.
