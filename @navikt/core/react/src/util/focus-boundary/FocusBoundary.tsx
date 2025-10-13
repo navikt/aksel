@@ -114,9 +114,10 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         const relatedTarget = event.relatedTarget as HTMLElement | null;
 
         /*
-         * `focusout` event with a `null` `relatedTarget` will happen in at least two cases:
+         * `focusout` event with a `null` `relatedTarget` will happen in a few known cases:
          * 1. When the user switches app/tabs/windows/the browser itself loses focus.
          * 2. In Google Chrome, when the focused element is removed from the DOM.
+         * 3. When clicking on an element that cannot receive focus.
          *
          * We let the browser do its thing here because:
          * 1. The browser already keeps a memory of what's focused for when the page gets refocused.
