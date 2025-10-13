@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { useFocusGuards } from "./useFocusGuard";
 
 export default {
-  title: "Utilities/Hooks/Tests",
+  title: "Utilities/Hooks",
   parameters: {
     chromatic: { disable: true },
   },
