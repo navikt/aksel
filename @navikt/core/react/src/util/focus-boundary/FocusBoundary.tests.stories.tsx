@@ -22,6 +22,16 @@ const Field_ONE = "Name";
 const Field_TWO = "Email";
 const BUTTON_THREE = "Submit";
 
+export const Playground: Story = {
+  render: BaseFocusBoundaryComponent,
+  args: {
+    loop: true,
+    trapped: true,
+    showByDefault: true,
+    firstChild: <div />,
+  },
+};
+
 export const Loop: Story = {
   render: BaseFocusBoundaryComponent,
   play: async ({ canvasElement }) => {
