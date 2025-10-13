@@ -110,6 +110,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         if (focusBoundary.paused || container === null) {
           return;
         }
+
         const relatedTarget = event.relatedTarget as HTMLElement | null;
 
         /*
@@ -127,7 +128,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         /*
-         * If the focus has moved to an legitimate element outside the container, we move focus to the last valid focused element inside.
+         * If the focus has moved to an element outside the container, we move focus to the last valid focused element inside.
          * This makes sure to "trap" focus inside the container.
          */
         if (!container.contains(relatedTarget)) {
