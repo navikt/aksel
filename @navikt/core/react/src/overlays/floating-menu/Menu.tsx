@@ -308,6 +308,7 @@ const MenuContentInternal = forwardRef<
           contentRef.current?.focus({ preventScroll: true });
         })}
         onUnmountAutoFocus={onCloseAutoFocus}
+        /* Focus trapping is handled in `Floating.Content: onKeyDown */
         trapped={false}
         loop={false}
       >
