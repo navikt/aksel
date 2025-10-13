@@ -190,7 +190,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
           for (const candidate of candidates) {
             focus(candidate, { select: true });
             if (document.activeElement !== previouslyFocusedElement) {
-              return;
+              break;
             }
           }
 
