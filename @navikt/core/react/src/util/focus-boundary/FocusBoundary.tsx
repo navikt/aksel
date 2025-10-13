@@ -217,7 +217,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
           container.addEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
           container.dispatchEvent(unmountEvent);
 
-          /* If user does not manually prevent event and handle focus themselves */
+          /* If consumer does not manually prevent event and handle focus themselves */
           if (!unmountEvent.defaultPrevented) {
             focus(currentActiveElement ?? document.body, {
               select: true,
