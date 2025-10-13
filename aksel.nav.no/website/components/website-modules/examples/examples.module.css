@@ -2,11 +2,6 @@
   padding-inline: 1rem;
 }
 
-.container a {
-  text-underline-offset: initial;
-  text-decoration-thickness: auto;
-}
-
 .containerDefault {
   display: flex;
   align-items: center;
