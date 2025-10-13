@@ -13,6 +13,12 @@ const AUTOFOCUS_ON_MOUNT = "focusBoundary.autoFocusOnMount";
 const AUTOFOCUS_ON_UNMOUNT = "focusBoundary.autoFocusOnUnmount";
 const EVENT_OPTIONS = { bubbles: false, cancelable: true };
 
+/* TODO: Regular story */
+/**
+ * TODO:
+ * - owner(container) for corrent document
+ */
+
 /* -------------------------------------------------------------------------- */
 /*                                 FocusBoundary                                 */
 /* -------------------------------------------------------------------------- */
@@ -24,6 +30,9 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * When `true`, tabbing from last item will focus first tabbable
    * and shift+tab from first item will focus last tabbable element.
+   * This does not "trap" focus inside the boundary, it only loops it when
+   * tabbing. If focus is moved outside the boundary programmatically or by
+   * pointer, it will not be moved back.
    *
    * - Links (`<a>` elements), are not considered tabbable for the purpose of looping.
    * - Hidden inputs (i.e. `<input type="hidden">`) are not considered tabbable.
