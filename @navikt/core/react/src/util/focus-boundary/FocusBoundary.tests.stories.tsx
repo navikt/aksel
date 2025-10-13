@@ -327,7 +327,12 @@ function TestField({
   return (
     <label>
       <span>{label}</span>
-      <input type="text" name={label.toLowerCase()} {...props} />
+      <input
+        type="text"
+        name={label.toLowerCase()}
+        autoComplete="off"
+        {...props}
+      />
     </label>
   );
 }
