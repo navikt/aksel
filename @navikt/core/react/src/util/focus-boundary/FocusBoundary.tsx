@@ -264,7 +264,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
           }
 
           /**
-           * Since we are either trapped OR looping, we will either do nothing (trapped), or focus first element (looping).
+           * Since we are either trapped + looping, or one of them we will do nothing when trapped and focus first element when looping.
            */
           if (!event.shiftKey && focusedElement === last) {
             event.preventDefault();
