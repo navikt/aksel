@@ -176,7 +176,11 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       const containsActiveElement =
         initialFocusedElement && container.contains(initialFocusedElement);
 
-      /* We only autofocus on mount if container does not contain active element */
+      /*
+       * We only autofocus on mount if container does not contain active element.
+       * If container has an element with `autoFocus` attribute, browser will
+       * have already moved focus there before this effect runs.
+       */
       if (!containsActiveElement) {
         const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
         container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
@@ -222,9 +226,15 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
 
           /* If consumer does not manually prevent event and handle focus themselves */
           if (!unmountEvent.defaultPrevented) {
-            focus(initialFocusedElement ?? document.body, {
-              select: true,
-            });
+            /* To avoid CPU-spikes on Chrome, we make sure element is still connected to the DOM. */
+            focus(
+              initialFocusedElement?.isConnected
+                ? initialFocusedElement
+                : document.body,
+              {
+                select: true,
+              },
+            );
           }
           /* Since this is inside a cleanup, we need to instantly remove the listener ourselves */
           container.removeEventListener(
