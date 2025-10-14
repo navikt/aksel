@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { ChevronDownIcon, InformationSquareIcon } from "@navikt/aksel-icons";
 import type { AkselColorRole } from "@navikt/ds-tokens/types";
