@@ -5,7 +5,7 @@ export {
   GlobalAlertTitle,
   GlobalAlertContent,
   GlobalAlertClose,
-} from "./root/GlobalAlert";
+} from "./root/GlobalAlertRoot";
 
 export type {
   GlobalAlertProps,
@@ -13,4 +13,4 @@ export type {
   GlobalAlertTitleProps,
   GlobalAlertContentProps,
   GlobalAlertCloseProps,
-} from "./root/GlobalAlert";
+} from "./root/GlobalAlertRoot";
