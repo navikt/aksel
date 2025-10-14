@@ -34,8 +34,7 @@ function DraftOverlay() {
   if (
     (environment !== "live" && environment !== "unknown") ||
     pathname?.startsWith("/admin") ||
-    isIFrame ||
-    isPresentation
+    isIFrame
   ) {
     return null;
   }
