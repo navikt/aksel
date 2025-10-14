@@ -145,6 +145,11 @@ const StyleMappings = {
     },
     { component: "Ingress", main: typoCss },
     {
+      component: "InlineMessage",
+      main: "inline-message.css",
+      dependencies: [typoCss],
+    },
+    {
       component: "InternalHeader",
       main: "internalheader.css",
       dependencies: [typoCss],

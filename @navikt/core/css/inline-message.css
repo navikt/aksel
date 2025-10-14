@@ -1,0 +1,47 @@
+.navds-inline-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--a-spacing-1);
+}
+
+.navds-inline-message[data-color="info"] {
+  color: var(--a-lightblue-900);
+
+  & .navds-inline-message__icon {
+    color: var(--a-icon-info);
+  }
+}
+
+.navds-inline-message[data-color="success"] {
+  color: var(--a-green-900);
+
+  & .navds-inline-message__icon {
+    color: var(--a-icon-success);
+  }
+}
+
+.navds-inline-message[data-color="danger"] {
+  color: var(--a-red-900);
+
+  & .navds-inline-message__icon {
+    color: var(--a-icon-danger);
+  }
+}
+
+.navds-inline-message[data-color="warning"] {
+  color: var(--a-orange-900);
+
+  & .navds-inline-message__icon {
+    color: var(--a-icon-warning);
+  }
+}
+
+.navds-inline-message__icon {
+  font-size: 1.5rem;
+  display: flex;
+  flex: 0 0 auto;
+
+  .navds-inline-message[data-size="small"] & {
+    font-size: 1.25rem;
+  }
+}
