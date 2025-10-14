@@ -21,6 +21,10 @@ function DraftOverlay() {
 
   const [enableVisualEditing, setEnableVisualEditing] = useState(false);
 
+  if (isPresentation) {
+    return <VisualEditing />;
+  }
+
   /**
    * Only show the disable draft mode panel when outside of Presentation Tool
    * - If in Iframe (e.g. embedded preview in Sanity Studio) we hide it
