@@ -5,7 +5,7 @@ export {
   LocalAlertTitle,
   LocalAlertContent,
   LocalAlertClose,
-} from "./root/LocalAlert";
+} from "./root/LocalAlertRoot";
 
 export type {
   LocalAlertProps,
@@ -13,4 +13,4 @@ export type {
   LocalAlertTitleProps,
   LocalAlertContentProps,
   LocalAlertCloseProps,
-} from "./root/LocalAlert";
+} from "./root/LocalAlertRoot";
