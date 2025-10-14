@@ -182,21 +182,3 @@
     color: var(--ax-text-neutral-contrast);
   }
 }
-
-.aksel-base-alert__inline {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--ax-space-4);
-  color: var(--ax-text-default);
-}
-
-.aksel-base-alert__inline-icon {
-  color: var(--ax-text-subtle);
-  font-size: 1.5rem;
-  display: flex;
-  flex: 0 0 auto;
-
-  .aksel-base-alert__inline[data-size="small"] & {
-    font-size: 1.25rem;
-  }
-}

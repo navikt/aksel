@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { VStack } from "../../layout/stack";
-import { Link } from "../../link";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
-import { InlineAlert } from "./InlineAlert";
+import { VStack } from "../layout/stack";
+import { Link } from "../link";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { InlineMessage } from "./InlineMessage";
 
-const meta: Meta<typeof InlineAlert> = {
-  title: "ds-react/Alert/InlineAlert",
-  component: InlineAlert,
+const meta: Meta<typeof InlineMessage> = {
+  title: "ds-react/Alert/InlineMessage",
+  component: InlineMessage,
   parameters: {
     chromatic: { disable: true },
   },
@@ -15,14 +15,16 @@ const meta: Meta<typeof InlineAlert> = {
 
 export default meta;
 
-type Story = StoryObj<typeof InlineAlert>;
+type Story = StoryObj<typeof InlineMessage>;
+
+const variants = ["info", "success", "warning", "error"] as const;
 
 export const Default: Story = {
   render: (props) => {
     return (
-      <InlineAlert variant={props.variant ?? "warning"}>
-        {props.children ?? "InlineAlert content"}
-      </InlineAlert>
+      <InlineMessage variant={props.variant ?? "warning"}>
+        {props.children ?? "InlineMessage content"}
+      </InlineMessage>
     );
   },
 
@@ -33,7 +35,7 @@ export const Default: Story = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["error", "warning", "success"],
+      options: variants,
     },
   },
 };
@@ -41,23 +43,21 @@ export const Default: Story = {
 export const SizeSmall: Story = {
   render: () => {
     return (
-      <InlineAlert variant="warning" size="small">
+      <InlineMessage variant="warning" size="small">
         <DemoContent />
-      </InlineAlert>
+      </InlineMessage>
     );
   },
 };
-
-const variants = ["warning", "error", "success"] as const;
 
 export const Compositions: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
         {variants.map((variant) => (
-          <InlineAlert variant={variant} key={variant}>
+          <InlineMessage variant={variant} key={variant}>
             <DemoContent />
-          </InlineAlert>
+          </InlineMessage>
         ))}
       </VStack>
     );
@@ -67,9 +67,9 @@ export const Compositions: Story = {
 export const WrappingTitle: Story = {
   render: () => {
     return (
-      <InlineAlert variant="warning">
+      <InlineMessage variant="warning">
         <DemoContent />
-      </InlineAlert>
+      </InlineMessage>
     );
   },
 };

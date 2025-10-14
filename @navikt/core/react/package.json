@@ -654,14 +654,14 @@
         "default": "./cjs/alert/global-alert/index.js"
       }
     },
-    "./InlineAlert": {
+    "./InlineMessage": {
       "import": {
-        "types": "./esm/alert/inline-alert/index.d.ts",
-        "default": "./esm/alert/inline-alert/index.js"
+        "types": "./esm/inline-message/index.d.ts",
+        "default": "./esm/inline-message/index.js"
       },
       "require": {
-        "types": "./cjs/alert/inline-alert/index.d.ts",
-        "default": "./cjs/alert/inline-alert/index.js"
+        "types": "./cjs/inline-message/index.d.ts",
+        "default": "./cjs/inline-message/index.js"
       }
     },
     "./package.json": "./package.json",

@@ -184,7 +184,7 @@ export {
   type GlobalAlertTitleProps,
   type GlobalAlertContentProps,
 } from "./alert/global-alert";
-export { InlineAlert, type InlineAlertProps } from "./alert/inline-alert";
+export { InlineMessage, type InlineMessageProps } from "./inline-message";
 
 /**
  * Theming
