@@ -143,6 +143,7 @@ const StyleMappings = {
       main: "help-text.css",
       dependencies: ["popover.css"],
     },
+    { component: "Infocard", main: "alert.css", dependencies: [typoCss] },
     { component: "Ingress", main: typoCss },
     {
       component: "InternalHeader",
