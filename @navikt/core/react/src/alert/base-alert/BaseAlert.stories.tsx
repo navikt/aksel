@@ -59,7 +59,7 @@ export const Default: Story = {
     },
     variant: {
       control: { type: "select" },
-      options: ["error", "warning", "success", "success"],
+      options: ["error", "warning", "success", "announcement"],
     },
   },
 };
