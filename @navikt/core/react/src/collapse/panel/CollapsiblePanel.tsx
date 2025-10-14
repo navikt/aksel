@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
+import type { AsChildProps } from "../../util/types";
 
-type CollapsiblePanelProps = {
-  children: React.ReactNode;
-};
+type CollapsiblePanelProps = React.HTMLAttributes<HTMLDivElement> &
+  AsChildProps;
 
 const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
   ({ children, ...rest }: CollapsiblePanelProps, forwardedRef) => {

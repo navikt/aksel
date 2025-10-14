@@ -1,18 +1,19 @@
 import React, { forwardRef } from "react";
+import type { AsChildProps } from "../../util/types";
 
-type CollapsibleTriggerProps = {
-  children: React.ReactNode;
-};
+type CollapsibleTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  AsChildProps;
 
-const CollapsibleTrigger = forwardRef<HTMLDivElement, CollapsibleTriggerProps>(
-  ({ children, ...rest }: CollapsibleTriggerProps, forwardedRef) => {
-    return (
-      <div ref={forwardedRef} {...rest}>
-        {children}
-      </div>
-    );
-  },
-);
+const CollapsibleTrigger = forwardRef<
+  HTMLButtonElement,
+  CollapsibleTriggerProps
+>(({ children, ...rest }: CollapsibleTriggerProps, forwardedRef) => {
+  return (
+    <button ref={forwardedRef} {...rest}>
+      {children}
+    </button>
+  );
+});
 
 export { CollapsibleTrigger };
 export type { CollapsibleTriggerProps };

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Box } from "../layout/box";
-import { HStack, VStack } from "../layout/stack";
+import { HStack } from "../layout/stack";
 import { Panel, Root, Trigger } from "./namespace";
 
 const meta: Meta<typeof Root> = {
@@ -67,7 +67,7 @@ export const InContext: StoryFn<typeof Root> = () => {
 };
 
 export const Animated: StoryFn<typeof Root> = () => (
-  <Root lazy>
+  <Root keepMounted>
     <Trigger asChild>
       <Button size="small" variant="secondary">
         Animer open/lukk
@@ -118,8 +118,8 @@ Animated.decorators = [
   ),
 ];
 
-export const Lazy: StoryFn<typeof Root> = () => (
-  <Root lazy>
+export const KeepMounted: StoryFn<typeof Root> = () => (
+  <Root keepMounted>
     <Trigger>Trigger</Trigger>
     <Panel>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
@@ -181,42 +181,3 @@ export const Disabled: StoryFn<typeof Root> = ({ open = false }) => (
     </Panel>
   </Root>
 );
-
-export const Chromatic: Story = {
-  render: () => (
-    <VStack gap="8">
-      <div>
-        <h2>In context</h2>
-        <InContext />
-      </div>
-      <div>
-        <h2>Animated</h2>
-        <Animated />
-      </div>
-      <div>
-        <h2>Lazy</h2>
-        <Lazy />
-      </div>
-      <div>
-        <h2>AsChild</h2>
-        <AsChild />
-      </div>
-      <div>
-        <h2>DefaultOpen</h2>
-        <DefaultOpen />
-      </div>
-      <div>
-        <h2>ControlledOpen</h2>
-        <ControlledOpen />
-      </div>
-      <div>
-        <h2>Disabled</h2>
-        <Disabled />
-        <Disabled open />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
