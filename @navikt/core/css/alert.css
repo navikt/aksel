@@ -123,17 +123,13 @@
 
   --__ac-base-alert-pi: var(--a-spacing-5);
   --__ac-base-alert-content-p: var(--a-spacing-3) var(--__ac-base-alert-pi) var(--a-spacing-4) var(--__ac-base-alert-pi);
-  --__ac-base-alert-icon-mt: var(--a-spacing-1);
   --__ac-base-alert-title-pb: var(--a-spacing-05);
-  --__ac-base-alert-icon-size: 1.5rem;
   --__ac-base-alert-header-max-width: 37.5rem;
 
   &[data-size="small"] {
     --__ac-base-alert-pi: var(--a-spacing-4);
     --__ac-base-alert-content-p: var(--a-spacing-2) var(--a-spacing-4) var(--a-spacing-3) var(--a-spacing-4);
-    --__ac-base-alert-icon-mt: var(--a-spacing-1-alt);
     --__ac-base-alert-title-pb: var(--a-spacing-1);
-    --__ac-base-alert-icon-size: 1.25rem;
   }
 
   &[data-type="moderate"] {
@@ -333,8 +329,8 @@
 }
 
 .navds-base-alert__icon {
-  font-size: var(--__ac-base-alert-icon-size);
-  margin-top: var(--__ac-base-alert-icon-mt);
+  font-size: 1.5rem;
+  margin-top: var(--a-spacing-1);
   display: grid;
 }
 

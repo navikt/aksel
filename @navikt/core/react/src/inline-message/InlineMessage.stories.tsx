@@ -6,7 +6,7 @@ import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import { InlineMessage } from "./InlineMessage";
 
 const meta: Meta<typeof InlineMessage> = {
-  title: "ds-react/Alert/InlineMessage",
+  title: "ds-react/InlineMessage",
   component: InlineMessage,
   parameters: {
     chromatic: { disable: true },

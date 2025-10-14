@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
-import { Heading } from "../../../typography";
+import { BodyShort } from "../../../typography";
 import { useBaseAlert } from "../root/BaseAlertRoot.context";
 
 interface BaseAlertTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
@@ -33,15 +33,16 @@ const BaseAlertTitle = forwardRef<HTMLHeadingElement, BaseAlertTitleProps>(
     const { size } = useBaseAlert();
 
     return (
-      <Heading
+      <BodyShort
         ref={forwardedRef}
         {...restProps}
         as={as}
-        size={size === "medium" ? "small" : "xsmall"}
+        size={size === "medium" ? "large" : "medium"}
+        weight="semibold"
         className={cn(className, "navds-base-alert__title")}
       >
         {children}
-      </Heading>
+      </BodyShort>
     );
   },
 );

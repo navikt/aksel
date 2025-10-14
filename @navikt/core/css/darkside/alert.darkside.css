@@ -94,17 +94,13 @@
 
   --__axc-base-alert-pi: var(--ax-space-20);
   --__axc-base-alert-content-p: var(--ax-space-12) var(--__axc-base-alert-pi) var(--ax-space-16) var(--__axc-base-alert-pi);
-  --__axc-base-alert-icon-mt: var(--ax-space-4);
   --__axc-base-alert-title-pb: var(--ax-space-2);
-  --__axc-base-alert-icon-size: 1.5rem;
   --__axc-base-alert-header-max-width: 37.5rem;
 
   &[data-size="small"] {
     --__axc-base-alert-pi: var(--ax-space-16);
     --__axc-base-alert-content-p: var(--ax-space-8) var(--ax-space-16) var(--ax-space-12) var(--ax-space-16);
-    --__axc-base-alert-icon-mt: var(--ax-space-6);
     --__axc-base-alert-title-pb: var(--ax-space-4);
-    --__axc-base-alert-icon-size: 1.25rem;
   }
 
   &[data-type="moderate"] {
@@ -152,8 +148,8 @@
 }
 
 .aksel-base-alert__icon {
-  font-size: var(--__axc-base-alert-icon-size);
-  margin-top: var(--__axc-base-alert-icon-mt);
+  font-size: 1.5rem;
+  margin-top: var(--ax-space-4);
   display: grid;
 }
 
