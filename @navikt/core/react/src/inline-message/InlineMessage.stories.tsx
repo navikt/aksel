@@ -74,6 +74,16 @@ export const WrappingTitle: Story = {
   },
 };
 
+export const AsLink: Story = {
+  render: () => {
+    return (
+      <InlineMessage variant="warning" as={Link} href="#">
+        This is a link inside the InlineMessage
+      </InlineMessage>
+    );
+  },
+};
+
 export const Chromatic = renderStoriesForChromatic({
   Default,
   Compositions,

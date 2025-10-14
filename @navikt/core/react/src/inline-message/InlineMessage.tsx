@@ -8,6 +8,7 @@ import {
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import type { AkselColor } from "../types";
 import { BodyShort } from "../typography";
+import type { OverridableComponent } from "../util";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -26,22 +27,34 @@ interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
  * Inline message are used to display important messages with other content.
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/inline-message)
  * @see 🏷️ {@link InlineMessageProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  * @example
  * ```jsx
  *  <InlineMessage variant="error">
  *    Inline Errormessage
  *  </InlineMessage>
  * ```
+ *
+ * * @example As a link
+ * ```jsx
+ *  <InlineMessage variant="error" as={Link} href="#">
+ *    Inline Errormessage
+ *  </InlineMessage>
+ * ```
  */
-const InlineMessage = forwardRef<HTMLDivElement, InlineMessageProps>(
+const InlineMessage: OverridableComponent<
+  InlineMessageProps,
+  HTMLAnchorElement
+> = forwardRef(
   (
     {
+      as: Component = "div",
       children,
       className,
       variant,
       size = "medium",
       ...restProps
-    }: InlineMessageProps,
+    }: InlineMessageProps & { as?: React.ElementType },
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
@@ -54,7 +67,7 @@ const InlineMessage = forwardRef<HTMLDivElement, InlineMessageProps>(
         data-color={variantToDataColor(variant)}
         {...restProps}
         size={size}
-        as="div"
+        as={Component}
         data-variant={variant}
         data-size={size}
       >
