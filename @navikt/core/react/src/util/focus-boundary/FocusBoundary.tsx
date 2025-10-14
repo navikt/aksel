@@ -270,7 +270,11 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
 
           /* We can only wrap focus if we have tabbable edges */
           if (!(first && last)) {
-            /* No need to do anything if active element is the expected focus-target */
+            /*
+             * No need to do anything if active element is the expected focus-target
+             * Case: No tabbable elements, focus should stay on container. If we don't preventDefault, the container will lose focus
+             * and potentially lose controll of focus to browser (like focusing address bar).
+             */
             if (focusedElement === containerTarget) {
               event.preventDefault();
             }
