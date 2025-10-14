@@ -90,7 +90,6 @@
   overflow: clip;
   position: relative;
   height: fit-content;
-  box-sizing: content-box;
 
   --__axc-base-alert-pi: var(--ax-space-20);
   --__axc-base-alert-content-p: var(--ax-space-12) var(--__axc-base-alert-pi) var(--ax-space-16) var(--__axc-base-alert-pi);
@@ -111,6 +110,10 @@
   &[data-type="strong"] {
     outline: 4px solid var(--ax-border-default);
     outline-offset: -4px;
+
+    &[data-color="neutral"] {
+      outline-color: var(--ax-border-strong);
+    }
   }
 
   &[data-global="true"] {
