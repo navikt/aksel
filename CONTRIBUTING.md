@@ -62,7 +62,7 @@ Dokumentasjon for komponenter finner man på [aksel.nav.no](https://aksel.nav.no
 
 ## Versjonering av pakker
 
-Vi bruker `changeset` for versjonering av pakker. Se [README](https://github.com/navikt/aksel/blob/main/.changeset/README.md) for mer informasjon.
+Vi bruker `changeset` for versjonering av pakker. Se [README](./README.md) for mer informasjon.
 
 ## Kodekvalitet og testing
 

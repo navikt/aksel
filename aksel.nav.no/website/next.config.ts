@@ -159,7 +159,11 @@ const nextConfig: NextConfig = {
   output: "standalone",
   outputFileTracingRoot: path.join(__dirname, "../../"),
   experimental: {
-    optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],
+    optimizePackageImports: [
+      "@navikt/ds-react",
+      "@navikt/aksel-icons",
+      "sanity",
+    ],
     largePageDataBytes: 128 * 2000,
   },
   serverExternalPackages: ["@navikt/next-logger", "next-logger", "pino"],

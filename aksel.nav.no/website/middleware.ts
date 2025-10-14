@@ -71,9 +71,8 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (fallbackfavicon file)
      * - favicon.svg (favicon file)
-     * - searchindex.json
      * - robots.txt
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|searchindex.json|robots.txt).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|robots.txt).*)",
   ],
 };

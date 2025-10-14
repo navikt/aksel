@@ -1,4 +1,5 @@
 import React from "react";
+import { ownerDocument } from "../util/owner";
 import type { ModalProps } from "./types";
 
 export interface MouseCoordinates {
@@ -16,7 +17,7 @@ export const coordsAreInside = (
 };
 
 export function getCloseHandler(
-  modalRef: React.RefObject<HTMLDialogElement>,
+  modalRef: React.RefObject<HTMLDialogElement | null>,
   header: ModalProps["header"],
   onBeforeClose: ModalProps["onBeforeClose"],
 ) {
@@ -31,7 +32,7 @@ export const BODY_CLASS_LEGACY = "navds-modal__document-body";
 export const BODY_CLASS = "aksel-modal__document-body";
 
 export function useBodyScrollLock(
-  modalRef: React.RefObject<HTMLDialogElement>,
+  modalRef: React.RefObject<HTMLDialogElement | null>,
   portalNode: HTMLElement | null,
   isNested: boolean,
 ) {
@@ -45,16 +46,18 @@ export function useBodyScrollLock(
       return;
     }
 
+    const ownerDoc = ownerDocument(modalRef.current);
+
     // In case `open` is true initially
     if (modalRef.current.open) {
-      document.body.classList.add(BODY_CLASS, BODY_CLASS_LEGACY);
+      ownerDoc.body.classList.add(BODY_CLASS, BODY_CLASS_LEGACY);
     }
 
     const observer = new MutationObserver(() => {
       if (modalRef.current?.open) {
-        document.body.classList.add(BODY_CLASS, BODY_CLASS_LEGACY);
+        ownerDoc.body.classList.add(BODY_CLASS, BODY_CLASS_LEGACY);
       } else {
-        document.body.classList.remove(BODY_CLASS, BODY_CLASS_LEGACY);
+        ownerDoc.body.classList.remove(BODY_CLASS, BODY_CLASS_LEGACY);
       }
     });
 
@@ -66,7 +69,7 @@ export function useBodyScrollLock(
     return () => {
       observer.disconnect();
       // In case modal is unmounted before it's closed
-      document.body.classList.remove(BODY_CLASS, BODY_CLASS_LEGACY);
+      ownerDoc.body.classList.remove(BODY_CLASS, BODY_CLASS_LEGACY);
     };
   }, [modalRef, portalNode, isNested]);
 }

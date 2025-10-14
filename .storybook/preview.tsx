@@ -1,5 +1,5 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
-import { Preview } from "@storybook/react";
+import { Preview } from "@storybook/nextjs";
 import React, { useEffect, useLayoutEffect } from "react";
 // @ts-expect-error - Temporary
 import darksideCss from "../@navikt/core/css/darkside/index.css?inline";
@@ -79,8 +79,20 @@ export default {
         ],
       },
     },
+
     layout: "centered",
     backgrounds: { disable: true },
+
+    docs: {
+      codePanel: true,
+    },
+
+    a11y: {
+      // 'todo' - show a11y violations in the test UI only
+      // 'error' - fail CI on a11y violations
+      // 'off' - skip a11y checks entirely
+      test: "todo",
+    },
   },
 
   globalTypes: {

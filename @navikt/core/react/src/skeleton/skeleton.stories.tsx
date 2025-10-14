@@ -1,4 +1,4 @@
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { Skeleton } from ".";
 import { Alert } from "../alert";

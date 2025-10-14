@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 
 const fontWeights = [100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const;

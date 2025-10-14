@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { HStack, Spacer, Stack, VStack } from ".";
 import { Box } from "../box";

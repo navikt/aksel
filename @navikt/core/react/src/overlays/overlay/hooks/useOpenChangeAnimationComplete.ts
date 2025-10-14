@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { useLatestRef } from "../../../util/hooks/useLatestRef";
 import { useAnimationsFinished } from "./useAnimationsFinished";
 import { useEventCallback } from "./useEventCallback";
-import { useLatestRef } from "./useLatestRef";
 
-interface useOpenChangeCompleteParameters {
+interface useOpenChangeAnimationCompleteParameters {
   /**
    * Enable / disable the effect. Disabled => no animation tracking / callback.
    * @default true
@@ -34,8 +34,8 @@ interface useOpenChangeCompleteParameters {
  * comparing the `open` value captured at scheduling time with the latest `open` via ref;
  * if they differ (state flipped again mid‑animation) the callback is skipped.
  */
-export function useOpenChangeComplete(
-  parameters: useOpenChangeCompleteParameters,
+export function useOpenChangeAnimationComplete(
+  parameters: useOpenChangeAnimationCompleteParameters,
 ) {
   const {
     enabled = true,

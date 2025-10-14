@@ -1,9 +1,7 @@
 "use client";
 
 import {
-  createContext,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -11,111 +9,108 @@ import {
   useTransition,
 } from "react";
 import { debounce } from "@navikt/ds-react";
+import {
+  type GlobalSearchActionReturnT,
+  GlobalSearchResultContext,
+  useGlobalSearch,
+} from "@/app/_ui/global-search/GlobalSearch.context";
+import {
+  fuseGlobalSearch,
+  preloadSearchIndex,
+} from "@/app/_ui/global-search/server/GlobalSearch.actions";
+import { useParamState } from "@/app/_ui/global-search/useParamState";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { fuseGlobalSearch } from "./GlobalSearch.actions";
 
-type ActionReturnT = Awaited<ReturnType<typeof fuseGlobalSearch>>;
+function GlobalSearchResultProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { openSearch } = useGlobalSearch();
+  const shouldInitialOpenRef = useRef<boolean>(true);
 
-type SearchContextType = {
-  open: boolean;
-  openSearch: () => void;
-  closeSearch: () => void;
-  inputRef: React.RefObject<HTMLInputElement>;
-  queryResults: ActionReturnT | null;
-  updateSearch: (query: string) => void;
-  resetSearch: () => void;
-};
+  const [searchResult, setSearchResults] =
+    useState<GlobalSearchActionReturnT | null>(null);
 
-const SearchContext = createContext<SearchContextType | null>(null);
-
-function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const [open, setOpen] = useState(false);
-
-  const isComicSans = useRef<boolean>(false);
-
-  const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
   const [, startTransition] = useTransition();
-
-  useEffect(() => {
-    const listener = (event: KeyboardEvent) => {
-      if (
-        (event.key === "k" || event.key === "b") &&
-        (event.metaKey || event.ctrlKey) &&
-        !event.shiftKey
-      ) {
-        event.preventDefault();
-        if (open) {
-          inputRef.current?.select();
-        } else {
-          setOpen(true);
-        }
-      }
-    };
-
-    document.addEventListener("keydown", listener);
-
-    return () => document.removeEventListener("keydown", listener);
-  }, [open]);
-
-  const openSearch = () => {
-    setOpen(true);
-    searchResult?.query
-      ? /* When re-opening search for user so they can start new search instantly */
-        inputRef.current?.select()
-      : inputRef.current?.focus();
-  };
-
-  const closeSearch = () => setOpen(false);
+  const { setParam, clearParam, paramValue } = useParamState("query");
 
   const debouncedSearch = useMemo(
     () =>
       debounce((query: string) => {
-        if (!isComicSans.current && query.includes("comic")) {
-          isComicSans.current = true;
-          document.body.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
-        }
+        maybeEnableComicSans(query);
 
-        startTransition(async () => {
-          const newResults = await fuseGlobalSearch(query);
-          setSearchResults(newResults);
-        });
         umamiTrack("sok", {});
-      }),
-    [],
+        setParam(query);
+      }, 200),
+    [setParam],
   );
 
   const resetSearch = useCallback(() => {
     debouncedSearch.clear();
-    setSearchResults(null);
+    clearParam();
+  }, [clearParam, debouncedSearch]);
+
+  const clearDebounce = useCallback(() => {
+    debouncedSearch.clear();
   }, [debouncedSearch]);
 
+  useEffect(() => {
+    return debouncedSearch.clear();
+  }, [debouncedSearch]);
+
+  useEffect(() => {
+    if (!paramValue) {
+      setSearchResults(null);
+      shouldInitialOpenRef.current = false;
+
+      return;
+    }
+
+    startTransition(async () => {
+      const newResults = await fuseGlobalSearch(paramValue);
+
+      setSearchResults(newResults);
+
+      /*
+       * We use a ref to ensure the dialog only auto-opens after results are in to avoid CLS.
+       */
+      if (shouldInitialOpenRef.current) {
+        openSearch();
+        shouldInitialOpenRef.current = false;
+      }
+    });
+  }, [paramValue, openSearch]);
+
+  /**
+   * Preload the searchindex cache, so that the first search is faster.
+   *
+   */
+  useEffect(() => {
+    void preloadSearchIndex();
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({
+      queryResults: searchResult,
+      updateQuery: debouncedSearch,
+      resetSearch,
+      clearDebounce,
+    }),
+    [searchResult, debouncedSearch, resetSearch, clearDebounce],
+  );
+
   return (
-    <SearchContext.Provider
-      value={{
-        open,
-        closeSearch,
-        openSearch,
-        inputRef,
-        queryResults: searchResult,
-        updateSearch: debouncedSearch,
-        resetSearch,
-      }}
-    >
+    <GlobalSearchResultContext.Provider value={contextValue}>
       {children}
-    </SearchContext.Provider>
+    </GlobalSearchResultContext.Provider>
   );
 }
 
-function useGlobalSearch() {
-  const context = useContext(SearchContext);
-  if (!context) {
-    throw new Error(
-      "useGlobalSearch must be used within a GlobalSearchProvider",
-    );
+function maybeEnableComicSans(query: string) {
+  if (query.includes("comic")) {
+    document.body.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
   }
-
-  return context;
 }
 
-export { GlobalSearchProvider, useGlobalSearch };
+export { GlobalSearchResultProvider };

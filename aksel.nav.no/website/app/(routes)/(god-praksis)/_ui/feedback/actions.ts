@@ -161,13 +161,6 @@ function slackBlock({ feedback, article, sender }: SlackBlockT) {
               url: `https://aksel.nav.no/${article.slug}`,
               text: `${article.title}\n\n`,
             },
-            {
-              type: "text",
-              text: "\n\nDisse fikk tilbakemeldingen (medvirkende og temakontakter):\n",
-              style: {
-                bold: true,
-              },
-            },
           ],
         },
       ],

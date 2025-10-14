@@ -1,18 +1,9 @@
 import React from "react";
 import { useRenameCSS } from "../theme/Theme";
-import { useId } from "../util/hooks";
 
-export const HelpTextIcon = ({
-  title,
-  filled = false,
-}: {
-  title: string;
-  filled?: boolean;
-}) => {
+export const HelpTextIcon = ({ filled = false }: { filled?: boolean }) => {
   const { cn } = useRenameCSS();
 
-  let titleId: string | undefined = useId();
-  titleId = title ? `title-${titleId}` : undefined;
   return (
     <svg
       width="1em"
@@ -22,12 +13,11 @@ export const HelpTextIcon = ({
       xmlns="http://www.w3.org/2000/svg"
       focusable={false}
       role="img"
-      aria-labelledby={titleId}
       className={cn("navds-help-text__icon", {
         "navds-help-text__icon--filled": filled,
       })}
+      aria-hidden
     >
-      {title ? <title id={titleId}>{title}</title> : null}
       <circle
         cx="12"
         cy="12"

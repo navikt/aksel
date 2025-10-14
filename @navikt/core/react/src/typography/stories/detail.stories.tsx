@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { expect, within } from "@storybook/test";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { expect, within } from "storybook/test";
 import { VStack } from "../../layout/stack";
 import Detail from "../Detail";
 

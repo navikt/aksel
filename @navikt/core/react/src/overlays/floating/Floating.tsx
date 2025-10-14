@@ -27,7 +27,7 @@ import {
   useMergeRefs,
 } from "../../util/hooks";
 import { AsChildProps } from "../../util/types";
-import { useOpenChangeComplete } from "../overlay/hooks/useOpenChangeComplete";
+import { useOpenChangeAnimationComplete } from "../overlay/hooks/useOpenChangeAnimationComplete";
 import {
   type Align,
   type Measurable,
@@ -363,7 +363,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       }
     }, [autoUpdateWhileMounted, enabled, floatingElements, update]);
 
-    useOpenChangeComplete({
+    useOpenChangeAnimationComplete({
       enabled: !!modalContext?.ref,
       open: enabled,
       ref: modalContext?.ref,

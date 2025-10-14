@@ -13,12 +13,17 @@ import {
 } from "date-fns";
 
 /** Return the months to show in the dropdown. */
-export function getMonthOptions(
-  displayMonth: Date,
-  navStart: Date | undefined,
-  navEnd: Date | undefined,
-  locale: Locale,
-):
+export function getMonthOptions({
+  displayMonth,
+  navStart,
+  navEnd,
+  locale,
+}: {
+  displayMonth: Date;
+  navStart: Date | undefined;
+  navEnd: Date | undefined;
+  locale: Locale;
+}):
   | {
       value: number;
       label: string;
@@ -31,7 +36,9 @@ export function getMonthOptions(
   });
 
   const options = months.map((month) => {
-    const label = format(month, "LLLL", { locale });
+    const label = format(month, "LLLL", {
+      locale,
+    }).replace(".", "");
     const value = getMonth(month);
     const disabled =
       (navStart && month < startOfMonth(navStart)) ||
@@ -44,11 +51,15 @@ export function getMonthOptions(
 }
 
 /** Return the years to show in the dropdown. */
-export function getYearOptions(
-  navStart: Date | undefined,
-  navEnd: Date | undefined,
-  locale: Locale,
-):
+export function getYearOptions({
+  navStart,
+  navEnd,
+  locale,
+}: {
+  navStart: Date | undefined;
+  navEnd: Date | undefined;
+  locale: Locale;
+}):
   | {
       value: number;
       label: string;

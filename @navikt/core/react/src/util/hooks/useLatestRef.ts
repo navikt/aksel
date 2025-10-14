@@ -1,6 +1,6 @@
 "use client";
 
-import { useClientLayoutEffect } from "../../../util";
+import { useClientLayoutEffect } from "./useClientLayoutEffect";
 import { useRefWithInit } from "./useRefWithInit";
 
 export function useLatestRef<T>(value: T) {

@@ -2,7 +2,16 @@ name: BugFill
 category: Nature and animals
 sub_category: Nature
 keywords:
-  - BugFill
+  - debugging
+  - error detection
+  - issue tracking
+  - software testing
+  - bug reporting
+  - feilsøking
+  - feildeteksjon
+  - problemregistrering
+  - programvaretesting
+  - rapportering av feil
 variant: Fill
-updated_at: 14.05.2025
+updated_at: 29.09.2025
 created_at: 27.02.2023

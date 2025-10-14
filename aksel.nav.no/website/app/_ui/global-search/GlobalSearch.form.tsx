@@ -1,13 +1,32 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Search } from "@navikt/ds-react";
+import {
+  useGlobalSearch,
+  useGlobalSearchResults,
+} from "@/app/_ui/global-search/GlobalSearch.context";
+import { useParamState } from "@/app/_ui/global-search/useParamState";
 import styles from "./GlobalSearch.module.css";
-import { useGlobalSearch } from "./GlobalSearch.provider";
 
 const GlobalSearchForm = () => {
-  const { inputRef, closeSearch, updateSearch, resetSearch } =
-    useGlobalSearch();
+  const { paramValue } = useParamState("query");
+  const initialQuery = useRef(!!paramValue);
+  const { inputRef, closeSearch } = useGlobalSearch();
+  const { updateQuery, resetSearch } = useGlobalSearchResults();
+
+  useEffect(() => {
+    if (!inputRef.current) {
+      return;
+    }
+    if (initialQuery.current) {
+      /* Defer to ensure defaultValue is applied */
+      queueMicrotask(() => inputRef.current?.select());
+    } else {
+      inputRef.current.focus();
+    }
+  }, [inputRef]);
 
   return (
     <div className={styles.searchForm}>
@@ -17,7 +36,8 @@ const GlobalSearchForm = () => {
           label="Globalt søk"
           aria-autocomplete="both"
           variant="simple"
-          onChange={updateSearch}
+          defaultValue={paramValue}
+          onChange={updateQuery}
           onClear={resetSearch}
           onKeyDown={(e) => {
             /* Avoids sideeffects when clearing Search */
@@ -38,7 +58,10 @@ const GlobalSearchForm = () => {
       </form>
       <Button
         variant="tertiary-neutral"
-        onClick={closeSearch}
+        onClick={() => {
+          closeSearch();
+          resetSearch();
+        }}
         icon={<XMarkIcon title="Lukk" />}
       />
     </div>

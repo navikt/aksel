@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
 import { BodyShort, Heading } from "@navikt/ds-react";
-import { preloadSearchIndex } from "./GlobalSearch.actions";
-import { globalSearchConfig } from "./GlobalSearch.config";
+import { useGlobalSearchResults } from "@/app/_ui/global-search/GlobalSearch.context";
+import { globalSearchConfig } from "@/app/_ui/global-search/server/GlobalSearch.config";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
 import styles from "./GlobalSearch.module.css";
-import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchResultsView() {
-  const { queryResults } = useGlobalSearch();
+  const { queryResults } = useGlobalSearchResults();
 
   if (!queryResults?.result || queryResults?.result?.totalHits === 0) {
     return null;
@@ -40,20 +38,8 @@ function GlobalSearchResultsView() {
   );
 }
 
-/**
- * Preload the searchindex cache, so that the first search is faster.
- *
- */
-function GlobalSearchPreload() {
-  useEffect(() => {
-    void preloadSearchIndex();
-  }, []);
-
-  return null;
-}
-
 function GlobalSearchEmptySearchState() {
-  const { queryResults } = useGlobalSearch();
+  const { queryResults } = useGlobalSearchResults();
 
   const showEmptySearchState =
     !queryResults?.result?.totalHits && queryResults?.query;
@@ -157,7 +143,7 @@ function GlobalSearchEmptySearchState() {
 }
 
 function GlobalSearchEmptyState() {
-  const { queryResults } = useGlobalSearch();
+  const { queryResults } = useGlobalSearchResults();
 
   if (queryResults?.result) {
     return null;
@@ -279,6 +265,5 @@ function GlobalSearchEmptyState() {
 export {
   GlobalSearchEmptySearchState,
   GlobalSearchEmptyState,
-  GlobalSearchPreload,
   GlobalSearchResultsView,
 };

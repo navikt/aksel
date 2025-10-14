@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { debounce } from "../../../util";
+import { ownerDocument } from "../../../util/owner";
 
-export function useScrollButtons(listRef: React.RefObject<HTMLDivElement>) {
+export function useScrollButtons(
+  listRef: React.RefObject<HTMLDivElement | null>,
+) {
   const [displayScroll, setDisplayScroll] = useState({
     start: false,
     end: false,
@@ -29,8 +32,8 @@ export function useScrollButtons(listRef: React.RefObject<HTMLDivElement>) {
 
   useEffect(() => {
     const handleResize = () => updateScrollButtonState();
-    const win = listRef.current?.ownerDocument ?? document ?? window;
-    win.addEventListener("resize", handleResize);
+    const ownerDoc = ownerDocument(listRef.current);
+    ownerDoc.addEventListener("resize", handleResize);
 
     let resizeObserver: ResizeObserver;
 
@@ -40,7 +43,7 @@ export function useScrollButtons(listRef: React.RefObject<HTMLDivElement>) {
     }
 
     return () => {
-      win.removeEventListener("resize", handleResize);
+      ownerDoc.removeEventListener("resize", handleResize);
       resizeObserver?.disconnect();
       updateScrollButtonState.clear();
     };

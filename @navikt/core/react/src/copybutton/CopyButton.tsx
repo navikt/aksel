@@ -1,16 +1,11 @@
-import React, {
-  ButtonHTMLAttributes,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ButtonHTMLAttributes, forwardRef, useState } from "react";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import { Button, ButtonProps } from "../button";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { Label } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import copy from "../util/copy";
+import { useTimeout } from "../util/hooks/useTimeout";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 export interface CopyButtonProps
@@ -94,29 +89,22 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     ref,
   ) => {
     const [active, setActive] = useState(false);
-    const timeoutRef = useRef<number>();
     const translate = useI18n("CopyButton");
+    const timeout = useTimeout();
 
     const { cn } = useRenameCSS();
 
     const themeContext = useThemeInternal(false);
 
-    useEffect(() => {
-      return () => {
-        timeoutRef.current && clearTimeout(timeoutRef.current);
-      };
-    }, []);
-
     const handleClick = () => {
-      timeoutRef.current && clearTimeout(timeoutRef.current);
       copy(copyText);
       setActive(true);
       onActiveChange?.(true);
 
-      timeoutRef.current = window.setTimeout(() => {
+      timeout.start(activeDuration, () => {
         setActive(false);
         onActiveChange?.(false);
-      }, activeDuration);
+      });
     };
 
     const activeString = activeText || translate("activeText");

@@ -67,7 +67,9 @@ export const CustomPortalRootFromProvider = () => {
         </Box>
         <Box
           background="surface-alt-3-subtle"
-          ref={(el) => el && setPortalContainer(el)}
+          ref={(el) => {
+            el && setPortalContainer(el);
+          }}
         >
           <h1>Tree B</h1>
         </Box>

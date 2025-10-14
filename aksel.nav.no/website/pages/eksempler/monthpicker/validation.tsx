@@ -36,5 +36,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Bruk onValidate-callback for å håndtere validering.",
+  desc: "Bruk `onValidate`-callback for å håndtere validering.",
 };
