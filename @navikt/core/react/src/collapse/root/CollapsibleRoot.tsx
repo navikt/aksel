@@ -1,4 +1,7 @@
 import React, { forwardRef } from "react";
+import { useEventCallback } from "../../overlays/overlay/hooks/useEventCallback";
+import { CollapsibleRootContextProvider } from "./CollapsibleRoot.context";
+import { useCollapsibleRoot } from "./useCollapsibleRoot";
 
 interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -43,11 +46,39 @@ interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
-  ({ children, ...rest }: CollapsibleProps, forwardedRef) => {
+  (
+    {
+      children,
+      defaultOpen = false,
+      disabled = false,
+      onOpenChange: onOpenChangeProp,
+      open,
+      hiddenUntilFound = false,
+      keepMounted = false,
+      ...rest
+    }: CollapsibleProps,
+    forwardedRef,
+  ) => {
+    const onOpenChange = useEventCallback(onOpenChangeProp);
+
+    const collapsibleHook = useCollapsibleRoot({
+      open,
+      defaultOpen,
+      onOpenChange,
+      disabled,
+      hiddenUntilFound,
+      keepMounted,
+    });
+
     return (
-      <div ref={forwardedRef} {...rest}>
-        {children}
-      </div>
+      <CollapsibleRootContextProvider
+        {...collapsibleHook}
+        onOpenChange={onOpenChange}
+      >
+        <div ref={forwardedRef} {...rest}>
+          {children}
+        </div>
+      </CollapsibleRootContextProvider>
     );
   },
 );
