@@ -18,7 +18,7 @@ interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Inline messages are used to display important messages with other content.
+ * InlineMessage is used to display important messages with other content.
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/inline-message)
  * @see 🏷️ {@link InlineMessageProps}
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
