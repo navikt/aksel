@@ -119,7 +119,6 @@
   overflow: clip;
   position: relative;
   height: fit-content;
-  box-sizing: content-box;
 
   --__ac-base-alert-pi: var(--a-spacing-5);
   --__ac-base-alert-content-p: var(--a-spacing-3) var(--__ac-base-alert-pi) var(--a-spacing-4) var(--__ac-base-alert-pi);
@@ -160,7 +159,7 @@
 }
 
 .navds-base-alert[data-color="neutral"] {
-  outline-color: var(--a-gray-600);
+  outline-color: var(--a-gray-700);
 
   &[data-type="moderate"] {
     .navds-base-alert__header {
