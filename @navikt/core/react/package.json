@@ -624,6 +624,16 @@
         "default": "./cjs/form/form-progress/index.js"
       }
     },
+    "./LocalAlert": {
+      "import": {
+        "types": "./esm/alert/local-alert/index.d.ts",
+        "default": "./esm/alert/local-alert/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/local-alert/index.d.ts",
+        "default": "./cjs/alert/local-alert/index.js"
+      }
+    },
     "./package.json": "./package.json",
     "./Theme": {
       "import": {

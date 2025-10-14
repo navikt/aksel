@@ -163,6 +163,14 @@ export {
   type LinkCardIconProps,
   type LinkCardImageProps,
 } from "./link-card";
+export {
+  LocalAlert,
+  type LocalAlertProps,
+  type LocalAlertHeaderProps,
+  type LocalAlertTitleProps,
+  type LocalAlertContentProps,
+  type LocalAlertCloseProps,
+} from "./alert/local-alert";
 
 /**
  * Theming
