@@ -29,7 +29,7 @@ interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
  *  </InlineMessage>
  * ```
  *
- * * @example As a link
+ * @example As a link
  * ```jsx
  *  <InlineMessage variant="error" as={Link} href="#">
  *    Inline Errormessage
