@@ -163,6 +163,7 @@ export {
   type LinkCardIconProps,
   type LinkCardImageProps,
 } from "./link-card";
+export { InlineMessage, type InlineMessageProps } from "./inline-message";
 
 /**
  * Theming
