@@ -131,6 +131,8 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         /*
          * If the focus has moved to an element outside the container, we move focus to the last valid focused element inside.
          * This makes sure to "trap" focus inside the container.
+         * We handle focus on focusout instead of focusin to avoid elements recieving focusin events
+         * when they are not supposed to (like when clicking on elements outside the container
          */
         if (!container.contains(relatedTarget)) {
           focus(lastFocusedElementRef.current, { select: true });
