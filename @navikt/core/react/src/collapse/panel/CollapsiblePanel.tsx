@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { useOpenChangeAnimationComplete } from "../../overlays/overlay/hooks/useOpenChangeAnimationComplete";
 import { useClientLayoutEffect } from "../../util";
 import type { AsChildProps } from "../../util/types";
 import { useCollapsibleRootContext } from "../root/CollapsibleRoot.context";
@@ -7,7 +8,10 @@ type CollapsiblePanelProps = React.HTMLAttributes<HTMLDivElement> &
   AsChildProps;
 
 const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
-  ({ children, id: idProp, ...rest }: CollapsiblePanelProps, forwardedRef) => {
+  (
+    { children, id: idProp, style: styleProp, ...rest }: CollapsiblePanelProps,
+    forwardedRef,
+  ) => {
     const {
       hiddenUntilFound,
       keepMounted,
@@ -15,6 +19,12 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
       panelId,
       open,
       triggerId,
+      transitionStatus,
+      panelRef,
+      setDimensions,
+      width,
+      height,
+      mounted,
     } = useCollapsibleRootContext();
 
     if (process.env.NODE_ENV !== "production") {
@@ -35,12 +45,46 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
       return undefined;
     }, [idProp]);
 
+    useOpenChangeAnimationComplete({
+      open: open && transitionStatus === "idle",
+      ref: panelRef,
+      onComplete() {
+        if (!open) {
+          return;
+        }
+
+        setDimensions({ height: undefined, width: undefined });
+      },
+    });
+
+    const transitionAttrbutes =
+      transitionStatus && transitionStatus !== "idle"
+        ? { [`data-${transitionStatus}-style`]: true }
+        : {};
+
+    const style: React.CSSProperties = {
+      ...styleProp,
+      "--__axc-collapsible-panel-height":
+        height === undefined ? "auto" : `${height}px`,
+      "--__axc-collapsible-panel-width":
+        width === undefined ? "auto" : `${width}px`,
+    };
+
+    const shouldRender =
+      keepMounted || hiddenUntilFound || (!keepMounted && mounted);
+
+    if (!shouldRender) {
+      return null;
+    }
+
     return (
       <div
         ref={forwardedRef}
         {...rest}
         id={panelId}
         aria-controls={open ? triggerId : undefined}
+        style={style}
+        {...transitionAttrbutes}
       >
         {children}
       </div>
