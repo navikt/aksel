@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 7.32.2
+
+### Patch Changes
+
+- Helptext: Avoid screen-readers reading title twice. ([#4169](https://github.com/navikt/aksel/pull/4169))
+
+- Combobox: Popup remains open when opening with voiceover in quick-nav mode. ([#4158](https://github.com/navikt/aksel/pull/4158))
+
+- Dependency: Update '@floating-ui/react-dom' to v2.1.6. ([#4154](https://github.com/navikt/aksel/pull/4154))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.32.2
+  - @navikt/aksel-icons@7.32.2
+
 ## 7.32.1
 
 ### Patch Changes
@@ -1818,7 +1832,6 @@
 ### Minor Changes
 
 - :recycle: Refaktorering og småfikser ([#2265](https://github.com/navikt/aksel/pull/2265))
-
   - Refaktorering som følge av nye ESLint-regler
   - AccordionItem/ToggleGroup: Støtte for 'id'-prop
   - MonthPicker: Mer presis type for 'onMonthSelect' prop
@@ -2006,7 +2019,6 @@
 ### Major Changes
 
 - Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
-
   - :sparkles: Støtte for header og footer
   - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
   - :boom: Provider: `appElement` er fjernet
