@@ -35,11 +35,14 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
   const shouldCancelInitialOpenTransitionRef = useRef(open);
 
   /**
-   * When `keepMounted` is `true` this runs once as soon as it exists in the DOM
-   * regardless of initial open state.
+   * When does this run:
+   * - keepMounted: true, open/defaultOpen: false
+   * - keepMounted: true, open/defaultOpen: true
+   * - keepMounted: false, open/defaultOpen: true
+   * - keepMounted: false, open/defaultOpen: false -> when it opens for the first time
    *
-   * When `keepMounted` is `false` this runs on every mount, typically every
-   * time it opens. If the panel is in the middle of a close transition that is
+   *
+   * If the panel is in the middle of a close transition that is
    * interrupted and re-opens, this won't run as the panel was not unmounted.
    */
   const handlePanelRef = useEventCallback((element: HTMLElement) => {
@@ -47,6 +50,13 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       return undefined;
     }
 
+    /**
+     * We start by detecting which animation type is being used (if any), and what orientation.
+     * This is only done once per panel instance.
+     *
+     * This allows us to handle setting/unsetting various styles and attributes
+     * in other effects based on the animation type/orientation.
+     */
     if (
       animationTypeRef.current === null ||
       transitionDimensionRef.current === null
@@ -98,7 +108,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       }
     }
 
-    /* Only run code after this if using css transitions */
+    /* Only run code after this if using CSS transitions */
     if (animationTypeRef.current !== "css-transition") {
       return undefined;
     }
@@ -107,7 +117,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
      * Explicitly set `display` to ensure the panel is actually rendered before
      * measuring anything. `!important` is to needed to override a conflicting
      * Tailwind v4 default that sets `display: none !important` on `[hidden]`:
-     * https://github.com/tailwindlabs/tailwindcss/blob/cd154a4f471e7a63cc27cad15dada650de89d52b/packages/tailwindcss/preflight.css#L320-L326
+     * @see https://github.com/tailwindlabs/tailwindcss/blob/cd154a4f471e7a63cc27cad15dada650de89d52b/packages/tailwindcss/preflight.css#L320-L326
      */
     element.style.setProperty("display", "block", "important");
 
@@ -118,6 +128,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       });
       element.style.removeProperty("display");
 
+      /* We make sure to disabled transitions on initial mount if defaultOpen/open: true */
       if (shouldCancelInitialOpenTransitionRef.current) {
         element.style.setProperty("transition-duration", "0s");
       }
@@ -133,7 +144,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
          * This is slightly faster than another RAF and is the earliest
          * opportunity to remove the temporary `transition-duration: 0s` that
          * was applied to cancel opening transitions of initially open panels.
-         * https://nolanlawson.com/2018/09/25/accurately-measuring-layout-on-the-web/
+         * @see https://nolanlawson.com/2018/09/25/accurately-measuring-layout-on-the-web/
          */
         setTimeout(() => {
           element.style.removeProperty("transition-duration");
@@ -282,7 +293,10 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     visible,
   ]);
 
-  /* On mount */
+  /**
+   * After the first render we can allow animations to run again.
+   * This is needed to prevent animations from running on page load.
+   */
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
       shouldCancelInitialOpenAnimationRef.current = false;
