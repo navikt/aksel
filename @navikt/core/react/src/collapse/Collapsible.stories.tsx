@@ -230,7 +230,6 @@ const StoryStyles = (
 
     .panel {
       background: var(--ax-bg-neutral-moderate);
-      padding: 1rem;
       margin-top: 0.5rem;
       border-radius: var(--ax-radius-4);
       border: 1px solid var(--ax-border-neutral);
@@ -238,9 +237,11 @@ const StoryStyles = (
       width: 100%;
 
       & ul {
+        padding: 1rem;
         list-style: none;
         margin: 0;
-        padding: 0;
+        overflow: clip;
+        white-space: nowrap;
       }
     }
 
@@ -283,8 +284,8 @@ const StoryStyles = (
     }
 
     .panel-transition {
-      transition: all 300ms ease;
       height: var(--__axc-collapsible-panel-height);
+      transition: all 12000ms ease;
 
       &[data-entering-style],
       &[data-exiting-style] {
