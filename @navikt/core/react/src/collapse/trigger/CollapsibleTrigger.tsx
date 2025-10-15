@@ -52,6 +52,7 @@ const CollapsibleTrigger = forwardRef<
         aria-controls={open ? panelId : undefined}
         aria-expanded={open}
         disabled={disabledProp ?? disabled}
+        data-state={open ? "open" : "closed"}
         onClick={composeEventHandlers(onClick, handleTrigger)}
       >
         {children}

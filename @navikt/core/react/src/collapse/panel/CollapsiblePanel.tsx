@@ -90,6 +90,8 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
         id={panelId}
         aria-controls={open ? triggerId : undefined}
         style={style}
+        hidden={hidden}
+        data-state={open ? "open" : "closed"}
         {...transitionAttrbutes}
       >
         {children}
