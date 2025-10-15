@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
+import { useClientLayoutEffect } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import type { AsChildProps } from "../../util/types";
 import { useCollapsibleRootContext } from "../root/CollapsibleRoot.context";
@@ -17,12 +18,29 @@ const CollapsibleTrigger = forwardRef<
       asChild,
       disabled: disabledProp,
       onClick,
+      id: idProp,
       ...rest
     }: CollapsibleTriggerProps,
     forwardedRef,
   ) => {
-    const { open, panelId, disabled, handleTrigger } =
-      useCollapsibleRootContext();
+    const {
+      open,
+      panelId,
+      disabled,
+      handleTrigger,
+      setTriggerIdState,
+      triggerId,
+    } = useCollapsibleRootContext();
+
+    useClientLayoutEffect(() => {
+      if (idProp) {
+        setTriggerIdState(idProp);
+        return () => {
+          setTriggerIdState(undefined);
+        };
+      }
+      return undefined;
+    }, [idProp]);
 
     const Component = asChild ? Slot : "button";
 
@@ -30,6 +48,7 @@ const CollapsibleTrigger = forwardRef<
       <Component
         ref={forwardedRef}
         {...rest}
+        id={triggerId}
         aria-controls={open ? panelId : undefined}
         aria-expanded={open}
         disabled={disabledProp ?? disabled}
