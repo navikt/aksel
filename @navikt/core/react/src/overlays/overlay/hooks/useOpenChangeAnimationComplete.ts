@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { useEventCallback } from "../../../util/hooks/useEventCallback";
 import { useLatestRef } from "../../../util/hooks/useLatestRef";
 import { useAnimationsFinished } from "./useAnimationsFinished";
-import { useEventCallback } from "./useEventCallback";
 
 interface useOpenChangeAnimationCompleteParameters {
   /**
