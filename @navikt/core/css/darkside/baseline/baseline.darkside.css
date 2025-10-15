@@ -7,7 +7,7 @@ body,
 }
 
 /* ---------------------------- Inline utilities ---------------------------- */
-[hidden] {
+[hidden]:where(:not([hidden="until-found"])) {
   /* CSS-layers reverses "!important" ordering, so we can't set this to important if we want to override it later. */
   display: none;
 }

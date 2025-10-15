@@ -22,6 +22,27 @@ export const Default: Story = {
   args: {},
 };
 
+export const HiddenUntilFound: Story = {
+  render: BaseCollapsible,
+  args: {
+    rootProps: {
+      hiddenUntilFound: true,
+      keepMounted: true,
+    },
+  },
+};
+
+export const HiddenUntilFoundWithTransition: Story = {
+  render: BaseCollapsible,
+  args: {
+    rootProps: {
+      hiddenUntilFound: true,
+      keepMounted: true,
+    },
+    animation: "transition-vertical",
+  },
+};
+
 export const Animations: Story = {
   render: () => (
     <HGrid columns={2} gap="space-32">
@@ -167,7 +188,7 @@ type BaseCollapsibleProps = {
 
 function BaseCollapsible(props: BaseCollapsibleProps) {
   return (
-    <div>
+    <div style={{ width: "300px", maxWidth: "100%" }}>
       {StoryStyles}
       <Root className="root" {...props.rootProps}>
         <Trigger className="trigger" {...props.triggerProps}>
@@ -186,11 +207,9 @@ function BaseCollapsible(props: BaseCollapsibleProps) {
           {...props.panelProps}
         >
           <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 3</li>
-            <li>Item 3</li>
+            <li>Ikea</li>
+            <li>Skeidar</li>
+            <li>Mobelringen</li>
           </ul>
         </Panel>
       </Root>
@@ -212,6 +231,7 @@ const StoryStyles = (
       padding: 0.5rem 1rem 0.5rem 0.5rem;
       border: 1px solid var(--ax-border-neutral);
       cursor: pointer;
+      width: 100%;
 
       &:hover {
         background: var(--ax-bg-neutral-moderate-hover);
@@ -229,18 +249,18 @@ const StoryStyles = (
     }
 
     .panel {
-      background: var(--ax-bg-neutral-moderate);
-      margin-top: 0.5rem;
-      border-radius: var(--ax-radius-4);
-      border: 1px solid var(--ax-border-neutral);
       overflow: hidden;
-      width: 100%;
 
       & ul {
+        background: var(--ax-bg-neutral-moderate);
+        border-radius: var(--ax-radius-4);
+        border: 1px solid var(--ax-border-neutral);
+        width: 100%;
+        overflow: hidden;
         padding: 1rem;
         list-style: none;
         margin: 0;
-        overflow: clip;
+        margin-top: 0.5rem;
         white-space: nowrap;
       }
     }
@@ -285,7 +305,7 @@ const StoryStyles = (
 
     .panel-transition {
       height: var(--__axc-collapsible-panel-height);
-      transition: all 12000ms ease;
+      transition: all 300ms ease;
 
       &[data-entering-style],
       &[data-exiting-style] {

@@ -359,27 +359,24 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     }
   }, [hiddenUntilFound, hidden, animationTypeRef, panelRef]);
 
-  useEffect(
-    function registerBeforeMatchListener() {
-      const panel = panelRef.current;
-      if (!panel) {
-        return undefined;
-      }
+  useEffect(() => {
+    const panel = panelRef.current;
+    if (!panel) {
+      return undefined;
+    }
 
-      function handleBeforeMatch() {
-        isBeforeMatchRef.current = true;
-        setOpen(true);
-        onOpenChange(true);
-      }
+    function handleBeforeMatch() {
+      isBeforeMatchRef.current = true;
+      setOpen(true);
+      onOpenChange(true);
+    }
 
-      panel.addEventListener("beforematch", handleBeforeMatch);
+    panel.addEventListener("beforematch", handleBeforeMatch);
 
-      return () => {
-        panel.removeEventListener("beforematch", handleBeforeMatch);
-      };
-    },
-    [onOpenChange, panelRef, setOpen],
-  );
+    return () => {
+      panel.removeEventListener("beforematch", handleBeforeMatch);
+    };
+  }, [onOpenChange, panelRef, setOpen]);
 
   const mergedPanelRef = useMergeRefs(externalRef, panelRef, handlePanelRef);
 
