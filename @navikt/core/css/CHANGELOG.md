@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.32.2
+
+### Patch Changes
+
+- Textarea: Break spaces ([#4182](https://github.com/navikt/aksel/pull/4182))
+
 ## 7.32.1
 
 ### Patch Changes
@@ -942,7 +948,6 @@
 ### Major Changes
 
 - Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
-
   - :sparkles: Støtte for header og footer
   - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
 
