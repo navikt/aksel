@@ -25,7 +25,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     setMounted,
     hiddenUntilFound,
     setVisible,
-    onOpenChange,
     setOpen,
   } = useCollapsibleRootContext();
 
@@ -368,7 +367,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     function handleBeforeMatch() {
       isBeforeMatchRef.current = true;
       setOpen(true);
-      onOpenChange(true);
     }
 
     panel.addEventListener("beforematch", handleBeforeMatch);
@@ -376,7 +374,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     return () => {
       panel.removeEventListener("beforematch", handleBeforeMatch);
     };
-  }, [onOpenChange, panelRef, setOpen]);
+  }, [panelRef, setOpen]);
 
   const mergedPanelRef = useMergeRefs(externalRef, panelRef, handlePanelRef);
 

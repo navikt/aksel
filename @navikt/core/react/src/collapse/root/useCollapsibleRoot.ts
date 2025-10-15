@@ -60,6 +60,7 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
     defaultValue: defaultOpen,
     onChange: onOpenChange,
   });
+
   const { mounted, setMounted, transitionStatus } = useTransitionStatus(
     open,
     true,
@@ -118,7 +119,6 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
     }
 
     setOpen(nextOpen);
-    onOpenChange(nextOpen);
 
     if (animationTypeRef.current === "none") {
       if (mounted && !nextOpen) {

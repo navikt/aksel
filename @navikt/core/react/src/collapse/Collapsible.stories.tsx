@@ -190,7 +190,11 @@ function BaseCollapsible(props: BaseCollapsibleProps) {
   return (
     <div style={{ width: "300px", maxWidth: "100%" }}>
       {StoryStyles}
-      <Root className="root" {...props.rootProps}>
+      <Root
+        className="root"
+        {...props.rootProps}
+        onOpenChange={(newOpen) => console.info("onOpenChange", newOpen)}
+      >
         <Trigger className="trigger" {...props.triggerProps}>
           <ChevronDownIcon aria-hidden fontSize="1.25rem" />
           <span>Show list</span>

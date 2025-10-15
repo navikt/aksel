@@ -71,10 +71,7 @@ const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
     });
 
     return (
-      <CollapsibleRootContextProvider
-        {...collapsibleHook}
-        onOpenChange={onOpenChange}
-      >
+      <CollapsibleRootContextProvider {...collapsibleHook}>
         <div ref={forwardedRef} {...rest}>
           {children}
         </div>
