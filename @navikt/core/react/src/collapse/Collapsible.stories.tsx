@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import clsx from "clsx";
-import React from "react";
+import React, { useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { HGrid } from "../layout/grid";
 import { Panel, Root, Trigger } from "./namespace";
@@ -40,6 +40,21 @@ export const HiddenUntilFoundWithTransition: Story = {
       keepMounted: true,
     },
     animation: "transition-vertical",
+  },
+};
+
+export const ControlledNotKeepMounted: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <div>
+        <button onClick={() => setOpen((x) => !x)}>Toggle</button>
+        <BaseCollapsible
+          rootProps={{ keepMounted: false, open, onOpenChange: setOpen }}
+        />
+      </div>
+    );
   },
 };
 
@@ -192,8 +207,8 @@ function BaseCollapsible(props: BaseCollapsibleProps) {
       {StoryStyles}
       <Root
         className="root"
-        {...props.rootProps}
         onOpenChange={(newOpen) => console.info("onOpenChange", newOpen)}
+        {...props.rootProps}
       >
         <Trigger className="trigger" {...props.triggerProps}>
           <ChevronDownIcon aria-hidden fontSize="1.25rem" />

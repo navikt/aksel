@@ -2,7 +2,11 @@ import { useMemo, useRef, useState } from "react";
 import { useAnimationsFinished } from "../../overlays/overlay/hooks/useAnimationsFinished";
 import { useEventCallback } from "../../overlays/overlay/hooks/useEventCallback";
 import { useTransitionStatus } from "../../overlays/overlay/hooks/useTransitionStatus";
-import { useControllableState, useId } from "../../util/hooks";
+import {
+  useClientLayoutEffect,
+  useControllableState,
+  useId,
+} from "../../util/hooks";
 
 type UseCollapsibleRootParams = {
   /**
@@ -94,32 +98,35 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
 
     const panel = panelRef.current;
 
+    /**
+     * Reset override made with
+     * `panel.style.setProperty("animation-name", "none");`
+     * in `useCollapsiblePanel`.
+     */
     if (animationTypeRef.current === "css-animation" && panel !== null) {
       panel.style.removeProperty("animation-name");
     }
 
-    if (!hiddenUntilFound && !keepMounted) {
-      if (
-        animationTypeRef.current !== null &&
-        animationTypeRef.current !== "css-animation"
-      ) {
-        if (!mounted && nextOpen) {
-          setMounted(true);
-        }
+    if (!hiddenUntilFound && !keepMounted && nextOpen) {
+      /**
+       * We could let `useTransitionStatus` handle this automatically,
+       * but by eagerly updating `mounted` here we avoid deferring
+       * the update to after next frame, which can cause shifts.
+       */
+      if (!mounted && animationTypeRef.current !== null) {
+        setMounted(true);
       }
 
-      if (animationTypeRef.current === "css-animation") {
-        if (!visible && nextOpen) {
-          setVisible(true);
-        }
-        if (!mounted && nextOpen) {
-          setMounted(true);
-        }
+      if (animationTypeRef.current === "css-animation" && !visible) {
+        setVisible(true);
       }
     }
 
     setOpen(nextOpen);
 
+    /**
+     * We handle the other two animationTypes in `useCollapsiblePanel` separately.
+     */
     if (animationTypeRef.current === "none") {
       if (mounted && !nextOpen) {
         setMounted(false);
@@ -127,23 +134,22 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
     }
   });
 
-  /* TODO: Test if this is really needed, wouldnt this handle itself anyways? */
-  // const isControlled = openParam !== undefined;
-  //
-  // useClientLayoutEffect(() => {
-  //   /**
-  //    * Unmount immediately when closing in controlled mode and keepMounted={false}
-  //    * and no CSS animations or transitions are applied
-  //    */
-  //   if (
-  //     isControlled &&
-  //     animationTypeRef.current === "none" &&
-  //     !keepMounted &&
-  //     !open
-  //   ) {
-  //     setMounted(false);
-  //   }
-  // }, [isControlled, keepMounted, open, openParam, setMounted]);
+  /**
+   * Unmount immediately when closing in controlled mode and keepMounted={false}
+   * and no CSS animations or transitions are applied. This is for when consumer has
+   * external buttons/logic that controls open state.
+   */
+  useClientLayoutEffect(() => {
+    const isControlled = openParam !== undefined;
+    if (
+      isControlled &&
+      animationTypeRef.current === "none" &&
+      !keepMounted &&
+      !open
+    ) {
+      setMounted(false);
+    }
+  }, [keepMounted, open, openParam, setMounted]);
 
   return useMemo(
     () => ({
