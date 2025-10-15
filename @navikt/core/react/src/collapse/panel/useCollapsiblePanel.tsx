@@ -178,12 +178,13 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     }
 
     if (open) {
-      /* opening */
+      /* Opening panel */
+      /* See comment in `handlePanelRef` for why we set this */
       panel.style.setProperty("display", "block", "important");
 
       /**
        * When `keepMounted={false}` and the panel is initially closed, the very
-       * first time it opens (not any subsequent opens) `data-starting-style` is
+       * first time it opens (not any subsequent opens) `data-entering-style` is
        * off or missing by a frame so we need to set it manually. Otherwise any
        * CSS properties expected to transition using [data-entering-style] may
        * be mis-timed and appear to be complete skipped.
@@ -198,7 +199,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
         panel.style.removeProperty("display");
       });
     } else {
-      /* closing */
+      /* Closing panel */
       setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
 
       abortControllerRef.current = new AbortController();
@@ -206,12 +207,10 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
 
       let frame2 = -1;
       const frame1 = requestAnimationFrame(() => {
-        // Wait until the `[data-ending-style]` attribute is added.
+        /* Wait until [data-exiting-style] is added */
         frame2 = requestAnimationFrame(() => {
           runOnceAnimationsFinish(() => {
             setDimensions({ height: 0, width: 0 });
-            panel.style.removeProperty("content-visibility");
-            panel.style.removeProperty("display");
             setMounted(false);
             abortControllerRef.current = null;
           }, signal);
@@ -266,14 +265,16 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       panel.style.removeProperty("animation-name");
     }
 
+    /* When open remove "hidden" instantly and mount panel */
     if (open) {
-      if (abortControllerRef.current != null) {
+      if (abortControllerRef.current !== null) {
         abortControllerRef.current.abort();
         abortControllerRef.current = null;
       }
       setMounted(true);
       setVisible(true);
     } else {
+      /* When closing, wait until animation finishes to set `hidden` and unmount panel */
       abortControllerRef.current = new AbortController();
       runOnceAnimationsFinish(() => {
         setMounted(false);
