@@ -94,13 +94,13 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
 
     const panel = panelRef.current;
 
-    if (animationTypeRef.current === "css-animation" && panel != null) {
+    if (animationTypeRef.current === "css-animation" && panel !== null) {
       panel.style.removeProperty("animation-name");
     }
 
     if (!hiddenUntilFound && !keepMounted) {
       if (
-        animationTypeRef.current != null &&
+        animationTypeRef.current !== null &&
         animationTypeRef.current !== "css-animation"
       ) {
         if (!mounted && nextOpen) {
