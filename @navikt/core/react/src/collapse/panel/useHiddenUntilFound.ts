@@ -28,7 +28,13 @@ function useHiddenUntilFound() {
     return !open && !mounted;
   }, [open, mounted, visible, animationTypeRef]);
 
-  /* Handle hiddenUntilFound opening */
+  /**
+   * When panel is opened via a find-in-page action, we need to:
+   * - Immediately remove any transition durations so it opens instantly
+   * - Measure and set dimensions to avoid layout shifts
+   * - On the next frame, restore the transition duration so future open/close
+   *   animations work as expected
+   */
   useClientLayoutEffect(() => {
     if (!hiddenUntilFound) {
       return undefined;
@@ -61,34 +67,39 @@ function useHiddenUntilFound() {
     };
   }, [hiddenUntilFound, open, panelRef, setDimensions]);
 
+  /**
+   * When `hiddenUntilFound` is enabled, we to set the `hidden` attribute to `until-found`
+   * manually since React lacks support.
+   * @see https://github.com/facebook/react/issues/24740
+   */
   useClientLayoutEffect(() => {
-    const panel = panelRef.current;
+    if (!hiddenUntilFound || !hidden || !panelRef.current) {
+      return;
+    }
 
-    if (panel && hiddenUntilFound && hidden) {
-      /**
-       * React only supports a boolean for the `hidden` attribute and forces
-       * legit string values to booleans so we have to force it back in the DOM
-       * when necessary: https://github.com/facebook/react/issues/24740
-       */
-      panel.setAttribute("hidden", "until-found");
-      /**
-       * Set data-entering-style here to persist the closed styles, this is to
-       * prevent transitions from starting when the `hidden` attribute changes
-       * to `'until-found'` as they could have different `display` properties:
-       * https://github.com/tailwindlabs/tailwindcss/pull/14625
-       *
-       */
-      if (animationTypeRef.current === "css-transition") {
-        panel.setAttribute("data-entering-style", "");
-      }
+    const panel = panelRef.current;
+    panel.setAttribute("hidden", "until-found");
+    /**
+     * Set `data-entering-style` here to persist the closed styles, this is to
+     * prevent transitions from starting when the `hidden` attribute changes
+     * to `until-found` as they could have different `display` properties:
+     * @see https://github.com/tailwindlabs/tailwindcss/pull/14625
+     *
+     */
+    if (animationTypeRef.current === "css-transition") {
+      panel.setAttribute("data-entering-style", "");
     }
   }, [hiddenUntilFound, hidden, animationTypeRef, panelRef]);
 
+  /**
+   * Listen for `beforematch` event to detect find-in-page actions
+   */
   useEffect(() => {
-    const panel = panelRef.current;
-    if (!panel) {
-      return undefined;
+    if (!hiddenUntilFound || !panelRef.current) {
+      return;
     }
+
+    const panel = panelRef.current;
 
     function handleBeforeMatch() {
       isBeforeMatchRef.current = true;
@@ -100,7 +111,7 @@ function useHiddenUntilFound() {
     return () => {
       panel.removeEventListener("beforematch", handleBeforeMatch);
     };
-  }, [panelRef, setOpen]);
+  }, [hiddenUntilFound, panelRef, setOpen]);
 
   return { isBeforeMatchRef, hidden };
 }
