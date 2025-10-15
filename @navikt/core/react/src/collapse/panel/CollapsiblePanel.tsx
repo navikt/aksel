@@ -3,6 +3,7 @@ import { useOpenChangeAnimationComplete } from "../../overlays/overlay/hooks/use
 import { useClientLayoutEffect } from "../../util";
 import type { AsChildProps } from "../../util/types";
 import { useCollapsibleRootContext } from "../root/CollapsibleRoot.context";
+import { useCollapsiblePanel } from "./useCollapsiblePanel";
 
 type CollapsiblePanelProps = React.HTMLAttributes<HTMLDivElement> &
   AsChildProps;
@@ -45,6 +46,11 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
       return undefined;
     }, [idProp]);
 
+    /* TODO: We need to handle hidden as a special case */
+    const { hidden, ref } = useCollapsiblePanel({
+      externalRef: forwardedRef,
+    });
+
     useOpenChangeAnimationComplete({
       open: open && transitionStatus === "idle",
       ref: panelRef,
@@ -79,7 +85,7 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
 
     return (
       <div
-        ref={forwardedRef}
+        ref={ref}
         {...rest}
         id={panelId}
         aria-controls={open ? triggerId : undefined}
