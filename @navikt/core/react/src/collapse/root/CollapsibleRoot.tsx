@@ -32,6 +32,7 @@ interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
    *
    * Overrides the `keepMounted` prop and uses `hidden="until-found"`
    * to hide the element without removing it from the DOM.
+   * TODO: Need to manage this with keepMounted: "visible" enabled.
    *
    * @default false
    */
@@ -40,9 +41,10 @@ interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
    * Keeps element in the DOM while the panel is hidden if `true`.
    *
    * **This prop is ignored when `hiddenUntilFound` is used.**
+   * TODO: This is no longer true :arrow_up:
    * @default false
    */
-  keepMounted?: boolean;
+  keepMounted?: "visible" | "hidden" | false;
 }
 
 const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(

@@ -31,7 +31,7 @@ export const HiddenUntilFound: Story = {
   args: {
     rootProps: {
       hiddenUntilFound: true,
-      keepMounted: true,
+      keepMounted: "hidden",
     },
   },
 };
@@ -41,7 +41,7 @@ export const HiddenUntilFoundWithTransition: Story = {
   args: {
     rootProps: {
       hiddenUntilFound: true,
-      keepMounted: true,
+      keepMounted: "hidden",
     },
     animation: "transition-vertical",
   },
@@ -67,9 +67,9 @@ export const Animations: Story = {
   render: () => (
     <HGrid columns={2} gap="space-32">
       <div>
-        <h2>Keepmounted: true</h2>
+        <h2>Keepmounted: hidden</h2>
         <BaseCollapsible
-          rootProps={{ keepMounted: true, defaultOpen: true }}
+          rootProps={{ keepMounted: "hidden", defaultOpen: true }}
           animation="animation-vertical"
         />
       </div>
@@ -82,7 +82,7 @@ export const Animations: Story = {
       </div>
       <div>
         <BaseCollapsible
-          rootProps={{ keepMounted: true, defaultOpen: false }}
+          rootProps={{ keepMounted: "hidden", defaultOpen: false }}
           animation="animation-vertical"
         />
       </div>
@@ -100,9 +100,9 @@ export const AnimationsHorizontal: Story = {
   render: () => (
     <HGrid columns={2} gap="space-32">
       <div>
-        <h2>Keepmounted: true</h2>
+        <h2>Keepmounted: hidden</h2>
         <BaseCollapsible
-          rootProps={{ keepMounted: true, defaultOpen: true }}
+          rootProps={{ keepMounted: "hidden", defaultOpen: true }}
           animation="animation-horizontal"
         />
       </div>
@@ -115,7 +115,7 @@ export const AnimationsHorizontal: Story = {
       </div>
       <div>
         <BaseCollapsible
-          rootProps={{ keepMounted: true, defaultOpen: false }}
+          rootProps={{ keepMounted: "hidden", defaultOpen: false }}
           animation="animation-horizontal"
         />
       </div>
@@ -133,9 +133,9 @@ export const Transitions: Story = {
   render: () => (
     <HGrid columns={2} gap="space-32">
       <div>
-        <h2>Keepmounted: true</h2>
+        <h2>Keepmounted: hidden</h2>
         <BaseCollapsible
-          rootProps={{ keepMounted: true, defaultOpen: true }}
+          rootProps={{ keepMounted: "hidden", defaultOpen: true }}
           animation="transition-vertical"
         />
       </div>
@@ -148,7 +148,7 @@ export const Transitions: Story = {
       </div>
       <div>
         <BaseCollapsible
-          rootProps={{ keepMounted: true, defaultOpen: false }}
+          rootProps={{ keepMounted: "hidden", defaultOpen: false }}
           animation="transition-vertical"
         />
       </div>
@@ -166,9 +166,9 @@ export const TransitionsHorizontal: Story = {
   render: () => (
     <HGrid columns={2} gap="space-32">
       <div>
-        <h2>Keepmounted: true</h2>
+        <h2>Keepmounted: hidden</h2>
         <BaseCollapsible
-          rootProps={{ keepMounted: true, defaultOpen: true }}
+          rootProps={{ keepMounted: "hidden", defaultOpen: true }}
           animation="transition-horizontal"
         />
       </div>
@@ -181,7 +181,7 @@ export const TransitionsHorizontal: Story = {
       </div>
       <div>
         <BaseCollapsible
-          rootProps={{ keepMounted: true, defaultOpen: false }}
+          rootProps={{ keepMounted: "hidden", defaultOpen: false }}
           animation="transition-horizontal"
         />
       </div>
@@ -203,7 +203,7 @@ export const LayoutWithSidebar: Story = {
     return (
       <HStack>
         {StoryStyles}
-        <Root open={open} onOpenChange={setOpen} keepMounted>
+        <Root open={open} onOpenChange={setOpen} keepMounted="visible">
           <Trigger>toggle</Trigger>
           <Panel className="panel panel-transition-horizontal-sidebar">
             <div

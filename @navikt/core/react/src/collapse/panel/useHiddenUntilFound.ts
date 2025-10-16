@@ -12,6 +12,7 @@ function useHiddenUntilFound() {
     setOpen,
     visible,
     mounted,
+    keepMounted,
   } = useCollapsibleRootContext();
 
   const isBeforeMatchRef = useRef(false);
@@ -21,12 +22,16 @@ function useHiddenUntilFound() {
    * When closing, the `hidden` attribute is set after any exit animations runs.
    */
   const hidden = useMemo(() => {
+    if (keepMounted === "visible") {
+      return false;
+    }
+
     if (animationTypeRef.current === "css-animation") {
       return !visible;
     }
 
     return !open && !mounted;
-  }, [open, mounted, visible, animationTypeRef]);
+  }, [keepMounted, animationTypeRef, open, mounted, visible]);
 
   /**
    * When panel is opened via a find-in-page action, we need to:

@@ -46,7 +46,7 @@ type UseCollapsibleRootParams = {
    * **This prop is ignored when `hiddenUntilFound` is used.**
    * @default false
    */
-  keepMounted: boolean;
+  keepMounted: "visible" | "hidden" | false;
 };
 
 function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {

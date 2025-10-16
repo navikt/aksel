@@ -34,8 +34,8 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
 
   /**
    * This runs when:
-   * - keepMounted: true, open/defaultOpen: false
-   * - keepMounted: true, open/defaultOpen: true
+   * - keepMounted: "visible" | "hidden", open/defaultOpen: false
+   * - keepMounted: "visible" | "hidden", open/defaultOpen: true
    * - keepMounted: false, open/defaultOpen: true
    * - keepMounted: false, open/defaultOpen: false -> when it opens for the first time
    *
@@ -128,9 +128,9 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
        *
        * How to test:
        * - Set up demo with transition and `data-entering-style` (e.g. opacity)
-       * - Test with `keepMounted` true and false
+       * - Test with `keepMounted` "hidden" and false
        * - Keepmounted: false only works consistently if this is set
-       * - KeepMounted: true works fine either way
+       * - KeepMounted: "hidden" works fine either way
        */
       if (!shouldCancelInitialOpenTransitionRef.current && !keepMounted) {
         panel.setAttribute("data-entering-style", "");
@@ -231,7 +231,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
 
   /**
    * We cant guarantee that "closed"-state equals `display: none` in all cases.
-   * If keepMounted=true and no animations are applied, we need to make sure
+   * If keepMounted="visible" and no animations are applied, we need to make sure
    * setDimensions is reset to a "closed" state. This allows consumer to use a
    * min-height/width in closed state if they want to.
    * @example Token in "open"-state, 4rem in "closed"-state
@@ -244,7 +244,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       animationTypeRef.current !== "none" ||
       !panelRef.current ||
       open ||
-      !keepMounted
+      keepMounted !== "visible"
     ) {
       return;
     }
