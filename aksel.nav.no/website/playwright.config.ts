@@ -59,8 +59,8 @@ const config: PlaywrightTestConfig = {
       testMatch: [/.*\.e2e\.(ts|tsx)/],
     },
     {
-      name: "Mobile Chrome",
-      use: { ...devices["Pixel 5"] },
+      name: "Webkit mobile",
+      use: { ...devices["iPhone 15"] },
       testMatch: [/.*\.e2e\.(ts|tsx)/],
     },
   ],
