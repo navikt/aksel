@@ -30,7 +30,6 @@ const CollapsibleTrigger = forwardRef<
       handleTrigger,
       setTriggerIdState,
       triggerId,
-      hideWhenClosed,
     } = useCollapsibleRootContext();
 
     useClientLayoutEffect(() => {
@@ -50,10 +49,9 @@ const CollapsibleTrigger = forwardRef<
         ref={forwardedRef}
         {...rest}
         id={triggerId}
-        aria-controls={open || !hideWhenClosed ? panelId : undefined}
+        aria-controls={open ? panelId : undefined}
         aria-expanded={open}
         disabled={disabledProp ?? disabled}
-        /* TODO: Do we want another state for when hideWhenClosed is false? */
         data-state={open ? "open" : "closed"}
         onClick={composeEventHandlers(onClick, handleTrigger)}
       >

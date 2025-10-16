@@ -43,15 +43,6 @@ interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   keepMounted?: boolean;
-  /**
-   * Hides the panel when closed and `keepMounted=true` by setting
-   * - hidden attribute to true
-   * - removing aria-controls
-   *
-   * @default true
-   * TODO: How should this interact with hiddenUntilFound?
-   */
-  hideWhenClosed?: boolean;
 }
 
 const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
@@ -63,8 +54,7 @@ const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
       onOpenChange: onOpenChangeProp,
       open,
       hiddenUntilFound = false,
-      hideWhenClosed = true,
-      keepMounted = !hideWhenClosed,
+      keepMounted = false,
       ...rest
     }: CollapsibleProps,
     forwardedRef,
@@ -81,10 +71,7 @@ const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
     });
 
     return (
-      <CollapsibleRootContextProvider
-        {...collapsibleHook}
-        hideWhenClosed={hideWhenClosed}
-      >
+      <CollapsibleRootContextProvider {...collapsibleHook}>
         <div ref={forwardedRef} {...rest}>
           {children}
         </div>
