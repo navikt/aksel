@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useEventCallback } from "../../overlays/overlay/hooks/useEventCallback";
 import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
 import { useCollapsibleRootContext } from "../root/CollapsibleRoot.context";
+import type { CollapsibleAnimationType } from "../root/useCollapsibleRoot";
 import { useHiddenUntilFound } from "./useHiddenUntilFound";
 
 type UseCollapsiblePanelParams = {
@@ -33,7 +34,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
   const shouldCancelInitialOpenTransitionRef = useRef(open);
 
   /**
-   * When does this run:
+   * This runs when:
    * - keepMounted: true, open/defaultOpen: false
    * - keepMounted: true, open/defaultOpen: true
    * - keepMounted: false, open/defaultOpen: true
@@ -48,48 +49,8 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       return undefined;
     }
 
-    /**
-     * We start by detecting which animation type is being used (if any), and what orientation.
-     * This is only done once per panel instance.
-     *
-     * This allows us to handle setting/unsetting various styles and attributes
-     * in other effects based on the animation type/orientation.
-     */
     if (animationTypeRef.current === null) {
-      const panelStyles = getComputedStyle(element);
-
-      const hasAnimation =
-        panelStyles.animationName !== "none" &&
-        panelStyles.animationName !== "";
-      const hasTransition =
-        panelStyles.transitionDuration !== "0s" &&
-        panelStyles.transitionDuration !== "";
-
-      /**
-       * animationTypeRef is safe to read in render because it's only ever set
-       * once here during the first render and never again.
-       * https://react.dev/learn/referencing-values-with-refs#best-practices-for-refs
-       */
-      if (hasAnimation && hasTransition) {
-        if (process.env.NODE_ENV !== "production") {
-          console.warn(
-            "CSS transitions and CSS animations both detected on Collapsible.",
-            "Only one of either animation type should be used.",
-          );
-        }
-      } else if (
-        panelStyles.animationName === "none" &&
-        panelStyles.transitionDuration !== "0s"
-      ) {
-        animationTypeRef.current = "css-transition";
-      } else if (
-        panelStyles.animationName !== "none" &&
-        panelStyles.transitionDuration === "0s"
-      ) {
-        animationTypeRef.current = "css-animation";
-      } else {
-        animationTypeRef.current = "none";
-      }
+      animationTypeRef.current = getAnimationType(element);
     }
 
     /* Only run code after this if using CSS transitions */
@@ -192,7 +153,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
 
     abortControllerRef.current = new AbortController();
-    const signal = abortControllerRef.current.signal;
+    const { signal } = abortControllerRef.current;
 
     let frame2 = -1;
     const frame1 = requestAnimationFrame(() => {
@@ -291,6 +252,52 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     hidden,
     ref: mergedPanelRef,
   };
+}
+
+/**
+ * Detects which animation type is being used (if any).
+ *
+ * This allows us to handle setting/unsetting various styles and attributes
+ * in based on the animation type/orientation.
+ */
+function getAnimationType(element: HTMLElement): CollapsibleAnimationType {
+  const panelStyles = getComputedStyle(element);
+
+  const hasAnimation =
+    panelStyles.animationName !== "none" && panelStyles.animationName !== "";
+  const hasTransition =
+    panelStyles.transitionDuration !== "0s" &&
+    panelStyles.transitionDuration !== "";
+
+  /**
+   * animationTypeRef is safe to read in render because it's only ever set
+   * once here during the first render and never again.
+   * https://react.dev/learn/referencing-values-with-refs#best-practices-for-refs
+   */
+  if (hasAnimation && hasTransition) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(
+        "CSS transitions and CSS animations both detected on Collapsible.",
+        "Only one of either animation type should be used.",
+      );
+    }
+  }
+
+  if (
+    panelStyles.animationName === "none" &&
+    panelStyles.transitionDuration !== "0s"
+  ) {
+    return "css-transition";
+  }
+
+  if (
+    panelStyles.animationName !== "none" &&
+    panelStyles.transitionDuration === "0s"
+  ) {
+    return "css-animation";
+  }
+
+  return "none";
 }
 
 export { useCollapsiblePanel };
