@@ -6,7 +6,7 @@ import {
 } from "next-sanity/hooks";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { Button, Switch } from "@navikt/ds-react";
 import styles from "./DraftOverlay.module.css";
 import { disableDraftModeAction } from "./actions";
@@ -20,6 +20,23 @@ function DraftOverlay() {
   const isIFrame = typeof window !== "undefined" && window.self !== window.top;
 
   const [enableVisualEditing, setEnableVisualEditing] = useState(false);
+
+  const channelRef = useRef<BroadcastChannel | null>(null);
+
+  useEffect(() => {
+    channelRef.current = new BroadcastChannel("aksel-draft-mode-channel");
+
+    const handleMessage = () => {
+      router.refresh();
+    };
+
+    channelRef.current.addEventListener("message", handleMessage);
+
+    return () => {
+      channelRef.current?.removeEventListener("message", handleMessage);
+      channelRef.current?.close();
+    };
+  }, [router]);
 
   if (isPresentation) {
     return <VisualEditing />;
@@ -42,6 +59,7 @@ function DraftOverlay() {
   const disable = () =>
     startTransition(async () => {
       await disableDraftModeAction();
+      channelRef.current?.postMessage("draft-mode-disabled");
       router.refresh();
     });
 
