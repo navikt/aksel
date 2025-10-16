@@ -22,7 +22,7 @@ function useShouldStopAnimation() {
       return;
     }
     setPauseAnimationState(JSON.parse(data ?? "false"));
-  }, []);
+  }, [setPauseAnimationState]);
 
   return {
     shouldStopAnimation: pauseAnimationState || reducedMotion,
