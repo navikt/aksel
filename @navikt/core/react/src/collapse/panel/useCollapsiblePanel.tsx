@@ -9,6 +9,7 @@ type UseCollapsiblePanelParams = {
   externalRef: React.ForwardedRef<HTMLDivElement>;
 };
 
+/* TODO: Dont add hidden attrb is element is still visible */
 function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
   const { externalRef } = params;
   const {
