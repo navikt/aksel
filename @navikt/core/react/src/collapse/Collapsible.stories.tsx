@@ -19,7 +19,9 @@ type Story = StoryObj<typeof BaseCollapsible>;
 
 export const Default: Story = {
   render: BaseCollapsible,
-  args: {},
+  args: {
+    animation: "transition-vertical",
+  },
 };
 
 export const HiddenUntilFound: Story = {
@@ -52,6 +54,7 @@ export const ControlledNotKeepMounted: Story = {
         <button onClick={() => setOpen((x) => !x)}>Toggle</button>
         <BaseCollapsible
           rootProps={{ keepMounted: false, open, onOpenChange: setOpen }}
+          animation="transition-vertical"
         />
       </div>
     );
@@ -326,7 +329,12 @@ const StoryStyles = (
       height: var(--__axc-collapsible-panel-height);
       transition: all 300ms ease;
 
-      &[data-entering-style],
+      &[data-entering-style] {
+        height: 100vh;
+        opacity: 0;
+        background: red;
+      }
+
       &[data-exiting-style] {
         height: 0;
         opacity: 0;

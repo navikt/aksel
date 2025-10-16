@@ -15,7 +15,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     open,
     mounted,
     animationTypeRef,
-    visible,
     panelRef,
     height,
     width,
@@ -24,7 +23,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     keepMounted,
     runOnceAnimationsFinish,
     setMounted,
-    hiddenUntilFound,
     setVisible,
   } = useCollapsibleRootContext();
 
@@ -119,18 +117,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       /* Opening panel */
       /* See comment in `handlePanelRef` for why we set this */
       panel.style.setProperty("display", "block", "important");
-
-      /**
-       * When `keepMounted={false}` and the panel is initially closed, the very
-       * first time it opens (not any subsequent opens) `data-entering-style` is
-       * off or missing by a frame so we need to set it manually. Otherwise any
-       * CSS properties expected to transition using [data-entering-style] may
-       * be mis-timed and appear to be complete skipped.
-       */
-      if (!shouldCancelInitialOpenTransitionRef.current && !keepMounted) {
-        panel.setAttribute("data-entering-style", "");
-      }
-
       setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
 
       let resizeFrame = -1;
@@ -168,7 +154,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
   }, [
     abortControllerRef,
     animationTypeRef,
-    hiddenUntilFound,
     keepMounted,
     mounted,
     open,
@@ -223,7 +208,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     setDimensions,
     setMounted,
     setVisible,
-    visible,
   ]);
 
   /**

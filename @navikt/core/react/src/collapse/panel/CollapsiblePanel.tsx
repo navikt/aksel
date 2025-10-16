@@ -65,7 +65,7 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
 
     const transitionAttrbutes =
       transitionStatus && transitionStatus !== "idle"
-        ? { [`data-${transitionStatus}-style`]: true }
+        ? { [`data-${transitionStatus}-style`]: "" }
         : {};
 
     const style: React.CSSProperties = {
