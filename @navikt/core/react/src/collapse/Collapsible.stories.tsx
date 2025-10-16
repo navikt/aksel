@@ -330,9 +330,8 @@ const StoryStyles = (
       transition: all 300ms ease;
 
       &[data-entering-style] {
-        height: 100vh;
+        height: 0;
         opacity: 0;
-        background: red;
       }
 
       &[data-exiting-style] {

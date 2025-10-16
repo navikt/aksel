@@ -117,6 +117,24 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       /* Opening panel */
       /* See comment in `handlePanelRef` for why we set this */
       panel.style.setProperty("display", "block", "important");
+
+      /**
+       * When `keepMounted={false}` and the panel is initially closed, the very
+       * first time it opens (not any subsequent opens) `data-entering-style` is
+       * off or missing by a frame so we need to set it manually. Otherwise any
+       * CSS properties expected to transition using [data-entering-style] may
+       * be mis-timed and appear to be complete skipped.
+       *
+       * How to test:
+       * - Set up demo with transition and `data-entering-style` (e.g. opacity)
+       * - Test with `keepMounted` true and false
+       * - Keepmounted: false only works consistently if this is set
+       * - KeepMounted: true works fine either way
+       */
+      if (!shouldCancelInitialOpenTransitionRef.current && !keepMounted) {
+        panel.setAttribute("data-entering-style", "");
+      }
+
       setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
 
       let resizeFrame = -1;
