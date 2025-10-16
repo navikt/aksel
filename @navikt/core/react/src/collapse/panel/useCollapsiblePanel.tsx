@@ -16,7 +16,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     animationTypeRef,
     visible,
     panelRef,
-    transitionDimensionRef,
     height,
     width,
     setDimensions,
@@ -57,10 +56,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
      * This allows us to handle setting/unsetting various styles and attributes
      * in other effects based on the animation type/orientation.
      */
-    if (
-      animationTypeRef.current === null ||
-      transitionDimensionRef.current === null
-    ) {
+    if (animationTypeRef.current === null) {
       const panelStyles = getComputedStyle(element);
 
       const hasAnimation =
@@ -94,17 +90,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
         animationTypeRef.current = "css-animation";
       } else {
         animationTypeRef.current = "none";
-      }
-
-      /**
-       * We need to know in advance which side is being collapsed when using CSS
-       * transitions in order to set the value of width/height to `0px` momentarily.
-       * Setting both to `0px` will break layout.
-       */
-      if (panelStyles.transitionProperty.indexOf("width") > -1) {
-        transitionDimensionRef.current = "width";
-      } else {
-        transitionDimensionRef.current = "height";
       }
     }
 
@@ -237,7 +222,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     runOnceAnimationsFinish,
     setDimensions,
     setMounted,
-    transitionDimensionRef,
   ]);
 
   /* Run only if using CSS animations */

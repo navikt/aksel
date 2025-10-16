@@ -88,7 +88,6 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
 
   const abortControllerRef = useRef<AbortController | null>(null);
   const animationTypeRef = useRef<CollapsibleAnimationType>(null);
-  const transitionDimensionRef = useRef<"width" | "height" | null>(null);
   const panelRef = useRef<HTMLElement | null>(null);
 
   const runOnceAnimationsFinish = useAnimationsFinished(panelRef, false);
@@ -170,7 +169,6 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
       setPanelIdState,
       setTriggerIdState,
       setVisible,
-      transitionDimensionRef,
       transitionStatus,
       visible,
       width,
