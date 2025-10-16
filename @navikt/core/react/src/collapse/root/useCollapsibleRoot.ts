@@ -126,10 +126,8 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
     /**
      * We handle the other two animationTypes in `useCollapsiblePanel` separately.
      */
-    if (animationTypeRef.current === "none") {
-      if (mounted && !nextOpen) {
-        setMounted(false);
-      }
+    if (animationTypeRef.current === "none" && mounted && !nextOpen) {
+      setMounted(false);
     }
   });
 

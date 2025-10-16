@@ -53,13 +53,12 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       animationTypeRef.current = getAnimationType(element);
     }
 
-    /* Only run code after this if using CSS transitions */
     if (animationTypeRef.current !== "css-transition") {
       return undefined;
     }
 
     /**
-     * Explicitly set `display` to ensure the panel is actually rendered before
+     * Explicitly set `display` to ensure the panel is rendered before
      * measuring anything. `!important` is to needed to override a conflicting
      * Tailwind v4 default that sets `display: none !important` on `[hidden]`:
      * @see https://github.com/tailwindlabs/tailwindcss/blob/cd154a4f471e7a63cc27cad15dada650de89d52b/packages/tailwindcss/preflight.css#L320-L326
@@ -105,17 +104,11 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
 
   /* Run only if using css transitions */
   useClientLayoutEffect(() => {
-    if (animationTypeRef.current !== "css-transition") {
-      return undefined;
+    if (animationTypeRef.current !== "css-transition" || !panelRef.current) {
+      return;
     }
 
     const panel = panelRef.current;
-
-    if (!panel) {
-      return undefined;
-    }
-
-    let resizeFrame = -1;
 
     if (abortControllerRef.current !== null) {
       abortControllerRef.current.abort();
@@ -140,6 +133,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
 
       setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
 
+      let resizeFrame = -1;
       resizeFrame = requestAnimationFrame(() => {
         panel.style.removeProperty("display");
       });
@@ -186,14 +180,11 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
 
   /* Run only if using CSS animations */
   useClientLayoutEffect(() => {
-    if (animationTypeRef.current !== "css-animation") {
+    if (animationTypeRef.current !== "css-animation" || !panelRef.current) {
       return;
     }
 
     const panel = panelRef.current;
-    if (!panel) {
-      return;
-    }
 
     panel.style.setProperty("animation-name", "none");
 
