@@ -204,6 +204,7 @@ export const LayoutWithSidebar: Story = {
       <HStack>
         {StoryStyles}
         <Root open={open} onOpenChange={setOpen} keepMounted>
+          <Trigger>toggle</Trigger>
           <Panel className="panel panel-transition-horizontal-sidebar">
             <div
               style={{
@@ -408,7 +409,7 @@ const StoryStyles = (
     .panel-transition-horizontal-sidebar {
       width: max(var(--__axc-collapsible-panel-width), 4rem);
       display: flex;
-      transition: all 300ms ease;
+      /* transition: all 300ms ease; */
     }
 
 

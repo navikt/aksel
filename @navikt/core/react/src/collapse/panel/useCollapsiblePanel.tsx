@@ -229,6 +229,29 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
   ]);
 
   /**
+   * We cant guarantee that "closed"-state equals `display: none` in all cases.
+   * If keepMounted=true and no animations are applied, we need to make sure
+   * setDimensions is reset to a "closed" state. This allows consumer to use a
+   * min-height/width in closed state if they want to.
+   * @example Token in "open"-state, 4rem in "closed"-state
+   * ```
+   * width: max(var(--__axc-collapsible-panel-width), 4rem);
+   * ```
+   */
+  useClientLayoutEffect(() => {
+    if (
+      animationTypeRef.current !== "none" ||
+      !panelRef.current ||
+      open ||
+      !keepMounted
+    ) {
+      return;
+    }
+
+    setDimensions({ height: 0, width: 0 });
+  }, [animationTypeRef, keepMounted, open, panelRef, setDimensions]);
+
+  /**
    * After the first render we can allow animations to run again.
    * This is needed to prevent animations from running on page load.
    */
