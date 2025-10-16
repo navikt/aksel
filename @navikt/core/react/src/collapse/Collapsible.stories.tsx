@@ -1,8 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import clsx from "clsx";
 import React, { useState } from "react";
-import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { ChevronDownIcon, SidebarLeftIcon } from "@navikt/aksel-icons";
+import { Button } from "../button";
 import { HGrid } from "../layout/grid";
+import { HStack } from "../layout/stack";
 import { Panel, Root, Trigger } from "./namespace";
 
 const meta: Meta<typeof Root> = {
@@ -193,6 +195,57 @@ export const TransitionsHorizontal: Story = {
   ),
 };
 
+export const LayoutWithSidebar: Story = {
+  render: () => {
+    const [open, setOpen] = useState(true);
+    /* <button onClick={() => setOpen((x) => !x)}>Toggle</button> */
+
+    return (
+      <HStack>
+        {StoryStyles}
+        <Root open={open} onOpenChange={setOpen} keepMounted>
+          <Panel className="panel panel-transition-horizontal-sidebar">
+            <div
+              style={{
+                width: 300,
+                height: "100svh",
+                padding: "2rem",
+                background: "var(--ax-bg-neutral-moderateA)",
+              }}
+            >
+              sidebar
+            </div>
+          </Panel>
+        </Root>
+        <main
+          style={{
+            width: "100%",
+            background: "var(--ax-bg-accent-moderateA)",
+            flex: "1",
+            display: "flex",
+            position: "relative",
+            alignItems: "start",
+            height: "100svh",
+            padding: "2rem",
+          }}
+        >
+          <Button
+            icon={<SidebarLeftIcon />}
+            data-color="neutral"
+            variant="tertiary"
+            onClick={() => setOpen((x) => !x)}
+            size="small"
+          />
+          content
+        </main>
+      </HStack>
+    );
+  },
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
 type BaseCollapsibleProps = {
   rootProps?: Omit<React.ComponentProps<typeof Root>, "children">;
   triggerProps?: Omit<React.ComponentProps<typeof Trigger>, "asChild">;
@@ -342,7 +395,7 @@ const StoryStyles = (
     }
 
     .panel-transition-horizontal {
-      width: var(--__axc-collapsible-panel-height);
+      width: var(--__axc-collapsible-panel-width);
       transition: all 300ms ease;
 
       &[data-entering-style],
@@ -351,6 +404,14 @@ const StoryStyles = (
         opacity: 0;
       }
     }
+
+    .panel-transition-horizontal-sidebar {
+      width: max(var(--__axc-collapsible-panel-width), 4rem);
+      display: flex;
+      transition: all 300ms ease;
+    }
+
+
 
     `}
   </style>
