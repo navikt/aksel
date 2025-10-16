@@ -29,7 +29,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
 
   const { isBeforeMatchRef, hidden } = useHiddenUntilFound();
 
-  const latestAnimationNameRef = useRef<string | null>(null);
   const shouldCancelInitialOpenAnimationRef = useRef(open);
   const shouldCancelInitialOpenTransitionRef = useRef(open);
 
@@ -183,33 +182,33 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       resizeFrame = requestAnimationFrame(() => {
         panel.style.removeProperty("display");
       });
-    } else {
-      /* Closing panel */
-      setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
-
-      abortControllerRef.current = new AbortController();
-      const signal = abortControllerRef.current.signal;
-
-      let frame2 = -1;
-      const frame1 = requestAnimationFrame(() => {
-        /* Wait until [data-exiting-style] is added */
-        frame2 = requestAnimationFrame(() => {
-          runOnceAnimationsFinish(() => {
-            setDimensions({ height: 0, width: 0 });
-            setMounted(false);
-            abortControllerRef.current = null;
-          }, signal);
-        });
-      });
 
       return () => {
-        cancelAnimationFrame(frame1);
-        cancelAnimationFrame(frame2);
+        cancelAnimationFrame(resizeFrame);
       };
     }
 
+    /* Closing panel */
+    setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
+
+    abortControllerRef.current = new AbortController();
+    const signal = abortControllerRef.current.signal;
+
+    let frame2 = -1;
+    const frame1 = requestAnimationFrame(() => {
+      /* Wait until [data-exiting-style] is added */
+      frame2 = requestAnimationFrame(() => {
+        runOnceAnimationsFinish(() => {
+          setDimensions({ height: 0, width: 0 });
+          setMounted(false);
+          abortControllerRef.current = null;
+        }, signal);
+      });
+    });
+
     return () => {
-      cancelAnimationFrame(resizeFrame);
+      cancelAnimationFrame(frame1);
+      cancelAnimationFrame(frame2);
     };
   }, [
     abortControllerRef,
@@ -234,9 +233,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     if (!panel) {
       return;
     }
-
-    latestAnimationNameRef.current =
-      panel.style.animationName || latestAnimationNameRef.current;
 
     panel.style.setProperty("animation-name", "none");
 
