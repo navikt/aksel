@@ -203,7 +203,7 @@ export const LayoutWithSidebar: Story = {
     return (
       <HStack>
         {StoryStyles}
-        <Root open={open} onOpenChange={setOpen} keepMounted>
+        <Root open={open} onOpenChange={setOpen} hideWhenClosed={false}>
           <Panel className="panel panel-transition-horizontal-sidebar">
             <div
               style={{

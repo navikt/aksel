@@ -26,6 +26,7 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
       width,
       height,
       mounted,
+      hideWhenClosed,
     } = useCollapsibleRootContext();
 
     if (process.env.NODE_ENV !== "production") {
@@ -77,7 +78,10 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
     };
 
     const shouldRender =
-      keepMounted || hiddenUntilFound || (!keepMounted && mounted);
+      keepMounted ||
+      !hideWhenClosed ||
+      hiddenUntilFound ||
+      (!keepMounted && mounted);
 
     if (!shouldRender) {
       return null;
@@ -88,9 +92,9 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
         ref={ref}
         {...rest}
         id={panelId}
-        aria-controls={open ? triggerId : undefined}
+        aria-controls={open || !hideWhenClosed ? triggerId : undefined}
         style={style}
-        hidden={hidden}
+        hidden={hideWhenClosed ? hidden : undefined}
         data-state={open ? "open" : "closed"}
         {...transitionAttrbutes}
       >
