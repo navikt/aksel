@@ -42,6 +42,7 @@ interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
    *
    * **This prop is ignored when `hiddenUntilFound` is used.**
    * TODO: This is no longer true :arrow_up:
+   * TODO: Might be a better name for this prop
    * @default false
    */
   keepMounted?: "visible" | "hidden" | false;

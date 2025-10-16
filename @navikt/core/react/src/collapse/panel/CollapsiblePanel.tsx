@@ -46,7 +46,6 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
       return undefined;
     }, [idProp]);
 
-    /* TODO: We need to handle hidden as a special case */
     const { hidden, ref } = useCollapsiblePanel({
       externalRef: forwardedRef,
     });
