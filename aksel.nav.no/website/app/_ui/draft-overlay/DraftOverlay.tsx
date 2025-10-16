@@ -27,7 +27,6 @@ function DraftOverlay() {
     channelRef.current = new BroadcastChannel("aksel-draft-mode-channel");
 
     const handleMessage = () => {
-      console.info("Received message: draft-mode-disabled");
       router.refresh();
     };
 
