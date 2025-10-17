@@ -21,12 +21,7 @@ const Example = () => {
           <Box marginBlock="space-0 space-8">
             <HStack justify="space-between" align="center">
               <Skeleton variant="text" width={84} height={32} />
-              <ArrowRightIcon
-                aria-hidden
-                fontSize="1.75rem"
-                color="var(--a-text-subtle, var(--ax-text-neutral-subtle))"
-                opacity={0.3}
-              />
+              <ArrowRightIcon aria-hidden fontSize="1.75rem" opacity={0.3} />
             </HStack>
 
             <Skeleton variant="text">
