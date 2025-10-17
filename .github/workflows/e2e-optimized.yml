@@ -9,12 +9,19 @@ on:
     paths:
       - "aksel.nav.no/**"
 
-jobs:
-  playwright:
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.48.1-jammy
+permissions:
+  actions: read
+  contents: read
+  packages: write
+  id-token: write
 
+jobs:
+  prebuild-app-for-playwright:
+    name: "Prebuild app for Playwright tests"
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ${{ github.repository }}-e2e
+      REGISTRY: ghcr.io
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -30,10 +37,93 @@ jobs:
           nais_project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           sanity_read_token: ${{ secrets.SANITY_READ }}
           sanity_read_no_drafts_token: ${{ secrets.SANITY_READ_NO_DRAFTS }}
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: aksel.nav.no/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+    outputs:
+      image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-      - name: Run Playwright tests
+  run-playwright:
+    needs: [prebuild-app-for-playwright]
+    name: Playwright shard ${{ matrix.shardIndex }}
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.0-noble
+    services:
+      testapp:
+        image: ${{ needs.prebuild-app-for-playwright.outputs.image }}
+        ports: ["3000:3000"]
         env:
           SANITY_READ: ${{ secrets.SANITY_READ }}
           SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
 
-        run: yarn workspace website e2e:ci-full
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4, 5]
+        shardTotal: [5]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+          cache: yarn
+          cache-dependency-path: "yarn.lock"
+
+      - name: Install dependencies
+        run: yarn --immutable
+        shell: bash
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
+      - name: Run Playwright
+        shell: bash
+        run: yarn e2e:docker --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        env:
+          SANITY_READ: ${{ secrets.SANITY_READ }}
+          SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
+
+      - name: Upload blob report to GitHub Actions Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: blob-report-${{ matrix.shardIndex }}
+          path: aksel.nav.no/website/blob-report
+          retention-days: 1
+
+  merge-reports:
+    if: ${{ !cancelled() }}
+    needs: [run-playwright]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download blob reports from GitHub Actions Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: all-blob-reports
+          pattern: blob-report-*
+          merge-multiple: true
+
+      - name: Merge into HTML Report
+        run: npx playwright merge-reports --reporter html ./all-blob-reports
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-report--attempt-${{ github.run_attempt }}
+          path: playwright-report
+          retention-days: 14
