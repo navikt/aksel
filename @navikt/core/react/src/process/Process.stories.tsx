@@ -87,6 +87,169 @@ export const IconBullets: Story = {
   ),
 };
 
+export const ConnectorPlacement: Story = {
+  render: () => (
+    <HStack gap="space-16">
+      <Process>
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="auto"
+          connectorPlacement="auto"
+        />
+        <Process.Event
+          bullet={<SparklesFillIcon />}
+          title="auto"
+          connectorPlacement="auto"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="both"
+          connectorPlacement="both"
+        />
+        <Process.Event
+          bullet={<SparklesFillIcon />}
+          title="end"
+          connectorPlacement="end"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="Both"
+          connectorPlacement="both"
+        />
+        <Process.Event
+          bullet={<SparklesFillIcon />}
+          title="Both"
+          connectorPlacement="both"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="start"
+          connectorPlacement="start"
+        />
+        <Process.Event
+          bullet={<SparklesFillIcon />}
+          title="start"
+          connectorPlacement="start"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="end"
+          connectorPlacement="end"
+        />
+        <Process.Event
+          bullet={<SparklesFillIcon />}
+          title="end"
+          connectorPlacement="end"
+        />
+      </Process>
+    </HStack>
+  ),
+};
+
+export const ConnectorStates: Story = {
+  render: () => (
+    <HStack gap="space-16">
+      <Process>
+        <Process.Event
+          status="uncompleted"
+          bullet={<SparklesFillIcon />}
+          title="uncompleted + auto"
+          connectorPlacement="auto"
+        />
+        <Process.Event
+          status="uncompleted"
+          bullet={<SparklesFillIcon />}
+          title="uncompleted + auto"
+          connectorPlacement="auto"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="active"
+          bullet={<SparklesFillIcon />}
+          title="active + auto"
+          connectorPlacement="auto"
+        />
+        <Process.Event
+          status="active"
+          bullet={<SparklesFillIcon />}
+          title="active + auto"
+          connectorPlacement="auto"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="completed + auto"
+          connectorPlacement="auto"
+        />
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="completed + auto"
+          connectorPlacement="auto"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="uncompleted"
+          bullet={<SparklesFillIcon />}
+          title="uncompleted + both"
+          connectorPlacement="both"
+        />
+        <Process.Event
+          status="uncompleted"
+          bullet={<SparklesFillIcon />}
+          title="uncompleted + end"
+          connectorPlacement="end"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="active"
+          bullet={<SparklesFillIcon />}
+          title="active + both"
+          connectorPlacement="both"
+        />
+        <Process.Event
+          status="active"
+          bullet={<SparklesFillIcon />}
+          title="active + end"
+          connectorPlacement="end"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="completed + both"
+          connectorPlacement="both"
+        />
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="completed + end"
+          connectorPlacement="end"
+        />
+      </Process>
+    </HStack>
+  ),
+};
+
 export const Content: Story = {
   render: () => (
     <Process>
