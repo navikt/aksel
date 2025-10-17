@@ -84,6 +84,29 @@ export const Position: Story = {
   },
 };
 
+export const PositionResponsive: Story = {
+  render: () => {
+    return (
+      <div>
+        <Overlay defaultOpen>
+          <OverlayTrigger>Open Overlay</OverlayTrigger>
+          <OverlayPortal>
+            <OverlayBackdrop className="backdropCSS" />
+            <OverlayDrawer
+              className="drawerCSS"
+              aria-labelledby="ha"
+              position={{ md: "fullscreen", lg: "bottom", "2xl": "right" }}
+            >
+              <h1 id="ha">Heading text</h1>
+              <OverlayClose>Close</OverlayClose>
+            </OverlayDrawer>
+          </OverlayPortal>
+        </Overlay>
+      </div>
+    );
+  },
+};
+
 export const DemoDefaultFocusDialog: Story = {
   render: () => (
     <div>
