@@ -32,6 +32,7 @@
 @import "./date.darkside.css" layer(aksel.components);
 @import "./dropdown.darkside.css" layer(aksel.components);
 @import "./action-menu.darkside.css" layer(aksel.components);
+@import "./dialog.darkside.css" layer(aksel.components);
 @import "./expansioncard.darkside.css" layer(aksel.components);
 @import "./guide-panel.darkside.css" layer(aksel.components);
 @import "./help-text.darkside.css" layer(aksel.components);

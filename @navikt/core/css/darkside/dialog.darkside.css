@@ -1,0 +1,105 @@
+.aksel-dialog__popup {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  max-height: calc(100dvh - 64px);
+  max-width: calc(100dvw - 64px);
+  min-width: 296px;
+  opacity: 1;
+  width: 640px;
+  position: fixed;
+  border-radius: var(--ax-radius-12);
+  background-color: var(--ax-bg-neutral-soft);
+  padding: 4rem;
+  transition: 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-property: opacity, transform;
+
+  &:focus {
+    outline: none;
+  }
+
+  &[data-position="right"] {
+    height: 100dvh;
+    max-height: unset;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    &[data-entering-style],
+    &[data-exiting-style] {
+      opacity: 0;
+      transform: translateX(35%);
+    }
+  }
+
+  &[data-position="left"] {
+    height: 100dvh;
+    max-height: unset;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    &[data-entering-style],
+    &[data-exiting-style] {
+      opacity: 0;
+      transform: translateX(-35%);
+    }
+  }
+
+  &[data-position="bottom"] {
+    max-height: calc(100dvh - 64px);
+    max-width: 100dvw;
+    width: 100dvw;
+    height: auto;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    &[data-entering-style],
+    &[data-exiting-style] {
+      opacity: 0;
+      transform: translateY(35%);
+    }
+  }
+
+  &[data-position="center"] {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24rem;
+    max-width: calc(100vw - 3rem);
+    outline: 1px solid var(--ax-border-neutral-subtle);
+
+    &[data-entering-style],
+    &[data-exiting-style] {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.96);
+    }
+  }
+
+  &[data-position="fullscreen"] {
+    flex-grow: 1;
+    height: 100%;
+    max-height: 100dvh;
+    max-width: 100dvw;
+    width: 100%;
+    border-radius: 0;
+    inset: 0;
+
+    &[data-entering-style] {
+      opacity: 0.2;
+      transform: translateY(10%);
+    }
+
+    &[data-exiting-style] {
+      opacity: 0;
+      transform: translateY(10%);
+    }
+  }
+}

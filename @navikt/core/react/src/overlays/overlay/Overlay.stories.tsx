@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
+import { HStack } from "../../layout/stack";
 import {
   Overlay,
   OverlayBackdrop,
@@ -19,7 +20,6 @@ const meta: Meta<typeof Overlay> = {
     (Story) => (
       <div data-style-wrapper>
         {BackDropStyle}
-        {DrawerStyle}
         <Story />
       </div>
     ),
@@ -47,6 +47,41 @@ export const Default: Story = {
       <button onClick={() => alert("after")}>after overlay</button>
     </div>
   ),
+};
+
+export const Position: Story = {
+  render: () => {
+    const [position, setPosition] =
+      useState<React.ComponentProps<typeof OverlayDrawer>["position"]>(
+        "center",
+      );
+    return (
+      <div>
+        <h2> {`Position: ${position}`}</h2>
+        <HStack gap="space-8" marginBlock="space-8">
+          <button onClick={() => setPosition("right")}>Right</button>
+          <button onClick={() => setPosition("left")}>Left</button>
+          <button onClick={() => setPosition("bottom")}>bottom</button>
+          <button onClick={() => setPosition("center")}>center</button>
+          <button onClick={() => setPosition("fullscreen")}>fullscreen</button>
+        </HStack>
+        <Overlay defaultOpen>
+          <OverlayTrigger>Open Overlay</OverlayTrigger>
+          <OverlayPortal>
+            <OverlayBackdrop className="backdropCSS" />
+            <OverlayDrawer
+              className="drawerCSS"
+              aria-labelledby="ha"
+              position={position}
+            >
+              <h1 id="ha">Heading text</h1>
+              <OverlayClose>Close</OverlayClose>
+            </OverlayDrawer>
+          </OverlayPortal>
+        </Overlay>
+      </div>
+    );
+  },
 };
 
 export const DemoDefaultFocusDialog: Story = {
@@ -253,7 +288,7 @@ const BackDropStyle = (
   .backdropCSS {
     position: fixed;
     inset: 0;
-    background-color: red;
+    background-color: black;
     opacity: 0.2;
     transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
 
@@ -262,31 +297,6 @@ const BackDropStyle = (
       opacity: 0;
     }
     }
-  `}
-  </style>
-);
-
-const DrawerStyle = (
-  <style>
-    {`
-  .drawerCSS {
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right:0;
-    width: 24rem;
-    max-width: 100vw;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    background-color: var(--ax-bg-neutral-soft);
-    transition: all 300ms;
-    padding: 4rem;
-
-    &[data-entering-style], &[data-exiting-style] {
-      transform: translateX(100%);
-    }
-  }
   `}
   </style>
 );

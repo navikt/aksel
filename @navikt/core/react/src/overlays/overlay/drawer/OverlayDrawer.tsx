@@ -38,6 +38,22 @@ interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   onCloseAutoFocus?:
     | React.RefObject<HTMLElement | null>
     | (() => HTMLElement | null | undefined);
+
+  /**
+   * TODO:
+   * @default "center"
+   */
+  position?:
+    | "center"
+    | "left"
+    | "right"
+    | "bottom"
+    | "fullscreen"
+    | {
+        md: "center" | "left" | "right" | "bottom" | "fullscreen";
+        lg: "center" | "left" | "right" | "bottom" | "fullscreen";
+        "2xl": "center" | "left" | "right" | "bottom" | "fullscreen";
+      };
 }
 
 /**
@@ -62,6 +78,7 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       closeOnOutsideClick = true,
       onOpenAutoFocus,
       onCloseAutoFocus,
+      position = "center",
       ...restProps
     },
     forwardedRef,
@@ -159,6 +176,15 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       hasPointerDownOutsideRef.current = false;
     });
 
+    const positionDataAttributes =
+      typeof position === "string"
+        ? { "data-position": position }
+        : Object.fromEntries(
+            Object.entries(position).map(([key, value]) => {
+              return [`data-position-${key}`, value];
+            }),
+          );
+
     return (
       <FocusScope
         loop
@@ -233,9 +259,10 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
           <div
             {...restProps}
             ref={mergedRefs}
-            className={cn(className)}
+            className={cn(className, "navds-dialog__popup")}
             role="dialog"
             {...transitionAttrb}
+            {...positionDataAttributes}
           >
             {children}
           </div>
