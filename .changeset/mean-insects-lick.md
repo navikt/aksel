@@ -3,4 +3,4 @@
 "@navikt/ds-css": minor
 ---
 
-Process: Added new prop `connectorPlacement` to `Process.Event`. This allows you to add connector to start of first event and end of last event to create "continuous" process-flows.
+Process: Added new prop `connectorPlacement` to `Process.Event`. This allows you to add connector to the start of first event and end of last event for "continuous" process-flows.
