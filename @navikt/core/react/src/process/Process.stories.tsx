@@ -250,6 +250,85 @@ export const ConnectorStates: Story = {
   ),
 };
 
+export const ConnectorDot: Story = {
+  render: () => (
+    <HStack gap="space-16">
+      <Process>
+        <Process.Event
+          status="uncompleted"
+          title="uncompleted + auto"
+          connectorPlacement="auto"
+        />
+        <Process.Event
+          status="uncompleted"
+          title="uncompleted + auto"
+          connectorPlacement="auto"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="active"
+          title="active + auto"
+          connectorPlacement="auto"
+        />
+        <Process.Event
+          status="active"
+          title="active + auto"
+          connectorPlacement="auto"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="completed"
+          title="completed + auto"
+          connectorPlacement="auto"
+        />
+        <Process.Event
+          status="completed"
+          title="completed + auto"
+          connectorPlacement="auto"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="uncompleted"
+          title="uncompleted + both"
+          connectorPlacement="both"
+        />
+        <Process.Event
+          status="uncompleted"
+          title="uncompleted + end"
+          connectorPlacement="end"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="active"
+          title="active + both"
+          connectorPlacement="both"
+        />
+        <Process.Event
+          status="active"
+          title="active + end"
+          connectorPlacement="end"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="completed"
+          title="completed + both"
+          connectorPlacement="both"
+        />
+        <Process.Event
+          status="completed"
+          title="completed + end"
+          connectorPlacement="end"
+        />
+      </Process>
+    </HStack>
+  ),
+};
+
 export const Content: Story = {
   render: () => (
     <Process>

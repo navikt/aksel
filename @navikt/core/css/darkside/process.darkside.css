@@ -23,7 +23,11 @@
 
     margin-block-start: calc((var(--__axc-process-circle-small) / 2) * -1);
 
-    & .aksel-process__line {
+    & .aksel-process__line[data-position="start"] {
+      margin-block-end: calc(var(--__axc-process-circle-size) / 2 * -1);
+    }
+
+    & .aksel-process__line[data-position="end"] {
       margin-block-start: calc(var(--__axc-process-circle-size) / 2);
     }
 
