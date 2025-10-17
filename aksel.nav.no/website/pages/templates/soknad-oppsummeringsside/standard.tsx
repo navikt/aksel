@@ -51,7 +51,7 @@ function Example() {
             </VStack>
           </VStack>
 
-          <div data-aksel-template="form-summarypage-v3">
+          <div data-aksel-template="form-summarypage-v4">
             <Link href="#">
               <ArrowLeftIcon aria-hidden /> Forrige steg
             </Link>
