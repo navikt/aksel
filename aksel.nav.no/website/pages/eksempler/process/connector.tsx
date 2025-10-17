@@ -39,4 +39,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
+  desc: "Du kan bruke `connectorPlacement` for å styre hvor linjen som kobler hendelsene skal vises. Komponenten støtter `auto` (standard), `start`, `end` og `both` som verdier.",
 };
