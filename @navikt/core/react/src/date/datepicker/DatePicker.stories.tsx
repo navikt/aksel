@@ -153,7 +153,6 @@ export const UseDatepicker = () => {
     toDate: new Date("Feb 23 2029"),
     onDateChange: console.log,
     onValidate: console.log,
-    allowTwoDigitYear: false,
   });
 
   return (
