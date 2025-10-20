@@ -67,7 +67,6 @@ function applyAttributeToOthers(
     }
 
     const parentChildren = parent.children;
-    const attributeCounterMap = ariaHiddenCounter;
 
     for (let index = 0; index < parentChildren.length; index += 1) {
       const node = parentChildren[index] as Element;
@@ -77,10 +76,10 @@ function applyAttributeToOthers(
       } else {
         const attr = node.getAttribute(controlAttribute);
         const alreadyHidden = attr !== null && attr !== "false";
-        const counterValue = (attributeCounterMap.get(node) || 0) + 1;
+        const counterValue = (ariaHiddenCounter.get(node) || 0) + 1;
         const markerValue = (markerMap.get(node) || 0) + 1;
 
-        attributeCounterMap.set(node, counterValue);
+        ariaHiddenCounter.set(node, counterValue);
         markerMap.set(node, markerValue);
         hiddenElements.push(node);
 
@@ -103,12 +102,11 @@ function applyAttributeToOthers(
 
   return () => {
     hiddenElements.forEach((element) => {
-      const attributeCounterMap = ariaHiddenCounter;
-      const currentCounterValue = attributeCounterMap.get(element) || 0;
+      const currentCounterValue = ariaHiddenCounter.get(element) || 0;
       const counterValue = currentCounterValue - 1;
       const markerValue = (markerMap.get(element) || 0) - 1;
 
-      attributeCounterMap.set(element, counterValue);
+      ariaHiddenCounter.set(element, counterValue);
       markerMap.set(element, markerValue);
 
       if (!counterValue) {
