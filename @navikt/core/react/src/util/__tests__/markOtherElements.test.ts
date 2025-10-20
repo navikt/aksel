@@ -35,6 +35,33 @@ describe("markOtherElements util", () => {
     expect(target.hasAttribute("data-aksel-hidden")).toBe(false);
   });
 
+  test("nested: marks non-avoided siblings with marker and cleans up on undo", () => {
+    document.body.innerHTML = `
+      <div id="root">
+        <div id="inner">
+          <div id="target"></div>
+          <div id="hidden-1"></div>
+        </div>
+        <div id="hidden-2"></div>
+      </div>
+    `;
+    const target = document.getElementById("target") as Element;
+    const hidden1 = document.getElementById("hidden-1") as Element;
+    const hidden2 = document.getElementById("hidden-2") as Element;
+
+    const undo = markOtherElements([target]);
+
+    expect(hidden1.hasAttribute("data-aksel-hidden")).toBe(true);
+    expect(hidden2.hasAttribute("data-aksel-hidden")).toBe(true);
+    expect(target.hasAttribute("data-aksel-hidden")).toBe(false);
+
+    undo();
+
+    expect(hidden1.hasAttribute("data-aksel-hidden")).toBe(false);
+    expect(hidden2.hasAttribute("data-aksel-hidden")).toBe(false);
+    expect(target.hasAttribute("data-aksel-hidden")).toBe(false);
+  });
+
   test("applies aria-hidden when requested and restores previous state", () => {
     document.body.innerHTML = `
       <div id="root">
