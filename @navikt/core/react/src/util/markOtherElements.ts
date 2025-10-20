@@ -6,7 +6,7 @@
  */
 import { ownerDocument } from "./owner";
 
-type Undo = () => void;
+type UndoFn = () => void;
 
 const counters = {
   "aria-hidden": new WeakMap<Element, number>(),
@@ -48,7 +48,7 @@ function applyAttributeToOthers(
   uncorrectedAvoidElements: Element[],
   body: HTMLElement,
   ariaHidden: boolean,
-): Undo {
+): UndoFn {
   const markerName = "data-aksel-inert";
   const controlAttribute = ariaHidden ? "aria-hidden" : null;
   const avoidElements = correctElements(body, uncorrectedAvoidElements);
@@ -149,7 +149,10 @@ function applyAttributeToOthers(
   };
 }
 
-function markOtherElements(avoidElements: Element[], ariaHidden = false): Undo {
+function markOtherElements(
+  avoidElements: Element[],
+  ariaHidden = false,
+): UndoFn {
   const body = ownerDocument(avoidElements[0]).body;
 
   return applyAttributeToOthers(
