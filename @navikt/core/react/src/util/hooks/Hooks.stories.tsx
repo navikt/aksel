@@ -75,12 +75,12 @@ export const UseScrollLockResizeTest: StoryObj = {
 
 function ScrollLockComponent() {
   const [enabled, setEnabled] = useState(false);
-  const [emulateIosState, setEmulateIosState] = useState(false);
+  const [emulateWebkitLazyClicks, setEmulateWebkitLazyClicks] = useState(false);
 
   useScrollLock({
     enabled,
-    mounted: emulateIosState,
-    open: !emulateIosState,
+    mounted: emulateWebkitLazyClicks,
+    open: !emulateWebkitLazyClicks,
   });
 
   return (
@@ -93,10 +93,11 @@ function ScrollLockComponent() {
       <div>
         <h3>
           When closing (!open && mounted), lazy clicks can end up selecting
-          whole page when transitioning to removing scroll-lock
+          whole page when transitioning to removing scroll-lock in WebKit
+          <a href="https://github.com/mui/base-ui/issues/1135">Link to issue</a>
         </h3>
-        <button onClick={() => setEmulateIosState((x) => !x)}>
-          Emulate WebKit-state: {`${emulateIosState}`}
+        <button onClick={() => setEmulateWebkitLazyClicks((x) => !x)}>
+          Emulate mounted && !open: {`${emulateWebkitLazyClicks}`}
         </button>
       </div>
     </div>
