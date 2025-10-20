@@ -44,6 +44,16 @@ describe("Parse date-inputs with 4-digit years", () => {
   });
 });
 
+describe("Parse date-inputs starting with year", () => {
+  // eslint-disable-next-line vitest/expect-expect
+  test("- divider", () => {
+    check("2022-5-1").toBeTruthy();
+    check("2022-5-10").toBeTruthy();
+    check("2022-05-1").toBeTruthy();
+    check("2022-05-10").toBeTruthy();
+  });
+});
+
 describe("Parse date-inputs with 2-digit years", () => {
   // eslint-disable-next-line vitest/expect-expect
   test("No spaces", () => {

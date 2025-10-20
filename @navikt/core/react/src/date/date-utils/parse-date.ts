@@ -74,6 +74,12 @@ export const parseDate = (
     }
   }
 
+  /* System format */
+  parsed = parse(date, "yyyy-MM-dd", today, { locale });
+  if (isValidDate(parsed)) {
+    return parsed;
+  }
+
   return new Date("Invalid date");
 };
 
