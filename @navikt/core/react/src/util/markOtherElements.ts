@@ -52,54 +52,54 @@ function applyAttributeToOthers(
   const markerName = "data-aksel-inert";
   const controlAttribute = ariaHidden ? "aria-hidden" : null;
   const avoidElements = correctElements(body, uncorrectedAvoidElements);
-  const elementsToKeep = new Set<Node>();
-  const elementsToStop = new Set<Node>(avoidElements);
+  const elementsToUpdate = new Set<Node>();
+  const elementsToAvoidUpdating = new Set<Node>(avoidElements);
   const hiddenElements: Element[] = [];
 
   if (!markerMap[markerName]) {
     markerMap[markerName] = new WeakMap();
   }
 
-  const markerCounter = markerMap[markerName];
+  const markerCounts = markerMap[markerName];
 
-  avoidElements.forEach(keep);
-  deep(body);
-  elementsToKeep.clear();
+  avoidElements.forEach(addToAvoidList);
+  applyAttributes(body);
+  elementsToUpdate.clear();
 
-  function keep(el: Node | undefined) {
-    if (!el || elementsToKeep.has(el)) {
+  function addToAvoidList(el: Node | undefined) {
+    if (!el || elementsToUpdate.has(el)) {
       return;
     }
 
-    elementsToKeep.add(el);
+    elementsToUpdate.add(el);
     if (el.parentNode) {
-      keep(el.parentNode);
+      addToAvoidList(el.parentNode);
     }
   }
 
-  function deep(parent: Element | null) {
-    if (!parent || elementsToStop.has(parent)) {
+  function applyAttributes(parent: Element | null) {
+    if (!parent || elementsToAvoidUpdating.has(parent)) {
       return;
     }
 
     const parentChildren = parent.children;
-    const counterMap = getCounterMap(controlAttribute);
+    const attributeCounterMap = getCounterMap(controlAttribute);
 
     for (let index = 0; index < parentChildren.length; index += 1) {
       const node = parentChildren[index] as Element;
 
-      if (elementsToKeep.has(node)) {
-        deep(node);
+      if (elementsToUpdate.has(node)) {
+        applyAttributes(node);
       } else {
         const attr = controlAttribute
           ? node.getAttribute(controlAttribute)
           : null;
         const alreadyHidden = attr !== null && attr !== "false";
-        const counterValue = (counterMap.get(node) || 0) + 1;
-        const markerValue = (markerCounter.get(node) || 0) + 1;
+        const counterValue = (attributeCounterMap.get(node) || 0) + 1;
+        const markerValue = (markerCounts.get(node) || 0) + 1;
 
-        counterMap.set(node, counterValue);
-        markerCounter.set(node, markerValue);
+        attributeCounterMap.set(node, counterValue);
+        markerCounts.set(node, markerValue);
         hiddenElements.push(node);
 
         if (counterValue === 1 && alreadyHidden) {
@@ -121,13 +121,13 @@ function applyAttributeToOthers(
 
   return () => {
     hiddenElements.forEach((element) => {
-      const counterMap = getCounterMap(controlAttribute);
-      const currentCounterValue = counterMap.get(element) || 0;
+      const attributeCounterMap = getCounterMap(controlAttribute);
+      const currentCounterValue = attributeCounterMap.get(element) || 0;
       const counterValue = currentCounterValue - 1;
-      const markerValue = (markerCounter.get(element) || 0) - 1;
+      const markerValue = (markerCounts.get(element) || 0) - 1;
 
-      counterMap.set(element, counterValue);
-      markerCounter.set(element, markerValue);
+      attributeCounterMap.set(element, counterValue);
+      markerCounts.set(element, markerValue);
 
       if (!counterValue) {
         if (!uncontrolledElementsSet.has(element) && controlAttribute) {
