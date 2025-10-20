@@ -25,12 +25,14 @@ describe("markOtherElements util", () => {
     expect(hidden1.hasAttribute("data-aksel-inert")).toBe(true);
     expect(live.hasAttribute("data-aksel-inert")).toBe(false);
     expect(script.hasAttribute("data-aksel-inert")).toBe(false);
+    expect(target.hasAttribute("data-aksel-inert")).toBe(false);
 
     undo();
 
     expect(hidden1.hasAttribute("data-aksel-inert")).toBe(false);
     expect(live.hasAttribute("data-aksel-inert")).toBe(false);
     expect(script.hasAttribute("data-aksel-inert")).toBe(false);
+    expect(target.hasAttribute("data-aksel-inert")).toBe(false);
   });
 
   test("applies aria-hidden when requested and restores previous state", () => {
