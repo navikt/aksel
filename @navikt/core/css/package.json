@@ -39,7 +39,7 @@
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.31",
     "postcss-combine-duplicated-selectors": "10.0.3",
-    "postcss-import": "^14.1.0",
+    "postcss-import": "^16.1.1",
     "postcss-nesting": "13.0.2",
     "tsx": "^4.20.6",
     "vitest": "^3.2.4"
