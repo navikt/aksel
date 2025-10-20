@@ -82,7 +82,12 @@ function applyAttributeToOthers(
       return;
     }
 
-    [].forEach.call(parent.children, (node: Element) => {
+    const parentChildren = parent.children;
+    const counterMap = getCounterMap(controlAttribute);
+
+    for (let index = 0; index < parentChildren.length; index += 1) {
+      const node = parentChildren[index] as Element;
+
       if (elementsToKeep.has(node)) {
         deep(node);
       } else {
@@ -90,7 +95,6 @@ function applyAttributeToOthers(
           ? node.getAttribute(controlAttribute)
           : null;
         const alreadyHidden = attr !== null && attr !== "false";
-        const counterMap = getCounterMap(controlAttribute);
         const counterValue = (counterMap.get(node) || 0) + 1;
         const markerValue = (markerCounter.get(node) || 0) + 1;
 
@@ -110,7 +114,7 @@ function applyAttributeToOthers(
           node.setAttribute(controlAttribute, "true");
         }
       }
-    });
+    }
   }
 
   lockCount += 1;
