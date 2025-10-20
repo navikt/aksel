@@ -35,7 +35,7 @@ const correctElements = (parent: HTMLElement, targets: Element[]): Element[] =>
     .filter((x): x is Element => x != null);
 
 const controlAttribute = "aria-hidden";
-const markerName = "data-aksel-inert";
+const markerName = "data-aksel-hidden";
 
 function applyAttributeToOthers(
   uncorrectedAvoidElements: Element[],

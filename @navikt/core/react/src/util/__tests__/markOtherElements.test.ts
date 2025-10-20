@@ -22,17 +22,17 @@ describe("markOtherElements util", () => {
 
     const undo = markOtherElements([target]);
 
-    expect(hidden1.hasAttribute("data-aksel-inert")).toBe(true);
-    expect(live.hasAttribute("data-aksel-inert")).toBe(false);
-    expect(script.hasAttribute("data-aksel-inert")).toBe(false);
-    expect(target.hasAttribute("data-aksel-inert")).toBe(false);
+    expect(hidden1.hasAttribute("data-aksel-hidden")).toBe(true);
+    expect(live.hasAttribute("data-aksel-hidden")).toBe(false);
+    expect(script.hasAttribute("data-aksel-hidden")).toBe(false);
+    expect(target.hasAttribute("data-aksel-hidden")).toBe(false);
 
     undo();
 
-    expect(hidden1.hasAttribute("data-aksel-inert")).toBe(false);
-    expect(live.hasAttribute("data-aksel-inert")).toBe(false);
-    expect(script.hasAttribute("data-aksel-inert")).toBe(false);
-    expect(target.hasAttribute("data-aksel-inert")).toBe(false);
+    expect(hidden1.hasAttribute("data-aksel-hidden")).toBe(false);
+    expect(live.hasAttribute("data-aksel-hidden")).toBe(false);
+    expect(script.hasAttribute("data-aksel-hidden")).toBe(false);
+    expect(target.hasAttribute("data-aksel-hidden")).toBe(false);
   });
 
   test("applies aria-hidden when requested and restores previous state", () => {
@@ -51,15 +51,15 @@ describe("markOtherElements util", () => {
 
     expect(hidden2.getAttribute("aria-hidden")).toBe("true");
     expect(preHidden.getAttribute("aria-hidden")).toBe("true");
-    expect(hidden2.hasAttribute("data-aksel-inert")).toBe(true);
-    expect(preHidden.hasAttribute("data-aksel-inert")).toBe(true);
+    expect(hidden2.hasAttribute("data-aksel-hidden")).toBe(true);
+    expect(preHidden.hasAttribute("data-aksel-hidden")).toBe(true);
 
     undo();
 
     expect(hidden2.hasAttribute("aria-hidden")).toBe(false);
     expect(preHidden.getAttribute("aria-hidden")).toBe("true");
-    expect(hidden2.hasAttribute("data-aksel-inert")).toBe(false);
-    expect(preHidden.hasAttribute("data-aksel-inert")).toBe(false);
+    expect(hidden2.hasAttribute("data-aksel-hidden")).toBe(false);
+    expect(preHidden.hasAttribute("data-aksel-hidden")).toBe(false);
   });
 
   test("treats shadow-hosted avoid elements as connected to host", () => {
@@ -82,13 +82,13 @@ describe("markOtherElements util", () => {
 
     const undo = markOtherElements([shadowTarget]);
 
-    expect(sibling.hasAttribute("data-aksel-inert")).toBe(true);
-    expect(host.hasAttribute("data-aksel-inert")).toBe(false);
+    expect(sibling.hasAttribute("data-aksel-hidden")).toBe(true);
+    expect(host.hasAttribute("data-aksel-hidden")).toBe(false);
 
     undo();
 
-    expect(sibling.hasAttribute("data-aksel-inert")).toBe(false);
-    expect(host.hasAttribute("data-aksel-inert")).toBe(false);
+    expect(sibling.hasAttribute("data-aksel-hidden")).toBe(false);
+    expect(host.hasAttribute("data-aksel-hidden")).toBe(false);
   });
 
   test("maintains counters across nested calls until final undo", () => {
@@ -104,17 +104,17 @@ describe("markOtherElements util", () => {
     const shared = document.getElementById("shared") as Element;
 
     const undoA = markOtherElements([targetA]);
-    expect(shared.hasAttribute("data-aksel-inert")).toBe(true);
+    expect(shared.hasAttribute("data-aksel-hidden")).toBe(true);
 
     const undoB = markOtherElements([targetB]);
-    expect(shared.hasAttribute("data-aksel-inert")).toBe(true);
+    expect(shared.hasAttribute("data-aksel-hidden")).toBe(true);
 
     undoB();
-    expect(shared.hasAttribute("data-aksel-inert")).toBe(true);
+    expect(shared.hasAttribute("data-aksel-hidden")).toBe(true);
     expect(shared.getAttribute("aria-hidden")).toBe("true");
 
     undoA();
-    expect(shared.hasAttribute("data-aksel-inert")).toBe(false);
+    expect(shared.hasAttribute("data-aksel-hidden")).toBe(false);
     expect(shared.hasAttribute("aria-hidden")).toBe(false);
   });
 });
