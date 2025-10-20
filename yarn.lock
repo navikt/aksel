@@ -20500,19 +20500,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-import@npm:^14.1.0":
-  version: 14.1.0
-  resolution: "postcss-import@npm:14.1.0"
-  dependencies:
-    postcss-value-parser: "npm:^4.0.0"
-    read-cache: "npm:^1.0.0"
-    resolve: "npm:^1.1.7"
-  peerDependencies:
-    postcss: ^8.0.0
-  checksum: 10/434ab43145ad6beeb3cd7405596cb29920061e9d55091196e0264daf0a4e543a8cf1568c233e5a4466786749f904c03a9d51d406685055af2a14a8337d8773d5
-  languageName: node
-  linkType: hard
-
 "postcss-import@npm:^15.1.0":
   version: 15.1.0
   resolution: "postcss-import@npm:15.1.0"
@@ -26774,7 +26761,7 @@ __metadata:
     pino: "npm:^8.21.0"
     pino-pretty: "npm:^10.0.0"
     postcss: "npm:^8.4.31"
-    postcss-import: "npm:^14.1.0"
+    postcss-import: "npm:^16.1.1"
     postcss-loader: "npm:7.0.0"
     prism-react-renderer: "npm:^2.0.0"
     react: "npm:^18.0.0"

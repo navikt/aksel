@@ -108,7 +108,7 @@
     "json5": "2.2.1",
     "pino-pretty": "^10.0.0",
     "postcss": "^8.4.31",
-    "postcss-import": "^14.1.0",
+    "postcss-import": "^16.1.1",
     "postcss-loader": "7.0.0",
     "rss": "^1.2.2",
     "showdown": "^2.1.0",
