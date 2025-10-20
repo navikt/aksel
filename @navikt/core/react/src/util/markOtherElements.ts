@@ -8,16 +8,10 @@ import { ownerDocument } from "./owner";
 
 type UndoFn = () => void;
 
-const counters = {
-  "aria-hidden": new WeakMap<Element, number>(),
-};
-
-function getCounterMap() {
-  return counters["aria-hidden"];
-}
+let ariaHiddenCounter = new WeakMap<Element, number>();
 
 let uncontrolledElementsSet = new WeakSet<Element>();
-let markerMap: Record<string, WeakMap<Element, number>> = {};
+let markerMap: WeakMap<Element, number> = new WeakMap();
 let lockCount = 0;
 
 const unwrapHost = (node: Element | ShadowRoot): Element | null =>
@@ -41,23 +35,16 @@ const correctElements = (parent: HTMLElement, targets: Element[]): Element[] =>
     .filter((x): x is Element => x != null);
 
 const controlAttribute = "aria-hidden";
+const markerName = "data-aksel-inert";
 
 function applyAttributeToOthers(
   uncorrectedAvoidElements: Element[],
   body: HTMLElement,
 ): UndoFn {
-  const markerName = "data-aksel-inert";
-
   const avoidElements = correctElements(body, uncorrectedAvoidElements);
   const elementsToUpdate = new Set<Node>();
   const elementsToAvoidUpdating = new Set<Node>(avoidElements);
   const hiddenElements: Element[] = [];
-
-  if (!markerMap[markerName]) {
-    markerMap[markerName] = new WeakMap();
-  }
-
-  const markerCounts = markerMap[markerName];
 
   avoidElements.forEach(addToAvoidList);
   applyAttributes(body);
@@ -80,7 +67,7 @@ function applyAttributeToOthers(
     }
 
     const parentChildren = parent.children;
-    const attributeCounterMap = getCounterMap();
+    const attributeCounterMap = ariaHiddenCounter;
 
     for (let index = 0; index < parentChildren.length; index += 1) {
       const node = parentChildren[index] as Element;
@@ -91,10 +78,10 @@ function applyAttributeToOthers(
         const attr = node.getAttribute(controlAttribute);
         const alreadyHidden = attr !== null && attr !== "false";
         const counterValue = (attributeCounterMap.get(node) || 0) + 1;
-        const markerValue = (markerCounts.get(node) || 0) + 1;
+        const markerValue = (markerMap.get(node) || 0) + 1;
 
         attributeCounterMap.set(node, counterValue);
-        markerCounts.set(node, markerValue);
+        markerMap.set(node, markerValue);
         hiddenElements.push(node);
 
         if (counterValue === 1 && alreadyHidden) {
@@ -116,13 +103,13 @@ function applyAttributeToOthers(
 
   return () => {
     hiddenElements.forEach((element) => {
-      const attributeCounterMap = getCounterMap();
+      const attributeCounterMap = ariaHiddenCounter;
       const currentCounterValue = attributeCounterMap.get(element) || 0;
       const counterValue = currentCounterValue - 1;
-      const markerValue = (markerCounts.get(element) || 0) - 1;
+      const markerValue = (markerMap.get(element) || 0) - 1;
 
       attributeCounterMap.set(element, counterValue);
-      markerCounts.set(element, markerValue);
+      markerMap.set(element, markerValue);
 
       if (!counterValue) {
         if (!uncontrolledElementsSet.has(element)) {
@@ -140,9 +127,9 @@ function applyAttributeToOthers(
     lockCount -= 1;
 
     if (!lockCount) {
-      counters["aria-hidden"] = new WeakMap();
+      ariaHiddenCounter = new WeakMap();
       uncontrolledElementsSet = new WeakSet();
-      markerMap = {};
+      markerMap = new WeakMap();
     }
   };
 }
