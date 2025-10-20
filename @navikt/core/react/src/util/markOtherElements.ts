@@ -10,14 +10,10 @@ type UndoFn = () => void;
 
 const counters = {
   "aria-hidden": new WeakMap<Element, number>(),
-  none: new WeakMap<Element, number>(),
 };
 
-function getCounterMap(control: "aria-hidden" | null) {
-  if (control === "aria-hidden") {
-    return counters["aria-hidden"];
-  }
-  return counters.none;
+function getCounterMap() {
+  return counters["aria-hidden"];
 }
 
 let uncontrolledElementsSet = new WeakSet<Element>();
@@ -44,13 +40,14 @@ const correctElements = (parent: HTMLElement, targets: Element[]): Element[] =>
     })
     .filter((x): x is Element => x != null);
 
+const controlAttribute = "aria-hidden";
+
 function applyAttributeToOthers(
   uncorrectedAvoidElements: Element[],
   body: HTMLElement,
-  ariaHidden: boolean,
 ): UndoFn {
   const markerName = "data-aksel-inert";
-  const controlAttribute = ariaHidden ? "aria-hidden" : null;
+
   const avoidElements = correctElements(body, uncorrectedAvoidElements);
   const elementsToUpdate = new Set<Node>();
   const elementsToAvoidUpdating = new Set<Node>(avoidElements);
@@ -83,7 +80,7 @@ function applyAttributeToOthers(
     }
 
     const parentChildren = parent.children;
-    const attributeCounterMap = getCounterMap(controlAttribute);
+    const attributeCounterMap = getCounterMap();
 
     for (let index = 0; index < parentChildren.length; index += 1) {
       const node = parentChildren[index] as Element;
@@ -91,9 +88,7 @@ function applyAttributeToOthers(
       if (elementsToUpdate.has(node)) {
         applyAttributes(node);
       } else {
-        const attr = controlAttribute
-          ? node.getAttribute(controlAttribute)
-          : null;
+        const attr = node.getAttribute(controlAttribute);
         const alreadyHidden = attr !== null && attr !== "false";
         const counterValue = (attributeCounterMap.get(node) || 0) + 1;
         const markerValue = (markerCounts.get(node) || 0) + 1;
@@ -110,7 +105,7 @@ function applyAttributeToOthers(
           node.setAttribute(markerName, "");
         }
 
-        if (!alreadyHidden && controlAttribute) {
+        if (!alreadyHidden) {
           node.setAttribute(controlAttribute, "true");
         }
       }
@@ -121,7 +116,7 @@ function applyAttributeToOthers(
 
   return () => {
     hiddenElements.forEach((element) => {
-      const attributeCounterMap = getCounterMap(controlAttribute);
+      const attributeCounterMap = getCounterMap();
       const currentCounterValue = attributeCounterMap.get(element) || 0;
       const counterValue = currentCounterValue - 1;
       const markerValue = (markerCounts.get(element) || 0) - 1;
@@ -130,7 +125,7 @@ function applyAttributeToOthers(
       markerCounts.set(element, markerValue);
 
       if (!counterValue) {
-        if (!uncontrolledElementsSet.has(element) && controlAttribute) {
+        if (!uncontrolledElementsSet.has(element)) {
           element.removeAttribute(controlAttribute);
         }
 
@@ -146,17 +141,13 @@ function applyAttributeToOthers(
 
     if (!lockCount) {
       counters["aria-hidden"] = new WeakMap();
-      counters.none = new WeakMap();
       uncontrolledElementsSet = new WeakSet();
       markerMap = {};
     }
   };
 }
 
-function markOtherElements(
-  avoidElements: Element[],
-  ariaHidden = false,
-): UndoFn {
+function markOtherElements(avoidElements: Element[]): UndoFn {
   const body = ownerDocument(avoidElements[0]).body;
 
   return applyAttributeToOthers(
@@ -164,7 +155,6 @@ function markOtherElements(
       Array.from(body.querySelectorAll("[aria-live], script")),
     ),
     body,
-    ariaHidden,
   );
 }
 

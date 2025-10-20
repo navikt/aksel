@@ -47,7 +47,7 @@ describe("markOtherElements util", () => {
     const hidden2 = document.getElementById("hidden-2") as Element;
     const preHidden = document.getElementById("pre-hidden") as Element;
 
-    const undo = markOtherElements([target], true);
+    const undo = markOtherElements([target]);
 
     expect(hidden2.getAttribute("aria-hidden")).toBe("true");
     expect(preHidden.getAttribute("aria-hidden")).toBe("true");
@@ -103,10 +103,10 @@ describe("markOtherElements util", () => {
     const targetB = document.getElementById("target-b") as Element;
     const shared = document.getElementById("shared") as Element;
 
-    const undoA = markOtherElements([targetA], true);
+    const undoA = markOtherElements([targetA]);
     expect(shared.hasAttribute("data-aksel-inert")).toBe(true);
 
-    const undoB = markOtherElements([targetB], true);
+    const undoB = markOtherElements([targetB]);
     expect(shared.hasAttribute("data-aksel-inert")).toBe(true);
 
     undoB();
