@@ -28,7 +28,7 @@ describe("Modal", () => {
     expect(screen.getByText("Foobar")).not.toBeVisible();
   });
 
-  test("should toggle body class", async () => {
+  test("should toggle scroll lock", async () => {
     render(<Test />);
 
     await waitFor(() => {
