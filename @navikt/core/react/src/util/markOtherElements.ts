@@ -9,9 +9,9 @@ import { ownerDocument } from "./owner";
 type UndoFn = () => void;
 
 let ariaHiddenCounter = new WeakMap<Element, number>();
+let markerCounter: WeakMap<Element, number> = new WeakMap();
 
 let uncontrolledElementsSet = new WeakSet<Element>();
-let markerMap: WeakMap<Element, number> = new WeakMap();
 let lockCount = 0;
 
 const unwrapHost = (node: Element | ShadowRoot): Element | null =>
@@ -77,10 +77,10 @@ function applyAttributeToOthers(
         const attr = node.getAttribute(controlAttribute);
         const alreadyHidden = attr !== null && attr !== "false";
         const counterValue = (ariaHiddenCounter.get(node) || 0) + 1;
-        const markerValue = (markerMap.get(node) || 0) + 1;
+        const markerValue = (markerCounter.get(node) || 0) + 1;
 
         ariaHiddenCounter.set(node, counterValue);
-        markerMap.set(node, markerValue);
+        markerCounter.set(node, markerValue);
         hiddenElements.push(node);
 
         if (counterValue === 1 && alreadyHidden) {
@@ -104,10 +104,10 @@ function applyAttributeToOthers(
     hiddenElements.forEach((element) => {
       const currentCounterValue = ariaHiddenCounter.get(element) || 0;
       const counterValue = currentCounterValue - 1;
-      const markerValue = (markerMap.get(element) || 0) - 1;
+      const markerValue = (markerCounter.get(element) || 0) - 1;
 
       ariaHiddenCounter.set(element, counterValue);
-      markerMap.set(element, markerValue);
+      markerCounter.set(element, markerValue);
 
       if (!counterValue) {
         if (!uncontrolledElementsSet.has(element)) {
@@ -127,7 +127,7 @@ function applyAttributeToOthers(
     if (!lockCount) {
       ariaHiddenCounter = new WeakMap();
       uncontrolledElementsSet = new WeakSet();
-      markerMap = new WeakMap();
+      markerCounter = new WeakMap();
     }
   };
 }
