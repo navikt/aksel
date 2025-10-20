@@ -51,7 +51,7 @@
     grid-row: line-1;
 
     .aksel-process__event[data-status="active"] & {
-      border-image: none;
+      border-image: unset;
     }
 
     .aksel-process__event:first-of-type & {
@@ -78,7 +78,7 @@
   }
 
   .aksel-process__event[data-status="active"]:last-of-type & {
-    border-image: none;
+    border-image: unset;
   }
 
   .aksel-process__event[data-status="completed"] & {
@@ -86,7 +86,7 @@
   }
 
   .aksel-process__event:not([data-status="active"]) & {
-    border-image: none;
+    border-image: unset;
   }
 
   .aksel-process__event:last-of-type:is([data-connector="auto"]) & {
@@ -187,6 +187,6 @@
   }
 
   .aksel-process__event:is([data-status="active"]) .aksel-process__line {
-    border-image: none;
+    border-image: unset;
   }
 }
