@@ -28,7 +28,7 @@ export function getCloseHandler(
 }
 
 function useIsModalOpen(modalRef: HTMLDialogElement | null) {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
   useEffect(() => {
     if (!modalRef) {
@@ -38,7 +38,7 @@ function useIsModalOpen(modalRef: HTMLDialogElement | null) {
     setIsOpen(modalRef.open);
 
     const observer = new MutationObserver(() => {
-      setIsOpen(!!modalRef.open);
+      setIsOpen(modalRef.open);
     });
 
     observer.observe(modalRef, {
