@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test } from "vitest";
-import { markOtherElements } from "../markOtherElements";
+import { hideNonTargetElements } from "../hideNonTargetElements";
 
-describe("markOtherElements util", () => {
+describe("hideNonTargetElements util", () => {
   beforeEach(() => {
     document.body.innerHTML = "";
   });
@@ -20,7 +20,7 @@ describe("markOtherElements util", () => {
     const live = document.getElementById("live-region") as Element;
     const script = document.getElementById("script-el") as Element;
 
-    const undo = markOtherElements([target]);
+    const undo = hideNonTargetElements([target]);
 
     expect(hidden1.hasAttribute("data-aksel-hidden")).toBe(true);
     expect(live.hasAttribute("data-aksel-hidden")).toBe(false);
@@ -49,7 +49,7 @@ describe("markOtherElements util", () => {
     const hidden1 = document.getElementById("hidden-1") as Element;
     const hidden2 = document.getElementById("hidden-2") as Element;
 
-    const undo = markOtherElements([target]);
+    const undo = hideNonTargetElements([target]);
 
     expect(hidden1.hasAttribute("data-aksel-hidden")).toBe(true);
     expect(hidden2.hasAttribute("data-aksel-hidden")).toBe(true);
@@ -74,7 +74,7 @@ describe("markOtherElements util", () => {
     const hidden2 = document.getElementById("hidden-2") as Element;
     const preHidden = document.getElementById("pre-hidden") as Element;
 
-    const undo = markOtherElements([target]);
+    const undo = hideNonTargetElements([target]);
 
     expect(hidden2.getAttribute("aria-hidden")).toBe("true");
     expect(preHidden.getAttribute("aria-hidden")).toBe("true");
@@ -107,7 +107,7 @@ describe("markOtherElements util", () => {
 
     root.append(host, sibling);
 
-    const undo = markOtherElements([shadowTarget]);
+    const undo = hideNonTargetElements([shadowTarget]);
 
     expect(sibling.hasAttribute("data-aksel-hidden")).toBe(true);
     expect(host.hasAttribute("data-aksel-hidden")).toBe(false);
@@ -130,10 +130,10 @@ describe("markOtherElements util", () => {
     const targetB = document.getElementById("target-b") as Element;
     const shared = document.getElementById("shared") as Element;
 
-    const undoA = markOtherElements([targetA]);
+    const undoA = hideNonTargetElements([targetA]);
     expect(shared.hasAttribute("data-aksel-hidden")).toBe(true);
 
-    const undoB = markOtherElements([targetB]);
+    const undoB = hideNonTargetElements([targetB]);
     expect(shared.hasAttribute("data-aksel-hidden")).toBe(true);
 
     undoB();
