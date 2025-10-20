@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-Modal: Replace className placed on Body when Modal is Open, repaced scroll-locking with new internal utility.
+Modal: Removed CSS-class `navds-modal__document-body` and `aksel-modal__document-body`. Scroll-lock now handled by internal utility, not CSS-class.
