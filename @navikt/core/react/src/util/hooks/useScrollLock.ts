@@ -259,9 +259,7 @@ function useScrollLock(params: {
 
   /**
    * https://github.com/mui/base-ui/issues/1135
-   * This only applies changes in the state where element is:
-   * - No longer open
-   * - Is mounted (and probably animating out)
+   * mounted + not open = probably animating out
    */
   useClientLayoutEffect(() => {
     if (enabled && isWebKit && mounted && !open) {
