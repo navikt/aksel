@@ -170,7 +170,6 @@
 
 .aksel-base-alert__close-button {
   margin-left: auto;
-  z-index: 1;
 
   &:focus-visible {
     outline-color: var(--ax-bg-default);
