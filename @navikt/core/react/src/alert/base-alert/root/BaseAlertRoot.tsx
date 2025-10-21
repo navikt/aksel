@@ -26,7 +26,7 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   type: "moderate" | "strong";
   /**
-   * Centers alert and removed border-radius
+   * Centers content and removes border-radius
    * @default false
    */
   global?: boolean;
