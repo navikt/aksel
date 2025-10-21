@@ -13,7 +13,7 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Changes the size of the BaseAlert.
+   * Changes the size.
    * @default "medium"
    */
   size?: BaseAlertContextProps["size"];
