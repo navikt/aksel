@@ -158,7 +158,7 @@ function applyAttributeToOthers(
 }
 
 /**
- * Hides all elements in the document body except the specified elements.
+ * Hides all elements in the document body for assertive technologies except the specified elements with `aria-hidden`.
  * @param avoidElements - An array of elements to avoid hiding.
  * @returns A function that, when called, will undo the hiding of elements.
  */
