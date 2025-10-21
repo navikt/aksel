@@ -72,11 +72,6 @@ function preventScrollStandard(referenceElement: Element | null) {
       scrollBehavior: body.style.scrollBehavior,
     };
 
-    /* Handle `scrollbar-gutter` in Chrome when there is no scrollable content. */
-    const supportsStableScrollbarGutter =
-      typeof CSS !== "undefined" &&
-      CSS.supports?.("scrollbar-gutter", "stable");
-
     const isScrollableY = html.scrollHeight > html.clientHeight;
     const isScrollableX = html.scrollWidth > html.clientWidth;
     const hasConstantOverflowY =
@@ -97,6 +92,12 @@ function preventScrollStandard(referenceElement: Element | null) {
     const marginX =
       parseFloat(bodyStyles.marginLeft) + parseFloat(bodyStyles.marginRight);
 
+    /**
+     * Check support for stable scrollbar gutter to avoid layout shift when scrollbars appear/disappear.
+     */
+    const supportsStableScrollbarGutter =
+      typeof CSS !== "undefined" &&
+      CSS.supports?.("scrollbar-gutter", "stable");
     /*
      * DOM writes:
      * Do not read the DOM past this point!
