@@ -38,7 +38,6 @@ const isWebKit =
     : CSS.supports("-webkit-backdrop-filter:none");
 
 const isIOS =
-  /*  */
   nav.platform === "MacIntel" && nav.maxTouchPoints > 1
     ? true
     : /iP(hone|ad|od)|iOS/.test(nav.platform);
