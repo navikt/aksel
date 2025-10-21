@@ -1,3 +1,8 @@
+/* TODO: Remove in v8 */
+.navds-modal__document-body {
+  overflow: hidden;
+}
+
 .navds-modal {
   --__ac-modal-bg: var(--ac-modal-bg, var(--a-surface-default));
 
