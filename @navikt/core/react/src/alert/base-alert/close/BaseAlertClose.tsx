@@ -14,7 +14,7 @@ type BaseAlertCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
  *  <BaseAlert>
  *    <BaseAlert.Header>
  *      <BaseAlert.Title>Info tittel</BaseAlert.Title>
- *      <BaseAlert.Close aria-label="Lukk varsel">
+ *      <BaseAlert.Close onClick={...} />
  *    </BaseAlert.Header>
  *  </BaseAlert>
  * ```
