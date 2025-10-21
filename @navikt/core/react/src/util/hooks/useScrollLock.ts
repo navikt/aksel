@@ -254,11 +254,12 @@ class ScrollLocker {
 
     /**
      * On iOS, scroll locking does not work if the navbar is collapsed.
-     * Due to side-effects and bugs that arise on iOS, it must be researched extensively before
-     * being enabled to ensure it doesn't cause the following issues:
+     * Due to the the following cases not working well with the standard scroll lock:
      * - Textboxes must scroll into view when focused, nor cause a glitchy scroll animation.
      * - The navbar must not force itself into view and cause layout shift.
      * - Scroll containers must not flicker upon closing a popup when it has an exit animation.
+     *
+     * We use a simpler scroll lock strategy to avoid these issues.
      */
     this.restore = shouldUseBasicLock
       ? preventScrollBasic(referenceElement)
