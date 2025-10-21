@@ -250,7 +250,7 @@ class ScrollLocker {
       return;
     }
 
-    const isOverflowHiddenLock = isIOS || !hasInsetScrollbars(referenceElement);
+    const shouldUseBasicLock = isIOS || !hasInsetScrollbars(referenceElement);
 
     /**
      * On iOS, scroll locking does not work if the navbar is collapsed.
@@ -260,7 +260,7 @@ class ScrollLocker {
      * - The navbar must not force itself into view and cause layout shift.
      * - Scroll containers must not flicker upon closing a popup when it has an exit animation.
      */
-    this.restore = isOverflowHiddenLock
+    this.restore = shouldUseBasicLock
       ? preventScrollBasic(referenceElement)
       : preventScrollStandard(referenceElement);
   }
