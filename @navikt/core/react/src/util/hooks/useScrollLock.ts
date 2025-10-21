@@ -119,17 +119,35 @@ function preventScrollStandard(referenceElement: Element | null) {
     });
 
     Object.assign(body.style, {
+      /*
+       * Keeps existing positioned children in place (e.g. fixed headers).
+       */
       position: "relative",
+      /**
+       *  Limits height to the viewport minus margins/scrollbar compensation to stop vertical overflow from reappearing.
+       */
       height:
         marginY || scrollbarHeight
           ? `calc(100dvh - ${marginY + scrollbarHeight}px)`
           : "100dvh",
+      /**
+       * Mirrors height-logic for width.
+       */
       width:
         marginX || scrollbarWidth
           ? `calc(100vw - ${marginX + scrollbarWidth}px)`
           : "100vw",
+      /**
+       * Ensures the adjusted dimensions include padding/border, matching the measured values.
+       */
       boxSizing: "border-box",
+      /**
+       * Blocks scrollable overflow.
+       */
       overflow: "hidden",
+      /**
+       * Removes smooth-scrolling so immediate position restores occur without animation.
+       */
       scrollBehavior: "unset",
     });
 
@@ -228,6 +246,10 @@ class ScrollLocker {
     }
 
     const isOverflowHiddenLock = isIOS || !hasInsetScrollbars(referenceElement);
+    console.info({
+      isOverflowHiddenLock,
+      t: !hasInsetScrollbars(referenceElement),
+    });
 
     /**
      * On iOS, scroll locking does not work if the navbar is collapsed.
