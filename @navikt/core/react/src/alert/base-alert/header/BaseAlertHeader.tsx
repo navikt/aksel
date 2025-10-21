@@ -40,7 +40,8 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
         {(variant || icon) && (
           <div
             className={cn("navds-base-alert__icon")}
-            aria-hidden={icon !== undefined}
+            /* TODO: Revisit this after other alerts are merged */
+            /* aria-hidden={icon !== undefined} */
           >
             {/* Icon can be manually set to null */}
             {icon !== undefined ? (
