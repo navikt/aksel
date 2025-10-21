@@ -17,6 +17,7 @@ import {
   MouseCoordinates,
   coordsAreInside,
   getCloseHandler,
+  useBodyScrollLock,
   useIsModalOpen,
 } from "./ModalUtils";
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
@@ -154,6 +155,12 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       open: isModalOpen,
       referenceElement: modalRef.current,
     });
+
+    /**
+     * TODO: Kept for legacy support.
+     * - Remove utility in v8 and deprecate body-classes in ModalUtils.ts
+     */
+    useBodyScrollLock(modalRef, portalNode, isNested);
 
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);

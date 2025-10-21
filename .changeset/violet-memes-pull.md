@@ -1,5 +1,5 @@
 ---
-"@navikt/aksel-stylelint": minor
+"@navikt/aksel-stylelint": patch
 ---
 
-Classnames: Added `navds-modal__document-body` to list of deprecations"
+Classnames: Added `navds-modal__document-body` to list of future deprecations.
