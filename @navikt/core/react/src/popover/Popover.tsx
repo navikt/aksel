@@ -148,7 +148,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     useClientLayoutEffect(() => {
       refs.setReference(anchorEl);
-    }, [anchorEl]);
+    }, [anchorEl, refs]);
 
     const floatingRef = useMergeRefs(refs.setFloating, ref);
 

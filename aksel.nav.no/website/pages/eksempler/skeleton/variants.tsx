@@ -18,11 +18,9 @@ const Example = () => {
 export default withDsExample(Example);
 
 /* Storybook story */
-export const Demo = {
-  render: Example,
-};
+export const Demo = { render: Example };
 
 export const args = {
   index: 1,
-  desc: "'text' (standard) representerer en enkel linje med tekst. 'circle', 'rectangle' og 'rounded' gir forskjellig visuell representasjon av elementet.",
+  desc: "Varianten 'text' (standard) representerer en enkel linje med tekst. Variantene 'circle', 'rectangle' og 'rounded' gir forskjellig visuell representasjon av elementet.",
 };

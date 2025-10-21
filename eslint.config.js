@@ -61,6 +61,10 @@ module.exports = tseslint.config([
       "react/display-name": "off", // Temporary
       "import/no-unresolved": "off",
       "import/no-named-as-default": "off", // Temporary
+      "react-hooks/exhaustive-deps": [
+        "warn",
+        { additionalHooks: "(useClientLayoutEffect)" },
+      ],
     },
   },
   {
