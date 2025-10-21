@@ -75,7 +75,7 @@ function preventScrollStandard(referenceElement: Element | null) {
     };
 
     /* Handle `scrollbar-gutter` in Chrome when there is no scrollable content. */
-    const supportsStableScrollbarGutter =
+    let supportsStableScrollbarGutter =
       typeof CSS !== "undefined" &&
       CSS.supports?.("scrollbar-gutter", "stable");
 
@@ -103,6 +103,8 @@ function preventScrollStandard(referenceElement: Element | null) {
      * DOM writes:
      * Do not read the DOM past this point!
      */
+
+    supportsStableScrollbarGutter = false;
 
     Object.assign(html.style, {
       scrollbarGutter: "stable",
@@ -177,6 +179,10 @@ function preventScrollStandard(referenceElement: Element | null) {
     if (resizeRaf) {
       cancelAnimationFrame(resizeRaf);
     }
+
+    /**
+     * Wait until next frame to re-apply scroll lock ensuring layout has settled after resize.
+     */
     resizeRaf = requestAnimationFrame(lockScroll);
   }
 
