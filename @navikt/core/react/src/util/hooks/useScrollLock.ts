@@ -7,8 +7,6 @@ let originalHtmlStyles: Partial<CSSStyleDeclaration> = {};
 let originalBodyStyles: Partial<CSSStyleDeclaration> = {};
 let originalHtmlScrollBehavior = "";
 
-const NOOP = () => {};
-
 function hasInsetScrollbars(referenceElement: Element | null) {
   if (typeof document === "undefined") {
     return false;
@@ -75,7 +73,7 @@ function preventScrollStandard(referenceElement: Element | null) {
     };
 
     /* Handle `scrollbar-gutter` in Chrome when there is no scrollable content. */
-    let supportsStableScrollbarGutter =
+    const supportsStableScrollbarGutter =
       typeof CSS !== "undefined" &&
       CSS.supports?.("scrollbar-gutter", "stable");
 
@@ -92,7 +90,7 @@ function preventScrollStandard(referenceElement: Element | null) {
 
     /*
      * Avoid shift due to the default <body> margin. This does cause elements to be clipped
-     * with whitespace. Warn if <body> has margins?
+     * with whitespace.
      */
     const marginY =
       parseFloat(bodyStyles.marginTop) + parseFloat(bodyStyles.marginBottom);
@@ -103,8 +101,6 @@ function preventScrollStandard(referenceElement: Element | null) {
      * DOM writes:
      * Do not read the DOM past this point!
      */
-
-    supportsStableScrollbarGutter = false;
 
     Object.assign(html.style, {
       scrollbarGutter: "stable",
@@ -212,6 +208,9 @@ class ScrollLocker {
   acquire(referenceElement: Element | null) {
     this.lockCount += 1;
     if (this.lockCount === 1 && this.restore === null) {
+      /*
+       * Delay locking to avoid layout thrashing when multiple locks/unlocks are requested in quick succession.
+       */
       this.timeoutLock.start(0, () => this.lock(referenceElement));
     }
     return this.release;
@@ -247,15 +246,11 @@ class ScrollLocker {
 
     /* If the site author already hid overflow on <html>, respect it and bail out. */
     if (htmlOverflowY === "hidden" || htmlOverflowY === "clip") {
-      this.restore = NOOP;
+      this.restore = () => {};
       return;
     }
 
     const isOverflowHiddenLock = isIOS || !hasInsetScrollbars(referenceElement);
-    console.info({
-      isOverflowHiddenLock,
-      t: !hasInsetScrollbars(referenceElement),
-    });
 
     /**
      * On iOS, scroll locking does not work if the navbar is collapsed.
