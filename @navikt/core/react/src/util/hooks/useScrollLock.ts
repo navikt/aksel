@@ -283,8 +283,12 @@ function useScrollLock(params: {
   const { enabled = true, mounted, open, referenceElement = null } = params;
 
   /**
-   * https://github.com/mui/base-ui/issues/1135
-   * mounted + not open = probably animating out
+   * When closing elements with "sloppy clicks" (clicks that start inside the element and ends outside),
+   * animating out on WebKit browsers (mounted + not open) can cause the whole page to be selected.
+   * To prevent this, we temporarily disable user-select on body while the element is animating out.
+   * This bug might be fixed in newer WebKit versions.
+   *
+   * @see https://github.com/mui/base-ui/issues/1135
    */
   useClientLayoutEffect(() => {
     if (enabled && isWebKit && mounted && !open) {
