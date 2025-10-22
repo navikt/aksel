@@ -11,7 +11,6 @@ type LocalAlertCloseProps = BaseAlert.CloseProps;
  *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
  *     <LocalAlert.Close onClick={() => alert("Lukket!")} />
  *    </LocalAlert.Header>
- *
  *  </LocalAlert>
  * ```
  */
