@@ -105,11 +105,11 @@ const LocalAlert = forwardRef<HTMLDivElement, LocalAlertProps>(
     return (
       <BaseAlert.Root
         ref={forwardedRef}
-        role={variant === "announcement" ? "status" : "alert"}
+        role="alert"
         {...restProps}
         type="strong"
         global={false}
-        statusType={variant === "announcement" ? "message" : "alert"}
+        statusType="alert"
         variant={variant}
       />
     );
