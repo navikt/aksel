@@ -212,7 +212,8 @@ export const WrappingTitle: Story = {
 };
 
 export const Chromatic = renderStoriesForChromatic({
-  Default,
+  Strong,
+  Moderate,
   SizeSmall,
   OnlyHeader,
   CloseButton,
@@ -220,7 +221,8 @@ export const Chromatic = renderStoriesForChromatic({
 });
 
 export const ChromaticLight = renderStoriesForChromatic({
-  Default,
+  Strong,
+  Moderate,
   SizeSmall,
   OnlyHeader,
   CloseButton,
@@ -229,7 +231,8 @@ export const ChromaticLight = renderStoriesForChromatic({
 ChromaticLight.globals = { theme: "light", mode: "darkside" };
 
 export const ChromaticDark = renderStoriesForChromatic({
-  Default,
+  Strong,
+  Moderate,
   SizeSmall,
   OnlyHeader,
   CloseButton,
