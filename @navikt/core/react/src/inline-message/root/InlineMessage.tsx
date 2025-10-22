@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
-import type { AkselColor } from "../../types";
 import { BodyShort } from "../../typography";
 import type { OverridableComponent } from "../../util";
 import { InlineMessageIcon } from "../icon/InlineMessageIcon";
@@ -37,51 +36,39 @@ interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
  *  </InlineMessage>
  * ```
  */
-const InlineMessage: OverridableComponent<
-  InlineMessageProps,
-  HTMLDivElement
-> = forwardRef(
-  (
-    {
-      as: Component = "div",
-      children,
-      className,
-      variant,
-      size = "medium",
-      ...restProps
-    }: InlineMessageProps & { as?: React.ElementType },
-    forwardedRef,
-  ) => {
-    const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
+const InlineMessage: OverridableComponent<InlineMessageProps, HTMLDivElement> =
+  forwardRef(
+    (
+      {
+        as: Component = "div",
+        children,
+        className,
+        variant,
+        size = "medium",
+        ...restProps
+      }: InlineMessageProps & { as?: React.ElementType },
+      forwardedRef,
+    ) => {
+      const { cn } = useRenameCSS();
+      const themeContext = useThemeInternal(false);
 
-    return (
-      <BodyShort
-        ref={forwardedRef}
-        className={cn("navds-inline-message", className)}
-        data-color={variant === "error" ? "danger" : variant}
-        {...restProps}
-        size={size}
-        as={Component}
-        data-variant={variant}
-        data-size={size}
-      >
-        <InlineMessageIcon variant={variant} />
-        <span data-color={themeContext?.color}>{children}</span>
-      </BodyShort>
-    );
-  },
-);
-
-function variantToDataColor(
-  variant: InlineMessageProps["variant"],
-): AkselColor | undefined {
-  if (variant === "error") {
-    return "danger";
-  }
-
-  return variant;
-}
+      return (
+        <BodyShort
+          ref={forwardedRef}
+          className={cn("navds-inline-message", className)}
+          data-color={variant === "error" ? "danger" : variant}
+          {...restProps}
+          size={size}
+          as={Component}
+          data-variant={variant}
+          data-size={size}
+        >
+          <InlineMessageIcon variant={variant} />
+          <span data-color={themeContext?.color}>{children}</span>
+        </BodyShort>
+      );
+    },
+  );
 
 export { InlineMessage };
 export type { InlineMessageProps };
