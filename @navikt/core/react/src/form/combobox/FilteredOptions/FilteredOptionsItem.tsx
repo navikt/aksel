@@ -13,6 +13,10 @@ const useTextHighlight = (text: string, searchTerm: string) => {
   const indexOfHighlightedText = text
     .toLowerCase()
     .indexOf(searchTerm.toLowerCase());
+  if (indexOfHighlightedText === -1) {
+    // This can happen if the consumer has implemented their own filtering logic
+    return [text, "", ""];
+  }
   const start = text.substring(0, indexOfHighlightedText);
   const highlight = text.substring(
     indexOfHighlightedText,
