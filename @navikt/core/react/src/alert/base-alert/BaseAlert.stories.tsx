@@ -51,6 +51,7 @@ export const Default: Story = {
     variant: "success",
     type: "strong",
     statusType: "alert",
+    global: false,
   },
   argTypes: {
     size: {
