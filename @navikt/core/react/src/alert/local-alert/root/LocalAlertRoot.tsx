@@ -80,7 +80,6 @@ interface LocalAlertComponent
    *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
    *     <LocalAlert.Close onClick={() => alert("Lukket!")} />
    *    </LocalAlert.Header>
-   *
    *  </LocalAlert>
    * ```
    */
