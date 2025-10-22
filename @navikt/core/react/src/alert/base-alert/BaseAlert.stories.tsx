@@ -62,6 +62,14 @@ export const Default: Story = {
       control: { type: "select" },
       options: ["error", "warning", "success", "announcement"],
     },
+    type: {
+      control: { type: "radio" },
+      options: ["strong", "moderate"],
+    },
+    statusType: {
+      control: { type: "radio" },
+      options: ["alert", "message"],
+    },
   },
 };
 
