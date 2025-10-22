@@ -14,7 +14,7 @@ type BaseAlertCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
  *  <BaseAlert>
  *    <BaseAlert.Header>
  *      <BaseAlert.Title>Info tittel</BaseAlert.Title>
- *      <BaseAlert.Close aria-label="Lukk varsel">
+ *      <BaseAlert.Close onClick={...} />
  *    </BaseAlert.Header>
  *  </BaseAlert>
  * ```
@@ -28,11 +28,11 @@ const BaseAlertClose = forwardRef<HTMLButtonElement, BaseAlertCloseProps>(
     return (
       <Button
         ref={forwardedRef}
+        type="button"
         {...restProps}
         data-color="neutral"
         variant="tertiary-neutral"
         className={cn(className, "navds-base-alert__close-button")}
-        type="button"
         size="small"
         icon={
           <XMarkIcon

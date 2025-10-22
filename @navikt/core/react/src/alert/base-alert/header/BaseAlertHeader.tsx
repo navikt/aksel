@@ -30,6 +30,9 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
     const { cn } = useRenameCSS();
     const { variant, color } = useBaseAlert();
 
+    const headerIcon =
+      icon ?? (variant ? <BaseAlertVariantIcon variant={variant} /> : null);
+
     return (
       <div
         ref={forwardedRef}
@@ -37,17 +40,13 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
         data-color={color}
         className={cn(className, "navds-base-alert__header")}
       >
-        {(variant || icon) && (
+        {headerIcon && (
           <div
             className={cn("navds-base-alert__icon")}
-            aria-hidden={icon !== undefined}
+            /* TODO: Revisit this after other alerts are merged */
+            /* aria-hidden={icon !== undefined} */
           >
-            {/* Icon can be manually set to null */}
-            {icon !== undefined ? (
-              icon
-            ) : (
-              <BaseAlertVariantIcon variant={variant} />
-            )}
+            {headerIcon}
           </div>
         )}
         {children}

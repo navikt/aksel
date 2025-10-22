@@ -13,7 +13,7 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Changes the size of the BaseAlert.
+   * Changes the size.
    * @default "medium"
    */
   size?: BaseAlertContextProps["size"];
@@ -26,7 +26,7 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   type: "moderate" | "strong";
   /**
-   * Centers alert and removed border-radius
+   * Centers content and removes border-radius
    * @default false
    */
   global?: boolean;
