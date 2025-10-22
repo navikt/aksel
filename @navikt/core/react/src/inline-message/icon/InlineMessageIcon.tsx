@@ -30,9 +30,10 @@ function InlineMessageIcon({
   const Icon = VARIANT_ICONS[variant];
 
   return (
-    <span className={cn("navds-inline-message__icon")}>
-      <Icon title={translate(variant)} />
-    </span>
+    <Icon
+      title={translate(variant)}
+      className={cn("navds-inline-message__icon")}
+    />
   );
 }
 

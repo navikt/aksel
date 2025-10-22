@@ -1,6 +1,5 @@
 .navds-inline-message {
   display: flex;
-  align-items: flex-start;
   gap: var(--a-spacing-1);
 }
 
