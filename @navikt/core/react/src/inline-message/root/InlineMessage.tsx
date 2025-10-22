@@ -39,7 +39,7 @@ interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 const InlineMessage: OverridableComponent<
   InlineMessageProps,
-  HTMLAnchorElement
+  HTMLDivElement
 > = forwardRef(
   (
     {
