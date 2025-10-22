@@ -148,7 +148,7 @@
 .navds-body-short--large {
   font-size: var(--a-font-size-xlarge);
   letter-spacing: -0.0013em;
-  line-height: var(--a-font-line-height-large);
+  line-height: var(--a-font-line-height-xlarge);
 }
 
 .navds-body-short--large.navds-typo--spacing {
