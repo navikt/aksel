@@ -59,7 +59,7 @@ const InlineMessage: OverridableComponent<
       <BodyShort
         ref={forwardedRef}
         className={cn("navds-inline-message", className)}
-        data-color={variantToDataColor(variant)}
+        data-color={variant === "error" ? "danger" : variant}
         {...restProps}
         size={size}
         as={Component}
