@@ -1,6 +1,5 @@
 .aksel-inline-message {
   display: flex;
-  align-items: flex-start;
   gap: var(--ax-space-4);
   color: var(--ax-text-default);
 }
