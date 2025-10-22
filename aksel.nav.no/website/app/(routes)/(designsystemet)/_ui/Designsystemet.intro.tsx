@@ -21,7 +21,7 @@ function DesignsystemetKomponentIntro({
     <VStack gap="space-24" marginBlock="0 space-28">
       {useFor && (
         <div>
-          <Heading size="small" level="3" spacing>
+          <Heading size="small" level="2" spacing>
             Egnet til:
           </Heading>
 
@@ -39,7 +39,7 @@ function DesignsystemetKomponentIntro({
       )}
       {avoidUseFor && (
         <div>
-          <Heading size="small" level="3" spacing>
+          <Heading size="small" level="2" spacing>
             Uegnet til:
           </Heading>
           <WebsiteList as="ul">

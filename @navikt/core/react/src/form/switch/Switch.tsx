@@ -124,14 +124,14 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           htmlFor={inputProps.id}
           className={cn("navds-switch__label-wrapper")}
         >
-          <div
+          <span
             className={cn("navds-switch__content", {
               "navds-sr-only": hideLabel,
               "navds-switch--with-description": description && !hideLabel,
             })}
           >
             <BodyShort
-              as="div"
+              as="span"
               size={size}
               className={cn("navds-switch__label")}
             >
@@ -141,7 +141,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             {description && (
               <BodyShort
                 size={size}
-                as="div"
+                as="span"
                 className={cn(
                   "navds-form-field__subdescription navds-switch__description",
                 )}
@@ -149,7 +149,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
                 {description}
               </BodyShort>
             )}
-          </div>
+          </span>
         </label>
       </div>
     );

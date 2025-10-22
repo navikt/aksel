@@ -4,7 +4,7 @@ import React, { createContext, useState } from "react";
 
 type Context = {
   pauseAnimationState: boolean;
-  setPauseAnimationState: CallableFunction;
+  setPauseAnimationState: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const PauseAnimationContext = createContext<Context>({
@@ -12,7 +12,11 @@ export const PauseAnimationContext = createContext<Context>({
   setPauseAnimationState: () => {},
 });
 
-export const PauseAnimationProvider = ({ children }) => {
+export const PauseAnimationProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [pauseAnimationState, setPauseAnimationState] = useState(false);
   return (
     <PauseAnimationContext.Provider
