@@ -88,7 +88,7 @@ interface GlobalAlertComponent
 
 /**
  * A component for displaying important content in your application.
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/globalAlert)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/globalalert)
  * @see 🏷️ {@link GlobalAlertProps}
  * @example
  * ```jsx
