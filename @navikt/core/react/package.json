@@ -624,6 +624,16 @@
         "default": "./cjs/form/form-progress/index.js"
       }
     },
+    "./InfoCard": {
+      "import": {
+        "types": "./esm/alert/info-card/index.d.ts",
+        "default": "./esm/alert/info-card/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/info-card/index.d.ts",
+        "default": "./cjs/alert/info-card/index.js"
+      }
+    },
     "./LocalAlert": {
       "import": {
         "types": "./esm/alert/local-alert/index.d.ts",
