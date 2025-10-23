@@ -164,6 +164,11 @@ const StyleMappings = {
     { component: "List", main: "list.css", dependencies: [typoCss] },
     { component: "Loader", main: "loader.css" },
     {
+      component: "LocalAlert",
+      main: "alert.css",
+      dependencies: [typoCss, "button.css"],
+    },
+    {
       component: "Modal",
       main: "modal.css",
       dependencies: [typoCss, "button.css"],
