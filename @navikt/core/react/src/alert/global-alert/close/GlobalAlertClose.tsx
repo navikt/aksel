@@ -11,7 +11,6 @@ type GlobalAlertCloseProps = BaseAlert.CloseProps;
  *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
  *     <GlobalAlert.Close onClick={() => alert("Lukket!")} />
  *    </GlobalAlert.Header>
- *
  *  </GlobalAlert>
  * ```
  */
