@@ -10,11 +10,9 @@ import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";
 
-interface DialogDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
+interface DialogPopupProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * TODO:
-   * - Can/should we even support trap-focus?
    * Determines if the dialog enters a modal state when open.
    * - `true`: user interaction is limited to just the dialog: focus is trapped, document page scroll is locked, and pointer interactions on outside elements are disabled.
    * - `'trap-focus'`: focus is trapped inside the dialog, but document page scroll is not locked and pointer interactions outside of it remain enabled.
@@ -49,19 +47,17 @@ interface DialogDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * @see 🏷️ {@link DialogDrawerProps}
+ * @see 🏷️ {@link DialogPopupProps}
  * @example
  * ```jsx
  * ```
  */
 /**
- * TODO: Dismissablelayer
-
  *
  * - Modal === "trap-focus"
  *  - Close on Outside pointerdown, unless backdrop is present, in that case only close on outside CLICK
  */
-const DialogDrawer = forwardRef<HTMLDivElement, DialogDrawerProps>(
+const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
   (
     {
       children,
@@ -124,8 +120,10 @@ const DialogDrawer = forwardRef<HTMLDivElement, DialogDrawerProps>(
         return;
       }
 
-      /* TODO: We could decide to always focus container on open instead of close-button */
-      /* This avoids having to check for "what" opened it. If touch, we want to focus the container always to avoid keyboard auto-opening in some mobile-devices */
+      /**
+       * After a11y testing, focusing container element seems to give best experience
+       * for screen reader and keyboard users. User will still have the option to override this anyways.
+       */
       popupRef.current?.focus({ preventScroll: true });
       event.preventDefault();
     });
@@ -242,7 +240,10 @@ const DialogDrawer = forwardRef<HTMLDivElement, DialogDrawerProps>(
             }}
             enablePointerUpOutside
             onPointerUpOutside={(event) => {
-              if (modal !== true || !closeOnOutsideClick) {
+              if (
+                (modal === "trap-focus" && !backdropRef.current) ||
+                !closeOnOutsideClick
+              ) {
                 event.preventDefault();
               }
             }}
@@ -264,5 +265,5 @@ const DialogDrawer = forwardRef<HTMLDivElement, DialogDrawerProps>(
   },
 );
 
-export { DialogDrawer };
-export type { DialogDrawerProps };
+export { DialogPopup };
+export type { DialogPopupProps };

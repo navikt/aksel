@@ -30,7 +30,7 @@ interface DialogProps {
 
 /**
  * ..
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/TODO)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/dialog)
  * @see 🏷️ {@link DialogProps}
  * @example
  * ```jsx
