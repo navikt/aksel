@@ -101,16 +101,15 @@ interface GlobalAlertComponent
  * ```
  */
 const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
-  ({ variant, ...restProps }: GlobalAlertProps, forwardedRef) => {
+  (props: GlobalAlertProps, forwardedRef) => {
     return (
       <BaseAlert.Root
         ref={forwardedRef}
         role="alert"
-        {...restProps}
+        {...props}
         type="strong"
         global
         statusType="alert"
-        variant={variant}
       />
     );
   },
