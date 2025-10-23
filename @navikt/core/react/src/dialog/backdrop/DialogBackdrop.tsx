@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
-import { useMergeRefs } from "../../../util/hooks";
-import { useOverlayContext } from "../root/OverlayRoot.context";
+import { useRenameCSS } from "../../theme/Theme";
+import { useMergeRefs } from "../../util/hooks";
+import { useOverlayContext } from "../root/DialogRoot.context";
 
 type OverlayBackdropProps = Omit<
   React.HTMLAttributes<HTMLDivElement>,

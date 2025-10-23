@@ -1,24 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fireEvent, fn, userEvent, within } from "storybook/test";
-import { Button } from "../../button";
-import { Provider } from "../../provider";
+import { Button } from "../button";
+import { Provider } from "../provider";
 import {
-  Overlay,
-  OverlayBackdrop,
-  OverlayClose,
-  type OverlayCloseProps,
-  OverlayDrawer,
-  type OverlayDrawerProps,
-  OverlayPortal,
-  type OverlayProps,
-  OverlayTrigger,
-  type OverlayTriggerProps,
+  Dialog,
+  DialogBackdrop,
+  DialogClose,
+  type DialogCloseProps,
+  DialogDrawer,
+  type DialogDrawerProps,
+  DialogPortal,
+  type DialogProps,
+  DialogTrigger,
+  type DialogTriggerProps,
 } from "./index";
 
-const meta: Meta<typeof Overlay> = {
-  title: "ds-react/Overlay/Tests",
-  component: Overlay,
+const meta: Meta<typeof Dialog> = {
+  title: "ds-react/Dialog/Tests",
+  component: Dialog,
   parameters: {
     chromatic: { disable: true },
   },
@@ -36,9 +36,9 @@ const meta: Meta<typeof Overlay> = {
 };
 
 export default meta;
-type Story = StoryObj<BaseOverlayProps>;
+type Story = StoryObj<BaseDialogProps>;
 
-function testUtils(canvasElement: HTMLElement, args: BaseOverlayProps) {
+function testUtils(canvasElement: HTMLElement, args: BaseDialogProps) {
   const canvas = within(canvasElement);
   return {
     canvas,
@@ -57,14 +57,14 @@ function testUtils(canvasElement: HTMLElement, args: BaseOverlayProps) {
 
 /* ----------------------------- State handling ----------------------------- */
 export const CancelClose: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { canvas, clickCloseButton } = testUtils(canvasElement, args);
     const drawer = canvas.getByTestId("drawer");
 
     await clickCloseButton();
-    // Overlay should remain open
+    // Dialog should remain open
     expect(drawer).toBeInTheDocument();
   },
   args: {
@@ -76,13 +76,13 @@ export const CancelClose: Story = {
 };
 
 export const CancelEscapeClose: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { expectDrawerOpen } = testUtils(canvasElement, args);
 
     await userEvent.keyboard("{Escape}");
-    // Overlay should remain open
+    // Dialog should remain open
     expectDrawerOpen();
   },
   args: {
@@ -94,7 +94,7 @@ export const CancelEscapeClose: Story = {
 };
 
 export const EscapeClose: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { expectDrawerOpen, expectDrawerClosed } = testUtils(
@@ -113,7 +113,7 @@ export const EscapeClose: Story = {
 };
 
 export const NestedEscapeClose: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { canvas, expectDrawerOpen, expectDrawerClosed } = testUtils(
@@ -121,7 +121,7 @@ export const NestedEscapeClose: Story = {
       args,
     );
 
-    const triggerButton = canvas.getByText("Open Overlay Nested");
+    const triggerButton = canvas.getByText("Open Dialog Nested");
     await userEvent.click(triggerButton);
 
     expect(canvas.getByTestId("drawer-nested")).toBeInTheDocument();
@@ -140,7 +140,7 @@ export const NestedEscapeClose: Story = {
 };
 
 export const OutsideClickClose: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { expectDrawerOpen, expectDrawerClosed, expectOpenedCalls } =
@@ -163,7 +163,7 @@ export const OutsideClickClose: Story = {
 };
 
 export const OutsideClickNoClose: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { expectDrawerOpen, expectOpenedCalls } = testUtils(
@@ -192,7 +192,7 @@ export const OutsideClickNoClose: Story = {
 
 /* Close should only happend on onClick */
 export const OutsideClickIntentionalClose: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { expectDrawerOpen, expectDrawerClosed, expectOpenedCalls } =
@@ -228,7 +228,7 @@ export const TrapFocusWithOutsideClick: Story = {
           data-testid="counter"
           onClick={() => setCounter((x) => x + 1)}
         >{`Counter ${counter}`}</button>
-        <BaseOverlayComponent {...props} />
+        <BaseDialogComponent {...props} />
       </div>
     );
   },
@@ -271,7 +271,7 @@ export const TrapFocusWithOutsideClick: Story = {
 };
 
 export const TrapFocusWithFocusBlur: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
@@ -311,7 +311,7 @@ export const TrapFocusWithFocusBlur: Story = {
 };
 
 export const FocusLock: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
@@ -347,7 +347,7 @@ export const FocusLock: Story = {
 };
 
 export const FocusTriggerOnClose: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const {
@@ -359,7 +359,7 @@ export const FocusTriggerOnClose: Story = {
     } = testUtils(canvasElement, args);
 
     expectOpenedCalls(0);
-    const openButton = canvas.getByText("Open Overlay");
+    const openButton = canvas.getByText("Open Dialog");
     await userEvent.click(openButton);
     expectDrawerOpen();
 
@@ -384,7 +384,7 @@ export const FocusTriggerOnClose: Story = {
  * We override this in `onUnmountAutoFocus` callback
  */
 export const FocusTriggerOnCloseWhenDefaultOpen: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const {
@@ -405,7 +405,7 @@ export const FocusTriggerOnCloseWhenDefaultOpen: Story = {
     expectDrawerClosed();
     expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(1);
 
-    const openButton = canvas.getByText("Open Overlay");
+    const openButton = canvas.getByText("Open Dialog");
     expect(openButton).toHaveFocus();
   },
   args: {
@@ -417,7 +417,7 @@ export const FocusTriggerOnCloseWhenDefaultOpen: Story = {
 };
 
 export const FocusWithNoTrigger: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const {
@@ -452,7 +452,7 @@ export const FocusWithNoTrigger: Story = {
 };
 
 /**
- * Overlay should focus previously focused element when closed if there is no trigger
+ * Dialog should focus previously focused element when closed if there is no trigger
  */
 export const FocusPreviousFocusedItemIfNoTrigger: Story = {
   render: (props) => {
@@ -462,7 +462,7 @@ export const FocusPreviousFocusedItemIfNoTrigger: Story = {
         <button data-testid="custom-trigger" onClick={() => setOpen((x) => !x)}>
           Toggle open
         </button>
-        <BaseOverlayComponent
+        <BaseDialogComponent
           {...props}
           rootProps={{ open, onOpenChange: (newOpen) => setOpen(newOpen) }}
         />
@@ -493,7 +493,7 @@ export const FocusPreviousFocusedItemIfNoTrigger: Story = {
 };
 
 /**
- * Overlay should focus previously focused element when closed if there is no trigger
+ * Dialog should focus previously focused element when closed if there is no trigger
  */
 export const FocusClickedItemOutsideWhenClosing: Story = {
   render: (props) => {
@@ -504,7 +504,7 @@ export const FocusClickedItemOutsideWhenClosing: Story = {
           Toggle open
         </button>
         <button data-testid="placeholder-button">Click me</button>
-        <BaseOverlayComponent
+        <BaseDialogComponent
           {...props}
           rootProps={{ open, onOpenChange: (newOpen) => setOpen(newOpen) }}
         />
@@ -540,12 +540,12 @@ export const FocusClickedItemOutsideWhenClosing: Story = {
 };
 
 export const FocusAutoOnOpen: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { canvas, expectDrawerOpen } = testUtils(canvasElement, args);
 
-    const triggerButton = canvas.getByText("Open Overlay");
+    const triggerButton = canvas.getByText("Open Dialog");
 
     await userEvent.click(triggerButton);
     expectDrawerOpen();
@@ -569,7 +569,7 @@ export const FocusAutoOnClose: Story = {
     return (
       <div>
         <button data-testid="autofocus-anchor">Autofocus</button>
-        <BaseOverlayComponent {...props} />
+        <BaseDialogComponent {...props} />
       </div>
     );
   },
@@ -601,11 +601,11 @@ export const FocusAutoOnClose: Story = {
 /* --------------------------------- Backdrop -------------------------------- */
 /* Only root-level backdrop should render */
 export const BackdropRenderOnlyRoot: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
     const { canvas } = testUtils(canvasElement, args);
 
-    const triggerButton = canvas.getByText("Open Overlay Nested");
+    const triggerButton = canvas.getByText("Open Dialog Nested");
     await userEvent.click(triggerButton);
 
     expect(canvas.getByTestId("drawer-nested")).toBeInTheDocument();
@@ -621,7 +621,7 @@ export const BackdropRenderOnlyRoot: Story = {
 
 /* --------------------------------- Trigger -------------------------------- */
 export const TriggerOpenOnClick: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
     const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
       canvasElement,
@@ -629,10 +629,10 @@ export const TriggerOpenOnClick: Story = {
     );
 
     expectOpenedCalls(0);
-    const triggerButton = canvas.getByText("Open Overlay");
+    const triggerButton = canvas.getByText("Open Dialog");
 
     await userEvent.click(triggerButton);
-    // Overlay should remain open
+    // Dialog should remain open
     expectDrawerOpen();
     expectOpenedCalls(1);
   },
@@ -644,7 +644,7 @@ export const TriggerOpenOnClick: Story = {
 };
 
 export const TriggerDisabled: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
     const { canvas, expectDrawerClosed, expectOpenedCalls } = testUtils(
       canvasElement,
@@ -653,7 +653,7 @@ export const TriggerDisabled: Story = {
 
     expectOpenedCalls(0);
 
-    const triggerButton = canvas.getByText("Open Overlay");
+    const triggerButton = canvas.getByText("Open Dialog");
     await userEvent.click(triggerButton);
     expectDrawerClosed();
 
@@ -668,7 +668,7 @@ export const TriggerDisabled: Story = {
 };
 
 export const TriggerDisabledSlot: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
     const { canvas, expectDrawerClosed, expectOpenedCalls } = testUtils(
       canvasElement,
@@ -676,7 +676,7 @@ export const TriggerDisabledSlot: Story = {
     );
 
     expectOpenedCalls(0);
-    const triggerButton = canvas.getByText("Open Overlay");
+    const triggerButton = canvas.getByText("Open Dialog");
     await userEvent.click(triggerButton);
 
     expectDrawerClosed();
@@ -688,7 +688,7 @@ export const TriggerDisabledSlot: Story = {
       asChild: true,
       children: (
         <Button disabled id="slot">
-          Open Overlay
+          Open Dialog
         </Button>
       ),
     },
@@ -700,7 +700,7 @@ export const TriggerDisabledSlot: Story = {
 
 /* ---------------------------- CloseButton tests --------------------------- */
 export const CloseButton: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
     const { expectOpenedCalls, clickCloseButton } = testUtils(
       canvasElement,
@@ -721,7 +721,7 @@ export const CloseButton: Story = {
 };
 
 export const CloseButtonDisabled: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
     const { clickCloseButton, expectOpenedCalls } = testUtils(
       canvasElement,
@@ -743,7 +743,7 @@ export const CloseButtonDisabled: Story = {
 };
 
 export const CloseButtonDisabledSlot: Story = {
-  render: BaseOverlayComponent,
+  render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
     const { expectOpenedCalls, clickCloseButton } = testUtils(
       canvasElement,
@@ -771,16 +771,16 @@ export const CloseButtonDisabledSlot: Story = {
 };
 
 /* ------------------------------- Test setup ------------------------------- */
-type BaseOverlayProps = {
-  rootProps?: Omit<OverlayProps, "children"> & { children?: React.ReactNode };
-  drawerProps?: Omit<OverlayDrawerProps, "children"> & {
+type BaseDialogProps = {
+  rootProps?: Omit<DialogProps, "children"> & { children?: React.ReactNode };
+  drawerProps?: Omit<DialogDrawerProps, "children"> & {
     children?: React.ReactNode;
   };
-  closeButtonProps?: Omit<OverlayCloseProps, "children"> & {
+  closeButtonProps?: Omit<DialogCloseProps, "children"> & {
     /* Has to override AsChild type */
     children?: any;
   };
-  triggerButtonProps?: Omit<OverlayTriggerProps, "children"> & {
+  triggerButtonProps?: Omit<DialogTriggerProps, "children"> & {
     /* Has to override AsChild type */
     children?: any;
   };
@@ -788,59 +788,56 @@ type BaseOverlayProps = {
   backdrop?: boolean;
 };
 
-function BaseOverlayComponent({
+function BaseDialogComponent({
   closeButtonProps,
   triggerButtonProps,
   rootProps,
   drawerProps,
   nested,
   backdrop = true,
-}: BaseOverlayProps) {
+}: BaseDialogProps) {
   return (
-    <Overlay {...rootProps}>
-      <OverlayTrigger data-testid="trigger" {...triggerButtonProps}>
-        {triggerButtonProps?.children ?? "Open Overlay"}
-      </OverlayTrigger>
-      <OverlayPortal data-testid="portal">
+    <Dialog {...rootProps}>
+      <DialogTrigger data-testid="trigger" {...triggerButtonProps}>
+        {triggerButtonProps?.children ?? "Open Dialog"}
+      </DialogTrigger>
+      <DialogPortal data-testid="portal">
         {backdrop && (
-          <OverlayBackdrop className="backdropCSS" data-testid="backdrop" />
+          <DialogBackdrop className="backdropCSS" data-testid="backdrop" />
         )}
-        <OverlayDrawer
+        <DialogDrawer
           className="drawerCSS"
           data-testid="drawer"
           {...drawerProps}
         >
           {nested ? (
-            <Overlay>
-              <OverlayTrigger data-testid="trigger-nested">
-                Open Overlay Nested
-              </OverlayTrigger>
-              <OverlayPortal data-testid="portal-nested">
-                <OverlayBackdrop
+            <Dialog>
+              <DialogTrigger data-testid="trigger-nested">
+                Open Dialog Nested
+              </DialogTrigger>
+              <DialogPortal data-testid="portal-nested">
+                <DialogBackdrop
                   className="backdropCSS"
                   data-testid="backdrop-nested"
                 />
-                <OverlayDrawer
-                  className="drawerCSS"
-                  data-testid="drawer-nested"
-                >
+                <DialogDrawer className="drawerCSS" data-testid="drawer-nested">
                   Drawer content Nested
-                  <OverlayClose data-testid="close-nested">
+                  <DialogClose data-testid="close-nested">
                     Close Nested
-                  </OverlayClose>
-                </OverlayDrawer>
-              </OverlayPortal>
-            </Overlay>
+                  </DialogClose>
+                </DialogDrawer>
+              </DialogPortal>
+            </Dialog>
           ) : (
             "Drawer content"
           )}
-          <OverlayClose data-testid="close" {...closeButtonProps}>
+          <DialogClose data-testid="close" {...closeButtonProps}>
             {closeButtonProps?.children ?? "Close"}
-          </OverlayClose>
+          </DialogClose>
           {drawerProps?.children}
-        </OverlayDrawer>
-      </OverlayPortal>
-    </Overlay>
+        </DialogDrawer>
+      </DialogPortal>
+    </Dialog>
   );
 }
 

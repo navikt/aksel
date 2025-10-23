@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
-import { useControllableState } from "../../../util/hooks/useControllableState";
-import { useEventCallback } from "../hooks/useEventCallback";
-import { useOpenChangeAnimationComplete } from "../hooks/useOpenChangeAnimationComplete";
-import { useTransitionStatus } from "../hooks/useTransitionStatus";
+import { useControllableState } from "../../util/hooks/useControllableState";
+import { useEventCallback } from "../../util/hooks/useEventCallback";
+import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
+import { useTransitionStatus } from "../../util/hooks/useTransitionStatus";
 import {
   OverlayContextProvider,
   useOverlayContext,
-} from "./OverlayRoot.context";
+} from "./DialogRoot.context";
 
 /**
  * ..

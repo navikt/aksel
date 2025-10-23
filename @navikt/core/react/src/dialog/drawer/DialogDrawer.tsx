@@ -1,13 +1,14 @@
 import React, { forwardRef, useRef } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
-import { useMergeRefs } from "../../../util/hooks";
-import { DismissableLayer } from "../../dismissablelayer/DismissableLayer";
-import { FocusScope } from "../FocusScope";
-import { useEventCallback } from "../hooks/useEventCallback";
-import { useScrollLock } from "../hooks/useScrollLock";
-import { useOverlayContext } from "../root/OverlayRoot.context";
-import { useFocusGuards } from "../useFocusGuard";
-import { OverlayPosition, type OverlayPositionProp } from "./OverlayPosition";
+import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
+import { useRenameCSS } from "../../theme/Theme";
+import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
+import { FocusGuards } from "../../util/focus-guards/FocusGuards";
+import { useMergeRefs } from "../../util/hooks";
+import { useEventCallback } from "../../util/hooks/useEventCallback";
+import { useScrollLock } from "../../util/hooks/useScrollLock";
+import { useOverlayContext } from "../root/DialogRoot.context";
+
+type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";
 
 interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -41,10 +42,10 @@ interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
     | (() => HTMLElement | null | undefined);
 
   /**
-   * TODO:
+   * The position of the dialog relative to the viewport.
    * @default "center"
    */
-  position?: OverlayPositionProp;
+  position?: DialogPosition;
 }
 
 /**
@@ -91,8 +92,6 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
     const hasPointerDownOutsideRef = useRef(false);
 
     const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
-
-    useFocusGuards();
 
     useScrollLock({
       enabled: open && modal === true,
@@ -177,8 +176,8 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
           );
 
     return (
-      <OverlayPosition position={position}>
-        <FocusScope
+      <FocusGuards>
+        <FocusBoundary
           loop
           trapped={open}
           onMountAutoFocus={handleInitialFocus}
@@ -259,8 +258,8 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
               {children}
             </div>
           </DismissableLayer>
-        </FocusScope>
-      </OverlayPosition>
+        </FocusBoundary>
+      </FocusGuards>
     );
   },
 );

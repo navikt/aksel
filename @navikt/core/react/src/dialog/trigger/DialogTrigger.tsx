@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../../slot/Slot";
-import { useRenameCSS } from "../../../theme/Theme";
-import { useMergeRefs } from "../../../util/hooks";
-import type { AsChild } from "../../../util/types/AsChild";
-import { useOverlayContext } from "../root/OverlayRoot.context";
+import { Slot } from "../../slot/Slot";
+import { useRenameCSS } from "../../theme/Theme";
+import { useMergeRefs } from "../../util/hooks";
+import type { AsChild } from "../../util/types/AsChild";
+import { useOverlayContext } from "../root/DialogRoot.context";
 
 type OverlayTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   AsChild;

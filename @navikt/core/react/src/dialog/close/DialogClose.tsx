@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../../slot/Slot";
-import { useRenameCSS } from "../../../theme/Theme";
-import type { AsChild } from "../../../util/types/AsChild";
-import { useEventCallback } from "../hooks/useEventCallback";
-import { useOverlayContext } from "../root/OverlayRoot.context";
+import { Slot } from "../../slot/Slot";
+import { useRenameCSS } from "../../theme/Theme";
+import { useEventCallback } from "../../util/hooks/useEventCallback";
+import type { AsChild } from "../../util/types/AsChild";
+import { useOverlayContext } from "../root/DialogRoot.context";
 
 type OverlayCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   AsChild;

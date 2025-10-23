@@ -1,5 +1,5 @@
-import { createContext } from "../../../util/create-context";
-import type { TransitionStatus } from "../hooks/useTransitionStatus";
+import { createContext } from "../../util/create-context";
+import type { TransitionStatus } from "../../util/hooks/useTransitionStatus";
 
 interface OverlayContextT {
   /**

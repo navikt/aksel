@@ -6,17 +6,19 @@ import React, {
   useState,
 } from "react";
 import { Slot } from "../../slot/Slot";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
-import { ownerDocument } from "../../util/owner";
 import { AsChild } from "../../util/types/AsChild";
 import {
   CustomFocusEvent,
   CustomPointerDownEvent,
+  type CustomPointerUpEvent,
 } from "./util/dispatchCustomEvent";
 import { useEscapeKeydown } from "./util/useEscapeKeydown";
 import { useFocusOutside } from "./util/useFocusOutside";
 import { usePointerDownOutside } from "./util/usePointerDownOutside";
+import { usePointerUpOutside } from "./util/usePointerUpOutside";
 
 interface DismissableLayerBaseProps {
   /**
@@ -25,6 +27,11 @@ interface DismissableLayerBaseProps {
    * interact with them: once to close the `DismissableLayer`, and again to trigger the element.
    */
   disableOutsidePointerEvents?: boolean;
+  /**
+   * When true, onDismiss called from escape key run `event.preventDefault()`.
+   * @default true
+   */
+  preventDefaultEscapeEvent?: boolean;
   /**
    * Event handler called when the escape key is down.
    * Can be prevented.
@@ -35,6 +42,18 @@ interface DismissableLayerBaseProps {
    * Can be prevented.
    */
   onPointerDownOutside?: (event: CustomPointerDownEvent) => void;
+  /**
+   * Enables listening for `pointerup` outside the `DismissableLayer`.
+   * In most cases `pointerdown` is sufficient, but in some cases (like modal, drawer)
+   * we want to mimic native OS behaviour and only close on `pointerup`.
+   * @default false
+   */
+  enablePointerUpOutside?: boolean;
+  /**
+   * Event handler called when the a `pointerup` event happens outside of the `DismissableLayer`.
+   * Can be prevented.
+   */
+  onPointerUpOutside?: (event: CustomPointerDownEvent) => void;
   /**
    * Event handler called when the focus moves outside of the `DismissableLayer`.
    * Can be prevented.
@@ -51,7 +70,7 @@ interface DismissableLayerBaseProps {
   /**
    * Handler called when the `DismissableLayer` should be dismissed
    */
-  onDismiss?: () => void;
+  onDismiss?: (event: Event) => void;
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
    * `safeZone.dismissable` is only needed when its element does not have a `tabIndex` since it will not receive focus-events.
@@ -127,12 +146,15 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       asChild,
       onEscapeKeyDown,
       onPointerDownOutside,
+      onPointerUpOutside,
+      enablePointerUpOutside = false,
       onFocusOutside,
       onInteractOutside,
       onDismiss,
       safeZone,
       disableOutsidePointerEvents = false,
       enabled = true,
+      preventDefaultEscapeEvent = true,
       ...rest
     }: DismissableLayerProps,
     ref,
@@ -159,7 +181,11 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
 
     const mergedRefs = useMergeRefs(setNode, register, ref);
 
-    const ownerDoc = ownerDocument(node);
+    /**
+     * In some cases the `node.ownerDocument` can differ from global document.
+     * This can happend when portaling elements or using web-components
+     */
+    const ownerDocument = node?.ownerDocument ?? globalThis?.document;
 
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
@@ -201,7 +227,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
      * Therefore, we also need to check that neither the trigger (`anchor`) nor the DismissableLayer (`dismissable`) are the event targets.
      */
     function handleOutsideEvent(
-      event: CustomFocusEvent | CustomPointerDownEvent,
+      event: CustomFocusEvent | CustomPointerDownEvent | CustomPointerUpEvent,
     ) {
       if ((!safeZone?.anchor && !safeZone?.dismissable) || !enabled) {
         return;
@@ -209,7 +235,10 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
 
       if (!event.defaultPrevented) {
         hasInteractedOutsideRef.current = true;
-        if (event.detail.originalEvent.type === "pointerdown") {
+        if (
+          event.detail.originalEvent.type === "pointerdown" ||
+          event.detail.originalEvent.type === "pointerup"
+        ) {
           hasPointerDownOutsideRef.current = true;
         }
       }
@@ -220,15 +249,18 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
        * pointerdown-events works as expected, but focus-events does not.
        * For focus-event we need to also check `safeZone.dismissable` (the Popover/Tooltip itself) since it does not have a tabIndex.
        */
-      if (event.detail.originalEvent.type === "pointerdown") {
+      if (
+        event.detail.originalEvent.type === "pointerdown" ||
+        event.detail.originalEvent.type === "pointerup"
+      ) {
         const targetIsTrigger =
           safeZone?.anchor?.contains(target) || target === safeZone?.anchor;
         targetIsTrigger && event.preventDefault();
       } else {
         const targetIsNotTrigger =
           target instanceof HTMLElement &&
-          ![safeZone?.anchor, safeZone?.dismissable].some(
-            (element) => element?.contains(target as Node),
+          ![safeZone?.anchor, safeZone?.dismissable].some((element) =>
+            element?.contains(target as Node),
           ) &&
           !target.contains(safeZone?.dismissable ?? null);
 
@@ -273,9 +305,37 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
        * Both `onPointerDownOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
        */
       if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
+        onDismiss(event);
       }
-    }, ownerDoc);
+    }, ownerDocument);
+
+    const pointerUpOutside = usePointerUpOutside((event) => {
+      if (
+        !pointerState.isPointerEventsEnabled ||
+        !enabled ||
+        !enablePointerUpOutside
+      ) {
+        return;
+      }
+
+      /**
+       * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+       */
+      onPointerUpOutside?.(event);
+      onInteractOutside?.(event);
+
+      /**
+       * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+       */
+      safeZone && handleOutsideEvent(event);
+
+      /**
+       * Both `onPointerDownOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
+       */
+      if (!event.defaultPrevented && onDismiss) {
+        onDismiss(event);
+      }
+    }, ownerDocument);
 
     const focusOutside = useFocusOutside((event) => {
       if (!enabled) {
@@ -297,9 +357,9 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
        * Both `onFocusOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
        */
       if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
+        onDismiss(event);
       }
-    }, ownerDoc);
+    }, ownerDocument);
 
     useEscapeKeydown((event) => {
       if (!enabled) {
@@ -325,10 +385,10 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
        * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
        */
       if (!event.defaultPrevented && onDismiss) {
-        event.preventDefault();
-        onDismiss();
+        preventDefaultEscapeEvent && event.preventDefault();
+        onDismiss(event);
       }
-    }, ownerDoc);
+    }, ownerDocument);
 
     /**
      * If `disableOutsidePointerEvents` is true,
@@ -340,17 +400,23 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       if (!node || !enabled || !disableOutsidePointerEvents) return;
 
       if (bodyLockCount === 0) {
-        originalBodyPointerEvents = ownerDoc.body.style.pointerEvents;
-        ownerDoc.body.style.pointerEvents = "none";
+        originalBodyPointerEvents = ownerDocument.body.style.pointerEvents;
+        ownerDocument.body.style.pointerEvents = "none";
       }
       bodyLockCount++;
       return () => {
         if (bodyLockCount === 1) {
-          ownerDoc.body.style.pointerEvents = originalBodyPointerEvents;
+          ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
         }
         bodyLockCount--;
       };
-    }, [node, ownerDoc, disableOutsidePointerEvents, descendants, enabled]);
+    }, [
+      node,
+      ownerDocument,
+      disableOutsidePointerEvents,
+      descendants,
+      enabled,
+    ]);
 
     /**
      * To make sure pointerEvents are enabled for all parents and siblings when the layer is removed from the DOM
@@ -368,7 +434,11 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
         {...rest}
         onFocusCapture={focusOutside.onFocusCapture}
         onBlurCapture={focusOutside.onBlurCapture}
-        onPointerDownCapture={pointerDownOutside.onPointerDownCapture}
+        onPointerDownCapture={composeEventHandlers(
+          pointerDownOutside.onPointerDownCapture,
+          pointerUpOutside.onPointerDownCapture,
+        )}
+        onPointerUpCapture={pointerUpOutside.onPointerUpCapture}
         style={{
           pointerEvents: pointerState.pointerStyle,
           ...rest.style,

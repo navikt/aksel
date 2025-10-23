@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { Portal } from "../../../portal";
-import { useRenameCSS } from "../../../theme/Theme";
-import { useOverlayContext } from "../root/OverlayRoot.context";
+import { Portal } from "../../portal";
+import { useRenameCSS } from "../../theme/Theme";
+import { useOverlayContext } from "../root/DialogRoot.context";
 
 type PortalProps = React.ComponentPropsWithoutRef<typeof Portal>;
 type MenuPortalElement = React.ElementRef<typeof Portal>;

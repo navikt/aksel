@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { HStack } from "../../layout/stack";
+import { HStack } from "../layout/stack";
 import {
-  Overlay,
-  OverlayBackdrop,
-  OverlayClose,
-  OverlayDrawer,
-  OverlayPortal,
-  OverlayTrigger,
+  Dialog,
+  DialogBackdrop,
+  DialogClose,
+  DialogDrawer,
+  DialogPortal,
+  DialogTrigger,
 } from "./index";
 
-const meta: Meta<typeof Overlay> = {
-  title: "ds-react/Overlay",
-  component: Overlay,
+const meta: Meta<typeof Dialog> = {
+  title: "ds-react/Dialog",
+  component: Dialog,
   parameters: {
     chromatic: { disable: true },
   },
@@ -28,23 +28,23 @@ const meta: Meta<typeof Overlay> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Overlay>;
+type Story = StoryObj<typeof Dialog>;
 
 export const Default: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before overlay</button>
-      <Overlay>
-        <OverlayTrigger>Open Overlay</OverlayTrigger>
-        <OverlayPortal>
-          <OverlayBackdrop className="backdropCSS" />
-          <OverlayDrawer className="drawerCSS" aria-labelledby="ha">
+      <button onClick={() => alert("after")}>Before dialog</button>
+      <Dialog>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogPortal>
+          <DialogBackdrop className="backdropCSS" />
+          <DialogDrawer className="drawerCSS" aria-labelledby="ha">
             <h1 id="ha">Heading text</h1>
-            <OverlayClose>Close</OverlayClose>
-          </OverlayDrawer>
-        </OverlayPortal>
-      </Overlay>
-      <button onClick={() => alert("after")}>after overlay</button>
+            <DialogClose>Close</DialogClose>
+          </DialogDrawer>
+        </DialogPortal>
+      </Dialog>
+      <button onClick={() => alert("after")}>after dialog</button>
     </div>
   ),
 };
@@ -52,7 +52,7 @@ export const Default: Story = {
 export const Position: Story = {
   render: () => {
     const [position, setPosition] =
-      useState<React.ComponentProps<typeof OverlayDrawer>["position"]>("right");
+      useState<React.ComponentProps<typeof DialogDrawer>["position"]>("right");
 
     return (
       <div>
@@ -64,20 +64,20 @@ export const Position: Story = {
           <button onClick={() => setPosition("center")}>center</button>
           <button onClick={() => setPosition("fullscreen")}>fullscreen</button>
         </HStack>
-        <Overlay defaultOpen>
-          <OverlayTrigger>Open Overlay</OverlayTrigger>
-          <OverlayPortal>
-            <OverlayBackdrop className="backdropCSS" />
-            <OverlayDrawer
+        <Dialog defaultOpen>
+          <DialogTrigger>Open Dialog</DialogTrigger>
+          <DialogPortal>
+            <DialogBackdrop className="backdropCSS" />
+            <DialogDrawer
               className="drawerCSS"
               aria-labelledby="ha"
               position={position}
             >
               <h1 id="ha">Heading text</h1>
-              <OverlayClose>Close</OverlayClose>
-            </OverlayDrawer>
-          </OverlayPortal>
-        </Overlay>
+              <DialogClose>Close</DialogClose>
+            </DialogDrawer>
+          </DialogPortal>
+        </Dialog>
       </div>
     );
   },
@@ -87,20 +87,20 @@ export const PositionResponsive: Story = {
   render: () => {
     return (
       <div>
-        <Overlay defaultOpen>
-          <OverlayTrigger>Open Overlay</OverlayTrigger>
-          <OverlayPortal>
-            <OverlayBackdrop className="backdropCSS" />
-            <OverlayDrawer
+        <Dialog defaultOpen>
+          <DialogTrigger>Open Dialog</DialogTrigger>
+          <DialogPortal>
+            <DialogBackdrop className="backdropCSS" />
+            <DialogDrawer
               className="drawerCSS"
               aria-labelledby="ha"
               position={{ md: "fullscreen", lg: "bottom", "2xl": "right" }}
             >
               <h1 id="ha">Heading text</h1>
-              <OverlayClose>Close</OverlayClose>
-            </OverlayDrawer>
-          </OverlayPortal>
-        </Overlay>
+              <DialogClose>Close</DialogClose>
+            </DialogDrawer>
+          </DialogPortal>
+        </Dialog>
       </div>
     );
   },
@@ -109,14 +109,14 @@ export const PositionResponsive: Story = {
 export const DemoDefaultFocusDialog: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before overlay focus-trap</button>
-      <Overlay>
-        <OverlayTrigger>Open Overlay</OverlayTrigger>
-        <OverlayPortal>
-          <OverlayBackdrop className="backdropCSS" />
-          <OverlayDrawer className="drawerCSS" aria-labelledby="ha">
+      <button onClick={() => alert("after")}>Before dialog focus-trap</button>
+      <Dialog>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogPortal>
+          <DialogBackdrop className="backdropCSS" />
+          <DialogDrawer className="drawerCSS" aria-labelledby="ha">
             <h1 id="ha">Headingtekst som er h1</h1>
-            <OverlayClose>Close</OverlayClose>
+            <DialogClose>Close</DialogClose>
             <p>
               Dette er vanlig innhold i en dialog. Innholdet kommer etter en
               tittel (h1) og en lukkeknapp. Etter dette innholdet kommer en
@@ -125,10 +125,10 @@ export const DemoDefaultFocusDialog: Story = {
             </p>
             <button>Knapp for fokushåndtering</button>
             <p>Og enda mer tekst for å fylle opp dialogen. Lorem ipsum ...</p>
-          </OverlayDrawer>
-        </OverlayPortal>
-      </Overlay>
-      <button onClick={() => alert("after")}>after overlay focus-trap</button>
+          </DialogDrawer>
+        </DialogPortal>
+      </Dialog>
+      <button onClick={() => alert("after")}>after dialog focus-trap</button>
     </div>
   ),
 };
@@ -138,20 +138,18 @@ export const DemoCloseButtonFocusDialog: Story = {
     const closeRef = React.useRef<HTMLButtonElement>(null);
     return (
       <div>
-        <button onClick={() => alert("after")}>
-          Before overlay focus-trap
-        </button>
-        <Overlay>
-          <OverlayTrigger>Open Overlay</OverlayTrigger>
-          <OverlayPortal>
-            <OverlayBackdrop className="backdropCSS" />
-            <OverlayDrawer
+        <button onClick={() => alert("after")}>Before dialog focus-trap</button>
+        <Dialog>
+          <DialogTrigger>Open Dialog</DialogTrigger>
+          <DialogPortal>
+            <DialogBackdrop className="backdropCSS" />
+            <DialogDrawer
               className="drawerCSS"
               aria-labelledby="ha"
               onOpenAutoFocus={closeRef}
             >
               <h1 id="ha">Headingtekst som er h1</h1>
-              <OverlayClose ref={closeRef}>Close</OverlayClose>
+              <DialogClose ref={closeRef}>Close</DialogClose>
               <p>
                 Denne skiller seg litt ut da autofokus var satt på lukkeknappen
                 som er etter heading. Dette er vanlig innhold i en dialog.
@@ -161,10 +159,10 @@ export const DemoCloseButtonFocusDialog: Story = {
               </p>
               <button>Knapp for fokushåndtering</button>
               <p>Og enda mer tekst for å fylle opp dialogen. Lorem ipsum ...</p>
-            </OverlayDrawer>
-          </OverlayPortal>
-        </Overlay>
-        <button onClick={() => alert("after")}>after overlay focus-trap</button>
+            </DialogDrawer>
+          </DialogPortal>
+        </Dialog>
+        <button onClick={() => alert("after")}>after dialog focus-trap</button>
       </div>
     );
   },
@@ -173,28 +171,28 @@ export const DemoCloseButtonFocusDialog: Story = {
 export const NestedDrawers: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before overlay</button>
-      <Overlay>
-        <OverlayTrigger>Open Overlay</OverlayTrigger>
-        <OverlayPortal>
-          <OverlayBackdrop className="backdropCSS" />
-          <OverlayDrawer className="drawerCSS">
+      <button onClick={() => alert("after")}>Before dialog</button>
+      <Dialog>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogPortal>
+          <DialogBackdrop className="backdropCSS" />
+          <DialogDrawer className="drawerCSS">
             Drawer content
-            <OverlayClose>Close</OverlayClose>
-            <Overlay>
-              <OverlayTrigger>Open Overlay nested</OverlayTrigger>
-              <OverlayPortal>
-                <OverlayBackdrop className="backdropCSS" />
-                <OverlayDrawer className="drawerCSS">
+            <DialogClose>Close</DialogClose>
+            <Dialog>
+              <DialogTrigger>Open Dialog nested</DialogTrigger>
+              <DialogPortal>
+                <DialogBackdrop className="backdropCSS" />
+                <DialogDrawer className="drawerCSS">
                   Drawer content
-                  <OverlayClose>Close</OverlayClose>
-                </OverlayDrawer>
-              </OverlayPortal>
-            </Overlay>
-          </OverlayDrawer>
-        </OverlayPortal>
-      </Overlay>
-      <button onClick={() => alert("after")}>after overlay</button>
+                  <DialogClose>Close</DialogClose>
+                </DialogDrawer>
+              </DialogPortal>
+            </Dialog>
+          </DialogDrawer>
+        </DialogPortal>
+      </Dialog>
+      <button onClick={() => alert("after")}>after dialog</button>
     </div>
   ),
 };
@@ -208,20 +206,20 @@ export const NonTriggerImplementation: Story = {
 
     return (
       <div>
-        <button onClick={() => alert("after")}>Before overlay</button>
+        <button onClick={() => alert("after")}>Before dialog</button>
         <button id="trigger" onClick={() => setOpen((x) => !x)}>
           Toggle drawer
         </button>
-        <Overlay open={open} onOpenChange={(x) => setOpen(x)}>
-          <OverlayPortal>
-            <OverlayBackdrop className="backdropCSS" />
-            <OverlayDrawer className="drawerCSS">
+        <Dialog open={open} onOpenChange={(x) => setOpen(x)}>
+          <DialogPortal>
+            <DialogBackdrop className="backdropCSS" />
+            <DialogDrawer className="drawerCSS">
               Drawer content
-              <OverlayClose>Close</OverlayClose>
-            </OverlayDrawer>
-          </OverlayPortal>
-        </Overlay>
-        <button onClick={() => alert("after")}>after overlay</button>
+              <DialogClose>Close</DialogClose>
+            </DialogDrawer>
+          </DialogPortal>
+        </Dialog>
+        <button onClick={() => alert("after")}>after dialog</button>
       </div>
     );
   },
@@ -236,19 +234,19 @@ export const TrapFocusOutsideClick: Story = {
         <button id="counter" onClick={() => setCount((x) => x + 1)}>
           Counter: {count}
         </button>
-        <Overlay>
-          <OverlayTrigger>Open Overlay</OverlayTrigger>
-          <OverlayPortal>
-            <OverlayDrawer
+        <Dialog>
+          <DialogTrigger>Open Dialog</DialogTrigger>
+          <DialogPortal>
+            <DialogDrawer
               className="drawerCSS"
               modal="trap-focus"
               closeOnOutsideClick={false}
             >
               Drawer content
-              <OverlayClose>Close</OverlayClose>
-            </OverlayDrawer>
-          </OverlayPortal>
-        </Overlay>
+              <DialogClose>Close</DialogClose>
+            </DialogDrawer>
+          </DialogPortal>
+        </Dialog>
       </div>
     );
   },
@@ -263,23 +261,23 @@ export const NestedTrapFocusOutsideClick: Story = {
         <button id="counter" onClick={() => setCount((x) => x + 1)}>
           Counter: {count}
         </button>
-        <Overlay>
-          <OverlayTrigger>Open Overlay</OverlayTrigger>
-          <OverlayPortal>
-            <OverlayDrawer className="drawerCSS" modal="trap-focus">
-              <Overlay>
-                <OverlayTrigger>Open Overlay2</OverlayTrigger>
-                <OverlayPortal>
-                  <OverlayDrawer className="drawerCSS" modal="trap-focus">
+        <Dialog>
+          <DialogTrigger>Open Dialog</DialogTrigger>
+          <DialogPortal>
+            <DialogDrawer className="drawerCSS" modal="trap-focus">
+              <Dialog>
+                <DialogTrigger>Open Dialog2</DialogTrigger>
+                <DialogPortal>
+                  <DialogDrawer className="drawerCSS" modal="trap-focus">
                     Drawer content2
-                    <OverlayClose>Close2</OverlayClose>
-                  </OverlayDrawer>
-                </OverlayPortal>
-              </Overlay>
-              <OverlayClose>Close</OverlayClose>
-            </OverlayDrawer>
-          </OverlayPortal>
-        </Overlay>
+                    <DialogClose>Close2</DialogClose>
+                  </DialogDrawer>
+                </DialogPortal>
+              </Dialog>
+              <DialogClose>Close</DialogClose>
+            </DialogDrawer>
+          </DialogPortal>
+        </Dialog>
       </div>
     );
   },
@@ -288,18 +286,18 @@ export const NestedTrapFocusOutsideClick: Story = {
 export const IgnoreOutsideClick: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before overlay</button>
-      <Overlay>
-        <OverlayTrigger>Open Overlay</OverlayTrigger>
-        <OverlayPortal>
-          <OverlayBackdrop className="backdropCSS" />
-          <OverlayDrawer className="drawerCSS" closeOnOutsideClick={false}>
+      <button onClick={() => alert("after")}>Before dialog</button>
+      <Dialog>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogPortal>
+          <DialogBackdrop className="backdropCSS" />
+          <DialogDrawer className="drawerCSS" closeOnOutsideClick={false}>
             Drawer content
-            <OverlayClose>Close</OverlayClose>
-          </OverlayDrawer>
-        </OverlayPortal>
-      </Overlay>
-      <button onClick={() => alert("after")}>after overlay</button>
+            <DialogClose>Close</DialogClose>
+          </DialogDrawer>
+        </DialogPortal>
+      </Dialog>
+      <button onClick={() => alert("after")}>after dialog</button>
     </div>
   ),
 };
