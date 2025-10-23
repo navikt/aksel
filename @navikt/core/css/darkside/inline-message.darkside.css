@@ -7,7 +7,6 @@
 .aksel-inline-message__icon {
   color: var(--ax-text-subtle);
   font-size: 1.5rem;
-  display: flex;
   flex: 0 0 auto;
 
   .aksel-inline-message[data-size="small"] & {

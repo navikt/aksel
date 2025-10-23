@@ -37,7 +37,6 @@
 
 .navds-inline-message__icon {
   font-size: 1.5rem;
-  display: flex;
   flex: 0 0 auto;
 
   .navds-inline-message[data-size="small"] & {
