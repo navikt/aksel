@@ -93,9 +93,6 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
 
   const dialogContext = useDialogContext(false);
 
-  /* const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = React.useState(0);
-  const isTopmost = ownNestedOpenDialogs === 0; */
-
   return (
     <DialogContextProvider
       open={open}
