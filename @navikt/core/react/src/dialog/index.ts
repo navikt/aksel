@@ -19,3 +19,5 @@ export { DialogTitle } from "./title/DialogTitle";
 export type { DialogTitleProps } from "./title/DialogTitle";
 export { DialogDescription } from "./description/DialogDescription";
 export type { DialogDescriptionProps } from "./description/DialogDescription";
+export { DialogBody } from "./body/DialogBody";
+export type { DialogBodyProps } from "./body/DialogBody";

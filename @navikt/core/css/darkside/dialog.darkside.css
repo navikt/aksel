@@ -7,6 +7,8 @@
   transition-property: opacity, transform;
   border-radius: var(--ax-radius-12);
   color: var(--ax-text-neutral);
+  display: flex;
+  flex-direction: column;
 
   &:focus {
     outline: none;
@@ -19,30 +21,33 @@
   }
 
   &[data-position="center"] {
-    --__axc-dialog-transform: translate(-50%, -50%) scale(0.96);
-
-    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 24rem;
-    max-width: calc(100vw - 3rem);
+    transform: translateX(-50%);
+    top: 10%;
+    max-width: calc(100dvw - 3rem);
+    max-height: calc(100dvh - 3rem);
     margin-top: -2rem;
     outline: 1px solid var(--ax-border-neutral-subtle);
+    margin-block: auto;
+    width: 640px;
 
-    /* Since we set transform in this declaration, we need to re-declare the entering/exiting style */
-    &[data-entering-style],
+    &[data-entering-style] {
+      transform: translate(-50%, 10%) scale(1.04);
+    }
+
     &[data-exiting-style] {
-      transform: var(--__axc-dialog-transform);
+      transform: translate(-50%, -10%) scale(0.96);
     }
   }
 
   &[data-position="right"],
   &[data-position="left"] {
-    width: 24rem;
     height: 100dvh;
     max-width: calc(100vw - 3rem);
     top: 0;
     bottom: 0;
+    width: 640px;
   }
 
   &[data-position="right"] {
@@ -71,7 +76,10 @@
     bottom: 0;
     max-height: calc(100dvh - 64px);
     max-width: 100dvw;
-    width: 100dvw;
+
+    /* TODO: Optimize for reading length */
+    width: 640px;
+    margin-inline: auto;
     height: auto;
   }
 
@@ -103,4 +111,44 @@
   &[data-exiting-style] {
     opacity: 0;
   }
+}
+
+.aksel-dialog__header {
+  z-index: 1;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+  padding-inline: var(--ax-space-20);
+  padding-block: var(--ax-space-16);
+}
+
+.aksel-dialog__title {
+  margin-block-end: var(--ax-space-4);
+}
+
+.aksel-dialog__description {
+  /* TODO: */
+}
+
+.aksel-dialog__close-button {
+  float: right;
+  margin-left: var(--ax-space-16);
+}
+
+.aksel-dialog__body {
+  overflow: auto;
+  flex-grow: 1;
+  padding-inline: var(--ax-space-20);
+  padding-block: var(--ax-space-16);
+}
+
+.aksel-dialog__footer {
+  /* TODO: up for discussion */
+  justify-content: flex-end;
+  display: flex;
+  flex-flow: wrap;
+  flex-shrink: 0;
+  gap: var(--base-size-8, 0.5rem);
+  z-index: 1;
+  padding-inline: var(--ax-space-20);
+  padding-block: var(--ax-space-16);
 }

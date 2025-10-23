@@ -1,12 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
+import { Button } from "../button";
 import { HStack } from "../layout/stack";
 import {
   Dialog,
   DialogBackdrop,
+  DialogBody,
   DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
   DialogPopup,
   DialogPortal,
+  DialogTitle,
   DialogTrigger,
 } from "./index";
 
@@ -40,6 +46,49 @@ export const Default: Story = {
           <DialogPopup className="dialogCSS" aria-labelledby="ha">
             <h1 id="ha">Heading text</h1>
             <DialogClose>Close</DialogClose>
+          </DialogPopup>
+        </DialogPortal>
+      </Dialog>
+      <button onClick={() => alert("after")}>after dialog</button>
+    </div>
+  ),
+};
+
+export const AllSubComponents: Story = {
+  render: () => (
+    <div>
+      <button onClick={() => alert("after")}>Before dialog</button>
+      <Dialog defaultOpen>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogPortal>
+          <DialogBackdrop className="backdropCSS" />
+          <DialogPopup
+            className="dialogCSS"
+            aria-labelledby="ha"
+            position="center"
+          >
+            <DialogHeader>
+              <DialogTitle id="ha">Dialog Title</DialogTitle>
+              <DialogDescription>
+                This is a description of the dialog.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogBody>
+              This is the body of the dialog. Here is where the main content
+              lives. This is the body of the dialog. Here is where the main
+              content lives This is the body of the dialog. Here is where the
+              main content lives This is the body of the dialog. Here is where
+              the main content lives This lives. This is the body of the dialog.
+              Here is where the main content lives This is the body of the
+              dialog. Here is where the main content lives This is the body of
+              the dialog. Here is where the main content lives This is the body
+              of the dialog. Here is where the main content lives
+            </DialogBody>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button>Close</Button>
+              </DialogClose>
+            </DialogFooter>
           </DialogPopup>
         </DialogPortal>
       </Dialog>
