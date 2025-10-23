@@ -36,7 +36,7 @@ const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(
       <div
         {...restProps}
         ref={mergedRefs}
-        className={cn(className)}
+        className={cn(className, "navds-dialog__backdrop")}
         role="presentation"
         style={{
           userSelect: "none",

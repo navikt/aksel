@@ -19,8 +19,6 @@ const meta: Meta<typeof Dialog> = {
   decorators: [
     (Story) => (
       <div data-style-wrapper>
-        {BackDropStyle}
-        {DialogStyle}
         <Story />
       </div>
     ),
@@ -53,7 +51,7 @@ export const Default: Story = {
 export const Position: Story = {
   render: () => {
     const [position, setPosition] =
-      useState<React.ComponentProps<typeof DialogPopup>["position"]>("right");
+      useState<React.ComponentProps<typeof DialogPopup>["position"]>("bottom");
 
     return (
       <div>
@@ -302,43 +300,3 @@ export const IgnoreOutsideClick: Story = {
     </div>
   ),
 };
-
-const BackDropStyle = (
-  <style>
-    {`
-  .backdropCSS {
-    position: fixed;
-    inset: 0;
-    background-color: black;
-    opacity: 0.2;
-    transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
-
-
-    &[data-entering-style], &[data-exiting-style] {
-      opacity: 0;
-    }
-    }
-  `}
-  </style>
-);
-
-const DialogStyle = (
-  <style>
-    {`
-  .dialogCSS {
-    position: fixed;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: 100vh;
-    width: 300px;
-    background-color: white;
-    transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
-
-    &[data-entering-style], &[data-exiting-style] {
-      opacity: 0;
-    }
-  }
-  `}
-  </style>
-);
