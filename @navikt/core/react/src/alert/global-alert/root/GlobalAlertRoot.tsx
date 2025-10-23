@@ -22,7 +22,7 @@ interface GlobalAlertProps
     BaseAlert.RootProps,
     "type" | "global" | "statusType" | "data-color"
   > {
-  variant: BaseAlert.RootProps["variant"];
+  variant: Exclude<BaseAlert.RootProps["variant"], undefined>;
 }
 
 interface GlobalAlertComponent
