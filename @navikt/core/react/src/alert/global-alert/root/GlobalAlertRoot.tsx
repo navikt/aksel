@@ -34,7 +34,7 @@ interface GlobalAlertComponent
    * @example
    * ```jsx
    *  <GlobalAlert>
-   *    <GlobalAlert.Header icon={<InformationSquareIcon />}>
+   *    <GlobalAlert.Header>
    *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
    *    </GlobalAlert.Header>
    *  </GlobalAlert>
