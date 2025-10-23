@@ -314,18 +314,53 @@ export const NestedDrawers: Story = {
         <DialogPortal>
           <DialogBackdrop className="backdropCSS" />
           <DialogPopup className="dialogCSS">
-            Drawer content
-            <DialogClose>Close</DialogClose>
-            <Dialog>
-              <DialogTrigger>Open Dialog nested</DialogTrigger>
-              <DialogPortal>
-                <DialogBackdrop className="backdropCSS" />
-                <DialogPopup className="dialogCSS">
-                  Drawer content
-                  <DialogClose>Close</DialogClose>
-                </DialogPopup>
-              </DialogPortal>
-            </Dialog>
+            <DialogHeader>
+              <DialogTitle id="ha">Dialog Title</DialogTitle>
+              <DialogDescription>
+                This is a description of the dialog.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogBody>
+              This is the body of the dialog. Here is where the main content
+              lives. This is the body of the dialog. Here is where the main
+              content lives This is the body of the dialog. Here is where the
+              main content lives This is the body of the dialog. Here is where
+              the main content lives This lives. This is the body of the dialog.
+              Here is where the main content lives This is the body of the
+              dialog. Here is where the main content lives This is the body of
+              the dialog. Here is where the main content lives This is the body
+              of the dialog. Here is where the main content lives
+            </DialogBody>
+            <DialogFooter>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button>Open nested</Button>
+                </DialogTrigger>
+                <DialogPortal>
+                  <DialogBackdrop className="backdropCSS" />
+                  <DialogPopup className="dialogCSS">
+                    <DialogHeader>
+                      <DialogTitle id="ha">Dialog Title</DialogTitle>
+                      <DialogDescription>
+                        This is a description of the dialog.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogBody>
+                      This is the body of the dialog. Here is where the main
+                      content lives. This i
+                    </DialogBody>
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button>Close</Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogPopup>
+                </DialogPortal>
+              </Dialog>
+              <DialogClose asChild>
+                <Button>Close</Button>
+              </DialogClose>
+            </DialogFooter>
           </DialogPopup>
         </DialogPortal>
       </Dialog>
