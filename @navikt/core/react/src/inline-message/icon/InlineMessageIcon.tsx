@@ -23,7 +23,7 @@ function InlineMessageIcon({
   const translate = useI18n("Alert");
   const { cn } = useRenameCSS();
 
-  if (!variant) {
+  if (!(variant in VARIANT_ICONS)) {
     return null;
   }
 
