@@ -21,6 +21,7 @@ const DialogPortal = forwardRef<MenuPortalElement, DialogPortalProps>(
     const { cn } = useRenameCSS();
     const { mounted } = useDialogContext();
 
+    /* TODO: Add keepmounted-prop */
     const shouldRender = mounted; /* || keepMounted */
 
     if (!shouldRender) {

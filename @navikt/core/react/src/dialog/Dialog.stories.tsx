@@ -1,7 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
+import {
+  ClockDashedIcon,
+  InboxDownIcon,
+  PaperplaneIcon,
+} from "@navikt/aksel-icons";
 import { Button } from "../button";
+import { Bleed } from "../layout/bleed";
 import { HStack } from "../layout/stack";
+import { Tabs } from "../tabs";
 import {
   Dialog,
   DialogBackdrop,
@@ -90,6 +97,88 @@ export const AllSubComponents: Story = {
               </DialogClose>
             </DialogFooter>
           </DialogPopup>
+        </DialogPortal>
+      </Dialog>
+      <button onClick={() => alert("after")}>after dialog</button>
+    </div>
+  ),
+};
+
+export const ComplexDrawer: Story = {
+  render: () => (
+    <div>
+      <button onClick={() => alert("after")}>Before dialog</button>
+      <Dialog defaultOpen>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogPortal>
+          <DialogBackdrop className="backdropCSS" />
+          <Tabs defaultValue="logg">
+            <DialogPopup
+              className="dialogCSS"
+              aria-labelledby="ha"
+              position="center"
+            >
+              <DialogHeader>
+                <DialogTitle id="ha">Dialog Title</DialogTitle>
+                <DialogDescription>
+                  This is a description of the dialog.
+                </DialogDescription>
+                <Bleed marginInline="space-20">
+                  <Tabs.List>
+                    <Tabs.Tab
+                      value="logg"
+                      label="Logg"
+                      icon={<ClockDashedIcon aria-hidden />}
+                    />
+                    <Tabs.Tab
+                      value="inbox"
+                      label="Inbox"
+                      icon={<InboxDownIcon aria-hidden />}
+                    />
+                    <Tabs.Tab
+                      value="sendt"
+                      label="Sendt"
+                      icon={<PaperplaneIcon aria-hidden />}
+                    />
+                  </Tabs.List>
+                </Bleed>
+              </DialogHeader>
+              <DialogBody asChild>
+                <Tabs.Panel value="logg">
+                  This is the body of the dialog. Here is where the main content
+                  lives. This is the body of the dialog. Here is where the main
+                  content lives This is the body of the dialog. Here is where
+                  the main content lives This is the body of the dialog. Here is
+                  where the main content lives This lives. This is the body of
+                  the dialog. Here is where the main content lives This is the
+                  body of the dialog. Here is where the main content lives This
+                  is the body of the dialog. Here is where the main content
+                  lives This is the body of the dialog. Here is where the main
+                  content lives
+                </Tabs.Panel>
+              </DialogBody>
+              <DialogBody asChild>
+                <Tabs.Panel value="inbox">
+                  where the main content lives This is the body of the dialog.
+                  Here is where the main content lives This is the body of the
+                  dialog. Here is where the main content lives
+                </Tabs.Panel>
+              </DialogBody>
+              <DialogBody asChild>
+                <Tabs.Panel value="sendt">
+                  This is the body of the dialog. Here is where the main content
+                  lives. This is the body of the dialog. Here is where the main
+                  content lives This is the body of the dialog. Here is where
+                  the main cont
+                </Tabs.Panel>
+              </DialogBody>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button>Close</Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogPopup>
+          </Tabs>
         </DialogPortal>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog</button>
