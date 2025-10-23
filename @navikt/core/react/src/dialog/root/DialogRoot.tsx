@@ -5,6 +5,29 @@ import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAn
 import { useTransitionStatus } from "../../util/hooks/useTransitionStatus";
 import { DialogContextProvider, useDialogContext } from "./DialogRoot.context";
 
+interface DialogProps {
+  children: React.ReactNode;
+  /**
+   * Whether the dialog is currently open.
+   */
+  open?: boolean;
+  /**
+   * Whether the dialog is initially open.
+   *
+   * To render a controlled dialog, use the `open` prop instead.
+   * @default false
+   */
+  defaultOpen?: boolean;
+  /**
+   * Event handler called when the dialog is opened or closed.
+   */
+  onOpenChange?: (open: boolean, event?: Event) => void;
+  /**
+   * Event handler called after any animations complete when the dialog is opened or closed.
+   */
+  onOpenChangeComplete?: (open: boolean) => void;
+}
+
 /**
  * ..
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/TODO)
@@ -91,29 +114,6 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     </DialogContextProvider>
   );
 };
-
-interface DialogProps {
-  children: React.ReactNode;
-  /**
-   * Whether the dialog is currently open.
-   */
-  open?: boolean;
-  /**
-   * Whether the dialog is initially open.
-   *
-   * To render a controlled dialog, use the `open` prop instead.
-   * @default false
-   */
-  defaultOpen?: boolean;
-  /**
-   * Event handler called when the dialog is opened or closed.
-   */
-  onOpenChange?: (open: boolean, event?: Event) => void;
-  /**
-   * Event handler called after any animations complete when the dialog is opened or closed.
-   */
-  onOpenChangeComplete?: (open: boolean) => void;
-}
 
 export { Dialog };
 export type { DialogProps };
