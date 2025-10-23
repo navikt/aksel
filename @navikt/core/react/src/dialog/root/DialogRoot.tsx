@@ -3,24 +3,21 @@ import { useControllableState } from "../../util/hooks/useControllableState";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
 import { useTransitionStatus } from "../../util/hooks/useTransitionStatus";
-import {
-  OverlayContextProvider,
-  useOverlayContext,
-} from "./DialogRoot.context";
+import { DialogContextProvider, useDialogContext } from "./DialogRoot.context";
 
 /**
  * ..
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/TODO)
- * @see 🏷️ {@link OverlayProps}
+ * @see 🏷️ {@link DialogProps}
  * @example
  * ```jsx
  * ```
  */
 /**
- * TODO: Root state and context provider for overlay components
- * - Handle nested overlays
+ * TODO: Root state and context provider for dialog components
+ * - Handle nested dialogs
  */
-const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
+const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
   const {
     children,
     defaultOpen = false,
@@ -71,13 +68,13 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
     },
   });
 
-  const overlayContext = useOverlayContext(false);
+  const dialogContext = useDialogContext(false);
 
   /* const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = React.useState(0);
   const isTopmost = ownNestedOpenDialogs === 0; */
 
   return (
-    <OverlayContextProvider
+    <DialogContextProvider
       open={open}
       setOpen={setOpen}
       mounted={mounted}
@@ -88,14 +85,14 @@ const Overlay: React.FC<OverlayProps> = (props: OverlayProps) => {
       popupElement={popupElement}
       setTriggerElement={setTriggerElement}
       triggerElement={triggerElement}
-      nested={!!overlayContext}
+      nested={!!dialogContext}
     >
       {children}
-    </OverlayContextProvider>
+    </DialogContextProvider>
   );
 };
 
-interface OverlayProps {
+interface DialogProps {
   children: React.ReactNode;
   /**
    * Whether the dialog is currently open.
@@ -118,5 +115,5 @@ interface OverlayProps {
   onOpenChangeComplete?: (open: boolean) => void;
 }
 
-export { Overlay };
-export type { OverlayProps };
+export { Dialog };
+export type { DialogProps };

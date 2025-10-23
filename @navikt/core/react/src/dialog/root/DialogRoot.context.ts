@@ -1,7 +1,7 @@
 import { createContext } from "../../util/create-context";
 import type { TransitionStatus } from "../../util/hooks/useTransitionStatus";
 
-interface OverlayContextT {
+interface DialogContextProps {
   /**
    * Whether the dialog is currently open.
    */
@@ -11,15 +11,15 @@ interface OverlayContextT {
    */
   setOpen: (open: boolean, originalEvent: Event) => void;
   /**
-   * The transition status of the overlay
+   * The transition status of the dialog
    */
   transitionStatus: TransitionStatus;
   /**
-   * Whether the overlay has been mounted (opened)
+   * Whether the dialog has been mounted (opened)
    */
   mounted: boolean;
   /**
-   * The ref to the Overlay-element.
+   * The ref to the Dialog-element.
    */
   popupRef: React.RefObject<HTMLElement | null>;
   /**
@@ -43,15 +43,15 @@ interface OverlayContextT {
    */
   triggerElement: HTMLElement | null;
   /**
-   * Declares if this overlay is nested inside another overlay.
+   * Declares if this dialog is nested inside another dialog.
    */
   nested: boolean;
 }
 
-const [OverlayContextProvider, useOverlayContext] =
-  createContext<OverlayContextT>({
-    name: "OverlayContext",
-    errorMessage: "useOverlayContext must be used within Overlay",
+const [DialogContextProvider, useDialogContext] =
+  createContext<DialogContextProps>({
+    name: "DialogContext",
+    errorMessage: "useDialogContext must be used within Dialog",
   });
 
-export { OverlayContextProvider, useOverlayContext };
+export { DialogContextProvider, useDialogContext };

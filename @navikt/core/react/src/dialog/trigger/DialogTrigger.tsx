@@ -3,22 +3,22 @@ import { Slot } from "../../slot/Slot";
 import { useRenameCSS } from "../../theme/Theme";
 import { useMergeRefs } from "../../util/hooks";
 import type { AsChild } from "../../util/types/AsChild";
-import { useOverlayContext } from "../root/DialogRoot.context";
+import { useDialogContext } from "../root/DialogRoot.context";
 
-type OverlayTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+type DialogTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   AsChild;
 
 /**
- * @see 🏷️ {@link OverlayTriggerProps}
+ * @see 🏷️ {@link DialogTriggerProps}
  * @example
  * ```jsx
  * ```
  */
-const OverlayTrigger = forwardRef<HTMLButtonElement, OverlayTriggerProps>(
+const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
   ({ children, className, asChild = false, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
 
-    const { open, setOpen, setTriggerElement } = useOverlayContext();
+    const { open, setOpen, setTriggerElement } = useDialogContext();
 
     const mergedRefs = useMergeRefs(forwardedRef, setTriggerElement);
 
@@ -40,5 +40,5 @@ const OverlayTrigger = forwardRef<HTMLButtonElement, OverlayTriggerProps>(
   },
 );
 
-export { OverlayTrigger };
-export type { OverlayTriggerProps };
+export { DialogTrigger };
+export type { DialogTriggerProps };

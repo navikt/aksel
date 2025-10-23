@@ -94,7 +94,7 @@ export const PositionResponsive: Story = {
             <DialogDrawer
               className="drawerCSS"
               aria-labelledby="ha"
-              position={{ md: "fullscreen", lg: "bottom", "2xl": "right" }}
+              position="bottom"
             >
               <h1 id="ha">Heading text</h1>
               <DialogClose>Close</DialogClose>

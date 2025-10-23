@@ -1,24 +1,24 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../theme/Theme";
 import { useMergeRefs } from "../../util/hooks";
-import { useOverlayContext } from "../root/DialogRoot.context";
+import { useDialogContext } from "../root/DialogRoot.context";
 
-type OverlayBackdropProps = Omit<
+type DialogBackdropProps = Omit<
   React.HTMLAttributes<HTMLDivElement>,
   "children"
 >;
 
 /**
- * @see 🏷️ {@link OverlayBackdropProps}
+ * @see 🏷️ {@link DialogBackdropProps}
  * @example
  * ```jsx
  * ```
  */
-const OverlayBackdrop = forwardRef<HTMLDivElement, OverlayBackdropProps>(
+const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(
   ({ className, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
     const { mounted, transitionStatus, nested, backdropRef } =
-      useOverlayContext();
+      useDialogContext();
 
     const mergedRefs = useMergeRefs(forwardedRef, backdropRef);
 
@@ -48,5 +48,5 @@ const OverlayBackdrop = forwardRef<HTMLDivElement, OverlayBackdropProps>(
   },
 );
 
-export { OverlayBackdrop };
-export type { OverlayBackdropProps };
+export { DialogBackdrop };
+export type { DialogBackdropProps };

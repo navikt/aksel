@@ -1,25 +1,25 @@
 import React, { forwardRef } from "react";
 import { Portal } from "../../portal";
 import { useRenameCSS } from "../../theme/Theme";
-import { useOverlayContext } from "../root/DialogRoot.context";
+import { useDialogContext } from "../root/DialogRoot.context";
 
 type PortalProps = React.ComponentPropsWithoutRef<typeof Portal>;
 type MenuPortalElement = React.ElementRef<typeof Portal>;
 
-type OverlayPortalProps = PortalProps & {
+type DialogPortalProps = PortalProps & {
   children: React.ReactNode;
 };
 
 /**
- * @see 🏷️ {@link OverlayPortalProps}
+ * @see 🏷️ {@link DialogPortalProps}
  * @example
  * ```jsx
  * ```
  */
-const OverlayPortal = forwardRef<MenuPortalElement, OverlayPortalProps>(
+const DialogPortal = forwardRef<MenuPortalElement, DialogPortalProps>(
   ({ children, className, rootElement, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
-    const { mounted } = useOverlayContext();
+    const { mounted } = useDialogContext();
 
     const shouldRender = mounted; /* || keepMounted */
 
@@ -41,5 +41,5 @@ const OverlayPortal = forwardRef<MenuPortalElement, OverlayPortalProps>(
   },
 );
 
-export { OverlayPortal };
-export type { OverlayPortalProps };
+export { DialogPortal };
+export type { DialogPortalProps };

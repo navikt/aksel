@@ -3,22 +3,21 @@ import { Slot } from "../../slot/Slot";
 import { useRenameCSS } from "../../theme/Theme";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
 import type { AsChild } from "../../util/types/AsChild";
-import { useOverlayContext } from "../root/DialogRoot.context";
+import { useDialogContext } from "../root/DialogRoot.context";
 
-type OverlayCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  AsChild;
+type DialogCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement> & AsChild;
 
 /**
- * @see 🏷️ {@link OverlayCloseProps}
+ * @see 🏷️ {@link DialogCloseProps}
  * @example
  * ```jsx
  * ```
  */
-const OverlayClose = forwardRef<HTMLButtonElement, OverlayCloseProps>(
+const DialogClose = forwardRef<HTMLButtonElement, DialogCloseProps>(
   ({ children, className, asChild = false, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
 
-    const { open, setOpen } = useOverlayContext();
+    const { open, setOpen } = useDialogContext();
 
     const handleClick = useEventCallback(
       (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -45,5 +44,5 @@ const OverlayClose = forwardRef<HTMLButtonElement, OverlayCloseProps>(
   },
 );
 
-export { OverlayClose };
-export type { OverlayCloseProps };
+export { DialogClose };
+export type { DialogCloseProps };

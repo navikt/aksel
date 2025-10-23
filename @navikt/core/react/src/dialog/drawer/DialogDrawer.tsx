@@ -6,11 +6,11 @@ import { FocusGuards } from "../../util/focus-guards/FocusGuards";
 import { useMergeRefs } from "../../util/hooks";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { useScrollLock } from "../../util/hooks/useScrollLock";
-import { useOverlayContext } from "../root/DialogRoot.context";
+import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";
 
-interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
+interface DialogDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * TODO:
@@ -49,7 +49,7 @@ interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * @see 🏷️ {@link OverlayDrawerProps}
+ * @see 🏷️ {@link DialogDrawerProps}
  * @example
  * ```jsx
  * ```
@@ -61,7 +61,7 @@ interface OverlayDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
  * - Modal === "trap-focus"
  *  - Close on Outside pointerdown, unless backdrop is present, in that case only close on outside CLICK
  */
-const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
+const DialogDrawer = forwardRef<HTMLDivElement, DialogDrawerProps>(
   (
     {
       children,
@@ -86,7 +86,7 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
       transitionStatus,
       popupElement,
       backdropRef,
-    } = useOverlayContext();
+    } = useDialogContext();
 
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
@@ -264,5 +264,5 @@ const OverlayDrawer = forwardRef<HTMLDivElement, OverlayDrawerProps>(
   },
 );
 
-export { OverlayDrawer };
-export type { OverlayDrawerProps };
+export { DialogDrawer };
+export type { DialogDrawerProps };
