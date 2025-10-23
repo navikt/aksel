@@ -1,5 +1,13 @@
 # @navikt/aksel-icons
 
+## 7.32.3
+
+### Patch Changes
+
+- Icons: Modified 'Robot' type icons. ([#4200](https://github.com/navikt/aksel/pull/4200))
+
+## 7.32.2
+
 ## 7.32.1
 
 ## 7.32.0

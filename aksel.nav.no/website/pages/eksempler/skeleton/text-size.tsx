@@ -20,10 +20,9 @@ const Example = () => {
 export default withDsExample(Example);
 
 /* Storybook story */
-export const Demo = {
-  render: Example,
-};
+export const Demo = { render: Example };
 
 export const args = {
   index: 2,
+  desc: "Med `variant='text'` følger høyden skriftstørrelsen.",
 };

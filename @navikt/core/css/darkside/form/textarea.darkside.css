@@ -11,6 +11,7 @@
   display: block;
   color: var(--ax-text-neutral);
   scroll-margin-block-start: 4rem;
+  white-space: break-spaces;
 
   &::placeholder {
     color: var(--ax-text-neutral-subtle);

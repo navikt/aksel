@@ -88,7 +88,6 @@
   display: grid;
   border-radius: var(--ax-radius-12);
   overflow: clip;
-  position: relative;
   height: fit-content;
 
   --__axc-base-alert-pi: var(--ax-space-20);
@@ -171,7 +170,6 @@
 
 .aksel-base-alert__close-button {
   margin-left: auto;
-  z-index: 1;
 
   &:focus-visible {
     outline-color: var(--ax-bg-default);

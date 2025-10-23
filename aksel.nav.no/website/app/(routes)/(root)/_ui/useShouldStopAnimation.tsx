@@ -22,6 +22,7 @@ function useShouldStopAnimation() {
       return;
     }
     setPauseAnimationState(JSON.parse(data ?? "false"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

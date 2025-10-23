@@ -170,6 +170,14 @@ export {
   type InfoCardTitleProps,
   type InfoCardContentProps,
 } from "./alert/info-card";
+export {
+  LocalAlert,
+  type LocalAlertProps,
+  type LocalAlertHeaderProps,
+  type LocalAlertTitleProps,
+  type LocalAlertContentProps,
+  type LocalAlertCloseProps,
+} from "./alert/local-alert";
 
 /**
  * Theming
