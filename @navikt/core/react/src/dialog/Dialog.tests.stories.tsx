@@ -8,8 +8,8 @@ import {
   DialogBackdrop,
   DialogClose,
   type DialogCloseProps,
-  DialogDrawer,
-  type DialogDrawerProps,
+  DialogPopup,
+  type DialogPopupProps,
   DialogPortal,
   type DialogProps,
   DialogTrigger,
@@ -26,8 +26,6 @@ const meta: Meta<typeof Dialog> = {
     (Story) => (
       <PortalContainer>
         <div>
-          {BackDropStyle}
-          {DrawerStyle}
           <Story />
         </div>
       </PortalContainer>
@@ -42,10 +40,10 @@ function testUtils(canvasElement: HTMLElement, args: BaseDialogProps) {
   const canvas = within(canvasElement);
   return {
     canvas,
-    expectDrawerOpen: () =>
-      expect(canvas.getByTestId("drawer")).toBeInTheDocument(),
-    expectDrawerClosed: () =>
-      expect(canvas.queryByTestId("drawer")).not.toBeInTheDocument(),
+    expectPopupOpen: () =>
+      expect(canvas.getByTestId("popup")).toBeInTheDocument(),
+    expectPopupClosed: () =>
+      expect(canvas.queryByTestId("popup")).not.toBeInTheDocument(),
     expectOpenedCalls: (n: number) => {
       expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(n);
     },
@@ -61,11 +59,11 @@ export const CancelClose: Story = {
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const { canvas, clickCloseButton } = testUtils(canvasElement, args);
-    const drawer = canvas.getByTestId("drawer");
+    const popup = canvas.getByTestId("popup");
 
     await clickCloseButton();
     // Dialog should remain open
-    expect(drawer).toBeInTheDocument();
+    expect(popup).toBeInTheDocument();
   },
   args: {
     rootProps: {
@@ -79,11 +77,11 @@ export const CancelEscapeClose: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { expectDrawerOpen } = testUtils(canvasElement, args);
+    const { expectPopupOpen } = testUtils(canvasElement, args);
 
     await userEvent.keyboard("{Escape}");
     // Dialog should remain open
-    expectDrawerOpen();
+    expectPopupOpen();
   },
   args: {
     rootProps: {
@@ -97,13 +95,13 @@ export const EscapeClose: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { expectDrawerOpen, expectDrawerClosed } = testUtils(
+    const { expectPopupOpen, expectPopupClosed } = testUtils(
       canvasElement,
       args,
     );
-    expectDrawerOpen();
+    expectPopupOpen();
     await userEvent.keyboard("{Escape}");
-    expectDrawerClosed();
+    expectPopupClosed();
   },
   args: {
     rootProps: {
@@ -116,7 +114,7 @@ export const NestedEscapeClose: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerOpen, expectDrawerClosed } = testUtils(
+    const { canvas, expectPopupOpen, expectPopupClosed } = testUtils(
       canvasElement,
       args,
     );
@@ -124,12 +122,12 @@ export const NestedEscapeClose: Story = {
     const triggerButton = canvas.getByText("Open Dialog Nested");
     await userEvent.click(triggerButton);
 
-    expect(canvas.getByTestId("drawer-nested")).toBeInTheDocument();
+    expect(canvas.getByTestId("popup-nested")).toBeInTheDocument();
     await userEvent.keyboard("{Escape}");
-    expect(canvas.queryByTestId("drawer-nested")).not.toBeInTheDocument();
-    expectDrawerOpen();
+    expect(canvas.queryByTestId("popup-nested")).not.toBeInTheDocument();
+    expectPopupOpen();
     await userEvent.keyboard("{Escape}");
-    expectDrawerClosed();
+    expectPopupClosed();
   },
   args: {
     rootProps: {
@@ -143,15 +141,17 @@ export const OutsideClickClose: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { expectDrawerOpen, expectDrawerClosed, expectOpenedCalls } =
-      testUtils(canvasElement, args);
+    const { expectPopupOpen, expectPopupClosed, expectOpenedCalls } = testUtils(
+      canvasElement,
+      args,
+    );
 
     expectOpenedCalls(0);
-    expectDrawerOpen();
+    expectPopupOpen();
 
     await userEvent.click(document.documentElement);
 
-    expectDrawerClosed();
+    expectPopupClosed();
     expectOpenedCalls(1);
   },
   args: {
@@ -166,17 +166,17 @@ export const OutsideClickNoClose: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { expectDrawerOpen, expectOpenedCalls } = testUtils(
+    const { expectPopupOpen, expectOpenedCalls } = testUtils(
       canvasElement,
       args,
     );
 
     expectOpenedCalls(0);
-    expectDrawerOpen();
+    expectPopupOpen();
 
     await userEvent.click(document.documentElement);
 
-    expectDrawerOpen();
+    expectPopupOpen();
     expectOpenedCalls(0);
   },
   args: {
@@ -184,7 +184,7 @@ export const OutsideClickNoClose: Story = {
       defaultOpen: true,
       onOpenChange: fn(),
     },
-    drawerProps: {
+    popupProps: {
       closeOnOutsideClick: false,
     },
   },
@@ -195,19 +195,21 @@ export const OutsideClickIntentionalClose: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { expectDrawerOpen, expectDrawerClosed, expectOpenedCalls } =
-      testUtils(canvasElement, args);
+    const { expectPopupOpen, expectPopupClosed, expectOpenedCalls } = testUtils(
+      canvasElement,
+      args,
+    );
 
     expectOpenedCalls(0);
-    expectDrawerOpen();
+    expectPopupOpen();
 
     await fireEvent.pointerDown(document.documentElement);
-    expectDrawerOpen();
+    expectPopupOpen();
     expectOpenedCalls(0);
 
     await userEvent.click(document.documentElement);
 
-    expectDrawerClosed();
+    expectPopupClosed();
     expectOpenedCalls(1);
   },
   args: {
@@ -234,27 +236,27 @@ export const TrapFocusWithOutsideClick: Story = {
   },
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
+    const { canvas, expectPopupOpen, expectOpenedCalls } = testUtils(
       canvasElement,
       args,
     );
 
     expectOpenedCalls(0);
-    expectDrawerOpen();
+    expectPopupOpen();
 
-    const closeButton = canvas.getByText("Close");
-    expect(closeButton).toHaveFocus();
+    const popup = canvas.getByTestId("popup");
+    expect(popup).toHaveFocus();
 
     await fireEvent.click(document.body);
-    expectDrawerOpen();
+    expectPopupOpen();
     expectOpenedCalls(0);
-    expect(closeButton).toHaveFocus();
+    expect(popup).toHaveFocus();
 
     const counterButton = canvas.getByTestId("counter");
     await userEvent.click(counterButton);
-    expectDrawerOpen();
+    expectPopupOpen();
     expectOpenedCalls(0);
-    expect(closeButton).toHaveFocus();
+    expect(popup).toHaveFocus();
     expect(counterButton).toHaveTextContent("Counter 1");
   },
   args: {
@@ -262,7 +264,7 @@ export const TrapFocusWithOutsideClick: Story = {
       defaultOpen: true,
       onOpenChange: fn(),
     },
-    drawerProps: {
+    popupProps: {
       modal: "trap-focus",
       closeOnOutsideClick: false,
     },
@@ -274,35 +276,35 @@ export const TrapFocusWithFocusBlur: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
+    const { canvas, expectPopupOpen, expectOpenedCalls } = testUtils(
       canvasElement,
       args,
     );
 
     expectOpenedCalls(0);
-    expectDrawerOpen();
+    expectPopupOpen();
 
-    const closeButton = canvas.getByText("Close");
-    expect(closeButton).toHaveFocus();
+    const popup = canvas.getByTestId("popup");
+    expect(popup).toHaveFocus();
 
     await fireEvent.focus(document.body);
-    expectDrawerOpen();
+    expectPopupOpen();
     expectOpenedCalls(0);
-    expect(closeButton).toHaveFocus();
+    expect(popup).toHaveFocus();
 
-    await fireEvent.blur(closeButton);
-    expect(canvas.queryByTestId("drawer")).toBeInTheDocument();
-    expectDrawerOpen();
+    await fireEvent.blur(popup);
+    expect(canvas.queryByTestId("popup")).toBeInTheDocument();
+    expectPopupOpen();
 
     expectOpenedCalls(0);
-    expect(closeButton).toHaveFocus();
+    expect(popup).toHaveFocus();
   },
   args: {
     rootProps: {
       defaultOpen: true,
       onOpenChange: fn(),
     },
-    drawerProps: {
+    popupProps: {
       modal: "trap-focus",
       closeOnOutsideClick: false,
     },
@@ -314,16 +316,20 @@ export const FocusLock: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
+    const { canvas, expectPopupOpen, expectOpenedCalls } = testUtils(
       canvasElement,
       args,
     );
 
     expectOpenedCalls(0);
-    expectDrawerOpen();
+    expectPopupOpen();
 
+    const popup = canvas.getByTestId("popup");
     const closeButton = canvas.getByText("Close");
     const testButton = canvas.getByText("Focus test");
+    expect(popup).toHaveFocus();
+
+    await userEvent.tab();
     expect(closeButton).toHaveFocus();
 
     await userEvent.tab();
@@ -340,7 +346,7 @@ export const FocusLock: Story = {
       defaultOpen: true,
       onOpenChange: fn(),
     },
-    drawerProps: {
+    popupProps: {
       children: <button data-testid="next-button">Focus test</button>,
     },
   },
@@ -352,8 +358,8 @@ export const FocusTriggerOnClose: Story = {
   play: async ({ canvasElement, args }) => {
     const {
       canvas,
-      expectDrawerOpen,
-      expectDrawerClosed,
+      expectPopupOpen,
+      expectPopupClosed,
       expectOpenedCalls,
       clickCloseButton,
     } = testUtils(canvasElement, args);
@@ -361,13 +367,13 @@ export const FocusTriggerOnClose: Story = {
     expectOpenedCalls(0);
     const openButton = canvas.getByText("Open Dialog");
     await userEvent.click(openButton);
-    expectDrawerOpen();
+    expectPopupOpen();
 
     const closeButton = canvas.getByText("Close");
     expect(closeButton).toHaveFocus();
 
     await clickCloseButton();
-    expectDrawerClosed();
+    expectPopupClosed();
     expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(2);
 
     expect(openButton).toHaveFocus();
@@ -380,7 +386,7 @@ export const FocusTriggerOnClose: Story = {
 };
 
 /**
- * By default, when trigger is not the one causing Drawer to open, the autofocus will go to body
+ * By default, when trigger is not the one causing Popup to open, the autofocus will go to body
  * We override this in `onUnmountAutoFocus` callback
  */
 export const FocusTriggerOnCloseWhenDefaultOpen: Story = {
@@ -389,20 +395,20 @@ export const FocusTriggerOnCloseWhenDefaultOpen: Story = {
   play: async ({ canvasElement, args }) => {
     const {
       canvas,
-      expectDrawerOpen,
-      expectDrawerClosed,
+      expectPopupOpen,
+      expectPopupClosed,
       expectOpenedCalls,
       clickCloseButton,
     } = testUtils(canvasElement, args);
 
     expectOpenedCalls(0);
-    expectDrawerOpen();
+    expectPopupOpen();
 
     const closeButton = canvas.getByText("Close");
     expect(closeButton).toHaveFocus();
 
     await clickCloseButton();
-    expectDrawerClosed();
+    expectPopupClosed();
     expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(1);
 
     const openButton = canvas.getByText("Open Dialog");
@@ -422,20 +428,20 @@ export const FocusWithNoTrigger: Story = {
   play: async ({ canvasElement, args }) => {
     const {
       canvas,
-      expectDrawerOpen,
-      expectDrawerClosed,
+      expectPopupOpen,
+      expectPopupClosed,
       expectOpenedCalls,
       clickCloseButton,
     } = testUtils(canvasElement, args);
 
     expectOpenedCalls(0);
-    expectDrawerOpen();
+    expectPopupOpen();
 
     const closeButton = canvas.getByText("Close");
     expect(closeButton).toHaveFocus();
 
     await clickCloseButton();
-    expectDrawerClosed();
+    expectPopupClosed();
     expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(1);
 
     expect(document.body).toHaveFocus();
@@ -471,17 +477,17 @@ export const FocusPreviousFocusedItemIfNoTrigger: Story = {
   },
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerOpen, expectDrawerClosed, clickCloseButton } =
+    const { canvas, expectPopupOpen, expectPopupClosed, clickCloseButton } =
       testUtils(canvasElement, args);
 
     const customTrigger = canvas.getByText("Toggle open");
     await userEvent.click(customTrigger);
-    expect(canvas.getByTestId("drawer")).toBeInTheDocument();
-    expectDrawerOpen();
+    expect(canvas.getByTestId("popup")).toBeInTheDocument();
+    expectPopupOpen();
 
     await clickCloseButton();
 
-    expectDrawerClosed();
+    expectPopupClosed();
 
     expect(customTrigger).toHaveFocus();
   },
@@ -513,26 +519,26 @@ export const FocusClickedItemOutsideWhenClosing: Story = {
   },
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerOpen, expectDrawerClosed } = testUtils(
+    const { canvas, expectPopupOpen, expectPopupClosed } = testUtils(
       canvasElement,
       args,
     );
 
     const customTrigger = canvas.getByText("Toggle open");
     await userEvent.click(customTrigger);
-    expectDrawerOpen();
+    expectPopupOpen();
 
     const placeholderButton = canvas.getByText("Click me");
     await userEvent.click(placeholderButton);
 
-    expectDrawerClosed();
+    expectPopupClosed();
     expect(placeholderButton).toHaveFocus();
   },
   args: {
     triggerButtonProps: {
       style: { display: "none" },
     },
-    drawerProps: {
+    popupProps: {
       modal: "trap-focus",
     },
     backdrop: false,
@@ -543,17 +549,17 @@ export const FocusAutoOnOpen: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerOpen } = testUtils(canvasElement, args);
+    const { canvas, expectPopupOpen } = testUtils(canvasElement, args);
 
     const triggerButton = canvas.getByText("Open Dialog");
 
     await userEvent.click(triggerButton);
-    expectDrawerOpen();
+    expectPopupOpen();
 
     expect(canvas.getByText("Autofocus")).toHaveFocus();
   },
   args: {
-    drawerProps: {
+    popupProps: {
       children: <button data-testid="autofocus-anchor">Autofocus</button>,
       onOpenAutoFocus: () => {
         return document.querySelector(
@@ -575,19 +581,19 @@ export const FocusAutoOnClose: Story = {
   },
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerOpen, expectDrawerClosed } = testUtils(
+    const { canvas, expectPopupOpen, expectPopupClosed } = testUtils(
       canvasElement,
       args,
     );
 
-    expectDrawerOpen();
+    expectPopupOpen();
     await userEvent.keyboard("{Escape}");
-    expectDrawerClosed();
+    expectPopupClosed();
     expect(canvas.getByText("Autofocus")).toHaveFocus();
   },
   args: {
     rootProps: { defaultOpen: true },
-    drawerProps: {
+    popupProps: {
       children: <button data-testid="autofocus-anchor">Autofocus</button>,
       onCloseAutoFocus: () => {
         return document.querySelector(
@@ -608,7 +614,7 @@ export const BackdropRenderOnlyRoot: Story = {
     const triggerButton = canvas.getByText("Open Dialog Nested");
     await userEvent.click(triggerButton);
 
-    expect(canvas.getByTestId("drawer-nested")).toBeInTheDocument();
+    expect(canvas.getByTestId("popup-nested")).toBeInTheDocument();
     expect(canvas.queryByTestId("backdrop-nested")).not.toBeInTheDocument();
   },
   args: {
@@ -623,7 +629,7 @@ export const BackdropRenderOnlyRoot: Story = {
 export const TriggerOpenOnClick: Story = {
   render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerOpen, expectOpenedCalls } = testUtils(
+    const { canvas, expectPopupOpen, expectOpenedCalls } = testUtils(
       canvasElement,
       args,
     );
@@ -633,7 +639,7 @@ export const TriggerOpenOnClick: Story = {
 
     await userEvent.click(triggerButton);
     // Dialog should remain open
-    expectDrawerOpen();
+    expectPopupOpen();
     expectOpenedCalls(1);
   },
   args: {
@@ -646,7 +652,7 @@ export const TriggerOpenOnClick: Story = {
 export const TriggerDisabled: Story = {
   render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerClosed, expectOpenedCalls } = testUtils(
+    const { canvas, expectPopupClosed, expectOpenedCalls } = testUtils(
       canvasElement,
       args,
     );
@@ -655,7 +661,7 @@ export const TriggerDisabled: Story = {
 
     const triggerButton = canvas.getByText("Open Dialog");
     await userEvent.click(triggerButton);
-    expectDrawerClosed();
+    expectPopupClosed();
 
     expectOpenedCalls(0);
   },
@@ -670,7 +676,7 @@ export const TriggerDisabled: Story = {
 export const TriggerDisabledSlot: Story = {
   render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectDrawerClosed, expectOpenedCalls } = testUtils(
+    const { canvas, expectPopupClosed, expectOpenedCalls } = testUtils(
       canvasElement,
       args,
     );
@@ -679,7 +685,7 @@ export const TriggerDisabledSlot: Story = {
     const triggerButton = canvas.getByText("Open Dialog");
     await userEvent.click(triggerButton);
 
-    expectDrawerClosed();
+    expectPopupClosed();
     expectOpenedCalls(0);
   },
   args: {
@@ -773,7 +779,7 @@ export const CloseButtonDisabledSlot: Story = {
 /* ------------------------------- Test setup ------------------------------- */
 type BaseDialogProps = {
   rootProps?: Omit<DialogProps, "children"> & { children?: React.ReactNode };
-  drawerProps?: Omit<DialogDrawerProps, "children"> & {
+  popupProps?: Omit<DialogPopupProps, "children"> & {
     children?: React.ReactNode;
   };
   closeButtonProps?: Omit<DialogCloseProps, "children"> & {
@@ -792,7 +798,7 @@ function BaseDialogComponent({
   closeButtonProps,
   triggerButtonProps,
   rootProps,
-  drawerProps,
+  popupProps,
   nested,
   backdrop = true,
 }: BaseDialogProps) {
@@ -805,11 +811,7 @@ function BaseDialogComponent({
         {backdrop && (
           <DialogBackdrop className="backdropCSS" data-testid="backdrop" />
         )}
-        <DialogDrawer
-          className="drawerCSS"
-          data-testid="drawer"
-          {...drawerProps}
-        >
+        <DialogPopup className="popupCSS" data-testid="popup" {...popupProps}>
           {nested ? (
             <Dialog>
               <DialogTrigger data-testid="trigger-nested">
@@ -820,22 +822,22 @@ function BaseDialogComponent({
                   className="backdropCSS"
                   data-testid="backdrop-nested"
                 />
-                <DialogDrawer className="drawerCSS" data-testid="drawer-nested">
-                  Drawer content Nested
+                <DialogPopup className="popupCSS" data-testid="popup-nested">
+                  Popup content Nested
                   <DialogClose data-testid="close-nested">
                     Close Nested
                   </DialogClose>
-                </DialogDrawer>
+                </DialogPopup>
               </DialogPortal>
             </Dialog>
           ) : (
-            "Drawer content"
+            "Popup content"
           )}
           <DialogClose data-testid="close" {...closeButtonProps}>
             {closeButtonProps?.children ?? "Close"}
           </DialogClose>
-          {drawerProps?.children}
-        </DialogDrawer>
+          {popupProps?.children}
+        </DialogPopup>
       </DialogPortal>
     </Dialog>
   );
@@ -858,47 +860,3 @@ function withoutAnimations() {
     globalThis.AKSEL_ANIMATIONS_DISABLED = false;
   };
 }
-
-const BackDropStyle = (
-  <style>
-    {`
-  .backdropCSS {
-    position: fixed;
-    inset: 0;
-    background-color: red;
-    opacity: 0.2;
-    transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
-
-
-    &[data-entering-style], &[data-exiting-style] {
-      opacity: 0;
-    }
-    }
-  `}
-  </style>
-);
-
-const DrawerStyle = (
-  <style>
-    {`
-  .drawerCSS {
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right:0;
-    width: 24rem;
-    max-width: 100vw;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    background-color: var(--ax-bg-neutral-soft);
-    transition: all 300ms;
-    padding: 4rem;
-
-    &[data-entering-style], &[data-exiting-style] {
-      transform: translateX(100%);
-    }
-  }
-  `}
-  </style>
-);
