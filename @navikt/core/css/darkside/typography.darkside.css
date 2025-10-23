@@ -141,7 +141,7 @@
 .aksel-body-short--large {
   font-size: var(--ax-font-size-xlarge);
   letter-spacing: -0.0013em;
-  line-height: var(--ax-font-line-height-large);
+  line-height: var(--ax-font-line-height-xlarge);
 }
 
 .aksel-body-short--large.aksel-typo--spacing {
