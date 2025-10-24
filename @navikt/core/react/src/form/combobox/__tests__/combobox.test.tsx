@@ -1,5 +1,4 @@
-/* eslint-disable testing-library/no-unnecessary-act -- https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning */
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { describe, expect, test, vi } from "vitest";
@@ -40,34 +39,20 @@ describe("Render combobox", () => {
     test("Should be able to search, select and remove selections", async () => {
       render(<App isMultiSelect options={options} />);
 
-      await act(async () => {
-        await userEvent.click(
-          screen.getByRole("combobox", {
-            name: "Hva er dine favorittfrukter?",
-          }),
-        );
+      const input = screen.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
       });
-      await act(async () => {
-        await userEvent.type(
-          screen.getByRole("combobox", {
-            name: "Hva er dine favorittfrukter?",
-          }),
-          "apple",
-        );
-      });
-      await act(async () => {
-        await userEvent.click(
-          await screen.findByRole("option", { name: "apple" }),
-        );
-      });
+      await userEvent.click(input);
+      await userEvent.type(input, "apple");
+      await userEvent.click(
+        await screen.findByRole("option", { name: "apple" }),
+      );
       expect(
         await screen.findByRole("option", { name: "apple", selected: true }),
       ).toBeInTheDocument();
-      await act(async () => {
-        await userEvent.click(
-          await screen.findByRole("button", { name: "apple slett" }),
-        );
-      });
+      await userEvent.click(
+        await screen.findByRole("button", { name: "apple slett" }),
+      );
     });
   });
 
@@ -81,24 +66,14 @@ describe("Render combobox", () => {
     test("Should not select previous focused element when closes", async () => {
       render(<App options={options} />);
 
-      await act(async () => {
-        await userEvent.click(
-          screen.getByRole("combobox", {
-            name: "Hva er dine favorittfrukter?",
-          }),
-        );
+      const input = screen.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
       });
-      await act(async () => {
-        await userEvent.type(
-          screen.getByRole("combobox", {
-            name: "Hva er dine favorittfrukter?",
-          }),
-          "ban",
-        );
-        await userEvent.keyboard("{ArrowDown}");
-        await userEvent.keyboard("{ArrowUp}");
-        await userEvent.keyboard("{Enter}");
-      });
+      await userEvent.click(input);
+      await userEvent.type(input, "ban");
+      await userEvent.keyboard("{ArrowDown}");
+      await userEvent.keyboard("{ArrowUp}");
+      await userEvent.keyboard("{Enter}");
 
       expect(screen.queryByRole("button", { name: "banana slett" })).toBeNull();
     });
@@ -106,24 +81,14 @@ describe("Render combobox", () => {
     test("Should reset list when resetting input (ESC)", async () => {
       render(<App options={options} />);
 
-      await act(async () => {
-        await userEvent.click(
-          screen.getByRole("combobox", {
-            name: "Hva er dine favorittfrukter?",
-          }),
-        );
+      const input = screen.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
       });
-      await act(async () => {
-        await userEvent.type(
-          screen.getByRole("combobox", {
-            name: "Hva er dine favorittfrukter?",
-          }),
-          "apple",
-        );
-        await userEvent.keyboard("{ArrowDown}");
-        await userEvent.keyboard("{Escape}");
-        await userEvent.keyboard("{ArrowDown}");
-      });
+      await userEvent.click(input);
+      await userEvent.type(input, "apple");
+      await userEvent.keyboard("{ArrowDown}");
+      await userEvent.keyboard("{Escape}");
+      await userEvent.keyboard("{ArrowDown}");
 
       expect(
         await screen.findByRole("option", { name: "banana" }),
@@ -145,13 +110,11 @@ describe("Render combobox", () => {
       );
 
       expect(screen.getByRole("combobox")).toBeInTheDocument();
-      const bananaOption = screen.getByRole("option", {
+      const option = screen.getByRole("option", {
         name: "Hjelpemidler [HJE]",
         selected: false,
       });
-      await act(async () => {
-        await userEvent.click(bananaOption);
-      });
+      await userEvent.click(option);
       expect(onToggleSelected).toHaveBeenCalledWith("HJE", true, false);
       expect(
         screen.getByRole("option", {
@@ -175,10 +138,8 @@ describe("Render combobox", () => {
       const combobox = screen.getByRole("combobox");
       expect(combobox).toBeInTheDocument();
 
-      await act(async () => {
-        await userEvent.click(combobox);
-        await userEvent.type(combobox, "Lemon");
-      });
+      await userEvent.click(combobox);
+      await userEvent.type(combobox, "Lemon");
       expect(onChange).toHaveBeenNthCalledWith(1, "L");
       expect(onChange).toHaveBeenNthCalledWith(2, "Le");
       expect(onChange).toHaveBeenNthCalledWith(3, "Lem");
@@ -205,13 +166,11 @@ describe("Render combobox", () => {
       const combobox = screen.getByRole("combobox");
       expect(combobox).toBeInTheDocument();
 
-      await act(async () => {
-        await userEvent.click(combobox);
-        await userEvent.type(combobox, "Syke");
-        await userEvent.keyboard("{ArrowRight}");
-        await userEvent.keyboard("{ArrowDown}");
-        await userEvent.keyboard("{Enter}");
-      });
+      await userEvent.click(combobox);
+      await userEvent.type(combobox, "Syke");
+      await userEvent.keyboard("{ArrowRight}");
+      await userEvent.keyboard("{ArrowDown}");
+      await userEvent.keyboard("{Enter}");
       expect(onChange).toHaveBeenNthCalledWith(1, "S");
       expect(onChange).toHaveBeenNthCalledWith(2, "Sy");
       expect(onChange).toHaveBeenNthCalledWith(3, "Syk");
@@ -228,18 +187,14 @@ describe("Render combobox", () => {
   });
 
   describe("search", () => {
-    test("should find matched anywhere in the label", async () => {
+    test("should find matches anywhere in the label", async () => {
       render(<App options={options} />);
 
       const combobox = screen.getByRole("combobox", {
         name: "Hva er dine favorittfrukter?",
       });
-
-      await act(async () => {
-        await userEvent.click(combobox);
-
-        await userEvent.type(combobox, "p");
-      });
+      await userEvent.click(combobox);
+      await userEvent.type(combobox, "p");
 
       const searchHits = [
         "apple",
@@ -273,18 +228,12 @@ describe("Render combobox", () => {
       const combobox = screen.getByRole("combobox", {
         name: "Hva er dine favorittfrukter?",
       });
-
-      await act(async () => {
-        await userEvent.click(combobox);
-
-        await userEvent.type(combobox, "p");
-      });
+      await userEvent.click(combobox);
+      await userEvent.type(combobox, "p");
 
       expect(combobox.getAttribute("value")).toBe("passion fruit");
 
-      await act(async () => {
-        await userEvent.keyboard("{Enter}");
-      });
+      await userEvent.keyboard("{Enter}");
 
       expect(onToggleSelected).toHaveBeenCalledWith(
         "passion fruit",
@@ -310,20 +259,14 @@ describe("Render combobox", () => {
       const combobox = screen.getByRole("combobox", {
         name: "Hva er dine favorittfrukter?",
       });
-
-      await act(async () => {
-        await userEvent.click(combobox);
-
-        await userEvent.type(combobox, "p");
-      });
+      await userEvent.click(combobox);
+      await userEvent.type(combobox, "p");
 
       expect(combobox.getAttribute("value")).toBe(
         "passion fruit (passion fruit)",
       );
 
-      await act(async () => {
-        await userEvent.keyboard("{Enter}");
-      });
+      await userEvent.keyboard("{Enter}");
 
       expect(onToggleSelected).toHaveBeenCalledWith(
         "passion fruit",
@@ -342,9 +285,7 @@ describe("Render combobox", () => {
       });
 
       const pressKey = async (key: string) => {
-        await act(async () => {
-          await userEvent.keyboard(`{${key}}`);
-        });
+        await userEvent.keyboard(`{${key}}`);
       };
 
       const hasVirtualFocus = (option: string) =>
@@ -352,9 +293,7 @@ describe("Render combobox", () => {
           screen.getByRole("option", { name: option }).id,
         );
 
-      await act(async () => {
-        await userEvent.click(combobox);
-      });
+      await userEvent.click(combobox);
 
       await pressKey("ArrowDown");
       hasVirtualFocus("apple");
