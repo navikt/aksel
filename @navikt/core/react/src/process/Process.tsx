@@ -197,6 +197,11 @@ interface ProcessEventProps extends React.HTMLAttributes<HTMLLIElement> {
    * @default "uncompleted"
    */
   status?: "active" | "completed" | "uncompleted";
+  /**
+   * Changes Process line placement
+   * @default "auto"
+   */
+  connectorPlacement?: "auto" | "start" | "end" | "both";
 }
 
 export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
@@ -210,6 +215,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
       className,
       id,
       status = "uncompleted",
+      connectorPlacement = "auto",
       ...restProps
     }: ProcessEventProps,
     forwardedRef,
@@ -236,7 +242,11 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
         data-dot={bullet === undefined}
         data-process-event=""
         data-status={status}
+        data-connector={connectorPlacement}
       >
+        {(connectorPlacement === "both" || connectorPlacement === "start") && (
+          <ProcessLine position="start" />
+        )}
         <div className={cn("navds-process__item")}>
           <ProcessBullet>{bullet}</ProcessBullet>
 
@@ -256,7 +266,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
             )}
           </div>
         </div>
-        <ProcessLine />
+        {connectorPlacement !== "start" && <ProcessLine position="end" />}
       </li>
     );
   },
@@ -346,10 +356,16 @@ const ProcessBullet = ({ children }: ProcessBulletProps) => {
 };
 
 /* ------------------------------ Process Line ------------------------------ */
-const ProcessLine = () => {
+
+type ProcessLineProps = {
+  position?: "start" | "end";
+};
+const ProcessLine = ({ position }: ProcessLineProps) => {
   const { cn } = useRenameCSS();
 
-  return <span className={cn("navds-process__line")} />;
+  return (
+    <span className={cn("navds-process__line")} data-position={position} />
+  );
 };
 
 /* -------------------------- Process exports ------------------------- */
