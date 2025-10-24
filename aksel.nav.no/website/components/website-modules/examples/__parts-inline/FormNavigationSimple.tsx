@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, PaperplaneIcon } from "@navikt/aksel-icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button, HGrid, Hide, Show } from "@navikt/ds-react";
 
 const FormNavigationSimple = () => (
@@ -10,10 +10,10 @@ const FormNavigationSimple = () => (
     <Hide above="sm" asChild>
       <Button
         variant="primary"
-        icon={<PaperplaneIcon aria-hidden />}
+        icon={<ArrowRightIcon aria-hidden />}
         iconPosition="right"
       >
-        Send søknad
+        Neste steg
       </Button>
     </Hide>
     <Button
@@ -26,10 +26,10 @@ const FormNavigationSimple = () => (
     <Show above="sm" asChild>
       <Button
         variant="primary"
-        icon={<PaperplaneIcon aria-hidden />}
+        icon={<ArrowRightIcon aria-hidden />}
         iconPosition="right"
       >
-        Send søknad
+        Neste steg
       </Button>
     </Show>
   </HGrid>
