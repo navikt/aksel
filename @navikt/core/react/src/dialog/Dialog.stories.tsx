@@ -309,7 +309,7 @@ export const NestedDrawers: Story = {
   render: () => (
     <div>
       <button onClick={() => alert("after")}>Before dialog</button>
-      <Dialog>
+      <Dialog defaultOpen>
         <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogPortal>
           <DialogBackdrop className="backdropCSS" />
@@ -332,7 +332,7 @@ export const NestedDrawers: Story = {
               of the dialog. Here is where the main content lives
             </DialogBody>
             <DialogFooter>
-              <Dialog>
+              <Dialog defaultOpen>
                 <DialogTrigger asChild>
                   <Button>Open nested</Button>
                 </DialogTrigger>
@@ -340,10 +340,7 @@ export const NestedDrawers: Story = {
                   <DialogBackdrop className="backdropCSS" />
                   <DialogPopup className="dialogCSS">
                     <DialogHeader>
-                      <DialogTitle id="ha">Dialog Title</DialogTitle>
-                      <DialogDescription>
-                        This is a description of the dialog.
-                      </DialogDescription>
+                      <DialogTitle id="ha">Dialog NESTED</DialogTitle>
                     </DialogHeader>
                     <DialogBody>
                       This is the body of the dialog. Here is where the main
