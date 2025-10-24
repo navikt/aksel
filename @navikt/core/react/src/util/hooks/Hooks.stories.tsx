@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Popover } from "../../popover";
 import { useScrollLock } from "./useScrollLock";
 
 export default {
@@ -73,8 +74,51 @@ export const UseScrollLockResizeTest: StoryObj = {
   },
 };
 
+export const ScrollLockBodyStyleTest: StoryObj = {
+  render: ScrollLockComponent,
+  decorators: [
+    (story) => (
+      <div
+        style={{
+          height: "200vh",
+          width: "200vw",
+          background: "var(--ax-bg-softA)",
+        }}
+      >
+        <h2>200vh and 200vw container</h2>
+        <div>{story()}</div>
+      </div>
+    ),
+    (story) => {
+      useEffect(() => {
+        document.body.style.marginBlock = "6rem";
+      }, []);
+
+      return (
+        <>
+          <div
+            style={{
+              top: "4rem",
+              position: "absolute",
+              width: "100vw",
+              height: "4rem",
+              background: "red",
+            }}
+          />
+          {story()}
+        </>
+      );
+    },
+  ],
+  parameters: {
+    layout: "padded",
+  },
+};
+
 function ScrollLockComponent() {
   const [enabled, setEnabled] = useState(false);
+
+  const [ref, setRef] = useState<HTMLElement | null>(null);
 
   useScrollLock({
     enabled,
@@ -84,9 +128,27 @@ function ScrollLockComponent() {
 
   return (
     <div>
-      <div>
+      <div style={{ position: "relative" }}>
         <button onClick={() => setEnabled(true)}>Enable</button>
-        <button onClick={() => setEnabled(false)}>Disable</button>
+        <button onClick={() => setEnabled(false)} ref={setRef}>
+          Disable
+        </button>
+
+        <Popover
+          open
+          anchorEl={ref}
+          onClose={() => null}
+          style={{ maxWidth: 100 }}
+        >
+          lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do lorem ipsum
+          dolor sit amet, consectetur adipiscing elit, sed do lorem ipsum dolor
+          sit amet, consectetur adipiscing elit, sed do lorem ipsum dolor sit
+          amet, consectetur adipiscing elit, sed do lorem ipsum dolor sit amet,
+          consectetur adipiscing elit, sed do lorem ipsum dolor sit amet,
+          consectetur adipiscing elit, sed do lorem ipsum dolor sit amet,
+          consectetur adipiscing elit, sed do
+        </Popover>
       </div>
     </div>
   );
