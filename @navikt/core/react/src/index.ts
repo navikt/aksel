@@ -164,6 +164,14 @@ export {
   type LinkCardImageProps,
 } from "./link-card";
 export {
+  GlobalAlert,
+  type GlobalAlertProps,
+  type GlobalAlertHeaderProps,
+  type GlobalAlertTitleProps,
+  type GlobalAlertContentProps,
+  type GlobalAlertCloseProps,
+} from "./alert/global-alert";
+export {
   InfoCard,
   type InfoCardProps,
   type InfoCardHeaderProps,
