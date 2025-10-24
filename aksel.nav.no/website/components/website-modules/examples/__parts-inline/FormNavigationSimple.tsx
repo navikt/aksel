@@ -17,6 +17,7 @@ const FormNavigationSimple = () => (
       </Button>
     </Hide>
     <Button
+      type="button"
       variant="secondary"
       icon={<ArrowLeftIcon aria-hidden />}
       iconPosition="left"
