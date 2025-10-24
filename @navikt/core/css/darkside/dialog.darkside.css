@@ -21,15 +21,17 @@
   }
 
   &[data-position="center"] {
+    --__axc-dialog-center-margin: 3rem;
+
     left: 0;
     right: 0;
     margin-inline: auto;
-    top: 10%;
-    max-width: calc(100dvw - 3rem);
-    max-height: calc(100dvh - 3rem);
-    margin-top: -2rem;
+    top: 0;
     outline: 1px solid var(--ax-border-neutral-subtle);
-    margin-block: auto;
+    max-width: 100dvw;
+    max-height: 100dvh;
+
+    /* margin-block: auto; */
 
     &[data-entering-style] {
       transform: translateY(10%) scale(1.04);
@@ -37,6 +39,20 @@
 
     &[data-exiting-style] {
       transform: translateY(-10%) scale(0.96);
+    }
+
+    @media screen and (min-width: 480px) {
+      max-width: calc(100dvw - 3rem);
+    }
+
+    /* TODO: Clips to bottom, now. Needs to keep bottom/margin-bottom until mobile  */
+    @media screen and (min-height: 480px) {
+      max-height: calc(90dvh - var(--__axc-dialog-center-margin));
+      margin-block: max(var(--__axc-dialog-center-margin), 10dvh) auto;
+    }
+
+    @media screen and (max-width: 479px) and (max-height: 479px) {
+      border-radius: 0;
     }
   }
 

@@ -64,15 +64,7 @@ export const Default = {
               </DialogDescription>
             </DialogHeader>
             <DialogBody>
-              This is the body of the dialog. Here is where the main content
-              lives. This is the body of the dialog. Here is where the main
-              content lives This is the body of the dialog. Here is where the
-              main content lives This is the body of the dialog. Here is where
-              the main content lives This lives. This is the body of the dialog.
-              Here is where the main content lives This is the body of the
-              dialog. Here is where the main content lives This is the body of
-              the dialog. Here is where the main content lives This is the body
-              of the dialog. Here is where the main content lives
+              <ScrollContent />
             </DialogBody>
             <DialogFooter>
               <DialogClose asChild>
@@ -158,7 +150,7 @@ export const ComplexDrawer: Story = {
             <DialogPopup
               className="dialogCSS"
               aria-labelledby="ha"
-              position="center"
+              position="right"
             >
               <DialogHeader>
                 <DialogTitle id="ha">Dialog Title</DialogTitle>
@@ -532,3 +524,29 @@ export const IgnoreOutsideClick: Story = {
     </div>
   ),
 };
+
+const content = `This is the body of the dialog. Here is where the main content
+              lives. This is the body of the dialog. Here is where the main
+              content lives This is the body of the dialog. Here is where the
+              main content lives This is the body of the dialog. Here is where
+              the main content lives This lives. This is the body of the dialog.
+              Here is where the main content lives This is the body of the
+              dialog. Here is where the main content lives This is the body of
+              the dialog. Here is where the main content lives This is the body
+              of the dialog. Here is where the main content lives`;
+
+function ScrollContent() {
+  const [showScroll, setShowScroll] = useState(false);
+  return (
+    <div>
+      <button onClick={() => setShowScroll((x) => !x)}>
+        Show more content
+      </button>
+      {content}
+      {showScroll && content}
+      {showScroll && content}
+      {showScroll && content}
+      {showScroll && content}
+    </div>
+  );
+}

@@ -289,7 +289,7 @@ function translateWidth(
 
   switch (width) {
     case "small":
-      return "400px";
+      return "480px";
     case "medium":
       return "640px";
     case "large":
