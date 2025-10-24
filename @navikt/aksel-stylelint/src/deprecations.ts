@@ -80,4 +80,9 @@ export const deprecations: DeprecatedList = [
     classes: ["navds-switch__checkmark"],
     message: "Removed in v7.24.0",
   },
+  {
+    classes: ["navds-modal__document-body"],
+    message:
+      "Will be removed in next major v8. We recommend not using this class anymore.",
+  },
 ];

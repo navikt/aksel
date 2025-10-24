@@ -1,7 +1,3 @@
-.aksel-modal__document-body {
-  overflow: hidden;
-}
-
 .aksel-modal {
   --__axc-modal-bg: var(--ax-bg-raised);
 
