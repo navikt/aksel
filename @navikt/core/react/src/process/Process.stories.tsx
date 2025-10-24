@@ -621,6 +621,9 @@ export const Chromatic = renderStoriesForChromatic({
   HideStatusText,
   Translation,
   InteractiveDemo,
+  ConnectorPlacement,
+  ConnectorStates,
+  ConnectorDot,
 });
 
 function ContentOne() {
