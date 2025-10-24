@@ -84,7 +84,7 @@ function preventScrollStandard(referenceElement: Element | null) {
     const scrollbarHeight = Math.max(0, win.innerHeight - html.clientHeight);
 
     /*
-     * Avoid shift due to the default <body> margin. This does cause elements to be clipped
+     * Avoid shift due to <body> margin. NB: This does cause elements to be clipped
      * with whitespace.
      */
     const marginY =
