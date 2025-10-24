@@ -42,23 +42,65 @@ export default meta;
 
 type Story = StoryObj<typeof Dialog>;
 
-export const Default: Story = {
-  render: () => (
+export const Default = {
+  render: (args) => (
     <div>
       <button onClick={() => alert("after")}>Before dialog</button>
-      <Dialog>
+      <Dialog defaultOpen={args.defaultOpen}>
         <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogPortal>
           <DialogBackdrop className="backdropCSS" />
-          <DialogPopup className="dialogCSS" aria-labelledby="ha">
-            <h1 id="ha">Heading text</h1>
-            <DialogClose>Close</DialogClose>
+          <DialogPopup
+            className="dialogCSS"
+            aria-labelledby="ha"
+            position={args.position}
+            width={args.width}
+            height={args.height}
+          >
+            <DialogHeader>
+              <DialogTitle id="ha">Dialog Title</DialogTitle>
+              <DialogDescription>
+                This is a description of the dialog.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogBody>
+              This is the body of the dialog. Here is where the main content
+              lives. This is the body of the dialog. Here is where the main
+              content lives This is the body of the dialog. Here is where the
+              main content lives This is the body of the dialog. Here is where
+              the main content lives This lives. This is the body of the dialog.
+              Here is where the main content lives This is the body of the
+              dialog. Here is where the main content lives This is the body of
+              the dialog. Here is where the main content lives This is the body
+              of the dialog. Here is where the main content lives
+            </DialogBody>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button>Close</Button>
+              </DialogClose>
+            </DialogFooter>
           </DialogPopup>
         </DialogPortal>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog</button>
     </div>
   ),
+  argTypes: {
+    width: {
+      options: ["large", "medium", "small", undefined],
+      control: { type: "radio" },
+    },
+    height: {
+      control: { type: "text" },
+    },
+    position: {
+      options: ["center", "bottom", "left", "right", "fullscreen"],
+      control: { type: "radio" },
+    },
+  },
+  args: {
+    defaultOpen: true,
+  },
 };
 
 export const AllSubComponents: Story = {
@@ -210,8 +252,28 @@ export const Position: Story = {
               aria-labelledby="ha"
               position={position}
             >
-              <h1 id="ha">Heading text</h1>
-              <DialogClose>Close</DialogClose>
+              <DialogHeader>
+                <DialogTitle id="ha">Dialog Title</DialogTitle>
+                <DialogDescription>
+                  This is a description of the dialog.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogBody>
+                This is the body of the dialog. Here is where the main content
+                lives. This is the body of the dialog. Here is where the main
+                content lives This is the body of the dialog. Here is where the
+                main content lives This is the body of the dialog. Here is where
+                the main content lives This lives. This is the body of the
+                dialog. Here is where the main content lives This is the body of
+                the dialog. Here is where the main content lives This is the
+                body of the dialog. Here is where the main content lives This is
+                the body of the dialog. Here is where the main content lives
+              </DialogBody>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button>Close</Button>
+                </DialogClose>
+              </DialogFooter>
             </DialogPopup>
           </DialogPortal>
         </Dialog>

@@ -1,3 +1,4 @@
+/* TODO: Switching from center to any other size now animates wierd */
 .aksel-dialog__popup {
   --__axc-dialog-transform: ;
 
@@ -44,7 +45,7 @@
   &[data-position="right"],
   &[data-position="left"] {
     height: 100dvh;
-    max-width: calc(100vw - 3rem);
+    max-width: calc(100vw - 48px);
     top: 0;
     bottom: 0;
     width: 640px;

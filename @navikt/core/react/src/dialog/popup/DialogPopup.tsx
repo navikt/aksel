@@ -1,4 +1,5 @@
 import React, { forwardRef, useRef } from "react";
+import { BoxNew, type BoxNewProps } from "../../layout/box";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
 import { useRenameCSS } from "../../theme/Theme";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
@@ -44,6 +45,15 @@ interface DialogPopupProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "center"
    */
   position?: DialogPosition;
+  /**
+   * CSS `width`
+   * @default "medium"
+   */
+  width?: BoxNewProps["width"] | "small" | "medium" | "large";
+  /**
+   * CSS `height`
+   */
+  height?: BoxNewProps["height"] | "small" | "medium" | "large";
 }
 
 /**
@@ -67,6 +77,8 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       onOpenAutoFocus,
       onCloseAutoFocus,
       position = "center",
+      width = "medium",
+      height,
       ...restProps
     },
     forwardedRef,
@@ -248,22 +260,59 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
               }
             }}
           >
-            <div
+            <BoxNew
               {...restProps}
               ref={mergedRefs}
               className={cn(className, "navds-dialog__popup")}
               role="dialog"
               {...transitionAttrb}
               {...positionDataAttributes}
+              width={translateWidth(width, position)}
+              height={translateHeight(height, position)}
             >
               {children}
-            </div>
+            </BoxNew>
           </DismissableLayer>
         </FocusBoundary>
       </FocusGuards>
     );
   },
 );
+
+function translateWidth(
+  width: DialogPopupProps["width"],
+  position: DialogPosition,
+): BoxNewProps["width"] {
+  if (position === "fullscreen") {
+    return undefined;
+  }
+
+  switch (width) {
+    case "small":
+      return "400px";
+    case "medium":
+      return "640px";
+    case "large":
+      return "800px";
+    default:
+      return width;
+  }
+}
+
+function translateHeight(
+  height: DialogPopupProps["height"],
+  position: DialogPosition,
+): BoxNewProps["width"] {
+  if (
+    position === "fullscreen" ||
+    position === "left" ||
+    position === "right"
+  ) {
+    return undefined;
+  }
+
+  return height;
+}
 
 export { DialogPopup };
 export type { DialogPopupProps };
