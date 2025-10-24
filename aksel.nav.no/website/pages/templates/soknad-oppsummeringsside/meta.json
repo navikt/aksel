@@ -2,7 +2,7 @@
   "version": 4,
   "changelog": [
     {
-      "description": "Oppdatert rekkefølge på 'Send inn' og 'Forrige steg' knapper i bunn av siden på mobil. 'Send inn' knappen kommer nå først på mobil.",
+      "description": "'Send søknad'-knappen kommer nå før 'Forrige steg'-knappen på mobil.",
       "date": "17.10.2025",
       "version": 4
     },
