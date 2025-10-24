@@ -15,7 +15,7 @@ import type { BaseAlertContextProps } from "../root/BaseAlertRoot.context";
 
 function baseAlertVariantToDataColor(
   variant: BaseAlertContextProps["variant"],
-): AkselColor | undefined {
+): AkselColor {
   switch (variant) {
     case "announcement":
       return "neutral";

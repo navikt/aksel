@@ -10,7 +10,7 @@ type BaseAlertContextProps = {
 
 const [BaseAlertProvider, useBaseAlert] = createContext<BaseAlertContextProps>({
   name: "BaseAlert",
-  errorMessage: "useBaseAlert must be used within an BaseAlertProvider",
+  errorMessage: "useBaseAlert must be used within a BaseAlertProvider",
 });
 
 export { BaseAlertProvider, useBaseAlert };

@@ -51,6 +51,7 @@ export const Default: Story = {
     variant: "success",
     type: "strong",
     statusType: "alert",
+    global: false,
   },
   argTypes: {
     size: {
@@ -59,7 +60,15 @@ export const Default: Story = {
     },
     variant: {
       control: { type: "select" },
-      options: ["error", "warning", "success", "success"],
+      options: ["error", "warning", "success", "announcement"],
+    },
+    type: {
+      control: { type: "radio" },
+      options: ["strong", "moderate"],
+    },
+    statusType: {
+      control: { type: "radio" },
+      options: ["alert", "message"],
     },
   },
 };
@@ -203,7 +212,8 @@ export const WrappingTitle: Story = {
 };
 
 export const Chromatic = renderStoriesForChromatic({
-  Default,
+  Strong,
+  Moderate,
   SizeSmall,
   OnlyHeader,
   CloseButton,
@@ -211,7 +221,8 @@ export const Chromatic = renderStoriesForChromatic({
 });
 
 export const ChromaticLight = renderStoriesForChromatic({
-  Default,
+  Strong,
+  Moderate,
   SizeSmall,
   OnlyHeader,
   CloseButton,
@@ -220,7 +231,8 @@ export const ChromaticLight = renderStoriesForChromatic({
 ChromaticLight.globals = { theme: "light", mode: "darkside" };
 
 export const ChromaticDark = renderStoriesForChromatic({
-  Default,
+  Strong,
+  Moderate,
   SizeSmall,
   OnlyHeader,
   CloseButton,

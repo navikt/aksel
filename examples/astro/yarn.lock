@@ -1005,34 +1005,34 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:./../../@navikt/aksel-icons::locator=irregular-iron%40workspace%3A.":
-  version: 7.32.1
-  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=995939&locator=irregular-iron%40workspace%3A."
-  checksum: 10/d24f0ba56709abf5dd041f0c5b94360853b0c0d37fada24456bcaf4fcf620787d9e9aa7c90e1ab25af20e8f9030df7da735df8005e0e851e13993b8198960e55
+  version: 7.32.3
+  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=754341&locator=irregular-iron%40workspace%3A."
+  checksum: 10/181edfa62efd7f124a38073ffe2853d9b5f75b45ab96df07ab12281d3f99f3626b4398df95965450a941a66e6c0aeb62b73fd2d26d7c6e335a1335b812a2e0a5
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.32.1":
-  version: 7.32.1
-  resolution: "@navikt/aksel-icons@npm:7.32.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.32.1%2F02c25e681fa3b7be8d79a00fee867e408baa22ac"
-  checksum: 10/b612636dab56535d2105c711f0266d12b4554e02e91a439a58755226db7b1a3ed32aef145665e5540da1fa7c0344e1d692e2000073cb3bc69a3bc4923592347e
+"@navikt/aksel-icons@npm:^7.32.3":
+  version: 7.32.3
+  resolution: "@navikt/aksel-icons@npm:7.32.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.32.3%2Fcae4a9d7f509452709ad48644ad5a915daf2a0ba"
+  checksum: 10/53152e8f472c2cb18642dc21d3172b58a6503d69b18cfbb8398fee46eb8d59861386990727495b3eda86dc460649538dfb9d1daea9a022bb98420eff04911a6b
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=irregular-iron%40workspace%3A.":
-  version: 7.32.1
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=e25f34&locator=irregular-iron%40workspace%3A."
-  checksum: 10/1ad73bc2ac91b87964ff966c4c1ed588c79c6dd422ddc431e9a35db6cb0784b3c49211b027eff57e74efadf2cdfcbe5e2d51fb3dca02930c6f8a1732bca6027c
+  version: 7.32.3
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=05e6a8&locator=irregular-iron%40workspace%3A."
+  checksum: 10/0529020c8d72bdb86dc6697e9bd7a0c09d0babf07721a752fa9f20c6535aee133b6cdd29cd2e45c2e61f4a18b67ecf78452f11b5072adc3aa5130807ef7f8599
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=irregular-iron%40workspace%3A.":
-  version: 7.32.1
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=f3fe9b&locator=irregular-iron%40workspace%3A."
+  version: 7.32.3
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=a14d83&locator=irregular-iron%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.6"
-    "@navikt/aksel-icons": "npm:^7.32.1"
-    "@navikt/ds-tokens": "npm:^7.32.1"
+    "@navikt/aksel-icons": "npm:^7.32.3"
+    "@navikt/ds-tokens": "npm:^7.32.3"
     clsx: "npm:^2.1.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
@@ -1042,14 +1042,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/41d6b2e32d3ed7111db601e2722613ce781b7c3823947c8cecb58d76d89cab3dca2e645e325bfc1c737e97555dd5bd75236cbf0cdb8ddf16cdb73e65403fda58
+  checksum: 10/baba0b9ba147f95e36ce5b50958ead23255b3151f32b1fce99ae61c8357997f1dc0891cee898f38e2a9bd8eb9060473096f145a7ff3aa37e71a096e0375be280
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^7.32.1":
-  version: 7.32.1
-  resolution: "@navikt/ds-tokens@npm:7.32.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.32.1%2F50a447c61a00e24c7a44b5b5aa6fd2f1369a0eee"
-  checksum: 10/b9ca49bde752a2cfd08fe7628856d853c7eb5dc755a5343cdcd216112d34cb4a4b82ad422c5dca8b72f189a82e285664e62f8eea25a44e1e858600c2bafdfb79
+"@navikt/ds-tokens@npm:^7.32.3":
+  version: 7.32.3
+  resolution: "@navikt/ds-tokens@npm:7.32.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.32.3%2Fea5e5b87965331382c72b794f1c17166662d9620"
+  checksum: 10/5d7439613299566960b7d3ca17be66dc40c6e6da01227485439bd3c7ae1c79ce7e5f7a6ed51b549385fa71fab27aa83f9473c3b46fd10fcd397dc1fe1305f0a4
   languageName: node
   linkType: hard
 
@@ -5413,8 +5413,8 @@ __metadata:
   linkType: hard
 
 "vite@npm:^6.3.5, vite@npm:^6.3.6":
-  version: 6.3.6
-  resolution: "vite@npm:6.3.6"
+  version: 6.4.1
+  resolution: "vite@npm:6.4.1"
   dependencies:
     esbuild: "npm:^0.25.0"
     fdir: "npm:^6.4.4"
@@ -5463,7 +5463,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/8b8b6fe12318ca457396bf2053df7056cf4810f1d4a43b36b6afe59860e32b749c0685a290fe8a973b0d3da179ceec4c30cebbd3c91d0c47fbcf6436b17bdeef
+  checksum: 10/ea2083b6b1d1c9e85a13d6797ae989aa1dbc27a5c054319c71141934bf3f8dba8d54b510618040f95751148da63787f28f043df7458a194c81f8b6d8a2d32844
   languageName: node
   linkType: hard
 
