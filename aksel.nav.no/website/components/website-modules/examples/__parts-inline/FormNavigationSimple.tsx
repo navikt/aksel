@@ -1,3 +1,4 @@
+import React from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button, HGrid, Hide, Show } from "@navikt/ds-react";
 
