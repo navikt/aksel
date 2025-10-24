@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useEffect, useState } from "react";
-import { Popover } from "../../popover";
 import { useScrollLock } from "./useScrollLock";
 
 export default {
@@ -49,25 +48,29 @@ export const UseScrollLockScrollXAndY: StoryObj = {
 export const UseScrollLockResizeTest: StoryObj = {
   render: ScrollLockComponent,
   decorators: [
-    (story) => (
-      <div
-        style={{
-          background: "var(--ax-bg-softA)",
-        }}
-      >
-        <h2>Resize to go from no scroll to scroll</h2>
-        <div>{story()}</div>
-        <div style={{ width: 400, resize: "horizontal", overflow: "auto" }}>
-          lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+    (story) => {
+      const [width, setWidth] = useState(400);
+      return (
+        <div
+          style={{
+            background: "var(--ax-bg-softA)",
+          }}
+        >
+          <div>{story()}</div>
+          <button onClick={() => setWidth(() => 80)}>Scroll</button>
+          <button onClick={() => setWidth(() => 400)}>No scroll</button>
+          <div style={{ width }}>
+            lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </div>
         </div>
-      </div>
-    ),
+      );
+    },
   ],
   parameters: {
     layout: "padded",
@@ -118,8 +121,6 @@ export const ScrollLockBodyStyleTest: StoryObj = {
 function ScrollLockComponent() {
   const [enabled, setEnabled] = useState(false);
 
-  const [ref, setRef] = useState<HTMLElement | null>(null);
-
   useScrollLock({
     enabled,
     mounted: false,
@@ -129,26 +130,17 @@ function ScrollLockComponent() {
   return (
     <div>
       <div style={{ position: "relative" }}>
+        <p>
+          lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
         <button onClick={() => setEnabled(true)}>Enable</button>
-        <button onClick={() => setEnabled(false)} ref={setRef}>
-          Disable
-        </button>
-
-        <Popover
-          open
-          anchorEl={ref}
-          onClose={() => null}
-          style={{ maxWidth: 100 }}
-        >
-          lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do lorem
-          ipsum dolor sit amet, consectetur adipiscing elit, sed do lorem ipsum
-          dolor sit amet, consectetur adipiscing elit, sed do lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do lorem ipsum dolor sit
-          amet, consectetur adipiscing elit, sed do lorem ipsum dolor sit amet,
-          consectetur adipiscing elit, sed do lorem ipsum dolor sit amet,
-          consectetur adipiscing elit, sed do lorem ipsum dolor sit amet,
-          consectetur adipiscing elit, sed do
-        </Popover>
+        <button onClick={() => setEnabled(false)}>Disable</button>
       </div>
     </div>
   );
