@@ -367,7 +367,7 @@ export const NestedDrawers: Story = {
         <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogPortal>
           <DialogBackdrop className="backdropCSS" />
-          <DialogPopup className="dialogCSS">
+          <DialogPopup className="dialogCSS" position="center">
             <DialogHeader>
               <DialogTitle id="ha">Dialog Title</DialogTitle>
               <DialogDescription>
@@ -392,7 +392,7 @@ export const NestedDrawers: Story = {
                 </DialogTrigger>
                 <DialogPortal>
                   <DialogBackdrop className="backdropCSS" />
-                  <DialogPopup className="dialogCSS">
+                  <DialogPopup className="dialogCSS" position="center">
                     <DialogHeader>
                       <DialogTitle id="ha">Dialog NESTED</DialogTitle>
                     </DialogHeader>
@@ -410,7 +410,7 @@ export const NestedDrawers: Story = {
                         </DialogTrigger>
                         <DialogPortal>
                           <DialogBackdrop className="backdropCSS" />
-                          <DialogPopup className="dialogCSS">
+                          <DialogPopup className="dialogCSS" position="center">
                             <DialogHeader>
                               <DialogTitle id="ha">Dialog NESTED</DialogTitle>
                             </DialogHeader>

@@ -152,7 +152,7 @@
   }
 
   &[data-position="fullscreen"] {
-    --__axc-dialog-transform: translateY(5%) scale(0.96);
+    --__axc-dialog-transform: scale(0.98);
 
     border-radius: 0;
     inset: 0;
