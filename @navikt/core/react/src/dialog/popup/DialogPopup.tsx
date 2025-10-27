@@ -6,7 +6,6 @@ import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../util/focus-guards/FocusGuards";
 import { useMergeRefs } from "../../util/hooks";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
-import { useLatestRef } from "../../util/hooks/useLatestRef";
 import { useScrollLock } from "../../util/hooks/useScrollLock";
 import { useDialogContext } from "../root/DialogRoot.context";
 
@@ -102,8 +101,6 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
 
-    const nestedOpenDialogCount = useLatestRef(nestedOpenDialogCountProp);
-
     const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
 
     useScrollLock({
@@ -143,16 +140,8 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       /**
        * After a11y testing, focusing container element seems to give best experience
        * for screen reader and keyboard users. User will still have the option to override this anyways.
-       *
-       * When having multiple nested dialogs with defaultOpen,
-       * focusing the root container triggers `onDismiss` if we don't stop it from focusing on only
-       * top-level element.
        */
-      setTimeout(() => {
-        if (nestedOpenDialogCount.current === 0) {
-          popupRef.current?.focus({ preventScroll: true });
-        }
-      });
+      popupRef.current?.focus({ preventScroll: true });
     });
 
     const handleUnmountFocus = useEventCallback((event: Event) => {
@@ -265,9 +254,12 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
               }
             }}
             onFocusOutside={(event) => {
-              if (modal === "trap-focus") {
-                event.preventDefault();
-              }
+              /**
+               * Focus-events are tricky when dealing with portals and nested dialogs.
+               * If multiple dialogs are open, initial auto-focus might cause
+               * onFocusOutside to trigger on the parent dialog when focusing the child dialog.
+               */
+              event.preventDefault();
             }}
             enablePointerUpOutside
             onPointerUpOutside={(event) => {

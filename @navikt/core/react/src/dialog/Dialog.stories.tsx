@@ -487,6 +487,50 @@ export const NonTriggerImplementation: Story = {
   },
 };
 
+/* TODO: Need to make sure ensted dialogs are in correct dom-order */
+/* Right now its first -> thrid -> first-nested */
+/* Should be first -> first-nested -> thrid  */
+/* this is needed for correct focus and backdrop ordering */
+export const DomOrder: Story = {
+  render: () => {
+    return (
+      <div>
+        <Dialog defaultOpen>
+          <DialogPortal>
+            <DialogBackdrop className="backdropCSS" />
+            <DialogPopup className="dialogCSS">
+              First behind First behind First behind First behind First behind
+              First behind First behind First behind First behind First behind
+              First behind First behind First behind First behind First behind
+              First behind First behind First behind First behind First behind
+              First behind
+              <Dialog defaultOpen>
+                <DialogPortal>
+                  <DialogPopup className="dialogCSS">First-nested</DialogPopup>
+                </DialogPortal>
+              </Dialog>
+              <DialogClose>Close</DialogClose>
+            </DialogPopup>
+          </DialogPortal>
+        </Dialog>
+        <Dialog defaultOpen>
+          <DialogPortal>
+            <DialogBackdrop className="backdropCSS" />
+            <DialogPopup className="dialogCSS">
+              thrid behind thrid behind thrid behind thrid behind thrid behind
+              thrid behind thrid behind thrid behind thrid behind thrid behind
+              thrid behind thrid behind thrid behind thrid behind thrid behind
+              thrid behind thrid behind thrid behind thrid behind thrid behind
+              thrid behind
+              <DialogClose>Close</DialogClose>
+            </DialogPopup>
+          </DialogPortal>
+        </Dialog>
+      </div>
+    );
+  },
+};
+
 export const TrapFocusOutsideClick: Story = {
   render: () => {
     const [count, setCount] = useState(0);
