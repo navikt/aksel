@@ -360,89 +360,103 @@ export const DemoCloseButtonFocusDialog: Story = {
 };
 
 export const NestedDrawers: Story = {
-  render: () => (
-    <div>
-      <button onClick={() => alert("after")}>Before dialog</button>
-      <Dialog defaultOpen>
-        <DialogTrigger>Open Dialog</DialogTrigger>
-        <DialogPortal>
-          <DialogBackdrop className="backdropCSS" />
-          <DialogPopup className="dialogCSS" position="center">
-            <DialogHeader>
-              <DialogTitle id="ha">Dialog Title</DialogTitle>
-              <DialogDescription>
-                This is a description of the dialog.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogBody>
-              This is the body of the dialog. Here is where the main content
-              lives. This is the body of the dialog. Here is where the main
-              content lives This is the body of the dialog. Here is where the
-              main content lives This is the body of the dialog. Here is where
-              the main content lives This lives. This is the body of the dialog.
-              Here is where the main content lives This is the body of the
-              dialog. Here is where the main content lives This is the body of
-              the dialog. Here is where the main content lives This is the body
-              of the dialog. Here is where the main content lives
-            </DialogBody>
-            <DialogFooter>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button>Open nested</Button>
-                </DialogTrigger>
-                <DialogPortal>
-                  <DialogBackdrop className="backdropCSS" />
-                  <DialogPopup className="dialogCSS" position="center">
-                    <DialogHeader>
-                      <DialogTitle id="ha">LEVEL 2</DialogTitle>
-                    </DialogHeader>
-                    <DialogBody>
-                      This is the body of the dialog. Here is where the main
-                      content lives. This i
-                    </DialogBody>
-                    <DialogFooter>
-                      <DialogClose asChild>
-                        <Button>Close</Button>
-                      </DialogClose>
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button>Open nested</Button>
-                        </DialogTrigger>
-                        <DialogPortal>
-                          <DialogBackdrop className="backdropCSS" />
-                          <DialogPopup className="dialogCSS" position="center">
-                            <DialogHeader>
-                              <DialogTitle id="ha">NESTED</DialogTitle>
-                            </DialogHeader>
-                            <DialogBody>
-                              This is the body of the dialog. Here is where the
-                              This is the body of the dialog. Here is where the
-                              main content lives. This iThis is the body of the
-                              dialog. Here is where the main content lives. This
-                              i main content lives. This i
-                            </DialogBody>
-                            <DialogFooter>
-                              <DialogClose asChild>
-                                <Button>Close</Button>
-                              </DialogClose>
-                            </DialogFooter>
-                          </DialogPopup>
-                        </DialogPortal>
-                      </Dialog>
-                    </DialogFooter>
-                  </DialogPopup>
-                </DialogPortal>
-              </Dialog>
-              <DialogClose asChild>
-                <Button>Close</Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogPopup>
-        </DialogPortal>
-      </Dialog>
-      <button onClick={() => alert("after")}>after dialog</button>
-    </div>
-  ),
+  render: () => {
+    const [position, setPosition] =
+      useState<React.ComponentProps<typeof DialogPopup>["position"]>("left");
+
+    return (
+      <div>
+        <h2> {`Position: ${position}`}</h2>
+        <HStack gap="space-8" marginBlock="space-8">
+          <button onClick={() => setPosition("right")}>Right</button>
+          <button onClick={() => setPosition("left")}>Left</button>
+          <button onClick={() => setPosition("bottom")}>bottom</button>
+          <button onClick={() => setPosition("center")}>center</button>
+          <button onClick={() => setPosition("fullscreen")}>fullscreen</button>
+        </HStack>
+        <Dialog defaultOpen>
+          <DialogTrigger>Open Dialog</DialogTrigger>
+          <DialogPortal>
+            <DialogBackdrop className="backdropCSS" />
+            <DialogPopup className="dialogCSS" position={position}>
+              <DialogHeader>
+                <DialogTitle id="ha">Dialog Title</DialogTitle>
+                <DialogDescription>
+                  This is a description of the dialog.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogBody>
+                This is the body of the dialog. Here is where the main content
+                lives. This is the body of the dialog. Here is where the main
+                content lives This is the body of the dialog. Here is where the
+                main content lives This is the body of the dialog. Here is where
+                the main content lives This lives. This is the body of the
+                dialog. Here is where the main content lives This is the body of
+                the dialog. Here is where the main content lives This is the
+                body of the dialog. Here is where the main content lives This is
+                the body of the dialog. Here is where the main content lives
+              </DialogBody>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button>Close</Button>
+                </DialogClose>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button>Open nested</Button>
+                  </DialogTrigger>
+                  <DialogPortal>
+                    <DialogBackdrop className="backdropCSS" />
+                    <DialogPopup className="dialogCSS" position={position}>
+                      <DialogHeader>
+                        <DialogTitle id="ha">LEVEL 2</DialogTitle>
+                      </DialogHeader>
+                      <DialogBody>
+                        This is the body of the dialog. Here is where the main
+                        content lives. This i
+                      </DialogBody>
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button>Close</Button>
+                        </DialogClose>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button>Open nested</Button>
+                          </DialogTrigger>
+                          <DialogPortal>
+                            <DialogBackdrop className="backdropCSS" />
+                            <DialogPopup
+                              className="dialogCSS"
+                              position={position}
+                            >
+                              <DialogHeader>
+                                <DialogTitle id="ha">NESTED</DialogTitle>
+                              </DialogHeader>
+                              <DialogBody>
+                                This is the body of the dialog. Here is where
+                                the This is the body of the dialog. Here is
+                                where the main content lives. This iThis is the
+                                body of the dialog. Here is where the main
+                                content lives. This i main content lives. This i
+                              </DialogBody>
+                              <DialogFooter>
+                                <DialogClose asChild>
+                                  <Button>Close</Button>
+                                </DialogClose>
+                              </DialogFooter>
+                            </DialogPopup>
+                          </DialogPortal>
+                        </Dialog>
+                      </DialogFooter>
+                    </DialogPopup>
+                  </DialogPortal>
+                </Dialog>
+              </DialogFooter>
+            </DialogPopup>
+          </DialogPortal>
+        </Dialog>
+      </div>
+    );
+  },
 };
 
 /**
