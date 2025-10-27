@@ -94,6 +94,8 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       transitionStatus,
       popupElement,
       backdropRef,
+      nestedOpenDialogCount,
+      nested,
     } = useDialogContext();
 
     const hasInteractedOutsideRef = useRef(false);
@@ -185,6 +187,10 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
             }),
           );
 
+    const style: React.CSSProperties = {
+      "--__axc-nested-level": nestedOpenDialogCount,
+    };
+
     return (
       <FocusGuards>
         <FocusBoundary
@@ -269,6 +275,9 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
               {...positionDataAttributes}
               width={translateWidth(width, position)}
               height={translateHeight(height, position)}
+              style={style}
+              data-nested-dialog-open={!!nestedOpenDialogCount}
+              data-nested={!!nested}
             >
               {children}
             </BoxNew>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
@@ -65,6 +65,32 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
   );
   const [popupElement, setPopupElement] = useState<HTMLElement | null>(null);
 
+  const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = useState(0);
+
+  const nestedDialogOpened = useEventCallback((nestedCount: number) => {
+    setOwnNestedOpenDialogs(nestedCount + 1);
+  });
+
+  const nestedDialogClosed = useEventCallback(() => {
+    setOwnNestedOpenDialogs(0);
+  });
+
+  const parentContext = useDialogContext(false);
+
+  useEffect(() => {
+    if (parentContext?.nestedDialogOpened && open) {
+      parentContext.nestedDialogOpened(ownNestedOpenDialogs);
+    }
+    if (parentContext?.nestedDialogClosed && !open) {
+      parentContext.nestedDialogClosed();
+    }
+    return () => {
+      if (parentContext?.nestedDialogClosed && open) {
+        parentContext.nestedDialogClosed();
+      }
+    };
+  }, [open, parentContext, ownNestedOpenDialogs]);
+
   const setOpen = useEventCallback(
     (nextOpen: boolean, originalEvent?: Event) => {
       onOpenChange?.(nextOpen, originalEvent);
@@ -92,8 +118,6 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     },
   });
 
-  const dialogContext = useDialogContext(false);
-
   return (
     <DialogContextProvider
       open={open}
@@ -106,7 +130,10 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       popupElement={popupElement}
       setTriggerElement={setTriggerElement}
       triggerElement={triggerElement}
-      nested={!!dialogContext}
+      nested={!!parentContext}
+      nestedDialogOpened={nestedDialogOpened}
+      nestedDialogClosed={nestedDialogClosed}
+      nestedOpenDialogCount={ownNestedOpenDialogs}
     >
       {children}
     </DialogContextProvider>

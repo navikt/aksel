@@ -46,6 +46,18 @@ interface DialogContextProps {
    * Declares if this dialog is nested inside another dialog.
    */
   nested: boolean;
+  /**
+   * Handles nested dialog opened event.
+   */
+  nestedDialogOpened: (nestedCount: number) => void;
+  /**
+   * Handles nested dialog closing event.
+   */
+  nestedDialogClosed: () => void;
+  /**
+   * Number of currently opened nested dialogs.
+   */
+  nestedOpenDialogCount: number | undefined;
 }
 
 const [DialogContextProvider, useDialogContext] =
