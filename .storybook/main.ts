@@ -19,8 +19,7 @@ export default {
     const customIndexer = async (fileName: string, opts: any) => {
       let code = readFileSync(fileName, "utf-8").toString();
 
-      const matches = indexRegex.exec(code);
-      const prefix = matches ? `${matches[1]} | ` : "";
+      const index = indexRegex.exec(code)?.[1];
 
       code = code.split(
         /\/\/ EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE/,
@@ -31,8 +30,8 @@ export default {
         .replace(".tsx", "")
         .split("/");
       const storyName = process.env.CHROMATIC
-        ? `${templateName} | ${prefix}${name}` // Chromatic does not support folders
-        : `${prefix}${name}`;
+        ? `${templateName} [${index}] ${name}` // Chromatic does not support folders, and doesn't like |
+        : `${index} | ${name}`;
 
       code += `
         export default { title: "Templates/${templateName}/${storyName}" };
