@@ -491,6 +491,7 @@ export const NonTriggerImplementation: Story = {
 /* Right now its first -> thrid -> first-nested */
 /* Should be first -> first-nested -> thrid  */
 /* this is needed for correct focus and backdrop ordering */
+/* Floating-ui uses same container for nested elements. Use this trick. */
 export const DomOrder: Story = {
   render: () => {
     return (
