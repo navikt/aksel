@@ -386,7 +386,7 @@ export const NestedDrawers: Story = {
               of the dialog. Here is where the main content lives
             </DialogBody>
             <DialogFooter>
-              <Dialog defaultOpen>
+              <Dialog>
                 <DialogTrigger asChild>
                   <Button>Open nested</Button>
                 </DialogTrigger>
@@ -404,6 +404,31 @@ export const NestedDrawers: Story = {
                       <DialogClose asChild>
                         <Button>Close</Button>
                       </DialogClose>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button>Open nested</Button>
+                        </DialogTrigger>
+                        <DialogPortal>
+                          <DialogBackdrop className="backdropCSS" />
+                          <DialogPopup className="dialogCSS">
+                            <DialogHeader>
+                              <DialogTitle id="ha">Dialog NESTED</DialogTitle>
+                            </DialogHeader>
+                            <DialogBody>
+                              This is the body of the dialog. Here is where the
+                              This is the body of the dialog. Here is where the
+                              main content lives. This iThis is the body of the
+                              dialog. Here is where the main content lives. This
+                              i main content lives. This i
+                            </DialogBody>
+                            <DialogFooter>
+                              <DialogClose asChild>
+                                <Button>Close</Button>
+                              </DialogClose>
+                            </DialogFooter>
+                          </DialogPopup>
+                        </DialogPortal>
+                      </Dialog>
                     </DialogFooter>
                   </DialogPopup>
                 </DialogPortal>
