@@ -6,6 +6,7 @@ import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../util/focus-guards/FocusGuards";
 import { useMergeRefs } from "../../util/hooks";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
+import { useLatestRef } from "../../util/hooks/useLatestRef";
 import { useScrollLock } from "../../util/hooks/useScrollLock";
 import { useDialogContext } from "../root/DialogRoot.context";
 
@@ -94,12 +95,14 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       transitionStatus,
       popupElement,
       backdropRef,
-      nestedOpenDialogCount,
+      nestedOpenDialogCount: nestedOpenDialogCountProp,
       nested,
     } = useDialogContext();
 
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
+
+    const nestedOpenDialogCount = useLatestRef(nestedOpenDialogCountProp);
 
     const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
 
@@ -134,12 +137,22 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
         return;
       }
 
+      /* Prevents `onMountAutoFocus` from controlling initial focus */
+      event.preventDefault();
+
       /**
        * After a11y testing, focusing container element seems to give best experience
        * for screen reader and keyboard users. User will still have the option to override this anyways.
+       *
+       * When having multiple nested dialogs with defaultOpen,
+       * focusing the root container triggers `onDismiss` if we don't stop it from focusing on only
+       * top-level element.
        */
-      popupRef.current?.focus({ preventScroll: true });
-      event.preventDefault();
+      setTimeout(() => {
+        if (nestedOpenDialogCount.current === 0) {
+          popupRef.current?.focus({ preventScroll: true });
+        }
+      });
     });
 
     const handleUnmountFocus = useEventCallback((event: Event) => {
@@ -188,7 +201,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
           );
 
     const style: React.CSSProperties = {
-      "--__axc-nested-level": nestedOpenDialogCount,
+      "--__axc-nested-level": nestedOpenDialogCountProp,
     };
 
     return (
@@ -276,7 +289,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
               width={translateWidth(width, position)}
               height={translateHeight(height, position)}
               style={style}
-              data-nested-dialog-open={!!nestedOpenDialogCount}
+              data-nested-dialog-open={!!nestedOpenDialogCountProp}
               data-nested={!!nested}
             >
               {children}

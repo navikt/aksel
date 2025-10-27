@@ -362,7 +362,7 @@ export const DemoCloseButtonFocusDialog: Story = {
 export const NestedDrawers: Story = {
   render: () => {
     const [position, setPosition] =
-      useState<React.ComponentProps<typeof DialogPopup>["position"]>("left");
+      useState<React.ComponentProps<typeof DialogPopup>["position"]>("center");
 
     return (
       <div>
