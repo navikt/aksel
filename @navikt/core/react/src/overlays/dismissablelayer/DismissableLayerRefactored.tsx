@@ -3,7 +3,6 @@ import React, {
   forwardRef,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from "react";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -26,7 +25,7 @@ type DismissableLayerElement = React.ComponentRef<
 const CONTEXT_UPDATE_EVENT = "dismissableLayer.update";
 
 const DismissableLayerContext = React.createContext({
-  layers: new Map<DismissableLayerElement, number>(),
+  layers: new Set<DismissableLayerElement>(),
   layersWithOutsidePointerEventsDisabled: new Set<DismissableLayerElement>(),
 });
 
@@ -90,7 +89,6 @@ export const [
 >();
 
 let originalBodyPointerEvents: string;
-let nextLayerId = 0;
 
 const DismissableLayerRefactored = forwardRef<
   HTMLDivElement,
@@ -111,25 +109,14 @@ const DismissableLayerRefactored = forwardRef<
 
   const [, force] = useState({});
   const [node, setNode] = React.useState<DismissableLayerElement | null>(null);
-  const layerIdRef = useRef<number>();
-
-  // Assign layer ID on first render, before any effects run
-  if (layerIdRef.current === undefined) {
-    layerIdRef.current = nextLayerId++;
-  }
-
   const mergedRefs = useMergeRefs(forwardedRef, setNode);
   const ownerDoc = ownerDocument(node);
 
   /* Layer handling */
-  const layers = Array.from(context.layers.entries());
-  const [highestLayerWithOutsidePointerEventsDisabled] = [
-    ...context.layersWithOutsidePointerEventsDisabled,
-  ].slice(-1);
-  const highestLayerWithOutsidePointerEventsDisabledIndex = layers.findIndex(
-    ([el]) => el === highestLayerWithOutsidePointerEventsDisabled,
-  );
-  const index = node ? layers.findIndex(([el]) => el === node) : -1;
+  const layers = Array.from(context.layers);
+  const [highestLayerWithOutsidePointerEventsDisabled] = [...context.layersWithOutsidePointerEventsDisabled].slice(-1); // prettier-ignore
+  const highestLayerWithOutsidePointerEventsDisabledIndex = layers.indexOf(highestLayerWithOutsidePointerEventsDisabled!); // prettier-ignore
+  const index = node ? layers.indexOf(node) : -1;
   const isBodyPointerEventsDisabled =
     context.layersWithOutsidePointerEventsDisabled.size > 0;
   const isPointerEventsEnabled =
@@ -170,10 +157,7 @@ const DismissableLayerRefactored = forwardRef<
      *
      * In some cases a layer might still exist, but be disabled. We want to ignore these layers.
      */
-    // Find the highest layer ID (last created)
-    const highestLayerId = Math.max(...context.layers.values());
-    const isHighestLayer = layerIdRef.current === highestLayerId;
-
+    const isHighestLayer = index === context.layers.size - 1;
     if (!isHighestLayer) {
       return;
     }
@@ -194,7 +178,6 @@ const DismissableLayerRefactored = forwardRef<
 
   /**
    * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
-   * TODO: https://github.com/radix-ui/primitives/issues/3445
    */
   useEffect(() => {
     if (!node) {
@@ -208,7 +191,7 @@ const DismissableLayerRefactored = forwardRef<
       }
       context.layersWithOutsidePointerEventsDisabled.add(node);
     }
-    context.layers.set(node, layerIdRef.current!);
+    context.layers.add(node);
     dispatchUpdate();
 
     return () => {
