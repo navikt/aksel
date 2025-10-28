@@ -1,6 +1,7 @@
 import React, {
   CSSProperties,
   forwardRef,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -18,7 +19,23 @@ import { useEscapeKeydown } from "./util/useEscapeKeydown";
 import { useFocusOutside } from "./util/useFocusOutside";
 import { usePointerDownOutside } from "./util/usePointerDownOutside";
 
+type DismissableLayerElement = React.ComponentRef<
+  typeof DismissableLayerRefactored
+>;
+type DismissableLayerBranchElement = React.ComponentRef<
+  typeof DismissableLayerRefactored
+>;
+
+const CONTEXT_UPDATE_EVENT = "dismissableLayer.update";
+
+const DismissableLayerContext = React.createContext({
+  layers: new Set<DismissableLayerElement>(),
+  layersWithOutsidePointerEventsDisabled: new Set<DismissableLayerElement>(),
+  branches: new Set<DismissableLayerBranchElement>(),
+});
+
 interface DismissableLayerBaseProps {
+  id?: string;
   /**
    * When `true`, hover/focus/click interactions will be disabled on elements outside
    * the `DismissableLayer`. Users will need to click twice on outside elements to
@@ -89,37 +106,107 @@ let originalBodyPointerEvents: string;
 const DismissableLayerRefactored = forwardRef<
   HTMLDivElement,
   DismissableLayerProps
->((props: DismissableLayerProps, ref) => {
-  const context = useDismissableDescendantsContext(false);
+>((props: DismissableLayerProps, forwardedRef) => {
+  const { children, disableOutsidePointerEvents, ...restProps } = props;
+  const context = useContext(DismissableLayerContext);
+
+  const [, force] = useState({});
+  const [node, setNode] = React.useState<DismissableLayerElement | null>(null);
+  const mergedRefs = useMergeRefs(forwardedRef, setNode);
+
+  /* Layer handling */
+  const layers = Array.from(context.layers);
+  const [highestLayerWithOutsidePointerEventsDisabled] = [...context.layersWithOutsidePointerEventsDisabled].slice(-1); // prettier-ignore
+  const highestLayerWithOutsidePointerEventsDisabledIndex = layers.indexOf(highestLayerWithOutsidePointerEventsDisabled!); // prettier-ignore
+  const index = node ? layers.indexOf(node) : -1;
+  const isBodyPointerEventsDisabled =
+    context.layersWithOutsidePointerEventsDisabled.size > 0;
+  const isPointerEventsEnabled =
+    index >= highestLayerWithOutsidePointerEventsDisabledIndex;
 
   /**
-   * To correctly handle nested DismissableLayer,
-   * we only initialize the `Descendants`-API for the root layer to aboid resetting context
+   * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
    */
-  return context ? (
-    <DismissableLayerNode ref={ref} {...props} />
-  ) : (
-    <DismissableRoot>
-      <DismissableLayerNode ref={ref} {...props} />
-    </DismissableRoot>
+  useEffect(() => {
+    if (!node) {
+      return;
+    }
+
+    const ownerDoc = ownerDocument(node);
+
+    if (disableOutsidePointerEvents) {
+      if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
+        originalBodyPointerEvents = ownerDoc.body.style.pointerEvents;
+        ownerDoc.body.style.pointerEvents = "none";
+      }
+      context.layersWithOutsidePointerEventsDisabled.add(node);
+    }
+    context.layers.add(node);
+    dispatchUpdate();
+    return () => {
+      if (
+        disableOutsidePointerEvents &&
+        context.layersWithOutsidePointerEventsDisabled.size === 1
+      ) {
+        ownerDoc.body.style.pointerEvents = originalBodyPointerEvents;
+      }
+    };
+  }, [node, disableOutsidePointerEvents, context]);
+
+  /**
+   * We purposefully prevent combining this effect with the `disableOutsidePointerEvents` effect
+   * because a change to `disableOutsidePointerEvents` would remove this layer from the stack
+   * and add it to the end again so the layering order wouldn't be creation order.
+   * We only want them to be removed from context stacks when unmounted.
+   */
+  useEffect(() => {
+    return () => {
+      if (!node) {
+        return;
+      }
+
+      context.layers.delete(node);
+      context.layersWithOutsidePointerEventsDisabled.delete(node);
+      dispatchUpdate();
+    };
+  }, [node, context]);
+
+  /**
+   * Force update when context changes to update index and pointer-events state.
+   * We use a custom event to avoid unnecessary renders from other state changes in the context.
+   */
+  useEffect(() => {
+    const handleUpdate = () => force({});
+    document.addEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
+    return () =>
+      document.removeEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
+  }, []);
+
+  return (
+    <div
+      {...restProps}
+      ref={mergedRefs}
+      style={{
+        pointerEvents: isBodyPointerEventsDisabled
+          ? isPointerEventsEnabled
+            ? "auto"
+            : "none"
+          : undefined,
+        ...restProps.style,
+      }}
+    >
+      {children}
+    </div>
   );
 });
 
 /**
- * DismissableRoot
- *
- * Used to initialize the `Descendants`-API at the root layer.
- * All subsequent layers will use the same context.
+ * Dispatches a custom event to inform all `DismissableLayer` components to update.
  */
-const DismissableRoot = ({ children }: { children: React.ReactNode }) => {
-  const descendants = useDismissableDescendants();
-
-  return (
-    <DismissableDescendantsProvider value={descendants}>
-      {children}
-    </DismissableDescendantsProvider>
-  );
-};
+function dispatchUpdate() {
+  const event = new CustomEvent(CONTEXT_UPDATE_EVENT);
+  document.dispatchEvent(event);
+}
 
 const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
   (
