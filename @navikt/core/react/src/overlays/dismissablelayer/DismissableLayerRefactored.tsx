@@ -112,7 +112,7 @@ const DismissableLayerRefactored = forwardRef<
     disableOutsidePointerEvents,
     onDismiss,
     onEscapeKeyDown,
-    enabled,
+    enabled = true,
     ...restProps
   } = props;
   const context = useContext(DismissableLayerContext);
@@ -138,12 +138,16 @@ const DismissableLayerRefactored = forwardRef<
     }
 
     /**
+     * TODO: Currently, parent in nested elements is before child in the set.
+     * This causes issues with determining the highest layer.
+     * We need to fix the layering order to be creation order, not insertion order??
+     *
+     *
      * The deepest nested element will always be last in the descendants list.
      * This allows us to only close the highest layer when pressing escape.
      *
      * In some cases a layer might still exist, but be disabled. We want to ignore these layers.
      */
-    /* TODO: need to handle enabledlayers */
     const isHighestLayer = index === context.layers.size - 1;
     if (!isHighestLayer) {
       return;
@@ -167,7 +171,7 @@ const DismissableLayerRefactored = forwardRef<
    * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
    */
   useEffect(() => {
-    if (!node) {
+    if (!node || !enabled) {
       return;
     }
 
@@ -180,6 +184,7 @@ const DismissableLayerRefactored = forwardRef<
     }
     context.layers.add(node);
     dispatchUpdate();
+
     return () => {
       if (
         disableOutsidePointerEvents &&
@@ -188,7 +193,7 @@ const DismissableLayerRefactored = forwardRef<
         ownerDoc.body.style.pointerEvents = originalBodyPointerEvents;
       }
     };
-  }, [node, disableOutsidePointerEvents, context, ownerDoc]);
+  }, [node, disableOutsidePointerEvents, context, ownerDoc, enabled]);
 
   /**
    * We purposefully prevent combining this effect with the `disableOutsidePointerEvents` effect
@@ -198,7 +203,7 @@ const DismissableLayerRefactored = forwardRef<
    */
   useEffect(() => {
     return () => {
-      if (!node) {
+      if (!node || !enabled) {
         return;
       }
 
@@ -206,7 +211,7 @@ const DismissableLayerRefactored = forwardRef<
       context.layersWithOutsidePointerEventsDisabled.delete(node);
       dispatchUpdate();
     };
-  }, [node, context]);
+  }, [node, context, enabled]);
 
   /**
    * Force update when context changes to update index and pointer-events state.

@@ -14,12 +14,46 @@ export const ContextTest = {
   render: () => {
     return (
       <div>
-        <DismissableLayerRefactored id="layer-1">
+        <DismissableLayerRefactored
+          onDismiss={() => console.info("dismissed 1")}
+          onEscapeKeyDown={() => console.info("Escaped 1")}
+        >
           <input type="text" />
         </DismissableLayerRefactored>
-        <DismissableLayerRefactored>
+        <DismissableLayerRefactored
+          onDismiss={() => console.info("dismissed 2")}
+          onEscapeKeyDown={() => console.info("Escaped 2")}
+        >
           <input type="text" />
         </DismissableLayerRefactored>
+      </div>
+    );
+  },
+};
+
+export const NestedTest = {
+  render: () => {
+    return (
+      <div>
+        <DismissableLayerRefactored
+          onDismiss={() => console.info("dismissed 1")}
+          onEscapeKeyDown={() => console.info("Escaped 1")}
+        >
+          <input type="text" />
+          <DismissableLayerRefactored
+            onDismiss={() => console.info("dismissed-nested 1")}
+            onEscapeKeyDown={() => console.info("Escaped-nested 1")}
+          >
+            <input type="text" />
+          </DismissableLayerRefactored>
+        </DismissableLayerRefactored>
+        {/* <DismissableLayerRefactored
+          onDismiss={() => console.info("dismissed 2")}
+          onEscapeKeyDown={() => console.info("Escaped 2")}
+          enabled={false}
+        >
+          <input type="text" />
+        </DismissableLayerRefactored> */}
       </div>
     );
   },
