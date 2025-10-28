@@ -59,6 +59,34 @@ export const NestedTest = {
   },
 };
 
+export const NestedTestLegacy = {
+  render: () => {
+    return (
+      <div>
+        <DismissableLayer
+          onDismiss={() => console.info("dismissed 1")}
+          onEscapeKeyDown={() => console.info("Escaped 1")}
+        >
+          <input type="text" />
+          <DismissableLayer
+            onDismiss={() => console.info("dismissed-nested 1")}
+            onEscapeKeyDown={() => console.info("Escaped-nested 1")}
+          >
+            <input type="text" />
+          </DismissableLayer>
+        </DismissableLayer>
+        {/* <DismissableLayer
+          onDismiss={() => console.info("dismissed 2")}
+          onEscapeKeyDown={() => console.info("Escaped 2")}
+          enabled={false}
+        >
+          <input type="text" />
+        </DismissableLayer> */}
+      </div>
+    );
+  },
+};
+
 export const Default = () => {
   const [open, setOpen] = useState(false);
   const openButtonRef = useRef(null);
