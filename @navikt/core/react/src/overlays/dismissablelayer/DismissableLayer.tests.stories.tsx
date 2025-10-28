@@ -158,52 +158,6 @@ export const DisableOutsidePointerEvents: Story = {
   },
 };
 
-export const Disabled: Story = {
-  render: (props) => {
-    return (
-      <div>
-        <DismissableLayer asChild {...props}>
-          <input type="text" />
-        </DismissableLayer>
-        <div data-testid="outside" style={{ padding: "1rem" }} />
-        <div
-          data-testid="outside-focusable"
-          style={{ padding: "1rem" }}
-          tabIndex={0}
-        />
-      </div>
-    );
-  },
-  play: async ({ args }) => {
-    const canvas = within(document.body);
-    const outsideElement = canvas.getByTestId("outside");
-    const outsideFocus = canvas.getByTestId("outside-focusable");
-
-    expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).not.toHaveBeenCalled();
-
-    await userEvent.keyboard("{Escape}");
-
-    expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).not.toHaveBeenCalled();
-
-    outsideFocus.focus();
-
-    expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).not.toHaveBeenCalled();
-
-    await userEvent.click(outsideElement);
-
-    expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).not.toHaveBeenCalled();
-  },
-  args: {
-    onDismiss: fn(),
-    onInteractOutside: fn(),
-    enabled: false,
-  },
-};
-
 export const SafeZone: Story = {
   render: (props) => {
     const [safeAnchor, setSafeAnchor] = React.useState<HTMLDivElement | null>(
@@ -266,7 +220,6 @@ export const SafeZone: Story = {
   args: {
     onDismiss: fn(),
     onInteractOutside: fn(),
-    enabled: false,
   },
 };
 
