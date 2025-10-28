@@ -107,12 +107,20 @@ const DismissableLayerRefactored = forwardRef<
   HTMLDivElement,
   DismissableLayerProps
 >((props: DismissableLayerProps, forwardedRef) => {
-  const { children, disableOutsidePointerEvents, ...restProps } = props;
+  const {
+    children,
+    disableOutsidePointerEvents,
+    onDismiss,
+    onEscapeKeyDown,
+    enabled,
+    ...restProps
+  } = props;
   const context = useContext(DismissableLayerContext);
 
   const [, force] = useState({});
   const [node, setNode] = React.useState<DismissableLayerElement | null>(null);
   const mergedRefs = useMergeRefs(forwardedRef, setNode);
+  const ownerDoc = ownerDocument(node);
 
   /* Layer handling */
   const layers = Array.from(context.layers);
@@ -124,6 +132,37 @@ const DismissableLayerRefactored = forwardRef<
   const isPointerEventsEnabled =
     index >= highestLayerWithOutsidePointerEventsDisabledIndex;
 
+  useEscapeKeydown((event) => {
+    if (!enabled) {
+      return;
+    }
+
+    /**
+     * The deepest nested element will always be last in the descendants list.
+     * This allows us to only close the highest layer when pressing escape.
+     *
+     * In some cases a layer might still exist, but be disabled. We want to ignore these layers.
+     */
+    /* TODO: need to handle enabledlayers */
+    const isHighestLayer = index === context.layers.size - 1;
+    if (!isHighestLayer) {
+      return;
+    }
+
+    /**
+     * We call this before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+     */
+    onEscapeKeyDown?.(event);
+    /**
+     * `onEscapeKeyDown` is able to preventDefault the event, thus stopping call for `onDismiss`.
+     * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
+     */
+    if (!event.defaultPrevented && onDismiss) {
+      event.preventDefault();
+      onDismiss();
+    }
+  }, ownerDoc);
+
   /**
    * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
    */
@@ -131,8 +170,6 @@ const DismissableLayerRefactored = forwardRef<
     if (!node) {
       return;
     }
-
-    const ownerDoc = ownerDocument(node);
 
     if (disableOutsidePointerEvents) {
       if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
@@ -151,7 +188,7 @@ const DismissableLayerRefactored = forwardRef<
         ownerDoc.body.style.pointerEvents = originalBodyPointerEvents;
       }
     };
-  }, [node, disableOutsidePointerEvents, context]);
+  }, [node, disableOutsidePointerEvents, context, ownerDoc]);
 
   /**
    * We purposefully prevent combining this effect with the `disableOutsidePointerEvents` effect
