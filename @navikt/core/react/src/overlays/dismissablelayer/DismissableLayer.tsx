@@ -223,12 +223,20 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       if (event.detail.originalEvent.type === "pointerdown") {
         const targetIsTrigger =
           safeZone?.anchor?.contains(target) || target === safeZone?.anchor;
-        targetIsTrigger && event.preventDefault();
+
+        /**
+         * This scenario only happens if the dismissable element is not DismissableLayer itself.
+         * In reality, this should never be a case.
+         */
+        const targetIsDismissable = target === safeZone?.dismissable;
+        if (targetIsTrigger || targetIsDismissable) {
+          event.preventDefault();
+        }
       } else {
         const targetIsNotTrigger =
           target instanceof HTMLElement &&
-          ![safeZone?.anchor, safeZone?.dismissable].some(
-            (element) => element?.contains(target as Node),
+          ![safeZone?.anchor, safeZone?.dismissable].some((element) =>
+            element?.contains(target as Node),
           ) &&
           !target.contains(safeZone?.dismissable ?? null);
 

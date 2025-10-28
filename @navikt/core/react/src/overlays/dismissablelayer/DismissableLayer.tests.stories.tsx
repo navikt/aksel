@@ -2,6 +2,7 @@
 import type { StoryObj } from "@storybook/react-vite/*";
 import React from "react";
 import { expect, fireEvent, fn, userEvent, within } from "storybook/test";
+import { DismissableLayer as LegacyDismissableLayer } from "./DismissableLayer";
 import {
   DismissableLayerRefactored as DismissableLayer,
   type DismissableLayerProps,
@@ -180,7 +181,7 @@ export const SafeZone: Story = {
           data-testid="safe-container"
           style={{ padding: "1rem", backgroundColor: "lightgray" }}
         />
-        <DismissableLayer
+        <LegacyDismissableLayer
           asChild
           {...props}
           safeZone={{
@@ -189,7 +190,7 @@ export const SafeZone: Story = {
           }}
         >
           <input type="text" />
-        </DismissableLayer>
+        </LegacyDismissableLayer>
       </div>
     );
   },
@@ -203,19 +204,19 @@ export const SafeZone: Story = {
 
     outsideAnchor.focus();
     expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).not.toHaveBeenCalled();
+    expect(args.onInteractOutside).toHaveBeenCalledTimes(1);
 
     outsideContainer.focus();
     expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).not.toHaveBeenCalled();
+    expect(args.onInteractOutside).toHaveBeenCalledTimes(2);
 
     await userEvent.click(outsideAnchor);
     expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).not.toHaveBeenCalled();
+    expect(args.onInteractOutside).toHaveBeenCalledTimes(4);
 
     await userEvent.click(outsideContainer);
     expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).not.toHaveBeenCalled();
+    expect(args.onInteractOutside).toHaveBeenCalledTimes(6);
   },
   args: {
     onDismiss: fn(),
