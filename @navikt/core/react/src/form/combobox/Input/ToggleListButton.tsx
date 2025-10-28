@@ -12,7 +12,8 @@ export const ToggleListButton = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div
       ref={ref}
-      onClick={() => {
+      onClick={(event) => {
+        event.stopPropagation();
         toggleIsListOpen();
         focusInput();
       }}
