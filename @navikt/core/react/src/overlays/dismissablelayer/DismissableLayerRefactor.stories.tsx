@@ -1,7 +1,6 @@
 import React, { StrictMode, useRef, useState } from "react";
 import { HStack, VStack } from "../../layout/stack";
-import { DismissableLayer } from "./DismissableLayer";
-import { DismissableLayerRefactored } from "./DismissableLayerRefactored";
+import { DismissableLayerRefactored as DismissableLayer } from "./DismissableLayerRefactored";
 
 export default {
   title: "Utilities/DismissableLayerRefactor",
@@ -14,18 +13,18 @@ export const ContextTest = {
   render: () => {
     return (
       <div>
-        <DismissableLayerRefactored
+        <DismissableLayer
           onDismiss={() => console.info("dismissed 1")}
           onEscapeKeyDown={() => console.info("Escaped 1")}
         >
           <input type="text" />
-        </DismissableLayerRefactored>
-        <DismissableLayerRefactored
+        </DismissableLayer>
+        <DismissableLayer
           onDismiss={() => console.info("dismissed 2")}
           onEscapeKeyDown={() => console.info("Escaped 2")}
         >
           <input type="text" />
-        </DismissableLayerRefactored>
+        </DismissableLayer>
       </div>
     );
   },
@@ -35,25 +34,27 @@ export const NestedTest = {
   render: () => {
     return (
       <div>
-        <DismissableLayerRefactored
+        <DismissableLayer
           onDismiss={() => console.info("dismissed 1")}
           onEscapeKeyDown={() => console.info("Escaped 1")}
+          id="root-layer"
         >
           <input type="text" />
-          <DismissableLayerRefactored
+          <DismissableLayer
             onDismiss={() => console.info("dismissed-nested 1")}
             onEscapeKeyDown={() => console.info("Escaped-nested 1")}
+            id="nested-layer"
           >
             <input type="text" />
-          </DismissableLayerRefactored>
-        </DismissableLayerRefactored>
-        {/* <DismissableLayerRefactored
+          </DismissableLayer>
+        </DismissableLayer>
+        {/* <DismissableLayer
           onDismiss={() => console.info("dismissed 2")}
           onEscapeKeyDown={() => console.info("Escaped 2")}
           enabled={false}
         >
           <input type="text" />
-        </DismissableLayerRefactored> */}
+        </DismissableLayer> */}
       </div>
     );
   },

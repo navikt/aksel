@@ -3,9 +3,9 @@ import type { StoryObj } from "@storybook/react-vite/*";
 import React from "react";
 import { expect, fireEvent, fn, userEvent, within } from "storybook/test";
 import {
-  DismissableLayer,
+  DismissableLayerRefactored as DismissableLayer,
   type DismissableLayerProps,
-} from "./DismissableLayer";
+} from "./DismissableLayerRefactored";
 
 export default {
   title: "Utilities/DismissableLayer/Tests",
@@ -292,6 +292,7 @@ export const NestedPointerEvents: StoryObj<{
             onDismiss={() => {
               props.root.onDismiss?.();
               setShowRoot(false);
+              console.info("dismissed root");
             }}
           >
             <input type="text" data-testId="root" />
@@ -301,6 +302,7 @@ export const NestedPointerEvents: StoryObj<{
                 onDismiss={() => {
                   props.nested?.onDismiss?.();
                   setShowNested(false);
+                  console.info("dismissed nested");
                 }}
               >
                 <input type="text" data-testId="nested" />

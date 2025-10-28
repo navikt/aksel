@@ -109,6 +109,7 @@ const DismissableLayerRefactored = forwardRef<
     enabled = true,
     ...restProps
   } = props;
+
   const context = useContext(DismissableLayerContext);
 
   const [, force] = useState({});
@@ -128,7 +129,7 @@ const DismissableLayerRefactored = forwardRef<
 
   /* TODO: We are now ignoring "safezone". Is safezone needed? */
   const pointerDownOutside = usePointerDownOutside((event) => {
-    if (!isPointerEventsEnabled) {
+    if (!isPointerEventsEnabled || !enabled) {
       return;
     }
     onPointerDownOutside?.(event);
@@ -141,6 +142,9 @@ const DismissableLayerRefactored = forwardRef<
 
   /* TODO: We are now ignoring "safezone". Is safezone needed? */
   const focusOutside = useFocusOutside((event) => {
+    if (!enabled) {
+      return;
+    }
     onFocusOutside?.(event);
     onInteractOutside?.(event);
 
@@ -186,6 +190,7 @@ const DismissableLayerRefactored = forwardRef<
 
   /**
    * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
+   * TODO: https://github.com/radix-ui/primitives/issues/3445
    */
   useEffect(() => {
     if (!node || !enabled) {
