@@ -18,6 +18,9 @@ export function useFocusOutside(
 
   useEffect(() => {
     const handleFocus = (event: FocusEvent) => {
+      console.info("handleFocus called", {
+        current: isFocusInsideReactTreeRef.current,
+      });
       if (event.target && !isFocusInsideReactTreeRef.current) {
         const eventDetail = { originalEvent: event };
 

@@ -3,6 +3,7 @@ import React, {
   forwardRef,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -66,13 +67,10 @@ interface DismissableLayerBaseProps
   onDismiss?: () => void;
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
-   * `safeZone.dismissable` is only needed when its element does not have a `tabIndex` since it will not receive focus-events.
    */
   safeZone?: {
     anchor?: Element | null;
-    dismissable?: Element | null;
   };
-
   style?: CSSProperties;
 }
 
@@ -102,6 +100,7 @@ const DismissableLayerRefactored = forwardRef<
     onEscapeKeyDown,
     onFocusOutside,
     onPointerDownOutside,
+    safeZone,
     ...restProps
   } = props;
 
@@ -111,6 +110,9 @@ const DismissableLayerRefactored = forwardRef<
   const [node, setNode] = React.useState<DismissableLayerElement | null>(null);
   const mergedRefs = useMergeRefs(forwardedRef, setNode);
   const ownerDoc = ownerDocument(node);
+
+  const hasInteractedOutsideRef = useRef(false);
+  const hasPointerDownOutsideRef = useRef(false);
 
   /* Layer handling */
   const layers = Array.from(context.layers);
@@ -122,7 +124,56 @@ const DismissableLayerRefactored = forwardRef<
   const isPointerEventsEnabled =
     index >= highestLayerWithOutsidePointerEventsDisabledIndex;
 
-  /* TODO: We are now ignoring "safezone". Is safezone needed? */
+  /**
+   * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
+   *
+   * To achieve this, we check if the event target is the trigger, anchor or a child. If it is, we prevent default event behavior.
+   *
+   * The `pointerDownOutside` and `focusOutside` handlers already check if the event target is within the DismissableLayer (`node`).
+   * However, since we don't add a `tabIndex` to the Popover/Tooltip, the `focusOutside` handler doesn't correctly handle focus events.
+   * Therefore, we also need to check that neither the trigger (`anchor`) nor the DismissableLayer (`dismissable`) are the event targets.
+   */
+  function handleOutsideEvent(
+    event: CustomFocusEvent | CustomPointerDownEvent,
+  ) {
+    if (!safeZone?.anchor) {
+      return;
+    }
+
+    if (!event.defaultPrevented) {
+      hasInteractedOutsideRef.current = true;
+      if (event.detail.originalEvent.type === "pointerdown") {
+        hasPointerDownOutsideRef.current = true;
+      }
+    }
+
+    const target = event.target as HTMLElement;
+
+    const targetIsTrigger =
+      safeZone.anchor.contains(target) || target === safeZone.anchor;
+
+    if (targetIsTrigger) {
+      event.preventDefault();
+    }
+
+    /**
+     * In Safari, if the trigger element is inside a container with tabIndex={0}, a click on the trigger
+     * will first fire a 'pointerdownoutside' event on the trigger itself. However, it will then fire a
+     * 'focusoutside' event on the container.
+     *
+     * To handle this, we ignore any 'focusoutside' events if a 'pointerdownoutside' event has already occurred.
+     * 'pointerdownoutside' event is sufficient to indicate interaction outside the DismissableLayer.
+     */
+    if (
+      event.detail.originalEvent.type === "focusin" &&
+      hasPointerDownOutsideRef.current
+    ) {
+      event.preventDefault();
+    }
+    hasPointerDownOutsideRef.current = false;
+    hasInteractedOutsideRef.current = false;
+  }
+
   const pointerDownOutside = usePointerDownOutside((event) => {
     if (!isPointerEventsEnabled) {
       return;
@@ -130,15 +181,24 @@ const DismissableLayerRefactored = forwardRef<
     onPointerDownOutside?.(event);
     onInteractOutside?.(event);
 
+    /**
+     * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+     */
+    safeZone && handleOutsideEvent(event);
+
     if (!event.defaultPrevented && onDismiss) {
       onDismiss();
     }
   }, ownerDoc);
 
-  /* TODO: We are now ignoring "safezone". Is safezone needed? */
   const focusOutside = useFocusOutside((event) => {
     onFocusOutside?.(event);
     onInteractOutside?.(event);
+
+    /**
+     * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+     */
+    safeZone && handleOutsideEvent(event);
 
     if (!event.defaultPrevented && onDismiss) {
       onDismiss();

@@ -54,13 +54,10 @@ interface DismissableLayerBaseProps {
   onDismiss?: () => void;
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
-   * `safeZone.dismissable` is only needed when its element does not have a `tabIndex` since it will not receive focus-events.
    */
   safeZone?: {
     anchor?: Element | null;
-    dismissable?: Element | null;
   };
-
   style?: CSSProperties;
   /**
    * Disables layer from beeing counted in context for nested `DismissableLayer`.
@@ -203,7 +200,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     function handleOutsideEvent(
       event: CustomFocusEvent | CustomPointerDownEvent,
     ) {
-      if ((!safeZone?.anchor && !safeZone?.dismissable) || !enabled) {
+      if (!safeZone?.anchor || !enabled) {
         return;
       }
 
@@ -216,31 +213,11 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
 
       const target = event.target as HTMLElement;
 
-      /**
-       * pointerdown-events works as expected, but focus-events does not.
-       * For focus-event we need to also check `safeZone.dismissable` (the Popover/Tooltip itself) since it does not have a tabIndex.
-       */
-      if (event.detail.originalEvent.type === "pointerdown") {
-        const targetIsTrigger =
-          safeZone?.anchor?.contains(target) || target === safeZone?.anchor;
+      const targetIsTrigger =
+        safeZone.anchor.contains(target) || target === safeZone.anchor;
 
-        /**
-         * This scenario only happens if the dismissable element is not DismissableLayer itself.
-         * In reality, this should never be a case.
-         */
-        const targetIsDismissable = target === safeZone?.dismissable;
-        if (targetIsTrigger || targetIsDismissable) {
-          event.preventDefault();
-        }
-      } else {
-        const targetIsNotTrigger =
-          target instanceof HTMLElement &&
-          ![safeZone?.anchor, safeZone?.dismissable].some((element) =>
-            element?.contains(target as Node),
-          ) &&
-          !target.contains(safeZone?.dismissable ?? null);
-
-        !targetIsNotTrigger && event.preventDefault();
+      if (targetIsTrigger) {
+        event.preventDefault();
       }
 
       /**
