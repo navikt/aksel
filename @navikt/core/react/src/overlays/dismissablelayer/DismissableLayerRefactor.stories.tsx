@@ -1,6 +1,6 @@
 import React, { StrictMode, useRef, useState } from "react";
 import { HStack, VStack } from "../../layout/stack";
-import { DismissableLayerRefactored as DismissableLayer } from "./DismissableLayerRefactored";
+import { DismissableLayer } from "./DismissableLayerRefactored";
 
 export default {
   title: "Utilities/DismissableLayerRefactor",
@@ -287,9 +287,11 @@ export const ParallelDismissableLayer = () => {
   const Layer = ({
     disableOutsidePointerEvents,
     children,
+    nested,
   }: {
     disableOutsidePointerEvents?: boolean;
     children?: React.ReactNode;
+    nested?: boolean;
   }) => {
     const [open, setOpen] = useState(true);
 
@@ -298,7 +300,7 @@ export const ParallelDismissableLayer = () => {
     const style = {
       width: 100,
       height: 100,
-      backgroundColor: "red",
+      backgroundColor: nested ? "red" : "blue",
     };
 
     return (
@@ -306,7 +308,9 @@ export const ParallelDismissableLayer = () => {
         disableOutsidePointerEvents={disableOutsidePointerEvents}
         style={style}
       >
-        <button onClick={() => setOpen(false)}>Close me</button>
+        <button onClick={() => setOpen(false)}>
+          Close me {nested && "nested"}
+        </button>
         {children}
       </DismissableLayer>
     );
@@ -341,16 +345,16 @@ export const ParallelDismissableLayer = () => {
         )}
         {nestedSingle && (
           <Layer disableOutsidePointerEvents>
-            <Layer disableOutsidePointerEvents />
+            <Layer disableOutsidePointerEvents nested />
           </Layer>
         )}
         {nestedDouble && (
           <div>
-            <Layer disableOutsidePointerEvents>
-              <Layer />
-            </Layer>
             <Layer>
-              <Layer disableOutsidePointerEvents />
+              <Layer nested />
+            </Layer>
+            <Layer disableOutsidePointerEvents>
+              <Layer nested />
             </Layer>
           </div>
         )}
