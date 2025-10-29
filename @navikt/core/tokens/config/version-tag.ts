@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "node:fs";
 
 const cssFilePaths = ["./dist/tokens.css", "./dist/darkside/tokens.css"];
 const packageJsonPath = "./package.json";

@@ -1,7 +1,7 @@
 import fastglob from "fast-glob";
-import { readFileSync } from "fs";
 import { select, selectAll } from "hast-util-select";
-import { basename } from "path";
+import { readFileSync } from "node:fs";
+import { basename } from "node:path";
 import parse from "rehype-parse";
 import { unified } from "unified";
 import { describe, expect, test } from "vitest";

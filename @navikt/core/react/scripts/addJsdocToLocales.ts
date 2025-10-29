@@ -1,5 +1,5 @@
-import fs from "fs";
 import jscodeshift from "jscodeshift";
+import fs from "node:fs";
 
 const j = jscodeshift.withParser("ts");
 const file = "src/util/i18n/locales/nb.ts";

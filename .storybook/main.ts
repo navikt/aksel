@@ -1,6 +1,6 @@
 import { StorybookConfig } from "@storybook/react-vite";
 import FG from "fast-glob";
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { loadCsf } from "storybook/internal/csf-tools";

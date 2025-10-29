@@ -1,5 +1,5 @@
 import fg from "fast-glob";
-import { writeFileSync } from "fs";
+import { writeFileSync } from "node:fs";
 import * as docgen from "react-docgen-typescript";
 
 const options: docgen.ParserOptions = {

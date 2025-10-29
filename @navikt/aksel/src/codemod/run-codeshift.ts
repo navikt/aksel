@@ -2,7 +2,7 @@ import chalk from "chalk";
 import { Command } from "commander";
 import fg from "fast-glob";
 import * as jscodeshift from "jscodeshift/src/Runner";
-import path from "path";
+import path from "node:path";
 import { GLOB_IGNORE_PATTERNS, getDefaultGlob } from "./codeshift.utils";
 import {
   getIgnoredFileExtensions,
