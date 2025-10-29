@@ -15,6 +15,7 @@ import {
   CustomFocusEvent,
   CustomPointerDownEvent,
 } from "./util/dispatchCustomEvent";
+import { getSortedLayers } from "./util/sort-layers";
 import { useEscapeKeydown } from "./util/useEscapeKeydown";
 import { useFocusOutside } from "./util/useFocusOutside";
 import { usePointerDownOutside } from "./util/usePointerDownOutside";
@@ -125,62 +126,6 @@ const DismissableLayerContext = React.createContext({
   >(),
   layersWithOutsidePointerEventsDisabled: new Set<DismissableLayerElement>(),
 });
-
-function getSortedLayers(
-  layers: Set<DismissableLayerElement>,
-  branchedLayers: Map<DismissableLayerElement, Set<DismissableLayerElement>>,
-): DismissableLayerElement[] {
-  const sorted: DismissableLayerElement[] = [];
-  const visited = new Set<DismissableLayerElement>();
-  const parentMap = new Map<DismissableLayerElement, DismissableLayerElement>();
-
-  branchedLayers.forEach((children, parent) => {
-    children.forEach((child) => {
-      if (child !== parent) {
-        parentMap.set(child, parent);
-      }
-    });
-  });
-
-  const walk = (layer: DismissableLayerElement) => {
-    if (visited.has(layer)) {
-      return;
-    }
-
-    const parent = parentMap.get(layer);
-    if (parent && !visited.has(parent)) {
-      walk(parent);
-      if (visited.has(layer)) {
-        return;
-      }
-    }
-
-    visited.add(layer);
-    sorted.push(layer);
-
-    const children = branchedLayers.get(layer);
-    if (children) {
-      children.forEach(walk);
-    }
-  };
-
-  layers.forEach(walk);
-
-  return sorted;
-}
-
-function getHighestDisabledLayerIndex(
-  orderedLayers: DismissableLayerElement[],
-  disabledLayers: Set<DismissableLayerElement>,
-): number {
-  for (let i = orderedLayers.length - 1; i >= 0; i -= 1) {
-    if (disabledLayers.has(orderedLayers[i])) {
-      return i;
-    }
-  }
-
-  return -1;
-}
 
 const DismissableLayerInternal = forwardRef<
   HTMLDivElement,
@@ -455,4 +400,17 @@ function dispatchUpdate() {
   document.dispatchEvent(event);
 }
 
-export { DismissableLayer, type DismissableLayerProps };
+function getHighestDisabledLayerIndex(
+  orderedLayers: DismissableLayerElement[],
+  disabledLayers: Set<DismissableLayerElement>,
+): number {
+  for (let i = orderedLayers.length - 1; i >= 0; i -= 1) {
+    if (disabledLayers.has(orderedLayers[i])) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+export { DismissableLayer, type DismissableLayerProps, getSortedLayers };

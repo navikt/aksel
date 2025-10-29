@@ -5,7 +5,7 @@ import { expect, fireEvent, fn, userEvent, within } from "storybook/test";
 import {
   DismissableLayer,
   type DismissableLayerProps,
-} from "./DismissableLayerRefactored";
+} from "./DismissableLayer";
 
 export default {
   title: "Utilities/DismissableLayer/Tests",
