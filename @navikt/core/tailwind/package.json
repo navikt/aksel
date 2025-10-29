@@ -24,6 +24,10 @@
     "url": "git+https://github.com/navikt/aksel.git",
     "directory": "@navikt/core/tailwind"
   },
+  "bugs": {
+    "url": "https://github.com/navikt/aksel/issues"
+  },
+  "homepage": "https://aksel.nav.no/",
   "devDependencies": {
     "@navikt/ds-tokens": "^7.32.4",
     "color": "5.0.0",
