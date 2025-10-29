@@ -20,10 +20,6 @@ import { useEscapeKeydown } from "./util/useEscapeKeydown";
 import { useFocusOutside } from "./util/useFocusOutside";
 import { usePointerDownOutside } from "./util/usePointerDownOutside";
 
-type DismissableLayerElement = React.ComponentRef<
-  typeof DismissableLayerInternal
->;
-
 interface DismissableLayerBaseProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -73,50 +69,41 @@ interface DismissableLayerBaseProps
 
 type DismissableLayerProps = DismissableLayerBaseProps & AsChild;
 
-let originalBodyPointerEvents: string;
-
-/* TODO:  Maybe just omit instead of destructuring */
 const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
-  (
-    {
-      enabled = true,
-      disableOutsidePointerEvents,
-      onDismiss,
-      onEscapeKeyDown,
-      onFocusOutside,
-      onInteractOutside,
-      onPointerDownOutside,
-      safeZone,
-      ...restProps
-    }: DismissableLayerProps,
-    forwardedRef,
-  ) => {
+  ({ enabled = true, ...restProps }: DismissableLayerProps, forwardedRef) => {
     if (!enabled) {
       const Component = restProps.asChild ? Slot : "div";
-      return <Component {...omit(restProps, ["asChild"])} ref={forwardedRef} />;
+      return (
+        <Component
+          {...omit(restProps, [
+            "asChild",
+            "disableOutsidePointerEvents",
+            "onDismiss",
+            "onEscapeKeyDown",
+            "onFocusOutside",
+            "onInteractOutside",
+            "onPointerDownOutside",
+            "safeZone",
+          ])}
+          ref={forwardedRef}
+        />
+      );
     }
 
-    return (
-      <DismissableLayerInternal
-        {...restProps}
-        ref={forwardedRef}
-        disableOutsidePointerEvents={disableOutsidePointerEvents}
-        onDismiss={onDismiss}
-        onEscapeKeyDown={onEscapeKeyDown}
-        onFocusOutside={onFocusOutside}
-        onInteractOutside={onInteractOutside}
-        onPointerDownOutside={onPointerDownOutside}
-        safeZone={safeZone}
-      />
-    );
+    return <DismissableLayerInternal {...restProps} ref={forwardedRef} />;
   },
 );
+
+type DismissableLayerElement = React.ComponentRef<
+  typeof DismissableLayerInternal
+>;
 
 const BranchedLayerContext =
   React.createContext<DismissableLayerElement | null>(null);
 
 /* ------------------------ DismissableLayerInternal ------------------------ */
 const CONTEXT_UPDATE_EVENT = "dismissableLayer.update";
+let originalBodyPointerEvents: string;
 
 const DismissableLayerContext = React.createContext({
   layers: new Set<DismissableLayerElement>(),
@@ -130,267 +117,272 @@ const DismissableLayerContext = React.createContext({
 const DismissableLayerInternal = forwardRef<
   HTMLDivElement,
   DismissableLayerProps
->((props: DismissableLayerProps, forwardedRef) => {
-  const {
-    children,
-    disableOutsidePointerEvents,
-    onDismiss,
-    onInteractOutside,
-    onEscapeKeyDown,
-    onFocusOutside,
-    onPointerDownOutside,
-    safeZone,
-    asChild,
-    ...restProps
-  } = props;
+>(
+  (
+    {
+      children,
+      disableOutsidePointerEvents,
+      onDismiss,
+      onInteractOutside,
+      onEscapeKeyDown,
+      onFocusOutside,
+      onPointerDownOutside,
+      safeZone,
+      asChild,
+      ...restProps
+    }: DismissableLayerProps,
+    forwardedRef,
+  ) => {
+    const context = useContext(DismissableLayerContext);
 
-  const context = useContext(DismissableLayerContext);
-
-  const [, force] = useState({});
-  const [node, setNode] = React.useState<DismissableLayerElement | null>(null);
-  const mergedRefs = useMergeRefs(forwardedRef, setNode);
-  const ownerDoc = ownerDocument(node);
-
-  const hasInteractedOutsideRef = useRef(false);
-  const hasPointerDownOutsideRef = useRef(false);
-
-  /* Layer handling */
-  const layers = getSortedLayers(context.layers, context.branchedLayers);
-  const highestLayerWithOutsidePointerEventsDisabledIndex =
-    getHighestDisabledLayerIndex(
-      layers,
-      context.layersWithOutsidePointerEventsDisabled,
+    const [, force] = useState({});
+    const [node, setNode] = React.useState<DismissableLayerElement | null>(
+      null,
     );
-  const index = node ? layers.indexOf(node) : -1;
-  const isBodyPointerEventsDisabled =
-    context.layersWithOutsidePointerEventsDisabled.size > 0;
-  const isPointerEventsEnabled =
-    highestLayerWithOutsidePointerEventsDisabledIndex === -1 ||
-    index >= highestLayerWithOutsidePointerEventsDisabledIndex;
+    const mergedRefs = useMergeRefs(forwardedRef, setNode);
+    const ownerDoc = ownerDocument(node);
 
-  /**
-   * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
-   * To achieve this, we check if the event target is the trigger, anchor or a child. If it is, we prevent default event behavior.
-   */
-  function handleOutsideEvent(
-    event: CustomFocusEvent | CustomPointerDownEvent,
-  ) {
-    if (!safeZone?.anchor) {
-      return;
-    }
+    const hasInteractedOutsideRef = useRef(false);
+    const hasPointerDownOutsideRef = useRef(false);
 
-    if (!event.defaultPrevented) {
-      hasInteractedOutsideRef.current = true;
-      if (event.detail.originalEvent.type === "pointerdown") {
-        hasPointerDownOutsideRef.current = true;
-      }
-    }
-
-    const target = event.target as HTMLElement;
-
-    const targetIsTrigger =
-      safeZone.anchor.contains(target) || target === safeZone.anchor;
-
-    if (targetIsTrigger) {
-      event.preventDefault();
-    }
+    /* Layer handling */
+    const layers = getSortedLayers(context.layers, context.branchedLayers);
+    const highestLayerWithOutsidePointerEventsDisabledIndex =
+      getHighestDisabledLayerIndex(
+        layers,
+        context.layersWithOutsidePointerEventsDisabled,
+      );
+    const index = node ? layers.indexOf(node) : -1;
+    const isBodyPointerEventsDisabled =
+      context.layersWithOutsidePointerEventsDisabled.size > 0;
+    const isPointerEventsEnabled =
+      highestLayerWithOutsidePointerEventsDisabledIndex === -1 ||
+      index >= highestLayerWithOutsidePointerEventsDisabledIndex;
 
     /**
-     * In Safari, if the trigger element is inside a container with tabIndex={0}, a click on the trigger
-     * will first fire a 'pointerdownoutside' event on the trigger itself. However, it will then fire a
-     * 'focusoutside' event on the container.
-     *
-     * To handle this, we ignore any 'focusoutside' events if a 'pointerdownoutside' event has already occurred.
-     * 'pointerdownoutside' event is sufficient to indicate interaction outside the DismissableLayer.
+     * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
+     * To achieve this, we check if the event target is the trigger, anchor or a child. If it is, we prevent default event behavior.
      */
-    if (
-      event.detail.originalEvent.type === "focusin" &&
-      hasPointerDownOutsideRef.current
+    function handleOutsideEvent(
+      event: CustomFocusEvent | CustomPointerDownEvent,
     ) {
-      event.preventDefault();
-    }
-    hasPointerDownOutsideRef.current = false;
-    hasInteractedOutsideRef.current = false;
-  }
-
-  const pointerDownOutside = usePointerDownOutside((event) => {
-    if (!isPointerEventsEnabled) {
-      return;
-    }
-    onPointerDownOutside?.(event);
-    onInteractOutside?.(event);
-
-    /**
-     * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
-     */
-    safeZone && handleOutsideEvent(event);
-
-    if (!event.defaultPrevented && onDismiss) {
-      onDismiss();
-    }
-  }, ownerDoc);
-
-  const focusOutside = useFocusOutside((event) => {
-    onFocusOutside?.(event);
-    onInteractOutside?.(event);
-
-    /**
-     * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
-     */
-    safeZone && handleOutsideEvent(event);
-
-    if (!event.defaultPrevented && onDismiss) {
-      onDismiss();
-    }
-  }, ownerDoc);
-
-  useEscapeKeydown((event) => {
-    /**
-     * The deepest nested element will always be last in the descendants list.
-     * This allows us to only close the highest layer when pressing escape.
-     */
-    const isHighestLayer = index === context.layers.size - 1;
-    if (!isHighestLayer) {
-      return;
-    }
-
-    /**
-     * We call this before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
-     */
-    onEscapeKeyDown?.(event);
-    /**
-     * `onEscapeKeyDown` is able to preventDefault the event, thus stopping call for `onDismiss`.
-     * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
-     */
-    if (!event.defaultPrevented && onDismiss) {
-      event.preventDefault();
-      onDismiss();
-    }
-  }, ownerDoc);
-
-  /**
-   * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
-   */
-  useEffect(() => {
-    if (!node) {
-      return;
-    }
-
-    if (disableOutsidePointerEvents) {
-      if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
-        originalBodyPointerEvents = ownerDoc.body.style.pointerEvents;
-        ownerDoc.body.style.pointerEvents = "none";
+      if (!safeZone?.anchor) {
+        return;
       }
-      context.layersWithOutsidePointerEventsDisabled.add(node);
-    }
-    context.layers.add(node);
-    dispatchUpdate();
 
-    return () => {
+      if (!event.defaultPrevented) {
+        hasInteractedOutsideRef.current = true;
+        if (event.detail.originalEvent.type === "pointerdown") {
+          hasPointerDownOutsideRef.current = true;
+        }
+      }
+
+      const target = event.target as HTMLElement;
+
+      const targetIsTrigger =
+        safeZone.anchor.contains(target) || target === safeZone.anchor;
+
+      if (targetIsTrigger) {
+        event.preventDefault();
+      }
+
+      /**
+       * In Safari, if the trigger element is inside a container with tabIndex={0}, a click on the trigger
+       * will first fire a 'pointerdownoutside' event on the trigger itself. However, it will then fire a
+       * 'focusoutside' event on the container.
+       *
+       * To handle this, we ignore any 'focusoutside' events if a 'pointerdownoutside' event has already occurred.
+       * 'pointerdownoutside' event is sufficient to indicate interaction outside the DismissableLayer.
+       */
       if (
-        disableOutsidePointerEvents &&
-        context.layersWithOutsidePointerEventsDisabled.size === 1
+        event.detail.originalEvent.type === "focusin" &&
+        hasPointerDownOutsideRef.current
       ) {
-        ownerDoc.body.style.pointerEvents = originalBodyPointerEvents;
+        event.preventDefault();
       }
-    };
-  }, [node, disableOutsidePointerEvents, context, ownerDoc]);
+      hasPointerDownOutsideRef.current = false;
+      hasInteractedOutsideRef.current = false;
+    }
 
-  /**
-   * We purposefully prevent combining this effect with the `disableOutsidePointerEvents` effect
-   * because a change to `disableOutsidePointerEvents` would remove this layer from the stack
-   * and add it to the end again so the layering order wouldn't be creation order.
-   * We only want them to be removed from context stacks when unmounted.
-   */
-  useEffect(() => {
-    return () => {
+    const pointerDownOutside = usePointerDownOutside((event) => {
+      if (!isPointerEventsEnabled) {
+        return;
+      }
+      onPointerDownOutside?.(event);
+      onInteractOutside?.(event);
+
+      /**
+       * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+       */
+      safeZone && handleOutsideEvent(event);
+
+      if (!event.defaultPrevented && onDismiss) {
+        onDismiss();
+      }
+    }, ownerDoc);
+
+    const focusOutside = useFocusOutside((event) => {
+      onFocusOutside?.(event);
+      onInteractOutside?.(event);
+
+      /**
+       * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+       */
+      safeZone && handleOutsideEvent(event);
+
+      if (!event.defaultPrevented && onDismiss) {
+        onDismiss();
+      }
+    }, ownerDoc);
+
+    useEscapeKeydown((event) => {
+      /**
+       * The deepest nested element will always be last in the descendants list.
+       * This allows us to only close the highest layer when pressing escape.
+       */
+      const isHighestLayer = index === context.layers.size - 1;
+      if (!isHighestLayer) {
+        return;
+      }
+
+      /**
+       * We call this before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+       */
+      onEscapeKeyDown?.(event);
+      /**
+       * `onEscapeKeyDown` is able to preventDefault the event, thus stopping call for `onDismiss`.
+       * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
+       */
+      if (!event.defaultPrevented && onDismiss) {
+        event.preventDefault();
+        onDismiss();
+      }
+    }, ownerDoc);
+
+    /**
+     * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
+     */
+    useEffect(() => {
       if (!node) {
         return;
       }
 
-      context.layers.delete(node);
-      context.layersWithOutsidePointerEventsDisabled.delete(node);
+      if (disableOutsidePointerEvents) {
+        if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
+          originalBodyPointerEvents = ownerDoc.body.style.pointerEvents;
+          ownerDoc.body.style.pointerEvents = "none";
+        }
+        context.layersWithOutsidePointerEventsDisabled.add(node);
+      }
+      context.layers.add(node);
       dispatchUpdate();
-    };
-  }, [node, context]);
 
-  const parentBranchedLayer = useContext(BranchedLayerContext);
+      return () => {
+        if (
+          disableOutsidePointerEvents &&
+          context.layersWithOutsidePointerEventsDisabled.size === 1
+        ) {
+          ownerDoc.body.style.pointerEvents = originalBodyPointerEvents;
+        }
+      };
+    }, [node, disableOutsidePointerEvents, context, ownerDoc]);
 
-  /**
-   * Handles registering and unregistering branched layers.
-   * When this layer has a parent, we register it as a child of the parent.
-   */
-  useEffect(() => {
-    if (!node || !parentBranchedLayer || node === parentBranchedLayer) {
-      return;
-    }
+    /**
+     * We purposefully prevent combining this effect with the `disableOutsidePointerEvents` effect
+     * because a change to `disableOutsidePointerEvents` would remove this layer from the stack
+     * and add it to the end again so the layering order wouldn't be creation order.
+     * We only want them to be removed from context stacks when unmounted.
+     */
+    useEffect(() => {
+      return () => {
+        if (!node) {
+          return;
+        }
 
-    // Get or create the Set of children for this parent
-    if (!context.branchedLayers.has(parentBranchedLayer)) {
-      context.branchedLayers.set(parentBranchedLayer, new Set());
-    }
+        context.layers.delete(node);
+        context.layersWithOutsidePointerEventsDisabled.delete(node);
+        dispatchUpdate();
+      };
+    }, [node, context]);
 
-    const branchedChildren = context.branchedLayers.get(parentBranchedLayer)!;
-    branchedChildren.add(node);
-    dispatchUpdate();
+    const parentBranchedLayer = useContext(BranchedLayerContext);
 
-    return () => {
-      // Remove this node from the parent's children
-      branchedChildren.delete(node);
-
-      // If the parent has no more children, remove the parent from branchedLayers
-      if (branchedChildren.size === 0) {
-        context.branchedLayers.delete(parentBranchedLayer);
+    /**
+     * Handles registering and unregistering branched layers.
+     * When this layer has a parent, we register it as a child of the parent.
+     */
+    useEffect(() => {
+      if (!node || !parentBranchedLayer || node === parentBranchedLayer) {
+        return;
       }
 
+      // Get or create the Set of children for this parent
+      if (!context.branchedLayers.has(parentBranchedLayer)) {
+        context.branchedLayers.set(parentBranchedLayer, new Set());
+      }
+
+      const branchedChildren = context.branchedLayers.get(parentBranchedLayer)!;
+      branchedChildren.add(node);
       dispatchUpdate();
-    };
-  }, [node, parentBranchedLayer, context]);
 
-  /**
-   * Force update when context changes to update index and pointer-events state.
-   * We use a custom event to avoid unnecessary renders from other state changes in the context.
-   */
-  useEffect(() => {
-    const handleUpdate = () => force({});
-    document.addEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
-    return () =>
-      document.removeEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
-  }, []);
+      return () => {
+        // Remove this node from the parent's children
+        branchedChildren.delete(node);
 
-  const Comp = asChild ? Slot : "div";
+        // If the parent has no more children, remove the parent from branchedLayers
+        if (branchedChildren.size === 0) {
+          context.branchedLayers.delete(parentBranchedLayer);
+        }
 
-  return (
-    <BranchedLayerContext.Provider value={node}>
-      <Comp
-        {...restProps}
-        ref={mergedRefs}
-        style={{
-          pointerEvents: isBodyPointerEventsDisabled
-            ? isPointerEventsEnabled
-              ? "auto"
-              : "none"
-            : undefined,
-          ...restProps.style,
-        }}
-        onFocusCapture={composeEventHandlers(
-          props.onFocusCapture,
-          focusOutside.onFocusCapture,
-        )}
-        onBlurCapture={composeEventHandlers(
-          props.onBlurCapture,
-          focusOutside.onBlurCapture,
-        )}
-        onPointerDownCapture={composeEventHandlers(
-          props.onPointerDownCapture,
-          pointerDownOutside.onPointerDownCapture,
-        )}
-      >
-        {children}
-      </Comp>
-    </BranchedLayerContext.Provider>
-  );
-});
+        dispatchUpdate();
+      };
+    }, [node, parentBranchedLayer, context]);
+
+    /**
+     * Force update when context changes to update index and pointer-events state.
+     * We use a custom event to avoid unnecessary renders from other state changes in the context.
+     */
+    useEffect(() => {
+      const handleUpdate = () => force({});
+      document.addEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
+      return () =>
+        document.removeEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
+    }, []);
+
+    const Comp = asChild ? Slot : "div";
+
+    return (
+      <BranchedLayerContext.Provider value={node}>
+        <Comp
+          {...restProps}
+          ref={mergedRefs}
+          style={{
+            pointerEvents: isBodyPointerEventsDisabled
+              ? isPointerEventsEnabled
+                ? "auto"
+                : "none"
+              : undefined,
+            ...restProps.style,
+          }}
+          onFocusCapture={composeEventHandlers(
+            restProps.onFocusCapture,
+            focusOutside.onFocusCapture,
+          )}
+          onBlurCapture={composeEventHandlers(
+            restProps.onBlurCapture,
+            focusOutside.onBlurCapture,
+          )}
+          onPointerDownCapture={composeEventHandlers(
+            restProps.onPointerDownCapture,
+            pointerDownOutside.onPointerDownCapture,
+          )}
+        >
+          {children}
+        </Comp>
+      </BranchedLayerContext.Provider>
+    );
+  },
+);
 
 /**
  * Dispatches a custom event to inform all `DismissableLayer` components to update.
@@ -400,6 +392,10 @@ function dispatchUpdate() {
   document.dispatchEvent(event);
 }
 
+/**
+ * Returns the highest index of a disabled layer in the ordered layers array.
+ * If no layers are disabled, returns -1.
+ */
 function getHighestDisabledLayerIndex(
   orderedLayers: DismissableLayerElement[],
   disabledLayers: Set<DismissableLayerElement>,
