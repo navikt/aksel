@@ -3,7 +3,7 @@ import { getSortedLayers } from "./sort-layers";
 
 type DismissableLayerElement = HTMLDivElement;
 
-describe("getSortedLayers", () => {
+describe("DismissableLayer: getSortedLayers", () => {
   test("should return empty array when no layers", () => {
     const layers = new Set<DismissableLayerElement>();
     const branchedLayers = new Map();
