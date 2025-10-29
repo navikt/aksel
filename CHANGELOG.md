@@ -1845,7 +1845,6 @@
 ### @navikt/ds-react
 
 - :recycle: Refaktorering og småfikser ([#2265](https://github.com/navikt/aksel/pull/2265))
-
   - Refaktorering som følge av nye ESLint-regler
   - AccordionItem/ToggleGroup: Støtte for 'id'-prop
   - MonthPicker: Mer presis type for 'onMonthSelect' prop
