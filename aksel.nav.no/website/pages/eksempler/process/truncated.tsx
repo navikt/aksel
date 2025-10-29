@@ -33,5 +33,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "`isTruncated` styrer hvor linjen som kobler hendelsene vises. Dette brukes for å illustrere at prosessen har flere hendelser før/etter enn det som vises.",
+  desc: "`isTruncated` legger til en linje før første og/eller etter siste hendelse. Dette brukes for å illustrere at prosessen har flere hendelser før/etter enn det som vises.",
 };
