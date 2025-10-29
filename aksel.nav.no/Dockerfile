@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs22-debian12
+FROM gcr.io/distroless/nodejs24-debian12
 
 WORKDIR /app
 COPY aksel.nav.no/website/.next/standalone ./
