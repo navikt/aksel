@@ -59,10 +59,19 @@
       border-start-end-radius: 4px;
       min-height: 1.5rem;
     }
+
+    .navds-process__event:not(:first-of-type) &,
+    .navds-process:is(:not([data-truncated="start"], [data-truncated="both"])) & {
+      display: none;
+    }
   }
 
   &[data-position="end"] {
     grid-row: line-2;
+
+    .navds-process:is(:not([data-truncated="end"], [data-truncated="both"])) .navds-process__event:last-of-type & {
+      display: none;
+    }
 
     .navds-process__event:last-of-type & {
       border-end-start-radius: 4px;

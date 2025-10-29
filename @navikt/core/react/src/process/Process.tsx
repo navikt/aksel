@@ -22,6 +22,11 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * @default false
    */
   hideStatusText?: boolean;
+  /**
+   * Indicates that the process is truncated and that there are more Events
+   * not shown either before, after or on both sides of the current list.
+   */
+  isTruncated?: "start" | "end" | "both";
 }
 
 type ProcessContextProps = Pick<ProcessProps, "hideStatusText"> & {
@@ -100,6 +105,7 @@ export const Process: ProcessComponent = forwardRef<
       className,
       hideStatusText = false,
       id,
+      isTruncated,
       ...restProps
     }: ProcessProps,
     forwardedRef,
@@ -157,6 +163,7 @@ export const Process: ProcessComponent = forwardRef<
         className={cn("navds-process", className)}
         id={rootId}
         aria-controls={activeChildId}
+        data-truncated={isTruncated}
       >
         <ProcessContextProvider
           hideStatusText={hideStatusText}
@@ -197,11 +204,6 @@ interface ProcessEventProps extends React.HTMLAttributes<HTMLLIElement> {
    * @default "uncompleted"
    */
   status?: "active" | "completed" | "uncompleted";
-  /**
-   * Changes Process line placement
-   * @default "auto"
-   */
-  connectorPlacement?: "auto" | "start" | "end" | "both";
 }
 
 export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
@@ -215,7 +217,6 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
       className,
       id,
       status = "uncompleted",
-      connectorPlacement = "auto",
       ...restProps
     }: ProcessEventProps,
     forwardedRef,
@@ -242,11 +243,8 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
         data-dot={bullet === undefined}
         data-process-event=""
         data-status={status}
-        data-connector={connectorPlacement}
       >
-        {(connectorPlacement === "both" || connectorPlacement === "start") && (
-          <ProcessLine position="start" />
-        )}
+        <ProcessLine position="start" />
         <div className={cn("navds-process__item")}>
           <ProcessBullet>{bullet}</ProcessBullet>
 
@@ -266,7 +264,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
             )}
           </div>
         </div>
-        {connectorPlacement !== "start" && <ProcessLine position="end" />}
+        <ProcessLine position="end" />
       </li>
     );
   },

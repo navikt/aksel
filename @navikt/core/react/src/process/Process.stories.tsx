@@ -95,65 +95,32 @@ export const ConnectorPlacement: Story = {
           status="completed"
           bullet={<SparklesFillIcon />}
           title="auto"
-          connectorPlacement="auto"
         />
-        <Process.Event
-          bullet={<SparklesFillIcon />}
-          title="auto"
-          connectorPlacement="auto"
-        />
+        <Process.Event bullet={<SparklesFillIcon />} title="auto" />
       </Process>
-      <Process>
+      <Process isTruncated="both">
         <Process.Event
           status="completed"
           bullet={<SparklesFillIcon />}
           title="both"
-          connectorPlacement="both"
         />
-        <Process.Event
-          bullet={<SparklesFillIcon />}
-          title="end"
-          connectorPlacement="end"
-        />
+        <Process.Event bullet={<SparklesFillIcon />} title="both" />
       </Process>
-      <Process>
-        <Process.Event
-          status="completed"
-          bullet={<SparklesFillIcon />}
-          title="Both"
-          connectorPlacement="both"
-        />
-        <Process.Event
-          bullet={<SparklesFillIcon />}
-          title="Both"
-          connectorPlacement="both"
-        />
-      </Process>
-      <Process>
+      <Process isTruncated="start">
         <Process.Event
           status="completed"
           bullet={<SparklesFillIcon />}
           title="start"
-          connectorPlacement="start"
         />
-        <Process.Event
-          bullet={<SparklesFillIcon />}
-          title="start"
-          connectorPlacement="start"
-        />
+        <Process.Event bullet={<SparklesFillIcon />} title="start" />
       </Process>
-      <Process>
+      <Process isTruncated="end">
         <Process.Event
           status="completed"
           bullet={<SparklesFillIcon />}
           title="end"
-          connectorPlacement="end"
         />
-        <Process.Event
-          bullet={<SparklesFillIcon />}
-          title="end"
-          connectorPlacement="end"
-        />
+        <Process.Event bullet={<SparklesFillIcon />} title="end" />
       </Process>
     </HStack>
   ),
@@ -167,13 +134,11 @@ export const ConnectorStates: Story = {
           status="uncompleted"
           bullet={<SparklesFillIcon />}
           title="uncompleted + auto"
-          connectorPlacement="auto"
         />
         <Process.Event
           status="uncompleted"
           bullet={<SparklesFillIcon />}
           title="uncompleted + auto"
-          connectorPlacement="auto"
         />
       </Process>
       <Process>
@@ -181,13 +146,11 @@ export const ConnectorStates: Story = {
           status="active"
           bullet={<SparklesFillIcon />}
           title="active + auto"
-          connectorPlacement="auto"
         />
         <Process.Event
           status="active"
           bullet={<SparklesFillIcon />}
           title="active + auto"
-          connectorPlacement="auto"
         />
       </Process>
       <Process>
@@ -195,55 +158,47 @@ export const ConnectorStates: Story = {
           status="completed"
           bullet={<SparklesFillIcon />}
           title="completed + auto"
-          connectorPlacement="auto"
         />
         <Process.Event
           status="completed"
           bullet={<SparklesFillIcon />}
           title="completed + auto"
-          connectorPlacement="auto"
         />
       </Process>
-      <Process>
+      <Process isTruncated="both">
         <Process.Event
           status="uncompleted"
           bullet={<SparklesFillIcon />}
           title="uncompleted + both"
-          connectorPlacement="both"
         />
         <Process.Event
           status="uncompleted"
           bullet={<SparklesFillIcon />}
-          title="uncompleted + end"
-          connectorPlacement="end"
+          title="uncompleted + both"
         />
       </Process>
-      <Process>
+      <Process isTruncated="both">
         <Process.Event
           status="active"
           bullet={<SparklesFillIcon />}
           title="active + both"
-          connectorPlacement="both"
         />
         <Process.Event
           status="active"
           bullet={<SparklesFillIcon />}
-          title="active + end"
-          connectorPlacement="end"
+          title="active + both"
         />
       </Process>
-      <Process>
+      <Process isTruncated="both">
         <Process.Event
           status="completed"
           bullet={<SparklesFillIcon />}
           title="completed + both"
-          connectorPlacement="both"
         />
         <Process.Event
           status="completed"
           bullet={<SparklesFillIcon />}
-          title="completed + end"
-          connectorPlacement="end"
+          title="completed + both"
         />
       </Process>
     </HStack>
@@ -254,76 +209,28 @@ export const ConnectorDot: Story = {
   render: () => (
     <HStack gap="space-16">
       <Process>
-        <Process.Event
-          status="uncompleted"
-          title="uncompleted + auto"
-          connectorPlacement="auto"
-        />
-        <Process.Event
-          status="uncompleted"
-          title="uncompleted + auto"
-          connectorPlacement="auto"
-        />
+        <Process.Event status="uncompleted" title="uncompleted + auto" />
+        <Process.Event status="uncompleted" title="uncompleted + auto" />
       </Process>
       <Process>
-        <Process.Event
-          status="active"
-          title="active + auto"
-          connectorPlacement="auto"
-        />
-        <Process.Event
-          status="active"
-          title="active + auto"
-          connectorPlacement="auto"
-        />
+        <Process.Event status="active" title="active + auto" />
+        <Process.Event status="active" title="active + auto" />
       </Process>
       <Process>
-        <Process.Event
-          status="completed"
-          title="completed + auto"
-          connectorPlacement="auto"
-        />
-        <Process.Event
-          status="completed"
-          title="completed + auto"
-          connectorPlacement="auto"
-        />
+        <Process.Event status="completed" title="completed + auto" />
+        <Process.Event status="completed" title="completed + auto" />
       </Process>
-      <Process>
-        <Process.Event
-          status="uncompleted"
-          title="uncompleted + both"
-          connectorPlacement="both"
-        />
-        <Process.Event
-          status="uncompleted"
-          title="uncompleted + end"
-          connectorPlacement="end"
-        />
+      <Process isTruncated="both">
+        <Process.Event status="uncompleted" title="uncompleted + both" />
+        <Process.Event status="uncompleted" title="uncompleted + both" />
       </Process>
-      <Process>
-        <Process.Event
-          status="active"
-          title="active + both"
-          connectorPlacement="both"
-        />
-        <Process.Event
-          status="active"
-          title="active + end"
-          connectorPlacement="end"
-        />
+      <Process isTruncated="both">
+        <Process.Event status="active" title="active + both" />
+        <Process.Event status="active" title="active + both" />
       </Process>
-      <Process>
-        <Process.Event
-          status="completed"
-          title="completed + both"
-          connectorPlacement="both"
-        />
-        <Process.Event
-          status="completed"
-          title="completed + end"
-          connectorPlacement="end"
-        />
+      <Process isTruncated="both">
+        <Process.Event status="completed" title="completed + both" />
+        <Process.Event status="completed" title="completed + both" />
       </Process>
     </HStack>
   ),

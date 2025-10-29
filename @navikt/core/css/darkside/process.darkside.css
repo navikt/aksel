@@ -59,10 +59,19 @@
       border-start-end-radius: var(--ax-radius-4);
       min-height: 1.5rem;
     }
+
+    .aksel-process__event:not(:first-of-type) &,
+    .aksel-process:is(:not([data-truncated="start"], [data-truncated="both"])) & {
+      display: none;
+    }
   }
 
   &[data-position="end"] {
     grid-row: line-2;
+
+    .aksel-process:is(:not([data-truncated="end"], [data-truncated="both"])) .aksel-process__event:last-of-type & {
+      display: none;
+    }
 
     .aksel-process__event:last-of-type & {
       border-end-start-radius: var(--ax-radius-4);
@@ -87,10 +96,6 @@
 
   .aksel-process__event:not([data-status="active"]) & {
     border-image: unset;
-  }
-
-  .aksel-process__event:last-of-type:is([data-connector="auto"]) & {
-    display: none;
   }
 }
 
