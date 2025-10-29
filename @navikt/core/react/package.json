@@ -624,6 +624,16 @@
         "default": "./cjs/form/form-progress/index.js"
       }
     },
+    "./InlineMessage": {
+      "import": {
+        "types": "./esm/inline-message/index.d.ts",
+        "default": "./esm/inline-message/index.js"
+      },
+      "require": {
+        "types": "./cjs/inline-message/index.d.ts",
+        "default": "./cjs/inline-message/index.js"
+      }
+    },
     "./GlobalAlert": {
       "import": {
         "types": "./esm/alert/global-alert/index.d.ts",
