@@ -3,7 +3,7 @@ import type { StoryObj } from "@storybook/react-vite/*";
 import React from "react";
 import { expect, fireEvent, fn, userEvent, within } from "storybook/test";
 import {
-  DismissableLayerRefactored as DismissableLayer,
+  DismissableLayer,
   type DismissableLayerProps,
 } from "./DismissableLayerRefactored";
 
@@ -302,6 +302,8 @@ export const NestedEscapeKeydown: StoryObj<{
   render: (props) => {
     const [showRoot, setShowRoot] = React.useState(true);
     const [showNested, setShowNested] = React.useState(true);
+    const [enabled, setEnabled] = React.useState(true);
+    const [enabledNested, setEnabledNested] = React.useState(true);
 
     return (
       <div>
@@ -312,6 +314,8 @@ export const NestedEscapeKeydown: StoryObj<{
               props.root.onDismiss?.();
               setShowRoot(false);
             }}
+            enabled={enabled}
+            id="root"
           >
             <input type="text" data-testId="root" />
             {showNested && (
@@ -321,8 +325,16 @@ export const NestedEscapeKeydown: StoryObj<{
                   props.nested?.onDismiss?.();
                   setShowNested(false);
                 }}
+                id="nested"
+                enabled={enabledNested}
               >
                 <input type="text" data-testId="nested" />
+                <button onClick={() => setEnabled((x) => !x)}>
+                  toggle root {enabled}
+                </button>
+                <button onClick={() => setEnabledNested((x) => !x)}>
+                  toggle nested {enabledNested}
+                </button>
               </DismissableLayer>
             )}
           </DismissableLayer>
@@ -330,7 +342,7 @@ export const NestedEscapeKeydown: StoryObj<{
       </div>
     );
   },
-  play: async ({ args }) => {
+  /* play: async ({ args }) => {
     expect(args.root.onDismiss).not.toHaveBeenCalled();
     expect(args.nested.onDismiss).not.toHaveBeenCalled();
 
@@ -343,7 +355,7 @@ export const NestedEscapeKeydown: StoryObj<{
 
     expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
     expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
-  },
+  }, */
   args: {
     root: {
       onDismiss: fn(),

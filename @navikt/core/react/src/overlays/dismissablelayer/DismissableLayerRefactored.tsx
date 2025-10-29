@@ -1,14 +1,13 @@
 import React, {
-  CSSProperties,
   forwardRef,
   useContext,
   useEffect,
   useRef,
   useState,
 } from "react";
+import { Slot } from "../../slot/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
-import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { ownerDocument } from "../../util/owner";
 import { AsChild } from "../../util/types/AsChild";
 import {
@@ -20,15 +19,8 @@ import { useFocusOutside } from "./util/useFocusOutside";
 import { usePointerDownOutside } from "./util/usePointerDownOutside";
 
 type DismissableLayerElement = React.ComponentRef<
-  typeof DismissableLayerRefactored
+  typeof DismissableLayerInternal
 >;
-
-const CONTEXT_UPDATE_EVENT = "dismissableLayer.update";
-
-const DismissableLayerContext = React.createContext({
-  layers: new Set<DismissableLayerElement>(),
-  layersWithOutsidePointerEventsDisabled: new Set<DismissableLayerElement>(),
-});
 
 interface DismissableLayerBaseProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -71,24 +63,36 @@ interface DismissableLayerBaseProps
   safeZone?: {
     anchor?: Element | null;
   };
-  style?: CSSProperties;
+  /**
+   * @default true
+   */
+  enabled?: boolean;
 }
 
 type DismissableLayerProps = DismissableLayerBaseProps & AsChild;
 
-export const [
-  DismissableDescendantsProvider,
-  useDismissableDescendantsContext,
-  useDismissableDescendants,
-  useDismissableDescendant,
-] = createDescendantContext<
-  HTMLDivElement,
-  { disableOutsidePointerEvents: boolean; forceUpdate: () => void }
->();
-
 let originalBodyPointerEvents: string;
 
-const DismissableLayerRefactored = forwardRef<
+const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
+  ({ enabled = true, ...restProps }: DismissableLayerProps, forwardedRef) => {
+    if (!enabled) {
+      const Component = restProps.asChild ? Slot : "div";
+      return <Component {...restProps} ref={forwardedRef} />;
+    }
+
+    return <DismissableLayerInternal {...restProps} ref={forwardedRef} />;
+  },
+);
+
+/* ------------------------ DismissableLayerInternal ------------------------ */
+const CONTEXT_UPDATE_EVENT = "dismissableLayer.update";
+
+const DismissableLayerContext = React.createContext({
+  layers: new Set<DismissableLayerElement>(),
+  layersWithOutsidePointerEventsDisabled: new Set<DismissableLayerElement>(),
+});
+
+const DismissableLayerInternal = forwardRef<
   HTMLDivElement,
   DismissableLayerProps
 >((props: DismissableLayerProps, forwardedRef) => {
@@ -101,6 +105,7 @@ const DismissableLayerRefactored = forwardRef<
     onFocusOutside,
     onPointerDownOutside,
     safeZone,
+    asChild,
     ...restProps
   } = props;
 
@@ -276,6 +281,7 @@ const DismissableLayerRefactored = forwardRef<
         return;
       }
 
+      console.info("Removing layer", node);
       context.layers.delete(node);
       context.layersWithOutsidePointerEventsDisabled.delete(node);
       dispatchUpdate();
@@ -293,8 +299,10 @@ const DismissableLayerRefactored = forwardRef<
       document.removeEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
   }, []);
 
+  const Comp = asChild ? Slot : "div";
+
   return (
-    <div
+    <Comp
       {...restProps}
       ref={mergedRefs}
       style={{
@@ -319,7 +327,7 @@ const DismissableLayerRefactored = forwardRef<
       )}
     >
       {children}
-    </div>
+    </Comp>
   );
 });
 
@@ -331,4 +339,4 @@ function dispatchUpdate() {
   document.dispatchEvent(event);
 }
 
-export { DismissableLayerRefactored, type DismissableLayerProps };
+export { DismissableLayer, type DismissableLayerProps };
