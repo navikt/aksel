@@ -1,5 +1,5 @@
 import ProgressBar from "cli-progress";
-import fs from "fs";
+import fs from "node:fs";
 import { TokenStatus } from "../config/TokenStatus";
 import { darksideTokenConfig } from "../config/darkside.tokens";
 import { legacyComponentTokenList } from "../config/legacy-component.tokens";

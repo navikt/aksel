@@ -1,5 +1,11 @@
-import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "fs";
-import { resolve } from "path";
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
+import { resolve } from "node:path";
 import { fetchDownloadUrls, fetchIcons } from "./fetch-icons";
 import { resolveName } from "./icon-name";
 import { makeConfig } from "./make-configs";

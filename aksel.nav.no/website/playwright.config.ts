@@ -1,6 +1,6 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
-import path from "path";
+import path from "node:path";
 
 type OptionsType = {
   baseURL: string;

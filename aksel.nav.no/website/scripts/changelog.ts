@@ -1,7 +1,7 @@
 import { htmlToBlocks } from "@portabletext/block-tools";
 import { Schema } from "@sanity/schema";
-import fs from "fs";
 import { JSDOM } from "jsdom";
+import fs from "node:fs";
 import showdown from "showdown";
 import { noCdnClient } from "../sanity/interface/client.server";
 

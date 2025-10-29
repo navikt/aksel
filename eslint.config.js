@@ -216,6 +216,13 @@ module.exports = tseslint.config([
               message: "React 18+ API not allowed (targeting React 17).",
             },
           ],
+          patterns: [
+            {
+              group: ["fs", "path"],
+              message:
+                'Use `node:` prefix when importing native node modules, e.g. `import path from "node:path"`.',
+            },
+          ],
         },
       ],
 
