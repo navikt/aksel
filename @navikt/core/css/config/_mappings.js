@@ -133,6 +133,11 @@ const StyleMappings = {
       ],
     },
     {
+      component: "GlobalAlert",
+      main: "alert.css",
+      dependencies: [typoCss, "button.css"],
+    },
+    {
       component: "GuidePanel",
       main: "guide-panel.css",
       dependencies: [typoCss],
