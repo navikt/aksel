@@ -3,11 +3,8 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Process>
-      <Process.Event
-        title="02. Jan. 2020. klokken 10:21"
-        connectorPlacement="both"
-      >
+    <Process isTruncated="both">
+      <Process.Event title="02. Jan. 2020. klokken 10:21">
         Din utbetalingsplan har blitt oppdatert, les vedtaket for mer
         informasjon
       </Process.Event>
@@ -17,10 +14,7 @@ const Example = () => {
           Et brev fra veileder følger med denne hendelsen
         </BodyShort>
       </Process.Event>
-      <Process.Event
-        title="21. Des. 2019. klokken 16:52"
-        connectorPlacement="end"
-      >
+      <Process.Event title="21. Des. 2019. klokken 16:52">
         Du har sendt 10 vedlegg til NAV
       </Process.Event>
     </Process>
@@ -39,5 +33,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "`connectorPlacement` styrer hvor linjen som kobler hendelsene vises. Dette kan brukes på første og/eller siste hendelse for å illustrere at prosessen har flere hendelser før/etter enn det som vises.",
+  desc: "`isTruncated` styrer hvor linjen som kobler hendelsene vises. Dette brukes for å illustrere at prosessen har flere hendelser før/etter enn det som vises.",
 };
