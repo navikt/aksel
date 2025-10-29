@@ -1,5 +1,31 @@
 # Changelog
 
+## 7.32.4
+
+### @navikt/ds-react
+
+- Combobox: Fix issue with toggle list button ([#4228](https://github.com/navikt/aksel/pull/4228))
+
+- Accordion: Heading size with `size="medium"` changed from 20px to 18px. This change is for Darkside only. ([#4209](https://github.com/navikt/aksel/pull/4209))
+
+### @navikt/ds-css
+
+- BodyShort: Line-height for `size="large"` is now 28px, adjusted from 24px. ([#4213](https://github.com/navikt/aksel/pull/4213))
+
+## 7.32.3
+
+### @navikt/aksel-icons
+
+- Icons: Modified 'Robot' type icons. ([#4200](https://github.com/navikt/aksel/pull/4200))
+
+### @navikt/ds-react
+
+- Combobox: Fix bug in highlighting when using custom filtering logic ([#4195](https://github.com/navikt/aksel/pull/4195))
+
+- Switch: Replace use of `div` inside `<label />` with `span`. ([#4184](https://github.com/navikt/aksel/pull/4184))
+
+- Maintenance: Update dependency-arrays for some layout-effects. ([#4191](https://github.com/navikt/aksel/pull/4191))
+
 ## 7.32.2
 
 ### @navikt/ds-react

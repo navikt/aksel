@@ -33,7 +33,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     if (themeContext?.isDarkside) {
       /* Fallback to "medium" Accordion-size if any other sizes are used */
-      headingSize = accordionContext?.size === "small" ? "xsmall" : "small";
+      headingSize = accordionContext?.size === "large" ? "small" : "xsmall";
     }
 
     return (
