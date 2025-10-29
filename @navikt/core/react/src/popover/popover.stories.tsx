@@ -16,6 +16,7 @@ const placements = [
   "left-start",
   "left-end",
 ];
+
 export default {
   title: "ds-react/Popover",
   component: Popover,

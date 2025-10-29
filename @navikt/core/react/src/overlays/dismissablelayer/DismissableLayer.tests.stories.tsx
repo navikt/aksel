@@ -342,7 +342,7 @@ export const NestedEscapeKeydown: StoryObj<{
       </div>
     );
   },
-  /* play: async ({ args }) => {
+  play: async ({ args }) => {
     expect(args.root.onDismiss).not.toHaveBeenCalled();
     expect(args.nested.onDismiss).not.toHaveBeenCalled();
 
@@ -355,7 +355,7 @@ export const NestedEscapeKeydown: StoryObj<{
 
     expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
     expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
-  }, */
+  },
   args: {
     root: {
       onDismiss: fn(),
