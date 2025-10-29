@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import { getStatus } from "./status";
 
 function printRemaining(files: string[]) {

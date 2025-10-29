@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { sitemapPages } from "../sanity/interface/interface";
 
 const token = process.env.SANITY_READ_NO_DRAFTS;

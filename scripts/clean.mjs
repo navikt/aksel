@@ -1,6 +1,6 @@
 import { execSync, spawnSync } from "child_process";
 import FastGlob from "fast-glob";
-import { rmSync } from "fs";
+import { rmSync } from "node:fs";
 
 /**
  * This script is used to clean up build artifacts.

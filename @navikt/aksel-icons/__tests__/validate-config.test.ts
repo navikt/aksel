@@ -1,7 +1,7 @@
 import fastglob from "fast-glob";
-import fs from "fs";
 import { JSON_SCHEMA, load } from "js-yaml";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { describe, expect, test } from "vitest";
 import { IconYml } from "../config/figma/make-configs";
 
