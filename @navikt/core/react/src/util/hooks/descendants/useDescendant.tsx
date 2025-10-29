@@ -46,10 +46,13 @@ export function createDescendantContext<
     useClientLayoutEffect(() => {
       return () => {
         if (!ref.current) return;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         descendants.unregister(ref.current);
       };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useClientLayoutEffect(() => {
       if (!ref.current) return;
       const dataIndex = Number(ref.current.dataset.index);

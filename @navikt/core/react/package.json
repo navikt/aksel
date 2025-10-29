@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "7.32.1",
+  "version": "7.32.3",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -634,6 +634,36 @@
         "default": "./cjs/inline-message/index.js"
       }
     },
+    "./GlobalAlert": {
+      "import": {
+        "types": "./esm/alert/global-alert/index.d.ts",
+        "default": "./esm/alert/global-alert/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/global-alert/index.d.ts",
+        "default": "./cjs/alert/global-alert/index.js"
+      }
+    },
+    "./InfoCard": {
+      "import": {
+        "types": "./esm/alert/info-card/index.d.ts",
+        "default": "./esm/alert/info-card/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/info-card/index.d.ts",
+        "default": "./cjs/alert/info-card/index.js"
+      }
+    },
+    "./LocalAlert": {
+      "import": {
+        "types": "./esm/alert/local-alert/index.d.ts",
+        "default": "./esm/alert/local-alert/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/local-alert/index.d.ts",
+        "default": "./cjs/alert/local-alert/index.js"
+      }
+    },
     "./package.json": "./package.json",
     "./Theme": {
       "import": {
@@ -653,15 +683,15 @@
     "clean": "rimraf cjs esm",
     "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup && yarn copy-types",
     "watch": "tsc --watch -p tsconfig.esm.json",
-    "test": "TZ=UTC vitest run -c tests/vitest.config.ts --silent",
+    "test": "TZ=UTC vitest run -c tests/vitest.config.ts --silent true",
     "test:watch": "TZ=UTC vitest watch -c tests/vitest.config.ts",
     "copy-types": "copyfiles -f ./src/types/theme.d.ts ./esm/types"
   },
   "dependencies": {
     "@floating-ui/react": "0.27.8",
     "@floating-ui/react-dom": "^2.1.6",
-    "@navikt/aksel-icons": "^7.32.1",
-    "@navikt/ds-tokens": "^7.32.1",
+    "@navikt/aksel-icons": "^7.32.3",
+    "@navikt/ds-tokens": "^7.32.3",
     "clsx": "^2.1.0",
     "date-fns": "^4.0.0",
     "react-day-picker": "9.7.0"
