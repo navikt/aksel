@@ -39,22 +39,52 @@ export const NestedTest = {
           onEscapeKeyDown={() => console.info("Escaped 1")}
           id="root-layer"
         >
-          <input type="text" />
+          <input type="text" placeholder="1" />
           <DismissableLayer
             onDismiss={() => console.info("dismissed-nested 1")}
             onEscapeKeyDown={() => console.info("Escaped-nested 1")}
             id="nested-layer"
           >
-            <input type="text" />
+            <input type="text" placeholder="nested-1" />
           </DismissableLayer>
         </DismissableLayer>
-        {/* <DismissableLayer
+        <DismissableLayer
           onDismiss={() => console.info("dismissed 2")}
           onEscapeKeyDown={() => console.info("Escaped 2")}
-          enabled={false}
+          id="root-2-layer"
         >
-          <input type="text" />
-        </DismissableLayer> */}
+          <input type="text" placeholder="2" />
+        </DismissableLayer>
+        <DismissableLayer
+          onDismiss={() => console.info("dismissed 3")}
+          onEscapeKeyDown={() => console.info("Escaped 3")}
+          id="root-3-layer"
+        >
+          <input type="text" placeholder="3" />
+          <DismissableLayer
+            onDismiss={() => console.info("dismissed nested-3")}
+            onEscapeKeyDown={() => console.info("Escaped nested-3")}
+            id="nested-3-layer"
+            enabled={false}
+          >
+            <input type="text" placeholder="nested-3" />
+            <DismissableLayer
+              onDismiss={() => console.info("dismissed nested-nested-3")}
+              onEscapeKeyDown={() => console.info("Escaped nested-nested-3")}
+              id="nested-nested-3-layer"
+              disableOutsidePointerEvents
+            >
+              <input type="text" placeholder="nested-nested-3" />
+            </DismissableLayer>
+          </DismissableLayer>
+        </DismissableLayer>
+        <DismissableLayer
+          onDismiss={() => console.info("dismissed 4")}
+          onEscapeKeyDown={() => console.info("Escaped 4")}
+          id="root-4"
+        >
+          <input type="text" placeholder="4" />
+        </DismissableLayer>
       </div>
     );
   },

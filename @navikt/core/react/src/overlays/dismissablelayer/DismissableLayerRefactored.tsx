@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import { Slot } from "../../slot/Slot";
+import { omit } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
 import { ownerDocument } from "../../util/owner";
@@ -73,24 +74,109 @@ type DismissableLayerProps = DismissableLayerBaseProps & AsChild;
 
 let originalBodyPointerEvents: string;
 
+/* TODO:  Maybe just omit instead of destructuring */
 const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
-  ({ enabled = true, ...restProps }: DismissableLayerProps, forwardedRef) => {
+  (
+    {
+      enabled = true,
+      disableOutsidePointerEvents,
+      onDismiss,
+      onEscapeKeyDown,
+      onFocusOutside,
+      onInteractOutside,
+      onPointerDownOutside,
+      safeZone,
+      ...restProps
+    }: DismissableLayerProps,
+    forwardedRef,
+  ) => {
     if (!enabled) {
       const Component = restProps.asChild ? Slot : "div";
-      return <Component {...restProps} ref={forwardedRef} />;
+      return <Component {...omit(restProps, ["asChild"])} ref={forwardedRef} />;
     }
 
-    return <DismissableLayerInternal {...restProps} ref={forwardedRef} />;
+    return (
+      <DismissableLayerInternal
+        {...restProps}
+        ref={forwardedRef}
+        disableOutsidePointerEvents={disableOutsidePointerEvents}
+        onDismiss={onDismiss}
+        onEscapeKeyDown={onEscapeKeyDown}
+        onFocusOutside={onFocusOutside}
+        onInteractOutside={onInteractOutside}
+        onPointerDownOutside={onPointerDownOutside}
+        safeZone={safeZone}
+      />
+    );
   },
 );
+
+const BranchedLayerContext =
+  React.createContext<DismissableLayerElement | null>(null);
 
 /* ------------------------ DismissableLayerInternal ------------------------ */
 const CONTEXT_UPDATE_EVENT = "dismissableLayer.update";
 
 const DismissableLayerContext = React.createContext({
   layers: new Set<DismissableLayerElement>(),
+  branchedLayers: new Map<
+    DismissableLayerElement,
+    Set<DismissableLayerElement>
+  >(),
   layersWithOutsidePointerEventsDisabled: new Set<DismissableLayerElement>(),
 });
+
+function getSortedLayers(
+  layers: Set<DismissableLayerElement>,
+  branchedLayers: Map<DismissableLayerElement, Set<DismissableLayerElement>>,
+): DismissableLayerElement[] {
+  const sorted: DismissableLayerElement[] = [];
+  const visited = new Set<DismissableLayerElement>();
+  const parentMap = new Map<DismissableLayerElement, DismissableLayerElement>();
+
+  branchedLayers.forEach((children, parent) => {
+    children.forEach((child) => parentMap.set(child, parent));
+  });
+
+  const walk = (layer: DismissableLayerElement) => {
+    if (visited.has(layer)) {
+      return;
+    }
+
+    const parent = parentMap.get(layer);
+    if (parent && !visited.has(parent)) {
+      walk(parent);
+      if (visited.has(layer)) {
+        return;
+      }
+    }
+
+    visited.add(layer);
+    sorted.push(layer);
+
+    const children = branchedLayers.get(layer);
+    if (children) {
+      children.forEach(walk);
+    }
+  };
+
+  layers.forEach(walk);
+
+  return sorted;
+}
+
+function getHighestDisabledLayerIndex(
+  orderedLayers: DismissableLayerElement[],
+  disabledLayers: Set<DismissableLayerElement>,
+): number {
+  for (let i = orderedLayers.length - 1; i >= 0; i -= 1) {
+    if (disabledLayers.has(orderedLayers[i])) {
+      return i;
+    }
+  }
+
+  return -1;
+}
 
 const DismissableLayerInternal = forwardRef<
   HTMLDivElement,
@@ -120,13 +206,17 @@ const DismissableLayerInternal = forwardRef<
   const hasPointerDownOutsideRef = useRef(false);
 
   /* Layer handling */
-  const layers = Array.from(context.layers);
-  const [highestLayerWithOutsidePointerEventsDisabled] = [...context.layersWithOutsidePointerEventsDisabled].slice(-1); // prettier-ignore
-  const highestLayerWithOutsidePointerEventsDisabledIndex = layers.indexOf(highestLayerWithOutsidePointerEventsDisabled!); // prettier-ignore
+  const layers = getSortedLayers(context.layers, context.branchedLayers);
+  const highestLayerWithOutsidePointerEventsDisabledIndex =
+    getHighestDisabledLayerIndex(
+      layers,
+      context.layersWithOutsidePointerEventsDisabled,
+    );
   const index = node ? layers.indexOf(node) : -1;
   const isBodyPointerEventsDisabled =
     context.layersWithOutsidePointerEventsDisabled.size > 0;
   const isPointerEventsEnabled =
+    highestLayerWithOutsidePointerEventsDisabledIndex === -1 ||
     index >= highestLayerWithOutsidePointerEventsDisabledIndex;
 
   /**
@@ -281,12 +371,44 @@ const DismissableLayerInternal = forwardRef<
         return;
       }
 
-      console.info("Removing layer", node);
       context.layers.delete(node);
       context.layersWithOutsidePointerEventsDisabled.delete(node);
       dispatchUpdate();
     };
   }, [node, context]);
+
+  const parentBranchedLayer = useContext(BranchedLayerContext);
+
+  /**
+   * Handles registering and unregistering branched layers.
+   * When this layer has a parent, we register it as a child of the parent.
+   */
+  useEffect(() => {
+    if (!node || !parentBranchedLayer) {
+      return;
+    }
+
+    // Get or create the Set of children for this parent
+    if (!context.branchedLayers.has(parentBranchedLayer)) {
+      context.branchedLayers.set(parentBranchedLayer, new Set());
+    }
+
+    const branchedChildren = context.branchedLayers.get(parentBranchedLayer)!;
+    branchedChildren.add(node);
+    dispatchUpdate();
+
+    return () => {
+      // Remove this node from the parent's children
+      branchedChildren.delete(node);
+
+      // If the parent has no more children, remove the parent from branchedLayers
+      if (branchedChildren.size === 0) {
+        context.branchedLayers.delete(parentBranchedLayer);
+      }
+
+      dispatchUpdate();
+    };
+  }, [node, parentBranchedLayer, context]);
 
   /**
    * Force update when context changes to update index and pointer-events state.
@@ -302,32 +424,34 @@ const DismissableLayerInternal = forwardRef<
   const Comp = asChild ? Slot : "div";
 
   return (
-    <Comp
-      {...restProps}
-      ref={mergedRefs}
-      style={{
-        pointerEvents: isBodyPointerEventsDisabled
-          ? isPointerEventsEnabled
-            ? "auto"
-            : "none"
-          : undefined,
-        ...restProps.style,
-      }}
-      onFocusCapture={composeEventHandlers(
-        props.onFocusCapture,
-        focusOutside.onFocusCapture,
-      )}
-      onBlurCapture={composeEventHandlers(
-        props.onBlurCapture,
-        focusOutside.onBlurCapture,
-      )}
-      onPointerDownCapture={composeEventHandlers(
-        props.onPointerDownCapture,
-        pointerDownOutside.onPointerDownCapture,
-      )}
-    >
-      {children}
-    </Comp>
+    <BranchedLayerContext.Provider value={node}>
+      <Comp
+        {...restProps}
+        ref={mergedRefs}
+        style={{
+          pointerEvents: isBodyPointerEventsDisabled
+            ? isPointerEventsEnabled
+              ? "auto"
+              : "none"
+            : undefined,
+          ...restProps.style,
+        }}
+        onFocusCapture={composeEventHandlers(
+          props.onFocusCapture,
+          focusOutside.onFocusCapture,
+        )}
+        onBlurCapture={composeEventHandlers(
+          props.onBlurCapture,
+          focusOutside.onBlurCapture,
+        )}
+        onPointerDownCapture={composeEventHandlers(
+          props.onPointerDownCapture,
+          pointerDownOutside.onPointerDownCapture,
+        )}
+      >
+        {children}
+      </Comp>
+    </BranchedLayerContext.Provider>
   );
 });
 
