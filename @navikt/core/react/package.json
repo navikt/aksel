@@ -683,7 +683,7 @@
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18 || ^19",
-    "react": "^17 || ^18 || ^19 || >19.0.0-rc",
+    "react": "^17 || ^18 || ^19",
     "react-dom": "^17 || ^18 || ^19"
   },
   "peerDependenciesMeta": {
