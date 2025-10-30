@@ -243,11 +243,22 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
             }}
             onPointerDownOutside={(event) => {
               if (
-                modal === true ||
                 !closeOnOutsideClick ||
-                /* User cant click "trough" backdrop */
-                !!backdropRef.current
+                (modal === "trap-focus" && !backdropRef.current)
               ) {
+                event.preventDefault();
+              }
+
+              const originalEvent = event.detail.originalEvent;
+              const ctrlLeftClick =
+                originalEvent.button === 0 && originalEvent.ctrlKey === true;
+              const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
+
+              /**
+               * If the event is a right-click, we shouldn't close because
+               * it is effectively as if we right-clicked the `Overlay`.
+               */
+              if (isRightClick) {
                 event.preventDefault();
               }
             }}

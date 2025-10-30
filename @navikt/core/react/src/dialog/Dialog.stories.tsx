@@ -56,6 +56,7 @@ export const Default = {
             position={args.position}
             width={args.width}
             height={args.height}
+            closeOnOutsideClick={args.closeOnOutsideClick}
           >
             <DialogHeader>
               <DialogTitle id="ha">Dialog Title</DialogTitle>
@@ -92,6 +93,7 @@ export const Default = {
   },
   args: {
     defaultOpen: true,
+    closeOnOutsideClick: true,
   },
 };
 
