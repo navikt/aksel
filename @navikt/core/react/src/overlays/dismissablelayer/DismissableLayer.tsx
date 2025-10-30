@@ -54,7 +54,7 @@ interface DismissableLayerBaseProps
   /**
    * Handler called when the `DismissableLayer` should be dismissed
    */
-  onDismiss?: () => void;
+  onDismiss?: (event: Event) => void;
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
    */
@@ -217,7 +217,7 @@ const DismissableLayerInternal = forwardRef<
       safeZone && handleOutsideEvent(event);
 
       if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
+        onDismiss(event);
       }
     }, ownerDoc);
 
@@ -231,7 +231,7 @@ const DismissableLayerInternal = forwardRef<
       safeZone && handleOutsideEvent(event);
 
       if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
+        onDismiss(event);
       }
     }, ownerDoc);
 
@@ -254,8 +254,13 @@ const DismissableLayerInternal = forwardRef<
        * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
        */
       if (!event.defaultPrevented && onDismiss) {
+        onDismiss(event);
+
+        /**
+         * Preventing after dismiss allows us to check if user prevents default on the escape event
+         * to avoid side effects on other elements after this layer has been dismissed.
+         */
         event.preventDefault();
-        onDismiss();
       }
     }, ownerDoc);
 

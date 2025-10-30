@@ -204,13 +204,11 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
           <DismissableLayer
             asChild
             safeZone={{
-              dismissable: popupRef.current,
               anchor: triggerElement,
             }}
             onDismiss={(event) => {
               open && setOpen(false, event);
             }}
-            preventDefaultEscapeEvent={false}
             disableOutsidePointerEvents={modal === true}
             onInteractOutside={(event) => {
               if (!event.defaultPrevented) {
@@ -261,15 +259,15 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
                */
               event.preventDefault();
             }}
-            enablePointerUpOutside
-            onPointerUpOutside={(event) => {
+            /* enablePointerUpOutside */
+            /* onPointerUpOutside={(event) => {
               if (
                 (modal === "trap-focus" && !backdropRef.current) ||
                 !closeOnOutsideClick
               ) {
                 event.preventDefault();
               }
-            }}
+            }} */
           >
             <BoxNew
               {...restProps}
