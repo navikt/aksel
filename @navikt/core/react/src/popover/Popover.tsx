@@ -174,7 +174,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         asChild
         safeZone={{
           anchor: anchorEl,
-          dismissable: refs.floating.current,
         }}
         onDismiss={() => open && onClose?.()}
         enabled={open}
