@@ -511,7 +511,7 @@ export const DomOrder: Story = {
         <Dialog defaultOpen>
           <DialogPortal>
             <DialogBackdrop className="backdropCSS" />
-            <DialogPopup className="dialogCSS">
+            <DialogPopup className="dialogCSS" position="left">
               First behind First behind First behind First behind First behind
               First behind First behind First behind First behind First behind
               First behind First behind First behind First behind First behind
@@ -519,7 +519,10 @@ export const DomOrder: Story = {
               First behind
               <Dialog defaultOpen>
                 <DialogPortal>
-                  <DialogPopup className="dialogCSS">First-nested</DialogPopup>
+                  <DialogPopup className="dialogCSS" position="right">
+                    First-nested
+                    <DialogClose>Close first nested</DialogClose>
+                  </DialogPopup>
                 </DialogPortal>
               </Dialog>
               <DialogClose>Close</DialogClose>
@@ -529,7 +532,7 @@ export const DomOrder: Story = {
         <Dialog defaultOpen>
           <DialogPortal>
             <DialogBackdrop className="backdropCSS" />
-            <DialogPopup className="dialogCSS">
+            <DialogPopup className="dialogCSS" position="bottom">
               thrid behind thrid behind thrid behind thrid behind thrid behind
               thrid behind thrid behind thrid behind thrid behind thrid behind
               thrid behind thrid behind thrid behind thrid behind thrid behind

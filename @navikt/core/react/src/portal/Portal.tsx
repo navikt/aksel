@@ -18,36 +18,37 @@ export const Portal = forwardRef<HTMLDivElement, PortalProps>(
   ({ rootElement, asChild, ...rest }, ref) => {
     const themeContext = useThemeInternal(false);
     const contextRoot = useProvider()?.rootElement;
+
     const root = rootElement ?? contextRoot ?? globalThis?.document?.body;
 
     const Component = asChild ? Slot : "div";
+
+    if (!root) {
+      return null;
+    }
 
     /**
      * Portal can be mounted outside of theme-classNames.
      * If a theme is present, we want to make sure that theme cascades to portaled element.
      */
     if (themeContext?.isDarkside) {
-      return root
-        ? ReactDOM.createPortal(
-            <Theme
-              theme={themeContext.theme}
-              asChild
-              hasBackground={false}
-              data-color={themeContext.color}
-            >
-              <Component ref={ref} data-aksel-portal="" {...rest} />
-            </Theme>,
-            root,
-          )
-        : null;
+      return ReactDOM.createPortal(
+        <Theme
+          theme={themeContext.theme}
+          asChild
+          hasBackground={false}
+          data-color={themeContext.color}
+        >
+          <Component ref={ref} data-aksel-portal="" {...rest} />
+        </Theme>,
+        root,
+      );
     }
 
-    return root
-      ? ReactDOM.createPortal(
-          <Component ref={ref} data-aksel-portal="" {...rest} />,
-          root,
-        )
-      : null;
+    return ReactDOM.createPortal(
+      <Component ref={ref} data-aksel-portal="" {...rest} />,
+      root,
+    );
   },
 );
 
