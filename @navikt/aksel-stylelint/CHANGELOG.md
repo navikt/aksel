@@ -1,5 +1,11 @@
 # @navikt/aksel-stylelint
 
+## 7.32.5
+
+### Patch Changes
+
+- Classnames: Added `navds-modal__document-body` to list of future deprecations. ([#4234](https://github.com/navikt/aksel/pull/4234))
+
 ## 7.32.4
 
 ## 7.32.3

@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.32.5
+
+### Patch Changes
+
+- Modal: Improved scroll locking. ([#4234](https://github.com/navikt/aksel/pull/4234))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.32.5
+  - @navikt/aksel-icons@7.32.5
+
 ## 7.32.4
 
 ### Patch Changes
