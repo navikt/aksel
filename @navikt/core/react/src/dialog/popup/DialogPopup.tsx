@@ -242,10 +242,17 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
               }
             }}
             onPointerDownOutside={(event) => {
-              if (
-                !closeOnOutsideClick ||
-                (modal === "trap-focus" && !backdropRef.current)
-              ) {
+              /* If backdrop exists, require "intentional" click (pointerup) */
+              if (backdropRef.current) {
+                event.preventDefault();
+              }
+
+              if (!closeOnOutsideClick) {
+                event.preventDefault();
+              }
+
+              /* "Sloppy" clicks are only allowed if modal is in trap-focus mode */
+              if (modal !== "trap-focus") {
                 event.preventDefault();
               }
 
@@ -270,15 +277,13 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
                */
               event.preventDefault();
             }}
-            /* enablePointerUpOutside */
-            /* onPointerUpOutside={(event) => {
-              if (
-                (modal === "trap-focus" && !backdropRef.current) ||
-                !closeOnOutsideClick
-              ) {
+            /* TODO: update logic */
+            enablePointerUpOutside
+            onPointerUpOutside={(event) => {
+              if (!closeOnOutsideClick) {
                 event.preventDefault();
               }
-            }} */
+            }}
           >
             <BoxNew
               {...restProps}

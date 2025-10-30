@@ -7,8 +7,7 @@ import {
 } from "./dispatchCustomEvent";
 
 /**
- * Listens for `pointerdown` outside a react subtree. We use `pointerdown` rather than `pointerup`
- * to mimic layer dismissing behaviour present in OS.
+ * Listens for `pointerup` outside a react subtree.
  * Returns props to pass to the node we want to check for outside events.
  * By checking `isPointerInsideReactTreeRef` we can determine if the event happened outside the subtree of the node, saving some element-comparisons.
  */
@@ -34,37 +33,44 @@ export function usePointerUpOutside(
        */
       if (event.target && !isPointerInsideReactTreeRef.current) {
         dispatchCustomEvent(
-          // Reuse constant to avoid wider refactor; consider introducing POINTER_UP_OUTSIDE later.
           CUSTOM_EVENTS.POINTER_UP_OUTSIDE,
           handlePointerUpOutside,
           { originalEvent: event },
           { discrete: true },
         );
       }
-      // Reset for next interaction.
+      /* Reset for next interaction. */
+      isPointerInsideReactTreeRef.current = false;
+    };
+
+    /* Mostly relevant if user moved touch after touch-start */
+    const handlePointerCancel = () => {
+      /* Reset state if interaction is cancelled */
       isPointerInsideReactTreeRef.current = false;
     };
 
     /**
-     * If this hook executes in a component that mounts via a `pointerdown` event, the event
-     * would bubble up to the document and trigger a `pointerDownOutside` event. We avoid
+     * If this hook executes in a component that mounts via a `pointerup` event, the event
+     * would bubble up to the document and trigger a `pointerUpOutside` event. We avoid
      * this by delaying the event listener registration on the document.
      * This is not React specific, but rather how the DOM works, ie:
      * ```
-     * button.addEventListener('pointerdown', () => {
+     * button.addEventListener('pointerup', () => {
      *   console.log('I will log');
-     *   document.addEventListener('pointerdown', () => {
+     *   document.addEventListener('pointerup', () => {
      *     console.log('I will also log');
      *   })
      * });
      */
     const timerId = window.setTimeout(() => {
       ownerDocument.addEventListener("pointerup", handlePointerUp);
+      ownerDocument.addEventListener("pointercancel", handlePointerCancel);
     }, 0);
 
     return () => {
       window.clearTimeout(timerId);
       ownerDocument.removeEventListener("pointerup", handlePointerUp);
+      ownerDocument.removeEventListener("pointercancel", handlePointerCancel);
     };
   }, [ownerDocument, handlePointerUpOutside]);
 

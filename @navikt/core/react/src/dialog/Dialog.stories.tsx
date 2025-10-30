@@ -49,7 +49,7 @@ export const Default = {
       <Dialog defaultOpen={args.defaultOpen}>
         <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogPortal>
-          <DialogBackdrop className="backdropCSS" />
+          {args.backdrop && <DialogBackdrop className="backdropCSS" />}
           <DialogPopup
             className="dialogCSS"
             aria-labelledby="ha"
@@ -57,6 +57,7 @@ export const Default = {
             width={args.width}
             height={args.height}
             closeOnOutsideClick={args.closeOnOutsideClick}
+            modal={args.modal}
           >
             <DialogHeader>
               <DialogTitle id="ha">Dialog Title</DialogTitle>
@@ -79,6 +80,10 @@ export const Default = {
     </div>
   ),
   argTypes: {
+    modal: {
+      options: [true, "trap-focus"],
+      control: { type: "radio" },
+    },
     width: {
       options: ["large", "medium", "small", undefined],
       control: { type: "radio" },
@@ -94,6 +99,7 @@ export const Default = {
   args: {
     defaultOpen: true,
     closeOnOutsideClick: true,
+    backdrop: true,
   },
 };
 
