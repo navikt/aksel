@@ -409,4 +409,4 @@ function getHighestDisabledLayerIndex(
   return -1;
 }
 
-export { DismissableLayer, type DismissableLayerProps, getSortedLayers };
+export { DismissableLayer, type DismissableLayerProps };
