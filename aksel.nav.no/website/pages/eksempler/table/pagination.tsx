@@ -51,52 +51,52 @@ const format = (date: Date) => {
 const data = [
   {
     name: "Jakobsen, Markus",
-    fnr: "03129265463",
+    fnr: "03999265463",
     start: "2021-04-28T19:12:14.358Z",
   },
   {
     name: "Halvorsen, Mari",
-    fnr: "16063634134",
+    fnr: "16993634134",
     start: "2022-01-29T09:51:19.833Z",
   },
   {
     name: "Christiansen, Mathias",
-    fnr: "18124441438",
+    fnr: "18994441438",
     start: "2021-06-04T20:57:29.159Z",
   },
   {
     name: "Fredriksen, Leah",
-    fnr: "24089080180",
+    fnr: "24999080180",
     start: "2021-08-31T15:47:36.293Z",
   },
   {
     name: "Evensen, Jonas",
-    fnr: "18106248460",
+    fnr: "18996248460",
     start: "2021-07-17T11:13:26.116Z",
   },
   {
     name: "Strand, Thomas",
-    fnr: "11123693157",
+    fnr: "11993693157",
     start: "2021-08-14T14:15:44.597Z",
   },
   {
     name: "Eriksen, Sofie",
-    fnr: "07067878435",
+    fnr: "07997878435",
     start: "2021-12-20T15:55:02.613Z",
   },
   {
     name: "Jørgensen, Erik",
-    fnr: "02099681196",
+    fnr: "02999681196",
     start: "2021-09-05T11:33:19.361Z",
   },
   {
     name: "Carlsen, Sondre",
-    fnr: "23096491197",
+    fnr: "23996491197",
     start: "2022-01-25T16:10:47.223Z",
   },
   {
     name: "Berge, Martine",
-    fnr: "11090293151",
+    fnr: "11990293151",
     start: "2022-01-09T11:15:50.833Z",
   },
 ];
