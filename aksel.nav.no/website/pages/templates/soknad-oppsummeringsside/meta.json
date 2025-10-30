@@ -1,6 +1,11 @@
 {
-  "version": 3,
+  "version": 4,
   "changelog": [
+    {
+      "description": "'Send søknad'-knappen kommer nå før 'Forrige steg'-knappen på mobil.",
+      "date": "17.10.2025",
+      "version": 4
+    },
     {
       "description": "Oppdatert header: Piktogram blir nå plassert over tittel på mobil, og størrelse på piktogram er endret til 96px på desktop og 64 på mobil. Hele header-seksjonen bør synkroniseres.",
       "date": "04.09.2025",

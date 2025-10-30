@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.32.4
+
+### Patch Changes
+
+- BodyShort: Line-height for `size="large"` is now 28px, adjusted from 24px. ([#4213](https://github.com/navikt/aksel/pull/4213))
+
 ## 7.32.3
 
 ## 7.32.2

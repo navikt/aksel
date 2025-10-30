@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.32.4
+
+### Patch Changes
+
+- Combobox: Fix issue with toggle list button ([#4228](https://github.com/navikt/aksel/pull/4228))
+
+- Accordion: Heading size with `size="medium"` changed from 20px to 18px. This change is for Darkside only. ([#4209](https://github.com/navikt/aksel/pull/4209))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.32.4
+  - @navikt/aksel-icons@7.32.4
+
 ## 7.32.3
 
 ### Patch Changes
@@ -1846,7 +1858,6 @@
 ### Minor Changes
 
 - :recycle: Refaktorering og småfikser ([#2265](https://github.com/navikt/aksel/pull/2265))
-
   - Refaktorering som følge av nye ESLint-regler
   - AccordionItem/ToggleGroup: Støtte for 'id'-prop
   - MonthPicker: Mer presis type for 'onMonthSelect' prop

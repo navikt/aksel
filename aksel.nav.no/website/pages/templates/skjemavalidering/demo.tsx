@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
-import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   Button,
   ErrorSummary,
-  HGrid,
   Heading,
   Page,
   Radio,
@@ -12,6 +10,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
+import FormNavigationSimple from "../../../components/website-modules/examples/__parts-inline/FormNavigationSimple";
 
 const validateFødselsnummer = (p: string) => {
   // Det er anbefalt å bruke https://github.com/navikt/fnrvalidator for å validere fødselsnummer.
@@ -131,28 +130,7 @@ const Example = () => {
             </ErrorSummary>
           )}
 
-          <HGrid
-            gap={{ xs: "4", sm: "8 4" }}
-            columns={{ xs: 1, sm: 2 }}
-            width={{ sm: "fit-content" }}
-          >
-            <Button
-              type="button"
-              variant="secondary"
-              icon={<ArrowLeftIcon aria-hidden />}
-              iconPosition="left"
-            >
-              Forrige steg
-            </Button>
-            <Button
-              type="submit"
-              variant="primary"
-              icon={<ArrowRightIcon aria-hidden />}
-              iconPosition="right"
-            >
-              Neste steg
-            </Button>
-          </HGrid>
+          <FormNavigationSimple />
         </VStack>
       </form>
     </Page.Block>

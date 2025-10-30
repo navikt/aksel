@@ -84,7 +84,7 @@ function preventScrollStandard(referenceElement: Element | null) {
     const scrollbarHeight = Math.max(0, win.innerHeight - html.clientHeight);
 
     /*
-     * Avoid shift due to the default <body> margin. This does cause elements to be clipped
+     * Avoid shift due to <body> margin. NB: This does cause elements to be clipped
      * with whitespace.
      */
     const marginY =
@@ -254,13 +254,11 @@ class ScrollLocker {
     const shouldUseBasicLock = isIOS || !hasInsetScrollbars(referenceElement);
 
     /**
-     * On iOS, scroll locking does not work if the navbar is collapsed.
-     * Due to the the following cases not working well with the standard scroll lock:
-     * - Textboxes must scroll into view when focused, nor cause a glitchy scroll animation.
+     * On iOS, the standard scroll locking method does not work properly if the navbar is collapsed.
+     * The following must be researched extensively before activating standard scroll locking on iOS:
+     * - Textboxes must scroll into view when focused, and not cause a glitchy scroll animation.
      * - The navbar must not force itself into view and cause layout shift.
      * - Scroll containers must not flicker upon closing a popup when it has an exit animation.
-     *
-     * We use a simpler scroll lock strategy to avoid these issues.
      */
     this.restore = shouldUseBasicLock
       ? preventScrollBasic(referenceElement)

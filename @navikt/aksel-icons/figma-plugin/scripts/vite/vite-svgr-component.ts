@@ -1,6 +1,6 @@
 import { FilterPattern, createFilter } from "@rollup/pluginutils";
 import type { Config } from "@svgr/core";
-import fs from "fs";
+import fs from "node:fs";
 import type { Plugin } from "vite";
 import { transformWithEsbuild } from "vite";
 

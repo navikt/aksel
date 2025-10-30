@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { describe, expect, test, vi } from "vitest";
 import { parseCodeFiles } from "../parts/parse-code-files";
 import { codeAfter, codeBefore } from "./mockdata";

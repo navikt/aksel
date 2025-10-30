@@ -3,7 +3,7 @@ import { Command } from "commander";
 import Enquirer from "enquirer";
 import fg from "fast-glob";
 import * as jscodeshift from "jscodeshift/src/Runner";
-import path from "path";
+import path from "node:path";
 import {
   GLOB_IGNORE_PATTERNS,
   SupportedCodemodExtensions,

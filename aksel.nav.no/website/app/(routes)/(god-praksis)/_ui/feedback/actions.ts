@@ -112,8 +112,7 @@ function slackBlock({ feedback, article, sender }: SlackBlockT) {
       type: "header",
       text: {
         type: "plain_text",
-        /* TODO: Endre melding basert på om du er editor eller temakontakt */
-        text: "Innspill til Aksel-artikkel du har medvirket til",
+        text: "Innspill til Aksel-artikkel",
         emoji: true,
       },
     },

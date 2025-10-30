@@ -1,7 +1,7 @@
 // https://github.com/mui/material-ui/blob/d14be1cb1e4c7275a1f356dec98667c7ad491983/test/utils/focusVisible.ts#L3
 import { act, fireEvent, render } from "@testing-library/react";
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { ReactElement } from "react";
 
 export function focusVisible(element: HTMLElement) {

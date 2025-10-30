@@ -1,6 +1,6 @@
 import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
-import path from "path";
+import path from "node:path";
 
 const useCdn = process.env.USE_CDN_ASSETS === "true";
 const isProduction = process.env.PRODUCTION === "true";
