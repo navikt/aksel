@@ -1,11 +1,32 @@
 import React, { createContext, forwardRef, useContext } from "react";
 import ReactDOM from "react-dom";
 import { useProvider } from "../provider/Provider";
+import { Theme, useThemeInternal } from "../theme/Theme";
 import { useClientLayoutEffect, useId } from "../util";
+import { useMergeRefs } from "../util/hooks";
 
 const PortalContext = createContext<HTMLElement | null>(null);
 
-function usePortalNode(rootElement?: HTMLElement | null) {
+type PortalNodeOptions = {
+  /**
+   * An optional container where the portaled content should be appended.
+   */
+  rootElement?: HTMLElement | null;
+  /**
+   * Ref forwarded to the portal container div.
+   */
+  ref: React.ForwardedRef<HTMLDivElement>;
+  /**
+   * Props forwarded to the portal container div.
+   */
+  props: React.HTMLAttributes<HTMLDivElement>;
+};
+
+function usePortalNode({
+  rootElement,
+  ref: forwardedRef,
+  props,
+}: PortalNodeOptions) {
   const providedRootElement = useProvider()?.rootElement ?? rootElement;
   const parentPortalNode = useContext(PortalContext);
 
@@ -18,9 +39,7 @@ function usePortalNode(rootElement?: HTMLElement | null) {
 
   const containerRef = React.useRef<HTMLElement | ShadowRoot | null>(null);
 
-  const setPortalNodeRef = React.useCallback((node: HTMLDivElement | null) => {
-    setPortalNode(node);
-  }, []);
+  const mergedRefs = useMergeRefs(forwardedRef, setPortalNode);
 
   useClientLayoutEffect(() => {
     /* Wait for the container to be resolved if explicitly `null`. */
@@ -63,7 +82,12 @@ function usePortalNode(rootElement?: HTMLElement | null) {
    */
   const portalSubtree = containerElement
     ? ReactDOM.createPortal(
-        <PortalDiv ref={setPortalNodeRef} id={uniqueId} data-aksel-portal="" />,
+        <PortalDiv
+          ref={mergedRefs}
+          id={uniqueId}
+          {...props}
+          data-aksel-portal=""
+        />,
         containerElement,
       )
     : null;
@@ -78,6 +102,21 @@ type PortalDivProps = React.HTMLAttributes<HTMLDivElement>;
 
 const PortalDiv = forwardRef<HTMLDivElement, PortalDivProps>(
   (props: PortalDivProps, forwardedRef) => {
+    const themeContext = useThemeInternal(false);
+
+    if (themeContext?.isDarkside) {
+      return (
+        <Theme
+          theme={themeContext?.theme}
+          asChild
+          hasBackground={false}
+          data-color={themeContext?.color}
+        >
+          <div ref={forwardedRef} {...props} />
+        </Theme>
+      );
+    }
+
     return <div ref={forwardedRef} {...props} />;
   },
 );

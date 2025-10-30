@@ -1,8 +1,5 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import ReactDOM from "react-dom";
-import { Slot } from "../slot/Slot";
-import { Theme, useThemeInternal } from "../theme/Theme";
-import { AsChildProps } from "../util/types";
 import { PortalContext, usePortalNode } from "./usePortalNode";
 
 interface PortalBaseProps extends HTMLAttributes<HTMLDivElement> {
@@ -12,60 +9,31 @@ interface PortalBaseProps extends HTMLAttributes<HTMLDivElement> {
   rootElement?: HTMLElement | null;
 }
 
-export type PortalProps = PortalBaseProps & AsChildProps;
+export type PortalProps = PortalBaseProps;
 
 export const Portal = forwardRef<HTMLDivElement, PortalProps>(
-  ({ rootElement, asChild, ...rest }, ref) => {
-    const themeContext = useThemeInternal(false);
-    const { portalNode, portalSubtree } = usePortalNode(rootElement);
-
-    const Component = asChild ? Slot : "div";
+  ({ rootElement, children, ...restProps }, forwardedRef) => {
+    const { portalNode, portalSubtree } = usePortalNode({
+      rootElement,
+      ref: forwardedRef,
+      props: restProps,
+    });
 
     if (!portalSubtree && !portalNode) {
       return null;
     }
 
-    /**
-     * Portal can be mounted outside of theme-classNames.
-     * If a theme is present, we want to make sure that theme cascades to portaled element.
-     */
-    if (themeContext?.isDarkside) {
-      return (
-        <>
-          {portalSubtree}
-          <PortalContext.Provider value={portalNode}>
-            {portalNode &&
-              ReactDOM.createPortal(
-                <Theme
-                  theme={themeContext.theme}
-                  asChild
-                  hasBackground={false}
-                  data-color={themeContext.color}
-                >
-                  <Component ref={ref} {...rest} />
-                </Theme>,
-                portalNode,
-              )}
-          </PortalContext.Provider>
-        </>
-      );
-    }
-
     return (
-      <>
+      <React.Fragment>
         {portalSubtree}
-        <PortalContext.Provider value={portalNode}>
-          {portalNode &&
-            ReactDOM.createPortal(
-              <Component ref={ref} {...rest} />,
-              portalNode,
-            )}
-        </PortalContext.Provider>
-      </>
+        {portalNode && (
+          <PortalContext.Provider value={portalNode}>
+            {ReactDOM.createPortal(children, portalNode)}
+          </PortalContext.Provider>
+        )}
+      </React.Fragment>
     );
   },
 );
 
 export default Portal;
-
-/* TODO: Fix ref, there are to many divs now */
