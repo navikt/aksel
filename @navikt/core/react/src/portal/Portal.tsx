@@ -21,6 +21,10 @@ export const Portal = forwardRef<HTMLDivElement, PortalProps>(
 
     const Component = asChild ? Slot : "div";
 
+    if (!portalSubtree && !portalNode) {
+      return null;
+    }
+
     /**
      * Portal can be mounted outside of theme-classNames.
      * If a theme is present, we want to make sure that theme cascades to portaled element.
@@ -53,10 +57,7 @@ export const Portal = forwardRef<HTMLDivElement, PortalProps>(
         <PortalContext.Provider value={portalNode}>
           {portalNode &&
             ReactDOM.createPortal(
-              ReactDOM.createPortal(
-                <Component ref={ref} {...rest} />,
-                portalNode,
-              ),
+              <Component ref={ref} {...rest} />,
               portalNode,
             )}
         </PortalContext.Provider>
@@ -66,3 +67,5 @@ export const Portal = forwardRef<HTMLDivElement, PortalProps>(
 );
 
 export default Portal;
+
+/* TODO: Fix ref, there are to many divs now */

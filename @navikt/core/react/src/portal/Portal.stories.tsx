@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box } from "../layout/box";
 import { Provider } from "../provider";
 import { Portal } from "./Portal";
@@ -123,6 +123,32 @@ export const Nested = () => {
           <Portal>
             <h4>2x Nested-2 portal</h4>
           </Portal>
+        </Portal>
+      </Portal>
+    </Box>
+  );
+};
+
+export const RefTest = () => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const refNested = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("Root portal ref:", ref.current);
+      console.log("Nested portal ref:", refNested.current);
+
+      ref.current.style.color = "red";
+      refNested.current.style.color = "blue";
+    }, 1000);
+  }, []);
+
+  return (
+    <Box>
+      <Portal ref={ref}>
+        <h2>Root portal</h2>
+        <Portal ref={refNested} asChild>
+          <h3>Nested portal</h3>
         </Portal>
       </Portal>
     </Box>
