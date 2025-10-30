@@ -62,7 +62,6 @@ const FilteredOptions = () => {
       asChild
       safeZone={{
         anchor: anchorRef,
-        dismissable: floatingRef.current,
       }}
       onDismiss={() => localOpen && toggleIsListOpen(false)}
       onEscapeKeyDown={(event) => {

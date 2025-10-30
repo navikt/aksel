@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.32.5
+
+### @navikt/ds-react
+
+- Modal: Improved scroll locking. ([#4234](https://github.com/navikt/aksel/pull/4234))
+
+### @navikt/aksel-stylelint
+
+- Classnames: Added `navds-modal__document-body` to list of future deprecations. ([#4234](https://github.com/navikt/aksel/pull/4234))
+
 ## 7.32.4
 
 ### @navikt/ds-react
