@@ -102,3 +102,29 @@ export const AsChild = () => {
     </Box>
   );
 };
+
+export const Nested = () => {
+  return (
+    <Box>
+      <Portal>
+        <h2>Root portal</h2>
+        <Portal>
+          <h3>Nested portal</h3>
+          <Portal>
+            <h4>2x Nested portal</h4>
+          </Portal>
+        </Portal>
+      </Portal>
+
+      <Portal>
+        <h2>Root-2 portal</h2>
+        <Portal>
+          <h3>Nested-2 portal</h3>
+          <Portal>
+            <h4>2x Nested-2 portal</h4>
+          </Portal>
+        </Portal>
+      </Portal>
+    </Box>
+  );
+};
