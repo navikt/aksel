@@ -2,14 +2,12 @@ import React, { HTMLAttributes, forwardRef } from "react";
 import ReactDOM from "react-dom";
 import { PortalContext, usePortalNode } from "./usePortalNode";
 
-interface PortalBaseProps extends HTMLAttributes<HTMLDivElement> {
+export interface PortalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * An optional container where the portaled content should be appended.
    */
   rootElement?: HTMLElement | null;
 }
-
-export type PortalProps = PortalBaseProps;
 
 export const Portal = forwardRef<HTMLDivElement, PortalProps>(
   ({ rootElement, children, ...restProps }, forwardedRef) => {
