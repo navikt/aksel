@@ -1,9 +1,10 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import { BoxNew, type BoxNewProps } from "../../layout/box";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
 import { useRenameCSS } from "../../theme/Theme";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../util/focus-guards/FocusGuards";
+import { hideNonTargetElements } from "../../util/hideNonTargetElements";
 import { useMergeRefs } from "../../util/hooks";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { useScrollLock } from "../../util/hooks/useScrollLock";
@@ -101,8 +102,27 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
 
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
+    const localPopupRef = useRef<HTMLDivElement | null>(null);
 
-    const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
+    const mergedRefs = useMergeRefs(
+      forwardedRef,
+      popupRef,
+      setPopupElement,
+      localPopupRef,
+    );
+
+    /**
+     * TODO:
+     * - validate that nested dialogs/nodes are not hidden, especially with Portal nested
+     * - Ignore focus-guards?
+     */
+    useEffect(() => {
+      if (!open || !popupRef.current) {
+        return;
+      }
+
+      return hideNonTargetElements([popupRef.current]);
+    }, [open, popupRef]);
 
     useScrollLock({
       enabled: open && modal === true,
