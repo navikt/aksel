@@ -5,7 +5,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <Tooltip content="Kopier fødselsnummer">
-      <CopyButton copyText="12003045000" icon={<FilesIcon aria-hidden />} />
+      <CopyButton copyText="12993045000" icon={<FilesIcon aria-hidden />} />
     </Tooltip>
   );
 };
