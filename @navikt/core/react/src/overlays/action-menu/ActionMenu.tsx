@@ -353,7 +353,7 @@ export const ActionMenuContent = forwardRef<
     const { cn } = useRenameCSS();
 
     return (
-      <Menu.Portal rootElement={context.rootElement} asChild>
+      <Menu.Portal rootElement={context.rootElement}>
         <Menu.Content
           ref={ref}
           id={context.contentId}

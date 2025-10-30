@@ -1,53 +1,36 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import ReactDOM from "react-dom";
-import { useProvider } from "../provider/Provider";
-import { Slot } from "../slot/Slot";
-import { Theme, useThemeInternal } from "../theme/Theme";
-import { AsChildProps } from "../util/types";
+import { PortalContext, usePortalNode } from "./usePortalNode";
 
-interface PortalBaseProps extends HTMLAttributes<HTMLDivElement> {
+export interface PortalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * An optional container where the portaled content should be appended.
    */
   rootElement?: HTMLElement | null;
 }
 
-export type PortalProps = PortalBaseProps & AsChildProps;
-
 export const Portal = forwardRef<HTMLDivElement, PortalProps>(
-  ({ rootElement, asChild, ...rest }, ref) => {
-    const themeContext = useThemeInternal(false);
-    const contextRoot = useProvider()?.rootElement;
-    const root = rootElement ?? contextRoot ?? globalThis?.document?.body;
+  ({ rootElement, children, ...restProps }, forwardedRef) => {
+    const { portalNode, portalSubtree } = usePortalNode({
+      rootElement,
+      ref: forwardedRef,
+      props: restProps,
+    });
 
-    const Component = asChild ? Slot : "div";
-
-    /**
-     * Portal can be mounted outside of theme-classNames.
-     * If a theme is present, we want to make sure that theme cascades to portaled element.
-     */
-    if (themeContext?.isDarkside) {
-      return root
-        ? ReactDOM.createPortal(
-            <Theme
-              theme={themeContext.theme}
-              asChild
-              hasBackground={false}
-              data-color={themeContext.color}
-            >
-              <Component ref={ref} data-aksel-portal="" {...rest} />
-            </Theme>,
-            root,
-          )
-        : null;
+    if (!portalSubtree && !portalNode) {
+      return null;
     }
 
-    return root
-      ? ReactDOM.createPortal(
-          <Component ref={ref} data-aksel-portal="" {...rest} />,
-          root,
-        )
-      : null;
+    return (
+      <React.Fragment>
+        {portalSubtree}
+        {portalNode && (
+          <PortalContext.Provider value={portalNode}>
+            {ReactDOM.createPortal(children, portalNode)}
+          </PortalContext.Provider>
+        )}
+      </React.Fragment>
+    );
   },
 );
 

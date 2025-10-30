@@ -42,7 +42,7 @@ export const WithPortal = () => {
         </Floating.Anchor>
 
         {open && (
-          <Portal asChild>
+          <Portal>
             <Floating.Content
               className="content"
               sideOffset={5}
@@ -152,7 +152,7 @@ export const PropsCheck = () => {
 
         <Floating>
           <Floating.Anchor className="anchor-small">2</Floating.Anchor>
-          <Portal asChild>
+          <Portal>
             <Floating.Content
               className="content-small"
               sideOffset={5}
@@ -188,7 +188,7 @@ export const PropsCheck = () => {
 
         <Floating>
           <Floating.Anchor className="anchor-small">4</Floating.Anchor>
-          <Portal asChild>
+          <Portal>
             <Floating.Content
               className="content-small"
               sideOffset={5}
@@ -225,7 +225,7 @@ export const PropsCheck = () => {
 
         <Floating>
           <Floating.Anchor className="anchor-small">6</Floating.Anchor>
-          <Portal asChild>
+          <Portal>
             <Floating.Content
               className="content-small"
               sideOffset={5}
@@ -262,7 +262,7 @@ export const PropsCheck = () => {
 
         <Floating>
           <Floating.Anchor className="anchor-small">8</Floating.Anchor>
-          <Portal asChild>
+          <Portal>
             <Floating.Content
               className="content-small"
               sideOffset={5}
@@ -317,7 +317,7 @@ export const PropsCheck = () => {
                     <Floating.Anchor className="anchor-small">
                       10.{i + 1}
                     </Floating.Anchor>
-                    <Portal asChild>
+                    <Portal>
                       <Floating.Content
                         className="content-small"
                         sideOffset={5}
@@ -379,7 +379,7 @@ export const PropsCheck = () => {
                     <Floating.Anchor className="anchor-small">
                       10.{i + 1}
                     </Floating.Anchor>
-                    <Portal asChild>
+                    <Portal>
                       <Floating.Content
                         className="content-small"
                         sideOffset={5}
