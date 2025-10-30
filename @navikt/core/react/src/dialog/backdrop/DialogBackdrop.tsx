@@ -17,16 +17,25 @@ type DialogBackdropProps = Omit<
 const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(
   ({ className, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
-    const { mounted, transitionStatus, nested, backdropRef } =
-      useDialogContext();
+    const {
+      mounted,
+      transitionStatus,
+      nested,
+      backdropRef,
+      setBackdropElement,
+    } = useDialogContext();
 
-    const mergedRefs = useMergeRefs(forwardedRef, backdropRef);
+    const mergedRefs = useMergeRefs(
+      forwardedRef,
+      backdropRef,
+      setBackdropElement,
+    );
 
     const transitionAttrb = transitionStatus
       ? { [`data-${transitionStatus}-style`]: true }
       : {};
 
-    const shouldRender = mounted && !nested;
+    const shouldRender = mounted;
 
     if (!shouldRender) {
       return null;
@@ -42,6 +51,8 @@ const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(
           userSelect: "none",
           WebkitUserSelect: "none",
         }}
+        /* TODO: Might be better way to "hide" nested backdops */
+        hidden={nested}
         {...transitionAttrb}
       />
     );

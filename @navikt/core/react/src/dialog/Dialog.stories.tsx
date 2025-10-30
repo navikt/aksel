@@ -414,7 +414,11 @@ export const NestedDrawers: Story = {
                   </DialogTrigger>
                   <DialogPortal>
                     <DialogBackdrop className="backdropCSS" />
-                    <DialogPopup className="dialogCSS" position={position}>
+                    <DialogPopup
+                      className="dialogCSS"
+                      position={position}
+                      modal="trap-focus"
+                    >
                       <DialogHeader>
                         <DialogTitle id="ha">LEVEL 2</DialogTitle>
                       </DialogHeader>

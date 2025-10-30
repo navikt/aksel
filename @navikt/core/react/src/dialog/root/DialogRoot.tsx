@@ -64,6 +64,9 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     null,
   );
   const [popupElement, setPopupElement] = useState<HTMLElement | null>(null);
+  const [backdropElement, setBackdropElement] = useState<HTMLElement | null>(
+    null,
+  );
 
   const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = useState(0);
 
@@ -128,6 +131,8 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       backdropRef={backdropRef}
       setPopupElement={setPopupElement}
       popupElement={popupElement}
+      setBackdropElement={setBackdropElement}
+      backdropElement={backdropElement}
       setTriggerElement={setTriggerElement}
       triggerElement={triggerElement}
       nested={!!parentContext}

@@ -96,6 +96,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       backdropRef,
       nestedOpenDialogCount: nestedOpenDialogCountProp,
       nested,
+      backdropElement,
     } = useDialogContext();
 
     const hasInteractedOutsideRef = useRef(false);
@@ -209,7 +210,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
             onDismiss={(event) => {
               open && setOpen(false, event);
             }}
-            disableOutsidePointerEvents={modal === true}
+            disableOutsidePointerEvents={modal === true || !!backdropElement}
             onInteractOutside={(event) => {
               if (!event.defaultPrevented) {
                 hasInteractedOutsideRef.current = true;
