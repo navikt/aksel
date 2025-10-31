@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Timeline: Period popups now has an accessible name.
+Timeline: Popups now have an accessible name.
