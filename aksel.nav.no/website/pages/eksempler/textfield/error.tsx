@@ -2,12 +2,7 @@ import { TextField } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  return (
-    <TextField
-      label="Har du noen tilbakemeldinger?"
-      error="Tilbakemeldingen er for kort."
-    />
-  );
+  return <TextField label="Navn" error="Navn må fylles ut." />;
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
