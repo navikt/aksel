@@ -28,6 +28,9 @@
     "directory": "@navikt/aksel"
   },
   "homepage": "https://aksel.nav.no/grunnleggende/kode/kommandolinje",
+  "bugs": {
+    "url": "https://github.com/navikt/aksel/issues"
+  },
   "dependencies": {
     "@navikt/ds-css": "^7.32.5",
     "@navikt/ds-tokens": "^7.32.5",
