@@ -7,9 +7,8 @@ import darksideCss from "../@navikt/core/css/darkside/index.css?inline";
 import defaultCss from "../@navikt/core/css/index.css?inline";
 import { Provider } from "../@navikt/core/react/src/provider";
 import { Theme } from "../@navikt/core/react/src/theme";
-import en from "../@navikt/core/react/src/util/i18n/locales/en";
-import nb from "../@navikt/core/react/src/util/i18n/locales/nb";
-import nn from "../@navikt/core/react/src/util/i18n/locales/nn";
+import { Translations } from "../@navikt/core/react/src/util/i18n/i18n.types";
+import { en, nb, nn } from "../@navikt/core/react/src/util/i18n/locales";
 import "./layout.css";
 
 const ModeDecorator = ({ children, mode, theme }) => {
@@ -37,24 +36,22 @@ const ModeDecorator = ({ children, mode, theme }) => {
   );
 };
 
-const translations = {
+type Language = "nb" | "nn" | "en";
+const locales: Record<Language, Translations> = {
   nb,
   nn,
   en,
 };
 
-const LanguageDecorator = ({ children, language }) => {
-  if (language) {
-    return (
-      <Provider translations={translations[language]}>{children}</Provider>
-    );
-  }
-  return children;
-};
-
 const fonts = ["Source Sans 3", "Open Sans"];
 
-const TypoDecorator = ({ children, font }) => {
+const TypoDecorator = ({
+  children,
+  font,
+}: {
+  children: React.ReactNode;
+  font: string;
+}) => {
   useEffect(() => {
     const fontVariable = fonts.includes(font) ? `"${font}", sans-serif` : null;
     document.body.style.setProperty("--ax-font-family", fontVariable);
@@ -148,11 +145,14 @@ export default {
         <StoryFn />
       </ModeDecorator>
     ),
-    (StoryFn, context) => (
-      <LanguageDecorator language={context.globals.language}>
+    (StoryFn, context) =>
+      context.globals.language ? (
+        <Provider locale={locales[context.globals.language as Language]}>
+          <StoryFn />
+        </Provider>
+      ) : (
         <StoryFn />
-      </LanguageDecorator>
-    ),
+      ),
     withThemeByClassName({
       themes: {
         light: "light",
