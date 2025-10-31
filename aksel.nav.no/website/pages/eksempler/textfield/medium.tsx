@@ -16,7 +16,3 @@ export const Demo = {
 export const args = {
   index: 0,
 };
-
-// TODO: Bedre eksempel-label. Feks. Navn
-
-// Senere: Se nærmere på autoformatering, type=number (hindre at man kan skrive inn ugyldige tegn)
