@@ -17,6 +17,7 @@ export default {
     info: "Information",
     success: "Success",
     warning: "Warning",
+    announcement: "Announcement",
   },
   Chips: {
     Removable: {

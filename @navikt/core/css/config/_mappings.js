@@ -133,6 +133,11 @@ const StyleMappings = {
       ],
     },
     {
+      component: "GlobalAlert",
+      main: "alert.css",
+      dependencies: [typoCss, "button.css"],
+    },
+    {
       component: "GuidePanel",
       main: "guide-panel.css",
       dependencies: [typoCss],
@@ -143,7 +148,13 @@ const StyleMappings = {
       main: "help-text.css",
       dependencies: ["popover.css"],
     },
+    { component: "InfoCard", main: "alert.css", dependencies: [typoCss] },
     { component: "Ingress", main: typoCss },
+    {
+      component: "InlineMessage",
+      main: "inline-message.css",
+      dependencies: [typoCss],
+    },
     {
       component: "InternalHeader",
       main: "internalheader.css",
@@ -163,6 +174,11 @@ const StyleMappings = {
     },
     { component: "List", main: "list.css", dependencies: [typoCss] },
     { component: "Loader", main: "loader.css" },
+    {
+      component: "LocalAlert",
+      main: "alert.css",
+      dependencies: [typoCss, "button.css"],
+    },
     {
       component: "Modal",
       main: "modal.css",
