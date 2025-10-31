@@ -102,7 +102,10 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         if (container.contains(target)) {
           lastFocusedElementRef.current = target;
         } else {
-          focus(lastFocusedElementRef.current, { select: true });
+          queueFocus(lastFocusedElementRef.current, {
+            select: true,
+            sync: true,
+          });
         }
       }
 
@@ -135,7 +138,10 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
          * when they are not supposed to (like when clicking on elements outside the container
          */
         if (!container.contains(relatedTarget)) {
-          focus(lastFocusedElementRef.current, { select: true });
+          queueFocus(lastFocusedElementRef.current, {
+            select: true,
+            sync: true,
+          });
         }
       }
 
@@ -150,7 +156,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         if (mutations.some((mutation) => mutation.removedNodes.length > 0)) {
-          focus(container);
+          queueFocus(container, { sync: true });
         }
       };
 
@@ -200,7 +206,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
             const candidates = removeLinks(getTabbableCandidates(container));
             const previouslyFocusedElement = document.activeElement;
             for (const candidate of candidates) {
-              focus(candidate, { select: true });
+              queueFocus(candidate, { select: true });
               if (document.activeElement !== previouslyFocusedElement) {
                 break;
               }
@@ -208,7 +214,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
 
             /* focusFirst might not find any candidates, so we fall back to focusing container */
             if (document.activeElement === initialFocusedElement) {
-              focus(container);
+              queueFocus(container);
             }
           }
         });
@@ -234,12 +240,13 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
           /* If consumer does not manually prevent event and handle focus themselves */
           if (!unmountEvent.defaultPrevented) {
             /* To avoid CPU-spikes on Chrome, we make sure element is still connected to the DOM. */
-            focus(
+            queueFocus(
               initialFocusedElement?.isConnected
                 ? initialFocusedElement
                 : document.body,
               {
                 select: true,
+                sync: true,
               },
             );
           }
@@ -292,12 +299,12 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
           if (!event.shiftKey && focusedElement === last) {
             event.preventDefault();
             if (loop) {
-              focus(first, { select: true });
+              queueFocus(first, { select: true, sync: true });
             }
           } else if (event.shiftKey && focusedElement === first) {
             event.preventDefault();
             if (loop) {
-              focus(last, { select: true });
+              queueFocus(last, { select: true, sync: true });
             }
           }
         }
@@ -392,27 +399,41 @@ function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
   return false;
 }
 
-/* TODO: Create queue-focus util */
-function focus(element?: HTMLElement | null, { select = false } = {}) {
+let rafId = 0;
+
+function queueFocus(
+  element?: HTMLElement | null,
+  { select = false, sync = false } = {},
+) {
   if (!element?.focus) {
     return;
   }
 
+  cancelAnimationFrame(rafId);
   const previouslyFocusedElement = document.activeElement;
-  /* Prevent scrolling on focus, to minimize jarring transitions */
-  element.focus({ preventScroll: true });
 
-  if (!select) {
-    return;
+  const exec = () => {
+    element?.focus({ preventScroll: true });
+
+    if (!select) {
+      return;
+    }
+
+    /* By default, inputs that gets focus should select its contents */
+    if (
+      element !== previouslyFocusedElement &&
+      element instanceof HTMLInputElement &&
+      "select" in element
+    ) {
+      element.select();
+    }
+  };
+
+  if (sync) {
+    exec();
+  } else {
+    rafId = requestAnimationFrame(exec);
   }
-
-  /* By default, inputs that gets focus should select its contents */
-  if (
-    element !== previouslyFocusedElement &&
-    element instanceof HTMLInputElement &&
-    "select" in element
-  )
-    element.select();
 }
 
 /* ---------------------------- FocusBoundary stack ---------------------------- */
@@ -455,5 +476,5 @@ function removeLinks(items: HTMLElement[]) {
   return items.filter((item) => item.tagName !== "A");
 }
 
-export { FocusBoundary };
+export { FocusBoundary, queueFocus };
 export type { FocusBoundaryProps };

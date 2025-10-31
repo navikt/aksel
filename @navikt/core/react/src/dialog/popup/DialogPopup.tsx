@@ -2,7 +2,10 @@ import React, { forwardRef, useEffect, useRef } from "react";
 import { BoxNew, type BoxNewProps } from "../../layout/box";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
 import { useRenameCSS } from "../../theme/Theme";
-import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
+import {
+  FocusBoundary,
+  queueFocus,
+} from "../../util/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../util/focus-guards/FocusGuards";
 import { hideNonTargetElements } from "../../util/hideNonTargetElements";
 import { useMergeRefs } from "../../util/hooks";
@@ -165,7 +168,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
        * After a11y testing, focusing container element seems to give best experience
        * for screen reader and keyboard users. User will still have the option to override this anyways.
        */
-      /* popupRef.current?.focus({ preventScroll: true }); */
+      queueFocus(popupRef.current);
     });
 
     const handleUnmountFocus = useEventCallback((event: Event) => {
