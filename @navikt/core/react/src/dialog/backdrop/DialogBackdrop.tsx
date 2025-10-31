@@ -35,9 +35,7 @@ const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(
       ? { [`data-${transitionStatus}-style`]: true }
       : {};
 
-    const shouldRender = mounted;
-
-    if (!shouldRender) {
+    if (!mounted) {
       return null;
     }
 
