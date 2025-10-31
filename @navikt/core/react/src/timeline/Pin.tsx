@@ -94,6 +94,10 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
       left: "right",
     }[placement.split("-")[0]];
 
+    const label = translate("Pin.pin", {
+      date: format(date, translate("dateFormat")),
+    });
+
     return (
       <>
         <div
@@ -104,9 +108,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             {...rest}
             ref={mergedRef}
             className={cn("navds-timeline__pin-button")}
-            aria-label={translate("Pin.pin", {
-              date: format(date, translate("dateFormat")),
-            })}
+            aria-label={label}
             type="button"
             aria-expanded={children ? open : undefined}
             {...getReferenceProps({
@@ -133,6 +135,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
               data-placement={placement}
               ref={refs.setFloating}
               role="dialog"
+              aria-label={label}
               {...getFloatingProps()}
               style={floatingStyles}
             >

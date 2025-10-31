@@ -106,6 +106,8 @@ const ClickablePeriod = React.memo(
       left: "right",
     }[placement.split("-")[0]];
 
+    const label = ariaLabel(start, end, status, statusLabel, translate);
+
     return (
       <>
         <button
@@ -116,7 +118,7 @@ const ClickablePeriod = React.memo(
             firstFocus && addFocusable(r, index);
             mergedRef(r);
           }}
-          aria-label={ariaLabel(start, end, status, statusLabel, translate)}
+          aria-label={label}
           className={cn(
             "navds-timeline__period--clickable",
             getConditionalClasses(cropped, direction, status),
@@ -168,6 +170,7 @@ const ClickablePeriod = React.memo(
               data-placement={placement}
               ref={refs.setFloating}
               role="dialog"
+              aria-label={label}
               {...getFloatingProps()}
               style={floatingStyles}
             >
