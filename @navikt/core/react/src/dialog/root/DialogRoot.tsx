@@ -69,6 +69,9 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     null,
   );
 
+  const [titleId, setTitleId] = useState<string>();
+  const [descriptionId, setDescriptionId] = useState<string>();
+
   const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = useState(0);
 
   const nestedDialogOpened = useEventCallback((nestedCount: number) => {
@@ -141,6 +144,10 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       nestedDialogClosed={nestedDialogClosed}
       nestedOpenDialogCount={ownNestedOpenDialogs}
       size={size}
+      titleId={titleId}
+      setTitleId={setTitleId}
+      descriptionId={descriptionId}
+      setDescriptionId={setDescriptionId}
     >
       {children}
     </DialogContextProvider>
