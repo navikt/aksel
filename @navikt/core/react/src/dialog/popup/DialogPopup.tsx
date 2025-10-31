@@ -165,7 +165,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
        * After a11y testing, focusing container element seems to give best experience
        * for screen reader and keyboard users. User will still have the option to override this anyways.
        */
-      popupRef.current?.focus({ preventScroll: true });
+      /* popupRef.current?.focus({ preventScroll: true }); */
     });
 
     const handleUnmountFocus = useEventCallback((event: Event) => {

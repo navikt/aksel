@@ -178,39 +178,44 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       const containsActiveElement =
         initialFocusedElement && container.contains(initialFocusedElement);
 
+      let frame = 0;
+
       /*
        * We only autofocus on mount if container does not contain active element.
        * If container has an element with `autoFocus` attribute, browser will
        * have already moved focus there before this effect runs.
        */
       if (!containsActiveElement) {
-        const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
-        container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
-        container.dispatchEvent(mountEvent);
+        frame = requestAnimationFrame(() => {
+          const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
+          container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
+          container.dispatchEvent(mountEvent);
 
-        /* If consumer does not manually prevent event and handle focus themselves */
-        if (!mountEvent.defaultPrevented) {
-          /**
-           * Attempts focusing the first element in a list of candidates.
-           * Stops when focus has actually moved.
-           */
-          const candidates = removeLinks(getTabbableCandidates(container));
-          const previouslyFocusedElement = document.activeElement;
-          for (const candidate of candidates) {
-            focus(candidate, { select: true });
-            if (document.activeElement !== previouslyFocusedElement) {
-              break;
+          /* If consumer does not manually prevent event and handle focus themselves */
+          if (!mountEvent.defaultPrevented) {
+            /**
+             * Attempts focusing the first element in a list of candidates.
+             * Stops when focus has actually moved.
+             */
+            const candidates = removeLinks(getTabbableCandidates(container));
+            const previouslyFocusedElement = document.activeElement;
+            for (const candidate of candidates) {
+              focus(candidate, { select: true });
+              if (document.activeElement !== previouslyFocusedElement) {
+                break;
+              }
+            }
+
+            /* focusFirst might not find any candidates, so we fall back to focusing container */
+            if (document.activeElement === initialFocusedElement) {
+              focus(container);
             }
           }
-
-          /* focusFirst might not find any candidates, so we fall back to focusing container */
-          if (document.activeElement === initialFocusedElement) {
-            focus(container);
-          }
-        }
+        });
       }
 
       return () => {
+        cancelAnimationFrame(frame);
         container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
 
         /**
@@ -387,6 +392,7 @@ function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
   return false;
 }
 
+/* TODO: Create queue-focus util */
 function focus(element?: HTMLElement | null, { select = false } = {}) {
   if (!element?.focus) {
     return;
