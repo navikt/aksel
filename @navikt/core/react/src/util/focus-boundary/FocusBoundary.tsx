@@ -401,6 +401,11 @@ function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
 
 let rafId = 0;
 
+/**
+ * TODO: Currently if we delay setting focus, while setting hideNonTargetElements before focus moves
+ * We get a warning chrome about not allowing hidden elements to be focused.
+ * We need to match hiding and focusing in the same frame
+ */
 function queueFocus(
   element?: HTMLElement | null,
   { select = false, sync = false } = {},
