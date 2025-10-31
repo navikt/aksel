@@ -1,6 +1,8 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
 .aksel-dialog__popup {
   --__axc-dialog-transform: ;
+  --__axc-dialog-p-b: var(--ax-space-16);
+  --__axc-dialog-p-i: var(--ax-space-20);
 
   position: fixed;
   background-color: var(--ax-bg-raised);
@@ -153,6 +155,11 @@
   }
 }
 
+.aksel-dialog__popup--small {
+  --__axc-dialog-p-b: var(--ax-space-12);
+  --__axc-dialog-p-i: var(--ax-space-16);
+}
+
 .aksel-dialog__backdrop {
   position: fixed;
   min-height: 100dvh;
@@ -174,12 +181,8 @@
 .aksel-dialog__header {
   z-index: 1;
   flex-shrink: 0;
-
-  /* TODO: Maybe a separate divider component? */
-
-  /* border-bottom: 1px solid var(--ax-border-neutral-subtleA); */
-  padding-inline: var(--ax-space-20);
-  padding-block: var(--ax-space-16);
+  padding-block: var(--__axc-dialog-p-b);
+  padding-inline: var(--__axc-dialog-p-i);
 }
 
 .aksel-dialog__title {
@@ -198,18 +201,17 @@
 .aksel-dialog__body {
   overflow: auto;
   flex-grow: 1;
-  padding-inline: var(--ax-space-20);
-  padding-block: var(--ax-space-16);
+  padding-block: var(--__axc-dialog-p-b);
+  padding-inline: var(--__axc-dialog-p-i);
 }
 
 .aksel-dialog__footer {
-  /* TODO: up for discussion */
   justify-content: flex-end;
   display: flex;
   flex-flow: wrap;
   flex-shrink: 0;
   gap: var(--base-size-8, 0.5rem);
   z-index: 1;
-  padding-inline: var(--ax-space-20);
-  padding-block: var(--ax-space-16);
+  padding-block: var(--__axc-dialog-p-b);
+  padding-inline: var(--__axc-dialog-p-i);
 }

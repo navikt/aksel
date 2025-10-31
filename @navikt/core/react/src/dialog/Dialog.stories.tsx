@@ -46,7 +46,7 @@ export const Default = {
   render: (args) => (
     <div>
       <button onClick={() => alert("after")}>Before dialog</button>
-      <Dialog defaultOpen={args.defaultOpen}>
+      <Dialog defaultOpen={args.defaultOpen} size={args.size}>
         <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogPortal>
           {args.backdrop && <DialogBackdrop className="backdropCSS" />}
@@ -86,6 +86,10 @@ export const Default = {
     },
     width: {
       options: ["large", "medium", "small", undefined],
+      control: { type: "radio" },
+    },
+    size: {
+      options: ["medium", "small"],
       control: { type: "radio" },
     },
     height: {
