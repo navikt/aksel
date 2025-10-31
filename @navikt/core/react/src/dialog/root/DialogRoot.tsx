@@ -26,6 +26,11 @@ interface DialogProps {
    * Event handler called after any animations complete when the dialog is opened or closed.
    */
   onOpenChangeComplete?: (open: boolean) => void;
+  /**
+   * Size of the dialog.
+   * @default "medium"
+   */
+  size?: "small" | "medium";
 }
 
 /**
@@ -43,6 +48,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     open: openParam,
     onOpenChange,
     onOpenChangeComplete,
+    size = "medium",
   } = props;
 
   const [open, setOpenControlled] = useControllableState({
@@ -134,6 +140,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       nestedDialogOpened={nestedDialogOpened}
       nestedDialogClosed={nestedDialogClosed}
       nestedOpenDialogCount={ownNestedOpenDialogs}
+      size={size}
     >
       {children}
     </DialogContextProvider>

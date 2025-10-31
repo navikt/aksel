@@ -66,6 +66,10 @@ interface DialogContextProps {
    * Number of currently opened nested dialogs.
    */
   nestedOpenDialogCount: number | undefined;
+  /**
+   * Dialog size
+   */
+  size: "small" | "medium";
 }
 
 const [DialogContextProvider, useDialogContext] =

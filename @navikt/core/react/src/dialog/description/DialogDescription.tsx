@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
+import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
 
@@ -15,13 +16,14 @@ const DialogDescription = forwardRef<
   DialogDescriptionProps
 >(({ className, children, ...restProps }, forwardedRef) => {
   const { cn } = useRenameCSS();
+  const { size } = useDialogContext();
 
   return (
     <BodyShort
       {...restProps}
       ref={forwardedRef}
       className={cn(className, "navds-dialog__description")}
-      size="medium"
+      size={size}
       data-color="neutral"
       textColor="subtle"
     >

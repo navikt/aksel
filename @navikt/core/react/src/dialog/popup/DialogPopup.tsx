@@ -98,6 +98,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       nestedOpenDialogCount: nestedOpenDialogCountProp,
       nested,
       backdropElement,
+      size,
     } = useDialogContext();
 
     const hasInteractedOutsideRef = useRef(false);
@@ -308,7 +309,11 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
             <BoxNew
               {...restProps}
               ref={mergedRefs}
-              className={cn(className, "navds-dialog__popup")}
+              className={cn(
+                className,
+                "navds-dialog__popup",
+                `navds-dialog__popup--${size}`,
+              )}
               role="dialog"
               {...transitionAttrb}
               {...positionDataAttributes}
