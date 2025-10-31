@@ -68,6 +68,10 @@ const sbConfig: StorybookConfig = {
   ],
   framework: getAbsolutePath("@storybook/nextjs"),
 
+  features: {
+    actions: false,
+  },
+
   webpackFinal: (async (config) => {
     if (!config?.resolve) {
       return config;
