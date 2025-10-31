@@ -21,15 +21,7 @@ const DialogPortal = forwardRef<MenuPortalElement, DialogPortalProps>(
     const { cn } = useRenameCSS();
     const { mounted } = useDialogContext();
 
-    /**
-     * Use a floating portal node to ensure that dialogs are rendered in correct order
-     * when multiple dialogs are defaultOpen.
-     */
-
-    /* TODO: Add keepmounted-prop */
-    const shouldRender = mounted; /* || keepMounted */
-
-    if (!shouldRender) {
+    if (!mounted) {
       return null;
     }
 

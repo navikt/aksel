@@ -298,7 +298,6 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
                */
               event.preventDefault();
             }}
-            /* TODO: update logic */
             enablePointerUpOutside
             onPointerUpOutside={(event) => {
               if (!closeOnOutsideClick) {

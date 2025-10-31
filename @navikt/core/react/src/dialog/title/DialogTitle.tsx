@@ -9,7 +9,6 @@ type DialogTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
  * @example
  * ```jsx
  * ```
- * TODO: Handle size
  */
 const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>(
   ({ className, children, ...restProps }, forwardedRef) => {

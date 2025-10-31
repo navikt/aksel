@@ -36,11 +36,6 @@ interface DialogProps {
  * ```jsx
  * ```
  */
-/**
- * TODO: Root state and context provider for dialog components
- * - Handle nested dialogs
- * - Nested dialogs that both have defaultOpen currently bug-out. Nested one renders first, then closes instantly
- */
 const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
   const {
     children,

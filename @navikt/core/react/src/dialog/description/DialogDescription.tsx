@@ -9,7 +9,6 @@ type DialogDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
  * @example
  * ```jsx
  * ```
- * TODO: Handle size
  */
 const DialogDescription = forwardRef<
   HTMLParagraphElement,
