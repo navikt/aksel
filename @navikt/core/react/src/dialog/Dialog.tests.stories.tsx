@@ -8,10 +8,12 @@ import {
   DialogBackdrop,
   DialogClose,
   type DialogCloseProps,
+  DialogDescription,
   DialogPopup,
   type DialogPopupProps,
   DialogPortal,
   type DialogProps,
+  DialogTitle,
   DialogTrigger,
   type DialogTriggerProps,
 } from "./index";
@@ -776,6 +778,38 @@ export const CloseButtonDisabledSlot: Story = {
   },
 };
 
+export const AriaAttributes: Story = {
+  render: BaseDialogComponent,
+  play: async ({ canvasElement, args }) => {
+    const { canvas, expectPopupOpen } = testUtils(canvasElement, args);
+
+    const triggerButton = canvas.getByText("Open Dialog");
+
+    expect(triggerButton).toHaveAttribute("aria-expanded", "false");
+    await userEvent.click(triggerButton);
+    expectPopupOpen();
+
+    const popupElement = canvas.getByTestId("popup");
+
+    expect(triggerButton).toHaveAttribute("aria-expanded", "true");
+    expect(triggerButton).toHaveAttribute("aria-controls", "custom-popup-id");
+
+    expect(popupElement).toHaveAttribute("id", "custom-popup-id");
+    expect(popupElement).toHaveAttribute("role", "dialog");
+    expect(popupElement).toHaveAttribute("tabindex", "-1");
+    expect(popupElement).toHaveAttribute("aria-labelledby", "popup-title");
+    expect(popupElement).toHaveAttribute(
+      "aria-describedby",
+      "popup-description",
+    );
+  },
+  args: {
+    popupProps: {
+      id: "custom-popup-id",
+    },
+  },
+};
+
 /* ------------------------------- Test setup ------------------------------- */
 type BaseDialogProps = {
   rootProps?: Omit<DialogProps, "children"> & { children?: React.ReactNode };
@@ -833,6 +867,10 @@ function BaseDialogComponent({
           ) : (
             "Popup content"
           )}
+          <DialogTitle id="popup-title">Dialog title</DialogTitle>
+          <DialogDescription id="popup-description">
+            Dialog Description
+          </DialogDescription>
           <DialogClose data-testid="close" {...closeButtonProps}>
             {closeButtonProps?.children ?? "Close"}
           </DialogClose>
