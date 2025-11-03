@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { Slot } from "../../slot/Slot";
 import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
+import { hideNonTargetElements } from "../hideNonTargetElements";
 import { useLatestRef } from "../hooks/useLatestRef";
 import { ownerDocument } from "../owner";
 
@@ -55,6 +56,11 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
    * that was focused before the FocusBoundary mounted.
    */
   returnFocus?: boolean | React.MutableRefObject<HTMLElement | null>;
+  /**
+   * Hides all outside content from screen readers when true.
+   * @default false
+   */
+  modal?: boolean;
 }
 
 const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
@@ -64,6 +70,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       trapped = false,
       initialFocus,
       returnFocus,
+      modal = false,
       ...restProps
     }: FocusBoundaryProps,
     forwardedRef,
@@ -178,6 +185,14 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }, 0);
       };
     }, [container, focusBoundary]);
+
+    useEffect(() => {
+      if (!container || !modal) {
+        return;
+      }
+
+      return hideNonTargetElements([container]);
+    });
 
     /* Handles mount focus */
     useClientLayoutEffect(() => {
