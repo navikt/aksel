@@ -203,40 +203,42 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       const ownerDoc = ownerDocument(container);
       const previouslyFocusedElement = ownerDoc.activeElement;
 
-      const focusableElements = removeLinks(getTabbableCandidates(container));
-      const initialFocusValueOrFn = initialFocusRef.current;
-      const resolvedInitialFocus =
-        typeof initialFocusValueOrFn === "function"
-          ? initialFocusValueOrFn()
-          : initialFocusValueOrFn;
+      queueMicrotask(() => {
+        const focusableElements = removeLinks(getTabbableCandidates(container));
+        const initialFocusValueOrFn = initialFocusRef.current;
+        const resolvedInitialFocus =
+          typeof initialFocusValueOrFn === "function"
+            ? initialFocusValueOrFn()
+            : initialFocusValueOrFn;
 
-      /* `null` should fallback to default behavior in case of an empty ref. */
-      if (
-        resolvedInitialFocus === undefined ||
-        resolvedInitialFocus === false
-      ) {
-        return;
-      }
+        /* `null` should fallback to default behavior in case of an empty ref. */
+        if (
+          resolvedInitialFocus === undefined ||
+          resolvedInitialFocus === false
+        ) {
+          return;
+        }
 
-      let elToFocus: HTMLElement | null | undefined;
-      if (resolvedInitialFocus === true || resolvedInitialFocus === null) {
-        elToFocus = focusableElements[0] || container;
-      } else {
-        elToFocus = resolveRef(resolvedInitialFocus);
-      }
-      elToFocus = elToFocus || focusableElements[0] || container;
+        let elToFocus: HTMLElement | null | undefined;
+        if (resolvedInitialFocus === true || resolvedInitialFocus === null) {
+          elToFocus = focusableElements[0] || container;
+        } else {
+          elToFocus = resolveRef(resolvedInitialFocus);
+        }
+        elToFocus = elToFocus || focusableElements[0] || container;
 
-      const focusAlreadyInsideFloatingEl = container.contains(
-        previouslyFocusedElement,
-      );
+        const focusAlreadyInsideFloatingEl = container.contains(
+          previouslyFocusedElement,
+        );
 
-      if (focusAlreadyInsideFloatingEl) {
-        return;
-      }
+        if (focusAlreadyInsideFloatingEl) {
+          return;
+        }
 
-      focus(elToFocus, {
-        preventScroll: elToFocus === container,
-        sync: false,
+        focus(elToFocus, {
+          preventScroll: elToFocus === container,
+          sync: false,
+        });
       });
     }, [container, initialFocusRef]);
 
