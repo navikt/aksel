@@ -1,5 +1,7 @@
 # @navikt/aksel-stylelint
 
+## 7.33.0
+
 ## 7.32.5
 
 ### Patch Changes
