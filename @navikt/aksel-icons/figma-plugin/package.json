@@ -24,7 +24,7 @@
     "@types/postcss-url": "^10.0.4",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react": "^5.1.0",
     "postcss": "^8.4.31",
     "postcss-url": "^10.1.3",
     "typescript": "5.9.3",
