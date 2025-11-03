@@ -184,15 +184,13 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       const containsActiveElement =
         initialFocusedElement && container.contains(initialFocusedElement);
 
-      let frame = 0;
-
       /*
        * We only autofocus on mount if container does not contain active element.
        * If container has an element with `autoFocus` attribute, browser will
        * have already moved focus there before this effect runs.
        */
       if (!containsActiveElement) {
-        frame = requestAnimationFrame(() => {
+        queueMicrotask(() => {
           const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
           container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
           container.dispatchEvent(mountEvent);
@@ -221,7 +219,6 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       }
 
       return () => {
-        cancelAnimationFrame(frame);
         container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
 
         /**
