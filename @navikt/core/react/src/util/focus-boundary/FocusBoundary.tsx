@@ -190,32 +190,30 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
        * have already moved focus there before this effect runs.
        */
       if (!containsActiveElement) {
-        queueMicrotask(() => {
-          const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
-          container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
-          container.dispatchEvent(mountEvent);
+        const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
+        container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
+        container.dispatchEvent(mountEvent);
 
-          /* If consumer does not manually prevent event and handle focus themselves */
-          if (!mountEvent.defaultPrevented) {
-            /**
-             * Attempts focusing the first element in a list of candidates.
-             * Stops when focus has actually moved.
-             */
-            const candidates = removeLinks(getTabbableCandidates(container));
-            const previouslyFocusedElement = document.activeElement;
-            for (const candidate of candidates) {
-              queueFocus(candidate, { select: true });
-              if (document.activeElement !== previouslyFocusedElement) {
-                break;
-              }
-            }
-
-            /* focusFirst might not find any candidates, so we fall back to focusing container */
-            if (document.activeElement === initialFocusedElement) {
-              queueFocus(container);
+        /* If consumer does not manually prevent event and handle focus themselves */
+        if (!mountEvent.defaultPrevented) {
+          /**
+           * Attempts focusing the first element in a list of candidates.
+           * Stops when focus has actually moved.
+           */
+          const candidates = removeLinks(getTabbableCandidates(container));
+          const previouslyFocusedElement = document.activeElement;
+          for (const candidate of candidates) {
+            queueFocus(candidate, { select: true });
+            if (document.activeElement !== previouslyFocusedElement) {
+              break;
             }
           }
-        });
+
+          /* focusFirst might not find any candidates, so we fall back to focusing container */
+          if (document.activeElement === initialFocusedElement) {
+            queueFocus(container);
+          }
+        }
       }
 
       return () => {
@@ -398,13 +396,6 @@ function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
 
 let rafId = 0;
 
-/**
- * TODO: Currently if we delay setting focus, while setting hideNonTargetElements before focus moves
- * We get a warning chrome about not allowing hidden elements to be focused.
- * We need to match hiding and focusing in the same frame,
- *
- * @note This might be fixed with "new" Portal-element since it renders a delayed frame.
- */
 function queueFocus(
   element?: HTMLElement | null,
   { select = false, sync = false } = {},
@@ -480,5 +471,5 @@ function removeLinks(items: HTMLElement[]) {
   return items.filter((item) => item.tagName !== "A");
 }
 
-export { FocusBoundary, queueFocus };
+export { FocusBoundary };
 export type { FocusBoundaryProps };

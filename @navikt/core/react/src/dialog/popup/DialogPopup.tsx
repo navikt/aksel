@@ -2,14 +2,12 @@ import React, { forwardRef, useEffect, useRef } from "react";
 import { BoxNew, type BoxNewProps } from "../../layout/box";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
 import { useRenameCSS } from "../../theme/Theme";
-import {
-  FocusBoundary,
-  queueFocus,
-} from "../../util/focus-boundary/FocusBoundary";
+import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../util/focus-guards/FocusGuards";
 import { hideNonTargetElements } from "../../util/hideNonTargetElements";
 import { useMergeRefs } from "../../util/hooks";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
+import { useLatestRef } from "../../util/hooks/useLatestRef";
 import { useScrollLock } from "../../util/hooks/useScrollLock";
 import { useDialogContext } from "../root/DialogRoot.context";
 
@@ -78,7 +76,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       className,
       modal = true,
       closeOnOutsideClick = true,
-      onOpenAutoFocus,
+      onOpenAutoFocus: onOpenAutoFocusProp,
       onCloseAutoFocus,
       position = "center",
       width = "medium",
@@ -112,6 +110,8 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
     const hasPointerDownOutsideRef = useRef(false);
     const localPopupRef = useRef<HTMLDivElement | null>(null);
 
+    const onOpenAutoFocus = useLatestRef(onOpenAutoFocusProp).current;
+
     const mergedRefs = useMergeRefs(
       forwardedRef,
       popupRef,
@@ -119,31 +119,35 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       localPopupRef,
     );
 
-    /**
-     * TODO:
-     * - validate that nested dialogs/nodes are not hidden, especially with Portal nested
-     * - Ignore focus-guards?
-     */
     useEffect(() => {
-      if (!open || !popupRef.current) {
+      if (!open || !popupElement) {
         return;
       }
 
-      return hideNonTargetElements([popupRef.current]);
-    }, [open, popupRef]);
+      let cleanupFn: () => void = () => {};
 
-    useScrollLock({
-      enabled: open && modal === true,
-      mounted,
-      open,
-      referenceElement: popupElement,
-    });
+      let frame2: number;
 
-    const transitionAttrb = transitionStatus
-      ? { [`data-${transitionStatus}-style`]: true }
-      : {};
+      const avoidElement = popupElement;
 
-    const handleInitialFocus = useEventCallback((event: Event) => {
+      const frame1 = requestAnimationFrame(() => {
+        frame2 = requestAnimationFrame(() => {
+          cleanupFn = hideNonTargetElements([avoidElement]);
+        });
+      });
+
+      return () => {
+        cleanupFn?.();
+        cancelAnimationFrame(frame1);
+        cancelAnimationFrame(frame2);
+      };
+    }, [open, popupElement]);
+
+    useEffect(() => {
+      if (!open || !popupElement) {
+        return;
+      }
+
       const resolvedInitialFocus =
         typeof onOpenAutoFocus === "function"
           ? onOpenAutoFocus()
@@ -158,20 +162,40 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       }
 
       if (elToFocus) {
-        event.preventDefault();
         elToFocus?.focus();
         return;
       }
 
-      /* Prevents `onMountAutoFocus` from controlling initial focus */
-      event.preventDefault();
-
+      let frame2: number;
       /**
        * After a11y testing, focusing container element seems to give best experience
        * for screen reader and keyboard users. User will still have the option to override this anyways.
+       *
+       * Using requestAnimationFrame solves bug in safari + voiceover
+       * where focus-change to dialog did not get announced correctly.
        */
-      queueFocus(popupRef.current);
+      const frame1 = requestAnimationFrame(() => {
+        frame2 = requestAnimationFrame(() =>
+          popupElement?.focus({ preventScroll: true }),
+        );
+      });
+
+      return () => {
+        cancelAnimationFrame(frame1);
+        cancelAnimationFrame(frame2);
+      };
+    }, [onOpenAutoFocus, open, popupElement]);
+
+    useScrollLock({
+      enabled: open && modal === true,
+      mounted,
+      open,
+      referenceElement: popupElement,
     });
+
+    const transitionAttrb = transitionStatus
+      ? { [`data-${transitionStatus}-style`]: true }
+      : {};
 
     const handleUnmountFocus = useEventCallback((event: Event) => {
       const resolvedUnmountFocus =
@@ -227,7 +251,10 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
         <FocusBoundary
           loop
           trapped={open}
-          onMountAutoFocus={handleInitialFocus}
+          onMountAutoFocus={(event) => {
+            /* We manually control initial focus for Dialog */
+            event.preventDefault();
+          }}
           onUnmountAutoFocus={handleUnmountFocus}
         >
           <DismissableLayer

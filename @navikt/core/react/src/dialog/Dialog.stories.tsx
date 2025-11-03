@@ -111,7 +111,7 @@ export const AllSubComponents: Story = {
   render: () => (
     <div>
       <button onClick={() => alert("after")}>Before dialog</button>
-      <Dialog defaultOpen>
+      <Dialog>
         <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogPortal>
           <DialogBackdrop className="backdropCSS" />
