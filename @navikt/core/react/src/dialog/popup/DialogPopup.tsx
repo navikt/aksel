@@ -83,6 +83,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       position = "center",
       width = "medium",
       height,
+      id,
       ...restProps
     },
     forwardedRef,
@@ -104,6 +105,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
       size,
       titleId,
       descriptionId,
+      popupId,
     } = useDialogContext();
 
     const hasInteractedOutsideRef = useRef(false);
@@ -314,6 +316,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
             <BoxNew
               aria-labelledby={titleId}
               aria-describedby={descriptionId}
+              id={id ?? popupId}
               {...restProps}
               ref={mergedRefs}
               className={cn(

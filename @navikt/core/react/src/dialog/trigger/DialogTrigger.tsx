@@ -18,7 +18,7 @@ const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
   ({ children, className, asChild = false, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
 
-    const { open, setOpen, setTriggerElement } = useDialogContext();
+    const { open, setOpen, setTriggerElement, popupId } = useDialogContext();
 
     const mergedRefs = useMergeRefs(forwardedRef, setTriggerElement);
 
@@ -33,6 +33,8 @@ const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
         data-popup-open={open}
         onClick={(event) => setOpen(!open, event.nativeEvent)}
         aria-haspopup="dialog"
+        aria-expanded={open}
+        aria-controls={open ? popupId : undefined}
       >
         {children}
       </Component>

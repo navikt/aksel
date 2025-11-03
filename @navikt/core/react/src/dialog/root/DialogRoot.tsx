@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useId } from "../../util";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
@@ -69,6 +70,12 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     null,
   );
 
+  const defaultId = useId();
+
+  const floatingId = useMemo(() => {
+    return popupElement?.id ?? defaultId;
+  }, [defaultId, popupElement?.id]);
+
   const [titleId, setTitleId] = useState<string>();
   const [descriptionId, setDescriptionId] = useState<string>();
 
@@ -135,6 +142,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       backdropRef={backdropRef}
       setPopupElement={setPopupElement}
       popupElement={popupElement}
+      popupId={floatingId}
       setBackdropElement={setBackdropElement}
       backdropElement={backdropElement}
       setTriggerElement={setTriggerElement}

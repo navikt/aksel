@@ -35,6 +35,10 @@ interface DialogContextProps {
    */
   popupElement: HTMLElement | null;
   /**
+   * ID of the popup element
+   */
+  popupId: string;
+  /**
    * Callback to register the Backdrop element DOM node.
    */
   setBackdropElement: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
