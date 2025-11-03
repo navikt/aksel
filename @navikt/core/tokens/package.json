@@ -37,7 +37,7 @@
   "bugs": {
     "url": "https://github.com/navikt/aksel/issues"
   },
-  "homepage": "https://aksel.nav.no/",
+  "homepage": "https://aksel.nav.no/grunnleggende/styling/design-tokens/",
   "devDependencies": {
     "@figma/plugin-typings": "^1.100.2",
     "colorjs.io": "^0.5.2",

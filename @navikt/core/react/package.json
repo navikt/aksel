@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/navikt/aksel/issues"
   },
-  "homepage": "https://aksel.nav.no/",
+  "homepage": "https://aksel.nav.no/designsystemet/",
   "sideEffects": false,
   "typings": "./esm/index.d.ts",
   "publishConfig": {

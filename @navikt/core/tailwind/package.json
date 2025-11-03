@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/navikt/aksel/issues"
   },
-  "homepage": "https://aksel.nav.no/",
+  "homepage": "https://aksel.nav.no/grunnleggende/kode/tailwind/",
   "devDependencies": {
     "@navikt/ds-tokens": "^7.32.4",
     "color": "5.0.0",
