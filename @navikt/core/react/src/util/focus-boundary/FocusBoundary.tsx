@@ -236,6 +236,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
 
       focus(elToFocus, {
         preventScroll: elToFocus === container,
+        sync: false,
       });
     }, [container, initialFocusRef]);
 
@@ -248,8 +249,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       const previouslyFocusedElement = ownerDoc.activeElement;
 
       function getReturnElement() {
-        const returnFocusValueOrFn = returnFocusRef.current;
-        let resolvedReturnFocusValue = returnFocusValueOrFn;
+        let resolvedReturnFocusValue = returnFocusRef.current;
 
         // `null` should fallback to default behavior in case of an empty ref.
         if (
@@ -428,17 +428,25 @@ function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
   return false;
 }
 
+let rafId = 0;
 function focus(
   element?: HTMLElement | null,
-  { select = false, preventScroll = true } = {},
+  { select = false, preventScroll = true, sync = true } = {},
 ) {
   if (!element?.focus) {
     return;
   }
 
   const previouslyFocusedElement = document.activeElement;
-  /* Prevent scrolling on focus, to minimize jarring transitions */
-  element.focus({ preventScroll });
+
+  cancelAnimationFrame(rafId);
+  const exec = () => element.focus({ preventScroll });
+
+  if (sync) {
+    exec();
+  } else {
+    rafId = requestAnimationFrame(exec);
+  }
 
   if (!select) {
     return;
