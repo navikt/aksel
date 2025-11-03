@@ -6,18 +6,9 @@ import React, {
   useState,
 } from "react";
 import { Slot } from "../../slot/Slot";
-import { useMergeRefs } from "../../util/hooks";
-import { useEventCallback } from "../hooks/useEventCallback";
-
-const AUTOFOCUS_ON_MOUNT = "focusBoundary.autoFocusOnMount";
-const AUTOFOCUS_ON_UNMOUNT = "focusBoundary.autoFocusOnUnmount";
-const EVENT_OPTIONS = { bubbles: false, cancelable: true };
-
-/* TODO: Regular story */
-/**
- * TODO:
- * - owner(container) for corrent document
- */
+import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
+import { useLatestRef } from "../hooks/useLatestRef";
+import { ownerDocument } from "../owner";
 
 /* -------------------------------------------------------------------------- */
 /*                                 FocusBoundary                                 */
@@ -48,15 +39,22 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   trapped?: boolean;
   /**
-   * Event handler called when auto-focusing on mount.
-   * Can be prevented.
+   * Will try to focus the given element on mount.
+   *
+   * If not provided, FocusBoundary will try to focus the first
+   * tabbable element inside the boundary.
    */
-  onMountAutoFocus?: (event: Event) => void;
+  initialFocus?:
+    | boolean
+    | React.MutableRefObject<HTMLElement | null>
+    | (() => boolean | HTMLElement | null | undefined);
   /**
-   * Event handler called when auto-focusing on unmount.
-   * Can be prevented.
+   * Tries to focus the previously focused element when unmounting.
+   *
+   * If not provided, FocusBoundary will try to focus the element
+   * that was focused before the FocusBoundary mounted.
    */
-  onUnmountAutoFocus?: (event: Event) => void;
+  returnFocus?: boolean | React.MutableRefObject<HTMLElement | null>;
 }
 
 const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
@@ -64,14 +62,14 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
     {
       loop = false,
       trapped = false,
-      onMountAutoFocus: onMountAutoFocusProp,
-      onUnmountAutoFocus: onUnmountAutoFocusProp,
+      initialFocus,
+      returnFocus,
       ...restProps
     }: FocusBoundaryProps,
     forwardedRef,
   ) => {
-    const onMountAutoFocus = useEventCallback(onMountAutoFocusProp);
-    const onUnmountAutoFocus = useEventCallback(onUnmountAutoFocusProp);
+    const initialFocusRef = useLatestRef(initialFocus);
+    const returnFocusRef = useLatestRef(returnFocus);
 
     const lastFocusedElementRef = useRef<HTMLElement | null>(null);
     const [container, setContainer] = useState<HTMLElement | null>(null);
@@ -166,88 +164,116 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       };
     }, [trapped, container, focusBoundary.paused]);
 
-    /* Handles autofocus on mount and unmount */
+    /* Adds element to focus-stack */
     useEffect(() => {
       if (!container) {
         return;
       }
 
       focusBoundarysStack.add(focusBoundary);
-      const initialFocusedElement =
-        document.activeElement as HTMLElement | null;
-      const containsActiveElement =
-        initialFocusedElement && container.contains(initialFocusedElement);
-
-      /*
-       * We only autofocus on mount if container does not contain active element.
-       * If container has an element with `autoFocus` attribute, browser will
-       * have already moved focus there before this effect runs.
-       */
-      if (!containsActiveElement) {
-        const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
-        container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
-        container.dispatchEvent(mountEvent);
-
-        /* If consumer does not manually prevent event and handle focus themselves */
-        if (!mountEvent.defaultPrevented) {
-          /**
-           * Attempts focusing the first element in a list of candidates.
-           * Stops when focus has actually moved.
-           */
-          const candidates = removeLinks(getTabbableCandidates(container));
-          const previouslyFocusedElement = document.activeElement;
-          for (const candidate of candidates) {
-            focus(candidate, { select: true });
-            if (document.activeElement !== previouslyFocusedElement) {
-              break;
-            }
-          }
-
-          /* focusFirst might not find any candidates, so we fall back to focusing container */
-          if (document.activeElement === initialFocusedElement) {
-            focus(container);
-          }
-        }
-      }
 
       return () => {
-        container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
-
-        /**
-         * https://github.com/facebook/react/issues/17894
-         * We delay to next tick to avoid issues with React's event system
-         * where calling `focus` inside a effect cleanup causes React to not call onFocus handlers.
-         */
         setTimeout(() => {
-          const unmountEvent = new CustomEvent(
-            AUTOFOCUS_ON_UNMOUNT,
-            EVENT_OPTIONS,
-          );
-          container.addEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
-          container.dispatchEvent(unmountEvent);
-
-          /* If consumer does not manually prevent event and handle focus themselves */
-          if (!unmountEvent.defaultPrevented) {
-            /* To avoid CPU-spikes on Chrome, we make sure element is still connected to the DOM. */
-            focus(
-              initialFocusedElement?.isConnected
-                ? initialFocusedElement
-                : document.body,
-              {
-                select: true,
-              },
-            );
-          }
-          /* Since this is inside a cleanup, we need to instantly remove the listener ourselves */
-          container.removeEventListener(
-            AUTOFOCUS_ON_UNMOUNT,
-            onUnmountAutoFocus,
-          );
-
           focusBoundarysStack.remove(focusBoundary);
         }, 0);
       };
-    }, [container, onMountAutoFocus, onUnmountAutoFocus, focusBoundary]);
+    }, [container, focusBoundary]);
+
+    /* Handles mount focus */
+    useClientLayoutEffect(() => {
+      if (!container || initialFocusRef.current === false) {
+        return;
+      }
+
+      const ownerDoc = ownerDocument(container);
+      const previouslyFocusedElement = ownerDoc.activeElement;
+
+      const focusableElements = removeLinks(getTabbableCandidates(container));
+      const initialFocusValueOrFn = initialFocusRef.current;
+      const resolvedInitialFocus =
+        typeof initialFocusValueOrFn === "function"
+          ? initialFocusValueOrFn()
+          : initialFocusValueOrFn;
+
+      /* `null` should fallback to default behavior in case of an empty ref. */
+      if (
+        resolvedInitialFocus === undefined ||
+        resolvedInitialFocus === false
+      ) {
+        return;
+      }
+
+      let elToFocus: HTMLElement | null | undefined;
+      if (resolvedInitialFocus === true || resolvedInitialFocus === null) {
+        elToFocus = focusableElements[0] || container;
+      } else {
+        elToFocus = resolveRef(resolvedInitialFocus);
+      }
+      elToFocus = elToFocus || focusableElements[0] || container;
+
+      const focusAlreadyInsideFloatingEl = container.contains(
+        previouslyFocusedElement,
+      );
+
+      if (focusAlreadyInsideFloatingEl) {
+        return;
+      }
+
+      focus(elToFocus, {
+        preventScroll: elToFocus === container,
+      });
+    }, [container, initialFocusRef]);
+
+    /* Handles unmount focus */
+    useClientLayoutEffect(() => {
+      if (!container) {
+        return;
+      }
+      const ownerDoc = ownerDocument(container);
+      const previouslyFocusedElement = ownerDoc.activeElement;
+
+      function getReturnElement() {
+        const returnFocusValueOrFn = returnFocusRef.current;
+        let resolvedReturnFocusValue = returnFocusValueOrFn;
+
+        // `null` should fallback to default behavior in case of an empty ref.
+        if (
+          resolvedReturnFocusValue === undefined ||
+          resolvedReturnFocusValue === false
+        ) {
+          return null;
+        }
+
+        if (resolvedReturnFocusValue === null) {
+          resolvedReturnFocusValue = true;
+        }
+
+        if (typeof resolvedReturnFocusValue === "boolean") {
+          const el = previouslyFocusedElement;
+          return el?.isConnected ? el : ownerDoc.body;
+        }
+
+        const fallback = previouslyFocusedElement || ownerDoc.body;
+
+        return resolveRef(resolvedReturnFocusValue) || fallback;
+      }
+
+      return () => {
+        const returnElement = getReturnElement() as HTMLElement | null;
+        const activeEl = ownerDoc.activeElement;
+
+        queueMicrotask(() => {
+          if (
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            returnFocusRef.current &&
+            returnElement &&
+            returnElement !== activeEl
+          ) {
+            returnElement.focus({ preventScroll: true });
+          }
+        });
+      };
+    }, [container, returnFocusRef]);
 
     /* Takes care of looping focus */
     const handleKeyDown = useCallback(
@@ -387,14 +413,17 @@ function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
   return false;
 }
 
-function focus(element?: HTMLElement | null, { select = false } = {}) {
+function focus(
+  element?: HTMLElement | null,
+  { select = false, preventScroll = true } = {},
+) {
   if (!element?.focus) {
     return;
   }
 
   const previouslyFocusedElement = document.activeElement;
   /* Prevent scrolling on focus, to minimize jarring transitions */
-  element.focus({ preventScroll: true });
+  element.focus({ preventScroll });
 
   if (!select) {
     return;
@@ -447,6 +476,26 @@ function arrayRemove<T>(array: T[], item: T) {
 
 function removeLinks(items: HTMLElement[]) {
   return items.filter((item) => item.tagName !== "A");
+}
+
+/**
+ * If the provided argument is a ref object, returns its `current` value.
+ * Otherwise, returns the argument itself.
+ *
+ * Non-generic to safely handle refs whose `.current` may be `null`.
+ */
+function resolveRef(
+  maybeRef:
+    | HTMLElement
+    | null
+    | undefined
+    | React.RefObject<HTMLElement | null | undefined>,
+): HTMLElement | null | undefined {
+  if (maybeRef == null) {
+    return maybeRef;
+  }
+
+  return "current" in maybeRef ? maybeRef.current : maybeRef;
 }
 
 export { FocusBoundary };

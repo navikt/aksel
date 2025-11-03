@@ -363,9 +363,7 @@ export const ActionMenuContent = forwardRef<
           align={align}
           sideOffset={4}
           collisionPadding={10}
-          onCloseAutoFocus={() => {
-            context.triggerRef.current?.focus();
-          }}
+          returnFocus={context.triggerRef}
           safeZone={{ anchor: context.triggerRef.current }}
           style={{
             ...style,
