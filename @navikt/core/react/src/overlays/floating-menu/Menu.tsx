@@ -912,7 +912,7 @@ const MenuSubContent = forwardRef<
           if (rootContext.isUsingKeyboardRef.current) {
             return ref.current;
           }
-          return undefined;
+          return false;
         }}
         /* Since we manually focus Subtrigger, we prevent use of auto-focus */
         returnFocus={false}
