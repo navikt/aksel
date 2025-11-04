@@ -366,7 +366,6 @@ export const NestedEscapeKeydown: StoryObj<{
   },
 };
 
-/* TODO: This currently fails since layer does not handle this case */
 export const MultipleEscapeKeydown: StoryObj<{
   first: Omit<DismissableLayerProps, "children" | "asChild">;
   last: Omit<DismissableLayerProps, "children" | "asChild">;
