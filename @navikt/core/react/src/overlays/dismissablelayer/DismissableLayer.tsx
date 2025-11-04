@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useContext, useEffect, useState } from "react";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -142,9 +136,6 @@ const DismissableLayerInternal = forwardRef<
     const mergedRefs = useMergeRefs(forwardedRef, setNode);
     const ownerDoc = ownerDocument(node);
 
-    const hasInteractedOutsideRef = useRef(false);
-    const hasPointerDownOutsideRef = useRef(false);
-
     /* Layer handling */
     const layers = getSortedLayers(context.layers, context.branchedLayers);
     const highestLayerWithOutsidePointerEventsDisabledIndex =
@@ -155,7 +146,7 @@ const DismissableLayerInternal = forwardRef<
     const index = node ? layers.indexOf(node) : -1;
     const isBodyPointerEventsDisabled =
       context.layersWithOutsidePointerEventsDisabled.size > 0;
-    const isPointerEventsEnabled =
+    const shouldEnablePointerEvents =
       highestLayerWithOutsidePointerEventsDisabledIndex === -1 ||
       index >= highestLayerWithOutsidePointerEventsDisabledIndex;
 
@@ -170,10 +161,11 @@ const DismissableLayerInternal = forwardRef<
         return;
       }
 
+      let hasPointerDownOutside = false;
+
       if (!event.defaultPrevented) {
-        hasInteractedOutsideRef.current = true;
         if (event.detail.originalEvent.type === "pointerdown") {
-          hasPointerDownOutsideRef.current = true;
+          hasPointerDownOutside = true;
         }
       }
 
@@ -196,16 +188,14 @@ const DismissableLayerInternal = forwardRef<
        */
       if (
         event.detail.originalEvent.type === "focusin" &&
-        hasPointerDownOutsideRef.current
+        hasPointerDownOutside
       ) {
         event.preventDefault();
       }
-      hasPointerDownOutsideRef.current = false;
-      hasInteractedOutsideRef.current = false;
     }
 
     const pointerDownOutside = usePointerDownOutside((event) => {
-      if (!isPointerEventsEnabled) {
+      if (!shouldEnablePointerEvents) {
         return;
       }
       onPointerDownOutside?.(event);
@@ -358,7 +348,7 @@ const DismissableLayerInternal = forwardRef<
           ref={mergedRefs}
           style={{
             pointerEvents: isBodyPointerEventsDisabled
-              ? isPointerEventsEnabled
+              ? shouldEnablePointerEvents
                 ? "auto"
                 : "none"
               : undefined,
