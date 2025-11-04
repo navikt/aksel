@@ -305,7 +305,7 @@ const DismissableLayerInternal = forwardRef<
     const parentBranchedLayer = useContext(BranchedLayerContext);
 
     /**
-     * Handles registering and unregistering branched layers.
+     * Handles registering and unregistering branched (nested) layers.
      * When this layer has a parent, we register it as a child of the parent.
      */
     useEffect(() => {
