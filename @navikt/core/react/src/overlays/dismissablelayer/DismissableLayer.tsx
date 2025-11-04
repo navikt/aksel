@@ -339,7 +339,7 @@ const DismissableLayerInternal = forwardRef<
     }, [node, parentBranchedLayer, context]);
 
     /**
-     * Force update when context changes to update index and pointer-events state.
+     * Force rerender when context changes to update index and pointer-events state.
      * We use a custom event to avoid unnecessary renders from other state changes in the context.
      */
     useEffect(() => {
