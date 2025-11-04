@@ -216,6 +216,9 @@ const DismissableLayerInternal = forwardRef<
     }, ownerDoc);
 
     const focusOutside = useFocusOutside((event) => {
+      /**
+       * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
+       */
       onFocusOutside?.(event);
       onInteractOutside?.(event);
 
