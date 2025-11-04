@@ -151,8 +151,8 @@ const DismissableLayerInternal = forwardRef<
       index >= highestLayerWithOutsidePointerEventsDisabledIndex;
 
     /**
-     * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
-     * To achieve this, we check if the event target is the trigger, anchor or a child. If it is, we prevent default event behavior.
+     * We want to prevent the Layer from closing when the trigger/anchor element or its child elements are interacted with.
+     * To achieve this, we check if the event target is the trigger/anchor or a child. If it is, we prevent default event behavior.
      */
     function handleOutsideEvent(
       event: CustomFocusEvent | CustomPointerDownEvent,
