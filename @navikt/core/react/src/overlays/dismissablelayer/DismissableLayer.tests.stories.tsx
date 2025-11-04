@@ -425,7 +425,6 @@ export const MultipleEscapeKeydown: StoryObj<{
   },
 };
 
-/* TODO: This currently fails since layer does not handle this case */
 export const MultipleOutsideClick: StoryObj<{
   first: Omit<DismissableLayerProps, "children" | "asChild">;
   last: Omit<DismissableLayerProps, "children" | "asChild">;
