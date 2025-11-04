@@ -72,7 +72,7 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
           className={cn(className, "navds-base-alert")}
           data-size={size}
           data-color={alertColor}
-          data-type={type}
+          data-variant={type}
           data-global={global}
         >
           {children}

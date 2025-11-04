@@ -130,12 +130,12 @@
     --__ac-base-alert-title-pb: var(--a-spacing-1);
   }
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     outline: 1px solid;
     outline-offset: -1px;
   }
 
-  &[data-type="strong"] {
+  &[data-variant="strong"] {
     outline: 4px solid;
     outline-offset: -4px;
   }
@@ -148,7 +148,7 @@
 .navds-base-alert[data-color="accent"] {
   outline-color: var(--a-border-action);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-action-subtle);
       color: var(--a-blue-800);
@@ -160,7 +160,7 @@
 .navds-base-alert[data-color="neutral"] {
   outline-color: var(--a-gray-700);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-neutral-subtle);
       color: var(--a-gray-800);
@@ -168,7 +168,7 @@
     }
   }
 
-  &[data-type="strong"] {
+  &[data-variant="strong"] {
     .navds-base-alert__header {
       background: var(--a-surface-neutral);
       color: var(--a-text-on-neutral);
@@ -179,7 +179,7 @@
 .navds-base-alert[data-color="info"] {
   outline-color: var(--a-border-info);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-info-subtle);
       color: var(--a-lightblue-900);
@@ -191,7 +191,7 @@
 .navds-base-alert[data-color="success"] {
   outline-color: var(--a-border-success);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-success-subtle);
       color: var(--a-green-800);
@@ -199,7 +199,7 @@
     }
   }
 
-  &[data-type="strong"] {
+  &[data-variant="strong"] {
     .navds-base-alert__header {
       background: var(--a-surface-success);
       color: var(--a-text-on-success);
@@ -210,7 +210,7 @@
 .navds-base-alert[data-color="warning"] {
   outline-color: var(--a-surface-warning);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-warning-subtle);
       color: var(--a-orange-900);
@@ -218,7 +218,7 @@
     }
   }
 
-  &[data-type="strong"] {
+  &[data-variant="strong"] {
     .navds-base-alert__header {
       background: var(--a-surface-warning);
       color: var(--a-text-on-warning);
@@ -229,7 +229,7 @@
 .navds-base-alert[data-color="danger"] {
   outline-color: var(--a-border-danger);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-danger-subtle);
       color: var(--a-red-800);
@@ -237,7 +237,7 @@
     }
   }
 
-  &[data-type="strong"] {
+  &[data-variant="strong"] {
     .navds-base-alert__header {
       background: var(--a-surface-danger);
       color: var(--a-text-on-danger);
@@ -248,7 +248,7 @@
 .navds-base-alert[data-color="brand-magenta"] {
   outline-color: var(--a-border-alt-1);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-alt-1-subtle);
       color: var(--a-purple-800);
@@ -260,7 +260,7 @@
 .navds-base-alert[data-color="brand-beige"] {
   outline-color: var(--a-border-warning);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-warning-subtle);
       color: var(--a-orange-900);
@@ -272,7 +272,7 @@
 .navds-base-alert[data-color="brand-blue"] {
   outline-color: var(--a-border-alt-3);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-alt-3-subtle);
       color: var(--a-deepblue-800);
@@ -284,7 +284,7 @@
 .navds-base-alert[data-color="meta-lime"] {
   outline-color: var(--a-border-alt-2);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-alt-2-subtle);
       color: var(--a-limegreen-900);
@@ -296,7 +296,7 @@
 .navds-base-alert[data-color="meta-purple"] {
   outline-color: var(--a-border-alt-1);
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     .navds-base-alert__header {
       background: var(--a-surface-alt-1-subtle);
       color: var(--a-purple-800);
@@ -316,7 +316,7 @@
     padding-inline: max(var(--__ac-base-alert-pi), calc((100% - var(--__ac-base-alert-header-max-width)) / 2));
   }
 
-  .navds-base-alert[data-type="strong"] & {
+  .navds-base-alert[data-variant="strong"] & {
     border-bottom: none;
     z-index: 1;
   }

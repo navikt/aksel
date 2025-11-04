@@ -101,12 +101,12 @@
     --__axc-base-alert-title-pb: var(--ax-space-4);
   }
 
-  &[data-type="moderate"] {
+  &[data-variant="moderate"] {
     outline: 1px solid var(--ax-border-default);
     outline-offset: -1px;
   }
 
-  &[data-type="strong"] {
+  &[data-variant="strong"] {
     outline: 4px solid var(--ax-border-default);
     outline-offset: -4px;
 
@@ -131,13 +131,13 @@
     padding-inline: max(var(--__axc-base-alert-pi), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
   }
 
-  .aksel-base-alert[data-type="moderate"] & {
+  .aksel-base-alert[data-variant="moderate"] & {
     background: var(--ax-bg-moderate);
     color: var(--ax-text-default);
     border-color: var(--ax-border-subtleA);
   }
 
-  .aksel-base-alert[data-type="strong"] & {
+  .aksel-base-alert[data-variant="strong"] & {
     background: var(--ax-bg-strong);
     color: var(--ax-text-contrast);
     border-bottom: none;
