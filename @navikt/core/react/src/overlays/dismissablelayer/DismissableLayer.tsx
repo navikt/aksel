@@ -171,10 +171,10 @@ const DismissableLayerInternal = forwardRef<
 
       const target = event.target as HTMLElement;
 
-      const targetIsTrigger =
+      const targetIsAnchor =
         safeZone.anchor.contains(target) || target === safeZone.anchor;
 
-      if (targetIsTrigger) {
+      if (targetIsAnchor) {
         event.preventDefault();
       }
 
