@@ -313,7 +313,6 @@ const DismissableLayerInternal = forwardRef<
         return;
       }
 
-      // Get or create the Set of children for this parent
       if (!context.branchedLayers.has(parentBranchedLayer)) {
         context.branchedLayers.set(parentBranchedLayer, new Set());
       }
@@ -336,8 +335,8 @@ const DismissableLayerInternal = forwardRef<
     }, [node, parentBranchedLayer, context]);
 
     /**
-     * Force update when context changes to update index and pointer-events state.
-     * We use a custom event to avoid unnecessary renders from other state changes in the context.
+     * Synchronizes layer state across all mounted `DismissableLayer` instances.
+     * All layers re-render on every context change to recalculate their position and pointer-events.
      */
     useEffect(() => {
       const handleUpdate = () => forceRerender({});
