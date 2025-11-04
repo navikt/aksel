@@ -68,8 +68,8 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
     {
       loop = false,
       trapped = false,
-      initialFocus,
-      returnFocus,
+      initialFocus = true,
+      returnFocus = true,
       modal = false,
       ...restProps
     }: FocusBoundaryProps,
@@ -211,7 +211,6 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
             ? initialFocusValueOrFn()
             : initialFocusValueOrFn;
 
-        /* `null` should fallback to default behavior in case of an empty ref. */
         if (
           resolvedInitialFocus === undefined ||
           resolvedInitialFocus === false
@@ -220,6 +219,8 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         let elToFocus: HTMLElement | null | undefined;
+
+        /* `null` should fallback to default behavior in case of an empty ref. */
         if (resolvedInitialFocus === true || resolvedInitialFocus === null) {
           elToFocus = focusableElements[0] || container;
         } else {
@@ -253,7 +254,6 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       function getReturnElement() {
         let resolvedReturnFocusValue = returnFocusRef.current;
 
-        // `null` should fallback to default behavior in case of an empty ref.
         if (
           resolvedReturnFocusValue === undefined ||
           resolvedReturnFocusValue === false
@@ -261,6 +261,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
           return null;
         }
 
+        /* `null` should fallback to default behavior in case of an empty ref. */
         if (resolvedReturnFocusValue === null) {
           resolvedReturnFocusValue = true;
         }
