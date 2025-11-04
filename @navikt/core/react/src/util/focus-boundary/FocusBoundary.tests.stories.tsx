@@ -222,7 +222,7 @@ export const MountAutofocusPrevented: Story = {
     expect(showButton).toHaveFocus();
   },
   args: {
-    onMountAutoFocus: (event) => event.preventDefault(),
+    initialFocus: false,
   },
 };
 
@@ -280,7 +280,7 @@ export const UnmountAutofocusPrevented: Story = {
     expect(document.body).toHaveFocus();
   },
   args: {
-    onUnmountAutoFocus: (event) => event.preventDefault(),
+    returnFocus: false,
     showByDefault: false,
   },
 };
