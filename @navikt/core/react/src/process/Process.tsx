@@ -22,6 +22,11 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * @default false
    */
   hideStatusText?: boolean;
+  /**
+   * Indicates that the process is truncated and that there are more Events
+   * not shown either before, after or on both sides of the current list.
+   */
+  isTruncated?: "start" | "end" | "both";
 }
 
 type ProcessContextProps = Pick<ProcessProps, "hideStatusText"> & {
@@ -100,6 +105,7 @@ export const Process: ProcessComponent = forwardRef<
       className,
       hideStatusText = false,
       id,
+      isTruncated,
       ...restProps
     }: ProcessProps,
     forwardedRef,
@@ -157,6 +163,7 @@ export const Process: ProcessComponent = forwardRef<
         className={cn("navds-process", className)}
         id={rootId}
         aria-controls={activeChildId}
+        data-truncated={isTruncated}
       >
         <ProcessContextProvider
           hideStatusText={hideStatusText}
@@ -237,6 +244,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
         data-process-event=""
         data-status={status}
       >
+        <ProcessLine position="start" />
         <div className={cn("navds-process__item")}>
           <ProcessBullet>{bullet}</ProcessBullet>
 
@@ -256,7 +264,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
             )}
           </div>
         </div>
-        <ProcessLine />
+        <ProcessLine position="end" />
       </li>
     );
   },
@@ -346,10 +354,16 @@ const ProcessBullet = ({ children }: ProcessBulletProps) => {
 };
 
 /* ------------------------------ Process Line ------------------------------ */
-const ProcessLine = () => {
+
+type ProcessLineProps = {
+  position?: "start" | "end";
+};
+const ProcessLine = ({ position }: ProcessLineProps) => {
   const { cn } = useRenameCSS();
 
-  return <span className={cn("navds-process__line")} />;
+  return (
+    <span className={cn("navds-process__line")} data-position={position} />
+  );
 };
 
 /* -------------------------- Process exports ------------------------- */

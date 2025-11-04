@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { RootDirectoriesT } from "../types";
 
 export function getFiles(dirName: string, rootDir: RootDirectoriesT) {

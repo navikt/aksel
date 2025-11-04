@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import chalk from "chalk";
-import fs from "fs";
+import fs from "node:fs";
 import { codemodCommand } from "./codemod/index";
 import { cssImportsCommand } from "./css-imports/index";
 import { darksideCommand } from "./darkside";

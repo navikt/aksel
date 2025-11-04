@@ -1,5 +1,43 @@
 # @navikt/ds-react
 
+## 7.33.0
+
+### Minor Changes
+
+- Process: Added new prop `isTruncated` to `<Process />`. This allows you to add a connector to the start of first event and end of last event to visualize a "truncated" process. ([#4196](https://github.com/navikt/aksel/pull/4196))
+
+- Dependencies: Added `react-dom` to `peerDependencies`. ([#4237](https://github.com/navikt/aksel/pull/4237))
+
+### Patch Changes
+
+- Timeline: Popups now have an accessible name. ([#4242](https://github.com/navikt/aksel/pull/4242))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.0
+  - @navikt/aksel-icons@7.33.0
+
+## 7.32.5
+
+### Patch Changes
+
+- Modal: Improved scroll locking. ([#4234](https://github.com/navikt/aksel/pull/4234))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.32.5
+  - @navikt/aksel-icons@7.32.5
+
+## 7.32.4
+
+### Patch Changes
+
+- Combobox: Fix issue with toggle list button ([#4228](https://github.com/navikt/aksel/pull/4228))
+
+- Accordion: Heading size with `size="medium"` changed from 20px to 18px. This change is for Darkside only. ([#4209](https://github.com/navikt/aksel/pull/4209))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.32.4
+  - @navikt/aksel-icons@7.32.4
+
 ## 7.32.3
 
 ### Patch Changes

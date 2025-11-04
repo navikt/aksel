@@ -1,5 +1,5 @@
 import fg from "fast-glob";
-import path from "path";
+import path from "node:path";
 
 export async function getDirectories() {
   const baseDir = process.cwd();

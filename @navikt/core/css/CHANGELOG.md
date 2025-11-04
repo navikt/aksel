@@ -1,5 +1,19 @@
 # @navikt/ds-css
 
+## 7.33.0
+
+### Minor Changes
+
+- Process: Added new prop `isTruncated` to `<Process />`. This allows you to add a connector to the start of first event and end of last event to visualize a "truncated" process. ([#4196](https://github.com/navikt/aksel/pull/4196))
+
+## 7.32.5
+
+## 7.32.4
+
+### Patch Changes
+
+- BodyShort: Line-height for `size="large"` is now 28px, adjusted from 24px. ([#4213](https://github.com/navikt/aksel/pull/4213))
+
 ## 7.32.3
 
 ## 7.32.2

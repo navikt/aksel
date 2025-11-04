@@ -1,7 +1,7 @@
 import type { StorybookConfig } from "@storybook/nextjs";
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { dirname, join, resolve } from "path";
+import { dirname, join, resolve } from "node:path";
 import { loadCsf } from "storybook/internal/csf-tools";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 
@@ -67,6 +67,10 @@ const sbConfig: StorybookConfig = {
     getAbsolutePath("@storybook/addon-docs"),
   ],
   framework: getAbsolutePath("@storybook/nextjs"),
+
+  features: {
+    actions: false,
+  },
 
   webpackFinal: (async (config) => {
     if (!config?.resolve) {

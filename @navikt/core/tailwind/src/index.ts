@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+import { writeFileSync } from "node:fs";
 import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import { getColors } from "./colors";
 import { getBreakpoints } from "./getBreakpoints";

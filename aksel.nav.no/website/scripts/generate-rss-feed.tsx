@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import RSS from "rss";
 import { noCdnClient } from "../sanity/interface/client.server";
 

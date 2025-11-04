@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+import { writeFileSync } from "node:fs";
 import * as TokensBuild from "@navikt/ds-tokens/darkside-js";
 import { kebabCaseForAlpha } from "../tokens/config/kebabCase";
 import { breakpointTokenConfig } from "../tokens/darkside/tokens/breakpoint";
