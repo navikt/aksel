@@ -28,7 +28,7 @@ type Story = StoryObj<typeof LocalAlert>;
 export const Default: Story = {
   render: (props) => {
     return (
-      <LocalAlert variant={props.variant ?? "announcement"} size={props.size}>
+      <LocalAlert status={props.status ?? "announcement"} size={props.size}>
         <LocalAlertHeader>
           <LocalAlertTitle>{props.title ?? "LocalAlert title"}</LocalAlertTitle>
           <LocalAlertClose onClick={() => alert("Lukket!")} />
@@ -44,14 +44,14 @@ export const Default: Story = {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
     title: "LocalAlert Title",
     size: "medium",
-    variant: "announcement",
+    status: "announcement",
   },
   argTypes: {
     size: {
       control: { type: "radio" },
       options: ["medium", "small"],
     },
-    variant: {
+    status: {
       control: { type: "select" },
       options: ["error", "warning", "announcement", "success"],
     },
@@ -61,7 +61,7 @@ export const Default: Story = {
 export const SizeSmall: Story = {
   render: () => {
     return (
-      <LocalAlert variant="announcement" size="small">
+      <LocalAlert status="announcement" size="small">
         <LocalAlertHeader>
           <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
           <LocalAlertClose onClick={() => alert("Lukket!")} />
@@ -76,23 +76,23 @@ export const OnlyHeader: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        <LocalAlert variant="announcement">
+        <LocalAlert status="announcement">
           <LocalAlertHeader>
             <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
           </LocalAlertHeader>
         </LocalAlert>
-        <LocalAlert variant="announcement">
+        <LocalAlert status="announcement">
           <LocalAlertHeader>
             <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
             <LocalAlertClose onClick={() => alert("Lukket!")} />
           </LocalAlertHeader>
         </LocalAlert>
-        <LocalAlert variant="announcement" size="small">
+        <LocalAlert status="announcement" size="small">
           <LocalAlertHeader>
             <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
           </LocalAlertHeader>
         </LocalAlert>
-        <LocalAlert variant="announcement" size="small">
+        <LocalAlert status="announcement" size="small">
           <LocalAlertHeader>
             <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
             <LocalAlertClose onClick={() => alert("Lukket!")} />
@@ -103,16 +103,16 @@ export const OnlyHeader: Story = {
   },
 };
 
-const variants = ["announcement", "warning", "error", "success"] as const;
+const statuss = ["announcement", "warning", "error", "success"] as const;
 
 export const Compositions: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        {variants.map((variant) => (
-          <LocalAlert variant={variant} key={variant}>
+        {statuss.map((status) => (
+          <LocalAlert status={status} key={status}>
             <LocalAlertHeader>
-              <LocalAlertTitle>{variant} LocalAlert title</LocalAlertTitle>
+              <LocalAlertTitle>{status} LocalAlert title</LocalAlertTitle>
               <LocalAlertClose onClick={() => alert("Lukket!")} />
             </LocalAlertHeader>
             <DemoContent />
@@ -127,14 +127,14 @@ export const CloseButton: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        <LocalAlert variant="announcement">
+        <LocalAlert status="announcement">
           <LocalAlertHeader>
             <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
             <LocalAlertClose onClick={() => alert("Lukket!")} />
           </LocalAlertHeader>
           <DemoContent />
         </LocalAlert>
-        <LocalAlert variant="announcement" size="small">
+        <LocalAlert status="announcement" size="small">
           <LocalAlertHeader>
             <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
             <LocalAlertClose onClick={() => alert("Lukket!")} />
@@ -149,7 +149,7 @@ export const CloseButton: Story = {
 export const WrappingTitle: Story = {
   render: () => {
     return (
-      <LocalAlert variant="announcement">
+      <LocalAlert status="announcement">
         <LocalAlertHeader>
           <LocalAlertTitle>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat

@@ -22,7 +22,7 @@ interface LocalAlertProps
     BaseAlert.RootProps,
     "type" | "global" | "statusType" | "data-color"
   > {
-  variant: Exclude<BaseAlert.RootProps["variant"], undefined>;
+  status: Exclude<BaseAlert.RootProps["status"], undefined>;
 }
 
 interface LocalAlertComponent
@@ -92,7 +92,7 @@ interface LocalAlertComponent
  * @see 🏷️ {@link LocalAlertProps}
  * @example
  * ```jsx
- *  <LocalAlert variant="error">
+ *  <LocalAlert status="error">
  *    <LocalAlert.Header>
  *      <LocalAlert.Title>Alert tittel</LocalAlert.Title>
  *    </LocalAlert.Header>
@@ -101,7 +101,7 @@ interface LocalAlertComponent
  * ```
  */
 const LocalAlert = forwardRef<HTMLDivElement, LocalAlertProps>(
-  ({ variant, ...restProps }: LocalAlertProps, forwardedRef) => {
+  ({ status, ...restProps }: LocalAlertProps, forwardedRef) => {
     return (
       <BaseAlert.Root
         ref={forwardedRef}
@@ -110,7 +110,7 @@ const LocalAlert = forwardRef<HTMLDivElement, LocalAlertProps>(
         type="strong"
         global={false}
         statusType="alert"
-        variant={variant}
+        status={status}
       />
     );
   },

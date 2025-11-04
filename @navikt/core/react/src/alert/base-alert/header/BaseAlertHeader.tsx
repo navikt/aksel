@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { useBaseAlert } from "../root/BaseAlertRoot.context";
-import { BaseAlertVariantIcon } from "../root/BaseAlertRoot.utils";
+import { BaseAlertStatusIcon } from "../root/BaseAlertRoot.utils";
 
 interface BaseAlertHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -28,10 +28,10 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
-    const { variant, color } = useBaseAlert();
+    const { status, color } = useBaseAlert();
 
     const headerIcon =
-      icon ?? (variant ? <BaseAlertVariantIcon variant={variant} /> : null);
+      icon ?? (status ? <BaseAlertStatusIcon status={status} /> : null);
 
     return (
       <div

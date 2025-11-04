@@ -30,7 +30,7 @@ export const Default: Story = {
     return (
       <BaseAlert
         {...props}
-        variant={props.variant ?? "success"}
+        status={props.status ?? "success"}
         size={props.size}
       >
         <BaseAlertHeader>
@@ -48,7 +48,7 @@ export const Default: Story = {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
     title: "BaseAlert Title",
     size: "medium",
-    variant: "success",
+    status: "success",
     type: "strong",
     statusType: "alert",
     global: false,
@@ -58,7 +58,7 @@ export const Default: Story = {
       control: { type: "radio" },
       options: ["medium", "small"],
     },
-    variant: {
+    status: {
       control: { type: "select" },
       options: ["error", "warning", "success", "announcement"],
     },
@@ -77,7 +77,7 @@ export const SizeSmall: Story = {
   render: () => {
     return (
       <BaseAlert
-        variant="success"
+        status="success"
         size="small"
         type="strong"
         statusType="message"
@@ -96,7 +96,7 @@ export const Strong: Story = {
   render: () => {
     return (
       <BaseAlert
-        variant="success"
+        status="success"
         size="small"
         type="strong"
         statusType="message"
@@ -113,7 +113,7 @@ export const Strong: Story = {
 export const Moderate: Story = {
   render: () => {
     return (
-      <BaseAlert variant="success" type="moderate" statusType="message">
+      <BaseAlert status="success" type="moderate" statusType="message">
         <BaseAlertHeader>
           <BaseAlertTitle>BaseAlert Title</BaseAlertTitle>
         </BaseAlertHeader>
@@ -127,19 +127,19 @@ export const OnlyHeader: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        <BaseAlert variant="success" type="strong" statusType="message">
+        <BaseAlert status="success" type="strong" statusType="message">
           <BaseAlertHeader>
             <BaseAlertTitle>BaseAlert Title</BaseAlertTitle>
           </BaseAlertHeader>
         </BaseAlert>
-        <BaseAlert variant="success" type="strong" statusType="message">
+        <BaseAlert status="success" type="strong" statusType="message">
           <BaseAlertHeader>
             <BaseAlertTitle>BaseAlert Title</BaseAlertTitle>
             <BaseAlertClose onClick={() => alert("Lukket!")} />
           </BaseAlertHeader>
         </BaseAlert>
         <BaseAlert
-          variant="success"
+          status="success"
           size="small"
           type="strong"
           statusType="message"
@@ -149,7 +149,7 @@ export const OnlyHeader: Story = {
           </BaseAlertHeader>
         </BaseAlert>
         <BaseAlert
-          variant="success"
+          status="success"
           size="small"
           type="strong"
           statusType="message"
@@ -168,7 +168,7 @@ export const CloseButton: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        <BaseAlert variant="success" type="strong" statusType="message">
+        <BaseAlert status="success" type="strong" statusType="message">
           <BaseAlertHeader>
             <BaseAlertTitle>Info: BaseAlert title</BaseAlertTitle>
             <BaseAlertClose onClick={() => alert("Lukket!")} />
@@ -176,7 +176,7 @@ export const CloseButton: Story = {
           <DemoContent />
         </BaseAlert>
         <BaseAlert
-          variant="success"
+          status="success"
           size="small"
           type="strong"
           statusType="message"
@@ -195,7 +195,7 @@ export const CloseButton: Story = {
 export const WrappingTitle: Story = {
   render: () => {
     return (
-      <BaseAlert variant="success" type="strong" statusType="message">
+      <BaseAlert status="success" type="strong" statusType="message">
         <BaseAlertHeader>
           <BaseAlertTitle>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat

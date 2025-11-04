@@ -4,7 +4,7 @@ import { createContext } from "../../../util/create-context";
 type BaseAlertContextProps = {
   size: "medium" | "small";
   statusType: "alert" | "message";
-  variant?: "announcement" | "success" | "warning" | "error";
+  status?: "announcement" | "success" | "warning" | "error";
   color: AkselColor | undefined;
 };
 

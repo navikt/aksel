@@ -13,10 +13,10 @@ import type { AkselColor } from "../../../types";
 import { useI18n } from "../../../util/i18n/i18n.hooks";
 import type { BaseAlertContextProps } from "../root/BaseAlertRoot.context";
 
-function baseAlertVariantToDataColor(
-  variant: BaseAlertContextProps["variant"],
+function baseAlertStatusToDataColor(
+  status: BaseAlertContextProps["status"],
 ): AkselColor {
-  switch (variant) {
+  switch (status) {
     case "announcement":
       return "neutral";
     case "success":
@@ -30,7 +30,7 @@ function baseAlertVariantToDataColor(
   return "neutral";
 }
 
-const VARIANT_ICONS = {
+const STATUS_ICONS = {
   announcement: {
     fill: MegaphoneSpeakingFillIcon,
     outline: MegaphoneSpeakingIcon,
@@ -49,24 +49,22 @@ const VARIANT_ICONS = {
   },
 } as const;
 
-function BaseAlertVariantIcon({
-  variant,
+function BaseAlertStatusIcon({
+  status,
   fill = true,
 }: {
-  variant: BaseAlertContextProps["variant"];
+  status: BaseAlertContextProps["status"];
   fill?: boolean;
 }) {
   const translate = useI18n("Alert");
 
-  if (!variant) {
+  if (!status) {
     return null;
   }
 
-  const Icon = fill
-    ? VARIANT_ICONS[variant].fill
-    : VARIANT_ICONS[variant].outline;
+  const Icon = fill ? STATUS_ICONS[status].fill : STATUS_ICONS[status].outline;
 
-  return <Icon title={translate(variant)} />;
+  return <Icon title={translate(status)} />;
 }
 
-export { baseAlertVariantToDataColor, BaseAlertVariantIcon };
+export { baseAlertStatusToDataColor, BaseAlertStatusIcon };

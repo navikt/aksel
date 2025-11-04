@@ -5,7 +5,7 @@ import {
   type BaseAlertContextProps,
   BaseAlertProvider,
 } from "./BaseAlertRoot.context";
-import { baseAlertVariantToDataColor } from "./BaseAlertRoot.utils";
+import { baseAlertStatusToDataColor } from "./BaseAlertRoot.utils";
 
 interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -37,7 +37,7 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Type of alert
    */
-  variant?: BaseAlertContextProps["variant"];
+  status?: BaseAlertContextProps["status"];
 }
 
 const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
@@ -50,22 +50,20 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
       type,
       global = false,
       statusType,
-      variant,
+      status,
       ...restProps
     }: BaseAlertProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
 
-    const alertColor = variant
-      ? baseAlertVariantToDataColor(variant)
-      : dataColor;
+    const alertColor = status ? baseAlertStatusToDataColor(status) : dataColor;
 
     return (
       <BaseAlertProvider
         size={size}
         statusType={statusType}
-        variant={variant}
+        status={status}
         color={alertColor}
       >
         <div
