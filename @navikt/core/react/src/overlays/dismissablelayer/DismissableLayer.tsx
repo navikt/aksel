@@ -135,7 +135,7 @@ const DismissableLayerInternal = forwardRef<
   ) => {
     const context = useContext(DismissableLayerContext);
 
-    const [, force] = useState({});
+    const [, forceRerender] = useState({});
     const [node, setNode] = React.useState<DismissableLayerElement | null>(
       null,
     );
@@ -343,7 +343,7 @@ const DismissableLayerInternal = forwardRef<
      * We use a custom event to avoid unnecessary renders from other state changes in the context.
      */
     useEffect(() => {
-      const handleUpdate = () => force({});
+      const handleUpdate = () => forceRerender({});
       document.addEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
       return () =>
         document.removeEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
