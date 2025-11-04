@@ -139,7 +139,7 @@ const DismissableLayerInternal = forwardRef<
     /* Layer handling */
     const layers = getSortedLayers(context.layers, context.branchedLayers);
     const highestLayerWithOutsidePointerEventsDisabledIndex =
-      getHighestDisabledLayerIndex(
+      findHighestLayerIndex(
         layers,
         context.layersWithOutsidePointerEventsDisabled,
       );
@@ -389,15 +389,15 @@ function dispatchUpdate() {
 }
 
 /**
- * Returns the highest index of a disabled layer in the ordered layers array.
- * If no layers are disabled, returns -1.
+ * Returns the index of the last layer that is found in the given subset.
+ * Returns -1 if no layers are found.
  */
-function getHighestDisabledLayerIndex(
+function findHighestLayerIndex(
   orderedLayers: DismissableLayerElement[],
-  disabledLayers: Set<DismissableLayerElement>,
+  layersWithOutsidePointerEventsDisabled: Set<DismissableLayerElement>,
 ): number {
   for (let i = orderedLayers.length - 1; i >= 0; i -= 1) {
-    if (disabledLayers.has(orderedLayers[i])) {
+    if (layersWithOutsidePointerEventsDisabled.has(orderedLayers[i])) {
       return i;
     }
   }
