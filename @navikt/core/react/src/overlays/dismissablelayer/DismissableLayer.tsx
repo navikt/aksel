@@ -198,6 +198,10 @@ const DismissableLayerInternal = forwardRef<
       if (!shouldEnablePointerEvents) {
         return;
       }
+
+      /**
+       * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
+       */
       onPointerDownOutside?.(event);
       onInteractOutside?.(event);
 
