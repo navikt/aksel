@@ -192,7 +192,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       }
 
       return hideNonTargetElements([container]);
-    });
+    }, [container, modal]);
 
     /* Handles mount focus */
     useClientLayoutEffect(() => {
