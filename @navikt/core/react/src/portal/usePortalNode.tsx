@@ -30,7 +30,8 @@ function usePortalNode({
   props,
   children,
 }: PortalNodeOptions) {
-  const providedRootElement = useProvider()?.rootElement ?? rootElement;
+  const providerRootElement = useProvider()?.rootElement;
+
   const parentPortalNode = useContext(PortalContext);
 
   const uniqueId = useId();
@@ -46,7 +47,7 @@ function usePortalNode({
 
   useClientLayoutEffect(() => {
     /* Wait for the container to be resolved if explicitly `null`. */
-    if (providedRootElement === null) {
+    if ((rootElement ?? providerRootElement) === null) {
       if (containerRef.current) {
         containerRef.current = null;
         setPortalNode(null);
@@ -61,7 +62,10 @@ function usePortalNode({
     }
 
     const resolvedContainer =
-      providedRootElement ?? parentPortalNode ?? globalThis?.document?.body;
+      rootElement ??
+      parentPortalNode ??
+      providerRootElement ??
+      globalThis?.document?.body;
 
     if (resolvedContainer === null) {
       if (containerRef.current) {
@@ -77,7 +81,7 @@ function usePortalNode({
       setPortalNode(null);
       setContainerElement(resolvedContainer);
     }
-  }, [parentPortalNode, providedRootElement, uniqueId]);
+  }, [parentPortalNode, providerRootElement, rootElement, uniqueId]);
 
   /**
    * This `createPortal` call injects `portalElement` into the `container`.
