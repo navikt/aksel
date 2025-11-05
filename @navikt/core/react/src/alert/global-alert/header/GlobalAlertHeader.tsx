@@ -7,7 +7,7 @@ type GlobalAlertHeaderProps = Omit<BaseAlert.HeaderProps, "icon">;
  * @see 🏷️ {@link GlobalAlertHeaderProps}
  * @example
  * ```jsx
- *  <GlobalAlert variant="info">
+ *  <GlobalAlert status="success">
  *    <GlobalAlert.Header>
  *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
  *    </GlobalAlert.Header>
