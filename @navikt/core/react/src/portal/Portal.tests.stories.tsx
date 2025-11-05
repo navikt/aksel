@@ -108,21 +108,21 @@ export const NestedPortalsAreInCorrectTree: Story = {
       <div>
         <div data-testid="custom-root" ref={setCustomRoot} />
 
-        <PortalComponent rootElement={customRoot} nested prefix="level-one-" />
-        <PortalComponent rootElement={customRoot} prefix="level-two-" />
+        <PortalComponent rootElement={customRoot} nested prefix="first-" />
+        <PortalComponent rootElement={customRoot} prefix="second-" />
       </div>
     );
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const root = canvas.getByTestId("level-one-portal-node");
-    const nested = canvas.getByTestId("level-one-nestedportal-node");
-    const rootTwoNode = canvas.getByTestId("level-two-portal-node");
+    const first = canvas.getByTestId("first-portal-node");
+    const nested = canvas.getByTestId("first-nestedportal-node");
+    const second = canvas.getByTestId("second-portal-node");
 
-    expect(nested.parentElement).toBe(root);
-    expect(rootTwoNode.parentElement).not.toBe(root);
-    expect(rootTwoNode.previousSibling).toBe(root);
+    expect(nested.parentElement).toBe(first);
+    expect(second.parentElement).not.toBe(first);
+    expect(second.previousSibling).toBe(first);
   },
 };
 
