@@ -31,7 +31,7 @@ interface DialogProps {
    * Size of the dialog.
    * @default "medium"
    */
-  size?: "small" | "medium";
+  size?: "medium" | "small";
 }
 
 /**

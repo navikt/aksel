@@ -49,7 +49,6 @@ const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(
           userSelect: "none",
           WebkitUserSelect: "none",
         }}
-        /* TODO: Might be better way to "hide" nested backdops */
         hidden={nested}
         {...transitionAttrb}
       />
