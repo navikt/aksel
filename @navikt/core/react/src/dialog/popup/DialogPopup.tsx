@@ -24,11 +24,18 @@ interface DialogPopupProps
  * ```
  */
 const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
-  ({ hasBackdrop = true, rootElement, ...restProps }, forwardedRef) => {
+  (
+    { hasBackdrop = true, rootElement, position, ...restProps },
+    forwardedRef,
+  ) => {
     return (
       <DialogPortal rootElement={rootElement}>
-        {hasBackdrop && <DialogBackdrop />}
-        <DialogPopupInternal ref={forwardedRef} {...restProps} />
+        {hasBackdrop && position !== "fullscreen" && <DialogBackdrop />}
+        <DialogPopupInternal
+          ref={forwardedRef}
+          {...restProps}
+          position={position}
+        />
       </DialogPortal>
     );
   },
