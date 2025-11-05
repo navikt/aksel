@@ -20,12 +20,15 @@ type PortalNodeOptions = {
    * Props forwarded to the portal container div.
    */
   props: React.HTMLAttributes<HTMLDivElement>;
+  // TEMP TEST
+  children: React.ReactNode;
 };
 
 function usePortalNode({
   rootElement,
   ref: forwardedRef,
   props,
+  children,
 }: PortalNodeOptions) {
   const providedRootElement = useProvider()?.rootElement ?? rootElement;
   const parentPortalNode = useContext(PortalContext);
@@ -87,7 +90,11 @@ function usePortalNode({
           id={uniqueId}
           {...props}
           data-aksel-portal=""
-        />,
+        >
+          <PortalContext.Provider value={portalNode}>
+            {children}
+          </PortalContext.Provider>
+        </PortalDiv>,
         containerElement,
       )
     : null;

@@ -1,6 +1,5 @@
-import React, { HTMLAttributes, forwardRef } from "react";
-import ReactDOM from "react-dom";
-import { PortalContext, usePortalNode } from "./usePortalNode";
+import { HTMLAttributes, forwardRef } from "react";
+import { usePortalNode } from "./usePortalNode";
 
 export interface PortalProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -15,22 +14,14 @@ export const Portal = forwardRef<HTMLDivElement, PortalProps>(
       rootElement,
       ref: forwardedRef,
       props: restProps,
+      children,
     });
 
     if (!portalSubtree && !portalNode) {
       return null;
     }
 
-    return (
-      <React.Fragment>
-        {portalSubtree}
-        {portalNode && (
-          <PortalContext.Provider value={portalNode}>
-            {ReactDOM.createPortal(children, portalNode)}
-          </PortalContext.Provider>
-        )}
-      </React.Fragment>
-    );
+    return portalSubtree;
   },
 );
 
