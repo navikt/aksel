@@ -11,14 +11,12 @@ import { HStack } from "../layout/stack";
 import { Tabs } from "../tabs";
 import {
   Dialog,
-  DialogBackdrop,
   DialogBody,
   DialogClose,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogPopup,
-  DialogPortal,
   DialogTitle,
   DialogTrigger,
 } from "./index";
@@ -48,33 +46,31 @@ export const Default = {
       <button onClick={() => alert("after")}>Before dialog</button>
       <Dialog defaultOpen={args.defaultOpen} size={args.size}>
         <DialogTrigger>Open Dialog</DialogTrigger>
-        <DialogPortal>
-          {args.backdrop && <DialogBackdrop className="backdropCSS" />}
-          <DialogPopup
-            className="dialogCSS"
-            aria-labelledby="ha"
-            position={args.position}
-            width={args.width}
-            height={args.height}
-            closeOnOutsideClick={args.closeOnOutsideClick}
-            modal={args.modal}
-          >
-            <DialogHeader>
-              <DialogTitle id="ha">Dialog Title</DialogTitle>
-              <DialogDescription>
-                This is a description of the dialog.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogBody>
-              <ScrollContent />
-            </DialogBody>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button>Close</Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogPopup>
-        </DialogPortal>
+        <DialogPopup
+          hasBackdrop={args.backdrop}
+          className="dialogCSS"
+          aria-labelledby="ha"
+          position={args.position}
+          width={args.width}
+          height={args.height}
+          closeOnOutsideClick={args.closeOnOutsideClick}
+          modal={args.modal}
+        >
+          <DialogHeader>
+            <DialogTitle id="ha">Dialog Title</DialogTitle>
+            <DialogDescription>
+              This is a description of the dialog.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogBody>
+            <ScrollContent />
+          </DialogBody>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button>Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogPopup>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog</button>
     </div>
@@ -113,12 +109,137 @@ export const AllSubComponents: Story = {
       <button onClick={() => alert("after")}>Before dialog</button>
       <Dialog>
         <DialogTrigger>Open Dialog</DialogTrigger>
-        <DialogPortal>
-          <DialogBackdrop className="backdropCSS" />
+
+        <DialogPopup aria-labelledby="ha" position="center">
+          <DialogHeader>
+            <DialogTitle id="ha">Dialog Title</DialogTitle>
+            <DialogDescription>
+              This is a description of the dialog.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogBody>
+            This is the body of the dialog. Here is where the main content
+            lives. This is the body of the dialog. Here is where the main
+            content lives This is the body of the dialog. Here is where the main
+            content lives This is the body of the dialog. Here is where the main
+            content lives This lives. This is the body of the dialog. Here is
+            where the main content lives This is the body of the dialog. Here is
+            where the main content lives This is the body of the dialog. Here is
+            where the main content lives This is the body of the dialog. Here is
+            where the main content lives
+          </DialogBody>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button>Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogPopup>
+      </Dialog>
+      <button onClick={() => alert("after")}>after dialog</button>
+    </div>
+  ),
+};
+
+export const ComplexDrawer: Story = {
+  render: () => (
+    <div>
+      <button onClick={() => alert("after")}>Before dialog</button>
+      <Dialog defaultOpen>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <Tabs defaultValue="logg">
           <DialogPopup
             className="dialogCSS"
             aria-labelledby="ha"
-            position="center"
+            position="right"
+          >
+            <DialogHeader>
+              <DialogTitle id="ha">Dialog Title</DialogTitle>
+              <DialogDescription>
+                This is a description of the dialog.
+              </DialogDescription>
+              <Bleed marginInline="space-20">
+                <Tabs.List>
+                  <Tabs.Tab
+                    value="logg"
+                    label="Logg"
+                    icon={<ClockDashedIcon aria-hidden />}
+                  />
+                  <Tabs.Tab
+                    value="inbox"
+                    label="Inbox"
+                    icon={<InboxDownIcon aria-hidden />}
+                  />
+                  <Tabs.Tab
+                    value="sendt"
+                    label="Sendt"
+                    icon={<PaperplaneIcon aria-hidden />}
+                  />
+                </Tabs.List>
+              </Bleed>
+            </DialogHeader>
+            <DialogBody asChild>
+              <Tabs.Panel value="logg">
+                This is the body of the dialog. Here is where the main content
+                lives. This is the body of the dialog. Here is where the main
+                content lives This is the body of the dialog. Here is where the
+                main content lives This is the body of the dialog. Here is where
+                the main content lives This lives. This is the body of the
+                dialog. Here is where the main content lives This is the body of
+                the dialog. Here is where the main content lives This is the
+                body of the dialog. Here is where the main content lives This is
+                the body of the dialog. Here is where the main content lives
+              </Tabs.Panel>
+            </DialogBody>
+            <DialogBody asChild>
+              <Tabs.Panel value="inbox">
+                where the main content lives This is the body of the dialog.
+                Here is where the main content lives This is the body of the
+                dialog. Here is where the main content lives
+              </Tabs.Panel>
+            </DialogBody>
+            <DialogBody asChild>
+              <Tabs.Panel value="sendt">
+                This is the body of the dialog. Here is where the main content
+                lives. This is the body of the dialog. Here is where the main
+                content lives This is the body of the dialog. Here is where the
+                main cont
+              </Tabs.Panel>
+            </DialogBody>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button>Close</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogPopup>
+        </Tabs>
+      </Dialog>
+      <button onClick={() => alert("after")}>after dialog</button>
+    </div>
+  ),
+};
+
+export const Position: Story = {
+  render: () => {
+    const [position, setPosition] =
+      useState<React.ComponentProps<typeof DialogPopup>["position"]>("bottom");
+
+    return (
+      <div>
+        <h2> {`Position: ${position}`}</h2>
+        <HStack gap="space-8" marginBlock="space-8">
+          <button onClick={() => setPosition("right")}>Right</button>
+          <button onClick={() => setPosition("left")}>Left</button>
+          <button onClick={() => setPosition("bottom")}>bottom</button>
+          <button onClick={() => setPosition("center")}>center</button>
+          <button onClick={() => setPosition("fullscreen")}>fullscreen</button>
+        </HStack>
+        <Dialog defaultOpen>
+          <DialogTrigger>Open Dialog</DialogTrigger>
+
+          <DialogPopup
+            className="dialogCSS"
+            aria-labelledby="ha"
+            position={position}
           >
             <DialogHeader>
               <DialogTitle id="ha">Dialog Title</DialogTitle>
@@ -143,143 +264,6 @@ export const AllSubComponents: Story = {
               </DialogClose>
             </DialogFooter>
           </DialogPopup>
-        </DialogPortal>
-      </Dialog>
-      <button onClick={() => alert("after")}>after dialog</button>
-    </div>
-  ),
-};
-
-export const ComplexDrawer: Story = {
-  render: () => (
-    <div>
-      <button onClick={() => alert("after")}>Before dialog</button>
-      <Dialog defaultOpen>
-        <DialogTrigger>Open Dialog</DialogTrigger>
-        <DialogPortal>
-          <DialogBackdrop className="backdropCSS" />
-          <Tabs defaultValue="logg">
-            <DialogPopup
-              className="dialogCSS"
-              aria-labelledby="ha"
-              position="right"
-            >
-              <DialogHeader>
-                <DialogTitle id="ha">Dialog Title</DialogTitle>
-                <DialogDescription>
-                  This is a description of the dialog.
-                </DialogDescription>
-                <Bleed marginInline="space-20">
-                  <Tabs.List>
-                    <Tabs.Tab
-                      value="logg"
-                      label="Logg"
-                      icon={<ClockDashedIcon aria-hidden />}
-                    />
-                    <Tabs.Tab
-                      value="inbox"
-                      label="Inbox"
-                      icon={<InboxDownIcon aria-hidden />}
-                    />
-                    <Tabs.Tab
-                      value="sendt"
-                      label="Sendt"
-                      icon={<PaperplaneIcon aria-hidden />}
-                    />
-                  </Tabs.List>
-                </Bleed>
-              </DialogHeader>
-              <DialogBody asChild>
-                <Tabs.Panel value="logg">
-                  This is the body of the dialog. Here is where the main content
-                  lives. This is the body of the dialog. Here is where the main
-                  content lives This is the body of the dialog. Here is where
-                  the main content lives This is the body of the dialog. Here is
-                  where the main content lives This lives. This is the body of
-                  the dialog. Here is where the main content lives This is the
-                  body of the dialog. Here is where the main content lives This
-                  is the body of the dialog. Here is where the main content
-                  lives This is the body of the dialog. Here is where the main
-                  content lives
-                </Tabs.Panel>
-              </DialogBody>
-              <DialogBody asChild>
-                <Tabs.Panel value="inbox">
-                  where the main content lives This is the body of the dialog.
-                  Here is where the main content lives This is the body of the
-                  dialog. Here is where the main content lives
-                </Tabs.Panel>
-              </DialogBody>
-              <DialogBody asChild>
-                <Tabs.Panel value="sendt">
-                  This is the body of the dialog. Here is where the main content
-                  lives. This is the body of the dialog. Here is where the main
-                  content lives This is the body of the dialog. Here is where
-                  the main cont
-                </Tabs.Panel>
-              </DialogBody>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button>Close</Button>
-                </DialogClose>
-              </DialogFooter>
-            </DialogPopup>
-          </Tabs>
-        </DialogPortal>
-      </Dialog>
-      <button onClick={() => alert("after")}>after dialog</button>
-    </div>
-  ),
-};
-
-export const Position: Story = {
-  render: () => {
-    const [position, setPosition] =
-      useState<React.ComponentProps<typeof DialogPopup>["position"]>("bottom");
-
-    return (
-      <div>
-        <h2> {`Position: ${position}`}</h2>
-        <HStack gap="space-8" marginBlock="space-8">
-          <button onClick={() => setPosition("right")}>Right</button>
-          <button onClick={() => setPosition("left")}>Left</button>
-          <button onClick={() => setPosition("bottom")}>bottom</button>
-          <button onClick={() => setPosition("center")}>center</button>
-          <button onClick={() => setPosition("fullscreen")}>fullscreen</button>
-        </HStack>
-        <Dialog defaultOpen>
-          <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogPortal>
-            <DialogBackdrop className="backdropCSS" />
-            <DialogPopup
-              className="dialogCSS"
-              aria-labelledby="ha"
-              position={position}
-            >
-              <DialogHeader>
-                <DialogTitle id="ha">Dialog Title</DialogTitle>
-                <DialogDescription>
-                  This is a description of the dialog.
-                </DialogDescription>
-              </DialogHeader>
-              <DialogBody>
-                This is the body of the dialog. Here is where the main content
-                lives. This is the body of the dialog. Here is where the main
-                content lives This is the body of the dialog. Here is where the
-                main content lives This is the body of the dialog. Here is where
-                the main content lives This lives. This is the body of the
-                dialog. Here is where the main content lives This is the body of
-                the dialog. Here is where the main content lives This is the
-                body of the dialog. Here is where the main content lives This is
-                the body of the dialog. Here is where the main content lives
-              </DialogBody>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button>Close</Button>
-                </DialogClose>
-              </DialogFooter>
-            </DialogPopup>
-          </DialogPortal>
         </Dialog>
       </div>
     );
@@ -292,17 +276,15 @@ export const PositionResponsive: Story = {
       <div>
         <Dialog defaultOpen>
           <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogPortal>
-            <DialogBackdrop className="backdropCSS" />
-            <DialogPopup
-              className="dialogCSS"
-              aria-labelledby="ha"
-              position="bottom"
-            >
-              <h1 id="ha">Heading text</h1>
-              <DialogClose>Close</DialogClose>
-            </DialogPopup>
-          </DialogPortal>
+
+          <DialogPopup
+            className="dialogCSS"
+            aria-labelledby="ha"
+            position="bottom"
+          >
+            <h1 id="ha">Heading text</h1>
+            <DialogClose>Close</DialogClose>
+          </DialogPopup>
         </Dialog>
       </div>
     );
@@ -315,21 +297,17 @@ export const DemoDefaultFocusDialog: Story = {
       <button onClick={() => alert("after")}>Before dialog focus-trap</button>
       <Dialog>
         <DialogTrigger>Open Dialog</DialogTrigger>
-        <DialogPortal>
-          <DialogBackdrop className="backdropCSS" />
-          <DialogPopup className="dialogCSS" aria-labelledby="ha">
-            <h1 id="ha">Headingtekst som er h1</h1>
-            <DialogClose>Close</DialogClose>
-            <p>
-              Dette er vanlig innhold i en dialog. Innholdet kommer etter en
-              tittel (h1) og en lukkeknapp. Etter dette innholdet kommer en
-              annen knapp som ikke gjør noe, men er der for å teste
-              fokushåndtering.
-            </p>
-            <button>Knapp for fokushåndtering</button>
-            <p>Og enda mer tekst for å fylle opp dialogen. Lorem ipsum ...</p>
-          </DialogPopup>
-        </DialogPortal>
+        <DialogPopup className="dialogCSS" aria-labelledby="ha">
+          <h1 id="ha">Headingtekst som er h1</h1>
+          <DialogClose>Close</DialogClose>
+          <p>
+            Dette er vanlig innhold i en dialog. Innholdet kommer etter en
+            tittel (h1) og en lukkeknapp. Etter dette innholdet kommer en annen
+            knapp som ikke gjør noe, men er der for å teste fokushåndtering.
+          </p>
+          <button>Knapp for fokushåndtering</button>
+          <p>Og enda mer tekst for å fylle opp dialogen. Lorem ipsum ...</p>
+        </DialogPopup>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog focus-trap</button>
     </div>
@@ -344,26 +322,23 @@ export const DemoCloseButtonFocusDialog: Story = {
         <button onClick={() => alert("after")}>Before dialog focus-trap</button>
         <Dialog>
           <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogPortal>
-            <DialogBackdrop className="backdropCSS" />
-            <DialogPopup
-              className="dialogCSS"
-              aria-labelledby="ha"
-              onOpenAutoFocus={closeRef}
-            >
-              <h1 id="ha">Headingtekst som er h1</h1>
-              <DialogClose ref={closeRef}>Close</DialogClose>
-              <p>
-                Denne skiller seg litt ut da autofokus var satt på lukkeknappen
-                som er etter heading. Dette er vanlig innhold i en dialog.
-                Innholdet kommer etter en tittel (h1) og en lukkeknapp. Etter
-                dette innholdet kommer en annen knapp som ikke gjør noe, men er
-                der for å teste fokushåndtering.
-              </p>
-              <button>Knapp for fokushåndtering</button>
-              <p>Og enda mer tekst for å fylle opp dialogen. Lorem ipsum ...</p>
-            </DialogPopup>
-          </DialogPortal>
+          <DialogPopup
+            className="dialogCSS"
+            aria-labelledby="ha"
+            onOpenAutoFocus={closeRef}
+          >
+            <h1 id="ha">Headingtekst som er h1</h1>
+            <DialogClose ref={closeRef}>Close</DialogClose>
+            <p>
+              Denne skiller seg litt ut da autofokus var satt på lukkeknappen
+              som er etter heading. Dette er vanlig innhold i en dialog.
+              Innholdet kommer etter en tittel (h1) og en lukkeknapp. Etter
+              dette innholdet kommer en annen knapp som ikke gjør noe, men er
+              der for å teste fokushåndtering.
+            </p>
+            <button>Knapp for fokushåndtering</button>
+            <p>Og enda mer tekst for å fylle opp dialogen. Lorem ipsum ...</p>
+          </DialogPopup>
         </Dialog>
         <button onClick={() => alert("after")}>after dialog focus-trap</button>
       </div>
@@ -388,87 +363,78 @@ export const NestedDrawers: Story = {
         </HStack>
         <Dialog defaultOpen>
           <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogPortal>
-            <DialogBackdrop className="backdropCSS" />
-            <DialogPopup className="dialogCSS" position={position}>
-              <DialogHeader>
-                <DialogTitle id="ha">Dialog Title</DialogTitle>
-                <DialogDescription>
-                  This is a description of the dialog.
-                </DialogDescription>
-              </DialogHeader>
-              <DialogBody>
-                This is the body of the dialog. Here is where the main content
-                lives. This is the body of the dialog. Here is where the main
-                content lives This is the body of the dialog. Here is where the
-                main content lives This is the body of the dialog. Here is where
-                the main content lives This lives. This is the body of the
-                dialog. Here is where the main content lives This is the body of
-                the dialog. Here is where the main content lives This is the
-                body of the dialog. Here is where the main content lives This is
-                the body of the dialog. Here is where the main content lives
-              </DialogBody>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button>Close</Button>
-                </DialogClose>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button>Open nested</Button>
-                  </DialogTrigger>
-                  <DialogPortal>
-                    <DialogBackdrop className="backdropCSS" />
-                    <DialogPopup
-                      className="dialogCSS"
-                      position={position}
-                      modal="trap-focus"
-                    >
-                      <DialogHeader>
-                        <DialogTitle id="ha">LEVEL 2</DialogTitle>
-                      </DialogHeader>
-                      <DialogBody>
-                        This is the body of the dialog. Here is where the main
-                        content lives. This i
-                      </DialogBody>
-                      <DialogFooter>
-                        <DialogClose asChild>
-                          <Button>Close</Button>
-                        </DialogClose>
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button>Open nested</Button>
-                          </DialogTrigger>
-                          <DialogPortal>
-                            <DialogBackdrop className="backdropCSS" />
-                            <DialogPopup
-                              className="dialogCSS"
-                              position={position}
-                            >
-                              <DialogHeader>
-                                <DialogTitle id="ha">NESTED</DialogTitle>
-                              </DialogHeader>
-                              <DialogBody>
-                                This is the body of the dialog. Here is where
-                                the This is the body of the dialog. Here is
-                                where the main content lives. This iThis is the
-                                body of the dialog. Here is where the main
-                                content lives. This i main content lives. This i
-                              </DialogBody>
-                              <DialogFooter>
-                                <DialogClose asChild>
-                                  <Button>Close</Button>
-                                </DialogClose>
-                              </DialogFooter>
-                            </DialogPopup>
-                          </DialogPortal>
-                        </Dialog>
-                      </DialogFooter>
-                    </DialogPopup>
-                  </DialogPortal>
-                </Dialog>
-              </DialogFooter>
-            </DialogPopup>
-          </DialogPortal>
+
+          <DialogPopup className="dialogCSS" position={position}>
+            <DialogHeader>
+              <DialogTitle id="ha">Dialog Title</DialogTitle>
+              <DialogDescription>
+                This is a description of the dialog.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogBody>
+              This is the body of the dialog. Here is where the main content
+              lives. This is the body of the dialog. Here is where the main
+              content lives This is the body of the dialog. Here is where the
+              main content lives This is the body of the dialog. Here is where
+              the main content lives This lives. This is the body of the dialog.
+              Here is where the main content lives This is the body of the
+              dialog. Here is where the main content lives This is the body of
+              the dialog. Here is where the main content lives This is the body
+              of the dialog. Here is where the main content lives
+            </DialogBody>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button>Close</Button>
+              </DialogClose>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button>Open nested</Button>
+                </DialogTrigger>
+
+                <DialogPopup
+                  className="dialogCSS"
+                  position={position}
+                  modal="trap-focus"
+                >
+                  <DialogHeader>
+                    <DialogTitle id="ha">LEVEL 2</DialogTitle>
+                  </DialogHeader>
+                  <DialogBody>
+                    This is the body of the dialog. Here is where the main
+                    content lives. This i
+                  </DialogBody>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button>Close</Button>
+                    </DialogClose>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button>Open nested</Button>
+                      </DialogTrigger>
+
+                      <DialogPopup className="dialogCSS" position={position}>
+                        <DialogHeader>
+                          <DialogTitle id="ha">NESTED</DialogTitle>
+                        </DialogHeader>
+                        <DialogBody>
+                          This is the body of the dialog. Here is where the This
+                          is the body of the dialog. Here is where the main
+                          content lives. This iThis is the body of the dialog.
+                          Here is where the main content lives. This i main
+                          content lives. This i
+                        </DialogBody>
+                        <DialogFooter>
+                          <DialogClose asChild>
+                            <Button>Close</Button>
+                          </DialogClose>
+                        </DialogFooter>
+                      </DialogPopup>
+                    </Dialog>
+                  </DialogFooter>
+                </DialogPopup>
+              </Dialog>
+            </DialogFooter>
+          </DialogPopup>
         </Dialog>
       </div>
     );
@@ -489,13 +455,10 @@ export const NonTriggerImplementation: Story = {
           Toggle drawer
         </button>
         <Dialog open={open} onOpenChange={(x) => setOpen(x)}>
-          <DialogPortal>
-            <DialogBackdrop className="backdropCSS" />
-            <DialogPopup className="dialogCSS">
-              Drawer content
-              <DialogClose>Close</DialogClose>
-            </DialogPopup>
-          </DialogPortal>
+          <DialogPopup className="dialogCSS">
+            Drawer content
+            <DialogClose>Close</DialogClose>
+          </DialogPopup>
         </Dialog>
         <button onClick={() => alert("after")}>after dialog</button>
       </div>
@@ -508,38 +471,30 @@ export const DomOrder: Story = {
     return (
       <div>
         <Dialog defaultOpen>
-          <DialogPortal>
-            <DialogBackdrop className="backdropCSS" />
-            <DialogPopup className="dialogCSS" position="left">
-              First behind First behind First behind First behind First behind
-              First behind First behind First behind First behind First behind
-              First behind First behind First behind First behind First behind
-              First behind First behind First behind First behind First behind
-              First behind
-              <Dialog defaultOpen>
-                <DialogPortal>
-                  <DialogPopup className="dialogCSS" position="right">
-                    First-nested
-                    <DialogClose>Close first nested</DialogClose>
-                  </DialogPopup>
-                </DialogPortal>
-              </Dialog>
-              <DialogClose>Close</DialogClose>
-            </DialogPopup>
-          </DialogPortal>
+          <DialogPopup className="dialogCSS" position="left">
+            First behind First behind First behind First behind First behind
+            First behind First behind First behind First behind First behind
+            First behind First behind First behind First behind First behind
+            First behind First behind First behind First behind First behind
+            First behind
+            <Dialog defaultOpen>
+              <DialogPopup className="dialogCSS" position="right">
+                First-nested
+                <DialogClose>Close first nested</DialogClose>
+              </DialogPopup>
+            </Dialog>
+            <DialogClose>Close</DialogClose>
+          </DialogPopup>
         </Dialog>
         <Dialog defaultOpen>
-          <DialogPortal>
-            <DialogBackdrop className="backdropCSS" />
-            <DialogPopup className="dialogCSS" position="bottom">
-              thrid behind thrid behind thrid behind thrid behind thrid behind
-              thrid behind thrid behind thrid behind thrid behind thrid behind
-              thrid behind thrid behind thrid behind thrid behind thrid behind
-              thrid behind thrid behind thrid behind thrid behind thrid behind
-              thrid behind
-              <DialogClose>Close</DialogClose>
-            </DialogPopup>
-          </DialogPortal>
+          <DialogPopup className="dialogCSS" position="bottom">
+            thrid behind thrid behind thrid behind thrid behind thrid behind
+            thrid behind thrid behind thrid behind thrid behind thrid behind
+            thrid behind thrid behind thrid behind thrid behind thrid behind
+            thrid behind thrid behind thrid behind thrid behind thrid behind
+            thrid behind
+            <DialogClose>Close</DialogClose>
+          </DialogPopup>
         </Dialog>
       </div>
     );
@@ -557,16 +512,15 @@ export const TrapFocusOutsideClick: Story = {
         </button>
         <Dialog>
           <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogPortal>
-            <DialogPopup
-              className="dialogCSS"
-              modal="trap-focus"
-              closeOnOutsideClick={false}
-            >
-              Drawer content
-              <DialogClose>Close</DialogClose>
-            </DialogPopup>
-          </DialogPortal>
+          <DialogPopup
+            className="dialogCSS"
+            modal="trap-focus"
+            closeOnOutsideClick={false}
+            hasBackdrop={false}
+          >
+            Drawer content
+            <DialogClose>Close</DialogClose>
+          </DialogPopup>
         </Dialog>
       </div>
     );
@@ -584,20 +538,26 @@ export const NestedTrapFocusOutsideClick: Story = {
         </button>
         <Dialog>
           <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogPortal>
-            <DialogPopup className="dialogCSS" modal="trap-focus">
-              <Dialog>
-                <DialogTrigger>Open Dialog2</DialogTrigger>
-                <DialogPortal>
-                  <DialogPopup className="dialogCSS" modal="trap-focus">
-                    Drawer content2
-                    <DialogClose>Close2</DialogClose>
-                  </DialogPopup>
-                </DialogPortal>
-              </Dialog>
-              <DialogClose>Close</DialogClose>
-            </DialogPopup>
-          </DialogPortal>
+
+          <DialogPopup
+            className="dialogCSS"
+            modal="trap-focus"
+            hasBackdrop={false}
+          >
+            <Dialog>
+              <DialogTrigger>Open Dialog2</DialogTrigger>
+
+              <DialogPopup
+                className="dialogCSS"
+                modal="trap-focus"
+                hasBackdrop={false}
+              >
+                Drawer content2
+                <DialogClose>Close2</DialogClose>
+              </DialogPopup>
+            </Dialog>
+            <DialogClose>Close</DialogClose>
+          </DialogPopup>
         </Dialog>
       </div>
     );
@@ -610,13 +570,11 @@ export const IgnoreOutsideClick: Story = {
       <button onClick={() => alert("after")}>Before dialog</button>
       <Dialog>
         <DialogTrigger>Open Dialog</DialogTrigger>
-        <DialogPortal>
-          <DialogBackdrop className="backdropCSS" />
-          <DialogPopup className="dialogCSS" closeOnOutsideClick={false}>
-            Drawer content
-            <DialogClose>Close</DialogClose>
-          </DialogPopup>
-        </DialogPortal>
+
+        <DialogPopup className="dialogCSS" closeOnOutsideClick={false}>
+          Drawer content
+          <DialogClose>Close</DialogClose>
+        </DialogPopup>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog</button>
     </div>

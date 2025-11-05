@@ -5,13 +5,11 @@ import { Button } from "../button";
 import { Provider } from "../provider";
 import {
   Dialog,
-  DialogBackdrop,
   DialogClose,
   type DialogCloseProps,
   DialogDescription,
   DialogPopup,
   type DialogPopupProps,
-  DialogPortal,
   type DialogProps,
   DialogTitle,
   DialogTrigger,
@@ -841,42 +839,36 @@ function BaseDialogComponent({
       <DialogTrigger data-testid="trigger" {...triggerButtonProps}>
         {triggerButtonProps?.children ?? "Open Dialog"}
       </DialogTrigger>
-      <DialogPortal data-testid="portal">
-        {backdrop && (
-          <DialogBackdrop className="backdropCSS" data-testid="backdrop" />
+
+      <DialogPopup
+        className="popupCSS"
+        data-testid="popup"
+        {...popupProps}
+        hasBackdrop={backdrop}
+      >
+        {nested ? (
+          <Dialog>
+            <DialogTrigger data-testid="trigger-nested">
+              Open Dialog Nested
+            </DialogTrigger>
+
+            <DialogPopup className="popupCSS" data-testid="popup-nested">
+              Popup content Nested
+              <DialogClose data-testid="close-nested">Close Nested</DialogClose>
+            </DialogPopup>
+          </Dialog>
+        ) : (
+          "Popup content"
         )}
-        <DialogPopup className="popupCSS" data-testid="popup" {...popupProps}>
-          {nested ? (
-            <Dialog>
-              <DialogTrigger data-testid="trigger-nested">
-                Open Dialog Nested
-              </DialogTrigger>
-              <DialogPortal data-testid="portal-nested">
-                <DialogBackdrop
-                  className="backdropCSS"
-                  data-testid="backdrop-nested"
-                />
-                <DialogPopup className="popupCSS" data-testid="popup-nested">
-                  Popup content Nested
-                  <DialogClose data-testid="close-nested">
-                    Close Nested
-                  </DialogClose>
-                </DialogPopup>
-              </DialogPortal>
-            </Dialog>
-          ) : (
-            "Popup content"
-          )}
-          <DialogTitle id="popup-title">Dialog title</DialogTitle>
-          <DialogDescription id="popup-description">
-            Dialog Description
-          </DialogDescription>
-          <DialogClose data-testid="close" {...closeButtonProps}>
-            {closeButtonProps?.children ?? "Close"}
-          </DialogClose>
-          {popupProps?.children}
-        </DialogPopup>
-      </DialogPortal>
+        <DialogTitle id="popup-title">Dialog title</DialogTitle>
+        <DialogDescription id="popup-description">
+          Dialog Description
+        </DialogDescription>
+        <DialogClose data-testid="close" {...closeButtonProps}>
+          {closeButtonProps?.children ?? "Close"}
+        </DialogClose>
+        {popupProps?.children}
+      </DialogPopup>
     </Dialog>
   );
 }
