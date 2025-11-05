@@ -65,11 +65,6 @@ interface DialogPopupInternalProps
  * ```jsx
  * ```
  */
-/**
- *
- * - Modal === "trap-focus"
- *  - Close on Outside pointerdown, unless backdrop is present, in that case only close on outside CLICK
- */
 const DialogPopupInternal = forwardRef<
   HTMLDivElement,
   DialogPopupInternalProps
