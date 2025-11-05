@@ -2,7 +2,7 @@ import React, { createContext, forwardRef, useContext } from "react";
 import ReactDOM from "react-dom";
 import { useProvider } from "../provider/Provider";
 import { Theme, useThemeInternal } from "../theme/Theme";
-import { useClientLayoutEffect, useId } from "../util";
+import { useClientLayoutEffect } from "../util";
 import { useMergeRefs } from "../util/hooks";
 
 const PortalContext = createContext<HTMLElement | null>(null);
@@ -34,8 +34,6 @@ function usePortalNode({
 
   const parentPortalNode = useContext(PortalContext);
 
-  const uniqueId = useId();
-
   const [containerElement, setContainerElement] = React.useState<
     HTMLElement | ShadowRoot | null
   >(null);
@@ -53,11 +51,6 @@ function usePortalNode({
         setPortalNode(null);
         setContainerElement(null);
       }
-      return;
-    }
-
-    /* React 17 does not use React.useId(). */
-    if (uniqueId == null) {
       return;
     }
 
@@ -81,7 +74,7 @@ function usePortalNode({
       setPortalNode(null);
       setContainerElement(resolvedContainer);
     }
-  }, [parentPortalNode, providerRootElement, rootElement, uniqueId]);
+  }, [parentPortalNode, providerRootElement, rootElement]);
 
   /**
    * This `createPortal` call injects `portalElement` into the `container`.
@@ -89,12 +82,7 @@ function usePortalNode({
    */
   const portalSubtree = containerElement
     ? ReactDOM.createPortal(
-        <PortalDiv
-          ref={mergedRefs}
-          id={uniqueId}
-          {...props}
-          data-aksel-portal=""
-        >
+        <PortalDiv ref={mergedRefs} {...props} data-aksel-portal="">
           <PortalContext.Provider value={portalNode}>
             {children}
           </PortalContext.Provider>
