@@ -7,6 +7,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -50,12 +51,23 @@ function KodeEksemplerProvider(props: {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const prevSearchParam = useRef<string | null>(null);
 
-  const [activeExample, setActiveExample] = useState<FileT | null>(
-    dir?.filer?.[0] ?? null,
-  );
-
   const [loaded, setLoaded] = useState(false);
   const [showCode, setShowCode] = useState(!compact);
+
+  // Derive active example from search params instead of storing in state
+  const activeExample = useMemo(() => {
+    const param = searchParams?.get("demo");
+    if (!param) {
+      return dir?.filer?.[0] ?? null;
+    }
+
+    const foundMatch = dir?.filer?.find((file) => {
+      const id = nameToId(dir?.title ?? "", file.navn ?? "");
+      return param === `${id}`;
+    });
+
+    return foundMatch ?? dir?.filer?.[0] ?? null;
+  }, [dir?.filer, dir?.title, searchParams]);
 
   const createQueryString = useCallback(
     (value: string) => {
@@ -78,7 +90,6 @@ function KodeEksemplerProvider(props: {
       return;
     }
 
-    setActiveExample(foundExample);
     setLoaded(false);
 
     const id = nameToId(dir?.title ?? "", exampleName);
@@ -88,22 +99,7 @@ function KodeEksemplerProvider(props: {
 
   useEffect(() => {
     const param = searchParams?.get("demo");
-    if (!param) {
-      return;
-    }
-
-    const foundMatch = dir?.filer?.find((file) => {
-      const id = nameToId(dir?.title ?? "", file.navn ?? "");
-      return param === `${id}`;
-    });
-
-    if (!foundMatch) {
-      return;
-    }
-
-    setActiveExample(foundMatch);
-
-    if (prevSearchParam.current === param) {
+    if (!param || prevSearchParam.current === param) {
       return;
     }
 
@@ -117,7 +113,7 @@ function KodeEksemplerProvider(props: {
     });
 
     iframeRef.current?.focus({ preventScroll: true });
-  }, [dir?.filer, dir?.title, searchParams]);
+  }, [searchParams]);
 
   return (
     <KodeEksemplerContext.Provider
