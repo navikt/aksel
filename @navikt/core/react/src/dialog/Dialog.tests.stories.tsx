@@ -1,6 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fireEvent, fn, userEvent, within } from "storybook/test";
+import {
+  expect,
+  fireEvent,
+  fn,
+  userEvent,
+  waitFor,
+  within,
+} from "storybook/test";
 import { Button } from "../button";
 import { Provider } from "../provider";
 import {
@@ -245,12 +252,12 @@ export const TrapFocusWithOutsideClick: Story = {
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
-    expect(popup).toHaveFocus();
+    waitFor(() => expect(popup).toHaveFocus());
 
     await fireEvent.click(document.body);
     expectPopupOpen();
     expectOpenedCalls(0);
-    expect(popup).toHaveFocus();
+    waitFor(() => expect(popup).toHaveFocus());
 
     const counterButton = canvas.getByTestId("counter");
     await userEvent.click(counterButton);
@@ -285,12 +292,12 @@ export const TrapFocusWithFocusBlur: Story = {
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
-    expect(popup).toHaveFocus();
+    waitFor(() => expect(popup).toHaveFocus());
 
     await fireEvent.focus(document.body);
     expectPopupOpen();
     expectOpenedCalls(0);
-    expect(popup).toHaveFocus();
+    waitFor(() => expect(popup).toHaveFocus());
 
     await fireEvent.blur(popup);
     expect(canvas.queryByTestId("popup")).toBeInTheDocument();
@@ -327,7 +334,7 @@ export const FocusLock: Story = {
     const popup = canvas.getByTestId("popup");
     const closeButton = canvas.getByText("Close");
     const testButton = canvas.getByText("Focus test");
-    expect(popup).toHaveFocus();
+    waitFor(() => expect(popup).toHaveFocus());
 
     await userEvent.tab();
     expect(closeButton).toHaveFocus();

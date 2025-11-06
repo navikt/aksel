@@ -124,7 +124,6 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         const relatedTarget = event.relatedTarget as HTMLElement | null;
-
         /*
          * `focusout` event with a `null` `relatedTarget` will happen in a few known cases:
          * 1. When the user switches app/tabs/windows/the browser itself loses focus.
