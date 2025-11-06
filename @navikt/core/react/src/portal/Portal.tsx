@@ -10,18 +10,14 @@ export interface PortalProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Portal = forwardRef<HTMLDivElement, PortalProps>(
   ({ rootElement, children, ...restProps }, forwardedRef) => {
-    const { portalNode, portalSubtree } = usePortalNode({
+    const { portalTree } = usePortalNode({
       rootElement,
       ref: forwardedRef,
       props: restProps,
       children,
     });
 
-    if (!portalSubtree && !portalNode) {
-      return null;
-    }
-
-    return portalSubtree;
+    return portalTree;
   },
 );
 

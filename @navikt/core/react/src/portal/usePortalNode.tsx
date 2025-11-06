@@ -45,6 +45,9 @@ function usePortalNode({
 
   const mergedRefs = useMergeRefs(forwardedRef, setPortalNode);
 
+  /**
+   * We update container in effect to avoid SSR mismatches.
+   */
   useClientLayoutEffect(() => {
     /* Wait for the container to be resolved if explicitly `null`. */
     if ((rootElement ?? providerRootElement) === null) {
@@ -78,24 +81,19 @@ function usePortalNode({
     }
   }, [parentPortalNode, providerRootElement, rootElement]);
 
-  /**
-   * This `createPortal` call injects `portalElement` into the `container`.
-   * Another call inside `Portal`-component then injects the children into the new `portalElement`.
-   */
-  const portalSubtree = containerElement
-    ? ReactDOM.createPortal(
-        <PortalDiv ref={mergedRefs} {...props} data-aksel-portal="">
-          <PortalContext.Provider value={portalNode}>
-            {children}
-          </PortalContext.Provider>
-        </PortalDiv>,
-        containerElement,
-      )
-    : null;
+  if (!containerElement) {
+    return { portalTree: null };
+  }
 
   return {
-    portalNode,
-    portalSubtree,
+    portalTree: ReactDOM.createPortal(
+      <PortalDiv ref={mergedRefs} {...props} data-aksel-portal="">
+        <PortalContext.Provider value={portalNode}>
+          {children}
+        </PortalContext.Provider>
+      </PortalDiv>,
+      containerElement,
+    ),
   };
 }
 
