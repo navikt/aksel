@@ -1,19 +1,18 @@
 "use client";
 
-import {
+import React, {
   CSSProperties,
   createContext,
   useCallback,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from "react";
 import { Color } from "@/app/_sanity/query-types";
 
 type CompareImagesContextT = {
+  registerContainer: (element: HTMLDivElement | null) => void;
   container: {
-    ref: React.MutableRefObject<HTMLDivElement | null>;
     onPointerDown?: (event: React.PointerEvent<HTMLDivElement>) => void;
     styles?: CSSProperties;
   };
@@ -37,7 +36,8 @@ function CompareImagesProvider({
   children: React.ReactNode;
   background?: Color;
 }) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerRefElement, setContainerRefElement] =
+    useState<HTMLDivElement | null>(null);
 
   const [handlePosition, setHandlePosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
@@ -47,11 +47,11 @@ function CompareImagesProvider({
    */
   const updateOnCursorPosition = useCallback(
     (event: React.PointerEvent<HTMLDivElement> | PointerEvent) => {
-      if (!containerRef.current) {
+      if (!containerRefElement) {
         return;
       }
 
-      const rect = containerRef.current.getBoundingClientRect();
+      const rect = containerRefElement.getBoundingClientRect();
       const elementLeft = rect.left;
       const elementWidth = rect.width;
 
@@ -70,12 +70,12 @@ function CompareImagesProvider({
       const newPosition = Number(clampedPercentageX.toFixed(2));
       setHandlePosition(newPosition);
     },
-    [],
+    [containerRefElement],
   );
 
   const handlePointerMove = useCallback(
     (event: React.PointerEvent<HTMLDivElement> | PointerEvent) => {
-      if (!isDragging || !containerRef.current) {
+      if (!isDragging) {
         return;
       }
 
@@ -140,8 +140,8 @@ function CompareImagesProvider({
   return (
     <CompareImagesContext.Provider
       value={{
+        registerContainer: setContainerRefElement,
         container: {
-          ref: containerRef,
           styles: appliedStyle,
           onPointerDown: handlePointerDown,
         },
