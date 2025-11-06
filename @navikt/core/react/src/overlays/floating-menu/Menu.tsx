@@ -579,7 +579,7 @@ const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
     }
 
     return (
-      <Portal asChild rootElement={rootElement} ref={ref}>
+      <Portal rootElement={rootElement} ref={ref}>
         {children}
       </Portal>
     );

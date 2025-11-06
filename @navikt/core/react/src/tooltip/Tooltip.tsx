@@ -209,8 +209,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         >
           {children}
         </Slot>
-        <Portal rootElement={rootElement} asChild>
-          {_open && (
+        {_open && (
+          <Portal rootElement={rootElement}>
             <div
               {...getFloatingProps({
                 ...rest,
@@ -267,8 +267,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 />
               )}
             </div>
-          )}
-        </Portal>
+          </Portal>
+        )}
       </>
     );
   },
