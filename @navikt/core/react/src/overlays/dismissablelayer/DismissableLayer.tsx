@@ -13,6 +13,7 @@ import { getSortedLayers } from "./util/sort-layers";
 import { useEscapeKeydown } from "./util/useEscapeKeydown";
 import { useFocusOutside } from "./util/useFocusOutside";
 import { usePointerDownOutside } from "./util/usePointerDownOutside";
+import { usePointerUpOutside } from "./util/usePointerUpOutside";
 
 interface DismissableLayerBaseProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -33,6 +34,18 @@ interface DismissableLayerBaseProps
    */
   onPointerDownOutside?: (event: CustomPointerDownEvent) => void;
   /**
+   * Event handler called when the a `pointerup` event happens outside of the `DismissableLayer`.
+   * Can be prevented.
+   */
+  onPointerUpOutside?: (event: CustomPointerDownEvent) => void;
+  /**
+   * Enables listening for `pointerup` outside the `DismissableLayer`.
+   * In most cases `pointerdown` is sufficient, but in some cases (like modal, drawer)
+   * we want to mimic native OS behaviour and only close on `pointerup`.
+   * @default false
+   */
+  enablePointerUpOutside?: boolean;
+  /**
    * Event handler called when the focus moves outside of the `DismissableLayer`.
    * Can be prevented.
    */
@@ -48,7 +61,7 @@ interface DismissableLayerBaseProps
   /**
    * Handler called when the `DismissableLayer` should be dismissed
    */
-  onDismiss?: () => void;
+  onDismiss?: (event: Event) => void;
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
    */
@@ -77,6 +90,8 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
             "onFocusOutside",
             "onInteractOutside",
             "onPointerDownOutside",
+            "onPointerUpOutside",
+            "enablePointerUpOutside",
             "safeZone",
           ])}
           ref={forwardedRef}
@@ -121,6 +136,8 @@ const DismissableLayerInternal = forwardRef<
       onEscapeKeyDown,
       onFocusOutside,
       onPointerDownOutside,
+      onPointerUpOutside,
+      enablePointerUpOutside = false,
       safeZone,
       asChild,
       ...restProps
@@ -211,7 +228,31 @@ const DismissableLayerInternal = forwardRef<
       safeZone && handleOutsideEvent(event);
 
       if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
+        onDismiss(event);
+      }
+    }, ownerDoc);
+
+    const pointerUpOutside = usePointerUpOutside((event) => {
+      if (!shouldEnablePointerEvents || !enablePointerUpOutside) {
+        return;
+      }
+
+      /**
+       * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+       */
+      onPointerUpOutside?.(event);
+      onInteractOutside?.(event);
+
+      /**
+       * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+       */
+      safeZone && handleOutsideEvent(event);
+
+      /**
+       * Both `onPointerDownOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
+       */
+      if (!event.defaultPrevented && onDismiss) {
+        onDismiss(event);
       }
     }, ownerDoc);
 
@@ -228,7 +269,7 @@ const DismissableLayerInternal = forwardRef<
       safeZone && handleOutsideEvent(event);
 
       if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
+        onDismiss(event);
       }
     }, ownerDoc);
 
@@ -252,7 +293,7 @@ const DismissableLayerInternal = forwardRef<
        */
       if (!event.defaultPrevented && onDismiss) {
         event.preventDefault();
-        onDismiss();
+        onDismiss(event);
       }
     }, ownerDoc);
 
@@ -370,7 +411,14 @@ const DismissableLayerInternal = forwardRef<
           )}
           onPointerDownCapture={composeEventHandlers(
             restProps.onPointerDownCapture,
-            pointerDownOutside.onPointerDownCapture,
+            () => {
+              pointerDownOutside.onPointerDownCapture();
+              pointerUpOutside.onPointerDownCapture();
+            },
+          )}
+          onPointerUpCapture={composeEventHandlers(
+            restProps.onPointerUpCapture,
+            pointerUpOutside.onPointerUpCapture,
           )}
         >
           {children}
