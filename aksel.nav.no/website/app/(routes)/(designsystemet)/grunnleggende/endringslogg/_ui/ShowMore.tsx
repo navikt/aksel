@@ -5,6 +5,7 @@ import React, {
   HTMLAttributes,
   ReactElement,
   ReactNode,
+  startTransition,
   useEffect,
   useRef,
   useState,
@@ -15,7 +16,6 @@ import ShowMoreButton from "./ShowMoreButton";
 import { ShowMoreContext, useShowMoreContext } from "./ShowMoreContext";
 
 /* Heading */
-
 const ShowMoreHeading = ({ children }) => {
   const { shouldFlash } = useShowMoreContext();
   const props: any = children.props || {};
@@ -28,7 +28,6 @@ const ShowMoreHeading = ({ children }) => {
 };
 
 /* Content */
-
 export interface ShowMoreContentProps
   extends Omit<HTMLAttributes<HTMLElement>, "onClick"> {
   /**
@@ -73,7 +72,6 @@ const ShowMoreContent = ({
 };
 
 /* ShowMore component */
-
 export interface ShowMoreProps
   extends Omit<HTMLAttributes<HTMLElement>, "onClick"> {
   /**
@@ -151,7 +149,7 @@ export const ShowMore = ({
           behavior: "instant",
           block: "start",
         });
-        setShouldScroll(false);
+        startTransition(() => setShouldScroll(false));
       }
     }
   }, [shouldScroll, scrollBackOnCollapse, scrollTargetRef]);
