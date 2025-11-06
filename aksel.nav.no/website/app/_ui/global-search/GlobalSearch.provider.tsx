@@ -61,9 +61,8 @@ function GlobalSearchResultProvider({
 
   useEffect(() => {
     if (!paramValue) {
-      setSearchResults(null);
       shouldInitialOpenRef.current = false;
-
+      startTransition(() => setSearchResults(null));
       return;
     }
 
