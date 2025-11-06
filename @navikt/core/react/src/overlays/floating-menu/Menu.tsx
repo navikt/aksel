@@ -243,7 +243,7 @@ type DismissableLayerProps = React.ComponentPropsWithoutRef<
 >;
 
 type MenuContentInternalPrivateProps = {
-  onOpenAutoFocus?: FocusScopeProps["onMountAutoFocus"];
+  initialFocus?: FocusScopeProps["initialFocus"];
   onDismiss?: DismissableLayerProps["onDismiss"];
   disableOutsidePointerEvents?: DismissableLayerProps["disableOutsidePointerEvents"];
 };
@@ -254,11 +254,7 @@ interface MenuContentInternalProps
       React.ComponentPropsWithoutRef<typeof Floating.Content>,
       "dir" | "onPlaced"
     > {
-  /**
-   * Event handler called when auto-focusing after close.
-   * Can be prevented.
-   */
-  onCloseAutoFocus?: FocusScopeProps["onUnmountAutoFocus"];
+  returnFocus?: FocusScopeProps["returnFocus"];
   onEntryFocus?: RovingFocusProps["onEntryFocus"];
   onEscapeKeyDown?: DismissableLayerProps["onEscapeKeyDown"];
   onPointerDownOutside?: DismissableLayerProps["onPointerDownOutside"];
@@ -273,8 +269,8 @@ const MenuContentInternal = forwardRef<
 >(
   (
     {
-      onOpenAutoFocus,
-      onCloseAutoFocus,
+      initialFocus,
+      returnFocus,
       disableOutsidePointerEvents,
       onEntryFocus,
       onEscapeKeyDown,
@@ -301,13 +297,8 @@ const MenuContentInternal = forwardRef<
 
     return (
       <FocusBoundary
-        onMountAutoFocus={composeEventHandlers(onOpenAutoFocus, (event) => {
-          // when opening, explicitly focus the content area only and leave
-          // `onEntryFocus` in  control of focusing first item
-          event.preventDefault();
-          contentRef.current?.focus({ preventScroll: true });
-        })}
-        onUnmountAutoFocus={onCloseAutoFocus}
+        initialFocus={initialFocus ?? contentRef}
+        returnFocus={returnFocus}
         /* Focus trapping is handled in `Floating.Content: onKeyDown */
         trapped={false}
         loop={false}
@@ -917,15 +908,14 @@ const MenuSubContent = forwardRef<
         align="start"
         side="right"
         disableOutsidePointerEvents={false}
-        onOpenAutoFocus={(event) => {
-          // when opening a submenu, focus content for keyboard users only
+        initialFocus={() => {
           if (rootContext.isUsingKeyboardRef.current) {
-            ref.current?.focus();
+            return ref.current;
           }
-          event.preventDefault();
+          return false;
         }}
         /* Since we manually focus Subtrigger, we prevent use of auto-focus */
-        onCloseAutoFocus={(event) => event.preventDefault()}
+        returnFocus={false}
         onEscapeKeyDown={composeEventHandlers(
           props.onEscapeKeyDown,
           (event) => {
