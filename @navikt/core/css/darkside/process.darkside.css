@@ -23,7 +23,11 @@
 
     margin-block-start: calc((var(--__axc-process-circle-small) / 2) * -1);
 
-    & .aksel-process__line {
+    & .aksel-process__line[data-position="start"] {
+      margin-block-end: calc(var(--__axc-process-circle-size) / 2 * -1);
+    }
+
+    & .aksel-process__line[data-position="end"] {
       margin-block-start: calc(var(--__axc-process-circle-size) / 2);
     }
 
@@ -41,8 +45,40 @@
   min-height: 2rem;
   justify-self: center;
   grid-column: 1;
-  grid-row: line-2;
   border-color: var(--ax-border-neutral-subtle);
+
+  &[data-position="start"] {
+    grid-row: line-1;
+
+    .aksel-process__event[data-status="active"] & {
+      border-image: unset;
+    }
+
+    .aksel-process__event:first-of-type & {
+      border-start-start-radius: var(--ax-radius-4);
+      border-start-end-radius: var(--ax-radius-4);
+      min-height: 1.5rem;
+    }
+
+    .aksel-process__event:not(:first-of-type) &,
+    .aksel-process:is(:not([data-truncated="start"], [data-truncated="both"])) & {
+      display: none;
+    }
+  }
+
+  &[data-position="end"] {
+    grid-row: line-2;
+
+    .aksel-process:is(:not([data-truncated="end"], [data-truncated="both"])) .aksel-process__event:last-of-type & {
+      display: none;
+    }
+
+    .aksel-process__event:last-of-type & {
+      border-end-start-radius: var(--ax-radius-4);
+      border-end-end-radius: var(--ax-radius-4);
+      min-height: 1.5rem;
+    }
+  }
 
   .aksel-process__event[data-status="active"] & {
     border-color: var(--ax-border-default);
@@ -50,16 +86,16 @@
     border-image-slice: 1;
   }
 
+  .aksel-process__event[data-status="active"]:last-of-type & {
+    border-image: unset;
+  }
+
   .aksel-process__event[data-status="completed"] & {
     border-color: var(--ax-border-default);
   }
 
   .aksel-process__event:not([data-status="active"]) & {
-    border-image: none;
-  }
-
-  .aksel-process__event:last-of-type & {
-    display: none;
+    border-image: unset;
   }
 }
 
@@ -156,6 +192,6 @@
   }
 
   .aksel-process__event:is([data-status="active"]) .aksel-process__line {
-    border-image: none;
+    border-image: unset;
   }
 }

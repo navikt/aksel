@@ -1,12 +1,15 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "7.32.5",
+  "version": "7.33.0",
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/aksel.git",
     "directory": "@navikt/aksel-icons"
+  },
+  "bugs": {
+    "url": "https://github.com/navikt/aksel/issues"
   },
   "keywords": [
     "Icons",

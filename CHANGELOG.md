@@ -1,5 +1,19 @@
 # Changelog
 
+## 7.33.0
+
+### @navikt/ds-react
+
+- Process: Added new prop `isTruncated` to `<Process />`. This allows you to add a connector to the start of first event and end of last event to visualize a "truncated" process. ([#4196](https://github.com/navikt/aksel/pull/4196))
+
+- Dependencies: Added `react-dom` to `peerDependencies`. ([#4237](https://github.com/navikt/aksel/pull/4237))
+
+* Timeline: Popups now have an accessible name. ([#4242](https://github.com/navikt/aksel/pull/4242))
+
+### @navikt/ds-css
+
+- Process: Added new prop `isTruncated` to `<Process />`. This allows you to add a connector to the start of first event and end of last event to visualize a "truncated" process. ([#4196](https://github.com/navikt/aksel/pull/4196))
+
 ## 7.32.5
 
 ### @navikt/ds-react

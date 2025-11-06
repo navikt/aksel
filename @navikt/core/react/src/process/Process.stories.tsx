@@ -87,6 +87,155 @@ export const IconBullets: Story = {
   ),
 };
 
+export const ConnectorPlacement: Story = {
+  render: () => (
+    <HStack gap="space-16">
+      <Process>
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="auto"
+        />
+        <Process.Event bullet={<SparklesFillIcon />} title="auto" />
+      </Process>
+      <Process isTruncated="both">
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="both"
+        />
+        <Process.Event bullet={<SparklesFillIcon />} title="both" />
+      </Process>
+      <Process isTruncated="start">
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="start"
+        />
+        <Process.Event bullet={<SparklesFillIcon />} title="start" />
+      </Process>
+      <Process isTruncated="end">
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="end"
+        />
+        <Process.Event bullet={<SparklesFillIcon />} title="end" />
+      </Process>
+    </HStack>
+  ),
+};
+
+export const ConnectorStates: Story = {
+  render: () => (
+    <HStack gap="space-16">
+      <Process>
+        <Process.Event
+          status="uncompleted"
+          bullet={<SparklesFillIcon />}
+          title="uncompleted + auto"
+        />
+        <Process.Event
+          status="uncompleted"
+          bullet={<SparklesFillIcon />}
+          title="uncompleted + auto"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="active"
+          bullet={<SparklesFillIcon />}
+          title="active + auto"
+        />
+        <Process.Event
+          status="active"
+          bullet={<SparklesFillIcon />}
+          title="active + auto"
+        />
+      </Process>
+      <Process>
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="completed + auto"
+        />
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="completed + auto"
+        />
+      </Process>
+      <Process isTruncated="both">
+        <Process.Event
+          status="uncompleted"
+          bullet={<SparklesFillIcon />}
+          title="uncompleted + both"
+        />
+        <Process.Event
+          status="uncompleted"
+          bullet={<SparklesFillIcon />}
+          title="uncompleted + both"
+        />
+      </Process>
+      <Process isTruncated="both">
+        <Process.Event
+          status="active"
+          bullet={<SparklesFillIcon />}
+          title="active + both"
+        />
+        <Process.Event
+          status="active"
+          bullet={<SparklesFillIcon />}
+          title="active + both"
+        />
+      </Process>
+      <Process isTruncated="both">
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="completed + both"
+        />
+        <Process.Event
+          status="completed"
+          bullet={<SparklesFillIcon />}
+          title="completed + both"
+        />
+      </Process>
+    </HStack>
+  ),
+};
+
+export const ConnectorDot: Story = {
+  render: () => (
+    <HStack gap="space-16">
+      <Process>
+        <Process.Event status="uncompleted" title="uncompleted + auto" />
+        <Process.Event status="uncompleted" title="uncompleted + auto" />
+      </Process>
+      <Process>
+        <Process.Event status="active" title="active + auto" />
+        <Process.Event status="active" title="active + auto" />
+      </Process>
+      <Process>
+        <Process.Event status="completed" title="completed + auto" />
+        <Process.Event status="completed" title="completed + auto" />
+      </Process>
+      <Process isTruncated="both">
+        <Process.Event status="uncompleted" title="uncompleted + both" />
+        <Process.Event status="uncompleted" title="uncompleted + both" />
+      </Process>
+      <Process isTruncated="both">
+        <Process.Event status="active" title="active + both" />
+        <Process.Event status="active" title="active + both" />
+      </Process>
+      <Process isTruncated="both">
+        <Process.Event status="completed" title="completed + both" />
+        <Process.Event status="completed" title="completed + both" />
+      </Process>
+    </HStack>
+  ),
+};
+
 export const Content: Story = {
   render: () => (
     <Process>
@@ -379,6 +528,9 @@ export const Chromatic = renderStoriesForChromatic({
   HideStatusText,
   Translation,
   InteractiveDemo,
+  ConnectorPlacement,
+  ConnectorStates,
+  ConnectorDot,
 });
 
 function ContentOne() {

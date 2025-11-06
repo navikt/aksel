@@ -4,6 +4,11 @@ import { getSortedLayers } from "./sort-layers";
 type DismissableLayerElement = HTMLDivElement;
 
 describe("DismissableLayer: getSortedLayers", () => {
+  beforeAll(() => {
+    /* Reset id counter before tests to ensure consistent element ids */
+    idCounter = 0;
+  });
+
   test("should return empty array when no layers", () => {
     const layers = new Set<DismissableLayerElement>();
     const branchedLayers = new Map();
@@ -13,7 +18,7 @@ describe("DismissableLayer: getSortedLayers", () => {
   });
 
   test("should return single layer", () => {
-    const layer = document.createElement("div");
+    const layer = createTestElement();
     const layers = new Set([layer]);
     const branchedLayers = new Map();
 
@@ -22,9 +27,9 @@ describe("DismissableLayer: getSortedLayers", () => {
   });
 
   test("should return multiple independent layers in order", () => {
-    const layer1 = document.createElement("div");
-    const layer2 = document.createElement("div");
-    const layer3 = document.createElement("div");
+    const layer1 = createTestElement();
+    const layer2 = createTestElement();
+    const layer3 = createTestElement();
     const layers = new Set([layer1, layer2, layer3]);
     const branchedLayers = new Map();
 
@@ -33,8 +38,8 @@ describe("DismissableLayer: getSortedLayers", () => {
   });
 
   test("should sort parent before child", () => {
-    const parent = document.createElement("div");
-    const child = document.createElement("div");
+    const parent = createTestElement();
+    const child = createTestElement();
     const layers = new Set([child, parent]);
     const branchedLayers = new Map([[parent, new Set([child])]]);
 
@@ -43,9 +48,9 @@ describe("DismissableLayer: getSortedLayers", () => {
   });
 
   test("should handle nested parent-child relationships", () => {
-    const grandparent = document.createElement("div");
-    const parent = document.createElement("div");
-    const child = document.createElement("div");
+    const grandparent = createTestElement();
+    const parent = createTestElement();
+    const child = createTestElement();
     const layers = new Set([child, parent, grandparent]);
     const branchedLayers = new Map([
       [grandparent, new Set([parent])],
@@ -57,9 +62,9 @@ describe("DismissableLayer: getSortedLayers", () => {
   });
 
   test("should handle multiple children of same parent", () => {
-    const parent = document.createElement("div");
-    const child1 = document.createElement("div");
-    const child2 = document.createElement("div");
+    const parent = createTestElement();
+    const child1 = createTestElement();
+    const child2 = createTestElement();
     const layers = new Set([child1, child2, parent]);
     const branchedLayers = new Map([[parent, new Set([child1, child2])]]);
 
@@ -71,11 +76,11 @@ describe("DismissableLayer: getSortedLayers", () => {
   });
 
   test("should handle complex branched structure", () => {
-    const root = document.createElement("div");
-    const branch1 = document.createElement("div");
-    const branch2 = document.createElement("div");
-    const leaf1 = document.createElement("div");
-    const leaf2 = document.createElement("div");
+    const root = createTestElement();
+    const branch1 = createTestElement();
+    const branch2 = createTestElement();
+    const leaf1 = createTestElement();
+    const leaf2 = createTestElement();
 
     const layers = new Set([root, branch1, branch2, leaf1, leaf2]);
     const branchedLayers = new Map([
@@ -92,7 +97,7 @@ describe("DismissableLayer: getSortedLayers", () => {
   });
 
   test("should ignore self-referential children", () => {
-    const layer = document.createElement("div");
+    const layer = createTestElement();
     const layers = new Set([layer]);
     const branchedLayers = new Map([[layer, new Set([layer])]]);
 
@@ -101,9 +106,9 @@ describe("DismissableLayer: getSortedLayers", () => {
   });
 
   test("should handle mixed independent and branched layers", () => {
-    const independent = document.createElement("div");
-    const parent = document.createElement("div");
-    const child = document.createElement("div");
+    const independent = createTestElement();
+    const parent = createTestElement();
+    const child = createTestElement();
     const layers = new Set([independent, parent, child]);
     const branchedLayers = new Map([[parent, new Set([child])]]);
 
@@ -113,3 +118,11 @@ describe("DismissableLayer: getSortedLayers", () => {
     expect(result).toHaveLength(3);
   });
 });
+
+let idCounter = 0;
+
+function createTestElement() {
+  const element = document.createElement("div");
+  element.id = `layer-${idCounter++}`;
+  return element;
+}

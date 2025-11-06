@@ -91,7 +91,7 @@ function TableOfContents({
           })}
         </ul>
       </div>
-      <TableOfContentsLinks feedback={feedback} />
+      <TableOfContentsLinks feedback={stegaClean(feedback)} />
     </aside>
   );
 }
