@@ -292,8 +292,13 @@ const DismissableLayerInternal = forwardRef<
        * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
        */
       if (!event.defaultPrevented && onDismiss) {
-        event.preventDefault();
         onDismiss(event);
+
+        /**
+         * Preventing after dismiss allows us to check if user prevents default on the escape event
+         * to avoid side effects on other elements after this layer has been dismissed.
+         */
+        event.preventDefault();
       }
     }, ownerDoc);
 

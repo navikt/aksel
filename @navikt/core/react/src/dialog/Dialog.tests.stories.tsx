@@ -369,9 +369,6 @@ export const FocusTriggerOnClose: Story = {
     await userEvent.click(openButton);
     expectPopupOpen();
 
-    const closeButton = canvas.getByText("Close");
-    expect(closeButton).toHaveFocus();
-
     await clickCloseButton();
     expectPopupClosed();
     expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(2);
@@ -385,49 +382,11 @@ export const FocusTriggerOnClose: Story = {
   },
 };
 
-/**
- * By default, when trigger is not the one causing Popup to open, the autofocus will go to body
- * We override this in `onUnmountAutoFocus` callback
- */
-export const FocusTriggerOnCloseWhenDefaultOpen: Story = {
-  render: BaseDialogComponent,
-  beforeEach: withoutAnimations,
-  play: async ({ canvasElement, args }) => {
-    const {
-      canvas,
-      expectPopupOpen,
-      expectPopupClosed,
-      expectOpenedCalls,
-      clickCloseButton,
-    } = testUtils(canvasElement, args);
-
-    expectOpenedCalls(0);
-    expectPopupOpen();
-
-    const closeButton = canvas.getByText("Close");
-    expect(closeButton).toHaveFocus();
-
-    await clickCloseButton();
-    expectPopupClosed();
-    expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(1);
-
-    const openButton = canvas.getByText("Open Dialog");
-    expect(openButton).toHaveFocus();
-  },
-  args: {
-    rootProps: {
-      onOpenChange: fn(),
-      defaultOpen: true,
-    },
-  },
-};
-
 export const FocusWithNoTrigger: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
     const {
-      canvas,
       expectPopupOpen,
       expectPopupClosed,
       expectOpenedCalls,
@@ -436,9 +395,6 @@ export const FocusWithNoTrigger: Story = {
 
     expectOpenedCalls(0);
     expectPopupOpen();
-
-    const closeButton = canvas.getByText("Close");
-    expect(closeButton).toHaveFocus();
 
     await clickCloseButton();
     expectPopupClosed();

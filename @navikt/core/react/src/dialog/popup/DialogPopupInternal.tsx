@@ -1,16 +1,14 @@
-import React, { forwardRef, useEffect, useRef } from "react";
+import React, { forwardRef, useRef } from "react";
 import { BoxNew, type BoxNewProps } from "../../layout/box";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
 import { useRenameCSS } from "../../theme/Theme";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../util/focus-guards/FocusGuards";
-import { hideNonTargetElements } from "../../util/hideNonTargetElements";
 import { useMergeRefs } from "../../util/hooks";
-import { useEventCallback } from "../../util/hooks/useEventCallback";
-import { useLatestRef } from "../../util/hooks/useLatestRef";
 import { useScrollLock } from "../../util/hooks/useScrollLock";
 import { useDialogContext } from "../root/DialogRoot.context";
 
+/* TODO: Trap-focus now has that aria-hidden error when using hide-elements.. */
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";
 
 interface DialogPopupInternalProps
@@ -106,11 +104,9 @@ const DialogPopupInternal = forwardRef<
       popupId,
     } = useDialogContext();
 
-    const hasInteractedOutsideRef = useRef(false);
-    const hasPointerDownOutsideRef = useRef(false);
-    const localPopupRef = useRef<HTMLDivElement | null>(null);
+    const preventReturnFocusRef = useRef(false);
 
-    const onOpenAutoFocus = useLatestRef(onOpenAutoFocusProp).current;
+    const localPopupRef = useRef<HTMLDivElement | null>(null);
 
     const mergedRefs = useMergeRefs(
       forwardedRef,
@@ -118,73 +114,6 @@ const DialogPopupInternal = forwardRef<
       setPopupElement,
       localPopupRef,
     );
-
-    useEffect(() => {
-      if (!open || !popupElement) {
-        return;
-      }
-
-      let cleanupFn: () => void = () => {};
-
-      let frame2: number;
-
-      const avoidElement = popupElement;
-
-      const frame1 = requestAnimationFrame(() => {
-        frame2 = requestAnimationFrame(() => {
-          cleanupFn = hideNonTargetElements([avoidElement]);
-        });
-      });
-
-      return () => {
-        cleanupFn?.();
-        cancelAnimationFrame(frame1);
-        cancelAnimationFrame(frame2);
-      };
-    }, [open, popupElement]);
-
-    useEffect(() => {
-      if (!open || !popupElement) {
-        return;
-      }
-
-      const resolvedInitialFocus =
-        typeof onOpenAutoFocus === "function"
-          ? onOpenAutoFocus()
-          : onOpenAutoFocus;
-
-      let elToFocus: HTMLElement | null | undefined;
-
-      if (resolvedInitialFocus && "current" in resolvedInitialFocus) {
-        elToFocus = resolvedInitialFocus.current;
-      } else {
-        elToFocus = resolvedInitialFocus;
-      }
-
-      if (elToFocus) {
-        elToFocus?.focus();
-        return;
-      }
-
-      let frame2: number;
-      /**
-       * After a11y testing, focusing container element seems to give best experience
-       * for screen reader and keyboard users. User will still have the option to override this anyways.
-       *
-       * Using requestAnimationFrame solves bug in safari + voiceover
-       * where focus-change to dialog did not get announced correctly.
-       */
-      const frame1 = requestAnimationFrame(() => {
-        frame2 = requestAnimationFrame(() =>
-          popupElement?.focus({ preventScroll: true }),
-        );
-      });
-
-      return () => {
-        cancelAnimationFrame(frame1);
-        cancelAnimationFrame(frame2);
-      };
-    }, [onOpenAutoFocus, open, popupElement]);
 
     useScrollLock({
       enabled: open && modal === true,
@@ -196,42 +125,6 @@ const DialogPopupInternal = forwardRef<
     const transitionAttrb = transitionStatus
       ? { [`data-${transitionStatus}-style`]: true }
       : {};
-
-    const handleUnmountFocus = useEventCallback((event: Event) => {
-      const resolvedUnmountFocus =
-        typeof onCloseAutoFocus === "function"
-          ? onCloseAutoFocus()
-          : onCloseAutoFocus;
-
-      let elToFocus: HTMLElement | null | undefined;
-
-      if (resolvedUnmountFocus && "current" in resolvedUnmountFocus) {
-        elToFocus = resolvedUnmountFocus.current;
-      } else {
-        elToFocus = resolvedUnmountFocus;
-      }
-
-      /* User handles unmount focus */
-      if (elToFocus) {
-        event.preventDefault();
-        elToFocus?.focus();
-
-        hasInteractedOutsideRef.current = false;
-        hasPointerDownOutsideRef.current = false;
-        return;
-      }
-
-      if (!hasInteractedOutsideRef.current) {
-        triggerElement?.focus();
-      }
-
-      /* Allows focus to stay on element one interacted with outside. */
-      if (hasInteractedOutsideRef.current) {
-        event.preventDefault();
-      }
-      hasInteractedOutsideRef.current = false;
-      hasPointerDownOutsideRef.current = false;
-    });
 
     const positionDataAttributes =
       typeof position === "string"
@@ -247,16 +140,34 @@ const DialogPopupInternal = forwardRef<
       "--__axc-nested-level": nestedOpenDialogCountProp,
     };
 
+    const resolvedInitialFocus =
+      onOpenAutoFocusProp === undefined ? popupRef : onOpenAutoFocusProp;
+
+    const resolvedReturnFocus = () => {
+      if (preventReturnFocusRef.current && modal === "trap-focus") {
+        preventReturnFocusRef.current = false;
+        return false;
+      }
+
+      preventReturnFocusRef.current = false;
+
+      if (!onCloseAutoFocus) {
+        return true;
+      }
+
+      return typeof onCloseAutoFocus === "function"
+        ? onCloseAutoFocus()
+        : onCloseAutoFocus.current;
+    };
+
     return (
       <FocusGuards>
         <FocusBoundary
           loop
           trapped={open}
-          onMountAutoFocus={(event) => {
-            /* We manually control initial focus for Dialog */
-            event.preventDefault();
-          }}
-          onUnmountAutoFocus={handleUnmountFocus}
+          initialFocus={resolvedInitialFocus}
+          returnFocus={resolvedReturnFocus}
+          modal
         >
           <DismissableLayer
             asChild
@@ -268,13 +179,6 @@ const DialogPopupInternal = forwardRef<
             }}
             disableOutsidePointerEvents={modal === true || !!backdropElement}
             onInteractOutside={(event) => {
-              if (!event.defaultPrevented) {
-                hasInteractedOutsideRef.current = true;
-                if (event.detail.originalEvent?.type === "pointerdown") {
-                  hasPointerDownOutsideRef.current = true;
-                }
-              }
-
               /**
                * Since trigger might be set up to close the dialog on click,
                * we need to prevent dismissing when clicking the trigger to avoid double close events (potentially re-triggering open)
@@ -282,19 +186,6 @@ const DialogPopupInternal = forwardRef<
               const target = event.target as HTMLElement;
               const targetIsTrigger = triggerElement?.contains(target);
               if (targetIsTrigger) {
-                event.preventDefault();
-              }
-
-              /**
-               * On Safari if the trigger is inside a container with tabIndex={0}, when clicked
-               * we will get the pointer down outside event on the trigger, but then a subsequent
-               * focus outside event on the container, we ignore any focus outside event when we've
-               * already had a pointer down outside event.
-               */
-              if (
-                event.detail.originalEvent.type === "focusin" &&
-                hasPointerDownOutsideRef.current
-              ) {
                 event.preventDefault();
               }
             }}
@@ -327,6 +218,9 @@ const DialogPopupInternal = forwardRef<
               }
             }}
             onFocusOutside={(event) => {
+              if (modal === "trap-focus") {
+                preventReturnFocusRef.current = true;
+              }
               /**
                * Focus-events are tricky when dealing with portals and nested dialogs.
                * If multiple dialogs are open, initial auto-focus might cause

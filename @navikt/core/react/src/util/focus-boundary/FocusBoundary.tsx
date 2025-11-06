@@ -59,7 +59,10 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
    *
    * Set to `false` to not focus anything.
    */
-  returnFocus?: boolean | React.MutableRefObject<HTMLElement | null>;
+  returnFocus?:
+    | boolean
+    | React.MutableRefObject<HTMLElement | null>
+    | (() => boolean | HTMLElement | null | undefined);
   /**
    * Hides all outside content from screen readers when true.
    * @default false
@@ -256,7 +259,12 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       const previouslyFocusedElement = ownerDoc.activeElement;
 
       function getReturnElement() {
-        let resolvedReturnFocusValue = returnFocusRef.current;
+        const resolvedReturnFocusValueOrFn = returnFocusRef.current;
+
+        let resolvedReturnFocusValue =
+          typeof resolvedReturnFocusValueOrFn === "function"
+            ? resolvedReturnFocusValueOrFn()
+            : resolvedReturnFocusValueOrFn;
 
         if (
           resolvedReturnFocusValue === undefined ||

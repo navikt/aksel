@@ -26,12 +26,7 @@ const DialogPortal = forwardRef<MenuPortalElement, DialogPortalProps>(
     }
 
     return (
-      <Portal
-        {...restProps}
-        ref={forwardedRef}
-        className={cn(className)}
-        asChild={false}
-      >
+      <Portal {...restProps} ref={forwardedRef} className={cn(className)}>
         {children}
       </Portal>
     );
