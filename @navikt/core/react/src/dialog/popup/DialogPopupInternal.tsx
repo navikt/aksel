@@ -9,6 +9,7 @@ import { useScrollLock } from "../../util/hooks/useScrollLock";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 /* TODO: Trap-focus now has that aria-hidden error when using hide-elements.. */
+/* TODO: Consistent asChild on components */
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";
 
 interface DialogPopupInternalProps
