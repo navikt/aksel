@@ -44,16 +44,20 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
    *
    * If not provided, FocusBoundary will try to focus the first
    * tabbable element inside the boundary.
+   * 
+   * Set to `false` to not focus anything.
    */
   initialFocus?:
     | boolean
     | React.MutableRefObject<HTMLElement | null>
     | (() => boolean | HTMLElement | null | undefined);
   /**
-   * Tries to focus the previously focused element when unmounting.
-   *
+   * Will try to focus the given element on unmount.
+   * 
    * If not provided, FocusBoundary will try to focus the element
    * that was focused before the FocusBoundary mounted.
+   * 
+   * Set to `false` to not focus anything.
    */
   returnFocus?: boolean | React.MutableRefObject<HTMLElement | null>;
   /**
@@ -511,16 +515,8 @@ function removeLinks(items: HTMLElement[]) {
  * Non-generic to safely handle refs whose `.current` may be `null`.
  */
 function resolveRef(
-  maybeRef:
-    | HTMLElement
-    | null
-    | undefined
-    | React.RefObject<HTMLElement | null | undefined>,
+  maybeRef: HTMLElement | React.RefObject<HTMLElement | null | undefined>,
 ): HTMLElement | null | undefined {
-  if (maybeRef == null) {
-    return maybeRef;
-  }
-
   return "current" in maybeRef ? maybeRef.current : maybeRef;
 }
 
