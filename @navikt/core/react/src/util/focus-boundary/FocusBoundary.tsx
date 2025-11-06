@@ -44,7 +44,7 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
    *
    * If not provided, FocusBoundary will try to focus the first
    * tabbable element inside the boundary.
-   * 
+   *
    * Set to `false` to not focus anything.
    */
   initialFocus?:
@@ -53,10 +53,10 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
     | (() => boolean | HTMLElement | null | undefined);
   /**
    * Will try to focus the given element on unmount.
-   * 
+   *
    * If not provided, FocusBoundary will try to focus the element
    * that was focused before the FocusBoundary mounted.
-   * 
+   *
    * Set to `false` to not focus anything.
    */
   returnFocus?: boolean | React.MutableRefObject<HTMLElement | null>;
@@ -228,9 +228,11 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         if (resolvedInitialFocus === true || resolvedInitialFocus === null) {
           elToFocus = focusableElements[0] || container;
         } else {
-          elToFocus = resolveRef(resolvedInitialFocus);
+          elToFocus =
+            resolveRef(resolvedInitialFocus) ||
+            focusableElements[0] ||
+            container;
         }
-        elToFocus = elToFocus || focusableElements[0] || container;
 
         const focusAlreadyInsideFloatingEl = container.contains(
           previouslyFocusedElement,
