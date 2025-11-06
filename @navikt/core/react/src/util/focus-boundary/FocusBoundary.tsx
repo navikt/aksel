@@ -223,15 +223,13 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         let elToFocus: HTMLElement | null | undefined;
+        const fallbackelements = focusableElements[0] || container;
 
         /* `null` should fallback to default behavior in case of an empty ref. */
         if (resolvedInitialFocus === true || resolvedInitialFocus === null) {
-          elToFocus = focusableElements[0] || container;
+          elToFocus = fallbackelements;
         } else {
-          elToFocus =
-            resolveRef(resolvedInitialFocus) ||
-            focusableElements[0] ||
-            container;
+          elToFocus = resolveRef(resolvedInitialFocus) || fallbackelements;
         }
 
         const focusAlreadyInsideFloatingEl = container.contains(
