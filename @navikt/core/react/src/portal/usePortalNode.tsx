@@ -20,7 +20,9 @@ type PortalNodeOptions = {
    * Props forwarded to the portal container div.
    */
   props: React.HTMLAttributes<HTMLDivElement>;
-  // TEMP TEST
+  /*
+   * Content to render inside Portal-node
+   */
   children: React.ReactNode;
 };
 
