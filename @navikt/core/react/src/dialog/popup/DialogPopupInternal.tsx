@@ -80,6 +80,8 @@ const DialogPopupInternal = forwardRef<
       height,
       id,
       style: styleProp,
+      "aria-labelledby": ariaLabelledbyProp,
+      "aria-describedby": ariaDescribedbyProp,
       ...restProps
     },
     forwardedRef,
@@ -273,8 +275,8 @@ const DialogPopupInternal = forwardRef<
             }}
           >
             <BoxNew
-              aria-labelledby={titleId}
-              aria-describedby={descriptionId}
+              aria-labelledby={ariaLabelledbyProp ?? titleId}
+              aria-describedby={ariaDescribedbyProp ?? descriptionId}
               id={id ?? popupId}
               {...restProps}
               ref={mergedRefs}
