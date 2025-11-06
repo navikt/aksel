@@ -104,8 +104,8 @@ const DialogPopupInternal = forwardRef<
       popupId,
     } = useDialogContext();
 
-    const preventReturnFocusRef = useRef(false);
-
+    const hasInteractedOutsideRef = useRef(false);
+    const hasPointerDownOutsideRef = useRef(false);
     const localPopupRef = useRef<HTMLDivElement | null>(null);
 
     const mergedRefs = useMergeRefs(
@@ -144,20 +144,41 @@ const DialogPopupInternal = forwardRef<
       onOpenAutoFocusProp === undefined ? popupRef : onOpenAutoFocusProp;
 
     const resolvedReturnFocus = () => {
-      if (preventReturnFocusRef.current && modal === "trap-focus") {
-        preventReturnFocusRef.current = false;
+      if (onCloseAutoFocus) {
+        hasInteractedOutsideRef.current = false;
+        hasPointerDownOutsideRef.current = false;
+
+        return typeof onCloseAutoFocus === "function"
+          ? onCloseAutoFocus()
+          : onCloseAutoFocus.current;
+      }
+
+      /**
+       * If dialog closes, and user has not interacted outside of it, we default to focusing the trigger
+       */
+      if (!hasInteractedOutsideRef.current && modal === "trap-focus") {
+        triggerElement?.focus();
+        hasInteractedOutsideRef.current = false;
+        hasPointerDownOutsideRef.current = false;
         return false;
       }
 
-      preventReturnFocusRef.current = false;
-
-      if (!onCloseAutoFocus) {
-        return true;
+      /**
+       * If user clicks something outside dialog, we respect that and avoid changing focus
+       */
+      if (modal === "trap-focus" && hasInteractedOutsideRef.current) {
+        hasInteractedOutsideRef.current = false;
+        hasPointerDownOutsideRef.current = false;
+        return false;
       }
 
-      return typeof onCloseAutoFocus === "function"
-        ? onCloseAutoFocus()
-        : onCloseAutoFocus.current;
+      hasInteractedOutsideRef.current = false;
+      hasPointerDownOutsideRef.current = false;
+
+      /**
+       * In all other cases, we allow FocusBoundary to return focus to the previously focused element
+       */
+      return true;
     };
 
     return (
@@ -179,6 +200,12 @@ const DialogPopupInternal = forwardRef<
             }}
             disableOutsidePointerEvents={modal === true || !!backdropElement}
             onInteractOutside={(event) => {
+              if (!event.defaultPrevented) {
+                hasInteractedOutsideRef.current = true;
+                if (event.detail.originalEvent?.type === "pointerdown") {
+                  hasPointerDownOutsideRef.current = true;
+                }
+              }
               /**
                * Since trigger might be set up to close the dialog on click,
                * we need to prevent dismissing when clicking the trigger to avoid double close events (potentially re-triggering open)
@@ -186,6 +213,19 @@ const DialogPopupInternal = forwardRef<
               const target = event.target as HTMLElement;
               const targetIsTrigger = triggerElement?.contains(target);
               if (targetIsTrigger) {
+                event.preventDefault();
+              }
+
+              /**
+               * On Safari if the trigger is inside a container with tabIndex={0}, when clicked
+               * we will get the pointer down outside event on the trigger, but then a subsequent
+               * focus outside event on the container, we ignore any focus outside event when we've
+               * already had a pointer down outside event.
+               */
+              if (
+                event.detail.originalEvent.type === "focusin" &&
+                hasPointerDownOutsideRef.current
+              ) {
                 event.preventDefault();
               }
             }}
@@ -218,9 +258,6 @@ const DialogPopupInternal = forwardRef<
               }
             }}
             onFocusOutside={(event) => {
-              if (modal === "trap-focus") {
-                preventReturnFocusRef.current = true;
-              }
               /**
                * Focus-events are tricky when dealing with portals and nested dialogs.
                * If multiple dialogs are open, initial auto-focus might cause

@@ -252,18 +252,17 @@ export const TrapFocusWithOutsideClick: Story = {
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
-    waitFor(() => expect(popup).toHaveFocus());
+    await waitFor(() => expect(popup).toHaveFocus());
 
     await fireEvent.click(document.body);
     expectPopupOpen();
     expectOpenedCalls(0);
-    waitFor(() => expect(popup).toHaveFocus());
 
     const counterButton = canvas.getByTestId("counter");
     await userEvent.click(counterButton);
     expectPopupOpen();
     expectOpenedCalls(0);
-    expect(popup).toHaveFocus();
+    await waitFor(() => expect(popup).toHaveFocus());
     expect(counterButton).toHaveTextContent("Counter 1");
   },
   args: {
@@ -292,19 +291,18 @@ export const TrapFocusWithFocusBlur: Story = {
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
-    waitFor(() => expect(popup).toHaveFocus());
+    await waitFor(() => expect(popup).toHaveFocus());
 
     await fireEvent.focus(document.body);
     expectPopupOpen();
     expectOpenedCalls(0);
-    waitFor(() => expect(popup).toHaveFocus());
 
     await fireEvent.blur(popup);
     expect(canvas.queryByTestId("popup")).toBeInTheDocument();
     expectPopupOpen();
 
     expectOpenedCalls(0);
-    expect(popup).toHaveFocus();
+    await waitFor(() => expect(popup).toHaveFocus());
   },
   args: {
     rootProps: {
@@ -334,7 +332,7 @@ export const FocusLock: Story = {
     const popup = canvas.getByTestId("popup");
     const closeButton = canvas.getByText("Close");
     const testButton = canvas.getByText("Focus test");
-    waitFor(() => expect(popup).toHaveFocus());
+    await waitFor(() => expect(popup).toHaveFocus());
 
     await userEvent.tab();
     expect(closeButton).toHaveFocus();
@@ -519,7 +517,7 @@ export const FocusAutoOnOpen: Story = {
     await userEvent.click(triggerButton);
     expectPopupOpen();
 
-    expect(canvas.getByText("Autofocus")).toHaveFocus();
+    await waitFor(() => expect(canvas.getByText("Autofocus")).toHaveFocus());
   },
   args: {
     popupProps: {
