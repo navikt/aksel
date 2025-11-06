@@ -5,11 +5,11 @@ import styles from "./CompareImages.module.css";
 import { useCompareImages } from "./CompareImages.provider";
 
 function CompareImagesHandle() {
-  const { handle, dragging } = useCompareImages();
+  const { handle, dragging, handlePosition } = useCompareImages();
+  const position = Math.round(handlePosition);
 
   return (
     <button
-      ref={handle.ref}
       onKeyDown={handle.onKeyDown}
       className={styles.compareImagesHandle}
       data-dragging={dragging.current}
@@ -18,8 +18,8 @@ function CompareImagesHandle() {
       aria-valuemin={0}
       aria-valuemax={100}
       /* Valuenow and valuetext are both updates manually in useCompareImages. */
-      aria-valuenow={50}
-      aria-valuetext="50%"
+      aria-valuenow={position}
+      aria-valuetext={`${position}%`}
       data-rcs="handle-container"
       role="slider"
     >

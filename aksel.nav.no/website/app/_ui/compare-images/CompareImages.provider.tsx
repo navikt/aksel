@@ -18,7 +18,6 @@ type CompareImagesContextT = {
     styles?: CSSProperties;
   };
   handle: {
-    ref: React.MutableRefObject<HTMLButtonElement | null>;
     onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
   };
 
@@ -39,30 +38,9 @@ function CompareImagesProvider({
   background?: Color;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const handleRef = useRef<HTMLButtonElement>(null);
-  const handlePosition = useRef(50);
 
+  const [handlePosition, setHandlePosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
-
-  const syncPosition = useCallback(() => {
-    if (!containerRef.current || !handleRef.current) {
-      return;
-    }
-
-    containerRef.current.style.setProperty(
-      "--image-clip-1",
-      `${100 - handlePosition.current}%`,
-    );
-    containerRef.current.style.setProperty(
-      "--image-clip-2",
-      `${handlePosition.current}%`,
-    );
-
-    const rounded = Math.round(handlePosition.current);
-
-    handleRef.current.ariaValueNow = rounded.toString();
-    handleRef.current.ariaValueText = `${rounded}%`;
-  }, []);
 
   /**
    * Update the position based on the cursor's current position within container.
@@ -89,10 +67,10 @@ function CompareImagesProvider({
       // Clamp between 0 and 100
       const clampedPercentageX = Math.max(-1, Math.min(100, percentageX));
 
-      handlePosition.current = Number(clampedPercentageX.toFixed(2));
-      syncPosition();
+      const newPosition = Number(clampedPercentageX.toFixed(2));
+      setHandlePosition(newPosition);
     },
-    [syncPosition],
+    [],
   );
 
   const handlePointerMove = useCallback(
@@ -130,11 +108,8 @@ function CompareImagesProvider({
   };
 
   const movePosition = (offset: number) => {
-    handlePosition.current = Math.max(
-      -1,
-      Math.min(100, handlePosition.current + offset),
-    );
-    syncPosition();
+    const newPosition = Math.max(-1, Math.min(100, handlePosition + offset));
+    setHandlePosition(newPosition);
   };
 
   /* Set on CompareHandle */
@@ -155,8 +130,8 @@ function CompareImagesProvider({
   };
 
   const appliedStyle: CSSProperties = {
-    "--image-clip-2": `${handlePosition.current}%`,
-    "--image-clip-1": `${100 - handlePosition.current}%`,
+    "--image-clip-2": `${handlePosition}%`,
+    "--image-clip-1": `${100 - handlePosition}%`,
     "--image-bg": background
       ? `rgba(${background.rgb?.r},${background.rgb?.g},${background.rgb?.b},${background.rgb?.a})`
       : undefined,
@@ -171,10 +146,9 @@ function CompareImagesProvider({
           onPointerDown: handlePointerDown,
         },
         handle: {
-          ref: handleRef,
           onKeyDown: handleKeyDown,
         },
-        handlePosition: handlePosition.current,
+        handlePosition,
         dragging: {
           current: isDragging,
           update: setIsDragging,
