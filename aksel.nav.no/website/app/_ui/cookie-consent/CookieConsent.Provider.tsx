@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  startTransition,
   useCallback,
   useContext,
   useEffect,
@@ -62,7 +63,7 @@ function CookieConsentProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    syncConsentState();
+    startTransition(() => syncConsentState());
   }, [syncConsentState]);
 
   const contextValue = useMemo(() => {
