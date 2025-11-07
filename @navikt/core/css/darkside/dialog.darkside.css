@@ -10,9 +10,15 @@
   transition-property: transform, opacity, translate;
   border-radius: var(--ax-radius-12);
   color: var(--ax-text-neutral);
-  display: flex;
   flex-direction: column;
   box-shadow: var(--ax-shadow-dialog);
+  display: grid;
+  grid-template-areas:
+    "header closebutton"
+    "body body"
+    "footer footer";
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr auto;
 
   &:focus {
     outline: none;
@@ -184,6 +190,7 @@
 }
 
 .aksel-dialog__header {
+  grid-area: header;
   z-index: 1;
   flex-shrink: 0;
   padding-block: var(--__axc-dialog-p-b);
@@ -195,18 +202,21 @@
 }
 
 .aksel-dialog__close-button {
-  float: right;
-  margin-left: var(--ax-space-16);
+  grid-area: closebutton;
+  margin-block-start: var(--__axc-dialog-p-b);
+  margin-inline-end: var(--__axc-dialog-p-i);
+  align-self: start;
 }
 
 .aksel-dialog__body {
+  grid-area: body;
   overflow: auto;
-  flex-grow: 1;
   padding-block: var(--__axc-dialog-p-b);
   padding-inline: var(--__axc-dialog-p-i);
 }
 
 .aksel-dialog__footer {
+  grid-area: footer;
   justify-content: flex-end;
   display: flex;
   flex-flow: wrap;

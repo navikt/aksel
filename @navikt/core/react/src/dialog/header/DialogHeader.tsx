@@ -35,6 +35,13 @@ const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
 
     return (
       <>
+        <Component
+          {...restProps}
+          ref={forwardedRef}
+          className={cn(className, "navds-dialog__header")}
+        >
+          {children}
+        </Component>
         {hasCloseButton && (
           <DialogClose asChild>
             <Button
@@ -46,13 +53,6 @@ const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
             />
           </DialogClose>
         )}
-        <Component
-          {...restProps}
-          ref={forwardedRef}
-          className={cn(className, "navds-dialog__header")}
-        >
-          {children}
-        </Component>
       </>
     );
   },
