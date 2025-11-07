@@ -80,7 +80,6 @@
     "typescript-cookie": "^1.0.6",
     "zod": "^3.22.4"
   },
-  "_note": "When upgrading @axe-core/playwright, try removing the resolution entry in the root package.json",
   "devDependencies": {
     "@axe-core/playwright": "4.11.0",
     "@babel/core": "^7.19.0",

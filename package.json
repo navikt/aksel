@@ -207,9 +207,5 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
-  "resolutions": {
-    "axe-core": "4.10.0"
-  },
-  "_note1": "Forcing axe-core to 4.10.0 fixes this error: `frame.evaluate: TypeError: Cannot read properties of null (reading 'children')`",
   "packageManager": "yarn@4.9.4"
 }
