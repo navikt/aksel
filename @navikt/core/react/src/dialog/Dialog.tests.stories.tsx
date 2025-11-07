@@ -772,7 +772,7 @@ export const AriaAttributes: Story = {
 /* ------------------------------- Test setup ------------------------------- */
 type BaseDialogProps = {
   rootProps?: Omit<DialogProps, "children"> & { children?: React.ReactNode };
-  popupProps?: Omit<DialogPopupProps, "children"> & {
+  popupProps?: Omit<DialogPopupProps, "children" | "asChild"> & {
     children?: React.ReactNode;
   };
   closeButtonProps?: Omit<DialogCloseProps, "children"> & {
