@@ -18,7 +18,10 @@ const Example = () => {
         <DatePicker.Input
           {...inputProps}
           label="Velg dato"
-          error={hasError && "Noe er feil"}
+          error={
+            hasError &&
+            "Du må skrive en dato, f.eks. på denne måten: dd.mm.åååå"
+          }
         />
       </DatePicker>
     </Box>
