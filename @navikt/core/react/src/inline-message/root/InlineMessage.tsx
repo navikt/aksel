@@ -6,9 +6,9 @@ import { InlineMessageIcon } from "../icon/InlineMessageIcon";
 
 interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * InlineMessage variant.
+   * InlineMessage status.
    */
-  variant: "info" | "success" | "warning" | "error";
+  status: "info" | "success" | "warning" | "error";
   /**
    * InlineMessage size.
    * @default "medium"
@@ -23,7 +23,7 @@ interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  * @example
  * ```jsx
- *  <InlineMessage variant="error">
+ *  <InlineMessage status="error">
  *    Inline Errormessage
  *  </InlineMessage>
  * ```
@@ -31,7 +31,7 @@ interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
  * @example
  * As a link
  * ```jsx
- *  <InlineMessage variant="error" as={Link} href="#">
+ *  <InlineMessage status="error" as={Link} href="#">
  *    Inline Errormessage
  *  </InlineMessage>
  * ```
@@ -43,7 +43,7 @@ const InlineMessage: OverridableComponent<InlineMessageProps, HTMLDivElement> =
         as: Component = "div",
         children,
         className,
-        variant,
+        status,
         size = "medium",
         ...restProps
       }: InlineMessageProps & { as?: React.ElementType },
@@ -56,14 +56,14 @@ const InlineMessage: OverridableComponent<InlineMessageProps, HTMLDivElement> =
         <BodyShort
           ref={forwardedRef}
           className={cn("navds-inline-message", className)}
-          data-color={variant === "error" ? "danger" : variant}
+          data-color={status === "error" ? "danger" : status}
           {...restProps}
           size={size}
           as={Component}
-          data-variant={variant}
+          data-status={status}
           data-size={size}
         >
-          <InlineMessageIcon variant={variant} />
+          <InlineMessageIcon status={status} />
           <span data-color={themeContext?.color}>{children}</span>
         </BodyShort>
       );

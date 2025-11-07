@@ -17,12 +17,12 @@ export default meta;
 
 type Story = StoryObj<typeof InlineMessage>;
 
-const variants = ["info", "success", "warning", "error"] as const;
+const statuss = ["info", "success", "warning", "error"] as const;
 
 export const Default: Story = {
   render: (props) => {
     return (
-      <InlineMessage variant={props.variant ?? "warning"}>
+      <InlineMessage status={props.status ?? "warning"}>
         {props.children ?? "InlineMessage content"}
       </InlineMessage>
     );
@@ -30,12 +30,12 @@ export const Default: Story = {
 
   args: {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
-    variant: "warning",
+    status: "warning",
   },
   argTypes: {
-    variant: {
+    status: {
       control: { type: "select" },
-      options: variants,
+      options: statuss,
     },
   },
 };
@@ -43,7 +43,7 @@ export const Default: Story = {
 export const SizeSmall: Story = {
   render: () => {
     return (
-      <InlineMessage variant="warning" size="small">
+      <InlineMessage status="warning" size="small">
         <DemoContent />
       </InlineMessage>
     );
@@ -54,8 +54,8 @@ export const Compositions: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        {variants.map((variant) => (
-          <InlineMessage variant={variant} key={variant}>
+        {statuss.map((status) => (
+          <InlineMessage status={status} key={status}>
             <DemoContent />
           </InlineMessage>
         ))}
@@ -67,7 +67,7 @@ export const Compositions: Story = {
 export const WrappingTitle: Story = {
   render: () => {
     return (
-      <InlineMessage variant="warning">
+      <InlineMessage status="warning">
         <DemoContent />
       </InlineMessage>
     );
@@ -77,7 +77,7 @@ export const WrappingTitle: Story = {
 export const AsLink: Story = {
   render: () => {
     return (
-      <InlineMessage variant="warning" as={Link} href="#">
+      <InlineMessage status="warning" as={Link} href="#">
         This is a link inside the InlineMessage
       </InlineMessage>
     );

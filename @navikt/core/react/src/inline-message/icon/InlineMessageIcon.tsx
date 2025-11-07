@@ -8,7 +8,7 @@ import {
 import { useRenameCSS } from "../../theme/Theme";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 
-const VARIANT_ICONS = {
+const STATUS_ICONS = {
   info: InformationSquareFillIcon,
   success: CheckmarkCircleFillIcon,
   warning: ExclamationmarkTriangleFillIcon,
@@ -16,22 +16,22 @@ const VARIANT_ICONS = {
 } as const;
 
 function InlineMessageIcon({
-  variant,
+  status,
 }: {
-  variant: "info" | "success" | "warning" | "error";
+  status: "info" | "success" | "warning" | "error";
 }) {
   const translate = useI18n("Alert");
   const { cn } = useRenameCSS();
 
-  if (!(variant in VARIANT_ICONS)) {
+  if (!(status in STATUS_ICONS)) {
     return null;
   }
 
-  const Icon = VARIANT_ICONS[variant];
+  const Icon = STATUS_ICONS[status];
 
   return (
     <Icon
-      title={translate(variant)}
+      title={translate(status)}
       className={cn("navds-inline-message__icon")}
     />
   );
