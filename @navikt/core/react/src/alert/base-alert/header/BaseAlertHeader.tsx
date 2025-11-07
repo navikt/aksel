@@ -41,13 +41,7 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
         className={cn(className, "navds-base-alert__header")}
       >
         {headerIcon && (
-          <div
-            className={cn("navds-base-alert__icon")}
-            /* TODO: Revisit this after other alerts are merged */
-            /* aria-hidden={icon !== undefined} */
-          >
-            {headerIcon}
-          </div>
+          <div className={cn("navds-base-alert__icon")}>{headerIcon}</div>
         )}
         {children}
       </div>
