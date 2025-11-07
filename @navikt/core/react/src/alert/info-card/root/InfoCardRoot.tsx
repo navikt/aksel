@@ -12,7 +12,7 @@ import { InfoCardTitle, type InfoCardTitleProps } from "../title/InfoCardTitle";
 
 type InfoCardProps = Omit<
   BaseAlert.RootProps,
-  "type" | "global" | "statusType" | "variant"
+  "type" | "global" | "statusType" | "status"
 >;
 
 interface InfoCardComponent
