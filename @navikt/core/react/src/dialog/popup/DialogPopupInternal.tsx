@@ -9,7 +9,6 @@ import { useScrollLock } from "../../util/hooks/useScrollLock";
 import { createTransitionStatusAttribute } from "../../util/hooks/useTransitionStatus";
 import { useDialogContext } from "../root/DialogRoot.context";
 
-/* TODO: Trap-focus now has that aria-hidden error when using hide-elements.. */
 /* TODO: Consistent asChild on components */
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";
 
@@ -125,20 +124,6 @@ const DialogPopupInternal = forwardRef<
       open,
       referenceElement: popupElement,
     });
-
-    const positionDataAttributes =
-      typeof position === "string"
-        ? { "data-position": position }
-        : Object.fromEntries(
-            Object.entries(position).map(([key, value]) => {
-              return [`data-position-${key}`, value];
-            }),
-          );
-
-    const style: React.CSSProperties = {
-      ...styleProp,
-      "--__axc-nested-level": nestedOpenDialogCountProp,
-    };
 
     const resolvedInitialFocus =
       onOpenAutoFocusProp === undefined ? popupRef : onOpenAutoFocusProp;
@@ -285,10 +270,13 @@ const DialogPopupInternal = forwardRef<
               )}
               role="dialog"
               {...createTransitionStatusAttribute(transitionStatus)}
-              {...positionDataAttributes}
+              data-position={position}
               width={translateWidth(width, position)}
               height={translateHeight(height, position)}
-              style={style}
+              style={{
+                ...styleProp,
+                "--__axc-nested-level": nestedOpenDialogCountProp,
+              }}
               data-nested-dialog-open={!!nestedOpenDialogCountProp}
               data-nested={!!nested}
             >
