@@ -91,6 +91,13 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
 
   const parentContext = useDialogContext(false);
 
+  /**
+   * Notify parent dialog about nested dialogs opening/closing.
+   * This allows us to better hide/obscure parent dialogs when nested dialogs are opened.
+   *
+   * This pattern is not good for deep nesting,
+   * but should work fine for 1-2 levels of nesting which is the most common use case here.
+   */
   useEffect(() => {
     if (parentContext?.nestedDialogOpened && open) {
       parentContext.nestedDialogOpened(ownNestedOpenDialogs);
@@ -105,6 +112,9 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     };
   }, [open, parentContext, ownNestedOpenDialogs]);
 
+  /**
+   * Passing the original event to onOpenChange to allow preventing the state change
+   */
   const setOpen = useEventCallback(
     (nextOpen: boolean, originalEvent?: Event) => {
       onOpenChange?.(nextOpen, originalEvent);
@@ -117,17 +127,16 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     },
   );
 
-  const handleUnmount = useEventCallback(() => {
-    setMounted(false);
-    onOpenChangeComplete?.(false);
-  });
-
+  /**
+   * Unmount only after close animation is complete
+   */
   useOpenChangeAnimationComplete({
     open,
     ref: popupRef,
     onComplete() {
       if (!open) {
-        handleUnmount();
+        setMounted(false);
+        onOpenChangeComplete?.(false);
       }
     },
   });
