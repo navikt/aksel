@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Portal, type PortalProps } from "../../portal";
-import { DialogBackdrop } from "../backdrop/DialogBackdrop";
+import { DialogBackdropInternal } from "../backdrop/DialogBackdropInternal";
 import { useDialogContext } from "../root/DialogRoot.context";
 import {
   DialogPopupInternal,
@@ -37,7 +37,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
 
     return (
       <Portal rootElement={rootElement}>
-        {hasBackdrop && position !== "fullscreen" && <DialogBackdrop />}
+        {hasBackdrop && position !== "fullscreen" && <DialogBackdropInternal />}
         <DialogPopupInternal
           ref={forwardedRef}
           {...restProps}
