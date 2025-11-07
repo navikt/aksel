@@ -7,16 +7,15 @@ import {
   type DialogPopupInternalProps,
 } from "./DialogPopupInternal";
 
-interface DialogPopupProps
-  extends DialogPopupInternalProps,
-    Pick<PortalProps, "rootElement"> {
-  children: React.ReactNode;
-  /**
-   * Adds a backdrop behind the dialog popup.
-   * @default true
-   */
-  hasBackdrop?: boolean;
-}
+type DialogPopupProps = DialogPopupInternalProps &
+  Pick<PortalProps, "rootElement"> & {
+    children: React.ReactNode;
+    /**
+     * Adds a backdrop behind the dialog popup.
+     * @default true
+     */
+    hasBackdrop?: boolean;
+  };
 
 /**
  * @see 🏷️ {@link DialogPopupProps}

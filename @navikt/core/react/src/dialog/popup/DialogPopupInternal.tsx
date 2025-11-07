@@ -7,56 +7,56 @@ import { FocusGuards } from "../../util/focus-guards/FocusGuards";
 import { useMergeRefs } from "../../util/hooks";
 import { useScrollLock } from "../../util/hooks/useScrollLock";
 import { createTransitionStatusAttribute } from "../../util/hooks/useTransitionStatus";
+import type { AsChild } from "../../util/types/AsChild";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 /* TODO: Consistent asChild on components */
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";
 
-interface DialogPopupInternalProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  /**
-   * Determines if the dialog enters a modal state when open.
-   * - `true`: user interaction is limited to just the dialog: focus is trapped, document page scroll is locked, and pointer interactions on outside elements are disabled.
-   * - `'trap-focus'`: focus is trapped inside the dialog, but document page scroll is not locked and pointer interactions outside of it remain enabled.
-   * @default true
-   */
-  modal?: true | "trap-focus";
-  /**
-   * Determines if the dialog should close on outside clicks.
-   * @default true
-   */
-  closeOnOutsideClick?: boolean;
-  /**
-   * Event handler called when the dialog opens, used to manage focus.
-   * Can be prevented with `event.preventDefault()`.
-   */
-  onOpenAutoFocus?:
-    | React.RefObject<HTMLElement | null>
-    | (() => HTMLElement | null | undefined);
-  /**
-   * Event handler called when the dialog closes, used to manage focus.
-   * Can be prevented with `event.preventDefault()`.
-   */
-  onCloseAutoFocus?:
-    | React.RefObject<HTMLElement | null>
-    | (() => HTMLElement | null | undefined);
+type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
+  AsChild & {
+    /**
+     * Determines if the dialog enters a modal state when open.
+     * - `true`: user interaction is limited to just the dialog: focus is trapped, document page scroll is locked, and pointer interactions on outside elements are disabled.
+     * - `'trap-focus'`: focus is trapped inside the dialog, but document page scroll is not locked and pointer interactions outside of it remain enabled.
+     * @default true
+     */
+    modal?: true | "trap-focus";
+    /**
+     * Determines if the dialog should close on outside clicks.
+     * @default true
+     */
+    closeOnOutsideClick?: boolean;
+    /**
+     * Event handler called when the dialog opens, used to manage focus.
+     * Can be prevented with `event.preventDefault()`.
+     */
+    onOpenAutoFocus?:
+      | React.RefObject<HTMLElement | null>
+      | (() => HTMLElement | null | undefined);
+    /**
+     * Event handler called when the dialog closes, used to manage focus.
+     * Can be prevented with `event.preventDefault()`.
+     */
+    onCloseAutoFocus?:
+      | React.RefObject<HTMLElement | null>
+      | (() => HTMLElement | null | undefined);
 
-  /**
-   * The position of the dialog relative to the viewport.
-   * @default "center"
-   */
-  position?: DialogPosition;
-  /**
-   * CSS `width`
-   * @default "medium"
-   */
-  width?: BoxNewProps["width"] | "small" | "medium" | "large";
-  /**
-   * CSS `height`
-   */
-  height?: BoxNewProps["height"] | "small" | "medium" | "large";
-}
+    /**
+     * The position of the dialog relative to the viewport.
+     * @default "center"
+     */
+    position?: DialogPosition;
+    /**
+     * CSS `width`
+     * @default "medium"
+     */
+    width?: BoxNewProps["width"] | "small" | "medium" | "large";
+    /**
+     * CSS `height`
+     */
+    height?: BoxNewProps["height"] | "small" | "medium" | "large";
+  };
 
 /**
  * @see 🏷️ {@link DialogPopupProps}
@@ -70,7 +70,6 @@ const DialogPopupInternal = forwardRef<
 >(
   (
     {
-      children,
       className,
       modal = true,
       closeOnOutsideClick = true,
@@ -279,9 +278,7 @@ const DialogPopupInternal = forwardRef<
               }}
               data-nested-dialog-open={!!nestedOpenDialogCountProp}
               data-nested={!!nested}
-            >
-              {children}
-            </BoxNew>
+            />
           </DismissableLayer>
         </FocusBoundary>
       </FocusGuards>
