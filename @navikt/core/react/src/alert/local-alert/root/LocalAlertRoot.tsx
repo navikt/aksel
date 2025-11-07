@@ -87,7 +87,7 @@ interface LocalAlertComponent
 }
 
 /**
- * A component for displaying important content in your application.
+ * A component for displaying important messages about a certain part of the page.
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/localalert)
  * @see 🏷️ {@link LocalAlertProps}
  * @example
