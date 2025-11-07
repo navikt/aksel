@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.33.1
+
+### Patch Changes
+
+- Portal: Update `<Portal />` to respect dom and render-order. Removed `asChild`-prop. ([#4239](https://github.com/navikt/aksel/pull/4239))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.1
+  - @navikt/aksel-icons@7.33.1
+
 ## 7.33.0
 
 ### Minor Changes
