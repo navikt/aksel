@@ -3,7 +3,6 @@ import React from "react";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Link } from "../../link";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import {
   Root as BaseAlert,
   Close as BaseAlertClose,
@@ -210,36 +209,6 @@ export const WrappingTitle: Story = {
     );
   },
 };
-
-export const Chromatic = renderStoriesForChromatic({
-  Strong,
-  Moderate,
-  SizeSmall,
-  OnlyHeader,
-  CloseButton,
-  WrappingTitle,
-});
-
-export const ChromaticLight = renderStoriesForChromatic({
-  Strong,
-  Moderate,
-  SizeSmall,
-  OnlyHeader,
-  CloseButton,
-  WrappingTitle,
-});
-ChromaticLight.globals = { theme: "light", mode: "darkside" };
-
-export const ChromaticDark = renderStoriesForChromatic({
-  Strong,
-  Moderate,
-  SizeSmall,
-  OnlyHeader,
-  CloseButton,
-  WrappingTitle,
-});
-
-ChromaticDark.globals = { theme: "dark", mode: "darkside" };
 
 function DemoContent() {
   return (
