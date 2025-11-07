@@ -14,12 +14,12 @@ import {
 } from "@floating-ui/react";
 import { format } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
-import { useMergeRefs } from "../util/hooks/useMergeRefs";
-import { useI18n } from "../util/i18n/i18n.hooks";
-import { useTimelineContext } from "./hooks/useTimelineContext";
-import { position } from "./utils/calc";
-import { TimelineComponentTypes } from "./utils/types.internal";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useMergeRefs } from "../../util/hooks/useMergeRefs";
+import { useI18n } from "../../util/i18n/i18n.hooks";
+import { useTimelineContext } from "../hooks/useTimelineContext";
+import { position } from "../utils/calc";
+import { TimelineComponentTypes } from "../utils/types.internal";
 
 export interface TimelinePinProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -40,7 +40,7 @@ export interface PinType
   componentType: TimelineComponentTypes;
 }
 
-export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
+export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
   ({ date, children, ...rest }, ref) => {
     const { cn } = useRenameCSS();
     const { startDate, endDate, direction } = useTimelineContext();
@@ -159,6 +159,4 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
   },
 ) as PinType;
 
-Pin.componentType = "pin";
-
-export default Pin;
+export default PinInternal;
