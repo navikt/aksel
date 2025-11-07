@@ -141,5 +141,17 @@ function useTransitionStatus(
   );
 }
 
-export { useTransitionStatus };
+/**
+ * Creates a single data attribute with optional suffix
+ * (e.g., data-entering-style, data-exiting-style, data-idle-style)
+ */
+function createTransitionStatusAttribute(value?: string): Record<string, true> {
+  if (!value) {
+    return {};
+  }
+
+  return { [`data-${value}-style`]: true };
+}
+
+export { useTransitionStatus, createTransitionStatusAttribute };
 export type { TransitionStatus };

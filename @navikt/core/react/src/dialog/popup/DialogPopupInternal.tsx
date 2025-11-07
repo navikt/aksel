@@ -6,6 +6,7 @@ import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../util/focus-guards/FocusGuards";
 import { useMergeRefs } from "../../util/hooks";
 import { useScrollLock } from "../../util/hooks/useScrollLock";
+import { createTransitionStatusAttribute } from "../../util/hooks/useTransitionStatus";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 /* TODO: Trap-focus now has that aria-hidden error when using hide-elements.. */
@@ -124,10 +125,6 @@ const DialogPopupInternal = forwardRef<
       open,
       referenceElement: popupElement,
     });
-
-    const transitionAttrb = transitionStatus
-      ? { [`data-${transitionStatus}-style`]: true }
-      : {};
 
     const positionDataAttributes =
       typeof position === "string"
@@ -287,7 +284,7 @@ const DialogPopupInternal = forwardRef<
                 `navds-dialog__popup--${size}`,
               )}
               role="dialog"
-              {...transitionAttrb}
+              {...createTransitionStatusAttribute(transitionStatus)}
               {...positionDataAttributes}
               width={translateWidth(width, position)}
               height={translateHeight(height, position)}

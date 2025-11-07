@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../theme/Theme";
 import { useMergeRefs } from "../../util/hooks";
+import { createTransitionStatusAttribute } from "../../util/hooks/useTransitionStatus";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogBackdropInternalProps = Omit<
@@ -28,10 +29,6 @@ const DialogBackdropInternal = forwardRef<
     setBackdropElement,
   );
 
-  const transitionAttrb = transitionStatus
-    ? { [`data-${transitionStatus}-style`]: true }
-    : {};
-
   if (!mounted) {
     return null;
   }
@@ -47,7 +44,7 @@ const DialogBackdropInternal = forwardRef<
         WebkitUserSelect: "none",
       }}
       hidden={nested}
-      {...transitionAttrb}
+      {...createTransitionStatusAttribute(transitionStatus)}
     />
   );
 });
