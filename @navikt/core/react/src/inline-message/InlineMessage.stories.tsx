@@ -64,16 +64,6 @@ export const Compositions: Story = {
   },
 };
 
-export const WrappingTitle: Story = {
-  render: () => {
-    return (
-      <InlineMessage status="warning">
-        <DemoContent />
-      </InlineMessage>
-    );
-  },
-};
-
 export const AsLink: Story = {
   render: () => {
     return (
@@ -87,14 +77,12 @@ export const AsLink: Story = {
 export const Chromatic = renderStoriesForChromatic({
   Default,
   Compositions,
-  WrappingTitle,
   SizeSmall,
 });
 
 export const ChromaticLight = renderStoriesForChromatic({
   Default,
   Compositions,
-  WrappingTitle,
   SizeSmall,
 });
 ChromaticLight.globals = { theme: "light", mode: "darkside" };
@@ -102,7 +90,6 @@ ChromaticLight.globals = { theme: "light", mode: "darkside" };
 export const ChromaticDark = renderStoriesForChromatic({
   Default,
   Compositions,
-  WrappingTitle,
   SizeSmall,
 });
 ChromaticDark.globals = { theme: "dark", mode: "darkside" };
