@@ -9,7 +9,7 @@ type GlobalAlertTitleProps = BaseAlert.TitleProps;
  * ```jsx
  *  <GlobalAlert>
  *    <GlobalAlert.Header>
- *      <GlobalAlert.Title as="h2">Info tittel</GlobalAlert.Title>
+ *      <GlobalAlert.Title as="h2">Info title</GlobalAlert.Title>
  *    </GlobalAlert.Header>
  *  </GlobalAlert>
  * ```

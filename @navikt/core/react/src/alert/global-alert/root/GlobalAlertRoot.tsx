@@ -35,7 +35,7 @@ interface GlobalAlertComponent
    * ```jsx
    *  <GlobalAlert>
    *    <GlobalAlert.Header>
-   *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
+   *      <GlobalAlert.Title>Info title</GlobalAlert.Title>
    *    </GlobalAlert.Header>
    *  </GlobalAlert>
    * ```
@@ -49,7 +49,7 @@ interface GlobalAlertComponent
    * ```jsx
    *  <GlobalAlert>
    *    <GlobalAlert.Header>
-   *      <GlobalAlert.Title as="h2">Info tittel</GlobalAlert.Title>
+   *      <GlobalAlert.Title as="h2">Info title</GlobalAlert.Title>
    *    </GlobalAlert.Header>
    *  </GlobalAlert>
    * ```
@@ -62,10 +62,10 @@ interface GlobalAlertComponent
    * ```jsx
    *  <GlobalAlert>
    *    <GlobalAlert.Header>
-   *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
+   *      <GlobalAlert.Title>Info title</GlobalAlert.Title>
    *    </GlobalAlert.Header>
    *
-   *    <GlobalAlert.Content>Innhold</GlobalAlert.Content>
+   *    <GlobalAlert.Content>Content</GlobalAlert.Content>
    *  </GlobalAlert>
    * ```
    */
@@ -77,7 +77,7 @@ interface GlobalAlertComponent
    * ```jsx
    *  <GlobalAlert>
    *    <GlobalAlert.Header>
-   *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
+   *      <GlobalAlert.Title>Info title</GlobalAlert.Title>
    *     <GlobalAlert.Close onClick={() => alert("Lukket!")} />
    *    </GlobalAlert.Header>
    *  </GlobalAlert>
@@ -94,9 +94,9 @@ interface GlobalAlertComponent
  * ```jsx
  *  <GlobalAlert status="error">
  *    <GlobalAlert.Header>
- *      <GlobalAlert.Title>Alert tittel</GlobalAlert.Title>
+ *      <GlobalAlert.Title>Alert title</GlobalAlert.Title>
  *    </GlobalAlert.Header>
- *    <GlobalAlert.Content>Innhold</GlobalAlert.Content>
+ *    <GlobalAlert.Content>Content</GlobalAlert.Content>
  *  </GlobalAlert>
  * ```
  */

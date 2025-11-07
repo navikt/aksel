@@ -35,7 +35,7 @@ interface LocalAlertComponent
    * ```jsx
    *  <LocalAlert>
    *    <LocalAlert.Header>
-   *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
+   *      <LocalAlert.Title>Info title</LocalAlert.Title>
    *    </LocalAlert.Header>
    *  </LocalAlert>
    * ```
@@ -49,7 +49,7 @@ interface LocalAlertComponent
    * ```jsx
    *  <LocalAlert>
    *    <LocalAlert.Header>
-   *      <LocalAlert.Title as="h2">Info tittel</LocalAlert.Title>
+   *      <LocalAlert.Title as="h2">Info title</LocalAlert.Title>
    *    </LocalAlert.Header>
    *  </LocalAlert>
    * ```
@@ -62,10 +62,10 @@ interface LocalAlertComponent
    * ```jsx
    *  <LocalAlert>
    *    <LocalAlert.Header>
-   *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
+   *      <LocalAlert.Title>Info title</LocalAlert.Title>
    *    </LocalAlert.Header>
    *
-   *    <LocalAlert.Content>Innhold</LocalAlert.Content>
+   *    <LocalAlert.Content>Content</LocalAlert.Content>
    *  </LocalAlert>
    * ```
    */
@@ -77,7 +77,7 @@ interface LocalAlertComponent
    * ```jsx
    *  <LocalAlert>
    *    <LocalAlert.Header>
-   *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
+   *      <LocalAlert.Title>Info title</LocalAlert.Title>
    *     <LocalAlert.Close onClick={() => alert("Lukket!")} />
    *    </LocalAlert.Header>
    *  </LocalAlert>
@@ -94,9 +94,9 @@ interface LocalAlertComponent
  * ```jsx
  *  <LocalAlert status="error">
  *    <LocalAlert.Header>
- *      <LocalAlert.Title>Alert tittel</LocalAlert.Title>
+ *      <LocalAlert.Title>Alert title</LocalAlert.Title>
  *    </LocalAlert.Header>
- *    <LocalAlert.Content>Innhold</LocalAlert.Content>
+ *    <LocalAlert.Content>Content</LocalAlert.Content>
  *  </LocalAlert>
  * ```
  */

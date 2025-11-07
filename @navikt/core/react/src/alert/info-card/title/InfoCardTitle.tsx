@@ -9,7 +9,7 @@ type InfoCardTitleProps = BaseAlert.TitleProps;
  * ```jsx
  *  <InfoCard>
  *    <InfoCard.Header>
- *      <InfoCard.Title as="h2">Info tittel</InfoCard.Title>
+ *      <InfoCard.Title as="h2">Info title</InfoCard.Title>
  *    </InfoCard.Header>
  *  </InfoCard>
  * ```

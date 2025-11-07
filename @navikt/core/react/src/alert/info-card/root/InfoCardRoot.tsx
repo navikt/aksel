@@ -25,7 +25,7 @@ interface InfoCardComponent
    * ```jsx
    *  <InfoCard>
    *    <InfoCard.Header icon={<InformationSquareIcon />}>
-   *      <InfoCard.Title>Info tittel</InfoCard.Title>
+   *      <InfoCard.Title>Info title</InfoCard.Title>
    *    </InfoCard.Header>
    *  </InfoCard>
    * ```
@@ -39,7 +39,7 @@ interface InfoCardComponent
    * ```jsx
    *  <InfoCard>
    *    <InfoCard.Header>
-   *      <InfoCard.Title as="h2">Info tittel</InfoCard.Title>
+   *      <InfoCard.Title as="h2">Info title</InfoCard.Title>
    *    </InfoCard.Header>
    *  </InfoCard>
    * ```
@@ -52,10 +52,10 @@ interface InfoCardComponent
    * ```jsx
    *  <InfoCard>
    *    <InfoCard.Header>
-   *      <InfoCard.Title>Info tittel</InfoCard.Title>
+   *      <InfoCard.Title>Info title</InfoCard.Title>
    *    </InfoCard.Header>
    *
-   *    <InfoCard.Content>Innhold</InfoCard.Content>
+   *    <InfoCard.Content>Content</InfoCard.Content>
    *  </InfoCard>
    * ```
    */
@@ -70,9 +70,9 @@ interface InfoCardComponent
  * ```jsx
  *  <InfoCard data-color="info">
  *    <InfoCard.Header icon={<InformationSquareIcon />}>
- *      <InfoCard.Title>Info tittel</InfoCard.Title>
+ *      <InfoCard.Title>Info title</InfoCard.Title>
  *    </InfoCard.Header>
- *    <InfoCard.Content>Innhold</InfoCard.Content>
+ *    <InfoCard.Content>Content</InfoCard.Content>
  *  </InfoCard>
  * ```
  */

@@ -13,7 +13,7 @@ type BaseAlertCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
  * ```jsx
  *  <BaseAlert>
  *    <BaseAlert.Header>
- *      <BaseAlert.Title>Info tittel</BaseAlert.Title>
+ *      <BaseAlert.Title>Info title</BaseAlert.Title>
  *      <BaseAlert.Close onClick={...} />
  *    </BaseAlert.Header>
  *  </BaseAlert>

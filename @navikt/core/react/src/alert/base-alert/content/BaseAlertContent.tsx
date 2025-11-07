@@ -11,10 +11,10 @@ interface BaseAlertContentProps extends React.HTMLAttributes<HTMLDivElement> {
  * ```jsx
  *  <BaseAlert>
  *    <BaseAlert.Header>
- *      <BaseAlert.Title>Info tittel</BaseAlert.Title>
+ *      <BaseAlert.Title>Info title</BaseAlert.Title>
  *    </BaseAlert.Header>
  *
- *    <BaseAlert.Content>Innhold</BaseAlert.Content>
+ *    <BaseAlert.Content>Content</BaseAlert.Content>
  *  </BaseAlert>
  * ```
  */

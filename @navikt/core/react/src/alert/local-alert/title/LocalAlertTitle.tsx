@@ -9,7 +9,7 @@ type LocalAlertTitleProps = BaseAlert.TitleProps;
  * ```jsx
  *  <LocalAlert>
  *    <LocalAlert.Header>
- *      <LocalAlert.Title as="h2">Info tittel</LocalAlert.Title>
+ *      <LocalAlert.Title as="h2">Info title</LocalAlert.Title>
  *    </LocalAlert.Header>
  *  </LocalAlert>
  * ```

@@ -8,10 +8,10 @@ type GlobalAlertContentProps = BaseAlert.ContentProps;
  * ```jsx
  *  <GlobalAlert>
  *    <GlobalAlert.Header>
- *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
+ *      <GlobalAlert.Title>Info title</GlobalAlert.Title>
  *    </GlobalAlert.Header>
  *
- *    <GlobalAlert.Content>Innhold</GlobalAlert.Content>
+ *    <GlobalAlert.Content>Content</GlobalAlert.Content>
  *  </GlobalAlert>
  * ```
  */

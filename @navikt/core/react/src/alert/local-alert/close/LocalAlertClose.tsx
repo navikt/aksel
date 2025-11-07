@@ -8,7 +8,7 @@ type LocalAlertCloseProps = BaseAlert.CloseProps;
  * ```jsx
  *  <LocalAlert>
  *    <LocalAlert.Header>
- *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
+ *      <LocalAlert.Title>Info title</LocalAlert.Title>
  *     <LocalAlert.Close onClick={() => alert("Lukket!")} />
  *    </LocalAlert.Header>
  *  </LocalAlert>

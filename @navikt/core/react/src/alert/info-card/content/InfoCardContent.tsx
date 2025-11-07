@@ -8,10 +8,10 @@ type InfoCardContentProps = BaseAlert.ContentProps;
  * ```jsx
  *  <InfoCard>
  *    <InfoCard.Header>
- *      <InfoCard.Title>Info tittel</InfoCard.Title>
+ *      <InfoCard.Title>Info title</InfoCard.Title>
  *    </InfoCard.Header>
  *
- *    <InfoCard.Content>Innhold</InfoCard.Content>
+ *    <InfoCard.Content>Content</InfoCard.Content>
  *  </InfoCard>
  * ```
  */

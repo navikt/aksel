@@ -8,7 +8,7 @@ type GlobalAlertCloseProps = BaseAlert.CloseProps;
  * ```jsx
  *  <GlobalAlert>
  *    <GlobalAlert.Header>
- *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
+ *      <GlobalAlert.Title>Info title</GlobalAlert.Title>
  *     <GlobalAlert.Close onClick={() => alert("Lukket!")} />
  *    </GlobalAlert.Header>
  *  </GlobalAlert>

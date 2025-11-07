@@ -9,7 +9,7 @@ type LocalAlertHeaderProps = Omit<BaseAlert.HeaderProps, "icon">;
  * ```jsx
  *  <LocalAlert>
  *    <LocalAlert.Header>
- *      <LocalAlert.Title>Info tittel</LocalAlert.Title>
+ *      <LocalAlert.Title>Info title</LocalAlert.Title>
  *    </LocalAlert.Header>
  *  </LocalAlert>
  * ```

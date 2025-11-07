@@ -19,7 +19,7 @@ interface BaseAlertTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
  * ```jsx
  *  <BaseAlert>
  *    <BaseAlert.Header>
- *      <BaseAlert.Title as="h2">Info tittel</BaseAlert.Title>
+ *      <BaseAlert.Title as="h2">Info title</BaseAlert.Title>
  *    </BaseAlert.Header>
  *  </BaseAlert>
  * ```

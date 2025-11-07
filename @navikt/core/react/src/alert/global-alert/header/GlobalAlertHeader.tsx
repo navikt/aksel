@@ -9,7 +9,7 @@ type GlobalAlertHeaderProps = Omit<BaseAlert.HeaderProps, "icon">;
  * ```jsx
  *  <GlobalAlert status="success">
  *    <GlobalAlert.Header>
- *      <GlobalAlert.Title>Info tittel</GlobalAlert.Title>
+ *      <GlobalAlert.Title>Info title</GlobalAlert.Title>
  *    </GlobalAlert.Header>
  *  </GlobalAlert>
  * ```
