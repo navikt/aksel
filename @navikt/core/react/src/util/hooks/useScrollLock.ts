@@ -19,11 +19,20 @@ function hasInsetScrollbars(referenceElement: Element | null) {
 function preventScrollBasic(referenceElement: Element | null) {
   const doc = ownerDocument(referenceElement);
   const html = doc.documentElement;
-  const originalOverflow = html.style.overflow;
-  html.style.overflow = "hidden";
+  const body = doc.body;
+
+  /**
+   * If an `overflow` style is present on <html>, we need to lock it, because a lock on <body>
+   * won't have any effect.
+   * But if <body> has an `overflow` style (like `overflow-x: hidden`), we need to lock it
+   * instead, as sticky elements shift otherwise.
+   */
+  const elementToLock = isOverflowElement(html) ? html : body;
+  const originalOverflow = elementToLock.style.overflow;
+  elementToLock.style.overflow = "hidden";
 
   return () => {
-    html.style.overflow = originalOverflow;
+    elementToLock.style.overflow = originalOverflow;
   };
 }
 
@@ -312,6 +321,16 @@ function useScrollLock(params: {
 
     return SCROLL_LOCKER.acquire(referenceElement);
   }, [enabled, referenceElement]);
+}
+
+const invalidOverflowDisplayValues = new Set(["inline", "contents"]);
+
+function isOverflowElement(element: Element): boolean {
+  const { overflow, overflowX, overflowY, display } = getComputedStyle(element);
+  return (
+    /auto|scroll|overlay|hidden|clip/.test(overflow + overflowY + overflowX) &&
+    !invalidOverflowDisplayValues.has(display)
+  );
 }
 
 export { useScrollLock };
