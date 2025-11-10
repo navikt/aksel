@@ -20,7 +20,7 @@
   "devDependencies": {
     "@figma/plugin-typings": "^1.100.2",
     "@svgr/core": "^8.1.0",
-    "@types/node": "^18.15.11",
+    "@types/node": "^24.10.0",
     "@types/postcss-url": "^10.0.4",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.0.0",
