@@ -160,7 +160,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@changesets/cli": "2.29.7",
-    "@eslint/js": "^9.39.0",
+    "@eslint/js": "^9.39.1",
     "@storybook/addon-a11y": "^9.1.15",
     "@storybook/addon-docs": "^9.1.15",
     "@storybook/addon-themes": "^9.1.15",
@@ -175,7 +175,7 @@
     "chromatic": "13.3.3",
     "concurrently": "9.2.1",
     "cross-env": "^10.0.0",
-    "eslint": "^9.39.0",
+    "eslint": "^9.39.1",
     "eslint-plugin-aksel-local": "*",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
