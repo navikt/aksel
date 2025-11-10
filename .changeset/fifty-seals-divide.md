@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-useRangeDatepicker: Improved logic for default month
+useRangeDatepicker: `defaultSelected` no longer overrides `defaultMonth` when `defaultSelected.from` is `undefined`
