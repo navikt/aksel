@@ -27,19 +27,21 @@ type Story = StoryObj<typeof BaseAlert>;
 export const Default: Story = {
   render: (props) => {
     return (
-      <BaseAlert
-        {...props}
-        status={props.status ?? "success"}
-        size={props.size}
-      >
-        <BaseAlertHeader>
-          <BaseAlertTitle>{props.title ?? "BaseAlert title"}</BaseAlertTitle>
-          <BaseAlertClose onClick={() => alert("Lukket!")} />
-        </BaseAlertHeader>
-        <BaseAlertContent>
-          {props.children ?? "BaseAlert content"}
-        </BaseAlertContent>
-      </BaseAlert>
+      <div>
+        <BaseAlert
+          {...props}
+          status={props.status ?? "success"}
+          size={props.size}
+        >
+          <BaseAlertHeader>
+            <BaseAlertTitle>{props.title ?? "BaseAlert title"}</BaseAlertTitle>
+            <BaseAlertClose onClick={() => alert("Lukket!")} />
+          </BaseAlertHeader>
+          <BaseAlertContent>
+            {props.children ?? "BaseAlert content"}
+          </BaseAlertContent>
+        </BaseAlert>
+      </div>
     );
   },
 
