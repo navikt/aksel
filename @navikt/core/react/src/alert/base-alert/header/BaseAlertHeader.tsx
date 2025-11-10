@@ -31,7 +31,7 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
   ) => {
     const { cn } = useRenameCSS();
     const { status, color, statusId } = useBaseAlert();
-    const translate = useI18n("Alert");
+    const translate = useI18n("global");
 
     const headerIcon =
       icon ?? (status ? <BaseAlertStatusIcon status={status} /> : null);

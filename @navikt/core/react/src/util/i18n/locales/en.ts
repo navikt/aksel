@@ -8,11 +8,6 @@ export default {
     showLess: "Show less",
     readOnly: "Read-only",
     close: "Close",
-  },
-
-  Alert: {
-    closeAlert: "Close alert",
-    closeMessage: "Close message",
     error: "Error",
     info: "Information",
     success: "Success",

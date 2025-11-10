@@ -20,7 +20,7 @@ function InlineMessageIcon({
 }: {
   status: "info" | "success" | "warning" | "error";
 }) {
-  const translate = useI18n("Alert");
+  const translate = useI18n("global");
   const { cn } = useRenameCSS();
 
   if (!(status in STATUS_ICONS)) {

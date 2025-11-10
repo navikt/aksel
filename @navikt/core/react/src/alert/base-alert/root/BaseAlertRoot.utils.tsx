@@ -56,7 +56,7 @@ function BaseAlertStatusIcon({
   status: BaseAlertContextProps["status"];
   fill?: boolean;
 }) {
-  const translate = useI18n("Alert");
+  const translate = useI18n("global");
 
   if (!status) {
     return null;
