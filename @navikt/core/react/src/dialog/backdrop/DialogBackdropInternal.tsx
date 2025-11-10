@@ -29,6 +29,7 @@ const DialogBackdropInternal = forwardRef<
     setBackdropElement,
   );
 
+  /* TODO: Remove */
   if (!mounted) {
     return null;
   }
@@ -39,6 +40,7 @@ const DialogBackdropInternal = forwardRef<
       ref={mergedRefs}
       className={cn(className, "navds-dialog__backdrop")}
       role="presentation"
+      /* TODO: Move to CSS */
       style={{
         userSelect: "none",
         WebkitUserSelect: "none",

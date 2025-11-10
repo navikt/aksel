@@ -26,6 +26,7 @@
 
   &[data-entering-style],
   &[data-exiting-style] {
+    /* TODO: comment */
     opacity: 0.001;
     transform: var(--__axc-dialog-transform);
   }

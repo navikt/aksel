@@ -201,6 +201,7 @@ const DialogPopupInternal = forwardRef<
               }
 
               /**
+               * TODO: test if needed
                * On Safari if the trigger is inside a container with tabIndex={0}, when clicked
                * we will get the pointer down outside event on the trigger, but then a subsequent
                * focus outside event on the container, we ignore any focus outside event when we've
@@ -233,6 +234,7 @@ const DialogPopupInternal = forwardRef<
                 originalEvent.button === 0 && originalEvent.ctrlKey === true;
               const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
 
+              /* TODO: Check middle mouse click */
               /**
                * If the event is a right-click, we shouldn't close because
                * it is effectively as if we right-clicked the `Overlay`.
@@ -258,6 +260,7 @@ const DialogPopupInternal = forwardRef<
           >
             <BoxNew
               aria-labelledby={ariaLabelledbyProp ?? titleId}
+              /* TODO: Remove? */
               aria-describedby={ariaDescribedbyProp ?? descriptionId}
               id={id ?? popupId}
               {...restProps}
