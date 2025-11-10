@@ -28,17 +28,30 @@ type Story = StoryObj<typeof GlobalAlert>;
 export const Default: Story = {
   render: (props) => {
     return (
-      <GlobalAlert status={props.status ?? "announcement"} size={props.size}>
-        <GlobalAlertHeader>
-          <GlobalAlertTitle>
-            {props.title ?? "GlobalAlert title"}
-          </GlobalAlertTitle>
-          <GlobalAlertClose onClick={() => alert("Lukket!")} />
-        </GlobalAlertHeader>
-        <GlobalAlertContent>
-          {props.children ?? "GlobalAlert content"}
-        </GlobalAlertContent>
-      </GlobalAlert>
+      <div>
+        <GlobalAlert status={props.status ?? "announcement"} size={props.size}>
+          <GlobalAlertHeader>
+            <GlobalAlertTitle>
+              {props.title ?? "GlobalAlert title"}
+            </GlobalAlertTitle>
+            <GlobalAlertClose onClick={() => alert("Lukket!")} />
+          </GlobalAlertHeader>
+          <GlobalAlertContent>
+            {props.children ?? "GlobalAlert content"}
+          </GlobalAlertContent>
+        </GlobalAlert>
+        <GlobalAlert status={props.status ?? "announcement"} size={props.size}>
+          <GlobalAlertHeader>
+            <GlobalAlertTitle>
+              {props.title ?? "GlobalAlert title"}
+            </GlobalAlertTitle>
+            <GlobalAlertClose onClick={() => alert("Lukket!")} />
+          </GlobalAlertHeader>
+          <GlobalAlertContent>
+            {props.children ?? "GlobalAlert content"}
+          </GlobalAlertContent>
+        </GlobalAlert>
+      </div>
     );
   },
 

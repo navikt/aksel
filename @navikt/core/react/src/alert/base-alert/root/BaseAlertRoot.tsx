@@ -72,7 +72,7 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
         color={alertColor}
         statusId={statusId}
       >
-        <section
+        <div
           ref={forwardedRef}
           aria-label={status ? translate(status) : undefined}
           {...restProps}
@@ -83,7 +83,7 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
           data-global={global}
         >
           {children}
-        </section>
+        </div>
       </BaseAlertProvider>
     );
   },
