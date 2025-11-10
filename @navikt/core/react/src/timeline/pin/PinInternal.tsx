@@ -19,7 +19,6 @@ import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 import { position } from "../utils/calc";
-import { TimelineComponentTypes } from "../utils/types.internal";
 
 export interface TimelinePinProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -31,13 +30,6 @@ export interface TimelinePinProps
    * Content in Pin Popover.
    */
   children?: React.ReactNode;
-}
-
-export interface PinType
-  extends React.ForwardRefExoticComponent<
-    TimelinePinProps & React.RefAttributes<HTMLButtonElement>
-  > {
-  componentType: TimelineComponentTypes;
 }
 
 export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
@@ -157,6 +149,6 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
       </>
     );
   },
-) as PinType;
+);
 
 export default PinInternal;

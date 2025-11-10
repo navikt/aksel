@@ -2,19 +2,7 @@ import { isBefore } from "date-fns";
 import React, { forwardRef } from "react";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 import { TimelineComponentTypes } from "../utils/types.internal";
-import PinInternal from "./PinInternal";
-
-export interface TimelinePinProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
-  /**
-   * Date position for the pin.
-   */
-  date: Date;
-  /**
-   * Content in Pin Popover.
-   */
-  children?: React.ReactNode;
-}
+import PinInternal, { type TimelinePinProps } from "./PinInternal";
 
 export interface PinType
   extends React.ForwardRefExoticComponent<
@@ -41,3 +29,5 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
 Pin.componentType = "pin";
 
 export default Pin;
+
+export type { TimelinePinProps };
