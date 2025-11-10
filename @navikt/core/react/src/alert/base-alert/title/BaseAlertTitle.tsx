@@ -1,6 +1,8 @@
+import cl from "clsx";
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { BodyShort } from "../../../typography";
+import { useId } from "../../../util";
 import { useBaseAlert } from "../root/BaseAlertRoot.context";
 
 interface BaseAlertTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
@@ -26,11 +28,19 @@ interface BaseAlertTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
  */
 const BaseAlertTitle = forwardRef<HTMLHeadingElement, BaseAlertTitleProps>(
   (
-    { children, className, as = "h2", ...restProps }: BaseAlertTitleProps,
+    {
+      children,
+      className,
+      as = "h2",
+      id: idProp,
+      ...restProps
+    }: BaseAlertTitleProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
-    const { size } = useBaseAlert();
+    const { size, statusId } = useBaseAlert();
+
+    const titleId = useId(idProp);
 
     return (
       <BodyShort
@@ -40,6 +50,8 @@ const BaseAlertTitle = forwardRef<HTMLHeadingElement, BaseAlertTitleProps>(
         size={size === "medium" ? "large" : "medium"}
         weight="semibold"
         className={cn(className, "navds-base-alert__title")}
+        id={titleId}
+        aria-labelledby={cl(statusId, titleId)}
       >
         {children}
       </BodyShort>

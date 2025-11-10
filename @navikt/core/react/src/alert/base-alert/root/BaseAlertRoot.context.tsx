@@ -6,6 +6,7 @@ type BaseAlertContextProps = {
   statusType: "alert" | "message";
   status?: "announcement" | "success" | "warning" | "error";
   color: AkselColor | undefined;
+  statusId: string;
 };
 
 const [BaseAlertProvider, useBaseAlert] = createContext<BaseAlertContextProps>({

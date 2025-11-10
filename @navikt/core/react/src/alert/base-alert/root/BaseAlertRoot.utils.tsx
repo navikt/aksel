@@ -64,7 +64,7 @@ function BaseAlertStatusIcon({
 
   const Icon = fill ? STATUS_ICONS[status].fill : STATUS_ICONS[status].outline;
 
-  return <Icon title={translate(status)} />;
+  return <Icon title={translate(status)} aria-hidden />;
 }
 
 export { baseAlertStatusToDataColor, BaseAlertStatusIcon };

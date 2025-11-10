@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { AkselColor } from "../../../types";
+import { useId } from "../../../util";
 import {
   type BaseAlertContextProps,
   BaseAlertProvider,
@@ -57,6 +58,8 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
   ) => {
     const { cn } = useRenameCSS();
 
+    const statusId = useId();
+
     const alertColor = status ? baseAlertStatusToDataColor(status) : dataColor;
 
     return (
@@ -65,6 +68,7 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
         statusType={statusType}
         status={status}
         color={alertColor}
+        statusId={statusId}
       >
         <div
           ref={forwardedRef}

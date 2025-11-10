@@ -1,5 +1,7 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
+import { BodyShort } from "../../../typography";
+import { useI18n } from "../../../util/i18n/i18n.hooks";
 import { useBaseAlert } from "../root/BaseAlertRoot.context";
 import { BaseAlertStatusIcon } from "../root/BaseAlertRoot.utils";
 
@@ -28,7 +30,8 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
-    const { status, color } = useBaseAlert();
+    const { status, color, statusId } = useBaseAlert();
+    const translate = useI18n("Alert");
 
     const headerIcon =
       icon ?? (status ? <BaseAlertStatusIcon status={status} /> : null);
@@ -42,6 +45,11 @@ const BaseAlertHeader = forwardRef<HTMLDivElement, BaseAlertHeaderProps>(
       >
         {headerIcon && (
           <div className={cn("navds-base-alert__icon")}>{headerIcon}</div>
+        )}
+        {status && (
+          <BodyShort id={statusId} aria-hidden visuallyHidden>
+            {`${translate(status)}: `}
+          </BodyShort>
         )}
         {children}
       </div>
