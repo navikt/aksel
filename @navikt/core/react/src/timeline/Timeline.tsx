@@ -2,7 +2,6 @@ import { endOfDay, isSameDay, startOfDay } from "date-fns";
 import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { AxisLabels } from "./AxisLabels";
-import Pin, { PinType } from "./Pin";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { RowContext } from "./hooks/useRowContext";
 import { TimelineContext } from "./hooks/useTimelineContext";
@@ -12,6 +11,7 @@ import {
   useTimelineRows,
 } from "./hooks/useTimelineRows";
 import Period, { PeriodType } from "./period";
+import Pin, { PinType } from "./pin/Pin";
 import { parseRows } from "./utils/timeline";
 import { AxisLabelTemplates } from "./utils/types.external";
 import Zoom, { ZoomType } from "./zoom";
