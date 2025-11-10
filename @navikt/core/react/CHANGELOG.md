@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 7.33.2
+
+### Patch Changes
+
+- Timeline: Pins before or after date-range are now hidden. ([#4266](https://github.com/navikt/aksel/pull/4266))
+
+- useRangeDatepicker: `defaultSelected` no longer overrides `defaultMonth` when `defaultSelected.from` is `undefined` ([#4267](https://github.com/navikt/aksel/pull/4267))
+
+- Modal: Improve scroll-lock interaction for sticky elements. ([#4269](https://github.com/navikt/aksel/pull/4269))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.2
+  - @navikt/aksel-icons@7.33.2
+
 ## 7.33.1
 
 ### Patch Changes
