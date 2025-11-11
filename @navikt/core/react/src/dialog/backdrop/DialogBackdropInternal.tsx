@@ -20,7 +20,7 @@ const DialogBackdropInternal = forwardRef<
   DialogBackdropInternalProps
 >(({ className, ...restProps }, forwardedRef) => {
   const { cn } = useRenameCSS();
-  const { mounted, transitionStatus, nested, backdropRef, setBackdropElement } =
+  const { transitionStatus, nested, backdropRef, setBackdropElement } =
     useDialogContext();
 
   const mergedRefs = useMergeRefs(
@@ -28,11 +28,6 @@ const DialogBackdropInternal = forwardRef<
     backdropRef,
     setBackdropElement,
   );
-
-  /* TODO: Remove */
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <div
