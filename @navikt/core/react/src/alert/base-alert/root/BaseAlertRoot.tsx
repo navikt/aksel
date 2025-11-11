@@ -2,7 +2,6 @@ import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { AkselColor } from "../../../types";
 import { useId } from "../../../util";
-import { useI18n } from "../../../util/i18n/i18n.hooks";
 import {
   type BaseAlertContextProps,
   BaseAlertProvider,
@@ -60,7 +59,6 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
     const { cn } = useRenameCSS();
 
     const statusId = useId();
-    const translate = useI18n("global");
 
     const alertColor = status ? baseAlertStatusToDataColor(status) : dataColor;
 
@@ -74,7 +72,6 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
       >
         <div
           ref={forwardedRef}
-          aria-label={status ? translate(status) : undefined}
           {...restProps}
           className={cn(className, "navds-base-alert")}
           data-size={size}

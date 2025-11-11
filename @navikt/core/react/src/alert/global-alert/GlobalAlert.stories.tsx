@@ -27,30 +27,26 @@ type Story = StoryObj<typeof GlobalAlert>;
 
 export const Default: Story = {
   render: (props) => {
+    const [open, setOpen] = React.useState(false);
     return (
       <div>
-        <GlobalAlert status={props.status ?? "announcement"} size={props.size}>
-          <GlobalAlertHeader>
-            <GlobalAlertTitle>
-              {props.title ?? "GlobalAlert title"}
-            </GlobalAlertTitle>
-            <GlobalAlertClose onClick={() => alert("Lukket!")} />
-          </GlobalAlertHeader>
-          <GlobalAlertContent>
-            {props.children ?? "GlobalAlert content"}
-          </GlobalAlertContent>
-        </GlobalAlert>
-        <GlobalAlert status={props.status ?? "announcement"} size={props.size}>
-          <GlobalAlertHeader>
-            <GlobalAlertTitle>
-              {props.title ?? "GlobalAlert title"}
-            </GlobalAlertTitle>
-            <GlobalAlertClose onClick={() => alert("Lukket!")} />
-          </GlobalAlertHeader>
-          <GlobalAlertContent>
-            {props.children ?? "GlobalAlert content"}
-          </GlobalAlertContent>
-        </GlobalAlert>
+        <Button onClick={() => setOpen(!open)}>toggle</Button>
+        {open && (
+          <GlobalAlert
+            status={props.status ?? "announcement"}
+            size={props.size}
+          >
+            <GlobalAlertHeader>
+              <GlobalAlertTitle>
+                {props.title ?? "GlobalAlert title"}
+              </GlobalAlertTitle>
+              <GlobalAlertClose onClick={() => alert("Lukket!")} />
+            </GlobalAlertHeader>
+            <GlobalAlertContent>
+              {props.children ?? "GlobalAlert content"}
+            </GlobalAlertContent>
+          </GlobalAlert>
+        )}
       </div>
     );
   },
