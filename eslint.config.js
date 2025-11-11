@@ -35,11 +35,15 @@ module.exports = tseslint.config([
     "examples/referansesider",
     "examples/astro/.astro",
     ".yarn",
+    "**/next-env.d.ts",
+    "**/query-types.ts",
+    /* TODO: Remove after update */
+    "**/website/**",
   ]),
   js.configs.recommended,
   reactPlugin.configs.flat.recommended,
   //reactPlugin.configs.flat["jsx-runtime"], // Not sure if this will cause problems for projects not using the new JSX transform
-  reactHooks.configs["recommended-latest"],
+  reactHooks.configs.flat["recommended-latest"],
   jsxA11y.flatConfigs.recommended,
   storybook.configs["flat/recommended"],
   importPlugin.flatConfigs.recommended,
