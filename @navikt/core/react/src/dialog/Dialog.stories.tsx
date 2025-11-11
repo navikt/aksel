@@ -325,7 +325,7 @@ export const DemoCloseButtonFocusDialog: Story = {
           <DialogPopup
             className="dialogCSS"
             aria-labelledby="ha"
-            onOpenAutoFocus={closeRef}
+            initialFocus={closeRef}
           >
             <h1 id="ha">Headingtekst som er h1</h1>
             <DialogClose ref={closeRef}>Close</DialogClose>

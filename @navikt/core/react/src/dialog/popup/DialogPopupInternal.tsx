@@ -30,14 +30,14 @@ type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
      * Event handler called when the dialog opens, used to manage focus.
      * Can be prevented with `event.preventDefault()`.
      */
-    onOpenAutoFocus?:
+    initialFocus?:
       | React.RefObject<HTMLElement | null>
       | (() => HTMLElement | null | undefined);
     /**
      * Event handler called when the dialog closes, used to manage focus.
      * Can be prevented with `event.preventDefault()`.
      */
-    onCloseAutoFocus?:
+    returnFocus?:
       | React.RefObject<HTMLElement | null>
       | (() => HTMLElement | null | undefined);
 
@@ -72,8 +72,8 @@ const DialogPopupInternal = forwardRef<
       className,
       modal = true,
       closeOnOutsideClick = true,
-      onOpenAutoFocus: onOpenAutoFocusProp,
-      onCloseAutoFocus,
+      initialFocus: initialFocusProp,
+      returnFocus: returnFocusProp,
       position = "center",
       width = "medium",
       height,
@@ -122,16 +122,16 @@ const DialogPopupInternal = forwardRef<
     });
 
     const resolvedInitialFocus =
-      onOpenAutoFocusProp === undefined ? popupRef : onOpenAutoFocusProp;
+      initialFocusProp === undefined ? popupRef : initialFocusProp;
 
     const resolvedReturnFocus = () => {
-      if (onCloseAutoFocus) {
+      if (returnFocusProp) {
         hasInteractedOutsideRef.current = false;
         hasPointerDownOutsideRef.current = false;
 
-        return typeof onCloseAutoFocus === "function"
-          ? onCloseAutoFocus()
-          : onCloseAutoFocus.current;
+        return typeof returnFocusProp === "function"
+          ? returnFocusProp()
+          : returnFocusProp.current;
       }
 
       /**
