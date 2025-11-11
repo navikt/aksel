@@ -13,41 +13,33 @@ export const artikkelPreview = (_type: string, threshold: number = 12) => {
     preview: {
       select: {
         heading: "heading",
-        tema: "tema.0.title",
         kategori: "kategori",
         type: "_type",
-        updateInfo: "updateInfo.lastVerified",
+        lastVerified: "updateInfo.lastVerified",
       },
       prepare(selection) {
-        const { heading, tema, kategori, type, updateInfo } = selection;
+        const { heading, kategori, type, lastVerified } = selection;
         if (
           ["ds_artikkel", "aksel_artikkel", "komponent_artikkel"].includes(
             type,
           ) &&
-          updateInfo
+          lastVerified
         ) {
+          const markAsOutdated = isAfter(lastVerified, threshold);
           return {
             title: heading,
-            subtitle: `${
-              isAfter(updateInfo, threshold) ? "UTDATERT |" : ""
-            }  ${_type} ${
-              tema ?? kategori
-                ? `${(tema ?? kategori) && "/ "}${tema ?? kategori ?? ``}`
-                : ""
+            subtitle: `${markAsOutdated ? "UTDATERT |" : ""} ${_type} ${
+              kategori ? `/ ${kategori}` : ""
             }`,
             media: () =>
-              isAfter(updateInfo, threshold) ? (
+              markAsOutdated ? (
                 <HourglassBottomFilledIcon aria-hidden />
               ) : undefined,
           };
         }
         return {
           title: heading,
-          subtitle: `${_type} ${
-            tema ?? kategori
-              ? `${(tema ?? kategori) && "/ "}${tema ?? kategori ?? ``}`
-              : ""
-          }`,
+          subtitle: `${_type} ${kategori ? `/ ${kategori}` : ""}`,
         };
       },
     },
