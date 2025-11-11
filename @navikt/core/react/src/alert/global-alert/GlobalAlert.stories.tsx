@@ -28,9 +28,16 @@ type Story = StoryObj<typeof GlobalAlert>;
 export const Default: Story = {
   render: (props) => {
     const [open, setOpen] = React.useState(false);
+
+    /* useEffect(() => {
+      setTimeout(() => {
+        setOpen(true);
+      }, 3000);
+    }, []); */
+
     return (
       <div>
-        <Button onClick={() => setOpen(!open)}>toggle</Button>
+        <button onClick={() => setOpen(!open)}>toggle</button>
         {open && (
           <GlobalAlert
             status={props.status ?? "announcement"}
