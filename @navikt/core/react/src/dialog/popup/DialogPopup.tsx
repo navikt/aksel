@@ -14,7 +14,7 @@ type DialogPopupProps = DialogPopupInternalProps &
      * Adds a backdrop behind the dialog popup.
      * @default true
      */
-    hasBackdrop?: boolean;
+    withBackdrop?: boolean;
   };
 
 /**
@@ -25,7 +25,7 @@ type DialogPopupProps = DialogPopupInternalProps &
  */
 const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
   (
-    { hasBackdrop = true, rootElement, position, ...restProps },
+    { withBackdrop = true, rootElement, position, ...restProps },
     forwardedRef,
   ) => {
     const { mounted } = useDialogContext();
@@ -36,7 +36,9 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
 
     return (
       <Portal rootElement={rootElement}>
-        {hasBackdrop && position !== "fullscreen" && <DialogBackdropInternal />}
+        {withBackdrop && position !== "fullscreen" && (
+          <DialogBackdropInternal />
+        )}
         <DialogPopupInternal
           ref={forwardedRef}
           {...restProps}

@@ -805,7 +805,7 @@ function BaseDialogComponent({
         className="popupCSS"
         data-testid="popup"
         {...popupProps}
-        hasBackdrop={backdrop}
+        withBackdrop={backdrop}
       >
         {nested ? (
           <Dialog>

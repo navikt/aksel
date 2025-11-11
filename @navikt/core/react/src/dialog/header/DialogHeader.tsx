@@ -14,7 +14,7 @@ type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement> &
      * Will trigger `onOpenChange` when clicked.
      * @default true
      */
-    hasCloseButton?: boolean;
+    withClosebutton?: boolean;
   };
 
 /**
@@ -25,7 +25,7 @@ type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement> &
  */
 const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
   (
-    { className, children, hasCloseButton = true, asChild, ...restProps },
+    { className, children, withClosebutton = true, asChild, ...restProps },
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
@@ -42,7 +42,7 @@ const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
         >
           {children}
         </Component>
-        {hasCloseButton && (
+        {withClosebutton && (
           <DialogClose asChild>
             <Button
               type="button"

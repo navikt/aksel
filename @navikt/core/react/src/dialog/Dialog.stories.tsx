@@ -47,7 +47,7 @@ export const Default = {
       <Dialog defaultOpen={args.defaultOpen} size={args.size}>
         <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogPopup
-          hasBackdrop={args.backdrop}
+          withBackdrop={args.backdrop}
           className="dialogCSS"
           aria-labelledby="ha"
           position={args.position}
@@ -516,7 +516,7 @@ export const TrapFocusOutsideClick: Story = {
             className="dialogCSS"
             modal="trap-focus"
             closeOnOutsideClick={false}
-            hasBackdrop={false}
+            withBackdrop={false}
           >
             Drawer content
             <DialogClose>Close</DialogClose>
@@ -542,7 +542,7 @@ export const NestedTrapFocusOutsideClick: Story = {
           <DialogPopup
             className="dialogCSS"
             modal="trap-focus"
-            hasBackdrop={false}
+            withBackdrop={false}
           >
             <Dialog>
               <DialogTrigger>Open Dialog2</DialogTrigger>
@@ -550,7 +550,7 @@ export const NestedTrapFocusOutsideClick: Story = {
               <DialogPopup
                 className="dialogCSS"
                 modal="trap-focus"
-                hasBackdrop={false}
+                withBackdrop={false}
               >
                 Drawer content2
                 <DialogClose>Close2</DialogClose>
