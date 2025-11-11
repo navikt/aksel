@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import * as Icons from "@navikt/aksel-icons";
 import { AirplaneIcon } from "@navikt/aksel-icons";
 import type { AkselIcon } from "@navikt/aksel-icons/metadata";
@@ -44,7 +44,7 @@ function IconPageIconDetails({
       }),
     );
 
-    setDownloadLink(url);
+    startTransition(() => setDownloadLink(url));
 
     return () => {
       URL.revokeObjectURL(url);
