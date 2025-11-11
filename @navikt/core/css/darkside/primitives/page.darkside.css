@@ -7,7 +7,6 @@
 
 /* Page.Block */
 .aksel-pageblock {
-  /* stylelint-disable-next-line length-zero-no-unit */
   --__axc-page-padding-inline: 0px;
 
   margin-inline: auto;

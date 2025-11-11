@@ -8,7 +8,6 @@
   transition: margin 500ms;
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .godPraksisHero {
   background: linear-gradient(238deg, var(--ax-bg-brand-blue-softA) 20.83%, var(--ax-bg-neutral-soft) 36.67%);
 }
@@ -80,7 +79,6 @@
   }
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .godPraksisHeroDialog {
   background: linear-gradient(238deg, var(--ax-bg-brand-blue-moderate) 20.83%, var(--ax-bg-brand-blue-soft) 36.67%);
 }

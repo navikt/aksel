@@ -33,7 +33,6 @@
   --aksel-brand-teal-400A: hsl(159deg 90% 61% / 0.17);
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .animated {
   & svg {
     color: var(--cube-stroke-color-dark);
