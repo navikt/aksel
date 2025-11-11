@@ -217,7 +217,6 @@ const DialogPopupInternal = forwardRef<
                 originalEvent.button === 0 && originalEvent.ctrlKey === true;
               const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
 
-              /* TODO: Check middle mouse click */
               /**
                * If the event is a right-click, we shouldn't close because
                * it is effectively as if we right-clicked the `Overlay`.
