@@ -40,6 +40,7 @@ type Stable<T extends Callback> = {
   callback: T | undefined;
   trampoline: T;
   effect: () => void;
+  update: (value: Callback | undefined) => void;
 };
 
 /**
@@ -49,7 +50,7 @@ export function useEventCallback<T extends Callback>(
   callback: T | undefined,
 ): T {
   const stable = useRefWithInit(createStableCallback).current as Stable<T>;
-  stable.next = callback;
+  stable.update(callback);
   useSafeInsertionEffect(stable.effect);
   return stable.trampoline;
 }
@@ -61,6 +62,9 @@ function createStableCallback() {
     trampoline: (...args: any[]) => stable.callback?.(...args),
     effect: () => {
       stable.callback = stable.next;
+    },
+    update: (value) => {
+      stable.next = value;
     },
   };
   return stable;

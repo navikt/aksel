@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
-
-const UNINITIALIZED = {};
+import React, { useRef, useState } from "react";
 
 /**
  * useRef initialized with a function on mount.
@@ -13,11 +11,8 @@ function useRefWithInit<T, U>(
   initArg: U,
 ): React.RefObject<T>;
 function useRefWithInit(init: (arg?: unknown) => unknown, initArg?: unknown) {
-  const ref = useRef(UNINITIALIZED as any);
-
-  if (ref.current === UNINITIALIZED) {
-    ref.current = init(initArg);
-  }
+  const [initialValue] = useState(() => init(initArg));
+  const ref = useRef(initialValue);
 
   return ref;
 }
