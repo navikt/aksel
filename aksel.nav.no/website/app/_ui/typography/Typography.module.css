@@ -24,8 +24,6 @@
 .typoList {
   max-width: 600px;
 
-  /* stylelint-disable-next-line aksel/no-class-override */
-  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   :global(.aksel-body-long.aksel-typo--spacing) + & {
     margin-top: -1rem;
   }

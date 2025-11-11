@@ -4,7 +4,6 @@
   column-gap: var(--ax-space-80);
   grid-template-columns: minmax(0, 720px);
   grid-template-rows: min-content min-content;
-  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
   grid-template-areas:
     "intro"
     "content";

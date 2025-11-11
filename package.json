@@ -89,6 +89,21 @@
           "aksel/no-internal-tokens": null,
           "aksel/no-class-override": null
         }
+      },
+      {
+        "files": [
+          "aksel.nav.no/website/**/*.module.css"
+        ],
+        "rules": {
+          "selector-pseudo-class-no-unknown": [
+            true,
+            {
+              "ignorePseudoClasses": [
+                "global"
+              ]
+            }
+          ]
+        }
       }
     ],
     "extends": [
