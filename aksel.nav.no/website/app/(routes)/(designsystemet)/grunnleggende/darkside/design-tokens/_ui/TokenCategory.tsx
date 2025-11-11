@@ -1,5 +1,5 @@
 import { useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { startTransition, useEffect } from "react";
 import { BodyShort, Heading, VStack } from "@navikt/ds-react";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import TokenRolesChips from "./TokenRolesChips";
@@ -27,7 +27,7 @@ const TokenCategory = ({
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We want to reset selectedRole when tokenQuery changes
   useEffect(() => {
-    setSelectedRole(null);
+    startTransition(() => setSelectedRole(null));
   }, [tokenQuery]);
 
   const filteredRoles = roles?.filter((role) =>
