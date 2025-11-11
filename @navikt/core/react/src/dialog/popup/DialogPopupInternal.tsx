@@ -196,20 +196,6 @@ const DialogPopupInternal = forwardRef<
               if (targetIsTrigger) {
                 event.preventDefault();
               }
-
-              /**
-               * TODO: test if needed
-               * On Safari if the trigger is inside a container with tabIndex={0}, when clicked
-               * we will get the pointer down outside event on the trigger, but then a subsequent
-               * focus outside event on the container, we ignore any focus outside event when we've
-               * already had a pointer down outside event.
-               */
-              if (
-                event.detail.originalEvent.type === "focusin" &&
-                hasPointerDownOutsideRef.current
-              ) {
-                event.preventDefault();
-              }
             }}
             onPointerDownOutside={(event) => {
               /* If backdrop exists, require "intentional" click (pointerup) */
