@@ -10,6 +10,7 @@ import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
 import { hideNonTargetElements } from "../hideNonTargetElements";
 import { useLatestRef } from "../hooks/useLatestRef";
 import { ownerDocument } from "../owner";
+import { resolveRef } from "../resolveRef";
 
 /* -------------------------------------------------------------------------- */
 /*                                 FocusBoundary                                 */
@@ -513,18 +514,6 @@ function arrayRemove<T>(array: T[], item: T) {
 
 function removeLinks(items: HTMLElement[]) {
   return items.filter((item) => item.tagName !== "A");
-}
-
-/**
- * If the provided argument is a ref object, returns its `current` value.
- * Otherwise, returns the argument itself.
- *
- * Non-generic to safely handle refs whose `.current` may be `null`.
- */
-function resolveRef(
-  maybeRef: HTMLElement | React.RefObject<HTMLElement | null | undefined>,
-): HTMLElement | null | undefined {
-  return "current" in maybeRef ? maybeRef.current : maybeRef;
 }
 
 export { FocusBoundary };

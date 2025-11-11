@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { resolveRef } from "../resolveRef";
 import { useEventCallback } from "./useEventCallback";
 
 /**
@@ -66,12 +67,8 @@ export function useAnimationsFinished(
       // Cancel any in-flight scheduling from a previous invocation (next-frame debounce semantics)
       cancelScheduled();
 
-      if (elementOrRef == null) {
-        return;
-      }
+      const element = resolveRef(elementOrRef);
 
-      const element =
-        "current" in elementOrRef ? elementOrRef.current : elementOrRef;
       if (element == null) {
         return;
       }
@@ -96,7 +93,9 @@ export function useAnimationsFinished(
           Promise.allSettled(
             element.getAnimations().map((anim) => anim.finished),
           ).then(() => {
-            if (signal?.aborted) return;
+            if (signal?.aborted) {
+              return;
+            }
             // Ensure any state updates inside the callback are flushed synchronously,
             // guaranteeing that dependent logic observes the current
             // tree rather than a stale in-progress update.
