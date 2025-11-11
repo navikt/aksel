@@ -353,7 +353,7 @@ export const ActionMenuContent = forwardRef<
     const { cn } = useRenameCSS();
 
     return (
-      <Menu.Portal rootElement={context.rootElement} asChild>
+      <Menu.Portal rootElement={context.rootElement}>
         <Menu.Content
           ref={ref}
           id={context.contentId}
@@ -363,9 +363,7 @@ export const ActionMenuContent = forwardRef<
           align={align}
           sideOffset={4}
           collisionPadding={10}
-          onCloseAutoFocus={() => {
-            context.triggerRef.current?.focus();
-          }}
+          returnFocus={context.triggerRef}
           safeZone={{ anchor: context.triggerRef.current }}
           style={{
             ...style,

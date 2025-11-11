@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 // eslint-disable-next-line storybook/use-storybook-testing-library
 import { act } from "@testing-library/react";
 import React, { useState } from "react";
-import { expect, fireEvent, userEvent, within } from "storybook/test";
+import { expect, fireEvent, userEvent, waitFor, within } from "storybook/test";
 import { VStack } from "../../layout/stack";
 import { FocusBoundary, type FocusBoundaryProps } from "./FocusBoundary";
 
@@ -42,8 +42,9 @@ export const Loop: Story = {
     const last = canvas.getByText(BUTTON_THREE);
 
     /* Regular focus */
-    await fireEvent.focus(first);
-    expect(first).toHaveFocus();
+    first.focus();
+    await waitFor(() => expect(first).toHaveFocus());
+
     await userEvent.tab();
     expect(middle).toHaveFocus();
 
@@ -54,7 +55,7 @@ export const Loop: Story = {
     expect(first).toHaveFocus();
 
     /* Shift tab */
-    await fireEvent.focus(first);
+    first.focus();
     expect(first).toHaveFocus();
     await userEvent.tab({ shift: true });
     expect(last).toHaveFocus();
@@ -75,7 +76,8 @@ export const TrappedNoLoop: Story = {
 
     /* Regular focus */
     await fireEvent.focus(first);
-    expect(first).toHaveFocus();
+    await waitFor(() => expect(first).toHaveFocus());
+
     await userEvent.tab();
     expect(middle).toHaveFocus();
 
@@ -106,7 +108,7 @@ export const Trapped: Story = {
     const outsideElement = canvas.getByLabelText("outside");
 
     await fireEvent.focus(first);
-    expect(first).toHaveFocus();
+    await waitFor(() => expect(first).toHaveFocus());
 
     await fireEvent.focus(outsideElement);
     expect(first).toHaveFocus();
@@ -137,6 +139,8 @@ export const ReFocusPrevTrappedItem: Story = {
 
     /* Regular focus */
     await fireEvent.focus(first);
+    await waitFor(() => expect(first).toHaveFocus());
+
     await userEvent.tab();
     expect(middle).toHaveFocus();
 
@@ -178,7 +182,7 @@ export const MountAutofocus: Story = {
     const showButton = canvas.getByText("show");
     await userEvent.click(showButton);
     const first = canvas.getByLabelText(Field_ONE);
-    expect(first).toHaveFocus();
+    await waitFor(() => expect(first).toHaveFocus());
   },
   args: {
     showByDefault: false,
@@ -222,7 +226,7 @@ export const MountAutofocusPrevented: Story = {
     expect(showButton).toHaveFocus();
   },
   args: {
-    onMountAutoFocus: (event) => event.preventDefault(),
+    initialFocus: false,
   },
 };
 
@@ -233,7 +237,7 @@ export const FocusPrevActiveItemOnUnmount: Story = {
 
     const showButton = canvas.getByText("show");
     await userEvent.click(showButton);
-    expect(canvas.getByLabelText(Field_ONE)).toHaveFocus();
+    await waitFor(() => expect(canvas.getByLabelText(Field_ONE)).toHaveFocus());
 
     const hideButton = canvas.getByText("hide");
     await userEvent.click(hideButton);
@@ -251,7 +255,7 @@ export const FocusBodyOnUnmount: Story = {
 
     const showButton = canvas.getByText("show");
     await userEvent.click(showButton);
-    expect(canvas.getByLabelText(Field_ONE)).toHaveFocus();
+    await waitFor(() => expect(canvas.getByLabelText(Field_ONE)).toHaveFocus());
 
     showButton.remove();
 
@@ -271,7 +275,7 @@ export const UnmountAutofocusPrevented: Story = {
 
     const showButton = canvas.getByText("show");
     await userEvent.click(showButton);
-    expect(canvas.getByLabelText(Field_ONE)).toHaveFocus();
+    await waitFor(() => expect(canvas.getByLabelText(Field_ONE)).toHaveFocus());
 
     const hideButton = canvas.getByText("hide");
     await userEvent.click(hideButton);
@@ -280,7 +284,7 @@ export const UnmountAutofocusPrevented: Story = {
     expect(document.body).toHaveFocus();
   },
   args: {
-    onUnmountAutoFocus: (event) => event.preventDefault(),
+    returnFocus: false,
     showByDefault: false,
   },
 };

@@ -1,5 +1,6 @@
 "use client";
 
+import { stegaClean } from "next-sanity";
 import { useEffect, useState } from "react";
 import { BodyLong, Button, Link, VStack } from "@navikt/ds-react";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
@@ -60,7 +61,7 @@ function SystemPanelOutdatedAction({ docId }: { docId?: string }) {
 
       <Button
         as="a"
-        href={`https://aksel.nav.no/admin/prod/intent/edit/id=${docId}`}
+        href={`https://aksel.nav.no/admin/prod/intent/edit/id=${stegaClean(docId)}`}
         target="_blank"
         size="small"
         variant="secondary-neutral"
