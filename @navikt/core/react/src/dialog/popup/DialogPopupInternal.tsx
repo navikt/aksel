@@ -10,7 +10,6 @@ import { createTransitionStatusAttribute } from "../../util/hooks/useTransitionS
 import type { AsChild } from "../../util/types/AsChild";
 import { useDialogContext } from "../root/DialogRoot.context";
 
-/* TODO: Consistent asChild on components */
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";
 
 type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
@@ -81,7 +80,6 @@ const DialogPopupInternal = forwardRef<
       id,
       style: styleProp,
       "aria-labelledby": ariaLabelledbyProp,
-      "aria-describedby": ariaDescribedbyProp,
       ...restProps
     },
     forwardedRef,
@@ -102,7 +100,6 @@ const DialogPopupInternal = forwardRef<
       backdropElement,
       size,
       titleId,
-      descriptionId,
       popupId,
     } = useDialogContext();
 
@@ -260,8 +257,6 @@ const DialogPopupInternal = forwardRef<
           >
             <BoxNew
               aria-labelledby={ariaLabelledbyProp ?? titleId}
-              /* TODO: Remove? */
-              aria-describedby={ariaDescribedbyProp ?? descriptionId}
               id={id ?? popupId}
               {...restProps}
               ref={mergedRefs}

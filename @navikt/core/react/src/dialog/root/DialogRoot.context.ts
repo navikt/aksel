@@ -82,14 +82,6 @@ interface DialogContextProps {
    * Setter for the dialog title ID.
    */
   setTitleId: React.Dispatch<React.SetStateAction<string | undefined>>;
-  /**
-   * ID of the dialog description element.
-   */
-  descriptionId?: string;
-  /**
-   * Setter for the dialog description ID.
-   */
-  setDescriptionId: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const [DialogContextProvider, useDialogContext] =

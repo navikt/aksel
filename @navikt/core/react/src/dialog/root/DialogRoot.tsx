@@ -77,7 +77,6 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
   }, [defaultId, popupElement?.id]);
 
   const [titleId, setTitleId] = useState<string>();
-  const [descriptionId, setDescriptionId] = useState<string>();
 
   const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = useState(0);
 
@@ -163,8 +162,6 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       size={size}
       titleId={titleId}
       setTitleId={setTitleId}
-      descriptionId={descriptionId}
-      setDescriptionId={setDescriptionId}
     >
       {children}
     </DialogContextProvider>
