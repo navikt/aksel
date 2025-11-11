@@ -11,6 +11,10 @@ interface DialogContextProps {
    */
   setOpen: (open: boolean, originalEvent: Event) => void;
   /**
+   * Event handler called after any animations complete when the dialog is opened or closed.
+   */
+  onOpenChangeComplete?: (open: boolean) => void;
+  /**
    * The transition status of the dialog
    */
   transitionStatus: TransitionStatus;

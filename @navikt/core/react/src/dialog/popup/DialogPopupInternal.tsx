@@ -5,6 +5,7 @@ import { useRenameCSS } from "../../theme/Theme";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../util/focus-guards/FocusGuards";
 import { useMergeRefs } from "../../util/hooks";
+import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
 import { useScrollLock } from "../../util/hooks/useScrollLock";
 import { createTransitionStatusAttribute } from "../../util/hooks/useTransitionStatus";
 import type { AsChild } from "../../util/types/AsChild";
@@ -101,6 +102,7 @@ const DialogPopupInternal = forwardRef<
       size,
       titleId,
       popupId,
+      onOpenChangeComplete,
     } = useDialogContext();
 
     const hasInteractedOutsideRef = useRef(false);
@@ -119,6 +121,20 @@ const DialogPopupInternal = forwardRef<
       mounted,
       open,
       referenceElement: popupElement,
+    });
+
+    /**
+     * On mount Popupref is not defined in root, so we need to
+     * run hook here as well as root to ensure animations are tracked correctly
+     */
+    useOpenChangeAnimationComplete({
+      open,
+      ref: localPopupRef,
+      onComplete() {
+        if (open) {
+          onOpenChangeComplete?.(true);
+        }
+      },
     });
 
     const resolvedInitialFocus =

@@ -162,6 +162,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       size={size}
       titleId={titleId}
       setTitleId={setTitleId}
+      onOpenChangeComplete={onOpenChangeComplete}
     >
       {children}
     </DialogContextProvider>
