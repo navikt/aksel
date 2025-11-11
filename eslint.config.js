@@ -32,6 +32,7 @@ module.exports = tseslint.config([
     "**/playwright-report/**/*",
     "**/tokens/**/plugin.js",
     "**/.next",
+    "**/query-types.ts",
     "examples/referansesider",
     "examples/astro/.astro",
     ".yarn",
