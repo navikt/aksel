@@ -41,37 +41,42 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
 
     const Component = asChild ? Slot : "div";
 
+    const handleClick = (
+      originalEvent: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    ) => {
+      if (
+        originalEvent.target === anchorRef.current ||
+        isTextSelected(anchorRef.current)
+      ) {
+        return;
+      }
+
+      const mouseEvent = new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+        ctrlKey: originalEvent.ctrlKey,
+        shiftKey: originalEvent.shiftKey,
+        altKey: originalEvent.altKey,
+        metaKey: originalEvent.metaKey,
+        button: originalEvent.button,
+        screenX: originalEvent.screenX,
+        screenY: originalEvent.screenY,
+        clientX: originalEvent.clientX,
+        clientY: originalEvent.clientY,
+      });
+
+      anchorRef.current?.dispatchEvent(mouseEvent);
+    };
+
     return (
       <LinkAnchorContextProvider anchorRef={anchorRef}>
         <Component
           ref={forwardedRef}
           {...restProps}
           className={cn("navds-link-anchor__overlay", className)}
-          onClick={composeEventHandlers(onClick, (e) => {
-            if (
-              e.target === anchorRef.current ||
-              isTextSelected(anchorRef.current)
-            ) {
-              return;
-            }
-
-            const event = new MouseEvent("click", {
-              bubbles: true,
-              cancelable: true,
-              view: window,
-              ctrlKey: e.ctrlKey,
-              shiftKey: e.shiftKey,
-              altKey: e.altKey,
-              metaKey: e.metaKey,
-              button: e.button,
-              screenX: e.screenX,
-              screenY: e.screenY,
-              clientX: e.clientX,
-              clientY: e.clientY,
-            });
-
-            anchorRef.current?.dispatchEvent(event);
-          })}
+          // eslint-disable-next-line react-hooks/refs
+          onClick={composeEventHandlers(onClick, handleClick)}
         >
           {children}
         </Component>

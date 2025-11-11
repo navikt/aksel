@@ -245,7 +245,9 @@ export const Multiple = () => {
 };
 
 const MyDropDownSearchVirtualfocus = () => {
-  const anchorRef = useRef<HTMLInputElement>(null);
+  const [anchorElement, setAnchorElement] = useState<HTMLInputElement | null>(
+    null,
+  );
   const [openState, setOpenState] = useState(false);
   const [value, setValue] = useState("");
 
@@ -291,10 +293,10 @@ const MyDropDownSearchVirtualfocus = () => {
 }
 `}
       </style>
-      <MyAnchor setValue={setValue} value={value} ref={anchorRef}>
+      <MyAnchor setValue={setValue} value={value} ref={setAnchorElement}>
         <Popover
           className="dropdown-search-virtualfocus"
-          anchorEl={anchorRef.current}
+          anchorEl={anchorElement}
           open={openState || (!!value.length && !!filteredItems.length)}
           onClose={() => {
             setOpenState(false);
