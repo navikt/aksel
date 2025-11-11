@@ -68,8 +68,10 @@
     margin-inline: auto;
     top: 0;
     outline: 1px solid var(--ax-border-neutral-subtle);
-    max-width: 100dvw;
+    max-width: calc(100dvw - 3rem);
     max-height: 100dvh;
+    max-height: calc(90dvh - var(--__axc-dialog-center-margin));
+    margin-block: max(var(--__axc-dialog-center-margin), 10dvh) auto;
 
     &[data-nested="true"] {
       &[data-entering-style] {
@@ -91,24 +93,28 @@
       outline-color: transparent;
     }
 
-    @media screen and (min-width: 480px) {
-      max-width: calc(100dvw - 3rem);
-    }
+    @media (max-width: 479px) or (max-height: 479px) {
+      --__axc-dialog-transform: translateY(35%);
 
-    @media screen and (min-height: 480px) {
-      max-height: calc(90dvh - var(--__axc-dialog-center-margin));
-      margin-block: max(var(--__axc-dialog-center-margin), 10dvh) auto;
-    }
-
-    @media screen and (max-width: 479px) and (max-height: 479px) {
-      border-radius: 0;
+      max-height: calc(100dvh - max(16px, 10dvh));
+      max-width: 100dvw;
+      margin-inline: auto;
+      height: auto;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+      top: auto;
+      margin-block: 0;
     }
   }
 
   &[data-position="right"],
   &[data-position="left"] {
     height: 100dvh;
-    max-width: calc(100vw - 48px);
+    max-width: calc(100vw - max(16px, 10vw));
     top: 0;
     bottom: 0;
 
@@ -144,7 +150,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    max-height: calc(100dvh - 64px);
+    max-height: calc(100dvh - max(16px, 10dvh));
     max-width: 100dvw;
     margin-inline: auto;
     height: auto;
