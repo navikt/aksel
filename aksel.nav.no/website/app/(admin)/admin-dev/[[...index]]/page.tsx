@@ -1,4 +1,4 @@
-import { AdminStudio } from "@/app/(routes)/(admin)/AdminStudio";
+import { AdminStudio } from "@/app/(admin)/AdminStudio";
 
 export { metadata, viewport } from "next-sanity/studio";
 
