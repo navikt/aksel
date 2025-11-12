@@ -64,27 +64,39 @@ interface DismissableLayerBaseProps
 type DismissableLayerProps = DismissableLayerBaseProps & AsChild;
 
 const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
-  ({ enabled = true, ...restProps }: DismissableLayerProps, forwardedRef) => {
-    if (!enabled) {
-      const Component = restProps.asChild ? Slot : "div";
-      return (
-        <Component
-          {...omit(restProps, [
-            "asChild",
-            "disableOutsidePointerEvents",
-            "onDismiss",
-            "onEscapeKeyDown",
-            "onFocusOutside",
-            "onInteractOutside",
-            "onPointerDownOutside",
-            "safeZone",
-          ])}
-          ref={forwardedRef}
-        />
-      );
-    }
+  (
+    { enabled = true, asChild, children, ...restProps }: DismissableLayerProps,
+    forwardedRef,
+  ) => {
+    const Component = asChild ? Slot : "div";
+    const Wrapper = enabled ? DismissableLayerInternal : Slot;
 
-    return <DismissableLayerInternal {...restProps} ref={forwardedRef} />;
+    const cleanedProps = omit(restProps, [
+      "disableOutsidePointerEvents",
+      "onDismiss",
+      "onEscapeKeyDown",
+      "onFocusOutside",
+      "onInteractOutside",
+      "onPointerDownOutside",
+      "safeZone",
+    ]);
+
+    /**
+     * When `enabled` is `false`, we render a simple `div` or `Slot` (if `asChild` is `true`)
+     * that forwards all props except the ones specific to `DismissableLayer`.
+     *
+     * We do this instead of conditionally rendering `DismissableLayerInternal` to preserve the
+     * component tree structure and avoid unmounting/mounting issues.
+     */
+    return (
+      <Wrapper
+        ref={forwardedRef}
+        {...(enabled ? { asChild: true } : {})}
+        {...(enabled ? restProps : cleanedProps)}
+      >
+        <Component>{children}</Component>
+      </Wrapper>
+    );
   },
 );
 

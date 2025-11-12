@@ -1,7 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../button";
-import { Dropdown } from "../dropdown";
-import { Modal } from "../modal";
 import Popover from "./Popover";
 
 const placements = [
@@ -87,112 +85,6 @@ const Template = (props) => {
         </Popover.Content>
       </Popover>
     </>
-  );
-};
-
-function TestElement() {
-  const [modalOpen, setModalOpen] = useState(false);
-  console.log("TestElement rendered");
-
-  useEffect(() => {
-    console.log("TestElement mounted");
-    return () => {
-      console.log("TestElement unmounted");
-    };
-  }, []);
-
-  return (
-    <div>
-      <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
-      {modalOpen && (
-        <Modal
-          open
-          portal
-          onClose={() => null}
-          header={{
-            label: "Optional label",
-            heading: "Title",
-            size: "small",
-          }}
-          closeOnBackdropClick
-        >
-          MODAL
-        </Modal>
-      )}
-    </div>
-  );
-}
-
-export const DialogTest = () => {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <Button onClick={() => setOpen((x) => !x)} ref={setAnchorEl}>
-        OPEN
-      </Button>
-      <Popover anchorEl={anchorEl} open={open} onClose={() => setOpen(false)}>
-        <Popover.Content>
-          <ÅpneModalKnapp />
-        </Popover.Content>
-      </Popover>
-    </>
-  );
-};
-
-const ÅpneModalKnapp = () => {
-  const [visModal, settVisModal] = useState(false);
-
-  console.log("visModal", visModal);
-
-  useEffect(() => {
-    console.log("mounted");
-    return () => {
-      console.log("unmounted");
-    };
-  }, []);
-
-  return (
-    <div>
-      <Dropdown.Menu.List.Item
-        onClick={() => {
-          console.info("opening modal");
-          settVisModal(true);
-        }}
-      >
-        Åpne modal
-      </Dropdown.Menu.List.Item>
-      {visModal && (
-        <Modal
-          open
-          portal
-          header={{
-            heading: "Modal header",
-            size: "medium",
-          }}
-          onClose={() => {
-            console.info("closing modal");
-            settVisModal(false);
-          }}
-        >
-          <Modal.Body>Dette er en modal</Modal.Body>
-        </Modal>
-      )}
-    </div>
-  );
-};
-
-export const Example = () => {
-  return (
-    <Dropdown>
-      <Button as={Dropdown.Toggle}>Toggle</Button>
-      <Dropdown.Menu>
-        <Dropdown.Menu.List>
-          <ÅpneModalKnapp />
-        </Dropdown.Menu.List>
-      </Dropdown.Menu>
-    </Dropdown>
   );
 };
 
