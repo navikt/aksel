@@ -106,18 +106,23 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
       panel.style.removeProperty("animation-name");
     }
 
-    if (!hiddenUntilFound && !keepMounted && nextOpen) {
-      /**
-       * We could let `useTransitionStatus` handle this automatically,
-       * but by eagerly updating `mounted` here we avoid deferring
-       * the update to after next frame, which can cause shifts.
-       */
-      if (!mounted && animationTypeRef.current !== null) {
-        setMounted(true);
+    if (!hiddenUntilFound && !keepMounted) {
+      if (
+        animationTypeRef.current != null &&
+        animationTypeRef.current !== "css-animation"
+      ) {
+        if (!mounted && nextOpen) {
+          setMounted(true);
+        }
       }
 
-      if (animationTypeRef.current === "css-animation" && !visible) {
-        setVisible(true);
+      if (animationTypeRef.current === "css-animation") {
+        if (!visible && nextOpen) {
+          setVisible(true);
+        }
+        if (!mounted && nextOpen) {
+          setMounted(true);
+        }
       }
     }
 

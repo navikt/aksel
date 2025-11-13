@@ -25,6 +25,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     runOnceAnimationsFinish,
     setMounted,
     setVisible,
+    visible,
   } = useCollapsibleRootContext();
 
   const { isBeforeMatchRef, hidden } = useHiddenUntilFound();
@@ -56,20 +57,11 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       return undefined;
     }
 
-    /**
-     * Explicitly set `display` to ensure the panel is rendered before
-     * measuring anything. `!important` is to needed to override a conflicting
-     * Tailwind v4 default that sets `display: none !important` on `[hidden]`:
-     * @see https://github.com/tailwindlabs/tailwindcss/blob/cd154a4f471e7a63cc27cad15dada650de89d52b/packages/tailwindcss/preflight.css#L320-L326
-     */
-    element.style.setProperty("display", "block", "important");
-
     if (height === undefined || width === undefined) {
       setDimensions({
         height: element.scrollHeight,
         width: element.scrollWidth,
       });
-      element.style.removeProperty("display");
 
       /* We make sure to disabled transitions on initial mount if defaultOpen/open: true */
       if (shouldCancelInitialOpenTransitionRef.current) {
@@ -115,9 +107,17 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     }
 
     if (open) {
-      /* Opening panel */
-      /* See comment in `handlePanelRef` for why we set this */
-      panel.style.setProperty("display", "block", "important");
+      const originalLayoutStyles = {
+        "justify-content": panel.style.justifyContent,
+        "align-items": panel.style.alignItems,
+        "align-content": panel.style.alignContent,
+        "justify-items": panel.style.justifyItems,
+      };
+
+      /* opening */
+      Object.keys(originalLayoutStyles).forEach((key) => {
+        panel.style.setProperty(key, "initial", "important");
+      });
 
       /**
        * When `keepMounted={false}` and the panel is initially closed, the very
@@ -140,7 +140,13 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
 
       let resizeFrame = -1;
       resizeFrame = requestAnimationFrame(() => {
-        panel.style.removeProperty("display");
+        Object.entries(originalLayoutStyles).forEach(([key, value]) => {
+          if (value === "") {
+            panel.style.removeProperty(key);
+          } else {
+            panel.style.setProperty(key, value);
+          }
+        });
       });
 
       return () => {
@@ -148,27 +154,55 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       };
     }
 
+    if (panel.scrollHeight === 0 && panel.scrollWidth === 0) {
+      return undefined;
+    }
+
     /* Closing panel */
     setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
 
-    abortControllerRef.current = new AbortController();
-    const { signal } = abortControllerRef.current;
+    const abortController = new AbortController();
+    abortControllerRef.current = abortController;
+    const signal = abortController.signal;
 
-    let frame2 = -1;
-    const frame1 = requestAnimationFrame(() => {
-      /* Wait until [data-exiting-style] is added */
-      frame2 = requestAnimationFrame(() => {
+    let attributeObserver: MutationObserver | null = null;
+
+    const endingStyleAttribute = "data-exiting-style";
+
+    /* Wait for `[data-exiting-style]` to be applied */
+    attributeObserver = new MutationObserver((mutationList) => {
+      const hasEndingStyle = mutationList.some(
+        (mutation) =>
+          mutation.type === "attributes" &&
+          mutation.attributeName === endingStyleAttribute,
+      );
+
+      if (hasEndingStyle) {
+        attributeObserver?.disconnect();
+        attributeObserver = null;
         runOnceAnimationsFinish(() => {
           setDimensions({ height: 0, width: 0 });
+          panel.style.removeProperty("content-visibility");
           setMounted(false);
-          abortControllerRef.current = null;
+          if (abortControllerRef.current === abortController) {
+            abortControllerRef.current = null;
+          }
         }, signal);
-      });
+      }
+    });
+
+    attributeObserver.observe(panel, {
+      attributes: true,
+      attributeFilter: [endingStyleAttribute],
     });
 
     return () => {
-      cancelAnimationFrame(frame1);
-      cancelAnimationFrame(frame2);
+      attributeObserver?.disconnect();
+
+      if (abortControllerRef.current === abortController) {
+        abortController.abort();
+        abortControllerRef.current = null;
+      }
     };
   }, [
     abortControllerRef,
@@ -227,6 +261,11 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     setDimensions,
     setMounted,
     setVisible,
+    /**
+     * Needed to update dimensions after initially visible
+     * Without, keepmounted will stutter on open
+     */
+    visible,
   ]);
 
   /**
