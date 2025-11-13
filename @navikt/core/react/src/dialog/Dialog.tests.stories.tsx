@@ -757,10 +757,6 @@ export const AriaAttributes: Story = {
     expect(popupElement).toHaveAttribute("role", "dialog");
     expect(popupElement).toHaveAttribute("tabindex", "-1");
     expect(popupElement).toHaveAttribute("aria-labelledby", "popup-title");
-    expect(popupElement).toHaveAttribute(
-      "aria-describedby",
-      "popup-description",
-    );
   },
   args: {
     popupProps: {

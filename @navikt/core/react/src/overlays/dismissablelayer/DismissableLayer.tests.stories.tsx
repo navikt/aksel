@@ -244,17 +244,17 @@ export const NestedPointerEvents: StoryObj<{
               console.info("dismissed root");
             }}
           >
-            <input type="text" data-testId="root" />
+            <input type="text" data-testId="root" placeholder="root" />
             {showNested && (
               <DismissableLayer
                 {...props.nested}
                 onDismiss={(event) => {
-                  props.root.onDismiss?.(event);
+                  props.nested.onDismiss?.(event);
                   setShowNested(false);
                   console.info("dismissed nested");
                 }}
               >
-                <input type="text" data-testId="nested" />
+                <input type="text" data-testId="nested" placeholder="nested" />
               </DismissableLayer>
             )}
           </DismissableLayer>
