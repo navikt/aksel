@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Popover: Children now longer re-mounts on open/close change.
+Popover: Children no longer re-mounts on open toggle.
