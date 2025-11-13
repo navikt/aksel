@@ -119,6 +119,13 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
         panel.style.setProperty(key, "initial", "important");
       });
 
+      const assumeWidthTransition = hasWidthTransition(panel);
+
+      const originalWidth = panel.style.width;
+      if (assumeWidthTransition) {
+        panel.style.setProperty("width", "auto", "important");
+      }
+
       /**
        * When `keepMounted={false}` and the panel is initially closed, the very
        * first time it opens (not any subsequent opens) `data-entering-style` is
@@ -137,6 +144,10 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       }
 
       setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
+
+      if (assumeWidthTransition) {
+        panel.style.setProperty("width", originalWidth);
+      }
 
       let resizeFrame = -1;
       resizeFrame = requestAnimationFrame(() => {
@@ -354,6 +365,19 @@ function getAnimationType(element: HTMLElement): CollapsibleAnimationType {
   }
 
   return "none";
+}
+
+function hasWidthTransition(element: HTMLElement): boolean {
+  const panelStyles = getComputedStyle(element);
+
+  const transitionProperties = panelStyles.transitionProperty
+    .split(",")
+    .map((prop) => prop.trim());
+
+  return (
+    transitionProperties.includes("width") ||
+    transitionProperties.includes("all")
+  );
 }
 
 export { useCollapsiblePanel };

@@ -204,17 +204,17 @@ export const LayoutWithSidebar: Story = {
       <HStack>
         {StoryStyles}
         <Root open={open} onOpenChange={setOpen} keepMounted="visible">
-          <Trigger>toggle</Trigger>
+          <Trigger>toggle {!open ? "open" : "closed"}</Trigger>
           <Panel className="panel panel-transition-horizontal-sidebar">
             <div
               style={{
-                width: 300,
+                width: "12rem",
                 height: "100svh",
-                padding: "2rem",
+                padding: "1rem",
                 background: "var(--ax-bg-neutral-moderateA)",
               }}
             >
-              sidebar
+              sidebar 12rem + 1rem padding
             </div>
           </Panel>
         </Root>
@@ -325,14 +325,15 @@ const StoryStyles = (
     }
 
     .panel {
-      overflow: hidden;
-
+overflow: hidden;
       & ul {
+        display: flex;
+        flex-direction: column;
         background: var(--ax-bg-neutral-moderate);
         border-radius: var(--ax-radius-4);
         border: 1px solid var(--ax-border-neutral);
         width: 100%;
-        overflow: hidden;
+        /* overflow: hidden; */
         padding: 1rem;
         list-style: none;
         margin: 0;
@@ -397,7 +398,9 @@ const StoryStyles = (
 
     .panel-transition-horizontal {
       width: var(--__axc-collapsible-panel-width);
-      transition: all 300ms ease;
+      transition: all 3000ms ease;
+      box-sizing: border-box;
+      overflow: hidden;
 
       &[data-entering-style],
       &[data-exiting-style] {
@@ -407,9 +410,19 @@ const StoryStyles = (
     }
 
     .panel-transition-horizontal-sidebar {
-      width: max(var(--__axc-collapsible-panel-width), 4rem);
       display: flex;
-      /* transition: all 300ms ease; */
+      transition: all 3000ms ease;
+      overflow: hidden;
+
+      width: var(--__axc-collapsible-panel-width);
+
+      &[data-entering-style] {
+        width: 6rem;
+      }
+
+      &[data-exiting-style] {
+        width: 6rem;
+      }
     }
 
 
