@@ -46,7 +46,6 @@
   --brand-blue-moderate: #00253c;
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .heroLinearBG {
   background: linear-gradient(196deg, var(--gradient-dark) 8.43%, transparent 40%);
 }
@@ -83,7 +82,6 @@
   line-height: 52px;
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .heroText {
   color: var(--hero-text);
 }

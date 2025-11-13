@@ -23,7 +23,6 @@
   background: var(--ax-bg-soft);
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.dark) .overviewImageWrapper {
   background: var(--ax-bg-neutral-soft);
 }
