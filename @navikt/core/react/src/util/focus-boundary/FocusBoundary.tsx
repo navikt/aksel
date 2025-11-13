@@ -184,6 +184,8 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         return;
       }
 
+      const ownerDoc = ownerDocument(container);
+      addPreviouslyFocusedElement(ownerDoc.activeElement);
       focusBoundarysStack.add(focusBoundary);
 
       return () => {
@@ -256,7 +258,6 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         return;
       }
       const ownerDoc = ownerDocument(container);
-      const previouslyFocusedElement = ownerDoc.activeElement;
 
       function getReturnElement() {
         const resolvedReturnFocusValueOrFn = returnFocusRef.current;
@@ -279,11 +280,11 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         if (typeof resolvedReturnFocusValue === "boolean") {
-          const el = previouslyFocusedElement;
+          const el = getPreviouslyFocusedElement();
           return el?.isConnected ? el : ownerDoc.body;
         }
 
-        const fallback = previouslyFocusedElement || ownerDoc.body;
+        const fallback = getPreviouslyFocusedElement() || ownerDoc.body;
 
         return resolveRef(resolvedReturnFocusValue) || fallback;
       }
@@ -514,6 +515,30 @@ function arrayRemove<T>(array: T[], item: T) {
 
 function removeLinks(items: HTMLElement[]) {
   return items.filter((item) => item.tagName !== "A");
+}
+
+const LIST_LIMIT = 10;
+let previouslyFocusedElements: Element[] = [];
+
+function clearDisconnectedPreviouslyFocusedElements() {
+  previouslyFocusedElements = previouslyFocusedElements.filter(
+    (el) => el.isConnected,
+  );
+}
+
+function addPreviouslyFocusedElement(element: Element | null) {
+  clearDisconnectedPreviouslyFocusedElements();
+  if (element && element?.nodeName !== "body") {
+    previouslyFocusedElements.push(element);
+    if (previouslyFocusedElements.length > LIST_LIMIT) {
+      previouslyFocusedElements = previouslyFocusedElements.slice(-LIST_LIMIT);
+    }
+  }
+}
+
+function getPreviouslyFocusedElement() {
+  clearDisconnectedPreviouslyFocusedElements();
+  return previouslyFocusedElements[previouslyFocusedElements.length - 1];
 }
 
 export { FocusBoundary };
