@@ -1,6 +1,5 @@
 import React, { forwardRef, useContext, useEffect, useState } from "react";
 import { Slot } from "../../slot/Slot";
-import { omit } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
 import { ownerDocument } from "../../util/owner";
@@ -63,46 +62,7 @@ interface DismissableLayerBaseProps
 
 type DismissableLayerProps = DismissableLayerBaseProps & AsChild;
 
-const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
-  (
-    { enabled = true, asChild, children, ...restProps }: DismissableLayerProps,
-    forwardedRef,
-  ) => {
-    const Component = asChild ? Slot : "div";
-    const Wrapper = enabled ? DismissableLayerInternal : Slot;
-
-    const cleanedProps = omit(restProps, [
-      "disableOutsidePointerEvents",
-      "onDismiss",
-      "onEscapeKeyDown",
-      "onFocusOutside",
-      "onInteractOutside",
-      "onPointerDownOutside",
-      "safeZone",
-    ]);
-
-    /**
-     * When `enabled` is `false`, we render a simple `div` or `Slot` (if `asChild` is `true`)
-     * that forwards all props except the ones specific to `DismissableLayer`.
-     *
-     * We do this instead of conditionally rendering `DismissableLayerInternal` to preserve the
-     * component tree structure and avoid unmounting/mounting issues.
-     */
-    return (
-      <Wrapper
-        ref={forwardedRef}
-        {...(enabled ? { asChild: true } : {})}
-        {...(enabled ? restProps : cleanedProps)}
-      >
-        <Component>{children}</Component>
-      </Wrapper>
-    );
-  },
-);
-
-type DismissableLayerElement = React.ComponentRef<
-  typeof DismissableLayerInternal
->;
+type DismissableLayerElement = React.ComponentRef<typeof DismissableLayer>;
 
 const BranchedLayerContext =
   React.createContext<DismissableLayerElement | null>(null);
@@ -120,10 +80,7 @@ const DismissableLayerContext = React.createContext({
   layersWithOutsidePointerEventsDisabled: new Set<DismissableLayerElement>(),
 });
 
-const DismissableLayerInternal = forwardRef<
-  HTMLDivElement,
-  DismissableLayerProps
->(
+const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
   (
     {
       children,
@@ -135,6 +92,7 @@ const DismissableLayerInternal = forwardRef<
       onPointerDownOutside,
       safeZone,
       asChild,
+      enabled = true,
       ...restProps
     }: DismissableLayerProps,
     forwardedRef,
@@ -206,73 +164,85 @@ const DismissableLayerInternal = forwardRef<
       }
     }
 
-    const pointerDownOutside = usePointerDownOutside((event) => {
-      if (!shouldEnablePointerEvents) {
-        return;
-      }
+    const pointerDownOutside = usePointerDownOutside(
+      (event) => {
+        if (!shouldEnablePointerEvents) {
+          return;
+        }
 
-      /**
-       * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
-       */
-      onPointerDownOutside?.(event);
-      onInteractOutside?.(event);
+        /**
+         * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
+         */
+        onPointerDownOutside?.(event);
+        onInteractOutside?.(event);
 
-      /**
-       * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
-       */
-      safeZone && handleOutsideEvent(event);
+        /**
+         * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+         */
+        safeZone && handleOutsideEvent(event);
 
-      if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
-      }
-    }, ownerDoc);
+        if (!event.defaultPrevented && onDismiss) {
+          onDismiss();
+        }
+      },
+      ownerDoc,
+      enabled,
+    );
 
-    const focusOutside = useFocusOutside((event) => {
-      /**
-       * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
-       */
-      onFocusOutside?.(event);
-      onInteractOutside?.(event);
+    const focusOutside = useFocusOutside(
+      (event) => {
+        /**
+         * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
+         */
+        onFocusOutside?.(event);
+        onInteractOutside?.(event);
 
-      /**
-       * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
-       */
-      safeZone && handleOutsideEvent(event);
+        /**
+         * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+         */
+        safeZone && handleOutsideEvent(event);
 
-      if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
-      }
-    }, ownerDoc);
+        if (!event.defaultPrevented && onDismiss) {
+          onDismiss();
+        }
+      },
+      ownerDoc,
+      enabled,
+    );
 
-    useEscapeKeydown((event) => {
-      /**
-       * The deepest nested element will always be last in the descendants list.
-       * This allows us to only close the highest layer when pressing escape.
-       */
-      const isHighestLayer = index === context.layers.size - 1;
-      if (!isHighestLayer) {
-        return;
-      }
+    useEscapeKeydown(
+      (event) => {
+        /**
+         * The deepest nested element will always be last in the descendants list.
+         * This allows us to only close the highest layer when pressing escape.
+         */
+        const isHighestLayer = index === context.layers.size - 1;
+        if (!isHighestLayer) {
+          return;
+        }
 
-      /**
-       * We call this before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
-       */
-      onEscapeKeyDown?.(event);
-      /**
-       * `onEscapeKeyDown` is able to preventDefault the event, thus stopping call for `onDismiss`.
-       * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
-       */
-      if (!event.defaultPrevented && onDismiss) {
-        event.preventDefault();
-        onDismiss();
-      }
-    }, ownerDoc);
+        /**
+         * We call this before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+         */
+        onEscapeKeyDown?.(event);
+        /**
+         * `onEscapeKeyDown` is able to preventDefault the event, thus stopping call for `onDismiss`.
+         * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
+         */
+        if (!event.defaultPrevented && onDismiss) {
+          event.preventDefault();
+          onDismiss();
+        }
+      },
+      ownerDoc,
+      enabled,
+    );
 
     /**
      * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
      */
     useEffect(() => {
-      if (!node) {
+      if (!node || !enabled) {
         return;
       }
 
@@ -294,7 +264,7 @@ const DismissableLayerInternal = forwardRef<
           ownerDoc.body.style.pointerEvents = originalBodyPointerEvents;
         }
       };
-    }, [node, disableOutsidePointerEvents, context, ownerDoc]);
+    }, [node, enabled, disableOutsidePointerEvents, context, ownerDoc]);
 
     /**
      * We purposefully prevent combining this effect with the `disableOutsidePointerEvents` effect
@@ -302,17 +272,17 @@ const DismissableLayerInternal = forwardRef<
      * and add it to the end again so the layering order wouldn't be creation order.
      * We only want them to be removed from context stacks when unmounted.
      */
+    // biome-ignore lint/correctness/useExhaustiveDependencies: We need to clean up after enabled changes.
     useEffect(() => {
       return () => {
         if (!node) {
           return;
         }
-
         context.layers.delete(node);
         context.layersWithOutsidePointerEventsDisabled.delete(node);
         dispatchUpdate();
       };
-    }, [node, context]);
+    }, [node, context, enabled]);
 
     const parentBranchedLayer = useContext(BranchedLayerContext);
 
@@ -321,7 +291,12 @@ const DismissableLayerInternal = forwardRef<
      * When this layer has a parent, we register it as a child of the parent.
      */
     useEffect(() => {
-      if (!node || !parentBranchedLayer || node === parentBranchedLayer) {
+      if (
+        !node ||
+        !enabled ||
+        !parentBranchedLayer ||
+        node === parentBranchedLayer
+      ) {
         return;
       }
 
@@ -344,7 +319,7 @@ const DismissableLayerInternal = forwardRef<
 
         dispatchUpdate();
       };
-    }, [node, parentBranchedLayer, context]);
+    }, [node, enabled, parentBranchedLayer, context]);
 
     /**
      * Synchronizes layer state across all mounted `DismissableLayer` instances.
