@@ -271,6 +271,8 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
      * because a change to `disableOutsidePointerEvents` would remove this layer from the stack
      * and add it to the end again so the layering order wouldn't be creation order.
      * We only want them to be removed from context stacks when unmounted.
+     *
+     * We depend on `enabled` to clean up when the layer is disabled.
      */
     // biome-ignore lint/correctness/useExhaustiveDependencies: We need to clean up after enabled changes.
     useEffect(() => {
@@ -278,9 +280,14 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         if (!node) {
           return;
         }
-        context.layers.delete(node);
-        context.layersWithOutsidePointerEventsDisabled.delete(node);
-        dispatchUpdate();
+        if (
+          context.layers.has(node) ||
+          context.layersWithOutsidePointerEventsDisabled.has(node)
+        ) {
+          context.layers.delete(node);
+          context.layersWithOutsidePointerEventsDisabled.delete(node);
+          dispatchUpdate();
+        }
       };
     }, [node, context, enabled]);
 
