@@ -28,7 +28,7 @@ function ownerDocument(node: Element | null) {
  * - Keyboard listeners for portaled overlays.
  * - Resize/scroll observers applied to iframe widgets.
  */
-function ownerWindow(node: Document | Element | null): typeof window {
+function ownerWindow(node: Document | Element | null | any): typeof window {
   return node?.ownerDocument?.defaultView || window;
 }
 

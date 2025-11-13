@@ -10,6 +10,7 @@ import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
 import { hideNonTargetElements } from "../hideNonTargetElements";
 import { useLatestRef } from "../hooks/useLatestRef";
 import { ownerDocument } from "../owner";
+import { resolveRef } from "../resolveRef";
 
 /* -------------------------------------------------------------------------- */
 /*                                 FocusBoundary                                 */
@@ -59,7 +60,10 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
    *
    * Set to `false` to not focus anything.
    */
-  returnFocus?: boolean | React.MutableRefObject<HTMLElement | null>;
+  returnFocus?:
+    | boolean
+    | React.MutableRefObject<HTMLElement | null>
+    | (() => boolean | HTMLElement | null | undefined);
   /**
    * Hides all outside content from screen readers when true.
    * @default false
@@ -121,7 +125,6 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         const relatedTarget = event.relatedTarget as HTMLElement | null;
-
         /*
          * `focusout` event with a `null` `relatedTarget` will happen in a few known cases:
          * 1. When the user switches app/tabs/windows/the browser itself loses focus.
@@ -256,7 +259,12 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       const previouslyFocusedElement = ownerDoc.activeElement;
 
       function getReturnElement() {
-        let resolvedReturnFocusValue = returnFocusRef.current;
+        const resolvedReturnFocusValueOrFn = returnFocusRef.current;
+
+        let resolvedReturnFocusValue =
+          typeof resolvedReturnFocusValueOrFn === "function"
+            ? resolvedReturnFocusValueOrFn()
+            : resolvedReturnFocusValueOrFn;
 
         if (
           resolvedReturnFocusValue === undefined ||
@@ -506,18 +514,6 @@ function arrayRemove<T>(array: T[], item: T) {
 
 function removeLinks(items: HTMLElement[]) {
   return items.filter((item) => item.tagName !== "A");
-}
-
-/**
- * If the provided argument is a ref object, returns its `current` value.
- * Otherwise, returns the argument itself.
- *
- * Non-generic to safely handle refs whose `.current` may be `null`.
- */
-function resolveRef(
-  maybeRef: HTMLElement | React.RefObject<HTMLElement | null | undefined>,
-): HTMLElement | null | undefined {
-  return "current" in maybeRef ? maybeRef.current : maybeRef;
 }
 
 export { FocusBoundary };
