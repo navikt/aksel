@@ -49,6 +49,17 @@ type UseCollapsibleRootParams = {
   keepMounted: "visible" | "hidden" | false;
 };
 
+type CollapsibleAnimationType =
+  | "css-transition"
+  | "css-animation"
+  | "none"
+  | null;
+
+interface CollapsibleDimensions {
+  height: number | undefined;
+  width: number | undefined;
+}
+
 function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
   const {
     open: openParam,
@@ -196,17 +207,6 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
       width,
     ],
   );
-}
-
-type CollapsibleAnimationType =
-  | "css-transition"
-  | "css-animation"
-  | "none"
-  | null;
-
-interface CollapsibleDimensions {
-  height: number | undefined;
-  width: number | undefined;
 }
 
 export { useCollapsibleRoot };
