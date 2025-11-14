@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.33.3
+
+### @navikt/ds-react
+
+- Popover: Children no longer re-mounts on open toggle. ([#4281](https://github.com/navikt/aksel/pull/4281))
+
 ## 7.33.2
 
 ### @navikt/ds-react
