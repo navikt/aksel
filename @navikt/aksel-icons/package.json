@@ -81,7 +81,7 @@
     "cross-zip-cli": "1.0.0",
     "fast-glob": "3.2.11",
     "hast-util-select": "6.0.4",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.1.1",
     "lodash": "^4.17.21",
     "prettier": "3.6.2",
     "react": "^18.0.0",
