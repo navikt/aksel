@@ -60,7 +60,6 @@ const InlineMessage: OverridableComponent<InlineMessageProps, HTMLDivElement> =
           {...restProps}
           size={size}
           as={Component}
-          data-status={status}
           data-size={size}
         >
           <InlineMessageIcon status={status} />
