@@ -111,3 +111,258 @@
     color: canvastext;
   }
 }
+
+/* -------------------- InfoCard, LocalAlert, GlobalAlert ------------------- */
+.navds-base-alert {
+  display: grid;
+  border-radius: var(--a-border-radius-xlarge);
+  overflow: clip;
+  height: fit-content;
+
+  --__ac-base-alert-pi: var(--a-spacing-5);
+  --__ac-base-alert-content-p: var(--a-spacing-3) var(--__ac-base-alert-pi) var(--a-spacing-4) var(--__ac-base-alert-pi);
+  --__ac-base-alert-title-pb: var(--a-spacing-05);
+  --__ac-base-alert-header-max-width: 37.5rem;
+
+  &[data-size="small"] {
+    --__ac-base-alert-pi: var(--a-spacing-4);
+    --__ac-base-alert-content-p: var(--a-spacing-2) var(--a-spacing-4) var(--a-spacing-3) var(--a-spacing-4);
+    --__ac-base-alert-title-pb: var(--a-spacing-1);
+  }
+
+  &[data-variant="moderate"] {
+    outline: 1px solid;
+    outline-offset: -1px;
+  }
+
+  &[data-variant="strong"] {
+    outline: 4px solid;
+    outline-offset: -4px;
+  }
+
+  &[data-global="true"] {
+    border-radius: 0;
+  }
+}
+
+.navds-base-alert[data-color="accent"] {
+  outline-color: var(--a-border-action);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-action-subtle);
+      color: var(--a-blue-800);
+      border-color: var(--a-blue-200);
+    }
+  }
+}
+
+.navds-base-alert[data-color="neutral"] {
+  outline-color: var(--a-gray-700);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-neutral-subtle);
+      color: var(--a-gray-800);
+      border-color: var(--a-gray-200);
+    }
+  }
+
+  &[data-variant="strong"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-neutral);
+      color: var(--a-text-on-neutral);
+    }
+  }
+}
+
+.navds-base-alert[data-color="info"] {
+  outline-color: var(--a-border-info);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-info-subtle);
+      color: var(--a-lightblue-900);
+      border-color: var(--a-lightblue-200);
+    }
+  }
+}
+
+.navds-base-alert[data-color="success"] {
+  outline-color: var(--a-border-success);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-success-subtle);
+      color: var(--a-green-800);
+      border-color: var(--a-green-200);
+    }
+  }
+
+  &[data-variant="strong"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-success);
+      color: var(--a-text-on-success);
+    }
+  }
+}
+
+.navds-base-alert[data-color="warning"] {
+  outline-color: var(--a-surface-warning);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-warning-subtle);
+      color: var(--a-orange-900);
+      border-color: var(--a-orange-200);
+    }
+  }
+
+  &[data-variant="strong"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-warning);
+      color: var(--a-text-on-warning);
+    }
+  }
+}
+
+.navds-base-alert[data-color="danger"] {
+  outline-color: var(--a-border-danger);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-danger-subtle);
+      color: var(--a-red-800);
+      border-color: var(--a-red-200);
+    }
+  }
+
+  &[data-variant="strong"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-danger);
+      color: var(--a-text-on-danger);
+    }
+  }
+}
+
+.navds-base-alert[data-color="brand-magenta"] {
+  outline-color: var(--a-border-alt-1);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-alt-1-subtle);
+      color: var(--a-purple-800);
+      border-color: var(--a-purple-200);
+    }
+  }
+}
+
+.navds-base-alert[data-color="brand-beige"] {
+  outline-color: var(--a-border-warning);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-warning-subtle);
+      color: var(--a-orange-900);
+      border-color: var(--a-orange-200);
+    }
+  }
+}
+
+.navds-base-alert[data-color="brand-blue"] {
+  outline-color: var(--a-border-alt-3);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-alt-3-subtle);
+      color: var(--a-deepblue-800);
+      border-color: var(--a-deepblue-200);
+    }
+  }
+}
+
+.navds-base-alert[data-color="meta-lime"] {
+  outline-color: var(--a-border-alt-2);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-alt-2-subtle);
+      color: var(--a-limegreen-900);
+      border-color: var(--a-limegreen-200);
+    }
+  }
+}
+
+.navds-base-alert[data-color="meta-purple"] {
+  outline-color: var(--a-border-alt-1);
+
+  &[data-variant="moderate"] {
+    .navds-base-alert__header {
+      background: var(--a-surface-alt-1-subtle);
+      color: var(--a-purple-800);
+      border-color: var(--a-purple-200);
+    }
+  }
+}
+
+.navds-base-alert__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--a-spacing-2);
+  padding: var(--a-spacing-2) var(--__ac-base-alert-pi);
+  border-bottom: 1px solid;
+
+  .navds-base-alert[data-global="true"] & {
+    padding-inline: max(var(--__ac-base-alert-pi), calc((100% - var(--__ac-base-alert-header-max-width)) / 2));
+  }
+
+  .navds-base-alert[data-variant="strong"] & {
+    border-bottom: none;
+  }
+
+  &:only-child {
+    border-bottom: none;
+  }
+}
+
+.navds-base-alert__icon {
+  font-size: 1.5rem;
+  margin-top: var(--a-spacing-1);
+  display: grid;
+}
+
+.navds-base-alert__title {
+  padding-block: var(--__ac-base-alert-title-pb);
+}
+
+.navds-base-alert__content {
+  padding: var(--__ac-base-alert-content-p);
+  background-color: var(--a-bg-default);
+
+  .navds-base-alert[data-global="true"] & {
+    padding-inline: max(var(--__ac-base-alert-pi), calc((100% - var(--__ac-base-alert-header-max-width)) / 2));
+  }
+}
+
+.navds-base-alert__close-button.navds-base-alert__close-button {
+  margin-left: auto;
+
+  /* Moved focus-outline over wrapper outline */
+  z-index: 1;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px white;
+  }
+
+  &.navds-base-alert__close-button.navds-base-alert__close-button {
+    color: var(--a-text-on-inverted);
+  }
+}
+
+.navds-base-alert[data-color="warning"] .navds-base-alert__close-button.navds-base-alert__close-button {
+  color: var(--a-text-default);
+
+  &:active {
+    color: var(--a-text-on-inverted);
+  }
+}

@@ -8,15 +8,11 @@ export default {
     showLess: "Vis mindre",
     readOnly: "Skrivebeskytta",
     close: "Lukk",
-  },
-
-  Alert: {
-    closeAlert: "Lukk varsel",
-    closeMessage: "Lukk melding",
     error: "Feil",
     info: "Informasjon",
     success: "Suksess",
     warning: "Åtvaring",
+    announcement: "Kunngjering",
   },
   Chips: {
     Removable: {
