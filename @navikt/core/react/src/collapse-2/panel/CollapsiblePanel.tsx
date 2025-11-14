@@ -62,11 +62,6 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
       },
     });
 
-    const transitionAttrbutes =
-      transitionStatus && transitionStatus !== "idle"
-        ? { [`data-${transitionStatus}-style`]: "" }
-        : {};
-
     const style: React.CSSProperties = {
       ...styleProp,
       "--__axc-collapsible-panel-height":
@@ -91,7 +86,6 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
         style={style}
         hidden={hidden}
         data-state={open ? "open" : "closed"}
-        {...transitionAttrbutes}
       >
         {children}
       </div>
