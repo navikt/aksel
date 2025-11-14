@@ -15,13 +15,6 @@ type RenameCSSContext = {
   cn: (...inputs: Parameters<typeof cl>) => ReturnType<typeof cl>;
 };
 
-const [RenameCSSProvider, useRenameCSS] = createContext<RenameCSSContext>({
-  hookName: "useRenameCSS",
-  name: "RenameCSS",
-  providerName: "RenameCSSProvider",
-  defaultValue: { cn: cl },
-});
-
 export const compositeClassFunction = (
   ...inputs: Parameters<typeof cl>
 ): string => {
@@ -33,6 +26,13 @@ export const compositeClassFunction = (
 
   return classes.trim();
 };
+
+const [RenameCSSProvider, useRenameCSS] = createContext<RenameCSSContext>({
+  hookName: "useRenameCSS",
+  name: "RenameCSS",
+  providerName: "RenameCSSProvider",
+  defaultValue: { cn: compositeClassFunction },
+});
 
 const RenameCSS = ({ children }: { children: React.ReactNode }) => {
   return (
