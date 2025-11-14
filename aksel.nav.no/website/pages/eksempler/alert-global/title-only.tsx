@@ -1,17 +1,16 @@
-import { LocalAlert } from "@navikt/ds-react";
+import { GlobalAlert } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <LocalAlert status="announcement">
-      <LocalAlert.Header>
-        <LocalAlert.Title>
-          Systemet vil være utilgjengelig for vedlikehold natt til søndag
-          (01.01)
-        </LocalAlert.Title>
-        <LocalAlert.Close onClick={() => alert("Lukket alert")} />
-      </LocalAlert.Header>
-    </LocalAlert>
+    <GlobalAlert status="announcement">
+      <GlobalAlert.Header>
+        <GlobalAlert.Title>
+          Systemet vil være utilgjengelig natt til søndag
+        </GlobalAlert.Title>
+        <GlobalAlert.Close onClick={() => alert("Lukket alert")} />
+      </GlobalAlert.Header>
+    </GlobalAlert>
   );
 };
 
