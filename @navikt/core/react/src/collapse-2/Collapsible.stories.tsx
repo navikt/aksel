@@ -1,11 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import clsx from "clsx";
 import React, { useState } from "react";
-import { ChevronDownIcon, SidebarLeftIcon } from "@navikt/aksel-icons";
-import { Button } from "../button";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { HGrid } from "../layout/grid";
-import { HStack } from "../layout/stack";
-import { Panel, Root, Trigger } from "./namespace";
+import { Panel, Root, Trigger } from "./Collapse";
 
 const meta: Meta<typeof Root> = {
   title: "Utilities/Collapsible-v3",
@@ -26,7 +24,7 @@ export const Default: Story = {
   },
 };
 
-export const HiddenUntilFound: Story = {
+/* export const HiddenUntilFound: Story = {
   render: BaseCollapsible,
   args: {
     rootProps: {
@@ -34,9 +32,9 @@ export const HiddenUntilFound: Story = {
       keepMounted: "hidden",
     },
   },
-};
+}; */
 
-export const HiddenUntilFoundWithTransition: Story = {
+/* export const HiddenUntilFoundWithTransition: Story = {
   render: BaseCollapsible,
   args: {
     rootProps: {
@@ -45,7 +43,7 @@ export const HiddenUntilFoundWithTransition: Story = {
     },
     animation: "transition-vertical",
   },
-};
+}; */
 
 export const ControlledNotKeepMounted: Story = {
   render: () => {
@@ -67,12 +65,13 @@ export const Animations: Story = {
   render: () => (
     <HGrid columns={2} gap="space-32">
       <div>
-        <h2>Keepmounted: hidden</h2>
+        <h2>Keepmounted: true</h2>
         <BaseCollapsible
-          rootProps={{ keepMounted: "hidden", defaultOpen: true }}
+          rootProps={{ keepMounted: true, defaultOpen: true }}
           animation="animation-vertical"
         />
       </div>
+
       <div>
         <h2>Keepmounted: false</h2>
         <BaseCollapsible
@@ -82,7 +81,7 @@ export const Animations: Story = {
       </div>
       <div>
         <BaseCollapsible
-          rootProps={{ keepMounted: "hidden", defaultOpen: false }}
+          rootProps={{ keepMounted: true, defaultOpen: false }}
           animation="animation-vertical"
         />
       </div>
@@ -100,9 +99,9 @@ export const AnimationsHorizontal: Story = {
   render: () => (
     <HGrid columns={2} gap="space-32">
       <div>
-        <h2>Keepmounted: hidden</h2>
+        <h2>Keepmounted: true</h2>
         <BaseCollapsible
-          rootProps={{ keepMounted: "hidden", defaultOpen: true }}
+          rootProps={{ keepMounted: true, defaultOpen: true }}
           animation="animation-horizontal"
         />
       </div>
@@ -115,7 +114,7 @@ export const AnimationsHorizontal: Story = {
       </div>
       <div>
         <BaseCollapsible
-          rootProps={{ keepMounted: "hidden", defaultOpen: false }}
+          rootProps={{ keepMounted: true, defaultOpen: false }}
           animation="animation-horizontal"
         />
       </div>
@@ -133,9 +132,9 @@ export const Transitions: Story = {
   render: () => (
     <HGrid columns={2} gap="space-32">
       <div>
-        <h2>Keepmounted: hidden</h2>
+        <h2>Keepmounted: true</h2>
         <BaseCollapsible
-          rootProps={{ keepMounted: "hidden", defaultOpen: true }}
+          rootProps={{ keepMounted: true, defaultOpen: true }}
           animation="transition-vertical"
         />
       </div>
@@ -148,7 +147,7 @@ export const Transitions: Story = {
       </div>
       <div>
         <BaseCollapsible
-          rootProps={{ keepMounted: "hidden", defaultOpen: false }}
+          rootProps={{ keepMounted: true, defaultOpen: false }}
           animation="transition-vertical"
         />
       </div>
@@ -166,9 +165,9 @@ export const TransitionsHorizontal: Story = {
   render: () => (
     <HGrid columns={2} gap="space-32">
       <div>
-        <h2>Keepmounted: hidden</h2>
+        <h2>Keepmounted: true</h2>
         <BaseCollapsible
-          rootProps={{ keepMounted: "hidden", defaultOpen: true }}
+          rootProps={{ keepMounted: true, defaultOpen: true }}
           animation="transition-horizontal"
         />
       </div>
@@ -181,7 +180,7 @@ export const TransitionsHorizontal: Story = {
       </div>
       <div>
         <BaseCollapsible
-          rootProps={{ keepMounted: "hidden", defaultOpen: false }}
+          rootProps={{ keepMounted: true, defaultOpen: false }}
           animation="transition-horizontal"
         />
       </div>
@@ -195,10 +194,9 @@ export const TransitionsHorizontal: Story = {
   ),
 };
 
-export const LayoutWithSidebar: Story = {
+/* export const LayoutWithSidebar: Story = {
   render: () => {
     const [open, setOpen] = useState(true);
-    /* <button onClick={() => setOpen((x) => !x)}>Toggle</button> */
 
     return (
       <HStack>
@@ -245,7 +243,7 @@ export const LayoutWithSidebar: Story = {
   parameters: {
     layout: "fullscreen",
   },
-};
+}; */
 
 type BaseCollapsibleProps = {
   rootProps?: Omit<React.ComponentProps<typeof Root>, "children">;
@@ -325,7 +323,8 @@ const StoryStyles = (
     }
 
     .panel {
-overflow: hidden;
+      overflow: hidden;
+
       & ul {
         display: flex;
         flex-direction: column;
@@ -367,7 +366,7 @@ overflow: hidden;
         height: 0;
       }
       to {
-        height: var(--__axc-collapsible-panel-height);
+        height: var(--panel-height);
       }
     }
 
@@ -376,12 +375,12 @@ overflow: hidden;
         width: 0;
       }
       to {
-        width: var(--__axc-collapsible-panel-width);
+        width: var(--panel-width);
       }
     }
 
     .panel-transition {
-      height: var(--__axc-collapsible-panel-height);
+      height: var(--panel-height);
       transition: all 300ms ease;
 
       &[data-entering-style] {
@@ -397,7 +396,7 @@ overflow: hidden;
     }
 
     .panel-transition-horizontal {
-      width: var(--__axc-collapsible-panel-width);
+      width: var(--panel-width);
       transition: all 3000ms ease;
       box-sizing: border-box;
       overflow: hidden;
@@ -414,7 +413,7 @@ overflow: hidden;
       transition: all 3000ms ease;
       overflow: hidden;
 
-      width: var(--__axc-collapsible-panel-width);
+      width: var(--panel-width);
 
       &[data-entering-style] {
         width: 6rem;
