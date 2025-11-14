@@ -10,7 +10,6 @@ import {
   XMarkOctagonIcon,
 } from "@navikt/aksel-icons";
 import type { AkselColor } from "../../../types";
-import { useI18n } from "../../../util/i18n/i18n.hooks";
 import type { BaseAlertContextProps } from "../root/BaseAlertRoot.context";
 
 function baseAlertStatusToDataColor(
@@ -56,15 +55,13 @@ function BaseAlertStatusIcon({
   status: BaseAlertContextProps["status"];
   fill?: boolean;
 }) {
-  const translate = useI18n("global");
-
   if (!status) {
     return null;
   }
 
   const Icon = fill ? STATUS_ICONS[status].fill : STATUS_ICONS[status].outline;
 
-  return <Icon title={translate(status)} aria-hidden />;
+  return <Icon aria-hidden />;
 }
 
-export { baseAlertStatusToDataColor, BaseAlertStatusIcon };
+export { BaseAlertStatusIcon, baseAlertStatusToDataColor };
