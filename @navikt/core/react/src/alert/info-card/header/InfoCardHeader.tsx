@@ -7,7 +7,7 @@ type InfoCardHeaderProps = BaseAlert.HeaderProps;
  * @example
  * ```jsx
  *  <InfoCard>
- *    <InfoCard.Header icon={<InformationSquareIcon />}>
+ *    <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
  *      <InfoCard.Title>Info title</InfoCard.Title>
  *    </InfoCard.Header>
  *  </InfoCard>

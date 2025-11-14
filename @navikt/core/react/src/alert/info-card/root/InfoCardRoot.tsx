@@ -24,7 +24,7 @@ interface InfoCardComponent
    * @example
    * ```jsx
    *  <InfoCard>
-   *    <InfoCard.Header icon={<InformationSquareIcon />}>
+   *    <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
    *      <InfoCard.Title>Info title</InfoCard.Title>
    *    </InfoCard.Header>
    *  </InfoCard>
@@ -69,7 +69,7 @@ interface InfoCardComponent
  * @example
  * ```jsx
  *  <InfoCard data-color="info">
- *    <InfoCard.Header icon={<InformationSquareIcon />}>
+ *    <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
  *      <InfoCard.Title>Info title</InfoCard.Title>
  *    </InfoCard.Header>
  *    <InfoCard.Content>Content</InfoCard.Content>

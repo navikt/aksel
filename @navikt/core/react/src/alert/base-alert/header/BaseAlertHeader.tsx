@@ -18,7 +18,7 @@ interface BaseAlertHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
  * @example
  * ```jsx
  *  <BaseAlert>
- *    <BaseAlert.Header icon={<InformationSquareIcon />}>
+ *    <BaseAlert.Header icon={<InformationSquareIcon aria-hidden />}>
  *      <BaseAlert.Title>Info title</BaseAlert.Title>
  *    </BaseAlert.Header>
  *  </BaseAlert>
