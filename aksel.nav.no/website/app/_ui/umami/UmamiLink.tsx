@@ -1,5 +1,6 @@
 "use client";
 
+import { stegaClean } from "next-sanity";
 import NextLink from "next/link";
 import { Link, LinkProps } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
@@ -14,8 +15,8 @@ export const UmamiLink = ({
       {...props}
       onClick={() =>
         umamiTrack("navigere", {
-          kilde: umamiKilde,
-          url: props.href!,
+          kilde: stegaClean(umamiKilde),
+          url: stegaClean(props.href)!,
         })
       }
       className={styles.umamiLink}

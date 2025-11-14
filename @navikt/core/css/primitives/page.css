@@ -10,7 +10,6 @@
 
 /* Page.Block */
 .navds-pageblock {
-  /* stylelint-disable-next-line length-zero-no-unit */
   --__ac-page-padding-inline: 0px;
 
   margin-inline: auto;

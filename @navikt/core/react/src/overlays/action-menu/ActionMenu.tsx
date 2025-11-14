@@ -276,6 +276,26 @@ const ActionMenuRoot = ({
   );
 };
 
+/**
+ * ActionMenu is a dropdown menu for actions and navigation.
+ *
+ * @example
+ * ```jsx
+ * <ActionMenu>
+ *   <ActionMenu.Trigger>
+ *     <button>Open Menu</button>
+ *   </ActionMenu.Trigger>
+ *   <ActionMenu.Content>
+ *     <ActionMenu.Item onSelect={() => alert("Item 1 selected")}>
+ *       Item 1
+ *     </ActionMenu.Item>
+ *     <ActionMenu.Item onSelect={() => alert("Item 2 selected")}>
+ *       Item 2
+ *     </ActionMenu.Item>
+ *   </ActionMenu.Content>
+ * <ActionMenu>
+ * ```
+ */
 export const ActionMenu = ActionMenuRoot as ActionMenuComponent;
 
 /* -------------------------------------------------------------------------- */
@@ -353,7 +373,7 @@ export const ActionMenuContent = forwardRef<
     const { cn } = useRenameCSS();
 
     return (
-      <Menu.Portal rootElement={context.rootElement} asChild>
+      <Menu.Portal rootElement={context.rootElement}>
         <Menu.Content
           ref={ref}
           id={context.contentId}
@@ -363,9 +383,7 @@ export const ActionMenuContent = forwardRef<
           align={align}
           sideOffset={4}
           collisionPadding={10}
-          onCloseAutoFocus={() => {
-            context.triggerRef.current?.focus();
-          }}
+          returnFocus={context.triggerRef}
           safeZone={{ anchor: context.triggerRef.current }}
           style={{
             ...style,

@@ -344,7 +344,7 @@ const MenuWithAnchor = (props: MenuProps) => {
       <Menu.Portal>
         <Menu.Content
           className="content"
-          onCloseAutoFocus={(event) => event.preventDefault()}
+          returnFocus={false}
           align="start"
           {...contentProps}
         >
@@ -416,9 +416,7 @@ export const MenuWithOpenButton = () => {
           className="content"
           align="start"
           ref={contentRef}
-          onCloseAutoFocus={() => {
-            triggerRef.current?.focus();
-          }}
+          returnFocus={triggerRef}
         >
           <Menu.Item className="item" onSelect={() => window.alert("undo")}>
             Undo
@@ -482,11 +480,7 @@ export const TestMenu = () => {
         <button>Menu</button>
       </Menu.Anchor>
       <Menu.Portal>
-        <Menu.Content
-          className="content"
-          onCloseAutoFocus={(event) => event.preventDefault()}
-          align="start"
-        >
+        <Menu.Content className="content" returnFocus={false} align="start">
           <Menu.Item className="item" onSelect={() => window.alert("Undo")}>
             Undo
           </Menu.Item>

@@ -37,7 +37,6 @@
   /* TODO: For page-overview templates: max-width 1280px, only 1 column always since there is no TOC */
   grid-template-columns: minmax(0, 960px);
   grid-template-rows: min-content min-content;
-  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
   grid-template-areas:
     "intro"
     "content";

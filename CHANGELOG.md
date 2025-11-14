@@ -1,5 +1,27 @@
 # Changelog
 
+## 7.33.3
+
+### @navikt/ds-react
+
+- Popover: Children no longer re-mounts on open toggle. ([#4281](https://github.com/navikt/aksel/pull/4281))
+
+## 7.33.2
+
+### @navikt/ds-react
+
+- Timeline: Pins before or after date-range are now hidden. ([#4266](https://github.com/navikt/aksel/pull/4266))
+
+- useRangeDatepicker: `defaultSelected` no longer overrides `defaultMonth` when `defaultSelected.from` is `undefined` ([#4267](https://github.com/navikt/aksel/pull/4267))
+
+- Modal: Improve scroll-lock interaction for sticky elements. ([#4269](https://github.com/navikt/aksel/pull/4269))
+
+## 7.33.1
+
+### @navikt/ds-react
+
+- Portal: Update `<Portal />` to respect dom and render-order. Removed `asChild`-prop. ([#4239](https://github.com/navikt/aksel/pull/4239))
+
 ## 7.33.0
 
 ### @navikt/ds-react
