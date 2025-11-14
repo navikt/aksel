@@ -4,11 +4,11 @@ import styles from "./CompareImages.module.css";
 import { useCompareImages } from "./CompareImages.provider";
 
 function CompareImagesContainer({ children }: { children: React.ReactNode }) {
-  const { container } = useCompareImages();
+  const { container, registerContainer } = useCompareImages();
 
   return (
     <div
-      ref={container.ref}
+      ref={registerContainer}
       style={container.styles}
       className={styles.compareImagesContainer}
       onPointerDown={container.onPointerDown}

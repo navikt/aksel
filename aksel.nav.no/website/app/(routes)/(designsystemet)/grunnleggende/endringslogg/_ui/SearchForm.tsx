@@ -99,7 +99,8 @@ export const SearchForm = ({
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to run this when urlParams changes
   useEffect(() => {
     if (!urlParams.has("fritekst")) {
-      setSearchInput(""); // In case you clear the URL params by clicking on "Endringslogg" again in the menu
+      // In case you clear the URL params by clicking on "Endringslogg" again in the menu
+      startTransition(() => setSearchInput(""));
     }
   }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
