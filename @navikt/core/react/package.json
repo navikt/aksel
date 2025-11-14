@@ -30,7 +30,8 @@
     "/esm",
     "/src",
     "!**/*.tsbuildinfo",
-    "!**/*.stories.*"
+    "!**/*.stories.*",
+    "!**/renderStoriesForChromatic.tsx"
   ],
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
