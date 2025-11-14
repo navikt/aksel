@@ -10,7 +10,7 @@ interface BaseAlertTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
    * Changes the HTML element used for the title.
    * @default "h2"
    */
-  as?: "h2" | "h3" | "h4" | "h5" | "h6";
+  as?: "h2" | "h3" | "h4" | "h5" | "h6" | "div";
 }
 
 /**
