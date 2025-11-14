@@ -318,7 +318,6 @@
 
   .navds-base-alert[data-variant="strong"] & {
     border-bottom: none;
-    z-index: 1;
   }
 
   &:only-child {
@@ -347,6 +346,8 @@
 
 .navds-base-alert__close-button.navds-base-alert__close-button {
   margin-left: auto;
+
+  /* Moved focus-outline over wrapper outline */
   z-index: 1;
 
   &:focus-visible {

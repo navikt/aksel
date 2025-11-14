@@ -141,7 +141,6 @@
     background: var(--ax-bg-strong);
     color: var(--ax-text-contrast);
     border-bottom: none;
-    z-index: 1;
   }
 
   &:only-child {
@@ -170,6 +169,8 @@
 
 .aksel-base-alert__close-button {
   margin-left: auto;
+
+  /* Moved focus-outline over wrapper outline */
   z-index: 1;
 
   &:focus-visible {
