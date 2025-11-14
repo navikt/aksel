@@ -29,12 +29,6 @@ export const Default: Story = {
   render: (props) => {
     const [open, setOpen] = React.useState(false);
 
-    /* useEffect(() => {
-      setTimeout(() => {
-        setOpen(true);
-      }, 3000);
-    }, []); */
-
     return (
       <div>
         <button onClick={() => setOpen(!open)}>toggle</button>
@@ -182,6 +176,32 @@ export const WrappingTitle: Story = {
         </GlobalAlertHeader>
         <DemoContent />
       </GlobalAlert>
+    );
+  },
+};
+
+export const A11yTest: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <div>
+        <Button onClick={() => setOpen(!open)}>Toggle open</Button>
+        {open && (
+          <GlobalAlert status="announcement">
+            <GlobalAlertHeader>
+              <GlobalAlertTitle>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non
+                fugiat tempore corrupti asperiores praesentium? Asperiores,
+                doloribus? Molestias, laudantium saepe. Nihil in alias
+                praesentium maxime iure ipsam? Accusantium libero quia quis!
+              </GlobalAlertTitle>
+              <GlobalAlertClose onClick={() => alert("Lukket!")} />
+            </GlobalAlertHeader>
+            <DemoContent />
+          </GlobalAlert>
+        )}
+      </div>
     );
   },
 };
