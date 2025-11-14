@@ -3,10 +3,14 @@ import FG from "fast-glob";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { loadCsf } from "storybook/internal/csf-tools";
 import { InlineConfig } from "vite";
 import turbosnap from "vite-plugin-turbosnap";
 import TsconfigPathsPlugin from "vite-tsconfig-paths";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const require = createRequire(import.meta.url);
 const includeWebsiteStories = process.env.WITH_WEBSITE === "true";
