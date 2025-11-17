@@ -59,8 +59,7 @@ export const Default: Story = {
     );
   },
   args: {
-    title: "",
-    description: "",
+    size: "medium",
   },
   argTypes: {
     size: { control: { type: "radio" }, options: ["small", "medium", "large"] },
@@ -111,36 +110,11 @@ export const Ordered: Story = {
   },
 };
 
-export const WithHeading: Story = {
-  render: () => {
-    return (
-      <List
-        title="Lorem Ipsum Dolor Sit Amet"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-      >
-        <List.Item title="Lorem Ipsum Dolor Sit Amet">
-          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-        </List.Item>
-        <List.Item title="Consectetur Adipiscing Elit">
-          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-        </List.Item>
-        <List.Item title="Sed Do Eiusmod Tempor Incididunt">
-          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-        </List.Item>
-      </List>
-    );
-  },
-};
-
 export const SizesUl: Story = {
   render: () => {
     return (
       <VStack gap="8">
-        <List
-          title="Large list"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-          size="large"
-        >
+        <List size="large">
           <List.Item title="Lorem Ipsum Dolor Sit Amet">
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
@@ -151,11 +125,7 @@ export const SizesUl: Story = {
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
         </List>
-        <List
-          title="Medium list"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-          size="medium"
-        >
+        <List size="medium">
           <List.Item title="Lorem Ipsum Dolor Sit Amet">
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
@@ -166,11 +136,7 @@ export const SizesUl: Story = {
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
         </List>
-        <List
-          title="Small list"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-          size="small"
-        >
+        <List size="small">
           <List.Item title="Lorem Ipsum Dolor Sit Amet">
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
@@ -190,12 +156,7 @@ export const SizesOl: Story = {
   render: () => {
     return (
       <VStack gap="8">
-        <List
-          title="Large list"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-          size="large"
-          as="ol"
-        >
+        <List size="large" as="ol">
           <List.Item title="Lorem Ipsum Dolor Sit Amet">
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
@@ -206,12 +167,7 @@ export const SizesOl: Story = {
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
         </List>
-        <List
-          title="Medium list"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-          size="medium"
-          as="ol"
-        >
+        <List size="medium" as="ol">
           <List.Item title="Lorem Ipsum Dolor Sit Amet">
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
@@ -222,12 +178,7 @@ export const SizesOl: Story = {
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
         </List>
-        <List
-          title="Small list"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-          size="small"
-          as="ol"
-        >
+        <List size="small" as="ol">
           <List.Item title="Lorem Ipsum Dolor Sit Amet">
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
@@ -247,11 +198,7 @@ export const SizesIcons: Story = {
   render: () => {
     return (
       <VStack gap="8">
-        <List
-          title="Large list"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-          size="large"
-        >
+        <List size="large">
           <List.Item
             icon={<HeadHeartIcon aria-hidden />}
             title="Lorem Ipsum Dolor Sit Amet"
@@ -268,11 +215,7 @@ export const SizesIcons: Story = {
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
         </List>
-        <List
-          title="Medium list"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-          size="medium"
-        >
+        <List size="medium">
           <List.Item
             icon={<HeadHeartIcon aria-hidden />}
             title="Lorem Ipsum Dolor Sit Amet"
@@ -289,11 +232,7 @@ export const SizesIcons: Story = {
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
         </List>
-        <List
-          title="Small list"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-          size="small"
-        >
+        <List size="small">
           <List.Item
             icon={<HeadHeartIcon aria-hidden />}
             title="Lorem Ipsum Dolor Sit Amet"
@@ -318,7 +257,7 @@ export const SizesIcons: Story = {
 export const Icons: Story = {
   render: () => {
     return (
-      <List title="Best title">
+      <List>
         <List.Item
           title="Lorem Ipsum Dolor Sit Amet"
           icon={
@@ -459,10 +398,6 @@ export const Chromatic: Story = {
       <div>
         <h2>Ordered</h2>
         {Ordered.render?.(...args)}
-      </div>
-      <div>
-        <h2>WithHeading</h2>
-        {WithHeading.render?.(...args)}
       </div>
       <div>
         <h2>SizesUl</h2>
