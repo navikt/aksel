@@ -36,5 +36,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "LocalAlert kommer i to størrelser: medium og small.",
+  desc: "InfoCard kommer i to størrelser: medium og small.",
 };
