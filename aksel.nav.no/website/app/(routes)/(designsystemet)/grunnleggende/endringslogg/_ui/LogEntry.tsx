@@ -122,11 +122,7 @@ export default function LogEntry({
               </BodyShort>
             </HStack>
             {fremhevet && (
-              <Tag
-                size="xsmall"
-                variant="neutral-filled"
-                data-color="aksel-brand-pink"
-              >
+              <Tag size="xsmall" variant="strong" data-color="aksel-brand-pink">
                 Fremhevet
               </Tag>
             )}

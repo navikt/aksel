@@ -174,7 +174,7 @@ const AktivitetsplanPage = () => {
                       </BodyShort>
                     )}
                     {tag && (
-                      <Tag variant={tag.variant} size="small">
+                      <Tag data-color={tag.color} size="small">
                         {tag.text}
                       </Tag>
                     )}

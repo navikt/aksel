@@ -101,7 +101,7 @@ function IconPageIconDetails({
           <HStack gap="space-8" marginBlock="space-12 0" as="ul">
             {[...dedupedKeywords.keys()].map((keyword) => (
               <li key={keyword}>
-                <Tag size="small" variant="neutral-moderate">
+                <Tag size="small" variant="moderate">
                   {keyword}
                 </Tag>
               </li>

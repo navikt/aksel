@@ -9,7 +9,7 @@ export interface BaseActivity {
   hasChange?: boolean;
   id: string;
   location: string;
-  tag?: { variant: TagProps["variant"]; text: string };
+  tag?: { color: TagProps["data-color"]; text: string };
 }
 
 export interface JobPosition extends BaseActivity {
@@ -51,7 +51,7 @@ const activities: Activity[] = [
     location: "Kristiansand",
     actionText: "Les mer om stillingen",
     tag: {
-      variant: "success",
+      color: "success",
       text: "Venter på Nav",
     },
   },
@@ -68,7 +68,7 @@ const activities: Activity[] = [
     description: `CaCO3 løses i vann ved oppkok og avkjøles til 25˚C. Løsningen appliseres til tøystykker og legges rundt bruddstedet. Beinet holdes i ro til gipsen har stivnet. Dette burde ta en dag, men det er lurt å ta forbehold om at det kan gå flere dager. CaCO3 løses i vann ved oppkok og avkjøles til 25˚C.`,
     id: "2",
     actionText: "Endre på aktiviteten",
-    tag: { variant: "info-filled", text: "Avtalt med Nav" },
+    tag: { color: "info", text: "Avtalt med Nav" },
   },
   {
     category: "Møte med Nav",
@@ -96,7 +96,7 @@ const activities: Activity[] = [
     id: "4",
     title: "Servitør",
     tag: {
-      variant: "success",
+      color: "success",
       text: "Venter på Nav",
     },
     actionText: "Les mer om stillingen",
@@ -111,7 +111,7 @@ const activities: Activity[] = [
     id: "5",
     title: "Ass. skipskokk",
     tag: {
-      variant: "success",
+      color: "success",
       text: "Venter på Nav",
     },
     actionText: "Les mer om stillingen",
@@ -126,7 +126,7 @@ const activities: Activity[] = [
     id: "4",
     title: "Servitør",
     tag: {
-      variant: "success",
+      color: "success",
       text: "Venter på Nav",
     },
     actionText: "Les mer om stillingen",
@@ -140,7 +140,7 @@ const activities: Activity[] = [
     id: "7",
     title: "Greve av Gral",
     tag: {
-      variant: "neutral",
+      color: "neutral",
       text: "Ikke fått jobben",
     },
     actionText: "Les mer om stillingen",

@@ -35,6 +35,7 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
   /**
    * Changes visual profile of tag
+   * @default "outline"
    */
   variant?: "outline" | "moderate" | "strong" | HiddenVariant;
   /**
@@ -68,7 +69,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
     {
       children,
       className,
-      variant,
+      variant = "outline",
       size = "medium",
       icon,
       "data-color": color,

@@ -78,7 +78,7 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
       )}
       <HStack gap="space-16" align="center" marginBlock="space-24 0">
         {statusTag && (
-          <Tag variant="info" size="xsmall" data-color={statusTag.colorRole}>
+          <Tag size="xsmall" data-color={statusTag.colorRole}>
             {statusTag.text}
           </Tag>
         )}
