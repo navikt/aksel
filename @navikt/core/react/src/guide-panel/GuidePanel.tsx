@@ -54,11 +54,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
         data-color={color}
         {...rest}
         ref={ref}
-        className={cn("navds-guide-panel", className, {
-          "navds-guide-panel--poster": poster === true,
-          "navds-guide-panel--not-poster": poster === false,
-          "navds-guide-panel--responsive-poster": poster === undefined,
-        })}
+        className={cn("navds-guide-panel", className)}
         data-responsive={poster === undefined}
         data-poster={poster}
       >

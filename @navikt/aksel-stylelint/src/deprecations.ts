@@ -84,4 +84,12 @@ export const deprecations: DeprecatedList = [
     classes: ["navds-modal__document-body"],
     message: "Removed in v8. We recommend not using this class anymore.",
   },
+  {
+    classes: [
+      "navds-guide-panel--poster",
+      "navds-guide-panel--not-poster",
+      "navds-guide-panel--responsive-poster",
+    ],
+    message: "Removed in v8.",
+  },
 ];
