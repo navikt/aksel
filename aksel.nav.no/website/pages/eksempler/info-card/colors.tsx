@@ -48,5 +48,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "InfoCard kommer i to størrelser: medium og small.",
+  desc: "InfoCard støtter flere fargevalg for ulike kontekster.",
 };
