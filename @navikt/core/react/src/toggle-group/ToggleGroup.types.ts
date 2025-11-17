@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react";
+import type { AkselColor } from "../types";
 
 export interface ToggleGroupProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
@@ -28,10 +29,13 @@ export interface ToggleGroupProps
    */
   label?: React.ReactNode;
   /**
-   * Changes design and interaction-visuals.
-   * @default "action"
+   * @deprecated Use `data-color` prop instead.
    */
   variant?: "action" | "neutral";
+  /**
+   * ToggleButton color.
+   */
+  "data-color"?: AkselColor;
   /**
    * Stretch each button to fill avaliable space in container.
    * @default false

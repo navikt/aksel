@@ -128,6 +128,8 @@ export const deprecations: DeprecatedList = [
       "navds-chips__removable--neutral",
       "navds-chips__toggle--action",
       "navds-chips__toggle--neutral",
+      "navds-toggle-group--action",
+      "navds-toggle-group--neutral",
     ],
     message: "Removed in v8.",
   },

@@ -15,6 +15,10 @@ export interface ChipsToggleProps
    */
   variant?: "action" | "neutral";
   /**
+   * Chip color
+   */
+  "data-color"?: AkselColor;
+  /**
    * Toggles display of checkmark on selected
    * @default true
    */
