@@ -31,6 +31,10 @@ interface AccordionComponent
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
+   * @deprecated Removed in v8, but backwards compatible. Use `data-color` instead.
+   */
+  variant?: "default" | "neutral";
+  /**
    * @default "medium"
    */
   size?: "large" | "medium" | "small";
@@ -66,7 +70,10 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  * ```
  */
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
-  ({ className, size = "medium", indent = true, ...rest }, ref) => {
+  (
+    { className, variant = "default", size = "medium", indent = true, ...rest },
+    ref,
+  ) => {
     const { cn } = useRenameCSS();
 
     return (
@@ -77,6 +84,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         }}
       >
         <div
+          data-color={variant === "neutral" ? "neutral" : undefined}
           {...rest}
           className={cn(
             "navds-accordion",
