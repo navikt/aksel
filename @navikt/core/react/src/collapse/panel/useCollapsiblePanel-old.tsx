@@ -14,6 +14,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
   const { externalRef } = params;
   const {
     open,
+    mounted,
     animationTypeRef,
     panelRef,
     height,
@@ -92,8 +93,9 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
     };
   });
 
+  /* Run only if using css transitions */
   useClientLayoutEffect(() => {
-    if (!animationTypeRef.current || !panelRef.current) {
+    if (animationTypeRef.current !== "css-transition" || !panelRef.current) {
       return;
     }
 
@@ -103,6 +105,135 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       abortControllerRef.current.abort();
       abortControllerRef.current = null;
     }
+
+    if (open) {
+      const originalLayoutStyles = {
+        "justify-content": panel.style.justifyContent,
+        "align-items": panel.style.alignItems,
+        "align-content": panel.style.alignContent,
+        "justify-items": panel.style.justifyItems,
+      };
+
+      /* opening */
+      Object.keys(originalLayoutStyles).forEach((key) => {
+        panel.style.setProperty(key, "initial", "important");
+      });
+
+      const assumeWidthTransition = hasWidthTransition(panel);
+
+      const originalWidth = panel.style.width;
+      if (assumeWidthTransition) {
+        panel.style.setProperty("width", "auto", "important");
+      }
+
+      /**
+       * When `keepMounted={false}` and the panel is initially closed, the very
+       * first time it opens (not any subsequent opens) `data-entering-style` is
+       * off or missing by a frame so we need to set it manually. Otherwise any
+       * CSS properties expected to transition using [data-entering-style] may
+       * be mis-timed and appear to be complete skipped.
+       *
+       * How to test:
+       * - Set up demo with transition and `data-entering-style` (e.g. opacity)
+       * - Test with `keepMounted` "hidden" and false
+       * - Keepmounted: false only works consistently if this is set
+       * - KeepMounted: "hidden" works fine either way
+       */
+      if (!shouldCancelInitialOpenTransitionRef.current && !keepMounted) {
+        panel.setAttribute("data-entering-style", "");
+      }
+
+      setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
+
+      if (assumeWidthTransition) {
+        panel.style.setProperty("width", originalWidth);
+      }
+
+      let resizeFrame = -1;
+      resizeFrame = requestAnimationFrame(() => {
+        Object.entries(originalLayoutStyles).forEach(([key, value]) => {
+          if (value === "") {
+            panel.style.removeProperty(key);
+          } else {
+            panel.style.setProperty(key, value);
+          }
+        });
+      });
+
+      return () => {
+        cancelAnimationFrame(resizeFrame);
+      };
+    }
+
+    if (panel.scrollHeight === 0 && panel.scrollWidth === 0) {
+      return undefined;
+    }
+
+    /* Closing panel */
+    setDimensions({ height: panel.scrollHeight, width: panel.scrollWidth });
+
+    const abortController = new AbortController();
+    abortControllerRef.current = abortController;
+    const signal = abortController.signal;
+
+    let attributeObserver: MutationObserver | null = null;
+
+    const endingStyleAttribute = "data-exiting-style";
+
+    /* Wait for `[data-exiting-style]` to be applied */
+    attributeObserver = new MutationObserver((mutationList) => {
+      const hasEndingStyle = mutationList.some(
+        (mutation) =>
+          mutation.type === "attributes" &&
+          mutation.attributeName === endingStyleAttribute,
+      );
+
+      if (hasEndingStyle) {
+        attributeObserver?.disconnect();
+        attributeObserver = null;
+        runOnceAnimationsFinish(() => {
+          setDimensions({ height: 0, width: 0 });
+          panel.style.removeProperty("content-visibility");
+          setMounted(false);
+          if (abortControllerRef.current === abortController) {
+            abortControllerRef.current = null;
+          }
+        }, signal);
+      }
+    });
+
+    attributeObserver.observe(panel, {
+      attributes: true,
+      attributeFilter: [endingStyleAttribute],
+    });
+
+    return () => {
+      attributeObserver?.disconnect();
+
+      if (abortControllerRef.current === abortController) {
+        abortController.abort();
+        abortControllerRef.current = null;
+      }
+    };
+  }, [
+    abortControllerRef,
+    animationTypeRef,
+    keepMounted,
+    mounted,
+    open,
+    panelRef,
+    runOnceAnimationsFinish,
+    setDimensions,
+    setMounted,
+  ]);
+
+  /* Run only if using CSS animations */
+  useClientLayoutEffect(() => {
+    if (animationTypeRef.current !== "css-animation" || !panelRef.current) {
+      return;
+    }
+
+    const panel = panelRef.current;
 
     panel.style.setProperty("animation-name", "none");
 
@@ -117,21 +248,20 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
 
     /* When open remove "hidden" instantly and mount panel */
     if (open) {
+      if (abortControllerRef.current !== null) {
+        abortControllerRef.current.abort();
+        abortControllerRef.current = null;
+      }
       setMounted(true);
       setVisible(true);
     } else {
       /* When closing, wait until animation finishes to set `hidden` and unmount panel */
       abortControllerRef.current = new AbortController();
-      const signal = abortControllerRef.current.signal;
-
-      requestAnimationFrame(() => {
-        runOnceAnimationsFinish(() => {
-          setDimensions({ height: 0, width: 0 });
-          setMounted(false);
-          setVisible(false);
-          abortControllerRef.current = null;
-        }, signal);
-      });
+      runOnceAnimationsFinish(() => {
+        setMounted(false);
+        setVisible(false);
+        abortControllerRef.current = null;
+      }, abortControllerRef.current.signal);
     }
   }, [
     abortControllerRef,
@@ -235,6 +365,19 @@ function getAnimationType(element: HTMLElement): CollapsibleAnimationType {
   }
 
   return "none";
+}
+
+function hasWidthTransition(element: HTMLElement): boolean {
+  const panelStyles = getComputedStyle(element);
+
+  const transitionProperties = panelStyles.transitionProperty
+    .split(",")
+    .map((prop) => prop.trim());
+
+  return (
+    transitionProperties.includes("width") ||
+    transitionProperties.includes("all")
+  );
 }
 
 export { useCollapsiblePanel };

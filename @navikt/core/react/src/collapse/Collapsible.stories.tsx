@@ -382,7 +382,7 @@ overflow: hidden;
 
     .panel-transition {
       height: var(--__axc-collapsible-panel-height);
-      transition: all 300ms ease;
+      transition: all 600ms ease;
 
       &[data-entering-style] {
         height: 0;
