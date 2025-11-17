@@ -117,16 +117,11 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
       panel.style.removeProperty("animation-name");
     }
 
-    if (!hiddenUntilFound && !keepMounted) {
-      if (!mounted && nextOpen) {
+    if (!hiddenUntilFound && !keepMounted && nextOpen) {
+      if (!mounted) {
         setMounted(true);
       }
-
-      if (
-        animationTypeRef.current === "css-animation" &&
-        !visible &&
-        nextOpen
-      ) {
+      if (animationTypeRef.current === "css-animation" && !visible) {
         setVisible(true);
       }
     }

@@ -194,42 +194,24 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
  * in based on the animation type/orientation.
  */
 function getAnimationType(element: HTMLElement): CollapsibleAnimationType {
-  const panelStyles = getComputedStyle(element);
+  const { animationName, transitionDuration } = getComputedStyle(element);
 
-  const hasAnimation =
-    panelStyles.animationName !== "none" && panelStyles.animationName !== "";
+  const hasAnimation = animationName !== "none" && animationName !== "";
   const hasTransition =
-    panelStyles.transitionDuration !== "0s" &&
-    panelStyles.transitionDuration !== "";
+    transitionDuration !== "0s" && transitionDuration !== "";
 
-  /**
-   * animationTypeRef is safe to read in render because it's only ever set
-   * once here during the first render and never again.
-   * https://react.dev/learn/referencing-values-with-refs#best-practices-for-refs
-   */
-  if (hasAnimation && hasTransition) {
-    if (process.env.NODE_ENV !== "production") {
-      console.warn(
-        "CSS transitions and CSS animations both detected on Collapsible.",
-        "Only one of either animation type should be used.",
-      );
-    }
+  if (hasAnimation && hasTransition && process.env.NODE_ENV !== "production") {
+    console.warn(
+      "Aksel: CSS transitions and CSS animations both detected on Collapsible. Only one should be used.",
+    );
   }
 
-  if (
-    panelStyles.animationName === "none" &&
-    panelStyles.transitionDuration !== "0s"
-  ) {
+  if (hasTransition && !hasAnimation) {
     return "css-transition";
   }
-
-  if (
-    panelStyles.animationName !== "none" &&
-    panelStyles.transitionDuration === "0s"
-  ) {
+  if (hasAnimation && !hasTransition) {
     return "css-animation";
   }
-
   return "none";
 }
 
