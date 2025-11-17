@@ -83,7 +83,6 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           placement={placement}
           strategy={strategy}
           offset={themeContext?.isDarkside ? 8 : 12}
-          arrow={!themeContext?.isDarkside}
         >
           <Popover.Content className={cn("navds-body-short")}>
             {children}
