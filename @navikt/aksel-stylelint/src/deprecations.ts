@@ -131,4 +131,15 @@ export const deprecations: DeprecatedList = [
     ],
     message: "Removed in v8.",
   },
+  {
+    classes: [
+      "navds-copybutton--medium",
+      "navds-copybutton--small",
+      "navds-copybutton--icon-only",
+      "navds-copybutton--icon-right",
+      "navds-copybutton--active",
+      "navds-copybutton__content",
+    ],
+    message: "Removed in v8.",
+  },
 ];
