@@ -150,7 +150,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       srHeading,
       "aria-labelledby": ariaLabelledBy,
       renderItem: Item = PaginationItem,
-      "data-color": color,
+      "data-color": color = "neutral",
       ...rest
     },
     ref,

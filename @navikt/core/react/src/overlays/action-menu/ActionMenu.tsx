@@ -2,7 +2,7 @@ import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS } from "../../theme/Theme";
 import { OverridableComponent, useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
@@ -753,7 +753,6 @@ export const ActionMenuRadioItem = forwardRef<
     ref,
   ) => {
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
 
     return (
       <Menu.RadioItem
@@ -800,48 +799,22 @@ export const ActionMenuRadioItem = forwardRef<
                   fill="var(--ax-bg-default, var(--a-surface-default))"
                 />
               </g>
-              {themeContext?.isDarkside ? (
-                <g className={cn("navds-action-menu__indicator-icon--checked")}>
-                  <rect
-                    width="24"
-                    height="24"
-                    rx="12"
-                    fill="var(--ax-bg-strong-pressed)"
-                  />
-                  <rect
-                    x="8"
-                    y="8"
-                    width="8"
-                    height="8"
-                    rx="4"
-                    fill="var(--ax-bg-default, var(--a-surface-default))"
-                  />
-                </g>
-              ) : (
-                <g className={cn("navds-action-menu__indicator-icon--checked")}>
-                  <rect
-                    x="1"
-                    y="1"
-                    width="22"
-                    height="22"
-                    rx="11"
-                    fill="var(--ax-bg-default, var(--a-surface-default))"
-                  />
-                  <rect
-                    x="1"
-                    y="1"
-                    width="22"
-                    height="22"
-                    rx="11"
-                    stroke="var(--ax-bg-strong-pressed, var(--a-surface-action-selected))"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
-                    fill="var(--ax-bg-strong-pressed, var(--a-surface-action-selected))"
-                  />
-                </g>
-              )}
+              <g className={cn("navds-action-menu__indicator-icon--checked")}>
+                <rect
+                  width="24"
+                  height="24"
+                  rx="12"
+                  fill="var(--ax-bg-strong-pressed)"
+                />
+                <rect
+                  x="8"
+                  y="8"
+                  width="8"
+                  height="8"
+                  rx="4"
+                  fill="var(--ax-bg-default, var(--a-surface-default))"
+                />
+              </g>
             </svg>
           </Menu.ItemIndicator>
         </Marker>
