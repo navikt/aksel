@@ -27,5 +27,4 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  desc: "LocalAlert kommer i to størrelser: medium og small.",
 };
