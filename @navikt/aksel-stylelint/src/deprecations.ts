@@ -94,6 +94,7 @@ export const deprecations: DeprecatedList = [
       "navds-stepper__item--completed",
       "navds-stepper__item--non-interactive",
       "navds-popover__arrow",
+      "navds-accordion__item--neutral",
     ],
     message: "Removed in v8.",
   },

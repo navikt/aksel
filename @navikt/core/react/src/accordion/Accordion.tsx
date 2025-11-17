@@ -31,16 +31,6 @@ interface AccordionComponent
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * @deprecated "default" will be the only variant.
-   * @default "default"
-   */
-  variant?: "default" | "neutral";
-  /**
-   * @default "small"
-   * @deprecated `size`-prop will be the only prop to control the size of the accordion.
-   */
-  headingSize?: "large" | "medium" | "small" | "xsmall";
-  /**
    * @default "medium"
    */
   size?: "large" | "medium" | "small";
@@ -76,24 +66,12 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  * ```
  */
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
-  (
-    {
-      className,
-      variant = "default",
-      headingSize = "small",
-      size = "medium",
-      indent = true,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ className, size = "medium", indent = true, ...rest }, ref) => {
     const { cn } = useRenameCSS();
 
     return (
       <AccordionContext.Provider
         value={{
-          variant,
-          headingSize,
           size,
           mounted: true,
         }}
