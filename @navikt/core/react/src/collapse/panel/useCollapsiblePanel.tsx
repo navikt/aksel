@@ -52,10 +52,6 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       animationTypeRef.current = getAnimationType(element);
     }
 
-    if (animationTypeRef.current !== "css-transition") {
-      return undefined;
-    }
-
     if (height === undefined || width === undefined) {
       setDimensions({
         height: element.scrollHeight,
@@ -93,7 +89,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
   });
 
   useClientLayoutEffect(() => {
-    if (!animationTypeRef.current || !panelRef.current) {
+    if (animationTypeRef.current === "none" || !panelRef.current) {
       return;
     }
 

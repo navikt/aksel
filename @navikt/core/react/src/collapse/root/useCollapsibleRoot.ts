@@ -118,29 +118,23 @@ function useCollapsibleRoot(parameters: UseCollapsibleRootParams) {
     }
 
     if (!hiddenUntilFound && !keepMounted) {
-      if (
-        animationTypeRef.current != null &&
-        animationTypeRef.current !== "css-animation"
-      ) {
-        if (!mounted && nextOpen) {
-          setMounted(true);
-        }
+      if (!mounted && nextOpen) {
+        setMounted(true);
       }
 
-      if (animationTypeRef.current === "css-animation") {
-        if (!visible && nextOpen) {
-          setVisible(true);
-        }
-        if (!mounted && nextOpen) {
-          setMounted(true);
-        }
+      if (
+        animationTypeRef.current === "css-animation" &&
+        !visible &&
+        nextOpen
+      ) {
+        setVisible(true);
       }
     }
 
     setOpen(nextOpen);
 
     /**
-     * We handle the other two animationTypes in `useCollapsiblePanel` separately.
+     * Unmount immediately when closing and no CSS animations or transitions are applied.
      */
     if (animationTypeRef.current === "none" && mounted && !nextOpen) {
       setMounted(false);

@@ -43,7 +43,7 @@ export const HiddenUntilFoundWithTransition: Story = {
       hiddenUntilFound: true,
       keepMounted: "hidden",
     },
-    animation: "transition-vertical",
+    animation: "animation-vertical",
   },
 };
 

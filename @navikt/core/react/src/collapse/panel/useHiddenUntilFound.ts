@@ -5,12 +5,10 @@ import { useCollapsibleRootContext } from "../root/CollapsibleRoot.context";
 function useHiddenUntilFound() {
   const {
     open,
-    animationTypeRef,
     panelRef,
     setDimensions,
     hiddenUntilFound,
     setOpen,
-    visible,
     mounted,
     keepMounted,
   } = useCollapsibleRootContext();
@@ -26,12 +24,8 @@ function useHiddenUntilFound() {
       return false;
     }
 
-    if (animationTypeRef.current === "css-animation") {
-      return !visible;
-    }
-
     return !open && !mounted;
-  }, [keepMounted, animationTypeRef, open, mounted, visible]);
+  }, [keepMounted, open, mounted]);
 
   /**
    * When panel is opened via a find-in-page action, we need to:
@@ -84,17 +78,7 @@ function useHiddenUntilFound() {
 
     const panel = panelRef.current;
     panel.setAttribute("hidden", "until-found");
-    /**
-     * Set `data-entering-style` here to persist the closed styles, this is to
-     * prevent transitions from starting when the `hidden` attribute changes
-     * to `until-found` as they could have different `display` properties:
-     * @see https://github.com/tailwindlabs/tailwindcss/pull/14625
-     *
-     */
-    if (animationTypeRef.current === "css-transition") {
-      panel.setAttribute("data-entering-style", "");
-    }
-  }, [hiddenUntilFound, hidden, animationTypeRef, panelRef]);
+  }, [hiddenUntilFound, hidden, panelRef]);
 
   /**
    * Listen for `beforematch` event to detect find-in-page actions
