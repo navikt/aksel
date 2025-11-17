@@ -3,44 +3,40 @@ import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { BodyShort } from "../typography";
 
+type legacyVariants =
+  | "warning"
+  | "warning-filled"
+  | "warning-moderate"
+  | "error"
+  | "error-filled"
+  | "error-moderate"
+  | "info"
+  | "info-filled"
+  | "info-moderate"
+  | "success"
+  | "success-filled"
+  | "success-moderate"
+  | "neutral"
+  | "neutral-filled"
+  | "neutral-moderate"
+  | "alt1"
+  | "alt1-filled"
+  | "alt1-moderate"
+  | "alt2"
+  | "alt2-filled"
+  | "alt2-moderate"
+  | "alt3"
+  | "alt3-filled"
+  | "alt3-moderate";
+
+type HiddenVariant = legacyVariants & { __brand?: never };
+
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
   /**
    * Changes visual profile of tag
    */
-  variant:
-    | "warning"
-    | "warning-filled"
-    | "warning-moderate"
-    | "error"
-    | "error-filled"
-    | "error-moderate"
-    | "info"
-    | "info-filled"
-    | "info-moderate"
-    | "success"
-    | "success-filled"
-    | "success-moderate"
-    | "neutral"
-    | "neutral-filled"
-    | "neutral-moderate"
-    | "alt1"
-    | "alt1-filled"
-    | "alt1-moderate"
-    | "alt2"
-    | "alt2-filled"
-    | "alt2-moderate"
-    | "alt3"
-    | "alt3-filled"
-    | "alt3-moderate";
-
-  /* Temp hide these until naming is resolved */
-  // | "meta-purple"
-  // | "meta-purple-filled"
-  // | "meta-purple-moderate"
-  // | "meta-lime"
-  // | "meta-lime-filled"
-  // | "meta-lime-moderate";
+  variant?: "outline" | "moderate" | "strong" | HiddenVariant;
   /**
    * @default "medium"
    */
@@ -49,6 +45,11 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
    * Tag Icon
    */
   icon?: React.ReactNode;
+  /**
+   * Tag color
+   * @default "neutral"
+   */
+  "data-color"?: AkselColor;
 }
 
 /**
@@ -79,20 +80,22 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
     const filledVariant = variant?.endsWith("-filled") && "strong";
     const moderateVariant = variant?.endsWith("-moderate") && "moderate";
 
+    const updatedVariant =
+      variant === "moderate" || variant === "strong" || variant === "outline";
+
     return (
       <BodyShort
         data-color={color ?? variantToColor(variant)}
-        data-variant={filledVariant || moderateVariant || "outline"}
+        data-variant={
+          updatedVariant
+            ? variant
+            : filledVariant || moderateVariant || "outline"
+        }
         {...rest}
         ref={ref}
         as="span"
         size={size === "medium" ? "medium" : "small"}
-        className={cn(
-          "navds-tag",
-          className,
-          `navds-tag--${variant}`,
-          `navds-tag--${size}`,
-        )}
+        className={cn("navds-tag", className, `navds-tag--${size}`)}
       >
         {icon && <span className={cn("navds-tag__icon--left")}>{icon}</span>}
         {children}

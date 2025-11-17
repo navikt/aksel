@@ -2,11 +2,13 @@ import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { ComponentIcon } from "@navikt/aksel-icons";
 import { Tag, TagProps } from ".";
-import { HStack, VStack } from "../layout/stack";
+import { HStack } from "../layout/stack";
+import type { AkselColor } from "../types/theme";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 
 const sizes: TagProps["size"][] = ["xsmall", "small", "medium"];
 
-const variants: TagProps["variant"][] = [
+const legacyVariants: TagProps["variant"][] = [
   "warning",
   "error",
   "info",
@@ -33,6 +35,22 @@ const variants: TagProps["variant"][] = [
   "alt3-moderate",
 ];
 
+const variants: TagProps["variant"][] = ["outline", "moderate", "strong"];
+
+const colors: AkselColor[] = [
+  "accent",
+  "neutral",
+  "brand-beige",
+  "brand-blue",
+  "brand-magenta",
+  "info",
+  "success",
+  "warning",
+  "danger",
+  "meta-lime",
+  "meta-purple",
+];
+
 export default {
   title: "ds-react/Tag",
   component: Tag,
@@ -43,6 +61,13 @@ export default {
         type: "radio",
       },
       options: variants,
+    },
+    color: {
+      defaultValue: "accent",
+      control: {
+        type: "radio",
+      },
+      options: colors,
     },
     size: {
       defaultValue: "medium",
@@ -79,49 +104,61 @@ export const Default = {
 
 export const Small: StoryFn<Story> = () => {
   return (
-    <div className="rowgap rowgap-wrap">
+    <HStack gap="space-8">
       {variants.map((variant) => (
         <Tag key={variant} variant={variant} size="small">
           {variant}
         </Tag>
       ))}
-    </div>
+    </HStack>
   );
 };
 
 export const XSmall: StoryFn<Story> = () => {
   return (
-    <div className="rowgap rowgap-wrap">
+    <HStack gap="space-8">
       {variants.map((variant) => (
         <Tag key={variant} variant={variant} size="xsmall">
           {variant}
         </Tag>
       ))}
-    </div>
+    </HStack>
   );
 };
 
-export const Variants: StoryFn<Story> = () => {
+export const Outline: StoryFn<Story> = () => {
   return (
-    <div className="rowgap rowgap-wrap">
-      {variants.map((variant) => (
-        <Tag key={variant} variant={variant}>
-          {variant}
+    <HStack gap="space-8">
+      {colors.map((color) => (
+        <Tag key={color} variant="outline" data-color={color}>
+          {color}
         </Tag>
       ))}
-    </div>
+    </HStack>
   );
 };
 
-export const VariantsWithAccentRoleOverride: StoryFn<Story> = () => {
+export const Moderate: StoryFn<Story> = () => {
   return (
-    <div className="rowgap rowgap-wrap">
-      {variants.map((variant) => (
-        <Tag key={variant} variant={variant} data-color="accent">
-          {variant}
+    <HStack gap="space-8">
+      {colors.map((color) => (
+        <Tag key={color} variant="moderate" data-color={color}>
+          {color}
         </Tag>
       ))}
-    </div>
+    </HStack>
+  );
+};
+
+export const Strong: StoryFn<Story> = () => {
+  return (
+    <HStack gap="space-8">
+      {colors.map((color) => (
+        <Tag key={color} variant="strong" data-color={color}>
+          {color}
+        </Tag>
+      ))}
+    </HStack>
   );
 };
 
@@ -129,12 +166,7 @@ export const WithIcons: StoryFn<Story> = () => {
   return (
     <HStack gap="2" align="start">
       {sizes.reverse().map((size) => (
-        <Tag
-          key={size}
-          variant="neutral-moderate"
-          size={size}
-          icon={<ComponentIcon aria-hidden />}
-        >
+        <Tag key={size} size={size} icon={<ComponentIcon aria-hidden />}>
           {size}
         </Tag>
       ))}
@@ -142,32 +174,27 @@ export const WithIcons: StoryFn<Story> = () => {
   );
 };
 
-export const Chromatic: Story = {
-  render: () => (
-    <VStack gap="2">
-      <div>
-        <h2>Default</h2>
-        <Default.render {...Default.args} />
-      </div>
-      <div>
-        <h2>Small</h2>
-        <Small />
-      </div>
-      <div>
-        <h2>XSmall</h2>
-        <XSmall />
-      </div>
-      <div>
-        <h2>Variants</h2>
-        <Variants />
-      </div>
-      <div>
-        <h2>WithIcons</h2>
-        <WithIcons />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
+/**
+ * These variant options were removed in v8, but we still support them
+ */
+export const LeagcySupport: StoryFn<Story> = () => {
+  return (
+    <HStack gap="space-8">
+      {legacyVariants.map((variant) => (
+        <Tag key={variant} variant={variant}>
+          {variant}
+        </Tag>
+      ))}
+    </HStack>
+  );
 };
+
+export const Chromatic = renderStoriesForChromatic({
+  Small,
+  XSmall,
+  Outline,
+  Moderate,
+  Strong,
+  WithIcons,
+  LeagcySupport,
+});

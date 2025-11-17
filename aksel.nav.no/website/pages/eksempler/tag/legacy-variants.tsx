@@ -47,5 +47,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 4,
+  desc: "Legacy-varianter for Tag. Bruk outline, moderate eller strong for nye løsninger + `data-color`.",
 };
