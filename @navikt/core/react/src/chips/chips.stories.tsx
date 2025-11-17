@@ -1,6 +1,8 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { Chips } from ".";
+import { VStack } from "../layout/stack";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 
 const meta: Meta<typeof Chips> = {
   title: "ds-react/Chips",
@@ -10,8 +12,6 @@ const meta: Meta<typeof Chips> = {
   },
 };
 export default meta;
-
-type Story = StoryObj<typeof Chips>;
 
 const options = ["Norsk", "Dansk", "Svensk", "Tysk", "Spansk"];
 
@@ -54,6 +54,10 @@ export const Default = (props) => {
     </Chips>
   );
 };
+Default.args = {
+  type: "toggle",
+};
+
 Default.argTypes = {
   type: {
     control: { type: "radio" },
@@ -65,111 +69,61 @@ Default.argTypes = {
   },
 };
 
-export const Toggle = ({ size }) => {
+export const Toggle = () => {
   const [selected, setSelected] = useState<number[]>([2, 4]);
   return (
-    <div className="colgap">
-      <Chips size={size}>
-        {options.map((c, y) => (
-          <Chips.Toggle
-            selected={selected.includes(y)}
-            onClick={() =>
-              setSelected(
-                selected.includes(y)
-                  ? selected.filter((x) => x !== y)
-                  : [...selected, y],
-              )
-            }
-            key={y}
-          >
-            {c}
-          </Chips.Toggle>
-        ))}
-      </Chips>
-      <Chips size={size}>
-        {options.map((c, y) => (
-          <Chips.Toggle
-            variant="neutral"
-            selected={selected.includes(y)}
-            onClick={() =>
-              setSelected(
-                selected.includes(y)
-                  ? selected.filter((x) => x !== y)
-                  : [...selected, y],
-              )
-            }
-            key={y}
-          >
-            {c}
-          </Chips.Toggle>
-        ))}
-      </Chips>
-    </div>
+    <Chips>
+      {options.map((c, y) => (
+        <Chips.Toggle
+          selected={selected.includes(y)}
+          onClick={() =>
+            setSelected(
+              selected.includes(y)
+                ? selected.filter((x) => x !== y)
+                : [...selected, y],
+            )
+          }
+          key={y}
+        >
+          {c}
+        </Chips.Toggle>
+      ))}
+    </Chips>
   );
-};
-Toggle.argTypes = {
-  size: {
-    control: { type: "radio" },
-    options: ["medium", "small"],
-  },
 };
 
 export const ToggleNoCheckmark = () => {
   const [selected, setSelected] = useState<number>(2);
   return (
-    <div className="colgap">
-      <Chips>
-        {options.map((c, y) => (
-          <Chips.Toggle
-            selected={selected === y}
-            checkmark={false}
-            onClick={() => setSelected(y)}
-            key={y}
-          >
-            {c}
-          </Chips.Toggle>
-        ))}
-      </Chips>
-      <Chips>
-        {options.map((c, y) => (
-          <Chips.Toggle
-            variant="neutral"
-            selected={selected === y}
-            checkmark={false}
-            onClick={() => setSelected(y)}
-            key={y}
-          >
-            {c}
-          </Chips.Toggle>
-        ))}
-      </Chips>
-    </div>
+    <Chips>
+      {options.map((c, y) => (
+        <Chips.Toggle
+          selected={selected === y}
+          checkmark={false}
+          onClick={() => setSelected(y)}
+          key={y}
+        >
+          {c}
+        </Chips.Toggle>
+      ))}
+    </Chips>
   );
 };
 
 export const Removable = () => {
   return (
-    <div className="colgap">
-      <Chips>
-        {options.map((c, y) => (
-          <Chips.Removable key={y}>{c}</Chips.Removable>
-        ))}
-      </Chips>
-      <Chips>
-        {options.map((c, y) => (
-          <Chips.Removable variant="neutral" key={y}>
-            {c}
-          </Chips.Removable>
-        ))}
-      </Chips>
-    </div>
+    <Chips>
+      {options.map((c, y) => (
+        <Chips.Removable key={y}>{c}</Chips.Removable>
+      ))}
+    </Chips>
   );
 };
 
-export const Regular = (props: any) => {
+export const Medium = (props: any) => {
   const [selected, setSelected] = useState<number[]>([2]);
   return (
-    <div className="colgap">
+    <VStack gap="space-16">
       <Chips>
         {options.map((c, y) => (
           <Chips.Removable key={y} {...props}>
@@ -195,7 +149,7 @@ export const Regular = (props: any) => {
           </Chips.Toggle>
         ))}
       </Chips>
-    </div>
+    </VStack>
   );
 };
 
@@ -230,52 +184,24 @@ export const Small = () => {
 };
 
 export const ColorRole = () => (
-  <div>
+  <VStack gap="space-24">
     <div>
-      <Regular />
+      <Medium />
     </div>
     <div data-color="brand-magenta">
-      <Regular />
+      <Medium />
     </div>
     <div>
-      <Regular data-color="brand-magenta" />
+      <Medium data-color="brand-beige" />
     </div>
-  </div>
+  </VStack>
 );
 
-export const Chromatic: Story = {
-  render: () => (
-    <div>
-      <div>
-        <h2>Default</h2>
-        <Default />
-      </div>
-      <div>
-        <h2>Toggle</h2>
-        <h3>Medium</h3>
-        <Toggle size="medium" />
-        <h3>Small</h3>
-        <Toggle size="small" />
-      </div>
-      <div>
-        <h2>Removable</h2>
-        <Removable />
-      </div>
-      <div>
-        <h2>Regular</h2>
-        <Regular />
-      </div>
-      <div>
-        <h2>Small</h2>
-        <Small />
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Toggle,
+  Removable,
+  Medium,
+  Small,
+  ColorRole,
+  ToggleNoCheckmark,
+});

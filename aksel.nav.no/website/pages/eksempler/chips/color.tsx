@@ -6,7 +6,7 @@ const Example = () => {
   const [filter, setFilter] = useState(options);
 
   return (
-    <Chips>
+    <Chips data-color="neutral">
       {filter.map((c) => (
         <Chips.Removable
           key={c}
@@ -42,5 +42,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "Removable chips viser valgte verdier som brukeren kan fjerne, for eksempel valgte filter eller verdier som brukeren har skrevet i tekstfelt.",
+  desc: "`data-color` kan brukes for å endre farge på chipsene.",
 };

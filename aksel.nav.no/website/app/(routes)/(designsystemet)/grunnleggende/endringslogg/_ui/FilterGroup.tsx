@@ -43,7 +43,7 @@ export default function FilterGroup({
   return (
     <VStack gap="space-8">
       <Label as="div">{label}</Label>
-      <Chips>
+      <Chips data-color="neutral">
         {options.map((option) => {
           // const href = getHref(option);
           return (
@@ -51,7 +51,6 @@ export default function FilterGroup({
               key={option}
               selected={selected === option}
               checkmark={false}
-              variant="neutral"
               onClick={() => {
                 if (selected !== option) {
                   setSelected(option);
