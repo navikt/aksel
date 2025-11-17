@@ -26,6 +26,8 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
       width,
       height,
       mounted,
+      collapsedHeight,
+      visible,
     } = useCollapsibleRootContext();
 
     if (process.env.NODE_ENV !== "production") {
@@ -69,14 +71,33 @@ const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
 
     const style: React.CSSProperties = {
       ...styleProp,
-      "--__axc-collapsible-panel-height":
-        height === undefined ? "auto" : `${height}px`,
-      "--__axc-collapsible-panel-width":
-        width === undefined ? "auto" : `${width}px`,
+      ["--panel-height" as any]:
+        height === undefined
+          ? "auto"
+          : `${Math.max(height, collapsedHeight ?? 0)}px`,
+      ["--panel-width" as any]: width === undefined ? "auto" : `${width}px`,
+      ["--panel-collapsed-height" as any]:
+        collapsedHeight === undefined ? undefined : `${collapsedHeight}px`,
+      ...(visible
+        ? {}
+        : { minHeight: collapsedHeight, maxHeight: collapsedHeight }),
+      contentVisibility:
+        hiddenUntilFound && collapsedHeight
+          ? "visible"
+          : styleProp?.contentVisibility,
+
+      /* Needed for entry/exit transition */
+      height:
+        transitionStatus === "exiting" || transitionStatus === "entering"
+          ? `${collapsedHeight ?? 0}px`
+          : styleProp?.height,
     };
 
     const shouldRender =
-      keepMounted || hiddenUntilFound || (!keepMounted && mounted);
+      keepMounted ||
+      hiddenUntilFound ||
+      (!keepMounted && mounted) ||
+      collapsedHeight !== undefined;
 
     if (!shouldRender) {
       return null;

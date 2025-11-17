@@ -120,6 +120,7 @@ function useCollapsiblePanel(params: UseCollapsiblePanelParams) {
       abortControllerRef.current = new AbortController();
       const signal = abortControllerRef.current.signal;
 
+      /* TODO: Add cancel */
       requestAnimationFrame(() => {
         runOnceAnimationsFinish(() => {
           setDimensions({ height: 0, width: 0 });

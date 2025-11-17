@@ -63,6 +63,59 @@ export const ControlledNotKeepMounted: Story = {
   },
 };
 
+export const CollapsedHeight: Story = {
+  render: () => (
+    <HGrid columns={2} gap="space-32">
+      <div>
+        <h2>Keepmounted: hidden</h2>
+        <BaseCollapsible
+          rootProps={{
+            keepMounted: "hidden",
+            defaultOpen: true,
+            hiddenUntilFound: true,
+          }}
+          animation="animation-vertical"
+          collapsedHeight={50}
+        />
+      </div>
+      <div>
+        <h2>Keepmounted: false</h2>
+        <BaseCollapsible
+          rootProps={{
+            keepMounted: false,
+            defaultOpen: true,
+            hiddenUntilFound: true,
+          }}
+          animation="animation-vertical"
+          collapsedHeight={50}
+        />
+      </div>
+      <div>
+        <BaseCollapsible
+          rootProps={{
+            keepMounted: "hidden",
+            defaultOpen: false,
+            hiddenUntilFound: true,
+          }}
+          animation="animation-vertical"
+          collapsedHeight={50}
+        />
+      </div>
+      <div>
+        <BaseCollapsible
+          rootProps={{
+            keepMounted: false,
+            defaultOpen: false,
+            hiddenUntilFound: true,
+          }}
+          animation="animation-vertical"
+          collapsedHeight={50}
+        />
+      </div>
+    </HGrid>
+  ),
+};
+
 export const Animations: Story = {
   render: () => (
     <HGrid columns={2} gap="space-32">
@@ -256,6 +309,7 @@ type BaseCollapsibleProps = {
     | "animation-horizontal"
     | "transition-vertical"
     | "transition-horizontal";
+  collapsedHeight?: number;
 };
 
 function BaseCollapsible(props: BaseCollapsibleProps) {
@@ -265,6 +319,7 @@ function BaseCollapsible(props: BaseCollapsibleProps) {
       <Root
         className="root"
         onOpenChange={(newOpen) => console.info("onOpenChange", newOpen)}
+        collapsedHeight={props.collapsedHeight}
         {...props.rootProps}
       >
         <Trigger className="trigger" {...props.triggerProps}>
@@ -364,49 +419,34 @@ overflow: hidden;
 
     @keyframes ax-collapse-slide-down {
       from {
-        height: 0;
+        height: var(--panel-collapsed-height, 0);
       }
       to {
-        height: var(--__axc-collapsible-panel-height);
+        height: var(--panel-height);
       }
     }
 
     @keyframes ax-collapse-slide-sideways {
       from {
-        width: 0;
+        height: var(--panel-collapsed-width, 0);
       }
       to {
-        width: var(--__axc-collapsible-panel-width);
+        width: var(--panel-width);
       }
     }
 
     .panel-transition {
-      height: var(--__axc-collapsible-panel-height);
+      height: var(--panel-height);
       transition: all 600ms ease;
-
-      &[data-entering-style] {
-        height: 0;
-        opacity: 0;
-      }
-
-      &[data-exiting-style] {
-        height: 0;
-        opacity: 0;
-      }
-
+      overflow: hidden;
     }
 
     .panel-transition-horizontal {
-      width: var(--__axc-collapsible-panel-width);
+      width: var(--panel-width);
       transition: all 3000ms ease;
       box-sizing: border-box;
       overflow: hidden;
 
-      &[data-entering-style],
-      &[data-exiting-style] {
-        width: 0;
-        opacity: 0;
-      }
     }
 
     .panel-transition-horizontal-sidebar {
@@ -414,7 +454,7 @@ overflow: hidden;
       transition: all 3000ms ease;
       overflow: hidden;
 
-      width: var(--__axc-collapsible-panel-width);
+      width: var(--panel-width);
 
       &[data-entering-style] {
         width: 6rem;

@@ -5,6 +5,7 @@ import type { useCollapsibleRoot } from "./useCollapsibleRoot";
 export interface CollapsibleRootContext
   extends ReturnType<typeof useCollapsibleRoot> {
   transitionStatus: TransitionStatus;
+  collapsedHeight?: number;
 }
 
 const [CollapsibleRootContextProvider, useCollapsibleRootContext] =

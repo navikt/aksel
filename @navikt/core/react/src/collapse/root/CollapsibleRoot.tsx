@@ -46,6 +46,10 @@ interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   keepMounted?: "visible" | "hidden" | false;
+  /**
+   * The height of the collapsible when it is collapsed.
+   */
+  collapsedHeight?: number;
 }
 
 const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
@@ -58,6 +62,7 @@ const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
       open,
       hiddenUntilFound = false,
       keepMounted = false,
+      collapsedHeight,
       ...rest
     }: CollapsibleProps,
     forwardedRef,
@@ -74,7 +79,10 @@ const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
     });
 
     return (
-      <CollapsibleRootContextProvider {...collapsibleHook}>
+      <CollapsibleRootContextProvider
+        {...collapsibleHook}
+        collapsedHeight={collapsedHeight}
+      >
         <div ref={forwardedRef} {...rest}>
           {children}
         </div>
