@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.33.4
+
+### @navikt/ds-react
+
+- Textarea: Set height on first render to `auto` instead of `0px` to reduce layout shift when SSR ([#4295](https://github.com/navikt/aksel/pull/4295))
+
 ## 7.33.3
 
 ### @navikt/ds-react
