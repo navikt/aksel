@@ -126,6 +126,8 @@ export const deprecations: DeprecatedList = [
       "navds-accordion__item--neutral",
       "navds-chips__removable--action",
       "navds-chips__removable--neutral",
+      "navds-chips__toggle--action",
+      "navds-chips__toggle--neutral",
     ],
     message: "Removed in v8.",
   },
