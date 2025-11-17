@@ -29,7 +29,7 @@
   justify-self: center;
   grid-column: 1;
 
-  .aksel-stepper__item--non-interactive & {
+  .aksel-stepper__item[data-interactive="false"] & {
     background-color: var(--ax-border-neutral-strong);
   }
 }
