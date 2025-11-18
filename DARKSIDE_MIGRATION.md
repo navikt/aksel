@@ -85,3 +85,17 @@ Removed
 Deprecated
 
 - variant
+
+### Link
+
+Removed
+
+- css-classes
+
+Deprecated
+
+- variant
+
+Removed
+
+- variant="subtle" (only 2-3 users)
