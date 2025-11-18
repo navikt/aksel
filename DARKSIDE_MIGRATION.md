@@ -100,6 +100,14 @@ Removed
 
 - variant="subtle" (only 2-3 users)
 
+### Checkbox
+
+- Now uses new implementation as default
+
+### Radio
+
+- Now uses new implementation as default
+
 ## Primitives
 
 ### Page
