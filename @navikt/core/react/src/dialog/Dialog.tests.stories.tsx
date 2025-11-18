@@ -294,7 +294,6 @@ export const TrapFocusWithFocusBlur: Story = {
     expectOpenChangeCalls(0);
 
     await fireEvent.blur(popup);
-    expect(canvas.queryByTestId("popup")).toBeInTheDocument();
     expectPopupOpen();
 
     expectOpenChangeCalls(0);
@@ -439,7 +438,6 @@ export const FocusPreviousFocusedItemIfNoTrigger: Story = {
 
     const customTrigger = canvas.getByText("Toggle open");
     await userEvent.click(customTrigger);
-    expect(canvas.getByTestId("popup")).toBeInTheDocument();
     expectPopupOpen();
 
     await clickCloseButton();
