@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -268,10 +268,9 @@ function ClearButton({
 }: SearchClearButtonProps) {
   const { cn } = useRenameCSS();
 
-  const themeContext = useThemeInternal(false);
   const translate = useI18n("Search");
 
-  return themeContext?.isDarkside ? (
+  return (
     <Button
       className={cn("navds-search__button-clear")}
       variant="tertiary"
@@ -282,17 +281,6 @@ function ClearButton({
       onClick={(event) => handleClear({ trigger: "Click", event })}
       type="button"
     />
-  ) : (
-    <button
-      type="button"
-      onClick={(event) => handleClear({ trigger: "Click", event })}
-      className={cn("navds-search__button-clear")}
-    >
-      <span className={cn("navds-sr-only")}>
-        {clearButtonLabel || translate("clear")}
-      </span>
-      <XMarkIcon aria-hidden />
-    </button>
   );
 }
 

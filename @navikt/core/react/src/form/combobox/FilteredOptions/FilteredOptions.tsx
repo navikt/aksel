@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { DismissableLayer } from "../../../overlays/dismissablelayer/DismissableLayer";
 import { Floating } from "../../../overlays/floating/Floating";
-import { useRenameCSS, useThemeInternal } from "../../../theme/Theme";
+import { useRenameCSS } from "../../../theme/Theme";
 import { useClientLayoutEffect } from "../../../util";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -15,7 +15,7 @@ import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const FilteredOptions = () => {
   const { cn } = useRenameCSS();
-  const themeContext = useThemeInternal(false);
+
   const {
     inputProps: { id },
     anchorRef,
@@ -55,8 +55,6 @@ const FilteredOptions = () => {
     (allowNewValues && isValueNew && !maxSelected.isLimitReached) || // Render add new option
     filteredOptions.length > 0; // Render filtered options
 
-  const height = themeContext?.isDarkside ? "316px" : "290px";
-
   return (
     <DismissableLayer
       asChild
@@ -84,8 +82,8 @@ const FilteredOptions = () => {
         enabled={isListOpen}
         style={{
           maxHeight: localOpen
-            ? `min(${height}, var(--ac-floating-available-height))`
-            : `${height}`,
+            ? `min(316px, var(--ac-floating-available-height))`
+            : `316px`,
         }}
         autoUpdateWhileMounted={false}
       >
