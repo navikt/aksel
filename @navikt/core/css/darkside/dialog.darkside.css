@@ -23,6 +23,10 @@
     outline: none;
   }
 
+  /* TODO: Detect if no backdrop: if so add outline */
+
+  /* outline: 1px solid var(--ax-border-neutral-subtleA); */
+
   &[data-entering-style],
   &[data-exiting-style] {
     /* Webkit a11y delays detecting visible elements when opacity starts at 0 */
