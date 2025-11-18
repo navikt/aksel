@@ -27,13 +27,6 @@ const meta: Meta<typeof Dialog> = {
   parameters: {
     chromatic: { disable: true },
   },
-  decorators: [
-    (Story) => (
-      <div data-style-wrapper>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;
@@ -43,12 +36,11 @@ type Story = StoryObj<typeof Dialog>;
 export const Default = {
   render: (args) => (
     <div>
-      <button onClick={() => alert("after")}>Before dialog</button>
+      <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog defaultOpen={args.defaultOpen} size={args.size}>
         <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogPopup
           withBackdrop={args.backdrop}
-          className="dialogCSS"
           aria-labelledby="ha"
           position={args.position}
           width={args.width}
@@ -106,7 +98,7 @@ export const Default = {
 export const AllSubComponents: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before dialog</button>
+      <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog>
         <DialogTrigger>Open Dialog</DialogTrigger>
 
@@ -143,15 +135,11 @@ export const AllSubComponents: Story = {
 export const ComplexDrawer: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before dialog</button>
+      <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog defaultOpen>
         <DialogTrigger>Open Dialog</DialogTrigger>
         <Tabs defaultValue="logg">
-          <DialogPopup
-            className="dialogCSS"
-            aria-labelledby="ha"
-            position="right"
-          >
+          <DialogPopup aria-labelledby="ha" position="right">
             <DialogHeader>
               <DialogTitle id="ha">Dialog Title</DialogTitle>
               <DialogDescription>
@@ -236,11 +224,7 @@ export const Position: Story = {
         <Dialog defaultOpen>
           <DialogTrigger>Open Dialog</DialogTrigger>
 
-          <DialogPopup
-            className="dialogCSS"
-            aria-labelledby="ha"
-            position={position}
-          >
+          <DialogPopup aria-labelledby="ha" position={position}>
             <DialogHeader>
               <DialogTitle id="ha">Dialog Title</DialogTitle>
               <DialogDescription>
@@ -270,34 +254,13 @@ export const Position: Story = {
   },
 };
 
-export const PositionResponsive: Story = {
-  render: () => {
-    return (
-      <div>
-        <Dialog defaultOpen>
-          <DialogTrigger>Open Dialog</DialogTrigger>
-
-          <DialogPopup
-            className="dialogCSS"
-            aria-labelledby="ha"
-            position="bottom"
-          >
-            <h1 id="ha">Heading text</h1>
-            <DialogClose>Close</DialogClose>
-          </DialogPopup>
-        </Dialog>
-      </div>
-    );
-  },
-};
-
 export const DemoDefaultFocusDialog: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before dialog focus-trap</button>
+      <button onClick={() => alert("before")}>Before dialog focus-trap</button>
       <Dialog>
         <DialogTrigger>Open Dialog</DialogTrigger>
-        <DialogPopup className="dialogCSS" aria-labelledby="ha">
+        <DialogPopup aria-labelledby="ha">
           <h1 id="ha">Headingtekst som er h1</h1>
           <DialogClose>Close</DialogClose>
           <p>
@@ -319,14 +282,12 @@ export const DemoCloseButtonFocusDialog: Story = {
     const closeRef = React.useRef<HTMLButtonElement>(null);
     return (
       <div>
-        <button onClick={() => alert("after")}>Before dialog focus-trap</button>
+        <button onClick={() => alert("before")}>
+          Before dialog focus-trap
+        </button>
         <Dialog>
           <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogPopup
-            className="dialogCSS"
-            aria-labelledby="ha"
-            initialFocus={closeRef}
-          >
+          <DialogPopup aria-labelledby="ha" initialFocus={closeRef}>
             <h1 id="ha">Headingtekst som er h1</h1>
             <DialogClose ref={closeRef}>Close</DialogClose>
             <p>
@@ -364,7 +325,7 @@ export const NestedDrawers: Story = {
         <Dialog defaultOpen>
           <DialogTrigger>Open Dialog</DialogTrigger>
 
-          <DialogPopup className="dialogCSS" position={position}>
+          <DialogPopup position={position}>
             <DialogHeader>
               <DialogTitle id="ha">Dialog Title</DialogTitle>
               <DialogDescription>
@@ -391,11 +352,7 @@ export const NestedDrawers: Story = {
                   <Button>Open nested</Button>
                 </DialogTrigger>
 
-                <DialogPopup
-                  className="dialogCSS"
-                  position={position}
-                  modal="trap-focus"
-                >
+                <DialogPopup position={position} modal="trap-focus">
                   <DialogHeader>
                     <DialogTitle id="ha">LEVEL 2</DialogTitle>
                   </DialogHeader>
@@ -412,7 +369,7 @@ export const NestedDrawers: Story = {
                         <Button>Open nested</Button>
                       </DialogTrigger>
 
-                      <DialogPopup className="dialogCSS" position={position}>
+                      <DialogPopup position={position}>
                         <DialogHeader>
                           <DialogTitle id="ha">NESTED</DialogTitle>
                         </DialogHeader>
@@ -450,12 +407,12 @@ export const NonTriggerImplementation: Story = {
 
     return (
       <div>
-        <button onClick={() => alert("after")}>Before dialog</button>
+        <button onClick={() => alert("before")}>Before dialog</button>
         <button id="trigger" onClick={() => setOpen((x) => !x)}>
           Toggle drawer
         </button>
         <Dialog open={open} onOpenChange={(x) => setOpen(x)}>
-          <DialogPopup className="dialogCSS">
+          <DialogPopup>
             Drawer content
             <DialogClose>Close</DialogClose>
           </DialogPopup>
@@ -471,14 +428,14 @@ export const DomOrder: Story = {
     return (
       <div>
         <Dialog defaultOpen>
-          <DialogPopup className="dialogCSS" position="left">
+          <DialogPopup position="left">
             First behind First behind First behind First behind First behind
             First behind First behind First behind First behind First behind
             First behind First behind First behind First behind First behind
             First behind First behind First behind First behind First behind
             First behind
             <Dialog defaultOpen>
-              <DialogPopup className="dialogCSS" position="right">
+              <DialogPopup position="right">
                 First-nested
                 <DialogClose>Close first nested</DialogClose>
               </DialogPopup>
@@ -487,7 +444,7 @@ export const DomOrder: Story = {
           </DialogPopup>
         </Dialog>
         <Dialog defaultOpen>
-          <DialogPopup className="dialogCSS" position="bottom">
+          <DialogPopup position="bottom">
             thrid behind thrid behind thrid behind thrid behind thrid behind
             thrid behind thrid behind thrid behind thrid behind thrid behind
             thrid behind thrid behind thrid behind thrid behind thrid behind
@@ -513,7 +470,6 @@ export const TrapFocusOutsideClick: Story = {
         <Dialog>
           <DialogTrigger>Open Dialog</DialogTrigger>
           <DialogPopup
-            className="dialogCSS"
             modal="trap-focus"
             closeOnOutsideClick={false}
             withBackdrop={false}
@@ -539,19 +495,11 @@ export const NestedTrapFocusOutsideClick: Story = {
         <Dialog>
           <DialogTrigger>Open Dialog</DialogTrigger>
 
-          <DialogPopup
-            className="dialogCSS"
-            modal="trap-focus"
-            withBackdrop={false}
-          >
+          <DialogPopup modal="trap-focus" withBackdrop={false}>
             <Dialog>
               <DialogTrigger>Open Dialog2</DialogTrigger>
 
-              <DialogPopup
-                className="dialogCSS"
-                modal="trap-focus"
-                withBackdrop={false}
-              >
+              <DialogPopup modal="trap-focus" withBackdrop={false}>
                 Drawer content2
                 <DialogClose>Close2</DialogClose>
               </DialogPopup>
@@ -567,11 +515,11 @@ export const NestedTrapFocusOutsideClick: Story = {
 export const IgnoreOutsideClick: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before dialog</button>
+      <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog>
         <DialogTrigger>Open Dialog</DialogTrigger>
 
-        <DialogPopup className="dialogCSS" closeOnOutsideClick={false}>
+        <DialogPopup closeOnOutsideClick={false}>
           Drawer content
           <DialogClose>Close</DialogClose>
         </DialogPopup>

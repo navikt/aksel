@@ -34,7 +34,6 @@ const DialogBackdropInternal = forwardRef<
       {...restProps}
       ref={mergedRefs}
       className={cn(className, "navds-dialog__backdrop")}
-      role="presentation"
       hidden={nested}
       {...createTransitionStatusAttribute(transitionStatus)}
     />

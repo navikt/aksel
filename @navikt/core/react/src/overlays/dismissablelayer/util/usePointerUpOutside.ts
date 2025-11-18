@@ -75,9 +75,9 @@ export function usePointerUpOutside(
   }, [ownerDocument, handlePointerUpOutside]);
 
   /**
-   * Ensures we check React component tree (not just DOM tree)
-   * This makes sure that if you start a pointer interaction inside the React tree (I.E Modal),
-   * we don't trigger the outside event on pointer up outside if its move away from Modal.
+   * Ensures we check React component tree (not just DOM tree).
+   * This makes sure that if you start or end a pointer interaction inside the
+   * React tree (e.g. Modal), we don't trigger the outside event on pointer up.
    */
   return {
     onPointerDownCapture: () => {

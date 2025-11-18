@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS } from "../../theme/Theme";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
 import type { AsChild } from "../../util/types/AsChild";
 import { useDialogContext } from "../root/DialogRoot.context";
@@ -14,9 +13,7 @@ type DialogCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement> & AsChild;
  * ```
  */
 const DialogClose = forwardRef<HTMLButtonElement, DialogCloseProps>(
-  ({ children, className, asChild = false, ...restProps }, forwardedRef) => {
-    const { cn } = useRenameCSS();
-
+  ({ children, asChild = false, ...restProps }, forwardedRef) => {
     const { open, setOpen } = useDialogContext();
 
     const handleClick = useEventCallback(
@@ -34,8 +31,6 @@ const DialogClose = forwardRef<HTMLButtonElement, DialogCloseProps>(
         type="button"
         {...restProps}
         ref={forwardedRef}
-        className={cn(className)}
-        data-popup-open={open}
         onClick={handleClick}
       >
         {children}
