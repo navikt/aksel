@@ -85,7 +85,9 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
         <Component
           aria-labelledby={
             ariaLabelledby ??
-            (ariaLabel || Component === "div" ? undefined : statusId)
+            (ariaLabel || Component === "div" || statusType === "message"
+              ? undefined
+              : statusId)
           }
           aria-label={ariaLabel}
         >

@@ -13,7 +13,19 @@ import { InfoCardTitle, type InfoCardTitleProps } from "../title/InfoCardTitle";
 type InfoCardProps = Omit<
   BaseAlert.RootProps,
   "type" | "global" | "statusType" | "status"
->;
+> & {
+  /**
+   * Changes the HTML element used for the root element.
+   *
+   * @important When using `section`, provide either `aria-label` or `aria-labelledby` for better accessibility.
+   *
+   * **Testing**: When using `axe-core` for accessibility testing, `section` might warn about unique landmarks if you have multipe InfoCards on page with the same status.
+   * In those cases, consider using `div` as the root element, or adding unique `aria-label` or `aria-labelledby` props.
+   * @see [📝 Landmarks unique](https://dequeuniversity.com/rules/axe/4.6/landmark-unique)
+   * @default "div"
+   */
+  as?: "div" | "section";
+};
 
 interface InfoCardComponent
   extends React.ForwardRefExoticComponent<
@@ -78,7 +90,11 @@ interface InfoCardComponent
  */
 const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
   (
-    { "data-color": dataColor = "info", ...restProps }: InfoCardProps,
+    {
+      "data-color": dataColor = "info",
+      as = "div",
+      ...restProps
+    }: InfoCardProps,
     forwardedRef,
   ) => {
     return (
@@ -89,6 +105,7 @@ const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
         type="moderate"
         global={false}
         statusType="message"
+        as={as}
       />
     );
   },
