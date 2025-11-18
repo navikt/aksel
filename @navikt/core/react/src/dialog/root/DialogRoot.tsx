@@ -13,7 +13,7 @@ interface DialogProps {
    */
   open?: boolean;
   /**
-   * Whether the dialog is initially open.
+   * Whether the dialog should be initially open.
    *
    * To render a controlled dialog, use the `open` prop instead.
    * @default false
@@ -22,7 +22,7 @@ interface DialogProps {
   /**
    * Event handler called when the dialog is opened or closed.
    */
-  onOpenChange?: (open: boolean, event?: Event) => void;
+  onOpenChange?: (nextOpen: boolean, event?: Event) => void;
   /**
    * Event handler called after any animations complete when the dialog is opened or closed.
    */

@@ -19,11 +19,11 @@ interface DialogContextProps {
    */
   transitionStatus: TransitionStatus;
   /**
-   * Whether the dialog has been mounted (opened)
+   * Whether the dialog should be mounted (opened)
    */
   mounted: boolean;
   /**
-   * The ref to the Dialog-element.
+   * The ref to the Popup element.
    */
   popupRef: React.RefObject<HTMLElement | null>;
   /**

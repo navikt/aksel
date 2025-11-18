@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS } from "../../theme/Theme";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
 import type { AsChild } from "../../util/types/AsChild";
@@ -16,12 +15,7 @@ type DialogTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
  * ```
  */
 const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
-  (
-    { children, className, asChild = false, onClick, ...restProps },
-    forwardedRef,
-  ) => {
-    const { cn } = useRenameCSS();
-
+  ({ children, asChild = false, onClick, ...restProps }, forwardedRef) => {
     const { open, setOpen, setTriggerElement, popupId } = useDialogContext();
 
     const mergedRefs = useMergeRefs(forwardedRef, setTriggerElement);
@@ -33,8 +27,6 @@ const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
         type="button"
         {...restProps}
         ref={mergedRefs}
-        className={cn(className)}
-        data-popup-open={open}
         onClick={composeEventHandlers(onClick, (event) =>
           setOpen(!open, event.nativeEvent),
         )}

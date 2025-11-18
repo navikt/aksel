@@ -128,7 +128,7 @@ const DialogPopupInternal = forwardRef<
     });
 
     /**
-     * On mount Popupref is not defined in root, so we need to
+     * On mount, popupRef is not defined in root, so we need to
      * run hook here as well as root to ensure animations are tracked correctly
      */
     useOpenChangeAnimationComplete({
@@ -312,7 +312,7 @@ function translateWidth(
 function translateHeight(
   height: DialogPopupInternalProps["height"],
   position: DialogPosition,
-): BoxNewProps["width"] {
+): BoxNewProps["height"] {
   if (
     position === "fullscreen" ||
     position === "left" ||

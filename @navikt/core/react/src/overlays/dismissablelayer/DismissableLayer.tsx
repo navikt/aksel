@@ -249,7 +249,8 @@ const DismissableLayerInternal = forwardRef<
       safeZone && handleOutsideEvent(event);
 
       /**
-       * Both `onPointerDownOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
+       * Both `onPointerUpOutside`, `onInteractOutside` and `handleOutsideEvent`
+       * are able to preventDefault the event, thus stopping call for `onDismiss`.
        */
       if (!event.defaultPrevented && onDismiss) {
         onDismiss(event);
