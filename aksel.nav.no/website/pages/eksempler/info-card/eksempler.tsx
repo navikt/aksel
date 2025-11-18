@@ -1,14 +1,30 @@
 import {
+  BulletListIcon,
   ClockDashedIcon,
   ExclamationmarkTriangleIcon,
   InformationSquareIcon,
 } from "@navikt/aksel-icons";
-import { InfoCard, Link, List, VStack } from "@navikt/ds-react";
+import { BodyLong, InfoCard, Link, List, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
     <VStack gap="space-16">
+      <InfoCard data-color="neutral">
+        <InfoCard.Header icon={<BulletListIcon aria-hidden />}>
+          <InfoCard.Title>Oppsummering</InfoCard.Title>
+        </InfoCard.Header>
+        <InfoCard.Content>
+          <BodyLong>
+            Her finner du en kort oppsummering av de viktigste punktene i
+            artikkelen.
+          </BodyLong>
+          <List>
+            <List.Item>Punkt 1</List.Item>
+            <List.Item>Punkt 2</List.Item>
+          </List>
+        </InfoCard.Content>
+      </InfoCard>
       <InfoCard data-color="info">
         <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
           <InfoCard.Title>Fedrekvotesaken</InfoCard.Title>
