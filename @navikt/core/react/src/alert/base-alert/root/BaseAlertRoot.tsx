@@ -64,6 +64,7 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
       as: Component = "section",
       "aria-labelledby": ariaLabelledby,
       "aria-label": ariaLabel,
+      role,
       ...restProps
     }: BaseAlertProps,
     forwardedRef,
@@ -90,18 +91,15 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
               : statusId)
           }
           aria-label={ariaLabel}
+          ref={forwardedRef}
+          {...restProps}
+          className={cn(className, "navds-base-alert")}
+          data-size={size}
+          data-color={alertColor}
+          data-variant={type}
+          data-global={global}
         >
-          <div
-            ref={forwardedRef}
-            {...restProps}
-            className={cn(className, "navds-base-alert")}
-            data-size={size}
-            data-color={alertColor}
-            data-variant={type}
-            data-global={global}
-          >
-            {children}
-          </div>
+          <div role={role}>{children}</div>
         </Component>
       </BaseAlertProvider>
     );
