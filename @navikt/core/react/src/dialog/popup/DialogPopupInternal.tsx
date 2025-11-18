@@ -28,15 +28,18 @@ type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
      */
     closeOnOutsideClick?: boolean;
     /**
-     * Event handler called when the dialog opens, used to manage focus.
-     * Can be prevented with `event.preventDefault()`.
+     * Will try to focus the given element on mount.
+     *
+     * If not provided, Dialog will focus the popup itself.
      */
     initialFocus?:
       | React.RefObject<HTMLElement | null>
       | (() => HTMLElement | null | undefined);
     /**
-     * Event handler called when the dialog closes, used to manage focus.
-     * Can be prevented with `event.preventDefault()`.
+     * Will try to focus the given element on unmount.
+     *
+     * If not provided, Dialog will try to focus the `Dialog.Trigger` element
+     * or the last focused element before the dialog opened.
      */
     returnFocus?:
       | React.RefObject<HTMLElement | null>
