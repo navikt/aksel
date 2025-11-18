@@ -50,8 +50,24 @@ function WebsiteAlert(props: ExtractPortableComponentProps<"alert">) {
     );
   }
 
+  /**
+   * We remove the `role` prop since none of the "Alerts" are actually
+   * meant to be assertive live regions.
+   */
   return (
-    <LocalAlert status={variant} data-block-margin="space-28">
+    <LocalAlert
+      status={variant}
+      data-block-margin="space-28"
+      role={undefined}
+      /**
+       * TODO: Multiple alerts with same status leads to repeated landmark labels in Axe.
+       * - Add more modules in Sanity for displaying positive/negative content: Do/Dont for content etc
+       * - Migrate most of the current Alert-usages to these new modules
+       * - Remove ignore when above is done
+       * @see /god-praksis/artikler/vurder-behovet-for-ki for page where multiple alerts are used.
+       */
+      data-axe-ignore
+    >
       <LocalAlertHeader>
         <LocalAlertTitle
           as={stegaClean(heading_level) ?? "h2"}
