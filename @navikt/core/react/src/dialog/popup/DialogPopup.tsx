@@ -10,11 +10,6 @@ import {
 type DialogPopupProps = DialogPopupInternalProps &
   Pick<PortalProps, "rootElement"> & {
     children: React.ReactNode;
-    /**
-     * Adds a backdrop behind the dialog popup.
-     * @default true
-     */
-    withBackdrop?: boolean;
   };
 
 /**
@@ -43,6 +38,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
           ref={forwardedRef}
           {...restProps}
           position={position}
+          withBackdrop={withBackdrop && position !== "fullscreen"}
         />
       </Portal>
     );

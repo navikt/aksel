@@ -60,15 +60,11 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
   const { mounted, setMounted, transitionStatus } = useTransitionStatus(open);
 
   const popupRef = useRef<HTMLDivElement | null>(null);
-  const backdropRef = useRef<HTMLDivElement | null>(null);
 
   const [triggerElement, setTriggerElement] = useState<HTMLElement | null>(
     null,
   );
   const [popupElement, setPopupElement] = useState<HTMLElement | null>(null);
-  const [backdropElement, setBackdropElement] = useState<HTMLElement | null>(
-    null,
-  );
 
   const defaultId = useId();
 
@@ -147,12 +143,9 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       mounted={mounted}
       transitionStatus={transitionStatus}
       popupRef={popupRef}
-      backdropRef={backdropRef}
       setPopupElement={setPopupElement}
       popupElement={popupElement}
       popupId={floatingId}
-      setBackdropElement={setBackdropElement}
-      backdropElement={backdropElement}
       setTriggerElement={setTriggerElement}
       triggerElement={triggerElement}
       nested={!!parentContext}

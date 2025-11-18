@@ -56,6 +56,11 @@ type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
      * CSS `height`
      */
     height?: BoxNewProps["height"] | "small" | "medium" | "large";
+    /**
+     * Adds a backdrop behind the dialog popup.
+     * @default true
+     */
+    withBackdrop?: boolean;
   };
 
 /**
@@ -81,6 +86,7 @@ const DialogPopupInternal = forwardRef<
       id,
       style: styleProp,
       "aria-labelledby": ariaLabelledbyProp,
+      withBackdrop,
       ...restProps
     },
     forwardedRef,
@@ -95,10 +101,8 @@ const DialogPopupInternal = forwardRef<
       open,
       transitionStatus,
       popupElement,
-      backdropRef,
       nestedOpenDialogCount: nestedOpenDialogCountProp,
       nested,
-      backdropElement,
       size,
       titleId,
       popupId,
@@ -195,7 +199,7 @@ const DialogPopupInternal = forwardRef<
             onDismiss={(event) => {
               open && setOpen(false, event);
             }}
-            disableOutsidePointerEvents={modal === true || !!backdropElement}
+            disableOutsidePointerEvents={modal === true || withBackdrop}
             onInteractOutside={(event) => {
               if (!event.defaultPrevented) {
                 hasInteractedOutsideRef.current = true;
@@ -215,7 +219,7 @@ const DialogPopupInternal = forwardRef<
             }}
             onPointerDownOutside={(event) => {
               /* If backdrop exists, require "intentional" click (pointerup) */
-              if (backdropRef.current) {
+              if (withBackdrop) {
                 event.preventDefault();
               }
 
