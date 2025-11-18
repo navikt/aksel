@@ -38,9 +38,9 @@ function GodPraksisFeedbackLogin() {
       </Box>
       <Button
         as="a"
-        href={`/oauth2/login?redirect=${pathname?.split(
-          "#",
-        )[0]}${encodeURIComponent("#scrollToFeedback")}`}
+        href={`/oauth2/login?redirect=${
+          pathname?.split("#")[0]
+        }${encodeURIComponent("#scrollToFeedback")}`}
         data-color="brand-blue"
       >
         Logg inn med Nav SSO
@@ -197,7 +197,7 @@ function GodPraksisFeedbackForm({
         <PersonIcon aria-hidden fontSize="1.5rem" />
         <BodyShort>{name}</BodyShort>
 
-        <Link variant="subtle" href={`/oauth2/logout?redirect=${pathname}`}>
+        <Link data-color="neutral" href={`/oauth2/logout?redirect=${pathname}`}>
           (logg ut)
         </Link>
       </HStack>
