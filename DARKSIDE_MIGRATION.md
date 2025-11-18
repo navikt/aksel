@@ -99,3 +99,15 @@ Deprecated
 Removed
 
 - variant="subtle" (only 2-3 users)
+
+## Primitives
+
+### Page
+
+Removed
+
+- `background`-prop
+
+### Box
+
+WIP: Currently just removed error when trying to use deprecated props

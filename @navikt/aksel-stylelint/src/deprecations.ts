@@ -147,4 +147,8 @@ export const deprecations: DeprecatedList = [
     ],
     message: "Removed in v8.",
   },
+  {
+    classes: ["navds-box-border-radius"],
+    message: "Removed in v8.",
+  },
 ];

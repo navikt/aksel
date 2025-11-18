@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS } from "../../theme/Theme";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
@@ -83,16 +83,14 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal(false);
-      const prefix = themeContext?.isDarkside ? "ax" : "a";
       const { cn } = useRenameCSS();
 
       const style: React.CSSProperties = {
         ..._style,
-        ...getResponsiveProps(prefix, `stack`, "gap", "spacing", gap),
-        ...getResponsiveValue(prefix, `stack`, "direction", direction),
-        ...getResponsiveValue(prefix, `stack`, "align", align),
-        ...getResponsiveValue(prefix, `stack`, "justify", justify),
+        ...getResponsiveProps(`stack`, "gap", "spacing", gap),
+        ...getResponsiveValue(`stack`, "direction", direction),
+        ...getResponsiveValue(`stack`, "align", align),
+        ...getResponsiveValue(`stack`, "justify", justify),
       };
 
       const Comp = asChild ? Slot : Component;

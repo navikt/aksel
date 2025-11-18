@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS } from "../../theme/Theme";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
@@ -108,57 +108,26 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal(false);
       const { cn } = useRenameCSS();
-
-      if (
-        process.env.NODE_ENV !== "production" &&
-        themeContext?.isDarkside &&
-        (background || borderColor || shadow)
-      ) {
-        let errorText = ``;
-        if (background) {
-          errorText += `\n- background: "${background}"`;
-        }
-        if (borderColor) {
-          errorText += `\n- borderColor: "${borderColor}"`;
-        }
-        if (shadow) {
-          errorText += `\n- shadow: "${shadow}"`;
-        }
-        throw new Error(
-          `<Box /> with properties 'background', 'borderColor' or 'shadow' cannot be used with Aksel <Theme /> (darkmode-support). \nTo continue using these properties, migrate to '<Box.New>' (BoxNew for RSC)\nUpdate these props:${errorText}`,
-        );
-      }
-
-      const prefix = themeContext?.isDarkside ? "ax" : "a";
 
       const style: React.CSSProperties = {
         ..._style,
-        [`--__${prefix}c-box-background`]: background
+        "--__axc-box-background": background
           ? `var(--a-${background})`
           : undefined,
-        [`--__${prefix}c-box-shadow`]: shadow
-          ? `var(--a-shadow-${shadow})`
-          : undefined,
-        [`--__${prefix}c-box-border-color`]: borderColor
+        "--__axc-box-shadow": shadow ? `var(--a-shadow-${shadow})` : undefined,
+        "--__axc-box-border-color": borderColor
           ? `var(--a-${borderColor})`
           : undefined,
-        [`--__${prefix}c-box-border-width`]: borderWidth
+        "--__axc-box-border-width": borderWidth
           ? borderWidth
               .split(" ")
               .map((x) => `${x}px`)
               .join(" ")
           : undefined,
-        ...getResponsiveProps(
-          prefix,
-          "box",
-          "radius",
-          "radius",
-          borderRadius,
-          false,
-          ["0"],
-        ),
+        ...getResponsiveProps("box", "radius", "radius", borderRadius, false, [
+          "0",
+        ]),
       };
 
       const Comp = asChild ? Slot : Component;
@@ -173,9 +142,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
               "navds-box-bg": background,
               "navds-box-border-color": borderColor,
               "navds-box-border-width": borderWidth,
-              "navds-box-border-radius":
-                borderRadius && !themeContext?.isDarkside,
-              "navds-box-radius": borderRadius && themeContext?.isDarkside,
+              "navds-box-radius": borderRadius,
               "navds-box-shadow": shadow,
             })}
           >

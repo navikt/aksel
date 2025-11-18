@@ -19,7 +19,6 @@ export default meta;
 
 export const Default: StoryFn = ({
   belowFold,
-  background,
   width,
   gutters,
   contentBlockPadding,
@@ -27,7 +26,6 @@ export const Default: StoryFn = ({
   <Page
     footer={<Footer width={width} gutters={gutters} />}
     footerPosition={belowFold ? "belowFold" : undefined}
-    background={background}
     contentBlockPadding={contentBlockPadding}
   >
     <Header width={width} gutters={gutters} />
@@ -39,10 +37,6 @@ Default.argTypes = {
   width: {
     control: "radio",
     options: [...widths],
-  },
-  background: {
-    control: "radio",
-    options: ["bg-default", "bg-subtle"],
   },
   belowFold: {
     control: "boolean",
@@ -73,34 +67,9 @@ export const BelowFold: StoryFn = () => (
   </Page>
 );
 
-export const Background: StoryFn = () => (
-  <HGrid columns={2} gap="4">
-    <Page
-      background="bg-default"
-      footer={<div>footer</div>}
-      contentBlockPadding="end"
-    >
-      <div>header</div>
-      <div>content</div>
-    </Page>
-    <Page
-      background="bg-subtle"
-      footer={<div>footer</div>}
-      contentBlockPadding="end"
-    >
-      <div>header</div>
-      <div>content</div>
-    </Page>
-  </HGrid>
-);
-
 export const ContentBlockPadding: StoryFn = () => (
   <HGrid columns={2} gap="6" align="start">
-    <Page
-      footer={<Footer width="lg" gutters />}
-      contentBlockPadding="end"
-      background="bg-subtle"
-    >
+    <Page footer={<Footer width="lg" gutters />} contentBlockPadding="end">
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
         <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
@@ -108,11 +77,7 @@ export const ContentBlockPadding: StoryFn = () => (
         </Box>
       </Page.Block>
     </Page>
-    <Page
-      footer={<Footer width="lg" gutters />}
-      contentBlockPadding="none"
-      background="bg-subtle"
-    >
+    <Page footer={<Footer width="lg" gutters />} contentBlockPadding="none">
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
         <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
@@ -125,7 +90,7 @@ export const ContentBlockPadding: StoryFn = () => (
 
 export const Gutters: StoryFn = () => (
   <HGrid columns={2} gap="6" align="start">
-    <Page footer={<Footer width="lg" gutters />} background="bg-subtle">
+    <Page footer={<Footer width="lg" gutters />}>
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
         <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
@@ -133,7 +98,7 @@ export const Gutters: StoryFn = () => (
         </Box>
       </Page.Block>
     </Page>
-    <Page footer={<Footer width="lg" />} background="bg-subtle">
+    <Page footer={<Footer width="lg" />}>
       <Header width="lg" />
       <Page.Block width="lg" as="main">
         <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
@@ -272,8 +237,6 @@ export const Chromatic = () => {
       <Default />
       <h2>BelowFold</h2>
       <BelowFold />
-      <h2>Background</h2>
-      <Background />
       <h2>ContentBlockPadding</h2>
       <ContentBlockPadding />
       <h2>Gutters</h2>

@@ -6,8 +6,9 @@ import type {
 } from "@navikt/ds-tokens/types";
 import { ResponsiveProp } from "./types";
 
+const TOKEN_PREFIX = "ax";
+
 export function getResponsiveValue<T = string>(
-  prefix: string,
   componentName: string,
   componentProp: string,
   responsiveProp?: ResponsiveProp<T>,
@@ -18,13 +19,14 @@ export function getResponsiveValue<T = string>(
 
   if (typeof responsiveProp === "string") {
     return {
-      [`--__${prefix}c-${componentName}-${componentProp}-xs`]: responsiveProp,
+      [`--__${TOKEN_PREFIX}c-${componentName}-${componentProp}-xs`]:
+        responsiveProp,
     };
   }
 
   return Object.fromEntries(
     Object.entries(responsiveProp).map(([breakpointAlias, responsiveValue]) => [
-      `--__${prefix}c-${componentName}-${componentProp}-${breakpointAlias}`,
+      `--__${TOKEN_PREFIX}c-${componentName}-${componentProp}-${breakpointAlias}`,
       responsiveValue,
     ]),
   );
@@ -77,7 +79,6 @@ const translateTokenStringToCSS = (
   tokenSubgroup: "spacing" | "radius",
   tokenExceptions: string[],
   invert: boolean,
-  prefix: string,
 ) => {
   return tokenString
     .split(" ")
@@ -94,22 +95,22 @@ const translateTokenStringToCSS = (
       }
 
       // Handle exceptions and space tokens
-      let output = `var(--${prefix}-${tokenSubgroup}-${propValue})`;
+      let output = `var(--${TOKEN_PREFIX}-${tokenSubgroup}-${propValue})`;
 
       if (tokenExceptions.includes(propValue)) {
         output = propValue === "px" ? "1px" : propValue;
       } else if (tokenSubgroup === "spacing" && propValue.startsWith("space")) {
         /* Use new "space-x" tokens */
-        output = `var(--${prefix}-${propValue})`;
+        output = `var(--${TOKEN_PREFIX}-${propValue})`;
       } else if (tokenSubgroup === "spacing") {
         /* Translate old "spacing" tokens to new "space" tokens */
-        const spacingTokenName = `--${prefix}-spacing-${propValue}`;
+        const spacingTokenName = `--${TOKEN_PREFIX}-spacing-${propValue}`;
         output = `var(${
           legacySpacingTokenLookup[spacingTokenName] ?? spacingTokenName
         })`;
       } else if (tokenSubgroup === "radius") {
         const name = legacyBorderRadiusNameTokenLookup[propValue] ?? propValue;
-        output = `var(--${prefix}-radius-${name})`;
+        output = `var(--${TOKEN_PREFIX}-radius-${name})`;
       }
 
       // Handle inversion for negative values
@@ -123,7 +124,6 @@ const translateTokenStringToCSS = (
 };
 
 export function getResponsiveProps<T extends string>(
-  prefix: string,
   componentName: string,
   componentProp: string,
   tokenSubgroup: "spacing" | "radius",
@@ -137,14 +137,14 @@ export function getResponsiveProps<T extends string>(
 
   if (typeof responsiveProp === "string") {
     return {
-      [`--__${prefix}c-${componentName}-${componentProp}-xs`]:
+      [`--__${TOKEN_PREFIX}c-${componentName}-${componentProp}-xs`]:
         translateTokenStringToCSS(
           componentProp,
           responsiveProp,
           tokenSubgroup,
           tokenExceptions,
           invert,
-          prefix,
+          TOKEN_PREFIX,
         ),
     };
   }
@@ -152,14 +152,14 @@ export function getResponsiveProps<T extends string>(
   const styleProps = {};
   Object.entries(responsiveProp).forEach(([breakpointAlias, aliasOrScale]) => {
     styleProps[
-      `--__${prefix}c-${componentName}-${componentProp}-${breakpointAlias}`
+      `--__${TOKEN_PREFIX}c-${componentName}-${componentProp}-${breakpointAlias}`
     ] = translateTokenStringToCSS(
       componentProp,
       aliasOrScale,
       tokenSubgroup,
       tokenExceptions,
       invert,
-      prefix,
+      TOKEN_PREFIX,
     );
   });
   return styleProps;

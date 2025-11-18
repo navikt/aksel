@@ -128,15 +128,9 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
               .map((x) => `${x}px`)
               .join(" ")
           : undefined,
-        ...getResponsiveProps(
-          "ax",
-          "box",
-          "radius",
-          "radius",
-          borderRadius,
-          false,
-          ["0"],
-        ),
+        ...getResponsiveProps("box", "radius", "radius", borderRadius, false, [
+          "0",
+        ]),
       };
 
       const Comp = asChild ? Slot : Component;

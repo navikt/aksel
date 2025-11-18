@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS } from "../../theme/Theme";
 import { OverridableComponent, omit } from "../../util";
 import BasePrimitive, {
   PRIMITIVE_PROPS,
@@ -77,15 +77,13 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal(false);
-      const prefix = themeContext?.isDarkside ? "ax" : "a";
       const { cn } = useRenameCSS();
 
       const styles: React.CSSProperties = {
         ...style,
-        [`--__${prefix}c-hgrid-align`]: align,
-        ...getResponsiveProps(prefix, `hgrid`, "gap", "spacing", gap),
-        ...getResponsiveValue(prefix, `hgrid`, "columns", formatGrid(columns)),
+        "--__axc-hgrid-align": align,
+        ...getResponsiveProps(`hgrid`, "gap", "spacing", gap),
+        ...getResponsiveValue(`hgrid`, "columns", formatGrid(columns)),
       };
 
       const Comp = asChild ? Slot : Component;
