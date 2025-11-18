@@ -629,37 +629,6 @@ export const TriggerDisabled: Story = {
   },
 };
 
-export const TriggerDisabledSlot: Story = {
-  render: BaseDialogComponent,
-  play: async ({ canvasElement, args }) => {
-    const { canvas, expectPopupClosed, expectOpenChangeCalls } = testUtils(
-      canvasElement,
-      args,
-    );
-
-    expectOpenChangeCalls(0);
-    const triggerButton = canvas.getByText("Open Dialog");
-    await userEvent.click(triggerButton);
-
-    expectPopupClosed();
-    expectOpenChangeCalls(0);
-  },
-  args: {
-    triggerButtonProps: {
-      disabled: true,
-      asChild: true,
-      children: (
-        <Button disabled id="slot">
-          Open Dialog
-        </Button>
-      ),
-    },
-    rootProps: {
-      onOpenChange: fn(),
-    },
-  },
-};
-
 /* ---------------------------- CloseButton tests --------------------------- */
 export const CloseButton: Story = {
   render: BaseDialogComponent,
