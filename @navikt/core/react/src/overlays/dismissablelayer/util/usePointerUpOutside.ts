@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useCallbackRef } from "../../../util/hooks";
 import {
   CUSTOM_EVENTS,
-  CustomPointerDownEvent,
+  CustomPointerEvent,
   dispatchCustomEvent,
 } from "./dispatchCustomEvent";
 
@@ -12,7 +12,7 @@ import {
  * By checking `isPointerInsideReactTreeRef` we can determine if the event happened outside the subtree of the node, saving some element-comparisons.
  */
 export function usePointerUpOutside(
-  callback?: (event: CustomPointerDownEvent) => void,
+  callback?: (event: CustomPointerEvent) => void,
   ownerDocument: Document = globalThis?.document,
 ) {
   // Keep callback ref stable

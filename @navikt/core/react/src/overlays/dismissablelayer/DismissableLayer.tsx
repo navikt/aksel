@@ -7,7 +7,7 @@ import { ownerDocument } from "../../util/owner";
 import { AsChild } from "../../util/types/AsChild";
 import {
   CustomFocusEvent,
-  CustomPointerDownEvent,
+  CustomPointerEvent,
 } from "./util/dispatchCustomEvent";
 import { getSortedLayers } from "./util/sort-layers";
 import { useEscapeKeydown } from "./util/useEscapeKeydown";
@@ -32,12 +32,12 @@ interface DismissableLayerBaseProps
    * Event handler called when the a `pointerdown` event happens outside of the `DismissableLayer`.
    * Can be prevented.
    */
-  onPointerDownOutside?: (event: CustomPointerDownEvent) => void;
+  onPointerDownOutside?: (event: CustomPointerEvent) => void;
   /**
    * Event handler called when the a `pointerup` event happens outside of the `DismissableLayer`.
    * Can be prevented.
    */
-  onPointerUpOutside?: (event: CustomPointerDownEvent) => void;
+  onPointerUpOutside?: (event: CustomPointerEvent) => void;
   /**
    * Enables listening for `pointerup` outside the `DismissableLayer`.
    * In most cases `pointerdown` is sufficient, but in some cases (like modal, drawer)
@@ -55,9 +55,7 @@ interface DismissableLayerBaseProps
    * Specifically, when a `pointerdown` event happens outside or focus moves outside of it.
    * Can be prevented.
    */
-  onInteractOutside?: (
-    event: CustomPointerDownEvent | CustomFocusEvent,
-  ) => void;
+  onInteractOutside?: (event: CustomPointerEvent | CustomFocusEvent) => void;
   /**
    * Handler called when the `DismissableLayer` should be dismissed
    */
@@ -171,9 +169,7 @@ const DismissableLayerInternal = forwardRef<
      * We want to prevent the Layer from closing when the trigger/anchor element or its child elements are interacted with.
      * To achieve this, we check if the event target is the trigger/anchor or a child. If it is, we prevent default event behavior.
      */
-    function handleOutsideEvent(
-      event: CustomFocusEvent | CustomPointerDownEvent,
-    ) {
+    function handleOutsideEvent(event: CustomFocusEvent | CustomPointerEvent) {
       if (!safeZone?.anchor) {
         return;
       }
