@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useEventCallback } from "../../util/hooks/useEventCallback";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
 import type { AsChild } from "../../util/types/AsChild";
 import { useDialogContext } from "../root/DialogRoot.context";
 
@@ -13,16 +13,16 @@ type DialogCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement> & AsChild;
  * ```
  */
 const DialogClose = forwardRef<HTMLButtonElement, DialogCloseProps>(
-  ({ children, asChild = false, ...restProps }, forwardedRef) => {
+  ({ children, asChild = false, onClick, ...restProps }, forwardedRef) => {
     const { open, setOpen } = useDialogContext();
 
-    const handleClick = useEventCallback(
-      (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        if (open) {
-          setOpen(false, event.nativeEvent);
-        }
-      },
-    );
+    const handleClick = (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    ) => {
+      if (open) {
+        setOpen(false, event.nativeEvent);
+      }
+    };
 
     const Component = asChild ? Slot : "button";
 
@@ -31,7 +31,7 @@ const DialogClose = forwardRef<HTMLButtonElement, DialogCloseProps>(
         type="button"
         {...restProps}
         ref={forwardedRef}
-        onClick={handleClick}
+        onClick={composeEventHandlers(onClick, handleClick)}
       >
         {children}
       </Component>
