@@ -31,7 +31,7 @@ const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>(
         {...restProps}
         id={titleId}
         ref={forwardedRef}
-        className={cn(className, "navds-dialog__title")}
+        className={cn("navds-dialog__title", className)}
         size={size}
         level="1"
       >

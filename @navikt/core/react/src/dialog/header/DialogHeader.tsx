@@ -38,7 +38,7 @@ const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
         <Component
           {...restProps}
           ref={forwardedRef}
-          className={cn(className, "navds-dialog__header")}
+          className={cn("navds-dialog__header", className)}
         >
           {children}
         </Component>

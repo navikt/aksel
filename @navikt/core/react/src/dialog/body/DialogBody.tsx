@@ -21,7 +21,7 @@ const DialogBody = forwardRef<HTMLDivElement, DialogBodyProps>(
       <Component
         {...restProps}
         ref={forwardedRef}
-        className={cn(className, "navds-dialog__body")}
+        className={cn("navds-dialog__body", className)}
       >
         {children}
       </Component>
