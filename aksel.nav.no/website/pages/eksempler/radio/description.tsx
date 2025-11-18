@@ -27,4 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
+  desc: "Bruk `description` i tillegg til `legend` når det er behov for mer utfyllende forklaring.",
 };

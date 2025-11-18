@@ -1,5 +1,17 @@
 # Changelog
 
+## 7.33.4
+
+### @navikt/ds-react
+
+- Textarea: Set height on first render to `auto` instead of `0px` to reduce layout shift when SSR ([#4295](https://github.com/navikt/aksel/pull/4295))
+
+## 7.33.3
+
+### @navikt/ds-react
+
+- Popover: Children no longer re-mounts on open toggle. ([#4281](https://github.com/navikt/aksel/pull/4281))
+
 ## 7.33.2
 
 ### @navikt/ds-react

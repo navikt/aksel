@@ -276,6 +276,26 @@ const ActionMenuRoot = ({
   );
 };
 
+/**
+ * ActionMenu is a dropdown menu for actions and navigation.
+ *
+ * @example
+ * ```jsx
+ * <ActionMenu>
+ *   <ActionMenu.Trigger>
+ *     <button>Open Menu</button>
+ *   </ActionMenu.Trigger>
+ *   <ActionMenu.Content>
+ *     <ActionMenu.Item onSelect={() => alert("Item 1 selected")}>
+ *       Item 1
+ *     </ActionMenu.Item>
+ *     <ActionMenu.Item onSelect={() => alert("Item 2 selected")}>
+ *       Item 2
+ *     </ActionMenu.Item>
+ *   </ActionMenu.Content>
+ * <ActionMenu>
+ * ```
+ */
 export const ActionMenu = ActionMenuRoot as ActionMenuComponent;
 
 /* -------------------------------------------------------------------------- */
