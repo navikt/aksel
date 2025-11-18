@@ -39,6 +39,15 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * Type of alert
    */
   status?: BaseAlertContextProps["status"];
+  /**
+   * Changes the HTML element used for the root element.
+   *
+   * **Testing**: When using `axe-core` for accessibility testing, `section` might warn about unique landmarks if you have multipe Alerts on page with the same status.
+   * In those cases, consider using `div` as the root element, or adding unique `aria-label` or `aria-labelledby` props.
+   * @see [📝 Landmarks unique](https://dequeuniversity.com/rules/axe/4.6/landmark-unique)
+   * @default "section"
+   */
+  as?: "section" | "div";
 }
 
 const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
@@ -52,6 +61,9 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
       global = false,
       statusType,
       status,
+      as: Component = "section",
+      "aria-labelledby": ariaLabelledby,
+      "aria-label": ariaLabel,
       ...restProps
     }: BaseAlertProps,
     forwardedRef,
@@ -70,17 +82,25 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
         color={alertColor}
         statusId={statusId}
       >
-        <div
-          ref={forwardedRef}
-          {...restProps}
-          className={cn(className, "navds-base-alert")}
-          data-size={size}
-          data-color={alertColor}
-          data-variant={type}
-          data-global={global}
+        <Component
+          aria-labelledby={
+            ariaLabelledby ??
+            (ariaLabel || Component === "div" ? undefined : statusId)
+          }
+          aria-label={ariaLabel}
         >
-          {children}
-        </div>
+          <div
+            ref={forwardedRef}
+            {...restProps}
+            className={cn(className, "navds-base-alert")}
+            data-size={size}
+            data-color={alertColor}
+            data-variant={type}
+            data-global={global}
+          >
+            {children}
+          </div>
+        </Component>
       </BaseAlertProvider>
     );
   },
