@@ -23,6 +23,9 @@ import {
 } from "../utilities/types";
 import BoxNew from "./Box.darkside";
 
+/**
+ * TODO: Support "base"-colors: default, soft, moderate, strong etc without color-role defined
+ */
 export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.

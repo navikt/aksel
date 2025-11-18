@@ -144,7 +144,6 @@ export function getResponsiveProps<T extends string>(
           tokenSubgroup,
           tokenExceptions,
           invert,
-          TOKEN_PREFIX,
         ),
     };
   }
@@ -159,7 +158,6 @@ export function getResponsiveProps<T extends string>(
       tokenSubgroup,
       tokenExceptions,
       invert,
-      TOKEN_PREFIX,
     );
   });
   return styleProps;
