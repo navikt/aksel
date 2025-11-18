@@ -72,7 +72,7 @@ export const ContentBlockPadding: StoryFn = () => (
     <Page footer={<Footer width="lg" gutters />} contentBlockPadding="end">
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
-        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+        <Box background="info-soft" style={{ height: "80vh" }}>
           Main
         </Box>
       </Page.Block>
@@ -80,7 +80,7 @@ export const ContentBlockPadding: StoryFn = () => (
     <Page footer={<Footer width="lg" gutters />} contentBlockPadding="none">
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
-        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+        <Box background="info-soft" style={{ height: "80vh" }}>
           Main
         </Box>
       </Page.Block>
@@ -93,7 +93,7 @@ export const Gutters: StoryFn = () => (
     <Page footer={<Footer width="lg" gutters />}>
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
-        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+        <Box background="info-soft" style={{ height: "80vh" }}>
           Main
         </Box>
       </Page.Block>
@@ -101,7 +101,7 @@ export const Gutters: StoryFn = () => (
     <Page footer={<Footer width="lg" />}>
       <Header width="lg" />
       <Page.Block width="lg" as="main">
-        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+        <Box background="info-soft" style={{ height: "80vh" }}>
           Main
         </Box>
       </Page.Block>
@@ -175,23 +175,19 @@ export const OutsideBackground = () => {
     <Page
       contentBlockPadding="end"
       footer={
-        <Box
-          background="surface-alt-3-subtle"
-          style={{ height: 100 }}
-          as="footer"
-        >
+        <Box background="info-soft" style={{ height: 100 }} as="footer">
           <Page.Block width="lg" gutters>
             Footer
           </Page.Block>
         </Box>
       }
     >
-      <Box background="surface-alt-1-subtle" style={{ height: 64 }} as="header">
+      <Box background="meta-purple-soft" style={{ height: 64 }} as="header">
         <Page.Block width="lg" gutters>
           Header
         </Page.Block>
       </Box>
-      <Box background="surface-alt-2-subtle" style={{ height: 300 }} as="main">
+      <Box background="meta-lime-soft" style={{ height: 300 }} as="main">
         <Page.Block width="lg" gutters>
           main
         </Page.Block>
@@ -203,7 +199,7 @@ export const OutsideBackground = () => {
 function Header({ width = "lg", gutters = false }: any) {
   return (
     <Page.Block as="header" width={width} gutters={gutters}>
-      <Box background="surface-alt-3-subtle" style={{ height: 64 }}>
+      <Box background="info-soft" style={{ height: 64 }}>
         Header
       </Box>
     </Page.Block>
@@ -213,7 +209,7 @@ function Header({ width = "lg", gutters = false }: any) {
 function Content({ width = "lg", gutters = false }: any) {
   return (
     <Page.Block width={width} gutters={gutters} as="main">
-      <Box background="surface-alt-3-subtle" style={{ height: 300 }}>
+      <Box background="info-soft" style={{ height: 300 }}>
         Main
       </Box>
     </Page.Block>
@@ -223,7 +219,7 @@ function Content({ width = "lg", gutters = false }: any) {
 function Footer({ width = "lg", gutters = false }: any) {
   return (
     <Page.Block width={width} gutters={gutters} as="footer">
-      <Box background="surface-alt-3-subtle" style={{ height: 100 }}>
+      <Box background="info-soft" style={{ height: 100 }}>
         Footer
       </Box>
     </Page.Block>

@@ -75,7 +75,7 @@ export const Animated: StoryFn<typeof Collapsible> = () => (
     </Collapsible.Trigger>
     <Collapsible.Content className="collapsible">
       <div className="collapsibleContent">
-        <Box padding="8" background="surface-alt-3-subtle">
+        <Box padding="8" background="info-soft">
           <div>lorem ipsum</div>
         </Box>
       </div>
@@ -136,7 +136,7 @@ export const AsChild: StoryFn<typeof Collapsible> = () => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="4" background="surface-alt-3-subtle">
+      <Box padding="4" background="info-soft">
         <div>lorem ipsum</div>
       </Box>
     </Collapsible.Content>
@@ -149,7 +149,7 @@ export const DefaultOpen: StoryFn<typeof Collapsible> = () => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="4" background="surface-alt-3-subtle">
+      <Box padding="4" background="info-soft">
         <div>lorem ipsum</div>
       </Box>
     </Collapsible.Content>
@@ -162,7 +162,7 @@ export const ControlledOpen: StoryFn<typeof Collapsible> = () => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="4" background="surface-alt-3-subtle">
+      <Box padding="4" background="info-soft">
         <div>lorem ipsum</div>
       </Box>
     </Collapsible.Content>
@@ -175,7 +175,7 @@ export const Disabled: StoryFn<typeof Collapsible> = ({ open = false }) => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="4" background="surface-alt-3-subtle">
+      <Box padding="4" background="info-soft">
         <div>lorem ipsum</div>
       </Box>
     </Collapsible.Content>

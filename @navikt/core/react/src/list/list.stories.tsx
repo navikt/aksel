@@ -24,7 +24,7 @@ type Story = StoryObj<typeof List>;
 export const Default: Story = {
   render: (props) => {
     return (
-      <Box borderWidth="0 0 0 1" borderColor="border-subtle" maxWidth="500px">
+      <Box borderWidth="0 0 0 1" borderColor="neutral-subtle" maxWidth="500px">
         <List {...props}>
           <List.Item title="Lorem Ipsum Dolor Sit Amet">Beskrivelse.</List.Item>
           <List.Item title="Consectetur Adipiscing Elit">
@@ -70,7 +70,7 @@ export const Default: Story = {
 export const Ordered: Story = {
   render: () => {
     return (
-      <Box borderWidth="0 0 0 1" borderColor="border-subtle" maxWidth="500px">
+      <Box borderWidth="0 0 0 1" borderColor="neutral-subtle" maxWidth="500px">
         <List as="ol">
           <List.Item title="Lorem Ipsum Dolor Sit Amet">Beskrivelse.</List.Item>
           <List.Item title="Consectetur Adipiscing Elit">
