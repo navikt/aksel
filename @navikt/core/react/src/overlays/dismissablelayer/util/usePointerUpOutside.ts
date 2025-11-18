@@ -24,7 +24,7 @@ export function usePointerUpOutside(
     const handlePointerUp = (event: PointerEvent) => {
       /**
        * The `DismisableLayer`-API is based on the ability to stop events from propagating and in the end calling `onDismiss`
-       * if `usePointerUpOutside` runs `event.preventDefault()`.
+       * if `usePointerUpOutside`-callback does not run `event.preventDefault()`.
        *
        * Although `pointerup` is already a cancelable event, we still dispatch a custom event (discrete)
        * to keep parity with focus outside handling and ensure ordering.
