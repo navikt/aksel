@@ -3,14 +3,9 @@ import { Preview } from "@storybook/nextjs";
 import React, { useEffect } from "react";
 import "../@navikt/core/css/darkside/index.css";
 import { Provider } from "../@navikt/core/react/src/provider";
-import { Theme } from "../@navikt/core/react/src/theme";
 import { Translations } from "../@navikt/core/react/src/util/i18n/i18n.types";
 import { en, nb, nn } from "../@navikt/core/react/src/util/i18n/locales";
 import "./layout.css";
-
-const ModeDecorator = ({ children }) => {
-  return <Theme hasBackground={false}>{children}</Theme>;
-};
 
 type Language = "nb" | "nn" | "en";
 const locales: Record<Language, Translations> = {
@@ -100,11 +95,6 @@ export default {
       <TypoDecorator font={context.globals.font}>
         <StoryFn />
       </TypoDecorator>
-    ),
-    (StoryFn) => (
-      <ModeDecorator>
-        <StoryFn />
-      </ModeDecorator>
     ),
     (StoryFn, context) =>
       context.globals.language ? (

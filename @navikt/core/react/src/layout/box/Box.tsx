@@ -1,4 +1,11 @@
 import React, { forwardRef } from "react";
+import type {
+  AkselColoredBorderToken,
+  AkselColoredStatelessBackgroundToken,
+  AkselRootBackgroundToken,
+  AkselRootBorderToken,
+  AkselShadowToken,
+} from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
 import { useRenameCSS } from "../../theme/Theme";
 import { omit } from "../../util";
@@ -10,13 +17,9 @@ import BasePrimitive, {
 import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
 import {
-  BackgroundColorToken,
-  BorderColorToken,
   BorderRadiusScale,
   ResponsiveProp,
-  ShadowToken,
   SpaceDelimitedAttribute,
-  SurfaceColorToken,
 } from "../utilities/types";
 import BoxNew from "./Box.darkside";
 
@@ -24,13 +27,17 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
+   * @see {@link StaticDefaultBgKeys} and {@link StaticBgKeys}
    */
-  background?: BackgroundColorToken | SurfaceColorToken;
+  background?: AkselRootBackgroundToken | AkselColoredStatelessBackgroundToken;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
+   * @see {@link BorderColorKeys} and {@link BorderColorWithRoleKeys}
    */
-  borderColor?: BorderColorToken;
+  borderColor?:
+    | Exclude<AkselRootBorderToken, "focus">
+    | AkselColoredBorderToken;
   /**
    * CSS `border-radius` property.
    * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
@@ -39,6 +46,7 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
    * borderRadius='full'
    * borderRadius='0 full 12 2'
    * borderRadius={{xs: '2 12', sm: '0', md: '12', lg: 'full'}}
+   * @see {@link BorderRadiusKeys}
    */
   borderRadius?: ResponsiveProp<
     SpaceDelimitedAttribute<BorderRadiusScale | "0">
@@ -53,13 +61,17 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
   /** Shadow on box. Accepts a shadow token.
    * @example
    * shadow='small'
+   * @see {@link ShadowKeys}
    */
-  shadow?: ShadowToken;
+  shadow?: AkselShadowToken;
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 
 interface BoxComponentType
   extends OverridableComponent<BoxProps, HTMLDivElement> {
+  /**
+   * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/box' instead (with same props).
+   */
   New: typeof BoxNew;
 }
 
@@ -109,15 +121,14 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
       ref,
     ) => {
       const { cn } = useRenameCSS();
-
       const style: React.CSSProperties = {
         ..._style,
         "--__axc-box-background": background
-          ? `var(--a-${background})`
+          ? `var(--ax-bg-${background})`
           : undefined,
-        "--__axc-box-shadow": shadow ? `var(--a-shadow-${shadow})` : undefined,
+        "--__axc-box-shadow": shadow ? `var(--ax-shadow-${shadow})` : undefined,
         "--__axc-box-border-color": borderColor
-          ? `var(--a-${borderColor})`
+          ? `var(--ax-border-${borderColor})`
           : undefined,
         "--__axc-box-border-width": borderWidth
           ? borderWidth

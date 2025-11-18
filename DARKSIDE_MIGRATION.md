@@ -118,4 +118,12 @@ Removed
 
 ### Box
 
-WIP: Currently just removed error when trying to use deprecated props
+WIP: Need to create codemod
+
+Changes:
+
+- Box now has the same props as BoxNew
+
+Deprecated
+
+- BoxNew tagges as deprecated

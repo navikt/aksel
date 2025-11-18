@@ -1,19 +1,10 @@
 import type {
   AkselBorderRadiusToken,
   AkselBreakpointToken,
-  AkselLegacyBackgroundColorToken,
-  AkselLegacyBorderColorToken,
   AkselLegacyBorderRadiusToken,
-  AkselLegacyShadowToken,
   AkselLegacySpacingToken,
-  AkselLegacySurfaceColorToken,
   AkselSpaceToken,
 } from "@navikt/ds-tokens/types";
-
-export type BackgroundColorToken = AkselLegacyBackgroundColorToken;
-export type SurfaceColorToken = AkselLegacySurfaceColorToken;
-export type BorderColorToken = AkselLegacyBorderColorToken;
-export type ShadowToken = AkselLegacyShadowToken;
 
 export type BreakpointsAlias = Extract<
   AkselBreakpointToken,
