@@ -1,5 +1,6 @@
 import React, { forwardRef, useRef } from "react";
 import { BoxNew, type BoxNewProps } from "../../layout/box";
+import type { ResponsiveProp } from "../../layout/utilities/types";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
 import { useRenameCSS } from "../../theme/Theme";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
@@ -54,11 +55,11 @@ type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
      * CSS `width`
      * @default "medium"
      */
-    width?: BoxNewProps["width"] | "small" | "medium" | "large";
+    width?: ResponsiveProp<string & {}> | "small" | "medium" | "large";
     /**
      * CSS `height`
      */
-    height?: BoxNewProps["height"] | "small" | "medium" | "large";
+    height?: ResponsiveProp<string & {}> | "small" | "medium" | "large";
     /**
      * Adds a backdrop behind the dialog popup.
      * @default true
