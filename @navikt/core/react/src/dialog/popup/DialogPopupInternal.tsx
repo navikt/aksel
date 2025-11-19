@@ -231,14 +231,11 @@ const DialogPopupInternal = forwardRef<
               id={id ?? popupId}
               {...restProps}
               ref={mergedRefs}
-              className={cn(
-                "navds-dialog__popup",
-                `navds-dialog__popup--${size}`,
-                className,
-              )}
+              className={cn("navds-dialog__popup", className)}
               role="dialog"
               {...createTransitionStatusAttribute(transitionStatus)}
               data-position={position}
+              data-size={size}
               width={translateWidth(width, position)}
               height={translateHeight(height, position)}
               style={{

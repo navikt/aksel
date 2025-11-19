@@ -23,6 +23,11 @@
     outline: none;
   }
 
+  &[data-size="small"] {
+    --__axc-dialog-p-b: var(--ax-space-12);
+    --__axc-dialog-p-i: var(--ax-space-16);
+  }
+
   /* TODO: Detect if no backdrop: if so add outline */
 
   /* outline: 1px solid var(--ax-border-neutral-subtleA); */
@@ -171,11 +176,6 @@
     width: 100%;
     height: 100%;
   }
-}
-
-.aksel-dialog__popup--small {
-  --__axc-dialog-p-b: var(--ax-space-12);
-  --__axc-dialog-p-i: var(--ax-space-16);
 }
 
 .aksel-dialog__backdrop {
