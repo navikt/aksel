@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useId } from "../../util";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
-import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
 import { useTransitionStatus } from "../../util/hooks/useTransitionStatus";
 import { DialogContextProvider, useDialogContext } from "./DialogRoot.context";
 
@@ -122,20 +121,6 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     },
   );
 
-  /**
-   * Unmount only after close animation is complete
-   */
-  useOpenChangeAnimationComplete({
-    open,
-    ref: popupRef,
-    onComplete() {
-      if (!open) {
-        setMounted(false);
-        onOpenChangeComplete?.(false);
-      }
-    },
-  });
-
   return (
     <DialogContextProvider
       open={open}
@@ -156,6 +141,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       titleId={titleId}
       setTitleId={setTitleId}
       onOpenChangeComplete={onOpenChangeComplete}
+      setMounted={setMounted}
     >
       {children}
     </DialogContextProvider>

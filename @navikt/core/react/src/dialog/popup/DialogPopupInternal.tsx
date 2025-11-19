@@ -111,6 +111,7 @@ const DialogPopupInternal = forwardRef<
       titleId,
       popupId,
       onOpenChangeComplete,
+      setMounted,
     } = useDialogContext();
 
     const hasInteractedOutsideRef = useRef(false);
@@ -135,6 +136,9 @@ const DialogPopupInternal = forwardRef<
       onComplete() {
         if (open) {
           onOpenChangeComplete?.(true);
+        } else {
+          setMounted(false);
+          onOpenChangeComplete?.(false);
         }
       },
     });
