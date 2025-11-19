@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useId } from "../../util";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
@@ -71,13 +71,13 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
 
   const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = useState(0);
 
-  const nestedDialogOpened = useEventCallback((nestedCount: number) => {
+  const nestedDialogOpened = useCallback((nestedCount: number) => {
     setOwnNestedOpenDialogs(nestedCount + 1);
-  });
+  }, []);
 
-  const nestedDialogClosed = useEventCallback(() => {
+  const nestedDialogClosed = useCallback(() => {
     setOwnNestedOpenDialogs(0);
-  });
+  }, []);
 
   const parentContext = useDialogContext(false);
 
