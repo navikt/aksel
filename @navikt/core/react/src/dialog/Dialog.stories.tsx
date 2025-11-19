@@ -4,10 +4,13 @@ import {
   ClockDashedIcon,
   InboxDownIcon,
   PaperplaneIcon,
+  PencilIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../button";
+import { Select } from "../form/select";
 import { Bleed } from "../layout/bleed";
-import { HStack } from "../layout/stack";
+import { HStack, VStack } from "../layout/stack";
+import { Table } from "../table";
 import { Tabs } from "../tabs";
 import {
   Dialog,
@@ -527,6 +530,124 @@ export const IgnoreOutsideClick: Story = {
       <button onClick={() => alert("after")}>after dialog</button>
     </div>
   ),
+};
+
+const TableData = [
+  {
+    id: 1,
+    firstName: "Jean-Luc",
+    lastName: "Picard",
+    role: "Kaptein",
+  },
+  {
+    id: 2,
+    firstName: "William",
+    lastName: "Riker",
+    role: "Kommandør",
+  },
+  {
+    id: 3,
+    firstName: "Geordi",
+    lastName: "La Forge",
+    role: "Sjefsingeniør",
+  },
+];
+
+export const ImplementationDemo = {
+  render: () => {
+    const [editingRow, setEditingRow] = useState<number | null>(null);
+    const [hasBackdrop, setHasBackdrop] = useState(true);
+    const [modalMode, setModalMode] = useState<true | "trap-focus">(true);
+    const [position, setPosition] =
+      useState<React.ComponentProps<typeof DialogPopup>["position"]>("right");
+
+    const currentData = TableData.find((data) => data.id === editingRow);
+
+    return (
+      <div>
+        <VStack gap="space-16" marginBlock="space-16" align="start">
+          <Button onClick={() => setHasBackdrop((x) => !x)}>
+            Backdrop: {hasBackdrop ? "On" : "Off"}
+          </Button>
+          <Button
+            onClick={() =>
+              setModalMode((x) => (x === true ? "trap-focus" : true))
+            }
+          >
+            Modal Mode: {modalMode === true ? "true" : "trap-focus"}
+          </Button>
+          <Select
+            label="Position"
+            hideLabel
+            value={position}
+            onChange={(e) => setPosition(e.target.value as any)}
+          >
+            <option value="right">Right</option>
+            <option value="left">Left</option>
+            <option value="bottom">Bottom</option>
+            <option value="center">Center</option>
+            <option value="fullscreen">Fullscreen</option>
+          </Select>
+        </VStack>
+        <Table>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell aria-hidden />
+              <Table.HeaderCell>ID</Table.HeaderCell>
+              <Table.HeaderCell>Fornavn</Table.HeaderCell>
+              <Table.HeaderCell textSize="medium">Etternavn</Table.HeaderCell>
+              <Table.HeaderCell textSize="small">Rolle</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {TableData.map((data) => (
+              <Table.Row key={data.id} shadeOnHover={false}>
+                <Table.DataCell>
+                  <Button
+                    variant="tertiary"
+                    data-color="neutral"
+                    size="small"
+                    icon={<PencilIcon title="Rediger rad" />}
+                    onClick={() => setEditingRow(data.id)}
+                  />
+                </Table.DataCell>
+                <Table.HeaderCell>{data.id}</Table.HeaderCell>
+                <Table.DataCell>{data.firstName}</Table.DataCell>
+                <Table.DataCell>{data.lastName}</Table.DataCell>
+                <Table.DataCell>{data.role}</Table.DataCell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+
+        <Dialog
+          open={editingRow !== null}
+          onOpenChange={() => setEditingRow(null)}
+        >
+          <DialogPopup
+            width="small"
+            withBackdrop={hasBackdrop}
+            modal={modalMode}
+            position={position}
+          >
+            {editingRow !== null && (
+              <>
+                <DialogHeader>
+                  <DialogTitle>Edit: {currentData?.firstName}</DialogTitle>
+                </DialogHeader>
+                <DialogBody>This is the body of the dialog.</DialogBody>
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button>Close</Button>
+                  </DialogClose>
+                </DialogFooter>
+              </>
+            )}
+          </DialogPopup>
+        </Dialog>
+      </div>
+    );
+  },
 };
 
 const content = `This is the body of the dialog. Here is where the main content
