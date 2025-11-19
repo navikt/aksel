@@ -145,9 +145,10 @@ const DialogPopupInternal = forwardRef<
     const resolvedInitialFocus = initialFocusProp ?? popupRef;
 
     const resolvedReturnFocus = () => {
-      if (returnFocusProp) {
-        hasInteractedOutsideRef.current = false;
+      const hasInteractedOutside = hasInteractedOutsideRef.current;
+      hasInteractedOutsideRef.current = false;
 
+      if (returnFocusProp) {
         return typeof returnFocusProp === "function"
           ? returnFocusProp()
           : returnFocusProp.current;
@@ -156,21 +157,17 @@ const DialogPopupInternal = forwardRef<
       /**
        * If dialog closes, and user has not interacted outside of it, we default to focusing the trigger
        */
-      if (!hasInteractedOutsideRef.current && modal === "trap-focus") {
+      if (!hasInteractedOutside && modal === "trap-focus") {
         triggerElement?.focus();
-        hasInteractedOutsideRef.current = false;
         return false;
       }
 
       /**
        * If user clicks something outside dialog, we respect that and avoid changing focus
        */
-      if (modal === "trap-focus" && hasInteractedOutsideRef.current) {
-        hasInteractedOutsideRef.current = false;
+      if (modal === "trap-focus" && hasInteractedOutside) {
         return false;
       }
-
-      hasInteractedOutsideRef.current = false;
 
       /**
        * In all other cases, we allow FocusBoundary to return focus to the previously focused element
