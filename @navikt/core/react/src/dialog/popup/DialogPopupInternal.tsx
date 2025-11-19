@@ -82,13 +82,13 @@ const DialogPopupInternal = forwardRef<
       className,
       modal = true,
       closeOnOutsideClick = true,
-      initialFocus: initialFocusProp,
-      returnFocus: returnFocusProp,
+      initialFocus,
+      returnFocus,
       position = "center",
       width = "medium",
       height,
       id,
-      style: styleProp,
+      style,
       "aria-labelledby": ariaLabelledbyProp,
       withBackdrop,
       ...restProps
@@ -142,16 +142,16 @@ const DialogPopupInternal = forwardRef<
       },
     });
 
-    const resolvedInitialFocus = initialFocusProp ?? popupRef;
+    const resolvedInitialFocus = initialFocus ?? popupRef;
 
     const resolvedReturnFocus = () => {
       const hasInteractedOutside = hasInteractedOutsideRef.current;
       hasInteractedOutsideRef.current = false;
 
-      if (returnFocusProp) {
-        return typeof returnFocusProp === "function"
-          ? returnFocusProp()
-          : returnFocusProp.current;
+      if (returnFocus) {
+        return typeof returnFocus === "function"
+          ? returnFocus()
+          : returnFocus.current;
       }
 
       /**
@@ -242,7 +242,7 @@ const DialogPopupInternal = forwardRef<
               width={translateWidth(width, position)}
               height={translateHeight(height, position)}
               style={{
-                ...styleProp,
+                ...style,
                 "--__axc-nested-level": nestedOpenDialogCountProp,
               }}
               data-nested-dialog-open={!!nestedOpenDialogCountProp}
