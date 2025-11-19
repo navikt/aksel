@@ -115,14 +115,8 @@ const DialogPopupInternal = forwardRef<
 
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
-    const localPopupRef = useRef<HTMLDivElement | null>(null);
 
-    const mergedRefs = useMergeRefs(
-      forwardedRef,
-      popupRef,
-      setPopupElement,
-      localPopupRef,
-    );
+    const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
 
     useScrollLock({
       enabled: open && modal === true,
@@ -137,7 +131,7 @@ const DialogPopupInternal = forwardRef<
      */
     useOpenChangeAnimationComplete({
       open,
-      ref: localPopupRef,
+      ref: popupRef,
       onComplete() {
         if (open) {
           onOpenChangeComplete?.(true);
