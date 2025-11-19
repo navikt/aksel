@@ -207,33 +207,11 @@ const DialogPopupInternal = forwardRef<
                 event.preventDefault();
               }
             }}
+            /**
+             * Only close dialog on pointerUp pointerEvents
+             */
             onPointerDownOutside={(event) => {
-              /* If backdrop exists, require "intentional" click (pointerup) */
-              if (withBackdrop) {
-                event.preventDefault();
-              }
-
-              if (!closeOnOutsideClick) {
-                event.preventDefault();
-              }
-
-              /* "Sloppy" clicks are only allowed if modal is in trap-focus mode */
-              if (modal !== "trap-focus") {
-                event.preventDefault();
-              }
-
-              const originalEvent = event.detail.originalEvent;
-              const ctrlLeftClick =
-                originalEvent.button === 0 && originalEvent.ctrlKey === true;
-              const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-
-              /**
-               * If the event is a right-click, we shouldn't close because
-               * it is effectively as if we right-clicked the `Overlay`.
-               */
-              if (isRightClick) {
-                event.preventDefault();
-              }
+              event.preventDefault();
             }}
             onFocusOutside={(event) => {
               /**
@@ -245,9 +223,7 @@ const DialogPopupInternal = forwardRef<
             }}
             enablePointerUpOutside
             onPointerUpOutside={(event) => {
-              if (!closeOnOutsideClick) {
-                event.preventDefault();
-              }
+              !closeOnOutsideClick && event.preventDefault();
             }}
           >
             <BoxNew
