@@ -53,11 +53,16 @@ type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
     position?: DialogPosition;
     /**
      * CSS `width`
+     *
+     * Has no effect when `position` is set to `fullscreen`.
+     *
      * @default "medium"
      */
     width?: ResponsiveProp<string & {}> | "small" | "medium" | "large";
     /**
      * CSS `height`
+     *
+     * Has no effect when `position` is set to `fullscreen`, `left` or `right`.
      */
     height?: ResponsiveProp<string & {}> | "small" | "medium" | "large";
     /**
