@@ -115,7 +115,6 @@ const DialogPopupInternal = forwardRef<
     } = useDialogContext();
 
     const hasInteractedOutsideRef = useRef(false);
-    const hasPointerDownOutsideRef = useRef(false);
 
     const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
 
@@ -143,13 +142,11 @@ const DialogPopupInternal = forwardRef<
       },
     });
 
-    const resolvedInitialFocus =
-      initialFocusProp === undefined ? popupRef : initialFocusProp;
+    const resolvedInitialFocus = initialFocusProp ?? popupRef;
 
     const resolvedReturnFocus = () => {
       if (returnFocusProp) {
         hasInteractedOutsideRef.current = false;
-        hasPointerDownOutsideRef.current = false;
 
         return typeof returnFocusProp === "function"
           ? returnFocusProp()
@@ -162,7 +159,6 @@ const DialogPopupInternal = forwardRef<
       if (!hasInteractedOutsideRef.current && modal === "trap-focus") {
         triggerElement?.focus();
         hasInteractedOutsideRef.current = false;
-        hasPointerDownOutsideRef.current = false;
         return false;
       }
 
@@ -171,12 +167,10 @@ const DialogPopupInternal = forwardRef<
        */
       if (modal === "trap-focus" && hasInteractedOutsideRef.current) {
         hasInteractedOutsideRef.current = false;
-        hasPointerDownOutsideRef.current = false;
         return false;
       }
 
       hasInteractedOutsideRef.current = false;
-      hasPointerDownOutsideRef.current = false;
 
       /**
        * In all other cases, we allow FocusBoundary to return focus to the previously focused element
@@ -205,9 +199,6 @@ const DialogPopupInternal = forwardRef<
             onInteractOutside={(event) => {
               if (!event.defaultPrevented) {
                 hasInteractedOutsideRef.current = true;
-                if (event.detail.originalEvent?.type === "pointerdown") {
-                  hasPointerDownOutsideRef.current = true;
-                }
               }
               /**
                * Since trigger might be set up to close the dialog on click,
