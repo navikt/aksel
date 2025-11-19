@@ -27,7 +27,7 @@ interface DialogProps {
    */
   onOpenChangeComplete?: (open: boolean) => void;
   /**
-   * Size of the dialog.
+   * Updates sub-component padding + DialogTitle and DialogDescription font-size.
    * @default "medium"
    */
   size?: "medium" | "small";
