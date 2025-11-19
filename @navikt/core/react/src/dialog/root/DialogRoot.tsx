@@ -85,7 +85,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
    * Notify parent dialog about nested dialogs opening/closing.
    * This allows us to better hide/obscure parent dialogs when nested dialogs are opened.
    *
-   * This pattern is not good for deep nesting,
+   * This pattern is not good for deep nesting since the context updates will cause cascading renders
    * but should work fine for 1-2 levels of nesting which is the most common use case here.
    */
   useEffect(() => {
