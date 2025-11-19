@@ -51,7 +51,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     size = "medium",
   } = props;
 
-  const [open, setOpenControlled] = useControllableState({
+  const [open, setOpenStateInternal] = useControllableState({
     defaultValue: defaultOpen,
     value: openParam,
   });
@@ -117,7 +117,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
         return;
       }
 
-      setOpenControlled(nextOpen);
+      setOpenStateInternal(nextOpen);
     },
   );
 
