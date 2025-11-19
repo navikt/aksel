@@ -18,19 +18,20 @@
     "footer footer";
   grid-template-columns: 1fr auto;
   grid-template-rows: auto 1fr auto;
+  outline: 1px solid var(--ax-border-neutral-subtleA);
 
-  &:focus {
+  .light:not(:has(.dark)) .aksel-dialog__backdrop ~ & {
     outline: none;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &[data-size="small"] {
     --__axc-dialog-p-b: var(--ax-space-12);
     --__axc-dialog-p-i: var(--ax-space-16);
   }
-
-  /* TODO: Detect if no backdrop: if so add outline */
-
-  /* outline: 1px solid var(--ax-border-neutral-subtleA); */
 
   &[data-entering-style],
   &[data-exiting-style] {

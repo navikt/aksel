@@ -19,14 +19,13 @@ const DialogBackdropInternal = forwardRef<
   DialogBackdropInternalProps
 >(({ className, ...restProps }, forwardedRef) => {
   const { cn } = useRenameCSS();
-  const { transitionStatus, nested } = useDialogContext();
+  const { transitionStatus } = useDialogContext();
 
   return (
     <div
       {...restProps}
       ref={forwardedRef}
       className={cn("navds-dialog__backdrop", className)}
-      hidden={nested}
       {...createTransitionStatusAttribute(transitionStatus)}
     />
   );
