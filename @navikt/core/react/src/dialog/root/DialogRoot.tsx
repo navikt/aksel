@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useId } from "../../util";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
@@ -67,10 +67,6 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
 
   const defaultId = useId();
 
-  const floatingId = useMemo(() => {
-    return popupElement?.id ?? defaultId;
-  }, [defaultId, popupElement?.id]);
-
   const [titleId, setTitleId] = useState<string>();
 
   const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = useState(0);
@@ -130,7 +126,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       popupRef={popupRef}
       setPopupElement={setPopupElement}
       popupElement={popupElement}
-      popupId={floatingId}
+      popupId={popupElement?.id ?? defaultId}
       setTriggerElement={setTriggerElement}
       triggerElement={triggerElement}
       nested={!!parentContext}
