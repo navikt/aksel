@@ -8,7 +8,7 @@ export const Demo = () => (
     >
       dette er en feilmelding
     </Alert>
-    <Accordion hidden>
+    <Accordion hidden variant="neutral">
       <Accordion.Item>
         <Accordion.Header>Section 1</Accordion.Header>
         <Accordion.Content>Content 1</Accordion.Content>

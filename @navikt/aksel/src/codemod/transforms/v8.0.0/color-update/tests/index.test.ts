@@ -1,7 +1,7 @@
 import { check } from "../../../../utils/check";
 
 const migration = "color-update";
-const fixtures = ["..."];
+const fixtures = ["all-variants", "complex-cases", "ignored"];
 
 for (const fixture of fixtures) {
   check(__dirname, {
