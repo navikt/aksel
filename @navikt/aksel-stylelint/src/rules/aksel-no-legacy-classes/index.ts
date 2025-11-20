@@ -1,17 +1,17 @@
 import selectorParser from "postcss-selector-parser";
 import stylelint from "stylelint";
 
-const ruleName = "aksel/no-legacy-classnames";
+const ruleName = "aksel/no-legacy-classes";
 const url =
-  "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#aksel/no-legacy-classnames";
+  "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#aksel/no-legacy-classes";
 const prefix = "navds-";
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   unexpected: (value) =>
-    `"${value}" no longer has any effect.\n\n` +
-    `In Aksel version 8.0, all classNames from '@navikt/ds-css' use the '.aksel-'-prefix, \n` +
-    `As the found className starts with '.navds'-its safe to assume that it no longer works as intended.\n` +
-    "We still recommended not overriding the styling from Aksel where possible.",
+    `".${value}" no longer has any effect.\n\n` +
+    "As of Aksel version 8.0, all class names from '@navikt/ds-css' are prefixed with '.aksel-'.\n" +
+    "Since this class name starts with '.navds-', it's safe to assume that it no longer works as intended.\n" +
+    "We still discourage overriding the styling from Aksel when possible.",
 });
 
 const ruleFunction: stylelint.Rule = () => {

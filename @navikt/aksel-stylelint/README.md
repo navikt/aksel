@@ -170,14 +170,14 @@ Warns when you try to use deprecated class names.
 }
 ```
 
-## aksel/no-legacy-classnames
+## aksel/no-legacy-classes
 
-Warns when trying to to use legacy-classNames starting with `.navds`. In verson 8.0, all classNames now use the `.aksel`-prefix, so all old overrides will no longer work.
+Warns when trying to to use legacy class names starting with `.navds`. As of version 8.0, all class names are prefixed with `.aksel`, so all old overrides no longer work.
 
-We still discourage overriding classNames from `@navikt/ds-css`:
+We still discourage overriding class names from `@navikt/ds-css`:
 
-- Create a new className that you target not referencing the designsystem-css directly
-- Create an Github issue if what you need to do is not easily possible, and we can work together to find a solution.
+- Add your own `className` instead of referencing Aksel classes directly.
+- Open a GitHub issue if what you need to do isn't straightforward, and we'll work together to find a solution.
 
 ❌ Incorrect:
 
