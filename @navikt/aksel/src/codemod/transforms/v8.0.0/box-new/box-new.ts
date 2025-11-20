@@ -1,4 +1,5 @@
 import type { API, FileInfo } from "jscodeshift";
+import { findComponentImport } from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
 export default function transformer(file: FileInfo, api: API) {
@@ -6,6 +7,14 @@ export default function transformer(file: FileInfo, api: API) {
   const root = j(file.source);
 
   const toSourceOptions = getLineTerminator(file.source);
+
+  const boxLocalName =
+    findComponentImport({
+      root,
+      j,
+      name: "Box",
+      packageType: "react",
+    }) || "Box";
 
   // Rename <BoxNew ...> to <Box ...>
   root.find(j.JSXOpeningElement).forEach((path) => {
@@ -19,10 +28,10 @@ export default function transformer(file: FileInfo, api: API) {
     if (
       path.value.name.type === "JSXMemberExpression" &&
       path.value.name.object.type === "JSXIdentifier" &&
-      path.value.name.object.name === "Box" &&
+      path.value.name.object.name === boxLocalName &&
       path.value.name.property.name === "New"
     ) {
-      path.value.name = j.jsxIdentifier("Box");
+      path.value.name = j.jsxIdentifier(boxLocalName);
     }
   });
 
@@ -36,16 +45,19 @@ export default function transformer(file: FileInfo, api: API) {
     if (
       path.value.name.type === "JSXMemberExpression" &&
       path.value.name.object.type === "JSXIdentifier" &&
-      path.value.name.object.name === "Box" &&
+      path.value.name.object.name === boxLocalName &&
       path.value.name.property.name === "New"
     ) {
-      path.value.name = j.jsxIdentifier("Box");
+      path.value.name = j.jsxIdentifier(boxLocalName);
     }
   });
 
   // Handle imports
-  const imports = root.find(j.ImportDeclaration, {
-    source: { value: "@navikt/ds-react" },
+  const imports = root.find(j.ImportDeclaration).filter((path) => {
+    return (
+      path.value.source.value === "@navikt/ds-react" ||
+      path.value.source.value === "@navikt/ds-react/Box"
+    );
   });
 
   imports.forEach((path) => {

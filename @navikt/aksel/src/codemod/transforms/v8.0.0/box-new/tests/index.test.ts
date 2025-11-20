@@ -6,6 +6,9 @@ const fixtures = [
   "direct-alias-import",
   "sub-import",
   "sub-alias-import",
+  "mixed-import",
+  "idempotent",
+  "comments",
 ];
 
 for (const fixture of fixtures) {
