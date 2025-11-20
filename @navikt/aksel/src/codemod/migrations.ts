@@ -153,13 +153,6 @@ export const migrations: {
     },
   ],
   "v8.0.0": [
-    /* {
-    TODO:
-      description: "marks deprecated prop usage with comments.",
-      value: "prop-deprecate",
-      path: "v8.0.0/prop-deprecate/prop-deprecate",
-      ignoredExtensions: CSS_EXTENSIONS,
-    }, */
     {
       description:
         "Updates Box with leagcy-tokens to Box using the new token system, and renames already migrated BoxNew/Box.New instances to Box.",
@@ -173,6 +166,12 @@ export const migrations: {
       description: "Renames already migrated BoxNew/Box.New instances to Box.",
       value: "v8-box-new",
       path: "v8.0.0/box-new/box-new",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description: "Removes deprecated props from components.",
+      value: "v8-prop-deprecate",
+      path: "v8.0.0/prop-deprecate/prop-deprecate",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],

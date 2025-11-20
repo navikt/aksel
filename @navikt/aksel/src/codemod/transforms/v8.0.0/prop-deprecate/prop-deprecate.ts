@@ -4,9 +4,10 @@ import { getLineTerminator } from "../../../utils/lineterminator";
 import removePropsFromComponent from "../../../utils/removeProps";
 
 const deprecationMap = {
-  Accordion: ["headingSize", "variant"],
+  Accordion: ["headingSize"],
   Popover: ["arrow"],
   Page: ["background"],
+  List: ["title", "description", "headingTag"],
 };
 
 export default function transformer(file: FileInfo, api: API) {
