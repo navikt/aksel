@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.33.5
+
+### Patch Changes
+
+- Darkside: Remove `display: none` on `[hidden]` since browsers have this built-in ([#4301](https://github.com/navikt/aksel/pull/4301))
+
 ## 7.33.4
 
 ## 7.33.3

@@ -49,6 +49,10 @@ const DateDialog = ({
   const hideModal =
     useMedia("screen and (min-width: 768px)", true) && !isInModal;
 
+  if (!open) {
+    return null;
+  }
+
   if (hideModal) {
     return (
       <Popover

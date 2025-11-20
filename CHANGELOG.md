@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.33.5
+
+### @navikt/ds-react
+
+- Datepicker: Avoid rendering Datepicker dialog when not open. ([#4300](https://github.com/navikt/aksel/pull/4300))
+
+### @navikt/ds-css
+
+- Darkside: Remove `display: none` on `[hidden]` since browsers have this built-in ([#4301](https://github.com/navikt/aksel/pull/4301))
+
 ## 7.33.4
 
 ### @navikt/ds-react
