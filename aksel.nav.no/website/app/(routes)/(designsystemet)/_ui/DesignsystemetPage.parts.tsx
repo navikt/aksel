@@ -77,13 +77,13 @@ function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
       )}
       <Link
         href="/grunnleggende/endringslogg"
+        data-color="neutral"
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "komponent-header",
             url: "/grunnleggende/endringslogg",
           })
         }
-        data-color="neutral"
       >
         <ClockDashedIcon fontSize="1.5rem" aria-hidden />
         Endringslogg
