@@ -1,6 +1,6 @@
 import { check } from "../../../../utils/check";
 
-const migration = "box-to-boxnew";
+const migration = "box";
 const fixtures = [
   "box",
   "import",

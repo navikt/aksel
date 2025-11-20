@@ -166,15 +166,15 @@ export const migrations: {
       path: "v8.0.0/box-new/box-new",
       ignoredExtensions: CSS_EXTENSIONS,
     },
-    /* {
+    {
       description:
         "Updates Box with leagcy-tokens to Box using the new token system, and renames already migrated BoxNew/Box.New instances to Box.",
       value: "v8-box",
-      path: "v8.0.0/box/box-props",
+      path: "v8.0.0/box/box",
       warning:
         "Remember to check if 'TODO: Aksel box migration'-comment were added to any files after migration. This comment will help you find and update Box-instances where we could not resolve the update for you.",
       ignoredExtensions: CSS_EXTENSIONS,
-    }, */
+    },
   ],
 };
 
