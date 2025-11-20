@@ -174,6 +174,13 @@ export const migrations: {
       path: "v8.0.0/prop-deprecate/prop-deprecate",
       ignoredExtensions: CSS_EXTENSIONS,
     },
+    {
+      description:
+        "Updates variant + data-color prop based on current variant-prop.",
+      value: "v8-tag-variant",
+      path: "v8.0.0/tag-variant/tag-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
   ],
 };
 
