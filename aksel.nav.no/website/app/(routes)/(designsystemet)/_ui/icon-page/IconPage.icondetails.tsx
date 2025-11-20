@@ -1,6 +1,6 @@
 "use client";
 
-import { startTransition, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as Icons from "@navikt/aksel-icons";
 import { AirplaneIcon } from "@navikt/aksel-icons";
 import type { AkselIcon } from "@navikt/aksel-icons/metadata";
@@ -44,7 +44,8 @@ function IconPageIconDetails({
       }),
     );
 
-    startTransition(() => setDownloadLink(url));
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setDownloadLink(url);
 
     return () => {
       URL.revokeObjectURL(url);

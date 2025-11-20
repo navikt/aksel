@@ -5,7 +5,6 @@ import React, {
   HTMLAttributes,
   ReactElement,
   ReactNode,
-  startTransition,
   useEffect,
   useRef,
   useState,
@@ -149,7 +148,8 @@ export const ShowMore = ({
           behavior: "instant",
           block: "start",
         });
-        startTransition(() => setShouldScroll(false));
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setShouldScroll(false);
       }
     }
   }, [shouldScroll, scrollBackOnCollapse, scrollTargetRef]);
