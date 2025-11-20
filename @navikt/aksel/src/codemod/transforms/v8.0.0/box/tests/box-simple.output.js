@@ -1,9 +1,9 @@
-import { BoxNew } from "@navikt/ds-react/Box";
+import { Box } from "@navikt/ds-react";
 
 export const MyComponent = () => {
   return (
-    <BoxNew>
+    <Box>
       Large
-    </BoxNew>
+    </Box>
   );
 };

@@ -1,11 +1,11 @@
 import Box from '@mui/material/Box';
-import { BoxNew } from "@navikt/ds-react/Box"
+import { Box as AkselBox } from "@navikt/ds-react"
 
 export const MyComponent = () => {
 return (<>
   <Box>unrelated Box from @mui/material</Box>
-  <BoxNew>
+  <AkselBox>
     simple rename of import
-  </BoxNew>
+  </AkselBox>
 </>);
 }
