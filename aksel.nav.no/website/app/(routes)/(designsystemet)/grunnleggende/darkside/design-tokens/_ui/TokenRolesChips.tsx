@@ -13,7 +13,7 @@ const TokenRolesChips = ({
   setSelectedRole: React.Dispatch<React.SetStateAction<typeof selectedRole>>;
 }) => {
   return (
-    <Chips aria-label={`Filtrer på ${category} rolle`}>
+    <Chips aria-label={`Filtrer på ${category} rolle`} data-color="neutral">
       {roles.map(({ id, title }) => (
         <Chips.Toggle
           checkmark={false}
@@ -22,7 +22,6 @@ const TokenRolesChips = ({
           onClick={() =>
             selectedRole !== id ? setSelectedRole(id) : setSelectedRole(null)
           }
-          variant="neutral"
         >
           {title}
         </Chips.Toggle>

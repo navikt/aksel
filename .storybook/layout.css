@@ -1,3 +1,7 @@
+body {
+  background-color: var(--ax-bg-default);
+}
+
 .rowgap {
   display: flex;
   gap: 1rem;
