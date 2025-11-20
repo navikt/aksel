@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.33.5
+
+### Patch Changes
+
+- Datepicker: Avoid rendering Datepicker dialog when not open. ([#4300](https://github.com/navikt/aksel/pull/4300))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.5
+  - @navikt/aksel-icons@7.33.5
+
 ## 7.33.4
 
 ### Patch Changes
