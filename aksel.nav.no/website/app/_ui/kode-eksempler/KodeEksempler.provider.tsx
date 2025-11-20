@@ -49,24 +49,20 @@ function KodeEksemplerProvider(props: {
 
   const resizerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const prevSearchParam = useRef<string | null>(null);
 
   const [loaded, setLoaded] = useState(false);
   const [showCode, setShowCode] = useState(!compact);
 
-  // Derive active example from search params instead of storing in state
-  const activeExample = useMemo(() => {
+  const selectedExample = useMemo(() => {
     const param = searchParams?.get("demo");
     if (!param) {
-      return dir?.filer?.[0] ?? null;
+      return;
     }
 
-    const foundMatch = dir?.filer?.find((file) => {
+    return dir?.filer?.find((file) => {
       const id = nameToId(dir?.title ?? "", file.navn ?? "");
       return param === `${id}`;
     });
-
-    return foundMatch ?? dir?.filer?.[0] ?? null;
   }, [dir?.filer, dir?.title, searchParams]);
 
   const createQueryString = useCallback(
@@ -98,12 +94,9 @@ function KodeEksemplerProvider(props: {
   };
 
   useEffect(() => {
-    const param = searchParams?.get("demo");
-    if (!param || prevSearchParam.current === param) {
+    if (!selectedExample) {
       return;
     }
-
-    prevSearchParam.current = param;
 
     queueMicrotask(() => {
       iframeRef.current?.scrollIntoView({
@@ -113,13 +106,13 @@ function KodeEksemplerProvider(props: {
     });
 
     iframeRef.current?.focus({ preventScroll: true });
-  }, [searchParams]);
+  }, [selectedExample]);
 
   return (
     <KodeEksemplerContext.Provider
       value={{
         activeExample: {
-          current: activeExample,
+          current: selectedExample ?? dir?.filer?.[0] ?? null,
           update: updateActiveExample,
           loaded,
           updateLoaded: setLoaded,
