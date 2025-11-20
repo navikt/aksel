@@ -78,7 +78,7 @@ export default {
     },
 
     layout: "centered",
-    backgrounds: { disabled: true },
+    backgrounds: { disable: true },
 
     docs: {
       codePanel: true,
