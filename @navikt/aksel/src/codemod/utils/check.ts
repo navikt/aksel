@@ -12,6 +12,13 @@ interface TestT {
   options?: { [option: string]: any };
 }
 
+interface ScenarioT {
+  migration: string;
+  scenarios: Record<string, { input: string; output: string }>;
+  extension?: "js" | "scss" | "less" | "css";
+  options?: { [option: string]: any };
+}
+
 export function check(
   dirName: string,
   { fixture, migration, extension = "js", options = {} }: TestT,
@@ -44,4 +51,69 @@ export function check(
       );
     });
   });
+}
+
+export function checkScenarios(
+  dirName: string,
+  { migration, scenarios, extension = "js", options = {} }: ScenarioT,
+) {
+  describe(migration, () => {
+    const parser = extension;
+    for (const [name, { input, output: expected }] of Object.entries(
+      scenarios,
+    )) {
+      test(name, async () => {
+        const module = await import(path.join(dirName, "..", migration));
+        const output = applyTransform({ ...module, parser: "tsx" }, options, {
+          source: input,
+        });
+
+        expect(
+          await prettier.format(output, {
+            parser: parser === "js" ? "typescript" : parser,
+          }),
+        ).toBe(
+          await prettier.format(expected, {
+            parser: parser === "js" ? "typescript" : parser,
+          }),
+        );
+      });
+    }
+  });
+}
+
+export function checkMoveVariantToDataColor(
+  dirName: string,
+  {
+    migration,
+    config,
+  }: {
+    migration: string;
+    config: {
+      component: string;
+      prop: string;
+      changes: Record<string, { replacement?: string; color: string }>;
+    };
+  },
+) {
+  const scenarios: Record<string, { input: string; output: string }> = {};
+
+  for (const [variant, change] of Object.entries(config.changes)) {
+    const input = `import { ${config.component} } from "@navikt/ds-react";
+<${config.component} ${config.prop}="${variant}">Text</${config.component}>;`;
+
+    let outputAttrs = "";
+    outputAttrs += `data-color="${change.color}"`;
+
+    if (change.replacement) {
+      outputAttrs += ` ${config.prop}="${change.replacement}"`;
+    }
+
+    const output = `import { ${config.component} } from "@navikt/ds-react";
+<${config.component} ${outputAttrs}>Text</${config.component}>;`;
+
+    scenarios[`should migrate ${variant}`] = { input, output };
+  }
+
+  checkScenarios(dirName, { migration, scenarios });
 }

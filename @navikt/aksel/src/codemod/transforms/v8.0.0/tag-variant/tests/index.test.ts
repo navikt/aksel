@@ -1,12 +1,9 @@
-import { check } from "../../../../utils/check";
+import { checkMoveVariantToDataColor } from "../../../../utils/check";
+import { migrationConfig } from "../tag-variant";
 
 const migration = "tag-variant";
-const fixtures = ["all-variants", "complex-cases", "ignored"];
 
-for (const fixture of fixtures) {
-  check(__dirname, {
-    fixture,
-    migration,
-    extension: "js",
-  });
-}
+checkMoveVariantToDataColor(__dirname, {
+  migration,
+  config: migrationConfig,
+});

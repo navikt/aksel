@@ -1,7 +1,7 @@
 import type { API, FileInfo } from "jscodeshift";
 import { moveVariantToDataColor } from "../../../utils/move-variant-to-data-color";
 
-const migrationConfig = {
+export const migrationConfig = {
   component: "Tag",
   prop: "variant",
   changes: {

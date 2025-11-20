@@ -55,13 +55,17 @@ export function moveVariantToDataColor(
         if (attr.type !== "JSXAttribute") return;
         if (attr.name.name === config.prop) {
           variantPropIndex = index;
-          if (attr.value?.type === "StringLiteral") {
-            variantValue = attr.value.value;
+          if (
+            attr.value?.type === "StringLiteral" ||
+            attr.value?.type === "Literal"
+          ) {
+            variantValue = attr.value.value as string;
           } else if (
             attr.value?.type === "JSXExpressionContainer" &&
-            attr.value.expression.type === "StringLiteral"
+            (attr.value.expression.type === "StringLiteral" ||
+              attr.value.expression.type === "Literal")
           ) {
-            variantValue = attr.value.expression.value;
+            variantValue = (attr.value.expression as any).value;
           }
         }
         if (attr.name.name === "data-color") {
