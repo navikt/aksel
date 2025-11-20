@@ -75,6 +75,30 @@ export default function transformer(file: FileInfo, api: API) {
 
       if (boxIndex !== -1) {
         // Box already imported, remove BoxNew
+        const boxNewSpecifier = specifiers[boxNewIndex];
+        if (
+          boxNewSpecifier.type === "ImportSpecifier" &&
+          boxNewSpecifier.local &&
+          boxNewSpecifier.local.name !== "BoxNew"
+        ) {
+          const localName = boxNewSpecifier.local.name;
+          root.find(j.JSXOpeningElement).forEach((jsxPath) => {
+            if (
+              jsxPath.value.name.type === "JSXIdentifier" &&
+              jsxPath.value.name.name === localName
+            ) {
+              jsxPath.value.name.name = boxLocalName;
+            }
+          });
+          root.find(j.JSXClosingElement).forEach((jsxPath) => {
+            if (
+              jsxPath.value.name.type === "JSXIdentifier" &&
+              jsxPath.value.name.name === localName
+            ) {
+              jsxPath.value.name.name = boxLocalName;
+            }
+          });
+        }
         specifiers.splice(boxNewIndex, 1);
       } else {
         // Rename BoxNew to Box

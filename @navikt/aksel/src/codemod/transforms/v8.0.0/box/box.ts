@@ -55,6 +55,24 @@ export default function transformer(file: FileInfo, api: API) {
             }
             tokenComments.push(tokenComment);
           }
+        } else if (
+          attrvalue.type === "JSXExpressionContainer" &&
+          attrvalue.expression.type === "StringLiteral"
+        ) {
+          const literal = attrvalue.expression;
+          const config = legacyTokenConfig[literal.value];
+          if (config?.replacement) {
+            literal.value = config.replacement;
+          } else {
+            const tokenComment: TokenComment = {
+              prop,
+              token: literal.value,
+            };
+            if (config?.comment) {
+              tokenComment.comment = config.comment;
+            }
+            tokenComments.push(tokenComment);
+          }
         }
       });
     }
@@ -79,6 +97,8 @@ export default function transformer(file: FileInfo, api: API) {
               }
             }
           });
+        } else if (expression.type === "StringLiteral") {
+          expression.value = convertBorderRadiusToRadius(expression.value);
         }
       }
     });

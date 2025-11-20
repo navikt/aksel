@@ -9,6 +9,7 @@ const fixtures = [
   "mixed-import",
   "idempotent",
   "comments",
+  "alias-with-existing-box",
 ];
 
 for (const fixture of fixtures) {

@@ -9,6 +9,7 @@ const fixtures = [
   "idempotent-2",
   "box-radius",
   "box-simple",
+  "expression-container",
 ];
 
 for (const fixture of fixtures) {
