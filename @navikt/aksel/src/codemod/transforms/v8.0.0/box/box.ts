@@ -1,14 +1,7 @@
-import type { API, FileInfo, JSCodeshift, JSXIdentifier } from "jscodeshift";
+import type { API, FileInfo } from "jscodeshift";
 import { legacyTokenConfig } from "../../../../darkside/config/legacy.tokens";
-import {
-  findComponentImport,
-  findJSXElement,
-  findProps,
-} from "../../../utils/ast";
+import { findComponentImport, findProps } from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
-import moveAndRenameImport, {
-  addPackageImport,
-} from "../../../utils/packageImports";
 
 const propsAffected = ["background", "borderColor", "shadow"];
 
@@ -18,7 +11,7 @@ export default function transformer(file: FileInfo, api: API) {
 
   const toSourceOptions = getLineTerminator(file.source);
 
-  if (file.source.includes("TODO: aksel box migration")) {
+  if (file.source.includes("TODO: Aksel box migration")) {
     return root.toSource(toSourceOptions);
   }
 
@@ -45,7 +38,6 @@ export default function transformer(file: FileInfo, api: API) {
   const tokenComments: TokenComments = [];
 
   for (const astElement of astElements.paths()) {
-    let encounteredUnmigratableProp = false;
     for (const prop of propsAffected) {
       findProps({ j, path: astElement, name: prop }).forEach((attr) => {
         const attrvalue = attr.value.value;
@@ -54,7 +46,6 @@ export default function transformer(file: FileInfo, api: API) {
           if (config?.replacement) {
             attrvalue.value = config.replacement;
           } else {
-            encounteredUnmigratableProp = true;
             const tokenComment: TokenComment = {
               prop,
               token: attrvalue.value,
@@ -91,45 +82,9 @@ export default function transformer(file: FileInfo, api: API) {
         }
       }
     });
-
-    if (!encounteredUnmigratableProp) {
-      // TODO: ?? Box -> BoxNew type fail? (but works)
-      (astElement.node.openingElement.name as JSXIdentifier).name = "BoxNew";
-      (astElement.node.closingElement.name as JSXIdentifier).name = "BoxNew";
-    }
   }
 
   const blockComment = createFileComments({ tokenComments });
-
-  const importAnalysis = analyzePartialMigration(
-    j,
-    root.toSource(toSourceOptions),
-  );
-
-  if (importAnalysis === "no new") {
-    // WHY: we do nothing to the import statements if we couldn't migrate any Box
-  }
-
-  if (importAnalysis === "mixed") {
-    // WHY: mixed Box and BoxNew == we keep old, and add the new import
-    addPackageImport({
-      j,
-      root,
-      packageName: "@navikt/ds-react/Box",
-      specifiers: ["BoxNew"],
-    });
-  }
-
-  if (importAnalysis === "all new") {
-    // WHY: when we have only new boxes == we replace the old import with the new one
-    moveAndRenameImport(j, root, {
-      fromImport: "@navikt/ds-react",
-      toImport: "@navikt/ds-react/Box",
-      fromName: "Box",
-      toName: "BoxNew",
-      ignoreAlias: true,
-    });
-  }
 
   const output = `${blockComment ? blockComment + "\n\n" : ""}${root.toSource(
     toSourceOptions,
@@ -168,53 +123,6 @@ const createFileComments = ({
   constructedComment += "*/";
 
   return constructedComment;
-};
-
-type MigrationResult = "all new" | "mixed" | "no new";
-
-const analyzePartialMigration = (
-  j: JSCodeshift,
-  source: string,
-): MigrationResult => {
-  const root = j(source);
-
-  const astNewElements = findJSXElement({
-    root,
-    j,
-    name: "BoxNew",
-    originalName: "BoxNew",
-  });
-
-  if (astNewElements.length === 0) {
-    return "no new";
-  }
-
-  const localName = findComponentImport({
-    root,
-    j,
-    name: "Box",
-    packageType: "react",
-  });
-
-  if (!localName) {
-    // this should never happen
-    throw new Error(
-      'package imports have been tampered with before the package import "step" in the migration',
-    );
-  }
-
-  const astOldElements = findJSXElement({
-    root,
-    j,
-    name: localName,
-    originalName: "Box",
-  });
-
-  if (astOldElements.length === 0) {
-    return "all new";
-  }
-
-  return "mixed";
 };
 
 const legacyBorderRadiusNameTokenLookup = {

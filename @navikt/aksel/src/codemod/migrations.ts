@@ -152,20 +152,21 @@ export const migrations: {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  darkside: [
-    {
+  "v8.0.0": [
+    /* {
+    TODO:
       description: "marks deprecated prop usage with comments.",
       value: "prop-deprecate",
-      path: "darkside/prop-deprecate/prop-deprecate",
+      path: "v8.0.0/prop-deprecate/prop-deprecate",
       ignoredExtensions: CSS_EXTENSIONS,
-    },
+    }, */
     {
       description:
-        "Update Box to to BoxNew (future Box) using the new token system",
-      value: "box-to-boxnew",
-      path: "darkside/box-to-boxnew/box-to-boxnew",
+        "Updates Box with leagcy-tokens to Box using the new token system, and renames already migrated BoxNew/Box.New instances to Box.",
+      value: "v8-box",
+      path: "v8.0.0/box/box-props",
       warning:
-        "Remember to check if 'aksel box migration'-comment were added to any files after migration. This comment will help you find and update Box-instances where we could not resolve the update for you.",
+        "Remember to check if 'TODO: Aksel box migration'-comment were added to any files after migration. This comment will help you find and update Box-instances where we could not resolve the update for you.",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
