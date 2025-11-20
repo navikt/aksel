@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
     "outDir": "./dist/react/cjs",
+    "moduleResolution": "node",
     "module": "commonjs",
     "skipLibCheck": true,
     "declaration": true,
