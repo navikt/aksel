@@ -2,6 +2,7 @@ import type { API, FileInfo } from "jscodeshift";
 import { legacyTokenConfig } from "../../../../darkside/config/legacy.tokens";
 import { findComponentImport, findProps } from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
+import transformBoxNewToBox from "../box-new/box-new";
 
 const propsAffected = ["background", "borderColor", "shadow"];
 
@@ -106,11 +107,15 @@ export default function transformer(file: FileInfo, api: API) {
 
   const blockComment = createFileComments({ tokenComments });
 
-  const output = `${blockComment ? blockComment + "\n\n" : ""}${root.toSource(
-    toSourceOptions,
-  )}`;
+  if (blockComment) {
+    return `${blockComment ? blockComment + "\n\n" : ""}${root.toSource(
+      toSourceOptions,
+    )}`;
+  }
 
-  return output;
+  file.source = root.toSource(toSourceOptions);
+
+  return transformBoxNewToBox(file, api);
 }
 
 type TokenComment = {
