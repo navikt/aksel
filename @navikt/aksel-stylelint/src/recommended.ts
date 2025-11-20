@@ -7,5 +7,6 @@ module.exports = {
     "aksel/no-deprecated-classes": true,
     "aksel/design-token-no-global-override": true,
     "aksel/design-token-no-component-reference": true,
+    "aksel/no-legacy-classnames": false,
   },
 };
