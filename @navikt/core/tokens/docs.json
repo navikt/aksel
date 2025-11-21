@@ -573,6 +573,6 @@
   "z-index": [
     { "name": "--a-z-index-focus", "value": 10 },
     { "name": "--a-z-index-popover", "value": 1000 },
-    { "name": "--a-z-index-tooltip", "value": 3000 }
+    { "name": "--a-z-index-tooltip", "value": 2147483647 }
   ]
 }
