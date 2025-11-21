@@ -6,7 +6,7 @@ const Example = () => {
     <LocalAlert status="warning">
       <LocalAlert.Header>
         <LocalAlert.Title>
-          Denne siden vil være synlig for personer utenfor din organisasjon
+          Mangler dokumentasjon om inntekt og arbeidsforhold
         </LocalAlert.Title>
       </LocalAlert.Header>
       <LocalAlert.Content>
