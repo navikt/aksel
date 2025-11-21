@@ -12,8 +12,8 @@ import { Button } from "../button";
 import { Provider } from "../provider";
 import {
   Dialog,
-  DialogClose,
-  type DialogCloseProps,
+  DialogCloseTrigger,
+  type DialogCloseTriggerProps,
   DialogDescription,
   DialogPopup,
   type DialogPopupProps,
@@ -709,7 +709,7 @@ type BaseDialogProps = {
   popupProps?: Omit<DialogPopupProps, "children" | "asChild"> & {
     children?: React.ReactNode;
   };
-  closeButtonProps?: Omit<DialogCloseProps, "children"> & {
+  closeButtonProps?: Omit<DialogCloseTriggerProps, "children"> & {
     /* Has to override AsChild type */
     children?: any;
   };
@@ -749,7 +749,9 @@ function BaseDialogComponent({
 
             <DialogPopup className="popupCSS" data-testid="popup-nested">
               Popup content Nested
-              <DialogClose data-testid="close-nested">Close Nested</DialogClose>
+              <DialogCloseTrigger data-testid="close-nested">
+                <Button>Close Nested</Button>
+              </DialogCloseTrigger>
             </DialogPopup>
           </Dialog>
         ) : (
@@ -759,9 +761,9 @@ function BaseDialogComponent({
         <DialogDescription id="popup-description">
           Dialog Description
         </DialogDescription>
-        <DialogClose data-testid="close" {...closeButtonProps}>
-          {closeButtonProps?.children ?? "Close"}
-        </DialogClose>
+        <DialogCloseTrigger data-testid="close" {...closeButtonProps}>
+          <Button>{closeButtonProps?.children ?? "Close"}</Button>
+        </DialogCloseTrigger>
         {popupProps?.children}
       </DialogPopup>
     </Dialog>

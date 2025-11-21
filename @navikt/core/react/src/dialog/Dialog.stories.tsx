@@ -15,7 +15,7 @@ import { Tabs } from "../tabs";
 import {
   Dialog,
   DialogBody,
-  DialogClose,
+  DialogCloseTrigger,
   DialogDescription,
   DialogFooter,
   DialogHeader,
@@ -61,9 +61,9 @@ export const Default = {
             <ScrollContent />
           </DialogBody>
           <DialogFooter>
-            <DialogClose asChild>
+            <DialogCloseTrigger>
               <Button>Close</Button>
-            </DialogClose>
+            </DialogCloseTrigger>
           </DialogFooter>
         </DialogPopup>
       </Dialog>
@@ -124,9 +124,9 @@ export const AllSubComponents: Story = {
             where the main content lives
           </DialogBody>
           <DialogFooter>
-            <DialogClose asChild>
+            <DialogCloseTrigger>
               <Button>Close</Button>
-            </DialogClose>
+            </DialogCloseTrigger>
           </DialogFooter>
         </DialogPopup>
       </Dialog>
@@ -197,9 +197,9 @@ export const ComplexDrawer: Story = {
               </Tabs.Panel>
             </DialogBody>
             <DialogFooter>
-              <DialogClose asChild>
+              <DialogCloseTrigger>
                 <Button>Close</Button>
-              </DialogClose>
+              </DialogCloseTrigger>
             </DialogFooter>
           </DialogPopup>
         </Tabs>
@@ -246,9 +246,9 @@ export const Position: Story = {
               of the dialog. Here is where the main content lives
             </DialogBody>
             <DialogFooter>
-              <DialogClose asChild>
+              <DialogCloseTrigger>
                 <Button>Close</Button>
-              </DialogClose>
+              </DialogCloseTrigger>
             </DialogFooter>
           </DialogPopup>
         </Dialog>
@@ -265,7 +265,9 @@ export const DemoDefaultFocusDialog: Story = {
         <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogPopup aria-labelledby="ha">
           <h1 id="ha">Headingtekst som er h1</h1>
-          <DialogClose>Close</DialogClose>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
           <p>
             Dette er vanlig innhold i en dialog. Innholdet kommer etter en
             tittel (h1) og en lukkeknapp. Etter dette innholdet kommer en annen
@@ -292,7 +294,9 @@ export const DemoCloseButtonFocusDialog: Story = {
           <DialogTrigger>Open Dialog</DialogTrigger>
           <DialogPopup aria-labelledby="ha" initialFocus={closeRef}>
             <h1 id="ha">Headingtekst som er h1</h1>
-            <DialogClose ref={closeRef}>Close</DialogClose>
+            <DialogCloseTrigger ref={closeRef}>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
             <p>
               Denne skiller seg litt ut da autofokus var satt på lukkeknappen
               som er etter heading. Dette er vanlig innhold i en dialog.
@@ -347,9 +351,9 @@ export const NestedDrawers: Story = {
               of the dialog. Here is where the main content lives
             </DialogBody>
             <DialogFooter>
-              <DialogClose asChild>
+              <DialogCloseTrigger>
                 <Button>Close</Button>
-              </DialogClose>
+              </DialogCloseTrigger>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button>Open nested</Button>
@@ -364,9 +368,9 @@ export const NestedDrawers: Story = {
                     content lives. This i
                   </DialogBody>
                   <DialogFooter>
-                    <DialogClose asChild>
+                    <DialogCloseTrigger>
                       <Button>Close</Button>
-                    </DialogClose>
+                    </DialogCloseTrigger>
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button>Open nested</Button>
@@ -384,9 +388,9 @@ export const NestedDrawers: Story = {
                           content lives. This i
                         </DialogBody>
                         <DialogFooter>
-                          <DialogClose asChild>
+                          <DialogCloseTrigger>
                             <Button>Close</Button>
-                          </DialogClose>
+                          </DialogCloseTrigger>
                         </DialogFooter>
                       </DialogPopup>
                     </Dialog>
@@ -417,7 +421,9 @@ export const NonTriggerImplementation: Story = {
         <Dialog open={open} onOpenChange={(x) => setOpen(x)}>
           <DialogPopup>
             Drawer content
-            <DialogClose>Close</DialogClose>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
           </DialogPopup>
         </Dialog>
         <button onClick={() => alert("after")}>after dialog</button>
@@ -440,10 +446,14 @@ export const DomOrder: Story = {
             <Dialog defaultOpen>
               <DialogPopup position="right">
                 First-nested
-                <DialogClose>Close first nested</DialogClose>
+                <DialogCloseTrigger>
+                  <Button>Close first nested</Button>
+                </DialogCloseTrigger>
               </DialogPopup>
             </Dialog>
-            <DialogClose>Close</DialogClose>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
           </DialogPopup>
         </Dialog>
         <Dialog defaultOpen>
@@ -453,7 +463,9 @@ export const DomOrder: Story = {
             thrid behind thrid behind thrid behind thrid behind thrid behind
             thrid behind thrid behind thrid behind thrid behind thrid behind
             thrid behind
-            <DialogClose>Close</DialogClose>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
           </DialogPopup>
         </Dialog>
       </div>
@@ -478,7 +490,9 @@ export const TrapFocusOutsideClick: Story = {
             withBackdrop={false}
           >
             Drawer content
-            <DialogClose>Close</DialogClose>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
           </DialogPopup>
         </Dialog>
       </div>
@@ -504,10 +518,14 @@ export const NestedTrapFocusOutsideClick: Story = {
 
               <DialogPopup modal="trap-focus" withBackdrop={false}>
                 Drawer content2
-                <DialogClose>Close2</DialogClose>
+                <DialogCloseTrigger>
+                  <Button>Close2</Button>
+                </DialogCloseTrigger>
               </DialogPopup>
             </Dialog>
-            <DialogClose>Close</DialogClose>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
           </DialogPopup>
         </Dialog>
       </div>
@@ -524,7 +542,9 @@ export const IgnoreOutsideClick: Story = {
 
         <DialogPopup closeOnOutsideClick={false}>
           Drawer content
-          <DialogClose>Close</DialogClose>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
         </DialogPopup>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog</button>
@@ -637,9 +657,9 @@ export const ImplementationDemo = {
                 </DialogHeader>
                 <DialogBody>This is the body of the dialog.</DialogBody>
                 <DialogFooter>
-                  <DialogClose asChild>
+                  <DialogCloseTrigger>
                     <Button>Close</Button>
-                  </DialogClose>
+                  </DialogCloseTrigger>
                 </DialogFooter>
               </>
             )}
