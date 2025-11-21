@@ -75,7 +75,7 @@ interface LocalAlertComponent
    *  <LocalAlert>
    *    <LocalAlert.Header>
    *      <LocalAlert.Title>Info title</LocalAlert.Title>
-   *     <LocalAlert.Close onClick={() => alert("Closed!")} />
+   *     <LocalAlert.CloseButton onClick={() => alert("Closed!")} />
    *    </LocalAlert.Header>
    *  </LocalAlert>
    * ```
