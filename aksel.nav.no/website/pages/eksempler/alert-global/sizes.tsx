@@ -7,7 +7,7 @@ const Example = () => {
       <GlobalAlert status="announcement" size="medium">
         <GlobalAlert.Header>
           <GlobalAlert.Title>
-            Systemet vil være utilgjengelig natt til søndag
+            Systemet vil være utilgjengelig natt til søndag (Medium)
           </GlobalAlert.Title>
           <GlobalAlert.Close onClick={() => alert("Lukket alert")} />
         </GlobalAlert.Header>
@@ -20,7 +20,7 @@ const Example = () => {
       <GlobalAlert status="announcement" size="small">
         <GlobalAlert.Header>
           <GlobalAlert.Title>
-            Systemet vil være utilgjengelig natt til søndag
+            Systemet vil være utilgjengelig natt til søndag (Small)
           </GlobalAlert.Title>
           <GlobalAlert.Close onClick={() => alert("Lukket alert")} />
         </GlobalAlert.Header>

@@ -6,7 +6,7 @@ const Example = () => {
     <VStack gap="space-16">
       <InfoCard data-color="info">
         <InfoCard.Header>
-          <InfoCard.Title>Fremhevet informasjon om noe på siden</InfoCard.Title>
+          <InfoCard.Title>Fremhevet statisk informasjon: Medium</InfoCard.Title>
         </InfoCard.Header>
         <InfoCard.Content>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
@@ -15,7 +15,7 @@ const Example = () => {
       </InfoCard>
       <InfoCard data-color="info" size="small">
         <InfoCard.Header>
-          <InfoCard.Title>Fremhevet informasjon om noe på siden</InfoCard.Title>
+          <InfoCard.Title>Fremhevet statisk informasjon: Small</InfoCard.Title>
         </InfoCard.Header>
         <InfoCard.Content>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur

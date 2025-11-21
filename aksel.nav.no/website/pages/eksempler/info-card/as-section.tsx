@@ -1,11 +1,16 @@
+import { InformationSquareIcon } from "@navikt/aksel-icons";
 import { InfoCard, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
     <VStack gap="space-16">
-      <InfoCard data-color="info">
-        <InfoCard.Header>
+      <InfoCard
+        data-color="info"
+        as="section"
+        aria-label="Informasjon om noe fremhevet"
+      >
+        <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
           <InfoCard.Title>Fremhevet statisk informasjon</InfoCard.Title>
         </InfoCard.Header>
         <InfoCard.Content>
@@ -26,5 +31,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 4,
+  desc: "Bruk `as='section'` + aria-label/aria-labelledby for å gjøre InfoCard til en semantisk seksjon på siden. Dette 'rammer inn' InfoCard for skjermlesere og gjør det lettere å forstå hvor den starter og slutter.",
 };

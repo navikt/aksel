@@ -1,3 +1,4 @@
+import { InformationSquareIcon } from "@navikt/aksel-icons";
 import { InfoCard, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -5,7 +6,7 @@ const Example = () => {
   return (
     <VStack gap="space-16">
       <InfoCard data-color="info">
-        <InfoCard.Header>
+        <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
           <InfoCard.Title>Fremhevet statisk informasjon</InfoCard.Title>
         </InfoCard.Header>
         <InfoCard.Content>
@@ -26,5 +27,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 3,
 };
