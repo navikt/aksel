@@ -780,8 +780,8 @@ function PortalContainer({ children }: { children: React.ReactNode }) {
 }
 
 function withoutAnimations() {
-  globalThis.AKSEL_ANIMATIONS_DISABLED = true;
+  globalThis.AKSEL_NO_EXIT_ANIMATIONS = true;
   return () => {
-    globalThis.AKSEL_ANIMATIONS_DISABLED = false;
+    globalThis.AKSEL_NO_EXIT_ANIMATIONS = false;
   };
 }

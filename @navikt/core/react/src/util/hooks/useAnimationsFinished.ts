@@ -16,7 +16,7 @@ import { useEventCallback } from "./useEventCallback";
  *
  * Mechanics:
  *  1. Resolves the concrete `HTMLElement` (direct element or from ref) – early no-op if missing.
- *  2. If `getAnimations` is unsupported or animations are globally disabled (`AKSEL_ANIMATIONS_DISABLED`),
+ *  2. If `getAnimations` is unsupported or animations are globally disabled (`AKSEL_NO_EXIT_ANIMATIONS`),
  *     runs the callback immediately.
  *  3. Schedules a frame so style/animation changes applied this render are committed.
  *  4. Optionally schedules an additional frame (`waitForNextTick=true`) to catch animations that
@@ -77,7 +77,7 @@ export function useAnimationsFinished(
       if (
         typeof element.getAnimations !== "function" ||
         // Flag hook for test envs.
-        (globalThis as any).AKSEL_ANIMATIONS_DISABLED
+        (globalThis as any).AKSEL_NO_EXIT_ANIMATIONS
       ) {
         fnToExecute();
         return;
