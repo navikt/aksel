@@ -39,7 +39,7 @@ export const workspaceConfig = defineConfig([
     beta: {
       form: {
         enhancedObjectDialog: {
-          enabled: true,
+          enabled: false,
         },
       },
     },
