@@ -9,7 +9,7 @@ const Example = () => {
           <GlobalAlert.Title>
             Systemet vil være utilgjengelig natt til søndag (Medium)
           </GlobalAlert.Title>
-          <GlobalAlert.Close onClick={() => alert("Lukket alert")} />
+          <GlobalAlert.CloseButton onClick={() => alert("Lukket alert")} />
         </GlobalAlert.Header>
         <GlobalAlert.Content>
           Kunngjøringer brukes for å formidle noe om appen eller systemet, eller
@@ -22,7 +22,7 @@ const Example = () => {
           <GlobalAlert.Title>
             Systemet vil være utilgjengelig natt til søndag (Small)
           </GlobalAlert.Title>
-          <GlobalAlert.Close onClick={() => alert("Lukket alert")} />
+          <GlobalAlert.CloseButton onClick={() => alert("Lukket alert")} />
         </GlobalAlert.Header>
         <GlobalAlert.Content>
           Kunngjøringer brukes for å formidle noe om appen eller systemet, eller

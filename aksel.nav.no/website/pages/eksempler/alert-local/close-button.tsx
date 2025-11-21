@@ -8,7 +8,7 @@ const Example = () => {
         <LocalAlert.Title>
           Nyhet! Nå kan du ettersende vedlegg digitalt
         </LocalAlert.Title>
-        <LocalAlert.Close onClick={() => alert("Lukket alert")} />
+        <LocalAlert.CloseButton onClick={() => alert("Lukket alert")} />
       </LocalAlert.Header>
       <LocalAlert.Content>
         Kunngjøringer brukes for å formidle noe om appen eller systemet, eller
@@ -29,5 +29,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Bruk `LocalAlert.Close` for å legge til en lukkeknapp i alerten. Du må selv håndtere lukke-logikken.",
+  desc: "Bruk `LocalAlert.CloseButton` for å legge til en lukkeknapp i alerten. Du må selv håndtere lukke-logikken.",
 };

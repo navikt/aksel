@@ -8,7 +8,7 @@ const Example = () => {
         <GlobalAlert.Title>
           Systemet vil være utilgjengelig natt til søndag
         </GlobalAlert.Title>
-        <GlobalAlert.Close onClick={() => alert("Lukket alert")} />
+        <GlobalAlert.CloseButton onClick={() => alert("Lukket alert")} />
       </GlobalAlert.Header>
       <GlobalAlert.Content>
         Kunngjøringer brukes for å formidle noe om appen eller systemet, eller
@@ -29,5 +29,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Bruk `GlobalAlert.Close` for å legge til en lukkeknapp i alerten. Du må selv håndtere lukke-logikken.",
+  desc: "Bruk `GlobalAlert.CloseButton` for å legge til en lukkeknapp i alerten. Du må selv håndtere lukke-logikken.",
 };

@@ -6,7 +6,7 @@ import { Link } from "../../link";
 import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import {
   LocalAlert,
-  LocalAlertClose,
+  LocalAlertCloseButton,
   LocalAlertContent,
   LocalAlertHeader,
   LocalAlertTitle,
@@ -31,7 +31,7 @@ export const Default: Story = {
       <LocalAlert status={props.status ?? "announcement"} size={props.size}>
         <LocalAlertHeader>
           <LocalAlertTitle>{props.title ?? "LocalAlert title"}</LocalAlertTitle>
-          <LocalAlertClose onClick={() => alert("Lukket!")} />
+          <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
         </LocalAlertHeader>
         <LocalAlertContent>
           {props.children ?? "LocalAlert content"}
@@ -64,7 +64,7 @@ export const SizeSmall: Story = {
       <LocalAlert status="announcement" size="small">
         <LocalAlertHeader>
           <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
-          <LocalAlertClose onClick={() => alert("Lukket!")} />
+          <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
         </LocalAlertHeader>
         <DemoContent />
       </LocalAlert>
@@ -84,7 +84,7 @@ export const OnlyHeader: Story = {
         <LocalAlert status="announcement">
           <LocalAlertHeader>
             <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
-            <LocalAlertClose onClick={() => alert("Lukket!")} />
+            <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
           </LocalAlertHeader>
         </LocalAlert>
         <LocalAlert status="announcement" size="small">
@@ -95,7 +95,7 @@ export const OnlyHeader: Story = {
         <LocalAlert status="announcement" size="small">
           <LocalAlertHeader>
             <LocalAlertTitle>LocalAlert Title</LocalAlertTitle>
-            <LocalAlertClose onClick={() => alert("Lukket!")} />
+            <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
           </LocalAlertHeader>
         </LocalAlert>
       </VStack>
@@ -113,7 +113,7 @@ export const Compositions: Story = {
           <LocalAlert status={status} key={status}>
             <LocalAlertHeader>
               <LocalAlertTitle>{status} LocalAlert title</LocalAlertTitle>
-              <LocalAlertClose onClick={() => alert("Lukket!")} />
+              <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
             </LocalAlertHeader>
             <DemoContent />
           </LocalAlert>
@@ -130,14 +130,14 @@ export const CloseButton: Story = {
         <LocalAlert status="announcement">
           <LocalAlertHeader>
             <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
-            <LocalAlertClose onClick={() => alert("Lukket!")} />
+            <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
           </LocalAlertHeader>
           <DemoContent />
         </LocalAlert>
         <LocalAlert status="announcement" size="small">
           <LocalAlertHeader>
             <LocalAlertTitle>Info: LocalAlert title</LocalAlertTitle>
-            <LocalAlertClose onClick={() => alert("Lukket!")} />
+            <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
           </LocalAlertHeader>
           <DemoContent />
         </LocalAlert>
@@ -157,7 +157,7 @@ export const WrappingTitle: Story = {
             Molestias, laudantium saepe. Nihil in alias praesentium maxime iure
             ipsam? Accusantium libero quia quis!
           </LocalAlertTitle>
-          <LocalAlertClose onClick={() => alert("Lukket!")} />
+          <LocalAlertCloseButton onClick={() => alert("Lukket!")} />
         </LocalAlertHeader>
         <DemoContent />
       </LocalAlert>

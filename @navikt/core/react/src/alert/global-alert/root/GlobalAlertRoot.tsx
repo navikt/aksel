@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import { BaseAlert } from "../../base-alert";
 import {
-  GlobalAlertClose,
-  type GlobalAlertCloseProps,
-} from "../close/GlobalAlertClose";
+  GlobalAlertCloseButton,
+  type GlobalAlertCloseButtonProps,
+} from "../close-button/GlobalAlertCloseButton";
 import {
   GlobalAlertContent,
   type GlobalAlertContentProps,
@@ -75,12 +75,12 @@ interface GlobalAlertComponent
    *  <GlobalAlert>
    *    <GlobalAlert.Header>
    *      <GlobalAlert.Title>Info title</GlobalAlert.Title>
-   *     <GlobalAlert.Close onClick={() => alert("Closed!")} />
+   *     <GlobalAlert.CloseButton onClick={() => alert("Closed!")} />
    *    </GlobalAlert.Header>
    *  </GlobalAlert>
    * ```
    */
-  Close: typeof GlobalAlertClose;
+  CloseButton: typeof GlobalAlertCloseButton;
 }
 
 /**
@@ -114,19 +114,19 @@ const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
 GlobalAlert.Header = GlobalAlertHeader;
 GlobalAlert.Title = GlobalAlertTitle;
 GlobalAlert.Content = GlobalAlertContent;
-GlobalAlert.Close = GlobalAlertClose;
+GlobalAlert.CloseButton = GlobalAlertCloseButton;
 
 export {
   GlobalAlert,
+  GlobalAlertCloseButton,
   GlobalAlertContent,
   GlobalAlertHeader,
   GlobalAlertTitle,
-  GlobalAlertClose,
 };
 export type {
-  GlobalAlertProps,
-  GlobalAlertHeaderProps,
-  GlobalAlertTitleProps,
+  GlobalAlertCloseButtonProps,
   GlobalAlertContentProps,
-  GlobalAlertCloseProps,
+  GlobalAlertHeaderProps,
+  GlobalAlertProps,
+  GlobalAlertTitleProps,
 };

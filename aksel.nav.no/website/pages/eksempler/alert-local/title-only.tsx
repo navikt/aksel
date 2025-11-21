@@ -8,7 +8,7 @@ const Example = () => {
         <LocalAlert.Title>
           Nyhet! Nå kan du ettersende vedlegg digitalt
         </LocalAlert.Title>
-        <LocalAlert.Close onClick={() => alert("Lukket alert")} />
+        <LocalAlert.CloseButton onClick={() => alert("Lukket alert")} />
       </LocalAlert.Header>
     </LocalAlert>
   );
