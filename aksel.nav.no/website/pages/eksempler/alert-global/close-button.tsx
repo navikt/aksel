@@ -29,5 +29,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Bruk `GlobalAlert.Close` for å legge til en lukkeknapp i alerten. Du må selv håndtere lukke-logikken.",
+  desc: "Bruk `GlobalAlert.CloseButton` for å legge til en lukkeknapp i alerten. Du må selv håndtere lukke-logikken.",
 };
