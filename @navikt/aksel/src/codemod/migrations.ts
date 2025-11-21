@@ -195,6 +195,13 @@ export const migrations: {
       path: "v8.0.0/accordion-variant/accordion-variant",
       ignoredExtensions: CSS_EXTENSIONS,
     },
+    {
+      description:
+        "Updates variant + data-color prop based on current variant-prop.",
+      value: "v8-chips-variant",
+      path: "v8.0.0/chips-variant/chips-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
   ],
 };
 
