@@ -297,7 +297,7 @@ export const TrackPrevFocused: Story = {
     const [open, setOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     return (
-      <Provider rootElement={anchorEl ? anchorEl : undefined}>
+      <Provider rootElement={anchorEl || undefined}>
         <div ref={setAnchorEl}>
           <ActionMenu>
             <ActionMenu.Trigger>
