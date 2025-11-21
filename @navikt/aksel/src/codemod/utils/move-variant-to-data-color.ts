@@ -1,4 +1,9 @@
-import type { API, FileInfo } from "jscodeshift";
+import type {
+  API,
+  FileInfo,
+  JSXAttribute,
+  JSXExpressionContainer,
+} from "jscodeshift";
 import { getLineTerminator } from "./lineterminator";
 
 export interface MigrationConfig {
@@ -55,17 +60,9 @@ export function moveVariantToDataColor(
         if (attr.type !== "JSXAttribute") return;
         if (attr.name.name === config.prop) {
           variantPropIndex = index;
-          if (
-            attr.value?.type === "StringLiteral" ||
-            attr.value?.type === "Literal"
-          ) {
-            variantValue = attr.value.value as string;
-          } else if (
-            attr.value?.type === "JSXExpressionContainer" &&
-            (attr.value.expression.type === "StringLiteral" ||
-              attr.value.expression.type === "Literal")
-          ) {
-            variantValue = (attr.value.expression as any).value;
+          const value = getStringValue(attr.value);
+          if (value) {
+            variantValue = value;
           }
         }
         if (attr.name.name === "data-color") {
@@ -119,4 +116,26 @@ export function moveVariantToDataColor(
 
   const toSourceOptions = getLineTerminator(file.source);
   return root.toSource(toSourceOptions);
+}
+
+type AttributeValue =
+  | JSXAttribute["value"]
+  | JSXExpressionContainer["expression"];
+
+function getStringValue(node: AttributeValue): string | null {
+  if (!node) return null;
+  if (node.type === "StringLiteral" || node.type === "Literal") {
+    return node.value as string;
+  }
+  if (
+    node.type === "TemplateLiteral" &&
+    node.expressions.length === 0 &&
+    node.quasis.length === 1
+  ) {
+    return node.quasis[0].value.cooked ?? null;
+  }
+  if (node.type === "JSXExpressionContainer") {
+    return getStringValue(node.expression);
+  }
+  return null;
 }

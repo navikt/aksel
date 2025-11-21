@@ -155,7 +155,7 @@ export const migrations: {
   "v8.0.0": [
     {
       description:
-        "Updates Box with leagcy-tokens to Box using the new token system, and renames already migrated BoxNew/Box.New instances to Box.",
+        "Updates Box with legacy-tokens to Box using the new token system, and renames already migrated BoxNew/Box.New instances to Box.",
       value: "v8-box",
       path: "v8.0.0/box/box",
       warning:
