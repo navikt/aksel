@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 7.34.0
+
+### Minor Changes
+
+- Icons: :tada: New icons `PhoneSlash` and `BellSlash`. ([#4310](https://github.com/navikt/aksel/pull/4310))
+
 ## 7.33.5
 
 ## 7.33.4
