@@ -109,14 +109,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       props?.defaultValue ?? "",
     );
 
-    const getMinRows = () => {
-      let rows = rest?.minRows ? rest?.minRows : 3;
-      if (size === "small") {
-        rows = rest?.minRows ? rest?.minRows : 2;
-      }
-      return rows;
-    };
-
     const describedBy = cl(inputProps["aria-describedby"], {
       [maxLengthId ?? ""]: hasMaxLength,
     });
@@ -169,7 +161,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               ? (e) => setUncontrolledValue(e.target.value)
               : undefined,
           )}
-          minRows={getMinRows()}
+          minRows={rest.minRows || (size === "small" ? 2 : 3)}
           autoScrollbar={UNSAFE_autoScrollbar}
           ref={ref}
           readOnly={readOnly}

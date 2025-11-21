@@ -21,7 +21,6 @@ const Example = () => {
         onClose={() => setOpenState(false)}
         anchorEl={buttonRef.current}
         offset={0}
-        arrow={false}
         placement="bottom"
       >
         <Popover.Content>offset = 0</Popover.Content>

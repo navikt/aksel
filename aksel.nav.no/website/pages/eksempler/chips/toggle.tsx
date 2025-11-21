@@ -1,54 +1,28 @@
 import { useState } from "react";
-import { Chips, VStack } from "@navikt/ds-react";
+import { Chips } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [selected, setSelected] = useState(["Nittedal", "Arendal"]);
 
   return (
-    <VStack gap="space-40">
-      <VStack gap="space-12">
-        Variant action (default)
-        <Chips>
-          {options.map((option) => (
-            <Chips.Toggle
-              key={option}
-              selected={selected.includes(option)}
-              onClick={() =>
-                setSelected(
-                  selected.includes(option)
-                    ? selected.filter((x) => x !== option)
-                    : [...selected, option],
-                )
-              }
-            >
-              {option}
-            </Chips.Toggle>
-          ))}
-        </Chips>
-      </VStack>
-      <VStack gap="space-12">
-        Variant neutral
-        <Chips>
-          {options.map((option) => (
-            <Chips.Toggle
-              variant="neutral"
-              key={option}
-              selected={selected.includes(option)}
-              onClick={() =>
-                setSelected(
-                  selected.includes(option)
-                    ? selected.filter((x) => x !== option)
-                    : [...selected, option],
-                )
-              }
-            >
-              {option}
-            </Chips.Toggle>
-          ))}
-        </Chips>
-      </VStack>
-    </VStack>
+    <Chips>
+      {options.map((option) => (
+        <Chips.Toggle
+          key={option}
+          selected={selected.includes(option)}
+          onClick={() =>
+            setSelected(
+              selected.includes(option)
+                ? selected.filter((x) => x !== option)
+                : [...selected, option],
+            )
+          }
+        >
+          {option}
+        </Chips.Toggle>
+      ))}
+    </Chips>
   );
 };
 

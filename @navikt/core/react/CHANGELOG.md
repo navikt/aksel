@@ -1,5 +1,35 @@
 # @navikt/ds-react
 
+## 7.33.5
+
+### Patch Changes
+
+- Datepicker: Avoid rendering Datepicker dialog when not open. ([#4300](https://github.com/navikt/aksel/pull/4300))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.5
+  - @navikt/aksel-icons@7.33.5
+
+## 7.33.4
+
+### Patch Changes
+
+- Textarea: Set height on first render to `auto` instead of `0px` to reduce layout shift when SSR ([#4295](https://github.com/navikt/aksel/pull/4295))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.4
+  - @navikt/aksel-icons@7.33.4
+
+## 7.33.3
+
+### Patch Changes
+
+- Popover: Children no longer re-mounts on open toggle. ([#4281](https://github.com/navikt/aksel/pull/4281))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.3
+  - @navikt/aksel-icons@7.33.3
+
 ## 7.33.2
 
 ### Patch Changes

@@ -14,6 +14,7 @@ import {
 export function usePointerUpOutside(
   callback?: (event: CustomPointerEvent) => void,
   ownerDocument: Document = globalThis?.document,
+  enabled: boolean = true,
 ) {
   // Keep callback ref stable
   const handlePointerUpOutside = useCallbackRef(callback) as EventListener;
@@ -21,6 +22,10 @@ export function usePointerUpOutside(
   const isPointerInsideReactTreeRef = useRef(false);
 
   useEffect(() => {
+    if (!enabled) {
+      return;
+    }
+
     const handlePointerUp = (event: PointerEvent) => {
       /**
        * The `DismisableLayer`-API is based on the ability to stop events from propagating and in the end calling `onDismiss`
@@ -72,7 +77,7 @@ export function usePointerUpOutside(
       ownerDocument.removeEventListener("pointerup", handlePointerUp);
       ownerDocument.removeEventListener("pointercancel", handlePointerCancel);
     };
-  }, [ownerDocument, handlePointerUpOutside]);
+  }, [ownerDocument, handlePointerUpOutside, enabled]);
 
   /**
    * Ensures we check React component tree (not just DOM tree).

@@ -299,7 +299,6 @@ const MyDropDownSearchVirtualfocus = () => {
           onClose={() => {
             setOpenState(false);
           }}
-          arrow={false}
           offset={0}
           placement="bottom-start"
         >

@@ -170,4 +170,21 @@ Warns when you try to use deprecated class names.
 }
 ```
 
+## aksel/no-legacy-classes
+
+Warns when trying to to use legacy class names starting with `.navds`. As of version 8.0, all class names are prefixed with `.aksel`, so all old overrides no longer work.
+
+We still discourage overriding class names from `@navikt/ds-css`:
+
+- Add your own `className` instead of referencing Aksel classes directly.
+- Open a GitHub issue if what you need to do isn't straightforward, and we'll work together to find a solution.
+
+❌ Incorrect:
+
+```css
+.navds-button {
+^^^^^^^^^^^^^
+}
+```
+
 🐛 Found a bug? https://github.com/navikt/aksel/issues

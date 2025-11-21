@@ -2,6 +2,7 @@
   "extends": "../../../tsconfig.build.json",
   "compilerOptions": {
     "outDir": "./cjs",
+    "moduleResolution": "node",
     "module": "commonjs",
     "noImplicitAny": false,
     "declaration": true,
@@ -12,6 +13,7 @@
     "./src/**/*.test.ts",
     "./src/**/*.test.tsx",
     "./src/**/*.test-d.ts",
-    "./src/**/*.stories.tsx"
+    "./src/**/*.stories.tsx",
+    "./src/**/renderStoriesForChromatic.tsx"
   ]
 }
