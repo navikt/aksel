@@ -174,10 +174,11 @@ const DialogPopupInternal = forwardRef<
         return false;
       }
 
-      /**
-       * In all other cases, we allow FocusBoundary to return focus to the previously focused element
-       */
-      return triggerElement ?? true;
+      if (triggerElement?.checkVisibility()) {
+        return triggerElement ?? true;
+      }
+
+      return true;
     };
 
     return (
