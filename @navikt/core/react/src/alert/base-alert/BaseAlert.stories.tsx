@@ -5,7 +5,7 @@ import { VStack } from "../../layout/stack";
 import { Link } from "../../link";
 import {
   Root as BaseAlert,
-  Close as BaseAlertClose,
+  CloseButton as BaseAlertClose,
   Content as BaseAlertContent,
   Header as BaseAlertHeader,
   Title as BaseAlertTitle,
