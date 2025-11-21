@@ -18,10 +18,7 @@ import {
 } from "../title/GlobalAlertTitle";
 
 interface GlobalAlertProps
-  extends Omit<
-    BaseAlert.RootProps,
-    "type" | "global" | "statusType" | "data-color"
-  > {
+  extends Omit<BaseAlert.RootProps, "type" | "global" | "data-color"> {
   status: Exclude<BaseAlert.RootProps["status"], undefined>;
 }
 
@@ -109,7 +106,6 @@ const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
         {...props}
         type="strong"
         global
-        statusType="alert"
       />
     );
   },

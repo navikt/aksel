@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { AkselColor } from "../../../types";
 import { useId } from "../../../util";
+import { useI18n } from "../../../util/i18n/i18n.hooks";
 import {
   type BaseAlertContextProps,
   BaseAlertProvider,
@@ -32,13 +33,18 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   global?: boolean;
   /**
-   * Changes the semantics of the alert. Use "alert" for important information that needs user attention, and "message" for less important information.
-   */
-  statusType: BaseAlertContextProps["statusType"];
-  /**
    * Type of alert
    */
   status?: BaseAlertContextProps["status"];
+  /**
+   * Changes the HTML element used for the root element.
+   *
+   * **Testing**: When using `axe-core` for accessibility testing, `section` might warn about unique landmarks if you have multipe Alerts on page with the same status.
+   * In those cases, consider using `div` as the root element, or adding unique `aria-label` or `aria-labelledby` props.
+   * @see [📝 Landmarks unique](https://dequeuniversity.com/rules/axe/4.6/landmark-unique)
+   * @default "section"
+   */
+  as?: "section" | "div";
 }
 
 const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
@@ -50,8 +56,10 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
       "data-color": dataColor,
       type,
       global = false,
-      statusType,
       status,
+      as: Component = "section",
+      "aria-label": ariaLabel,
+      role,
       ...restProps
     }: BaseAlertProps,
     forwardedRef,
@@ -59,18 +67,22 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
     const { cn } = useRenameCSS();
 
     const statusId = useId();
+    const translate = useI18n("global");
 
     const alertColor = status ? baseAlertStatusToDataColor(status) : dataColor;
 
     return (
       <BaseAlertProvider
         size={size}
-        statusType={statusType}
         status={status}
         color={alertColor}
         statusId={statusId}
       >
-        <div
+        <Component
+          aria-label={
+            ariaLabel ??
+            (!status || Component === "div" ? undefined : translate(status))
+          }
           ref={forwardedRef}
           {...restProps}
           className={cn(className, "navds-base-alert")}
@@ -79,8 +91,8 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
           data-variant={type}
           data-global={global}
         >
-          {children}
-        </div>
+          <div role={role}>{children}</div>
+        </Component>
       </BaseAlertProvider>
     );
   },

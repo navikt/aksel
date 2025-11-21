@@ -18,10 +18,7 @@ import {
 } from "../title/LocalAlertTitle";
 
 interface LocalAlertProps
-  extends Omit<
-    BaseAlert.RootProps,
-    "type" | "global" | "statusType" | "data-color"
-  > {
+  extends Omit<BaseAlert.RootProps, "type" | "global" | "data-color"> {
   status: Exclude<BaseAlert.RootProps["status"], undefined>;
 }
 
@@ -109,7 +106,6 @@ const LocalAlert = forwardRef<HTMLDivElement, LocalAlertProps>(
         {...restProps}
         type="strong"
         global={false}
-        statusType="alert"
         status={status}
       />
     );

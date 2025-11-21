@@ -51,7 +51,6 @@ export const Default: Story = {
     size: "medium",
     status: "success",
     type: "strong",
-    statusType: "alert",
     global: false,
   },
   argTypes: {
@@ -67,22 +66,13 @@ export const Default: Story = {
       control: { type: "radio" },
       options: ["strong", "moderate"],
     },
-    statusType: {
-      control: { type: "radio" },
-      options: ["alert", "message"],
-    },
   },
 };
 
 export const SizeSmall: Story = {
   render: () => {
     return (
-      <BaseAlert
-        status="success"
-        size="small"
-        type="strong"
-        statusType="message"
-      >
+      <BaseAlert status="success" size="small" type="strong">
         <BaseAlertHeader>
           <BaseAlertTitle>BaseAlert Title</BaseAlertTitle>
           <BaseAlertClose onClick={() => alert("Lukket!")} />
@@ -96,12 +86,7 @@ export const SizeSmall: Story = {
 export const Strong: Story = {
   render: () => {
     return (
-      <BaseAlert
-        status="success"
-        size="small"
-        type="strong"
-        statusType="message"
-      >
+      <BaseAlert status="success" size="small" type="strong">
         <BaseAlertHeader>
           <BaseAlertTitle>BaseAlert Title</BaseAlertTitle>
         </BaseAlertHeader>
@@ -114,7 +99,7 @@ export const Strong: Story = {
 export const Moderate: Story = {
   render: () => {
     return (
-      <BaseAlert status="success" type="moderate" statusType="message">
+      <BaseAlert status="success" type="moderate">
         <BaseAlertHeader>
           <BaseAlertTitle>BaseAlert Title</BaseAlertTitle>
         </BaseAlertHeader>
@@ -128,33 +113,23 @@ export const OnlyHeader: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        <BaseAlert status="success" type="strong" statusType="message">
+        <BaseAlert status="success" type="strong">
           <BaseAlertHeader>
             <BaseAlertTitle>BaseAlert Title</BaseAlertTitle>
           </BaseAlertHeader>
         </BaseAlert>
-        <BaseAlert status="success" type="strong" statusType="message">
+        <BaseAlert status="success" type="strong">
           <BaseAlertHeader>
             <BaseAlertTitle>BaseAlert Title</BaseAlertTitle>
             <BaseAlertClose onClick={() => alert("Lukket!")} />
           </BaseAlertHeader>
         </BaseAlert>
-        <BaseAlert
-          status="success"
-          size="small"
-          type="strong"
-          statusType="message"
-        >
+        <BaseAlert status="success" size="small" type="strong">
           <BaseAlertHeader>
             <BaseAlertTitle>BaseAlert Title</BaseAlertTitle>
           </BaseAlertHeader>
         </BaseAlert>
-        <BaseAlert
-          status="success"
-          size="small"
-          type="strong"
-          statusType="message"
-        >
+        <BaseAlert status="success" size="small" type="strong">
           <BaseAlertHeader>
             <BaseAlertTitle>BaseAlert Title</BaseAlertTitle>
             <BaseAlertClose onClick={() => alert("Lukket!")} />
@@ -169,19 +144,14 @@ export const CloseButton: Story = {
   render: () => {
     return (
       <VStack gap="space-16">
-        <BaseAlert status="success" type="strong" statusType="message">
+        <BaseAlert status="success" type="strong">
           <BaseAlertHeader>
             <BaseAlertTitle>Info: BaseAlert title</BaseAlertTitle>
             <BaseAlertClose onClick={() => alert("Lukket!")} />
           </BaseAlertHeader>
           <DemoContent />
         </BaseAlert>
-        <BaseAlert
-          status="success"
-          size="small"
-          type="strong"
-          statusType="message"
-        >
+        <BaseAlert status="success" size="small" type="strong">
           <BaseAlertHeader>
             <BaseAlertTitle>Info: BaseAlert title</BaseAlertTitle>
             <BaseAlertClose onClick={() => alert("Lukket!")} />
@@ -196,7 +166,7 @@ export const CloseButton: Story = {
 export const WrappingTitle: Story = {
   render: () => {
     return (
-      <BaseAlert status="success" type="strong" statusType="message">
+      <BaseAlert status="success" type="strong">
         <BaseAlertHeader>
           <BaseAlertTitle>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat

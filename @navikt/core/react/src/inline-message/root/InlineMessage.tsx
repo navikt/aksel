@@ -1,7 +1,9 @@
+import cl from "clsx";
 import React, { forwardRef } from "react";
 import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
-import type { OverridableComponent } from "../../util";
+import { type OverridableComponent, useId } from "../../util";
+import { useI18n } from "../../util/i18n/i18n.hooks";
 import { InlineMessageIcon } from "../icon/InlineMessageIcon";
 
 interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -52,6 +54,10 @@ const InlineMessage: OverridableComponent<InlineMessageProps, HTMLDivElement> =
       const { cn } = useRenameCSS();
       const themeContext = useThemeInternal(false);
 
+      const translate = useI18n("global");
+      const statusId = useId();
+      const contentId = useId();
+
       return (
         <BodyShort
           ref={forwardedRef}
@@ -63,7 +69,18 @@ const InlineMessage: OverridableComponent<InlineMessageProps, HTMLDivElement> =
           data-size={size}
         >
           <InlineMessageIcon status={status} />
-          <span data-color={themeContext?.color}>{children}</span>
+          {status && (
+            <BodyShort id={statusId} aria-hidden visuallyHidden>
+              {`${translate(status)}: `}
+            </BodyShort>
+          )}
+          <span
+            data-color={themeContext?.color}
+            id={contentId}
+            aria-labelledby={cl(statusId, contentId)}
+          >
+            {children}
+          </span>
         </BodyShort>
       );
     },
