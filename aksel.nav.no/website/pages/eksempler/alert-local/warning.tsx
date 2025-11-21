@@ -10,9 +10,8 @@ const Example = () => {
         </LocalAlert.Title>
       </LocalAlert.Header>
       <LocalAlert.Content>
-        Advarsel brukes når brukeren skal foreta en bestemt handling eller for å
-        advare dem om noe viktig. Eksempelvis at de mangler informasjon eller at
-        en handling kan få negative konsekvenser.
+        Advarsel brukes for å advare dem om noe viktig. Eksempelvis at de
+        mangler informasjon eller at en handling kan få negative konsekvenser.
       </LocalAlert.Content>
     </LocalAlert>
   );
