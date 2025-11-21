@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <LocalAlert status="success">
       <LocalAlert.Header>
-        <LocalAlert.Title>Søknaden din er sendt inn!</LocalAlert.Title>
+        <LocalAlert.Title>Endringene er lagret</LocalAlert.Title>
       </LocalAlert.Header>
       <LocalAlert.Content>
         Suksess bekrefter at en oppgave er fullført som forventet. Eksempelvis

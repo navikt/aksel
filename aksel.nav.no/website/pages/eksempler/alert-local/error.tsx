@@ -11,7 +11,7 @@ const Example = () => {
       </LocalAlert.Header>
       <LocalAlert.Content>
         Error brukes til å informere brukeren om at noe kritisk har skjedd.
-        Eksempelvis at en handling ikke ble fullført eller at systemet er nede.
+        Eksempelvis at en handling ikke ble fullført, eller noe uventet oppstod.
       </LocalAlert.Content>
     </LocalAlert>
   );

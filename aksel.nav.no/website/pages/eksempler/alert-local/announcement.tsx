@@ -6,8 +6,7 @@ const Example = () => {
     <LocalAlert status="announcement">
       <LocalAlert.Header>
         <LocalAlert.Title>
-          Systemet vil være utilgjengelig for vedlikehold natt til søndag
-          (01.01)
+          Nyhet! Nå kan du ettersende vedlegg digitalt
         </LocalAlert.Title>
       </LocalAlert.Header>
       <LocalAlert.Content>

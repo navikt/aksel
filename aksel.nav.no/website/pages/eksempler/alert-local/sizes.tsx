@@ -7,8 +7,7 @@ const Example = () => {
       <LocalAlert status="announcement" size="medium">
         <LocalAlert.Header>
           <LocalAlert.Title>
-            Systemet vil være utilgjengelig for vedlikehold natt til søndag
-            (Medium)
+            Nyhet! Nå kan du ettersende vedlegg digitalt (Medium)
           </LocalAlert.Title>
           <LocalAlert.Close onClick={() => alert("Lukket alert")} />
         </LocalAlert.Header>
@@ -21,8 +20,7 @@ const Example = () => {
       <LocalAlert status="announcement" size="small">
         <LocalAlert.Header>
           <LocalAlert.Title>
-            Systemet vil være utilgjengelig for vedlikehold natt til søndag
-            (Small)
+            Nyhet! Nå kan du ettersende vedlegg digitalt (Small)
           </LocalAlert.Title>
           <LocalAlert.Close onClick={() => alert("Lukket alert")} />
         </LocalAlert.Header>
