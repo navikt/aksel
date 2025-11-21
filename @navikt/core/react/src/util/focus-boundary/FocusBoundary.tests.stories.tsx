@@ -319,7 +319,7 @@ export const TrackPrevFocused: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const openButton = canvas.getByText("Open action menu");
+    const openMenuButton = canvas.getByText("Open action menu");
     await userEvent.click(openButton);
 
     await waitFor(async () =>
