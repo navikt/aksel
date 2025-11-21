@@ -175,7 +175,7 @@ const DialogPopupInternal = forwardRef<
       /**
        * In all other cases, we allow FocusBoundary to return focus to the previously focused element
        */
-      return true;
+      return triggerElement ?? true;
     };
 
     return (
