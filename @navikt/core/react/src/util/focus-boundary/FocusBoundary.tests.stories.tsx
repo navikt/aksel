@@ -320,7 +320,7 @@ export const TrackPrevFocused: Story = {
     const canvas = within(canvasElement);
 
     const openMenuButton = canvas.getByText("Open action menu");
-    await userEvent.click(openButton);
+    await userEvent.click(openMenuButton);
 
     await waitFor(async () =>
       expect(canvas.getByText("Open dialog")).toBeVisible(),
@@ -331,7 +331,7 @@ export const TrackPrevFocused: Story = {
 
     await userEvent.keyboard("{Escape}");
 
-    await waitFor(() => expect(openButton).toHaveFocus());
+    await waitFor(() => expect(openMenuButton).toHaveFocus());
   },
 };
 
