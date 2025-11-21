@@ -528,7 +528,7 @@ function clearDisconnectedPreviouslyFocusedElements() {
 
 function addPreviouslyFocusedElement(element: Element | null) {
   clearDisconnectedPreviouslyFocusedElements();
-  if (element && element?.nodeName !== "body") {
+  if (element && element?.nodeName !== "BODY") {
     previouslyFocusedElements.push(element);
     if (previouslyFocusedElements.length > LIST_LIMIT) {
       previouslyFocusedElements = previouslyFocusedElements.slice(-LIST_LIMIT);
