@@ -1,14 +1,11 @@
 import ReactDOM from "react-dom";
 
 type CustomFocusEvent = CustomEvent<{ originalEvent: FocusEvent }>;
-type CustomPointerDownEvent = CustomEvent<{
-  originalEvent: PointerEvent;
-}>;
-type CustomPointerUpEvent = CustomEvent<{
+type CustomPointerEvent = CustomEvent<{
   originalEvent: PointerEvent;
 }>;
 
-export type { CustomFocusEvent, CustomPointerDownEvent, CustomPointerUpEvent };
+export type { CustomFocusEvent, CustomPointerEvent };
 
 export const CUSTOM_EVENTS = {
   FOCUS_OUTSIDE: "AKSEL_FOCUS_OUTSIDE",

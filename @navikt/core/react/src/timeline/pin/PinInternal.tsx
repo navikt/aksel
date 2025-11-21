@@ -1,7 +1,6 @@
 import {
   FloatingFocusManager,
   autoUpdate,
-  arrow as flArrow,
   flip,
   offset,
   safePolygon,
@@ -13,8 +12,8 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import { format } from "date-fns";
-import React, { forwardRef, useRef, useState } from "react";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import React, { forwardRef, useState } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { useTimelineContext } from "../hooks/useTimelineContext";
@@ -37,16 +36,13 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
     const { cn } = useRenameCSS();
     const { startDate, endDate, direction } = useTimelineContext();
     const [open, setOpen] = useState(false);
-    const arrowRef = useRef<HTMLDivElement | null>(null);
-    const translate = useI18n("Timeline");
 
-    const themeContext = useThemeInternal(false);
-    const showArrow = !themeContext?.isDarkside;
+    const translate = useI18n("Timeline");
 
     const {
       context,
       placement,
-      middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+
       refs,
       floatingStyles,
     } = useFloating({
@@ -55,10 +51,9 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
       onOpenChange: (_open) => setOpen(_open),
       whileElementsMounted: autoUpdate,
       middleware: [
-        offset(showArrow ? 16 : 8),
+        offset(8),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
-        flArrow({ element: arrowRef, padding: 5 }),
       ],
     });
 
@@ -78,13 +73,6 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
     ]);
 
     const mergedRef = useMergeRefs(refs.setReference, ref);
-
-    const staticSide = {
-      top: "bottom",
-      right: "left",
-      bottom: "top",
-      left: "right",
-    }[placement.split("-")[0]];
 
     const label = translate("Pin.pin", {
       date: format(date, translate("dateFormat")),
@@ -132,17 +120,6 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
               style={floatingStyles}
             >
               {children}
-              {showArrow && (
-                <div
-                  ref={arrowRef}
-                  style={{
-                    ...(arrowX != null ? { left: arrowX } : {}),
-                    ...(arrowY != null ? { top: arrowY } : {}),
-                    ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
-                  }}
-                  className={cn("navds-timeline__popover-arrow")}
-                />
-              )}
             </div>
           </FloatingFocusManager>
         )}

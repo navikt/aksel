@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useId } from "../../util";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
-import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
 import { useTransitionStatus } from "../../util/hooks/useTransitionStatus";
 import { DialogContextProvider, useDialogContext } from "./DialogRoot.context";
 
@@ -13,7 +12,7 @@ interface DialogProps {
    */
   open?: boolean;
   /**
-   * Whether the dialog is initially open.
+   * Whether the dialog should be initially open.
    *
    * To render a controlled dialog, use the `open` prop instead.
    * @default false
@@ -22,13 +21,13 @@ interface DialogProps {
   /**
    * Event handler called when the dialog is opened or closed.
    */
-  onOpenChange?: (open: boolean, event?: Event) => void;
+  onOpenChange?: (nextOpen: boolean, event?: Event) => void;
   /**
    * Event handler called after any animations complete when the dialog is opened or closed.
    */
   onOpenChangeComplete?: (open: boolean) => void;
   /**
-   * Size of the dialog.
+   * Updates sub-component padding + DialogTitle and DialogDescription font-size.
    * @default "medium"
    */
   size?: "medium" | "small";
@@ -52,7 +51,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     size = "medium",
   } = props;
 
-  const [open, setOpenControlled] = useControllableState({
+  const [open, setOpenStateInternal] = useControllableState({
     defaultValue: defaultOpen,
     value: openParam,
   });
@@ -60,33 +59,25 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
   const { mounted, setMounted, transitionStatus } = useTransitionStatus(open);
 
   const popupRef = useRef<HTMLDivElement | null>(null);
-  const backdropRef = useRef<HTMLDivElement | null>(null);
 
   const [triggerElement, setTriggerElement] = useState<HTMLElement | null>(
     null,
   );
   const [popupElement, setPopupElement] = useState<HTMLElement | null>(null);
-  const [backdropElement, setBackdropElement] = useState<HTMLElement | null>(
-    null,
-  );
 
   const defaultId = useId();
-
-  const floatingId = useMemo(() => {
-    return popupElement?.id ?? defaultId;
-  }, [defaultId, popupElement?.id]);
 
   const [titleId, setTitleId] = useState<string>();
 
   const [ownNestedOpenDialogs, setOwnNestedOpenDialogs] = useState(0);
 
-  const nestedDialogOpened = useEventCallback((nestedCount: number) => {
+  const nestedDialogOpened = useCallback((nestedCount: number) => {
     setOwnNestedOpenDialogs(nestedCount + 1);
-  });
+  }, []);
 
-  const nestedDialogClosed = useEventCallback(() => {
+  const nestedDialogClosed = useCallback(() => {
     setOwnNestedOpenDialogs(0);
-  });
+  }, []);
 
   const parentContext = useDialogContext(false);
 
@@ -94,20 +85,25 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
    * Notify parent dialog about nested dialogs opening/closing.
    * This allows us to better hide/obscure parent dialogs when nested dialogs are opened.
    *
-   * This pattern is not good for deep nesting,
+   * This pattern is not good for deep nesting since the context updates will cause cascading renders
    * but should work fine for 1-2 levels of nesting which is the most common use case here.
    */
   useEffect(() => {
-    if (parentContext?.nestedDialogOpened && open) {
-      parentContext.nestedDialogOpened(ownNestedOpenDialogs);
+    if (
+      !parentContext?.nestedDialogOpened ||
+      !parentContext?.nestedDialogClosed
+    ) {
+      return;
     }
-    if (parentContext?.nestedDialogClosed && !open) {
+
+    if (open) {
+      parentContext.nestedDialogOpened(ownNestedOpenDialogs);
+    } else {
       parentContext.nestedDialogClosed();
     }
+
     return () => {
-      if (parentContext?.nestedDialogClosed && open) {
-        parentContext.nestedDialogClosed();
-      }
+      open && parentContext.nestedDialogClosed();
     };
   }, [open, parentContext, ownNestedOpenDialogs]);
 
@@ -122,23 +118,9 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
         return;
       }
 
-      setOpenControlled(nextOpen);
+      setOpenStateInternal(nextOpen);
     },
   );
-
-  /**
-   * Unmount only after close animation is complete
-   */
-  useOpenChangeAnimationComplete({
-    open,
-    ref: popupRef,
-    onComplete() {
-      if (!open) {
-        setMounted(false);
-        onOpenChangeComplete?.(false);
-      }
-    },
-  });
 
   return (
     <DialogContextProvider
@@ -147,12 +129,9 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       mounted={mounted}
       transitionStatus={transitionStatus}
       popupRef={popupRef}
-      backdropRef={backdropRef}
       setPopupElement={setPopupElement}
       popupElement={popupElement}
-      popupId={floatingId}
-      setBackdropElement={setBackdropElement}
-      backdropElement={backdropElement}
+      popupId={popupElement?.id ?? defaultId}
       setTriggerElement={setTriggerElement}
       triggerElement={triggerElement}
       nested={!!parentContext}
@@ -163,6 +142,7 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
       titleId={titleId}
       setTitleId={setTitleId}
       onOpenChangeComplete={onOpenChangeComplete}
+      setMounted={setMounted}
     >
       {children}
     </DialogContextProvider>

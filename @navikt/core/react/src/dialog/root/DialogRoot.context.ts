@@ -11,6 +11,10 @@ interface DialogContextProps {
    */
   setOpen: (open: boolean, originalEvent: Event) => void;
   /**
+   *
+   */
+  setMounted: React.Dispatch<React.SetStateAction<boolean>>;
+  /**
    * Event handler called after any animations complete when the dialog is opened or closed.
    */
   onOpenChangeComplete?: (open: boolean) => void;
@@ -19,17 +23,13 @@ interface DialogContextProps {
    */
   transitionStatus: TransitionStatus;
   /**
-   * Whether the dialog has been mounted (opened)
+   * Whether the dialog should be mounted (opened)
    */
   mounted: boolean;
   /**
-   * The ref to the Dialog-element.
+   * The ref to the Popup element.
    */
   popupRef: React.RefObject<HTMLElement | null>;
-  /**
-   * The ref to the Backdrop-element.
-   */
-  backdropRef: React.RefObject<HTMLElement | null>;
   /**
    * Callback to register the Popup element DOM node.
    */
@@ -42,14 +42,6 @@ interface DialogContextProps {
    * ID of the popup element
    */
   popupId: string;
-  /**
-   * Callback to register the Backdrop element DOM node.
-   */
-  setBackdropElement: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
-  /**
-   * The Backdrop element DOM node.
-   */
-  backdropElement: HTMLElement | null;
   /**
    * Callback to register the Trigger element DOM node.
    */

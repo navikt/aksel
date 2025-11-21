@@ -2,14 +2,13 @@
 
 import { stegaClean } from "next-sanity";
 import { useEffect, useState } from "react";
-import { BodyLong, Button, Link, VStack } from "@navikt/ds-react";
+import { BodyLong, Box, Button, Link, VStack } from "@navikt/ds-react";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { clientConfig } from "@/sanity/config";
-import styles from "./SystemPanel.module.css";
 
 function SystemPanelAction() {
   return (
-    <div className={styles.systemPanelAction}>
+    <Box marginBlock="space-20 0">
       <Button
         size="small"
         variant="secondary-neutral"
@@ -18,7 +17,7 @@ function SystemPanelAction() {
       >
         Send innspill
       </Button>
-    </div>
+    </Box>
   );
 }
 

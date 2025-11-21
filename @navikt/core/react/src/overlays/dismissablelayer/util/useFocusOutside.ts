@@ -12,11 +12,16 @@ import {
 export function useFocusOutside(
   callback?: (event: CustomFocusEvent) => void,
   ownerDocument: Document = globalThis?.document,
+  enabled: boolean = true,
 ) {
   const handleFocusOutside = useCallbackRef(callback) as EventListener;
   const isFocusInsideReactTreeRef = useRef(false);
 
   useEffect(() => {
+    if (!enabled) {
+      return;
+    }
+
     const handleFocus = (event: FocusEvent) => {
       if (event.target && !isFocusInsideReactTreeRef.current) {
         const eventDetail = { originalEvent: event };
@@ -38,8 +43,10 @@ export function useFocusOutside(
       }
     };
     ownerDocument.addEventListener("focusin", handleFocus);
-    return () => ownerDocument.removeEventListener("focusin", handleFocus);
-  }, [ownerDocument, handleFocusOutside]);
+    return () => {
+      ownerDocument.removeEventListener("focusin", handleFocus);
+    };
+  }, [ownerDocument, handleFocusOutside, enabled]);
 
   /**
    * By directly setting isFocusInsideReactTreeRef on focus-events at the root of the "dismissable" element,

@@ -12,8 +12,8 @@ import { Button } from "../button";
 import { Provider } from "../provider";
 import {
   Dialog,
-  DialogClose,
-  type DialogCloseProps,
+  DialogCloseTrigger,
+  type DialogCloseTriggerProps,
   DialogDescription,
   DialogPopup,
   type DialogPopupProps,
@@ -51,7 +51,7 @@ function testUtils(canvasElement: HTMLElement, args: BaseDialogProps) {
       expect(canvas.getByTestId("popup")).toBeInTheDocument(),
     expectPopupClosed: () =>
       expect(canvas.queryByTestId("popup")).not.toBeInTheDocument(),
-    expectOpenedCalls: (n: number) => {
+    expectOpenChangeCalls: (n: number) => {
       expect(args.rootProps?.onOpenChange).toHaveBeenCalledTimes(n);
     },
     clickCloseButton: async () => {
@@ -148,18 +148,16 @@ export const OutsideClickClose: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { expectPopupOpen, expectPopupClosed, expectOpenedCalls } = testUtils(
-      canvasElement,
-      args,
-    );
+    const { expectPopupOpen, expectPopupClosed, expectOpenChangeCalls } =
+      testUtils(canvasElement, args);
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     expectPopupOpen();
 
     await userEvent.click(document.documentElement);
 
     expectPopupClosed();
-    expectOpenedCalls(1);
+    expectOpenChangeCalls(1);
   },
   args: {
     rootProps: {
@@ -173,18 +171,18 @@ export const OutsideClickNoClose: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { expectPopupOpen, expectOpenedCalls } = testUtils(
+    const { expectPopupOpen, expectOpenChangeCalls } = testUtils(
       canvasElement,
       args,
     );
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     expectPopupOpen();
 
     await userEvent.click(document.documentElement);
 
     expectPopupOpen();
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
   },
   args: {
     rootProps: {
@@ -197,27 +195,25 @@ export const OutsideClickNoClose: Story = {
   },
 };
 
-/* Close should only happend on onClick */
+/* Close should only happen on onClick */
 export const OutsideClickIntentionalClose: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { expectPopupOpen, expectPopupClosed, expectOpenedCalls } = testUtils(
-      canvasElement,
-      args,
-    );
+    const { expectPopupOpen, expectPopupClosed, expectOpenChangeCalls } =
+      testUtils(canvasElement, args);
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     expectPopupOpen();
 
     await fireEvent.pointerDown(document.documentElement);
     expectPopupOpen();
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
 
     await userEvent.click(document.documentElement);
 
     expectPopupClosed();
-    expectOpenedCalls(1);
+    expectOpenChangeCalls(1);
   },
   args: {
     rootProps: {
@@ -243,12 +239,12 @@ export const TrapFocusWithOutsideClick: Story = {
   },
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectPopupOpen, expectOpenedCalls } = testUtils(
+    const { canvas, expectPopupOpen, expectOpenChangeCalls } = testUtils(
       canvasElement,
       args,
     );
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
@@ -256,12 +252,12 @@ export const TrapFocusWithOutsideClick: Story = {
 
     await fireEvent.click(document.body);
     expectPopupOpen();
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
 
     const counterButton = canvas.getByTestId("counter");
     await userEvent.click(counterButton);
     expectPopupOpen();
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     await waitFor(() => expect(popup).toHaveFocus());
     expect(counterButton).toHaveTextContent("Counter 1");
   },
@@ -282,12 +278,12 @@ export const TrapFocusWithFocusBlur: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectPopupOpen, expectOpenedCalls } = testUtils(
+    const { canvas, expectPopupOpen, expectOpenChangeCalls } = testUtils(
       canvasElement,
       args,
     );
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
@@ -295,13 +291,12 @@ export const TrapFocusWithFocusBlur: Story = {
 
     await fireEvent.focus(document.body);
     expectPopupOpen();
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
 
     await fireEvent.blur(popup);
-    expect(canvas.queryByTestId("popup")).toBeInTheDocument();
     expectPopupOpen();
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     await waitFor(() => expect(popup).toHaveFocus());
   },
   args: {
@@ -321,12 +316,12 @@ export const FocusLock: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectPopupOpen, expectOpenedCalls } = testUtils(
+    const { canvas, expectPopupOpen, expectOpenChangeCalls } = testUtils(
       canvasElement,
       args,
     );
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
@@ -365,11 +360,11 @@ export const FocusTriggerOnClose: Story = {
       canvas,
       expectPopupOpen,
       expectPopupClosed,
-      expectOpenedCalls,
+      expectOpenChangeCalls,
       clickCloseButton,
     } = testUtils(canvasElement, args);
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     const openButton = canvas.getByText("Open Dialog");
     await userEvent.click(openButton);
     expectPopupOpen();
@@ -394,11 +389,11 @@ export const FocusWithNoTrigger: Story = {
     const {
       expectPopupOpen,
       expectPopupClosed,
-      expectOpenedCalls,
+      expectOpenChangeCalls,
       clickCloseButton,
     } = testUtils(canvasElement, args);
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     expectPopupOpen();
 
     await clickCloseButton();
@@ -419,7 +414,7 @@ export const FocusWithNoTrigger: Story = {
 };
 
 /**
- * Dialog should focus previously focused element when closed if there is no trigger
+ * Dialog should focus previously focused element when closed if built-in trigger is not used
  */
 export const FocusPreviousFocusedItemIfNoTrigger: Story = {
   render: (props) => {
@@ -443,7 +438,6 @@ export const FocusPreviousFocusedItemIfNoTrigger: Story = {
 
     const customTrigger = canvas.getByText("Toggle open");
     await userEvent.click(customTrigger);
-    expect(canvas.getByTestId("popup")).toBeInTheDocument();
     expectPopupOpen();
 
     await clickCloseButton();
@@ -460,7 +454,7 @@ export const FocusPreviousFocusedItemIfNoTrigger: Story = {
 };
 
 /**
- * Dialog should focus previously focused element when closed if there is no trigger
+ * Dialog should focus previously focused element when closed if built-in trigger is not used
  */
 export const FocusClickedItemOutsideWhenClosing: Story = {
   render: (props) => {
@@ -590,75 +584,19 @@ export const BackdropRenderOnlyRoot: Story = {
 export const TriggerOpenOnClick: Story = {
   render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
-    const { canvas, expectPopupOpen, expectOpenedCalls } = testUtils(
+    const { canvas, expectPopupOpen, expectOpenChangeCalls } = testUtils(
       canvasElement,
       args,
     );
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     const triggerButton = canvas.getByText("Open Dialog");
 
     await userEvent.click(triggerButton);
-    // Dialog should remain open
     expectPopupOpen();
-    expectOpenedCalls(1);
+    expectOpenChangeCalls(1);
   },
   args: {
-    rootProps: {
-      onOpenChange: fn(),
-    },
-  },
-};
-
-export const TriggerDisabled: Story = {
-  render: BaseDialogComponent,
-  play: async ({ canvasElement, args }) => {
-    const { canvas, expectPopupClosed, expectOpenedCalls } = testUtils(
-      canvasElement,
-      args,
-    );
-
-    expectOpenedCalls(0);
-
-    const triggerButton = canvas.getByText("Open Dialog");
-    await userEvent.click(triggerButton);
-    expectPopupClosed();
-
-    expectOpenedCalls(0);
-  },
-  args: {
-    triggerButtonProps: { disabled: true },
-    rootProps: {
-      onOpenChange: fn(),
-    },
-  },
-};
-
-export const TriggerDisabledSlot: Story = {
-  render: BaseDialogComponent,
-  play: async ({ canvasElement, args }) => {
-    const { canvas, expectPopupClosed, expectOpenedCalls } = testUtils(
-      canvasElement,
-      args,
-    );
-
-    expectOpenedCalls(0);
-    const triggerButton = canvas.getByText("Open Dialog");
-    await userEvent.click(triggerButton);
-
-    expectPopupClosed();
-    expectOpenedCalls(0);
-  },
-  args: {
-    triggerButtonProps: {
-      disabled: true,
-      asChild: true,
-      children: (
-        <Button disabled id="slot">
-          Open Dialog
-        </Button>
-      ),
-    },
     rootProps: {
       onOpenChange: fn(),
     },
@@ -669,15 +607,15 @@ export const TriggerDisabledSlot: Story = {
 export const CloseButton: Story = {
   render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
-    const { expectOpenedCalls, clickCloseButton } = testUtils(
+    const { expectOpenChangeCalls, clickCloseButton } = testUtils(
       canvasElement,
       args,
     );
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
 
     await clickCloseButton();
-    expectOpenedCalls(1);
+    expectOpenChangeCalls(1);
   },
   args: {
     rootProps: {
@@ -690,15 +628,15 @@ export const CloseButton: Story = {
 export const CloseButtonDisabled: Story = {
   render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
-    const { clickCloseButton, expectOpenedCalls } = testUtils(
+    const { clickCloseButton, expectOpenChangeCalls } = testUtils(
       canvasElement,
       args,
     );
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
 
     await clickCloseButton();
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
   },
   args: {
     rootProps: {
@@ -712,14 +650,14 @@ export const CloseButtonDisabled: Story = {
 export const CloseButtonDisabledSlot: Story = {
   render: BaseDialogComponent,
   play: async ({ canvasElement, args }) => {
-    const { expectOpenedCalls, clickCloseButton } = testUtils(
+    const { expectOpenChangeCalls, clickCloseButton } = testUtils(
       canvasElement,
       args,
     );
 
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
     await clickCloseButton();
-    expectOpenedCalls(0);
+    expectOpenChangeCalls(0);
   },
   args: {
     rootProps: {
@@ -771,7 +709,7 @@ type BaseDialogProps = {
   popupProps?: Omit<DialogPopupProps, "children" | "asChild"> & {
     children?: React.ReactNode;
   };
-  closeButtonProps?: Omit<DialogCloseProps, "children"> & {
+  closeButtonProps?: Omit<DialogCloseTriggerProps, "children"> & {
     /* Has to override AsChild type */
     children?: any;
   };
@@ -811,7 +749,9 @@ function BaseDialogComponent({
 
             <DialogPopup className="popupCSS" data-testid="popup-nested">
               Popup content Nested
-              <DialogClose data-testid="close-nested">Close Nested</DialogClose>
+              <DialogCloseTrigger data-testid="close-nested">
+                <Button>Close Nested</Button>
+              </DialogCloseTrigger>
             </DialogPopup>
           </Dialog>
         ) : (
@@ -821,9 +761,9 @@ function BaseDialogComponent({
         <DialogDescription id="popup-description">
           Dialog Description
         </DialogDescription>
-        <DialogClose data-testid="close" {...closeButtonProps}>
-          {closeButtonProps?.children ?? "Close"}
-        </DialogClose>
+        <DialogCloseTrigger data-testid="close" {...closeButtonProps}>
+          <Button>{closeButtonProps?.children ?? "Close"}</Button>
+        </DialogCloseTrigger>
         {popupProps?.children}
       </DialogPopup>
     </Dialog>
@@ -842,8 +782,8 @@ function PortalContainer({ children }: { children: React.ReactNode }) {
 }
 
 function withoutAnimations() {
-  globalThis.AKSEL_ANIMATIONS_DISABLED = true;
+  globalThis.AKSEL_NO_EXIT_ANIMATIONS = true;
   return () => {
-    globalThis.AKSEL_ANIMATIONS_DISABLED = false;
+    globalThis.AKSEL_NO_EXIT_ANIMATIONS = false;
   };
 }

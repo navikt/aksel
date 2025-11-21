@@ -4,15 +4,18 @@ import {
   ClockDashedIcon,
   InboxDownIcon,
   PaperplaneIcon,
+  PencilIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../button";
+import { Select } from "../form/select";
 import { Bleed } from "../layout/bleed";
-import { HStack } from "../layout/stack";
+import { HStack, VStack } from "../layout/stack";
+import { Table } from "../table";
 import { Tabs } from "../tabs";
 import {
   Dialog,
   DialogBody,
-  DialogClose,
+  DialogCloseTrigger,
   DialogDescription,
   DialogFooter,
   DialogHeader,
@@ -27,13 +30,6 @@ const meta: Meta<typeof Dialog> = {
   parameters: {
     chromatic: { disable: true },
   },
-  decorators: [
-    (Story) => (
-      <div data-style-wrapper>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;
@@ -43,12 +39,11 @@ type Story = StoryObj<typeof Dialog>;
 export const Default = {
   render: (args) => (
     <div>
-      <button onClick={() => alert("after")}>Before dialog</button>
+      <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog defaultOpen={args.defaultOpen} size={args.size}>
         <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogPopup
           withBackdrop={args.backdrop}
-          className="dialogCSS"
           aria-labelledby="ha"
           position={args.position}
           width={args.width}
@@ -66,9 +61,9 @@ export const Default = {
             <ScrollContent />
           </DialogBody>
           <DialogFooter>
-            <DialogClose asChild>
+            <DialogCloseTrigger>
               <Button>Close</Button>
-            </DialogClose>
+            </DialogCloseTrigger>
           </DialogFooter>
         </DialogPopup>
       </Dialog>
@@ -106,7 +101,7 @@ export const Default = {
 export const AllSubComponents: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before dialog</button>
+      <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog>
         <DialogTrigger>Open Dialog</DialogTrigger>
 
@@ -129,9 +124,9 @@ export const AllSubComponents: Story = {
             where the main content lives
           </DialogBody>
           <DialogFooter>
-            <DialogClose asChild>
+            <DialogCloseTrigger>
               <Button>Close</Button>
-            </DialogClose>
+            </DialogCloseTrigger>
           </DialogFooter>
         </DialogPopup>
       </Dialog>
@@ -143,15 +138,11 @@ export const AllSubComponents: Story = {
 export const ComplexDrawer: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before dialog</button>
+      <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog defaultOpen>
         <DialogTrigger>Open Dialog</DialogTrigger>
         <Tabs defaultValue="logg">
-          <DialogPopup
-            className="dialogCSS"
-            aria-labelledby="ha"
-            position="right"
-          >
+          <DialogPopup aria-labelledby="ha" position="right">
             <DialogHeader>
               <DialogTitle id="ha">Dialog Title</DialogTitle>
               <DialogDescription>
@@ -206,9 +197,9 @@ export const ComplexDrawer: Story = {
               </Tabs.Panel>
             </DialogBody>
             <DialogFooter>
-              <DialogClose asChild>
+              <DialogCloseTrigger>
                 <Button>Close</Button>
-              </DialogClose>
+              </DialogCloseTrigger>
             </DialogFooter>
           </DialogPopup>
         </Tabs>
@@ -236,11 +227,7 @@ export const Position: Story = {
         <Dialog defaultOpen>
           <DialogTrigger>Open Dialog</DialogTrigger>
 
-          <DialogPopup
-            className="dialogCSS"
-            aria-labelledby="ha"
-            position={position}
-          >
+          <DialogPopup aria-labelledby="ha" position={position}>
             <DialogHeader>
               <DialogTitle id="ha">Dialog Title</DialogTitle>
               <DialogDescription>
@@ -259,31 +246,10 @@ export const Position: Story = {
               of the dialog. Here is where the main content lives
             </DialogBody>
             <DialogFooter>
-              <DialogClose asChild>
+              <DialogCloseTrigger>
                 <Button>Close</Button>
-              </DialogClose>
+              </DialogCloseTrigger>
             </DialogFooter>
-          </DialogPopup>
-        </Dialog>
-      </div>
-    );
-  },
-};
-
-export const PositionResponsive: Story = {
-  render: () => {
-    return (
-      <div>
-        <Dialog defaultOpen>
-          <DialogTrigger>Open Dialog</DialogTrigger>
-
-          <DialogPopup
-            className="dialogCSS"
-            aria-labelledby="ha"
-            position="bottom"
-          >
-            <h1 id="ha">Heading text</h1>
-            <DialogClose>Close</DialogClose>
           </DialogPopup>
         </Dialog>
       </div>
@@ -294,12 +260,14 @@ export const PositionResponsive: Story = {
 export const DemoDefaultFocusDialog: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before dialog focus-trap</button>
+      <button onClick={() => alert("before")}>Before dialog focus-trap</button>
       <Dialog>
         <DialogTrigger>Open Dialog</DialogTrigger>
-        <DialogPopup className="dialogCSS" aria-labelledby="ha">
+        <DialogPopup aria-labelledby="ha">
           <h1 id="ha">Headingtekst som er h1</h1>
-          <DialogClose>Close</DialogClose>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
           <p>
             Dette er vanlig innhold i en dialog. Innholdet kommer etter en
             tittel (h1) og en lukkeknapp. Etter dette innholdet kommer en annen
@@ -319,16 +287,16 @@ export const DemoCloseButtonFocusDialog: Story = {
     const closeRef = React.useRef<HTMLButtonElement>(null);
     return (
       <div>
-        <button onClick={() => alert("after")}>Before dialog focus-trap</button>
+        <button onClick={() => alert("before")}>
+          Before dialog focus-trap
+        </button>
         <Dialog>
           <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogPopup
-            className="dialogCSS"
-            aria-labelledby="ha"
-            initialFocus={closeRef}
-          >
+          <DialogPopup aria-labelledby="ha" initialFocus={closeRef}>
             <h1 id="ha">Headingtekst som er h1</h1>
-            <DialogClose ref={closeRef}>Close</DialogClose>
+            <DialogCloseTrigger ref={closeRef}>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
             <p>
               Denne skiller seg litt ut da autofokus var satt på lukkeknappen
               som er etter heading. Dette er vanlig innhold i en dialog.
@@ -364,7 +332,7 @@ export const NestedDrawers: Story = {
         <Dialog defaultOpen>
           <DialogTrigger>Open Dialog</DialogTrigger>
 
-          <DialogPopup className="dialogCSS" position={position}>
+          <DialogPopup position={position}>
             <DialogHeader>
               <DialogTitle id="ha">Dialog Title</DialogTitle>
               <DialogDescription>
@@ -383,19 +351,15 @@ export const NestedDrawers: Story = {
               of the dialog. Here is where the main content lives
             </DialogBody>
             <DialogFooter>
-              <DialogClose asChild>
+              <DialogCloseTrigger>
                 <Button>Close</Button>
-              </DialogClose>
+              </DialogCloseTrigger>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button>Open nested</Button>
                 </DialogTrigger>
 
-                <DialogPopup
-                  className="dialogCSS"
-                  position={position}
-                  modal="trap-focus"
-                >
+                <DialogPopup position={position} modal="trap-focus">
                   <DialogHeader>
                     <DialogTitle id="ha">LEVEL 2</DialogTitle>
                   </DialogHeader>
@@ -404,15 +368,15 @@ export const NestedDrawers: Story = {
                     content lives. This i
                   </DialogBody>
                   <DialogFooter>
-                    <DialogClose asChild>
+                    <DialogCloseTrigger>
                       <Button>Close</Button>
-                    </DialogClose>
+                    </DialogCloseTrigger>
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button>Open nested</Button>
                       </DialogTrigger>
 
-                      <DialogPopup className="dialogCSS" position={position}>
+                      <DialogPopup position={position}>
                         <DialogHeader>
                           <DialogTitle id="ha">NESTED</DialogTitle>
                         </DialogHeader>
@@ -424,9 +388,9 @@ export const NestedDrawers: Story = {
                           content lives. This i
                         </DialogBody>
                         <DialogFooter>
-                          <DialogClose asChild>
+                          <DialogCloseTrigger>
                             <Button>Close</Button>
-                          </DialogClose>
+                          </DialogCloseTrigger>
                         </DialogFooter>
                       </DialogPopup>
                     </Dialog>
@@ -450,14 +414,16 @@ export const NonTriggerImplementation: Story = {
 
     return (
       <div>
-        <button onClick={() => alert("after")}>Before dialog</button>
+        <button onClick={() => alert("before")}>Before dialog</button>
         <button id="trigger" onClick={() => setOpen((x) => !x)}>
           Toggle drawer
         </button>
         <Dialog open={open} onOpenChange={(x) => setOpen(x)}>
-          <DialogPopup className="dialogCSS">
+          <DialogPopup>
             Drawer content
-            <DialogClose>Close</DialogClose>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
           </DialogPopup>
         </Dialog>
         <button onClick={() => alert("after")}>after dialog</button>
@@ -471,29 +437,35 @@ export const DomOrder: Story = {
     return (
       <div>
         <Dialog defaultOpen>
-          <DialogPopup className="dialogCSS" position="left">
+          <DialogPopup position="left">
             First behind First behind First behind First behind First behind
             First behind First behind First behind First behind First behind
             First behind First behind First behind First behind First behind
             First behind First behind First behind First behind First behind
             First behind
             <Dialog defaultOpen>
-              <DialogPopup className="dialogCSS" position="right">
+              <DialogPopup position="right">
                 First-nested
-                <DialogClose>Close first nested</DialogClose>
+                <DialogCloseTrigger>
+                  <Button>Close first nested</Button>
+                </DialogCloseTrigger>
               </DialogPopup>
             </Dialog>
-            <DialogClose>Close</DialogClose>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
           </DialogPopup>
         </Dialog>
         <Dialog defaultOpen>
-          <DialogPopup className="dialogCSS" position="bottom">
+          <DialogPopup position="bottom">
             thrid behind thrid behind thrid behind thrid behind thrid behind
             thrid behind thrid behind thrid behind thrid behind thrid behind
             thrid behind thrid behind thrid behind thrid behind thrid behind
             thrid behind thrid behind thrid behind thrid behind thrid behind
             thrid behind
-            <DialogClose>Close</DialogClose>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
           </DialogPopup>
         </Dialog>
       </div>
@@ -513,13 +485,14 @@ export const TrapFocusOutsideClick: Story = {
         <Dialog>
           <DialogTrigger>Open Dialog</DialogTrigger>
           <DialogPopup
-            className="dialogCSS"
             modal="trap-focus"
             closeOnOutsideClick={false}
             withBackdrop={false}
           >
             Drawer content
-            <DialogClose>Close</DialogClose>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
           </DialogPopup>
         </Dialog>
       </div>
@@ -539,24 +512,20 @@ export const NestedTrapFocusOutsideClick: Story = {
         <Dialog>
           <DialogTrigger>Open Dialog</DialogTrigger>
 
-          <DialogPopup
-            className="dialogCSS"
-            modal="trap-focus"
-            withBackdrop={false}
-          >
+          <DialogPopup modal="trap-focus" withBackdrop={false}>
             <Dialog>
               <DialogTrigger>Open Dialog2</DialogTrigger>
 
-              <DialogPopup
-                className="dialogCSS"
-                modal="trap-focus"
-                withBackdrop={false}
-              >
+              <DialogPopup modal="trap-focus" withBackdrop={false}>
                 Drawer content2
-                <DialogClose>Close2</DialogClose>
+                <DialogCloseTrigger>
+                  <Button>Close2</Button>
+                </DialogCloseTrigger>
               </DialogPopup>
             </Dialog>
-            <DialogClose>Close</DialogClose>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
           </DialogPopup>
         </Dialog>
       </div>
@@ -567,18 +536,138 @@ export const NestedTrapFocusOutsideClick: Story = {
 export const IgnoreOutsideClick: Story = {
   render: () => (
     <div>
-      <button onClick={() => alert("after")}>Before dialog</button>
+      <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog>
         <DialogTrigger>Open Dialog</DialogTrigger>
 
-        <DialogPopup className="dialogCSS" closeOnOutsideClick={false}>
+        <DialogPopup closeOnOutsideClick={false}>
           Drawer content
-          <DialogClose>Close</DialogClose>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
         </DialogPopup>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog</button>
     </div>
   ),
+};
+
+const TableData = [
+  {
+    id: 1,
+    firstName: "Jean-Luc",
+    lastName: "Picard",
+    role: "Kaptein",
+  },
+  {
+    id: 2,
+    firstName: "William",
+    lastName: "Riker",
+    role: "Kommandør",
+  },
+  {
+    id: 3,
+    firstName: "Geordi",
+    lastName: "La Forge",
+    role: "Sjefsingeniør",
+  },
+];
+
+export const ImplementationDemo = {
+  render: () => {
+    const [editingRow, setEditingRow] = useState<number | null>(null);
+    const [hasBackdrop, setHasBackdrop] = useState(true);
+    const [modalMode, setModalMode] = useState<true | "trap-focus">(true);
+    const [position, setPosition] =
+      useState<React.ComponentProps<typeof DialogPopup>["position"]>("right");
+
+    const currentData = TableData.find((data) => data.id === editingRow);
+
+    return (
+      <div>
+        <VStack gap="space-16" marginBlock="space-16" align="start">
+          <Button onClick={() => setHasBackdrop((x) => !x)}>
+            Backdrop: {hasBackdrop ? "On" : "Off"}
+          </Button>
+          <Button
+            onClick={() =>
+              setModalMode((x) => (x === true ? "trap-focus" : true))
+            }
+          >
+            Modal Mode: {modalMode === true ? "true" : "trap-focus"}
+          </Button>
+          <Select
+            label="Position"
+            hideLabel
+            value={position}
+            onChange={(e) => setPosition(e.target.value as any)}
+          >
+            <option value="right">Right</option>
+            <option value="left">Left</option>
+            <option value="bottom">Bottom</option>
+            <option value="center">Center</option>
+            <option value="fullscreen">Fullscreen</option>
+          </Select>
+        </VStack>
+        <Table>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell aria-hidden />
+              <Table.HeaderCell>ID</Table.HeaderCell>
+              <Table.HeaderCell>Fornavn</Table.HeaderCell>
+              <Table.HeaderCell textSize="medium">Etternavn</Table.HeaderCell>
+              <Table.HeaderCell textSize="small">Rolle</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {TableData.map((data) => (
+              <Table.Row key={data.id} shadeOnHover={false}>
+                <Table.DataCell>
+                  <Button
+                    variant="tertiary"
+                    data-color="neutral"
+                    size="small"
+                    icon={<PencilIcon title="Rediger rad" />}
+                    onClick={() => setEditingRow(data.id)}
+                  />
+                </Table.DataCell>
+                <Table.HeaderCell>{data.id}</Table.HeaderCell>
+                <Table.DataCell>{data.firstName}</Table.DataCell>
+                <Table.DataCell>{data.lastName}</Table.DataCell>
+                <Table.DataCell>{data.role}</Table.DataCell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+
+        <Dialog
+          open={editingRow !== null}
+          onOpenChange={() => setEditingRow(null)}
+        >
+          <DialogPopup
+            width="small"
+            withBackdrop={hasBackdrop}
+            modal={modalMode}
+            position={position}
+          >
+            {editingRow !== null && (
+              <>
+                <DialogHeader>
+                  <DialogTitle>Edit: {currentData?.firstName}</DialogTitle>
+                </DialogHeader>
+                <DialogBody>This is the body of the dialog.</DialogBody>
+                <DialogFooter>
+                  <DialogCloseTrigger>
+                    <Button>Close</Button>
+                  </DialogCloseTrigger>
+                </DialogFooter>
+              </>
+            )}
+          </DialogPopup>
+        </Dialog>
+      </div>
+    );
+  },
 };
 
 const content = `This is the body of the dialog. Here is where the main content

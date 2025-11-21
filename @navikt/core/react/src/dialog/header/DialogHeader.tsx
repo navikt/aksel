@@ -5,7 +5,7 @@ import { Slot } from "../../slot/Slot";
 import { useRenameCSS } from "../../theme/Theme";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import type { AsChild } from "../../util/types/AsChild";
-import { DialogClose } from "../close/DialogClose";
+import { DialogCloseTrigger } from "../close-trigger/DialogCloseTrigger";
 
 type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement> &
   AsChild & {
@@ -38,12 +38,12 @@ const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
         <Component
           {...restProps}
           ref={forwardedRef}
-          className={cn(className, "navds-dialog__header")}
+          className={cn("navds-dialog__header", className)}
         >
           {children}
         </Component>
         {withClosebutton && (
-          <DialogClose asChild>
+          <DialogCloseTrigger>
             <Button
               type="button"
               className={cn("navds-dialog__close-button")}
@@ -51,7 +51,7 @@ const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
               variant="tertiary-neutral"
               icon={<XMarkIcon title={translate("close")} />}
             />
-          </DialogClose>
+          </DialogCloseTrigger>
         )}
       </>
     );

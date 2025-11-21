@@ -22,7 +22,7 @@ const DialogDescription = forwardRef<
     <BodyShort
       {...restProps}
       ref={forwardedRef}
-      className={cn(className, "navds-dialog__description")}
+      className={cn("navds-dialog__description", className)}
       size={size}
       data-color="neutral"
       textColor="subtle"

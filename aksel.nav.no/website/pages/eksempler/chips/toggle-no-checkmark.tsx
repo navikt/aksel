@@ -1,44 +1,23 @@
 import { useState } from "react";
-import { Chips, VStack } from "@navikt/ds-react";
+import { Chips } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [selected, setSelected] = useState(3);
 
   return (
-    <VStack gap="space-40">
-      <VStack gap="space-12">
-        Variant action (default)
-        <Chips>
-          {options.map((label, id) => (
-            <Chips.Toggle
-              checkmark={false}
-              key={label}
-              selected={selected === id}
-              onClick={() => setSelected(id)}
-            >
-              {label}
-            </Chips.Toggle>
-          ))}
-        </Chips>
-      </VStack>
-      <VStack gap="space-12">
-        Variant neutral
-        <Chips>
-          {options.map((label, id) => (
-            <Chips.Toggle
-              checkmark={false}
-              variant="neutral"
-              key={label}
-              selected={selected === id}
-              onClick={() => setSelected(id)}
-            >
-              {label}
-            </Chips.Toggle>
-          ))}
-        </Chips>
-      </VStack>
-    </VStack>
+    <Chips>
+      {options.map((label, id) => (
+        <Chips.Toggle
+          checkmark={false}
+          key={label}
+          selected={selected === id}
+          onClick={() => setSelected(id)}
+        >
+          {label}
+        </Chips.Toggle>
+      ))}
+    </Chips>
   );
 };
 

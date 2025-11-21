@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useCallbackRef } from "../../../util/hooks";
 import {
   CUSTOM_EVENTS,
-  CustomPointerDownEvent,
+  CustomPointerEvent,
   dispatchCustomEvent,
 } from "./dispatchCustomEvent";
 
@@ -12,8 +12,9 @@ import {
  * By checking `isPointerInsideReactTreeRef` we can determine if the event happened outside the subtree of the node, saving some element-comparisons.
  */
 export function usePointerUpOutside(
-  callback?: (event: CustomPointerDownEvent) => void,
+  callback?: (event: CustomPointerEvent) => void,
   ownerDocument: Document = globalThis?.document,
+  enabled: boolean = true,
 ) {
   // Keep callback ref stable
   const handlePointerUpOutside = useCallbackRef(callback) as EventListener;
@@ -21,10 +22,14 @@ export function usePointerUpOutside(
   const isPointerInsideReactTreeRef = useRef(false);
 
   useEffect(() => {
+    if (!enabled) {
+      return;
+    }
+
     const handlePointerUp = (event: PointerEvent) => {
       /**
        * The `DismisableLayer`-API is based on the ability to stop events from propagating and in the end calling `onDismiss`
-       * if `usePointerUpOutside` runs `event.preventDefault()`.
+       * if `usePointerUpOutside`-callback does not run `event.preventDefault()`.
        *
        * Although `pointerup` is already a cancelable event, we still dispatch a custom event (discrete)
        * to keep parity with focus outside handling and ensure ordering.
@@ -72,12 +77,12 @@ export function usePointerUpOutside(
       ownerDocument.removeEventListener("pointerup", handlePointerUp);
       ownerDocument.removeEventListener("pointercancel", handlePointerCancel);
     };
-  }, [ownerDocument, handlePointerUpOutside]);
+  }, [ownerDocument, handlePointerUpOutside, enabled]);
 
   /**
-   * Ensures we check React component tree (not just DOM tree)
-   * This makes sure that if you start a pointer interaction inside the React tree (I.E Modal),
-   * we don't trigger the outside event on pointer up outside if its move away from Modal.
+   * Ensures we check React component tree (not just DOM tree).
+   * This makes sure that if you start or end a pointer interaction inside the
+   * React tree (e.g. Modal), we don't trigger the outside event on pointer up.
    */
   return {
     onPointerDownCapture: () => {

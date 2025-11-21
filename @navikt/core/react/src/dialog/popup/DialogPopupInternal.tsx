@@ -1,5 +1,6 @@
 import React, { forwardRef, useRef } from "react";
 import { BoxNew, type BoxNewProps } from "../../layout/box";
+import type { ResponsiveProp } from "../../layout/utilities/types";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
 import { useRenameCSS } from "../../theme/Theme";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
@@ -28,15 +29,18 @@ type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
      */
     closeOnOutsideClick?: boolean;
     /**
-     * Event handler called when the dialog opens, used to manage focus.
-     * Can be prevented with `event.preventDefault()`.
+     * Will try to focus the given element on mount.
+     *
+     * If not provided, Dialog will focus the popup itself.
      */
     initialFocus?:
       | React.RefObject<HTMLElement | null>
       | (() => HTMLElement | null | undefined);
     /**
-     * Event handler called when the dialog closes, used to manage focus.
-     * Can be prevented with `event.preventDefault()`.
+     * Will try to focus the given element on unmount.
+     *
+     * If not provided, Dialog will try to focus the `Dialog.Trigger` element
+     * or the last focused element before the dialog opened.
      */
     returnFocus?:
       | React.RefObject<HTMLElement | null>
@@ -49,13 +53,23 @@ type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
     position?: DialogPosition;
     /**
      * CSS `width`
+     *
+     * Has no effect when `position` is set to `fullscreen`.
+     *
      * @default "medium"
      */
-    width?: BoxNewProps["width"] | "small" | "medium" | "large";
+    width?: ResponsiveProp<string & {}> | "small" | "medium" | "large";
     /**
      * CSS `height`
+     *
+     * Has no effect when `position` is set to `fullscreen`, `left` or `right`.
      */
-    height?: BoxNewProps["height"] | "small" | "medium" | "large";
+    height?: ResponsiveProp<string & {}> | "small" | "medium" | "large";
+    /**
+     * Adds a backdrop behind the dialog popup.
+     * @default true
+     */
+    withBackdrop?: boolean;
   };
 
 /**
@@ -73,14 +87,15 @@ const DialogPopupInternal = forwardRef<
       className,
       modal = true,
       closeOnOutsideClick = true,
-      initialFocus: initialFocusProp,
-      returnFocus: returnFocusProp,
+      initialFocus,
+      returnFocus,
       position = "center",
       width = "medium",
       height,
       id,
-      style: styleProp,
+      style,
       "aria-labelledby": ariaLabelledbyProp,
+      withBackdrop,
       ...restProps
     },
     forwardedRef,
@@ -95,26 +110,18 @@ const DialogPopupInternal = forwardRef<
       open,
       transitionStatus,
       popupElement,
-      backdropRef,
       nestedOpenDialogCount: nestedOpenDialogCountProp,
       nested,
-      backdropElement,
       size,
       titleId,
       popupId,
       onOpenChangeComplete,
+      setMounted,
     } = useDialogContext();
 
     const hasInteractedOutsideRef = useRef(false);
-    const hasPointerDownOutsideRef = useRef(false);
-    const localPopupRef = useRef<HTMLDivElement | null>(null);
 
-    const mergedRefs = useMergeRefs(
-      forwardedRef,
-      popupRef,
-      setPopupElement,
-      localPopupRef,
-    );
+    const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
 
     useScrollLock({
       enabled: open && modal === true,
@@ -124,53 +131,48 @@ const DialogPopupInternal = forwardRef<
     });
 
     /**
-     * On mount Popupref is not defined in root, so we need to
+     * On mount, popupRef is not defined in root, so we need to
      * run hook here as well as root to ensure animations are tracked correctly
      */
     useOpenChangeAnimationComplete({
       open,
-      ref: localPopupRef,
+      ref: popupRef,
       onComplete() {
         if (open) {
           onOpenChangeComplete?.(true);
+        } else {
+          setMounted(false);
+          onOpenChangeComplete?.(false);
         }
       },
     });
 
-    const resolvedInitialFocus =
-      initialFocusProp === undefined ? popupRef : initialFocusProp;
+    const resolvedInitialFocus = initialFocus ?? popupRef;
 
     const resolvedReturnFocus = () => {
-      if (returnFocusProp) {
-        hasInteractedOutsideRef.current = false;
-        hasPointerDownOutsideRef.current = false;
+      const hasInteractedOutside = hasInteractedOutsideRef.current;
+      hasInteractedOutsideRef.current = false;
 
-        return typeof returnFocusProp === "function"
-          ? returnFocusProp()
-          : returnFocusProp.current;
+      if (returnFocus) {
+        return typeof returnFocus === "function"
+          ? returnFocus()
+          : returnFocus.current;
       }
 
       /**
        * If dialog closes, and user has not interacted outside of it, we default to focusing the trigger
        */
-      if (!hasInteractedOutsideRef.current && modal === "trap-focus") {
+      if (!hasInteractedOutside && modal === "trap-focus") {
         triggerElement?.focus();
-        hasInteractedOutsideRef.current = false;
-        hasPointerDownOutsideRef.current = false;
         return false;
       }
 
       /**
        * If user clicks something outside dialog, we respect that and avoid changing focus
        */
-      if (modal === "trap-focus" && hasInteractedOutsideRef.current) {
-        hasInteractedOutsideRef.current = false;
-        hasPointerDownOutsideRef.current = false;
+      if (modal === "trap-focus" && hasInteractedOutside) {
         return false;
       }
-
-      hasInteractedOutsideRef.current = false;
-      hasPointerDownOutsideRef.current = false;
 
       /**
        * In all other cases, we allow FocusBoundary to return focus to the previously focused element
@@ -195,13 +197,10 @@ const DialogPopupInternal = forwardRef<
             onDismiss={(event) => {
               open && setOpen(false, event);
             }}
-            disableOutsidePointerEvents={modal === true || !!backdropElement}
+            disableOutsidePointerEvents={modal === true || withBackdrop}
             onInteractOutside={(event) => {
               if (!event.defaultPrevented) {
                 hasInteractedOutsideRef.current = true;
-                if (event.detail.originalEvent?.type === "pointerdown") {
-                  hasPointerDownOutsideRef.current = true;
-                }
               }
               /**
                * Since trigger might be set up to close the dialog on click,
@@ -213,33 +212,11 @@ const DialogPopupInternal = forwardRef<
                 event.preventDefault();
               }
             }}
+            /**
+             * Only close dialog on pointerUp pointerEvents
+             */
             onPointerDownOutside={(event) => {
-              /* If backdrop exists, require "intentional" click (pointerup) */
-              if (backdropRef.current) {
-                event.preventDefault();
-              }
-
-              if (!closeOnOutsideClick) {
-                event.preventDefault();
-              }
-
-              /* "Sloppy" clicks are only allowed if modal is in trap-focus mode */
-              if (modal !== "trap-focus") {
-                event.preventDefault();
-              }
-
-              const originalEvent = event.detail.originalEvent;
-              const ctrlLeftClick =
-                originalEvent.button === 0 && originalEvent.ctrlKey === true;
-              const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-
-              /**
-               * If the event is a right-click, we shouldn't close because
-               * it is effectively as if we right-clicked the `Overlay`.
-               */
-              if (isRightClick) {
-                event.preventDefault();
-              }
+              event.preventDefault();
             }}
             onFocusOutside={(event) => {
               /**
@@ -251,9 +228,7 @@ const DialogPopupInternal = forwardRef<
             }}
             enablePointerUpOutside
             onPointerUpOutside={(event) => {
-              if (!closeOnOutsideClick) {
-                event.preventDefault();
-              }
+              !closeOnOutsideClick && event.preventDefault();
             }}
           >
             <BoxNew
@@ -261,18 +236,15 @@ const DialogPopupInternal = forwardRef<
               id={id ?? popupId}
               {...restProps}
               ref={mergedRefs}
-              className={cn(
-                className,
-                "navds-dialog__popup",
-                `navds-dialog__popup--${size}`,
-              )}
+              className={cn("navds-dialog__popup", className)}
               role="dialog"
               {...createTransitionStatusAttribute(transitionStatus)}
               data-position={position}
+              data-size={size}
               width={translateWidth(width, position)}
               height={translateHeight(height, position)}
               style={{
-                ...styleProp,
+                ...style,
                 "--__axc-nested-level": nestedOpenDialogCountProp,
               }}
               data-nested-dialog-open={!!nestedOpenDialogCountProp}
@@ -308,7 +280,7 @@ function translateWidth(
 function translateHeight(
   height: DialogPopupInternalProps["height"],
   position: DialogPosition,
-): BoxNewProps["width"] {
+): BoxNewProps["height"] {
   if (
     position === "fullscreen" ||
     position === "left" ||

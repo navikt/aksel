@@ -93,7 +93,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     ref,
   ) => {
     const { cn } = useRenameCSS();
-    const translate = useI18n("Alert");
+    const translate = useI18n("global");
     const Icon = IconMap[variant];
     return (
       <div
@@ -132,15 +132,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
               variant="tertiary-neutral"
               onClick={onClose}
               type="button"
-              icon={
-                <XMarkIcon
-                  title={
-                    ["error", "warning"].includes(variant)
-                      ? translate("closeAlert")
-                      : translate("closeMessage")
-                  }
-                />
-              }
+              icon={<XMarkIcon title={translate("close")} />}
             />
           </div>
         )}

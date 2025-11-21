@@ -21,7 +21,7 @@ const DialogFooter = forwardRef<HTMLDivElement, DialogFooterProps>(
       <Component
         {...restProps}
         ref={forwardedRef}
-        className={cn(className, "navds-dialog__footer")}
+        className={cn("navds-dialog__footer", className)}
       >
         {children}
       </Component>
