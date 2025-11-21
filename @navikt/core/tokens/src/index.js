@@ -62,7 +62,7 @@ module.exports = {
     "z-index": {
       popover: { value: 1000 },
       focus: { value: 10 },
-      tooltip: { value: 3000 },
+      tooltip: { value: 2147483647 },
     },
   },
 };
