@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { AkselColor } from "../../../types";
 import { useId } from "../../../util";
+import { useI18n } from "../../../util/i18n/i18n.hooks";
 import {
   type BaseAlertContextProps,
   BaseAlertProvider,
@@ -32,10 +33,6 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   global?: boolean;
   /**
-   * Changes the semantics of the alert. Use "alert" for important information that needs user attention, and "message" for less important information.
-   */
-  statusType: BaseAlertContextProps["statusType"];
-  /**
    * Type of alert
    */
   status?: BaseAlertContextProps["status"];
@@ -59,10 +56,8 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
       "data-color": dataColor,
       type,
       global = false,
-      statusType,
       status,
       as: Component = "section",
-      "aria-labelledby": ariaLabelledby,
       "aria-label": ariaLabel,
       role,
       ...restProps
@@ -72,25 +67,22 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
     const { cn } = useRenameCSS();
 
     const statusId = useId();
+    const translate = useI18n("global");
 
     const alertColor = status ? baseAlertStatusToDataColor(status) : dataColor;
 
     return (
       <BaseAlertProvider
         size={size}
-        statusType={statusType}
         status={status}
         color={alertColor}
         statusId={statusId}
       >
         <Component
-          aria-labelledby={
-            ariaLabelledby ??
-            (ariaLabel || Component === "div" || statusType === "message"
-              ? undefined
-              : statusId)
+          aria-label={
+            ariaLabel ??
+            (!status || Component === "div" ? undefined : translate(status))
           }
-          aria-label={ariaLabel}
           ref={forwardedRef}
           {...restProps}
           className={cn(className, "navds-base-alert")}

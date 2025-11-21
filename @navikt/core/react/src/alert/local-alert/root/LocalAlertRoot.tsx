@@ -109,7 +109,6 @@ const LocalAlert = forwardRef<HTMLDivElement, LocalAlertProps>(
         {...restProps}
         type="strong"
         global={false}
-        statusType="alert"
         status={status}
       />
     );

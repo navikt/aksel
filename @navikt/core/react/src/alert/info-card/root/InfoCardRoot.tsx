@@ -104,7 +104,6 @@ const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
         {...restProps}
         type="moderate"
         global={false}
-        statusType="message"
         as={as}
       />
     );

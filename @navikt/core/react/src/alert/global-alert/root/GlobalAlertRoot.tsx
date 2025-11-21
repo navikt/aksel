@@ -109,7 +109,6 @@ const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
         {...props}
         type="strong"
         global
-        statusType="alert"
       />
     );
   },
