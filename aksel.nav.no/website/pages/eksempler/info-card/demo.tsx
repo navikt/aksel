@@ -1,19 +1,17 @@
-import { InfoCard, VStack } from "@navikt/ds-react";
+import { InfoCard } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="space-16">
-      <InfoCard data-color="info">
-        <InfoCard.Header>
-          <InfoCard.Title>Fremhevet statisk informasjon</InfoCard.Title>
-        </InfoCard.Header>
-        <InfoCard.Content>
-          InfoCard brukes for å fremheve informasjon på en side, uten at det er
-          like kritisk som en alert.
-        </InfoCard.Content>
-      </InfoCard>
-    </VStack>
+    <InfoCard data-color="info">
+      <InfoCard.Header>
+        <InfoCard.Title>Fremhevet statisk informasjon</InfoCard.Title>
+      </InfoCard.Header>
+      <InfoCard.Content>
+        InfoCard brukes for å fremheve informasjon på en side, uten at det er
+        like kritisk som en alert.
+      </InfoCard.Content>
+    </InfoCard>
   );
 };
 
