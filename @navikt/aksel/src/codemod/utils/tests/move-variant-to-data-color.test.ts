@@ -53,6 +53,12 @@ describe("moveVariantToDataColor", () => {
     expect(transform(source)).toBe(expected);
   });
 
+  test("should handle direct imports", () => {
+    const source = `import { TestComponent as TC } from "@navikt/ds-react/TestComponent"; <TC variant="old" />`;
+    const expected = `import { TestComponent as TC } from "@navikt/ds-react/TestComponent"; <TC data-color="blue" variant="new" />`;
+    expect(transform(source)).toBe(expected);
+  });
+
   test("should handle sub-components", () => {
     const source = `import { TestComponent } from "@navikt/ds-react"; <TestComponent.SubElement variant="old" />`;
     const expected = `import { TestComponent } from "@navikt/ds-react"; <TestComponent.SubElement data-color="blue" variant="new" />`;

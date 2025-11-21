@@ -21,8 +21,13 @@ export function moveVariantToDataColor(
   const root = j(file.source);
 
   /* Find all imports from @navikt/ds-react */
-  const imports = root.find(j.ImportDeclaration, {
-    source: { value: "@navikt/ds-react" },
+  const imports = root.find(j.ImportDeclaration).filter((path) => {
+    const sourceValue = path.value.source.value;
+    return (
+      typeof sourceValue === "string" &&
+      (sourceValue === "@navikt/ds-react" ||
+        sourceValue.startsWith("@navikt/ds-react/"))
+    );
   });
 
   if (imports.size() === 0) {
