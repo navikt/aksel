@@ -1,6 +1,12 @@
-import { BodyLong, CopyButton, VStack } from "@navikt/ds-react";
+import { FileTextIcon } from "@navikt/aksel-icons";
+import { BodyLong, CopyButton, Spacer, VStack } from "@navikt/ds-react";
+import {
+  InfoCard,
+  InfoCardContent,
+  InfoCardHeader,
+  InfoCardTitle,
+} from "@navikt/ds-react/InfoCard";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
-import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 
 function ExampleText(
   props: ExtractPortableComponentProps<"exampletext_block">,
@@ -12,16 +18,16 @@ function ExampleText(
   }
 
   return (
-    <section aria-label={title}>
-      <EditorPanel
-        variant="example-text"
-        heading={title}
-        headingTag="p"
-        actionComponent={<CopyButton size="small" copyText={text} />}
-      >
+    <InfoCard data-color="neutral" aria-label={title} as="section">
+      <InfoCardHeader icon={<FileTextIcon aria-hidden fontSize="1.5rem" />}>
+        <InfoCardTitle as="div">{title}</InfoCardTitle>
+        <Spacer />
+        <CopyButton size="small" copyText={text} />
+      </InfoCardHeader>
+      <InfoCardContent>
         <VStack gap="space-24">{formatText(text)}</VStack>
-      </EditorPanel>
-    </section>
+      </InfoCardContent>
+    </InfoCard>
   );
 }
 
