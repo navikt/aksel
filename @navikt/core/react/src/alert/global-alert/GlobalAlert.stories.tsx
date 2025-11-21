@@ -180,12 +180,7 @@ export const A11yTest: Story = {
         {open && (
           <GlobalAlert status="announcement">
             <GlobalAlertHeader>
-              <GlobalAlertTitle>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non
-                fugiat tempore corrupti asperiores praesentium? Asperiores,
-                doloribus? Molestias, laudantium saepe. Nihil in alias
-                praesentium maxime iure ipsam? Accusantium libero quia quis!
-              </GlobalAlertTitle>
+              <GlobalAlertTitle>Alert title</GlobalAlertTitle>
               <GlobalAlertClose onClick={() => alert("Lukket!")} />
             </GlobalAlertHeader>
             <DemoContent />
