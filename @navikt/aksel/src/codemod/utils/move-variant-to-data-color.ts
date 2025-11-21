@@ -29,13 +29,14 @@ export function moveVariantToDataColor(
     return null;
   }
 
+  const [rootComponent, subComponent] = config.component.split(".");
   let localName = "";
 
   imports.forEach((path) => {
     path.value.specifiers?.forEach((specifier) => {
       if (
         specifier.type === "ImportSpecifier" &&
-        specifier.imported.name === config.component
+        specifier.imported.name === rootComponent
       ) {
         localName = specifier.local?.name || specifier.imported.name;
       }
@@ -46,73 +47,83 @@ export function moveVariantToDataColor(
     return null;
   }
 
-  root
-    .find(j.JSXElement, { openingElement: { name: { name: localName } } })
-    .forEach((path) => {
-      const attributes = path.value.openingElement.attributes;
-      if (!attributes) return;
+  const elementSearch = subComponent
+    ? {
+        openingElement: {
+          name: {
+            type: "JSXMemberExpression",
+            object: { name: localName },
+            property: { name: subComponent },
+          },
+        },
+      }
+    : { openingElement: { name: { name: localName } } };
 
-      let variantPropIndex = -1;
-      let colorPropIndex = -1;
-      let variantValue = "";
+  root.find(j.JSXElement, elementSearch as any).forEach((path) => {
+    const attributes = path.value.openingElement.attributes;
+    if (!attributes) return;
 
-      attributes.forEach((attr, index) => {
-        if (attr.type !== "JSXAttribute") return;
-        if (attr.name.name === config.prop) {
-          variantPropIndex = index;
-          const value = getStringValue(attr.value);
-          if (value) {
-            variantValue = value;
-          }
-        }
-        if (attr.name.name === "data-color") {
-          colorPropIndex = index;
-        }
-      });
+    let variantPropIndex = -1;
+    let colorPropIndex = -1;
+    let variantValue = "";
 
-      if (variantPropIndex !== -1 && variantValue) {
-        const changeConfig = config.changes[variantValue];
-        if (changeConfig) {
-          const originalAttr = attributes[variantPropIndex];
-          if (originalAttr.type !== "JSXAttribute") return;
-
-          // Handle variant prop update or removal
-          if (changeConfig.replacement) {
-            let newValue;
-            if (originalAttr.value?.type === "JSXExpressionContainer") {
-              newValue = j.jsxExpressionContainer(
-                j.literal(changeConfig.replacement),
-              );
-            } else {
-              newValue = j.literal(changeConfig.replacement);
-            }
-
-            const newAttr = j.jsxAttribute(
-              j.jsxIdentifier(config.prop),
-              newValue,
-            );
-            newAttr.comments = originalAttr.comments;
-            attributes[variantPropIndex] = newAttr;
-          } else {
-            // Remove the variant prop if no replacement is specified
-            attributes.splice(variantPropIndex, 1);
-            // Adjust colorPropIndex if it was after the removed prop
-            if (colorPropIndex > variantPropIndex) {
-              colorPropIndex--;
-            }
-          }
-
-          // Add data-color prop if it doesn't exist
-          if (colorPropIndex === -1) {
-            const colorAttr = j.jsxAttribute(
-              j.jsxIdentifier("data-color"),
-              j.literal(changeConfig.color),
-            );
-            attributes.unshift(colorAttr);
-          }
+    attributes.forEach((attr, index) => {
+      if (attr.type !== "JSXAttribute") return;
+      if (attr.name.name === config.prop) {
+        variantPropIndex = index;
+        const value = getStringValue(attr.value);
+        if (value) {
+          variantValue = value;
         }
       }
+      if (attr.name.name === "data-color") {
+        colorPropIndex = index;
+      }
     });
+
+    if (variantPropIndex !== -1 && variantValue) {
+      const changeConfig = config.changes[variantValue];
+      if (changeConfig) {
+        const originalAttr = attributes[variantPropIndex];
+        if (originalAttr.type !== "JSXAttribute") return;
+
+        // Handle variant prop update or removal
+        if (changeConfig.replacement) {
+          let newValue;
+          if (originalAttr.value?.type === "JSXExpressionContainer") {
+            newValue = j.jsxExpressionContainer(
+              j.literal(changeConfig.replacement),
+            );
+          } else {
+            newValue = j.literal(changeConfig.replacement);
+          }
+
+          const newAttr = j.jsxAttribute(
+            j.jsxIdentifier(config.prop),
+            newValue,
+          );
+          newAttr.comments = originalAttr.comments;
+          attributes[variantPropIndex] = newAttr;
+        } else {
+          // Remove the variant prop if no replacement is specified
+          attributes.splice(variantPropIndex, 1);
+          // Adjust colorPropIndex if it was after the removed prop
+          if (colorPropIndex > variantPropIndex) {
+            colorPropIndex--;
+          }
+        }
+
+        // Add data-color prop if it doesn't exist
+        if (colorPropIndex === -1) {
+          const colorAttr = j.jsxAttribute(
+            j.jsxIdentifier("data-color"),
+            j.literal(changeConfig.color),
+          );
+          attributes.unshift(colorAttr);
+        }
+      }
+    }
+  });
 
   const toSourceOptions = getLineTerminator(file.source);
   return root.toSource(toSourceOptions);

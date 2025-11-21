@@ -18,8 +18,21 @@ const config = {
   },
 };
 
-function transform(source: string) {
-  return moveVariantToDataColor({ source, path: "test.tsx" }, api, config);
+const configSub = {
+  component: "TestComponent.SubElement",
+  prop: "variant",
+  changes: {
+    old: { replacement: "new", color: "blue" },
+    remove: { color: "red" },
+  },
+};
+
+function transform(source: string, subComponent = false) {
+  return moveVariantToDataColor(
+    { source, path: "test.tsx" },
+    api,
+    subComponent ? configSub : config,
+  );
 }
 
 describe("moveVariantToDataColor", () => {
@@ -38,6 +51,12 @@ describe("moveVariantToDataColor", () => {
     const source = `import { TestComponent as TC } from "@navikt/ds-react"; <TC variant="old" />`;
     const expected = `import { TestComponent as TC } from "@navikt/ds-react"; <TC data-color="blue" variant="new" />`;
     expect(transform(source)).toBe(expected);
+  });
+
+  test("should handle sub-components", () => {
+    const source = `import { TestComponent } from "@navikt/ds-react"; <TestComponent.SubElement variant="old" />`;
+    const expected = `import { TestComponent } from "@navikt/ds-react"; <TestComponent.SubElement data-color="blue" variant="new" />`;
+    expect(transform(source, true)).toBe(expected);
   });
 
   test("should replace variant with replacement", () => {
