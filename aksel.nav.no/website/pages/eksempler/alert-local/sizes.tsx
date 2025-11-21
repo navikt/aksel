@@ -9,7 +9,7 @@ const Example = () => {
           <LocalAlert.Title>
             Nyhet! Nå kan du ettersende vedlegg digitalt (Medium)
           </LocalAlert.Title>
-          <LocalAlert.Close onClick={() => alert("Lukket alert")} />
+          <LocalAlert.CloseButton onClick={() => alert("Lukket alert")} />
         </LocalAlert.Header>
         <LocalAlert.Content>
           Kunngjøringer brukes for å formidle noe om appen eller systemet, eller
@@ -22,7 +22,7 @@ const Example = () => {
           <LocalAlert.Title>
             Nyhet! Nå kan du ettersende vedlegg digitalt (Small)
           </LocalAlert.Title>
-          <LocalAlert.Close onClick={() => alert("Lukket alert")} />
+          <LocalAlert.CloseButton onClick={() => alert("Lukket alert")} />
         </LocalAlert.Header>
         <LocalAlert.Content>
           Kunngjøringer brukes for å formidle noe om appen eller systemet, eller

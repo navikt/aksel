@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import { BaseAlert } from "../../base-alert";
 import {
-  LocalAlertClose,
-  type LocalAlertCloseProps,
-} from "../close/LocalAlertClose";
+  LocalAlertCloseButton,
+  type LocalAlertCloseButtonProps,
+} from "../close-button/LocalAlertCloseButton";
 import {
   LocalAlertContent,
   type LocalAlertContentProps,
@@ -80,7 +80,7 @@ interface LocalAlertComponent
    *  </LocalAlert>
    * ```
    */
-  Close: typeof LocalAlertClose;
+  CloseButton: typeof LocalAlertCloseButton;
 }
 
 /**
@@ -115,19 +115,19 @@ const LocalAlert = forwardRef<HTMLDivElement, LocalAlertProps>(
 LocalAlert.Header = LocalAlertHeader;
 LocalAlert.Title = LocalAlertTitle;
 LocalAlert.Content = LocalAlertContent;
-LocalAlert.Close = LocalAlertClose;
+LocalAlert.CloseButton = LocalAlertCloseButton;
 
 export {
   LocalAlert,
   LocalAlertContent,
   LocalAlertHeader,
   LocalAlertTitle,
-  LocalAlertClose,
+  LocalAlertCloseButton,
 };
 export type {
   LocalAlertProps,
   LocalAlertContentProps,
   LocalAlertHeaderProps,
   LocalAlertTitleProps,
-  LocalAlertCloseProps,
+  LocalAlertCloseButtonProps,
 };

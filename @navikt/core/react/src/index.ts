@@ -170,7 +170,7 @@ export {
   type GlobalAlertHeaderProps,
   type GlobalAlertTitleProps,
   type GlobalAlertContentProps,
-  type GlobalAlertCloseProps,
+  type GlobalAlertCloseButtonProps,
 } from "./alert/global-alert";
 export {
   InfoCard,
@@ -185,7 +185,7 @@ export {
   type LocalAlertHeaderProps,
   type LocalAlertTitleProps,
   type LocalAlertContentProps,
-  type LocalAlertCloseProps,
+  type LocalAlertCloseButtonProps,
 } from "./alert/local-alert";
 
 /**

@@ -8,7 +8,7 @@ const Example = () => {
         <GlobalAlert.Title>
           Systemet vil være utilgjengelig natt til søndag
         </GlobalAlert.Title>
-        <GlobalAlert.Close onClick={() => alert("Lukket alert")} />
+        <GlobalAlert.CloseButton onClick={() => alert("Lukket alert")} />
       </GlobalAlert.Header>
     </GlobalAlert>
   );
