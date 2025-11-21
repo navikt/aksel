@@ -38,53 +38,55 @@ interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
  *  </InlineMessage>
  * ```
  */
-const InlineMessage: OverridableComponent<InlineMessageProps, HTMLDivElement> =
-  forwardRef(
-    (
-      {
-        as: Component = "div",
-        children,
-        className,
-        status,
-        size = "medium",
-        ...restProps
-      }: InlineMessageProps & { as?: React.ElementType },
-      forwardedRef,
-    ) => {
-      const { cn } = useRenameCSS();
-      const themeContext = useThemeInternal(false);
+export const InlineMessage: OverridableComponent<
+  InlineMessageProps,
+  HTMLDivElement
+> = forwardRef(
+  (
+    {
+      as: Component = "div",
+      children,
+      className,
+      status,
+      size = "medium",
+      ...restProps
+    }: InlineMessageProps & { as?: React.ElementType },
+    forwardedRef,
+  ) => {
+    const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal(false);
 
-      const translate = useI18n("global");
-      const statusId = useId();
-      const contentId = useId();
+    const translate = useI18n("global");
+    const statusId = useId();
+    const contentId = useId();
 
-      return (
-        <BodyShort
-          ref={forwardedRef}
-          className={cn("navds-inline-message", className)}
-          data-color={status === "error" ? "danger" : status}
-          {...restProps}
-          size={size}
-          as={Component}
-          data-size={size}
+    return (
+      <BodyShort
+        ref={forwardedRef}
+        className={cn("navds-inline-message", className)}
+        data-color={status === "error" ? "danger" : status}
+        {...restProps}
+        size={size}
+        as={Component}
+        data-size={size}
+      >
+        <InlineMessageIcon status={status} />
+        {status && (
+          <BodyShort id={statusId} aria-hidden visuallyHidden>
+            {`${translate(status)}: `}
+          </BodyShort>
+        )}
+        <span
+          data-color={themeContext?.color}
+          id={contentId}
+          aria-labelledby={cl(statusId, contentId)}
         >
-          <InlineMessageIcon status={status} />
-          {status && (
-            <BodyShort id={statusId} aria-hidden visuallyHidden>
-              {`${translate(status)}: `}
-            </BodyShort>
-          )}
-          <span
-            data-color={themeContext?.color}
-            id={contentId}
-            aria-labelledby={cl(statusId, contentId)}
-          >
-            {children}
-          </span>
-        </BodyShort>
-      );
-    },
-  );
+          {children}
+        </span>
+      </BodyShort>
+    );
+  },
+);
 
-export { InlineMessage };
+export default InlineMessage;
 export type { InlineMessageProps };

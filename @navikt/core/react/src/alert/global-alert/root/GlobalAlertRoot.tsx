@@ -97,7 +97,7 @@ interface GlobalAlertComponent
  *  </GlobalAlert>
  * ```
  */
-const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
+export const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
   (props: GlobalAlertProps, forwardedRef) => {
     return (
       <BaseAlert.Root
@@ -116,8 +116,8 @@ GlobalAlert.Title = GlobalAlertTitle;
 GlobalAlert.Content = GlobalAlertContent;
 GlobalAlert.CloseButton = GlobalAlertCloseButton;
 
+export default GlobalAlert;
 export {
-  GlobalAlert,
   GlobalAlertCloseButton,
   GlobalAlertContent,
   GlobalAlertHeader,

@@ -84,7 +84,7 @@ interface InfoCardComponent
  *  </InfoCard>
  * ```
  */
-const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
+export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
   (
     {
       "data-color": dataColor = "info",
@@ -110,7 +110,8 @@ InfoCard.Header = InfoCardHeader;
 InfoCard.Title = InfoCardTitle;
 InfoCard.Content = InfoCardContent;
 
-export { InfoCard, InfoCardContent, InfoCardHeader, InfoCardTitle };
+export default InfoCard;
+export { InfoCardContent, InfoCardHeader, InfoCardTitle };
 export type {
   InfoCardProps,
   InfoCardHeaderProps,

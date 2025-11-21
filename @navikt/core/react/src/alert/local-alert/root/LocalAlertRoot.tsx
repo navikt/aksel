@@ -97,7 +97,7 @@ interface LocalAlertComponent
  *  </LocalAlert>
  * ```
  */
-const LocalAlert = forwardRef<HTMLDivElement, LocalAlertProps>(
+export const LocalAlert = forwardRef<HTMLDivElement, LocalAlertProps>(
   ({ status, ...restProps }: LocalAlertProps, forwardedRef) => {
     return (
       <BaseAlert.Root
@@ -117,8 +117,8 @@ LocalAlert.Title = LocalAlertTitle;
 LocalAlert.Content = LocalAlertContent;
 LocalAlert.CloseButton = LocalAlertCloseButton;
 
+export default LocalAlert;
 export {
-  LocalAlert,
   LocalAlertContent,
   LocalAlertHeader,
   LocalAlertTitle,
