@@ -39,7 +39,7 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Changes the HTML element used for the root element.
    *
-   * **Testing**: When using `axe-core` for accessibility testing, `section` might warn about unique landmarks if you have multipe Alerts on page with the same status.
+   * **Testing**: When using `axe-core` for accessibility testing, `section` might warn about unique landmarks if you have multiple Alerts on page with the same status.
    * In those cases, consider using `div` as the root element, or adding unique `aria-label` or `aria-labelledby` props.
    * @see [📝 Landmarks unique](https://dequeuniversity.com/rules/axe/4.6/landmark-unique)
    * @default "section"

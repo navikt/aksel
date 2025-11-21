@@ -15,7 +15,7 @@ type InfoCardProps = Omit<BaseAlert.RootProps, "type" | "global" | "status"> & {
    * Changes the HTML element used for the root element.
    *
    * **When using `section`, provide either `aria-label` or `aria-labelledby` for better accessibility.**
-   * `axe-core` might warn about unique landmarks if you have multipe InfoCards on page with the same label.
+   * `axe-core` might warn about unique landmarks if you have multiple InfoCards on page with the same label.
    * In those cases consider updating to unique `aria-label` or `aria-labelledby` props.
    * @see [📝 Landmarks unique](https://dequeuniversity.com/rules/axe/4.6/landmark-unique)
    * @default "div"
