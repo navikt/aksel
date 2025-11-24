@@ -17,6 +17,8 @@ function GodPraksisHeroDialog({ children }: { children: React.ReactNode }) {
       aria-label="Temanavigasjon"
       aria-modal="false"
       /* False positive */
+
+      // eslint-disable-next-line
       /* eslint-disable-next-line react-hooks/refs */
       ref={registerRef.dialogRef}
       data-hidden={!dialogState.open}
