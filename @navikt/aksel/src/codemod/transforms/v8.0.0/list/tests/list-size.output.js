@@ -12,7 +12,7 @@ export const MyComponent = () => {
           risus volutpat.
         </BodyShort>
         <Box marginBlock="space-12" asChild>
-          <List>
+          <List size="small">
             <List.Item>lorem ipsum</List.Item>
             <List.Item>lorem ipsum</List.Item>
           </List>
@@ -27,7 +27,7 @@ export const MyComponent = () => {
           risus volutpat.
         </BodyShort>
         <Box marginBlock="space-16" asChild>
-          <List>
+          <List size="large">
             <List.Item>lorem ipsum</List.Item>
             <List.Item>lorem ipsum</List.Item>
           </List>

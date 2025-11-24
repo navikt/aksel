@@ -94,15 +94,39 @@ export default function transformer(file: FileInfo, api: API) {
         }
       }
 
-      // Remove attributes
-      path.node.openingElement.attributes = attributes.filter(
-        (attr) =>
-          attr.type !== "JSXAttribute" ||
-          (attr.name.name !== "title" &&
-            attr.name.name !== "description" &&
-            attr.name.name !== "headingTag" &&
-            attr.name.name !== "size"),
-      );
+      // Separate attributes
+      const listAttributes: any[] = [];
+      const divAttributes: any[] = [];
+
+      attributes.forEach((attr) => {
+        if (attr.type !== "JSXAttribute") {
+          // Spread attributes or others -> move to div
+          divAttributes.push(attr);
+          return;
+        }
+
+        const name = attr.name.name;
+
+        if (
+          name === "title" ||
+          name === "description" ||
+          name === "headingTag"
+        ) {
+          // Handled separately
+          return;
+        }
+
+        if (
+          name === "size" ||
+          name === "as" ||
+          name === "aria-label" ||
+          name === "aria-labelledby"
+        ) {
+          listAttributes.push(attr);
+        } else {
+          divAttributes.push(attr);
+        }
+      });
 
       const newNodes = [];
 
@@ -180,12 +204,9 @@ export default function transformer(file: FileInfo, api: API) {
         j.jsxAttribute(j.jsxIdentifier("asChild")),
       ];
 
-      // Reconstruct List element to avoid printer issues with reused node
+      // Reconstruct List element
       const newList = j.jsxElement(
-        j.jsxOpeningElement(
-          j.jsxIdentifier(localListName),
-          path.node.openingElement.attributes,
-        ),
+        j.jsxOpeningElement(j.jsxIdentifier(localListName), listAttributes),
         path.node.closingElement,
         path.node.children,
       );
@@ -199,7 +220,7 @@ export default function transformer(file: FileInfo, api: API) {
 
       // Wrap in div
       const div = j.jsxElement(
-        j.jsxOpeningElement(j.jsxIdentifier("div")),
+        j.jsxOpeningElement(j.jsxIdentifier("div"), divAttributes),
         j.jsxClosingElement(j.jsxIdentifier("div")),
         newNodes,
       );
