@@ -1,17 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import {
-  ClockDashedIcon,
-  InboxDownIcon,
-  PaperplaneIcon,
-  PencilIcon,
-} from "@navikt/aksel-icons";
+import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Select } from "../form/select";
-import { Bleed } from "../layout/bleed";
-import { HStack, VStack } from "../layout/stack";
+import { VStack } from "../layout/stack";
 import { Table } from "../table";
-import { Tabs } from "../tabs";
 import {
   Dialog,
   DialogBody,
@@ -98,458 +91,260 @@ export const Default = {
   },
 };
 
-export const AllSubComponents: Story = {
+export const PositionCenter: Story = {
   render: () => (
-    <div>
-      <button onClick={() => alert("before")}>Before dialog</button>
-      <Dialog>
-        <DialogTrigger>Open Dialog</DialogTrigger>
-
-        <DialogPopup aria-labelledby="ha" position="center">
-          <DialogHeader>
-            <DialogTitle id="ha">Dialog Title</DialogTitle>
-            <DialogDescription>
-              This is a description of the dialog.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogBody>
-            This is the body of the dialog. Here is where the main content
-            lives. This is the body of the dialog. Here is where the main
-            content lives This is the body of the dialog. Here is where the main
-            content lives This is the body of the dialog. Here is where the main
-            content lives This lives. This is the body of the dialog. Here is
-            where the main content lives This is the body of the dialog. Here is
-            where the main content lives This is the body of the dialog. Here is
-            where the main content lives This is the body of the dialog. Here is
-            where the main content lives
-          </DialogBody>
-          <DialogFooter>
-            <DialogCloseTrigger>
-              <Button>Close</Button>
-            </DialogCloseTrigger>
-          </DialogFooter>
-        </DialogPopup>
-      </Dialog>
-      <button onClick={() => alert("after")}>after dialog</button>
-    </div>
-  ),
-};
-
-export const ComplexDrawer: Story = {
-  render: () => (
-    <div>
-      <button onClick={() => alert("before")}>Before dialog</button>
-      <Dialog defaultOpen>
-        <DialogTrigger>Open Dialog</DialogTrigger>
-        <Tabs defaultValue="logg">
-          <DialogPopup aria-labelledby="ha" position="right">
-            <DialogHeader>
-              <DialogTitle id="ha">Dialog Title</DialogTitle>
-              <DialogDescription>
-                This is a description of the dialog.
-              </DialogDescription>
-              <Bleed marginInline="space-20">
-                <Tabs.List>
-                  <Tabs.Tab
-                    value="logg"
-                    label="Logg"
-                    icon={<ClockDashedIcon aria-hidden />}
-                  />
-                  <Tabs.Tab
-                    value="inbox"
-                    label="Inbox"
-                    icon={<InboxDownIcon aria-hidden />}
-                  />
-                  <Tabs.Tab
-                    value="sendt"
-                    label="Sendt"
-                    icon={<PaperplaneIcon aria-hidden />}
-                  />
-                </Tabs.List>
-              </Bleed>
-            </DialogHeader>
-            <DialogBody asChild>
-              <Tabs.Panel value="logg">
-                This is the body of the dialog. Here is where the main content
-                lives. This is the body of the dialog. Here is where the main
-                content lives This is the body of the dialog. Here is where the
-                main content lives This is the body of the dialog. Here is where
-                the main content lives This lives. This is the body of the
-                dialog. Here is where the main content lives This is the body of
-                the dialog. Here is where the main content lives This is the
-                body of the dialog. Here is where the main content lives This is
-                the body of the dialog. Here is where the main content lives
-              </Tabs.Panel>
-            </DialogBody>
-            <DialogBody asChild>
-              <Tabs.Panel value="inbox">
-                where the main content lives This is the body of the dialog.
-                Here is where the main content lives This is the body of the
-                dialog. Here is where the main content lives
-              </Tabs.Panel>
-            </DialogBody>
-            <DialogBody asChild>
-              <Tabs.Panel value="sendt">
-                This is the body of the dialog. Here is where the main content
-                lives. This is the body of the dialog. Here is where the main
-                content lives This is the body of the dialog. Here is where the
-                main cont
-              </Tabs.Panel>
-            </DialogBody>
-            <DialogFooter>
-              <DialogCloseTrigger>
-                <Button>Close</Button>
-              </DialogCloseTrigger>
-            </DialogFooter>
-          </DialogPopup>
-        </Tabs>
-      </Dialog>
-      <button onClick={() => alert("after")}>after dialog</button>
-    </div>
-  ),
-};
-
-export const Position: Story = {
-  render: () => {
-    const [position, setPosition] =
-      useState<React.ComponentProps<typeof DialogPopup>["position"]>("bottom");
-
-    return (
-      <div>
-        <h2> {`Position: ${position}`}</h2>
-        <HStack gap="space-8" marginBlock="space-8">
-          <button onClick={() => setPosition("right")}>Right</button>
-          <button onClick={() => setPosition("left")}>Left</button>
-          <button onClick={() => setPosition("bottom")}>bottom</button>
-          <button onClick={() => setPosition("center")}>center</button>
-          <button onClick={() => setPosition("fullscreen")}>fullscreen</button>
-        </HStack>
-        <Dialog defaultOpen>
-          <DialogTrigger>Open Dialog</DialogTrigger>
-
-          <DialogPopup aria-labelledby="ha" position={position}>
-            <DialogHeader>
-              <DialogTitle id="ha">Dialog Title</DialogTitle>
-              <DialogDescription>
-                This is a description of the dialog.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogBody>
-              This is the body of the dialog. Here is where the main content
-              lives. This is the body of the dialog. Here is where the main
-              content lives This is the body of the dialog. Here is where the
-              main content lives This is the body of the dialog. Here is where
-              the main content lives This lives. This is the body of the dialog.
-              Here is where the main content lives This is the body of the
-              dialog. Here is where the main content lives This is the body of
-              the dialog. Here is where the main content lives This is the body
-              of the dialog. Here is where the main content lives
-            </DialogBody>
-            <DialogFooter>
-              <DialogCloseTrigger>
-                <Button>Close</Button>
-              </DialogCloseTrigger>
-            </DialogFooter>
-          </DialogPopup>
-        </Dialog>
-      </div>
-    );
-  },
-};
-
-export const DemoDefaultFocusDialog: Story = {
-  render: () => (
-    <div>
-      <button onClick={() => alert("before")}>Before dialog focus-trap</button>
-      <Dialog>
-        <DialogTrigger>Open Dialog</DialogTrigger>
-        <DialogPopup aria-labelledby="ha">
-          <h1 id="ha">Headingtekst som er h1</h1>
+    <Dialog defaultOpen>
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogPopup position="center">
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quas
+          debitis ad soluta excepturi reprehenderit veritatis aut nesciunt,
+          alias adipisci deserunt laudantium asperiores repellat voluptatum vero
+          aliquam eius accusantium consectetur.
+        </DialogBody>
+        <DialogFooter>
           <DialogCloseTrigger>
             <Button>Close</Button>
           </DialogCloseTrigger>
-          <p>
-            Dette er vanlig innhold i en dialog. Innholdet kommer etter en
-            tittel (h1) og en lukkeknapp. Etter dette innholdet kommer en annen
-            knapp som ikke gjør noe, men er der for å teste fokushåndtering.
-          </p>
-          <button>Knapp for fokushåndtering</button>
-          <p>Og enda mer tekst for å fylle opp dialogen. Lorem ipsum ...</p>
-        </DialogPopup>
-      </Dialog>
-      <button onClick={() => alert("after")}>after dialog focus-trap</button>
-    </div>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
   ),
-};
-
-export const DemoCloseButtonFocusDialog: Story = {
-  render: () => {
-    const closeRef = React.useRef<HTMLButtonElement>(null);
-    return (
-      <div>
-        <button onClick={() => alert("before")}>
-          Before dialog focus-trap
-        </button>
-        <Dialog>
-          <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogPopup aria-labelledby="ha" initialFocus={closeRef}>
-            <h1 id="ha">Headingtekst som er h1</h1>
-            <DialogCloseTrigger ref={closeRef}>
-              <Button>Close</Button>
-            </DialogCloseTrigger>
-            <p>
-              Denne skiller seg litt ut da autofokus var satt på lukkeknappen
-              som er etter heading. Dette er vanlig innhold i en dialog.
-              Innholdet kommer etter en tittel (h1) og en lukkeknapp. Etter
-              dette innholdet kommer en annen knapp som ikke gjør noe, men er
-              der for å teste fokushåndtering.
-            </p>
-            <button>Knapp for fokushåndtering</button>
-            <p>Og enda mer tekst for å fylle opp dialogen. Lorem ipsum ...</p>
-          </DialogPopup>
-        </Dialog>
-        <button onClick={() => alert("after")}>after dialog focus-trap</button>
-      </div>
-    );
+  parameters: {
+    chromatic: {
+      modes: {
+        mobile: {
+          viewport: {
+            width: 400,
+            height: 400,
+          },
+        },
+        desktop: {
+          viewport: {
+            width: 1024,
+            height: 600,
+          },
+        },
+      },
+      disable: false,
+    },
   },
 };
 
-export const NestedDrawers: Story = {
-  render: () => {
-    const [position, setPosition] =
-      useState<React.ComponentProps<typeof DialogPopup>["position"]>("center");
-
-    return (
-      <div>
-        <h2> {`Position: ${position}`}</h2>
-        <HStack gap="space-8" marginBlock="space-8">
-          <button onClick={() => setPosition("right")}>Right</button>
-          <button onClick={() => setPosition("left")}>Left</button>
-          <button onClick={() => setPosition("bottom")}>bottom</button>
-          <button onClick={() => setPosition("center")}>center</button>
-          <button onClick={() => setPosition("fullscreen")}>fullscreen</button>
-        </HStack>
-        <Dialog defaultOpen>
-          <DialogTrigger>Open Dialog</DialogTrigger>
-
-          <DialogPopup position={position}>
-            <DialogHeader>
-              <DialogTitle id="ha">Dialog Title</DialogTitle>
-              <DialogDescription>
-                This is a description of the dialog.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogBody>
-              This is the body of the dialog. Here is where the main content
-              lives. This is the body of the dialog. Here is where the main
-              content lives This is the body of the dialog. Here is where the
-              main content lives This is the body of the dialog. Here is where
-              the main content lives This lives. This is the body of the dialog.
-              Here is where the main content lives This is the body of the
-              dialog. Here is where the main content lives This is the body of
-              the dialog. Here is where the main content lives This is the body
-              of the dialog. Here is where the main content lives
-            </DialogBody>
-            <DialogFooter>
-              <DialogCloseTrigger>
-                <Button>Close</Button>
-              </DialogCloseTrigger>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button>Open nested</Button>
-                </DialogTrigger>
-
-                <DialogPopup position={position} modal="trap-focus">
-                  <DialogHeader>
-                    <DialogTitle id="ha">LEVEL 2</DialogTitle>
-                  </DialogHeader>
-                  <DialogBody>
-                    This is the body of the dialog. Here is where the main
-                    content lives. This i
-                  </DialogBody>
-                  <DialogFooter>
-                    <DialogCloseTrigger>
-                      <Button>Close</Button>
-                    </DialogCloseTrigger>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button>Open nested</Button>
-                      </DialogTrigger>
-
-                      <DialogPopup position={position}>
-                        <DialogHeader>
-                          <DialogTitle id="ha">NESTED</DialogTitle>
-                        </DialogHeader>
-                        <DialogBody>
-                          This is the body of the dialog. Here is where the This
-                          is the body of the dialog. Here is where the main
-                          content lives. This iThis is the body of the dialog.
-                          Here is where the main content lives. This i main
-                          content lives. This i
-                        </DialogBody>
-                        <DialogFooter>
-                          <DialogCloseTrigger>
-                            <Button>Close</Button>
-                          </DialogCloseTrigger>
-                        </DialogFooter>
-                      </DialogPopup>
-                    </Dialog>
-                  </DialogFooter>
-                </DialogPopup>
-              </Dialog>
-            </DialogFooter>
-          </DialogPopup>
-        </Dialog>
-      </div>
-    );
-  },
-};
-
-/**
- * We need to know that closing without trigger autofocuses the right element on close
- */
-export const NonTriggerImplementation: Story = {
-  render: () => {
-    const [open, setOpen] = useState(false);
-
-    return (
-      <div>
-        <button onClick={() => alert("before")}>Before dialog</button>
-        <button id="trigger" onClick={() => setOpen((x) => !x)}>
-          Toggle drawer
-        </button>
-        <Dialog open={open} onOpenChange={(x) => setOpen(x)}>
-          <DialogPopup>
-            Drawer content
-            <DialogCloseTrigger>
-              <Button>Close</Button>
-            </DialogCloseTrigger>
-          </DialogPopup>
-        </Dialog>
-        <button onClick={() => alert("after")}>after dialog</button>
-      </div>
-    );
-  },
-};
-
-export const DomOrder: Story = {
-  render: () => {
-    return (
-      <div>
-        <Dialog defaultOpen>
-          <DialogPopup position="left">
-            First behind First behind First behind First behind First behind
-            First behind First behind First behind First behind First behind
-            First behind First behind First behind First behind First behind
-            First behind First behind First behind First behind First behind
-            First behind
-            <Dialog defaultOpen>
-              <DialogPopup position="right">
-                First-nested
-                <DialogCloseTrigger>
-                  <Button>Close first nested</Button>
-                </DialogCloseTrigger>
-              </DialogPopup>
-            </Dialog>
-            <DialogCloseTrigger>
-              <Button>Close</Button>
-            </DialogCloseTrigger>
-          </DialogPopup>
-        </Dialog>
-        <Dialog defaultOpen>
-          <DialogPopup position="bottom">
-            thrid behind thrid behind thrid behind thrid behind thrid behind
-            thrid behind thrid behind thrid behind thrid behind thrid behind
-            thrid behind thrid behind thrid behind thrid behind thrid behind
-            thrid behind thrid behind thrid behind thrid behind thrid behind
-            thrid behind
-            <DialogCloseTrigger>
-              <Button>Close</Button>
-            </DialogCloseTrigger>
-          </DialogPopup>
-        </Dialog>
-      </div>
-    );
-  },
-};
-
-export const TrapFocusOutsideClick: Story = {
-  render: () => {
-    const [count, setCount] = useState(0);
-
-    return (
-      <div style={{ height: "150vh" }}>
-        <button id="counter" onClick={() => setCount((x) => x + 1)}>
-          Counter: {count}
-        </button>
-        <Dialog>
-          <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogPopup
-            modal="trap-focus"
-            closeOnOutsideClick={false}
-            withBackdrop={false}
-          >
-            Drawer content
-            <DialogCloseTrigger>
-              <Button>Close</Button>
-            </DialogCloseTrigger>
-          </DialogPopup>
-        </Dialog>
-      </div>
-    );
-  },
-};
-
-export const NestedTrapFocusOutsideClick: Story = {
-  render: () => {
-    const [count, setCount] = useState(0);
-
-    return (
-      <div style={{ height: "150vh" }}>
-        <button id="counter" onClick={() => setCount((x) => x + 1)}>
-          Counter: {count}
-        </button>
-        <Dialog>
-          <DialogTrigger>Open Dialog</DialogTrigger>
-
-          <DialogPopup modal="trap-focus" withBackdrop={false}>
-            <Dialog>
-              <DialogTrigger>Open Dialog2</DialogTrigger>
-
-              <DialogPopup modal="trap-focus" withBackdrop={false}>
-                Drawer content2
-                <DialogCloseTrigger>
-                  <Button>Close2</Button>
-                </DialogCloseTrigger>
-              </DialogPopup>
-            </Dialog>
-            <DialogCloseTrigger>
-              <Button>Close</Button>
-            </DialogCloseTrigger>
-          </DialogPopup>
-        </Dialog>
-      </div>
-    );
-  },
-};
-
-export const IgnoreOutsideClick: Story = {
+export const PositionRight: Story = {
   render: () => (
-    <div>
-      <button onClick={() => alert("before")}>Before dialog</button>
-      <Dialog>
-        <DialogTrigger>Open Dialog</DialogTrigger>
-
-        <DialogPopup closeOnOutsideClick={false}>
-          Drawer content
+    <Dialog defaultOpen>
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogPopup position="right">
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quas
+          debitis ad soluta excepturi reprehenderit veritatis aut nesciunt,
+          alias adipisci deserunt laudantium asperiores repellat voluptatum vero
+          aliquam eius accusantium consectetur.
+        </DialogBody>
+        <DialogFooter>
           <DialogCloseTrigger>
             <Button>Close</Button>
           </DialogCloseTrigger>
-        </DialogPopup>
-      </Dialog>
-      <button onClick={() => alert("after")}>after dialog</button>
-    </div>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
   ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
+export const PositionLeft: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogPopup position="left">
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quas
+          debitis ad soluta excepturi reprehenderit veritatis aut nesciunt,
+          alias adipisci deserunt laudantium asperiores repellat voluptatum vero
+          aliquam eius accusantium consectetur.
+        </DialogBody>
+        <DialogFooter>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
+export const PositionBottom: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogPopup position="bottom">
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quas
+          debitis ad soluta excepturi reprehenderit veritatis aut nesciunt,
+          alias adipisci deserunt laudantium asperiores repellat voluptatum vero
+          aliquam eius accusantium consectetur.
+        </DialogBody>
+        <DialogFooter>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
+export const PositionFullscreen: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogPopup position="fullscreen">
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quas
+          debitis ad soluta excepturi reprehenderit veritatis aut nesciunt,
+          alias adipisci deserunt laudantium asperiores repellat voluptatum vero
+          aliquam eius accusantium consectetur.
+        </DialogBody>
+        <DialogFooter>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
+export const NoBackdrop: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogPopup withBackdrop={false}>
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quas
+          debitis ad soluta excepturi reprehenderit veritatis aut nesciunt,
+          alias adipisci deserunt laudantium asperiores repellat voluptatum vero
+          aliquam eius accusantium consectetur.
+        </DialogBody>
+        <DialogFooter>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
+export const SizeSmall: Story = {
+  render: () => (
+    <Dialog defaultOpen size="small">
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogPopup>
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quas
+          debitis ad soluta excepturi reprehenderit veritatis aut nesciunt,
+          alias adipisci deserunt laudantium asperiores repellat voluptatum vero
+          aliquam eius accusantium consectetur.
+        </DialogBody>
+        <DialogFooter>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
+export const CustomWidthHeight: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogPopup width="300px" height="300px">
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quas
+          debitis ad soluta excepturi reprehenderit veritatis aut nesciunt,
+          alias adipisci deserunt laudantium asperiores repellat voluptatum vero
+          aliquam eius accusantium consectetur.
+        </DialogBody>
+        <DialogFooter>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };
 
 const TableData = [
