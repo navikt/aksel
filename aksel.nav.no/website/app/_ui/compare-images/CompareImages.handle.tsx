@@ -17,7 +17,6 @@ function CompareImagesHandle() {
       aria-orientation="horizontal"
       aria-valuemin={0}
       aria-valuemax={100}
-      /* Valuenow and valuetext are both updates manually in useCompareImages. */
       aria-valuenow={position}
       aria-valuetext={`${position}%`}
       data-rcs="handle-container"
