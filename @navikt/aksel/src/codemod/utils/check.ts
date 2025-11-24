@@ -102,8 +102,7 @@ export function checkMoveVariantToDataColor(
     const input = `import { ${config.component} } from "@navikt/ds-react";
 <${config.component} ${config.prop}="${variant}">Text</${config.component}>;`;
 
-    let outputAttrs = "";
-    outputAttrs += `data-color="${change.color}"`;
+    let outputAttrs = `data-color="${change.color}"`;
 
     if (change.replacement) {
       outputAttrs += ` ${config.prop}="${change.replacement}"`;
