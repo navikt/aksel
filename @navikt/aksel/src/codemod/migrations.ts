@@ -183,7 +183,7 @@ export const migrations: {
     },
     {
       description:
-        "Updates variant + data-color prop based on current variant-prop.",
+        "Updates variant + data-color props on ToggleGroup based on current variant prop.",
       value: "v8-toggle-group-variant",
       path: "v8.0.0/toggle-group-variant/toggle-group-variant",
       ignoredExtensions: CSS_EXTENSIONS,
