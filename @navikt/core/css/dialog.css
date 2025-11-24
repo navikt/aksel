@@ -1,16 +1,16 @@
-.aksel-dialog__popup {
-  --__axc-dialog-transform: ;
-  --__axc-dialog-p-b: var(--ax-space-16);
-  --__axc-dialog-p-i: var(--ax-space-20);
+.navds-dialog__popup {
+  --__ac-dialog-transform: ;
+  --__ac-dialog-p-b: var(--a-spacing-4);
+  --__ac-dialog-p-i: var(--a-spacing-5);
 
   position: fixed;
-  background-color: var(--ax-bg-raised);
+  background-color: var(--a-surface-default);
   transition: 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transition-property: transform, opacity, translate;
-  border-radius: var(--ax-radius-12);
-  color: var(--ax-text-neutral);
+  border-radius: var(--a-border-radius-large);
+  color: var(--a-text-default);
   flex-direction: column;
-  box-shadow: var(--ax-shadow-dialog);
+  box-shadow: var(--a-shadow-xlarge);
   display: grid;
   grid-template-areas:
     "header closebutton"
@@ -18,9 +18,9 @@
     "footer footer";
   grid-template-columns: 1fr auto;
   grid-template-rows: auto 1fr auto;
-  outline: 1px solid var(--ax-border-neutral-subtleA);
+  outline: 1px solid var(--a-border-subtle);
 
-  .light:not(:has(.dark)) .aksel-dialog__backdrop ~ & {
+  .light:not(:has(.dark)) .navds-dialog__backdrop ~ & {
     outline: none;
 
     &:focus {
@@ -29,15 +29,15 @@
   }
 
   &[data-size="small"] {
-    --__axc-dialog-p-b: var(--ax-space-12);
-    --__axc-dialog-p-i: var(--ax-space-16);
+    --__ac-dialog-p-b: var(--a-spacing-3);
+    --__ac-dialog-p-i: var(--a-spacing-4);
   }
 
   &[data-entering-style],
   &[data-exiting-style] {
     /* Webkit a11y delays detecting visible elements when opacity starts at 0 */
     opacity: 0.001;
-    transform: var(--__axc-dialog-transform);
+    transform: var(--__ac-dialog-transform);
   }
 
   &[data-exiting-style] {
@@ -62,23 +62,23 @@
     inset: 0;
     position: absolute;
     border-radius: inherit;
-    background-color: var(--ax-bg-overlay);
+    background-color: var(--a-surface-backdrop);
     opacity: 0;
     z-index: 1;
     pointer-events: none;
   }
 
   &[data-position="center"] {
-    --__axc-dialog-center-margin: 3rem;
-    --__axc-dialog-transform: scale(0.98);
+    --__ac-dialog-center-margin: 3rem;
+    --__ac-dialog-transform: scale(0.98);
 
     left: 0;
     right: 0;
     margin-inline: auto;
     top: 0;
     max-width: calc(100dvw - 3rem);
-    max-height: calc(90dvh - var(--__axc-dialog-center-margin));
-    margin-block: max(var(--__axc-dialog-center-margin), 10dvh) auto;
+    max-height: calc(90dvh - var(--__ac-dialog-center-margin));
+    margin-block: max(var(--__ac-dialog-center-margin), 10dvh) auto;
 
     &[data-nested="true"] {
       &[data-entering-style] {
@@ -100,7 +100,7 @@
     }
 
     @media (max-width: 479px) or (max-height: 479px) {
-      --__axc-dialog-transform: translateY(35%);
+      --__ac-dialog-transform: translateY(35%);
 
       max-height: calc(100dvh - max(16px, 10dvh));
       max-width: 100dvw;
@@ -132,7 +132,7 @@
   }
 
   &[data-position="right"] {
-    --__axc-dialog-transform: translateX(35%);
+    --__ac-dialog-transform: translateX(35%);
 
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -140,7 +140,7 @@
   }
 
   &[data-position="left"] {
-    --__axc-dialog-transform: translateX(-35%);
+    --__ac-dialog-transform: translateX(-35%);
 
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -148,7 +148,7 @@
   }
 
   &[data-position="bottom"] {
-    --__axc-dialog-transform: translateY(35%);
+    --__ac-dialog-transform: translateY(35%);
 
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -167,7 +167,7 @@
   }
 
   &[data-position="fullscreen"] {
-    --__axc-dialog-transform: scale(0.98);
+    --__ac-dialog-transform: scale(0.98);
 
     border-radius: 0;
     inset: 0;
@@ -178,11 +178,11 @@
   }
 }
 
-.aksel-dialog__backdrop {
+.navds-dialog__backdrop {
   position: fixed;
   min-height: 100dvh;
   inset: 0;
-  background-color: var(--ax-bg-overlay);
+  background-color: var(--a-surface-backdrop);
   transition: opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   /* iOS 26+: Ensure the backdrop covers the entire visible viewport. */
@@ -196,40 +196,40 @@
   }
 }
 
-.aksel-dialog__header {
+.navds-dialog__header {
   grid-area: header;
-  padding-block: var(--__axc-dialog-p-b);
-  padding-inline: var(--__axc-dialog-p-i);
+  padding-block: var(--__ac-dialog-p-b);
+  padding-inline: var(--__ac-dialog-p-i);
 }
 
-.aksel-dialog__title {
-  margin-block-end: var(--ax-space-4);
+.navds-dialog__title {
+  margin-block-end: var(--a-spacing-1);
 }
 
-.aksel-dialog__close-button {
+.navds-dialog__close-button {
   grid-area: closebutton;
-  margin-block-start: var(--__axc-dialog-p-b);
-  margin-inline-end: var(--__axc-dialog-p-i);
+  margin-block-start: var(--__ac-dialog-p-b);
+  margin-inline-end: var(--__ac-dialog-p-i);
   align-self: start;
 }
 
-.aksel-dialog__body {
+.navds-dialog__body {
   grid-area: body;
   overflow: auto;
-  padding-block: var(--__axc-dialog-p-b);
-  padding-inline: var(--__axc-dialog-p-i);
+  padding-block: var(--__ac-dialog-p-b);
+  padding-inline: var(--__ac-dialog-p-i);
 
-  .aksel-dialog__header ~ & {
+  .navds-dialog__header ~ & {
     padding-block-start: 0;
   }
 }
 
-.aksel-dialog__footer {
+.navds-dialog__footer {
   grid-area: footer;
   justify-content: flex-start;
   display: flex;
   flex-flow: wrap;
-  gap: var(--ax-space-8);
-  padding-block: var(--__axc-dialog-p-b);
-  padding-inline: var(--__axc-dialog-p-i);
+  gap: var(--a-spacing-2);
+  padding-block: var(--__ac-dialog-p-b);
+  padding-inline: var(--__ac-dialog-p-i);
 }
