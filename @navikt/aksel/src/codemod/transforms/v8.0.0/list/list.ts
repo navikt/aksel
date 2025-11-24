@@ -11,11 +11,13 @@ const headingSizeMap = {
 const bodySizeMap = {
   small: "small",
   medium: "medium",
+  large: "large",
 };
 
 const boxMarginMap = {
   small: "space-12",
   medium: "space-16",
+  large: "space-16",
 };
 
 export default function transformer(file: FileInfo, api: API) {
