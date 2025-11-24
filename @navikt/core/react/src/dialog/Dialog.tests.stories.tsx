@@ -325,7 +325,7 @@ export const FocusLock: Story = {
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
-    const closeButton = canvas.getByText("Close");
+    const closeButton = canvas.getByRole("button", { name: "Close" });
     const testButton = canvas.getByText("Focus test");
     await waitFor(() => expect(popup).toHaveFocus());
 
