@@ -7,7 +7,6 @@ const deprecationMap = {
   Accordion: ["headingSize"],
   Popover: ["arrow"],
   Page: ["background"],
-  List: ["title", "description", "headingTag"],
 };
 
 export default function transformer(file: FileInfo, api: API) {
