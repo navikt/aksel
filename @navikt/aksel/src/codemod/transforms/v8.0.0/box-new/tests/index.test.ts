@@ -10,7 +10,7 @@ const fixtures = [
   "idempotent",
   "comments",
   "alias-with-existing-box",
-  "alias-with-existing-box2",
+  "alias-with-existing-box-2",
 ];
 
 for (const fixture of fixtures) {
