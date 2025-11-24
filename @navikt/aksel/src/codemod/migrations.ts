@@ -197,7 +197,7 @@ export const migrations: {
     },
     {
       description:
-        "Updates variant + data-color prop based on current variant-prop.",
+        "Updates variant + data-color props on Chips based on current variant prop.",
       value: "v8-chips-variant",
       path: "v8.0.0/chips-variant/chips-variant",
       ignoredExtensions: CSS_EXTENSIONS,
