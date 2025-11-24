@@ -22,6 +22,83 @@ To get started:
 npx @navikt/aksel codemod --help
 ```
 
+### v8
+
+#### Box
+
+`npx @navikt/aksel codemod v8-box ...`
+
+Updates Box with legacy-tokens to Box using the new token system.
+
+```diff
+-<Box background="bg-subtle" borderColor="border-alt-1">
++<Box background="bg-neutral-soft" borderColor="border-meta-purple">
+```
+
+#### BoxNew
+
+`npx @navikt/aksel codemod v8-box-new ...`
+
+Renames already migrated BoxNew/Box.New instances to Box.
+
+```diff
+-<BoxNew>
++<Box>
+```
+
+#### Prop deprecate
+
+`npx @navikt/aksel codemod v8-prop-deprecate ...`
+
+Removes deprecated props from components.
+
+```diff
+-<Accordion headingSize="large">
++<Accordion>
+
+-<Popover arrow>
++<Popover>
+
+-<Page background="bg-subtle">
++<Page>
+```
+
+#### List
+
+`npx @navikt/aksel codemod v8-list ...`
+
+Tries to migrate List component moving 'title' and 'description' props to 'Heading' and 'BodyShort'.
+
+#### Variants
+
+`npx @navikt/aksel codemod v8-tag-variant ...`
+`npx @navikt/aksel codemod v8-toggle-group-variant ...`
+`npx @navikt/aksel codemod v8-accordion-variant ...`
+`npx @navikt/aksel codemod v8-chips-variant ...`
+
+Updates variant + data-color props based on current variant prop.
+
+```diff
+-<Tag variant="info">
++<Tag variant="outline" data-color="info">
+```
+
+### v6
+
+#### Chat
+
+`npx @navikt/aksel codemod v6-chat ...`
+
+Removes `backgroundColor` and `avatarBgColor` properties from `Chat` and `Chat.Bubble`.
+
+```diff
+-<Chat backgroundColor="red" avatarBgColor="blue">
++<Chat>
+-  <Chat.Bubble backgroundColor="red" />
++  <Chat.Bubble />
+</Chat>
+```
+
 ### v4
 
 In v4, we moved all the components from `@navikt/ds-react-internal` to `@navikt/ds-react`. This means that you will need to update all your imports to the new package. As a part of this, Header was renamed to `InternalHeader` and all the CSS-classes was renamed to use `navds` as a prefix instead of `navdsi`.
