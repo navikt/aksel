@@ -21,6 +21,13 @@ type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement> &
  * @see 🏷️ {@link DialogHeaderProps}
  * @example
  * ```jsx
+ *  <Dialog>
+ *    <Dialog.Popup>
+ *      <Dialog.Header>
+ *        <Dialog.Title>Dialog title</Dialog.Title>
+ *      </Dialog.Header>
+ *    </Dialog.Popup>
+ *  </Dialog>
  * ```
  */
 const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(

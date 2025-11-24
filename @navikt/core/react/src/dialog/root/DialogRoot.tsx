@@ -3,6 +3,14 @@ import { useId } from "../../util";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { useTransitionStatus } from "../../util/hooks/useTransitionStatus";
+import { DialogBody } from "../body/DialogBody";
+import { DialogCloseTrigger } from "../close-trigger/DialogCloseTrigger";
+import { DialogDescription } from "../description/DialogDescription";
+import { DialogFooter } from "../footer/DialogFooter";
+import { DialogHeader } from "../header/DialogHeader";
+import { DialogPopup } from "../popup/DialogPopup";
+import { DialogTitle } from "../title/DialogTitle";
+import { DialogTrigger } from "../trigger/DialogTrigger";
 import { DialogContextProvider, useDialogContext } from "./DialogRoot.context";
 
 interface DialogProps {
@@ -33,15 +41,154 @@ interface DialogProps {
   size?: "medium" | "small";
 }
 
+interface DialogComponent extends React.FC<DialogProps> {
+  /**
+   * @see 🏷️ {@link DialogTriggerProps}
+   * @example
+   * ```jsx
+   *  <Dialog>
+   *    <Dialog.Trigger>
+   *      <Button>Open dialog</Button>
+   *    </Dialog.Trigger>
+   *  </Dialog>
+   * ```
+   */
+  Trigger: typeof DialogTrigger;
+  /**
+   * @see 🏷️ {@link DialogCloseTriggerProps}
+   * @example
+   * ```jsx
+   *  <Dialog>
+   *    <Dialog.Popup>
+   *      <Dialog.CloseTrigger>
+   *        <Button>Close dialog</Button>
+   *      </Dialog.CloseTrigger>
+   *    </Dialog.Popup>
+   *  </Dialog>
+   * ```
+   */
+  CloseTrigger: typeof DialogCloseTrigger;
+  /**
+   * @see 🏷️ {@link DialogPopupProps}
+   * @example
+   * ```jsx
+   *  <Dialog>
+   *    <Dialog.Popup>
+   *      ...
+   *    </Dialog.Popup>
+   *  </Dialog>
+   * ```
+   */
+  Popup: typeof DialogPopup;
+
+  /**
+   * @see 🏷️ {@link DialogHeaderProps}
+   * @example
+   * ```jsx
+   *  <Dialog>
+   *    <Dialog.Popup>
+   *      <Dialog.Header>
+   *        <Dialog.Title>Dialog title</Dialog.Title>
+   *      </Dialog.Header>
+   *    </Dialog.Popup>
+   *  </Dialog>
+   * ```
+   */
+  Header: typeof DialogHeader;
+
+  /**
+   * Title component for GlobalAlert. Remember to use correct heading-level with the `as` prop.
+   * @see 🏷️ {@link DialogTitleProps}
+   * @example
+   * ```jsx
+   *  <Dialog>
+   *    <Dialog.Popup>
+   *      <Dialog.Header>
+   *        <Dialog.Title>Dialog title</Dialog.Title>
+   *      </Dialog.Header>
+   *    </Dialog.Popup>
+   *  </Dialog>
+   * ```
+   */
+  Title: typeof DialogTitle;
+
+  /**
+   * @see 🏷️ {@link DialogDescriptionProps}
+   * @example
+   * ```jsx
+   *  <Dialog>
+   *    <Dialog.Popup>
+   *      <Dialog.Header>
+   *        <Dialog.Title>Dialog title</Dialog.Title>
+   *        <Dialog.Description>Dialog description</Dialog.Description>
+   *      </Dialog.Header>
+   *    </Dialog.Popup>
+   *  </Dialog>
+   * ```
+   */
+  Description: typeof DialogDescription;
+
+  /**
+   * @see 🏷️ {@link DialogBodyProps}
+   * @example
+   * ```jsx
+   *  <Dialog>
+   *    <Dialog.Popup>
+   *      <Dialog.Body>
+   *        Dialog body content
+   *      </Dialog.Body>
+   *    </Dialog.Popup>
+   *  </Dialog>
+   * ```
+   */
+  Body: typeof DialogBody;
+
+  /**
+   * @see 🏷️ {@link DialogFooterProps}
+   * @example
+   * ```jsx
+   *  <Dialog>
+   *    <Dialog.Popup>
+   *      <Dialog.Footer>
+   *        <Dialog.CloseTrigger>
+   *          <Button>Close dialog</Button>
+   *        </Dialog.CloseTrigger>
+   *      </Dialog.Footer>
+   *    </Dialog.Popup>
+   *  </Dialog>
+   * ```
+   */
+  Footer: typeof DialogFooter;
+}
+
 /**
  * ..
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/dialog)
  * @see 🏷️ {@link DialogProps}
  * @example
  * ```jsx
+ *  <Dialog>
+ *    <Dialog.Trigger>
+ *      <Button>Open dialog</Button>
+ *    </Dialog.Trigger>
+ *    <Dialog.Popup>
+ *      <Dialog.Header>
+ *        <Dialog.Title>Dialog title</Dialog.Title>
+ *        <Dialog.Description>Dialog description</Dialog.Description>
+ *      </Dialog.Header>
+ *      <Dialog.Body>
+ *        Dialog body content
+ *      </Dialog.Body>
+ *      <Dialog.Footer>
+ *.       <Dialog.CloseTrigger>
+ *.         <Button>Close dialog</Button>
+ *.       </Dialog.CloseTrigger>
+ *      </Dialog.Footer>
+ *    </Dialog.Popup>
+ *  </Dialog>
  * ```
  */
-const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
+const Dialog: DialogComponent = (props: DialogProps) => {
   const {
     children,
     defaultOpen = false,
@@ -136,6 +283,15 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     </DialogContextProvider>
   );
 };
+
+Dialog.Trigger = DialogTrigger;
+Dialog.CloseTrigger = DialogCloseTrigger;
+Dialog.Header = DialogHeader;
+Dialog.Title = DialogTitle;
+Dialog.Description = DialogDescription;
+Dialog.Body = DialogBody;
+Dialog.Footer = DialogFooter;
+Dialog.Popup = DialogPopup;
 
 export { Dialog };
 export type { DialogProps };

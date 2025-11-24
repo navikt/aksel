@@ -12,6 +12,11 @@ type DialogTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
  * @see 🏷️ {@link DialogTriggerProps}
  * @example
  * ```jsx
+ *  <Dialog>
+ *    <Dialog.Trigger>
+ *      <Button>Open dialog</Button>
+ *    </Dialog.Trigger>
+ *  </Dialog>
  * ```
  */
 const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(

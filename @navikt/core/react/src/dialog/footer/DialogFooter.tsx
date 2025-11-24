@@ -9,6 +9,15 @@ type DialogFooterProps = React.HTMLAttributes<HTMLDivElement> & AsChild;
  * @see 🏷️ {@link DialogFooterProps}
  * @example
  * ```jsx
+ *  <Dialog>
+ *    <Dialog.Popup>
+ *      <Dialog.Footer>
+ *        <Dialog.CloseTrigger>
+ *          <Button>Close dialog</Button>
+ *        </Dialog.CloseTrigger>
+ *      </Dialog.Footer>
+ *    </Dialog.Popup>
+ *  </Dialog>
  * ```
  */
 const DialogFooter = forwardRef<HTMLDivElement, DialogFooterProps>(

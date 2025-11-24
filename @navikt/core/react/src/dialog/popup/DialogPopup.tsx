@@ -16,6 +16,11 @@ type DialogPopupProps = DialogPopupInternalProps &
  * @see 🏷️ {@link DialogPopupProps}
  * @example
  * ```jsx
+ *  <Dialog>
+ *    <Dialog.Popup>
+ *      ...
+ *    </Dialog.Popup>
+ *  </Dialog>
  * ```
  */
 const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(

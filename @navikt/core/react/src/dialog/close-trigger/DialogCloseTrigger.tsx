@@ -12,6 +12,13 @@ interface DialogCloseTriggerProps
  * @see 🏷️ {@link DialogCloseTriggerProps}
  * @example
  * ```jsx
+ *  <Dialog>
+ *    <Dialog.Popup>
+ *      <Dialog.CloseTrigger>
+ *        <Button>Close dialog</Button>
+ *      </Dialog.CloseTrigger>
+ *    </Dialog.Popup>
+ *  </Dialog>
  * ```
  */
 const DialogCloseTrigger = forwardRef<

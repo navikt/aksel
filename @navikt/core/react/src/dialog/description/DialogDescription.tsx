@@ -9,6 +9,14 @@ type DialogDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
  * @see 🏷️ {@link DialogDescriptionProps}
  * @example
  * ```jsx
+ *  <Dialog>
+ *    <Dialog.Popup>
+ *      <Dialog.Header>
+ *        <Dialog.Title>Dialog title</Dialog.Title>
+ *        <Dialog.Description>Dialog description</Dialog.Description>
+ *      </Dialog.Header>
+ *    </Dialog.Popup>
+ *  </Dialog>
  * ```
  */
 const DialogDescription = forwardRef<

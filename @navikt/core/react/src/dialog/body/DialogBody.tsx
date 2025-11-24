@@ -9,6 +9,13 @@ type DialogBodyProps = React.HTMLAttributes<HTMLDivElement> & AsChild;
  * @see 🏷️ {@link DialogBodyProps}
  * @example
  * ```jsx
+ *  <Dialog>
+ *    <Dialog.Popup>
+ *      <Dialog.Body>
+ *        Dialog body content
+ *      </Dialog.Body>
+ *    </Dialog.Popup>
+ *  </Dialog>
  * ```
  */
 const DialogBody = forwardRef<HTMLDivElement, DialogBodyProps>(
