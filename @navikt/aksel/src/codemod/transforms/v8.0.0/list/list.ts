@@ -1,4 +1,11 @@
-import type { API, FileInfo, JSXAttribute } from "jscodeshift";
+import type {
+  API,
+  ASTPath,
+  FileInfo,
+  ImportDeclaration,
+  JSXAttribute,
+  JSXSpreadAttribute,
+} from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
 const headingSizeMap = {
@@ -25,7 +32,7 @@ export default function transformer(file: FileInfo, api: API) {
 
   let localListName = "List";
   let hasListImport = false;
-  let listImportPath: any = null;
+  let listImportPath: ASTPath<ImportDeclaration> = null;
 
   // Find the local name for List import
   root.find(j.ImportDeclaration).forEach((path) => {
@@ -95,8 +102,8 @@ export default function transformer(file: FileInfo, api: API) {
       }
 
       // Separate attributes
-      const listAttributes: any[] = [];
-      const divAttributes: any[] = [];
+      const listAttributes: JSXAttribute[] = [];
+      const divAttributes: (JSXSpreadAttribute | JSXAttribute)[] = [];
 
       attributes.forEach((attr) => {
         if (attr.type !== "JSXAttribute") {
@@ -231,8 +238,9 @@ export default function transformer(file: FileInfo, api: API) {
   // Add imports
   if (newImports.size > 0 && listImportPath) {
     const existingSpecifiers = new Set(
-      listImportPath.node.specifiers?.map((s: any) => s.local?.name),
+      listImportPath.node.specifiers?.map((specifier) => specifier.local?.name),
     );
+
     newImports.forEach((imp) => {
       if (!existingSpecifiers.has(imp)) {
         listImportPath.node.specifiers?.push(
