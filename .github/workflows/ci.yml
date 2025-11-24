@@ -78,4 +78,4 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Test UI
-        run: yarn storybook:test --reporter=verbose --max-workers=2
+        run: yarn storybook:test --max-workers=2
