@@ -16,6 +16,15 @@ const options: docgen.ParserOptions = {
     if (prop.parent?.fileName.includes("/node_modules/@types/react/")) {
       return false;
     }
+
+    /**
+     * Filter out all HTML attributes inherited from React.HTMLAttributes
+     * className is handled separately above
+     */
+    if (prop.parent?.name === "HTMLAttributes") {
+      return false;
+    }
+
     return true;
   },
 };
