@@ -128,10 +128,6 @@ const DialogPopupInternal = forwardRef<
       referenceElement: popupElement,
     });
 
-    /**
-     * On mount, popupRef is not defined in root, so we need to
-     * run hook here as well as root to ensure animations are tracked correctly
-     */
     useOpenChangeAnimationComplete({
       open,
       ref: popupRef,
@@ -155,7 +151,7 @@ const DialogPopupInternal = forwardRef<
       }
 
       if (triggerElement?.checkVisibility()) {
-        return triggerElement ?? true;
+        return triggerElement;
       }
 
       return true;

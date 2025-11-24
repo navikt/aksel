@@ -11,7 +11,7 @@ interface DialogContextProps {
    */
   setOpen: (open: boolean, originalEvent: Event) => void;
   /**
-   *
+   * Setter for whether the dialog is mounted.
    */
   setMounted: React.Dispatch<React.SetStateAction<boolean>>;
   /**
