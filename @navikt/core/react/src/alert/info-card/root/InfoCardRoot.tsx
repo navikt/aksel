@@ -10,7 +10,10 @@ import {
 } from "../header/InfoCardHeader";
 import { InfoCardTitle, type InfoCardTitleProps } from "../title/InfoCardTitle";
 
-type InfoCardProps = Omit<BaseAlert.RootProps, "type" | "global" | "status"> & {
+type InfoCardProps = Omit<
+  BaseAlert.RootProps,
+  "type" | "global" | "status" | "as"
+> & {
   /**
    * Changes the HTML element used for the root element.
    *

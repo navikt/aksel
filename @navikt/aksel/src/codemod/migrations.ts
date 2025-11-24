@@ -152,20 +152,61 @@ export const migrations: {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  darkside: [
+  "v8.0.0": [
     {
-      description: "marks deprecated prop usage with comments.",
-      value: "prop-deprecate",
-      path: "darkside/prop-deprecate/prop-deprecate",
+      description:
+        "Updates Box with legacy-tokens to Box using the new token system, and renames already migrated BoxNew/Box.New instances to Box.",
+      value: "v8-box",
+      path: "v8.0.0/box/box",
+      warning:
+        "Remember to check if 'TODO: Aksel Box migration'-comment was added to any files after migration. This comment will help you find and update Box-instances we couldn't update for you.",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description: "Renames already migrated BoxNew/Box.New instances to Box.",
+      value: "v8-box-new",
+      path: "v8.0.0/box-new/box-new",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description: "Removes deprecated props from components.",
+      value: "v8-prop-deprecate",
+      path: "v8.0.0/prop-deprecate/prop-deprecate",
       ignoredExtensions: CSS_EXTENSIONS,
     },
     {
       description:
-        "Update Box to to BoxNew (future Box) using the new token system",
-      value: "box-to-boxnew",
-      path: "darkside/box-to-boxnew/box-to-boxnew",
-      warning:
-        "Remember to check if 'aksel box migration'-comment were added to any files after migration. This comment will help you find and update Box-instances where we could not resolve the update for you.",
+        "Updates variant + data-color props on Tag based on current variant prop.",
+      value: "v8-tag-variant",
+      path: "v8.0.0/tag-variant/tag-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on ToggleGroup based on current variant prop.",
+      value: "v8-toggle-group-variant",
+      path: "v8.0.0/toggle-group-variant/toggle-group-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on Accordion based on current variant prop.",
+      value: "v8-accordion-variant",
+      path: "v8.0.0/accordion-variant/accordion-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on Chips based on current variant prop.",
+      value: "v8-chips-variant",
+      path: "v8.0.0/chips-variant/chips-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Tries to migrate List component moving 'title' and 'description' props to 'Heading' and 'BodyShort'.",
+      value: "v8-list",
+      path: "v8.0.0/list/list",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],

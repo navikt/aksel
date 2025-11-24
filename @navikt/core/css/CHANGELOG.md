@@ -1,5 +1,21 @@
 # @navikt/ds-css
 
+## 7.34.0
+
+### Minor Changes
+
+- LocalAlert: :tada: New component replacing regular `<Alert />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- GlobalAlert: :tada: New component replacing `<Alert fullWidth>`, now with built-in centering of content. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InlineMessage: :tada: New component replacing `<Alert inline />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InfoCard: :tada: New component replacing `<Alert variant="info" />`. Used for content you want to highlight. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+### Patch Changes
+
+- Tooltip: Update z-index to max int. ([#4309](https://github.com/navikt/aksel/pull/4309))
+
 ## 7.33.5
 
 ### Patch Changes

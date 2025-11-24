@@ -24,7 +24,7 @@ jobs:
       REGISTRY: ghcr.io
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 1
 
@@ -74,7 +74,7 @@ jobs:
         shardTotal: [5]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 1
 
