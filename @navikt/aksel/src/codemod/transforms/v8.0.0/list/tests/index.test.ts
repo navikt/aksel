@@ -10,6 +10,7 @@ const fixtures = [
   "existing-imports",
   "direct",
   "idempotent",
+  "only-margin",
 ];
 
 for (const fixture of fixtures) {

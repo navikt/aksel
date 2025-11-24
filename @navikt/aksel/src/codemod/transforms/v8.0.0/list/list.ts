@@ -110,10 +110,6 @@ export default function transformer(file: FileInfo, api: API) {
         return;
       }
 
-      if (!titleAttr && !descAttr) {
-        return;
-      }
-
       const headingTagAttr = attributes.find(
         (attr) =>
           attr.type === "JSXAttribute" && attr.name.name === "headingTag",
@@ -266,13 +262,17 @@ export default function transformer(file: FileInfo, api: API) {
       newNodes.push(box);
 
       // Wrap in div
-      const div = j.jsxElement(
-        j.jsxOpeningElement(j.jsxIdentifier("div"), divAttributes),
-        j.jsxClosingElement(j.jsxIdentifier("div")),
-        newNodes,
-      );
+      if (newNodes.length === 1 && divAttributes.length === 0) {
+        j(path).replaceWith(newNodes[0]);
+      } else {
+        const div = j.jsxElement(
+          j.jsxOpeningElement(j.jsxIdentifier("div"), divAttributes),
+          j.jsxClosingElement(j.jsxIdentifier("div")),
+          newNodes,
+        );
 
-      j(path).replaceWith(div);
+        j(path).replaceWith(div);
+      }
     });
 
   // Add imports
