@@ -22,7 +22,7 @@ export default function transformer(file: FileInfo, api: API) {
       path.value.name.type === "JSXIdentifier" &&
       path.value.name.name === "BoxNew"
     ) {
-      path.value.name.name = "Box";
+      path.value.name.name = boxLocalName;
     }
     // Rename <Box.New ...> to <Box ...>
     if (
@@ -40,7 +40,7 @@ export default function transformer(file: FileInfo, api: API) {
       path.value.name.type === "JSXIdentifier" &&
       path.value.name.name === "BoxNew"
     ) {
-      path.value.name.name = "Box";
+      path.value.name.name = boxLocalName;
     }
     if (
       path.value.name.type === "JSXMemberExpression" &&
