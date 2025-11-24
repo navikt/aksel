@@ -9557,7 +9557,7 @@ __metadata:
     react: "npm:^18.0.0"
     react-dom: "npm:^18.0.0"
     typescript: "npm:5.9.3"
-    vite: "npm:^7.1.12"
+    vite: "npm:^7.2.4"
     vite-plugin-singlefile: "npm:^2.2.0"
     vite-plugin-svgr: "npm:^4.2.0"
   languageName: unknown
@@ -9623,7 +9623,7 @@ __metadata:
     tsx: "npm:^4.20.6"
     typescript: "npm:5.9.3"
     typescript-eslint: "npm:^8.39.0"
-    vite: "npm:^7.1.12"
+    vite: "npm:^7.2.4"
     vite-plugin-turbosnap: "npm:^1.0.3"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^3.2.4"
@@ -27003,6 +27003,61 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10/34482c3698a6e10986036caa91c0114fc59f5a4bdda571d19b863a44a8b231dda09b0e3c63eb459e3b27ce453e695bce476f504b160451706563ce97e841ac5a
+  languageName: node
+  linkType: hard
+
+"vite@npm:^7.2.4":
+  version: 7.2.4
+  resolution: "vite@npm:7.2.4"
+  dependencies:
+    esbuild: "npm:^0.25.0"
+    fdir: "npm:^6.5.0"
+    fsevents: "npm:~2.3.3"
+    picomatch: "npm:^4.0.3"
+    postcss: "npm:^8.5.6"
+    rollup: "npm:^4.43.0"
+    tinyglobby: "npm:^0.2.15"
+  peerDependencies:
+    "@types/node": ^20.19.0 || >=22.12.0
+    jiti: ">=1.21.0"
+    less: ^4.0.0
+    lightningcss: ^1.21.0
+    sass: ^1.70.0
+    sass-embedded: ^1.70.0
+    stylus: ">=0.54.8"
+    sugarss: ^5.0.0
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10/25962e65159e62fa6b643ac5bc79457c61c9b2cec9a1a17763b067b1e5ecac6483ad84247d6d457d81e25c5d1f8c553372bedf71dee09d8c1bd41af6c7b016a5
   languageName: node
   linkType: hard
 
