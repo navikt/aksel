@@ -3,6 +3,7 @@ import type {
   FileInfo,
   JSXAttribute,
   JSXExpressionContainer,
+  Literal,
 } from "jscodeshift";
 import { getLineTerminator } from "./lineterminator";
 
@@ -94,7 +95,7 @@ export function moveVariantToDataColor(
 
         // Handle variant prop update or removal
         if (changeConfig.replacement) {
-          let newValue;
+          let newValue: JSXExpressionContainer | Literal;
           if (originalAttr.value?.type === "JSXExpressionContainer") {
             newValue = j.jsxExpressionContainer(
               j.literal(changeConfig.replacement),
