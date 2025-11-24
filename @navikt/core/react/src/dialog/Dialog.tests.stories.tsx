@@ -665,7 +665,6 @@ export const CloseButtonDisabledSlot: Story = {
       onOpenChange: fn(),
     },
     closeButtonProps: {
-      asChild: true,
       children: (
         <Button disabled id="slot">
           Close
