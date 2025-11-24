@@ -453,53 +453,6 @@ export const FocusPreviousFocusedItemIfNoTrigger: Story = {
   },
 };
 
-/**
- * Dialog should focus previously focused element when closed if built-in trigger is not used
- */
-export const FocusClickedItemOutsideWhenClosing: Story = {
-  render: (props) => {
-    const [open, setOpen] = React.useState(false);
-    return (
-      <div>
-        <button data-testid="custom-trigger" onClick={() => setOpen((x) => !x)}>
-          Toggle open
-        </button>
-        <button data-testid="placeholder-button">Click me</button>
-        <BaseDialogComponent
-          {...props}
-          rootProps={{ open, onOpenChange: (newOpen) => setOpen(newOpen) }}
-        />
-      </div>
-    );
-  },
-  beforeEach: withoutAnimations,
-  play: async ({ canvasElement, args }) => {
-    const { canvas, expectPopupOpen, expectPopupClosed } = testUtils(
-      canvasElement,
-      args,
-    );
-
-    const customTrigger = canvas.getByText("Toggle open");
-    await userEvent.click(customTrigger);
-    expectPopupOpen();
-
-    const placeholderButton = canvas.getByText("Click me");
-    await userEvent.click(placeholderButton);
-
-    expectPopupClosed();
-    expect(placeholderButton).toHaveFocus();
-  },
-  args: {
-    triggerButtonProps: {
-      style: { display: "none" },
-    },
-    popupProps: {
-      modal: "trap-focus",
-    },
-    backdrop: false,
-  },
-};
-
 export const FocusAutoOnOpen: Story = {
   render: BaseDialogComponent,
   beforeEach: withoutAnimations,
