@@ -184,6 +184,11 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         return;
       }
 
+      const ownerDoc = ownerDocument(container);
+      const activeElement = ownerDoc.activeElement;
+      const closestContainer = activeElement?.closest("[data-focus-boundary]");
+
+      addPreviouslyFocusedElement(ownerDoc.activeElement, closestContainer);
       focusBoundarysStack.add(focusBoundary);
 
       return () => {
@@ -192,6 +197,17 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }, 0);
       };
     }, [container, focusBoundary]);
+
+    /**
+     * On unmount, we need to clean up previously focused elements associated with this container
+     * This makes sure we don't accidentally try to focus elements that are no longer relevant
+     * or will be removed from the DOM.
+     */
+    useEffect(() => {
+      return () => {
+        container && deleteContainerAndPreviouslyFocusedElements(container);
+      };
+    }, [container]);
 
     useEffect(() => {
       if (!container || !modal) {
@@ -256,7 +272,6 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         return;
       }
       const ownerDoc = ownerDocument(container);
-      const previouslyFocusedElement = ownerDoc.activeElement;
 
       function getReturnElement() {
         const resolvedReturnFocusValueOrFn = returnFocusRef.current;
@@ -279,11 +294,11 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         if (typeof resolvedReturnFocusValue === "boolean") {
-          const el = previouslyFocusedElement;
+          const el = getPreviouslyFocusedElement();
           return el?.isConnected ? el : ownerDoc.body;
         }
 
-        const fallback = previouslyFocusedElement || ownerDoc.body;
+        const fallback = getPreviouslyFocusedElement() || ownerDoc.body;
 
         return resolveRef(resolvedReturnFocusValue) || fallback;
       }
@@ -362,6 +377,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         {...restProps}
         ref={mergedRefs}
         onKeyDown={handleKeyDown}
+        data-focus-boundary
       />
     );
   },
@@ -514,6 +530,53 @@ function arrayRemove<T>(array: T[], item: T) {
 
 function removeLinks(items: HTMLElement[]) {
   return items.filter((item) => item.tagName !== "A");
+}
+
+const LIST_LIMIT = 10;
+let previouslyFocusedElements: Element[] = [];
+const focusedElementsByContainer = new WeakMap<Element, Element[]>();
+
+function clearDisconnectedPreviouslyFocusedElements() {
+  previouslyFocusedElements = previouslyFocusedElements.filter(
+    (el) => el.isConnected,
+  );
+}
+
+/**
+ * Removes "will be" unmounted elements from previouslyFocusedElements,
+ * and deletes the container from focusedElementsByContainer.
+ */
+function deleteContainerAndPreviouslyFocusedElements(container: HTMLElement) {
+  const nestedElements = focusedElementsByContainer.get(container) || [];
+  previouslyFocusedElements = previouslyFocusedElements.filter((el) => {
+    return !nestedElements.includes(el);
+  });
+  focusedElementsByContainer.delete(container);
+}
+
+function addPreviouslyFocusedElement(
+  element: Element | null,
+  container: Element | null | undefined,
+) {
+  clearDisconnectedPreviouslyFocusedElements();
+  if (element && element?.nodeName !== "BODY") {
+    previouslyFocusedElements.push(element);
+
+    if (container) {
+      const nestedElements = focusedElementsByContainer.get(container) || [];
+      nestedElements.push(element);
+      focusedElementsByContainer.set(container, nestedElements);
+    }
+
+    if (previouslyFocusedElements.length > LIST_LIMIT) {
+      previouslyFocusedElements = previouslyFocusedElements.slice(-LIST_LIMIT);
+    }
+  }
+}
+
+function getPreviouslyFocusedElement() {
+  clearDisconnectedPreviouslyFocusedElements();
+  return previouslyFocusedElements[previouslyFocusedElements.length - 1];
 }
 
 export { FocusBoundary };

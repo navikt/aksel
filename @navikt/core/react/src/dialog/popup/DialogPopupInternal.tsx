@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef } from "react";
 import { BoxNew, type BoxNewProps } from "../../layout/box";
 import type { ResponsiveProp } from "../../layout/utilities/types";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
@@ -119,8 +119,6 @@ const DialogPopupInternal = forwardRef<
       setMounted,
     } = useDialogContext();
 
-    const hasInteractedOutsideRef = useRef(false);
-
     const mergedRefs = useMergeRefs(forwardedRef, popupRef, setPopupElement);
 
     useScrollLock({
@@ -150,33 +148,16 @@ const DialogPopupInternal = forwardRef<
     const resolvedInitialFocus = initialFocus ?? popupRef;
 
     const resolvedReturnFocus = () => {
-      const hasInteractedOutside = hasInteractedOutsideRef.current;
-      hasInteractedOutsideRef.current = false;
-
       if (returnFocus) {
         return typeof returnFocus === "function"
           ? returnFocus()
           : returnFocus.current;
       }
 
-      /**
-       * If dialog closes, and user has not interacted outside of it, we default to focusing the trigger
-       */
-      if (!hasInteractedOutside && modal === "trap-focus") {
-        triggerElement?.focus();
-        return false;
+      if (triggerElement?.checkVisibility()) {
+        return triggerElement ?? true;
       }
 
-      /**
-       * If user clicks something outside dialog, we respect that and avoid changing focus
-       */
-      if (modal === "trap-focus" && hasInteractedOutside) {
-        return false;
-      }
-
-      /**
-       * In all other cases, we allow FocusBoundary to return focus to the previously focused element
-       */
       return true;
     };
 
@@ -199,9 +180,6 @@ const DialogPopupInternal = forwardRef<
             }}
             disableOutsidePointerEvents={modal === true || withBackdrop}
             onInteractOutside={(event) => {
-              if (!event.defaultPrevented) {
-                hasInteractedOutsideRef.current = true;
-              }
               /**
                * Since trigger might be set up to close the dialog on click,
                * we need to prevent dismissing when clicking the trigger to avoid double close events (potentially re-triggering open)

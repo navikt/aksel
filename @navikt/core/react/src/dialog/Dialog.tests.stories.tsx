@@ -325,7 +325,7 @@ export const FocusLock: Story = {
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
-    const closeButton = canvas.getByText("Close");
+    const closeButton = canvas.getByRole("button", { name: "Close" });
     const testButton = canvas.getByText("Focus test");
     await waitFor(() => expect(popup).toHaveFocus());
 
@@ -450,53 +450,6 @@ export const FocusPreviousFocusedItemIfNoTrigger: Story = {
     triggerButtonProps: {
       style: { display: "none" },
     },
-  },
-};
-
-/**
- * Dialog should focus previously focused element when closed if built-in trigger is not used
- */
-export const FocusClickedItemOutsideWhenClosing: Story = {
-  render: (props) => {
-    const [open, setOpen] = React.useState(false);
-    return (
-      <div>
-        <button data-testid="custom-trigger" onClick={() => setOpen((x) => !x)}>
-          Toggle open
-        </button>
-        <button data-testid="placeholder-button">Click me</button>
-        <BaseDialogComponent
-          {...props}
-          rootProps={{ open, onOpenChange: (newOpen) => setOpen(newOpen) }}
-        />
-      </div>
-    );
-  },
-  beforeEach: withoutAnimations,
-  play: async ({ canvasElement, args }) => {
-    const { canvas, expectPopupOpen, expectPopupClosed } = testUtils(
-      canvasElement,
-      args,
-    );
-
-    const customTrigger = canvas.getByText("Toggle open");
-    await userEvent.click(customTrigger);
-    expectPopupOpen();
-
-    const placeholderButton = canvas.getByText("Click me");
-    await userEvent.click(placeholderButton);
-
-    expectPopupClosed();
-    expect(placeholderButton).toHaveFocus();
-  },
-  args: {
-    triggerButtonProps: {
-      style: { display: "none" },
-    },
-    popupProps: {
-      modal: "trap-focus",
-    },
-    backdrop: false,
   },
 };
 
@@ -665,7 +618,6 @@ export const CloseButtonDisabledSlot: Story = {
       onOpenChange: fn(),
     },
     closeButtonProps: {
-      asChild: true,
       children: (
         <Button disabled id="slot">
           Close
