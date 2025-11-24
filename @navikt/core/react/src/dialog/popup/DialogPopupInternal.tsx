@@ -217,7 +217,13 @@ const DialogPopupInternal = forwardRef<
              * Only close dialog on pointerUp pointerEvents
              */
             onPointerDownOutside={(event) => {
-              event.preventDefault();
+              if (
+                !closeOnOutsideClick ||
+                modal !== "trap-focus" ||
+                withBackdrop
+              ) {
+                event.preventDefault();
+              }
             }}
             onFocusOutside={(event) => {
               /**
