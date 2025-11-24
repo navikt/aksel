@@ -5,7 +5,7 @@ export const MyComponent = () => {
     <List
       title="Lorem Ipsum Dolor Sit Amet"
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
-      headingTag="h3"
+      headingTag="h4"
     >
       <List.Item>
         lorem ipsum

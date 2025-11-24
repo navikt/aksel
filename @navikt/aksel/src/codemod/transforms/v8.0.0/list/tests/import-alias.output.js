@@ -5,7 +5,7 @@ export const MyComponent = () => {
   return (
     <div>
       <div>
-        <Heading level="2" size="small">
+        <Heading level="3" size="small">
           Lorem Ipsum Dolor Sit Amet
         </Heading>
         <BodyShort>
@@ -24,7 +24,7 @@ export const MyComponent = () => {
         </Box>
       </div>
       <div>
-        <Heading level="2" size="small">
+        <Heading level="3" size="small">
           Lorem Ipsum Dolor Sit Amet
         </Heading>
         <BodyShort>

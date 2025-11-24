@@ -92,7 +92,7 @@ export default function transformer(file: FileInfo, api: API) {
         sizeValue = sizeAttr.value.value;
       }
 
-      let headingLevel = "2";
+      let headingLevel = "3";
       if (headingTagAttr && headingTagAttr.value?.type === "StringLiteral") {
         const tag = headingTagAttr.value.value;
         const match = tag.match(/h(\d)/);

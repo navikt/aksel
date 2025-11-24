@@ -3,7 +3,7 @@ import { List, Heading, BodyShort, Box } from "@navikt/ds-react";
 export const MyComponent = () => {
   return (
     <div>
-      <Heading level="2" size="small">
+      <Heading level="3" size="small">
         Lorem Ipsum Dolor Sit Amet
       </Heading>
       <BodyShort>

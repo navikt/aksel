@@ -7,7 +7,7 @@ export const MyComponent = () => {
         <CustomHeading>Heading</CustomHeading>
       </Box>
       <div>
-        <CustomHeading level="2" size="small">
+        <CustomHeading level="3" size="small">
           Lorem Ipsum Dolor Sit Amet
         </CustomHeading>
         <BodyShort>

@@ -4,7 +4,7 @@ export const MyComponent = () => {
   return (
     <div>
       <div>
-        <Heading level="2" size="small">
+        <Heading level="3" size="small">
           Lorem Ipsum Dolor Sit Amet
         </Heading>
         <Box marginBlock="space-16" asChild>
