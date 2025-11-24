@@ -190,7 +190,7 @@ export const migrations: {
     },
     {
       description:
-        "Updates variant + data-color prop based on current variant-prop.",
+        "Updates variant + data-color props on Accordion based on current variant prop.",
       value: "v8-accordion-variant",
       path: "v8.0.0/accordion-variant/accordion-variant",
       ignoredExtensions: CSS_EXTENSIONS,
