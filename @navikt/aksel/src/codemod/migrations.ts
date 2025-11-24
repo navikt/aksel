@@ -159,7 +159,7 @@ export const migrations: {
       value: "v8-box",
       path: "v8.0.0/box/box",
       warning:
-        "Remember to check if 'TODO: Aksel box migration'-comment were added to any files after migration. This comment will help you find and update Box-instances where we could not resolve the update for you.",
+        "Remember to check if 'TODO: Aksel Box migration'-comment was added to any files after migration. This comment will help you find and update Box-instances we couldn't update for you.",
       ignoredExtensions: CSS_EXTENSIONS,
     },
     {
