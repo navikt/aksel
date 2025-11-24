@@ -12,7 +12,7 @@ export default function transformer(file: FileInfo, api: API) {
 
   const toSourceOptions = getLineTerminator(file.source);
 
-  if (file.source.includes("TODO: Aksel box migration")) {
+  if (file.source.includes("TODO: Aksel Box migration")) {
     return root.toSource(toSourceOptions);
   }
 
@@ -136,7 +136,7 @@ const createFileComments = ({
   }
 
   let constructedComment =
-    "/*\nTODO: Aksel box migration:\nCould not migrate the following:\n";
+    "/*\nTODO: Aksel Box migration:\nCould not migrate the following:\n";
 
   for (const { prop, token, comment } of tokenComments.values()) {
     constructedComment += `  - ${prop}=${token}\n`;
