@@ -16,7 +16,7 @@ export const MyComponent = () => {
         Desc
       </BodyShort>
       <Box marginBlock="space-12" asChild>
-        <List size="small" as="ol" aria-label="My List" aria-labelledby="some-id">
+        <List data-aksel-migrated-v8 size="small" as="ol" aria-label="My List" aria-labelledby="some-id">
           <List.Item>Item</List.Item>
         </List>
       </Box>

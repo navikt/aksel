@@ -9,6 +9,7 @@ const fixtures = [
   "list-attributes",
   "existing-imports",
   "direct",
+  "idempotent",
 ];
 
 for (const fixture of fixtures) {

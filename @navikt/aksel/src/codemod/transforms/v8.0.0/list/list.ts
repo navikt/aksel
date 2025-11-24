@@ -100,6 +100,16 @@ export default function transformer(file: FileInfo, api: API) {
           attr.type === "JSXAttribute" && attr.name.name === "description",
       ) as JSXAttribute | undefined;
 
+      if (
+        attributes.some(
+          (attr) =>
+            attr.type === "JSXAttribute" &&
+            attr.name.name === "data-aksel-migrated-v8",
+        )
+      ) {
+        return;
+      }
+
       if (!titleAttr && !descAttr) {
         return;
       }
@@ -127,7 +137,9 @@ export default function transformer(file: FileInfo, api: API) {
       }
 
       // Separate attributes
-      const listAttributes: JSXAttribute[] = [];
+      const listAttributes: JSXAttribute[] = [
+        j.jsxAttribute(j.jsxIdentifier("data-aksel-migrated-v8")),
+      ];
       const divAttributes: (JSXSpreadAttribute | JSXAttribute)[] = [];
 
       attributes.forEach((attr) => {

@@ -11,7 +11,7 @@ export const MyComponent = () => {
         risus volutpat.
       </BodyShort>
       <Box marginBlock="space-16" asChild>
-        <List>
+        <List data-aksel-migrated-v8>
           <List.Item>
             lorem ipsum
           </List.Item>
