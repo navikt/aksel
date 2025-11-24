@@ -7,8 +7,8 @@ const fixtures = [
   "list-props",
   "list-size",
   "list-attributes",
-  "import-alias",
   "existing-imports",
+  "direct",
 ];
 
 for (const fixture of fixtures) {

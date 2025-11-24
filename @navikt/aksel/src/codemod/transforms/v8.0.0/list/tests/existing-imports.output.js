@@ -1,4 +1,4 @@
-import { List, Heading as CustomHeading, BodyShort, Box } from "@navikt/ds-react";
+import { List, Box, Heading as CustomHeading, BodyShort } from "@navikt/ds-react";
 
 export const MyComponent = () => {
   return (

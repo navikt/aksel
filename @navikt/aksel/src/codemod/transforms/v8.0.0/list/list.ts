@@ -32,19 +32,48 @@ export default function transformer(file: FileInfo, api: API) {
 
   let localListName = "List";
   let hasListImport = false;
-  let listImportPath: ASTPath<ImportDeclaration> = null;
+  let dsReactImportPath: ASTPath<ImportDeclaration> | null = null;
+
+  let localHeadingName = "Heading";
+  let hasHeadingImport = false;
+
+  let localBodyShortName = "BodyShort";
+  let hasBodyShortImport = false;
+
+  let localBoxName = "Box";
+  let hasBoxImport = false;
 
   // Find the local name for List import
   root.find(j.ImportDeclaration).forEach((path) => {
     if (path.node.source.value === "@navikt/ds-react") {
+      dsReactImportPath = path;
       path.node.specifiers?.forEach((specifier) => {
-        if (
-          specifier.type === "ImportSpecifier" &&
-          specifier.imported.name === "List"
-        ) {
-          localListName = specifier.local?.name || "List";
-          hasListImport = true;
-          listImportPath = path;
+        if (specifier.type === "ImportSpecifier") {
+          if (specifier.imported.name === "List") {
+            localListName = specifier.local?.name || "List";
+            hasListImport = true;
+          }
+          if (specifier.imported.name === "Heading") {
+            localHeadingName = specifier.local?.name || "Heading";
+            hasHeadingImport = true;
+          }
+          if (specifier.imported.name === "BodyShort") {
+            localBodyShortName = specifier.local?.name || "BodyShort";
+            hasBodyShortImport = true;
+          }
+          if (specifier.imported.name === "Box") {
+            localBoxName = specifier.local?.name || "Box";
+            hasBoxImport = true;
+          }
+        }
+      });
+    } else if (path.node.source.value === "@navikt/ds-react/List") {
+      path.node.specifiers?.forEach((specifier) => {
+        if (specifier.type === "ImportSpecifier") {
+          if (specifier.imported.name === "List") {
+            localListName = specifier.local?.name || "List";
+            hasListImport = true;
+          }
         }
       });
     }
@@ -135,7 +164,9 @@ export default function transformer(file: FileInfo, api: API) {
 
       // Create Heading
       if (titleValue) {
-        newImports.add("Heading");
+        if (!hasHeadingImport) {
+          newImports.add("Heading");
+        }
         const headingAttrs = [
           j.jsxAttribute(j.jsxIdentifier("as"), j.stringLiteral(headingAs)),
         ];
@@ -158,8 +189,8 @@ export default function transformer(file: FileInfo, api: API) {
         }
 
         const heading = j.jsxElement(
-          j.jsxOpeningElement(j.jsxIdentifier("Heading"), headingAttrs),
-          j.jsxClosingElement(j.jsxIdentifier("Heading")),
+          j.jsxOpeningElement(j.jsxIdentifier(localHeadingName), headingAttrs),
+          j.jsxClosingElement(j.jsxIdentifier(localHeadingName)),
           children,
         );
         newNodes.push(heading);
@@ -167,7 +198,9 @@ export default function transformer(file: FileInfo, api: API) {
 
       // Create BodyShort
       if (descValue) {
-        newImports.add("BodyShort");
+        if (!hasBodyShortImport) {
+          newImports.add("BodyShort");
+        }
         const bodyAttrs = [];
         const mappedSize = bodySizeMap[sizeValue];
         if (mappedSize && mappedSize !== "medium") {
@@ -187,15 +220,17 @@ export default function transformer(file: FileInfo, api: API) {
         }
 
         const body = j.jsxElement(
-          j.jsxOpeningElement(j.jsxIdentifier("BodyShort"), bodyAttrs),
-          j.jsxClosingElement(j.jsxIdentifier("BodyShort")),
+          j.jsxOpeningElement(j.jsxIdentifier(localBodyShortName), bodyAttrs),
+          j.jsxClosingElement(j.jsxIdentifier(localBodyShortName)),
           children,
         );
         newNodes.push(body);
       }
 
       // Create Box
-      newImports.add("Box");
+      if (!hasBoxImport) {
+        newImports.add("Box");
+      }
       const boxAttrs = [
         j.jsxAttribute(
           j.jsxIdentifier("marginBlock"),
@@ -212,8 +247,8 @@ export default function transformer(file: FileInfo, api: API) {
       );
 
       const box = j.jsxElement(
-        j.jsxOpeningElement(j.jsxIdentifier("Box"), boxAttrs),
-        j.jsxClosingElement(j.jsxIdentifier("Box")),
+        j.jsxOpeningElement(j.jsxIdentifier(localBoxName), boxAttrs),
+        j.jsxClosingElement(j.jsxIdentifier(localBoxName)),
         [newList],
       );
       newNodes.push(box);
@@ -229,18 +264,37 @@ export default function transformer(file: FileInfo, api: API) {
     });
 
   // Add imports
-  if (newImports.size > 0 && listImportPath) {
-    const existingSpecifiers = new Set(
-      listImportPath.node.specifiers?.map((specifier) => specifier.local?.name),
-    );
+  if (newImports.size > 0) {
+    if (dsReactImportPath) {
+      const existingSpecifiers = new Set(
+        dsReactImportPath.node.specifiers?.map(
+          (specifier) => specifier.local?.name,
+        ),
+      );
 
-    newImports.forEach((imp) => {
-      if (!existingSpecifiers.has(imp)) {
-        listImportPath.node.specifiers?.push(
-          j.importSpecifier(j.identifier(imp)),
-        );
+      newImports.forEach((imp) => {
+        if (!existingSpecifiers.has(imp)) {
+          dsReactImportPath!.node.specifiers?.push(
+            j.importSpecifier(j.identifier(imp)),
+          );
+        }
+      });
+    } else {
+      const specifiers = Array.from(newImports).map((imp) =>
+        j.importSpecifier(j.identifier(imp)),
+      );
+      const newImportDecl = j.importDeclaration(
+        specifiers,
+        j.stringLiteral("@navikt/ds-react"),
+      );
+
+      const lastImport = root.find(j.ImportDeclaration).at(-1);
+      if (lastImport.length > 0) {
+        lastImport.insertAfter(newImportDecl);
+      } else {
+        root.get().node.program.body.unshift(newImportDecl);
       }
-    });
+    }
   }
 
   return root.toSource(getLineTerminator(file.source));
