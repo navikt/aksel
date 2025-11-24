@@ -89,22 +89,10 @@ const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
    * but should work fine for 1-2 levels of nesting which is the most common use case here.
    */
   useEffect(() => {
-    if (
-      !parentContext?.nestedDialogOpened ||
-      !parentContext?.nestedDialogClosed
-    ) {
-      return;
-    }
-
-    if (open) {
+    if (open && parentContext) {
       parentContext.nestedDialogOpened(ownNestedOpenDialogs);
-    } else {
-      parentContext.nestedDialogClosed();
+      return () => parentContext.nestedDialogClosed();
     }
-
-    return () => {
-      open && parentContext.nestedDialogClosed();
-    };
   }, [open, parentContext, ownNestedOpenDialogs]);
 
   /**
