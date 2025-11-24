@@ -1,10 +1,12 @@
-import { BodyShort, Box, Heading, List } from "@navikt/ds-react";
+import { List, Heading, Box, BodyShort } from "@navikt/ds-react";
 
 export const MyComponent = () => {
   return (
     <div>
       <div>
-        <Heading level="2">Lorem Ipsum Dolor Sit Amet</Heading>
+        <Heading level="2" size="small">
+          Lorem Ipsum Dolor Sit Amet
+        </Heading>
         <Box marginBlock="space-16" asChild>
           <List>
             <List.Item>lorem ipsum</List.Item>

@@ -1,4 +1,4 @@
-import { BodyShort, Box, Heading, List } from "@navikt/ds-react";
+import { List, Heading, BodyShort, Box } from "@navikt/ds-react";
 
 export const MyComponent = () => {
   return (
