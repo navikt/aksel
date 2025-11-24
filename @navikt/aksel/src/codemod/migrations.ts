@@ -176,7 +176,7 @@ export const migrations: {
     },
     {
       description:
-        "Updates variant + data-color prop based on current variant-prop.",
+        "Updates variant + data-color props on Tag based on current variant prop.",
       value: "v8-tag-variant",
       path: "v8.0.0/tag-variant/tag-variant",
       ignoredExtensions: CSS_EXTENSIONS,
