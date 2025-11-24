@@ -9,7 +9,7 @@ export const MyComponent = () => {
       key="list-key"
       role="presentation"
     >
-      <Heading level="3" size="xsmall">
+      <Heading as="h3" size="xsmall">
         Title
       </Heading>
       <BodyShort size="small">

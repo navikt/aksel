@@ -92,13 +92,9 @@ export default function transformer(file: FileInfo, api: API) {
         sizeValue = sizeAttr.value.value;
       }
 
-      let headingLevel = "3";
+      let headingAs = "h3";
       if (headingTagAttr && headingTagAttr.value?.type === "StringLiteral") {
-        const tag = headingTagAttr.value.value;
-        const match = tag.match(/h(\d)/);
-        if (match) {
-          headingLevel = match[1];
-        }
+        headingAs = headingTagAttr.value.value;
       }
 
       // Separate attributes
@@ -141,10 +137,7 @@ export default function transformer(file: FileInfo, api: API) {
       if (titleValue) {
         newImports.add("Heading");
         const headingAttrs = [
-          j.jsxAttribute(
-            j.jsxIdentifier("level"),
-            j.stringLiteral(headingLevel),
-          ),
+          j.jsxAttribute(j.jsxIdentifier("as"), j.stringLiteral(headingAs)),
         ];
 
         const mappedSize = headingSizeMap[sizeValue];
