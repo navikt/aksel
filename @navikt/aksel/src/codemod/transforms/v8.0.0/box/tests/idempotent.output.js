@@ -1,5 +1,5 @@
 /*
-TODO: aksel box migration:
+TODO: Aksel box migration:
 Could not migrate the following:
   - shadow=large
   - background=surface-alt-3-strong

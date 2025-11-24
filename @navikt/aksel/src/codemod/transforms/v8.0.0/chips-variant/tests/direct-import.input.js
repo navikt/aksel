@@ -1,4 +1,4 @@
-import { Chips, ChipsRemovable, ChipsToggle } from "@navikt/ds-react/Chips";
+import { ChipsRemovable, ChipsToggle } from "@navikt/ds-react/Chips";
 
 export const MyComponent = () => {
   return (
