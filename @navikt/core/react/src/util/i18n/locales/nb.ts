@@ -11,15 +11,11 @@ export default {
     showLess: "Vis mindre",
     readOnly: "Skrivebeskyttet",
     close: "Lukk",
-  },
-
-  Alert: {
-    closeAlert: "Lukk varsel",
-    closeMessage: "Lukk melding",
     error: "Feil",
     info: "Informasjon",
     success: "Suksess",
     warning: "Advarsel",
+    announcement: "Kunngjøring",
   },
   Chips: {
     Removable: {

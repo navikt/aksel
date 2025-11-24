@@ -60,7 +60,7 @@ function IconPage({
             <Link
               as={NextLink}
               href="https://www.figma.com/community/file/1214869602572392330"
-              variant="subtle"
+              data-color="neutral"
               onClick={() =>
                 umamiTrack("navigere", {
                   kilde: "ikonside",
@@ -76,7 +76,7 @@ function IconPage({
             <Link
               as={NextLink}
               href="/god-praksis/artikler/tilgjengelig-ikonbruk"
-              variant="subtle"
+              data-color="neutral"
               onClick={() =>
                 umamiTrack("navigere", {
                   kilde: "ikonside",
@@ -90,7 +90,7 @@ function IconPage({
           </li>
           <li className={styles.iconPageLinkLi}>
             <Link
-              variant="subtle"
+              data-color="neutral"
               href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
               download="Ikonpakke"
               onClick={() =>

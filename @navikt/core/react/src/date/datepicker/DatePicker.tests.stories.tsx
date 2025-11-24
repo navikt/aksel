@@ -258,7 +258,6 @@ export const HookDefaultMonth: Story = {
   render: () => {
     const { datepickerProps, inputProps } = useDatepicker({
       fromDate: new Date("Aug 23 2019"),
-      onDateChange: console.log,
       defaultMonth: oldDate,
     });
 
@@ -296,7 +295,7 @@ export const HookDefaultMonthWhenSelected: Story = {
   render: () => {
     const { datepickerProps, inputProps } = useDatepicker({
       fromDate: new Date("Aug 23 2019"),
-      onDateChange: console.log,
+
       defaultSelected: oldDate,
     });
 

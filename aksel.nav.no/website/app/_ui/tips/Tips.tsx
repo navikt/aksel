@@ -11,7 +11,7 @@ function Tips(props: ExtractPortableComponentProps<"tips">) {
   }
 
   return (
-    <EditorPanel variant="tips" headingTag="p">
+    <EditorPanel variant="tips" headingTag="div">
       <CustomPortableText value={body as PortableTextBlock[]} />
     </EditorPanel>
   );

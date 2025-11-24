@@ -3,38 +3,13 @@ import type { Preview } from "@storybook/nextjs";
 import { Box, Theme } from "@navikt/ds-react";
 import "./aksel-storybook.css";
 
-export const globalTypes = {
-  mode: {
-    name: "Darkside",
-    defaultValue: "darkside",
-    toolbar: {
-      icon: "paintbrush",
-      showName: true,
-      dynamicTitle: true,
-      items: [
-        { value: "legacy", title: "Legacy CSS" },
-        { value: "darkside", title: "Darkside CSS" },
-      ],
-    },
-  },
-};
-
-const withDarkside = (Story: () => JSX.Element, context: any) => {
-  const isDarkside = context.globals.mode === "darkside";
-
-  if (isDarkside) {
-    return (
-      <Theme hasBackground>
-        <Box padding="space-16">
-          <Story />
-        </Box>
-      </Theme>
-    );
-  }
+const withTheme = (Story: () => JSX.Element) => {
   return (
-    <div>
-      <Story />
-    </div>
+    <Theme hasBackground asChild>
+      <Box padding="space-16">
+        <Story />
+      </Box>
+    </Theme>
   );
 };
 
@@ -56,7 +31,7 @@ const preview: Preview = {
     },
   },
   decorators: [
-    withDarkside,
+    withTheme,
     withThemeByClassName({
       themes: {
         light: "light",

@@ -1,5 +1,17 @@
 # @navikt/ds-tokens
 
+## 7.34.0
+
+### Patch Changes
+
+- Tooltip: Update z-index to max int. ([#4309](https://github.com/navikt/aksel/pull/4309))
+
+## 7.33.5
+
+## 7.33.4
+
+## 7.33.3
+
 ## 7.33.2
 
 ## 7.33.1

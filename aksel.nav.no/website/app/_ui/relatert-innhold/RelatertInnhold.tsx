@@ -25,7 +25,7 @@ function RelatertInnhold(
   };
 
   return (
-    <EditorPanel variant="links" heading={title ?? undefined} headingTag="p">
+    <EditorPanel variant="links" heading={title ?? undefined} headingTag="div">
       <WebsiteList as="ul">
         {lenker.map((pageLink) => (
           <WebsiteListItem key={pageLink._key} icon>

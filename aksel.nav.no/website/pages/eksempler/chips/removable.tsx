@@ -1,48 +1,25 @@
 import { useState } from "react";
-import { Chips, VStack } from "@navikt/ds-react";
+import { Chips } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [filter, setFilter] = useState(options);
 
   return (
-    <VStack gap="space-40">
-      <VStack gap="space-12">
-        Variant action (default)
-        <Chips>
-          {filter.map((c) => (
-            <Chips.Removable
-              key={c}
-              onClick={() =>
-                setFilter((x) =>
-                  x.length === 1 ? options : x.filter((y) => y !== c),
-                )
-              }
-            >
-              {c}
-            </Chips.Removable>
-          ))}
-        </Chips>
-      </VStack>
-      <VStack gap="space-12">
-        Variant neutral
-        <Chips>
-          {filter.map((c) => (
-            <Chips.Removable
-              variant="neutral"
-              key={c}
-              onClick={() =>
-                setFilter((x) =>
-                  x.length === 1 ? options : x.filter((y) => y !== c),
-                )
-              }
-            >
-              {c}
-            </Chips.Removable>
-          ))}
-        </Chips>
-      </VStack>
-    </VStack>
+    <Chips>
+      {filter.map((c) => (
+        <Chips.Removable
+          key={c}
+          onClick={() =>
+            setFilter((x) =>
+              x.length === 1 ? options : x.filter((y) => y !== c),
+            )
+          }
+        >
+          {c}
+        </Chips.Removable>
+      ))}
+    </Chips>
   );
 };
 

@@ -149,7 +149,7 @@ export const OnChange: StoryFn = () => {
   return (
     <Textarea
       label="Ipsum enim quis culpa"
-      onChange={console.log}
+      onChange={() => {}}
       maxLength={50}
     />
   );

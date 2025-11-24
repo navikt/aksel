@@ -1,5 +1,53 @@
 # @navikt/ds-react
 
+## 7.34.0
+
+### Minor Changes
+
+- LocalAlert: :tada: New component replacing regular `<Alert />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- GlobalAlert: :tada: New component replacing `<Alert fullWidth>`, now with built-in centering of content. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InlineMessage: :tada: New component replacing `<Alert inline />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InfoCard: :tada: New component replacing `<Alert variant="info" />`. Used for content you want to highlight. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+### Patch Changes
+
+- Updated dependencies [[`a405824`](https://github.com/navikt/aksel/commit/a4058247d01292217a2209fbfbd83b9f816dcdd7), [`efebc5f`](https://github.com/navikt/aksel/commit/efebc5fbbb3e955df5050086aef68812052a837d)]:
+  - @navikt/aksel-icons@7.34.0
+  - @navikt/ds-tokens@7.34.0
+
+## 7.33.5
+
+### Patch Changes
+
+- Datepicker: Avoid rendering Datepicker dialog when not open. ([#4300](https://github.com/navikt/aksel/pull/4300))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.5
+  - @navikt/aksel-icons@7.33.5
+
+## 7.33.4
+
+### Patch Changes
+
+- Textarea: Set height on first render to `auto` instead of `0px` to reduce layout shift when SSR ([#4295](https://github.com/navikt/aksel/pull/4295))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.4
+  - @navikt/aksel-icons@7.33.4
+
+## 7.33.3
+
+### Patch Changes
+
+- Popover: Children no longer re-mounts on open toggle. ([#4281](https://github.com/navikt/aksel/pull/4281))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.3
+  - @navikt/aksel-icons@7.33.3
+
 ## 7.33.2
 
 ### Patch Changes

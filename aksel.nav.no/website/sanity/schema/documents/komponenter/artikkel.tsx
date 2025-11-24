@@ -127,7 +127,7 @@ export const KomponentArtikkel = defineType({
       },
     }),
     defineField({
-      title: "Figma lenke (optional)",
+      title: "Figma-lenke (valgfritt)",
       name: "figma_link",
       type: "url",
       group: "lenker",

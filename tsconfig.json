@@ -4,7 +4,7 @@
     "strict": true,
     "esModuleInterop": true,
     "target": "es6",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "incremental": true,
     "skipLibCheck": true,
     "resolveJsonModule": true

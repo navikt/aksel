@@ -1,5 +1,5 @@
 .aksel-tooltip {
-  z-index: 3000;
+  z-index: 2147483647;
   background-color: var(--ax-bg-neutral-strong);
   color: var(--ax-text-neutral-contrast);
   border-radius: var(--ax-radius-4);
