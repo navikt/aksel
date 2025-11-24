@@ -12,41 +12,49 @@ export const Tag = ({
   hTag?: string;
   count?: number;
 }) => {
-  const Comp = ({ children }) => {
-    return (
-      <DsTag variant="info" size={size}>
-        {children}
-      </DsTag>
-    );
-  };
-
   switch (type) {
     case "aksel_artikkel":
-      return <Comp>{text ? text : "God praksis"}</Comp>;
+      return (
+        <DsTag variant="info" size={size}>
+          {text ? text : "God praksis"}
+        </DsTag>
+      );
     case "aksel_blogg":
-      return <Comp>Blogg</Comp>;
+      return (
+        <DsTag variant="info" size={size}>
+          Blogg
+        </DsTag>
+      );
     case "komponent_artikkel":
       return (
-        <>
-          <Comp>Komponent</Comp>
-        </>
+        <DsTag variant="info" size={size}>
+          Komponent
+        </DsTag>
       );
     case "ds_artikkel":
       return (
-        <>
-          <Comp>Grunnleggende</Comp>
-        </>
+        <DsTag variant="info" size={size}>
+          Grunnleggende
+        </DsTag>
       );
     case "templates_artikkel":
       return (
-        <>
-          <Comp>Mønster og Maler</Comp>
-        </>
+        <DsTag variant="info" size={size}>
+          Mönster og Maler
+        </DsTag>
       );
     case "aksel_prinsipp":
-      return <Comp>Prinsipper</Comp>;
+      return (
+        <DsTag variant="info" size={size}>
+          Prinsipper
+        </DsTag>
+      );
     case "aksel_standalone":
-      return <Comp>Unike sider</Comp>;
+      return (
+        <DsTag variant="info" size={size}>
+          Unike sider
+        </DsTag>
+      );
 
     default:
       return null;
