@@ -18,7 +18,6 @@
     "@navikt/aksel-icons": "^7.34.0",
     "@navikt/ds-css": "^7.34.0",
     "@navikt/ds-react": "^7.34.0",
-    "@navikt/ds-tailwind": "^7.34.0",
     "@navikt/ds-tokens": "^7.34.0"
   }
 }
