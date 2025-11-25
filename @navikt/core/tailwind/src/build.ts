@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import * as TokensBuild from "@navikt/ds-tokens/darkside-js";
-import { kebabCaseForAlpha } from "../tokens/config/kebabCase";
-import { breakpointTokenConfig } from "../tokens/darkside/tokens/breakpoint";
+import { kebabCaseForAlpha } from "../../tokens/config/kebabCase";
+import { breakpointTokenConfig } from "../../tokens/darkside/tokens/breakpoint";
 
 const transformedTokens = Object.fromEntries(
   Object.entries(TokensBuild)
@@ -54,7 +54,7 @@ export const config = {
 
 const outputString = `module.exports = ${JSON.stringify(config, null, 2)};`;
 
-writeFileSync("tailwind.darkside.config.js", outputString);
+writeFileSync("tailwind.config.js", outputString);
 
 /* -------------------------------------------------------------------------- */
 /*                                  Utilities                                 */

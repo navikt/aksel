@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { config } from "./darkside";
+import { config } from "./build";
 
 describe("Darkside tailwind config", () => {
   test("should have correct color tokens", () => {
