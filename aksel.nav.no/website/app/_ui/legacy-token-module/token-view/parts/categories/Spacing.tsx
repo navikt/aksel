@@ -28,9 +28,12 @@ export const SpacingView = ({ cat }: { cat: string }) => {
               hideOnSm: true,
               text: (
                 <div
-                  className="mr-auto h-8 rounded-md bg-surface-alt-3-strong"
                   style={{
                     width: x.value,
+                    backgroundColor: "var(--a-bg-surface-alt-3-strong)",
+                    borderRadius: "8px",
+                    height: "2rem",
+                    marginRight: "auto",
                   }}
                 />
               ),

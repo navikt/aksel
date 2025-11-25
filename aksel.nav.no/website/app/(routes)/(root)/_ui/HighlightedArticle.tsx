@@ -135,7 +135,7 @@ export const Highlight = ({
             {article?.heading}
           </Link>
         </Heading>
-        <BodyLong className="mb-4" size="medium">
+        <BodyLong size="medium">
           {(isArticle(article) || isBlogg(article)) &&
             (article.ingress ?? article.seo?.meta)}
         </BodyLong>

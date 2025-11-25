@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
+import { BodyShort, Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
 import { ThemeButton } from "@/app/_ui/theming/Theme.button";
@@ -50,7 +50,9 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
               />
             </svg>
           </Hide>
-          <span className="sr-only">Aksel</span>
+          <BodyShort visuallyHidden as="span">
+            Aksel
+          </BodyShort>
         </Link>
 
         <Spacer />
