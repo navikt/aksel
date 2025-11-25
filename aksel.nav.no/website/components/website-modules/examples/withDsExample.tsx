@@ -1,8 +1,16 @@
+"use client";
+
 import cl from "clsx";
 import { useTheme } from "next-themes";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
-import { type CSSProperties, ComponentType, useSyncExternalStore } from "react";
+import {
+  type CSSProperties,
+  ComponentType,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import {
   LaptopIcon,
   MobileIcon,
@@ -90,6 +98,16 @@ function ThemeWrapper({
   style: CSSProperties;
   className: string;
 }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   if (useDarkside) {
     return (
       <AkselTheme hasBackground={false} className={className} asChild>
