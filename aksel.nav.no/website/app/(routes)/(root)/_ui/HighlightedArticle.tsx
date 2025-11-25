@@ -71,9 +71,10 @@ export const Highlight = ({
             blurDataURL={imageBlurUrl}
             placeholder="blur"
             quality={100}
-            layout="fill"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             aria-hidden
-            className={cl(`${styles.sectionImage}`, {
+            className={cl(styles.sectionImage, {
               [`${styles.betaHue}`]:
                 isKomponent(article) && article.status?.tag === "beta",
             })}
@@ -86,10 +87,11 @@ export const Highlight = ({
             blurDataURL={seoImageBlurUrl}
             placeholder="blur"
             quality={100}
-            layout="fill"
-            objectFit="cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: "cover" }}
             aria-hidden
-            className={cl(`${styles.sectionImage}`, {
+            className={cl(styles.sectionImage, {
               [`${styles.betaHue}`]: getStatusTag() === "beta",
             })}
             decoding="auto"
@@ -98,8 +100,9 @@ export const Highlight = ({
         ) : (
           <NextImage
             src={fallbackImageUrl(article?.heading ?? "", "thumbnail")}
-            layout="fill"
-            objectFit="contain"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: "contain" }}
             aria-hidden
             className={styles.sectionImage}
             decoding="auto"
@@ -112,7 +115,7 @@ export const Highlight = ({
           <Tag
             type={article._type}
             text={
-              isArticle(article) ? article.tema?.[0] ?? undefined : undefined
+              isArticle(article) ? (article.tema?.[0] ?? undefined) : undefined
             }
           />
           {getStatusTag() === "beta" && <BetaTag />}

@@ -1,12 +1,12 @@
-import docs from "@navikt/ds-tokens/docs.json";
 import {
   WebsiteTable,
   WebsiteTableRow,
 } from "@/app/_ui/website-table/WebsiteTable";
+import { LegacyDocs } from "../../../legacy-docs";
 import { sanitizeName } from "../utilities";
 
 export const ZindexView = ({ cat }: { cat: string }) => {
-  const zindex = docs[cat] as { name: string; value: number }[];
+  const zindex = LegacyDocs[cat];
 
   return (
     <WebsiteTable withCopy th={[{ text: "Enhet" }, { text: "Verdi" }]}>
