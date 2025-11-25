@@ -101,7 +101,7 @@
   border-bottom-right-radius: var(--ax-radius-8);
 }
 
-.aksel-search__button-search.aksel-button--secondary {
+.aksel-search__button-search[data-variant="secondary"] {
   --__axc-button-border-width: 1px;
   --__axc-button-border-color: var(--ax-border-neutral);
 
@@ -117,7 +117,7 @@
 /* Special-case where we hover/focus input, and want the secondary-button to match input-border */
 .aksel-search:not(.aksel-search--error, .aksel-search--disabled)
   .aksel-search__wrapper:has(.aksel-search__input:is(:hover, :focus-visible))
-  .aksel-search__button-search.aksel-button--secondary:not(:hover, :active) {
+  .aksel-search__button-search[data-variant="secondary"]:not(:hover, :active) {
   --__axc-button-border-color: var(--ax-border-strong);
 }
 

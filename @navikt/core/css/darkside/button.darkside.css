@@ -175,8 +175,7 @@
   stroke: currentColor;
 }
 
-.aksel-button--primary .aksel-loader .aksel-loader__background,
-.aksel-button--danger .aksel-loader .aksel-loader__background {
+.aksel-button[data-variant="primary"] .aksel-loader .aksel-loader__background {
   stroke: rgb(255 255 255 / 0.3);
 }
 
@@ -211,8 +210,7 @@
     stroke: canvas;
   }
 
-  .aksel-button--primary .aksel-loader .aksel-loader__background,
-  .aksel-button--danger .aksel-loader .aksel-loader__background {
+  .aksel-button[data-variant="primary"] .aksel-loader .aksel-loader__background {
     stroke: canvastext;
   }
 }
