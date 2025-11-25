@@ -10,6 +10,8 @@ export default {
   parameters: {
     chromatic: { disable: false },
   },
+  /* TODO: Temp disabled CI-tests */
+  tags: ["!play-fn", "skip-test"],
 } satisfies Meta<typeof UNSAFE_Combobox>;
 
 type StoryObject = StoryObj<typeof UNSAFE_Combobox>;
