@@ -154,8 +154,7 @@
         true,
         {
           "importFrom": [
-            "@navikt/core/tokens/dist/tokens.css",
-            "@navikt/core/tokens/dist/darkside/tokens.css"
+            "@navikt/core/tokens/dist/tokens.css"
           ]
         }
       ]
