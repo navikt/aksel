@@ -1,11 +1,9 @@
-import React from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
   Alert,
   Bleed,
   BodyLong,
-  BodyShort,
   Box,
   Button,
   Checkbox,
@@ -14,6 +12,7 @@ import {
   Link,
   List,
   Page,
+  Tag,
   VStack,
 } from "@navikt/ds-react";
 import ApplicationPictogram from "../../../components/website-modules/examples/__parts/ApplicationPictogram";
@@ -31,7 +30,7 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block width="text" gutters>
-        <VStack as="main" gap="8" data-aksel-template="form-intropage-v3">
+        <VStack as="main" gap="8" data-aksel-template="form-intropage-v4">
           <VStack gap="3">
             <Bleed asChild marginInline={{ lg: "32" }}>
               <Box
@@ -43,11 +42,13 @@ function Example() {
                 <ApplicationPictogram />
               </Box>
             </Bleed>
-            <VStack gap="1">
-              <BodyShort size="small">Nav 10-07.03 (om relevant)</BodyShort>
+            <VStack gap="1" align="start">
               <Heading level="1" size="xlarge">
                 Søknad om [ytelse]
               </Heading>
+              <Tag variant="neutral-moderate" size="small">
+                Nav 10-07.03 (om relevant)
+              </Tag>
             </VStack>
           </VStack>
 
