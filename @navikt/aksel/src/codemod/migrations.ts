@@ -87,7 +87,7 @@ export const migrations: {
       value: "v3-copybutton",
       path: "v3.0.0/copybutton/copybutton",
       warning:
-        "Remember to clean css-import from '@navikt/ds-css-internal' if no longer needed\nIf non-text was used as children, or different locales were handled, you need to manually fix this",
+        "Remember to remove css-import from '@navikt/ds-css-internal' if no longer needed\nIf non-text was used as children, or different locales were handled, you need to manually fix this",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],

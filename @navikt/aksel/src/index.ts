@@ -2,7 +2,6 @@
 import chalk from "chalk";
 import fs from "node:fs";
 import { codemodCommand } from "./codemod/index";
-import { cssImportsCommand } from "./css-imports/index";
 import { darksideCommand } from "./darkside";
 import { helpCommand } from "./help";
 
@@ -11,11 +10,6 @@ run();
 async function run() {
   if (!process.argv[2] || process.argv[2] === "help") {
     helpCommand();
-    return;
-  }
-
-  if (process.argv[2] === "css-imports") {
-    await cssImportsCommand();
     return;
   }
 
