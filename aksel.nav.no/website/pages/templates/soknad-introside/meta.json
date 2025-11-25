@@ -2,7 +2,7 @@
   "version": 4,
   "changelog": [
     {
-      "description": "Oppdatert header til å bruke `Tag` for søknadsnummer.",
+      "description": "Oppdatert header til å bruke `Tag` for søknadsnummer. 'Intro med Alert'-eksempel er oppdatert til å bruke 'InfoCard' som erstatning for 'Alert' og henter nå 'Intro med fremhevet info'.",
       "date": "25.11.2025",
       "version": 4
     },
