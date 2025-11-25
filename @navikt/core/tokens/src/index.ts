@@ -26,7 +26,7 @@ import {
 import { semanticRoleConfig } from "./tokens/colors/semantic-role.tokens";
 import { semanticThemedBaseTokens } from "./tokens/colors/semantic-themed-base.tokens";
 
-const DARKSIDE_DIST = "./dist/darkside/";
+const OUT_DIST_DIR = "./dist/";
 
 /* Global accumulator for built CSS-files */
 const bundledCSSFiles: string[] = [];
@@ -108,19 +108,19 @@ async function main() {
   await buildOtherTokenFormats();
 
   fs.writeFileSync(
-    `${DARKSIDE_DIST}tokens.css`,
+    `${OUT_DIST_DIR}tokens.css`,
     bundledCSSFiles.map((path) => `@import "${path}";`).join("\n"),
   );
 
   const { code } = bundle({
-    filename: `${DARKSIDE_DIST}tokens.css`,
+    filename: `${OUT_DIST_DIR}tokens.css`,
     minify: false,
   });
 
-  fs.writeFileSync(`${DARKSIDE_DIST}tokens.css`, code);
+  fs.writeFileSync(`${OUT_DIST_DIR}tokens.css`, code);
 
   /* Cleanup temp-files */
-  bundledCSSFiles.forEach((path) => fs.unlinkSync(`${DARKSIDE_DIST}${path}`));
+  bundledCSSFiles.forEach((path) => fs.unlinkSync(`${OUT_DIST_DIR}${path}`));
 }
 
 /**
@@ -192,7 +192,7 @@ async function buildOtherTokenFormats() {
       },
       js: {
         transformGroup: "js",
-        buildPath: DARKSIDE_DIST,
+        buildPath: OUT_DIST_DIR,
         files: [
           {
             destination: "tokens.js",
@@ -220,7 +220,7 @@ async function buildOtherTokenFormats() {
       },
       // jsStatic: {
       //   transformGroup: "js",
-      //   buildPath: `${DARKSIDE_DIST}static/`,
+      //   buildPath: `${OUT_DIST_DIR}static/`,
       //   files: [
       //     {
       //       destination: "tokens.js",
@@ -238,7 +238,7 @@ async function buildOtherTokenFormats() {
       // },
       scss: {
         transformGroup: "scss",
-        buildPath: DARKSIDE_DIST,
+        buildPath: OUT_DIST_DIR,
 
         files: [
           {
@@ -249,7 +249,7 @@ async function buildOtherTokenFormats() {
       },
       // scssStatic: {
       //   transformGroup: "scss",
-      //   buildPath: `${DARKSIDE_DIST}static/`,
+      //   buildPath: `${OUT_DIST_DIR}static/`,
       //   files: [
       //     {
       //       destination: "tokens.scss",
@@ -259,7 +259,7 @@ async function buildOtherTokenFormats() {
       // },
       less: {
         transformGroup: "less",
-        buildPath: DARKSIDE_DIST,
+        buildPath: OUT_DIST_DIR,
         files: [
           {
             destination: "tokens.less",
@@ -269,7 +269,7 @@ async function buildOtherTokenFormats() {
       },
       // lessStatic: {
       //   transformGroup: "less",
-      //   buildPath: `${DARKSIDE_DIST}static/`,
+      //   buildPath: `${OUT_DIST_DIR}static/`,
       //   files: [
       //     {
       //       destination: "tokens.less",
@@ -349,7 +349,7 @@ async function buildCSSBundleForTokens({
       [filename]: {
         transformGroup: "css",
         transforms: ["name/alpha-suffix"],
-        buildPath: DARKSIDE_DIST,
+        buildPath: OUT_DIST_DIR,
         files: [
           {
             destination: filename,

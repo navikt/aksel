@@ -1,12 +1,12 @@
-import docs from "@navikt/ds-tokens/docs.json";
 import {
   WebsiteTable,
   WebsiteTableRow,
 } from "@/app/_ui/website-table/WebsiteTable";
+import { LegacyDocs } from "../../../legacy-docs";
 import { sanitizeName } from "../utilities";
 
 export const ShapesView = ({ cat }: { cat: string }) => {
-  const shapes = docs[cat];
+  const shapes = LegacyDocs[cat];
 
   return (
     <WebsiteTable withCopy th={[{ text: "Enhet" }, { text: "Verdi" }]}>

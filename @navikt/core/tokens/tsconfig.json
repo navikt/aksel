@@ -9,5 +9,5 @@
     "lib": ["ESNext"],
     "module": "Preserve"
   },
-  "include": ["./stories", "./darkside/figma"]
+  "include": ["./stories", "./src/figma"]
 }
