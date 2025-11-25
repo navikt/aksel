@@ -12,11 +12,11 @@ import {
 } from "../config/_mappings";
 import packageJSON from "../package.json";
 
-bundleDarkside();
+bundle();
 
-async function bundleDarkside() {
-  const buildDir = path.join(__dirname, "..", "dist/darkside");
-  const darksideDir = path.join(__dirname, "..", "darkside");
+async function bundle() {
+  const buildDir = path.join(__dirname, "..", "dist");
+  const outDir = path.join(__dirname, "..", "src");
 
   /* Make sure every dir is created to make node happy */
   [buildDir, `${buildDir}/global`, `${buildDir}/component`].forEach((dir) => {
@@ -32,7 +32,7 @@ async function bundleDarkside() {
    */
   async function bundleCSS(rootParser?: (rootFile: string) => string) {
     const { code } = await bundleAsync({
-      filename: `${darksideDir}/index.css`,
+      filename: `${outDir}/index.css`,
       minify: false,
       include:
         Features.Nesting | Features.MediaRangeSyntax | Features.HexAlphaColors,
@@ -46,7 +46,7 @@ async function bundleDarkside() {
       resolver: {
         read(filePath) {
           const file = fs.readFileSync(filePath, "utf8");
-          if (filePath === `${darksideDir}/index.css` && rootParser) {
+          if (filePath === `${outDir}/index.css` && rootParser) {
             return rootParser(file);
           }
 
@@ -201,7 +201,7 @@ async function bundleDarkside() {
   /* ---------------------------- /component build ---------------------------- */
 
   function componentFiles(): string[] {
-    const indexFile = fs.readFileSync(`${darksideDir}/index.css`, "utf8");
+    const indexFile = fs.readFileSync(`${outDir}/index.css`, "utf8");
 
     /* Since forms and primitives is under the same layers, but diffferent files we filter them out to avoid duplicates */
     const formLine = rootFormParser(indexFile);
@@ -257,7 +257,14 @@ async function bundleDarkside() {
 
   const version = packageJSON.version;
 
-  const files = fastglob.sync("**/*.css", {
+  /**
+   * We only publish
+   * - index.css
+   * - index.min.css
+   *
+   * to CDNs with versioning
+   */
+  const files = fastglob.sync("**/index*.css", {
     cwd: buildDir,
     ignore: ["**/version/**"],
   });
