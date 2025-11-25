@@ -14,9 +14,7 @@ type Blogg =
 export const BloggList = async ({ blogg }: { blogg: Blogg }) => {
   const avatars = queryToAvatars(blogg.writers);
 
-  const imageUrl = urlForImage(blogg?.seo?.image)
-    ?.quality(100)
-    .url();
+  const imageUrl = urlForImage(blogg?.seo?.image)?.quality(100).url();
 
   return (
     <li>
@@ -36,7 +34,6 @@ export const BloggList = async ({ blogg }: { blogg: Blogg }) => {
                 aria-hidden
                 priority
                 alt=""
-                quality={100}
               />
             ) : (
               <NextImage
