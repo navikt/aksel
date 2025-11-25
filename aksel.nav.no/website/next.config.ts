@@ -155,7 +155,7 @@ const nextConfig: NextConfig = {
       },
     ],
     dangerouslyAllowSVG: true,
-    qualities: [100],
+    qualities: [75, 100],
   },
   output: "standalone",
   outputFileTracingRoot: path.join(__dirname, "../../"),
