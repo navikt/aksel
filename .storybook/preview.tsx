@@ -26,7 +26,6 @@ const TypoDecorator = ({
   useEffect(() => {
     const fontVariable = fonts.includes(font) ? `"${font}", sans-serif` : null;
     document.body.style.setProperty("--ax-font-family", fontVariable);
-    document.body.style.setProperty("--a-font-family", fontVariable);
   }, [font]);
 
   return children;
