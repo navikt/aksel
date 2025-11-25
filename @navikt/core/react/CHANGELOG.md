@@ -1,5 +1,23 @@
 # @navikt/ds-react
 
+## 7.34.0
+
+### Minor Changes
+
+- LocalAlert: :tada: New component replacing regular `<Alert />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- GlobalAlert: :tada: New component replacing `<Alert fullWidth>`, now with built-in centering of content. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InlineMessage: :tada: New component replacing `<Alert inline />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InfoCard: :tada: New component replacing `<Alert variant="info" />`. Used for content you want to highlight. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+### Patch Changes
+
+- Updated dependencies [[`a405824`](https://github.com/navikt/aksel/commit/a4058247d01292217a2209fbfbd83b9f816dcdd7), [`efebc5f`](https://github.com/navikt/aksel/commit/efebc5fbbb3e955df5050086aef68812052a837d)]:
+  - @navikt/aksel-icons@7.34.0
+  - @navikt/ds-tokens@7.34.0
+
 ## 7.33.5
 
 ### Patch Changes

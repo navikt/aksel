@@ -1,5 +1,37 @@
 # Changelog
 
+## 7.34.0
+
+### @navikt/aksel-icons
+
+- Icons: :tada: New icons `PhoneSlash` and `BellSlash`. ([#4310](https://github.com/navikt/aksel/pull/4310))
+
+### @navikt/ds-react
+
+- LocalAlert: :tada: New component replacing regular `<Alert />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- GlobalAlert: :tada: New component replacing `<Alert fullWidth>`, now with built-in centering of content. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InlineMessage: :tada: New component replacing `<Alert inline />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InfoCard: :tada: New component replacing `<Alert variant="info" />`. Used for content you want to highlight. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+### @navikt/ds-tokens
+
+- Tooltip: Update z-index to max int. ([#4309](https://github.com/navikt/aksel/pull/4309))
+
+### @navikt/ds-css
+
+- LocalAlert: :tada: New component replacing regular `<Alert />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- GlobalAlert: :tada: New component replacing `<Alert fullWidth>`, now with built-in centering of content. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InlineMessage: :tada: New component replacing `<Alert inline />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InfoCard: :tada: New component replacing `<Alert variant="info" />`. Used for content you want to highlight. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+* Tooltip: Update z-index to max int. ([#4309](https://github.com/navikt/aksel/pull/4309))
+
 ## 7.33.5
 
 ### @navikt/ds-react

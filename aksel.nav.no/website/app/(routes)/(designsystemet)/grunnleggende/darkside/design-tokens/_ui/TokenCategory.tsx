@@ -27,6 +27,8 @@ const TokenCategory = ({
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We want to reset selectedRole when tokenQuery changes
   useEffect(() => {
+    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedRole(null);
   }, [tokenQuery]);
 

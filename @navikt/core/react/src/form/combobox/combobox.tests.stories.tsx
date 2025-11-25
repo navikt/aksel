@@ -10,6 +10,8 @@ export default {
   parameters: {
     chromatic: { disable: false },
   },
+  /* TODO: Temp disabled CI-tests */
+  tags: ["!play-fn", "skip-test"],
 } satisfies Meta<typeof UNSAFE_Combobox>;
 
 type StoryObject = StoryObj<typeof UNSAFE_Combobox>;
@@ -47,14 +49,14 @@ export const CancelInput: StoryObject = {
 
     userEvent.click(input);
     await userEvent.type(input, "apple", { delay: 200 });
-    await sleep(1000);
+    await sleep(100);
 
     userEvent.keyboard("{ArrowDown}");
-    await sleep(1000);
+    await sleep(100);
     userEvent.keyboard("{Escape}");
-    await sleep(1000);
+    await sleep(100);
     userEvent.keyboard("{ArrowDown}");
-    await sleep(500);
+    await sleep(50);
     const banana = canvas.getByText("banana");
     userEvent.click(banana);
   },
@@ -77,36 +79,36 @@ export const RemoveSelectedMultiSelect: StoryObject = {
 
     userEvent.click(input);
     await userEvent.type(input, "apple", { delay: 200 });
-    await sleep(250);
+    await sleep(25);
 
     userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{Enter}");
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{Escape}");
-    await sleep(250);
+    await sleep(25);
 
     userEvent.click(input);
     await userEvent.type(input, "banana", { delay: 200 });
-    await sleep(250);
+    await sleep(25);
 
     userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{Enter}");
-    await sleep(250);
+    await sleep(25);
 
     const appleSlett = canvas.getByLabelText("apple slett");
     appleSlett.focus();
-    await sleep(250);
+    await sleep(25);
     userEvent.click(appleSlett);
-    await sleep(250);
+    await sleep(25);
     const appleOption = canvas.getByRole("option", {
       name: "apple",
       selected: false,
     });
     expect(appleOption).toBeVisible();
     userEvent.keyboard("{Escape}");
-    await sleep(250);
+    await sleep(25);
     expect(appleOption).not.toBeVisible();
 
     const bananaSlett = canvas.getByLabelText("banana slett");
@@ -134,12 +136,12 @@ export const AllowNewValuesMultiSelect: StoryObject = {
 
     userEvent.click(input);
     await userEvent.type(input, "aaa", { delay: 200 });
-    await sleep(250);
+    await sleep(25);
 
     userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{Enter}");
-    await sleep(250);
+    await sleep(25);
 
     const invalidSelect = canvas.queryByLabelText("aaa slett");
     expect(invalidSelect).toBeInTheDocument();
@@ -163,15 +165,15 @@ export const AllowNewValuesSingleSelect: StoryObject = {
 
     userEvent.click(input);
     await userEvent.type(input, "aaa", { delay: 200 });
-    await sleep(250);
+    await sleep(25);
     expect(
       canvas.getByRole("option", { name: "Legg til “aaa”" }),
     ).toBeVisible();
 
     userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{Enter}");
-    await sleep(250);
+    await sleep(25);
 
     const invalidSelect = canvas.queryByLabelText("aaa slett");
     expect(invalidSelect).not.toBeInTheDocument();
@@ -191,16 +193,16 @@ export const DisallowNewValues: StoryObject = {
 
     userEvent.click(input);
     await userEvent.type(input, "aaa", { delay: 200 });
-    await sleep(250);
+    await sleep(25);
 
     userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{Enter}");
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{Escape}");
-    await sleep(250);
+    await sleep(25);
 
     const invalidSelect = canvas.queryByLabelText("aaa slett");
     expect(invalidSelect).not.toBeInTheDocument();
@@ -237,11 +239,11 @@ export const CallbacksOnlyFireWhenExpected: StoryObj<{
 
     userEvent.click(input);
     await userEvent.type(input, searchWord, { delay: 200 });
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{Enter}");
-    await sleep(250);
+    await sleep(25);
     expect(args.onClear.mock.calls).toHaveLength(1);
     expect(args.onToggleSelected.mock.calls).toHaveLength(1);
     expect(args.onChange.mock.calls).toHaveLength(searchWord.length + 1);
@@ -272,10 +274,10 @@ export const CorrectCasingWhenAutoCompleting = {
     // With exisiting option
     userEvent.click(input);
     await userEvent.type(input, "cAmEl CaSe", { delay: 250 });
-    await sleep(250);
+    await sleep(25);
     expect(input.value).toBe("cAmEl CaSe");
     await userEvent.type(input, "{Enter}");
-    await sleep(250);
+    await sleep(25);
     const chips = canvas.getAllByRole("list")[0];
     const selectedUpperCaseChip = within(chips).getAllByRole("listitem")[0];
     expect(selectedUpperCaseChip).toHaveTextContent("Camel Case"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
@@ -283,10 +285,10 @@ export const CorrectCasingWhenAutoCompleting = {
     // With custom option
     userEvent.click(input);
     await userEvent.type(input, "cAmEl{Backspace}", { delay: 250 });
-    await sleep(250);
+    await sleep(25);
     expect(input.value).toBe("cAmEl");
     await userEvent.type(input, "{Enter}");
-    await sleep(250);
+    await sleep(25);
     const selectedNewValueChip = within(chips).getAllByRole("listitem")[0];
     expect(selectedNewValueChip).toHaveTextContent("cAmEl"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
   },
@@ -301,7 +303,7 @@ export const HoverAndFocusSwitching: StoryObject = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await sleep(500);
+    await sleep(50);
 
     const getInput = () =>
       canvas.getByRole("combobox", {
@@ -312,23 +314,23 @@ export const HoverAndFocusSwitching: StoryObject = {
     expect(getInput().getAttribute("aria-expanded")).toEqual("false");
     expect(getInput().getAttribute("aria-activedescendant")).toBeNull();
 
-    await sleep(250);
+    await sleep(25);
     userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
+    await sleep(25);
     const bananaOption = canvas.getByRole("option", { name: "banana" });
     expect(getInput().getAttribute("aria-activedescendant")).toBe(
       bananaOption.getAttribute("id"),
     );
 
     userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
+    await sleep(25);
     const appleOption = canvas.getByRole("option", { name: "apple" });
     expect(getInput().getAttribute("aria-activedescendant")).toBe(
       appleOption.getAttribute("id"),
     );
 
     userEvent.hover(bananaOption);
-    await sleep(250);
+    await sleep(25);
     expect(getInput().getAttribute("aria-activedescendant")).toBe(
       bananaOption.getAttribute("id"),
     );

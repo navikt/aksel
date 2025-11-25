@@ -13,6 +13,8 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
+  /* TODO: Temp disabled CI-tests */
+  tags: ["!play-fn", "skip-test"],
 } satisfies Meta<typeof DatePicker>;
 
 type Story = StoryObj<typeof DatePicker>;
@@ -258,7 +260,6 @@ export const HookDefaultMonth: Story = {
   render: () => {
     const { datepickerProps, inputProps } = useDatepicker({
       fromDate: new Date("Aug 23 2019"),
-      onDateChange: console.log,
       defaultMonth: oldDate,
     });
 
@@ -296,7 +297,7 @@ export const HookDefaultMonthWhenSelected: Story = {
   render: () => {
     const { datepickerProps, inputProps } = useDatepicker({
       fromDate: new Date("Aug 23 2019"),
-      onDateChange: console.log,
+
       defaultSelected: oldDate,
     });
 

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import type { StoryObj } from "@storybook/react-vite/*";
+import type { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fireEvent, fn, userEvent, within } from "storybook/test";
 import {
