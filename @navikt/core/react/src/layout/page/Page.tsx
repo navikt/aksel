@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../../theme/Theme";
-import { OverridableComponent } from "../../util";
+import { OverridableComponent, omit } from "../../util";
 import { PageBlock } from "./parts/PageBlock";
 
 export interface PageProps extends React.HTMLAttributes<HTMLElement> {
@@ -22,6 +22,10 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * @default "end"
    */
   contentBlockPadding?: "end" | "none";
+  /**
+   * @deprecated Deprecated in v8 and no longer has any effect. Use `<Box asChild background="...">` wrapped around `<Page>`.
+   */
+  background?: string;
 }
 
 interface PageComponentType
@@ -48,7 +52,11 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       const belowFold = footerPosition === "belowFold";
 
       return (
-        <Component {...rest} className={cn("navds-page", className)} ref={ref}>
+        <Component
+          {...omit(rest, ["background"])}
+          className={cn("navds-page", className)}
+          ref={ref}
+        >
           <div
             className={cn({
               "navds-page__content--fullheight": belowFold,

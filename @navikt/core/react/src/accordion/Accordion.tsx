@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import { omit } from "../util";
 import AccordionContent, { AccordionContentProps } from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
 import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
@@ -31,7 +32,7 @@ interface AccordionComponent
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * @deprecated Removed in v8, but backwards compatible. Use `data-color` instead.
+   * @deprecated Will be removed in a future major version. Use `data-color` instead.
    */
   variant?: "default" | "neutral";
   /**
@@ -47,6 +48,10 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * Instances of `Accordion.Item`.
    */
   children: React.ReactNode;
+  /**
+   * @deprecated No longer has any effect.
+   */
+  headingSize?: "large" | "medium" | "small" | "xsmall";
 }
 
 /**
@@ -81,11 +86,11 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         value={{
           size,
           mounted: true,
+          variant,
         }}
       >
         <div
-          data-color={variant === "neutral" ? "neutral" : undefined}
-          {...rest}
+          {...omit(rest, ["headingSize"])}
           className={cn(
             "navds-accordion",
             className,

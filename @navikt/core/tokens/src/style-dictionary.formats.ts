@@ -234,7 +234,7 @@ export function generateTokenString(
   const nameWithoutPrefix = token.name.slice(2);
 
   const tokenValue = isStatic
-    ? token.value ?? token.$value
+    ? (token.value ?? token.$value)
     : createTokenValue(token);
 
   if (format === "es6") {

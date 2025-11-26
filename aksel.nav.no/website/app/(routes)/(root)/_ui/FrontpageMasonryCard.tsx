@@ -84,6 +84,7 @@ const Card = ({ article, visible }: CardProps) => {
             }
             alt={article.heading + " thumbnail"}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </LinkCardImage>
       )}

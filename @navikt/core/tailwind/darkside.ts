@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
-import * as TokensBuild from "@navikt/ds-tokens/darkside-js";
+import * as TokensBuild from "@navikt/ds-tokens/js";
 import { kebabCaseForAlpha } from "../tokens/config/kebabCase";
-import { breakpointTokenConfig } from "../tokens/darkside/tokens/breakpoint";
+import { breakpointTokenConfig } from "../tokens/src/tokens/breakpoint";
 
 const transformedTokens = Object.fromEntries(
   Object.entries(TokensBuild)
