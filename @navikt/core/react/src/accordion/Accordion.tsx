@@ -32,7 +32,7 @@ interface AccordionComponent
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * @deprecated Removed in v8, but backwards compatible. Use `data-color` instead.
+   * @deprecated Will be removed in a future major version. Use `data-color` instead.
    */
   variant?: "default" | "neutral";
   /**
