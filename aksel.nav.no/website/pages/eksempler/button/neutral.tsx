@@ -27,5 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "For nøytrale handlinger som verken er positive eller negative, kan du bruke en 'nøytral' knapp.",
+  desc: "For handlinger som ikke trenger så mye oppmerksomhet, kan du bruke en 'nøytral' knapp.",
 };
