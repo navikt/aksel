@@ -28,6 +28,7 @@ export const workspaceConfig = defineConfig([
     basePath: "/admin",
     icon: AkselLogo,
     auth: authStore(),
+    scheduledPublishing: { enabled: false },
     schema,
     document: {
       newDocumentOptions: newDocumentsCreator,
@@ -68,7 +69,7 @@ export const workspaceConfig = defineConfig([
       }),
     ],
     releases: {
-      enabled: false,
+      enabled: true,
     },
   },
   {
@@ -80,6 +81,7 @@ export const workspaceConfig = defineConfig([
     basePath: "/admin-dev",
     icon: TestFlaskIcon,
     auth: authStore(),
+    scheduledPublishing: { enabled: false },
     schema,
     document: {
       newDocumentOptions: newDocumentsCreator,
