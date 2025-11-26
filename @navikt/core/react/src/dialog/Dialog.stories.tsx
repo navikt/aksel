@@ -5,7 +5,6 @@ import { Button } from "../button";
 import { Select } from "../form/select";
 import { VStack } from "../layout/stack";
 import { Table } from "../table";
-import { BodyLong } from "../typography";
 import {
   Dialog,
   DialogBody,
@@ -509,34 +508,3 @@ function ScrollContent() {
     </div>
   );
 }
-
-export const TestDemoOne = {
-  render: () => {
-    return (
-      <Dialog>
-        <DialogTrigger>
-          <Button>Rediger søknad</Button>
-        </DialogTrigger>
-        <DialogPopup>
-          <DialogHeader>
-            <DialogTitle>Rediger søknad </DialogTitle>
-            <DialogDescription>
-              Her kan du redigere søknaden din før du sender den inn på nytt.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogBody>
-            <BodyLong>placeholder</BodyLong>
-          </DialogBody>
-          <DialogFooter>
-            <DialogCloseTrigger>
-              <Button>Lagre</Button>
-            </DialogCloseTrigger>
-            <DialogCloseTrigger>
-              <Button variant="secondary">Avbryt</Button>
-            </DialogCloseTrigger>
-          </DialogFooter>
-        </DialogPopup>
-      </Dialog>
-    );
-  },
-};
