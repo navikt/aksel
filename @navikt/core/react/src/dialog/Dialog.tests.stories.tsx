@@ -365,7 +365,7 @@ export const FocusTriggerOnClose: Story = {
     } = testUtils(canvasElement, args);
 
     expectOpenChangeCalls(0);
-    const openButton = canvas.getByText("Open Dialog");
+    const openButton = canvas.getByRole("button", { name: "Open Dialog" });
     await userEvent.click(openButton);
     expectPopupOpen();
 
@@ -632,7 +632,7 @@ export const AriaAttributes: Story = {
   play: async ({ canvasElement, args }) => {
     const { canvas, expectPopupOpen } = testUtils(canvasElement, args);
 
-    const triggerButton = canvas.getByText("Open Dialog");
+    const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
 
     expect(triggerButton).toHaveAttribute("aria-expanded", "false");
     await userEvent.click(triggerButton);
@@ -684,7 +684,7 @@ function BaseDialogComponent({
   return (
     <Dialog {...rootProps}>
       <DialogTrigger data-testid="trigger" {...triggerButtonProps}>
-        {triggerButtonProps?.children ?? "Open Dialog"}
+        <Button>{triggerButtonProps?.children ?? "Open Dialog"}</Button>
       </DialogTrigger>
 
       <DialogPopup
@@ -696,7 +696,7 @@ function BaseDialogComponent({
         {nested ? (
           <Dialog>
             <DialogTrigger data-testid="trigger-nested">
-              Open Dialog Nested
+              <Button>Open Dialog Nested</Button>
             </DialogTrigger>
 
             <DialogPopup className="popupCSS" data-testid="popup-nested">
