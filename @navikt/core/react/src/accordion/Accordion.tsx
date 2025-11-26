@@ -81,10 +81,10 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         value={{
           size,
           mounted: true,
+          variant,
         }}
       >
         <div
-          data-color={variant === "neutral" ? "neutral" : undefined}
           {...rest}
           className={cn(
             "navds-accordion",

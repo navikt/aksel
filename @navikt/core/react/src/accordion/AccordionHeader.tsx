@@ -31,6 +31,9 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     return (
       <button
         ref={ref}
+        data-color={
+          accordionContext?.variant === "neutral" ? "neutral" : undefined
+        }
         {...rest}
         className={cn("navds-accordion__header", className)}
         onClick={composeEventHandlers(onClick, itemContext.toggleOpen)}
