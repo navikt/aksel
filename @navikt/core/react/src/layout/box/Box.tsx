@@ -73,7 +73,9 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
 interface BoxComponentType
   extends OverridableComponent<BoxProps, HTMLDivElement> {
   /**
-   * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/box' instead (with same props).
+   * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/Box' instead (with same props).
+   *
+   * **Run `npx @navikt/aksel@latest codemod v8-box-new`> to migrate.**
    */
   New: typeof BoxNew;
 }

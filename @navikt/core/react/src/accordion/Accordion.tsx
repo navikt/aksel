@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import { omit } from "../util";
 import AccordionContent, { AccordionContentProps } from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
 import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
@@ -47,6 +48,10 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * Instances of `Accordion.Item`.
    */
   children: React.ReactNode;
+  /**
+   * @deprecated Removed in v8, no longer has any effect.
+   */
+  headingSize?: "large" | "medium" | "small" | "xsmall";
 }
 
 /**
@@ -85,7 +90,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         }}
       >
         <div
-          {...rest}
+          {...omit(rest, ["headingSize"])}
           className={cn(
             "navds-accordion",
             className,

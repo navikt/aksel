@@ -52,8 +52,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
     | "left-start"
     | "left-end";
   /**
-   * Adds a arrow from dialog to anchor when true
-   * @deprecated Removed in v8
+   * @deprecated Removed in v8, no longer has any effect.
    */
   arrow?: boolean;
   /**

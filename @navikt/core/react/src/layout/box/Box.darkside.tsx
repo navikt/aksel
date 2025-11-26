@@ -68,8 +68,9 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
 
 /**
  * Foundational Layout-primitive for generic encapsulation & styling.
- * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/box' instead (with same props).
- * TODO: Add link/cli script for codemod when ready.
+ * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/Box' instead (with same props).
+ *
+ * **Run `npx @navikt/aksel@latest codemod v8-box-new`> to migrate.**
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/box)
  * @see 🏷️ {@link BoxProps}
