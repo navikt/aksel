@@ -24,16 +24,18 @@ const Example = () => {
           aktiviteten, ber vi deg ta kontakt med veilederen din så snart som
           mulig.
         </BodyLong>
-        <Button variant="secondary-neutral">Ok, jeg har lest beskjeden</Button>
+        <Button variant="secondary" data-color="neutral">
+          Ok, jeg har lest beskjeden
+        </Button>
       </Alert>
       <Alert size="small" variant="info">
         <VStack gap="space-12">
           Det har kommet nye opplysninger. Vil du ta dem i bruk?
           <HStack gap="space-16">
-            <Button size="small" variant="secondary-neutral">
+            <Button size="small" variant="secondary" data-color="neutral">
               Ja
             </Button>
-            <Button size="small" variant="secondary-neutral">
+            <Button size="small" variant="secondary" data-color="neutral">
               Nei
             </Button>
           </HStack>

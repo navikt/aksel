@@ -4,13 +4,13 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <HStack gap="space-8">
-      <Button data-color="neutral" variant="primary">
+      <Button data-color="danger" variant="primary">
         Primary
       </Button>
-      <Button data-color="neutral" variant="secondary">
+      <Button data-color="danger" variant="secondary">
         Secondary
       </Button>
-      <Button data-color="neutral" variant="tertiary">
+      <Button data-color="danger" variant="tertiary">
         Tertiary
       </Button>
     </HStack>
@@ -26,6 +26,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  desc: "For handlinger som ikke trenger så mye oppmerksomhet, kan du bruke en 'nøytral' knapp.",
+  index: 2,
+  desc: "For handlinger som kan føre til tap av data eller andre negative konsekvenser for brukeren, bør du bruke en 'destruktiv' knapp.",
 };

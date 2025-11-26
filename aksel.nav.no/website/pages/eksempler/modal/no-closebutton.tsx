@@ -27,7 +27,11 @@ const Example = () => {
           </BodyLong>
         </Modal.Body>
         <Modal.Footer>
-          <Button type="button" variant="danger" onClick={() => setOpen(false)}>
+          <Button
+            type="button"
+            data-color="danger"
+            onClick={() => setOpen(false)}
+          >
             Ja, jeg er sikker
           </Button>
           <Button
