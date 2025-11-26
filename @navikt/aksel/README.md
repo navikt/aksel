@@ -75,6 +75,7 @@ Tries to migrate List component moving 'title' and 'description' props to 'Headi
 `npx @navikt/aksel codemod v8-toggle-group-variant ...`
 `npx @navikt/aksel codemod v8-accordion-variant ...`
 `npx @navikt/aksel codemod v8-chips-variant ...`
+`npx @navikt/aksel codemod v8-link-variant ...`
 
 Updates variant + data-color props based on current variant prop.
 

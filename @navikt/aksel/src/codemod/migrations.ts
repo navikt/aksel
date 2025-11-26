@@ -204,6 +204,13 @@ export const migrations: {
     },
     {
       description:
+        "Updates variant + data-color props on Link based on current variant prop.",
+      value: "v8-link-variant",
+      path: "v8.0.0/link/link-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
         "Tries to migrate List component moving 'title' and 'description' props to 'Heading' and 'BodyShort'.",
       value: "v8-list",
       path: "v8.0.0/list/list",

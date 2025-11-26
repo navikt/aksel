@@ -86,6 +86,7 @@ function variantToColor(
     case "action":
       return "accent";
     case "neutral":
+    case "subtle":
       return "neutral";
     default:
       return undefined;
