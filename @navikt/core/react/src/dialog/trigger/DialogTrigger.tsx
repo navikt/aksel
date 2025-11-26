@@ -2,11 +2,11 @@ import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
-import type { AsChild } from "../../util/types/AsChild";
 import { useDialogContext } from "../root/DialogRoot.context";
 
-type DialogTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  AsChild;
+type DialogTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  children: React.ReactElement;
+};
 
 /**
  * @see 🏷️ {@link DialogTriggerProps}
@@ -20,15 +20,13 @@ type DialogTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
  * ```
  */
 const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
-  ({ children, asChild = false, onClick, ...restProps }, forwardedRef) => {
+  ({ children, onClick, ...restProps }, forwardedRef) => {
     const { open, setOpen, setTriggerElement, popupId } = useDialogContext();
 
     const mergedRefs = useMergeRefs(forwardedRef, setTriggerElement);
 
-    const Component = asChild ? Slot : "button";
-
     return (
-      <Component
+      <Slot
         type="button"
         {...restProps}
         ref={mergedRefs}
@@ -40,7 +38,7 @@ const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
         aria-controls={open ? popupId : undefined}
       >
         {children}
-      </Component>
+      </Slot>
     );
   },
 );

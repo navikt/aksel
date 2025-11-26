@@ -5,6 +5,7 @@ import { Button } from "../button";
 import { Select } from "../form/select";
 import { VStack } from "../layout/stack";
 import { Table } from "../table";
+import { BodyLong } from "../typography";
 import {
   Dialog,
   DialogBody,
@@ -34,7 +35,9 @@ export const Default = {
     <div>
       <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog defaultOpen={args.defaultOpen} size={args.size}>
-        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogTrigger>
+          <Button>Open Dialog</Button>
+        </DialogTrigger>
         <DialogPopup
           withBackdrop={args.backdrop}
           aria-labelledby="ha"
@@ -94,7 +97,9 @@ export const Default = {
 export const PositionCenter: Story = {
   render: () => (
     <Dialog defaultOpen>
-      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
       <DialogPopup position="center">
         <DialogHeader>
           <DialogTitle>Dialog Title</DialogTitle>
@@ -140,7 +145,9 @@ export const PositionCenter: Story = {
 export const PositionRight: Story = {
   render: () => (
     <Dialog defaultOpen>
-      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
       <DialogPopup position="right">
         <DialogHeader>
           <DialogTitle>Dialog Title</DialogTitle>
@@ -170,7 +177,9 @@ export const PositionRight: Story = {
 export const PositionLeft: Story = {
   render: () => (
     <Dialog defaultOpen>
-      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
       <DialogPopup position="left">
         <DialogHeader>
           <DialogTitle>Dialog Title</DialogTitle>
@@ -200,7 +209,9 @@ export const PositionLeft: Story = {
 export const PositionBottom: Story = {
   render: () => (
     <Dialog defaultOpen>
-      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
       <DialogPopup position="bottom">
         <DialogHeader>
           <DialogTitle>Dialog Title</DialogTitle>
@@ -230,7 +241,9 @@ export const PositionBottom: Story = {
 export const PositionFullscreen: Story = {
   render: () => (
     <Dialog defaultOpen>
-      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
       <DialogPopup position="fullscreen">
         <DialogHeader>
           <DialogTitle>Dialog Title</DialogTitle>
@@ -260,7 +273,9 @@ export const PositionFullscreen: Story = {
 export const NoBackdrop: Story = {
   render: () => (
     <Dialog defaultOpen>
-      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
       <DialogPopup withBackdrop={false}>
         <DialogHeader>
           <DialogTitle>Dialog Title</DialogTitle>
@@ -290,7 +305,9 @@ export const NoBackdrop: Story = {
 export const SizeSmall: Story = {
   render: () => (
     <Dialog defaultOpen size="small">
-      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
       <DialogPopup>
         <DialogHeader>
           <DialogTitle>Dialog Title</DialogTitle>
@@ -320,7 +337,9 @@ export const SizeSmall: Story = {
 export const CustomWidthHeight: Story = {
   render: () => (
     <Dialog defaultOpen>
-      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
       <DialogPopup width="300px" height="300px">
         <DialogHeader>
           <DialogTitle>Dialog Title</DialogTitle>
@@ -490,3 +509,34 @@ function ScrollContent() {
     </div>
   );
 }
+
+export const TestDemoOne = {
+  render: () => {
+    return (
+      <Dialog>
+        <DialogTrigger>
+          <Button>Rediger søknad</Button>
+        </DialogTrigger>
+        <DialogPopup>
+          <DialogHeader>
+            <DialogTitle>Rediger søknad </DialogTitle>
+            <DialogDescription>
+              Her kan du redigere søknaden din før du sender den inn på nytt.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogBody>
+            <BodyLong>placeholder</BodyLong>
+          </DialogBody>
+          <DialogFooter>
+            <DialogCloseTrigger>
+              <Button>Lagre</Button>
+            </DialogCloseTrigger>
+            <DialogCloseTrigger>
+              <Button variant="secondary">Avbryt</Button>
+            </DialogCloseTrigger>
+          </DialogFooter>
+        </DialogPopup>
+      </Dialog>
+    );
+  },
+};
