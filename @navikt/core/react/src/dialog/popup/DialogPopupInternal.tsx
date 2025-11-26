@@ -70,6 +70,11 @@ type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
      * @default true
      */
     withBackdrop?: boolean;
+    /**
+     * ARIA role for the dialog popup.
+     * @default "dialog"
+     */
+    role?: "dialog" | "alertdialog";
   };
 
 /**
@@ -96,6 +101,7 @@ const DialogPopupInternal = forwardRef<
       style,
       "aria-labelledby": ariaLabelledbyProp,
       withBackdrop,
+      role = "dialog",
       ...restProps
     },
     forwardedRef,
@@ -211,7 +217,7 @@ const DialogPopupInternal = forwardRef<
               {...restProps}
               ref={mergedRefs}
               className={cn("navds-dialog__popup", className)}
-              role="dialog"
+              role={role}
               {...createTransitionStatusAttribute(transitionStatus)}
               data-position={position}
               data-size={size}
