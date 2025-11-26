@@ -1,6 +1,6 @@
 "use client";
 
-import { Box } from "@navikt/ds-react";
+import { BodyShort, Box } from "@navikt/ds-react";
 import styles from "./PropsSeksjon.module.css";
 
 function PropsSeksjonDeprecation({ text }: { text?: string }) {
@@ -9,10 +9,15 @@ function PropsSeksjonDeprecation({ text }: { text?: string }) {
   }
 
   return (
-    <li className={`${styles.propsSeksjonLi} text-[--ax-text-danger-subtle]`}>
+    <BodyShort
+      as="li"
+      textColor="subtle"
+      data-color="danger"
+      className={styles.propsSeksjonLi}
+    >
       <div className={styles.propsSeksjonLiTitle}>Deprecated:</div>
       <Box marginInline="space-8">{text}</Box>
-    </li>
+    </BodyShort>
   );
 }
 
