@@ -75,12 +75,44 @@ Deprecated
 
 ### Box
 
-WIP: Need to create codemod
-
 Changes:
 
 - Box now has the same props as BoxNew
 
 Deprecated
 
-- BoxNew tagges as deprecated
+- BoxNew tagged as deprecated
+
+## CSS
+
+Old css removed
+
+- Moved into src-dir (no external effect)
+
+Only index.css and index.min.css avaliable trough CDN now
+All classNames with `navds` prefix removed
+`/darkside`-import removed. Regular import now just "darkside"
+
+## Tailwind
+
+Old config removed, regular import now just new config
+
+## Tokens
+
+Old tokens removed
+
+/darkside imports removed. Direct import `@navikt/ds-tokens` now uses darkside config.
+
+Removed
+
+- `@navikt/ds-tokens/darkside-js`
+- `@navikt/ds-tokens/darkside-css` ++
+
+Added
+
+- `@navikt/ds-tokens/js`
+- `@navikt/ds-tokens/css` ++
+
+## CLI
+
+Added a bunch of new codemods
