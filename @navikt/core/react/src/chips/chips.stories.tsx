@@ -198,8 +198,6 @@ export const ColorRole = () => (
 );
 
 export const Chromatic = renderStoriesForChromatic({
-  Toggle,
-  Removable,
   Medium,
   Small,
   ColorRole,
