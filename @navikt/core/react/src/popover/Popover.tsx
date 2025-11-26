@@ -52,7 +52,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
     | "left-start"
     | "left-end";
   /**
-   * @deprecated Removed in v8, no longer has any effect.
+   * @deprecated No longer has any effect.
    */
   arrow?: boolean;
   /**

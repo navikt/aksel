@@ -49,7 +49,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * @deprecated Removed in v8, no longer has any effect.
+   * @deprecated No longer has any effect.
    */
   headingSize?: "large" | "medium" | "small" | "xsmall";
 }
