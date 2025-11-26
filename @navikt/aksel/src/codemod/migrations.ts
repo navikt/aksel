@@ -14,10 +14,14 @@ const CSS_EXTENSIONS = [
   "less",
 ] satisfies SupportedCodemodExtensions[];
 
-export const migrations: {
-  [key: string]: {
+type MigrationT = Record<
+  string,
+  {
     description: string;
-    value: string;
+    value: Exclude<
+      string,
+      (typeof MigrationOverride)[keyof typeof MigrationOverride][number]["value"]
+    >;
     path: string;
     warning?: string;
     /**
@@ -25,8 +29,10 @@ export const migrations: {
      * This is used to filter out files that should not be transformed.
      */
     ignoredExtensions: SupportedCodemodExtensions[];
-  }[];
-} = {
+  }[]
+>;
+
+export const migrations: MigrationT = {
   "1.0.0": [
     {
       description: "Runs all codemods for beta -> v1 migration",
@@ -208,7 +214,7 @@ export const migrations: {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-};
+} as const;
 
 /**
  * Extracts `path` field for a given migration.
@@ -245,12 +251,29 @@ export function getMigrationNames() {
     .map((x) => x.value);
 }
 
+const MigrationOverride = {
+  "v8.0.0": [
+    {
+      value: "v8-tokens",
+      description: "Starts interactive token migration for v8",
+    },
+  ],
+} as const satisfies Partial<
+  Record<keyof typeof migrations, { value: string; description: string }[]>
+>;
+
 export function getMigrationString() {
   let str = "";
 
   Object.entries(migrations).forEach(([version, vMigrations]) => {
     str += `\n${chalk.underline(version)}\n`;
+
     vMigrations.forEach((migration) => {
+      str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
+    });
+
+    const overrideMigrations = MigrationOverride[version] || [];
+    overrideMigrations.forEach((migration) => {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });
   });
