@@ -26,7 +26,7 @@ export default {
   Combobox: {
     /** The input value will be appended to the end of this text, e.g. `Legg til "input value"`. */
     addOption: "Legg til",
-    noOptions: "Ingen søketreff",
+    noMatches: "Ingen søketreff",
     /** Loader title */
     loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valgt.",

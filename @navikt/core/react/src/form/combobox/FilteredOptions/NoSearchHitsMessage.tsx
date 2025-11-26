@@ -18,7 +18,7 @@ const NoSearchHitsMessage = () => {
       className={cn("navds-combobox__list-item--no-options")}
       id={filteredOptionsUtil.getNoHitsId(id)}
     >
-      {translate("noOptions")}
+      {translate("noMatches")}
     </div>
   );
 };
