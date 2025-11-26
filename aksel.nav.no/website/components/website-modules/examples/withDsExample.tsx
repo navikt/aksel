@@ -31,6 +31,7 @@ type withDsT = {
    */
   variant?: "full" | "static" | "static-full" | "fullscreen";
   background?: "inverted" | "subtle";
+  minHeight?: string;
   showBreakpoints?: boolean;
   /**
    * Hides theme switch, makes sure to not use `AkselTheme` wrapper and forces light-mode.
@@ -40,7 +41,13 @@ type withDsT = {
 
 export const withDsExample = (
   Component: ComponentType,
-  { variant, background, showBreakpoints, legacyOnly = false }: withDsT = {},
+  {
+    variant,
+    background,
+    minHeight,
+    showBreakpoints,
+    legacyOnly = false,
+  }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
     const { theme } = useTheme();
@@ -59,7 +66,7 @@ export const withDsExample = (
           [styles.containerStaticFull]: variant === "static-full",
           [styles.containerFullscreen]: variant === "fullscreen",
         })}
-        style={{ background: getBg(background) }}
+        style={{ background: getBg(background), minHeight }}
       >
         <Head>
           <title>
@@ -128,7 +135,7 @@ function getBg(background: withDsT["background"]): string {
     case "inverted":
       return "var(--ax-neutral-1000)";
     case "subtle":
-      return "var(--a-bg-neutral-soft)";
+      return "var(--ax-bg-neutral-soft)";
 
     default:
       return "var(--ax-bg-default)";
