@@ -1,10 +1,10 @@
 import ProgressBar from "cli-progress";
 import fs from "node:fs";
+import { translateToken } from "../../codemod/utils/translate-token";
 import { TokenStatus } from "../config/TokenStatus";
 import { darksideTokenConfig } from "../config/darkside.tokens";
 import { legacyComponentTokenList } from "../config/legacy-component.tokens";
 import { legacyTokenConfig } from "../config/legacy.tokens";
-import { getTokenRegex } from "../config/token-regex";
 
 const StatusStore = new TokenStatus();
 
@@ -30,15 +30,38 @@ function getStatus(
 
   StatusStore.initStatus();
 
-  const legacyCheckRegexes = new Map<string, RegExp>();
-  for (const legacyToken of Object.keys(legacyTokenConfig)) {
-    legacyCheckRegexes.set(legacyToken, getTokenRegex(legacyToken, "css"));
+  const legacySearchTerms = new Map<string, Set<string>>();
+  for (const [legacyToken, config] of Object.entries(legacyTokenConfig)) {
+    const terms = new Set<string>();
+    const tokenName = `--a-${legacyToken}`;
+    terms.add(tokenName);
+    terms.add(translateToken(tokenName, "scss"));
+    terms.add(translateToken(tokenName, "less"));
+    terms.add(translateToken(tokenName, "js"));
+
+    if (config.twOld) {
+      config.twOld.split(",").forEach((t) => terms.add(t.trim()));
+    }
+    legacySearchTerms.set(legacyToken, terms);
   }
 
-  const darksideCheckRegexes = new Map<string, RegExp>();
-  for (const newTokenName of Object.keys(darksideTokenConfig)) {
-    darksideCheckRegexes.set(newTokenName, getTokenRegex(newTokenName, "css"));
+  const darksideSearchTerms = new Map<string, Set<string>>();
+  for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
+    const terms = new Set<string>();
+    const tokenName = `--ax-${newTokenName}`;
+    terms.add(tokenName);
+    terms.add(translateToken(tokenName, "scss"));
+    terms.add(translateToken(tokenName, "less"));
+    terms.add(translateToken(newTokenName, "js"));
+    terms.add(newTokenName);
+
+    if (config.tw) {
+      config.tw.split(",").forEach((t) => terms.add(t.trim()));
+    }
+    darksideSearchTerms.set(newTokenName, terms);
   }
+
+  const legacyComponentTokensSet = new Set(legacyComponentTokenList);
 
   const legacyRegex = new RegExp(
     `(${legacyComponentTokenList.map((t) => `${t}:`).join("|")})`,
@@ -47,18 +70,40 @@ function getStatus(
 
   files.forEach((fileName, index) => {
     const fileSrc = fs.readFileSync(fileName, "utf8");
-    const lineStarts = getLineStarts(fileSrc);
+
+    /**
+     * Create a set of all words in the file to quickly check for potential matches
+     */
+    const fileWords = new Set(fileSrc.match(/[a-zA-Z0-9_@$-]+/g) || []);
+
+    let _lineStarts: number[] | undefined;
+
+    /**
+     * Gets line-start positions for the file, caching the result
+     */
+    const getStarts = () => {
+      if (!_lineStarts) {
+        _lineStarts = getLineStarts(fileSrc);
+      }
+      return _lineStarts;
+    };
 
     /**
      * We first parse trough all legacy tokens (--a-) prefixed tokens
      */
     for (const [legacyToken, config] of Object.entries(legacyTokenConfig)) {
-      const checkRegex = legacyCheckRegexes.get(legacyToken);
-      if (checkRegex) {
-        checkRegex.lastIndex = 0;
-        if (!checkRegex.test(fileSrc)) {
-          continue;
+      const terms = legacySearchTerms.get(legacyToken);
+      let found = false;
+      if (terms) {
+        for (const term of terms) {
+          if (fileWords.has(term)) {
+            found = true;
+            break;
+          }
         }
+      }
+      if (!found) {
+        continue;
       }
 
       for (const [regexKey, regex] of Object.entries(config.regexes)) {
@@ -71,7 +116,7 @@ function getStatus(
         while (match) {
           const { row, column } = getWordPositionInFile(
             match.index,
-            lineStarts,
+            getStarts(),
           );
 
           StatusStore.add({
@@ -93,35 +138,51 @@ function getStatus(
       }
     }
 
-    legacyRegex.lastIndex = 0;
-    let legacyMatch: RegExpExecArray | null = legacyRegex.exec(fileSrc);
+    let hasLegacyComponentToken = false;
+    for (const token of legacyComponentTokensSet) {
+      if (fileWords.has(token)) {
+        hasLegacyComponentToken = true;
+        break;
+      }
+    }
 
-    while (legacyMatch !== null) {
-      const { row, column } = getWordPositionInFile(
-        legacyMatch.index,
-        lineStarts,
-      );
+    if (hasLegacyComponentToken) {
+      legacyRegex.lastIndex = 0;
+      let legacyMatch: RegExpExecArray | null = legacyRegex.exec(fileSrc);
 
-      StatusStore.add({
-        isLegacy: true,
-        type: "component",
-        columnNumber: column,
-        lineNumber: row,
-        canAutoMigrate: false,
-        fileName,
-        name: legacyMatch[0],
-      });
+      while (legacyMatch !== null) {
+        const { row, column } = getWordPositionInFile(
+          legacyMatch.index,
+          getStarts(),
+        );
 
-      legacyMatch = legacyRegex.exec(fileSrc);
+        StatusStore.add({
+          isLegacy: true,
+          type: "component",
+          columnNumber: column,
+          lineNumber: row,
+          canAutoMigrate: false,
+          fileName,
+          name: legacyMatch[0],
+        });
+
+        legacyMatch = legacyRegex.exec(fileSrc);
+      }
     }
 
     for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
-      const checkRegex = darksideCheckRegexes.get(newTokenName);
-      if (checkRegex) {
-        checkRegex.lastIndex = 0;
-        if (!checkRegex.test(fileSrc)) {
-          continue;
+      const terms = darksideSearchTerms.get(newTokenName);
+      let found = false;
+      if (terms) {
+        for (const term of terms) {
+          if (fileWords.has(term)) {
+            found = true;
+            break;
+          }
         }
+      }
+      if (!found) {
+        continue;
       }
 
       for (const [regexKey, regex] of Object.entries(config.regexes)) {
@@ -133,7 +194,7 @@ function getStatus(
         while (match) {
           const { row, column } = getWordPositionInFile(
             match.index,
-            lineStarts,
+            getStarts(),
           );
 
           StatusStore.add({
