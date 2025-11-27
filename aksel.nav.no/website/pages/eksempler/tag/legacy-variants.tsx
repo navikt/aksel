@@ -48,5 +48,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "Legacy-varianter for Tag. Bruk outline, moderate eller strong for nye løsninger + `data-color`.",
+  desc: "Legacy-varianter for Tag. Bruk outline, moderate eller strong for nye løsninger + `data-color`. Du kan automatisk migrere dette med codemod: `npx @navikt/aksel@latest codemod v8-tag-variant`",
 };

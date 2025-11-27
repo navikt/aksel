@@ -19,9 +19,9 @@ export interface LinkProps
    */
   inlineText?: boolean;
   /**
-   * @deprecated Use `data-color` prop instead.
+   * @deprecated Deprecated in v8. Use `data-color` prop instead.
    */
-  variant?: "action" | "neutral";
+  variant?: "action" | "neutral" | "subtle";
   /**
    * Link text
    */
@@ -86,6 +86,7 @@ function variantToColor(
     case "action":
       return "accent";
     case "neutral":
+    case "subtle":
       return "neutral";
     default:
       return undefined;

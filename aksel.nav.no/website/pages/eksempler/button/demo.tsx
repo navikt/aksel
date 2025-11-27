@@ -4,15 +4,9 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <HStack gap="space-8">
-      <Button data-color="neutral" variant="primary">
-        Primary
-      </Button>
-      <Button data-color="neutral" variant="secondary">
-        Secondary
-      </Button>
-      <Button data-color="neutral" variant="tertiary">
-        Tertiary
-      </Button>
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="tertiary">Tertiary</Button>
     </HStack>
   );
 };
@@ -26,6 +20,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  desc: "For handlinger som ikke trenger så mye oppmerksomhet, kan du bruke en 'nøytral' knapp.",
+  index: 0,
 };
