@@ -153,7 +153,6 @@ async function executeTask(
 
       printSummary(task, stats, tokensBefore, tokensAfter);
 
-      await waitForKeyPress();
       return newStatus;
     }
     case "run-all-migrations": {
@@ -217,7 +216,6 @@ async function executeTask(
         console.info("");
       }
 
-      await waitForKeyPress();
       return currentStatus;
     }
 
@@ -225,14 +223,6 @@ async function executeTask(
       program.error(chalk.red(`Unknown task: ${task}`));
       return statusStore;
   }
-}
-
-async function waitForKeyPress() {
-  await Enquirer.prompt({
-    type: "input",
-    name: "key",
-    message: "Press Enter to return to menu...",
-  });
 }
 
 const JS_EXTENSIONS = [
