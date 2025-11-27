@@ -90,14 +90,16 @@ export async function runTooling(
     console.info("\n\n");
 
     try {
-      await executeTask(task, filepaths, options, program, currentStatus);
+      currentStatus = await executeTask(
+        task,
+        filepaths,
+        options,
+        program,
+        currentStatus,
+        () => getStatus(filepaths, "no-print"),
+      );
     } catch (error) {
       program.error(chalk.red("Error:", error.message));
-    }
-
-    // Only re-scan if we actually ran a migration
-    if (task !== "status" && task !== "print-remaining-tokens") {
-      currentStatus = getStatus(filepaths, "no-print");
     }
 
     task = await getNextTask(currentStatus.status);
@@ -115,15 +117,15 @@ async function executeTask(
   options: ToolingOptions,
   program: Command,
   statusStore: TokenStatus,
-): Promise<void> {
+  updateStatus: () => TokenStatus,
+): Promise<TokenStatus> {
   switch (task) {
     case "status":
-      getStatus(filepaths);
-      break;
+      return updateStatus();
 
     case "print-remaining-tokens":
       await printRemaining(filepaths, statusStore.status);
-      break;
+      return statusStore;
 
     case "css-tokens":
     case "scss-tokens":
@@ -139,15 +141,20 @@ async function executeTask(
         statusStore.status,
       );
 
-      await runCodeshift(task, scopedFiles, {
+      const tokensBefore = getTokenCount(statusStore.status, task);
+
+      const stats = await runCodeshift(task, scopedFiles, {
         dryRun: options.dryRun,
         force: options.force,
       });
 
-      console.info(chalk.green(`\n✅ ${task} complete!`));
-      console.info(`Processed ${scopedFiles.length} files.`);
+      const newStatus = updateStatus();
+      const tokensAfter = getTokenCount(newStatus.status, task);
+
+      printSummary(task, stats, tokensBefore, tokensAfter);
+
       await waitForKeyPress();
-      break;
+      return newStatus;
     }
     case "run-all-migrations": {
       const tasks = [
@@ -162,21 +169,61 @@ async function executeTask(
         validateGit(options, program);
       }
 
+      let currentStatus = statusStore;
+      const summaryData: {
+        task: string;
+        stats: { ok: number };
+        tokensBefore: number;
+        tokensAfter: number;
+      }[] = [];
+
       for (const migrationTask of tasks) {
         console.info(`\nRunning ${migrationTask}...`);
-        await runCodeshift(migrationTask, filepaths, {
+        const scopedFiles = getScopedFilesForTask(
+          migrationTask,
+          filepaths,
+          currentStatus.status,
+        );
+
+        const tokensBefore = getTokenCount(currentStatus.status, migrationTask);
+
+        const stats = await runCodeshift(migrationTask, scopedFiles, {
           dryRun: options.dryRun,
           force: true,
         });
+
+        currentStatus = updateStatus();
+        const tokensAfter = getTokenCount(currentStatus.status, migrationTask);
+
+        summaryData.push({
+          task: migrationTask,
+          stats,
+          tokensBefore,
+          tokensAfter,
+        });
       }
 
-      console.info(chalk.green(`\n✅ All migrations complete!`));
+      console.info(chalk.bold(`\nMigration Summary:`));
+      console.info("-".repeat(60));
+
+      for (const data of summaryData) {
+        const replaced = data.tokensBefore - data.tokensAfter;
+        const remaining = data.tokensAfter;
+        const icon = remaining === 0 ? "✨" : "⚠️";
+        console.info(`${chalk.bold(data.task)}:`);
+        console.info(`  Files changed: ${data.stats.ok}`);
+        console.info(`  Tokens replaced: ${replaced}`);
+        console.info(`  ${icon} Remaining: ${remaining}`);
+        console.info("");
+      }
+
       await waitForKeyPress();
-      break;
+      return currentStatus;
     }
 
     default:
       program.error(chalk.red(`Unknown task: ${task}`));
+      return statusStore;
   }
 }
 
@@ -236,14 +283,19 @@ async function runCodeshift(
   task: TaskName,
   filepaths: string[],
   options: CodeshiftOptions,
-): Promise<void> {
+): Promise<{
+  error: number;
+  ok: number;
+  nochange: number;
+  skip: number;
+}> {
   if (!TRANSFORMS[task]) {
     throw new Error(`No transform found for task: ${task}`);
   }
 
   const codemodPath = path.join(__dirname, `${TRANSFORMS[task]}.js`);
 
-  await jscodeshift.run(codemodPath, filepaths, {
+  return await jscodeshift.run(codemodPath, filepaths, {
     babel: true,
     ignorePattern: GLOB_IGNORE_PATTERNS,
     parser: "tsx",
@@ -318,5 +370,43 @@ async function getNextTask(status?: any): Promise<TaskName> {
       console.error(error);
     }
     process.exit(1);
+  }
+}
+
+function getTokenCount(status: TokenStatus["status"], task: string): number {
+  switch (task) {
+    case "css-tokens":
+      return status.css.legacy.length;
+    case "scss-tokens":
+      return status.scss.legacy.length;
+    case "less-tokens":
+      return status.less.legacy.length;
+    case "js-tokens":
+      return status.js.legacy.length;
+    case "tailwind-tokens":
+      return status.tailwind.legacy.length;
+    default:
+      return 0;
+  }
+}
+
+function printSummary(
+  task: string,
+  stats: { ok: number },
+  tokensBefore: number,
+  tokensAfter: number,
+) {
+  console.info(chalk.bold(`\nMigration Summary for ${task}:`));
+  console.info("-".repeat(40));
+  console.info(`✅ Files changed:    ${stats.ok}`);
+  console.info(`✅ Tokens replaced:  ${tokensBefore - tokensAfter}`);
+  if (tokensAfter > 0) {
+    console.info(
+      chalk.yellow(
+        `⚠️ Tokens remaining: ${tokensAfter} (manual intervention needed)`,
+      ),
+    );
+  } else {
+    console.info(chalk.green(`✨ Tokens remaining: ${tokensAfter}`));
   }
 }
