@@ -1,7 +1,7 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
 import { Preview } from "@storybook/nextjs";
 import React, { useEffect } from "react";
-import "../@navikt/core/css/darkside/index.css";
+import "../@navikt/core/css/src/index.css";
 import { Provider } from "../@navikt/core/react/src/provider";
 import { Translations } from "../@navikt/core/react/src/util/i18n/i18n.types";
 import { en, nb, nn } from "../@navikt/core/react/src/util/i18n/locales";

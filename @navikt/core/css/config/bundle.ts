@@ -126,8 +126,8 @@ async function bundle() {
       .filter((line) => {
         /* We assume that all components is added under the layer components or layout */
         return (
-          line.endsWith("layer(aksel.components);") ||
-          line.endsWith("layer(aksel.layout);")
+          line.includes("layer(aksel.components") ||
+          line.includes("layer(aksel.layout")
         );
       })
       .join("\n");
@@ -211,7 +211,7 @@ async function bundle() {
       .filter((line) => line.startsWith("@import"))
       .filter((line) => !formLine.includes(line))
       .filter((line) => !primitivesLine.includes(line))
-      .filter((line) => line.endsWith("layer(aksel.components);"));
+      .filter((line) => line.includes("layer(aksel.components"));
   }
 
   for (const componentLine of componentFiles()) {
