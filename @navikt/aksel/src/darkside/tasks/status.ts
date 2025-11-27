@@ -30,6 +30,21 @@ function getStatus(
 
   StatusStore.initStatus();
 
+  const legacyCheckRegexes = new Map<string, RegExp>();
+  for (const legacyToken of Object.keys(legacyTokenConfig)) {
+    legacyCheckRegexes.set(legacyToken, getTokenRegex(legacyToken, "css"));
+  }
+
+  const darksideCheckRegexes = new Map<string, RegExp>();
+  for (const newTokenName of Object.keys(darksideTokenConfig)) {
+    darksideCheckRegexes.set(newTokenName, getTokenRegex(newTokenName, "css"));
+  }
+
+  const legacyRegex = new RegExp(
+    `(${legacyComponentTokenList.map((t) => `${t}:`).join("|")})`,
+    "gm",
+  );
+
   files.forEach((fileName, index) => {
     const fileSrc = fs.readFileSync(fileName, "utf8");
     const lineStarts = getLineStarts(fileSrc);
@@ -38,8 +53,12 @@ function getStatus(
      * We first parse trough all legacy tokens (--a-) prefixed tokens
      */
     for (const [legacyToken, config] of Object.entries(legacyTokenConfig)) {
-      if (!getTokenRegex(legacyToken, "css").test(fileSrc)) {
-        continue;
+      const checkRegex = legacyCheckRegexes.get(legacyToken);
+      if (checkRegex) {
+        checkRegex.lastIndex = 0;
+        if (!checkRegex.test(fileSrc)) {
+          continue;
+        }
       }
 
       for (const [regexKey, regex] of Object.entries(config.regexes)) {
@@ -74,11 +93,7 @@ function getStatus(
       }
     }
 
-    const legacyRegex = new RegExp(
-      `(${legacyComponentTokenList.map((t) => `${t}:`).join("|")})`,
-      "gm",
-    );
-
+    legacyRegex.lastIndex = 0;
     let legacyMatch: RegExpExecArray | null = legacyRegex.exec(fileSrc);
 
     while (legacyMatch !== null) {
@@ -101,8 +116,12 @@ function getStatus(
     }
 
     for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
-      if (!getTokenRegex(newTokenName, "css").test(fileSrc)) {
-        continue;
+      const checkRegex = darksideCheckRegexes.get(newTokenName);
+      if (checkRegex) {
+        checkRegex.lastIndex = 0;
+        if (!checkRegex.test(fileSrc)) {
+          continue;
+        }
       }
 
       for (const [regexKey, regex] of Object.entries(config.regexes)) {
