@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.35.0
+
+### Patch Changes
+
+- Combobox: Add locale-support for 'Ingen søketreff'. ([#4324](https://github.com/navikt/aksel/pull/4324))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.35.0
+  - @navikt/aksel-icons@7.35.0
+
 ## 7.34.0
 
 ### Minor Changes
