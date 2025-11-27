@@ -232,9 +232,10 @@ function getStatus(
 
 function getLineStarts(content: string): number[] {
   const starts = [0];
-  let i = -1;
-  while ((i = content.indexOf("\n", i + 1)) !== -1) {
-    starts.push(i + 1);
+  let lineIndex = content.indexOf("\n", 0);
+  while (lineIndex !== -1) {
+    starts.push(lineIndex + 1);
+    lineIndex = content.indexOf("\n", lineIndex + 1);
   }
   return starts;
 }
