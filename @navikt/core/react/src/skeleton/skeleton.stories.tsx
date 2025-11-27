@@ -1,11 +1,10 @@
-import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { Skeleton } from ".";
 import { Alert } from "../alert";
 import { Button } from "../button";
 import { Checkbox } from "../form/checkbox";
-import { VStack } from "../layout/stack";
 import { BodyLong, Heading } from "../typography";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 
 export default {
   title: "ds-react/Skeleton",
@@ -21,8 +20,6 @@ export default {
     chromatic: { disable: true },
   },
 };
-
-type Story = StoryObj<typeof Skeleton>;
 
 export const Default = {
   render: () => (
@@ -136,36 +133,11 @@ export const InlineText = {
   ),
 };
 
-export const Chromatic: Story = {
-  render: () => (
-    <VStack gap="2">
-      <div>
-        <h2>Default</h2>
-        <Default.render />
-      </div>
-      <div>
-        <h2>Shapes</h2>
-        <Shapes.render />
-      </div>
-      <div>
-        <h2>WrappingComponents</h2>
-        <WrappingComponents.render />
-      </div>
-      <div>
-        <h2>TextSizing</h2>
-        <TextSizing.render />
-      </div>
-      <div>
-        <h2>NativeText</h2>
-        <NativeText.render />
-      </div>
-      <div>
-        <h2>InlineText</h2>
-        <InlineText.render />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Shapes,
+  WrappingComponents,
+  TextSizing,
+  NativeText,
+  InlineText,
+});

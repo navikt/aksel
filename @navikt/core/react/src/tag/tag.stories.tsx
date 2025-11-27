@@ -2,7 +2,8 @@ import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { ComponentIcon } from "@navikt/aksel-icons";
 import { Tag, TagProps } from ".";
-import { HStack, VStack } from "../layout/stack";
+import { HStack } from "../layout/stack";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 
 const sizes: TagProps["size"][] = ["xsmall", "small", "medium"];
 
@@ -142,32 +143,10 @@ export const WithIcons: StoryFn<Story> = () => {
   );
 };
 
-export const Chromatic: Story = {
-  render: () => (
-    <VStack gap="2">
-      <div>
-        <h2>Default</h2>
-        <Default.render {...Default.args} />
-      </div>
-      <div>
-        <h2>Small</h2>
-        <Small />
-      </div>
-      <div>
-        <h2>XSmall</h2>
-        <XSmall />
-      </div>
-      <div>
-        <h2>Variants</h2>
-        <Variants />
-      </div>
-      <div>
-        <h2>WithIcons</h2>
-        <WithIcons />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Small,
+  XSmall,
+  Variants,
+  WithIcons,
+});
