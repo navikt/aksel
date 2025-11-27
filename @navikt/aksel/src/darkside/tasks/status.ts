@@ -32,6 +32,7 @@ function getStatus(
 
   files.forEach((fileName, index) => {
     const fileSrc = fs.readFileSync(fileName, "utf8");
+    const lineStarts = getLineStarts(fileSrc);
 
     /**
      * We first parse trough all legacy tokens (--a-) prefixed tokens
@@ -49,7 +50,10 @@ function getStatus(
         let match: RegExpExecArray | null = regex.exec(fileSrc);
 
         while (match) {
-          const { row, column } = getWordPositionInFile(fileSrc, match.index);
+          const { row, column } = getWordPositionInFile(
+            match.index,
+            lineStarts,
+          );
 
           StatusStore.add({
             isLegacy: true,
@@ -78,7 +82,10 @@ function getStatus(
     let legacyMatch: RegExpExecArray | null = legacyRegex.exec(fileSrc);
 
     while (legacyMatch !== null) {
-      const { row, column } = getWordPositionInFile(fileSrc, legacyMatch.index);
+      const { row, column } = getWordPositionInFile(
+        legacyMatch.index,
+        lineStarts,
+      );
 
       StatusStore.add({
         isLegacy: true,
@@ -105,7 +112,10 @@ function getStatus(
         let match: RegExpExecArray | null = regex.exec(fileSrc);
 
         while (match) {
-          const { row, column } = getWordPositionInFile(fileSrc, match.index);
+          const { row, column } = getWordPositionInFile(
+            match.index,
+            lineStarts,
+          );
 
           StatusStore.add({
             isLegacy: false,
@@ -140,21 +150,34 @@ function getStatus(
   return StatusStore;
 }
 
-function getWordPositionInFile(
-  fileContent: string,
-  index: number,
-): { row: number; column: number } {
-  let row = 1;
-  let lastNewLineIndex = -1;
+function getLineStarts(content: string): number[] {
+  const starts = [0];
+  let i = -1;
+  while ((i = content.indexOf("\n", i + 1)) !== -1) {
+    starts.push(i + 1);
+  }
+  return starts;
+}
 
-  for (let i = 0; i < index; i++) {
-    if (fileContent[i] === "\n") {
-      row++;
-      lastNewLineIndex = i;
+function getWordPositionInFile(
+  index: number,
+  lineStarts: number[],
+): { row: number; column: number } {
+  let low = 0;
+  let high = lineStarts.length - 1;
+  let lineIndex = 0;
+
+  while (low <= high) {
+    const mid = (low + high) >>> 1;
+    if (lineStarts[mid] <= index) {
+      lineIndex = mid;
+      low = mid + 1;
+    } else {
+      high = mid - 1;
     }
   }
 
-  return { row, column: index - lastNewLineIndex };
+  return { row: lineIndex + 1, column: index - lineStarts[lineIndex] + 1 };
 }
 
-export { getStatus, getWordPositionInFile };
+export { getStatus, getWordPositionInFile, getLineStarts };
