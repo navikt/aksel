@@ -53,7 +53,7 @@ const TASK_MENU = {
   initial: "status",
   choices: [
     { message: "Check status", name: "status" },
-    { message: "Print remaining tokens", name: "print-remaining-tokens" },
+    { message: "Print status", name: "print-remaining-tokens" },
     { message: "Migrate CSS tokens", name: "css-tokens" },
     { message: "Migrate Scss tokens", name: "scss-tokens" },
     { message: "Migrate Less tokens", name: "less-tokens" },
@@ -118,7 +118,7 @@ async function executeTask(
       break;
 
     case "print-remaining-tokens":
-      printRemaining(filepaths);
+      await printRemaining(filepaths);
       break;
 
     case "css-tokens":
