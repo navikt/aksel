@@ -1,6 +1,6 @@
 # Aksel command line interface
 
-CLI tool for managing Codemods when consuming Aksel-packages.
+CLI tool for running codemods when consuming Aksel-packages.
 
 [Documentation](https://aksel.nav.no/preview/grunnleggende/kode/kommandolinje)
 
