@@ -10,6 +10,7 @@ import {
   getDefaultGlob,
 } from "../codemod/codeshift.utils";
 import { validateGit } from "../codemod/validation";
+import { TokenStatus } from "./config/TokenStatus";
 import { printRemaining } from "./tasks/print-remaining";
 import { getStatus } from "./tasks/status";
 
@@ -83,16 +84,22 @@ export async function runTooling(
 
   // Task execution loop
   let task: TaskName = await getNextTask(initialStatus.status);
+  let currentStatus = initialStatus;
 
   while (task !== "exit") {
     console.info("\n\n");
 
     try {
-      await executeTask(task, filepaths, options, program);
+      await executeTask(task, filepaths, options, program, currentStatus);
     } catch (error) {
       program.error(chalk.red("Error:", error.message));
     }
-    const currentStatus = getStatus(filepaths, "no-print");
+
+    // Only re-scan if we actually ran a migration
+    if (task !== "status" && task !== "print-remaining-tokens") {
+      currentStatus = getStatus(filepaths, "no-print");
+    }
+
     task = await getNextTask(currentStatus.status);
   }
 
@@ -107,6 +114,7 @@ async function executeTask(
   filepaths: string[],
   options: ToolingOptions,
   program: Command,
+  statusStore: TokenStatus,
 ): Promise<void> {
   switch (task) {
     case "status":
@@ -114,7 +122,7 @@ async function executeTask(
       break;
 
     case "print-remaining-tokens":
-      await printRemaining(filepaths);
+      await printRemaining(filepaths, statusStore.status);
       break;
 
     case "css-tokens":
@@ -125,13 +133,20 @@ async function executeTask(
       if (!options.force) {
         validateGit(options, program);
       }
-      const updatedStatus = getStatus(filepaths, "no-print").status;
-      const scopedFiles = getScopedFilesForTask(task, filepaths, updatedStatus);
+      const scopedFiles = getScopedFilesForTask(
+        task,
+        filepaths,
+        statusStore.status,
+      );
 
       await runCodeshift(task, scopedFiles, {
         dryRun: options.dryRun,
         force: options.force,
       });
+
+      console.info(chalk.green(`\n✅ ${task} complete!`));
+      console.info(`Processed ${scopedFiles.length} files.`);
+      await waitForKeyPress();
       break;
     }
     case "run-all-migrations": {
@@ -154,12 +169,23 @@ async function executeTask(
           force: true,
         });
       }
+
+      console.info(chalk.green(`\n✅ All migrations complete!`));
+      await waitForKeyPress();
       break;
     }
 
     default:
       program.error(chalk.red(`Unknown task: ${task}`));
   }
+}
+
+async function waitForKeyPress() {
+  await Enquirer.prompt({
+    type: "input",
+    name: "key",
+    message: "Press Enter to return to menu...",
+  });
 }
 
 const JS_EXTENSIONS = [

@@ -1,11 +1,12 @@
 import clipboardy from "clipboardy";
 import Enquirer from "enquirer";
 import path from "node:path";
+import { TokenStatus } from "../config/TokenStatus";
 import { getStatus } from "./status";
 
-async function printRemaining(files: string[]) {
+async function printRemaining(files: string[], status?: TokenStatus["status"]) {
   process.stdout.write("\nAnalyzing...");
-  const statusObj = getStatus(files, "no-print").status;
+  const statusObj = status ?? getStatus(files, "no-print").status;
 
   // Flatten all legacy tokens
   const allTokens = Object.values(statusObj).flatMap((data) => data.legacy);
