@@ -16,9 +16,7 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
     kilde,
   } = props.value;
 
-  const imageUrl = urlForImage(props?.value)
-    ?.auto("format")
-    .url();
+  const imageUrl = urlForImage(props?.value)?.auto("format").url();
 
   if (!imageUrl) {
     return null;
@@ -55,11 +53,7 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
                 <>
                   {`${kilde?.prefix}: `}
 
-                  <Link
-                    as={NextLink}
-                    href={kilde.link}
-                    className="break-normal"
-                  >
+                  <Link as={NextLink} href={kilde.link}>
                     {kilde?.tekst}
                   </Link>
                 </>

@@ -33,6 +33,10 @@ body {
   }
 }
 
+[data-scroll-margin] {
+  scroll-margin: 5rem;
+}
+
 [data-clamp-text] {
   overflow: hidden;
   display: -webkit-box;

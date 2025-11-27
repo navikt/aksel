@@ -73,6 +73,7 @@
 
 /* ------------------------------- Search icon ------------------------------ */
 .aksel-search__search-icon {
+  color: var(--ax-text-neutral);
   position: absolute;
   left: var(--ax-space-8);
   top: 50%;

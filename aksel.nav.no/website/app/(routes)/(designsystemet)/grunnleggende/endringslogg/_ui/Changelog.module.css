@@ -51,6 +51,7 @@
 .logEntry {
   /* header + monthSpacer + monthBubble + log entry spacer */
   scroll-margin-top: calc(var(--website-header-height) + var(--ax-space-12) + 48px + var(--ax-space-32));
+  overflow-wrap: anywhere;
 }
 
 .entryEyebrowNotFremhevet {
