@@ -1,6 +1,6 @@
 # Aksel command line interface
 
-CLI tool for managing CSS-imports and Codemods when consuming Aksel-packages.
+CLI tool for running codemods when consuming Aksel-packages.
 
 [Documentation](https://aksel.nav.no/preview/grunnleggende/kode/kommandolinje)
 
@@ -9,7 +9,6 @@ run:
 npx @navikt/aksel
 
 commands:
-css-imports: Generate css-imports for all components from Aksel
 codemod: Codemods for version-migrations related to Aksel
 ```
 
