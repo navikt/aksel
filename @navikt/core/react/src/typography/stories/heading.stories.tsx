@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { default as React } from "react";
 import { expect, within } from "storybook/test";
 import { VStack } from "../../layout/stack";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import Heading from "../Heading";
 
 const meta: Meta<typeof Heading> = {
@@ -151,28 +152,9 @@ export const ColorRole: Story = {
   ),
 };
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Sizes</h2>
-        {Sizes.render?.(...props)}
-      </div>
-      <div>
-        <h2>Align</h2>
-        {Align.render?.(...props)}
-      </div>
-      <div>
-        <h2>Override Tag</h2>
-        {OverrideTag.render?.(...props)}
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        {ColorRole.render?.(...props)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Sizes,
+  Align,
+  OverrideTag,
+  ColorRole,
+});
