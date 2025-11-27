@@ -4,17 +4,17 @@
 @layer aksel.reset, aksel.theming, aksel.baseline, aksel.print, aksel.typography, aksel.components, aksel.layout;
 
 /* ----------------------------- CSS foundations ---------------------------- */
-@import "./baseline/fonts.darkside.css" layer(aksel.typography);
-@import "./baseline/reset.darkside.css" layer(aksel.reset);
-@import "./baseline/tokens.darkside.css" layer(aksel.theming);
-@import "./baseline/baseline.darkside.css" layer(aksel.baseline);
-@import "./baseline/print.darkside.css" layer(aksel.print);
+@import "./baseline/fonts.css" layer(aksel.typography);
+@import "./baseline/reset.css" layer(aksel.reset);
+@import "./baseline/tokens.css" layer(aksel.theming);
+@import "./baseline/baseline.css" layer(aksel.baseline);
+@import "./baseline/print.css" layer(aksel.print);
 
 /* ------------------------------- Components ------------------------------- */
-@import "./theme.darkside.css" layer(aksel.components);
-@import "./typography.darkside.css" layer(aksel.components);
-@import "./button.darkside.css" layer(aksel.components);
-@import "./chips.darkside.css" layer(aksel.components);
+@import "./theme.css" layer(aksel.components);
+@import "./typography.css" layer(aksel.components);
+@import "./button.css" layer(aksel.components);
+@import "./chips.css" layer(aksel.components);
 
 /**
   * Most components depend on typo-styles, so we import them first.
@@ -25,39 +25,39 @@
   * To avoid specificity conflicts, we import those components before form.
 */
 @import "./form/index.css" layer(aksel.components);
-@import "./accordion.darkside.css" layer(aksel.components);
-@import "./alert.darkside.css" layer(aksel.components);
-@import "./chat.darkside.css" layer(aksel.components);
-@import "./copybutton.darkside.css" layer(aksel.components);
-@import "./date.darkside.css" layer(aksel.components);
-@import "./dropdown.darkside.css" layer(aksel.components);
-@import "./action-menu.darkside.css" layer(aksel.components);
-@import "./expansioncard.darkside.css" layer(aksel.components);
-@import "./guide-panel.darkside.css" layer(aksel.components);
-@import "./help-text.darkside.css" layer(aksel.components);
-@import "./inline-message.darkside.css" layer(aksel.components);
-@import "./internalheader.darkside.css" layer(aksel.components);
-@import "./link.darkside.css" layer(aksel.components);
-@import "./link-panel.darkside.css" layer(aksel.components);
-@import "./link-anchor.darkside.css" layer(aksel.components);
-@import "./link-card.darkside.css" layer(aksel.components);
-@import "./loader.darkside.css" layer(aksel.components);
-@import "./modal.darkside.css" layer(aksel.components);
-@import "./pagination.darkside.css" layer(aksel.components);
-@import "./popover.darkside.css" layer(aksel.components);
-@import "./tag.darkside.css" layer(aksel.components);
-@import "./timeline.darkside.css" layer(aksel.components);
-@import "./tooltip.darkside.css" layer(aksel.components);
-@import "./toggle-group.darkside.css" layer(aksel.components);
-@import "./panel.darkside.css" layer(aksel.components);
-@import "./read-more.darkside.css" layer(aksel.components);
-@import "./progress-bar.darkside.css" layer(aksel.components);
-@import "./skeleton.darkside.css" layer(aksel.components);
-@import "./process.darkside.css" layer(aksel.components);
-@import "./stepper.darkside.css" layer(aksel.components);
-@import "./table.darkside.css" layer(aksel.components);
-@import "./tabs.darkside.css" layer(aksel.components);
-@import "./list.darkside.css" layer(aksel.components);
+@import "./accordion.css" layer(aksel.components);
+@import "./alert.css" layer(aksel.components);
+@import "./chat.css" layer(aksel.components);
+@import "./copybutton.css" layer(aksel.components);
+@import "./date.css" layer(aksel.components);
+@import "./dropdown.css" layer(aksel.components);
+@import "./action-menu.css" layer(aksel.components);
+@import "./expansioncard.css" layer(aksel.components);
+@import "./guide-panel.css" layer(aksel.components);
+@import "./help-text.css" layer(aksel.components);
+@import "./inline-message.css" layer(aksel.components);
+@import "./internalheader.css" layer(aksel.components);
+@import "./link.css" layer(aksel.components);
+@import "./link-panel.css" layer(aksel.components);
+@import "./link-anchor.css" layer(aksel.components);
+@import "./link-card.css" layer(aksel.components);
+@import "./loader.css" layer(aksel.components);
+@import "./modal.css" layer(aksel.components);
+@import "./pagination.css" layer(aksel.components);
+@import "./popover.css" layer(aksel.components);
+@import "./tag.css" layer(aksel.components);
+@import "./timeline.css" layer(aksel.components);
+@import "./tooltip.css" layer(aksel.components);
+@import "./toggle-group.css" layer(aksel.components);
+@import "./panel.css" layer(aksel.components);
+@import "./read-more.css" layer(aksel.components);
+@import "./progress-bar.css" layer(aksel.components);
+@import "./skeleton.css" layer(aksel.components);
+@import "./process.css" layer(aksel.components);
+@import "./stepper.css" layer(aksel.components);
+@import "./table.css" layer(aksel.components);
+@import "./tabs.css" layer(aksel.components);
+@import "./list.css" layer(aksel.components);
 
 /* --------------------------------- Layout --------------------------------- */
 @import "./primitives/index.css" layer(aksel.layout);
