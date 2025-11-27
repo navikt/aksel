@@ -18,10 +18,7 @@ type MigrationT = Record<
   string,
   {
     description: string;
-    value: Exclude<
-      string,
-      (typeof MigrationOverride)[keyof typeof MigrationOverride][number]["value"]
-    >;
+    value: string;
     path: string;
     warning?: string;
     /**
@@ -251,7 +248,14 @@ export function getMigrationNames() {
     .map((x) => x.value);
 }
 
-const MigrationOverride = {
+/**
+ * Allows injecting additional migration names that are not part of the main migrations-list.
+ * This is used for interactive migrations that should not be part of the main list.
+ *
+ * We need to separate this since main migration list expect all migration names to have a unique path,
+ * which is not the case for interactive migrations that are handled differently.
+ */
+export const migrationStringOverride = {
   "v8.0.0": [
     {
       value: "v8-tokens",
@@ -272,7 +276,7 @@ export function getMigrationString() {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });
 
-    const overrideMigrations = MigrationOverride[version] || [];
+    const overrideMigrations = migrationStringOverride[version] || [];
     overrideMigrations.forEach((migration) => {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });
