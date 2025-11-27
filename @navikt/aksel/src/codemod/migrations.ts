@@ -129,29 +129,6 @@ export const migrations: {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  spacing: [
-    {
-      description:
-        "Updates all Primitives to use new `space`-tokens. (Works with old and new system)",
-      value: "primitive-spacing",
-      path: "spacing/primitives-spacing/spacing",
-      ignoredExtensions: CSS_EXTENSIONS,
-    },
-    {
-      description:
-        "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
-      value: "token-spacing",
-      path: "spacing/token-spacing/spacing",
-      ignoredExtensions: [],
-    },
-    {
-      description:
-        "Updates js-tokens to use new `space`-tokens. (Works with old and new system)",
-      value: "token-spacing-js",
-      path: "spacing/token-spacing-js/spacing",
-      ignoredExtensions: CSS_EXTENSIONS,
-    },
-  ],
   "v8.0.0": [
     {
       description:
@@ -221,6 +198,27 @@ export const migrations: {
         "Tries to migrate List component moving 'title' and 'description' props to 'Heading' and 'BodyShort'.",
       value: "v8-list",
       path: "v8.0.0/list/list",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates all Primitives to use new `space`-tokens. (Works with old and new system)",
+      value: "v8-primitive-spacing",
+      path: "v8.0.0/primitives-spacing/spacing",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
+      value: "v8-token-spacing",
+      path: "v8.0.0/token-spacing/spacing",
+      ignoredExtensions: [],
+    },
+    {
+      description:
+        "Updates js-tokens to use new `space`-tokens. (Works with old and new system)",
+      value: "v8-token-spacing-js",
+      path: "v8.0.0/token-spacing-js/spacing",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],

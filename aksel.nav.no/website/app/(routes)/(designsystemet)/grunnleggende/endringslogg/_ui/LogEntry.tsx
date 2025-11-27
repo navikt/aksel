@@ -112,7 +112,9 @@ export default function LogEntry({
                 className={!fremhevet ? styles.entryEyebrowNotFremhevet : ""}
               >
                 {capitalizeText(endringstype || "")}
-                <span className="sr-only">.&nbsp;</span>
+                <BodyShort as="span" visuallyHidden>
+                  .&nbsp;
+                </BodyShort>
                 <span aria-hidden>•</span>
                 <span>
                   {format(new Date(endringsdato || 0), "d. MMMM yyy", {

@@ -14,13 +14,13 @@ const Example = () => {
       <Table.Body>
         {data.map(({ name, fnr, start }, i) => {
           const hasError = fnr.startsWith("18") ? "Error message" : false;
-          const cellClass = hasError ? "align-top" : "";
+          const cellStyle = hasError ? { verticalAlign: "baseline" } : {};
           return (
             <Table.Row key={i + fnr}>
-              <Table.HeaderCell scope="row" className={cellClass}>
+              <Table.HeaderCell scope="row" style={cellStyle}>
                 {name}
               </Table.HeaderCell>
-              <Table.DataCell className={cellClass}>
+              <Table.DataCell style={cellStyle}>
                 <TextField
                   label="Fødselsnr."
                   hideLabel
@@ -30,7 +30,7 @@ const Example = () => {
                   error={hasError}
                 />
               </Table.DataCell>
-              <Table.DataCell className={cellClass}>
+              <Table.DataCell style={cellStyle}>
                 {format(new Date(start))}
               </Table.DataCell>
             </Table.Row>

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { CopyButton } from "@navikt/ds-react";
+import { BodyShort, CopyButton } from "@navikt/ds-react";
 import styles from "./WebsiteTable.module.css";
 
 const TableContext = createContext<boolean>(false);
@@ -25,12 +25,20 @@ function WebsiteTable({
               className={styles.websiteTableTh}
               data-hide={x.hideOnSm ? "sm" : undefined}
             >
-              {x?.sronly ? <span className="sr-only">{x.text}</span> : x.text}
+              {x?.sronly ? (
+                <BodyShort as="span" visuallyHidden>
+                  {x.text}
+                </BodyShort>
+              ) : (
+                x.text
+              )}
             </th>
           ))}
           {withCopy && (
             <th data-hide="sm" className={styles.websiteTableTh}>
-              <span className="sr-only">Kopi</span>
+              <BodyShort as="span" visuallyHidden>
+                Kopi
+              </BodyShort>
             </th>
           )}
         </tr>
