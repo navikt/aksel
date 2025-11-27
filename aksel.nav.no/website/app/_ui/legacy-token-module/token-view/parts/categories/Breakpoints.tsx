@@ -5,14 +5,14 @@ import {
   MonitorIcon,
   TabletIcon,
 } from "@navikt/aksel-icons";
-import docs from "@navikt/ds-tokens/docs.json";
 import {
   WebsiteTable,
   WebsiteTableRow,
 } from "@/app/_ui/website-table/WebsiteTable";
+import { LegacyDocs } from "../../../legacy-docs";
 
 export const BreakpointsView = ({ cat }: { cat: string }) => {
-  const breakpoints = docs[cat];
+  const breakpoints = LegacyDocs[cat];
 
   return (
     <WebsiteTable

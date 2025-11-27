@@ -63,14 +63,6 @@ export const Controls: Story = {
     );
   },
   argTypes: {
-    variant: {
-      options: ["default", "neutral"],
-      control: { type: "select" },
-    },
-    headingSize: {
-      options: ["large", "medium", "small", "xsmall"],
-      control: { type: "select" },
-    },
     size: {
       options: ["large", "medium", "small"],
       control: { type: "select" },
@@ -78,8 +70,6 @@ export const Controls: Story = {
   },
 
   args: {
-    variant: "default",
-    headingSize: "medium",
     size: "medium",
     indent: true,
   },
@@ -93,27 +83,6 @@ export const DefaultOpen: Story = {
           <Item key={y} defaultOpen={y === 2} />
         ))}
       </Accordion>
-    );
-  },
-};
-
-export const Variants: Story = {
-  render: () => {
-    return (
-      <div className="colgap">
-        <h3>Default</h3>
-        <Accordion>
-          {[...Array(2)].map((_, y) => (
-            <Item key={y} defaultOpen />
-          ))}
-        </Accordion>
-        <h3>Neutral</h3>
-        <Accordion variant="neutral">
-          {[...Array(2)].map((_, y) => (
-            <Item key={y} defaultOpen />
-          ))}
-        </Accordion>
-      </div>
     );
   },
 };
@@ -144,16 +113,15 @@ export const ControlledState: Story = {
 
 const SingleHeaderAccordion = ({
   size = "medium",
-  headingSize = "medium",
 }: Partial<AccordionProps>) => {
   return (
-    <Accordion size={size} headingSize={headingSize}>
+    <Accordion size={size}>
       <Accordion.Item>
-        <Accordion.Header>{`${size} size + ${headingSize} heading`}</Accordion.Header>
+        <Accordion.Header>{`${size} size heading`}</Accordion.Header>
         <Accordion.Content>a</Accordion.Content>
       </Accordion.Item>
       <Accordion.Item open>
-        <Accordion.Header>{`${size} size + ${headingSize} heading`}</Accordion.Header>
+        <Accordion.Header>{`${size} size heading`}</Accordion.Header>
         <Accordion.Content>
           lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Accordion.Content>
@@ -163,28 +131,12 @@ const SingleHeaderAccordion = ({
 };
 
 const sizes: AccordionProps["size"][] = ["large", "medium", "small"];
-const headingSizes: AccordionProps["headingSize"][] = [
-  "large",
-  "medium",
-  "small",
-  "xsmall",
-];
 
 export const Size: Story = {
   render: () => (
     <div className="colgap">
       {sizes.map((size) => (
         <SingleHeaderAccordion key={size} size={size} />
-      ))}
-    </div>
-  ),
-};
-
-export const HeadingSize: Story = {
-  render: () => (
-    <div className="colgap">
-      {headingSizes.map((size) => (
-        <SingleHeaderAccordion key={size} headingSize={size} />
       ))}
     </div>
   ),
@@ -231,9 +183,7 @@ export const ColorRole: Story = {
 };
 
 export const Chromatic = renderStoriesForChromatic({
-  Variants,
   Size,
-  HeadingSize,
   DefaultOpen,
   Indent,
   ColorRole,

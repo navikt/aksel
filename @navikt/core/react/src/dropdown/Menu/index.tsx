@@ -76,7 +76,6 @@ export const Menu = forwardRef<HTMLDivElement, DropdownMenuProps>(
         {...rest}
         placement={placement}
         ref={ref}
-        arrow={false}
         className={cn("navds-dropdown__menu", className)}
         offset={-4}
         anchorEl={anchorEl}

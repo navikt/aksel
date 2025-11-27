@@ -31,7 +31,7 @@ const LinkWrapper = ({
     <Link
       href="#"
       underline={underline}
-      variant={variant as "action" | "neutral" | "subtle"}
+      variant={variant as "action" | "neutral"}
       inlineText={inlineText}
     >
       {iconLeft && <RandomIcon />}
@@ -119,28 +119,6 @@ export const InlineInsideBodyLong = {
   },
 };
 
-export const Varianter = {
-  render: ({ iconLeft, iconRight }) => {
-    return (
-      <VStack gap="3">
-        {["action", "neutral", "subtle"].map((variant) => (
-          <div key={variant}>
-            <LinkWrapper
-              iconLeft={iconLeft}
-              iconRight={iconRight}
-              variant={variant}
-            />
-          </div>
-        ))}
-      </VStack>
-    );
-  },
-  args: {
-    iconLeft: false,
-    iconRight: false,
-  },
-};
-
 const LinkWithIcon = () => (
   <Link href="#">
     <PlusCircleFillIcon aria-hidden />
@@ -151,20 +129,10 @@ const LinkWithIcon = () => (
 
 export const Icon = () => <LinkWithIcon />;
 
-const Variants = () => (
-  <VStack gap="3">
-    {["action", "neutral", "subtle"].map((variant) => (
-      <div key={variant}>
-        <LinkWrapper variant={variant} />
-      </div>
-    ))}
-  </VStack>
-);
-
 export const ColorRole = () => (
   <VStack gap="3" data-color="brand-magenta">
     <Link href="#">Ex aliqua incididunt</Link>
-    {["action", "neutral", "subtle"].map((variant) => (
+    {["action", "neutral"].map((variant) => (
       <div key={variant}>
         <LinkWrapper variant={variant} underline />
       </div>
@@ -179,9 +147,6 @@ export const Chromatic = () => (
 
     <h2>With icon</h2>
     <LinkWithIcon />
-
-    <h2>Variants (no underline)</h2>
-    <Variants />
 
     <h2>Inline</h2>
     <BodyLong style={{ width: 500 }}>

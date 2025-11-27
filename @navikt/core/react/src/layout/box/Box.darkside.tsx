@@ -67,8 +67,10 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   PrimitiveAsChildProps;
 
 /**
- *
  * Foundational Layout-primitive for generic encapsulation & styling.
+ * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/Box' instead (with same props).
+ *
+ * **Run `npx @navikt/aksel@latest codemod v8-box-new` to migrate.**
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/box)
  * @see 🏷️ {@link BoxProps}
@@ -128,15 +130,9 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
               .map((x) => `${x}px`)
               .join(" ")
           : undefined,
-        ...getResponsiveProps(
-          "ax",
-          "box",
-          "radius",
-          "radius",
-          borderRadius,
-          false,
-          ["0"],
-        ),
+        ...getResponsiveProps("box", "radius", "radius", borderRadius, false, [
+          "0",
+        ]),
       };
 
       const Comp = asChild ? Slot : Component;

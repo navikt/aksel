@@ -92,20 +92,16 @@ const PortalDiv = forwardRef<HTMLDivElement, PortalDivProps>(
   (props: PortalDivProps, forwardedRef) => {
     const themeContext = useThemeInternal(false);
 
-    if (themeContext?.isDarkside) {
-      return (
-        <Theme
-          theme={themeContext?.theme}
-          asChild
-          hasBackground={false}
-          data-color={themeContext?.color}
-        >
-          <div ref={forwardedRef} {...props} />
-        </Theme>
-      );
-    }
-
-    return <div ref={forwardedRef} {...props} />;
+    return (
+      <Theme
+        theme={themeContext?.theme}
+        asChild
+        hasBackground={false}
+        data-color={themeContext?.color}
+      >
+        <div ref={forwardedRef} {...props} />
+      </Theme>
+    );
   },
 );
 
