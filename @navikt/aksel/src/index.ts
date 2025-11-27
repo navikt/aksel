@@ -13,13 +13,16 @@ async function run() {
     return;
   }
 
-  if (process.argv[2] === "codemod") {
-    codemodCommand();
+  /**
+   * Runs custom tooling for migrating to v8 tokens
+   */
+  if (process.argv[2] === "codemod" && process.argv[3] === "v8-tokens") {
+    darksideCommand();
     return;
   }
 
-  if (process.argv[2] === "darkside") {
-    darksideCommand();
+  if (process.argv[2] === "codemod") {
+    codemodCommand();
     return;
   }
 
