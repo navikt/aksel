@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
   "organizeImports": {
-    "enabled": true
+    "enabled": false
   },
   "javascript": {
     "jsxRuntime": "reactClassic"
