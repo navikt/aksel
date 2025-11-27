@@ -28,7 +28,6 @@ type TaskName =
 type ToolingOptions = {
   force: boolean;
   dryRun: boolean;
-  print: boolean;
   glob: string;
   ext: string;
 };
@@ -144,11 +143,12 @@ async function executeTask(
         "js-tokens",
         "tailwind-tokens",
       ] as const;
-      for (const migrationTask of tasks) {
-        if (!options.force) {
-          validateGit(options, program);
-        }
 
+      if (!options.force) {
+        validateGit(options, program);
+      }
+
+      for (const migrationTask of tasks) {
         console.info(`\nRunning ${migrationTask}...`);
         await runCodeshift(migrationTask, filepaths, {
           dryRun: options.dryRun,
