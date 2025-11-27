@@ -75,7 +75,7 @@ function Example() {
             <InfoCard.Content>
               Her skal det stå en viktig melding om tidsbestemte eller
               situasjonsbestemte forhold som påvirker søknaden. <br />
-              Bruk kun 1 Info Alert per side.
+              Bruk kun 1 InfoCard per side.
             </InfoCard.Content>
           </InfoCard>
           <div>
