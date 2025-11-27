@@ -71,10 +71,23 @@ export async function runTooling(
   options: ToolingOptions,
   program: Command,
 ): Promise<void> {
+  console.info(
+    chalk.greenBright.bold("\nWelcome to the Aksel v8 token migration tool!"),
+  );
+
+  const globList = [options.glob ?? getDefaultGlob(options?.ext)];
+
+  console.info(
+    chalk.gray(
+      `Using glob pattern(s): ${globList.join(", ")}\nWorking directory: ${process.cwd()}\n`,
+    ),
+  );
+
   // Find matching files based on glob pattern
-  const filepaths = fg.sync([options.glob ?? getDefaultGlob(options?.ext)], {
+  const filepaths = await fg(globList, {
     cwd: process.cwd(),
     ignore: GLOB_IGNORE_PATTERNS,
+    followSymbolicLinks: false,
   });
 
   if (options.dryRun) {

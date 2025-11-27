@@ -28,14 +28,22 @@ export async function runCodeshift(
     `./transforms/${getMigrationPath(input)}.js`,
   );
 
-  const filepaths = fg.sync([options.glob ?? getDefaultGlob(options?.ext)], {
-    cwd: process.cwd(),
-    ignore: GLOB_IGNORE_PATTERNS,
-  });
-
+  console.info(chalk.greenBright.bold("\nWelcome to Aksel codemods!"));
   console.info("\nRunning migration:", chalk.green("input"));
 
-  options?.glob && console.info(`Using glob: ${chalk.green(options.glob)}\n`);
+  const globList = [options.glob ?? getDefaultGlob(options?.ext)];
+
+  console.info(
+    chalk.gray(
+      `Using glob pattern(s): ${globList.join(", ")}\nWorking directory: ${process.cwd()}\n`,
+    ),
+  );
+
+  const filepaths = fg.sync(globList, {
+    cwd: process.cwd(),
+    ignore: GLOB_IGNORE_PATTERNS,
+    followSymbolicLinks: false,
+  });
 
   const warning = getWarning(input);
 
