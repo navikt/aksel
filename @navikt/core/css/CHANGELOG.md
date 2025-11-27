@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.35.0
+
+### Patch Changes
+
+- Search: Fixes edgecase where darkmode (in darkside) were used without color-scheme, making icons inverted in color. ([#4323](https://github.com/navikt/aksel/pull/4323))
+
 ## 7.34.0
 
 ### Minor Changes
