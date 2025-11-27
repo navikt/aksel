@@ -15,11 +15,6 @@ body {
   padding: 1rem;
 }
 
-.colgap[data-theme="dark"],
-.rowgap[data-theme="dark"] {
-  background-color: var(--a-gray-900);
-}
-
 .rowgap-wrap {
   flex-wrap: wrap;
 }
