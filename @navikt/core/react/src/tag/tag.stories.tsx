@@ -63,11 +63,11 @@ type Story = StoryObj<typeof Tag>;
 export const Default = {
   render: (props) => (
     <Tag
-      variant={props.variant}
+      variant={props.variant ?? "info"}
       size={props.size}
       icon={props.icon && <ComponentIcon aria-hidden />}
     >
-      {props.children}
+      {props.children ?? "Id elit esse"}
     </Tag>
   ),
 
