@@ -46,24 +46,6 @@ const TRANSFORMS: Record<string, string> = {
   "tailwind-tokens": "./transforms/darkside-tokens-tailwind",
 };
 
-const TASK_MENU = {
-  type: "select",
-  name: "task",
-  message: "Task",
-  initial: "status",
-  choices: [
-    { message: "Check status", name: "status" },
-    { message: "Print status", name: "print-remaining-tokens" },
-    { message: "Migrate CSS tokens", name: "css-tokens" },
-    { message: "Migrate Scss tokens", name: "scss-tokens" },
-    { message: "Migrate Less tokens", name: "less-tokens" },
-    { message: "Migrate JS tokens", name: "js-tokens" },
-    { message: "Migrate tailwind tokens", name: "tailwind-tokens" },
-    { message: "Run all migrations", name: "run-all-migrations" },
-    { message: "Exit", name: "exit" },
-  ] as { message: string; name: TaskName }[],
-};
-
 /**
  * Main entry point for the tooling system
  */
@@ -97,10 +79,10 @@ export async function runTooling(
   }
 
   // Show initial status
-  getStatus(filepaths);
+  const initialStatus = getStatus(filepaths);
 
   // Task execution loop
-  let task: TaskName = await getNextTask();
+  let task: TaskName = await getNextTask(initialStatus.status);
 
   while (task !== "exit") {
     console.info("\n\n");
@@ -110,7 +92,8 @@ export async function runTooling(
     } catch (error) {
       program.error(chalk.red("Error:", error.message));
     }
-    task = await getNextTask();
+    const currentStatus = getStatus(filepaths, "no-print");
+    task = await getNextTask(currentStatus.status);
   }
 
   process.exit(0);
@@ -139,6 +122,9 @@ async function executeTask(
     case "less-tokens":
     case "js-tokens":
     case "tailwind-tokens": {
+      if (!options.force) {
+        validateGit(options, program);
+      }
       const updatedStatus = getStatus(filepaths, "no-print").status;
       const scopedFiles = getScopedFilesForTask(task, filepaths, updatedStatus);
 
@@ -248,15 +234,54 @@ async function runCodeshift(
 /**
  * Prompts the user for the next task to run
  */
-async function getNextTask(): Promise<TaskName> {
+async function getNextTask(status?: any): Promise<TaskName> {
+  const getMessage = (base: string, tokens: any[]) => {
+    if (!status) return base;
+    const fileCount = new Set(tokens.map((t) => t.fileName)).size;
+    if (fileCount === 0) return `${base} (Done)`;
+    return `${base} (${fileCount} files)`;
+  };
+
+  const choices = [
+    { message: "Check status", name: "status" },
+    { message: "Print status", name: "print-remaining-tokens" },
+    {
+      message: getMessage("Migrate CSS tokens", status?.css?.legacy ?? []),
+      name: "css-tokens",
+    },
+    {
+      message: getMessage("Migrate Scss tokens", status?.scss?.legacy ?? []),
+      name: "scss-tokens",
+    },
+    {
+      message: getMessage("Migrate Less tokens", status?.less?.legacy ?? []),
+      name: "less-tokens",
+    },
+    {
+      message: getMessage("Migrate JS tokens", status?.js?.legacy ?? []),
+      name: "js-tokens",
+    },
+    {
+      message: getMessage(
+        "Migrate tailwind tokens",
+        status?.tailwind?.legacy ?? [],
+      ),
+      name: "tailwind-tokens",
+    },
+    { message: "Run all migrations", name: "run-all-migrations" },
+    { message: "Exit", name: "exit" },
+  ] as { message: string; name: TaskName }[];
+
   try {
-    const response = await Enquirer.prompt([
-      {
-        ...TASK_MENU,
-        onCancel: () => process.exit(1),
-      },
-    ]);
-    return (response as { task: TaskName }).task;
+    const response = await Enquirer.prompt<{ task: TaskName }>({
+      type: "select",
+      name: "task",
+      message: "Task",
+      initial: "status",
+      choices,
+      onCancel: () => process.exit(1),
+    } as any);
+    return response.task;
   } catch (error) {
     if (error.isTtyError) {
       console.info(

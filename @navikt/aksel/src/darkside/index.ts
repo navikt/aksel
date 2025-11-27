@@ -1,6 +1,5 @@
 import chalk from "chalk";
 import { Command } from "commander";
-import { validateGit } from "../codemod/validation.js";
 // import figlet from "figlet";
 // import { getMigrationString } from "./migrations.js";
 import { runTooling } from "./run-tooling.js";
@@ -25,11 +24,6 @@ export function darksideCommand() {
 
   program.parse();
   const options = program.opts();
-
-  /* Makes sure that you don't migrate lots of files while having other uncommitted changes */
-  if (!options.force) {
-    validateGit(options, program);
-  }
 
   runTooling(options as Parameters<typeof runTooling>["0"], program);
 }
