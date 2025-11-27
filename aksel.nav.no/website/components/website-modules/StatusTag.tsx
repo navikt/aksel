@@ -13,23 +13,13 @@ export const StatusTag = ({
   switch (status) {
     case "beta":
       return (
-        <Tag
-          variant="alt1"
-          size={size}
-          className="border-violet-300 bg-violet-50 text-violet-800"
-          {...rest}
-        >
+        <Tag variant="alt1" size={size} data-color="meta-purple" {...rest}>
           Beta
         </Tag>
       );
     case "internal":
       return (
-        <Tag
-          variant="alt1"
-          size={size}
-          className="border-amber-400 bg-amber-50"
-          {...rest}
-        >
+        <Tag variant="warning" size={size} data-color="warning" {...rest}>
           Interne flater
         </Tag>
       );

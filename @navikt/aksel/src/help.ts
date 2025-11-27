@@ -10,11 +10,6 @@ export function helpCommand() {
    )}
 
 💻 Commands:
-   - ${chalk.cyan(`npx @navikt/aksel ${chalk.green("css-imports")}`)}
-   ✔︎ Helps with CSS imports for all Aksel components
-   ✔︎ Supports Static and CDN-imports
-   ✔︎ Handles cascading, tailwind and @layer rules
-
    - ${chalk.cyan(
      `npx @navikt/aksel ${chalk.green("codemod")} ${chalk.gray("<migration>")}`,
    )}

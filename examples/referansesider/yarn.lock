@@ -827,44 +827,45 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
-  version: 7.32.3
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=754341&locator=referansesider%40workspace%3A."
-  checksum: 10/181edfa62efd7f124a38073ffe2853d9b5f75b45ab96df07ab12281d3f99f3626b4398df95965450a941a66e6c0aeb62b73fd2d26d7c6e335a1335b812a2e0a5
+  version: 7.34.0
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=ffe31c&locator=referansesider%40workspace%3A."
+  checksum: 10/ca99461bb2718a4d62d813708272ca1e9614fb7c5242863295faded0abbd21b642b078db62d2068565c24a60e3d1b2ff2031f408f30cf5e8532633746afc94dd
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
-  version: 7.32.3
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=05e6a8&locator=referansesider%40workspace%3A."
-  checksum: 10/0529020c8d72bdb86dc6697e9bd7a0c09d0babf07721a752fa9f20c6535aee133b6cdd29cd2e45c2e61f4a18b67ecf78452f11b5072adc3aa5130807ef7f8599
+  version: 7.34.0
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=219188&locator=referansesider%40workspace%3A."
+  checksum: 10/60952ff58b18cce7b24fdecfd0fba75ab98b32927df55b3aa0446ea7ddca7d3bb40d47213755646a3601da388bb5e7e8347352ce31f5a3c8b2445bf77eae0608
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:../../@navikt/core/react::locator=referansesider%40workspace%3A.":
-  version: 7.32.3
-  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=a14d83&locator=referansesider%40workspace%3A."
+  version: 7.34.0
+  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=99c1bc&locator=referansesider%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.6"
-    "@navikt/aksel-icons": "npm:^7.32.3"
-    "@navikt/ds-tokens": "npm:^7.32.3"
+    "@navikt/aksel-icons": "npm:^7.34.0"
+    "@navikt/ds-tokens": "npm:^7.34.0"
     clsx: "npm:^2.1.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
   peerDependencies:
-    "@types/react": ">=17.0.30"
-    react: ">=17.0.0 || >19.0.0-rc"
+    "@types/react": ^17.0.30 || ^18 || ^19
+    react: ^17 || ^18 || ^19
+    react-dom: ^17 || ^18 || ^19
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/baba0b9ba147f95e36ce5b50958ead23255b3151f32b1fce99ae61c8357997f1dc0891cee898f38e2a9bd8eb9060473096f145a7ff3aa37e71a096e0375be280
+  checksum: 10/53cf1a4fcf79699ca15d108b25cff0cbcc6d0de14f84b0bfcb025495693a10390f5bb8c20b662a9561314d78b7fe16f6bdbf34bcc99b7b65501e2fcd7dee9581
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
-  version: 7.32.3
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=6cd0ad&locator=referansesider%40workspace%3A."
-  checksum: 10/50410a3f42c1a22d5880d0e58080935c3f7753b9f32e669e42568fdb42a9ce6667d597c0723d4212824d02d544f8bcfbf10fae07c829f32c9f82982a709cf692
+  version: 7.34.0
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=c164f4&locator=referansesider%40workspace%3A."
+  checksum: 10/bb40e360ac9401b681a9a323e9beb06fd434544342e4ab0fdb317040ff0bb315a768fbb04c4f54b4433112d387cb667064728f7772c3c1c669557e84c088ad09
   languageName: node
   linkType: hard
 
@@ -2528,8 +2529,8 @@ __metadata:
   linkType: hard
 
 "glob@npm:^10.2.2, glob@npm:^10.3.10":
-  version: 10.4.5
-  resolution: "glob@npm:10.4.5"
+  version: 10.5.0
+  resolution: "glob@npm:10.5.0"
   dependencies:
     foreground-child: "npm:^3.1.0"
     jackspeak: "npm:^3.1.2"
@@ -2539,7 +2540,7 @@ __metadata:
     path-scurry: "npm:^1.11.1"
   bin:
     glob: dist/esm/bin.mjs
-  checksum: 10/698dfe11828b7efd0514cd11e573eaed26b2dff611f0400907281ce3eab0c1e56143ef9b35adc7c77ecc71fba74717b510c7c223d34ca8a98ec81777b293d4ac
+  checksum: 10/ab3bccfefcc0afaedbd1f480cd0c4a2c0e322eb3f0aa7ceaa31b3f00b825069f17cf0f1fc8b6f256795074b903f37c0ade37ddda6a176aa57f1c2bbfe7240653
   languageName: node
   linkType: hard
 

@@ -21,6 +21,7 @@ export default {
   },
   Combobox: {
     addOption: "Add",
+    noMatches: "No search hits",
     loading: "Searching…",
     maxSelected: "{selected} of max {limit} are selected.",
   },
