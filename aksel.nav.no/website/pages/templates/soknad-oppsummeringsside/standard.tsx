@@ -57,7 +57,7 @@ function Example() {
             </Link>
             <Box paddingBlock="6 5">
               <Heading level="2" size="large">
-                Oppsummering
+                Bekreft informasjonen og send søknaden
               </Heading>
             </Box>
             <FormProgress activeStep={3} totalSteps={3}>

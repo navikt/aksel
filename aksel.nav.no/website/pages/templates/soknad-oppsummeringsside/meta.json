@@ -1,6 +1,11 @@
 {
-  "version": 4,
+  "version": 5,
   "changelog": [
+    {
+      "description": "Endret overskriften fra «Oppsummering» til «Bekreft informasjonen og send søknaden» for å gjøre siste steg mer handlingsorientert.",
+      "date": "25.11.2025",
+      "version": 5
+    },
     {
       "description": "'Send søknad'-knappen kommer nå før 'Forrige steg'-knappen på mobil.",
       "date": "17.10.2025",
