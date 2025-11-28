@@ -8,12 +8,6 @@ type DialogBackdropInternalProps = Omit<
   "children"
 >;
 
-/**
- * @see 🏷️ {@link DialogBackdropInternalProps}
- * @example
- * ```jsx
- * ```
- */
 const DialogBackdropInternal = forwardRef<
   HTMLDivElement,
   DialogBackdropInternalProps
