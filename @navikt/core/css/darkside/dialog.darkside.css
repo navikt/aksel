@@ -11,13 +11,7 @@
   color: var(--ax-text-neutral);
   flex-direction: column;
   box-shadow: var(--ax-shadow-dialog);
-  display: grid;
-  grid-template-areas:
-    "header closebutton"
-    "body body"
-    "footer footer";
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto 1fr auto;
+  display: block;
   outline: 1px solid var(--ax-border-neutral-subtleA);
 
   .light:not(:has(.dark)) .aksel-dialog__backdrop ~ & {
@@ -197,7 +191,6 @@
 }
 
 .aksel-dialog__header {
-  grid-area: header;
   padding-block: var(--__axc-dialog-p-b);
   padding-inline: var(--__axc-dialog-p-i);
 }
@@ -207,14 +200,13 @@
 }
 
 .aksel-dialog__close-button {
-  grid-area: closebutton;
   margin-block-start: var(--__axc-dialog-p-b);
   margin-inline-end: var(--__axc-dialog-p-i);
   align-self: start;
+  float: right;
 }
 
 .aksel-dialog__body {
-  grid-area: body;
   overflow: auto;
   padding-block: var(--__axc-dialog-p-b);
   padding-inline: var(--__axc-dialog-p-i);
@@ -225,7 +217,6 @@
 }
 
 .aksel-dialog__footer {
-  grid-area: footer;
   justify-content: flex-start;
   display: flex;
   flex-flow: wrap;
