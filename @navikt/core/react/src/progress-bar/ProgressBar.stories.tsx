@@ -1,7 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { ProgressBar } from ".";
-import { VStack } from "../layout/stack";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 
 export default {
   title: "ds-react/ProgressBar",
@@ -65,14 +65,14 @@ Default.argTypes = {
   },
 };
 
-export const Sizes: StoryFn = (args) => {
-  return (
+export const Sizes = {
+  render: ({ valueMax = 12 }) => (
     <div>
       <p id="progress-bar-label-small">Fremdrift i søknaden (liten versjon)</p>
       <ProgressBar
         size="small"
         value={0}
-        valueMax={args.valueMax}
+        valueMax={valueMax}
         aria-labelledby="progress-bar-label-small"
       />
       <p id="progress-bar-label-medium">
@@ -80,23 +80,22 @@ export const Sizes: StoryFn = (args) => {
       </p>
       <ProgressBar
         value={6}
-        valueMax={args.valueMax}
+        valueMax={valueMax}
         aria-labelledby="progress-bar-label-medium"
       />
       <p id="progress-bar-label-large">Fremdrift i søknaden (stor versjon)</p>
       <ProgressBar
         size="large"
         value={12}
-        valueMax={args.valueMax}
+        valueMax={valueMax}
         aria-labelledby="progress-bar-label-large"
       />
     </div>
-  );
-};
-
-Sizes.args = {
-  valueMax: 12,
-};
+  ),
+  args: {
+    valueMax: 12,
+  },
+} satisfies StoryObj<{ valueMax: number }>;
 
 export const IndeterminateState: Story = {
   render: () => {
@@ -150,17 +149,7 @@ export const ColorRole: StoryFn = () => {
   );
 };
 
-export const Chromatic: Story = {
-  render: () => {
-    return (
-      <VStack gap="4">
-        <div>
-          <Sizes {...Sizes.args} />
-        </div>
-      </VStack>
-    );
-  },
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Sizes,
+  ColorRole,
+});
