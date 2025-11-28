@@ -1,7 +1,5 @@
 import chalk from "chalk";
 import { Command } from "commander";
-// import figlet from "figlet";
-// import { getMigrationString } from "./migrations.js";
 import { runTooling } from "./run-tooling.js";
 
 const program = new Command();
