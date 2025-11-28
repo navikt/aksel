@@ -109,6 +109,11 @@ const StyleMappings = {
     },
     { component: "Detail", main: typoCss },
     {
+      component: "Dialog",
+      main: "dialog.css",
+      dependencies: [typoCss, "button.css", primitivesCss],
+    },
+    {
       component: "Dropdown",
       main: "dropdown.css",
       dependencies: [typoCss, "popover.css"],

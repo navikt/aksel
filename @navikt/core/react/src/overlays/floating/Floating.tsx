@@ -26,8 +26,8 @@ import {
   useClientLayoutEffect,
   useMergeRefs,
 } from "../../util/hooks";
+import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
 import { AsChildProps } from "../../util/types";
-import { useOpenChangeAnimationComplete } from "../overlay/hooks/useOpenChangeAnimationComplete";
 import {
   type Align,
   type Measurable,
