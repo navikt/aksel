@@ -4,21 +4,35 @@ import { legacyTokenConfig } from "../config/legacy.tokens";
 export default function transformer(file: FileInfo) {
   let src = file.source;
 
-  for (const [oldToken, config] of Object.entries(legacyTokenConfig)) {
-    const oldCSSVar = `--a-${oldToken}`;
+  /*
+    1. Replace definitions: --a-token: -> --aksel-legacy__a-token:
+    Matches "--a-token" followed by optional whitespace and a colon.
+    Uses negative lookbehind to ensure we don't match "--not-a-token".
+  */
+  src = src.replace(
+    /(?<![\w-])(--a-[\w-]+)(\s*:)/g,
+    (match, tokenName, suffix) => {
+      const key = tokenName.replace("--a-", "");
+      if (legacyTokenConfig[key]) {
+        return `--aksel-legacy${tokenName.replace("--", "__")}${suffix}`;
+      }
+      return match;
+    },
+  );
 
-    /* We update all re-definitions of a token to a "legacy" version */
-    const replaceRegex = new RegExp("(" + `${oldCSSVar}:` + ")", "gm");
+  /*
+    2. Replace usages: --a-token -> --ax-replacement
+    Matches "--a-token" with word boundaries.
+  */
+  src = src.replace(/(?<![\w-])(--a-[\w-]+)(?![\w-])/g, (match, tokenName) => {
+    const key = tokenName.replace("--a-", "");
+    const config = legacyTokenConfig[key];
 
-    src = src.replace(
-      replaceRegex,
-      `--aksel-legacy${oldCSSVar.replace("--", "__")}:`,
-    );
-
-    if (config.replacement.length > 0) {
-      src = src.replace(config.regexes.css, `--ax-${config.replacement}`);
+    if (config?.replacement) {
+      return `--ax-${config.replacement}`;
     }
-  }
+    return match;
+  });
 
   return src;
 }
