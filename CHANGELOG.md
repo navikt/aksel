@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.35.1
+
+### @navikt/ds-react
+
+- Select: Remove the htmlSize prop ([#4347](https://github.com/navikt/aksel/pull/4347))
+
 ## 7.35.0
 
 ### @navikt/ds-react
