@@ -6,9 +6,13 @@ import { getStatus } from "./status";
 
 async function printRemaining(files: string[], status?: TokenStatus["status"]) {
   process.stdout.write("\nAnalyzing...");
+
+  /**
+   * Skip re-calculating status if already provided
+   */
   const statusObj = status ?? getStatus(files, "no-print").status;
 
-  // Flatten all legacy tokens
+  /* Flatten all legacy tokens */
   const allTokens = Object.values(statusObj).flatMap((data) => data.legacy);
 
   if (allTokens.length === 0) {
@@ -48,8 +52,10 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
 
   let jsonOutput: unknown;
 
+  /**
+   * Group by filename
+   */
   if (groupBy === "file") {
-    // Group by filename
     const byFile = new Map<string, typeof allTokens>();
 
     allTokens.forEach((token) => {
@@ -59,7 +65,7 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
       byFile.get(token.fileName)!.push(token);
     });
 
-    // Sort files by number of tokens (descending)
+    /* Sort files by number of tokens (descending) */
     const sortedFiles = Array.from(byFile.entries()).sort(
       (a, b) => b[1].length - a[1].length,
     );
@@ -81,7 +87,7 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
       const fullPath = path.resolve(process.cwd(), fileName);
       log(`${fileName} (${tokens.length} tokens)`);
 
-      // Sort tokens in file by line number
+      /* Sort tokens in file by line number */
       tokens.sort((a, b) => a.lineNumber - b.lineNumber);
 
       const fileEntry = {
@@ -107,12 +113,13 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
           link: `file://${fullPath}`,
         });
       });
-      log(""); // Empty line
+      /* Empty line */
+      log("");
       fileOutput.push(fileEntry);
     });
     jsonOutput = fileOutput;
   } else {
-    // Group by token name
+    /* Group by token name */
     const byToken = new Map<string, typeof allTokens>();
 
     allTokens.forEach((token) => {
@@ -122,7 +129,7 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
       byToken.get(token.name)!.push(token);
     });
 
-    // Sort tokens by frequency (descending)
+    /* Sort tokens by frequency (descending) */
     const sortedTokens = Array.from(byToken.entries()).sort(
       (a, b) => b[1].length - a[1].length,
     );
@@ -165,7 +172,9 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
           link: `file://${fullPath}`,
         });
       });
-      log(""); // Empty line
+
+      /* Empty line */
+      log("");
       tokenOutput.push(tokenEntry);
     });
     jsonOutput = tokenOutput;

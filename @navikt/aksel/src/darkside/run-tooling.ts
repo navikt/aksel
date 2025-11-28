@@ -70,6 +70,14 @@ export async function runTooling(
   const filepaths = await fg(globList, {
     cwd: process.cwd(),
     ignore: GLOB_IGNORE_PATTERNS,
+    /**
+     * When globbing, do not follow symlinks to avoid processing files outside the directory.
+     * This is most likely to happen in monorepos where node_modules may contain symlinks to packages
+     * in other parts of the repo.
+     *
+     * While node_modules is already ignored via GLOB_IGNORE_PATTERNS, if user globs upwards (e.g., using '../src/**'),
+     * that ignore-pattern may be ignored, leading to unintended file processing.
+     */
     followSymbolicLinks: false,
   });
 

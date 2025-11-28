@@ -30,6 +30,16 @@ function getStatus(
 
   StatusStore.initStatus();
 
+  /**
+   * Prepare search terms for legacy and darkside tokens
+   * For each token, we create a set of possible search terms including:
+   * - CSS variable format (--a-token-name)
+   * - Translated formats for SCSS, LESS, and JS
+   * - Any additional Tailwind classes specified in the config
+   *
+   * By pre-computing these sets, we save re-calculating them for each file,
+   * improving performance when processing large numbers of files.
+   */
   const legacySearchTerms = new Map<string, Set<string>>();
   for (const [legacyToken, config] of Object.entries(legacyTokenConfig)) {
     const terms = new Set<string>();
@@ -63,11 +73,17 @@ function getStatus(
 
   const legacyComponentTokensSet = new Set(legacyComponentTokenList);
 
+  /**
+   * Pre-computed regex for legacy component tokens
+   */
   const legacyRegex = new RegExp(
     `(${legacyComponentTokenList.map((t) => `${t}:`).join("|")})`,
     "gm",
   );
 
+  /**
+   * Process each file to find and record token usages
+   */
   files.forEach((fileName, index) => {
     const fileSrc = fs.readFileSync(fileName, "utf8");
 
@@ -76,16 +92,16 @@ function getStatus(
      */
     const fileWords = new Set(fileSrc.match(/[a-zA-Z0-9_@$-]+/g) || []);
 
-    let _lineStarts: number[] | undefined;
+    let lineStarts: number[] | undefined;
 
     /**
      * Gets line-start positions for the file, caching the result
      */
     const getStarts = () => {
-      if (!_lineStarts) {
-        _lineStarts = getLineStarts(fileSrc);
+      if (!lineStarts) {
+        lineStarts = getLineStarts(fileSrc);
       }
-      return _lineStarts;
+      return lineStarts;
     };
 
     /**
@@ -230,6 +246,9 @@ function getStatus(
   return StatusStore;
 }
 
+/**
+ * Given the content of a file, returns an array of line start positions.
+ */
 function getLineStarts(content: string): number[] {
   const starts = [0];
   let lineIndex = content.indexOf("\n", 0);
@@ -240,6 +259,10 @@ function getLineStarts(content: string): number[] {
   return starts;
 }
 
+/**
+ * Given a character index and an array of line start positions,
+ * returns the corresponding row and column numbers.
+ */
 function getWordPositionInFile(
   index: number,
   lineStarts: number[],
