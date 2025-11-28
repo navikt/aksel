@@ -1,6 +1,6 @@
 # Aksel command line interface
 
-CLI tool for managing CSS-imports and Codemods when consuming Aksel-packages.
+CLI tool for running codemods when consuming Aksel-packages.
 
 [Documentation](https://aksel.nav.no/preview/grunnleggende/kode/kommandolinje)
 
@@ -9,7 +9,6 @@ run:
 npx @navikt/aksel
 
 commands:
-css-imports: Generate css-imports for all components from Aksel
 codemod: Codemods for version-migrations related to Aksel
 ```
 
@@ -81,6 +80,24 @@ Updates variant + data-color props based on current variant prop.
 ```diff
 -<Tag variant="info">
 +<Tag variant="outline" data-color="info">
+```
+
+#### Spacing
+
+`npx @navikt/aksel codemod v8-primitive-spacing ...`
+`npx @navikt/aksel codemod v8-token-spacing ...`
+`npx @navikt/aksel codemod v8-token-spacing-js ...`
+
+Updates use of legacy `spacing` token to new `space`-token
+
+```diff
+-<HStack gap="spacing-4" />
++<HStack gap="space-16" />
+```
+
+```diff
+-margin: var(--a-spacing-1);
++margin: var(--ax-space-4);
 ```
 
 ### v6

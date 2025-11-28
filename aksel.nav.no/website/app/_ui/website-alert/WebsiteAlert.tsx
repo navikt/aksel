@@ -39,7 +39,7 @@ function WebsiteAlert(props: ExtractPortableComponentProps<"alert">) {
         <InfoCardTitle
           as={stegaClean(heading_level) ?? "h2"}
           id={`${encodeURIComponent(heading)}-a`}
-          className="scroll-m-20"
+          data-scroll-margin
         >
           {heading}
         </InfoCardTitle>

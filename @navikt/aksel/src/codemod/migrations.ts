@@ -14,8 +14,9 @@ const CSS_EXTENSIONS = [
   "less",
 ] satisfies SupportedCodemodExtensions[];
 
-export const migrations: {
-  [key: string]: {
+type MigrationT = Record<
+  string,
+  {
     description: string;
     value: string;
     path: string;
@@ -25,8 +26,10 @@ export const migrations: {
      * This is used to filter out files that should not be transformed.
      */
     ignoredExtensions: SupportedCodemodExtensions[];
-  }[];
-} = {
+  }[]
+>;
+
+export const migrations: MigrationT = {
   "1.0.0": [
     {
       description: "Runs all codemods for beta -> v1 migration",
@@ -87,7 +90,7 @@ export const migrations: {
       value: "v3-copybutton",
       path: "v3.0.0/copybutton/copybutton",
       warning:
-        "Remember to clean css-import from '@navikt/ds-css-internal' if no longer needed\nIf non-text was used as children, or different locales were handled, you need to manually fix this",
+        "Remember to remove css-import from '@navikt/ds-css-internal' if no longer needed\nIf non-text was used as children, or different locales were handled, you need to manually fix this",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
@@ -126,29 +129,6 @@ export const migrations: {
       path: "v6.0.0/chat/chat",
       warning:
         "Remember to update use of `variant`-prop to match previous use of colors. If needed the component exposes css-variables for custom overrides",
-      ignoredExtensions: CSS_EXTENSIONS,
-    },
-  ],
-  spacing: [
-    {
-      description:
-        "Updates all Primitives to use new `space`-tokens. (Works with old and new system)",
-      value: "primitive-spacing",
-      path: "spacing/primitives-spacing/spacing",
-      ignoredExtensions: CSS_EXTENSIONS,
-    },
-    {
-      description:
-        "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
-      value: "token-spacing",
-      path: "spacing/token-spacing/spacing",
-      ignoredExtensions: [],
-    },
-    {
-      description:
-        "Updates js-tokens to use new `space`-tokens. (Works with old and new system)",
-      value: "token-spacing-js",
-      path: "spacing/token-spacing-js/spacing",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
@@ -209,8 +189,29 @@ export const migrations: {
       path: "v8.0.0/list/list",
       ignoredExtensions: CSS_EXTENSIONS,
     },
+    {
+      description:
+        "Updates all Primitives to use new `space`-tokens. (Works with old and new system)",
+      value: "v8-primitive-spacing",
+      path: "v8.0.0/primitives-spacing/spacing",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
+      value: "v8-token-spacing",
+      path: "v8.0.0/token-spacing/spacing",
+      ignoredExtensions: [],
+    },
+    {
+      description:
+        "Updates js-tokens to use new `space`-tokens. (Works with old and new system)",
+      value: "v8-token-spacing-js",
+      path: "v8.0.0/token-spacing-js/spacing",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
   ],
-};
+} as const;
 
 /**
  * Extracts `path` field for a given migration.
@@ -247,12 +248,36 @@ export function getMigrationNames() {
     .map((x) => x.value);
 }
 
+/**
+ * Allows injecting additional migration names that are not part of the main migrations-list.
+ * This is used for interactive migrations that should not be part of the main list.
+ *
+ * We need to separate this since main migration list expect all migration names to have a unique path,
+ * which is not the case for interactive migrations that are handled differently.
+ */
+export const migrationStringOverride = {
+  "v8.0.0": [
+    {
+      value: "v8-tokens",
+      description: "Starts interactive token migration for v8",
+    },
+  ],
+} as const satisfies Partial<
+  Record<keyof typeof migrations, { value: string; description: string }[]>
+>;
+
 export function getMigrationString() {
   let str = "";
 
   Object.entries(migrations).forEach(([version, vMigrations]) => {
     str += `\n${chalk.underline(version)}\n`;
+
     vMigrations.forEach((migration) => {
+      str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
+    });
+
+    const overrideMigrations = migrationStringOverride[version] || [];
+    overrideMigrations.forEach((migration) => {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });
   });

@@ -1,7 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { VStack } from "../layout/stack";
 import { BodyLong } from "../typography";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import Stepper from "./Stepper";
 
 const meta: Meta<typeof Stepper> = {
@@ -207,32 +207,10 @@ export const ColorRole = () => (
   </div>
 );
 
-export const Chromatic: Story = {
-  render: () => (
-    <VStack gap="4">
-      <div>
-        <h2>Horizontal</h2>
-        <Horizontal />
-      </div>
-      <div>
-        <h2>Vertical</h2>
-        <Vertical />
-      </div>
-      <div>
-        <h2>Display only</h2>
-        <DisplayOnly />
-      </div>
-      <div>
-        <h2>Completed steps</h2>
-        <CompletedSteps />
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Horizontal,
+  Vertical,
+  DisplayOnly,
+  CompletedSteps,
+  ColorRole,
+});

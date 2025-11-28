@@ -21,6 +21,7 @@ export default {
   },
   Combobox: {
     addOption: "Legg til",
+    noMatches: "Ingen søketreff",
     loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valt.",
   },

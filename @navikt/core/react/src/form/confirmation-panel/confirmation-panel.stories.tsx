@@ -1,6 +1,7 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { Link } from "../../link";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import { ConfirmationPanel } from "./index";
 
 export default {
@@ -21,8 +22,6 @@ export default {
     chromatic: { disable: true },
   },
 } satisfies Meta<typeof ConfirmationPanel>;
-
-type Story = StoryObj<typeof ConfirmationPanel>;
 
 const content = (
   <>
@@ -101,28 +100,9 @@ export const WithError = () => {
   );
 };
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Default</h2>
-        {Default.render?.(props)}
-      </div>
-      <div>
-        <h2>Small</h2>
-        <Small />
-      </div>
-      <div>
-        <h2>No content</h2>
-        <NoContent />
-      </div>
-      <div>
-        <h2>With error</h2>
-        <WithError />
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Small,
+  NoContent,
+  WithError,
+});

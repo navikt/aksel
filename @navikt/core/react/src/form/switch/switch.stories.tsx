@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { VStack } from "../../layout/stack";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import Switch from "./Switch";
 
 export default {
@@ -52,14 +52,14 @@ export const Small: Story = {
   },
 };
 
-export const Description: Story = {
+export const Description = {
   args: {
     children: "Label text",
     description: "Cillum sint exercitation ut cillum.",
   },
-};
+} satisfies Story;
 
-export const Loading: Story = {
+export const Loading = {
   render: () => {
     return (
       <div className="colgap">
@@ -81,9 +81,10 @@ export const Loading: Story = {
       </div>
     );
   },
-};
+  parameters: { controls: { disable: true } },
+} satisfies Story;
 
-export const Disabled: Story = {
+export const Disabled = {
   render: () => (
     <div className="colgap">
       <Switch disabled>Label text</Switch>
@@ -93,7 +94,8 @@ export const Disabled: Story = {
       </Switch>
     </div>
   ),
-};
+  parameters: { controls: { disable: true } },
+} satisfies Story;
 
 export const HideLabel: Story = {
   render: () => (
@@ -105,6 +107,7 @@ export const HideLabel: Story = {
       </Switch>
     </div>
   ),
+  parameters: { controls: { disable: true } },
 };
 
 export const Readonly: Story = {
@@ -119,79 +122,43 @@ export const Readonly: Story = {
       </Switch>
     </div>
   ),
+  parameters: { controls: { disable: true } },
 };
 
 export const ColorRole: Story = {
   render: () => (
     <div className="colgap" data-color="brand-magenta">
       <div>
-        {/* @ts-expect-error Args are Partial here */}
         <Switch {...Description.args} position="left" />
-        {/* @ts-expect-error Args are Partial here */}
         <Switch {...Description.args} checked position="left" />
       </div>
       <div>
-        {/* @ts-expect-error Args are Partial here */}
         <Disabled.render />
       </div>
       <div>
-        {/* @ts-expect-error Args are Partial here */}
         <Loading.render />
       </div>
     </div>
   ),
+  parameters: { controls: { disable: true } },
 };
 
-export const Chromatic: Story = {
-  render: () => (
-    <VStack gap="4" align="start">
-      <div>
-        <h2>Default</h2>
-        {/* @ts-expect-error Args are Partial here */}
-        <Switch {...Default.args} />
-      </div>
-      <div>
-        <h2>Small</h2>
-        {/* @ts-expect-error Args are Partial here */}
-        <Switch {...Small.args} position="left" />
-        {/* @ts-expect-error Args are Partial here */}
-        <Switch {...Small.args} position="right" />
-      </div>
-      <div>
-        <h2>Description</h2>
-        {/* @ts-expect-error Args are Partial here */}
-        <Switch {...Description.args} position="left" />
-        {/* @ts-expect-error Args are Partial here */}
-        <Switch {...Description.args} position="right" />
-      </div>
-      <div>
-        <h2>Loading</h2>
-        {/* @ts-expect-error Args are Partial here */}
-        <Loading.render />
-      </div>
-      <div>
-        <h2>Disabled</h2>
-        {/* @ts-expect-error Args are Partial here */}
-        <Disabled.render />
-      </div>
-      <div>
-        <h2>HideLabel</h2>
-        {/* @ts-expect-error Args are Partial here */}
-        <HideLabel.render />
-      </div>
-      <div>
-        <h2>Readonly</h2>
-        {/* @ts-expect-error Args are Partial here */}
-        <Readonly.render />
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        {/* @ts-expect-error Args are Partial here */}
-        <ColorRole.render />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
+export const Chromatic = renderStoriesForChromatic(
+  {
+    Default,
+    DefaultRight: { ...Default, args: { ...Default.args, position: "right" } },
+    Small,
+    SmallRight: { ...Small, args: { ...Small.args, position: "right" } },
+    Description,
+    DescriptionRight: {
+      ...Description,
+      args: { ...Description.args, position: "right" },
+    },
+    Loading,
+    Disabled,
+    HideLabel,
+    Readonly,
+    ColorRole,
   },
-};
+  Switch,
+);

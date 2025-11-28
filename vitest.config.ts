@@ -24,7 +24,6 @@ export default defineConfig({
             provider: "playwright",
             instances: [{ browser: "chromium" }],
           },
-          pool: "threads",
           setupFiles: [".storybook/vitest.setup.ts"],
         },
       },

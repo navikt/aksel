@@ -69,7 +69,7 @@ export const workspaceConfig = defineConfig([
       }),
     ],
     releases: {
-      enabled: false,
+      enabled: true,
     },
   },
   {

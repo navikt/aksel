@@ -31,7 +31,6 @@ const SearchField = () => {
         name="tokenSearch"
         hideLabel
         variant="simple"
-        htmlSize="26"
         autoComplete="off"
       />
     </form>

@@ -44,14 +44,7 @@ function getDemoCell({ value, name }: { value: string; name: string }) {
         </span>
       );
     case name.includes("size-heading"):
-      return (
-        <span
-          className="leading-none"
-          style={{ fontSize: value, fontWeight: value }}
-        >
-          Aa
-        </span>
-      );
+      return <span style={{ fontSize: value, fontWeight: value }}>Aa</span>;
 
     case name.includes("size"):
       return <span style={{ fontSize: value }}>Aa</span>;

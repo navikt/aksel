@@ -1,5 +1,17 @@
 # @navikt/aksel
 
+## 7.35.0
+
+### Minor Changes
+
+- CLI: Removed 'css-import' command. ([#4331](https://github.com/navikt/aksel/pull/4331))
+
+### Patch Changes
+
+- Updated dependencies [[`7a68589`](https://github.com/navikt/aksel/commit/7a6858905859d8b277685bd5e42361e0df382e94)]:
+  - @navikt/ds-css@7.35.0
+  - @navikt/ds-tokens@7.35.0
+
 ## 7.34.0
 
 ### Patch Changes
