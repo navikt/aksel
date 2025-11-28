@@ -77,12 +77,6 @@ type DialogPopupInternalProps = React.HTMLAttributes<HTMLDivElement> &
     role?: "dialog" | "alertdialog";
   };
 
-/**
- * @see 🏷️ {@link DialogPopupProps}
- * @example
- * ```jsx
- * ```
- */
 const DialogPopupInternal = forwardRef<
   HTMLDivElement,
   DialogPopupInternalProps
