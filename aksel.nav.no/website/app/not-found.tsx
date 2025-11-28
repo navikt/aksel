@@ -5,6 +5,7 @@ import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import { UmamiNotFoundPageLog } from "@/app/_ui/umami/Umami.log";
+import GitHubIssueLink from "./_ui/github-issue-link";
 
 export default function NotFound() {
   return (
@@ -37,10 +38,15 @@ export default function NotFound() {
                   </WebsiteListItem>
                 </WebsiteList>
               </div>
-              <Link href="https://github.com/navikt/aksel/issues/new?assignees=&labels=bug+%F0%9F%90%9B&projects=&template=bug-report.md&title=[Aksel.nav.no%20-%20404]">
+              <GitHubIssueLink
+                labels="bug 🐛"
+                template="bug-report.md"
+                title="[Aksel.nav.no - 404]"
+                includeUrlInBody
+              >
                 <BugIcon aria-hidden />
                 Meld gjerne fra om at lenken ikke virker
-              </Link>
+              </GitHubIssueLink>
             </VStack>
 
             <div>
