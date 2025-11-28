@@ -31,45 +31,12 @@ function getStatus(
   StatusStore.initStatus();
 
   /**
-   * Prepare search terms for legacy and darkside tokens
-   * For each token, we create a set of possible search terms including:
-   * - CSS variable format (--a-token-name)
-   * - Translated formats for SCSS, LESS, and JS
-   * - Any additional Tailwind classes specified in the config
-   *
+   * Prepare search terms for legacy and darkside tokens.
    * By pre-computing these sets, we save re-calculating them for each file,
    * improving performance when processing large numbers of files.
    */
-  const legacySearchTerms = new Map<string, Set<string>>();
-  for (const [legacyToken, config] of Object.entries(legacyTokenConfig)) {
-    const terms = new Set<string>();
-    const tokenName = `--a-${legacyToken}`;
-    terms.add(tokenName);
-    terms.add(translateToken(tokenName, "scss"));
-    terms.add(translateToken(tokenName, "less"));
-    terms.add(translateToken(tokenName, "js"));
-
-    if (config.twOld) {
-      config.twOld.split(",").forEach((t) => terms.add(t.trim()));
-    }
-    legacySearchTerms.set(legacyToken, terms);
-  }
-
-  const darksideSearchTerms = new Map<string, Set<string>>();
-  for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
-    const terms = new Set<string>();
-    const tokenName = `--ax-${newTokenName}`;
-    terms.add(tokenName);
-    terms.add(translateToken(tokenName, "scss"));
-    terms.add(translateToken(tokenName, "less"));
-    terms.add(translateToken(newTokenName, "js"));
-    terms.add(newTokenName);
-
-    if (config.tw) {
-      config.tw.split(",").forEach((t) => terms.add(t.trim()));
-    }
-    darksideSearchTerms.set(newTokenName, terms);
-  }
+  const legacySearchTerms = getLegacySearchTerms();
+  const darksideSearchTerms = getDarksideSearchTerms();
 
   const legacyComponentTokensSet = new Set(legacyComponentTokenList);
 
@@ -95,9 +62,10 @@ function getStatus(
     let lineStarts: number[] | undefined;
 
     /**
-     * Gets line-start positions for the file, caching the result
+     * Gets line-start positions for the file, caching the result.
+     * We only calculate this if we actually find a token match, saving processing time.
      */
-    const getStarts = () => {
+    const getLineStartsLazy = () => {
       if (!lineStarts) {
         lineStarts = getLineStarts(fileSrc);
       }
@@ -109,6 +77,11 @@ function getStatus(
      */
     for (const [legacyToken, config] of Object.entries(legacyTokenConfig)) {
       const terms = legacySearchTerms.get(legacyToken);
+
+      /**
+       * Optimization: Check if any of the search terms exist in the file words set
+       * before running expensive regex operations.
+       */
       let found = false;
       if (terms) {
         for (const term of terms) {
@@ -132,7 +105,7 @@ function getStatus(
         while (match) {
           const { row, column } = getWordPositionInFile(
             match.index,
-            getStarts(),
+            getLineStartsLazy(),
           );
 
           StatusStore.add({
@@ -169,7 +142,7 @@ function getStatus(
       while (legacyMatch !== null) {
         const { row, column } = getWordPositionInFile(
           legacyMatch.index,
-          getStarts(),
+          getLineStartsLazy(),
         );
 
         StatusStore.add({
@@ -188,6 +161,8 @@ function getStatus(
 
     for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
       const terms = darksideSearchTerms.get(newTokenName);
+
+      /* Optimization: Check if any of the search terms exist in the file words set */
       let found = false;
       if (terms) {
         for (const term of terms) {
@@ -210,7 +185,7 @@ function getStatus(
         while (match) {
           const { row, column } = getWordPositionInFile(
             match.index,
-            getStarts(),
+            getLineStartsLazy(),
           );
 
           StatusStore.add({
@@ -244,6 +219,43 @@ function getStatus(
   console.info("\n");
 
   return StatusStore;
+}
+
+function getLegacySearchTerms() {
+  const legacySearchTerms = new Map<string, Set<string>>();
+  for (const [legacyToken, config] of Object.entries(legacyTokenConfig)) {
+    const terms = new Set<string>();
+    const tokenName = `--a-${legacyToken}`;
+    terms.add(tokenName);
+    terms.add(translateToken(tokenName, "scss"));
+    terms.add(translateToken(tokenName, "less"));
+    terms.add(translateToken(tokenName, "js"));
+
+    if (config.twOld) {
+      config.twOld.split(",").forEach((t) => terms.add(t.trim()));
+    }
+    legacySearchTerms.set(legacyToken, terms);
+  }
+  return legacySearchTerms;
+}
+
+function getDarksideSearchTerms() {
+  const darksideSearchTerms = new Map<string, Set<string>>();
+  for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
+    const terms = new Set<string>();
+    const tokenName = `--ax-${newTokenName}`;
+    terms.add(tokenName);
+    terms.add(translateToken(tokenName, "scss"));
+    terms.add(translateToken(tokenName, "less"));
+    terms.add(translateToken(newTokenName, "js"));
+    terms.add(newTokenName);
+
+    if (config.tw) {
+      config.tw.split(",").forEach((t) => terms.add(t.trim()));
+    }
+    darksideSearchTerms.set(newTokenName, terms);
+  }
+  return darksideSearchTerms;
 }
 
 /**
