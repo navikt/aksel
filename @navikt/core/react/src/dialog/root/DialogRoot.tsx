@@ -97,7 +97,6 @@ interface DialogComponent extends React.FC<DialogProps> {
   Header: typeof DialogHeader;
 
   /**
-   * Title component for GlobalAlert. Remember to use correct heading-level with the `as` prop.
    * @see 🏷️ {@link DialogTitleProps}
    * @example
    * ```jsx
