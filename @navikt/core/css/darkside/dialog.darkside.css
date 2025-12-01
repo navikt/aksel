@@ -13,6 +13,7 @@
   box-shadow: var(--ax-shadow-dialog);
   display: block;
   outline: 1px solid var(--ax-border-neutral-subtleA);
+  z-index: 1000;
 
   .light:not(:has(.dark)) .aksel-dialog__backdrop ~ & {
     outline: none;
