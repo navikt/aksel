@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ChevronDownIcon, SparklesIcon } from "@navikt/aksel-icons";
 import { HStack } from "@navikt/ds-react";
-import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { SidebarGroupedPagesT } from "@/types";
 import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
@@ -32,12 +31,6 @@ function DesignsystemSidebarSubNav(
       className={styles.navListSub}
     >
       <button
-        onClick={() => {
-          setOpen(!open);
-          umamiTrack("sidebar-subnav", {
-            kategori: title,
-          });
-        }}
         className={cl(styles.navListSubButton, styles.navListNotch)}
         data-notch={isSectionActive && !open}
         data-state={isSectionActive ? "active" : "inactive"}

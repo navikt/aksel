@@ -14,7 +14,6 @@ import type {
   SearchResultPageTypesT,
 } from "@/app/_ui/global-search/server/GlobalSearch.config";
 import { doctypeToColorRole } from "@/app/_ui/theming/theme-config";
-import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { StatusTag } from "@/web/StatusTag";
 import styles from "./GlobalSearch.module.css";
 
@@ -73,9 +72,6 @@ function GlobalSearchLink(props: {
             size="small"
             as={Link}
             href={href}
-            onClick={() =>
-              umamiTrack("navigere", { kilde: "global sok", url: href })
-            }
             onNavigate={() => {
               context.closeSearch();
               clearDebounce();

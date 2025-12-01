@@ -36,7 +36,6 @@ import "../../globals.css";
 import { PauseAnimationProvider } from "./_ui/AnimationStopContext";
 import { Hero } from "./_ui/FrontpageHero";
 import { FrontpageLatest, LatestT } from "./_ui/FrontpageLatest";
-import { GpFrontpageCard } from "./_ui/GpFrontpageCard";
 import { MainWrapper } from "./_ui/MainWrapper";
 import styles from "./_ui/frontpage.module.css";
 
@@ -214,62 +213,6 @@ const Page = async () => {
                   </HGrid>
                 </BoxNew>
               </Bleed>
-
-              {/* God praksis */}
-
-              <Bleed
-                marginInline="full"
-                reflectivePadding
-                className={styles.cubeFader}
-              >
-                <BoxNew
-                  background="raised"
-                  borderWidth="1"
-                  borderColor="neutral-subtleA"
-                  borderRadius="xlarge"
-                  paddingBlock={{ xs: "space-48" }}
-                  paddingInline={{ xs: "space-16", sm: "space-48" }}
-                  marginBlock="space-64 0"
-                >
-                  <VStack gap="space-12">
-                    <BoxNew>
-                      <Heading
-                        level="2"
-                        size="xlarge"
-                        spacing
-                        data-aksel-heading-color
-                      >
-                        <Link
-                          as={NextLink}
-                          href="/god-praksis"
-                          data-aksel-heading-color
-                        >
-                          God praksis
-                        </Link>
-                      </Heading>
-                      <BodyLong size="large" className={styles.godPraksisInfo}>
-                        Alle som jobber med produktutvikling i Nav sitter på
-                        kunnskap og erfaring som er nyttig for andre. Derfor
-                        deler vi god praksis med hverandre her.
-                      </BodyLong>
-                    </BoxNew>
-
-                    <HGrid as="ul" columns={{ md: 2, xl: 3 }}>
-                      {tema.map((t) => (
-                        <GpFrontpageCard
-                          key={t.title}
-                          href={`/god-praksis/${t.slug?.current}`}
-                          image={t.pictogram}
-                        >
-                          {t.title}
-                        </GpFrontpageCard>
-                      ))}
-                    </HGrid>
-                  </VStack>
-                </BoxNew>
-              </Bleed>
-              {/* Siste fra Aksel */}
-              {latest && <FrontpageLatest latest={latest as LatestT[]} />}
             </PageBlock>
           </BoxNew>
         </MainWrapper>

@@ -2,7 +2,6 @@ import { BodyLong, Box, Heading, Link } from "@navikt/ds-react";
 import { Page as DsPage, PageBlock } from "@navikt/ds-react/Page";
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
-import { ConsentForm } from "./_ui/ConsentForm";
 
 export const metadata = {
   title: "Personvern og sikkerhet",
@@ -95,31 +94,6 @@ export default async function Page() {
             sist du ga ditt samtykke. Lagres til vi ber om nytt samtykke etter
             365 dager.
           </BodyLong>
-
-          <Heading size="medium" level="3" spacing data-aksel-heading-color>
-            Godkjenn alle
-          </Heading>
-
-          <BodyLong spacing>
-            Ved å trykke &quot;godkjenn alle&quot; skrur vi på analyseverktøyet
-            Umami.
-          </BodyLong>
-
-          <Heading size="small" level="4" spacing data-aksel-heading-color>
-            Umami
-          </Heading>
-          <BodyLong spacing>
-            Umami brukes til statistikk og analyse av hvordan nav.no brukes.
-            Umami bruker ikke informasjonskapsler, men henter inn opplysninger
-            om nettleseren din for å lage en unik ID. Denne ID-en brukes for å
-            skille deg fra andre brukere. For å hindre identifisering, bruker vi
-            en egenutviklet proxy som vasker bort deler av IP-adressen din før
-            dataene sendes til verktøyet.
-          </BodyLong>
-          <Heading size="large" level="2" spacing data-aksel-heading-color>
-            Mine valg
-          </Heading>
-          <ConsentForm />
         </PageBlock>
       </Box>
     </DsPage>

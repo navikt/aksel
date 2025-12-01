@@ -8,7 +8,6 @@ import { SquareGridFillIcon, SquareGridIcon } from "@navikt/aksel-icons";
 import { BodyShort, HStack, Tag } from "@navikt/ds-react";
 import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
-import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { SidebarPageT } from "@/types";
 import styles from "./Sidebar.module.css";
 
@@ -52,12 +51,6 @@ function DesignsystemSidebarItem(props: {
         className={cl(styles.navListItemLink, styles.navListNotch)}
         data-notch={active}
         data-current={active}
-        onClick={() =>
-          umamiTrack("navigere", {
-            kilde: "sidebar",
-            url: `/${page.slug}`,
-          })
-        }
       >
         <HStack gap="space-4" align="center" as="span">
           {isOverviewPage &&

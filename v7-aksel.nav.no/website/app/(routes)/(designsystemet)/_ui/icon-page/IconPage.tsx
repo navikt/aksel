@@ -16,7 +16,6 @@ import {
 } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
-import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { FigmaIcon } from "@/assets/Icons";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
 import { IconPageButton } from "./IconPage.button";
@@ -61,12 +60,6 @@ function IconPage({
               as={NextLink}
               href="https://www.figma.com/community/file/1214869602572392330"
               data-color="neutral"
-              onClick={() =>
-                umamiTrack("navigere", {
-                  kilde: "ikonside",
-                  url: "https://www.figma.com/community/file/1214869602572392330",
-                })
-              }
             >
               <FigmaIcon /> <span>Figma</span>
             </Link>
@@ -77,12 +70,6 @@ function IconPage({
               as={NextLink}
               href="/god-praksis/artikler/tilgjengelig-ikonbruk"
               data-color="neutral"
-              onClick={() =>
-                umamiTrack("navigere", {
-                  kilde: "ikonside",
-                  url: "/god-praksis/artikler/tilgjengelig-ikonbruk",
-                })
-              }
             >
               <BrailleIcon aria-hidden fontSize="1.5rem" />{" "}
               <span>Tilgjengelighet</span>
@@ -93,13 +80,6 @@ function IconPage({
               data-color="neutral"
               href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
               download="Ikonpakke"
-              onClick={() =>
-                umamiTrack("last ned", {
-                  tema: "ikon",
-                  type: "zip",
-                  tittel: "ikonpakke",
-                })
-              }
             >
               <DownloadIcon fontSize="1.5rem" aria-hidden /> Last ned ikonpakke
             </Link>

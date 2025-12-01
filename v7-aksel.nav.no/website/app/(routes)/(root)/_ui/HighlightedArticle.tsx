@@ -3,7 +3,6 @@ import NextImage from "next/image";
 import NextLink from "next/link";
 import { BodyLong, HGrid, HStack, Heading, Link } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
-import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import {
   ArticleT,
@@ -123,12 +122,6 @@ export const Highlight = ({
         <Heading size="large" level="3">
           <Link
             as={NextLink}
-            onClick={() =>
-              umamiTrack("navigere", {
-                kilde: "global sok",
-                url: `/${article.slug}`,
-              })
-            }
             href={`/${article.slug}`}
             className={styles.highlightLink}
           >

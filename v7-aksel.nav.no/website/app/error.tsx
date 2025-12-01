@@ -5,7 +5,6 @@ import { BodyShort, Box, Heading, Link, VStack } from "@navikt/ds-react";
 import { Page } from "@navikt/ds-react/Page";
 import { logger } from "@navikt/next-logger";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
-import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
 export default function ErrorPage({
   error,
@@ -15,10 +14,6 @@ export default function ErrorPage({
   useEffect(() => {
     logger.error(error);
   }, [error]);
-
-  useEffect(() => {
-    umamiTrack("client-error", { url: window.location.pathname });
-  }, []);
 
   return (
     <Page data-aksel-template="500-v2" className="vk-error">

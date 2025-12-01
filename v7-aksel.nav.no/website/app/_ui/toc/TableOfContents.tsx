@@ -6,7 +6,6 @@ import NextLink from "next/link";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
 import { TOC_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
-import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { removeEmojiesFromText } from "@/ui-utils/format-text";
 import styles from "./TableOfContents.module.css";
 import { TableOfContentsScroll } from "./TableOfContents.scroll";
@@ -74,10 +73,6 @@ function TableOfContents({
                   href={`#${node.id}`}
                   onClick={() => {
                     tocCtx.setActiveId(node.id);
-                    umamiTrack("navigere", {
-                      kilde: "toc",
-                      url: `#${node.id}`,
-                    });
                   }}
                   className={cl(styles.tocNavListItemLink, {
                     [styles.tocNavListNotch]: active,
@@ -111,7 +106,6 @@ function TableOfContentsLinks({
         size="small"
         icon={<SparklesIcon aria-hidden />}
         href={`https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill%5D%20${feedback.name}`}
-        onClick={() => umamiTrack("feedback-designsystem", { kilde: "toc" })}
         target="_blank"
         rel="noreferrer"
       >

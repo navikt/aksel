@@ -12,7 +12,6 @@ import {
 import { LANDINGSSIDE_LATEST_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { Avatar, AvatarStack, avatarUrl } from "@/app/_ui/avatar/Avatar";
-import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
@@ -90,17 +89,7 @@ const Card = ({ article, visible }: CardProps) => {
       )}
       <LinkCardTitle as="h2">
         <LinkCardAnchor asChild>
-          <Link
-            onNavigate={() =>
-              umamiTrack("navigere", {
-                kilde: "forsidekort",
-                url: `/${article.slug}`,
-              })
-            }
-            href={`/${article.slug}`}
-          >
-            {article.heading}
-          </Link>
+          <Link href={`/${article.slug}`}>{article.heading}</Link>
         </LinkCardAnchor>
       </LinkCardTitle>
       {isArticle(article) || isBlogg(article) ? (

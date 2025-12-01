@@ -4,12 +4,10 @@ import { Page, PageBlock } from "@navikt/ds-react/Page";
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
-import { UmamiNotFoundPageLog } from "@/app/_ui/umami/Umami.log";
 
 export default function NotFound() {
   return (
     <Page data-aksel-template="404-v2" footer={<Footer />} className="vk-error">
-      <UmamiNotFoundPageLog />
       <Header />
       <PageBlock as="main" width="xl" gutters>
         <Box paddingBlock="space-80 space-64">
