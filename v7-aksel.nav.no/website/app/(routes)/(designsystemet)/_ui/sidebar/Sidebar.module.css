@@ -16,7 +16,7 @@
     position: sticky;
     overflow: auto;
     scrollbar-width: thin;
-    top: var(--website-header-height-width-border);
+    top: 10.3rem;
     max-height: calc(100vh - var(--website-header-height-width-border));
     overscroll-behavior: contain;
 

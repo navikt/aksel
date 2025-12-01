@@ -5,7 +5,7 @@
   min-width: 12.5rem;
   height: fit-content;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  top: calc(var(--website-header-height-width-border) + var(--ax-space-24));
+  top: calc(var(--website-header-height-width-border) + 110px);
 
   &[data-variant="subtle"] {
     --aksel-toc-fade-shadow-color: var(--ax-bg-neutral-softA);
