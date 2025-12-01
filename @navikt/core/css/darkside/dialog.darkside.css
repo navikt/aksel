@@ -98,7 +98,7 @@
       --__axc-dialog-transform: translateY(35%);
 
       max-height: calc(100dvh - max(16px, 10dvh));
-      max-width: 100dvw;
+      max-width: calc(100dvw - max(16px, 5dvw));
       margin-inline: auto;
       height: auto;
       border-bottom-left-radius: 0;
@@ -151,7 +151,7 @@
     right: 0;
     bottom: 0;
     max-height: calc(100dvh - max(16px, 10dvh));
-    max-width: 100dvw;
+    max-width: calc(100dvw - max(16px, 5dvw));
     margin-inline: auto;
     height: auto;
 

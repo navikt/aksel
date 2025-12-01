@@ -6,6 +6,8 @@
   padding: var(--ax-space-8);
   border-bottom: 1px solid var(--ax-border-neutral-subtle);
   background-color: var(--ax-bg-neutral-soft);
+  border-start-start-radius: var(--ax-radius-12);
+  border-start-end-radius: var(--ax-radius-12);
 
   @media (width > 768px) {
     padding: var(--ax-space-16);
