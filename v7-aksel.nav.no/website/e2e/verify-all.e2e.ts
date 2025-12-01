@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import urls from "./sitemap-urls.json";
+import urls from "./sitemap-urls-v7.json";
 
 test.describe("Validate CMS-link and A11y on all pages", () => {
   for (const url of urls) {

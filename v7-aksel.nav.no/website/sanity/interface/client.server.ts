@@ -9,15 +9,6 @@ export const sanityClient = createClient({
   useCdn: true,
 });
 
-// Set up a preview client with serverless authentication for drafts
-/* Should not be needed anymore after migration of preview solution */
-
-export const noCdnClient = (token: string) =>
-  createClient({
-    ...clientConfig,
-    token,
-  });
-
 export const previewDraftsClient = () =>
   sanityClient.withConfig({
     useCdn: false,
