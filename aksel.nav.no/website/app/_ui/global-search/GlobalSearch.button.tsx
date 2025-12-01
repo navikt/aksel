@@ -1,40 +1,38 @@
 "use client";
 
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Button, Detail, HStack, Hide, Show } from "@navikt/ds-react";
-import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.context";
+import { Button, Detail, Dialog, HStack, Hide, Show } from "@navikt/ds-react";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import styles from "./GlobalSearch.module.css";
 
 function GlobalSearchButton() {
-  const { openSearch } = useGlobalSearch();
-
   const renderButton = (showChildContent: boolean) => (
-    <Button
-      variant="secondary-neutral"
-      aria-keyshortcuts="Control+k"
-      icon={
-        <MagnifyingGlassIcon
-          className={styles.searchButtonIcon}
-          aria-label="Åpne søk"
-          aria-hidden={showChildContent}
-        />
-      }
-      iconPosition="left"
-      onClick={openSearch}
-    >
-      {showChildContent && (
-        <HStack gap="space-8" as="span">
-          Søk
-          <HStack gap="space-2" asChild aria-hidden>
-            <Detail as="span">
-              <Kbd>Ctrl</Kbd>
-              <Kbd>k</Kbd>
-            </Detail>
+    <Dialog.Trigger>
+      <Button
+        variant="secondary-neutral"
+        aria-keyshortcuts="Control+k"
+        icon={
+          <MagnifyingGlassIcon
+            className={styles.searchButtonIcon}
+            aria-label="Åpne søk"
+            aria-hidden={showChildContent}
+          />
+        }
+        iconPosition="left"
+      >
+        {showChildContent && (
+          <HStack gap="space-8" as="span">
+            Søk
+            <HStack gap="space-2" asChild aria-hidden>
+              <Detail as="span">
+                <Kbd>Ctrl</Kbd>
+                <Kbd>k</Kbd>
+              </Detail>
+            </HStack>
           </HStack>
-        </HStack>
-      )}
-    </Button>
+        )}
+      </Button>
+    </Dialog.Trigger>
   );
 
   return (

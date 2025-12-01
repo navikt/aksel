@@ -33,10 +33,7 @@
   flex-direction: column;
   overflow-y: auto;
   background-color: var(--ax-bg-default);
-
-  @media (width > 768px) {
-    max-height: 70vh;
-  }
+  max-height: 60dvh;
 }
 
 .searchButtonIcon {

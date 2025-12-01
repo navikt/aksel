@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Search } from "@navikt/ds-react";
 import {
@@ -12,21 +11,8 @@ import styles from "./GlobalSearch.module.css";
 
 const GlobalSearchForm = () => {
   const { paramValue } = useParamState("query");
-  const initialQuery = useRef(!!paramValue);
   const { inputRef, closeSearch } = useGlobalSearch();
   const { updateQuery, resetSearch } = useGlobalSearchResults();
-
-  useEffect(() => {
-    if (!inputRef.current) {
-      return;
-    }
-    if (initialQuery.current) {
-      /* Defer to ensure defaultValue is applied */
-      queueMicrotask(() => inputRef.current?.select());
-    } else {
-      inputRef.current.focus();
-    }
-  }, [inputRef]);
 
   return (
     <div className={styles.searchForm}>
