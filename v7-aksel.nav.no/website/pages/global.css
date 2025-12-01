@@ -1,15 +1,6 @@
-@layer twBase, dsComponentsLegacy, dsComponents, twComponents, twUtilities;
+@layer twBase, dsComponentsLegacy, twComponents, twUtilities;
 
 @import "tailwindcss/base" layer(twBase);
 @import "@navikt/ds-css" layer(dsComponentsLegacy);
-@import "@navikt/ds-css/dist/darkside/global/fonts.min.css" layer(dsComponents);
-@import "@navikt/ds-css/dist/darkside/global/tokens.min.css" layer(dsComponents);
-@import "@navikt/ds-css/dist/darkside/global/baseline.min.css" layer(dsComponents);
-@import "@navikt/ds-css/dist/darkside/global/print.min.css" layer(dsComponents);
-@import "@navikt/ds-css/dist/darkside/components.min.css" layer(dsComponents);
 @import "tailwindcss/components" layer(twComponents);
 @import "tailwindcss/utilities" layer(twUtilities);
-
-body {
-  background-color: var(--ax-bg-default);
-}

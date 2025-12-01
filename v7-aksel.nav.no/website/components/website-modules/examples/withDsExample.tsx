@@ -1,16 +1,9 @@
 "use client";
 
 import cl from "clsx";
-import { useTheme } from "next-themes";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
-import {
-  type CSSProperties,
-  ComponentType,
-  useEffect,
-  useState,
-  useSyncExternalStore,
-} from "react";
+import { ComponentType, useSyncExternalStore } from "react";
 import {
   LaptopIcon,
   MobileIcon,
@@ -18,9 +11,8 @@ import {
   MonitorIcon,
   TabletIcon,
 } from "@navikt/aksel-icons";
-import { Theme as AkselTheme, BodyShort, Box, HStack } from "@navikt/ds-react";
+import { BodyShort, Box, HStack } from "@navikt/ds-react";
 import styles from "./examples.module.css";
-import { ExampleThemingSwitch } from "./withDsExample.theme";
 
 type withDsT = {
   /**
@@ -50,13 +42,11 @@ export const withDsExample = (
   }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
-    const { theme } = useTheme();
     const pathname = usePathname() || "///";
     const pathParts = pathname.split("/");
 
     return (
-      <ThemeWrapper
-        useDarkside={!(legacyOnly || theme === "legacy")}
+      <div
         className={cl(styles.container, {
           /* Overrides global theme when showing legacy-examples */
           light: legacyOnly,
@@ -75,7 +65,6 @@ export const withDsExample = (
             } - aksel.nav.no`}
           </title>
         </Head>
-        <ExampleThemingSwitch legacyOnly={legacyOnly} />
         {showBreakpoints && <BreakpointText />}
         <main
           id="ds-example"
@@ -83,7 +72,7 @@ export const withDsExample = (
         >
           <Component {...props} />
         </main>
-      </ThemeWrapper>
+      </div>
     );
   };
 
@@ -93,42 +82,6 @@ export const withDsExample = (
 
   return DsHOC;
 };
-
-function ThemeWrapper({
-  children,
-  useDarkside,
-  style,
-  className,
-}: {
-  children: React.ReactNode;
-  useDarkside: boolean;
-  style: CSSProperties;
-  className: string;
-}) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
-  if (useDarkside) {
-    return (
-      <AkselTheme hasBackground={false} className={className} asChild>
-        <div style={style}>{children}</div>
-      </AkselTheme>
-    );
-  }
-
-  return (
-    <div className={className} style={style}>
-      {children}
-    </div>
-  );
-}
 
 function getBg(background: withDsT["background"]): string {
   switch (background) {

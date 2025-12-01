@@ -1,28 +1,7 @@
-import { ThemeProvider, useTheme } from "next-themes";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 import { Box, Select } from "@navikt/ds-react";
-
-type SupportedThemes = "legacy" | "light" | "dark";
-
-const colorThemes = ["legacy", "light", "dark"] satisfies SupportedThemes[];
-
-const LOCAL_STORAGE_KEY = "aksel-example-theme";
-
-function ExampleTheming({ children }: { children: React.ReactNode }) {
-  return (
-    <ThemeProvider
-      attribute="class"
-      storageKey={LOCAL_STORAGE_KEY}
-      defaultTheme="legacy"
-      enableSystem={false}
-      themes={colorThemes}
-      disableTransitionOnChange
-    >
-      {children}
-    </ThemeProvider>
-  );
-}
 
 function ExampleThemingSwitch({
   legacyOnly = false,
@@ -58,4 +37,4 @@ function ExampleThemingSwitch({
   );
 }
 
-export { ExampleTheming, ExampleThemingSwitch };
+export { ExampleThemingSwitch };

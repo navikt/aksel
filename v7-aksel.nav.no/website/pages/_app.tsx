@@ -1,12 +1,11 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import "@navikt/ds-tokens/darkside-css";
-import { ExampleTheming } from "@/web/examples/withDsExample.theme";
 import "./global.css";
 
 function App({ Component, pageProps, router }: AppProps) {
   return (
-    <ExampleTheming>
+    <>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
@@ -26,7 +25,7 @@ function App({ Component, pageProps, router }: AppProps) {
         <meta property="og:site_name" content="Aksel" key="ogsitename" />
       </Head>
       <Component {...pageProps} />
-    </ExampleTheming>
+    </>
   );
 }
 
