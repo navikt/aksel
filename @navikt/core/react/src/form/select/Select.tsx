@@ -14,10 +14,6 @@ export interface SelectProps
    */
   children: React.ReactNode;
   /**
-   * Exposes the HTML size attribute.
-   */
-  htmlSize?: number;
-  /**
    * Sets inline-style on select wrapper.
    */
   style?: React.CSSProperties;
@@ -64,7 +60,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       label,
       className,
       description,
-      htmlSize,
       hideLabel = false,
       style,
       ...rest
@@ -140,7 +135,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               "navds-body-short",
               `navds-body-short--${size ?? "medium"}`,
             )}
-            size={htmlSize}
           >
             {children}
           </select>
