@@ -2,7 +2,6 @@ import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 import path from "node:path";
 
-const useCdn = process.env.USE_CDN_ASSETS === "true";
 const isProduction = process.env.PRODUCTION === "true";
 
 const cdnUrl = "https://cdn.nav.no";
@@ -76,7 +75,6 @@ const nextConfig: NextConfig = {
       ? "fb69e1e9-1bd3-4fd9-b700-9d035cbf44e1"
       : "7b9fb2cd-40f4-4a30-b208-5b4dba026b57",
   },
-  assetPrefix: useCdn ? "https://cdn.nav.no/designsystem/website" : undefined,
   headers: async () => {
     return [
       {

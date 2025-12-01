@@ -12,12 +12,6 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
   },
   metadataBase: new URL("https://aksel.nav.no/"),
-
-  alternates: {
-    types: {
-      "application/rss+xml": "https://aksel.nav.no/rss/produktbloggen-rss.xml",
-    },
-  },
 };
 
 export const viewport: Viewport = {
