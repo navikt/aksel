@@ -8,7 +8,6 @@ import {
   komponentKategorier,
   templatesKategorier,
 } from "@/sanity/config";
-import { metadata as tokenMetadata } from "./(designsystemet)/grunnleggende/darkside/design-tokens/page";
 import { metadata as iconsMetadata } from "./(designsystemet)/komponenter/ikoner/page";
 
 type PageRoute = {
@@ -63,18 +62,6 @@ const PAGE_ROUTES: Routes = {
         order: "last",
       },
     ],
-    nested: {
-      darkside: [
-        {
-          heading: "Tokens darkside",
-          slug: `grunnleggende/darkside/design-tokens`,
-          tag: "ready",
-          searchMetadata: {
-            intro: tokenMetadata?.description ?? "",
-          },
-        },
-      ],
-    },
   },
   komponenter: {
     title: "Byggeklosser",
