@@ -23,10 +23,10 @@ const Example = () => {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
-        <Box paddingBlock="20 16" data-aksel-template="404-v2">
-          <VStack gap="12" align="start">
-            <div>
-              <Heading level="1" size="large" spacing>
+        <Box paddingBlock="space-80 space-64" data-aksel-template="404-v2">
+          <VStack gap="space-48" align="start">
+            <VStack gap="space-16">
+              <Heading level="1" size="large">
                 Beklager, vi fant ikke siden
               </Heading>
               <BodyShort>
@@ -39,7 +39,7 @@ const Example = () => {
                   <Link href="#">Gå til forsiden</Link>
                 </List.Item>
               </List>
-            </div>
+            </VStack>
             <Button as="a" href="#">
               Gå til Min side
             </Button>

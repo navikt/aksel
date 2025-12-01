@@ -22,16 +22,22 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
-        <Box paddingBlock="20 16">
-          <HGrid columns="minmax(auto,600px)" data-aksel-template="500-v2">
-            <BodyShort textColor="subtle" size="small">
-              Statuskode 500
-            </BodyShort>
-            <Heading level="1" size="large" spacing>
-              Beklager, noe gikk galt.
-            </Heading>
+        <Box paddingBlock="space-80 space-64">
+          <HGrid
+            columns="minmax(auto,600px)"
+            gap="space-16"
+            data-aksel-template="500-v2"
+          >
+            <div>
+              <BodyShort textColor="subtle" size="small">
+                Statuskode 500
+              </BodyShort>
+              <Heading level="1" size="large">
+                Beklager, noe gikk galt.
+              </Heading>
+            </div>
             {/* Tekster bør tilpasses den aktuelle 500-feilen. Teksten under er for en generisk 500-feil. */}
-            <BodyShort spacing>
+            <BodyShort>
               En teknisk feil på våre servere gjør at siden er utilgjengelig.
               Dette skyldes ikke noe du gjorde.
             </BodyShort>
@@ -40,7 +46,7 @@ function Example() {
               <List.Item>
                 vente noen minutter og{" "}
                 {/* Husk at POST-data går tapt når man reloader med JS. For å unngå dette kan dere
-                  fjerne lenken (men beholde teksten) slik at man må bruke nettleserens reload-knapp. */}
+                    fjerne lenken (men beholde teksten) slik at man må bruke nettleserens reload-knapp. */}
                 <Link href="#" onClick={() => location.reload()}>
                   laste siden på nytt
                 </Link>
