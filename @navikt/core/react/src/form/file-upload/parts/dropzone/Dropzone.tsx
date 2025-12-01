@@ -32,6 +32,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
       translations,
       onClick,
       id: buttonId,
+      "data-color": color,
       ...rest
     } = props;
 
@@ -105,11 +106,11 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           onDragOver={dropzoneCtx.onDragOver}
           onDragLeave={dropzoneCtx.onDragLeave}
           onDrop={dropzoneCtx.onDrop}
-          onClick={composeEventHandlers(
-            onClick,
-            () => inputRef.current?.click(),
+          onClick={composeEventHandlers(onClick, () =>
+            inputRef.current?.click(),
           )}
           data-disabled={inputProps.disabled}
+          data-color={color}
         >
           {!inputProps.disabled && (
             <>
