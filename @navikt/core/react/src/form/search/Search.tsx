@@ -7,6 +7,7 @@ import React, {
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { useRenameCSS } from "../../theme/Theme";
+import { AkselColor } from "../../types";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -73,6 +74,10 @@ export interface SearchProps
    * HTML size attribute. Specifies the width of the input, in characters.
    */
   htmlSize?: number | string;
+  /**
+   * @private
+   */
+  "data-color"?: AkselColor;
 }
 
 interface SearchComponent

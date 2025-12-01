@@ -2,6 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -68,6 +69,10 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
     tag: "h2" | "h3" | "h4" | "h5" | "h6";
     text: string;
   };
+  /**
+   * @private
+   */
+  "data-color"?: AkselColor;
 }
 
 interface PaginationType

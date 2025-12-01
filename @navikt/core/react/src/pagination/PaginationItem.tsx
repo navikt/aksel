@@ -37,7 +37,7 @@ export const Item: PaginationItemType = forwardRef(
       page,
       "data-color": color,
       ...rest
-    },
+    }: PaginationItemProps & { as?: React.ElementType },
     ref,
   ) => {
     const { cn } = useRenameCSS();
