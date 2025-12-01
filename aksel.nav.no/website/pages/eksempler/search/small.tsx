@@ -23,5 +23,4 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Small passer også i tilknytning til en komponent, for eksempel til filtrering av data i en tabell.",
 };
