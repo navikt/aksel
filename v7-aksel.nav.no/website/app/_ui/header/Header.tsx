@@ -1,6 +1,20 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { BodyShort, Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
+import {
+  BodyShort,
+  Box,
+  Link as DsLink,
+  GlobalAlert,
+  HStack,
+  Hide,
+  Show,
+  Spacer,
+} from "@navikt/ds-react";
+import {
+  GlobalAlertContent,
+  GlobalAlertHeader,
+  GlobalAlertTitle,
+} from "@navikt/ds-react/GlobalAlert";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
 import { ThemeButton } from "@/app/_ui/theming/Theme.button";
@@ -26,6 +40,19 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
       <a className={styles.skiplink} href="#hovedinnhold">
         Hopp til innhold
       </a>
+      <GlobalAlert status="announcement">
+        <GlobalAlertHeader>
+          <GlobalAlertTitle>
+            Dette er dokumentasjonen for Aksel versjon 7.
+          </GlobalAlertTitle>
+        </GlobalAlertHeader>
+        <GlobalAlertContent>
+          Den nyeste versjonen finner du på{" "}
+          <DsLink href="https://aksel.nav.no" variant="neutral">
+            aksel.nav.no
+          </DsLink>
+        </GlobalAlertContent>
+      </GlobalAlert>
       <div className={styles.headerContainer}>
         <Link href="/" passHref className={styles.headerLogoLink}>
           <Show above="sm">

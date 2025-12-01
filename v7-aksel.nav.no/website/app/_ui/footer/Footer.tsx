@@ -9,7 +9,7 @@ import styles from "./Footer.module.css";
 function Footer() {
   return (
     <footer className={`${styles.footer} dark`} id="aksel-footer">
-      <HGrid gap="space-24" asChild columns={{ xs: 1, md: 2, lg: 4 }}>
+      <HGrid gap="space-24" asChild columns={{ xs: 1, md: 2, lg: 3 }}>
         <PageBlock width="2xl">
           <div className={styles.footerLogo}>
             <AkselLogo />
@@ -22,30 +22,8 @@ function Footer() {
             </div>
           </div>
           <LinkBlock
-            heading="Snarveier"
-            links={[
-              {
-                url: "/side/skriv-for-aksel",
-                text: "Skriv for Aksel",
-              },
-              {
-                url: "/prinsipper/brukeropplevelse",
-                text: "Prinsipper for brukeropplevelse",
-              },
-              { url: "https://sikkerhet.nav.no/", text: "Security Playbook" },
-              {
-                url: "https://etterlevelse.ansatt.nav.no/",
-                text: "Etterlevelse",
-              },
-            ]}
-          />
-          <LinkBlock
             heading="Om nettstedet"
             links={[
-              {
-                url: "/side/om-aksel",
-                text: "Hva er Aksel?",
-              },
               {
                 url: "/personvernerklaering",
                 text: "Personvernerklæring",
