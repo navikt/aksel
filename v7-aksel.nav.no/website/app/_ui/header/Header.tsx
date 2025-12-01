@@ -22,11 +22,7 @@ import AkselLogo from "@/assets/Logo";
 import { HeaderLink } from "./Header.link";
 import styles from "./Header.module.css";
 
-const LINKS = [
-  { name: "God praksis", href: "/god-praksis" },
-  { name: "Designsystemet", href: "/designsystemet" },
-  { name: "Bloggen", href: "/produktbloggen" },
-];
+const LINKS = [{ name: "Designsystemet", href: "/designsystemet" }];
 
 function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
   variant = variant ? variant : "default";

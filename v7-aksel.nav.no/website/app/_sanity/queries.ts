@@ -81,12 +81,7 @@ const DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY = defineQuery(
 
 const GLOBAL_SEARCH_QUERY_ALL = defineQuery(
   `*[_type in ["komponent_artikkel",
-  "ds_artikkel",
-  "aksel_artikkel",
-  "aksel_blogg",
-  "aksel_prinsipp",
-  "aksel_standalone",
-  "templates_artikkel"]]{
+  "ds_artikkel"]]{
     heading,
     "slug": slug.current,
     "tema": undertema[]->tema->title,
