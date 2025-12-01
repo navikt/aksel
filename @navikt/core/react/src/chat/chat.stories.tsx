@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { VStack } from "../layout/stack";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import Chat, { POSITIONS, SIZES, VARIANTS } from "./Chat";
 
 export default {
@@ -313,36 +314,11 @@ function Illustration() {
   );
 }
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Size</h2>
-        {Size.render?.(...props)}
-      </div>
-      <div>
-        <h2>Variants</h2>
-        {Variants.render?.(...props)}
-      </div>
-      <div>
-        <h2>Position</h2>
-        {Position.render?.(...props)}
-      </div>
-      <div>
-        <h2>Toptext</h2>
-        {ToptextPosition.render?.(...props)}
-      </div>
-      <div>
-        <h2>Avatar</h2>
-        {Avatar.render?.(...props)}
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        {ColorRole.render?.(...props)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Size,
+  Variants,
+  Position,
+  ToptextPosition,
+  Avatar,
+  ColorRole,
+});

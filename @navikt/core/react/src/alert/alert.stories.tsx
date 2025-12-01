@@ -3,6 +3,7 @@ import React from "react";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
 import { BodyLong, Heading } from "../typography";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import Alert, { AlertProps } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
@@ -180,38 +181,22 @@ export const CloseButton: StoryFn = () => {
   );
 };
 
-export const Chromatic: Story = {
-  render: () => (
-    <div>
-      <h2>Variants</h2>
-      <Variants />
+export const Links: StoryFn = () => (
+  <VStack gap="2">
+    {variants.map((variant) => (
+      <Alert key={variant} variant={variant}>
+        <Link href="#">Id elit esse enim reprehenderit</Link>
+      </Alert>
+    ))}
+  </VStack>
+);
 
-      <h2>FullWidth</h2>
-      <FullWidth />
-
-      <h2>ContentMaxWidthOff</h2>
-      <ContentMaxWidthOff />
-
-      <h2>Inline</h2>
-      <Inline />
-
-      <h2>Heading</h2>
-      <WithHeading />
-
-      <h2>CloseButton</h2>
-      <CloseButton />
-
-      <h2>Links</h2>
-      <VStack gap="2">
-        {variants.map((variant) => (
-          <Alert key={variant} variant={variant}>
-            <Link href="#">Id elit esse enim reprehenderit</Link>
-          </Alert>
-        ))}
-      </VStack>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Variants,
+  FullWidth,
+  ContentMaxWidthOff,
+  Inline,
+  WithHeading,
+  CloseButton,
+  Links,
+});

@@ -4,6 +4,7 @@ import { userEvent, within } from "storybook/test";
 import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { CopyButton } from ".";
 import { Tooltip } from "../tooltip";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 
 const meta: Meta<typeof CopyButton> = {
   title: "ds-react/CopyButton",
@@ -178,44 +179,13 @@ export const Disabled: Story = {
   ),
 };
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>IconPosition</h2>
-        {IconPosition.render?.(...props)}
-      </div>
-      <div>
-        <h2>Sizes</h2>
-        {Sizes.render?.(...props)}
-      </div>
-      <div>
-        <h2>Texts</h2>
-        {Texts.render?.(...props)}
-      </div>
-      <div>
-        <h2>Icons</h2>
-        {Icons.render?.(...props)}
-      </div>
-      <div>
-        <h2>InlineDemo</h2>
-        {InlineDemo.render?.(...props)}
-      </div>
-      <div>
-        <h2>WithTooltip</h2>
-        {WithTooltip.render?.(...props)}
-      </div>
-      <div>
-        <h2>Duration</h2>
-        {Duration.render?.(...props)}
-      </div>
-      <div>
-        <h2>Disabled</h2>
-        {Disabled.render?.(...props)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  IconPosition,
+  Sizes,
+  Texts,
+  Icons,
+  InlineDemo,
+  WithTooltip,
+  Duration,
+  Disabled,
+});

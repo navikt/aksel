@@ -1,5 +1,19 @@
 # Changelog
 
+## 7.35.0
+
+### @navikt/ds-react
+
+- Combobox: Add locale-support for 'Ingen søketreff'. ([#4324](https://github.com/navikt/aksel/pull/4324))
+
+### @navikt/ds-css
+
+- Search: Fixes edgecase where darkmode (in darkside) were used without color-scheme, making icons inverted in color. ([#4323](https://github.com/navikt/aksel/pull/4323))
+
+### @navikt/aksel
+
+- CLI: Removed 'css-import' command. ([#4331](https://github.com/navikt/aksel/pull/4331))
+
 ## 7.34.0
 
 ### @navikt/aksel-icons

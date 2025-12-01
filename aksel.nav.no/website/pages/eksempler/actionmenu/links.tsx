@@ -17,11 +17,11 @@ const Example = () => {
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="Se kode for implementasjon">
-          <ActionMenu.Item as="a" href="#">
-            # lenke
+          <ActionMenu.Item as="a" href="/eksempel">
+            Vanlig lenke
           </ActionMenu.Item>
-          <Link href="#123" passHref legacyBehavior>
-            <ActionMenu.Item as="a">Nextjs</ActionMenu.Item>
+          <Link href="/eksempel" passHref legacyBehavior>
+            <ActionMenu.Item as="a">Next.js-lenke</ActionMenu.Item>
           </Link>
           <ActionMenu.Item>React router (se kommentert kode)</ActionMenu.Item>
           <ActionMenu.Item>Remix (se kommentert kode)</ActionMenu.Item>

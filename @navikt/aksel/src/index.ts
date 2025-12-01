@@ -2,7 +2,6 @@
 import chalk from "chalk";
 import fs from "node:fs";
 import { codemodCommand } from "./codemod/index";
-import { cssImportsCommand } from "./css-imports/index";
 import { darksideCommand } from "./darkside";
 import { helpCommand } from "./help";
 
@@ -14,18 +13,16 @@ async function run() {
     return;
   }
 
-  if (process.argv[2] === "css-imports") {
-    await cssImportsCommand();
+  /**
+   * Runs custom tooling for migrating to v8 tokens
+   */
+  if (process.argv[2] === "codemod" && process.argv[3] === "v8-tokens") {
+    darksideCommand();
     return;
   }
 
   if (process.argv[2] === "codemod") {
     codemodCommand();
-    return;
-  }
-
-  if (process.argv[2] === "darkside") {
-    darksideCommand();
     return;
   }
 

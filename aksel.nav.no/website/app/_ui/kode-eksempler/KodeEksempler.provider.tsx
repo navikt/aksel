@@ -60,7 +60,7 @@ function KodeEksemplerProvider(props: {
     }
 
     return dir?.filer?.find((file) => {
-      const id = nameToId(dir?.title ?? "", file.navn ?? "");
+      const id = stegaClean(nameToId(dir?.title ?? "", file.navn ?? ""));
       return param === `${id}`;
     });
   }, [dir?.filer, dir?.title, searchParams]);
