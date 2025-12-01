@@ -37,7 +37,6 @@
       "@/error-boundary": ["./components/website-modules/ErrorBoundary.tsx"],
       "@/sanity/config": ["./sanity/config.ts"],
       "@/sanity/client.server": ["./sanity/interface/client.server.ts"],
-      "@/sanity/interface": ["./sanity/interface/interface.ts"],
       "@/sanity/queries": ["./sanity/interface/queries.ts"],
       "@/app/CustomPortableText": [
         "./app/_ui/portable-text/CustomPortableText.tsx"
