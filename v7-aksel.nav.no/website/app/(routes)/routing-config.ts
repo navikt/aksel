@@ -3,11 +3,7 @@
  * hardcoded in the codebase. We still need a way to reference them in the sidebar and sitemap.
  * This file contains the routes for those pages.
  */
-import {
-  grunnleggendeKategorier,
-  komponentKategorier,
-  templatesKategorier,
-} from "@/sanity/config";
+import { grunnleggendeKategorier, komponentKategorier } from "@/sanity/config";
 import { metadata as iconsMetadata } from "./(designsystemet)/komponenter/ikoner/page";
 
 type PageRoute = {
@@ -40,28 +36,13 @@ type Routes = {
       Record<(typeof grunnleggendeKategorier)[number]["value"], PageRoute[]>
     >;
   };
-  templates: {
-    title: "Mønster og Maler";
-    _type: "templates_artikkel";
-    root: PageRoute[];
-    nested?: Partial<
-      Record<(typeof templatesKategorier)[number]["value"], PageRoute[]>
-    >;
-  };
 };
 
 const PAGE_ROUTES: Routes = {
   grunnleggende: {
     title: "Grunnleggende",
     _type: "ds_artikkel",
-    root: [
-      {
-        heading: "Endringslogg",
-        slug: `grunnleggende/endringslogg`,
-        tag: "ready",
-        order: "last",
-      },
-    ],
+    root: [],
   },
   komponenter: {
     title: "Byggeklosser",
@@ -74,17 +55,6 @@ const PAGE_ROUTES: Routes = {
         searchMetadata: {
           intro: iconsMetadata?.description ?? "",
         },
-      },
-    ],
-  },
-  templates: {
-    title: "Mønster og Maler",
-    _type: "templates_artikkel",
-    root: [
-      {
-        heading: "Oversikt",
-        slug: "monster-maler",
-        tag: "ready",
       },
     ],
   },

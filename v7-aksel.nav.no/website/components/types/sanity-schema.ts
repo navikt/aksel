@@ -2,7 +2,6 @@ import {
   bloggKategorier,
   grunnleggendeKategorier,
   komponentKategorier,
-  templatesKategorier,
 } from "@/sanity/config";
 
 export type ResolveSlugT<T> = Omit<T, "slug"> & {
@@ -117,25 +116,6 @@ export interface AkselGrunnleggendeDocT
   };
 }
 
-export interface AkselTemplatesDocT extends DocumentT<"ds_artikkel">, ArticleT {
-  kategori: (typeof templatesKategorier)[number]["value"];
-  status: {
-    tag?: "beta" | "new" | "ready" | "deprecated";
-    unsafe?: boolean;
-    bilde?: any;
-  };
-  gh_discussions?: string;
-  intro: {
-    body?: any[];
-    brukes_til: string[];
-    brukes_ikke_til?: string[];
-  };
-  content: any[];
-  updateInfo?: {
-    lastVerified?: string;
-  };
-}
-
 export type SidebarInputNodeT = {
   _type: string;
   heading: string;
@@ -164,8 +144,7 @@ export type ArticleListT = {
   slug: { current: string };
   kategori:
     | (typeof komponentKategorier)[number]["value"]
-    | (typeof grunnleggendeKategorier)[number]["value"]
-    | (typeof templatesKategorier)[number]["value"];
+    | (typeof grunnleggendeKategorier)[number]["value"];
   status: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     unsafe?: boolean;

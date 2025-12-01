@@ -58,15 +58,8 @@ export const grunnleggendeKategorier = [
   { title: "Introduksjon", value: "introduksjon" },
   { title: "Brand", value: "brand" },
   { title: "Styling", value: "styling" },
-  { title: "Darkside", value: "darkside" },
   { title: "Guider", value: "guider" },
   { title: "Kode", value: "kode" },
-] as const;
-
-export const templatesKategorier = [
-  { title: "Brev", value: "brev" },
-  { title: "Støtte", value: "stotte" },
-  { title: "Søknadsdialog", value: "soknadsdialog" },
 ] as const;
 
 export const bloggKategorier = [
@@ -89,8 +82,6 @@ export const sanityCategoryLookup = (
       return komponentKategorier;
     case "grunnleggende":
       return grunnleggendeKategorier;
-    case "templates":
-      return templatesKategorier;
     default:
       return [];
   }
