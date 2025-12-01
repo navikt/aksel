@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "changelog": [
+    {
+      "description": "Fjernet illustrasjon",
+      "date": "01.12.2023",
+      "version": 2
+    },
+    {
+      "description": "Publiserte varianter med CTA, tilbakemelding og språkvalg",
+      "date": "03.11.2023",
+      "version": 1
+    }
+  ]
+}

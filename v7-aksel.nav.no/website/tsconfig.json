@@ -1,0 +1,56 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext", "ES2021.String"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "noImplicitAny": false,
+    "incremental": true,
+    "types": [
+      "node",
+      "umami",
+      "@navikt/ds-react/types/theme",
+      "./app/theme.d.ts"
+    ],
+    "paths": {
+      "@/sb-util": ["./.storybook/utils.tsx"],
+      "@/types": ["./components/types/index.ts"],
+      "@/sanity-block": ["./components/website-modules/SanityBlockContent.tsx"],
+      "@/auth/*": ["./components/auth/*"],
+      "@/hooks/*": ["./components/hooks/*"],
+      "@/logging": ["./components/logging/index.ts"],
+      "@/utils": ["./components/utils/index.ts"],
+      "@/slack": ["./components/utils/slack/index.ts"],
+      "@/layout/*": ["./components/layout/*"],
+      "@/assets/*": ["./components/assets/*"],
+      "@/web/*": ["./components/website-modules/*"],
+      "@/cms/*": ["./components/sanity-modules/*"],
+      "@/error-boundary": ["./components/website-modules/ErrorBoundary.tsx"],
+      "@/sanity/config": ["./sanity/config.ts"],
+      "@/sanity/client.server": ["./sanity/interface/client.server.ts"],
+      "@/sanity/interface": ["./sanity/interface/interface.ts"],
+      "@/sanity/queries": ["./sanity/interface/queries.ts"],
+      "@/app/CustomPortableText": [
+        "./app/_ui/portable-text/CustomPortableText.tsx"
+      ],
+      "@/ui-utils/*": ["./app/_ui/utils/*"],
+      "@/app/*": ["./app/*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "e2e", "./scripts/**"]
+}

@@ -1,0 +1,5 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+.imageAsModule {
+  width: var(--website-svg-size);
+  height: var(--website-svg-size);
+}

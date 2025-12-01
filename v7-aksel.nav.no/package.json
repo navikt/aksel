@@ -1,0 +1,17 @@
+{
+  "name": "v7-aksel.nav.no",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for v7 release of Aksel.nav.no",
+  "author": "Aksel | Nav designsystem team",
+  "workspaces": [
+    "website",
+    "playroom"
+  ],
+  "dependencies": {
+    "@navikt/aksel-icons": "^7",
+    "@navikt/ds-css": "^7",
+    "@navikt/ds-react": "^7",
+    "@navikt/ds-tokens": "^7"
+  }
+}

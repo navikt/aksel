@@ -1,0 +1,34 @@
+.overviewLi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.overviewCardLink {
+  display: grid;
+  gap: var(--ax-space-12);
+  color: var(--ax-text-neutral);
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.overviewImageWrapper {
+  position: relative;
+  display: grid;
+  place-content: center;
+  overflow: hidden;
+  height: min-content;
+  background: var(--ax-bg-soft);
+}
+
+:global(.dark) .overviewImageWrapper {
+  background: var(--ax-bg-neutral-soft);
+}
+
+.overviewCardHeading {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-8);
+}

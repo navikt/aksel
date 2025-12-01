@@ -1,0 +1,265 @@
+@layer twBase, dsComponents, twComponents, twUtilities;
+
+@import "tailwindcss/base" layer(twBase);
+@import "@navikt/ds-css/darkside" layer(dsComponents);
+@import "tailwindcss/components" layer(twComponents);
+@import "tailwindcss/utilities" layer(twUtilities);
+
+:root {
+  --website-header-height: 4rem;
+  --website-header-height-width-border: calc(var(--website-header-height) + 1px);
+  --website-font-mono:
+    ui-monospace, "Menlo", "Monaco", "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
+    "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+}
+
+/* Prevents scroll-rubberbanding on Apple devices  */
+body {
+  overscroll-behavior: none;
+}
+
+/* Stops skiplink from setting focus */
+#hovedinnhold:focus {
+  outline: none;
+}
+
+[data-block-margin] {
+  &[data-block-margin="space-28"] {
+    margin-block: var(--ax-space-28);
+  }
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+}
+
+[data-scroll-margin] {
+  scroll-margin: 5rem;
+}
+
+[data-clamp-text] {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  &[data-clamp-text="4-lines"] {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+  }
+}
+
+[data-text-prose] {
+  max-width: 670px;
+}
+
+[data-aksel-heading-color] {
+  color: var(--ax-text-brand-blue);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+[data-wrapper-prose] {
+  margin-inline: auto;
+  max-width: 670px;
+}
+
+/* 480 === sm
+min-width: X == X is the minimum width needed before styles apply */
+@media (min-width: 480px) {
+  [data-wrapper-prose] {
+    width: 90%;
+  }
+}
+
+/* Local resets */
+address {
+  font-style: normal;
+}
+
+/* ---------------------------- AkselBrand theme ---------------------------- */
+
+:root,
+.light {
+  --aksel-brand-logo: #004367;
+
+  /* Teal */
+  --aksel-brand-teal-100: #ddfcf5;
+  --aksel-brand-teal-200: #ccf6ed;
+  --aksel-brand-teal-300: #b7eee4;
+  --aksel-brand-teal-400: #90e1d2;
+  --aksel-brand-teal-500: #009a8c;
+  --aksel-brand-teal-600: #00857c;
+  --aksel-brand-teal-700: #0e716a;
+  --aksel-brand-teal-800: #116862;
+  --aksel-brand-teal-900: #105a56;
+  --aksel-brand-teal-1000: #052c2a;
+  --aksel-brand-teal-100A: hsl(166deg 90% 48% / 0.14);
+  --aksel-brand-teal-200A: hsl(167deg 100% 41% / 0.2);
+  --aksel-brand-teal-300A: hsl(169deg 93% 40% / 0.29);
+  --aksel-brand-teal-400A: hsl(169deg 97% 37% / 0.44);
+
+  /* Pink */
+  --aksel-brand-pink-100: #fef2f9;
+  --aksel-brand-pink-200: #fde9f4;
+  --aksel-brand-pink-300: #fcdaee;
+  --aksel-brand-pink-400: #fdc1e2;
+  --aksel-brand-pink-500: #ed4899;
+  --aksel-brand-pink-600: #d33785;
+  --aksel-brand-pink-700: #b72a71;
+  --aksel-brand-pink-800: #aa2568;
+  --aksel-brand-pink-900: #961d5b;
+  --aksel-brand-pink-1000: #4e082d;
+  --aksel-brand-pink-100A: hsl(325deg 86% 54% / 0.06);
+  --aksel-brand-pink-200A: hsl(327deg 91% 48% / 0.09);
+  --aksel-brand-pink-300A: hsl(325deg 93% 48% / 0.15);
+  --aksel-brand-pink-400A: hsl(327deg 95% 50% / 0.25);
+}
+
+.dark {
+  --aksel-brand-logo: var(--ax-neutral-1000);
+
+  /* Teal */
+  --aksel-brand-teal-100: #03211f;
+  --aksel-brand-teal-200: #042826;
+  --aksel-brand-teal-300: #06302d;
+  --aksel-brand-teal-400: #093c39;
+  --aksel-brand-teal-500: #067972;
+  --aksel-brand-teal-600: #008d82;
+  --aksel-brand-teal-700: #00a394;
+  --aksel-brand-teal-800: #00ae9d;
+  --aksel-brand-teal-900: #2fbfad;
+  --aksel-brand-teal-1000: #c3f2e9;
+  --aksel-brand-teal-100A: hsl(152deg 100% 10% / 0.36);
+  --aksel-brand-teal-200A: hsl(146deg 98% 49% / 0.08);
+  --aksel-brand-teal-300A: hsl(153deg 85% 54% / 0.12);
+  --aksel-brand-teal-400A: hsl(159deg 90% 61% / 0.17);
+
+  /* Pink */
+  --aksel-brand-pink-100: #2b171f;
+  --aksel-brand-pink-200: #331c25;
+  --aksel-brand-pink-300: #3d232d;
+  --aksel-brand-pink-400: #4b2c38;
+  --aksel-brand-pink-500: #b44377;
+  --aksel-brand-pink-600: #cd528a;
+  --aksel-brand-pink-700: #e565a0;
+  --aksel-brand-pink-800: #ee71ab;
+  --aksel-brand-pink-900: #f986bd;
+  --aksel-brand-pink-1000: #fde1f1;
+  --aksel-brand-pink-100A: hsl(1deg 85% 53% / 0.13);
+  --aksel-brand-pink-200A: hsl(359deg 90% 61%/ 0.16);
+  --aksel-brand-pink-300A: hsl(356deg 93% 67%/ 0.2);
+  --aksel-brand-pink-400A: hsl(352deg 92% 70%/ 0.26);
+}
+
+:root,
+.light,
+.dark {
+  /* Teal */
+  --aksel-border-brand-teal-strong: var(--aksel-brand-teal-700);
+  --aksel-border-brand-teal-subtleA: var(--aksel-brand-teal-400A);
+  --aksel-border-brand-teal-subtle: var(--aksel-brand-teal-400);
+  --aksel-border-brand-teal: var(--aksel-brand-teal-600);
+  --aksel-text-brand-teal-contrast: var(--ax-neutral-000);
+  --aksel-text-brand-teal-icon: var(--aksel-brand-teal-600);
+  --aksel-text-brand-teal-subtle: var(--aksel-brand-teal-800);
+  --aksel-text-brand-teal: var(--aksel-brand-teal-1000);
+  --aksel-bg-brand-teal-strong-pressed: var(--aksel-brand-teal-800);
+  --aksel-bg-brand-teal-strong-hover: var(--aksel-brand-teal-700);
+  --aksel-bg-brand-teal-strong: var(--aksel-brand-teal-600);
+  --aksel-bg-brand-teal-moderate-pressedA: var(--aksel-brand-teal-400A);
+  --aksel-bg-brand-teal-moderate-pressed: var(--aksel-brand-teal-400);
+  --aksel-bg-brand-teal-moderate-hoverA: var(--aksel-brand-teal-300A);
+  --aksel-bg-brand-teal-moderate-hover: var(--aksel-brand-teal-300);
+  --aksel-bg-brand-teal-moderateA: var(--aksel-brand-teal-200A);
+  --aksel-bg-brand-teal-moderate: var(--aksel-brand-teal-200);
+  --aksel-bg-brand-teal-softA: var(--aksel-brand-teal-100A);
+  --aksel-bg-brand-teal-soft: var(--aksel-brand-teal-100);
+
+  /* Pink */
+  --aksel-border-brand-pink-strong: var(--aksel-brand-pink-700);
+  --aksel-border-brand-pink-subtleA: var(--aksel-brand-pink-400A);
+  --aksel-border-brand-pink-subtle: var(--aksel-brand-pink-400);
+  --aksel-border-brand-pink: var(--aksel-brand-pink-600);
+  --aksel-text-brand-pink-contrast: var(--ax-neutral-000);
+  --aksel-text-brand-pink-icon: var(--aksel-brand-pink-600);
+  --aksel-text-brand-pink-subtle: var(--aksel-brand-pink-800);
+  --aksel-text-brand-pink: var(--aksel-brand-pink-1000);
+  --aksel-bg-brand-pink-strong-pressed: var(--aksel-brand-pink-800);
+  --aksel-bg-brand-pink-strong-hover: var(--aksel-brand-pink-700);
+  --aksel-bg-brand-pink-strong: var(--aksel-brand-pink-600);
+  --aksel-bg-brand-pink-moderate-pressedA: var(--aksel-brand-pink-400A);
+  --aksel-bg-brand-pink-moderate-pressed: var(--aksel-brand-pink-400);
+  --aksel-bg-brand-pink-moderate-hoverA: var(--aksel-brand-pink-300A);
+  --aksel-bg-brand-pink-moderate-hover: var(--aksel-brand-pink-300);
+  --aksel-bg-brand-pink-moderateA: var(--aksel-brand-pink-200A);
+  --aksel-bg-brand-pink-moderate: var(--aksel-brand-pink-200);
+  --aksel-bg-brand-pink-softA: var(--aksel-brand-pink-100A);
+  --aksel-bg-brand-pink-soft: var(--aksel-brand-pink-100);
+}
+
+[data-color="aksel-brand-teal"] {
+  --ax-border-strong: var(--aksel-border-brand-teal-strong);
+  --ax-border-subtleA: var(--aksel-border-brand-teal-subtleA);
+  --ax-border-subtle: var(--aksel-border-brand-teal-subtle);
+  --ax-border-default: var(--aksel-border-brand-teal);
+  --ax-text-contrast: var(--aksel-text-brand-teal-contrast);
+  --ax-text-icon: var(--aksel-text-brand-teal-icon);
+  --ax-text-subtle: var(--aksel-text-brand-teal-subtle);
+  --ax-text-default: var(--aksel-text-brand-teal);
+  --ax-bg-strong-pressed: var(--aksel-bg-brand-teal-strong-pressed);
+  --ax-bg-strong-hover: var(--aksel-bg-brand-teal-strong-hover);
+  --ax-bg-strong: var(--aksel-bg-brand-teal-strong);
+  --ax-bg-moderate-pressedA: var(--aksel-bg-brand-teal-moderate-pressedA);
+  --ax-bg-moderate-pressed: var(--aksel-bg-brand-teal-moderate-pressed);
+  --ax-bg-moderate-hoverA: var(--aksel-bg-brand-teal-moderate-hoverA);
+  --ax-bg-moderate-hover: var(--aksel-bg-brand-teal-moderate-hover);
+  --ax-bg-moderateA: var(--aksel-bg-brand-teal-moderateA);
+  --ax-bg-moderate: var(--aksel-bg-brand-teal-moderate);
+  --ax-bg-softA: var(--aksel-bg-brand-teal-softA);
+  --ax-bg-soft: var(--aksel-bg-brand-teal-soft);
+}
+
+[data-color="aksel-brand-pink"] {
+  --ax-border-strong: var(--aksel-border-brand-pink-strong);
+  --ax-border-subtleA: var(--aksel-border-brand-pink-subtleA);
+  --ax-border-subtle: var(--aksel-border-brand-pink-subtle);
+  --ax-border-default: var(--aksel-border-brand-pink);
+  --ax-text-contrast: var(--aksel-text-brand-pink-contrast);
+  --ax-text-icon: var(--aksel-text-brand-pink-icon);
+  --ax-text-subtle: var(--aksel-text-brand-pink-subtle);
+  --ax-text-default: var(--aksel-text-brand-pink);
+  --ax-bg-strong-pressed: var(--aksel-bg-brand-pink-strong-pressed);
+  --ax-bg-strong-hover: var(--aksel-bg-brand-pink-strong-hover);
+  --ax-bg-strong: var(--aksel-bg-brand-pink-strong);
+  --ax-bg-moderate-pressedA: var(--aksel-bg-brand-pink-moderate-pressedA);
+  --ax-bg-moderate-pressed: var(--aksel-bg-brand-pink-moderate-pressed);
+  --ax-bg-moderate-hoverA: var(--aksel-bg-brand-pink-moderate-hoverA);
+  --ax-bg-moderate-hover: var(--aksel-bg-brand-pink-moderate-hover);
+  --ax-bg-moderateA: var(--aksel-bg-brand-pink-moderateA);
+  --ax-bg-moderate: var(--aksel-bg-brand-pink-moderate);
+  --ax-bg-softA: var(--aksel-bg-brand-pink-softA);
+  --ax-bg-soft: var(--aksel-bg-brand-pink-soft);
+}
+
+.animation-stop,
+.animation-stop *,
+.animation-stop *::before,
+.animation-stop *::after {
+  animation-delay: -1ms !important;
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  background-attachment: initial !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}

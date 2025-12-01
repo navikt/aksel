@@ -1,0 +1,32 @@
+.removeSpacingForLast:last-child {
+  margin-bottom: 0;
+}
+
+.headingElement {
+  color: var(--ax-text-brand-blue);
+  scroll-margin-block: var(--ax-space-80);
+
+  &[data-level="2"] {
+    margin-block: var(--ax-space-48) var(--ax-space-16);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &[data-level="3"] {
+    margin-block-start: var(--ax-space-32);
+  }
+
+  &[data-level="4"] {
+    margin-block-start: var(--ax-space-24);
+  }
+
+  &[data-level="5"] {
+    margin-block-start: var(--ax-space-20);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

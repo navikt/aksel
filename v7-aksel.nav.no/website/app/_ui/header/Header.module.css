@@ -1,0 +1,103 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+.header {
+  background-color: var(--ax-bg-default);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+.headerProduktbloggen {
+  background-color: var(--ax-bg-brand-blue-soft);
+}
+
+.headerContainer {
+  height: var(--website-header-height);
+  display: flex;
+  align-items: center;
+  padding-inline: 0 var(--ax-space-16);
+  max-width: 1920px;
+  margin-inline: auto;
+
+  @media (min-width: 1024px) {
+    padding-inline: 0 var(--ax-space-24);
+  }
+}
+
+.headerLogoLink {
+  margin-inline: var(--ax-space-8) var(--ax-space-12);
+  padding-inline: var(--ax-space-8) var(--ax-space-12);
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--ax-border-radius-small);
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.headerLogo {
+  color: var(--aksel-brand-logo);
+}
+
+.headerLink {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 2.75rem;
+  border-radius: var(--ax-border-radius-small);
+  padding-inline: var(--ax-space-8);
+  color: var(--aksel-brand-logo);
+  font-size: var(--ax-font-size-large);
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: var(--ax-space-4);
+    z-index: 10;
+    height: 3px;
+    width: calc(100% - var(--ax-space-16));
+    border-radius: var(--ax-border-radius-full);
+    background-color: transparent;
+  }
+
+  &[data-current="true"] {
+    font-weight: var(--ax-font-weight-bold);
+
+    &::before {
+      background-color: var(--aksel-brand-logo);
+    }
+  }
+
+  &[data-current="false"]:hover {
+    &::before {
+      background-color: var(--ax-border-neutral-subtleA);
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.skiplink {
+  position: absolute;
+  left: 0;
+  background-color: var(--ax-bg-info-strong);
+  padding: var(--ax-space-16);
+  color: var(--ax-text-info-contrast);
+  text-decoration: none;
+  border-end-end-radius: var(--ax-radius-8);
+
+  /* We move it further away and (just in case scale it to 0)
+  to avoid it showing when scroll "overshoots" */
+  transform: translateY(-300%) scale(0);
+
+  &:focus-within {
+    transform: translateY(0) scale(1);
+    outline: none;
+  }
+}

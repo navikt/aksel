@@ -1,0 +1,7 @@
+.feedbackIllustrationSquare {
+  fill: var(--ax-bg-meta-purple-moderate-pressed);
+}
+
+:global(.dark) .feedbackIllustrationSquare {
+  fill: var(--ax-bg-meta-purple-strong);
+}

@@ -1,0 +1,43 @@
+.container {
+  padding-inline: 1rem;
+}
+
+.containerDefault {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.containerStatic {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  padding-block: 1.5rem;
+}
+
+.exampleStatic {
+  max-width: 30rem;
+  width: 100%;
+}
+
+.containerFull {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.containerStaticFull {
+  padding-block: 1.5rem;
+}
+
+.containerFullscreen {
+  padding: 0;
+}
+
+@media (max-width: 820px) {
+  .container {
+    padding-block: 3rem;
+  }
+}

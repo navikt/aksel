@@ -1,0 +1,10 @@
+.animatedArrow {
+  transition: transform 200ms;
+  transform: translateX(0);
+  color: currentColor;
+  flex-shrink: 0;
+
+  [data-animated-arrow-anchor]:hover & {
+    transform: translateX(4px);
+  }
+}

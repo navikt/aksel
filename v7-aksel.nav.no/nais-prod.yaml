@@ -1,0 +1,48 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: aksel-website-v7
+  namespace: designsystem
+  labels:
+    team: designsystem
+spec:
+  envFrom:
+    - secret: aksel-website-secrets
+  image: {{ image }}
+  port: 3000
+  ingresses:
+    - "https://aksel-v7.nav.no"
+  replicas:
+    min: 1
+    max: 1
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      cpu: 172m
+      memory: 896Mi
+  liveness:
+    path: /api/isAlive
+    initialDelay: 20
+    timeout: 1
+    periodSeconds: 5
+    failureThreshold: 10
+  readiness:
+    path: /api/isAlive
+    initialDelay: 20
+    timeout: 1
+  accessPolicy:
+    outbound:
+      external:
+        - host: api.sanity.io
+        - host: api.slack.com
+        - host: slack.com
+        - host: wss-primary.slack.com
+        - host: hnbe3yhs.api.sanity.io
+        - host: apicdn.sanity.io
+        - host: hnbe3yhs.apicdn.sanity.io
+        - host: cdn.sanity.io
+        - host: umami.nav.no
+        - host: raw.githubusercontent.com
+
+      rules: []
