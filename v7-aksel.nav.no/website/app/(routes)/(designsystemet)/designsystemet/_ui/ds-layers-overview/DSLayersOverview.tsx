@@ -1,11 +1,6 @@
 import cl from "clsx";
 import NextLink from "next/link";
-import {
-  ComponentIcon,
-  Density2Icon,
-  SidebarLeftIcon,
-  TokenIcon,
-} from "@navikt/aksel-icons";
+import { ComponentIcon, Density2Icon, TokenIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   BodyShort,
@@ -62,11 +57,6 @@ const DSLayersOverview = ({ title, description }: DSLayersOverviewProps) => (
 );
 
 const Links = {
-  monsterMaler: {
-    href: "/monster-maler",
-    label: "Mønster og maler",
-    icon: <SidebarLeftIcon fontSize="24" aria-hidden="true" />,
-  },
   komponenter: {
     href: "/komponenter/core",
     label: "Komponenter",
@@ -97,30 +87,6 @@ function IllustratedLinks() {
       paddingInline={{ xs: "0", md: "0 space-32" }}
     >
       <List className={styles.akselLayersList}>
-        <ListItem
-          className={cl(
-            styles.akselLayersListItem,
-            styles.akselLayersIllustrativeListItem,
-          )}
-          icon={Links.monsterMaler.icon}
-        >
-          <Link
-            as={NextLink}
-            className={styles.akselLayersLink}
-            href={Links.monsterMaler.href}
-            variant="neutral"
-          >
-            <BodyShort
-              className={styles.akselLayersLinkText}
-              as="span"
-              weight="semibold"
-              size="large"
-            >
-              {Links.monsterMaler.label}
-            </BodyShort>
-            <DottedLine />
-          </Link>
-        </ListItem>
         <ListItem
           className={cl(
             styles.akselLayersListItem,

@@ -31,13 +31,7 @@ async function GrunnleggendePage({ slug }: { slug: string }) {
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <DesignsystemetPageHeader data={pageData} />
-      <TableOfContents
-        feedback={{
-          name: pageData.heading,
-          text: "Send innspill",
-        }}
-        toc={toc}
-      />
+      <TableOfContents toc={toc} />
       <CustomPortableText
         value={pageData.content as PortableTextBlock[]}
         data-block-margin="space-28"

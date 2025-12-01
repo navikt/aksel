@@ -1,6 +1,6 @@
 import { PortableTextComponentProps } from "next-sanity";
 import core from "@navikt/ds-css/tokens.json";
-import { BodyLong, Link } from "@navikt/ds-react";
+import { BodyLong } from "@navikt/ds-react";
 import { Token_kategori } from "@/app/_sanity/query-types";
 import {
   WebsiteTable,
@@ -31,10 +31,7 @@ function LegacyTokenTable(props: PortableTextComponentProps<Token_kategori>) {
         <strong data-color="warning" className={styles.legacyTokenTableWarning}>
           Deprecation warning:{" "}
         </strong>
-        I det nye systemet for theming og darkmode, er komponent-tokens fjernet.{" "}
-        <Link href="/grunnleggende/darkside/theming">
-          Les mer om det nye themingsystemet.
-        </Link>
+        I versjon 8 er komponent-tokens fjernet.
       </BodyLong>
       <WebsiteTable th={[{ text: "Token" }, { text: "Fallback" }]}>
         {Object.entries(tokens).map(([key, val]) => (

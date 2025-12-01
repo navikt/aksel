@@ -9,10 +9,6 @@ import {
   InfoCardHeader,
   InfoCardTitle,
 } from "@navikt/ds-react/InfoCard";
-import {
-  SystemPanelAction,
-  SystemPanelOutdatedAction,
-} from "./SystemPanel.action";
 
 type SystemPanelProps = {
   variant: "outdated" | "beta" | "new";
@@ -56,7 +52,7 @@ const unsafeDescription =
   "Komponenten er under utvikling. Så lenge komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i minor versjon av kodepakker og i Figma. Teamet ditt må selv ta stilling til om dere ønsker å bruke denne i produksjon.";
 
 function SystemPanel(props: SystemPanelProps) {
-  const { variant, docId, unsafeBeta = false } = props;
+  const { variant, unsafeBeta = false } = props;
 
   const config = VariantConfig[variant];
 
@@ -73,11 +69,6 @@ function SystemPanel(props: SystemPanelProps) {
         <BodyLong data-text-prose>
           {unsafeBeta ? unsafeDescription : config.description}
         </BodyLong>
-        {variant === "outdated" ? (
-          <SystemPanelOutdatedAction docId={docId} />
-        ) : (
-          <SystemPanelAction />
-        )}
       </InfoCardContent>
     </InfoCard>
   );

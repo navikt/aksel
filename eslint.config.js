@@ -127,7 +127,7 @@ module.exports = tseslint.config([
     extends: [testingLibrary.configs["flat/react"], vitest.configs.recommended],
   },
   {
-    files: ["aksel.nav.no/website/**"],
+    files: ["aksel.nav.no/website/**", "v7-aksel.nav.no/website/**"],
     extends: [next.flatConfig.recommended],
 
     rules: {

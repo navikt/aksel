@@ -7,8 +7,6 @@ import { sanityFetch } from "@/app/_sanity/live";
 import { DS_FRONT_PAGE_QUERY } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
-import AkselByNumbers from "./_ui/aksel-by-numbers/AkselByNumbers";
-import { ChangeLogNews } from "./_ui/change-log/ChangeLogNews";
 import { DSLayersOverview } from "./_ui/ds-layers-overview/DSLayersOverview";
 import { GettingStartedSection } from "./_ui/getting-started/GettingStartedSection";
 import DSLandingPageHeading from "./_ui/page-heading/DSLandingPageHeading";
@@ -60,15 +58,6 @@ const DesignsystemetPage = async () => {
               "Et fleksibelt system"
             }
             description={dsFrontPageData.ds_layers_overview?.ingress}
-          />
-          <ChangeLogNews
-            title={dsFrontPageData.ds_changelog?.title ?? "Endringslogg"}
-            description={dsFrontPageData.ds_changelog?.ingress}
-          />
-          <AkselByNumbers
-            title={dsFrontPageData.ds_aksel_in_numbers?.title}
-            description={dsFrontPageData.ds_aksel_in_numbers?.ingress}
-            entries={dsFrontPageData.ds_aksel_in_numbers?.statistics}
           />
           <SupportSection
             entries={(dsFrontPageData.ds_support || []).map(

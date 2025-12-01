@@ -33,13 +33,7 @@ async function KomponenterPage({ slug }: { slug: string }) {
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <DesignsystemetPageHeader data={pageData} />
-      <TableOfContents
-        feedback={{
-          name: pageData.heading,
-          text: "Send innspill",
-        }}
-        toc={toc}
-      />
+      <TableOfContents toc={toc} />
       <div>
         {["beta", "new"].includes(pageData.status?.tag ?? "") && (
           <SystemPanel

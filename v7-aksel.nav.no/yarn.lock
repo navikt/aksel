@@ -205,17 +205,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@axe-core/playwright@npm:4.11.0":
-  version: 4.11.0
-  resolution: "@axe-core/playwright@npm:4.11.0"
-  dependencies:
-    axe-core: "npm:~4.11.0"
-  peerDependencies:
-    playwright-core: ">= 1.0.0"
-  checksum: 10/54de38082deeb1d9022b47f1412ebba7c9b93aa09a0dbc5b1609d35b4f5d05f43840968aeeea913b340b4d89ab1ec0c8bb18aeb1f4c609751ae95e7b8ae2b724
-  languageName: node
-  linkType: hard
-
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/code-frame@npm:7.27.1"
@@ -3520,17 +3509,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/oasis@npm:3.2.1":
-  version: 3.2.1
-  resolution: "@navikt/oasis@npm:3.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F3.2.1%2F26ee586237f293fef794fa8db122f39422c8594a"
-  dependencies:
-    jose: "npm:^5.2.2"
-    openid-client: "npm:^5.6.4"
-    prom-client: "npm:^15.1.0"
-  checksum: 10/ac240ac670b8375ef086560f2da3688ea0f98a7cdd983644b2077f1b9fea0ed8c4c6b817ded6aa163a207f231b93074b3508e80ffbd4f4659708c87d1c26dde7
-  languageName: node
-  linkType: hard
-
 "@navikt/pino-logger@npm:^4.4.1":
   version: 4.4.1
   resolution: "@navikt/pino-logger@npm:4.4.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fpino-logger%2F4.4.1%2F8fd55667f2e3180e5157641d0bac10dafe4c3613"
@@ -3834,7 +3812,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/api@npm:^1.4.0, @opentelemetry/api@npm:^1.9.0":
+"@opentelemetry/api@npm:^1.9.0":
   version: 1.9.0
   resolution: "@opentelemetry/api@npm:1.9.0"
   checksum: 10/a607f0eef971893c4f2ee2a4c2069aade6ec3e84e2a1f5c2aac19f65c5d9eeea41aa72db917c1029faafdd71789a1a040bdc18f40d63690e22ccae5d7070f194
@@ -3845,17 +3823,6 @@ __metadata:
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
   checksum: 10/115e8ceeec6bc69dff2048b35c0ab4f8bbee12d8bb6c1f4af758604586d802b6e669dcb02dda61d078de42c2b4ddce41b3d9e726d7daa6b4b850f4adbf7333ff
-  languageName: node
-  linkType: hard
-
-"@playwright/test@npm:1.56.1":
-  version: 1.56.1
-  resolution: "@playwright/test@npm:1.56.1"
-  dependencies:
-    playwright: "npm:1.56.1"
-  bin:
-    playwright: cli.js
-  checksum: 10/9933fa9f8eb9e775e792421b99c984c310b92092e65de57508ae1951a2589d87bbb5f1c4114bfdf7f69c15c0a3acb3f31259e143fa597aa28e97f4b223e37637
   languageName: node
   linkType: hard
 
@@ -6826,13 +6793,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:~4.11.0":
-  version: 4.11.0
-  resolution: "axe-core@npm:4.11.0"
-  checksum: 10/18254ee95bc328aec9a909b22e4b22e8ff14a21363fdbd1a5227267e66bf1d2fc1425c186e9001759aab5827cf4ee9dc30f7ea57e8200cbf7a1cd555ed21a908
-  languageName: node
-  linkType: hard
-
 "axios@npm:^1.11.0":
   version: 1.13.2
   resolution: "axios@npm:1.13.2"
@@ -7029,13 +6989,6 @@ __metadata:
   version: 2.3.0
   resolution: "binaryextensions@npm:2.3.0"
   checksum: 10/e8ab6e8bbc7a68cc534c8e82086a52048685828063c363135ba1637dba2c1f601b29ca95240a815704757df55c04630e99778cc4c78d0c2aadbf1655af385383
-  languageName: node
-  linkType: hard
-
-"bintrees@npm:1.0.2":
-  version: 1.0.2
-  resolution: "bintrees@npm:1.0.2"
-  checksum: 10/071896cea5ea5413316c8436e95799444c208630d5c539edd8a7089fc272fc5d3634aa4a2e4847b28350dda1796162e14a34a0eda53108cc5b3c2ff6a036c1fa
   languageName: node
   linkType: hard
 
@@ -9796,31 +9749,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@npm:2.3.2":
-  version: 2.3.2
-  resolution: "fsevents@npm:2.3.2"
-  dependencies:
-    node-gyp: "npm:latest"
-  checksum: 10/6b5b6f5692372446ff81cf9501c76e3e0459a4852b3b5f1fc72c103198c125a6b8c72f5f166bdd76ffb2fca261e7f6ee5565daf80dca6e571e55bcc589cc1256
-  conditions: os=darwin
-  languageName: node
-  linkType: hard
-
 "fsevents@npm:~2.3.2, fsevents@npm:~2.3.3":
   version: 2.3.3
   resolution: "fsevents@npm:2.3.3"
   dependencies:
     node-gyp: "npm:latest"
   checksum: 10/4c1ade961ded57cdbfbb5cac5106ec17bc8bccd62e16343c569a0ceeca83b9dfef87550b4dc5cbb89642da412b20c5071f304c8c464b80415446e8e155a038c0
-  conditions: os=darwin
-  languageName: node
-  linkType: hard
-
-"fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>":
-  version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
-  dependencies:
-    node-gyp: "npm:latest"
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -11174,20 +11108,6 @@ __metadata:
   bin:
     jiti: lib/jiti-cli.mjs
   checksum: 10/8cd72c5fd03a0502564c3f46c49761090f6dadead21fa191b73535724f095ad86c2fa89ee6fe4bc3515337e8d406cc8fb2d37b73fa0c99a34584bac35cd4a4de
-  languageName: node
-  linkType: hard
-
-"jose@npm:^4.15.9":
-  version: 4.15.9
-  resolution: "jose@npm:4.15.9"
-  checksum: 10/256234b6f85cdc080b1331f2d475bd58c8ccf459cb20f70ac5e4200b271bce10002b1c2f8e5b96dd975d83065ae5a586d52cdf89d28471d56de5d297992f9905
-  languageName: node
-  linkType: hard
-
-"jose@npm:^5.2.2":
-  version: 5.10.0
-  resolution: "jose@npm:5.10.0"
-  checksum: 10/03881d1dfb390dcf50926402edcfe233bf557b5a77321fcb1bdb53453bc1cdd26d2d0a9ab28c7445cbb826881f84fdf5074179700f10c2711ccb9880f51065d7
   languageName: node
   linkType: hard
 
@@ -13234,13 +13154,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-hash@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "object-hash@npm:2.2.0"
-  checksum: 10/dee06b6271bf5769ae5f1a7386fdd52c1f18aae9fcb0b8d4bb1232f2d743d06cb5b662be42378b60a1c11829f96f3f86834a16bbaa57a085763295fff8b93e27
-  languageName: node
-  linkType: hard
-
 "object-hash@npm:^3.0.0":
   version: 3.0.0
   resolution: "object-hash@npm:3.0.0"
@@ -13268,13 +13181,6 @@ __metadata:
   version: 1.1.2
   resolution: "obuf@npm:1.1.2"
   checksum: 10/53ff4ab3a13cc33ba6c856cf281f2965c0aec9720967af450e8fd06cfd50aceeefc791986a16bcefa14e7898b3ca9acdfcf15b9d9a1b9c7e1366581a8ad6e65e
-  languageName: node
-  linkType: hard
-
-"oidc-token-hash@npm:^5.0.3":
-  version: 5.2.0
-  resolution: "oidc-token-hash@npm:5.2.0"
-  checksum: 10/4eb991b454722d051ac79c98ab08c5ec9e40ae98835797690f1419dd396d680dbbdb17dfb700c4a1b6be472b795fb9b494c15c6af9b026d576f3c9482b43c03f
   languageName: node
   linkType: hard
 
@@ -13364,18 +13270,6 @@ __metadata:
   bin:
     opener: bin/opener-bin.js
   checksum: 10/0504efcd6546e14c016a261f58a68acf9f2e5c23d84865d7d5470d5169788327ceaa5386253682f533b3fba4821748aa37ecb395f3dae7acb3261b9b22e36814
-  languageName: node
-  linkType: hard
-
-"openid-client@npm:^5.6.4":
-  version: 5.7.1
-  resolution: "openid-client@npm:5.7.1"
-  dependencies:
-    jose: "npm:^4.15.9"
-    lru-cache: "npm:^6.0.0"
-    object-hash: "npm:^2.2.0"
-    oidc-token-hash: "npm:^5.0.3"
-  checksum: 10/188a875ab1824010bde85b6755f31401d4b0bcf6edffe5f149b1e67fc886c692658121c0c3cc04db84be33138c0e9e2e7d829e6997adf489f23a32ea7e745151
   languageName: node
   linkType: hard
 
@@ -14073,30 +13967,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"playwright-core@npm:1.56.1":
-  version: 1.56.1
-  resolution: "playwright-core@npm:1.56.1"
-  bin:
-    playwright-core: cli.js
-  checksum: 10/df785eb3b3a8392b10dcde5f768e09b7fe459a7b06ed81180da69e048f2154b761f86d79572c2b62037a1f18a44e4ace72f5b6547f4f473b4ab13ab1d94007d2
-  languageName: node
-  linkType: hard
-
-"playwright@npm:1.56.1":
-  version: 1.56.1
-  resolution: "playwright@npm:1.56.1"
-  dependencies:
-    fsevents: "npm:2.3.2"
-    playwright-core: "npm:1.56.1"
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    playwright: cli.js
-  checksum: 10/f1743f93b26f1d497257771428d93f3c9ed2d75b00d935f0cd1556ff2dc61d47f2df8b381d752fbd2c47082b685f0ffe4cc4b7ba440d7b4ba3a08572aec58fba
-  languageName: node
-  linkType: hard
-
 "pluralize-esm@npm:^9.0.5":
   version: 9.0.5
   resolution: "pluralize-esm@npm:9.0.5"
@@ -14411,16 +14281,6 @@ __metadata:
   version: 0.11.10
   resolution: "process@npm:0.11.10"
   checksum: 10/dbaa7e8d1d5cf375c36963ff43116772a989ef2bb47c9bdee20f38fd8fc061119cf38140631cf90c781aca4d3f0f0d2c834711952b728953f04fd7d238f59f5b
-  languageName: node
-  linkType: hard
-
-"prom-client@npm:^15.1.0":
-  version: 15.1.3
-  resolution: "prom-client@npm:15.1.3"
-  dependencies:
-    "@opentelemetry/api": "npm:^1.4.0"
-    tdigest: "npm:^0.1.1"
-  checksum: 10/eba75e15ab896845d39359e3a4d6f7913ea05339b3122d8dde8c8c374669ad1a1d1ab2694ab2101c420bd98086a564e4f2a18aa29018fc14a4732e57c1c19aec
   languageName: node
   linkType: hard
 
@@ -17038,15 +16898,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tdigest@npm:^0.1.1":
-  version: 0.1.2
-  resolution: "tdigest@npm:0.1.2"
-  dependencies:
-    bintrees: "npm:1.0.2"
-  checksum: 10/45be99fa52dab74b8edafe150e473cdc45aa1352c75ed516a39905f350a08c3175f6555598111042c3677ba042d7e3cae6b5ce4c663fe609bc634f326aabc9d6
-  languageName: node
-  linkType: hard
-
 "temp@npm:^0.8.4":
   version: 0.8.4
   resolution: "temp@npm:0.8.4"
@@ -17558,13 +17409,6 @@ __metadata:
   dependencies:
     uuidv7: "npm:^0.4.4"
   checksum: 10/7ef7efcdeba702bf917e72e9254b1bc7a10dd425e0e652d933eec3726ab7c55db0db1e83c1def61750834056c5f391c8dc8821f0fb77705da35cecf1e808a356
-  languageName: node
-  linkType: hard
-
-"typescript-cookie@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "typescript-cookie@npm:1.0.6"
-  checksum: 10/105d4774ee847daf3e5e9a4433746eb34cd40feb1703bc7c9bde0bfc77c94ee4318386b94af66f9380fd24fa36600cc8e730ead7dfa67097ebbeff158e8020c3
   languageName: node
   linkType: hard
 
@@ -18365,16 +18209,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "website@workspace:website"
   dependencies:
-    "@axe-core/playwright": "npm:4.11.0"
     "@babel/core": "npm:^7.19.0"
     "@babel/parser": "npm:^7.27.5"
     "@babel/traverse": "npm:^7.27.4"
     "@floating-ui/react": "npm:0.27.8"
     "@navikt/next-logger": "npm:4.4.1"
-    "@navikt/oasis": "npm:3.2.1"
     "@next/bundle-analyzer": "npm:15.4.5"
     "@next/eslint-plugin-next": "npm:15.4.5"
-    "@playwright/test": "npm:1.56.1"
     "@portabletext/block-tools": "npm:^1.1.21"
     "@portabletext/react": "npm:^4.0.3"
     "@sanity/client": "npm:^7.12.0"
@@ -18442,7 +18283,6 @@ __metadata:
     tsconfig-paths-webpack-plugin: "npm:^4.2.0"
     tsx: "npm:^4.20.6"
     typescript: "npm:5.9.3"
-    typescript-cookie: "npm:^1.0.6"
     vitest: "npm:^3.2.4"
     zod: "npm:^3.22.4"
   languageName: unknown

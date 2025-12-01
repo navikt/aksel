@@ -2,7 +2,7 @@
 
 import NextLink from "next/link";
 import * as Icons from "@navikt/aksel-icons";
-import { BrailleIcon, DownloadIcon } from "@navikt/aksel-icons";
+import { DownloadIcon } from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import {
   BodyLong,
@@ -65,16 +65,6 @@ function IconPage({
             </Link>
           </li>
 
-          <li className={styles.iconPageLinkLi}>
-            <Link
-              as={NextLink}
-              href="/god-praksis/artikler/tilgjengelig-ikonbruk"
-              data-color="neutral"
-            >
-              <BrailleIcon aria-hidden fontSize="1.5rem" />{" "}
-              <span>Tilgjengelighet</span>
-            </Link>
-          </li>
           <li className={styles.iconPageLinkLi}>
             <Link
               data-color="neutral"
