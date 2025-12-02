@@ -81,12 +81,13 @@ const main = async () => {
 
   console.info(`Found ${assetsToKeep.length} referenced assets.`);
 
-  const outPathDocs = "doc-data.json";
-  const outPathAssets = "doc-data-assets.json";
+  const outPathDocs = "./scripts/doc-data.json";
+  const outPathAssets = "./scripts/doc-data-assets.json";
   fs.writeFileSync(outPathDocs, JSON.stringify(docs, null, 2));
   fs.writeFileSync(outPathAssets, JSON.stringify(assetsToKeep, null, 2));
 
   console.info(`Wrote ${docs.length} documents to ${outPathDocs}`);
+  console.info(`Wrote ${assetsToKeep.length} assets to ${outPathAssets}`);
 };
 
 main().catch((err) => {

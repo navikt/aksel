@@ -2,32 +2,8 @@ import fs from "fs";
 import https from "https";
 import path from "path";
 
-const ASSETS_FILE = "doc-data-assets.json";
+const ASSETS_FILE = "./scripts/doc-data-assets.json";
 const OUTPUT_DIR = path.join(process.cwd(), "public", "sanity-assets");
-
-async function downloadFile(url: string, dest: string) {
-  return new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(dest);
-    https
-      .get(url, (response) => {
-        if (response.statusCode !== 200) {
-          reject(
-            new Error(`Failed to download ${url}: ${response.statusCode}`),
-          );
-          return;
-        }
-        response.pipe(file);
-        file.on("finish", () => {
-          file.close();
-          resolve(true);
-        });
-      })
-      .on("error", (err) => {
-        fs.unlink(dest, () => {});
-        reject(err);
-      });
-  });
-}
 
 async function main() {
   if (!fs.existsSync(ASSETS_FILE)) {
@@ -57,7 +33,7 @@ async function main() {
     const dest = path.join(OUTPUT_DIR, filename);
 
     if (fs.existsSync(dest)) {
-      // console.log(`Skipping ${filename} (already exists)`);
+      console.log(`Skipping ${filename} (already exists)`);
       continue;
     }
 
@@ -69,6 +45,30 @@ async function main() {
     }
   }
   console.log("Done!");
+}
+
+async function downloadFile(url: string, dest: string) {
+  return new Promise((resolve, reject) => {
+    const file = fs.createWriteStream(dest);
+    https
+      .get(url, (response) => {
+        if (response.statusCode !== 200) {
+          reject(
+            new Error(`Failed to download ${url}: ${response.statusCode}`),
+          );
+          return;
+        }
+        response.pipe(file);
+        file.on("finish", () => {
+          file.close();
+          resolve(true);
+        });
+      })
+      .on("error", (err) => {
+        fs.unlink(dest, () => {});
+        reject(err);
+      });
+  });
 }
 
 main();
