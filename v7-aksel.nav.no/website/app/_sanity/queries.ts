@@ -383,8 +383,6 @@ const DOCUMENT_BY_ID_FOR_SLACK_QUERY = defineQuery(`*[_id == $id][0]{
 const SITEMAP_LANDINGPAGES_QUERY = defineQuery(`
 {
       "frontpage": *[_type == "aksel_forside"][0]._updatedAt,
-      "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,
-      "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,
 }
   `);
 

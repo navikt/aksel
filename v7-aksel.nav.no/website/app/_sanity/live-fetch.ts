@@ -4,8 +4,6 @@ import { sanityFetch } from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
   DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
-  DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
-  GOD_PRAKSIS_ALL_TEMA_QUERY,
   SITEMAP_ARTICLES_BY_TYPE_QUERY,
   SITEMAP_LANDINGPAGES_QUERY,
 } from "@/app/_sanity/queries";
@@ -20,10 +18,8 @@ async function fetchAllSanityPages(): Promise<
   const [
     { data: landingPageData },
     { data: articleListData },
-    { data: temaListData },
     { data: dsKomponenterData },
     { data: dsGrunnleggendeData },
-    { data: dsTemplatesData },
   ] = await Promise.all([
     sanityFetch({
       query: SITEMAP_LANDINGPAGES_QUERY,
@@ -39,11 +35,6 @@ async function fetchAllSanityPages(): Promise<
       perspective: "published",
     }),
     sanityFetch({
-      query: GOD_PRAKSIS_ALL_TEMA_QUERY,
-      stega: false,
-      perspective: "published",
-    }),
-    sanityFetch({
       query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
       stega: false,
       perspective: "published",
@@ -53,26 +44,14 @@ async function fetchAllSanityPages(): Promise<
       stega: false,
       perspective: "published",
     }),
-    sanityFetch({
-      query: DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
-      stega: false,
-      perspective: "published",
-    }),
   ]);
 
   const paths = [
     { slug: "", lastMod: landingPageData.frontpage },
-    { slug: "/god-praksis", lastMod: landingPageData.godpraksis },
-    { slug: "/produktbloggen", lastMod: landingPageData.blogg },
     { slug: "/designsystemet", lastMod: new Date().toISOString() },
     ...articleListData.map((page) => {
       return { slug: `/${page.slug}`, lastMod: page._updatedAt };
     }),
-    ...temaListData
-      .filter((tema) => tema.articles.length > 0)
-      .map((page) => {
-        return { slug: `/god-praksis/${page.slug}`, lastMod: page._updatedAt };
-      }),
   ];
 
   dsKomponenterData?.overview_pages?.forEach((overviewPage) => {
@@ -81,10 +60,6 @@ async function fetchAllSanityPages(): Promise<
 
   dsGrunnleggendeData?.overview_pages?.forEach((overviewPage) => {
     paths.push({ slug: `/grunnleggende/${overviewPage}`, lastMod: null });
-  });
-
-  dsTemplatesData?.overview_pages?.forEach((overviewPage) => {
-    paths.push({ slug: `/monster-maler/${overviewPage}`, lastMod: null });
   });
 
   paths.push({ slug: `/monster-maler`, lastMod: null });

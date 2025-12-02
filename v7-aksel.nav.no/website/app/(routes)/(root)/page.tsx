@@ -1,18 +1,7 @@
 import { Metadata } from "next";
 import NextLink from "next/link";
 import { ComponentIcon, TokenIcon } from "@navikt/aksel-icons";
-import {
-  Bleed,
-  BodyLong,
-  BoxNew,
-  HGrid,
-  HStack,
-  Heading,
-  Link,
-  LinkCard,
-  Show,
-  VStack,
-} from "@navikt/ds-react";
+import { Bleed, BoxNew, HGrid, HStack, LinkCard, Show } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
   LinkCardDescription,
@@ -23,19 +12,13 @@ import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { AnimatedFaceCard } from "@/app/(routes)/(root)/_ui/AnimatedFaceCard";
 import { AnimationButton } from "@/app/(routes)/(root)/_ui/AnimationButton";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import PromoTag from "@/app/_ui/promo-tag/PromoTag";
 import { sanityFetch } from "../../_sanity/live";
-import {
-  GOD_PRAKSIS_TEMA_QUERY,
-  LANDINGSSIDE_LATEST_QUERY,
-  LANDINGSSIDE_META_QUERY,
-} from "../../_sanity/queries";
+import { LANDINGSSIDE_META_QUERY } from "../../_sanity/queries";
 import Footer from "../../_ui/footer/Footer";
 import { Header } from "../../_ui/header/Header";
 import "../../globals.css";
 import { PauseAnimationProvider } from "./_ui/AnimationStopContext";
 import { Hero } from "./_ui/FrontpageHero";
-import { FrontpageLatest, LatestT } from "./_ui/FrontpageLatest";
 import { MainWrapper } from "./_ui/MainWrapper";
 import styles from "./_ui/frontpage.module.css";
 
@@ -57,15 +40,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Page = async () => {
-  const [{ data: tema }, { data: latest }] = await Promise.all([
-    sanityFetch({
-      query: GOD_PRAKSIS_TEMA_QUERY,
-    }),
-    sanityFetch({
-      query: LANDINGSSIDE_LATEST_QUERY,
-    }),
-  ]);
-
   return (
     <AkselPage
       footer={<Footer />}
@@ -87,9 +61,6 @@ const Page = async () => {
                   paddingInline={{ xs: "space-0", sm: "space-48" }}
                   marginInline={{ xs: "space-0", md: "space-96" }}
                 >
-                  <BoxNew paddingBlock="space-0 space-24" marginInline="auto">
-                    <PromoTag animated />
-                  </BoxNew>
                   <HStack justify="end" marginBlock="space-16">
                     <AnimationButton />
                   </HStack>
