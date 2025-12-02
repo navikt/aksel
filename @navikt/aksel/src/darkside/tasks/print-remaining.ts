@@ -149,6 +149,13 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
 
     sortedTokens.forEach(([tokenName, tokens]) => {
       log(`${tokenName} (${tokens.length} occurrences)`);
+      /**
+       * We can assume all comments are the same for a "tokenName"
+       */
+      const foundComment = tokens.find((t) => t.comment)?.comment;
+      if (foundComment) {
+        log(`/* ${foundComment} */`, 1);
+      }
 
       const tokenEntry = {
         token: tokenName,
@@ -158,9 +165,7 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
 
       tokens.forEach((token) => {
         const fullPath = path.resolve(process.cwd(), token.fileName);
-        if (token.comment) {
-          log(`/* ${token.comment} */`, 1);
-        }
+
         log(`${fullPath}:${token.lineNumber}:${token.columnNumber}`, 1);
 
         tokenEntry.occurrences.push({
