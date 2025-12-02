@@ -73,13 +73,13 @@ function Example() {
             <Heading level="2" size="large" spacing>
               Før du søker
             </Heading>
-            <BodyLong spacing>
+            <BodyLong>
               Denne seksjonen brukes til å gi søkerne informasjon de vil ha stor
               nytte av før de går i gang med søknaden. Eksempler på nyttig
               informasjon:
             </BodyLong>
             <Box marginBlock="space-16" asChild>
-              <List data-aksel-migrated-v8>
+              <List>
                 <List.Item>
                   Oppgaver brukeren må ha gjort før de søker.{" "}
                   <i>

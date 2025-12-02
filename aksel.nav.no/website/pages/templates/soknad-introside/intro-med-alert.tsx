@@ -79,7 +79,7 @@ function Example() {
             <Heading level="2" size="large" spacing>
               Før du søker
             </Heading>
-            <BodyLong spacing>
+            <BodyLong>
               Denne seksjonen brukes til å gi søkerne informasjon de vil ha stor
               nytte av før de går i gang med søknaden. Eksempler på nyttig
               informasjon:
