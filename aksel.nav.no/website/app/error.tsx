@@ -21,53 +21,50 @@ export default function ErrorPage({
   }, []);
 
   return (
-    <Page data-aksel-template="500-v2" className="vk-error">
+    <Page data-aksel-template="500-v3" className="vk-error">
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="space-80 space-32">
           <VStack gap="space-64">
             <VStack gap="space-48" align="start">
-              <div>
-                <Heading
-                  level="1"
-                  size="large"
-                  spacing
-                  data-aksel-heading-color
-                >
+              <VStack gap="space-16">
+                <Heading level="1" size="large" data-aksel-heading-color>
                   Beklager, noe gikk galt.
                 </Heading>
-                <BodyShort spacing>
+                <BodyShort>
                   En teknisk feil på våre servere gjør at siden er
                   utilgjengelig. Dette skyldes ikke noe du gjorde.
                 </BodyShort>
-                <BodyShort spacing>Du kan prøve å</BodyShort>
-                <WebsiteList>
-                  <WebsiteListItem icon>
-                    vente noen minutter og{" "}
-                    <Link href="#" onClick={() => location.reload()}>
-                      laste siden på nytt
-                    </Link>
-                  </WebsiteListItem>
-                  <WebsiteListItem icon>
-                    {history && history.length > 1 ? (
-                      <Link href="#" onClick={() => history.back()}>
-                        gå tilbake til forrige side
+                <BodyShort>Du kan prøve å</BodyShort>
+                <div>
+                  <WebsiteList>
+                    <WebsiteListItem icon>
+                      vente noen minutter og{" "}
+                      <Link href="#" onClick={() => location.reload()}>
+                        laste siden på nytt
                       </Link>
-                    ) : (
-                      "gå tilbake til forrige side"
-                    )}
-                  </WebsiteListItem>
-                </WebsiteList>
-                <BodyShort>
-                  Hvis problemet vedvarer, kan du{" "}
-                  <Link
-                    href="https://github.com/navikt/aksel/issues/new?assignees=&labels=bug+%F0%9F%90%9B&projects=&template=bug-report.md&title=[Aksel.nav.no%20-%20500]"
-                    target="_blank"
-                  >
-                    kontakte oss (åpnes i ny fane)
-                  </Link>
-                  .
-                </BodyShort>
-              </div>
+                    </WebsiteListItem>
+                    <WebsiteListItem icon>
+                      {history && history.length > 1 ? (
+                        <Link href="#" onClick={() => history.back()}>
+                          gå tilbake til forrige side
+                        </Link>
+                      ) : (
+                        "gå tilbake til forrige side"
+                      )}
+                    </WebsiteListItem>
+                  </WebsiteList>
+                  <BodyShort>
+                    Hvis problemet vedvarer, kan du{" "}
+                    <Link
+                      href="https://github.com/navikt/aksel/issues/new?assignees=&labels=bug+%F0%9F%90%9B&projects=&template=bug-report.md&title=[Aksel.nav.no%20-%20500]"
+                      target="_blank"
+                    >
+                      kontakte oss (åpnes i ny fane)
+                    </Link>
+                    .
+                  </BodyShort>
+                </div>
+              </VStack>
             </VStack>
             <div>
               <Heading level="1" size="large" spacing data-aksel-heading-color>

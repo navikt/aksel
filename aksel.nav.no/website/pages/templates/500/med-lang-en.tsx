@@ -27,7 +27,7 @@ function Example() {
           <HGrid
             columns="minmax(auto,600px)"
             gap="space-64"
-            data-aksel-template="500-v2"
+            data-aksel-template="500-v3"
           >
             <VStack gap="space-16">
               <div>

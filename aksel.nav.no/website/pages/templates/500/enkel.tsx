@@ -26,7 +26,7 @@ function Example() {
           <HGrid
             columns="minmax(auto,600px)"
             gap="space-16"
-            data-aksel-template="500-v2"
+            data-aksel-template="500-v3"
           >
             <div>
               <BodyShort textColor="subtle" size="small">

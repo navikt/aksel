@@ -23,7 +23,7 @@ const Example = () => {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
-        <Box paddingBlock="space-80 space-64" data-aksel-template="404-v2">
+        <Box paddingBlock="space-80 space-64" data-aksel-template="404-v3">
           <VStack gap="space-48" align="start">
             <VStack gap="space-16">
               <Heading level="1" size="large">
