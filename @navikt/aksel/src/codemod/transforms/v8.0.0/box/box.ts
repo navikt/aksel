@@ -4,7 +4,7 @@ import { findComponentImport, findProps } from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
 import transformBoxNewToBox from "../box-new/box-new";
 
-const propsAffected = ["background", "borderColor", "shadow"];
+const propsAffected = ["background", "borderColor", "shadow"] as const;
 
 export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
@@ -36,16 +36,24 @@ export default function transformer(file: FileInfo, api: API) {
     },
   });
 
-  const tokenComments: TokenComments = [];
+  const predefinedReplacents = predefinedReplacentset();
 
+  const tokenComments: TokenComments = [];
   for (const astElement of astElements.paths()) {
     for (const prop of propsAffected) {
       findProps({ j, path: astElement, name: prop }).forEach((attr) => {
         const attrvalue = attr.value.value;
         if (attrvalue.type === "StringLiteral") {
+          /**
+           * Skips if the replacement token already set
+           */
+          if (predefinedReplacents.has(addPrefix(attrvalue.value, prop))) {
+            return;
+          }
+
           const config = legacyTokenConfig[attrvalue.value];
           if (config?.replacement) {
-            attrvalue.value = config.replacement;
+            attrvalue.value = cleanReplacementToken(config.replacement, prop);
           } else {
             const tokenComment: TokenComment = {
               prop,
@@ -61,9 +69,16 @@ export default function transformer(file: FileInfo, api: API) {
           attrvalue.expression.type === "StringLiteral"
         ) {
           const literal = attrvalue.expression;
+
+          /**
+           * Skips if the replacement token already set
+           */
+          if (predefinedReplacents.has(addPrefix(literal.value, prop))) {
+            return;
+          }
           const config = legacyTokenConfig[literal.value];
           if (config?.replacement) {
-            literal.value = config.replacement;
+            literal.value = cleanReplacementToken(config.replacement, prop);
           } else {
             const tokenComment: TokenComment = {
               prop,
@@ -179,4 +194,48 @@ function convertBorderRadiusToRadius(oldValue: string): string {
   }
 
   return newRadius.join(" ");
+}
+
+/**
+ * New props in Box do not have bg- or border- prefixes
+ * This function removes those prefixes from the tokens
+ */
+function cleanReplacementToken(
+  token: string,
+  type: (typeof propsAffected)[number],
+): string {
+  if (type === "background") {
+    return token.replace("bg-", "");
+  }
+  if (type === "borderColor") {
+    return token.replace("border-", "");
+  }
+  return token;
+}
+
+/**
+ * Adds bg- or border- prefixes to tokens for comparison with existing replacements
+ */
+function addPrefix(
+  token: string,
+  type: (typeof propsAffected)[number],
+): string {
+  if (type === "background") {
+    return `bg-${token}`;
+  }
+  if (type === "borderColor") {
+    return `border-${token}`;
+  }
+  return token;
+}
+
+function predefinedReplacentset() {
+  const set = new Set<string>();
+  for (const key in legacyTokenConfig) {
+    const config = legacyTokenConfig[key];
+    if (config.replacement) {
+      set.add(config.replacement);
+    }
+  }
+  return set;
 }
