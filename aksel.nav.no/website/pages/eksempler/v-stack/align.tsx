@@ -56,9 +56,9 @@ const Placeholder = ({
   padding?: string;
 }) => (
   <Box
-    background="surface-alt-3"
-    borderRadius="medium"
-    style={{ color: "var(--a-text-on-action)", padding }}
+    background="brand-blue-strong"
+    borderRadius="4"
+    style={{ color: "var(--ax-text-accent-contrast)", padding }}
   >
     {text}
   </Box>

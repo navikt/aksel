@@ -6,28 +6,28 @@ const Example = () => {
     <VStack gap="space-16">
       <DemoWrapper>
         <Bleed marginInline="space-40 space-0" asChild>
-          <Box padding="space-12" background="surface-alt-3-subtle">
+          <Box padding="space-12" background="brand-blue-moderate">
             <HStack justify="center">marginInline start</HStack>
           </Box>
         </Bleed>
       </DemoWrapper>
       <DemoWrapper>
         <Bleed marginInline="space-0 space-40" asChild>
-          <Box padding="space-12" background="surface-alt-3-subtle">
+          <Box padding="space-12" background="brand-blue-moderate">
             <HStack justify="center">marginInline end</HStack>
           </Box>
         </Bleed>
       </DemoWrapper>
       <DemoWrapper>
         <Bleed marginBlock="space-40 space-0" asChild>
-          <Box padding="space-12" background="surface-alt-3-subtle">
+          <Box padding="space-12" background="brand-blue-moderate">
             <HStack justify="center">marginBlock start</HStack>
           </Box>
         </Bleed>
       </DemoWrapper>
       <DemoWrapper>
         <Bleed marginBlock="space-0 space-40" asChild>
-          <Box padding="space-12" background="surface-alt-3-subtle">
+          <Box padding="space-12" background="brand-blue-moderate">
             <HStack justify="center">marginBlock end</HStack>
           </Box>
         </Bleed>
@@ -38,8 +38,8 @@ const Example = () => {
 
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <Box background="surface-alt-3" padding="space-20" borderRadius="large">
-      <Box background="surface-subtle" padding="space-20" borderRadius="medium">
+    <Box background="brand-blue-strong" padding="space-20" borderRadius="8">
+      <Box background="neutral-soft" padding="space-20" borderRadius="4">
         {children}
       </Box>
     </Box>

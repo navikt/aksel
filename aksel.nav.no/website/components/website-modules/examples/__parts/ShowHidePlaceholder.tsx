@@ -16,9 +16,13 @@ const Placeholder = ({
     width="12rem"
     borderRadius="medium"
     background={
-      desktop ? "surface-alt-1" : mobil ? "surface-alt-3" : "surface-success"
+      desktop
+        ? "meta-purple-strong"
+        : mobil
+          ? "brand-blue-strong"
+          : "success-strong"
     }
-    style={{ color: "var(--a-text-on-action)", textAlign: "center" }}
+    style={{ color: "var(--ax-text-accent-contrast)", textAlign: "center" }}
     className={className}
   >
     {text}

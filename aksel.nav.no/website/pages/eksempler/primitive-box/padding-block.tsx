@@ -4,21 +4,21 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <VStack gap="space-16">
-      <Box background="surface-neutral" paddingBlock="space-16">
-        <Box background="surface-alt-3-subtle" padding="space-8">
+      <Box background="neutral-strong" paddingBlock="space-16">
+        <Box background="brand-blue-moderate" padding="space-8">
           Padding block
         </Box>
       </Box>
-      <Box background="surface-neutral" paddingBlock="space-16 space-64">
-        <Box background="surface-alt-3-subtle" padding="space-8">
+      <Box background="neutral-strong" paddingBlock="space-16 space-64">
+        <Box background="brand-blue-moderate" padding="space-8">
           Forskjellig blockStart og blockEnd
         </Box>
       </Box>
       <Box
-        background="surface-neutral"
+        background="neutral-strong"
         paddingBlock={{ xs: "space-16", md: "space-24 space-64" }}
       >
-        <Box background="surface-alt-3-subtle" padding="space-8">
+        <Box background="brand-blue-moderate" padding="space-8">
           Dynamisk paddingBlock
         </Box>
       </Box>

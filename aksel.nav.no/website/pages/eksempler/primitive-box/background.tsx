@@ -4,14 +4,14 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <VStack gap="space-16">
-      <Box padding="space-16" background="surface-alt-3-subtle">
-        Denne boksen har background=&quot;surface-alt-3-subtle&quot;
+      <Box padding="space-16" background="brand-beige-soft">
+        Denne boksen har background=&quot;brand-beige-soft&quot;
       </Box>
-      <Box padding="space-16" background="surface-info-subtle">
-        Denne boksen har background=&quot;surface-info-subtle&quot;
+      <Box padding="space-16" background="info-soft">
+        Denne boksen har background=&quot;info-soft&quot;
       </Box>
-      <Box padding="space-16" background="surface-success-subtle">
-        Denne boksen har background=&quot;surface-success-subtle&quot;
+      <Box padding="space-16" background="success-soft">
+        Denne boksen har background=&quot;success-soft&quot;
       </Box>
     </VStack>
   );

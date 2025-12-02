@@ -5,29 +5,29 @@ const Example = () => {
   return (
     <VStack gap="space-16">
       <Box
-        background="surface-subtle"
-        borderColor="border-alt-3"
+        background="neutral-soft"
+        borderColor="brand-blue"
         padding="space-16"
         borderWidth="2"
-        borderRadius="xlarge"
+        borderRadius="12"
       >
         border-radius
       </Box>
       <Box
-        background="surface-subtle"
-        borderColor="border-alt-3"
+        background="neutral-soft"
+        borderColor="brand-blue"
         padding="space-16"
         borderWidth="2"
-        borderRadius="xlarge xlarge 0 0"
+        borderRadius="12 12 0 0"
       >
         Fleksibel border-radius
       </Box>
       <Box
-        background="surface-subtle"
-        borderColor="border-alt-3"
+        background="neutral-soft"
+        borderColor="brand-blue"
         padding="space-16"
         borderWidth="2"
-        borderRadius={{ md: "large" }}
+        borderRadius={{ md: "8" }}
       >
         Dynamisk border-radius
       </Box>
