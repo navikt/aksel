@@ -36,13 +36,21 @@ export default function transformer(file: FileInfo, api: API) {
     },
   });
 
-  const tokenComments: TokenComments = [];
+  const existingReplacements = existingReplacementSet();
 
+  const tokenComments: TokenComments = [];
   for (const astElement of astElements.paths()) {
     for (const prop of propsAffected) {
       findProps({ j, path: astElement, name: prop }).forEach((attr) => {
         const attrvalue = attr.value.value;
         if (attrvalue.type === "StringLiteral") {
+          /**
+           * Skips if the replacement token already set
+           */
+          if (existingReplacements.has(addPrefix(attrvalue.value, prop))) {
+            return;
+          }
+
           const config = legacyTokenConfig[attrvalue.value];
           if (config?.replacement) {
             attrvalue.value = cleanReplacementToken(config.replacement, prop);
@@ -61,6 +69,13 @@ export default function transformer(file: FileInfo, api: API) {
           attrvalue.expression.type === "StringLiteral"
         ) {
           const literal = attrvalue.expression;
+
+          /**
+           * Skips if the replacement token already set
+           */
+          if (existingReplacements.has(addPrefix(literal.value, prop))) {
+            return;
+          }
           const config = legacyTokenConfig[literal.value];
           if (config?.replacement) {
             literal.value = cleanReplacementToken(config.replacement, prop);
@@ -196,4 +211,31 @@ function cleanReplacementToken(
     return token.replace("border-", "");
   }
   return token;
+}
+
+/**
+ * Adds bg- or border- prefixes to tokens for comparison with existing replacements
+ */
+function addPrefix(
+  token: string,
+  type: (typeof propsAffected)[number],
+): string {
+  if (type === "background") {
+    return `bg-${token}`;
+  }
+  if (type === "borderColor") {
+    return `border-${token}`;
+  }
+  return token;
+}
+
+function existingReplacementSet() {
+  const set = new Set<string>();
+  for (const key in legacyTokenConfig) {
+    const config = legacyTokenConfig[key];
+    if (config.replacement) {
+      set.add(config.replacement);
+    }
+  }
+  return set;
 }
