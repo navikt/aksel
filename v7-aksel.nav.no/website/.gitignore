@@ -3,4 +3,3 @@ test-results/
 tsconfig.tsbuildinfo
 ___temp
 next-env.d.ts
-public/sanity-assets

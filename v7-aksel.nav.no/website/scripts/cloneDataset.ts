@@ -1,6 +1,7 @@
 import { createClient } from "@sanity/client";
 import fs from "fs";
 import { clientConfig } from "../sanity/config";
+import { downloadAssets } from "./downloadAssets";
 
 /* yarn tsx --env-file-if-exists=.env cloneDatabase.ts */
 /**
@@ -77,12 +78,11 @@ const main = async () => {
   console.info(`Found ${assetsToKeep.length} referenced assets.`);
 
   const outPathDocs = "./scripts/doc-data.json";
-  const outPathAssets = "./scripts/doc-data-assets.json";
-  fs.writeFileSync(outPathDocs, JSON.stringify(docs, null, 2));
-  fs.writeFileSync(outPathAssets, JSON.stringify(assetsToKeep, null, 2));
+  fs.writeFileSync(outPathDocs, JSON.stringify(docs));
 
   console.info(`Wrote ${docs.length} documents to ${outPathDocs}`);
-  console.info(`Wrote ${assetsToKeep.length} assets to ${outPathAssets}`);
+
+  await downloadAssets(assetsToKeep);
 };
 
 main().catch((err) => {

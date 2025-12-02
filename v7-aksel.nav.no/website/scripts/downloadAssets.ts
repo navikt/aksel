@@ -2,20 +2,13 @@ import fs from "fs";
 import https from "https";
 import path from "path";
 
-const ASSETS_FILE = "./scripts/doc-data-assets.json";
 const OUTPUT_DIR = path.join(process.cwd(), "public", "sanity-assets");
 
-async function main() {
-  if (!fs.existsSync(ASSETS_FILE)) {
-    console.error(`File ${ASSETS_FILE} not found.`);
-    process.exit(1);
-  }
-
+export async function downloadAssets(assets: any) {
   if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   }
 
-  const assets = JSON.parse(fs.readFileSync(ASSETS_FILE, "utf-8"));
   console.log(`Found ${assets.length} assets to download.`);
 
   for (const asset of assets) {
@@ -70,5 +63,3 @@ async function downloadFile(url: string, dest: string) {
       });
   });
 }
-
-main();
