@@ -16,7 +16,6 @@ import { getStatus } from "./tasks/status";
 
 // Types
 type TaskName =
-  | "status"
   | "print-remaining-tokens"
   | "css-tokens"
   | "scss-tokens"
@@ -128,12 +127,11 @@ async function executeTask(
   updateStatus: () => TokenStatus,
 ): Promise<TokenStatus> {
   switch (task) {
-    case "status":
-      return updateStatus();
-
-    case "print-remaining-tokens":
-      await printRemaining(filepaths, statusStore.status);
-      return statusStore;
+    case "print-remaining-tokens": {
+      const newStatus = updateStatus();
+      await printRemaining(filepaths, newStatus.status);
+      return newStatus;
+    }
 
     case "css-tokens":
     case "scss-tokens":
@@ -319,7 +317,6 @@ async function getNextTask(status?: any): Promise<TaskName> {
   };
 
   const choices = [
-    { message: "Check status", name: "status" },
     { message: "Print status", name: "print-remaining-tokens" },
     {
       message: getMessage("Migrate CSS tokens", status?.css?.legacy ?? []),
