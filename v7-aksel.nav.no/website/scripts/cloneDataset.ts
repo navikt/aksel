@@ -1,6 +1,6 @@
 import { createClient } from "@sanity/client";
 import fs from "fs";
-import { clientConfig } from "./sanity/config";
+import { clientConfig } from "../sanity/config";
 
 /* yarn tsx --env-file-if-exists=.env cloneDatabase.ts */
 /**
@@ -55,7 +55,7 @@ const main = async () => {
   );
   const assetIds = new Set();
 
-  const traverse = (obj) => {
+  const traverse = (obj: any) => {
     if (!obj || typeof obj !== "object") return;
 
     if (obj._ref && typeof obj._ref === "string") {

@@ -2,8 +2,6 @@ import fs from "fs";
 import https from "https";
 import path from "path";
 
-/* yarn tsx downloadAssets.ts */
-
 const ASSETS_FILE = "doc-data-assets.json";
 const OUTPUT_DIR = path.join(process.cwd(), "public", "sanity-assets");
 
