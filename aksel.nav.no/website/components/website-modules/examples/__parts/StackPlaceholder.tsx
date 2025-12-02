@@ -2,7 +2,7 @@ import { Box } from "@navikt/ds-react";
 
 const Placeholder = () => (
   <Box
-    background="surface-alt-3"
+    background="brand-blue-strong"
     height="3rem"
     width="3rem"
     borderRadius="medium"

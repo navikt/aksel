@@ -15,12 +15,11 @@ const Example = () => {
     <Box
       as="header"
       borderWidth="0 0 4 0"
-      borderColor="border-success"
+      borderColor="success"
       paddingBlock="space-48 space-0"
     >
       <Box
         maxWidth="64rem"
-        background="surface-default"
         paddingInline="space-16"
         paddingBlock="space-0 space-24"
       >
