@@ -36,7 +36,7 @@ export default function transformer(file: FileInfo, api: API) {
     },
   });
 
-  const existingReplacements = existingReplacementSet();
+  const predefinedReplacents = predefinedReplacentset();
 
   const tokenComments: TokenComments = [];
   for (const astElement of astElements.paths()) {
@@ -47,7 +47,7 @@ export default function transformer(file: FileInfo, api: API) {
           /**
            * Skips if the replacement token already set
            */
-          if (existingReplacements.has(addPrefix(attrvalue.value, prop))) {
+          if (predefinedReplacents.has(addPrefix(attrvalue.value, prop))) {
             return;
           }
 
@@ -73,7 +73,7 @@ export default function transformer(file: FileInfo, api: API) {
           /**
            * Skips if the replacement token already set
            */
-          if (existingReplacements.has(addPrefix(literal.value, prop))) {
+          if (predefinedReplacents.has(addPrefix(literal.value, prop))) {
             return;
           }
           const config = legacyTokenConfig[literal.value];
@@ -229,7 +229,7 @@ function addPrefix(
   return token;
 }
 
-function existingReplacementSet() {
+function predefinedReplacentset() {
   const set = new Set<string>();
   for (const key in legacyTokenConfig) {
     const config = legacyTokenConfig[key];
