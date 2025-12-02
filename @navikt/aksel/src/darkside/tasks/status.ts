@@ -103,7 +103,7 @@ function getStatus(
         let match: RegExpExecArray | null = regex.exec(fileSrc);
 
         while (match) {
-          const { row, column } = getWordPositionInFile(
+          const { row, column } = getCharacterPositionInFile(
             match.index,
             getLineStartsLazy(),
           );
@@ -140,7 +140,7 @@ function getStatus(
       let legacyMatch: RegExpExecArray | null = legacyRegex.exec(fileSrc);
 
       while (legacyMatch !== null) {
-        const { row, column } = getWordPositionInFile(
+        const { row, column } = getCharacterPositionInFile(
           legacyMatch.index,
           getLineStartsLazy(),
         );
@@ -183,7 +183,7 @@ function getStatus(
         let match: RegExpExecArray | null = regex.exec(fileSrc);
 
         while (match) {
-          const { row, column } = getWordPositionInFile(
+          const { row, column } = getCharacterPositionInFile(
             match.index,
             getLineStartsLazy(),
           );
@@ -275,7 +275,7 @@ function getLineStarts(content: string): number[] {
  * Given a character index and an array of line start positions,
  * returns the corresponding row and column numbers.
  */
-function getWordPositionInFile(
+function getCharacterPositionInFile(
   index: number,
   lineStarts: number[],
 ): { row: number; column: number } {
@@ -296,4 +296,4 @@ function getWordPositionInFile(
   return { row: lineIndex + 1, column: index - lineStarts[lineIndex] + 1 };
 }
 
-export { getStatus, getWordPositionInFile, getLineStarts };
+export { getStatus, getCharacterPositionInFile, getLineStarts };

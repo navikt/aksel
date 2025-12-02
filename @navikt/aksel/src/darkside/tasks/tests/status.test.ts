@@ -1,32 +1,41 @@
 import { describe, expect, test } from "vitest";
-import { getLineStarts, getWordPositionInFile } from "../status";
+import { getCharacterPositionInFile, getLineStarts } from "../status";
 
-describe("getWordPositionInFile", () => {
+describe("getCharacterPositionInFile", () => {
   test("should return row 1, column 1 for the start of the file", () => {
     const content = "const foo = 'bar';";
     const lineStarts = getLineStarts(content);
-    expect(getWordPositionInFile(0, lineStarts)).toEqual({ row: 1, column: 1 });
+    expect(getCharacterPositionInFile(0, lineStarts)).toEqual({
+      row: 1,
+      column: 1,
+    });
   });
 
   test("should return correct column for position within the first line", () => {
     const content = "const foo = 'bar';";
     const lineStarts = getLineStarts(content);
     // Index 6 is 'f' in 'foo'
-    expect(getWordPositionInFile(6, lineStarts)).toEqual({ row: 1, column: 7 });
+    expect(getCharacterPositionInFile(6, lineStarts)).toEqual({
+      row: 1,
+      column: 7,
+    });
   });
 
   test("should return correct row and column for start of second line", () => {
     const content = "line1\nline2";
     const lineStarts = getLineStarts(content);
     // Index 6 is 'l' in 'line2' (5 chars + 1 newline)
-    expect(getWordPositionInFile(6, lineStarts)).toEqual({ row: 2, column: 1 });
+    expect(getCharacterPositionInFile(6, lineStarts)).toEqual({
+      row: 2,
+      column: 1,
+    });
   });
 
   test("should return correct row and column for position within second line", () => {
     const content = "line1\nline2";
     const lineStarts = getLineStarts(content);
     // Index 10 is '2' in 'line2'
-    expect(getWordPositionInFile(10, lineStarts)).toEqual({
+    expect(getCharacterPositionInFile(10, lineStarts)).toEqual({
       row: 2,
       column: 5,
     });
@@ -36,20 +45,29 @@ describe("getWordPositionInFile", () => {
     const content = "a\n\nb";
     const lineStarts = getLineStarts(content);
     // Index 3 is 'b' (a=0, \n=1, \n=2, b=3)
-    expect(getWordPositionInFile(3, lineStarts)).toEqual({ row: 3, column: 1 });
+    expect(getCharacterPositionInFile(3, lineStarts)).toEqual({
+      row: 3,
+      column: 1,
+    });
   });
 
   test("should handle index pointing to a newline character itself", () => {
     const content = "a\nb";
     const lineStarts = getLineStarts(content);
     // Index 1 is the newline character
-    expect(getWordPositionInFile(1, lineStarts)).toEqual({ row: 1, column: 2 });
+    expect(getCharacterPositionInFile(1, lineStarts)).toEqual({
+      row: 1,
+      column: 2,
+    });
   });
 
   test("should handle empty string input", () => {
     const content = "";
     const lineStarts = getLineStarts(content);
-    expect(getWordPositionInFile(0, lineStarts)).toEqual({ row: 1, column: 1 });
+    expect(getCharacterPositionInFile(0, lineStarts)).toEqual({
+      row: 1,
+      column: 1,
+    });
   });
 });
 
