@@ -131,9 +131,11 @@ async function executeTask(
     case "status":
       return updateStatus();
 
-    case "print-remaining-tokens":
-      await printRemaining(filepaths, statusStore.status);
-      return statusStore;
+    case "print-remaining-tokens": {
+      const newStatus = updateStatus();
+      await printRemaining(filepaths, newStatus.status);
+      return newStatus;
+    }
 
     case "css-tokens":
     case "scss-tokens":
