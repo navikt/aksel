@@ -1,0 +1,59 @@
+name: Deploy aksel-v7.nav.no
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - v7-aksel.nav.no
+
+jobs:
+  build_and_deploy:
+    name: Build and deploy to dev-gcp
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/v7-aksel.nav.no'
+    permissions:
+      packages: "write"
+      contents: "read"
+      id-token: "write"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: cd v7-aksel.nav.no && yarn --immutable
+        shell: bash
+
+      - name: Set production env var
+        run: |
+          echo "PRODUCTION=true" >> v7-aksel.nav.no/website/.env
+        shell: bash
+
+      - name: Build Next.js website
+        run: cd v7-aksel.nav.no && yarn build
+        shell: bash
+
+      - name: Get complete tag
+        run: echo "TAG=DEV-$( date +%s )" >> $GITHUB_ENV
+
+      - uses: nais/docker-build-push@v0
+        id: docker-push
+        with:
+          team: designsystem
+          push_image: true
+          dockerfile: v7-aksel.nav.no/Dockerfile
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+
+      - name: Deploy to dev-gcp
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: v7-aksel.nav.no/nais-prod.yaml
+          CLUSTER: prod-gcp
+          IMAGE: ${{ steps.docker-push.outputs.image }}
