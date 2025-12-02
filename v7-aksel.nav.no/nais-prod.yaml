@@ -6,8 +6,6 @@ metadata:
   labels:
     team: designsystem
 spec:
-  envFrom:
-    - secret: aksel-website-secrets
   image: {{ image }}
   port: 3000
   ingresses:
@@ -34,15 +32,5 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: api.sanity.io
-        - host: api.slack.com
-        - host: slack.com
-        - host: wss-primary.slack.com
-        - host: hnbe3yhs.api.sanity.io
-        - host: apicdn.sanity.io
-        - host: hnbe3yhs.apicdn.sanity.io
-        - host: cdn.sanity.io
-        - host: umami.nav.no
         - host: raw.githubusercontent.com
-
       rules: []

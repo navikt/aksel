@@ -6,10 +6,6 @@ import { AllArticleDocumentsT } from "@/sanity/config";
 const doctypeToColorRole: Record<AllArticleDocumentsT, AkselColor> = {
   ds_artikkel: "brand-blue",
   komponent_artikkel: "brand-blue",
-  templates_artikkel: "brand-blue",
-  aksel_artikkel: "aksel-brand-teal",
-  aksel_blogg: "aksel-brand-pink",
-  aksel_prinsipp: "neutral",
   aksel_standalone: "neutral",
 } as const;
 

@@ -11,7 +11,6 @@ import {
   Spacer,
 } from "@navikt/ds-react";
 import {
-  GlobalAlertContent,
   GlobalAlertHeader,
   GlobalAlertTitle,
 } from "@navikt/ds-react/GlobalAlert";
@@ -39,15 +38,13 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
       <GlobalAlert status="announcement">
         <GlobalAlertHeader>
           <GlobalAlertTitle>
-            Dette er dokumentasjonen for Aksel versjon 7.
+            Dette er dokumentasjonen for Aksel versjon 7. Den nyeste versjonen
+            finner du på{" "}
+            <DsLink href="https://aksel.nav.no" style={{ color: "inherit" }}>
+              aksel.nav.no
+            </DsLink>
           </GlobalAlertTitle>
         </GlobalAlertHeader>
-        <GlobalAlertContent>
-          Den nyeste versjonen finner du på{" "}
-          <DsLink href="https://aksel.nav.no" variant="neutral">
-            aksel.nav.no
-          </DsLink>
-        </GlobalAlertContent>
       </GlobalAlert>
       <div className={styles.headerContainer}>
         <Link href="/" passHref className={styles.headerLogoLink}>

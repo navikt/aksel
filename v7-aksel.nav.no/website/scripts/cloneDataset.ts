@@ -18,7 +18,6 @@ const alltypes = [
   "redirect",
   "aksel_ds_forside",
   "aksel_forside",
-  "sanity.fileAsset",
   "sanity.imageAsset",
 ];
 
@@ -41,18 +40,14 @@ const main = async () => {
   );
 
   // Filter out asset types for the initial fetch
-  const docTypes = alltypes.filter(
-    (t) => t !== "sanity.fileAsset" && t !== "sanity.imageAsset",
-  );
+  const docTypes = alltypes.filter((t) => t !== "sanity.imageAsset");
 
   console.info("Fetching documents of types:", docTypes.join(", "));
 
   const docs = await client.fetch(`*[_type in $types]`, { types: docTypes });
   console.info(`Fetched ${docs.length} documents.`);
 
-  const remoteAssets = await client.fetch(
-    `*[_type in ["sanity.imageAsset", "sanity.fileAsset"]]`,
-  );
+  const remoteAssets = await client.fetch(`*[_type in ["sanity.imageAsset"]]`);
   const assetIds = new Set();
 
   const traverse = (obj: any) => {
