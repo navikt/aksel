@@ -208,8 +208,6 @@
 
 .navds-dialog__close-button {
   grid-area: closebutton;
-  margin-block-start: var(--__ac-dialog-p-b);
-  margin-inline-end: var(--__ac-dialog-p-i);
   align-self: start;
 }
 
