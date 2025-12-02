@@ -36,26 +36,24 @@ const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
     const translate = useI18n("global");
 
     return (
-      <>
-        <div
-          {...restProps}
-          ref={forwardedRef}
-          className={cn("navds-dialog__header", className)}
-        >
-          {withClosebutton && (
-            <DialogCloseTrigger>
-              <Button
-                type="button"
-                className={cn("navds-dialog__close-button")}
-                size="small"
-                variant="tertiary-neutral"
-                icon={<XMarkIcon title={translate("close")} />}
-              />
-            </DialogCloseTrigger>
-          )}
-          {children}
-        </div>
-      </>
+      <div
+        {...restProps}
+        ref={forwardedRef}
+        className={cn("navds-dialog__header", className)}
+      >
+        {withClosebutton && (
+          <DialogCloseTrigger>
+            <Button
+              type="button"
+              className={cn("navds-dialog__close-button")}
+              size="small"
+              variant="tertiary-neutral"
+              icon={<XMarkIcon title={translate("close")} />}
+            />
+          </DialogCloseTrigger>
+        )}
+        {children}
+      </div>
     );
   },
 );
