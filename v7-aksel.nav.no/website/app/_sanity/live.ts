@@ -14,7 +14,7 @@ async function sanityLocalFetch({
   const tree = parse(query);
   const value = await evaluate(tree, { dataset, params });
 
-  return await value.get();
+  return { data: await value.get() };
 }
 
 export { sanityLocalFetch };

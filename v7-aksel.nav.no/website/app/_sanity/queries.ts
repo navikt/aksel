@@ -1,15 +1,13 @@
 import { defineQuery } from "next-sanity";
 import { destructureBlocks, writersAll } from "@/sanity/queries";
 
-const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
+const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel"`;
 
 const DS_FRONT_PAGE_QUERY = defineQuery(`*[_type == "aksel_ds_forside"][0] {
     ds_forside_title,
     ds_forside_ingress,
     ds_getting_started[]{ description, icon, link, title },
     ds_layers_overview,
-    ds_changelog { title, ingress },
-    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},
     ds_support[]{description, link, title},
     seo { image, meta }
   }`);
@@ -29,7 +27,7 @@ const DESIGNSYSTEM_SIDEBAR_QUERY =
 }`);
 
 const DESIGNSYSTEM_OVERVIEW_PAGES_QUERY = defineQuery(
-  `*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {
+  `*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside"] {
   _type,
   overview_pages
   }`,
