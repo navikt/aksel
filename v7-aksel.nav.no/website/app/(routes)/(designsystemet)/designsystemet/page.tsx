@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { VStack } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
-import { sanityFetch } from "@/app/_sanity/live";
+import { sanityLocalFetch } from "@/app/_sanity/live";
 import { DS_FRONT_PAGE_QUERY } from "@/app/_sanity/queries";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
 import { DSLayersOverview } from "./_ui/ds-layers-overview/DSLayersOverview";
@@ -11,7 +11,7 @@ import DSLandingPageHeading from "./_ui/page-heading/DSLandingPageHeading";
 import SupportSection from "./_ui/support-section/SupportSection";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data: pageData } = await sanityFetch({
+  const { data: pageData } = await sanityLocalFetch({
     query: DS_FRONT_PAGE_QUERY,
   });
 
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const DesignsystemetPage = async () => {
-  const { data: dsFrontPageData } = await sanityFetch({
+  const { data: dsFrontPageData } = await sanityLocalFetch({
     query: DS_FRONT_PAGE_QUERY,
   });
 

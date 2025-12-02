@@ -1,17 +1,13 @@
 import "server-only";
-import { sanityFetch } from "@/app/_sanity/live";
+import { sanityLocalFetch } from "@/app/_sanity/live";
 import { SLUG_BY_TYPE_QUERY } from "@/app/_sanity/queries";
 import { AllArticleDocumentsT } from "@/sanity/config";
 
 const SanityDoctypeSlugPrefixConfig = {
   komponent_artikkel: "komponenter",
   ds_artikkel: "grunnleggende",
-  templates_artikkel: "monster-maler",
 } satisfies Record<
-  Extract<
-    AllArticleDocumentsT,
-    "komponent_artikkel" | "ds_artikkel" | "templates_artikkel"
-  >,
+  Extract<AllArticleDocumentsT, "komponent_artikkel" | "ds_artikkel">,
   string
 >;
 
@@ -27,11 +23,9 @@ async function getStaticParamsSlugs({
   type: keyof typeof SanityDoctypeSlugPrefixConfig;
   onlyTopLevelPages: boolean;
 }) {
-  const { data } = await sanityFetch({
+  const { data } = await sanityLocalFetch({
     query: SLUG_BY_TYPE_QUERY,
     params: { type },
-    stega: false,
-    perspective: "published",
   });
 
   return data

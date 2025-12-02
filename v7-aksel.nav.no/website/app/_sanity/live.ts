@@ -1,10 +1,20 @@
-import { defineLive } from "next-sanity/live";
+import fs from "fs";
+import { evaluate, parse } from "groq-js";
 import "server-only";
-import { readWithDraftToken } from "@/app/_sanity/token";
-import { client } from "./client";
 
-export const { sanityFetch, SanityLive } = defineLive({
-  client,
-  serverToken: readWithDraftToken,
-  browserToken: readWithDraftToken,
-});
+const dataset = JSON.parse(fs.readFileSync("./doc-data.json", "utf-8"));
+
+async function sanityLocalFetch({
+  query,
+  params,
+}: {
+  query: string;
+  params?: { [key: string]: any };
+}) {
+  const tree = parse(query);
+  const value = await evaluate(tree, { dataset, params });
+
+  return await value.get();
+}
+
+export { sanityLocalFetch };

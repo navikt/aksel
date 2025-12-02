@@ -4,7 +4,7 @@ import {
   DesignsystemetPageHeader,
   DesignsystemetPageLayout,
 } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
-import { sanityFetch } from "@/app/_sanity/live";
+import { sanityLocalFetch } from "@/app/_sanity/live";
 import {
   GRUNNLEGGENDE_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
@@ -14,11 +14,11 @@ import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 
 async function GrunnleggendePage({ slug }: { slug: string }) {
   const [{ data: pageData }, { data: toc = [] }] = await Promise.all([
-    sanityFetch({
+    sanityLocalFetch({
       query: GRUNNLEGGENDE_BY_SLUG_QUERY,
       params: { slug },
     }),
-    sanityFetch({
+    sanityLocalFetch({
       query: TOC_BY_SLUG_QUERY,
       params: { slug },
     }),

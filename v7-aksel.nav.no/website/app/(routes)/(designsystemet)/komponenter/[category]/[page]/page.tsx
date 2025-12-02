@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { getStaticParamsSlugs } from "@/app/(routes)/(designsystemet)/slug";
-import { sanityFetch } from "@/app/_sanity/live";
+import { sanityLocalFetch } from "@/app/_sanity/live";
 import { METADATA_BY_SLUG_QUERY } from "@/app/_sanity/queries";
 import { KomponenterPage } from "../_ui/KomponenterPage";
 
@@ -11,10 +11,9 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category, page } = await params;
 
-  const { data: pageData } = await sanityFetch({
+  const { data: pageData } = await sanityLocalFetch({
     query: METADATA_BY_SLUG_QUERY,
     params: { slug: `komponenter/${category}/${page}` },
-    stega: false,
   });
 
   return {

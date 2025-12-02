@@ -18244,6 +18244,7 @@ __metadata:
     cross-env: "npm:^10.0.0"
     date-fns: "npm:^4.0.0"
     fuse.js: "npm:^7.0.0"
+    groq-js: "npm:^1.21.0"
     isomorphic-dompurify: "npm:2.26.0"
     jscodeshift: "npm:^0.15.1"
     jsdom: "npm:27.1.0"

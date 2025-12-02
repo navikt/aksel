@@ -11,7 +11,7 @@ import {
 import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { AnimatedFaceCard } from "@/app/(routes)/(root)/_ui/AnimatedFaceCard";
 import { AnimationButton } from "@/app/(routes)/(root)/_ui/AnimationButton";
-import { sanityFetch } from "../../_sanity/live";
+import { sanityLocalFetch } from "../../_sanity/live";
 import { LANDINGSSIDE_META_QUERY } from "../../_sanity/queries";
 import Footer from "../../_ui/footer/Footer";
 import { Header } from "../../_ui/header/Header";
@@ -22,9 +22,8 @@ import { MainWrapper } from "./_ui/MainWrapper";
 import styles from "./_ui/frontpage.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data: page } = await sanityFetch({
+  const { data: page } = await sanityLocalFetch({
     query: LANDINGSSIDE_META_QUERY,
-    stega: false,
   });
 
   return {

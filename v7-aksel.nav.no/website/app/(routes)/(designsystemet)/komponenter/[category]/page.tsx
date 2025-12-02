@@ -3,7 +3,7 @@ import { stegaClean } from "next-sanity";
 import { notFound } from "next/navigation";
 import { DesignsystemetOverviewPage } from "@/app/(routes)/(designsystemet)/_ui/overview/DesignsystemetOverview";
 import { getStaticParamsSlugs } from "@/app/(routes)/(designsystemet)/slug";
-import { sanityFetch } from "@/app/_sanity/live";
+import { sanityLocalFetch } from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
@@ -22,10 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
 
   if (!komponentKategorier.find((cat) => cat.value === category)) {
-    const { data: pageData } = await sanityFetch({
+    const { data: pageData } = await sanityLocalFetch({
       query: METADATA_BY_SLUG_QUERY,
       params: { slug: `komponenter/${category}` },
-      stega: false,
     });
 
     return {
@@ -42,10 +41,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const [{ data: page }, topLevelPages] = await Promise.all([
-    sanityFetch({
+    sanityLocalFetch({
       query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
-      stega: false,
-      perspective: "published",
     }),
     getStaticParamsSlugs({
       type: "komponent_artikkel",
@@ -73,11 +70,11 @@ export default async function Page({ params }: Props) {
   }
 
   const [{ data: categoryPages }, { data: landingPage }] = await Promise.all([
-    sanityFetch({
+    sanityLocalFetch({
       query: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
       params: { category, docType: "komponent_artikkel" },
     }),
-    sanityFetch({
+    sanityLocalFetch({
       query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
     }),
   ]);

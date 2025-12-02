@@ -1,4 +1,4 @@
-import { sanityFetch } from "@/app/_sanity/live";
+import { sanityLocalFetch } from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
   DESIGNSYSTEM_SIDEBAR_QUERY,
@@ -20,10 +20,10 @@ async function getSidebarData() {
   "use server";
 
   const [{ data: sidebar }, { data: oversikt }] = await Promise.all([
-    sanityFetch({
+    sanityLocalFetch({
       query: DESIGNSYSTEM_SIDEBAR_QUERY,
     }),
-    sanityFetch({
+    sanityLocalFetch({
       query: DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
     }),
   ]);

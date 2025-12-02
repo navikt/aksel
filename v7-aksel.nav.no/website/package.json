@@ -42,6 +42,7 @@
     "codesandbox-import-utils": "^2.2.3",
     "date-fns": "^4.0.0",
     "fuse.js": "^7.0.0",
+    "groq-js": "^1.21.0",
     "isomorphic-dompurify": "2.26.0",
     "jscodeshift": "^0.15.1",
     "lodash": "^4.17.21",

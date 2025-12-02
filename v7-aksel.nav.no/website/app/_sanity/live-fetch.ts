@@ -1,6 +1,6 @@
 import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
-import { sanityFetch } from "@/app/_sanity/live";
+import { sanityLocalFetch } from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
   DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
@@ -21,28 +21,20 @@ async function fetchAllSanityPages(): Promise<
     { data: dsKomponenterData },
     { data: dsGrunnleggendeData },
   ] = await Promise.all([
-    sanityFetch({
+    sanityLocalFetch({
       query: SITEMAP_LANDINGPAGES_QUERY,
-      stega: false,
-      perspective: "published",
     }),
-    sanityFetch({
+    sanityLocalFetch({
       query: SITEMAP_ARTICLES_BY_TYPE_QUERY,
       params: {
         doctypes: allArticleDocuments,
       },
-      stega: false,
-      perspective: "published",
     }),
-    sanityFetch({
+    sanityLocalFetch({
       query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
-      stega: false,
-      perspective: "published",
     }),
-    sanityFetch({
+    sanityLocalFetch({
       query: DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
-      stega: false,
-      perspective: "published",
     }),
   ]);
 
