@@ -5,9 +5,9 @@
   "description": "Aksel.nav.no website",
   "author": "Aksel | Nav designsystem team",
   "scripts": {
-    "dev": "next | pino-pretty --messageKey=message",
-    "dev-turbo": "next --turbo | pino-pretty --messageKey=message",
-    "build": "concurrently \"yarn workspace playroom build:playroom\" \"yarn next build\" && yarn cp:assets",
+    "dev": "yarn prepare:local && next | pino-pretty --messageKey=message",
+    "dev-turbo": "yarn prepare:local && next --turbo | pino-pretty --messageKey=message",
+    "build": "yarn prepare:local && concurrently \"yarn workspace playroom build:playroom\" \"yarn next build\" && yarn cp:assets",
     "start": "cd .next/standalone/v7-aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "test": "vitest run -c config/vitest.config.ts",
     "test:watch": "vitest watch -c config/vitest.config.ts",
