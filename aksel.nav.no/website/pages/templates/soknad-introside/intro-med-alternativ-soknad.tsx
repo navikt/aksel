@@ -96,7 +96,7 @@ function Example() {
               nytte av før de går i gang med søknaden. Eksempler på nyttig
               informasjon:
             </BodyLong>
-            <Box marginBlock="space-16" asChild>
+            <Box marginBlock="space-16 space-28" asChild>
               <List>
                 <List.Item>
                   Oppgaver brukeren må ha gjort før de søker.{" "}
