@@ -8,7 +8,7 @@ export const MyComponent = () => {
 		<Box background="bg-subtle" borderColor="border-alt-1" shadow="large">
       migratable + unmigratable (no comment)
 		</Box>
-		<Box background="surface-alt-3-strong" >
+		<Box background="surface-alt-3-strong">
       unmigratable (with comment)
 		</Box>
 		<Box borderWidth="4" padding={{ lg: "10", sm: "8" }} height="200rem">

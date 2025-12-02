@@ -4,7 +4,7 @@ import { findComponentImport, findProps } from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
 import transformBoxNewToBox from "../box-new/box-new";
 
-const propsAffected = ["background", "borderColor", "shadow"];
+const propsAffected = ["background", "borderColor", "shadow"] as const;
 
 export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
@@ -45,7 +45,7 @@ export default function transformer(file: FileInfo, api: API) {
         if (attrvalue.type === "StringLiteral") {
           const config = legacyTokenConfig[attrvalue.value];
           if (config?.replacement) {
-            attrvalue.value = config.replacement;
+            attrvalue.value = cleanReplacementToken(config.replacement, prop);
           } else {
             const tokenComment: TokenComment = {
               prop,
@@ -63,7 +63,7 @@ export default function transformer(file: FileInfo, api: API) {
           const literal = attrvalue.expression;
           const config = legacyTokenConfig[literal.value];
           if (config?.replacement) {
-            literal.value = config.replacement;
+            literal.value = cleanReplacementToken(config.replacement, prop);
           } else {
             const tokenComment: TokenComment = {
               prop,
@@ -179,4 +179,21 @@ function convertBorderRadiusToRadius(oldValue: string): string {
   }
 
   return newRadius.join(" ");
+}
+
+/**
+ * New props in Box do not have bg- or border- prefixes
+ * This function removes those prefixes from the tokens
+ */
+function cleanReplacementToken(
+  token: string,
+  type: (typeof propsAffected)[number],
+): string {
+  if (type === "background") {
+    return token.replace("bg-", "");
+  }
+  if (type === "borderColor") {
+    return token.replace("border-", "");
+  }
+  return token;
 }
