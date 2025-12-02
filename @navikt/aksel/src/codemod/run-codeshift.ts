@@ -29,7 +29,7 @@ export async function runCodeshift(
   );
 
   console.info(chalk.greenBright.bold("\nWelcome to Aksel codemods!"));
-  console.info("\nRunning migration:", chalk.green("input"));
+  console.info("\nRunning migration:", chalk.green(input));
 
   const globList = [options.glob ?? getDefaultGlob(options?.ext)];
 
