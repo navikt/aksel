@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Box background="surface-alt-3-subtle">
+    <Box background="brand-blue-moderate">
       <HStack gap="space-12" wrap={false}>
         <Placeholder />
         <Spacer />
@@ -15,10 +15,10 @@ const Example = () => {
 
 const Placeholder = () => (
   <Box
-    background="surface-alt-3"
+    background="brand-blue-strong"
     height="2rem"
     width="2rem"
-    borderRadius="medium"
+    borderRadius="4"
   />
 );
 

@@ -5,36 +5,12 @@ const Example = () => {
   return (
     <VStack gap="space-32">
       <Box
-        background="surface-subtle"
+        background="neutral-soft"
         padding="space-16"
-        borderRadius="large"
-        shadow="xsmall"
+        borderRadius="8"
+        shadow="dialog"
       >
-        xsmall
-      </Box>
-      <Box
-        background="surface-subtle"
-        padding="space-16"
-        borderRadius="large"
-        shadow="small"
-      >
-        small
-      </Box>
-      <Box
-        background="surface-subtle"
-        padding="space-16"
-        borderRadius="large"
-        shadow="medium"
-      >
-        medium
-      </Box>
-      <Box
-        background="surface-subtle"
-        padding="space-16"
-        borderRadius="large"
-        shadow="large"
-      >
-        large
+        dialog
       </Box>
     </VStack>
   );

@@ -6,24 +6,24 @@ const Example = () => {
     <VStack gap="space-16">
       <Box
         padding="space-16"
-        background="surface-alt-3-subtle"
-        borderColor="border-alt-3"
+        background="brand-beige-soft"
+        borderColor="brand-beige"
         borderWidth="4"
       >
-        Alt-3
+        Brand-beige
       </Box>
       <Box
         padding="space-16"
-        background="surface-info-subtle"
-        borderColor="border-info"
+        background="info-soft"
+        borderColor="info"
         borderWidth="4"
       >
         Info
       </Box>
       <Box
         padding="space-16"
-        background="surface-success-subtle"
-        borderColor="border-success"
+        background="success-soft"
+        borderColor="success"
         borderWidth="4"
       >
         Success
