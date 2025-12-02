@@ -2,6 +2,7 @@ import { createClient } from "@sanity/client";
 import fs from "fs";
 import { clientConfig } from "./sanity/config";
 
+/* yarn tsx --env-file-if-exists=.env cloneDatabase.ts */
 /**
  * List of document types that should be preserved during a content migration.
  */
