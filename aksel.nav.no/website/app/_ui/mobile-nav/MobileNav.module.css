@@ -28,6 +28,10 @@
   margin-block-end: var(--ax-space-24);
 }
 
+.mobileNavDialogPopup {
+  overflow-y: auto;
+}
+
 .divider {
   border-bottom: 1px solid var(--ax-border-neutral-subtleA);
 }

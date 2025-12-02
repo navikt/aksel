@@ -1,6 +1,7 @@
 "use client";
 
 import { Dialog } from "@navikt/ds-react";
+import styles from "./MobileNav.module.css";
 import { useMobileNav } from "./MobileNav.provider";
 
 function MobileNavDialog({ children }: { children: React.ReactNode }) {
@@ -8,7 +9,12 @@ function MobileNavDialog({ children }: { children: React.ReactNode }) {
 
   return (
     <Dialog open={open} onOpenChange={() => toggleOpen(false)}>
-      <Dialog.Popup width="small" closeOnOutsideClick position="right">
+      <Dialog.Popup
+        width="small"
+        closeOnOutsideClick
+        position="right"
+        className={styles.mobileNavDialogPopup}
+      >
         <Dialog.Header>
           <Dialog.Title>Aksel</Dialog.Title>
         </Dialog.Header>

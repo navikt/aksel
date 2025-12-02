@@ -76,7 +76,7 @@ function IconPageIconDetails({
 
   const dedupedKeywords = new Set(metaData?.keywords ?? []);
 
-  const DialogActions = () => (
+  const dialogActions = (
     <>
       <HStack gap="space-8">
         {iconSvg && (
@@ -143,13 +143,9 @@ function IconPageIconDetails({
           </div>
         )}
         {isDialog ? (
-          <Dialog.Body>
-            <DialogActions />
-          </Dialog.Body>
+          <Dialog.Body>{dialogActions}</Dialog.Body>
         ) : (
-          <div>
-            <DialogActions />
-          </div>
+          <div>{dialogActions}</div>
         )}
       </div>
     </div>

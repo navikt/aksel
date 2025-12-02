@@ -9,9 +9,9 @@
   transition-property: transform, opacity, translate;
   border-radius: var(--a-border-radius-large);
   color: var(--a-text-default);
-  flex-direction: column;
   box-shadow: var(--a-shadow-xlarge);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-template-areas:
     "header closebutton"
     "body body"

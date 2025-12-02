@@ -31,7 +31,7 @@
   border-radius: var(--ax-radius-12);
   border: 1px solid var(--ax-border-neutral-subtleA);
   background: var(--ax-bg-raised);
-  overflow: clip;
+  overflow: auto;
   padding: var(--ax-space-20);
 
   &[data-inline] {
