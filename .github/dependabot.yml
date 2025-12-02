@@ -6,11 +6,20 @@ registries:
     token: ${{ secrets.READER_TOKEN }}
 updates:
   - package-ecosystem: npm
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
     directory: /
     exclude-paths:
       - "examples/**"
     schedule:
       interval: weekly
+      day: monday
+      time: "04:00"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
     registries:
       - npm-github
     groups:
@@ -30,10 +39,27 @@ updates:
       storybook:
         patterns:
           - "*storybook*"
+      # Group all other minor and patch updates to reduce noise
+      dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: weekly
+      day: monday
+      time: "04:00"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
     registries:
       - npm-github
+    groups:
+      actions:
+        patterns:
+          - "*"
