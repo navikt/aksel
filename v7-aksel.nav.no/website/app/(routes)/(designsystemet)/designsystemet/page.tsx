@@ -1,11 +1,9 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import React from "react";
 import { VStack } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
 import { sanityFetch } from "@/app/_sanity/live";
 import { DS_FRONT_PAGE_QUERY } from "@/app/_sanity/queries";
-import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
 import { DSLayersOverview } from "./_ui/ds-layers-overview/DSLayersOverview";
 import { GettingStartedSection } from "./_ui/getting-started/GettingStartedSection";
@@ -17,14 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
     query: DS_FRONT_PAGE_QUERY,
   });
 
-  const pageOgImage = urlForOpenGraphImage(pageData?.seo?.image);
-
   return {
     title: pageData?.ds_forside_title,
-    description: pageData?.seo?.meta || pageData?.ds_forside_ingress,
-    openGraph: {
-      images: pageOgImage,
-    },
   };
 }
 

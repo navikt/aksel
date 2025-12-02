@@ -11,7 +11,6 @@ import {
 import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { AnimatedFaceCard } from "@/app/(routes)/(root)/_ui/AnimatedFaceCard";
 import { AnimationButton } from "@/app/(routes)/(root)/_ui/AnimationButton";
-import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { sanityFetch } from "../../_sanity/live";
 import { LANDINGSSIDE_META_QUERY } from "../../_sanity/queries";
 import Footer from "../../_ui/footer/Footer";
@@ -29,13 +28,10 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 
   return {
-    title: "Aksel",
+    title: "Aksel v7 (legacy)",
     description:
       page?.seo?.meta ??
       `En samling ressurser fra ulike fagdisipliner som hjelper oss å skape bedre, universelt tilgjengelige og sammenhengende produkter i Nav.`,
-    openGraph: {
-      images: urlForOpenGraphImage(page?.seo?.image),
-    },
   };
 }
 

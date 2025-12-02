@@ -9,7 +9,6 @@ import {
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
   METADATA_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
-import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { grunnleggendeKategorier, sanityCategoryLookup } from "@/sanity/config";
 import { GrunnleggendePage } from "./_ui/GrunnleggendePage";
 
@@ -31,26 +30,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     return {
       title: pageData?.heading,
-      description: pageData?.seo?.meta,
-      openGraph: {
-        images: urlForOpenGraphImage(pageData?.seo?.image),
-      },
     };
   }
-
-  const { data: page } = await sanityFetch({
-    query: DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
-    stega: false,
-  });
 
   const currentCategory = categoryConfig.find((cat) => cat.value === category);
 
   return {
     title: currentCategory?.title,
-    description: page?.seo?.meta,
-    openGraph: {
-      images: urlForOpenGraphImage(page?.seo?.image),
-    },
   };
 }
 

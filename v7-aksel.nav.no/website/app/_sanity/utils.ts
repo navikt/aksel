@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 type Image = {
   asset?: {
     _ref: string;
@@ -11,22 +12,22 @@ class LocalImageBuilder {
     this.source = source;
   }
 
-  auto() {
+  auto(_: any) {
     return this;
   }
-  fit() {
+  fit(_: any) {
     return this;
   }
-  width() {
+  width(_: any) {
     return this;
   }
-  height() {
+  height(_: any) {
     return this;
   }
-  quality() {
+  quality(_: any) {
     return this;
   }
-  format() {
+  format(_: any) {
     return this;
   }
 
@@ -53,8 +54,4 @@ const urlForImage = (source: Image | null | undefined) => {
   return new LocalImageBuilder(source);
 };
 
-function urlForOpenGraphImage(image: Image | null | undefined) {
-  return urlForImage(image)?.width(1200).height(627).fit("crop").url();
-}
-
-export { urlForImage, urlForOpenGraphImage };
+export { urlForImage };

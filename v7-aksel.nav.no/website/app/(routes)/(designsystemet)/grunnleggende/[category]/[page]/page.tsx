@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { getStaticParamsSlugs } from "@/app/(routes)/(designsystemet)/slug";
 import { sanityFetch } from "@/app/_sanity/live";
 import { METADATA_BY_SLUG_QUERY } from "@/app/_sanity/queries";
-import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { GrunnleggendePage } from "../_ui/GrunnleggendePage";
 
 type Props = {
@@ -20,10 +19,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: pageData?.heading,
-    description: pageData?.seo?.meta,
-    openGraph: {
-      images: urlForOpenGraphImage(pageData?.seo?.image),
-    },
   };
 }
 

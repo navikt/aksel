@@ -29,23 +29,9 @@ export const Highlight = ({
     .auto("format")
     .url();
 
-  const imageBlurUrl = urlForImage(
-    isKomponent(article) ? article.status?.bilde : null,
-  )
-    ?.width(24)
-    .height(24)
-    .blur(10)
-    .url();
-
   const seoImageUrl = urlForImage(article?.seo?.image)
     ?.quality(100)
     .auto("format")
-    .url();
-
-  const seoImageBlurUrl = urlForImage(article?.seo?.image)
-    ?.width(24)
-    .height(24)
-    .blur(10)
     .url();
 
   const getStatusTag = () => {
@@ -67,7 +53,6 @@ export const Highlight = ({
         {useStatusImage && imageUrl ? (
           <NextImage
             src={imageUrl}
-            blurDataURL={imageBlurUrl}
             placeholder="blur"
             quality={100}
             fill
@@ -83,7 +68,6 @@ export const Highlight = ({
         ) : seoImageUrl ? (
           <NextImage
             src={seoImageUrl}
-            blurDataURL={seoImageBlurUrl}
             placeholder="blur"
             quality={100}
             fill
