@@ -22,7 +22,7 @@ function IconPageSidebar({
   const handleClose = () => {
     const params = new URLSearchParams(searchParams?.toString());
     params.delete("iconName");
-    replace(`${pathname}?${params.toString()}`);
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   return (
