@@ -1,16 +1,48 @@
-import createImageUrlBuilder from "@sanity/image-url";
-import { SANITY_DATASET, SANITY_PROJECT_ID } from "@/sanity/config";
-
-const imageBuilder = createImageUrlBuilder({
-  projectId: SANITY_PROJECT_ID || "",
-  dataset: SANITY_DATASET || "",
-});
-
 type Image = {
   asset?: {
     _ref: string;
   };
 };
+
+class LocalImageBuilder {
+  source: Image;
+
+  constructor(source: Image) {
+    this.source = source;
+  }
+
+  auto() {
+    return this;
+  }
+  fit() {
+    return this;
+  }
+  width() {
+    return this;
+  }
+  height() {
+    return this;
+  }
+  quality() {
+    return this;
+  }
+  format() {
+    return this;
+  }
+
+  url() {
+    const ref = this.source?.asset?._ref;
+    if (!ref) return undefined;
+
+    const parts = ref.split("-");
+    if (parts.length < 2) return undefined;
+
+    const ext = parts[parts.length - 1];
+    const filename = parts.slice(1, parts.length - 1).join("-") + "." + ext;
+
+    return `/sanity-assets/${filename}`;
+  }
+}
 
 const urlForImage = (source: Image | null | undefined) => {
   // Ensure that source image contains a valid reference
@@ -18,7 +50,7 @@ const urlForImage = (source: Image | null | undefined) => {
     return undefined;
   }
 
-  return imageBuilder?.image(source).auto("format").fit("max");
+  return new LocalImageBuilder(source);
 };
 
 function urlForOpenGraphImage(image: Image | null | undefined) {

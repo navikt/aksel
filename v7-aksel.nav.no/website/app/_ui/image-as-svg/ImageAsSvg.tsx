@@ -1,4 +1,6 @@
+import fs from "fs/promises";
 import DOMPurify from "isomorphic-dompurify";
+import path from "path";
 import styles from "./ImageAsSvg.module.css";
 
 /**
@@ -17,9 +19,24 @@ async function ImageAsThemedSvg({
     return null;
   }
 
-  const svgString = await fetch(url)
-    .then((res) => res.text())
-    .catch(() => null);
+  let svgString: string | null = null;
+
+  if (url.startsWith("/")) {
+    const filePath = path.join(process.cwd(), "public", url);
+    try {
+      svgString = await fs.readFile(filePath, "utf-8");
+    } catch {
+      console.info(`Failed to read local SVG from ${url}`);
+      return null;
+    }
+  } else {
+    svgString = await fetch(url)
+      .then((res) => res.text())
+      .catch(() => {
+        console.info(`Failed to fetch SVG from ${url}`);
+        return null;
+      });
+  }
 
   if (!svgString) {
     return null;

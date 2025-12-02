@@ -71,7 +71,7 @@ const main = async () => {
 
   docs.forEach(traverse);
 
-  const assetsToKeep = [];
+  const assetsToKeep: any[] = [];
 
   for (const asset of remoteAssets) {
     if (assetIds.has(asset._id)) {
