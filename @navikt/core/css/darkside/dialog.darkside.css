@@ -9,7 +9,6 @@
   transition-property: transform, opacity, translate;
   border-radius: var(--ax-radius-12);
   color: var(--ax-text-neutral);
-  flex-direction: column;
   box-shadow: var(--ax-shadow-dialog);
   display: block;
   outline: 1px solid var(--ax-border-neutral-subtleA);
