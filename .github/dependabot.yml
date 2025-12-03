@@ -49,9 +49,6 @@ updates:
       interval: weekly
       day: monday
       time: "04:00"
-    commit-message:
-      prefix: "chore(deps)"
-      include: "scope"
     registries:
       - npm-github
     groups:
