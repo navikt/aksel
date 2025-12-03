@@ -14,7 +14,7 @@
   flex-direction: column;
   outline: 1px solid var(--ax-border-neutral-subtleA);
   z-index: 1000;
-  overflow: clip;
+  overflow: hidden;
 
   .light:not(:has(.dark)) .aksel-dialog__backdrop ~ & {
     outline: none;
