@@ -12,12 +12,6 @@
   box-shadow: var(--a-shadow-xlarge);
   display: flex;
   flex-direction: column;
-  grid-template-areas:
-    "header closebutton"
-    "body body"
-    "footer footer";
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto 1fr auto;
   outline: 1px solid var(--a-border-subtle);
 
   .light:not(:has(.dark)) .navds-dialog__backdrop ~ & {
@@ -197,7 +191,6 @@
 }
 
 .navds-dialog__header {
-  grid-area: header;
   padding-block: var(--__ac-dialog-p-b);
   padding-inline: var(--__ac-dialog-p-i);
 }
@@ -207,14 +200,11 @@
 }
 
 .navds-dialog__close-button {
-  grid-area: closebutton;
-  margin-block-start: var(--__ac-dialog-p-b);
-  margin-inline-end: var(--__ac-dialog-p-i);
   align-self: start;
+  float: right;
 }
 
 .navds-dialog__body {
-  grid-area: body;
   overflow: auto;
   padding-block: var(--__ac-dialog-p-b);
   padding-inline: var(--__ac-dialog-p-i);
@@ -225,7 +215,6 @@
 }
 
 .navds-dialog__footer {
-  grid-area: footer;
   justify-content: flex-start;
   display: flex;
   flex-flow: wrap;

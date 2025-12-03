@@ -1,9 +1,7 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../slot/Slot";
 import { useRenameCSS } from "../../theme/Theme";
-import type { AsChild } from "../../util/types/AsChild";
 
-type DialogBodyProps = React.HTMLAttributes<HTMLDivElement> & AsChild;
+type DialogBodyProps = React.HTMLAttributes<HTMLDivElement>;
 
 /**
  * @see 🏷️ {@link DialogBodyProps}
@@ -19,19 +17,17 @@ type DialogBodyProps = React.HTMLAttributes<HTMLDivElement> & AsChild;
  * ```
  */
 const DialogBody = forwardRef<HTMLDivElement, DialogBodyProps>(
-  ({ className, children, asChild = false, ...restProps }, forwardedRef) => {
+  ({ className, children, ...restProps }, forwardedRef) => {
     const { cn } = useRenameCSS();
 
-    const Component = asChild ? Slot : "div";
-
     return (
-      <Component
+      <div
         {...restProps}
         ref={forwardedRef}
         className={cn("navds-dialog__body", className)}
       >
         {children}
-      </Component>
+      </div>
     );
   },
 );
