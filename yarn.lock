@@ -5264,7 +5264,7 @@ __metadata:
     "@navikt/ds-tokens": "npm:^7.35.0"
     "@types/cli-progress": "npm:3.11.6"
     axios: "npm:1.13.2"
-    chalk: "npm:4.1.0"
+    chalk: "npm:5.6.2"
     cli-progress: "npm:^3.12.0"
     clipboardy: "npm:^2.3.0"
     commander: "npm:10.0.1"
@@ -11148,16 +11148,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:4.1.0":
-  version: 4.1.0
-  resolution: "chalk@npm:4.1.0"
-  dependencies:
-    ansi-styles: "npm:^4.1.0"
-    supports-color: "npm:^7.1.0"
-  checksum: 10/e8d2b9b9abe5aee78caae44e2fd86ade56e440df5822006d702ce18771c00418b6f2c0eb294093d5486b852c83f021e409205d0ee07095fb14f5c8f9db9e7f80
-  languageName: node
-  linkType: hard
-
 "chalk@npm:4.1.2, chalk@npm:^4.0.0, chalk@npm:^4.0.2, chalk@npm:^4.1.0, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
@@ -11165,6 +11155,13 @@ __metadata:
     ansi-styles: "npm:^4.1.0"
     supports-color: "npm:^7.1.0"
   checksum: 10/cb3f3e594913d63b1814d7ca7c9bafbf895f75fbf93b92991980610dfd7b48500af4e3a5d4e3a8f337990a96b168d7eb84ee55efdce965e2ee8efc20f8c8f139
+  languageName: node
+  linkType: hard
+
+"chalk@npm:5.6.2, chalk@npm:^5.6.2":
+  version: 5.6.2
+  resolution: "chalk@npm:5.6.2"
+  checksum: 10/1b2f48f6fba1370670d5610f9cd54c391d6ede28f4b7062dd38244ea5768777af72e5be6b74fb6c6d54cb84c4a2dff3f3afa9b7cb5948f7f022cfd3d087989e0
   languageName: node
   linkType: hard
 
@@ -11200,13 +11197,6 @@ __metadata:
   version: 5.6.0
   resolution: "chalk@npm:5.6.0"
   checksum: 10/f0e0646a72adbd0f6e73441d3872d7f2f40ba98052924f08a30c10634ec6b1e2cd19cc3c40cc21081dad640e2a1a2749030418571690b89bd7782babf7f89866
-  languageName: node
-  linkType: hard
-
-"chalk@npm:^5.6.2":
-  version: 5.6.2
-  resolution: "chalk@npm:5.6.2"
-  checksum: 10/1b2f48f6fba1370670d5610f9cd54c391d6ede28f4b7062dd38244ea5768777af72e5be6b74fb6c6d54cb84c4a2dff3f3afa9b7cb5948f7f022cfd3d087989e0
   languageName: node
   linkType: hard
 
