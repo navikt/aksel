@@ -10,7 +10,7 @@ function MobileNavDialog({ children }: { children: React.ReactNode }) {
   return (
     <Dialog open={open} onOpenChange={() => toggleOpen(false)}>
       <Dialog.Popup
-        width="small"
+        width="400px"
         closeOnOutsideClick
         position="right"
         className={styles.mobileNavDialogPopup}
