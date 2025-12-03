@@ -64,7 +64,7 @@ const Example = () => {
   if (formState.submitted)
     return (
       <Page.Block width="lg" gutters>
-        <VStack gap="8" align="center">
+        <VStack gap="space-32" align="center">
           <Heading size="large">Demo slutt</Heading>
           <Button
             onClick={() => {
@@ -81,7 +81,7 @@ const Example = () => {
   return (
     <Page.Block width="lg" gutters>
       <form onSubmit={onSubmit}>
-        <VStack gap="8">
+        <VStack gap="space-32">
           <TextField
             id="fødselsnummer"
             label="Fødselsnummer"
