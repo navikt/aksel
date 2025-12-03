@@ -199,8 +199,6 @@
 }
 
 .aksel-dialog__close-button {
-  margin-block-start: var(--__axc-dialog-p-b);
-  margin-inline-end: var(--__axc-dialog-p-i);
   align-self: start;
   float: right;
 }

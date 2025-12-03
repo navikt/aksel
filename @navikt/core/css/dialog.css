@@ -199,8 +199,6 @@
 }
 
 .navds-dialog__close-button {
-  margin-block-start: var(--__ac-dialog-p-b);
-  margin-inline-end: var(--__ac-dialog-p-i);
   align-self: start;
   float: right;
 }
