@@ -3,7 +3,6 @@ import { ArrowLeftIcon } from "@navikt/aksel-icons";
 import {
   Bleed,
   BodyLong,
-  BodyShort,
   Box,
   FormProgress,
   FormSummary,
@@ -11,6 +10,7 @@ import {
   Heading,
   Link,
   Page,
+  Tag,
   VStack,
 } from "@navikt/ds-react";
 import FormNavigation from "../../../components/website-modules/examples/__parts-inline/FormNavigation";
@@ -41,17 +41,17 @@ function Example() {
                 <ApplicationPictogram />
               </Box>
             </Bleed>
-            <VStack gap="1">
-              <BodyShort size="small">
-                Nav 10-07.03 (Om søknaden har ID)
-              </BodyShort>
+            <VStack gap="space-4" align="start">
               <Heading level="1" size="xlarge">
                 Søknad om [ytelse]
               </Heading>
+              <Tag variant="neutral-moderate" size="small">
+                Nav 10-07.03 (Om søknaden har ID)
+              </Tag>
             </VStack>
           </VStack>
 
-          <div data-aksel-template="form-summarypage-v4">
+          <div data-aksel-template="form-summarypage-v5">
             <Link href="#">
               <ArrowLeftIcon aria-hidden /> Forrige steg
             </Link>
