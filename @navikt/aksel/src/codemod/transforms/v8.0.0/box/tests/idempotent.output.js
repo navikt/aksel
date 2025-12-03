@@ -10,10 +10,10 @@ import { Box } from "@navikt/ds-react"
 
 export const MyComponent = () => {
   return (<>
-    <Box background="bg-neutral-soft" borderColor="border-meta-purple">
+    <Box background="neutral-soft" borderColor="meta-purple">
       migratable
     </Box>
-    <Box background="bg-neutral-soft" borderColor="border-meta-purple" shadow="large">
+    <Box background="neutral-soft" borderColor="meta-purple" shadow="large">
       migratable + unmigratable (no comment)
     </Box>
     <Box background="surface-alt-3-strong" >
@@ -22,7 +22,7 @@ export const MyComponent = () => {
     <Box borderWidth="4" padding={{ lg: "10", sm: "8" }} height="200rem">
       old
     </Box>
-    <Box borderWidth="4" background="bg-neutral-soft">
+    <Box borderWidth="4" background="neutral-soft">
       old + migratable
     </Box>
   </>);

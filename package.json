@@ -67,10 +67,10 @@
     "importOrderSortSpecifiers": true
   },
   "lint-staged": {
-    "*.js": "eslint --max-warnings=0",
-    "*.jsx": "eslint --max-warnings=0",
-    "*.ts": "eslint --max-warnings=0",
-    "*.tsx": "eslint --max-warnings=0",
+    "*.js": "eslint --max-warnings=0 --no-warn-ignored",
+    "*.jsx": "eslint --max-warnings=0 --no-warn-ignored",
+    "*.ts": "eslint --max-warnings=0 --no-warn-ignored",
+    "*.tsx": "eslint --max-warnings=0 --no-warn-ignored",
     "*.css": "stylelint",
     "*": "prettier --write --ignore-unknown"
   },

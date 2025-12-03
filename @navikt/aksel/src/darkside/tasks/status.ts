@@ -1,10 +1,10 @@
 import ProgressBar from "cli-progress";
 import fs from "node:fs";
+import { translateToken } from "../../codemod/utils/translate-token";
 import { TokenStatus } from "../config/TokenStatus";
 import { darksideTokenConfig } from "../config/darkside.tokens";
 import { legacyComponentTokenList } from "../config/legacy-component.tokens";
 import { legacyTokenConfig } from "../config/legacy.tokens";
-import { getTokenRegex } from "../config/token-regex";
 
 const StatusStore = new TokenStatus();
 
@@ -30,14 +30,68 @@ function getStatus(
 
   StatusStore.initStatus();
 
+  /**
+   * Prepare search terms for legacy and darkside tokens.
+   * By pre-computing these sets, we save re-calculating them for each file,
+   * improving performance when processing large numbers of files.
+   */
+  const legacySearchTerms = getLegacySearchTerms();
+  const darksideSearchTerms = getDarksideSearchTerms();
+
+  const legacyComponentTokensSet = new Set(legacyComponentTokenList);
+
+  /**
+   * Pre-computed regex for legacy component tokens
+   */
+  const legacyRegex = new RegExp(
+    `(${legacyComponentTokenList.map((t) => `${t}:`).join("|")})`,
+    "gm",
+  );
+
+  /**
+   * Process each file to find and record token usages
+   */
   files.forEach((fileName, index) => {
     const fileSrc = fs.readFileSync(fileName, "utf8");
+
+    /**
+     * Create a set of all words in the file to quickly check for potential matches
+     */
+    const fileWords = new Set(fileSrc.match(/[a-zA-Z0-9_@$-]+/g) || []);
+
+    let lineStarts: number[] | undefined;
+
+    /**
+     * Gets line-start positions for the file, caching the result.
+     * We only calculate this if we actually find a token match, saving processing time.
+     */
+    const getLineStartsLazy = () => {
+      if (!lineStarts) {
+        lineStarts = getLineStarts(fileSrc);
+      }
+      return lineStarts;
+    };
 
     /**
      * We first parse trough all legacy tokens (--a-) prefixed tokens
      */
     for (const [legacyToken, config] of Object.entries(legacyTokenConfig)) {
-      if (!getTokenRegex(legacyToken, "css").test(fileSrc)) {
+      const terms = legacySearchTerms.get(legacyToken);
+
+      /**
+       * Optimization: Check if any of the search terms exist in the file words set
+       * before running expensive regex operations.
+       */
+      let found = false;
+      if (terms) {
+        for (const term of terms) {
+          if (fileWords.has(term)) {
+            found = true;
+            break;
+          }
+        }
+      }
+      if (!found) {
         continue;
       }
 
@@ -49,7 +103,10 @@ function getStatus(
         let match: RegExpExecArray | null = regex.exec(fileSrc);
 
         while (match) {
-          const { row, column } = getWordPositionInFile(fileSrc, match.index);
+          const { row, column } = getCharacterPositionInFile(
+            match.index,
+            getLineStartsLazy(),
+          );
 
           StatusStore.add({
             isLegacy: true,
@@ -70,31 +127,52 @@ function getStatus(
       }
     }
 
-    const legacyRegex = new RegExp(
-      `(${legacyComponentTokenList.map((t) => `${t}:`).join("|")})`,
-      "gm",
-    );
+    let hasLegacyComponentToken = false;
+    for (const token of legacyComponentTokensSet) {
+      if (fileWords.has(token)) {
+        hasLegacyComponentToken = true;
+        break;
+      }
+    }
 
-    let legacyMatch: RegExpExecArray | null = legacyRegex.exec(fileSrc);
+    if (hasLegacyComponentToken) {
+      legacyRegex.lastIndex = 0;
+      let legacyMatch: RegExpExecArray | null = legacyRegex.exec(fileSrc);
 
-    while (legacyMatch !== null) {
-      const { row, column } = getWordPositionInFile(fileSrc, legacyMatch.index);
+      while (legacyMatch !== null) {
+        const { row, column } = getCharacterPositionInFile(
+          legacyMatch.index,
+          getLineStartsLazy(),
+        );
 
-      StatusStore.add({
-        isLegacy: true,
-        type: "component",
-        columnNumber: column,
-        lineNumber: row,
-        canAutoMigrate: false,
-        fileName,
-        name: legacyMatch[0],
-      });
+        StatusStore.add({
+          isLegacy: true,
+          type: "component",
+          columnNumber: column,
+          lineNumber: row,
+          canAutoMigrate: false,
+          fileName,
+          name: legacyMatch[0],
+        });
 
-      legacyMatch = legacyRegex.exec(fileSrc);
+        legacyMatch = legacyRegex.exec(fileSrc);
+      }
     }
 
     for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
-      if (!getTokenRegex(newTokenName, "css").test(fileSrc)) {
+      const terms = darksideSearchTerms.get(newTokenName);
+
+      /* Optimization: Check if any of the search terms exist in the file words set */
+      let found = false;
+      if (terms) {
+        for (const term of terms) {
+          if (fileWords.has(term)) {
+            found = true;
+            break;
+          }
+        }
+      }
+      if (!found) {
         continue;
       }
 
@@ -105,7 +183,10 @@ function getStatus(
         let match: RegExpExecArray | null = regex.exec(fileSrc);
 
         while (match) {
-          const { row, column } = getWordPositionInFile(fileSrc, match.index);
+          const { row, column } = getCharacterPositionInFile(
+            match.index,
+            getLineStartsLazy(),
+          );
 
           StatusStore.add({
             isLegacy: false,
@@ -140,26 +221,79 @@ function getStatus(
   return StatusStore;
 }
 
-function getWordPositionInFile(
-  fileContent: string,
-  index: number,
-): { row: number; column: number } {
-  const lines = fileContent.split("\n");
-  let lineNumber = 1;
-  let charCount = 0;
+function getLegacySearchTerms() {
+  const legacySearchTerms = new Map<string, Set<string>>();
+  for (const [legacyToken, config] of Object.entries(legacyTokenConfig)) {
+    const terms = new Set<string>();
+    const tokenName = `--a-${legacyToken}`;
+    terms.add(tokenName);
+    terms.add(translateToken(tokenName, "scss"));
+    terms.add(translateToken(tokenName, "less"));
+    terms.add(translateToken(tokenName, "js"));
 
-  for (let i = 0; i < lines.length; i++) {
-    const lineLength = lines[i].length + 1; // +1 to account for the newline character that was removed by split
-
-    if (charCount + lineLength > index) {
-      return { row: lineNumber, column: index - charCount + 1 };
+    if (config.twOld) {
+      config.twOld.split(",").forEach((t) => terms.add(t.trim()));
     }
-
-    charCount += lineLength;
-    lineNumber++;
+    legacySearchTerms.set(legacyToken, terms);
   }
-
-  return { row: lineNumber, column: 0 }; // Should not reach here if the index is within the file content range
+  return legacySearchTerms;
 }
 
-export { getStatus };
+function getDarksideSearchTerms() {
+  const darksideSearchTerms = new Map<string, Set<string>>();
+  for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
+    const terms = new Set<string>();
+    const tokenName = `--ax-${newTokenName}`;
+    terms.add(tokenName);
+    terms.add(translateToken(tokenName, "scss"));
+    terms.add(translateToken(tokenName, "less"));
+    terms.add(translateToken(newTokenName, "js"));
+    terms.add(newTokenName);
+
+    if (config.tw) {
+      config.tw.split(",").forEach((t) => terms.add(t.trim()));
+    }
+    darksideSearchTerms.set(newTokenName, terms);
+  }
+  return darksideSearchTerms;
+}
+
+/**
+ * Given the content of a file, returns an array of line start positions.
+ */
+function getLineStarts(content: string): number[] {
+  const starts = [0];
+  let lineIndex = content.indexOf("\n", 0);
+  while (lineIndex !== -1) {
+    starts.push(lineIndex + 1);
+    lineIndex = content.indexOf("\n", lineIndex + 1);
+  }
+  return starts;
+}
+
+/**
+ * Given a character index and an array of line start positions,
+ * returns the corresponding row and column numbers.
+ */
+function getCharacterPositionInFile(
+  index: number,
+  lineStarts: number[],
+): { row: number; column: number } {
+  let low = 0;
+  let high = lineStarts.length - 1;
+  let lineIndex = 0;
+
+  while (low <= high) {
+    const mid = (low + high) >>> 1;
+    if (lineStarts[mid] <= index) {
+      lineIndex = mid;
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+
+  return { row: lineIndex + 1, column: index - lineStarts[lineIndex] + 1 };
+}
+
+export { getStatus, getCharacterPositionInFile, getLineStarts };
