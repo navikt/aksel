@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
+import { Dialog } from "@navikt/ds-react";
 
 type MobileNavContextT = {
   open: boolean;
@@ -24,7 +25,9 @@ function MobileNavProvider({ children }: { children: React.ReactNode }) {
         },
       }}
     >
-      {children}
+      <Dialog open={open} onOpenChange={(nextOpen) => setOpen(nextOpen)}>
+        {children}
+      </Dialog>
     </MobileNavContext.Provider>
   );
 }

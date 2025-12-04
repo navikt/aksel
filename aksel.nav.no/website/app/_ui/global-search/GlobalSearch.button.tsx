@@ -1,49 +1,36 @@
 "use client";
 
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Button, Detail, Dialog, HStack, Hide, Show } from "@navikt/ds-react";
+import { Bleed, Button, Detail, Dialog, HStack, Show } from "@navikt/ds-react";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import styles from "./GlobalSearch.module.css";
 
 function GlobalSearchButton() {
-  const renderButton = (showChildContent: boolean) => (
+  return (
     <Dialog.Trigger>
-      <Button
-        variant="secondary-neutral"
-        aria-keyshortcuts="Control+k"
-        icon={
-          <MagnifyingGlassIcon
-            className={styles.searchButtonIcon}
-            aria-label="Åpne søk"
-            aria-hidden={showChildContent}
-          />
-        }
-        iconPosition="left"
-      >
-        {showChildContent && (
-          <HStack gap="space-8" as="span">
-            Søk
-            <HStack gap="space-2" asChild aria-hidden>
-              <Detail as="span">
-                <Kbd>Ctrl</Kbd>
-                <Kbd>k</Kbd>
-              </Detail>
-            </HStack>
+      <Button variant="secondary-neutral" aria-keyshortcuts="Control+k">
+        <Bleed asChild marginInline={{ xs: "space-8", md: "space-8 0" }}>
+          <HStack gap="space-6" align="center" as="span">
+            <MagnifyingGlassIcon
+              className={styles.searchButtonIcon}
+              aria-label="Åpne søk"
+              fontSize="1.5rem"
+            />
+            <Show above="md" asChild>
+              <HStack gap="space-8" as="span" aria-hidden>
+                Søk
+                <HStack gap="space-2" asChild>
+                  <Detail as="span">
+                    <Kbd>Ctrl</Kbd>
+                    <Kbd>k</Kbd>
+                  </Detail>
+                </HStack>
+              </HStack>
+            </Show>
           </HStack>
-        )}
+        </Bleed>
       </Button>
     </Dialog.Trigger>
-  );
-
-  return (
-    <>
-      <Show above="md" asChild>
-        {renderButton(true)}
-      </Show>
-      <Hide above="md" asChild>
-        {renderButton(false)}
-      </Hide>
-    </>
   );
 }
 
