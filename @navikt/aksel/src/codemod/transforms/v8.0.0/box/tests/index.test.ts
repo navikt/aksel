@@ -10,6 +10,7 @@ const fixtures = [
   "box-radius",
   "box-simple",
   "expression-container",
+  "real-examples",
 ];
 
 for (const fixture of fixtures) {

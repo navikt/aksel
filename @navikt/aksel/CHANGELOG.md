@@ -1,5 +1,21 @@
 # @navikt/aksel
 
+## 7.35.1
+
+### Patch Changes
+
+- CLI: Update v8-box migration to properly handle background/border-prefixing and nesting. ([#4363](https://github.com/navikt/aksel/pull/4363))
+
+- CLI: Improvements to v8-tokens codemod. ([#4341](https://github.com/navikt/aksel/pull/4341))
+
+- CLI: Allow 'v8-tokens' codemod to run with options. ([`5a09f88`](https://github.com/navikt/aksel/commit/5a09f88ea2223327b969572dbe700858c9e71e0c))
+
+- CLI: Engine requirements set to node >= v20. ([#4372](https://github.com/navikt/aksel/pull/4372))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.35.1
+  - @navikt/ds-tokens@7.35.1
+
 ## 7.35.0
 
 ### Minor Changes

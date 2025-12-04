@@ -5,4 +5,6 @@
   @apply md:bg-surface-subtle text-red-500 lg:via-surface-transparent z-tooltip;
   @apply md:bg-surface-subtle! text-red-500! lg:via-surface-transparent z-tooltip!;
   @apply group:bg-red-500;
+  @apply !bg-surface-subtle hover:focus:bg-surface-subtle;
+  @apply data-[state=open]:bg-surface-subtle aria-expanded:bg-surface-subtle;
 }

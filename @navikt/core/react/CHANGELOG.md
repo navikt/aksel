@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.35.1
+
+### Patch Changes
+
+- Select: Remove the htmlSize prop ([#4347](https://github.com/navikt/aksel/pull/4347))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.35.1
+  - @navikt/aksel-icons@7.35.1
+
 ## 7.35.0
 
 ### Patch Changes

@@ -42,6 +42,14 @@ for (const fixture of ["css-complete"]) {
   });
 }
 
+for (const fixture of ["css-edge-cases"]) {
+  check(__dirname, {
+    fixture,
+    migration: "darkside-tokens-css",
+    extension: "css",
+  });
+}
+
 /* Tailwind transforms */
 for (const fixture of ["tw-complete"]) {
   check(__dirname, {

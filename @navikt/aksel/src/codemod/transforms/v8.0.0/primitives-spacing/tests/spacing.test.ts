@@ -8,6 +8,7 @@ const fixtures = [
   "subComponent",
   "idempotent",
   "directImport",
+  "composed",
 ];
 
 for (const fixture of fixtures) {
