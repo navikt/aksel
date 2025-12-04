@@ -1,6 +1,13 @@
 import { getFrameworkRegexes } from "./token-regex";
 import { generateBgTwTags, generateRoundedTwTags } from "./token.utils";
 
+type ColorObjType = {
+  ref: string;
+  raw: `rgba(${string})`;
+  replacement: string;
+  comment?: string;
+};
+
 const colors = {
   "purple-900": {
     ref: "",
@@ -1180,30 +1187,36 @@ const colors = {
     raw: "rgba(255, 255, 255, 0)",
     replacement: "",
   },
+} satisfies {
+  [key: string]: ColorObjType;
 };
 
-const colorWithTailwindConversion = Object.entries(colors).reduce(
-  (acc, [key, value]) => {
-    const twOld = generateBgTwTags(key);
-    const twNew =
-      value.replacement.length > 0
-        ? generateBgTwTags(value.replacement, true)
-        : undefined;
+type ColorObjWithTwType = ColorObjType & {
+  twOld: string;
+  twNew: string;
+};
 
-    acc[key] = {
-      ...value,
-      twOld,
-      twNew,
-    };
+const colorWithTailwindConversion = Object.entries(colors).reduce<
+  Record<string, ColorObjWithTwType>
+>((acc, [key, value]) => {
+  const twOld = generateBgTwTags(key);
+  const twNew =
+    value.replacement.length > 0
+      ? generateBgTwTags(value.replacement, true)
+      : undefined;
 
-    return acc;
-  },
-  {},
-);
+  acc[key] = {
+    ...value,
+    twOld,
+    twNew,
+  };
+
+  return acc;
+}, {});
 
 type LegacyTokenConfig = {
   ref: string;
-  raw: string;
+  raw: `${string}rem` | `${string}px` | `${string} ${string}` | `${number}`; // Disallows empty string
   replacement: string;
   comment?: string;
   twOld?: string;
@@ -1690,9 +1703,9 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
   },
 };
 
-const legacyTokenConfig: Record<string, LegacyTokenConfig> = Object.entries(
-  tokensWithoutRegex,
-).reduce((acc, [key, value]) => {
+const legacyTokenConfig = Object.entries(tokensWithoutRegex).reduce<
+  Record<string, LegacyTokenConfig>
+>((acc, [key, value]) => {
   acc[key] = {
     ...value,
     regexes: getFrameworkRegexes({
