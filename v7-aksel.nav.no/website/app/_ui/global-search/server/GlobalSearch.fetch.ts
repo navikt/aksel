@@ -2,7 +2,7 @@ import groupBy from "lodash/groupBy";
 import NodeCache from "node-cache";
 import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
-import { client } from "@/app/_sanity/client";
+import { sanityLocalFetch } from "@/app/_sanity/live";
 import { GLOBAL_SEARCH_QUERY_ALL } from "@/app/_sanity/queries";
 import { SearchPageT } from "./GlobalSearch.config";
 
@@ -24,11 +24,9 @@ async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
     return cachedData;
   }
 
-  const allArticles = await client.fetch<SearchPageT[]>(
-    GLOBAL_SEARCH_QUERY_ALL,
-    {},
-    { useCdn: false },
-  );
+  const { data: allArticles } = await sanityLocalFetch({
+    query: GLOBAL_SEARCH_QUERY_ALL,
+  });
 
   if (!allArticles) {
     console.error("Failed to fetch search index");

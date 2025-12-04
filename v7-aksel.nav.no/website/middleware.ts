@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { sanityClient } from "@/sanity/client.server";
+import { sanityLocalFetch } from "@/app/_sanity/live";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
 const ignoredStaticPaths = [
@@ -45,16 +45,16 @@ export async function middleware(req: NextRequest) {
   }
 
   try {
-    const redirect = await sanityClient.fetch(
-      `
+    const { data: redirect } = await sanityLocalFetch({
+      query: `
   *[_type == 'redirect' && source == $source][0] {
     _id,
     destination,
     redirects
   }
 `,
-      { source: decodeURIComponent(req.nextUrl.pathname) },
-    );
+      params: { source: decodeURIComponent(req.nextUrl.pathname) },
+    });
 
     if (redirect) {
       if (redirect.destination.startsWith("http")) {
