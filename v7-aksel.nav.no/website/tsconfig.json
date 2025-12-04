@@ -15,12 +15,7 @@
     "jsx": "preserve",
     "noImplicitAny": false,
     "incremental": true,
-    "types": [
-      "node",
-      "umami",
-      "@navikt/ds-react/types/theme",
-      "./app/theme.d.ts"
-    ],
+    "types": ["node", "@navikt/ds-react/types/theme", "./app/theme.d.ts"],
     "paths": {
       "@/sb-util": ["./.storybook/utils.tsx"],
       "@/types": ["./components/types/index.ts"],
