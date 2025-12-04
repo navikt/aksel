@@ -147,7 +147,7 @@ const nextConfig: NextConfig = {
     ],
     largePageDataBytes: 128 * 2000,
   },
-  serverExternalPackages: ["@navikt/next-logger", "next-logger", "pino"],
+  serverExternalPackages: ["@navikt/next-logger", "pino"],
   /* Hack to allow use of fs in server-component */
   webpack: (config) => {
     config.resolve.fallback = {
