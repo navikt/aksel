@@ -1,3 +1,6 @@
+/* eslint-disable vitest/no-conditional-expect */
+
+/* TODO: Fix eslint-error */
 import fastglob from "fast-glob";
 import { select, selectAll } from "hast-util-select";
 import { readFileSync } from "node:fs";
