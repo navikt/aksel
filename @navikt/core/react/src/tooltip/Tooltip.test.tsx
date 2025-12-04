@@ -76,16 +76,10 @@ describe("Tooltip", () => {
       </Tooltip>,
     );
 
-    /* TODO: Fix eslint error */
-    // eslint-disable-next-line testing-library/no-unnecessary-act
-    await act(async () => {
-      await user.hover(screen.getByRole("button"));
-      await new Promise((r) => setTimeout(r, 250));
-      expect(screen.queryByRole("tooltip")).toBeNull();
-      await new Promise((r) => setTimeout(r, 600));
-    });
-
-    expect(screen.getByRole("tooltip")).toBeVisible();
+    await user.hover(screen.getByRole("button"));
+    await new Promise((r) => setTimeout(r, 250));
+    expect(screen.queryByRole("tooltip")).toBeNull();
+    expect(await screen.findByRole("tooltip")).toBeVisible();
   });
 
   test("outsideClick", async () => {
