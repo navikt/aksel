@@ -37,7 +37,7 @@ jobs:
         shell: bash
 
       - name: Build Next.js website
-        run: cd v7-aksel.nav.no && yarn build
+        run: cd v7-aksel.nav.no/website && yarn build
         shell: bash
 
       - name: Get complete tag
