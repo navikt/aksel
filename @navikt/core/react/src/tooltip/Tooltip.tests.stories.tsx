@@ -39,7 +39,7 @@ export const OpenOnFocus: Story = {
 
     await button.focus();
     const tooltip = canvas.getByRole("tooltip");
-    await waitFor(async () => expect(tooltip).toBeVisible());
+    await waitFor(() => expect(tooltip).toBeVisible());
   },
 };
 
@@ -59,10 +59,10 @@ export const CloseOnFocusLoss: Story = {
 
     await button.focus();
     const tooltip = canvas.getByRole("tooltip");
-    await waitFor(async () => expect(tooltip).toBeVisible());
+    await waitFor(() => expect(tooltip).toBeVisible());
 
     await userEvent.tab();
-    await waitFor(async () => expect(tooltip).not.toBeVisible());
+    await waitFor(() => expect(tooltip).not.toBeVisible());
   },
 };
 
@@ -76,10 +76,10 @@ export const HideOnOutsideClick: Story = {
     const canvas = within(canvasElement);
 
     const tooltip = canvas.getByRole("tooltip");
-    await waitFor(async () => expect(tooltip).toBeVisible());
+    await waitFor(() => expect(tooltip).toBeVisible());
 
     await userEvent.click(document.body);
-    await waitFor(async () => expect(tooltip).not.toBeVisible());
+    await waitFor(() => expect(tooltip).not.toBeVisible());
   },
 };
 
@@ -93,10 +93,10 @@ export const HideOnEscape: Story = {
     const canvas = within(canvasElement);
 
     const tooltip = canvas.getByRole("tooltip");
-    await waitFor(async () => expect(tooltip).toBeVisible());
+    await waitFor(() => expect(tooltip).toBeVisible());
 
     await userEvent.keyboard("{Escape}");
-    await waitFor(async () => expect(tooltip).not.toBeVisible());
+    await waitFor(() => expect(tooltip).not.toBeVisible());
   },
 };
 
@@ -110,10 +110,10 @@ export const KeepOpenOnTooltipClick: Story = {
     const canvas = within(canvasElement);
 
     const tooltip = canvas.getByRole("tooltip");
-    await waitFor(async () => expect(tooltip).toBeVisible());
+    await waitFor(() => expect(tooltip).toBeVisible());
 
     await userEvent.click(tooltip);
-    await waitFor(async () => expect(tooltip).toBeVisible());
+    await waitFor(() => expect(tooltip).toBeVisible());
   },
 };
 
@@ -131,12 +131,11 @@ export const OpenDelay: Story = {
     await userEvent.hover(button);
 
     await waitFor(
-      async () => expect(canvas.queryByRole("tooltip")).not.toBeInTheDocument(),
+      () => expect(canvas.queryByRole("tooltip")).not.toBeInTheDocument(),
       { timeout: 250 },
     );
-    await waitFor(
-      async () => expect(canvas.getByRole("tooltip")).toBeVisible(),
-      { timeout: 500 },
-    );
+    await waitFor(() => expect(canvas.getByRole("tooltip")).toBeVisible(), {
+      timeout: 500,
+    });
   },
 };
