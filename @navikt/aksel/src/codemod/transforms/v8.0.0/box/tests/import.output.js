@@ -8,7 +8,7 @@ import { Box as AkselBox } from "@navikt/ds-react"
 
 export const MyComponent = () => {
 	return (<>
-		<AkselBox background="bg-neutral-soft" borderColor="border-meta-purple">
+		<AkselBox background="neutral-soft" borderColor="meta-purple">
 			simple rename of import
 		</AkselBox>
 		<AkselBox shadow="medium">

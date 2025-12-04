@@ -97,7 +97,7 @@ function findProps(input: {
 }) {
   const { j, path, name } = input;
 
-  return j(path).find(j.JSXAttribute, {
+  return j(path.get("openingElement")).find(j.JSXAttribute, {
     name: {
       name,
     },

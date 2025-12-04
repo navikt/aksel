@@ -177,8 +177,7 @@ describe("Render combobox", () => {
       expect(onChange).toHaveBeenNthCalledWith(4, "Syke");
       expect(onChange).toHaveBeenNthCalledWith(5, "Sykepenger [SYK]");
       expect(onChange).toHaveBeenCalledWith("");
-      expect(onToggleSelected).toHaveBeenCalledOnce();
-      expect(onToggleSelected).toHaveBeenCalledWith(
+      expect(onToggleSelected).toHaveBeenCalledExactlyOnceWith(
         "Sykepenger [SYK]",
         true,
         false,

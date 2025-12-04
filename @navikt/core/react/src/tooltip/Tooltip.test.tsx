@@ -76,6 +76,8 @@ describe("Tooltip", () => {
       </Tooltip>,
     );
 
+    /* TODO: Fix eslint error */
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
       await user.hover(screen.getByRole("button"));
       await new Promise((r) => setTimeout(r, 250));

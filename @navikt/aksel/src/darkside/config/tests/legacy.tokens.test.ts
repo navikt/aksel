@@ -1,3 +1,6 @@
+/* eslint-disable vitest/no-conditional-expect */
+
+/* TODO: Fix eslint-error */
 import { describe, expect, test } from "vitest";
 import * as jsTokens from "@navikt/ds-tokens/dist/tokens";
 import { translateToken } from "../../../codemod/utils/translate-token";
