@@ -4,3 +4,4 @@ tsconfig.tsbuildinfo
 ___temp
 next-env.d.ts
 !react-css.d.ts
+!theme.d.ts
