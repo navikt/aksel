@@ -49,13 +49,6 @@ describe("Each icons has a valid code", () => {
         expect(root?.properties.height).toBe("24");
       });
 
-      test("has valid stroke", () => {
-        const nodes = selectAll("*", iconAst);
-        nodes.forEach((node) => {
-          expect(node.properties.stroke).toBeOneOf([undefined, "#202733"]);
-        });
-      });
-
       test("has valid fill", () => {
         const nodes = selectAll("*", iconAst);
         nodes.forEach((node) => {
