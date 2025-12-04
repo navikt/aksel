@@ -87,7 +87,7 @@
     "@babel/traverse": "^7.27.4",
     "@next/bundle-analyzer": "15.4.5",
     "@next/eslint-plugin-next": "15.4.5",
-    "@playwright/test": "1.56.1",
+    "@playwright/test": "^1.57.0",
     "@portabletext/block-tools": "^1.1.21",
     "@sanity/schema": "4.14.1",
     "@types/jscodeshift": "^0.11.11",
