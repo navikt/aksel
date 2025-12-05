@@ -211,6 +211,7 @@ const DialogPopupInternal = forwardRef<
               ref={mergedRefs}
               className={cn("navds-dialog__popup", className)}
               role={role}
+              aria-modal="true"
               {...createTransitionStatusAttribute(transitionStatus)}
               data-position={position}
               data-size={size}
