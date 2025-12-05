@@ -40,6 +40,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
       size,
       "aria-label": _ariaLabel,
       "aria-labelledby": _ariaLabelledBy,
+      title,
       ...rest
     },
     ref,
@@ -49,6 +50,12 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
     const { cn } = useRenameCSS();
 
     const listSize = size ?? contextSize;
+
+    if (title) {
+      console.error(
+        "Aksel | <List />: The `title` prop is deprecated and no longer has any effect. Use a <Heading> component instead.",
+      );
+    }
 
     return (
       <ListContext.Provider
