@@ -1,4 +1,4 @@
-import * as tokens from "@navikt/ds-tokens/darkside-js";
+import * as tokens from "@navikt/ds-tokens/js";
 
 export const Ikon = ({ darkmode = false }: { darkmode?: boolean }) => {
   const lightColor = darkmode ? tokens.Neutral400A : tokens.BrandMagenta400A;

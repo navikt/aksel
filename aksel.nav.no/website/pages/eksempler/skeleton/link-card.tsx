@@ -7,12 +7,9 @@ const Example = () => {
     <Box
       paddingBlock="space-16"
       paddingInline="space-20"
-      borderRadius="xlarge"
+      borderRadius="12"
       borderWidth="1"
-      style={{
-        border:
-          "1px solid var(--a-border-subtle, var(--ax-border-neutral-subtleA))",
-      }}
+      borderColor="neutral-subtleA"
     >
       <HStack gap="space-16">
         <Skeleton variant="rounded" width={50} height={50} />

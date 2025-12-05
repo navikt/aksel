@@ -1,12 +1,12 @@
-import docs from "@navikt/ds-tokens/docs.json";
 import {
   WebsiteTable,
   WebsiteTableRow,
 } from "@/app/_ui/website-table/WebsiteTable";
+import { LegacyDocs } from "../../../legacy-docs";
 import { sanitizeName } from "../utilities";
 
 export const FontView = ({ cat }: { cat: string }) => {
-  const fonts = docs[cat];
+  const fonts = LegacyDocs[cat];
 
   return (
     <WebsiteTable

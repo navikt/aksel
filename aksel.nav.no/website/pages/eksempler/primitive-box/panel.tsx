@@ -4,10 +4,10 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <Box
-      background="surface-default"
+      background="default"
       padding="space-24"
-      borderRadius="xlarge"
-      borderColor="border-subtle"
+      borderRadius="12"
+      borderColor="neutral-subtle"
       borderWidth="1"
     >
       <BodyLong spacing>
@@ -17,7 +17,7 @@ const Example = () => {
       <BodyLong spacing>
         Nav kan også gi deg råd og veiledning i situasjonen din.
       </BodyLong>
-      <BodyLong spacing>
+      <BodyLong>
         Hvis du ikke får dagpenger kan du ha rett til tiltakspenger. Dette er en
         dagsats du får de dagene du deltar på et arbeidsmarkedstiltak. Et
         arbeidsmarkedstiltak kan for eksempel være kurs, jobbklubb eller

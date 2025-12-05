@@ -142,7 +142,7 @@ export const DividerDemo: Story = {
 export const ResponsiveDirection: Story = {
   render: () => (
     <Box
-      background="surface-alt-3-subtle"
+      background="info-soft"
       padding="12"
       style={{ minWidth: "20rem", aspectRatio: "1/1" }}
     >
@@ -151,10 +151,10 @@ export const ResponsiveDirection: Story = {
         gap="2"
         direction={{ xs: "column", lg: "row" }}
       >
-        <Box padding="6" background="surface-action" />
-        <Box padding="2" background="surface-action" />
-        <Box padding="6" background="surface-action" />
-        <Box padding="4" background="surface-action" />
+        <Box padding="6" background="accent-strong" />
+        <Box padding="2" background="accent-strong" />
+        <Box padding="6" background="accent-strong" />
+        <Box padding="4" background="accent-strong" />
       </Stack>
     </Box>
   ),

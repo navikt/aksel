@@ -1,7 +1,7 @@
 @layer tw-base, framework, tw-components, tw-utilities;
 
 @import url("tailwindcss/base") layer(tw-base);
-@import url("@navikt/ds-css/darkside") layer(framework);
+@import url("@navikt/ds-css") layer(framework);
 @import url("tailwindcss/components") layer(tw-components);
 @import url("tailwindcss/utilities") layer(tw-utilities);
 

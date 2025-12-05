@@ -1,7 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
-import { OverridableComponent } from "../../util";
-import { BackgroundColorToken } from "../utilities/types";
+import { useRenameCSS } from "../../theme/Theme";
+import { OverridableComponent, omit } from "../../util";
 import { PageBlock } from "./parts/PageBlock";
 
 export interface PageProps extends React.HTMLAttributes<HTMLElement> {
@@ -10,13 +9,6 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * @default "div"
    */
   as?: "div" | "body";
-  /**
-   * Background color.
-   * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#753d1cf4d1d6).
-   * @default "bg-default"
-   * @deprecated Use `<Box asChild background="...">` wrapped around `<Page>`.
-   */
-  background?: BackgroundColorToken;
   /**
    * Allows better positioning of footer
    */
@@ -30,6 +22,10 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * @default "end"
    */
   contentBlockPadding?: "end" | "none";
+  /**
+   * @deprecated Deprecated in v8 and no longer has any effect. Use `<Box asChild background="...">` wrapped around `<Page>`.
+   */
+  background?: string;
 }
 
 interface PageComponentType
@@ -43,42 +39,23 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       {
         as: Component = "div",
         className,
-        style: _style,
         footer,
         children,
         footerPosition,
-        background,
         contentBlockPadding = "end",
         ...rest
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal(false);
       const { cn } = useRenameCSS();
-
-      if (
-        process.env.NODE_ENV !== "production" &&
-        themeContext?.isDarkside &&
-        background
-      ) {
-        console.warn(
-          `Prop \`background\` is deprecated and cannot be used with theme-support. Instead wrap component with \`<Box asChild background>\``,
-        );
-      }
-
-      const style: React.CSSProperties = {
-        ..._style,
-        "--__ac-page-background": `var(--a-${background ?? "bg-default"})`,
-      };
 
       const belowFold = footerPosition === "belowFold";
 
       return (
         <Component
-          {...rest}
+          {...omit(rest, ["background"])}
           className={cn("navds-page", className)}
           ref={ref}
-          style={style}
         >
           <div
             className={cn({

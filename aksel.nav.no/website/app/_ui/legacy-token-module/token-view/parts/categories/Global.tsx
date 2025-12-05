@@ -1,11 +1,11 @@
 import { BodyShort, CopyButton } from "@navikt/ds-react";
-import docs from "@navikt/ds-tokens/docs.json";
+import { LegacyDocs } from "../../../legacy-docs";
 import styles from "../../TokenView.module.css";
 import { Grid } from "../Grid";
 import { getColorString, sanitizeName } from "../utilities";
 
 export const GlobalView = ({ cat }: { cat: string }) => {
-  const colors: { name: string; value: string }[] = docs[cat];
+  const colors: { name: string; value: string }[] = LegacyDocs[cat];
   return (
     <Grid>
       {colors.map((x) => {

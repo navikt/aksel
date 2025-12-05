@@ -12,20 +12,15 @@
   "license": "MIT",
   "files": [
     "/dist",
-    "/src",
     "types.ts",
     "internal-types.ts",
-    "docs.json",
-    "token_docs.js",
-    "!/dist/darkside",
-    "/dist/darkside/tokens*"
+    "token_docs.js"
   ],
   "scripts": {
-    "build": "tsx ./config/build.ts > /dev/null && yarn build:darkside && tsx ./config/version-tag.ts",
-    "build:darkside": "tsx ./darkside && yarn build:figma-config && yarn build:plugin",
-    "build:figma-config": "tsx ./darkside/figma",
-    "build:plugin-dev": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"development\\\" --outfile='darkside/figma/plugin/plugin.js'",
-    "build:plugin": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile='darkside/figma/plugin/plugin.js'",
+    "build": "tsx ./src && yarn build:figma-config && yarn build:plugin && tsx ./config/version-tag.ts",
+    "build:figma-config": "tsx ./src/figma",
+    "build:plugin-dev": "esbuild src/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"development\\\" --outfile='src/figma/plugin/plugin.js'",
+    "build:plugin": "esbuild src/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile='src/figma/plugin/plugin.js'",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -57,19 +52,18 @@
   "exports": {
     ".": "./dist/tokens.css",
     "./types": "./types.ts",
-    "./docs.json": "./docs.json",
     "./token_docs": "./token_docs.js",
     "./dist/*": {
       "types": "./dist/tokens.d.ts",
       "default": "./dist/*"
     },
-    "./darkside-css": "./dist/darkside/tokens.css",
-    "./darkside-js": {
-      "types": "./dist/darkside/tokens.d.ts",
-      "import": "./dist/darkside/tokens.js",
-      "require": "./dist/darkside/tokens-cjs.js"
+    "./css": "./dist/tokens.css",
+    "./js": {
+      "types": "./dist/tokens.d.ts",
+      "import": "./dist/tokens.js",
+      "require": "./dist/tokens-cjs.js"
     },
-    "./darkside-scss": "./dist/darkside/tokens.scss",
-    "./darkside-less": "./dist/darkside/tokens.less"
+    "./scss": "./dist/tokens.scss",
+    "./less": "./dist/tokens.less"
   }
 }

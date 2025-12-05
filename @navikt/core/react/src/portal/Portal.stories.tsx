@@ -12,7 +12,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Box background="surface-neutral-subtle">
+    <Box background="neutral-soft">
       <h1>In regular DOM tree</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus

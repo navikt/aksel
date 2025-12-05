@@ -17,37 +17,37 @@ export const Default = {
   render: () => (
     <>
       <VStack gap="2">
-        <Box background="surface-alt-1-subtle" padding="5">
-          <Box background="surface-alt-2-subtle" padding="5">
+        <Box background="meta-purple-soft" padding="5">
+          <Box background="meta-lime-soft" padding="5">
             <Bleed marginInline="10 0">
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>marginInline=&quot;10 0&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding="5">
-          <Box background="surface-alt-2-subtle" padding="5">
+        <Box background="meta-purple-soft" padding="5">
+          <Box background="meta-lime-soft" padding="5">
             <Bleed marginInline="0 10">
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>marginInline=&quot;0 10&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding="5">
-          <Box background="surface-alt-2-subtle" padding="5">
+        <Box background="meta-purple-soft" padding="5">
+          <Box background="meta-lime-soft" padding="5">
             <Bleed marginBlock="10 0">
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>marginBlock=&quot;10 0&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding="5">
-          <Box background="surface-alt-2-subtle" padding="5">
+        <Box background="meta-purple-soft" padding="5">
+          <Box background="meta-lime-soft" padding="5">
             <Bleed marginBlock="0 10">
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>marginBlock=&quot;0 10&quot;</BodyLong>
               </Box>
             </Bleed>
@@ -62,37 +62,37 @@ export const AsChild = {
   render: () => (
     <>
       <VStack gap="2">
-        <Box background="surface-alt-1-subtle" padding="5">
-          <Box background="surface-alt-2-subtle" padding="5">
+        <Box background="meta-purple-soft" padding="5">
+          <Box background="meta-lime-soft" padding="5">
             <Bleed marginInline="10 0" asChild>
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>marginInline=&quot;10 0&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding="5">
-          <Box background="surface-alt-2-subtle" padding="5">
+        <Box background="meta-purple-soft" padding="5">
+          <Box background="meta-lime-soft" padding="5">
             <Bleed marginInline="0 10" asChild>
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>marginInline=&quot;0 10&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding="5">
-          <Box background="surface-alt-2-subtle" padding="5">
+        <Box background="meta-purple-soft" padding="5">
+          <Box background="meta-lime-soft" padding="5">
             <Bleed marginBlock="10 0" asChild>
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>marginBlock=&quot;10 0&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding="5">
-          <Box background="surface-alt-2-subtle" padding="5">
+        <Box background="meta-purple-soft" padding="5">
+          <Box background="meta-lime-soft" padding="5">
             <Bleed marginBlock="0 10" asChild>
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>marginBlock=&quot;0 10&quot;</BodyLong>
               </Box>
             </Bleed>
@@ -107,13 +107,10 @@ export const Breakpoints = {
   render: () => (
     <>
       <VStack gap="2">
-        <Box background="surface-alt-1-subtle" padding={{ xs: "5", md: "10" }}>
-          <Box
-            background="surface-alt-2-subtle"
-            padding={{ xs: "5", md: "10" }}
-          >
+        <Box background="meta-purple-soft" padding={{ xs: "5", md: "10" }}>
+          <Box background="meta-lime-soft" padding={{ xs: "5", md: "10" }}>
             <Bleed marginInline={{ xs: "10 0", md: "20 0" }}>
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>
                   {'marginInline={{ xs: "10 0", md: "20 0" }}'}
                 </BodyLong>
@@ -121,13 +118,10 @@ export const Breakpoints = {
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding={{ xs: "5", md: "10" }}>
-          <Box
-            background="surface-alt-2-subtle"
-            padding={{ xs: "5", md: "10" }}
-          >
+        <Box background="meta-purple-soft" padding={{ xs: "5", md: "10" }}>
+          <Box background="meta-lime-soft" padding={{ xs: "5", md: "10" }}>
             <Bleed marginInline={{ xs: "0 10", md: "0 20" }}>
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>
                   {'marginInline={{ xs: "0 10", md: "0 20" }}'}
                 </BodyLong>
@@ -135,13 +129,10 @@ export const Breakpoints = {
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding={{ xs: "5", md: "10" }}>
-          <Box
-            background="surface-alt-2-subtle"
-            padding={{ xs: "5", md: "10" }}
-          >
+        <Box background="meta-purple-soft" padding={{ xs: "5", md: "10" }}>
+          <Box background="meta-lime-soft" padding={{ xs: "5", md: "10" }}>
             <Bleed marginBlock={{ xs: "10 0", md: "20 0" }}>
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>
                   {'marginBlock={{ xs: "10 0", md: "20 0" }}'}
                 </BodyLong>
@@ -149,13 +140,10 @@ export const Breakpoints = {
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding={{ xs: "5", md: "10" }}>
-          <Box
-            background="surface-alt-2-subtle"
-            padding={{ xs: "5", md: "10" }}
-          >
+        <Box background="meta-purple-soft" padding={{ xs: "5", md: "10" }}>
+          <Box background="meta-lime-soft" padding={{ xs: "5", md: "10" }}>
             <Bleed marginBlock={{ xs: "0 10", md: "0 20" }}>
-              <Box padding="3" background="surface-success-subtle">
+              <Box padding="3" background="success-soft">
                 <BodyLong>
                   {'marginBlock={{ xs: "0 10", md: "0 20" }}'}
                 </BodyLong>
@@ -189,14 +177,14 @@ export const Px = {
         <HStack className="" gap="32">
           <Box
             className="circle scale"
-            background="surface-success-subtle"
+            background="success-soft"
             borderRadius="full"
           >
             L
           </Box>
           <Box
             className="circle scale"
-            background="surface-success-subtle"
+            background="success-soft"
             borderRadius="full"
           >
             <Bleed marginInline="0 px">L</Bleed>
@@ -221,53 +209,37 @@ export const Full = {
         `}
       </style>
       <VStack gap="2" align="center">
-        <Box
-          className="maxWidth"
-          background="surface-alt-1-subtle"
-          padding="10"
-        >
-          <Box background="surface-alt-2-subtle" padding="10">
+        <Box className="maxWidth" background="meta-purple-soft" padding="10">
+          <Box background="meta-lime-soft" padding="10">
             <Bleed marginInline="full">
-              <Box background="surface-success-subtle">
+              <Box background="success-soft">
                 <BodyLong>marginInline=&quot;full&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box
-          className="maxWidth"
-          background="surface-alt-1-subtle"
-          padding="10"
-        >
-          <Box background="surface-alt-2-subtle" padding="10">
+        <Box className="maxWidth" background="meta-purple-soft" padding="10">
+          <Box background="meta-lime-soft" padding="10">
             <Bleed marginInline="full 0">
-              <Box background="surface-success-subtle">
+              <Box background="success-soft">
                 <BodyLong>marginInline=&quot;full 0&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box
-          className="maxWidth"
-          background="surface-alt-1-subtle"
-          padding="10"
-        >
-          <Box background="surface-alt-2-subtle" padding="10">
+        <Box className="maxWidth" background="meta-purple-soft" padding="10">
+          <Box background="meta-lime-soft" padding="10">
             <Bleed marginInline="0 full">
-              <Box background="surface-success-subtle">
+              <Box background="success-soft">
                 <BodyLong>marginInline=&quot;0 full&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box
-          className="maxWidth"
-          background="surface-alt-1-subtle"
-          padding="10"
-        >
-          <Box background="surface-alt-2-subtle" padding="10">
+        <Box className="maxWidth" background="meta-purple-soft" padding="10">
+          <Box background="meta-lime-soft" padding="10">
             <Bleed marginInline="full" reflectivePadding asChild>
-              <Box background="surface-success-subtle">
+              <Box background="success-soft">
                 <BodyLong>full + reflectivePadding</BodyLong>
               </Box>
             </Bleed>
@@ -284,7 +256,7 @@ export const ReflectivePadding = {
       <style>
         {`
       .navds-bleed {
-        background-color: var(--a-surface-success-subtle);
+        background-color: var(--a-success-soft);
         width: fit-content;
       }
       `}
@@ -292,22 +264,22 @@ export const ReflectivePadding = {
       <HStack gap="3">
         <VStack gap="2">
           <p>CSS string</p>
-          <Box background="surface-alt-1-subtle" padding="5">
-            <Box background="surface-alt-2-subtle" padding="5">
+          <Box background="meta-purple-soft" padding="5">
+            <Box background="meta-lime-soft" padding="5">
               <Bleed asChild>
                 <BodyLong>before Bleed</BodyLong>
               </Bleed>
             </Box>
           </Box>
-          <Box background="surface-alt-1-subtle" padding="5">
-            <Box background="surface-alt-2-subtle" padding="5">
+          <Box background="meta-purple-soft" padding="5">
+            <Box background="meta-lime-soft" padding="5">
               <Bleed marginInline="10 0" asChild>
                 <BodyLong>without reflectivePadding</BodyLong>
               </Bleed>
             </Box>
           </Box>
-          <Box background="surface-alt-1-subtle" padding="5">
-            <Box background="surface-alt-2-subtle" padding="5">
+          <Box background="meta-purple-soft" padding="5">
+            <Box background="meta-lime-soft" padding="5">
               <Bleed marginInline="10 0" reflectivePadding asChild>
                 <BodyLong>with reflectivePadding</BodyLong>
               </Bleed>
@@ -318,11 +290,11 @@ export const ReflectivePadding = {
         <VStack gap="2">
           <p>breakpoints</p>
           <Box
-            background="surface-alt-1-subtle"
+            background="meta-purple-soft"
             padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
           >
             <Box
-              background="surface-alt-2-subtle"
+              background="meta-lime-soft"
               padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
             >
               <Bleed asChild>
@@ -331,11 +303,11 @@ export const ReflectivePadding = {
             </Box>
           </Box>
           <Box
-            background="surface-alt-1-subtle"
+            background="meta-purple-soft"
             padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
           >
             <Box
-              background="surface-alt-2-subtle"
+              background="meta-lime-soft"
               padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
             >
               <Bleed
@@ -353,11 +325,11 @@ export const ReflectivePadding = {
             </Box>
           </Box>
           <Box
-            background="surface-alt-1-subtle"
+            background="meta-purple-soft"
             padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
           >
             <Box
-              background="surface-alt-2-subtle"
+              background="meta-lime-soft"
               padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
             >
               <Bleed

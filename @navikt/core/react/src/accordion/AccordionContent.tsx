@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { useRenameCSS } from "../theme/Theme";
 import { BodyLong } from "../typography";
 import { AccordionItemContext } from "./AccordionItem";
 
@@ -15,7 +15,6 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ children, className, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
 
-    const themeContext = useThemeInternal(false);
     const { cn } = useRenameCSS();
 
     if (context === null) {
@@ -41,11 +40,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
           !context.open || undefined
         } /* Added to fix bug with Radio component, where label text inside a span sometimes is ignored by screen readers after hiding/displaying the RadioGroup inside an Accordion */
       >
-        {themeContext?.isDarkside ? (
-          <div className={cn("navds-accordion__content-inner")}>{children}</div>
-        ) : (
-          children
-        )}
+        <div className={cn("navds-accordion__content-inner")}>{children}</div>
       </BodyLong>
     );
   },

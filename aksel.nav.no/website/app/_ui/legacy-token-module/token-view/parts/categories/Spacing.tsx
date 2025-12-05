@@ -1,11 +1,11 @@
-import docs from "@navikt/ds-tokens/docs.json";
 import {
   WebsiteTable,
   WebsiteTableRow,
 } from "@/app/_ui/website-table/WebsiteTable";
+import { LegacyDocs } from "../../../legacy-docs";
 
 export const SpacingView = ({ cat }: { cat: string }) => {
-  const spacings = docs[cat];
+  const spacings = LegacyDocs[cat];
 
   return (
     <WebsiteTable

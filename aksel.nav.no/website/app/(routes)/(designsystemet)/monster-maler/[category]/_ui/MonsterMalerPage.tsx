@@ -13,6 +13,7 @@ import {
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import styles from "@/app/_ui/portable-text/CustomPortableText.module.css";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
+import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import {
   WebsiteTable,
   WebsiteTableRow,
@@ -78,7 +79,11 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
                   tr={[
                     { text: log.date },
                     { text: log.version },
-                    { text: log.description },
+                    {
+                      text: (
+                        <MarkdownText>{log.description ?? ""}</MarkdownText>
+                      ),
+                    },
                   ]}
                 />
               ))}
