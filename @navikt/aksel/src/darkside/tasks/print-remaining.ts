@@ -1,3 +1,4 @@
+import chalk, { type ForegroundColorName } from "chalk";
 import clipboardy from "clipboardy";
 import Enquirer from "enquirer";
 import path from "node:path";
@@ -45,11 +46,6 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
 
   console.info("\n");
 
-  const log = (str: string, indent = 0) => {
-    const prefix = "  ".repeat(indent);
-    console.info(prefix + str);
-  };
-
   let jsonOutput: unknown;
 
   /**
@@ -85,7 +81,7 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
 
     sortedFiles.forEach(([fileName, tokens]) => {
       const fullPath = path.resolve(process.cwd(), fileName);
-      log(`${fileName} (${tokens.length} tokens)`);
+      log(`${fileName} (${tokens.length} tokens)`, 0, "blueBright");
 
       /* Sort tokens in file by line number */
       tokens.sort((a, b) => a.lineNumber - b.lineNumber);
@@ -99,10 +95,10 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
 
       tokens.forEach((token) => {
         if (token.comment) {
-          log(`/* ${token.comment} */`, 1);
+          log(`/* ${token.comment} */`, 1, "gray");
         }
         log(
-          `${token.name}: ${fullPath}:${token.lineNumber}:${token.columnNumber}`,
+          `${chalk.blueBright(token.name)}: ${fullPath}:${token.lineNumber}:${token.columnNumber}`,
           1,
         );
         fileEntry.tokens.push({
@@ -148,13 +144,17 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
     }[] = [];
 
     sortedTokens.forEach(([tokenName, tokens]) => {
-      log(`${tokenName} (${tokens.length} occurrences)`);
+      log(
+        `${chalk.blueBright(tokenName)} (${tokens.length} occurrences)`,
+        0,
+        "blueBright",
+      );
       /**
        * We can assume all comments are the same for a "tokenName"
        */
       const foundComment = tokens.find((t) => t.comment)?.comment;
       if (foundComment) {
-        log(`/* ${foundComment} */`, 1);
+        log(`/* ${foundComment} */`, 1, "gray");
       }
 
       const tokenEntry = {
@@ -193,6 +193,17 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
       console.error("❌ Failed to copy to clipboard:", error.message);
     }
   }
+}
+
+function log(str: string, indent = 0, chalkColor?: ForegroundColorName) {
+  const prefix = "  ".repeat(indent);
+
+  if (chalkColor) {
+    console.info(prefix + chalk[chalkColor](str));
+    return;
+  }
+
+  console.info(prefix + str);
 }
 
 export { printRemaining };

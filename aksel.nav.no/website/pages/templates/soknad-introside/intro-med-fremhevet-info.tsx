@@ -1,19 +1,19 @@
 import React from "react";
-import { ArrowRightIcon } from "@navikt/aksel-icons";
+import { ArrowRightIcon, InformationSquareIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
-  Alert,
   Bleed,
   BodyLong,
-  BodyShort,
   Box,
   Button,
   Checkbox,
   GuidePanel,
   Heading,
+  InfoCard,
   Link,
   List,
   Page,
+  Tag,
   VStack,
 } from "@navikt/ds-react";
 import ApplicationPictogram from "../../../components/website-modules/examples/__parts/ApplicationPictogram";
@@ -34,7 +34,7 @@ function Example() {
         <VStack
           as="main"
           gap="space-32"
-          data-aksel-template="form-intropage-v3"
+          data-aksel-template="form-intropage-v4"
         >
           <VStack gap="space-12">
             <Bleed asChild marginInline={{ lg: "space-128" }}>
@@ -47,11 +47,14 @@ function Example() {
                 <ApplicationPictogram />
               </Box>
             </Bleed>
-            <VStack gap="space-4">
-              <BodyShort size="small">Nav 10-07.03 (om relevant)</BodyShort>
+
+            <VStack gap="space-4" align="start">
               <Heading level="1" size="xlarge">
                 Søknad om [ytelse]
               </Heading>
+              <Tag variant="neutral-moderate" size="small">
+                Nav 10-07.03 (om relevant)
+              </Tag>
             </VStack>
           </VStack>
 
@@ -70,11 +73,16 @@ function Example() {
               nav.no som åpnes i en ny fane.
             </BodyLong>
           </GuidePanel>
-          <Alert variant="info">
-            Her skal det stå en viktig melding om tidsbestemte eller
-            situasjonsbestemte forhold som påvirker søknaden. <br />
-            Bruk kun 1 Info Alert per side.
-          </Alert>
+          <InfoCard data-color="info">
+            <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
+              <InfoCard.Title>Viktig informasjon</InfoCard.Title>
+            </InfoCard.Header>
+            <InfoCard.Content>
+              Her skal det stå en viktig melding om tidsbestemte eller
+              situasjonsbestemte forhold som påvirker søknaden. <br />
+              Bruk kun 1 InfoCard per side.
+            </InfoCard.Content>
+          </InfoCard>
           <div>
             <Heading level="2" size="large" spacing>
               Før du søker

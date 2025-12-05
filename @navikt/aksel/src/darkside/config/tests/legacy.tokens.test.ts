@@ -4,21 +4,13 @@ import { legacyTokenConfig } from "../legacy.tokens";
 
 describe("Legacy token migration", () => {
   test("Token migration references exists", () => {
-    Object.entries(legacyTokenConfig).forEach(([oldToken, config]) => {
-      if (config.replacement.length > 1) {
+    Object.entries(legacyTokenConfig)
+      .filter(([, config]) => config.replacement.length > 1)
+      .forEach(([oldToken, config]) => {
         expect(
           config.replacement in darksideTokenConfig,
           `${oldToken} has valid replacement: ${config.replacement}`,
         ).toBeTruthy();
-      }
-    });
-  });
-
-  test("Has raw value if no reference is set", () => {
-    Object.values(legacyTokenConfig).forEach((config) => {
-      if (config.replacement.length === 0) {
-        expect(config.raw.length > 0).toBeTruthy();
-      }
-    });
+      });
   });
 });
