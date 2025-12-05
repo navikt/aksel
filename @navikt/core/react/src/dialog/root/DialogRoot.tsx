@@ -161,7 +161,7 @@ interface DialogComponent extends React.FC<DialogProps> {
 }
 
 /**
- * ..
+ * Dialog component for displaying modal content on top of an application.
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/dialog)
  * @see 🏷️ {@link DialogProps}
  * @example
