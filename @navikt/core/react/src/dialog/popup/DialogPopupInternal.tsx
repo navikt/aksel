@@ -149,7 +149,7 @@ const DialogPopupInternal = forwardRef<
           : returnFocus.current;
       }
 
-      if (triggerElement?.checkVisibility()) {
+      if (isFocusable(triggerElement)) {
         return triggerElement;
       }
 
@@ -263,6 +263,22 @@ function translateHeight(
   }
 
   return height;
+}
+
+function isFocusable(element: Element | null) {
+  if (!element || !element.isConnected) {
+    return false;
+  }
+
+  /**
+   * Baselined in 2024
+   * @see https://caniuse.com/?search=checkvisibility
+   */
+  if (typeof element.checkVisibility === "function") {
+    return element.checkVisibility();
+  }
+
+  return getComputedStyle(element).display !== "none";
 }
 
 export { DialogPopupInternal };
