@@ -28,17 +28,17 @@
 }
 
 .iconDetails {
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   border: 1px solid var(--ax-border-neutral-subtleA);
   background: var(--ax-bg-raised);
-  overflow: clip;
+  overflow: auto;
   padding: var(--ax-space-20);
 
   &[data-inline] {
     padding: 0;
   }
 
-  [data-modal="true"] & {
+  &[data-dialog="true"] {
     border-radius: 0;
     border: none;
     padding-block-end: var(--ax-space-20);
@@ -56,21 +56,15 @@
 .iconDetailsContent {
   padding: var(--ax-space-24) var(--ax-space-20);
 
-  [data-modal="true"] & {
+  [data-dialog="true"] & {
     padding: 0;
-  }
-}
-
-.iconDetailsActions {
-  [data-modal="true"] & {
-    padding-inline: var(--ax-space-20);
   }
 }
 
 .iconFeedback {
   margin-top: var(--ax-space-16);
 
-  [data-modal="true"] & {
+  [data-dialog="true"] & {
     padding-inline: var(--ax-space-20);
     padding-block: var(--ax-space-20);
   }

@@ -238,23 +238,23 @@ export const NestedPointerEvents: StoryObj<{
         {showRoot && (
           <DismissableLayer
             {...props.root}
-            onDismiss={() => {
-              props.root.onDismiss?.();
+            onDismiss={(event) => {
+              props.root.onDismiss?.(event);
               setShowRoot(false);
               console.info("dismissed root");
             }}
           >
-            <input type="text" data-testId="root" />
+            <input type="text" data-testId="root" placeholder="root" />
             {showNested && (
               <DismissableLayer
                 {...props.nested}
-                onDismiss={() => {
-                  props.nested?.onDismiss?.();
+                onDismiss={(event) => {
+                  props.nested.onDismiss?.(event);
                   setShowNested(false);
                   console.info("dismissed nested");
                 }}
               >
-                <input type="text" data-testId="nested" />
+                <input type="text" data-testId="nested" placeholder="nested" />
               </DismissableLayer>
             )}
           </DismissableLayer>
@@ -310,8 +310,8 @@ export const NestedEscapeKeydown: StoryObj<{
         {showRoot && (
           <DismissableLayer
             {...props.root}
-            onDismiss={() => {
-              props.root.onDismiss?.();
+            onDismiss={(event) => {
+              props.root.onDismiss?.(event);
               setShowRoot(false);
             }}
             enabled={enabled}
@@ -321,8 +321,8 @@ export const NestedEscapeKeydown: StoryObj<{
             {showNested && (
               <DismissableLayer
                 {...props.nested}
-                onDismiss={() => {
-                  props.nested?.onDismiss?.();
+                onDismiss={(event) => {
+                  props.nested?.onDismiss?.(event);
                   setShowNested(false);
                 }}
                 id="nested"
@@ -379,8 +379,8 @@ export const MultipleEscapeKeydown: StoryObj<{
         {showFirst && (
           <DismissableLayer
             {...props.first}
-            onDismiss={() => {
-              props.first.onDismiss?.();
+            onDismiss={(event) => {
+              props.first.onDismiss?.(event);
               setShowFirst(false);
             }}
           >
@@ -390,8 +390,8 @@ export const MultipleEscapeKeydown: StoryObj<{
         {showLast && (
           <DismissableLayer
             {...props.last}
-            onDismiss={() => {
-              props.last?.onDismiss?.();
+            onDismiss={(event) => {
+              props.last?.onDismiss?.(event);
               setShowLast(false);
             }}
           >
@@ -444,8 +444,8 @@ export const MultipleOutsideClick: StoryObj<{
         {showFirst && (
           <DismissableLayer
             {...props.first}
-            onDismiss={() => {
-              props.first.onDismiss?.();
+            onDismiss={(event) => {
+              props.first.onDismiss?.(event);
               setShowFirst(false);
             }}
           >
@@ -455,8 +455,8 @@ export const MultipleOutsideClick: StoryObj<{
         {showLast && (
           <DismissableLayer
             {...props.last}
-            onDismiss={() => {
-              props.last?.onDismiss?.();
+            onDismiss={(event) => {
+              props.last?.onDismiss?.(event);
               setShowLast(false);
             }}
           >

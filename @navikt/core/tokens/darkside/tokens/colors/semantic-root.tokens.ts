@@ -60,7 +60,7 @@ export function semanticRootTokens(theme: AkselColorTheme) {
           "Bakgrunnsfarge på en side eller deler av en side som fremstår nedsunket, dvs. «lavere» enn standard bakgrunn.",
       },
       overlay: {
-        value: "rgba(2, 20, 49 , 0.80)",
+        value: "rgba(12, 22, 39, 0.66)",
         type: "color",
         group: "background",
         comment:

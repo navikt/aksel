@@ -28,30 +28,8 @@
   margin-block-end: var(--ax-space-24);
 }
 
-.mobileNavSidebarMenu {
-  display: grid;
-  gap: var(--ax-space-24);
-}
-
-.mobileNavDialog {
-  max-height: 100dvh;
-  height: 100dvh;
-  right: 0;
-  left: auto;
-  bottom: auto;
-  overflow-y: scroll;
-  padding-inline-end: var(--ax-space-8);
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  animation: none;
-}
-
-.mobileNavDialogHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-block-start: var(--ax-space-8);
-  padding-inline-end: var(--ax-space-8);
+.mobileNavDialogPopup {
+  overflow-y: auto;
 }
 
 .divider {
