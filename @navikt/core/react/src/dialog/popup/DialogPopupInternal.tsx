@@ -66,7 +66,7 @@ interface DialogPopupInternalProps
   height?: ResponsiveProp<string & {}> | "small" | "medium" | "large";
   /**
    * Adds a backdrop behind the dialog popup.
-   * @default true
+   * @default true if `modal={true}`, else `false`
    */
   withBackdrop?: boolean;
   /**
@@ -83,7 +83,7 @@ const DialogPopupInternal = forwardRef<
   (
     {
       className,
-      modal = true,
+      modal,
       closeOnOutsideClick = true,
       initialFocus,
       returnFocus,

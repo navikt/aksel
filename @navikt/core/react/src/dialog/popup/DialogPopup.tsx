@@ -25,7 +25,13 @@ type DialogPopupProps = DialogPopupInternalProps &
  */
 const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
   (
-    { withBackdrop = true, rootElement, position, ...restProps },
+    {
+      modal = true,
+      withBackdrop = modal === true,
+      rootElement,
+      position,
+      ...restProps
+    },
     forwardedRef,
   ) => {
     const { mounted, nested } = useDialogContext();
@@ -44,6 +50,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
           {...restProps}
           position={position}
           withBackdrop={withBackdrop && position !== "fullscreen"}
+          modal={modal}
         />
       </Portal>
     );
