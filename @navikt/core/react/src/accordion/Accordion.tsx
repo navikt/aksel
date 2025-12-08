@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { omit } from "../util";
 import AccordionContent, { AccordionContentProps } from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
@@ -52,6 +53,10 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * @deprecated No longer has any effect.
    */
   headingSize?: "large" | "medium" | "small" | "xsmall";
+  /**
+   * Overrides the accent color inherited from the Theme.
+   */
+  "data-color"?: AkselColor;
 }
 
 /**

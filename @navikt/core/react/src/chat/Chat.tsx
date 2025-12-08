@@ -53,6 +53,10 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    * @default "3"
    */
   toptextHeadingLevel?: Exclude<HeadingProps["level"], "1">;
+  /**
+   * Overrides the accent color inherited from the Theme.
+   */
+  "data-color"?: AkselColor;
 }
 
 interface ChatComponent

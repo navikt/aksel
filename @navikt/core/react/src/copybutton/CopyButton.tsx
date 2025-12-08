@@ -16,7 +16,7 @@ export interface CopyButtonProps
    */
   variant?: "action" | "neutral";
   /**
-   * CopyButton color.
+   * Overrides the color.
    * @default "neutral"
    */
   "data-color"?: AkselColor;

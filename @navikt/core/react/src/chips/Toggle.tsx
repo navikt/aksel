@@ -15,7 +15,7 @@ export interface ChipsToggleProps
    */
   variant?: "action" | "neutral";
   /**
-   * Chip color
+   * Overrides the accent color inherited from the Theme.
    */
   "data-color"?: AkselColor;
   /**

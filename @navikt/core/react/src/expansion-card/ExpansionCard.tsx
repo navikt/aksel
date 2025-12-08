@@ -1,5 +1,6 @@
 import React, { forwardRef, useRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { useControllableState } from "../util/hooks";
 import { OverridableComponent } from "../util/types";
 import ExpansionCardContent, {
@@ -68,6 +69,10 @@ interface ExpansionCardCommonProps
    * @default "medium"
    */
   size?: "medium" | "small";
+  /**
+   * Overrides the accent color inherited from the Theme.
+   */
+  "data-color"?: AkselColor;
 }
 
 type ExpansionCardConditionalProps =

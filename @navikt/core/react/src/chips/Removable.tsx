@@ -17,7 +17,7 @@ export interface ChipsRemovableProps
    */
   onDelete?: () => void;
   /**
-   * Chip color
+   * Overrides the accent color inherited from the Theme.
    */
   "data-color"?: AkselColor;
 }

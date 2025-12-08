@@ -20,7 +20,7 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   size?: BaseAlertContextProps["size"];
   /**
-   * Overrides color
+   * Overrides the accent color inherited from the Theme.
    */
   "data-color"?: AkselColor;
   /**
