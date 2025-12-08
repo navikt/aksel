@@ -16,7 +16,6 @@
 }
 
 .mobileNavItemCentered {
-  padding-inline: var(--ax-space-12) var(--ax-space-48);
   text-align: center;
 }
 
