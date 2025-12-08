@@ -35,7 +35,7 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
    */
   variant?: "neutral" | "interaction" | "inverted";
   /**
-   * Overrides loader-color
+   * Overrides the color.
    */
   "data-color"?: AkselColor;
 }

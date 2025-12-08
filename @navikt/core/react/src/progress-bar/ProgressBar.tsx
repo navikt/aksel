@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, forwardRef, useEffect } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { useLatestRef } from "../util/hooks/useLatestRef";
 import { useTimeout } from "../util/hooks/useTimeout";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -45,6 +46,10 @@ interface ProgressBarPropsBase
    * Not needed if `aria-labelledby` is used.
    */
   "aria-label"?: string;
+  /**
+   * Overrides the accent color inherited from the Theme.
+   */
+  "data-color"?: AkselColor;
 }
 
 export type ProgressBarProps = ProgressBarPropsBase &

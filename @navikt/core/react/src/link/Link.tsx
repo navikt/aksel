@@ -26,6 +26,10 @@ export interface LinkProps
    * Link text
    */
   children: React.ReactNode;
+  /**
+   * Overrides the accent color inherited from the Theme.
+   */
+  "data-color"?: AkselColor;
 }
 
 /**

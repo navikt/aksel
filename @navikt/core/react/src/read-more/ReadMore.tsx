@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { BodyLong } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -34,6 +35,10 @@ export interface ReadMoreProps
    * @default "medium"
    */
   size?: "large" | "medium" | "small";
+  /**
+   * Overrides the accent color inherited from the Theme.
+   */
+  "data-color"?: AkselColor;
 }
 
 /**

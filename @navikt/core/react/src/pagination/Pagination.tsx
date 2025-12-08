@@ -70,6 +70,8 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
     text: string;
   };
   /**
+   * Overrides the accent color inherited from the Theme.
+   * @default "neutral"
    * @private
    */
   "data-color"?: AkselColor;

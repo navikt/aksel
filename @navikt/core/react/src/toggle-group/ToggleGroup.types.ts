@@ -33,7 +33,7 @@ export interface ToggleGroupProps
    */
   variant?: "action" | "neutral";
   /**
-   * ToggleButton color.
+   * Overrides the accent color inherited from the Theme.
    */
   "data-color"?: AkselColor;
   /**

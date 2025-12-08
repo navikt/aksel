@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { BodyLong, Heading } from "../typography";
 import { createContext } from "../util/create-context";
 import {
@@ -25,6 +26,10 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
    * @default "medium"
    */
   size?: "small" | "medium";
+  /**
+   * Overrides the accent color inherited from the Theme.
+   */
+  "data-color"?: AkselColor;
 }
 
 type LinkCardContextProps = {
