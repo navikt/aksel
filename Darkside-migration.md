@@ -116,3 +116,9 @@ Added
 ## CLI
 
 Added a bunch of new codemods
+
+## Stylelint
+
+- Added rule "aksel/no-legacy-classes".
+- Removed rule "aksel/design-token-no-component-reference" since we don't have any component tokens anymore.
+- Adjusted existing rules according to new tokens/prefixes.
