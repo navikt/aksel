@@ -8,7 +8,7 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * @deprecated Use <Heading> instead of `title`.
    */
-  title?: string;
+  title?: never;
   /**
    * Changes margin-block on list and font size on items.
    * @default "medium"
