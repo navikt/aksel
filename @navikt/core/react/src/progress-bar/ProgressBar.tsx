@@ -144,11 +144,11 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
               simulated?.seconds !== undefined,
           })}
           style={{
-            "--__ac-progress-bar-simulated":
+            "--__axc-progress-bar-simulated":
               simulated?.seconds !== undefined
                 ? `${simulated?.seconds}s`
                 : undefined,
-            "--__ac-progress-bar-translate": `-${translateX}%`,
+            "--__axc-progress-bar-translate": `-${translateX}%`,
           }}
         />
       </div>

@@ -388,9 +388,9 @@ export const ActionMenuContent = forwardRef<
           style={{
             ...style,
             ...{
-              "--__ac-action-menu-content-transform-origin":
+              "--__axc-action-menu-content-transform-origin":
                 "var(--ac-floating-transform-origin)",
-              "--__ac-action-menu-content-available-height":
+              "--__axc-action-menu-content-available-height":
                 "var(--ac-floating-available-height)",
             },
           }}

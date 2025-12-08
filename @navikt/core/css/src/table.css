@@ -291,7 +291,7 @@
 }
 
 .aksel-table__expanded-row-content {
-  --__ac-table-expanded-row-pi: calc(var(--ax-space-8) + 3rem);
+  --__axc-table-expanded-row-pi: calc(var(--ax-space-8) + 3rem);
 
   padding-block: var(--ax-space-16);
 }
@@ -301,15 +301,15 @@
 }
 
 .aksel-table__expanded-row-content--gutter-both {
-  padding-inline: var(--__ac-table-expanded-row-pi);
+  padding-inline: var(--__axc-table-expanded-row-pi);
 }
 
 .aksel-table__expanded-row-content--gutter-left {
-  padding-inline: var(--__ac-table-expanded-row-pi) var(--ax-space-8);
+  padding-inline: var(--__axc-table-expanded-row-pi) var(--ax-space-8);
 }
 
 .aksel-table__expanded-row-content--gutter-right {
-  padding-inline: var(--ax-space-8) var(--__ac-table-expanded-row-pi);
+  padding-inline: var(--ax-space-8) var(--__axc-table-expanded-row-pi);
 }
 
 .aksel-table__expanded-row-content--gutter-none {

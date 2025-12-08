@@ -44,13 +44,13 @@
   min-width: 128px;
   max-width: min(95vw, 640px);
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  transform-origin: var(--__ac-action-menu-content-transform-origin);
+  transform-origin: var(--__axc-action-menu-content-transform-origin);
   animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   padding: var(--__axc-action-menu-content-p);
   overflow: auto;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  max-height: var(--__ac-action-menu-content-available-height);
+  max-height: var(--__axc-action-menu-content-available-height);
 }
 
 /* ----------------------------- ActionMenu Item ---------------------------- */
