@@ -2,4 +2,4 @@
 "@navikt/aksel": patch
 ---
 
-CLI: Lock depdendencies.
+CLI: Lock dependencies.
