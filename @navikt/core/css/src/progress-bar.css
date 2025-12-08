@@ -22,10 +22,9 @@
 }
 
 .aksel-progress-bar__foreground {
-  /* TODO:  rename --__ac- in ProgressBar.tsx after darkside update */
-  --__ac-progress-bar-translate: initial;
+  --__axc-progress-bar-translate: initial;
 
-  transform: translateX(var(--__ac-progress-bar-translate));
+  transform: translateX(var(--__axc-progress-bar-translate));
   background: var(--ax-bg-strong);
   transform-origin: left;
   position: absolute;
@@ -38,14 +37,14 @@
 }
 
 .aksel-progress-bar__foreground--indeterminate {
-  --__ac-progress-bar-simulated: initial;
+  --__axc-progress-bar-simulated: initial;
 
   animation-name: aksel-progress-bar-indeterminate-grow, aksel-progress-bar-indeterminate;
   animation-timing-function: ease-in-out, ease-in-out;
-  animation-duration: var(--__ac-progress-bar-simulated), 2500ms;
+  animation-duration: var(--__axc-progress-bar-simulated), 2500ms;
   animation-fill-mode: forwards, none;
   animation-iteration-count: 1, infinite;
-  animation-delay: 0s, var(--__ac-progress-bar-simulated);
+  animation-delay: 0s, var(--__axc-progress-bar-simulated);
 }
 
 /* aksel-progress-bar-indeterminate wave animation */
