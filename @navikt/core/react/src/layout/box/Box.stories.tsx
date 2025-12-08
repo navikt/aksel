@@ -82,11 +82,10 @@ export const ThemingDemo = () => {
               text-decoration: none;
             }
             .link-card:hover {
-              border-color: var(--a-border-action);
-              box-shadow: var(--a-shadow-small);
+              border-color: var(--ax-border-accent-strong);
             }
-            .link-card:hover .navds-heading {
-              color: var(--a-text-action);
+            .link-card:hover .aksel-heading {
+              color: var(--ax-text-accent-subtle);
               text-decoration: underline;
             }
             .link-card:hover .link-card__chevron,

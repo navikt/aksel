@@ -200,27 +200,6 @@ export const ControlledState = () => {
   );
 };
 
-export const Customization = () => (
-  <div className="subtle-card">
-    <ExpansionCard aria-label="custom-styling demo">
-      <ExpansionCard.Header>
-        <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-        <ExpansionCard.Description>
-          For at yrkesskadedekningen skal gjelde, er det som hovedregel krav til
-          tid, sted og arbeidsoppgaver
-        </ExpansionCard.Description>
-      </ExpansionCard.Header>
-      <Content />
-    </ExpansionCard>
-
-    <style>{`
-        .subtle-card {
-          --ac-expansioncard-bg: var(--a-surface-subtle);
-          --ac-expansioncard-border-open-color: var(--a-border-alt-3);
-        }`}</style>
-  </div>
-);
-
 export const Icon = () => (
   <div>
     <ExpansionCard aria-label="custom-styling demo">
@@ -312,8 +291,6 @@ export const Chromatic: Story = {
         <DefaultOpen />
         <h2>Controlled state</h2>
         <ControlledState />
-        <h2>Customization</h2>
-        <Customization />
         <h2>Icon</h2>
         <Icon />
         <h2>ColorRole</h2>

@@ -536,7 +536,7 @@ const storyStyles = (
       ${itemCss}
       font-weight: 600;
       font-size: 14px;
-      background-color: var(--a-gray-100);
+      background-color: var(--ax-bg-neutral-moderate);
     }
 
     .item {
