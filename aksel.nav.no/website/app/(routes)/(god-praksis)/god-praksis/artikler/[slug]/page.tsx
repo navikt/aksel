@@ -1,4 +1,4 @@
-import differenceInMonths from "date-fns/differenceInMonths";
+import { differenceInMonths } from "date-fns";
 import { Metadata } from "next";
 import { PortableTextBlock } from "next-sanity";
 import NextLink from "next/link";
