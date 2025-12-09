@@ -70,7 +70,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
     text: string;
   };
   /**
-   * Overrides the accent color inherited from the Theme.
+   * Overrides the color.
    * @default "neutral"
    * @private
    */
