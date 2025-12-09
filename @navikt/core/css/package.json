@@ -27,8 +27,7 @@
   "homepage": "https://aksel.nav.no/designsystemet/",
   "scripts": {
     "build": "tsx ./config/bundle.ts",
-    "css:get-version": "node config/get-version.js",
-    "test": "yarn build && vitest run"
+    "css:get-version": "node config/get-version.js"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^7.35.1",
