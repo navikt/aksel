@@ -28,9 +28,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   avatar?: React.ReactNode;
   /**
-   * Changes background color on avatar and bubbles.
-   * Avoid using the same background as the surface behind Chat.
-   * @default "neutral"
+   * @deprecated Use `data-color` prop instead.
    */
   variant?: (typeof VARIANTS)[number];
   /**

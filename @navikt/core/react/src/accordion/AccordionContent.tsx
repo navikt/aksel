@@ -31,14 +31,9 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
         ref={ref}
         className={cn(
           "navds-accordion__content",
-          {
-            "navds-accordion__content--closed": !context.open,
-          },
+          { "navds-accordion__content--closed": !context.open },
           className,
         )}
-        aria-hidden={
-          !context.open || undefined
-        } /* Added to fix bug with Radio component, where label text inside a span sometimes is ignored by screen readers after hiding/displaying the RadioGroup inside an Accordion */
       >
         <div className={cn("navds-accordion__content-inner")}>{children}</div>
       </BodyLong>

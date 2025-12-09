@@ -18,6 +18,12 @@ Deprecated
 
 - variant
 
+### Chat
+
+Deprecated
+
+- variant
+
 ### CopyButton
 
 Deprecated
