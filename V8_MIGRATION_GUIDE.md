@@ -1,13 +1,13 @@
-# Aksel v8.0.0 Migration Guide
+# Aksel v8.0.0 Migreringsguide
 
-This guide covers the migration from Aksel v7 to v8, which introduces **Darkside** as the default design system. Darkside brings improved theming, updated tokens, and a more consistent API across all components.
+Denne guiden dekker migreringen fra Aksel v7 til v8, som introduserer **Darkside** som standard designsystem. Darkside bringer forbedret temabehandling, oppdaterte tokens og et mer konsistent API på tvers av alle komponenter.
 
-## 🚀 Quick Migration
+## 🚀 Rask migrering
 
-The fastest way to migrate is using our automated codemods:
+Den raskeste måten å migrere på er å bruke våre automatiserte codemods:
 
 ```bash
-# Run all v8 codemods
+# Kjør alle v8 codemods
 npx @navikt/aksel@latest codemod v8-box
 npx @navikt/aksel@latest codemod v8-box-new
 npx @navikt/aksel@latest codemod v8-list
@@ -26,23 +26,23 @@ npx @navikt/aksel@latest codemod v8-tokens
 
 ---
 
-## 📦 Package Changes
+## 📦 Pakkeendringer
 
 ### @navikt/ds-tokens
 
 **Breaking Changes:**
 
-- **Removed `/darkside` imports** - Darkside is now the default
+- **Fjernet `/darkside` imports** - Darkside er nå standard
   - ❌ `@navikt/ds-tokens/darkside-css` → ✅ `@navikt/ds-tokens/css`
   - ❌ `@navikt/ds-tokens/darkside-js` → ✅ `@navikt/ds-tokens/js`
   - ❌ `@navikt/ds-tokens/darkside-scss` → ✅ `@navikt/ds-tokens/scss`
   - ❌ `@navikt/ds-tokens/darkside-less` → ✅ `@navikt/ds-tokens/less`
 
-- **New spacing tokens** - All spacing tokens now use `--ax-spacing-*` prefix
-  - Run `npx @navikt/aksel@latest codemod v8-token-spacing` for CSS/SCSS/LESS
-  - Run `npx @navikt/aksel@latest codemod v8-token-spacing-js` for JavaScript
+- **Nye spacing-tokens** - Alle spacing-tokens bruker nå `--ax-spacing-*` prefiks
+  - Kjør `npx @navikt/aksel@latest codemod v8-token-spacing` for CSS/SCSS/LESS
+  - Kjør `npx @navikt/aksel@latest codemod v8-token-spacing-js` for JavaScript
 
-**Migration:**
+**Migrering:**
 
 ```diff
 - import "@navikt/ds-tokens/darkside-css";
@@ -56,13 +56,13 @@ npx @navikt/aksel@latest codemod v8-tokens
 
 **Breaking Changes:**
 
-- **Removed `/darkside` import** - Darkside is now the default
+- **Fjernet `/darkside` import** - Darkside er nå standard
   - ❌ `@navikt/ds-css/darkside` → ✅ `@navikt/ds-css`
 
-- **Removed `navds-` prefixed classes** - All classes now use the default Darkside naming
-- **CDN**: Only `index.css` and `index.min.css` are available via CDN
+- **Fjernet `navds-` prefiks på klasser** - Alle klasser bruker nå standard Darkside-navngivning
+- **CDN**: Kun `index.css` og `index.min.css` er tilgjengelig via CDN
 
-**Migration:**
+**Migrering:**
 
 ```diff
 - import "@navikt/ds-css/darkside";
@@ -73,10 +73,10 @@ npx @navikt/aksel@latest codemod v8-tokens
 
 **Breaking Changes:**
 
-- **Removed old config** - Darkside config is now the default
-  - The regular import now uses the new Darkside-based configuration
+- **Fjernet gammel config** - Darkside config er nå standard
+  - Vanlig import bruker nå den nye Darkside-baserte konfigurasjonen
 
-**Migration:**
+**Migrering:**
 
 ```diff
 // tailwind.config.js
@@ -86,12 +86,12 @@ npx @navikt/aksel@latest codemod v8-tokens
 
 ### @navikt/ds-react
 
-**New Exports:**
+**Nye eksporter:**
 
-- `InlineMessage` - Now available as a separate export
-- `GlobalAlert` - Now available as a separate export
-- `InfoCard` - Now available as a separate export  
-- `LocalAlert` - Now available as a separate export
+- `InlineMessage` - Nå tilgjengelig som separat eksport
+- `GlobalAlert` - Nå tilgjengelig som separat eksport
+- `InfoCard` - Nå tilgjengelig som separat eksport  
+- `LocalAlert` - Nå tilgjengelig som separat eksport
 
 ```javascript
 import { InlineMessage } from "@navikt/ds-react/InlineMessage";
@@ -102,41 +102,41 @@ import { LocalAlert } from "@navikt/ds-react/LocalAlert";
 
 ---
 
-## 🔧 Component Changes
+## 🔧 Komponentendringer
 
 ### Accordion
 
 **Deprecated:**
 
-- `variant` prop - Use `data-color` instead
+- `variant` prop - Bruk `data-color` i stedet
   - `variant="neutral"` → `data-color="neutral"`
-- `headingSize` prop - No longer has any effect (removed in implementation)
+- `headingSize` prop - Har ingen effekt lenger (fjernet i implementasjonen)
 
-**Migration:**
+**Migrering:**
 
 ```diff
 - <Accordion variant="neutral">
 + <Accordion data-color="neutral">
 ```
 
-Run `npx @navikt/aksel@latest codemod v8-accordion-variant` to migrate automatically.
+Kjør `npx @navikt/aksel@latest codemod v8-accordion-variant` for å migrere automatisk.
 
 ### Box
 
 **Breaking Changes:**
 
-- `Box` now uses the new token system (previously `Box.New`)
-- `Box.New` is deprecated - use `Box` instead
-- Token prefixes updated:
-  - `background` now uses `--ax-bg-*` tokens instead of `--a-*`
-  - `borderColor` now uses `--ax-border-*` tokens
-  - `shadow` now uses `--ax-shadow-*` tokens
+- `Box` bruker nå det nye tokensystemet (tidligere `Box.New`)
+- `Box.New` er deprecated - bruk `Box` i stedet
+- Token-prefikser oppdatert:
+  - `background` bruker nå `--ax-bg-*` tokens i stedet for `--a-*`
+  - `borderColor` bruker nå `--ax-border-*` tokens
+  - `shadow` bruker nå `--ax-shadow-*` tokens
 
 **Deprecated:**
 
-- `Box.New` - Use `Box` from `@navikt/ds-react/Box` instead
+- `Box.New` - Bruk `Box` fra `@navikt/ds-react/Box` i stedet
 
-**Migration:**
+**Migrering:**
 
 ```diff
 - <Box.New background="default" borderColor="default">
@@ -150,24 +150,24 @@ Run `npx @navikt/aksel@latest codemod v8-accordion-variant` to migrate automatic
 + <Box ... />
 ```
 
-Run `npx @navikt/aksel@latest codemod v8-box` to migrate Box with legacy tokens.  
-Run `npx @navikt/aksel@latest codemod v8-box-new` to rename Box.New to Box.
+Kjør `npx @navikt/aksel@latest codemod v8-box` for å migrere Box med legacy tokens.  
+Kjør `npx @navikt/aksel@latest codemod v8-box-new` for å bytte navn fra Box.New til Box.
 
 ### Button
 
 **Deprecated:**
 
-- Variant-based coloring replaced with `data-color` prop
+- Variant-basert fargesetting erstattet med `data-color` prop
   - `variant="primary-neutral"` → `variant="primary"` + `data-color="neutral"`
   - `variant="secondary-neutral"` → `variant="secondary"` + `data-color="neutral"`
   - `variant="tertiary-neutral"` → `variant="tertiary"` + `data-color="neutral"`
   - `variant="danger"` → `variant="primary"` + `data-color="danger"`
 
-**New Props:**
+**Nye props:**
 
-- `data-color` - Controls button color independently of variant
+- `data-color` - Styrer knappens farge uavhengig av variant
 
-**Migration:**
+**Migrering:**
 
 ```diff
 - <Button variant="primary-neutral">
@@ -177,113 +177,113 @@ Run `npx @navikt/aksel@latest codemod v8-box-new` to rename Box.New to Box.
 + <Button variant="primary" data-color="danger">
 ```
 
-Run `npx @navikt/aksel@latest codemod v8-button-variant` to migrate automatically.
+Kjør `npx @navikt/aksel@latest codemod v8-button-variant` for å migrere automatisk.
 
 ### Chips
 
 **Deprecated:**
 
-- `variant` prop on `Chips.Toggle` - Use `data-color` instead
-  - `variant="action"` → `data-color="accent"` (default)
+- `variant` prop på `Chips.Toggle` - Bruk `data-color` i stedet
+  - `variant="action"` → `data-color="accent"` (standard)
   - `variant="neutral"` → `data-color="neutral"`
 
-**New Props:**
+**Nye props:**
 
-- `data-color` - Controls chip color
+- `data-color` - Styrer chip-farge
 
-**Migration:**
+**Migrering:**
 
 ```diff
 - <Chips.Toggle variant="neutral">
 + <Chips.Toggle data-color="neutral">
 ```
 
-Run `npx @navikt/aksel@latest codemod v8-chips-variant` to migrate automatically.
+Kjør `npx @navikt/aksel@latest codemod v8-chips-variant` for å migrere automatisk.
 
 ### Chat
 
 **Deprecated:**
 
-- `variant` prop - No replacement, variant styling removed
+- `variant` prop - Ingen erstatning, variant-styling fjernet
 
 ### CopyButton
 
 **Deprecated:**
 
-- `variant` prop - No replacement, variant styling removed
+- `variant` prop - Ingen erstatning, variant-styling fjernet
 
 ### Link
 
 **Deprecated:**
 
-- `variant` prop - Use `data-color` instead
-  - `variant="action"` → `data-color="accent"` (default)
+- `variant` prop - Bruk `data-color` i stedet
+  - `variant="action"` → `data-color="accent"` (standard)
   - `variant="neutral"` → `data-color="neutral"`
   - `variant="subtle"` → `data-color="neutral"`
 
-**New Props:**
+**Nye props:**
 
-- `data-color` - Controls link color
+- `data-color` - Styrer lenke-farge
 
-**Migration:**
+**Migrering:**
 
 ```diff
 - <Link variant="neutral">
 + <Link data-color="neutral">
 ```
 
-Run `npx @navikt/aksel@latest codemod v8-link-variant` to migrate automatically.
+Kjør `npx @navikt/aksel@latest codemod v8-link-variant` for å migrere automatisk.
 
 ### List
 
-**Breaking Changes - Removed Props:**
+**Breaking Changes - Fjernede props:**
 
-- `title` - Moved outside component, use `<Heading>` before `<List>`
-- `description` - Moved outside component, use `<BodyShort>` before `<List>`
-- `headingTag` - No longer needed
+- `title` - Flyttet utenfor komponenten, bruk `<Heading>` før `<List>`
+- `description` - Flyttet utenfor komponenten, bruk `<BodyShort>` før `<List>`
+- `headingTag` - Ikke lenger nødvendig
 
-**Migration:**
+**Migrering:**
 
 ```diff
-- <List title="My List" description="List description">
--   <List.Item>Item 1</List.Item>
+- <List title="Min liste" description="Listebeskrivelse">
+-   <List.Item>Element 1</List.Item>
 - </List>
 
-+ <Heading size="small" as="h3">My List</Heading>
-+ <BodyShort>List description</BodyShort>
++ <Heading size="small" as="h3">Min liste</Heading>
++ <BodyShort>Listebeskrivelse</BodyShort>
 + <List>
-+   <List.Item>Item 1</List.Item>
++   <List.Item>Element 1</List.Item>
 + </List>
 ```
 
-Run `npx @navikt/aksel@latest codemod v8-list` to migrate automatically (note: may require manual adjustments).
+Kjør `npx @navikt/aksel@latest codemod v8-list` for å migrere automatisk (merk: kan kreve manuelle justeringer).
 
 ### Modal
 
-**Changes:**
+**Endringer:**
 
-- Removed `navds-modal__document-body` CSS class - internal change, no user action needed
+- Fjernet `navds-modal__document-body` CSS-klasse - intern endring, ingen brukerhandling nødvendig
 
 ### Page (Primitive)
 
 **Deprecated:**
 
-- `background` prop - No longer has any effect
+- `background` prop - Har ingen effekt lenger
 
 ### Popover
 
 **Deprecated:**
 
-- `arrow` prop - No longer has any effect, arrows are always shown
-- `offset` default changed from `16` (with arrow) or `4` (without) to `8`
+- `arrow` prop - Har ingen effekt lenger, piler vises alltid
+- `offset` standard endret fra `16` (med pil) eller `4` (uten) til `8`
 
 ### Select
 
-**Breaking Changes - Removed Props:**
+**Breaking Changes - Fjernede props:**
 
-- `htmlSize` - Removed, no replacement
+- `htmlSize` - Fjernet, ingen erstatning
 
-**Migration:**
+**Migrering:**
 
 ```diff
 - <Select htmlSize={5}>
@@ -294,16 +294,16 @@ Run `npx @navikt/aksel@latest codemod v8-list` to migrate automatically (note: m
 
 **Breaking Changes:**
 
-- Variant system completely redesigned
-- New variants: `outline`, `moderate`, `strong`
-- Old variants (`info`, `success`, `warning`, `error`, `alt1`, `alt2`, `alt3`, `neutral` with `-filled` and `-moderate` suffixes) are deprecated but still work
+- Variant-systemet fullstendig redesignet
+- Nye varianter: `outline`, `moderate`, `strong`
+- Gamle varianter (`info`, `success`, `warning`, `error`, `alt1`, `alt2`, `alt3`, `neutral` med `-filled` og `-moderate` suffikser) er deprecated men fungerer fortsatt
 
-**New Props:**
+**Nye props:**
 
-- `data-color` - Controls tag color (default: `"neutral"`)
-- `variant` - Now accepts `"outline"`, `"moderate"`, or `"strong"` (default: `"outline"`)
+- `data-color` - Styrer tag-farge (standard: `"neutral"`)
+- `variant` - Aksepterer nå `"outline"`, `"moderate"` eller `"strong"` (standard: `"outline"`)
 
-**Migration:**
+**Migrering:**
 
 ```diff
 - <Tag variant="info-filled">
@@ -316,101 +316,101 @@ Run `npx @navikt/aksel@latest codemod v8-list` to migrate automatically (note: m
 + <Tag variant="outline" data-color="warning">
 ```
 
-Run `npx @navikt/aksel@latest codemod v8-tag-variant` to migrate automatically.
+Kjør `npx @navikt/aksel@latest codemod v8-tag-variant` for å migrere automatisk.
 
 ### Checkbox & Radio
 
-**Changes:**
+**Endringer:**
 
-- Now use new implementation as default (previously behind feature flag)
-- No API changes, improved styling and accessibility
+- Bruker nå ny implementasjon som standard (tidligere bak feature flag)
+- Ingen API-endringer, forbedret styling og tilgjengelighet
 
 ### ToggleGroup
 
 **Deprecated:**
 
-- `variant` prop - Use `data-color` instead
-  - Similar migration pattern to other components
+- `variant` prop - Bruk `data-color` i stedet
+  - Samme migreringsmønster som andre komponenter
 
-Run `npx @navikt/aksel@latest codemod v8-toggle-group-variant` to migrate automatically.
+Kjør `npx @navikt/aksel@latest codemod v8-toggle-group-variant` for å migrere automatisk.
 
 ---
 
 ## 🎨 Styling & Tokens
 
-### CSS Variable Prefix Changes
+### CSS-variabel prefiksendringer
 
-All internal CSS variables have been updated:
+Alle interne CSS-variabler har blitt oppdatert:
 
 - `--__ac-*` → `--__axc-*`
 
-This is an internal change and should not affect consumer code unless you're overriding internal variables.
+Dette er en intern endring og bør ikke påvirke konsumentkode med mindre du overstyrer interne variabler.
 
-### Spacing Tokens
+### Spacing-tokens
 
-All spacing tokens now use the `--ax-spacing-*` prefix:
+Alle spacing-tokens bruker nå `--ax-spacing-*` prefikset:
 
 ```diff
 - var(--a-spacing-4)
 + var(--ax-spacing-4)
 ```
 
-Run `npx @navikt/aksel@latest codemod v8-token-spacing` to migrate CSS/SCSS/LESS files.  
-Run `npx @navikt/aksel@latest codemod v8-token-spacing-js` to migrate JavaScript/TypeScript files.
+Kjør `npx @navikt/aksel@latest codemod v8-token-spacing` for å migrere CSS/SCSS/LESS-filer.  
+Kjør `npx @navikt/aksel@latest codemod v8-token-spacing-js` for å migrere JavaScript/TypeScript-filer.
 
 ---
 
 ## 🛠️ Stylelint
 
-### New Rules
+### Nye regler
 
-- `aksel/no-legacy-classes` - Warns about legacy `navds-*` class usage
+- `aksel/no-legacy-classes` - Advarer om bruk av legacy `navds-*` klasser
 
-### Removed Rules
+### Fjernede regler
 
-- `aksel/design-token-no-component-reference` - Removed since component tokens no longer exist
+- `aksel/design-token-no-component-reference` - Fjernet siden komponent-tokens ikke lenger eksisterer
 
-### Updated Rules
+### Oppdaterte regler
 
-- Existing rules adjusted for new token prefixes and naming conventions
+- Eksisterende regler justert for nye token-prefikser og navnekonvensjoner
 
 ---
 
-## 📝 Summary
+## 📝 Oppsummering
 
-### What's New
+### Hva er nytt
 
-- **Darkside as default** - Improved theming with better dark mode support
-- **Unified color system** - `data-color` prop for consistent coloring across components
-- **New spacing tokens** - More flexible and semantic spacing system
-- **Improved component APIs** - More consistent prop naming and behavior
-- **Better tree-shaking** - More granular exports for smaller bundle sizes
+- **Darkside som standard** - Forbedret temabehandling med bedre støtte for dark mode
+- **Enhetlig fargesystem** - `data-color` prop for konsistent fargesetting på tvers av komponenter
+- **Nye spacing-tokens** - Mer fleksibelt og semantisk spacing-system
+- **Forbedrede komponent-APIer** - Mer konsistent prop-navngivning og oppførsel
+- **Bedre tree-shaking** - Mer granulære eksporter for mindre bundle-størrelse
 
 ### Breaking Changes
 
-1. Token import paths changed (removed `/darkside`)
-2. CSS import paths changed (removed `/darkside`)
-3. Box API updated to use new tokens
-4. List component API changed (title/description removed)
-5. Select `htmlSize` prop removed
-6. Several component `variant` props deprecated in favor of `data-color`
+1. Token-importstier endret (fjernet `/darkside`)
+2. CSS-importstier endret (fjernet `/darkside`)
+3. Box API oppdatert til å bruke nye tokens
+4. List-komponent API endret (title/description fjernet)
+5. Select `htmlSize` prop fjernet
+6. Flere komponent `variant` props deprecated til fordel for `data-color`
 
-### Recommended Migration Steps
+### Anbefalte migreringssteg
 
-1. **Update dependencies** to v8.x
-2. **Update imports** for tokens and CSS
-3. **Run codemods** in order:
-   - Token migrations first (`v8-token-spacing`, `v8-token-spacing-js`, `v8-tokens`)
-   - Component migrations next (all `v8-*-variant` codemods)
-   - Box migrations (`v8-box`, `v8-box-new`)
-   - List migration (`v8-list`)
-   - Property deprecation cleanup (`v8-prop-deprecate`)
-4. **Test thoroughly** - especially components with `data-color` changes
-5. **Update custom CSS** if you override Aksel classes
-6. **Review Stylelint warnings** for legacy class usage
+1. **Oppdater dependencies** til v8.x
+2. **Oppdater importer** for tokens og CSS
+3. **Kjør codemods** i rekkefølge:
+   - Token-migreringer først (`v8-token-spacing`, `v8-token-spacing-js`, `v8-tokens`)
+   - Komponent-migreringer deretter (alle `v8-*-variant` codemods)
+   - Box-migreringer (`v8-box`, `v8-box-new`)
+   - List-migrering (`v8-list`)
+   - Property deprecation opprydding (`v8-prop-deprecate`)
+4. **Test grundig** - spesielt komponenter med `data-color` endringer
+5. **Oppdater egen CSS** hvis du overstyrer Aksel-klasser
+6. **Gjennomgå Stylelint-advarsler** for legacy klassebruk
 
-### Need Help?
+### Trenger du hjelp?
 
-- Full documentation: https://aksel.nav.no
+- Fullstendig dokumentasjon: https://aksel.nav.no
 - GitHub Issues: https://github.com/navikt/aksel/issues
-- Slack: #aksel (internal NAV)
+- Slack: #aksel (intern NAV)
