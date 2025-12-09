@@ -36,17 +36,16 @@
     "@navikt/ds-tokens": "^7.35.1",
     "axios": "1.13.2",
     "chalk": "5.6.2",
-    "cli-progress": "^3.12.0",
-    "clipboardy": "^5.0.0",
+    "cli-progress": "3.12.0",
+    "clipboardy": "5.0.1",
     "commander": "10.0.1",
-    "enquirer": "^2.3.6",
+    "enquirer": "2.4.1",
     "fast-glob": "3.2.11",
     "figlet": "1.8.0",
     "is-git-clean": "1.1.0",
-    "jscodeshift": "^0.15.1",
+    "jscodeshift": "0.15.2",
     "jscodeshift-add-imports": "1.0.11",
-    "lodash": "^4.17.21",
-    "react-scanner": "^1.1.0"
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "@types/cli-progress": "3.11.6",
