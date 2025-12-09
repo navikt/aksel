@@ -21,7 +21,7 @@ interface LocalAlertProps
   extends Omit<BaseAlert.RootProps, "type" | "global" | "data-color"> {
   status: Exclude<BaseAlert.RootProps["status"], undefined>;
   /**
-   * data-color has no effect on GlobalAlert.
+   * data-color has no effect on LocalAlert.
    */
   "data-color"?: never;
 }
