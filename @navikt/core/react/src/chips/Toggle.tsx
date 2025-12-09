@@ -15,7 +15,9 @@ export interface ChipsToggleProps
    */
   variant?: "action" | "neutral";
   /**
-   * Overrides the accent color inherited from the Theme.
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */
   "data-color"?: AkselColor;
   /**

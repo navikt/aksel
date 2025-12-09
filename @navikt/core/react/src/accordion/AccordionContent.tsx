@@ -16,7 +16,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
     const context = useContext(AccordionItemContext);
 
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
 
     if (context === null) {
       console.error(
@@ -27,7 +27,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
 
     return (
       <BodyLong
-        data-color={themeContext?.color}
+        data-color={themeContext.color}
         {...rest}
         as="div"
         ref={ref}

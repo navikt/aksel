@@ -54,7 +54,12 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   headingSize?: "large" | "medium" | "small" | "xsmall";
   /**
-   * Overrides the accent color inherited from the Theme.
+   * Overrides inherited color.
+   *
+   *
+   * We recommend only using `accent` and `neutral`.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */
   "data-color"?: AkselColor;
 }

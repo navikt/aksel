@@ -54,7 +54,9 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   toptextHeadingLevel?: Exclude<HeadingProps["level"], "1">;
   /**
-   * Overrides the accent color inherited from the Theme.
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */
   "data-color"?: AkselColor;
 }
