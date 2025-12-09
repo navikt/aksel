@@ -238,7 +238,7 @@
 
 .aksel-combobox__list {
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  width: var(--ac-floating-anchor-width);
+  width: var(--__axc-floating-anchor-width);
   overflow: clip;
   border: 1px solid var(--ax-border-neutral-subtleA);
   display: flex;

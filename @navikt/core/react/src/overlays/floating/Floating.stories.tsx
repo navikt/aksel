@@ -108,7 +108,7 @@ export const PropsCheck = () => {
       }
 
       .content-small {
-        transform-origin: var(--ac-floating-transform-origin);
+        transform-origin: var(--__axc-floating-transform-origin);
         background-color: var(--ax-bg-neutral-moderate);
         border-radius: var(--ax-radius-8);
         width: 100px;
@@ -421,7 +421,7 @@ function Scrollable(props: any) {
       }
 
       .content {
-        transform-origin: var(--ac-floating-transform-origin);
+        transform-origin: var(--__axc-floating-transform-origin);
         background-color: var(--ax-bg-neutral-moderate);
         border-radius: var(--ax-radius-8);
         width: 300px;

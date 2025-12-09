@@ -389,9 +389,9 @@ export const ActionMenuContent = forwardRef<
             ...style,
             ...{
               "--__axc-action-menu-content-transform-origin":
-                "var(--ac-floating-transform-origin)",
+                "var(--__axc-floating-transform-origin)",
               "--__axc-action-menu-content-available-height":
-                "var(--ac-floating-available-height)",
+                "var(--__axc-floating-available-height)",
             },
           }}
         >
@@ -958,7 +958,7 @@ interface ActionMenuSubContentProps
 export const ActionMenuSubContent = forwardRef<
   ActionMenuSubContentElement,
   ActionMenuSubContentProps
->(({ children, className, style, ...rest }: ActionMenuSubContentProps, ref) => {
+>(({ children, className, ...rest }: ActionMenuSubContentProps, ref) => {
   const { cn } = useRenameCSS();
   const context = useActionMenuContext();
 
@@ -974,20 +974,6 @@ export const ActionMenuSubContent = forwardRef<
           "navds-action-menu__content navds-action-menu__sub-content",
           className,
         )}
-        style={{
-          ...style,
-          ...{
-            "--ac-action-menu-content-transform-origin":
-              "var(--ac-floating-transform-origin)",
-            "--ac-action-menu-content-available-width":
-              "var(--ac-floating-available-width)",
-            "--ac-action-menu-content-available-height":
-              "var(--ac-floating-available-height)",
-            "--ac-action-menu-trigger-width": "var(--ac-floating-anchor-width)",
-            "--ac-action-menu-trigger-height":
-              "var(--ac-floating-anchor-height)",
-          },
-        }}
       >
         <div className={cn("navds-action-menu__content-inner")}>{children}</div>
       </Menu.SubContent>
