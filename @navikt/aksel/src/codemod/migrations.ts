@@ -156,6 +156,34 @@ export const migrations: MigrationT = {
     },
     {
       description:
+        "Tries to migrate List component moving 'title' and 'description' props to 'Heading' and 'BodyShort'.",
+      value: "v8-list",
+      path: "v8.0.0/list/list",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates all Primitives to use new `space`-tokens. (Works with old and new system)",
+      value: "v8-primitive-spacing",
+      path: "v8.0.0/primitives-spacing/spacing",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
+      value: "v8-token-spacing",
+      path: "v8.0.0/token-spacing/spacing",
+      ignoredExtensions: [],
+    },
+    {
+      description:
+        "Updates js-tokens to use new `space`-tokens. (Works with old and new system)",
+      value: "v8-token-spacing-js",
+      path: "v8.0.0/token-spacing-js/spacing",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
         "Updates variant + data-color props on Tag based on current variant prop.",
       value: "v8-tag-variant",
       path: "v8.0.0/tag-variant/tag-variant",
@@ -193,35 +221,7 @@ export const migrations: MigrationT = {
       description:
         "Updates variant + data-color props on Link based on current variant prop.",
       value: "v8-link-variant",
-      path: "v8.0.0/link/link-variant",
-      ignoredExtensions: CSS_EXTENSIONS,
-    },
-    {
-      description:
-        "Tries to migrate List component moving 'title' and 'description' props to 'Heading' and 'BodyShort'.",
-      value: "v8-list",
-      path: "v8.0.0/list/list",
-      ignoredExtensions: CSS_EXTENSIONS,
-    },
-    {
-      description:
-        "Updates all Primitives to use new `space`-tokens. (Works with old and new system)",
-      value: "v8-primitive-spacing",
-      path: "v8.0.0/primitives-spacing/spacing",
-      ignoredExtensions: CSS_EXTENSIONS,
-    },
-    {
-      description:
-        "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
-      value: "v8-token-spacing",
-      path: "v8.0.0/token-spacing/spacing",
-      ignoredExtensions: [],
-    },
-    {
-      description:
-        "Updates js-tokens to use new `space`-tokens. (Works with old and new system)",
-      value: "v8-token-spacing-js",
-      path: "v8.0.0/token-spacing-js/spacing",
+      path: "v8.0.0/link-variant/link-variant",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
@@ -286,12 +286,12 @@ export function getMigrationString() {
   Object.entries(migrations).forEach(([version, vMigrations]) => {
     str += `\n${chalk.underline(version)}\n`;
 
-    vMigrations.forEach((migration) => {
+    const overrideMigrations = migrationStringOverride[version] || [];
+    overrideMigrations.forEach((migration) => {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });
 
-    const overrideMigrations = migrationStringOverride[version] || [];
-    overrideMigrations.forEach((migration) => {
+    vMigrations.forEach((migration) => {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });
   });

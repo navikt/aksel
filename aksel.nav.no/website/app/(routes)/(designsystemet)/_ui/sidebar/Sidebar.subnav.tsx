@@ -32,6 +32,7 @@ function DesignsystemSidebarSubNav(
       className={styles.navListSub}
     >
       <button
+        type="button"
         onClick={() => {
           setOpen(!open);
           umamiTrack("sidebar-subnav", {
