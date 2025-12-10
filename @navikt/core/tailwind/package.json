@@ -30,7 +30,7 @@
   "homepage": "https://aksel.nav.no/grunnleggende/kode/tailwind/",
   "devDependencies": {
     "@navikt/ds-tokens": "^7.35.1",
-    "color": "5.0.0",
+    "color": "5.0.3",
     "lodash": "^4.17.21",
     "tailwindcss": "^3.3.3",
     "tsx": "^4.20.6",
