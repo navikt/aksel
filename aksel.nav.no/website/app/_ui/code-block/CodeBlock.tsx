@@ -101,7 +101,7 @@ function CodeBlockEditor(props: {
 
   const showExpander = !!extraCode || code.split("\n").length > 16;
   const showOverflow = !!extraCode || expanded.current;
-  const visibleCode = (expanded.current ? extraCode ?? code : code).trim();
+  const visibleCode = (expanded.current ? (extraCode ?? code) : code).trim();
 
   const Wrapper = useTabs ? TabsPanel : "div";
 
