@@ -145,7 +145,7 @@ function CodeBlockEditor(props: {
                     {line.map((token, key) => {
                       let content = token.content;
                       if (key === 0 && lineMark) {
-                        content = content.replace(/^[+->]/, "");
+                        content = content.slice(1);
                       }
                       const tokenProps = { ...getTokenProps({ token }) };
                       return (
