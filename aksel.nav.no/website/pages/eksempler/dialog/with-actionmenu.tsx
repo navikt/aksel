@@ -19,7 +19,11 @@ const Example = () => {
           </Button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
-          <ActionMenu.Item onSelect={() => setOpen(true)}>
+          <ActionMenu.Item
+            onSelect={() => setOpen(true)}
+            aria-haspopup="dialog"
+            aria-expanded={false}
+          >
             Åpne dialog
           </ActionMenu.Item>
         </ActionMenu.Content>
