@@ -18,7 +18,6 @@ declare module "**/metadata.mjs" {
     sub_category: "Time";
     keywords: string[];
     variant: "stroke" | "fill";
-    updated_at: Date;
     created_at: Date;
   };
 
