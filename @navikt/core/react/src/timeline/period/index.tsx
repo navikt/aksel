@@ -27,6 +27,9 @@ export interface TimelinePeriodProps
   status?: "success" | "warning" | "danger" | "info" | "neutral";
   /**
    * Overrides color set by status.
+   * 
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */
   "data-color"?: AkselColor;
   /**
