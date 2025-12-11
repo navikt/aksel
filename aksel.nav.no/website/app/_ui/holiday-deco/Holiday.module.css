@@ -1,0 +1,8 @@
+.tree {
+  position: absolute;
+  top: var(--ax-space-8);
+  z-index: -1;
+  transform: translateY(-100%);
+  right: var(--ax-space-32);
+  user-select: none;
+}
