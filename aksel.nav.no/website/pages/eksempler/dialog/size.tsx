@@ -59,5 +59,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 11,
+  index: 3,
 };

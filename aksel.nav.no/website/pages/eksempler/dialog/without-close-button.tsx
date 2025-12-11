@@ -43,6 +43,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 3,
+  index: 7,
   desc: "Du kan fjerne lukkeknappen i headeren ved å sette `withClosebutton=false` på Dialog.Header. Husk at brukeren fortsatt må kunne lukke dialogen på andre måter (klikk utenfor er ikke et gyldig alternativ alene).",
 };

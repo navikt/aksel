@@ -36,6 +36,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 13,
+  index: 8,
   desc: "Dialoger med viktige handlinger bør ikke kunne lukkes ved klikk utenfor. Eksempler på dette er alertdialoger eller skjemaer der brukeren kan miste data.",
 };

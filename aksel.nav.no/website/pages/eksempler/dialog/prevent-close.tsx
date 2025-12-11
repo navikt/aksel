@@ -66,6 +66,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 9,
   desc: "Ved `onOpenChange` kan du forhindre at dialogen lukkes basert på logikk.",
 };

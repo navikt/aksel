@@ -76,5 +76,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 12,
+  index: 4,
 };

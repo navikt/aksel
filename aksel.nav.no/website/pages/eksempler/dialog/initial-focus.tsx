@@ -41,6 +41,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 5,
+  index: 10,
   desc: "Ved å bruke `initialFocus` kan du angi hvilket element som skal få fokus når dialogen åpnes. Dette er nyttig for skjemaer der du vil at brukeren skal kunne begynne å skrive med en gang.",
 };
