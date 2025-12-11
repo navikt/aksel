@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.35.2
+
+### Patch Changes
+
+- InfoCard: Removed unused `aria-labelledby` from `InfoCard.Title`. ([#4393](https://github.com/navikt/aksel/pull/4393))
+
+- Accordion: Remove `aria-hidden` to prevent SiteImprove reporting an issue. ([#4382](https://github.com/navikt/aksel/pull/4382))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.35.2
+  - @navikt/aksel-icons@7.35.2
+
 ## 7.35.1
 
 ### Patch Changes

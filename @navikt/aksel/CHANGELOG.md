@@ -1,5 +1,15 @@
 # @navikt/aksel
 
+## 7.35.2
+
+### Patch Changes
+
+- CLI: Lock dependencies. ([#4386](https://github.com/navikt/aksel/pull/4386))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.35.2
+  - @navikt/ds-tokens@7.35.2
+
 ## 7.35.1
 
 ### Patch Changes
