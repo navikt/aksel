@@ -6,6 +6,7 @@ import { HGrid } from "../../layout/grid";
 import Modal from "../../modal/Modal";
 import { BodyLong } from "../../typography";
 import { useId } from "../../util";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import DatePicker, { DatePickerProps } from "./DatePicker";
 import { useDatepicker } from "./hooks/useDatepicker";
 import { useRangeDatepicker } from "./hooks/useRangeDatepicker";
@@ -199,11 +200,19 @@ export const Standalone = () => (
   <DatePicker.Standalone
     today={new Date("2006-07-01")}
     onSelect={console.info}
+    defaultSelected={new Date("2006-07-05")}
   />
 );
 
 export const StandaloneRange = () => (
-  <DatePicker.Standalone mode="range" today={new Date("2006-07-01")} />
+  <DatePicker.Standalone
+    mode="range"
+    today={new Date("2006-07-01")}
+    defaultSelected={{
+      from: new Date("2006-07-03"),
+      to: new Date("2006-07-07"),
+    }}
+  />
 );
 
 export const StandaloneMultiple = () => (
@@ -517,92 +526,22 @@ export const ChromaticSmallMobile: Story = {
   },
 };
 
-export const Chromatic: Story = {
-  render: () => (
-    <div>
-      <div>
-        <h2>DropdownCaption</h2>
-        <DropdownCaption />
-      </div>
-      <div>
-        <h2>DisabledDays</h2>
-        <DisabledDays />
-      </div>
-      <div>
-        <h2>UseDatepicker</h2>
-        <UseDatepicker />
-      </div>
-      <div>
-        <h2>UseRangedDatepicker</h2>
-        <UseRangedDatepicker />
-      </div>
-      <div>
-        <h2>NB</h2>
-        <NB />
-      </div>
-      <div>
-        <h2>NN</h2>
-        <NN />
-      </div>
-      <div>
-        <h2>EN</h2>
-        <EN />
-      </div>
-      <div>
-        <h2>Standalone</h2>
-        <Standalone />
-      </div>
-      <div>
-        <h2>StandaloneRange</h2>
-        <StandaloneRange />
-      </div>
-      <div>
-        <h2>StandaloneMultiple</h2>
-        <StandaloneMultiple />
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
-      <div>
-        <h2>UserControlled</h2>
-        <UserControlled />
-      </div>
-      <div>
-        <h2>Validering</h2>
-        <Validering />
-      </div>
-      <div>
-        <h2>DisabledInput</h2>
-        <DisabledInput />
-      </div>
-      <div>
-        <h2>ErrorInput</h2>
-        <ErrorInput />
-      </div>
-      <div>
-        <h2>UseRangedDatepickerValidation</h2>
-        <UseRangedDatepickerValidation />
-      </div>
-      <div>
-        <h2>Size</h2>
-        <Size />
-      </div>
-      <div>
-        <h2>Readonly</h2>
-        <Readonly />
-      </div>
-      <div>
-        <h2>StandaloneOptions</h2>
-        <StandaloneOptions />
-      </div>
-      <div>
-        <h2>WeekNumber</h2>
-        <WeekNumber />
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  DropdownCaption,
+  DisabledDays,
+  UseDatepicker,
+  UseRangedDatepicker,
+  NB,
+  NN,
+  EN,
+  Standalone,
+  StandaloneRange,
+  ColorRole,
+  UserControlled,
+  DisabledInput,
+  ErrorInput,
+  Size,
+  Readonly,
+  StandaloneOptions,
+  WeekNumber,
+});

@@ -1,9 +1,10 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryFn } from "@storybook/react-vite";
 import { setYear } from "date-fns";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { useId } from "../../util";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import { DateInputProps } from "../Date.Input";
 import MonthPicker from "./MonthPicker";
 import { MonthPickerProps } from "./MonthPicker.types";
@@ -16,8 +17,6 @@ export default {
     chromatic: { disable: true },
   },
 } satisfies Meta<typeof MonthPicker>;
-
-type Story = StoryObj<typeof MonthPicker>;
 
 export const Default: StoryFn<{
   size: DateInputProps["size"];
@@ -60,27 +59,35 @@ export const DropdownCaption = () => {
       dropdownCaption
       fromDate={new Date("Feb 10 2019")}
       toDate={new Date("Sep 27 2032")}
+      year={new Date("Jan 1 2025")}
     />
   );
 };
 
-export const NB = () => <MonthPicker.Standalone locale="nb" />;
-export const NN = () => <MonthPicker.Standalone locale="nn" />;
-export const EN = () => <MonthPicker.Standalone locale="en" />;
+export const NB = () => (
+  <MonthPicker.Standalone locale="nb" year={new Date("Jan 1 2025")} />
+);
+export const NN = () => (
+  <MonthPicker.Standalone locale="nn" year={new Date("Jan 1 2025")} />
+);
+export const EN = () => (
+  <MonthPicker.Standalone locale="en" year={new Date("Jan 1 2025")} />
+);
 
 export const DisabledMonths = () => (
   <MonthPicker.Standalone
     disabled={[
-      { from: new Date("Jan 1 2022"), to: new Date("Jul  6 2022") },
-      { from: new Date("Apr 2 2023"), to: new Date("Dec 4 2023") },
-      new Date("Sep 5 2022"),
-      new Date("Jan 5 2023"),
+      { from: new Date("Jan 1 2025"), to: new Date("Jul  6 2025") },
+      { from: new Date("Apr 2 2026"), to: new Date("Dec 4 2026") },
+      new Date("Sep 5 2025"),
+      new Date("Jan 5 2026"),
     ]}
+    year={new Date("Jan 1 2025")}
   />
 );
 
 export const Standalone = () => {
-  return <MonthPicker.Standalone />;
+  return <MonthPicker.Standalone year={new Date("Jan 1 2025")} />;
 };
 
 export const UseMonthpicker = () => {
@@ -89,6 +96,7 @@ export const UseMonthpicker = () => {
     onMonthChange: console.log,
     fromDate: new Date("Jan 1 2022"),
     toDate: new Date("Sep 27 2025"),
+    defaultSelected: new Date("2025-12-01"),
   });
 
   return (
@@ -109,6 +117,7 @@ export const UseMonthpickerFormat = () => {
     disabled: [new Date("Apr 1 2022")],
     onMonthChange: console.log,
     inputFormat: "MM.yyyy",
+    defaultSelected: new Date("2025-12-01"),
   });
 
   return (
@@ -197,22 +206,14 @@ export const FollowYear = () => {
   );
 };
 
-export const Chromatic: Story = {
-  render: () => (
-    <div className="colgap">
-      <MonthPicker.Standalone />
-      <DropdownCaption />
-      <NB />
-      <NN />
-      <EN />
-      <DisabledMonths />
-      <UseMonthpicker />
-      <UseMonthpickerFormat />
-      <UserControlled />
-      <FollowYear />
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Standalone,
+  DropdownCaption,
+  NB,
+  NN,
+  EN,
+  DisabledMonths,
+  UseMonthpicker,
+  UseMonthpickerFormat,
+  UserControlled,
+});

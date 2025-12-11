@@ -6,6 +6,7 @@ import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Heading } from "../../typography";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import {
   FileObject,
   FileRejected,
@@ -254,39 +255,32 @@ TriggerWithButton.args = {
   maxSizeInBytes: 0,
 };
 
-const ChromaticStories: StoryFn = () => (
-  <div>
+export const ColorRoles = () => (
+  <div data-color="brand-magenta">
     <h2>Default</h2>
     <Default />
-    <h2>Single</h2>
-    <Single />
-    <h2>Translation</h2>
-    <Translation />
     <h2>TriggerWithButton</h2>
     <TriggerWithButton />
     <h2>DropzoneStates</h2>
     <DropzoneStates />
-    <h2>DropzoneTranslation</h2>
-    <DropzoneTranslation />
-    <h2>ItemDescription</h2>
-    <ItemDescription />
-    <h2>ItemDownload</h2>
-    <ItemDownload />
-    <h2>ItemIcons</h2>
-    <ItemIcons />
     <h2>ItemStates</h2>
     <ItemStates />
   </div>
 );
 
-export const ColorRoles = () => (
-  <div data-color="brand-magenta">
-    <ChromaticStories />
-  </div>
-);
-
-export const Chromatic: StoryFn = () => <ChromaticStories />;
-
-Chromatic.parameters = {
-  chromatic: { disable: false },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Single,
+  Translation,
+  TriggerWithButton,
+  DropzoneStates,
+  DropzoneTranslation,
+  ItemDescription: () => (
+    <div style={{ width: 400, maxWidth: "100%" }}>
+      <ItemDescription />
+    </div>
+  ),
+  ItemDownload,
+  ItemIcons,
+  ItemStates,
+});
