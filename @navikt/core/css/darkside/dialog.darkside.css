@@ -225,3 +225,9 @@
   padding-block: var(--__axc-dialog-p-b);
   padding-inline: var(--__axc-dialog-p-i);
 }
+
+@media (forced-colors: active) {
+  .aksel-dialog__popup {
+    outline: 2px solid var(--ax-border-neutral-strong) !important;
+  }
+}
