@@ -35,7 +35,10 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
    */
   variant?: "neutral" | "interaction" | "inverted";
   /**
-   * Overrides the color.
+   * Overrides color.
+   * 
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */
   "data-color"?: AkselColor;
 }
