@@ -140,5 +140,6 @@
 }
 
 .codeBlockLine[data-line-mark="highlight"] {
-  background-color: var(--ax-bg-info-moderate);
+  background-color: var(--ax-bg-info-moderateA);
+  border-left: 3px solid var(--ax-border-info);
 }
