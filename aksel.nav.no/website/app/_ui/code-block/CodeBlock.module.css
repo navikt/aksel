@@ -121,6 +121,10 @@
   }
 }
 
+/* When line numbers are present, offset line mark indicator to avoid overlap */
+.codeBlockLine.hasLineNumbers[data-line-mark]::before {
+  left: var(--ax-space-20);
+}
 .codeBlockLine[data-line-mark="add"] {
   background-color: var(--ax-bg-success-moderate);
 
