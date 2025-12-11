@@ -8,9 +8,11 @@
 }
 
 .codeBlockPre {
+  --codeblock-padding: var(--ax-space-8);
+
   border-top: 1px solid var(--ax-border-neutral-subtleA);
   border-bottom: 1px solid var(--ax-border-neutral-subtleA);
-  padding: var(--ax-space-8);
+  padding: var(--codeblock-padding);
   font-size: var(--ax-font-size-medium);
   font-family: var(--aksel-font-mono);
   overflow-x: auto;
@@ -29,11 +31,11 @@
     white-space: pre-wrap;
   }
 
-  &[data-line-numbers="true"] {
-    & code {
-      position: relative;
-    }
+  & code {
+    position: relative;
+  }
 
+  &[data-line-numbers="true"] {
     & .codeBlockLine {
       margin-left: var(--ax-space-40);
 
@@ -96,5 +98,43 @@
   &:focus-visible {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: -4px;
+  }
+}
+
+/* Diff highlighting */
+.codeBlockLine[data-diff] {
+  padding-left: calc(var(--ax-space-20) + var(--codeblock-padding));
+  padding-right: var(--codeblock-padding);
+  margin-left: calc(-1 * var(--codeblock-padding));
+  margin-right: calc(-1 * var(--codeblock-padding));
+
+  &::before {
+    width: 0.5rem;
+    text-align: left;
+    user-select: none;
+    color: var(--ax-text-neutral-subtle);
+    font-family: var(--aksel-font-mono);
+    font-size: var(--ax-font-size-small);
+    display: inline-block;
+    position: absolute;
+    left: var(--ax-space-2);
+  }
+}
+
+.codeBlockLine[data-diff="add"] {
+  background-color: var(--ax-bg-success-moderate);
+
+  &::before {
+    content: "+";
+    color: var(--ax-text-success);
+  }
+}
+
+.codeBlockLine[data-diff="remove"] {
+  background-color: var(--ax-bg-danger-moderate);
+
+  &::before {
+    content: "–";
+    color: var(--ax-text-danger);
   }
 }

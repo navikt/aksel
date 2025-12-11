@@ -22,7 +22,6 @@ type CodeBlockT = {
 /**
  * TODO: Future upgrades
  * - Add support for highlighting lines
- * - Add support for DIFF
  */
 function CodeBlock(props: CodeBlockT & React.HTMLAttributes<HTMLDivElement>) {
   const { tabs, showLineNumbers = true, defaultWrap, ...rest } = props;
@@ -129,23 +128,54 @@ function CodeBlockEditor(props: {
         {({ tokens, getLineProps, getTokenProps }) => (
           <pre
             className={styles.codeBlockPre}
-            data-line-numbers={showLineNumbers}
+            data-line-numbers={lang !== "diff" && showLineNumbers}
             data-wrap={wrapCode.current}
             data-overflow={showOverflow}
           >
             <code>
               {tokens.map((line, i) => {
                 const lineProps = getLineProps({ line });
+                const lineText = line.map((t) => t.content).join("");
+                const diffType =
+                  lang === "diff"
+                    ? lineText.startsWith("+")
+                      ? "add"
+                      : lineText.startsWith("-")
+                        ? "remove"
+                        : undefined
+                    : undefined;
+
                 return (
                   <div
                     key={i}
                     {...lineProps}
                     style={{ ...lineProps.style, "--line": `"${i + 1}"` }}
                     className={styles.codeBlockLine}
+                    data-diff={diffType}
                   >
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token })} />
-                    ))}
+                    {line.map((token, key) => {
+                      let content = token.content;
+                      if (key === 0 && diffType) {
+                        content = content.replace(/^[+-]/, "");
+                      }
+                      const tokenProps = { ...getTokenProps({ token }) };
+                      return (
+                        <span
+                          key={key}
+                          {...tokenProps}
+                          style={{
+                            ...tokenProps.style,
+                            color: diffType
+                              ? diffType === "add"
+                                ? "var(--ax-text-success)"
+                                : "var(--ax-text-danger)"
+                              : tokenProps.style?.color,
+                          }}
+                        >
+                          {content}
+                        </span>
+                      );
+                    })}
                   </div>
                 );
               })}
@@ -254,6 +284,9 @@ function getLanguage(lang: string) {
       break;
     case "less":
       language = "css";
+      break;
+    case "diff":
+      language = "diff";
       break;
     default:
       break;
