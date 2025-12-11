@@ -14,7 +14,7 @@ export default function transformer(file: FileInfo) {
     (match, tokenName, suffix) => {
       const key = tokenName.replace("--a-", "");
       if (legacyTokenConfig[key]) {
-        return `--aksel-legacy${tokenName.replace("--", "__")}${suffix}`;
+        return `--aksel-v7-deprecated${tokenName.replace("--", "__")}${suffix}`;
       }
       return match;
     },
