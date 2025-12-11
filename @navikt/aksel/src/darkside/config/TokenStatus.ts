@@ -22,6 +22,7 @@ type StatusT = {
   js: StatusDataT;
   tailwind: StatusDataT;
   component: StatusDataT;
+  deprecated: StatusDataT;
 };
 
 class TokenStatus {
@@ -39,6 +40,7 @@ class TokenStatus {
       js: { legacy: [], updated: [] },
       tailwind: { legacy: [], updated: [] },
       component: { legacy: [], updated: [] },
+      deprecated: { legacy: [], updated: [] },
     };
   }
 
@@ -72,6 +74,12 @@ class TokenStatus {
         break;
       case "tailwind":
         this.status.tailwind[statusType].push(hit);
+        break;
+      case "component":
+        this.status.component[statusType].push(hit);
+        break;
+      case "deprecated":
+        this.status.deprecated[statusType].push(hit);
         break;
     }
   }
@@ -208,12 +216,25 @@ class TokenStatus {
 
     const componentTokens = this.status.component.legacy.length;
     if (componentTokens > 0) {
-      console.info(chalk.underline(`COMPONENT Tokens Migration`));
+      console.info(chalk.underline(`\nCOMPONENT Tokens Migration`));
 
       console.info(
         `We no longer support component tokens. Please migrate to the new darkside tokens. using theming or other methods.`,
       );
-      console.info(`You can read more at https://aksel.nav.no/darkside`);
+    }
+
+    const deprecatedTokens = this.status.deprecated.legacy.length;
+    if (deprecatedTokens > 0) {
+      console.info(
+        chalk.underline(`\nDEPRECATED Tokens (--aksel-v7-deprecated__*)`),
+      );
+
+      console.info(
+        `${chalk.yellow("!")} Found ${deprecatedTokens} deprecated token${deprecatedTokens > 1 ? "s" : ""} that require manual migration.`,
+      );
+      console.info(
+        `These tokens were marked as deprecated during the automated migration and need to be replaced with new darkside tokens.`,
+      );
     }
   }
 }

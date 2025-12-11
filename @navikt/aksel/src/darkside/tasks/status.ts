@@ -49,6 +49,11 @@ function getStatus(
   );
 
   /**
+   * Pre-computed regex for deprecated tokens (--aksel-v7-deprecated__*)
+   */
+  const deprecatedRegex = /(--aksel-v7-deprecated__[a-zA-Z0-9_-]+)/gm;
+
+  /**
    * Process each file to find and record token usages
    */
   files.forEach((fileName, index) => {
@@ -156,6 +161,38 @@ function getStatus(
         });
 
         legacyMatch = legacyRegex.exec(fileSrc);
+      }
+    }
+
+    /**
+     * Detect deprecated tokens (--aksel-v7-deprecated__*)
+     * These are tokens that have been marked as deprecated during migration
+     * and need manual intervention from the user.
+     */
+    if (fileSrc.includes("--aksel-v7-deprecated__")) {
+      deprecatedRegex.lastIndex = 0;
+      let deprecatedMatch: RegExpExecArray | null =
+        deprecatedRegex.exec(fileSrc);
+
+      while (deprecatedMatch !== null) {
+        const { row, column } = getCharacterPositionInFile(
+          deprecatedMatch.index,
+          getLineStartsLazy(),
+        );
+
+        StatusStore.add({
+          isLegacy: true,
+          type: "deprecated",
+          columnNumber: column,
+          lineNumber: row,
+          canAutoMigrate: false,
+          fileName,
+          name: deprecatedMatch[0],
+          comment:
+            "Token marked as deprecated - requires manual migration to new darkside tokens",
+        });
+
+        deprecatedMatch = deprecatedRegex.exec(fileSrc);
       }
     }
 
