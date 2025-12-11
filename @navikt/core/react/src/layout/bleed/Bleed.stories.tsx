@@ -255,8 +255,8 @@ export const ReflectivePadding = {
     <>
       <style>
         {`
-      .navds-bleed {
-        background-color: var(--a-success-soft);
+      .aksel-bleed {
+        background-color: var(--ax-bg-success-moderate);
         width: fit-content;
       }
       `}

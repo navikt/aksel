@@ -274,7 +274,7 @@ export const Icons: Story = {
                 width="24"
                 height="24"
                 rx="6"
-                fill="var(--ax-text-info, var(--a-icon-alt-3))"
+                fill="var(--ax-text-info-subtle)"
               />
             </svg>
           }

@@ -129,7 +129,7 @@ function Placeholder({ text, height }: { text: string; height?: string }) {
   return (
     <div
       style={{
-        background: "var(--a-deepblue-900)",
+        background: "var(--ax-bg-brand-blue-strong)",
         height: height ?? "5rem",
         width: "auto",
         color: "white",

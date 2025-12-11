@@ -127,7 +127,7 @@ export const DividerDemo: Story = {
         <hr
           style={{
             border: "none",
-            borderBottom: "1px solid var(--a-border-divider)",
+            borderBottom: "1px solid var(--ax-border-neutral)",
             margin: 0,
           }}
         />
@@ -175,7 +175,7 @@ function Placeholders({
         <div
           key={i}
           style={{
-            backgroundColor: color ?? "var(--a-purple-200)",
+            backgroundColor: color ?? "var(--ax-bg-brand-blue-strong)",
             height: children ? "" : "3rem",
             width: children ? "" : "3rem",
           }}

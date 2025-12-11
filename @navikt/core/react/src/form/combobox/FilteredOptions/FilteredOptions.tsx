@@ -82,7 +82,7 @@ const FilteredOptions = () => {
         enabled={isListOpen}
         style={{
           maxHeight: localOpen
-            ? `min(316px, var(--ac-floating-available-height))`
+            ? `min(316px, var(--__axc-floating-available-height))`
             : `316px`,
         }}
         autoUpdateWhileMounted={false}

@@ -389,9 +389,9 @@ export const ActionMenuContent = forwardRef<
             ...style,
             ...{
               "--__axc-action-menu-content-transform-origin":
-                "var(--ac-floating-transform-origin)",
+                "var(--__axc-floating-transform-origin)",
               "--__axc-action-menu-content-available-height":
-                "var(--ac-floating-available-height)",
+                "var(--__axc-floating-available-height)",
             },
           }}
         >
@@ -666,7 +666,7 @@ export const ActionMenuCheckboxItem = forwardRef<
                   width="24"
                   height="24"
                   rx="4"
-                  fill="var(--ax-border-neutral, var(--a-border-default))"
+                  fill="var(--ax-border-neutral)"
                 />
                 <rect
                   x="1"
@@ -674,7 +674,7 @@ export const ActionMenuCheckboxItem = forwardRef<
                   width="22"
                   height="22"
                   rx="3"
-                  fill="var(--ax-bg-default, var(--a-surface-default))"
+                  fill="var(--ax-bg-default)"
                   strokeWidth="2"
                 />
               </g>
@@ -687,7 +687,7 @@ export const ActionMenuCheckboxItem = forwardRef<
                   width="24"
                   height="24"
                   rx="4"
-                  fill="var(--ax-bg-strong-pressed, var(--a-surface-action-selected))"
+                  fill="var(--ax-bg-strong-pressed)"
                 />
                 <rect
                   x="6"
@@ -695,7 +695,7 @@ export const ActionMenuCheckboxItem = forwardRef<
                   width="12"
                   height="4"
                   rx="1"
-                  fill="var(--ax-bg-default, var(--a-surface-default))"
+                  fill="var(--ax-bg-default)"
                 />
               </g>
               <g className={cn("navds-action-menu__indicator-icon--checked")}>
@@ -703,11 +703,11 @@ export const ActionMenuCheckboxItem = forwardRef<
                   width="24"
                   height="24"
                   rx="4"
-                  fill="var(--ax-bg-strong-pressed, var(--a-surface-action-selected))"
+                  fill="var(--ax-bg-strong-pressed)"
                 />
                 <path
                   d="M10.0352 13.4148L16.4752 7.40467C17.0792 6.83965 18.029 6.86933 18.5955 7.47478C19.162 8.08027 19.1296 9.03007 18.5245 9.59621L11.0211 16.5993C10.741 16.859 10.3756 17 10.0002 17C9.60651 17 9.22717 16.8462 8.93914 16.5611L6.43914 14.0611C5.85362 13.4756 5.85362 12.5254 6.43914 11.9399C7.02467 11.3544 7.97483 11.3544 8.56036 11.9399L10.0352 13.4148Z"
-                  fill="var(--ax-bg-default, var(--a-surface-default))"
+                  fill="var(--ax-bg-default)"
                 />
               </g>
             </svg>
@@ -807,7 +807,7 @@ export const ActionMenuRadioItem = forwardRef<
                   width="24"
                   height="24"
                   rx="12"
-                  fill="var(--ax-border-neutral, var(--a-border-default))"
+                  fill="var(--ax-border-neutral)"
                 />
                 <rect
                   x="1"
@@ -816,7 +816,7 @@ export const ActionMenuRadioItem = forwardRef<
                   height="22"
                   rx="11"
                   strokeWidth="2"
-                  fill="var(--ax-bg-default, var(--a-surface-default))"
+                  fill="var(--ax-bg-default)"
                 />
               </g>
               <g className={cn("navds-action-menu__indicator-icon--checked")}>
@@ -832,7 +832,7 @@ export const ActionMenuRadioItem = forwardRef<
                   width="8"
                   height="8"
                   rx="4"
-                  fill="var(--ax-bg-default, var(--a-surface-default))"
+                  fill="var(--ax-bg-default)"
                 />
               </g>
             </svg>
@@ -958,7 +958,7 @@ interface ActionMenuSubContentProps
 export const ActionMenuSubContent = forwardRef<
   ActionMenuSubContentElement,
   ActionMenuSubContentProps
->(({ children, className, style, ...rest }: ActionMenuSubContentProps, ref) => {
+>(({ children, className, ...rest }: ActionMenuSubContentProps, ref) => {
   const { cn } = useRenameCSS();
   const context = useActionMenuContext();
 
@@ -974,20 +974,6 @@ export const ActionMenuSubContent = forwardRef<
           "navds-action-menu__content navds-action-menu__sub-content",
           className,
         )}
-        style={{
-          ...style,
-          ...{
-            "--ac-action-menu-content-transform-origin":
-              "var(--ac-floating-transform-origin)",
-            "--ac-action-menu-content-available-width":
-              "var(--ac-floating-available-width)",
-            "--ac-action-menu-content-available-height":
-              "var(--ac-floating-available-height)",
-            "--ac-action-menu-trigger-width": "var(--ac-floating-anchor-width)",
-            "--ac-action-menu-trigger-height":
-              "var(--ac-floating-anchor-height)",
-          },
-        }}
       >
         <div className={cn("navds-action-menu__content-inner")}>{children}</div>
       </Menu.SubContent>
