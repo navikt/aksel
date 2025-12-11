@@ -1,5 +1,6 @@
 "use client";
 
+import cl from "clsx";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import tiny_color from "tinycolor2";
@@ -25,7 +26,7 @@ type TreeOptions = {
   size?: number;
 };
 
-function AsciiTree() {
+function AsciiTree({ right = false }: { right?: boolean }) {
   const [lines, updateLines] = useState(() =>
     xmasTree({ color: true, size: 21 }),
   );
@@ -48,7 +49,12 @@ function AsciiTree() {
   }
 
   return (
-    <div aria-hidden className={styles.tree}>
+    <div
+      aria-hidden
+      className={cl(`${styles.tree}`, {
+        [styles.right]: right,
+      })}
+    >
       <pre style={{ lineHeight: "8px", fontSize: "8px" }}>
         {lines.map((line, idx) => (
           <span key={idx}>

@@ -3,6 +3,11 @@
   top: var(--ax-space-8);
   z-index: -1;
   transform: translateY(-100%);
-  right: var(--ax-space-32);
+  left: 0;
   user-select: none;
+}
+
+.right {
+  left: calc(100% - var(--ax-space-24));
+  transform: translateY(-100%) translateX(-100%);
 }
