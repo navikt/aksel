@@ -17,7 +17,7 @@ export interface CopyButtonProps
    */
   variant?: "action" | "neutral";
   /**
-   * Overrides inherited color.
+   * Overrides color.
    * @default "neutral"
    *
    *
