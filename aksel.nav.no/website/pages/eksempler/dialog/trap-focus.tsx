@@ -41,5 +41,5 @@ export const Demo = {
 
 export const args = {
   index: 12,
-  desc: `Med modal="trap-focus" vil fokus være låst inne i dialogen, men scrolling på siden og interaksjon med elementer utenfor dialogen er fortsatt mulig. Dette er nyttig for dialoger som ikke skal blokkere hele siden. Merk at dette bare bør brukes i ekspertsystemer hvor brukeren har god kontroll over konteksten utenfor dialogen.`,
+  desc: 'Med modal="trap-focus" vil fokus være låst inne i dialogen, men scrolling på siden og interaksjon med elementer utenfor dialogen er fortsatt mulig. Dette er nyttig for dialoger som ikke skal blokkere hele siden. Merk at dette bare bør brukes i ekspertsystemer hvor brukeren har god kontroll over konteksten utenfor dialogen.',
 };
