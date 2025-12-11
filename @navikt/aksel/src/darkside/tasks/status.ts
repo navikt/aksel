@@ -49,9 +49,10 @@ function getStatus(
   );
 
   /**
-   * Pre-computed regex for deprecated tokens (--aksel-v7-deprecated__*)
+   * Pre-computed regex for legacy token definitions (--a-token:)
+   * These are custom property definitions that need manual migration.
    */
-  const deprecatedRegex = /(--aksel-v7-deprecated__[a-zA-Z0-9_-]+)/gm;
+  const legacyDefinitionRegex = /(--a-[a-zA-Z0-9-]+)(?=\s*:)/gm;
 
   /**
    * Process each file to find and record token usages
@@ -165,18 +166,21 @@ function getStatus(
     }
 
     /**
-     * Detect deprecated tokens (--aksel-v7-deprecated__*)
-     * These are tokens that have been marked as deprecated during migration
-     * and need manual intervention from the user.
+     * Detect legacy token definitions (--a-token:)
+     * These are custom property definitions using legacy tokens
+     * that need manual intervention from the user.
      */
-    if (fileSrc.includes("--aksel-v7-deprecated__")) {
-      deprecatedRegex.lastIndex = 0;
-      let deprecatedMatch: RegExpExecArray | null =
-        deprecatedRegex.exec(fileSrc);
+    legacyDefinitionRegex.lastIndex = 0;
+    let definitionMatch: RegExpExecArray | null =
+      legacyDefinitionRegex.exec(fileSrc);
 
-      while (deprecatedMatch !== null) {
+    while (definitionMatch !== null) {
+      const tokenKey = definitionMatch[1].replace("--a-", "");
+
+      /* Only report if it's a known legacy token */
+      if (legacyTokenConfig[tokenKey]) {
         const { row, column } = getCharacterPositionInFile(
-          deprecatedMatch.index,
+          definitionMatch.index,
           getLineStartsLazy(),
         );
 
@@ -187,13 +191,13 @@ function getStatus(
           lineNumber: row,
           canAutoMigrate: false,
           fileName,
-          name: deprecatedMatch[0],
+          name: definitionMatch[1],
           comment:
-            "Token marked as deprecated - requires manual migration to new darkside tokens",
+            "Legacy token definition - requires manual migration to new darkside tokens",
         });
-
-        deprecatedMatch = deprecatedRegex.exec(fileSrc);
       }
+
+      definitionMatch = legacyDefinitionRegex.exec(fileSrc);
     }
 
     for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {

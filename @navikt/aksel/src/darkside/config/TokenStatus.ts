@@ -217,6 +217,9 @@ class TokenStatus {
     const componentTokens = this.status.component.legacy.length;
     if (componentTokens > 0) {
       console.info(chalk.underline(`\nCOMPONENT Tokens Migration`));
+      console.info(
+        `${chalk.yellow("!")} Found ${componentTokens} component token definition${componentTokens > 1 ? "s" : ""} that require manual migration.`,
+      );
 
       console.info(
         `We no longer support component tokens. Please migrate to the new darkside tokens. using theming or other methods.`,
@@ -225,15 +228,13 @@ class TokenStatus {
 
     const deprecatedTokens = this.status.deprecated.legacy.length;
     if (deprecatedTokens > 0) {
-      console.info(
-        chalk.underline(`\nDEPRECATED Tokens (--aksel-v7-deprecated__*)`),
-      );
+      console.info(chalk.underline(`\nLEGACY TOKEN DEFINITIONS (--a-token:)`));
 
       console.info(
-        `${chalk.yellow("!")} Found ${deprecatedTokens} deprecated token${deprecatedTokens > 1 ? "s" : ""} that require manual migration.`,
+        `${chalk.yellow("!")} Found ${deprecatedTokens} legacy token definition${deprecatedTokens > 1 ? "s" : ""} that require manual migration.`,
       );
       console.info(
-        `These tokens were marked as deprecated during the automated migration and need to be replaced with new darkside tokens.`,
+        `These are custom property definitions using legacy tokens that need to be updated to use new darkside tokens.`,
       );
     }
   }
