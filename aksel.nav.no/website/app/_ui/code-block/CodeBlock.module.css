@@ -37,7 +37,8 @@
 
   &[data-line-numbers="true"] {
     & .codeBlockLine {
-      margin-left: var(--ax-space-40);
+      margin-left: var(--ax-space-36);
+      position: relative;
 
       &::before {
         content: var(--line);
@@ -49,7 +50,9 @@
         font-size: var(--ax-font-size-small);
         display: inline-block;
         position: absolute;
-        left: 0;
+        left: calc(var(--ax-space-40) * -1);
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }
@@ -107,6 +110,7 @@
   padding-right: var(--codeblock-padding);
   margin-left: calc(-1 * var(--codeblock-padding));
   margin-right: calc(-1 * var(--codeblock-padding));
+  position: relative;
 
   &::before {
     width: 0.5rem;
@@ -117,7 +121,9 @@
     font-size: var(--ax-font-size-small);
     display: inline-block;
     position: absolute;
-    left: var(--ax-space-2);
+    left: var(--ax-space-8);
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
@@ -125,6 +131,7 @@
 .codeBlockLine.hasLineNumbers[data-line-mark]::before {
   left: var(--ax-space-20);
 }
+
 .codeBlockLine[data-line-mark="add"] {
   background-color: var(--ax-bg-success-moderate);
 
