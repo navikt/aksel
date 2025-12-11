@@ -1,5 +1,17 @@
 # Changelog
 
+## 7.35.2
+
+### @navikt/ds-react
+
+- InfoCard: Removed unused `aria-labelledby` from `InfoCard.Title`. ([#4393](https://github.com/navikt/aksel/pull/4393))
+
+- Accordion: Remove `aria-hidden` to prevent SiteImprove reporting an issue. ([#4382](https://github.com/navikt/aksel/pull/4382))
+
+### @navikt/aksel
+
+- CLI: Lock dependencies. ([#4386](https://github.com/navikt/aksel/pull/4386))
+
 ## 7.35.1
 
 ### @navikt/ds-react
