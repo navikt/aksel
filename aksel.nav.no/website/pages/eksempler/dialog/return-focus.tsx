@@ -11,11 +11,14 @@ const Example = () => {
       <TextField ref={inputRef} label="Søkefelt" />
       <Dialog>
         <Dialog.Trigger>
-          <Button variant="secondary" icon={<CogIcon title="Instillinger" />} />
+          <Button
+            variant="secondary"
+            icon={<CogIcon title="Innstillinger" />}
+          />
         </Dialog.Trigger>
         <Dialog.Popup returnFocus={inputRef}>
           <Dialog.Header>
-            <Dialog.Title>Instillinger</Dialog.Title>
+            <Dialog.Title>Innstillinger</Dialog.Title>
           </Dialog.Header>
           <Dialog.Body>
             <BodyLong>

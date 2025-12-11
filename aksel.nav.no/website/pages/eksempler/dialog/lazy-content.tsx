@@ -79,5 +79,5 @@ export const Demo = {
 
 export const args = {
   index: 14,
-  desc: "Åpne dialogen og last inn innholdet asynkront istedenfor å vente til alt innhold er klart. Dette kan forbedre brukeropplevelsen da siden føkles raskere.",
+  desc: "Åpne dialogen og last inn innholdet asynkront istedenfor å vente til alt innhold er klart. Dette kan forbedre brukeropplevelsen da siden føles raskere.",
 };
