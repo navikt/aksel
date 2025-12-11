@@ -19,10 +19,6 @@ type CodeBlockT = {
   defaultWrap?: boolean;
 };
 
-/**
- * TODO: Future upgrades
- * - Add support for highlighting lines
- */
 function CodeBlock(props: CodeBlockT & React.HTMLAttributes<HTMLDivElement>) {
   const { tabs, showLineNumbers = true, defaultWrap, ...rest } = props;
 
@@ -128,7 +124,7 @@ function CodeBlockEditor(props: {
         {({ tokens, getLineProps, getTokenProps }) => (
           <pre
             className={styles.codeBlockPre}
-            data-line-numbers={lang !== "diff" && showLineNumbers}
+            data-line-numbers={showLineNumbers}
             data-wrap={wrapCode.current}
             data-overflow={showOverflow}
           >
@@ -136,14 +132,7 @@ function CodeBlockEditor(props: {
               {tokens.map((line, i) => {
                 const lineProps = getLineProps({ line });
                 const lineText = line.map((t) => t.content).join("");
-                const diffType =
-                  lang === "diff"
-                    ? lineText.startsWith("+")
-                      ? "add"
-                      : lineText.startsWith("-")
-                        ? "remove"
-                        : undefined
-                    : undefined;
+                const lineMark = getLineMark(lang, lineText);
 
                 return (
                   <div
@@ -151,12 +140,12 @@ function CodeBlockEditor(props: {
                     {...lineProps}
                     style={{ ...lineProps.style, "--line": `"${i + 1}"` }}
                     className={styles.codeBlockLine}
-                    data-diff={diffType}
+                    data-line-mark={lineMark}
                   >
                     {line.map((token, key) => {
                       let content = token.content;
-                      if (key === 0 && diffType) {
-                        content = content.replace(/^[+-]/, "");
+                      if (key === 0 && lineMark) {
+                        content = content.replace(/^[+->]/, "");
                       }
                       const tokenProps = { ...getTokenProps({ token }) };
                       return (
@@ -165,11 +154,12 @@ function CodeBlockEditor(props: {
                           {...tokenProps}
                           style={{
                             ...tokenProps.style,
-                            color: diffType
-                              ? diffType === "add"
+                            color:
+                              lineMark === "add"
                                 ? "var(--ax-text-success)"
-                                : "var(--ax-text-danger)"
-                              : tokenProps.style?.color,
+                                : lineMark === "remove"
+                                  ? "var(--ax-text-danger)"
+                                  : tokenProps.style?.color,
                           }}
                         >
                           {content}
@@ -293,6 +283,23 @@ function getLanguage(lang: string) {
   }
 
   return language;
+}
+
+function getLineMark(lang: string, lineText: string) {
+  const trimmed = lineText.trimStart();
+
+  /* Ignore empty lines or lines with only the marker */
+  if (trimmed.length <= 1) return undefined;
+
+  /* Highlight works for any language */
+  if (trimmed.startsWith(">")) return "highlight";
+
+  /* Add/remove only applies to diff language */
+  if (lang !== "diff") return undefined;
+  if (trimmed.startsWith("+")) return "add";
+  if (trimmed.startsWith("-")) return "remove";
+
+  return undefined;
 }
 
 export { CodeBlock };

@@ -101,8 +101,8 @@
   }
 }
 
-/* Diff highlighting */
-.codeBlockLine[data-diff] {
+/* Line marking (diff add/remove, highlight) */
+.codeBlockLine[data-line-mark] {
   padding-left: calc(var(--ax-space-20) + var(--codeblock-padding));
   padding-right: var(--codeblock-padding);
   margin-left: calc(-1 * var(--codeblock-padding));
@@ -121,7 +121,7 @@
   }
 }
 
-.codeBlockLine[data-diff="add"] {
+.codeBlockLine[data-line-mark="add"] {
   background-color: var(--ax-bg-success-moderate);
 
   &::before {
@@ -130,11 +130,15 @@
   }
 }
 
-.codeBlockLine[data-diff="remove"] {
+.codeBlockLine[data-line-mark="remove"] {
   background-color: var(--ax-bg-danger-moderate);
 
   &::before {
     content: "–";
     color: var(--ax-text-danger);
   }
+}
+
+.codeBlockLine[data-line-mark="highlight"] {
+  background-color: var(--ax-bg-info-moderate);
 }

@@ -18,7 +18,7 @@ function SingleCodeBlock(props: ExtractPortableComponentProps<"kode">) {
     value: id,
   };
 
-  return <CodeBlock showLineNumbers tabs={[tab]} />;
+  return <CodeBlock showLineNumbers={false} tabs={[tab]} />;
 }
 
 export { SingleCodeBlock };
