@@ -218,12 +218,26 @@
 }
 
 .aksel-dialog__footer {
-  justify-content: flex-start;
-  display: flex;
-  flex-flow: wrap;
-  gap: var(--ax-space-8);
   padding-block: var(--__axc-dialog-p-b);
   padding-inline: var(--__axc-dialog-p-i);
+  display: flex;
+  gap: var(--ax-space-8);
+}
+
+.aksel-dialog__action-footer {
+  display: flex;
+  flex-flow: wrap-reverse;
+  gap: var(--ax-space-8);
+
+  @media (min-width: 480px) {
+    & :nth-of-type(2) {
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 479px) {
+    flex-flow: column-reverse;
+  }
 }
 
 @media (forced-colors: active) {

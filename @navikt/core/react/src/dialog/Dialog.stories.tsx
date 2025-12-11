@@ -7,6 +7,7 @@ import { VStack } from "../layout/stack";
 import { Table } from "../table";
 import {
   Dialog,
+  DialogActionFooter,
   DialogBody,
   DialogCloseTrigger,
   DialogDescription,
@@ -55,11 +56,17 @@ export const Default = {
           <DialogBody>
             <ScrollContent />
           </DialogBody>
-          <DialogFooter>
-            <DialogCloseTrigger>
-              <Button>Close</Button>
-            </DialogCloseTrigger>
-          </DialogFooter>
+          <DialogActionFooter>
+            <Button variant="tertiary">Back</Button>
+            <Button variant="secondary">Cancel</Button>
+            <Button>Send button with long text</Button>
+          </DialogActionFooter>
+          {/* <DialogFooter>
+            <Button variant="tertiary">Back</Button>
+            <Spacer />
+            <Button variant="secondary">Cancel</Button>
+            <Button>Send button with long text</Button>
+          </DialogFooter> */}
         </DialogPopup>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog</button>
