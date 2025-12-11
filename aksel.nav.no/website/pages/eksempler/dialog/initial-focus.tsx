@@ -6,32 +6,29 @@ const Example = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div>
-      <Dialog>
-        <Dialog.Trigger>
-          <Button>Åpne dialog</Button>
-        </Dialog.Trigger>
-        <Dialog.Popup initialFocus={inputRef}>
-          <Dialog.Header withClosebutton={false}>
-            <Dialog.Title>Dialog med autofocus</Dialog.Title>
-            <Search ref={inputRef} label="Navn" variant="simple" />
-          </Dialog.Header>
-          <Dialog.Body>
-            <BodyLong>
-              Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
-              incididunt dolor do ad ut. Incididunt eiusmod nostrud deserunt
-              duis laborum. Proident aute culpa qui nostrud velit adipisicing
-              minim.
-            </BodyLong>
-          </Dialog.Body>
-          <Dialog.Footer>
-            <Dialog.CloseTrigger>
-              <Button>Lukk</Button>
-            </Dialog.CloseTrigger>
-          </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </div>
+    <Dialog>
+      <Dialog.Trigger>
+        <Button>Åpne dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Popup initialFocus={inputRef}>
+        <Dialog.Header withClosebutton={false}>
+          <Dialog.Title>Dialog med autofocus</Dialog.Title>
+          <Search ref={inputRef} label="Navn" variant="simple" />
+        </Dialog.Header>
+        <Dialog.Body>
+          <BodyLong>
+            Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
+            incididunt dolor do ad ut. Incididunt eiusmod nostrud deserunt duis
+            laborum. Proident aute culpa qui nostrud velit adipisicing minim.
+          </BodyLong>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.CloseTrigger>
+            <Button>Lukk</Button>
+          </Dialog.CloseTrigger>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
 

@@ -3,34 +3,31 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div>
-      <Dialog>
-        <Dialog.Trigger>
-          <Button>Åpne dialog</Button>
-        </Dialog.Trigger>
-        <Dialog.Popup modal="trap-focus" closeOnOutsideClick={false}>
-          <Dialog.Header>
-            <Dialog.Title>Dialog med trap-focus</Dialog.Title>
-            <Dialog.Description>
-              Fokus er låst, men scroll og interaksjon utenfor er tillatt.
-            </Dialog.Description>
-          </Dialog.Header>
-          <Dialog.Body>
-            <BodyLong>
-              Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
-              incididunt dolor do ad ut. Incididunt eiusmod nostrud deserunt
-              duis laborum. Proident aute culpa qui nostrud velit adipisicing
-              minim.
-            </BodyLong>
-          </Dialog.Body>
-          <Dialog.Footer>
-            <Dialog.CloseTrigger>
-              <Button>Lukk</Button>
-            </Dialog.CloseTrigger>
-          </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </div>
+    <Dialog>
+      <Dialog.Trigger>
+        <Button>Åpne dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Popup modal="trap-focus" closeOnOutsideClick={false}>
+        <Dialog.Header>
+          <Dialog.Title>Dialog med trap-focus</Dialog.Title>
+          <Dialog.Description>
+            Fokus er låst, men scroll og interaksjon utenfor er tillatt.
+          </Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Body>
+          <BodyLong>
+            Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
+            incididunt dolor do ad ut. Incididunt eiusmod nostrud deserunt duis
+            laborum. Proident aute culpa qui nostrud velit adipisicing minim.
+          </BodyLong>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.CloseTrigger>
+            <Button>Lukk</Button>
+          </Dialog.CloseTrigger>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, Dialog, HStack } from "@navikt/ds-react";
+import { Button, Dialog, HStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 type Position = "center" | "right" | "left" | "bottom" | "fullscreen";
@@ -25,7 +25,7 @@ const Example = () => {
   };
 
   return (
-    <Box paddingBlock="space-64">
+    <div>
       <HStack gap="space-4">
         <Button variant="secondary" {...getDialogProps("center")}>
           Center
@@ -56,7 +56,7 @@ const Example = () => {
           </Dialog.Footer>
         </Dialog.Popup>
       </Dialog>
-    </Box>
+    </div>
   );
 };
 

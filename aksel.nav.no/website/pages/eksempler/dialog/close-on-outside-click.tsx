@@ -3,29 +3,27 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div>
-      <Dialog>
-        <Dialog.Trigger>
-          <Button>Åpne dialog</Button>
-        </Dialog.Trigger>
-        <Dialog.Popup closeOnOutsideClick={false}>
-          <Dialog.Header>
-            <Dialog.Title>Klikk utenfor er deaktivert</Dialog.Title>
-          </Dialog.Header>
-          <Dialog.Body>
-            <BodyLong>
-              Denne dialogen lukkes ikke når du klikker utenfor. Du må bruke
-              lukkeknappen eller trykke Escape for å lukke den.
-            </BodyLong>
-          </Dialog.Body>
-          <Dialog.Footer>
-            <Dialog.CloseTrigger>
-              <Button>Lukk</Button>
-            </Dialog.CloseTrigger>
-          </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </div>
+    <Dialog>
+      <Dialog.Trigger>
+        <Button>Åpne dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Popup closeOnOutsideClick={false}>
+        <Dialog.Header>
+          <Dialog.Title>Klikk utenfor er deaktivert</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <BodyLong>
+            Denne dialogen lukkes ikke når du klikker utenfor. Du må bruke
+            lukkeknappen eller trykke Escape for å lukke den.
+          </BodyLong>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.CloseTrigger>
+            <Button>Lukk</Button>
+          </Dialog.CloseTrigger>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
 

@@ -17,45 +17,43 @@ const Example = () => {
   };
 
   return (
-    <div>
-      <Dialog onOpenChange={handleOpenChange}>
-        <Dialog.Trigger>
-          <Button>Åpne dialog</Button>
-        </Dialog.Trigger>
-        <Dialog.Popup>
-          <Dialog.Header>
-            <Dialog.Title>Skjema med ulagrede endringer</Dialog.Title>
-          </Dialog.Header>
-          <Dialog.Body>
-            <BodyLong spacing>
-              Skriv noe i feltet nedenfor og prøv å lukke dialogen. Du vil bli
-              spurt om bekreftelse før dialogen lukkes.
-            </BodyLong>
-            <TextField
-              label="Navn"
-              onChange={(e) => {
-                hasUnsavedChangesRef.current = e.target.value.length > 0;
+    <Dialog onOpenChange={handleOpenChange}>
+      <Dialog.Trigger>
+        <Button>Åpne dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Popup>
+        <Dialog.Header>
+          <Dialog.Title>Skjema med ulagrede endringer</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <BodyLong spacing>
+            Skriv noe i feltet nedenfor og prøv å lukke dialogen. Du vil bli
+            spurt om bekreftelse før dialogen lukkes.
+          </BodyLong>
+          <TextField
+            label="Navn"
+            onChange={(e) => {
+              hasUnsavedChangesRef.current = e.target.value.length > 0;
+            }}
+          />
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.CloseTrigger>
+            <Button
+              onClick={() => {
+                // Save changes
+                hasUnsavedChangesRef.current = false;
               }}
-            />
-          </Dialog.Body>
-          <Dialog.Footer>
-            <Dialog.CloseTrigger>
-              <Button
-                onClick={() => {
-                  // Save changes
-                  hasUnsavedChangesRef.current = false;
-                }}
-              >
-                Lagre
-              </Button>
-            </Dialog.CloseTrigger>
-            <Dialog.CloseTrigger>
-              <Button variant="secondary">Avbryt</Button>
-            </Dialog.CloseTrigger>
-          </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </div>
+            >
+              Lagre
+            </Button>
+          </Dialog.CloseTrigger>
+          <Dialog.CloseTrigger>
+            <Button variant="secondary">Avbryt</Button>
+          </Dialog.CloseTrigger>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
 
