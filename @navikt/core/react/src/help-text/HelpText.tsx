@@ -21,8 +21,12 @@ export interface HelpTextProps
    */
   wrapperClassName?: string;
   /**
-   * Overrides the color.
+   * Overrides color.
    * @default "info"
+   *
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   * @private
    */
   "data-color"?: AkselColor;
 }

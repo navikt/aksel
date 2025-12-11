@@ -1,4 +1,5 @@
 import React, { HTMLAttributes, forwardRef } from "react";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { BodyLong, HeadingProps } from "../typography";
@@ -55,10 +56,13 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   toptextHeadingLevel?: Exclude<HeadingProps["level"], "1">;
   /**
    * Overrides inherited color.
+   *
+   *
+   * We have dissalowed status-colors
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */
-  "data-color"?: AkselColor;
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 interface ChatComponent

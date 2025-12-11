@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
 import type { AkselColor } from "../types";
 import { omit } from "../util";
@@ -57,11 +58,11 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * Overrides inherited color.
    *
    *
-   * We recommend only using `accent` and `neutral`.
+   * We recommend only using `accent` and `neutral`. We have dissalowed status-colors.
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */
-  "data-color"?: AkselColor;
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 /**

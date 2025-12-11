@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import type { AkselColor } from "../types";
 
 export interface ToggleGroupProps
@@ -34,10 +35,13 @@ export interface ToggleGroupProps
   variant?: "action" | "neutral";
   /**
    * Overrides inherited color.
+   *
+   *
+   * We recommend only using `accent` and `neutral`. We have dissalowed status-colors.
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */
-  "data-color"?: AkselColor;
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
   /**
    * Stretch each button to fill avaliable space in container.
    * @default false

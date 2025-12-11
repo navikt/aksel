@@ -28,6 +28,9 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
   size?: "small" | "medium";
   /**
    * Overrides inherited color.
+   *
+   *
+   * We reccomend avoiding status-colors like `info`, `success`, `warning` and `danger` in LinkCards.
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */

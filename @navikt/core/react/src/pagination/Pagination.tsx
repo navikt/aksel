@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { BodyShort, Heading } from "../typography";
@@ -70,11 +71,16 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
     text: string;
   };
   /**
-   * Overrides the color.
+   * Overrides color.
    * @default "neutral"
+   *
+   *
+   * We have dissalowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    * @private
    */
-  "data-color"?: AkselColor;
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 interface PaginationType
