@@ -40,7 +40,7 @@ export interface ReadMoreProps
    * Overrides inherited color.
    *
    *
-   * We recommend only using `accent`. We have dissalowed status-colors.
+   * We recommend only using `accent`. We have disallowed status-colors.
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    * @private

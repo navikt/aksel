@@ -56,7 +56,7 @@ export interface ButtonProps
    * Overrides inherited color.
    *
    *
-   * We recommend only using `accent`, `neutral` and `danger`. We have dissalowed other status-colors.
+   * We recommend only using `accent`, `neutral` and `danger`. We have disallowed other status-colors.
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */

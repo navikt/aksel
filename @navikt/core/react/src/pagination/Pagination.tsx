@@ -75,7 +75,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
    * @default "neutral"
    *
    *
-   * We have dissalowed status-colors.
+   * We have disallowed status-colors.
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    * @private
