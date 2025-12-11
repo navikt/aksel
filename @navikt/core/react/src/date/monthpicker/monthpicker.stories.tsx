@@ -87,7 +87,12 @@ export const DisabledMonths = () => (
 );
 
 export const Standalone = () => {
-  return <MonthPicker.Standalone year={new Date("Jan 1 2025")} />;
+  return (
+    <MonthPicker.Standalone
+      defaultSelected={new Date("Jan 1 2025")}
+      year={new Date("Jan 1 2025")}
+    />
+  );
 };
 
 export const UseMonthpicker = () => {
