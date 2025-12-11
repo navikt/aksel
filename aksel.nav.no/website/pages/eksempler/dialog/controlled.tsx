@@ -11,13 +11,13 @@ const Example = () => {
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={open}
-        aria-controls={open ? "dialog-popup-controlled-example" : undefined}
+        aria-controls={open ? "dialog-popup-example" : undefined}
       >
         Åpne dialog
       </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <Dialog.Popup id="dialog-popup-controlled-example">
+        <Dialog.Popup id="dialog-popup-example">
           <Dialog.Header>
             <Dialog.Title>Kontrollert dialog</Dialog.Title>
             <Dialog.Description>

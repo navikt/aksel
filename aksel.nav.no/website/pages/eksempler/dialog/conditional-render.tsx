@@ -28,7 +28,7 @@ const Example = () => {
         onClick={() => openDialog("user-1")}
         aria-haspopup="dialog"
         aria-expanded={open}
-        aria-controls={open ? "dialog-popup-controlled-example" : undefined}
+        aria-controls={open ? "dialog-popup-example" : undefined}
       >
         Vis brukerdetaljer
       </Button>
@@ -38,7 +38,7 @@ const Example = () => {
         onOpenChange={(newOpen) => !newOpen && setSelectedId(null)}
         onOpenChangeComplete={handleOpenChangeComplete}
       >
-        <Dialog.Popup>
+        <Dialog.Popup id="dialog-popup-example">
           {data && (
             <>
               <Dialog.Header>
