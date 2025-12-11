@@ -5,6 +5,7 @@ import React, {
   useState,
 } from "react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Button } from "../../button";
 import { useRenameCSS } from "../../theme/Theme";
 import { AkselColor } from "../../types";
@@ -77,7 +78,7 @@ export interface SearchProps
   /**
    * @private
    */
-  "data-color"?: AkselColor;
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 interface SearchComponent

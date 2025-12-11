@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps } from "../popover";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -19,6 +20,15 @@ export interface HelpTextProps
    * Classname for wrapper
    */
   wrapperClassName?: string;
+  /**
+   * Overrides color.
+   * @default "info"
+   *
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   * @private
+   */
+  "data-color"?: AkselColor;
 }
 
 /**

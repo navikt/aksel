@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { BodyLong } from "../typography";
 import { AccordionItemContext } from "./AccordionItem";
 
@@ -16,6 +16,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
     const context = useContext(AccordionItemContext);
 
     const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal();
 
     if (context === null) {
       console.error(
@@ -26,6 +27,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
 
     return (
       <BodyLong
+        data-color={themeContext.color}
         {...rest}
         as="div"
         ref={ref}

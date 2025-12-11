@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { OverridableComponent } from "../util/types";
@@ -26,6 +27,15 @@ export interface LinkProps
    * Link text
    */
   children: React.ReactNode;
+  /**
+   * Overrides inherited color.
+   *
+   *
+   * We recommend only using `accent` and `neutral`. We have disallowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 /**

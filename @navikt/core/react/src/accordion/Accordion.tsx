@@ -1,5 +1,7 @@
 import React, { forwardRef } from "react";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { omit } from "../util";
 import AccordionContent, { AccordionContentProps } from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
@@ -52,6 +54,15 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * @deprecated No longer has any effect.
    */
   headingSize?: "large" | "medium" | "small" | "xsmall";
+  /**
+   * Overrides inherited color.
+   *
+   *
+   * We recommend only using `accent` and `neutral`. We have disallowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 /**

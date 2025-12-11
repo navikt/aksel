@@ -1,5 +1,6 @@
 import React, { ButtonHTMLAttributes, forwardRef, useState } from "react";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Button, ButtonProps } from "../button";
 import { useRenameCSS } from "../theme/Theme";
 import type { AkselColor } from "../types/theme";
@@ -16,10 +17,15 @@ export interface CopyButtonProps
    */
   variant?: "action" | "neutral";
   /**
-   * CopyButton color.
+   * Overrides color.
    * @default "neutral"
+   *
+   *
+   * We recommend only using `accent` and `neutral`. We have disallowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */
-  "data-color"?: AkselColor;
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
   /**
    * Text to copy to clipboard.
    */
@@ -153,7 +159,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 
 function variantToDataColor(
   variant: CopyButtonProps["variant"],
-): AkselColor | undefined {
+): Exclude<AkselColor, AkselStatusColorRole> | undefined {
   if (variant === "action") {
     return "accent";
   }
