@@ -78,7 +78,7 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
         size={size}
         status={status}
         color={alertColor}
-        statusId={statusId}
+        statusId={type === "strong" ? statusId : undefined}
       >
         <Component
           aria-label={
