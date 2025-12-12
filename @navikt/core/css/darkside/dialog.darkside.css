@@ -221,7 +221,9 @@
   padding-block: var(--__axc-dialog-p-b);
   padding-inline: var(--__axc-dialog-p-i);
   display: flex;
+  justify-content: flex-end;
   gap: var(--ax-space-8);
+  flex-wrap: wrap;
 }
 
 .aksel-dialog__action-footer {
