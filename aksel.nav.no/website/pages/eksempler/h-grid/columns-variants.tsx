@@ -23,7 +23,6 @@ const Placeholder = () => <Box background="brand-blue-strong" height="15rem" />;
 export default withDsExample(Example, {
   variant: "full",
   showBreakpoints: true,
-  legacyOnly: true,
 });
 
 /* Storybook story */
