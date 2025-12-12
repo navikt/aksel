@@ -23,6 +23,8 @@ import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { AnimatedFaceCard } from "@/app/(routes)/(root)/_ui/AnimatedFaceCard";
 import { AnimationButton } from "@/app/(routes)/(root)/_ui/AnimationButton";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { AsciiTree } from "@/app/_ui/holiday-deco/AsciiTree";
+import { Snow } from "@/app/_ui/holiday-deco/Snow";
 import PromoTag from "@/app/_ui/promo-tag/PromoTag";
 import { sanityFetch } from "../../_sanity/live";
 import {
@@ -82,6 +84,7 @@ const Page = async () => {
           <BoxNew className={styles.forsidePageWrapper}>
             <PageBlock width="xl" gutters>
               <Hero />
+
               {/* Designsystemet */}
               <Bleed marginInline="full" reflectivePadding>
                 <BoxNew
@@ -96,8 +99,13 @@ const Page = async () => {
                   </HStack>
                   <HGrid gap="space-24" as="ul" columns={{ sm: 1, xl: 2 }}>
                     <li>
-                      <BoxNew borderColor="brand-blue" asChild>
+                      <BoxNew
+                        borderColor="brand-blue"
+                        asChild
+                        position="relative"
+                      >
                         <LinkCard data-color="brand-blue" arrow={false}>
+                          <AsciiTree />
                           <BoxNew
                             asChild
                             padding="space-16"
@@ -230,6 +238,7 @@ const Page = async () => {
                   paddingBlock={{ xs: "space-48" }}
                   paddingInline={{ xs: "space-16", sm: "space-48" }}
                   marginBlock="space-64 0"
+                  position="relative"
                 >
                   <VStack gap="space-12">
                     <BoxNew>
@@ -273,6 +282,7 @@ const Page = async () => {
             </PageBlock>
           </BoxNew>
         </MainWrapper>
+        <Snow />
       </PauseAnimationProvider>
     </AkselPage>
   );
