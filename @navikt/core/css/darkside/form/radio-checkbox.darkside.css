@@ -85,8 +85,11 @@
   content: "";
   position: absolute;
   inset: calc(
-    -1 * (var(--__axc-radio-checkbox-marker-border) +
-          (var(--__axc-radio-checkbox-marker-target) - var(--__axc-radio-checkbox-marker-size)) / 2)
+    -1 *
+      (
+        var(--__axc-radio-checkbox-marker-border) +
+          (var(--__axc-radio-checkbox-marker-target) - var(--__axc-radio-checkbox-marker-size)) / 2
+      )
   );
 }
 
@@ -230,8 +233,8 @@
     inset 0 0 0 7px var(--ax-bg-neutral-moderate);
 }
 
-/* High contrast mode */
-@media (forced-colors: active) {
+/* High contrast mode (but not print) */
+@media screen and (forced-colors: active) {
   /* Checkbox indeterminate icon color */
   :is(.aksel-checkbox, .aksel-checkbox--readonly) .aksel-checkbox__input:indeterminate::after {
     background-color: fieldtext;
@@ -287,5 +290,31 @@
     :is(.aksel-checkbox__label, .aksel-checkbox__description, .aksel-checkbox__input:checked + .aksel-checkbox__icon),
   .aksel-radio--disabled :is(.aksel-radio__label, .aksel-radio__description) {
     color: graytext;
+  }
+}
+
+@media print {
+  .aksel-checkbox__input::before,
+  .aksel-radio__input::before {
+    z-index: -1;
+  }
+
+  .aksel-radio__input,
+  .aksel-checkbox__input {
+    border-color: black !important;
+  }
+
+  .aksel-radio__input:checked {
+    border-color: black;
+  }
+
+  .aksel-checkbox__input {
+    color: white !important;
+  }
+
+  .aksel-checkbox__icon {
+    top: 2px;
+    bottom: 2px;
+    height: calc(var(--__axc-radio-checkbox-marker-size) - 4px);
   }
 }
