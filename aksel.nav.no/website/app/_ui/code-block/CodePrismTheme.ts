@@ -8,7 +8,7 @@ import {
   TextNeutralSubtle,
   TextWarning,
   TextWarningSubtle,
-} from "@navikt/ds-tokens/darkside-js";
+} from "@navikt/ds-tokens/js";
 
 const AkselPrismTheme: PrismTheme = {
   plain: { color: TextNeutral },

@@ -1,6 +1,13 @@
 import React, { forwardRef } from "react";
+import type {
+  AkselColoredBorderToken,
+  AkselColoredStatelessBackgroundToken,
+  AkselRootBackgroundToken,
+  AkselRootBorderToken,
+  AkselShadowToken,
+} from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS } from "../../theme/Theme";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
@@ -10,27 +17,30 @@ import BasePrimitive, {
 import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
 import {
-  BackgroundColorToken,
-  BorderColorToken,
   BorderRadiusScale,
   ResponsiveProp,
-  ShadowToken,
   SpaceDelimitedAttribute,
-  SurfaceColorToken,
 } from "../utilities/types";
 import BoxNew from "./Box.darkside";
 
+/**
+ * TODO: Support "base"-colors: default, soft, moderate, strong etc without color-role defined
+ */
 export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
+   * @see {@link StaticDefaultBgKeys} and {@link StaticBgKeys}
    */
-  background?: BackgroundColorToken | SurfaceColorToken;
+  background?: AkselRootBackgroundToken | AkselColoredStatelessBackgroundToken;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
+   * @see {@link BorderColorKeys} and {@link BorderColorWithRoleKeys}
    */
-  borderColor?: BorderColorToken;
+  borderColor?:
+    | Exclude<AkselRootBorderToken, "focus">
+    | AkselColoredBorderToken;
   /**
    * CSS `border-radius` property.
    * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
@@ -39,6 +49,7 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
    * borderRadius='full'
    * borderRadius='0 full 12 2'
    * borderRadius={{xs: '2 12', sm: '0', md: '12', lg: 'full'}}
+   * @see {@link BorderRadiusKeys}
    */
   borderRadius?: ResponsiveProp<
     SpaceDelimitedAttribute<BorderRadiusScale | "0">
@@ -53,13 +64,19 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
   /** Shadow on box. Accepts a shadow token.
    * @example
    * shadow='small'
+   * @see {@link ShadowKeys}
    */
-  shadow?: ShadowToken;
+  shadow?: AkselShadowToken;
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 
 interface BoxComponentType
   extends OverridableComponent<BoxProps, HTMLDivElement> {
+  /**
+   * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/Box' instead (with same props).
+   *
+   * **Run `npx @navikt/aksel@latest codemod v8-box-new`> to migrate.**
+   */
   New: typeof BoxNew;
 }
 
@@ -108,57 +125,25 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal(false);
       const { cn } = useRenameCSS();
-
-      if (
-        process.env.NODE_ENV !== "production" &&
-        themeContext?.isDarkside &&
-        (background || borderColor || shadow)
-      ) {
-        let errorText = ``;
-        if (background) {
-          errorText += `\n- background: "${background}"`;
-        }
-        if (borderColor) {
-          errorText += `\n- borderColor: "${borderColor}"`;
-        }
-        if (shadow) {
-          errorText += `\n- shadow: "${shadow}"`;
-        }
-        throw new Error(
-          `<Box /> with properties 'background', 'borderColor' or 'shadow' cannot be used with Aksel <Theme /> (darkmode-support). \nTo continue using these properties, migrate to '<Box.New>' (BoxNew for RSC)\nUpdate these props:${errorText}`,
-        );
-      }
-
-      const prefix = themeContext?.isDarkside ? "ax" : "a";
-
       const style: React.CSSProperties = {
         ..._style,
-        [`--__${prefix}c-box-background`]: background
-          ? `var(--a-${background})`
+        "--__axc-box-background": background
+          ? `var(--ax-bg-${background})`
           : undefined,
-        [`--__${prefix}c-box-shadow`]: shadow
-          ? `var(--a-shadow-${shadow})`
+        "--__axc-box-shadow": shadow ? `var(--ax-shadow-${shadow})` : undefined,
+        "--__axc-box-border-color": borderColor
+          ? `var(--ax-border-${borderColor})`
           : undefined,
-        [`--__${prefix}c-box-border-color`]: borderColor
-          ? `var(--a-${borderColor})`
-          : undefined,
-        [`--__${prefix}c-box-border-width`]: borderWidth
+        "--__axc-box-border-width": borderWidth
           ? borderWidth
               .split(" ")
               .map((x) => `${x}px`)
               .join(" ")
           : undefined,
-        ...getResponsiveProps(
-          prefix,
-          "box",
-          "radius",
-          "radius",
-          borderRadius,
-          false,
-          ["0"],
-        ),
+        ...getResponsiveProps("box", "radius", "radius", borderRadius, false, [
+          "0",
+        ]),
       };
 
       const Comp = asChild ? Slot : Component;
@@ -173,9 +158,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
               "navds-box-bg": background,
               "navds-box-border-color": borderColor,
               "navds-box-border-width": borderWidth,
-              "navds-box-border-radius":
-                borderRadius && !themeContext?.isDarkside,
-              "navds-box-radius": borderRadius && themeContext?.isDarkside,
+              "navds-box-radius": borderRadius,
               "navds-box-shadow": shadow,
             })}
           >

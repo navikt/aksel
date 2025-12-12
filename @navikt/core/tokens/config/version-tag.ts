@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from "node:fs";
 
-const cssFilePaths = ["./dist/tokens.css", "./dist/darkside/tokens.css"];
+const cssFilePaths = ["./dist/tokens.css"];
 const packageJsonPath = "./package.json";
 
 const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8"));

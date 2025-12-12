@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Loader } from "../loader";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
@@ -6,6 +7,14 @@ import { Label } from "../typography";
 import { omit } from "../util";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { OverridableComponent } from "../util/types";
+
+type legacyVariants =
+  | "primary-neutral"
+  | "secondary-neutral"
+  | "tertiary-neutral"
+  | "danger";
+
+type HiddenVariant = legacyVariants & { __brand?: never };
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -17,14 +26,7 @@ export interface ButtonProps
    * Changes design and interaction-visuals.
    * @default "primary"
    */
-  variant?:
-    | "primary"
-    | "primary-neutral"
-    | "secondary"
-    | "secondary-neutral"
-    | "tertiary"
-    | "tertiary-neutral"
-    | "danger";
+  variant?: "primary" | "secondary" | "tertiary" | HiddenVariant;
   /**
    * Changes padding, height, and font-size.
    * @default "medium"
@@ -50,6 +52,15 @@ export interface ButtonProps
    * @default "left"
    */
   iconPosition?: "left" | "right";
+  /**
+   * Overrides inherited color.
+   *
+   *
+   * We recommend only using `accent`, `neutral` and `danger`. We have disallowed other status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   */
+  "data-color"?: Exclude<AkselColor, Exclude<AkselStatusColorRole, "danger">>;
 }
 
 /**
@@ -100,18 +111,12 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           {...filterProps}
           ref={ref}
           onKeyUp={composeEventHandlers(onKeyUp, handleKeyUp)}
-          className={cn(
-            className,
-            "navds-button",
-            `navds-button--${variant}`,
-            `navds-button--${size}`,
-            {
-              "navds-button--loading": loading,
-              "navds-button--icon-only": !!icon && !children,
-              "navds-button--disabled": disabled ?? loading,
-            },
-          )}
-          disabled={disabled ?? loading ? true : undefined}
+          className={cn(className, "navds-button", `navds-button--${size}`, {
+            "navds-button--loading": loading,
+            "navds-button--icon-only": !!icon && !children,
+            "navds-button--disabled": disabled ?? loading,
+          })}
+          disabled={(disabled ?? loading) ? true : undefined}
         >
           {icon && iconPosition === "left" && (
             <span className={cn("navds-button__icon")}>{icon}</span>

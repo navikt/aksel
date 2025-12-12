@@ -4,7 +4,7 @@ import { Placeholder } from "../../../components/website-modules/examples/__part
 
 const Example = () => {
   return (
-    <Box maxWidth="385px" padding="space-8" background="bg-subtle">
+    <Box maxWidth="385px" padding="space-8" background="neutral-soft">
       <VStack gap="space-12">
         <div>
           <Heading size="xsmall">wrap=true (default)</Heading>

@@ -36,7 +36,7 @@ const ChangelogLinkCard = ({
         </Detail>
       </LinkCardDescription>
       <LinkCardFooter>
-        <Tag size="xsmall" variant="info-moderate">
+        <Tag size="xsmall" variant="moderate" data-color="info">
           {capitalizeText(logEntry.endringstype || "")}
         </Tag>
       </LinkCardFooter>

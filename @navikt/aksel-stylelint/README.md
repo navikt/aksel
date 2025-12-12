@@ -31,16 +31,16 @@ It should be sufficient for most cases to extend the recommended defaults.
 
 ## aksel/design-token-exists
 
-Makes sure all referenced CSS-variables with prefix `--a-` or `--ac-` exists in Aksels token-collection. As a side-effect Aksel reserves these prefixes for its design-tokens.
+Makes sure all referenced CSS-variables with prefix `--ax-` exists in Aksel's token-collection. As a side-effect Aksel reserves these prefixes for its design-tokens.
 
 ❌ Incorrect:
 
 ```css
 html {
-    --a-my-own-color-bg-hover: #f2f2f2;
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-    background-color: var(--a-my-own-color-bg-hover);
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+    --ax-my-own-color-bg-hover: #f2f2f2;
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    background-color: var(--ax-my-own-color-bg-hover);
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 ```
 
@@ -48,20 +48,20 @@ html {
 
 ```css
 html {
-  background-color: var(--custom-tag-surface-default);
+  background-color: var(--ax-bg-default);
 }
 ```
 
 ## aksel/design-token-no-global-override
 
-Makes sure you don't override global level tokens with `--a-`-prefix. Global/Semantic tokens are supposed to be used as is, and not overridden. That is unless you are theming your solution to match a different sub-brands or brands. In those cases we encourage to make all the changes in a single 'config'-file, then disable the rule for that file only.
+Makes sure you don't override Aksel design tokens with `--ax-`-prefix. Design tokens are supposed to be used as is, and not overridden. That is unless you are theming your solution to match a different brand. In those cases we encourage to make all the changes in a single 'config'-file, then disable the rule for that file only.
 
 ❌ Incorrect:
 
 ```css
 div {
-    --a-surface-default: #f2f2f2;
-    ^^^^^^^^^^^^^^^^^^^
+    --ax-surface-default: #f2f2f2;
+    ^^^^^^^^^^^^^^^^^^^^
 }
 ```
 
@@ -69,48 +69,26 @@ div {
 
 ```css
 div {
-  background-color: var(--a-surface-default);
-}
-```
-
-## aksel/design-token-no-component-reference
-
-Makes sure you don't reference component level tokens with `--ac-`-prefix. Component level tokens are only supposed to be overridden, not referenced.
-This is since they are by default not defined, leading to unknown side-effects when referenced incorrectly.
-
-❌ Incorrect:
-
-```css
-html {
-    stroke: var(--ac-button-loader-stroke);
-                ^^^^^^^^^^^^^^^^^^^^^^^^^
-}
-```
-
-✅ Correct:
-
-```css
-html {
-  --ac-button-loader-stroke: lawngreen;
+  background-color: var(--ax-surface-default);
 }
 ```
 
 ## aksel/no-internal-tokens
 
-Disallows use or override of internal Aksel design tokens. Internal tokens are not supposed to be used outside the design system, and may be changed or removed without warning. Be aware that the rule simply checks the prefix of the token, and not if it actually exists in the design system. Even if it doesn't exist, using design system prefixes should be avoided.
+Disallows use or override of internal Aksel CSS variables. Internal CSS variables are not supposed to be used outside the design system, and may be changed or removed without warning. Be aware that the rule simply checks the prefix of the token, and not if it actually exists in the design system. Even if it doesn't exist, using design system prefixes should be avoided.
 
 ❌ Incorrect:
 
 ```css
 a {
-  --__ac-some-property: pink;
-} ^^^^^^^^^^^^^^^^^^^^
+  --__axc-some-property: pink;
+} ^^^^^^^^^^^^^^^^^^^^^
 ```
 
 ```css
 a {
-  color: var(--__ac-some-property);
-}            ^^^^^^^^^^^^^^^^^^^^
+  color: var(--__axc-some-property);
+}            ^^^^^^^^^^^^^^^^^^^^^
 ```
 
 ✅ Correct:
@@ -129,19 +107,14 @@ a {
 
 ## aksel/no-class-override
 
-Warns when trying to override design system styling by using class selectors that starts with "navds-" or "navdsi-". Overriding styles in the design system is discouraged. We want to have consistent look and feel across applications. Even if it seems to work fine now, it might break on subsequent updates in the design system.
+Warns when trying to override design system styling by using class selectors that starts with "aksel-". Overriding styles in the design system is discouraged. We want to have consistent look and feel across applications. Even if it seems to work fine now, it might break on subsequent updates in the design system.
 
 ❌ Incorrect:
 
 ```css
-.navds-button {
-^^^^^^^^^^^^^
+.aksel-button {
+ ^^^^^^^^^^^^
 }
-```
-
-```css
-.some-class .navdsi-header {
-}           ^^^^^^^^^^^^^^
 ```
 
 ✅ Correct:
@@ -158,15 +131,8 @@ Warns when you try to use deprecated class names.
 ❌ Incorrect:
 
 ```css
-.navdsi-deprecated-example {
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-}
-```
-
-✅ Correct:
-
-```css
-.guaranteed-not-deprecated {
+.aksel-deprecated-example {
+ ^^^^^^^^^^^^^^^^^^^^^^^^
 }
 ```
 
@@ -183,7 +149,7 @@ We still discourage overriding class names from `@navikt/ds-css`:
 
 ```css
 .navds-button {
-^^^^^^^^^^^^^
+ ^^^^^^^^^^^^
 }
 ```
 

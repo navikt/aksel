@@ -116,7 +116,7 @@ function Input() {
         height: "3rem",
         borderRadius: "4px",
         textAlign: "center",
-        border: "1px solid var(--a-border-default)",
+        border: "1px solid var(--ax-border-neutral)",
       }}
       placeholder={focused ? "" : "0"}
       onFocus={() => setFocused(true)}

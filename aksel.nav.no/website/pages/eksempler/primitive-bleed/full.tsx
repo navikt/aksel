@@ -13,7 +13,7 @@ const Example = () => {
         <Box
           padding="space-12"
           marginBlock="space-0 space-28"
-          background="surface-alt-3-subtle"
+          background="brand-blue-moderate"
         >
           <HStack justify="center">
             Bleed med marginInline=&quot;full&quot;

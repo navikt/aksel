@@ -4,10 +4,10 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <VStack gap="space-16">
-      <Box background="surface-subtle" padding="space-16" borderWidth="2">
+      <Box background="neutral-soft" padding="space-16" borderWidth="2">
         border-width
       </Box>
-      <Box background="surface-subtle" padding="space-16" borderWidth="2 5">
+      <Box background="neutral-soft" padding="space-16" borderWidth="2 5">
         Fleksibel border-width
       </Box>
     </VStack>

@@ -1,7 +1,9 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -68,6 +70,17 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
     tag: "h2" | "h3" | "h4" | "h5" | "h6";
     text: string;
   };
+  /**
+   * Overrides color.
+   * @default "neutral"
+   *
+   *
+   * We have disallowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   * @private
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 interface PaginationType
@@ -150,7 +163,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       srHeading,
       "aria-labelledby": ariaLabelledBy,
       renderItem: Item = PaginationItem,
-      "data-color": color,
+      "data-color": color = "neutral",
       ...rest
     },
     ref,

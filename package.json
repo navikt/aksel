@@ -78,13 +78,9 @@
     "overrides": [
       {
         "files": [
-          "@navikt/core/css/**/*",
-          "@navikt/internal/css/**/*"
+          "@navikt/core/css/**/*"
         ],
         "rules": {
-          "aksel/no-deprecated-classes": true,
-          "aksel/design-token-exists": true,
-          "aksel/design-token-no-component-reference": null,
           "aksel/design-token-no-global-override": null,
           "aksel/no-internal-tokens": null,
           "aksel/no-class-override": null
@@ -154,8 +150,7 @@
         true,
         {
           "importFrom": [
-            "@navikt/core/tokens/dist/tokens.css",
-            "@navikt/core/tokens/dist/darkside/tokens.css"
+            "@navikt/core/tokens/dist/tokens.css"
           ]
         }
       ]

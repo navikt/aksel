@@ -36,7 +36,7 @@ export const Icons: Story = {
 export const IconsInverted: Story = {
   render: () => {
     return (
-      <div className="icons">
+      <div className="dark">
         {Object.entries(AkselIcons).map(([key, Value]) => (
           <React.Fragment key={key}>
             <Value
@@ -47,18 +47,6 @@ export const IconsInverted: Story = {
             />
           </React.Fragment>
         ))}
-        <style>
-          {`
-          .icons{
-            display: flex;
-            flex-wrap: wrap;
-            background: var(--a-gray-900);
-          }
-          .icon-color{
-            color: var(--a-icon-on-inverted);
-          }
-          `}
-        </style>
       </div>
     );
   },

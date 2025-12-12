@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+/* CSS is ordered by specificity, so that browsers without layers fall backs to good defaults */
+@layer aksel.reset, aksel.theming, aksel.baseline, aksel.print, aksel.typography, aksel.components.core, aksel.components.form, aksel.components.modules, aksel.layout;
+
+/* ----------------------------- CSS foundations ---------------------------- */
+@import "./baseline/fonts.css" layer(aksel.typography);
+@import "./baseline/reset.css" layer(aksel.reset);
+@import "./baseline/tokens.css" layer(aksel.theming);
+@import "./baseline/baseline.css" layer(aksel.baseline);
+@import "./baseline/print.css" layer(aksel.print);
+
+/* ------------------------------- Components ------------------------------- */
+@import "./theme.css" layer(aksel.components.core);
+@import "./typography.css" layer(aksel.components.core);
+@import "./button.css" layer(aksel.components.core);
+@import "./chips.css" layer(aksel.components.core);
+
+/**
+  * Most components depend on typo-styles, so we import them first.
+  *
+  * `./form/index.css` edits the following components:
+  * - Button
+  * - Chips
+  * To avoid specificity conflicts, we import those components before form.
+*/
+@import "./form/index.css" layer(aksel.components.form);
+@import "./accordion.css" layer(aksel.components.modules);
+@import "./alert.css" layer(aksel.components.modules);
+@import "./chat.css" layer(aksel.components.modules);
+@import "./copybutton.css" layer(aksel.components.modules);
+@import "./date.css" layer(aksel.components.modules);
+@import "./dropdown.css" layer(aksel.components.modules);
+@import "./action-menu.css" layer(aksel.components.modules);
+@import "./expansioncard.css" layer(aksel.components.modules);
+@import "./guide-panel.css" layer(aksel.components.modules);
+@import "./help-text.css" layer(aksel.components.modules);
+@import "./inline-message.css" layer(aksel.components.modules);
+@import "./internalheader.css" layer(aksel.components.modules);
+@import "./link.css" layer(aksel.components.modules);
+@import "./link-panel.css" layer(aksel.components.modules);
+@import "./link-anchor.css" layer(aksel.components.modules);
+@import "./link-card.css" layer(aksel.components.modules);
+@import "./loader.css" layer(aksel.components.modules);
+@import "./modal.css" layer(aksel.components.modules);
+@import "./pagination.css" layer(aksel.components.modules);
+@import "./popover.css" layer(aksel.components.modules);
+@import "./tag.css" layer(aksel.components.modules);
+@import "./timeline.css" layer(aksel.components.modules);
+@import "./tooltip.css" layer(aksel.components.modules);
+@import "./toggle-group.css" layer(aksel.components.modules);
+@import "./panel.css" layer(aksel.components.modules);
+@import "./read-more.css" layer(aksel.components.modules);
+@import "./progress-bar.css" layer(aksel.components.modules);
+@import "./skeleton.css" layer(aksel.components.modules);
+@import "./process.css" layer(aksel.components.modules);
+@import "./stepper.css" layer(aksel.components.modules);
+@import "./table.css" layer(aksel.components.modules);
+@import "./tabs.css" layer(aksel.components.modules);
+@import "./list.css" layer(aksel.components.modules);
+
+/* --------------------------------- Layout --------------------------------- */
+@import "./primitives/index.css" layer(aksel.layout);

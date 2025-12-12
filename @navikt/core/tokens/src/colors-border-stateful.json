@@ -1,7 +1,0 @@
-{
-  "a": {
-    "border-subtle-hover": {
-      "value": "{a.grayalpha.400.value}"
-    }
-  }
-}
