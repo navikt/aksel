@@ -59,14 +59,8 @@ export const Default = {
           <DialogActionFooter>
             <Button variant="tertiary">Back</Button>
             <Button variant="secondary">Cancel</Button>
-            <Button>Send button with long text</Button>
+            <Button>Send text with a little longer text</Button>
           </DialogActionFooter>
-          {/* <DialogFooter>
-            <Button variant="tertiary">Back</Button>
-            <Spacer />
-            <Button variant="secondary">Cancel</Button>
-            <Button>Send button with long text</Button>
-          </DialogFooter> */}
         </DialogPopup>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog</button>

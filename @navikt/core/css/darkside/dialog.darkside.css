@@ -230,7 +230,13 @@
   gap: var(--ax-space-8);
 
   @media (min-width: 480px) {
-    & :nth-of-type(2) {
+    /* 1 or 2 elements: margin-left on first to right-align all */
+    & > :first-child:nth-last-child(-n + 2) {
+      margin-left: auto;
+    }
+
+    /* 3+ elements: margin-left on second to split (1 left, rest right) */
+    & > :nth-child(2):nth-last-child(n + 2) {
       margin-left: auto;
     }
   }
