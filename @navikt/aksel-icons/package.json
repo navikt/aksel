@@ -84,7 +84,7 @@
     "js-yaml": "^4.1.1",
     "lodash": "^4.17.21",
     "prettier": "3.6.2",
-    "react": "^18.0.0",
+    "react": "^19.1.1",
     "rehype-parse": "9.0.1",
     "tsc-alias": "1.8.16",
     "tsx": "^4.20.6",
