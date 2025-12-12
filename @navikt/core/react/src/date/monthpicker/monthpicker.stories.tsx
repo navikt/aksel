@@ -10,6 +10,8 @@ import MonthPicker from "./MonthPicker";
 import { MonthPickerProps } from "./MonthPicker.types";
 import { useMonthpicker } from "./hooks/useMonthPicker";
 
+const year = new Date().getFullYear();
+
 export default {
   title: "ds-react/Monthpicker",
   component: MonthPicker,
@@ -57,51 +59,41 @@ export const DropdownCaption = () => {
     <MonthPicker.Standalone
       onMonthSelect={console.log}
       dropdownCaption
-      fromDate={new Date("Feb 10 2019")}
-      toDate={new Date("Sep 27 2032")}
-      year={new Date("Jan 1 2025")}
+      fromDate={new Date(`Feb 10 ${year - 5}`)}
+      toDate={new Date(`Sep 27 ${year + 10}`)}
     />
   );
 };
 
-export const NB = () => (
-  <MonthPicker.Standalone locale="nb" year={new Date("Jan 1 2025")} />
-);
-export const NN = () => (
-  <MonthPicker.Standalone locale="nn" year={new Date("Jan 1 2025")} />
-);
-export const EN = () => (
-  <MonthPicker.Standalone locale="en" year={new Date("Jan 1 2025")} />
-);
+export const NB = () => <MonthPicker.Standalone locale="nb" />;
+export const NN = () => <MonthPicker.Standalone locale="nn" />;
+export const EN = () => <MonthPicker.Standalone locale="en" />;
 
 export const DisabledMonths = () => (
   <MonthPicker.Standalone
     disabled={[
-      { from: new Date("Jan 1 2025"), to: new Date("Jul  6 2025") },
-      { from: new Date("Apr 2 2026"), to: new Date("Dec 4 2026") },
-      new Date("Sep 5 2025"),
-      new Date("Jan 5 2026"),
+      { from: new Date(`Jan 1 ${year}`), to: new Date(`Jul 6 ${year}`) },
+      {
+        from: new Date(`Apr 2 ${year + 1}`),
+        to: new Date(`Dec 4 ${year + 1}`),
+      },
+      new Date(`Sep 5 ${year}`),
+      new Date(`Jan 5 ${year + 1}`),
     ]}
-    year={new Date("Jan 1 2025")}
   />
 );
 
 export const Standalone = () => {
-  return (
-    <MonthPicker.Standalone
-      defaultSelected={new Date("Jan 1 2025")}
-      year={new Date("Jan 1 2025")}
-    />
-  );
+  return <MonthPicker.Standalone defaultSelected={new Date(`Jan 1 ${year}`)} />;
 };
 
 export const UseMonthpicker = () => {
   const { inputProps, monthpickerProps } = useMonthpicker({
-    disabled: [new Date("Apr 1 2022")],
+    disabled: [new Date(`Apr 1 ${year - 1}`)],
     onMonthChange: console.log,
-    fromDate: new Date("Jan 1 2022"),
-    toDate: new Date("Sep 27 2025"),
-    defaultSelected: new Date("2025-12-01"),
+    fromDate: new Date(`Jan 1 ${year - 1}`),
+    toDate: new Date(`Sep 27 ${year + 1}`),
+    defaultSelected: new Date(`Dec 1 ${year}`),
   });
 
   return (
@@ -119,10 +111,9 @@ export const UseMonthpicker = () => {
 
 export const UseMonthpickerFormat = () => {
   const { inputProps, monthpickerProps } = useMonthpicker({
-    disabled: [new Date("Apr 1 2022")],
     onMonthChange: console.log,
     inputFormat: "MM.yyyy",
-    defaultSelected: new Date("2025-12-01"),
+    defaultSelected: new Date(`Jun 1 ${year}`),
   });
 
   return (
@@ -141,7 +132,7 @@ export const UseMonthpickerFormat = () => {
 export const Required = {
   render: () => {
     const { monthpickerProps } = useMonthpicker({
-      defaultSelected: new Date("Apr 10 2024"),
+      defaultSelected: new Date(`Apr 10 ${year}`),
       required: true,
     });
 
@@ -189,8 +180,8 @@ export const UserControlled = () => {
 export const FollowYear = () => {
   const { monthpickerProps, inputProps, selectedMonth, setSelected } =
     useMonthpicker({
-      fromDate: new Date("Aug 23 2019"),
-      toDate: new Date("Aug 23 2025"),
+      fromDate: new Date(`Aug 23 ${year - 5}`),
+      toDate: new Date(`Aug 23 ${year + 5}`),
       onMonthChange: console.log,
     });
 
@@ -221,4 +212,7 @@ export const Chromatic = renderStoriesForChromatic({
   UseMonthpicker,
   UseMonthpickerFormat,
   UserControlled,
+  CurrentMonthSelected: () => (
+    <MonthPicker.Standalone defaultSelected={new Date()} />
+  ),
 });
