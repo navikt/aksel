@@ -99,8 +99,13 @@ const Page = async () => {
                   </HStack>
                   <HGrid gap="space-24" as="ul" columns={{ sm: 1, xl: 2 }}>
                     <li>
-                      <BoxNew borderColor="brand-blue" asChild>
+                      <BoxNew
+                        borderColor="brand-blue"
+                        asChild
+                        position="relative"
+                      >
                         <LinkCard data-color="brand-blue" arrow={false}>
+                          <AsciiTree />
                           <BoxNew
                             asChild
                             padding="space-16"
@@ -235,7 +240,6 @@ const Page = async () => {
                   marginBlock="space-64 0"
                   position="relative"
                 >
-                  <AsciiTree />
                   <VStack gap="space-12">
                     <BoxNew>
                       <Heading
