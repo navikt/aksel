@@ -19,16 +19,28 @@ const COLOR_CANDIDATES = [
   "yellow",
 ] as const;
 
+const EYE_EXPRESSIONS = [
+  "' '", // normal
+  "- -", // blink/closed
+  "^ ^", // happy
+  "o o", // surprised
+  "> <", // squint
+  "• •",
+  "♥ ♥",
+] as const;
+
 type ColorName = (typeof COLOR_CANDIDATES)[number];
 
 type TreeOptions = {
   color?: boolean;
   size?: number;
+  eyes?: string;
 };
 
 function AsciiTree({ right = false }: { right?: boolean }) {
+  const [eyes, setEyes] = useState("' '");
   const [lines, updateLines] = useState(() =>
-    xmasTree({ color: true, size: 21 }),
+    xmasTree({ color: true, size: 21, eyes: "' '" }),
   );
 
   const { resolvedTheme } = useTheme();
@@ -38,10 +50,39 @@ function AsciiTree({ right = false }: { right?: boolean }) {
       return;
     }
     const interval = setInterval(() => {
-      updateLines(xmasTree({ color: true, size: 21 }));
+      updateLines(xmasTree({ color: true, size: 21, eyes }));
     }, 1500);
 
     return () => clearInterval(interval);
+  }, [resolvedTheme, eyes]);
+
+  useEffect(() => {
+    if (resolvedTheme === "light") {
+      return;
+    }
+
+    const scheduleNextBlink = () => {
+      const delay = 2500 + Math.random() * 4100; // 2-6 seconds
+      return setTimeout(() => {
+        const newEyes = EYE_EXPRESSIONS[randomInt(EYE_EXPRESSIONS.length)];
+        setEyes(newEyes);
+
+        // If it's a blink, revert quickly
+        if (newEyes === "- -") {
+          setTimeout(() => setEyes("' '"), 150);
+        }
+      }, delay);
+    };
+
+    const timeoutId = scheduleNextBlink();
+    const intervalId = setInterval(() => {
+      scheduleNextBlink();
+    }, 3200);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
   }, [resolvedTheme]);
 
   if (resolvedTheme === "light") {
@@ -68,11 +109,15 @@ function AsciiTree({ right = false }: { right?: boolean }) {
   );
 }
 
-function xmasTree({ color = false, size = DEFAULT_SIZE }: TreeOptions) {
+function xmasTree({
+  color = false,
+  size = DEFAULT_SIZE,
+  eyes = "' '",
+}: TreeOptions) {
   const validSize = Math.max(size, DEFAULT_SIZE);
 
   const treeLines = Array.from({ length: validSize }, (_, index) =>
-    makeTreeLine(index, validSize, color),
+    makeTreeLine(index, validSize, color, eyes),
   ).filter((line) => line !== null);
 
   const potLines = makePot(validSize, color);
@@ -80,12 +125,17 @@ function xmasTree({ color = false, size = DEFAULT_SIZE }: TreeOptions) {
   return [...treeLines, ...potLines];
 }
 
-function makeTreeLine(index: number, size: number, hasColor: boolean) {
+function makeTreeLine(
+  index: number,
+  size: number,
+  hasColor: boolean,
+  eyes: string,
+) {
   const topPatterns: Record<number, { pattern: string; color?: ColorName }> = {
     0: { pattern: "*", color: "yellow" },
     1: { pattern: "_/ \\_", color: "yellow" },
     2: { pattern: "\\     /", color: "yellow" },
-    3: { pattern: "/_' '_\\", color: "yellow" },
+    3: { pattern: `/_${eyes}_\\`, color: "yellow" },
   };
 
   const top = topPatterns[index];
@@ -152,7 +202,15 @@ function randomColor(): ColorName {
 
 function applyColor(text: string, color: ColorName) {
   const hex = tiny_color(color).toHexString();
-  return <span style={{ color: hex }}>{text}</span>;
+
+  return (
+    <span
+      style={{ color: hex }}
+      className={cl({ [styles.glow]: color === "yellow" })}
+    >
+      {text}
+    </span>
+  );
 }
 
 export { AsciiTree };
