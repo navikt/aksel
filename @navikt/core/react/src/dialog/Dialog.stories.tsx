@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Select } from "../form/select";
-import { VStack } from "../layout/stack";
+import { Hide, Show } from "../layout/responsive";
+import { HStack, Spacer, Stack, VStack } from "../layout/stack";
 import { Table } from "../table";
 import {
   Dialog,
+  DialogActionFooter,
   DialogBody,
   DialogCloseTrigger,
   DialogDescription,
@@ -56,9 +58,21 @@ export const Default = {
             <ScrollContent />
           </DialogBody>
           <DialogFooter>
-            <DialogCloseTrigger>
-              <Button>Close</Button>
-            </DialogCloseTrigger>
+            <HStack asChild gap="space-8" flexGrow="1">
+              <Show above="sm">
+                <Button variant="tertiary">Back</Button>
+                <Spacer />
+                <Button variant="secondary">Cancel</Button>
+                <Button>Send text with a little longer text</Button>
+              </Show>
+            </HStack>
+            <VStack asChild gap="space-8" flexGrow="1">
+              <Hide above="sm">
+                <Button>Send text with a little longer text</Button>
+                <Button variant="secondary">Cancel</Button>
+                <Button variant="tertiary">Back</Button>
+              </Hide>
+            </VStack>
           </DialogFooter>
         </DialogPopup>
       </Dialog>

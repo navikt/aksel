@@ -11,6 +11,8 @@ export { DialogHeader } from "./header/DialogHeader";
 export type { DialogHeaderProps } from "./header/DialogHeader";
 export { DialogFooter } from "./footer/DialogFooter";
 export type { DialogFooterProps } from "./footer/DialogFooter";
+export { DialogActionFooter } from "./action-footer/DialogActionFooter";
+export type { DialogActionFooterProps } from "./action-footer/DialogActionFooter";
 export { DialogTitle } from "./title/DialogTitle";
 export type { DialogTitleProps } from "./title/DialogTitle";
 export { DialogDescription } from "./description/DialogDescription";
