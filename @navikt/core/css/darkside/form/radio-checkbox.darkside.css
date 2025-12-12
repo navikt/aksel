@@ -308,10 +308,6 @@
     border-color: black;
   }
 
-  .aksel-checkbox__input {
-    color: white !important;
-  }
-
   .aksel-checkbox__icon {
     top: 2px;
     bottom: 2px;
