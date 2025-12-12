@@ -174,6 +174,7 @@ const AktivitetsplanPage = () => {
                       </BodyShort>
                     )}
                     {tag && (
+                      /* @ts-expect-error Temp ignore until variant is optional */
                       <Tag data-color={tag.color} size="small">
                         {tag.text}
                       </Tag>

@@ -2,7 +2,8 @@
 
 import React, { useCallback, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { useEventCallback } from "../../../util/hooks/useEventCallback";
+import { resolveRef } from "../resolveRef";
+import { useEventCallback } from "./useEventCallback";
 
 /**
  * Returns a stable function that, when invoked, waits for all current CSS/Web Animations
@@ -15,7 +16,7 @@ import { useEventCallback } from "../../../util/hooks/useEventCallback";
  *
  * Mechanics:
  *  1. Resolves the concrete `HTMLElement` (direct element or from ref) – early no-op if missing.
- *  2. If `getAnimations` is unsupported or animations are globally disabled (`AKSEL_ANIMATIONS_DISABLED`),
+ *  2. If `getAnimations` is unsupported or animations are globally disabled (`AKSEL_NO_EXIT_ANIMATIONS`),
  *     runs the callback immediately.
  *  3. Schedules a frame so style/animation changes applied this render are committed.
  *  4. Optionally schedules an additional frame (`waitForNextTick=true`) to catch animations that
@@ -66,12 +67,8 @@ export function useAnimationsFinished(
       // Cancel any in-flight scheduling from a previous invocation (next-frame debounce semantics)
       cancelScheduled();
 
-      if (elementOrRef == null) {
-        return;
-      }
+      const element = resolveRef(elementOrRef);
 
-      const element =
-        "current" in elementOrRef ? elementOrRef.current : elementOrRef;
       if (element == null) {
         return;
       }
@@ -80,7 +77,7 @@ export function useAnimationsFinished(
       if (
         typeof element.getAnimations !== "function" ||
         // Flag hook for test envs.
-        (globalThis as any).AKSEL_ANIMATIONS_DISABLED
+        (globalThis as any).AKSEL_NO_EXIT_ANIMATIONS
       ) {
         fnToExecute();
         return;
@@ -96,7 +93,9 @@ export function useAnimationsFinished(
           Promise.allSettled(
             element.getAnimations().map((anim) => anim.finished),
           ).then(() => {
-            if (signal?.aborted) return;
+            if (signal?.aborted) {
+              return;
+            }
             // Ensure any state updates inside the callback are flushed synchronously,
             // guaranteeing that dependent logic observes the current
             // tree rather than a stale in-progress update.

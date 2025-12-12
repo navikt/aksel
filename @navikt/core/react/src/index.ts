@@ -187,6 +187,18 @@ export {
   type LocalAlertContentProps,
   type LocalAlertCloseButtonProps,
 } from "./alert/local-alert";
+export {
+  Dialog,
+  type DialogProps,
+  type DialogTriggerProps,
+  type DialogCloseTriggerProps,
+  type DialogPopupProps,
+  type DialogHeaderProps,
+  type DialogTitleProps,
+  type DialogDescriptionProps,
+  type DialogBodyProps,
+  type DialogFooterProps,
+} from "./dialog";
 
 /**
  * Theming

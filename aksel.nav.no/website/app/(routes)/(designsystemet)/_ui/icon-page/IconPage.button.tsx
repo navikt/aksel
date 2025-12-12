@@ -55,7 +55,7 @@ function IconPageButton({
       >
         {icon}
       </button>
-      {isActive && context.hideModal && (
+      {isActive && context.hideDialog && (
         <a className={styles.iconPageSkiplink} href="#icon-page-sidepanel">
           Hopp til ikonpanel
         </a>
