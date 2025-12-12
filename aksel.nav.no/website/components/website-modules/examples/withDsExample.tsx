@@ -4,7 +4,6 @@ import cl from "clsx";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
 import {
-  type CSSProperties,
   ComponentType,
   useEffect,
   useState,
@@ -42,8 +41,16 @@ export const withDsExample = (
     const pathname = usePathname() || "///";
     const pathParts = pathname.split("/");
 
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+      setMounted(true);
+    }, []);
+    if (!mounted) {
+      return null;
+    }
+
     return (
-      <ThemeWrapper
+      <div
         className={cl(styles.container, {
           [styles.containerDefault]: !variant,
           [styles.containerStatic]: variant === "static",
@@ -68,7 +75,7 @@ export const withDsExample = (
         >
           <Component {...props} />
         </main>
-      </ThemeWrapper>
+      </div>
     );
   };
 
@@ -78,32 +85,6 @@ export const withDsExample = (
 
   return DsHOC;
 };
-
-function ThemeWrapper({
-  children,
-  style,
-  className,
-}: {
-  children: React.ReactNode;
-  style: CSSProperties;
-  className: string;
-}) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
-  return (
-    <div className={className} style={style}>
-      {children}
-    </div>
-  );
-}
 
 function getBg(background: withDsT["background"]): string {
   switch (background) {
