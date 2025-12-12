@@ -68,9 +68,7 @@ function KodeEksemplerIFrame(props: {
   };
 
   const demoVariant = dir.variant;
-  const iframeUrl = stegaClean(
-    `/${demoVariant}/${dir.title}/${current?.navn}?darkside=true`,
-  );
+  const iframeUrl = stegaClean(`/${demoVariant}/${dir.title}/${current?.navn}`);
 
   const hasJSXSnippet = !!current?.kompaktInnhold;
 

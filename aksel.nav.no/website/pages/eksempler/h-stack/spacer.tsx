@@ -26,7 +26,6 @@ const Placeholder = () => (
 export default withDsExample(Example, {
   variant: "full",
   showBreakpoints: true,
-  legacyOnly: true,
 });
 
 /* Storybook story */
