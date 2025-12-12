@@ -222,7 +222,7 @@ class TokenStatus {
       );
 
       console.info(
-        `We no longer support component tokens. Please migrate to the new darkside tokens. using theming or other methods.`,
+        `We no longer support component tokens. Please migrate to the new darkside tokens using theming or other methods.`,
       );
     }
 
