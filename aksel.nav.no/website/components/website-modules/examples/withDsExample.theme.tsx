@@ -17,7 +17,15 @@ function ExampleThemingSwitch() {
   const { resolvedTheme, setTheme } = useTheme();
 
   return (
-    <Box position="absolute" top="space-8" right="space-8">
+    <Box
+      position="absolute"
+      top="space-8"
+      right="space-8"
+      // Needed for examples that use the Decorator:
+      style={{ zIndex: "2000" }}
+      background="default"
+      borderRadius="8"
+    >
       <Select
         label="Tema"
         onChange={(event) => setTheme(event.target.value)}
