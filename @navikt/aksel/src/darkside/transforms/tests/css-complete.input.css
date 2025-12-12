@@ -8,9 +8,11 @@
   /* Has no replacement */
   background-color: var(--a-surface-transparent);
 
-  /* Is tagged as legacy */
+  /* Is detected as legacy */
   --a-surface-neutral: red;
   --a-surface-subtle: orange;
+  --a-surface-action:blue;
+  --a-surface-action-selected :red;
 
   /* Border-radius */
   border-radius: var(--a-border-radius-small);

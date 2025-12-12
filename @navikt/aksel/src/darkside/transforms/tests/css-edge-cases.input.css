@@ -4,7 +4,7 @@
   color: var(--not-a-surface-action);
   margin: var(--a-spacing-4-extra);
 
-  /* Whitespace in definitions - SHOULD change */
+  /* Whitespace in definitions - SHOULD be detected */
   --a-surface-action : blue;
   --a-surface-action-selected  : red;
 

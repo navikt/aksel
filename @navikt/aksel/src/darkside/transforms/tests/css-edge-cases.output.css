@@ -4,9 +4,9 @@
   color: var(--not-a-surface-action);
   margin: var(--a-spacing-4-extra);
 
-  /* Whitespace in definitions - SHOULD change */
-  --aksel-legacy__a-surface-action : blue;
-  --aksel-legacy__a-surface-action-selected  : red;
+  /* Whitespace in definitions - SHOULD be detected */
+  --a-surface-action : blue;
+  --a-surface-action-selected  : red;
 
   /* Multiple tokens on one line - SHOULD change */
   padding: var(--ax-space-16) var(--ax-space-16);
