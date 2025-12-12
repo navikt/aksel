@@ -1,13 +1,16 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryFn } from "@storybook/react-vite";
 import { setYear } from "date-fns";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { useId } from "../../util";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import { DateInputProps } from "../Date.Input";
 import MonthPicker from "./MonthPicker";
 import { MonthPickerProps } from "./MonthPicker.types";
 import { useMonthpicker } from "./hooks/useMonthPicker";
+
+const year = new Date().getFullYear();
 
 export default {
   title: "ds-react/Monthpicker",
@@ -16,8 +19,6 @@ export default {
     chromatic: { disable: true },
   },
 } satisfies Meta<typeof MonthPicker>;
-
-type Story = StoryObj<typeof MonthPicker>;
 
 export const Default: StoryFn<{
   size: DateInputProps["size"];
@@ -58,8 +59,8 @@ export const DropdownCaption = () => {
     <MonthPicker.Standalone
       onMonthSelect={console.log}
       dropdownCaption
-      fromDate={new Date("Feb 10 2019")}
-      toDate={new Date("Sep 27 2032")}
+      fromDate={new Date(`Feb 10 ${year - 5}`)}
+      toDate={new Date(`Sep 27 ${year + 10}`)}
     />
   );
 };
@@ -71,24 +72,28 @@ export const EN = () => <MonthPicker.Standalone locale="en" />;
 export const DisabledMonths = () => (
   <MonthPicker.Standalone
     disabled={[
-      { from: new Date("Jan 1 2022"), to: new Date("Jul  6 2022") },
-      { from: new Date("Apr 2 2023"), to: new Date("Dec 4 2023") },
-      new Date("Sep 5 2022"),
-      new Date("Jan 5 2023"),
+      { from: new Date(`Jan 1 ${year}`), to: new Date(`Jul 6 ${year}`) },
+      {
+        from: new Date(`Apr 2 ${year + 1}`),
+        to: new Date(`Dec 4 ${year + 1}`),
+      },
+      new Date(`Sep 5 ${year}`),
+      new Date(`Jan 5 ${year + 1}`),
     ]}
   />
 );
 
 export const Standalone = () => {
-  return <MonthPicker.Standalone />;
+  return <MonthPicker.Standalone defaultSelected={new Date(`Jan 1 ${year}`)} />;
 };
 
 export const UseMonthpicker = () => {
   const { inputProps, monthpickerProps } = useMonthpicker({
-    disabled: [new Date("Apr 1 2022")],
+    disabled: [new Date(`Apr 1 ${year - 1}`)],
     onMonthChange: console.log,
-    fromDate: new Date("Jan 1 2022"),
-    toDate: new Date("Sep 27 2025"),
+    fromDate: new Date(`Jan 1 ${year - 1}`),
+    toDate: new Date(`Sep 27 ${year + 1}`),
+    defaultSelected: new Date(`Dec 1 ${year}`),
   });
 
   return (
@@ -106,9 +111,9 @@ export const UseMonthpicker = () => {
 
 export const UseMonthpickerFormat = () => {
   const { inputProps, monthpickerProps } = useMonthpicker({
-    disabled: [new Date("Apr 1 2022")],
     onMonthChange: console.log,
     inputFormat: "MM.yyyy",
+    defaultSelected: new Date(`Jun 1 ${year}`),
   });
 
   return (
@@ -127,7 +132,7 @@ export const UseMonthpickerFormat = () => {
 export const Required = {
   render: () => {
     const { monthpickerProps } = useMonthpicker({
-      defaultSelected: new Date("Apr 10 2024"),
+      defaultSelected: new Date(`Apr 10 ${year}`),
       required: true,
     });
 
@@ -175,8 +180,8 @@ export const UserControlled = () => {
 export const FollowYear = () => {
   const { monthpickerProps, inputProps, selectedMonth, setSelected } =
     useMonthpicker({
-      fromDate: new Date("Aug 23 2019"),
-      toDate: new Date("Aug 23 2025"),
+      fromDate: new Date(`Aug 23 ${year - 5}`),
+      toDate: new Date(`Aug 23 ${year + 5}`),
       onMonthChange: console.log,
     });
 
@@ -197,22 +202,17 @@ export const FollowYear = () => {
   );
 };
 
-export const Chromatic: Story = {
-  render: () => (
-    <div className="colgap">
-      <MonthPicker.Standalone />
-      <DropdownCaption />
-      <NB />
-      <NN />
-      <EN />
-      <DisabledMonths />
-      <UseMonthpicker />
-      <UseMonthpickerFormat />
-      <UserControlled />
-      <FollowYear />
-    </div>
+export const Chromatic = renderStoriesForChromatic({
+  Standalone,
+  DropdownCaption,
+  NB,
+  NN,
+  EN,
+  DisabledMonths,
+  UseMonthpicker,
+  UseMonthpickerFormat,
+  UserControlled,
+  CurrentMonthSelected: () => (
+    <MonthPicker.Standalone defaultSelected={new Date()} />
   ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+});
