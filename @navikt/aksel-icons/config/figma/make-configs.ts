@@ -10,7 +10,6 @@ export type IconYml = {
   sub_category: string;
   keywords: string[];
   variant: string;
-  updated_at: string;
   created_at: string;
 };
 
@@ -42,12 +41,6 @@ export const makeConfig = (
       variant: icon.name.includes("Variant=")
         ? icon.name.replace("Variant=", "")
         : "Stroke",
-      updated_at: new Date(icon.updated_at)
-        .toISOString()
-        .split("T")[0]
-        .split("-")
-        .reverse()
-        .join("."),
       created_at: new Date(icon.created_at)
         .toISOString()
         .split("T")[0]

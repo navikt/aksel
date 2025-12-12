@@ -29,7 +29,6 @@ keywords: # Samling med søkeord
   - template2
   - template3
 variant: Stroke # Stroke eller Fill
-updated_at: 02.01.2023 # Dato for siste oppdatering
 created_at: 01.01.2023 # Dato for opprettelse
 ```
 

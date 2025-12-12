@@ -24,8 +24,6 @@ describe(`Each icons YML-config is valid`, () => {
       expect(ymlData.keywords).toBeTruthy();
       expect(ymlData.variant).toBeTruthy();
       expect(ymlData.keywords.length).toBeGreaterThan(0);
-      expect(ymlData.updated_at).toBeTruthy();
-      expect(isDate(ymlData.updated_at)).toBeTruthy();
       expect(ymlData.created_at).toBeTruthy();
       expect(isDate(ymlData.created_at)).toBeTruthy();
     });
