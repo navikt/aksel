@@ -25,4 +25,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
+  desc: "Denne knappen skal brukes til destruktive handlinger som ikke kan omgjøres, for eksempel 'Slett'.",
 };
