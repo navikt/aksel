@@ -11,3 +11,46 @@
   left: calc(100% - var(--ax-space-24));
   transform: translateY(-100%) translateX(-100%);
 }
+
+.glow {
+  text-shadow:
+    0 0 4px gold,
+    0 0 12px gold,
+    0 0 20px yellow;
+  animation: candleFlicker 3.25s infinite;
+}
+
+@keyframes candleFlicker {
+  0%,
+  100% {
+    text-shadow:
+      0 0 4px gold,
+      0 0 12px gold,
+      0 0 20px yellow;
+    opacity: 1;
+  }
+
+  25% {
+    text-shadow:
+      0 0 2px gold,
+      0 0 8px gold,
+      0 0 14px yellow;
+    opacity: 0.9;
+  }
+
+  50% {
+    text-shadow:
+      0 0 5px gold,
+      0 0 14px gold,
+      0 0 22px yellow;
+    opacity: 1;
+  }
+
+  75% {
+    text-shadow:
+      0 0 3px gold,
+      0 0 10px gold,
+      0 0 16px yellow;
+    opacity: 0.95;
+  }
+}
