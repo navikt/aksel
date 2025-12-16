@@ -27,6 +27,11 @@
   width: 100%;
   max-height: calc(100vh - 200px);
   background-color: var(--ax-bg-default);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  scroll-margin-block-start: calc(var(--website-header-height) + 3rem);
+
+  /* Prevent the iframe from covering up the resize handle in Safari */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
 }
 
 .kodeEksemplerToolbar {
