@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Loader } from "../loader";
 import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
@@ -56,11 +55,11 @@ export interface ButtonProps
    * Overrides inherited color.
    *
    *
-   * We recommend only using `accent`, `neutral` and `danger`. We have disallowed other status-colors.
+   * We recommend only using `accent`, `neutral` and `danger`.
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
    */
-  "data-color"?: Exclude<AkselColor, Exclude<AkselStatusColorRole, "danger">>;
+  "data-color"?: AkselColor;
 }
 
 /**
