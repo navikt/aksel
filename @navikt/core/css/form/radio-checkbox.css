@@ -365,17 +365,15 @@
 }
 
 @media print {
-  .navds-radio__input + .navds-radio__label::before {
-    box-shadow:
-      0 0 0 2px black,
-      inset 0 0 0 2px white !important;
+  .navds-checkbox__label::before,
+  .navds-radio__label::before {
+    border: 1px solid black;
   }
 
   .navds-radio__input:checked + .navds-radio__label::before {
-    box-shadow:
-      0 0 0 2px black,
-      inset 0 0 0 2px white !important;
-    background-color: black !important;
+    border: 1px solid black;
+    outline: 4px solid black;
+    outline-offset: -5px;
   }
 
   .navds-checkbox__label::before {
