@@ -371,6 +371,7 @@
   }
 
   .navds-radio__input:checked + .navds-radio__label::before {
+    print-color-adjust: exact;
     border: 1px solid black;
     outline: 4px solid black;
     outline-offset: -5px;
