@@ -1,8 +1,13 @@
 import { useState } from "react";
-import { Button, Dialog, HStack } from "@navikt/ds-react";
+import {
+  Button,
+  Dialog,
+  type DialogPopupProps,
+  HStack,
+} from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
-type Position = "center" | "right" | "left" | "bottom" | "fullscreen";
+type Position = DialogPopupProps["position"];
 
 const Example = () => {
   const [position, setPosition] = useState<Position>("center");
