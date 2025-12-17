@@ -46,7 +46,7 @@ function IconPageSidebar({
           }
         }}
       >
-        <Dialog.Popup returnFocus={() => activeIconButton}>
+        <Dialog.Popup returnFocusTo={() => activeIconButton}>
           {!hideDialog && iconName && children}
         </Dialog.Popup>
       </Dialog>

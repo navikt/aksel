@@ -16,7 +16,7 @@ const Example = () => {
             icon={<CogIcon title="Innstillinger" />}
           />
         </Dialog.Trigger>
-        <Dialog.Popup returnFocus={inputRef}>
+        <Dialog.Popup returnFocusTo={inputRef}>
           <Dialog.Header>
             <Dialog.Title>Innstillinger</Dialog.Title>
           </Dialog.Header>

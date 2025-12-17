@@ -10,7 +10,7 @@ const Example = () => {
       <Dialog.Trigger>
         <Button>Åpne dialog</Button>
       </Dialog.Trigger>
-      <Dialog.Popup initialFocus={inputRef}>
+      <Dialog.Popup initialFocusTo={inputRef}>
         <Dialog.Header withClosebutton={false}>
           <Dialog.Title>Dialog med autofocus</Dialog.Title>
           <Search ref={inputRef} label="Navn" variant="simple" />
@@ -42,5 +42,5 @@ export const Demo = {
 
 export const args = {
   index: 10,
-  desc: "Ved å bruke `initialFocus` kan du angi hvilket element som skal få fokus når dialogen åpnes. Dette er nyttig for skjemaer der du vil at brukeren skal kunne begynne å skrive med en gang.",
+  desc: "Ved å bruke `initialFocusTo` kan du angi hvilket element som skal få fokus når dialogen åpnes. Dette er nyttig for skjemaer der du vil at brukeren skal kunne begynne å skrive med en gang.",
 };
