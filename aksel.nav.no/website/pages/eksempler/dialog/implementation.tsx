@@ -1,10 +1,47 @@
 import { useState } from "react";
-import { PencilIcon } from "@navikt/aksel-icons";
-import { Button, Dialog, Table, TextField, VStack } from "@navikt/ds-react";
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  PencilIcon,
+  XMarkIcon,
+} from "@navikt/aksel-icons";
+import {
+  Button,
+  Dialog,
+  HStack,
+  Table,
+  TextField,
+  VStack,
+} from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [editingPerson, setEditingPerson] = useState<Person | null>(null);
+  const [data, setData] = useState<Person[]>(initialPeople);
+  const [editingPersonId, setEditingPersonId] = useState<number | null>(null);
+
+  const editingPerson = data.find((p) => p.id === editingPersonId) ?? null;
+  const editingIndex = editingPerson
+    ? data.findIndex((p) => p.id === editingPersonId)
+    : -1;
+
+  const handleSave = (updatedPerson: Person) => {
+    setData((prev) =>
+      prev.map((p) => (p.id === updatedPerson.id ? updatedPerson : p)),
+    );
+    setEditingPersonId(null);
+  };
+
+  const goToPrevious = () => {
+    if (editingIndex > 0) {
+      setEditingPersonId(data[editingIndex - 1].id);
+    }
+  };
+
+  const goToNext = () => {
+    if (editingIndex < data.length - 1) {
+      setEditingPersonId(data[editingIndex + 1].id);
+    }
+  };
 
   return (
     <>
@@ -18,7 +55,7 @@ const Example = () => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {people.map((person) => (
+          {data.map((person) => (
             <Table.Row key={person.id} shadeOnHover={false}>
               <Table.HeaderCell scope="row">
                 {person.firstName} {person.lastName}
@@ -30,7 +67,7 @@ const Example = () => {
                   variant="tertiary-neutral"
                   size="small"
                   icon={<PencilIcon aria-hidden />}
-                  onClick={() => setEditingPerson(person)}
+                  onClick={() => setEditingPersonId(person.id)}
                 >
                   Rediger
                 </Button>
@@ -42,13 +79,16 @@ const Example = () => {
 
       <Dialog
         open={editingPerson !== null}
-        onOpenChange={() => setEditingPerson(null)}
+        onOpenChange={() => setEditingPersonId(null)}
       >
         <Dialog.Popup width="small" position="right">
           {editingPerson && (
             <EditPersonForm
+              key={editingPerson.id}
               person={editingPerson}
-              onClose={() => setEditingPerson(null)}
+              onSave={handleSave}
+              onPrevious={editingIndex > 0 ? goToPrevious : undefined}
+              onNext={editingIndex < data.length - 1 ? goToNext : undefined}
             />
           )}
         </Dialog.Popup>
@@ -59,27 +99,73 @@ const Example = () => {
 
 function EditPersonForm({
   person,
-  onClose,
+  onSave,
+  onPrevious,
+  onNext,
 }: {
   person: Person;
-  onClose: () => void;
+  onSave: (person: Person) => void;
+  onPrevious?: () => void;
+  onNext?: () => void;
 }) {
+  const [role, setRole] = useState(person.role);
+  const [department, setDepartment] = useState(person.department);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onSave({ ...person, role, department });
+  };
+
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        onClose();
-      }}
-    >
-      <Dialog.Header>
-        <Dialog.Title>
-          Rediger {person.firstName} {person.lastName}
-        </Dialog.Title>
+    <form onSubmit={handleSubmit}>
+      <Dialog.Header withClosebutton={false}>
+        <HStack justify="space-between" align="center">
+          <Dialog.Title>
+            Rediger {person.firstName} {person.lastName}
+          </Dialog.Title>
+          <HStack gap="space-4">
+            <Button
+              variant="tertiary"
+              size="small"
+              icon={<ChevronUpIcon title="Forrige person" />}
+              data-color="neutral"
+              type="button"
+              onClick={onPrevious}
+              disabled={!onPrevious}
+            />
+            <Button
+              variant="tertiary"
+              size="small"
+              icon={<ChevronDownIcon title="Neste person" />}
+              data-color="neutral"
+              type="button"
+              onClick={onNext}
+              disabled={!onNext}
+            />
+            <Dialog.CloseTrigger>
+              <Button
+                variant="tertiary"
+                size="small"
+                icon={<XMarkIcon title="Lukk dialog" />}
+                data-color="neutral"
+                type="button"
+              />
+            </Dialog.CloseTrigger>
+          </HStack>
+        </HStack>
       </Dialog.Header>
       <Dialog.Body>
         <VStack gap="space-16">
-          <TextField label="Rolle" defaultValue={person.role} />
-          <TextField label="Avdeling" defaultValue={person.department} />
+          <TextField
+            label="Rolle"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+          />
+          <TextField
+            label="Avdeling"
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+          />
         </VStack>
       </Dialog.Body>
       <Dialog.Footer>
@@ -100,7 +186,7 @@ interface Person {
   department: string;
 }
 
-const people: Person[] = [
+const initialPeople: Person[] = [
   {
     id: 1,
     firstName: "Jean-Luc",
@@ -134,5 +220,5 @@ export const Demo = {
 
 export const args = {
   index: 12,
-  desc: "Eksempel på bruk av Dialog for å redigere data i en tabell. Dialogen åpnes ved å klikke på rediger-knappen, og lukkes ved å klikke på avbryt eller lagre.",
+  desc: "Eksempel på bruk av Dialog for å redigere data i en tabell. Endringer lagres og vises i tabellen når du klikker Lagre.",
 };
