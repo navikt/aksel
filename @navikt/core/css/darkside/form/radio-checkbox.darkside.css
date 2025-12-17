@@ -304,7 +304,9 @@
     border-color: black !important;
   }
 
-  .aksel-radio__input:checked {
+  .aksel-radio__input:checked.aksel-radio__input:checked {
+    --__axc-radio-checkbox-marker-border: 7px;
+
     border-color: black;
   }
 
