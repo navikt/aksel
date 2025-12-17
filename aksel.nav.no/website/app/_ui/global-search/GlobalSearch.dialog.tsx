@@ -10,7 +10,7 @@ function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
       position="center"
       width="large"
       withBackdrop
-      initialFocus={() => document.getElementById("aksel-search-input")}
+      initialFocusTo={() => document.getElementById("aksel-search-input")}
     >
       <Heading level="1" size="medium" id="aksel-search-heading" visuallyHidden>
         Søk

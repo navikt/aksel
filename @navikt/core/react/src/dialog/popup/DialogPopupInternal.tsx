@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import { BoxNew, type BoxNewProps } from "../../layout/box";
-import type { ResponsiveProp } from "../../layout/utilities/types";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
 import { useRenameCSS } from "../../theme/Theme";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
@@ -57,13 +56,13 @@ interface DialogPopupInternalProps
    *
    * @default "medium"
    */
-  width?: ResponsiveProp<string & {}> | "small" | "medium" | "large";
+  width?: (string & {}) | "small" | "medium" | "large";
   /**
    * CSS `height`
    *
    * Has no effect when `position` is set to `fullscreen`, `left` or `right`.
    */
-  height?: ResponsiveProp<string & {}> | "small" | "medium" | "large";
+  height?: (string & {}) | "small" | "medium" | "large";
   /**
    * Adds a backdrop behind the dialog popup.
    * @default true if `modal={true}`, else `false`

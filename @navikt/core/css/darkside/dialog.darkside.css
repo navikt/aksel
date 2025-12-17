@@ -95,7 +95,7 @@
       transform: translateY(calc(1rem * var(--__axc-nested-level) * -1)) scale(calc(1 - 0.02 * var(--__axc-nested-level)));
     }
 
-    @media (max-width: 768px) or (max-height: 768px) {
+    @media (max-width: 768px) or (max-height: 479px) {
       --__axc-dialog-transform: translateY(35%);
 
       max-height: calc(100dvh - max(16px, 10dvh));
@@ -218,7 +218,7 @@
 }
 
 .aksel-dialog__footer {
-  justify-content: flex-start;
+  justify-content: flex-end;
   display: flex;
   flex-flow: wrap;
   gap: var(--ax-space-8);

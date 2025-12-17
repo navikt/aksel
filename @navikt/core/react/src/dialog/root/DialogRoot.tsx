@@ -29,7 +29,7 @@ interface DialogProps {
   /**
    * Event handler called when the dialog is opened or closed.
    */
-  onOpenChange?: (nextOpen: boolean, event?: Event) => void;
+  onOpenChange?: (nextOpen: boolean, event: Event) => void;
   /**
    * Event handler called after any animations complete when the dialog is opened or closed.
    */
@@ -245,7 +245,7 @@ const Dialog: DialogComponent = (props: DialogProps) => {
    * Passing the original event to onOpenChange to allow preventing the state change
    */
   const setOpen = useEventCallback(
-    (nextOpen: boolean, originalEvent?: Event) => {
+    (nextOpen: boolean, originalEvent: Event) => {
       onOpenChange?.(nextOpen, originalEvent);
 
       if (originalEvent?.defaultPrevented) {
