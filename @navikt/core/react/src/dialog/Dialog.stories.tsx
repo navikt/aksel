@@ -32,61 +32,61 @@ type Story = StoryObj<typeof Dialog>;
 export const Default = {
   render: (args) => (
     <div>
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog defaultOpen={args.defaultOpen} size={args.size}>
         <DialogTrigger>
@@ -117,61 +117,61 @@ export const Default = {
         </DialogPopup>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog</button>
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
       <br />
-      Hei
+      Hei på deg, her er jeg, hvordan går det med deg?
     </div>
   ),
   argTypes: {
