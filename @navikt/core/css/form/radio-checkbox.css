@@ -391,6 +391,7 @@
   }
 
   .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
-    background: black !important;
+    outline: 2px solid black;
+    outline-offset: -2px;
   }
 }
