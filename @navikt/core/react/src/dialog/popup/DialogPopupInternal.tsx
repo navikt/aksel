@@ -49,7 +49,7 @@ interface DialogPopupInternalProps
    * The position of the dialog relative to the viewport.
    * @default "center"
    */
-  position?: DialogPosition;
+  position?: "center" | "bottom" | "left" | "right" | "fullscreen";
   /**
    * CSS `width`
    *
