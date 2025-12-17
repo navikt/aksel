@@ -9,10 +9,10 @@ function Content({ children }: { children: React.ReactNode }) {
           place-content: center;
           background: repeating-linear-gradient(
             45deg,
-            #eee,
-            #eee 10px,
-            #fff 10px,
-            #fff 20px
+            var(--ax-bg-neutral-moderate),
+            var(--ax-bg-neutral-moderate) 10px,
+            transparent 10px,
+            transparent 20px
           );`}
       </style>
       {children}

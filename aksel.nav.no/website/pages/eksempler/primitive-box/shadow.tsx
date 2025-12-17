@@ -22,7 +22,6 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
-  legacyOnly: true,
 };
 
 export const args = {
