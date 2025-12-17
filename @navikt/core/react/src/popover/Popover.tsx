@@ -7,7 +7,6 @@ import {
   useFloating,
 } from "@floating-ui/react";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
-import { useDateInputContext } from "../date/Date.Input";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
@@ -121,9 +120,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const { cn } = useRenameCSS();
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useModalContext(false) !== undefined;
-    const datepickerContext = useDateInputContext(false);
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
-    const chosenFlip = datepickerContext ? false : _flip;
 
     const themeContext = useThemeInternal(false);
 
@@ -139,8 +136,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       open,
       middleware: [
         flOffset(offset ?? (themeContext?.isDarkside ? 8 : arrow ? 16 : 4)),
-        chosenFlip &&
-          flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        _flip && flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         shift({ padding: 12 }),
         flArrow({ element: arrowRef, padding: 8 }),
       ],
