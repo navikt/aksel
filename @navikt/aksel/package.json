@@ -16,8 +16,9 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "yarn clean && tsc -p tsconfig.json",
-    "dev": "tsc --watch -p tsconfig.json",
+    "generate-version": "node -e \"const fs=require('fs');const v=require('./package.json').version;fs.writeFileSync('src/version.ts','export const VERSION = \\\"'+v+'\\\";\\n')\"",
+    "build": "yarn clean && yarn generate-version && tsc -p tsconfig.json",
+    "dev": "yarn generate-version && tsc --watch -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
