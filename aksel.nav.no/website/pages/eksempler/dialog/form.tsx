@@ -26,31 +26,29 @@ const Example = () => {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <Dialog.Popup id="dialog-popup-example">
-          <VStack asChild overflow="hidden">
-            <form onSubmit={handleSubmit}>
-              <Dialog.Header>
-                <Dialog.Title>Kontaktskjema</Dialog.Title>
-                <Dialog.Description>
-                  Fyll ut skjemaet for å kontakte oss.
-                </Dialog.Description>
-              </Dialog.Header>
-              <Dialog.Body>
-                <VStack gap="space-8">
-                  <TextField label="Navn" name="name" />
-                  <TextField label="E-post" name="email" type="email" />
-                  <TextField label="Melding" name="message" />
-                </VStack>
-              </Dialog.Body>
-              <Dialog.Footer>
-                <Button type="submit">Send inn</Button>
-                <Dialog.CloseTrigger>
-                  <Button type="button" variant="secondary">
-                    Avbryt
-                  </Button>
-                </Dialog.CloseTrigger>
-              </Dialog.Footer>
+          <Dialog.Header>
+            <Dialog.Title>Kontaktskjema</Dialog.Title>
+            <Dialog.Description>
+              Fyll ut skjemaet for å kontakte oss.
+            </Dialog.Description>
+          </Dialog.Header>
+          <Dialog.Body>
+            <form id="form" onSubmit={handleSubmit}>
+              <VStack gap="space-8">
+                <TextField label="Navn" name="name" />
+                <TextField label="E-post" name="email" type="email" />
+                <TextField label="Melding" name="message" />
+              </VStack>
             </form>
-          </VStack>
+          </Dialog.Body>
+          <Dialog.Footer>
+            <Button form="form">Send inn</Button>
+            <Dialog.CloseTrigger>
+              <Button type="button" variant="secondary">
+                Avbryt
+              </Button>
+            </Dialog.CloseTrigger>
+          </Dialog.Footer>
         </Dialog.Popup>
       </Dialog>
     </div>

@@ -48,20 +48,15 @@ const Example = () => {
       <Table>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Rediger</Table.HeaderCell>
             <Table.HeaderCell scope="col">Rolle</Table.HeaderCell>
             <Table.HeaderCell scope="col">Avdeling</Table.HeaderCell>
-            <Table.HeaderCell aria-hidden />
+            <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {data.map((person) => (
             <Table.Row key={person.id} shadeOnHover={false}>
-              <Table.HeaderCell scope="row">
-                {person.firstName} {person.lastName}
-              </Table.HeaderCell>
-              <Table.DataCell>{person.role}</Table.DataCell>
-              <Table.DataCell>{person.department}</Table.DataCell>
               <Table.DataCell>
                 <Button
                   variant="tertiary-neutral"
@@ -72,6 +67,11 @@ const Example = () => {
                   Rediger
                 </Button>
               </Table.DataCell>
+              <Table.HeaderCell scope="row">
+                {person.firstName} {person.lastName}
+              </Table.HeaderCell>
+              <Table.DataCell>{person.role}</Table.DataCell>
+              <Table.DataCell>{person.department}</Table.DataCell>
             </Table.Row>
           ))}
         </Table.Body>
@@ -81,7 +81,7 @@ const Example = () => {
         open={editingPerson !== null}
         onOpenChange={() => setEditingPersonId(null)}
       >
-        <Dialog.Popup width="small" position="right">
+        <Dialog.Popup width="small" position="right" modal="trap-focus">
           {editingPerson && (
             <EditPersonForm
               key={editingPerson.id}
@@ -117,45 +117,45 @@ function EditPersonForm({
   };
 
   return (
-    <VStack asChild overflow="hidden">
-      <form onSubmit={handleSubmit}>
-        <Dialog.Header withClosebutton={false}>
-          <HStack justify="space-between" align="center">
-            <Dialog.Title>
-              Rediger {person.firstName} {person.lastName}
-            </Dialog.Title>
-            <HStack gap="space-4">
+    <>
+      <Dialog.Header withClosebutton={false}>
+        <HStack justify="space-between" align="center">
+          <Dialog.Title>
+            Rediger {person.firstName} {person.lastName}
+          </Dialog.Title>
+          <HStack gap="space-4">
+            <Button
+              variant="tertiary"
+              size="small"
+              icon={<ChevronUpIcon title="Forrige person" />}
+              data-color="neutral"
+              type="button"
+              onClick={onPrevious}
+              disabled={!onPrevious}
+            />
+            <Button
+              variant="tertiary"
+              size="small"
+              icon={<ChevronDownIcon title="Neste person" />}
+              data-color="neutral"
+              type="button"
+              onClick={onNext}
+              disabled={!onNext}
+            />
+            <Dialog.CloseTrigger>
               <Button
                 variant="tertiary"
                 size="small"
-                icon={<ChevronUpIcon title="Forrige person" />}
+                icon={<XMarkIcon title="Lukk dialog" />}
                 data-color="neutral"
                 type="button"
-                onClick={onPrevious}
-                disabled={!onPrevious}
               />
-              <Button
-                variant="tertiary"
-                size="small"
-                icon={<ChevronDownIcon title="Neste person" />}
-                data-color="neutral"
-                type="button"
-                onClick={onNext}
-                disabled={!onNext}
-              />
-              <Dialog.CloseTrigger>
-                <Button
-                  variant="tertiary"
-                  size="small"
-                  icon={<XMarkIcon title="Lukk dialog" />}
-                  data-color="neutral"
-                  type="button"
-                />
-              </Dialog.CloseTrigger>
-            </HStack>
+            </Dialog.CloseTrigger>
           </HStack>
-        </Dialog.Header>
-        <Dialog.Body>
+        </HStack>
+      </Dialog.Header>
+      <Dialog.Body>
+        <form id="form" onSubmit={handleSubmit}>
           <VStack gap="space-16">
             <TextField
               label="Rolle"
@@ -168,15 +168,15 @@ function EditPersonForm({
               onChange={(e) => setDepartment(e.target.value)}
             />
           </VStack>
-        </Dialog.Body>
-        <Dialog.Footer>
-          <Button type="submit">Lagre</Button>
-          <Dialog.CloseTrigger>
-            <Button variant="secondary">Avbryt</Button>
-          </Dialog.CloseTrigger>
-        </Dialog.Footer>
-      </form>
-    </VStack>
+        </form>
+      </Dialog.Body>
+      <Dialog.Footer>
+        <Button form="form">Lagre</Button>
+        <Dialog.CloseTrigger>
+          <Button variant="secondary">Avbryt</Button>
+        </Dialog.CloseTrigger>
+      </Dialog.Footer>
+    </>
   );
 }
 
@@ -222,5 +222,5 @@ export const Demo = {
 
 export const args = {
   index: 12,
-  desc: "Eksempel på bruk av Dialog for å redigere data i en tabell. Endringer lagres og vises i tabellen når du klikker Lagre.",
+  desc: "'trap-focus' modal dialog lar brukeren navigere innenfor dialogen med pointer/touch uten å miste 'focus'.",
 };
