@@ -529,7 +529,11 @@ export const HookFallbackToDate: Story = {
 export const SelectSameRangedDate: Story = {
   render: () => {
     const { datepickerProps, toInputProps, fromInputProps } =
-      useRangeDatepicker({});
+      useRangeDatepicker({
+        defaultSelected: {
+          from: new Date("Aug 23 2025"),
+        },
+      });
 
     return (
       <DatePicker {...datepickerProps}>
