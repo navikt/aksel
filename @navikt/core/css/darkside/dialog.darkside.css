@@ -2,6 +2,7 @@
   --__axc-dialog-transform: ;
   --__axc-dialog-p-b: var(--ax-space-16);
   --__axc-dialog-p-i: var(--ax-space-20);
+  --spacing: 0.25rem;
 
   position: fixed;
   background-color: var(--ax-bg-raised);
@@ -106,7 +107,7 @@
       border-bottom-right-radius: 0;
       left: 0;
       right: 0;
-      bottom: 0;
+      bottom: calc(var(--spacing) * 0);
       /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
       top: auto;
       margin-block: 0;
@@ -117,7 +118,7 @@
   &[data-position="left"] {
     max-width: calc(100vw - max(16px, 10vw));
     top: 0;
-    bottom: 0;
+    bottom: calc(var(--spacing) * 0);
 
     &[data-nested-dialog-open="true"] {
       &::after {
@@ -150,7 +151,7 @@
     border-bottom-right-radius: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: calc(var(--spacing) * 0);
     max-height: calc(100dvh - max(16px, 10dvh));
     max-width: 95dvw;
     margin-inline: auto;
