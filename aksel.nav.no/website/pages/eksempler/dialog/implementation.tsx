@@ -117,64 +117,66 @@ function EditPersonForm({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Header withClosebutton={false}>
-        <HStack justify="space-between" align="center">
-          <Dialog.Title>
-            Rediger {person.firstName} {person.lastName}
-          </Dialog.Title>
-          <HStack gap="space-4">
-            <Button
-              variant="tertiary"
-              size="small"
-              icon={<ChevronUpIcon title="Forrige person" />}
-              data-color="neutral"
-              type="button"
-              onClick={onPrevious}
-              disabled={!onPrevious}
-            />
-            <Button
-              variant="tertiary"
-              size="small"
-              icon={<ChevronDownIcon title="Neste person" />}
-              data-color="neutral"
-              type="button"
-              onClick={onNext}
-              disabled={!onNext}
-            />
-            <Dialog.CloseTrigger>
+    <VStack asChild overflow="hidden">
+      <form onSubmit={handleSubmit}>
+        <Dialog.Header withClosebutton={false}>
+          <HStack justify="space-between" align="center">
+            <Dialog.Title>
+              Rediger {person.firstName} {person.lastName}
+            </Dialog.Title>
+            <HStack gap="space-4">
               <Button
                 variant="tertiary"
                 size="small"
-                icon={<XMarkIcon title="Lukk dialog" />}
+                icon={<ChevronUpIcon title="Forrige person" />}
                 data-color="neutral"
                 type="button"
+                onClick={onPrevious}
+                disabled={!onPrevious}
               />
-            </Dialog.CloseTrigger>
+              <Button
+                variant="tertiary"
+                size="small"
+                icon={<ChevronDownIcon title="Neste person" />}
+                data-color="neutral"
+                type="button"
+                onClick={onNext}
+                disabled={!onNext}
+              />
+              <Dialog.CloseTrigger>
+                <Button
+                  variant="tertiary"
+                  size="small"
+                  icon={<XMarkIcon title="Lukk dialog" />}
+                  data-color="neutral"
+                  type="button"
+                />
+              </Dialog.CloseTrigger>
+            </HStack>
           </HStack>
-        </HStack>
-      </Dialog.Header>
-      <Dialog.Body>
-        <VStack gap="space-16">
-          <TextField
-            label="Rolle"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          />
-          <TextField
-            label="Avdeling"
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
-          />
-        </VStack>
-      </Dialog.Body>
-      <Dialog.Footer>
-        <Button type="submit">Lagre</Button>
-        <Dialog.CloseTrigger>
-          <Button variant="secondary">Avbryt</Button>
-        </Dialog.CloseTrigger>
-      </Dialog.Footer>
-    </form>
+        </Dialog.Header>
+        <Dialog.Body>
+          <VStack gap="space-16">
+            <TextField
+              label="Rolle"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            />
+            <TextField
+              label="Avdeling"
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+            />
+          </VStack>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Button type="submit">Lagre</Button>
+          <Dialog.CloseTrigger>
+            <Button variant="secondary">Avbryt</Button>
+          </Dialog.CloseTrigger>
+        </Dialog.Footer>
+      </form>
+    </VStack>
   );
 }
 
