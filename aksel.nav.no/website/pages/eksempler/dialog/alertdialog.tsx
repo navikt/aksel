@@ -5,7 +5,9 @@ const Example = () => {
   return (
     <Dialog>
       <Dialog.Trigger>
-        <Button variant="danger">Slett dokument</Button>
+        <Button variant="secondary" data-color="danger">
+          Slett dokument
+        </Button>
       </Dialog.Trigger>
       <Dialog.Popup role="alertdialog" closeOnOutsideClick={false}>
         <Dialog.Header withClosebutton={false}>
