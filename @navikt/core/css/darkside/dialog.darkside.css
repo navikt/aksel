@@ -149,11 +149,10 @@
 
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    left: 0;
-    right: 0;
+    left: calc(var(--spacing) * 0);
+    right: calc(var(--spacing) * 0);
     bottom: calc(var(--spacing) * 0);
     max-height: calc(100dvh - max(16px, 10dvh));
-    max-width: 95dvw;
     margin-inline: auto;
     height: auto;
 

@@ -88,7 +88,7 @@ const DialogPopupInternal = forwardRef<
       initialFocus,
       returnFocus,
       position = "center",
-      width = "medium",
+      //width = "medium",
       height,
       id,
       style,
@@ -215,7 +215,7 @@ const DialogPopupInternal = forwardRef<
               {...createTransitionStatusAttribute(transitionStatus)}
               data-position={position}
               data-size={size}
-              width={translateWidth(width, position)}
+              //width={translateWidth(width, position)}
               height={translateHeight(height, position)}
               style={{
                 ...style,
@@ -230,26 +230,6 @@ const DialogPopupInternal = forwardRef<
     );
   },
 );
-
-function translateWidth(
-  width: DialogPopupInternalProps["width"],
-  position: DialogPosition,
-): BoxNewProps["width"] {
-  if (position === "fullscreen") {
-    return undefined;
-  }
-
-  switch (width) {
-    case "small":
-      return "480px";
-    case "medium":
-      return "640px";
-    case "large":
-      return "800px";
-    default:
-      return width;
-  }
-}
 
 function translateHeight(
   height: DialogPopupInternalProps["height"],

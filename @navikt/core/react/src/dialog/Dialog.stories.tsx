@@ -96,7 +96,6 @@ export const Default = {
           withBackdrop={args.backdrop}
           aria-labelledby="ha"
           position={args.position}
-          width={args.width}
           height={args.height}
           closeOnOutsideClick={args.closeOnOutsideClick}
           modal={args.modal}
