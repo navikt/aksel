@@ -1,5 +1,5 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
-import { Preview } from "@storybook/nextjs";
+import { Preview } from "@storybook/react-vite";
 import React, { useEffect, useLayoutEffect } from "react";
 // @ts-expect-error - Temporary
 import darksideCss from "../@navikt/core/css/darkside/index.css?inline";

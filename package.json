@@ -180,7 +180,7 @@
     "@storybook/addon-docs": "^10.1.2",
     "@storybook/addon-themes": "^10.1.2",
     "@storybook/addon-vitest": "^10.1.2",
-    "@storybook/nextjs": "^10.1.2",
+    "@storybook/nextjs-vite": "^10.1.2",
     "@storybook/react-vite": "^10.1.2",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",

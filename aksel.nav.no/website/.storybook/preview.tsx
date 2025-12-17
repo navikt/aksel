@@ -1,5 +1,5 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
-import type { Preview } from "@storybook/nextjs";
+import type { Preview } from "@storybook/nextjs-vite";
 import { Box, Theme } from "@navikt/ds-react";
 import "./aksel-storybook.css";
 

@@ -1,10 +1,10 @@
-import type { StorybookConfig } from "@storybook/nextjs";
+import type { StorybookConfig } from "@storybook/nextjs-vite";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadCsf } from "storybook/internal/csf-tools";
-import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import TsconfigPathsPlugin from "vite-tsconfig-paths";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -59,7 +59,6 @@ const sbConfig: StorybookConfig = {
   staticDirs: ["../public"],
 
   stories: [
-    "../**/*.mdx",
     "../**/*.stories.@(ts|tsx)",
     "../pages/eksempler/**/*.tsx",
     "../pages/templates/**/*.tsx",
@@ -70,23 +69,23 @@ const sbConfig: StorybookConfig = {
     getAbsolutePath("@storybook/addon-themes"),
     getAbsolutePath("@storybook/addon-docs"),
   ],
-  framework: getAbsolutePath("@storybook/nextjs"),
+  framework: getAbsolutePath("@storybook/nextjs-vite"),
 
   features: {
     actions: false,
   },
 
-  webpackFinal: (async (config) => {
-    if (!config?.resolve) {
-      return config;
-    }
-    config.resolve.plugins = [
-      new TsconfigPathsPlugin({
-        configFile: resolve(__dirname, "../tsconfig.json"),
-      }),
-    ];
-    return config;
-  }) satisfies StorybookConfig["webpackFinal"],
+  viteFinal: async (config) => {
+    const { mergeConfig } = await import("vite");
+    return mergeConfig(config, {
+      plugins: [
+        TsconfigPathsPlugin({
+          projects: [resolve(__dirname, "../tsconfig.json")],
+          ignoreConfigErrors: true,
+        }),
+      ],
+    });
+  },
 };
 export default sbConfig;
 
