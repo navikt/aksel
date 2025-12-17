@@ -154,6 +154,7 @@
     bottom: calc(var(--spacing) * 0);
     max-height: calc(100dvh - max(16px, 10dvh));
     margin-inline: auto;
+    margin-bottom: env(safe-area-inset-bottom, 1rem);
     height: auto;
 
     &[data-nested-dialog-open="true"] {
