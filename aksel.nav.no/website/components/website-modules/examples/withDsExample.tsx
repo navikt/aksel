@@ -66,7 +66,7 @@ export const withDsExample = (
           [styles.containerStaticFull]: variant === "static-full",
           [styles.containerFullscreen]: variant === "fullscreen",
         })}
-        style={{ background: getBg(background), minHeight }}
+        style={{ background: getBg(background) }}
       >
         <Head>
           <title>
@@ -80,6 +80,7 @@ export const withDsExample = (
         <main
           id="ds-example"
           className={variant === "static" ? styles.exampleStatic : undefined}
+          style={{ minHeight }}
         >
           <Component {...props} />
         </main>

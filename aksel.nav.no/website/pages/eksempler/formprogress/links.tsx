@@ -5,24 +5,25 @@ const Example = () => {
   const activeStep = 2; // Finn steg basert på rute
 
   return (
-    <div style={{ minHeight: 260 }}>
-      <FormProgress totalSteps={5} activeStep={activeStep}>
-        <FormProgress.Step href="#/steg-1" completed>
-          Dine opplysninger
-        </FormProgress.Step>
-        <FormProgress.Step href="#/steg-2">Barn</FormProgress.Step>
-        <FormProgress.Step href="#/steg-3">Fastlege</FormProgress.Step>
-        <FormProgress.Step href="#/steg-4">
-          Tilleggsopplysninger
-        </FormProgress.Step>
-        <FormProgress.Step interactive={false}>Oppsummering</FormProgress.Step>
-      </FormProgress>
-    </div>
+    <FormProgress totalSteps={5} activeStep={activeStep}>
+      <FormProgress.Step href="#/steg-1" completed>
+        Dine opplysninger
+      </FormProgress.Step>
+      <FormProgress.Step href="#/steg-2">Barn</FormProgress.Step>
+      <FormProgress.Step href="#/steg-3">Fastlege</FormProgress.Step>
+      <FormProgress.Step href="#/steg-4">
+        Tilleggsopplysninger
+      </FormProgress.Step>
+      <FormProgress.Step interactive={false}>Oppsummering</FormProgress.Step>
+    </FormProgress>
   );
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { variant: "static" });
+export default withDsExample(Example, {
+  variant: "static",
+  minHeight: "300px",
+});
 
 /* Storybook story */
 export const Demo = {
