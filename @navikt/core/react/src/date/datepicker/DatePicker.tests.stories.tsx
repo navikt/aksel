@@ -3,6 +3,7 @@ import { addMonths, format } from "date-fns";
 import { nb } from "date-fns/locale";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
+import { HStack } from "../../layout/stack";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./hooks/useDatepicker";
 import { useRangeDatepicker } from "./hooks/useRangeDatepicker";
@@ -522,5 +523,47 @@ export const HookFallbackToDate: Story = {
     );
 
     expect(label).toBeInTheDocument();
+  },
+};
+
+export const SelectSameRangedDate: Story = {
+  render: () => {
+    const { datepickerProps, toInputProps, fromInputProps } =
+      useRangeDatepicker({});
+
+    return (
+      <DatePicker {...datepickerProps}>
+        <HStack wrap gap="space-16" justify="center">
+          <DatePicker.Input {...fromInputProps} label="Fra" />
+          <DatePicker.Input {...toInputProps} label="Til" />
+        </HStack>
+      </DatePicker>
+    );
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fromInput = canvas.getByLabelText("Fra");
+    const toInput = canvas.getByLabelText("Til");
+
+    expect(fromInput).toHaveValue("23.08.2025");
+    expect(toInput).toHaveValue("");
+
+    await userEvent.click(fromInput);
+    await userEvent.tab();
+    await userEvent.keyboard("{Enter}");
+
+    const currentSelected = within(canvas.getByRole("dialog")).getByLabelText(
+      "lørdag 23",
+    );
+
+    expect(currentSelected).toBeInTheDocument();
+    expect(currentSelected.ariaPressed).toBe("true");
+
+    await userEvent.click(currentSelected);
+
+    expect(fromInput).toHaveValue("23.08.2025");
+    expect(toInput).toHaveValue("23.08.2025");
   },
 };
