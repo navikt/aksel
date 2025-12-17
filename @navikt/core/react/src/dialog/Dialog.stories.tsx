@@ -32,6 +32,61 @@ type Story = StoryObj<typeof Dialog>;
 export const Default = {
   render: (args) => (
     <div>
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
       <button onClick={() => alert("before")}>Before dialog</button>
       <Dialog defaultOpen={args.defaultOpen} size={args.size}>
         <DialogTrigger>
@@ -63,6 +118,61 @@ export const Default = {
         </DialogPopup>
       </Dialog>
       <button onClick={() => alert("after")}>after dialog</button>
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
+      <br />
+      Hei
     </div>
   ),
   argTypes: {
