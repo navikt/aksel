@@ -469,7 +469,7 @@ export const FocusAutoOnOpen: Story = {
   args: {
     popupProps: {
       children: <button data-testid="autofocus-anchor">Autofocus</button>,
-      initialFocusElement: () => {
+      initialFocusTo: () => {
         return document.querySelector(
           '[data-testid="autofocus-anchor"]',
         ) as HTMLElement;
@@ -503,7 +503,7 @@ export const FocusAutoOnClose: Story = {
     rootProps: { defaultOpen: true },
     popupProps: {
       children: <button data-testid="autofocus-anchor">Autofocus</button>,
-      returnFocusElement: () => {
+      returnFocusTo: () => {
         return document.querySelector(
           '[data-testid="autofocus-anchor"]',
         ) as HTMLElement;
