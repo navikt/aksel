@@ -32,7 +32,7 @@ interface DialogPopupInternalProps
    *
    * If not provided, Dialog will focus the popup itself.
    */
-  initialFocus?:
+  initialFocusTo?:
     | React.RefObject<HTMLElement | null>
     | (() => HTMLElement | null | undefined);
   /**
@@ -41,7 +41,7 @@ interface DialogPopupInternalProps
    * If not provided, Dialog will try to focus the `Dialog.Trigger` element
    * or the last focused element before the dialog opened.
    */
-  returnFocus?:
+  returnFocusTo?:
     | React.RefObject<HTMLElement | null>
     | (() => HTMLElement | null | undefined);
 
@@ -49,7 +49,7 @@ interface DialogPopupInternalProps
    * The position of the dialog relative to the viewport.
    * @default "center"
    */
-  position?: DialogPosition;
+  position?: "center" | "bottom" | "left" | "right" | "fullscreen";
   /**
    * CSS `width`
    *
@@ -85,8 +85,8 @@ const DialogPopupInternal = forwardRef<
       className,
       modal,
       closeOnOutsideClick = true,
-      initialFocus,
-      returnFocus,
+      initialFocusTo,
+      returnFocusTo,
       position = "center",
       width = "medium",
       height,
@@ -140,13 +140,13 @@ const DialogPopupInternal = forwardRef<
       },
     });
 
-    const resolvedInitialFocus = initialFocus ?? popupRef;
+    const resolvedInitialFocus = initialFocusTo ?? popupRef;
 
     const resolvedReturnFocus = () => {
-      if (returnFocus) {
-        return typeof returnFocus === "function"
-          ? returnFocus()
-          : returnFocus.current;
+      if (returnFocusTo) {
+        return typeof returnFocusTo === "function"
+          ? returnFocusTo()
+          : returnFocusTo.current;
       }
 
       if (isFocusable(triggerElement)) {
