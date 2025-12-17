@@ -111,9 +111,9 @@
     "postcss-loader": "7.0.0",
     "rss": "^1.2.2",
     "showdown": "^2.1.0",
-    "tsconfig-paths-webpack-plugin": "^4.2.0",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
+    "vite-tsconfig-paths": "^6.0.1",
     "vitest": "^3.2.4"
   }
 }
