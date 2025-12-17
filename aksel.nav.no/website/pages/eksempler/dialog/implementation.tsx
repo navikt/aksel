@@ -1,108 +1,126 @@
 import { useState } from "react";
 import { PencilIcon } from "@navikt/aksel-icons";
-import { Button, Dialog, Table, VStack } from "@navikt/ds-react";
+import { Button, Dialog, Table, TextField, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [editingRow, setEditingRow] = useState<number | null>(null);
-  const [modalMode, setModalMode] = useState<true | "trap-focus">(true);
-
-  const currentData = TableData.find((data) => data.id === editingRow);
+  const [editingPerson, setEditingPerson] = useState<Person | null>(null);
 
   return (
-    <div>
-      <VStack marginBlock="space-16" align="start">
-        <Button
-          onClick={() =>
-            setModalMode((x) => (x === true ? "trap-focus" : true))
-          }
-        >
-          Modal Mode: {modalMode === true ? "true" : "trap-focus"}
-        </Button>
-      </VStack>
+    <>
       <Table>
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Rolle</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Avdeling</Table.HeaderCell>
             <Table.HeaderCell aria-hidden />
-            <Table.HeaderCell>ID</Table.HeaderCell>
-            <Table.HeaderCell>Fornavn</Table.HeaderCell>
-            <Table.HeaderCell textSize="medium">Etternavn</Table.HeaderCell>
-            <Table.HeaderCell textSize="small">Rolle</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {TableData.map((data) => (
-            <Table.Row key={data.id} shadeOnHover={false}>
+          {people.map((person) => (
+            <Table.Row key={person.id} shadeOnHover={false}>
+              <Table.HeaderCell scope="row">
+                {person.firstName} {person.lastName}
+              </Table.HeaderCell>
+              <Table.DataCell>{person.role}</Table.DataCell>
+              <Table.DataCell>{person.department}</Table.DataCell>
               <Table.DataCell>
                 <Button
-                  variant="tertiary"
-                  data-color="neutral"
+                  variant="tertiary-neutral"
                   size="small"
-                  icon={<PencilIcon title="Rediger rad" />}
-                  onClick={() => setEditingRow(data.id)}
-                  aria-haspopup="dialog"
-                  aria-expanded={data.id === editingRow}
-                  aria-controls={
-                    data.id === editingRow ? "dialog-popup-example" : undefined
-                  }
-                />
+                  icon={<PencilIcon aria-hidden />}
+                  onClick={() => setEditingPerson(person)}
+                >
+                  Rediger
+                </Button>
               </Table.DataCell>
-              <Table.HeaderCell>{data.id}</Table.HeaderCell>
-              <Table.DataCell>{data.firstName}</Table.DataCell>
-              <Table.DataCell>{data.lastName}</Table.DataCell>
-              <Table.DataCell>{data.role}</Table.DataCell>
             </Table.Row>
           ))}
         </Table.Body>
       </Table>
 
       <Dialog
-        open={editingRow !== null}
-        onOpenChange={() => setEditingRow(null)}
+        open={editingPerson !== null}
+        onOpenChange={() => setEditingPerson(null)}
       >
-        <Dialog.Popup
-          width="small"
-          modal={modalMode}
-          position="right"
-          id="dialog-popup-example"
-        >
-          {editingRow !== null && (
-            <>
-              <Dialog.Header>
-                <Dialog.Title>Edit: {currentData?.firstName}</Dialog.Title>
-              </Dialog.Header>
-              <Dialog.Body>This is the body of the dialog.</Dialog.Body>
-              <Dialog.Footer>
-                <Dialog.CloseTrigger>
-                  <Button>Close</Button>
-                </Dialog.CloseTrigger>
-              </Dialog.Footer>
-            </>
+        <Dialog.Popup width="small" position="right">
+          {editingPerson && (
+            <EditPersonForm
+              person={editingPerson}
+              onClose={() => setEditingPerson(null)}
+            />
           )}
         </Dialog.Popup>
       </Dialog>
-    </div>
+    </>
   );
 };
 
-const TableData = [
+function EditPersonForm({
+  person,
+  onClose,
+}: {
+  person: Person;
+  onClose: () => void;
+}) {
+  return (
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+    >
+      <Dialog.Header>
+        <Dialog.Title>
+          Rediger {person.firstName} {person.lastName}
+        </Dialog.Title>
+      </Dialog.Header>
+      <Dialog.Body>
+        <VStack gap="space-16">
+          <TextField label="Rolle" defaultValue={person.role} />
+          <TextField label="Avdeling" defaultValue={person.department} />
+        </VStack>
+      </Dialog.Body>
+      <Dialog.Footer>
+        <Button type="submit">Lagre</Button>
+        <Dialog.CloseTrigger>
+          <Button variant="secondary">Avbryt</Button>
+        </Dialog.CloseTrigger>
+      </Dialog.Footer>
+    </form>
+  );
+}
+
+interface Person {
+  id: number;
+  firstName: string;
+  lastName: string;
+  role: string;
+  department: string;
+}
+
+const people: Person[] = [
   {
     id: 1,
     firstName: "Jean-Luc",
     lastName: "Picard",
     role: "Kaptein",
+    department: "Bro",
   },
   {
     id: 2,
     firstName: "William",
     lastName: "Riker",
     role: "Kommandør",
+    department: "Bro",
   },
   {
     id: 3,
     firstName: "Geordi",
     lastName: "La Forge",
     role: "Sjefsingeniør",
+    department: "Maskinrom",
   },
 ];
 
@@ -116,5 +134,5 @@ export const Demo = {
 
 export const args = {
   index: 12,
-  desc: 'Med modal="trap-focus" vil fokus være låst inne i dialogen, men scrolling på siden og interaksjon med elementer utenfor dialogen er fortsatt mulig. Dette er nyttig for dialoger som ikke skal blokkere hele siden. Merk at dette bare bør brukes i ekspertsystemer hvor brukeren har god kontroll over konteksten utenfor dialogen.',
+  desc: "Eksempel på bruk av Dialog for å redigere data i en tabell. Dialogen åpnes ved å klikke på rediger-knappen, og lukkes ved å klikke på avbryt eller lagre.",
 };
