@@ -315,4 +315,9 @@
     bottom: 2px;
     height: calc(var(--__axc-radio-checkbox-marker-size) - 4px);
   }
+
+  .aksel-checkbox__input:indeterminate::after {
+    outline: 2px solid black;
+    outline-offset: -2px;
+  }
 }

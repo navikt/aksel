@@ -389,4 +389,8 @@
     height: calc(1.5rem - 9px) !important;
     margin-top: 4px;
   }
+
+  .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
+    background: black !important;
+  }
 }
