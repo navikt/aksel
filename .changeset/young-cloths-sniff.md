@@ -2,4 +2,4 @@
 "@navikt/aksel": patch
 ---
 
-CLI: Avoid renaming redefined tokens, now shows status for component and legacy-token definitions.
+CLI: Update v8-tokens codemod to avoid renaming redefined tokens. Now shows status for component and legacy-token definitions.
