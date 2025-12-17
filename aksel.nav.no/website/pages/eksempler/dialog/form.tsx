@@ -42,12 +42,12 @@ const Example = () => {
             </form>
           </Dialog.Body>
           <Dialog.Footer>
-            <Button form="form">Send inn</Button>
             <Dialog.CloseTrigger>
               <Button type="button" variant="secondary">
                 Avbryt
               </Button>
             </Dialog.CloseTrigger>
+            <Button form="form">Send inn</Button>
           </Dialog.Footer>
         </Dialog.Popup>
       </Dialog>

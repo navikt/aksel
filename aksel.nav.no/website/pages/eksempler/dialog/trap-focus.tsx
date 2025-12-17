@@ -171,10 +171,10 @@ function EditPersonForm({
         </form>
       </Dialog.Body>
       <Dialog.Footer>
-        <Button form="form">Lagre</Button>
         <Dialog.CloseTrigger>
           <Button variant="secondary">Avbryt</Button>
         </Dialog.CloseTrigger>
+        <Button form="form">Lagre</Button>
       </Dialog.Footer>
     </>
   );

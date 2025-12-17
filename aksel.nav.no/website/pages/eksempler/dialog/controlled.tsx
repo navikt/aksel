@@ -33,10 +33,10 @@ const Example = () => {
             </BodyLong>
           </Dialog.Body>
           <Dialog.Footer>
-            <Button onClick={() => setOpen(false)}>Lukk</Button>
             <Dialog.CloseTrigger>
               <Button variant="secondary">Avbryt</Button>
             </Dialog.CloseTrigger>
+            <Button onClick={() => setOpen(false)}>Lukk</Button>
           </Dialog.Footer>
         </Dialog.Popup>
       </Dialog>

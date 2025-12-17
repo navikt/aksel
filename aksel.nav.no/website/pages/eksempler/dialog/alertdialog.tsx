@@ -21,13 +21,13 @@ const Example = () => {
         </Dialog.Body>
         <Dialog.Footer>
           <Dialog.CloseTrigger>
-            <Button variant="danger" onClick={() => alert("Slettet!")}>
-              Ja, slett
+            <Button variant="secondary" data-color="neutral">
+              Avbryt
             </Button>
           </Dialog.CloseTrigger>
           <Dialog.CloseTrigger>
-            <Button variant="secondary" data-color="neutral">
-              Avbryt
+            <Button variant="danger" onClick={() => alert("Slettet!")}>
+              Ja, slett
             </Button>
           </Dialog.CloseTrigger>
         </Dialog.Footer>

@@ -39,6 +39,9 @@ const Example = () => {
         </Dialog.Body>
         <Dialog.Footer>
           <Dialog.CloseTrigger>
+            <Button variant="secondary">Avbryt</Button>
+          </Dialog.CloseTrigger>
+          <Dialog.CloseTrigger>
             <Button
               onClick={() => {
                 // Save changes
@@ -47,9 +50,6 @@ const Example = () => {
             >
               Lagre
             </Button>
-          </Dialog.CloseTrigger>
-          <Dialog.CloseTrigger>
-            <Button variant="secondary">Avbryt</Button>
           </Dialog.CloseTrigger>
         </Dialog.Footer>
       </Dialog.Popup>
