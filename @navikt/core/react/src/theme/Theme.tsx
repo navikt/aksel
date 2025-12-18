@@ -49,13 +49,13 @@ const DEFAULT_COLOR: AkselColor = "accent";
 
 type ThemeContext = {
   /**
-   * Color theme
-   * @default Inherits parent theme, or "light" if root
+   * Color theme.
+   * @default Inherits parent theme, or "light" if root.
    */
   theme?: "light" | "dark";
   color?: AkselColor;
   /**
-   * Indicates if Theme-component root-level or not
+   * Indicates if Theme-component is on root-level or not.
    */
   isRoot: boolean;
 };
@@ -73,11 +73,12 @@ const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
 export type ThemeProps = {
   className?: string;
   /**
-   * Sets default background when enabled
+   * Whether to apply the default background.
+   * @default true
    */
   hasBackground?: boolean;
   /**
-   * Sets default 'base'-color for application
+   * Changes default 'base'-color for application.
    */
   "data-color"?: AkselColor;
 } & Omit<ThemeContext, "color" | "isRoot"> &
