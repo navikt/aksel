@@ -1,4 +1,4 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { PlantIcon } from "@navikt/aksel-icons";
 import { ExpansionCard, ExpansionCardProps } from ".";
@@ -6,6 +6,7 @@ import { Checkbox } from "../form/checkbox";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
 import { BodyLong } from "../typography";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 
 const meta: Meta<typeof ExpansionCard> = {
   title: "ds-react/ExpansionCard",
@@ -31,8 +32,6 @@ const meta: Meta<typeof ExpansionCard> = {
   },
 };
 export default meta;
-
-type Story = StoryObj<typeof ExpansionCard>;
 
 const Content = () => (
   <ExpansionCard.Content>
@@ -65,6 +64,17 @@ const Content = () => (
       doloremque explicabo perspiciatis quasi repellendus! Est dolore a nemo
       aspernatur obcaecati dicta.
     </BodyLong>
+  </ExpansionCard.Content>
+);
+
+const SmallContent = () => (
+  <ExpansionCard.Content>
+    <BodyLong>
+      På ditt faste arbeidssted vil du ha yrkesskadedekning også i hvilepauser,
+      lunsjpauser, trimaktiviteter og lignende i arbeidstiden.{" "}
+      <Link href="#">LENKE</Link>
+    </BodyLong>
+    <Checkbox checked>Label</Checkbox>
   </ExpansionCard.Content>
 );
 
@@ -238,7 +248,7 @@ export const Icon = () => (
 export const ColorRole = () => (
   <VStack gap="space-40">
     <div>
-      <ExpansionCard aria-label="bare description">
+      <ExpansionCard aria-label="bare description" defaultOpen>
         <ExpansionCard.Header>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -246,11 +256,11 @@ export const ColorRole = () => (
             til tid, sted og arbeidsoppgaver
           </ExpansionCard.Description>
         </ExpansionCard.Header>
-        <Content />
+        <SmallContent />
       </ExpansionCard>
     </div>
     <div data-color="brand-magenta">
-      <ExpansionCard aria-label="bare description">
+      <ExpansionCard aria-label="bare description" defaultOpen>
         <ExpansionCard.Header>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -258,12 +268,16 @@ export const ColorRole = () => (
             til tid, sted og arbeidsoppgaver
           </ExpansionCard.Description>
         </ExpansionCard.Header>
-        <Content />
+        <SmallContent />
       </ExpansionCard>
     </div>
 
     <div>
-      <ExpansionCard aria-label="bare description" data-color="brand-magenta">
+      <ExpansionCard
+        aria-label="bare description"
+        data-color="brand-magenta"
+        defaultOpen
+      >
         <ExpansionCard.Header>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -271,34 +285,18 @@ export const ColorRole = () => (
             til tid, sted og arbeidsoppgaver
           </ExpansionCard.Description>
         </ExpansionCard.Header>
-        <Content />
+        <SmallContent />
       </ExpansionCard>
     </div>
   </VStack>
 );
 
-export const Chromatic: Story = {
-  render: () => {
-    return (
-      <div>
-        <h2>Description</h2>
-        <Description />
-        <h2>Sizes</h2>
-        <Sizes />
-        <h2>Heading sizing</h2>
-        <HeadingSizing />
-        <h2>Default open</h2>
-        <DefaultOpen />
-        <h2>Controlled state</h2>
-        <ControlledState />
-        <h2>Icon</h2>
-        <Icon />
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
-    );
-  },
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Description,
+  Sizes,
+  HeadingSizing,
+  DefaultOpen,
+  ControlledState,
+  Icon,
+  ColorRole,
+});

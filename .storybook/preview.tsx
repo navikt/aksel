@@ -1,5 +1,5 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
-import { Preview } from "@storybook/nextjs";
+import { Preview } from "@storybook/react-vite";
 import React, { useEffect } from "react";
 import "../@navikt/core/css/src/index.css";
 import { Provider } from "../@navikt/core/react/src/provider";

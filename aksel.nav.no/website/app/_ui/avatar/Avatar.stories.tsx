@@ -1,4 +1,4 @@
-import { type Meta, type StoryFn } from "@storybook/nextjs";
+import { type Meta, type StoryFn } from "@storybook/nextjs-vite";
 import { HGrid, LinkCard, VStack } from "@navikt/ds-react";
 import {
   LinkCardAnchor,

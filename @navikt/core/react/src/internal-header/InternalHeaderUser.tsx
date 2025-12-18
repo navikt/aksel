@@ -7,11 +7,11 @@ export interface InternalHeaderUserProps
   /**
    * User name
    */
-  name: string;
+  name: React.ReactNode;
   /**
    * User description
    */
-  description?: string;
+  description?: React.ReactNode;
 }
 
 export const InternalHeaderUser = forwardRef<
@@ -26,12 +26,12 @@ export const InternalHeaderUser = forwardRef<
       ref={ref}
       className={cn("navds-internalheader__user", className)}
     >
-      <span>
+      <div>
         <BodyShort size="small" as="div">
           {name}
         </BodyShort>
         {description && <Detail as="div">{description}</Detail>}
-      </span>
+      </div>
     </div>
   );
 });

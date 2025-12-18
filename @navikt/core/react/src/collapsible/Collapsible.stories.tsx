@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Box } from "../layout/box";
-import { HStack, VStack } from "../layout/stack";
+import { HStack } from "../layout/stack";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import { Collapsible } from "./Collapsible";
 
 const meta: Meta<typeof Collapsible> = {
@@ -182,41 +183,13 @@ export const Disabled: StoryFn<typeof Collapsible> = ({ open = false }) => (
   </Collapsible>
 );
 
-export const Chromatic: Story = {
-  render: () => (
-    <VStack gap="8">
-      <div>
-        <h2>In context</h2>
-        <InContext />
-      </div>
-      <div>
-        <h2>Animated</h2>
-        <Animated />
-      </div>
-      <div>
-        <h2>Lazy</h2>
-        <Lazy />
-      </div>
-      <div>
-        <h2>AsChild</h2>
-        <AsChild />
-      </div>
-      <div>
-        <h2>DefaultOpen</h2>
-        <DefaultOpen />
-      </div>
-      <div>
-        <h2>ControlledOpen</h2>
-        <ControlledOpen />
-      </div>
-      <div>
-        <h2>Disabled</h2>
-        <Disabled />
-        <Disabled open />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  InContext,
+  Animated,
+  Lazy,
+  AsChild,
+  DefaultOpen,
+  ControlledOpen,
+  Disabled,
+  DisabledOpen: () => <Disabled open />,
+});

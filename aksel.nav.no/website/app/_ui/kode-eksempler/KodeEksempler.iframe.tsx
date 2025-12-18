@@ -35,20 +35,9 @@ function KodeEksemplerIFrame(props: {
 
     const waitForExampleContentToRender = setInterval(() => {
       const exampleIframeDOM = iframeRef.current?.contentDocument;
-
-      let exampleWrapper: HTMLElement | null = null;
-
-      if (dir.variant === "templates") {
-        const element = exampleIframeDOM?.getElementById("__next");
-        if (element) {
-          exampleWrapper = element;
-        }
-      } else {
-        const element = exampleIframeDOM?.getElementById("ds-example");
-        if (element) {
-          exampleWrapper = element;
-        }
-      }
+      const exampleWrapper = exampleIframeDOM?.getElementById(
+        dir.variant === "templates" ? "__next" : "ds-example",
+      );
 
       if (exampleWrapper?.offsetHeight) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
@@ -89,11 +78,6 @@ function KodeEksemplerIFrame(props: {
             aria-label={`${dir?.title} ${current?.title} eksempel`}
             title="Demo"
             className={styles.kodeExampleIframe}
-            style={{
-              // Prevent the iframe from covering up the resize handle in Safari
-              clipPath:
-                "polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%)",
-            }}
           />
         </div>
 
