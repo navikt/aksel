@@ -43,7 +43,7 @@ export const Controls: Story = {
     },
     textColor: {
       control: "radio",
-      options: ["default", "subtle"],
+      options: ["default", "subtle", "contrast"],
     },
   },
 };
@@ -162,11 +162,21 @@ export const ColorRole: Story = {
     <VStack gap="2">
       <BodyLong textColor="default">{lorem}</BodyLong>
       <BodyLong textColor="subtle">{lorem}</BodyLong>
+      <BodyLong textColor="contrast" style={{ backgroundColor: "black" }}>
+        {lorem}
+      </BodyLong>
       <BodyLong data-color="brand-magenta">{lorem}</BodyLong>
       <BodyLong data-color="brand-magenta" textColor="default">
         {lorem}
       </BodyLong>
       <BodyLong data-color="brand-magenta" textColor="subtle">
+        {lorem}
+      </BodyLong>
+      <BodyLong
+        data-color="brand-magenta"
+        textColor="contrast"
+        style={{ backgroundColor: "black" }}
+      >
         {lorem}
       </BodyLong>
     </VStack>

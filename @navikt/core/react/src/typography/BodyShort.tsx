@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -16,6 +17,15 @@ export interface BodyShortProps
    * Paragraph text.
    */
   children: React.ReactNode;
+  /**
+   * Overrides inherited color.
+   * @default "neutral"
+   *
+   *
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   */
+  "data-color"?: AkselColor;
 }
 
 /**

@@ -4,6 +4,10 @@
 
 ## Components
 
+### Typo
+
+Added "contrast"-option to `textColor` prop.
+
 ### Accordion
 
 `headingSize` now has no effect
