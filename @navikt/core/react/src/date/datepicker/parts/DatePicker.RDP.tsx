@@ -84,9 +84,11 @@ const ReactDayPicker = ({
         /**
          * In the case where we have:
          * - Mode: "range"
-         * - selected: { from: undefined, to: Date }
+         * - selected: { from: undefined, to: Date } or
+         * - selected: { from: Date, to: undefined }
          *
-         * RDP returns undefined for newSelection. We need to manually handle this case.
+         *
+         * RDP returns undefined for newSelection. We need to manually handle these cases.
          */
         if (mode !== "range" || newSelection || !isDateRange(selected)) {
           handleSelect(newSelection);
@@ -94,6 +96,14 @@ const ReactDayPicker = ({
         }
 
         if (!selected.to) {
+          /**
+           * If defaultSelected.from is defined, but not "to", and user selects the same date as "from",
+           * we interpret this as user wanting to select a single date range (from === to).
+           */
+          if (selected.from && isSameDay(selected.from, newDate)) {
+            handleSelect({ from: newDate, to: newDate });
+            return;
+          }
           handleSelect({ from: newDate, to: undefined });
           return;
         }
