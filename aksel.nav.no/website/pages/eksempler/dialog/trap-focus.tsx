@@ -222,5 +222,5 @@ export const Demo = {
 
 export const args = {
   index: 12,
-  desc: "'trap-focus' modal dialog lar brukeren navigere innenfor dialogen med pointer/touch uten å miste 'focus'.",
+  desc: '`modal="trap-focus"` lar brukeren interagere med innholdet utenfor dialogen med pointer/touch, mens fokus forblir innenfor dialogen. Tastatur og skjermlesere vil ikke ha tilgang til innholdet bak dialogen, slik at dette bør bare implementeres i ekspertsystemer!',
 };
