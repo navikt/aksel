@@ -75,8 +75,9 @@ const Example = () => {
         <Spacer />
         <HStack gap="space-2" align="center">
           <Button
+            data-color="neutral"
             icon={<ChevronLeftIcon title="Forrige periode" />}
-            variant="secondary-neutral"
+            variant="secondary"
             size="small"
             onClick={() => {
               /**
@@ -88,8 +89,9 @@ const Example = () => {
             }}
           />
           <Button
+            data-color="neutral"
             icon={<ChevronRightIcon title="Neste periode" />}
-            variant="secondary-neutral"
+            variant="secondary"
             size="small"
             onClick={() => {
               /**
@@ -115,7 +117,6 @@ const Example = () => {
           <ToggleGroup.Item value="8" label="8 mnd" />
         </ToggleGroup>
       </HStack>
-
       <Timeline
         startDate={currentWindow.start}
         endDate={currentWindow.end}
