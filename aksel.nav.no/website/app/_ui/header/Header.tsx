@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { BodyShort, Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
+import { GlobalSearchButton } from "@/app/_ui/global-search/GlobalSearch.button";
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
 import { ThemeButton } from "@/app/_ui/theming/Theme.button";
 import AkselLogo from "@/assets/Logo";
@@ -73,7 +74,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
           </Box>
         </Show>
         <HStack align="center" gap="2">
-          <Suspense>
+          <Suspense fallback={<GlobalSearchButton trigger={false} />}>
             <GlobalSearch />
           </Suspense>
 
