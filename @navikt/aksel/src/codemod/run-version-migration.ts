@@ -1,7 +1,11 @@
 import chalk from "chalk";
 import { Command } from "commander";
 import Enquirer from "enquirer";
-import { getMigrationsForVersion, getVersionKeys } from "./migrations.js";
+import {
+  getMigrationsForVersion,
+  getOverridesForVersion,
+  getVersionKeys,
+} from "./migrations.js";
 import { runCodeshift } from "./run-codeshift.js";
 import { validateGit } from "./validation.js";
 
@@ -29,10 +33,16 @@ async function runVersionMigration(
   version: string,
   options: any,
   program: Command,
+  /**
+   * Handler for override migrations that need special handling (e.g., v8-tokens).
+   * If provided and an override migration is selected, this will be called instead of runCodeshift.
+   */
+  overrideHandler?: (migration: string) => Promise<void> | void,
 ) {
   const availableMigrations = getMigrationsForVersion(version);
+  const overrideMigrations = getOverridesForVersion(version);
 
-  if (availableMigrations.length === 0) {
+  if (availableMigrations.length === 0 && overrideMigrations.length === 0) {
     program.error(chalk.red(`No migrations found for version ${version}`));
   }
 
@@ -40,16 +50,26 @@ async function runVersionMigration(
     chalk.greenBright.bold(`\nAvailable migrations for ${version}:\n`),
   );
 
-  const response = await Enquirer.prompt<{ selectedMigrations: string[] }>({
-    type: "multiselect",
-    name: "selectedMigrations",
-    message: `Select migrations to run for ${version}`,
+  const overrideValues = new Set(overrideMigrations.map((m) => m.value));
 
-    choices: availableMigrations.map((migration) => ({
+  const choices = [
+    ...overrideMigrations.map((migration) => ({
       name: migration.value,
       message: `${chalk.blue(migration.value)}: ${chalk.gray(migration.description)}\n`,
       value: migration.value,
     })),
+    ...availableMigrations.map((migration) => ({
+      name: migration.value,
+      message: `${chalk.blue(migration.value)}: ${chalk.gray(migration.description)}\n`,
+      value: migration.value,
+    })),
+  ];
+
+  const response = await Enquirer.prompt<{ selectedMigrations: string[] }>({
+    type: "multiselect",
+    name: "selectedMigrations",
+    message: `Select migrations to run for ${version}`,
+    choices,
   });
 
   const { selectedMigrations } = response;
@@ -69,7 +89,13 @@ async function runVersionMigration(
 
   for (const migration of selectedMigrations) {
     console.info(chalk.blue(`\n\n--- Running: ${migration} ---`));
-    await runCodeshift(migration, options, program);
+
+    // Check if this is an override migration that needs special handling
+    if (overrideValues.has(migration) && overrideHandler) {
+      await overrideHandler(migration);
+    } else {
+      await runCodeshift(migration, options, program);
+    }
   }
 
   console.info(chalk.greenBright.bold("\nAll selected migrations completed!"));

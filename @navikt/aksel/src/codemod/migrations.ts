@@ -263,6 +263,13 @@ export function getMigrationsForVersion(version: string) {
 }
 
 /**
+ * Returns the override migrations available for a specific version.
+ */
+export function getOverridesForVersion(version: string) {
+  return migrationStringOverride[version] ?? [];
+}
+
+/**
  * Allows injecting additional migration names that are not part of the main migrations-list.
  * This is used for interactive migrations that should not be part of the main list.
  *
@@ -270,7 +277,7 @@ export function getMigrationsForVersion(version: string) {
  * which is not the case for interactive migrations that are handled differently.
  */
 export const migrationStringOverride = {
-  "v8.0.0": [
+  v8: [
     {
       value: "v8-tokens",
       description: "Starts interactive token migration for v8",

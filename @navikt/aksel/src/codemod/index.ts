@@ -11,7 +11,9 @@ import { validateGit, validateMigration } from "./validation.js";
 
 const program = new Command();
 
-export function codemodCommand() {
+export function codemodCommand(
+  overrideHandler?: (migration: string) => Promise<void> | void,
+) {
   program.name(`${chalk.blueBright(`npx @navikt/aksel`)}`);
 
   program
@@ -47,7 +49,7 @@ export function codemodCommand() {
       // Check if the argument is a version key for interactive selection
       if (versionKeys.includes(str)) {
         validateVersion(str, program);
-        await runVersionMigration(str, options, program);
+        await runVersionMigration(str, options, program, overrideHandler);
         return;
       }
 
