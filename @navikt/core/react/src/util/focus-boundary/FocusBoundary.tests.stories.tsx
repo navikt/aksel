@@ -3,7 +3,10 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { act } from "@testing-library/react";
 import React, { useState } from "react";
 import { expect, fireEvent, userEvent, waitFor, within } from "storybook/test";
+import { Dialog, DialogPopup } from "../../dialog";
 import { VStack } from "../../layout/stack";
+import { ActionMenu } from "../../overlays/action-menu";
+import { Provider } from "../../provider";
 import { FocusBoundary, type FocusBoundaryProps } from "./FocusBoundary";
 
 const meta: Meta<typeof FocusBoundary> = {
@@ -286,6 +289,49 @@ export const UnmountAutofocusPrevented: Story = {
   args: {
     returnFocus: false,
     showByDefault: false,
+  },
+};
+
+export const TrackPrevFocused: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+    return (
+      <Provider rootElement={anchorEl || undefined}>
+        <div ref={setAnchorEl}>
+          <ActionMenu>
+            <ActionMenu.Trigger>
+              <button data-testid="trigger">Open action menu</button>
+            </ActionMenu.Trigger>
+            <ActionMenu.Content>
+              <ActionMenu.Item onSelect={() => setOpen(true)}>
+                Open dialog
+              </ActionMenu.Item>
+            </ActionMenu.Content>
+          </ActionMenu>
+          <Dialog open={open} onOpenChange={() => setOpen(false)}>
+            <DialogPopup>Content</DialogPopup>
+          </Dialog>
+        </div>
+      </Provider>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const openMenuButton = canvas.getByText("Open action menu");
+    await userEvent.click(openMenuButton);
+
+    await waitFor(async () =>
+      expect(canvas.getByText("Open dialog")).toBeVisible(),
+    );
+
+    const openDialog = canvas.getByText("Open dialog");
+    await userEvent.click(openDialog);
+
+    await userEvent.keyboard("{Escape}");
+
+    await waitFor(() => expect(openMenuButton).toHaveFocus());
   },
 };
 

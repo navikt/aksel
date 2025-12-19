@@ -669,6 +669,16 @@
         "default": "./cjs/alert/local-alert/index.js"
       }
     },
+    "./Dialog": {
+      "import": {
+        "types": "./esm/dialog/index.d.ts",
+        "default": "./esm/dialog/index.js"
+      },
+      "require": {
+        "types": "./cjs/dialog/index.d.ts",
+        "default": "./cjs/dialog/index.js"
+      }
+    },
     "./package.json": "./package.json",
     "./Theme": {
       "import": {
