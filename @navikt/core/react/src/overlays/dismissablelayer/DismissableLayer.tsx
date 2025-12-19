@@ -64,7 +64,7 @@ interface DismissableLayerBaseProps
    */
   safeZone?: {
     anchor?: Element | null;
-    isTargetAnchorRef?: React.MutableRefObject<boolean>;
+    isEventSafe?: (eventType: "pointerdown" | "focusin") => boolean;
   };
   /**
    * @default true
@@ -143,10 +143,14 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         return;
       }
 
-      if (
-        safeZone.isTargetAnchorRef?.current &&
-        event.detail.originalEvent.type === "pointerdown"
-      ) {
+      const eventType = event.detail.originalEvent.type as
+        | "pointerdown"
+        | "focusin";
+
+      /**
+       * Allows caller to define custom logic to determine if the event is "safe".
+       */
+      if (safeZone.isEventSafe?.(eventType)) {
         event.preventDefault();
         return;
       }

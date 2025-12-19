@@ -318,7 +318,6 @@ export const ActionMenuTrigger = forwardRef<
     ref,
   ) => {
     const context = useActionMenuContext();
-
     const mergedRefs = useMergeRefs(ref, context.triggerRef);
 
     return (
@@ -401,7 +400,21 @@ export const ActionMenuContent = forwardRef<
           returnFocus={context.triggerRef}
           safeZone={{
             anchor: context.triggerRef.current,
-            isTargetAnchorRef: context.triggerPointerDownRef,
+            /**
+             * If actionmenu is wrapped inside a custom-component,
+             * the target will be a generic "custom-component".
+             * Therefore, we check if the pointerdown originated from the trigger itself since
+             * anchor will never match the target in that case.
+             */
+            isEventSafe: (eventType) => {
+              const currentValue = context.triggerPointerDownRef.current;
+              context.triggerPointerDownRef.current = false;
+              if (eventType !== "pointerdown") {
+                return false;
+              }
+
+              return currentValue;
+            },
           }}
           style={{
             ...style,
