@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 7.36.0
+
+### Patch Changes
+
+- Datepicker: Fixed bug where selecting same date while only `from`-date is defined in "ranged"-mode would cause no interaction to happen. ([#4417](https://github.com/navikt/aksel/pull/4417))
+
+- InternalHeader: InternalHeader.User-props supports React.ReactNode now. ([#4415](https://github.com/navikt/aksel/pull/4415))
+
+- Datepicker/MonthPicker: Popover now flips if there is more available space above input. ([#4420](https://github.com/navikt/aksel/pull/4420))
+
+- Popover: Placement-prop now respects 'alignment' when flipping. ([#4420](https://github.com/navikt/aksel/pull/4420))
+
+- Updated dependencies [[`092853d`](https://github.com/navikt/aksel/commit/092853dd18e5a9eb84f00bd5bd3559f82d1e885d)]:
+  - @navikt/aksel-icons@7.36.0
+  - @navikt/ds-tokens@7.36.0
+
 ## 7.35.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tailwind",
-  "version": "7.35.3",
+  "version": "7.36.0",
   "description": "Tailwind config based on @navikt/ds-tokens",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -29,7 +29,7 @@
   },
   "homepage": "https://aksel.nav.no/grunnleggende/kode/tailwind/",
   "devDependencies": {
-    "@navikt/ds-tokens": "^7.35.3",
+    "@navikt/ds-tokens": "^7.36.0",
     "color": "5.0.0",
     "lodash": "^4.17.21",
     "tailwindcss": "^3.3.3",
