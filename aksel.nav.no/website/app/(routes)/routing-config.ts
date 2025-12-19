@@ -66,7 +66,7 @@ const PAGE_ROUTES: Routes = {
     nested: {
       styling: [
         {
-          heading: "Tokens",
+          heading: "Design tokens",
           slug: `grunnleggende/styling/design-tokens`,
           tag: "ready",
           searchMetadata: {
