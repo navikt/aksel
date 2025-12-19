@@ -1,4 +1,7 @@
 import {
+  Alignment,
+  Placement,
+  Side,
   autoUpdate,
   arrow as flArrow,
   offset as flOffset,
@@ -136,7 +139,11 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       open,
       middleware: [
         flOffset(offset ?? (themeContext?.isDarkside ? 8 : arrow ? 16 : 4)),
-        _flip && flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        _flip &&
+          flip({
+            padding: 5,
+            fallbackPlacements: getOppositePlacement(placement),
+          }),
         shift({ padding: 12 }),
         flArrow({ element: arrowRef, padding: 8 }),
       ],
@@ -204,6 +211,32 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     );
   },
 ) as PopoverComponent;
+
+const oppositeSideMap: Record<Side, Side> = {
+  top: "bottom",
+  bottom: "top",
+  left: "right",
+  right: "left",
+};
+
+/**
+ * If placement is side+alignment, we want to preserve the alignment
+ * when flipping to the opposite side.
+ */
+function getOppositePlacement(placement: Placement): Placement[] {
+  /**
+   * In most cases, the fallback for left/right should be top/bottom
+   * as there is usually more space vertically than horizontally.
+   */
+  if (placement.startsWith("left") || placement.startsWith("right")) {
+    return ["bottom", "top"];
+  }
+
+  const [side, alignment] = placement.split("-") as [Side, Alignment?];
+  const oppositeSide = oppositeSideMap[side];
+
+  return [alignment ? `${oppositeSide}-${alignment}` : oppositeSide];
+}
 
 Popover.Content = PopoverContent;
 
