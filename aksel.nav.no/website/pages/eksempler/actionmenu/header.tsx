@@ -81,5 +81,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "InternalHeader er implementert som 'darkmode' som standard. For at ActionMenu skal vises riktig kan Theme-komponenten med riktig globalt 'theme' brukes rundt ActionMenu.Content.",
+  desc: "InternalHeader er implementert med 'dark mode' som standard. For at ActionMenu skal vises riktig kan Theme-komponenten med riktig globalt 'theme' brukes rundt ActionMenu.Content.",
 };
