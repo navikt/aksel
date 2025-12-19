@@ -17,6 +17,7 @@ import { Menu, MenuPortalProps } from "../floating-menu/Menu";
 type ActionMenuContextValue = {
   triggerId: string;
   triggerRef: React.RefObject<HTMLButtonElement | null>;
+  triggerPointerDownRef: React.MutableRefObject<boolean>;
   contentId: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -249,6 +250,7 @@ const ActionMenuRoot = ({
   rootElement: rootElementProp,
 }: ActionMenuProps) => {
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const triggerPointerDownRef = useRef<boolean>(false);
 
   const modalContext = useModalContext(false);
   const rootElement = modalContext ? modalContext.ref.current : rootElementProp;
@@ -263,6 +265,7 @@ const ActionMenuRoot = ({
     <ActionMenuProvider
       triggerId={useId()}
       triggerRef={triggerRef}
+      triggerPointerDownRef={triggerPointerDownRef}
       contentId={useId()}
       open={open}
       onOpenChange={setOpen}
@@ -338,6 +341,18 @@ export const ActionMenuTrigger = forwardRef<
               event.preventDefault();
             }
           })}
+          onPointerDownCapture={() => {
+            context.triggerPointerDownRef.current = true;
+          }}
+          onPointerUp={() => {
+            context.triggerPointerDownRef.current = false;
+          }}
+          onPointerLeave={() => {
+            context.triggerPointerDownRef.current = false;
+          }}
+          onPointerCancel={() => {
+            context.triggerPointerDownRef.current = false;
+          }}
         >
           {requireReactElement(children)}
         </Slot>
@@ -384,7 +399,10 @@ export const ActionMenuContent = forwardRef<
           sideOffset={4}
           collisionPadding={10}
           returnFocus={context.triggerRef}
-          safeZone={{ anchor: context.triggerRef.current }}
+          safeZone={{
+            anchor: context.triggerRef.current,
+            isTargetAnchorRef: context.triggerPointerDownRef,
+          }}
           style={{
             ...style,
             ...{

@@ -64,6 +64,7 @@ interface DismissableLayerBaseProps
    */
   safeZone?: {
     anchor?: Element | null;
+    isTargetAnchorRef?: React.MutableRefObject<boolean>;
   };
   /**
    * @default true
@@ -139,6 +140,14 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
      */
     function handleOutsideEvent(event: CustomFocusEvent | CustomPointerEvent) {
       if (!safeZone?.anchor) {
+        return;
+      }
+
+      if (
+        safeZone.isTargetAnchorRef?.current &&
+        event.detail.originalEvent.type === "pointerdown"
+      ) {
+        event.preventDefault();
         return;
       }
 
