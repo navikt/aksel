@@ -30,7 +30,7 @@ type MigrationT = Record<
 >;
 
 export const migrations: MigrationT = {
-  "1.0.0": [
+  v1: [
     {
       description: "Runs all codemods for beta -> v1 migration",
       value: "v1-preset",
@@ -57,7 +57,7 @@ export const migrations: MigrationT = {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "2.0.0": [
+  v2: [
     {
       description: "Patches changed css-variables",
       value: "v2-css",
@@ -83,7 +83,7 @@ export const migrations: MigrationT = {
       ignoredExtensions: JS_EXTENSIONS,
     },
   ],
-  "v3.0.0": [
+  v3: [
     {
       description:
         "Replaces deprecated <CopyToClipboard /> with <CopyButton />",
@@ -94,7 +94,7 @@ export const migrations: MigrationT = {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "v4.0.0": [
+  v4: [
     {
       description:
         "Replaced deprecated 'internal'-component import to 'core'-imports",
@@ -121,7 +121,7 @@ export const migrations: MigrationT = {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "v6.0.0": [
+  v6: [
     {
       description:
         "Removes `backgroundColor` and `avatarBgColor` properties from `Chat` and `Chat.Bubble`",
@@ -132,7 +132,7 @@ export const migrations: MigrationT = {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "v8.0.0": [
+  v8: [
     {
       description:
         "Updates Box with legacy-tokens to Box using the new token system, and renames already migrated BoxNew/Box.New instances to Box.",
@@ -283,14 +283,6 @@ export const migrationStringOverride = {
 export function getMigrationString() {
   let str = "";
 
-  str += `\n${chalk.bold("Interactive version selection:")}\n`;
-  str += chalk.gray(
-    "Run with a version key to interactively select migrations:\n",
-  );
-  Object.keys(migrations).forEach((version) => {
-    str += `${chalk.blue(version)}: Interactive selection for ${version} migrations\n`;
-  });
-
   Object.entries(migrations).forEach(([version, vMigrations]) => {
     str += `\n${chalk.underline(version)}\n`;
 
@@ -302,6 +294,14 @@ export function getMigrationString() {
     vMigrations.forEach((migration) => {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });
+  });
+
+  str += `\n${chalk.bold(chalk.blueBright("Interactive version selection:"))}\n`;
+  str += chalk.gray(
+    "Run with a version key to interactively select migrations:\n",
+  );
+  Object.keys(migrations).forEach((version) => {
+    str += `${chalk.blue(version)}, `;
   });
 
   return str;
