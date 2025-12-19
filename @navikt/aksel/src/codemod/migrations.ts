@@ -249,6 +249,20 @@ export function getMigrationNames() {
 }
 
 /**
+ * Returns all available version keys from the migrations object.
+ */
+export function getVersionKeys(): string[] {
+  return Object.keys(migrations);
+}
+
+/**
+ * Returns the migrations available for a specific version.
+ */
+export function getMigrationsForVersion(version: string) {
+  return migrations[version] ?? [];
+}
+
+/**
  * Allows injecting additional migration names that are not part of the main migrations-list.
  * This is used for interactive migrations that should not be part of the main list.
  *
@@ -268,6 +282,14 @@ export const migrationStringOverride = {
 
 export function getMigrationString() {
   let str = "";
+
+  str += `\n${chalk.bold("Interactive version selection:")}\n`;
+  str += chalk.gray(
+    "Run with a version key to interactively select migrations:\n",
+  );
+  Object.keys(migrations).forEach((version) => {
+    str += `${chalk.blue(version)}: Interactive selection for ${version} migrations\n`;
+  });
 
   Object.entries(migrations).forEach(([version, vMigrations]) => {
     str += `\n${chalk.underline(version)}\n`;
