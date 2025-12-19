@@ -64,7 +64,6 @@ const DateDialog = ({
         className={cn("navds-date__popover", {
           "navds-date": variant === "month",
         })}
-        flip={false}
         {...popoverProps}
       >
         {children}

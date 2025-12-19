@@ -299,7 +299,7 @@ export const UseRangedDatepickerValidation = () => {
       <DatePicker {...datepickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
           <DatePicker.Input {...fromInputProps} label="Fra" />
-          <DatePicker.Input {...toInputProps} label="Til" />
+          <DatePicker.Input {...toInputProps} label="Til" error="123" />
         </div>
       </DatePicker>
     </div>
@@ -406,7 +406,11 @@ export const WeekNumber = () => {
   };
 
   return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="space-80 space-16">
+    <HGrid
+      columns={{ xs: 1, md: 2 }}
+      gap="space-80 space-16"
+      style={{ marginBlockEnd: "30rem" }}
+    >
       <DatePicker.Standalone showWeekNumber today={new Date("2006-07-01")} />
       <DatePicker.Standalone
         showWeekNumber
