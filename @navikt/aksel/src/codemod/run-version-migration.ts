@@ -44,9 +44,10 @@ async function runVersionMigration(
     type: "multiselect",
     name: "selectedMigrations",
     message: `Select migrations to run for ${version}`,
+
     choices: availableMigrations.map((migration) => ({
       name: migration.value,
-      message: `${chalk.blue(migration.value)}: ${migration.description}`,
+      message: `${chalk.blue(migration.value)}: ${chalk.gray(migration.description)}\n`,
       value: migration.value,
     })),
   });
@@ -67,7 +68,7 @@ async function runVersionMigration(
   validateGit(options, program);
 
   for (const migration of selectedMigrations) {
-    console.info(chalk.blue(`\n--- Running: ${migration} ---\n`));
+    console.info(chalk.blue(`\n\n--- Running: ${migration} ---`));
     await runCodeshift(migration, options, program);
   }
 
