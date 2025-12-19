@@ -90,7 +90,7 @@ async function runVersionMigration(
   for (const migration of selectedMigrations) {
     console.info(chalk.blue(`\n\n--- Running: ${migration} ---`));
 
-    // Check if this is an override migration that needs special handling
+    /* Check if this is an override migration that needs special handling */
     if (overrideValues.has(migration) && overrideHandler) {
       await overrideHandler(migration);
     } else {

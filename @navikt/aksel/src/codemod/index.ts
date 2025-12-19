@@ -24,7 +24,7 @@ export function codemodCommand(
       chalk.gray(`\nAvailable migrations:\n${getMigrationString()}`),
     )
     .description("Migrations for Aksel components and more")
-    .argument("<migration>", "Migration name or version (e.g., v8.0.0)")
+    .argument("<migration>", "Migration name or version (e.g., v8)")
 
     .option("-e, --ext [extension]", "default: js,ts,jsx,tsx,css,scss,less")
     .option(
@@ -41,19 +41,19 @@ export function codemodCommand(
       "after",
       `\nExample:
   $ npx @navikt/aksel codemod --dry-run v2-css
-  $ npx @navikt/aksel codemod v8.0.0  # Interactive selection for version`,
+  $ npx @navikt/aksel codemod v8  # Interactive selection for version`,
     )
     .action(async (str, options) => {
       const versionKeys = getVersionKeys();
 
-      // Check if the argument is a version key for interactive selection
+      /* Check if the argument is a version key for interactive selection */
       if (versionKeys.includes(str)) {
         validateVersion(str, program);
         await runVersionMigration(str, options, program, overrideHandler);
         return;
       }
 
-      // Otherwise, treat it as a specific migration name
+      /* Otherwise, treat it as a specific migration name */
       validateMigration(str, program);
       validateGit(options, program);
       runCodeshift(str, options, program);
