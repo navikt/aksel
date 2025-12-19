@@ -1,6 +1,6 @@
 import { differenceInMonths } from "date-fns";
 import { Metadata } from "next";
-import { PortableTextBlock } from "next-sanity";
+import { PortableTextBlock, stegaClean } from "next-sanity";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import { TagFillIcon } from "@navikt/aksel-icons";
@@ -115,9 +115,11 @@ export default async function Page(props: Props) {
         </BodyShort>
         <HStack gap="space-8" marginBlock="space-16 space-48">
           {pageData.undertema?.map(({ tema, title }) => {
-            const href = `/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
-              title ?? "",
-            )}`;
+            const href = stegaClean(
+              `/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
+                title ?? "",
+              )}`,
+            );
 
             return (
               <NextLink
