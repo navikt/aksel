@@ -1,5 +1,61 @@
 # Changelog
 
+## 7.36.0
+
+### @navikt/aksel-icons
+
+- Icons: Removed 'updated_at'-field from AkselIcon-type. ([#4399](https://github.com/navikt/aksel/pull/4399))
+
+### @navikt/ds-react
+
+- Datepicker: Fixed bug where selecting same date while only `from`-date is defined in "ranged"-mode would cause no interaction to happen. ([#4417](https://github.com/navikt/aksel/pull/4417))
+
+- InternalHeader: InternalHeader.User-props supports React.ReactNode now. ([#4415](https://github.com/navikt/aksel/pull/4415))
+
+- Datepicker/MonthPicker: Popover now flips if there is more available space above input. ([#4420](https://github.com/navikt/aksel/pull/4420))
+
+- Popover: Placement-prop now respects 'alignment' when flipping. ([#4420](https://github.com/navikt/aksel/pull/4420))
+
+### @navikt/aksel
+
+- CLI: Added 'aksel' command for local installs. Example `yarn aksel help`. ([#4419](https://github.com/navikt/aksel/pull/4419))
+
+* CLI: Update v8-tokens codemod to avoid renaming redefined tokens. Now shows status for component and legacy-token definitions. ([#4398](https://github.com/navikt/aksel/pull/4398))
+
+## 7.35.3
+
+### @navikt/ds-css
+
+- Radio/Checkbox: Support print. ([#4404](https://github.com/navikt/aksel/pull/4404))
+
+## 7.35.2
+
+### @navikt/ds-react
+
+- InfoCard: Removed unused `aria-labelledby` from `InfoCard.Title`. ([#4393](https://github.com/navikt/aksel/pull/4393))
+
+- Accordion: Remove `aria-hidden` to prevent SiteImprove reporting an issue. ([#4382](https://github.com/navikt/aksel/pull/4382))
+
+### @navikt/aksel
+
+- CLI: Lock dependencies. ([#4386](https://github.com/navikt/aksel/pull/4386))
+
+## 7.35.1
+
+### @navikt/ds-react
+
+- Select: Remove the htmlSize prop ([#4347](https://github.com/navikt/aksel/pull/4347))
+
+### @navikt/aksel
+
+- CLI: Update v8-box migration to properly handle background/border-prefixing and nesting. ([#4363](https://github.com/navikt/aksel/pull/4363))
+
+- CLI: Improvements to v8-tokens codemod. ([#4341](https://github.com/navikt/aksel/pull/4341))
+
+- CLI: Allow 'v8-tokens' codemod to run with options. ([`5a09f88`](https://github.com/navikt/aksel/commit/5a09f88ea2223327b969572dbe700858c9e71e0c))
+
+- CLI: Engine requirements set to node >= v20. ([#4372](https://github.com/navikt/aksel/pull/4372))
+
 ## 7.35.0
 
 ### @navikt/ds-react

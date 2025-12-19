@@ -45,4 +45,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "Neutral-fargen brukes på handlinger som ikke trenger så mye oppmerksomhet.",
 };

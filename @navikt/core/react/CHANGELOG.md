@@ -1,5 +1,51 @@
 # @navikt/ds-react
 
+## 7.36.0
+
+### Patch Changes
+
+- Datepicker: Fixed bug where selecting same date while only `from`-date is defined in "ranged"-mode would cause no interaction to happen. ([#4417](https://github.com/navikt/aksel/pull/4417))
+
+- InternalHeader: InternalHeader.User-props supports React.ReactNode now. ([#4415](https://github.com/navikt/aksel/pull/4415))
+
+- Datepicker/MonthPicker: Popover now flips if there is more available space above input. ([#4420](https://github.com/navikt/aksel/pull/4420))
+
+- Popover: Placement-prop now respects 'alignment' when flipping. ([#4420](https://github.com/navikt/aksel/pull/4420))
+
+- Updated dependencies [[`092853d`](https://github.com/navikt/aksel/commit/092853dd18e5a9eb84f00bd5bd3559f82d1e885d)]:
+  - @navikt/aksel-icons@7.36.0
+  - @navikt/ds-tokens@7.36.0
+
+## 7.35.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.35.3
+  - @navikt/aksel-icons@7.35.3
+
+## 7.35.2
+
+### Patch Changes
+
+- InfoCard: Removed unused `aria-labelledby` from `InfoCard.Title`. ([#4393](https://github.com/navikt/aksel/pull/4393))
+
+- Accordion: Remove `aria-hidden` to prevent SiteImprove reporting an issue. ([#4382](https://github.com/navikt/aksel/pull/4382))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.35.2
+  - @navikt/aksel-icons@7.35.2
+
+## 7.35.1
+
+### Patch Changes
+
+- Select: Remove the htmlSize prop ([#4347](https://github.com/navikt/aksel/pull/4347))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.35.1
+  - @navikt/aksel-icons@7.35.1
+
 ## 7.35.0
 
 ### Patch Changes

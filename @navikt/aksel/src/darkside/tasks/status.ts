@@ -49,6 +49,12 @@ function getStatus(
   );
 
   /**
+   * Pre-computed regex for legacy token definitions (--a-token:)
+   * These are custom property definitions that need manual migration.
+   */
+  const legacyDefinitionRegex = /(--a-[a-zA-Z0-9-]+)(?=\s*:)/gm;
+
+  /**
    * Process each file to find and record token usages
    */
   files.forEach((fileName, index) => {
@@ -157,6 +163,41 @@ function getStatus(
 
         legacyMatch = legacyRegex.exec(fileSrc);
       }
+    }
+
+    /**
+     * Detect legacy token definitions (--a-token:)
+     * These are custom property definitions using legacy tokens
+     * that need manual intervention from the user.
+     */
+    legacyDefinitionRegex.lastIndex = 0;
+    let definitionMatch: RegExpExecArray | null =
+      legacyDefinitionRegex.exec(fileSrc);
+
+    while (definitionMatch !== null) {
+      const tokenKey = definitionMatch[1].replace("--a-", "");
+
+      /* Only report if it's a known legacy token */
+      if (legacyTokenConfig[tokenKey]) {
+        const { row, column } = getCharacterPositionInFile(
+          definitionMatch.index,
+          getLineStartsLazy(),
+        );
+
+        StatusStore.add({
+          isLegacy: true,
+          type: "deprecated",
+          columnNumber: column,
+          lineNumber: row,
+          canAutoMigrate: false,
+          fileName,
+          name: definitionMatch[1],
+          comment:
+            "Legacy token definition - requires manual migration to new darkside tokens",
+        });
+      }
+
+      definitionMatch = legacyDefinitionRegex.exec(fileSrc);
     }
 
     for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {

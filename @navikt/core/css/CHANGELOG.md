@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 7.36.0
+
+## 7.35.3
+
+### Patch Changes
+
+- Radio/Checkbox: Support print. ([#4404](https://github.com/navikt/aksel/pull/4404))
+
+## 7.35.2
+
+## 7.35.1
+
 ## 7.35.0
 
 ### Patch Changes

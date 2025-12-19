@@ -23,6 +23,7 @@ import {
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
 import { ListItem } from "@navikt/ds-react/List";
+import { HolidayDecorations } from "@/app/_ui/holiday-deco/HolidayDecorations";
 import styles from "./DSLayersOverview.module.css";
 
 type DSLayersOverviewProps = {
@@ -38,9 +39,11 @@ const DSLayersOverview = ({ title, description }: DSLayersOverviewProps) => (
     borderRadius="12"
     padding={{ xs: "space-16", md: "space-40" }}
     width="100%"
+    position="relative"
     asChild
   >
     <VStack gap={{ xs: "space-24", md: "space-64" }} align="center">
+      <HolidayDecorations type={{ name: "tree", right: true }} />
       <VStack align="center" gap="space-16" maxWidth="400px">
         <Heading level="2" size="large">
           {title}

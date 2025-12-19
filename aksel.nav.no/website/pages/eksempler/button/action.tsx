@@ -45,4 +45,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  desc: "Action-fargen (standard) brukes på handlinger som skal ha oppmerksomhet og er en del av den planlagte flyten i løsningen.",
 };

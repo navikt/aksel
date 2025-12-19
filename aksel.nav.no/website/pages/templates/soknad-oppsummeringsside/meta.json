@@ -1,6 +1,11 @@
 {
-  "version": 4,
+  "version": 5,
   "changelog": [
+    {
+      "description": "Oppdatert header til å bruke `Tag` for søknadsnummer.",
+      "date": "03.12.2025",
+      "version": 5
+    },
     {
       "description": "'Send søknad'-knappen kommer nå før 'Forrige steg'-knappen på mobil.",
       "date": "17.10.2025",

@@ -1,5 +1,53 @@
 # @navikt/aksel
 
+## 7.36.0
+
+### Minor Changes
+
+- CLI: Added 'aksel' command for local installs. Example `yarn aksel help`. ([#4419](https://github.com/navikt/aksel/pull/4419))
+
+### Patch Changes
+
+- CLI: Update v8-tokens codemod to avoid renaming redefined tokens. Now shows status for component and legacy-token definitions. ([#4398](https://github.com/navikt/aksel/pull/4398))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.36.0
+  - @navikt/ds-tokens@7.36.0
+
+## 7.35.3
+
+### Patch Changes
+
+- Updated dependencies [[`2523378`](https://github.com/navikt/aksel/commit/25233783a7809e28e57fc2fa78ab5b2b58d2626f)]:
+  - @navikt/ds-css@7.35.3
+  - @navikt/ds-tokens@7.35.3
+
+## 7.35.2
+
+### Patch Changes
+
+- CLI: Lock dependencies. ([#4386](https://github.com/navikt/aksel/pull/4386))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.35.2
+  - @navikt/ds-tokens@7.35.2
+
+## 7.35.1
+
+### Patch Changes
+
+- CLI: Update v8-box migration to properly handle background/border-prefixing and nesting. ([#4363](https://github.com/navikt/aksel/pull/4363))
+
+- CLI: Improvements to v8-tokens codemod. ([#4341](https://github.com/navikt/aksel/pull/4341))
+
+- CLI: Allow 'v8-tokens' codemod to run with options. ([`5a09f88`](https://github.com/navikt/aksel/commit/5a09f88ea2223327b969572dbe700858c9e71e0c))
+
+- CLI: Engine requirements set to node >= v20. ([#4372](https://github.com/navikt/aksel/pull/4372))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.35.1
+  - @navikt/ds-tokens@7.35.1
+
 ## 7.35.0
 
 ### Minor Changes

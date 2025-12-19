@@ -51,7 +51,7 @@ const BaseAlertTitle = forwardRef<HTMLHeadingElement, BaseAlertTitleProps>(
         weight="semibold"
         className={cn(className, "navds-base-alert__title")}
         id={titleId}
-        aria-labelledby={cl(statusId, titleId)}
+        aria-labelledby={statusId ? cl(statusId, titleId) : undefined}
       >
         {children}
       </BodyShort>

@@ -302,3 +302,18 @@ export const ChromaticDark = renderStoriesForChromatic({
   ColorRole,
 });
 ChromaticDark.globals = { theme: "dark", mode: "darkside" };
+
+export const ChromaticPrint = renderStoriesForChromatic({
+  Group,
+  GroupError,
+  GroupDescription,
+  Readonly,
+  Disabled,
+  ColorRole,
+});
+
+ChromaticPrint.parameters = {
+  chromatic: {
+    media: "print",
+  },
+};

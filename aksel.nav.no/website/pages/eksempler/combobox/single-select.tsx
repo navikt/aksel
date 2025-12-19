@@ -26,7 +26,7 @@ const options = [
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   variant: "static",
-  minHeight: "300px",
+  minHeight: "260px",
 });
 
 /* Storybook story */

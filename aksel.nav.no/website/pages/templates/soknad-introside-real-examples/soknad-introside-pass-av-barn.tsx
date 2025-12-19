@@ -1,8 +1,7 @@
 import React from "react";
-import { ArrowRightIcon } from "@navikt/aksel-icons";
+import { ArrowRightIcon, InformationSquareIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
-  Alert,
   Bleed,
   BodyLong,
   Box,
@@ -10,6 +9,7 @@ import {
   Checkbox,
   GuidePanel,
   Heading,
+  InfoCard,
   Link,
   List,
   Page,
@@ -30,7 +30,7 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block width="text" gutters>
-        <VStack as="main" gap="8" data-aksel-template="form-intropage-v3">
+        <VStack as="main" gap="8" data-aksel-template="form-intropage-v4">
           <VStack gap="3">
             <Bleed asChild marginInline={{ lg: "32" }}>
               <Box
@@ -67,16 +67,19 @@ function Example() {
               </Link>
             </BodyLong>
           </GuidePanel>
-          <Alert variant="info">
-            <Heading level="2" size="small" spacing>
-              Søker du for nytt skole- eller barnehageår?
-            </Heading>
-            <BodyLong>
+
+          <InfoCard data-color="info">
+            <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
+              <InfoCard.Title>
+                Søker du for nytt skole- eller barnehageår?
+              </InfoCard.Title>
+            </InfoCard.Header>
+            <InfoCard.Content>
               Du må dokumentere utgiftene til barnepass for perioden du søker
               for. Vi anbefaler at du venter med å søke til du har fakturaen for
               det nye skole- eller barnehageåret.
-            </BodyLong>
-          </Alert>
+            </InfoCard.Content>
+          </InfoCard>
           <div>
             <Heading level="2" size="large" spacing>
               Før du søker

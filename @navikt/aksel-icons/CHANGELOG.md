@@ -1,5 +1,17 @@
 # @navikt/aksel-icons
 
+## 7.36.0
+
+### Patch Changes
+
+- Icons: Removed 'updated_at'-field from AkselIcon-type. ([#4399](https://github.com/navikt/aksel/pull/4399))
+
+## 7.35.3
+
+## 7.35.2
+
+## 7.35.1
+
 ## 7.35.0
 
 ## 7.34.0

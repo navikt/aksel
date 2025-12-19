@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel",
-  "version": "7.35.0",
+  "version": "7.36.0",
   "description": "Aksel command line interface. Codemods and other utilities for Aksel users.",
   "author": "Aksel | Nav designsystem team",
   "license": "MIT",
@@ -16,8 +16,9 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "yarn clean && tsc -p tsconfig.json",
-    "dev": "tsc --watch -p tsconfig.json",
+    "generate-version": "node -e \"const fs=require('fs');const v=require('./package.json').version;fs.writeFileSync('src/version.ts','export const VERSION = \\\"'+v+'\\\";\\n')\"",
+    "build": "yarn clean && yarn generate-version && tsc -p tsconfig.json",
+    "dev": "yarn generate-version && tsc --watch -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -32,21 +33,19 @@
     "url": "https://github.com/navikt/aksel/issues"
   },
   "dependencies": {
-    "@navikt/ds-css": "^7.35.0",
-    "@navikt/ds-tokens": "^7.35.0",
-    "axios": "1.13.2",
+    "@navikt/ds-css": "^7.36.0",
+    "@navikt/ds-tokens": "^7.36.0",
     "chalk": "5.6.2",
-    "cli-progress": "^3.12.0",
-    "clipboardy": "^5.0.0",
+    "cli-progress": "3.12.0",
+    "clipboardy": "5.0.1",
     "commander": "10.0.1",
-    "enquirer": "^2.3.6",
+    "enquirer": "2.4.1",
     "fast-glob": "3.2.11",
     "figlet": "1.8.0",
     "is-git-clean": "1.1.0",
-    "jscodeshift": "^0.15.1",
+    "jscodeshift": "0.15.2",
     "jscodeshift-add-imports": "1.0.11",
-    "lodash": "^4.17.21",
-    "react-scanner": "^1.1.0"
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "@types/cli-progress": "3.11.6",
