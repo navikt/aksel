@@ -44,9 +44,7 @@ type Stable<T extends Callback> = {
   effect: () => void;
 };
 
-export function useEventCallback<T extends Callback>(
-  callback: T | undefined,
-): T {
+function useEventCallback<T extends Callback>(callback: T | undefined): T {
   const stable = useRefWithInit(createStableCallback).current as Stable<T>;
   stable.next = callback;
   useSafeInsertionEffect(stable.effect);
@@ -70,3 +68,5 @@ function assertNotCalled() {
     throw new Error("Aksel: Cannot call an event handler while rendering.");
   }
 }
+
+export { useEventCallback };
