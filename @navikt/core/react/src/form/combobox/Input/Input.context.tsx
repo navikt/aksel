@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import { createContext } from "../../../util/create-context";
+import { createStrictContext } from "../../../util/create-context";
 import { useClientLayoutEffect } from "../../../util/hooks";
 import { FormFieldType, useFormField } from "../../useFormField";
 import { ComboboxProps } from "../types";
@@ -23,7 +23,7 @@ interface InputContextValue extends FormFieldType {
 }
 
 const [InputContextProvider, useInputContext] =
-  createContext<InputContextValue>({
+  createStrictContext<InputContextValue>({
     name: "InputContext",
     errorMessage: "useInputContext must be used within an InputContextProvider",
   });

@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { SetStateAction, useCallback, useMemo, useState } from "react";
-import { createContext } from "../../../util/create-context";
+import { createStrictContext } from "../../../util/create-context";
 import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -37,7 +37,7 @@ type FilteredOptionsContextValue = {
   virtualFocus: VirtualFocusType;
 };
 const [FilteredOptionsContextProvider, useFilteredOptionsContext] =
-  createContext<FilteredOptionsContextValue>({
+  createStrictContext<FilteredOptionsContextValue>({
     name: "FilteredOptionsContext",
     errorMessage:
       "useFilteredOptionsContext must be used within a FilteredOptionsProvider",

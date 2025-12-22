@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { createContext } from "../../util/create-context";
+import { createStrictContext } from "../../util/create-context";
 import { useInputContext } from "./Input/Input.context";
 import { ComboboxOption } from "./types";
 
@@ -11,7 +11,7 @@ type CustomOptionsContextValue = {
 };
 
 const [ComboboxCustomOptionsProvider, useComboboxCustomOptions] =
-  createContext<CustomOptionsContextValue>({
+  createStrictContext<CustomOptionsContextValue>({
     name: "ComboboxCustomOptions",
     errorMessage:
       "useComboboxCustomOptions must be used within a ComboboxCustomOptionsProvider",

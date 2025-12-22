@@ -1,4 +1,4 @@
-import { createContext } from "../../util/create-context";
+import { createStrictContext } from "../../util/create-context";
 import type { TransitionStatus } from "../../util/hooks/useTransitionStatus";
 
 interface DialogContextProps {
@@ -81,7 +81,7 @@ interface DialogContextProps {
 }
 
 const [DialogContextProvider, useDialogContext] =
-  createContext<DialogContextProps>({
+  createStrictContext<DialogContextProps>({
     name: "DialogContext",
     errorMessage: "useDialogContext must be used within Dialog",
   });

@@ -8,7 +8,7 @@ import React, {
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
-import { createContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-context";
 import { useMergeRefs } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
@@ -35,9 +35,7 @@ type ProcessContextProps = Pick<ProcessProps, "hideStatusText"> & {
 };
 
 const [ProcessContextProvider, useProcessContext] =
-  createContext<ProcessContextProps>({
-    providerName: "ProcessContextProvider",
-    hookName: "useProcessContext",
+  createStrictContext<ProcessContextProps>({
     name: "ProcessContext",
     errorMessage:
       "`<Process.Event />` must be used within a `<Process />` component.",

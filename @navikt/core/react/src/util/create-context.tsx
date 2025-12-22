@@ -1,79 +1,89 @@
 /**
- * Custom createContext to consolidate context-implementation across the system
+ * Custom createStrictContext to consolidate context-implementation across the system.
+ * Unlike React's createContext, this throws an error by default when used outside a provider.
+ *
  * Inspired by:
  * - https://github.com/radix-ui/primitives/blob/main/packages/react/context/src/createContext.tsx
  * - https://github.com/chakra-ui/chakra-ui/blob/5ec0be610b5a69afba01a9c22365155c1b519136/packages/hooks/context/src/index.ts
  */
 import React, {
   createContext as createReactContext,
-  forwardRef,
   useContext as useReactContext,
 } from "react";
 
-export interface CreateContextOptions<T> {
-  hookName?: string;
-  providerName?: string;
+type ProviderProps<T> = T & { children: React.ReactNode; ref?: never };
+
+function getErrorMessage(name: string) {
+  return `Aksel: use${name}Context returned \`undefined\`. Seems you forgot to wrap component within ${name}Provider`;
+}
+
+/* -----------------------------------------------------------------------------
+ * Overload signatures
+ * -------------------------------------------------------------------------- */
+
+/**
+ * When defaultValue is provided, context is always defined.
+ * The hook will always return T (no strict parameter needed).
+ */
+function createStrictContext<T>(options: {
+  name: string;
   errorMessage?: string;
-  name?: string;
+  defaultValue: T;
+}): readonly [React.FC<ProviderProps<T>>, () => T];
+
+/**
+ * When no defaultValue is provided, context may be undefined.
+ * The hook accepts an optional `strict` parameter (default: true).
+ * - strict=true (default): throws if undefined, returns T
+ * - strict=false: returns T | undefined
+ */
+function createStrictContext<T>(options: {
+  name: string;
+  errorMessage?: string;
+  defaultValue?: undefined;
+}): readonly [
+  React.FC<ProviderProps<T>>,
+  <S extends boolean = true>(strict?: S) => S extends true ? T : T | undefined,
+];
+
+/* -----------------------------------------------------------------------------
+ * Implementation
+ * -------------------------------------------------------------------------- */
+
+function createStrictContext<T>(options: {
+  name: string;
+  errorMessage?: string;
   defaultValue?: T;
-}
-
-type ProviderProps<T> = T & { children: React.ReactNode };
-
-function getErrorMessage(hook: string, provider: string) {
-  return `${hook} returned \`undefined\`. Seems you forgot to wrap component within ${provider}`;
-}
-
-export function createContext<T>(options: CreateContextOptions<T> = {}) {
-  const {
-    name,
-    hookName = "useContext",
-    providerName = "Provider",
-    errorMessage,
-    defaultValue,
-  } = options;
+}) {
+  const { name, defaultValue, errorMessage } = options;
+  const hasDefault = defaultValue !== undefined;
 
   const Context = createReactContext<T | undefined>(defaultValue);
+  Context.displayName = name;
 
-  /**
-   * We use forwardRef to allow `ref` to be used as a regular context value
-   * @see https://reactjs.org/docs/forwarding-refs.html#forwarding-refs-to-dom-components
-   */
-  const Provider = forwardRef<unknown, ProviderProps<T>>(
-    ({ children, ...context }, ref) => {
-      // Only re-memoize when prop values change
+  function Provider({ children, ...context }: ProviderProps<T>) {
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Object.values(context) includes all dependencies.
+    const value = React.useMemo(() => context, Object.values(context)) as T; // eslint-disable-line react-hooks/exhaustive-deps
 
-      // biome-ignore lint/correctness/useExhaustiveDependencies: Object.values(context) includes all dependencies.
-      const value = React.useMemo(() => context, Object.values(context)) as T; // eslint-disable-line react-hooks/exhaustive-deps
+    return <Context.Provider value={value}>{children}</Context.Provider>;
+  }
 
-      return (
-        <Context.Provider value={ref ? { ...value, ref } : value}>
-          {children}
-        </Context.Provider>
-      );
-    },
-  );
+  Provider.displayName = `${name}Provider`;
 
-  function useContext<S extends boolean = true>(
-    strict: S = true as S,
-  ): Context<S, T> {
+  function useContext(strict = true) {
     const context = useReactContext(Context);
 
-    if (!context && strict) {
-      const error = new Error(
-        errorMessage ?? getErrorMessage(hookName, providerName),
-      );
+    if (!hasDefault && !context && strict) {
+      const error = new Error(errorMessage ?? getErrorMessage(name));
       error.name = "ContextError";
       Error.captureStackTrace?.(error, useContext);
       throw error;
     }
 
-    return context as Context<S, T>;
+    return context;
   }
-
-  Context.displayName = name;
 
   return [Provider, useContext] as const;
 }
 
-type Context<S, T> = S extends true ? T : T | undefined;
+export { createStrictContext };

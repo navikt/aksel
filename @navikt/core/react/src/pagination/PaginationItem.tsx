@@ -40,7 +40,7 @@ export const Item: PaginationItemType = forwardRef(
     },
     ref,
   ) => {
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
     const { cn } = useRenameCSS();
 
     return (

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { createContext } from "../../../util/create-context";
+import { createStrictContext } from "../../../util/create-context";
 import { usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { isInList } from "../combobox-utils";
@@ -21,7 +21,9 @@ type SelectedOptionsContextValue = {
 };
 
 const [SelectedOptionsContextProvider, useSelectedOptionsContext] =
-  createContext<SelectedOptionsContextValue>();
+  createStrictContext<SelectedOptionsContextValue>({
+    name: "SelectedOptionsContext",
+  });
 
 const SelectedOptionsProvider = ({
   children,

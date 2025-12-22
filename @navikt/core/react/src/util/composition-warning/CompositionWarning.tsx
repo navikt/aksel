@@ -13,7 +13,7 @@
  */
 import React, { useEffect, useRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { createContext } from "../create-context";
+import { createStrictContext } from "../create-context";
 
 type CompositionName = string;
 
@@ -27,7 +27,8 @@ type CompositionWarningContextType = {
 };
 
 const [CompositionWarning, useCompositionWarning] =
-  createContext<CompositionWarningContextType>({
+  createStrictContext<CompositionWarningContextType>({
+    name: "CompositionWarningContext",
     errorMessage:
       "useCompositionWarning() must be used within <CompositionWarning />",
   });

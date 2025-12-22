@@ -55,7 +55,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     ref,
   ) => {
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
     const descendants = useToggleGroupDescendants();
 
     const toggleGroupContext = useToggleGroup({

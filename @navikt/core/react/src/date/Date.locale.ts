@@ -1,5 +1,5 @@
 import { enGB, nb, nn } from "date-fns/locale";
-import { createContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-context";
 import { TFunction } from "../util/i18n/i18n.types";
 import en_translations from "../util/i18n/locales/en";
 import nn_translations from "../util/i18n/locales/nn";
@@ -53,4 +53,6 @@ interface DateTranslationContextProps {
 }
 
 export const [DateTranslationContextProvider, useDateTranslationContext] =
-  createContext<DateTranslationContextProps>();
+  createStrictContext<DateTranslationContextProps>({
+    name: "DateTranslationContext",
+  });

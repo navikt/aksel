@@ -2,7 +2,7 @@
  * https://github.com/chakra-ui/chakra-ui/tree/5ec0be610b5a69afba01a9c22365155c1b519136/packages/components/descendant
  */
 import React, { useRef, useState } from "react";
-import { createContext } from "../../create-context";
+import { createStrictContext } from "../../create-context";
 import { useClientLayoutEffect } from "../useClientLayoutEffect";
 import { mergeRefs } from "../useMergeRefs";
 import { DescendantOptions, DescendantsManager } from "./descendant";
@@ -15,13 +15,12 @@ export function createDescendantContext<
   T extends HTMLElement = HTMLElement,
   K extends Record<string, any> = object,
 >() {
-  const [DescendantsContextProvider, useDescendantsContext] = createContext<
-    ReturnType<typeof useDescendants>
-  >({
-    name: "DescendantsProvider",
-    errorMessage:
-      "useDescendantsContext must be used within DescendantsProvider",
-  });
+  const [DescendantsContextProvider, useDescendantsContext] =
+    createStrictContext<ReturnType<typeof useDescendants>>({
+      name: "DescendantsProvider",
+      errorMessage:
+        "useDescendantsContext must be used within DescendantsProvider",
+    });
 
   const ContextProvider = cast<React.Provider<DescendantsManager<T, K>>>(
     (props) => (

@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, Heading } from "../typography";
-import { createContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-context";
 import {
   LinkAnchor,
   LinkAnchorArrow,
@@ -32,7 +32,7 @@ type LinkCardContextProps = {
 };
 
 const [LinkCardContextProvider, useLinkCardContext] =
-  createContext<LinkCardContextProps>({
+  createStrictContext<LinkCardContextProps>({
     name: "LinkCardContextProvider",
   });
 

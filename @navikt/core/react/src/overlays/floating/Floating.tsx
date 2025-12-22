@@ -20,7 +20,7 @@ import React, {
 } from "react";
 import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
-import { createContext } from "../../util/create-context";
+import { createStrictContext } from "../../util/create-context";
 import {
   useCallbackRef,
   useClientLayoutEffect,
@@ -45,10 +45,8 @@ type FloatingContextValue = {
 };
 
 export const [FloatingProvider, useFloatingContext] =
-  createContext<FloatingContextValue>({
+  createStrictContext<FloatingContextValue>({
     name: "FloatingContext",
-    hookName: "useFloating",
-    providerName: "FloatingProvider",
   });
 
 interface FloatingProps {
@@ -172,10 +170,8 @@ type FloatingContentContextValue = {
 };
 
 const [FloatingContentProvider, useFloatingContentContext] =
-  createContext<FloatingContentContextValue>({
+  createStrictContext<FloatingContentContextValue>({
     name: "FloatingContentContext",
-    hookName: "useFloatingContentContext",
-    providerName: "FloatingContentProvider",
   });
 
 type Boundary = Element | null;
@@ -364,9 +360,9 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     }, [autoUpdateWhileMounted, enabled, floatingElements, update]);
 
     useOpenChangeAnimationComplete({
-      enabled: !!modalContext?.ref,
+      enabled: !!modalContext?.modalRef,
       open: enabled,
-      ref: modalContext?.ref,
+      ref: modalContext?.modalRef,
       onComplete: update,
     });
 

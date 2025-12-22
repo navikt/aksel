@@ -1,4 +1,4 @@
-import { createContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-context";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
 import { TabsProps } from "./Tabs.types";
 import { useTabs } from "./useTabs";
@@ -17,10 +17,9 @@ type TabsProviderProps = ReturnType<typeof useTabs> &
   >;
 
 /* State context */
-export const [TabsProvider, useTabsContext] = createContext<TabsProviderProps>({
-  name: "TabsContext",
-  hookName: "useTabsContext",
-  providerName: "TabsProvider",
-  errorMessage:
-    "Tabs.List, Tabs.Tag and Tabs.Panel needs to be wrapped within <Tabs>",
-});
+export const [TabsProvider, useTabsContext] =
+  createStrictContext<TabsProviderProps>({
+    name: "TabsContext",
+    errorMessage:
+      "Tabs.List, Tabs.Tag and Tabs.Panel needs to be wrapped within <Tabs>",
+  });

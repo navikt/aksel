@@ -251,7 +251,7 @@ export const BasePrimitive = ({
   flexShrink,
   gridColumn,
 }: BasePrimitiveProps) => {
-  const themeContext = useThemeInternal(false);
+  const themeContext = useThemeInternal();
   const { cn } = useRenameCSS();
   const prefix = themeContext?.isDarkside ? "ax" : "a";
 

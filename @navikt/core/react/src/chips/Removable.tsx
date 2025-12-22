@@ -37,7 +37,7 @@ export const RemovableChips = forwardRef<
     ref,
   ) => {
     const translate = useI18n("Chips");
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
     const { cn } = useRenameCSS();
 
     let localVariant: ChipsRemovableProps["variant"] | undefined;

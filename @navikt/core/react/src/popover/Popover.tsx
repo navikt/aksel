@@ -125,7 +125,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const isInModal = useModalContext(false) !== undefined;
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
 
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
 
     const {
       update,

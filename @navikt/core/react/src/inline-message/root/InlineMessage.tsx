@@ -54,7 +54,7 @@ export const InlineMessage: OverridableComponent<
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
 
     const translate = useI18n("global");
     const statusId = useId();

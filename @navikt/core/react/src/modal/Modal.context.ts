@@ -1,13 +1,13 @@
 import React from "react";
-import { createContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-context";
 
 interface ModalContextProps {
   closeHandler?: React.MouseEventHandler<HTMLButtonElement>;
-  ref: React.RefObject<HTMLDialogElement>;
+  modalRef: React.RefObject<HTMLDialogElement>;
 }
 
 export const [ModalContextProvider, useModalContext] =
-  createContext<ModalContextProps>({
+  createStrictContext<ModalContextProps>({
     name: "ModalContext",
     errorMessage: "<Modal.Header> must be used within a <Modal>",
   });
