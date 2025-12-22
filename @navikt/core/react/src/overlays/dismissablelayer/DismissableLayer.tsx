@@ -64,6 +64,7 @@ interface DismissableLayerBaseProps
    */
   safeZone?: {
     anchor?: Element | null;
+    isEventSafe?: (eventType: "pointerdown" | "focusin") => boolean;
   };
   /**
    * @default true
@@ -139,6 +140,18 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
      */
     function handleOutsideEvent(event: CustomFocusEvent | CustomPointerEvent) {
       if (!safeZone?.anchor) {
+        return;
+      }
+
+      const eventType = event.detail.originalEvent.type as
+        | "pointerdown"
+        | "focusin";
+
+      /**
+       * Allows caller to define custom logic to determine if the event is "safe".
+       */
+      if (safeZone.isEventSafe?.(eventType)) {
+        event.preventDefault();
         return;
       }
 
