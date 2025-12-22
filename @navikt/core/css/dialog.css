@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   outline: 1px solid var(--a-border-subtle);
-  z-index: 1000;
+  z-index: 2000;
   overflow: hidden;
 
   .light:not(:has(.dark)) .navds-dialog__backdrop ~ & {
