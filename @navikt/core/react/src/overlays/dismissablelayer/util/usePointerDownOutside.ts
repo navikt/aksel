@@ -18,9 +18,9 @@ export function usePointerDownOutside(
   ownerDocument: Document = globalThis?.document,
   enabled: boolean = true,
 ) {
-  const handlePointerDownOutside = useEventCallback(callback);
+  const handlePointerDownOutside = useEventCallback(callback) as EventListener;
   const isPointerInsideReactTreeRef = useRef(false);
-  const handleClickRef = useRef<typeof callback>(() => {});
+  const handleClickRef = useRef<typeof handlePointerDownOutside>(() => {});
   const timeout = useTimeout();
 
   useEffect(() => {
