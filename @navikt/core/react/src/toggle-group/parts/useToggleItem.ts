@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { mergeRefs } from "../../util/hooks/useMergeRefs";
+import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import {
   useToggleGroupContext,
   useToggleGroupDescendant,
@@ -96,8 +96,10 @@ export function useToggleItem<P extends UseToggleItemProps>(
     [descendants, focusedValue, selectedValue, setFocusedValue],
   );
 
+  const refs = useMergeRefs(register, ref);
+
   return {
-    ref: mergeRefs([register, ref]),
+    ref: refs,
     isSelected,
     isFocused: focusedValue === value,
     onClick: composeEventHandlers(

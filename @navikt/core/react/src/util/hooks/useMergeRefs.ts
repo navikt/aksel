@@ -1,32 +1,157 @@
-/* https://github.com/radix-ui/primitives/blob/main/packages/react/compose-refs/src/composeRefs.tsx */
 import React from "react";
+import { useRefWithInit } from "./useRefWithInit";
 
-type PossibleRef<T> = React.Ref<T> | undefined;
+type Empty = null | undefined;
+type InputRef<I> = React.Ref<I> | Empty;
+type Result<I> = React.RefCallback<I> | null;
+type Cleanup = () => void;
 
-// https://github.com/gregberge/react-merge-refs
+type ForkRef<I> = {
+  callback: React.RefCallback<I> | null;
+  cleanup: Cleanup | null;
+  refs: InputRef<I>[];
+};
+
 /**
- * Use `useMergeRefs`
- * @internal
+ * Merges refs into a single memoized callback ref or `null`.
+ * This makes sure multiple refs are updated together and have the same value.
+ *
+ * This function accepts up to four refs. If you need to merge more, or have an unspecified number of refs to merge,
+ * use `useMergeRefsN` instead.
  */
-export function mergeRefs<T>(refs: PossibleRef<T>[]) {
-  return (instance: T | null) => {
-    refs.forEach((ref) => {
-      if (typeof ref === "function") {
-        ref(instance);
-      } else if (ref !== null && ref !== undefined) {
-        (ref as React.MutableRefObject<T | null>).current = instance;
-      }
-    });
-  };
+export function useMergeRefs<I>(a: InputRef<I>, b: InputRef<I>): Result<I>;
+export function useMergeRefs<I>(
+  a: InputRef<I>,
+  b: InputRef<I>,
+  c: InputRef<I>,
+): Result<I>;
+export function useMergeRefs<I>(
+  a: InputRef<I>,
+  b: InputRef<I>,
+  c: InputRef<I>,
+  d: InputRef<I>,
+): Result<I>;
+export function useMergeRefs<I>(
+  a: InputRef<I>,
+  b: InputRef<I>,
+  c?: InputRef<I>,
+  d?: InputRef<I>,
+): Result<I> {
+  const forkRef = useRefWithInit(createForkRef<I>).current!;
+  if (didChange(forkRef, a, b, c, d)) {
+    update(forkRef, [a, b, c, d]);
+  }
+  return forkRef.callback;
 }
 
 /**
- * Merges refs within useCallback
- * @internal
- * @param ...refs: React.Ref<T> | undefined
- * @returns React.useCallback(mergeRefs(refs), refs)
+ * Merges an array of refs into a single memoized callback ref or `null`.
+ *
+ * If you need to merge a fixed number (up to four) of refs, use `useMergeRefs` instead for better performance.
  */
-export function useMergeRefs<T>(...refs: PossibleRef<T>[]) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return React.useCallback(mergeRefs(refs), refs);
+export function useMergeRefsN<I>(refs: InputRef<I>[]): Result<I> {
+  const forkRef = useRefWithInit(createForkRef<I>).current!;
+  if (didChangeN(forkRef, refs)) {
+    update(forkRef, refs);
+  }
+  return forkRef.callback;
+}
+
+function createForkRef<I>(): ForkRef<I> {
+  return {
+    callback: null,
+    cleanup: null as Cleanup | null,
+    refs: [],
+  };
+}
+
+function didChange<I>(
+  forkRef: ForkRef<I>,
+  a: InputRef<I>,
+  b: InputRef<I>,
+  c: InputRef<I>,
+  d: InputRef<I>,
+) {
+  // prettier-ignore
+  return (
+    forkRef.refs[0] !== a ||
+    forkRef.refs[1] !== b ||
+    forkRef.refs[2] !== c ||
+    forkRef.refs[3] !== d
+  )
+}
+
+function didChangeN<I>(forkRef: ForkRef<I>, newRefs: InputRef<I>[]) {
+  return (
+    forkRef.refs.length !== newRefs.length ||
+    forkRef.refs.some((ref, index) => ref !== newRefs[index])
+  );
+}
+
+function update<I>(forkRef: ForkRef<I>, refs: InputRef<I>[]) {
+  forkRef.refs = refs;
+
+  if (refs.every((ref) => ref == null)) {
+    forkRef.callback = null;
+    return;
+  }
+
+  forkRef.callback = (instance: I) => {
+    if (forkRef.cleanup) {
+      forkRef.cleanup();
+      forkRef.cleanup = null;
+    }
+
+    if (instance != null) {
+      const cleanupCallbacks = Array(refs.length).fill(
+        null,
+      ) as (Cleanup | null)[];
+
+      for (let i = 0; i < refs.length; i += 1) {
+        const ref = refs[i];
+        if (ref == null) {
+          continue;
+        }
+        switch (typeof ref) {
+          case "function": {
+            const refCleanup = ref(instance);
+            if (typeof refCleanup === "function") {
+              cleanupCallbacks[i] = refCleanup;
+            }
+            break;
+          }
+          case "object": {
+            (ref as React.MutableRefObject<I | null>).current = instance;
+            break;
+          }
+          default:
+        }
+      }
+
+      forkRef.cleanup = () => {
+        for (let i = 0; i < refs.length; i += 1) {
+          const ref = refs[i];
+          if (ref == null) {
+            continue;
+          }
+          switch (typeof ref) {
+            case "function": {
+              const cleanupCallback = cleanupCallbacks[i];
+              if (typeof cleanupCallback === "function") {
+                cleanupCallback();
+              } else {
+                ref(null);
+              }
+              break;
+            }
+            case "object": {
+              (ref as React.MutableRefObject<I | null>).current = null;
+              break;
+            }
+            default:
+          }
+        }
+      };
+    }
+  };
 }

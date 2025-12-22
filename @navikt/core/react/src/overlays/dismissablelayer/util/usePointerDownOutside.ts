@@ -20,7 +20,7 @@ export function usePointerDownOutside(
 ) {
   const handlePointerDownOutside = useEventCallback(callback);
   const isPointerInsideReactTreeRef = useRef(false);
-  const handleClickRef = useRef<typeof handlePointerDownOutside>(() => {});
+  const handleClickRef = useRef<typeof callback>(() => {});
   const timeout = useTimeout();
 
   useEffect(() => {

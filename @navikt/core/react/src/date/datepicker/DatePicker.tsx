@@ -3,7 +3,7 @@ import React, { forwardRef, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { useRenameCSS } from "../../theme/Theme";
 import { useControllableState, useId } from "../../util/hooks";
-import { useMergeRefs } from "../../util/hooks/useMergeRefs";
+import { useMergedRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { DateDialog } from "../Date.Dialog";
 import { DateInputContextProvider, DatePickerInput } from "../Date.Input";
@@ -98,7 +98,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     /* We use state here to insure that anchor is defined if open is true on initial render */
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
-    const mergedRef = useMergeRefs(setWrapperRef, ref);
+    const mergedRef = useMergedRefs(setWrapperRef, ref);
 
     const [value, setValue] = useControllableState<
       Date | Date[] | DateRange | undefined
