@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useCallbackRef } from "../../../util/hooks";
+import { useEventCallback } from "../../../util/hooks/useEventCallback";
 import { useTimeout } from "../../../util/hooks/useTimeout";
 import {
   CUSTOM_EVENTS,
@@ -18,7 +18,7 @@ export function usePointerDownOutside(
   ownerDocument: Document = globalThis?.document,
   enabled: boolean = true,
 ) {
-  const handlePointerDownOutside = useCallbackRef(callback) as EventListener;
+  const handlePointerDownOutside = useEventCallback(callback);
   const isPointerInsideReactTreeRef = useRef(false);
   const handleClickRef = useRef<typeof handlePointerDownOutside>(() => {});
   const timeout = useTimeout();
