@@ -1,8 +1,6 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
-  "organizeImports": {
-    "enabled": false
-  },
+  "$schema": "https://biomejs.dev/schemas/2.3.10/schema.json",
+  "assist": { "actions": { "source": { "organizeImports": "off" } } },
   "javascript": {
     "jsxRuntime": "reactClassic"
   },
@@ -42,7 +40,6 @@
         "useConst": "off",
         "noUnusedTemplateLiteral": "off",
         "noInferrableTypes": "off",
-        "noVar": "off",
         "noParameterAssign": "off",
         "useNumberNamespace": "off",
         "noNonNullAssertion": "off",
@@ -51,27 +48,29 @@
       },
       "suspicious": {
         "noExplicitAny": "off",
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "off",
+        "noVar": "off"
       },
       "complexity": {
         "noForEach": "off",
         "useArrowFunction": "off"
       }
     },
-    "ignore": [
-      "**/node_modules/**",
-      "**/lib/**",
-      "**/public/**",
-      "**/examples/**",
-      "**/esm/**",
-      "**/cjs/**",
-      "**/dist/**",
-      "**/figma/**/plugin.js",
-      "**/codemod/**/*.js",
-      "**/tailwind/tailwind.config.js",
-      "**/.next/**",
-      "**/modal/dialog-polyfill.ts",
-      "**/_sanity/query-types.ts"
+    "includes": [
+      "**",
+      "!**/node_modules/**",
+      "!**/lib/**",
+      "!**/public/**",
+      "!**/examples/**",
+      "!**/esm/**",
+      "!**/cjs/**",
+      "!**/dist/**",
+      "!**/figma/**/plugin.js",
+      "!**/codemod/**/*.js",
+      "!**/tailwind/tailwind.config.js",
+      "!**/.next/**",
+      "!**/modal/dialog-polyfill.ts",
+      "!**/_sanity/query-types.ts"
     ]
   }
 }
