@@ -112,7 +112,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     }, [onTimeoutRef, simulated?.seconds, timeout]);
 
     return (
-      /* biome-ignore lint/a11y/useFocusableInteractive: Progressbar is not interactive. */
       <div
         ref={ref}
         className={cn(
@@ -132,7 +131,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
                 max: Math.round(valueMax),
               })
         }
-        // biome-ignore lint/a11y/useAriaPropsForRole: We found that adding valueMin was not needed
         role="progressbar"
         aria-labelledby={ariaLabelledBy}
         aria-label={ariaLabel}

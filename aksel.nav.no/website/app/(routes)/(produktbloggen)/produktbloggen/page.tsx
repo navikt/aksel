@@ -44,42 +44,40 @@ export default async function Page() {
   );
 
   return (
-    <>
-      <div className={styles.bloggPosts}>
-        <VStack align="center">
-          <Heading
-            level="1"
-            size="xlarge"
-            spacing
-            className={styles.overviewTitle}
-          >
-            Produktbloggen
-          </Heading>
-          <BodyLong className={styles.overviewSubtitle}>
-            Skriverier fra produktutviklingsmiljøet i Nav. Har du eller teamet
-            ditt noe å dele? Ta kontakt med Team Aksel!
-          </BodyLong>
-        </VStack>
+    <div className={styles.bloggPosts}>
+      <VStack align="center">
+        <Heading
+          level="1"
+          size="xlarge"
+          spacing
+          className={styles.overviewTitle}
+        >
+          Produktbloggen
+        </Heading>
+        <BodyLong className={styles.overviewSubtitle}>
+          Skriverier fra produktutviklingsmiljøet i Nav. Har du eller teamet
+          ditt noe å dele? Ta kontakt med Team Aksel!
+        </BodyLong>
+      </VStack>
 
-        <div className={styles.latestBloggPosts}>
-          <HighlightedBlogg blogg={pageData.bloggposts[0]} />
-          <Show above="md">
-            <HighlightedBlogg blogg={pageData.bloggposts[1]} />
-          </Show>
-          <Show below="md">
-            <BloggArticleBlock blogg={pageData.bloggposts[1]} />
-          </Show>
-        </div>
-
-        {/* Flere blogger */}
-        {remainingPosts && (
-          <ul className={styles.remainingPosts}>
-            {remainingPosts.map((blogg) => (
-              <BloggList blogg={blogg} key={blogg._id} />
-            ))}
-          </ul>
-        )}
+      <div className={styles.latestBloggPosts}>
+        <HighlightedBlogg blogg={pageData.bloggposts[0]} />
+        <Show above="md">
+          <HighlightedBlogg blogg={pageData.bloggposts[1]} />
+        </Show>
+        <Show below="md">
+          <BloggArticleBlock blogg={pageData.bloggposts[1]} />
+        </Show>
       </div>
-    </>
+
+      {/* Flere blogger */}
+      {remainingPosts && (
+        <ul className={styles.remainingPosts}>
+          {remainingPosts.map((blogg) => (
+            <BloggList blogg={blogg} key={blogg._id} />
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }

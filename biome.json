@@ -11,7 +11,8 @@
   },
   "css": {
     "parser": {
-      "cssModules": true
+      "cssModules": true,
+      "tailwindDirectives": true
     }
   },
   "files": {
@@ -53,7 +54,8 @@
       },
       "complexity": {
         "noForEach": "off",
-        "useArrowFunction": "off"
+        "useArrowFunction": "off",
+        "noImportantStyles": "off"
       }
     },
     "includes": [
@@ -70,7 +72,9 @@
       "!**/tailwind/tailwind.config.js",
       "!**/.next/**",
       "!**/modal/dialog-polyfill.ts",
-      "!**/_sanity/query-types.ts"
+      "!**/_sanity/query-types.ts",
+      "!**/transforms/**/*.input.*",
+      "!**/transforms/**/*.output.*"
     ]
   }
 }

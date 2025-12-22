@@ -6,6 +6,7 @@ const Example = () => {
   return (
     <LinkCard>
       <LinkCard.Image aspectRatio="16/6">
+        {/** biome-ignore lint/performance/noImgElement: Img element is fine here */}
         <img
           src="/images/og/blogg/image-2.png"
           alt="Alt-tekst for bilde"

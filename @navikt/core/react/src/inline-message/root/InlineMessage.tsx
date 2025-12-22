@@ -76,6 +76,7 @@ export const InlineMessage: OverridableComponent<
             {`${translate(status)}: `}
           </BodyShort>
         )}
+        {/** biome-ignore lint/a11y/useAriaPropsSupportedByRole: Testing shows that this works. */}
         <span
           data-color={themeContext?.color}
           id={contentId}

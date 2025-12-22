@@ -43,6 +43,7 @@ const ComboboxWrapper = ({
   }
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: Wrapper for combobox input and chips.
     <div
       ref={wrapperRef}
       className={cn(

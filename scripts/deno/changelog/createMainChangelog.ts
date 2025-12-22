@@ -188,8 +188,8 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
 };
 
 const semverSort = (a: string, b: string): number => {
-  const [aMajor, aMinor, aPatch] = a.split(".").map((v) => parseInt(v));
-  const [bMajor, bMinor, bPatch] = b.split(".").map((v) => parseInt(v));
+  const [aMajor, aMinor, aPatch] = a.split(".").map((v) => parseInt(v, 10));
+  const [bMajor, bMinor, bPatch] = b.split(".").map((v) => parseInt(v, 10));
 
   if (aMajor !== bMajor) {
     return aMajor - bMajor;

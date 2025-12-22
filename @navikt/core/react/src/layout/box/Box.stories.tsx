@@ -126,21 +126,19 @@ export const ThemingDemo = () => {
 
   const ChatBubble = () => {
     return (
-      <>
-        <Box
-          background="surface-neutral-subtle"
-          shadow="xsmall"
-          padding="4"
-          borderRadius="xlarge xlarge xlarge 0"
-        >
-          <VStack gap="2">
-            <Detail>BOX • 01.01.21 14:00</Detail>
-            <BodyLong>
-              Hei! Dette er en chatbobble som bruker Box som base!
-            </BodyLong>
-          </VStack>
-        </Box>
-      </>
+      <Box
+        background="surface-neutral-subtle"
+        shadow="xsmall"
+        padding="4"
+        borderRadius="xlarge xlarge xlarge 0"
+      >
+        <VStack gap="2">
+          <Detail>BOX • 01.01.21 14:00</Detail>
+          <BodyLong>
+            Hei! Dette er en chatbobble som bruker Box som base!
+          </BodyLong>
+        </VStack>
+      </Box>
     );
   };
 
