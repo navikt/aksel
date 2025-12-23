@@ -6,6 +6,14 @@ import styles from "./Avatar.module.css";
 
 const MAX_AVATAR_COUNT = 30;
 
+type AvatarProps = {
+  imageSrc: string;
+  name: string;
+  type: string;
+  children?: ReactNode;
+  showName?: boolean;
+};
+
 export const avatarUrl = (avatar_id: string) => {
   let _avatar_id = stegaClean(avatar_id);
   if (!Number.isNaN(parseInt(_avatar_id, 10))) {
@@ -93,7 +101,8 @@ export const AvatarStack = ({
   if (avatars.length === 0) {
     return null;
   }
-  const firstAvatar = avatars && isValidElement(avatars[0]) && avatars[0];
+  const firstAvatar =
+    avatars && isValidElement<AvatarProps>(avatars[0]) && avatars[0];
   if (!firstAvatar) {
     return null;
   }
