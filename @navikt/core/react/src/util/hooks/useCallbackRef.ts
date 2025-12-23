@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useRef } from "react";
 
 /**
@@ -15,6 +16,6 @@ export function useCallbackRef<T extends (...args: any[]) => any>(
     callbackRef.current = callback;
   });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We want the passed deps to determine when the returned callback changes
   return useCallback(((...args) => callbackRef.current?.(...args)) as T, deps);
 }

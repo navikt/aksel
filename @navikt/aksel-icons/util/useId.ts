@@ -1,4 +1,6 @@
 //https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/useId.ts
+
+/** biome-ignore-all lint/correctness/useHookAtTopLevel: `useId` is invariant at runtime. */
 import React, { useEffect, useState } from "react";
 
 let globalId = 0;

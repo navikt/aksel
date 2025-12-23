@@ -68,8 +68,9 @@ export const Period = forwardRef<HTMLDivElement, TimelinePeriodProps>(
     const period = periods.find((p) => p.id === periodId);
 
     if (!period) {
-      return <></>;
+      return null;
     }
+
     const {
       start,
       endInclusive,

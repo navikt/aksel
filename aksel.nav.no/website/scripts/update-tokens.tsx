@@ -34,13 +34,13 @@ export const updateTokens = async () => {
     }
   }
 
-  allTokens.forEach((c) =>
+  allTokens.forEach((c) => {
     transactionClient.createOrReplace({
       _id: `${c.title.split("-").join("_")}_tokenkategori`,
       _type: "token_kategori",
       ...c,
-    }),
-  );
+    });
+  });
 
   await transactionClient
     .commit()

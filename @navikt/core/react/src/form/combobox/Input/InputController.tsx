@@ -59,6 +59,7 @@ export const InputController = forwardRef<
 
   return (
     <Floating.Anchor asChild ref={setAnchorRef}>
+      {/** biome-ignore lint/a11y/noStaticElementInteractions: Acts as wrapper list-toggle and input */}
       <div
         className={cn("navds-combobox__wrapper-inner navds-text-field__input", {
           "navds-combobox__wrapper-inner--virtually-unfocused":

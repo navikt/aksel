@@ -18,16 +18,18 @@ const tokens = [
 
 describe("Translating tokens to correct format", () => {
   test("To scss", () => {
-    tokens.forEach((x) =>
-      expect(translateToken(x.name, "scss")).toEqual(x.scss),
-    );
+    tokens.forEach((x) => {
+      expect(translateToken(x.name, "scss")).toEqual(x.scss);
+    });
   });
   test("To less", () => {
-    tokens.forEach((x) =>
-      expect(translateToken(x.name, "less")).toEqual(x.less),
-    );
+    tokens.forEach((x) => {
+      expect(translateToken(x.name, "less")).toEqual(x.less);
+    });
   });
   test("To js", () => {
-    tokens.forEach((x) => expect(translateToken(x.name, "js")).toEqual(x.js));
+    tokens.forEach((x) => {
+      expect(translateToken(x.name, "js")).toEqual(x.js);
+    });
   });
 });

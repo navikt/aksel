@@ -134,24 +134,22 @@ export const MultiSelectWithComplexOptions: StoryFn = () => {
     "OPP",
   ]);
   return (
-    <>
-      <UNSAFE_Combobox
-        options={complexOptions.map((option) => ({
-          ...option,
-          label: `${option.label} [${option.value}]`,
-        }))}
-        id="combobox-with-complex-options"
-        label="Velg temakoder"
-        allowNewValues
-        onToggleSelected={(value, isSelected) =>
-          isSelected
-            ? setSelectedOptions([...selectedOptions, value])
-            : setSelectedOptions(selectedOptions.filter((o) => o !== value))
-        }
-        selectedOptions={selectedOptions}
-        isMultiSelect
-      />
-    </>
+    <UNSAFE_Combobox
+      options={complexOptions.map((option) => ({
+        ...option,
+        label: `${option.label} [${option.value}]`,
+      }))}
+      id="combobox-with-complex-options"
+      label="Velg temakoder"
+      allowNewValues
+      onToggleSelected={(value, isSelected) =>
+        isSelected
+          ? setSelectedOptions([...selectedOptions, value])
+          : setSelectedOptions(selectedOptions.filter((o) => o !== value))
+      }
+      selectedOptions={selectedOptions}
+      isMultiSelect
+    />
   );
 };
 
