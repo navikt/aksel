@@ -166,7 +166,10 @@ const nextConfig: NextConfig = {
       "sanity",
     ],
     largePageDataBytes: 128 * 2000,
+    turbopackFileSystemCacheForDev: true,
   },
+  reactCompiler: true,
+
   serverExternalPackages: ["@navikt/next-logger", "next-logger", "pino"],
 };
 

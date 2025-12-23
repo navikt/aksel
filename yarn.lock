@@ -1591,7 +1591,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.0.0, @babel/types@npm:^7.17.0, @babel/types@npm:^7.20.7, @babel/types@npm:^7.21.3, @babel/types@npm:^7.23.0, @babel/types@npm:^7.24.7, @babel/types@npm:^7.25.4, @babel/types@npm:^7.27.1, @babel/types@npm:^7.27.3, @babel/types@npm:^7.28.2, @babel/types@npm:^7.28.4, @babel/types@npm:^7.28.5, @babel/types@npm:^7.4.4":
+"@babel/types@npm:^7.0.0, @babel/types@npm:^7.17.0, @babel/types@npm:^7.20.7, @babel/types@npm:^7.21.3, @babel/types@npm:^7.23.0, @babel/types@npm:^7.24.7, @babel/types@npm:^7.25.4, @babel/types@npm:^7.26.0, @babel/types@npm:^7.27.1, @babel/types@npm:^7.27.3, @babel/types@npm:^7.28.2, @babel/types@npm:^7.28.4, @babel/types@npm:^7.28.5, @babel/types@npm:^7.4.4":
   version: 7.28.5
   resolution: "@babel/types@npm:7.28.5"
   dependencies:
@@ -9207,6 +9207,15 @@ __metadata:
     babel-plugin-macros: "npm:^3.0.1"
     require-from-string: "npm:^2.0.2"
   checksum: 10/d4507d1f134a610b8a2d4de911afe147eba7aab782ea34e7b687e99bdfd2e28d2056e16b7fa4b66acb59bcbd681acc40e851a20f03f7be719ee4cc51fc88eee0
+  languageName: node
+  linkType: hard
+
+"babel-plugin-react-compiler@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "babel-plugin-react-compiler@npm:1.0.0"
+  dependencies:
+    "@babel/types": "npm:^7.26.0"
+  checksum: 10/51358f4da7dd338afd93ca647af3b5b95fdedd2ffde78719fbba5c542e3d66d338f020bc61234caf4ddf25cddbf517ae101ff76e362e3244d1047c1e64d90a60
   languageName: node
   linkType: hard
 
@@ -24932,6 +24941,7 @@ __metadata:
     "@types/umami": "npm:^2.10.0"
     autoprefixer: "npm:^10.4.20"
     babel-loader: "npm:^9.1.3"
+    babel-plugin-react-compiler: "npm:^1.0.0"
     clsx: "npm:^2.1.0"
     codesandbox-import-utils: "npm:^2.2.3"
     concurrently: "npm:9.2.1"
