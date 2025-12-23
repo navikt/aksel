@@ -1,6 +1,13 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import {
+  Activity,
+  Suspense,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Dialog } from "@navikt/ds-react";
 import { GlobalSearchResultProvider } from "@/app/_ui/global-search/GlobalSearch.provider";
 import { useParamState } from "@/app/_ui/global-search/useParamState";
@@ -64,18 +71,20 @@ function GlobalSearch() {
     >
       <GlobalSearchContext.Provider value={contextValue}>
         <GlobalSearchButton />
-        <Suspense>
-          <GlobalSearchResultProvider>
-            <GlobalSearchDialog>
-              <GlobalSearchForm />
-              <div className={styles.searchResults}>
-                <GlobalSearchEmptyState />
-                <GlobalSearchEmptySearchState />
-                <GlobalSearchResultsView />
-              </div>
-            </GlobalSearchDialog>
-          </GlobalSearchResultProvider>
-        </Suspense>
+        <Activity mode={open ? "visible" : "hidden"}>
+          <Suspense>
+            <GlobalSearchResultProvider>
+              <GlobalSearchDialog>
+                <GlobalSearchForm />
+                <div className={styles.searchResults}>
+                  <GlobalSearchEmptyState />
+                  <GlobalSearchEmptySearchState />
+                  <GlobalSearchResultsView />
+                </div>
+              </GlobalSearchDialog>
+            </GlobalSearchResultProvider>
+          </Suspense>
+        </Activity>
       </GlobalSearchContext.Provider>
     </Dialog>
   );
