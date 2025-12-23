@@ -1,5 +1,23 @@
 # Changelog
 
+## 7.37.0
+
+### @navikt/ds-react
+
+- Dialog: :tada: New component `Dialog`. ([#4262](https://github.com/navikt/aksel/pull/4262))
+
+* Internals: Update internal utilities. ([#4432](https://github.com/navikt/aksel/pull/4432))
+
+* Internal: Updated internal createContext utility. ([#4433](https://github.com/navikt/aksel/pull/4433))
+
+### @navikt/ds-tokens
+
+- Tokens: Updated --ax-bg-overlay token. ([#4262](https://github.com/navikt/aksel/pull/4262))
+
+### @navikt/ds-css
+
+- Dialog: :tada: New component `Dialog`. ([#4262](https://github.com/navikt/aksel/pull/4262))
+
 ## 7.36.0
 
 ### @navikt/aksel-icons
