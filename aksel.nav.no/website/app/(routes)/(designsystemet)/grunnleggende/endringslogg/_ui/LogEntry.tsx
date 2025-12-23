@@ -5,7 +5,6 @@ import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
-import NextLink from "next/link";
 import { useRef } from "react";
 import {
   BodyShort,
@@ -22,6 +21,7 @@ import {
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { capitalizeText } from "@/ui-utils/format-text";
 import styles from "./Changelog.module.css";
 import ShowMore from "./ShowMore";

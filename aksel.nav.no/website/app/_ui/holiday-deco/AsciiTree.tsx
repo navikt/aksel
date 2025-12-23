@@ -95,6 +95,7 @@ function AsciiTree({ right = false }: { right?: boolean }) {
       className={cl(`${styles.tree}`, {
         [styles.right]: right,
       })}
+      suppressHydrationWarning
     >
       <pre style={{ lineHeight: "8px", fontSize: "8px" }}>
         {lines.map((line, idx) => (
@@ -207,6 +208,7 @@ function applyColor(text: string, color: ColorName) {
     <span
       style={{ color: hex }}
       className={cl({ [styles.glow]: color === "yellow" })}
+      key={Math.random()}
     >
       {text}
     </span>

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { BodyLong, Box, HGrid, Heading, LinkCard, Tag } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
@@ -13,6 +12,7 @@ import {
 } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { ImageAsThemedSvg } from "@/app/_ui/image-as-svg/ImageAsSvg";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import styles from "./DesignsystemetOverview.module.css";
@@ -97,7 +97,7 @@ function DesignsystemetOverviewCard({
 
       <LinkCardTitle>
         <LinkCardAnchor asChild>
-          <Link href={`/${page?.slug}`}>{page?.heading}</Link>
+          <NextLink href={`/${page?.slug}`}>{page?.heading}</NextLink>
         </LinkCardAnchor>
       </LinkCardTitle>
     </LinkCard>

@@ -1,6 +1,5 @@
 "use client";
 
-import NextLink from "next/link";
 import * as Icons from "@navikt/aksel-icons";
 import { BrailleIcon, DownloadIcon } from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
@@ -16,6 +15,7 @@ import {
 } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { FigmaIcon } from "@/assets/Icons";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";

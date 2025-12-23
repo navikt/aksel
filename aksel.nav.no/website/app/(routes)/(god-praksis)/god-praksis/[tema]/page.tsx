@@ -1,5 +1,4 @@
 import { Metadata, ResolvingMetadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   BodyLong,
@@ -26,6 +25,7 @@ import {
 } from "@/app/_sanity/queries";
 import { GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { formatDateString } from "@/ui-utils/format-date";
 
 /* We rely on seachparams for initial render, so need to force-dynamic */
@@ -203,7 +203,7 @@ export default async function Page(props: Props) {
         articlesMap[key] = {
           title:
             groupByField === "innholdstype"
-              ? innholdstypeTitleMap[key] ?? key
+              ? (innholdstypeTitleMap[key] ?? key)
               : article.undertema,
           description: description ?? undefined,
           ariaLabel: `${
@@ -263,9 +263,9 @@ export default async function Page(props: Props) {
                           <LinkCard>
                             <LinkCardTitle as="h3">
                               <LinkCardAnchor asChild>
-                                <Link href={`/${article.slug}`}>
+                                <NextLink href={`/${article.slug}`}>
                                   {article.heading}
-                                </Link>
+                                </NextLink>
                               </LinkCardAnchor>
                             </LinkCardTitle>
 

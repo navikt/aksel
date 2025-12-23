@@ -1,6 +1,5 @@
 import cl from "clsx";
 import Image from "next/image";
-import Link from "next/link";
 import { HStack, LinkCard, VStack } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
@@ -12,6 +11,7 @@ import {
 import { LANDINGSSIDE_LATEST_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { Avatar, AvatarStack, avatarUrl } from "@/app/_ui/avatar/Avatar";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
@@ -90,7 +90,7 @@ const Card = ({ article, visible }: CardProps) => {
       )}
       <LinkCardTitle as="h2">
         <LinkCardAnchor asChild>
-          <Link
+          <NextLink
             onNavigate={() =>
               umamiTrack("navigere", {
                 kilde: "forsidekort",
@@ -100,7 +100,7 @@ const Card = ({ article, visible }: CardProps) => {
             href={`/${article.slug}`}
           >
             {article.heading}
-          </Link>
+          </NextLink>
         </LinkCardAnchor>
       </LinkCardTitle>
       {isArticle(article) || isBlogg(article) ? (

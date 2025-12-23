@@ -2,10 +2,10 @@
 
 import cl from "clsx";
 import { stegaClean } from "next-sanity";
-import NextLink from "next/link";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
 import { TOC_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { removeEmojiesFromText } from "@/ui-utils/format-text";
 import styles from "./TableOfContents.module.css";
