@@ -9,11 +9,12 @@ module.exports = {
   baseUrl: "./",
   components: path.resolve("./src/components.ts"),
   outputPath: path.resolve("./dist/sandbox"),
-  // Optional:
   title: "Aksel Sandbox",
   snippets: path.resolve("./src/snippets.ts"),
   widths: [320, 480, 768, 1024, 1280, 1440],
-  defaultVisibleWidths: [320, 1280],
+  defaultVisibleWidths: [1280],
+  defaultVisibleThemes: ["light", "dark"],
+  themes: "./src/themes.ts",
   port: 9000,
   frameComponent: path.resolve("./src/FrameComponent.tsx"),
   useScope: path.resolve("./src/useScope.tsx"),
@@ -21,12 +22,11 @@ module.exports = {
   paramType: "search", // default is 'hash'
   iframeSandbox: "allow-scripts allow-same-origin allow-modals",
   exampleCode: `
-  <Heading>This is a sandbox!</Heading>
-  <HStack gap="10">
-    <Box> box 1</Box> <Box> box 2</Box> <Box> box 3</Box>
-  </HStack>
-  <Button>test</Button>
-  <BodyShort>This is a bodyshort</BodyShort>
+<GlobalAlert status="success">
+  <GlobalAlert.Header>
+    <GlobalAlert.Title>Welcome to Aksel sandbox!</GlobalAlert.Title>
+  </GlobalAlertHeader>
+</GlobalAlert>
   `,
   webpackConfig: () => ({
     module: {
@@ -53,10 +53,7 @@ module.exports = {
         },
         {
           test: /\.css$/i,
-          include: [
-            require.resolve("@navikt/ds-css"),
-            require.resolve("./src/frameComponent.css"),
-          ],
+          include: [require.resolve("@navikt/ds-css")],
           use: ["style-loader", "css-loader"],
         },
       ],
