@@ -1,4 +1,4 @@
-import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
+import { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
 
 /**
  * Capitalize the first letter of a string.
@@ -8,7 +8,7 @@ function capitalizeText(inputString: string): string {
 }
 
 type RedaksjonTypeValue = NonNullable<
-  NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][number]["writers"]
+  NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT>["bloggposts"][number]["writers"]
 >[number]["type"];
 
 export const humanizeRedaksjonType = (type: RedaksjonTypeValue) => {

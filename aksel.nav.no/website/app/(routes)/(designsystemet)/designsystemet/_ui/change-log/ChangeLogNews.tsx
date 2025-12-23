@@ -14,7 +14,7 @@ import {
 } from "@navikt/ds-react/LinkCard";
 import { sanityFetch } from "@/app/_sanity/live";
 import { N_LATEST_CHANGE_LOGS_QUERY } from "@/app/_sanity/queries";
-import { N_LATEST_CHANGE_LOGS_QUERYResult } from "@/app/_sanity/query-types";
+import { N_LATEST_CHANGE_LOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
 
@@ -93,7 +93,7 @@ function ChangelogIcon({
   endringstype,
 }: {
   endringstype:
-    | N_LATEST_CHANGE_LOGS_QUERYResult[number]["endringstype"]
+    | N_LATEST_CHANGE_LOGS_QUERY_RESULT[number]["endringstype"]
     | "sparkles";
 }) {
   if (!endringstype) {

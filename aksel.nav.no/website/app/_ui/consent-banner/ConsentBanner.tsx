@@ -1,9 +1,9 @@
 "use client";
 
-import NextLink from "next/link";
 import { useTransition } from "react";
 import { BodyLong, Box, Button, Heading, Link, Stack } from "@navikt/ds-react";
 import { useCookieConsent } from "@/app/_ui/cookie-consent/CookieConsent.Provider";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import styles from "./ConsentBanner.module.css";
 

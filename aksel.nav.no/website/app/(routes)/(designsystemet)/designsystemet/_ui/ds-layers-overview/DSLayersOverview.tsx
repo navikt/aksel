@@ -1,5 +1,4 @@
 import cl from "clsx";
-import NextLink from "next/link";
 import {
   ComponentIcon,
   Density2Icon,
@@ -24,6 +23,7 @@ import {
 } from "@navikt/ds-react/LinkCard";
 import { ListItem } from "@navikt/ds-react/List";
 import { HolidayDecorations } from "@/app/_ui/holiday-deco/HolidayDecorations";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import styles from "./DSLayersOverview.module.css";
 
 type DSLayersOverviewProps = {

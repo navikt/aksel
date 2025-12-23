@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { clientConfig } from "@/sanity/config";
 import styles from "./Footer.module.css";
 
@@ -33,7 +33,7 @@ function FooterEdit() {
   }
 
   return (
-    <Link
+    <NextLink
       href={`/admin/presentation?preview=${pathName}`}
       className={styles.footerEdit}
       target="_blank"
@@ -41,7 +41,7 @@ function FooterEdit() {
       prefetch={false}
     >
       Rediger side
-    </Link>
+    </NextLink>
   );
 }
 

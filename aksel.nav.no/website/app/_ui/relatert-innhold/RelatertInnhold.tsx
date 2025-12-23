@@ -1,7 +1,7 @@
-import NextLink from "next/link";
 import { Link } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 
 function RelatertInnhold(

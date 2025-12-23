@@ -1,15 +1,15 @@
 import NextImage from "next/image";
-import NextLink from "next/link";
 import { BodyLong, Heading, Hide, Link, Show } from "@navikt/ds-react";
-import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
+import { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { Avatar, AvatarStack } from "@/app/_ui/avatar/Avatar";
 import { queryToAvatars } from "@/app/_ui/avatar/utils";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import styles from "../_ui/Produktbloggen.module.css";
 
 interface Props {
-  blogg: NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][number];
+  blogg: NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT>["bloggposts"][number];
 }
 
 export const HighlightedBlogg = async ({ blogg }: Props) => {

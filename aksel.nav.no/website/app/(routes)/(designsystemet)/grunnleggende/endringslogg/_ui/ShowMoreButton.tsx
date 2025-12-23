@@ -48,7 +48,10 @@ const ShowMoreButton = ({
 
   const buttonText = isExpanded ? expandedText : collapsedText;
 
-  const { className, ...restProps } = child?.props ?? {};
+  const { className, ...restProps } = (child?.props ?? {}) as {
+    className?: string;
+    [key: string]: unknown;
+  };
 
   const childClone = React.cloneElement(
     React.Children.only(child),
@@ -57,7 +60,7 @@ const ShowMoreButton = ({
       onClick: toggleExpansion,
       icon: <ChevronIcon aria-hidden />,
       ...restProps,
-    },
+    } as Record<string, unknown>,
     buttonText,
   );
   return React.isValidElement(childClone) ? childClone : null;
