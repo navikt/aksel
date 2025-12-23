@@ -1,5 +1,5 @@
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
-import { mergeRefs } from "../../../util/hooks/useMergeRefs";
+import { useMergeRefs } from "../../../util/hooks/useMergeRefs";
 import { useTabsContext, useTabsDescendant } from "../../Tabs.context";
 
 export interface UseTabProps {
@@ -40,8 +40,10 @@ export function useTab<P extends UseTabProps>(
     selectionFollowsFocus && setSelectedValue(value);
   };
 
+  const refs = useMergeRefs(register, ref);
+
   return {
-    ref: mergeRefs([register, ref]),
+    ref: refs,
     isSelected,
     isFocused: focusedValue === value,
     id: makeTabId(id, value),
