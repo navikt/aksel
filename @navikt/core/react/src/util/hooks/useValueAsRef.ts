@@ -3,7 +3,7 @@
 import { useClientLayoutEffect } from "./useClientLayoutEffect";
 import { useRefWithInit } from "./useRefWithInit";
 
-export function useLatestRef<T>(value: T) {
+function useValueAsRef<T>(value: T) {
   const latest = useRefWithInit(createLatestRef, value).current!;
 
   latest.next = value;
@@ -24,3 +24,5 @@ function createLatestRef<T>(value: T) {
   };
   return latest;
 }
+
+export { useValueAsRef };

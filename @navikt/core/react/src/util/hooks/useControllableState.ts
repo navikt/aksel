@@ -1,6 +1,6 @@
 // https://github.com/chakra-ui/chakra-ui/tree/5ec0be610b5a69afba01a9c22365155c1b519136/packages/hooks/use-controllable-state
 import { useState } from "react";
-import { useCallbackRef } from "./useCallbackRef";
+import { useEventCallback } from "./useEventCallback";
 
 export interface UseControllableStateProps<T> {
   value?: T;
@@ -16,25 +16,22 @@ export function useControllableState<T>({
   defaultValue,
   onChange,
 }: UseControllableStateProps<T>) {
-  const onChangeProp = useCallbackRef(onChange);
+  const onChangeProp = useEventCallback(onChange);
 
   const [uncontrolledState, setUncontrolledState] = useState(defaultValue);
   const controlled = valueProp !== undefined;
   const value = controlled ? valueProp : uncontrolledState;
 
-  const setValue = useCallbackRef(
-    (next: React.SetStateAction<T>) => {
-      const setter = next as (prevState?: T) => T;
-      const nextValue = typeof next === "function" ? setter(value) : next;
+  const setValue = useEventCallback((next: React.SetStateAction<T>) => {
+    const setter = next as (prevState?: T) => T;
+    const nextValue = typeof next === "function" ? setter(value) : next;
 
-      if (!controlled) {
-        setUncontrolledState(nextValue);
-      }
+    if (!controlled) {
+      setUncontrolledState(nextValue);
+    }
 
-      onChangeProp(nextValue);
-    },
-    [controlled, onChangeProp, value],
-  );
+    onChangeProp(nextValue);
+  });
 
   return [value, setValue] as const;
 }

@@ -21,11 +21,8 @@ import React, {
 import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
 import { createContext } from "../../util/create-context";
-import {
-  useCallbackRef,
-  useClientLayoutEffect,
-  useMergeRefs,
-} from "../../util/hooks";
+import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
+import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
 import { AsChildProps } from "../../util/types";
 import {
@@ -372,7 +369,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
 
     const [placedSide, placedAlign] = getSideAndAlignFromPlacement(placement);
 
-    const handlePlaced = useCallbackRef(onPlaced);
+    const handlePlaced = useEventCallback(onPlaced);
 
     useClientLayoutEffect(() => {
       isPositioned && handlePlaced?.();

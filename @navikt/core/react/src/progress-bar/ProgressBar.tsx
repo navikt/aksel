@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, forwardRef, useEffect } from "react";
 import { useRenameCSS } from "../theme/Theme";
-import { useLatestRef } from "../util/hooks/useLatestRef";
 import { useTimeout } from "../util/hooks/useTimeout";
+import { useValueAsRef } from "../util/hooks/useValueAsRef";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 interface ProgressBarPropsBase
@@ -97,7 +97,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   ) => {
     const { cn } = useRenameCSS();
     const translateX = 100 - (Math.round(value) / valueMax) * 100;
-    const onTimeoutRef = useLatestRef(simulated?.onTimeout);
+    const onTimeoutRef = useValueAsRef(simulated?.onTimeout);
 
     const translate = useI18n("ProgressBar");
     const timeout = useTimeout();
