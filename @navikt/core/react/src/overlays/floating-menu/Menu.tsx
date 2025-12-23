@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { Portal } from "../../portal";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { createContext } from "../../util/create-context";
+import { createStrictContext } from "../../util/create-strict-context";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
@@ -72,10 +72,10 @@ type MenuContextValue = {
   onContentChange: (content: MenuContentElementRef | null) => void;
 };
 
-const [MenuProvider, useMenuContext] = createContext<MenuContextValue>({
-  providerName: "MenuProvider",
-  hookName: "useMenuContext",
-});
+const { Provider: MenuProvider, useContext: useMenuContext } =
+  createStrictContext<MenuContextValue>({
+    name: "MenuContext",
+  });
 
 type MenuRootContextValue = {
   onClose: () => void;
@@ -83,10 +83,9 @@ type MenuRootContextValue = {
   modal: boolean;
 };
 
-const [MenuRootProvider, useMenuRootContext] =
-  createContext<MenuRootContextValue>({
-    providerName: "MenuRootProvider",
-    hookName: "useMenuRootContext",
+const { Provider: MenuRootProvider, useContext: useMenuRootContext } =
+  createStrictContext<MenuRootContextValue>({
+    name: "MenuRootContext",
   });
 
 const MenuRoot = ({
@@ -590,10 +589,9 @@ const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
 /* -------------------------------------------------------------------------- */
 /*                                 Menu Radio                                 */
 /* -------------------------------------------------------------------------- */
-const [RadioGroupProvider, useMenuRadioGroupContext] =
-  createContext<MenuRadioGroupProps>({
-    providerName: "MenuRadioGroupProvider",
-    hookName: "useMenuRadioGroupContext",
+const { Provider: RadioGroupProvider, useContext: useMenuRadioGroupContext } =
+  createStrictContext<MenuRadioGroupProps>({
+    name: "MenuRadioGroupContext",
     defaultValue: {
       value: undefined,
       onValueChange: () => {},
@@ -620,11 +618,13 @@ const MenuRadioGroup = React.forwardRef<
 /* -------------------------------------------------------------------------- */
 /*                             Menu Item Indicator                            */
 /* -------------------------------------------------------------------------- */
-const [MenuItemIndicatorProvider, useMenuItemIndicatorContext] = createContext<{
+const {
+  Provider: MenuItemIndicatorProvider,
+  useContext: useMenuItemIndicatorContext,
+} = createStrictContext<{
   state: CheckedState;
 }>({
-  providerName: "MenuItemIndicatorProvider",
-  hookName: "useMenuItemIndicatorContext",
+  name: "MenuItemIndicatorContext",
 });
 
 type MenuItemIndicatorProps = SlottedDivProps;
@@ -744,12 +744,10 @@ type MenuSubContextValue = {
   onTriggerChange: (trigger: MenuItemElement | null) => void;
 };
 
-const [MenuSubProvider, useMenuSubContext] = createContext<MenuSubContextValue>(
-  {
-    providerName: "MenuSubProvider",
-    hookName: "useMenuSubContext",
-  },
-);
+const { Provider: MenuSubProvider, useContext: useMenuSubContext } =
+  createStrictContext<MenuSubContextValue>({
+    name: "MenuSubContext",
+  });
 
 interface MenuSubProps {
   children?: React.ReactNode;

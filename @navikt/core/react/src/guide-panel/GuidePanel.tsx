@@ -47,7 +47,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
     ref,
   ) => {
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
 
     return (
       <div

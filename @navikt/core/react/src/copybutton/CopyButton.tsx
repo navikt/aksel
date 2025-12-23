@@ -94,7 +94,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 
     const { cn } = useRenameCSS();
 
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
 
     const handleClick = () => {
       copy(copyText);
@@ -112,7 +112,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     const copyIcon = (
       <LegacyIconWrapper useLegacy={!themeContext?.isDarkside}>
         {active
-          ? activeIcon ?? (
+          ? (activeIcon ?? (
               <CheckmarkIcon
                 aria-hidden={!!text}
                 title={text ? undefined : activeString}
@@ -122,8 +122,8 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
                     : undefined
                 }
               />
-            )
-          : icon ?? (
+            ))
+          : (icon ?? (
               <FilesIcon
                 aria-hidden={!!text}
                 title={text ? undefined : title || translate("title")}
@@ -133,7 +133,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
                     : undefined
                 }
               />
-            )}
+            ))}
       </LegacyIconWrapper>
     );
 

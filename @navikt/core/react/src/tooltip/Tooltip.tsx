@@ -133,7 +133,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const modalContext = useModalContext(false);
-    const rootElement = modalContext ? modalContext.ref.current : undefined;
+    const rootElement = modalContext
+      ? modalContext.modalRef.current
+      : undefined;
 
     const {
       x,

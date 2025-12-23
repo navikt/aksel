@@ -269,7 +269,7 @@ function ClearButton({
 }: SearchClearButtonProps) {
   const { cn } = useRenameCSS();
 
-  const themeContext = useThemeInternal(false);
+  const themeContext = useThemeInternal();
   const translate = useI18n("Search");
 
   return themeContext?.isDarkside ? (

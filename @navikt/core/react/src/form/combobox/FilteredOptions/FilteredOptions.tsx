@@ -15,7 +15,7 @@ import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const FilteredOptions = () => {
   const { cn } = useRenameCSS();
-  const themeContext = useThemeInternal(false);
+  const themeContext = useThemeInternal();
   const {
     inputProps: { id },
     anchorRef,

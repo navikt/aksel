@@ -10,7 +10,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const { cn } = useRenameCSS();
   const { inputProps, size, hasError, readOnly } = useRadio(props);
   const descriptionId = useId();
-  const themeContext = useThemeInternal(false);
+  const themeContext = useThemeInternal();
 
   if (themeContext?.isDarkside) {
     return (
