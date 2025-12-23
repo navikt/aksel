@@ -1,4 +1,1 @@
-@layer legacy, darkside;
-
-@import "@navikt/ds-css" layer(legacy);
-@import "@navikt/ds-css/darkside" layer(darkside);
+@import "@navikt/ds-css";

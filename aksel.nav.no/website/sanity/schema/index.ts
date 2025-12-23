@@ -62,7 +62,6 @@ export const schema: SchemaPluginOptions = {
     object.Alert,
     object.ExpansionCard,
     object.Tips,
-    object.UnikSidemodul,
     object.Attachment,
     object.Language,
     object.CompareImages,

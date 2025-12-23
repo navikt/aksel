@@ -25,9 +25,10 @@ const Example = () => {
               <ActionMenu>
                 <ActionMenu.Trigger>
                   <Button
+                    data-color="neutral"
                     icon={<MenuElipsisVerticalCircleIcon title="Meny" />}
                     size="small"
-                    variant="tertiary-neutral"
+                    variant="tertiary"
                   />
                 </ActionMenu.Trigger>
                 <ActionMenu.Content>

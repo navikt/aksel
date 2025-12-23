@@ -40,7 +40,7 @@ export const Controls: Story = {
     },
     textColor: {
       control: "radio",
-      options: ["default", "subtle"],
+      options: ["default", "subtle", "contrast"],
     },
   },
 };
@@ -139,6 +139,13 @@ export const ColorRole: Story = {
       <Heading size="small" textColor="subtle">
         {lorem}
       </Heading>
+      <Heading
+        size="small"
+        textColor="contrast"
+        style={{ backgroundColor: "black" }}
+      >
+        {lorem}
+      </Heading>
       <Heading size="small" data-color="brand-magenta">
         {lorem}
       </Heading>
@@ -146,6 +153,14 @@ export const ColorRole: Story = {
         {lorem}
       </Heading>
       <Heading size="small" data-color="brand-magenta" textColor="subtle">
+        {lorem}
+      </Heading>
+      <Heading
+        size="small"
+        data-color="brand-magenta"
+        textColor="contrast"
+        style={{ backgroundColor: "black" }}
+      >
         {lorem}
       </Heading>
     </VStack>

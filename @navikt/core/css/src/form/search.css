@@ -1,0 +1,151 @@
+.aksel-search {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.aksel-search__wrapper-inner {
+  position: relative;
+  width: 100%;
+}
+
+.aksel-search--with-size {
+  & .aksel-search__wrapper-inner {
+    width: inherit;
+  }
+
+  & .aksel-search__wrapper {
+    width: fit-content;
+  }
+}
+
+.aksel-search__wrapper {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--ax-radius-8);
+
+  /* We have to outline the whole container to include the Search-buttons */
+  &:has(.aksel-search__input:focus-visible) {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+/* ------------------------------ Search input ------------------------------ */
+.aksel-search__input {
+  padding-right: var(--ax-space-40);
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &.aksel-search__input--primary,
+  &.aksel-search__input--secondary {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+  }
+}
+
+.aksel-search__input--simple {
+  padding-left: var(--ax-space-40);
+}
+
+/* ------------------------------ Search sizing ----------------------------- */
+.aksel-form-field--small {
+  & .aksel-search__input {
+    padding-right: var(--ax-space-28);
+  }
+
+  & .aksel-search__input--simple {
+    padding-left: var(--ax-space-28);
+  }
+
+  & .aksel-search__search-icon {
+    left: var(--ax-space-4);
+    font-size: 1.25rem;
+  }
+
+  & .aksel-search__button-clear {
+    right: var(--ax-space-4);
+  }
+}
+
+/* ------------------------------- Search icon ------------------------------ */
+.aksel-search__search-icon {
+  color: var(--ax-text-neutral);
+  position: absolute;
+  left: var(--ax-space-8);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 1.5rem;
+
+  .aksel-search--disabled & {
+    opacity: var(--ax-opacity-disabled);
+  }
+}
+
+/* --------------------------- Search Clear-button -------------------------- */
+.aksel-search__button-clear {
+  position: absolute;
+  right: var(--ax-space-8);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ------------------------------ Search Button ----------------------------- */
+.aksel-search__button-search {
+  flex-shrink: 0;
+  border-radius: 0;
+  border-top-right-radius: var(--ax-radius-8);
+  border-bottom-right-radius: var(--ax-radius-8);
+}
+
+.aksel-search__button-search[data-variant="secondary"] {
+  --__axc-button-border-width: 1px;
+  --__axc-button-border-color: var(--ax-border-neutral);
+
+  &:not(:hover, :active) {
+    background-color: var(--ax-bg-input);
+  }
+
+  &:hover:not(:disabled) {
+    --__axc-button-border-color: var(--ax-border-strong);
+  }
+}
+
+/* Special-case where we hover/focus input, and want the secondary-button to match input-border */
+.aksel-search:not(.aksel-search--error, .aksel-search--disabled)
+  .aksel-search__wrapper:has(.aksel-search__input:is(:hover, :focus-visible))
+  .aksel-search__button-search[data-variant="secondary"]:not(:hover, :active) {
+  --__axc-button-border-color: var(--ax-border-strong);
+}
+
+/* --------------------------- Search Error-state --------------------------- */
+.aksel-search--error .aksel-search__input:not(:disabled) {
+  border-color: var(--ax-border-danger-strong);
+  box-shadow:
+    inset -2px 0 0 0 var(--ax-border-danger-strong),
+    inset 0 0 0 1px var(--ax-border-danger-strong);
+
+  &.aksel-search__input--simple {
+    box-shadow: inset 0 0 0 1px var(--ax-border-danger-strong);
+  }
+}
+
+/* -------------------------- Search Focus layering ------------------------- */
+.aksel-search__input:focus-visible,
+.aksel-search__button-search:focus-visible {
+  z-index: 1;
+}
+
+/* -------------------------- Search disabled state ------------------------- */
+
+/* We can't re-use disabled-state for form-fields since opacity multiplies on search-button */
+.aksel-search--disabled {
+  .aksel-search__input {
+    opacity: var(--ax-opacity-disabled);
+    cursor: not-allowed;
+  }
+}

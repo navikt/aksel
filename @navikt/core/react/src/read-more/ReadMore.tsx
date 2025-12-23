@@ -1,6 +1,8 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { BodyLong } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -34,6 +36,16 @@ export interface ReadMoreProps
    * @default "medium"
    */
   size?: "large" | "medium" | "small";
+  /**
+   * Overrides inherited color.
+   *
+   *
+   * We recommend only using `accent`. We have disallowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   * @private
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 /**

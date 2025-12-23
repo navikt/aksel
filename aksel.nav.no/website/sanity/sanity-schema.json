@@ -5436,21 +5436,6 @@
           {
             "type": "object",
             "attributes": {
-              "_key": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              }
-            },
-            "rest": {
-              "type": "inline",
-              "name": "spesial_seksjon"
-            }
-          },
-          {
-            "type": "object",
-            "attributes": {
               "asset": {
                 "type": "objectAttribute",
                 "value": {
@@ -7370,65 +7355,6 @@
           "value": {
             "type": "inline",
             "name": "riktekst_enkel"
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
-    "name": "spesial_seksjon",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "spesial_seksjon"
-          }
-        },
-        "modul": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "token_kategori"
-              }
-            ]
-          },
-          "optional": true
-        },
-        "token_ref": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "object",
-            "attributes": {
-              "_ref": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              },
-              "_type": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string",
-                  "value": "reference"
-                }
-              },
-              "_weak": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "boolean"
-                },
-                "optional": true
-              }
-            },
-            "dereferencesTo": "token_kategori"
           },
           "optional": true
         }

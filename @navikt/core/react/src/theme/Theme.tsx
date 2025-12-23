@@ -15,12 +15,6 @@ type RenameCSSContext = {
   cn: (...inputs: Parameters<typeof cl>) => ReturnType<typeof cl>;
 };
 
-const { Provider: RenameCSSProvider, useContext: useRenameCSS } =
-  createStrictContext<RenameCSSContext>({
-    name: "RenameCSS",
-    defaultValue: { cn: cl },
-  });
-
 export const compositeClassFunction = (
   ...inputs: Parameters<typeof cl>
 ): string => {
@@ -32,6 +26,12 @@ export const compositeClassFunction = (
 
   return classes.trim();
 };
+
+const { Provider: RenameCSSProvider, useContext: useRenameCSS } =
+  createStrictContext<RenameCSSContext>({
+    name: "RenameCSS",
+    defaultValue: { cn: compositeClassFunction },
+  });
 
 const RenameCSS = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -54,10 +54,9 @@ type ThemeContext = {
   theme?: "light" | "dark";
   color?: AkselColor;
   /**
-   * Indicates if Theme-component is used or not.
-   * @default false
+   * Indicates if Theme-component root-level or not
    */
-  isDarkside: boolean;
+  isRoot: boolean;
 };
 
 const { Provider: ThemeProvider, useContext: useThemeInternal } =
@@ -65,7 +64,7 @@ const { Provider: ThemeProvider, useContext: useThemeInternal } =
     name: "ThemeProvider",
     defaultValue: {
       color: DEFAULT_COLOR,
-      isDarkside: false,
+      isRoot: true,
     },
   });
 
@@ -79,7 +78,7 @@ export type ThemeProps = {
    * Sets default 'base'-color for application
    */
   "data-color"?: AkselColor;
-} & Omit<ThemeContext, "color" | "isDarkside"> &
+} & Omit<ThemeContext, "color" | "isRoot"> &
   AsChildProps;
 
 const Theme = forwardRef<HTMLDivElement, ThemeProps>(
@@ -95,7 +94,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
       "data-color": color = context?.color,
     } = props;
 
-    const isRoot = !context?.isDarkside;
+    const isRoot = context?.isRoot;
 
     const hasBackground =
       hasBackgroundProp ?? (isRoot && props.theme !== undefined);
@@ -103,7 +102,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
     const SlotElement = asChild ? Slot : "div";
 
     return (
-      <ThemeProvider theme={theme} color={color} isDarkside={true}>
+      <ThemeProvider theme={theme} color={color} isRoot={false}>
         <RenameCSS>
           <SlotElement
             ref={ref}

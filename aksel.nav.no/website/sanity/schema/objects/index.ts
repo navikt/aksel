@@ -15,6 +15,5 @@ export * from "./shared/relatert-innhold";
 export * from "./shared/riktekst";
 export * from "./shared/tabell";
 export * from "./shared/tips";
-export * from "./shared/unik-sidemodul";
 export * from "./shared/video";
 export * from "./templates/ExampletextBlock";

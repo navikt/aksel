@@ -35,6 +35,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
       translations,
       onClick,
       id: buttonId,
+      "data-color": color,
       ...rest
     } = props;
 
@@ -112,6 +113,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
             inputRef.current?.click(),
           )}
           data-disabled={inputProps.disabled}
+          data-color={color}
         >
           {!inputProps.disabled && (
             <>

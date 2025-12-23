@@ -84,11 +84,7 @@ function DesignsystemetOverviewCard({
         <ImageAsThemedSvg url={imageUrl} size={200} />
         {statusTagWithoutStable && (
           <Box asChild position="absolute" bottom="space-8" left="space-8">
-            <Tag
-              size="small"
-              variant="alt1-filled"
-              data-color={statusTag?.colorRole}
-            >
+            <Tag size="small" data-color={statusTag?.colorRole}>
               {statusTagWithoutStable.text}
             </Tag>
           </Box>

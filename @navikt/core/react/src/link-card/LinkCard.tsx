@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { BodyLong, Heading } from "../typography";
 import { createStrictContext } from "../util/create-strict-context";
 import {
@@ -25,6 +26,15 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
    * @default "medium"
    */
   size?: "small" | "medium";
+  /**
+   * Overrides inherited color.
+   *
+   *
+   * We reccomend avoiding status-colors like `info`, `success`, `warning` and `danger` in LinkCards.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   */
+  "data-color"?: AkselColor;
 }
 
 type LinkCardContextProps = {

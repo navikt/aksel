@@ -13,9 +13,6 @@ const Example = () => {
       <Button disabled variant="tertiary">
         Tertiary
       </Button>
-      <Button disabled variant="danger">
-        Danger
-      </Button>
     </HStack>
   );
 };
