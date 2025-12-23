@@ -1,7 +1,7 @@
 import fs from "node:fs";
-import packageJson from "@navikt/ds-react/package.json" with { type: "json" };
+import packageJson from "@navikt/ds-react/package.json";
 
-const exports = Object.keys(packageJson.exports).filter(
+const componentExports = Object.keys(packageJson.exports).filter(
   (key) =>
     key.startsWith("./") &&
     key !== "./index" &&
@@ -9,7 +9,7 @@ const exports = Object.keys(packageJson.exports).filter(
     /^\.\/[A-Z]/.test(key),
 );
 
-const lines = exports.map((key) => {
+const lines = componentExports.map((key) => {
   const importPath = key.replace("./", "@navikt/ds-react/");
   return `export * from "${importPath}";`;
 });
