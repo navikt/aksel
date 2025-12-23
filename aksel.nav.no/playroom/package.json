@@ -1,8 +1,9 @@
 {
   "name": "playroom",
   "scripts": {
-    "start": "playroom start",
-    "build:playroom": "playroom build"
+    "start": "yarn sync-imports && playroom start",
+    "build:playroom": "yarn sync-imports && playroom build",
+    "sync-imports": "node ./generate-imports.mjs"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.2",
@@ -11,7 +12,7 @@
     "babel-loader": "^9.1.3",
     "babel-plugin-preval": "^5.1.0",
     "css-loader": "^6.8.1",
-    "playroom": "^0.44.3",
+    "playroom": "^1.0.5",
     "style-loader": "^3.3.3"
   },
   "dependencies": {
