@@ -1,7 +1,7 @@
 import core, { Collection } from "jscodeshift";
 
 export default function removePropsFromComponent(
-  j: core.JSCodeshift,
+  _: core.JSCodeshift,
   root: Collection<any>,
   componentName: string,
   propsToRemove: string[],

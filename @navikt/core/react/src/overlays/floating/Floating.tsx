@@ -20,12 +20,9 @@ import React, {
 } from "react";
 import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
-import { createStrictContext } from "../../util/create-context";
-import {
-  useCallbackRef,
-  useClientLayoutEffect,
-  useMergeRefs,
-} from "../../util/hooks";
+import { createStrictContext } from "../../util/create-strict-context";
+import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
+import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
 import { AsChildProps } from "../../util/types";
 import {
@@ -44,7 +41,7 @@ type FloatingContextValue = {
   onAnchorChange: (anchor: Measurable | null) => void;
 };
 
-export const [FloatingProvider, useFloatingContext] =
+export const { Provider: FloatingProvider, useContext: useFloatingContext } =
   createStrictContext<FloatingContextValue>({
     name: "FloatingContext",
   });
@@ -169,10 +166,12 @@ type FloatingContentContextValue = {
   hideArrow: boolean;
 };
 
-const [FloatingContentProvider, useFloatingContentContext] =
-  createStrictContext<FloatingContentContextValue>({
-    name: "FloatingContentContext",
-  });
+const {
+  Provider: FloatingContentProvider,
+  useContext: useFloatingContentContext,
+} = createStrictContext<FloatingContentContextValue>({
+  name: "FloatingContentContext",
+});
 
 type Boundary = Element | null;
 
@@ -368,7 +367,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
 
     const [placedSide, placedAlign] = getSideAndAlignFromPlacement(placement);
 
-    const handlePlaced = useCallbackRef(onPlaced);
+    const handlePlaced = useEventCallback(onPlaced);
 
     useClientLayoutEffect(() => {
       isPositioned && handlePlaced?.();

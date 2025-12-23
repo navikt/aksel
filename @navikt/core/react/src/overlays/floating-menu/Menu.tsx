@@ -4,8 +4,9 @@ import { Portal } from "../../portal";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createStrictContext } from "../../util/create-context";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
-import { useCallbackRef, useId, useMergeRefs } from "../../util/hooks";
+import { useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
+import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating } from "../floating/Floating";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
@@ -94,7 +95,7 @@ const MenuRoot = ({
 }: MenuProps) => {
   const [content, setContent] = useState<MenuContentElement | null>(null);
   const isUsingKeyboardRef = useRef(false);
-  const handleOpenChange = useCallbackRef(onOpenChange);
+  const handleOpenChange = useEventCallback(onOpenChange);
 
   useEffect(() => {
     const globalDocument = globalThis.document;
@@ -605,7 +606,7 @@ const MenuRadioGroup = React.forwardRef<
   React.ElementRef<typeof MenuGroup>,
   MenuRadioGroupProps
 >(({ value, onValueChange, ...rest }: MenuRadioGroupProps, ref) => {
-  const handleValueChange = useCallbackRef(onValueChange);
+  const handleValueChange = useEventCallback(onValueChange);
   return (
     <RadioGroupProvider value={value} onValueChange={handleValueChange}>
       <MenuGroup {...rest} ref={ref} />
@@ -764,7 +765,7 @@ const MenuSub: React.FC<MenuSubProps> = ({
   const [content, setContent] = useState<MenuContentInternalElement | null>(
     null,
   );
-  const handleOpenChange = useCallbackRef(onOpenChange);
+  const handleOpenChange = useEventCallback(onOpenChange);
 
   // Prevent the parent menu from reopening with open submenus.
   useEffect(() => {

@@ -195,6 +195,7 @@ describe("getTokenRegex JS", () => {
 
     expect("ATextRed").toMatch(regex);
     expect(" ATextRed ").toMatch(regex);
+    // biome-ignore lint/suspicious/noTemplateCurlyInString: Testing token match inside template string
     expect(" background: `${ATextRed}` ").toMatch(regex);
   });
 

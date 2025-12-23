@@ -150,6 +150,7 @@ function CodeSandbox({ code }: { code: string }) {
       action="https://codesandbox.io/api/v1/sandboxes/define"
       method="POST"
       target="_blank"
+      rel="noopener"
       className={styles.kodeEksemplerCodeSandbox}
     >
       <input type="hidden" name="parameters" value={parameters} />

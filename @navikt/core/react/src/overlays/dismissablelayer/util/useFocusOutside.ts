@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useCallbackRef } from "../../../util/hooks";
+import { useEventCallback } from "../../../util/hooks/useEventCallback";
 import {
   CUSTOM_EVENTS,
   CustomFocusEvent,
@@ -14,7 +14,7 @@ export function useFocusOutside(
   ownerDocument: Document = globalThis?.document,
   enabled: boolean = true,
 ) {
-  const handleFocusOutside = useCallbackRef(callback) as EventListener;
+  const handleFocusOutside = useEventCallback(callback) as EventListener;
   const isFocusInsideReactTreeRef = useRef(false);
 
   useEffect(() => {

@@ -22,7 +22,7 @@ export default function viteSvgr({
   return {
     name: "vite-svgr-component",
 
-    async transform(code, id) {
+    async transform(_, id) {
       if (filter(id)) {
         const { transform } = await import("@svgr/core");
         const svgCode = await fs.promises.readFile(

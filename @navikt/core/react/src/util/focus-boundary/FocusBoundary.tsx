@@ -8,7 +8,7 @@ import React, {
 import { Slot } from "../../slot/Slot";
 import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
 import { hideNonTargetElements } from "../hideNonTargetElements";
-import { useLatestRef } from "../hooks/useLatestRef";
+import { useValueAsRef } from "../hooks/useValueAsRef";
 import { ownerDocument } from "../owner";
 import { resolveRef } from "../resolveRef";
 
@@ -83,8 +83,8 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
     }: FocusBoundaryProps,
     forwardedRef,
   ) => {
-    const initialFocusRef = useLatestRef(initialFocus);
-    const returnFocusRef = useLatestRef(returnFocus);
+    const initialFocusRef = useValueAsRef(initialFocus);
+    const returnFocusRef = useValueAsRef(returnFocus);
 
     const lastFocusedElementRef = useRef<HTMLElement | null>(null);
     const [container, setContainer] = useState<HTMLElement | null>(null);

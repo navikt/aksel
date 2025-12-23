@@ -11,11 +11,11 @@ describe("kebabCase", () => {
     "fooBar",
     "--foo-bar--",
     "__foo_bar__",
-  ].forEach((string) =>
+  ].forEach((string) => {
     test(`${string} is converted to foo-bar`, () => {
       expect(kebabCase(string)).toBe("foo-bar");
-    }),
-  );
+    });
+  });
 
   test(`spacing 3xl is converted to spacing-3xl`, () => {
     expect(kebabCase("spacing 3xl")).toBe("spacing-3xl");

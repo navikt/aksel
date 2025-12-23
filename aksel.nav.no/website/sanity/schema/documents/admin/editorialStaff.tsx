@@ -30,7 +30,7 @@ export const EditorialStaff = defineType({
       name: "avatar_id",
       type: "slug",
       hidden: showForDevsOnly(),
-      initialValue: async (params, context) => {
+      initialValue: async (_, context) => {
         const client = context.getClient({ apiVersion: SANITY_API_VERSION });
 
         let slugs: SlugValue[] = await client.fetch(
