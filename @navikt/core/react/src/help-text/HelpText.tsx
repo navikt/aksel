@@ -63,7 +63,6 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = useMergeRefs(buttonRef, ref);
     const [open, setOpen] = useState(false);
-
     const translate = useI18n("HelpText");
 
     const titleWithFallback = title || translate("title");

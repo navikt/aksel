@@ -51,7 +51,7 @@ const Example = () => {
     }
 
     const newDateEnd = new Date(newDateStart);
-    newDateEnd.setMonth(newDateEnd.getMonth() + parseInt(_windowSize));
+    newDateEnd.setMonth(newDateEnd.getMonth() + parseInt(_windowSize, 10));
 
     setCurrentWindow({ start: newDateStart, end: newDateEnd });
   }
@@ -85,7 +85,11 @@ const Example = () => {
                * to navigate through the timeline.
                * This is a design choice, and can be adjusted to fit your needs.
                */
-              updateWindow("previous", parseInt(windowSize) * 0.5, windowSize);
+              updateWindow(
+                "previous",
+                parseInt(windowSize, 10) * 0.5,
+                windowSize,
+              );
             }}
           />
           <Button
@@ -99,7 +103,7 @@ const Example = () => {
                * to navigate through the timeline.
                * This is a design choice, and can be adjusted to fit your needs.
                */
-              updateWindow("next", parseInt(windowSize) * 0.5, windowSize);
+              updateWindow("next", parseInt(windowSize, 10) * 0.5, windowSize);
             }}
           />
         </HStack>
@@ -109,7 +113,7 @@ const Example = () => {
           value={windowSize}
           onChange={(value) => {
             setWindowSize(value as WindowSize);
-            updateWindow("current", parseInt(value), value as WindowSize);
+            updateWindow("current", parseInt(value, 10), value as WindowSize);
           }}
         >
           <ToggleGroup.Item value="2" label="2 mnd" />

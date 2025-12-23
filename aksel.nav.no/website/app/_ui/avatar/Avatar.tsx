@@ -8,9 +8,10 @@ const MAX_AVATAR_COUNT = 30;
 
 export const avatarUrl = (avatar_id: string) => {
   let _avatar_id = stegaClean(avatar_id);
-  if (!Number.isNaN(parseInt(_avatar_id))) {
+  if (!Number.isNaN(parseInt(_avatar_id, 10))) {
     _avatar_id =
-      `${parseInt(_avatar_id) % MAX_AVATAR_COUNT}`.padStart(3, "0") ?? "broken";
+      `${parseInt(_avatar_id, 10) % MAX_AVATAR_COUNT}`.padStart(3, "0") ??
+      "broken";
   }
   return `/avatars/${_avatar_id}.svg`;
 };

@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useAnimationsFinished } from "./useAnimationsFinished";
 import { useEventCallback } from "./useEventCallback";
-import { useLatestRef } from "./useLatestRef";
+import { useValueAsRef } from "./useValueAsRef";
 
 interface useOpenChangeAnimationCompleteParameters {
   /**
@@ -44,7 +44,7 @@ export function useOpenChangeAnimationComplete(
     onComplete: onCompleteParam,
   } = parameters;
 
-  const openRef = useLatestRef(open);
+  const openRef = useValueAsRef(open);
   const onComplete = useEventCallback(onCompleteParam);
   const runOnceAnimationsFinish = useAnimationsFinished(ref, open);
 

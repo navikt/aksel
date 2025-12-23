@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+
+/** biome-ignore-all lint/performance/noImgElement: img is fine here */
 import NextLink from "next/link";
 import { BodyLong, HGrid, Link } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
@@ -58,7 +60,7 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
                   </Link>
                 </>
               ) : (
-                <>{`${kilde?.prefix}: ${kilde?.tekst}`}</>
+                `${kilde?.prefix}: ${kilde?.tekst}`
               )}
             </BodyLong>
           )}

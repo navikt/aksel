@@ -131,7 +131,9 @@ const SelectionTable = ({
               indeterminate={selectedRows.length === 1}
               onChange={() => {
                 if (selectedRows.length === 2) {
-                  selectedRows.forEach((id) => toggleSelectedRow(id));
+                  selectedRows.forEach((id) => {
+                    toggleSelectedRow(id);
+                  });
                 } else {
                   ["1", "2"].forEach((id) => {
                     if (!selectedRows.includes(id)) {

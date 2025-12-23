@@ -120,7 +120,9 @@ async function main() {
   fs.writeFileSync(`${OUT_DIST_DIR}tokens.css`, code);
 
   /* Cleanup temp-files */
-  bundledCSSFiles.forEach((path) => fs.unlinkSync(`${OUT_DIST_DIR}${path}`));
+  bundledCSSFiles.forEach((path) => {
+    fs.unlinkSync(`${OUT_DIST_DIR}${path}`);
+  });
 }
 
 /**

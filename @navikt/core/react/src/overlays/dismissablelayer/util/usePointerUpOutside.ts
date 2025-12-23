@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useCallbackRef } from "../../../util/hooks";
+import { useEventCallback } from "../../../util/hooks/useEventCallback";
 import {
   CUSTOM_EVENTS,
   CustomPointerEvent,
@@ -17,7 +17,7 @@ export function usePointerUpOutside(
   enabled: boolean = true,
 ) {
   // Keep callback ref stable
-  const handlePointerUpOutside = useCallbackRef(callback) as EventListener;
+  const handlePointerUpOutside = useEventCallback(callback) as EventListener;
   // Tracks if the pointer interaction started inside the React subtree.
   const isPointerInsideReactTreeRef = useRef(false);
 

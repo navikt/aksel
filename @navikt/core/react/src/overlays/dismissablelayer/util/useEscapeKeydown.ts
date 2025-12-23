@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { useCallbackRef } from "../../../util/hooks";
+import { useEventCallback } from "../../../util/hooks/useEventCallback";
 
 export function useEscapeKeydown(
   callback?: (event: KeyboardEvent) => void,
   ownerDocument: Document = globalThis?.document,
   enabled: boolean = true,
 ) {
-  const onEscapeKeyDown = useCallbackRef(callback);
+  const onEscapeKeyDown = useEventCallback(callback);
 
   useEffect(() => {
     if (!enabled) {

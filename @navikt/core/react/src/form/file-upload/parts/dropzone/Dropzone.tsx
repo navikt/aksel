@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { CircleSlashIcon, CloudUpIcon } from "@navikt/aksel-icons";
@@ -99,7 +102,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
             {description}
           </BodyShort>
         )}
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+        {/** biome-ignore lint/a11y/noStaticElementInteractions: Assistive technologies will use the input within.  */}
         <div
           className={cn("navds-dropzone__area")}
           onDragEnter={dropzoneCtx.onDragEnter}

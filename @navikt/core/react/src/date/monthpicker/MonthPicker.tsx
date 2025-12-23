@@ -1,7 +1,6 @@
 import React, { forwardRef, useState } from "react";
 import { useRenameCSS } from "../../theme/Theme";
-import { useControllableState, useId } from "../../util/hooks";
-import { useMergeRefs } from "../../util/hooks/useMergeRefs";
+import { useControllableState, useId, useMergeRefs } from "../../util/hooks";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import { DateDialog } from "../Date.Dialog";
 import { DateInputContextProvider, MonthPickerInput } from "../Date.Input";

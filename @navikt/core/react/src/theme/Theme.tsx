@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Slot } from "../slot/Slot";
 import { AkselColor } from "../types";
-import { createContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-strict-context";
 import { AsChildProps } from "../util/types";
 
 /* -------------------------------------------------------------------------- */
@@ -27,12 +27,11 @@ export const compositeClassFunction = (
   return classes.trim();
 };
 
-const [RenameCSSProvider, useRenameCSS] = createContext<RenameCSSContext>({
-  hookName: "useRenameCSS",
-  name: "RenameCSS",
-  providerName: "RenameCSSProvider",
-  defaultValue: { cn: compositeClassFunction },
-});
+const { Provider: RenameCSSProvider, useContext: useRenameCSS } =
+  createStrictContext<RenameCSSContext>({
+    name: "RenameCSS",
+    defaultValue: { cn: compositeClassFunction },
+  });
 
 const RenameCSS = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -60,15 +59,14 @@ type ThemeContext = {
   isRoot: boolean;
 };
 
-const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
-  hookName: "useTheme",
-  name: "ThemeProvider",
-  providerName: "ThemeProvider",
-  defaultValue: {
-    color: DEFAULT_COLOR,
-    isRoot: true,
-  },
-});
+const { Provider: ThemeProvider, useContext: useThemeInternal } =
+  createStrictContext<ThemeContext>({
+    name: "ThemeProvider",
+    defaultValue: {
+      color: DEFAULT_COLOR,
+      isRoot: true,
+    },
+  });
 
 export type ThemeProps = {
   className?: string;
@@ -85,7 +83,7 @@ export type ThemeProps = {
 
 const Theme = forwardRef<HTMLDivElement, ThemeProps>(
   (props: ThemeProps, ref) => {
-    const context = useThemeInternal(false);
+    const context = useThemeInternal();
 
     const {
       children,

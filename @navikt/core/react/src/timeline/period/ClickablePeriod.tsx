@@ -98,7 +98,7 @@ const ClickablePeriod = React.memo(
           type="button"
           ref={(r) => {
             firstFocus && addFocusable(r, index);
-            mergedRef(r);
+            mergedRef?.(r);
           }}
           aria-label={label}
           className={cn(
