@@ -1,4 +1,4 @@
-import { createStrictContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-strict-context";
 
 interface StepperContextValue {
   onStepChange: (step: number) => void;
@@ -9,8 +9,10 @@ interface StepperContextValue {
   index: number;
 }
 
-export const [StepperContextProvider, useStepperContext] =
-  createStrictContext<StepperContextValue>({
-    name: "StepperContext",
-    errorMessage: "<Stepper.Step> has to be used within <Stepper>",
-  });
+export const {
+  Provider: StepperContextProvider,
+  useContext: useStepperContext,
+} = createStrictContext<StepperContextValue>({
+  name: "StepperContext",
+  errorMessage: "<Stepper.Step> has to be used within <Stepper>",
+});

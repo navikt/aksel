@@ -1,4 +1,4 @@
-import { createStrictContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-strict-context";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
 import { TabsProps } from "./Tabs.types";
 import { useTabs } from "./useTabs";
@@ -17,7 +17,7 @@ type TabsProviderProps = ReturnType<typeof useTabs> &
   >;
 
 /* State context */
-export const [TabsProvider, useTabsContext] =
+export const { Provider: TabsProvider, useContext: useTabsContext } =
   createStrictContext<TabsProviderProps>({
     name: "TabsContext",
     errorMessage:

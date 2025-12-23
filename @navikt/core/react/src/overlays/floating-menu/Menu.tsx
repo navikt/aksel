@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { Portal } from "../../portal";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { createStrictContext } from "../../util/create-context";
+import { createStrictContext } from "../../util/create-strict-context";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
@@ -72,9 +72,10 @@ type MenuContextValue = {
   onContentChange: (content: MenuContentElementRef | null) => void;
 };
 
-const [MenuProvider, useMenuContext] = createStrictContext<MenuContextValue>({
-  name: "MenuContext",
-});
+const { Provider: MenuProvider, useContext: useMenuContext } =
+  createStrictContext<MenuContextValue>({
+    name: "MenuContext",
+  });
 
 type MenuRootContextValue = {
   onClose: () => void;
@@ -82,7 +83,7 @@ type MenuRootContextValue = {
   modal: boolean;
 };
 
-const [MenuRootProvider, useMenuRootContext] =
+const { Provider: MenuRootProvider, useContext: useMenuRootContext } =
   createStrictContext<MenuRootContextValue>({
     name: "MenuRootContext",
   });
@@ -588,7 +589,7 @@ const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
 /* -------------------------------------------------------------------------- */
 /*                                 Menu Radio                                 */
 /* -------------------------------------------------------------------------- */
-const [RadioGroupProvider, useMenuRadioGroupContext] =
+const { Provider: RadioGroupProvider, useContext: useMenuRadioGroupContext } =
   createStrictContext<MenuRadioGroupProps>({
     name: "MenuRadioGroupContext",
     defaultValue: {
@@ -617,12 +618,14 @@ const MenuRadioGroup = React.forwardRef<
 /* -------------------------------------------------------------------------- */
 /*                             Menu Item Indicator                            */
 /* -------------------------------------------------------------------------- */
-const [MenuItemIndicatorProvider, useMenuItemIndicatorContext] =
-  createStrictContext<{
-    state: CheckedState;
-  }>({
-    name: "MenuItemIndicatorContext",
-  });
+const {
+  Provider: MenuItemIndicatorProvider,
+  useContext: useMenuItemIndicatorContext,
+} = createStrictContext<{
+  state: CheckedState;
+}>({
+  name: "MenuItemIndicatorContext",
+});
 
 type MenuItemIndicatorProps = SlottedDivProps;
 
@@ -741,7 +744,7 @@ type MenuSubContextValue = {
   onTriggerChange: (trigger: MenuItemElement | null) => void;
 };
 
-const [MenuSubProvider, useMenuSubContext] =
+const { Provider: MenuSubProvider, useContext: useMenuSubContext } =
   createStrictContext<MenuSubContextValue>({
     name: "MenuSubContext",
   });

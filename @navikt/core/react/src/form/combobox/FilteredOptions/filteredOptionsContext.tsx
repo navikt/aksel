@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { SetStateAction, useCallback, useMemo, useState } from "react";
-import { createStrictContext } from "../../../util/create-context";
+import { createStrictContext } from "../../../util/create-strict-context";
 import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -36,12 +36,14 @@ type FilteredOptionsContextValue = {
   shouldAutocomplete?: boolean;
   virtualFocus: VirtualFocusType;
 };
-const [FilteredOptionsContextProvider, useFilteredOptionsContext] =
-  createStrictContext<FilteredOptionsContextValue>({
-    name: "FilteredOptionsContext",
-    errorMessage:
-      "useFilteredOptionsContext must be used within a FilteredOptionsProvider",
-  });
+const {
+  Provider: FilteredOptionsContextProvider,
+  useContext: useFilteredOptionsContext,
+} = createStrictContext<FilteredOptionsContextValue>({
+  name: "FilteredOptionsContext",
+  errorMessage:
+    "useFilteredOptionsContext must be used within a FilteredOptionsProvider",
+});
 
 const FilteredOptionsProvider = ({
   children,

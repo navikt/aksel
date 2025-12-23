@@ -1,6 +1,6 @@
 import { Locale, isSameYear } from "date-fns";
 import React from "react";
-import { createStrictContext } from "../../util/create-context";
+import { createStrictContext } from "../../util/create-strict-context";
 import { useControllableState } from "../../util/hooks";
 import { clampDisplayYear } from "../date-utils";
 import { MonthPickerProps } from "./MonthPicker.types";
@@ -33,12 +33,14 @@ type MonthPickerContextProps = {
   toDate?: MonthPickerProps["toDate"];
 };
 
-const [MonthPickerContextProvider, useMonthPickerContext] =
-  createStrictContext<MonthPickerContextProps>({
-    name: "MonthPickerContext",
-    errorMessage:
-      "useMonthPickerContext must be used within an MonthPickerContextProvider",
-  });
+const {
+  Provider: MonthPickerContextProvider,
+  useContext: useMonthPickerContext,
+} = createStrictContext<MonthPickerContextProps>({
+  name: "MonthPickerContext",
+  errorMessage:
+    "useMonthPickerContext must be used within an MonthPickerContextProvider",
+});
 
 const MonthPickerProvider = ({
   children,

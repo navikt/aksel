@@ -1,5 +1,5 @@
 import { AkselColor } from "../../../types";
-import { createStrictContext } from "../../../util/create-context";
+import { createStrictContext } from "../../../util/create-strict-context";
 
 type BaseAlertContextProps = {
   size: "medium" | "small";
@@ -8,7 +8,7 @@ type BaseAlertContextProps = {
   statusId?: string;
 };
 
-const [BaseAlertProvider, useBaseAlert] =
+const { Provider: BaseAlertProvider, useContext: useBaseAlert } =
   createStrictContext<BaseAlertContextProps>({
     name: "BaseAlert",
   });

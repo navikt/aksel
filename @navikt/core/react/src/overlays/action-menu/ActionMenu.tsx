@@ -5,7 +5,7 @@ import { Slot } from "../../slot/Slot";
 import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { OverridableComponent, useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { createStrictContext } from "../../util/create-context";
+import { createStrictContext } from "../../util/create-strict-context";
 import { useMergeRefs } from "../../util/hooks";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { requireReactElement } from "../../util/requireReactElement";
@@ -24,7 +24,7 @@ type ActionMenuContextValue = {
   rootElement: MenuPortalProps["rootElement"];
 };
 
-const [ActionMenuProvider, useActionMenuContext] =
+const { Provider: ActionMenuProvider, useContext: useActionMenuContext } =
   createStrictContext<ActionMenuContextValue>({
     name: "ActionMenuContext",
     errorMessage:

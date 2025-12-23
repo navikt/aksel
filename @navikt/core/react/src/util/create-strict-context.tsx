@@ -29,7 +29,7 @@ function createStrictContext<T>(options: {
   name: string;
   errorMessage?: string;
   defaultValue: T;
-}): readonly [React.FC<ProviderProps<T>>, () => T];
+}): { Provider: React.FC<ProviderProps<T>>; useContext: () => T };
 
 /**
  * When no defaultValue is provided, context may be undefined.
@@ -41,10 +41,12 @@ function createStrictContext<T>(options: {
   name: string;
   errorMessage?: string;
   defaultValue?: undefined;
-}): readonly [
-  React.FC<ProviderProps<T>>,
-  <S extends boolean = true>(strict?: S) => S extends true ? T : T | undefined,
-];
+}): {
+  Provider: React.FC<ProviderProps<T>>;
+  useContext: <S extends boolean = true>(
+    strict?: S,
+  ) => S extends true ? T : T | undefined;
+};
 
 /* -----------------------------------------------------------------------------
  * Implementation
@@ -56,7 +58,7 @@ function createStrictContext<T>(options: {
   defaultValue?: T;
 }) {
   const { name, defaultValue, errorMessage } = options;
-  const hasDefault = defaultValue !== undefined;
+  const hasDefault = "defaultValue" in options;
 
   const Context = createReactContext<T | undefined>(defaultValue);
   Context.displayName = name;
@@ -83,7 +85,7 @@ function createStrictContext<T>(options: {
     return context;
   }
 
-  return [Provider, useContext] as const;
+  return { Provider, useContext } as const;
 }
 
 export { createStrictContext };

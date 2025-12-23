@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Slot } from "../slot/Slot";
 import { AkselColor } from "../types";
-import { createStrictContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-strict-context";
 import { AsChildProps } from "../util/types";
 
 /* -------------------------------------------------------------------------- */
@@ -15,12 +15,11 @@ type RenameCSSContext = {
   cn: (...inputs: Parameters<typeof cl>) => ReturnType<typeof cl>;
 };
 
-const [RenameCSSProvider, useRenameCSS] = createStrictContext<RenameCSSContext>(
-  {
+const { Provider: RenameCSSProvider, useContext: useRenameCSS } =
+  createStrictContext<RenameCSSContext>({
     name: "RenameCSS",
     defaultValue: { cn: cl },
-  },
-);
+  });
 
 export const compositeClassFunction = (
   ...inputs: Parameters<typeof cl>
@@ -61,13 +60,14 @@ type ThemeContext = {
   isDarkside: boolean;
 };
 
-const [ThemeProvider, useThemeInternal] = createStrictContext<ThemeContext>({
-  name: "ThemeProvider",
-  defaultValue: {
-    color: DEFAULT_COLOR,
-    isDarkside: false,
-  },
-});
+const { Provider: ThemeProvider, useContext: useThemeInternal } =
+  createStrictContext<ThemeContext>({
+    name: "ThemeProvider",
+    defaultValue: {
+      color: DEFAULT_COLOR,
+      isDarkside: false,
+    },
+  });
 
 export type ThemeProps = {
   className?: string;

@@ -5,7 +5,7 @@ import { FormFieldProps, useFormField } from "../form/useFormField";
 import { useRenameCSS } from "../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit } from "../util";
-import { createStrictContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-strict-context";
 import { useDateTranslationContext } from "./Date.locale";
 
 interface DateInputContextProps {
@@ -27,11 +27,13 @@ interface DateInputContextProps {
   defined: boolean;
 }
 
-export const [DateInputContextProvider, useDateInputContext] =
-  createStrictContext<DateInputContextProps>({
-    name: "DateInputContext",
-    errorMessage: "useDateInputContext must be used with DateInputContext",
-  });
+export const {
+  Provider: DateInputContextProvider,
+  useContext: useDateInputContext,
+} = createStrictContext<DateInputContextProps>({
+  name: "DateInputContext",
+  errorMessage: "useDateInputContext must be used with DateInputContext",
+});
 
 export interface DateInputProps
   extends FormFieldProps,

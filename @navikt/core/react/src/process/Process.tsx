@@ -8,7 +8,7 @@ import React, {
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
-import { createStrictContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-strict-context";
 import { useMergeRefs } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
@@ -34,7 +34,7 @@ type ProcessContextProps = Pick<ProcessProps, "hideStatusText"> & {
   syncAriaControls: () => void;
 };
 
-const [ProcessContextProvider, useProcessContext] =
+const { Provider: ProcessContextProvider, useContext: useProcessContext } =
   createStrictContext<ProcessContextProps>({
     name: "ProcessContext",
     errorMessage:
