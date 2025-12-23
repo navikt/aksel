@@ -13,58 +13,56 @@ export default {
 export const ClickableRowTest = {
   render: ({ onOpenChange }) => {
     return (
-      <>
-        <Table zebraStripes>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell aria-hidden />
-              <Table.HeaderCell aria-hidden />
-              <Table.HeaderCell aria-hidden />
-              <Table.HeaderCell aria-hidden />
-              <Table.HeaderCell aria-hidden />
-              <Table.HeaderCell aria-hidden />
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Table.ExpandableRow
-              content={<div>placeholder row 2</div>}
-              togglePlacement="right"
-              data-testid="row1"
-              expandOnRowClick
-              onOpenChange={onOpenChange}
-            >
-              <Table.DataCell>
-                <div data-testid="cell1">Should be clickable</div>
-              </Table.DataCell>
-              <Table.DataCell data-testid="cell2">
-                Should also be clickable
-              </Table.DataCell>
+      <Table zebraStripes>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell aria-hidden />
+            <Table.HeaderCell aria-hidden />
+            <Table.HeaderCell aria-hidden />
+            <Table.HeaderCell aria-hidden />
+            <Table.HeaderCell aria-hidden />
+            <Table.HeaderCell aria-hidden />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          <Table.ExpandableRow
+            content={<div>placeholder row 2</div>}
+            togglePlacement="right"
+            data-testid="row1"
+            expandOnRowClick
+            onOpenChange={onOpenChange}
+          >
+            <Table.DataCell>
+              <div data-testid="cell1">Should be clickable</div>
+            </Table.DataCell>
+            <Table.DataCell data-testid="cell2">
+              Should also be clickable
+            </Table.DataCell>
 
-              <Table.DataCell>
-                <button data-testid="cell3">Should not be clickable</button>
-              </Table.DataCell>
-              <Table.DataCell>
+            <Table.DataCell>
+              <button data-testid="cell3">Should not be clickable</button>
+            </Table.DataCell>
+            <Table.DataCell>
+              <div>
                 <div>
-                  <div>
-                    <button data-testid="cell4">
-                      Nested should not be clickable
-                    </button>
-                  </div>
+                  <button data-testid="cell4">
+                    Nested should not be clickable
+                  </button>
                 </div>
-              </Table.DataCell>
-              <Table.DataCell>
+              </div>
+            </Table.DataCell>
+            <Table.DataCell>
+              <div>
                 <div>
-                  <div>
-                    <button data-testid="cell4">
-                      <span>2x nested should not be clickable</span>
-                    </button>
-                  </div>
+                  <button data-testid="cell4">
+                    <span>2x nested should not be clickable</span>
+                  </button>
                 </div>
-              </Table.DataCell>
-            </Table.ExpandableRow>
-          </Table.Body>
-        </Table>
-      </>
+              </div>
+            </Table.DataCell>
+          </Table.ExpandableRow>
+        </Table.Body>
+      </Table>
     );
   },
   args: {

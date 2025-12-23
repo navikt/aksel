@@ -29,7 +29,9 @@ describe("migrations", () => {
   test("No overrides", () => {
     const overrideValues = new Set<string>();
     Object.values(migrationStringOverride).forEach((overrides) => {
-      overrides.forEach((override) => overrideValues.add(override.value));
+      overrides.forEach((override) => {
+        overrideValues.add(override.value);
+      });
     });
 
     expect(values.filter((x) => overrideValues.has(x))).toEqual([]);

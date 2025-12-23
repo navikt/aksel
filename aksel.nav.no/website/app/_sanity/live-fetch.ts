@@ -90,15 +90,15 @@ async function fetchAllSanityPages(): Promise<
   paths.push({ slug: `/monster-maler`, lastMod: null });
 
   Object.values(PAGE_ROUTES).forEach((category) => {
-    category.root.forEach((page) =>
-      paths.push({ slug: `/${page.slug}`, lastMod: null }),
-    );
+    category.root.forEach((page) => {
+      paths.push({ slug: `/${page.slug}`, lastMod: null });
+    });
 
     if (category?.nested) {
       Object.values(category.nested).forEach((nestedCategory) => {
-        nestedCategory.forEach((page) =>
-          paths.push({ slug: `/${page.slug}`, lastMod: null }),
-        );
+        nestedCategory.forEach((page) => {
+          paths.push({ slug: `/${page.slug}`, lastMod: null });
+        });
       });
     }
   });
