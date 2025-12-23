@@ -4,7 +4,7 @@ import cl from "clsx";
 import { stegaClean } from "next-sanity";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
-import { TOC_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
+import { TOC_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { removeEmojiesFromText } from "@/ui-utils/format-text";
@@ -13,7 +13,7 @@ import { TableOfContentsScroll } from "./TableOfContents.scroll";
 import { useTableOfContents } from "./useTableOfContents";
 
 type TableOfContentsProps = {
-  toc: TOC_BY_SLUG_QUERYResult;
+  toc: TOC_BY_SLUG_QUERY_RESULT;
   variant?: "default" | "subtle";
   feedback?: {
     name?: string;

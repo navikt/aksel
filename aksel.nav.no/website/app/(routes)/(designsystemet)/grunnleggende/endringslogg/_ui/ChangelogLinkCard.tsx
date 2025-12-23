@@ -7,14 +7,14 @@ import {
   LinkCardFooter,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
-import { ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult } from "@/app/_sanity/query-types";
+import { ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { capitalizeText } from "@/ui-utils/format-text";
 
 const ChangelogLinkCard = ({
   logEntry,
   label,
 }: {
-  logEntry: NonNullable<ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult>["primary"];
+  logEntry: NonNullable<ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT>["primary"];
   label: string;
 }) => (
   <VStack gap="space-12">

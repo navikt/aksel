@@ -19,7 +19,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
+import { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { capitalizeText } from "@/ui-utils/format-text";
@@ -29,7 +29,7 @@ import ShowMore from "./ShowMore";
 const Hero = ({
   herobilde,
 }: {
-  herobilde: NonNullable<ENDRINGSLOGG_QUERYResult[number]["herobilde"]>;
+  herobilde: NonNullable<ENDRINGSLOGG_QUERY_RESULT[number]["herobilde"]>;
 }) => (
   <Image
     className={styles.herobilde}
@@ -44,7 +44,7 @@ const Hero = ({
 );
 
 interface Props {
-  logEntry: ENDRINGSLOGG_QUERYResult[number];
+  logEntry: ENDRINGSLOGG_QUERY_RESULT[number];
   isLastOfMonth: boolean;
   isLastEntry: boolean;
 }

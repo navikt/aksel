@@ -11,7 +11,7 @@ import { GodPraksisHeroProvider } from "@/app/(routes)/(god-praksis)/_ui/hero/He
 import { GodPraksisPictogram } from "@/app/(routes)/(root)/_ui/pictogram/GodPraksisPictogram";
 import { sanityFetch } from "@/app/_sanity/live";
 import { GOD_PRAKSIS_ALL_TEMA_QUERY } from "@/app/_sanity/queries";
-import { GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
+import { GOD_PRAKSIS_TEMA_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import styles from "./Hero.module.css";
@@ -19,7 +19,7 @@ import styles from "./Hero.module.css";
 type GpIntroHeroProps = {
   title: string;
   description?: string;
-  image?: NonNullable<GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult>["pictogram"];
+  image?: NonNullable<GOD_PRAKSIS_TEMA_BY_SLUG_QUERY_RESULT>["pictogram"];
   isCollapsible?: boolean;
 };
 

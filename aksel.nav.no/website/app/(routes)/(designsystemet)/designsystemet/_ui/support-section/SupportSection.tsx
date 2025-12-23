@@ -12,11 +12,11 @@ import {
   LinkCardFooter,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
-import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
+import { DS_FRONT_PAGE_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { GithubIcon, SlackIcon } from "@/assets/Icons";
 
 type SupportData = NonNullable<
-  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_support"]
+  NonNullable<DS_FRONT_PAGE_QUERY_RESULT>["ds_support"]
 >;
 type SupportLink = NonNullable<SupportData[number]["link"]>;
 
