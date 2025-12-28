@@ -4,15 +4,14 @@ export type PrimitiveAsChildProps =
       /**
        * Renders the component and its child as a single element,
        * merging the props of the component with the props of the child.
+       *
        * @example
-       * ```tsx
        * <Component asChild data-prop>
        *   <ChildComponent data-child />
        * </Component>
        *
        * // Renders
        * <div data-prop data-child />
-       * ```
        */
       asChild: true;
       /**
@@ -29,14 +28,12 @@ export type PrimitiveAsChildProps =
        * merging the props of the component with the props of the child.
        *
        * @example
-       * ```tsx
        * <Component asChild data-prop>
        *   <ChildComponent data-child />
        * </Component>
        *
        * // Renders
        * <div data-prop data-child />
-       * ```
        */
       asChild?: false;
     };
