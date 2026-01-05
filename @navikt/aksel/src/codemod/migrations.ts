@@ -307,9 +307,7 @@ export function getMigrationString() {
   str += chalk.gray(
     "Run with a version key to interactively select migrations:\n",
   );
-  Object.keys(migrations).forEach((version) => {
-    str += `${chalk.blue(version)}, `;
-  });
+  str += chalk.blue(getVersionKeys().join(", "));
 
   return str;
 }
