@@ -5,6 +5,29 @@ import { AccordionContext } from "./AccordionContext";
 import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
 import AccordionItem, { AccordionItemProps } from "./AccordionItem";
 
+let hasWarnedAboutItems = false;
+
+function checkAccordionItems() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  React.useEffect(() => {
+    document.querySelectorAll(".aksel-accordion").forEach((accordion) => {
+      if (hasWarnedAboutItems || accordion.children.length !== 1) {
+        return;
+      }
+      if (accordion.nextElementSibling?.classList.contains("aksel-accordion")) {
+        console.warn(
+          "[Aksel] Do not put multiple accordions directly after each other. Use one <Accordion> with multiple <Accordion.Item> instead.",
+        );
+      } else {
+        console.warn(
+          "[Aksel] Accordions should have more than one item. Consider using ExpansionPanel instead.",
+        );
+      }
+      hasWarnedAboutItems = true;
+    });
+  }, []);
+}
+
 interface AccordionComponent
   extends React.ForwardRefExoticComponent<
     AccordionProps & React.RefAttributes<HTMLDivElement>
@@ -88,6 +111,10 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     ref,
   ) => {
     const { cn } = useRenameCSS();
+
+    if (process.env.NODE_ENV !== "production") {
+      checkAccordionItems();
+    }
 
     return (
       <AccordionContext.Provider
