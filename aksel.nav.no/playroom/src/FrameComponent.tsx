@@ -11,7 +11,7 @@ const FrameComponent = ({
 }) => {
   return (
     <Theme theme={theme} asChild>
-      <div id="sandbox-wrapper" style={{ height: "100vh" }}>
+      <div id="sandbox-wrapper" style={{ minHeight: "100vh" }}>
         {children}
       </div>
     </Theme>
