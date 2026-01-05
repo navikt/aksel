@@ -1,5 +1,5 @@
 "use client";
-export { Dialog } from "./root/DialogRoot";
+export { default as Dialog } from "./root/DialogRoot";
 export type { DialogProps } from "./root/DialogRoot";
 export { DialogTrigger } from "./trigger/DialogTrigger";
 export type { DialogTriggerProps } from "./trigger/DialogTrigger";
