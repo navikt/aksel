@@ -55,12 +55,12 @@ async function runVersionMigration(
   const choices = [
     ...overrideMigrations.map((migration) => ({
       name: migration.value,
-      message: `${chalk.blue(migration.value)}: ${chalk.gray(migration.description)}\n`,
+      message: `${chalk.blue(migration.value)}: ${chalk.gray(migration.description)}`,
       value: migration.value,
     })),
     ...availableMigrations.map((migration) => ({
       name: migration.value,
-      message: `${chalk.blue(migration.value)}: ${chalk.gray(migration.description)}\n`,
+      message: `${chalk.blue(migration.value)}: ${chalk.gray(migration.description)}`,
       value: migration.value,
     })),
   ];
