@@ -72,7 +72,7 @@ export type ThemeProps = {
   className?: string;
   /**
    * Whether to apply the default background.
-   * @default true
+   * @default `true` if this is the root instance and `theme` is defined, otherwise `false`.
    */
   hasBackground?: boolean;
   /**
@@ -91,7 +91,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
       className,
       asChild = false,
       theme = context?.theme,
-      hasBackground: hasBackgroundProp = true,
+      hasBackground: hasBackgroundProp,
       "data-color": color = context?.color,
     } = props;
 
