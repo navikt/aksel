@@ -48,13 +48,13 @@ const DEFAULT_COLOR: AkselColor = "accent";
 
 type ThemeContext = {
   /**
-   * Color theme
-   * @default Inherits parent theme, or "light" if root
+   * Color theme.
+   * @default Inherits parent theme, or "light" if root.
    */
   theme?: "light" | "dark";
   color?: AkselColor;
   /**
-   * Indicates if Theme-component root-level or not
+   * Indicates if Theme-component is on root-level or not.
    */
   isRoot: boolean;
 };
@@ -71,11 +71,12 @@ const { Provider: ThemeProvider, useContext: useThemeInternal } =
 export type ThemeProps = {
   className?: string;
   /**
-   * Sets default background when enabled
+   * Whether to apply the default background.
+   * @default `true` if this is the root instance and `theme` is defined, otherwise `false`.
    */
   hasBackground?: boolean;
   /**
-   * Sets default 'base'-color for application
+   * Changes default 'base'-color for application.
    */
   "data-color"?: AkselColor;
 } & Omit<ThemeContext, "color" | "isRoot"> &
@@ -90,7 +91,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
       className,
       asChild = false,
       theme = context?.theme,
-      hasBackground: hasBackgroundProp = true,
+      hasBackground: hasBackgroundProp,
       "data-color": color = context?.color,
     } = props;
 
