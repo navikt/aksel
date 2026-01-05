@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* CSS is ordered by specificity, so that browsers without layers fall backs to good defaults */
-@layer aksel.reset, aksel.theming, aksel.baseline, aksel.print, aksel.typography, aksel.components.core, aksel.components.form, aksel.components.modules, aksel.layout;
+@layer aksel.reset, aksel.theming, aksel.baseline, aksel.print, aksel.typography, aksel.components.core, aksel.components.core.loader, aksel.components.core.button, aksel.components.form, aksel.components.modules, aksel.layout;
 
 /* ----------------------------- CSS foundations ---------------------------- */
 @import "./baseline/fonts.css" layer(aksel.typography);
@@ -13,8 +13,9 @@
 /* ------------------------------- Components ------------------------------- */
 @import "./theme.css" layer(aksel.components.core);
 @import "./typography.css" layer(aksel.components.core);
-@import "./button.css" layer(aksel.components.core);
 @import "./chips.css" layer(aksel.components.core);
+@import "./loader.css" layer(aksel.components.core.loader);
+@import "./button.css" layer(aksel.components.core.button);
 
 /**
   * Most components depend on typo-styles, so we import them first.
@@ -42,7 +43,6 @@
 @import "./link-panel.css" layer(aksel.components.modules);
 @import "./link-anchor.css" layer(aksel.components.modules);
 @import "./link-card.css" layer(aksel.components.modules);
-@import "./loader.css" layer(aksel.components.modules);
 @import "./modal.css" layer(aksel.components.modules);
 @import "./pagination.css" layer(aksel.components.modules);
 @import "./popover.css" layer(aksel.components.modules);

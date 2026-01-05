@@ -1,5 +1,16 @@
 /* ------------------------- Global typo-definitions ------------------------ */
 
+:root,
+:host,
+.light {
+  color: var(--ax-text-neutral);
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
 body,
 :host {
   font-family: var(--ax-font-family, "Source Sans 3", "Source Sans Pro", Arial, sans-serif);
