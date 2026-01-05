@@ -3264,10 +3264,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/rest-api-spec@npm:^0.34.0":
-  version: 0.34.0
-  resolution: "@figma/rest-api-spec@npm:0.34.0"
-  checksum: 10/9d98a331096c9e98e66bca7a0e54fa693d1f30e69eade80922ef19a263e9b7ac8b4c4c03fe283cbcb3616aa13f923b691c589b0d7b379475bef5c6a638833e4b
+"@figma/rest-api-spec@npm:^0.35.0":
+  version: 0.35.0
+  resolution: "@figma/rest-api-spec@npm:0.35.0"
+  checksum: 10/c529f9e7b418ff9a8266b901089d8b653dd6a180304c508f38eb943dea7ee67ac9780a30d6dad5c3c954501da584ec92de774757115a192156b7898dc62345ad
   languageName: node
   linkType: hard
 
@@ -4476,7 +4476,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
-    "@figma/rest-api-spec": "npm:^0.34.0"
+    "@figma/rest-api-spec": "npm:^0.35.0"
     "@svgr/cli": "npm:8.1.0"
     "@types/js-yaml": "npm:^4.0.9"
     "@types/react": "npm:^18.3.11"
