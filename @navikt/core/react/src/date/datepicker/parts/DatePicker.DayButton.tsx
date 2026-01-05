@@ -24,7 +24,7 @@ const DatePickerDayButton = ({
   }, [modifiers.focused]);
 
   if (modifiers.hidden) {
-    return <></>;
+    return null;
   }
 
   return (

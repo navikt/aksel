@@ -1,5 +1,6 @@
 "use client";
 
+import { stegaClean } from "next-sanity";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./ChipsNavigation.module.css";
@@ -58,7 +59,7 @@ function GodPrakisChipsNavigationButton(props: GpChipNavigationButtonProps) {
         prefetch(href);
       }}
     >
-      {`${title} (${count})`}
+      {stegaClean(`${title} (${count})`)}
     </button>
   );
 }

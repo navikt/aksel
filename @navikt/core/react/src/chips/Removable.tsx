@@ -42,7 +42,6 @@ export const RemovableChips = forwardRef<
     ref,
   ) => {
     const translate = useI18n("Chips");
-
     const { cn } = useRenameCSS();
 
     return (

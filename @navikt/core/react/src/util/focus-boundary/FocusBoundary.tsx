@@ -8,8 +8,9 @@ import React, {
 import { Slot } from "../../slot/Slot";
 import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
 import { hideNonTargetElements } from "../hideNonTargetElements";
-import { useLatestRef } from "../hooks/useLatestRef";
+import { useValueAsRef } from "../hooks/useValueAsRef";
 import { ownerDocument } from "../owner";
+import { resolveRef } from "../resolveRef";
 
 /* -------------------------------------------------------------------------- */
 /*                                 FocusBoundary                                 */
@@ -59,7 +60,10 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
    *
    * Set to `false` to not focus anything.
    */
-  returnFocus?: boolean | React.MutableRefObject<HTMLElement | null>;
+  returnFocus?:
+    | boolean
+    | React.MutableRefObject<HTMLElement | null>
+    | (() => boolean | HTMLElement | null | undefined);
   /**
    * Hides all outside content from screen readers when true.
    * @default false
@@ -79,8 +83,8 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
     }: FocusBoundaryProps,
     forwardedRef,
   ) => {
-    const initialFocusRef = useLatestRef(initialFocus);
-    const returnFocusRef = useLatestRef(returnFocus);
+    const initialFocusRef = useValueAsRef(initialFocus);
+    const returnFocusRef = useValueAsRef(returnFocus);
 
     const lastFocusedElementRef = useRef<HTMLElement | null>(null);
     const [container, setContainer] = useState<HTMLElement | null>(null);
@@ -121,7 +125,6 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         const relatedTarget = event.relatedTarget as HTMLElement | null;
-
         /*
          * `focusout` event with a `null` `relatedTarget` will happen in a few known cases:
          * 1. When the user switches app/tabs/windows/the browser itself loses focus.
@@ -181,6 +184,11 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         return;
       }
 
+      const ownerDoc = ownerDocument(container);
+      const activeElement = ownerDoc.activeElement;
+      const closestContainer = activeElement?.closest("[data-focus-boundary]");
+
+      addPreviouslyFocusedElement(ownerDoc.activeElement, closestContainer);
       focusBoundarysStack.add(focusBoundary);
 
       return () => {
@@ -189,6 +197,17 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }, 0);
       };
     }, [container, focusBoundary]);
+
+    /**
+     * On unmount, we need to clean up previously focused elements associated with this container
+     * This makes sure we don't accidentally try to focus elements that are no longer relevant
+     * or will be removed from the DOM.
+     */
+    useEffect(() => {
+      return () => {
+        container && deleteContainerAndPreviouslyFocusedElements(container);
+      };
+    }, [container]);
 
     useEffect(() => {
       if (!container || !modal) {
@@ -253,10 +272,14 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         return;
       }
       const ownerDoc = ownerDocument(container);
-      const previouslyFocusedElement = ownerDoc.activeElement;
 
       function getReturnElement() {
-        let resolvedReturnFocusValue = returnFocusRef.current;
+        const resolvedReturnFocusValueOrFn = returnFocusRef.current;
+
+        let resolvedReturnFocusValue =
+          typeof resolvedReturnFocusValueOrFn === "function"
+            ? resolvedReturnFocusValueOrFn()
+            : resolvedReturnFocusValueOrFn;
 
         if (
           resolvedReturnFocusValue === undefined ||
@@ -271,11 +294,11 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         if (typeof resolvedReturnFocusValue === "boolean") {
-          const el = previouslyFocusedElement;
+          const el = getPreviouslyFocusedElement();
           return el?.isConnected ? el : ownerDoc.body;
         }
 
-        const fallback = previouslyFocusedElement || ownerDoc.body;
+        const fallback = getPreviouslyFocusedElement() || ownerDoc.body;
 
         return resolveRef(resolvedReturnFocusValue) || fallback;
       }
@@ -354,6 +377,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         {...restProps}
         ref={mergedRefs}
         onKeyDown={handleKeyDown}
+        data-focus-boundary
       />
     );
   },
@@ -508,16 +532,51 @@ function removeLinks(items: HTMLElement[]) {
   return items.filter((item) => item.tagName !== "A");
 }
 
+const LIST_LIMIT = 10;
+let previouslyFocusedElements: Element[] = [];
+const focusedElementsByContainer = new WeakMap<Element, Element[]>();
+
+function clearDisconnectedPreviouslyFocusedElements() {
+  previouslyFocusedElements = previouslyFocusedElements.filter(
+    (el) => el.isConnected,
+  );
+}
+
 /**
- * If the provided argument is a ref object, returns its `current` value.
- * Otherwise, returns the argument itself.
- *
- * Non-generic to safely handle refs whose `.current` may be `null`.
+ * Removes "will be" unmounted elements from previouslyFocusedElements,
+ * and deletes the container from focusedElementsByContainer.
  */
-function resolveRef(
-  maybeRef: HTMLElement | React.RefObject<HTMLElement | null | undefined>,
-): HTMLElement | null | undefined {
-  return "current" in maybeRef ? maybeRef.current : maybeRef;
+function deleteContainerAndPreviouslyFocusedElements(container: HTMLElement) {
+  const nestedElements = focusedElementsByContainer.get(container) || [];
+  previouslyFocusedElements = previouslyFocusedElements.filter((el) => {
+    return !nestedElements.includes(el);
+  });
+  focusedElementsByContainer.delete(container);
+}
+
+function addPreviouslyFocusedElement(
+  element: Element | null,
+  container: Element | null | undefined,
+) {
+  clearDisconnectedPreviouslyFocusedElements();
+  if (element && element?.nodeName !== "BODY") {
+    previouslyFocusedElements.push(element);
+
+    if (container) {
+      const nestedElements = focusedElementsByContainer.get(container) || [];
+      nestedElements.push(element);
+      focusedElementsByContainer.set(container, nestedElements);
+    }
+
+    if (previouslyFocusedElements.length > LIST_LIMIT) {
+      previouslyFocusedElements = previouslyFocusedElements.slice(-LIST_LIMIT);
+    }
+  }
+}
+
+function getPreviouslyFocusedElement() {
+  clearDisconnectedPreviouslyFocusedElements();
+  return previouslyFocusedElements[previouslyFocusedElements.length - 1];
 }
 
 export { FocusBoundary };

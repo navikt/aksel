@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { createContext } from "../../util/create-context";
+import { createStrictContext } from "../../util/create-strict-context";
 import { useInputContext } from "./Input/Input.context";
 import { ComboboxOption } from "./types";
 
@@ -10,12 +10,14 @@ type CustomOptionsContextValue = {
   setCustomOptions: React.Dispatch<React.SetStateAction<ComboboxOption[]>>;
 };
 
-const [ComboboxCustomOptionsProvider, useComboboxCustomOptions] =
-  createContext<CustomOptionsContextValue>({
-    name: "ComboboxCustomOptions",
-    errorMessage:
-      "useComboboxCustomOptions must be used within a ComboboxCustomOptionsProvider",
-  });
+const {
+  Provider: ComboboxCustomOptionsProvider,
+  useContext: useComboboxCustomOptions,
+} = createStrictContext<CustomOptionsContextValue>({
+  name: "ComboboxCustomOptions",
+  errorMessage:
+    "useComboboxCustomOptions must be used within a ComboboxCustomOptionsProvider",
+});
 
 const CustomOptionsProvider = ({
   children,

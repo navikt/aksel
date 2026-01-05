@@ -130,23 +130,21 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         onClick={composeEventHandlers(onClick, handleClick)}
         iconPosition={iconPosition}
         icon={
-          <React.Fragment>
-            {active
-              ? (activeIcon ?? (
-                  <CheckmarkIcon
-                    aria-hidden={!!text}
-                    title={text ? undefined : activeString}
-                    className={cn("navds-copybutton__icon")}
-                  />
-                ))
-              : (icon ?? (
-                  <FilesIcon
-                    aria-hidden={!!text}
-                    title={text ? undefined : title || translate("title")}
-                    className={cn("navds-copybutton__icon")}
-                  />
-                ))}
-          </React.Fragment>
+          active
+            ? (activeIcon ?? (
+                <CheckmarkIcon
+                  aria-hidden={!!text}
+                  title={text ? undefined : activeString}
+                  className={cn("navds-copybutton__icon")}
+                />
+              ))
+            : (icon ?? (
+                <FilesIcon
+                  aria-hidden={!!text}
+                  title={text ? undefined : title || translate("title")}
+                  className={cn("navds-copybutton__icon")}
+                />
+              ))
         }
         data-active={active}
         size={size}

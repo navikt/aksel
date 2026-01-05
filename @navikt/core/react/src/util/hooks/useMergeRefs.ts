@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 /* https://github.com/radix-ui/primitives/blob/main/packages/react/compose-refs/src/composeRefs.tsx */
 import React from "react";
 
@@ -27,6 +29,6 @@ export function mergeRefs<T>(refs: PossibleRef<T>[]) {
  * @returns React.useCallback(mergeRefs(refs), refs)
  */
 export function useMergeRefs<T>(...refs: PossibleRef<T>[]) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // biome-ignore lint/correctness/useExhaustiveDependencies: we want to only update if refs change
   return React.useCallback(mergeRefs(refs), refs);
 }

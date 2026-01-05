@@ -1,5 +1,5 @@
 import { createContext as ReactCreateContext } from "react";
-import { createContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-strict-context";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
 import { ToggleGroupProps } from "./ToggleGroup.types";
 import { useToggleGroup } from "./useToggleGroup";
@@ -23,10 +23,10 @@ type ToggleGroupProviderProps = ReturnType<typeof useToggleGroup> &
   Pick<ToggleGroupProps, "size">;
 
 /* State context */
-export const [ToggleGroupProvider, useToggleGroupContext] =
-  createContext<ToggleGroupProviderProps>({
-    name: "ToggleGroupContext",
-    hookName: "useToggleGroupContext",
-    providerName: "ToggleGroupProvider",
-    errorMessage: "<ToggleGroup.Item> needs to be wrapped within <ToggleGroup>",
-  });
+export const {
+  Provider: ToggleGroupProvider,
+  useContext: useToggleGroupContext,
+} = createStrictContext<ToggleGroupProviderProps>({
+  name: "ToggleGroupContext",
+  errorMessage: "<ToggleGroup.Item> needs to be wrapped within <ToggleGroup>",
+});

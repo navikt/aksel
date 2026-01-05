@@ -1,7 +1,9 @@
 "use client";
 
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Dialog } from "@navikt/ds-react";
 import { GlobalSearchResultProvider } from "@/app/_ui/global-search/GlobalSearch.provider";
+import { useParamState } from "@/app/_ui/global-search/useParamState";
 import { GlobalSearchButton } from "./GlobalSearch.button";
 import { GlobalSearchContext } from "./GlobalSearch.context";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
@@ -16,6 +18,7 @@ import {
 function GlobalSearch() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [open, setOpen] = useState<boolean>(false);
+  const { clearParam } = useParamState("query");
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -49,21 +52,32 @@ function GlobalSearch() {
   );
 
   return (
-    <GlobalSearchContext.Provider value={contextValue}>
-      <GlobalSearchButton />
-      <Suspense>
-        <GlobalSearchResultProvider>
-          <GlobalSearchDialog>
-            <GlobalSearchForm />
-            <div className={styles.searchResults}>
-              <GlobalSearchEmptyState />
-              <GlobalSearchEmptySearchState />
-              <GlobalSearchResultsView />
-            </div>
-          </GlobalSearchDialog>
-        </GlobalSearchResultProvider>
-      </Suspense>
-    </GlobalSearchContext.Provider>
+    <Dialog
+      open={open}
+      onOpenChange={(nextOpen) => {
+        setOpen(nextOpen);
+        if (!nextOpen) {
+          clearParam();
+        }
+      }}
+      aria-labelledby="aksel-search-heading"
+    >
+      <GlobalSearchContext.Provider value={contextValue}>
+        <GlobalSearchButton />
+        <Suspense>
+          <GlobalSearchResultProvider>
+            <GlobalSearchDialog>
+              <GlobalSearchForm />
+              <div className={styles.searchResults}>
+                <GlobalSearchEmptyState />
+                <GlobalSearchEmptySearchState />
+                <GlobalSearchResultsView />
+              </div>
+            </GlobalSearchDialog>
+          </GlobalSearchResultProvider>
+        </Suspense>
+      </GlobalSearchContext.Provider>
+    </Dialog>
   );
 }
 

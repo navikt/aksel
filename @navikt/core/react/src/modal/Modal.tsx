@@ -244,7 +244,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       >
         <ModalContextProvider
           closeHandler={getCloseHandler(modalRef, header, onBeforeClose)}
-          ref={modalRef}
+          modalRef={modalRef}
         >
           {header && (
             <ModalHeader>

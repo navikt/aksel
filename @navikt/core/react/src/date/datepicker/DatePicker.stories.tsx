@@ -76,28 +76,26 @@ export const Default: StoryObj<DefaultStoryProps> = {
         >
           {!props.standalone &&
             (props.inputfield && props.mode !== "multiple" ? (
-              <>
-                {props.mode === "range" ? (
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <DatePicker.Input
-                      label="Fra"
-                      size={props?.size}
-                      {...rangeCtx.fromInputProps}
-                    />
-                    <DatePicker.Input
-                      label="Til"
-                      size={props?.size}
-                      {...rangeCtx.toInputProps}
-                    />
-                  </div>
-                ) : (
+              props.mode === "range" ? (
+                <div style={{ display: "flex", gap: "1rem" }}>
                   <DatePicker.Input
-                    label="Velg dato"
+                    label="Fra"
                     size={props?.size}
-                    {...singleCtx.inputProps}
+                    {...rangeCtx.fromInputProps}
                   />
-                )}
-              </>
+                  <DatePicker.Input
+                    label="Til"
+                    size={props?.size}
+                    {...rangeCtx.toInputProps}
+                  />
+                </div>
+              ) : (
+                <DatePicker.Input
+                  label="Velg dato"
+                  size={props?.size}
+                  {...singleCtx.inputProps}
+                />
+              )
             ) : (
               <Button onClick={() => setOpen((x) => !x)}>
                 Åpne datovelger
@@ -299,7 +297,7 @@ export const UseRangedDatepickerValidation = () => {
       <DatePicker {...datepickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
           <DatePicker.Input {...fromInputProps} label="Fra" />
-          <DatePicker.Input {...toInputProps} label="Til" />
+          <DatePicker.Input {...toInputProps} label="Til" error="123" />
         </div>
       </DatePicker>
     </div>
@@ -406,7 +404,11 @@ export const WeekNumber = () => {
   };
 
   return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="space-80 space-16">
+    <HGrid
+      columns={{ xs: 1, md: 2 }}
+      gap="space-80 space-16"
+      style={{ marginBlockEnd: "30rem" }}
+    >
       <DatePicker.Standalone showWeekNumber today={new Date("2006-07-01")} />
       <DatePicker.Standalone
         showWeekNumber

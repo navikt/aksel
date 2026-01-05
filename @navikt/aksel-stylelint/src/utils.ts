@@ -112,7 +112,9 @@ export const tokenExists = (
 
     const jsonFileBuffer = readFileSync(`${__dirname}/${tokenJsonFile}`);
     const flattened = flattenObject(JSON.parse(jsonFileBuffer.toString()));
-    flattened.forEach((token) => allowedTokenNames.push(token));
+    flattened.forEach((token) => {
+      allowedTokenNames.push(token);
+    });
   }
 
   return allowedTokenNames.includes(inputToken);

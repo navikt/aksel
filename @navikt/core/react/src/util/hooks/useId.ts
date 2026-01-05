@@ -3,10 +3,15 @@
 //https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/useId.ts
 import React, { useEffect, useState } from "react";
 
+/* eslint-disable react-hooks/rules-of-hooks */
+
 let globalId = 0;
 function useGlobalId(idOverride?: string): string | undefined {
+  // biome-ignore lint/correctness/useHookAtTopLevel: At runtime, `useGlobalId` is invariant.
   const [defaultId, setDefaultId] = useState(idOverride);
   const id = idOverride || defaultId;
+
+  // biome-ignore lint/correctness/useHookAtTopLevel: At runtime, `useGlobalId` is invariant.
   useEffect(() => {
     if (defaultId == null) {
       // Fallback to this default id when possible.
@@ -34,6 +39,6 @@ export function useId(idOverride?: string): string {
     const reactId = maybeReactUseId();
     return idOverride ?? reactId.replace(/(:)/g, "");
   }
-  // eslint-disable-next-line react-hooks/rules-of-hooks -- `useId` is invariant at runtime.
+  // biome-ignore lint/correctness/useHookAtTopLevel: `useId` is invariant at runtime.
   return useGlobalId(idOverride) ?? "";
 }

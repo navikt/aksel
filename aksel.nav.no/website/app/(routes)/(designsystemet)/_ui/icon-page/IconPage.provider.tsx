@@ -6,7 +6,7 @@ import { useMedia } from "@/hooks/useMedia";
 type IconPageContextT = {
   activeIconButton: HTMLButtonElement | null;
   setActiveIconButton: (button: HTMLButtonElement | null) => void;
-  hideModal: boolean;
+  hideDialog: boolean;
 };
 
 const IconPageContext = createContext<IconPageContextT | null>(null);
@@ -15,14 +15,14 @@ function IconPageProvider({ children }: { children?: React.ReactNode }) {
   const [activeIconButton, setActiveIconButton] =
     useState<HTMLButtonElement | null>(null);
 
-  const hideModal = useMedia("screen and (min-width: 1280px)");
+  const hideDialog = useMedia("screen and (min-width: 1280px)");
 
   return (
     <IconPageContext.Provider
       value={{
         activeIconButton,
         setActiveIconButton,
-        hideModal,
+        hideDialog,
       }}
     >
       {children}

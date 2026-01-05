@@ -37,7 +37,9 @@ const removeImportLines = (code: string) => {
   const removeImport = (path: any) => {
     parse(path).remove();
   };
-  ast.find(parse.ImportDeclaration).forEach((path: any) => removeImport(path));
+  ast.find(parse.ImportDeclaration).forEach((path: any) => {
+    removeImport(path);
+  });
   return ast.toSource();
 };
 

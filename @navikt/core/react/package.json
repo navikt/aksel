@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "7.35.3",
+  "version": "7.36.0",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -669,6 +669,16 @@
         "default": "./cjs/alert/local-alert/index.js"
       }
     },
+    "./Dialog": {
+      "import": {
+        "types": "./esm/dialog/index.d.ts",
+        "default": "./esm/dialog/index.js"
+      },
+      "require": {
+        "types": "./cjs/dialog/index.d.ts",
+        "default": "./cjs/dialog/index.js"
+      }
+    },
     "./package.json": "./package.json",
     "./Theme": {
       "import": {
@@ -695,8 +705,8 @@
   "dependencies": {
     "@floating-ui/react": "0.27.8",
     "@floating-ui/react-dom": "^2.1.6",
-    "@navikt/aksel-icons": "^7.35.3",
-    "@navikt/ds-tokens": "^7.35.3",
+    "@navikt/aksel-icons": "^7.36.0",
+    "@navikt/ds-tokens": "^7.36.0",
     "clsx": "^2.1.0",
     "date-fns": "^4.0.0",
     "react-day-picker": "9.7.0"

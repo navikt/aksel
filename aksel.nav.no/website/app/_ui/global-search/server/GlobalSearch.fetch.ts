@@ -38,7 +38,7 @@ async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
   const sanitizedData = sanitizeSanityData(allArticles);
 
   Object.values(PAGE_ROUTES).forEach((value) => {
-    value.root.forEach((page) =>
+    value.root.forEach((page) => {
       sanitizedData.push({
         heading: page.heading,
         slug: page.slug,
@@ -52,12 +52,12 @@ async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
         ingress: null,
         status: null,
         tema: null,
-      }),
-    );
+      });
+    });
 
     if (value.nested) {
       Object.values(value.nested).forEach((nested) => {
-        nested.forEach((page) =>
+        nested.forEach((page) => {
           sanitizedData.push({
             heading: page.heading,
             slug: page.slug,
@@ -71,8 +71,8 @@ async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
             ingress: null,
             status: null,
             tema: null,
-          }),
-        );
+          });
+        });
       });
     }
   });

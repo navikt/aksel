@@ -1,13 +1,12 @@
 import { Meta } from "@storybook/react-vite";
 import React from "react";
-import { PlusCircleFillIcon } from "@navikt/aksel-icons";
+import { PencilIcon, PlusCircleFillIcon } from "@navikt/aksel-icons";
 import { Alert } from "../../alert";
 import { ConfirmationPanel } from "../../form/confirmation-panel";
 import { Box } from "../../layout/box";
 import { VStack } from "../../layout/stack";
 import { BodyLong } from "../../typography";
 import Link from "../Link";
-import { RandomIcon } from "./RandomIcon";
 
 const meta: Meta<typeof Link> = {
   title: "ds-react/Link",
@@ -34,9 +33,9 @@ const LinkWrapper = ({
       variant={variant as "action" | "neutral"}
       inlineText={inlineText}
     >
-      {iconLeft && <RandomIcon />}
+      {iconLeft && <PencilIcon />}
       {children}
-      {iconRight && <RandomIcon />}
+      {iconRight && <PencilIcon />}
     </Link>{" "}
   </>
 );

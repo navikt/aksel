@@ -39,12 +39,12 @@ async function generateFile() {
 
   categories.forEach((value, key) => {
     mkdirSync(`${iconFolder}/${key}`);
-    value.forEach((icon) =>
+    value.forEach((icon) => {
       copyFileSync(
         `${basePath}/${icon}.svg`,
         `${iconFolder}/${key}/${icon}.svg`,
-      ),
-    );
+      );
+    });
   });
 }
 

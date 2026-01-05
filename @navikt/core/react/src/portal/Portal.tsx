@@ -90,7 +90,7 @@ type PortalDivProps = React.HTMLAttributes<HTMLDivElement>;
 
 const PortalDiv = forwardRef<HTMLDivElement, PortalDivProps>(
   (props: PortalDivProps, forwardedRef) => {
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
 
     return (
       <Theme

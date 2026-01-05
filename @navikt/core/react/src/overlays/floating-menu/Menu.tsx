@@ -2,10 +2,11 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { Portal } from "../../portal";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { createContext } from "../../util/create-context";
+import { createStrictContext } from "../../util/create-strict-context";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
-import { useCallbackRef, useId, useMergeRefs } from "../../util/hooks";
+import { useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
+import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating } from "../floating/Floating";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
@@ -71,10 +72,10 @@ type MenuContextValue = {
   onContentChange: (content: MenuContentElementRef | null) => void;
 };
 
-const [MenuProvider, useMenuContext] = createContext<MenuContextValue>({
-  providerName: "MenuProvider",
-  hookName: "useMenuContext",
-});
+const { Provider: MenuProvider, useContext: useMenuContext } =
+  createStrictContext<MenuContextValue>({
+    name: "MenuContext",
+  });
 
 type MenuRootContextValue = {
   onClose: () => void;
@@ -82,10 +83,9 @@ type MenuRootContextValue = {
   modal: boolean;
 };
 
-const [MenuRootProvider, useMenuRootContext] =
-  createContext<MenuRootContextValue>({
-    providerName: "MenuRootProvider",
-    hookName: "useMenuRootContext",
+const { Provider: MenuRootProvider, useContext: useMenuRootContext } =
+  createStrictContext<MenuRootContextValue>({
+    name: "MenuRootContext",
   });
 
 const MenuRoot = ({
@@ -96,7 +96,7 @@ const MenuRoot = ({
 }: MenuProps) => {
   const [content, setContent] = useState<MenuContentElement | null>(null);
   const isUsingKeyboardRef = useRef(false);
-  const handleOpenChange = useCallbackRef(onOpenChange);
+  const handleOpenChange = useEventCallback(onOpenChange);
 
   useEffect(() => {
     const globalDocument = globalThis.document;
@@ -589,10 +589,9 @@ const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
 /* -------------------------------------------------------------------------- */
 /*                                 Menu Radio                                 */
 /* -------------------------------------------------------------------------- */
-const [RadioGroupProvider, useMenuRadioGroupContext] =
-  createContext<MenuRadioGroupProps>({
-    providerName: "MenuRadioGroupProvider",
-    hookName: "useMenuRadioGroupContext",
+const { Provider: RadioGroupProvider, useContext: useMenuRadioGroupContext } =
+  createStrictContext<MenuRadioGroupProps>({
+    name: "MenuRadioGroupContext",
     defaultValue: {
       value: undefined,
       onValueChange: () => {},
@@ -608,7 +607,7 @@ const MenuRadioGroup = React.forwardRef<
   React.ElementRef<typeof MenuGroup>,
   MenuRadioGroupProps
 >(({ value, onValueChange, ...rest }: MenuRadioGroupProps, ref) => {
-  const handleValueChange = useCallbackRef(onValueChange);
+  const handleValueChange = useEventCallback(onValueChange);
   return (
     <RadioGroupProvider value={value} onValueChange={handleValueChange}>
       <MenuGroup {...rest} ref={ref} />
@@ -619,11 +618,13 @@ const MenuRadioGroup = React.forwardRef<
 /* -------------------------------------------------------------------------- */
 /*                             Menu Item Indicator                            */
 /* -------------------------------------------------------------------------- */
-const [MenuItemIndicatorProvider, useMenuItemIndicatorContext] = createContext<{
+const {
+  Provider: MenuItemIndicatorProvider,
+  useContext: useMenuItemIndicatorContext,
+} = createStrictContext<{
   state: CheckedState;
 }>({
-  providerName: "MenuItemIndicatorProvider",
-  hookName: "useMenuItemIndicatorContext",
+  name: "MenuItemIndicatorContext",
 });
 
 type MenuItemIndicatorProps = SlottedDivProps;
@@ -743,12 +744,10 @@ type MenuSubContextValue = {
   onTriggerChange: (trigger: MenuItemElement | null) => void;
 };
 
-const [MenuSubProvider, useMenuSubContext] = createContext<MenuSubContextValue>(
-  {
-    providerName: "MenuSubProvider",
-    hookName: "useMenuSubContext",
-  },
-);
+const { Provider: MenuSubProvider, useContext: useMenuSubContext } =
+  createStrictContext<MenuSubContextValue>({
+    name: "MenuSubContext",
+  });
 
 interface MenuSubProps {
   children?: React.ReactNode;
@@ -769,7 +768,7 @@ const MenuSub: React.FC<MenuSubProps> = ({
   const [content, setContent] = useState<MenuContentInternalElement | null>(
     null,
   );
-  const handleOpenChange = useCallbackRef(onOpenChange);
+  const handleOpenChange = useEventCallback(onOpenChange);
 
   // Prevent the parent menu from reopening with open submenus.
   useEffect(() => {

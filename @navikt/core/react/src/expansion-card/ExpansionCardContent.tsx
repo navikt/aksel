@@ -14,7 +14,7 @@ const ExpansionCardContent = forwardRef<
 >(({ children, className, ...rest }, ref) => {
   const { cn } = useRenameCSS();
   const panelContext = useContext(ExpansionCardContext);
-  const themeContext = useThemeInternal(false);
+  const themeContext = useThemeInternal();
 
   if (panelContext === null) {
     console.error(
