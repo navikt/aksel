@@ -1,7 +1,7 @@
 import React, {
   AnchorHTMLAttributes,
+  type ComponentProps,
   HTMLAttributes,
-  SVGProps,
   forwardRef,
   useRef,
 } from "react";
@@ -130,7 +130,7 @@ const LinkAnchor = forwardRef<HTMLAnchorElement, LinkAnchorProps>(
 );
 
 /* ---------------------------- LinkAnchor Arrow ---------------------------- */
-type LinkAnchorArrowProps = Omit<SVGProps<SVGSVGElement>, "ref">;
+type LinkAnchorArrowProps = Omit<ComponentProps<typeof ArrowRightIcon>, "ref">;
 
 const LinkAnchorArrow = forwardRef<SVGSVGElement, LinkAnchorArrowProps>(
   ({ className, ...restProps }: LinkAnchorArrowProps, forwardedRef) => {

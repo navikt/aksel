@@ -3,7 +3,7 @@ import { createStrictContext } from "../util/create-strict-context";
 
 interface ModalContextProps {
   closeHandler?: React.MouseEventHandler<HTMLButtonElement>;
-  modalRef: React.RefObject<HTMLDialogElement>;
+  modalRef: React.RefObject<HTMLDialogElement | null>;
 }
 
 export const { Provider: ModalContextProvider, useContext: useModalContext } =
