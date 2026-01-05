@@ -24,7 +24,7 @@ export function codemodCommand(
       chalk.gray(`\nAvailable migrations:\n${getMigrationString()}`),
     )
     .description("Migrations for Aksel components and more")
-    .argument("<migration>", "Migration name or version (e.g., v8)")
+    .argument("<migration>", "Migration name or version (e.g. v8)")
 
     .option("-e, --ext [extension]", "default: js,ts,jsx,tsx,css,scss,less")
     .option(
