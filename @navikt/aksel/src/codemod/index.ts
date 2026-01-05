@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { Command } from "commander";
 import figlet from "figlet";
-import { getMigrationString, getVersionKeys } from "./migrations.js";
+import { getMigrationString } from "./migrations.js";
 import { runCodeshift } from "./run-codeshift.js";
 import {
   runVersionMigration,
@@ -44,10 +44,8 @@ export function codemodCommand(
   $ npx @navikt/aksel codemod v8  # Interactive selection for version`,
     )
     .action(async (str, options) => {
-      const versionKeys = getVersionKeys();
-
       /* Check if the argument is a version key for interactive selection */
-      if (versionKeys.includes(str)) {
+      if (/^v\d+$/.test(str)) {
         validateVersion(str, program);
         await runVersionMigration(str, options, program, overrideHandler);
         return;
