@@ -9,9 +9,12 @@ import { VERSION } from "./version";
 run();
 
 async function run() {
-  const program = new Command();
+  let program = new Command();
   program.version(VERSION, "-v, --version");
-  program.allowUnknownOption().helpOption(false);
+  program = program
+    .allowUnknownOption()
+    .allowExcessArguments()
+    .helpOption(false);
 
   program.parse();
 
