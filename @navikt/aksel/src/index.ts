@@ -28,7 +28,11 @@ async function run() {
       return;
     }
 
-    codemodCommand();
+    codemodCommand((migration) => {
+      if (migration === "v8-tokens") {
+        darksideCommand();
+      }
+    });
     return;
   }
 

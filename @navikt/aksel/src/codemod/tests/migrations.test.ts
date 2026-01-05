@@ -4,6 +4,7 @@ import { describe, expect, test } from "vitest";
 import {
   getMigrationNames,
   getMigrationPath,
+  getVersionKeys,
   migrationStringOverride,
 } from "../migrations";
 
@@ -35,5 +36,11 @@ describe("migrations", () => {
     });
 
     expect(values.filter((x) => overrideValues.has(x))).toEqual([]);
+  });
+
+  test("No global overrides", () => {
+    const versionNames = getVersionKeys();
+
+    expect(values.filter((x) => versionNames.includes(x))).toEqual([]);
   });
 });
