@@ -1,4 +1,4 @@
-import { check } from "../../../codemod/utils/check";
+import { check } from "../../../utils/check";
 
 /* JS transforms */
 for (const fixture of ["js-replace-all", "js-replace-some"]) {
