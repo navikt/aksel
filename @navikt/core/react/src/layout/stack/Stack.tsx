@@ -87,7 +87,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
 
       const style: React.CSSProperties = {
         ..._style,
-        ...getResponsiveProps(`stack`, "gap", "spacing", gap),
+        ...getResponsiveProps(`stack`, "gap", "space", gap),
         ...getResponsiveValue(`stack`, "direction", direction),
         ...getResponsiveValue(`stack`, "align", align),
         ...getResponsiveValue(`stack`, "justify", justify),

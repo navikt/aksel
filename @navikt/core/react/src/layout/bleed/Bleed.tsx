@@ -87,7 +87,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       ...getResponsiveProps(
         "bleed",
         "margin-inline",
-        "spacing",
+        "space",
         marginInline,
         true,
         ["0", "full", "px"],
@@ -96,7 +96,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       ...getResponsiveProps(
         "bleed",
         "margin-block",
-        "spacing",
+        "space",
         marginBlock,
         true,
         ["0", "px"],
@@ -109,7 +109,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
         ...getResponsiveProps(
           "bleed",
           "padding-inline",
-          "spacing",
+          "space",
           marginInline,
           false,
           ["0", "full", "px"],
@@ -117,7 +117,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
         ...getResponsiveProps(
           "bleed",
           "padding-block",
-          "spacing",
+          "space",
           marginBlock,
           false,
           ["0", "px"],

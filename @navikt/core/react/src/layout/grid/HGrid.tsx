@@ -82,7 +82,7 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       const styles: React.CSSProperties = {
         ...style,
         "--__axc-hgrid-align": align,
-        ...getResponsiveProps(`hgrid`, "gap", "spacing", gap),
+        ...getResponsiveProps(`hgrid`, "gap", "space", gap),
         ...getResponsiveValue(`hgrid`, "columns", formatGrid(columns)),
       };
 

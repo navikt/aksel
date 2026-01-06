@@ -255,13 +255,13 @@ export const BasePrimitive = ({
 
   const style: React.CSSProperties = {
     /* Padding */
-    ...getResponsiveProps("r", "p", "spacing", padding),
-    ...getResponsiveProps("r", "pi", "spacing", paddingInline),
-    ...getResponsiveProps("r", "pb", "spacing", paddingBlock),
+    ...getResponsiveProps("r", "p", "space", padding),
+    ...getResponsiveProps("r", "pi", "space", paddingInline),
+    ...getResponsiveProps("r", "pb", "space", paddingBlock),
     /* Margin */
-    ...getResponsiveProps("r", "m", "spacing", margin),
-    ...getResponsiveProps("r", "mi", "spacing", marginInline),
-    ...getResponsiveProps("r", "mb", "spacing", marginBlock),
+    ...getResponsiveProps("r", "m", "space", margin),
+    ...getResponsiveProps("r", "mi", "space", marginInline),
+    ...getResponsiveProps("r", "mb", "space", marginBlock),
     /* Width & height */
     ...getResponsiveValue("r", "w", width),
     ...getResponsiveValue("r", "minw", minWidth),
@@ -271,11 +271,11 @@ export const BasePrimitive = ({
     ...getResponsiveValue("r", "maxh", maxHeight),
     /* Positon & inset */
     ...getResponsiveValue("r", "position", position),
-    ...getResponsiveProps("r", "inset", "spacing", inset),
-    ...getResponsiveProps("r", "top", "spacing", top),
-    ...getResponsiveProps("r", "right", "spacing", right),
-    ...getResponsiveProps("r", "bottom", "spacing", bottom),
-    ...getResponsiveProps("r", "left", "spacing", left),
+    ...getResponsiveProps("r", "inset", "space", inset),
+    ...getResponsiveProps("r", "top", "space", top),
+    ...getResponsiveProps("r", "right", "space", right),
+    ...getResponsiveProps("r", "bottom", "space", bottom),
+    ...getResponsiveProps("r", "left", "space", left),
     /* Overflow */
     ...getResponsiveValue("r", "overflow", overflow),
     ...getResponsiveValue("r", "overflowx", overflowX),
