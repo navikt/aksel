@@ -8,8 +8,8 @@ import {
   GLOB_IGNORE_PATTERNS,
   SupportedCodemodExtensions,
   getDefaultGlob,
-} from "../codemod/codeshift.utils";
-import { validateGit } from "../codemod/validation";
+} from "../codeshift.utils";
+import { validateGit } from "../validation";
 import { TokenStatus } from "./config/TokenStatus";
 import { printRemaining } from "./tasks/print-remaining";
 import { getStatus } from "./tasks/status";

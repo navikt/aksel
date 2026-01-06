@@ -2,8 +2,8 @@
 import chalk from "chalk";
 import { Command } from "commander";
 import { codemodCommand } from "./codemod/index";
+import { v8TokensCommand } from "./codemod/v8-tokens";
 import { helpCommand } from "./help";
-import { v8TokensCommand } from "./v8-tokens";
 import { VERSION } from "./version";
 
 run();

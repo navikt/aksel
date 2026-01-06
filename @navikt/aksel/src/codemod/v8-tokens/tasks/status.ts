@@ -1,6 +1,6 @@
 import ProgressBar from "cli-progress";
 import fs from "node:fs";
-import { translateToken } from "../../codemod/utils/translate-token";
+import { translateToken } from "../../utils/translate-token";
 import { TokenStatus } from "../config/TokenStatus";
 import { legacyComponentTokenList } from "../config/legacy-component.tokens";
 import { legacyTokenConfig } from "../config/legacy.tokens";

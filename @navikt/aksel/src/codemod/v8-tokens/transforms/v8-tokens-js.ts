@@ -1,8 +1,8 @@
 import type { API, FileInfo } from "jscodeshift";
-import { getImportSpecifier } from "../../codemod/utils/imports";
-import { getLineTerminator } from "../../codemod/utils/lineterminator";
-import moveAndRenameImport from "../../codemod/utils/packageImports";
-import { translateToken } from "../../codemod/utils/translate-token";
+import { getImportSpecifier } from "../../utils/imports";
+import { getLineTerminator } from "../../utils/lineterminator";
+import moveAndRenameImport from "../../utils/packageImports";
+import { translateToken } from "../../utils/translate-token";
 import { legacyTokenConfig } from "../config/legacy.tokens";
 
 export default function transformer(file: FileInfo, api: API) {
