@@ -35,13 +35,6 @@ updates:
       storybook:
         patterns:
           - "*storybook*"
-      # Group all other minor and patch updates to reduce noise
-      dependencies:
-        patterns:
-          - "*"
-        update-types:
-          - "minor"
-          - "patch"
 
   - package-ecosystem: github-actions
     directory: "/"

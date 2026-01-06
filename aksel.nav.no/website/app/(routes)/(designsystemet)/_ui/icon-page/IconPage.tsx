@@ -27,6 +27,8 @@ import { IconPageProvider } from "./IconPage.provider";
 import { IconPageSidebar } from "./IconPage.sidebar";
 import { categorizeIcons, searchIcons } from "./IconPage.utils";
 
+/* eslint-disable import/namespace */
+
 function IconPage({
   iconName,
   iconQuery,
@@ -139,7 +141,7 @@ function IconPage({
 
                     <HStack gap="space-8" marginBlock="space-16 space-0">
                       {section.icons.map((icon) => {
-                        // eslint-disable-next-line import/namespace
+                        // biome-ignore lint/performance/noDynamicNamespaceImportAccess: We do not know which icon will be rendered at build time
                         const T = Icons[`${icon.id}Icon`];
                         if (T === undefined) {
                           return null;

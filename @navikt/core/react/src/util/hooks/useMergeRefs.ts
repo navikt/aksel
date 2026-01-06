@@ -73,13 +73,12 @@ function didChange<I>(
   c: InputRef<I>,
   d: InputRef<I>,
 ) {
-  // prettier-ignore
   return (
     forkRef.refs[0] !== a ||
     forkRef.refs[1] !== b ||
     forkRef.refs[2] !== c ||
     forkRef.refs[3] !== d
-  )
+  );
 }
 
 function didChangeN<I>(forkRef: ForkRef<I>, newRefs: InputRef<I>[]) {

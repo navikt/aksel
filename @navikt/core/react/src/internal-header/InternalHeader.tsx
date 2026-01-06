@@ -78,7 +78,7 @@ interface InternalHeaderComponent
  * ```
  */
 export const InternalHeader = forwardRef(({ className, ...rest }, ref) => {
-  const themeContext = useThemeInternal(false);
+  const themeContext = useThemeInternal();
   const { cn } = useRenameCSS();
 
   /*

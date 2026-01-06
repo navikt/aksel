@@ -15,7 +15,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ children, className, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
 
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
     const { cn } = useRenameCSS();
 
     if (context === null) {

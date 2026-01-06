@@ -273,7 +273,9 @@ function getLegacySearchTerms() {
     terms.add(translateToken(tokenName, "js"));
 
     if (config.twOld) {
-      config.twOld.split(",").forEach((t) => terms.add(t.trim()));
+      config.twOld.split(",").forEach((t) => {
+        terms.add(t.trim());
+      });
     }
     legacySearchTerms.set(legacyToken, terms);
   }
@@ -292,7 +294,9 @@ function getDarksideSearchTerms() {
     terms.add(newTokenName);
 
     if (config.tw) {
-      config.tw.split(",").forEach((t) => terms.add(t.trim()));
+      config.tw.split(",").forEach((t) => {
+        terms.add(t.trim());
+      });
     }
     darksideSearchTerms.set(newTokenName, terms);
   }

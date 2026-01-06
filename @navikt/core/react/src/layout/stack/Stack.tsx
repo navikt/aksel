@@ -83,7 +83,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal(false);
+      const themeContext = useThemeInternal();
       const prefix = themeContext?.isDarkside ? "ax" : "a";
       const { cn } = useRenameCSS();
 

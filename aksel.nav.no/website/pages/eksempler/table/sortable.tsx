@@ -43,37 +43,35 @@ const Example = () => {
   });
 
   return (
-    <>
-      <Table
-        sort={sort}
-        onSortChange={(sortKey) =>
-          handleSort(sortKey as ScopedSortState["orderBy"])
-        }
-      >
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeader sortKey="name" sortable>
-              Navn
-            </Table.ColumnHeader>
-            <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
-            <Table.ColumnHeader sortKey="start" sortable>
-              Start
-            </Table.ColumnHeader>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {sortedData.map(({ name, fnr, start }, i) => {
-            return (
-              <Table.Row key={i + fnr}>
-                <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
-                <Table.DataCell>{fnr}</Table.DataCell>
-                <Table.DataCell>{format(new Date(start))}</Table.DataCell>
-              </Table.Row>
-            );
-          })}
-        </Table.Body>
-      </Table>
-    </>
+    <Table
+      sort={sort}
+      onSortChange={(sortKey) =>
+        handleSort(sortKey as ScopedSortState["orderBy"])
+      }
+    >
+      <Table.Header>
+        <Table.Row>
+          <Table.ColumnHeader sortKey="name" sortable>
+            Navn
+          </Table.ColumnHeader>
+          <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
+          <Table.ColumnHeader sortKey="start" sortable>
+            Start
+          </Table.ColumnHeader>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {sortedData.map(({ name, fnr, start }, i) => {
+          return (
+            <Table.Row key={i + fnr}>
+              <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
+              <Table.DataCell>{fnr}</Table.DataCell>
+              <Table.DataCell>{format(new Date(start))}</Table.DataCell>
+            </Table.Row>
+          );
+        })}
+      </Table.Body>
+    </Table>
   );
 };
 

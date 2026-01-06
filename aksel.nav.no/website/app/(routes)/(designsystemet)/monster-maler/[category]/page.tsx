@@ -68,9 +68,9 @@ export async function generateStaticParams() {
   ]);
 
   const pages = topLevelPages;
-  page?.overview_pages?.forEach((overviewPage) =>
-    pages.push({ category: overviewPage }),
-  );
+  page?.overview_pages?.forEach((overviewPage) => {
+    pages.push({ category: overviewPage });
+  });
 
   return pages;
 }

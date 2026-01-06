@@ -59,7 +59,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
     const { size: contextSize } = useContext(ListContext);
 
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
 
     const listSize = size ?? contextSize;
 

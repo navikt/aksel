@@ -12,12 +12,10 @@ type HolidayDecorationsProps = {
     | { name: "tree"; right?: boolean };
 };
 
-const isHolidaySeason = new Date().getMonth() === 11;
-
 function HolidayDecorations({ type }: HolidayDecorationsProps) {
   const { resolvedTheme } = useTheme();
 
-  if (resolvedTheme === "light" || !isHolidaySeason) {
+  if (resolvedTheme === "light" || !(new Date().getMonth() === 11)) {
     return null;
   }
 

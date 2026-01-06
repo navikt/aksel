@@ -6,12 +6,6 @@ const snippets = [
   },
   {
     group: "Templates",
-    name: "Multiple Components",
-    code: ` <Button variant="primary">First</Button>
-  <Button>Second</Button>`,
-  },
-  {
-    group: "Templates",
     name: "Component with state",
     code: `{
   (() => {

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, {
   InputHTMLAttributes,
   forwardRef,
@@ -151,7 +152,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       clearButton && !inputProps.disabled && (value ?? internalValue);
 
     return (
-      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+      // biome-ignore lint/a11y/noStaticElementInteractions: Escape key handler for clearing input
       <div
         onKeyDown={(event) => {
           if (event.key !== "Escape") {
@@ -268,7 +269,7 @@ function ClearButton({
 }: SearchClearButtonProps) {
   const { cn } = useRenameCSS();
 
-  const themeContext = useThemeInternal(false);
+  const themeContext = useThemeInternal();
   const translate = useI18n("Search");
 
   return themeContext?.isDarkside ? (

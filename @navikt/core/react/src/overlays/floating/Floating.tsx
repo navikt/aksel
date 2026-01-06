@@ -20,12 +20,9 @@ import React, {
 } from "react";
 import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
-import { createContext } from "../../util/create-context";
-import {
-  useCallbackRef,
-  useClientLayoutEffect,
-  useMergeRefs,
-} from "../../util/hooks";
+import { createStrictContext } from "../../util/create-strict-context";
+import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
+import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
 import { AsChildProps } from "../../util/types";
 import {
@@ -44,11 +41,9 @@ type FloatingContextValue = {
   onAnchorChange: (anchor: Measurable | null) => void;
 };
 
-export const [FloatingProvider, useFloatingContext] =
-  createContext<FloatingContextValue>({
+export const { Provider: FloatingProvider, useContext: useFloatingContext } =
+  createStrictContext<FloatingContextValue>({
     name: "FloatingContext",
-    hookName: "useFloating",
-    providerName: "FloatingProvider",
   });
 
 interface FloatingProps {
@@ -171,12 +166,12 @@ type FloatingContentContextValue = {
   hideArrow: boolean;
 };
 
-const [FloatingContentProvider, useFloatingContentContext] =
-  createContext<FloatingContentContextValue>({
-    name: "FloatingContentContext",
-    hookName: "useFloatingContentContext",
-    providerName: "FloatingContentProvider",
-  });
+const {
+  Provider: FloatingContentProvider,
+  useContext: useFloatingContentContext,
+} = createStrictContext<FloatingContentContextValue>({
+  name: "FloatingContentContext",
+});
 
 type Boundary = Element | null;
 
@@ -364,15 +359,15 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     }, [autoUpdateWhileMounted, enabled, floatingElements, update]);
 
     useOpenChangeAnimationComplete({
-      enabled: !!modalContext?.ref,
+      enabled: !!modalContext?.modalRef,
       open: enabled,
-      ref: modalContext?.ref,
+      ref: modalContext?.modalRef,
       onComplete: update,
     });
 
     const [placedSide, placedAlign] = getSideAndAlignFromPlacement(placement);
 
-    const handlePlaced = useCallbackRef(onPlaced);
+    const handlePlaced = useEventCallback(onPlaced);
 
     useClientLayoutEffect(() => {
       isPositioned && handlePlaced?.();

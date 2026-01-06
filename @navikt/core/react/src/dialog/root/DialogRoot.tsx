@@ -187,7 +187,7 @@ interface DialogComponent extends React.FC<DialogProps> {
  *  </Dialog>
  * ```
  */
-const Dialog: DialogComponent = (props: DialogProps) => {
+export const Dialog: DialogComponent = (props: DialogProps) => {
   const {
     children,
     defaultOpen = false,
@@ -292,5 +292,5 @@ Dialog.Body = DialogBody;
 Dialog.Footer = DialogFooter;
 Dialog.Popup = DialogPopup;
 
-export { Dialog };
+export default Dialog;
 export type { DialogProps };
