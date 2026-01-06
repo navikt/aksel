@@ -23,7 +23,7 @@ export interface BodyShortProps
    *
    *
    * @see 🏷️ {@link AkselColor}
-   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */
   "data-color"?: AkselColor;
 }

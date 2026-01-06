@@ -1,6 +1,6 @@
 import { ASurfaceTransparent } from "@navikt/ds-tokens/dist/tokens";
 
-import { BgNeutralStrong, BgNeutralSoft } from "@navikt/ds-tokens/darkside-js";
+import { BgNeutralStrong, BgNeutralSoft } from "@navikt/ds-tokens/js";
 
 /**
  * Since only some tokens has a replacement, we have to keep both imports

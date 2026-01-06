@@ -164,25 +164,17 @@ class TokenStatus {
 
   printMigrationHelp() {
     const imports = {
-      css: {
-        old: `import "@navikt/ds-tokens";`,
-        new: `import "@navikt/ds-tokens/darkside-css";`,
-      },
       scss: {
         old: `@use '@navikt/ds-tokens/dist/tokens' as *;`,
-        new: `@use "@navikt/ds-tokens/darkside-scss" as *;`,
+        new: `@use "@navikt/ds-tokens/scss" as *;`,
       },
       less: {
         old: `@import "~@navikt/ds-tokens/dist/tokens.less";`,
-        new: `@import "~@navikt/ds-tokens/darkside-less";`,
+        new: `@import "~@navikt/ds-tokens/less";`,
       },
       js: {
         old: `import { ... } from "@navikt/ds-tokens/dist/tokens";`,
-        new: `import { ... } from "@navikt/ds-tokens/darkside-js";`,
-      },
-      tailwind: {
-        old: `import config from "@navikt/ds-tailwind";`,
-        new: `import config from "@navikt/ds-tailwind/darkside-tw3";`,
+        new: `import { ... } from "@navikt/ds-tokens/js";`,
       },
     } as const;
 
@@ -222,7 +214,7 @@ class TokenStatus {
       );
 
       console.info(
-        `We no longer support component tokens. Please migrate to the new darkside tokens using theming or other methods.`,
+        `We no longer support component tokens. Please migrate to the new v8 tokens using theming or other methods.`,
       );
     }
 
@@ -234,7 +226,7 @@ class TokenStatus {
         `${chalk.yellow("!")} Found ${deprecatedTokens} legacy token definition${deprecatedTokens > 1 ? "s" : ""} that require manual migration.`,
       );
       console.info(
-        `These are custom property definitions using legacy tokens that need to be updated to use new darkside tokens.`,
+        `These are custom property definitions using legacy tokens that need to be updated to use new v8 tokens.`,
       );
     }
   }

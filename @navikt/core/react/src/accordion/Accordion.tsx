@@ -60,7 +60,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    *
    * We recommend only using `accent` and `neutral`. We have disallowed status-colors.
    * @see 🏷️ {@link AkselColor}
-   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */
   "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }

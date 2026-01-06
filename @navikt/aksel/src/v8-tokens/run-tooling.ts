@@ -40,11 +40,11 @@ type CodeshiftOptions = {
 
 // Constants
 const TRANSFORMS: Record<string, string> = {
-  "css-tokens": "./transforms/darkside-tokens-css",
-  "scss-tokens": "./transforms/darkside-tokens-scss",
-  "less-tokens": "./transforms/darkside-tokens-less",
-  "js-tokens": "./transforms/darkside-tokens-js",
-  "tailwind-tokens": "./transforms/darkside-tokens-tailwind",
+  "css-tokens": "./transforms/v8-tokens-css",
+  "scss-tokens": "./transforms/v8-tokens-scss",
+  "less-tokens": "./transforms/v8-tokens-less",
+  "js-tokens": "./transforms/v8-tokens-js",
+  "tailwind-tokens": "./transforms/v8-tokens-tailwind",
 };
 
 /**

@@ -14,7 +14,7 @@ const TokenTableOfContents = () => {
   return (
     <TableOfContents
       feedback={{
-        name: "Tokens darkside",
+        name: "Tokens",
         text: "Send innspill",
       }}
       toc={toc}

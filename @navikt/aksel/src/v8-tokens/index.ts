@@ -4,7 +4,7 @@ import { runTooling } from "./run-tooling.js";
 
 const program = new Command();
 
-export function darksideCommand() {
+function v8TokensCommand() {
   program.name(`${chalk.blueBright(`npx @navikt/aksel v8-tokens`)}`);
 
   program
@@ -25,3 +25,5 @@ export function darksideCommand() {
 
   runTooling(options as Parameters<typeof runTooling>["0"], program);
 }
+
+export { v8TokensCommand };

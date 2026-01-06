@@ -456,7 +456,7 @@ type TokensWithRegexes = Record<
   { tw: string; regexes: ReturnType<typeof getFrameworkRegexes> }
 >;
 
-const darksideTokenConfig: TokensWithRegexes = Object.entries(
+const v8TokenConfig: TokensWithRegexes = Object.entries(
   newTokensWithoutRegex,
 ).reduce((acc, [name, tw]) => {
   acc[name] = {
@@ -470,4 +470,4 @@ const darksideTokenConfig: TokensWithRegexes = Object.entries(
   return acc;
 }, {} as TokensWithRegexes);
 
-export { darksideTokenConfig };
+export { v8TokenConfig };

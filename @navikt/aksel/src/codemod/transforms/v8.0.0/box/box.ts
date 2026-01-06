@@ -1,5 +1,5 @@
 import type { API, FileInfo } from "jscodeshift";
-import { legacyTokenConfig } from "../../../../darkside/config/legacy.tokens";
+import { legacyTokenConfig } from "../../../../v8-tokens/config/legacy.tokens";
 import { findComponentImport, findProps } from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
 import transformBoxNewToBox from "../box-new/box-new";
