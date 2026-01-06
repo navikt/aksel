@@ -12,7 +12,7 @@ const Placeholder = ({
   className?: string;
 }) => (
   <Box
-    paddingBlock="11"
+    paddingBlock="space-44"
     width="12rem"
     borderRadius="4"
     background={
