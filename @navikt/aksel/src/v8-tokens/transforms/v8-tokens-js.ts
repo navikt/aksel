@@ -49,7 +49,7 @@ export default function transformer(file: FileInfo, api: API) {
 
       const localName = moveAndRenameImport(j, root, {
         fromImport: "@navikt/ds-tokens/dist/tokens",
-        toImport: "@navikt/ds-tokens/darkside-js",
+        toImport: "@navikt/ds-tokens/js",
         fromName: foundName,
         toName: jsToken,
         ignoreAlias: true,

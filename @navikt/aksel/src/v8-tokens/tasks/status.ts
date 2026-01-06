@@ -2,9 +2,9 @@ import ProgressBar from "cli-progress";
 import fs from "node:fs";
 import { translateToken } from "../../codemod/utils/translate-token";
 import { TokenStatus } from "../config/TokenStatus";
-import { darksideTokenConfig } from "../config/darkside.tokens";
 import { legacyComponentTokenList } from "../config/legacy-component.tokens";
 import { legacyTokenConfig } from "../config/legacy.tokens";
+import { v8TokenConfig } from "../config/v8.tokens";
 
 const StatusStore = new TokenStatus();
 
@@ -31,12 +31,12 @@ function getStatus(
   StatusStore.initStatus();
 
   /**
-   * Prepare search terms for legacy and darkside tokens.
+   * Prepare search terms for legacy and v8 tokens.
    * By pre-computing these sets, we save re-calculating them for each file,
    * improving performance when processing large numbers of files.
    */
   const legacySearchTerms = getLegacySearchTerms();
-  const darksideSearchTerms = getDarksideSearchTerms();
+  const v8TokensSearchTerms = getV8TokensSearchTerms();
 
   const legacyComponentTokensSet = new Set(legacyComponentTokenList);
 
@@ -193,15 +193,15 @@ function getStatus(
           fileName,
           name: definitionMatch[1],
           comment:
-            "Legacy token definition - requires manual migration to new darkside tokens",
+            "Legacy token definition - requires manual migration to new v8 tokens",
         });
       }
 
       definitionMatch = legacyDefinitionRegex.exec(fileSrc);
     }
 
-    for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
-      const terms = darksideSearchTerms.get(newTokenName);
+    for (const [newTokenName, config] of Object.entries(v8TokenConfig)) {
+      const terms = v8TokensSearchTerms.get(newTokenName);
 
       /* Optimization: Check if any of the search terms exist in the file words set */
       let found = false;
@@ -282,9 +282,9 @@ function getLegacySearchTerms() {
   return legacySearchTerms;
 }
 
-function getDarksideSearchTerms() {
-  const darksideSearchTerms = new Map<string, Set<string>>();
-  for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
+function getV8TokensSearchTerms() {
+  const v8TokensSearchTerms = new Map<string, Set<string>>();
+  for (const [newTokenName, config] of Object.entries(v8TokenConfig)) {
     const terms = new Set<string>();
     const tokenName = `--ax-${newTokenName}`;
     terms.add(tokenName);
@@ -298,9 +298,9 @@ function getDarksideSearchTerms() {
         terms.add(t.trim());
       });
     }
-    darksideSearchTerms.set(newTokenName, terms);
+    v8TokensSearchTerms.set(newTokenName, terms);
   }
-  return darksideSearchTerms;
+  return v8TokensSearchTerms;
 }
 
 /**

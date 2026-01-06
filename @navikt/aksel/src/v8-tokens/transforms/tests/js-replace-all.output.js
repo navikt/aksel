@@ -1,4 +1,4 @@
-import { BgNeutralStrong, BgNeutralSoft } from "@navikt/ds-tokens/darkside-js";
+import { BgNeutralStrong, BgNeutralSoft } from "@navikt/ds-tokens/js";
 
 /**
  * Since all tokens has a replacement, we want to remove old import when empty
