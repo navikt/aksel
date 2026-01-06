@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-ActionMenu: Trigger handles trigger click while inside web-component better.
+ActionMenu: Trigger handles click while inside web-component better.
