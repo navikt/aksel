@@ -14,7 +14,7 @@ function EmptyStateCard({
       asChild
       borderWidth="1"
       borderColor="neutral-subtleA"
-      borderRadius="xlarge"
+      borderRadius="12"
     >
       <HGrid
         padding="space-16"

@@ -127,10 +127,10 @@ export const ThemingDemo = () => {
     return (
       <Box
         background="neutral-soft"
-        padding="4"
-        borderRadius="xlarge xlarge xlarge 0"
+        padding="space-16"
+        borderRadius="12 12 12 0"
       >
-        <VStack gap="2">
+        <VStack gap="space-8">
           <Detail>BOX • 01.01.21 14:00</Detail>
           <BodyLong>
             Hei! Dette er en chatbobble som bruker Box som base!
@@ -264,14 +264,18 @@ export const Padding = () => (
 export const BoxInBox = () => (
   <div>
     <Box
-      padding={{ xs: "2", sm: "3" }}
-      paddingInline={{ sm: "4 1" }}
+      padding={{ xs: "space-8", sm: "space-12" }}
+      paddingInline={{ sm: "space-16 space-4" }}
       background="accent-soft"
       borderWidth="2"
       borderColor="accent-strong"
-      borderRadius="large"
+      borderRadius="8"
     >
-      <Box padding="8" paddingInline={{ sm: "12" }} background="default">
+      <Box
+        padding="space-32"
+        paddingInline={{ sm: "space-48" }}
+        background="default"
+      >
         <Box background="accent-moderate">
           CSS variables on a Box should not be inherited by children.
         </Box>

@@ -9,7 +9,7 @@ export type BreakpointsAlias = Extract<
   "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
 >;
 
-export type SpacingScale = AkselSpaceToken;
+export type SpacingScale = AkselSpaceToken | "0";
 export type BorderRadiusScale = AkselBorderRadiusToken;
 
 export type SpaceDelimitedAttribute<T extends string> =

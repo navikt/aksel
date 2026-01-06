@@ -14,7 +14,7 @@ const Placeholder = ({
   <Box
     paddingBlock="11"
     width="12rem"
-    borderRadius="medium"
+    borderRadius="4"
     background={
       desktop
         ? "meta-purple-strong"

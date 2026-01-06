@@ -32,7 +32,7 @@ const TokenExample = ({ token }: { token: TokenForDocumentationT }) => {
       return (
         <Box.New
           borderColor="neutral-subtle"
-          borderRadius="medium"
+          borderRadius="4"
           background="neutral-moderate"
           borderWidth="1"
           width="32px"
@@ -53,7 +53,7 @@ const TokenPreview = ({ token }: { token: TokenForDocumentationT }) => (
     }
     padding="space-12"
     borderColor="neutral-subtle"
-    borderRadius="large"
+    borderRadius="8"
     borderWidth="1"
     height="58px"
     width="58px"
@@ -62,7 +62,7 @@ const TokenPreview = ({ token }: { token: TokenForDocumentationT }) => (
         ? {
             backgroundColor: "transparent",
             opacity: 0.8,
-            backgroundImage: `repeating-linear-gradient(45deg, var(--ax-bg-neutral-moderate) 25%, transparent 25%, transparent 75%, var(--ax-bg-neutral-moderate) 75%, var(--ax-bg-neutral-moderate)), 
+            backgroundImage: `repeating-linear-gradient(45deg, var(--ax-bg-neutral-moderate) 25%, transparent 25%, transparent 75%, var(--ax-bg-neutral-moderate) 75%, var(--ax-bg-neutral-moderate)),
               repeating-linear-gradient(45deg, var(--ax-bg-neutral-moderate) 25%, transparent 25%, transparent 75%, var(--ax-bg-neutral-moderate) 75%, var(--ax-bg-neutral-moderate))`,
             backgroundPosition: "-4px -4px, 4px 4px",
             backgroundSize: "16px 16px",
