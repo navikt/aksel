@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { config } from "./build";
 
-describe("Darkside tailwind config", () => {
+describe("Tailwind config", () => {
   test("should have correct color tokens", () => {
     const colorKeys = Object.keys(config.theme.colors);
     expect(colorKeys).not.toContain("spacing");
