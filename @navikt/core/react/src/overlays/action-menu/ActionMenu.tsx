@@ -17,7 +17,6 @@ import { Menu, MenuPortalProps } from "../floating-menu/Menu";
 type ActionMenuContextValue = {
   triggerId: string;
   triggerRef: React.RefObject<HTMLButtonElement | null>;
-  triggerPointerDownRef: React.MutableRefObject<boolean>;
   contentId: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -250,7 +249,6 @@ const ActionMenuRoot = ({
   rootElement: rootElementProp,
 }: ActionMenuProps) => {
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const triggerPointerDownRef = useRef<boolean>(false);
 
   const modalContext = useModalContext(false);
   const rootElement = modalContext ? modalContext.ref.current : rootElementProp;
@@ -265,7 +263,6 @@ const ActionMenuRoot = ({
     <ActionMenuProvider
       triggerId={useId()}
       triggerRef={triggerRef}
-      triggerPointerDownRef={triggerPointerDownRef}
       contentId={useId()}
       open={open}
       onOpenChange={setOpen}
@@ -340,18 +337,6 @@ export const ActionMenuTrigger = forwardRef<
               event.preventDefault();
             }
           })}
-          onPointerDownCapture={() => {
-            context.triggerPointerDownRef.current = true;
-          }}
-          onPointerUp={() => {
-            context.triggerPointerDownRef.current = false;
-          }}
-          onPointerLeave={() => {
-            context.triggerPointerDownRef.current = false;
-          }}
-          onPointerCancel={() => {
-            context.triggerPointerDownRef.current = false;
-          }}
         >
           {requireReactElement(children)}
         </Slot>
@@ -400,21 +385,6 @@ export const ActionMenuContent = forwardRef<
           returnFocus={context.triggerRef}
           safeZone={{
             anchor: context.triggerRef.current,
-            /**
-             * If actionmenu is wrapped inside a custom-component,
-             * the target will be a generic "custom-component".
-             * Therefore, we check if the pointerdown originated from the trigger itself since
-             * anchor will never match the target in that case.
-             */
-            isEventSafe: (eventType) => {
-              const currentValue = context.triggerPointerDownRef.current;
-              context.triggerPointerDownRef.current = false;
-              if (eventType !== "pointerdown") {
-                return false;
-              }
-
-              return currentValue;
-            },
           }}
           style={{
             ...style,

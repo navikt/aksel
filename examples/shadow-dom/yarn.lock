@@ -655,7 +655,7 @@ __metadata:
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=shadow-dom%40workspace%3A.":
   version: 7.36.0
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=4b1130&locator=shadow-dom%40workspace%3A."
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=327066&locator=shadow-dom%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.6"
@@ -671,7 +671,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/ad8a60a07cfdc46786bf43db025fb95a699e90eb8da789add32aab5d5b96723c85e772c36ac4746681ebece93ff2e9422c87ed9e59c0a48ff03e31b64da1689b
+  checksum: 10/cbe537ee992b12d2f1d7868e7f40ce2587946ae35cedc0531dabd12fe19ce829ee2f0d1121f6f1b2a745dabda1dc48e48a2c703a5d588680b7586f2367880804
   languageName: node
   linkType: hard
 

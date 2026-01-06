@@ -1,4 +1,10 @@
-import React, { forwardRef, useContext, useEffect, useState } from "react";
+import React, {
+  forwardRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Slot } from "../../slot/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
@@ -62,13 +68,9 @@ interface DismissableLayerBaseProps
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
    * - anchor: The element that should be considered safe to interact with.
-   * - isEventSafe: Optional function to determine if the event is safe based on custom logic.
    */
   safeZone?: {
     anchor?: Element | null;
-    isEventSafe?: (
-      eventType: "pointerdown" | "pointerup" | "focusin",
-    ) => boolean;
   };
   /**
    * @default true
@@ -117,6 +119,8 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
   ) => {
     const context = useContext(DismissableLayerContext);
 
+    const triggerPointerDownRef = useRef<boolean>(false);
+
     const [, forceRerender] = useState({});
     const [node, setNode] = React.useState<DismissableLayerElement | null>(
       null,
@@ -153,9 +157,15 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         | "focusin";
 
       /**
-       * Allows caller to define custom logic to determine if the event is "safe".
+       * If anchor is wrapped inside a custom-component,
+       * the target will be a generic "custom-component".
+       * Therefore, we check if the pointerdown originated from the trigger itself since
+       * anchor will never match the target in that case.
        */
-      if (safeZone.isEventSafe?.(eventType)) {
+      if (
+        eventType === "pointerdown" &&
+        triggerPointerDownRef.current === true
+      ) {
         event.preventDefault();
         return;
       }
@@ -168,6 +178,8 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       if (targetIsAnchor) {
         event.preventDefault();
       }
+
+      triggerPointerDownRef.current = false;
     }
 
     const pointerDownOutside = usePointerDownOutside(
@@ -277,6 +289,51 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       ownerDoc,
       enabled,
     );
+
+    useEffect(() => {
+      if (!safeZone?.anchor) {
+        return;
+      }
+
+      const handlePointerDown = () => {
+        triggerPointerDownRef.current = true;
+      };
+
+      const handlePointerEnd = () => {
+        triggerPointerDownRef.current = false;
+      };
+
+      const anchor = safeZone.anchor;
+
+      anchor.addEventListener("pointerdown", handlePointerDown, {
+        capture: true,
+      });
+      anchor.addEventListener("pointerup", handlePointerEnd);
+      anchor.addEventListener("pointerleave", handlePointerEnd);
+      anchor.addEventListener("pointercancel", handlePointerEnd);
+
+      return () => {
+        anchor.removeEventListener("pointerdown", handlePointerDown, {
+          capture: true,
+        });
+        anchor.removeEventListener("pointerup", handlePointerEnd);
+        anchor.removeEventListener("pointerleave", handlePointerEnd);
+        anchor.removeEventListener("pointercancel", handlePointerEnd);
+      };
+    }, [safeZone?.anchor]);
+
+    /* onPointerDownCapture={() => {
+            context.triggerPointerDownRef.current = true;
+          }}
+          onPointerUp={() => {
+            context.triggerPointerDownRef.current = false;
+          }}
+          onPointerLeave={() => {
+            context.triggerPointerDownRef.current = false;
+          }}
+          onPointerCancel={() => {
+            context.triggerPointerDownRef.current = false;
+          }} */
 
     /**
      * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
