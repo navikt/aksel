@@ -1,25 +1,30 @@
 import React from "react";
-import { mergeRefs } from "../util/hooks/useMergeRefs";
+import { useMergeRefs } from "../util/hooks";
 import { mergeProps } from "./merge-props";
 
 interface SlotProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
 }
 
+function getChildRef(children: React.ReactNode): React.Ref<HTMLElement> | null {
+  if (!React.isValidElement(children)) {
+    return null;
+  }
+  return Object.prototype.propertyIsEnumerable.call(children.props, "ref")
+    ? (children.props as any).ref // React 19 (children.ref still works, but gives a warning)
+    : (children as any).ref; // React <19
+}
+
 const Slot = React.forwardRef<HTMLElement, SlotProps>((props, forwardedRef) => {
   const { children, ...slotProps } = props;
 
-  if (React.isValidElement(children)) {
-    const childRef = Object.prototype.propertyIsEnumerable.call(
-      children.props,
-      "ref",
-    )
-      ? (children.props as any).ref // React 19 (children.ref still works, but gives a warning)
-      : (children as any).ref; // React <19
+  const childRef = getChildRef(children);
+  const mergedRef = useMergeRefs(forwardedRef, childRef);
 
+  if (React.isValidElement(children)) {
     return React.cloneElement<any>(children, {
       ...mergeProps(slotProps, children.props as any),
-      ref: forwardedRef ? mergeRefs([forwardedRef, childRef]) : childRef,
+      ref: mergedRef,
     });
   }
 

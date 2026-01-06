@@ -4,7 +4,7 @@
 import React, { useRef, useState } from "react";
 import { createStrictContext } from "../../create-strict-context";
 import { useClientLayoutEffect } from "../useClientLayoutEffect";
-import { mergeRefs } from "../useMergeRefs";
+import { useMergeRefs } from "../useMergeRefs";
 import { DescendantOptions, DescendantsManager } from "./descendant";
 import { cast } from "./utils";
 
@@ -66,11 +66,13 @@ export function createDescendantContext<
       ? cast<React.RefCallback<T>>(descendants.register(options))
       : cast<React.RefCallback<T>>(descendants.register);
 
+    const refs = useMergeRefs(refCallback, ref);
+
     return {
       descendants,
       index,
       enabledIndex: descendants.enabledIndexOf(ref.current),
-      register: mergeRefs([refCallback, ref]),
+      register: refs,
     };
   }
 
