@@ -61,10 +61,14 @@ interface DismissableLayerBaseProps
   onDismiss?: (event: Event) => void;
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
+   * - anchor: The element that should be considered safe to interact with.
+   * - isEventSafe: Optional function to determine if the event is safe based on custom logic.
    */
   safeZone?: {
     anchor?: Element | null;
-    isEventSafe?: (eventType: "pointerdown" | "focusin") => boolean;
+    isEventSafe?: (
+      eventType: "pointerdown" | "pointerup" | "focusin",
+    ) => boolean;
   };
   /**
    * @default true
@@ -144,6 +148,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       }
 
       const eventType = event.detail.originalEvent.type as
+        | "pointerup"
         | "pointerdown"
         | "focusin";
 

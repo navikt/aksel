@@ -8,8 +8,10 @@ import {
   Checkbox,
   CheckboxGroup,
   Modal,
+  Popover,
   Provider,
   Tooltip,
+  UNSAFE_Combobox,
 } from "@navikt/ds-react";
 
 class CustomComponent extends HTMLElement {
@@ -32,6 +34,8 @@ class CustomComponent extends HTMLElement {
           <Button>Tooltip</Button>
         </Tooltip>
         <ModalWrapper />
+        <PopoverDemo />
+        <ComboboxDemo />
         <br />
       </Provider>,
     );
@@ -81,5 +85,52 @@ const ActionMenuDemo = () => {
     </ActionMenu>
   );
 };
+
+const PopoverDemo = () => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [openState, setOpenState] = useState(false);
+
+  return (
+    <>
+      <Button
+        ref={setAnchorEl}
+        onClick={() => setOpenState(!openState)}
+        aria-expanded={openState}
+      >
+        Åpne popover
+      </Button>
+
+      <Popover
+        open={openState}
+        onClose={() => setOpenState(false)}
+        anchorEl={anchorEl}
+      >
+        <Popover.Content>Innhold her!</Popover.Content>
+      </Popover>
+    </>
+  );
+};
+
+const ComboboxDemo = () => {
+  return (
+    <UNSAFE_Combobox label="Hva er din favorittfrukt?" options={options} />
+  );
+};
+
+const options = [
+  "ananas",
+  "banan",
+  "bringebær",
+  "drue",
+  "eple",
+  "grapefrukt",
+  "jordbær",
+  "kiwi",
+  "mandarin",
+  "mango",
+  "pære",
+  "pasjonsfrukt",
+  "vannmelon",
+];
 
 window.customElements.define("custom-component", CustomComponent);
