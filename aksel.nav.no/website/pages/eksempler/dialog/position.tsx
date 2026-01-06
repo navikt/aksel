@@ -89,7 +89,7 @@ function PositionButtons({
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { minHeight: "300px" });
+export default withDsExample(Example, { minHeight: "360px" });
 
 /* Storybook story */
 export const Demo = {

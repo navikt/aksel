@@ -213,7 +213,7 @@ const initialPeople: Person[] = [
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, { minHeight: "360px" });
 
 /* Storybook story */
 export const Demo = {
