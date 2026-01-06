@@ -12,16 +12,12 @@
   box-shadow: var(--ax-shadow-dialog);
   display: flex;
   flex-direction: column;
-  outline: 1px solid var(--ax-border-neutral-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   z-index: 2000;
   overflow: hidden;
 
-  .light:not(:has(.dark)) .aksel-dialog__backdrop ~ & {
+  &:focus {
     outline: none;
-
-    &:focus {
-      outline: none;
-    }
   }
 
   &[data-size="small"] {
@@ -104,6 +100,7 @@
       height: auto;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+      border-bottom: 0;
       left: 0;
       right: 0;
       bottom: 0;
@@ -132,6 +129,7 @@
 
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    border-right: 0;
     right: 0;
   }
 
@@ -140,6 +138,7 @@
 
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    border-left: 0;
     left: 0;
   }
 
@@ -148,6 +147,7 @@
 
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    border-bottom: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -166,6 +166,7 @@
     --__axc-dialog-transform: scale(0.98);
 
     border-radius: 0;
+    border: 0;
     inset: 0;
     max-height: 100dvh;
     max-width: 100dvw;
