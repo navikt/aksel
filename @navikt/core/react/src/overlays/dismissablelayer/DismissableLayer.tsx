@@ -155,35 +155,12 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         return;
       }
 
-      let hasPointerDownOutside = false;
-
-      if (!event.defaultPrevented) {
-        if (event.detail.originalEvent.type === "pointerdown") {
-          hasPointerDownOutside = true;
-        }
-      }
-
       const target = event.target as HTMLElement;
 
       const targetIsAnchor =
         safeZone.anchor.contains(target) || target === safeZone.anchor;
 
       if (targetIsAnchor) {
-        event.preventDefault();
-      }
-
-      /**
-       * In Safari, if the trigger element is inside a container with tabIndex={0}, a click on the trigger
-       * will first fire a 'pointerdownoutside' event on the trigger itself. However, it will then fire a
-       * 'focusoutside' event on the container.
-       *
-       * To handle this, we ignore any 'focusoutside' events if a 'pointerdownoutside' event has already occurred.
-       * 'pointerdownoutside' event is sufficient to indicate interaction outside the DismissableLayer.
-       */
-      if (
-        event.detail.originalEvent.type === "focusin" &&
-        hasPointerDownOutside
-      ) {
         event.preventDefault();
       }
     }
