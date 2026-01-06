@@ -42,7 +42,7 @@ export interface ReadMoreProps
    *
    * We recommend only using `accent`. We have disallowed status-colors.
    * @see 🏷️ {@link AkselColor}
-   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/darkside/farger-darkside)
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    * @private
    */
   "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;

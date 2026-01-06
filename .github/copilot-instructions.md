@@ -197,7 +197,7 @@ Troubleshooting
 2. Check workspace dependency build order/issues
 3. If focusing workspaces, avoid running repo-wide scripts that depend on the website
 
-## Darkside theming and tokens
+## Theming and tokens
 
 - Use design tokens and CSS layers; avoid hard-coded colors/spacing.
 - Stylelint enforces token usage; unknown/missing custom properties will fail lint.
