@@ -49,7 +49,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         <Heading
           size={accordionContext?.size === "large" ? "small" : "xsmall"}
           as="span"
-          className={cn("navds-accordion__header-content")}
         >
           {children}
         </Heading>

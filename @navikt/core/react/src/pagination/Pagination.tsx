@@ -127,12 +127,6 @@ export const getSteps = ({
 };
 
 /**
- * TODO: These classes can be removed in darkside update
- * - navds-pagination--prev-next--with-text
- * - navds-pagination__prev-next
- */
-
-/**
  * A component that displays pagination controls.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/pagination)
@@ -217,9 +211,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           <li>
             <Item
               data-color={color}
-              className={cn("navds-pagination__prev-next", {
+              className={cn({
                 "navds-pagination--invisible": page === 1,
-                "navds-pagination--prev-next--with-text": prevNextTexts,
               })}
               disabled={page === 1}
               onClick={() => onPageChange?.(page - 1)}
@@ -270,9 +263,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           <li>
             <Item
               data-color={color}
-              className={cn("navds-pagination__prev-next", {
+              className={cn({
                 "navds-pagination--invisible": page === count,
-                "navds-pagination--prev-next--with-text": prevNextTexts,
               })}
               disabled={page === count}
               onClick={() => onPageChange?.(page + 1)}
