@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
+import { Box } from "../../layout/box";
 import { VStack } from "../../layout/stack";
 import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import Detail from "../Detail";
@@ -85,9 +86,9 @@ export const ColorRole: Story = {
     <VStack gap="2">
       <Detail textColor="default">{lorem}</Detail>
       <Detail textColor="subtle">{lorem}</Detail>
-      <Detail textColor="contrast" style={{ backgroundColor: "black" }}>
-        {lorem}
-      </Detail>
+      <Box background="neutral-strong">
+        <Detail textColor="contrast">{lorem}</Detail>
+      </Box>
       <Detail data-color="brand-magenta">{lorem}</Detail>
       <Detail data-color="brand-magenta" textColor="default">
         {lorem}
@@ -95,13 +96,11 @@ export const ColorRole: Story = {
       <Detail data-color="brand-magenta" textColor="subtle">
         {lorem}
       </Detail>
-      <Detail
-        data-color="brand-magenta"
-        textColor="contrast"
-        style={{ backgroundColor: "black" }}
-      >
-        {lorem}
-      </Detail>
+      <Box background="neutral-strong">
+        <Detail data-color="brand-magenta" textColor="contrast">
+          {lorem}
+        </Detail>
+      </Box>
     </VStack>
   ),
 };
