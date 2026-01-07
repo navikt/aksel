@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./Header.module.css";
 
@@ -28,7 +28,7 @@ function HeaderLink({ name, href }: HeaderLinkProps) {
   };
 
   return (
-    <Link
+    <NextLink
       href={href}
       prefetch={false}
       data-current={isActive()}
@@ -36,7 +36,7 @@ function HeaderLink({ name, href }: HeaderLinkProps) {
       onClick={() => umamiTrack("navigere", { kilde: "header", url: href })}
     >
       {name}
-    </Link>
+    </NextLink>
   );
 }
 

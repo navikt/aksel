@@ -1,9 +1,9 @@
 import { BodyLong, BoxNew, HGrid, Heading, VStack } from "@navikt/ds-react";
-import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
+import { DS_FRONT_PAGE_QUERY_RESULT } from "@/app/_sanity/query-types";
 import styles from "./AkselByNumbers.module.css";
 
 type AkselByNumbersData = NonNullable<
-  NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_aksel_in_numbers"]
+  NonNullable<DS_FRONT_PAGE_QUERY_RESULT>["ds_aksel_in_numbers"]
 >;
 type AkselByNumbersStatistics = NonNullable<AkselByNumbersData>["statistics"];
 type AkselByNumbersStatisticsEntry =

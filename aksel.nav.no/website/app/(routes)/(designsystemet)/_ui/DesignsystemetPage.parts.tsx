@@ -2,7 +2,7 @@
 
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import { HStack, Link } from "@navikt/ds-react";
-import { KOMPONENT_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
+import { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
 
@@ -33,7 +33,7 @@ const GITHUB_CONFIG = {
   },
 } as const;
 
-function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
+function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERY_RESULT }) {
   const pack = data?.kodepakker?.[0];
   const gitConfig = pack ? (GITHUB_CONFIG[pack] ?? null) : null;
 

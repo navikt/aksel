@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/suspicious/noFocusedTests: False positive */
-import createImageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 import { SANITY_DATASET, SANITY_PROJECT_ID } from "@/sanity/config";
 
 const imageBuilder = createImageUrlBuilder({

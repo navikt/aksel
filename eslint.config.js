@@ -1,5 +1,5 @@
 const js = require("@eslint/js");
-const next = require("@next/eslint-plugin-next");
+const nextPlugin = require("@next/eslint-plugin-next");
 const vitest = require("@vitest/eslint-plugin");
 const akselLocal = require("eslint-plugin-aksel-local");
 const importPlugin = require("eslint-plugin-import");
@@ -128,9 +128,11 @@ module.exports = tseslint.config([
   },
   {
     files: ["aksel.nav.no/website/**"],
-    extends: [next.flatConfig.recommended],
-
+    plugins: {
+      "@next/next": nextPlugin,
+    },
     rules: {
+      ...nextPlugin.configs.recommended.rules,
       "react/no-unknown-property": [2, { ignore: ["jsx", "global"] }],
       "react/react-in-jsx-scope": "off",
       "@next/next/no-html-link-for-pages": [

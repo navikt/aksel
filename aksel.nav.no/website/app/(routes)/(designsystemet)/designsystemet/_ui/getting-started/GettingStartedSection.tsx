@@ -6,10 +6,10 @@ import {
   LinkCardIcon,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
-import { DS_FRONT_PAGE_QUERYResult } from "@/app/_sanity/query-types";
+import { DS_FRONT_PAGE_QUERY_RESULT } from "@/app/_sanity/query-types";
 
 type GettingStartedSectionProps = {
-  cards: NonNullable<DS_FRONT_PAGE_QUERYResult>["ds_getting_started"];
+  cards: NonNullable<DS_FRONT_PAGE_QUERY_RESULT>["ds_getting_started"];
 };
 
 function GettingStartedSection({ cards }: GettingStartedSectionProps) {

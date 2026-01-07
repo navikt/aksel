@@ -1,9 +1,9 @@
-import { BLOGG_LANDINGSSIDE_BLOGS_QUERYResult } from "@/app/_sanity/query-types";
+import { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 import { Avatar, avatarUrl } from "./Avatar";
 
 type Blogg =
-  NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERYResult>["bloggposts"][number];
+  NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT>["bloggposts"][number];
 
 export const queryToAvatars = (
   queryResponseEditorialStaff: Blogg["writers"],

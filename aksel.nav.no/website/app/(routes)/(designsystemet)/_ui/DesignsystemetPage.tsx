@@ -2,9 +2,9 @@ import { PortableTextBlock } from "next-sanity";
 import { BodyShort, Box, HStack, Heading, Tag } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import {
-  GRUNNLEGGENDE_BY_SLUG_QUERYResult,
-  KOMPONENT_BY_SLUG_QUERYResult,
-  MONSTER_MALER_BY_SLUG_QUERYResult,
+  GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT,
+  KOMPONENT_BY_SLUG_QUERY_RESULT,
+  MONSTER_MALER_BY_SLUG_QUERY_RESULT,
 } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
@@ -39,9 +39,9 @@ function DesignsystemetPageLayout({
 
 type DesignsystemetPageT = {
   data:
-    | KOMPONENT_BY_SLUG_QUERYResult
-    | GRUNNLEGGENDE_BY_SLUG_QUERYResult
-    | MONSTER_MALER_BY_SLUG_QUERYResult;
+    | KOMPONENT_BY_SLUG_QUERY_RESULT
+    | GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT
+    | MONSTER_MALER_BY_SLUG_QUERY_RESULT;
 };
 
 async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {

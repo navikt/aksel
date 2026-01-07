@@ -1,5 +1,5 @@
 import { BoxNew, HStack } from "@navikt/ds-react";
-import { GOD_PRAKSIS_TEMA_QUERYResult } from "@/app/_sanity/query-types";
+import { GOD_PRAKSIS_TEMA_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import { GodPraksisPictogram } from "./pictogram/GodPraksisPictogram";
@@ -7,7 +7,7 @@ import { GodPraksisPictogram } from "./pictogram/GodPraksisPictogram";
 type GpFrontpageCardProps = {
   children: React.ReactNode;
   href: string;
-  image?: NonNullable<GOD_PRAKSIS_TEMA_QUERYResult[number]["seo"]>["image"];
+  image?: NonNullable<GOD_PRAKSIS_TEMA_QUERY_RESULT[number]["seo"]>["image"];
 };
 
 const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {

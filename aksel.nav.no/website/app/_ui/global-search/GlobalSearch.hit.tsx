@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { Heading } from "@navikt/ds-react";
 import {
@@ -12,6 +11,7 @@ import type {
   SearchHitT,
   SearchResultPageTypesT,
 } from "@/app/_ui/global-search/server/GlobalSearch.config";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { doctypeToColorRole } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { urlFor } from "@/sanity/interface";
@@ -63,9 +63,7 @@ function GlobalSearchLink(props: {
       ? `/${hit.item.slug}#${hit.anchor}`
       : `/${hit.item.slug}`;
 
-  const imageUrl = urlFor(hit.item.status?.bilde)
-    ?.auto("format")
-    .url();
+  const imageUrl = urlFor(hit.item.status?.bilde)?.auto("format").url();
 
   return (
     <li className={styles.searchLinkLi}>
@@ -73,7 +71,7 @@ function GlobalSearchLink(props: {
         <span className={styles.searchLinkHeading}>
           <Heading
             size="small"
-            as={Link}
+            as={NextLink}
             href={href}
             onClick={() =>
               umamiTrack("navigere", { kilde: "global sok", url: href })

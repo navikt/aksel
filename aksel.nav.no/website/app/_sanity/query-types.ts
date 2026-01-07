@@ -15,30 +15,79 @@ import "@sanity/client";
  * ---------------------------------------------------------------------------------
  */
 
-// Source: schema.json
+// Source: sanity-schema.json
+export type Seo = {
+  meta?: string;
+  image?: SeoImage;
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type SeoImage = {
+  asset?: SanityImageAssetReference;
+  media?: unknown; // Unable to locate the referenced type "media" in schema
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  _type: "image";
+};
+
+export type Kilde = {
+  har_kilde?: boolean;
+  prefix?: "FOTO" | "Kilde";
+  tekst?: string;
+  link?: string;
+};
+
+export type UpdateInfo = {
+  lastVerified?: string;
+};
+
 export type Exampletext_block = {
   _type: "exampletext_block";
   title?: string;
   text?: string;
 };
 
-export type Token_ref = {
-  _type: "reference";
+export type Intro_komponent = {
+  _type: "intro_komponent";
+  body?: Riktekst_enkel;
+  brukes_til?: Array<string>;
+  brukes_ikke_til?: Array<string>;
+};
+
+export type Token_kategoriReference = {
   _ref: string;
+  _type: "reference";
   _weak?: boolean;
   [internalGroqTypeReferenceTo]?: "token_kategori";
+};
+
+export type Token_ref = Token_kategoriReference;
+
+export type Kode_eksempler_filReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "kode_eksempler_fil";
 };
 
 export type Kode_eksempler = {
   _type: "kode_eksempler";
   title?: string;
-  dir?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "kode_eksempler_fil";
-  };
+  dir?: Kode_eksempler_filReference;
   compact?: boolean;
+};
+
+export type Ds_propsReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "ds_props";
 };
 
 export type Props_seksjon = {
@@ -47,15 +96,59 @@ export type Props_seksjon = {
   komponenter?: Array<{
     title?: string;
     overridable?: boolean;
-    propref?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "ds_props";
-    };
+    propref?: Ds_propsReference;
     _type: "komponent";
     _key: string;
   }>;
+};
+
+export type Komponent_artikkelReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "komponent_artikkel";
+};
+
+export type Ds_artikkelReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "ds_artikkel";
+};
+
+export type Aksel_artikkelReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "aksel_artikkel";
+};
+
+export type Aksel_bloggReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "aksel_blogg";
+};
+
+export type Aksel_prinsippReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
+};
+
+export type Aksel_standaloneReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "aksel_standalone";
+};
+
+export type Templates_artikkelReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "templates_artikkel";
 };
 
 export type Riktekst_blogg = Array<
@@ -71,48 +164,13 @@ export type Riktekst_blogg = Array<
       markDefs?: Array<
         | {
             reference?:
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                };
+              | Komponent_artikkelReference
+              | Ds_artikkelReference
+              | Aksel_artikkelReference
+              | Aksel_bloggReference
+              | Aksel_prinsippReference
+              | Aksel_standaloneReference
+              | Templates_artikkelReference;
             _type: "internalLink";
             _key: string;
           }
@@ -129,31 +187,9 @@ export type Riktekst_blogg = Array<
   | ({
       _key: string;
     } & Relatert_innhold)
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      caption?: string;
-      small?: boolean;
-      kilde?: {
-        har_kilde?: boolean;
-        prefix?: "FOTO" | "Kilde";
-        tekst?: string;
-        link?: string;
-      };
-      dekorativt?: boolean;
-      border?: boolean;
-      background?: Color;
-      _type: "bilde";
+  | ({
       _key: string;
-    }
+    } & Bilde)
   | ({
       _key: string;
     } & Kode)
@@ -172,15 +208,9 @@ export type Riktekst_blogg = Array<
   | ({
       _key: string;
     } & Expansioncard)
-  | {
-      rows?: Array<
-        {
-          _key: string;
-        } & TableRow
-      >;
-      _type: "tabell_v2";
+  | ({
       _key: string;
-    }
+    } & Tabell_v2)
   | ({
       _key: string;
     } & Video)
@@ -208,48 +238,13 @@ export type Riktekst_accordion = Array<
       markDefs?: Array<
         | {
             reference?:
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                };
+              | Komponent_artikkelReference
+              | Ds_artikkelReference
+              | Aksel_artikkelReference
+              | Aksel_bloggReference
+              | Aksel_prinsippReference
+              | Aksel_standaloneReference
+              | Templates_artikkelReference;
             _type: "internalLink";
             _key: string;
           }
@@ -269,31 +264,9 @@ export type Riktekst_accordion = Array<
   | ({
       _key: string;
     } & Video)
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      caption?: string;
-      small?: boolean;
-      kilde?: {
-        har_kilde?: boolean;
-        prefix?: "FOTO" | "Kilde";
-        tekst?: string;
-        link?: string;
-      };
-      dekorativt?: boolean;
-      border?: boolean;
-      background?: Color;
-      _type: "bilde";
+  | ({
       _key: string;
-    }
+    } & Bilde)
   | ({
       _key: string;
     } & Kode)
@@ -306,15 +279,9 @@ export type Riktekst_accordion = Array<
   | ({
       _key: string;
     } & Alert)
-  | {
-      rows?: Array<
-        {
-          _key: string;
-        } & TableRow
-      >;
-      _type: "tabell_v2";
+  | ({
       _key: string;
-    }
+    } & Tabell_v2)
   | ({
       _key: string;
     } & Exampletext_block)
@@ -333,48 +300,13 @@ export type Riktekst_standalone = Array<
       markDefs?: Array<
         | {
             reference?:
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                };
+              | Komponent_artikkelReference
+              | Ds_artikkelReference
+              | Aksel_artikkelReference
+              | Aksel_bloggReference
+              | Aksel_prinsippReference
+              | Aksel_standaloneReference
+              | Templates_artikkelReference;
             _type: "internalLink";
             _key: string;
           }
@@ -391,31 +323,9 @@ export type Riktekst_standalone = Array<
   | ({
       _key: string;
     } & Relatert_innhold)
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      caption?: string;
-      small?: boolean;
-      kilde?: {
-        har_kilde?: boolean;
-        prefix?: "FOTO" | "Kilde";
-        tekst?: string;
-        link?: string;
-      };
-      dekorativt?: boolean;
-      border?: boolean;
-      background?: Color;
-      _type: "bilde";
+  | ({
       _key: string;
-    }
+    } & Bilde)
   | ({
       _key: string;
     } & Kode)
@@ -434,15 +344,9 @@ export type Riktekst_standalone = Array<
   | ({
       _key: string;
     } & Expansioncard)
-  | {
-      rows?: Array<
-        {
-          _key: string;
-        } & TableRow
-      >;
-      _type: "tabell_v2";
+  | ({
       _key: string;
-    }
+    } & Tabell_v2)
   | ({
       _key: string;
     } & Video)
@@ -467,48 +371,13 @@ export type Riktekst_prinsipp = Array<
       markDefs?: Array<
         | {
             reference?:
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                };
+              | Komponent_artikkelReference
+              | Ds_artikkelReference
+              | Aksel_artikkelReference
+              | Aksel_bloggReference
+              | Aksel_prinsippReference
+              | Aksel_standaloneReference
+              | Templates_artikkelReference;
             _type: "internalLink";
             _key: string;
           }
@@ -525,31 +394,9 @@ export type Riktekst_prinsipp = Array<
   | ({
       _key: string;
     } & Relatert_innhold)
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      caption?: string;
-      small?: boolean;
-      kilde?: {
-        har_kilde?: boolean;
-        prefix?: "FOTO" | "Kilde";
-        tekst?: string;
-        link?: string;
-      };
-      dekorativt?: boolean;
-      border?: boolean;
-      background?: Color;
-      _type: "bilde";
+  | ({
       _key: string;
-    }
+    } & Bilde)
   | ({
       _key: string;
     } & Kode)
@@ -568,15 +415,9 @@ export type Riktekst_prinsipp = Array<
   | ({
       _key: string;
     } & Expansioncard)
-  | {
-      rows?: Array<
-        {
-          _key: string;
-        } & TableRow
-      >;
-      _type: "tabell_v2";
+  | ({
       _key: string;
-    }
+    } & Tabell_v2)
   | ({
       _key: string;
     } & Video)
@@ -601,48 +442,13 @@ export type Riktekst_standard = Array<
       markDefs?: Array<
         | {
             reference?:
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                };
+              | Komponent_artikkelReference
+              | Ds_artikkelReference
+              | Aksel_artikkelReference
+              | Aksel_bloggReference
+              | Aksel_prinsippReference
+              | Aksel_standaloneReference
+              | Templates_artikkelReference;
             _type: "internalLink";
             _key: string;
           }
@@ -659,31 +465,9 @@ export type Riktekst_standard = Array<
   | ({
       _key: string;
     } & Relatert_innhold)
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      caption?: string;
-      small?: boolean;
-      kilde?: {
-        har_kilde?: boolean;
-        prefix?: "FOTO" | "Kilde";
-        tekst?: string;
-        link?: string;
-      };
-      dekorativt?: boolean;
-      border?: boolean;
-      background?: Color;
-      _type: "bilde";
+  | ({
       _key: string;
-    }
+    } & Bilde)
   | ({
       _key: string;
     } & Kode)
@@ -702,15 +486,9 @@ export type Riktekst_standard = Array<
   | ({
       _key: string;
     } & Expansioncard)
-  | {
-      rows?: Array<
-        {
-          _key: string;
-        } & TableRow
-      >;
-      _type: "tabell_v2";
+  | ({
       _key: string;
-    }
+    } & Tabell_v2)
   | ({
       _key: string;
     } & Video)
@@ -735,48 +513,13 @@ export type Riktekst_templates = Array<
       markDefs?: Array<
         | {
             reference?:
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                };
+              | Komponent_artikkelReference
+              | Ds_artikkelReference
+              | Aksel_artikkelReference
+              | Aksel_bloggReference
+              | Aksel_prinsippReference
+              | Aksel_standaloneReference
+              | Templates_artikkelReference;
             _type: "internalLink";
             _key: string;
           }
@@ -793,31 +536,9 @@ export type Riktekst_templates = Array<
   | ({
       _key: string;
     } & Relatert_innhold)
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      caption?: string;
-      small?: boolean;
-      kilde?: {
-        har_kilde?: boolean;
-        prefix?: "FOTO" | "Kilde";
-        tekst?: string;
-        link?: string;
-      };
-      dekorativt?: boolean;
-      border?: boolean;
-      background?: Color;
-      _type: "bilde";
+  | ({
       _key: string;
-    }
+    } & Bilde)
   | ({
       _key: string;
     } & Kode)
@@ -836,15 +557,9 @@ export type Riktekst_templates = Array<
   | ({
       _key: string;
     } & Expansioncard)
-  | {
-      rows?: Array<
-        {
-          _key: string;
-        } & TableRow
-      >;
-      _type: "tabell_v2";
+  | ({
       _key: string;
-    }
+    } & Tabell_v2)
   | ({
       _key: string;
     } & Video)
@@ -872,48 +587,13 @@ export type Riktekst_grunnleggende = Array<
       markDefs?: Array<
         | {
             reference?:
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                };
+              | Komponent_artikkelReference
+              | Ds_artikkelReference
+              | Aksel_artikkelReference
+              | Aksel_bloggReference
+              | Aksel_prinsippReference
+              | Aksel_standaloneReference
+              | Templates_artikkelReference;
             _type: "internalLink";
             _key: string;
           }
@@ -930,31 +610,9 @@ export type Riktekst_grunnleggende = Array<
   | ({
       _key: string;
     } & Relatert_innhold)
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      caption?: string;
-      small?: boolean;
-      kilde?: {
-        har_kilde?: boolean;
-        prefix?: "FOTO" | "Kilde";
-        tekst?: string;
-        link?: string;
-      };
-      dekorativt?: boolean;
-      border?: boolean;
-      background?: Color;
-      _type: "bilde";
+  | ({
       _key: string;
-    }
+    } & Bilde)
   | ({
       _key: string;
     } & Kode)
@@ -973,15 +631,9 @@ export type Riktekst_grunnleggende = Array<
   | ({
       _key: string;
     } & Expansioncard)
-  | {
-      rows?: Array<
-        {
-          _key: string;
-        } & TableRow
-      >;
-      _type: "tabell_v2";
+  | ({
       _key: string;
-    }
+    } & Tabell_v2)
   | ({
       _key: string;
     } & Video)
@@ -994,86 +646,9 @@ export type Riktekst_grunnleggende = Array<
   | ({
       _key: string;
     } & Spesial_seksjon)
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-      };
-      media?: unknown;
-      title?: string;
-      fileName?: string;
-      body?: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<
-          | {
-              reference?:
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                  };
-              _type: "internalLink";
-              _key: string;
-            }
-          | {
-              href?: string;
-              _type: "link";
-              _key: string;
-            }
-        >;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }>;
-      _type: "attachment";
+  | ({
       _key: string;
-    }
+    } & Attachment)
   | ({
       _key: string;
     } & Props_seksjon)
@@ -1091,48 +666,13 @@ export type Riktekst_enkel = Array<{
   markDefs?: Array<
     | {
         reference?:
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-            };
+          | Komponent_artikkelReference
+          | Ds_artikkelReference
+          | Aksel_artikkelReference
+          | Aksel_bloggReference
+          | Aksel_prinsippReference
+          | Aksel_standaloneReference
+          | Templates_artikkelReference;
         _type: "internalLink";
         _key: string;
       }
@@ -1160,48 +700,13 @@ export type Riktekst_komponent = Array<
       markDefs?: Array<
         | {
             reference?:
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                };
+              | Komponent_artikkelReference
+              | Ds_artikkelReference
+              | Aksel_artikkelReference
+              | Aksel_bloggReference
+              | Aksel_prinsippReference
+              | Aksel_standaloneReference
+              | Templates_artikkelReference;
             _type: "internalLink";
             _key: string;
           }
@@ -1218,31 +723,9 @@ export type Riktekst_komponent = Array<
   | ({
       _key: string;
     } & Relatert_innhold)
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      caption?: string;
-      small?: boolean;
-      kilde?: {
-        har_kilde?: boolean;
-        prefix?: "FOTO" | "Kilde";
-        tekst?: string;
-        link?: string;
-      };
-      dekorativt?: boolean;
-      border?: boolean;
-      background?: Color;
-      _type: "bilde";
+  | ({
       _key: string;
-    }
+    } & Bilde)
   | ({
       _key: string;
     } & Kode)
@@ -1261,15 +744,9 @@ export type Riktekst_komponent = Array<
   | ({
       _key: string;
     } & Expansioncard)
-  | {
-      rows?: Array<
-        {
-          _key: string;
-        } & TableRow
-      >;
-      _type: "tabell_v2";
+  | ({
       _key: string;
-    }
+    } & Tabell_v2)
   | ({
       _key: string;
     } & Video)
@@ -1293,12 +770,7 @@ export type Riktekst_komponent = Array<
 export type Compare_images = {
   _type: "compare_images";
   image_1?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -1306,12 +778,7 @@ export type Compare_images = {
     _type: "image";
   };
   image_2?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -1329,14 +796,16 @@ export type Language = {
   language?: "en";
 };
 
+export type SanityFileAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+};
+
 export type Attachment = {
   _type: "attachment";
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-  };
+  asset?: SanityFileAssetReference;
   media?: unknown;
   title?: string;
   fileName?: string;
@@ -1346,12 +815,7 @@ export type Attachment = {
 export type Spesial_seksjon = {
   _type: "spesial_seksjon";
   modul?: "token_kategori";
-  token_ref?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "token_kategori";
-  };
+  token_ref?: Token_kategoriReference;
 };
 
 export type Tips = {
@@ -1388,32 +852,17 @@ export type Accordion = {
 export type Video = {
   _type: "video";
   webm?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-    };
+    asset?: SanityFileAssetReference;
     media?: unknown;
     _type: "file";
   };
   fallback?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-    };
+    asset?: SanityFileAssetReference;
     media?: unknown;
     _type: "file";
   };
   track?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-    };
+    asset?: SanityFileAssetReference;
     media?: unknown;
     _type: "file";
   };
@@ -1426,12 +875,7 @@ export type Do_dont_block = {
   _type: "do_dont_block";
   fullwidth?: boolean;
   picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -1453,24 +897,14 @@ export type Do_dont = {
 
 export type Bilde = {
   _type: "bilde";
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-  };
+  asset?: SanityImageAssetReference;
   media?: unknown;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   alt?: string;
   caption?: string;
   small?: boolean;
-  kilde?: {
-    har_kilde?: boolean;
-    prefix?: "FOTO" | "Kilde";
-    tekst?: string;
-    link?: string;
-  };
+  kilde?: Kilde;
   dekorativt?: boolean;
   border?: boolean;
   background?: Color;
@@ -1491,48 +925,13 @@ export type Relatert_innhold = {
     title?: string;
     intern?: boolean;
     intern_lenke?:
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-        };
+      | Komponent_artikkelReference
+      | Ds_artikkelReference
+      | Aksel_artikkelReference
+      | Aksel_bloggReference
+      | Aksel_prinsippReference
+      | Aksel_standaloneReference
+      | Templates_artikkelReference;
     ekstern_link?: string;
     ekstern_domene?: boolean;
     _type: "lenke";
@@ -1556,21 +955,14 @@ export type Blogg_landingsside = {
   _updatedAt: string;
   _rev: string;
   intro?: Riktekst_standard;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
+};
+
+export type GpTemaReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "gp.tema";
 };
 
 export type GpTemaUndertema = {
@@ -1581,12 +973,14 @@ export type GpTemaUndertema = {
   _rev: string;
   title?: string;
   description?: string;
-  tema?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "gp.tema";
-  };
+  tema?: GpTemaReference;
+};
+
+export type Editorial_staffReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "editorial_staff";
 };
 
 export type GpTema = {
@@ -1598,21 +992,14 @@ export type GpTema = {
   title?: string;
   slug?: Slug;
   description?: string;
-  contacts?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "editorial_staff";
-  }>;
+  contacts?: Array<
+    {
+      _key: string;
+    } & Editorial_staffReference
+  >;
   alias?: Array<string>;
   pictogram?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -1620,33 +1007,36 @@ export type GpTema = {
     _type: "image";
   };
   pictogramInverted?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
   };
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type Godpraksis_landingsside = {
@@ -1656,21 +1046,7 @@ export type Godpraksis_landingsside = {
   _updatedAt: string;
   _rev: string;
   intro?: Riktekst_standard;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 };
 
 export type Templates_landingsside = {
@@ -1684,21 +1060,7 @@ export type Templates_landingsside = {
   ingress_brev?: string;
   ingress_stotte?: string;
   ingress_soknadsdialog?: string;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 };
 
 export type Ds_endringslogg_artikkel = {
@@ -1713,12 +1075,7 @@ export type Ds_endringslogg_artikkel = {
   endringstype?: "design" | "dokumentasjon" | "kode";
   fremhevet?: boolean;
   herobilde?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -1728,21 +1085,7 @@ export type Ds_endringslogg_artikkel = {
   };
   content?: Riktekst_grunnleggende;
   visMer?: boolean;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 };
 
 export type Grunnleggende_landingsside = {
@@ -1765,21 +1108,9 @@ export type Grunnleggende_landingsside = {
   show_overview_guider?: boolean;
   ingress_kode?: string;
   show_overview_kode?: boolean;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  ingress_migreringsguider?: string;
+  show_overview_migreringsguider?: boolean;
+  seo?: Seo;
 };
 
 export type Komponenter_landingsside = {
@@ -1793,21 +1124,7 @@ export type Komponenter_landingsside = {
   ingress_primitives?: string;
   ingress_core?: string;
   ingress_legacy?: string;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 };
 
 export type Token_kategori = {
@@ -1873,12 +1190,7 @@ export type Article_views = {
   views_week?: number;
   views_month?: number;
   views_year?: number;
-  article_ref?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-  };
+  article_ref?: Aksel_artikkelReference;
   url?: string;
 };
 
@@ -1900,48 +1212,13 @@ export type Publication_flow = {
     markDefs?: Array<
       | {
           reference?:
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-              };
+            | Komponent_artikkelReference
+            | Ds_artikkelReference
+            | Aksel_artikkelReference
+            | Aksel_bloggReference
+            | Aksel_prinsippReference
+            | Aksel_standaloneReference
+            | Templates_artikkelReference;
           _type: "internalLink";
           _key: string;
         }
@@ -1967,48 +1244,13 @@ export type Publication_flow = {
     markDefs?: Array<
       | {
           reference?:
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-              };
+            | Komponent_artikkelReference
+            | Ds_artikkelReference
+            | Aksel_artikkelReference
+            | Aksel_bloggReference
+            | Aksel_prinsippReference
+            | Aksel_standaloneReference
+            | Templates_artikkelReference;
           _type: "internalLink";
           _key: string;
         }
@@ -2034,48 +1276,13 @@ export type Publication_flow = {
     markDefs?: Array<
       | {
           reference?:
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-              };
+            | Komponent_artikkelReference
+            | Ds_artikkelReference
+            | Aksel_artikkelReference
+            | Aksel_bloggReference
+            | Aksel_prinsippReference
+            | Aksel_standaloneReference
+            | Templates_artikkelReference;
           _type: "internalLink";
           _key: string;
         }
@@ -2109,48 +1316,13 @@ export type Skrivehjelp = {
     markDefs?: Array<
       | {
           reference?:
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-              };
+            | Komponent_artikkelReference
+            | Ds_artikkelReference
+            | Aksel_artikkelReference
+            | Aksel_bloggReference
+            | Aksel_prinsippReference
+            | Aksel_standaloneReference
+            | Templates_artikkelReference;
           _type: "internalLink";
           _key: string;
         }
@@ -2172,9 +1344,7 @@ export type Komponent_artikkel = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  updateInfo?: {
-    lastVerified?: string;
-  };
+  updateInfo?: UpdateInfo;
   publishedAt?: string;
   heading?: string;
   kategori?: "primitives" | "core" | "legacy" | "standalone";
@@ -2185,12 +1355,7 @@ export type Komponent_artikkel = {
     unsafe?: boolean;
     internal?: boolean;
     bilde?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -2202,21 +1367,7 @@ export type Komponent_artikkel = {
   content?: Riktekst_komponent;
   kodepakker?: Array<string>;
   figma_link?: string;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 };
 
 export type Ds_artikkel = {
@@ -2225,9 +1376,7 @@ export type Ds_artikkel = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  updateInfo?: {
-    lastVerified?: string;
-  };
+  updateInfo?: UpdateInfo;
   publishedAt?: string;
   heading?: string;
   kategori?:
@@ -2237,18 +1386,14 @@ export type Ds_artikkel = {
     | "darkside"
     | "guider"
     | "kode"
+    | "migreringsguider"
     | "standalone";
   sidebarindex?: number;
   slug?: Slug;
   status?: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     bilde?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -2256,21 +1401,7 @@ export type Ds_artikkel = {
     };
   };
   content?: Riktekst_grunnleggende;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 };
 
 export type Ds_props = {
@@ -2298,99 +1429,53 @@ export type Ds_props = {
   }>;
 };
 
+export type GpInnholdstypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "gp.innholdstype";
+};
+
+export type GpTemaUndertemaReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "gp.tema.undertema";
+};
+
 export type Aksel_artikkel = {
   _id: string;
   _type: "aksel_artikkel";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  updateInfo?: {
-    lastVerified?: string;
-  };
+  updateInfo?: UpdateInfo;
   publishedAt?: string;
-  innholdstype?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "gp.innholdstype";
-  };
-  undertema?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "gp.tema.undertema";
-  }>;
+  innholdstype?: GpInnholdstypeReference;
+  undertema?: Array<
+    {
+      _key: string;
+    } & GpTemaUndertemaReference
+  >;
   heading?: string;
-  writers?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "editorial_staff";
-  }>;
+  writers?: Array<
+    {
+      _key: string;
+    } & Editorial_staffReference
+  >;
   slug?: Slug;
   ingress?: string;
   content?: Riktekst_standard;
   relevante_artikler?: Array<
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-      }
+    | Komponent_artikkelReference
+    | Ds_artikkelReference
+    | Aksel_artikkelReference
+    | Aksel_bloggReference
+    | Aksel_prinsippReference
+    | Aksel_standaloneReference
+    | Templates_artikkelReference
   >;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
   writeHelp?: string;
 };
 
@@ -2402,32 +1487,25 @@ export type Aksel_blogg = {
   _rev: string;
   publishedAt?: string;
   heading?: string;
-  writers?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "editorial_staff";
-  }>;
+  writers?: Array<
+    {
+      _key: string;
+    } & Editorial_staffReference
+  >;
   kategori?: "nytt-fra-teamene" | "da-vi-gjorde-dette" | "pa-reise";
   slug?: Slug;
   ingress?: string;
   content?: Riktekst_blogg;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
+};
+
+export type Color = {
+  _type: "color";
+  hex?: string;
+  alpha?: number;
+  hsl?: HslaColor;
+  hsv?: HsvaColor;
+  rgb?: RgbaColor;
 };
 
 export type Aksel_prinsipp = {
@@ -2445,21 +1523,7 @@ export type Aksel_prinsipp = {
   };
   ingress?: string;
   content?: Riktekst_prinsipp;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 };
 
 export type Aksel_standalone = {
@@ -2480,9 +1544,7 @@ export type Templates_artikkel = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  updateInfo?: {
-    lastVerified?: string;
-  };
+  updateInfo?: UpdateInfo;
   publishedAt?: string;
   heading?: string;
   kategori?: "brev" | "stotte" | "soknadsdialog" | "standalone";
@@ -2491,12 +1553,7 @@ export type Templates_artikkel = {
   status?: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     bilde?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -2505,21 +1562,15 @@ export type Templates_artikkel = {
   };
   gh_discussions?: string;
   content?: Riktekst_templates;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
+};
+
+export type Code = {
+  _type: "code";
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
 };
 
 export type GpInnholdstype = {
@@ -2530,13 +1581,6 @@ export type GpInnholdstype = {
   _rev: string;
   title?: string;
   description?: string;
-};
-
-export type Intro_komponent = {
-  _type: "intro_komponent";
-  body?: Riktekst_enkel;
-  brukes_til?: Array<string>;
-  brukes_ikke_til?: Array<string>;
 };
 
 export type Redirect = {
@@ -2603,21 +1647,7 @@ export type Aksel_ds_forside = {
     _type: "support_card";
     _key: string;
   }>;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 };
 
 export type Aksel_forside = {
@@ -2629,67 +1659,18 @@ export type Aksel_forside = {
   god_praksis_intro?: string;
   blocks?: Array<{
     highlights?: Array<
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-        }
+      | Komponent_artikkelReference
+      | Ds_artikkelReference
+      | Aksel_artikkelReference
+      | Aksel_bloggReference
+      | Aksel_prinsippReference
+      | Aksel_standaloneReference
+      | Templates_artikkelReference
     >;
     _type: "nytt_fra_aksel";
     _key: string;
   }>;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 };
 
 export type Editorial_staff = {
@@ -2702,15 +1683,6 @@ export type Editorial_staff = {
   description?: string;
   avatar_id?: Slug;
   type?: "team" | "miljoe";
-};
-
-export type Color = {
-  _type: "color";
-  hex?: string;
-  alpha?: number;
-  hsl?: HslaColor;
-  hsv?: HsvaColor;
-  rgb?: RgbaColor;
 };
 
 export type RgbaColor = {
@@ -2744,14 +1716,6 @@ export type MediaTag = {
   _updatedAt: string;
   _rev: string;
   name?: Slug;
-};
-
-export type Code = {
-  _type: "code";
-  language?: string;
-  filename?: string;
-  code?: string;
-  highlightedLines?: Array<number>;
 };
 
 export type Table = {
@@ -2794,20 +1758,15 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
 };
 
 export type SanityFileAsset = {
@@ -2830,6 +1789,13 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type SanityImageAsset = {
@@ -2855,17 +1821,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type Geopoint = {
   _type: "geopoint";
   lat?: number;
@@ -2873,24 +1828,27 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type AllSanitySchemaTypes =
+  | Seo
+  | SanityImageAssetReference
+  | SeoImage
+  | Kilde
+  | UpdateInfo
   | Exampletext_block
+  | Intro_komponent
+  | Token_kategoriReference
   | Token_ref
+  | Kode_eksempler_filReference
   | Kode_eksempler
+  | Ds_propsReference
   | Props_seksjon
+  | Komponent_artikkelReference
+  | Ds_artikkelReference
+  | Aksel_artikkelReference
+  | Aksel_bloggReference
+  | Aksel_prinsippReference
+  | Aksel_standaloneReference
+  | Templates_artikkelReference
   | Riktekst_blogg
   | Riktekst_accordion
   | Riktekst_standalone
@@ -2902,6 +1860,7 @@ export type AllSanitySchemaTypes =
   | Riktekst_komponent
   | Compare_images
   | Language
+  | SanityFileAssetReference
   | Attachment
   | Spesial_seksjon
   | Tips
@@ -2917,8 +1876,13 @@ export type AllSanitySchemaTypes =
   | Relatert_innhold
   | Prinsipper_landingsside
   | Blogg_landingsside
+  | GpTemaReference
   | GpTemaUndertema
+  | Editorial_staffReference
   | GpTema
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Slug
   | Godpraksis_landingsside
   | Templates_landingsside
   | Ds_endringslogg_artikkel
@@ -2933,41 +1897,41 @@ export type AllSanitySchemaTypes =
   | Komponent_artikkel
   | Ds_artikkel
   | Ds_props
+  | GpInnholdstypeReference
+  | GpTemaUndertemaReference
   | Aksel_artikkel
   | Aksel_blogg
+  | Color
   | Aksel_prinsipp
   | Aksel_standalone
   | Templates_artikkel
+  | Code
   | GpInnholdstype
-  | Intro_komponent
   | Redirect
   | Aksel_ds_forside
   | Aksel_forside
   | Editorial_staff
-  | Color
   | RgbaColor
   | HsvaColor
   | HslaColor
   | MediaTag
-  | Code
   | Table
   | TableRow
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityImageHotspot
-  | SanityImageCrop
-  | SanityFileAsset
-  | SanityImageAsset
   | SanityImageMetadata
-  | Geopoint
-  | Slug
-  | SanityAssetSourceData;
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint;
+
 export declare const internalGroqTypeReferenceTo: unique symbol;
+
 // Source: ../app/_sanity/queries.ts
 // Variable: DS_FRONT_PAGE_QUERY
 // Query: *[_type == "aksel_ds_forside"][0] {    ds_forside_title,    ds_forside_ingress,    ds_getting_started[]{ description, icon, link, title },    ds_layers_overview,    ds_changelog { title, ingress },    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},    ds_support[]{description, link, title},    seo { image, meta }  }
-export type DS_FRONT_PAGE_QUERYResult = {
+export type DS_FRONT_PAGE_QUERY_RESULT = {
   ds_forside_title: string | null;
   ds_forside_ingress: string | null;
   ds_getting_started: Array<{
@@ -3003,32 +1967,25 @@ export type DS_FRONT_PAGE_QUERYResult = {
     title: string | null;
   }> | null;
   seo: {
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
+    image: SeoImage | null;
     meta: string | null;
   } | null;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: DS_PROMO_QUERY
 // Query: *[_type == "aksel_ds_forside"][0].ds_forside_promo_tag
-export type DS_PROMO_QUERYResult = {
+export type DS_PROMO_QUERY_RESULT = {
   show?: boolean;
   label?: string;
   text?: string;
   link?: string;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: DESIGNSYSTEM_SIDEBAR_QUERY
 // Query: *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {  _type,  heading,  "slug": slug.current,  kategori,  "tag": status.tag,  "sidebarindex": sidebarindex,}
-export type DESIGNSYSTEM_SIDEBAR_QUERYResult = Array<
+export type DESIGNSYSTEM_SIDEBAR_QUERY_RESULT = Array<
   | {
       _type: "ds_artikkel";
       heading: string | null;
@@ -3039,6 +1996,7 @@ export type DESIGNSYSTEM_SIDEBAR_QUERYResult = Array<
         | "guider"
         | "introduksjon"
         | "kode"
+        | "migreringsguider"
         | "standalone"
         | "styling"
         | null;
@@ -3062,9 +2020,11 @@ export type DESIGNSYSTEM_SIDEBAR_QUERYResult = Array<
       sidebarindex: number | null;
     }
 >;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: DESIGNSYSTEM_OVERVIEW_PAGES_QUERY
 // Query: *[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {  _type,  overview_pages  }
-export type DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult = Array<
+export type DESIGNSYSTEM_OVERVIEW_PAGES_QUERY_RESULT = Array<
   | {
       _type: "grunnleggende_landingsside";
       overview_pages: Array<string> | null;
@@ -3078,9 +2038,11 @@ export type DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult = Array<
       overview_pages: Array<string> | null;
     }
 >;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: BLOGG_BY_SLUG_QUERY
-// Query: *[_type == "aksel_blogg" && slug.current == $slug][0]{  ...,  "slug": slug.current,  content[]{    ...,    _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},  },  publishedAt,  "writers": array::compact(writers[]->{title, description, avatar_id, type})}
-export type BLOGG_BY_SLUG_QUERYResult = {
+// Query: *[_type == "aksel_blogg" && slug.current == $slug][0]{  ...,  "slug": slug.current,  content[]{    ...,    _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"},  },  publishedAt,  "writers": array::compact(writers[]->{title, description, avatar_id, type})}
+export type BLOGG_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _type: "aksel_blogg";
   _createdAt: string;
@@ -3133,48 +2095,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -3192,29 +2119,19 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -3230,48 +2147,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -3343,13 +2225,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -3367,48 +2249,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -3466,48 +2313,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -3525,29 +2337,19 @@ export type BLOGG_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        _key: string;
+        _type: "bilde";
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
         caption?: string;
         small?: boolean;
-        kilde?: {
-          har_kilde?: boolean;
-          prefix?: "FOTO" | "Kilde";
-          tekst?: string;
-          link?: string;
-        };
+        kilde?: Kilde;
         dekorativt?: boolean;
         border?: boolean;
         background?: Color;
-        _type: "bilde";
-        _key: string;
         markDefs: null;
         floating_text: null;
       }
@@ -3563,48 +2365,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
         markDefs: Array<
           | {
               reference?:
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                  };
+                | Aksel_artikkelReference
+                | Aksel_bloggReference
+                | Aksel_prinsippReference
+                | Aksel_standaloneReference
+                | Ds_artikkelReference
+                | Komponent_artikkelReference
+                | Templates_artikkelReference;
               _type: "internalLink";
               _key: string;
               slug: Slug | null;
@@ -3623,12 +2390,7 @@ export type BLOGG_BY_SLUG_QUERYResult = {
         _key: string;
         _type: "compare_images";
         image_1?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -3636,12 +2398,7 @@ export type BLOGG_BY_SLUG_QUERYResult = {
           _type: "image";
         };
         image_2?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -3695,48 +2452,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -3754,29 +2476,19 @@ export type BLOGG_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              _key: string;
+              _type: "bilde";
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               alt?: string;
               caption?: string;
               small?: boolean;
-              kilde?: {
-                har_kilde?: boolean;
-                prefix?: "FOTO" | "Kilde";
-                tekst?: string;
-                link?: string;
-              };
+              kilde?: Kilde;
               dekorativt?: boolean;
               border?: boolean;
               background?: Color;
-              _type: "bilde";
-              _key: string;
               markDefs: null;
               floating_text: null;
             }
@@ -3792,48 +2504,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
               markDefs: Array<
                 | {
                     reference?:
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                        };
+                      | Aksel_artikkelReference
+                      | Aksel_bloggReference
+                      | Aksel_prinsippReference
+                      | Aksel_standaloneReference
+                      | Ds_artikkelReference
+                      | Komponent_artikkelReference
+                      | Templates_artikkelReference;
                     _type: "internalLink";
                     _key: string;
                     slug: Slug | null;
@@ -3889,13 +2566,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
+              _key: string;
+              _type: "table";
               rows?: Array<
                 {
                   _key: string;
                 } & TableRow
               >;
-              _type: "tabell_v2";
-              _key: string;
               markDefs: null;
             }
           | {
@@ -3913,48 +2590,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -4014,48 +2656,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -4089,13 +2696,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
+        _key: string;
+        _type: "tabell_v2";
         rows?: Array<
           {
             _key: string;
           } & TableRow
         >;
-        _type: "tabell_v2";
-        _key: string;
         markDefs: null;
       }
     | {
@@ -4113,48 +2720,13 @@ export type BLOGG_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -4189,41 +2761,15 @@ export type BLOGG_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
   > | null;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: BLOGG_LANDINGSSIDE_BLOGS_QUERY
 // Query: *[_type == "blogg_landingsside"][0]{    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){      seo,      heading,      ingress,      publishedAt,      _createdAt,      _id,      "slug": slug.current,      "writers": array::compact(writers[]->{title, description, avatar_id, type})    }  }
-export type BLOGG_LANDINGSSIDE_BLOGS_QUERYResult = {
+export type BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT = {
   bloggposts: Array<{
-    seo: {
-      meta?: string;
-      image?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      };
-    } | null;
+    seo: Seo | null;
     heading: string | null;
     ingress: string | null;
     publishedAt: string | null;
@@ -4238,9 +2784,11 @@ export type BLOGG_LANDINGSSIDE_BLOGS_QUERYResult = {
     }> | null;
   }>;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: BLOGG_LANDINGSSIDE_PAGE_QUERY
 // Query: *[_type == "blogg_landingsside"][0]{    "page": {...},  }
-export type BLOGG_LANDINGSSIDE_PAGE_QUERYResult = {
+export type BLOGG_LANDINGSSIDE_PAGE_QUERY_RESULT = {
   page: {
     _id: string;
     _type: "blogg_landingsside";
@@ -4248,26 +2796,14 @@ export type BLOGG_LANDINGSSIDE_PAGE_QUERYResult = {
     _updatedAt: string;
     _rev: string;
     intro?: Riktekst_standard;
-    seo?: {
-      meta?: string;
-      image?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      };
-    };
+    seo?: Seo;
   };
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY
 // Query: *[_type == "komponenter_landingsside"][0]
-export type DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERYResult = {
+export type DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY_RESULT = {
   _id: string;
   _type: "komponenter_landingsside";
   _createdAt: string;
@@ -4278,25 +2814,13 @@ export type DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERYResult = {
   ingress_primitives?: string;
   ingress_core?: string;
   ingress_legacy?: string;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY
 // Query: *[_type == "grunnleggende_landingsside"][0]
-export type DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERYResult = {
+export type DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY_RESULT = {
   _id: string;
   _type: "grunnleggende_landingsside";
   _createdAt: string;
@@ -4316,25 +2840,15 @@ export type DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERYResult = {
   show_overview_guider?: boolean;
   ingress_kode?: string;
   show_overview_kode?: boolean;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  ingress_migreringsguider?: string;
+  show_overview_migreringsguider?: boolean;
+  seo?: Seo;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY
 // Query: *[_type == "templates_landingsside"][0]
-export type DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERYResult = {
+export type DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY_RESULT = {
   _id: string;
   _type: "templates_landingsside";
   _createdAt: string;
@@ -4345,25 +2859,13 @@ export type DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERYResult = {
   ingress_brev?: string;
   ingress_stotte?: string;
   ingress_soknadsdialog?: string;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: GLOBAL_SEARCH_QUERY_ALL
 // Query: *[_type in ["komponent_artikkel",  "ds_artikkel",  "aksel_artikkel",  "aksel_blogg",  "aksel_prinsipp",  "aksel_standalone",  "templates_artikkel"]]{    heading,    "slug": slug.current,    "tema": undertema[]->tema->title,    ingress,    status,    _type,    "intro": pt::text(intro.body),    content,    publishedAt,    seo}
-export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
+export type GLOBAL_SEARCH_QUERY_ALL_RESULT = Array<
   | {
       heading: string | null;
       slug: string | null;
@@ -4374,21 +2876,7 @@ export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
       intro: string;
       content: Riktekst_standard | null;
       publishedAt: string | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | {
       heading: string | null;
@@ -4400,21 +2888,7 @@ export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
       intro: string;
       content: Riktekst_blogg | null;
       publishedAt: string | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | {
       heading: string | null;
@@ -4426,21 +2900,7 @@ export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
       intro: string;
       content: Riktekst_prinsipp | null;
       publishedAt: string | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | {
       heading: string | null;
@@ -4462,12 +2922,7 @@ export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
       status: {
         tag?: "beta" | "deprecated" | "new" | "ready";
         bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -4478,21 +2933,7 @@ export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
       intro: string;
       content: Riktekst_grunnleggende | null;
       publishedAt: string | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | {
       heading: string | null;
@@ -4504,12 +2945,7 @@ export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
         unsafe?: boolean;
         internal?: boolean;
         bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -4520,21 +2956,7 @@ export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
       intro: string;
       content: Riktekst_komponent | null;
       publishedAt: string | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | {
       heading: string | null;
@@ -4544,12 +2966,7 @@ export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
       status: {
         tag?: "beta" | "deprecated" | "new" | "ready";
         bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -4560,34 +2977,20 @@ export type GLOBAL_SEARCH_QUERY_ALLResult = Array<
       intro: string;
       content: Riktekst_templates | null;
       publishedAt: string | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
 >;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: KOMPONENT_BY_SLUG_QUERY
-// Query: *[_type == "komponent_artikkel" && slug.current == $slug][0]  {    ...,    intro{      ...,      body[]{        ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},      }    },    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},    },}
-export type KOMPONENT_BY_SLUG_QUERYResult = {
+// Query: *[_type == "komponent_artikkel" && slug.current == $slug][0]  {    ...,    intro{      ...,      body[]{        ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"},      }    },    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"},    },}
+export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _type: "komponent_artikkel";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  updateInfo?: {
-    lastVerified?: string;
-  };
+  updateInfo?: UpdateInfo;
   publishedAt?: string;
   heading?: string;
   kategori?: "core" | "legacy" | "primitives" | "standalone";
@@ -4598,12 +3001,7 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
     unsafe?: boolean;
     internal?: boolean;
     bilde?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -4625,48 +3023,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
       markDefs: Array<
         | {
             reference?:
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                }
-              | {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                };
+              | Aksel_artikkelReference
+              | Aksel_bloggReference
+              | Aksel_prinsippReference
+              | Aksel_standaloneReference
+              | Ds_artikkelReference
+              | Komponent_artikkelReference
+              | Templates_artikkelReference;
             _type: "internalLink";
             _key: string;
             slug: Slug | null;
@@ -4687,8 +3050,8 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
   content: Array<
     | {
         _key: string;
-        _type: "reference";
         _ref: string;
+        _type: "reference";
         _weak?: boolean;
         markDefs: null;
       }
@@ -4727,48 +3090,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -4786,29 +3114,19 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -4824,48 +3142,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -4937,13 +3220,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -4961,48 +3244,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -5060,48 +3308,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -5119,29 +3332,19 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        _key: string;
+        _type: "bilde";
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
         caption?: string;
         small?: boolean;
-        kilde?: {
-          har_kilde?: boolean;
-          prefix?: "FOTO" | "Kilde";
-          tekst?: string;
-          link?: string;
-        };
+        kilde?: Kilde;
         dekorativt?: boolean;
         border?: boolean;
         background?: Color;
-        _type: "bilde";
-        _key: string;
         markDefs: null;
         floating_text: null;
       }
@@ -5157,48 +3360,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
         markDefs: Array<
           | {
               reference?:
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                  };
+                | Aksel_artikkelReference
+                | Aksel_bloggReference
+                | Aksel_prinsippReference
+                | Aksel_standaloneReference
+                | Ds_artikkelReference
+                | Komponent_artikkelReference
+                | Templates_artikkelReference;
               _type: "internalLink";
               _key: string;
               slug: Slug | null;
@@ -5255,48 +3423,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -5314,29 +3447,19 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              _key: string;
+              _type: "bilde";
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               alt?: string;
               caption?: string;
               small?: boolean;
-              kilde?: {
-                har_kilde?: boolean;
-                prefix?: "FOTO" | "Kilde";
-                tekst?: string;
-                link?: string;
-              };
+              kilde?: Kilde;
               dekorativt?: boolean;
               border?: boolean;
               background?: Color;
-              _type: "bilde";
-              _key: string;
               markDefs: null;
               floating_text: null;
             }
@@ -5352,48 +3475,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
               markDefs: Array<
                 | {
                     reference?:
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                        };
+                      | Aksel_artikkelReference
+                      | Aksel_bloggReference
+                      | Aksel_prinsippReference
+                      | Aksel_standaloneReference
+                      | Ds_artikkelReference
+                      | Komponent_artikkelReference
+                      | Templates_artikkelReference;
                     _type: "internalLink";
                     _key: string;
                     slug: Slug | null;
@@ -5449,13 +3537,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
+              _key: string;
+              _type: "table";
               rows?: Array<
                 {
                   _key: string;
                 } & TableRow
               >;
-              _type: "tabell_v2";
-              _key: string;
               markDefs: null;
             }
           | {
@@ -5473,48 +3561,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -5612,48 +3665,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -5723,13 +3741,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
+        _key: string;
+        _type: "tabell_v2";
         rows?: Array<
           {
             _key: string;
           } & TableRow
         >;
-        _type: "tabell_v2";
-        _key: string;
         markDefs: null;
       }
     | {
@@ -5747,48 +3765,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -5825,25 +3808,13 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
   > | null;
   kodepakker?: Array<string>;
   figma_link?: string;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY
 // Query: *[_type == $docType  && kategori == $category]  {    _id,    heading,    "slug": slug.current,    status,    kategori,    "sidebarindex": sidebarindex,    "description": seo.meta}
-export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult = Array<
+export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY_RESULT = Array<
   | {
       _id: string;
       heading: null;
@@ -5905,12 +3876,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult = Array<
       status: {
         tag?: "beta" | "deprecated" | "new" | "ready";
         bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -5923,6 +3889,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult = Array<
         | "guider"
         | "introduksjon"
         | "kode"
+        | "migreringsguider"
         | "standalone"
         | "styling"
         | null;
@@ -5936,12 +3903,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult = Array<
       status: {
         tag?: "beta" | "deprecated" | "new" | "ready";
         bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -5961,12 +3923,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult = Array<
         unsafe?: boolean;
         internal?: boolean;
         bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -5987,9 +3944,11 @@ export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult = Array<
       description: string | null;
     }
 >;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY
 // Query: *[_type == $docType && defined(kategori)]{  _id,  heading,  "slug": slug.current,  status,  kategori,  sidebarindex}
-export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
+export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY_RESULT = Array<
   | {
       _id: string;
       heading: null;
@@ -6005,12 +3964,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
       status: {
         tag?: "beta" | "deprecated" | "new" | "ready";
         bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -6023,6 +3977,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
         | "guider"
         | "introduksjon"
         | "kode"
+        | "migreringsguider"
         | "standalone"
         | "styling"
         | null;
@@ -6035,12 +3990,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
       status: {
         tag?: "beta" | "deprecated" | "new" | "ready";
         bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -6059,12 +4009,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
         unsafe?: boolean;
         internal?: boolean;
         bilde?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -6083,17 +4028,17 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult = Array<
       sidebarindex: null;
     }
 >;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: GRUNNLEGGENDE_BY_SLUG_QUERY
-// Query: *[_type == "ds_artikkel" && slug.current == $slug][0]  {    ...,    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},    },}
-export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
+// Query: *[_type == "ds_artikkel" && slug.current == $slug][0]  {    ...,    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"},    },}
+export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _type: "ds_artikkel";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  updateInfo?: {
-    lastVerified?: string;
-  };
+  updateInfo?: UpdateInfo;
   publishedAt?: string;
   heading?: string;
   kategori?:
@@ -6102,6 +4047,7 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
     | "guider"
     | "introduksjon"
     | "kode"
+    | "migreringsguider"
     | "standalone"
     | "styling";
   sidebarindex?: number;
@@ -6109,12 +4055,7 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
   status?: {
     tag?: "beta" | "deprecated" | "new" | "ready";
     bilde?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -6157,48 +4098,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -6216,29 +4122,19 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -6254,48 +4150,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -6367,13 +4228,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -6391,48 +4252,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -6490,48 +4316,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -6549,12 +4340,9 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-        };
+        _key: string;
+        _type: "attachment";
+        asset?: SanityFileAssetReference;
         media?: unknown;
         title?: string;
         fileName?: string;
@@ -6570,48 +4358,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -6626,36 +4379,24 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
           _type: "block";
           _key: string;
         }> | null;
-        _type: "attachment";
-        _key: string;
         downloadLink: string | null;
         size: number | null;
         markDefs: null;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        _key: string;
+        _type: "bilde";
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
         caption?: string;
         small?: boolean;
-        kilde?: {
-          har_kilde?: boolean;
-          prefix?: "FOTO" | "Kilde";
-          tekst?: string;
-          link?: string;
-        };
+        kilde?: Kilde;
         dekorativt?: boolean;
         border?: boolean;
         background?: Color;
-        _type: "bilde";
-        _key: string;
         markDefs: null;
         floating_text: null;
       }
@@ -6671,48 +4412,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
         markDefs: Array<
           | {
               reference?:
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                  };
+                | Aksel_artikkelReference
+                | Aksel_bloggReference
+                | Aksel_prinsippReference
+                | Aksel_standaloneReference
+                | Ds_artikkelReference
+                | Komponent_artikkelReference
+                | Templates_artikkelReference;
               _type: "internalLink";
               _key: string;
               slug: Slug | null;
@@ -6769,48 +4475,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -6828,29 +4499,19 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              _key: string;
+              _type: "bilde";
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               alt?: string;
               caption?: string;
               small?: boolean;
-              kilde?: {
-                har_kilde?: boolean;
-                prefix?: "FOTO" | "Kilde";
-                tekst?: string;
-                link?: string;
-              };
+              kilde?: Kilde;
               dekorativt?: boolean;
               border?: boolean;
               background?: Color;
-              _type: "bilde";
-              _key: string;
               markDefs: null;
               floating_text: null;
             }
@@ -6866,48 +4527,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
               markDefs: Array<
                 | {
                     reference?:
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                        };
+                      | Aksel_artikkelReference
+                      | Aksel_bloggReference
+                      | Aksel_prinsippReference
+                      | Aksel_standaloneReference
+                      | Ds_artikkelReference
+                      | Komponent_artikkelReference
+                      | Templates_artikkelReference;
                     _type: "internalLink";
                     _key: string;
                     slug: Slug | null;
@@ -6963,13 +4589,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
+              _key: string;
+              _type: "table";
               rows?: Array<
                 {
                   _key: string;
                 } & TableRow
               >;
-              _type: "tabell_v2";
-              _key: string;
               markDefs: null;
             }
           | {
@@ -6987,48 +4613,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -7088,48 +4679,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -7202,12 +4758,7 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
         _key: string;
         _type: "spesial_seksjon";
         modul?: "token_kategori";
-        token_ref?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "token_kategori";
-        };
+        token_ref?: Token_kategoriReference;
         markDefs: null;
         token: {
           _id: string;
@@ -7220,13 +4771,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
         } | null;
       }
     | {
+        _key: string;
+        _type: "tabell_v2";
         rows?: Array<
           {
             _key: string;
           } & TableRow
         >;
-        _type: "tabell_v2";
-        _key: string;
         markDefs: null;
       }
     | {
@@ -7244,48 +4795,13 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -7320,33 +4836,19 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
   > | null;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: MONSTER_MALER_BY_SLUG_QUERY
-// Query: *[_type == "templates_artikkel" && slug.current == $slug][0]  {    ...,    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},    },}
-export type MONSTER_MALER_BY_SLUG_QUERYResult = {
+// Query: *[_type == "templates_artikkel" && slug.current == $slug][0]  {    ...,    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"},    },}
+export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _type: "templates_artikkel";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  updateInfo?: {
-    lastVerified?: string;
-  };
+  updateInfo?: UpdateInfo;
   publishedAt?: string;
   heading?: string;
   kategori?: "brev" | "soknadsdialog" | "standalone" | "stotte";
@@ -7355,12 +4857,7 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
   status?: {
     tag?: "beta" | "deprecated" | "new" | "ready";
     bilde?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -7404,48 +4901,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -7463,29 +4925,19 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -7501,48 +4953,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -7614,13 +5031,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -7638,48 +5055,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -7737,48 +5119,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -7796,29 +5143,19 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        _key: string;
+        _type: "bilde";
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
         caption?: string;
         small?: boolean;
-        kilde?: {
-          har_kilde?: boolean;
-          prefix?: "FOTO" | "Kilde";
-          tekst?: string;
-          link?: string;
-        };
+        kilde?: Kilde;
         dekorativt?: boolean;
         border?: boolean;
         background?: Color;
-        _type: "bilde";
-        _key: string;
         markDefs: null;
         floating_text: null;
       }
@@ -7834,48 +5171,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
         markDefs: Array<
           | {
               reference?:
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                  };
+                | Aksel_artikkelReference
+                | Aksel_bloggReference
+                | Aksel_prinsippReference
+                | Aksel_standaloneReference
+                | Ds_artikkelReference
+                | Komponent_artikkelReference
+                | Templates_artikkelReference;
               _type: "internalLink";
               _key: string;
               slug: Slug | null;
@@ -7932,48 +5234,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -7991,29 +5258,19 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              _key: string;
+              _type: "bilde";
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               alt?: string;
               caption?: string;
               small?: boolean;
-              kilde?: {
-                har_kilde?: boolean;
-                prefix?: "FOTO" | "Kilde";
-                tekst?: string;
-                link?: string;
-              };
+              kilde?: Kilde;
               dekorativt?: boolean;
               border?: boolean;
               background?: Color;
-              _type: "bilde";
-              _key: string;
               markDefs: null;
               floating_text: null;
             }
@@ -8029,48 +5286,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
               markDefs: Array<
                 | {
                     reference?:
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                        };
+                      | Aksel_artikkelReference
+                      | Aksel_bloggReference
+                      | Aksel_prinsippReference
+                      | Aksel_standaloneReference
+                      | Ds_artikkelReference
+                      | Komponent_artikkelReference
+                      | Templates_artikkelReference;
                     _type: "internalLink";
                     _key: string;
                     slug: Slug | null;
@@ -8126,13 +5348,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
+              _key: string;
+              _type: "table";
               rows?: Array<
                 {
                   _key: string;
                 } & TableRow
               >;
-              _type: "tabell_v2";
-              _key: string;
               markDefs: null;
             }
           | {
@@ -8150,48 +5372,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -8289,48 +5476,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -8364,13 +5516,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
+        _key: string;
+        _type: "tabell_v2";
         rows?: Array<
           {
             _key: string;
           } & TableRow
         >;
-        _type: "tabell_v2";
-        _key: string;
         markDefs: null;
       }
     | {
@@ -8388,48 +5540,13 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -8464,31 +5581,21 @@ export type MONSTER_MALER_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
   > | null;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: TOC_BY_SLUG_QUERY
 // Query: *[slug.current == $slug][0].content[style match 'h2'][]{  "id": _key,  "title": pt::text(@)}
-export type TOC_BY_SLUG_QUERYResult = Array<{
+export type TOC_BY_SLUG_QUERY_RESULT = Array<{
   id: string;
   title: string;
 }> | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: METADATA_BY_SLUG_QUERY
 // Query: *[slug.current == $slug][0]{  heading,  ingress,  publishedAt,  seo}
-export type METADATA_BY_SLUG_QUERYResult =
+export type METADATA_BY_SLUG_QUERY_RESULT =
   | {
       heading: null;
       ingress: null;
@@ -8499,41 +5606,13 @@ export type METADATA_BY_SLUG_QUERYResult =
       heading: null;
       ingress: null;
       publishedAt: null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | {
       heading: string | null;
       ingress: null;
       publishedAt: null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | {
       heading: string | null;
@@ -8545,61 +5624,32 @@ export type METADATA_BY_SLUG_QUERYResult =
       heading: string | null;
       ingress: null;
       publishedAt: string | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | {
       heading: string | null;
       ingress: string | null;
       publishedAt: string | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: SLUG_BY_TYPE_QUERY
 // Query: *[_type == $type && defined(slug.current)].slug.current
-export type SLUG_BY_TYPE_QUERYResult = Array<string | null>;
+export type SLUG_BY_TYPE_QUERY_RESULT = Array<string | null>;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: ENDRINGSLOGG_QUERY
-// Query: *[_type == "ds_endringslogg_artikkel"]{    heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}, }, visMer  }
-export type ENDRINGSLOGG_QUERYResult = Array<{
+// Query: *[_type == "ds_endringslogg_artikkel"]{    heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"}, }, visMer  }
+export type ENDRINGSLOGG_QUERY_RESULT = Array<{
   heading: string | null;
   slug: string | null;
   endringsdato: string | null;
   endringstype: "design" | "dokumentasjon" | "kode" | null;
   fremhevet: boolean | null;
   herobilde: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -8643,48 +5693,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -8702,29 +5717,19 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -8740,48 +5745,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -8853,13 +5823,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -8877,48 +5847,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -8976,48 +5911,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -9035,12 +5935,9 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
         markDefs: null;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-        };
+        _key: string;
+        _type: "attachment";
+        asset?: SanityFileAssetReference;
         media?: unknown;
         title?: string;
         fileName?: string;
@@ -9056,48 +5953,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -9112,36 +5974,24 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
           _type: "block";
           _key: string;
         }> | null;
-        _type: "attachment";
-        _key: string;
         downloadLink: string | null;
         size: number | null;
         markDefs: null;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        _key: string;
+        _type: "bilde";
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
         caption?: string;
         small?: boolean;
-        kilde?: {
-          har_kilde?: boolean;
-          prefix?: "FOTO" | "Kilde";
-          tekst?: string;
-          link?: string;
-        };
+        kilde?: Kilde;
         dekorativt?: boolean;
         border?: boolean;
         background?: Color;
-        _type: "bilde";
-        _key: string;
         markDefs: null;
         floating_text: null;
       }
@@ -9157,48 +6007,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
         markDefs: Array<
           | {
               reference?:
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                  };
+                | Aksel_artikkelReference
+                | Aksel_bloggReference
+                | Aksel_prinsippReference
+                | Aksel_standaloneReference
+                | Ds_artikkelReference
+                | Komponent_artikkelReference
+                | Templates_artikkelReference;
               _type: "internalLink";
               _key: string;
               slug: Slug | null;
@@ -9255,48 +6070,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -9314,29 +6094,19 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
               markDefs: null;
             }
           | {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              _key: string;
+              _type: "bilde";
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               alt?: string;
               caption?: string;
               small?: boolean;
-              kilde?: {
-                har_kilde?: boolean;
-                prefix?: "FOTO" | "Kilde";
-                tekst?: string;
-                link?: string;
-              };
+              kilde?: Kilde;
               dekorativt?: boolean;
               border?: boolean;
               background?: Color;
-              _type: "bilde";
-              _key: string;
               markDefs: null;
               floating_text: null;
             }
@@ -9352,48 +6122,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
               markDefs: Array<
                 | {
                     reference?:
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                        };
+                      | Aksel_artikkelReference
+                      | Aksel_bloggReference
+                      | Aksel_prinsippReference
+                      | Aksel_standaloneReference
+                      | Ds_artikkelReference
+                      | Komponent_artikkelReference
+                      | Templates_artikkelReference;
                     _type: "internalLink";
                     _key: string;
                     slug: Slug | null;
@@ -9449,13 +6184,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
               markDefs: null;
             }
           | {
+              _key: string;
+              _type: "table";
               rows?: Array<
                 {
                   _key: string;
                 } & TableRow
               >;
-              _type: "tabell_v2";
-              _key: string;
               markDefs: null;
             }
           | {
@@ -9473,48 +6208,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -9574,48 +6274,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -9688,12 +6353,7 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
         _key: string;
         _type: "spesial_seksjon";
         modul?: "token_kategori";
-        token_ref?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "token_kategori";
-        };
+        token_ref?: Token_kategoriReference;
         markDefs: null;
         token: {
           _id: string;
@@ -9706,13 +6366,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
         } | null;
       }
     | {
+        _key: string;
+        _type: "tabell_v2";
         rows?: Array<
           {
             _key: string;
           } & TableRow
         >;
-        _type: "tabell_v2";
-        _key: string;
         markDefs: null;
       }
     | {
@@ -9730,48 +6390,13 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -9808,9 +6433,11 @@ export type ENDRINGSLOGG_QUERYResult = Array<{
   > | null;
   visMer: boolean | null;
 }>;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: ENDRINGSLOGG_WITH_NEIGHBORS_QUERY
-// Query: *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{    "primary": {      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}, }, visMer    },    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}, }, visMer    },    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}, }, visMer    }  }
-export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
+// Query: *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{    "primary": {      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"}, }, visMer    },    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"}, }, visMer    },    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"}, }, visMer    }  }
+export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
   primary: {
     heading: string | null;
     slug: string | null;
@@ -9818,12 +6445,7 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
     endringstype: "design" | "dokumentasjon" | "kode" | null;
     fremhevet: boolean | null;
     herobilde: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -9867,48 +6489,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                     markDefs: Array<
                       | {
                           reference?:
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                              };
+                            | Aksel_artikkelReference
+                            | Aksel_bloggReference
+                            | Aksel_prinsippReference
+                            | Aksel_standaloneReference
+                            | Ds_artikkelReference
+                            | Komponent_artikkelReference
+                            | Templates_artikkelReference;
                           _type: "internalLink";
                           _key: string;
                           slug: Slug | null;
@@ -9926,29 +6513,19 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: null;
                 }
               | {
-                  asset?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                  };
+                  _key: string;
+                  _type: "bilde";
+                  asset?: SanityImageAssetReference;
                   media?: unknown;
                   hotspot?: SanityImageHotspot;
                   crop?: SanityImageCrop;
                   alt?: string;
                   caption?: string;
                   small?: boolean;
-                  kilde?: {
-                    har_kilde?: boolean;
-                    prefix?: "FOTO" | "Kilde";
-                    tekst?: string;
-                    link?: string;
-                  };
+                  kilde?: Kilde;
                   dekorativt?: boolean;
                   border?: boolean;
                   background?: Color;
-                  _type: "bilde";
-                  _key: string;
                   markDefs: null;
                   floating_text: null;
                 }
@@ -9964,48 +6541,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -10077,13 +6619,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: null;
                 }
               | {
+                  _key: string;
+                  _type: "table";
                   rows?: Array<
                     {
                       _key: string;
                     } & TableRow
                   >;
-                  _type: "tabell_v2";
-                  _key: string;
                   markDefs: null;
                 }
               | {
@@ -10101,48 +6643,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                     markDefs: Array<
                       | {
                           reference?:
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                              };
+                            | Aksel_artikkelReference
+                            | Aksel_bloggReference
+                            | Aksel_prinsippReference
+                            | Aksel_standaloneReference
+                            | Ds_artikkelReference
+                            | Komponent_artikkelReference
+                            | Templates_artikkelReference;
                           _type: "internalLink";
                           _key: string;
                           slug: Slug | null;
@@ -10200,48 +6707,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -10259,12 +6731,9 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           markDefs: null;
         }
       | {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
+          _key: string;
+          _type: "attachment";
+          asset?: SanityFileAssetReference;
           media?: unknown;
           title?: string;
           fileName?: string;
@@ -10280,48 +6749,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -10336,36 +6770,24 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             _type: "block";
             _key: string;
           }> | null;
-          _type: "attachment";
-          _key: string;
           downloadLink: string | null;
           size: number | null;
           markDefs: null;
         }
       | {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          _key: string;
+          _type: "bilde";
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           alt?: string;
           caption?: string;
           small?: boolean;
-          kilde?: {
-            har_kilde?: boolean;
-            prefix?: "FOTO" | "Kilde";
-            tekst?: string;
-            link?: string;
-          };
+          kilde?: Kilde;
           dekorativt?: boolean;
           border?: boolean;
           background?: Color;
-          _type: "bilde";
-          _key: string;
           markDefs: null;
           floating_text: null;
         }
@@ -10381,48 +6803,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -10479,48 +6866,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -10538,29 +6890,19 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -10576,48 +6918,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -10673,13 +6980,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -10697,48 +7004,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -10798,48 +7070,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -10912,12 +7149,7 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           _key: string;
           _type: "spesial_seksjon";
           modul?: "token_kategori";
-          token_ref?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "token_kategori";
-          };
+          token_ref?: Token_kategoriReference;
           markDefs: null;
           token: {
             _id: string;
@@ -10930,13 +7162,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           } | null;
         }
       | {
+          _key: string;
+          _type: "tabell_v2";
           rows?: Array<
             {
               _key: string;
             } & TableRow
           >;
-          _type: "tabell_v2";
-          _key: string;
           markDefs: null;
         }
       | {
@@ -10954,48 +7186,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -11039,12 +7236,7 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
     endringstype: "design" | "dokumentasjon" | "kode" | null;
     fremhevet: boolean | null;
     herobilde: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -11088,48 +7280,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                     markDefs: Array<
                       | {
                           reference?:
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                              };
+                            | Aksel_artikkelReference
+                            | Aksel_bloggReference
+                            | Aksel_prinsippReference
+                            | Aksel_standaloneReference
+                            | Ds_artikkelReference
+                            | Komponent_artikkelReference
+                            | Templates_artikkelReference;
                           _type: "internalLink";
                           _key: string;
                           slug: Slug | null;
@@ -11147,29 +7304,19 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: null;
                 }
               | {
-                  asset?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                  };
+                  _key: string;
+                  _type: "bilde";
+                  asset?: SanityImageAssetReference;
                   media?: unknown;
                   hotspot?: SanityImageHotspot;
                   crop?: SanityImageCrop;
                   alt?: string;
                   caption?: string;
                   small?: boolean;
-                  kilde?: {
-                    har_kilde?: boolean;
-                    prefix?: "FOTO" | "Kilde";
-                    tekst?: string;
-                    link?: string;
-                  };
+                  kilde?: Kilde;
                   dekorativt?: boolean;
                   border?: boolean;
                   background?: Color;
-                  _type: "bilde";
-                  _key: string;
                   markDefs: null;
                   floating_text: null;
                 }
@@ -11185,48 +7332,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -11298,13 +7410,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: null;
                 }
               | {
+                  _key: string;
+                  _type: "table";
                   rows?: Array<
                     {
                       _key: string;
                     } & TableRow
                   >;
-                  _type: "tabell_v2";
-                  _key: string;
                   markDefs: null;
                 }
               | {
@@ -11322,48 +7434,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                     markDefs: Array<
                       | {
                           reference?:
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                              };
+                            | Aksel_artikkelReference
+                            | Aksel_bloggReference
+                            | Aksel_prinsippReference
+                            | Aksel_standaloneReference
+                            | Ds_artikkelReference
+                            | Komponent_artikkelReference
+                            | Templates_artikkelReference;
                           _type: "internalLink";
                           _key: string;
                           slug: Slug | null;
@@ -11421,48 +7498,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -11480,12 +7522,9 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           markDefs: null;
         }
       | {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
+          _key: string;
+          _type: "attachment";
+          asset?: SanityFileAssetReference;
           media?: unknown;
           title?: string;
           fileName?: string;
@@ -11501,48 +7540,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -11557,36 +7561,24 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             _type: "block";
             _key: string;
           }> | null;
-          _type: "attachment";
-          _key: string;
           downloadLink: string | null;
           size: number | null;
           markDefs: null;
         }
       | {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          _key: string;
+          _type: "bilde";
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           alt?: string;
           caption?: string;
           small?: boolean;
-          kilde?: {
-            har_kilde?: boolean;
-            prefix?: "FOTO" | "Kilde";
-            tekst?: string;
-            link?: string;
-          };
+          kilde?: Kilde;
           dekorativt?: boolean;
           border?: boolean;
           background?: Color;
-          _type: "bilde";
-          _key: string;
           markDefs: null;
           floating_text: null;
         }
@@ -11602,48 +7594,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -11700,48 +7657,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -11759,29 +7681,19 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -11797,48 +7709,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -11894,13 +7771,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -11918,48 +7795,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -12019,48 +7861,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -12133,12 +7940,7 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           _key: string;
           _type: "spesial_seksjon";
           modul?: "token_kategori";
-          token_ref?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "token_kategori";
-          };
+          token_ref?: Token_kategoriReference;
           markDefs: null;
           token: {
             _id: string;
@@ -12151,13 +7953,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           } | null;
         }
       | {
+          _key: string;
+          _type: "tabell_v2";
           rows?: Array<
             {
               _key: string;
             } & TableRow
           >;
-          _type: "tabell_v2";
-          _key: string;
           markDefs: null;
         }
       | {
@@ -12175,48 +7977,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -12260,12 +8027,7 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
     endringstype: "design" | "dokumentasjon" | "kode" | null;
     fremhevet: boolean | null;
     herobilde: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -12309,48 +8071,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                     markDefs: Array<
                       | {
                           reference?:
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                              };
+                            | Aksel_artikkelReference
+                            | Aksel_bloggReference
+                            | Aksel_prinsippReference
+                            | Aksel_standaloneReference
+                            | Ds_artikkelReference
+                            | Komponent_artikkelReference
+                            | Templates_artikkelReference;
                           _type: "internalLink";
                           _key: string;
                           slug: Slug | null;
@@ -12368,29 +8095,19 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: null;
                 }
               | {
-                  asset?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                  };
+                  _key: string;
+                  _type: "bilde";
+                  asset?: SanityImageAssetReference;
                   media?: unknown;
                   hotspot?: SanityImageHotspot;
                   crop?: SanityImageCrop;
                   alt?: string;
                   caption?: string;
                   small?: boolean;
-                  kilde?: {
-                    har_kilde?: boolean;
-                    prefix?: "FOTO" | "Kilde";
-                    tekst?: string;
-                    link?: string;
-                  };
+                  kilde?: Kilde;
                   dekorativt?: boolean;
                   border?: boolean;
                   background?: Color;
-                  _type: "bilde";
-                  _key: string;
                   markDefs: null;
                   floating_text: null;
                 }
@@ -12406,48 +8123,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -12519,13 +8201,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: null;
                 }
               | {
+                  _key: string;
+                  _type: "table";
                   rows?: Array<
                     {
                       _key: string;
                     } & TableRow
                   >;
-                  _type: "tabell_v2";
-                  _key: string;
                   markDefs: null;
                 }
               | {
@@ -12543,48 +8225,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                     markDefs: Array<
                       | {
                           reference?:
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                              }
-                            | {
-                                _ref: string;
-                                _type: "reference";
-                                _weak?: boolean;
-                                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                              };
+                            | Aksel_artikkelReference
+                            | Aksel_bloggReference
+                            | Aksel_prinsippReference
+                            | Aksel_standaloneReference
+                            | Ds_artikkelReference
+                            | Komponent_artikkelReference
+                            | Templates_artikkelReference;
                           _type: "internalLink";
                           _key: string;
                           slug: Slug | null;
@@ -12642,48 +8289,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -12701,12 +8313,9 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           markDefs: null;
         }
       | {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
+          _key: string;
+          _type: "attachment";
+          asset?: SanityFileAssetReference;
           media?: unknown;
           title?: string;
           fileName?: string;
@@ -12722,48 +8331,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -12778,36 +8352,24 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             _type: "block";
             _key: string;
           }> | null;
-          _type: "attachment";
-          _key: string;
           downloadLink: string | null;
           size: number | null;
           markDefs: null;
         }
       | {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          _key: string;
+          _type: "bilde";
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           alt?: string;
           caption?: string;
           small?: boolean;
-          kilde?: {
-            har_kilde?: boolean;
-            prefix?: "FOTO" | "Kilde";
-            tekst?: string;
-            link?: string;
-          };
+          kilde?: Kilde;
           dekorativt?: boolean;
           border?: boolean;
           background?: Color;
-          _type: "bilde";
-          _key: string;
           markDefs: null;
           floating_text: null;
         }
@@ -12823,48 +8385,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -12921,48 +8448,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -12980,29 +8472,19 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -13018,48 +8500,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -13115,13 +8562,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -13139,48 +8586,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -13240,48 +8652,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -13354,12 +8731,7 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           _key: string;
           _type: "spesial_seksjon";
           modul?: "token_kategori";
-          token_ref?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "token_kategori";
-          };
+          token_ref?: Token_kategoriReference;
           markDefs: null;
           token: {
             _id: string;
@@ -13372,13 +8744,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
           } | null;
         }
       | {
+          _key: string;
+          _type: "tabell_v2";
           rows?: Array<
             {
               _key: string;
             } & TableRow
           >;
-          _type: "tabell_v2";
-          _key: string;
           markDefs: null;
         }
       | {
@@ -13396,48 +8768,13 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
             markDefs: Array<
               | {
                   reference?:
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                      }
-                    | {
-                        _ref: string;
-                        _type: "reference";
-                        _weak?: boolean;
-                        [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                      };
+                    | Aksel_artikkelReference
+                    | Aksel_bloggReference
+                    | Aksel_prinsippReference
+                    | Aksel_standaloneReference
+                    | Ds_artikkelReference
+                    | Komponent_artikkelReference
+                    | Templates_artikkelReference;
                   _type: "internalLink";
                   _key: string;
                   slug: Slug | null;
@@ -13475,9 +8812,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult = {
     visMer: boolean | null;
   } | null;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: ENDRINGSLOGG_METADATA_BY_SLUG_QUERY
 // Query: *[slug.current == $slug][0]{    heading,    endringsdato,    endringstype,    herobilde,    seo  }
-export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult =
+export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERY_RESULT =
   | {
       heading: null;
       endringsdato: null;
@@ -13490,21 +8829,7 @@ export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult =
       endringsdato: null;
       endringstype: null;
       herobilde: null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | {
       heading: string | null;
@@ -13518,33 +8843,14 @@ export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult =
       endringsdato: null;
       endringstype: null;
       herobilde: null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | {
       heading: string | null;
       endringsdato: string | null;
       endringstype: "design" | "dokumentasjon" | "kode" | null;
       herobilde: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
@@ -13552,44 +8858,29 @@ export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult =
         alt?: string;
         _type: "image";
       } | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
     }
   | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: N_LATEST_CHANGE_LOGS_QUERY
 // Query: *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]
-export type N_LATEST_CHANGE_LOGS_QUERYResult = Array<{
+export type N_LATEST_CHANGE_LOGS_QUERY_RESULT = Array<{
   heading: string | null;
   slug: Slug | null;
   endringsdato: string | null;
   endringstype: "design" | "dokumentasjon" | "kode" | null;
 }>;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: GOD_PRAKSIS_ALL_TEMA_QUERY
 // Query: *[_type == "gp.tema"] | order(lower(title)){  title,  _updatedAt,  description,  pictogram,  "slug": slug.current,  "articles": *[_type=="aksel_artikkel"    && (^._id in undertema[]->tema._ref)] {      heading,      "slug": slug.current,      "undertema": undertema[]->{title, "temaTitle": tema->title},      "innholdstype": innholdstype->title,      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month    } | order(coalesce(views, -1) desc)[0...4]{      heading,      slug,      undertema,      innholdstype    },}
-export type GOD_PRAKSIS_ALL_TEMA_QUERYResult = Array<{
+export type GOD_PRAKSIS_ALL_TEMA_QUERY_RESULT = Array<{
   title: string | null;
   _updatedAt: string;
   description: string | null;
   pictogram: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -13607,26 +8898,16 @@ export type GOD_PRAKSIS_ALL_TEMA_QUERYResult = Array<{
     innholdstype: string | null;
   }>;
 }>;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY
 // Query: *[_type == "godpraksis_landingsside"][0].seo
-export type GOD_PRAKSIS_LANDING_PAGE_SEO_QUERYResult = {
-  meta?: string;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-} | null;
+export type GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY_RESULT = Seo | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: GOD_PRAKSIS_TEMA_BY_SLUG_QUERY
 // Query: *[_type == "gp.tema" && slug.current == $slug][0]{    ...,    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{      title,      description    },  }
-export type GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult = {
+export type GOD_PRAKSIS_TEMA_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _type: "gp.tema";
   _createdAt: string;
@@ -13635,21 +8916,14 @@ export type GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult = {
   title?: string;
   slug?: Slug;
   description?: string;
-  contacts?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "editorial_staff";
-  }>;
+  contacts?: Array<
+    {
+      _key: string;
+    } & Editorial_staffReference
+  >;
   alias?: Array<string>;
   pictogram?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -13657,41 +8931,24 @@ export type GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult = {
     _type: "image";
   };
   pictogramInverted?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
   };
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
   undertema: Array<{
     title: string | null;
     description: string | null;
   }>;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY
 // Query: *[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(updateInfo.lastVerified desc) {    _id,    heading,    "displayDate": updateInfo.lastVerified,    "description": ingress,    "undertema": undertema[]->{title, "temaTitle": tema->title},    "innholdstype": innholdstype->title,    "slug": slug.current,  }
-export type GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult = Array<{
+export type GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY_RESULT = Array<{
   _id: string;
   heading: string | null;
   displayDate: string | null;
@@ -13703,17 +8960,17 @@ export type GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult = Array<{
   innholdstype: string | null;
   slug: string | null;
 }>;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY
-// Query: *[slug.current == $slug && _type == "aksel_artikkel"][0]  {    ...,    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},    },    "innholdstype": innholdstype->title,    "undertema": undertema[]->{      title,      "tema": tema->{        title,        "slug": slug.current,        "image": seo.image      }    },    "writers": array::compact(writers[]->{title, description, avatar_id, type}),    relevante_artikler[]->{      heading,      ingress,      slug,      "innholdstype": innholdstype->title,    }  }
-export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
+// Query: *[slug.current == $slug && _type == "aksel_artikkel"][0]  {    ...,    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"},    },    "innholdstype": innholdstype->title,    "undertema": undertema[]->{      title,      "tema": tema->{        title,        "slug": slug.current,        "image": seo.image      }    },    "writers": array::compact(writers[]->{title, description, avatar_id, type}),    relevante_artikler[]->{      heading,      ingress,      slug,      "innholdstype": innholdstype->title,    }  }
+export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _type: "aksel_artikkel";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  updateInfo?: {
-    lastVerified?: string;
-  };
+  updateInfo?: UpdateInfo;
   publishedAt?: string;
   innholdstype: string | null;
   undertema: Array<{
@@ -13721,18 +8978,7 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
     tema: {
       title: string | null;
       slug: string | null;
-      image: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      } | null;
+      image: SeoImage | null;
     } | null;
   }> | null;
   heading?: string;
@@ -13780,48 +9026,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -13839,29 +9050,19 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -13877,48 +9078,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -13990,13 +9156,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -14014,48 +9180,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -14113,48 +9244,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -14172,29 +9268,19 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        _key: string;
+        _type: "bilde";
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
         caption?: string;
         small?: boolean;
-        kilde?: {
-          har_kilde?: boolean;
-          prefix?: "FOTO" | "Kilde";
-          tekst?: string;
-          link?: string;
-        };
+        kilde?: Kilde;
         dekorativt?: boolean;
         border?: boolean;
         background?: Color;
-        _type: "bilde";
-        _key: string;
         markDefs: null;
         floating_text: null;
       }
@@ -14210,48 +9296,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
         markDefs: Array<
           | {
               reference?:
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                  };
+                | Aksel_artikkelReference
+                | Aksel_bloggReference
+                | Aksel_prinsippReference
+                | Aksel_standaloneReference
+                | Ds_artikkelReference
+                | Komponent_artikkelReference
+                | Templates_artikkelReference;
               _type: "internalLink";
               _key: string;
               slug: Slug | null;
@@ -14308,48 +9359,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -14367,29 +9383,19 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              _key: string;
+              _type: "bilde";
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               alt?: string;
               caption?: string;
               small?: boolean;
-              kilde?: {
-                har_kilde?: boolean;
-                prefix?: "FOTO" | "Kilde";
-                tekst?: string;
-                link?: string;
-              };
+              kilde?: Kilde;
               dekorativt?: boolean;
               border?: boolean;
               background?: Color;
-              _type: "bilde";
-              _key: string;
               markDefs: null;
               floating_text: null;
             }
@@ -14405,48 +9411,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
               markDefs: Array<
                 | {
                     reference?:
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                        };
+                      | Aksel_artikkelReference
+                      | Aksel_bloggReference
+                      | Aksel_prinsippReference
+                      | Aksel_standaloneReference
+                      | Ds_artikkelReference
+                      | Komponent_artikkelReference
+                      | Templates_artikkelReference;
                     _type: "internalLink";
                     _key: string;
                     slug: Slug | null;
@@ -14502,13 +9473,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
+              _key: string;
+              _type: "table";
               rows?: Array<
                 {
                   _key: string;
                 } & TableRow
               >;
-              _type: "tabell_v2";
-              _key: string;
               markDefs: null;
             }
           | {
@@ -14526,48 +9497,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -14627,48 +9563,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -14702,13 +9603,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
+        _key: string;
+        _type: "tabell_v2";
         rows?: Array<
           {
             _key: string;
           } & TableRow
         >;
-        _type: "tabell_v2";
-        _key: string;
         markDefs: null;
       }
     | {
@@ -14726,48 +9627,13 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -14822,26 +9688,14 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult = {
         innholdstype: string | null;
       }
   > | null;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
   writeHelp?: string;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: GOD_PRAKSIS_TEMA_QUERY
 // Query: *[_type == "gp.tema"] | order(lower(title))
-export type GOD_PRAKSIS_TEMA_QUERYResult = Array<{
+export type GOD_PRAKSIS_TEMA_QUERY_RESULT = Array<{
   _id: string;
   _type: "gp.tema";
   _createdAt: string;
@@ -14850,21 +9704,14 @@ export type GOD_PRAKSIS_TEMA_QUERYResult = Array<{
   title?: string;
   slug?: Slug;
   description?: string;
-  contacts?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "editorial_staff";
-  }>;
+  contacts?: Array<
+    {
+      _key: string;
+    } & Editorial_staffReference
+  >;
   alias?: Array<string>;
   pictogram?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -14872,37 +9719,20 @@ export type GOD_PRAKSIS_TEMA_QUERYResult = Array<{
     _type: "image";
   };
   pictogramInverted?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
   };
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 }>;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: LANDINGSSIDE_LATEST_QUERY
 // Query: *[_type == "aksel_forside"][0]{  blocks[]{    ...,    _type == "nytt_fra_aksel"=>{      highlights[]->{        ...,        "slug": slug.current,        "content": null,        "tema": undertema[]->tema->title,      },      "curatedRecent": {        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...4]{          _type,          _id,          heading,          _createdAt,          _updatedAt,          publishedAt,          "slug": slug.current,          ingress,          seo,          "writers": array::compact(writers[]->{title, description, avatar_id, type})        },        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{          _type,          _id,          heading,          _createdAt,          _updatedAt,          publishedAt,          "slug": slug.current,          "tema": undertema[]->tema->title,          ingress,          seo,          "writers": array::compact(writers[]->{title, description, avatar_id, type})        },        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...7]{          _type,          _id,          heading,          "slug": slug.current,          status,          kategori,          _createdAt,          _updatedAt,          publishedAt,          seo        },      },    }  }}.blocks
-export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
+export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
   highlights: Array<
     | {
         _id: string;
@@ -14910,93 +9740,33 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
-        updateInfo?: {
-          lastVerified?: string;
-        };
+        updateInfo?: UpdateInfo;
         publishedAt?: string;
-        innholdstype?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "gp.innholdstype";
-        };
-        undertema?: Array<{
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          _key: string;
-          [internalGroqTypeReferenceTo]?: "gp.tema.undertema";
-        }>;
+        innholdstype?: GpInnholdstypeReference;
+        undertema?: Array<
+          {
+            _key: string;
+          } & GpTemaUndertemaReference
+        >;
         heading?: string;
-        writers?: Array<{
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          _key: string;
-          [internalGroqTypeReferenceTo]?: "editorial_staff";
-        }>;
+        writers?: Array<
+          {
+            _key: string;
+          } & Editorial_staffReference
+        >;
         slug: string | null;
         ingress?: string;
         content: null;
         relevante_artikler?: Array<
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-            }
-          | {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-            }
+          | Aksel_artikkelReference
+          | Aksel_bloggReference
+          | Aksel_prinsippReference
+          | Aksel_standaloneReference
+          | Ds_artikkelReference
+          | Komponent_artikkelReference
+          | Templates_artikkelReference
         >;
-        seo?: {
-          meta?: string;
-          image?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-        };
+        seo?: Seo;
         writeHelp?: string;
         tema: Array<string | null> | null;
       }
@@ -15008,32 +9778,16 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         _rev: string;
         publishedAt?: string;
         heading?: string;
-        writers?: Array<{
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          _key: string;
-          [internalGroqTypeReferenceTo]?: "editorial_staff";
-        }>;
+        writers?: Array<
+          {
+            _key: string;
+          } & Editorial_staffReference
+        >;
         kategori?: "da-vi-gjorde-dette" | "nytt-fra-teamene" | "pa-reise";
         slug: string | null;
         ingress?: string;
         content: null;
-        seo?: {
-          meta?: string;
-          image?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-        };
+        seo?: Seo;
         tema: null;
       }
     | {
@@ -15051,21 +9805,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         };
         ingress?: string;
         content: null;
-        seo?: {
-          meta?: string;
-          image?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-        };
+        seo?: Seo;
         tema: null;
       }
     | {
@@ -15086,9 +9826,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
-        updateInfo?: {
-          lastVerified?: string;
-        };
+        updateInfo?: UpdateInfo;
         publishedAt?: string;
         heading?: string;
         kategori?:
@@ -15097,6 +9835,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
           | "guider"
           | "introduksjon"
           | "kode"
+          | "migreringsguider"
           | "standalone"
           | "styling";
         sidebarindex?: number;
@@ -15104,12 +9843,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         status?: {
           tag?: "beta" | "deprecated" | "new" | "ready";
           bilde?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
+            asset?: SanityImageAssetReference;
             media?: unknown;
             hotspot?: SanityImageHotspot;
             crop?: SanityImageCrop;
@@ -15117,21 +9851,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
           };
         };
         content: null;
-        seo?: {
-          meta?: string;
-          image?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-        };
+        seo?: Seo;
         tema: null;
       }
     | {
@@ -15140,9 +9860,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
-        updateInfo?: {
-          lastVerified?: string;
-        };
+        updateInfo?: UpdateInfo;
         publishedAt?: string;
         heading?: string;
         kategori?: "core" | "legacy" | "primitives" | "standalone";
@@ -15153,12 +9871,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
           unsafe?: boolean;
           internal?: boolean;
           bilde?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
+            asset?: SanityImageAssetReference;
             media?: unknown;
             hotspot?: SanityImageHotspot;
             crop?: SanityImageCrop;
@@ -15170,21 +9883,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         content: null;
         kodepakker?: Array<string>;
         figma_link?: string;
-        seo?: {
-          meta?: string;
-          image?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-        };
+        seo?: Seo;
         tema: null;
       }
     | {
@@ -15193,9 +9892,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
-        updateInfo?: {
-          lastVerified?: string;
-        };
+        updateInfo?: UpdateInfo;
         publishedAt?: string;
         heading?: string;
         kategori?: "brev" | "soknadsdialog" | "standalone" | "stotte";
@@ -15204,12 +9901,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         status?: {
           tag?: "beta" | "deprecated" | "new" | "ready";
           bilde?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
+            asset?: SanityImageAssetReference;
             media?: unknown;
             hotspot?: SanityImageHotspot;
             crop?: SanityImageCrop;
@@ -15218,21 +9910,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
         };
         gh_discussions?: string;
         content: null;
-        seo?: {
-          meta?: string;
-          image?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-        };
+        seo?: Seo;
         tema: null;
       }
   > | null;
@@ -15248,21 +9926,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
       publishedAt: string | null;
       slug: string | null;
       ingress: string | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
       writers: Array<{
         title: string | null;
         description: string | null;
@@ -15280,21 +9944,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
       slug: string | null;
       tema: Array<string | null> | null;
       ingress: string | null;
-      seo: {
-        meta?: string;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      } | null;
+      seo: Seo | null;
       writers: Array<{
         title: string | null;
         description: string | null;
@@ -15311,12 +9961,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
           status: {
             tag?: "beta" | "deprecated" | "new" | "ready";
             bilde?: {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
@@ -15329,27 +9974,14 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
             | "guider"
             | "introduksjon"
             | "kode"
+            | "migreringsguider"
             | "standalone"
             | "styling"
             | null;
           _createdAt: string;
           _updatedAt: string;
           publishedAt: string | null;
-          seo: {
-            meta?: string;
-            image?: {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
-              media?: unknown;
-              hotspot?: SanityImageHotspot;
-              crop?: SanityImageCrop;
-              _type: "image";
-            };
-          } | null;
+          seo: Seo | null;
         }
       | {
           _type: "komponent_artikkel";
@@ -15361,12 +9993,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
             unsafe?: boolean;
             internal?: boolean;
             bilde?: {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
@@ -15377,21 +10004,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
           _createdAt: string;
           _updatedAt: string;
           publishedAt: string | null;
-          seo: {
-            meta?: string;
-            image?: {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
-              media?: unknown;
-              hotspot?: SanityImageHotspot;
-              crop?: SanityImageCrop;
-              _type: "image";
-            };
-          } | null;
+          seo: Seo | null;
         }
       | {
           _type: "templates_artikkel";
@@ -15401,12 +10014,7 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
           status: {
             tag?: "beta" | "deprecated" | "new" | "ready";
             bilde?: {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
@@ -15417,28 +10025,16 @@ export type LANDINGSSIDE_LATEST_QUERYResult = Array<{
           _createdAt: string;
           _updatedAt: string;
           publishedAt: string | null;
-          seo: {
-            meta?: string;
-            image?: {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
-              media?: unknown;
-              hotspot?: SanityImageHotspot;
-              crop?: SanityImageCrop;
-              _type: "image";
-            };
-          } | null;
+          seo: Seo | null;
         }
     >;
   };
 }> | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: LANDINGSSIDE_META_QUERY
 // Query: *[_type == "aksel_forside"][0]{  "page": {    ...,  }}.page
-export type LANDINGSSIDE_META_QUERYResult = {
+export type LANDINGSSIDE_META_QUERY_RESULT = {
   _id: string;
   _type: "aksel_forside";
   _createdAt: string;
@@ -15447,71 +10043,24 @@ export type LANDINGSSIDE_META_QUERYResult = {
   god_praksis_intro?: string;
   blocks?: Array<{
     highlights?: Array<
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-        }
-      | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-        }
+      | Aksel_artikkelReference
+      | Aksel_bloggReference
+      | Aksel_prinsippReference
+      | Aksel_standaloneReference
+      | Ds_artikkelReference
+      | Komponent_artikkelReference
+      | Templates_artikkelReference
     >;
     _type: "nytt_fra_aksel";
     _key: string;
   }>;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: SIDE_ARTICLE_BY_SLUG_QUERY
-// Query: *[slug.current == $slug && _type == "aksel_standalone"][0]  {    ...,    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},    }  }
-export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
+// Query: *[slug.current == $slug && _type == "aksel_standalone"][0]  {    ...,    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"},    }  }
+export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _type: "aksel_standalone";
   _createdAt: string;
@@ -15556,48 +10105,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -15615,29 +10129,19 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -15653,48 +10157,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -15766,13 +10235,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -15790,48 +10259,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -15889,48 +10323,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -15948,29 +10347,19 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        _key: string;
+        _type: "bilde";
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
         caption?: string;
         small?: boolean;
-        kilde?: {
-          har_kilde?: boolean;
-          prefix?: "FOTO" | "Kilde";
-          tekst?: string;
-          link?: string;
-        };
+        kilde?: Kilde;
         dekorativt?: boolean;
         border?: boolean;
         background?: Color;
-        _type: "bilde";
-        _key: string;
         markDefs: null;
         floating_text: null;
       }
@@ -15986,48 +10375,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
         markDefs: Array<
           | {
               reference?:
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                  };
+                | Aksel_artikkelReference
+                | Aksel_bloggReference
+                | Aksel_prinsippReference
+                | Aksel_standaloneReference
+                | Ds_artikkelReference
+                | Komponent_artikkelReference
+                | Templates_artikkelReference;
               _type: "internalLink";
               _key: string;
               slug: Slug | null;
@@ -16084,48 +10438,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -16143,29 +10462,19 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              _key: string;
+              _type: "bilde";
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               alt?: string;
               caption?: string;
               small?: boolean;
-              kilde?: {
-                har_kilde?: boolean;
-                prefix?: "FOTO" | "Kilde";
-                tekst?: string;
-                link?: string;
-              };
+              kilde?: Kilde;
               dekorativt?: boolean;
               border?: boolean;
               background?: Color;
-              _type: "bilde";
-              _key: string;
               markDefs: null;
               floating_text: null;
             }
@@ -16181,48 +10490,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
               markDefs: Array<
                 | {
                     reference?:
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                        };
+                      | Aksel_artikkelReference
+                      | Aksel_bloggReference
+                      | Aksel_prinsippReference
+                      | Aksel_standaloneReference
+                      | Ds_artikkelReference
+                      | Komponent_artikkelReference
+                      | Templates_artikkelReference;
                     _type: "internalLink";
                     _key: string;
                     slug: Slug | null;
@@ -16278,13 +10552,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
+              _key: string;
+              _type: "table";
               rows?: Array<
                 {
                   _key: string;
                 } & TableRow
               >;
-              _type: "tabell_v2";
-              _key: string;
               markDefs: null;
             }
           | {
@@ -16302,48 +10576,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -16403,48 +10642,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -16478,13 +10682,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
+        _key: string;
+        _type: "tabell_v2";
         rows?: Array<
           {
             _key: string;
           } & TableRow
         >;
-        _type: "tabell_v2";
-        _key: string;
         markDefs: null;
       }
     | {
@@ -16502,48 +10706,13 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -16579,9 +10748,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERYResult = {
       }
   > | null;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: PRINSIPPER_BY_SLUG_QUERY
-// Query: *[slug.current == $slug && _type == "aksel_prinsipp"][0]{  ...,  content[]{    ...,    _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},  }}
-export type PRINSIPPER_BY_SLUG_QUERYResult = {
+// Query: *[slug.current == $slug && _type == "aksel_prinsipp"][0]{  ...,  content[]{    ...,    _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "spesial_seksjon" =>{  ...,  "token": token_ref->{...}},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"},  }}
+export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _type: "aksel_prinsipp";
   _createdAt: string;
@@ -16631,48 +10802,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -16690,29 +10826,19 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 alt?: string;
                 caption?: string;
                 small?: boolean;
-                kilde?: {
-                  har_kilde?: boolean;
-                  prefix?: "FOTO" | "Kilde";
-                  tekst?: string;
-                  link?: string;
-                };
+                kilde?: Kilde;
                 dekorativt?: boolean;
                 border?: boolean;
                 background?: Color;
-                _type: "bilde";
-                _key: string;
                 markDefs: null;
                 floating_text: null;
               }
@@ -16728,48 +10854,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -16841,13 +10932,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                 markDefs: null;
               }
             | {
+                _key: string;
+                _type: "table";
                 rows?: Array<
                   {
                     _key: string;
                   } & TableRow
                 >;
-                _type: "tabell_v2";
-                _key: string;
                 markDefs: null;
               }
             | {
@@ -16865,48 +10956,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                   markDefs: Array<
                     | {
                         reference?:
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                            }
-                          | {
-                              _ref: string;
-                              _type: "reference";
-                              _weak?: boolean;
-                              [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                            };
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
                         _type: "internalLink";
                         _key: string;
                         slug: Slug | null;
@@ -16964,48 +11020,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -17023,29 +11044,19 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        _key: string;
+        _type: "bilde";
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
         caption?: string;
         small?: boolean;
-        kilde?: {
-          har_kilde?: boolean;
-          prefix?: "FOTO" | "Kilde";
-          tekst?: string;
-          link?: string;
-        };
+        kilde?: Kilde;
         dekorativt?: boolean;
         border?: boolean;
         background?: Color;
-        _type: "bilde";
-        _key: string;
         markDefs: null;
         floating_text: null;
       }
@@ -17061,48 +11072,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
         markDefs: Array<
           | {
               reference?:
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                  }
-                | {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                  };
+                | Aksel_artikkelReference
+                | Aksel_bloggReference
+                | Aksel_prinsippReference
+                | Aksel_standaloneReference
+                | Ds_artikkelReference
+                | Komponent_artikkelReference
+                | Templates_artikkelReference;
               _type: "internalLink";
               _key: string;
               slug: Slug | null;
@@ -17159,48 +11135,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -17218,29 +11159,19 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
+              _key: string;
+              _type: "bilde";
+              asset?: SanityImageAssetReference;
               media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               alt?: string;
               caption?: string;
               small?: boolean;
-              kilde?: {
-                har_kilde?: boolean;
-                prefix?: "FOTO" | "Kilde";
-                tekst?: string;
-                link?: string;
-              };
+              kilde?: Kilde;
               dekorativt?: boolean;
               border?: boolean;
               background?: Color;
-              _type: "bilde";
-              _key: string;
               markDefs: null;
               floating_text: null;
             }
@@ -17256,48 +11187,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
               markDefs: Array<
                 | {
                     reference?:
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                        }
-                      | {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                        };
+                      | Aksel_artikkelReference
+                      | Aksel_bloggReference
+                      | Aksel_prinsippReference
+                      | Aksel_standaloneReference
+                      | Ds_artikkelReference
+                      | Komponent_artikkelReference
+                      | Templates_artikkelReference;
                     _type: "internalLink";
                     _key: string;
                     slug: Slug | null;
@@ -17353,13 +11249,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
               markDefs: null;
             }
           | {
+              _key: string;
+              _type: "table";
               rows?: Array<
                 {
                   _key: string;
                 } & TableRow
               >;
-              _type: "tabell_v2";
-              _key: string;
               markDefs: null;
             }
           | {
@@ -17377,48 +11273,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
                 markDefs: Array<
                   | {
                       reference?:
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                          }
-                        | {
-                            _ref: string;
-                            _type: "reference";
-                            _weak?: boolean;
-                            [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                          };
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
                       _type: "internalLink";
                       _key: string;
                       slug: Slug | null;
@@ -17478,48 +11339,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -17553,13 +11379,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
     | {
+        _key: string;
+        _type: "tabell_v2";
         rows?: Array<
           {
             _key: string;
           } & TableRow
         >;
-        _type: "tabell_v2";
-        _key: string;
         markDefs: null;
       }
     | {
@@ -17577,48 +11403,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
           markDefs: Array<
             | {
                 reference?:
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_blogg";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "aksel_standalone";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "ds_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-                    }
-                  | {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "templates_artikkel";
-                    };
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
                 _type: "internalLink";
                 _key: string;
                 slug: Slug | null;
@@ -17653,25 +11444,13 @@ export type PRINSIPPER_BY_SLUG_QUERYResult = {
         markDefs: null;
       }
   > | null;
-  seo?: {
-    meta?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
+  seo?: Seo;
 } | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: DOCUMENT_BY_ID_FOR_SLACK_QUERY
 // Query: *[_id == $id][0]{      "id": _id,      "title": heading,      "slug": slug.current,    }
-export type DOCUMENT_BY_ID_FOR_SLACK_QUERYResult =
+export type DOCUMENT_BY_ID_FOR_SLACK_QUERY_RESULT =
   | {
       id: string;
       title: null;
@@ -17688,16 +11467,20 @@ export type DOCUMENT_BY_ID_FOR_SLACK_QUERYResult =
       slug: string | null;
     }
   | null;
+
+// Source: ../app/_sanity/queries.ts
 // Variable: SITEMAP_LANDINGPAGES_QUERY
 // Query: {      "frontpage": *[_type == "aksel_forside"][0]._updatedAt,      "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,      "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,}
-export type SITEMAP_LANDINGPAGES_QUERYResult = {
+export type SITEMAP_LANDINGPAGES_QUERY_RESULT = {
   frontpage: string | null;
   godpraksis: string | null;
   blogg: string | null;
 };
+
+// Source: ../app/_sanity/queries.ts
 // Variable: SITEMAP_ARTICLES_BY_TYPE_QUERY
 // Query: *[_type in $doctypes]{    "slug": slug.current,    _updatedAt  }
-export type SITEMAP_ARTICLES_BY_TYPE_QUERYResult = Array<
+export type SITEMAP_ARTICLES_BY_TYPE_QUERY_RESULT = Array<
   | {
       slug: null;
       _updatedAt: string;
@@ -17710,41 +11493,41 @@ export type SITEMAP_ARTICLES_BY_TYPE_QUERYResult = Array<
 
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "aksel_ds_forside"][0] {\n    ds_forside_title,\n    ds_forside_ingress,\n    ds_getting_started[]{ description, icon, link, title },\n    ds_layers_overview,\n    ds_changelog { title, ingress },\n    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},\n    ds_support[]{description, link, title},\n    seo { image, meta }\n  }': DS_FRONT_PAGE_QUERYResult;
-    '*[_type == "aksel_ds_forside"][0].ds_forside_promo_tag': DS_PROMO_QUERYResult;
-    '*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {\n  _type,\n  heading,\n  "slug": slug.current,\n  kategori,\n  "tag": status.tag,\n  "sidebarindex": sidebarindex,\n}': DESIGNSYSTEM_SIDEBAR_QUERYResult;
-    '*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {\n  _type,\n  overview_pages\n  }': DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult;
-    '*[_type == "aksel_blogg" && slug.current == $slug][0]\n{\n  ...,\n  "slug": slug.current,\n  content[]{\n    ...,\n    \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n  },\n  publishedAt,\n  "writers": array::compact(writers[]->{title, description, avatar_id, type})\n}': BLOGG_BY_SLUG_QUERYResult;
-    '\n  *[_type == "blogg_landingsside"][0]{\n    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){\n      seo,\n      heading,\n      ingress,\n      publishedAt,\n      _createdAt,\n      _id,\n      "slug": slug.current,\n      "writers": array::compact(writers[]->{title, description, avatar_id, type})\n    }\n  }': BLOGG_LANDINGSSIDE_BLOGS_QUERYResult;
-    '\n  *[_type == "blogg_landingsside"][0]{\n    "page": {...},\n  }': BLOGG_LANDINGSSIDE_PAGE_QUERYResult;
-    '*[_type == "komponenter_landingsside"][0]': DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERYResult;
-    '*[_type == "grunnleggende_landingsside"][0]': DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERYResult;
-    '*[_type == "templates_landingsside"][0]': DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERYResult;
-    '*[_type in ["komponent_artikkel",\n  "ds_artikkel",\n  "aksel_artikkel",\n  "aksel_blogg",\n  "aksel_prinsipp",\n  "aksel_standalone",\n  "templates_artikkel"]]{\n    heading,\n    "slug": slug.current,\n    "tema": undertema[]->tema->title,\n    ingress,\n    status,\n    _type,\n    "intro": pt::text(intro.body),\n    content,\n    publishedAt,\n    seo\n}': GLOBAL_SEARCH_QUERY_ALLResult;
-    '*[_type == "komponent_artikkel" && slug.current == $slug][0]\n  {\n    ...,\n    intro{\n      ...,\n      body[]{\n        ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n      }\n    },\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n    },\n}': KOMPONENT_BY_SLUG_QUERYResult;
-    '*[_type == $docType  && kategori == $category]\n  {\n    _id,\n    heading,\n    "slug": slug.current,\n    status,\n    kategori,\n    "sidebarindex": sidebarindex,\n    "description": seo.meta\n}': DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult;
-    '*[_type == $docType && defined(kategori)]{\n  _id,\n  heading,\n  "slug": slug.current,\n  status,\n  kategori,\n  sidebarindex\n}': DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult;
-    '*[_type == "ds_artikkel" && slug.current == $slug][0]\n  {\n    ...,\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n    },\n}': GRUNNLEGGENDE_BY_SLUG_QUERYResult;
-    '*[_type == "templates_artikkel" && slug.current == $slug][0]\n  {\n    ...,\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n    },\n}': MONSTER_MALER_BY_SLUG_QUERYResult;
-    '*[slug.current == $slug][0].content[style match \'h2\'][]{\n  "id": _key,\n  "title": pt::text(@)\n}': TOC_BY_SLUG_QUERYResult;
-    "*[slug.current == $slug][0]{\n  heading,\n  ingress,\n  publishedAt,\n  seo\n}": METADATA_BY_SLUG_QUERYResult;
-    "\n  *[_type == $type && defined(slug.current)].slug.current\n": SLUG_BY_TYPE_QUERYResult;
-    '\n  *[_type == "ds_endringslogg_artikkel"]{\n    heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n }, visMer\n  }': ENDRINGSLOGG_QUERYResult;
-    '\n  *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{\n    "primary": {\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n }, visMer\n    },\n    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n }, visMer\n    },\n    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n }, visMer\n    }\n  }\n': ENDRINGSLOGG_WITH_NEIGHBORS_QUERYResult;
-    "*[slug.current == $slug][0]{\n    heading,\n    endringsdato,\n    endringstype,\n    herobilde,\n    seo\n  }": ENDRINGSLOGG_METADATA_BY_SLUG_QUERYResult;
-    '\n  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]': N_LATEST_CHANGE_LOGS_QUERYResult;
-    '*[_type == "gp.tema"] | order(lower(title)){\n  title,\n  _updatedAt,\n  description,\n  pictogram,\n  "slug": slug.current,\n  "articles": *[_type=="aksel_artikkel"\n    && (^._id in undertema[]->tema._ref)] {\n      heading,\n      "slug": slug.current,\n      "undertema": undertema[]->{title, "temaTitle": tema->title},\n      "innholdstype": innholdstype->title,\n      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month\n    } | order(coalesce(views, -1) desc)[0...4]{\n      heading,\n      slug,\n      undertema,\n      innholdstype\n    },\n}': GOD_PRAKSIS_ALL_TEMA_QUERYResult;
-    '*[_type == "godpraksis_landingsside"][0].seo': GOD_PRAKSIS_LANDING_PAGE_SEO_QUERYResult;
-    '*[_type == "gp.tema" && slug.current == $slug][0]{\n    ...,\n    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{\n      title,\n      description\n    },\n  }': GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult;
-    '*[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(updateInfo.lastVerified desc) {\n    _id,\n    heading,\n    "displayDate": updateInfo.lastVerified,\n    "description": ingress,\n    "undertema": undertema[]->{title, "temaTitle": tema->title},\n    "innholdstype": innholdstype->title,\n    "slug": slug.current,\n  }': GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult;
-    '*[slug.current == $slug && _type == "aksel_artikkel"][0]\n  {\n    ...,\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n    },\n    "innholdstype": innholdstype->title,\n    "undertema": undertema[]->{\n      title,\n      "tema": tema->{\n        title,\n        "slug": slug.current,\n        "image": seo.image\n      }\n    },\n    "writers": array::compact(writers[]->{title, description, avatar_id, type}),\n    relevante_artikler[]->{\n      heading,\n      ingress,\n      slug,\n      "innholdstype": innholdstype->title,\n    }\n  }': GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERYResult;
-    '*[_type == "gp.tema"] | order(lower(title))': GOD_PRAKSIS_TEMA_QUERYResult;
-    '\n*[_type == "aksel_forside"][0]{\n  blocks[]{\n    ...,\n    _type == "nytt_fra_aksel"=>{\n      highlights[]->{\n        ...,\n        "slug": slug.current,\n        "content": null,\n        "tema": undertema[]->tema->title,\n      },\n      "curatedRecent": {\n        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...4]{\n          _type,\n          _id,\n          heading,\n          _createdAt,\n          _updatedAt,\n          publishedAt,\n          "slug": slug.current,\n          ingress,\n          seo,\n          "writers": array::compact(writers[]->{title, description, avatar_id, type})\n        },\n        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{\n          _type,\n          _id,\n          heading,\n          _createdAt,\n          _updatedAt,\n          publishedAt,\n          "slug": slug.current,\n          "tema": undertema[]->tema->title,\n          ingress,\n          seo,\n          "writers": array::compact(writers[]->{title, description, avatar_id, type})\n        },\n        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...7]{\n          _type,\n          _id,\n          heading,\n          "slug": slug.current,\n          status,\n          kategori,\n          _createdAt,\n          _updatedAt,\n          publishedAt,\n          seo\n        },\n      },\n    }\n  }\n}.blocks\n': LANDINGSSIDE_LATEST_QUERYResult;
-    '*[_type == "aksel_forside"][0]{\n  "page": {\n    ...,\n  }\n}.page': LANDINGSSIDE_META_QUERYResult;
-    '\n*[slug.current == $slug && _type == "aksel_standalone"][0]\n  {\n    ...,\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n    }\n  }\n': SIDE_ARTICLE_BY_SLUG_QUERYResult;
-    '\n  *[slug.current == $slug && _type == "aksel_prinsipp"][0]{\n  ...,\n  content[]{\n    ...,\n    \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n\n  }\n}': PRINSIPPER_BY_SLUG_QUERYResult;
-    '*[_id == $id][0]{\n      "id": _id,\n      "title": heading,\n      "slug": slug.current,\n    }': DOCUMENT_BY_ID_FOR_SLACK_QUERYResult;
-    '\n{\n      "frontpage": *[_type == "aksel_forside"][0]._updatedAt,\n      "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,\n      "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,\n}\n  ': SITEMAP_LANDINGPAGES_QUERYResult;
-    '\n  *[_type in $doctypes]{\n    "slug": slug.current,\n    _updatedAt\n  }\n  ': SITEMAP_ARTICLES_BY_TYPE_QUERYResult;
+    '*[_type == "aksel_ds_forside"][0] {\n    ds_forside_title,\n    ds_forside_ingress,\n    ds_getting_started[]{ description, icon, link, title },\n    ds_layers_overview,\n    ds_changelog { title, ingress },\n    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},\n    ds_support[]{description, link, title},\n    seo { image, meta }\n  }': DS_FRONT_PAGE_QUERY_RESULT;
+    '*[_type == "aksel_ds_forside"][0].ds_forside_promo_tag': DS_PROMO_QUERY_RESULT;
+    '*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {\n  _type,\n  heading,\n  "slug": slug.current,\n  kategori,\n  "tag": status.tag,\n  "sidebarindex": sidebarindex,\n}': DESIGNSYSTEM_SIDEBAR_QUERY_RESULT;
+    '*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {\n  _type,\n  overview_pages\n  }': DESIGNSYSTEM_OVERVIEW_PAGES_QUERY_RESULT;
+    '*[_type == "aksel_blogg" && slug.current == $slug][0]\n{\n  ...,\n  "slug": slug.current,\n  content[]{\n    ...,\n    \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n\n  },\n  publishedAt,\n  "writers": array::compact(writers[]->{title, description, avatar_id, type})\n}': BLOGG_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "blogg_landingsside"][0]{\n    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){\n      seo,\n      heading,\n      ingress,\n      publishedAt,\n      _createdAt,\n      _id,\n      "slug": slug.current,\n      "writers": array::compact(writers[]->{title, description, avatar_id, type})\n    }\n  }': BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT;
+    '\n  *[_type == "blogg_landingsside"][0]{\n    "page": {...},\n  }': BLOGG_LANDINGSSIDE_PAGE_QUERY_RESULT;
+    '*[_type == "komponenter_landingsside"][0]': DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY_RESULT;
+    '*[_type == "grunnleggende_landingsside"][0]': DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY_RESULT;
+    '*[_type == "templates_landingsside"][0]': DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY_RESULT;
+    '*[_type in ["komponent_artikkel",\n  "ds_artikkel",\n  "aksel_artikkel",\n  "aksel_blogg",\n  "aksel_prinsipp",\n  "aksel_standalone",\n  "templates_artikkel"]]{\n    heading,\n    "slug": slug.current,\n    "tema": undertema[]->tema->title,\n    ingress,\n    status,\n    _type,\n    "intro": pt::text(intro.body),\n    content,\n    publishedAt,\n    seo\n}': GLOBAL_SEARCH_QUERY_ALL_RESULT;
+    '*[_type == "komponent_artikkel" && slug.current == $slug][0]\n  {\n    ...,\n    intro{\n      ...,\n      body[]{\n        ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n\n      }\n    },\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n\n    },\n}': KOMPONENT_BY_SLUG_QUERY_RESULT;
+    '*[_type == $docType  && kategori == $category]\n  {\n    _id,\n    heading,\n    "slug": slug.current,\n    status,\n    kategori,\n    "sidebarindex": sidebarindex,\n    "description": seo.meta\n}': DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY_RESULT;
+    '*[_type == $docType && defined(kategori)]{\n  _id,\n  heading,\n  "slug": slug.current,\n  status,\n  kategori,\n  sidebarindex\n}': DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY_RESULT;
+    '*[_type == "ds_artikkel" && slug.current == $slug][0]\n  {\n    ...,\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n\n    },\n}': GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT;
+    '*[_type == "templates_artikkel" && slug.current == $slug][0]\n  {\n    ...,\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n\n    },\n}': MONSTER_MALER_BY_SLUG_QUERY_RESULT;
+    '*[slug.current == $slug][0].content[style match \'h2\'][]{\n  "id": _key,\n  "title": pt::text(@)\n}': TOC_BY_SLUG_QUERY_RESULT;
+    "*[slug.current == $slug][0]{\n  heading,\n  ingress,\n  publishedAt,\n  seo\n}": METADATA_BY_SLUG_QUERY_RESULT;
+    "\n  *[_type == $type && defined(slug.current)].slug.current\n": SLUG_BY_TYPE_QUERY_RESULT;
+    '\n  *[_type == "ds_endringslogg_artikkel"]{\n    heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n }, visMer\n  }': ENDRINGSLOGG_QUERY_RESULT;
+    '\n  *[_type == "ds_endringslogg_artikkel" && slug.current == $slug][0]{\n    "primary": {\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n }, visMer\n    },\n    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n }, visMer\n    },\n    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{\n      heading, "slug": slug.current, endringsdato, endringstype, fremhevet, herobilde, content[]{ ..., \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n }, visMer\n    }\n  }\n': ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT;
+    "*[slug.current == $slug][0]{\n    heading,\n    endringsdato,\n    endringstype,\n    herobilde,\n    seo\n  }": ENDRINGSLOGG_METADATA_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "ds_endringslogg_artikkel"] | order(endringsdato desc){ heading, slug, endringsdato, endringstype }[0...$count]': N_LATEST_CHANGE_LOGS_QUERY_RESULT;
+    '*[_type == "gp.tema"] | order(lower(title)){\n  title,\n  _updatedAt,\n  description,\n  pictogram,\n  "slug": slug.current,\n  "articles": *[_type=="aksel_artikkel"\n    && (^._id in undertema[]->tema._ref)] {\n      heading,\n      "slug": slug.current,\n      "undertema": undertema[]->{title, "temaTitle": tema->title},\n      "innholdstype": innholdstype->title,\n      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month\n    } | order(coalesce(views, -1) desc)[0...4]{\n      heading,\n      slug,\n      undertema,\n      innholdstype\n    },\n}': GOD_PRAKSIS_ALL_TEMA_QUERY_RESULT;
+    '*[_type == "godpraksis_landingsside"][0].seo': GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY_RESULT;
+    '*[_type == "gp.tema" && slug.current == $slug][0]{\n    ...,\n    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{\n      title,\n      description\n    },\n  }': GOD_PRAKSIS_TEMA_BY_SLUG_QUERY_RESULT;
+    '*[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(updateInfo.lastVerified desc) {\n    _id,\n    heading,\n    "displayDate": updateInfo.lastVerified,\n    "description": ingress,\n    "undertema": undertema[]->{title, "temaTitle": tema->title},\n    "innholdstype": innholdstype->title,\n    "slug": slug.current,\n  }': GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY_RESULT;
+    '*[slug.current == $slug && _type == "aksel_artikkel"][0]\n  {\n    ...,\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n\n    },\n    "innholdstype": innholdstype->title,\n    "undertema": undertema[]->{\n      title,\n      "tema": tema->{\n        title,\n        "slug": slug.current,\n        "image": seo.image\n      }\n    },\n    "writers": array::compact(writers[]->{title, description, avatar_id, type}),\n    relevante_artikler[]->{\n      heading,\n      ingress,\n      slug,\n      "innholdstype": innholdstype->title,\n    }\n  }': GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT;
+    '*[_type == "gp.tema"] | order(lower(title))': GOD_PRAKSIS_TEMA_QUERY_RESULT;
+    '\n*[_type == "aksel_forside"][0]{\n  blocks[]{\n    ...,\n    _type == "nytt_fra_aksel"=>{\n      highlights[]->{\n        ...,\n        "slug": slug.current,\n        "content": null,\n        "tema": undertema[]->tema->title,\n      },\n      "curatedRecent": {\n        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...4]{\n          _type,\n          _id,\n          heading,\n          _createdAt,\n          _updatedAt,\n          publishedAt,\n          "slug": slug.current,\n          ingress,\n          seo,\n          "writers": array::compact(writers[]->{title, description, avatar_id, type})\n        },\n        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{\n          _type,\n          _id,\n          heading,\n          _createdAt,\n          _updatedAt,\n          publishedAt,\n          "slug": slug.current,\n          "tema": undertema[]->tema->title,\n          ingress,\n          seo,\n          "writers": array::compact(writers[]->{title, description, avatar_id, type})\n        },\n        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...7]{\n          _type,\n          _id,\n          heading,\n          "slug": slug.current,\n          status,\n          kategori,\n          _createdAt,\n          _updatedAt,\n          publishedAt,\n          seo\n        },\n      },\n    }\n  }\n}.blocks\n': LANDINGSSIDE_LATEST_QUERY_RESULT;
+    '*[_type == "aksel_forside"][0]{\n  "page": {\n    ...,\n  }\n}.page': LANDINGSSIDE_META_QUERY_RESULT;
+    '\n*[slug.current == $slug && _type == "aksel_standalone"][0]\n  {\n    ...,\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n\n    }\n  }\n': SIDE_ARTICLE_BY_SLUG_QUERY_RESULT;
+    '\n  *[slug.current == $slug && _type == "aksel_prinsipp"][0]{\n  ...,\n  content[]{\n    ...,\n    \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "spesial_seksjon" =>{\n  ...,\n  "token": token_ref->{...}\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n\n  }\n}': PRINSIPPER_BY_SLUG_QUERY_RESULT;
+    '*[_id == $id][0]{\n      "id": _id,\n      "title": heading,\n      "slug": slug.current,\n    }': DOCUMENT_BY_ID_FOR_SLACK_QUERY_RESULT;
+    '\n{\n      "frontpage": *[_type == "aksel_forside"][0]._updatedAt,\n      "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,\n      "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,\n}\n  ': SITEMAP_LANDINGPAGES_QUERY_RESULT;
+    '\n  *[_type in $doctypes]{\n    "slug": slug.current,\n    _updatedAt\n  }\n  ': SITEMAP_ARTICLES_BY_TYPE_QUERY_RESULT;
   }
 }

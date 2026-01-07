@@ -11,7 +11,7 @@ import { Heading, VStack } from "@navikt/ds-react";
 import { PageProps } from "@/app/(routes)/next-types";
 import { sanityFetch } from "@/app/_sanity/live";
 import { ENDRINGSLOGG_FIELDS, ENDRINGSLOGG_QUERY } from "@/app/_sanity/queries";
-import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
+import { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { capitalizeText } from "@/ui-utils/format-text";
@@ -63,7 +63,7 @@ export default async function Page({ searchParams }: PageProps) {
   const searchText = paramTextFilter.toString().trim();
   const textFilter = searchText.split(" ");
 
-  let logEntries: ENDRINGSLOGG_QUERYResult = [];
+  let logEntries: ENDRINGSLOGG_QUERY_RESULT = [];
 
   if (isSemverSearch) {
     const semverRange = semverValidRange(textFilter.join(" "));
@@ -127,7 +127,10 @@ export default async function Page({ searchParams }: PageProps) {
   });
 
   const groupedByMonth = logEntries.reduce(
-    (acc: ENDRINGSLOGG_QUERYResult[], logEntry): ENDRINGSLOGG_QUERYResult[] => {
+    (
+      acc: ENDRINGSLOGG_QUERY_RESULT[],
+      logEntry,
+    ): ENDRINGSLOGG_QUERY_RESULT[] => {
       const monthKey = getMonthAndYear(logEntry.endringsdato);
       const lastGroup = acc[acc.length - 1];
       if (

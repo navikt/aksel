@@ -212,7 +212,9 @@ function blockComponents({
   } satisfies Record<string, PortableTextBlockComponent>;
 }
 
-function withSanitizedBlock(node: React.ReactElement) {
+function withSanitizedBlock(
+  node: React.ReactElement<{ children?: React.ReactNode }>,
+) {
   const { children } = node.props;
   const validChildren = Children.toArray(children).filter(Boolean);
 

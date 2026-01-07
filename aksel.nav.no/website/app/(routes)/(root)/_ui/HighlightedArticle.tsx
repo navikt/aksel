@@ -1,8 +1,8 @@
 import cl from "clsx";
 import NextImage from "next/image";
-import NextLink from "next/link";
 import { BodyLong, HGrid, HStack, Heading, Link } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import {
