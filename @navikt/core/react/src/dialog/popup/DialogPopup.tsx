@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { useModalContext } from "../../modal/Modal.context";
 import { Portal, type PortalProps } from "../../portal";
 import { DialogBackdropInternal } from "../backdrop/DialogBackdropInternal";
 import { useDialogContext } from "../root/DialogRoot.context";
@@ -28,13 +29,18 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
     {
       modal = true,
       withBackdrop = modal === true,
-      rootElement,
+      rootElement: _rootElement,
       position,
       ...restProps
     },
     forwardedRef,
   ) => {
     const { mounted, nested } = useDialogContext();
+
+    const modalContext = useModalContext(false);
+    const rootElement = modalContext
+      ? modalContext.modalRef.current
+      : _rootElement;
 
     if (!mounted) {
       return null;
