@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 7.38.0
+
+### Patch Changes
+
+- Dialog: Now interacts better with Modal and Datepicker. ([#4455](https://github.com/navikt/aksel/pull/4455))
+
+- ActionMenu: Trigger handles click while inside web-component better. ([#4428](https://github.com/navikt/aksel/pull/4428))
+
+- Internal: Updated mergedRef-utility. ([#4434](https://github.com/navikt/aksel/pull/4434))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.38.0
+  - @navikt/aksel-icons@7.38.0
+
 ## 7.37.0
 
 ### Minor Changes

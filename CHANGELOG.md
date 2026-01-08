@@ -1,5 +1,27 @@
 # Changelog
 
+## 7.38.0
+
+### @navikt/ds-react
+
+- Dialog: Now interacts better with Modal and Datepicker. ([#4455](https://github.com/navikt/aksel/pull/4455))
+
+- ActionMenu: Trigger handles click while inside web-component better. ([#4428](https://github.com/navikt/aksel/pull/4428))
+
+- Internal: Updated mergedRef-utility. ([#4434](https://github.com/navikt/aksel/pull/4434))
+
+### @navikt/ds-css
+
+- Dialog: Fixed z-index issue with backdrop. ([#4455](https://github.com/navikt/aksel/pull/4455))
+
+- Dialog: Now has border in light-mode. ([#4452](https://github.com/navikt/aksel/pull/4452))
+
+### @navikt/aksel
+
+- CLI: Now has interactive codemod-selection for all major-versions. ([#4427](https://github.com/navikt/aksel/pull/4427))
+
+* CLI: Updated codemod 'v8-primitive-spacing' to migrate `HGrid`-component. ([`d631eef`](https://github.com/navikt/aksel/commit/d631eefe59217a70ad9598e967b86cf961739421))
+
 ## 7.37.0
 
 ### @navikt/ds-react

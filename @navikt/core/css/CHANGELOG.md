@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 7.38.0
+
+### Patch Changes
+
+- Dialog: Fixed z-index issue with backdrop. ([#4455](https://github.com/navikt/aksel/pull/4455))
+
+- Dialog: Now has border in light-mode. ([#4452](https://github.com/navikt/aksel/pull/4452))
+
 ## 7.37.0
 
 ### Minor Changes
