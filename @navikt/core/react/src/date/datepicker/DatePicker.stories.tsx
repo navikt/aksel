@@ -492,8 +492,6 @@ export const ModalDemo = () => {
   );
 };
 
-ModalDemo.parameters = { chromatic: { pauseAnimationAtEnd: true } };
-
 export const DialogDemo = () => {
   const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
@@ -532,8 +530,6 @@ export const DialogDemo = () => {
     </Dialog>
   );
 };
-
-DialogDemo.parameters = { chromatic: { pauseAnimationAtEnd: true } };
 
 export const ColorRole = () => (
   <div data-color="meta-purple">

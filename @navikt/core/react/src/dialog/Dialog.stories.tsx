@@ -394,8 +394,6 @@ export const WithTooltip: Story = {
   },
 };
 
-WithTooltip.parameters = { chromatic: { disable: true } }; // The tooltip behaves unpredictably in Chromatic
-
 export const WithDatepicker: Story = {
   render: () => {
     const { datepickerProps, inputProps } = useDatepicker({
@@ -423,8 +421,6 @@ export const WithDatepicker: Story = {
     );
   },
 };
-
-WithTooltip.parameters = { chromatic: { disable: true } }; // The tooltip behaves unpredictably in Chromatic
 
 export const WithModalOutside: Story = {
   render: () => {
