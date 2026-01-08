@@ -51,7 +51,7 @@ const FormNavigation = () => (
         </Button>
       </Show>
 
-      <Box asChild marginBlock={{ xs: "space-16 0", sm: "0" }}>
+      <Box asChild marginBlock={{ xs: "space-16 space-0", sm: "space-0" }}>
         <Button
           variant="tertiary"
           icon={<FloppydiskIcon aria-hidden />}

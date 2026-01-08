@@ -152,7 +152,7 @@ export default async function (props: Props) {
       </BoxNew>
 
       <HGrid
-        marginBlock="space-28 0"
+        marginBlock="space-28 space-0"
         gap="space-48 space-24"
         columns={{ xs: 1, md: 2 }}
       >

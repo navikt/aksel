@@ -61,7 +61,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
         <Show above="lg" asChild>
           <Box
             as="nav"
-            paddingInline={{ xs: "0 space-8", lg: "0 space-32" }}
+            paddingInline={{ xs: "space-0 space-8", lg: "space-0 space-32" }}
             aria-label="Hovedmeny"
           >
             <HStack as="ul" gap="space-8" align="center">
@@ -73,7 +73,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
             </HStack>
           </Box>
         </Show>
-        <HStack align="center" gap="2">
+        <HStack align="center" gap="space-8">
           <Suspense fallback={<GlobalSearchButton trigger={false} />}>
             <GlobalSearch />
           </Suspense>

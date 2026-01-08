@@ -193,7 +193,7 @@ function GodPraksisFeedbackForm({
           folka som har lagd artikkelen 🙌
         </BodyLong>
       </Box>
-      <HStack gap="space-8" paddingBlock="0 space-24">
+      <HStack gap="space-8" paddingBlock="space-0 space-24">
         <PersonIcon aria-hidden fontSize="1.5rem" />
         <BodyShort>{name}</BodyShort>
 
@@ -201,7 +201,6 @@ function GodPraksisFeedbackForm({
           (logg ut)
         </Link>
       </HStack>
-
       <form onSubmit={handleSubmit}>
         <Textarea
           name="feedback"
@@ -219,7 +218,7 @@ function GodPraksisFeedbackForm({
             });
           }}
         />
-        <Box marginBlock="space-16 0" asChild>
+        <Box marginBlock="space-16 space-0" asChild>
           <Button type="submit" data-color="brand-blue" disabled={isPending}>
             Send inn
           </Button>

@@ -52,7 +52,7 @@ async function GodPraksisIntroHero({
         </svg>
       </div>
       {isCollapsible && <GodPraksisHeroButton />}
-      <HStack gap="space-12" align="center" marginBlock="0 space-16">
+      <HStack gap="space-12" align="center" marginBlock="space-0 space-16">
         {imageUrl && <GodPraksisPictogram url={imageUrl} />}
         <Heading level="1" size="xlarge" data-aksel-heading-color>
           {title}
@@ -67,7 +67,6 @@ async function GodPraksisIntroHero({
           {description}
         </BodyLong>
       )}
-
       {isCollapsible ? (
         <GodPraksisHeroDialog>
           <GodPraksisTemaList />

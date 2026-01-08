@@ -56,7 +56,6 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
   return (
     <Box marginBlock="space-0 space-28" data-color={statusTag?.colorRole}>
       <DesignsystemetEyebrow type={data?._type} />
-
       <Box marginBlock="space-0 space-8" asChild>
         <Heading
           level="1"
@@ -76,7 +75,7 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
           }}
         />
       )}
-      <HStack gap="space-16" align="center" marginBlock="space-24 0">
+      <HStack gap="space-16" align="center" marginBlock="space-24 space-0">
         {statusTag && (
           <Tag size="xsmall" data-color={statusTag.colorRole}>
             {statusTag.text}
@@ -89,7 +88,6 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
         )}
       </HStack>
       {isComponentPage && <KomponentLinks data={data} />}
-
       <DesignsystemetThumbnail thumbnailUrl={imageUrl} />
     </Box>
   );

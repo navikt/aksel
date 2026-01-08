@@ -22,7 +22,7 @@ const Page = async () => {
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <VStack gap="space-8">
-        <VStack marginBlock="0 space-16">
+        <VStack marginBlock="space-0 space-16">
           <DesignsystemetEyebrow type="ds_artikkel" />
           <Heading level="1" size="xlarge" data-aksel-heading-color>
             Tokenoversikt
@@ -32,7 +32,7 @@ const Page = async () => {
             komponenter og layout.
           </BodyLong>
         </VStack>
-        <VStack gap="space-16" marginBlock="0 space-16">
+        <VStack gap="space-16" marginBlock="space-0 space-16">
           <HStack gap="space-16" align="center">
             <Link href="https://github.com/navikt/aksel" variant="neutral">
               <GithubIcon aria-hidden />

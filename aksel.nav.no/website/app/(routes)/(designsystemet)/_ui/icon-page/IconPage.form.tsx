@@ -47,7 +47,7 @@ function IconPageForm({
       align="center"
       gap="space-24"
       columns={{ xs: 1, sm: "1fr auto" }}
-      marginBlock="space-40 0"
+      marginBlock="space-40 space-0"
     >
       <Search
         variant="simple"
