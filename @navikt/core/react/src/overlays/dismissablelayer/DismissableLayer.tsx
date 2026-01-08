@@ -1,4 +1,10 @@
-import React, { forwardRef, useContext, useEffect, useState } from "react";
+import React, {
+  forwardRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Slot } from "../../slot/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
@@ -61,6 +67,7 @@ interface DismissableLayerBaseProps
   onDismiss?: (event: Event) => void;
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
+   * - anchor: The element that should be considered safe to interact with.
    */
   safeZone?: {
     anchor?: Element | null;
@@ -112,6 +119,8 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
   ) => {
     const context = useContext(DismissableLayerContext);
 
+    const triggerPointerDownRef = useRef<boolean>(false);
+
     const [, forceRerender] = useState({});
     const [node, setNode] = React.useState<DismissableLayerElement | null>(
       null,
@@ -142,13 +151,10 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         return;
       }
 
-      let hasPointerDownOutside = false;
-
-      if (!event.defaultPrevented) {
-        if (event.detail.originalEvent.type === "pointerdown") {
-          hasPointerDownOutside = true;
-        }
-      }
+      const eventType = event.detail.originalEvent.type as
+        | "pointerup"
+        | "pointerdown"
+        | "focusin";
 
       const target = event.target as HTMLElement;
 
@@ -160,19 +166,17 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       }
 
       /**
-       * In Safari, if the trigger element is inside a container with tabIndex={0}, a click on the trigger
-       * will first fire a 'pointerdownoutside' event on the trigger itself. However, it will then fire a
-       * 'focusoutside' event on the container.
-       *
-       * To handle this, we ignore any 'focusoutside' events if a 'pointerdownoutside' event has already occurred.
-       * 'pointerdownoutside' event is sufficient to indicate interaction outside the DismissableLayer.
+       * If the target is inside a custom element, event.target will be that element on pointerdown.
+       * Therefore, checking anchor.contains(target) etc. won't work in that case.
        */
       if (
-        event.detail.originalEvent.type === "focusin" &&
-        hasPointerDownOutside
+        eventType === "pointerdown" &&
+        triggerPointerDownRef.current === true
       ) {
         event.preventDefault();
       }
+
+      triggerPointerDownRef.current = false;
     }
 
     const pointerDownOutside = usePointerDownOutside(
@@ -282,6 +286,38 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       ownerDoc,
       enabled,
     );
+
+    useEffect(() => {
+      if (!safeZone?.anchor) {
+        return;
+      }
+
+      const handlePointerDown = () => {
+        triggerPointerDownRef.current = true;
+      };
+
+      const handlePointerEnd = () => {
+        triggerPointerDownRef.current = false;
+      };
+
+      const anchor = safeZone.anchor;
+
+      anchor.addEventListener("pointerdown", handlePointerDown, {
+        capture: true,
+      });
+      anchor.addEventListener("pointerup", handlePointerEnd);
+      anchor.addEventListener("pointerleave", handlePointerEnd);
+      anchor.addEventListener("pointercancel", handlePointerEnd);
+
+      return () => {
+        anchor.removeEventListener("pointerdown", handlePointerDown, {
+          capture: true,
+        });
+        anchor.removeEventListener("pointerup", handlePointerEnd);
+        anchor.removeEventListener("pointerleave", handlePointerEnd);
+        anchor.removeEventListener("pointercancel", handlePointerEnd);
+      };
+    }, [safeZone?.anchor]);
 
     /**
      * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
