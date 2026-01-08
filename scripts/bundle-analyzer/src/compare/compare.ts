@@ -1,6 +1,6 @@
-import type { ExportInfo, PackageExports } from "../types.js";
+import type { BundleSizeInfo } from "../types.js";
 
-export interface ExportDiff {
+interface ExportDiff {
   path: string;
   added: {
     exports: string[];
@@ -12,7 +12,47 @@ export interface ExportDiff {
   };
 }
 
-export interface ComparisonResult {
+interface BundleSizeDiff {
+  /** Size difference in bytes (positive = increase, negative = decrease) */
+  raw: number;
+  gzip: number;
+  minified: number;
+  minifiedGzip: number;
+}
+
+interface ExportBundleSizeChange {
+  exportName: string;
+  base: BundleSizeInfo | null;
+  head: BundleSizeInfo | null;
+  diff: BundleSizeDiff | null;
+}
+
+export interface PathBundleSizeChange {
+  path: string;
+  fullImport: {
+    base: BundleSizeInfo | null;
+    head: BundleSizeInfo | null;
+    diff: BundleSizeDiff | null;
+  };
+  namedExports: ExportBundleSizeChange[];
+}
+
+interface BundleSizeComparisonResult {
+  packageName: string;
+  baseVersion: string;
+  headVersion: string;
+  hasChanges: boolean;
+  changes: PathBundleSizeChange[];
+  summary: {
+    totalMinifiedGzipDiff: number;
+    increasedExports: number;
+    decreasedExports: number;
+    newExports: number;
+    removedExports: number;
+  };
+}
+
+interface ComparisonResult {
   packageName: string;
   baseVersion: string;
   headVersion: string;
@@ -30,194 +70,236 @@ export interface ComparisonResult {
   };
 }
 
-function arrayDiff<T>(base: T[], head: T[]): { added: T[]; removed: T[] } {
-  const baseSet = new Set(base);
-  const headSet = new Set(head);
-
-  return {
-    added: head.filter((item) => !baseSet.has(item)),
-    removed: base.filter((item) => !headSet.has(item)),
-  };
-}
-
 /**
- * Compare two package export analyses
+ * Format bytes to a human-readable string
  */
-export function compareExports(
-  base: PackageExports,
-  head: PackageExports,
-): ComparisonResult {
-  const pathDiff = arrayDiff(base.exportPaths, head.exportPaths);
-
-  // Create maps for easy lookup
-  const baseMap = new Map<string, ExportInfo>(
-    base.details.map((d) => [d.path, d]),
-  );
-  const headMap = new Map<string, ExportInfo>(
-    head.details.map((d) => [d.path, d]),
-  );
-
-  const diffs: ExportDiff[] = [];
-  let addedExports = 0;
-  let removedExports = 0;
-  let addedTypes = 0;
-  let removedTypes = 0;
-
-  // Check all paths that exist in either version
-  const allPaths = new Set([...base.exportPaths, ...head.exportPaths]);
-
-  for (const path of allPaths) {
-    const baseInfo = baseMap.get(path) || { path, exports: [], types: [] };
-    const headInfo = headMap.get(path) || { path, exports: [], types: [] };
-
-    const exportsDiff = arrayDiff(baseInfo.exports, headInfo.exports);
-    const typesDiff = arrayDiff(baseInfo.types, headInfo.types);
-
-    // Only include paths with actual changes
-    if (
-      exportsDiff.added.length > 0 ||
-      exportsDiff.removed.length > 0 ||
-      typesDiff.added.length > 0 ||
-      typesDiff.removed.length > 0
-    ) {
-      diffs.push({
-        path,
-        added: {
-          exports: exportsDiff.added,
-          types: typesDiff.added,
-        },
-        removed: {
-          exports: exportsDiff.removed,
-          types: typesDiff.removed,
-        },
-      });
-
-      addedExports += exportsDiff.added.length;
-      removedExports += exportsDiff.removed.length;
-      addedTypes += typesDiff.added.length;
-      removedTypes += typesDiff.removed.length;
-    }
+function formatBytes(bytes: number): string {
+  const absBytes = Math.abs(bytes);
+  if (absBytes < 1024) {
+    return `${bytes} B`;
   }
-
-  const hasChanges =
-    diffs.length > 0 ||
-    pathDiff.added.length > 0 ||
-    pathDiff.removed.length > 0;
-
-  return {
-    packageName: head.packageName,
-    baseVersion: base.version,
-    headVersion: head.version,
-    hasChanges,
-    addedPaths: pathDiff.added,
-    removedPaths: pathDiff.removed,
-    diffs,
-    summary: {
-      addedExports,
-      removedExports,
-      addedTypes,
-      removedTypes,
-      addedPaths: pathDiff.added.length,
-      removedPaths: pathDiff.removed.length,
-    },
-  };
+  const kb = bytes / 1024;
+  if (absBytes < 1024 * 1024) {
+    return `${kb.toFixed(2)} kB`;
+  }
+  const mb = kb / 1024;
+  return `${mb.toFixed(2)} MB`;
 }
 
 /**
- * Format comparison result as a markdown comment for GitHub PR
+ * Format a size diff with indicator
  */
-export function formatAsMarkdown(result: ComparisonResult): string {
-  if (!result.hasChanges) {
-    return `## 📦 Export Analysis: ${result.packageName}
+function formatSizeDiff(diff: number): string {
+  if (diff === 0) {
+    return "0 B";
+  }
+  const sign = diff > 0 ? "+" : "";
+  return `${sign}${formatBytes(diff)}`;
+}
+
+/**
+ * Format combined comparison result as a markdown comment for GitHub PR
+ */
+export function formatAsMarkdown(
+  exportResult: ComparisonResult,
+  bundleResult: BundleSizeComparisonResult | null,
+): string {
+  const hasExportChanges = exportResult.hasChanges;
+  const hasBundleChanges = bundleResult?.hasChanges ?? false;
+
+  if (!hasExportChanges && !hasBundleChanges) {
+    return `## 📦 Package Analysis: ${exportResult.packageName}
 
 ✅ **No changes detected** between main and Pull request`;
   }
 
   const lines: string[] = [
-    `## 📦 Export Analysis: ${result.packageName}`,
+    `## 📦 Package Analysis: ${exportResult.packageName}`,
     "",
     `Comparing Pull request → main`,
     "",
-    "### Summary",
+  ];
+
+  // Export summary table
+  lines.push(
+    "### Export Summary",
     "",
     "| Category | Added | Removed |",
     "|----------|-------|---------|",
-    `| Export Paths | ${result.summary.addedPaths} | ${result.summary.removedPaths} |`,
-    `| Exports | ${result.summary.addedExports} | ${result.summary.removedExports} |`,
-    `| Types | ${result.summary.addedTypes} | ${result.summary.removedTypes} |`,
+    `| Export Paths | ${exportResult.summary.addedPaths} | ${exportResult.summary.removedPaths} |`,
+    `| Exports | ${exportResult.summary.addedExports} | ${exportResult.summary.removedExports} |`,
+    `| Types | ${exportResult.summary.addedTypes} | ${exportResult.summary.removedTypes} |`,
     "",
-  ];
+  );
+
+  // Bundle size summary
+  if (bundleResult) {
+    lines.push(
+      "### Bundle Size Summary",
+      "",
+      `**Total size change (minified+gzip):** ${formatSizeDiff(bundleResult.summary.totalMinifiedGzipDiff)}`,
+      "",
+      "| Category | Count |",
+      "|----------|-------|",
+      `| Exports with size increase | ${bundleResult.summary.increasedExports} |`,
+      `| Exports with size decrease | ${bundleResult.summary.decreasedExports} |`,
+      "",
+    );
+  }
 
   // Added paths
-  if (result.addedPaths.length > 0) {
-    lines.push("### + New Export Paths", "");
-    for (const path of result.addedPaths) {
+  if (exportResult.addedPaths.length > 0) {
+    lines.push("### ➕ New Export Paths", "");
+    for (const path of exportResult.addedPaths) {
       lines.push(`- \`${path}\``);
     }
     lines.push("");
   }
 
   // Removed paths
-  if (result.removedPaths.length > 0) {
-    lines.push("### - Removed Export Paths", "");
-    for (const path of result.removedPaths) {
+  if (exportResult.removedPaths.length > 0) {
+    lines.push("### ➖ Removed Export Paths", "");
+    for (const path of exportResult.removedPaths) {
       lines.push(`- \`${path}\``);
     }
     lines.push("");
   }
 
-  // Detailed changes
-  if (result.diffs.length > 0) {
+  // Detailed export changes with bundle sizes
+  if (
+    exportResult.diffs.length > 0 ||
+    (bundleResult?.changes.length ?? 0) > 0
+  ) {
     lines.push("### Detailed Changes", "");
 
-    for (const diff of result.diffs) {
-      const hasAdditions =
-        diff.added.exports.length > 0 || diff.added.types.length > 0;
-      const hasRemovals =
-        diff.removed.exports.length > 0 || diff.removed.types.length > 0;
+    // Create a map of bundle changes for easy lookup
+    const bundleChangeMap = new Map<string, PathBundleSizeChange>();
+    if (bundleResult) {
+      for (const change of bundleResult.changes) {
+        bundleChangeMap.set(change.path, change);
+      }
+    }
 
-      lines.push(`#### \`${diff.path}\``, "");
+    // Get all paths with changes
+    const allChangedPaths = new Set([
+      ...exportResult.diffs.map((d) => d.path),
+      ...(bundleResult?.changes.map((c) => c.path) ?? []),
+    ]);
 
-      if (hasAdditions) {
-        if (diff.added.exports.length > 0) {
-          lines.push(
-            `**Added exports:** \`${diff.added.exports.join("`, `")}\``,
+    for (const path of allChangedPaths) {
+      const exportDiff = exportResult.diffs.find((d) => d.path === path);
+      const bundleChange = bundleChangeMap.get(path);
+
+      lines.push(`#### \`${path}\``, "");
+
+      // Show added exports with sizes
+      if (exportDiff?.added.exports.length) {
+        lines.push("**Added exports:**");
+        for (const exp of exportDiff.added.exports) {
+          const sizeInfo = bundleChange?.namedExports.find(
+            (e) => e.exportName === exp,
           );
+          if (sizeInfo?.head) {
+            lines.push(
+              `- \`${exp}\` (${formatBytes(sizeInfo.head.minifiedGzip)})`,
+            );
+          } else {
+            lines.push(`- \`${exp}\``);
+          }
         }
-        if (diff.added.types.length > 0) {
-          lines.push(`**Added types:** \`${diff.added.types.join("`, `")}\``);
-        }
+        lines.push("");
       }
 
-      if (hasRemovals) {
-        if (diff.removed.exports.length > 0) {
-          lines.push(
-            `**Removed exports:** ~~\`${diff.removed.exports.join("`, `")}\`~~`,
-          );
-        }
-        if (diff.removed.types.length > 0) {
-          lines.push(
-            `**Removed types:** ~~\`${diff.removed.types.join("`, `")}\`~~`,
-          );
-        }
+      // Show added types
+      if (exportDiff?.added.types.length) {
+        lines.push(
+          `**Added types:** \`${exportDiff.added.types.join("`, `")}\``,
+        );
+        lines.push("");
       }
 
-      lines.push("");
+      // Show removed exports with sizes
+      if (exportDiff?.removed.exports.length) {
+        lines.push("**Removed exports:**");
+        for (const exp of exportDiff.removed.exports) {
+          const sizeInfo = bundleChange?.namedExports.find(
+            (e) => e.exportName === exp,
+          );
+          if (sizeInfo?.base) {
+            lines.push(
+              `- ~~\`${exp}\`~~ (was ${formatBytes(sizeInfo.base.minifiedGzip)})`,
+            );
+          } else {
+            lines.push(`- ~~\`${exp}\`~~`);
+          }
+        }
+        lines.push("");
+      }
+
+      // Show removed types
+      if (exportDiff?.removed.types.length) {
+        lines.push(
+          `**Removed types:** ~~\`${exportDiff.removed.types.join("`, `")}\`~~`,
+        );
+        lines.push("");
+      }
+
+      // Show bundle size changes for existing exports (not new/removed)
+      const sizeChangedExports =
+        bundleChange?.namedExports.filter((e) => {
+          const isNew = exportDiff?.added.exports.includes(e.exportName);
+          const isRemoved = exportDiff?.removed.exports.includes(e.exportName);
+          return !isNew && !isRemoved && e.diff && e.diff.minifiedGzip !== 0;
+        }) ?? [];
+
+      if (sizeChangedExports.length > 0) {
+        lines.push("**Size changes:**");
+        lines.push(
+          "| Export | Before | After | Diff |",
+          "|--------|--------|-------|------|",
+        );
+        for (const exp of sizeChangedExports.sort(
+          (a, b) =>
+            Math.abs(b.diff?.minifiedGzip ?? 0) -
+            Math.abs(a.diff?.minifiedGzip ?? 0),
+        )) {
+          const icon =
+            exp.diff && exp.diff.minifiedGzip > 0
+              ? "📈"
+              : exp.diff && exp.diff.minifiedGzip < 0
+                ? "📉"
+                : "";
+          lines.push(
+            `| \`${exp.exportName}\` | ${formatBytes(exp.base?.minifiedGzip ?? 0)} | ${formatBytes(exp.head?.minifiedGzip ?? 0)} | ${icon} ${formatSizeDiff(exp.diff?.minifiedGzip ?? 0)} |`,
+          );
+        }
+        lines.push("");
+      }
     }
   }
 
-  // Add breaking change warning
+  // Warnings section
+  const warnings: string[] = [];
+
   if (
-    result.summary.removedExports > 0 ||
-    result.summary.removedTypes > 0 ||
-    result.summary.removedPaths > 0
+    exportResult.summary.removedExports > 0 ||
+    exportResult.summary.removedTypes > 0 ||
+    exportResult.summary.removedPaths > 0
   ) {
-    lines.push(
-      "---",
-      "",
-      "⚠️ **Warning:** This change removes public exports or types, which may be a breaking change.",
-      "",
+    warnings.push(
+      "⚠️ **Breaking change:** This change removes public exports or types.",
     );
+  }
+
+  const threshold = 5 * 1024; // 5kB
+  if (bundleResult && bundleResult.summary.totalMinifiedGzipDiff > threshold) {
+    warnings.push(
+      `⚠️ **Size increase:** Total bundle size increased by ${formatBytes(bundleResult.summary.totalMinifiedGzipDiff)}. Consider reviewing for optimization opportunities.`,
+    );
+  }
+
+  if (warnings.length > 0) {
+    lines.push("---", "", ...warnings, "");
   }
 
   return lines.join("\n");
