@@ -107,7 +107,6 @@ function preventScrollStandard(referenceElement: Element | null) {
     const supportsStableScrollbarGutter =
       typeof CSS !== "undefined" &&
       CSS.supports?.("scrollbar-gutter", "stable");
-
     /*
      * DOM writes:
      * Do not read the DOM past this point!

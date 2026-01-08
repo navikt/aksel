@@ -87,6 +87,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
     const mergedRef = useMergeRefs(ref, wrapperRef);
 
     return (
+      // biome-ignore lint/a11y/noStaticElementInteractions: Allows focus-calls on div to move focus to heading.
       <div
         ref={mergedRef}
         {...rest}

@@ -54,7 +54,7 @@ export const InlineMessage: OverridableComponent<
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
 
     const translate = useI18n("global");
     const statusId = useId();
@@ -76,6 +76,7 @@ export const InlineMessage: OverridableComponent<
             {`${translate(status)}: `}
           </BodyShort>
         )}
+        {/** biome-ignore lint/a11y/useAriaPropsSupportedByRole: Testing shows that this works. */}
         <span
           data-color={themeContext?.color}
           id={contentId}

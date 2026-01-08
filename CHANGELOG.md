@@ -1,5 +1,45 @@
 # Changelog
 
+## 7.37.0
+
+### @navikt/ds-react
+
+- Dialog: :tada: New component `Dialog`. ([#4262](https://github.com/navikt/aksel/pull/4262))
+
+* Internals: Update internal utilities. ([#4432](https://github.com/navikt/aksel/pull/4432))
+
+* Internal: Updated internal createContext utility. ([#4433](https://github.com/navikt/aksel/pull/4433))
+
+### @navikt/ds-tokens
+
+- Tokens: Updated --ax-bg-overlay token. ([#4262](https://github.com/navikt/aksel/pull/4262))
+
+### @navikt/ds-css
+
+- Dialog: :tada: New component `Dialog`. ([#4262](https://github.com/navikt/aksel/pull/4262))
+
+## 7.36.0
+
+### @navikt/aksel-icons
+
+- Icons: Removed 'updated_at'-field from AkselIcon-type. ([#4399](https://github.com/navikt/aksel/pull/4399))
+
+### @navikt/ds-react
+
+- Datepicker: Fixed bug where selecting same date while only `from`-date is defined in "ranged"-mode would cause no interaction to happen. ([#4417](https://github.com/navikt/aksel/pull/4417))
+
+- InternalHeader: InternalHeader.User-props supports React.ReactNode now. ([#4415](https://github.com/navikt/aksel/pull/4415))
+
+- Datepicker/MonthPicker: Popover now flips if there is more available space above input. ([#4420](https://github.com/navikt/aksel/pull/4420))
+
+- Popover: Placement-prop now respects 'alignment' when flipping. ([#4420](https://github.com/navikt/aksel/pull/4420))
+
+### @navikt/aksel
+
+- CLI: Added 'aksel' command for local installs. Example `yarn aksel help`. ([#4419](https://github.com/navikt/aksel/pull/4419))
+
+* CLI: Update v8-tokens codemod to avoid renaming redefined tokens. Now shows status for component and legacy-token definitions. ([#4398](https://github.com/navikt/aksel/pull/4398))
+
 ## 7.35.3
 
 ### @navikt/ds-css

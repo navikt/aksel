@@ -40,7 +40,7 @@ export const ToggleChips: OverridableComponent<
     ref,
   ) => {
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
     let localVariant: ChipsToggleProps["variant"] | undefined;
 
     if (themeContext?.isDarkside) {

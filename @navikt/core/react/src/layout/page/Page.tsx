@@ -53,7 +53,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal(false);
+      const themeContext = useThemeInternal();
       const { cn } = useRenameCSS();
 
       if (

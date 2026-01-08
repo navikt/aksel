@@ -64,7 +64,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal(false);
+      const themeContext = useThemeInternal();
       const { cn } = useRenameCSS();
 
       /*

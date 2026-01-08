@@ -4,6 +4,7 @@ import { describe, expect, test } from "vitest";
 import {
   getMigrationNames,
   getMigrationPath,
+  getVersionKeys,
   migrationStringOverride,
 } from "../migrations";
 
@@ -29,9 +30,17 @@ describe("migrations", () => {
   test("No overrides", () => {
     const overrideValues = new Set<string>();
     Object.values(migrationStringOverride).forEach((overrides) => {
-      overrides.forEach((override) => overrideValues.add(override.value));
+      overrides.forEach((override) => {
+        overrideValues.add(override.value);
+      });
     });
 
     expect(values.filter((x) => overrideValues.has(x))).toEqual([]);
+  });
+
+  test("No global overrides", () => {
+    const versionNames = getVersionKeys();
+
+    expect(values.filter((x) => versionNames.includes(x))).toEqual([]);
   });
 });

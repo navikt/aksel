@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useEventCallback } from "../../../util/hooks/useEventCallback";
-import { useLatestRef } from "../../../util/hooks/useLatestRef";
 import { useAnimationsFinished } from "./useAnimationsFinished";
+import { useEventCallback } from "./useEventCallback";
+import { useValueAsRef } from "./useValueAsRef";
 
 interface useOpenChangeAnimationCompleteParameters {
   /**
@@ -44,7 +44,7 @@ export function useOpenChangeAnimationComplete(
     onComplete: onCompleteParam,
   } = parameters;
 
-  const openRef = useLatestRef(open);
+  const openRef = useValueAsRef(open);
   const onComplete = useEventCallback(onCompleteParam);
   const runOnceAnimationsFinish = useAnimationsFinished(ref, open);
 

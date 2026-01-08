@@ -15,9 +15,9 @@
     "playroom"
   ],
   "dependencies": {
-    "@navikt/aksel-icons": "^7.35.3",
-    "@navikt/ds-css": "^7.35.3",
-    "@navikt/ds-react": "^7.35.3",
-    "@navikt/ds-tokens": "^7.35.3"
+    "@navikt/aksel-icons": "^7.37.0",
+    "@navikt/ds-css": "^7.37.0",
+    "@navikt/ds-react": "^7.37.0",
+    "@navikt/ds-tokens": "^7.37.0"
   }
 }

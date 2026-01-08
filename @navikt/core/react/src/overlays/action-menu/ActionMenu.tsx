@@ -5,7 +5,7 @@ import { Slot } from "../../slot/Slot";
 import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { OverridableComponent, useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { createContext } from "../../util/create-context";
+import { createStrictContext } from "../../util/create-strict-context";
 import { useMergeRefs } from "../../util/hooks";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { requireReactElement } from "../../util/requireReactElement";
@@ -24,8 +24,8 @@ type ActionMenuContextValue = {
   rootElement: MenuPortalProps["rootElement"];
 };
 
-const [ActionMenuProvider, useActionMenuContext] =
-  createContext<ActionMenuContextValue>({
+const { Provider: ActionMenuProvider, useContext: useActionMenuContext } =
+  createStrictContext<ActionMenuContextValue>({
     name: "ActionMenuContext",
     errorMessage:
       "ActionMenu sub-components cannot be rendered outside the ActionMenu component.",
@@ -251,7 +251,9 @@ const ActionMenuRoot = ({
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   const modalContext = useModalContext(false);
-  const rootElement = modalContext ? modalContext.ref.current : rootElementProp;
+  const rootElement = modalContext
+    ? modalContext.modalRef.current
+    : rootElementProp;
 
   const [open = false, setOpen] = useControllableState({
     value: openProp,
@@ -773,7 +775,7 @@ export const ActionMenuRadioItem = forwardRef<
     ref,
   ) => {
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
 
     return (
       <Menu.RadioItem

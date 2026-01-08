@@ -1,0 +1,29 @@
+import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
+import { createTransitionStatusAttribute } from "../../util/hooks/useTransitionStatus";
+import { useDialogContext } from "../root/DialogRoot.context";
+
+type DialogBackdropInternalProps = Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "children"
+>;
+
+const DialogBackdropInternal = forwardRef<
+  HTMLDivElement,
+  DialogBackdropInternalProps
+>(({ className, ...restProps }, forwardedRef) => {
+  const { cn } = useRenameCSS();
+  const { transitionStatus } = useDialogContext();
+
+  return (
+    <div
+      {...restProps}
+      ref={forwardedRef}
+      className={cn("navds-dialog__backdrop", className)}
+      {...createTransitionStatusAttribute(transitionStatus)}
+    />
+  );
+});
+
+export { DialogBackdropInternal };
+export type { DialogBackdropInternalProps };

@@ -12,7 +12,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const { cn } = useRenameCSS();
     const { inputProps, hasError, size, readOnly, nested } = useCheckbox(props);
     const descriptionId = useId();
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
 
     if (themeContext?.isDarkside) {
       return (

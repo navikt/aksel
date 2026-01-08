@@ -15,7 +15,7 @@ import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const FilteredOptions = () => {
   const { cn } = useRenameCSS();
-  const themeContext = useThemeInternal(false);
+  const themeContext = useThemeInternal();
   const {
     inputProps: { id },
     anchorRef,
@@ -103,7 +103,6 @@ const FilteredOptions = () => {
         )}
 
         {shouldRenderFilteredOptionsList && (
-          /* biome-ignore lint/a11y/useFocusableInteractive: Interaction is not handeled by listbox itself. */
           <ul
             ref={setFilteredOptionsRef}
             role="listbox"

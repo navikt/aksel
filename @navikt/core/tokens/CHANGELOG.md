@@ -1,5 +1,13 @@
 # @navikt/ds-tokens
 
+## 7.37.0
+
+### Patch Changes
+
+- Tokens: Updated --ax-bg-overlay token. ([#4262](https://github.com/navikt/aksel/pull/4262))
+
+## 7.36.0
+
 ## 7.35.3
 
 ## 7.35.2

@@ -1,5 +1,27 @@
 # @navikt/aksel
 
+## 7.37.0
+
+### Patch Changes
+
+- Updated dependencies [[`452d128`](https://github.com/navikt/aksel/commit/452d12826fd27e011dd96f2d95eefea33779b5f0), [`452d128`](https://github.com/navikt/aksel/commit/452d12826fd27e011dd96f2d95eefea33779b5f0)]:
+  - @navikt/ds-css@7.37.0
+  - @navikt/ds-tokens@7.37.0
+
+## 7.36.0
+
+### Minor Changes
+
+- CLI: Added 'aksel' command for local installs. Example `yarn aksel help`. ([#4419](https://github.com/navikt/aksel/pull/4419))
+
+### Patch Changes
+
+- CLI: Update v8-tokens codemod to avoid renaming redefined tokens. Now shows status for component and legacy-token definitions. ([#4398](https://github.com/navikt/aksel/pull/4398))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.36.0
+  - @navikt/ds-tokens@7.36.0
+
 ## 7.35.3
 
 ### Patch Changes

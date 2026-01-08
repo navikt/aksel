@@ -19,7 +19,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     const itemContext = useContext(AccordionItemContext);
     const accordionContext = useContext(AccordionContext);
 
-    const themeContext = useThemeInternal(false);
+    const themeContext = useThemeInternal();
     const { cn } = useRenameCSS();
 
     if (itemContext === null) {

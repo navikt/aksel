@@ -108,7 +108,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal(false);
+      const themeContext = useThemeInternal();
       const { cn } = useRenameCSS();
 
       if (

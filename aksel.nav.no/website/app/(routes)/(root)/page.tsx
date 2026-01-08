@@ -23,8 +23,7 @@ import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { AnimatedFaceCard } from "@/app/(routes)/(root)/_ui/AnimatedFaceCard";
 import { AnimationButton } from "@/app/(routes)/(root)/_ui/AnimationButton";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { AsciiTree } from "@/app/_ui/holiday-deco/AsciiTree";
-import { Snow } from "@/app/_ui/holiday-deco/Snow";
+import { HolidayDecorations } from "@/app/_ui/holiday-deco/HolidayDecorations";
 import PromoTag from "@/app/_ui/promo-tag/PromoTag";
 import { sanityFetch } from "../../_sanity/live";
 import {
@@ -105,7 +104,7 @@ const Page = async () => {
                         position="relative"
                       >
                         <LinkCard data-color="brand-blue" arrow={false}>
-                          <AsciiTree />
+                          <HolidayDecorations type={{ name: "tree" }} />
                           <BoxNew
                             asChild
                             padding="space-16"
@@ -282,7 +281,7 @@ const Page = async () => {
             </PageBlock>
           </BoxNew>
         </MainWrapper>
-        <Snow />
+        <HolidayDecorations type={{ name: "snow" }} />
       </PauseAnimationProvider>
     </AkselPage>
   );
