@@ -373,24 +373,22 @@ export const WithTooltip: Story = {
     const buttonRef = React.useRef<HTMLButtonElement | null>(null);
 
     return (
-      <Dialog>
-        <Dialog defaultOpen aria-label="Tooltip test">
-          <Dialog.Trigger>
-            <Button>Open Dialog</Button>
-          </Dialog.Trigger>
-          <Dialog.Popup initialFocusTo={buttonRef}>
-            <Dialog.Body>
-              <div style={{ marginBottom: "1rem" }}>
-                <Tooltip content="This_is_the_first_tooltip">
-                  <Button ref={buttonRef}>Test 1</Button>
-                </Tooltip>
-              </div>
-              <Tooltip content="This is the second tooltip">
-                <Button>Test 2</Button>
+      <Dialog defaultOpen aria-label="Tooltip test">
+        <Dialog.Trigger>
+          <Button>Open Dialog</Button>
+        </Dialog.Trigger>
+        <Dialog.Popup initialFocusTo={buttonRef}>
+          <Dialog.Body>
+            <div style={{ marginBottom: "1rem" }}>
+              <Tooltip content="This_is_the_first_tooltip">
+                <Button ref={buttonRef}>Test 1</Button>
               </Tooltip>
-            </Dialog.Body>
-          </Dialog.Popup>
-        </Dialog>
+            </div>
+            <Tooltip content="This is the second tooltip">
+              <Button>Test 2</Button>
+            </Tooltip>
+          </Dialog.Body>
+        </Dialog.Popup>
       </Dialog>
     );
   },
@@ -406,23 +404,21 @@ export const WithDatepicker: Story = {
     });
 
     return (
-      <Dialog>
-        <Dialog defaultOpen aria-label="Tooltip test">
-          <Dialog.Trigger>
-            <Button>Open Dialog</Button>
-          </Dialog.Trigger>
-          <Dialog.Popup>
-            <Dialog.Body>
-              <DatePicker {...datepickerProps} dropdownCaption>
-                <DatePicker.Input
-                  {...inputProps}
-                  label="Velg dato"
-                  description="Format: dd.mm.yyyy"
-                />
-              </DatePicker>
-            </Dialog.Body>
-          </Dialog.Popup>
-        </Dialog>
+      <Dialog defaultOpen aria-label="Tooltip test">
+        <Dialog.Trigger>
+          <Button>Open Dialog</Button>
+        </Dialog.Trigger>
+        <Dialog.Popup>
+          <Dialog.Body>
+            <DatePicker {...datepickerProps} dropdownCaption>
+              <DatePicker.Input
+                {...inputProps}
+                label="Velg dato"
+                description="Format: dd.mm.yyyy"
+              />
+            </DatePicker>
+          </Dialog.Body>
+        </Dialog.Popup>
       </Dialog>
     );
   },
@@ -485,6 +481,32 @@ export const WithModalInside: Story = {
               </Modal>
             </Dialog.Body>
           </Dialog.Popup>
+        </Dialog>
+      </div>
+    );
+  },
+};
+
+export const SideBySide: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <div>
+        <Dialog>
+          <DialogTrigger>
+            <Button>Open Dialog</Button>
+          </DialogTrigger>
+          <DialogPopup>
+            <DialogBody>
+              Dialog 1<Button onClick={() => setOpen((x) => !x)}>Open</Button>
+            </DialogBody>
+          </DialogPopup>
+        </Dialog>
+
+        <Dialog open={open} onOpenChange={(next) => setOpen(next)}>
+          <DialogPopup>
+            <DialogBody>Dialog 2</DialogBody>
+          </DialogPopup>
         </Dialog>
       </div>
     );
