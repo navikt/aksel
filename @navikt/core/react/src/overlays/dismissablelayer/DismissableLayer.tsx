@@ -156,26 +156,23 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         | "pointerdown"
         | "focusin";
 
-      /**
-       * If anchor is wrapped inside a custom-component,
-       * the target will be a generic "custom-component".
-       * Therefore, we check if the pointerdown originated from the trigger itself since
-       * anchor will never match the target in that case.
-       */
-      if (
-        eventType === "pointerdown" &&
-        triggerPointerDownRef.current === true
-      ) {
-        event.preventDefault();
-        return;
-      }
-
       const target = event.target as HTMLElement;
 
       const targetIsAnchor =
         safeZone.anchor.contains(target) || target === safeZone.anchor;
 
       if (targetIsAnchor) {
+        event.preventDefault();
+      }
+
+      /**
+       * If the target is inside a custom element, event.target will be that element on pointerdown.
+       * Therefore, checking anchor.contains(target) etc. won't work in that case.
+       */
+      if (
+        eventType === "pointerdown" &&
+        triggerPointerDownRef.current === true
+      ) {
         event.preventDefault();
       }
 
