@@ -47,9 +47,7 @@ const DateDialog = ({
 
   const modalRef = useRef<HTMLDialogElement>(null);
 
-  const modalContext = useModalContext(false);
-
-  const isInModal = modalContext !== undefined;
+  const isInModal = useModalContext(false) !== undefined;
   const isInDialog = useDialogContext(false) !== undefined;
   const hideModal =
     useMedia("screen and (min-width: 768px)", true) &&
