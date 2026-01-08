@@ -37,7 +37,7 @@ const enrich_extra_prop_fields = (docs: docgen.ComponentDoc[]) => {
       if (!prop.description) {
         continue;
       }
-      const example_regex = /@example((.|\n)*?(?=@))|@example((.|\n)*)/;
+      const example_regex = /@example((.|\n)*?(?=@[a-z]+\s))|@example((.|\n)*)/;
       const example = prop.description.match(example_regex);
       prop.description = prop.description.replace(example_regex, "");
       // We replace twice as a hack b.c. 'asChild' ends up with two @example-blocks,
