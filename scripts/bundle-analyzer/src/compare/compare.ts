@@ -130,14 +130,13 @@ export function formatAsMarkdown(result: ComparisonResult): string {
   if (!result.hasChanges) {
     return `## 📦 Export Analysis: ${result.packageName}
 
-✅ **No changes detected** between \`${result.baseVersion}\` and \`${result.headVersion}\`
-`;
+✅ **No changes detected** between main and Pull request`;
   }
 
   const lines: string[] = [
     `## 📦 Export Analysis: ${result.packageName}`,
     "",
-    `Comparing \`${result.baseVersion}\` → \`${result.headVersion}\``,
+    `Comparing Pull request → main`,
     "",
     "### Summary",
     "",
@@ -151,7 +150,7 @@ export function formatAsMarkdown(result: ComparisonResult): string {
 
   // Added paths
   if (result.addedPaths.length > 0) {
-    lines.push("### ➕ New Export Paths", "");
+    lines.push("### + New Export Paths", "");
     for (const path of result.addedPaths) {
       lines.push(`- \`${path}\``);
     }
@@ -160,7 +159,7 @@ export function formatAsMarkdown(result: ComparisonResult): string {
 
   // Removed paths
   if (result.removedPaths.length > 0) {
-    lines.push("### ➖ Removed Export Paths", "");
+    lines.push("### - Removed Export Paths", "");
     for (const path of result.removedPaths) {
       lines.push(`- \`${path}\``);
     }
@@ -169,7 +168,7 @@ export function formatAsMarkdown(result: ComparisonResult): string {
 
   // Detailed changes
   if (result.diffs.length > 0) {
-    lines.push("### 📝 Detailed Changes", "");
+    lines.push("### Detailed Changes", "");
 
     for (const diff of result.diffs) {
       const hasAdditions =
@@ -222,65 +221,4 @@ export function formatAsMarkdown(result: ComparisonResult): string {
   }
 
   return lines.join("\n");
-}
-
-/**
- * Print comparison result to console
- */
-export function printComparison(result: ComparisonResult): void {
-  console.info("\n" + "=".repeat(60));
-  console.info(`📊 COMPARISON: ${result.packageName}`);
-  console.info(`   ${result.baseVersion} → ${result.headVersion}`);
-  console.info("=".repeat(60));
-
-  if (!result.hasChanges) {
-    console.info("\n✅ No changes detected\n");
-    return;
-  }
-
-  console.info("\n📈 Summary:");
-  console.info(
-    `   Export Paths: +${result.summary.addedPaths} / -${result.summary.removedPaths}`,
-  );
-  console.info(
-    `   Exports:      +${result.summary.addedExports} / -${result.summary.removedExports}`,
-  );
-  console.info(
-    `   Types:        +${result.summary.addedTypes} / -${result.summary.removedTypes}`,
-  );
-
-  if (result.addedPaths.length > 0) {
-    console.info("\n➕ New Export Paths:");
-    for (const path of result.addedPaths) {
-      console.info(`   ${path}`);
-    }
-  }
-
-  if (result.removedPaths.length > 0) {
-    console.info("\n➖ Removed Export Paths:");
-    for (const path of result.removedPaths) {
-      console.info(`   ${path}`);
-    }
-  }
-
-  if (result.diffs.length > 0) {
-    console.info("\n📝 Detailed Changes:");
-    for (const diff of result.diffs) {
-      console.info(`\n   ${diff.path}:`);
-      if (diff.added.exports.length > 0) {
-        console.info(`     + exports: ${diff.added.exports.join(", ")}`);
-      }
-      if (diff.added.types.length > 0) {
-        console.info(`     + types: ${diff.added.types.join(", ")}`);
-      }
-      if (diff.removed.exports.length > 0) {
-        console.info(`     - exports: ${diff.removed.exports.join(", ")}`);
-      }
-      if (diff.removed.types.length > 0) {
-        console.info(`     - types: ${diff.removed.types.join(", ")}`);
-      }
-    }
-  }
-
-  console.info("\n" + "=".repeat(60) + "\n");
 }
