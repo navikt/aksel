@@ -31,7 +31,7 @@ export const Default = () => (
 
 const Card = ({
   background,
-  borderRadius = "xlarge",
+  borderRadius = "12",
   children,
 }: Pick<BoxProps, "background" | "borderRadius" | "children">) => (
   <Box
@@ -103,7 +103,7 @@ export const ThemingDemo = () => {
           as="a"
           href="#"
           className="link-card"
-          borderRadius="small"
+          borderRadius="2"
           borderColor="neutral"
           borderWidth="1"
           padding="space-16"
@@ -354,7 +354,7 @@ export const BorderWidth = () => (
       padding="space-40"
       borderWidth="5 2 4 1"
       borderColor="neutral-strong"
-      borderRadius="large"
+      borderRadius="8"
     >
       Box
     </Box>
@@ -368,7 +368,7 @@ export const BorderRadius = () => (
       padding="space-40"
       borderWidth="2"
       borderColor="neutral-strong"
-      borderRadius="small medium large xlarge"
+      borderRadius="2 4 8 12"
     >
       Box
     </Box>
@@ -401,9 +401,9 @@ export const BorderRadius = () => (
       borderWidth="2"
       borderColor="neutral-strong"
       borderRadius={{
-        xs: "small medium large xlarge",
-        md: "medium small large full",
-        lg: "xlarge large",
+        xs: "2 4 8 12",
+        md: "4 2 8 full",
+        lg: "12 8",
       }}
     >
       Box
@@ -439,7 +439,7 @@ export const PaddingDemo = () => (
 
 export const AsChild = () => (
   <VStack gap="space-16">
-    <Box borderRadius="large" padding="space-16" asChild>
+    <Box borderRadius="8" padding="space-16" asChild>
       <button onClick={() => alert("clicked")}>Box is now a button</button>
     </Box>
   </VStack>
