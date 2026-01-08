@@ -13,6 +13,6 @@
     "pkg-types": "^2.3.0"
   },
   "scripts": {
-    "report": "tsx ./src/index.ts"
+    "generate:bundle-report": "tsx ./src/index.ts"
   }
 }
