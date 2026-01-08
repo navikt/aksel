@@ -19,10 +19,15 @@ export function useEscapeKeydown(
       }
     };
 
-    ownerDocument.addEventListener("keydown", handleKeyDown, true);
+    /**
+     * We use the bubbling phase (not capture) so that elements inside the layer
+     * can handle Escape themselves and call stopPropagation() if needed.
+     * Layer ordering is handled programmatically via the DismissableLayerContext.
+     */
+    ownerDocument.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      ownerDocument.removeEventListener("keydown", handleKeyDown, true);
+      ownerDocument.removeEventListener("keydown", handleKeyDown);
     };
   }, [onEscapeKeyDown, ownerDocument, enabled]);
 }

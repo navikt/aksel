@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { Button } from "../button";
+import { useDialogContext } from "../dialog/root/DialogRoot.context";
 import { Modal } from "../modal";
 import { useModalContext } from "../modal/Modal.context";
 import { Popover } from "../popover";
@@ -45,9 +46,13 @@ const DateDialog = ({
   const { cn } = useRenameCSS();
 
   const modalRef = useRef<HTMLDialogElement>(null);
+
   const isInModal = useModalContext(false) !== undefined;
+  const isInDialog = useDialogContext(false) !== undefined;
   const hideModal =
-    useMedia("screen and (min-width: 768px)", true) && !isInModal;
+    useMedia("screen and (min-width: 768px)", true) &&
+    !isInModal &&
+    !isInDialog;
 
   if (!open) {
     return null;
