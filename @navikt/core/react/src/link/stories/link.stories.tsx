@@ -129,7 +129,7 @@ const LinkWithIcon = () => (
 export const Icon = () => <LinkWithIcon />;
 
 export const ColorRole = () => (
-  <VStack gap="3" data-color="brand-magenta">
+  <VStack gap="space-12" data-color="brand-magenta">
     <Link href="#">Ex aliqua incididunt</Link>
     {["action", "neutral"].map((variant) => (
       <div key={variant}>

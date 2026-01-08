@@ -47,7 +47,7 @@ export const Controls: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Heading level="1" size="xlarge">
         {lorem}
       </Heading>
@@ -94,7 +94,7 @@ export const Spacing: Story = {
 
 export const Align: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Heading level="1" size="large" align="start">
         {lorem}
       </Heading>
@@ -132,7 +132,7 @@ export const OverrideTag: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Heading size="small" textColor="default">
         {lorem}
       </Heading>

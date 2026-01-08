@@ -50,7 +50,7 @@ export const Controls: Story = {
 
 export const SizeLarge: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <BodyLong size="large">{lorem}</BodyLong>
       <BodyLong size="large" weight="semibold">
         {lorem}
@@ -64,7 +64,7 @@ export const SizeLarge: Story = {
 
 export const SizeMedium: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyLong size="medium">{lorem}</BodyLong>
       <BodyLong size="medium" weight="semibold">
         {lorem}
@@ -78,7 +78,7 @@ export const SizeMedium: Story = {
 
 export const SizeSmall: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyLong size="small">{lorem}</BodyLong>
       <BodyLong size="small" weight="semibold">
         {lorem}
@@ -131,7 +131,7 @@ export const SpacingSmall: Story = {
 
 export const Align: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyLong align="start">{lorem}</BodyLong>
       <BodyLong align="center">{lorem}</BodyLong>
       <BodyLong align="end">{lorem}</BodyLong>
@@ -159,7 +159,7 @@ export const OverrideTag: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyLong textColor="default">{lorem}</BodyLong>
       <BodyLong textColor="subtle">{lorem}</BodyLong>
       <BodyLong textColor="contrast" style={{ backgroundColor: "black" }}>

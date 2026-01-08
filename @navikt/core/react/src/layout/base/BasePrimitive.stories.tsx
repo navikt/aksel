@@ -67,7 +67,7 @@ export const PaddingBreakpointsInherit2 = () => (
 );
 
 export const Padding = () => (
-  <VStack align="center" gap="2">
+  <VStack align="center" gap="space-8">
     <BasePrimitive padding="20">
       <Box borderWidth="1">Padding all around</Box>
     </BasePrimitive>
@@ -87,7 +87,7 @@ export const Padding = () => (
 );
 
 export const Margin = () => (
-  <VStack align="center" gap="2">
+  <VStack align="center" gap="space-8">
     <Box background="info-soft">
       <BasePrimitive margin="20">
         <Box borderWidth="1">Margin all around</Box>
@@ -137,7 +137,7 @@ export const MarginAuto = () => (
 );
 
 export const HeightWidth = () => (
-  <VStack align="center" gap="2">
+  <VStack align="center" gap="space-8">
     <BasePrimitive height="4rem">
       <Box borderWidth="1">height 4 rem</Box>
     </BasePrimitive>
@@ -188,7 +188,7 @@ export const PositionAbsolute = () => (
 );
 
 export const Overflow = () => (
-  <VStack gap="8">
+  <VStack gap="space-32">
     <BasePrimitive overflow="scroll" maxHeight="100px" maxWidth="100px">
       <Box borderWidth="1">
         <div style={{ width: 200, height: 200 }}>scroll</div>
@@ -218,8 +218,8 @@ export const Overflow = () => (
 );
 
 export const Flex = () => (
-  <VStack gap="8">
-    <HStack align="center" gap="2">
+  <VStack gap="space-32">
+    <HStack align="center" gap="space-8">
       <BasePrimitive flexGrow="1">
         <Box borderWidth="1">grow 1</Box>
       </BasePrimitive>
@@ -231,7 +231,7 @@ export const Flex = () => (
       </BasePrimitive>
     </HStack>
     <h2>Flex basis</h2>
-    <HStack align="center" gap="0">
+    <HStack align="center" gap="space-0">
       <BasePrimitive flexBasis="33%">
         <Box borderWidth="1">33%</Box>
       </BasePrimitive>
@@ -249,9 +249,9 @@ export const Flex = () => (
 );
 
 export const Grid = () => (
-  <VStack gap="8">
+  <VStack gap="space-32">
     <h2>Static columns</h2>
-    <HGrid gap="2" columns="1fr 1fr 1fr">
+    <HGrid gap="space-8" columns="1fr 1fr 1fr">
       <BasePrimitive gridColumn="1 / span 2">
         <Box borderWidth="1">2 columns</Box>
       </BasePrimitive>
@@ -260,7 +260,7 @@ export const Grid = () => (
       </BasePrimitive>
     </HGrid>
     <h2>Dynamic columns</h2>
-    <HGrid gap="2" columns="1fr 1fr 1fr 1fr 1fr 1fr">
+    <HGrid gap="space-8" columns="1fr 1fr 1fr 1fr 1fr 1fr">
       <BasePrimitive
         gridColumn={{
           xs: "1 / span 1",
@@ -301,7 +301,7 @@ export const NewSpaceTokens = () => (
 
 export const Chromatic: Story = {
   render: () => (
-    <VStack align="center" gap="6">
+    <VStack align="center" gap="space-24">
       <div>
         <h2>PaddingBreakpoints</h2>
         <PaddingBreakpoints />

@@ -35,7 +35,7 @@ const Card = ({
   children,
 }: Pick<BoxProps, "background" | "borderRadius" | "children">) => (
   <Box
-    padding="4"
+    padding="space-16"
     background={background}
     borderColor="neutral-subtle"
     borderRadius={borderRadius}
@@ -46,7 +46,7 @@ const Card = ({
 );
 
 export const AsCard = () => (
-  <HStack gap="4" justify="center">
+  <HStack gap="space-16" justify="center">
     <Card>
       <h1>Card one</h1>
       <BodyLong>
@@ -106,11 +106,11 @@ export const ThemingDemo = () => {
           borderRadius="small"
           borderColor="neutral"
           borderWidth="1"
-          padding="4"
+          padding="space-16"
           onClick={() => alert("Clicked!")}
         >
-          <HStack gap="4" align="center">
-            <VStack gap="2">
+          <HStack gap="space-16" align="center">
+            <VStack gap="space-8">
               <Heading size="medium">
                 LinkCard som bruker Box, HStack og VStack
               </Heading>
@@ -153,7 +153,7 @@ export const ThemingDemo = () => {
         <HStack>
           <Box
             background="success-soft"
-            padding="4"
+            padding="space-16"
             borderRadius="full 0 0 full"
           >
             <VStack align="center">
@@ -163,7 +163,7 @@ export const ThemingDemo = () => {
           </Box>
           <Box
             background="danger-soft"
-            padding="4"
+            padding="space-16"
             borderRadius="0 full full 0"
           >
             <VStack align="center">
@@ -179,7 +179,7 @@ export const ThemingDemo = () => {
   };
 
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <Card>Dette er et Card som bruker Box som base</Card>
       <LinkCard />
       <ChatBubble />
@@ -192,7 +192,14 @@ export const PaddingBreakpoints = {
   render: () => (
     <div>
       <Box
-        padding={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6", "2xl": "8" }}
+        padding={{
+          xs: "space-8",
+          sm: "space-12",
+          md: "space-16",
+          lg: "space-20",
+          xl: "space-24",
+          "2xl": "space-32",
+        }}
         background="neutral-moderate"
       >
         <Box background="accent-strong">
@@ -210,8 +217,8 @@ export const PaddingBreakpointsInherit1 = {
   render: () => (
     <div>
       <Box
-        padding={{ xs: "2" }}
-        paddingInline={{ md: "24 0" }}
+        padding={{ xs: "space-8" }}
+        paddingInline={{ md: "space-96 space-0" }}
         background="neutral-moderate"
       >
         <Box background="accent-strong">
@@ -227,8 +234,8 @@ export const PaddingBreakpointsInherit1 = {
 export const PaddingBreakpointsInherit2 = () => (
   <div>
     <Box
-      padding={{ xs: "2", sm: "3" }}
-      paddingInline={{ sm: "4 0", md: "24 0" }}
+      padding={{ xs: "space-8", sm: "space-12" }}
+      paddingInline={{ sm: "space-16 space-0", md: "space-96 space-0" }}
       background="neutral-moderate"
     >
       <Box background="accent-strong">
@@ -242,20 +249,36 @@ export const PaddingBreakpointsInherit2 = () => (
 );
 
 export const Padding = () => (
-  <VStack align="center" gap="2">
-    <Box padding="20" background="accent-strong">
+  <VStack align="center" gap="space-8">
+    <Box padding="space-80" background="accent-strong">
       <BodyLong>Padding all around</BodyLong>
     </Box>
-    <Box padding="1" paddingBlock="20 0" background="accent-strong">
+    <Box
+      padding="space-4"
+      paddingBlock="space-80 space-0"
+      background="accent-strong"
+    >
       <BodyLong>Padding to the North</BodyLong>
     </Box>
-    <Box padding="1" paddingInline="0 20" background="accent-strong">
+    <Box
+      padding="space-4"
+      paddingInline="space-0 space-80"
+      background="accent-strong"
+    >
       <BodyLong>Padding to the East</BodyLong>
     </Box>
-    <Box padding="1" paddingBlock="0 20" background="accent-strong">
+    <Box
+      padding="space-4"
+      paddingBlock="space-0 space-80"
+      background="accent-strong"
+    >
       <BodyLong>Padding to the South</BodyLong>
     </Box>
-    <Box padding="1" paddingInline="20 0" background="accent-strong">
+    <Box
+      padding="space-4"
+      paddingInline="space-80 space-0"
+      background="accent-strong"
+    >
       <BodyLong>Padding to the West</BodyLong>
     </Box>
   </VStack>
@@ -286,21 +309,21 @@ export const BoxInBox = () => (
 
 export const WithHGrid = () => {
   return (
-    <Box background="neutral-soft" padding="10">
+    <Box background="neutral-soft" padding="space-40">
       <HGrid
-        gap="6"
+        gap="space-24"
         columns={{ xs: "repeat(auto-fit, minmax(10rem, 1fr))", md: 4 }}
       >
-        <Box padding="4" background="neutral-moderate">
+        <Box padding="space-16" background="neutral-moderate">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
         </Box>
-        <Box padding="4" background="neutral-moderate">
+        <Box padding="space-16" background="neutral-moderate">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
         </Box>
-        <Box padding="4" background="neutral-moderate">
+        <Box padding="space-16" background="neutral-moderate">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
         </Box>
-        <Box padding="4" background="neutral-moderate">
+        <Box padding="space-16" background="neutral-moderate">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
         </Box>
       </HGrid>
@@ -309,10 +332,10 @@ export const WithHGrid = () => {
 };
 
 export const BorderWidth = () => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Box
       background="neutral-moderate"
-      padding="10"
+      padding="space-40"
       borderWidth="2"
       borderColor="neutral-strong"
     >
@@ -320,7 +343,7 @@ export const BorderWidth = () => (
     </Box>
     <Box
       background="neutral-moderate"
-      padding="10"
+      padding="space-40"
       borderWidth="1 2 3 4"
       borderColor="neutral-strong"
     >
@@ -328,7 +351,7 @@ export const BorderWidth = () => (
     </Box>
     <Box
       background="neutral-moderate"
-      padding="10"
+      padding="space-40"
       borderWidth="5 2 4 1"
       borderColor="neutral-strong"
       borderRadius="large"
@@ -339,10 +362,10 @@ export const BorderWidth = () => (
 );
 
 export const BorderRadius = () => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Box
       background="neutral-moderate"
-      padding="10"
+      padding="space-40"
       borderWidth="2"
       borderColor="neutral-strong"
       borderRadius="small medium large xlarge"
@@ -351,7 +374,7 @@ export const BorderRadius = () => (
     </Box>
     <Box
       background="neutral-moderate"
-      padding="10"
+      padding="space-40"
       borderWidth="2"
       borderColor="neutral-strong"
       borderRadius="2 4 8 12"
@@ -360,7 +383,7 @@ export const BorderRadius = () => (
     </Box>
     <Box
       background="neutral-moderate"
-      padding="10"
+      padding="space-40"
       borderWidth="2"
       borderColor="neutral-strong"
       borderRadius={{
@@ -374,7 +397,7 @@ export const BorderRadius = () => (
 
     <Box
       background="neutral-moderate"
-      padding="10"
+      padding="space-40"
       borderWidth="2"
       borderColor="neutral-strong"
       borderRadius={{
@@ -389,12 +412,12 @@ export const BorderRadius = () => (
 );
 
 export const MarginDemo = () => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Box borderWidth="1">
       <Box
         background="accent-moderate"
-        margin="5"
-        marginInline={{ xs: "20", lg: "10" }}
+        margin="space-20"
+        marginInline={{ xs: "space-80", lg: "space-40" }}
       >
         Box
       </Box>
@@ -403,11 +426,11 @@ export const MarginDemo = () => (
 );
 
 export const PaddingDemo = () => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Box
       background="neutral-moderate"
-      padding="5"
-      paddingInline={{ xs: "20", lg: "10" }}
+      padding="space-20"
+      paddingInline={{ xs: "space-80", lg: "space-40" }}
     >
       Box
     </Box>
@@ -415,8 +438,8 @@ export const PaddingDemo = () => (
 );
 
 export const AsChild = () => (
-  <VStack gap="4">
-    <Box borderRadius="large" padding="4" asChild>
+  <VStack gap="space-16">
+    <Box borderRadius="large" padding="space-16" asChild>
       <button onClick={() => alert("clicked")}>Box is now a button</button>
     </Box>
   </VStack>
@@ -424,7 +447,7 @@ export const AsChild = () => (
 
 export const Chromatic: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <div>
         <h2>Default</h2>
         <Default />

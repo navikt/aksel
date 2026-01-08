@@ -101,7 +101,7 @@ export const Compositions = () => {
   const [activeValue, setActiveValue] = useState("ulest");
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       <ToggleGroup value={activeValue} onChange={setActiveValue}>
         {Items()}
       </ToggleGroup>
@@ -122,7 +122,7 @@ export const Small = () => {
   const [activeValue, setActiveValue] = useState("ulest");
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
         {Items()}
       </ToggleGroup>
