@@ -59,8 +59,7 @@ const translateTokenStringToCSS = (
           output = `var(--${TOKEN_PREFIX}-${propValue})`;
         }
       } else if (tokenSubgroup === "radius") {
-        const name = propValue;
-        output = `var(--${TOKEN_PREFIX}-radius-${name})`;
+        output = `var(--${TOKEN_PREFIX}-radius-${propValue})`;
       }
 
       // Handle inversion for negative values
