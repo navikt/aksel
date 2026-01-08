@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Button, ButtonProps } from "../button";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { useRenameCSS } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 
 export interface PaginationItemProps extends ButtonProps {
@@ -37,16 +37,15 @@ export const Item: PaginationItemType = forwardRef(
       page,
       "data-color": color,
       ...rest
-    },
+    }: PaginationItemProps & { as?: React.ElementType },
     ref,
   ) => {
-    const themeContext = useThemeInternal();
     const { cn } = useRenameCSS();
 
     return (
       <Button
         as={Component}
-        variant={themeContext?.isDarkside ? "tertiary-neutral" : "tertiary"}
+        variant="tertiary"
         data-color={color}
         aria-current={selected}
         data-pressed={selected}

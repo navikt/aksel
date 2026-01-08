@@ -17,7 +17,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { ListItem } from "@navikt/ds-react/List";
-import * as tokens from "@navikt/ds-tokens/darkside-js";
+import * as tokens from "@navikt/ds-tokens/js";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { ActivityCard } from "../components/aktivitetsplan/ActivityCard";
 import { ActivityColumn } from "../components/aktivitetsplan/ActivityColumn";

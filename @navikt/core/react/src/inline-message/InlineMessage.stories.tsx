@@ -81,21 +81,13 @@ export const Chromatic = renderStoriesForChromatic({
   AsLink,
 });
 
-export const ChromaticLight = renderStoriesForChromatic({
-  Default,
-  Compositions,
-  SizeSmall,
-  AsLink,
-});
-ChromaticLight.globals = { theme: "light", mode: "darkside" };
-
 export const ChromaticDark = renderStoriesForChromatic({
   Default,
   Compositions,
   SizeSmall,
   AsLink,
 });
-ChromaticDark.globals = { theme: "dark", mode: "darkside" };
+ChromaticDark.globals = { theme: "dark" };
 
 function DemoContent() {
   return (

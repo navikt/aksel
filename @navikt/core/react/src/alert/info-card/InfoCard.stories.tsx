@@ -183,16 +183,6 @@ export const Chromatic = renderStoriesForChromatic({
   WrappingTitle,
 });
 
-export const ChromaticLight = renderStoriesForChromatic({
-  Default,
-  SizeSmall,
-  OnlyHeader,
-  Compositions,
-  CustomHeaders,
-  WrappingTitle,
-});
-ChromaticLight.globals = { theme: "light", mode: "darkside" };
-
 export const ChromaticDark = renderStoriesForChromatic({
   Default,
   SizeSmall,
@@ -201,7 +191,7 @@ export const ChromaticDark = renderStoriesForChromatic({
   CustomHeaders,
   WrappingTitle,
 });
-ChromaticDark.globals = { theme: "dark", mode: "darkside" };
+ChromaticDark.globals = { theme: "dark" };
 
 function DemoContent() {
   return (

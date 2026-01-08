@@ -31,9 +31,7 @@ const ExpansionCardHeader = forwardRef<
       className={cn("navds-expansioncard__header", className)}
       data-open={panelContext.open}
     >
-      <div className={cn("navds-expansioncard__header-content")}>
-        {children}
-      </div>
+      <div>{children}</div>
 
       <button
         className={cn("navds-expansioncard__header-button")}

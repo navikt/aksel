@@ -6,7 +6,7 @@ import "./aksel-storybook.css";
 const withTheme = (Story: () => JSX.Element) => {
   return (
     <Theme hasBackground asChild>
-      <Box padding="space-16">
+      <Box padding="space-32" minHeight="100vh">
         <Story />
       </Box>
     </Theme>
@@ -29,6 +29,8 @@ const preview: Preview = {
         return aIndex - bIndex;
       },
     },
+    backgrounds: { disable: true },
+    layout: "fullscreen",
   },
   decorators: [
     withTheme,

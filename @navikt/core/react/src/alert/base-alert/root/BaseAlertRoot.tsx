@@ -20,7 +20,9 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   size?: BaseAlertContextProps["size"];
   /**
-   * Overrides color
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */
   "data-color"?: AkselColor;
   /**

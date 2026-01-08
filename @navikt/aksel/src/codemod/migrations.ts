@@ -210,6 +210,20 @@ export const migrations: MigrationT = {
       path: "v8.0.0/chips-variant/chips-variant",
       ignoredExtensions: CSS_EXTENSIONS,
     },
+    {
+      description:
+        "Updates variant + data-color props on Button based on current variant prop.",
+      value: "v8-button-variant",
+      path: "v8.0.0/button-variant/button-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on Link based on current variant prop.",
+      value: "v8-link-variant",
+      path: "v8.0.0/link-variant/link-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
   ],
 } as const;
 

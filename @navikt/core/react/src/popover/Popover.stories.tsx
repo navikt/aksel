@@ -26,9 +26,6 @@ export default {
     open: {
       control: { type: "boolean" },
     },
-    arrow: {
-      control: { type: "boolean" },
-    },
     offset: {
       control: { type: "number" },
     },
@@ -98,21 +95,11 @@ export const Placement = () => {
   );
 };
 
-/* TODO: All stories with Arrow can be removed after darkside update */
-export const Arrow = () => {
-  return (
-    <div className="colgap" style={{ gap: "12rem" }}>
-      <Template arrow />
-      <Template arrow={false} />
-    </div>
-  );
-};
-
 export const Offset = () => {
   return (
     <div className="colgap" style={{ gap: "12rem" }}>
-      <Template arrow offset={30} />
-      <Template arrow={false} offset={30} />
+      <Template offset={20} />
+      <Template offset={30} />
     </div>
   );
 };

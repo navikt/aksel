@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { default as React } from "react";
 import { expect, within } from "storybook/test";
+import { Box } from "../../layout/box";
 import { VStack } from "../../layout/stack";
 import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import Heading from "../Heading";
@@ -40,7 +41,7 @@ export const Controls: Story = {
     },
     textColor: {
       control: "radio",
-      options: ["default", "subtle"],
+      options: ["default", "subtle", "contrast"],
     },
   },
 };
@@ -139,6 +140,11 @@ export const ColorRole: Story = {
       <Heading size="small" textColor="subtle">
         {lorem}
       </Heading>
+      <Box background="neutral-strong">
+        <Heading size="small" textColor="contrast">
+          {lorem}
+        </Heading>
+      </Box>
       <Heading size="small" data-color="brand-magenta">
         {lorem}
       </Heading>
@@ -148,6 +154,11 @@ export const ColorRole: Story = {
       <Heading size="small" data-color="brand-magenta" textColor="subtle">
         {lorem}
       </Heading>
+      <Box background="neutral-strong">
+        <Heading size="small" data-color="brand-magenta" textColor="contrast">
+          {lorem}
+        </Heading>
+      </Box>
     </VStack>
   ),
 };

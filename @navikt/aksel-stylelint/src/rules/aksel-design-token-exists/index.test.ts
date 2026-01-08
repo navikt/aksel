@@ -8,85 +8,76 @@ testRule({
 
   accept: [
     {
-      code: ".foo { --ac-accordion-header-bg-hover: 1px; --ac-internalheader-bg: red; }",
-      description: "existing '--ac-' tokens overridden",
+      code: ".foo { --ax-font-line-height-large: 1px; --ax-border-default: red; }",
+      description: "existing '--ax-' tokens overridden",
     },
     {
-      code: ".foo { --my-custom-color: var(--a-orange-800); }",
-      description: "existing '--a-' token referenced",
+      code: ".foo { --my-custom-color: var(--ax-warning-800); }",
+      description: "existing '--ax-' token referenced",
     },
   ],
 
   reject: [
     {
-      code: ".foo { --a-does-not-exist: 1px }",
-      description: "attempt to override nonexistent '--a-' token",
+      code: ".foo { --ax-does-not-exist: 1px }",
+      description: "attempt to override nonexistent '--ax-' token",
       warnings: [
         {
-          message: messages.propNotExist({ prop: "--a-does-not-exist" }),
+          message: messages.propNotExist({ prop: "--ax-does-not-exist" }),
           line: 1,
           endLine: 1,
           column: 8,
-          endColumn: 26,
+          endColumn: 27,
         },
       ],
     },
-    {
-      code: ".foo \n { \n --ac-does-not-exist: 1px; \n }",
-      description: "attempt to override nonexistent '--ac-' token",
-      message: messages.propNotExist({ prop: "--ac-does-not-exist" }),
-      line: 3,
-      endLine: 3,
-      column: 2,
-      endColumn: 21,
-    },
 
     {
-      code: ".foo { color: var(--a-bar) }",
+      code: ".foo { color: var(--ax-bar) }",
       description: "attempt to use nonexistent token",
-      message: messages.valueNotExist({ prop: "color" }, "--a-bar"),
+      message: messages.valueNotExist({ prop: "color" }, "--ax-bar"),
       line: 1,
       endLine: 1,
       column: 19,
-      endColumn: 26,
+      endColumn: 27,
     },
     {
-      code: ".foo { width: var(--ac-bar, --a-baz) }",
+      code: ".foo { width: var(--ax-bar, --ax-baz) }",
       description: "attempt to use two nonexistent tokens in one var()",
       warnings: [
         {
-          message: messages.valueNotExist({ prop: "width" }, "--ac-bar"),
+          message: messages.valueNotExist({ prop: "width" }, "--ax-bar"),
           line: 1,
           endLine: 1,
           column: 19,
           endColumn: 27,
         },
         {
-          message: messages.valueNotExist({ prop: "width" }, "--a-baz"),
+          message: messages.valueNotExist({ prop: "width" }, "--ax-baz"),
           line: 1,
           endLine: 1,
           column: 29,
-          endColumn: 36,
+          endColumn: 37,
         },
       ],
     },
     {
-      code: ".foo { padding: var(--a-bar) var(--a-baz); }",
+      code: ".foo { padding: var(--ax-bar) var(--ax-baz); }",
       description: "attempt to use two nonexistent tokens as separate vars",
       warnings: [
         {
-          message: messages.valueNotExist({ prop: "padding" }, "--a-bar"),
+          message: messages.valueNotExist({ prop: "padding" }, "--ax-bar"),
           line: 1,
           endLine: 1,
           column: 21,
-          endColumn: 28,
+          endColumn: 29,
         },
         {
-          message: messages.valueNotExist({ prop: "padding" }, "--a-baz"),
+          message: messages.valueNotExist({ prop: "padding" }, "--ax-baz"),
           line: 1,
           endLine: 1,
-          column: 34,
-          endColumn: 41,
+          column: 35,
+          endColumn: 43,
         },
       ],
     },

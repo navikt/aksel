@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Box borderColor="border-subtle" borderWidth="1 0 0">
+    <Box borderColor="neutral-subtle" borderWidth="1 0 0">
       <Row text="Addresse 1:">Osloveien 99, 0111 Oslo</Row>
       <Row text="Addresse 2:">Bergenveien 99, 2233 Bergen</Row>
       <Row text="Telefon:">4040404040</Row>
@@ -13,7 +13,7 @@ const Example = () => {
 };
 
 const Row = ({ children, text }: any) => (
-  <Box borderColor="border-subtle" borderWidth="0 0 1" paddingBlock="space-4">
+  <Box borderColor="neutral-subtle" borderWidth="0 0 1" paddingBlock="space-4">
     <HGrid columns="1fr 4fr auto" gap="space-8" align="center">
       <span>{text}</span>
       <span>{children}</span>
@@ -28,7 +28,6 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
-  legacyOnly: true,
 };
 
 export const args = {

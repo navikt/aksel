@@ -1,5 +1,6 @@
 import React, { forwardRef, useRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { useControllableState } from "../util/hooks";
 import { OverridableComponent } from "../util/types";
 import ExpansionCardContent, {
@@ -68,6 +69,12 @@ interface ExpansionCardCommonProps
    * @default "medium"
    */
   size?: "medium" | "small";
+  /**
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
 }
 
 type ExpansionCardConditionalProps =
@@ -146,7 +153,6 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
             className,
             `navds-expansioncard--${size}`,
             {
-              "navds-expansioncard--open": open ?? _open,
               "navds-expansioncard--no-animation": !shouldFade.current,
             },
           )}

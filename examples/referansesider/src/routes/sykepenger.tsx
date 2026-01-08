@@ -9,7 +9,7 @@ import {
   ChevronDownIcon,
 } from "@navikt/aksel-icons";
 import { Link } from "@navikt/ds-react";
-import * as tokens from "@navikt/ds-tokens/darkside-js";
+import * as tokens from "@navikt/ds-tokens/js";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { Button } from "../components/Button";
 import { Page } from "../components/Page";

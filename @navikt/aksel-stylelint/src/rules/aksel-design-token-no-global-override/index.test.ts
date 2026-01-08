@@ -8,35 +8,31 @@ testRule({
 
   accept: [
     {
-      code: ".foo { --ac-accordion-header-bg-hover: 1px; --ac-header-bg: red; }",
-      description: "existing '--ac-' tokens overridden",
-    },
-    {
-      code: ".foo { --my-custom-color: var(--a-orange-800); }",
-      description: "existing '--a-' token referenced",
+      code: ".foo { --my-custom-color: var(--ax-warning-800); }",
+      description: "existing '--ax-' token referenced",
     },
   ],
 
   reject: [
     {
-      code: ".foo { --a-surface-action: 1px }",
-      description: "existing '--a-' token overridden",
-      message: messages.propOverrideGlobal({ prop: "--a-surface-action" }),
+      code: ".foo { --ax-border-default: red }",
+      description: "existing '--ax-' token overridden",
+      message: messages.propOverrideGlobal({ prop: "--ax-border-default" }),
       line: 1,
       endLine: 1,
       column: 8,
-      endColumn: 26,
+      endColumn: 27,
     },
     {
-      code: ".foo { --a-does-not-exist: 1px }",
-      description: "attempt to override nonexistent '--a-' token",
+      code: ".foo { --ax-does-not-exist: 1px }",
+      description: "attempt to override nonexistent '--ax-' token",
       warnings: [
         {
-          message: messages.propOverrideGlobal({ prop: "--a-does-not-exist" }),
+          message: messages.propOverrideGlobal({ prop: "--ax-does-not-exist" }),
           line: 1,
           endLine: 1,
           column: 8,
-          endColumn: 26,
+          endColumn: 27,
         },
       ],
     },

@@ -80,10 +80,6 @@
     transform: translateY(-50%);
     border-radius: var(--ax-border-radius-full);
   }
-
-  [data-type="darkside"] &::before {
-    background-color: var(--ax-bg-brand-magenta-strong-pressed);
-  }
 }
 
 .tocNavListItem {
@@ -93,7 +89,6 @@
 
 .tocNavListItemLink {
   border-radius: var(--ax-border-radius-medium);
-  display: block;
   display: flex;
   align-items: center;
   justify-content: space-between;

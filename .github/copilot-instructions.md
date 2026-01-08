@@ -197,12 +197,9 @@ Troubleshooting
 2. Check workspace dependency build order/issues
 3. If focusing workspaces, avoid running repo-wide scripts that depend on the website
 
-## Darkside theming and tokens
+## Theming and tokens
 
 - Use design tokens and CSS layers; avoid hard-coded colors/spacing.
-- Website imports Darkside CSS and tokens, see:
-  - `aksel.nav.no/website/pages/global.css` (imports `@navikt/ds-css/darkside`)
-  - `aksel.nav.no/website/pages/_app.tsx` (imports `@navikt/ds-tokens/darkside-css`)
 - Stylelint enforces token usage; unknown/missing custom properties will fail lint.
 
 ## Website (Next.js)
@@ -227,7 +224,7 @@ Troubleshooting
 - Storybook: “Run yarn storybook” (or `yarn storybook:aksel` for the website config)
 - Lint/format: “Run yarn lint” (full install recommended) and optional `yarn biome:lint`
 - Versioning: “Run yarn changeset, then yarn create-version”
-- Theming: “Import @navikt/ds-css/darkside in global CSS and ensure tokens via @navikt/ds-tokens/darkside-css”
+- Theming: “Import @navikt/ds-css in global CSS”
 
 ## Code reviews (for Copilot)
 

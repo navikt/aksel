@@ -1,7 +1,9 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
+import { AkselColor } from "../types";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -68,6 +70,17 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
     tag: "h2" | "h3" | "h4" | "h5" | "h6";
     text: string;
   };
+  /**
+   * Overrides color.
+   * @default "neutral"
+   *
+   *
+   * We have disallowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   * @private
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 interface PaginationType
@@ -114,12 +127,6 @@ export const getSteps = ({
 };
 
 /**
- * TODO: These classes can be removed in darkside update
- * - navds-pagination--prev-next--with-text
- * - navds-pagination__prev-next
- */
-
-/**
  * A component that displays pagination controls.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/pagination)
@@ -150,7 +157,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       srHeading,
       "aria-labelledby": ariaLabelledBy,
       renderItem: Item = PaginationItem,
-      "data-color": color,
+      "data-color": color = "neutral",
       ...rest
     },
     ref,
@@ -204,9 +211,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           <li>
             <Item
               data-color={color}
-              className={cn("navds-pagination__prev-next", {
+              className={cn({
                 "navds-pagination--invisible": page === 1,
-                "navds-pagination--prev-next--with-text": prevNextTexts,
               })}
               disabled={page === 1}
               onClick={() => onPageChange?.(page - 1)}
@@ -257,9 +263,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           <li>
             <Item
               data-color={color}
-              className={cn("navds-pagination__prev-next", {
+              className={cn({
                 "navds-pagination--invisible": page === count,
-                "navds-pagination--prev-next--with-text": prevNextTexts,
               })}
               disabled={page === count}
               onClick={() => onPageChange?.(page + 1)}

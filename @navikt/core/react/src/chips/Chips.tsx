@@ -39,23 +39,23 @@ interface ChipsComponent
  *
  * @example
  * ```jsx
-      <Chips size="small">
-        {options.map((c) => (
-          <Chips.Toggle
-            selected={selected.includes(c)}
-            key={c}
-            onClick={() =>
-              setSelected(
-                selected.includes(c)
-                  ? selected.filter((x) => x !== c)
-                  : [...selected, c]
-              )
-            }
-          >
-            {c}
-          </Chips.Toggle>
-        ))}
-      </Chips>
+ *    <Chips size="small">
+ *      {options.map((c) => (
+ *        <Chips.Toggle
+ *          selected={selected.includes(c)}
+ *          key={c}
+ *          onClick={() =>
+ *            setSelected(
+ *              selected.includes(c)
+ *                ? selected.filter((x) => x !== c)
+ *                : [...selected, c]
+ *            )
+ *          }
+ *        >
+ *          {c}
+ *        </Chips.Toggle>
+ *      ))}
+ *    </Chips>
  * ```
  */
 export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(

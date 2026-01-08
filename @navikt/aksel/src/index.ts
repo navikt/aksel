@@ -2,7 +2,7 @@
 import chalk from "chalk";
 import { Command } from "commander";
 import { codemodCommand } from "./codemod/index";
-import { darksideCommand } from "./darkside";
+import { v8TokensCommand } from "./codemod/v8-tokens";
 import { helpCommand } from "./help";
 import { VERSION } from "./version";
 
@@ -27,13 +27,13 @@ async function run() {
 
   if (args[0] === "codemod") {
     if (args.includes("v8-tokens")) {
-      darksideCommand();
+      v8TokensCommand();
       return;
     }
 
     codemodCommand((migration) => {
       if (migration === "v8-tokens") {
-        darksideCommand();
+        v8TokensCommand();
       }
     });
     return;
