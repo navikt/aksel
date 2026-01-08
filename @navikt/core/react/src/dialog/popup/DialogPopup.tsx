@@ -40,7 +40,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
     const modalContext = useModalContext(false);
     const rootElement = modalContext
       ? modalContext.modalRef.current
-      : _rootElement;
+      : rootElementProp;
 
     if (!mounted) {
       return null;
