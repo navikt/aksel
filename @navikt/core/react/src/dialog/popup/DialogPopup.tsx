@@ -29,7 +29,7 @@ const DialogPopup = forwardRef<HTMLDivElement, DialogPopupProps>(
     {
       modal = true,
       withBackdrop = modal === true,
-      rootElement: _rootElement,
+      rootElement: rootElementProp,
       position,
       ...restProps
     },
