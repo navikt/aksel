@@ -6,14 +6,12 @@ export type AsChildProps =
        * merging the props of the component with the props of the child.
        *
        * @example
-       * ```
        * <Component asChild data-prop>
        *   <ChildComponent data-child />
        * </Component>
        *
        * Out:
        * <MergedComponent data-prop data-child />
-       * ```
        */
       asChild: true;
       as?: never;
@@ -25,14 +23,12 @@ export type AsChildProps =
        * merging the props of the component with the props of the child.
        *
        * @example
-       * ```
        * <Component asChild data-prop>
        *   <ChildComponent data-child />
        * </Component>
        *
        * Out:
        * <MergedComponent data-prop data-child />
-       * ```
        */
       asChild?: false;
     };
