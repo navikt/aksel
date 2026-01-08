@@ -12,7 +12,7 @@
   box-shadow: var(--a-shadow-xlarge);
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--ax-border-neutral-subtleA);
+  border: 1px solid var(--a-border-subtle);
   z-index: 2000;
   overflow: hidden;
 
