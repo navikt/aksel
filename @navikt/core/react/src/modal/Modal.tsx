@@ -249,6 +249,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         }
         aria-labelledby={mergedAriaLabelledBy}
         onKeyDown={(e) => {
+          /**
+           * Stops propagation of Escape key to prevent closing parent modals/dialogs
+           */
           if (e.key === "Escape") {
             e.stopPropagation();
           }
