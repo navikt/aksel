@@ -322,19 +322,6 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       };
     }, [safeZone?.anchor]);
 
-    /* onPointerDownCapture={() => {
-            context.triggerPointerDownRef.current = true;
-          }}
-          onPointerUp={() => {
-            context.triggerPointerDownRef.current = false;
-          }}
-          onPointerLeave={() => {
-            context.triggerPointerDownRef.current = false;
-          }}
-          onPointerCancel={() => {
-            context.triggerPointerDownRef.current = false;
-          }} */
-
     /**
      * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
      */
