@@ -1,5 +1,19 @@
 # @navikt/aksel
 
+## 7.38.0
+
+### Minor Changes
+
+- CLI: Now has interactive codemod-selection for all major-versions. ([#4427](https://github.com/navikt/aksel/pull/4427))
+
+### Patch Changes
+
+- CLI: Updated codemod 'v8-primitive-spacing' to migrate `HGrid`-component. ([`d631eef`](https://github.com/navikt/aksel/commit/d631eefe59217a70ad9598e967b86cf961739421))
+
+- Updated dependencies [[`155b395`](https://github.com/navikt/aksel/commit/155b395187968be65585ab8720037b1056641a53), [`6219718`](https://github.com/navikt/aksel/commit/6219718eba348efc3b838e0d95b32fcf22ef9db5)]:
+  - @navikt/ds-css@7.38.0
+  - @navikt/ds-tokens@7.38.0
+
 ## 7.37.0
 
 ### Patch Changes
