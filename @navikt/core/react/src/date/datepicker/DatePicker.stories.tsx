@@ -509,7 +509,7 @@ export const DialogDemo = () => {
         <Dialog.Header>
           <Dialog.Title>Dialog-demo</Dialog.Title>
         </Dialog.Header>
-        <Dialog.Body style={{ position: "relative" }}>
+        <Dialog.Body>
           <BodyLong spacing>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit.
           </BodyLong>
