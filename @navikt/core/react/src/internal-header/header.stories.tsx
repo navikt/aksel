@@ -262,7 +262,7 @@ export const UserButton = () => (
 
 export const Chromatic: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <div>
         <h2>TitleAsHeading</h2>
         <TitleAsHeading />
