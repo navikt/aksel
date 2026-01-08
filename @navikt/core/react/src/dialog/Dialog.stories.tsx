@@ -5,6 +5,7 @@ import { Button } from "../button";
 import { Select } from "../form/select";
 import { VStack } from "../layout/stack";
 import { Table } from "../table";
+import { BodyShort } from "../typography";
 import {
   Dialog,
   DialogBody,
@@ -351,6 +352,57 @@ export const CustomWidthHeight: Story = {
           debitis ad soluta excepturi reprehenderit veritatis aut nesciunt,
           alias adipisci deserunt laudantium asperiores repellat voluptatum vero
           aliquam eius accusantium consectetur.
+        </DialogBody>
+        <DialogFooter>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
+export const WithSrElement: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
+      <DialogPopup>
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          <BodyShort>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            officiis magni praesentium odio sequi ex minus ipsa, sunt commodi
+            vel aut nam error beatae exercitationem amet, ut quia, dignissimos
+            nobis!
+          </BodyShort>
+          <BodyShort
+            visuallyHidden
+            style={{
+              clip: "unset !important",
+              clipPath: "unset !important",
+              outline: "2px solid red",
+            }}
+            as="legend"
+          >
+            lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </BodyShort>
+          <BodyShort>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            officiis magni praesentium odio sequi ex minus ipsa, sunt commodi
+            vel aut nam error beatae exercitationem amet, ut quia, dignissimos
+            nobis!
+          </BodyShort>
         </DialogBody>
         <DialogFooter>
           <DialogCloseTrigger>

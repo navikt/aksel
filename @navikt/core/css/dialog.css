@@ -209,17 +209,32 @@
 }
 
 .navds-dialog__body {
-  overflow: auto;
   padding-block: var(--__ac-dialog-p-b);
   padding-inline: var(--__ac-dialog-p-i);
+  overflow: auto;
+  overscroll-behavior: contain;
+  position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
 
   .navds-dialog__header ~ & {
     padding-block-start: 0;
   }
+
+  background:
+    linear-gradient(var(--a-surface-default) 30%, transparent) top,
+    linear-gradient(transparent, var(--a-surface-default) 60%) bottom,
+    radial-gradient(farthest-side at 50% 0, rgba(0 0 0 / 0.3), transparent) top,
+    radial-gradient(farthest-side at 50% 100%, rgba(0 0 0 / 0.3), transparent) bottom;
+  background-size:
+    100% 40px,
+    100% 50px,
+    100% 16px,
+    100% 16px;
+  background-attachment: local, local, scroll, scroll;
+  background-repeat: no-repeat;
 }
 
 .navds-dialog__footer {
-  justify-content: flex-start;
+  justify-content: flex-end;
   display: flex;
   flex-flow: wrap;
   gap: var(--a-spacing-2);
