@@ -12,42 +12,16 @@ export default meta;
 type Story = StoryObj<typeof StarFillIcon>;
 
 export const Icons: Story = {
-  render: () => {
-    return (
-      <div className="icons">
-        {Object.entries(AkselIcons).map(([key, Value]) => (
-          <React.Fragment key={key}>
-            <Value fontSize="3rem" aria-hidden title={key} />
-          </React.Fragment>
-        ))}
-        <style>
-          {`
-          .icons{
-            display: flex;
-            flex-wrap: wrap;
-          }
-          `}
-        </style>
-      </div>
-    );
-  },
+  render: () => (
+    <div>
+      {Object.entries(AkselIcons).map(([key, Icon]) => (
+        <Icon key={key} fontSize="3rem" aria-hidden title={key} />
+      ))}
+    </div>
+  ),
 };
 
 export const IconsInverted: Story = {
-  render: () => {
-    return (
-      <div className="dark">
-        {Object.entries(AkselIcons).map(([key, Value]) => (
-          <React.Fragment key={key}>
-            <Value
-              fontSize="3rem"
-              aria-hidden
-              title={key}
-              className="icon-color"
-            />
-          </React.Fragment>
-        ))}
-      </div>
-    );
-  },
+  render: Icons.render,
+  globals: { theme: "dark" },
 };
