@@ -10,7 +10,7 @@ export type BleedSpacingBlock = "0" | "px" | SpacingScale;
 export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * **Negative** horizontal margin around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    *
    * The `px` value is useful to nudge by just 1px.
@@ -26,7 +26,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
   >;
   /**
    * **Negative** vertical margin around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    *
    * The `px` value is useful to nudge by just 1px.
