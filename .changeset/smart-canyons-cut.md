@@ -2,4 +2,4 @@
 "@navikt/ds-css": patch
 ---
 
-Darkside: Update how data-color affects nested typography.
+Darkside: ExpansioncardContent typography is no longer affected by 'app-color'.

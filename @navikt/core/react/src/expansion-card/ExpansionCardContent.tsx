@@ -36,7 +36,12 @@ const ExpansionCardContent = forwardRef<
       size={panelContext.size}
       data-open={panelContext.open}
     >
-      <div className={cn("navds-expansioncard__content-inner")}>{children}</div>
+      <div
+        className={cn("navds-expansioncard__content-inner")}
+        data-color={themeContext?.color}
+      >
+        {children}
+      </div>
     </BodyLong>
   );
 });

@@ -257,12 +257,8 @@
   width: 1px !important;
 }
 
-:is(.aksel-heading, .aksel-ingress, .aksel-body-long, .aksel-body-short, .aksel-label, .aksel-detail) {
-  color: var(--ax-text-neutral);
-}
-
 [data-color] {
-  &:is(.aksel-heading, .aksel-ingress, .aksel-body-long, .aksel-body-short, .aksel-label, .aksel-detail) {
+  &:where(.aksel-heading, .aksel-ingress, .aksel-body-long, .aksel-body-short, .aksel-label, .aksel-detail) {
     color: var(--ax-text-default);
   }
 }
