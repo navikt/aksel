@@ -14,7 +14,9 @@ type GlobalAlertTitleProps = BaseAlert.TitleProps;
  *  </GlobalAlert>
  * ```
  */
+
 const GlobalAlertTitle = BaseAlert.Title;
 
 export { GlobalAlertTitle };
+
 export type { GlobalAlertTitleProps };
