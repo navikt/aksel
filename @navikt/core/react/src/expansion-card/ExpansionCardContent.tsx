@@ -11,7 +11,7 @@ export interface ExpansionCardContentProps
 const ExpansionCardContent = forwardRef<
   HTMLDivElement,
   ExpansionCardContentProps
->(({ children, className, ...rest }, ref) => {
+>(({ children, className, "data-color": dataColor, ...rest }, ref) => {
   const { cn } = useRenameCSS();
   const panelContext = useContext(ExpansionCardContext);
   const themeContext = useThemeInternal();
@@ -25,7 +25,6 @@ const ExpansionCardContent = forwardRef<
 
   return (
     <BodyLong
-      data-color={themeContext?.color}
       {...rest}
       ref={ref}
       as="div"
@@ -36,7 +35,12 @@ const ExpansionCardContent = forwardRef<
       size={panelContext.size}
       data-open={panelContext.open}
     >
-      <div className={cn("navds-expansioncard__content-inner")}>{children}</div>
+      <div
+        className={cn("navds-expansioncard__content-inner")}
+        data-color={dataColor ?? themeContext?.color}
+      >
+        {children}
+      </div>
     </BodyLong>
   );
 });
