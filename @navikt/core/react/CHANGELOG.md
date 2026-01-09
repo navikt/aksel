@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.38.1
+
+### Patch Changes
+
+- ReadMore: Removed tabIndex 0 from content. ([#4464](https://github.com/navikt/aksel/pull/4464))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.38.1
+  - @navikt/aksel-icons@7.38.1
+
 ## 7.38.0
 
 ### Patch Changes
