@@ -2,4 +2,4 @@
 "@navikt/ds-css": patch
 ---
 
-Darkside: ExpansioncardContent typography is no longer affected by 'app-color'.
+Darkside: ExpansionCardContent typography is no longer affected by 'app-color'.
