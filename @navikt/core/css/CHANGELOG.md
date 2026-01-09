@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.38.1
+
+### Patch Changes
+
+- ReadMore: Removed focus styling for content, reverting #4116. ([#4464](https://github.com/navikt/aksel/pull/4464))
+
 ## 7.38.0
 
 ### Patch Changes

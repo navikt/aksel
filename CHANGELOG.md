@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.38.1
+
+### @navikt/ds-react
+
+- ReadMore: Removed tabIndex 0 from content. ([#4464](https://github.com/navikt/aksel/pull/4464))
+
+### @navikt/ds-css
+
+- ReadMore: Removed focus styling for content, reverting #4116. ([#4464](https://github.com/navikt/aksel/pull/4464))
+
 ## 7.38.0
 
 ### @navikt/ds-react
