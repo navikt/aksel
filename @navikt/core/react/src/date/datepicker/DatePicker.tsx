@@ -78,6 +78,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onOpenToggle,
       strategy,
       mode,
+      removeRoleDialog,
       ...rest
     },
     ref,
@@ -156,6 +157,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 id: ariaId,
                 strategy,
               }}
+              removeRoleDialog={removeRoleDialog}
             >
               <ReactDayPicker
                 {...rest}
