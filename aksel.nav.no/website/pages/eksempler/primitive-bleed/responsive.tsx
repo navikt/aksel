@@ -8,7 +8,7 @@ const Example = () => {
         marginInline={{ xs: "space-32", sm: "space-48", md: "space-64" }}
         asChild
       >
-        <Box padding="space-12" background="brand-blue-moderate">
+        <Box padding="space-12" background="neutral-moderate">
           <HStack justify="center">
             <BodyLong>xs: 8, sm: 12, md: 16</BodyLong>
           </HStack>
@@ -21,7 +21,7 @@ const Example = () => {
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
     <Box
-      background="brand-blue-strong"
+      background="neutral-strong"
       paddingBlock="space-16"
       paddingInline={{ xs: "space-16", sm: "space-32", md: "space-48" }}
       borderRadius="8"

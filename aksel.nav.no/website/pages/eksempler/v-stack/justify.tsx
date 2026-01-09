@@ -6,7 +6,7 @@ const Example = () => {
     <Box
       style={{ display: "flex" }}
       height="18rem"
-      background="brand-blue-moderate"
+      background="neutral-moderate"
     >
       <HStack gap="space-8" wrap={false}>
         <VStack justify="center" gap="space-4">
@@ -51,7 +51,7 @@ const Example = () => {
 
 const Placeholder = ({ text }: { text?: string }) => (
   <Box
-    background="brand-blue-strong"
+    background="neutral-strong"
     borderRadius="4"
     padding="space-8"
     style={{ color: "var(--ax-text-accent-contrast)" }}

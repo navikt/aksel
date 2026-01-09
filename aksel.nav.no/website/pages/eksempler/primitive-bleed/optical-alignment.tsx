@@ -10,7 +10,7 @@ const Example = () => {
         <Box
           paddingBlock="space-4"
           paddingInline="space-8"
-          background="brand-blue-moderate"
+          background="neutral-moderate"
           borderRadius="full"
         >
           <Bleed marginBlock="space-1 space-0" asChild>
@@ -23,7 +23,7 @@ const Example = () => {
         <Box
           paddingBlock="space-4"
           paddingInline="space-8"
-          background="brand-blue-moderate"
+          background="neutral-moderate"
           borderRadius="full"
         >
           <MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />

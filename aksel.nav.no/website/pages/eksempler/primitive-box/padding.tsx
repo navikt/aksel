@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <VStack gap="space-16">
       <Box background="neutral-strong" padding="space-16">
-        <Box background="brand-blue-moderate" padding="space-8">
+        <Box background="neutral-moderate" padding="space-8">
           Statisk padding
         </Box>
       </Box>
@@ -13,7 +13,7 @@ const Example = () => {
         background="neutral-strong"
         padding={{ xs: "space-8", md: "space-24" }}
       >
-        <Box background="brand-blue-moderate" padding="space-8">
+        <Box background="neutral-moderate" padding="space-8">
           Dynamisk padding
         </Box>
       </Box>

@@ -23,7 +23,7 @@ const Example = () => {
 const Placeholder = ({ height = "2rem", children = "" }) => (
   <Box
     height={height}
-    background="brand-blue-strong"
+    background="neutral-strong"
     style={{
       display: "grid",
       placeContent: "center",
