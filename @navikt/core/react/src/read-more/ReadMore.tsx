@@ -100,7 +100,6 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
 
         <BodyLong
           as="div"
-          tabIndex={0}
           className={cn("navds-read-more__content", {
             "navds-read-more__content--closed": !_open,
           })}
