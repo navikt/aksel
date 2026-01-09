@@ -105,7 +105,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
         style: _style,
         asChild,
         ...rest
-      },
+      }: BoxProps & { as?: React.ElementType },
       ref,
     ) => {
       const themeContext = useThemeInternal();
