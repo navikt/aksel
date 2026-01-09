@@ -28,7 +28,11 @@ type Story = StoryObj<typeof GlobalAlert>;
 export const Default: Story = {
   render: (props) => {
     return (
-      <GlobalAlert status={props.status ?? "announcement"} size={props.size}>
+      <GlobalAlert
+        status={props.status ?? "announcement"}
+        size={props.size}
+        alignContent={props.alignContent}
+      >
         <GlobalAlertHeader>
           <GlobalAlertTitle>
             {props.title ?? "GlobalAlert title"}
@@ -56,6 +60,10 @@ export const Default: Story = {
     status: {
       control: { type: "select" },
       options: ["error", "warning", "announcement", "success"],
+    },
+    alignContent: {
+      control: { type: "radio" },
+      options: ["center", "left"],
     },
   },
 };

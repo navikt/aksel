@@ -121,13 +121,24 @@
 
   --__ac-base-alert-pi: var(--a-spacing-5);
   --__ac-base-alert-content-p: var(--a-spacing-3) var(--__ac-base-alert-pi) var(--a-spacing-4) var(--__ac-base-alert-pi);
-  --__ac-base-alert-title-pb: var(--a-spacing-05);
   --__ac-base-alert-header-max-width: 37.5rem;
+  --__ac-base-alert-header-icon-margin-block-start: var(--a-spacing-2);
+  --__ac-base-alert-header-close-button-margin-block-start: var(--a-spacing-1);
+  --__ac-global-alert-alignment: max(var(--__ac-base-alert-pi), calc((100% - var(--__ac-base-alert-header-max-width)) / 2));
+
+  &.navds-global-alert--align-left {
+    --__ac-global-alert-alignment: var(--a-spacing-5);
+  }
 
   &[data-size="small"] {
     --__ac-base-alert-pi: var(--a-spacing-4);
     --__ac-base-alert-content-p: var(--a-spacing-2) var(--a-spacing-4) var(--a-spacing-3) var(--a-spacing-4);
-    --__ac-base-alert-title-pb: var(--a-spacing-1);
+    --__ac-base-alert-header-icon-margin-block-start: var(--a-spacing-1-alt);
+    --__ac-base-alert-header-close-button-margin-block-start: var(--a-spacing-05);
+
+    &.navds-global-alert--align-left {
+      --__ac-global-alert-alignment: var(--a-spacing-4);
+    }
   }
 
   &[data-variant="moderate"] {
@@ -309,11 +320,11 @@
   display: flex;
   align-items: flex-start;
   gap: var(--a-spacing-2);
-  padding: var(--a-spacing-2) var(--__ac-base-alert-pi);
+  padding: 0 var(--__ac-base-alert-pi);
   border-bottom: 1px solid;
 
   .navds-base-alert[data-global="true"] & {
-    padding-inline: max(var(--__ac-base-alert-pi), calc((100% - var(--__ac-base-alert-header-max-width)) / 2));
+    padding-inline: var(--__ac-global-alert-alignment);
   }
 
   .navds-base-alert[data-variant="strong"] & {
@@ -327,12 +338,12 @@
 
 .navds-base-alert__icon {
   font-size: 1.5rem;
-  margin-top: var(--a-spacing-1);
+  margin-top: var(--__ac-base-alert-header-icon-margin-block-start);
   display: grid;
 }
 
 .navds-base-alert__title {
-  padding-block: var(--__ac-base-alert-title-pb);
+  padding-block: var(--a-spacing-1-alt);
 }
 
 .navds-base-alert__content {
@@ -340,12 +351,13 @@
   background-color: var(--a-bg-default);
 
   .navds-base-alert[data-global="true"] & {
-    padding-inline: max(var(--__ac-base-alert-pi), calc((100% - var(--__ac-base-alert-header-max-width)) / 2));
+    padding-inline: var(--__ac-global-alert-alignment);
   }
 }
 
 .navds-base-alert__close-button.navds-base-alert__close-button {
   margin-left: auto;
+  margin-block-start: var(--__ac-base-alert-header-close-button-margin-block-start);
 
   /* Moved focus-outline over wrapper outline */
   z-index: 1;
