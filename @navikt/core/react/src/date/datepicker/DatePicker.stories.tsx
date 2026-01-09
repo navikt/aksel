@@ -165,6 +165,23 @@ export const UseDatepicker = () => {
   );
 };
 
+export const UtenRole = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2029"),
+    onDateChange: console.log,
+    onValidate: console.log,
+  });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps} dropdownCaption removeRoleDialog>
+        <DatePicker.Input {...inputProps} label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};
+
 export const UseRangedDatepicker = () => {
   const { datepickerProps, fromInputProps, toInputProps } = useRangeDatepicker({
     fromDate: new Date("Aug 23 2019"),

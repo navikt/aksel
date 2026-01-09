@@ -30,6 +30,7 @@ type DateWrapperProps = {
     id?: string;
     strategy?: "absolute" | "fixed";
   };
+  removeRoleDialog?: boolean;
 };
 
 const DateDialog = ({
@@ -41,6 +42,7 @@ const DateDialog = ({
   translate,
   variant,
   popoverProps,
+  removeRoleDialog,
 }: DateWrapperProps) => {
   const translateGlobal = useI18n("global", getGlobalTranslations(locale));
   const { cn } = useRenameCSS();
@@ -66,7 +68,10 @@ const DateDialog = ({
         open={open}
         onClose={onClose}
         placement="bottom-start"
-        role="dialog"
+        role={removeRoleDialog ? undefined : "dialog"}
+        aria-label={
+          removeRoleDialog ? undefined : translate(variantToLabel[variant])
+        }
         className={cn("navds-date__popover", {
           "navds-date": variant === "month",
         })}
