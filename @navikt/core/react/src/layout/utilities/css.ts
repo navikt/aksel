@@ -51,7 +51,7 @@ const translateTokenStringToCSS = (
       let output = `var(--${TOKEN_PREFIX}-${tokenSubgroup}-${propValue})`;
 
       if (tokenExceptions.includes(propValue)) {
-        output = propValue === "px" ? "1px" : propValue;
+        output = propValue;
       } else if (tokenSubgroup === "space") {
         output = `var(--${TOKEN_PREFIX}-${propValue})`;
       } else if (tokenSubgroup === "radius") {
