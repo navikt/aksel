@@ -22,7 +22,7 @@ export type HGridProps = React.HTMLAttributes<HTMLDivElement> & {
   columns?: ResponsiveProp<number | string>;
   /**
    * Spacing between columns.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * gap="space-20"
@@ -43,19 +43,19 @@ export type HGridProps = React.HTMLAttributes<HTMLDivElement> & {
  * @see 🏷️ {@link HGridProps}
  *
  * @example
- * <HGrid gap="6" columns={3}>
+ * <HGrid gap="space-24" columns={3}>
  *   <div />
  *   <div />
  *   <div />
  * </HGrid>
  * @example
- * <HGrid gap={{xs: "2", md: "6"}} columns={3}>
+ * <HGrid gap={{xs: "space-8", md: "space-24"}} columns={3}>
  *   <div />
  *   <div />
  *   <div />
  * </HGrid>
  * @example
- * <HGrid gap="6" columns={{ sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto"}}>
+ * <HGrid gap="space-24" columns={{ sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto"}}>
  *   <div />
  *   <div />
  *   <div />

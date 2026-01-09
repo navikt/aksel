@@ -25,27 +25,27 @@ import {
 export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
-   * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
-   * @see {@link StaticDefaultBgKeys} and {@link StaticBgKeys}
+   * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#backgroundColor).
+   * @see {@link AkselRootBackgroundToken} and {@link AkselColoredStatelessBackgroundToken}
    */
   background?: AkselRootBackgroundToken | AkselColoredStatelessBackgroundToken;
   /**
    * CSS `border-color` property.
-   * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
-   * @see {@link BorderColorKeys} and {@link BorderColorWithRoleKeys}
+   * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#borderColor).
+   * @see {@link AkselColoredBorderToken}
    */
   borderColor?:
     | Exclude<AkselRootBorderToken, "focus">
     | AkselColoredBorderToken;
   /**
    * CSS `border-radius` property.
-   * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
+   * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#radius)
    * or an object of radius tokens for different breakpoints.
    * @example
    * borderRadius='full'
    * borderRadius='0 full 12 2'
    * borderRadius={{xs: '2 12', sm: '0', md: '12', lg: 'full'}}
-   * @see {@link BorderRadiusKeys}
+   * @see {@link BorderRadiusScale}
    */
   borderRadius?: ResponsiveProp<
     SpaceDelimitedAttribute<BorderRadiusScale | "0">
@@ -77,21 +77,21 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
- * <Box padding="4">
+ * <Box padding="space-16">
  *   <BodyShort>Hei</BodyShort>
  * </Box>
  *
  * @example
- * <Box padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}>
+ * <Box padding={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}>
  *   <BodyShort>Hei</BodyShort>
  * </Box>
  *
  * @example
- * <VStack gap="8">
- *  <Box padding="4">
+ * <VStack gap="space-32">
+ *  <Box padding="space-16">
  *   <BodyShort>Hei</BodyShort>
  *  </Box>
- *  <Box padding="4">
+ *  <Box padding="space-16">
  *    <BodyShort>Hei</BodyShort>
  *  </Box>
  * </VStack>

@@ -11,7 +11,7 @@ export type PrimitiveProps = {
   className?: string;
   /**
    * Padding around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * padding='space-16'
@@ -20,7 +20,7 @@ export type PrimitiveProps = {
   padding?: ResponsiveProp<SpacingScale>;
   /**
    * Horizontal padding around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * paddingInline='space-16'
@@ -32,7 +32,7 @@ export type PrimitiveProps = {
   >;
   /**
    * Vertical padding around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * paddingBlock='space-16'
@@ -44,7 +44,7 @@ export type PrimitiveProps = {
   >;
   /**
    * Margin around element.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * margin='space-16'
@@ -53,7 +53,7 @@ export type PrimitiveProps = {
   margin?: ResponsiveProp<SpacingScale>;
   /**
    * Horizontal margin around element.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * marginInline='space-16'
@@ -69,7 +69,7 @@ export type PrimitiveProps = {
   >;
   /**
    * Vertical margin around element.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * marginBlock='space-16'
@@ -115,7 +115,7 @@ export type PrimitiveProps = {
   >;
   /**
    * CSS `inset`.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * inset='space-16'
@@ -125,7 +125,7 @@ export type PrimitiveProps = {
   inset?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**
    * CSS `top`
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * top='space-16'
@@ -134,7 +134,7 @@ export type PrimitiveProps = {
   top?: ResponsiveProp<SpacingScale>;
   /**
    * CSS `right`
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * right='space-16'
@@ -143,7 +143,7 @@ export type PrimitiveProps = {
   right?: ResponsiveProp<SpacingScale>;
   /**
    * CSS `bottom`
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * bottom='space-16'
@@ -152,7 +152,7 @@ export type PrimitiveProps = {
   bottom?: ResponsiveProp<SpacingScale>;
   /**
    * CSS `left`
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * left='space-16'
