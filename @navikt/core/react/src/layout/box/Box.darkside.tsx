@@ -111,7 +111,7 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
         style: _style,
         asChild,
         ...rest
-      },
+      }: BoxNewProps & { as?: React.ElementType },
       ref,
     ) => {
       const { cn } = useRenameCSS();
