@@ -67,7 +67,7 @@ export const Open: Story = {
 
 export const BrandVolumeLow: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <ReadMore size="large" header={Default.args?.header}>
         {Content}
       </ReadMore>
@@ -85,7 +85,7 @@ export const BrandVolumeLow: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="4" data-color="brand-magenta">
+    <VStack gap="space-16" data-color="brand-magenta">
       <ReadMore size="large" header={Default.args?.header}>
         {Content}
       </ReadMore>
@@ -104,7 +104,7 @@ export const ColorRole: Story = {
 export const Chromatic: Story = {
   render: (...props) => {
     return (
-      <VStack gap="4">
+      <VStack gap="space-16">
         <div>
           <h2>Default</h2>
           {/* @ts-expect-error Args are partial, leading to required prop mismatch */}

@@ -60,7 +60,7 @@ export function setLastVerified(
         header: "Kvalitetssjekk før publisering",
         onClose: toggleDialog,
         footer: (
-          <Stack justify="end" gap="4">
+          <Stack justify="end" gap="space-16">
             <Button variant="tertiary" onClick={toggleDialog}>
               Nei, jeg vil endre noe først
             </Button>
@@ -157,7 +157,7 @@ export function setLastVerifiedWithoutPublish(
         header: "Kvalitetssjekk før publisering",
         onClose: toggleDialog,
         footer: (
-          <Stack justify="end" gap="4">
+          <Stack justify="end" gap="space-16">
             <Button variant="tertiary" onClick={toggleDialog}>
               Nei, jeg vil endre noe først
             </Button>

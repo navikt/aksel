@@ -129,9 +129,9 @@ const BreakpointText = () => {
     <Box
       asChild
       position="absolute"
-      left="0"
-      top="0"
-      borderRadius="0 0 medium 0"
+      left="space-0"
+      top="space-0"
+      borderRadius="0 0 4 0"
       padding="space-4"
     >
       <HStack

@@ -5,7 +5,7 @@ const Placeholder = () => (
     background="brand-blue-strong"
     height="3rem"
     width="3rem"
-    borderRadius="medium"
+    borderRadius="4"
     flexShrink="0"
   />
 );

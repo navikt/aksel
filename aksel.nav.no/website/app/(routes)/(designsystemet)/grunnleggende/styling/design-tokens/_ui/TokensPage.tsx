@@ -15,7 +15,7 @@ const TokensPage = () => {
     filteredTokens.some((token) => token.category === id),
   );
   return (
-    <Box marginBlock="space-40 0">
+    <Box marginBlock="space-40 space-0">
       {filteredTokens.length === 0 && (
         <EmptyStateCard
           actionComponent={

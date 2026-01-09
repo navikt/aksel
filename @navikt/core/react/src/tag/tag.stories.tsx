@@ -164,7 +164,7 @@ export const Strong: StoryFn<Story> = () => {
 
 export const WithIcons: StoryFn<Story> = () => {
   return (
-    <HStack gap="2" align="start">
+    <HStack gap="space-8" align="start">
       {sizes.reverse().map((size) => (
         <Tag key={size} size={size} icon={<ComponentIcon aria-hidden />}>
           {size}

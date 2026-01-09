@@ -100,7 +100,7 @@ function NumberInputWrapper({ children }: { children?: React.ReactNode }) {
 
   return (
     <DescendantsProvider value={descendants}>
-      <HStack gap="1">{children}</HStack>
+      <HStack gap="space-4">{children}</HStack>
     </DescendantsProvider>
   );
 }

@@ -36,7 +36,7 @@ export const Default: Story = {
 
 export const PosterVariants: Story = {
   render: () => (
-    <VStack gap="6" align="start">
+    <VStack gap="space-24" align="start">
       <GuidePanel>
         If you exclude the `poster` prop, you will get the poster variant on
         mobile (&lt;480px) and the non-poster variant otherwise.

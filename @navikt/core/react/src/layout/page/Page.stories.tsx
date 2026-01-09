@@ -68,7 +68,7 @@ export const BelowFold: StoryFn = () => (
 );
 
 export const ContentBlockPadding: StoryFn = () => (
-  <HGrid columns={2} gap="6" align="start">
+  <HGrid columns={2} gap="space-24" align="start">
     <Page footer={<Footer width="lg" gutters />} contentBlockPadding="end">
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
@@ -89,7 +89,7 @@ export const ContentBlockPadding: StoryFn = () => (
 );
 
 export const Gutters: StoryFn = () => (
-  <HGrid columns={2} gap="6" align="start">
+  <HGrid columns={2} gap="space-24" align="start">
     <Page footer={<Footer width="lg" gutters />}>
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
@@ -228,7 +228,7 @@ function Footer({ width = "lg", gutters = false }: any) {
 
 export const Chromatic = () => {
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <h2>Default</h2>
       <Default />
       <h2>BelowFold</h2>

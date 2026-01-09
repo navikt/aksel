@@ -97,7 +97,7 @@ function IllustratedLinks() {
     <BoxNew
       maxWidth="600px"
       width="100%"
-      paddingInline={{ xs: "0", md: "0 space-32" }}
+      paddingInline={{ xs: "space-0", md: "space-0 space-32" }}
     >
       <List className={styles.akselLayersList}>
         <ListItem
