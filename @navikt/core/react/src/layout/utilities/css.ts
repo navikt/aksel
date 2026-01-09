@@ -30,7 +30,6 @@ const translateTokenStringToCSS = (
   specialLayout: string,
   tokenString: string,
   tokenSubgroup: "space" | "radius",
-  tokenExceptions: string[],
   invert: boolean,
 ) => {
   return tokenString
@@ -50,9 +49,7 @@ const translateTokenStringToCSS = (
       // Handle exceptions and space tokens
       let output = `var(--${TOKEN_PREFIX}-${tokenSubgroup}-${propValue})`;
 
-      if (tokenExceptions.includes(propValue)) {
-        output = propValue === "px" ? "1px" : propValue;
-      } else if (tokenSubgroup === "space") {
+      if (tokenSubgroup === "space") {
         output = `var(--${TOKEN_PREFIX}-${propValue})`;
       } else if (tokenSubgroup === "radius") {
         output = `var(--${TOKEN_PREFIX}-radius-${propValue})`;
@@ -74,7 +71,6 @@ export function getResponsiveProps<T extends string>(
   tokenSubgroup: "space" | "radius",
   responsiveProp?: ResponsiveProp<T>,
   invert = false,
-  tokenExceptions: string[] = [],
 ) {
   if (!responsiveProp) {
     return {};
@@ -87,7 +83,6 @@ export function getResponsiveProps<T extends string>(
           componentProp,
           responsiveProp,
           tokenSubgroup,
-          tokenExceptions,
           invert,
         ),
     };
@@ -101,7 +96,6 @@ export function getResponsiveProps<T extends string>(
       componentProp,
       aliasOrScale,
       tokenSubgroup,
-      tokenExceptions,
       invert,
     );
   });

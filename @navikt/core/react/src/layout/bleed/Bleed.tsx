@@ -4,8 +4,8 @@ import { useRenameCSS } from "../../theme/Theme";
 import { getResponsiveProps } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export type BleedSpacingInline = "0" | "full" | "px" | SpacingScale;
-export type BleedSpacingBlock = "0" | "px" | SpacingScale;
+export type BleedSpacingInline = "full" | SpacingScale;
+export type BleedSpacingBlock = SpacingScale;
 
 export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -19,7 +19,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * @example
    * marginInline='space-16'
    * marginInline='space-16 space-20'
-   * marginInline={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24', "2xl": 'space-32'}}
+   * marginInline={{xs: 'space-0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24', "2xl": 'space-32'}}
    */
   marginInline?: ResponsiveProp<
     BleedSpacingInline | `${BleedSpacingInline} ${BleedSpacingInline}`
@@ -35,7 +35,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * @example
    * marginBlock='space-16'
    * marginBlock='space-16 space-20'
-   * marginBlock={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24', "2xl": 'space-32'}}
+   * marginBlock={{xs: 'space-0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24', "2xl": 'space-32'}}
    */
   marginBlock?: ResponsiveProp<
     BleedSpacingBlock | `${BleedSpacingBlock} ${BleedSpacingBlock}`
@@ -62,7 +62,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * @example
  * <Box padding="4">
- *   <Bleed marginInline="4" marginBlock="4">
+ *   <Bleed marginInline="space-16" marginBlock="space-16">
  *     <BodyLong>Some content</BodyLong>
  *   </Bleed>
  * </Box>
@@ -90,7 +90,6 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
         "space",
         marginInline,
         true,
-        ["0", "full", "px"],
       ),
 
       ...getResponsiveProps(
@@ -99,7 +98,6 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
         "space",
         marginBlock,
         true,
-        ["0", "px"],
       ),
     };
 
@@ -112,7 +110,6 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
           "space",
           marginInline,
           false,
-          ["0", "full", "px"],
         ),
         ...getResponsiveProps(
           "bleed",
@@ -120,7 +117,6 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
           "space",
           marginBlock,
           false,
-          ["0", "px"],
         ),
       };
     }
