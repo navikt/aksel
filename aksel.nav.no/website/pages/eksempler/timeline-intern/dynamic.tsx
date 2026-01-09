@@ -108,7 +108,7 @@ const Example = () => {
           />
         </HStack>
         <ToggleGroup
-          variant="neutral"
+          data-color="neutral"
           size="small"
           value={windowSize}
           onChange={(value) => {
