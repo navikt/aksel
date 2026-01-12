@@ -8,7 +8,7 @@ const Example = () => {
         avatar="EVA"
         name="EVA"
         timestamp="01.01.21 14:00"
-        data-color="info"
+        data-color="brand-blue"
       >
         <Chat.Bubble>Hei! Mitt navn er Eva.</Chat.Bubble>
         <Chat.Bubble>Hva kan jeg hjelpe deg med?</Chat.Bubble>
