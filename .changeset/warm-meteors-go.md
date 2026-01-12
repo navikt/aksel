@@ -3,6 +3,6 @@
 "@navikt/ds-css": minor
 ---
 
-GlobalAlert: More compact header and added centered content prop
-LocalAlert: More compact header
-InfoCard: More compact header
+GlobalAlert: Reduced default header height and added centered content prop
+LocalAlert: Reduced default header height
+InfoCard: Reduced default header height
