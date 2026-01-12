@@ -28,6 +28,7 @@ const Example = () => {
           </Heading>
         </Box>
       </div>
+      <Divider />
       <div>
         <Descriptor>Default + data-color</Descriptor>
         <Heading textColor="default" data-color="accent" size="medium">
