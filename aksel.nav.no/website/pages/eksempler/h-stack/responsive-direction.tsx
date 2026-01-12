@@ -18,7 +18,7 @@ const Example = () => {
 
 const Placeholder = ({ height = "3rem" }: { height?: string }) => (
   <Box
-    background="brand-blue-strong"
+    background="neutral-strong"
     height={height}
     width="3rem"
     borderRadius="4"

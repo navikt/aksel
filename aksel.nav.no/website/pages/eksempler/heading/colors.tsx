@@ -19,6 +19,38 @@ const Example = () => {
           {lorem}
         </Heading>
       </div>
+      <Divider />
+      <div>
+        <Descriptor>Contrast</Descriptor>
+        <Box background="neutral-strong">
+          <Heading textColor="contrast" size="medium">
+            {lorem}
+          </Heading>
+        </Box>
+      </div>
+      <Divider />
+      <div>
+        <Descriptor>Default + data-color</Descriptor>
+        <Heading textColor="default" data-color="accent" size="medium">
+          {lorem}
+        </Heading>
+      </div>
+      <Divider />
+      <div>
+        <Descriptor>Subtle + data-color</Descriptor>
+        <Heading textColor="subtle" data-color="accent" size="medium">
+          {lorem}
+        </Heading>
+      </div>
+      <Divider />
+      <div>
+        <Descriptor>Contrast + data-color</Descriptor>
+        <Box background="neutral-strong">
+          <Heading textColor="contrast" data-color="accent" size="medium">
+            {lorem}
+          </Heading>
+        </Box>
+      </div>
     </VStack>
   );
 };

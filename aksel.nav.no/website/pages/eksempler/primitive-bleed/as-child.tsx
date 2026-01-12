@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <DemoWrapper>
       <Bleed marginInline="space-40" asChild>
-        <Box padding="space-12" background="brand-blue-moderate">
+        <Box padding="space-12" background="neutral-moderate">
           <HStack justify="center">Med asChild</HStack>
         </Box>
       </Bleed>
@@ -15,8 +15,8 @@ const Example = () => {
 
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <Box background="brand-blue-strong" padding="space-20" borderRadius="8">
-      <Box background="neutral-soft" padding="space-20" borderRadius="4">
+    <Box background="neutral-strong" padding="space-20" borderRadius="8">
+      <Box background="default" padding="space-20" borderRadius="4">
         {children}
       </Box>
     </Box>

@@ -5,22 +5,22 @@ const Example = () => {
   return (
     <DemoWrapper>
       <Bleed marginInline="space-40" asChild reflectivePadding>
-        <Box background="brand-blue-moderate">
+        <Box background="neutral-moderate">
           reflectivePadding lar innhold forbli der det ville vært uten Bleed
         </Box>
       </Bleed>
       <Bleed marginInline="space-40" asChild>
-        <Box background="brand-blue-moderate">Bleed uten reflectivePadding</Box>
+        <Box background="neutral-moderate">Bleed uten reflectivePadding</Box>
       </Bleed>
-      <Box background="brand-blue-moderate">Uten Bleed</Box>
+      <Box background="neutral-moderate">Uten Bleed</Box>
     </DemoWrapper>
   );
 };
 
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <Box background="brand-blue-strong" padding="space-20" borderRadius="8">
-      <Box background="neutral-soft" padding="space-20" borderRadius="4">
+    <Box background="neutral-strong" padding="space-20" borderRadius="8">
+      <Box background="default" padding="space-20" borderRadius="4">
         <VStack gap="space-16">{children}</VStack>
       </Box>
     </Box>

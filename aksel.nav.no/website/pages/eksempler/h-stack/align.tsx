@@ -52,7 +52,7 @@ const Placeholder = ({
 }) => {
   return (
     <Box
-      background="brand-blue-strong"
+      background="neutral-strong"
       borderRadius="4"
       minHeight="1rem"
       style={{ color: "var(--ax-text-accent-contrast)", padding }}

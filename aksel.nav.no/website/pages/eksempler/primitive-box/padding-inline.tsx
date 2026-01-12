@@ -5,12 +5,12 @@ const Example = () => {
   return (
     <VStack gap="space-16">
       <Box background="neutral-strong" paddingInline="space-16">
-        <Box background="brand-blue-moderate" padding="space-8">
+        <Box background="neutral-moderate" padding="space-8">
           Padding inline
         </Box>
       </Box>
       <Box background="neutral-strong" paddingInline="space-16 space-64">
-        <Box background="brand-blue-moderate" padding="space-8">
+        <Box background="neutral-moderate" padding="space-8">
           Forskjellig inlineStart og inlineEnd
         </Box>
       </Box>
@@ -18,7 +18,7 @@ const Example = () => {
         background="neutral-strong"
         paddingInline={{ xs: "space-16", md: "space-24 space-64" }}
       >
-        <Box background="brand-blue-moderate" padding="space-8">
+        <Box background="neutral-moderate" padding="space-8">
           Dynamisk paddingInline
         </Box>
       </Box>
