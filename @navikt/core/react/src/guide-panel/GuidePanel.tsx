@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { GudiepanelIllustration } from "./Illustration";
 
 export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
@@ -46,6 +46,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
     ref,
   ) => {
     const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal();
 
     return (
       <div
@@ -83,7 +84,10 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
               fill="var(--ax-border-default)"
             />
           </svg>
-          <div className={cn("navds-guide-panel__content-inner")}>
+          <div
+            className={cn("navds-guide-panel__content-inner")}
+            data-color={themeContext?.color}
+          >
             {children}
           </div>
         </div>
