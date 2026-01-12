@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import type {
   AkselColoredBorderToken,
   AkselColoredStatelessBackgroundToken,
+  AkselDynamicStatelessBackgroundToken,
   AkselRootBackgroundToken,
   AkselRootBorderToken,
   AkselShadowToken,
@@ -32,7 +33,10 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
    * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#backgroundColor).
    * @see {@link AkselRootBackgroundToken} and {@link AkselColoredStatelessBackgroundToken}
    */
-  background?: AkselRootBackgroundToken | AkselColoredStatelessBackgroundToken;
+  background?:
+    | AkselRootBackgroundToken
+    | AkselColoredStatelessBackgroundToken
+    | AkselDynamicStatelessBackgroundToken;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#borderColor).

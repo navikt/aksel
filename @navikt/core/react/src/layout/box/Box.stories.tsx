@@ -29,6 +29,25 @@ export const Default = () => (
   </Box>
 );
 
+export const BackgroundTypes = () => (
+  <VStack gap="space-24">
+    <Box padding="space-16" background="brand-beige-moderate">
+      Static color
+    </Box>
+    <Box padding="space-16" background="moderate">
+      Dynamic themed app theme
+    </Box>
+    <div data-color="danger">
+      <Box padding="space-16" background="moderate">
+        Dynamic themed danger
+      </Box>
+    </div>
+    <Box padding="space-16" background="sunken">
+      Default tokens
+    </Box>
+  </VStack>
+);
+
 const Card = ({
   background,
   borderRadius = "12",
