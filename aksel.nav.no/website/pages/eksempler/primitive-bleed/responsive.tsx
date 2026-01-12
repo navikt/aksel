@@ -26,7 +26,7 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
       paddingInline={{ xs: "space-16", sm: "space-32", md: "space-48" }}
       borderRadius="8"
     >
-      <Box background="neutral-soft" padding="space-16" borderRadius="4">
+      <Box background="default" padding="space-16" borderRadius="4">
         {children}
       </Box>
     </Box>

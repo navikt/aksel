@@ -20,7 +20,7 @@ const Example = () => {
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
     <Box background="neutral-strong" padding="space-20" borderRadius="8">
-      <Box background="neutral-soft" padding="space-20" borderRadius="4">
+      <Box background="default" padding="space-20" borderRadius="4">
         <VStack gap="space-16">{children}</VStack>
       </Box>
     </Box>
