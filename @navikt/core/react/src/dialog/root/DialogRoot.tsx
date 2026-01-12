@@ -179,9 +179,9 @@ interface DialogComponent extends React.FC<DialogProps> {
  *        Dialog body content
  *      </Dialog.Body>
  *      <Dialog.Footer>
- *.       <Dialog.CloseTrigger>
- *.         <Button>Close dialog</Button>
- *.       </Dialog.CloseTrigger>
+ *        <Dialog.CloseTrigger>
+ *          <Button>Close dialog</Button>
+ *        </Dialog.CloseTrigger>
  *      </Dialog.Footer>
  *    </Dialog.Popup>
  *  </Dialog>

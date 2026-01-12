@@ -49,8 +49,8 @@
     "date-fns": "^4.0.0",
     "fuse.js": "^7.0.0",
     "isomorphic-dompurify": "2.26.0",
-    "jscodeshift": "^0.15.1",
-    "lodash": "^4.17.21",
+    "jscodeshift": "0.15.2",
+    "lodash": "4.17.21",
     "lz-string": "^1.5.0",
     "next": "15.5.9",
     "next-logger": "^5.0.1",
@@ -113,7 +113,6 @@
     "showdown": "^2.1.0",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
-    "vite-tsconfig-paths": "^6.0.1",
     "vitest": "^3.2.4"
   }
 }

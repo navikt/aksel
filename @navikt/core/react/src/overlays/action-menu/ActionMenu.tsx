@@ -317,7 +317,6 @@ export const ActionMenuTrigger = forwardRef<
     ref,
   ) => {
     const context = useActionMenuContext();
-
     const mergedRefs = useMergeRefs(ref, context.triggerRef);
 
     return (
@@ -386,7 +385,9 @@ export const ActionMenuContent = forwardRef<
           sideOffset={4}
           collisionPadding={10}
           returnFocus={context.triggerRef}
-          safeZone={{ anchor: context.triggerRef.current }}
+          safeZone={{
+            anchor: context.triggerRef.current,
+          }}
           style={{
             ...style,
             ...{

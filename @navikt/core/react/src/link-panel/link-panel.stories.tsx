@@ -1,17 +1,12 @@
 import { Meta } from "@storybook/react-vite";
 import React from "react";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import LinkPanel from "./LinkPanel";
 
 export default {
   title: "ds-react/LinkPanel",
   component: LinkPanel,
-  argTypes: {
-    border: {
-      control: {
-        type: "boolean",
-      },
-    },
-  },
+  parameters: { chromatic: { disable: true } },
 } satisfies Meta<typeof LinkPanel>;
 
 export const Default = {
@@ -29,7 +24,11 @@ export const Default = {
       </LinkPanel>
     );
   },
-
+  argTypes: {
+    border: {
+      control: { type: "boolean" },
+    },
+  },
   args: {
     description: false,
   },
@@ -57,3 +56,9 @@ export const NoBorder = () => {
     </LinkPanel>
   );
 };
+
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Description,
+  NoBorder,
+});

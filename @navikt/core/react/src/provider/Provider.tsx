@@ -24,12 +24,10 @@ export type ProviderProps = {
        * Aksel locale
        * @default nb
        * @example
-       * ```jsx
        * import { en } from "@navikt/ds-react/locales";
        * <Provider locale={en}>
-       *  {app}
+       *   {app}
        * </Provider>
-       * ```
        */
       locale: Translations;
       /**
@@ -54,11 +52,9 @@ export const useProvider = () => useContext(ProviderContext);
  * @see 🏷️ {@link ProviderProps}
  *
  * @example
- * ```jsx
  * <Provider rootElement={rootElement}>
  *   {app}
  * </Provider>
- * ```
  */
 export const Provider = ({
   children,

@@ -230,7 +230,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         : ariaLabelledby;
 
     const component = (
-      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <dialog
         {...rest}
         ref={mergedRef}
@@ -248,6 +248,14 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
             : onMouseDown
         }
         aria-labelledby={mergedAriaLabelledBy}
+        onKeyDown={(e) => {
+          /**
+           * Stops propagation of Escape key to prevent closing parent modals/dialogs
+           */
+          if (e.key === "Escape") {
+            e.stopPropagation();
+          }
+        }}
       >
         <ModalContextProvider
           closeHandler={getCloseHandler(modalRef, header, onBeforeClose)}
