@@ -193,6 +193,15 @@
     border: 1px solid transparent;
     color: ButtonText;
     background-color: ButtonFace;
+
+    &[data-variant="primary"] {
+      background-color: Highlight;
+      color: highlighttext;
+
+      & span {
+        forced-color-adjust: none;
+      }
+    }
   }
 
   .aksel-button:not(:disabled):hover {
