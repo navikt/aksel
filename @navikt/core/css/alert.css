@@ -126,7 +126,7 @@
   --__ac-base-alert-header-close-button-margin-block-start: var(--a-spacing-1);
   --__ac-global-alert-alignment: max(var(--__ac-base-alert-pi), calc((100% - var(--__ac-base-alert-header-max-width)) / 2));
 
-  &.navds-global-alert--align-left {
+  &[data-centered="false"] {
     --__ac-global-alert-alignment: var(--a-spacing-5);
   }
 
@@ -136,7 +136,7 @@
     --__ac-base-alert-header-icon-margin-block-start: var(--a-spacing-1-alt);
     --__ac-base-alert-header-close-button-margin-block-start: var(--a-spacing-05);
 
-    &.navds-global-alert--align-left {
+    &[data-centered="false"] {
       --__ac-global-alert-alignment: var(--a-spacing-4);
     }
   }
