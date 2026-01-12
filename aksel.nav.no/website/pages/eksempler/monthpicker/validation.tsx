@@ -22,6 +22,7 @@ const Example = () => {
           {...inputProps}
           label="Velg måned"
           error={hasError && "Du må velge måned"}
+          description="Format: mm.yyyy"
         />
       </MonthPicker>
     </Box>
