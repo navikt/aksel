@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
 import { BaseAlert } from "../../base-alert";
 import {
   GlobalAlertCloseButton,
@@ -22,9 +21,10 @@ interface GlobalAlertProps
   extends Omit<BaseAlert.RootProps, "type" | "global" | "data-color"> {
   status: Exclude<BaseAlert.RootProps["status"], undefined>;
   /**
-   * Alignment of title and content. It defaults to center.
+   *  Whether title and content are centered or not.
+   * @default true
    */
-  alignContent?: "center" | "left";
+  centered?: boolean;
 }
 
 interface GlobalAlertComponent
@@ -103,11 +103,7 @@ interface GlobalAlertComponent
  * ```
  */
 export const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
-  (
-    { alignContent = "center", className, ...rest }: GlobalAlertProps,
-    forwardedRef,
-  ) => {
-    const { cn } = useRenameCSS();
+  ({ centered = true, ...rest }: GlobalAlertProps, forwardedRef) => {
     return (
       <BaseAlert.Root
         ref={forwardedRef}
@@ -115,9 +111,7 @@ export const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
         {...rest}
         type="strong"
         global
-        className={cn(className, {
-          "navds-global-alert--align-left": alignContent === "left",
-        })}
+        data-centered={centered}
       />
     );
   },
