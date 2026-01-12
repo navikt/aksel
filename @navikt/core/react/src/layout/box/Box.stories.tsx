@@ -200,9 +200,9 @@ export const PaddingBreakpoints = {
           xl: "space-24",
           "2xl": "space-32",
         }}
-        background="neutral-moderate"
+        background="neutral-strong"
       >
-        <Box background="accent-strong">
+        <Box background="accent-moderate">
           This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
           nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
           Proident pariatur proident pariatur magna consequat velit id commodo
@@ -219,9 +219,9 @@ export const PaddingBreakpointsInherit1 = {
       <Box
         padding={{ xs: "space-8" }}
         paddingInline={{ md: "space-96 space-0" }}
-        background="neutral-moderate"
+        background="neutral-strong"
       >
-        <Box background="accent-strong">
+        <Box background="accent-moderate">
           This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
           nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
           Proident pariatur proident pariatur magna consequat velit id commodo
@@ -236,9 +236,9 @@ export const PaddingBreakpointsInherit2 = () => (
     <Box
       padding={{ xs: "space-8", sm: "space-12" }}
       paddingInline={{ sm: "space-16 space-0", md: "space-96 space-0" }}
-      background="neutral-moderate"
+      background="neutral-strong"
     >
-      <Box background="accent-strong">
+      <Box background="accent-moderate">
         This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
         nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
         Proident pariatur proident pariatur magna consequat velit id commodo
@@ -250,34 +250,34 @@ export const PaddingBreakpointsInherit2 = () => (
 
 export const Padding = () => (
   <VStack align="center" gap="space-8">
-    <Box padding="space-80" background="accent-strong">
+    <Box padding="space-80" background="accent-moderate">
       <BodyLong>Padding all around</BodyLong>
     </Box>
     <Box
       padding="space-4"
       paddingBlock="space-80 space-0"
-      background="accent-strong"
+      background="accent-moderate"
     >
       <BodyLong>Padding to the North</BodyLong>
     </Box>
     <Box
       padding="space-4"
       paddingInline="space-0 space-80"
-      background="accent-strong"
+      background="accent-moderate"
     >
       <BodyLong>Padding to the East</BodyLong>
     </Box>
     <Box
       padding="space-4"
       paddingBlock="space-0 space-80"
-      background="accent-strong"
+      background="accent-moderate"
     >
       <BodyLong>Padding to the South</BodyLong>
     </Box>
     <Box
       padding="space-4"
       paddingInline="space-80 space-0"
-      background="accent-strong"
+      background="accent-moderate"
     >
       <BodyLong>Padding to the West</BodyLong>
     </Box>

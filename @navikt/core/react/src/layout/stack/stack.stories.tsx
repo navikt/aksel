@@ -116,7 +116,7 @@ export const Nested: Story = {
     <VStack gap="space-64">
       <Placeholders count={2}>
         <VStack gap="space-16">
-          <Placeholders count={2} color="gray" />
+          <Placeholders count={2} color="lightgray" />
         </VStack>
       </Placeholders>
     </VStack>
