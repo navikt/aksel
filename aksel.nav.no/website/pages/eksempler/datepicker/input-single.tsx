@@ -10,7 +10,11 @@ const Example = () => {
   return (
     <Box minHeight="24rem">
       <DatePicker {...datepickerProps}>
-        <DatePicker.Input {...inputProps} label="Velg dato" />
+        <DatePicker.Input
+          {...inputProps}
+          label="Velg dato"
+          description="Format: dd.mm.yyyy"
+        />
       </DatePicker>
       <Box paddingBlock="space-16 space-0">{selectedDay?.toDateString()}</Box>
     </Box>
