@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Select } from "../form/select";
@@ -366,6 +366,48 @@ export const CustomWidthHeight: Story = {
   },
 };
 
+export const Scroll: Story = {
+  render: () => {
+    const bodyRef = useRef<HTMLDivElement>(null);
+
+    return (
+      <Dialog
+        defaultOpen
+        onOpenChangeComplete={(open) => {
+          if (!open || !bodyRef.current) {
+            return;
+          }
+
+          bodyRef.current.scrollTop = 200;
+        }}
+      >
+        <DialogTrigger>
+          <Button>Open Dialog</Button>
+        </DialogTrigger>
+        <DialogPopup height="400px">
+          <DialogHeader>
+            <DialogTitle>Dialog Title</DialogTitle>
+            <DialogDescription>
+              This is a description of the dialog.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogBody ref={bodyRef}>
+            {ScrollContent({ defaultOpen: true })}
+          </DialogBody>
+          <DialogFooter>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
+          </DialogFooter>
+        </DialogPopup>
+      </Dialog>
+    );
+  },
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
 export const WithSrElement: Story = {
   render: () => (
     <Dialog defaultOpen>
@@ -545,8 +587,8 @@ const content = `This is the body of the dialog. Here is where the main content
               the dialog. Here is where the main content lives This is the body
               of the dialog. Here is where the main content lives`;
 
-function ScrollContent() {
-  const [showScroll, setShowScroll] = useState(false);
+function ScrollContent({ defaultOpen = false }: { defaultOpen?: boolean }) {
+  const [showScroll, setShowScroll] = useState(defaultOpen);
   return (
     <div>
       <button onClick={() => setShowScroll((x) => !x)}>
