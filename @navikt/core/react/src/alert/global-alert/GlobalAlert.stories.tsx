@@ -31,7 +31,7 @@ export const Default: Story = {
       <GlobalAlert
         status={props.status ?? "announcement"}
         size={props.size}
-        alignContent={props.alignContent}
+        centered={props.centered}
       >
         <GlobalAlertHeader>
           <GlobalAlertTitle>
@@ -51,6 +51,7 @@ export const Default: Story = {
     title: "GlobalAlert Title",
     size: "medium",
     status: "announcement",
+    centered: true,
   },
   argTypes: {
     size: {
@@ -60,10 +61,6 @@ export const Default: Story = {
     status: {
       control: { type: "select" },
       options: ["error", "warning", "announcement", "success"],
-    },
-    alignContent: {
-      control: { type: "radio" },
-      options: ["center", "left"],
     },
   },
 };
