@@ -93,7 +93,7 @@ export const OverrideTag: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label textColor="default">{lorem}</Label>
       <Label textColor="subtle">{lorem}</Label>
       <Box background="neutral-strong">

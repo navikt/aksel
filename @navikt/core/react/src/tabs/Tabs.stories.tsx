@@ -135,7 +135,7 @@ export const Controlled = () => {
 };
 
 export const IconPosition = () => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Tabs defaultValue="test2" size="small">
       <Tabs.List>
         <Tabs.Tab value="test1" icon={<MugIcon aria-hidden />} label="Skap" />
@@ -172,7 +172,7 @@ export const IconPosition = () => (
 );
 
 export const Icon = () => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Tabs defaultValue="test2">
       <Tabs.List style={{ margin: "0 auto" }}>
         <Tabs.Tab value="test1" icon={<MugIcon title="Skap" />} />

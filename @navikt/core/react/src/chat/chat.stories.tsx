@@ -61,7 +61,7 @@ export const Controls: Story = {
 
 export const Size: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {SIZES.map((size) => (
         <React.Fragment key={size}>
           <h3>{size}</h3>
@@ -88,7 +88,7 @@ export const Size: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {VARIANTS.map((variant) => (
         <React.Fragment key={variant}>
           <h3>{variant}</h3>
@@ -110,7 +110,7 @@ export const Variants: Story = {
 
 export const Position: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <h3>Default</h3>
       <Chat avatar="ON" name="Ola Normann" timestamp="01.01.21 14:00">
         <Chat.Bubble>
@@ -150,7 +150,7 @@ export const Position: Story = {
 
 export const ToptextPosition: Story = {
   render: () => (
-    <VStack gap="4" style={{ width: 500 }}>
+    <VStack gap="space-16" style={{ width: 500 }}>
       <h3>All right</h3>
       <Chat
         avatar="ON"
@@ -215,7 +215,7 @@ export const Avatar: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {VARIANTS.map((variant) => (
         <React.Fragment key={variant}>
           <h3>{variant}</h3>

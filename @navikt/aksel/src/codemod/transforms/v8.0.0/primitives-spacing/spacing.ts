@@ -18,7 +18,7 @@ export default function transformer(file: FileInfo, api: API) {
     "Box",
     "Box.New",
     "BoxNew",
-    "Hgrid",
+    "HGrid",
     "Stack",
     "HStack",
     "VStack",

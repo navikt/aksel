@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { SparklesIcon } from "@navikt/aksel-icons";
-import { BoxNew } from "../layout/box";
+import { Box } from "../layout/box";
 import { HGrid } from "../layout/grid";
 import { HStack, VStack } from "../layout/stack";
 import { Tag } from "../tag";
@@ -885,7 +885,7 @@ function FooterContentDemo() {
 
 function IconDemo() {
   return (
-    <BoxNew
+    <Box
       asChild
       padding="space-8"
       borderRadius="12"
@@ -897,6 +897,6 @@ function IconDemo() {
       <LinkCardIcon>
         <SparklesIcon fontSize="2rem" />
       </LinkCardIcon>
-    </BoxNew>
+    </Box>
   );
 }

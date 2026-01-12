@@ -26,7 +26,7 @@ export default {
   component: VirtualFocus,
   decorators: [
     (Story) => (
-      <VStack gap="10">
+      <VStack gap="space-40">
         <Button>above</Button>
         <Story />
         <Button>below</Button>

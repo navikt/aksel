@@ -18,8 +18,8 @@ type Story = StoryObj<typeof Show>;
 
 export const Default: Story = {
   render: () => (
-    <VStack gap="12">
-      <VStack gap="2" align="center">
+    <VStack gap="space-48">
+      <VStack gap="space-8" align="center">
         <Show above="xl">
           <Tag>Visible above xl</Tag>
         </Show>
@@ -33,7 +33,7 @@ export const Default: Story = {
           <Tag>Visible above sm</Tag>
         </Show>
       </VStack>
-      <VStack gap="2" align="center">
+      <VStack gap="space-8" align="center">
         <Show below="xl">
           <Tag data-color="info">Visible below xl</Tag>
         </Show>
@@ -53,8 +53,8 @@ export const Default: Story = {
 
 export const AsChild: Story = {
   render: () => (
-    <VStack gap="12">
-      <VStack gap="2" align="center">
+    <VStack gap="space-48">
+      <VStack gap="space-8" align="center">
         <Show above="xl" asChild>
           <Tag>Visible above xl</Tag>
         </Show>
@@ -68,7 +68,7 @@ export const AsChild: Story = {
           <Tag>Visible above sm</Tag>
         </Show>
       </VStack>
-      <VStack gap="2" align="center">
+      <VStack gap="space-8" align="center">
         <Show below="xl" asChild>
           <Tag data-color="info">Visible below xl</Tag>
         </Show>
@@ -88,7 +88,7 @@ export const AsChild: Story = {
 
 export const Chromatic: Story = {
   render: (props, context) => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <h2>Default</h2>
       {Default.render?.(props, context)}
       <h2>AsChild</h2>

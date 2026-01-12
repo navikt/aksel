@@ -4,6 +4,10 @@
 
 ## Components
 
+## Types
+
+Removed string | {} notation from AkselColor-type.
+
 ### Typo
 
 Added "contrast"-option to `textColor` prop.

@@ -55,7 +55,7 @@ export const Spacing: Story = {
 
 export const Align: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Detail align="start">{lorem}</Detail>
       <Detail align="center">{lorem}</Detail>
       <Detail align="end">{lorem}</Detail>
@@ -83,7 +83,7 @@ export const OverrideTag: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Detail textColor="default">{lorem}</Detail>
       <Detail textColor="subtle">{lorem}</Detail>
       <Box background="neutral-strong">

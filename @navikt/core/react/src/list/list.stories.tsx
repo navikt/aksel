@@ -113,7 +113,7 @@ export const Ordered: Story = {
 export const SizesUl: Story = {
   render: () => {
     return (
-      <VStack gap="8">
+      <VStack gap="space-32">
         <List size="large">
           <List.Item title="Lorem Ipsum Dolor Sit Amet">
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
@@ -155,7 +155,7 @@ export const SizesUl: Story = {
 export const SizesOl: Story = {
   render: () => {
     return (
-      <VStack gap="8">
+      <VStack gap="space-32">
         <List size="large" as="ol">
           <List.Item title="Lorem Ipsum Dolor Sit Amet">
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
@@ -197,7 +197,7 @@ export const SizesOl: Story = {
 export const SizesIcons: Story = {
   render: () => {
     return (
-      <VStack gap="8">
+      <VStack gap="space-32">
         <List size="large">
           <List.Item
             icon={<HeadHeartIcon aria-hidden />}
@@ -390,7 +390,7 @@ export const Spacing: Story = {
 
 export const Chromatic: Story = {
   render: (...args) => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <div>
         <h2>Default</h2>
         {Default.render?.(...args)}

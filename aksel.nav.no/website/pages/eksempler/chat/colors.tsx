@@ -17,7 +17,7 @@ const Example = () => {
         name="Ola Normann"
         timestamp="01.01.21 14:00"
         position="right"
-        data-color="brand-magenta"
+        data-color="brand-beige"
       >
         <Chat.Bubble>Hei Eva.</Chat.Bubble>
         <Chat.Bubble>

@@ -8,7 +8,7 @@ import { clientConfig } from "@/sanity/config";
 
 function SystemPanelAction() {
   return (
-    <Box marginBlock="space-20 0">
+    <Box marginBlock="space-20 space-0">
       <Button
         size="small"
         variant="secondary-neutral"

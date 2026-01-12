@@ -53,8 +53,8 @@ export const Default = {
       return (
         <Box
           borderWidth="1"
-          borderRadius="large"
-          padding="4"
+          borderRadius="8"
+          padding="space-16"
           style={{ maxWidth: "800px" }}
         >
           <BodyLong>
@@ -82,8 +82,8 @@ export const InlineInsideBodyLong = {
     return (
       <Box
         borderWidth="1"
-        borderRadius="large"
-        padding="4"
+        borderRadius="8"
+        padding="space-16"
         style={{ width: "800px" }}
       >
         <style>{`.storybook-custom-spacing { white-space: pre;}`}</style>
@@ -129,7 +129,7 @@ const LinkWithIcon = () => (
 export const Icon = () => <LinkWithIcon />;
 
 export const ColorRole = () => (
-  <VStack gap="3" data-color="brand-magenta">
+  <VStack gap="space-12" data-color="brand-magenta">
     <Link href="#">Ex aliqua incididunt</Link>
     {["action", "neutral"].map((variant) => (
       <div key={variant}>

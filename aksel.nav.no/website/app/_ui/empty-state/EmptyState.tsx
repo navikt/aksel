@@ -14,7 +14,7 @@ function EmptyStateCard({
       asChild
       borderWidth="1"
       borderColor="neutral-subtleA"
-      borderRadius="xlarge"
+      borderRadius="12"
     >
       <HGrid
         padding="space-16"
@@ -39,7 +39,7 @@ function EmptyStateCard({
             ser vi på det sammen.
           </BodyShort>
           {actionComponent && (
-            <BoxNew marginBlock="space-24 0">{actionComponent}</BoxNew>
+            <BoxNew marginBlock="space-24 space-0">{actionComponent}</BoxNew>
           )}
         </div>
       </HGrid>

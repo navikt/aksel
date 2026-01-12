@@ -51,7 +51,7 @@ export const Default = {
 
 export const Gap = {
   render: () => (
-    <HGrid gap="6">
+    <HGrid gap="space-24">
       <Placeholder text="1" />
       <Placeholder text="2" />
       <Placeholder text="3" />
@@ -62,7 +62,7 @@ export const Gap = {
 
 export const DynamicGap = {
   render: () => (
-    <HGrid gap={{ xs: "2", md: "8" }}>
+    <HGrid gap={{ xs: "space-8", md: "space-32" }}>
       <Placeholder text="1" />
       <Placeholder text="2" />
       <Placeholder text="3" />
@@ -73,7 +73,7 @@ export const DynamicGap = {
 
 export const Columns = {
   render: () => (
-    <HGrid gap="4" columns={2}>
+    <HGrid gap="space-16" columns={2}>
       <Placeholder text="1" />
       <Placeholder text="2" />
       <Placeholder text="3" />
@@ -84,7 +84,7 @@ export const Columns = {
 
 export const DynamicColumns = {
   render: () => (
-    <HGrid gap="4" columns={{ sm: "1fr 5fr", md: "2fr 2fr" }}>
+    <HGrid gap="space-16" columns={{ sm: "1fr 5fr", md: "2fr 2fr" }}>
       <Placeholder text="1" />
       <Placeholder text="2" />
     </HGrid>
@@ -93,16 +93,16 @@ export const DynamicColumns = {
 
 export const AlignItems = {
   render: () => (
-    <VStack gap="8">
-      <HGrid gap="4" columns={2} align="start">
+    <VStack gap="space-32">
+      <HGrid gap="space-16" columns={2} align="start">
         <Placeholder text="start" height="8rem" />
         <Placeholder text="auto" height="auto" />
       </HGrid>
-      <HGrid gap="4" columns={2} align="center">
+      <HGrid gap="space-16" columns={2} align="center">
         <Placeholder text="center" height="8rem" />
         <Placeholder text="auto" height="auto" />
       </HGrid>
-      <HGrid gap="4" columns={2} align="end">
+      <HGrid gap="space-16" columns={2} align="end">
         <Placeholder text="end" height="8rem" />
         <Placeholder text="auto" height="auto" />
       </HGrid>
@@ -112,12 +112,12 @@ export const AlignItems = {
 
 export const Nested = {
   render: () => (
-    <HGrid columns={{ xs: 1, sm: 2 }} gap="8">
-      <HGrid columns={2} gap="2">
+    <HGrid columns={{ xs: 1, sm: 2 }} gap="space-32">
+      <HGrid columns={2} gap="space-8">
         <Placeholder text="1" />
         <Placeholder text="2" />
       </HGrid>
-      <HGrid columns={2} gap="2">
+      <HGrid columns={2} gap="space-8">
         <Placeholder text="3" />
         <Placeholder text="4" />
       </HGrid>
@@ -142,7 +142,7 @@ function Placeholder({ text, height }: { text: string; height?: string }) {
 
 export const Chromatic: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <div>
         <h2>Gap</h2>
         <Gap.render />

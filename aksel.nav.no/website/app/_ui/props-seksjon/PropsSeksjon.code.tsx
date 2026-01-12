@@ -30,7 +30,7 @@ function PropsSeksjonCode({
               overflowX="auto"
               as={wrap ? "div" : "pre"}
               paddingInline="space-8"
-              borderRadius="medium"
+              borderRadius="4"
             >
               {tokens.map((line, i) => (
                 <code

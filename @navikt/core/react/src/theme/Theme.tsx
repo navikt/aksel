@@ -109,7 +109,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
             ref={ref}
             className={cl("aksel-theme", className, theme)}
             data-background={hasBackground}
-            data-color={color ?? ""}
+            data-color={color ?? DEFAULT_COLOR}
           >
             {children}
           </SlotElement>
