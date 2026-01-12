@@ -79,6 +79,30 @@ export const SizeSmall: Story = {
   },
 };
 
+export const LeftAlignContent: Story = {
+  render: () => {
+    return (
+      <VStack gap="space-16">
+        <GlobalAlert status="announcement" centered={false}>
+          <GlobalAlertHeader>
+            <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
+            <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+          </GlobalAlertHeader>
+          <GlobalAlertContent>GlobalAlert content</GlobalAlertContent>
+        </GlobalAlert>
+
+        <GlobalAlert status="announcement" size="small" centered={false}>
+          <GlobalAlertHeader>
+            <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
+            <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+          </GlobalAlertHeader>
+          <GlobalAlertContent>GlobalAlert content</GlobalAlertContent>
+        </GlobalAlert>
+      </VStack>
+    );
+  },
+};
+
 export const OnlyHeader: Story = {
   render: () => {
     return (
@@ -198,6 +222,7 @@ export const A11yTest: Story = {
 
 export const Chromatic = renderStoriesForChromatic({
   Default,
+  LeftAlignContent,
   SizeSmall,
   OnlyHeader,
   Compositions,
@@ -207,6 +232,7 @@ export const Chromatic = renderStoriesForChromatic({
 
 export const ChromaticLight = renderStoriesForChromatic({
   Default,
+  LeftAlignContent,
   SizeSmall,
   OnlyHeader,
   Compositions,
@@ -217,6 +243,7 @@ ChromaticLight.globals = { theme: "light", mode: "darkside" };
 
 export const ChromaticDark = renderStoriesForChromatic({
   Default,
+  LeftAlignContent,
   SizeSmall,
   OnlyHeader,
   Compositions,
