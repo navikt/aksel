@@ -1,4 +1,4 @@
-import { MenuElipsisVerticalCircleIcon } from "@navikt/aksel-icons";
+import { MenuElipsisVerticalIcon } from "@navikt/aksel-icons";
 import { ActionMenu, Button, Table } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -26,7 +26,7 @@ const Example = () => {
                 <ActionMenu.Trigger>
                   <Button
                     data-color="neutral"
-                    icon={<MenuElipsisVerticalCircleIcon title="Meny" />}
+                    icon={<MenuElipsisVerticalIcon title="Meny" />}
                     size="small"
                     variant="tertiary"
                   />
