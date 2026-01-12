@@ -25,6 +25,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 3,
-  desc: "Feilmelding om for mange filer bør legges i en separat Alert og plasseres over listen med filer.",
+  index: 2,
 };

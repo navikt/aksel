@@ -2,9 +2,12 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useRef, useState } from "react";
 import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
+import { DatePicker, useDatepicker } from "../date/datepicker";
 import { Select } from "../form/select";
 import { VStack } from "../layout/stack";
+import { Modal } from "../modal";
 import { Table } from "../table";
+import { Tooltip } from "../tooltip";
 import { BodyShort } from "../typography";
 import {
   Dialog,
@@ -456,6 +459,147 @@ export const WithSrElement: Story = {
   ),
   parameters: {
     chromatic: { disable: false },
+  },
+};
+
+export const WithTooltip: Story = {
+  render: () => {
+    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+
+    return (
+      <Dialog defaultOpen aria-label="Tooltip test">
+        <Dialog.Trigger>
+          <Button>Open Dialog</Button>
+        </Dialog.Trigger>
+        <Dialog.Popup initialFocusTo={buttonRef}>
+          <Dialog.Body>
+            <div style={{ marginBottom: "1rem" }}>
+              <Tooltip content="This_is_the_first_tooltip">
+                <Button ref={buttonRef}>Test 1</Button>
+              </Tooltip>
+            </div>
+            <Tooltip content="This is the second tooltip">
+              <Button>Test 2</Button>
+            </Tooltip>
+          </Dialog.Body>
+        </Dialog.Popup>
+      </Dialog>
+    );
+  },
+};
+
+export const WithDatepicker: Story = {
+  render: () => {
+    const { datepickerProps, inputProps } = useDatepicker({
+      fromDate: new Date("Aug 23 2019"),
+      toDate: new Date("Feb 23 2024"),
+    });
+
+    return (
+      <Dialog defaultOpen aria-label="Tooltip test">
+        <Dialog.Trigger>
+          <Button>Open Dialog</Button>
+        </Dialog.Trigger>
+        <Dialog.Popup>
+          <Dialog.Body>
+            <DatePicker {...datepickerProps} dropdownCaption>
+              <DatePicker.Input
+                {...inputProps}
+                label="Velg dato"
+                description="Format: dd.mm.yyyy"
+              />
+            </DatePicker>
+          </Dialog.Body>
+        </Dialog.Popup>
+      </Dialog>
+    );
+  },
+};
+
+export const WithModalOutside: Story = {
+  render: () => {
+    const ref = useRef<HTMLDialogElement>(null);
+
+    return (
+      <div>
+        <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
+        <Modal
+          open={ref.current ? undefined : true /* initially open */}
+          onClose={() => null}
+          ref={ref}
+          aria-label="Tooltip test"
+        >
+          <Modal.Body>
+            <Dialog defaultOpen aria-label="Modal test">
+              <Dialog.Trigger>
+                <Button>Open Dialog</Button>
+              </Dialog.Trigger>
+              <Dialog.Popup>
+                <Dialog.Body>
+                  lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  domet.
+                </Dialog.Body>
+              </Dialog.Popup>
+            </Dialog>
+          </Modal.Body>
+        </Modal>
+      </div>
+    );
+  },
+};
+
+export const WithModalInside: Story = {
+  render: () => {
+    const ref = useRef<HTMLDialogElement>(null);
+
+    return (
+      <div>
+        <Dialog defaultOpen aria-label="Modal test">
+          <Dialog.Trigger>
+            <Button>Open Dialog</Button>
+          </Dialog.Trigger>
+          <Dialog.Popup>
+            <Dialog.Body>
+              <Button onClick={() => ref.current?.showModal()}>
+                Open Modal
+              </Button>
+              <Modal ref={ref} aria-label="Tooltip test" closeOnBackdropClick>
+                <Modal.Body>
+                  lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  domet.
+                </Modal.Body>
+              </Modal>
+            </Dialog.Body>
+          </Dialog.Popup>
+        </Dialog>
+      </div>
+    );
+  },
+};
+
+export const SideBySide: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <div>
+        <Dialog>
+          <DialogTrigger>
+            <Button>Open Dialog</Button>
+          </DialogTrigger>
+          <DialogPopup>
+            <DialogBody>
+              Dialog 1<Button onClick={() => setOpen((x) => !x)}>Open</Button>
+            </DialogBody>
+          </DialogPopup>
+        </Dialog>
+
+        <Dialog open={open} onOpenChange={(next) => setOpen(next)}>
+          <DialogPopup>
+            <DialogBody>Dialog 2</DialogBody>
+          </DialogPopup>
+        </Dialog>
+      </div>
+    );
   },
 };
 

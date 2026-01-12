@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { InformationIcon } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
+import { Link } from "../link";
 import { BodyLong } from "../typography";
 import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import GuidePanel from "./GuidePanel";
@@ -16,10 +17,14 @@ export default {
   },
 } satisfies Meta<typeof GuidePanel>;
 
-const panelText = `Sit sint eu dolore reprehenderit exercitation labore aute anim sit
-adipisicing proident. Tempor ipsum ea cupidatat qui esse do veniam
-cupidatat. Excepteur irure reprehenderit esse tempor nisi duis qui ea
-enim id.`;
+const panelText = (
+  <>
+    Sit sint eu dolore reprehenderit exercitation labore aute anim sit
+    adipisicing proident. Tempor ipsum ea cupidatat qui esse do veniam
+    cupidatat. Excepteur irure reprehenderit esse tempor nisi duis qui ea enim
+    id. <Link href="#">Link</Link>
+  </>
+);
 
 export const Default: Story = {
   argTypes: {
