@@ -9,7 +9,11 @@ const Example = () => {
   return (
     <VStack gap="space-16" minHeight="24rem">
       <MonthPicker {...monthpickerProps}>
-        <MonthPicker.Input {...inputProps} label="Velg måned" />
+        <MonthPicker.Input
+          {...inputProps}
+          label="Velg måned"
+          description="Format: mm.yyyy"
+        />
       </MonthPicker>
       {selectedMonth?.toLocaleDateString(undefined, {
         year: "numeric",
