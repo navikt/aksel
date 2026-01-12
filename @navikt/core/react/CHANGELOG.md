@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 7.39.0
+
+### Minor Changes
+
+- LocalAlert, InfoCard: Reduced default header height. ([`91f3f8a`](https://github.com/navikt/aksel/commit/91f3f8acb8749bc154a1e7dca008ce0be43e2e34))
+
+- GlobalAlert: Reduced default header height and added centered content prop. ([#4476](https://github.com/navikt/aksel/pull/4476))
+
+### Patch Changes
+
+- ReadMore: Removed tabIndex 0 from content. ([#4464](https://github.com/navikt/aksel/pull/4464))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.39.0
+  - @navikt/aksel-icons@7.39.0
+
 ## 7.38.0
 
 ### Patch Changes
