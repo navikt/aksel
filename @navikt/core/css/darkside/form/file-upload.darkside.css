@@ -168,20 +168,26 @@ li.aksel-file-item {
   align-items: flex-start;
 }
 
+.aksel-file-item__link {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ax-space-2);
+
+  &:is(a) {
+    color: var(--ax-text-subtle);
+  }
+}
+
 .aksel-file-item--error > .aksel-file-item__inner {
   outline: 2px solid var(--ax-border-danger-strong);
 }
 
 .aksel-file-item__icon {
-  background-color: var(--ax-bg-neutral-moderateA);
-  color: var(--ax-text-neutral);
-  border-radius: var(--ax-radius-full);
-  min-height: 2.5rem;
-  min-width: 2.5rem;
-  margin-top: var(--ax-space-2);
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+  margin: var(--ax-space-2) 0;
   display: grid;
   place-content: center;
-  transition: background-color 250ms cubic-bezier(0, 0.3, 0.15, 1);
 
   & > svg {
     height: 1.5rem;
@@ -191,6 +197,11 @@ li.aksel-file-item {
 
 .aksel-file-item__icon--loading {
   background-color: transparent;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  display: grid;
+  place-content: center;
+  padding: var(--ax-space-12);
 }
 
 .aksel-file-item__file-info {
