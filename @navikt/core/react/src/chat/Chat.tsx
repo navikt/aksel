@@ -55,8 +55,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Overrides inherited color.
    *
-   *
-   * We have disallowed status-colors
+   * We have disallowed status-colors.
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */

@@ -54,7 +54,6 @@ export interface ButtonProps
   /**
    * Overrides inherited color.
    *
-   *
    * We recommend only using `accent`, `neutral` and `danger`.
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)

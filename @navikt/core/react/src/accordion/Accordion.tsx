@@ -57,7 +57,6 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Overrides inherited color.
    *
-   *
    * We recommend only using `accent` and `neutral`. We have disallowed status-colors.
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
