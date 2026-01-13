@@ -286,7 +286,6 @@ function getStatus(
             canAutoMigrate: true,
             fileName,
             name: match[0],
-            comment: `Deprecated token - migrate to ${config.replacement}`,
           });
 
           match = regex.exec(fileSrc);
