@@ -21,7 +21,6 @@ export interface BodyShortProps
    * Overrides inherited color.
    * @default "neutral"
    *
-   *
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */

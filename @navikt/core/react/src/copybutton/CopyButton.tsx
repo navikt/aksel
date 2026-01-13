@@ -18,10 +18,9 @@ export interface CopyButtonProps
   variant?: "action" | "neutral";
   /**
    * Overrides color.
-   * @default "neutral"
-   *
    *
    * We recommend only using `accent` and `neutral`. We have disallowed status-colors.
+   * @default "neutral"
    * @see 🏷️ {@link AkselColor}
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */
@@ -47,7 +46,7 @@ export interface CopyButtonProps
    */
   onActiveChange?: (state: boolean) => void;
   /**
-   *  Icon shown when button is not clicked.
+   * Icon shown when button is not clicked.
    * @default <FilesIcon />
    */
   icon?: React.ReactNode;
