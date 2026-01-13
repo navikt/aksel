@@ -193,13 +193,38 @@
     border: 1px solid transparent;
     color: ButtonText;
     background-color: ButtonFace;
-  }
 
-  .aksel-button:not(:disabled):hover {
-    background-color: highlighttext;
-    border-color: highlight;
-    color: highlight;
-    box-shadow: none;
+    &[data-variant="primary"]:not(:disabled) {
+      background-color: Highlight;
+      color: highlighttext;
+
+      & span {
+        forced-color-adjust: none;
+      }
+
+      &:where(a) {
+        background-color: LinkText;
+        color: highlighttext;
+
+        & span {
+          forced-color-adjust: none;
+        }
+      }
+
+      &:hover {
+        background-color: highlighttext;
+        border-color: highlight;
+        color: highlight;
+      }
+    }
+
+    &:hover:not(:disabled),
+    &[data-variant="primary"]:where(a):hover:not(:disabled) {
+      background-color: highlighttext;
+      border-color: highlight;
+      color: highlight;
+      box-shadow: none;
+    }
   }
 
   .aksel-button:not(:disabled):hover span {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 
 export interface FormSummaryAnswerProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,10 +16,12 @@ export const FormSummaryAnswer = React.forwardRef<
   FormSummaryAnswerProps
 >(({ children, className, ...rest }, ref) => {
   const { cn } = useRenameCSS();
+  const ctx = useThemeInternal();
 
   return (
     <div
       ref={ref}
+      data-color={ctx.color}
       {...rest}
       className={cn("navds-form-summary__answer", className)}
     >
