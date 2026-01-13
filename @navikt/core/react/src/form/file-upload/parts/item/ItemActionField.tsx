@@ -5,7 +5,6 @@ import Spacer from "../../../../layout/stack/Spacer";
 import { Loader } from "../../../../loader";
 import { useRenameCSS } from "../../../../theme/Theme";
 import { TFunction } from "../../../../util/i18n/i18n.types";
-import { FileUploadItemProps } from "./Item";
 
 interface ItemActionFieldProps {
   isLoading: boolean;
@@ -76,7 +75,13 @@ function ItemActionField({
 }
 
 function isCustomButton(
-  button: FileUploadItemProps["button"],
+  button:
+    | {
+        action: "delete" | "retry";
+        onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+        id?: string;
+      }
+    | React.ReactNode,
 ): button is React.ReactNode {
   return React.isValidElement(button);
 }
