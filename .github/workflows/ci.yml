@@ -79,3 +79,5 @@ jobs:
 
       - name: Test UI
         run: yarn storybook:test --max-workers=2
+        env:
+          HOME: /root
