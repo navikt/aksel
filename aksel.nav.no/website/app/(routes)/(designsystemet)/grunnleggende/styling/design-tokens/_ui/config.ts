@@ -53,7 +53,7 @@ const COLOR_ROLES: ColorRoleT[] = [
     id: "root",
     title: "Root",
     description:
-      "Root brukes på elementer i spesialtilfeller som for å skape dypde i skjermbildet eller der elementet ikke har en bestemt rolle.",
+      "Root-tokens er spissede farger som løser spesifikke behov i et grensesnitt.",
   },
   {
     id: "neutral",

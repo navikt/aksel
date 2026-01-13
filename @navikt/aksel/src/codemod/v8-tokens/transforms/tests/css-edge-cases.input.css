@@ -16,4 +16,13 @@
 
   /* Comments - SHOULD change (regex based) */
   /* var(--a-spacing-4) */
+  border-radius: var(--a-border-radius-medium);
+  border-radius: var(--ax-border-radius-small);
+
+  /* Border radius tokens - SHOULD migrate to numeric values */
+  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-border-radius-small);
+  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-border-radius-xlarge);
 }

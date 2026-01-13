@@ -2,7 +2,7 @@
   --__axc-link-card-padding-block: var(--ax-space-16);
   --__axc-link-card-padding-inline: var(--ax-space-20);
 
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   text-decoration: none;
   color: var(--ax-text-neutral);
   transition-property: border-color, box-shadow, transform, background-color;
@@ -103,7 +103,7 @@
   grid-area: image;
   margin-block: calc(var(--__axc-link-card-padding-block) * -1) var(--__axc-link-card-padding-block);
   margin-inline: calc(var(--__axc-link-card-padding-inline) * 1 * -1);
-  border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
+  border-radius: calc(var(--ax-radius-12) - 1px);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   position: relative;
