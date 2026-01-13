@@ -16,4 +16,6 @@
 
   /* Comments - SHOULD change (regex based) */
   /* var(--ax-space-16) */
+  border-radius: var(--ax-radius-4);
+  border-radius: var(--ax-radius-2);
 }
