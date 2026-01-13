@@ -34,7 +34,6 @@ const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
           setOpen(!open, event.nativeEvent),
         )}
         aria-haspopup="dialog"
-        aria-expanded={open}
         aria-controls={open ? popupId : undefined}
       >
         {children}

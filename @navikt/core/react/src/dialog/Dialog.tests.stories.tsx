@@ -634,13 +634,11 @@ export const AriaAttributes: Story = {
 
     const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
 
-    expect(triggerButton).toHaveAttribute("aria-expanded", "false");
     await userEvent.click(triggerButton);
     expectPopupOpen();
 
     const popupElement = canvas.getByTestId("popup");
 
-    expect(triggerButton).toHaveAttribute("aria-expanded", "true");
     expect(triggerButton).toHaveAttribute("aria-controls", "custom-popup-id");
 
     expect(popupElement).toHaveAttribute("id", "custom-popup-id");
