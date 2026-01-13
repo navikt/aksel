@@ -5,8 +5,6 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   const [hasError, setHasError] = useState(false);
   const { monthpickerProps, inputProps } = useMonthpicker({
-    fromDate: new Date("Aug 23 2019"),
-    toDate: new Date("Aug 23 2025"),
     onValidate: (val) => {
       setHasError(!val.isValidMonth);
       console.info(val);
