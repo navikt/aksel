@@ -113,7 +113,7 @@ type AkselShadowToken = "dialog";
 export type { AkselShadowToken };
 
 /* ------------------------------ Border Radius tokens --------------------- */
-type AkselBorderRadiusToken = "2" | "4" | "8" | "12" | "full";
+type AkselBorderRadiusToken = "2" | "4" | "8" | "12" | "16" | "full";
 
 export type { AkselBorderRadiusToken };
 
