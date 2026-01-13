@@ -95,14 +95,13 @@
   /*
    * Cannot use --ax-bg-overlay because ::backdrop does not inherit from anything but itself.
    * TODO: Consider adding `::backdrop` to global token definitions.
-   * TODO: Check that overlay-color is correct after the new colors is set in stone.
    */
-  background: rgb(2 20 49 /0.8);
+  background: rgba(12 22 39 / 0.659);
   animation: akselModalBackdropFadeIn 0.7s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .aksel-modal--polyfilled + .backdrop /* Cannot be combined with ::backdrop selector */ {
-  background: rgb(2 20 49 /0.8);
+  background: rgba(12 22 39 / 0.659);
 
   /* From polyfill: */
   position: fixed;

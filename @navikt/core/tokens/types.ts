@@ -37,25 +37,33 @@ type AkselRootBackgroundToken =
   | "sunken"
   | "overlay";
 
+type AkselDynamicStatelessBackgroundToken =
+  | "soft"
+  | "softA"
+  | "moderate"
+  | "moderateA"
+  | "strong";
+
+type AkselDynamicStatefulBackgroundToken =
+  | "moderate-hover"
+  | "moderate-hoverA"
+  | "moderate-pressed"
+  | "moderate-pressedA"
+  | "strong-hover"
+  | "strong-pressed";
+
 type AkselColoredStatelessBackgroundToken =
-  | `${AkselColorRole}-soft`
-  | `${AkselColorRole}-softA`
-  | `${AkselColorRole}-moderate`
-  | `${AkselColorRole}-moderateA`
-  | `${AkselColorRole}-strong`;
+  `${AkselColorRole}-${AkselDynamicStatelessBackgroundToken}`;
 
 type AkselColoredStatefulBackgroundToken =
-  | `${AkselColorRole}-moderate-hover`
-  | `${AkselColorRole}-moderate-hoverA`
-  | `${AkselColorRole}-moderate-pressed`
-  | `${AkselColorRole}-moderate-pressedA`
-  | `${AkselColorRole}-strong-hover`
-  | `${AkselColorRole}-strong-pressed`;
+  `${AkselColorRole}-${AkselDynamicStatefulBackgroundToken}`;
 
 export type {
   AkselRootBackgroundToken,
   AkselColoredStatelessBackgroundToken,
   AkselColoredStatefulBackgroundToken,
+  AkselDynamicStatelessBackgroundToken,
+  AkselDynamicStatefulBackgroundToken,
 };
 
 /* ------------------------------- Text tokens ------------------------------ */

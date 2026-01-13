@@ -649,7 +649,6 @@ const colors = {
     raw: "rgba(255, 255, 255, 1)",
     replacement: "text-neutral-contrast",
   },
-  /* TODO */
   "text-action": {
     ref: "blue-500",
     raw: "rgba(0, 103, 197, 1)",
