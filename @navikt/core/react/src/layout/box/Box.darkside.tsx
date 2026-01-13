@@ -27,7 +27,7 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
    * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#backgroundColor).
-   * @see {@link AkselRootBackgroundToken} and {@link AkselColoredStatelessBackgroundToken}
+   * @see {@link AkselRootBackgroundToken}, {@link AkselColoredStatelessBackgroundToken} and {@link AkselDynamicStatelessBackgroundToken}
    */
   background?:
     | AkselRootBackgroundToken
