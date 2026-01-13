@@ -18,4 +18,11 @@
   /* var(--ax-space-16) */
   border-radius: var(--ax-radius-4);
   border-radius: var(--ax-radius-2);
+
+  /* Border radius tokens - SHOULD migrate to numeric values */
+  border-radius: var(--ax-radius-full);
+  border-radius: var(--ax-radius-2);
+  border-radius: var(--ax-radius-4);
+  border-radius: var(--ax-radius-8);
+  border-radius: var(--ax-radius-12);
 }

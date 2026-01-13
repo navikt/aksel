@@ -1,7 +1,11 @@
 import { check } from "../../../utils/check";
 
 /* JS transforms */
-for (const fixture of ["js-replace-all", "js-replace-some"]) {
+for (const fixture of [
+  "js-replace-all",
+  "js-replace-some",
+  "js-replace-border",
+]) {
   check(__dirname, {
     fixture,
     migration: "v8-tokens-js",
