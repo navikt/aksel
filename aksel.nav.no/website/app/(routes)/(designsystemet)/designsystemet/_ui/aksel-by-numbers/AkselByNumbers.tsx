@@ -43,11 +43,10 @@ const AkselByNumbers = ({
     {entries && entries.length > 0 && (
       <HGrid gap="space-24" width="100%" columns={{ md: 3, lg: 3 }}>
         {entries.map(({ number, unit, title: numberTitle }, index) => {
-          const dataColor = [
-            "aksel-brand-teal",
-            "aksel-brand-blue",
-            "aksel-brand-pink",
-          ][index];
+          const dataColor = (
+            ["aksel-brand-teal", "brand-blue", "aksel-brand-pink"] as const
+          )[index];
+
           return (
             <BoxNew
               className={styles.akselByNumbers}
