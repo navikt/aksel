@@ -4,6 +4,7 @@ import { translateToken } from "../../utils/translate-token";
 import { TokenStatus } from "../config/TokenStatus";
 import { legacyComponentTokenList } from "../config/legacy-component.tokens";
 import { legacyTokenConfig } from "../config/legacy.tokens";
+import { getFrameworkRegexes } from "../config/token-regex";
 import { v8TokenConfig } from "../config/v8.tokens";
 
 const StatusStore = new TokenStatus();
@@ -37,6 +38,7 @@ function getStatus(
    */
   const legacySearchTerms = getLegacySearchTerms();
   const v8TokensSearchTerms = getV8TokensSearchTerms();
+  const deprecatedAxSearchTerms = getDeprecatedAxSearchTerms();
 
   const legacyComponentTokensSet = new Set(legacyComponentTokenList);
 
@@ -243,6 +245,55 @@ function getStatus(
       }
     }
 
+    /**
+     * Detect deprecated --ax-border-radius-* tokens that should be migrated to --ax-radius-*
+     */
+    for (const [deprecatedToken, config] of Object.entries(
+      deprecatedAxTokenConfig,
+    )) {
+      const terms = deprecatedAxSearchTerms.get(deprecatedToken);
+
+      let found = false;
+      if (terms) {
+        for (const term of terms) {
+          if (fileWords.has(term)) {
+            found = true;
+            break;
+          }
+        }
+      }
+      if (!found) {
+        continue;
+      }
+
+      for (const [regexKey, regex] of Object.entries(config.regexes)) {
+        if (!regex) {
+          continue;
+        }
+        let match: RegExpExecArray | null = regex.exec(fileSrc);
+
+        while (match) {
+          const { row, column } = getCharacterPositionInFile(
+            match.index,
+            getLineStartsLazy(),
+          );
+
+          StatusStore.add({
+            isLegacy: true,
+            type: regexKey as keyof typeof config.regexes,
+            columnNumber: column,
+            lineNumber: row,
+            canAutoMigrate: true,
+            fileName,
+            name: match[0],
+            comment: `Deprecated token - migrate to ${config.replacement}`,
+          });
+
+          match = regex.exec(fileSrc);
+        }
+      }
+    }
+
     if (action === "print") {
       progressBar.update(index + 1, { fileName });
     }
@@ -301,6 +352,68 @@ function getV8TokensSearchTerms() {
     v8TokensSearchTerms.set(newTokenName, terms);
   }
   return v8TokensSearchTerms;
+}
+
+/**
+ * Configuration for deprecated --ax-* tokens that should be migrated
+ */
+const deprecatedAxTokenConfig = {
+  "border-radius-full": {
+    replacement: "--ax-radius-full",
+    regexes: getFrameworkRegexes({
+      legacy: false,
+      token: "--ax-border-radius-full",
+      twString: null,
+    }),
+  },
+  "border-radius-small": {
+    replacement: "--ax-radius-2",
+    regexes: getFrameworkRegexes({
+      legacy: false,
+      token: "--ax-border-radius-small",
+      twString: null,
+    }),
+  },
+  "border-radius-medium": {
+    replacement: "--ax-radius-4",
+    regexes: getFrameworkRegexes({
+      legacy: false,
+      token: "--ax-border-radius-medium",
+      twString: null,
+    }),
+  },
+  "border-radius-large": {
+    replacement: "--ax-radius-8",
+    regexes: getFrameworkRegexes({
+      legacy: false,
+      token: "--ax-border-radius-large",
+      twString: null,
+    }),
+  },
+  "border-radius-xlarge": {
+    replacement: "--ax-radius-12",
+    regexes: getFrameworkRegexes({
+      legacy: false,
+      token: "--ax-border-radius-xlarge",
+      twString: null,
+    }),
+  },
+};
+
+function getDeprecatedAxSearchTerms() {
+  const deprecatedAxSearchTerms = new Map<string, Set<string>>();
+  for (const deprecatedToken of Object.keys(deprecatedAxTokenConfig)) {
+    const terms = new Set<string>();
+    const tokenName = `--ax-${deprecatedToken}`;
+    terms.add(tokenName);
+    terms.add(translateToken(tokenName, "scss"));
+    terms.add(translateToken(tokenName, "less"));
+    /* JS tokens use Ax prefix */
+    const jsToken = translateToken(tokenName, "js");
+    terms.add(jsToken);
+    deprecatedAxSearchTerms.set(deprecatedToken, terms);
+  }
+  return deprecatedAxSearchTerms;
 }
 
 /**
