@@ -172,6 +172,7 @@ li.aksel-file-item {
   display: flex;
   align-items: flex-start;
   gap: var(--ax-space-2);
+  width: fit-content;
 
   &:is(a) {
     color: var(--ax-text-subtle);
