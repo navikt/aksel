@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.39.1
+
+### @navikt/ds-react
+
+- Dialog: Removed 'aria-expanded' from Dialog.Trigger. ([#4478](https://github.com/navikt/aksel/pull/4478))
+
+### @navikt/ds-css
+
+- Modal, Dialog: Handle scroll for extreme zoom-levels better. ([#4488](https://github.com/navikt/aksel/pull/4488))
+
 ## 7.39.0
 
 ### @navikt/ds-react

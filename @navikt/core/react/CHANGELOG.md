@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.39.1
+
+### Patch Changes
+
+- Dialog: Removed 'aria-expanded' from Dialog.Trigger. ([#4478](https://github.com/navikt/aksel/pull/4478))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.39.1
+  - @navikt/aksel-icons@7.39.1
+
 ## 7.39.0
 
 ### Minor Changes
