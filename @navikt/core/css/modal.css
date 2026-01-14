@@ -139,6 +139,11 @@
   overflow: auto;
   overscroll-behavior: contain;
   position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
+
+  /* Needed to accommodate 400% zoom */
+  @media (max-height: 400px) {
+    overflow: unset;
+  }
 }
 
 .navds-modal:not(.navds-modal--polyfilled) .navds-modal__body {

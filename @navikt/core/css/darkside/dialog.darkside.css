@@ -25,6 +25,11 @@
     --__axc-dialog-p-i: var(--ax-space-16);
   }
 
+  /* Needed to accommodate 400% zoom */
+  @media (max-height: 400px) {
+    overflow: auto;
+  }
+
   &[data-entering-style],
   &[data-exiting-style] {
     /* Webkit a11y delays detecting visible elements when opacity starts at 0 */
@@ -231,6 +236,11 @@
     100% 16px;
   background-attachment: local, local, scroll, scroll;
   background-repeat: no-repeat;
+
+  /* Needed to accommodate 400% zoom */
+  @media (max-height: 400px) {
+    overflow: unset;
+  }
 }
 
 .aksel-dialog__footer {
