@@ -1,16 +1,16 @@
-import Color from "colorjs.io";
+import Color, { type Coords } from "colorjs.io";
 import type { GlobalColorScale } from "../../../internal-types";
-import { AkselColor, AkselColorTheme } from "../../../types";
+import { AkselColorRole, AkselColorTheme } from "../../../types";
 import { GlobalColorEntry } from "../../tokens.util";
 import { GlobalConfigWithoutAlpha } from "./colors.types";
 import { semanticRootTokens } from "./semantic-root.tokens";
 
 type GlobalConfigWithAlpha = Record<
-  Extract<AkselColor, "neutral">,
+  Extract<AkselColorRole, "neutral">,
   Record<GlobalColorScale, GlobalColorEntry>
 > &
   Record<
-    Exclude<AkselColor, "neutral">,
+    Exclude<AkselColorRole, "neutral">,
     Record<Exclude<GlobalColorScale, "000">, GlobalColorEntry>
   >;
 
@@ -28,7 +28,7 @@ export function globalConfigWithAlphaTokens({
   const localConfig = structuredClone(globalConfig) as GlobalConfigWithAlpha;
 
   Object.keys(globalConfig).forEach((key) => {
-    const _key = key as AkselColor;
+    const _key = key as AkselColorRole;
     const scopedConfig = localConfig[_key];
 
     scopedConfig["100A"] = {
@@ -55,14 +55,30 @@ export function globalConfigWithAlphaTokens({
 function createAlphaColor(targetColor: string, theme: AkselColorTheme) {
   const backgroundColor = semanticRootTokens(theme).bg.default.value;
 
+  const targetCoords = new Color(targetColor).to("srgb").coords;
+  const backgroundCoords = new Color(backgroundColor).to("srgb").coords;
+
   const [r, g, b, a] = getAlphaColor(
-    new Color(targetColor).to("srgb").coords,
-    new Color(backgroundColor).to("srgb").coords,
+    parseAndValidateCoords(targetCoords),
+    parseAndValidateCoords(backgroundCoords),
     255,
     255,
   );
 
   return formatHex(new Color("srgb", [r, g, b], a).toString({ format: "hex" }));
+}
+
+function parseAndValidateCoords(coords: Coords): number[] {
+  const parsedCoords: number[] = [];
+
+  for (const coord of coords) {
+    if (coord === null) {
+      throw new Error(`Color coordinate is undefined: ${coord}`);
+    }
+    parsedCoords.push(coord);
+  }
+
+  return parsedCoords;
 }
 
 // target = background * (1 - alpha) + foreground * alpha
