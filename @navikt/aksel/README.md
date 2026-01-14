@@ -66,7 +66,7 @@ Removes deprecated props from components.
 
 `npx @navikt/aksel codemod v8-list ...`
 
-Tries to migrate List component moving 'title' and 'description' props to 'Heading' and 'BodyShort'.
+Tries to migrate List component by wrapping it with 'Box' and moving 'title' and 'description' props to 'Heading' and 'BodyShort'.
 
 #### Variants
 
