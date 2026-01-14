@@ -198,8 +198,6 @@ li.aksel-file-item {
 
 .aksel-file-item__icon--loading {
   background-color: transparent;
-  min-width: 1.5rem;
-  min-height: 1.5rem;
   display: grid;
   place-content: center;
   padding: var(--ax-space-12);
