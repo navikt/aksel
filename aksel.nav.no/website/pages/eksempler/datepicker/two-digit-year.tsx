@@ -14,7 +14,7 @@ const Example = () => {
         <DatePicker.Input
           {...inputProps}
           label="Velg dato"
-          description="Format: dd.mm.yy"
+          description="Format: dd.mm.åå"
         />
       </DatePicker>
       <Box paddingBlock="space-16 space-0">{selectedDay?.toDateString()}</Box>
