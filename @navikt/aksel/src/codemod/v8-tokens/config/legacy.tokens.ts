@@ -1437,9 +1437,10 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
   "shadow-focus": {
     ref: "",
     raw: "0 0 0 3px rgba(0, 52, 125, 1)",
-    replacement:
-      "We now use `outline: 3px solid var(--ax-border-focus)` + `outline-offset: 3px`",
+    replacement: "",
     twOld: "shadow-focus",
+    comment:
+      "We now use `outline: 3px solid var(--ax-border-focus)` + `outline-offset: 3px`",
   },
   "border-radius-full": {
     ref: "",
