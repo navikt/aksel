@@ -1432,7 +1432,7 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
     ref: "",
     raw: "0 0 0 3px rgba(0, 52, 125, 1)",
     replacement:
-      "We now use outline `outline: 3px solid var(--ax-border-focus) + outline-offset: 3px`",
+      "We now use `outline: 3px solid var(--ax-border-focus)` + `outline-offset: 3px`",
     twOld: "shadow-focus",
   },
   "border-radius-full": {
@@ -1499,14 +1499,14 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
     ref: "",
     raw: "3000",
     replacement: "",
-    comment: "Use `z-index: 3000`as replacement",
+    comment: "Use `z-index: 3000` as replacement",
     twOld: "z-tooltip",
     twNew: "z-[3000]",
   },
   "z-index-focus": {
     ref: "",
     raw: "10",
-    comment: "Use `z-index: 10`as replacement",
+    comment: "Use `z-index: 10` as replacement",
     replacement: "",
     twOld: "z-focus",
     twNew: "z-[10]",
@@ -1514,7 +1514,7 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
   "z-index-popover": {
     ref: "",
     raw: "1000",
-    comment: "Use `z-index: 1000`as replacement",
+    comment: "Use `z-index: 1000` as replacement",
     replacement: "",
     twOld: "z-popover",
     twNew: "z-[1000]",
