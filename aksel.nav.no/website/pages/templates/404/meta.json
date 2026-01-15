@@ -3,7 +3,7 @@
   "changelog": [
     {
       "description": "Migrerte til v8 og justerte avstander ([diff](https://github.com/navikt/aksel/pull/4358/files?w=1)).",
-      "date": "08.12.2025",
+      "date": "15.01.2026",
       "version": 3
     },
     {
