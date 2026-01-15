@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { Detail, Heading, HeadingProps } from "../typography";
+import { cl } from "../util/className";
 
 export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -39,17 +39,15 @@ const Bubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
-      <div ref={ref} className={cn("navds-chat__bubble", className)} {...rest}>
+      <div ref={ref} className={cl("aksel-chat__bubble", className)} {...rest}>
         {(timestamp || name) && (
           <Heading
             size="xsmall"
             level={toptextHeadingLevel}
-            className={cn(
-              `navds-chat__top-text`,
-              toptextPosition && `navds-chat__top-text--${toptextPosition}`,
+            className={cl(
+              `aksel-chat__top-text`,
+              toptextPosition && `aksel-chat__top-text--${toptextPosition}`,
             )}
           >
             {name && <Detail as="span">{name}</Detail>}

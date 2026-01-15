@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS, useThemeInternal } from "../../../theme/Theme";
+import { useThemeInternal } from "../../../theme/Theme";
+import { cl } from "../../../util/className";
 
 interface BaseAlertContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -23,7 +24,6 @@ const BaseAlertContent = forwardRef<HTMLDivElement, BaseAlertContentProps>(
     { children, className, ...restProps }: BaseAlertContentProps,
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
     const themeContext = useThemeInternal();
 
     return (
@@ -31,7 +31,7 @@ const BaseAlertContent = forwardRef<HTMLDivElement, BaseAlertContentProps>(
         ref={forwardedRef}
         data-color={themeContext?.color}
         {...restProps}
-        className={cn(className, "navds-base-alert__content")}
+        className={cl(className, "aksel-base-alert__content")}
       >
         {children}
       </div>

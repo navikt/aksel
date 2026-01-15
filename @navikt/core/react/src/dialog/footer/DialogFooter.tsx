@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 
 type DialogFooterProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -20,13 +20,11 @@ type DialogFooterProps = React.HTMLAttributes<HTMLDivElement>;
  */
 const DialogFooter = forwardRef<HTMLDivElement, DialogFooterProps>(
   ({ className, children, ...restProps }, forwardedRef) => {
-    const { cn } = useRenameCSS();
-
     return (
       <div
         {...restProps}
         ref={forwardedRef}
-        className={cn("navds-dialog__footer", className)}
+        className={cl("aksel-dialog__footer", className)}
       >
         {children}
       </div>

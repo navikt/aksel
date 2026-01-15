@@ -1,17 +1,15 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 
 export const Divider = forwardRef<
   HTMLHRElement,
   React.HTMLAttributes<HTMLHRElement>
 >(({ className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <hr
       {...rest}
       ref={ref}
-      className={cn("navds-dropdown__divider", className)}
+      className={cl("aksel-dropdown__divider", className)}
     />
   );
 });

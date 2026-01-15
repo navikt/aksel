@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { DropdownContext } from "./context";
 
@@ -16,7 +16,6 @@ export const DropdownToggle = forwardRef<
   DropdownToggleProps
 >(({ className, onClick, ...rest }, ref) => {
   const context = useContext(DropdownContext);
-  const { cn } = useRenameCSS();
 
   if (!context) {
     console.warn("Dropdown.Toggle has to be wrapped in <Dropdown />");
@@ -44,7 +43,7 @@ export const DropdownToggle = forwardRef<
       }}
       onClick={composeEventHandlers(onClick, handleClick)}
       aria-expanded={isOpen}
-      className={cn("navds-dropdown__toggle", className)}
+      className={cl("aksel-dropdown__toggle", className)}
     />
   );
 });

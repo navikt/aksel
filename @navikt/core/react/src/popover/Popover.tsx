@@ -11,8 +11,8 @@ import {
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
-import { useRenameCSS } from "../theme/Theme";
 import { omit } from "../util";
+import { cl } from "../util/className";
 import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
@@ -118,8 +118,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     const isInModal = useModalContext(false) !== undefined;
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
 
@@ -171,8 +169,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         <div
           ref={floatingRef}
           {...omit(restProps, ["arrow"])}
-          className={cn("navds-popover", className, {
-            "navds-popover--hidden": !open || !anchorEl,
+          className={cl("aksel-popover", className, {
+            "aksel-popover--hidden": !open || !anchorEl,
           })}
           style={{ ...restProps.style, ...floatingStyles }}
           data-placement={flPlacement}

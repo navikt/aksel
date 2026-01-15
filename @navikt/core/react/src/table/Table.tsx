@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import Body from "./Body";
 import ColumnHeader from "./ColumnHeader";
 import DataCell from "./DataCell";
@@ -95,15 +95,14 @@ export const Table = forwardRef(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     return (
       <TableContext.Provider value={{ onSortChange, sort }}>
         <table
           {...rest}
           ref={ref}
-          className={cn("navds-table", `navds-table--${size}`, className, {
-            "navds-table--zebra-stripes": zebraStripes,
-            "navds-table--sticky-header": stickyHeader,
+          className={cl("aksel-table", `aksel-table--${size}`, className, {
+            "aksel-table--zebra-stripes": zebraStripes,
+            "aksel-table--sticky-header": stickyHeader,
           })}
         />
       </TableContext.Provider>

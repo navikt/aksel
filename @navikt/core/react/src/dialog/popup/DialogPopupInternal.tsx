@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { BoxNew, type BoxNewProps } from "../../layout/box";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../util/focus-guards/FocusGuards";
 import { useMergeRefs } from "../../util/hooks";
@@ -98,7 +98,6 @@ const DialogPopupInternal = forwardRef<
     },
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
     const {
       mounted,
       popupRef,
@@ -208,7 +207,7 @@ const DialogPopupInternal = forwardRef<
               id={id ?? popupId}
               {...restProps}
               ref={mergedRefs}
-              className={cn("navds-dialog__popup", className)}
+              className={cl("aksel-dialog__popup", className)}
               role={role}
               aria-modal="true"
               {...createTransitionStatusAttribute(transitionStatus)}

@@ -1,5 +1,5 @@
 import React, { createContext, forwardRef, useContext, useState } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { Fieldset, FieldsetProps } from "../fieldset";
 import { FieldsetContext } from "../fieldset/context";
 
@@ -59,7 +59,6 @@ export const CheckboxGroup = forwardRef<
     { value, defaultValue, onChange = () => {}, children, className, ...rest },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const fieldset = useContext(FieldsetContext);
 
     const [state, setState] = useState<any[]>(defaultValue ?? []);
@@ -78,10 +77,10 @@ export const CheckboxGroup = forwardRef<
       <Fieldset
         {...rest}
         ref={ref}
-        className={cn(
+        className={cl(
           className,
-          "navds-checkbox-group",
-          `navds-checkbox-group--${rest.size ?? fieldset?.size ?? "medium"}`,
+          "aksel-checkbox-group",
+          `aksel-checkbox-group--${rest.size ?? fieldset?.size ?? "medium"}`,
         )}
         nativeReadOnly={false}
       >
@@ -92,7 +91,7 @@ export const CheckboxGroup = forwardRef<
             toggleValue,
           }}
         >
-          <div className={cn("navds-checkboxes")}>{children}</div>
+          <div className="aksel-checkboxes">{children}</div>
         </CheckboxGroupContext.Provider>
       </Fieldset>
     );

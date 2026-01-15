@@ -1,6 +1,5 @@
 import React from "react";
 import { Chips } from "../../../chips";
-import { useRenameCSS } from "../../../theme/Theme";
 import { useInputContext } from "../Input/Input.context";
 import { ComboboxOption } from "../types";
 import { useSelectedOptionsContext } from "./selectedOptionsContext";
@@ -12,14 +11,12 @@ interface SelectedOptionsProps {
 }
 
 const Option = ({ option }: { option: ComboboxOption }) => {
-  const { cn } = useRenameCSS();
-
   const { isMultiSelect, removeSelectedOption } = useSelectedOptionsContext();
   const { focusInput, readOnly, inputProps } = useInputContext();
 
   if (!isMultiSelect) {
     return (
-      <div className={cn("navds-combobox__selected-options--no-bg")}>
+      <div className="aksel-combobox__selected-options--no-bg">
         {option.label}
       </div>
     );
@@ -51,12 +48,11 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
   size,
   children,
 }) => {
-  const { cn } = useRenameCSS();
   const { value } = useInputContext();
   const { isMultiSelect } = useSelectedOptionsContext();
   return (
     <Chips
-      className={cn("navds-combobox__selected-options")}
+      className="aksel-combobox__selected-options"
       size={size}
       data-type={isMultiSelect ? "multiple" : "single"}
     >

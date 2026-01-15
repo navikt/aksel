@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
+import { cl } from "../../util/className";
 import debounce from "../../util/debounce";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import type { TextareaProps } from "./Textarea";
@@ -20,7 +20,6 @@ const TextareaCounter = ({
   size,
   i18n,
 }: Props) => {
-  const { cn } = useRenameCSS();
   const translate = useI18n("Textarea", {
     charsLeft: i18n?.counterLeft ? `{chars} ${i18n.counterLeft}` : undefined,
     charsTooMany: i18n?.counterTooMuch
@@ -44,22 +43,22 @@ const TextareaCounter = ({
 
   return (
     <>
-      <span id={maxLengthId} className={cn("navds-sr-only")}>
+      <span id={maxLengthId} className="aksel-sr-only">
         {translate("maxLength", { maxLength })}
       </span>
 
       {difference < 20 && (
         <span
           role="status"
-          className={cn("navds-textarea__sr-counter navds-sr-only")}
+          className="aksel-textarea__sr-counter aksel-sr-only"
         >
           {getCounterText(debouncedDiff, translate)}
         </span>
       )}
 
       <BodyShort
-        className={cn("navds-textarea__counter", {
-          "navds-textarea__counter--error": difference < 0,
+        className={cl("aksel-textarea__counter", {
+          "aksel-textarea__counter--error": difference < 0,
         })}
         size={size}
       >

@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS } from "../../theme/Theme";
 import { OverridableComponent, omit } from "../../util";
+import { cl } from "../../util/className";
 import BasePrimitive, {
   PRIMITIVE_PROPS,
   PrimitiveProps,
@@ -77,8 +77,6 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const { cn } = useRenameCSS();
-
       const styles: React.CSSProperties = {
         ...style,
         "--__axc-hgrid-align": align,
@@ -93,9 +91,9 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
           <Comp
             {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
-            className={cn("navds-hgrid", className, {
-              "navds-hgrid-gap": gap,
-              "navds-hgrid-align": align,
+            className={cl("aksel-hgrid", className, {
+              "aksel-hgrid-gap": gap,
+              "aksel-hgrid-align": align,
             })}
             style={styles}
           >

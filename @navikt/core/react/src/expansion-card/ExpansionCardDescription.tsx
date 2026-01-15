@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { BodyLong } from "../typography";
+import { cl } from "../util/className";
 import { ExpansionCardContext } from "./context";
 
 export interface ExpansionCardDescriptionProps
@@ -12,7 +12,6 @@ export const ExpansionCardDescription = forwardRef<
   HTMLParagraphElement,
   ExpansionCardDescriptionProps
 >(({ className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
   const panelContext = useContext(ExpansionCardContext);
 
   if (panelContext === null) {
@@ -27,7 +26,7 @@ export const ExpansionCardDescription = forwardRef<
       {...rest}
       as="p"
       ref={ref}
-      className={cn("navds-link-panel__description", className)}
+      className={cl("aksel-link-panel__description", className)}
       size={panelContext.size}
     />
   );

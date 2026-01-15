@@ -1,8 +1,8 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { BodyLong, HeadingProps } from "../typography";
+import { cl } from "../util/className";
 import Bubble, { type ChatBubbleProps } from "./Bubble";
 
 export const VARIANTS = ["subtle", "info", "neutral"] as const;
@@ -107,33 +107,27 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
     }: ChatProps,
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <div
         ref={ref}
-        className={cn(
-          "navds-chat",
+        className={cl(
+          "aksel-chat",
           className,
-          `navds-chat--${position}`,
-          `navds-chat--top-text-${toptextPosition ?? position}`,
-          `navds-chat--${size}`,
-          `navds-chat--${variant}`,
+          `aksel-chat--${position}`,
+          `aksel-chat--top-text-${toptextPosition ?? position}`,
+          `aksel-chat--${size}`,
+          `aksel-chat--${variant}`,
         )}
         data-color={color ?? variantToColor(variant)}
         {...rest}
         data-variant={variant}
       >
         {avatar && (
-          <div className={cn("navds-chat__avatar")} aria-hidden>
+          <div className="aksel-chat__avatar" aria-hidden>
             {avatar}
           </div>
         )}
-        <BodyLong
-          as="div"
-          size={size}
-          className={cn("navds-chat__bubble-wrapper")}
-        >
+        <BodyLong as="div" size={size} className="aksel-chat__bubble-wrapper">
           {React.Children.map(children, (child, i) => {
             if (!React.isValidElement<ChatBubbleProps>(child)) {
               return null;

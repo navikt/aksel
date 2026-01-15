@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 
 export type HeaderProps = React.HTMLAttributes<HTMLTableSectionElement>;
 
@@ -8,12 +8,11 @@ export type HeaderType = React.ForwardRefExoticComponent<
 >;
 
 export const Header: HeaderType = forwardRef(({ className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
   return (
     <thead
       {...rest}
       ref={ref}
-      className={cn("navds-table__header", className)}
+      className={cl("aksel-table__header", className)}
     />
   );
 });

@@ -5,9 +5,9 @@ import React, {
   useState,
 } from "react";
 import { Loader } from "../../loader";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
+import { cl } from "../../util/className";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 
@@ -64,8 +64,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       ...rest
     } = props;
 
-    const { cn } = useRenameCSS();
-
     const [_checked, setChecked] = useState(
       defaultChecked ?? checkedProp ?? false,
     );
@@ -78,16 +76,16 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
 
     return (
       <div
-        className={cn(
-          "navds-switch",
+        className={cl(
+          "aksel-switch",
           props.className,
-          `navds-switch--${size}`,
-          `navds-switch--${position}`,
+          `aksel-switch--${size}`,
+          `aksel-switch--${position}`,
           {
-            "navds-switch--loading": loading,
-            "navds-switch--disabled": inputProps.disabled ?? loading,
-            "navds-switch--readonly": readOnly,
-            "navds-switch--standalone": hideLabel,
+            "aksel-switch--loading": loading,
+            "aksel-switch--disabled": inputProps.disabled ?? loading,
+            "aksel-switch--readonly": readOnly,
+            "aksel-switch--standalone": hideLabel,
           },
         )}
       >
@@ -113,28 +111,21 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             }
             props.onClick?.(event);
           }}
-          className={cn(className, "navds-switch__input")}
+          className={cl(className, "aksel-switch__input")}
         />
-        <span className={cn("navds-switch__track")}>
-          <span className={cn("navds-switch__thumb")}>
+        <span className="aksel-switch__track">
+          <span className="aksel-switch__thumb">
             <SwitchIcon size={size} checked={checked} loading={loading} />
           </span>
         </span>
-        <label
-          htmlFor={inputProps.id}
-          className={cn("navds-switch__label-wrapper")}
-        >
+        <label htmlFor={inputProps.id} className="aksel-switch__label-wrapper">
           <span
-            className={cn("navds-switch__content", {
-              "navds-sr-only": hideLabel,
-              "navds-switch--with-description": description && !hideLabel,
+            className={cl("aksel-switch__content", {
+              "aksel-sr-only": hideLabel,
+              "aksel-switch--with-description": description && !hideLabel,
             })}
           >
-            <BodyShort
-              as="span"
-              size={size}
-              className={cn("navds-switch__label")}
-            >
+            <BodyShort as="span" size={size} className="aksel-switch__label">
               {readOnly && <ReadOnlyIconWithTitle />}
               {children}
             </BodyShort>
@@ -142,8 +133,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
               <BodyShort
                 size={size}
                 as="span"
-                className={cn(
-                  "navds-form-field__subdescription navds-switch__description",
+                className={cl(
+                  "aksel-form-field__subdescription aksel-switch__description",
                 )}
               >
                 {description}

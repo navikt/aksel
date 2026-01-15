@@ -1,7 +1,7 @@
 import React, { MouseEvent, forwardRef } from "react";
-import { useRenameCSS } from "../../../../theme/Theme";
 import { BodyLong, BodyShort, ErrorMessage } from "../../../../typography";
 import { OverridableComponent } from "../../../../util";
+import { cl } from "../../../../util/className";
 import { useI18n } from "../../../../util/i18n/i18n.hooks";
 import { ComponentTranslation } from "../../../../util/i18n/i18n.types";
 import { useFileUploadTranslation } from "../../FileUpload.context";
@@ -81,7 +81,6 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
       }: FileUploadItemProps,
       ref,
     ) => {
-      const { cn } = useRenameCSS();
       const context = useFileUploadTranslation(false);
       const translate = useI18n(
         "FileUpload",
@@ -105,18 +104,18 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
         <Component
           ref={ref}
           {...rest}
-          className={cn("navds-file-item", className, {
-            "navds-file-item--error": showError,
+          className={cl("aksel-file-item", className, {
+            "aksel-file-item--error": showError,
           })}
         >
-          <div className={cn("navds-file-item__inner")}>
-            <BodyLong as="div" className={cn("navds-file-item__file-info")}>
+          <div className="aksel-file-item__inner">
+            <BodyLong as="div" className="aksel-file-item__file-info">
               <ItemHeader file={file} href={href} onClick={onFileClick} />
               <BodyShort as="div" size="small">
                 {getStatusText()}
               </BodyShort>
               <div
-                className={cn("navds-file-item__error")}
+                className="aksel-file-item__error"
                 aria-relevant="additions removals"
                 aria-live="polite"
               >

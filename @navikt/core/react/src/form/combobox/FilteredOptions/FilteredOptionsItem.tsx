@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckmarkIcon } from "@navikt/aksel-icons";
-import { useRenameCSS } from "../../../theme/Theme";
 import { BodyShort } from "../../../typography";
+import { cl } from "../../../util/className";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList } from "../combobox-utils";
@@ -27,8 +27,6 @@ const useTextHighlight = (text: string, searchTerm: string) => {
 };
 
 const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
-  const { cn } = useRenameCSS();
-
   const {
     inputProps: { id },
     size,
@@ -52,9 +50,9 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
 
   return (
     <li
-      className={cn("navds-combobox__list-item", {
-        "navds-combobox__list-item--focus": isActive,
-        "navds-combobox__list-item--selected": isInList(
+      className={cl("aksel-combobox__list-item", {
+        "aksel-combobox__list-item--focus": isActive,
+        "aksel-combobox__list-item--selected": isInList(
           option.value,
           selectedOptions,
         ),

@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { Label } from "../typography";
 import { useId } from "../util";
+import { cl } from "../util/className";
 import {
   ToggleGroupDescendantsProvider,
   ToggleGroupProvider,
@@ -54,7 +54,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const descendants = useToggleGroupDescendants();
 
     const toggleGroupContext = useToggleGroup({
@@ -85,8 +84,8 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       <ToggleGroupDescendantsProvider value={descendants}>
         <ToggleGroupProvider {...context}>
           <div
-            className={cn("navds-toggle-group__wrapper", className, {
-              "navds-toggle-group__wrapper--fill": fill,
+            className={cl("aksel-toggle-group__wrapper", className, {
+              "aksel-toggle-group__wrapper--fill": fill,
             })}
             data-color={color ?? variantToColor(variant)}
           >
@@ -94,7 +93,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               <Label
                 as="div"
                 size={size}
-                className={cn("navds-toggle-group__label")}
+                className="aksel-toggle-group__label"
                 id={labelId}
               >
                 {label}
@@ -104,9 +103,9 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               aria-labelledby={label ? labelId : undefined}
               {...rest}
               ref={ref}
-              className={cn(
-                "navds-toggle-group",
-                `navds-toggle-group--${size}`,
+              className={cl(
+                "aksel-toggle-group",
+                `aksel-toggle-group--${size}`,
               )}
               role="radiogroup"
             >

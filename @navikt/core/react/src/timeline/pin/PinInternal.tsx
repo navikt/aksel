@@ -13,7 +13,6 @@ import {
 } from "@floating-ui/react";
 import { format } from "date-fns";
 import React, { forwardRef, useState } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { useTimelineContext } from "../hooks/useTimelineContext";
@@ -33,7 +32,6 @@ export interface TimelinePinProps
 
 export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
   ({ date, children, ...rest }, ref) => {
-    const { cn } = useRenameCSS();
     const { startDate, endDate, direction } = useTimelineContext();
     const [open, setOpen] = useState(false);
 
@@ -81,13 +79,13 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
     return (
       <>
         <div
-          className={cn("navds-timeline__pin-wrapper")}
+          className="aksel-timeline__pin-wrapper"
           style={{ [direction]: `${position(date, startDate, endDate)}%` }}
         >
           <button
             {...rest}
             ref={mergedRef}
-            className={cn("navds-timeline__pin-button")}
+            className="aksel-timeline__pin-button"
             aria-label={label}
             type="button"
             aria-expanded={children ? open : undefined}
@@ -111,7 +109,7 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
             returnFocus={false}
           >
             <div
-              className={cn("navds-timeline__popover")}
+              className="aksel-timeline__popover"
               data-placement={placement}
               ref={refs.setFloating}
               role="dialog"

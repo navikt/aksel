@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography/BodyShort";
+import { cl } from "../../util/className";
 import { useToggleGroupContext } from "../ToggleGroup.context";
 import { useToggleItem } from "./useToggleItem";
 
@@ -62,7 +62,6 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
     },
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
     const itemCtx = useToggleItem(
       { value, onClick, onFocus, disabled: false, onKeyDown },
       forwardedRef,
@@ -73,7 +72,7 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
       <button
         {...rest}
         ref={itemCtx.ref}
-        className={cn("navds-toggle-group__button", className)}
+        className={cl("aksel-toggle-group__button", className)}
         type="button"
         role="radio"
         aria-checked={itemCtx.isSelected}
@@ -85,7 +84,7 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
       >
         <BodyShort
           as="span"
-          className={cn("navds-toggle-group__button-inner")}
+          className="aksel-toggle-group__button-inner"
           size={ctx?.size}
         >
           {children ?? (

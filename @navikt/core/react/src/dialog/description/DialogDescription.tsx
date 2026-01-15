@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
+import { cl } from "../../util/className";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
@@ -23,14 +23,13 @@ const DialogDescription = forwardRef<
   HTMLParagraphElement,
   DialogDescriptionProps
 >(({ className, children, ...restProps }, forwardedRef) => {
-  const { cn } = useRenameCSS();
   const { size } = useDialogContext();
 
   return (
     <BodyShort
       {...restProps}
       ref={forwardedRef}
-      className={cn("navds-dialog__description", className)}
+      className={cl("aksel-dialog__description", className)}
       size={size}
       data-color="neutral"
       textColor="subtle"

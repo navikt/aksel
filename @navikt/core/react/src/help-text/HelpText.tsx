@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps } from "../popover";
-import { useRenameCSS } from "../theme/Theme";
 import type { AkselColor } from "../types";
+import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -59,7 +59,6 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = useMergeRefs(buttonRef, ref);
     const [open, setOpen] = useState(false);
@@ -69,14 +68,14 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
 
     return (
       <div
-        className={cn("navds-help-text", wrapperClassName)}
+        className={cl("aksel-help-text", wrapperClassName)}
         data-color={color}
       >
         <button
           {...rest}
           ref={mergedRef}
           onClick={composeEventHandlers(onClick, () => setOpen((x) => !x))}
-          className={cn(className, "navds-help-text__button")}
+          className={cl(className, "aksel-help-text__button")}
           type="button"
           aria-expanded={open}
           aria-label={titleWithFallback}
@@ -86,13 +85,13 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
         </button>
         <Popover
           onClose={() => setOpen(false)}
-          className={cn("navds-help-text__popover")}
+          className="aksel-help-text__popover"
           open={open}
           anchorEl={buttonRef.current}
           placement={placement}
           strategy={strategy}
         >
-          <Popover.Content className={cn("navds-body-short")}>
+          <Popover.Content className="aksel-body-short">
             {children}
           </Popover.Content>
         </Popover>

@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { forwardRef } from "react";
 import { Floating } from "../../../overlays/floating/Floating";
-import { useRenameCSS } from "../../../theme/Theme";
+import { cl } from "../../../util/className";
 import { useMergeRefs } from "../../../util/hooks";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "../SelectedOptions/SelectedOptions";
@@ -40,8 +40,6 @@ export const InputController = forwardRef<
     ...rest
   } = props;
 
-  const { cn } = useRenameCSS();
-
   const {
     focusInput,
     inputProps,
@@ -61,8 +59,8 @@ export const InputController = forwardRef<
     <Floating.Anchor asChild ref={setAnchorRef}>
       {/** biome-ignore lint/a11y/noStaticElementInteractions: Acts as wrapper list-toggle and input */}
       <div
-        className={cn("navds-combobox__wrapper-inner navds-text-field__input", {
-          "navds-combobox__wrapper-inner--virtually-unfocused":
+        className={cl("aksel-combobox__wrapper-inner aksel-text-field__input", {
+          "aksel-combobox__wrapper-inner--virtually-unfocused":
             activeDecendantId !== undefined,
         })}
         onClick={() => {

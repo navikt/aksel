@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import { useRenameCSS } from "../theme/Theme";
 import type { AkselColor } from "../types";
 import { BodyLong } from "../typography";
+import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useControllableState } from "../util/hooks/useControllableState";
 
@@ -72,7 +72,6 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
     }: ReadMoreProps,
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
       value: open,
@@ -83,11 +82,11 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
 
     return (
       <div
-        className={cn(
-          "navds-read-more",
-          `navds-read-more--${size}`,
+        className={cl(
+          "aksel-read-more",
+          `aksel-read-more--${size}`,
           className,
-          { "navds-read-more--open": _open },
+          { "aksel-read-more--open": _open },
         )}
         data-volume="low"
       >
@@ -95,15 +94,15 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           {...rest}
           ref={ref}
           type="button"
-          className={cn("navds-read-more__button", "navds-body-short", {
-            "navds-body-short--small": size === "small",
+          className={cl("aksel-read-more__button", "aksel-body-short", {
+            "aksel-body-short--small": size === "small",
           })}
           onClick={composeEventHandlers(onClick, () => _setOpen((x) => !x))}
           aria-expanded={_open}
           data-state={_open ? "open" : "closed"}
         >
           <ChevronDownIcon
-            className={cn("navds-read-more__expand-icon")}
+            className="aksel-read-more__expand-icon"
             aria-hidden
           />
           <span>{header}</span>
@@ -111,8 +110,8 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
 
         <BodyLong
           as="div"
-          className={cn("navds-read-more__content", {
-            "navds-read-more__content--closed": !_open,
+          className={cl("aksel-read-more__content", {
+            "aksel-read-more__content--closed": !_open,
           })}
           size={typoSize}
           data-state={_open ? "open" : "closed"}

@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import { useRenameCSS } from "../theme/Theme";
 import type { AkselColor } from "../types";
 import { omit } from "../util";
+import { cl } from "../util/className";
 import AccordionContent, { AccordionContentProps } from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
 import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
@@ -89,8 +89,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     { className, variant = "default", size = "medium", indent = true, ...rest },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <AccordionContext.Provider
         value={{
@@ -101,11 +99,11 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       >
         <div
           {...omit(rest, ["headingSize"])}
-          className={cn(
-            "navds-accordion",
+          className={cl(
+            "aksel-accordion",
             className,
-            `navds-accordion--${size}`,
-            { "navds-accordion--indent": indent },
+            `aksel-accordion--${size}`,
+            { "aksel-accordion--indent": indent },
           )}
           ref={ref}
         />

@@ -15,8 +15,8 @@ import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
 import { Slot } from "../slot/Slot";
-import { useRenameCSS } from "../theme/Theme";
 import { Detail } from "../typography";
+import { cl } from "../util/className";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
@@ -123,8 +123,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
       value: open,
@@ -225,9 +223,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 },
                 role: "tooltip",
                 id: ariaId,
-                className: cn(
-                  "navds-tooltip",
-                  "navds-detail navds-detail--small",
+                className: cl(
+                  "aksel-tooltip",
+                  "aksel-detail aksel-detail--small",
                   className,
                 ),
               })}
@@ -236,13 +234,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             >
               {content}
               {keys && (
-                <span className={cn("navds-tooltip__keys")} aria-hidden>
+                <span className="aksel-tooltip__keys" aria-hidden>
                   {keys.map((key) => (
-                    <Detail
-                      as="kbd"
-                      key={key}
-                      className={cn("navds-tooltip__key")}
-                    >
+                    <Detail as="kbd" key={key} className="aksel-tooltip__key">
                       {key}
                     </Detail>
                   ))}
@@ -253,7 +247,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                   ref={(node) => {
                     arrowRef.current = node;
                   }}
-                  className={cn("navds-tooltip__arrow")}
+                  className="aksel-tooltip__arrow"
                   style={{
                     left: arrowX != null ? `${arrowX}px` : "",
                     top: arrowY != null ? `${arrowY}px` : "",

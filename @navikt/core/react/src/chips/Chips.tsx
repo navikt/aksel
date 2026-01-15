@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 import RemovableChips, { ChipsRemovableProps } from "./Removable";
 import ToggleChips, { ChipsToggleProps } from "./Toggle";
@@ -60,14 +60,13 @@ interface ChipsComponent
  */
 export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
   ({ className, size = "medium", children, ...rest }, ref) => {
-    const { cn } = useRenameCSS();
     return (
       <ul
         {...rest}
         ref={ref}
-        className={cn("navds-chips", className, `navds-chips--${size}`, {
-          "navds-body-short navds-body-short--small": size === "medium",
-          "navds-detail navds-detail--small": size === "small",
+        className={cl("aksel-chips", className, `aksel-chips--${size}`, {
+          "aksel-body-short aksel-body-short--small": size === "medium",
+          "aksel-detail aksel-detail--small": size === "small",
         })}
       >
         {React.Children.map(children, (chip, index) => {

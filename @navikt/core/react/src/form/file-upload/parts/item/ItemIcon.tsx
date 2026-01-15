@@ -8,7 +8,6 @@ import {
   FileTextIcon,
   FileWordIcon,
 } from "@navikt/aksel-icons";
-import { useRenameCSS } from "../../../../theme/Theme";
 import { FileItem } from "./Item.types";
 
 interface ItemIconProps {
@@ -21,9 +20,8 @@ const iconProps = {
 };
 
 function ItemIcon({ file }: ItemIconProps) {
-  const { cn } = useRenameCSS();
   return (
-    <div className={cn("navds-file-item__icon")}>
+    <div className="aksel-file-item__icon">
       <Icon file={file} />
     </div>
   );

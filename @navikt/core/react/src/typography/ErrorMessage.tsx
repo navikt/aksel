@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -52,22 +52,20 @@ export const ErrorMessage: OverridableComponent<
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <Component
         {...rest}
         ref={ref}
-        className={cn(
-          "navds-error-message",
-          "navds-label",
+        className={cl(
+          "aksel-error-message",
+          "aksel-label",
           className,
           typoClassNames({
             spacing,
           }),
           {
-            "navds-label--small": size === "small",
-            "navds-error-message--show-icon": showIcon,
+            "aksel-label--small": size === "small",
+            "aksel-error-message--show-icon": showIcon,
           },
         )}
       >
