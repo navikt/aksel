@@ -60,47 +60,26 @@ Default.args = {
 };
 
 export const Small = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search label="Søk" size="small" />
-      <Search label="Søk" variant="secondary" size="small" />
-      <Search label="Søk" variant="simple" size="small" />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search label="Søk" size="small" />
-      <Search label="Søk" variant="secondary" size="small" />
-      <Search label="Søk" variant="simple" size="small" />
-    </div>
+  <div className="colgap">
+    <Search label="Søk" size="small" />
+    <Search label="Søk" variant="secondary" size="small" />
+    <Search label="Søk" variant="simple" size="small" />
   </div>
 );
 
 export const Variants = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search label="Søk" />
-      <Search label="Søk" variant="secondary" />
-      <Search label="Søk" variant="simple" />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search label="Søk" />
-      <Search label="Søk" variant="secondary" />
-      <Search label="Søk" variant="simple" />
-    </div>
+  <div className="colgap">
+    <Search label="Søk" />
+    <Search label="Søk" variant="secondary" />
+    <Search label="Søk" variant="simple" />
   </div>
 );
 
 export const ErrorVariants = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search error="errormsg" label="Søk" />
-      <Search error="errormsg" label="Søk" variant="secondary" />
-      <Search error="errormsg" label="Søk" variant="simple" />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search error="errormsg" label="Søk" />
-      <Search error="errormsg" label="Søk" variant="secondary" />
-      <Search error="errormsg" label="Søk" variant="simple" />
-    </div>
+  <div className="colgap">
+    <Search error="errormsg" label="Søk" />
+    <Search error="errormsg" label="Søk" variant="secondary" />
+    <Search error="errormsg" label="Søk" variant="simple" />
   </div>
 );
 
@@ -120,51 +99,28 @@ export const Disabled = () => (
 );
 
 export const Placeholder = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search label="Søk" placeholder="Søk" />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search label="Søk" placeholder="Søk" />
-    </div>
+  <div className="colgap">
+    <Search label="Søk" placeholder="Søk" />
   </div>
 );
 
 export const Text = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search label="Søk" value="Søketekst" />
-      <Search label="Søk" variant="secondary" value="Søketekst" />
-      <Search label="Søk" variant="simple" value="Søketekst" />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search label="Søk" value="Søketekst" />
-      <Search label="Søk" variant="secondary" value="Søketekst" />
-      <Search label="Søk" variant="simple" value="Søketekst" />
-    </div>
+  <div className="colgap">
+    <Search label="Søk" value="Søketekst" />
+    <Search label="Søk" variant="secondary" value="Søketekst" />
+    <Search label="Søk" variant="simple" value="Søketekst" />
   </div>
 );
 
 export const WLabel = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search label="Label søk" variant="simple" hideLabel={false} />
-      <Search
-        label="Label søk"
-        description="Description søk"
-        variant="simple"
-        hideLabel={false}
-      />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search label="Label søk" variant="simple" hideLabel={false} />
-      <Search
-        label="Label søk"
-        description="Description søk"
-        variant="simple"
-        hideLabel={false}
-      />
-    </div>
+  <div className="colgap">
+    <Search label="Label søk" variant="simple" hideLabel={false} />
+    <Search
+      label="Label søk"
+      description="Description søk"
+      variant="simple"
+      hideLabel={false}
+    />
   </div>
 );
 

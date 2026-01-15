@@ -6,7 +6,7 @@ const MainCard = ({ children }: { children: ReactNode }) => (
     background="raised"
     borderColor="neutral-subtleA"
     borderWidth="1"
-    borderRadius="xlarge"
+    borderRadius="12"
     padding="space-16"
   >
     <HStack gap="space-24">{children}</HStack>

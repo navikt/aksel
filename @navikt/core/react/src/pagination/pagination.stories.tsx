@@ -161,7 +161,7 @@ export const ColorRole = () => {
 
 export const Chromatic: Story = {
   render: (props) => (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <div>
         <h2>Default</h2>
         <Default {...props} />

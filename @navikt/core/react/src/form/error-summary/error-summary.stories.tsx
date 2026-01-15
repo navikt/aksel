@@ -109,7 +109,7 @@ export const FocusDemo: Story = {
 
 export const Chromatic: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <div>
         <h2>Default</h2>
         <ErrorSummary heading="Feiloppsummering komponent">

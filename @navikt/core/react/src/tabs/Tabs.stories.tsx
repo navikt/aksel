@@ -34,7 +34,7 @@ const Panel = () => (
     <Tabs.Panel
       value="test1"
       className="panel"
-      style={{ background: "var(--a-gray-50)", height: 100 }}
+      style={{ background: "var(--ax-bg-neutral-soft)", height: 100 }}
     >
       Innholdspanel for Skap-tab
     </Tabs.Panel>
@@ -42,7 +42,7 @@ const Panel = () => (
       value="test2"
       className="panel"
       style={{
-        background: "var(--a-green-50)",
+        background: "var(--ax-bg-success-soft)",
         height: 100,
       }}
     >
@@ -51,7 +51,7 @@ const Panel = () => (
     <Tabs.Panel
       value="test3"
       className="panel"
-      style={{ background: "var(--a-red-50)", height: 100 }}
+      style={{ background: "var(--ax-bg-danger-soft)", height: 100 }}
     >
       Innholdspanel for Fryser-tab
     </Tabs.Panel>
@@ -135,7 +135,7 @@ export const Controlled = () => {
 };
 
 export const IconPosition = () => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Tabs defaultValue="test2" size="small">
       <Tabs.List>
         <Tabs.Tab value="test1" icon={<MugIcon aria-hidden />} label="Skap" />
@@ -172,7 +172,7 @@ export const IconPosition = () => (
 );
 
 export const Icon = () => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Tabs defaultValue="test2">
       <Tabs.List style={{ margin: "0 auto" }}>
         <Tabs.Tab value="test1" icon={<MugIcon title="Skap" />} />

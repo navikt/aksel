@@ -94,9 +94,9 @@ export const WithPlaceholder: StoryFunction = () => {
     onChange: console.log,
   };
   return (
-    <VStack gap="8" align="center">
+    <VStack gap="space-32" align="center">
       <Alert variant="warning" style={{ width: "70ch" }}>
-        <VStack gap="4">
+        <VStack gap="space-16">
           <BodyLong>
             {`We don't endorse placeholders, but they shouldn't break either!`}
           </BodyLong>
@@ -492,7 +492,7 @@ export const Disabled: StoryFn = () => {
   const selectedOptionsMultiple = ["napoleonskake", "donut"];
   const selectedOptionsSingle = ["pushups"];
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <UNSAFE_Combobox
         options={options}
         label="Hva er dine favorittfrukter?"
@@ -516,7 +516,7 @@ export const Readonly: StoryFn = () => {
   const selectedOptionsMultiple = ["napoleonskake", "donut"];
   const selectedOptionsSingle = ["pushups"];
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <UNSAFE_Combobox
         options={options}
         label="Hva er dine favorittfrukter?"
@@ -542,7 +542,7 @@ const H2 = (props: { children: string; style?: React.CSSProperties }) => (
 
 const ChromaticRender = ({ children }: { children?: React.ReactNode }) => {
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <H2>MultiSelect</H2>
       <MultiSelect />
       <H2>ComboboxWithNoHits</H2>

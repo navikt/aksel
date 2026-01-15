@@ -30,9 +30,13 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block width="text" gutters>
-        <VStack as="main" gap="8" data-aksel-template="form-intropage-v4">
-          <VStack gap="3">
-            <Bleed asChild marginInline={{ lg: "32" }}>
+        <VStack
+          as="main"
+          gap="space-32"
+          data-aksel-template="form-intropage-v4"
+        >
+          <VStack gap="space-12">
+            <Bleed asChild marginInline={{ lg: "space-128" }}>
               <Box
                 width={{ xs: "64px", lg: "96px" }}
                 height={{ xs: "64px", lg: "96px" }}
@@ -42,7 +46,8 @@ function Example() {
                 <ApplicationPictogram />
               </Box>
             </Bleed>
-            <VStack gap="1" align="start">
+
+            <VStack gap="space-4" align="start">
               <Heading level="1" size="xlarge">
                 Søknad om [ytelse]
               </Heading>
@@ -71,53 +76,56 @@ function Example() {
             <Heading level="2" size="large" spacing>
               Før du søker
             </Heading>
-            <BodyLong spacing>
+            <BodyLong>
               Denne seksjonen brukes til å gi søkerne informasjon de vil ha stor
               nytte av før de går i gang med søknaden. Eksempler på nyttig
               informasjon:
             </BodyLong>
-            <List>
-              <List.Item>
-                Oppgaver brukeren må ha gjort før de søker.{" "}
-                <i>
-                  Du må ha meldt deg som arbeidssøker før du kan søke om
-                  dagpenger.
-                </i>
-              </List.Item>
-              <List.Item>
-                Dokumentasjon brukeren kan bli bedt om.{" "}
-                <i>
-                  Noen av opplysningene du gir underveis vil du bli bedt om å
-                  dokumentere. Du vil trenge xx og xx for å fullføre denne
-                  søknaden.
-                </i>
-              </List.Item>
-              <List.Item>
-                Automatisk lagring.{" "}
-                <i>
-                  Vi lagrer svarene dine (xx timer) mens du fyller ut, så du kan
-                  ta pauser underveis.
-                </i>
-              </List.Item>
-              <List.Item>
-                Antall steg og estimert tidsbruk.{" "}
-                <i>
-                  Det er XX steg i søknaden, og du kan regne med å bruke ca. XX
-                  minutter.
-                </i>
-              </List.Item>
-              <List.Item>
-                Søknadsfrister. <i>Husk at du må søke om xx innen xx dager.</i>
-              </List.Item>
-              <List.Item>
-                Saksbehandlingstider og info om gyldighet, krav osv.{" "}
-                <i>
-                  Vi bruker ca. xx uker på å behandle søknaden din. Husk at du
-                  må sende meldekort xx ofte selv om du ikke har fått svar på
-                  søknaden din om dagpenger ennå.
-                </i>
-              </List.Item>
-            </List>
+            <Box marginBlock="space-16 space-28" asChild>
+              <List>
+                <List.Item>
+                  Oppgaver brukeren må ha gjort før de søker.{" "}
+                  <i>
+                    Du må ha meldt deg som arbeidssøker før du kan søke om
+                    dagpenger.
+                  </i>
+                </List.Item>
+                <List.Item>
+                  Dokumentasjon brukeren kan bli bedt om.{" "}
+                  <i>
+                    Noen av opplysningene du gir underveis vil du bli bedt om å
+                    dokumentere. Du vil trenge xx og xx for å fullføre denne
+                    søknaden.
+                  </i>
+                </List.Item>
+                <List.Item>
+                  Automatisk lagring.{" "}
+                  <i>
+                    Vi lagrer svarene dine (xx timer) mens du fyller ut, så du
+                    kan ta pauser underveis.
+                  </i>
+                </List.Item>
+                <List.Item>
+                  Antall steg og estimert tidsbruk.{" "}
+                  <i>
+                    Det er XX steg i søknaden, og du kan regne med å bruke ca.
+                    XX minutter.
+                  </i>
+                </List.Item>
+                <List.Item>
+                  Søknadsfrister.{" "}
+                  <i>Husk at du må søke om xx innen xx dager.</i>
+                </List.Item>
+                <List.Item>
+                  Saksbehandlingstider og info om gyldighet, krav osv.{" "}
+                  <i>
+                    Vi bruker ca. xx uker på å behandle søknaden din. Husk at du
+                    må sende meldekort xx ofte selv om du ikke har fått svar på
+                    søknaden din om dagpenger ennå.
+                  </i>
+                </List.Item>
+              </List>
+            </Box>
             <BodyLong>
               For annen, utfyllende informasjon om søknaden bør du lenke direkte
               til søknadskapittelet i produktsiden, som{" "}
@@ -183,7 +191,7 @@ function Example() {
                 Les mer om viktigheten av å gi riktige opplysninger.
               </Link>
             </BodyLong>
-            <Box paddingBlock="4 8">
+            <Box paddingBlock="space-16 space-32">
               <Checkbox>
                 Jeg bekrefter at jeg vil svare så riktig som jeg kan.
               </Checkbox>

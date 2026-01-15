@@ -7,7 +7,7 @@ const ActivityCard = ({ children }: { children: ReactNode }) => {
       className="activity-card"
       background="raised"
       borderColor="neutral-subtleA"
-      borderRadius="xlarge"
+      borderRadius="12"
       borderWidth="1"
       paddingInline="space-16"
       paddingBlock="space-12"

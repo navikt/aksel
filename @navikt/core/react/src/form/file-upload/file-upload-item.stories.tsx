@@ -34,7 +34,7 @@ const fileDocx = new File(["abc"], "file.docx");
 export const Icons: StoryFn = () => {
   return (
     <FileUpload>
-      <VStack gap="5" as="ul">
+      <VStack gap="space-20" as="ul">
         <FileUpload.Item file={fileTxt} as="li" />
         <FileUpload.Item file={filePng} as="li" />
         <FileUpload.Item file={fileWebp} as="li" />
@@ -152,7 +152,7 @@ export const CustomButton: StoryFn = () => {
 
 export const Download: StoryFn = () => {
   return (
-    <VStack gap="5">
+    <VStack gap="space-20">
       <FileUpload.Item
         file={{
           name: "with onClick.txt",
@@ -180,7 +180,7 @@ export const Download: StoryFn = () => {
 
 export const Description: StoryFn = () => {
   return (
-    <VStack gap="5">
+    <VStack gap="space-20">
       <FileUpload.Item file={fileTxt} description="Mottat 11.11.11" />
       <FileUpload.Item
         file={fileTxt}

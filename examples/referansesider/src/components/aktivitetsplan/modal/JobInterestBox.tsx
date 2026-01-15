@@ -24,11 +24,11 @@ const JobInterestBox = ({
     <Box.New
       borderColor="neutral-subtleA"
       borderWidth="1"
-      borderRadius="xlarge"
+      borderRadius="12"
       padding="space-12"
       background="neutral-softA"
     >
-      <VStack gap="4">
+      <VStack gap="space-16">
         <Heading size="small" as="h2">
           Er du interessert i denne stillingen?
         </Heading>

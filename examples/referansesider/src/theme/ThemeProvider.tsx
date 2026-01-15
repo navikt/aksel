@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Theme } from "@navikt/ds-react/Theme";
-import * as tokens from "@navikt/ds-tokens/darkside-js";
+import * as tokens from "@navikt/ds-tokens/js";
 import { ThemeProviderContext, type Theme as ThemeType } from "./ThemeContext";
 
 const ScDiv = styled.div`
