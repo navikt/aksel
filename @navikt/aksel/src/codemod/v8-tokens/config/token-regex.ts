@@ -66,7 +66,7 @@ function getTokenRegex(
 
 function createCompositeTwRegex(tokens: string[]) {
   return new RegExp(
-    `(?<!:)(\\s|^)?(${tokens.join("|")}|${tokens
+    `(?<!-)(?<!:)(\\s|^)?(${tokens.join("|")}|${tokens
       .map((t) => `:${t}`)
       .join("|")})(?=\\s|$|[^\\w-])`,
     "gm",
