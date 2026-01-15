@@ -433,37 +433,43 @@ const colors = {
     ref: "",
     raw: "rgba(2, 5, 9, 0.87)",
     replacement: "",
-    comment: "No replacement available.",
+    comment:
+      "No replacement available. Use neutral-1000 of you don't need opacity.",
   },
   "grayalpha-800": {
     ref: "",
     raw: "rgba(3, 11, 22, 0.75)",
     replacement: "",
-    comment: "No replacement available.",
+    comment:
+      "No replacement available. Use neutral-900 of you don't need opacity.",
   },
   "grayalpha-700": {
     ref: "",
     raw: "rgba(1, 11, 24, 0.68)",
     replacement: "",
-    comment: "No replacement available.",
+    comment:
+      "No replacement available. Use neutral-800 of you don't need opacity.",
   },
   "grayalpha-600": {
     ref: "",
     raw: "rgba(2, 15, 34, 0.6)",
     replacement: "",
-    comment: "No replacement available.",
+    comment:
+      "No replacement available. Use neutral-700 of you don't need opacity.",
   },
   "grayalpha-500": {
     ref: "",
     raw: "rgba(2, 20, 49, 0.49)",
     replacement: "",
-    comment: "No replacement available.",
+    comment:
+      "No replacement available. Use neutral-600 of you don't need opacity.",
   },
   "grayalpha-400": {
     ref: "",
     raw: "rgba(5, 23, 51, 0.34)",
     replacement: "",
-    comment: "No replacement available.",
+    comment:
+      "No replacement available. Use neutral-500 of you don't need opacity.",
   },
   "grayalpha-300": {
     ref: "",
