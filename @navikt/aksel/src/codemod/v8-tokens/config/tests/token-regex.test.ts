@@ -16,6 +16,20 @@ describe("createCompositeTwRegex", () => {
     expect('class="text-blue"').toMatch(regex);
   });
 
+  test("should ignore a regex that matches token with matching name to tailwind", () => {
+    const regex = createCompositeTwRegex([
+      "shadow-focus",
+      "shadow-focus-inverted",
+    ]);
+
+    expect(regex).toBeInstanceOf(RegExp);
+
+    expect("var(--a-shadow-focus)").not.toMatch(regex);
+    expect("var(--shadow-focus-inverted)").not.toMatch(regex);
+
+    expect("var(blue, var(--a-shadow-focus))").not.toMatch(regex);
+  });
+
   test("should match tokens with the colon prefix format", () => {
     const regex = createCompositeTwRegex(["text-red", "text-blue"]);
 
