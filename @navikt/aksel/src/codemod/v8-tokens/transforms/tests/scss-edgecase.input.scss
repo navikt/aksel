@@ -1,0 +1,73 @@
+@use '../../../scss/variables';
+
+.legend {
+  display: block;
+  font-size: var(--ax-font-size-large);
+  font-weight: var(--ax-font-weight-bold);
+  letter-spacing: 0;
+  line-height: var(--ax-font-line-height-large);
+  margin: 0;
+  margin-bottom: var(--ax-space-8);
+}
+
+.description {
+  padding-bottom: var(--ax-space-16);
+}
+
+.select {
+  &Wrapper {
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--ax-space-16);
+
+    label {
+      font-size: var(--ax-font-size-medium);
+    }
+  }
+
+  &Aar {
+    flex-basis: variables.$input-width-xxs;
+    flex-shrink: 0;
+  }
+
+  &Maaned {
+    flex-basis: variables.$input-width-xs;
+    flex-shrink: 0;
+  }
+
+  &__hasError {
+    select {
+      box-shadow: 0 0 0 1px
+        var(--ac-select-error-border, var(--ax-bg-danger-strong));
+      border-color: var(--ac-select-error-border, var(--ax-bg-danger-strong));
+
+      &:focus {
+        outline: none;
+        border-color: var(
+          --ac-select-active-border,
+          var(--ax-border-accent-strong)
+        );
+        box-shadow: var(--a-shadow-focus);
+      }
+    }
+  }
+
+  &Error {
+    &Message {
+      padding-top: var(--ax-space-8);
+
+      :global {
+        .nowrap {
+          display: contents;
+        }
+      }
+    }
+  }
+}
+
+.date {
+  align-self: end;
+  padding-bottom: var(--ax-space-12);
+}
