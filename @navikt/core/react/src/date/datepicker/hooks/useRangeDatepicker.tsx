@@ -237,7 +237,7 @@ export const useRangeDatepicker = (
 
   // Initialize states
   const [month, setMonth] = useState(
-    defaultSelected ? defaultSelected?.from : defaultMonth ?? today,
+    defaultSelected?.from || defaultSelected?.to || defaultMonth || today,
   );
   const [selectedRange, setSelectedRange] = useState<DateRange | undefined>(
     defaultSelected ?? { from: undefined, to: undefined },
@@ -277,7 +277,9 @@ export const useRangeDatepicker = (
 
   const reset = () => {
     updateRange(defaultSelected ?? { from: undefined, to: undefined });
-    setMonth(defaultSelected ? defaultSelected?.from : defaultMonth ?? today);
+    setMonth(
+      defaultSelected?.from || defaultSelected?.to || defaultMonth || today,
+    );
     setValidation(
       initialValidation(
         defaultSelected ?? { from: undefined, to: undefined },

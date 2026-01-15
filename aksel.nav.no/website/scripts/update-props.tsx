@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { noCdnClient } from "../sanity/interface/client.server";
 
 updateProps();
@@ -16,13 +16,15 @@ async function updateProps() {
 
   const props = propList();
 
-  if (checkIfDuplicateExists(propList().map((x) => x._id))) {
+  if (checkIfDuplicateExists(propList().map((x: any) => x._id))) {
     throw new Error(
       "Duplicate _id found for prop-list. This should not be possible...",
     );
   }
 
-  props.forEach((x) => transactionClient.createOrReplace(x));
+  props.forEach((x) => {
+    transactionClient.createOrReplace(x);
+  });
 
   await transactionClient
     .commit()
@@ -35,7 +37,7 @@ async function updateProps() {
 
   let deletedIds: string[] = [];
   for (const prop of remoteProps) {
-    if (!props.find(({ _id }) => _id === prop._id)) {
+    if (!props.find(({ _id }: any) => _id === prop._id)) {
       transactionClient.delete(prop._id);
       deletedIds.push(prop._id);
     }
@@ -86,7 +88,7 @@ function propList() {
     ),
   );
 
-  return CoreDocs.map((prop) => {
+  return CoreDocs.map((prop: any) => {
     const _id = `${hashString(prop.displayName)}_${hashString(prop.filePath)}`;
 
     return {

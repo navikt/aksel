@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tailwind",
-  "version": "7.32.0",
+  "version": "8.0.0",
   "description": "Tailwind config based on @navikt/ds-tokens",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -10,12 +10,10 @@
   "license": "MIT",
   "files": [
     "tailwind.config.js",
-    "tailwind.config.d.ts",
-    "tailwind.darkside.config.js"
+    "tailwind.config.d.ts"
   ],
   "scripts": {
-    "build": "tsx ./src && yarn build:darkside",
-    "build:darkside": "tsx darkside.ts",
+    "build": "yarn tsx ./src/build.ts",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -24,14 +22,16 @@
     "url": "git+https://github.com/navikt/aksel.git",
     "directory": "@navikt/core/tailwind"
   },
+  "bugs": {
+    "url": "https://github.com/navikt/aksel/issues"
+  },
+  "homepage": "https://aksel.nav.no/grunnleggende/kode/tailwind/",
   "devDependencies": {
-    "@navikt/ds-tokens": "^7.32.0",
-    "color": "5.0.0",
-    "lodash": "^4.17.21",
+    "@navikt/ds-tokens": "^8.0.0",
     "tailwindcss": "^3.3.3",
     "tsx": "^4.20.6",
-    "typescript": "5.8.3",
-    "vitest": "^2.1.9"
+    "typescript": "5.9.3",
+    "vitest": "^3.2.4"
   },
   "publishConfig": {
     "access": "public",
@@ -48,16 +48,6 @@
       "require": {
         "types": "./tailwind.config.d.ts",
         "default": "./tailwind.config.js"
-      }
-    },
-    "./darkside-tw3": {
-      "import": {
-        "types": "./tailwind.config.d.ts",
-        "default": "./tailwind.darkside.config.js"
-      },
-      "require": {
-        "types": "./tailwind.config.d.ts",
-        "default": "./tailwind.darkside.config.js"
       }
     }
   }

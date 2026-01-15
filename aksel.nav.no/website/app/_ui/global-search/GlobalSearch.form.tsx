@@ -1,13 +1,18 @@
 "use client";
 
 import { XMarkIcon } from "@navikt/aksel-icons";
-import { Button, Search } from "@navikt/ds-react";
+import { Button, Dialog, Search } from "@navikt/ds-react";
+import {
+  useGlobalSearch,
+  useGlobalSearchResults,
+} from "@/app/_ui/global-search/GlobalSearch.context";
+import { useParamState } from "@/app/_ui/global-search/useParamState";
 import styles from "./GlobalSearch.module.css";
-import { useGlobalSearch } from "./GlobalSearch.provider";
 
 const GlobalSearchForm = () => {
-  const { inputRef, closeSearch, updateSearch, resetSearch } =
-    useGlobalSearch();
+  const { paramValue } = useParamState("query");
+  const { inputRef } = useGlobalSearch();
+  const { updateQuery, resetSearch } = useGlobalSearchResults();
 
   return (
     <div className={styles.searchForm}>
@@ -17,7 +22,8 @@ const GlobalSearchForm = () => {
           label="Globalt søk"
           aria-autocomplete="both"
           variant="simple"
-          onChange={updateSearch}
+          defaultValue={paramValue}
+          onChange={updateQuery}
           onClear={resetSearch}
           onKeyDown={(e) => {
             /* Avoids sideeffects when clearing Search */
@@ -36,11 +42,9 @@ const GlobalSearchForm = () => {
           placeholder="Søk gjennom hele Aksel..."
         />
       </form>
-      <Button
-        variant="tertiary-neutral"
-        onClick={closeSearch}
-        icon={<XMarkIcon title="Lukk" />}
-      />
+      <Dialog.CloseTrigger>
+        <Button variant="tertiary-neutral" icon={<XMarkIcon title="Lukk" />} />
+      </Dialog.CloseTrigger>
     </div>
   );
 };

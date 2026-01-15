@@ -1,27 +1,16 @@
 "use client";
 
-import { BodyShort, Box, Heading, Modal } from "@navikt/ds-react";
+import { BodyShort, Box, Dialog, Heading } from "@navikt/ds-react";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import styles from "./GlobalSearch.module.css";
-import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
-  const { open, closeSearch } = useGlobalSearch();
-
   return (
-    <Modal
-      open={open}
-      onClose={closeSearch}
-      placement="top"
-      onKeyDown={(e) => {
-        /* Avoids sideeffects when closing Modal */
-        if (e.key === "Escape") {
-          e.stopPropagation();
-        }
-      }}
-      aria-labelledby="aksel-search-heading"
-      closeOnBackdropClick
-      width="60rem"
+    <Dialog.Popup
+      position="center"
+      width="large"
+      withBackdrop
+      initialFocusTo={() => document.getElementById("aksel-search-input")}
     >
       <Heading level="1" size="medium" id="aksel-search-heading" visuallyHidden>
         Søk
@@ -43,7 +32,7 @@ function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
           <Kbd>Esc</Kbd> for å lukke
         </span>
       </BodyShort>
-    </Modal>
+    </Dialog.Popup>
   );
 }
 

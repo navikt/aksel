@@ -1,17 +1,19 @@
-import { useRef, useState } from "react";
+import { useId, useState } from "react";
 import { Button, Popover } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [openState, setOpenState] = useState(false);
+  const popoverId = useId();
 
   return (
     <>
       <Button
-        ref={buttonRef}
+        ref={setAnchorEl}
         onClick={() => setOpenState(!openState)}
         aria-expanded={openState}
+        aria-controls={openState ? popoverId : undefined}
       >
         Åpne popover
       </Button>
@@ -19,10 +21,10 @@ const Example = () => {
       <Popover
         open={openState}
         onClose={() => setOpenState(false)}
-        anchorEl={buttonRef.current}
+        anchorEl={anchorEl}
         offset={0}
-        arrow={false}
         placement="bottom"
+        id={popoverId}
       >
         <Popover.Content>offset = 0</Popover.Content>
       </Popover>

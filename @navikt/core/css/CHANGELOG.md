@@ -1,5 +1,125 @@
 # @navikt/ds-css
 
+## 8.0.0
+
+### Major Changes
+
+- New design with theming support - See https://aksel.nav.no/grunnleggende/endringslogg/versjon-8 for more info ([#4283](https://github.com/navikt/aksel/pull/4283))
+
+## 7.40.0
+
+## 7.39.1
+
+### Patch Changes
+
+- Modal, Dialog: Handle scroll for extreme zoom-levels better. ([#4488](https://github.com/navikt/aksel/pull/4488))
+
+## 7.39.0
+
+### Minor Changes
+
+- LocalAlert, InfoCard: Reduced default header height. ([`91f3f8a`](https://github.com/navikt/aksel/commit/91f3f8acb8749bc154a1e7dca008ce0be43e2e34))
+
+- GlobalAlert: Reduced default header height and added centered content prop. ([#4476](https://github.com/navikt/aksel/pull/4476))
+
+### Patch Changes
+
+- Dialog: Handle SR-only elements inside Dialog.Body better. Moved elements in Footer to flex-end. ([#4457](https://github.com/navikt/aksel/pull/4457))
+
+- Darkside: ExpansionCardContent typography is no longer affected by 'app-color'. ([#4460](https://github.com/navikt/aksel/pull/4460))
+
+- ReadMore: Removed focus styling for content, reverting #4116. ([#4464](https://github.com/navikt/aksel/pull/4464))
+
+## 7.38.0
+
+### Patch Changes
+
+- Dialog: Fixed z-index issue with backdrop. ([#4455](https://github.com/navikt/aksel/pull/4455))
+
+- Dialog: Now has border in light-mode. ([#4452](https://github.com/navikt/aksel/pull/4452))
+
+## 7.37.0
+
+### Minor Changes
+
+- Dialog: :tada: New component `Dialog`. ([#4262](https://github.com/navikt/aksel/pull/4262))
+
+## 7.36.0
+
+## 7.35.3
+
+### Patch Changes
+
+- Radio/Checkbox: Support print. ([#4404](https://github.com/navikt/aksel/pull/4404))
+
+## 7.35.2
+
+## 7.35.1
+
+## 7.35.0
+
+### Patch Changes
+
+- Search: Fixes edgecase where darkmode (in darkside) were used without color-scheme, making icons inverted in color. ([#4323](https://github.com/navikt/aksel/pull/4323))
+
+## 7.34.0
+
+### Minor Changes
+
+- LocalAlert: :tada: New component replacing regular `<Alert />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- GlobalAlert: :tada: New component replacing `<Alert fullWidth>`, now with built-in centering of content. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InlineMessage: :tada: New component replacing `<Alert inline />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InfoCard: :tada: New component replacing `<Alert variant="info" />`. Used for content you want to highlight. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+### Patch Changes
+
+- Tooltip: Update z-index to max int. ([#4309](https://github.com/navikt/aksel/pull/4309))
+
+## 7.33.5
+
+### Patch Changes
+
+- Darkside: Remove `display: none` on `[hidden]` since browsers have this built-in ([#4301](https://github.com/navikt/aksel/pull/4301))
+
+## 7.33.4
+
+## 7.33.3
+
+## 7.33.2
+
+## 7.33.1
+
+## 7.33.0
+
+### Minor Changes
+
+- Process: Added new prop `isTruncated` to `<Process />`. This allows you to add a connector to the start of first event and end of last event to visualize a "truncated" process. ([#4196](https://github.com/navikt/aksel/pull/4196))
+
+## 7.32.5
+
+## 7.32.4
+
+### Patch Changes
+
+- BodyShort: Line-height for `size="large"` is now 28px, adjusted from 24px. ([#4213](https://github.com/navikt/aksel/pull/4213))
+
+## 7.32.3
+
+## 7.32.2
+
+### Patch Changes
+
+- Textarea: Break spaces ([#4182](https://github.com/navikt/aksel/pull/4182))
+
+## 7.32.1
+
+### Patch Changes
+
+- Darkside: Adjustments for DatePicker on very small devices ([#4142](https://github.com/navikt/aksel/pull/4142))
+
 ## 7.32.0
 
 ### Patch Changes
@@ -936,7 +1056,6 @@
 ### Major Changes
 
 - Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
-
   - :sparkles: Støtte for header og footer
   - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
 

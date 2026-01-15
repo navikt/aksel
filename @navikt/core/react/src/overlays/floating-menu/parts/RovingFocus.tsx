@@ -1,8 +1,10 @@
 import React, { forwardRef, useCallback, useEffect, useRef } from "react";
 import { Slot } from "../../../slot/Slot";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
-import { useCallbackRef, useMergeRefs } from "../../../util/hooks";
+import { useMergeRefs } from "../../../util/hooks";
 import { DescendantsManager } from "../../../util/hooks/descendants/descendant";
+import { useEventCallback } from "../../../util/hooks/useEventCallback";
+import { ownerDocument } from "../../../util/owner";
 
 interface RovingFocusProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "tabIndex"> {
@@ -31,7 +33,7 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
     const _ref = React.useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(ref, _ref);
 
-    const handleEntryFocus = useCallbackRef(onEntryFocus);
+    const handleEntryFocus = useEventCallback(onEntryFocus);
     const isMouseFocusRef = useRef(false);
 
     useEffect(() => {
@@ -46,12 +48,11 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
       (event: React.KeyboardEvent) => {
         const loop = false;
 
-        const ownerDocument =
-          _ref?.current?.ownerDocument ?? globalThis?.document;
+        const ownerDoc = ownerDocument(_ref?.current);
 
         const idx = descendants
           .values()
-          .findIndex((x) => x.node.isSameNode(ownerDocument.activeElement));
+          .findIndex((x) => x.node.isSameNode(ownerDoc.activeElement));
 
         const nextItem = () => {
           const next = descendants.nextEnabled(idx, loop);

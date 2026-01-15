@@ -14,21 +14,21 @@
     "@navikt/ds-css": "*",
     "@navikt/ds-react": "*",
     "fuse.js": "^7.0.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.100.2",
     "@svgr/core": "^8.1.0",
-    "@types/node": "^18.15.11",
+    "@types/node": "^24.10.0",
     "@types/postcss-url": "^10.0.4",
-    "@types/react": "^19.1.13",
-    "@types/react-dom": "^19.1.9",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.0",
     "postcss": "^8.4.31",
     "postcss-url": "^10.1.3",
-    "typescript": "5.8.3",
-    "vite": "^7.0.7",
+    "typescript": "5.9.3",
+    "vite": "^7.2.4",
     "vite-plugin-singlefile": "^2.2.0",
     "vite-plugin-svgr": "^4.2.0"
   }

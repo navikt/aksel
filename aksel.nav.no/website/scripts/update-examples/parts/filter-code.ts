@@ -1,7 +1,7 @@
 import { namedTypes } from "ast-types";
-import fs from "fs";
 import jscodeshift, { ASTPath, Collection } from "jscodeshift";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 // eslint-disable-next-line import/default
 import prettier from "prettier";
 
@@ -20,6 +20,7 @@ export async function filterCode(code: string, filePath: string) {
     .substring(0, code.indexOf(FILTER_STRING))
     .split("\n")
     .filter((x) => !x.includes("examples/withDsExample"))
+    .filter((x) => !x.includes("biome-ignore"))
     .join("\n")
     .trim();
 

@@ -12,6 +12,21 @@ const ignoredStaticPaths = [
 ];
 
 export async function middleware(req: NextRequest) {
+  /*
+   * "Open in studio" links defaults to published perspective, but unpublished drafts have no
+   * published content, leading to 404-erros in presentation-mode. By stripping the query,
+   * we default to draft-mode, which is the expected behaviour when coming from the studio.
+   */
+  if (req.nextUrl.pathname.startsWith("/admin/intent/edit")) {
+    const editUrl = req.nextUrl.clone();
+    if (editUrl.searchParams.get("perspective") === "published") {
+      editUrl.searchParams.delete("perspective");
+
+      return NextResponse.redirect(editUrl);
+    }
+    return NextResponse.next();
+  }
+
   if (
     ignoredPaths.some((prefix) => req.nextUrl.pathname.startsWith(prefix)) ||
     ignoredStaticPaths.some((prefix) => req.nextUrl.pathname === prefix)
@@ -71,9 +86,8 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (fallbackfavicon file)
      * - favicon.svg (favicon file)
-     * - searchindex.json
      * - robots.txt
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|searchindex.json|robots.txt).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|robots.txt).*)",
   ],
 };

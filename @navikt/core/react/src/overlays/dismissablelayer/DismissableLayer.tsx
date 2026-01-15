@@ -1,23 +1,27 @@
 import React, {
-  CSSProperties,
   forwardRef,
+  useContext,
   useEffect,
   useRef,
   useState,
 } from "react";
 import { Slot } from "../../slot/Slot";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
-import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
+import { ownerDocument } from "../../util/owner";
 import { AsChild } from "../../util/types/AsChild";
 import {
   CustomFocusEvent,
-  CustomPointerDownEvent,
+  CustomPointerEvent,
 } from "./util/dispatchCustomEvent";
+import { getSortedLayers } from "./util/sort-layers";
 import { useEscapeKeydown } from "./util/useEscapeKeydown";
 import { useFocusOutside } from "./util/useFocusOutside";
 import { usePointerDownOutside } from "./util/usePointerDownOutside";
+import { usePointerUpOutside } from "./util/usePointerUpOutside";
 
-interface DismissableLayerBaseProps {
+interface DismissableLayerBaseProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * When `true`, hover/focus/click interactions will be disabled on elements outside
    * the `DismissableLayer`. Users will need to click twice on outside elements to
@@ -33,7 +37,19 @@ interface DismissableLayerBaseProps {
    * Event handler called when the a `pointerdown` event happens outside of the `DismissableLayer`.
    * Can be prevented.
    */
-  onPointerDownOutside?: (event: CustomPointerDownEvent) => void;
+  onPointerDownOutside?: (event: CustomPointerEvent) => void;
+  /**
+   * Event handler called when the a `pointerup` event happens outside of the `DismissableLayer`.
+   * Can be prevented.
+   */
+  onPointerUpOutside?: (event: CustomPointerEvent) => void;
+  /**
+   * Enables listening for `pointerup` outside the `DismissableLayer`.
+   * In most cases `pointerdown` is sufficient, but in some cases (like modal, drawer)
+   * we want to mimic native OS behaviour and only close on `pointerup`.
+   * @default false
+   */
+  enablePointerUpOutside?: boolean;
   /**
    * Event handler called when the focus moves outside of the `DismissableLayer`.
    * Can be prevented.
@@ -44,349 +60,431 @@ interface DismissableLayerBaseProps {
    * Specifically, when a `pointerdown` event happens outside or focus moves outside of it.
    * Can be prevented.
    */
-  onInteractOutside?: (
-    event: CustomPointerDownEvent | CustomFocusEvent,
-  ) => void;
+  onInteractOutside?: (event: CustomPointerEvent | CustomFocusEvent) => void;
   /**
    * Handler called when the `DismissableLayer` should be dismissed
    */
-  onDismiss?: () => void;
+  onDismiss?: (event: Event) => void;
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
-   * `safeZone.dismissable` is only needed when its element does not have a `tabIndex` since it will not receive focus-events.
+   * - anchor: The element that should be considered safe to interact with.
    */
   safeZone?: {
     anchor?: Element | null;
-    dismissable?: Element | null;
   };
-
-  style?: CSSProperties;
   /**
-   * Disables layer from beeing counted in context for nested `DismissableLayer`.
+   * @default true
    */
   enabled?: boolean;
 }
 
 type DismissableLayerProps = DismissableLayerBaseProps & AsChild;
 
-export const [
-  DismissableDescendantsProvider,
-  useDismissableDescendantsContext,
-  useDismissableDescendants,
-  useDismissableDescendant,
-] = createDescendantContext<
-  HTMLDivElement,
-  { disableOutsidePointerEvents: boolean; forceUpdate: () => void }
->();
+type DismissableLayerElement = React.ComponentRef<typeof DismissableLayer>;
 
-/**
- * Number of layers with `disableOutsidePointerEvents` set to `true` currently enabled.
- */
-let bodyLockCount = 0;
+const BranchedLayerContext =
+  React.createContext<DismissableLayerElement | null>(null);
+
+/* ------------------------ DismissableLayerInternal ------------------------ */
+const CONTEXT_UPDATE_EVENT = "dismissableLayer.update";
 let originalBodyPointerEvents: string;
 
+const DismissableLayerContext = React.createContext({
+  layers: new Set<DismissableLayerElement>(),
+  branchedLayers: new Map<
+    DismissableLayerElement,
+    Set<DismissableLayerElement>
+  >(),
+  layersWithOutsidePointerEventsDisabled: new Set<DismissableLayerElement>(),
+});
+
 const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
-  (props: DismissableLayerProps, ref) => {
-    const context = useDismissableDescendantsContext(false);
-
-    /**
-     * To correctly handle nested DismissableLayer,
-     * we only initialize the `Descendants`-API for the root layer to aboid resetting context
-     */
-    return context ? (
-      <DismissableLayerNode ref={ref} {...props} />
-    ) : (
-      <DismissableRoot>
-        <DismissableLayerNode ref={ref} {...props} />
-      </DismissableRoot>
-    );
-  },
-);
-
-/**
- * DismissableRoot
- *
- * Used to initialize the `Descendants`-API at the root layer.
- * All subsequent layers will use the same context.
- */
-const DismissableRoot = ({ children }: { children: React.ReactNode }) => {
-  const descendants = useDismissableDescendants();
-
-  return (
-    <DismissableDescendantsProvider value={descendants}>
-      {children}
-    </DismissableDescendantsProvider>
-  );
-};
-
-const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
   (
     {
       children,
-      asChild,
-      onEscapeKeyDown,
-      onPointerDownOutside,
-      onFocusOutside,
-      onInteractOutside,
-      onDismiss,
-      safeZone,
-      disableOutsidePointerEvents = false,
-      enabled = true,
-      ...rest
-    }: DismissableLayerProps,
-    ref,
-  ) => {
-    const [, setForce] = useState({});
-    const { register, index, descendants } = useDismissableDescendant({
       disableOutsidePointerEvents,
-      disabled: !enabled,
-      forceUpdate: () => setForce({}),
-    });
+      onDismiss,
+      onInteractOutside,
+      onEscapeKeyDown,
+      onFocusOutside,
+      onPointerDownOutside,
+      onPointerUpOutside,
+      enablePointerUpOutside = false,
+      safeZone,
+      asChild,
+      enabled = true,
+      ...restProps
+    }: DismissableLayerProps,
+    forwardedRef,
+  ) => {
+    const context = useContext(DismissableLayerContext);
+
+    const triggerPointerDownRef = useRef<boolean>(false);
+
+    const [, forceRerender] = useState({});
+    const [node, setNode] = React.useState<DismissableLayerElement | null>(
+      null,
+    );
+    const mergedRefs = useMergeRefs(forwardedRef, setNode);
+    const ownerDoc = ownerDocument(node);
+
+    /* Layer handling */
+    const layers = getSortedLayers(context.layers, context.branchedLayers);
+    const highestLayerWithOutsidePointerEventsDisabledIndex =
+      findHighestLayerIndex(
+        layers,
+        context.layersWithOutsidePointerEventsDisabled,
+      );
+    const index = node ? layers.indexOf(node) : -1;
+    const isBodyPointerEventsDisabled =
+      context.layersWithOutsidePointerEventsDisabled.size > 0;
+    const shouldEnablePointerEvents =
+      highestLayerWithOutsidePointerEventsDisabledIndex === -1 ||
+      index >= highestLayerWithOutsidePointerEventsDisabledIndex;
 
     /**
-     * `node` will be set to the ref of the component or nested component
-     * Ex: If
-     * ```
-     * <DismissableLayer asChild>
-     *   <Popover />
-     * </DismissableLayer>
-     * ```
-     * `node` will in this case be the Popover-element.
-     * We use State her and not ref since we want to trigger a rerender when the node changes.
+     * We want to prevent the Layer from closing when the trigger/anchor element or its child elements are interacted with.
+     * To achieve this, we check if the event target is the trigger/anchor or a child. If it is, we prevent default event behavior.
      */
-    const [node, setNode] = useState<HTMLDivElement | null>(null);
-
-    const mergedRefs = useMergeRefs(setNode, register, ref);
-
-    /**
-     * In some cases the `node.ownerDocument` can differ from global document.
-     * This can happend when portaling elements or using web-components
-     */
-    const ownerDocument = node?.ownerDocument ?? globalThis?.document;
-
-    const hasInteractedOutsideRef = useRef(false);
-    const hasPointerDownOutsideRef = useRef(false);
-
-    const pointerState = (() => {
-      let lastIndex = -1;
-
-      const descendantNodes = descendants.enabledValues();
-
-      descendantNodes.forEach((obj, _index) => {
-        if (obj.disableOutsidePointerEvents) {
-          lastIndex = _index;
-        }
-      });
-
-      return {
-        /**
-         * Makes sure we stop events at the highest layer with pointer events disabled.
-         * If not checked, we risk closing every layer when clicking outside the layer.
-         */
-        isPointerEventsEnabled: index >= lastIndex,
-        /**
-         * If we find a node with `disableOutsidePointerEvents` we want to disable pointer events on the body.
-         */
-        isBodyPointerEventsDisabled: bodyLockCount > 0,
-        pointerStyle: (index >= lastIndex && bodyLockCount > 0
-          ? "auto"
-          : undefined) as CSSProperties["pointerEvents"] | undefined,
-      };
-    })();
-
-    /**
-     * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
-     *
-     * To achieve this, we check if the event target is the trigger, anchor or a child. If it is, we prevent default event behavior.
-     *
-     * The `pointerDownOutside` and `focusOutside` handlers already check if the event target is within the DismissableLayer (`node`).
-     * However, since we don't add a `tabIndex` to the Popover/Tooltip, the `focusOutside` handler doesn't correctly handle focus events.
-     * Therefore, we also need to check that neither the trigger (`anchor`) nor the DismissableLayer (`dismissable`) are the event targets.
-     */
-    function handleOutsideEvent(
-      event: CustomFocusEvent | CustomPointerDownEvent,
-    ) {
-      if ((!safeZone?.anchor && !safeZone?.dismissable) || !enabled) {
+    function handleOutsideEvent(event: CustomFocusEvent | CustomPointerEvent) {
+      if (!safeZone?.anchor) {
         return;
       }
 
-      if (!event.defaultPrevented) {
-        hasInteractedOutsideRef.current = true;
-        if (event.detail.originalEvent.type === "pointerdown") {
-          hasPointerDownOutsideRef.current = true;
-        }
-      }
+      const eventType = event.detail.originalEvent.type as
+        | "pointerup"
+        | "pointerdown"
+        | "focusin";
 
       const target = event.target as HTMLElement;
 
-      /**
-       * pointerdown-events works as expected, but focus-events does not.
-       * For focus-event we need to also check `safeZone.dismissable` (the Popover/Tooltip itself) since it does not have a tabIndex.
-       */
-      if (event.detail.originalEvent.type === "pointerdown") {
-        const targetIsTrigger =
-          safeZone?.anchor?.contains(target) || target === safeZone?.anchor;
-        targetIsTrigger && event.preventDefault();
-      } else {
-        const targetIsNotTrigger =
-          target instanceof HTMLElement &&
-          ![safeZone?.anchor, safeZone?.dismissable].some(
-            (element) => element?.contains(target as Node),
-          ) &&
-          !target.contains(safeZone?.dismissable ?? null);
+      const targetIsAnchor =
+        safeZone.anchor.contains(target) || target === safeZone.anchor;
 
-        !targetIsNotTrigger && event.preventDefault();
+      if (targetIsAnchor) {
+        event.preventDefault();
       }
 
       /**
-       * In Safari, if the trigger element is inside a container with tabIndex={0}, a click on the trigger
-       * will first fire a 'pointerdownoutside' event on the trigger itself. However, it will then fire a
-       * 'focusoutside' event on the container.
-       *
-       * To handle this, we ignore any 'focusoutside' events if a 'pointerdownoutside' event has already occurred.
-       * 'pointerdownoutside' event is sufficient to indicate interaction outside the DismissableLayer.
+       * If the target is inside a custom element, event.target will be that element on pointerdown.
+       * Therefore, checking anchor.contains(target) etc. won't work in that case.
        */
       if (
-        event.detail.originalEvent.type === "focusin" &&
-        hasPointerDownOutsideRef.current
+        eventType === "pointerdown" &&
+        triggerPointerDownRef.current === true
       ) {
         event.preventDefault();
       }
-      hasPointerDownOutsideRef.current = false;
-      hasInteractedOutsideRef.current = false;
+
+      triggerPointerDownRef.current = false;
     }
 
-    const pointerDownOutside = usePointerDownOutside((event) => {
-      if (!pointerState.isPointerEventsEnabled || !enabled) {
-        return;
-      }
-
-      /**
-       * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
-       */
-      onPointerDownOutside?.(event);
-      onInteractOutside?.(event);
-
-      /**
-       * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
-       */
-      safeZone && handleOutsideEvent(event);
-
-      /**
-       * Both `onPointerDownOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
-       */
-      if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
-      }
-    }, ownerDocument);
-
-    const focusOutside = useFocusOutside((event) => {
-      if (!enabled) {
-        return;
-      }
-
-      /**
-       * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
-       */
-      onFocusOutside?.(event);
-      onInteractOutside?.(event);
-
-      /**
-       * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
-       */
-      safeZone && handleOutsideEvent(event);
-
-      /**
-       * Both `onFocusOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
-       */
-      if (!event.defaultPrevented && onDismiss) {
-        onDismiss();
-      }
-    }, ownerDocument);
-
-    useEscapeKeydown((event) => {
-      if (!enabled) {
-        return;
-      }
-      /**
-       * The deepest nested element will always be last in the descendants list.
-       * This allows us to only close the highest layer when pressing escape.
-       *
-       * In some cases a layer might still exist, but be disabled. We want to ignore these layers.
-       */
-      const isHighestLayer = index === descendants.enabledCount() - 1;
-      if (!isHighestLayer) {
-        return;
-      }
-
-      /**
-       * We call this before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
-       */
-      onEscapeKeyDown?.(event);
-      /**
-       * `onEscapeKeyDown` is able to preventDefault the event, thus stopping call for `onDismiss`.
-       * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
-       */
-      if (!event.defaultPrevented && onDismiss) {
-        event.preventDefault();
-        onDismiss();
-      }
-    }, ownerDocument);
-
-    /**
-     * If `disableOutsidePointerEvents` is true,
-     * we want to disable pointer events on the body when the first layer is opened.
-     */
-
-    // biome-ignore lint/correctness/useExhaustiveDependencies: Every time the descendants change, we want to update the body pointer events since we might have added or removed a layer.
-    useEffect(() => {
-      if (!node || !enabled || !disableOutsidePointerEvents) return;
-
-      if (bodyLockCount === 0) {
-        originalBodyPointerEvents = ownerDocument.body.style.pointerEvents;
-        ownerDocument.body.style.pointerEvents = "none";
-      }
-      bodyLockCount++;
-      return () => {
-        if (bodyLockCount === 1) {
-          ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
+    const pointerDownOutside = usePointerDownOutside(
+      (event) => {
+        if (!shouldEnablePointerEvents) {
+          return;
         }
-        bodyLockCount--;
-      };
-    }, [
-      node,
-      ownerDocument,
-      disableOutsidePointerEvents,
-      descendants,
+
+        /**
+         * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
+         */
+        onPointerDownOutside?.(event);
+        onInteractOutside?.(event);
+
+        /**
+         * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+         */
+        safeZone && handleOutsideEvent(event);
+
+        if (!event.defaultPrevented && onDismiss) {
+          onDismiss(event);
+        }
+      },
+      ownerDoc,
       enabled,
-    ]);
+    );
+
+    const pointerUpOutside = usePointerUpOutside(
+      (event) => {
+        if (!shouldEnablePointerEvents || !enablePointerUpOutside) {
+          return;
+        }
+
+        /**
+         * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+         */
+        onPointerUpOutside?.(event);
+        onInteractOutside?.(event);
+
+        /**
+         * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+         */
+        safeZone && handleOutsideEvent(event);
+
+        /**
+         * Both `onPointerUpOutside`, `onInteractOutside` and `handleOutsideEvent`
+         * are able to preventDefault the event, thus stopping call for `onDismiss`.
+         */
+        if (!event.defaultPrevented && onDismiss) {
+          onDismiss(event);
+        }
+      },
+      ownerDoc,
+      enabled,
+    );
+
+    const focusOutside = useFocusOutside(
+      (event) => {
+        /**
+         * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
+         */
+        onFocusOutside?.(event);
+        onInteractOutside?.(event);
+
+        /**
+         * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+         */
+        safeZone && handleOutsideEvent(event);
+
+        if (!event.defaultPrevented && onDismiss) {
+          onDismiss(event);
+        }
+      },
+      ownerDoc,
+      enabled,
+    );
+
+    useEscapeKeydown(
+      (event) => {
+        /**
+         * The deepest nested element will always be last in the descendants list.
+         * This allows us to only close the highest layer when pressing escape.
+         */
+        const isHighestLayer = index === context.layers.size - 1;
+        if (!isHighestLayer) {
+          return;
+        }
+
+        /**
+         * We call this before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+         */
+        onEscapeKeyDown?.(event);
+        /**
+         * `onEscapeKeyDown` is able to preventDefault the event, thus stopping call for `onDismiss`.
+         * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
+         */
+        if (!event.defaultPrevented && onDismiss) {
+          onDismiss(event);
+
+          /**
+           * Preventing after dismiss allows us to check if user prevents default on the escape event
+           * to avoid side effects on other elements after this layer has been dismissed.
+           */
+          event.preventDefault();
+        }
+      },
+      ownerDoc,
+      enabled,
+    );
+
+    useEffect(() => {
+      if (!safeZone?.anchor) {
+        return;
+      }
+
+      const handlePointerDown = () => {
+        triggerPointerDownRef.current = true;
+      };
+
+      const handlePointerEnd = () => {
+        triggerPointerDownRef.current = false;
+      };
+
+      const anchor = safeZone.anchor;
+
+      anchor.addEventListener("pointerdown", handlePointerDown, {
+        capture: true,
+      });
+      anchor.addEventListener("pointerup", handlePointerEnd);
+      anchor.addEventListener("pointerleave", handlePointerEnd);
+      anchor.addEventListener("pointercancel", handlePointerEnd);
+
+      return () => {
+        anchor.removeEventListener("pointerdown", handlePointerDown, {
+          capture: true,
+        });
+        anchor.removeEventListener("pointerup", handlePointerEnd);
+        anchor.removeEventListener("pointerleave", handlePointerEnd);
+        anchor.removeEventListener("pointercancel", handlePointerEnd);
+      };
+    }, [safeZone?.anchor]);
 
     /**
-     * To make sure pointerEvents are enabled for all parents and siblings when the layer is removed from the DOM
+     * Handles registering `layers` and `layersWithOutsidePointerEventsDisabled`.
      */
-    // biome-ignore lint/correctness/useExhaustiveDependencies: We explicitly want to run this on unmount, including every time the node updates to make sure we don't lock the application behind pointer-events: none.
     useEffect(() => {
-      return () => descendants.values().forEach((x) => x.forceUpdate());
-    }, [descendants, node]);
+      if (!node || !enabled) {
+        return;
+      }
+
+      if (disableOutsidePointerEvents) {
+        if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
+          originalBodyPointerEvents = ownerDoc.body.style.pointerEvents;
+          ownerDoc.body.style.pointerEvents = "none";
+        }
+        context.layersWithOutsidePointerEventsDisabled.add(node);
+      }
+      context.layers.add(node);
+      dispatchUpdate();
+
+      return () => {
+        if (
+          disableOutsidePointerEvents &&
+          context.layersWithOutsidePointerEventsDisabled.size === 1
+        ) {
+          ownerDoc.body.style.pointerEvents = originalBodyPointerEvents;
+        }
+      };
+    }, [node, enabled, disableOutsidePointerEvents, context, ownerDoc]);
+
+    /**
+     * We purposefully prevent combining this effect with the `disableOutsidePointerEvents` effect
+     * because a change to `disableOutsidePointerEvents` would remove this layer from the stack
+     * and add it to the end again so the layering order wouldn't be creation order.
+     * We only want them to be removed from context stacks when unmounted.
+     *
+     * We depend on `enabled` to clean up when the layer is disabled.
+     */
+    // biome-ignore lint/correctness/useExhaustiveDependencies: We need to clean up after enabled changes.
+    useEffect(() => {
+      return () => {
+        if (!node) {
+          return;
+        }
+        if (
+          context.layers.has(node) ||
+          context.layersWithOutsidePointerEventsDisabled.has(node)
+        ) {
+          context.layers.delete(node);
+          context.layersWithOutsidePointerEventsDisabled.delete(node);
+          dispatchUpdate();
+        }
+      };
+    }, [node, context, enabled]);
+
+    const parentBranchedLayer = useContext(BranchedLayerContext);
+
+    /**
+     * Handles registering and unregistering branched (nested) layers.
+     * When this layer has a parent, we register it as a child of the parent.
+     */
+    useEffect(() => {
+      if (
+        !node ||
+        !enabled ||
+        !parentBranchedLayer ||
+        node === parentBranchedLayer
+      ) {
+        return;
+      }
+
+      if (!context.branchedLayers.has(parentBranchedLayer)) {
+        context.branchedLayers.set(parentBranchedLayer, new Set());
+      }
+
+      const branchedChildren = context.branchedLayers.get(parentBranchedLayer)!;
+      branchedChildren.add(node);
+      dispatchUpdate();
+
+      return () => {
+        // Remove this node from the parent's children
+        branchedChildren.delete(node);
+
+        // If the parent has no more children, remove the parent from branchedLayers
+        if (branchedChildren.size === 0) {
+          context.branchedLayers.delete(parentBranchedLayer);
+        }
+
+        dispatchUpdate();
+      };
+    }, [node, enabled, parentBranchedLayer, context]);
+
+    /**
+     * Synchronizes layer state across all mounted `DismissableLayer` instances.
+     * All layers re-render on every context change to recalculate their position and pointer-events.
+     */
+    useEffect(() => {
+      const handleUpdate = () => forceRerender({});
+      document.addEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
+      return () =>
+        document.removeEventListener(CONTEXT_UPDATE_EVENT, handleUpdate);
+    }, []);
 
     const Comp = asChild ? Slot : "div";
 
     return (
-      <Comp
-        ref={mergedRefs}
-        {...rest}
-        onFocusCapture={focusOutside.onFocusCapture}
-        onBlurCapture={focusOutside.onBlurCapture}
-        onPointerDownCapture={pointerDownOutside.onPointerDownCapture}
-        style={{
-          pointerEvents: pointerState.pointerStyle,
-          ...rest.style,
-        }}
-      >
-        {children}
-      </Comp>
+      <BranchedLayerContext.Provider value={node}>
+        <Comp
+          {...restProps}
+          ref={mergedRefs}
+          style={{
+            pointerEvents: isBodyPointerEventsDisabled
+              ? shouldEnablePointerEvents
+                ? "auto"
+                : "none"
+              : undefined,
+            ...restProps.style,
+          }}
+          onFocusCapture={composeEventHandlers(
+            restProps.onFocusCapture,
+            focusOutside.onFocusCapture,
+          )}
+          onBlurCapture={composeEventHandlers(
+            restProps.onBlurCapture,
+            focusOutside.onBlurCapture,
+          )}
+          onPointerDownCapture={composeEventHandlers(
+            restProps.onPointerDownCapture,
+            () => {
+              pointerDownOutside.onPointerDownCapture();
+              pointerUpOutside.onPointerDownCapture();
+            },
+          )}
+          onPointerUpCapture={composeEventHandlers(
+            restProps.onPointerUpCapture,
+            pointerUpOutside.onPointerUpCapture,
+          )}
+        >
+          {children}
+        </Comp>
+      </BranchedLayerContext.Provider>
     );
   },
 );
+
+/**
+ * Dispatches a custom event to inform all `DismissableLayer` components to update.
+ */
+function dispatchUpdate() {
+  const event = new CustomEvent(CONTEXT_UPDATE_EVENT);
+  document.dispatchEvent(event);
+}
+
+/**
+ * Returns the index of the last layer that is found in the given subset.
+ * Returns -1 if no layers are found.
+ */
+function findHighestLayerIndex(
+  orderedLayers: DismissableLayerElement[],
+  layersWithOutsidePointerEventsDisabled: Set<DismissableLayerElement>,
+): number {
+  for (let i = orderedLayers.length - 1; i >= 0; i -= 1) {
+    if (layersWithOutsidePointerEventsDisabled.has(orderedLayers[i])) {
+      return i;
+    }
+  }
+
+  return -1;
+}
 
 export { DismissableLayer, type DismissableLayerProps };

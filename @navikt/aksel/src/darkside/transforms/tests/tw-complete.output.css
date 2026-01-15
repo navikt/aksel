@@ -1,8 +1,0 @@
-.test {
-  @apply bg-ax-bg-neutral-soft via-surface-transparent;
-  @apply text-ax-small font-ax-bold font-ax-font-family leading-ax-heading-small;
-  @apply shadow-small z-[3000];
-  @apply ax-md:bg-ax-bg-neutral-soft text-ax-danger-600 ax-lg:via-surface-transparent z-[3000];
-  @apply ax-md:bg-ax-bg-neutral-soft! text-ax-danger-600! ax-lg:via-surface-transparent z-[3000]!;
-  @apply group:bg-ax-danger-600;
-}

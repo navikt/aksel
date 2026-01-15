@@ -2,12 +2,13 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { Portal } from "../../portal";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { createContext } from "../../util/create-context";
-import { useCallbackRef, useId, useMergeRefs } from "../../util/hooks";
+import { createStrictContext } from "../../util/create-strict-context";
+import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
+import { useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
+import { useEventCallback } from "../../util/hooks/useEventCallback";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating } from "../floating/Floating";
-import { FocusScope } from "./parts/FocusScope";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
 import {
   SlottedDivElement,
@@ -71,10 +72,10 @@ type MenuContextValue = {
   onContentChange: (content: MenuContentElementRef | null) => void;
 };
 
-const [MenuProvider, useMenuContext] = createContext<MenuContextValue>({
-  providerName: "MenuProvider",
-  hookName: "useMenuContext",
-});
+const { Provider: MenuProvider, useContext: useMenuContext } =
+  createStrictContext<MenuContextValue>({
+    name: "MenuContext",
+  });
 
 type MenuRootContextValue = {
   onClose: () => void;
@@ -82,10 +83,9 @@ type MenuRootContextValue = {
   modal: boolean;
 };
 
-const [MenuRootProvider, useMenuRootContext] =
-  createContext<MenuRootContextValue>({
-    providerName: "MenuRootProvider",
-    hookName: "useMenuRootContext",
+const { Provider: MenuRootProvider, useContext: useMenuRootContext } =
+  createStrictContext<MenuRootContextValue>({
+    name: "MenuRootContext",
   });
 
 const MenuRoot = ({
@@ -96,7 +96,7 @@ const MenuRoot = ({
 }: MenuProps) => {
   const [content, setContent] = useState<MenuContentElement | null>(null);
   const isUsingKeyboardRef = useRef(false);
-  const handleOpenChange = useCallbackRef(onOpenChange);
+  const handleOpenChange = useEventCallback(onOpenChange);
 
   useEffect(() => {
     const globalDocument = globalThis.document;
@@ -237,13 +237,13 @@ const MenuRootContentModal = forwardRef<
 
 /* -------------------------- Menu content internals ------------------------- */
 type MenuContentInternalElement = React.ElementRef<typeof Floating.Content>;
-type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
+type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusBoundary>;
 type DismissableLayerProps = React.ComponentPropsWithoutRef<
   typeof DismissableLayer
 >;
 
 type MenuContentInternalPrivateProps = {
-  onOpenAutoFocus?: FocusScopeProps["onMountHandler"];
+  initialFocus?: FocusScopeProps["initialFocus"];
   onDismiss?: DismissableLayerProps["onDismiss"];
   disableOutsidePointerEvents?: DismissableLayerProps["disableOutsidePointerEvents"];
 };
@@ -254,11 +254,7 @@ interface MenuContentInternalProps
       React.ComponentPropsWithoutRef<typeof Floating.Content>,
       "dir" | "onPlaced"
     > {
-  /**
-   * Event handler called when auto-focusing after close.
-   * Can be prevented.
-   */
-  onCloseAutoFocus?: FocusScopeProps["onUnmountHandler"];
+  returnFocus?: FocusScopeProps["returnFocus"];
   onEntryFocus?: RovingFocusProps["onEntryFocus"];
   onEscapeKeyDown?: DismissableLayerProps["onEscapeKeyDown"];
   onPointerDownOutside?: DismissableLayerProps["onPointerDownOutside"];
@@ -273,8 +269,8 @@ const MenuContentInternal = forwardRef<
 >(
   (
     {
-      onOpenAutoFocus,
-      onCloseAutoFocus,
+      initialFocus,
+      returnFocus,
       disableOutsidePointerEvents,
       onEntryFocus,
       onEscapeKeyDown,
@@ -300,14 +296,12 @@ const MenuContentInternal = forwardRef<
     );
 
     return (
-      <FocusScope
-        onMountHandler={composeEventHandlers(onOpenAutoFocus, (event) => {
-          // when opening, explicitly focus the content area only and leave
-          // `onEntryFocus` in  control of focusing first item
-          event.preventDefault();
-          contentRef.current?.focus({ preventScroll: true });
-        })}
-        onUnmountHandler={onCloseAutoFocus}
+      <FocusBoundary
+        initialFocus={initialFocus ?? contentRef}
+        returnFocus={returnFocus}
+        /* Focus trapping is handled in `Floating.Content: onKeyDown */
+        trapped={false}
+        loop={false}
       >
         <DismissableLayer
           asChild
@@ -324,8 +318,9 @@ const MenuContentInternal = forwardRef<
             descendants={descendants}
             onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
               // only focus first item when using keyboard
-              if (!rootContext.isUsingKeyboardRef.current)
+              if (!rootContext.isUsingKeyboardRef.current) {
                 event.preventDefault();
+              }
             })}
           >
             <Floating.Content
@@ -363,7 +358,7 @@ const MenuContentInternal = forwardRef<
             />
           </RovingFocus>
         </DismissableLayer>
-      </FocusScope>
+      </FocusBoundary>
     );
   },
 );
@@ -584,7 +579,7 @@ const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
     }
 
     return (
-      <Portal asChild rootElement={rootElement} ref={ref}>
+      <Portal rootElement={rootElement} ref={ref}>
         {children}
       </Portal>
     );
@@ -594,10 +589,9 @@ const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
 /* -------------------------------------------------------------------------- */
 /*                                 Menu Radio                                 */
 /* -------------------------------------------------------------------------- */
-const [RadioGroupProvider, useMenuRadioGroupContext] =
-  createContext<MenuRadioGroupProps>({
-    providerName: "MenuRadioGroupProvider",
-    hookName: "useMenuRadioGroupContext",
+const { Provider: RadioGroupProvider, useContext: useMenuRadioGroupContext } =
+  createStrictContext<MenuRadioGroupProps>({
+    name: "MenuRadioGroupContext",
     defaultValue: {
       value: undefined,
       onValueChange: () => {},
@@ -613,7 +607,7 @@ const MenuRadioGroup = React.forwardRef<
   React.ElementRef<typeof MenuGroup>,
   MenuRadioGroupProps
 >(({ value, onValueChange, ...rest }: MenuRadioGroupProps, ref) => {
-  const handleValueChange = useCallbackRef(onValueChange);
+  const handleValueChange = useEventCallback(onValueChange);
   return (
     <RadioGroupProvider value={value} onValueChange={handleValueChange}>
       <MenuGroup {...rest} ref={ref} />
@@ -624,11 +618,13 @@ const MenuRadioGroup = React.forwardRef<
 /* -------------------------------------------------------------------------- */
 /*                             Menu Item Indicator                            */
 /* -------------------------------------------------------------------------- */
-const [MenuItemIndicatorProvider, useMenuItemIndicatorContext] = createContext<{
+const {
+  Provider: MenuItemIndicatorProvider,
+  useContext: useMenuItemIndicatorContext,
+} = createStrictContext<{
   state: CheckedState;
 }>({
-  providerName: "MenuItemIndicatorProvider",
-  hookName: "useMenuItemIndicatorContext",
+  name: "MenuItemIndicatorContext",
 });
 
 type MenuItemIndicatorProps = SlottedDivProps;
@@ -748,12 +744,10 @@ type MenuSubContextValue = {
   onTriggerChange: (trigger: MenuItemElement | null) => void;
 };
 
-const [MenuSubProvider, useMenuSubContext] = createContext<MenuSubContextValue>(
-  {
-    providerName: "MenuSubProvider",
-    hookName: "useMenuSubContext",
-  },
-);
+const { Provider: MenuSubProvider, useContext: useMenuSubContext } =
+  createStrictContext<MenuSubContextValue>({
+    name: "MenuSubContext",
+  });
 
 interface MenuSubProps {
   children?: React.ReactNode;
@@ -774,7 +768,7 @@ const MenuSub: React.FC<MenuSubProps> = ({
   const [content, setContent] = useState<MenuContentInternalElement | null>(
     null,
   );
-  const handleOpenChange = useCallbackRef(onOpenChange);
+  const handleOpenChange = useEventCallback(onOpenChange);
 
   // Prevent the parent menu from reopening with open submenus.
   useEffect(() => {
@@ -913,15 +907,14 @@ const MenuSubContent = forwardRef<
         align="start"
         side="right"
         disableOutsidePointerEvents={false}
-        onOpenAutoFocus={(event) => {
-          // when opening a submenu, focus content for keyboard users only
+        initialFocus={() => {
           if (rootContext.isUsingKeyboardRef.current) {
-            ref.current?.focus();
+            return ref.current;
           }
-          event.preventDefault();
+          return false;
         }}
         /* Since we manually focus Subtrigger, we prevent use of auto-focus */
-        onCloseAutoFocus={(event) => event.preventDefault()}
+        returnFocus={false}
         onEscapeKeyDown={composeEventHandlers(
           props.onEscapeKeyDown,
           (event) => {

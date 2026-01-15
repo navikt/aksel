@@ -46,7 +46,7 @@ interface CollapsibleComponent
  *     <Button>Button</Button>
  *   </Collapsible.Trigger>
  *   <Collapsible.Content asChild>
- *     <Box padding="4" background="surface-alt-3-subtle">
+ *     <Box padding="4" background="info-soft">
  *       <div>lorem ipsum</div>
  *     </Box>
  *   </Collapsible.Content>

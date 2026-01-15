@@ -1,5 +1,5 @@
 import { execSync } from "child_process";
-import fs from "fs";
+import fs from "node:fs";
 
 type ExampleDataT = {
   title: string;

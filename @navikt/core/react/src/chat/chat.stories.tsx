@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { VStack } from "../layout/stack";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import Chat, { POSITIONS, SIZES, VARIANTS } from "./Chat";
 
 export default {
@@ -60,7 +61,7 @@ export const Controls: Story = {
 
 export const Size: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {SIZES.map((size) => (
         <React.Fragment key={size}>
           <h3>{size}</h3>
@@ -87,7 +88,7 @@ export const Size: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {VARIANTS.map((variant) => (
         <React.Fragment key={variant}>
           <h3>{variant}</h3>
@@ -109,7 +110,7 @@ export const Variants: Story = {
 
 export const Position: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <h3>Default</h3>
       <Chat avatar="ON" name="Ola Normann" timestamp="01.01.21 14:00">
         <Chat.Bubble>
@@ -149,7 +150,7 @@ export const Position: Story = {
 
 export const ToptextPosition: Story = {
   render: () => (
-    <VStack gap="4" style={{ width: 500 }}>
+    <VStack gap="space-16" style={{ width: 500 }}>
       <h3>All right</h3>
       <Chat
         avatar="ON"
@@ -214,7 +215,7 @@ export const Avatar: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {VARIANTS.map((variant) => (
         <React.Fragment key={variant}>
           <h3>{variant}</h3>
@@ -313,36 +314,11 @@ function Illustration() {
   );
 }
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Size</h2>
-        {Size.render?.(...props)}
-      </div>
-      <div>
-        <h2>Variants</h2>
-        {Variants.render?.(...props)}
-      </div>
-      <div>
-        <h2>Position</h2>
-        {Position.render?.(...props)}
-      </div>
-      <div>
-        <h2>Toptext</h2>
-        {ToptextPosition.render?.(...props)}
-      </div>
-      <div>
-        <h2>Avatar</h2>
-        {Avatar.render?.(...props)}
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        {ColorRole.render?.(...props)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Size,
+  Variants,
+  Position,
+  ToptextPosition,
+  Avatar,
+  ColorRole,
+});

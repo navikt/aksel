@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import { createContext } from "../../../util/create-context";
+import { createStrictContext } from "../../../util/create-strict-context";
 import { useClientLayoutEffect } from "../../../util/hooks";
 import { FormFieldType, useFormField } from "../../useFormField";
 import { ComboboxProps } from "../types";
@@ -18,10 +18,12 @@ interface InputContextValue extends FormFieldType {
   toggleOpenButtonRef: React.MutableRefObject<HTMLDivElement | null>;
   hideCaret: boolean;
   setHideCaret: React.Dispatch<React.SetStateAction<boolean>>;
+  anchorRef: HTMLDivElement | null;
+  setAnchorRef: React.Dispatch<React.SetStateAction<HTMLDivElement | null>>;
 }
 
-const [InputContextProvider, useInputContext] =
-  createContext<InputContextValue>({
+const { Provider: InputContextProvider, useContext: useInputContext } =
+  createStrictContext<InputContextValue>({
     name: "InputContext",
     errorMessage: "useInputContext must be used within an InputContextProvider",
   });
@@ -75,6 +77,7 @@ const InputProvider = ({ children, value: props }: Props) => {
   const toggleOpenButtonRef = useRef<HTMLDivElement>(null);
   const [internalValue, setInternalValue] = useState<string>(defaultValue);
   const [hideCaret, setHideCaret] = useState(false);
+  const [anchorRef, setAnchorRef] = useState<HTMLDivElement | null>(null);
 
   const value = useMemo(
     () => String(externalValue ?? internalValue),
@@ -127,6 +130,8 @@ const InputProvider = ({ children, value: props }: Props) => {
     toggleOpenButtonRef,
     hideCaret,
     setHideCaret,
+    anchorRef,
+    setAnchorRef,
   };
 
   return (

@@ -2,10 +2,13 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import { isSameDay } from "date-fns";
 import React, { useState } from "react";
 import { Button } from "../../button";
+import { Dialog } from "../../dialog";
 import { HGrid } from "../../layout/grid";
+import { Spacer } from "../../layout/stack";
 import Modal from "../../modal/Modal";
 import { BodyLong } from "../../typography";
 import { useId } from "../../util";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import DatePicker, { DatePickerProps } from "./DatePicker";
 import { useDatepicker } from "./hooks/useDatepicker";
 import { useRangeDatepicker } from "./hooks/useRangeDatepicker";
@@ -75,28 +78,26 @@ export const Default: StoryObj<DefaultStoryProps> = {
         >
           {!props.standalone &&
             (props.inputfield && props.mode !== "multiple" ? (
-              <>
-                {props.mode === "range" ? (
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <DatePicker.Input
-                      label="Fra"
-                      size={props?.size}
-                      {...rangeCtx.fromInputProps}
-                    />
-                    <DatePicker.Input
-                      label="Til"
-                      size={props?.size}
-                      {...rangeCtx.toInputProps}
-                    />
-                  </div>
-                ) : (
+              props.mode === "range" ? (
+                <div style={{ display: "flex", gap: "1rem" }}>
                   <DatePicker.Input
-                    label="Velg dato"
+                    label="Fra"
                     size={props?.size}
-                    {...singleCtx.inputProps}
+                    {...rangeCtx.fromInputProps}
                   />
-                )}
-              </>
+                  <DatePicker.Input
+                    label="Til"
+                    size={props?.size}
+                    {...rangeCtx.toInputProps}
+                  />
+                </div>
+              ) : (
+                <DatePicker.Input
+                  label="Velg dato"
+                  size={props?.size}
+                  {...singleCtx.inputProps}
+                />
+              )
             ) : (
               <Button onClick={() => setOpen((x) => !x)}>
                 Åpne datovelger
@@ -199,11 +200,19 @@ export const Standalone = () => (
   <DatePicker.Standalone
     today={new Date("2006-07-01")}
     onSelect={console.info}
+    defaultSelected={new Date("2006-07-05")}
   />
 );
 
 export const StandaloneRange = () => (
-  <DatePicker.Standalone mode="range" today={new Date("2006-07-01")} />
+  <DatePicker.Standalone
+    mode="range"
+    today={new Date("2006-07-01")}
+    defaultSelected={{
+      from: new Date("2006-07-03"),
+      to: new Date("2006-07-07"),
+    }}
+  />
 );
 
 export const StandaloneMultiple = () => (
@@ -290,7 +299,7 @@ export const UseRangedDatepickerValidation = () => {
       <DatePicker {...datepickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
           <DatePicker.Input {...fromInputProps} label="Fra" />
-          <DatePicker.Input {...toInputProps} label="Til" />
+          <DatePicker.Input {...toInputProps} label="Til" error="123" />
         </div>
       </DatePicker>
     </div>
@@ -357,7 +366,7 @@ export const Readonly = () => {
 
 export const StandaloneOptions = () => {
   return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="8">
+    <HGrid columns={{ xs: 1, md: 2 }} gap="space-32">
       <DatePicker.Standalone today={new Date("Nov 23 2022")} />
       <DatePicker.Standalone
         dropdownCaption
@@ -397,7 +406,11 @@ export const WeekNumber = () => {
   };
 
   return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="space-80 space-16">
+    <HGrid
+      columns={{ xs: 1, md: 2 }}
+      gap="space-80 space-16"
+      style={{ marginBlockEnd: "30rem" }}
+    >
       <DatePicker.Standalone showWeekNumber today={new Date("2006-07-01")} />
       <DatePicker.Standalone
         showWeekNumber
@@ -478,7 +491,45 @@ export const ModalDemo = () => {
     </>
   );
 };
-ModalDemo.parameters = { chromatic: { pauseAnimationAtEnd: true } };
+
+export const DialogDemo = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+  });
+
+  return (
+    <Dialog defaultOpen>
+      <Dialog.Trigger>
+        <Button>Open dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Popup>
+        <Dialog.Header>
+          <Dialog.Title>Dialog-demo</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <BodyLong spacing>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          </BodyLong>
+
+          <DatePicker {...datepickerProps} dropdownCaption>
+            <DatePicker.Input
+              {...inputProps}
+              label="Velg dato"
+              description="Format: dd.mm.yyyy"
+            />
+          </DatePicker>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Button variant="tertiary">Avbryt</Button>
+          <Spacer />
+          <Button variant="secondary">Tilbake</Button>
+          <Button>Neste</Button>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
+  );
+};
 
 export const ColorRole = () => (
   <div data-color="meta-purple">
@@ -490,92 +541,49 @@ export const ColorRole = () => (
   </div>
 );
 
-export const Chromatic: Story = {
-  render: () => (
-    <div>
-      <div>
-        <h2>DropdownCaption</h2>
-        <DropdownCaption />
-      </div>
-      <div>
-        <h2>DisabledDays</h2>
-        <DisabledDays />
-      </div>
-      <div>
-        <h2>UseDatepicker</h2>
-        <UseDatepicker />
-      </div>
-      <div>
-        <h2>UseRangedDatepicker</h2>
-        <UseRangedDatepicker />
-      </div>
-      <div>
-        <h2>NB</h2>
-        <NB />
-      </div>
-      <div>
-        <h2>NN</h2>
-        <NN />
-      </div>
-      <div>
-        <h2>EN</h2>
-        <EN />
-      </div>
-      <div>
-        <h2>Standalone</h2>
-        <Standalone />
-      </div>
-      <div>
-        <h2>StandaloneRange</h2>
-        <StandaloneRange />
-      </div>
-      <div>
-        <h2>StandaloneMultiple</h2>
-        <StandaloneMultiple />
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
-      <div>
-        <h2>UserControlled</h2>
-        <UserControlled />
-      </div>
-      <div>
-        <h2>Validering</h2>
-        <Validering />
-      </div>
-      <div>
-        <h2>DisabledInput</h2>
-        <DisabledInput />
-      </div>
-      <div>
-        <h2>ErrorInput</h2>
-        <ErrorInput />
-      </div>
-      <div>
-        <h2>UseRangedDatepickerValidation</h2>
-        <UseRangedDatepickerValidation />
-      </div>
-      <div>
-        <h2>Size</h2>
-        <Size />
-      </div>
-      <div>
-        <h2>Readonly</h2>
-        <Readonly />
-      </div>
-      <div>
-        <h2>StandaloneOptions</h2>
-        <StandaloneOptions />
-      </div>
-      <div>
-        <h2>WeekNumber</h2>
-        <WeekNumber />
-      </div>
-    </div>
-  ),
+export const ChromaticSmallMobile: Story = {
+  render: () => {
+    const { datepickerProps, inputProps } = useDatepicker({
+      fromDate: new Date("Jan 10 2020"),
+      toDate: new Date("Jan 11 2020"),
+    });
+
+    return (
+      <DatePicker {...datepickerProps} dropdownCaption open>
+        <DatePicker.Input {...inputProps} label="Velg dato" />
+      </DatePicker>
+    );
+  },
   parameters: {
-    chromatic: { disable: false },
+    chromatic: {
+      disable: false,
+      modes: {
+        sm: {
+          viewport: {
+            width: 320,
+          },
+        },
+      },
+    },
   },
 };
+
+export const Chromatic = renderStoriesForChromatic({
+  DropdownCaption,
+  DisabledDays,
+  UseDatepicker,
+  UseRangedDatepicker,
+  NB,
+  NN,
+  EN,
+  Standalone,
+  StandaloneRange,
+  ColorRole,
+  UserControlled,
+  DisabledInput,
+  ErrorInput,
+  Size,
+  Readonly,
+  StandaloneOptions,
+  WeekNumber,
+});

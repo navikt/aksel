@@ -28,7 +28,10 @@ const initialOptions = [
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { variant: "static" });
+export default withDsExample(Example, {
+  variant: "static",
+  minHeight: "260px",
+});
 
 /* Storybook story */
 export const Demo = {

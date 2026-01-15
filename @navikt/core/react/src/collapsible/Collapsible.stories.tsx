@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Box } from "../layout/box";
-import { HStack, VStack } from "../layout/stack";
+import { HStack } from "../layout/stack";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import { Collapsible } from "./Collapsible";
 
 const meta: Meta<typeof Collapsible> = {
@@ -40,7 +41,7 @@ export const InContext: StoryFn<typeof Collapsible> = () => {
   const [open, setOpen] = useState(false);
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
-      <HStack justify="space-between" gap="4" align="center">
+      <HStack justify="space-between" gap="space-16" align="center">
         Steg 1 av 8{" "}
         <Collapsible.Trigger asChild>
           <Button
@@ -75,7 +76,7 @@ export const Animated: StoryFn<typeof Collapsible> = () => (
     </Collapsible.Trigger>
     <Collapsible.Content className="collapsible">
       <div className="collapsibleContent">
-        <Box padding="8" background="surface-alt-3-subtle">
+        <Box padding="space-32" background="info-soft">
           <div>lorem ipsum</div>
         </Box>
       </div>
@@ -136,7 +137,7 @@ export const AsChild: StoryFn<typeof Collapsible> = () => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="4" background="surface-alt-3-subtle">
+      <Box padding="space-16" background="info-soft">
         <div>lorem ipsum</div>
       </Box>
     </Collapsible.Content>
@@ -149,7 +150,7 @@ export const DefaultOpen: StoryFn<typeof Collapsible> = () => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="4" background="surface-alt-3-subtle">
+      <Box padding="space-16" background="info-soft">
         <div>lorem ipsum</div>
       </Box>
     </Collapsible.Content>
@@ -162,7 +163,7 @@ export const ControlledOpen: StoryFn<typeof Collapsible> = () => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="4" background="surface-alt-3-subtle">
+      <Box padding="space-16" background="info-soft">
         <div>lorem ipsum</div>
       </Box>
     </Collapsible.Content>
@@ -175,48 +176,20 @@ export const Disabled: StoryFn<typeof Collapsible> = ({ open = false }) => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="4" background="surface-alt-3-subtle">
+      <Box padding="space-16" background="info-soft">
         <div>lorem ipsum</div>
       </Box>
     </Collapsible.Content>
   </Collapsible>
 );
 
-export const Chromatic: Story = {
-  render: () => (
-    <VStack gap="8">
-      <div>
-        <h2>In context</h2>
-        <InContext />
-      </div>
-      <div>
-        <h2>Animated</h2>
-        <Animated />
-      </div>
-      <div>
-        <h2>Lazy</h2>
-        <Lazy />
-      </div>
-      <div>
-        <h2>AsChild</h2>
-        <AsChild />
-      </div>
-      <div>
-        <h2>DefaultOpen</h2>
-        <DefaultOpen />
-      </div>
-      <div>
-        <h2>ControlledOpen</h2>
-        <ControlledOpen />
-      </div>
-      <div>
-        <h2>Disabled</h2>
-        <Disabled />
-        <Disabled open />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  InContext,
+  Animated,
+  Lazy,
+  AsChild,
+  DefaultOpen,
+  ControlledOpen,
+  Disabled,
+  DisabledOpen: () => <Disabled open />,
+});

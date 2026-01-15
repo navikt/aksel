@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { DismissableLayer } from "../../../overlays/dismissablelayer/DismissableLayer";
 import { Floating } from "../../../overlays/floating/Floating";
-import { useRenameCSS, useThemeInternal } from "../../../theme/Theme";
+import { useRenameCSS } from "../../../theme/Theme";
 import { useClientLayoutEffect } from "../../../util";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -14,9 +15,9 @@ import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const FilteredOptions = () => {
   const { cn } = useRenameCSS();
-  const themeContext = useThemeInternal(false);
   const {
     inputProps: { id },
+    anchorRef,
   } = useInputContext();
 
   const {
@@ -27,8 +28,11 @@ const FilteredOptions = () => {
     setFilteredOptionsRef,
     isMouseLastUsedInputDevice,
     isValueNew,
+    toggleIsListOpen,
   } = useFilteredOptionsContext();
   const [localOpen, setLocalOpen] = useState(isListOpen);
+
+  const floatingRef = useRef<HTMLDivElement | null>(null);
 
   /**
    * This is a dirty hack to make the positioning-logic in Floating base the "flip" on the static 290px max-height,
@@ -50,56 +54,67 @@ const FilteredOptions = () => {
     (allowNewValues && isValueNew && !maxSelected.isLimitReached) || // Render add new option
     filteredOptions.length > 0; // Render filtered options
 
-  const height = themeContext?.isDarkside ? "316px" : "290px";
-
   return (
-    <Floating.Content
-      className={cn("navds-combobox__list", {
-        "navds-combobox__list--closed": !isListOpen,
-        "navds-combobox__list--with-hover": isMouseLastUsedInputDevice,
-      })}
-      id={filteredOptionsUtil.getFilteredOptionsId(id)}
-      tabIndex={-1}
-      sideOffset={8}
-      side="bottom"
-      fallbackPlacements={["top"]}
-      enabled={isListOpen}
-      style={{
-        maxHeight: localOpen
-          ? `min(${height}, var(--ac-floating-available-height))`
-          : `${height}`,
+    <DismissableLayer
+      asChild
+      safeZone={{
+        anchor: anchorRef,
       }}
-      autoUpdateWhileMounted={false}
+      onDismiss={() => localOpen && toggleIsListOpen(false)}
+      onEscapeKeyDown={(event) => {
+        /* We handle this manually in Input */
+        event.preventDefault();
+      }}
+      enabled={localOpen}
     >
-      {shouldRenderNonSelectables && (
-        <div
-          className={cn("navds-combobox__list_non-selectables")}
-          role="status"
-        >
-          {isMultiSelect && maxSelected.limit && <MaxSelectedMessage />}
-          {isLoading && <LoadingMessage />}
-          {!isLoading && filteredOptions.length === 0 && !allowNewValues && (
-            <NoSearchHitsMessage />
-          )}
-        </div>
-      )}
+      <Floating.Content
+        ref={floatingRef}
+        className={cn("navds-combobox__list", {
+          "navds-combobox__list--closed": !isListOpen,
+          "navds-combobox__list--with-hover": isMouseLastUsedInputDevice,
+        })}
+        id={filteredOptionsUtil.getFilteredOptionsId(id)}
+        tabIndex={-1}
+        sideOffset={8}
+        side="bottom"
+        fallbackPlacements={["top"]}
+        enabled={isListOpen}
+        style={{
+          maxHeight: localOpen
+            ? `min(316px, var(--__axc-floating-available-height))`
+            : `316px`,
+        }}
+        autoUpdateWhileMounted={false}
+      >
+        {shouldRenderNonSelectables && (
+          <div
+            className={cn("navds-combobox__list_non-selectables")}
+            role="status"
+          >
+            {isMultiSelect && maxSelected.limit && <MaxSelectedMessage />}
+            {isLoading && <LoadingMessage />}
+            {!isLoading && filteredOptions.length === 0 && !allowNewValues && (
+              <NoSearchHitsMessage />
+            )}
+          </div>
+        )}
 
-      {shouldRenderFilteredOptionsList && (
-        /* biome-ignore lint/a11y/useFocusableInteractive: Interaction is not handeled by listbox itself. */
-        <ul
-          ref={setFilteredOptionsRef}
-          role="listbox"
-          className={cn("navds-combobox__list-options")}
-        >
-          {isValueNew && !maxSelected.isLimitReached && allowNewValues && (
-            <AddNewOption />
-          )}
-          {filteredOptions.map((option) => (
-            <FilteredOptionsItem key={option.value} option={option} />
-          ))}
-        </ul>
-      )}
-    </Floating.Content>
+        {shouldRenderFilteredOptionsList && (
+          <ul
+            ref={setFilteredOptionsRef}
+            role="listbox"
+            className={cn("navds-combobox__list-options")}
+          >
+            {isValueNew && !maxSelected.isLimitReached && allowNewValues && (
+              <AddNewOption />
+            )}
+            {filteredOptions.map((option) => (
+              <FilteredOptionsItem key={option.value} option={option} />
+            ))}
+          </ul>
+        )}
+      </Floating.Content>
+    </DismissableLayer>
   );
 };
 

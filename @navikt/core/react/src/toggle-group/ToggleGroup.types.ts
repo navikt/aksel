@@ -1,4 +1,6 @@
 import { HTMLAttributes } from "react";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
+import type { AkselColor } from "../types";
 
 export interface ToggleGroupProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
@@ -28,10 +30,17 @@ export interface ToggleGroupProps
    */
   label?: React.ReactNode;
   /**
-   * Changes design and interaction-visuals.
-   * @default "action"
+   * @deprecated Use `data-color` prop instead.
    */
   variant?: "action" | "neutral";
+  /**
+   * Overrides inherited color.
+   *
+   * We recommend only using `accent` and `neutral`. We have disallowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
   /**
    * Stretch each button to fill avaliable space in container.
    * @default false

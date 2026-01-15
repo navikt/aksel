@@ -32,9 +32,11 @@ module.exports = tseslint.config([
     "**/playwright-report/**/*",
     "**/tokens/**/plugin.js",
     "**/.next",
+    "**/query-types.ts",
     "examples/referansesider",
     "examples/astro/.astro",
     ".yarn",
+    "**/next-env.d.ts",
   ]),
   js.configs.recommended,
   reactPlugin.configs.flat.recommended,
@@ -61,6 +63,10 @@ module.exports = tseslint.config([
       "react/display-name": "off", // Temporary
       "import/no-unresolved": "off",
       "import/no-named-as-default": "off", // Temporary
+      "react-hooks/exhaustive-deps": [
+        "warn",
+        { additionalHooks: "(useClientLayoutEffect)" },
+      ],
     },
   },
   {
@@ -210,6 +216,13 @@ module.exports = tseslint.config([
               name: "react-dom/client",
               importNames: ["createRoot", "hydrateRoot"],
               message: "React 18+ API not allowed (targeting React 17).",
+            },
+          ],
+          patterns: [
+            {
+              group: ["fs", "path"],
+              message:
+                'Use `node:` prefix when importing native node modules, e.g. `import path from "node:path"`.',
             },
           ],
         },

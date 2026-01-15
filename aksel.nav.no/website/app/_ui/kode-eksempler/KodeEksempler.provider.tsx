@@ -7,6 +7,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -48,14 +49,21 @@ function KodeEksemplerProvider(props: {
 
   const resizerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const prevSearchParam = useRef<string | null>(null);
-
-  const [activeExample, setActiveExample] = useState<FileT | null>(
-    dir?.filer?.[0] ?? null,
-  );
 
   const [loaded, setLoaded] = useState(false);
   const [showCode, setShowCode] = useState(!compact);
+
+  const selectedExample = useMemo(() => {
+    const param = searchParams?.get("demo");
+    if (!param) {
+      return;
+    }
+
+    return dir?.filer?.find((file) => {
+      const id = stegaClean(nameToId(dir?.title ?? "", file.navn ?? ""));
+      return param === `${id}`;
+    });
+  }, [dir?.filer, dir?.title, searchParams]);
 
   const createQueryString = useCallback(
     (value: string) => {
@@ -78,7 +86,6 @@ function KodeEksemplerProvider(props: {
       return;
     }
 
-    setActiveExample(foundExample);
     setLoaded(false);
 
     const id = nameToId(dir?.title ?? "", exampleName);
@@ -87,27 +94,9 @@ function KodeEksemplerProvider(props: {
   };
 
   useEffect(() => {
-    const param = searchParams?.get("demo");
-    if (!param) {
+    if (!selectedExample) {
       return;
     }
-
-    const foundMatch = dir?.filer?.find((file) => {
-      const id = nameToId(dir?.title ?? "", file.navn ?? "");
-      return param === `${id}`;
-    });
-
-    if (!foundMatch) {
-      return;
-    }
-
-    setActiveExample(foundMatch);
-
-    if (prevSearchParam.current === param) {
-      return;
-    }
-
-    prevSearchParam.current = param;
 
     queueMicrotask(() => {
       iframeRef.current?.scrollIntoView({
@@ -117,13 +106,13 @@ function KodeEksemplerProvider(props: {
     });
 
     iframeRef.current?.focus({ preventScroll: true });
-  }, [dir?.filer, dir?.title, searchParams]);
+  }, [selectedExample]);
 
   return (
     <KodeEksemplerContext.Provider
       value={{
         activeExample: {
-          current: activeExample,
+          current: selectedExample ?? dir?.filer?.[0] ?? null,
           update: updateActiveExample,
           loaded,
           updateLoaded: setLoaded,

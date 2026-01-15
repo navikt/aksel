@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { default as React } from "react";
 import { expect, within } from "storybook/test";
+import { Box } from "../../layout/box";
 import { VStack } from "../../layout/stack";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import Heading from "../Heading";
 
 const meta: Meta<typeof Heading> = {
@@ -39,14 +41,14 @@ export const Controls: Story = {
     },
     textColor: {
       control: "radio",
-      options: ["default", "subtle"],
+      options: ["default", "subtle", "contrast"],
     },
   },
 };
 
 export const Sizes: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Heading level="1" size="xlarge">
         {lorem}
       </Heading>
@@ -93,7 +95,7 @@ export const Spacing: Story = {
 
 export const Align: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Heading level="1" size="large" align="start">
         {lorem}
       </Heading>
@@ -131,13 +133,18 @@ export const OverrideTag: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Heading size="small" textColor="default">
         {lorem}
       </Heading>
       <Heading size="small" textColor="subtle">
         {lorem}
       </Heading>
+      <Box background="neutral-strong">
+        <Heading size="small" textColor="contrast">
+          {lorem}
+        </Heading>
+      </Box>
       <Heading size="small" data-color="brand-magenta">
         {lorem}
       </Heading>
@@ -147,32 +154,18 @@ export const ColorRole: Story = {
       <Heading size="small" data-color="brand-magenta" textColor="subtle">
         {lorem}
       </Heading>
+      <Box background="neutral-strong">
+        <Heading size="small" data-color="brand-magenta" textColor="contrast">
+          {lorem}
+        </Heading>
+      </Box>
     </VStack>
   ),
 };
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Sizes</h2>
-        {Sizes.render?.(...props)}
-      </div>
-      <div>
-        <h2>Align</h2>
-        {Align.render?.(...props)}
-      </div>
-      <div>
-        <h2>Override Tag</h2>
-        {OverrideTag.render?.(...props)}
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        {ColorRole.render?.(...props)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Sizes,
+  Align,
+  OverrideTag,
+  ColorRole,
+});

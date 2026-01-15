@@ -1,53 +1,107 @@
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, {
+  HTMLAttributes,
+  createContext,
+  forwardRef,
+  useContext,
+} from "react";
 import ReactDOM from "react-dom";
 import { useProvider } from "../provider/Provider";
-import { Slot } from "../slot/Slot";
 import { Theme, useThemeInternal } from "../theme/Theme";
-import { AsChildProps } from "../util/types";
+import { useClientLayoutEffect, useMergeRefs } from "../util/hooks";
 
-interface PortalBaseProps extends HTMLAttributes<HTMLDivElement> {
+export interface PortalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * An optional container where the portaled content should be appended.
    */
   rootElement?: HTMLElement | null;
 }
 
-export type PortalProps = PortalBaseProps & AsChildProps;
+const PortalContext = createContext<HTMLElement | null>(null);
 
 export const Portal = forwardRef<HTMLDivElement, PortalProps>(
-  ({ rootElement, asChild, ...rest }, ref) => {
-    const themeContext = useThemeInternal(false);
-    const contextRoot = useProvider()?.rootElement;
-    const root = rootElement ?? contextRoot ?? globalThis?.document?.body;
+  ({ rootElement, children, ...restProps }, forwardedRef) => {
+    const providerRootElement = useProvider()?.rootElement;
 
-    const Component = asChild ? Slot : "div";
+    const parentPortalNode = useContext(PortalContext);
+
+    const [containerElement, setContainerElement] = React.useState<
+      HTMLElement | ShadowRoot | null
+    >(null);
+    const [portalNode, setPortalNode] = React.useState<HTMLElement | null>(
+      null,
+    );
+
+    const containerRef = React.useRef<HTMLElement | ShadowRoot | null>(null);
+
+    const mergedRefs = useMergeRefs(forwardedRef, setPortalNode);
 
     /**
-     * Portal can be mounted outside of theme-classNames.
-     * If a theme is present, we want to make sure that theme cascades to portaled element.
+     * We update container in effect to avoid SSR mismatches.
      */
-    if (themeContext?.isDarkside) {
-      return root
-        ? ReactDOM.createPortal(
-            <Theme
-              theme={themeContext.theme}
-              asChild
-              hasBackground={false}
-              data-color={themeContext.color}
-            >
-              <Component ref={ref} data-aksel-portal="" {...rest} />
-            </Theme>,
-            root,
-          )
-        : null;
+    useClientLayoutEffect(() => {
+      /* Wait for the container to be resolved if explicitly `null`. */
+      if ((rootElement ?? providerRootElement) === null) {
+        if (containerRef.current) {
+          containerRef.current = null;
+          setPortalNode(null);
+          setContainerElement(null);
+        }
+        return;
+      }
+
+      const resolvedContainer =
+        rootElement ??
+        parentPortalNode ??
+        providerRootElement ??
+        globalThis?.document?.body;
+
+      if (resolvedContainer === null) {
+        if (containerRef.current) {
+          containerRef.current = null;
+          setPortalNode(null);
+          setContainerElement(null);
+        }
+        return;
+      }
+
+      if (containerRef.current !== resolvedContainer) {
+        containerRef.current = resolvedContainer;
+        setPortalNode(null);
+        setContainerElement(resolvedContainer);
+      }
+    }, [parentPortalNode, providerRootElement, rootElement]);
+
+    if (!containerElement) {
+      return null;
     }
 
-    return root
-      ? ReactDOM.createPortal(
-          <Component ref={ref} data-aksel-portal="" {...rest} />,
-          root,
-        )
-      : null;
+    return ReactDOM.createPortal(
+      <PortalDiv ref={mergedRefs} {...restProps} data-aksel-portal="">
+        <PortalContext.Provider value={portalNode}>
+          {children}
+        </PortalContext.Provider>
+      </PortalDiv>,
+      containerElement,
+    );
+  },
+);
+
+type PortalDivProps = React.HTMLAttributes<HTMLDivElement>;
+
+const PortalDiv = forwardRef<HTMLDivElement, PortalDivProps>(
+  (props: PortalDivProps, forwardedRef) => {
+    const themeContext = useThemeInternal();
+
+    return (
+      <Theme
+        theme={themeContext?.theme}
+        asChild
+        hasBackground={false}
+        data-color={themeContext?.color}
+      >
+        <div ref={forwardedRef} {...props} />
+      </Theme>
+    );
   },
 );
 

@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -9,14 +9,19 @@ export interface ChipsRemovableProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   /**
-   * Chip-variants
-   * @default "action"
+   * @deprecated Use `data-color` prop instead.
    */
   variant?: "action" | "neutral";
   /**
    * Click callback
    */
   onDelete?: () => void;
+  /**
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
 }
 
 export const RemovableChips = forwardRef<
@@ -37,29 +42,17 @@ export const RemovableChips = forwardRef<
     ref,
   ) => {
     const translate = useI18n("Chips");
-    const themeContext = useThemeInternal(false);
     const { cn } = useRenameCSS();
-
-    let localVariant: ChipsRemovableProps["variant"] | undefined;
-
-    if (themeContext?.isDarkside) {
-      localVariant = variant;
-    } else {
-      localVariant = variant ?? "action";
-    }
 
     return (
       <button
-        data-color={color ?? variantToColor(localVariant)}
+        data-color={color ?? variantToColor(variant)}
         {...rest}
         ref={ref}
         type={type}
         className={cn(
           "navds-chips__chip navds-chips__removable navds-chips--icon-right",
           className,
-          {
-            [`navds-chips__removable--${localVariant}`]: localVariant,
-          },
         )}
         aria-label={`${children} ${translate("Removable.labelSuffix")}`}
         onClick={composeEventHandlers(onClick, onDelete)}

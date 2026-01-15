@@ -9,7 +9,7 @@
 .kodeExampleContainer {
   position: relative;
   overflow: hidden;
-  border-radius: var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge) 0 0;
+  border-radius: var(--ax-radius-12) var(--ax-radius-12) 0 0;
   border: 1px solid var(--ax-border-neutral-subtle);
   border-bottom: none;
   background-color: var(--ax-bg-sunken);
@@ -27,13 +27,18 @@
   width: 100%;
   max-height: calc(100vh - 200px);
   background-color: var(--ax-bg-default);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  scroll-margin-block-start: calc(var(--website-header-height) + 3rem);
+
+  /* Prevent the iframe from covering up the resize handle in Safari */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
 }
 
 .kodeEksemplerToolbar {
   padding: var(--ax-space-4);
   margin-block-end: var(--ax-space-8);
   border: 1px solid var(--ax-border-neutral-subtle);
-  border-radius: 0 0 var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge);
+  border-radius: 0 0 var(--ax-radius-12) var(--ax-radius-12);
   background-color: var(--ax-bg-raised);
 }
 

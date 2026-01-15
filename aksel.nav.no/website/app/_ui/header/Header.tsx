@@ -1,7 +1,9 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
+import { Suspense } from "react";
+import { BodyShort, Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
+import { GlobalSearchButton } from "@/app/_ui/global-search/GlobalSearch.button";
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
 import { ThemeButton } from "@/app/_ui/theming/Theme.button";
 import AkselLogo from "@/assets/Logo";
@@ -50,14 +52,16 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
               />
             </svg>
           </Hide>
-          <span className="sr-only">Aksel</span>
+          <BodyShort visuallyHidden as="span">
+            Aksel
+          </BodyShort>
         </Link>
 
         <Spacer />
         <Show above="lg" asChild>
           <Box
             as="nav"
-            paddingInline={{ xs: "0 space-8", lg: "0 space-32" }}
+            paddingInline={{ xs: "space-0 space-8", lg: "space-0 space-32" }}
             aria-label="Hovedmeny"
           >
             <HStack as="ul" gap="space-8" align="center">
@@ -69,8 +73,11 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
             </HStack>
           </Box>
         </Show>
-        <HStack align="center" gap="2">
-          <GlobalSearch />
+        <HStack align="center" gap="space-8">
+          <Suspense fallback={<GlobalSearchButton trigger={false} />}>
+            <GlobalSearch />
+          </Suspense>
+
           <Show below="lg">
             <MobileNav />
           </Show>

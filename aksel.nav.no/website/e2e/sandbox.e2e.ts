@@ -6,10 +6,13 @@ const previewUrl =
 
 test.describe("Check website sandbox", () => {
   test("Check if sandbox is loading for preview", async ({ page }) => {
-    await page.goto(`http://localhost:3000${previewUrl}`);
+    await page.goto(previewUrl);
     await page.waitForLoadState("domcontentloaded");
 
-    const count = await page.locator("#sandbox-wrapper").count();
-    expect(count).toBeGreaterThan(0);
+    const frameLocator = page.frameLocator('iframe[src*="sandbox"]');
+    const sandboxWrapper = frameLocator.locator("#sandbox-wrapper");
+
+    await expect(sandboxWrapper).toBeVisible({ timeout: 2000 });
+    await expect(sandboxWrapper).not.toBeEmpty();
   });
 });

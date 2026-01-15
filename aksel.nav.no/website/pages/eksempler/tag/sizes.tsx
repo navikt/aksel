@@ -5,35 +5,35 @@ const Example = () => {
   return (
     <VStack gap="space-16">
       <HStack gap="space-12">
-        <Tag size="medium" variant="neutral">
+        <Tag size="medium" variant="outline">
           Medium
         </Tag>
-        <Tag size="medium" variant="neutral-moderate">
+        <Tag size="medium" variant="moderate">
           Medium
         </Tag>
-        <Tag size="medium" variant="neutral-filled">
+        <Tag size="medium" variant="strong">
           Medium
         </Tag>
       </HStack>
       <HStack gap="space-12">
-        <Tag size="small" variant="neutral">
+        <Tag size="small" variant="outline">
           Small
         </Tag>
-        <Tag size="small" variant="neutral-moderate">
+        <Tag size="small" variant="moderate">
           Small
         </Tag>
-        <Tag size="small" variant="neutral-filled">
+        <Tag size="small" variant="strong">
           Small
         </Tag>
       </HStack>
       <HStack gap="space-12">
-        <Tag size="xsmall" variant="neutral">
+        <Tag size="xsmall" variant="outline">
           xsmall
         </Tag>
-        <Tag size="xsmall" variant="neutral-moderate">
+        <Tag size="xsmall" variant="moderate">
           xsmall
         </Tag>
-        <Tag size="xsmall" variant="neutral-filled">
+        <Tag size="xsmall" variant="strong">
           xsmall
         </Tag>
       </HStack>
@@ -50,5 +50,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 3,
 };

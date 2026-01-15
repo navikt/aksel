@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Box, MonthPicker, useMonthpicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
+const year = new Date().getFullYear();
+
 const Example = () => {
   const [hasError, setHasError] = useState(false);
   const { monthpickerProps, inputProps } = useMonthpicker({
-    fromDate: new Date("Aug 23 2019"),
-    toDate: new Date("Aug 23 2025"),
+    fromDate: new Date(`Aug 23 ${year - 1}`),
+    toDate: new Date(`Aug 23 ${year + 1}`),
     onValidate: (val) => {
       setHasError(!val.isValidMonth);
       console.info(val);
@@ -20,6 +22,7 @@ const Example = () => {
           {...inputProps}
           label="Velg måned"
           error={hasError && "Du må velge måned"}
+          description="Format: mm.åååå"
         />
       </MonthPicker>
     </Box>
@@ -36,5 +39,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Bruk onValidate-callback for å håndtere validering.",
+  desc: "Bruk `onValidate`-callback for å håndtere validering.",
 };

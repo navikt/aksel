@@ -177,7 +177,7 @@ export const WithPins: StoryFn = () => {
   return (
     <div style={{ width: "80vw" }}>
       <Timeline>
-        <Timeline.Pin date={new Date("Apr 15 2022")}>Pin 1</Timeline.Pin>
+        <Timeline.Pin date={new Date("Dec 20 2021")}>Pin 1</Timeline.Pin>
         <Timeline.Pin date={new Date("Jun 12 2022")}>Pin 2</Timeline.Pin>
         <Timeline.Pin date={new Date("Jul 28 2022")}>Pin 3</Timeline.Pin>
         <Timeline.Row
@@ -430,9 +430,8 @@ export const WithDayLabels: StoryFn = () => {
   );
 
   return (
-    <VStack gap="8" width="80vw">
+    <VStack gap="space-32" width="80vw">
       {component}
-
       <div>
         <h3>EN:</h3>
         <Provider locale={en}>{component}</Provider>

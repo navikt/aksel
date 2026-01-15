@@ -22,11 +22,11 @@ jobs:
       packages: "write"
       pull-requests: "write"
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/*
           cache: yarn
@@ -49,9 +49,11 @@ jobs:
           publish: yarn release
           createGithubReleases: false
         env:
-          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+          # Use OIDC for npm authentication instead of NPM_TOKEN
+          # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
+          NPM_TOKEN: ""
+          # Needed for push to main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
 
       - name: Creating .npmrc
         run: |
@@ -70,9 +72,9 @@ jobs:
           publish: yarn changeset publish
           createGithubReleases: false
         env:
-          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+          NPM_TOKEN: ""
+          # Needed for push to main
           GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
 
       - name: Generate icon.zip
         if: steps.changesets.outputs.published == 'true'

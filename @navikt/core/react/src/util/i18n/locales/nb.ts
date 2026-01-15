@@ -11,15 +11,11 @@ export default {
     showLess: "Vis mindre",
     readOnly: "Skrivebeskyttet",
     close: "Lukk",
-  },
-
-  Alert: {
-    closeAlert: "Lukk varsel",
-    closeMessage: "Lukk melding",
     error: "Feil",
     info: "Informasjon",
     success: "Suksess",
     warning: "Advarsel",
+    announcement: "Kunngjøring",
   },
   Chips: {
     Removable: {
@@ -30,6 +26,7 @@ export default {
   Combobox: {
     /** The input value will be appended to the end of this text, e.g. `Legg til "input value"`. */
     addOption: "Legg til",
+    noMatches: "Ingen søketreff",
     /** Loader title */
     loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valgt.",

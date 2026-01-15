@@ -17,7 +17,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { ListItem } from "@navikt/ds-react/List";
-import * as tokens from "@navikt/ds-tokens/darkside-js";
+import * as tokens from "@navikt/ds-tokens/js";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { ActivityCard } from "../components/aktivitetsplan/ActivityCard";
 import { ActivityColumn } from "../components/aktivitetsplan/ActivityColumn";
@@ -174,7 +174,8 @@ const AktivitetsplanPage = () => {
                       </BodyShort>
                     )}
                     {tag && (
-                      <Tag variant={tag.variant} size="small">
+                      /* @ts-expect-error Temp ignore until variant is optional */
+                      <Tag data-color={tag.color} size="small">
                         {tag.text}
                       </Tag>
                     )}

@@ -8,15 +8,11 @@ export default {
     showLess: "Show less",
     readOnly: "Read-only",
     close: "Close",
-  },
-
-  Alert: {
-    closeAlert: "Close alert",
-    closeMessage: "Close message",
     error: "Error",
     info: "Information",
     success: "Success",
     warning: "Warning",
+    announcement: "Announcement",
   },
   Chips: {
     Removable: {
@@ -25,6 +21,7 @@ export default {
   },
   Combobox: {
     addOption: "Add",
+    noMatches: "No search hits",
     loading: "Searching…",
     maxSelected: "{selected} of max {limit} are selected.",
   },

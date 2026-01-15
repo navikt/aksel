@@ -33,6 +33,16 @@ export const workspaceConfig = defineConfig([
     document: {
       newDocumentOptions: newDocumentsCreator,
     },
+    scheduledDrafts: {
+      enabled: false,
+    },
+    beta: {
+      form: {
+        enhancedObjectDialog: {
+          enabled: true,
+        },
+      },
+    },
     plugins: [
       structureTool({
         title: "Editor",
@@ -59,7 +69,7 @@ export const workspaceConfig = defineConfig([
       }),
     ],
     releases: {
-      enabled: false,
+      enabled: true,
     },
   },
   {
@@ -75,6 +85,16 @@ export const workspaceConfig = defineConfig([
     schema,
     document: {
       newDocumentOptions: newDocumentsCreator,
+    },
+    scheduledDrafts: {
+      enabled: false,
+    },
+    beta: {
+      form: {
+        enhancedObjectDialog: {
+          enabled: true,
+        },
+      },
     },
     plugins: [
       structureTool({

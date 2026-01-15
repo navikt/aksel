@@ -1,5 +1,55 @@
 # @navikt/ds-tailwind
 
+## 8.0.0
+
+### Major Changes
+
+- New design with theming support - See https://aksel.nav.no/grunnleggende/endringslogg/versjon-8 for more info ([#4283](https://github.com/navikt/aksel/pull/4283))
+
+## 7.40.0
+
+## 7.39.1
+
+## 7.39.0
+
+## 7.38.0
+
+## 7.37.0
+
+## 7.36.0
+
+## 7.35.3
+
+## 7.35.2
+
+## 7.35.1
+
+## 7.35.0
+
+## 7.34.0
+
+## 7.33.5
+
+## 7.33.4
+
+## 7.33.3
+
+## 7.33.2
+
+## 7.33.1
+
+## 7.33.0
+
+## 7.32.5
+
+## 7.32.4
+
+## 7.32.3
+
+## 7.32.2
+
+## 7.32.1
+
 ## 7.32.0
 
 ## 7.31.0

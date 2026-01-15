@@ -1,13 +1,19 @@
 import { StorybookConfig } from "@storybook/react-vite";
-import { readFileSync } from "fs";
+import FG from "fast-glob";
+import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { loadCsf } from "storybook/internal/csf-tools";
 import { InlineConfig } from "vite";
 import turbosnap from "vite-plugin-turbosnap";
 import TsconfigPathsPlugin from "vite-tsconfig-paths";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const require = createRequire(import.meta.url);
+const includeWebsiteStories = process.env.WITH_WEBSITE === "true";
 
 const indexRegex = /export const args = {\s+index: (\d+),/;
 
@@ -17,8 +23,7 @@ export default {
     const customIndexer = async (fileName: string, opts: any) => {
       let code = readFileSync(fileName, "utf-8").toString();
 
-      const matches = indexRegex.exec(code);
-      const prefix = matches ? `${matches[1]} | ` : "";
+      const index = indexRegex.exec(code)?.[1];
 
       code = code.split(
         /\/\/ EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE/,
@@ -29,15 +34,18 @@ export default {
         .replace(".tsx", "")
         .split("/");
       const storyName = process.env.CHROMATIC
-        ? `${templateName} | ${prefix}${name}` // Chromatic does not support folders
-        : `${prefix}${name}`;
+        ? `${templateName} [${index}] ${name}` // Chromatic does not support folders, and doesn't like |
+        : `${index} | ${name}`;
 
       code += `
         export default { title: "Templates/${templateName}/${storyName}" };
         export const Demo = { render: Example };
         Demo.storyName = "${storyName}";`;
 
-      return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
+      return loadCsf(code, {
+        ...opts,
+        fileName,
+      }).parse().indexInputs;
     };
 
     return [
@@ -51,17 +59,13 @@ export default {
 
   staticDirs: ["./public"],
 
-  stories: () => [
-    "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "./docs/*.mdx",
-    "./docs/*.stories.tsx",
-    "../aksel.nav.no/website/pages/templates/**/*.tsx",
-  ],
+  stories: resolveStoriesPaths,
 
   addons: [
     getAbsolutePath("@storybook/addon-a11y"),
     getAbsolutePath("@storybook/addon-themes"),
     getAbsolutePath("@storybook/addon-docs"),
+    getAbsolutePath("@storybook/addon-vitest"),
   ],
 
   framework: {
@@ -108,4 +112,28 @@ export default {
 
 function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, "package.json")));
+}
+
+function resolveStoriesPaths() {
+  const paths = [
+    "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "./docs/*.mdx",
+    "./docs/*.stories.tsx",
+  ];
+
+  if (includeWebsiteStories) {
+    paths.push("../aksel.nav.no/website/pages/templates/**/*.tsx");
+  }
+
+  return FG.sync(paths, {
+    cwd: __dirname,
+    ignore: [
+      "../**/node_modules/**",
+      "**/dist",
+      "**/build",
+      "**/.next",
+      "**/esm",
+      "**/cjs",
+    ],
+  });
 }

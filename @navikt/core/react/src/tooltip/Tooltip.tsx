@@ -133,7 +133,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const modalContext = useModalContext(false);
-    const rootElement = modalContext ? modalContext.ref.current : undefined;
+    const rootElement = modalContext
+      ? modalContext.modalRef.current
+      : undefined;
 
     const {
       x,
@@ -209,8 +211,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         >
           {children}
         </Slot>
-        <Portal rootElement={rootElement} asChild>
-          {_open && (
+        {_open && (
+          <Portal rootElement={rootElement}>
             <div
               {...getFloatingProps({
                 ...rest,
@@ -267,8 +269,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 />
               )}
             </div>
-          )}
-        </Portal>
+          </Portal>
+        )}
       </>
     );
   },

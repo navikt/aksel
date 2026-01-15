@@ -3,8 +3,6 @@ import stylelint from "stylelint";
 import { deprecations } from "../../deprecations";
 
 const ruleName = "aksel/no-deprecated-classes";
-const url =
-  "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#aksel/no-deprecated-classes";
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   unexpected: (value, secondaryOption) =>
@@ -49,6 +47,8 @@ const ruleFunction: stylelint.Rule = () => {
 
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
-ruleFunction.meta = { url };
+ruleFunction.meta = {
+  url: `https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#${ruleName}`,
+};
 
 export default ruleFunction;

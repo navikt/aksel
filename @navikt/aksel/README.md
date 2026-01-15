@@ -1,6 +1,6 @@
 # Aksel command line interface
 
-CLI tool for managing CSS-imports and Codemods when consuming Aksel-packages.
+CLI tool for running codemods when consuming Aksel-packages.
 
 [Documentation](https://aksel.nav.no/preview/grunnleggende/kode/kommandolinje)
 
@@ -9,7 +9,6 @@ run:
 npx @navikt/aksel
 
 commands:
-css-imports: Generate css-imports for all components from Aksel
 codemod: Codemods for version-migrations related to Aksel
 ```
 
@@ -20,6 +19,103 @@ Codemods are code-transformations that patches breaking changes in your project.
 ```bash
 To get started:
 npx @navikt/aksel codemod --help
+```
+
+### v8
+
+#### Box
+
+`npx @navikt/aksel codemod v8-box ...`
+
+Updates Box with legacy-tokens to Box using the new token system.
+
+```diff
+-<Box background="bg-subtle" borderColor="border-alt-1">
++<Box background="bg-neutral-soft" borderColor="border-meta-purple">
+```
+
+#### BoxNew
+
+`npx @navikt/aksel codemod v8-box-new ...`
+
+Renames already migrated BoxNew/Box.New instances to Box.
+
+```diff
+-<BoxNew>
++<Box>
+```
+
+#### Prop deprecate
+
+`npx @navikt/aksel codemod v8-prop-deprecate ...`
+
+Removes deprecated props from components.
+
+```diff
+-<Accordion headingSize="large">
++<Accordion>
+
+-<Popover arrow>
++<Popover>
+
+-<Page background="bg-subtle">
++<Page>
+```
+
+#### List
+
+`npx @navikt/aksel codemod v8-list ...`
+
+Tries to migrate List component by wrapping it with 'Box' and moving 'title' and 'description' props to 'Heading' and 'BodyShort'.
+
+#### Variants
+
+`npx @navikt/aksel codemod v8-button-variant ...`
+`npx @navikt/aksel codemod v8-tag-variant ...`
+`npx @navikt/aksel codemod v8-toggle-group-variant ...`
+`npx @navikt/aksel codemod v8-accordion-variant ...`
+`npx @navikt/aksel codemod v8-chips-variant ...`
+`npx @navikt/aksel codemod v8-link-variant ...`
+
+Updates variant + data-color props based on current variant prop.
+
+```diff
+-<Tag variant="info">
++<Tag variant="outline" data-color="info">
+```
+
+#### Spacing
+
+`npx @navikt/aksel codemod v8-primitive-spacing ...`
+`npx @navikt/aksel codemod v8-token-spacing ...`
+`npx @navikt/aksel codemod v8-token-spacing-js ...`
+
+Updates use of legacy `spacing` token to new `space`-token
+
+```diff
+-<HStack gap="spacing-4" />
++<HStack gap="space-16" />
+```
+
+```diff
+-margin: var(--a-spacing-1);
++margin: var(--ax-space-4);
+```
+
+### v6
+
+#### Chat
+
+`npx @navikt/aksel codemod v6-chat ...`
+
+Removes `backgroundColor` and `avatarBgColor` properties from `Chat` and `Chat.Bubble`.
+
+```diff
+-<Chat backgroundColor="red" avatarBgColor="blue">
++<Chat>
+-  <Chat.Bubble backgroundColor="red" />
++  <Chat.Bubble />
+</Chat>
 ```
 
 ### v4

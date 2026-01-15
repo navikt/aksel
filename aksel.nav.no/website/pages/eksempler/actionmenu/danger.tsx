@@ -12,7 +12,8 @@ const Example = () => {
     <ActionMenu>
       <ActionMenu.Trigger>
         <Button
-          variant="secondary-neutral"
+          data-color="neutral"
+          variant="secondary"
           icon={<ChevronDownIcon aria-hidden />}
           iconPosition="right"
         >

@@ -14,11 +14,9 @@ const Example = () => {
 export default withDsExample(Example);
 
 /* Storybook story */
-export const Demo = {
-  render: Example,
-};
+export const Demo = { render: Example };
 
 export const args = {
   index: 3,
-  desc: "Bruk av children vil gi en grå blokk som ofte ikke ligner på det faktiske elementet. Derfor anbefaler vi å manuelt bygge elementet ved hjelp av flere skeletons og 'height' + 'width'.",
+  desc: "Bruk av `children` med flere elementer vil gi en grå blokk som ofte ikke ligner på det faktiske innholdet. Derfor anbefaler vi å manuelt bygge elementet ved hjelp av flere skeletons og `height` + `width`.",
 };

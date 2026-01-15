@@ -29,9 +29,13 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block width="text" gutters>
-        <VStack as="main" gap="8" data-aksel-template="form-intropage-v3">
-          <VStack gap="3">
-            <Bleed asChild marginInline={{ lg: "32" }}>
+        <VStack
+          as="main"
+          gap="space-32"
+          data-aksel-template="form-intropage-v4"
+        >
+          <VStack gap="space-12">
+            <Bleed asChild marginInline={{ lg: "space-128" }}>
               <Box
                 width={{ xs: "64px", lg: "96px" }}
                 height={{ xs: "64px", lg: "96px" }}
@@ -58,18 +62,20 @@ function Example() {
               Alderspensjon fra folketrygden er livsvarig, og sikrer at du har
               inntekt når du er pensjonist.
             </BodyLong>
-            <List>
-              <List.Item>
-                Du tjener opp alderspensjon fra inntekt og botid i Norge.
-              </List.Item>
-              <List.Item>
-                Du kan jobbe samtidig som du tar ut alderspensjon fra Nav.
-              </List.Item>
-              <List.Item>
-                Det er ulike regler for alderspensjon avhengig av når du er
-                født.
-              </List.Item>
-            </List>
+            <Box marginBlock="space-16" asChild>
+              <List>
+                <List.Item>
+                  Du tjener opp alderspensjon fra inntekt og botid i Norge.
+                </List.Item>
+                <List.Item>
+                  Du kan jobbe samtidig som du tar ut alderspensjon fra Nav.
+                </List.Item>
+                <List.Item>
+                  Det er ulike regler for alderspensjon avhengig av når du er
+                  født.
+                </List.Item>
+              </List>
+            </Box>
             <BodyLong>
               <Link href="#">
                 Les mer om alderspensjon, hvem som kan søke og hva du kan få på
@@ -81,10 +87,14 @@ function Example() {
             <Heading level="2" size="large" spacing>
               Her kan du søke om
             </Heading>
-            <List>
-              <List.Item>Alderspensjon</List.Item>
-              <List.Item>Avtalefestet pensjon (AFP) i privat sektor</List.Item>
-            </List>
+            <Box marginBlock="space-16" asChild>
+              <List>
+                <List.Item>Alderspensjon</List.Item>
+                <List.Item>
+                  Avtalefestet pensjon (AFP) i privat sektor
+                </List.Item>
+              </List>
+            </Box>
             <BodyLong spacing>
               Du kan lese mer om AFP i privat sektor hos Fellesordningen for
               AFP.
@@ -92,12 +102,14 @@ function Example() {
             <Heading level="3" size="medium" spacing>
               Dette kan du ikke søke om her
             </Heading>
-            <List>
-              <List.Item>
-                Avtalefestet pensjon (AFP) i offentlig sektor (link)
-              </List.Item>
-              <List.Item>Tjenestepensjon (link)</List.Item>
-            </List>
+            <Box marginBlock="space-16" asChild>
+              <List>
+                <List.Item>
+                  Avtalefestet pensjon (AFP) i offentlig sektor (link)
+                </List.Item>
+                <List.Item>Tjenestepensjon (link)</List.Item>
+              </List>
+            </Box>
             <BodyLong>
               Du kan ikke kombinere AFP i offentlig sektor og alderspensjon.
             </BodyLong>
@@ -182,7 +194,7 @@ function Example() {
                 Les mer om viktigheten av å gi riktige opplysninger.
               </Link>
             </BodyLong>
-            <Box paddingBlock="4 8">
+            <Box paddingBlock="space-16 space-32">
               <Checkbox>
                 Jeg bekrefter at jeg vil svare så riktig som jeg kan.
               </Checkbox>

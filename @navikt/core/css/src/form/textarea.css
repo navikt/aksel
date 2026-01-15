@@ -1,0 +1,104 @@
+.aksel-textarea__input {
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  height: var(--__axc-textarea-height);
+  appearance: none;
+  padding: var(--ax-space-8);
+  background-color: var(--ax-bg-input);
+  border-radius: var(--ax-radius-8);
+  border: 1px solid var(--ax-border-neutral);
+  resize: none;
+  width: 100%;
+  display: block;
+  color: var(--ax-text-neutral);
+  scroll-margin-block-start: 4rem;
+  white-space: break-spaces;
+
+  &::placeholder {
+    color: var(--ax-text-neutral-subtle);
+  }
+
+  &:hover {
+    border-color: var(--ax-border-strong);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+    border-color: var(--ax-border-strong);
+  }
+
+  &:disabled {
+    background-color: var(--ax-bg-input);
+    border-color: var(--ax-border-neutral);
+    cursor: not-allowed;
+  }
+
+  .aksel-form-field--small & {
+    padding: var(--ax-space-6);
+  }
+
+  .aksel-textarea--readonly & {
+    background-color: var(--ax-bg-neutral-moderate);
+    border-color: var(--ax-border-neutral-subtleA);
+    cursor: default;
+  }
+}
+
+.aksel-textarea__counter {
+  margin-top: -0.25rem;
+  color: var(--ax-text-neutral-subtle);
+}
+
+.aksel-textarea__counter--error {
+  color: var(--ax-text-danger-subtle);
+}
+
+.aksel-textarea__sr-counter {
+  display: none;
+}
+
+.aksel-textarea__input:focus ~ .aksel-textarea__sr-counter {
+  display: initial;
+}
+
+.aksel-textarea--resize-both .aksel-textarea__input {
+  resize: both;
+  border-end-end-radius: 0;
+}
+
+.aksel-textarea--resize-horizontal .aksel-textarea__input {
+  resize: horizontal;
+  border-end-end-radius: 0;
+}
+
+.aksel-textarea--resize-vertical .aksel-textarea__input {
+  resize: vertical;
+  border-end-end-radius: 0;
+}
+
+.aksel-textarea--autoscrollbar,
+.aksel-textarea--autoscrollbar .aksel-textarea__wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  /* Makes the box-shadow visible even though overflow is hidden: */
+  padding: 3px;
+  margin: -3px;
+}
+
+.aksel-textarea--autoscrollbar .aksel-textarea__input {
+  scrollbar-gutter: stable; /* Needed to prevent scrollbar from appearing too early */
+}
+
+.aksel-textarea--error .aksel-textarea__input:not(:disabled) {
+  box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
+  border-color: var(--ax-border-danger-strong);
+}
+
+@media (forced-colors: active) {
+  .aksel-textarea__input {
+    background-color: field;
+    color: fieldtext;
+  }
+}

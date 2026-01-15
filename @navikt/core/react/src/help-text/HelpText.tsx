@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps } from "../popover";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -19,6 +20,15 @@ export interface HelpTextProps
    * Classname for wrapper
    */
   wrapperClassName?: string;
+  /**
+   * Overrides color.
+   * @default "info"
+   *
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   * @private
+   */
+  "data-color"?: AkselColor;
 }
 
 /**
@@ -53,7 +63,6 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = useMergeRefs(buttonRef, ref);
     const [open, setOpen] = useState(false);
-    const themeContext = useThemeInternal(false);
     const translate = useI18n("HelpText");
 
     const titleWithFallback = title || translate("title");
@@ -70,9 +79,10 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           className={cn(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}
+          aria-label={titleWithFallback}
         >
-          <HelpTextIcon title={titleWithFallback} />
-          <HelpTextIcon filled title={titleWithFallback} />
+          <HelpTextIcon />
+          <HelpTextIcon filled />
         </button>
         <Popover
           onClose={() => setOpen(false)}
@@ -81,8 +91,6 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           anchorEl={buttonRef.current}
           placement={placement}
           strategy={strategy}
-          offset={themeContext?.isDarkside ? 8 : 12}
-          arrow={!themeContext?.isDarkside}
         >
           <Popover.Content className={cn("navds-body-short")}>
             {children}

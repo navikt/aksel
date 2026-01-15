@@ -1,5 +1,8 @@
-import React, { HTMLAttributes, forwardRef, useEffect, useRef } from "react";
+import React, { HTMLAttributes, forwardRef, useEffect } from "react";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
+import { useTimeout } from "../util/hooks/useTimeout";
+import { useValueAsRef } from "../util/hooks/useValueAsRef";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 interface ProgressBarPropsBase
@@ -43,6 +46,12 @@ interface ProgressBarPropsBase
    * Not needed if `aria-labelledby` is used.
    */
   "aria-label"?: string;
+  /**
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
 }
 
 export type ProgressBarProps = ProgressBarPropsBase &
@@ -95,22 +104,21 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   ) => {
     const { cn } = useRenameCSS();
     const translateX = 100 - (Math.round(value) / valueMax) * 100;
-    const onTimeoutRef = useRef<() => void>(undefined);
-    onTimeoutRef.current = simulated?.onTimeout;
+    const onTimeoutRef = useValueAsRef(simulated?.onTimeout);
+
     const translate = useI18n("ProgressBar");
+    const timeout = useTimeout();
 
     useEffect(() => {
-      if (simulated?.seconds && onTimeoutRef.current) {
-        const timeout = setTimeout(
-          onTimeoutRef.current,
-          simulated.seconds * 1000,
-        );
-        return () => clearTimeout(timeout);
+      if (!simulated?.seconds || !onTimeoutRef.current) {
+        return;
       }
-    }, [simulated?.seconds]);
+
+      timeout.start(simulated.seconds * 1000, onTimeoutRef.current);
+      return timeout.clear;
+    }, [onTimeoutRef, simulated?.seconds, timeout]);
 
     return (
-      /* biome-ignore lint/a11y/useFocusableInteractive: Progressbar is not interactive. */
       <div
         ref={ref}
         className={cn(
@@ -130,7 +138,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
                 max: Math.round(valueMax),
               })
         }
-        // biome-ignore lint/a11y/useAriaPropsForRole: We found that adding valueMin was not needed
         role="progressbar"
         aria-labelledby={ariaLabelledBy}
         aria-label={ariaLabel}
@@ -142,11 +149,11 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
               simulated?.seconds !== undefined,
           })}
           style={{
-            "--__ac-progress-bar-simulated":
+            "--__axc-progress-bar-simulated":
               simulated?.seconds !== undefined
                 ? `${simulated?.seconds}s`
                 : undefined,
-            "--__ac-progress-bar-translate": `-${translateX}%`,
+            "--__axc-progress-bar-translate": `-${translateX}%`,
           }}
         />
       </div>

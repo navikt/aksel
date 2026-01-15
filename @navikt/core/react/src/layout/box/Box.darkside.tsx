@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import type {
   AkselColoredBorderToken,
   AkselColoredStatelessBackgroundToken,
+  AkselDynamicStatelessBackgroundToken,
   AkselRootBackgroundToken,
   AkselRootBorderToken,
   AkselShadowToken,
@@ -25,27 +26,30 @@ import {
 export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
-   * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
-   * @see {@link StaticDefaultBgKeys} and {@link StaticBgKeys}
+   * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#backgroundColor).
+   * @see {@link AkselRootBackgroundToken}, {@link AkselColoredStatelessBackgroundToken} and {@link AkselDynamicStatelessBackgroundToken}
    */
-  background?: AkselRootBackgroundToken | AkselColoredStatelessBackgroundToken;
+  background?:
+    | AkselRootBackgroundToken
+    | AkselColoredStatelessBackgroundToken
+    | AkselDynamicStatelessBackgroundToken;
   /**
    * CSS `border-color` property.
-   * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
-   * @see {@link BorderColorKeys} and {@link BorderColorWithRoleKeys}
+   * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#borderColor).
+   * @see {@link AkselColoredBorderToken}
    */
   borderColor?:
     | Exclude<AkselRootBorderToken, "focus">
     | AkselColoredBorderToken;
   /**
    * CSS `border-radius` property.
-   * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
+   * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#radius)
    * or an object of radius tokens for different breakpoints.
    * @example
    * borderRadius='full'
    * borderRadius='0 full 12 2'
    * borderRadius={{xs: '2 12', sm: '0', md: '12', lg: 'full'}}
-   * @see {@link BorderRadiusKeys}
+   * @see {@link BorderRadiusScale}
    */
   borderRadius?: ResponsiveProp<
     SpaceDelimitedAttribute<BorderRadiusScale | "0">
@@ -67,29 +71,31 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   PrimitiveAsChildProps;
 
 /**
- *
  * Foundational Layout-primitive for generic encapsulation & styling.
+ * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/Box' instead (with same props).
+ *
+ * **Run `npx @navikt/aksel@latest codemod v8-box-new` to migrate.**
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/box)
  * @see 🏷️ {@link BoxProps}
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
- * <Box padding="4">
+ * <Box padding="space-16">
  *   <BodyShort>Hei</BodyShort>
  * </Box>
  *
  * @example
- * <Box padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}>
+ * <Box padding={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}>
  *   <BodyShort>Hei</BodyShort>
  * </Box>
  *
  * @example
- * <VStack gap="8">
- *  <Box padding="4">
+ * <VStack gap="space-32">
+ *  <Box padding="space-16">
  *   <BodyShort>Hei</BodyShort>
  *  </Box>
- *  <Box padding="4">
+ *  <Box padding="space-16">
  *    <BodyShort>Hei</BodyShort>
  *  </Box>
  * </VStack>
@@ -109,7 +115,7 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
         style: _style,
         asChild,
         ...rest
-      },
+      }: BoxNewProps & { as?: React.ElementType },
       ref,
     ) => {
       const { cn } = useRenameCSS();
@@ -128,15 +134,9 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
               .map((x) => `${x}px`)
               .join(" ")
           : undefined,
-        ...getResponsiveProps(
-          "ax",
-          "box",
-          "radius",
-          "radius",
-          borderRadius,
-          false,
-          ["0"],
-        ),
+        ...getResponsiveProps("box", "radius", "radius", borderRadius, false, [
+          "0",
+        ]),
       };
 
       const Comp = asChild ? Slot : Component;

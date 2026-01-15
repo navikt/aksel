@@ -8,7 +8,7 @@ import React, {
 import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
-import { createContext } from "../util/create-context";
+import { createStrictContext } from "../util/create-strict-context";
 import { useMergeRefs } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
@@ -22,6 +22,11 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
    * @default false
    */
   hideStatusText?: boolean;
+  /**
+   * Indicates that the process is truncated and that there are more Events
+   * not shown either before, after or on both sides of the current list.
+   */
+  isTruncated?: "start" | "end" | "both";
 }
 
 type ProcessContextProps = Pick<ProcessProps, "hideStatusText"> & {
@@ -29,10 +34,8 @@ type ProcessContextProps = Pick<ProcessProps, "hideStatusText"> & {
   syncAriaControls: () => void;
 };
 
-const [ProcessContextProvider, useProcessContext] =
-  createContext<ProcessContextProps>({
-    providerName: "ProcessContextProvider",
-    hookName: "useProcessContext",
+const { Provider: ProcessContextProvider, useContext: useProcessContext } =
+  createStrictContext<ProcessContextProps>({
     name: "ProcessContext",
     errorMessage:
       "`<Process.Event />` must be used within a `<Process />` component.",
@@ -100,6 +103,7 @@ export const Process: ProcessComponent = forwardRef<
       className,
       hideStatusText = false,
       id,
+      isTruncated,
       ...restProps
     }: ProcessProps,
     forwardedRef,
@@ -157,6 +161,7 @@ export const Process: ProcessComponent = forwardRef<
         className={cn("navds-process", className)}
         id={rootId}
         aria-controls={activeChildId}
+        data-truncated={isTruncated}
       >
         <ProcessContextProvider
           hideStatusText={hideStatusText}
@@ -237,6 +242,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
         data-process-event=""
         data-status={status}
       >
+        <ProcessLine position="start" />
         <div className={cn("navds-process__item")}>
           <ProcessBullet>{bullet}</ProcessBullet>
 
@@ -256,7 +262,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
             )}
           </div>
         </div>
-        <ProcessLine />
+        <ProcessLine position="end" />
       </li>
     );
   },
@@ -346,10 +352,16 @@ const ProcessBullet = ({ children }: ProcessBulletProps) => {
 };
 
 /* ------------------------------ Process Line ------------------------------ */
-const ProcessLine = () => {
+
+type ProcessLineProps = {
+  position?: "start" | "end";
+};
+const ProcessLine = ({ position }: ProcessLineProps) => {
   const { cn } = useRenameCSS();
 
-  return <span className={cn("navds-process__line")} />;
+  return (
+    <span className={cn("navds-process__line")} data-position={position} />
+  );
 };
 
 /* -------------------------- Process exports ------------------------- */

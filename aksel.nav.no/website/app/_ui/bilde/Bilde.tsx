@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+
+/** biome-ignore-all lint/performance/noImgElement: img is fine here */
 import NextLink from "next/link";
 import { BodyLong, HGrid, Link } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
@@ -16,9 +18,7 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
     kilde,
   } = props.value;
 
-  const imageUrl = urlForImage(props?.value)
-    ?.auto("format")
-    .url();
+  const imageUrl = urlForImage(props?.value)?.auto("format").url();
 
   if (!imageUrl) {
     return null;
@@ -41,7 +41,7 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
       {caption && (
         <HGrid
           as="figcaption"
-          marginBlock="space-8 0"
+          marginBlock="space-8 space-0"
           marginInline="space-12"
           gap="space-4"
           className={styles.bildeCaption}
@@ -55,16 +55,12 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
                 <>
                   {`${kilde?.prefix}: `}
 
-                  <Link
-                    as={NextLink}
-                    href={kilde.link}
-                    className="break-normal"
-                  >
+                  <Link as={NextLink} href={kilde.link}>
                     {kilde?.tekst}
                   </Link>
                 </>
               ) : (
-                <>{`${kilde?.prefix}: ${kilde?.tekst}`}</>
+                `${kilde?.prefix}: ${kilde?.tekst}`
               )}
             </BodyLong>
           )}

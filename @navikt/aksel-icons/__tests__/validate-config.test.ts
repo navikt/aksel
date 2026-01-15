@@ -1,7 +1,7 @@
 import fastglob from "fast-glob";
-import fs from "fs";
 import { JSON_SCHEMA, load } from "js-yaml";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { describe, expect, test } from "vitest";
 import { IconYml } from "../config/figma/make-configs";
 
@@ -24,8 +24,6 @@ describe(`Each icons YML-config is valid`, () => {
       expect(ymlData.keywords).toBeTruthy();
       expect(ymlData.variant).toBeTruthy();
       expect(ymlData.keywords.length).toBeGreaterThan(0);
-      expect(ymlData.updated_at).toBeTruthy();
-      expect(isDate(ymlData.updated_at)).toBeTruthy();
       expect(ymlData.created_at).toBeTruthy();
       expect(isDate(ymlData.created_at)).toBeTruthy();
     });

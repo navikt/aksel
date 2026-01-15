@@ -2,7 +2,9 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { InformationIcon } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
+import { Link } from "../link";
 import { BodyLong } from "../typography";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import GuidePanel from "./GuidePanel";
 
 type Story = StoryObj<typeof GuidePanel>;
@@ -15,39 +17,31 @@ export default {
   },
 } satisfies Meta<typeof GuidePanel>;
 
-const panelText = `Sit sint eu dolore reprehenderit exercitation labore aute anim sit
-adipisicing proident. Tempor ipsum ea cupidatat qui esse do veniam
-cupidatat. Excepteur irure reprehenderit esse tempor nisi duis qui ea
-enim id.`;
+const panelText = (
+  <>
+    Sit sint eu dolore reprehenderit exercitation labore aute anim sit
+    adipisicing proident. Tempor ipsum ea cupidatat qui esse do veniam
+    cupidatat. Excepteur irure reprehenderit esse tempor nisi duis qui ea enim
+    id. <Link href="#">Link</Link>
+  </>
+);
 
-export const Default: StoryObj<{ poster?: boolean; colorOverride?: boolean }> =
-  {
-    render: (props) => {
-      const style = props.colorOverride
-        ? {
-            "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
-            "--ac-guide-panel-border": "var(--a-purple-400)",
-          }
-        : {};
-
-      return (
-        <VStack gap="2">
-          <GuidePanel style={style} poster={props?.poster}>
-            {panelText}
-          </GuidePanel>
-        </VStack>
-      );
+export const Default: Story = {
+  argTypes: {
+    poster: {
+      control: {
+        type: "boolean",
+      },
     },
-
-    args: {
-      poster: undefined,
-      colorOverride: false,
-    },
-  };
+  },
+  args: {
+    children: panelText,
+  },
+};
 
 export const PosterVariants: Story = {
   render: () => (
-    <VStack gap="6" align="start">
+    <VStack gap="space-24" align="start">
       <GuidePanel>
         If you exclude the `poster` prop, you will get the poster variant on
         mobile (&lt;480px) and the non-poster variant otherwise.
@@ -66,21 +60,6 @@ export const PosterVariants: Story = {
   },
 };
 
-export const ColorOverride: Story = {
-  render: () => (
-    <div>
-      <GuidePanel
-        style={{
-          "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
-          "--ac-guide-panel-border": "var(--a-purple-400)",
-        }}
-      >
-        {panelText}
-      </GuidePanel>
-    </div>
-  ),
-};
-
 export const Content: Story = {
   render: () => (
     <GuidePanel>
@@ -88,7 +67,7 @@ export const Content: Story = {
         Duis et ex ad magna nostrud ut officia nulla cillum commodo sint irure
         elit nulla. Ad proident nulla ex sunt exercitation sunt Lorem non
         laboris ea ex cillum nulla consequat. Enim pariatur eiusmod quis est
-        fugiat officia nostrud dolore occaecat nisi.
+        fugiat officia nostrud dolore occaecat.
       </BodyLong>
       <BodyLong>
         Do esse magna nulla amet excepteur. Tempor laboris ipsum magna velit
@@ -108,70 +87,18 @@ export const CustomIllustration: Story = {
 export const ColorRole: Story = {
   render: () => (
     <VStack gap="space-40">
-      <div>
-        <GuidePanel>
-          <BodyLong spacing>
-            Duis et ex ad magna nostrud ut officia nulla cillum commodo sint
-            irure elit nulla. Ad proident nulla ex sunt exercitation sunt Lorem
-            non laboris ea ex cillum nulla consequat. Enim pariatur eiusmod quis
-            est fugiat officia nostrud dolore occaecat nisi.
-          </BodyLong>
-          <BodyLong>
-            Do esse magna nulla amet excepteur. Tempor laboris ipsum magna velit
-            dolore nulla id ex mollit. Deserunt ut esse laboris pariatur tempor
-            laborum veniam enim. Nisi deserunt officia minim enim.
-          </BodyLong>
-        </GuidePanel>
-      </div>
-      <div>
-        <GuidePanel data-color="brand-magenta">
-          <BodyLong spacing>
-            Duis et ex ad magna nostrud ut officia nulla cillum commodo sint
-            irure elit nulla. Ad proident nulla ex sunt exercitation sunt Lorem
-            non laboris ea ex cillum nulla consequat. Enim pariatur eiusmod quis
-            est fugiat officia nostrud dolore occaecat nisi.
-          </BodyLong>
-          <BodyLong>
-            Do esse magna nulla amet excepteur. Tempor laboris ipsum magna velit
-            dolore nulla id ex mollit. Deserunt ut esse laboris pariatur tempor
-            laborum veniam enim. Nisi deserunt officia minim enim.
-          </BodyLong>
-        </GuidePanel>
-      </div>
+      <GuidePanel>{panelText}</GuidePanel>
+      <GuidePanel data-color="brand-magenta">{panelText}</GuidePanel>
     </VStack>
   ),
 };
 
-export const Chromatic: Story = {
-  render: (props, context) => (
-    <div>
-      <div>
-        <h2>Default</h2>
-        {Default.render?.(Default.args || {}, context)}
-      </div>
-      <div>
-        <h2>PosterVariants</h2>
-        {PosterVariants.render?.(props, context)}
-      </div>
-      <div>
-        <h2>ColorOverride</h2>
-        {ColorOverride.render?.(props, context)}
-      </div>
-      <div>
-        <h2>Content</h2>
-        {Content.render?.(props, context)}
-      </div>
-      <div>
-        <h2>CustomIllustration</h2>
-        {CustomIllustration.render?.(props, context)}
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        {ColorRole.render?.(props, context)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
+export const Chromatic = renderStoriesForChromatic({
+  PosterVariants,
+  Content,
+  CustomIllustration,
+  ColorRole,
+});
+Chromatic.parameters = {
+  chromatic: { disable: false, viewports: [479, 800] },
 };

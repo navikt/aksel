@@ -2,17 +2,15 @@ import valueParser from "postcss-value-parser";
 import stylelint from "stylelint";
 
 const ruleName = "aksel/no-internal-tokens";
-const url =
-  "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#aksel/no-internal-tokens";
-const prefix = "--__ac-";
+const prefix = "--__axc-";
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   tokenUsed: (token, prop) =>
-    `("${token}") not allowed.\n\n` +
+    `"${token}" not allowed.\n\n` +
     `"${token}" (inside decleration "${prop}") looks like an internal design token, ` +
     `because it starts with "${prefix}". Internal tokens should not be used outside the design system.`,
   tokenOverridden: (token) =>
-    `("${token}") not allowed.\n\n` +
+    `"${token}" not allowed.\n\n` +
     `"${token}" looks like an internal design token, because it starts with "${prefix}". ` +
     `Internal tokens should not be overridden.`,
 });
@@ -57,6 +55,8 @@ const ruleFunction: stylelint.Rule = () => {
 
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = {};
-ruleFunction.meta = { url };
+ruleFunction.meta = {
+  url: `https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#${ruleName}`,
+};
 
 export default ruleFunction;

@@ -13,9 +13,6 @@ const Example = () => {
       <Button disabled variant="tertiary">
         Tertiary
       </Button>
-      <Button disabled variant="danger">
-        Danger
-      </Button>
     </HStack>
   );
 };
@@ -30,5 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 20,
-  desc: "Vi fraråder bruk av disabled state da elementet blir gjemt fra hjelpeteknologier og ofte vil være vanskelig å oppfatte visuelt.",
+  desc: "Vi fraråder bruk av disabled state da elementet blir gjemt fra hjelpeteknologier og vil ofte være vanskelig å oppfatte visuelt.",
 };

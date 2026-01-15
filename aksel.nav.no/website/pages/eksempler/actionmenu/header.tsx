@@ -6,24 +6,21 @@ import {
   PersonGroupIcon,
   PersonIcon,
 } from "@navikt/aksel-icons";
-import { ActionMenu, InternalHeader, Spacer } from "@navikt/ds-react";
+import { ActionMenu, InternalHeader, Spacer, Theme } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div style={{ minHeight: "20rem" }}>
-      <InternalHeader>
-        <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
-        <Spacer />
-        <ActionMenu>
-          <ActionMenu.Trigger>
-            <InternalHeader.Button>
-              <MenuGridIcon
-                fontSize="1.5rem"
-                title="Systemer og oppslagsverk"
-              />
-            </InternalHeader.Button>
-          </ActionMenu.Trigger>
+    <InternalHeader>
+      <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
+      <Spacer />
+      <ActionMenu>
+        <ActionMenu.Trigger>
+          <InternalHeader.Button>
+            <MenuGridIcon fontSize="1.5rem" title="Systemer og oppslagsverk" />
+          </InternalHeader.Button>
+        </ActionMenu.Trigger>
+        <Theme theme="light">
           <ActionMenu.Content>
             <ActionMenu.Group label="Gosys">
               <ActionMenu.Item onSelect={console.info} icon={<PersonIcon />}>
@@ -63,16 +60,19 @@ const Example = () => {
               <ActionMenu.Item onSelect={console.info}>Modia</ActionMenu.Item>
             </ActionMenu.Group>
           </ActionMenu.Content>
-        </ActionMenu>
+        </Theme>
+      </ActionMenu>
 
-        <InternalHeader.User name="Ola Normann" />
-      </InternalHeader>
-    </div>
+      <InternalHeader.User name="Ola Normann" />
+    </InternalHeader>
   );
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { variant: "static" });
+export default withDsExample(Example, {
+  variant: "static",
+  minHeight: "18rem",
+});
 
 /* Storybook story */
 export const Demo = {
@@ -81,4 +81,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
+  desc: "InternalHeader er implementert med 'dark mode' som standard. For at ActionMenu skal vises riktig kan Theme-komponenten med riktig globalt 'theme' brukes rundt ActionMenu.Content.",
 };

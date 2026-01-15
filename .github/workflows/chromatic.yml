@@ -26,7 +26,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -61,7 +61,7 @@ jobs:
 
       - name: Find Comment
         if: github.event_name != 'push' && !contains(github.event.head_commit.message, '[ci skip]')
-        uses: peter-evans/find-comment@v3
+        uses: peter-evans/find-comment@v4
         id: fc
         with:
           issue-number: ${{ github.event.pull_request.number }}
@@ -70,7 +70,7 @@ jobs:
 
       - name: Create or update comment
         if: github.event_name != 'push' && !contains(github.event.head_commit.message, '[ci skip]')
-        uses: peter-evans/create-or-update-comment@v4
+        uses: peter-evans/create-or-update-comment@v5
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}

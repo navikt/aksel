@@ -39,17 +39,27 @@ const ResponsiveBreakpointDisplay = () => (
 
 export const PaddingBreakpoints = () => (
   <BasePrimitive
-    padding={{ xs: "2", sm: "4", md: "8", lg: "16", xl: "24", "2xl": "32" }}
+    padding={{
+      xs: "space-8",
+      sm: "space-16",
+      md: "space-32",
+      lg: "space-64",
+      xl: "space-96",
+      "2xl": "space-128",
+    }}
   >
-    <Box background="surface-alt-3-subtle">
+    <Box background="info-soft">
       <ResponsiveBreakpointDisplay />
     </Box>
   </BasePrimitive>
 );
 
 export const PaddingBreakpointsInherit1 = () => (
-  <BasePrimitive padding={{ xs: "2" }} paddingInline={{ md: "24 0" }}>
-    <Box background="surface-alt-3-subtle">
+  <BasePrimitive
+    padding={{ xs: "space-8" }}
+    paddingInline={{ md: "space-96 space-0" }}
+  >
+    <Box background="info-soft">
       <ResponsiveBreakpointDisplay />
     </Box>
   </BasePrimitive>
@@ -57,59 +67,59 @@ export const PaddingBreakpointsInherit1 = () => (
 
 export const PaddingBreakpointsInherit2 = () => (
   <BasePrimitive
-    padding={{ xs: "2", sm: "3" }}
-    paddingInline={{ sm: "4 0", md: "24 0" }}
+    padding={{ xs: "space-8", sm: "space-12" }}
+    paddingInline={{ sm: "space-16 space-0", md: "space-96 space-0" }}
   >
-    <Box background="surface-alt-3-subtle">
+    <Box background="info-soft">
       <ResponsiveBreakpointDisplay />
     </Box>
   </BasePrimitive>
 );
 
 export const Padding = () => (
-  <VStack align="center" gap="2">
-    <BasePrimitive padding="20">
+  <VStack align="center" gap="space-8">
+    <BasePrimitive padding="space-80">
       <Box borderWidth="1">Padding all around</Box>
     </BasePrimitive>
-    <BasePrimitive padding="1" paddingBlock="20 0">
+    <BasePrimitive padding="space-4" paddingBlock="space-80 space-0">
       <Box borderWidth="1">Padding to the North</Box>
     </BasePrimitive>
-    <BasePrimitive padding="1" paddingInline="0 20">
+    <BasePrimitive padding="space-4" paddingInline="space-0 space-80">
       <Box borderWidth="1">Padding to the East</Box>
     </BasePrimitive>
-    <BasePrimitive padding="1" paddingBlock="0 20">
+    <BasePrimitive padding="space-4" paddingBlock="space-0 space-80">
       <Box borderWidth="1">Padding to the South</Box>
     </BasePrimitive>
-    <BasePrimitive padding="1" paddingInline="20 0">
+    <BasePrimitive padding="space-4" paddingInline="space-80 space-0">
       <Box borderWidth="1">Padding to the West</Box>
     </BasePrimitive>
   </VStack>
 );
 
 export const Margin = () => (
-  <VStack align="center" gap="2">
-    <Box background="surface-alt-3-subtle">
-      <BasePrimitive margin="20">
+  <VStack align="center" gap="space-8">
+    <Box background="info-soft">
+      <BasePrimitive margin="space-80">
         <Box borderWidth="1">Margin all around</Box>
       </BasePrimitive>
     </Box>
-    <Box background="surface-alt-3-subtle">
-      <BasePrimitive margin="1" marginBlock="20 0">
+    <Box background="info-soft">
+      <BasePrimitive margin="space-4" marginBlock="space-80 space-0">
         <Box borderWidth="1">Margin to the North</Box>
       </BasePrimitive>
     </Box>
-    <Box background="surface-alt-3-subtle">
-      <BasePrimitive margin="1" marginInline="0 20">
+    <Box background="info-soft">
+      <BasePrimitive margin="space-4" marginInline="space-0 space-80">
         <Box borderWidth="1">Margin to the East</Box>
       </BasePrimitive>
     </Box>
-    <Box background="surface-alt-3-subtle">
-      <BasePrimitive margin="1" marginBlock="0 20">
+    <Box background="info-soft">
+      <BasePrimitive margin="space-4" marginBlock="space-0 space-80">
         <Box borderWidth="1">Margin to the South</Box>
       </BasePrimitive>
     </Box>
-    <Box background="surface-alt-3-subtle">
-      <BasePrimitive margin="1" marginInline="20 0">
+    <Box background="info-soft">
+      <BasePrimitive margin="space-4" marginInline="space-80 space-0">
         <Box borderWidth="1">Margin to the West</Box>
       </BasePrimitive>
     </Box>
@@ -117,18 +127,18 @@ export const Margin = () => (
 );
 
 export const MarginAuto = () => (
-  <Box width="400px" background="surface-alt-3-subtle">
+  <Box width="400px" background="info-soft">
     <BasePrimitive marginInline="auto">
       <Box borderWidth="1" width="200px">
         MarginInline: auto
       </Box>
     </BasePrimitive>
-    <BasePrimitive marginInline="auto 0" marginBlock="2">
+    <BasePrimitive marginInline="auto space-0" marginBlock="space-8">
       <Box borderWidth="1" width="200px">
         MarginInline: auto 0
       </Box>
     </BasePrimitive>
-    <BasePrimitive marginInline="0 auto" marginBlock="2">
+    <BasePrimitive marginInline="space-0 auto" marginBlock="space-8">
       <Box borderWidth="1" width="200px">
         MarginInline: 0 auto
       </Box>
@@ -137,7 +147,7 @@ export const MarginAuto = () => (
 );
 
 export const HeightWidth = () => (
-  <VStack align="center" gap="2">
+  <VStack align="center" gap="space-8">
     <BasePrimitive height="4rem">
       <Box borderWidth="1">height 4 rem</Box>
     </BasePrimitive>
@@ -169,26 +179,26 @@ export const PositionAbsolute = () => (
       border: "1px solid gray",
     }}
   >
-    <BasePrimitive position="absolute" inset="0">
+    <BasePrimitive position="absolute" inset="space-0">
       <div style={{ display: "grid", placeContent: "center" }}>inset 0</div>
     </BasePrimitive>
-    <BasePrimitive position="absolute" top="4" right="0">
+    <BasePrimitive position="absolute" top="space-16" right="space-0">
       <div>Top</div>
     </BasePrimitive>
-    <BasePrimitive position="absolute" bottom="4">
+    <BasePrimitive position="absolute" bottom="space-16">
       <div>bottom</div>
     </BasePrimitive>
-    <BasePrimitive position="absolute" right="4" bottom="0">
+    <BasePrimitive position="absolute" right="space-16" bottom="space-0">
       <div>right</div>
     </BasePrimitive>
-    <BasePrimitive position="absolute" left="4">
+    <BasePrimitive position="absolute" left="space-16">
       <div>left</div>
     </BasePrimitive>
   </div>
 );
 
 export const Overflow = () => (
-  <VStack gap="8">
+  <VStack gap="space-32">
     <BasePrimitive overflow="scroll" maxHeight="100px" maxWidth="100px">
       <Box borderWidth="1">
         <div style={{ width: 200, height: 200 }}>scroll</div>
@@ -218,8 +228,8 @@ export const Overflow = () => (
 );
 
 export const Flex = () => (
-  <VStack gap="8">
-    <HStack align="center" gap="2">
+  <VStack gap="space-32">
+    <HStack align="center" gap="space-8">
       <BasePrimitive flexGrow="1">
         <Box borderWidth="1">grow 1</Box>
       </BasePrimitive>
@@ -231,7 +241,7 @@ export const Flex = () => (
       </BasePrimitive>
     </HStack>
     <h2>Flex basis</h2>
-    <HStack align="center" gap="0">
+    <HStack align="center" gap="space-0">
       <BasePrimitive flexBasis="33%">
         <Box borderWidth="1">33%</Box>
       </BasePrimitive>
@@ -249,9 +259,9 @@ export const Flex = () => (
 );
 
 export const Grid = () => (
-  <VStack gap="8">
+  <VStack gap="space-32">
     <h2>Static columns</h2>
-    <HGrid gap="2" columns="1fr 1fr 1fr">
+    <HGrid gap="space-8" columns="1fr 1fr 1fr">
       <BasePrimitive gridColumn="1 / span 2">
         <Box borderWidth="1">2 columns</Box>
       </BasePrimitive>
@@ -260,7 +270,7 @@ export const Grid = () => (
       </BasePrimitive>
     </HGrid>
     <h2>Dynamic columns</h2>
-    <HGrid gap="2" columns="1fr 1fr 1fr 1fr 1fr 1fr">
+    <HGrid gap="space-8" columns="1fr 1fr 1fr 1fr 1fr 1fr">
       <BasePrimitive
         gridColumn={{
           xs: "1 / span 1",
@@ -282,17 +292,17 @@ export const NewSpaceTokens = () => (
     <BasePrimitive padding="space-80">
       <Box borderWidth="1">Padding all around</Box>
     </BasePrimitive>
-    <BasePrimitive padding="1" paddingBlock="space-80 space-0">
+    <BasePrimitive padding="space-4" paddingBlock="space-80 space-0">
       <Box borderWidth="1">Padding to the North</Box>
     </BasePrimitive>
-    <BasePrimitive padding="1" paddingInline="space-0 space-80">
+    <BasePrimitive padding="space-4" paddingInline="space-0 space-80">
       <Box borderWidth="1">Padding to the East</Box>
     </BasePrimitive>
-    <BasePrimitive padding="1" paddingInline="20 space-80">
+    <BasePrimitive padding="space-4" paddingInline="space-80">
       <Box borderWidth="1">mix</Box>
     </BasePrimitive>
     <BasePrimitive padding={{ md: "space-8", lg: "space-16", xl: "space-32" }}>
-      <Box background="surface-alt-3-subtle">
+      <Box background="info-soft">
         <ResponsiveBreakpointDisplay />
       </Box>
     </BasePrimitive>
@@ -301,7 +311,7 @@ export const NewSpaceTokens = () => (
 
 export const Chromatic: Story = {
   render: () => (
-    <VStack align="center" gap="6">
+    <VStack align="center" gap="space-24">
       <div>
         <h2>PaddingBreakpoints</h2>
         <PaddingBreakpoints />

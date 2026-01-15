@@ -43,37 +43,35 @@ const Example = () => {
   });
 
   return (
-    <>
-      <Table
-        sort={sort}
-        onSortChange={(sortKey) =>
-          handleSort(sortKey as ScopedSortState["orderBy"])
-        }
-      >
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeader sortKey="name" sortable>
-              Navn
-            </Table.ColumnHeader>
-            <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
-            <Table.ColumnHeader sortKey="start" sortable>
-              Start
-            </Table.ColumnHeader>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {sortedData.map(({ name, fnr, start }, i) => {
-            return (
-              <Table.Row key={i + fnr}>
-                <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
-                <Table.DataCell>{fnr}</Table.DataCell>
-                <Table.DataCell>{format(new Date(start))}</Table.DataCell>
-              </Table.Row>
-            );
-          })}
-        </Table.Body>
-      </Table>
-    </>
+    <Table
+      sort={sort}
+      onSortChange={(sortKey) =>
+        handleSort(sortKey as ScopedSortState["orderBy"])
+      }
+    >
+      <Table.Header>
+        <Table.Row>
+          <Table.ColumnHeader sortKey="name" sortable>
+            Navn
+          </Table.ColumnHeader>
+          <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
+          <Table.ColumnHeader sortKey="start" sortable>
+            Start
+          </Table.ColumnHeader>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {sortedData.map(({ name, fnr, start }, i) => {
+          return (
+            <Table.Row key={i + fnr}>
+              <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
+              <Table.DataCell>{fnr}</Table.DataCell>
+              <Table.DataCell>{format(new Date(start))}</Table.DataCell>
+            </Table.Row>
+          );
+        })}
+      </Table.Body>
+    </Table>
   );
 };
 
@@ -87,27 +85,27 @@ const format = (date: Date) => {
 const data = [
   {
     name: "Jakobsen, Markus",
-    fnr: "03129265463",
+    fnr: "03999265463",
     start: "2020-04-28T19:12:14.358Z",
   },
   {
     name: "Halvorsen, Mari",
-    fnr: "16063634134",
+    fnr: "16993634134",
     start: "2022-01-29T09:51:19.833Z",
   },
   {
     name: "Christiansen, Mathias",
-    fnr: "18124441438",
+    fnr: "18994441438",
     start: "2021-06-04T20:57:29.159Z",
   },
   {
     name: "Fredriksen, Leah",
-    fnr: "24089080180",
+    fnr: "24999080180",
     start: "2015-08-31T15:47:36.293Z",
   },
   {
     name: "Evensen, Jonas",
-    fnr: "18106248460",
+    fnr: "18996248460",
     start: "2010-07-17T11:13:26.116Z",
   },
 ];

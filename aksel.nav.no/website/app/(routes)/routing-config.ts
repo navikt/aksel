@@ -8,7 +8,7 @@ import {
   komponentKategorier,
   templatesKategorier,
 } from "@/sanity/config";
-import { metadata as tokenMetadata } from "./(designsystemet)/grunnleggende/darkside/design-tokens/page";
+import { metadata as tokenMetadata } from "./(designsystemet)/grunnleggende/styling/design-tokens/page";
 import { metadata as iconsMetadata } from "./(designsystemet)/komponenter/ikoner/page";
 
 type PageRoute = {
@@ -64,10 +64,10 @@ const PAGE_ROUTES: Routes = {
       },
     ],
     nested: {
-      darkside: [
+      styling: [
         {
-          heading: "Tokens darkside",
-          slug: `grunnleggende/darkside/design-tokens`,
+          heading: "Design tokens",
+          slug: `grunnleggende/styling/design-tokens`,
           tag: "ready",
           searchMetadata: {
             intro: tokenMetadata?.description ?? "",

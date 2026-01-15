@@ -19,11 +19,6 @@ type CodeBlockT = {
   defaultWrap?: boolean;
 };
 
-/**
- * TODO: Future upgrades
- * - Add support for highlighting lines
- * - Add support for DIFF
- */
 function CodeBlock(props: CodeBlockT & React.HTMLAttributes<HTMLDivElement>) {
   const { tabs, showLineNumbers = true, defaultWrap, ...rest } = props;
 
@@ -101,7 +96,7 @@ function CodeBlockEditor(props: {
 
   const showExpander = !!extraCode || code.split("\n").length > 16;
   const showOverflow = !!extraCode || expanded.current;
-  const visibleCode = (expanded.current ? extraCode ?? code : code).trim();
+  const visibleCode = (expanded.current ? (extraCode ?? code) : code).trim();
 
   const Wrapper = useTabs ? TabsPanel : "div";
 
@@ -136,16 +131,41 @@ function CodeBlockEditor(props: {
             <code>
               {tokens.map((line, i) => {
                 const lineProps = getLineProps({ line });
+                const lineText = line.map((t) => t.content).join("");
+                const lineMark = getLineMark(lang, lineText);
+
                 return (
                   <div
                     key={i}
                     {...lineProps}
                     style={{ ...lineProps.style, "--line": `"${i + 1}"` }}
                     className={styles.codeBlockLine}
+                    data-line-mark={lineMark}
                   >
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token })} />
-                    ))}
+                    {line.map((token, key) => {
+                      let content = token.content;
+                      if (key === 0 && lineMark) {
+                        content = content.slice(1);
+                      }
+                      const tokenProps = { ...getTokenProps({ token }) };
+                      return (
+                        <span
+                          key={key}
+                          {...tokenProps}
+                          style={{
+                            ...tokenProps.style,
+                            color:
+                              lineMark === "add"
+                                ? "var(--ax-text-success)"
+                                : lineMark === "remove"
+                                  ? "var(--ax-text-danger)"
+                                  : tokenProps.style?.color,
+                          }}
+                        >
+                          {content}
+                        </span>
+                      );
+                    })}
                   </div>
                 );
               })}
@@ -255,11 +275,31 @@ function getLanguage(lang: string) {
     case "less":
       language = "css";
       break;
+    case "diff":
+      language = "diff";
+      break;
     default:
       break;
   }
 
   return language;
+}
+
+function getLineMark(lang: string, lineText: string) {
+  const trimmed = lineText.trimStart();
+
+  /* Ignore empty lines or lines with only the marker */
+  if (trimmed.length <= 1) return undefined;
+
+  /* Highlight works for any language */
+  if (trimmed.startsWith(">")) return "highlight";
+
+  /* Add/remove only applies to diff language */
+  if (lang !== "diff") return undefined;
+  if (trimmed.startsWith("+")) return "add";
+  if (trimmed.startsWith("-")) return "remove";
+
+  return undefined;
 }
 
 export { CodeBlock };

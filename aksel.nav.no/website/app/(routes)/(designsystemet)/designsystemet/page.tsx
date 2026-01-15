@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import React from "react";
 import { VStack } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -41,7 +40,7 @@ const DesignsystemetPage = async () => {
 
   return (
     <DesignsystemetPageLayout layout="without-toc">
-      <VStack align="center" gap="space-80" asChild>
+      <VStack align="center" gap="space-80" asChild position="relative">
         <PageBlock width="lg">
           <VStack asChild gap="space-48" align="center">
             <PageBlock width="md">

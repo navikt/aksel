@@ -14,11 +14,11 @@ function SingleCodeBlock(props: ExtractPortableComponentProps<"kode">) {
   const tab: CodeBlockTabsT[number] = {
     code: code.code,
     lang: (code.language as any) ?? "tsx",
-    text: code.language?.toUpperCase() ?? title ?? "Kode",
+    text: title ?? code.language?.toUpperCase() ?? "Kode",
     value: id,
   };
 
-  return <CodeBlock showLineNumbers tabs={[tab]} />;
+  return <CodeBlock showLineNumbers={false} tabs={[tab]} />;
 }
 
 export { SingleCodeBlock };

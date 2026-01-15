@@ -48,7 +48,7 @@ export function UndertemaHighlight(props) {
               background="neutral-soft"
               borderWidth="1"
               borderColor="neutral-subtleA"
-              borderRadius="medium"
+              borderRadius="4"
               padding="space-16"
               marginBlock="space-4 space-0"
             >

@@ -1,4 +1,5 @@
 import { BodyShort, Box, Heading } from "@navikt/ds-react";
+import type { AkselColorRole } from "@navikt/ds-tokens/types";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { Code } from "../typography/Code";
 import { PropsSeksjonCode } from "./PropsSeksjon.code";
@@ -89,7 +90,7 @@ const PropEntry = ({
       <>
         <Box
           as="dt"
-          paddingBlock="space-8 0"
+          paddingBlock="space-8 space-0"
           paddingInline="space-8"
           className="inline-block"
         >
@@ -103,12 +104,7 @@ const PropEntry = ({
             <PropsSeksjonCode code={prop.type} title="Type" wrap />
             <PropsSeksjonCode
               /* We assume that if type starts with ", its an union-type */
-              code={
-                (prop.type ?? "").startsWith('"') &&
-                !prop.defaultValue?.startsWith('"')
-                  ? `"${prop.defaultValue}"`
-                  : prop.defaultValue
-              }
+              code={prop.defaultValue}
               title="Default"
               wrap
             />
@@ -122,23 +118,26 @@ const PropEntry = ({
       </>
     );
   }
+
+  let type = prop.type;
+
+  if (prop.type === "AkselColor") {
+    type = unpackAkselColorType();
+  }
+
   return (
     <>
-      <Box as="dt" paddingBlock="space-8 0" paddingInline="space-8">
+      <Box as="dt" paddingBlock="space-8 space-0" paddingInline="space-8">
         <Code as="h4" highlighted>{`${prop.name}${
           prop?.required ? "" : "?"
         }`}</Code>
       </Box>
       <BodyShort as="dd">
         <Box as="ul" overflowX="auto">
-          <PropsSeksjonCode code={prop.type} title="Type" wrap />
+          <PropsSeksjonCode code={type} title="Type" wrap />
           <PropsSeksjonCode
             /* We assume that if type starts with ", its an union-type */
-            code={
-              (prop.type ?? "").startsWith('"')
-                ? `"${prop.defaultValue}"`
-                : prop.defaultValue
-            }
+            code={prop.defaultValue}
             title="Default"
             wrap
           />
@@ -152,5 +151,25 @@ const PropEntry = ({
     </>
   );
 };
+
+const colors: Record<AkselColorRole, boolean> = {
+  accent: true,
+  neutral: true,
+  info: true,
+  success: true,
+  warning: true,
+  danger: true,
+  "meta-purple": true,
+  "meta-lime": true,
+  "brand-beige": true,
+  "brand-blue": true,
+  "brand-magenta": true,
+};
+
+function unpackAkselColorType() {
+  return Object.keys(colors)
+    .map((key) => `"${key}"`)
+    .join(" | ");
+}
 
 export { PropsSeksjon };

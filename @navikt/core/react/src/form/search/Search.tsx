@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, {
   InputHTMLAttributes,
   forwardRef,
@@ -5,8 +6,10 @@ import React, {
   useState,
 } from "react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Button } from "../../button";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS } from "../../theme/Theme";
+import { AkselColor } from "../../types";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -73,6 +76,10 @@ export interface SearchProps
    * HTML size attribute. Specifies the width of the input, in characters.
    */
   htmlSize?: number | string;
+  /**
+   * @private
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 interface SearchComponent
@@ -151,7 +158,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       clearButton && !inputProps.disabled && (value ?? internalValue);
 
     return (
-      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+      // biome-ignore lint/a11y/noStaticElementInteractions: Escape key handler for clearing input
       <div
         onKeyDown={(event) => {
           if (event.key !== "Escape") {
@@ -268,10 +275,9 @@ function ClearButton({
 }: SearchClearButtonProps) {
   const { cn } = useRenameCSS();
 
-  const themeContext = useThemeInternal(false);
   const translate = useI18n("Search");
 
-  return themeContext?.isDarkside ? (
+  return (
     <Button
       className={cn("navds-search__button-clear")}
       variant="tertiary"
@@ -282,17 +288,6 @@ function ClearButton({
       onClick={(event) => handleClear({ trigger: "Click", event })}
       type="button"
     />
-  ) : (
-    <button
-      type="button"
-      onClick={(event) => handleClear({ trigger: "Click", event })}
-      className={cn("navds-search__button-clear")}
-    >
-      <span className={cn("navds-sr-only")}>
-        {clearButtonLabel || translate("clear")}
-      </span>
-      <XMarkIcon aria-hidden />
-    </button>
   );
 }
 

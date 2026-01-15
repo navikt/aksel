@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
 import { extractJsx } from "./extract-jsx";
@@ -51,6 +51,8 @@ export async function parseCodeFile(dirPath: string, file: string) {
     sandboxBase64: processAndCompressForURI(filteredCode),
     /* We are limited to ~8000 characters in url, so disable story if too long */
     sandboxEnabled:
-      urlBaseLength + encodedCode.length < 8000 ? args.sandbox ?? true : false,
+      urlBaseLength + encodedCode.length < 8000
+        ? (args.sandbox ?? true)
+        : false,
   };
 }

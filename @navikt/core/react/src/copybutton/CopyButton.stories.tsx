@@ -4,6 +4,7 @@ import { userEvent, within } from "storybook/test";
 import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { CopyButton } from ".";
 import { Tooltip } from "../tooltip";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 
 const meta: Meta<typeof CopyButton> = {
   title: "ds-react/CopyButton",
@@ -22,10 +23,6 @@ export const Default: Story = {
     size: {
       control: { type: "radio" },
       options: ["medium", "small", "xsmall"],
-    },
-    variant: {
-      control: { type: "radio" },
-      options: ["neutral", "action"],
     },
     iconPosition: {
       control: { type: "radio" },
@@ -46,7 +43,7 @@ export const Interaction: Story = {
   render: () => (
     <CopyButton
       copyText="3.14"
-      variant="action"
+      data-color="accent"
       text="Kopier"
       data-testid="copy-button"
     />
@@ -58,16 +55,6 @@ export const Interaction: Story = {
 
     userEvent.click(button);
   },
-};
-
-export const Variants: Story = {
-  render: () => (
-    <div className="colgap">
-      <CopyButton copyText="3.14" variant="action" text="Kopier" />
-
-      <CopyButton copyText="3.14" variant="neutral" text="Kopier" />
-    </div>
-  ),
 };
 
 export const IconPosition: Story = {
@@ -84,42 +71,16 @@ export const Sizes: Story = {
   render: () => (
     <div className="colgap">
       <div className="rowgap">
-        <CopyButton copyText="3.14" variant="action" />
-        <CopyButton copyText="3.14" variant="neutral" />
-        <CopyButton copyText="3.14" variant="action" text="Kopier" />
-        <CopyButton copyText="3.14" variant="neutral" text="Kopier" />
+        <CopyButton copyText="3.14" />
+        <CopyButton copyText="3.14" text="Kopier" />
       </div>
       <div className="rowgap">
-        <CopyButton size="small" copyText="3.14" variant="action" />
-        <CopyButton size="small" copyText="3.14" variant="neutral" />
-        <CopyButton
-          size="small"
-          copyText="3.14"
-          variant="action"
-          text="Kopier"
-        />
-        <CopyButton
-          size="small"
-          copyText="3.14"
-          variant="neutral"
-          text="Kopier"
-        />
+        <CopyButton size="small" copyText="3.14" />
+        <CopyButton size="small" copyText="3.14" text="Kopier" />
       </div>
       <div className="rowgap">
-        <CopyButton size="xsmall" copyText="3.14" variant="action" />
-        <CopyButton size="xsmall" copyText="3.14" variant="neutral" />
-        <CopyButton
-          size="xsmall"
-          copyText="3.14"
-          variant="action"
-          text="Kopier"
-        />
-        <CopyButton
-          size="xsmall"
-          copyText="3.14"
-          variant="neutral"
-          text="Kopier"
-        />
+        <CopyButton size="xsmall" copyText="3.14" />
+        <CopyButton size="xsmall" copyText="3.14" text="Kopier" />
       </div>
     </div>
   ),
@@ -214,53 +175,17 @@ export const Disabled: Story = {
     <div className="colgap">
       <CopyButton copyText="3.14" disabled />
       <CopyButton copyText="3.14" size="small" disabled />
-      <CopyButton copyText="3.14" disabled variant="action" />
     </div>
   ),
 };
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Variants</h2>
-        {Variants.render?.(...props)}
-      </div>
-      <div>
-        <h2>IconPosition</h2>
-        {IconPosition.render?.(...props)}
-      </div>
-      <div>
-        <h2>Sizes</h2>
-        {Sizes.render?.(...props)}
-      </div>
-      <div>
-        <h2>Texts</h2>
-        {Texts.render?.(...props)}
-      </div>
-      <div>
-        <h2>Icons</h2>
-        {Icons.render?.(...props)}
-      </div>
-      <div>
-        <h2>InlineDemo</h2>
-        {InlineDemo.render?.(...props)}
-      </div>
-      <div>
-        <h2>WithTooltip</h2>
-        {WithTooltip.render?.(...props)}
-      </div>
-      <div>
-        <h2>Duration</h2>
-        {Duration.render?.(...props)}
-      </div>
-      <div>
-        <h2>Disabled</h2>
-        {Disabled.render?.(...props)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  IconPosition,
+  Sizes,
+  Texts,
+  Icons,
+  InlineDemo,
+  WithTooltip,
+  Duration,
+  Disabled,
+});

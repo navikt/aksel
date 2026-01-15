@@ -36,6 +36,10 @@ declare module "react" {
      */
     "data-block-margin"?: "space-28" | "space-0";
     /**
+     * Standarized scroll-margin
+     */
+    "data-scroll-margin"?: boolean;
+    /**
      * When set, the element will be rendered with a max-width made for prose text.
      */
     "data-text-prose"?: boolean;

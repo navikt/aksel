@@ -1,6 +1,6 @@
-import fs from "fs";
 import JSON5 from "json5";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { CodeExampleSchemaT } from "../../../components/types";
 import { RootDirectoriesT } from "../types";
 

@@ -28,6 +28,7 @@ export const Kode = defineType({
           { value: "bash", title: "Terminal" },
           { value: "markdown", title: "Markdown" },
           { value: "yaml", title: "YAML" },
+          { value: "diff", title: "Diff" },
         ],
       },
     }),

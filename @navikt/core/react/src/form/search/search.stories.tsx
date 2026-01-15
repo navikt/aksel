@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta } from "@storybook/react-vite";
 import React, { useState } from "react";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import Search from "./Search";
 
 export default {
@@ -34,8 +35,6 @@ export default {
   },
 } satisfies Meta<typeof Search>;
 
-type Story = StoryObj<typeof Search>;
-
 export const Default = (props) => {
   const [state, setState] = useState("");
   return (
@@ -61,47 +60,26 @@ Default.args = {
 };
 
 export const Small = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search label="Søk" size="small" />
-      <Search label="Søk" variant="secondary" size="small" />
-      <Search label="Søk" variant="simple" size="small" />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search label="Søk" size="small" />
-      <Search label="Søk" variant="secondary" size="small" />
-      <Search label="Søk" variant="simple" size="small" />
-    </div>
+  <div className="colgap">
+    <Search label="Søk" size="small" />
+    <Search label="Søk" variant="secondary" size="small" />
+    <Search label="Søk" variant="simple" size="small" />
   </div>
 );
 
 export const Variants = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search label="Søk" />
-      <Search label="Søk" variant="secondary" />
-      <Search label="Søk" variant="simple" />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search label="Søk" />
-      <Search label="Søk" variant="secondary" />
-      <Search label="Søk" variant="simple" />
-    </div>
+  <div className="colgap">
+    <Search label="Søk" />
+    <Search label="Søk" variant="secondary" />
+    <Search label="Søk" variant="simple" />
   </div>
 );
 
 export const ErrorVariants = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search error="errormsg" label="Søk" />
-      <Search error="errormsg" label="Søk" variant="secondary" />
-      <Search error="errormsg" label="Søk" variant="simple" />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search error="errormsg" label="Søk" />
-      <Search error="errormsg" label="Søk" variant="secondary" />
-      <Search error="errormsg" label="Søk" variant="simple" />
-    </div>
+  <div className="colgap">
+    <Search error="errormsg" label="Søk" />
+    <Search error="errormsg" label="Søk" variant="secondary" />
+    <Search error="errormsg" label="Søk" variant="simple" />
   </div>
 );
 
@@ -121,51 +99,28 @@ export const Disabled = () => (
 );
 
 export const Placeholder = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search label="Søk" placeholder="Søk" />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search label="Søk" placeholder="Søk" />
-    </div>
+  <div className="colgap">
+    <Search label="Søk" placeholder="Søk" />
   </div>
 );
 
 export const Text = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search label="Søk" value="Søketekst" />
-      <Search label="Søk" variant="secondary" value="Søketekst" />
-      <Search label="Søk" variant="simple" value="Søketekst" />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search label="Søk" value="Søketekst" />
-      <Search label="Søk" variant="secondary" value="Søketekst" />
-      <Search label="Søk" variant="simple" value="Søketekst" />
-    </div>
+  <div className="colgap">
+    <Search label="Søk" value="Søketekst" />
+    <Search label="Søk" variant="secondary" value="Søketekst" />
+    <Search label="Søk" variant="simple" value="Søketekst" />
   </div>
 );
 
 export const WLabel = () => (
-  <div className="rowgap">
-    <div className="colgap">
-      <Search label="Label søk" variant="simple" hideLabel={false} />
-      <Search
-        label="Label søk"
-        description="Description søk"
-        variant="simple"
-        hideLabel={false}
-      />
-    </div>
-    <div className="colgap" data-theme="dark">
-      <Search label="Label søk" variant="simple" hideLabel={false} />
-      <Search
-        label="Label søk"
-        description="Description søk"
-        variant="simple"
-        hideLabel={false}
-      />
-    </div>
+  <div className="colgap">
+    <Search label="Label søk" variant="simple" hideLabel={false} />
+    <Search
+      label="Label søk"
+      description="Description søk"
+      variant="simple"
+      hideLabel={false}
+    />
   </div>
 );
 
@@ -219,56 +174,16 @@ export const ColorRole = () => (
   </div>
 );
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Default</h2>
-        <Default {...props} />
-      </div>
-      <div>
-        <h2>Small</h2>
-        <Small />
-      </div>
-      <div>
-        <h2>Variants</h2>
-        <Variants />
-      </div>
-      <div>
-        <h2>ErrorVariants</h2>
-        <ErrorVariants />
-      </div>
-      <div>
-        <h2>Disabled</h2>
-        <Disabled />
-      </div>
-      <div>
-        <h2>Placeholder</h2>
-        <Placeholder />
-      </div>
-      <div>
-        <h2>Text</h2>
-        <Text />
-      </div>
-      <div>
-        <h2>WLabel</h2>
-        <WLabel />
-      </div>
-      <div>
-        <h2>NoClearButton</h2>
-        <NoClearButton />
-      </div>
-      <div>
-        <h2>HtmlSize</h2>
-        <HtmlSize />
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Small,
+  Variants,
+  ErrorVariants,
+  Disabled,
+  Placeholder,
+  Text,
+  WLabel,
+  NoClearButton,
+  HtmlSize,
+  ColorRole,
+});

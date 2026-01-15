@@ -1,0 +1,323 @@
+.aksel-checkbox,
+.aksel-radio {
+  --__axc-radio-checkbox-marker-size: 1.5rem;
+  --__axc-radio-checkbox-marker-target: 2.75rem; /* We want the click area to be a bit larger than the visible radio/checkbox */
+
+  position: relative;
+  width: fit-content;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ax-space-2) 0;
+  padding: var(--ax-space-12) 0; /* We need spacing even bellow the last element to allocate space for the clickable area */
+
+  /* Focus outline */
+  &:focus-within::after {
+    content: "";
+    position: absolute;
+    inset: var(--ax-space-12) 0;
+    pointer-events: none;
+    border-radius: var(--ax-radius-4);
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+/* Small */
+.aksel-checkbox--small,
+.aksel-radio--small {
+  --__axc-radio-checkbox-marker-size: 1.25rem;
+  --__axc-radio-checkbox-marker-target: 2rem;
+
+  padding: var(--ax-space-6) 0;
+
+  /* Focus outline */
+  &:focus-within::after {
+    inset: var(--ax-space-6) 0;
+  }
+}
+
+/* Label */
+.aksel-checkbox__label,
+.aksel-radio__label {
+  cursor: pointer;
+}
+
+/* Description */
+.aksel-checkbox__description,
+.aksel-radio__description {
+  grid-column-start: 2;
+}
+
+/* Spacing between marker and text */
+.aksel-checkbox__label,
+.aksel-radio__label,
+.aksel-checkbox__description,
+.aksel-radio__description {
+  padding-left: var(--ax-space-8);
+}
+
+/* Checkbox has a wrapper around input and checkmark svg (consider creating the checkmark with css in the future) */
+.aksel-checkbox__input-wrapper {
+  position: relative;
+  height: var(--__axc-radio-checkbox-marker-size);
+}
+
+/* The input acts as a container for the marker (since the click area should be larger than the visible marker) */
+.aksel-checkbox__input,
+.aksel-radio__input {
+  --__axc-radio-checkbox-marker-border: 2px;
+
+  -webkit-appearance: none; /* Safari <= 15.3 */
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  width: var(--__axc-radio-checkbox-marker-size);
+  height: var(--__axc-radio-checkbox-marker-size);
+  background-color: var(--ax-bg-input);
+  border: var(--__axc-radio-checkbox-marker-border) solid var(--ax-border-neutral);
+  border-radius: var(--ax-radius-4);
+  position: relative;
+}
+
+/* Visible marker */
+.aksel-checkbox__input::before,
+.aksel-radio__input::before {
+  content: "";
+  position: absolute;
+  inset: calc(
+    -1 *
+      (
+        var(--__axc-radio-checkbox-marker-border) +
+          (var(--__axc-radio-checkbox-marker-target) - var(--__axc-radio-checkbox-marker-size)) / 2
+      )
+  );
+}
+
+/* Radio marker should be round */
+.aksel-radio__input {
+  border-radius: var(--ax-radius-full);
+}
+
+/* Checkbox indeterminate: Center the icon */
+.aksel-checkbox__input:indeterminate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Checkbox indeterminate icon */
+.aksel-checkbox__input:indeterminate::after {
+  content: "";
+  width: 0.75rem;
+  height: 0.25rem;
+  background-color: var(--ax-bg-default);
+  border-radius: 1px;
+  position: absolute;
+}
+
+/* Checkbox marker colors in checked/indeterminate state */
+.aksel-checkbox__input:where(:checked, :indeterminate) {
+  background-color: var(--ax-bg-strong-pressed);
+  border-color: var(--ax-bg-strong-pressed);
+}
+
+/* Checkbox marker colors in checked/indeterminate + hover state (unless disabled) */
+.aksel-checkbox__input:where(:checked, :indeterminate):not(:disabled):hover {
+  border-color: var(--ax-bg-strong-hover);
+  background-color: var(--ax-bg-strong-hover);
+}
+
+/* Checkbox checkmark: Hide when unchecked */
+.aksel-checkbox__input:where(:not(:checked)) + .aksel-checkbox__icon {
+  display: none;
+}
+
+/* Checkbox checkmark */
+.aksel-checkbox__icon {
+  color: var(--ax-bg-default);
+  pointer-events: none;
+  width: 0.8125rem; /* Safari does not support inline rem-values in SVG */
+  height: var(--__axc-radio-checkbox-marker-size);
+  position: absolute;
+  top: 0;
+  left: var(--ax-space-6);
+}
+
+/* Small Checkbox checkmark position */
+.aksel-checkbox--small .aksel-checkbox__input:checked + .aksel-checkbox__icon {
+  left: var(--ax-space-4);
+}
+
+/* Radio marker colors in checked state */
+.aksel-radio__input:checked {
+  --__axc-radio-checkbox-marker-border: 8px;
+
+  border-color: var(--ax-bg-strong-pressed);
+  background-color: var(--ax-bg-input);
+}
+
+/* Small Radio dot size in checked state */
+.aksel-radio--small > .aksel-radio__input:checked {
+  --__axc-radio-checkbox-marker-border: 7px;
+}
+
+/* Marker colors in unchecked hover state (unless disabled) */
+.aksel-checkbox__input:hover:not(:disabled, :checked, :indeterminate),
+.aksel-radio__input:hover:not(:disabled, :checked) {
+  border-color: var(--ax-border-strong);
+  background-color: var(--ax-bg-moderate-hoverA);
+}
+
+/* Marker colors in unchecked error state (unless disabled) */
+.aksel-checkbox--error .aksel-checkbox__input:not(:disabled, :checked, :indeterminate),
+.aksel-radio--error > .aksel-radio__input:not(:disabled, :checked) {
+  border-color: var(--ax-border-danger-strong);
+}
+
+/* Opacity in disabled state */
+.aksel-checkbox--disabled,
+.aksel-radio--disabled {
+  opacity: var(--ax-opacity-disabled);
+}
+
+/* Cursor in disabled state on otherwise clickable elements */
+.aksel-checkbox--disabled :where(.aksel-checkbox__input, .aksel-checkbox__label),
+.aksel-radio--disabled > :where(.aksel-radio__input, .aksel-radio__label) {
+  cursor: not-allowed;
+}
+
+/* Cursor in readonly state on otherwise clickable elements */
+.aksel-checkbox--readonly :where(.aksel-checkbox__input, .aksel-checkbox__label),
+.aksel-radio--readonly > :where(.aksel-radio__input, .aksel-radio__label) {
+  cursor: default;
+}
+
+/* Marker colors in readonly state (`:not(:disabled)` is just to get same specificity as (hence override) hover colors) */
+.aksel-checkbox--readonly .aksel-checkbox__input:not(:disabled),
+.aksel-radio--readonly > .aksel-radio__input:not(:disabled) {
+  background-color: var(--ax-bg-neutral-moderate);
+  border-color: var(--ax-border-neutral-subtle);
+}
+
+.aksel-checkbox--readonly {
+  /* Needed to center the lock icon on standalone checkbox */
+  .aksel-checkbox__label {
+    display: inline-flex;
+  }
+
+  /* Checkbox checkmark color in readonly + checked state */
+  .aksel-checkbox__input:checked + .aksel-checkbox__icon {
+    color: var(--ax-text-neutral-subtle);
+  }
+
+  /* Checkbox indeterminate icon color in readonly + indeterminate state */
+  .aksel-checkbox__input:indeterminate::after {
+    background-color: var(--ax-text-neutral-subtle);
+  }
+}
+
+/* Radio marker colors in readonly + checked state */
+.aksel-radio--readonly > .aksel-radio__input:checked {
+  --__axc-radio-checkbox-marker-border: 0px; /* Needs unit for calc() to work */
+
+  background-color: var(--ax-bg-neutral-strong);
+  box-shadow:
+    inset 0 0 0 2px var(--ax-border-neutral-subtle),
+    inset 0 0 0 8px var(--ax-bg-neutral-moderate);
+}
+
+/* Small Radio dot size in readonly + checked state */
+.aksel-radio--small.aksel-radio--readonly > .aksel-radio__input:checked {
+  box-shadow:
+    inset 0 0 0 2px var(--ax-border-neutral-subtle),
+    inset 0 0 0 7px var(--ax-bg-neutral-moderate);
+}
+
+/* High contrast mode (but not print) */
+@media screen and (forced-colors: active) {
+  /* Checkbox indeterminate icon color */
+  :is(.aksel-checkbox, .aksel-checkbox--readonly) .aksel-checkbox__input:indeterminate::after {
+    background-color: fieldtext;
+  }
+
+  /* Label color on hover (unless readonly/disabled) */
+  .aksel-checkbox:not(.aksel-checkbox--readonly):has(.aksel-checkbox__input:hover:not(:disabled)) > .aksel-checkbox__label,
+  .aksel-radio:not(.aksel-radio--readonly) > .aksel-radio__input:hover:not(:disabled) + .aksel-radio__label {
+    color: highlight;
+  }
+
+  /* Marker border color on hover (unless readonly/disabled) */
+  .aksel-checkbox:not(.aksel-checkbox--readonly) .aksel-checkbox__input:hover:not(:disabled),
+  .aksel-radio:not(.aksel-radio--readonly) > .aksel-radio__input:hover:not(:disabled) {
+    border-color: highlight;
+  }
+
+  /* Checkbox checkmark color in readonly + checked state */
+  .aksel-checkbox--readonly .aksel-checkbox__input:checked + .aksel-checkbox__icon {
+    color: var(--ax-bg-default);
+  }
+
+  /* Radio dot size in readonly + checked state */
+  .aksel-radio--readonly > .aksel-radio__input:checked {
+    --__axc-radio-checkbox-marker-border: 8px;
+  }
+
+  /* Small Radio dot size in readonly + checked state */
+  .aksel-radio--small.aksel-radio--readonly > .aksel-radio__input:checked {
+    --__axc-radio-checkbox-marker-border: 7px;
+  }
+
+  /* Turn off disabled state transparency */
+  .aksel-checkbox--disabled,
+  .aksel-radio--disabled {
+    opacity: 1;
+  }
+
+  /* Marker colors in disabled state */
+  .aksel-checkbox--disabled .aksel-checkbox__input,
+  .aksel-radio--disabled .aksel-radio__input {
+    border-color: graytext;
+    background-color: field;
+  }
+
+  /* Checkbox indeterminate icon color in disabled state */
+  .aksel-checkbox--disabled .aksel-checkbox__input:indeterminate::after {
+    background-color: graytext;
+  }
+
+  /* Text/icon color in disabled state */
+  .aksel-checkbox--disabled
+    :is(.aksel-checkbox__label, .aksel-checkbox__description, .aksel-checkbox__input:checked + .aksel-checkbox__icon),
+  .aksel-radio--disabled :is(.aksel-radio__label, .aksel-radio__description) {
+    color: graytext;
+  }
+}
+
+@media print {
+  .aksel-checkbox__input::before,
+  .aksel-radio__input::before {
+    z-index: -1;
+  }
+
+  .aksel-radio__input,
+  .aksel-checkbox__input {
+    border-color: black !important;
+  }
+
+  .aksel-radio__input:checked.aksel-radio__input:checked {
+    --__axc-radio-checkbox-marker-border: 7px;
+
+    border-color: black;
+  }
+
+  .aksel-checkbox__icon {
+    top: 2px;
+    bottom: 2px;
+    height: calc(var(--__axc-radio-checkbox-marker-size) - 4px);
+  }
+
+  .aksel-checkbox__input:indeterminate::after {
+    outline: 2px solid black;
+    outline-offset: -2px;
+  }
+}

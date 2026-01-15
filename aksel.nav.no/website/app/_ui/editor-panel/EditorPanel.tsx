@@ -1,16 +1,19 @@
 import {
   DownloadIcon,
   ExclamationmarkTriangleIcon,
-  FileTextIcon,
   InformationSquareIcon,
   LightBulbIcon,
   LinkIcon,
   ThumbDownIcon,
   ThumbUpIcon,
 } from "@navikt/aksel-icons";
-import { Heading, Spacer } from "@navikt/ds-react";
+import { InfoCard, Spacer } from "@navikt/ds-react";
+import {
+  InfoCardContent,
+  InfoCardHeader,
+  InfoCardTitle,
+} from "@navikt/ds-react/InfoCard";
 import { AkselColor } from "@navikt/ds-react/types/theme";
-import styles from "./EditorPanel.module.css";
 
 type EditorPanelProps = {
   children: React.ReactNode;
@@ -21,21 +24,13 @@ type EditorPanelProps = {
   /**
    * @default "h2"
    */
-  headingTag?: "h2" | "h3" | "h4" | "p";
+  headingTag?: "h2" | "h3" | "h4" | "div";
   /**
    * Optional action
    * @example <CopyButton />
    */
   actionComponent?: React.ReactNode;
-  variant:
-    | "tips"
-    | "do"
-    | "dont"
-    | "caution"
-    | "info"
-    | "links"
-    | "attachment"
-    | "example-text";
+  variant: "tips" | "do" | "dont" | "caution" | "info" | "links" | "attachment";
 };
 
 const VariantConfig: Record<
@@ -81,11 +76,6 @@ const VariantConfig: Record<
     icon: <DownloadIcon aria-hidden fontSize="1.5rem" />,
     color: "neutral",
   },
-  "example-text": {
-    heading: "Eksempeltekst",
-    icon: <FileTextIcon aria-hidden fontSize="1.5rem" />,
-    color: "neutral",
-  },
 } as const;
 
 function EditorPanel(props: EditorPanelProps) {
@@ -94,9 +84,8 @@ function EditorPanel(props: EditorPanelProps) {
   const config = VariantConfig[variant];
 
   return (
-    <div
+    <InfoCard
       data-block-margin="space-28"
-      className={styles.editorPanel}
       data-color={config.color}
       data-text-prose
     >
@@ -106,8 +95,8 @@ function EditorPanel(props: EditorPanelProps) {
         headingTag={headingTag}
         actionComponent={actionComponent}
       />
-      <div className={styles.editorPanelContent}>{children}</div>
-    </div>
+      <InfoCardContent>{children}</InfoCardContent>
+    </InfoCard>
   );
 }
 
@@ -127,18 +116,15 @@ function EditorPanelHeader(
   const config = VariantConfig[variant];
 
   return (
-    <div className={styles.editorPanelHeader} data-variant={variant}>
-      {config.icon}
-      <Heading as={headingTag} size="small">
-        {heading ?? config.heading}
-      </Heading>
+    <InfoCardHeader icon={config.icon}>
+      <InfoCardTitle as={headingTag}>{heading ?? config.heading}</InfoCardTitle>
       {actionComponent && (
         <>
           <Spacer />
           {actionComponent}
         </>
       )}
-    </div>
+    </InfoCardHeader>
   );
 }
 

@@ -6,7 +6,7 @@ const Example = () => {
     <Box
       style={{ display: "flex" }}
       height="18rem"
-      background="surface-alt-3-subtle"
+      background="neutral-moderate"
     >
       <HStack gap="space-8" wrap={false}>
         <VStack justify="center" gap="space-4">
@@ -51,23 +51,22 @@ const Example = () => {
 
 const Placeholder = ({ text }: { text?: string }) => (
   <Box
-    background="surface-alt-3"
-    borderRadius="medium"
+    background="neutral-strong"
+    borderRadius="4"
     padding="space-8"
-    style={{ color: "var(--a-text-on-action)" }}
+    style={{ color: "var(--ax-text-accent-contrast)" }}
   >
     {text}
   </Box>
 );
 
 const Divider = () => {
-  return <Box borderWidth="0 1 0 0" borderColor="border-divider" />;
+  return <Box borderWidth="0 1 0 0" borderColor="neutral-subtle" />;
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
-  legacyOnly: true,
 });
 
 /* Storybook story */

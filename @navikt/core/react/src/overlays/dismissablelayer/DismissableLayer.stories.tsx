@@ -253,8 +253,8 @@ export const ParallelDismissableLayer = () => {
 
   return (
     <StrictMode>
-      <VStack gap="4">
-        <HStack gap="2">
+      <VStack gap="space-16">
+        <HStack gap="space-8">
           <button onClick={() => setSingle((x) => !x)}>
             Single {state(single)}
           </button>

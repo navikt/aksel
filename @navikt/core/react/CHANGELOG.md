@@ -1,5 +1,285 @@
 # @navikt/ds-react
 
+## 8.0.0
+
+### Major Changes
+
+- New design with theming support - See https://aksel.nav.no/grunnleggende/endringslogg/versjon-8 for more info ([#4283](https://github.com/navikt/aksel/pull/4283))
+
+### Patch Changes
+
+- Updated dependencies [[`5572548`](https://github.com/navikt/aksel/commit/5572548bb582892dadb34a190b9915bca3c4d656)]:
+  - @navikt/ds-tokens@8.0.0
+  - @navikt/aksel-icons@8.0.0
+
+## 7.40.0
+
+### Patch Changes
+
+- DatePicker/MonthPicker: Remove role=dialog from popover ([#4463](https://github.com/navikt/aksel/pull/4463))
+
+- Updated dependencies [[`2a43bcc`](https://github.com/navikt/aksel/commit/2a43bcc6d1cea922baf0d80101e12eb822699ff6)]:
+  - @navikt/aksel-icons@7.40.0
+  - @navikt/ds-tokens@7.40.0
+
+## 7.39.1
+
+### Patch Changes
+
+- Dialog: Removed 'aria-expanded' from Dialog.Trigger. ([#4478](https://github.com/navikt/aksel/pull/4478))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.39.1
+  - @navikt/aksel-icons@7.39.1
+
+## 7.39.0
+
+### Minor Changes
+
+- LocalAlert, InfoCard: Reduced default header height. ([`91f3f8a`](https://github.com/navikt/aksel/commit/91f3f8acb8749bc154a1e7dca008ce0be43e2e34))
+
+- GlobalAlert: Reduced default header height and added centered content prop. ([#4476](https://github.com/navikt/aksel/pull/4476))
+
+### Patch Changes
+
+- ReadMore: Removed tabIndex 0 from content. ([#4464](https://github.com/navikt/aksel/pull/4464))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.39.0
+  - @navikt/aksel-icons@7.39.0
+
+## 7.38.0
+
+### Patch Changes
+
+- Dialog: Now interacts better with Modal and Datepicker. ([#4455](https://github.com/navikt/aksel/pull/4455))
+
+- ActionMenu: Trigger handles click while inside web-component better. ([#4428](https://github.com/navikt/aksel/pull/4428))
+
+- Internal: Updated mergedRef-utility. ([#4434](https://github.com/navikt/aksel/pull/4434))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.38.0
+  - @navikt/aksel-icons@7.38.0
+
+## 7.37.0
+
+### Minor Changes
+
+- Dialog: :tada: New component `Dialog`. ([#4262](https://github.com/navikt/aksel/pull/4262))
+
+### Patch Changes
+
+- Internals: Update internal utilities. ([#4432](https://github.com/navikt/aksel/pull/4432))
+
+- Internal: Updated internal createContext utility. ([#4433](https://github.com/navikt/aksel/pull/4433))
+
+- Updated dependencies [[`452d128`](https://github.com/navikt/aksel/commit/452d12826fd27e011dd96f2d95eefea33779b5f0)]:
+  - @navikt/ds-tokens@7.37.0
+  - @navikt/aksel-icons@7.37.0
+
+## 7.36.0
+
+### Patch Changes
+
+- Datepicker: Fixed bug where selecting same date while only `from`-date is defined in "ranged"-mode would cause no interaction to happen. ([#4417](https://github.com/navikt/aksel/pull/4417))
+
+- InternalHeader: InternalHeader.User-props supports React.ReactNode now. ([#4415](https://github.com/navikt/aksel/pull/4415))
+
+- Datepicker/MonthPicker: Popover now flips if there is more available space above input. ([#4420](https://github.com/navikt/aksel/pull/4420))
+
+- Popover: Placement-prop now respects 'alignment' when flipping. ([#4420](https://github.com/navikt/aksel/pull/4420))
+
+- Updated dependencies [[`092853d`](https://github.com/navikt/aksel/commit/092853dd18e5a9eb84f00bd5bd3559f82d1e885d)]:
+  - @navikt/aksel-icons@7.36.0
+  - @navikt/ds-tokens@7.36.0
+
+## 7.35.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.35.3
+  - @navikt/aksel-icons@7.35.3
+
+## 7.35.2
+
+### Patch Changes
+
+- InfoCard: Removed unused `aria-labelledby` from `InfoCard.Title`. ([#4393](https://github.com/navikt/aksel/pull/4393))
+
+- Accordion: Remove `aria-hidden` to prevent SiteImprove reporting an issue. ([#4382](https://github.com/navikt/aksel/pull/4382))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.35.2
+  - @navikt/aksel-icons@7.35.2
+
+## 7.35.1
+
+### Patch Changes
+
+- Select: Remove the htmlSize prop ([#4347](https://github.com/navikt/aksel/pull/4347))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.35.1
+  - @navikt/aksel-icons@7.35.1
+
+## 7.35.0
+
+### Patch Changes
+
+- Combobox: Add locale-support for 'Ingen søketreff'. ([#4324](https://github.com/navikt/aksel/pull/4324))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.35.0
+  - @navikt/aksel-icons@7.35.0
+
+## 7.34.0
+
+### Minor Changes
+
+- LocalAlert: :tada: New component replacing regular `<Alert />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- GlobalAlert: :tada: New component replacing `<Alert fullWidth>`, now with built-in centering of content. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InlineMessage: :tada: New component replacing `<Alert inline />`. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+- InfoCard: :tada: New component replacing `<Alert variant="info" />`. Used for content you want to highlight. ([#4186](https://github.com/navikt/aksel/pull/4186))
+
+### Patch Changes
+
+- Updated dependencies [[`a405824`](https://github.com/navikt/aksel/commit/a4058247d01292217a2209fbfbd83b9f816dcdd7), [`efebc5f`](https://github.com/navikt/aksel/commit/efebc5fbbb3e955df5050086aef68812052a837d)]:
+  - @navikt/aksel-icons@7.34.0
+  - @navikt/ds-tokens@7.34.0
+
+## 7.33.5
+
+### Patch Changes
+
+- Datepicker: Avoid rendering Datepicker dialog when not open. ([#4300](https://github.com/navikt/aksel/pull/4300))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.5
+  - @navikt/aksel-icons@7.33.5
+
+## 7.33.4
+
+### Patch Changes
+
+- Textarea: Set height on first render to `auto` instead of `0px` to reduce layout shift when SSR ([#4295](https://github.com/navikt/aksel/pull/4295))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.4
+  - @navikt/aksel-icons@7.33.4
+
+## 7.33.3
+
+### Patch Changes
+
+- Popover: Children no longer re-mounts on open toggle. ([#4281](https://github.com/navikt/aksel/pull/4281))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.3
+  - @navikt/aksel-icons@7.33.3
+
+## 7.33.2
+
+### Patch Changes
+
+- Timeline: Pins before or after date-range are now hidden. ([#4266](https://github.com/navikt/aksel/pull/4266))
+
+- useRangeDatepicker: `defaultSelected` no longer overrides `defaultMonth` when `defaultSelected.from` is `undefined` ([#4267](https://github.com/navikt/aksel/pull/4267))
+
+- Modal: Improve scroll-lock interaction for sticky elements. ([#4269](https://github.com/navikt/aksel/pull/4269))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.2
+  - @navikt/aksel-icons@7.33.2
+
+## 7.33.1
+
+### Patch Changes
+
+- Portal: Update `<Portal />` to respect dom and render-order. Removed `asChild`-prop. ([#4239](https://github.com/navikt/aksel/pull/4239))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.1
+  - @navikt/aksel-icons@7.33.1
+
+## 7.33.0
+
+### Minor Changes
+
+- Process: Added new prop `isTruncated` to `<Process />`. This allows you to add a connector to the start of first event and end of last event to visualize a "truncated" process. ([#4196](https://github.com/navikt/aksel/pull/4196))
+
+- Dependencies: Added `react-dom` to `peerDependencies`. ([#4237](https://github.com/navikt/aksel/pull/4237))
+
+### Patch Changes
+
+- Timeline: Popups now have an accessible name. ([#4242](https://github.com/navikt/aksel/pull/4242))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.33.0
+  - @navikt/aksel-icons@7.33.0
+
+## 7.32.5
+
+### Patch Changes
+
+- Modal: Improved scroll locking. ([#4234](https://github.com/navikt/aksel/pull/4234))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.32.5
+  - @navikt/aksel-icons@7.32.5
+
+## 7.32.4
+
+### Patch Changes
+
+- Combobox: Fix issue with toggle list button ([#4228](https://github.com/navikt/aksel/pull/4228))
+
+- Accordion: Heading size with `size="medium"` changed from 20px to 18px. This change is for Darkside only. ([#4209](https://github.com/navikt/aksel/pull/4209))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.32.4
+  - @navikt/aksel-icons@7.32.4
+
+## 7.32.3
+
+### Patch Changes
+
+- Combobox: Fix bug in highlighting when using custom filtering logic ([#4195](https://github.com/navikt/aksel/pull/4195))
+
+- Switch: Replace use of `div` inside `<label />` with `span`. ([#4184](https://github.com/navikt/aksel/pull/4184))
+
+- Maintenance: Update dependency-arrays for some layout-effects. ([#4191](https://github.com/navikt/aksel/pull/4191))
+
+- Updated dependencies [[`db055ae`](https://github.com/navikt/aksel/commit/db055ae69334dbab602a9944d46adfe634248eea)]:
+  - @navikt/aksel-icons@7.32.3
+  - @navikt/ds-tokens@7.32.3
+
+## 7.32.2
+
+### Patch Changes
+
+- Helptext: Avoid screen-readers reading title twice. ([#4169](https://github.com/navikt/aksel/pull/4169))
+
+- Combobox: Popup remains open when opening with voiceover in quick-nav mode. ([#4158](https://github.com/navikt/aksel/pull/4158))
+
+- Dependency: Update '@floating-ui/react-dom' to v2.1.6. ([#4154](https://github.com/navikt/aksel/pull/4154))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.32.2
+  - @navikt/aksel-icons@7.32.2
+
+## 7.32.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.32.1
+  - @navikt/aksel-icons@7.32.1
+
 ## 7.32.0
 
 ### Patch Changes
@@ -1810,7 +2090,6 @@
 ### Minor Changes
 
 - :recycle: Refaktorering og småfikser ([#2265](https://github.com/navikt/aksel/pull/2265))
-
   - Refaktorering som følge av nye ESLint-regler
   - AccordionItem/ToggleGroup: Støtte for 'id'-prop
   - MonthPicker: Mer presis type for 'onMonthSelect' prop
@@ -1998,7 +2277,6 @@
 ### Major Changes
 
 - Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
-
   - :sparkles: Støtte for header og footer
   - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
   - :boom: Provider: `appElement` er fjernet

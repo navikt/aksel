@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import meta from "@navikt/aksel-icons/metadata";
-import { Modal } from "@navikt/ds-react";
+import { Dialog } from "@navikt/ds-react";
 import styles from "./IconPage.module.css";
 import { useIconPage } from "./IconPage.provider";
 
@@ -13,7 +13,7 @@ function IconPageSidebar({
   children: React.ReactNode;
   iconName?: keyof typeof meta;
 }) {
-  const { activeIconButton, hideModal } = useIconPage();
+  const { activeIconButton, hideDialog } = useIconPage();
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -22,13 +22,12 @@ function IconPageSidebar({
   const handleClose = () => {
     const params = new URLSearchParams(searchParams?.toString());
     params.delete("iconName");
-    replace(`${pathname}?${params.toString()}`);
-    activeIconButton?.focus();
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   return (
     <>
-      {(hideModal || !iconName) && (
+      {(hideDialog || !iconName) && (
         <section
           aria-label={iconName ? `Ikon ${iconName}` : "Kom i gang med ikoner"}
           id="icon-page-sidepanel"
@@ -38,16 +37,19 @@ function IconPageSidebar({
         </section>
       )}
 
-      {!hideModal && iconName && (
-        <Modal
-          open={!!iconName}
-          aria-label={`${iconName} ikon`}
-          onClose={handleClose}
-          data-modal={true}
-        >
-          {children}
-        </Modal>
-      )}
+      <Dialog
+        open={!!iconName && !hideDialog}
+        aria-label={`${iconName} ikon`}
+        onOpenChange={(nextOpen) => {
+          if (!nextOpen) {
+            handleClose();
+          }
+        }}
+      >
+        <Dialog.Popup returnFocusTo={() => activeIconButton}>
+          {!hideDialog && iconName && children}
+        </Dialog.Popup>
+      </Dialog>
     </>
   );
 }

@@ -27,11 +27,9 @@ const loaded = false;
 export default withDsExample(Example);
 
 /* Storybook story */
-export const Demo = {
-  render: Example,
-};
+export const Demo = { render: Example };
 
 export const args = {
   index: 0,
-  desc: "I de fleste tilfellene vil du bruke 'width' og 'height' for å manuelt bygge opp en visuell representasjon av elementet du skal emulere. Disse settes da rett på style, slik at px, rem eller f.eks. '100%' fungerer.",
+  desc: "Du kan enten wrappe elementet som skal emuleres, eller sette størrelsen manuelt med prop-ene `width` og `height`. Width og height settes rett på style, slik at px, rem eller f.eks. '100%' fungerer.",
 };

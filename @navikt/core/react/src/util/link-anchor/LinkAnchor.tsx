@@ -9,18 +9,21 @@ import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { Slot } from "../../slot/Slot";
 import { useRenameCSS } from "../../theme/Theme";
 import { composeEventHandlers } from "../composeEventHandlers";
-import { createContext } from "../create-context";
+import { createStrictContext } from "../create-strict-context";
 import { useMergeRefs } from "../hooks/useMergeRefs";
+import { ownerWindow } from "../owner";
 import { AsChildProps } from "../types";
 
 type LinkAnchorOverlayContextProps = {
   anchorRef: React.RefObject<HTMLAnchorElement | null>;
 };
 
-const [LinkAnchorContextProvider, useLinkAnchorContext] =
-  createContext<LinkAnchorOverlayContextProps>({
-    name: "LinkAnchorOverlayContext",
-  });
+const {
+  Provider: LinkAnchorContextProvider,
+  useContext: useLinkAnchorContext,
+} = createStrictContext<LinkAnchorOverlayContextProps>({
+  name: "LinkAnchorOverlayContext",
+});
 
 type LinkAnchorOverlayProps = HTMLAttributes<HTMLDivElement> & AsChildProps;
 
@@ -47,7 +50,10 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
           {...restProps}
           className={cn("navds-link-anchor__overlay", className)}
           onClick={composeEventHandlers(onClick, (e) => {
-            if (e.target === anchorRef.current || isTextSelected()) {
+            if (
+              e.target === anchorRef.current ||
+              isTextSelected(anchorRef.current)
+            ) {
               return;
             }
 
@@ -142,11 +148,8 @@ const LinkAnchorArrow = forwardRef<SVGSVGElement, LinkAnchorArrowProps>(
 );
 
 /* -------------------------- LinkAnchor Utilities -------------------------- */
-function isTextSelected(): boolean {
-  if (typeof window === "undefined") {
-    return false;
-  }
-  return !!window.getSelection()?.toString();
+function isTextSelected(refElement: HTMLAnchorElement | null): boolean {
+  return !!ownerWindow(refElement)?.getSelection()?.toString();
 }
 
 export { LinkAnchor, LinkAnchorArrow, LinkAnchorOverlay };

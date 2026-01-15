@@ -68,18 +68,16 @@ export const WithError: StoryFn = () => {
         label="Ipsum enim quis culpa"
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
       />
-
       <Textarea
         label="Ipsum enim quis culpa"
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
         size="small"
       />
-
       <VStack
         style={{
           maxWidth: "400px",
         }}
-        gap="4"
+        gap="space-16"
       >
         <Textarea
           label="Ipsum enim quis culpa"
@@ -92,13 +90,11 @@ export const WithError: StoryFn = () => {
           size="small"
         />
       </VStack>
-
       <Textarea
         label="Ipsum enim quis culpa"
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
         maxLength={20}
       />
-
       <Textarea
         label="Ipsum enim quis culpa"
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
@@ -149,7 +145,7 @@ export const OnChange: StoryFn = () => {
   return (
     <Textarea
       label="Ipsum enim quis culpa"
-      onChange={console.log}
+      onChange={() => {}}
       maxLength={50}
     />
   );

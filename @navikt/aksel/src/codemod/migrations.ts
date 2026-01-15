@@ -14,8 +14,9 @@ const CSS_EXTENSIONS = [
   "less",
 ] satisfies SupportedCodemodExtensions[];
 
-export const migrations: {
-  [key: string]: {
+type MigrationT = Record<
+  string,
+  {
     description: string;
     value: string;
     path: string;
@@ -25,9 +26,11 @@ export const migrations: {
      * This is used to filter out files that should not be transformed.
      */
     ignoredExtensions: SupportedCodemodExtensions[];
-  }[];
-} = {
-  "1.0.0": [
+  }[]
+>;
+
+export const migrations: MigrationT = {
+  v1: [
     {
       description: "Runs all codemods for beta -> v1 migration",
       value: "v1-preset",
@@ -54,7 +57,7 @@ export const migrations: {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "2.0.0": [
+  v2: [
     {
       description: "Patches changed css-variables",
       value: "v2-css",
@@ -80,18 +83,18 @@ export const migrations: {
       ignoredExtensions: JS_EXTENSIONS,
     },
   ],
-  "v3.0.0": [
+  v3: [
     {
       description:
         "Replaces deprecated <CopyToClipboard /> with <CopyButton />",
       value: "v3-copybutton",
       path: "v3.0.0/copybutton/copybutton",
       warning:
-        "Remember to clean css-import from '@navikt/ds-css-internal' if no longer needed\nIf non-text was used as children, or different locales were handled, you need to manually fix this",
+        "Remember to remove css-import from '@navikt/ds-css-internal' if no longer needed\nIf non-text was used as children, or different locales were handled, you need to manually fix this",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "v4.0.0": [
+  v4: [
     {
       description:
         "Replaced deprecated 'internal'-component import to 'core'-imports",
@@ -118,7 +121,7 @@ export const migrations: {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "v6.0.0": [
+  v6: [
     {
       description:
         "Removes `backgroundColor` and `avatarBgColor` properties from `Chat` and `Chat.Bubble`",
@@ -129,47 +132,100 @@ export const migrations: {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  spacing: [
+  v8: [
+    {
+      description:
+        "Updates Box with legacy-tokens to Box using the new token system, and renames already migrated BoxNew/Box.New instances to Box.",
+      value: "v8-box",
+      path: "v8.0.0/box/box",
+      warning:
+        "Remember to check if 'TODO: Aksel Box migration'-comment was added to any files after migration. This comment will help you find and update Box-instances we couldn't update for you.",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description: "Renames already migrated BoxNew/Box.New instances to Box.",
+      value: "v8-box-new",
+      path: "v8.0.0/box-new/box-new",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description: "Removes deprecated props from components.",
+      value: "v8-prop-deprecate",
+      path: "v8.0.0/prop-deprecate/prop-deprecate",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Tries to migrate List component by wrapping it with 'Box' and moving 'title' and 'description' props to 'Heading' and 'BodyShort'.",
+      value: "v8-list",
+      path: "v8.0.0/list/list",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
     {
       description:
         "Updates all Primitives to use new `space`-tokens. (Works with old and new system)",
-      value: "primitive-spacing",
-      path: "spacing/primitives-spacing/spacing",
+      value: "v8-primitive-spacing",
+      path: "v8.0.0/primitives-spacing/spacing",
       ignoredExtensions: CSS_EXTENSIONS,
     },
     {
       description:
         "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
-      value: "token-spacing",
-      path: "spacing/token-spacing/spacing",
+      value: "v8-token-spacing",
+      path: "v8.0.0/token-spacing/spacing",
       ignoredExtensions: [],
     },
     {
       description:
         "Updates js-tokens to use new `space`-tokens. (Works with old and new system)",
-      value: "token-spacing-js",
-      path: "spacing/token-spacing-js/spacing",
-      ignoredExtensions: CSS_EXTENSIONS,
-    },
-  ],
-  darkside: [
-    {
-      description: "marks deprecated prop usage with comments.",
-      value: "prop-deprecate",
-      path: "darkside/prop-deprecate/prop-deprecate",
+      value: "v8-token-spacing-js",
+      path: "v8.0.0/token-spacing-js/spacing",
       ignoredExtensions: CSS_EXTENSIONS,
     },
     {
       description:
-        "Update Box to to BoxNew (future Box) using the new token system",
-      value: "box-to-boxnew",
-      path: "darkside/box-to-boxnew/box-to-boxnew",
-      warning:
-        "Remember to check if 'aksel box migration'-comment were added to any files after migration. This comment will help you find and update Box-instances where we could not resolve the update for you.",
+        "Updates variant + data-color props on Tag based on current variant prop.",
+      value: "v8-tag-variant",
+      path: "v8.0.0/tag-variant/tag-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on ToggleGroup based on current variant prop.",
+      value: "v8-toggle-group-variant",
+      path: "v8.0.0/toggle-group-variant/toggle-group-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on Accordion based on current variant prop.",
+      value: "v8-accordion-variant",
+      path: "v8.0.0/accordion-variant/accordion-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on Chips based on current variant prop.",
+      value: "v8-chips-variant",
+      path: "v8.0.0/chips-variant/chips-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on Button based on current variant prop.",
+      value: "v8-button-variant",
+      path: "v8.0.0/button-variant/button-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on Link based on current variant prop.",
+      value: "v8-link-variant",
+      path: "v8.0.0/link-variant/link-variant",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-};
+} as const;
 
 /**
  * Extracts `path` field for a given migration.
@@ -206,15 +262,66 @@ export function getMigrationNames() {
     .map((x) => x.value);
 }
 
+/**
+ * Returns all available version keys from the migrations object.
+ */
+export function getVersionKeys(): string[] {
+  return Object.keys(migrations);
+}
+
+/**
+ * Returns the migrations available for a specific version.
+ */
+export function getMigrationsForVersion(version: string) {
+  return migrations[version] ?? [];
+}
+
+/**
+ * Returns the override migrations available for a specific version.
+ */
+export function getOverridesForVersion(version: string) {
+  return migrationStringOverride[version] ?? [];
+}
+
+/**
+ * Allows injecting additional migration names that are not part of the main migrations-list.
+ * This is used for interactive migrations that should not be part of the main list.
+ *
+ * We need to separate this since main migration list expect all migration names to have a unique path,
+ * which is not the case for interactive migrations that are handled differently.
+ */
+export const migrationStringOverride = {
+  v8: [
+    {
+      value: "v8-tokens",
+      description: "Starts interactive token migration for v8",
+    },
+  ],
+} as const satisfies Partial<
+  Record<keyof typeof migrations, { value: string; description: string }[]>
+>;
+
 export function getMigrationString() {
   let str = "";
 
   Object.entries(migrations).forEach(([version, vMigrations]) => {
     str += `\n${chalk.underline(version)}\n`;
+
+    const overrideMigrations = migrationStringOverride[version] || [];
+    overrideMigrations.forEach((migration) => {
+      str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
+    });
+
     vMigrations.forEach((migration) => {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });
   });
+
+  str += `\n${chalk.bold(chalk.blueBright("Interactive version selection:"))}\n`;
+  str += chalk.gray(
+    "Run with a version key to interactively select migrations:\n",
+  );
+  str += chalk.blue(getVersionKeys().join(", "));
 
   return str;
 }

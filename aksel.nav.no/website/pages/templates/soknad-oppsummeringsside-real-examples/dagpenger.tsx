@@ -28,9 +28,9 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="text" gutters>
-        <VStack gap="8">
-          <VStack gap="3">
-            <Bleed asChild marginInline={{ lg: "32" }}>
+        <VStack gap="space-32">
+          <VStack gap="space-12">
+            <Bleed asChild marginInline={{ lg: "space-128" }}>
               <Box
                 width={{ xs: "64px", lg: "96px" }}
                 height={{ xs: "64px", lg: "96px" }}
@@ -45,11 +45,11 @@ function Example() {
             </Heading>
           </VStack>
 
-          <div data-aksel-template="form-summarypage-v3">
+          <div data-aksel-template="form-summarypage-v5">
             <Link href="#">
               <ArrowLeftIcon aria-hidden /> Forrige steg
             </Link>
-            <Box paddingBlock="6 5">
+            <Box paddingBlock="space-24 space-20">
               <Heading level="2" size="large">
                 Oppsummering
               </Heading>
