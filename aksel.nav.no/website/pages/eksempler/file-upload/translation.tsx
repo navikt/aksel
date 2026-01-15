@@ -9,7 +9,7 @@ const Example = () => (
         buttonMultiple: "Velg bilder",
       },
       item: {
-        uploading: "Laster opp bilde...",
+        uploading: "Laster opp bilde…",
       },
     }}
   >
@@ -29,7 +29,7 @@ const Example = () => (
             as="li"
             file={{ name: "eksempel.png", size: 200000 }}
             status="uploading"
-            translations={{ uploading: "Sender bilde..." }}
+            translations={{ uploading: "Sender bilde…" }}
           />
         </VStack>
       </div>
@@ -46,6 +46,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 99,
   desc: "Med translations API-et kan du endre tekstene i komponentene.",
 };

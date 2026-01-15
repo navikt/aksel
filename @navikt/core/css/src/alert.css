@@ -92,13 +92,23 @@
 
   --__axc-base-alert-pi: var(--ax-space-20);
   --__axc-base-alert-content-p: var(--ax-space-12) var(--__axc-base-alert-pi) var(--ax-space-16) var(--__axc-base-alert-pi);
-  --__axc-base-alert-title-pb: var(--ax-space-2);
   --__axc-base-alert-header-max-width: 37.5rem;
+  --__axc-base-alert-header-icon-margin-block-start: var(--ax-space-8);
+  --__axc-base-alert-header-close-button-margin-block-start: var(--ax-space-4);
+  --__axc-global-alert-alignment: max(var(--__axc-base-alert-pi), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
+
+  &[data-centered="false"] {
+    --__axc-global-alert-alignment: var(--ax-space-20);
+  }
 
   &[data-size="small"] {
-    --__axc-base-alert-pi: var(--ax-space-16);
     --__axc-base-alert-content-p: var(--ax-space-8) var(--ax-space-16) var(--ax-space-12) var(--ax-space-16);
-    --__axc-base-alert-title-pb: var(--ax-space-4);
+    --__axc-base-alert-header-icon-margin-block-start: var(--ax-space-6);
+    --__axc-base-alert-header-close-button-margin-block-start: var(--ax-space-2);
+
+    &[data-centered="false"] {
+      --__axc-global-alert-alignment: var(--ax-space-16);
+    }
   }
 
   &[data-variant="moderate"] {
@@ -124,11 +134,11 @@
   display: flex;
   align-items: flex-start;
   gap: var(--ax-space-8);
-  padding: var(--ax-space-8) var(--__axc-base-alert-pi);
+  padding: 0 var(--__axc-base-alert-pi);
   border-bottom: 1px solid;
 
   .aksel-base-alert[data-global="true"] & {
-    padding-inline: max(var(--__axc-base-alert-pi), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
+    padding-inline: var(--__axc-global-alert-alignment);
   }
 
   .aksel-base-alert[data-variant="moderate"] & {
@@ -150,12 +160,12 @@
 
 .aksel-base-alert__icon {
   font-size: 1.5rem;
-  margin-top: var(--ax-space-4);
+  margin-top: var(--__axc-base-alert-header-icon-margin-block-start);
   display: grid;
 }
 
 .aksel-base-alert__title {
-  padding-block: var(--__axc-base-alert-title-pb);
+  padding-block: var(--ax-space-6);
 }
 
 .aksel-base-alert__content {
@@ -163,12 +173,13 @@
   background-color: var(--ax-bg-default);
 
   .aksel-base-alert[data-global="true"] & {
-    padding-inline: max(var(--__axc-base-alert-pi), calc((100% - var(--__axc-base-alert-header-max-width)) / 2));
+    padding-inline: var(--__axc-global-alert-alignment);
   }
 }
 
 .aksel-base-alert__close-button {
   margin-left: auto;
+  margin-block-start: var(--__axc-base-alert-header-close-button-margin-block-start);
 
   /* Moved focus-outline over wrapper outline */
   z-index: 1;

@@ -6,10 +6,6 @@ import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export type PrimitiveProps = {
   /**
-   * @private Hides prop from documentation
-   */
-  className?: string;
-  /**
    * Padding around children.
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
@@ -190,7 +186,6 @@ export type PrimitiveProps = {
 };
 
 export const PRIMITIVE_PROPS: (keyof PrimitiveProps)[] = [
-  "className",
   "padding",
   "paddingInline",
   "paddingBlock",
@@ -220,6 +215,10 @@ export const PRIMITIVE_PROPS: (keyof PrimitiveProps)[] = [
 
 interface BasePrimitiveProps extends PrimitiveProps {
   children: React.ReactElement;
+  /**
+   * @private Hides prop from documentation
+   */
+  className?: string;
 }
 
 export const BasePrimitive = ({

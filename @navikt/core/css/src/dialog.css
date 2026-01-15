@@ -12,21 +12,22 @@
   box-shadow: var(--ax-shadow-dialog);
   display: flex;
   flex-direction: column;
-  outline: 1px solid var(--ax-border-neutral-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   z-index: 2000;
   overflow: hidden;
 
-  .light:not(:has(.dark)) .aksel-dialog__backdrop ~ & {
+  &:focus {
     outline: none;
-
-    &:focus {
-      outline: none;
-    }
   }
 
   &[data-size="small"] {
     --__axc-dialog-p-b: var(--ax-space-12);
     --__axc-dialog-p-i: var(--ax-space-16);
+  }
+
+  /* Needed to accommodate 400% zoom */
+  @media (max-height: 400px) {
+    overflow: auto;
   }
 
   &[data-entering-style],
@@ -104,6 +105,7 @@
       height: auto;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+      border-bottom: 0;
       left: 0;
       right: 0;
       bottom: 0;
@@ -132,6 +134,7 @@
 
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    border-right: 0;
     right: 0;
   }
 
@@ -140,6 +143,7 @@
 
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    border-left: 0;
     left: 0;
   }
 
@@ -148,6 +152,7 @@
 
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    border-bottom: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -166,6 +171,7 @@
     --__axc-dialog-transform: scale(0.98);
 
     border-radius: 0;
+    border: 0;
     inset: 0;
     max-height: 100dvh;
     max-width: 100dvw;
@@ -180,7 +186,7 @@
   inset: 0;
   background-color: var(--ax-bg-overlay);
   transition: opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  z-index: 1000;
+  z-index: 2000;
 
   /* iOS 26+: Ensure the backdrop covers the entire visible viewport. */
   @supports (-webkit-touch-callout: none) {
@@ -208,12 +214,32 @@
 }
 
 .aksel-dialog__body {
-  overflow: auto;
   padding-block: var(--__axc-dialog-p-b);
   padding-inline: var(--__axc-dialog-p-i);
+  overflow: auto;
+  overscroll-behavior: contain;
+  position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
 
   .aksel-dialog__header ~ & {
     padding-block-start: 0;
+  }
+
+  background:
+    linear-gradient(var(--ax-bg-raised) 30%, transparent) top,
+    linear-gradient(transparent, var(--ax-bg-raised) 60%) bottom,
+    radial-gradient(farthest-side at 50% 0, rgba(0 0 0 / 0.3), transparent) top,
+    radial-gradient(farthest-side at 50% 100%, rgba(0 0 0 / 0.3), transparent) bottom;
+  background-size:
+    100% 40px,
+    100% 50px,
+    100% 16px,
+    100% 16px;
+  background-attachment: local, local, scroll, scroll;
+  background-repeat: no-repeat;
+
+  /* Needed to accommodate 400% zoom */
+  @media (max-height: 400px) {
+    overflow: unset;
   }
 }
 

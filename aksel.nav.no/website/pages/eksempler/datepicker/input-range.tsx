@@ -12,8 +12,16 @@ const Example = () => {
     <Box minHeight="24rem">
       <DatePicker {...datepickerProps}>
         <HStack wrap gap="space-16" justify="center">
-          <DatePicker.Input {...fromInputProps} label="Fra" />
-          <DatePicker.Input {...toInputProps} label="Til" />
+          <DatePicker.Input
+            {...fromInputProps}
+            label="Fra"
+            description="Format: dd.mm.yyyy"
+          />
+          <DatePicker.Input
+            {...toInputProps}
+            label="Til"
+            description="Format: dd.mm.yyyy"
+          />
         </HStack>
       </DatePicker>
       {selectedRange && (

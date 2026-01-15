@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
+import { DatePicker, useDatepicker } from "../date/datepicker";
 import { Select } from "../form/select";
 import { VStack } from "../layout/stack";
+import { Modal } from "../modal";
 import { Table } from "../table";
+import { Tooltip } from "../tooltip";
+import { BodyShort } from "../typography";
 import {
   Dialog,
   DialogBody,
@@ -365,6 +369,240 @@ export const CustomWidthHeight: Story = {
   },
 };
 
+export const Scroll: Story = {
+  render: () => {
+    const bodyRef = useRef<HTMLDivElement>(null);
+
+    return (
+      <Dialog
+        defaultOpen
+        onOpenChangeComplete={(open) => {
+          if (!open || !bodyRef.current) {
+            return;
+          }
+
+          bodyRef.current.scrollTop = 200;
+        }}
+      >
+        <DialogTrigger>
+          <Button>Open Dialog</Button>
+        </DialogTrigger>
+        <DialogPopup height="400px">
+          <DialogHeader>
+            <DialogTitle>Dialog Title</DialogTitle>
+            <DialogDescription>
+              This is a description of the dialog.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogBody ref={bodyRef}>
+            {ScrollContent({ defaultOpen: true })}
+          </DialogBody>
+          <DialogFooter>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
+          </DialogFooter>
+        </DialogPopup>
+      </Dialog>
+    );
+  },
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
+export const WithSrElement: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
+      <DialogPopup>
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          <BodyShort>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            officiis magni praesentium odio sequi ex minus ipsa, sunt commodi
+            vel aut nam error beatae exercitationem amet, ut quia, dignissimos
+            nobis!
+          </BodyShort>
+          <BodyShort
+            visuallyHidden
+            style={{
+              clip: "unset !important",
+              clipPath: "unset !important",
+              outline: "2px solid red",
+            }}
+            as="legend"
+          >
+            lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </BodyShort>
+          <BodyShort>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            officiis magni praesentium odio sequi ex minus ipsa, sunt commodi
+            vel aut nam error beatae exercitationem amet, ut quia, dignissimos
+            nobis!
+          </BodyShort>
+        </DialogBody>
+        <DialogFooter>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
+export const WithTooltip: Story = {
+  render: () => {
+    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+
+    return (
+      <Dialog defaultOpen aria-label="Tooltip test">
+        <Dialog.Trigger>
+          <Button>Open Dialog</Button>
+        </Dialog.Trigger>
+        <Dialog.Popup initialFocusTo={buttonRef}>
+          <Dialog.Body>
+            <div style={{ marginBottom: "1rem" }}>
+              <Tooltip content="This_is_the_first_tooltip">
+                <Button ref={buttonRef}>Test 1</Button>
+              </Tooltip>
+            </div>
+            <Tooltip content="This is the second tooltip">
+              <Button>Test 2</Button>
+            </Tooltip>
+          </Dialog.Body>
+        </Dialog.Popup>
+      </Dialog>
+    );
+  },
+};
+
+export const WithDatepicker: Story = {
+  render: () => {
+    const { datepickerProps, inputProps } = useDatepicker({
+      fromDate: new Date("Aug 23 2019"),
+      toDate: new Date("Feb 23 2024"),
+    });
+
+    return (
+      <Dialog defaultOpen aria-label="Tooltip test">
+        <Dialog.Trigger>
+          <Button>Open Dialog</Button>
+        </Dialog.Trigger>
+        <Dialog.Popup>
+          <Dialog.Body>
+            <DatePicker {...datepickerProps} dropdownCaption>
+              <DatePicker.Input
+                {...inputProps}
+                label="Velg dato"
+                description="Format: dd.mm.yyyy"
+              />
+            </DatePicker>
+          </Dialog.Body>
+        </Dialog.Popup>
+      </Dialog>
+    );
+  },
+};
+
+export const WithModalOutside: Story = {
+  render: () => {
+    const ref = useRef<HTMLDialogElement>(null);
+
+    return (
+      <div>
+        <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
+        <Modal
+          open={ref.current ? undefined : true /* initially open */}
+          onClose={() => null}
+          ref={ref}
+          aria-label="Tooltip test"
+        >
+          <Modal.Body>
+            <Dialog defaultOpen aria-label="Modal test">
+              <Dialog.Trigger>
+                <Button>Open Dialog</Button>
+              </Dialog.Trigger>
+              <Dialog.Popup>
+                <Dialog.Body>
+                  lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  domet.
+                </Dialog.Body>
+              </Dialog.Popup>
+            </Dialog>
+          </Modal.Body>
+        </Modal>
+      </div>
+    );
+  },
+};
+
+export const WithModalInside: Story = {
+  render: () => {
+    const ref = useRef<HTMLDialogElement>(null);
+
+    return (
+      <div>
+        <Dialog defaultOpen aria-label="Modal test">
+          <Dialog.Trigger>
+            <Button>Open Dialog</Button>
+          </Dialog.Trigger>
+          <Dialog.Popup>
+            <Dialog.Body>
+              <Button onClick={() => ref.current?.showModal()}>
+                Open Modal
+              </Button>
+              <Modal ref={ref} aria-label="Tooltip test" closeOnBackdropClick>
+                <Modal.Body>
+                  lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  domet.
+                </Modal.Body>
+              </Modal>
+            </Dialog.Body>
+          </Dialog.Popup>
+        </Dialog>
+      </div>
+    );
+  },
+};
+
+export const SideBySide: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <div>
+        <Dialog>
+          <DialogTrigger>
+            <Button>Open Dialog</Button>
+          </DialogTrigger>
+          <DialogPopup>
+            <DialogBody>
+              Dialog 1<Button onClick={() => setOpen((x) => !x)}>Open</Button>
+            </DialogBody>
+          </DialogPopup>
+        </Dialog>
+
+        <Dialog open={open} onOpenChange={(next) => setOpen(next)}>
+          <DialogPopup>
+            <DialogBody>Dialog 2</DialogBody>
+          </DialogPopup>
+        </Dialog>
+      </div>
+    );
+  },
+};
+
 const TableData = [
   {
     id: 1,
@@ -493,8 +731,8 @@ const content = `This is the body of the dialog. Here is where the main content
               the dialog. Here is where the main content lives This is the body
               of the dialog. Here is where the main content lives`;
 
-function ScrollContent() {
-  const [showScroll, setShowScroll] = useState(false);
+function ScrollContent({ defaultOpen = false }: { defaultOpen?: boolean }) {
+  const [showScroll, setShowScroll] = useState(defaultOpen);
   return (
     <div>
       <button onClick={() => setShowScroll((x) => !x)}>

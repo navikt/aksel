@@ -22,7 +22,6 @@ const Example = () => {
           <ActionMenu.Item
             onSelect={() => setOpen(true)}
             aria-haspopup="dialog"
-            aria-expanded={false}
           >
             Åpne dialog
           </ActionMenu.Item>

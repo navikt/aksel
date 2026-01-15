@@ -20,11 +20,7 @@ const Example = () => {
 
   return (
     <div>
-      <PositionButtons
-        onPositionSelect={openWithPosition}
-        position={position}
-        open={open}
-      />
+      <PositionButtons onPositionSelect={openWithPosition} open={open} />
 
       <Dialog open={open} onOpenChange={setOpen}>
         <Dialog.Popup position={position} id="dialog-popup-position-example">
@@ -32,11 +28,7 @@ const Example = () => {
             <Dialog.Title>Position: {position}</Dialog.Title>
           </Dialog.Header>
           <Dialog.Body>
-            <PositionButtons
-              onPositionSelect={openWithPosition}
-              position={position}
-              open={open}
-            />
+            <PositionButtons onPositionSelect={openWithPosition} open={open} />
           </Dialog.Body>
           <Dialog.Footer>
             <Dialog.CloseTrigger>
@@ -51,17 +43,14 @@ const Example = () => {
 
 function PositionButtons({
   onPositionSelect,
-  position,
   open,
 }: {
   onPositionSelect: (pos: Position) => void;
-  position: Position;
   open: boolean;
 }) {
   const getDialogProps = (pos: Position) => {
     return {
       "aria-haspopup": "dialog" as const,
-      "aria-expanded": pos === position && open,
       "aria-controls": open ? "dialog-popup-position-example" : undefined,
       onClick: () => onPositionSelect(pos),
     };

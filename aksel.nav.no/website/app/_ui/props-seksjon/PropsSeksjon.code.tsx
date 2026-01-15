@@ -32,17 +32,19 @@ function PropsSeksjonCode({
               paddingInline="space-8"
               borderRadius="4"
             >
-              {tokens.map((line, i) => (
-                <code
-                  key={i}
-                  {...getLineProps({ line })}
-                  className={styles.propsSeksjonCode}
-                >
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token })} />
-                  ))}
-                </code>
-              ))}
+              <code>
+                {tokens.map((line, i) => (
+                  <div
+                    key={i}
+                    {...getLineProps({ line })}
+                    className={styles.propsSeksjonCode}
+                  >
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </div>
+                ))}
+              </code>
             </Box>
           )}
         </Highlight>

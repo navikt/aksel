@@ -4,7 +4,8 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "rewriteRelativeImportExtensions": true,
-    "erasableSyntaxOnly": true
+    "erasableSyntaxOnly": true,
+    "lib": ["ESNext"]
   },
-  "include": ["./generate-imports.ts"]
+  "include": ["./*.ts"]
 }

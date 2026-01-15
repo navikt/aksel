@@ -1,5 +1,45 @@
 # @navikt/ds-react
 
+## 7.39.1
+
+### Patch Changes
+
+- Dialog: Removed 'aria-expanded' from Dialog.Trigger. ([#4478](https://github.com/navikt/aksel/pull/4478))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.39.1
+  - @navikt/aksel-icons@7.39.1
+
+## 7.39.0
+
+### Minor Changes
+
+- LocalAlert, InfoCard: Reduced default header height. ([`91f3f8a`](https://github.com/navikt/aksel/commit/91f3f8acb8749bc154a1e7dca008ce0be43e2e34))
+
+- GlobalAlert: Reduced default header height and added centered content prop. ([#4476](https://github.com/navikt/aksel/pull/4476))
+
+### Patch Changes
+
+- ReadMore: Removed tabIndex 0 from content. ([#4464](https://github.com/navikt/aksel/pull/4464))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.39.0
+  - @navikt/aksel-icons@7.39.0
+
+## 7.38.0
+
+### Patch Changes
+
+- Dialog: Now interacts better with Modal and Datepicker. ([#4455](https://github.com/navikt/aksel/pull/4455))
+
+- ActionMenu: Trigger handles click while inside web-component better. ([#4428](https://github.com/navikt/aksel/pull/4428))
+
+- Internal: Updated mergedRef-utility. ([#4434](https://github.com/navikt/aksel/pull/4434))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.38.0
+  - @navikt/aksel-icons@7.38.0
+
 ## 7.37.0
 
 ### Minor Changes

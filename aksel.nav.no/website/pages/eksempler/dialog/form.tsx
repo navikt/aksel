@@ -18,7 +18,6 @@ const Example = () => {
       <Button
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
-        aria-expanded={open}
         aria-controls={open ? "dialog-popup-example" : undefined}
       >
         Åpne skjema

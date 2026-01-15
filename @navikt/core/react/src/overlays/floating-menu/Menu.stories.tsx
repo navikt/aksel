@@ -12,6 +12,7 @@ export default {
       </div>
     ),
   ],
+  parameters: { chromatic: { disable: true } },
 } satisfies Meta<typeof Menu>;
 
 export const Styled = () => (
