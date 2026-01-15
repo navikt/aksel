@@ -163,51 +163,71 @@ const colors = {
     ref: "",
     raw: "rgba(19, 72, 82, 1)",
     replacement: "",
+    comment:
+      "Lightblue is now info and brand-blue color. Consider using those colors.",
   },
   "lightblue-800": {
     ref: "",
     raw: "rgba(35, 107, 125, 1)",
     replacement: "",
+    comment:
+      "Lightblue is now info and brand-blue color. Consider using those colors.",
   },
   "lightblue-700": {
     ref: "",
     raw: "rgba(54, 141, 168, 1)",
     replacement: "",
+    comment:
+      "Lightblue is now info and brand-blue color. Consider using those colors.",
   },
   "lightblue-600": {
     ref: "",
     raw: "rgba(76, 173, 205, 1)",
     replacement: "",
+    comment:
+      "Lightblue is now info and brand-blue color. Consider using those colors.",
   },
   "lightblue-500": {
     ref: "",
     raw: "rgba(102, 203, 236, 1)",
     replacement: "",
+    comment:
+      "Lightblue is now info and brand-blue color. Consider using those colors.",
   },
   "lightblue-400": {
     ref: "",
     raw: "rgba(124, 218, 248, 1)",
     replacement: "",
+    comment:
+      "Lightblue is now info and brand-blue color. Consider using those colors.",
   },
   "lightblue-300": {
     ref: "",
     raw: "rgba(151, 230, 255, 1)",
     replacement: "",
+    comment:
+      "Lightblue is now info and brand-blue color. Consider using those colors.",
   },
   "lightblue-200": {
     ref: "",
     raw: "rgba(181, 241, 255, 1)",
     replacement: "",
+    comment:
+      "Lightblue is now info and brand-blue color. Consider using those colors.",
   },
   "lightblue-100": {
     ref: "",
     raw: "rgba(216, 249, 255, 1)",
     replacement: "",
+    comment:
+      "Lightblue is now info and brand-blue color. Consider using those colors.",
   },
   "lightblue-50": {
     ref: "",
     raw: "rgba(235, 252, 255, 1)",
     replacement: "",
+    comment:
+      "Lightblue is now info and brand-blue color. Consider using those colors.",
   },
   "green-900": {
     ref: "",
@@ -413,31 +433,37 @@ const colors = {
     ref: "",
     raw: "rgba(2, 5, 9, 0.87)",
     replacement: "",
+    comment: "No replacement available.",
   },
   "grayalpha-800": {
     ref: "",
     raw: "rgba(3, 11, 22, 0.75)",
     replacement: "",
+    comment: "No replacement available.",
   },
   "grayalpha-700": {
     ref: "",
     raw: "rgba(1, 11, 24, 0.68)",
     replacement: "",
+    comment: "No replacement available.",
   },
   "grayalpha-600": {
     ref: "",
     raw: "rgba(2, 15, 34, 0.6)",
     replacement: "",
+    comment: "No replacement available.",
   },
   "grayalpha-500": {
     ref: "",
     raw: "rgba(2, 20, 49, 0.49)",
     replacement: "",
+    comment: "No replacement available.",
   },
   "grayalpha-400": {
     ref: "",
     raw: "rgba(5, 23, 51, 0.34)",
     replacement: "",
+    comment: "No replacement available.",
   },
   "grayalpha-300": {
     ref: "",
@@ -512,92 +538,95 @@ const colors = {
   "data-border-6": {
     ref: "purple-400",
     raw: "rgba(130, 105, 162, 1)",
-    replacement: "",
+    replacement: "border-meta-purple",
   },
   "data-border-5": {
     ref: "green-400",
     raw: "rgba(42, 167, 88, 1)",
-    replacement: "",
+    replacement: "border-success",
   },
   "data-border-4": {
     ref: "lightblue-700",
     raw: "rgba(54, 141, 168, 1)",
     replacement: "",
+    comment: "Lightblue is now info and brand-blue color.",
   },
   "data-border-3": {
     ref: "orange-600",
     raw: "rgba(199, 115, 0, 1)",
-    replacement: "",
+    replacement: "border-warning",
   },
   "data-border-2": {
     ref: "deepblue-500",
     raw: "rgba(0, 91, 130, 1)",
-    replacement: "",
+    replacement: "border-brand-blue",
   },
   "data-border-1": {
     ref: "blue-400",
     raw: "rgba(51, 134, 224, 1)",
-    replacement: "",
+    replacement: "border-accent",
   },
   "data-surface-6-subtle": {
     ref: "purple-200",
     raw: "rgba(192, 178, 210, 1)",
-    replacement: "",
+    replacement: "meta-purple-300",
   },
   "data-surface-6": {
     ref: "purple-400",
     raw: "rgba(130, 105, 162, 1)",
-    replacement: "",
+    replacement: "meta-purple-500",
   },
   "data-surface-5-subtle": {
     ref: "green-200",
     raw: "rgba(153, 222, 173, 1)",
-    replacement: "",
+    replacement: "success-300",
   },
   "data-surface-5": {
     ref: "green-400",
     raw: "rgba(42, 167, 88, 1)",
-    replacement: "",
+    replacement: "success-500",
   },
   "data-surface-4-subtle": {
     ref: "lightblue-500",
     raw: "rgba(102, 203, 236, 1)",
     replacement: "",
+    comment: "Lightblue is now info and brand-blue color.",
   },
   "data-surface-4": {
     ref: "lightblue-700",
     raw: "rgba(54, 141, 168, 1)",
     replacement: "",
+    comment: "Lightblue is now info and brand-blue color.",
   },
   "data-surface-3-subtle": {
     ref: "orange-300",
     raw: "rgba(255, 193, 102, 1)",
-    replacement: "",
+    replacement: "warning-400",
   },
   "data-surface-3": {
     ref: "orange-600",
     raw: "rgba(199, 115, 0, 1)",
-    replacement: "",
+    replacement: "warning-700",
   },
   "data-surface-2-subtle": {
     ref: "deepblue-200",
     raw: "rgba(153, 196, 221, 1)",
-    replacement: "",
+    replacement: "brand-blue-300",
   },
   "data-surface-2": {
     ref: "deepblue-500",
     raw: "rgba(0, 91, 130, 1)",
-    replacement: "",
+    replacement: "brand-blue-600",
   },
   "data-surface-1-subtle": {
     ref: "blue-100",
     raw: "rgba(204, 225, 255, 1)",
-    replacement: "",
+    replacement: "accent-200",
   },
   "data-surface-1": {
     ref: "blue-400",
     raw: "rgba(51, 134, 224, 1)",
-    replacement: "",
+    replacement: "accent-500",
   },
   "text-on-alt-3": {
     ref: "white",
@@ -697,8 +726,7 @@ const colors = {
   "surface-alt-3-strong": {
     ref: "deepblue-800",
     raw: "rgba(0, 52, 83, 1)",
-    comment: "Use 'bg-brand-blue-moderate' in theme 'dark'-mode.",
-    replacement: "",
+    replacement: "brand-blue-900",
   },
   "surface-alt-3-moderate": {
     ref: "deepblue-200",
@@ -940,6 +968,7 @@ const colors = {
   "surface-inverted-active": {
     ref: "gray-700",
     raw: "rgba(82, 89, 98, 1)",
+    comment: "Use 'bg-neutral-strong-pressed' for similar color.",
     replacement: "",
   },
   "surface-inverted-hover": {
@@ -1180,10 +1209,12 @@ const colors = {
     ref: "",
     raw: "rgba(255, 255, 255, 1)",
     replacement: "",
+    comment: "Use 'white' CSS color.",
   },
   transparent: {
     ref: "",
     raw: "rgba(255, 255, 255, 0)",
+    comment: "Use 'transparent' CSS color.",
     replacement: "",
   },
 } satisfies {
@@ -1355,7 +1386,7 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
   "shadow-xlarge": {
     ref: "",
     raw: "0px 2px 5px 0px rgba(0, 0, 0, 0.15), 0px 10px 24px 0px rgba(0, 0, 0, 0.18), 0px 0px 1px 0px rgba(0, 0, 0, 0.08)",
-    replacement: "",
+    replacement: "shadow-dialog",
     twOld: "shadow-xlarge",
   },
   "shadow-large": {
@@ -1363,35 +1394,45 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
     raw: "0px 2px 5px 0px rgba(0, 0, 0, 0.15), 0px 10px 16px 0px rgba(0, 0, 0, 0.12), 0px 0px 1px 0px rgba(0, 0, 0, 0.12)",
     replacement: "",
     twOld: "shadow-large",
+    comment:
+      "New design-language has removed use of shadows besides on dialog, modal or popup elements where `shadow-dialog` is used.",
   },
   "shadow-medium": {
     ref: "",
     raw: "0px 5px 12px 0px rgba(0, 0, 0, 0.13), 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 0px 1px 0px rgba(0, 0, 0, 0.15)",
     replacement: "",
     twOld: "shadow-medium",
+    comment:
+      "New design-language has removed use of shadows besides on dialog, modal or popup elements where `shadow-dialog` is used.",
   },
   "shadow-small": {
     ref: "",
     raw: "0px 3px 8px 0px rgba(0, 0, 0, 0.10), 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 0px 1px 0px rgba(0, 0, 0, 0.18)",
     replacement: "",
     twOld: "shadow-small",
+    comment:
+      "New design-language has removed use of shadows besides on dialog, modal or popup elements where `shadow-dialog` is used.",
   },
   "shadow-xsmall": {
     ref: "",
     raw: "0px 1px 3px 0px rgba(0, 0, 0, 0.15), 0px 0px 1px 0px rgba(0, 0, 0, 0.20)",
     replacement: "",
     twOld: "shadow-xsmall",
+    comment:
+      "New design-language has removed use of shadows besides on dialog, modal or popup elements where `shadow-dialog` is used.",
   },
   "shadow-focus-inverted": {
     ref: "",
     raw: "0 0 0 3px rgba(153, 195, 255, 1)",
     replacement: "",
     twOld: "shadow-focus-inverted",
+    comment: "This is now handled by light/dark theme.",
   },
   "shadow-focus": {
     ref: "",
     raw: "0 0 0 3px rgba(0, 52, 125, 1)",
-    replacement: "",
+    replacement:
+      "We now use outline `outline: 3px solid var(--ax-border-focus) + outline-offset: 3px`",
     twOld: "shadow-focus",
   },
   "border-radius-full": {
@@ -1458,12 +1499,14 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
     ref: "",
     raw: "3000",
     replacement: "",
+    comment: "Use `z-index: 3000`as replacement",
     twOld: "z-tooltip",
     twNew: "z-[3000]",
   },
   "z-index-focus": {
     ref: "",
     raw: "10",
+    comment: "Use `z-index: 10`as replacement",
     replacement: "",
     twOld: "z-focus",
     twNew: "z-[10]",
@@ -1471,6 +1514,7 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
   "z-index-popover": {
     ref: "",
     raw: "1000",
+    comment: "Use `z-index: 1000`as replacement",
     replacement: "",
     twOld: "z-popover",
     twNew: "z-[1000]",
@@ -1633,6 +1677,7 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
     ref: "",
     raw: "576px",
     replacement: "",
+    comment: "Use `max-width: 576px` as replacement",
     twOld: "max-w-text",
   },
   "breakpoint-2xl-down": {
