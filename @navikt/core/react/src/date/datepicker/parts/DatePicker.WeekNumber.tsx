@@ -67,7 +67,7 @@ const DatePickerWeekNumber = ({
           name="week-number"
           aria-label={translate("selectWeekNumber", { week: weekNumber })}
           style={style}
-          className={cl("aksel-date__weeknumber", "rdp-weeknumber")}
+          className="aksel-date__weeknumber rdp-weeknumber"
           onClick={() => {
             onWeekNumberClick(
               weekNumber,

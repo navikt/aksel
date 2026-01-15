@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noAssignInExpressions: Because why not? */
 type ClassValue =
   | ClassArray
   | ClassDictionary

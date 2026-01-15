@@ -8,7 +8,6 @@ export const getConditionalClasses = (
   direction: string,
   status: PeriodProps["status"],
 ) => {
-  /* Renaming to aksel-* happends where these are used, so no need to rename here */
   return cl(`aksel-timeline__period aksel-timeline__period--${status}`, {
     "aksel-timeline__period--connected-both": cropped === "both",
     "aksel-timeline__period--connected-right":

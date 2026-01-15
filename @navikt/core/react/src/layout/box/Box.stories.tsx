@@ -97,7 +97,7 @@ export const ThemingDemo = () => {
         <style>
           {`
             .link-card {
-              color: var(--aksel-color-text-primary);
+              color: unset;
               text-decoration: none;
             }
             .link-card:hover {

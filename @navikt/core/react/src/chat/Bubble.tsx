@@ -46,7 +46,7 @@ const Bubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
             size="xsmall"
             level={toptextHeadingLevel}
             className={cl(
-              `aksel-chat__top-text`,
+              "aksel-chat__top-text",
               toptextPosition && `aksel-chat__top-text--${toptextPosition}`,
             )}
           >

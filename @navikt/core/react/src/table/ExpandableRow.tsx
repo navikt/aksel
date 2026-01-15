@@ -147,11 +147,9 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           <td colSpan={colSpan} className="aksel-table__expanded-row-cell">
             <AnimateHeight
               className="aksel-table__expanded-row-collapse"
-              innerClassName={cl(
-                `aksel-table__expanded-row-content aksel-table__expanded-row-content--gutter-${
-                  contentGutter ?? togglePlacement
-                }`,
-              )}
+              innerClassName={`aksel-table__expanded-row-content aksel-table__expanded-row-content--gutter-${
+                contentGutter ?? togglePlacement
+              }`}
               height={_open ? "auto" : 0}
               duration={150}
               easing="cubic-bezier(0.39,0.57,0.56,1)"

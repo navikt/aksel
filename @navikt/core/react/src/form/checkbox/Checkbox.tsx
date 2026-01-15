@@ -87,9 +87,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <BodyShort
             id={descriptionId}
             size={size}
-            className={cl(
-              "aksel-form-field__subdescription aksel-checkbox__description",
-            )}
+            className="aksel-form-field__subdescription aksel-checkbox__description"
           >
             {props.description}
           </BodyShort>

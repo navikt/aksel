@@ -66,11 +66,7 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
           onClick={composeEventHandlers(onClick, handleStepClick)}
         >
           {completed ? (
-            <span
-              className={cl(
-                "aksel-stepper__circle aksel-stepper__circle--success",
-              )}
-            >
+            <span className="aksel-stepper__circle aksel-stepper__circle--success">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"

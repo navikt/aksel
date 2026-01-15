@@ -133,9 +133,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
               <BodyShort
                 size={size}
                 as="span"
-                className={cl(
-                  "aksel-form-field__subdescription aksel-switch__description",
-                )}
+                className="aksel-form-field__subdescription aksel-switch__description"
               >
                 {description}
               </BodyShort>

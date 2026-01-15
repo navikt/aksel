@@ -41,9 +41,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         <BodyShort
           id={descriptionId}
           size={size}
-          className={cl(
-            "aksel-form-field__subdescription aksel-radio__description",
-          )}
+          className="aksel-form-field__subdescription aksel-radio__description"
         >
           {props.description}
         </BodyShort>

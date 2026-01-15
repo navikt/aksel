@@ -666,11 +666,7 @@ export const ActionMenuCheckboxItem = forwardRef<
                   strokeWidth="2"
                 />
               </g>
-              <g
-                className={cl(
-                  "aksel-action-menu__indicator-icon--indeterminate",
-                )}
-              >
+              <g className="aksel-action-menu__indicator-icon--indeterminate">
                 <rect
                   width="24"
                   height="24"
