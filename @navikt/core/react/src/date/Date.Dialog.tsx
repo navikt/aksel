@@ -65,7 +65,6 @@ const DateDialog = ({
         open={open}
         onClose={onClose}
         placement="bottom-start"
-        role="dialog"
         className={cn("navds-date__popover", {
           "navds-date": variant === "month",
         })}

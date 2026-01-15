@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.40.0
+
+### Patch Changes
+
+- DatePicker/MonthPicker: Remove role=dialog from popover ([#4463](https://github.com/navikt/aksel/pull/4463))
+
+- Updated dependencies [[`2a43bcc`](https://github.com/navikt/aksel/commit/2a43bcc6d1cea922baf0d80101e12eb822699ff6)]:
+  - @navikt/aksel-icons@7.40.0
+  - @navikt/ds-tokens@7.40.0
+
 ## 7.39.1
 
 ### Patch Changes

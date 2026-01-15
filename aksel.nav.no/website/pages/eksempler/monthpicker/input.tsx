@@ -12,7 +12,7 @@ const Example = () => {
         <MonthPicker.Input
           {...inputProps}
           label="Velg måned"
-          description="Format: mm.yyyy"
+          description="Format: mm.åååå"
         />
       </MonthPicker>
       {selectedMonth?.toLocaleDateString(undefined, {
