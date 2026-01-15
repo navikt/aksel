@@ -1,5 +1,5 @@
 import React from "react";
-import { useRenameCSS } from "../../../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../../../theme/Theme";
 import { LinkAnchor } from "../../../../util/link-anchor";
 import { FileItem } from "./Item.types";
 import ItemIcon from "./ItemIcon";
@@ -15,12 +15,15 @@ interface Props {
 const ItemHeader = ({ file, href, onClick }: Props) => {
   const { cn } = useRenameCSS();
 
+  const ctx = useThemeInternal();
+
   if (onClick && href) {
     return (
       <LinkAnchor
         href={href}
         onClick={onClick}
         className={cn("navds-file-item__link")}
+        data-color={ctx.color}
       >
         <ItemIcon file={file} />
         {file.name}
@@ -37,6 +40,7 @@ const ItemHeader = ({ file, href, onClick }: Props) => {
           onClick(event);
         }}
         className={cn("navds-file-item__link")}
+        data-color={ctx.color}
       >
         <ItemIcon file={file} />
         {file.name}
@@ -46,7 +50,11 @@ const ItemHeader = ({ file, href, onClick }: Props) => {
 
   if (href) {
     return (
-      <LinkAnchor href={href} className={cn("navds-file-item__link")}>
+      <LinkAnchor
+        href={href}
+        className={cn("navds-file-item__link")}
+        data-color={ctx.color}
+      >
         <ItemIcon file={file} />
         {file.name}
       </LinkAnchor>
@@ -63,6 +71,7 @@ const ItemHeader = ({ file, href, onClick }: Props) => {
           downloadFile(file);
         }}
         className={cn("navds-file-item__link")}
+        data-color={ctx.color}
       >
         <ItemIcon file={file} />
         {file.name}

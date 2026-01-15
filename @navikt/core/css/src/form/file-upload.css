@@ -173,10 +173,6 @@ li.aksel-file-item {
   align-items: flex-start;
   gap: var(--ax-space-2);
   width: fit-content;
-
-  &:is(a) {
-    color: var(--ax-text-subtle);
-  }
 }
 
 .aksel-file-item--error > .aksel-file-item__inner {

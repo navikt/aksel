@@ -25,6 +25,10 @@
   text-decoration-thickness: 0.05em;
   color: inherit;
 
+  &[data-color] {
+    color: var(--ax-text-subtle);
+  }
+
   &:hover,
   .aksel-link-anchor__overlay:hover & {
     text-decoration-thickness: 0.111em;
