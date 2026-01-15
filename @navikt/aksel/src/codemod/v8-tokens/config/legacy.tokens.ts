@@ -726,7 +726,8 @@ const colors = {
   "surface-alt-3-strong": {
     ref: "deepblue-800",
     raw: "rgba(0, 52, 83, 1)",
-    replacement: "brand-blue-900",
+    replacement: "",
+    comment: "Use 'bg-brand-blue-moderate' in theme 'dark'-mode.",
   },
   "surface-alt-3-moderate": {
     ref: "deepblue-200",
@@ -1431,7 +1432,8 @@ const tokensWithoutRegex: Record<string, Omit<LegacyTokenConfig, "regexes">> = {
   "shadow-focus": {
     ref: "",
     raw: "0 0 0 3px rgba(0, 52, 125, 1)",
-    replacement:
+    replacement: "",
+    comment:
       "We now use `outline: 3px solid var(--ax-border-focus)` + `outline-offset: 3px`",
     twOld: "shadow-focus",
   },

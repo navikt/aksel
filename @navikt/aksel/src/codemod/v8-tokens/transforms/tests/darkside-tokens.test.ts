@@ -59,12 +59,22 @@ for (const fixture of ["tw-complete"]) {
   check(__dirname, {
     fixture,
     migration: "v8-tokens-tailwind",
-    extension: "css",
+    extension: "js",
   });
+}
 
+for (const fixture of ["tw-complete"]) {
   check(__dirname, {
     fixture,
     migration: "v8-tokens-tailwind",
-    extension: "js",
+    extension: "css",
+  });
+}
+
+for (const fixture of ["scss-edgecase"]) {
+  check(__dirname, {
+    fixture,
+    migration: "v8-tokens-tailwind",
+    extension: "scss",
   });
 }
