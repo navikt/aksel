@@ -8,6 +8,7 @@ import { VStack } from "../layout/stack";
 import { Modal } from "../modal";
 import { Table } from "../table";
 import { Tooltip } from "../tooltip";
+import { BodyShort } from "../typography";
 import {
   Dialog,
   DialogBody,
@@ -368,6 +369,99 @@ export const CustomWidthHeight: Story = {
   },
 };
 
+export const Scroll: Story = {
+  render: () => {
+    const bodyRef = useRef<HTMLDivElement>(null);
+
+    return (
+      <Dialog
+        defaultOpen
+        onOpenChangeComplete={(open) => {
+          if (!open || !bodyRef.current) {
+            return;
+          }
+
+          bodyRef.current.scrollTop = 200;
+        }}
+      >
+        <DialogTrigger>
+          <Button>Open Dialog</Button>
+        </DialogTrigger>
+        <DialogPopup height="400px">
+          <DialogHeader>
+            <DialogTitle>Dialog Title</DialogTitle>
+            <DialogDescription>
+              This is a description of the dialog.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogBody ref={bodyRef}>
+            {ScrollContent({ defaultOpen: true })}
+          </DialogBody>
+          <DialogFooter>
+            <DialogCloseTrigger>
+              <Button>Close</Button>
+            </DialogCloseTrigger>
+          </DialogFooter>
+        </DialogPopup>
+      </Dialog>
+    );
+  },
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
+export const WithSrElement: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
+      <DialogPopup>
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a description of the dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          <BodyShort>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            officiis magni praesentium odio sequi ex minus ipsa, sunt commodi
+            vel aut nam error beatae exercitationem amet, ut quia, dignissimos
+            nobis!
+          </BodyShort>
+          <BodyShort
+            visuallyHidden
+            style={{
+              clip: "unset !important",
+              clipPath: "unset !important",
+              outline: "2px solid red",
+            }}
+            as="legend"
+          >
+            lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </BodyShort>
+          <BodyShort>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            officiis magni praesentium odio sequi ex minus ipsa, sunt commodi
+            vel aut nam error beatae exercitationem amet, ut quia, dignissimos
+            nobis!
+          </BodyShort>
+        </DialogBody>
+        <DialogFooter>
+          <DialogCloseTrigger>
+            <Button>Close</Button>
+          </DialogCloseTrigger>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
+
 export const WithTooltip: Story = {
   render: () => {
     const buttonRef = React.useRef<HTMLButtonElement | null>(null);
@@ -637,8 +731,8 @@ const content = `This is the body of the dialog. Here is where the main content
               the dialog. Here is where the main content lives This is the body
               of the dialog. Here is where the main content lives`;
 
-function ScrollContent() {
-  const [showScroll, setShowScroll] = useState(false);
+function ScrollContent({ defaultOpen = false }: { defaultOpen?: boolean }) {
+  const [showScroll, setShowScroll] = useState(defaultOpen);
   return (
     <div>
       <button onClick={() => setShowScroll((x) => !x)}>

@@ -27,7 +27,6 @@ const Example = () => {
       <Button
         onClick={() => openDialog("user-1")}
         aria-haspopup="dialog"
-        aria-expanded={open}
         aria-controls={open ? "dialog-popup-example" : undefined}
       >
         Vis brukerdetaljer

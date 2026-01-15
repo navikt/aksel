@@ -28,7 +28,11 @@ type Story = StoryObj<typeof GlobalAlert>;
 export const Default: Story = {
   render: (props) => {
     return (
-      <GlobalAlert status={props.status ?? "announcement"} size={props.size}>
+      <GlobalAlert
+        status={props.status ?? "announcement"}
+        size={props.size}
+        centered={props.centered}
+      >
         <GlobalAlertHeader>
           <GlobalAlertTitle>
             {props.title ?? "GlobalAlert title"}
@@ -47,6 +51,7 @@ export const Default: Story = {
     title: "GlobalAlert Title",
     size: "medium",
     status: "announcement",
+    centered: true,
   },
   argTypes: {
     size: {
@@ -70,6 +75,30 @@ export const SizeSmall: Story = {
         </GlobalAlertHeader>
         <DemoContent />
       </GlobalAlert>
+    );
+  },
+};
+
+export const LeftAlignContent: Story = {
+  render: () => {
+    return (
+      <VStack gap="space-16">
+        <GlobalAlert status="announcement" centered={false}>
+          <GlobalAlertHeader>
+            <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
+            <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+          </GlobalAlertHeader>
+          <GlobalAlertContent>GlobalAlert content</GlobalAlertContent>
+        </GlobalAlert>
+
+        <GlobalAlert status="announcement" size="small" centered={false}>
+          <GlobalAlertHeader>
+            <GlobalAlertTitle>GlobalAlert Title</GlobalAlertTitle>
+            <GlobalAlertCloseButton onClick={() => alert("Lukket!")} />
+          </GlobalAlertHeader>
+          <GlobalAlertContent>GlobalAlert content</GlobalAlertContent>
+        </GlobalAlert>
+      </VStack>
     );
   },
 };
@@ -193,6 +222,7 @@ export const A11yTest: Story = {
 
 export const Chromatic = renderStoriesForChromatic({
   Default,
+  LeftAlignContent,
   SizeSmall,
   OnlyHeader,
   Compositions,
@@ -202,6 +232,7 @@ export const Chromatic = renderStoriesForChromatic({
 
 export const ChromaticLight = renderStoriesForChromatic({
   Default,
+  LeftAlignContent,
   SizeSmall,
   OnlyHeader,
   Compositions,
@@ -212,6 +243,7 @@ ChromaticLight.globals = { theme: "light", mode: "darkside" };
 
 export const ChromaticDark = renderStoriesForChromatic({
   Default,
+  LeftAlignContent,
   SizeSmall,
   OnlyHeader,
   Compositions,

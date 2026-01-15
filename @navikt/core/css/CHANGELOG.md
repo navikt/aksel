@@ -1,5 +1,27 @@
 # @navikt/ds-css
 
+## 7.39.1
+
+### Patch Changes
+
+- Modal, Dialog: Handle scroll for extreme zoom-levels better. ([#4488](https://github.com/navikt/aksel/pull/4488))
+
+## 7.39.0
+
+### Minor Changes
+
+- LocalAlert, InfoCard: Reduced default header height. ([`91f3f8a`](https://github.com/navikt/aksel/commit/91f3f8acb8749bc154a1e7dca008ce0be43e2e34))
+
+- GlobalAlert: Reduced default header height and added centered content prop. ([#4476](https://github.com/navikt/aksel/pull/4476))
+
+### Patch Changes
+
+- Dialog: Handle SR-only elements inside Dialog.Body better. Moved elements in Footer to flex-end. ([#4457](https://github.com/navikt/aksel/pull/4457))
+
+- Darkside: ExpansionCardContent typography is no longer affected by 'app-color'. ([#4460](https://github.com/navikt/aksel/pull/4460))
+
+- ReadMore: Removed focus styling for content, reverting #4116. ([#4464](https://github.com/navikt/aksel/pull/4464))
+
 ## 7.38.0
 
 ### Patch Changes

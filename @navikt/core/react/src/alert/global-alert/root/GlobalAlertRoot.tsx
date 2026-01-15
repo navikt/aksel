@@ -20,6 +20,11 @@ import {
 interface GlobalAlertProps
   extends Omit<BaseAlert.RootProps, "type" | "global" | "data-color"> {
   status: Exclude<BaseAlert.RootProps["status"], undefined>;
+  /**
+   *  Whether title and content are centered or not.
+   * @default true
+   */
+  centered?: boolean;
 }
 
 interface GlobalAlertComponent
@@ -98,14 +103,15 @@ interface GlobalAlertComponent
  * ```
  */
 export const GlobalAlert = forwardRef<HTMLDivElement, GlobalAlertProps>(
-  (props: GlobalAlertProps, forwardedRef) => {
+  ({ centered = true, ...rest }: GlobalAlertProps, forwardedRef) => {
     return (
       <BaseAlert.Root
         ref={forwardedRef}
         role="alert"
-        {...props}
+        {...rest}
         type="strong"
         global
+        data-centered={centered}
       />
     );
   },

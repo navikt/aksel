@@ -7,7 +7,7 @@ export default {
   title: "ds-react/Loader",
   component: Loader,
   parameters: {
-    chromatic: { disable: false },
+    chromatic: { disable: true },
   },
 } satisfies Meta<typeof Loader>;
 

@@ -12,7 +12,11 @@ import { ComboboxProps, UNSAFE_Combobox } from "./index";
 export default {
   title: "ds-react/Combobox",
   component: UNSAFE_Combobox,
-  decorators: [(story) => <div style={{ width: "300px" }}>{story()}</div>],
+  decorators: [
+    (story) => (
+      <div style={{ width: "320px", minHeight: "100px" }}>{story()}</div>
+    ),
+  ],
   parameters: {
     chromatic: { disable: true },
   },
@@ -532,12 +536,11 @@ export const Readonly: StoryFn = () => {
   );
 };
 
+const H2 = (props: { children: string; style?: React.CSSProperties }) => (
+  <h2 style={{ marginBottom: "-0.25rem", ...props.style }}>{props.children}</h2>
+);
+
 const ChromaticRender = ({ children }: { children?: React.ReactNode }) => {
-  const H2 = (props: { children: string; style?: React.CSSProperties }) => (
-    <h2 style={{ marginBottom: "-0.25rem", ...props.style }}>
-      {props.children}
-    </h2>
-  );
   return (
     <VStack gap="2">
       <H2>MultiSelect</H2>
@@ -558,7 +561,7 @@ const ChromaticRender = ({ children }: { children?: React.ReactNode }) => {
       <Controlled />
       <H2>ComboboxSizes</H2>
       <ComboboxSizes />
-      <H2>MaxSelectedOptions</H2>
+      <H2 style={{ marginBottom: "18rem" }}>MaxSelectedOptions</H2>
       <MaxSelectedOptions open />
       <H2 style={{ marginTop: "20rem" }}>WithError</H2>
       <WithError />
