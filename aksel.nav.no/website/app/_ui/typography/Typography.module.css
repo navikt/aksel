@@ -1,5 +1,5 @@
 .typoCode {
-  border-radius: var(--ax-border-radius-small);
+  border-radius: var(--ax-radius-2);
   background-color: var(--ax-bg-neutral-softA);
   padding: var(--ax-space-2) var(--ax-space-4);
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */

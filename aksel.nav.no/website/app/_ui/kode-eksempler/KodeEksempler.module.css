@@ -9,7 +9,7 @@
 .kodeExampleContainer {
   position: relative;
   overflow: hidden;
-  border-radius: var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge) 0 0;
+  border-radius: var(--ax-radius-12) var(--ax-radius-12) 0 0;
   border: 1px solid var(--ax-border-neutral-subtle);
   border-bottom: none;
   background-color: var(--ax-bg-sunken);
@@ -38,7 +38,7 @@
   padding: var(--ax-space-4);
   margin-block-end: var(--ax-space-8);
   border: 1px solid var(--ax-border-neutral-subtle);
-  border-radius: 0 0 var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge);
+  border-radius: 0 0 var(--ax-radius-12) var(--ax-radius-12);
   background-color: var(--ax-bg-raised);
 }
 

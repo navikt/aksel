@@ -68,7 +68,7 @@
   position: relative;
   display: block;
   margin-bottom: var(--ax-space-40);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   aspect-ratio: 16 / 9;
 }
 
@@ -80,7 +80,7 @@
 .remainingArticleImage {
   position: relative;
   display: none;
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   aspect-ratio: 1;
   height: 12rem;
 }
@@ -172,7 +172,7 @@
   position: relative;
   margin-block: var(--ax-space-40) 0;
   margin-inline: auto;
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   width: 100%;
   max-width: 48rem;
   overflow: hidden;
@@ -181,7 +181,7 @@
 .imageContainer {
   & img {
     object-fit: cover;
-    border-radius: var(--ax-border-radius-xlarge);
+    border-radius: var(--ax-radius-12);
   }
 
   &::after {
@@ -191,7 +191,7 @@
     height: 100%;
     position: absolute;
     width: 100%;
-    border-radius: var(--ax-border-radius-xlarge);
+    border-radius: var(--ax-radius-12);
   }
 }
 

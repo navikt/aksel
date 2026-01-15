@@ -1,10 +1,10 @@
 .bildeFigure {
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
 }
 
 .bildeImage {
   padding: 0;
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   background-color: var(--bilde-background, var(--ax-bg-neutral-softA));
 
   &[data-image-border="true"] {
