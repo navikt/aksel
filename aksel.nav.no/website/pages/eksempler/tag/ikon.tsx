@@ -5,19 +5,15 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <HStack gap="space-12" align="start">
-      <Tag variant="neutral-moderate" icon={<ComponentIcon aria-hidden />}>
+      <Tag variant="moderate" icon={<ComponentIcon aria-hidden />}>
         Medium
       </Tag>
-      <Tag
-        size="small"
-        variant="neutral-moderate"
-        icon={<ComponentIcon aria-hidden />}
-      >
+      <Tag size="small" variant="moderate" icon={<ComponentIcon aria-hidden />}>
         Small
       </Tag>
       <Tag
         size="xsmall"
-        variant="neutral-moderate"
+        variant="moderate"
         icon={<ComponentIcon aria-hidden />}
       >
         Xsmall
@@ -35,6 +31,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 4,
   desc: "Husk å legge til 'aria-hidden' hvis ikonet bare er illustrativt.",
 };

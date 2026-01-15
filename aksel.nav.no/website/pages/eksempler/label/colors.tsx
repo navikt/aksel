@@ -1,4 +1,4 @@
-import { Label, VStack } from "@navikt/ds-react";
+import { Box, Label, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -7,8 +7,30 @@ const Example = () => {
 
   return (
     <VStack gap="space-20">
-      <Label textColor="default">Default: {exampleText}</Label>
-      <Label textColor="subtle">Subtle: {exampleText}</Label>
+      <h2>Default coloring</h2>
+      <Label textColor="default">
+        <b>Default:</b> {exampleText}
+      </Label>
+      <Label textColor="subtle">
+        <b>Subtle:</b> {exampleText}
+      </Label>
+      <Box background="neutral-strong">
+        <Label textColor="contrast">
+          <b>Contrast:</b> {exampleText}
+        </Label>
+      </Box>
+      <h2>Data-color</h2>
+      <Label textColor="default" data-color="accent">
+        <b>Default:</b> {exampleText}
+      </Label>
+      <Label textColor="subtle" data-color="accent">
+        <b>Subtle:</b> {exampleText}
+      </Label>
+      <Box background="neutral-strong">
+        <Label textColor="contrast" data-color="accent">
+          <b>Contrast:</b> {exampleText}
+        </Label>
+      </Box>
     </VStack>
   );
 };

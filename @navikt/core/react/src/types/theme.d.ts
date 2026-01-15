@@ -9,7 +9,7 @@ export type AkselColor = AkselColorRole | keyof CustomAkselColor;
 declare global {
   namespace React {
     interface HTMLAttributes {
-      "data-color"?: AkselColor | (string & {});
+      "data-color"?: AkselColor;
     }
   }
 }

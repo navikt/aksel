@@ -86,7 +86,7 @@ export const Keys = () => {
 
 export const Chromatic = () => {
   return (
-    <VStack gap="24">
+    <VStack gap="space-96">
       <div>
         <h2>Default</h2>
         <Default />

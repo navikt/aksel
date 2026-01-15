@@ -49,7 +49,7 @@ export const Controls: Story = {
 
 export const Variants: StoryFn = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant}>
           {new Array(i + 1).fill(
@@ -70,7 +70,7 @@ export const Variants: StoryFn = () => {
 
 export const FullWidth: StoryFn = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert variant="info" fullWidth>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
@@ -90,7 +90,7 @@ export const ContentMaxWidthOff: StoryFn = () => (
 
 export const Inline: StoryFn = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert variant="info" inline>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
@@ -115,7 +115,7 @@ export const Inline: StoryFn = () => {
 
 export const WithHeading: StoryFn = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert variant="info">
         <Heading spacing size="small" level="3">
           Aliquip duis est in commodo pariatur
@@ -142,7 +142,7 @@ export const WithHeading: StoryFn = () => {
 
 export const CloseButton: StoryFn = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert variant="info" closeButton>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
@@ -182,7 +182,7 @@ export const CloseButton: StoryFn = () => {
 };
 
 export const Links: StoryFn = () => (
-  <VStack gap="2">
+  <VStack gap="space-8">
     {variants.map((variant) => (
       <Alert key={variant} variant={variant}>
         <Link href="#">Id elit esse enim reprehenderit</Link>

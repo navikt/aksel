@@ -219,9 +219,6 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
     };
 
     const mainStyle: React.CSSProperties = {
-      "--__ac-textarea-height": state.outerHeightStyle
-        ? state.outerHeightStyle + "px"
-        : "auto",
       "--__axc-textarea-height": state.outerHeightStyle
         ? state.outerHeightStyle + "px"
         : "auto",

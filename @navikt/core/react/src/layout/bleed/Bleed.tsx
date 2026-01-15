@@ -1,16 +1,16 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS } from "../../theme/Theme";
 import { getResponsiveProps } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export type BleedSpacingInline = "0" | "full" | "px" | SpacingScale;
-export type BleedSpacingBlock = "0" | "px" | SpacingScale;
+export type BleedSpacingInline = "full" | SpacingScale;
+export type BleedSpacingBlock = SpacingScale;
 
 export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * **Negative** horizontal margin around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    *
    * The `px` value is useful to nudge by just 1px.
@@ -19,14 +19,14 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * @example
    * marginInline='space-16'
    * marginInline='space-16 space-20'
-   * marginInline={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24', "2xl": 'space-32'}}
+   * marginInline={{xs: 'space-0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24', "2xl": 'space-32'}}
    */
   marginInline?: ResponsiveProp<
     BleedSpacingInline | `${BleedSpacingInline} ${BleedSpacingInline}`
   >;
   /**
    * **Negative** vertical margin around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    *
    * The `px` value is useful to nudge by just 1px.
@@ -35,7 +35,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * @example
    * marginBlock='space-16'
    * marginBlock='space-16 space-20'
-   * marginBlock={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24', "2xl": 'space-32'}}
+   * marginBlock={{xs: 'space-0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24', "2xl": 'space-32'}}
    */
   marginBlock?: ResponsiveProp<
     BleedSpacingBlock | `${BleedSpacingBlock} ${BleedSpacingBlock}`
@@ -62,7 +62,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * @example
  * <Box padding="4">
- *   <Bleed marginInline="4" marginBlock="4">
+ *   <Bleed marginInline="space-16" marginBlock="space-16">
  *     <BodyLong>Some content</BodyLong>
  *   </Bleed>
  * </Box>
@@ -80,30 +80,24 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     },
     ref,
   ) => {
-    const themeContext = useThemeInternal();
     const { cn } = useRenameCSS();
-    const prefix = themeContext?.isDarkside ? "ax" : "a";
 
     let style: React.CSSProperties = {
       ..._style,
       ...getResponsiveProps(
-        prefix,
         "bleed",
         "margin-inline",
-        "spacing",
+        "space",
         marginInline,
         true,
-        ["0", "full", "px"],
       ),
 
       ...getResponsiveProps(
-        prefix,
         "bleed",
         "margin-block",
-        "spacing",
+        "space",
         marginBlock,
         true,
-        ["0", "px"],
       ),
     };
 
@@ -111,22 +105,18 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       style = {
         ...style,
         ...getResponsiveProps(
-          prefix,
           "bleed",
           "padding-inline",
-          "spacing",
+          "space",
           marginInline,
           false,
-          ["0", "full", "px"],
         ),
         ...getResponsiveProps(
-          prefix,
           "bleed",
           "padding-block",
-          "spacing",
+          "space",
           marginBlock,
           false,
-          ["0", "px"],
         ),
       };
     }

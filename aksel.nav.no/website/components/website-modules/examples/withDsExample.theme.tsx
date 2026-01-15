@@ -1,22 +1,11 @@
 import { ThemeProvider, useTheme } from "next-themes";
-import { useRouter } from "next/router";
-import { useMemo } from "react";
 import { Box, Select } from "@navikt/ds-react";
-
-type SupportedThemes = "legacy" | "light" | "dark";
-
-const colorThemes = ["legacy", "light", "dark"] satisfies SupportedThemes[];
-
-const LOCAL_STORAGE_KEY = "aksel-example-theme";
 
 function ExampleTheming({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider
       attribute="class"
-      storageKey={LOCAL_STORAGE_KEY}
-      defaultTheme="legacy"
-      enableSystem={false}
-      themes={colorThemes}
+      storageKey="aksel-example-theme"
       disableTransitionOnChange
     >
       {children}
@@ -24,35 +13,28 @@ function ExampleTheming({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ExampleThemingSwitch({
-  legacyOnly = false,
-}: {
-  legacyOnly?: boolean;
-}) {
-  const { theme, setTheme } = useTheme();
-  const { query, isReady } = useRouter();
-
-  const shouldShow = useMemo(
-    () => isReady && query.darkside === "true",
-    [isReady, query.darkside],
-  );
-
-  if (!shouldShow || legacyOnly) {
-    return null;
-  }
+function ExampleThemingSwitch() {
+  const { resolvedTheme, setTheme } = useTheme();
 
   return (
-    <Box position="absolute" top="space-8" right="space-8">
+    <Box
+      position="absolute"
+      top="space-8"
+      right="space-8"
+      // Needed for examples that use the Decorator:
+      style={{ zIndex: "2000" }}
+      background="default"
+      borderRadius="8"
+    >
       <Select
         label="Tema"
-        onChange={(e) => setTheme(e.target.value)}
+        onChange={(event) => setTheme(event.target.value)}
         hideLabel
-        value={theme}
+        value={resolvedTheme}
         size="small"
       >
-        <option value="legacy">Standard</option>
-        <option value="light">Nytt lyst tema</option>
-        <option value="dark">Nytt mørkt tema</option>
+        <option value="light">Lyst tema</option>
+        <option value="dark">Mørkt tema</option>
       </Select>
     </Box>
   );

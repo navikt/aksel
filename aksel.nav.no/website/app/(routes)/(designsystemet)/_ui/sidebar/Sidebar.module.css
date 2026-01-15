@@ -86,10 +86,6 @@
   [data-layout="mobile"] & {
     padding-block: var(--ax-space-12);
   }
-
-  &[data-highlight="true"] {
-    color: var(--ax-text-subtle);
-  }
 }
 
 .navListSubButtonIcon {
@@ -127,7 +123,6 @@
 
 .navListItemLink {
   border-radius: var(--ax-radius-8);
-  display: block;
   display: flex;
   align-items: center;
   justify-content: space-between;

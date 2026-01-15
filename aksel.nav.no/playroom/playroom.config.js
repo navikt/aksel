@@ -13,6 +13,8 @@ module.exports = {
   snippets: path.resolve("./src/snippets.ts"),
   widths: [320, 480, 768, 1024, 1280, 1440],
   defaultVisibleWidths: [1280],
+  defaultVisibleThemes: ["light", "dark"],
+  themes: "./src/themes.ts",
   port: 9000,
   frameComponent: path.resolve("./src/FrameComponent.tsx"),
   useScope: path.resolve("./src/useScope.tsx"),

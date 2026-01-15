@@ -54,7 +54,7 @@ const Items = (icon?: boolean, both?: boolean) => {
   );
 };
 
-interface Props extends Pick<ToggleGroupProps, "size" | "variant"> {
+interface Props extends Pick<ToggleGroupProps, "size"> {
   icon: boolean;
   text: boolean;
   label: boolean;
@@ -64,7 +64,6 @@ export const Default: StoryFn<Props> = (props) => {
   return (
     <ToggleGroup
       size={props.size}
-      variant={props.variant}
       value={activeValue}
       onChange={(value) => {
         setActiveValue(value);
@@ -82,10 +81,6 @@ Default.argTypes = {
     control: {
       type: "radio",
     },
-  },
-  variant: {
-    options: ["action", "neutral"],
-    control: { type: "radio" },
   },
 };
 Default.args = {
@@ -106,7 +101,7 @@ export const Compositions = () => {
   const [activeValue, setActiveValue] = useState("ulest");
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       <ToggleGroup value={activeValue} onChange={setActiveValue}>
         {Items()}
       </ToggleGroup>
@@ -123,34 +118,11 @@ export const Compositions = () => {
   );
 };
 
-export const Variants = () => {
-  const [activeValue, setActiveValue] = useState("ulest");
-
-  return (
-    <VStack gap="6">
-      <ToggleGroup
-        variant="action"
-        value={activeValue}
-        onChange={setActiveValue}
-      >
-        {Items(true, true)}
-      </ToggleGroup>
-      <ToggleGroup
-        variant="neutral"
-        value={activeValue}
-        onChange={setActiveValue}
-      >
-        {Items(true, true)}
-      </ToggleGroup>
-    </VStack>
-  );
-};
-
 export const Small = () => {
   const [activeValue, setActiveValue] = useState("ulest");
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
         {Items()}
       </ToggleGroup>
@@ -172,35 +144,8 @@ export const Small = () => {
   );
 };
 
-export const ColorRoles = () => {
-  const [activeValue, setActiveValue] = useState("ulest");
-  return (
-    <VStack gap="space-12" data-color="brand-magenta">
-      <ToggleGroup value={activeValue} onChange={setActiveValue}>
-        {Items()}
-      </ToggleGroup>
-      <ToggleGroup
-        value={activeValue}
-        onChange={setActiveValue}
-        variant="action"
-      >
-        {Items()}
-      </ToggleGroup>
-      <ToggleGroup
-        value={activeValue}
-        onChange={setActiveValue}
-        variant="neutral"
-      >
-        {Items()}
-      </ToggleGroup>
-    </VStack>
-  );
-};
-
 export const Chromatic = renderStoriesForChromatic({
   Label,
   Compositions,
-  Variants,
   Small,
-  ColorRoles,
 });

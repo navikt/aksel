@@ -16,6 +16,10 @@ interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "medium"
    */
   size?: "medium" | "small";
+  /**
+   * "data-color" has no effect on InlineMessage.
+   */
+  "data-color"?: never;
 }
 
 /**

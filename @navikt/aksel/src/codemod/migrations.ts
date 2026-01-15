@@ -156,7 +156,7 @@ export const migrations: MigrationT = {
     },
     {
       description:
-        "Tries to migrate List component moving 'title' and 'description' props to 'Heading' and 'BodyShort'.",
+        "Tries to migrate List component by wrapping it with 'Box' and moving 'title' and 'description' props to 'Heading' and 'BodyShort'.",
       value: "v8-list",
       path: "v8.0.0/list/list",
       ignoredExtensions: CSS_EXTENSIONS,
@@ -208,6 +208,20 @@ export const migrations: MigrationT = {
         "Updates variant + data-color props on Chips based on current variant prop.",
       value: "v8-chips-variant",
       path: "v8.0.0/chips-variant/chips-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on Button based on current variant prop.",
+      value: "v8-button-variant",
+      path: "v8.0.0/button-variant/button-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on Link based on current variant prop.",
+      value: "v8-link-variant",
+      path: "v8.0.0/link-variant/link-variant",
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],

@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS } from "../../theme/Theme";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
@@ -42,7 +42,7 @@ export type StackProps = HTMLAttributes<HTMLDivElement> & {
   wrap?: boolean;
   /**
    * CSS `gap` property.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    *
    * @example
@@ -83,16 +83,14 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal();
-      const prefix = themeContext?.isDarkside ? "ax" : "a";
       const { cn } = useRenameCSS();
 
       const style: React.CSSProperties = {
         ..._style,
-        ...getResponsiveProps(prefix, `stack`, "gap", "spacing", gap),
-        ...getResponsiveValue(prefix, `stack`, "direction", direction),
-        ...getResponsiveValue(prefix, `stack`, "align", align),
-        ...getResponsiveValue(prefix, `stack`, "justify", justify),
+        ...getResponsiveProps(`stack`, "gap", "space", gap),
+        ...getResponsiveValue(`stack`, "direction", direction),
+        ...getResponsiveValue(`stack`, "align", align),
+        ...getResponsiveValue(`stack`, "justify", justify),
       };
 
       const Comp = asChild ? Slot : Component;

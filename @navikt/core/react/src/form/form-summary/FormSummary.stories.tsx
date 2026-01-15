@@ -267,7 +267,7 @@ export const RealisticUsage: StoryFn<typeof FormSummary> = () => (
 );
 
 export const Empty: StoryFn<typeof FormSummary> = () => (
-  <VStack gap="8">
+  <VStack gap="space-32">
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Just Header</FormSummary.Heading>

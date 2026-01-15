@@ -2,10 +2,10 @@ import { Box } from "@navikt/ds-react";
 
 const Placeholder = () => (
   <Box
-    background="surface-alt-3"
+    background="neutral-strong"
     height="3rem"
     width="3rem"
-    borderRadius="medium"
+    borderRadius="4"
     flexShrink="0"
   />
 );

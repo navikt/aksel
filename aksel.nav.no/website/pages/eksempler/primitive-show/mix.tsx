@@ -4,7 +4,7 @@ import { Placeholder } from "../../../components/website-modules/examples/__part
 
 const Example = () => {
   return (
-    <HGrid columns={2} gap="4">
+    <HGrid columns={2} gap="space-16">
       <Show below="md" asChild>
         <Placeholder mobil text="Synlig bare på mobil" />
       </Show>
