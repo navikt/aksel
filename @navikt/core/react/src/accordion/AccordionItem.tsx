@@ -64,7 +64,6 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       <div
         className={cn("navds-accordion__item", className, {
           "navds-accordion__item--open": _open,
-          "navds-accordion__item--neutral": context?.variant === "neutral",
           "navds-accordion__item--no-animation": !shouldAnimate.current,
         })}
         data-expanded={_open}

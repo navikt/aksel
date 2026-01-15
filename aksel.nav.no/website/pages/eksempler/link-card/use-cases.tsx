@@ -13,7 +13,7 @@ const Example = () => {
           skattlegges på samme måte som lønnsinntekt.
         </LinkCard.Description>
         <LinkCard.Footer>
-          <Tag size="small" variant="neutral-moderate">
+          <Tag size="small" variant="moderate">
             Informasjon fra Skatteetaten
           </Tag>
         </LinkCard.Footer>
@@ -25,7 +25,7 @@ const Example = () => {
           </LinkCard.Anchor>
         </LinkCard.Title>
         <LinkCard.Footer>
-          <Tag size="small" variant="neutral-moderate">
+          <Tag size="small" variant="moderate">
             Dette kan du ha rett til
           </Tag>
         </LinkCard.Footer>
@@ -41,7 +41,7 @@ const Example = () => {
           Honnørkort gir redusert billettpris på kollektive transportmidler.
         </LinkCard.Description>
         <LinkCard.Footer>
-          <Tag size="small" variant="neutral-moderate">
+          <Tag size="small" variant="moderate">
             Slik gjør du det
           </Tag>
         </LinkCard.Footer>
@@ -62,7 +62,7 @@ const Example = () => {
           arbeidsplassen eller studiestedet når du har nedsatt funksjonsevne.
         </LinkCard.Description>
         <LinkCard.Footer>
-          <Tag size="small" variant="neutral-moderate">
+          <Tag size="small" variant="moderate">
             Dette kan du ha rett til
           </Tag>
         </LinkCard.Footer>

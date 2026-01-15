@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { Label } from "../typography";
 import { useId } from "../util";
@@ -55,7 +55,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     ref,
   ) => {
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal();
     const descendants = useToggleGroupDescendants();
 
     const toggleGroupContext = useToggleGroup({
@@ -82,14 +81,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       console.error("ToggleGroup needs either a value or defaultValue");
     }
 
-    let localVariant: ToggleGroupProps["variant"] | undefined;
-
-    if (themeContext?.isDarkside) {
-      localVariant = variant;
-    } else {
-      localVariant = variant ?? "action";
-    }
-
     return (
       <ToggleGroupDescendantsProvider value={descendants}>
         <ToggleGroupProvider {...context}>
@@ -97,7 +88,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
             className={cn("navds-toggle-group__wrapper", className, {
               "navds-toggle-group__wrapper--fill": fill,
             })}
-            data-color={color ?? variantToColor(localVariant)}
+            data-color={color ?? variantToColor(variant)}
           >
             {label && (
               <Label
@@ -116,7 +107,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               className={cn(
                 "navds-toggle-group",
                 `navds-toggle-group--${size}`,
-                { [`navds-toggle-group--${localVariant}`]: localVariant },
               )}
               role="radiogroup"
             >

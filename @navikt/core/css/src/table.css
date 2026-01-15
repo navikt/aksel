@@ -1,0 +1,317 @@
+.aksel-table {
+  width: 100%;
+  border-collapse: collapse;
+  display: table;
+
+  &.aksel-table--sticky-header {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+}
+
+.aksel-table__header {
+  display: table-header-group;
+
+  .aksel-table--sticky-header & {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--ax-bg-default);
+    box-sizing: border-box;
+  }
+}
+
+.aksel-table__body {
+  display: table-row-group;
+
+  & .aksel-table__row--shade-on-hover:hover {
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
+    transition: background-color 70ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  & .aksel-table__row--shade-on-hover.aksel-table__row--selected:hover {
+    background-color: var(--ax-bg-moderate-hoverA);
+  }
+}
+
+.aksel-table__row {
+  display: table-row;
+
+  &:has(+ .aksel-table__row--selected) :is(.aksel-table__header-cell, .aksel-table__data-cell) {
+    border-color: var(--ax-border-default);
+  }
+
+  &[data-interactive="true"]:hover {
+    cursor: pointer;
+  }
+}
+
+.aksel-table__row--selected {
+  background-color: var(--ax-bg-softA);
+  box-shadow:
+    inset 1px 0 0 0 var(--ax-border-default),
+    inset -1px 0 0 0 var(--ax-border-default);
+
+  &:first-of-type {
+    box-shadow:
+      inset 1px 0 0 0 var(--ax-border-default),
+      inset -1px 0 0 0 var(--ax-border-default),
+      inset 0 1px 0 0 var(--ax-border-default);
+  }
+
+  & + .aksel-table__expanded-row {
+    background-color: var(--ax-bg-softA);
+    box-shadow:
+      inset 1px 0 0 0 var(--ax-border-default),
+      inset -1px 0 0 0 var(--ax-border-default);
+
+    & .aksel-table__expanded-row-collapse {
+      border-color: var(--ax-border-default);
+    }
+  }
+
+  & :is(.aksel-table__header-cell, .aksel-table__data-cell) {
+    border-color: var(--ax-border-default);
+  }
+
+  &.aksel-table__expandable-row--open :is(.aksel-table__header-cell, .aksel-table__data-cell) {
+    border-color: transparent;
+  }
+}
+
+.aksel-table--zebra-stripes {
+  & .aksel-table__body :where(.aksel-table__row:nth-child(odd):not(.aksel-table__row--selected)) {
+    background-color: var(--ax-bg-neutral-softA);
+  }
+
+  & .aksel-table__body :where(.aksel-table__expandable-row:nth-child(4n + 1):not(.aksel-table__row--selected)) {
+    background-color: transparent;
+  }
+
+  & .aksel-table__body .aksel-table__expanded-row:nth-child(4n) {
+    background-color: var(--ax-bg-neutral-softA);
+  }
+
+  & .aksel-table__row--selected + .aksel-table__expanded-row:nth-child(4n) {
+    background-color: var(--ax-bg-softA);
+  }
+}
+
+.aksel-table__header-cell,
+.aksel-table__data-cell {
+  display: table-cell;
+  padding: var(--ax-space-12) var(--ax-space-8);
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+  text-align: left;
+}
+
+.aksel-table__header .aksel-table__header-cell,
+.aksel-table__header .aksel-table__data-cell {
+  border-bottom-width: 2px;
+}
+
+.aksel-table__header-cell--align-right,
+.aksel-table__data-cell--align-right {
+  text-align: right;
+}
+
+.aksel-table__header-cell--align-center,
+.aksel-table__data-cell--align-center {
+  text-align: center;
+}
+
+:where(.aksel-table__expandable-row--open:hover) .aksel-table__data-cell {
+  border-bottom-color: transparent;
+}
+
+.aksel-table--large .aksel-table__header-cell,
+.aksel-table--large .aksel-table__data-cell {
+  padding: var(--ax-space-16) var(--ax-space-8);
+}
+
+.aksel-table--small .aksel-table__header-cell,
+.aksel-table--small .aksel-table__data-cell {
+  padding: var(--ax-space-4) var(--ax-space-8);
+}
+
+/* TODO: Look to handle "inline"-checkbox better than custom CSS-overrides in the future. */
+.aksel-table tr:not(.aksel-table__expanded-row) .aksel-checkbox {
+  padding: 0;
+}
+
+.aksel-table tr:not(.aksel-table__expanded-row) .aksel-checkbox:focus-within::after {
+  inset: 0;
+}
+
+.aksel-table__header-cell[aria-sort] {
+  padding: 0;
+}
+
+.aksel-table__sort-button {
+  appearance: none;
+  background: none;
+  color: var(--ax-text-subtle);
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  padding: var(--ax-space-16) var(--ax-space-12);
+  width: 100%;
+  display: flex;
+  gap: var(--ax-space-4);
+  align-items: center;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+.aksel-table--small .aksel-table__sort-button {
+  padding: var(--ax-space-8) var(--ax-space-12);
+}
+
+.aksel-table__sort-button:hover {
+  background-color: var(--ax-bg-neutral-moderate-hoverA);
+}
+
+.aksel-table__sort-button:focus-visible {
+  outline: 3px solid var(--ax-border-focus);
+  outline-offset: -5px;
+}
+
+.aksel-table__header-cell[aria-sort="ascending"] .aksel-table__sort-button,
+.aksel-table__header-cell[aria-sort="descending"] .aksel-table__sort-button {
+  background-color: var(--ax-bg-moderate-pressedA);
+  color: var(--ax-text-default);
+}
+
+.aksel-table__header-cell--align-right .aksel-table__sort-button {
+  justify-content: flex-end;
+}
+
+.aksel-table__header-cell--align-center .aksel-table__sort-button {
+  justify-content: center;
+}
+
+.aksel-table__sort-button svg {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.aksel-table__expandable-row:not(.aksel-table__expandable-row--open) :where(.aksel-table__data-cell, .aksel-table__header-cell) {
+  transition: border-bottom-color 150ms cubic-bezier(0.95, 0.05, 0.8, 0.04);
+}
+
+.aksel-table__expandable-row.aksel-table__expandable-row--clickable:not(.aksel-table__expandable-row--expansion-disabled):hover {
+  cursor: pointer;
+}
+
+.aksel-table__expandable-row--open :where(.aksel-table__data-cell, .aksel-table__header-cell) {
+  border-bottom-color: transparent;
+}
+
+.aksel-table__expandable-row--open .aksel-table__toggle-expand-cell--open {
+  border-color: transparent;
+}
+
+.aksel-table__toggle-expand-cell {
+  padding: 0;
+  width: 3rem;
+}
+
+.aksel-table--large .aksel-table__toggle-expand-cell {
+  padding: 0 var(--ax-space-8);
+}
+
+.aksel-table--small .aksel-table__toggle-expand-cell {
+  padding: var(--ax-space-4) var(--ax-space-8);
+}
+
+.aksel-table__toggle-expand-button {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: var(--ax-radius-4);
+  height: 2rem;
+  width: 2rem;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  transition: background-color 70ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.aksel-table__expandable-icon {
+  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.aksel-table__expandable-row:not(.aksel-table__expandable-row--expansion-disabled) .aksel-table__toggle-expand-cell:hover {
+  cursor: pointer;
+}
+
+.aksel-table__toggle-expand-button:hover,
+.aksel-table__toggle-expand-cell:hover > .aksel-table__toggle-expand-button,
+.aksel-table__expandable-row--clickable:hover .aksel-table__toggle-expand-button {
+  background-color: var(--ax-bg-neutral-moderate-hoverA);
+}
+
+& .aksel-table__toggle-expand-button:hover,
+& .aksel-table__toggle-expand-cell:hover > .aksel-table__toggle-expand-button,
+& .aksel-table__expandable-row--clickable:hover .aksel-table__toggle-expand-button {
+  .aksel-table__row--selected & {
+    background-color: var(--ax-bg-moderate-hoverA);
+  }
+}
+
+.aksel-table__toggle-expand-cell--open > :where(.aksel-table__toggle-expand-button) :where(.aksel-table__expandable-icon) {
+  transform: rotateX(180deg);
+}
+
+.aksel-table__toggle-expand-button:focus-visible {
+  outline: 3px solid var(--ax-border-focus);
+}
+
+.aksel-table__expanded-row-cell {
+  padding: 0;
+
+  &:empty {
+    display: none;
+  }
+}
+
+/* -------------------------- Table ExpandableRow -------------------------- */
+.aksel-table__expanded-row-collapse:not([style*="height: 0px;"]),
+.aksel-table__expanded-row-collapse[style*="transition:"] {
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+}
+
+.aksel-table__expanded-row {
+  &:has(+ .aksel-table__row--selected) {
+    & .aksel-table__expanded-row-collapse {
+      border-color: var(--ax-border-default);
+    }
+  }
+}
+
+.aksel-table__expanded-row-content {
+  --__axc-table-expanded-row-pi: calc(var(--ax-space-8) + 3rem);
+
+  padding-block: var(--ax-space-16);
+}
+
+.aksel-table--small .aksel-table__expanded-row-content {
+  padding-block: var(--ax-space-8);
+}
+
+.aksel-table__expanded-row-content--gutter-both {
+  padding-inline: var(--__axc-table-expanded-row-pi);
+}
+
+.aksel-table__expanded-row-content--gutter-left {
+  padding-inline: var(--__axc-table-expanded-row-pi) var(--ax-space-8);
+}
+
+.aksel-table__expanded-row-content--gutter-right {
+  padding-inline: var(--ax-space-8) var(--__axc-table-expanded-row-pi);
+}
+
+.aksel-table__expanded-row-content--gutter-none {
+  padding-inline: var(--ax-space-8);
+}

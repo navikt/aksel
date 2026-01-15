@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-stylelint",
-  "version": "7.39.0",
+  "version": "7.40.0",
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/grunnleggende/kode/stylelint",
   "repository": {
@@ -31,15 +31,15 @@
   "scripts": {
     "test": "yarn build && node --import tsx --test ./dist/**/*.test.js",
     "copy-css": "node -e \"require('fs').copyFileSync('../core/css/dist/index.css','dist/index.css')\"",
-    "copy-tokens": "node -e \"require('fs').copyFileSync('../core/css/tokens.json','dist/tokens.json')\"",
+    "copy-tokens": "node -e \"require('fs').copyFileSync('legacy-tokens.json','dist/tokens.json')\"",
     "copy": "yarn copy-css && yarn copy-tokens",
     "build": "tsc -p . && concurrently \"yarn:copy-*\"",
     "watch:lint": "tsc --watch -p .",
     "dev": "yarn watch:lint"
   },
   "devDependencies": {
-    "@navikt/ds-css": "^7.39.0",
-    "@navikt/ds-tokens": "^7.39.0",
+    "@navikt/ds-css": "^7.40.0",
+    "@navikt/ds-tokens": "^7.40.0",
     "concurrently": "9.2.1",
     "postcss-selector-parser": "^7.1.0",
     "postcss-value-parser": "^4.2.0",

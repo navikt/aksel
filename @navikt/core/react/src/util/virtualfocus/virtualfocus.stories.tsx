@@ -26,7 +26,7 @@ export default {
   component: VirtualFocus,
   decorators: [
     (Story) => (
-      <VStack gap="10">
+      <VStack gap="space-40">
         <Button>above</Button>
         <Story />
         <Button>below</Button>
@@ -105,12 +105,14 @@ const MyItem = ({
 };
 
 const StoryStyle = () => (
-  <style>{`
-[data-aksel-virtualfocus="true"] {
-  outline: solid 3px var(--a-border-focus);
-  border-radius: var(--a-border-radius-medium);
-}
-`}</style>
+  <style>
+    {`
+    [data-aksel-virtualfocus="true"] {
+      outline: solid 3px var(--ax-border-focus);
+      border-radius: var(--ax-radius-4);
+    }
+    `}
+  </style>
 );
 
 export const Default = () => {
@@ -282,14 +284,14 @@ const MyDropDownSearchVirtualfocus = () => {
     <>
       <style>
         {`
-.dropdown-search-virtualfocus {
-  width: 100%;
-}
-[data-aksel-virtualfocus="true"] {
-  outline: solid 3px var(--a-border-focus);
-  border-radius: var(--a-border-radius-medium);
-}
-`}
+        .dropdown-search-virtualfocus {
+          width: 100%;
+        }
+        [data-aksel-virtualfocus="true"] {
+          outline: solid 3px var(--ax-border-focus);
+          border-radius: var(--ax-radius-4);
+        }
+        `}
       </style>
       <MyAnchor setValue={setValue} value={value} ref={anchorRef}>
         <Popover

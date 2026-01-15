@@ -34,7 +34,7 @@ export const Controls: Story = {
 
 export const SizeMedium: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <ErrorMessage size="medium">{lorem}</ErrorMessage>
       <ErrorMessage size="medium">{lorem}</ErrorMessage>
     </VStack>
@@ -43,7 +43,7 @@ export const SizeMedium: Story = {
 
 export const SizeSmall: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <ErrorMessage size="small">{lorem}</ErrorMessage>
       <ErrorMessage size="small">{lorem}</ErrorMessage>
     </VStack>
@@ -96,7 +96,7 @@ export const OverrideTag: Story = {
 
 export const WithIcon: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <ErrorMessage size="medium" showIcon>
         {lorem}
       </ErrorMessage>

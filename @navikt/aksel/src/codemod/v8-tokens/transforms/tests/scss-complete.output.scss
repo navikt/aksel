@@ -1,0 +1,17 @@
+.test-scss {
+  margin: $ax-space-16;
+  padding: $ax-space-0;
+  padding: $ax-space-6;
+  padding: $ax-space-2;
+  /* Has replacement */
+  background-color: $ax-bg-neutral-soft;
+  /* Has no replacement */
+  background-color: $a-surface-transparent;
+
+  /* Border radius tokens - SHOULD migrate to numeric values */
+  border-radius: $ax-radius-full;
+  border-radius: $ax-radius-2;
+  border-radius: $ax-radius-4;
+  border-radius: $ax-radius-8;
+  border-radius: $ax-radius-12;
+}

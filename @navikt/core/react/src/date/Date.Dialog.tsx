@@ -61,12 +61,10 @@ const DateDialog = ({
   if (hideModal) {
     return (
       <Popover
-        arrow={false}
         anchorEl={anchor}
         open={open}
         onClose={onClose}
         placement="bottom-start"
-        role="dialog"
         className={cn("navds-date__popover", {
           "navds-date": variant === "month",
         })}

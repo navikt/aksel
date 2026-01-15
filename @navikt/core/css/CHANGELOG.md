@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 7.40.0
+
+## 7.39.1
+
+### Patch Changes
+
+- Modal, Dialog: Handle scroll for extreme zoom-levels better. ([#4488](https://github.com/navikt/aksel/pull/4488))
+
 ## 7.39.0
 
 ### Minor Changes

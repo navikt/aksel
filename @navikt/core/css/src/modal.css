@@ -1,0 +1,218 @@
+.aksel-modal {
+  --__axc-modal-bg: var(--ax-bg-raised);
+
+  background-color: var(--__axc-modal-bg);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  border-radius: var(--ax-radius-12);
+  box-shadow: var(--ax-shadow-dialog);
+  padding: 0;
+  position: fixed;
+  max-height: 100%;
+  max-width: 100%;
+  color: var(--ax-text-neutral);
+  margin: auto;
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+    animation: akselModalFadeIn 0.7s cubic-bezier(0.15, 1, 0.3, 1);
+  }
+}
+
+.aksel-modal--polyfilled {
+  top: 50%;
+  transform: translate(0, -50%);
+
+  /* From polyfill (dialog-polyfill/dist/dialog-polyfill.css): */
+  left: 0;
+  right: 0;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+
+  &:not([open]) {
+    display: none; /* from polyfill */
+  }
+
+  & .aksel-modal--polyfilled {
+    overflow: auto;
+  }
+}
+
+._dialog_overlay {
+  /* From polyfill */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  left: 0;
+}
+
+.aksel-modal--medium {
+  width: 700px;
+}
+
+.aksel-modal--small {
+  width: 450px;
+
+  & .aksel-modal__header {
+    padding: var(--ax-space-12) var(--ax-space-16);
+  }
+
+  & .aksel-modal__body {
+    padding: var(--ax-space-12) var(--ax-space-16);
+  }
+
+  & .aksel-modal__footer {
+    padding-block: var(--ax-space-12) var(--ax-space-16);
+    padding-inline: var(--ax-space-16);
+  }
+}
+
+@media (min-width: 480px) {
+  .aksel-modal {
+    max-width: calc(100% - 2em);
+  }
+
+  .aksel-modal--autowidth {
+    max-width: min(700px, calc(100% - 2em));
+  }
+}
+
+@media (min-height: 480px) {
+  .aksel-modal {
+    max-height: calc(100% - 2em);
+  }
+
+  .aksel-modal--top {
+    margin-top: 2em;
+    max-height: calc(100% - 4em);
+  }
+}
+
+.aksel-modal::backdrop {
+  /*
+   * Cannot use --ax-bg-overlay because ::backdrop does not inherit from anything but itself.
+   * TODO: Consider adding `::backdrop` to global token definitions.
+   */
+  background: rgba(12 22 39 / 0.659);
+  animation: akselModalBackdropFadeIn 0.7s cubic-bezier(0.15, 1, 0.3, 1);
+}
+
+.aksel-modal--polyfilled + .backdrop /* Cannot be combined with ::backdrop selector */ {
+  background: rgba(12 22 39 / 0.659);
+
+  /* From polyfill: */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  left: 0;
+}
+
+.aksel-modal__button {
+  margin-left: var(--ax-space-16);
+  float: right;
+}
+
+.aksel-modal__header {
+  padding: var(--ax-space-16) var(--ax-space-20);
+}
+
+.aksel-modal__header-icon {
+  & svg {
+    display: inline;
+    vertical-align: -0.25rem;
+    margin-right: var(--ax-space-4);
+  }
+}
+
+.aksel-modal__label {
+  font-weight: var(--ax-font-weight-bold);
+  color: var(--ax-text-neutral-subtle);
+}
+
+.aksel-modal__body {
+  padding: var(--ax-space-16) var(--ax-space-20);
+  overflow: auto;
+  overscroll-behavior: contain;
+  position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
+  background:
+    linear-gradient(var(--__axc-modal-bg) 30%, transparent) top,
+    linear-gradient(transparent, var(--__axc-modal-bg) 60%) bottom,
+    radial-gradient(farthest-side at 50% 0, rgba(0 0 0 / 0.3), transparent) top,
+    radial-gradient(farthest-side at 50% 100%, rgba(0 0 0 / 0.3), transparent) bottom;
+  background-size:
+    100% 40px,
+    100% 50px,
+    100% 16px,
+    100% 16px;
+  background-attachment: local, local, scroll, scroll;
+  background-repeat: no-repeat;
+
+  /* Needed to accommodate 400% zoom */
+  @media (max-height: 400px) {
+    overflow: unset;
+  }
+}
+
+.aksel-modal__header + .aksel-modal__body {
+  padding-top: var(--ax-space-0);
+}
+
+.aksel-modal__footer {
+  display: flex;
+  flex-flow: row-reverse wrap;
+  gap: var(--ax-space-16);
+  padding-block: var(--ax-space-16) var(--ax-space-20);
+  padding-inline: var(--ax-space-20);
+}
+
+.aksel-modal__footer :nth-of-type(2) {
+  margin-left: auto;
+}
+
+/* When Datepicker is used nested inside a Modal */
+.aksel-modal--polyfilled .aksel-modal--polyfilled.aksel-date__nested-modal {
+  min-width: fit-content;
+  max-width: 100vw;
+  max-height: 100vh;
+  animation: none;
+}
+
+@keyframes akselModalFadeIn {
+  0% {
+    opacity: 0.0001; /* Safari will not set focus inside the modal when it opens if we set this to 0 */
+    transform: translate3d(0, 4px, 0);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes akselModalBackdropFadeIn {
+  0% {
+    opacity: 0.0001;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (forced-colors: active) {
+  .aksel-modal {
+    outline: 2px solid transparent;
+  }
+}

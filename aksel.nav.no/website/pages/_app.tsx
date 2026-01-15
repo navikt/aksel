@@ -1,6 +1,6 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
-import "@navikt/ds-tokens/darkside-css";
+import "@navikt/ds-tokens/css";
 import { ExampleTheming } from "@/web/examples/withDsExample.theme";
 import "./global.css";
 

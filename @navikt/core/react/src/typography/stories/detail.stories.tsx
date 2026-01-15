@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
+import { Box } from "../../layout/box";
 import { VStack } from "../../layout/stack";
 import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import Detail from "../Detail";
@@ -38,7 +39,7 @@ export const Controls: Story = {
     },
     textColor: {
       control: "radio",
-      options: ["default", "subtle"],
+      options: ["default", "subtle", "contrast"],
     },
   },
 };
@@ -54,7 +55,7 @@ export const Spacing: Story = {
 
 export const Align: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Detail align="start">{lorem}</Detail>
       <Detail align="center">{lorem}</Detail>
       <Detail align="end">{lorem}</Detail>
@@ -82,9 +83,12 @@ export const OverrideTag: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Detail textColor="default">{lorem}</Detail>
       <Detail textColor="subtle">{lorem}</Detail>
+      <Box background="neutral-strong">
+        <Detail textColor="contrast">{lorem}</Detail>
+      </Box>
       <Detail data-color="brand-magenta">{lorem}</Detail>
       <Detail data-color="brand-magenta" textColor="default">
         {lorem}
@@ -92,6 +96,11 @@ export const ColorRole: Story = {
       <Detail data-color="brand-magenta" textColor="subtle">
         {lorem}
       </Detail>
+      <Box background="neutral-strong">
+        <Detail data-color="brand-magenta" textColor="contrast">
+          {lorem}
+        </Detail>
+      </Box>
     </VStack>
   ),
 };

@@ -52,10 +52,10 @@ const Placeholder = ({
 }) => {
   return (
     <Box
-      background="surface-alt-3"
-      borderRadius="medium"
+      background="neutral-strong"
+      borderRadius="4"
       minHeight="1rem"
-      style={{ color: "var(--a-text-on-action)", padding }}
+      style={{ color: "var(--ax-text-accent-contrast)", padding }}
     >
       {text}
     </Box>
@@ -65,7 +65,6 @@ const Placeholder = ({
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
-  legacyOnly: true,
 });
 
 /* Storybook story */

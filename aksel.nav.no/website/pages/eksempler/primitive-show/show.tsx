@@ -4,7 +4,7 @@ import { Placeholder } from "../../../components/website-modules/examples/__part
 
 const Example = () => {
   return (
-    <HGrid columns={2} gap="4">
+    <HGrid columns={2} gap="space-16">
       <Placeholder text="Alltid synlig" />
       <Show below="md" asChild>
         <Placeholder desktop text="Synlig bare på mobil" />

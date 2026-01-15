@@ -28,7 +28,7 @@ function ConsentBanner() {
       >
         <Stack
           as="div"
-          gap={{ xs: "4", lg: "8" }}
+          gap={{ xs: "space-16", lg: "space-32" }}
           wrap={false}
           align={{ xs: "start", lg: "center" }}
           direction={{ xs: "column", lg: "row" }}
@@ -70,7 +70,7 @@ function ConsentBanner() {
           </div>
 
           <Stack
-            gap="2"
+            gap="space-8"
             align="start"
             minWidth="fit-content"
             direction={{ xs: "row", lg: "column" }}

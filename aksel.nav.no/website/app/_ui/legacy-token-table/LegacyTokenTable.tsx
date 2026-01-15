@@ -1,12 +1,11 @@
 import { PortableTextComponentProps } from "next-sanity";
-import core from "@navikt/ds-css/tokens.json";
-import { BodyLong, Link } from "@navikt/ds-react";
-import { Token_kategori } from "@/app/_sanity/query-types";
+import { InfoCard, Link } from "@navikt/ds-react";
 import {
-  WebsiteTable,
-  WebsiteTableRow,
-} from "@/app/_ui/website-table/WebsiteTable";
-import styles from "./LegacyTokenTable.module.css";
+  InfoCardContent,
+  InfoCardHeader,
+  InfoCardTitle,
+} from "@navikt/ds-react/InfoCard";
+import { Token_kategori } from "@/app/_sanity/query-types";
 
 /**
  * Lists out the "component"-level tokens.
@@ -18,30 +17,18 @@ function LegacyTokenTable(props: PortableTextComponentProps<Token_kategori>) {
     return null;
   }
 
-  const tokens: { [key: string]: string } | null =
-    title in core ? core[title] : null;
-
-  if (!tokens) {
-    return null;
-  }
-
   return (
-    <>
-      <BodyLong>
-        <strong data-color="warning" className={styles.legacyTokenTableWarning}>
-          Deprecation warning:{" "}
-        </strong>
-        I det nye systemet for theming og darkmode, er komponent-tokens fjernet.{" "}
-        <Link href="/grunnleggende/darkside/theming">
-          Les mer om det nye themingsystemet.
+    <InfoCard data-color="info">
+      <InfoCardHeader>
+        <InfoCardTitle>Komponent-tokens er fjernet i versjon 8</InfoCardTitle>
+      </InfoCardHeader>
+      <InfoCardContent>
+        Gammel dokumentasjon for disse finner du på{" "}
+        <Link href="https://cdn.jsdelivr.net/npm/@navikt/ds-css@7/tokens.json">
+          JsDelivery
         </Link>
-      </BodyLong>
-      <WebsiteTable th={[{ text: "Token" }, { text: "Fallback" }]}>
-        {Object.entries(tokens).map(([key, val]) => (
-          <WebsiteTableRow key={key} tr={[{ text: key }, { text: val }]} />
-        ))}
-      </WebsiteTable>
-    </>
+      </InfoCardContent>
+    </InfoCard>
   );
 }
 

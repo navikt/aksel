@@ -1,5 +1,13 @@
 # @navikt/aksel-icons
 
+## 7.40.0
+
+### Minor Changes
+
+- Icons: New icon MagnifyingGlassCheckmark ([#4489](https://github.com/navikt/aksel/pull/4489))
+
+## 7.39.1
+
 ## 7.39.0
 
 ## 7.38.0

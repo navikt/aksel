@@ -10,7 +10,7 @@ const Example = () => {
         <Box
           paddingBlock="space-4"
           paddingInline="space-8"
-          background="surface-alt-3-subtle"
+          background="neutral-moderate"
           borderRadius="full"
         >
           <Bleed marginBlock="space-1 space-0" asChild>
@@ -23,7 +23,7 @@ const Example = () => {
         <Box
           paddingBlock="space-4"
           paddingInline="space-8"
-          background="surface-alt-3-subtle"
+          background="neutral-moderate"
           borderRadius="full"
         >
           <MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />
@@ -34,7 +34,7 @@ const Example = () => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { legacyOnly: true });
+export default withDsExample(Example);
 
 /* Storybook story */
 export const Demo = {

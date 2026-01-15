@@ -238,7 +238,7 @@ export const StickyHeader = () => {
 
 export const Chromatic = {
   render: () => (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <div>
         <h3>Default</h3>
         <Default />

@@ -8,7 +8,7 @@ const Example = () => {
         marginInline={{ xs: "space-32", sm: "space-48", md: "space-64" }}
         asChild
       >
-        <Box padding="space-12" background="surface-alt-3-subtle">
+        <Box padding="space-12" background="neutral-moderate">
           <HStack justify="center">
             <BodyLong>xs: 8, sm: 12, md: 16</BodyLong>
           </HStack>
@@ -21,12 +21,12 @@ const Example = () => {
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
     <Box
-      background="surface-alt-3"
+      background="neutral-strong"
       paddingBlock="space-16"
       paddingInline={{ xs: "space-16", sm: "space-32", md: "space-48" }}
-      borderRadius="large"
+      borderRadius="8"
     >
-      <Box background="surface-subtle" padding="space-16" borderRadius="medium">
+      <Box background="default" padding="space-16" borderRadius="4">
         {children}
       </Box>
     </Box>
@@ -36,7 +36,6 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
-  legacyOnly: true,
 });
 
 /* Storybook story */

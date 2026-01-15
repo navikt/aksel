@@ -1,5 +1,4 @@
 import { Metadata, Viewport } from "next";
-import "@navikt/ds-tokens/darkside-css";
 import { ThemeProvider } from "@/app/_ui/theming/ThemeProvider";
 import "./globals.css";
 

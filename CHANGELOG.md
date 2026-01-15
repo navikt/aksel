@@ -1,5 +1,25 @@
 # Changelog
 
+## 7.40.0
+
+### @navikt/aksel-icons
+
+- Icons: New icon MagnifyingGlassCheckmark ([#4489](https://github.com/navikt/aksel/pull/4489))
+
+### @navikt/ds-react
+
+- DatePicker/MonthPicker: Remove role=dialog from popover ([#4463](https://github.com/navikt/aksel/pull/4463))
+
+## 7.39.1
+
+### @navikt/ds-react
+
+- Dialog: Removed 'aria-expanded' from Dialog.Trigger. ([#4478](https://github.com/navikt/aksel/pull/4478))
+
+### @navikt/ds-css
+
+- Modal, Dialog: Handle scroll for extreme zoom-levels better. ([#4488](https://github.com/navikt/aksel/pull/4488))
+
 ## 7.39.0
 
 ### @navikt/ds-react
