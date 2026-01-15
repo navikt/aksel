@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
+import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { OverridableComponent } from "../util/types";
 
@@ -19,14 +20,21 @@ export interface LinkProps
    */
   inlineText?: boolean;
   /**
-   * Variant of the component to use.
-   * @default "action"
+   * @deprecated Deprecated in v8. Use `data-color` prop instead.
    */
   variant?: "action" | "neutral" | "subtle";
   /**
    * Link text
    */
   children: React.ReactNode;
+  /**
+   * Overrides inherited color.
+   *
+   * We recommend only using `accent` and `neutral`. We have disallowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 /**
@@ -64,28 +72,14 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal(false);
       const { cn } = useRenameCSS();
-
-      /*
-       * We avoid defaulting to "action" in darkside.
-       */
-      let localVariant: LinkProps["variant"];
-
-      if (themeContext?.isDarkside) {
-        localVariant = variant;
-      } else {
-        localVariant = variant ?? "action";
-      }
 
       return (
         <Component
-          data-color={color ?? variantToColor(localVariant)}
-          data-variant={localVariant}
+          data-color={color ?? variantToColor(variant)}
           {...rest}
           ref={ref}
           className={cn("navds-link", className, {
-            [`navds-link--${localVariant}`]: localVariant,
             "navds-link--remove-underline": !underline,
             "navds-link--inline-text": inlineText,
           })}
@@ -101,7 +95,6 @@ function variantToColor(
     case "action":
       return "accent";
     case "neutral":
-      return "neutral";
     case "subtle":
       return "neutral";
     default:

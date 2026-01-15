@@ -5,26 +5,22 @@ import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import { UmamiNotFoundPageLog } from "@/app/_ui/umami/Umami.log";
+import GitHubIssueLink from "./_ui/github-issue-link";
 
 export default function NotFound() {
   return (
-    <Page data-aksel-template="404-v2" footer={<Footer />} className="vk-error">
+    <Page data-aksel-template="404-v3" footer={<Footer />} className="vk-error">
       <UmamiNotFoundPageLog />
       <Header />
       <PageBlock as="main" width="xl" gutters>
         <Box paddingBlock="space-80 space-64">
           <VStack gap="space-64">
             <VStack gap="space-48" align="start">
-              <div>
-                <Heading
-                  level="1"
-                  size="large"
-                  spacing
-                  data-aksel-heading-color
-                >
+              <VStack gap="space-16">
+                <Heading level="1" size="large" data-aksel-heading-color>
                   Beklager, vi fant ikke siden
                 </Heading>
-                <BodyShort spacing>
+                <BodyShort>
                   Denne siden kan være slettet eller flyttet, eller det er en
                   feil i lenken.
                 </BodyShort>
@@ -36,11 +32,16 @@ export default function NotFound() {
                     <Link href="/">Gå til forsiden</Link>
                   </WebsiteListItem>
                 </WebsiteList>
-              </div>
-              <Link href="https://github.com/navikt/aksel/issues/new?assignees=&labels=bug+%F0%9F%90%9B&projects=&template=bug-report.md&title=[Aksel.nav.no%20-%20404]">
+              </VStack>
+              <GitHubIssueLink
+                labels="bug 🐛"
+                template="bug-report.md"
+                title="[Aksel.nav.no - 404]"
+                includeUrlInBody
+              >
                 <BugIcon aria-hidden />
                 Meld gjerne fra om at lenken ikke virker
-              </Link>
+              </GitHubIssueLink>
             </VStack>
 
             <div>

@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
+import { Box } from "../../layout/box";
 import { VStack } from "../../layout/stack";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import BodyLong from "../BodyLong";
 
 const meta: Meta<typeof BodyLong> = {
@@ -42,14 +44,14 @@ export const Controls: Story = {
     },
     textColor: {
       control: "radio",
-      options: ["default", "subtle"],
+      options: ["default", "subtle", "contrast"],
     },
   },
 };
 
 export const SizeLarge: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <BodyLong size="large">{lorem}</BodyLong>
       <BodyLong size="large" weight="semibold">
         {lorem}
@@ -63,7 +65,7 @@ export const SizeLarge: Story = {
 
 export const SizeMedium: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyLong size="medium">{lorem}</BodyLong>
       <BodyLong size="medium" weight="semibold">
         {lorem}
@@ -77,7 +79,7 @@ export const SizeMedium: Story = {
 
 export const SizeSmall: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyLong size="small">{lorem}</BodyLong>
       <BodyLong size="small" weight="semibold">
         {lorem}
@@ -130,7 +132,7 @@ export const SpacingSmall: Story = {
 
 export const Align: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyLong align="start">{lorem}</BodyLong>
       <BodyLong align="center">{lorem}</BodyLong>
       <BodyLong align="end">{lorem}</BodyLong>
@@ -158,9 +160,12 @@ export const OverrideTag: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyLong textColor="default">{lorem}</BodyLong>
       <BodyLong textColor="subtle">{lorem}</BodyLong>
+      <Box background="neutral-strong">
+        <BodyLong textColor="contrast">{lorem}</BodyLong>
+      </Box>
       <BodyLong data-color="brand-magenta">{lorem}</BodyLong>
       <BodyLong data-color="brand-magenta" textColor="default">
         {lorem}
@@ -168,49 +173,23 @@ export const ColorRole: Story = {
       <BodyLong data-color="brand-magenta" textColor="subtle">
         {lorem}
       </BodyLong>
+      <Box background="neutral-strong">
+        <BodyLong data-color="brand-magenta" textColor="contrast">
+          {lorem}
+        </BodyLong>
+      </Box>
     </VStack>
   ),
 };
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Large</h2>
-        <h3>Size</h3>
-        {SizeLarge.render?.(...props)}
-        <h3>Spacing</h3>
-        {SpacingLarge.render?.(...props)}
-      </div>
-      <div>
-        <h2>Medium</h2>
-        <h3>Size</h3>
-        {SizeMedium.render?.(...props)}
-        <h3>Spacing</h3>
-        {SpacingMedium.render?.(...props)}
-      </div>
-      <div>
-        <h2>Small</h2>
-        <h3>Size</h3>
-        {SizeSmall.render?.(...props)}
-        <h3>Spacing</h3>
-        {SpacingSmall.render?.(...props)}
-      </div>
-      <div>
-        <h2>Align</h2>
-        {Align.render?.(...props)}
-      </div>
-      <div>
-        <h2>Override Tag</h2>
-        {OverrideTag.render?.(...props)}
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        {ColorRole.render?.(...props)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  SizeLarge,
+  SpacingLarge,
+  SizeMedium,
+  SpacingMedium,
+  SizeSmall,
+  SpacingSmall,
+  Align,
+  OverrideTag,
+  ColorRole,
+});

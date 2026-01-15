@@ -5,6 +5,7 @@ const GLOB_IGNORE_PATTERNS = [
   "**/lib/**",
   "**/.next/**",
   "**/__snapshots__/**",
+  "**/public/**",
 ];
 
 type SupportedCodemodExtensions =
@@ -21,8 +22,17 @@ type SupportedCodemodExtensions =
  */
 function getDefaultGlob(ext: string): string {
   const defaultExt = "js,ts,jsx,tsx,css,scss,less";
+  const extensions = cleanExtensions(ext ?? defaultExt);
 
-  return `**/*.{${cleanExtensions(ext ?? defaultExt).join(",")}}`;
+  /**
+   * Single-item braces are treated as a literal string by some globbing libraries,
+   * so we only use them when there are multiple extensions
+   */
+  if (extensions.length > 1) {
+    return `**/*.{${extensions.join(",")}}`;
+  }
+
+  return `**/*.${extensions[0]}`;
 }
 
 /**

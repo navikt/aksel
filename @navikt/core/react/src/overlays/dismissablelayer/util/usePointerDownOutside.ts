@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
-import { useCallbackRef } from "../../../util/hooks";
+import { useEventCallback } from "../../../util/hooks/useEventCallback";
 import { useTimeout } from "../../../util/hooks/useTimeout";
 import {
   CUSTOM_EVENTS,
-  CustomPointerDownEvent,
+  CustomPointerEvent,
   dispatchCustomEvent,
 } from "./dispatchCustomEvent";
 
@@ -14,15 +14,20 @@ import {
  * By checking `isPointerInsideReactTreeRef` we can determine if the event happened outside the subtree of the node, saving some element-comparisons.
  */
 export function usePointerDownOutside(
-  callback?: (event: CustomPointerDownEvent) => void,
+  callback?: (event: CustomPointerEvent) => void,
   ownerDocument: Document = globalThis?.document,
+  enabled: boolean = true,
 ) {
-  const handlePointerDownOutside = useCallbackRef(callback) as EventListener;
+  const handlePointerDownOutside = useEventCallback(callback) as EventListener;
   const isPointerInsideReactTreeRef = useRef(false);
   const handleClickRef = useRef<typeof handlePointerDownOutside>(() => {});
   const timeout = useTimeout();
 
   useEffect(() => {
+    if (!enabled) {
+      return;
+    }
+
     const handlePointerDown = (event: PointerEvent) => {
       /**
        * The `DismisableLayer`-API is based on the ability to stop events from propagating and in the end calling `onDismiss`
@@ -87,7 +92,7 @@ export function usePointerDownOutside(
       ownerDocument.removeEventListener("pointerdown", handlePointerDown);
       ownerDocument.removeEventListener("click", handleClickRef.current);
     };
-  }, [ownerDocument, handlePointerDownOutside, timeout]);
+  }, [ownerDocument, handlePointerDownOutside, timeout, enabled]);
 
   return {
     // ensures we check React component tree (not just DOM tree)

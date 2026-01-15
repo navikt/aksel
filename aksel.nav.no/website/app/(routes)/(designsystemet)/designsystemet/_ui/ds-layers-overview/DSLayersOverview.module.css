@@ -5,19 +5,19 @@
 
 .akselLayersListItem {
   &:nth-of-type(1) {
-    --ax-layer-background: var(--ax-bg-info-softA);
+    --ds-layer-background: var(--ax-bg-info-softA);
   }
 
   &:nth-of-type(2) {
-    --ax-layer-background: var(--ax-bg-brand-blue-moderateA);
+    --ds-layer-background: var(--ax-bg-brand-blue-moderateA);
   }
 
   &:nth-of-type(3) {
-    --ax-layer-background: var(--ax-bg-info-moderateA);
+    --ds-layer-background: var(--ax-bg-info-moderateA);
   }
 
   &:nth-of-type(4) {
-    --ax-layer-background: var(--ax-bg-brand-blue-moderate-pressedA);
+    --ds-layer-background: var(--ax-bg-brand-blue-moderate-pressedA);
   }
 }
 
@@ -27,21 +27,21 @@
   &:has(.akselLayersLink:hover),
   &:has(.akselLayersLink:focus-visible) {
     &:nth-of-type(1) {
-      --ax-layer-background: var(--ax-bg-brand-blue-moderateA);
+      --ds-layer-background: var(--ax-bg-brand-blue-moderateA);
     }
 
     &:nth-of-type(2) {
-      --ax-layer-background: var(--ax-bg-info-moderate-pressedA);
-      --ax-layer-background-opacity: 0.6;
+      --ds-layer-background: var(--ax-bg-info-moderate-pressedA);
+      --ds-layer-background-opacity: 0.6;
     }
 
     &:nth-of-type(3) {
-      --ax-layer-background: var(--ax-bg-brand-blue-moderate-pressedA);
+      --ds-layer-background: var(--ax-bg-brand-blue-moderate-pressedA);
     }
 
     &:nth-of-type(4) {
-      --ax-layer-background: var(--ax-bg-brand-blue-strong-pressed);
-      --ax-layer-background-opacity: 0.4;
+      --ds-layer-background: var(--ax-bg-brand-blue-strong-pressed);
+      --ds-layer-background-opacity: 0.4;
     }
   }
 }
@@ -65,14 +65,14 @@
       content: "" / "";
       display: block;
       border: 2px solid var(--ax-border-info-subtleA);
-      background-color: var(--ax-layer-background);
+      background-color: var(--ds-layer-background);
       width: 10rem;
       height: 10rem;
       transform: rotateX(67deg) rotateZ(45deg);
       position: absolute;
       right: 0;
-      border-radius: var(--ax-border-radius-large);
-      opacity: var(--ax-layer-background-opacity);
+      border-radius: var(--ax-radius-8);
+      opacity: var(--ds-layer-background-opacity);
     }
 
     &:hover,
@@ -99,7 +99,7 @@
   :focus-visible & {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;
-    border-radius: var(--ax-border-radius-small);
+    border-radius: var(--ax-radius-2);
   }
 }
 

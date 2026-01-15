@@ -163,6 +163,42 @@ export {
   type LinkCardIconProps,
   type LinkCardImageProps,
 } from "./link-card";
+export { InlineMessage, type InlineMessageProps } from "./inline-message";
+export {
+  GlobalAlert,
+  type GlobalAlertProps,
+  type GlobalAlertHeaderProps,
+  type GlobalAlertTitleProps,
+  type GlobalAlertContentProps,
+  type GlobalAlertCloseButtonProps,
+} from "./alert/global-alert";
+export {
+  InfoCard,
+  type InfoCardProps,
+  type InfoCardHeaderProps,
+  type InfoCardTitleProps,
+  type InfoCardContentProps,
+} from "./alert/info-card";
+export {
+  LocalAlert,
+  type LocalAlertProps,
+  type LocalAlertHeaderProps,
+  type LocalAlertTitleProps,
+  type LocalAlertContentProps,
+  type LocalAlertCloseButtonProps,
+} from "./alert/local-alert";
+export {
+  Dialog,
+  type DialogProps,
+  type DialogTriggerProps,
+  type DialogCloseTriggerProps,
+  type DialogPopupProps,
+  type DialogHeaderProps,
+  type DialogTitleProps,
+  type DialogDescriptionProps,
+  type DialogBodyProps,
+  type DialogFooterProps,
+} from "./dialog";
 
 /**
  * Theming

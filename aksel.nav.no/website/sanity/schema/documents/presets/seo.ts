@@ -27,7 +27,7 @@ const BaseSEOPreset = {
     defineField({
       name: "meta",
       type: "text",
-      title: "OG-description (valgfri)",
+      title: "OG-description (valgfritt)",
       description: "Erstatter ingress som OG-description og meta-tag",
       rows: 3,
       validation: (Rule) =>

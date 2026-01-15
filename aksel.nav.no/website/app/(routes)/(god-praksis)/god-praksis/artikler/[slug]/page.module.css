@@ -4,7 +4,6 @@
   column-gap: var(--ax-space-80);
   grid-template-columns: minmax(0, 720px);
   grid-template-rows: min-content min-content;
-  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
   grid-template-areas:
     "intro"
     "content";
@@ -37,7 +36,7 @@
   color: var(--ax-text-brand-blue-decoration);
   border: 1px solid var(--ax-border-brand-blue-subtleA);
   background: var(--ax-bg-brand-blue-moderate);
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   transition: border-color 200ms cubic-bezier(0.15, 1, 0.3, 1);
 
   &:hover {

@@ -13,7 +13,7 @@ function KodeEksemplerNavigation(props: {
   const { dir } = props.value;
   const { activeExample } = useKodeEksempler();
 
-  if (!dir?.filer || dir.filer.length === 0) {
+  if (!dir?.filer || dir.filer.length < 2) {
     return null;
   }
 

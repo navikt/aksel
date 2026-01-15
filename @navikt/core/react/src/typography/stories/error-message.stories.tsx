@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
 import { VStack } from "../../layout/stack";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import ErrorMessage from "../ErrorMessage";
 
 const meta: Meta<typeof ErrorMessage> = {
@@ -33,7 +34,7 @@ export const Controls: Story = {
 
 export const SizeMedium: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <ErrorMessage size="medium">{lorem}</ErrorMessage>
       <ErrorMessage size="medium">{lorem}</ErrorMessage>
     </VStack>
@@ -42,7 +43,7 @@ export const SizeMedium: Story = {
 
 export const SizeSmall: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <ErrorMessage size="small">{lorem}</ErrorMessage>
       <ErrorMessage size="small">{lorem}</ErrorMessage>
     </VStack>
@@ -95,7 +96,7 @@ export const OverrideTag: Story = {
 
 export const WithIcon: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <ErrorMessage size="medium" showIcon>
         {lorem}
       </ErrorMessage>
@@ -106,34 +107,11 @@ export const WithIcon: Story = {
   ),
 };
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Medium</h2>
-        <h3>Size</h3>
-        {SizeMedium.render?.(...props)}
-        <h3>Spacing</h3>
-        {SpacingMedium.render?.(...props)}
-      </div>
-      <div>
-        <h2>Small</h2>
-        <h3>Size</h3>
-        {SizeSmall.render?.(...props)}
-        <h3>Spacing</h3>
-        {SpacingSmall.render?.(...props)}
-      </div>
-      <div>
-        <h2>Override Tag</h2>
-        {OverrideTag.render?.(...props)}
-      </div>
-      <div>
-        <h2>With Icon</h2>
-        {WithIcon.render?.(...props)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  SizeMedium,
+  SpacingMedium,
+  SizeSmall,
+  SpacingSmall,
+  OverrideTag,
+  WithIcon,
+});

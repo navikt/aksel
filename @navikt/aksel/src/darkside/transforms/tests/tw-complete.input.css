@@ -1,8 +1,0 @@
-.test {
-  @apply bg-surface-subtle via-surface-transparent;
-  @apply text-small font-bold font-font-family leading-heading-small;
-  @apply shadow-small z-tooltip;
-  @apply md:bg-surface-subtle text-red-500 lg:via-surface-transparent z-tooltip;
-  @apply md:bg-surface-subtle! text-red-500! lg:via-surface-transparent z-tooltip!;
-  @apply group:bg-red-500;
-}

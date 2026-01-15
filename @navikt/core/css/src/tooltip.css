@@ -1,0 +1,126 @@
+.aksel-tooltip {
+  z-index: 2147483647;
+  background-color: var(--ax-bg-neutral-strong);
+  color: var(--ax-text-neutral-contrast);
+  border-radius: var(--ax-radius-4);
+  padding: 0 var(--ax-space-6);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-duration: 150ms;
+  text-align: center;
+  box-shadow: var(--ax-shadow-dialog);
+  border: 1px solid transparent;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.aksel-tooltip__arrow {
+  height: 0.5rem;
+  width: 0.5rem;
+  z-index: -1;
+  background-color: var(--ax-bg-neutral-strong);
+  position: absolute;
+  border-radius: 1px;
+  transform: rotate(45deg);
+
+  @media (forced-colors: active) {
+    & {
+      display: none;
+    }
+  }
+}
+
+.aksel-tooltip:where([data-state="open"]):where([data-side="bottom"]) {
+  animation-name: aksel-tooltip-from-bottom, aksel-tooltip-fade-in;
+}
+
+.aksel-tooltip:where([data-state="open"]):where([data-side="top"]) {
+  animation-name: aksel-tooltip-from-top, aksel-tooltip-fade-in;
+}
+
+.aksel-tooltip:where([data-state="open"]):where([data-side="left"]) {
+  animation-name: aksel-tooltip-from-left, aksel-tooltip-fade-in;
+}
+
+.aksel-tooltip:where([data-state="open"]):where([data-side="right"]) {
+  animation-name: aksel-tooltip-from-right, aksel-tooltip-fade-in;
+}
+
+@keyframes aksel-tooltip-from-bottom {
+  from {
+    transform: translateY(-4px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes aksel-tooltip-from-top {
+  from {
+    transform: translateY(4px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes aksel-tooltip-from-left {
+  from {
+    transform: translateX(4px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes aksel-tooltip-from-right {
+  from {
+    transform: translateX(-4px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes aksel-tooltip-fade-in {
+  from {
+    opacity: 0.01;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.aksel-tooltip__keys {
+  padding-bottom: var(--ax-space-4);
+  display: flex;
+  gap: var(--ax-space-4);
+}
+
+.aksel-tooltip__key {
+  font-family: var(--ax-font-family);
+  color: var(--ax-text-neutral);
+  padding: 0 var(--ax-space-4);
+  min-width: 1.125rem;
+  height: 1.125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ax-radius-2);
+  background: var(--ax-bg-neutral-moderate);
+
+  @media (forced-colors: active) {
+    & {
+      outline: 1px solid;
+    }
+  }
+}

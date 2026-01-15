@@ -20,14 +20,11 @@ import React, {
 } from "react";
 import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
-import { createContext } from "../../util/create-context";
-import {
-  useCallbackRef,
-  useClientLayoutEffect,
-  useMergeRefs,
-} from "../../util/hooks";
+import { createStrictContext } from "../../util/create-strict-context";
+import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
+import { useEventCallback } from "../../util/hooks/useEventCallback";
+import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
 import { AsChildProps } from "../../util/types";
-import { useOpenChangeAnimationComplete } from "../overlay/hooks/useOpenChangeAnimationComplete";
 import {
   type Align,
   type Measurable,
@@ -44,11 +41,9 @@ type FloatingContextValue = {
   onAnchorChange: (anchor: Measurable | null) => void;
 };
 
-export const [FloatingProvider, useFloatingContext] =
-  createContext<FloatingContextValue>({
+export const { Provider: FloatingProvider, useContext: useFloatingContext } =
+  createStrictContext<FloatingContextValue>({
     name: "FloatingContext",
-    hookName: "useFloating",
-    providerName: "FloatingProvider",
   });
 
 interface FloatingProps {
@@ -171,12 +166,12 @@ type FloatingContentContextValue = {
   hideArrow: boolean;
 };
 
-const [FloatingContentProvider, useFloatingContentContext] =
-  createContext<FloatingContentContextValue>({
-    name: "FloatingContentContext",
-    hookName: "useFloatingContentContext",
-    providerName: "FloatingContentProvider",
-  });
+const {
+  Provider: FloatingContentProvider,
+  useContext: useFloatingContentContext,
+} = createStrictContext<FloatingContentContextValue>({
+  name: "FloatingContentContext",
+});
 
 type Boundary = Element | null;
 
@@ -321,19 +316,19 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
              * Allows styling and animations based on the available space.
              */
             contentStyle.setProperty(
-              "--ac-floating-available-width",
+              "--__axc-floating-available-width",
               `${availableWidth}px`,
             );
             contentStyle.setProperty(
-              "--ac-floating-available-height",
+              "--__axc-floating-available-height",
               `${availableHeight}px`,
             );
             contentStyle.setProperty(
-              "--ac-floating-anchor-width",
+              "--__axc-floating-anchor-width",
               `${anchorWidth}px`,
             );
             contentStyle.setProperty(
-              "--ac-floating-anchor-height",
+              "--__axc-floating-anchor-height",
               `${anchorHeight}px`,
             );
           },
@@ -364,15 +359,15 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     }, [autoUpdateWhileMounted, enabled, floatingElements, update]);
 
     useOpenChangeAnimationComplete({
-      enabled: !!modalContext?.ref,
+      enabled: !!modalContext?.modalRef,
       open: enabled,
-      ref: modalContext?.ref,
+      ref: modalContext?.modalRef,
       onComplete: update,
     });
 
     const [placedSide, placedAlign] = getSideAndAlignFromPlacement(placement);
 
-    const handlePlaced = useCallbackRef(onPlaced);
+    const handlePlaced = useEventCallback(onPlaced);
 
     useClientLayoutEffect(() => {
       isPositioned && handlePlaced?.();
@@ -393,7 +388,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
             : "translate(0, -200%)", // keep off the page when measuring
           minWidth: "max-content",
           zIndex: "9999999",
-          ["--ac-floating-transform-origin" as any]: [
+          ["--__axc-floating-transform-origin" as any]: [
             middlewareData.transformOrigin?.x,
             middlewareData.transformOrigin?.y,
           ].join(" "),

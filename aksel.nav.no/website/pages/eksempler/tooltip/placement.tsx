@@ -9,7 +9,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="space-16">
+    <VStack gap="space-16" align="center">
       <Tooltip content="Skriv ut dokument">
         <Button icon={<ArrowUpIcon aria-hidden />} />
       </Tooltip>

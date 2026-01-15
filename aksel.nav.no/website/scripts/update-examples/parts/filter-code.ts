@@ -20,6 +20,7 @@ export async function filterCode(code: string, filePath: string) {
     .substring(0, code.indexOf(FILTER_STRING))
     .split("\n")
     .filter((x) => !x.includes("examples/withDsExample"))
+    .filter((x) => !x.includes("biome-ignore"))
     .join("\n")
     .trim();
 

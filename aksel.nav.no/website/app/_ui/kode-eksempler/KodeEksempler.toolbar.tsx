@@ -34,9 +34,9 @@ function KodeEksemplerToolbar({
 
   return (
     <div className={styles.kodeEksemplerToolbar}>
-      <HStack gap="4" justify="space-between">
+      <HStack gap="space-16" justify="space-between">
         <Show above="sm">
-          <HStack gap="2">
+          <HStack gap="space-8">
             <Button
               variant="tertiary-neutral"
               size="small"
@@ -150,6 +150,7 @@ function CodeSandbox({ code }: { code: string }) {
       action="https://codesandbox.io/api/v1/sandboxes/define"
       method="POST"
       target="_blank"
+      rel="noopener"
       className={styles.kodeEksemplerCodeSandbox}
     >
       <input type="hidden" name="parameters" value={parameters} />

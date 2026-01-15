@@ -91,9 +91,9 @@ export const Controls: Story = {
 
 function ButtonGrid(props: any) {
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       {variants.map((variant) => (
-        <HStack gap="2" key={variant}>
+        <HStack gap="space-8" key={variant}>
           <Button variant={variant} {...props}>
             Button
           </Button>
@@ -129,7 +129,7 @@ export const XSmall: Story = {
 
 export const AsLink: Story = {
   render: () => (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Button href="#" as="a">
         Button as a-tag
       </Button>
@@ -157,9 +157,9 @@ export const DisabledAsLink: Story = {
 };
 
 export const ColorRole = () => (
-  <VStack gap="2">
+  <VStack gap="space-8">
     <h2>Variants + data-color on parent</h2>
-    <HStack gap="2" data-color="danger">
+    <HStack gap="space-8" data-color="danger">
       <Button variant="primary" icon={<StarIcon />}>
         Button
       </Button>
@@ -171,7 +171,7 @@ export const ColorRole = () => (
       </Button>
     </HStack>
     <h2>Variants + data-color on button</h2>
-    <HStack gap="2">
+    <HStack gap="space-8">
       <Button data-color="danger" variant="primary" icon={<StarIcon />}>
         Button
       </Button>
@@ -232,7 +232,7 @@ export const InsideModal: Story = {
 
 export const Chromatic: Story = {
   render: () => (
-    <VStack gap="6" align="center">
+    <VStack gap="space-24" align="center">
       <div>
         <h2>Medium</h2>
         <ButtonGrid size="medium" />
@@ -271,18 +271,10 @@ export const ChromaticForcedColors: Story = {
   },
 };
 
-export const ChromaticDarksideDark: Story = {
+export const ChromaticDark: Story = {
   render: Chromatic.render,
   parameters: {
     chromatic: { disable: false },
   },
-  globals: { theme: "dark", mode: "darkside" },
-};
-
-export const ChromaticDarksideLight: Story = {
-  render: Chromatic.render,
-  parameters: {
-    chromatic: { disable: false },
-  },
-  globals: { theme: "light", mode: "darkside" },
+  globals: { theme: "dark" },
 };

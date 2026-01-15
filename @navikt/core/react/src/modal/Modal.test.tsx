@@ -17,9 +17,9 @@ const Test = () => {
 };
 
 describe("Modal", () => {
-  test("should be visible", () => {
+  test("should be visible", async () => {
     render(<Test />);
-    expect(screen.getByText("Foobar")).toBeVisible();
+    expect(await screen.findByText("Foobar")).toBeVisible();
   });
 
   test("should be hidden after setting 'open' to false", async () => {

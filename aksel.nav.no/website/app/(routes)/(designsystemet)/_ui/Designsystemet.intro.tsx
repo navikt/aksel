@@ -18,7 +18,7 @@ function DesignsystemetKomponentIntro({
   const internal = data?.status?.internal;
 
   return (
-    <VStack gap="space-24" marginBlock="0 space-28">
+    <VStack gap="space-24" marginBlock="space-0 space-28">
       {useFor && (
         <div>
           <Heading size="small" level="2" spacing>

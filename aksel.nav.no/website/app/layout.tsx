@@ -1,12 +1,5 @@
 import { Metadata, Viewport } from "next";
-import { draftMode } from "next/headers";
-import "@navikt/ds-tokens/darkside-css";
-import { SanityLive } from "@/app/_sanity/live";
-import { ConsentBanner } from "@/app/_ui/consent-banner/ConsentBanner";
-import { CookieConsentProvider } from "@/app/_ui/cookie-consent/CookieConsent.Provider";
-import { DraftOverlay } from "@/app/_ui/draft-overlay/DraftOverlay";
 import { ThemeProvider } from "@/app/_ui/theming/ThemeProvider";
-import { Umami } from "@/app/_ui/umami/Umami";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,8 +28,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isEnabled: isDraftMode } = await draftMode();
-
   return (
     <html lang="no" suppressHydrationWarning>
       <head>
@@ -49,19 +40,7 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <CookieConsentProvider>
-          <Umami isDraftMode={isDraftMode} />
-          <ThemeProvider>
-            <ConsentBanner />
-            {children}
-            {isDraftMode && <DraftOverlay />}
-          </ThemeProvider>
-        </CookieConsentProvider>
-        <SanityLive
-          intervalOnGoAway={false}
-          refreshOnFocus={false}
-          refreshOnMount={false}
-        />
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

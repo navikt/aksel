@@ -35,20 +35,9 @@ function KodeEksemplerIFrame(props: {
 
     const waitForExampleContentToRender = setInterval(() => {
       const exampleIframeDOM = iframeRef.current?.contentDocument;
-
-      let exampleWrapper: HTMLElement | null = null;
-
-      if (dir.variant === "templates") {
-        const element = exampleIframeDOM?.getElementById("__next");
-        if (element) {
-          exampleWrapper = element;
-        }
-      } else {
-        const element = exampleIframeDOM?.getElementById("ds-example");
-        if (element) {
-          exampleWrapper = element;
-        }
-      }
+      const exampleWrapper = exampleIframeDOM?.getElementById(
+        dir.variant === "templates" ? "__next" : "ds-example",
+      );
 
       if (exampleWrapper?.offsetHeight) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
@@ -68,9 +57,7 @@ function KodeEksemplerIFrame(props: {
   };
 
   const demoVariant = dir.variant;
-  const iframeUrl = stegaClean(
-    `/${demoVariant}/${dir.title}/${current?.navn}?darkside=true`,
-  );
+  const iframeUrl = stegaClean(`/${demoVariant}/${dir.title}/${current?.navn}`);
 
   const hasJSXSnippet = !!current?.kompaktInnhold;
 
@@ -91,18 +78,13 @@ function KodeEksemplerIFrame(props: {
             aria-label={`${dir?.title} ${current?.title} eksempel`}
             title="Demo"
             className={styles.kodeExampleIframe}
-            style={{
-              // Prevent the iframe from covering up the resize handle in Safari
-              clipPath:
-                "polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%)",
-            }}
           />
         </div>
 
         {/* Skeleton loading */}
         {!loaded && (
           <HStack asChild justify="center" align="center">
-            <BoxNew inset="0" position="absolute" background="default">
+            <BoxNew inset="space-0" position="absolute" background="default">
               <VStack gap="space-8" width="70%">
                 <Skeleton variant="rounded" width="66%" height="1.5rem" />
                 <Skeleton variant="rounded" width="100%" height="4rem" />
@@ -111,7 +93,6 @@ function KodeEksemplerIFrame(props: {
           </HStack>
         )}
       </div>
-
       <KodeEksemplerToolbar
         code={current?.innhold?.trim()}
         base64={current?.sandboxEnabled ? current?.sandboxBase64 : undefined}
@@ -121,7 +102,6 @@ function KodeEksemplerIFrame(props: {
           iframeRef.current?.contentWindow?.location.reload();
         }}
       />
-
       {showCode && (
         <CodeBlock
           data-block-margin="space-0"

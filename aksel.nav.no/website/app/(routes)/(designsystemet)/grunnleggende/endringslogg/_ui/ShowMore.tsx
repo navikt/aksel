@@ -15,7 +15,6 @@ import ShowMoreButton from "./ShowMoreButton";
 import { ShowMoreContext, useShowMoreContext } from "./ShowMoreContext";
 
 /* Heading */
-
 const ShowMoreHeading = ({ children }) => {
   const { shouldFlash } = useShowMoreContext();
   const props: any = children.props || {};
@@ -28,7 +27,6 @@ const ShowMoreHeading = ({ children }) => {
 };
 
 /* Content */
-
 export interface ShowMoreContentProps
   extends Omit<HTMLAttributes<HTMLElement>, "onClick"> {
   /**
@@ -42,7 +40,7 @@ export interface ShowMoreContentProps
   children: ReactNode;
 }
 
-const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
+const inertValue = parseInt(version.split(".")[0], 10) > 18 ? true : ""; // Support for inert was added in React 19
 
 const ShowMoreContent = ({
   collapsedHeight = "10rem",
@@ -73,7 +71,6 @@ const ShowMoreContent = ({
 };
 
 /* ShowMore component */
-
 export interface ShowMoreProps
   extends Omit<HTMLAttributes<HTMLElement>, "onClick"> {
   /**
@@ -145,12 +142,14 @@ export const ShowMore = ({
       if (
         scrollTarget &&
         scrollTarget.getBoundingClientRect().top <
-          parseInt(getComputedStyle(scrollTarget).scrollMarginTop)
+          parseInt(getComputedStyle(scrollTarget).scrollMarginTop, 10)
       ) {
         scrollTarget.scrollIntoView({
           behavior: "instant",
           block: "start",
         });
+        // eslint-disable-next-line
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setShouldScroll(false);
       }
     }

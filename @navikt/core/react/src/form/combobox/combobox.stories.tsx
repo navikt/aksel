@@ -12,7 +12,11 @@ import { ComboboxProps, UNSAFE_Combobox } from "./index";
 export default {
   title: "ds-react/Combobox",
   component: UNSAFE_Combobox,
-  decorators: [(story) => <div style={{ width: "300px" }}>{story()}</div>],
+  decorators: [
+    (story) => (
+      <div style={{ width: "320px", minHeight: "100px" }}>{story()}</div>
+    ),
+  ],
   parameters: {
     chromatic: { disable: true },
   },
@@ -90,9 +94,9 @@ export const WithPlaceholder: StoryFunction = () => {
     onChange: console.log,
   };
   return (
-    <VStack gap="8" align="center">
+    <VStack gap="space-32" align="center">
       <Alert variant="warning" style={{ width: "70ch" }}>
-        <VStack gap="4">
+        <VStack gap="space-16">
           <BodyLong>
             {`We don't endorse placeholders, but they shouldn't break either!`}
           </BodyLong>
@@ -134,24 +138,22 @@ export const MultiSelectWithComplexOptions: StoryFn = () => {
     "OPP",
   ]);
   return (
-    <>
-      <UNSAFE_Combobox
-        options={complexOptions.map((option) => ({
-          ...option,
-          label: `${option.label} [${option.value}]`,
-        }))}
-        id="combobox-with-complex-options"
-        label="Velg temakoder"
-        allowNewValues
-        onToggleSelected={(value, isSelected) =>
-          isSelected
-            ? setSelectedOptions([...selectedOptions, value])
-            : setSelectedOptions(selectedOptions.filter((o) => o !== value))
-        }
-        selectedOptions={selectedOptions}
-        isMultiSelect
-      />
-    </>
+    <UNSAFE_Combobox
+      options={complexOptions.map((option) => ({
+        ...option,
+        label: `${option.label} [${option.value}]`,
+      }))}
+      id="combobox-with-complex-options"
+      label="Velg temakoder"
+      allowNewValues
+      onToggleSelected={(value, isSelected) =>
+        isSelected
+          ? setSelectedOptions([...selectedOptions, value])
+          : setSelectedOptions(selectedOptions.filter((o) => o !== value))
+      }
+      selectedOptions={selectedOptions}
+      isMultiSelect
+    />
   );
 };
 
@@ -490,7 +492,7 @@ export const Disabled: StoryFn = () => {
   const selectedOptionsMultiple = ["napoleonskake", "donut"];
   const selectedOptionsSingle = ["pushups"];
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <UNSAFE_Combobox
         options={options}
         label="Hva er dine favorittfrukter?"
@@ -514,7 +516,7 @@ export const Readonly: StoryFn = () => {
   const selectedOptionsMultiple = ["napoleonskake", "donut"];
   const selectedOptionsSingle = ["pushups"];
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <UNSAFE_Combobox
         options={options}
         label="Hva er dine favorittfrukter?"
@@ -534,14 +536,13 @@ export const Readonly: StoryFn = () => {
   );
 };
 
+const H2 = (props: { children: string; style?: React.CSSProperties }) => (
+  <h2 style={{ marginBottom: "-0.25rem", ...props.style }}>{props.children}</h2>
+);
+
 const ChromaticRender = ({ children }: { children?: React.ReactNode }) => {
-  const H2 = (props: { children: string; style?: React.CSSProperties }) => (
-    <h2 style={{ marginBottom: "-0.25rem", ...props.style }}>
-      {props.children}
-    </h2>
-  );
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <H2>MultiSelect</H2>
       <MultiSelect />
       <H2>ComboboxWithNoHits</H2>
@@ -560,7 +561,7 @@ const ChromaticRender = ({ children }: { children?: React.ReactNode }) => {
       <Controlled />
       <H2>ComboboxSizes</H2>
       <ComboboxSizes />
-      <H2>MaxSelectedOptions</H2>
+      <H2 style={{ marginBottom: "18rem" }}>MaxSelectedOptions</H2>
       <MaxSelectedOptions open />
       <H2 style={{ marginTop: "20rem" }}>WithError</H2>
       <WithError />

@@ -1,5 +1,8 @@
 import React, { forwardRef } from "react";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
+import { omit } from "../util";
 import AccordionContent, { AccordionContentProps } from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
 import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
@@ -54,15 +57,9 @@ interface AccordionComponent
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * @deprecated "default" will be the only variant.
-   * @default "default"
+   * @deprecated Will be removed in a future major version. Use `data-color` instead.
    */
   variant?: "default" | "neutral";
-  /**
-   * @default "small"
-   * @deprecated `size`-prop will be the only prop to control the size of the accordion.
-   */
-  headingSize?: "large" | "medium" | "small" | "xsmall";
   /**
    * @default "medium"
    */
@@ -76,6 +73,18 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * Instances of `Accordion.Item`.
    */
   children: React.ReactNode;
+  /**
+   * @deprecated No longer has any effect.
+   */
+  headingSize?: "large" | "medium" | "small" | "xsmall";
+  /**
+   * Overrides inherited color.
+   *
+   * We recommend only using `accent` and `neutral`. We have disallowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 /**
@@ -100,14 +109,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
-    {
-      className,
-      variant = "default",
-      headingSize = "small",
-      size = "medium",
-      indent = true,
-      ...rest
-    },
+    { className, variant = "default", size = "medium", indent = true, ...rest },
     ref,
   ) => {
     const { cn } = useRenameCSS();
@@ -119,14 +121,13 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     return (
       <AccordionContext.Provider
         value={{
-          variant,
-          headingSize,
           size,
           mounted: true,
+          variant,
         }}
       >
         <div
-          {...rest}
+          {...omit(rest, ["headingSize"])}
           className={cn(
             "navds-accordion",
             className,

@@ -1,20 +1,5 @@
-import { type Meta, type StoryFn } from "@storybook/nextjs";
-import "@navikt/ds-css/darkside";
-import {
-  Accordion,
-  BodyLong,
-  BodyShort,
-  HGrid,
-  HStack,
-  Heading,
-  LinkCard,
-  VStack,
-} from "@navikt/ds-react";
-import {
-  AccordionContent,
-  AccordionHeader,
-  AccordionItem,
-} from "@navikt/ds-react/Accordion";
+import { type Meta, type StoryFn } from "@storybook/nextjs-vite";
+import { HGrid, LinkCard, VStack } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
   LinkCardDescription,
@@ -22,7 +7,6 @@ import {
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
 import { Avatar, AvatarStack } from "./Avatar";
-import { HoverCard, HoverCardGroup } from "./HoverCard";
 
 const meta = {
   title: "Website-modules/AvatarStack",
@@ -51,146 +35,6 @@ export const LoneAvatar: StoryFn = () => {
         name="Team aksel"
       />
     </VStack>
-  );
-};
-
-export const LoneAvatarInteractive: StoryFn = () => {
-  return (
-    <VStack gap="space-16">
-      <HoverCard
-        popoverContent={
-          <>
-            <Heading level="2" size="xlarge">
-              Team Aksel!!
-            </Heading>
-            <BodyLong>Dette teamet er et team!</BodyLong>
-            <Accordion>
-              <AccordionItem>
-                <AccordionHeader>
-                  Her kan man plassere hva som helst
-                </AccordionHeader>
-                <AccordionContent>Content 1</AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </>
-        }
-      >
-        <Avatar
-          type="Team"
-          imageSrc="/avatars/aksel.svg"
-          name="Team aksel"
-        ></Avatar>
-      </HoverCard>
-      <HoverCard
-        popoverContent={
-          <>
-            <Heading level="2" size="xlarge">
-              Team Aksel
-            </Heading>
-            <BodyLong>ReactNode content</BodyLong>
-            <Accordion>
-              <AccordionItem>
-                <AccordionHeader>
-                  Her kan man plassere hva som helst
-                </AccordionHeader>
-                <AccordionContent>Content 1</AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </>
-        }
-      >
-        <Avatar
-          type="Team"
-          showName
-          imageSrc="/avatars/aksel.svg"
-          name="Team aksel"
-        ></Avatar>
-      </HoverCard>
-      <HoverCardGroup>
-        <BodyShort>inside a HoverCardGroup</BodyShort>
-        <HStack gap="space-16">
-          <HoverCard
-            popoverContent={
-              <>
-                <Heading level="2" size="xlarge">
-                  Team Aksel
-                </Heading>
-                <BodyLong>ReactNode content</BodyLong>
-                <Accordion>
-                  <AccordionItem>
-                    <AccordionHeader>
-                      Her kan man plassere hva som helst
-                    </AccordionHeader>
-                    <AccordionContent>Content 1</AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </>
-            }
-          >
-            <Avatar
-              type="Team"
-              showName
-              imageSrc="/avatars/aksel.svg"
-              name="Team aksel"
-            ></Avatar>
-          </HoverCard>
-          <HoverCard
-            popoverContent={
-              <>
-                <Heading level="2" size="xlarge">
-                  Team Aksel
-                </Heading>
-                <BodyLong>ReactNode content</BodyLong>
-                <Accordion>
-                  <AccordionItem>
-                    <AccordionHeader>
-                      Her kan man plassere hva som helst
-                    </AccordionHeader>
-                    <AccordionContent>Content 1</AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </>
-            }
-          >
-            <Avatar
-              type="Team"
-              showName
-              imageSrc="/avatars/aksel.svg"
-              name="Team aksel"
-            ></Avatar>
-          </HoverCard>
-        </HStack>
-      </HoverCardGroup>
-    </VStack>
-  );
-};
-
-export const StackInteractive: StoryFn = () => {
-  return (
-    <HoverCard
-      popoverContent={
-        <>
-          <Heading level="2" size="xlarge">
-            Team Aksel
-          </Heading>
-          <BodyLong>ReactNode content</BodyLong>
-          <Accordion>
-            <AccordionItem>
-              <AccordionHeader>
-                Her kan man plassere hva som helst
-              </AccordionHeader>
-              <AccordionContent>Content 1</AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </>
-      }
-    >
-      <AvatarStack>
-        <Avatar type="Team" imageSrc="/avatars/aksel.svg" name="Team aksel" />
-        <Avatar type="Team" imageSrc="/avatars/001.svg" name="Team Nav.no" />
-        <Avatar type="Team" imageSrc="/avatars/002.svg" name="Team Nais" />
-      </AvatarStack>
-    </HoverCard>
   );
 };
 

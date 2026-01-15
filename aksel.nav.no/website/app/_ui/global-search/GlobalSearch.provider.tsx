@@ -26,7 +26,7 @@ function GlobalSearchResultProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { openSearch } = useGlobalSearch();
+  const { openSearch, open } = useGlobalSearch();
   const shouldInitialOpenRef = useRef<boolean>(true);
 
   const [searchResult, setSearchResults] =
@@ -56,14 +56,21 @@ function GlobalSearchResultProvider({
   }, [debouncedSearch]);
 
   useEffect(() => {
-    return debouncedSearch.clear();
+    if (!open) {
+      debouncedSearch.clear();
+    }
+  }, [open, debouncedSearch]);
+
+  useEffect(() => {
+    return () => debouncedSearch.clear();
   }, [debouncedSearch]);
 
   useEffect(() => {
     if (!paramValue) {
-      setSearchResults(null);
       shouldInitialOpenRef.current = false;
-
+      // eslint-disable-next-line
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSearchResults(null);
       return;
     }
 

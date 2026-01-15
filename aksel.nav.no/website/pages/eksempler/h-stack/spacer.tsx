@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Box background="surface-alt-3-subtle">
+    <Box background="neutral-moderate">
       <HStack gap="space-12" wrap={false}>
         <Placeholder />
         <Spacer />
@@ -15,10 +15,10 @@ const Example = () => {
 
 const Placeholder = () => (
   <Box
-    background="surface-alt-3"
+    background="neutral-strong"
     height="2rem"
     width="2rem"
-    borderRadius="medium"
+    borderRadius="4"
   />
 );
 
@@ -26,7 +26,6 @@ const Placeholder = () => (
 export default withDsExample(Example, {
   variant: "full",
   showBreakpoints: true,
-  legacyOnly: true,
 });
 
 /* Storybook story */

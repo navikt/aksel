@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { DishwasherIcon, FreezerIcon, MugIcon } from "@navikt/aksel-icons";
 import { Tabs } from ".";
 import { VStack } from "../layout/stack";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 
 export default {
   title: "ds-react/Tabs",
@@ -33,7 +34,7 @@ const Panel = () => (
     <Tabs.Panel
       value="test1"
       className="panel"
-      style={{ background: "var(--a-gray-50)", height: 100 }}
+      style={{ background: "var(--ax-bg-neutral-soft)", height: 100 }}
     >
       Innholdspanel for Skap-tab
     </Tabs.Panel>
@@ -41,7 +42,7 @@ const Panel = () => (
       value="test2"
       className="panel"
       style={{
-        background: "var(--a-green-50)",
+        background: "var(--ax-bg-success-soft)",
         height: 100,
       }}
     >
@@ -50,7 +51,7 @@ const Panel = () => (
     <Tabs.Panel
       value="test3"
       className="panel"
-      style={{ background: "var(--a-red-50)", height: 100 }}
+      style={{ background: "var(--ax-bg-danger-soft)", height: 100 }}
     >
       Innholdspanel for Fryser-tab
     </Tabs.Panel>
@@ -134,7 +135,7 @@ export const Controlled = () => {
 };
 
 export const IconPosition = () => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Tabs defaultValue="test2" size="small">
       <Tabs.List>
         <Tabs.Tab value="test1" icon={<MugIcon aria-hidden />} label="Skap" />
@@ -171,7 +172,7 @@ export const IconPosition = () => (
 );
 
 export const Icon = () => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Tabs defaultValue="test2">
       <Tabs.List style={{ margin: "0 auto" }}>
         <Tabs.Tab value="test1" icon={<MugIcon title="Skap" />} />
@@ -217,24 +218,25 @@ export const Overflow = () => (
 );
 
 export const Fill = () => (
-  <Tabs defaultValue="test2" fill>
-    <Tabs.List>
-      <Tabs.Tab value="test1" icon={<MugIcon aria-hidden />} label="Skap" />
-      <Tabs.Tab
-        value="test2"
-        icon={<DishwasherIcon aria-hidden />}
-        label="Oppvaskmaskin"
-      />
-      <Tabs.Tab
-        value="test3"
-        icon={<FreezerIcon aria-hidden />}
-        label="Fryser"
-      />
-    </Tabs.List>
-    <Panel />
-  </Tabs>
+  <div style={{ minWidth: 500 }}>
+    <Tabs defaultValue="test2" fill>
+      <Tabs.List>
+        <Tabs.Tab value="test1" icon={<MugIcon aria-hidden />} label="Skap" />
+        <Tabs.Tab
+          value="test2"
+          icon={<DishwasherIcon aria-hidden />}
+          label="Oppvaskmaskin"
+        />
+        <Tabs.Tab
+          value="test3"
+          icon={<FreezerIcon aria-hidden />}
+          label="Fryser"
+        />
+      </Tabs.List>
+      <Panel />
+    </Tabs>
+  </div>
 );
-
 Fill.parameters = {
   layout: "fullscreen",
 };
@@ -280,42 +282,15 @@ export const ColorRole = () => (
   </div>
 );
 
-export const Chromatic = {
-  render: () => (
-    <VStack gap="6" align="center">
-      <div>
-        <h2>Small</h2>
-        <Small />
-      </div>
-      <div>
-        <h2>Controlled</h2>
-        <Controlled />
-      </div>
-      <div>
-        <h2>IconPosition</h2>
-        <IconPosition />
-      </div>
-      <div>
-        <h2>Icon</h2>
-        <Icon />
-      </div>
-      <div>
-        <h2>Overflow</h2>
-        <Overflow />
-      </div>
-      <div>
-        <h2>Fill</h2>
-        <div style={{ minWidth: 600 }}>
-          <Fill />
-        </div>
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false, delay: 300 },
-  },
+export const Chromatic = renderStoriesForChromatic({
+  Small,
+  Controlled,
+  IconPosition,
+  Icon,
+  Overflow,
+  Fill,
+  ColorRole,
+});
+Chromatic.parameters = {
+  chromatic: { disable: false, delay: 300 },
 };

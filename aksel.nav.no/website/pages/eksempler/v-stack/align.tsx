@@ -56,9 +56,9 @@ const Placeholder = ({
   padding?: string;
 }) => (
   <Box
-    background="surface-alt-3"
-    borderRadius="medium"
-    style={{ color: "var(--a-text-on-action)", padding }}
+    background="neutral-strong"
+    borderRadius="4"
+    style={{ color: "var(--ax-text-accent-contrast)", padding }}
   >
     {text}
   </Box>
@@ -67,7 +67,6 @@ const Placeholder = ({
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
-  legacyOnly: true,
 });
 
 /* Storybook story */

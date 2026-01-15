@@ -6,6 +6,7 @@ import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Heading } from "../../typography";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import {
   FileObject,
   FileRejected,
@@ -81,7 +82,7 @@ export const Default: StoryFn = () => {
 
   return (
     <FileUpload style={{ width: 500, maxWidth: "100%", margin: "0 auto" }}>
-      <VStack gap="6">
+      <VStack gap="space-24">
         <FileUpload.Dropzone
           label="Last opp filer til søknaden"
           description={`Maks størrelse ${MAX_SIZE_MB} MB`}
@@ -96,11 +97,11 @@ export const Default: StoryFn = () => {
         )}
 
         {acceptedFiles.length > 0 && (
-          <VStack gap="2">
+          <VStack gap="space-8">
             <Heading level="3" size="xsmall">
               {`Vedlegg (${acceptedFiles.length} av maks ${MAX_FILES})`}
             </Heading>
-            <VStack as="ul" gap="3">
+            <VStack as="ul" gap="space-12">
               {acceptedFiles.map((file, index) => (
                 <CustomItem
                   key={index}
@@ -113,11 +114,11 @@ export const Default: StoryFn = () => {
           </VStack>
         )}
         {rejectedFiles.length > 0 && (
-          <VStack gap="2">
+          <VStack gap="space-8">
             <Heading level="3" size="xsmall">
               Vedlegg med feil
             </Heading>
-            <VStack as="ul" gap="3">
+            <VStack as="ul" gap="space-12">
               {rejectedFiles.map((rejected, index) => (
                 <CustomItem
                   key={index}
@@ -164,7 +165,7 @@ export const Single: StoryFn = () => {
   }
 
   return (
-    <VStack gap="6" style={{ width: 500, maxWidth: "100%" }}>
+    <VStack gap="space-24" style={{ width: 500, maxWidth: "100%" }}>
       <FileUpload.Dropzone
         label="Last opp fil til søknaden"
         description={`Maks størrelse ${MAX_SIZE_MB} MB`}
@@ -207,7 +208,7 @@ export const Translation: StoryFn = () => (
       },
     }}
   >
-    <VStack gap="3" style={{ width: 500, maxWidth: "100%" }}>
+    <VStack gap="space-12" style={{ width: 500, maxWidth: "100%" }}>
       <FileUpload.Dropzone label="Last opp bilder" onSelect={console.log} />
       <FileUpload.Item
         file={{ name: "eksempel.png", size: 200000 }}
@@ -254,39 +255,32 @@ TriggerWithButton.args = {
   maxSizeInBytes: 0,
 };
 
-const ChromaticStories: StoryFn = () => (
-  <div>
+export const ColorRoles = () => (
+  <div data-color="brand-magenta">
     <h2>Default</h2>
     <Default />
-    <h2>Single</h2>
-    <Single />
-    <h2>Translation</h2>
-    <Translation />
     <h2>TriggerWithButton</h2>
     <TriggerWithButton />
     <h2>DropzoneStates</h2>
     <DropzoneStates />
-    <h2>DropzoneTranslation</h2>
-    <DropzoneTranslation />
-    <h2>ItemDescription</h2>
-    <ItemDescription />
-    <h2>ItemDownload</h2>
-    <ItemDownload />
-    <h2>ItemIcons</h2>
-    <ItemIcons />
     <h2>ItemStates</h2>
     <ItemStates />
   </div>
 );
 
-export const ColorRoles = () => (
-  <div data-color="brand-magenta">
-    <ChromaticStories />
-  </div>
-);
-
-export const Chromatic: StoryFn = () => <ChromaticStories />;
-
-Chromatic.parameters = {
-  chromatic: { disable: false },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Single,
+  Translation,
+  TriggerWithButton,
+  DropzoneStates,
+  DropzoneTranslation,
+  ItemDescription: () => (
+    <div style={{ width: 400, maxWidth: "100%" }}>
+      <ItemDescription />
+    </div>
+  ),
+  ItemDownload,
+  ItemIcons,
+  ItemStates,
+});

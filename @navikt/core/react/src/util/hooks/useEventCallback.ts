@@ -14,6 +14,8 @@
  *
  * Guarantees: stable identity; latest logic executed; no calls from uncommitted renders; dev
  * error if invoked during render; safe when `callback` is undefined (no-op).
+ *
+ * This hook is a more permissive version of React 19.2's `React.useEffectEvent` in that it can be passed through contexts and called in event handler props, not just effects.
  */
 import React, { useLayoutEffect } from "react";
 import { useRefWithInit } from "./useRefWithInit";
@@ -42,12 +44,7 @@ type Stable<T extends Callback> = {
   effect: () => void;
 };
 
-/**
- * TODO: Long term, replace `useCallbackRef` with this hook.
- */
-export function useEventCallback<T extends Callback>(
-  callback: T | undefined,
-): T {
+function useEventCallback<T extends Callback>(callback: T | undefined): T {
   const stable = useRefWithInit(createStableCallback).current as Stable<T>;
   stable.next = callback;
   useSafeInsertionEffect(stable.effect);
@@ -71,3 +68,5 @@ function assertNotCalled() {
     throw new Error("Aksel: Cannot call an event handler while rendering.");
   }
 }
+
+export { useEventCallback };

@@ -15,5 +15,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Textarea kan vise antall gjenværende tegn som er tillatt å skrive inn. Tallet oppdateres etterhvert som brukeren skriver eller fjerner innhold. NB! Dette er bare en visuell indikator. Faktisk begrensning og validering må håndteres i kode.",
+  desc: "Textarea kan vise antall gjenværende tegn som er tillatt å skrive inn. Tallet oppdateres mens brukeren skriver eller fjerner innhold. NB! Dette er bare en visuell indikator. Faktisk begrensning og validering må håndteres i kode.",
 };

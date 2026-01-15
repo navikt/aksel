@@ -27,6 +27,8 @@ import { IconPageProvider } from "./IconPage.provider";
 import { IconPageSidebar } from "./IconPage.sidebar";
 import { categorizeIcons, searchIcons } from "./IconPage.utils";
 
+/* eslint-disable import/namespace */
+
 function IconPage({
   iconName,
   iconQuery,
@@ -55,12 +57,12 @@ function IconPage({
             for Nav
           </BodyLong>
         </Box>
-        <HStack as="ul" gap="space-16" marginBlock="space-24 0">
+        <HStack as="ul" gap="space-16" marginBlock="space-24 space-0">
           <li className={styles.iconPageLinkLi}>
             <Link
               as={NextLink}
               href="https://www.figma.com/community/file/1214869602572392330"
-              variant="subtle"
+              data-color="neutral"
               onClick={() =>
                 umamiTrack("navigere", {
                   kilde: "ikonside",
@@ -76,7 +78,7 @@ function IconPage({
             <Link
               as={NextLink}
               href="/god-praksis/artikler/tilgjengelig-ikonbruk"
-              variant="subtle"
+              data-color="neutral"
               onClick={() =>
                 umamiTrack("navigere", {
                   kilde: "ikonside",
@@ -90,7 +92,7 @@ function IconPage({
           </li>
           <li className={styles.iconPageLinkLi}>
             <Link
-              variant="subtle"
+              data-color="neutral"
               href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
               download="Ikonpakke"
               onClick={() =>
@@ -106,14 +108,13 @@ function IconPage({
           </li>
         </HStack>
       </div>
-
       <IconPageProvider>
         <div>
           <IconPageForm iconQuery={iconQuery} iconToggle={iconToggle} />
           <HGrid
             columns={{ xs: 1, xl: "3fr minmax(300px, 2fr)" }}
             gap="space-40"
-            marginBlock="space-24 0"
+            marginBlock="space-24 space-0"
           >
             <VStack as="section" aria-label="Ikonliste" gap="space-40">
               {iconsWithCategories.length === 0 && (
@@ -139,7 +140,7 @@ function IconPage({
 
                     <HStack gap="space-8" marginBlock="space-16 space-0">
                       {section.icons.map((icon) => {
-                        // eslint-disable-next-line import/namespace
+                        // biome-ignore lint/performance/noDynamicNamespaceImportAccess: We do not know which icon will be rendered at build time
                         const T = Icons[`${icon.id}Icon`];
                         if (T === undefined) {
                           return null;

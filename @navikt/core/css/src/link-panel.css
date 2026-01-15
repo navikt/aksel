@@ -1,0 +1,37 @@
+.aksel-link-panel {
+  text-decoration: none;
+  color: var(--ax-text-neutral);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ax-space-16);
+
+  &:hover {
+    border-color: var(--ax-border-accent);
+
+    & .aksel-link-panel__title {
+      text-decoration: underline;
+      color: var(--ax-text-accent-subtle);
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.aksel-link-panel__chevron {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  transition: transform 200ms;
+}
+
+.aksel-link-panel:hover > .aksel-link-panel__chevron,
+.aksel-link-panel:focus-within > .aksel-link-panel__chevron {
+  transform: translateX(4px);
+}
+
+.aksel-link-panel__description {
+  margin-top: var(--ax-space-4);
+}

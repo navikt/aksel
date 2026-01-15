@@ -22,5 +22,5 @@ export type TypoProps = {
   /**
    * Adjusts color.
    */
-  textColor?: "default" | "subtle";
+  textColor?: "default" | "subtle" | "contrast";
 };

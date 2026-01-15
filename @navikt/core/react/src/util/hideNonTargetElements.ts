@@ -169,11 +169,11 @@ function hideNonTargetElements(avoidElements: Element[]): UndoFn {
    * Assume that elements with `aria-live` or `script` tags should not be hidden.
    * This ensures that live regions and scripts continue to function properly.
    */
-  const ingoredElements = Array.from(
+  const ignoredElements = Array.from(
     body.querySelectorAll("[aria-live], script"),
   );
 
-  return applyAttributeToOthers(avoidElements.concat(ingoredElements), body);
+  return applyAttributeToOthers(avoidElements.concat(ignoredElements), body);
 }
 
 export { hideNonTargetElements };

@@ -35,14 +35,14 @@ const GITHUB_CONFIG = {
 
 function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
   const pack = data?.kodepakker?.[0];
-  const gitConfig = pack ? GITHUB_CONFIG[pack] ?? null : null;
+  const gitConfig = pack ? (GITHUB_CONFIG[pack] ?? null) : null;
 
   if (!(gitConfig || data?.figma_link)) {
     return null;
   }
 
   return (
-    <HStack gap="space-16" align="center" marginBlock="space-16 0">
+    <HStack gap="space-16" align="center" marginBlock="space-16 space-0">
       {gitConfig && (
         <Link
           target="_blank"
@@ -54,7 +54,7 @@ function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
               url: gitConfig.git,
             })
           }
-          variant="subtle"
+          data-color="neutral"
         >
           <GithubIcon /> Github
         </Link>
@@ -70,14 +70,14 @@ function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERYResult }) {
               url: data.figma_link ?? "",
             })
           }
-          variant="subtle"
+          data-color="neutral"
         >
           <FigmaIcon /> Figma
         </Link>
       )}
       <Link
         href="/grunnleggende/endringslogg"
-        variant="subtle"
+        data-color="neutral"
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "komponent-header",

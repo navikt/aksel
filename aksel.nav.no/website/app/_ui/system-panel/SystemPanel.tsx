@@ -3,12 +3,16 @@ import {
   SparklesIcon,
   TestFlaskIcon,
 } from "@navikt/aksel-icons";
-import { BodyLong, Heading } from "@navikt/ds-react";
+import { BodyLong, InfoCard } from "@navikt/ds-react";
+import {
+  InfoCardContent,
+  InfoCardHeader,
+  InfoCardTitle,
+} from "@navikt/ds-react/InfoCard";
 import {
   SystemPanelAction,
   SystemPanelOutdatedAction,
 } from "./SystemPanel.action";
-import styles from "./SystemPanel.module.css";
 
 type SystemPanelProps = {
   variant: "outdated" | "beta" | "new";
@@ -57,13 +61,15 @@ function SystemPanel(props: SystemPanelProps) {
   const config = VariantConfig[variant];
 
   return (
-    <div
+    <InfoCard
       data-block-margin="space-28"
-      className={styles.systemPanel}
       data-color={config.colorRole}
+      as="section"
+      aria-label="Beta"
     >
-      <div className={styles.systemPanelContent}>
-        <SystemPanelHeader variant={variant} />
+      <SystemPanelHeader variant={variant} />
+
+      <InfoCardContent>
         <BodyLong data-text-prose>
           {unsafeBeta ? unsafeDescription : config.description}
         </BodyLong>
@@ -72,8 +78,8 @@ function SystemPanel(props: SystemPanelProps) {
         ) : (
           <SystemPanelAction />
         )}
-      </div>
-    </div>
+      </InfoCardContent>
+    </InfoCard>
   );
 }
 
@@ -81,12 +87,9 @@ function SystemPanelHeader({ variant }: Pick<SystemPanelProps, "variant">) {
   const config = VariantConfig[variant];
 
   return (
-    <div className={styles.systemPanelHeader} data-variant={variant}>
-      {config.icon}
-      <Heading level="2" size="small">
-        {config.heading}
-      </Heading>
-    </div>
+    <InfoCardHeader icon={config.icon}>
+      <InfoCardTitle>{config.heading}</InfoCardTitle>
+    </InfoCardHeader>
   );
 }
 

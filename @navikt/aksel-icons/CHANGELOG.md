@@ -1,5 +1,53 @@
 # @navikt/aksel-icons
 
+## 8.0.0
+
+## 7.40.0
+
+### Minor Changes
+
+- Icons: New icon MagnifyingGlassCheckmark ([#4489](https://github.com/navikt/aksel/pull/4489))
+
+## 7.39.1
+
+## 7.39.0
+
+## 7.38.0
+
+## 7.37.0
+
+## 7.36.0
+
+### Patch Changes
+
+- Icons: Removed 'updated_at'-field from AkselIcon-type. ([#4399](https://github.com/navikt/aksel/pull/4399))
+
+## 7.35.3
+
+## 7.35.2
+
+## 7.35.1
+
+## 7.35.0
+
+## 7.34.0
+
+### Minor Changes
+
+- Icons: :tada: New icons `PhoneSlash` and `BellSlash`. ([#4310](https://github.com/navikt/aksel/pull/4310))
+
+## 7.33.5
+
+## 7.33.4
+
+## 7.33.3
+
+## 7.33.2
+
+## 7.33.1
+
+## 7.33.0
+
 ## 7.32.5
 
 ## 7.32.4

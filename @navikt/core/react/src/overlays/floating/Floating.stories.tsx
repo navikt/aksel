@@ -42,7 +42,7 @@ export const WithPortal = () => {
         </Floating.Anchor>
 
         {open && (
-          <Portal asChild>
+          <Portal>
             <Floating.Content
               className="content"
               sideOffset={5}
@@ -101,25 +101,25 @@ export const PropsCheck = () => {
   return (
     <div style={{ paddingBottom: 500 }}>
       <style>{`
-      .anchor-small{
+      .anchor-small {
         background: red;
         width: 40px;
         height: 40px;
       }
 
       .content-small {
-        transform-origin: var(--ac-floating-transform-origin);
-        background-color: var(--a-gray-100);
-        border-radius: var(--a-border-radius-large);
+        transform-origin: var(--__axc-floating-transform-origin);
+        background-color: var(--ax-bg-neutral-moderate);
+        border-radius: var(--ax-radius-8);
         width: 100px;
         height: 50px;
         display: grid;
         place-content: center;
       }
 
-      .arrow{
+      .arrow {
         background: transparent;
-        fill: var(--a-gray-100);
+        fill: var(--ax-bg-neutral-moderate);
       }
       `}</style>
       <header
@@ -152,7 +152,7 @@ export const PropsCheck = () => {
 
         <Floating>
           <Floating.Anchor className="anchor-small">2</Floating.Anchor>
-          <Portal asChild>
+          <Portal>
             <Floating.Content
               className="content-small"
               sideOffset={5}
@@ -188,7 +188,7 @@ export const PropsCheck = () => {
 
         <Floating>
           <Floating.Anchor className="anchor-small">4</Floating.Anchor>
-          <Portal asChild>
+          <Portal>
             <Floating.Content
               className="content-small"
               sideOffset={5}
@@ -225,7 +225,7 @@ export const PropsCheck = () => {
 
         <Floating>
           <Floating.Anchor className="anchor-small">6</Floating.Anchor>
-          <Portal asChild>
+          <Portal>
             <Floating.Content
               className="content-small"
               sideOffset={5}
@@ -262,7 +262,7 @@ export const PropsCheck = () => {
 
         <Floating>
           <Floating.Anchor className="anchor-small">8</Floating.Anchor>
-          <Portal asChild>
+          <Portal>
             <Floating.Content
               className="content-small"
               sideOffset={5}
@@ -317,7 +317,7 @@ export const PropsCheck = () => {
                     <Floating.Anchor className="anchor-small">
                       10.{i + 1}
                     </Floating.Anchor>
-                    <Portal asChild>
+                    <Portal>
                       <Floating.Content
                         className="content-small"
                         sideOffset={5}
@@ -379,7 +379,7 @@ export const PropsCheck = () => {
                     <Floating.Anchor className="anchor-small">
                       10.{i + 1}
                     </Floating.Anchor>
-                    <Portal asChild>
+                    <Portal>
                       <Floating.Content
                         className="content-small"
                         sideOffset={5}
@@ -414,25 +414,25 @@ function Scrollable(props: any) {
       {...props}
     >
       <style>{`
-      .anchor{
+      .anchor {
         background: red;
         width: 100px;
         height: 100px;
       }
 
       .content {
-        transform-origin: var(--ac-floating-transform-origin);
-        background-color: var(--a-gray-100);
-        border-radius: var(--a-border-radius-large);
+        transform-origin: var(--__axc-floating-transform-origin);
+        background-color: var(--ax-bg-neutral-moderate);
+        border-radius: var(--ax-radius-8);
         width: 300px;
         height: 150px;
         display: grid;
         place-content: center;
       }
 
-      .arrow{
+      .arrow {
         background: transparent;
-        fill: var(--a-gray-100);
+        fill: var(--ax-bg-neutral-moderate);
       }
       `}</style>
       {props?.children}

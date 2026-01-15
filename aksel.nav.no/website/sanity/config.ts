@@ -58,9 +58,9 @@ export const grunnleggendeKategorier = [
   { title: "Introduksjon", value: "introduksjon" },
   { title: "Brand", value: "brand" },
   { title: "Styling", value: "styling" },
-  { title: "Darkside", value: "darkside" },
   { title: "Guider", value: "guider" },
   { title: "Kode", value: "kode" },
+  { title: "Migreringsguider", value: "migreringsguider" },
 ] as const;
 
 export const templatesKategorier = [

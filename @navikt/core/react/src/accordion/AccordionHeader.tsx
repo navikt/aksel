@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { useRenameCSS } from "../theme/Theme";
 import { Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { AccordionContext } from "./AccordionContext";
@@ -19,7 +19,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     const itemContext = useContext(AccordionItemContext);
     const accordionContext = useContext(AccordionContext);
 
-    const themeContext = useThemeInternal(false);
     const { cn } = useRenameCSS();
 
     if (itemContext === null) {
@@ -29,16 +28,12 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
       return null;
     }
 
-    let headingSize = accordionContext?.headingSize ?? "small";
-
-    if (themeContext?.isDarkside) {
-      /* Fallback to "medium" Accordion-size if any other sizes are used */
-      headingSize = accordionContext?.size === "large" ? "small" : "xsmall";
-    }
-
     return (
       <button
         ref={ref}
+        data-color={
+          accordionContext?.variant === "neutral" ? "neutral" : undefined
+        }
         {...rest}
         className={cn("navds-accordion__header", className)}
         onClick={composeEventHandlers(onClick, itemContext.toggleOpen)}
@@ -52,9 +47,8 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
           />
         </span>
         <Heading
-          size={headingSize}
+          size={accordionContext?.size === "large" ? "small" : "xsmall"}
           as="span"
-          className={cn("navds-accordion__header-content")}
         >
           {children}
         </Heading>

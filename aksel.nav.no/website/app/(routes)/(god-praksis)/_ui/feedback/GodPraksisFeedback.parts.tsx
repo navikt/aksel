@@ -38,9 +38,9 @@ function GodPraksisFeedbackLogin() {
       </Box>
       <Button
         as="a"
-        href={`/oauth2/login?redirect=${pathname?.split(
-          "#",
-        )[0]}${encodeURIComponent("#scrollToFeedback")}`}
+        href={`/oauth2/login?redirect=${
+          pathname?.split("#")[0]
+        }${encodeURIComponent("#scrollToFeedback")}`}
         data-color="brand-blue"
       >
         Logg inn med Nav SSO
@@ -193,15 +193,14 @@ function GodPraksisFeedbackForm({
           folka som har lagd artikkelen 🙌
         </BodyLong>
       </Box>
-      <HStack gap="space-8" paddingBlock="0 space-24">
+      <HStack gap="space-8" paddingBlock="space-0 space-24">
         <PersonIcon aria-hidden fontSize="1.5rem" />
         <BodyShort>{name}</BodyShort>
 
-        <Link variant="subtle" href={`/oauth2/logout?redirect=${pathname}`}>
+        <Link data-color="neutral" href={`/oauth2/logout?redirect=${pathname}`}>
           (logg ut)
         </Link>
       </HStack>
-
       <form onSubmit={handleSubmit}>
         <Textarea
           name="feedback"
@@ -219,7 +218,7 @@ function GodPraksisFeedbackForm({
             });
           }}
         />
-        <Box marginBlock="space-16 0" asChild>
+        <Box marginBlock="space-16 space-0" asChild>
           <Button type="submit" data-color="brand-blue" disabled={isPending}>
             Send inn
           </Button>

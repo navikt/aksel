@@ -10,22 +10,10 @@ export function helpCommand() {
    )}
 
 💻 Commands:
-   - ${chalk.cyan(`npx @navikt/aksel ${chalk.green("css-imports")}`)}
-   ✔︎ Helps with CSS imports for all Aksel components
-   ✔︎ Supports Static and CDN-imports
-   ✔︎ Handles cascading, tailwind and @layer rules
-
    - ${chalk.cyan(
      `npx @navikt/aksel ${chalk.green("codemod")} ${chalk.gray("<migration>")}`,
    )}
    ✔︎ Code-transformations for breaking changes when updating Aksel
-   ✔︎ Run with ${chalk.cyan(`${chalk.green("--help")}`)} to get started!
-
-   - ${chalk.cyan(
-     `npx @navikt/aksel ${chalk.green("darkside")} ${chalk.gray("<task>")}`,
-   )}
-   ✔︎ Tooling for migrating to the darkside
-   ✔︎ Check current status and migrate tokens
    ✔︎ Run with ${chalk.cyan(`${chalk.green("--help")}`)} to get started!
 `);
 }

@@ -5,28 +5,18 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeftIcon, ChevronDownIcon } from "@navikt/aksel-icons";
 import { HGrid, VStack } from "@navikt/ds-react";
-import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
 import styles from "./MobileNav.module.css";
 
 function MobileNavMenu({ children }: { children: React.ReactNode }) {
-  const { focusRef } = useMobileNav();
   const pathName = usePathname();
   const [open, setOpen] = useState(pathName?.startsWith("/designsystemet"));
 
-  const handleOpenToggle = (toState?: boolean) => {
-    setOpen(toState);
-
-    queueMicrotask(() => {
-      focusRef.current?.focus();
-    });
-  };
-
   return open ? (
-    <DesignsystemView toggleClose={() => handleOpenToggle(false)}>
+    <DesignsystemView toggleClose={() => setOpen(false)}>
       {children}
     </DesignsystemView>
   ) : (
-    <InitialView toggleOpen={() => handleOpenToggle(true)} />
+    <InitialView toggleOpen={() => setOpen(true)} />
   );
 }
 

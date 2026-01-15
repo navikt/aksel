@@ -18,7 +18,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
       themes={colorThemes}
       disableTransitionOnChange
     >
-      <Theme>{children}</Theme>
+      <Theme hasBackground>{children}</Theme>
     </NextThemeProvider>
   );
 }

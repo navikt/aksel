@@ -1,8 +1,9 @@
 import React, { forwardRef, useCallback, useEffect, useRef } from "react";
 import { Slot } from "../../../slot/Slot";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
-import { useCallbackRef, useMergeRefs } from "../../../util/hooks";
+import { useMergeRefs } from "../../../util/hooks";
 import { DescendantsManager } from "../../../util/hooks/descendants/descendant";
+import { useEventCallback } from "../../../util/hooks/useEventCallback";
 import { ownerDocument } from "../../../util/owner";
 
 interface RovingFocusProps
@@ -32,7 +33,7 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
     const _ref = React.useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(ref, _ref);
 
-    const handleEntryFocus = useCallbackRef(onEntryFocus);
+    const handleEntryFocus = useEventCallback(onEntryFocus);
     const isMouseFocusRef = useRef(false);
 
     useEffect(() => {

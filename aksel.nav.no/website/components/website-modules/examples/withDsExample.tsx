@@ -1,8 +1,14 @@
+"use client";
+
 import cl from "clsx";
-import { useTheme } from "next-themes";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
-import { ComponentType, useSyncExternalStore } from "react";
+import {
+  ComponentType,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import {
   LaptopIcon,
   MobileIcon,
@@ -10,7 +16,7 @@ import {
   MonitorIcon,
   TabletIcon,
 } from "@navikt/aksel-icons";
-import { Theme as AkselTheme, BodyShort, Box, HStack } from "@navikt/ds-react";
+import { BodyShort, Box, HStack } from "@navikt/ds-react";
 import styles from "./examples.module.css";
 import { ExampleThemingSwitch } from "./withDsExample.theme";
 
@@ -23,32 +29,29 @@ type withDsT = {
    */
   variant?: "full" | "static" | "static-full" | "fullscreen";
   background?: "inverted" | "subtle";
+  minHeight?: string;
   showBreakpoints?: boolean;
-  /**
-   * Hides theme switch, makes sure to not use `AkselTheme` wrapper and forces light-mode.
-   */
-  legacyOnly?: boolean;
 };
 
 export const withDsExample = (
   Component: ComponentType,
-  { variant, background, showBreakpoints, legacyOnly = false }: withDsT = {},
+  { variant, background, minHeight, showBreakpoints }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
-    const { theme } = useTheme();
     const pathname = usePathname() || "///";
     const pathParts = pathname.split("/");
 
-    const Wrapper =
-      legacyOnly || theme === "legacy"
-        ? "div"
-        : (_props: any) => <AkselTheme {..._props} hasBackground={false} />;
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+      setMounted(true);
+    }, []);
+    if (!mounted) {
+      return null;
+    }
 
     return (
-      <Wrapper
+      <div
         className={cl(styles.container, {
-          /* Overrides global theme when showing legacy-examples */
-          light: legacyOnly,
           [styles.containerDefault]: !variant,
           [styles.containerStatic]: variant === "static",
           [styles.containerFull]: variant === "full",
@@ -64,15 +67,16 @@ export const withDsExample = (
             } - aksel.nav.no`}
           </title>
         </Head>
-        <ExampleThemingSwitch legacyOnly={legacyOnly} />
+        <ExampleThemingSwitch />
         {showBreakpoints && <BreakpointText />}
         <main
           id="ds-example"
           className={variant === "static" ? styles.exampleStatic : undefined}
+          style={{ minHeight }}
         >
           <Component {...props} />
         </main>
-      </Wrapper>
+      </div>
     );
   };
 
@@ -88,7 +92,7 @@ function getBg(background: withDsT["background"]): string {
     case "inverted":
       return "var(--ax-neutral-1000)";
     case "subtle":
-      return "var(--a-bg-neutral-soft)";
+      return "var(--ax-bg-neutral-soft)";
 
     default:
       return "var(--ax-bg-default)";
@@ -125,9 +129,9 @@ const BreakpointText = () => {
     <Box
       asChild
       position="absolute"
-      left="0"
-      top="0"
-      borderRadius="0 0 medium 0"
+      left="space-0"
+      top="space-0"
+      borderRadius="0 0 4 0"
       padding="space-4"
     >
       <HStack

@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <DemoWrapper>
       <Bleed marginInline="space-40" asChild>
-        <Box padding="space-12" background="surface-alt-3-subtle">
+        <Box padding="space-12" background="neutral-moderate">
           <HStack justify="center">Med asChild</HStack>
         </Box>
       </Bleed>
@@ -15,8 +15,8 @@ const Example = () => {
 
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <Box background="surface-alt-3" padding="space-20" borderRadius="large">
-      <Box background="surface-subtle" padding="space-20" borderRadius="medium">
+    <Box background="neutral-strong" padding="space-20" borderRadius="8">
+      <Box background="default" padding="space-20" borderRadius="4">
         {children}
       </Box>
     </Box>
@@ -24,7 +24,7 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { legacyOnly: true });
+export default withDsExample(Example);
 
 /* Storybook story */
 export const Demo = {

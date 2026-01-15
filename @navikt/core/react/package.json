@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "7.32.5",
+  "version": "8.0.0",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -15,6 +15,10 @@
     "url": "git+https://github.com/navikt/aksel.git",
     "directory": "@navikt/core/react"
   },
+  "bugs": {
+    "url": "https://github.com/navikt/aksel/issues"
+  },
+  "homepage": "https://aksel.nav.no/designsystemet/",
   "sideEffects": false,
   "typings": "./esm/index.d.ts",
   "publishConfig": {
@@ -26,7 +30,8 @@
     "/esm",
     "/src",
     "!**/*.tsbuildinfo",
-    "!**/*.stories.*"
+    "!**/*.stories.*",
+    "!**/renderStoriesForChromatic.tsx"
   ],
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -624,6 +629,56 @@
         "default": "./cjs/form/form-progress/index.js"
       }
     },
+    "./InlineMessage": {
+      "import": {
+        "types": "./esm/inline-message/index.d.ts",
+        "default": "./esm/inline-message/index.js"
+      },
+      "require": {
+        "types": "./cjs/inline-message/index.d.ts",
+        "default": "./cjs/inline-message/index.js"
+      }
+    },
+    "./GlobalAlert": {
+      "import": {
+        "types": "./esm/alert/global-alert/index.d.ts",
+        "default": "./esm/alert/global-alert/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/global-alert/index.d.ts",
+        "default": "./cjs/alert/global-alert/index.js"
+      }
+    },
+    "./InfoCard": {
+      "import": {
+        "types": "./esm/alert/info-card/index.d.ts",
+        "default": "./esm/alert/info-card/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/info-card/index.d.ts",
+        "default": "./cjs/alert/info-card/index.js"
+      }
+    },
+    "./LocalAlert": {
+      "import": {
+        "types": "./esm/alert/local-alert/index.d.ts",
+        "default": "./esm/alert/local-alert/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/local-alert/index.d.ts",
+        "default": "./cjs/alert/local-alert/index.js"
+      }
+    },
+    "./Dialog": {
+      "import": {
+        "types": "./esm/dialog/index.d.ts",
+        "default": "./esm/dialog/index.js"
+      },
+      "require": {
+        "types": "./cjs/dialog/index.d.ts",
+        "default": "./cjs/dialog/index.js"
+      }
+    },
     "./package.json": "./package.json",
     "./Theme": {
       "import": {
@@ -650,8 +705,8 @@
   "dependencies": {
     "@floating-ui/react": "0.27.8",
     "@floating-ui/react-dom": "^2.1.6",
-    "@navikt/aksel-icons": "^7.32.5",
-    "@navikt/ds-tokens": "^7.32.5",
+    "@navikt/aksel-icons": "^8.0.0",
+    "@navikt/ds-tokens": "^8.0.0",
     "clsx": "^2.1.0",
     "date-fns": "^4.0.0",
     "react-day-picker": "9.7.0"
@@ -663,13 +718,13 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/jscodeshift": "^0.11.11",
     "aksel": "workspace:^",
-    "concurrently": "9.0.1",
+    "concurrently": "9.2.1",
     "copyfiles": "^2.4.1",
     "fast-glob": "3.2.11",
-    "jscodeshift": "^0.15.1",
-    "jsdom": "27.0.1",
+    "jscodeshift": "0.15.2",
+    "jsdom": "27.1.0",
     "react-dom": "^18.0.0",
-    "react-router": "^7.6.2",
+    "react-router": "^7.12.0",
     "rimraf": "6.0.1",
     "swr": "^2.3.6",
     "tsc-alias": "1.8.16",
@@ -678,8 +733,9 @@
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "@types/react": ">=17.0.30",
-    "react": ">=17.0.0 || >19.0.0-rc"
+    "@types/react": "^17.0.30 || ^18 || ^19",
+    "react": "^17 || ^18 || ^19",
+    "react-dom": "^17 || ^18 || ^19"
   },
   "peerDependenciesMeta": {
     "@types/react": {

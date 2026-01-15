@@ -3,10 +3,11 @@ import React from "react";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
 import { BodyLong, Heading } from "../typography";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import Alert, { AlertProps } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
-  title: "ds-react/Alert",
+  title: "ds-react/Alert/Legacy",
   component: Alert,
   parameters: {
     chromatic: { disable: true },
@@ -48,7 +49,7 @@ export const Controls: Story = {
 
 export const Variants: StoryFn = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant}>
           {new Array(i + 1).fill(
@@ -69,7 +70,7 @@ export const Variants: StoryFn = () => {
 
 export const FullWidth: StoryFn = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert variant="info" fullWidth>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
@@ -89,7 +90,7 @@ export const ContentMaxWidthOff: StoryFn = () => (
 
 export const Inline: StoryFn = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert variant="info" inline>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
@@ -114,7 +115,7 @@ export const Inline: StoryFn = () => {
 
 export const WithHeading: StoryFn = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert variant="info">
         <Heading spacing size="small" level="3">
           Aliquip duis est in commodo pariatur
@@ -141,7 +142,7 @@ export const WithHeading: StoryFn = () => {
 
 export const CloseButton: StoryFn = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Alert variant="info" closeButton>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
@@ -180,38 +181,22 @@ export const CloseButton: StoryFn = () => {
   );
 };
 
-export const Chromatic: Story = {
-  render: () => (
-    <div>
-      <h2>Variants</h2>
-      <Variants />
+export const Links: StoryFn = () => (
+  <VStack gap="space-8">
+    {variants.map((variant) => (
+      <Alert key={variant} variant={variant}>
+        <Link href="#">Id elit esse enim reprehenderit</Link>
+      </Alert>
+    ))}
+  </VStack>
+);
 
-      <h2>FullWidth</h2>
-      <FullWidth />
-
-      <h2>ContentMaxWidthOff</h2>
-      <ContentMaxWidthOff />
-
-      <h2>Inline</h2>
-      <Inline />
-
-      <h2>Heading</h2>
-      <WithHeading />
-
-      <h2>CloseButton</h2>
-      <CloseButton />
-
-      <h2>Links</h2>
-      <VStack gap="2">
-        {variants.map((variant) => (
-          <Alert key={variant} variant={variant}>
-            <Link href="#">Id elit esse enim reprehenderit</Link>
-          </Alert>
-        ))}
-      </VStack>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Variants,
+  FullWidth,
+  ContentMaxWidthOff,
+  Inline,
+  WithHeading,
+  CloseButton,
+  Links,
+});

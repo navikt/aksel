@@ -2,7 +2,7 @@ import { TextField } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  return <TextField label="Har du noen tilbakemeldinger?" size="small" />;
+  return <TextField label="Navn" size="small" />;
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE

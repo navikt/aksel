@@ -30,9 +30,13 @@ function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block width="text" gutters>
-        <VStack as="main" gap="8" data-aksel-template="form-intropage-v3">
-          <VStack gap="3">
-            <Bleed asChild marginInline={{ lg: "32" }}>
+        <VStack
+          as="main"
+          gap="space-32"
+          data-aksel-template="form-intropage-v4"
+        >
+          <VStack gap="space-12">
+            <Bleed asChild marginInline={{ lg: "space-128" }}>
               <Box
                 width={{ xs: "64px", lg: "96px" }}
                 height={{ xs: "64px", lg: "96px" }}
@@ -138,7 +142,7 @@ function Example() {
                 Les mer om viktigheten av å gi riktige opplysninger.
               </Link>
             </BodyLong>
-            <Box paddingBlock="4 8">
+            <Box paddingBlock="space-16 space-32">
               <Checkbox>
                 Jeg bekrefter at jeg vil svare så riktig som jeg kan.
               </Checkbox>

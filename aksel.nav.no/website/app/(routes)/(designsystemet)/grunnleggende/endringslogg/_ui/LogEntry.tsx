@@ -112,7 +112,9 @@ export default function LogEntry({
                 className={!fremhevet ? styles.entryEyebrowNotFremhevet : ""}
               >
                 {capitalizeText(endringstype || "")}
-                <span className="sr-only">.&nbsp;</span>
+                <BodyShort as="span" visuallyHidden>
+                  .&nbsp;
+                </BodyShort>
                 <span aria-hidden>•</span>
                 <span>
                   {format(new Date(endringsdato || 0), "d. MMMM yyy", {
@@ -122,11 +124,7 @@ export default function LogEntry({
               </BodyShort>
             </HStack>
             {fremhevet && (
-              <Tag
-                size="xsmall"
-                variant="neutral-filled"
-                data-color="aksel-brand-pink"
-              >
+              <Tag size="xsmall" variant="strong" data-color="aksel-brand-pink">
                 Fremhevet
               </Tag>
             )}
@@ -144,9 +142,6 @@ export default function LogEntry({
                     <Link
                       as={NextLink}
                       href={`./endringslogg/${slug}`}
-                      className={
-                        fremhevet ? styles.innholdFremhevet : undefined
-                      }
                       data-color="neutral"
                     >
                       {heading}
@@ -160,11 +155,8 @@ export default function LogEntry({
                     <Hero herobilde={herobilde} />
                   )}
                   <CustomPortableText
-                    className={cl(
-                      fremhevet ? styles.innholdFremhevet : undefined,
-                      styles.portableTextFirstHeading,
-                    )}
-                    data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
+                    className={cl(styles.portableTextFirstHeading)}
+                    data-color={fremhevet ? "aksel-brand-pink" : "accent"}
                     value={content as PortableTextBlock[]}
                   />
                 </ShowMore.Content>
@@ -183,7 +175,6 @@ export default function LogEntry({
                   <Link
                     as={NextLink}
                     href={`./endringslogg/${slug}`}
-                    className={fremhevet ? styles.innholdFremhevet : undefined}
                     data-color="neutral"
                   >
                     {heading}
@@ -193,11 +184,8 @@ export default function LogEntry({
                   <Hero herobilde={herobilde} />
                 )}
                 <CustomPortableText
-                  className={cl(
-                    fremhevet ? styles.innholdFremhevet : undefined,
-                    styles.portableTextFirstHeading,
-                  )}
-                  data-color={fremhevet ? "aksel-brand-pink" : undefined}
+                  data-color={fremhevet ? "aksel-brand-pink" : "accent"}
+                  className={cl(styles.portableTextFirstHeading)}
                   value={content as PortableTextBlock[]}
                 />
               </>

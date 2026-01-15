@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import type { AkselColor } from "../../types";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import type { TimelineComponentTypes } from "../utils/types.internal";
@@ -24,6 +25,13 @@ export interface TimelinePeriodProps
    * @default "neutral"
    */
   status?: "success" | "warning" | "danger" | "info" | "neutral";
+  /**
+   * Overrides color set by status.
+   *
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
   /**
    * Status label for screen-readers
    * e.g "Sykemeldt", "foreldrepermisjon"
@@ -68,8 +76,9 @@ export const Period = forwardRef<HTMLDivElement, TimelinePeriodProps>(
     const period = periods.find((p) => p.id === periodId);
 
     if (!period) {
-      return <></>;
+      return null;
     }
+
     const {
       start,
       endInclusive,

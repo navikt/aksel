@@ -6,11 +6,16 @@ import {
 import styles from "./Typography.module.css";
 
 type ListProps = Pick<AkselListProps, "as" | "children"> &
-  React.HTMLAttributes<HTMLDivElement>;
+  Omit<React.HTMLAttributes<HTMLDivElement>, "title">;
 
 function WebsiteList({ children, as = "ul", ...restProps }: ListProps) {
   return (
-    <AkselList {...restProps} className={styles.typoList} as={as}>
+    <AkselList
+      {...restProps}
+      className={styles.typoList}
+      as={as}
+      data-color="neutral"
+    >
       {children}
     </AkselList>
   );
@@ -34,6 +39,7 @@ function WebsiteListItem({ children, icon = false }: ListItemProps) {
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
             className={styles.typoListIcon}
+            data-color="brand-blue"
           >
             <rect width="24" height="24" rx="6" />
           </svg>

@@ -8,9 +8,10 @@ const MAX_AVATAR_COUNT = 30;
 
 export const avatarUrl = (avatar_id: string) => {
   let _avatar_id = stegaClean(avatar_id);
-  if (!Number.isNaN(parseInt(_avatar_id))) {
+  if (!Number.isNaN(parseInt(_avatar_id, 10))) {
     _avatar_id =
-      `${parseInt(_avatar_id) % MAX_AVATAR_COUNT}`.padStart(3, "0") ?? "broken";
+      `${parseInt(_avatar_id, 10) % MAX_AVATAR_COUNT}`.padStart(3, "0") ??
+      "broken";
   }
   return `/avatars/${_avatar_id}.svg`;
 };
@@ -53,12 +54,20 @@ export const Avatar = ({
       />
       {showName && (
         <VStack align="start">
-          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BoxNew
+            asChild
+            marginBlock="space-1 space-0"
+            marginInline="space-2 space-0"
+          >
             <Detail as="span" textColor="subtle">
               {type}
             </Detail>
           </BoxNew>
-          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BoxNew
+            asChild
+            marginBlock="space-1 space-0"
+            marginInline="space-2 space-0"
+          >
             <BodyShort
               as="span"
               className={styles.avatarName}
@@ -114,10 +123,18 @@ export const AvatarStack = ({
 
       {showNames && (
         <VStack>
-          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BoxNew
+            asChild
+            marginBlock="space-1 space-0"
+            marginInline="space-2 space-0"
+          >
             <Detail textColor="subtle">{firstAvatar.props.type}</Detail>
           </BoxNew>
-          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BoxNew
+            asChild
+            marginBlock="space-1 space-0"
+            marginInline="space-2 space-0"
+          >
             <BodyShort className={styles.avatarName}>
               {`${firstAvatar.props.name}`}
               {suffix && (

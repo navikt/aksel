@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { VStack } from "../../layout/stack";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import TextField from "../textfield/TextField";
 import { Fieldset } from "./index";
 
@@ -109,49 +109,21 @@ export const HideLegend: Story = {
   },
 };
 
-export const Chromatic: Story = {
-  render: () => {
-    return (
-      <VStack gap="4">
-        <div>
-          <h2>Default</h2>
-          {/* @ts-expect-error Args are Partial here */}
-          <Fieldset {...Default.args} />
-        </div>
-        <div>
-          <h2>Small</h2>
-          {/* @ts-expect-error Args are Partial here */}
-          <Fieldset {...Small.args} />
-        </div>
-        <div>
-          <h2>ErrorPropagation</h2>
-          {/* @ts-expect-error Args are Partial here */}
-          <Fieldset {...ErrorPropagation.args} />
-        </div>
-        <div>
-          <h2>WithError</h2>
-          {/* @ts-expect-error Args are Partial here */}
-          <Fieldset {...WithError.args} />
-        </div>
-        <div>
-          <h2>WithError small</h2>
-          {/* @ts-expect-error Args are Partial here */}
-          <Fieldset {...WithError.args} size="small" />
-        </div>
-        <div>
-          <h2>Disabled</h2>
-          {/* @ts-expect-error Args are Partial here */}
-          <Fieldset {...Disabled.args} />
-        </div>
-        <div>
-          <h2>HideLegend</h2>
-          {/* @ts-expect-error Args are Partial here */}
-          <Fieldset {...HideLegend.args} />
-        </div>
-      </VStack>
-    );
+export const Chromatic = renderStoriesForChromatic(
+  {
+    Default,
+    Small,
+    ErrorPropagation,
+    WithError,
+    WithErrorSmall: {
+      ...WithError,
+      args: {
+        ...WithError.args,
+        size: "small",
+      },
+    },
+    Disabled,
+    HideLegend,
   },
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+  Fieldset,
+);

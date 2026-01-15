@@ -283,16 +283,6 @@ export const Chromatic = renderStoriesForChromatic({
   ColorRole,
 });
 
-export const ChromaticLight = renderStoriesForChromatic({
-  Group,
-  GroupError,
-  GroupDescription,
-  Readonly,
-  Disabled,
-  ColorRole,
-});
-ChromaticLight.globals = { theme: "light", mode: "darkside" };
-
 export const ChromaticDark = renderStoriesForChromatic({
   Group,
   GroupError,
@@ -301,4 +291,19 @@ export const ChromaticDark = renderStoriesForChromatic({
   Disabled,
   ColorRole,
 });
-ChromaticDark.globals = { theme: "dark", mode: "darkside" };
+ChromaticDark.globals = { theme: "dark" };
+
+export const ChromaticPrint = renderStoriesForChromatic({
+  Group,
+  GroupError,
+  GroupDescription,
+  Readonly,
+  Disabled,
+  ColorRole,
+});
+
+ChromaticPrint.parameters = {
+  chromatic: {
+    media: "print",
+  },
+};

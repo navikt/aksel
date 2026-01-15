@@ -1,17 +1,13 @@
 import React from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS } from "../../theme/Theme";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export type PrimitiveProps = {
   /**
-   * @private Hides prop from documentation
-   */
-  className?: string;
-  /**
    * Padding around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * padding='space-16'
@@ -20,7 +16,7 @@ export type PrimitiveProps = {
   padding?: ResponsiveProp<SpacingScale>;
   /**
    * Horizontal padding around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * paddingInline='space-16'
@@ -32,7 +28,7 @@ export type PrimitiveProps = {
   >;
   /**
    * Vertical padding around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * paddingBlock='space-16'
@@ -44,7 +40,7 @@ export type PrimitiveProps = {
   >;
   /**
    * Margin around element.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * margin='space-16'
@@ -53,7 +49,7 @@ export type PrimitiveProps = {
   margin?: ResponsiveProp<SpacingScale>;
   /**
    * Horizontal margin around element.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * marginInline='space-16'
@@ -69,7 +65,7 @@ export type PrimitiveProps = {
   >;
   /**
    * Vertical margin around element.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * marginBlock='space-16'
@@ -115,7 +111,7 @@ export type PrimitiveProps = {
   >;
   /**
    * CSS `inset`.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * inset='space-16'
@@ -125,7 +121,7 @@ export type PrimitiveProps = {
   inset?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**
    * CSS `top`
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * top='space-16'
@@ -134,7 +130,7 @@ export type PrimitiveProps = {
   top?: ResponsiveProp<SpacingScale>;
   /**
    * CSS `right`
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * right='space-16'
@@ -143,7 +139,7 @@ export type PrimitiveProps = {
   right?: ResponsiveProp<SpacingScale>;
   /**
    * CSS `bottom`
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * bottom='space-16'
@@ -152,7 +148,7 @@ export type PrimitiveProps = {
   bottom?: ResponsiveProp<SpacingScale>;
   /**
    * CSS `left`
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    * @example
    * left='space-16'
@@ -190,7 +186,6 @@ export type PrimitiveProps = {
 };
 
 export const PRIMITIVE_PROPS: (keyof PrimitiveProps)[] = [
-  "className",
   "padding",
   "paddingInline",
   "paddingBlock",
@@ -220,6 +215,10 @@ export const PRIMITIVE_PROPS: (keyof PrimitiveProps)[] = [
 
 interface BasePrimitiveProps extends PrimitiveProps {
   children: React.ReactElement;
+  /**
+   * @private Hides prop from documentation
+   */
+  className?: string;
 }
 
 export const BasePrimitive = ({
@@ -251,43 +250,41 @@ export const BasePrimitive = ({
   flexShrink,
   gridColumn,
 }: BasePrimitiveProps) => {
-  const themeContext = useThemeInternal(false);
   const { cn } = useRenameCSS();
-  const prefix = themeContext?.isDarkside ? "ax" : "a";
 
   const style: React.CSSProperties = {
     /* Padding */
-    ...getResponsiveProps(prefix, "r", "p", "spacing", padding),
-    ...getResponsiveProps(prefix, "r", "pi", "spacing", paddingInline),
-    ...getResponsiveProps(prefix, "r", "pb", "spacing", paddingBlock),
+    ...getResponsiveProps("r", "p", "space", padding),
+    ...getResponsiveProps("r", "pi", "space", paddingInline),
+    ...getResponsiveProps("r", "pb", "space", paddingBlock),
     /* Margin */
-    ...getResponsiveProps(prefix, "r", "m", "spacing", margin),
-    ...getResponsiveProps(prefix, "r", "mi", "spacing", marginInline),
-    ...getResponsiveProps(prefix, "r", "mb", "spacing", marginBlock),
+    ...getResponsiveProps("r", "m", "space", margin),
+    ...getResponsiveProps("r", "mi", "space", marginInline),
+    ...getResponsiveProps("r", "mb", "space", marginBlock),
     /* Width & height */
-    ...getResponsiveValue(prefix, "r", "w", width),
-    ...getResponsiveValue(prefix, "r", "minw", minWidth),
-    ...getResponsiveValue(prefix, "r", "maxw", maxWidth),
-    ...getResponsiveValue(prefix, "r", "h", height),
-    ...getResponsiveValue(prefix, "r", "minh", minHeight),
-    ...getResponsiveValue(prefix, "r", "maxh", maxHeight),
+    ...getResponsiveValue("r", "w", width),
+    ...getResponsiveValue("r", "minw", minWidth),
+    ...getResponsiveValue("r", "maxw", maxWidth),
+    ...getResponsiveValue("r", "h", height),
+    ...getResponsiveValue("r", "minh", minHeight),
+    ...getResponsiveValue("r", "maxh", maxHeight),
     /* Positon & inset */
-    ...getResponsiveValue(prefix, "r", "position", position),
-    ...getResponsiveProps(prefix, "r", "inset", "spacing", inset),
-    ...getResponsiveProps(prefix, "r", "top", "spacing", top),
-    ...getResponsiveProps(prefix, "r", "right", "spacing", right),
-    ...getResponsiveProps(prefix, "r", "bottom", "spacing", bottom),
-    ...getResponsiveProps(prefix, "r", "left", "spacing", left),
+    ...getResponsiveValue("r", "position", position),
+    ...getResponsiveProps("r", "inset", "space", inset),
+    ...getResponsiveProps("r", "top", "space", top),
+    ...getResponsiveProps("r", "right", "space", right),
+    ...getResponsiveProps("r", "bottom", "space", bottom),
+    ...getResponsiveProps("r", "left", "space", left),
     /* Overflow */
-    ...getResponsiveValue(prefix, "r", "overflow", overflow),
-    ...getResponsiveValue(prefix, "r", "overflowx", overflowX),
-    ...getResponsiveValue(prefix, "r", "overflowy", overflowY),
+    ...getResponsiveValue("r", "overflow", overflow),
+    ...getResponsiveValue("r", "overflowx", overflowX),
+    ...getResponsiveValue("r", "overflowy", overflowY),
     /* Flex */
-    ...getResponsiveValue(prefix, "r", "flex-basis", flexBasis),
-    ...getResponsiveValue(prefix, "r", "flex-grow", flexGrow),
-    ...getResponsiveValue(prefix, "r", "flex-shrink", flexShrink),
+    ...getResponsiveValue("r", "flex-basis", flexBasis),
+    ...getResponsiveValue("r", "flex-grow", flexGrow),
+    ...getResponsiveValue("r", "flex-shrink", flexShrink),
     /* Grid */
-    ...getResponsiveValue(prefix, "r", "grid-column", gridColumn),
+    ...getResponsiveValue("r", "grid-column", gridColumn),
   };
 
   return (

@@ -1,37 +1,19 @@
-import { Button, HStack, VStack } from "@navikt/ds-react";
+import { Button, HStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="space-24" align="center">
-      <HStack gap="space-8">
-        <Button variant="primary-neutral">Primary</Button>
-        <Button variant="secondary-neutral">Secondary</Button>
-        <Button variant="tertiary-neutral">Tertiary</Button>
-      </HStack>
-      <HStack gap="space-8">
-        <Button variant="primary-neutral" size="small">
-          Primary
-        </Button>
-        <Button variant="secondary-neutral" size="small">
-          Secondary
-        </Button>
-        <Button variant="tertiary-neutral" size="small">
-          Tertiary
-        </Button>
-      </HStack>
-      <HStack gap="space-8">
-        <Button variant="primary-neutral" size="xsmall">
-          Primary
-        </Button>
-        <Button variant="secondary-neutral" size="xsmall">
-          Secondary
-        </Button>
-        <Button variant="tertiary-neutral" size="xsmall">
-          Tertiary
-        </Button>
-      </HStack>
-    </VStack>
+    <HStack gap="space-8">
+      <Button data-color="neutral" variant="primary">
+        Primary
+      </Button>
+      <Button data-color="neutral" variant="secondary">
+        Secondary
+      </Button>
+      <Button data-color="neutral" variant="tertiary">
+        Tertiary
+      </Button>
+    </HStack>
   );
 };
 
@@ -45,4 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "For handlinger som ikke trenger så mye oppmerksomhet, kan du bruke en 'nøytral' knapp.",
 };

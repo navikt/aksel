@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
+import { Box } from "../../layout/box";
 import { VStack } from "../../layout/stack";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import Label from "../Label";
 
 const meta: Meta<typeof Label> = {
@@ -32,7 +34,7 @@ export const Controls: Story = {
     },
     textColor: {
       control: "radio",
-      options: ["default", "subtle"],
+      options: ["default", "subtle", "contrast"],
     },
   },
 };
@@ -91,9 +93,12 @@ export const OverrideTag: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label textColor="default">{lorem}</Label>
       <Label textColor="subtle">{lorem}</Label>
+      <Box background="neutral-strong">
+        <Label textColor="contrast">{lorem}</Label>
+      </Box>
       <Label data-color="brand-magenta">{lorem}</Label>
       <Label data-color="brand-magenta" textColor="default">
         {lorem}
@@ -101,38 +106,20 @@ export const ColorRole: Story = {
       <Label data-color="brand-magenta" textColor="subtle">
         {lorem}
       </Label>
+      <Box background="neutral-strong">
+        <Label data-color="brand-magenta" textColor="contrast">
+          {lorem}
+        </Label>
+      </Box>
     </VStack>
   ),
 };
 
-export const Chromatic: Story = {
-  render: (...props) => (
-    <div>
-      <div>
-        <h2>Medium</h2>
-        <h3>Size</h3>
-        {SizeMedium.render?.(...props)}
-        <h3>Spacing</h3>
-        {SpacingMedium.render?.(...props)}
-      </div>
-      <div>
-        <h2>Small</h2>
-        <h3>Size</h3>
-        {SizeSmall.render?.(...props)}
-        <h3>Spacing</h3>
-        {SpacingSmall.render?.(...props)}
-      </div>
-      <div>
-        <h2>Override Tag</h2>
-        {OverrideTag.render?.(...props)}
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        {ColorRole.render?.(...props)}
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  SizeMedium,
+  SpacingMedium,
+  SizeSmall,
+  SpacingSmall,
+  OverrideTag,
+  ColorRole,
+});

@@ -8,15 +8,11 @@ export default {
     showLess: "Vis mindre",
     readOnly: "Skrivebeskytta",
     close: "Lukk",
-  },
-
-  Alert: {
-    closeAlert: "Lukk varsel",
-    closeMessage: "Lukk melding",
     error: "Feil",
     info: "Informasjon",
     success: "Suksess",
     warning: "Åtvaring",
+    announcement: "Kunngjering",
   },
   Chips: {
     Removable: {
@@ -25,6 +21,7 @@ export default {
   },
   Combobox: {
     addOption: "Legg til",
+    noMatches: "Ingen søketreff",
     loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valt.",
   },

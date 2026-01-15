@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { VStack } from "../layout/stack";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import Loader, { LoaderProps } from "./Loader";
 
 export default {
   title: "ds-react/Loader",
   component: Loader,
   parameters: {
-    chromatic: { disable: false },
+    chromatic: { disable: true },
   },
 } satisfies Meta<typeof Loader>;
 
@@ -99,28 +99,9 @@ export const ColorRole = () => (
   </div>
 );
 
-export const Chromatic: Story = {
-  render: () => (
-    <VStack gap="2">
-      <div>
-        <h2>Size</h2>
-        <Size />
-      </div>
-      <div>
-        <h2>Variant</h2>
-        <Variant />
-      </div>
-      <div>
-        <h2>Transparent</h2>
-        <Transparent />
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole />
-      </div>
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Size,
+  Variant,
+  Transparent,
+  ColorRole,
+});

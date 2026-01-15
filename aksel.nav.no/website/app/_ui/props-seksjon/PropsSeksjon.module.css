@@ -1,12 +1,12 @@
 .propsSeksjon {
   background-color: var(--ax-bg-raised);
   color: var(--ax-text-neutral);
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
 }
 
 .propsSeksjonHeader {
   scroll-margin-block: var(--ax-space-32);
-  border-radius: var(--ax-border-radius-large) var(--ax-border-radius-large) 0 0;
+  border-radius: var(--ax-radius-8) var(--ax-radius-8) 0 0;
   border: 1px solid var(--ax-border-neutral-subtleA);
   border-bottom: none;
   background: var(--ax-bg-neutral-moderateA);
@@ -19,7 +19,7 @@
   border-block-start: none;
 
   &:last-of-type {
-    border-radius: 0 0 var(--ax-border-radius-large) var(--ax-border-radius-large);
+    border-radius: 0 0 var(--ax-radius-8) var(--ax-radius-8);
   }
 }
 

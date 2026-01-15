@@ -9,7 +9,7 @@ import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { Slot } from "../../slot/Slot";
 import { useRenameCSS } from "../../theme/Theme";
 import { composeEventHandlers } from "../composeEventHandlers";
-import { createContext } from "../create-context";
+import { createStrictContext } from "../create-strict-context";
 import { useMergeRefs } from "../hooks/useMergeRefs";
 import { ownerWindow } from "../owner";
 import { AsChildProps } from "../types";
@@ -18,10 +18,12 @@ type LinkAnchorOverlayContextProps = {
   anchorRef: React.RefObject<HTMLAnchorElement | null>;
 };
 
-const [LinkAnchorContextProvider, useLinkAnchorContext] =
-  createContext<LinkAnchorOverlayContextProps>({
-    name: "LinkAnchorOverlayContext",
-  });
+const {
+  Provider: LinkAnchorContextProvider,
+  useContext: useLinkAnchorContext,
+} = createStrictContext<LinkAnchorOverlayContextProps>({
+  name: "LinkAnchorOverlayContext",
+});
 
 type LinkAnchorOverlayProps = HTMLAttributes<HTMLDivElement> & AsChildProps;
 

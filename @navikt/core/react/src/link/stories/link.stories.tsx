@@ -1,13 +1,12 @@
 import { Meta } from "@storybook/react-vite";
 import React from "react";
-import { PlusCircleFillIcon } from "@navikt/aksel-icons";
+import { PencilIcon, PlusCircleFillIcon } from "@navikt/aksel-icons";
 import { Alert } from "../../alert";
 import { ConfirmationPanel } from "../../form/confirmation-panel";
 import { Box } from "../../layout/box";
 import { VStack } from "../../layout/stack";
 import { BodyLong } from "../../typography";
 import Link from "../Link";
-import { RandomIcon } from "./RandomIcon";
 
 const meta: Meta<typeof Link> = {
   title: "ds-react/Link",
@@ -31,12 +30,12 @@ const LinkWrapper = ({
     <Link
       href="#"
       underline={underline}
-      variant={variant as "action" | "neutral" | "subtle"}
+      variant={variant as "action" | "neutral"}
       inlineText={inlineText}
     >
-      {iconLeft && <RandomIcon />}
+      {iconLeft && <PencilIcon />}
       {children}
-      {iconRight && <RandomIcon />}
+      {iconRight && <PencilIcon />}
     </Link>{" "}
   </>
 );
@@ -54,8 +53,8 @@ export const Default = {
       return (
         <Box
           borderWidth="1"
-          borderRadius="large"
-          padding="4"
+          borderRadius="8"
+          padding="space-16"
           style={{ maxWidth: "800px" }}
         >
           <BodyLong>
@@ -83,8 +82,8 @@ export const InlineInsideBodyLong = {
     return (
       <Box
         borderWidth="1"
-        borderRadius="large"
-        padding="4"
+        borderRadius="8"
+        padding="space-16"
         style={{ width: "800px" }}
       >
         <style>{`.storybook-custom-spacing { white-space: pre;}`}</style>
@@ -119,28 +118,6 @@ export const InlineInsideBodyLong = {
   },
 };
 
-export const Varianter = {
-  render: ({ iconLeft, iconRight }) => {
-    return (
-      <VStack gap="3">
-        {["action", "neutral", "subtle"].map((variant) => (
-          <div key={variant}>
-            <LinkWrapper
-              iconLeft={iconLeft}
-              iconRight={iconRight}
-              variant={variant}
-            />
-          </div>
-        ))}
-      </VStack>
-    );
-  },
-  args: {
-    iconLeft: false,
-    iconRight: false,
-  },
-};
-
 const LinkWithIcon = () => (
   <Link href="#">
     <PlusCircleFillIcon aria-hidden />
@@ -151,20 +128,10 @@ const LinkWithIcon = () => (
 
 export const Icon = () => <LinkWithIcon />;
 
-const Variants = () => (
-  <VStack gap="3">
-    {["action", "neutral", "subtle"].map((variant) => (
-      <div key={variant}>
-        <LinkWrapper variant={variant} />
-      </div>
-    ))}
-  </VStack>
-);
-
 export const ColorRole = () => (
-  <VStack gap="3" data-color="brand-magenta">
+  <VStack gap="space-12" data-color="brand-magenta">
     <Link href="#">Ex aliqua incididunt</Link>
-    {["action", "neutral", "subtle"].map((variant) => (
+    {["action", "neutral"].map((variant) => (
       <div key={variant}>
         <LinkWrapper variant={variant} underline />
       </div>
@@ -179,9 +146,6 @@ export const Chromatic = () => (
 
     <h2>With icon</h2>
     <LinkWithIcon />
-
-    <h2>Variants (no underline)</h2>
-    <Variants />
 
     <h2>Inline</h2>
     <BodyLong style={{ width: 500 }}>

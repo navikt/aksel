@@ -11,7 +11,7 @@ async function GodPraksisFeedback({ docId }: { docId: string }) {
 
   return (
     <BoxNew
-      borderRadius="large"
+      borderRadius="8"
       borderWidth="1"
       borderColor="neutral-subtleA"
       background="raised"

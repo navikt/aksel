@@ -1,45 +1,47 @@
 #!/usr/bin/env node
 import chalk from "chalk";
-import fs from "node:fs";
+import { Command } from "commander";
 import { codemodCommand } from "./codemod/index";
-import { cssImportsCommand } from "./css-imports/index";
-import { darksideCommand } from "./darkside";
+import { v8TokensCommand } from "./codemod/v8-tokens";
 import { helpCommand } from "./help";
+import { VERSION } from "./version";
 
 run();
 
 async function run() {
-  if (!process.argv[2] || process.argv[2] === "help") {
+  let program = new Command();
+  program.version(VERSION, "-v, --version");
+  program = program
+    .allowUnknownOption()
+    .allowExcessArguments()
+    .helpOption(false);
+
+  program.parse();
+
+  const args = program.args;
+
+  if (args.length === 0 || args[0] === "help") {
     helpCommand();
     return;
   }
 
-  if (process.argv[2] === "css-imports") {
-    await cssImportsCommand();
-    return;
-  }
+  if (args[0] === "codemod") {
+    if (args.includes("v8-tokens")) {
+      v8TokensCommand();
+      return;
+    }
 
-  if (process.argv[2] === "codemod") {
-    codemodCommand();
-    return;
-  }
-
-  if (process.argv[2] === "darkside") {
-    darksideCommand();
-    return;
-  }
-
-  if (process.argv[2] === "-v" || process.argv[2] === "--version") {
-    const pkg = JSON.parse(
-      fs.readFileSync("./package.json").toString(),
-    ).version;
-    console.info(pkg);
+    codemodCommand((migration) => {
+      if (migration === "v8-tokens") {
+        v8TokensCommand();
+      }
+    });
     return;
   }
 
   console.info(
     chalk.red(
-      `Unknown command: ${process.argv[2]}.\nRun ${chalk.cyan(
+      `Unknown command: ${args[0]}.\nRun ${chalk.cyan(
         "npx @navikt/aksel help",
       )} for all available commands.`,
     ),
