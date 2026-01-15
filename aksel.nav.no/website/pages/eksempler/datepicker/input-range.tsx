@@ -15,12 +15,12 @@ const Example = () => {
           <DatePicker.Input
             {...fromInputProps}
             label="Fra"
-            description="Format: dd.mm.yyyy"
+            description="Format: dd.mm.åååå"
           />
           <DatePicker.Input
             {...toInputProps}
             label="Til"
-            description="Format: dd.mm.yyyy"
+            description="Format: dd.mm.åååå"
           />
         </HStack>
       </DatePicker>
