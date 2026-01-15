@@ -116,5 +116,4 @@ export interface DatePickerDefaultProps
    * @default See Popover
    */
   strategy?: "absolute" | "fixed";
-  removeRoleDialog?: boolean;
 }
