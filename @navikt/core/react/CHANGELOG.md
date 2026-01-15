@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 8.0.0
+
+### Major Changes
+
+- New design with theming support - See https://aksel.nav.no/grunnleggende/endringslogg/versjon-8 for more info ([#4283](https://github.com/navikt/aksel/pull/4283))
+
+### Patch Changes
+
+- Updated dependencies [[`5572548`](https://github.com/navikt/aksel/commit/5572548bb582892dadb34a190b9915bca3c4d656)]:
+  - @navikt/ds-tokens@8.0.0
+  - @navikt/aksel-icons@8.0.0
+
 ## 7.40.0
 
 ### Patch Changes
