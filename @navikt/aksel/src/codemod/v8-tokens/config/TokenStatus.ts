@@ -164,21 +164,26 @@ class TokenStatus {
 
   printMigrationHelp() {
     const imports = {
+      css: {
+        new: `@use "@navikt/ds-tokens/css";`,
+        link: "https://cdn.jsdelivr.net/npm/@navikt/ds-tokens@7/dist/tokens.css",
+      },
       scss: {
-        old: `@use '@navikt/ds-tokens/dist/tokens' as *;`,
         new: `@use "@navikt/ds-tokens/scss" as *;`,
+        link: "https://cdn.jsdelivr.net/npm/@navikt/ds-tokens@7/dist/tokens.scss",
       },
       less: {
-        old: `@import "~@navikt/ds-tokens/dist/tokens.less";`,
         new: `@import "~@navikt/ds-tokens/less";`,
+        link: "https://cdn.jsdelivr.net/npm/@navikt/ds-tokens@7/dist/tokens.less",
       },
       js: {
-        old: `import { ... } from "@navikt/ds-tokens/dist/tokens";`,
         new: `import { ... } from "@navikt/ds-tokens/js";`,
+        link: "https://cdn.jsdelivr.net/npm/@navikt/ds-tokens@7/dist/tokens.js",
       },
     } as const;
 
-    for (const key of Object.keys(imports)) {
+    for (const _key of Object.keys(imports)) {
+      const key = _key as keyof typeof imports;
       const data = this.status[key] as StatusDataT;
 
       const legacyNeeded = data.legacy.length > 0;
@@ -190,17 +195,18 @@ class TokenStatus {
 
       console.info(chalk.underline(`\n${key.toUpperCase()} Tokens Migration`));
 
-      const importStrings = imports[key];
-      console.info(
-        `${chalk.blue("→")} Add new import: ${chalk.green(importStrings.new)}`,
-      );
+      const importStrings = imports[key as keyof typeof imports];
+
+      if (key !== "css") {
+        console.info(
+          `${chalk.blue("→")} Update import: ${chalk.green(importStrings.new)}`,
+        );
+      }
 
       if (legacyNeeded) {
         console.info(
-          `${chalk.yellow(
-            "!",
-          )} Keep old import until fully migrated: ${chalk.dim(
-            importStrings.old,
+          `${chalk.yellow("!")} Old tokens still needed until migration is finished. Finish migration now, or add old tokens to project manually:\n${chalk.blueBright(
+            importStrings.link,
           )}`,
         );
       }
