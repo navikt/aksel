@@ -230,17 +230,6 @@ export const Chromatic = renderStoriesForChromatic({
   WrappingTitle,
 });
 
-export const ChromaticLight = renderStoriesForChromatic({
-  Default,
-  LeftAlignContent,
-  SizeSmall,
-  OnlyHeader,
-  Compositions,
-  CloseButton,
-  WrappingTitle,
-});
-ChromaticLight.globals = { theme: "light", mode: "darkside" };
-
 export const ChromaticDark = renderStoriesForChromatic({
   Default,
   LeftAlignContent,
