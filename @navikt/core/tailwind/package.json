@@ -10,12 +10,10 @@
   "license": "MIT",
   "files": [
     "tailwind.config.js",
-    "tailwind.config.d.ts",
-    "tailwind.darkside.config.js"
+    "tailwind.config.d.ts"
   ],
   "scripts": {
-    "build": "tsx ./src && yarn build:darkside",
-    "build:darkside": "tsx darkside.ts",
+    "build": "yarn tsx ./src/build.ts",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -30,8 +28,6 @@
   "homepage": "https://aksel.nav.no/grunnleggende/kode/tailwind/",
   "devDependencies": {
     "@navikt/ds-tokens": "^7.40.0",
-    "color": "5.0.0",
-    "lodash": "4.17.21",
     "tailwindcss": "^3.3.3",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
@@ -52,16 +48,6 @@
       "require": {
         "types": "./tailwind.config.d.ts",
         "default": "./tailwind.config.js"
-      }
-    },
-    "./darkside-tw3": {
-      "import": {
-        "types": "./tailwind.config.d.ts",
-        "default": "./tailwind.darkside.config.js"
-      },
-      "require": {
-        "types": "./tailwind.config.d.ts",
-        "default": "./tailwind.darkside.config.js"
       }
     }
   }

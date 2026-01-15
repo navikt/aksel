@@ -1,13 +1,18 @@
 {
-  "version": 2,
+  "version": 3,
   "changelog": [
     {
-      "description": "Fjernet illustrasjon",
+      "description": "Migrerte til v8 og justerte avstander ([diff](https://github.com/navikt/aksel/pull/4358/files?w=1)).",
+      "date": "15.01.2026",
+      "version": 3
+    },
+    {
+      "description": "Fjernet illustrasjon.",
       "date": "01.12.2023",
       "version": 2
     },
     {
-      "description": "Publiserte varianter med CTA, tilbakemelding og språkvalg",
+      "description": "Publiserte varianter med CTA, tilbakemelding og språkvalg.",
       "date": "03.11.2023",
       "version": 1
     }

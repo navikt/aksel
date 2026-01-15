@@ -37,25 +37,33 @@ type AkselRootBackgroundToken =
   | "sunken"
   | "overlay";
 
+type AkselDynamicStatelessBackgroundToken =
+  | "soft"
+  | "softA"
+  | "moderate"
+  | "moderateA"
+  | "strong";
+
+type AkselDynamicStatefulBackgroundToken =
+  | "moderate-hover"
+  | "moderate-hoverA"
+  | "moderate-pressed"
+  | "moderate-pressedA"
+  | "strong-hover"
+  | "strong-pressed";
+
 type AkselColoredStatelessBackgroundToken =
-  | `${AkselColorRole}-soft`
-  | `${AkselColorRole}-softA`
-  | `${AkselColorRole}-moderate`
-  | `${AkselColorRole}-moderateA`
-  | `${AkselColorRole}-strong`;
+  `${AkselColorRole}-${AkselDynamicStatelessBackgroundToken}`;
 
 type AkselColoredStatefulBackgroundToken =
-  | `${AkselColorRole}-moderate-hover`
-  | `${AkselColorRole}-moderate-hoverA`
-  | `${AkselColorRole}-moderate-pressed`
-  | `${AkselColorRole}-moderate-pressedA`
-  | `${AkselColorRole}-strong-hover`
-  | `${AkselColorRole}-strong-pressed`;
+  `${AkselColorRole}-${AkselDynamicStatefulBackgroundToken}`;
 
 export type {
   AkselRootBackgroundToken,
   AkselColoredStatelessBackgroundToken,
   AkselColoredStatefulBackgroundToken,
+  AkselDynamicStatelessBackgroundToken,
+  AkselDynamicStatefulBackgroundToken,
 };
 
 /* ------------------------------- Text tokens ------------------------------ */
@@ -113,7 +121,7 @@ type AkselShadowToken = "dialog";
 export type { AkselShadowToken };
 
 /* ------------------------------ Border Radius tokens --------------------- */
-type AkselBorderRadiusToken = "2" | "4" | "8" | "12" | "full";
+type AkselBorderRadiusToken = "2" | "4" | "8" | "12" | "16" | "full";
 
 export type { AkselBorderRadiusToken };
 
@@ -132,110 +140,3 @@ type AkselBreakpointToken =
   | "2xl-down";
 
 export type { AkselBreakpointToken };
-
-/* ------------------------------ Legacy tokens ----------------------------- */
-type AkselLegacyBorderRadiusToken =
-  | "small"
-  | "medium"
-  | "large"
-  | "xlarge"
-  | "full";
-
-type AkselLegacyShadowToken =
-  | "xsmall"
-  | "small"
-  | "medium"
-  | "large"
-  | "xlarge";
-
-type AkselLegacyBackgroundColorToken = "bg-default" | "bg-subtle";
-
-type AkselLegacySurfaceColorToken =
-  | "surface-default"
-  | "surface-selected"
-  | "surface-subtle"
-  | "surface-transparent"
-  | "surface-backdrop"
-  | "surface-inverted"
-  | "surface-action-subtle"
-  | "surface-action-selected"
-  | "surface-action"
-  | "surface-neutral-subtle"
-  | "surface-neutral-moderate"
-  | "surface-neutral-selected"
-  | "surface-neutral"
-  | "surface-success-subtle"
-  | "surface-success-moderate"
-  | "surface-success"
-  | "surface-danger-subtle"
-  | "surface-danger-moderate"
-  | "surface-danger"
-  | "surface-warning-subtle"
-  | "surface-warning-moderate"
-  | "surface-warning"
-  | "surface-info-subtle"
-  | "surface-info-moderate"
-  | "surface-info"
-  | "surface-alt-1-subtle"
-  | "surface-alt-1-moderate"
-  | "surface-alt-1"
-  | "surface-alt-2-subtle"
-  | "surface-alt-2-moderate"
-  | "surface-alt-2"
-  | "surface-alt-3-subtle"
-  | "surface-alt-3-moderate"
-  | "surface-alt-3-strong"
-  | "surface-alt-3";
-
-type AkselLegacyBorderColorToken =
-  | "border-default"
-  | "border-strong"
-  | "border-divider"
-  | "border-subtle"
-  | "border-action-selected"
-  | "border-action-hover"
-  | "border-action"
-  | "border-selected"
-  | "border-success"
-  | "border-danger"
-  | "border-warning"
-  | "border-info"
-  | "border-focus-on-inverted"
-  | "border-focus"
-  | "border-on-inverted"
-  | "border-on-inverted-subtle"
-  | "border-alt-1"
-  | "border-alt-2"
-  | "border-alt-3";
-
-type AkselLegacySpacingToken =
-  | "0"
-  | "05"
-  | "1"
-  | "1-alt"
-  | "2"
-  | "3"
-  | "4"
-  | "5"
-  | "6"
-  | "7"
-  | "8"
-  | "9"
-  | "10"
-  | "11"
-  | "12"
-  | "14"
-  | "16"
-  | "18"
-  | "20"
-  | "24"
-  | "32";
-
-export type {
-  AkselLegacyBorderRadiusToken,
-  AkselLegacyShadowToken,
-  AkselLegacyBackgroundColorToken,
-  AkselLegacySurfaceColorToken,
-  AkselLegacyBorderColorToken,
-  AkselLegacySpacingToken,
-};

@@ -1,33 +1,22 @@
-import { readFileSync } from "node:fs";
 import valueParser from "postcss-value-parser";
 import stylelint from "stylelint";
-import { isCustomProperty, tokenExists } from "../../utils";
-
-const packageJson = JSON.parse(
-  readFileSync(`${__dirname}/../../../package.json`).toString(),
-);
+import { getPackageVersion, isCustomProperty, tokenExists } from "../../utils";
 
 const ruleName = "aksel/design-token-exists";
-
-const prefix_a = "--a-";
-const prefix_ac = "--ac-";
-export const controlledPrefixes = [prefix_a, prefix_ac];
-
-const packageVersion = packageJson.version;
+const prefix = "--ax-";
+const packageVersion = getPackageVersion();
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   propNotExist: (node: any) =>
-    `("${node.prop}") does not exist in the design system.\n\n` +
-    `Property "${node.prop}" has a name that seems like it intends to override a design token by ` +
-    `using one of the following prefixes [${controlledPrefixes}]. ` +
-    `However, that token doesn"t seem to exist in the design system. ` +
+    `"${node.prop}" does not exist in the design system. \n\n` +
+    `Property "${node.prop}" seems like it intends to override a design token by ` +
+    `using the prefix "${prefix}". However, that token doesn't seem to exist in the design system. ` +
     `\n\nVersion: ${packageVersion}`,
   valueNotExist: (node: any, invalidValues: string) =>
-    `("${invalidValues}") does not exist in the design system.\n\n` +
+    `"${invalidValues}" does not exist in the design system. \n\n` +
     `Property "${node.prop}" has offending value "${invalidValues}", ` +
     `and the value seems like it intends to reference a design token by ` +
-    `using one of the following prefixes [${controlledPrefixes}]. ` +
-    `However, that token doesn't seem to exist in the design system. ` +
+    `using the prefix "${prefix}". However, that token doesn't seem to exist in the design system. ` +
     `\n\nVersion: ${packageVersion}`,
 });
 
@@ -40,8 +29,8 @@ const checkDeclValue = (
     if (
       node.type === "word" &&
       isCustomProperty(node.value) &&
-      controlledPrefixes.some((prefix) => node.value.startsWith(prefix)) &&
-      !tokenExists(controlledPrefixes, node.value)
+      node.value.startsWith(prefix) &&
+      !tokenExists([prefix], node.value)
     ) {
       stylelint.utils.report({
         message: messages.valueNotExist(rootNode, node.value),
@@ -61,8 +50,8 @@ const checkDeclProp = (
 ) => {
   if (
     isCustomProperty(prop) &&
-    controlledPrefixes.some((prefix) => prop.startsWith(prefix)) &&
-    !tokenExists(controlledPrefixes, prop)
+    prop.startsWith(prefix) &&
+    !tokenExists([prefix], prop)
   ) {
     stylelint.utils.report({
       message: messages.propNotExist(rootNode),

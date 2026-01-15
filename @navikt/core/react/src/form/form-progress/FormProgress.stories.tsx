@@ -172,7 +172,7 @@ export const ColorRole: StoryFn = () => (
 );
 
 export const Chromatic: StoryFn = () => (
-  <VStack gap="10">
+  <VStack gap="space-40">
     <div>
       <Default activeStep={1} totalSteps={7} />
     </div>

@@ -66,14 +66,16 @@ Removes deprecated props from components.
 
 `npx @navikt/aksel codemod v8-list ...`
 
-Tries to migrate List component moving 'title' and 'description' props to 'Heading' and 'BodyShort'.
+Tries to migrate List component by wrapping it with 'Box' and moving 'title' and 'description' props to 'Heading' and 'BodyShort'.
 
 #### Variants
 
+`npx @navikt/aksel codemod v8-button-variant ...`
 `npx @navikt/aksel codemod v8-tag-variant ...`
 `npx @navikt/aksel codemod v8-toggle-group-variant ...`
 `npx @navikt/aksel codemod v8-accordion-variant ...`
 `npx @navikt/aksel codemod v8-chips-variant ...`
+`npx @navikt/aksel codemod v8-link-variant ...`
 
 Updates variant + data-color props based on current variant prop.
 

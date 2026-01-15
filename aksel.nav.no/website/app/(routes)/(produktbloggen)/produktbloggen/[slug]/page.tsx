@@ -83,9 +83,7 @@ export default async function Page({ params }: Props) {
   const avatars = queryToAvatars(pageData?.writers ?? []);
   const publishDate = formatDateString(publishedAtRaw);
 
-  const imageUrl = urlForImage(pageData?.seo?.image)
-    ?.quality(100)
-    .url();
+  const imageUrl = urlForImage(pageData?.seo?.image)?.quality(100).url();
 
   if (!pageData?._id) {
     notFound();
@@ -114,7 +112,11 @@ export default async function Page({ params }: Props) {
             </BodyShort>
           </div>
           <div>
-            <HStack gap="space-32" justify="center" marginBlock="space-16 0">
+            <HStack
+              gap="space-32"
+              justify="center"
+              marginBlock="space-16 space-0"
+            >
               {avatars.map((avatar) => {
                 return (
                   <Avatar
@@ -156,7 +158,6 @@ export default async function Page({ params }: Props) {
           )}
         </div>
       </div>
-
       <div className={styles.customBlockWrapper} data-page-layout="centered">
         <CustomPortableText
           data-wrapper-prose

@@ -26,7 +26,7 @@ export default function MonthHeader({ monthAndYear, index }: Props) {
         <VStack asChild width="48px" align="center">
           <MonthBubble />
         </VStack>
-        <VStack asChild justify="center" paddingInline="space-12 0">
+        <VStack asChild justify="center" paddingInline="space-12 space-0">
           <Heading as="div" size="small">
             {capitalizeText(monthAndYear)}
           </Heading>

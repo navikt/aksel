@@ -90,7 +90,7 @@ const PropEntry = ({
       <>
         <Box
           as="dt"
-          paddingBlock="space-8 0"
+          paddingBlock="space-8 space-0"
           paddingInline="space-8"
           className="inline-block"
         >
@@ -127,7 +127,7 @@ const PropEntry = ({
 
   return (
     <>
-      <Box as="dt" paddingBlock="space-8 0" paddingInline="space-8">
+      <Box as="dt" paddingBlock="space-8 space-0" paddingInline="space-8">
         <Code as="h4" highlighted>{`${prop.name}${
           prop?.required ? "" : "?"
         }`}</Code>

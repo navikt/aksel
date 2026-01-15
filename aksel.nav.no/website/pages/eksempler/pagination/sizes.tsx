@@ -5,7 +5,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   const [pageState, setPageState] = useState(2);
   return (
-    <VStack gap="space-48">
+    <VStack gap="space-48" align="center">
       <Pagination
         page={pageState}
         onPageChange={setPageState}

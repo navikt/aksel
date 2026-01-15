@@ -57,7 +57,7 @@ function IconPage({
             for Nav
           </BodyLong>
         </Box>
-        <HStack as="ul" gap="space-16" marginBlock="space-24 0">
+        <HStack as="ul" gap="space-16" marginBlock="space-24 space-0">
           <li className={styles.iconPageLinkLi}>
             <Link
               as={NextLink}
@@ -108,14 +108,13 @@ function IconPage({
           </li>
         </HStack>
       </div>
-
       <IconPageProvider>
         <div>
           <IconPageForm iconQuery={iconQuery} iconToggle={iconToggle} />
           <HGrid
             columns={{ xs: 1, xl: "3fr minmax(300px, 2fr)" }}
             gap="space-40"
-            marginBlock="space-24 0"
+            marginBlock="space-24 space-0"
           >
             <VStack as="section" aria-label="Ikonliste" gap="space-40">
               {iconsWithCategories.length === 0 && (

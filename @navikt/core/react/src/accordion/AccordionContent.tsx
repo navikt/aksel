@@ -15,8 +15,8 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ children, className, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
 
-    const themeContext = useThemeInternal();
     const { cn } = useRenameCSS();
+    const themeContext = useThemeInternal();
 
     if (context === null) {
       console.error(
@@ -27,6 +27,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
 
     return (
       <BodyLong
+        data-color={themeContext.color}
         {...rest}
         as="div"
         ref={ref}
@@ -36,11 +37,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
           className,
         )}
       >
-        {themeContext?.isDarkside ? (
-          <div className={cn("navds-accordion__content-inner")}>{children}</div>
-        ) : (
-          children
-        )}
+        <div className={cn("navds-accordion__content-inner")}>{children}</div>
       </BodyLong>
     );
   },

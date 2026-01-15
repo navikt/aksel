@@ -21,7 +21,7 @@ type Story = StoryObj<typeof ActionMenu>;
 
 const DemoDecorator: Story["decorators"] = (Story, { name }) => {
   return (
-    <VStack gap="4" align="start">
+    <VStack gap="space-16" align="start">
       <h2>{name}</h2>
       <p>Placeholder before button</p>
       <button>Focusable item before action</button>
@@ -119,7 +119,7 @@ export const ShortcutsAndIcons: Story = {
           <button>Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
-          <VStack asChild align="start" gap="1" paddingBlock="2">
+          <VStack asChild align="start" gap="space-4" paddingBlock="space-8">
             <ActionMenu.Label>
               <BodyShort weight="semibold" as="div">
                 Ola Normann
@@ -564,7 +564,7 @@ export const Links: Story = {
 export const Align: Story = {
   render: (props) => {
     return (
-      <HStack gap="24">
+      <HStack gap="space-96">
         <ActionMenu open={props.open}>
           <ActionMenu.Trigger>
             <button>Start</button>
@@ -612,7 +612,7 @@ export const Chromatic: Story = {
           <h2>Submenus</h2>
           {Submenus.render?.(newArgs, context)}
         </div>
-        <HStack gap="12">
+        <HStack gap="space-48">
           <div>
             <h2>OnlyItems</h2>
             {OnlyItems.render?.(newArgs, context)}
@@ -626,7 +626,7 @@ export const Chromatic: Story = {
             {ShortcutsAndIcons.render?.(newArgs, context)}
           </div>
         </HStack>
-        <HStack gap="12">
+        <HStack gap="space-48">
           <div>
             <h2>Checkboxes</h2>
             {Checkboxes.render?.(newArgs, context)}
@@ -640,8 +640,7 @@ export const Chromatic: Story = {
           <h2>Dividers</h2>
           {Dividers.render?.(newArgs, context)}
         </div>
-
-        <HStack gap="12">
+        <HStack gap="space-48">
           <div>
             <h2>Links</h2>
             {Links.render?.(newArgs, context)}

@@ -5,24 +5,22 @@ const Example = () => {
   return (
     <DemoWrapper>
       <Bleed marginInline="space-40" asChild reflectivePadding>
-        <Box background="surface-alt-3-subtle">
+        <Box background="neutral-moderate">
           reflectivePadding lar innhold forbli der det ville vært uten Bleed
         </Box>
       </Bleed>
       <Bleed marginInline="space-40" asChild>
-        <Box background="surface-alt-3-subtle">
-          Bleed uten reflectivePadding
-        </Box>
+        <Box background="neutral-moderate">Bleed uten reflectivePadding</Box>
       </Bleed>
-      <Box background="surface-alt-3-subtle">Uten Bleed</Box>
+      <Box background="neutral-moderate">Uten Bleed</Box>
     </DemoWrapper>
   );
 };
 
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <Box background="surface-alt-3" padding="space-20" borderRadius="large">
-      <Box background="surface-subtle" padding="space-20" borderRadius="medium">
+    <Box background="neutral-strong" padding="space-20" borderRadius="8">
+      <Box background="default" padding="space-20" borderRadius="4">
         <VStack gap="space-16">{children}</VStack>
       </Box>
     </Box>
@@ -30,7 +28,7 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { legacyOnly: true });
+export default withDsExample(Example);
 
 /* Storybook story */
 export const Demo = {
