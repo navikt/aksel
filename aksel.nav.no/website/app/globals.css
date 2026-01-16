@@ -1,3 +1,4 @@
+/* stylelint-disable aksel/design-token-no-global-override */
 @layer twBase, dsComponents, twComponents, twUtilities;
 
 @import "tailwindcss/base" layer(twBase);
@@ -170,7 +171,7 @@ address {
   --aksel-border-brand-teal-subtle: var(--aksel-brand-teal-400);
   --aksel-border-brand-teal: var(--aksel-brand-teal-600);
   --aksel-text-brand-teal-contrast: var(--ax-neutral-000);
-  --aksel-text-brand-teal-icon: var(--aksel-brand-teal-600);
+  --aksel-text-brand-teal-decoration: var(--aksel-brand-teal-600);
   --aksel-text-brand-teal-subtle: var(--aksel-brand-teal-800);
   --aksel-text-brand-teal: var(--aksel-brand-teal-1000);
   --aksel-bg-brand-teal-strong-pressed: var(--aksel-brand-teal-800);
@@ -191,7 +192,7 @@ address {
   --aksel-border-brand-pink-subtle: var(--aksel-brand-pink-400);
   --aksel-border-brand-pink: var(--aksel-brand-pink-600);
   --aksel-text-brand-pink-contrast: var(--ax-neutral-000);
-  --aksel-text-brand-pink-icon: var(--aksel-brand-pink-600);
+  --aksel-text-brand-pink-decoration: var(--aksel-brand-pink-600);
   --aksel-text-brand-pink-subtle: var(--aksel-brand-pink-800);
   --aksel-text-brand-pink: var(--aksel-brand-pink-1000);
   --aksel-bg-brand-pink-strong-pressed: var(--aksel-brand-pink-800);
@@ -213,7 +214,7 @@ address {
   --ax-border-subtle: var(--aksel-border-brand-teal-subtle);
   --ax-border-default: var(--aksel-border-brand-teal);
   --ax-text-contrast: var(--aksel-text-brand-teal-contrast);
-  --ax-text-icon: var(--aksel-text-brand-teal-icon);
+  --ax-text-decoration: var(--aksel-text-brand-teal-decoration);
   --ax-text-subtle: var(--aksel-text-brand-teal-subtle);
   --ax-text-default: var(--aksel-text-brand-teal);
   --ax-bg-strong-pressed: var(--aksel-bg-brand-teal-strong-pressed);
@@ -235,7 +236,7 @@ address {
   --ax-border-subtle: var(--aksel-border-brand-pink-subtle);
   --ax-border-default: var(--aksel-border-brand-pink);
   --ax-text-contrast: var(--aksel-text-brand-pink-contrast);
-  --ax-text-icon: var(--aksel-text-brand-pink-icon);
+  --ax-text-decoration: var(--aksel-text-brand-pink-decoration);
   --ax-text-subtle: var(--aksel-text-brand-pink-subtle);
   --ax-text-default: var(--aksel-text-brand-pink);
   --ax-bg-strong-pressed: var(--aksel-bg-brand-pink-strong-pressed);
