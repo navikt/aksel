@@ -1,4 +1,3 @@
-import cl from "clsx";
 import NextLink from "next/link";
 import {
   ComponentIcon,
@@ -101,10 +100,7 @@ function IllustratedLinks() {
     >
       <List className={styles.akselLayersList}>
         <ListItem
-          className={cl(
-            styles.akselLayersListItem,
-            styles.akselLayersIllustrativeListItem,
-          )}
+          className={`${styles.akselLayersListItem} ${styles.akselLayersIllustrativeListItem}`}
           icon={Links.monsterMaler.icon}
         >
           <Link
@@ -125,10 +121,7 @@ function IllustratedLinks() {
           </Link>
         </ListItem>
         <ListItem
-          className={cl(
-            styles.akselLayersListItem,
-            styles.akselLayersIllustrativeListItem,
-          )}
+          className={`${styles.akselLayersListItem} ${styles.akselLayersIllustrativeListItem}`}
           icon={Links.komponenter.icon}
         >
           <div className={styles.akselLayersListItemLinkGroup}>
@@ -167,10 +160,7 @@ function IllustratedLinks() {
           </div>
         </ListItem>
         <ListItem
-          className={cl(
-            styles.akselLayersListItem,
-            styles.akselLayersIllustrativeListItem,
-          )}
+          className={`${styles.akselLayersListItem} ${styles.akselLayersIllustrativeListItem}`}
           icon={Links.layoutPrimitives.icon}
         >
           <Link
@@ -191,10 +181,7 @@ function IllustratedLinks() {
           </Link>
         </ListItem>
         <ListItem
-          className={cl(
-            styles.akselLayersListItem,
-            styles.akselLayersIllustrativeListItem,
-          )}
+          className={`${styles.akselLayersListItem} ${styles.akselLayersIllustrativeListItem}`}
           icon={Links.designTokens.icon}
         >
           <Link

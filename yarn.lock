@@ -10239,7 +10239,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.0.0, clsx@npm:^2.1.0, clsx@npm:^2.1.1":
+"clsx@npm:^2.0.0, clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10/cdfb57fa6c7649bbff98d9028c2f0de2f91c86f551179541cf784b1cfdc1562dcb951955f46d54d930a3879931a980e32a46b598acaea274728dbe068deca919
@@ -24847,7 +24847,6 @@ __metadata:
     "@types/umami": "npm:^2.10.0"
     autoprefixer: "npm:^10.4.20"
     babel-loader: "npm:^9.1.3"
-    clsx: "npm:^2.1.0"
     codesandbox-import-utils: "npm:^2.2.3"
     concurrently: "npm:9.2.1"
     copyfiles: "npm:^2.4.1"

@@ -1,6 +1,6 @@
 "use client";
 
-import cl from "clsx";
+import { cl } from "@/ui-utils/className";
 import styles from "./frontpage.module.css";
 import { useShouldStopAnimation } from "./useShouldStopAnimation";
 
