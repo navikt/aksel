@@ -3,6 +3,9 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "resolveJsonModule": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "paths": {
+      "@/className": ["./src/util/className.ts"]
+    }
   }
 }

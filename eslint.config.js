@@ -224,6 +224,11 @@ module.exports = tseslint.config([
               message:
                 'Use `node:` prefix when importing native node modules, e.g. `import path from "node:path"`.',
             },
+            {
+              group: ["@/components", "@/components/index"],
+              message:
+                "Don't import from the root index. Import from specific component paths, e.g. `@/components/button`.",
+            },
           ],
         },
       ],
