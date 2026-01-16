@@ -827,27 +827,27 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
-  version: 7.34.0
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=ffe31c&locator=referansesider%40workspace%3A."
-  checksum: 10/ca99461bb2718a4d62d813708272ca1e9614fb7c5242863295faded0abbd21b642b078db62d2068565c24a60e3d1b2ff2031f408f30cf5e8532633746afc94dd
+  version: 7.39.1
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=8c43a6&locator=referansesider%40workspace%3A."
+  checksum: 10/f64dde85be8d2e9a2442a79e528671737db06931d3d5ccae14be3c93322dfba351821ff03e53f59db86ab0470c272d240f864856aef5200e8edcb62a673509f9
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
-  version: 7.34.0
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=219188&locator=referansesider%40workspace%3A."
-  checksum: 10/60952ff58b18cce7b24fdecfd0fba75ab98b32927df55b3aa0446ea7ddca7d3bb40d47213755646a3601da388bb5e7e8347352ce31f5a3c8b2445bf77eae0608
+  version: 7.39.1
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=2f2a49&locator=referansesider%40workspace%3A."
+  checksum: 10/97b32a7170cf9411b33f6f6b35fdb727d173f0859bf3aa23889c57ed79dfc5bad66c65dabef4feddf0b264e73fb46b0fcc02495cce34bf74842ee0dc12db5da4
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:../../@navikt/core/react::locator=referansesider%40workspace%3A.":
-  version: 7.34.0
-  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=99c1bc&locator=referansesider%40workspace%3A."
+  version: 7.39.1
+  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=eaf6c0&locator=referansesider%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.6"
-    "@navikt/aksel-icons": "npm:^7.34.0"
-    "@navikt/ds-tokens": "npm:^7.34.0"
+    "@navikt/aksel-icons": "npm:^7.39.1"
+    "@navikt/ds-tokens": "npm:^7.39.1"
     clsx: "npm:^2.1.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
@@ -858,14 +858,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/53cf1a4fcf79699ca15d108b25cff0cbcc6d0de14f84b0bfcb025495693a10390f5bb8c20b662a9561314d78b7fe16f6bdbf34bcc99b7b65501e2fcd7dee9581
+  checksum: 10/6dedae1a951d2a236791317e244714f7190c4fb6e2c8ff37256af40c5afd0b6961de611cf8e3e76befa45af8277a7110a14f51a941a676b6611cf69defc73d0d
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
-  version: 7.34.0
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=c164f4&locator=referansesider%40workspace%3A."
-  checksum: 10/bb40e360ac9401b681a9a323e9beb06fd434544342e4ab0fdb317040ff0bb315a768fbb04c4f54b4433112d387cb667064728f7772c3c1c669557e84c088ad09
+  version: 7.39.1
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=ff4294&locator=referansesider%40workspace%3A."
+  checksum: 10/c6f176c57cdf4e50b241e393fc1936074f571c7bd39b04d467f08d27cc31184b49535b4c5e912a38d9afa98e49a08c0c9797671c7f96a3b431041d62c616d9fd
   languageName: node
   linkType: hard
 
@@ -2027,9 +2027,9 @@ __metadata:
   linkType: hard
 
 "diff@npm:^8.0.2":
-  version: 8.0.2
-  resolution: "diff@npm:8.0.2"
-  checksum: 10/82a2120d3418f97822e17a6044ccd4b99a91e26e145e8698353673d7146bd2d092bbebb79c112aae7badc7b9c526f9098cbe342f96174feb6beabdd2587b3c42
+  version: 8.0.3
+  resolution: "diff@npm:8.0.3"
+  checksum: 10/52f957e1fa53db4616ff5f4811b92b22b97a160c12a2f86f22debd4181227b0f6751aa8fd711d6a8fcf4618acb13b86bc702e6d9d6d6ed82acfd00c9cb26ace2
   languageName: node
   linkType: hard
 

@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect } from "react";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import { Box } from "../box";
 import { HGrid } from "../grid";
-import { VStack } from "../stack";
 import Page from "./Page";
 import { widths } from "./parts/PageBlock";
 
@@ -226,25 +226,10 @@ function Footer({ width = "lg", gutters = false }: any) {
   );
 }
 
-export const Chromatic = () => {
-  return (
-    <VStack gap="space-8">
-      <h2>Default</h2>
-      <Default />
-      <h2>BelowFold</h2>
-      <BelowFold />
-      <h2>ContentBlockPadding</h2>
-      <ContentBlockPadding />
-      <h2>Gutters</h2>
-      <Gutters />
-      <h2>OutsideBackground</h2>
-      <OutsideBackground />
-    </VStack>
-  );
-};
-
-Chromatic.parameters = {
-  chromatic: {
-    disable: false,
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  BelowFold,
+  ContentBlockPadding,
+  Gutters,
+  OutsideBackground,
+});
