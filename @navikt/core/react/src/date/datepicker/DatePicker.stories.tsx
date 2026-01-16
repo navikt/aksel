@@ -75,6 +75,7 @@ export const Default: StoryObj<DefaultStoryProps> = {
           {...newProps}
           locale={props.locale}
           disableWeekends={props.disableWeekends}
+          fixedWeeks={props.fixedWeeks}
         >
           {!props.standalone &&
             (props.inputfield && props.mode !== "multiple" ? (
@@ -129,6 +130,7 @@ export const Default: StoryObj<DefaultStoryProps> = {
       options: ["single", "multiple", "range"],
       control: { type: "radio" },
     },
+    fixedWeeks: { control: { type: "boolean" } },
   },
 };
 
