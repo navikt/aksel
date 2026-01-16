@@ -1,11 +1,17 @@
-import { createRequire } from "node:module";
-import { dirname } from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-/* Use require.resolve to get absolute path - works regardless of CWD in monorepo */
-const tokensPath =
-  dirname(require.resolve("@navikt/ds-tokens")) + "/tokens.css";
+const tokensPath = resolve(
+  __dirname,
+  "@navikt",
+  "core",
+  "tokens",
+  "dist",
+  "tokens.css",
+);
 
 export default {
   overrides: [
