@@ -12,7 +12,7 @@ interface ShowMoreButtonProps {
    * A button to use with ShowMore
    * @default '<Button />'
    */
-  children: ReactElement;
+  children: ReactElement<React.ComponentProps<typeof Button>>;
   /**
    * Text to show when content is collapsed.
    * @default "Vis mer"
@@ -48,10 +48,7 @@ const ShowMoreButton = ({
 
   const buttonText = isExpanded ? expandedText : collapsedText;
 
-  const { className, ...restProps } = (child?.props ?? {}) as {
-    className?: string;
-    [key: string]: unknown;
-  };
+  const { className, ...restProps } = child?.props ?? {};
 
   const childClone = React.cloneElement(
     React.Children.only(child),
