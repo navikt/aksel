@@ -108,7 +108,7 @@ export const Horizontal: StoryFn<Story> = () => {
   );
 };
 
-export const Vertical: StoryFn<Story> = () => {
+export const Vertical = () => {
   const [activeStep, setActiveStep] = useState(2);
   const props = { onClick: (e) => e.preventDefault(), href: "#" };
   return (
