@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 
 export interface ChipsToggleProps
@@ -44,15 +44,13 @@ export const ToggleChips: OverridableComponent<
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <Component
         data-color={color ?? variantToColor(variant)}
         {...rest}
         ref={ref}
-        className={cn("navds-chips__chip navds-chips__toggle", className, {
-          "navds-chips__toggle--with-checkmark": checkmark,
+        className={cl("aksel-chips__chip aksel-chips__toggle", className, {
+          "aksel-chips__toggle--with-checkmark": checkmark,
         })}
         aria-pressed={selected}
         data-pressed={selected}
@@ -60,7 +58,7 @@ export const ToggleChips: OverridableComponent<
         {checkmark && (
           <svg
             aria-hidden
-            className={cn("navds-chips__toggle-icon")}
+            className="aksel-chips__toggle-icon"
             width="1.25em"
             height="1.25em"
             viewBox="0 0 20 20"
@@ -87,7 +85,7 @@ export const ToggleChips: OverridableComponent<
             )}
           </svg>
         )}
-        <span className={cn("navds-chips__chip-text")}>{children}</span>
+        <span className="aksel-chips__chip-text">{children}</span>
       </Component>
     );
   },

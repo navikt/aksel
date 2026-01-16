@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 
 /**
@@ -33,12 +33,11 @@ export const Panel: PanelType = forwardRef(
     { children, className, border = false, as: Component = "div", ...rest },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     return (
       <Component
         ref={ref}
-        className={cn("navds-panel", className, {
-          "navds-panel--border": border,
+        className={cl("aksel-panel", className, {
+          "aksel-panel--border": border,
         })}
         {...rest}
       >

@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { OverridableComponent, omit } from "../../util";
+import { cl } from "../../util/className";
 import { PageBlock } from "./parts/PageBlock";
 
 export interface PageProps extends React.HTMLAttributes<HTMLElement> {
@@ -47,21 +47,19 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       },
       ref,
     ) => {
-      const { cn } = useRenameCSS();
-
       const belowFold = footerPosition === "belowFold";
 
       return (
         <Component
           {...omit(rest, ["background"])}
-          className={cn("navds-page", className)}
+          className={cl("aksel-page", className)}
           ref={ref}
         >
           <div
-            className={cn({
-              "navds-page__content--fullheight": belowFold,
-              "navds-page__content--grow": !belowFold,
-              "navds-page__content--padding": contentBlockPadding === "end",
+            className={cl({
+              "aksel-page__content--fullheight": belowFold,
+              "aksel-page__content--grow": !belowFold,
+              "aksel-page__content--padding": contentBlockPadding === "end",
             })}
           >
             {children}

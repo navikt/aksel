@@ -8,10 +8,10 @@ import React, {
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Button } from "../../button";
-import { useRenameCSS } from "../../theme/Theme";
 import { AkselColor } from "../../types";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
+import { cl } from "../../util/className";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { FormFieldProps, useFormField } from "../useFormField";
@@ -132,8 +132,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       ...rest
     } = props;
 
-    const { cn } = useRenameCSS();
-
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMergeRefs(searchRef, ref);
 
@@ -167,15 +165,15 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           searchRef.current?.value && event.preventDefault();
           handleClear({ trigger: "Escape", event });
         }}
-        className={cn(
+        className={cl(
           className,
-          "navds-form-field",
-          `navds-form-field--${size}`,
-          "navds-search",
+          "aksel-form-field",
+          `aksel-form-field--${size}`,
+          "aksel-search",
           {
-            "navds-search--error": hasError,
-            "navds-search--disabled": inputProps.disabled,
-            "navds-search--with-size": htmlSize,
+            "aksel-search--error": hasError,
+            "aksel-search--disabled": inputProps.disabled,
+            "aksel-search--with-size": htmlSize,
           },
         )}
         data-color={dataColor}
@@ -183,16 +181,16 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          className={cn("navds-form-field__label", {
-            "navds-sr-only": hideLabel,
+          className={cl("aksel-form-field__label", {
+            "aksel-sr-only": hideLabel,
           })}
         >
           {label}
         </Label>
         {!!description && (
           <BodyShort
-            className={cn("navds-form-field__description", {
-              "navds-sr-only": hideLabel,
+            className={cl("aksel-form-field__description", {
+              "aksel-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}
@@ -201,12 +199,12 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
             {description}
           </BodyShort>
         )}
-        <div className={cn("navds-search__wrapper")}>
-          <div className={cn("navds-search__wrapper-inner")}>
+        <div className="aksel-search__wrapper">
+          <div className="aksel-search__wrapper-inner">
             {variant === "simple" && (
               <MagnifyingGlassIcon
                 aria-hidden
-                className={cn("navds-search__search-icon")}
+                className="aksel-search__search-icon"
               />
             )}
             <input
@@ -216,13 +214,13 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               value={value ?? internalValue}
               onChange={(e) => handleChange(e.target.value)}
               type="search"
-              className={cn(
+              className={cl(
                 className,
-                "navds-search__input",
-                `navds-search__input--${variant}`,
-                "navds-text-field__input",
-                "navds-body-short",
-                `navds-body-short--${size}`,
+                "aksel-search__input",
+                `aksel-search__input--${variant}`,
+                "aksel-text-field__input",
+                "aksel-body-short",
+                `aksel-body-short--${size}`,
               )}
               {...(htmlSize ? { size: Number(htmlSize) } : {})}
             />
@@ -248,7 +246,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           </SearchContext.Provider>
         </div>
         <div
-          className={cn("navds-form-field__error")}
+          className="aksel-form-field__error"
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"
@@ -273,13 +271,11 @@ function ClearButton({
   clearButtonLabel,
   handleClear,
 }: SearchClearButtonProps) {
-  const { cn } = useRenameCSS();
-
   const translate = useI18n("Search");
 
   return (
     <Button
-      className={cn("navds-search__button-clear")}
+      className="aksel-search__button-clear"
       variant="tertiary"
       data-color="neutral"
       size={size === "medium" ? "small" : "xsmall"}

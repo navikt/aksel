@@ -1,6 +1,6 @@
 import React from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -250,8 +250,6 @@ export const BasePrimitive = ({
   flexShrink,
   gridColumn,
 }: BasePrimitiveProps) => {
-  const { cn } = useRenameCSS();
-
   const style: React.CSSProperties = {
     /* Padding */
     ...getResponsiveProps("r", "p", "space", padding),
@@ -289,33 +287,33 @@ export const BasePrimitive = ({
 
   return (
     <Slot
-      className={cn({
+      className={cl({
         className,
-        "navds-r-p": padding,
-        "navds-r-pi": paddingInline,
-        "navds-r-pb": paddingBlock,
-        "navds-r-m": margin,
-        "navds-r-mi": marginInline,
-        "navds-r-mb": marginBlock,
-        "navds-r-w": width,
-        "navds-r-minw": minWidth,
-        "navds-r-maxw": maxWidth,
-        "navds-r-h": height,
-        "navds-r-minh": minHeight,
-        "navds-r-maxh": maxHeight,
-        "navds-r-position": position,
-        "navds-r-inset": inset,
-        "navds-r-top": top,
-        "navds-r-right": right,
-        "navds-r-bottom": bottom,
-        "navds-r-left": left,
-        "navds-r-overflow": overflow,
-        "navds-r-overflowx": overflowX,
-        "navds-r-overflowy": overflowY,
-        "navds-r-flex-basis": flexBasis,
-        "navds-r-flex-grow": flexGrow,
-        "navds-r-flex-shrink": flexShrink,
-        "navds-r-grid-column": gridColumn,
+        "aksel-r-p": padding,
+        "aksel-r-pi": paddingInline,
+        "aksel-r-pb": paddingBlock,
+        "aksel-r-m": margin,
+        "aksel-r-mi": marginInline,
+        "aksel-r-mb": marginBlock,
+        "aksel-r-w": width,
+        "aksel-r-minw": minWidth,
+        "aksel-r-maxw": maxWidth,
+        "aksel-r-h": height,
+        "aksel-r-minh": minHeight,
+        "aksel-r-maxh": maxHeight,
+        "aksel-r-position": position,
+        "aksel-r-inset": inset,
+        "aksel-r-top": top,
+        "aksel-r-right": right,
+        "aksel-r-bottom": bottom,
+        "aksel-r-left": left,
+        "aksel-r-overflow": overflow,
+        "aksel-r-overflowx": overflowX,
+        "aksel-r-overflowy": overflowY,
+        "aksel-r-flex-basis": flexBasis,
+        "aksel-r-flex-grow": flexGrow,
+        "aksel-r-flex-shrink": flexShrink,
+        "aksel-r-grid-column": gridColumn,
       })}
       style={style}
     >

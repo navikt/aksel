@@ -8,8 +8,8 @@ import type {
   AkselShadowToken,
 } from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS } from "../../theme/Theme";
 import { omit } from "../../util";
+import { cl } from "../../util/className";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
   PRIMITIVE_PROPS,
@@ -118,7 +118,6 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
       }: BoxNewProps & { as?: React.ElementType },
       ref,
     ) => {
-      const { cn } = useRenameCSS();
       const style: React.CSSProperties = {
         ..._style,
         "--__axc-box-background": background
@@ -147,12 +146,12 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
             {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
             style={style}
-            className={cn("navds-box", className, {
-              "navds-box-bg": background,
-              "navds-box-border-color": borderColor,
-              "navds-box-border-width": borderWidth,
-              "navds-box-radius": borderRadius,
-              "navds-box-shadow": shadow,
+            className={cl("aksel-box", className, {
+              "aksel-box-bg": background,
+              "aksel-box-border-color": borderColor,
+              "aksel-box-border-width": borderWidth,
+              "aksel-box-radius": borderRadius,
+              "aksel-box-shadow": shadow,
             })}
           >
             {children}

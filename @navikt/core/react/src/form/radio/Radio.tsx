@@ -1,22 +1,20 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
 import { omit, useId } from "../../util";
+import { cl } from "../../util/className";
 import { RadioProps } from "./types";
 import { useRadio } from "./useRadio";
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
-  const { cn } = useRenameCSS();
   const { inputProps, size, hasError, readOnly } = useRadio(props);
   const descriptionId = useId();
 
   return (
     <div
-      className={cn(props.className, "navds-radio", `navds-radio--${size}`, {
-        "navds-radio--error": hasError,
-        "navds-radio--disabled": inputProps.disabled,
-        "navds-radio--readonly": readOnly,
+      className={cl(props.className, "aksel-radio", `aksel-radio--${size}`, {
+        "aksel-radio--error": hasError,
+        "aksel-radio--disabled": inputProps.disabled,
+        "aksel-radio--readonly": readOnly,
       })}
       data-color={hasError ? "danger" : props["data-color"]}
     >
@@ -28,13 +26,13 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
             [descriptionId]: props.description,
           }) || undefined
         }
-        className={cn("navds-radio__input")}
+        className="aksel-radio__input"
         ref={ref}
       />
       <BodyShort
         as="label"
         htmlFor={inputProps.id}
-        className={cn("navds-radio__label")}
+        className="aksel-radio__label"
         size={size}
       >
         {props.children}
@@ -43,9 +41,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         <BodyShort
           id={descriptionId}
           size={size}
-          className={cn(
-            "navds-form-field__subdescription navds-radio__description",
-          )}
+          className="aksel-form-field__subdescription aksel-radio__description"
         >
           {props.description}
         </BodyShort>

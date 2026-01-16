@@ -3,7 +3,6 @@ import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
 import Spacer from "../../../../layout/stack/Spacer";
 import { Loader } from "../../../../loader";
-import { useRenameCSS } from "../../../../theme/Theme";
 import { TFunction } from "../../../../util/i18n/i18n.types";
 
 interface ItemActionFieldProps {
@@ -23,13 +22,11 @@ function ItemActionField({
   button,
   translate,
 }: ItemActionFieldProps) {
-  const { cn } = useRenameCSS();
-
   if (isLoading) {
     return (
       <>
         <Spacer />
-        <div className={cn("navds-file-item__icon--loading")}>
+        <div className="aksel-file-item__icon--loading">
           <Loader size="medium" />
         </div>
       </>
@@ -56,7 +53,7 @@ function ItemActionField({
       <Spacer />
       <Button
         id={button.id}
-        className={cn("navds-file-item__button")}
+        className="aksel-file-item__button"
         type="button"
         variant="tertiary-neutral"
         onClick={button.onClick}

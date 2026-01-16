@@ -5,7 +5,6 @@ import Collapsible from "../../collapsible/Collapsible";
 import { HStack } from "../../layout/stack";
 import { ProgressBar } from "../../progress-bar";
 import { Stepper, StepperStepProps } from "../../stepper";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { ComponentTranslation } from "../../util/i18n/i18n.types";
@@ -92,7 +91,6 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
     }: FormProgressProps,
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const translate = useI18n("FormProgress", translations);
 
     return (
@@ -101,7 +99,7 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
           aria-hidden
           value={activeStep}
           valueMax={totalSteps}
-          className={cn("navds-form-progress__bar")}
+          className="aksel-form-progress__bar"
         />
 
         <Collapsible lazy open={open} onOpenChange={onOpenChange}>
@@ -113,24 +111,22 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
               <Button
                 variant="tertiary"
                 size="small"
-                className={cn("navds-form-progress__button")}
+                className="aksel-form-progress__button"
                 icon={<ChevronDownIcon aria-hidden />}
               >
-                <span className={cn("navds-form-progress__btn-txt-hide")}>
+                <span className="aksel-form-progress__btn-txt-hide">
                   {translate("hideAllSteps")}
                 </span>
-                <span className={cn("navds-form-progress__btn-txt-show")}>
+                <span className="aksel-form-progress__btn-txt-show">
                   {translate("showAllSteps")}
                 </span>
               </Button>
             </Collapsible.Trigger>
           </HStack>
 
-          <Collapsible.Content
-            className={cn("navds-form-progress__collapsible")}
-          >
-            <div className={cn("navds-form-progress__collapsible-content")}>
-              <div className={cn("navds-form-progress__stepper")}>
+          <Collapsible.Content className="aksel-form-progress__collapsible">
+            <div className="aksel-form-progress__collapsible-content">
+              <div className="aksel-form-progress__stepper">
                 <Stepper
                   activeStep={activeStep}
                   onStepChange={onStepChange}

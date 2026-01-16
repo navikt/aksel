@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { Theme, useRenameCSS } from "../theme/Theme";
+import { Theme } from "../theme/Theme";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 import InternalHeaderButton, {
   InternalHeaderButtonProps,
@@ -78,8 +79,6 @@ interface InternalHeaderComponent
  * ```
  */
 export const InternalHeader = forwardRef(({ className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   /*
    * Component is always in "dark" mode, so we manually override global theme.
    */
@@ -88,7 +87,7 @@ export const InternalHeader = forwardRef(({ className, ...rest }, ref) => {
       <header
         {...rest}
         ref={ref}
-        className={cn("navds-internalheader", className)}
+        className={cl("aksel-internalheader", className)}
       />
     </Theme>
   );

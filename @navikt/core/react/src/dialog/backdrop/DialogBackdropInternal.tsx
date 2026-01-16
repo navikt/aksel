@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { createTransitionStatusAttribute } from "../../util/hooks/useTransitionStatus";
 import { useDialogContext } from "../root/DialogRoot.context";
 
@@ -12,14 +12,13 @@ const DialogBackdropInternal = forwardRef<
   HTMLDivElement,
   DialogBackdropInternalProps
 >(({ className, ...restProps }, forwardedRef) => {
-  const { cn } = useRenameCSS();
   const { transitionStatus } = useDialogContext();
 
   return (
     <div
       {...restProps}
       ref={forwardedRef}
-      className={cn("navds-dialog__backdrop", className)}
+      className={cl("aksel-dialog__backdrop", className)}
       {...createTransitionStatusAttribute(transitionStatus)}
     />
   );

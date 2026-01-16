@@ -1,9 +1,7 @@
 import React from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 
 export const HelpTextIcon = ({ filled = false }: { filled?: boolean }) => {
-  const { cn } = useRenameCSS();
-
   return (
     <svg
       width="1em"
@@ -13,8 +11,8 @@ export const HelpTextIcon = ({ filled = false }: { filled?: boolean }) => {
       xmlns="http://www.w3.org/2000/svg"
       focusable={false}
       role="img"
-      className={cn("navds-help-text__icon", {
-        "navds-help-text__icon--filled": filled,
+      className={cl("aksel-help-text__icon", {
+        "aksel-help-text__icon--filled": filled,
       })}
       aria-hidden
     >

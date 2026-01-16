@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { BodyLong } from "../typography";
+import { cl } from "../util/className";
 
 export interface LinkPanelDescriptionProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -11,14 +11,12 @@ export const LinkPanelDescription = forwardRef<
   HTMLDivElement,
   LinkPanelDescriptionProps
 >(({ className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <BodyLong
       {...rest}
       as="div"
       ref={ref}
-      className={cn("navds-link-panel__description", className)}
+      className={cl("aksel-link-panel__description", className)}
     />
   );
 });

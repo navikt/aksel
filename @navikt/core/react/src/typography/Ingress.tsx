@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 
 export interface IngressProps
@@ -32,14 +32,12 @@ export interface IngressProps
  */
 export const Ingress: OverridableComponent<IngressProps, HTMLParagraphElement> =
   forwardRef(({ className, spacing, as: Component = "p", ...rest }, ref) => {
-    const { cn } = useRenameCSS();
-
     return (
       <Component
         {...rest}
         ref={ref}
-        className={cn(className, "navds-ingress", {
-          "navds-typo--spacing": !!spacing,
+        className={cl(className, "aksel-ingress", {
+          "aksel-typo--spacing": !!spacing,
         })}
       />
     );

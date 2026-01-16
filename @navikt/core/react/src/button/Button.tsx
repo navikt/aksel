@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import { Loader } from "../loader";
-import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { Label } from "../typography";
 import { omit } from "../util";
+import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { OverridableComponent } from "../util/types";
 
@@ -90,8 +90,6 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       },
       ref,
     ) => {
-      const { cn } = useRenameCSS();
-
       const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
         disabled || loading ? omit(rest, ["href"]) : rest;
 
@@ -109,15 +107,15 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           {...filterProps}
           ref={ref}
           onKeyUp={composeEventHandlers(onKeyUp, handleKeyUp)}
-          className={cn(className, "navds-button", `navds-button--${size}`, {
-            "navds-button--loading": loading,
-            "navds-button--icon-only": !!icon && !children,
-            "navds-button--disabled": disabled ?? loading,
+          className={cl(className, "aksel-button", `aksel-button--${size}`, {
+            "aksel-button--loading": loading,
+            "aksel-button--icon-only": !!icon && !children,
+            "aksel-button--disabled": disabled ?? loading,
           })}
           disabled={(disabled ?? loading) ? true : undefined}
         >
           {icon && iconPosition === "left" && (
-            <span className={cn("navds-button__icon")}>{icon}</span>
+            <span className="aksel-button__icon">{icon}</span>
           )}
           {loading && <Loader size={size} />}
           {children && (
@@ -126,7 +124,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
             </Label>
           )}
           {icon && iconPosition === "right" && (
-            <span className={cn("navds-button__icon")}>{icon}</span>
+            <span className="aksel-button__icon">{icon}</span>
           )}
         </Component>
       );

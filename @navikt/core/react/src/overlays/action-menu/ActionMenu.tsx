@@ -2,8 +2,8 @@ import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS } from "../../theme/Theme";
 import { OverridableComponent, useId } from "../../util";
+import { cl } from "../../util/className";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createStrictContext } from "../../util/create-strict-context";
 import { useMergeRefs } from "../../util/hooks";
@@ -371,7 +371,6 @@ export const ActionMenuContent = forwardRef<
     ref,
   ) => {
     const context = useActionMenuContext();
-    const { cn } = useRenameCSS();
 
     return (
       <Menu.Portal rootElement={context.rootElement}>
@@ -379,7 +378,7 @@ export const ActionMenuContent = forwardRef<
           ref={ref}
           id={context.contentId}
           aria-labelledby={context.triggerId}
-          className={cn("navds-action-menu__content", className)}
+          className={cl("aksel-action-menu__content", className)}
           {...rest}
           align={align}
           sideOffset={4}
@@ -398,9 +397,7 @@ export const ActionMenuContent = forwardRef<
             },
           }}
         >
-          <div className={cn("navds-action-menu__content-inner")}>
-            {children}
-          </div>
+          <div className="aksel-action-menu__content-inner">{children}</div>
         </Menu.Content>
       </Menu.Portal>
     );
@@ -416,12 +413,11 @@ interface ActionMenuLabelProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
   ({ children, className, ...rest }: ActionMenuLabelProps, ref) => {
-    const { cn } = useRenameCSS();
     return (
       <div
         ref={ref}
         {...rest}
-        className={cn("navds-action-menu__label", className)}
+        className={cl("aksel-action-menu__label", className)}
       >
         {children}
       </div>
@@ -465,13 +461,12 @@ export const ActionMenuGroup = forwardRef<
   ActionMenuGroupProps
 >(({ children, className, label, ...rest }: ActionMenuGroupProps, ref) => {
   const labelId = useId();
-  const { cn } = useRenameCSS();
 
   return (
     <Menu.Group
       ref={ref}
       {...rest}
-      className={cn("navds-action-menu__group", className)}
+      className={cl("aksel-action-menu__group", className)}
       asChild={false}
       aria-labelledby={label ? labelId : undefined}
     >
@@ -495,15 +490,13 @@ type MarkerProps = {
 };
 
 const Marker = ({ children, className, placement }: MarkerProps) => {
-  const { cn } = useRenameCSS();
-
   return (
     <div
       aria-hidden
-      className={cn(
+      className={cl(
         className,
-        "navds-action-menu__marker",
-        `navds-action-menu__marker--${placement}`,
+        "aksel-action-menu__marker",
+        `aksel-action-menu__marker--${placement}`,
       )}
     >
       {children}
@@ -516,7 +509,6 @@ type ShortcutProps = {
 };
 
 const Shortcut = ({ children }: ShortcutProps) => {
-  const { cn } = useRenameCSS();
   /**
    * Assumes the user will input either a single keyboard key
    * or keys separated by "+"
@@ -526,7 +518,7 @@ const Shortcut = ({ children }: ShortcutProps) => {
   return (
     <Marker placement="right">
       {parsed.map((char, index) => (
-        <span key={char + index} className={cn("navds-action-menu__shortcut")}>
+        <span key={char + index} className="aksel-action-menu__shortcut">
           {char}
         </span>
       ))}
@@ -572,14 +564,12 @@ export const ActionMenuItem: OverridableComponent<
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <Menu.Item
         {...rest}
-        className={cn("navds-action-menu__item", className, {
-          "navds-action-menu__item--danger": variant === "danger",
-          "navds-action-menu__item--has-icon": icon,
+        className={cl("aksel-action-menu__item", className, {
+          "aksel-action-menu__item--danger": variant === "danger",
+          "aksel-action-menu__item--has-icon": icon,
         })}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
@@ -587,10 +577,7 @@ export const ActionMenuItem: OverridableComponent<
         <Component ref={ref}>
           {children}
           {icon && (
-            <Marker
-              placement="left"
-              className={cn("navds-action-menu__marker-icon")}
-            >
+            <Marker placement="left" className="aksel-action-menu__marker-icon">
               {icon}
             </Marker>
           )}
@@ -633,8 +620,6 @@ export const ActionMenuCheckboxItem = forwardRef<
     }: ActionMenuCheckboxItemProps,
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <Menu.CheckboxItem
         ref={ref}
@@ -646,25 +631,25 @@ export const ActionMenuCheckboxItem = forwardRef<
           event.preventDefault();
         })}
         asChild={false}
-        className={cn(
-          "navds-action-menu__item navds-action-menu__item--has-icon",
+        className={cl(
+          "aksel-action-menu__item aksel-action-menu__item--has-icon",
           className,
         )}
         aria-keyshortcuts={shortcut}
       >
         {children}
         <Marker placement="left">
-          <Menu.ItemIndicator className={cn("navds-action-menu__indicator")}>
+          <Menu.ItemIndicator className="aksel-action-menu__indicator">
             <svg
               width="1em"
               height="1em"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={cn("navds-action-menu__indicator-icon")}
+              className="aksel-action-menu__indicator-icon"
               aria-hidden
             >
-              <g className={cn("navds-action-menu__indicator-icon--unchecked")}>
+              <g className="aksel-action-menu__indicator-icon--unchecked">
                 <rect
                   width="24"
                   height="24"
@@ -681,11 +666,7 @@ export const ActionMenuCheckboxItem = forwardRef<
                   strokeWidth="2"
                 />
               </g>
-              <g
-                className={cn(
-                  "navds-action-menu__indicator-icon--indeterminate",
-                )}
-              >
+              <g className="aksel-action-menu__indicator-icon--indeterminate">
                 <rect
                   width="24"
                   height="24"
@@ -701,7 +682,7 @@ export const ActionMenuCheckboxItem = forwardRef<
                   fill="var(--ax-bg-default)"
                 />
               </g>
-              <g className={cn("navds-action-menu__indicator-icon--checked")}>
+              <g className="aksel-action-menu__indicator-icon--checked">
                 <rect
                   width="24"
                   height="24"
@@ -775,8 +756,6 @@ export const ActionMenuRadioItem = forwardRef<
     { children, className, onSelect, ...rest }: ActionMenuRadioItemProps,
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <Menu.RadioItem
         ref={ref}
@@ -788,24 +767,24 @@ export const ActionMenuRadioItem = forwardRef<
           event.preventDefault();
         })}
         asChild={false}
-        className={cn(
-          "navds-action-menu__item navds-action-menu__item--has-icon",
+        className={cl(
+          "aksel-action-menu__item aksel-action-menu__item--has-icon",
           className,
         )}
       >
         {children}
         <Marker placement="left">
-          <Menu.ItemIndicator className={cn("navds-action-menu__indicator")}>
+          <Menu.ItemIndicator className="aksel-action-menu__indicator">
             <svg
               width="1em"
               height="1em"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={cn("navds-action-menu__indicator-icon")}
+              className="aksel-action-menu__indicator-icon"
               aria-hidden
             >
-              <g className={cn("navds-action-menu__indicator-icon--unchecked")}>
+              <g className="aksel-action-menu__indicator-icon--unchecked">
                 <rect
                   width="24"
                   height="24"
@@ -822,7 +801,7 @@ export const ActionMenuRadioItem = forwardRef<
                   fill="var(--ax-bg-default)"
                 />
               </g>
-              <g className={cn("navds-action-menu__indicator-icon--checked")}>
+              <g className="aksel-action-menu__indicator-icon--checked">
                 <rect
                   width="24"
                   height="24"
@@ -857,14 +836,12 @@ export const ActionMenuDivider = forwardRef<
   ActionMenuDividerElement,
   ActionMenuDividerProps
 >(({ className, ...rest }: ActionMenuDividerProps, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <Menu.Divider
       ref={ref}
       asChild={false}
       {...rest}
-      className={cn("navds-action-menu__divider", className)}
+      className={cl("aksel-action-menu__divider", className)}
     />
   );
 });
@@ -916,32 +893,24 @@ export const ActionMenuSubTrigger = forwardRef<
   ActionMenuSubTriggerElement,
   ActionMenuSubTriggerProps
 >(({ children, className, icon, ...rest }: ActionMenuSubTriggerProps, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <Menu.SubTrigger
       ref={ref}
       {...rest}
       asChild={false}
-      className={cn(
-        "navds-action-menu__item navds-action-menu__sub-trigger",
+      className={cl(
+        "aksel-action-menu__item aksel-action-menu__sub-trigger",
         className,
-        { "navds-action-menu__item--has-icon": icon },
+        { "aksel-action-menu__item--has-icon": icon },
       )}
     >
       {children}
       {icon && (
-        <Marker
-          placement="left"
-          className={cn("navds-action-menu__marker-icon")}
-        >
+        <Marker placement="left" className="aksel-action-menu__marker-icon">
           {icon}
         </Marker>
       )}
-      <Marker
-        placement="right"
-        className={cn("navds-action-menu__marker-icon")}
-      >
+      <Marker placement="right" className="aksel-action-menu__marker-icon">
         <ChevronRightIcon aria-hidden />
       </Marker>
     </Menu.SubTrigger>
@@ -962,7 +931,6 @@ export const ActionMenuSubContent = forwardRef<
   ActionMenuSubContentElement,
   ActionMenuSubContentProps
 >(({ children, className, ...rest }: ActionMenuSubContentProps, ref) => {
-  const { cn } = useRenameCSS();
   const context = useActionMenuContext();
 
   return (
@@ -973,12 +941,12 @@ export const ActionMenuSubContent = forwardRef<
         sideOffset={1}
         collisionPadding={10}
         {...rest}
-        className={cn(
-          "navds-action-menu__content navds-action-menu__sub-content",
+        className={cl(
+          "aksel-action-menu__content aksel-action-menu__sub-content",
           className,
         )}
       >
-        <div className={cn("navds-action-menu__content-inner")}>{children}</div>
+        <div className="aksel-action-menu__content-inner">{children}</div>
       </Menu.SubContent>
     </Menu.Portal>
   );

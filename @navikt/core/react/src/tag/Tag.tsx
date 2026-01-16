@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { BodyShort } from "../typography";
+import { cl } from "../util/className";
 
 type legacyVariants =
   | "warning"
@@ -77,7 +77,6 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const filledVariant = variant?.endsWith("-filled") && "strong";
     const moderateVariant = variant?.endsWith("-moderate") && "moderate";
 
@@ -96,9 +95,9 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
         ref={ref}
         as="span"
         size={size === "medium" ? "medium" : "small"}
-        className={cn("navds-tag", className, `navds-tag--${size}`)}
+        className={cl("aksel-tag", className, `aksel-tag--${size}`)}
       >
-        {icon && <span className={cn("navds-tag__icon--left")}>{icon}</span>}
+        {icon && <span className="aksel-tag__icon--left">{icon}</span>}
         {children}
       </BodyShort>
     );

@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -80,7 +80,6 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
       value: open,
@@ -107,31 +106,31 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         <Row
           {...rest}
           ref={ref}
-          className={cn("navds-table__expandable-row", className, {
-            "navds-table__expandable-row--open": _open,
-            "navds-table__expandable-row--expansion-disabled":
+          className={cl("aksel-table__expandable-row", className, {
+            "aksel-table__expandable-row--open": _open,
+            "aksel-table__expandable-row--expansion-disabled":
               expansionDisabled,
-            "navds-table__expandable-row--clickable": expandOnRowClick,
+            "aksel-table__expandable-row--clickable": expandOnRowClick,
           })}
           onClick={composeEventHandlers(onClick, handleRowClick)}
         >
           {togglePlacement === "right" && children}
           <DataCell
-            className={cn("navds-table__toggle-expand-cell", {
-              "navds-table__toggle-expand-cell--open": _open,
+            className={cl("aksel-table__toggle-expand-cell", {
+              "aksel-table__toggle-expand-cell--open": _open,
             })}
             onClick={!expansionDisabled ? expansionHandler : () => null}
           >
             {!expansionDisabled && (
               <button
-                className={cn("navds-table__toggle-expand-button")}
+                className="aksel-table__toggle-expand-button"
                 type="button"
                 aria-controls={id}
                 aria-expanded={_open}
                 onClick={expansionHandler}
               >
                 <ChevronDownIcon
-                  className={cn("navds-table__expandable-icon")}
+                  className="aksel-table__expandable-icon"
                   title={_open ? translate("showLess") : translate("showMore")}
                 />
               </button>
@@ -141,21 +140,16 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         </Row>
         <tr
           data-state={_open ? "open" : "closed"}
-          className={cn("navds-table__expanded-row")}
+          className="aksel-table__expanded-row"
           aria-hidden={!_open}
           id={id}
         >
-          <td
-            colSpan={colSpan}
-            className={cn("navds-table__expanded-row-cell")}
-          >
+          <td colSpan={colSpan} className="aksel-table__expanded-row-cell">
             <AnimateHeight
-              className={cn("navds-table__expanded-row-collapse")}
-              innerClassName={cn(
-                `navds-table__expanded-row-content navds-table__expanded-row-content--gutter-${
-                  contentGutter ?? togglePlacement
-                }`,
-              )}
+              className="aksel-table__expanded-row-collapse"
+              innerClassName={`aksel-table__expanded-row-content aksel-table__expanded-row-content--gutter-${
+                contentGutter ?? togglePlacement
+              }`}
               height={_open ? "auto" : 0}
               duration={150}
               easing="cubic-bezier(0.39,0.57,0.56,1)"

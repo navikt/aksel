@@ -1,8 +1,8 @@
 import React, { SelectHTMLAttributes, forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
+import { cl } from "../../util/className";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 
@@ -65,8 +65,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       ...rest
     } = props;
 
-    const { cn } = useRenameCSS();
-
     const readOnlyEventHandlers = {
       onMouseDown: (evt) => {
         // NOTE: does not prevent click
@@ -90,23 +88,23 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <div
-        className={cn(
+        className={cl(
           className,
-          "navds-form-field",
-          `navds-form-field--${size}`,
+          "aksel-form-field",
+          `aksel-form-field--${size}`,
           {
-            "navds-form-field--disabled": !!inputProps.disabled,
-            "navds-form-field--readonly": readOnly,
-            "navds-select--error": hasError,
-            "navds-select--readonly": readOnly,
+            "aksel-form-field--disabled": !!inputProps.disabled,
+            "aksel-form-field--readonly": readOnly,
+            "aksel-select--error": hasError,
+            "aksel-select--readonly": readOnly,
           },
         )}
       >
         <Label
           htmlFor={inputProps.id}
           size={size}
-          className={cn("navds-form-field__label", {
-            "navds-sr-only": hideLabel,
+          className={cl("aksel-form-field__label", {
+            "aksel-sr-only": hideLabel,
           })}
         >
           {readOnly && <ReadOnlyIconWithTitle />}
@@ -114,8 +112,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </Label>
         {!!description && (
           <BodyShort
-            className={cn("navds-form-field__description", {
-              "navds-sr-only": hideLabel,
+            className={cl("aksel-form-field__description", {
+              "aksel-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}
@@ -124,27 +122,24 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             {description}
           </BodyShort>
         )}
-        <div className={cn("navds-select__container")} style={style}>
+        <div className="aksel-select__container" style={style}>
           <select
             {...omit(rest, ["error", "errorId", "size", "readOnly"])}
             {...inputProps}
             {...readOnlyEventHandlers}
             ref={ref}
-            className={cn(
-              "navds-select__input",
-              "navds-body-short",
-              `navds-body-short--${size ?? "medium"}`,
+            className={cl(
+              "aksel-select__input",
+              "aksel-body-short",
+              `aksel-body-short--${size ?? "medium"}`,
             )}
           >
             {children}
           </select>
-          <ChevronDownIcon
-            className={cn("navds-select__chevron")}
-            aria-hidden
-          />
+          <ChevronDownIcon className="aksel-select__chevron" aria-hidden />
         </div>
         <div
-          className={cn("navds-form-field__error")}
+          className="aksel-form-field__error"
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"

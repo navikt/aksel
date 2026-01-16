@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 
 export interface LinkProps
@@ -72,16 +72,14 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
       },
       ref,
     ) => {
-      const { cn } = useRenameCSS();
-
       return (
         <Component
           data-color={color ?? variantToColor(variant)}
           {...rest}
           ref={ref}
-          className={cn("navds-link", className, {
-            "navds-link--remove-underline": !underline,
-            "navds-link--inline-text": inlineText,
+          className={cl("aksel-link", className, {
+            "aksel-link--remove-underline": !underline,
+            "aksel-link--inline-text": inlineText,
           })}
         />
       );
