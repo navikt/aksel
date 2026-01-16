@@ -1,6 +1,5 @@
 "use client";
 
-import cl from "clsx";
 import { stegaClean } from "next-sanity";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -37,7 +36,7 @@ function DesignsystemSidebarSubNav(
             kategori: title,
           });
         }}
-        className={cl(styles.navListSubButton, styles.navListNotch)}
+        className={`${styles.navListSubButton} ${styles.navListNotch}`}
         data-notch={isSectionActive && !open}
         data-state={isSectionActive ? "active" : "inactive"}
         data-open={open}
