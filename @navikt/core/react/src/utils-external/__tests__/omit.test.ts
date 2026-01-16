@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { omit } from "../omit";
+import { omit } from "../helpers/omit";
 
 describe("omit", () => {
   test("should return a new object without the specified properties", () => {
