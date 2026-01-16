@@ -97,6 +97,11 @@ export interface DatePickerDefaultProps
    */
   showWeekNumber?: boolean;
   /**
+   * If datepicker should be fixed to 6 weeks, regardless of actual weeks in month.
+   * @default false
+   */
+  fixedWeeks?: boolean;
+  /**
    * Open state for user-controlled state. Component controlled by default.
    */
   open?: boolean;
