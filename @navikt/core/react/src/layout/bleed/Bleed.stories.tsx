@@ -1,6 +1,7 @@
 import type { Meta } from "@storybook/react-vite";
 import React from "react";
 import { BodyLong } from "../../typography";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import { Box } from "../box";
 import { HStack, VStack } from "../stack";
 import { Bleed } from "./Bleed";
@@ -437,24 +438,11 @@ export const ReflectivePadding = {
   ),
 };
 
-export const Chromatic = {
-  render: () => (
-    <VStack gap="space-16">
-      <h2>Default</h2>
-      <Default.render />
-      <h2>AsChild</h2>
-      <AsChild.render />
-      <h2>Breakpoints</h2>
-      <Breakpoints.render />
-      <h2>Px</h2>
-      <Px.render />
-      <h2>Full</h2>
-      <Full.render />
-      <h2>ReflectivePadding</h2>
-      <ReflectivePadding.render />
-    </VStack>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  AsChild,
+  Breakpoints,
+  Px,
+  Full,
+  ReflectivePadding,
+});
