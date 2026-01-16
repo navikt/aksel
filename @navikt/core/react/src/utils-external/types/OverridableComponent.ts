@@ -5,7 +5,7 @@ import React from "react";
  * @template Component The type of the props for the component.
  * @template Element The type of the HTML element that the component renders.
  */
-export interface OverridableComponent<Component, Element extends HTMLElement> {
+interface OverridableComponent<Component, Element extends HTMLElement> {
   /**
    * This is a function type that takes props and returns a React functional component.
    * @param props The props for the component, which are a combination of the Component type and React.RefAttributes for the Element type.
@@ -27,3 +27,5 @@ export interface OverridableComponent<Component, Element extends HTMLElement> {
       Omit<React.ComponentPropsWithRef<As>, keyof Component | "as">,
   ): ReturnType<React.FC>;
 }
+
+export type { OverridableComponent };

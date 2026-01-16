@@ -1,4 +1,4 @@
-export function omit<T extends object, K extends keyof T>(
+function omit<T extends object, K extends keyof T>(
   obj: T,
   props: K[],
 ): Omit<T, K> {
@@ -8,3 +8,5 @@ export function omit<T extends object, K extends keyof T>(
 
   return Object.fromEntries(filteredEntries) as Omit<T, K>;
 }
+
+export { omit };

@@ -481,12 +481,12 @@
     },
     "./Utils": {
       "import": {
-        "types": "./esm/util/index.d.ts",
-        "default": "./esm/util/index.js"
+        "types": "./esm/utils-external/index.d.ts",
+        "default": "./esm/utils-external/index.js"
       },
       "require": {
-        "types": "./cjs/util/index.d.ts",
-        "default": "./cjs/util/index.js"
+        "types": "./cjs/utils-external/index.d.ts",
+        "default": "./cjs/utils-external/index.js"
       }
     },
     "./Checkbox": {

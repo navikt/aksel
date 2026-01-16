@@ -34,7 +34,7 @@ const maybeReactUseId: undefined | (() => string) = (React as any)[
  * @param idOverride
  * @returns {string}
  */
-export function useId(idOverride?: string): string {
+function useId(idOverride?: string): string {
   if (maybeReactUseId !== undefined) {
     const reactId = maybeReactUseId();
     return idOverride ?? reactId.replace(/(:)/g, "");
@@ -42,3 +42,5 @@ export function useId(idOverride?: string): string {
   // biome-ignore lint/correctness/useHookAtTopLevel: `useId` is invariant at runtime.
   return useGlobalId(idOverride) ?? "";
 }
+
+export { useId };

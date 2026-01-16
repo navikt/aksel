@@ -6,10 +6,7 @@
     "module": "commonjs",
     "noImplicitAny": false,
     "declaration": true,
-    "sourceMap": true,
-    "paths": {
-      "@/className": ["./src/util/className.ts"]
-    }
+    "sourceMap": true
   },
   "include": ["./src"],
   "exclude": [
