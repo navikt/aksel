@@ -4,7 +4,7 @@
  * Utility to consistently call original eventhandler, often from props and internal eventhandler
  * @internal
  */
-export function composeEventHandlers<T extends React.SyntheticEvent | Event>(
+function composeEventHandlers<T extends React.SyntheticEvent | Event>(
   originalEventHandler?: (event: T) => void,
   ourEventHandler?: (event: T) => void,
   { checkForDefaultPrevented = true } = {},
@@ -17,3 +17,5 @@ export function composeEventHandlers<T extends React.SyntheticEvent | Event>(
     }
   };
 }
+
+export { composeEventHandlers };

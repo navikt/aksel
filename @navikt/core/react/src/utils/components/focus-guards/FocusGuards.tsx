@@ -1,5 +1,5 @@
 import React from "react";
-import { useMergeRefs } from "../hooks";
+import { useMergeRefs } from "../../hooks";
 
 const visuallyHidden: React.CSSProperties = {
   clip: "rect(0 0 0 0)",

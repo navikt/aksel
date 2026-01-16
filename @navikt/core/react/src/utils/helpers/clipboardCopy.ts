@@ -1,4 +1,4 @@
-export default async function copy(text: string): Promise<void> {
+async function clipboardCopy(text: string): Promise<void> {
   try {
     await navigator.clipboard.writeText(text);
   } catch (err) {
@@ -12,3 +12,5 @@ export default async function copy(text: string): Promise<void> {
     window.prompt(message, text);
   }
 }
+
+export { clipboardCopy };

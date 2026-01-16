@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import ReactDOM from "react-dom";
-import { useClientLayoutEffect } from "./useClientLayoutEffect";
+import { useClientLayoutEffect } from "../../utils-external";
 
 type TransitionStatus = "entering" | "exiting" | "idle" | undefined;
 

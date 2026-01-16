@@ -1,8 +1,6 @@
 import React from "react";
 
-export const requireReactElement = <T extends React.ReactNode>(
-  children: T,
-): T => {
+const requireReactElement = <T extends React.ReactNode>(children: T): T => {
   const isReactElement = React.isValidElement(children);
 
   if (!isReactElement) {
@@ -23,3 +21,5 @@ export const requireReactElement = <T extends React.ReactNode>(
 
   return children;
 };
+
+export { requireReactElement };

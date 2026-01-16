@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useId } from "../../util/hooks";
+import { useId } from "../../../utils-external";
 import {
   VirtualFocusDescendantsProvider,
   VirtualFocusInternalContextProvider,

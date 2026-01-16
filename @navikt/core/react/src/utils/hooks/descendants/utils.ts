@@ -5,7 +5,7 @@
  * - https://github.com/floating-ui/floating-ui/blob/8e449abb0bfda143c6a6eb01d3e6943c095b744f/packages/react/src/components/FloatingList.tsx#L8
  * - https://github.com/chakra-ui/chakra-ui/tree/5ec0be610b5a69afba01a9c22365155c1b519136/packages/components/descendant
  */
-export function sortNodes(nodes: Node[]) {
+function sortNodes(nodes: Node[]) {
   return nodes.sort((a, b) => {
     const compare = a.compareDocumentPosition(b);
 
@@ -36,21 +36,23 @@ export function sortNodes(nodes: Node[]) {
   });
 }
 
-export const isElement = (el: any): el is HTMLElement =>
+const isElement = (el: any): el is HTMLElement =>
   typeof el === "object" &&
   "nodeType" in el &&
   el.nodeType === Node.ELEMENT_NODE;
 
-export function getNextIndex(current: number, max: number, loop: boolean) {
+function getNextIndex(current: number, max: number, loop: boolean) {
   let next = current + 1;
   if (loop && next >= max) next = 0;
   return next;
 }
 
-export function getPrevIndex(current: number, max: number, loop: boolean) {
+function getPrevIndex(current: number, max: number, loop: boolean) {
   let next = current - 1;
   if (loop && next < 0) next = max;
   return next;
 }
 
-export const cast = <T>(value: any) => value as T;
+const cast = <T>(value: any) => value as T;
+
+export { sortNodes, isElement, getNextIndex, getPrevIndex, cast };

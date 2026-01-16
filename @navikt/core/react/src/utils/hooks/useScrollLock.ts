@@ -1,6 +1,5 @@
-import { isIOS, isWebKit } from "../detectBrowser";
-import { ownerDocument, ownerWindow } from "../owner";
-import { useClientLayoutEffect } from "./useClientLayoutEffect";
+import { useClientLayoutEffect } from "../../utils-external";
+import { isIOS, isWebKit, ownerDocument, ownerWindow } from "../helpers";
 import { Timeout } from "./useTimeout";
 
 let originalHtmlStyles: Partial<CSSStyleDeclaration> = {};

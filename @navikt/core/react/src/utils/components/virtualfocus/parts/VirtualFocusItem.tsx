@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../../slot/Slot";
-import { composeEventHandlers } from "../../composeEventHandlers";
-import { useMergeRefs } from "../../hooks";
+import { composeEventHandlers } from "../../../helpers";
+import { useMergeRefs } from "../../../hooks";
+import { Slot } from "../../slot/Slot";
 import {
   useVirtualFocusDescendant,
   useVirtualFocusInternalContext,

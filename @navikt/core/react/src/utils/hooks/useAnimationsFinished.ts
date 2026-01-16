@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { resolveRef } from "../resolveRef";
+import { resolveRef } from "../helpers";
 import { useEventCallback } from "./useEventCallback";
 
 /**

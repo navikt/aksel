@@ -15,10 +15,10 @@ import {
   PuzzlePieceIcon,
   RulerIcon,
 } from "@navikt/aksel-icons";
-import { Button } from "../../button";
-import { Search } from "../../form/search";
-import { VStack } from "../../layout/stack";
-import { Popover } from "../../popover";
+import { Button } from "../../../button";
+import { Search } from "../../../form/search";
+import { VStack } from "../../../layout/stack";
+import { Popover } from "../../../popover";
 import { VirtualFocus } from "./VirtualFocus";
 
 export default {

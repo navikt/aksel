@@ -1,10 +1,9 @@
 /* https://github.com/mui/material-ui/blob/master/packages/mui-base/src/TextareaAutosize/TextareaAutosize.tsx */
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import { useClientLayoutEffect } from "../util/hooks";
-import debounce from "./debounce";
-import { useMergeRefs } from "./hooks/useMergeRefs";
-import { ownerWindow } from "./owner";
+import { debounce, useClientLayoutEffect } from "../../../utils-external";
+import { ownerWindow } from "../../helpers";
+import { useMergeRefs } from "../../hooks";
 
 type State = {
   outerHeightStyle: number;

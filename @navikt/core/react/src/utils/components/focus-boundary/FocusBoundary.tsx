@@ -5,12 +5,15 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Slot } from "../../slot/Slot";
-import { useClientLayoutEffect, useMergeRefs } from "../../util/hooks";
-import { hideNonTargetElements } from "../hideNonTargetElements";
-import { useValueAsRef } from "../hooks/useValueAsRef";
-import { ownerDocument } from "../owner";
-import { resolveRef } from "../resolveRef";
+import { useClientLayoutEffect } from "../../../utils-external";
+import {
+  hideNonTargetElements,
+  ownerDocument,
+  resolveRef,
+} from "../../helpers";
+import { useMergeRefs } from "../../hooks";
+import { useValueAsRef } from "../../hooks/useValueAsRef";
+import { Slot } from "../slot/Slot";
 
 /* -------------------------------------------------------------------------- */
 /*                                 FocusBoundary                                 */

@@ -12,8 +12,8 @@
  * This is guidance only: warnings are logged to the console in development, never enforced at runtime.
  */
 import React, { useEffect, useRef } from "react";
-import { Slot } from "../../slot/Slot";
-import { createStrictContext } from "../create-strict-context";
+import { createStrictContext } from "../../helpers";
+import { Slot } from "../slot/Slot";
 
 type CompositionName = string;
 

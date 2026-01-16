@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { act } from "@testing-library/react";
 import React, { useState } from "react";
 import { expect, fireEvent, userEvent, waitFor, within } from "storybook/test";
-import { Dialog, DialogPopup } from "../../dialog";
-import { VStack } from "../../layout/stack";
-import { ActionMenu } from "../../overlays/action-menu";
-import { Provider } from "../../provider";
+import { Dialog, DialogPopup } from "../../../dialog";
+import { VStack } from "../../../layout/stack";
+import { ActionMenu } from "../../../overlays/action-menu";
+import { Provider } from "../../../provider";
 import { FocusBoundary, type FocusBoundaryProps } from "./FocusBoundary";
 
 const meta: Meta<typeof FocusBoundary> = {

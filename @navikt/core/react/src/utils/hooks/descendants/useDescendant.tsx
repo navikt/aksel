@@ -2,8 +2,8 @@
  * https://github.com/chakra-ui/chakra-ui/tree/5ec0be610b5a69afba01a9c22365155c1b519136/packages/components/descendant
  */
 import React, { useRef, useState } from "react";
-import { createStrictContext } from "../../create-strict-context";
-import { useClientLayoutEffect } from "../useClientLayoutEffect";
+import { useClientLayoutEffect } from "../../../utils-external";
+import { createStrictContext } from "../../helpers";
 import { useMergeRefs } from "../useMergeRefs";
 import { DescendantOptions, DescendantsManager } from "./descendant";
 import { cast } from "./utils";
@@ -11,7 +11,7 @@ import { cast } from "./utils";
 /**
  * Provides strongly typed versions of the context provider and hooks above.
  */
-export function createDescendantContext<
+function createDescendantContext<
   T extends HTMLElement = HTMLElement,
   K extends Record<string, any> = object,
 >() {
@@ -97,3 +97,5 @@ export function createDescendantContext<
     useDescendant,
   ] as const;
 }
+
+export { createDescendantContext };

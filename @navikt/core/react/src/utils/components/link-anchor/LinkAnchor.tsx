@@ -6,13 +6,15 @@ import React, {
   useRef,
 } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
-import { Slot } from "../../slot/Slot";
-import { cl } from "../className";
-import { composeEventHandlers } from "../composeEventHandlers";
-import { createStrictContext } from "../create-strict-context";
-import { useMergeRefs } from "../hooks/useMergeRefs";
-import { ownerWindow } from "../owner";
-import { AsChildProps } from "../types";
+import {
+  cl,
+  composeEventHandlers,
+  createStrictContext,
+  ownerWindow,
+} from "../../helpers";
+import { useMergeRefs } from "../../hooks";
+import type { AsChildProps } from "../../types";
+import { Slot } from "../slot/Slot";
 
 type LinkAnchorOverlayContextProps = {
   anchorRef: React.RefObject<HTMLAnchorElement | null>;

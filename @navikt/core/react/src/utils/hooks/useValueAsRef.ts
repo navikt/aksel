@@ -1,6 +1,6 @@
 "use client";
 
-import { useClientLayoutEffect } from "./useClientLayoutEffect";
+import { useClientLayoutEffect } from "../../utils-external";
 import { useRefWithInit } from "./useRefWithInit";
 
 function useValueAsRef<T>(value: T) {

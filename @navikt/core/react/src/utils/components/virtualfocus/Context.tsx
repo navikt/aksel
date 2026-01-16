@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { createStrictContext } from "../create-strict-context";
-import { createDescendantContext } from "../hooks/descendants/useDescendant";
+import { createStrictContext } from "../../helpers";
+import { createDescendantContext } from "../../hooks/descendants/useDescendant";
 import { SlottedDivElementRef } from "./SlottedDivElement";
 
 export const [

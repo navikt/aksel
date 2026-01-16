@@ -40,7 +40,7 @@ function toVal(mix: Exclude<ClassValue, null | undefined | false>) {
   return result;
 }
 
-export function cl(...inputs: ClassValue[]) {
+function cl(...inputs: ClassValue[]) {
   let parsedValue = "";
   let currentValue: ClassValue;
   let result = "";
@@ -56,3 +56,5 @@ export function cl(...inputs: ClassValue[]) {
 
   return result;
 }
+
+export { cl };
