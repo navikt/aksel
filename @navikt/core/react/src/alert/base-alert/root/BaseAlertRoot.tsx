@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
 import { AkselColor } from "../../../types";
 import { useId } from "../../../util";
+import { cl } from "../../../util/className";
 import { useI18n } from "../../../util/i18n/i18n.hooks";
 import {
   type BaseAlertContextProps,
@@ -20,7 +20,9 @@ interface BaseAlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   size?: BaseAlertContextProps["size"];
   /**
-   * Overrides color
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */
   "data-color"?: AkselColor;
   /**
@@ -64,8 +66,6 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
     }: BaseAlertProps,
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
-
     const statusId = useId();
     const translate = useI18n("global");
 
@@ -85,7 +85,7 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
           }
           ref={forwardedRef}
           {...restProps}
-          className={cn(className, "navds-base-alert")}
+          className={cl(className, "aksel-base-alert")}
           data-size={size}
           data-color={alertColor}
           data-variant={type}

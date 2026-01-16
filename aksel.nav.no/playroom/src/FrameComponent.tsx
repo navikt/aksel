@@ -1,9 +1,21 @@
 import * as React from "react";
 import "@navikt/ds-css";
-import "./frameComponent.css";
+import { Theme } from "@navikt/ds-react/Theme";
 
-const FrameComponent = ({ children }: { children: React.ReactNode }) => {
-  return <div id="sandbox-wrapper">{children}</div>;
+const FrameComponent = ({
+  children,
+  theme,
+}: {
+  children: React.ReactNode;
+  theme: "light" | "dark";
+}) => {
+  return (
+    <Theme theme={theme} asChild>
+      <div id="sandbox-wrapper" style={{ minHeight: "100vh" }}>
+        {children}
+      </div>
+    </Theme>
+  );
 };
 
 export default FrameComponent;

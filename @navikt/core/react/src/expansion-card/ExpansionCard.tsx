@@ -1,5 +1,6 @@
 import React, { forwardRef, useRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
+import { cl } from "../util/className";
 import { useControllableState } from "../util/hooks";
 import { OverridableComponent } from "../util/types";
 import ExpansionCardContent, {
@@ -68,6 +69,12 @@ interface ExpansionCardCommonProps
    * @default "medium"
    */
   size?: "medium" | "small";
+  /**
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
 }
 
 type ExpansionCardConditionalProps =
@@ -118,7 +125,6 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const shouldFade = useRef<boolean>(!(Boolean(open) || defaultOpen));
 
     const [_open, _setOpen] = useControllableState({
@@ -141,13 +147,12 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
         <section
           data-color={color}
           {...rest}
-          className={cn(
-            "navds-expansioncard",
+          className={cl(
+            "aksel-expansioncard",
             className,
-            `navds-expansioncard--${size}`,
+            `aksel-expansioncard--${size}`,
             {
-              "navds-expansioncard--open": open ?? _open,
-              "navds-expansioncard--no-animation": !shouldFade.current,
+              "aksel-expansioncard--no-animation": !shouldFade.current,
             },
           )}
           ref={ref}

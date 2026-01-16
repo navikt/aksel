@@ -62,12 +62,20 @@ export const Avatar = ({
       />
       {showName && (
         <VStack align="start">
-          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BoxNew
+            asChild
+            marginBlock="space-1 space-0"
+            marginInline="space-2 space-0"
+          >
             <Detail as="span" textColor="subtle">
               {type}
             </Detail>
           </BoxNew>
-          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BoxNew
+            asChild
+            marginBlock="space-1 space-0"
+            marginInline="space-2 space-0"
+          >
             <BodyShort
               as="span"
               className={styles.avatarName}
@@ -124,10 +132,18 @@ export const AvatarStack = ({
 
       {showNames && (
         <VStack>
-          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BoxNew
+            asChild
+            marginBlock="space-1 space-0"
+            marginInline="space-2 space-0"
+          >
             <Detail textColor="subtle">{firstAvatar.props.type}</Detail>
           </BoxNew>
-          <BoxNew asChild marginBlock="space-1 0" marginInline="space-2 0">
+          <BoxNew
+            asChild
+            marginBlock="space-1 space-0"
+            marginInline="space-2 space-0"
+          >
             <BodyShort className={styles.avatarName}>
               {`${firstAvatar.props.name}`}
               {suffix && (

@@ -54,7 +54,7 @@ const SupportSection = ({ entries }: Props) => (
           className="support-section"
           background="brand-blue-soft"
           borderWidth="1"
-          borderRadius="xlarge"
+          borderRadius="12"
           paddingBlock="space-16"
           paddingInline="space-24"
           data-color="brand-blue"

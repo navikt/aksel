@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { CompositionWarning } from "../../util/composition-warning";
 
 export interface FormSummaryHeaderProps
@@ -14,14 +14,12 @@ export const FormSummaryHeader = forwardRef<
   HTMLDivElement,
   FormSummaryHeaderProps
 >(({ children, className, ...rest }: FormSummaryHeaderProps, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <CompositionWarning.Root name="FormSummary.Header">
       <div
         ref={ref}
         {...rest}
-        className={cn("navds-form-summary__header", className)}
+        className={cl("aksel-form-summary__header", className)}
       >
         {children}
       </div>

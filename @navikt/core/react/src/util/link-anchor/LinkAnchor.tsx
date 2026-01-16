@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../className";
 import { composeEventHandlers } from "../composeEventHandlers";
 import { createStrictContext } from "../create-strict-context";
 import { useMergeRefs } from "../hooks/useMergeRefs";
@@ -38,7 +38,6 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
     }: LinkAnchorOverlayProps,
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
     const anchorRef = useRef<HTMLAnchorElement>(null);
 
     const Component = asChild ? Slot : "div";
@@ -48,7 +47,7 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
         <Component
           ref={forwardedRef}
           {...restProps}
-          className={cn("navds-link-anchor__overlay", className)}
+          className={cl("aksel-link-anchor__overlay", className)}
           onClick={composeEventHandlers(onClick, (e) => {
             if (
               e.target === anchorRef.current ||
@@ -110,8 +109,6 @@ const LinkAnchor = forwardRef<HTMLAnchorElement, LinkAnchorProps>(
     { children, asChild, className, ...restProps }: LinkAnchorProps,
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
-
     const context = useLinkAnchorContext(false);
     const mergedRefs = useMergeRefs(forwardedRef, context?.anchorRef);
 
@@ -121,7 +118,7 @@ const LinkAnchor = forwardRef<HTMLAnchorElement, LinkAnchorProps>(
       <Component
         ref={mergedRefs}
         {...restProps}
-        className={cn("navds-link-anchor", className)}
+        className={cl("aksel-link-anchor", className)}
       >
         {children}
       </Component>
@@ -134,13 +131,11 @@ type LinkAnchorArrowProps = Omit<ComponentProps<typeof ArrowRightIcon>, "ref">;
 
 const LinkAnchorArrow = forwardRef<SVGSVGElement, LinkAnchorArrowProps>(
   ({ className, ...restProps }: LinkAnchorArrowProps, forwardedRef) => {
-    const { cn } = useRenameCSS();
-
     return (
       <ArrowRightIcon
         ref={forwardedRef}
         aria-hidden
-        className={cn("navds-link-anchor__arrow", className)}
+        className={cl("aksel-link-anchor__arrow", className)}
         {...restProps}
       />
     );

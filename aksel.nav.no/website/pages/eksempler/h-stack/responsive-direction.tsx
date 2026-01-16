@@ -18,10 +18,10 @@ const Example = () => {
 
 const Placeholder = ({ height = "3rem" }: { height?: string }) => (
   <Box
-    background="surface-alt-3"
+    background="neutral-strong"
     height={height}
     width="3rem"
-    borderRadius="medium"
+    borderRadius="4"
   />
 );
 
@@ -29,7 +29,6 @@ const Placeholder = ({ height = "3rem" }: { height?: string }) => (
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "full",
-  legacyOnly: true,
 });
 
 /* Storybook story */

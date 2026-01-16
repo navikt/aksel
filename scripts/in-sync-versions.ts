@@ -22,7 +22,6 @@ function validateVersions() {
     for (const localDependency of [
       packageJson.dependencies,
       packageJson.devDependencies,
-      packageJson.peerDependencies,
     ]) {
       if (!localDependency) {
         continue;

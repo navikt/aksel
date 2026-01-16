@@ -1,5 +1,5 @@
-import cl from "clsx";
 import { format } from "date-fns";
+import { cl } from "../../util/className";
 import type { TFunction } from "../../util/i18n/i18n.types";
 import type { PeriodProps } from "../period/types";
 
@@ -8,13 +8,12 @@ export const getConditionalClasses = (
   direction: string,
   status: PeriodProps["status"],
 ) => {
-  /* Renaming to aksel-* happends where these are used, so no need to rename here */
-  return cl(`navds-timeline__period navds-timeline__period--${status}`, {
-    "navds-timeline__period--connected-both": cropped === "both",
-    "navds-timeline__period--connected-right":
+  return cl(`aksel-timeline__period aksel-timeline__period--${status}`, {
+    "aksel-timeline__period--connected-both": cropped === "both",
+    "aksel-timeline__period--connected-right":
       (cropped === "right" && direction === "left") ||
       (cropped === "left" && direction === "right"),
-    "navds-timeline__period--connected-left":
+    "aksel-timeline__period--connected-left":
       (cropped === "left" && direction === "left") ||
       (cropped === "right" && direction === "right"),
   });

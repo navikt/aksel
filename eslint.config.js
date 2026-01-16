@@ -37,6 +37,7 @@ module.exports = tseslint.config([
     "examples/astro/.astro",
     ".yarn",
     "**/next-env.d.ts",
+    "stylelint.config.mjs",
   ]),
   js.configs.recommended,
   reactPlugin.configs.flat.recommended,

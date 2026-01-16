@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { DismissableLayer } from "../../../overlays/dismissablelayer/DismissableLayer";
 import { Floating } from "../../../overlays/floating/Floating";
-import { useRenameCSS, useThemeInternal } from "../../../theme/Theme";
 import { useClientLayoutEffect } from "../../../util";
+import { cl } from "../../../util/className";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import AddNewOption from "./AddNewOption";
@@ -14,8 +14,6 @@ import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const FilteredOptions = () => {
-  const { cn } = useRenameCSS();
-  const themeContext = useThemeInternal();
   const {
     inputProps: { id },
     anchorRef,
@@ -55,8 +53,6 @@ const FilteredOptions = () => {
     (allowNewValues && isValueNew && !maxSelected.isLimitReached) || // Render add new option
     filteredOptions.length > 0; // Render filtered options
 
-  const height = themeContext?.isDarkside ? "316px" : "290px";
-
   return (
     <DismissableLayer
       asChild
@@ -72,9 +68,9 @@ const FilteredOptions = () => {
     >
       <Floating.Content
         ref={floatingRef}
-        className={cn("navds-combobox__list", {
-          "navds-combobox__list--closed": !isListOpen,
-          "navds-combobox__list--with-hover": isMouseLastUsedInputDevice,
+        className={cl("aksel-combobox__list", {
+          "aksel-combobox__list--closed": !isListOpen,
+          "aksel-combobox__list--with-hover": isMouseLastUsedInputDevice,
         })}
         id={filteredOptionsUtil.getFilteredOptionsId(id)}
         tabIndex={-1}
@@ -84,16 +80,13 @@ const FilteredOptions = () => {
         enabled={isListOpen}
         style={{
           maxHeight: localOpen
-            ? `min(${height}, var(--ac-floating-available-height))`
-            : `${height}`,
+            ? `min(316px, var(--__axc-floating-available-height))`
+            : `316px`,
         }}
         autoUpdateWhileMounted={false}
       >
         {shouldRenderNonSelectables && (
-          <div
-            className={cn("navds-combobox__list_non-selectables")}
-            role="status"
-          >
+          <div className="aksel-combobox__list_non-selectables" role="status">
             {isMultiSelect && maxSelected.limit && <MaxSelectedMessage />}
             {isLoading && <LoadingMessage />}
             {!isLoading && filteredOptions.length === 0 && !allowNewValues && (
@@ -106,7 +99,7 @@ const FilteredOptions = () => {
           <ul
             ref={setFilteredOptionsRef}
             role="listbox"
-            className={cn("navds-combobox__list-options")}
+            className="aksel-combobox__list-options"
           >
             {isValueNew && !maxSelected.isLimitReached && allowNewValues && (
               <AddNewOption />

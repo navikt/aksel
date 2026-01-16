@@ -42,7 +42,7 @@ function KomponentLinks({ data }: { data: KOMPONENT_BY_SLUG_QUERY_RESULT }) {
   }
 
   return (
-    <HStack gap="space-16" align="center" marginBlock="space-16 0">
+    <HStack gap="space-16" align="center" marginBlock="space-16 space-0">
       {gitConfig && (
         <Link
           target="_blank"

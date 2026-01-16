@@ -1,5 +1,5 @@
 .video {
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
 
   &:focus-visible {
     outline: 3px solid var(--ax-border-focus);

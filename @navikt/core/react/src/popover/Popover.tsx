@@ -3,16 +3,16 @@ import {
   Placement,
   Side,
   autoUpdate,
-  arrow as flArrow,
   offset as flOffset,
   flip,
   shift,
   useFloating,
 } from "@floating-ui/react";
-import React, { HTMLAttributes, forwardRef, useRef } from "react";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { omit } from "../util";
+import { cl } from "../util/className";
 import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
@@ -54,13 +54,12 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
     | "left-start"
     | "left-end";
   /**
-   * Adds a arrow from dialog to anchor when true
-   * @default true
+   * @deprecated No longer has any effect.
    */
   arrow?: boolean;
   /**
    * Distance from anchor to popover
-   * @default 16 w/arrow, 4 w/no-arrow
+   * @default 8
    */
   offset?: number;
   /**
@@ -109,43 +108,36 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       className,
       children,
       anchorEl,
-      arrow = true,
       open,
       onClose,
       placement = "top",
       offset,
       strategy: userStrategy,
       flip: _flip = true,
-      ...rest
+      ...restProps
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-    const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useModalContext(false) !== undefined;
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
-
-    const themeContext = useThemeInternal();
 
     const {
       update,
       refs,
       placement: flPlacement,
-      middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
       floatingStyles,
     } = useFloating({
       strategy: chosenStrategy,
       placement,
       open,
       middleware: [
-        flOffset(offset ?? (themeContext?.isDarkside ? 8 : arrow ? 16 : 4)),
+        flOffset(offset ?? 8),
         _flip &&
           flip({
             padding: 5,
             fallbackPlacements: getOppositePlacement(placement),
           }),
         shift({ padding: 12 }),
-        flArrow({ element: arrowRef, padding: 8 }),
       ],
     });
 
@@ -165,13 +157,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       return () => cleanup();
     }, [refs.floating, refs.reference, update, open, anchorEl]);
 
-    const staticSide = {
-      top: "bottom",
-      right: "left",
-      bottom: "top",
-      left: "right",
-    }[flPlacement.split("-")[0]];
-
     return (
       <DismissableLayer
         asChild
@@ -183,29 +168,15 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       >
         <div
           ref={floatingRef}
-          {...rest}
-          className={cn("navds-popover", className, {
-            "navds-popover--hidden": !open || !anchorEl,
+          {...omit(restProps, ["arrow"])}
+          className={cl("aksel-popover", className, {
+            "aksel-popover--hidden": !open || !anchorEl,
           })}
-          style={{ ...rest.style, ...floatingStyles }}
+          style={{ ...restProps.style, ...floatingStyles }}
           data-placement={flPlacement}
           aria-hidden={!open || !anchorEl}
         >
           {children}
-          {/* Hide arrow in new design, prop will be removed in breaking change update */}
-          {arrow && !themeContext?.isDarkside && (
-            <div
-              ref={(node) => {
-                arrowRef.current = node;
-              }}
-              style={{
-                ...(arrowX != null ? { left: arrowX } : {}),
-                ...(arrowY != null ? { top: arrowY } : {}),
-                ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
-              }}
-              className={cn("navds-popover__arrow")}
-            />
-          )}
         </div>
       </DismissableLayer>
     );

@@ -206,8 +206,13 @@ const answers = [
       },
       {
         label: "Kake",
-        value: `Jeg har alltid en kake i sekken min. Den blir litt most etter en
-        stund i sekken min men det gjør ingenting. Jeg liker moste kaker. Det er veldig godt.`,
+        value: (
+          <>
+            Jeg har alltid en kake i sekken min. Den blir litt most etter en
+            stund i sekken min men det gjør ingenting. Jeg liker moste kaker.
+            Det er veldig godt. <Link href="#">Lenke</Link>
+          </>
+        ),
       },
       {
         label: "Kaffekopp",
@@ -262,7 +267,7 @@ export const RealisticUsage: StoryFn<typeof FormSummary> = () => (
 );
 
 export const Empty: StoryFn<typeof FormSummary> = () => (
-  <VStack gap="8">
+  <VStack gap="space-32">
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading level="2">Just Header</FormSummary.Heading>

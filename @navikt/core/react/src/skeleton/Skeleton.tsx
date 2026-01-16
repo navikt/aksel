@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 
 export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -45,20 +45,19 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     return (
       <As
         {...rest}
         ref={ref}
-        className={cn(
-          "navds-skeleton",
+        className={cl(
+          "aksel-skeleton",
           className,
-          `navds-skeleton--${variant}`,
+          `aksel-skeleton--${variant}`,
           {
-            "navds-skeleton--has-children": Boolean(children),
-            "navds-skeleton--no-height": !height,
-            "navds-skeleton--no-width": !width,
-            "navds-skeleton--inline": As === "span",
+            "aksel-skeleton--has-children": Boolean(children),
+            "aksel-skeleton--no-height": !height,
+            "aksel-skeleton--no-width": !width,
+            "aksel-skeleton--inline": As === "span",
           },
         )}
         style={{ ...style, width, height }}

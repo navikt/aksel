@@ -2,7 +2,9 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import { isSameDay } from "date-fns";
 import React, { useState } from "react";
 import { Button } from "../../button";
+import { Dialog } from "../../dialog";
 import { HGrid } from "../../layout/grid";
+import { Spacer } from "../../layout/stack";
 import Modal from "../../modal/Modal";
 import { BodyLong } from "../../typography";
 import { useId } from "../../util";
@@ -73,6 +75,7 @@ export const Default: StoryObj<DefaultStoryProps> = {
           {...newProps}
           locale={props.locale}
           disableWeekends={props.disableWeekends}
+          fixedWeeks={props.fixedWeeks}
         >
           {!props.standalone &&
             (props.inputfield && props.mode !== "multiple" ? (
@@ -127,6 +130,7 @@ export const Default: StoryObj<DefaultStoryProps> = {
       options: ["single", "multiple", "range"],
       control: { type: "radio" },
     },
+    fixedWeeks: { control: { type: "boolean" } },
   },
 };
 
@@ -364,7 +368,7 @@ export const Readonly = () => {
 
 export const StandaloneOptions = () => {
   return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="8">
+    <HGrid columns={{ xs: 1, md: 2 }} gap="space-32">
       <DatePicker.Standalone today={new Date("Nov 23 2022")} />
       <DatePicker.Standalone
         dropdownCaption
@@ -489,7 +493,45 @@ export const ModalDemo = () => {
     </>
   );
 };
-ModalDemo.parameters = { chromatic: { pauseAnimationAtEnd: true } };
+
+export const DialogDemo = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+  });
+
+  return (
+    <Dialog defaultOpen>
+      <Dialog.Trigger>
+        <Button>Open dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Popup>
+        <Dialog.Header>
+          <Dialog.Title>Dialog-demo</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <BodyLong spacing>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          </BodyLong>
+
+          <DatePicker {...datepickerProps} dropdownCaption>
+            <DatePicker.Input
+              {...inputProps}
+              label="Velg dato"
+              description="Format: dd.mm.yyyy"
+            />
+          </DatePicker>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Button variant="tertiary">Avbryt</Button>
+          <Spacer />
+          <Button variant="secondary">Tilbake</Button>
+          <Button>Neste</Button>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
+  );
+};
 
 export const ColorRole = () => (
   <div data-color="meta-purple">

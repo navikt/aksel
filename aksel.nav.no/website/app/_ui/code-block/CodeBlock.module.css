@@ -2,7 +2,7 @@
 
 .codeBlock {
   background: var(--ax-bg-default);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   overflow: hidden;
   border: 1px solid var(--ax-border-neutral-subtleA);
 }

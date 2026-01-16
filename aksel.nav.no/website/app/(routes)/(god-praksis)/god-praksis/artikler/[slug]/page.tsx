@@ -30,6 +30,7 @@ import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import { formatDateString } from "@/ui-utils/format-date";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
+import { getValidRenderArray } from "@/ui-utils/valid-array";
 import styles from "./page.module.css";
 
 type Props = {
@@ -87,7 +88,10 @@ export default async function Page(props: Props) {
     pageData?._updatedAt;
 
   const outdated = differenceInMonths(new Date(), new Date(verifiedDate)) >= 12;
-  const writers = pageData.writers ?? [];
+  const writers = getValidRenderArray(pageData.writers);
+
+  const undertema = getValidRenderArray(pageData.undertema);
+  const relevanteArtikler = getValidRenderArray(pageData.relevante_artikler);
 
   return (
     <article className={styles.pageArticle}>
@@ -114,7 +118,7 @@ export default async function Page(props: Props) {
           {`Oppdatert ${formatDateString(verifiedDate)}`}
         </BodyShort>
         <HStack gap="space-8" marginBlock="space-16 space-48">
-          {pageData.undertema?.map(({ tema, title }) => {
+          {undertema?.map(({ tema, title }) => {
             const href = stegaClean(
               `/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
                 title ?? "",
@@ -146,13 +150,13 @@ export default async function Page(props: Props) {
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
 
-        {writers.length > 0 && (
+        {writers && (
           <VStack gap="space-8" marginBlock="space-48">
             <Label data-aksel-heading-color as="p">
               Medvirkende
             </Label>
             <HStack gap="space-32">
-              {pageData.writers?.map((writer) => {
+              {writers?.map((writer) => {
                 return (
                   <Avatar
                     type={humanizeRedaksjonType(writer.type)}
@@ -166,28 +170,27 @@ export default async function Page(props: Props) {
             </HStack>
           </VStack>
         )}
-        {pageData.relevante_artikler &&
-          pageData.relevante_artikler.length > 0 && (
-            <Box marginBlock="space-0 space-48">
-              <EditorPanel variant="links" heading="Relatert innhold fra Aksel">
-                <WebsiteList as="ul">
-                  {pageData.relevante_artikler.map((item) => (
-                    <WebsiteListItem key={item.heading} icon>
-                      <Link
-                        variant="neutral"
-                        href={`/${item.slug?.current}`}
-                        data-umami-event="navigere"
-                        data-umami-event-kilde="les ogsaa"
-                        data-umami-event-url={item.slug?.current ?? ""}
-                      >
-                        {item.heading}
-                      </Link>
-                    </WebsiteListItem>
-                  ))}
-                </WebsiteList>
-              </EditorPanel>
-            </Box>
-          )}
+        {relevanteArtikler && (
+          <Box marginBlock="space-0 space-48">
+            <EditorPanel variant="links" heading="Relatert innhold fra Aksel">
+              <WebsiteList as="ul">
+                {relevanteArtikler.map((item) => (
+                  <WebsiteListItem key={item.heading} icon>
+                    <Link
+                      variant="neutral"
+                      href={`/${item.slug?.current}`}
+                      data-umami-event="navigere"
+                      data-umami-event-kilde="les ogsaa"
+                      data-umami-event-url={item.slug?.current ?? ""}
+                    >
+                      {item.heading}
+                    </Link>
+                  </WebsiteListItem>
+                ))}
+              </WebsiteList>
+            </EditorPanel>
+          </Box>
+        )}
 
         <GodPraksisFeedback docId={pageData._id} />
       </div>

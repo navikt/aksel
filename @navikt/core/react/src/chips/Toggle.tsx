@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { AkselColor } from "../types";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 
 export interface ChipsToggleProps
@@ -11,10 +11,15 @@ export interface ChipsToggleProps
    */
   selected?: boolean;
   /**
-   * Chip-variants
-   * @default "action"
+   * @deprecated Use `data-color` prop instead.
    */
   variant?: "action" | "neutral";
+  /**
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
   /**
    * Toggles display of checkmark on selected
    * @default true
@@ -39,24 +44,13 @@ export const ToggleChips: OverridableComponent<
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal();
-    let localVariant: ChipsToggleProps["variant"] | undefined;
-
-    if (themeContext?.isDarkside) {
-      localVariant = variant;
-    } else {
-      localVariant = variant ?? "action";
-    }
-
     return (
       <Component
-        data-color={color ?? variantToColor(localVariant)}
+        data-color={color ?? variantToColor(variant)}
         {...rest}
         ref={ref}
-        className={cn("navds-chips__chip navds-chips__toggle", className, {
-          "navds-chips__toggle--with-checkmark": checkmark,
-          [`navds-chips__toggle--${localVariant}`]: localVariant,
+        className={cl("aksel-chips__chip aksel-chips__toggle", className, {
+          "aksel-chips__toggle--with-checkmark": checkmark,
         })}
         aria-pressed={selected}
         data-pressed={selected}
@@ -64,7 +58,7 @@ export const ToggleChips: OverridableComponent<
         {checkmark && (
           <svg
             aria-hidden
-            className={cn("navds-chips__toggle-icon")}
+            className="aksel-chips__toggle-icon"
             width="1.25em"
             height="1.25em"
             viewBox="0 0 20 20"
@@ -86,12 +80,12 @@ export const ToggleChips: OverridableComponent<
                 clipRule="evenodd"
                 d="M10 3.125C6.20304 3.125 3.125 6.20304 3.125 10C3.125 13.797 6.20304 16.875 10 16.875C13.797 16.875 16.875 13.797 16.875 10C16.875 6.20304 13.797 3.125 10 3.125ZM1.875 10C1.875 5.51269 5.51269 1.875 10 1.875C14.4873 1.875 18.125 5.51269 18.125 10C18.125 14.4873 14.4873 18.125 10 18.125C5.51269 18.125 1.875 14.4873 1.875 10Z"
                 /* After removing old fallbacks, change to currentColor */
-                fill="var(--ax-text-default, var(--ac-chip-toggle-circle-border, var(--a-border-default)))"
+                fill="var(--ax-text-default)"
               />
             )}
           </svg>
         )}
-        <span className={cn("navds-chips__chip-text")}>{children}</span>
+        <span className="aksel-chips__chip-text">{children}</span>
       </Component>
     );
   },

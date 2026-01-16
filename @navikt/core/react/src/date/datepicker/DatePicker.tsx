@@ -1,7 +1,7 @@
 import { isSameDay } from "date-fns";
 import React, { forwardRef, useState } from "react";
 import { DateRange } from "react-day-picker";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { useControllableState, useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.hooks";
@@ -87,7 +87,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       translations,
       getTranslations(locale),
     );
-    const { cn } = useRenameCSS();
 
     const ariaId = useId(id);
 
@@ -139,7 +138,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         >
           <div
             ref={mergedRef}
-            className={cn("navds-date__wrapper", wrapperClassName)}
+            className={cl("aksel-date__wrapper", wrapperClassName)}
           >
             {children}
             <DateDialog

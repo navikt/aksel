@@ -5,6 +5,7 @@ const GLOB_IGNORE_PATTERNS = [
   "**/lib/**",
   "**/.next/**",
   "**/__snapshots__/**",
+  "**/public/**",
 ];
 
 type SupportedCodemodExtensions =

@@ -23,11 +23,11 @@ const Example = () => {
 const Placeholder = ({ height = "2rem", children = "" }) => (
   <Box
     height={height}
-    background="surface-alt-3"
+    background="neutral-strong"
     style={{
       display: "grid",
       placeContent: "center",
-      color: "var(--a-text-on-action)",
+      color: "var(--ax-text-accent-contrast)",
     }}
   >
     {children}
@@ -38,7 +38,6 @@ const Placeholder = ({ height = "2rem", children = "" }) => (
 export default withDsExample(Example, {
   variant: "full",
   showBreakpoints: true,
-  legacyOnly: true,
 });
 
 /* Storybook story */

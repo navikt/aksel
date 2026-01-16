@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 
 /**
  * Footer slot for actions in `FormSummary`.
@@ -16,14 +16,11 @@ export const FormSummaryFooter = forwardRef<
   HTMLDivElement,
   FormSummaryFooterProps
 >(({ children, className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <div
       ref={ref}
-      data-color="info"
       {...rest}
-      className={cn("navds-form-summary__footer", className)}
+      className={cl("aksel-form-summary__footer", className)}
     >
       {children}
     </div>

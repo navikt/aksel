@@ -316,19 +316,19 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
              * Allows styling and animations based on the available space.
              */
             contentStyle.setProperty(
-              "--ac-floating-available-width",
+              "--__axc-floating-available-width",
               `${availableWidth}px`,
             );
             contentStyle.setProperty(
-              "--ac-floating-available-height",
+              "--__axc-floating-available-height",
               `${availableHeight}px`,
             );
             contentStyle.setProperty(
-              "--ac-floating-anchor-width",
+              "--__axc-floating-anchor-width",
               `${anchorWidth}px`,
             );
             contentStyle.setProperty(
-              "--ac-floating-anchor-height",
+              "--__axc-floating-anchor-height",
               `${anchorHeight}px`,
             );
           },
@@ -388,7 +388,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
             : "translate(0, -200%)", // keep off the page when measuring
           minWidth: "max-content",
           zIndex: "9999999",
-          ["--ac-floating-transform-origin" as any]: [
+          ["--__axc-floating-transform-origin" as any]: [
             middlewareData.transformOrigin?.x,
             middlewareData.transformOrigin?.y,
           ].join(" "),

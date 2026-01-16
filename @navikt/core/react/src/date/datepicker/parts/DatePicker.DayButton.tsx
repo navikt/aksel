@@ -1,7 +1,7 @@
 import { Locale, format } from "date-fns";
 import React, { useEffect, useRef } from "react";
 import { CalendarDay, Modifiers } from "react-day-picker";
-import { useRenameCSS } from "../../../theme/Theme";
+import { cl } from "../../../util/className";
 
 const DatePickerDayButton = ({
   day,
@@ -14,7 +14,6 @@ const DatePickerDayButton = ({
   modifiers: Modifiers;
   locale: Locale;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const { cn } = useRenameCSS();
   const ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const DatePickerDayButton = ({
       })}
       data-pressed={modifiers.selected}
       data-today={modifiers.today || undefined}
-      className={cn(rest.className, {
+      className={cl(rest.className, {
         "rdp-day_disabled": modifiers.disabled,
         "rdp-day_selected": modifiers.selected,
         "rdp-day_range_start": modifiers.range_start,

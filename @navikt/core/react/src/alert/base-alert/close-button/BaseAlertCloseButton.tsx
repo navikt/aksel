@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
-import { useRenameCSS } from "../../../theme/Theme";
+import { cl } from "../../../util/className";
 import { useI18n } from "../../../util/i18n/i18n.hooks";
 
 type BaseAlertCloseButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -22,7 +22,6 @@ const BaseAlertCloseButton = forwardRef<
   HTMLButtonElement,
   BaseAlertCloseButtonProps
 >(({ className, ...restProps }: BaseAlertCloseButtonProps, forwardedRef) => {
-  const { cn } = useRenameCSS();
   const translate = useI18n("global");
 
   return (
@@ -32,7 +31,7 @@ const BaseAlertCloseButton = forwardRef<
       {...restProps}
       data-color="neutral"
       variant="tertiary-neutral"
-      className={cn(className, "navds-base-alert__close-button")}
+      className={cl(className, "aksel-base-alert__close-button")}
       size="small"
       title={translate("close")}
       icon={<XMarkIcon aria-hidden />}

@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -20,6 +21,14 @@ export interface HeadingProps
    * Heading text.
    */
   children: React.ReactNode;
+  /**
+   * Overrides inherited color.
+   * @default "neutral"
+   *
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
 }
 
 /**
@@ -52,17 +61,16 @@ export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
       },
       ref,
     ) => {
-      const { cn } = useRenameCSS();
       const HeadingTag = as ?? (`h${level}` as React.ElementType);
 
       return (
         <HeadingTag
           {...rest}
           ref={ref}
-          className={cn(
+          className={cl(
             className,
-            "navds-heading",
-            `navds-heading--${size}`,
+            "aksel-heading",
+            `aksel-heading--${size}`,
             typoClassNames({
               spacing,
               align,

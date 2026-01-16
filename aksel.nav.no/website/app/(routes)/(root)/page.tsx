@@ -233,10 +233,10 @@ const Page = async () => {
                   background="raised"
                   borderWidth="1"
                   borderColor="neutral-subtleA"
-                  borderRadius="xlarge"
+                  borderRadius="12"
                   paddingBlock={{ xs: "space-48" }}
                   paddingInline={{ xs: "space-16", sm: "space-48" }}
-                  marginBlock="space-64 0"
+                  marginBlock="space-64 space-0"
                   position="relative"
                 >
                   <VStack gap="space-12">

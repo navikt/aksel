@@ -1,5 +1,4 @@
 import { type Meta, type StoryFn } from "@storybook/nextjs-vite";
-import "@navikt/ds-css/darkside";
 import { HGrid, LinkCard, VStack } from "@navikt/ds-react";
 import {
   LinkCardAnchor,

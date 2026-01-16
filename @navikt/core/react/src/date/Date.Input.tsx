@@ -2,9 +2,9 @@ import React, { InputHTMLAttributes, forwardRef, useRef } from "react";
 import { CalendarIcon } from "@navikt/aksel-icons";
 import { ReadOnlyIcon } from "../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../form/useFormField";
-import { useRenameCSS } from "../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit } from "../util";
+import { cl } from "../util/className";
 import { createStrictContext } from "../util/create-strict-context";
 import { useDateTranslationContext } from "./Date.locale";
 
@@ -75,7 +75,6 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const translate = useDateTranslationContext().translate;
-  const { cn } = useRenameCSS();
 
   const isDatepickerVariant = variant === "datepicker";
 
@@ -101,27 +100,27 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
 
   return (
     <div
-      className={cn(
+      className={cl(
         className,
-        "navds-form-field",
-        `navds-form-field--${size}`,
-        "navds-date__field",
+        "aksel-form-field",
+        `aksel-form-field--${size}`,
+        "aksel-date__field",
         {
-          "navds-text-field--error": hasError,
-          "navds-date__field--error": hasError,
-          "navds-form-field--disabled": !!inputProps.disabled,
-          "navds-text-field--disabled": !!inputProps.disabled,
-          "navds-form-field--readonly": readOnly,
-          "navds-text-field--readonly": readOnly,
-          "navds-date__field--readonly": readOnly,
+          "aksel-text-field--error": hasError,
+          "aksel-date__field--error": hasError,
+          "aksel-form-field--disabled": !!inputProps.disabled,
+          "aksel-text-field--disabled": !!inputProps.disabled,
+          "aksel-form-field--readonly": readOnly,
+          "aksel-text-field--readonly": readOnly,
+          "aksel-date__field--readonly": readOnly,
         },
       )}
     >
       <Label
         htmlFor={inputProps.id}
         size={size}
-        className={cn("navds-form-field__label", {
-          "navds-sr-only": hideLabel,
+        className={cl("aksel-form-field__label", {
+          "aksel-sr-only": hideLabel,
         })}
       >
         {readOnly && <ReadOnlyIcon />}
@@ -130,8 +129,8 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
       {!!description && (
         <BodyShort
           as="div"
-          className={cn("navds-form-field__description", {
-            "navds-sr-only": hideLabel,
+          className={cl("aksel-form-field__description", {
+            "aksel-sr-only": hideLabel,
           })}
           id={inputDescriptionId}
           size={size}
@@ -139,7 +138,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           {description}
         </BodyShort>
       )}
-      <div className={cn("navds-date__field-wrapper")}>
+      <div className="aksel-date__field-wrapper">
         <input
           ref={ref}
           {...omit(rest, ["error", "errorId", "size"])}
@@ -147,11 +146,11 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           autoComplete="off"
           aria-controls={context?.open ? context.ariaId : undefined}
           readOnly={readOnly}
-          className={cn(
-            "navds-date__field-input",
-            "navds-text-field__input",
-            "navds-body-short",
-            `navds-body-short--${size}`,
+          className={cl(
+            "aksel-date__field-input",
+            "aksel-text-field__input",
+            "aksel-body-short",
+            `aksel-body-short--${size}`,
           )}
           size={isDatepickerVariant ? 11 : 14}
         />
@@ -163,7 +162,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
             setAnchorRef?.(buttonRef.current);
           }}
           type="button"
-          className={cn("navds-date__field-button")}
+          className="aksel-date__field-button"
           ref={buttonRef}
         >
           <CalendarIcon
@@ -174,7 +173,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
         </button>
       </div>
       <div
-        className={cn("navds-form-field__error")}
+        className="aksel-form-field__error"
         id={errorId}
         aria-relevant="additions removals"
         aria-live="polite"

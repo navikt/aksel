@@ -5,7 +5,7 @@
   background-color: var(--ax-bg-neutral-soft);
   border: 1px solid var(--ax-border-neutral-subtleA);
   color: var(--ax-text-neutral);
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
 
   &:hover {
     background-color: var(--ax-bg-neutral-moderate-hover);

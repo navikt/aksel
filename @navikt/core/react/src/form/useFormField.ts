@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { useContext } from "react";
 import { ReadMore } from "../read-more/ReadMore";
+import { cl } from "../util/className";
 import { useId } from "../util/hooks";
 import { FieldsetContext } from "./fieldset/context";
 

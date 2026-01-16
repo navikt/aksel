@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { PencilIcon } from "@navikt/aksel-icons";
 import { Link } from "../../link";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { CompositionWarning } from "../../util/composition-warning";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { OverridableComponent } from "../../util/types";
@@ -25,8 +25,6 @@ export const FormSummaryEditLink: OverridableComponent<
   FormSummaryEditProps,
   HTMLAnchorElement
 > = forwardRef(({ children, className, as = "a", ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   const translate = useI18n("FormSummary");
 
   return (
@@ -38,7 +36,7 @@ export const FormSummaryEditLink: OverridableComponent<
         ref={ref}
         as={as}
         {...rest}
-        className={cn("navds-form-summary__edit", className)}
+        className={cl("aksel-form-summary__edit", className)}
       >
         <PencilIcon aria-hidden fontSize="1.5rem" />
         {children || translate("editAnswer")}

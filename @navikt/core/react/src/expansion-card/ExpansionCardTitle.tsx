@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 
 export interface ExpansionCardTitleProps
@@ -17,17 +17,15 @@ export const ExpansionCardTitle: OverridableComponent<
   HTMLHeadingElement
 > = forwardRef(
   ({ className, as: Component = "h3", size = "medium", ...rest }, ref) => {
-    const { cn } = useRenameCSS();
-
     return (
       <Component
         {...rest}
         ref={ref}
-        className={cn(
-          "navds-expansioncard__title",
-          `navds-expansioncard__title--${size}`,
-          "navds-heading",
-          `navds-heading--${size}`,
+        className={cl(
+          "aksel-expansioncard__title",
+          `aksel-expansioncard__title--${size}`,
+          "aksel-heading",
+          `aksel-heading--${size}`,
           className,
         )}
       />

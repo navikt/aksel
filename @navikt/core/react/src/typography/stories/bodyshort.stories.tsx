@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
+import { Box } from "../../layout/box";
 import { VStack } from "../../layout/stack";
 import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import { BodyShort } from "../BodyShort";
@@ -42,14 +43,14 @@ export const Controls: Story = {
     },
     textColor: {
       control: "radio",
-      options: ["default", "subtle"],
+      options: ["default", "subtle", "contrast"],
     },
   },
 };
 
 export const SizeLarge: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyShort size="large">{lorem}</BodyShort>
       <BodyShort size="large" weight="semibold">
         {lorem}
@@ -63,7 +64,7 @@ export const SizeLarge: Story = {
 
 export const SizeMedium: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyShort size="medium">{lorem}</BodyShort>
       <BodyShort size="medium" weight="semibold">
         {lorem}
@@ -77,7 +78,7 @@ export const SizeMedium: Story = {
 
 export const SizeSmall: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyShort size="small">{lorem}</BodyShort>
       <BodyShort size="small" weight="semibold">
         {lorem}
@@ -130,7 +131,7 @@ export const SpacingSmall: Story = {
 
 export const Align: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyShort align="start">{lorem}</BodyShort>
       <BodyShort align="center">{lorem}</BodyShort>
       <BodyShort align="end">{lorem}</BodyShort>
@@ -158,9 +159,12 @@ export const OverrideTag: Story = {
 
 export const ColorRole: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <BodyShort textColor="default">{lorem}</BodyShort>
       <BodyShort textColor="subtle">{lorem}</BodyShort>
+      <Box background="neutral-strong">
+        <BodyShort textColor="contrast">{lorem}</BodyShort>
+      </Box>
       <BodyShort data-color="brand-magenta">{lorem}</BodyShort>
       <BodyShort data-color="brand-magenta" textColor="default">
         {lorem}
@@ -168,6 +172,11 @@ export const ColorRole: Story = {
       <BodyShort data-color="brand-magenta" textColor="subtle">
         {lorem}
       </BodyShort>
+      <Box background="neutral-strong">
+        <BodyShort data-color="brand-magenta" textColor="contrast">
+          {lorem}
+        </BodyShort>
+      </Box>
     </VStack>
   ),
 };

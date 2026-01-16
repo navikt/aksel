@@ -138,11 +138,6 @@ const expansionCardBlock = `_type == "expansioncard"=>{
   }
 }`;
 
-const spesialSeksjon = `_type == "spesial_seksjon" =>{
-  ...,
-  "token": token_ref->{...}
-}`;
-
 const propsSeksjon = `_type == "props_seksjon" =>{
   ...,
   komponenter[]{
@@ -165,7 +160,6 @@ ${relatertInnhold},
 ${liveSeksjon},
 ${propsSeksjon},
 ${installSeksjon},
-${spesialSeksjon},
 ${accordionBlock},
 ${expansionCardBlock},
 ${defaultBlock},

@@ -1,8 +1,7 @@
-import cl from "clsx";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit, useId } from "../../util";
+import { cl } from "../../util/className";
 import { ReadOnlyIcon, ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps } from "../useFormField";
 import { FieldsetContext } from "./context";
@@ -44,7 +43,6 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       inputDescriptionId,
     } = useFieldset(props, legendId);
 
-    const { cn } = useRenameCSS();
     const fieldset = useContext(FieldsetContext);
 
     const {
@@ -61,7 +59,9 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
     return (
       <FieldsetContext.Provider
         value={{
-          error: errorPropagation ? props.error ?? fieldset?.error : undefined,
+          error: errorPropagation
+            ? (props.error ?? fieldset?.error)
+            : undefined,
           errorId: cl({
             [errorId]: showErrorMsg,
             [fieldset?.errorId ?? ""]: !!fieldset?.error,
@@ -75,13 +75,13 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           {...omit(rest, ["errorId", "error", "size", "readOnly"])}
           {...inputProps}
           ref={ref}
-          className={cn(
+          className={cl(
             className,
-            "navds-fieldset",
-            `navds-fieldset--${size}`,
+            "aksel-fieldset",
+            `aksel-fieldset--${size}`,
             {
-              "navds-fieldset--error": hasError,
-              "navds-fieldset--readonly": readOnly,
+              "aksel-fieldset--error": hasError,
+              "aksel-fieldset--readonly": readOnly,
             },
           )}
         >
@@ -89,8 +89,8 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             id={legendId}
             size={size}
             as="legend"
-            className={cn("navds-fieldset__legend", {
-              "navds-sr-only": !!hideLegend,
+            className={cl("aksel-fieldset__legend", {
+              "aksel-sr-only": !!hideLegend,
             })}
           >
             {readOnly &&
@@ -99,8 +99,8 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           </Label>
           {!!description && (
             <BodyShort
-              className={cn("navds-fieldset__description", {
-                "navds-sr-only": !!hideLegend,
+              className={cl("aksel-fieldset__description", {
+                "aksel-sr-only": !!hideLegend,
               })}
               id={inputDescriptionId}
               size={size ?? "medium"}
@@ -114,7 +114,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             id={errorId}
             aria-relevant="additions removals"
             aria-live="polite"
-            className={cn("navds-fieldset__error")}
+            className="aksel-fieldset__error"
           >
             {showErrorMsg && (
               <ErrorMessage size={size} showIcon>

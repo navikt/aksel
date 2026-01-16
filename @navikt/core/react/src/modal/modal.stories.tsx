@@ -351,7 +351,7 @@ export const WithSrOnlyElement: StoryFn = () => (
     header={{ heading: "Simple header" }}
   >
     <Modal.Body>
-      <VStack gap="16">
+      <VStack gap="space-64">
         <BodyLong>
           The modal body needs to have position:relative to make sr-only
           elements position themselves correctly when the modal body is

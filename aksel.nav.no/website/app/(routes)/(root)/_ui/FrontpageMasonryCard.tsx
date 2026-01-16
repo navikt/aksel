@@ -1,4 +1,3 @@
-import cl from "clsx";
 import Image from "next/image";
 import { HStack, LinkCard, VStack } from "@navikt/ds-react";
 import {
@@ -14,6 +13,7 @@ import { Avatar, AvatarStack, avatarUrl } from "@/app/_ui/avatar/Avatar";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
+import { cl } from "@/ui-utils/className";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 import { BetaTag, Tag } from "./FrontpageTag";
@@ -72,8 +72,8 @@ const Card = ({ article, visible }: CardProps) => {
       {showImage && (
         <LinkCardImage
           aspectRatio="16/9"
-          className={cl(`${styles.cardImageWrapper}`, {
-            [`${styles.betaHue}`]: getStatusTag() === "beta",
+          className={cl(styles.cardImageWrapper, {
+            [styles.betaHue]: getStatusTag() === "beta",
           })}
         >
           <Image

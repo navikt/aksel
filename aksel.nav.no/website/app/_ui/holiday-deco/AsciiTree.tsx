@@ -1,9 +1,9 @@
 "use client";
 
-import cl from "clsx";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import tiny_color from "tinycolor2";
+import { cl } from "@/ui-utils/className";
 import styles from "./Holiday.module.css";
 
 /* https://github.com/importre/xmas-tree/blob/b3ccb8de7f4f9cd271f3e41ad9a1780bfbcb8ced/index.js */
@@ -92,7 +92,7 @@ function AsciiTree({ right = false }: { right?: boolean }) {
   return (
     <div
       aria-hidden
-      className={cl(`${styles.tree}`, {
+      className={cl(styles.tree, {
         [styles.right]: right,
       })}
       suppressHydrationWarning

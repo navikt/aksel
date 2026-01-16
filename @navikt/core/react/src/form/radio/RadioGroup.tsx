@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { useId } from "../../util/hooks";
 import { Fieldset, FieldsetProps } from "../fieldset";
 import { FieldsetContext } from "../fieldset/context";
@@ -71,7 +71,6 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const fieldset = useContext(FieldsetContext);
 
     const nameId = useId();
@@ -81,10 +80,10 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
         {...rest}
         readOnly={readOnly}
         ref={ref}
-        className={cn(
+        className={cl(
           className,
-          "navds-radio-group",
-          `navds-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`,
+          "aksel-radio-group",
+          `aksel-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`,
         )}
         nativeReadOnly={false}
       >
@@ -97,7 +96,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
             required,
           }}
         >
-          <div className={cn("navds-radio-buttons")}>{children}</div>
+          <div className="aksel-radio-buttons">{children}</div>
         </RadioGroupContext.Provider>
       </Fieldset>
     );

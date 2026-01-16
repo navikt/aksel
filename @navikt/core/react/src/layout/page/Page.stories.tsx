@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect } from "react";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import { Box } from "../box";
 import { HGrid } from "../grid";
-import { VStack } from "../stack";
 import Page from "./Page";
 import { widths } from "./parts/PageBlock";
 
@@ -19,7 +19,6 @@ export default meta;
 
 export const Default: StoryFn = ({
   belowFold,
-  background,
   width,
   gutters,
   contentBlockPadding,
@@ -27,7 +26,6 @@ export const Default: StoryFn = ({
   <Page
     footer={<Footer width={width} gutters={gutters} />}
     footerPosition={belowFold ? "belowFold" : undefined}
-    background={background}
     contentBlockPadding={contentBlockPadding}
   >
     <Header width={width} gutters={gutters} />
@@ -39,10 +37,6 @@ Default.argTypes = {
   width: {
     control: "radio",
     options: [...widths],
-  },
-  background: {
-    control: "radio",
-    options: ["bg-default", "bg-subtle"],
   },
   belowFold: {
     control: "boolean",
@@ -73,49 +67,20 @@ export const BelowFold: StoryFn = () => (
   </Page>
 );
 
-export const Background: StoryFn = () => (
-  <HGrid columns={2} gap="4">
-    <Page
-      background="bg-default"
-      footer={<div>footer</div>}
-      contentBlockPadding="end"
-    >
-      <div>header</div>
-      <div>content</div>
-    </Page>
-    <Page
-      background="bg-subtle"
-      footer={<div>footer</div>}
-      contentBlockPadding="end"
-    >
-      <div>header</div>
-      <div>content</div>
-    </Page>
-  </HGrid>
-);
-
 export const ContentBlockPadding: StoryFn = () => (
-  <HGrid columns={2} gap="6" align="start">
-    <Page
-      footer={<Footer width="lg" gutters />}
-      contentBlockPadding="end"
-      background="bg-subtle"
-    >
+  <HGrid columns={2} gap="space-24" align="start">
+    <Page footer={<Footer width="lg" gutters />} contentBlockPadding="end">
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
-        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+        <Box background="info-soft" style={{ height: "80vh" }}>
           Main
         </Box>
       </Page.Block>
     </Page>
-    <Page
-      footer={<Footer width="lg" gutters />}
-      contentBlockPadding="none"
-      background="bg-subtle"
-    >
+    <Page footer={<Footer width="lg" gutters />} contentBlockPadding="none">
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
-        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+        <Box background="info-soft" style={{ height: "80vh" }}>
           Main
         </Box>
       </Page.Block>
@@ -124,19 +89,19 @@ export const ContentBlockPadding: StoryFn = () => (
 );
 
 export const Gutters: StoryFn = () => (
-  <HGrid columns={2} gap="6" align="start">
-    <Page footer={<Footer width="lg" gutters />} background="bg-subtle">
+  <HGrid columns={2} gap="space-24" align="start">
+    <Page footer={<Footer width="lg" gutters />}>
       <Header width="lg" gutters />
       <Page.Block width="lg" gutters as="main">
-        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+        <Box background="info-soft" style={{ height: "80vh" }}>
           Main
         </Box>
       </Page.Block>
     </Page>
-    <Page footer={<Footer width="lg" />} background="bg-subtle">
+    <Page footer={<Footer width="lg" />}>
       <Header width="lg" />
       <Page.Block width="lg" as="main">
-        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+        <Box background="info-soft" style={{ height: "80vh" }}>
           Main
         </Box>
       </Page.Block>
@@ -210,23 +175,19 @@ export const OutsideBackground = () => {
     <Page
       contentBlockPadding="end"
       footer={
-        <Box
-          background="surface-alt-3-subtle"
-          style={{ height: 100 }}
-          as="footer"
-        >
+        <Box background="info-soft" style={{ height: 100 }} as="footer">
           <Page.Block width="lg" gutters>
             Footer
           </Page.Block>
         </Box>
       }
     >
-      <Box background="surface-alt-1-subtle" style={{ height: 64 }} as="header">
+      <Box background="meta-purple-soft" style={{ height: 64 }} as="header">
         <Page.Block width="lg" gutters>
           Header
         </Page.Block>
       </Box>
-      <Box background="surface-alt-2-subtle" style={{ height: 300 }} as="main">
+      <Box background="meta-lime-soft" style={{ height: 300 }} as="main">
         <Page.Block width="lg" gutters>
           main
         </Page.Block>
@@ -238,7 +199,7 @@ export const OutsideBackground = () => {
 function Header({ width = "lg", gutters = false }: any) {
   return (
     <Page.Block as="header" width={width} gutters={gutters}>
-      <Box background="surface-alt-3-subtle" style={{ height: 64 }}>
+      <Box background="info-soft" style={{ height: 64 }}>
         Header
       </Box>
     </Page.Block>
@@ -248,7 +209,7 @@ function Header({ width = "lg", gutters = false }: any) {
 function Content({ width = "lg", gutters = false }: any) {
   return (
     <Page.Block width={width} gutters={gutters} as="main">
-      <Box background="surface-alt-3-subtle" style={{ height: 300 }}>
+      <Box background="info-soft" style={{ height: 300 }}>
         Main
       </Box>
     </Page.Block>
@@ -258,34 +219,17 @@ function Content({ width = "lg", gutters = false }: any) {
 function Footer({ width = "lg", gutters = false }: any) {
   return (
     <Page.Block width={width} gutters={gutters} as="footer">
-      <Box background="surface-alt-3-subtle" style={{ height: 100 }}>
+      <Box background="info-soft" style={{ height: 100 }}>
         Footer
       </Box>
     </Page.Block>
   );
 }
 
-export const Chromatic = () => {
-  return (
-    <VStack gap="2">
-      <h2>Default</h2>
-      <Default />
-      <h2>BelowFold</h2>
-      <BelowFold />
-      <h2>Background</h2>
-      <Background />
-      <h2>ContentBlockPadding</h2>
-      <ContentBlockPadding />
-      <h2>Gutters</h2>
-      <Gutters />
-      <h2>OutsideBackground</h2>
-      <OutsideBackground />
-    </VStack>
-  );
-};
-
-Chromatic.parameters = {
-  chromatic: {
-    disable: false,
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  BelowFold,
+  ContentBlockPadding,
+  Gutters,
+  OutsideBackground,
+});

@@ -1,11 +1,8 @@
 "use client";
 
-import cl from "clsx";
-import { useTheme } from "next-themes";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
 import {
-  type CSSProperties,
   ComponentType,
   useEffect,
   useState,
@@ -18,7 +15,8 @@ import {
   MonitorIcon,
   TabletIcon,
 } from "@navikt/aksel-icons";
-import { Theme as AkselTheme, BodyShort, Box, HStack } from "@navikt/ds-react";
+import { BodyShort, Box, HStack } from "@navikt/ds-react";
+import { cl } from "@/ui-utils/className";
 import styles from "./examples.module.css";
 import { ExampleThemingSwitch } from "./withDsExample.theme";
 
@@ -33,33 +31,27 @@ type withDsT = {
   background?: "inverted" | "subtle";
   minHeight?: string;
   showBreakpoints?: boolean;
-  /**
-   * Hides theme switch, makes sure to not use `AkselTheme` wrapper and forces light-mode.
-   */
-  legacyOnly?: boolean;
 };
 
 export const withDsExample = (
   Component: ComponentType,
-  {
-    variant,
-    background,
-    minHeight,
-    showBreakpoints,
-    legacyOnly = false,
-  }: withDsT = {},
+  { variant, background, minHeight, showBreakpoints }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
-    const { theme } = useTheme();
     const pathname = usePathname() || "///";
     const pathParts = pathname.split("/");
 
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+      setMounted(true);
+    }, []);
+    if (!mounted) {
+      return null;
+    }
+
     return (
-      <ThemeWrapper
-        useDarkside={!(legacyOnly || theme === "legacy")}
+      <div
         className={cl(styles.container, {
-          /* Overrides global theme when showing legacy-examples */
-          light: legacyOnly,
           [styles.containerDefault]: !variant,
           [styles.containerStatic]: variant === "static",
           [styles.containerFull]: variant === "full",
@@ -75,7 +67,7 @@ export const withDsExample = (
             } - aksel.nav.no`}
           </title>
         </Head>
-        <ExampleThemingSwitch legacyOnly={legacyOnly} />
+        <ExampleThemingSwitch />
         {showBreakpoints && <BreakpointText />}
         <main
           id="ds-example"
@@ -84,7 +76,7 @@ export const withDsExample = (
         >
           <Component {...props} />
         </main>
-      </ThemeWrapper>
+      </div>
     );
   };
 
@@ -94,42 +86,6 @@ export const withDsExample = (
 
   return DsHOC;
 };
-
-function ThemeWrapper({
-  children,
-  useDarkside,
-  style,
-  className,
-}: {
-  children: React.ReactNode;
-  useDarkside: boolean;
-  style: CSSProperties;
-  className: string;
-}) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
-  if (useDarkside) {
-    return (
-      <AkselTheme hasBackground={false} className={className} asChild>
-        <div style={style}>{children}</div>
-      </AkselTheme>
-    );
-  }
-
-  return (
-    <div className={className} style={style}>
-      {children}
-    </div>
-  );
-}
 
 function getBg(background: withDsT["background"]): string {
   switch (background) {
@@ -173,9 +129,9 @@ const BreakpointText = () => {
     <Box
       asChild
       position="absolute"
-      left="0"
-      top="0"
-      borderRadius="0 0 medium 0"
+      left="space-0"
+      top="space-0"
+      borderRadius="0 0 4 0"
       padding="space-4"
     >
       <HStack

@@ -186,7 +186,7 @@
 }
 
 .sectionImage {
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   background: var(--ax-brand-blue-300);
   object-fit: cover;
 }

@@ -1,4 +1,5 @@
-import { FileUpload, Heading, VStack } from "@navikt/ds-react";
+import { PencilIcon } from "@navikt/aksel-icons";
+import { Button, FileUpload, Heading, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => (
@@ -22,6 +23,20 @@ const Example = () => (
           action: "delete",
           onClick: () => null,
         }}
+      />
+    </div>
+    <div>
+      <Heading size="small">Egendefinert knapp</Heading>
+      <FileUpload.Item
+        file={{ name: "eksempel3.pdf", size: 250000 }}
+        href="#"
+        button={
+          <Button
+            variant="tertiary"
+            data-color="neutral"
+            icon={<PencilIcon title="Endre filnavn" />}
+          />
+        }
       />
     </div>
   </VStack>

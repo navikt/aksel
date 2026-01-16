@@ -243,7 +243,7 @@ export default async function Page(props: Props) {
             Object.values(articlesMap).map(
               ({ title, description, ariaLabel, articles }) => (
                 <section aria-label={ariaLabel} key={title}>
-                  <VStack gap="space-8" marginBlock="0 space-24">
+                  <VStack gap="space-8" marginBlock="space-0 space-24">
                     <Heading level="2" size="large" data-aksel-heading-color>
                       {title}
                     </Heading>
@@ -272,7 +272,7 @@ export default async function Page(props: Props) {
                             {article.description && (
                               <LinkCardDescription>
                                 {article.displayDate && (
-                                  <Box asChild marginBlock="0 space-8">
+                                  <Box asChild marginBlock="space-0 space-8">
                                     <Detail
                                       as="time"
                                       textColor="subtle"

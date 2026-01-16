@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 
 export interface InternalHeaderButtonProps
@@ -13,13 +13,11 @@ export const InternalHeaderButton: OverridableComponent<
   InternalHeaderButtonProps,
   HTMLButtonElement
 > = forwardRef(({ as: Component = "button", className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <Component
       {...rest}
       ref={ref}
-      className={cn("navds-internalheader__button", className)}
+      className={cl("aksel-internalheader__button", className)}
     />
   );
 });

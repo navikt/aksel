@@ -4,8 +4,8 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
 import { omit } from "../../../util";
+import { cl } from "../../../util/className";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
@@ -38,8 +38,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     { inputClassName, shouldShowSelectedOptions, placeholder, onBlur, ...rest },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     const internalRef = useRef<HTMLInputElement>(null);
     const mergedRefs = useMergeRefs(ref, internalRef);
     const {
@@ -289,12 +287,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onKeyDown={handleKeyDown}
         autoComplete="off"
         placeholder={selectedOptions.length ? undefined : placeholder}
-        className={cn(
+        className={cl(
           inputClassName,
-          "navds-combobox__input",
-          "navds-body-short",
-          `navds-body-short--${size}`,
-          { "navds-combobox__input--hide-caret": hideCaret },
+          "aksel-combobox__input",
+          "aksel-body-short",
+          `aksel-body-short--${size}`,
+          { "aksel-combobox__input--hide-caret": hideCaret },
         )}
         aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}
         aria-expanded={!!isListOpen}

@@ -30,7 +30,7 @@ type MigrationT = Record<
 >;
 
 export const migrations: MigrationT = {
-  "1.0.0": [
+  v1: [
     {
       description: "Runs all codemods for beta -> v1 migration",
       value: "v1-preset",
@@ -57,7 +57,7 @@ export const migrations: MigrationT = {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "2.0.0": [
+  v2: [
     {
       description: "Patches changed css-variables",
       value: "v2-css",
@@ -83,7 +83,7 @@ export const migrations: MigrationT = {
       ignoredExtensions: JS_EXTENSIONS,
     },
   ],
-  "v3.0.0": [
+  v3: [
     {
       description:
         "Replaces deprecated <CopyToClipboard /> with <CopyButton />",
@@ -94,7 +94,7 @@ export const migrations: MigrationT = {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "v4.0.0": [
+  v4: [
     {
       description:
         "Replaced deprecated 'internal'-component import to 'core'-imports",
@@ -121,7 +121,7 @@ export const migrations: MigrationT = {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "v6.0.0": [
+  v6: [
     {
       description:
         "Removes `backgroundColor` and `avatarBgColor` properties from `Chat` and `Chat.Bubble`",
@@ -132,7 +132,7 @@ export const migrations: MigrationT = {
       ignoredExtensions: CSS_EXTENSIONS,
     },
   ],
-  "v8.0.0": [
+  v8: [
     {
       description:
         "Updates Box with legacy-tokens to Box using the new token system, and renames already migrated BoxNew/Box.New instances to Box.",
@@ -156,7 +156,7 @@ export const migrations: MigrationT = {
     },
     {
       description:
-        "Tries to migrate List component moving 'title' and 'description' props to 'Heading' and 'BodyShort'.",
+        "Tries to migrate List component by wrapping it with 'Box' and moving 'title' and 'description' props to 'Heading' and 'BodyShort'.",
       value: "v8-list",
       path: "v8.0.0/list/list",
       ignoredExtensions: CSS_EXTENSIONS,
@@ -210,6 +210,20 @@ export const migrations: MigrationT = {
       path: "v8.0.0/chips-variant/chips-variant",
       ignoredExtensions: CSS_EXTENSIONS,
     },
+    {
+      description:
+        "Updates variant + data-color props on Button based on current variant prop.",
+      value: "v8-button-variant",
+      path: "v8.0.0/button-variant/button-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
+    {
+      description:
+        "Updates variant + data-color props on Link based on current variant prop.",
+      value: "v8-link-variant",
+      path: "v8.0.0/link-variant/link-variant",
+      ignoredExtensions: CSS_EXTENSIONS,
+    },
   ],
 } as const;
 
@@ -249,6 +263,27 @@ export function getMigrationNames() {
 }
 
 /**
+ * Returns all available version keys from the migrations object.
+ */
+export function getVersionKeys(): string[] {
+  return Object.keys(migrations);
+}
+
+/**
+ * Returns the migrations available for a specific version.
+ */
+export function getMigrationsForVersion(version: string) {
+  return migrations[version] ?? [];
+}
+
+/**
+ * Returns the override migrations available for a specific version.
+ */
+export function getOverridesForVersion(version: string) {
+  return migrationStringOverride[version] ?? [];
+}
+
+/**
  * Allows injecting additional migration names that are not part of the main migrations-list.
  * This is used for interactive migrations that should not be part of the main list.
  *
@@ -256,7 +291,7 @@ export function getMigrationNames() {
  * which is not the case for interactive migrations that are handled differently.
  */
 export const migrationStringOverride = {
-  "v8.0.0": [
+  v8: [
     {
       value: "v8-tokens",
       description: "Starts interactive token migration for v8",
@@ -281,6 +316,12 @@ export function getMigrationString() {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });
   });
+
+  str += `\n${chalk.bold(chalk.blueBright("Interactive version selection:"))}\n`;
+  str += chalk.gray(
+    "Run with a version key to interactively select migrations:\n",
+  );
+  str += chalk.blue(getVersionKeys().join(", "));
 
   return str;
 }

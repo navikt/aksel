@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { Heading } from "../../typography";
 import { useClientLayoutEffect, useId } from "../../util";
+import { cl } from "../../util/className";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
@@ -21,7 +21,6 @@ type DialogTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
  */
 const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>(
   ({ className, children, id, ...restProps }, forwardedRef) => {
-    const { cn } = useRenameCSS();
     const { size, setTitleId } = useDialogContext();
 
     const titleId = useId(id);
@@ -38,7 +37,7 @@ const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>(
         {...restProps}
         id={titleId}
         ref={forwardedRef}
-        className={cn("navds-dialog__title", className)}
+        className={cl("aksel-dialog__title", className)}
         size={size}
         level="1"
       >

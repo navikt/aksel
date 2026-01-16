@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { BodyLong, Box, Heading, Popover, Select } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [anchor, setAnchor] = useState<HTMLSelectElement | null>(null);
   const [placement, setPlacement] = useState<Option>(options[0]);
+  const popoverId = useId();
 
   return (
     <Box paddingBlock="space-128">
@@ -12,6 +13,7 @@ const Example = () => {
         ref={setAnchor}
         label="Velg 'placement'"
         onChange={(e) => setPlacement(e.target.value as Option)}
+        aria-controls={popoverId}
       >
         {options.map((x) => (
           <option key={x} value={x}>
@@ -24,6 +26,7 @@ const Example = () => {
         onClose={() => null}
         anchorEl={anchor}
         placement={placement}
+        id={popoverId}
       >
         <Popover.Content>
           <Heading level="2" size="xsmall" spacing>

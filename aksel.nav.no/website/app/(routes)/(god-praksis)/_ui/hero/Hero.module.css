@@ -1,6 +1,6 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
 .godPraksisHero {
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   border: 1px solid var(--ax-border-brand-blue-subtleA);
   position: relative;
   isolation: isolate;
@@ -31,7 +31,7 @@
   inset: 0;
   z-index: -1;
   overflow: clip;
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   box-sizing: content-box;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .godPraksisTemaCard {
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
   border: 1px solid var(--ax-border-brand-blue-subtleA);
   background: var(--ax-bg-raised);
   color: var(--ax-text-brand-blue);
@@ -65,7 +65,7 @@
   position: absolute;
   inset: -1px;
   overflow: clip;
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   border: 1px solid var(--ax-border-brand-blue-subtle);
   box-shadow: 0 0 0 1px var(--ax-border-brand-blue-subtle);
   clip-path: circle(140% at var(--website-hero-selector-x) var(--website-hero-selector-y));
@@ -99,7 +99,7 @@
   display: flex;
   align-items: center;
   gap: var(--ax-space-2);
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   padding-block: var(--ax-space-4);
   margin-block-end: var(--ax-space-16);
   padding-inline: var(--ax-space-16) var(--ax-space-8);

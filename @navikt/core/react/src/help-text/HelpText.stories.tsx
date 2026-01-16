@@ -1,6 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect, useRef } from "react";
 import { BodyLong, Heading } from "../typography";
+import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
 import HelpText from "./HelpText";
 
 const meta: Meta<typeof HelpText> = {
@@ -53,12 +54,14 @@ export const Open: StoryFn = () => {
   }, []);
 
   return (
-    <HelpText ref={ref} title="Show tooltip" strategy="fixed">
-      Incididunt laborum eiusmod ullamco id aliquip officia ex irure aliqua
-      laboris id ea do nisi. Ex esse ad duis culpa non aliquip exercitation eu
-      culpa cupidatat nisi. Deserunt voluptate consectetur cillum elit qui ad
-      voluptate pariatur.
-    </HelpText>
+    <div style={{ paddingTop: "9rem" }}>
+      <HelpText ref={ref} title="Show tooltip" strategy="fixed">
+        Incididunt laborum eiusmod ullamco id aliquip officia ex irure aliqua
+        laboris id ea do nisi. Ex esse ad duis culpa non aliquip exercitation eu
+        culpa cupidatat nisi. Deserunt voluptate consectetur cillum elit qui ad
+        voluptate pariatur.
+      </HelpText>
+    </div>
   );
 };
 
@@ -98,35 +101,28 @@ export const ColorRole: StoryFn = () => {
   }, []);
 
   return (
-    <HelpText
-      ref={ref}
-      title="Show tooltip"
-      strategy="fixed"
-      data-color="brand-magenta"
-    >
-      Incididunt laborum eiusmod ullamco id aliquip officia ex irure aliqua
-      laboris id ea do nisi. Ex esse ad duis culpa non aliquip exercitation eu
-      culpa cupidatat nisi. Deserunt voluptate consectetur cillum elit qui ad
-      voluptate pariatur.
-    </HelpText>
-  );
-};
-
-export const Chromatic = () => {
-  return (
-    <div>
-      <h2>Default</h2>
-      <Default>{null}</Default>
-      <h2>Open</h2>
-      <Open />
-      <h2>WrapperClassName</h2>
-      <WrapperClassName />
-      <h2>ColorRole</h2>
-      <ColorRole />
+    <div style={{ paddingTop: "7rem" }}>
+      <HelpText
+        ref={ref}
+        title="Show tooltip"
+        strategy="fixed"
+        data-color="brand-magenta"
+      >
+        Incididunt laborum eiusmod ullamco id aliquip officia ex irure aliqua
+        laboris id ea do nisi. Ex esse ad duis culpa non aliquip exercitation eu
+        culpa cupidatat nisi.
+      </HelpText>
     </div>
   );
 };
 
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Open,
+  WrapperClassName,
+  ColorRole,
+});
 Chromatic.parameters = {
-  chromatic: { disable: false, delay: 300 },
+  ...Chromatic.parameters,
+  chromatic: { ...Chromatic.parameters?.chromatic, delay: 300 },
 };

@@ -1,5 +1,55 @@
 # @navikt/aksel
 
+## 8.0.0
+
+### Major Changes
+
+- New design with theming support - See https://aksel.nav.no/grunnleggende/endringslogg/versjon-8 for more info ([#4283](https://github.com/navikt/aksel/pull/4283))
+
+### Patch Changes
+
+- Updated dependencies [[`5572548`](https://github.com/navikt/aksel/commit/5572548bb582892dadb34a190b9915bca3c4d656)]:
+  - @navikt/ds-tokens@8.0.0
+  - @navikt/ds-css@8.0.0
+
+## 7.40.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.40.0
+  - @navikt/ds-tokens@7.40.0
+
+## 7.39.1
+
+### Patch Changes
+
+- Updated dependencies [[`7efacb8`](https://github.com/navikt/aksel/commit/7efacb88d114a89abd90dec9920221cc49480500)]:
+  - @navikt/ds-css@7.39.1
+  - @navikt/ds-tokens@7.39.1
+
+## 7.39.0
+
+### Patch Changes
+
+- Updated dependencies [[`e938cc0`](https://github.com/navikt/aksel/commit/e938cc0c7aa6f09e321f06f6988d3d170baa0643), [`fb384fa`](https://github.com/navikt/aksel/commit/fb384fa3e26d8dba938966a68317f895cdf91328), [`ae95c5c`](https://github.com/navikt/aksel/commit/ae95c5c9db7d7dc790182f6131607a6a2813cc17), [`91f3f8a`](https://github.com/navikt/aksel/commit/91f3f8acb8749bc154a1e7dca008ce0be43e2e34), [`0e1685d`](https://github.com/navikt/aksel/commit/0e1685dd7dd626e7b74a33cd10fad9e9fa1992d7)]:
+  - @navikt/ds-css@7.39.0
+  - @navikt/ds-tokens@7.39.0
+
+## 7.38.0
+
+### Minor Changes
+
+- CLI: Now has interactive codemod-selection for all major-versions. ([#4427](https://github.com/navikt/aksel/pull/4427))
+
+### Patch Changes
+
+- CLI: Updated codemod 'v8-primitive-spacing' to migrate `HGrid`-component. ([`d631eef`](https://github.com/navikt/aksel/commit/d631eefe59217a70ad9598e967b86cf961739421))
+
+- Updated dependencies [[`155b395`](https://github.com/navikt/aksel/commit/155b395187968be65585ab8720037b1056641a53), [`6219718`](https://github.com/navikt/aksel/commit/6219718eba348efc3b838e0d95b32fcf22ef9db5)]:
+  - @navikt/ds-css@7.38.0
+  - @navikt/ds-tokens@7.38.0
+
 ## 7.37.0
 
 ### Patch Changes

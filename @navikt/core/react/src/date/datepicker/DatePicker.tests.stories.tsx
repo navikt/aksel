@@ -150,7 +150,7 @@ export const DomStructure: Story = {
 
     const picker = canvas.getByTestId("date-table");
 
-    expect(picker.className).toEqual("rdp navds-date");
+    expect(picker.className).toEqual("rdp aksel-date");
 
     const months = picker.firstChild;
     expect(months).toBeInTheDocument();

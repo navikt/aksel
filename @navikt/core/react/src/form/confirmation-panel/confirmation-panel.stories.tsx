@@ -64,6 +64,14 @@ export const Small = () => {
   );
 };
 
+export const Checked = () => {
+  return (
+    <ConfirmationPanel checked label="Checkbox label text">
+      {content}
+    </ConfirmationPanel>
+  );
+};
+
 export const NoContent = () => {
   const [checked, setChecked] = useState(false);
   return (
@@ -103,6 +111,7 @@ export const WithError = () => {
 export const Chromatic = renderStoriesForChromatic({
   Default,
   Small,
+  Checked,
   NoContent,
   WithError,
 });

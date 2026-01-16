@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
 import { BodyLong, Heading } from "../typography";
+import { cl } from "../util/className";
 import { createStrictContext } from "../util/create-strict-context";
 import {
   LinkAnchor,
@@ -25,6 +26,14 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
    * @default "medium"
    */
   size?: "small" | "medium";
+  /**
+   * Overrides inherited color.
+   *
+   * We reccomend avoiding status-colors (`info`, `success`, `warning`, `danger`) in LinkCards.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
 }
 
 type LinkCardContextProps = {
@@ -103,8 +112,6 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     }: LinkCardProps,
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <LinkCardContextProvider size={size}>
         <LinkAnchorOverlay asChild>
@@ -113,10 +120,10 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
             size={size}
             ref={forwardedRef}
             data-color="neutral"
-            className={cn(
-              "navds-link-card",
+            className={cl(
+              "aksel-link-card",
               className,
-              `navds-link-card--${size}`,
+              `aksel-link-card--${size}`,
             )}
             data-align-arrow={arrowPosition}
             {...restProps}
@@ -125,7 +132,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
             {arrow && (
               <LinkAnchorArrow
                 fontSize={size === "medium" ? "1.75rem" : "1.5rem"}
-                className={cn("navds-link-card__arrow")}
+                className="aksel-link-card__arrow"
               />
             )}
           </BodyLong>
@@ -154,8 +161,6 @@ export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
     { children, as = "span", className, ...restProps }: LinkCardTitleProps,
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
-
     const context = useLinkCardContext();
 
     return (
@@ -163,7 +168,7 @@ export const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
         ref={forwardedRef}
         as={as}
         size={context.size === "medium" ? "small" : "xsmall"}
-        className={cn("navds-link-card__title", className)}
+        className={cl("aksel-link-card__title", className)}
         {...restProps}
       >
         {children}
@@ -196,12 +201,10 @@ export const LinkCardDescription = forwardRef<
     { children, className, ...restProps }: LinkCardDescriptionProps,
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <div
         ref={forwardedRef}
-        className={cn("navds-link-card__description", className)}
+        className={cl("aksel-link-card__description", className)}
         {...restProps}
       >
         {children}
@@ -223,12 +226,10 @@ export const LinkCardFooter = forwardRef<HTMLDivElement, LinkCardFooterProps>(
     { children, className, ...restProps }: LinkCardFooterProps,
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <div
         ref={forwardedRef}
-        className={cn("navds-link-card__footer", className)}
+        className={cl("aksel-link-card__footer", className)}
         {...restProps}
       >
         {children}
@@ -247,13 +248,11 @@ interface LinkCardIconProps extends HTMLAttributes<HTMLDivElement> {
  */
 export const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
   ({ children, className, ...restProps }: LinkCardIconProps, forwardedRef) => {
-    const { cn } = useRenameCSS();
-
     return (
       <div
         ref={forwardedRef}
         aria-hidden
-        className={cn("navds-link-card__icon", className)}
+        className={cl("aksel-link-card__icon", className)}
         {...restProps}
       >
         {children}
@@ -288,12 +287,10 @@ export const LinkCardImage = forwardRef<HTMLDivElement, LinkCardImageProps>(
     }: LinkCardImageProps,
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <div
         ref={forwardedRef}
-        className={cn("navds-link-card__image-container", className)}
+        className={cl("aksel-link-card__image-container", className)}
         style={{
           ...style,
           aspectRatio,

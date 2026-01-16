@@ -15,7 +15,6 @@ import { SingleCodeBlock } from "@/app/_ui/code-block/CodeBlock.single";
 import { CompareImages } from "@/app/_ui/compare-images/CompareImages";
 import { ExampleText } from "@/app/_ui/example-text/ExampleText";
 import { KodeEksempler } from "@/app/_ui/kode-eksempler/KodeEksempler";
-import { LegacyTokenModule } from "@/app/_ui/legacy-token-module/LegacyTokenModule";
 import { LegacyTokenTable } from "@/app/_ui/legacy-token-table/LegacyTokenTable";
 import { Bilde } from "../bilde/Bilde";
 import { DoDont } from "../do-dont/DoDont";
@@ -61,7 +60,6 @@ function customPortableTextComponents({
       kode: SingleCodeBlock,
       kode_eksempler: KodeEksempler,
       token_kategori: LegacyTokenTable,
-      spesial_seksjon: LegacyTokenModule,
       exampletext_block: ExampleText,
       attachment: Attachment,
       compare_images: CompareImages,

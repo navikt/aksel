@@ -18,7 +18,7 @@ export default function transformer(file: FileInfo, api: API) {
     "Box",
     "Box.New",
     "BoxNew",
-    "Hgrid",
+    "HGrid",
     "Stack",
     "HStack",
     "VStack",
@@ -59,6 +59,13 @@ export default function transformer(file: FileInfo, api: API) {
           if (attrValue.type === "StringLiteral") {
             /* padding="32" */
             attrValue.value = convertSpacingToSpace(attrValue.value);
+          } else if (
+            attrValue.type === "JSXExpressionContainer" &&
+            attrValue.expression.type === "StringLiteral"
+          ) {
+            attrValue.expression.value = convertSpacingToSpace(
+              attrValue.expression.value,
+            );
           } else if (attrValue.type === "JSXExpressionContainer") {
             /* padding={{xs: "16", sm: "32"}} */
             const expression = attrValue.expression;

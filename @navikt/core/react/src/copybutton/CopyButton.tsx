@@ -1,8 +1,9 @@
 import React, { ButtonHTMLAttributes, forwardRef, useState } from "react";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Button, ButtonProps } from "../button";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
-import { Label } from "../typography";
+import type { AkselColor } from "../types/theme";
+import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import copy from "../util/copy";
 import { useTimeout } from "../util/hooks/useTimeout";
@@ -12,9 +13,18 @@ export interface CopyButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">,
     Pick<ButtonProps, "iconPosition" | "size"> {
   /**
-   * @default "neutral"
+   * @deprecated Use `data-color` attribute instead.
    */
   variant?: "action" | "neutral";
+  /**
+   * Overrides color.
+   *
+   * We recommend only using `accent` and `neutral`. We have disallowed status-colors.
+   * @default "neutral"
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
   /**
    * Text to copy to clipboard.
    */
@@ -36,7 +46,7 @@ export interface CopyButtonProps
    */
   onActiveChange?: (state: boolean) => void;
   /**
-   *  Icon shown when button is not clicked.
+   * Icon shown when button is not clicked.
    * @default <FilesIcon />
    */
   icon?: React.ReactNode;
@@ -75,7 +85,8 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       copyText,
       text,
       activeText,
-      variant = "neutral",
+      variant,
+      "data-color": dataColor = "neutral",
       onActiveChange,
       icon,
       activeIcon,
@@ -92,10 +103,6 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     const translate = useI18n("CopyButton");
     const timeout = useTimeout();
 
-    const { cn } = useRenameCSS();
-
-    const themeContext = useThemeInternal();
-
     const handleClick = () => {
       copy(copyText);
       setActive(true);
@@ -109,98 +116,52 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 
     const activeString = activeText || translate("activeText");
 
-    const copyIcon = (
-      <LegacyIconWrapper useLegacy={!themeContext?.isDarkside}>
-        {active
-          ? (activeIcon ?? (
-              <CheckmarkIcon
-                aria-hidden={!!text}
-                title={text ? undefined : activeString}
-                className={
-                  themeContext?.isDarkside
-                    ? cn("navds-copybutton__icon")
-                    : undefined
-                }
-              />
-            ))
-          : (icon ?? (
-              <FilesIcon
-                aria-hidden={!!text}
-                title={text ? undefined : title || translate("title")}
-                className={
-                  themeContext?.isDarkside
-                    ? cn("navds-copybutton__icon")
-                    : undefined
-                }
-              />
-            ))}
-      </LegacyIconWrapper>
-    );
-
-    if (themeContext?.isDarkside) {
-      return (
-        <Button
-          ref={ref}
-          type="button"
-          className={cn("navds-copybutton", className)}
-          {...rest}
-          variant={variant === "action" ? "tertiary" : "tertiary-neutral"}
-          onClick={composeEventHandlers(onClick, handleClick)}
-          iconPosition={iconPosition}
-          icon={copyIcon}
-          data-active={active}
-          size={size}
-        >
-          {text ? (active ? activeString : text) : null}
-        </Button>
-      );
-    }
-
     return (
-      <button
+      <Button
         ref={ref}
         type="button"
+        className={cl("aksel-copybutton", className)}
         {...rest}
-        className={cn(
-          "navds-copybutton",
-          className,
-          `navds-copybutton--${size}`,
-          `navds-copybutton--${variant}`,
-          {
-            "navds-copybutton--icon-only": !text,
-            "navds-copybutton--icon-right": iconPosition === "right",
-            "navds-copybutton--active": active,
-          },
-        )}
+        variant="tertiary"
+        data-color={variantToDataColor(variant) ?? dataColor}
         onClick={composeEventHandlers(onClick, handleClick)}
+        iconPosition={iconPosition}
+        icon={
+          active
+            ? (activeIcon ?? (
+                <CheckmarkIcon
+                  aria-hidden={!!text}
+                  title={text ? undefined : activeString}
+                  className="aksel-copybutton__icon"
+                />
+              ))
+            : (icon ?? (
+                <FilesIcon
+                  aria-hidden={!!text}
+                  title={text ? undefined : title || translate("title")}
+                  className="aksel-copybutton__icon"
+                />
+              ))
+        }
+        data-active={active}
+        size={size}
       >
-        <span className={cn("navds-copybutton__content")}>
-          {iconPosition === "left" && copyIcon}
-          {text && (
-            <Label as="span" size={size === "medium" ? "medium" : "small"}>
-              {active ? activeString : text}
-            </Label>
-          )}
-          {iconPosition === "right" && copyIcon}
-        </span>
-      </button>
+        {text ? (active ? activeString : text) : null}
+      </Button>
     );
   },
 );
 
-function LegacyIconWrapper({
-  children,
-  useLegacy,
-}: {
-  children: React.ReactNode;
-  useLegacy: boolean;
-}) {
-  const { cn } = useRenameCSS();
-
-  if (!useLegacy) {
-    return children;
+function variantToDataColor(
+  variant: CopyButtonProps["variant"],
+): Exclude<AkselColor, AkselStatusColorRole> | undefined {
+  if (variant === "action") {
+    return "accent";
   }
-  return <span className={cn("navds-copybutton__icon")}>{children}</span>;
+  if (variant === "neutral") {
+    return "neutral";
+  }
+  return undefined;
 }
 
 export default CopyButton;

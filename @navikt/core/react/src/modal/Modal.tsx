@@ -3,8 +3,8 @@ import React, { forwardRef, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useDateInputContext } from "../date/Date.Input";
 import { useProvider } from "../provider/Provider";
-import { useRenameCSS } from "../theme/Theme";
 import { Detail, Heading } from "../typography";
+import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
@@ -17,11 +17,12 @@ import {
   MouseCoordinates,
   coordsAreInside,
   getCloseHandler,
-  useBodyScrollLock,
   useIsModalOpen,
 } from "./ModalUtils";
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
 import { ModalProps } from "./types";
+
+const polyfillClassName = "aksel-modal--polyfilled";
 
 interface ModalComponent
   extends React.ForwardRefExoticComponent<
@@ -99,10 +100,6 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     }: ModalProps,
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
-    const polyfillClassName = useRef(cn("navds-modal--polyfilled"));
-
     const modalRef = useRef<HTMLDialogElement>(null);
     const mergedRef = useMergeRefs(modalRef, ref);
 
@@ -127,7 +124,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         dialogPolyfill.registerDialog(modalRef.current);
 
         // Force-add the "polyfilled" class in case of SSR (needPolyfill will always be false on the server)
-        modalRef.current.classList.add(polyfillClassName.current);
+        modalRef.current.classList.add(polyfillClassName);
       }
       // We set autofocus on the dialog element to prevent the default behavior where first focusable element gets focus when modal is opened.
       // This is mainly to fix an edge case where having a Tooltip as the first focusable element would make it activate when you open the modal.
@@ -156,20 +153,14 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       referenceElement: modalRef.current,
     });
 
-    /**
-     * TODO: Kept for legacy support.
-     * - Remove utility in v8 and deprecate body-classes in ModalUtils.ts
-     */
-    useBodyScrollLock(modalRef, portalNode, isNested);
-
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
 
-    const mergedClassName = cn("navds-modal", className, {
-      [polyfillClassName.current]: needPolyfill,
-      "navds-modal--autowidth": !width,
-      [`navds-modal--${width}`]: isWidthPreset,
-      "navds-modal--top": placement === "top" && !needPolyfill,
+    const mergedClassName = cl("aksel-modal", className, {
+      [polyfillClassName]: needPolyfill,
+      "aksel-modal--autowidth": !width,
+      [`aksel-modal--${width}`]: isWidthPreset,
+      "aksel-modal--top": placement === "top" && !needPolyfill,
     });
 
     const mergedStyle = {
@@ -230,7 +221,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         : ariaLabelledby;
 
     const component = (
-      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <dialog
         {...rest}
         ref={mergedRef}
@@ -248,6 +239,14 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
             : onMouseDown
         }
         aria-labelledby={mergedAriaLabelledBy}
+        onKeyDown={(e) => {
+          /**
+           * Stops propagation of Escape key to prevent closing parent modals/dialogs
+           */
+          if (e.key === "Escape") {
+            e.stopPropagation();
+          }
+        }}
       >
         <ModalContextProvider
           closeHandler={getCloseHandler(modalRef, header, onBeforeClose)}
@@ -256,9 +255,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
           {header && (
             <ModalHeader>
               {header.label && (
-                <Detail className={cn("navds-modal__label")}>
-                  {header.label}
-                </Detail>
+                <Detail className="aksel-modal__label">{header.label}</Detail>
               )}
               <Heading
                 size={header.size ?? "medium"}
@@ -266,7 +263,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
                 id={ariaLabelId}
               >
                 {header.icon && (
-                  <span className={cn("navds-modal__header-icon")}>
+                  <span className="aksel-modal__header-icon">
                     {header.icon}
                   </span>
                 )}

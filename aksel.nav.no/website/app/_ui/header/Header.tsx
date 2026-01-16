@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { Suspense } from "react";
 import { BodyShort, Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
@@ -7,6 +6,7 @@ import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { ThemeButton } from "@/app/_ui/theming/Theme.button";
 import AkselLogo from "@/assets/Logo";
+import { cl } from "@/ui-utils/className";
 import { HeaderLink } from "./Header.link";
 import styles from "./Header.module.css";
 
@@ -21,7 +21,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
 
   return (
     <header
-      className={clsx(styles.header, {
+      className={cl(styles.header, {
         [styles.headerProduktbloggen]: variant === "produktbloggen",
       })}
     >
@@ -61,7 +61,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
         <Show above="lg" asChild>
           <Box
             as="nav"
-            paddingInline={{ xs: "0 space-8", lg: "0 space-32" }}
+            paddingInline={{ xs: "space-0 space-8", lg: "space-0 space-32" }}
             aria-label="Hovedmeny"
           >
             <HStack as="ul" gap="space-8" align="center">
@@ -73,7 +73,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
             </HStack>
           </Box>
         </Show>
-        <HStack align="center" gap="2">
+        <HStack align="center" gap="space-8">
           <Suspense fallback={<GlobalSearchButton trigger={false} />}>
             <GlobalSearch />
           </Suspense>

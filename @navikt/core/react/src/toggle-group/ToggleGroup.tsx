@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { Label } from "../typography";
 import { useId } from "../util";
+import { cl } from "../util/className";
 import {
   ToggleGroupDescendantsProvider,
   ToggleGroupProvider,
@@ -54,8 +54,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal();
     const descendants = useToggleGroupDescendants();
 
     const toggleGroupContext = useToggleGroup({
@@ -82,28 +80,20 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       console.error("ToggleGroup needs either a value or defaultValue");
     }
 
-    let localVariant: ToggleGroupProps["variant"] | undefined;
-
-    if (themeContext?.isDarkside) {
-      localVariant = variant;
-    } else {
-      localVariant = variant ?? "action";
-    }
-
     return (
       <ToggleGroupDescendantsProvider value={descendants}>
         <ToggleGroupProvider {...context}>
           <div
-            className={cn("navds-toggle-group__wrapper", className, {
-              "navds-toggle-group__wrapper--fill": fill,
+            className={cl("aksel-toggle-group__wrapper", className, {
+              "aksel-toggle-group__wrapper--fill": fill,
             })}
-            data-color={color ?? variantToColor(localVariant)}
+            data-color={color ?? variantToColor(variant)}
           >
             {label && (
               <Label
                 as="div"
                 size={size}
-                className={cn("navds-toggle-group__label")}
+                className="aksel-toggle-group__label"
                 id={labelId}
               >
                 {label}
@@ -113,10 +103,9 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               aria-labelledby={label ? labelId : undefined}
               {...rest}
               ref={ref}
-              className={cn(
-                "navds-toggle-group",
-                `navds-toggle-group--${size}`,
-                { [`navds-toggle-group--${localVariant}`]: localVariant },
+              className={cl(
+                "aksel-toggle-group",
+                `aksel-toggle-group--${size}`,
               )}
               role="radiogroup"
             >

@@ -61,7 +61,6 @@ export default async function Page() {
           erfaring som er nyttig for oss alle. Det er god praksis som vi deler
           her."
       />
-
       <VStack
         gap="space-48"
         paddingInline={{ xs: "space-16", lg: "space-40" }}
@@ -70,7 +69,7 @@ export default async function Page() {
         {filteredTemaList.map((tema) => {
           return (
             <section key={tema.slug} aria-label={`Tema ${tema.title}`}>
-              <VStack gap="space-8" marginBlock="0 space-24">
+              <VStack gap="space-8" marginBlock="space-0 space-24">
                 <Heading level="2" size="large">
                   {tema.title}
                 </Heading>
@@ -80,7 +79,7 @@ export default async function Page() {
                 as="ul"
                 columns={{ xs: 1, md: 2 }}
                 gap={{ xs: "space-16", md: "space-24" }}
-                marginBlock="0 space-24"
+                marginBlock="space-0 space-24"
               >
                 {tema.articles.map((article) => {
                   const undertema = article.undertema?.find(

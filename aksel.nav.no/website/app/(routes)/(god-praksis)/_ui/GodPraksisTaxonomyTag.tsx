@@ -14,7 +14,8 @@ function GodPraksisTaxonomyTag({
 
   return (
     <Tag
-      variant={type === "undertema" ? "alt3-moderate" : "alt1-moderate"}
+      variant="moderate"
+      data-color={type === "undertema" ? "info" : "meta-purple"}
       size="xsmall"
       icon={
         type === "undertema" ? (

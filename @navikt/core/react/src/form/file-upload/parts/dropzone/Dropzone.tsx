@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { CircleSlashIcon, CloudUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
-import { useRenameCSS } from "../../../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../../../typography";
+import { cl } from "../../../../util/className";
 import { composeEventHandlers } from "../../../../util/composeEventHandlers";
 import { useId } from "../../../../util/hooks";
 import { useI18n } from "../../../../util/i18n/i18n.hooks";
@@ -35,10 +34,10 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
       translations,
       onClick,
       id: buttonId,
+      "data-color": color,
       ...rest
     } = props;
 
-    const { cn } = useRenameCSS();
     const context = useFileUploadTranslation(false);
     const translate = useI18n(
       "FileUpload",
@@ -79,23 +78,23 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
 
     return (
       <div
-        className={cn("navds-form-field", "navds-dropzone", className, {
-          "navds-dropzone--error": hasError,
-          "navds-dropzone--dragging": dropzoneCtx.isDraggingOver,
-          "navds-dropzone--disabled": inputProps.disabled,
+        className={cl("aksel-form-field", "aksel-dropzone", className, {
+          "aksel-dropzone--error": hasError,
+          "aksel-dropzone--dragging": dropzoneCtx.isDraggingOver,
+          "aksel-dropzone--disabled": inputProps.disabled,
         })}
       >
         <Label
           htmlFor={inputId}
           id={labelId}
-          className={cn("navds-form-field__label")}
+          className="aksel-form-field__label"
         >
           {label}
         </Label>
         {!!description && (
           <BodyShort
             id={inputDescriptionId}
-            className={cn("navds-form-field__description")}
+            className="aksel-form-field__description"
             as="div"
           >
             {description}
@@ -103,7 +102,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
         )}
         {/** biome-ignore lint/a11y/noStaticElementInteractions: Assistive technologies will use the input within.  */}
         <div
-          className={cn("navds-dropzone__area")}
+          className="aksel-dropzone__area"
           onDragEnter={dropzoneCtx.onDragEnter}
           onDragOver={dropzoneCtx.onDragOver}
           onDragLeave={dropzoneCtx.onDragLeave}
@@ -112,19 +111,20 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
             inputRef.current?.click(),
           )}
           data-disabled={inputProps.disabled}
+          data-color={color}
         >
           {!inputProps.disabled && (
             <>
-              <div className={cn("navds-dropzone__area-icon")}>
+              <div className="aksel-dropzone__area-icon">
                 <DropzoneIcon fontSize="1.5rem" aria-hidden />
               </div>
-              <div className={cn("navds-dropzone__area-release")}>
-                <div className={cn("navds-dropzone__area-release__icon")}>
+              <div className="aksel-dropzone__area-release">
+                <div className="aksel-dropzone__area-release__icon">
                   <DropzoneIcon aria-hidden />
                 </div>
                 <span
                   aria-hidden={!dropzoneCtx.isDraggingOver}
-                  className={cn("navds-dropzone__area-release__text")}
+                  className="aksel-dropzone__area-release__text"
                 >
                   {translate("dropzone.drop")}
                 </span>
@@ -142,7 +142,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
                 {...inputPropsRest}
                 id={buttonId}
                 aria-describedby={cl(labelId, ariaDescribedby)}
-                className={cn("navds-dropzone__area-button")}
+                className="aksel-dropzone__area-button"
                 type="button"
                 variant="secondary"
               >
@@ -154,7 +154,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           )}
 
           {inputProps.disabled && (
-            <div className={cn("navds-dropzone__area-disabled")}>
+            <div className="aksel-dropzone__area-disabled">
               <CircleSlashIcon aria-hidden fontSize="1.75rem" />
               <BodyShort as="div">
                 {fileLimitReached
@@ -176,7 +176,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           />
         </div>
         <div
-          className={cn("navds-form-field__error")}
+          className="aksel-form-field__error"
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"

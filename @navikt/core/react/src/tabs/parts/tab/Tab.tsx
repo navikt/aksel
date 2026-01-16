@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
 import { BodyShort } from "../../../typography";
 import { OverridableComponent } from "../../../util";
+import { cl } from "../../../util/className";
 import { useTabsContext } from "../../Tabs.context";
 import { useTab } from "./useTab";
 
@@ -45,7 +45,6 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
       },
       ref: React.ForwardedRef<HTMLButtonElement>,
     ) => {
-      const { cn } = useRenameCSS();
       const tabCtx = useTab({ value, onClick, onFocus, disabled }, ref);
       const ctx = useTabsContext();
 
@@ -58,14 +57,14 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
         <Component
           ref={tabCtx.ref}
           {...rest}
-          className={cn(
-            "navds-tabs__tab",
-            `navds-tabs__tab--${ctx?.size ?? "medium"}`,
-            `navds-tabs__tab-icon--${ctx?.iconPosition}`,
+          className={cl(
+            "aksel-tabs__tab",
+            `aksel-tabs__tab--${ctx?.size ?? "medium"}`,
+            `aksel-tabs__tab-icon--${ctx?.iconPosition}`,
             className,
             {
-              "navds-tabs__tab--icon-only": icon && !label,
-              "navds-tabs__tab--fill": ctx.fill,
+              "aksel-tabs__tab--icon-only": icon && !label,
+              "aksel-tabs__tab--fill": ctx.fill,
             },
           )}
           role="tab"
@@ -80,7 +79,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
         >
           <BodyShort
             as="span"
-            className={cn("navds-tabs__tab-inner")}
+            className="aksel-tabs__tab-inner"
             size={ctx?.size}
           >
             <span aria-hidden={!!label}>{icon}</span>

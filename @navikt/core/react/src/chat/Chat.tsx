@@ -1,7 +1,8 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { AkselColor } from "../types";
 import { BodyLong, HeadingProps } from "../typography";
+import { cl } from "../util/className";
 import Bubble, { type ChatBubbleProps } from "./Bubble";
 
 export const VARIANTS = ["subtle", "info", "neutral"] as const;
@@ -28,9 +29,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   avatar?: React.ReactNode;
   /**
-   * Changes background color on avatar and bubbles.
-   * Avoid using the same background as the surface behind Chat.
-   * @default "neutral"
+   * @deprecated Use `data-color` prop instead.
    */
   variant?: (typeof VARIANTS)[number];
   /**
@@ -53,6 +52,14 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    * @default "3"
    */
   toptextHeadingLevel?: Exclude<HeadingProps["level"], "1">;
+  /**
+   * Overrides inherited color.
+   *
+   * We have disallowed status-colors.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
 interface ChatComponent
@@ -100,33 +107,27 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
     }: ChatProps,
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <div
         ref={ref}
-        className={cn(
-          "navds-chat",
+        className={cl(
+          "aksel-chat",
           className,
-          `navds-chat--${position}`,
-          `navds-chat--top-text-${toptextPosition ?? position}`,
-          `navds-chat--${size}`,
-          `navds-chat--${variant}`,
+          `aksel-chat--${position}`,
+          `aksel-chat--top-text-${toptextPosition ?? position}`,
+          `aksel-chat--${size}`,
+          `aksel-chat--${variant}`,
         )}
         data-color={color ?? variantToColor(variant)}
         {...rest}
         data-variant={variant}
       >
         {avatar && (
-          <div className={cn("navds-chat__avatar")} aria-hidden>
+          <div className="aksel-chat__avatar" aria-hidden>
             {avatar}
           </div>
         )}
-        <BodyLong
-          as="div"
-          size={size}
-          className={cn("navds-chat__bubble-wrapper")}
-        >
+        <BodyLong as="div" size={size} className="aksel-chat__bubble-wrapper">
           {React.Children.map(children, (child, i) => {
             if (!React.isValidElement<ChatBubbleProps>(child)) {
               return null;
