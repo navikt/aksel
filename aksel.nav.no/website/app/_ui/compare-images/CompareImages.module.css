@@ -12,7 +12,7 @@
   touch-action: pan-y;
   user-select: none;
   overflow: hidden;
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-radius-8);
 
   &:focus-within {
     outline: 3px solid var(--ax-border-focus);
@@ -95,7 +95,7 @@
   z-index: 10;
   display: flex;
   align-items: center;
-  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-radius-full);
   background-color: var(--ax-bg-neutral-strong);
   font-size: 1.75rem;
   color: var(--ax-text-neutral-contrast);

@@ -24,7 +24,7 @@ export const UpdateInfo: ComponentType<ObjectFieldProps> = () => {
       background="warning-soft"
       borderWidth="1"
       borderColor="warning-subtleA"
-      borderRadius="medium"
+      borderRadius="4"
       padding="space-16"
     >
       <HStack gap="space-4" marginBlock="space-0 space-4" align="center">

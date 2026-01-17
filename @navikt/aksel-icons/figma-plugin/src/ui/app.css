@@ -1,11 +1,11 @@
 @import "@navikt/ds-css";
 
 .wrapper {
-  background-color: var(--a-bg-default);
+  background-color: var(--ax-bg-default);
 }
 
 .form {
-  border-bottom: 1px solid var(--a-border-subtle);
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -16,7 +16,7 @@
   gap: 1rem;
   padding-block: 0.5rem;
   padding-inline: 1rem;
-  background-color: var(--a-bg-default);
+  background-color: var(--ax-bg-default);
 }
 
 .form-togglegroup {
@@ -45,7 +45,7 @@
 }
 
 .sub-heading {
-  color: var(--a-text-subtle);
+  color: var(--ax-text-neutral-subtle);
   margin-bottom: 0.25rem;
 }
 
@@ -58,22 +58,23 @@
 .icon-button {
   min-height: 3rem;
   min-width: 3rem;
-  border-radius: var(--a-border-radius-small);
+  border-radius: var(--ax-radius-2);
   display: grid;
   place-content: center;
-  background-color: var(--a-surface-default);
+  background-color: var(--ax-bg-neutral-softA);
   cursor: pointer;
   border: none;
 }
 
 .icon-button:hover {
-  background-color: var(--a-surface-hover);
+  background-color: var(--ax-bg-neutral-moderate-hoverA);
 }
 
 .icon-button:active {
-  background-color: var(--a-surface-neutral-subtle-hover);
+  background-color: var(--ax-bg-neutral-moderate-pressedA);
 }
 
 .icon-button:focus-visible {
-  outline: 2px solid var(--a-border-focus);
+  outline: 3px solid var(--ax-border-focus);
+  outline-offset: 2px;
 }

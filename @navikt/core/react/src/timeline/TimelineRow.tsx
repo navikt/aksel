@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { BodyShort } from "../typography/BodyShort";
+import { cl } from "../util/className";
 import { useI18n } from "../util/i18n/i18n.hooks";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
@@ -38,7 +38,6 @@ export interface TimelineRowType
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, className, headingTag = "h3", icon, ...rest }, ref) => {
-    const { cn } = useRenameCSS();
     const { periods, id, active } = useRowContext();
     const { setActiveRow } = useTimelineContext();
     const translate = useI18n("Timeline");
@@ -61,7 +60,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           <BodyShort
             as={headingTag}
             id={`timeline-row-${id}`}
-            className={cn("navds-timeline__row-label")}
+            className="aksel-timeline__row-label"
             size="small"
           >
             {icon}
@@ -69,8 +68,8 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           </BodyShort>
         )}
         <div
-          className={cn("navds-timeline__row", {
-            "navds-timeline__row--active": active,
+          className={cl("aksel-timeline__row", {
+            "aksel-timeline__row--active": active,
           })}
         >
           {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
@@ -86,7 +85,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
                     end: format(latest.end, translate("dateFormat")),
                   })
             }
-            className={cn("navds-timeline__row-periods", className)}
+            className={cl("aksel-timeline__row-periods", className)}
             onKeyDown={(e) => {
               if (e.key === "ArrowDown" || e.key === "ArrowUp") {
                 e.preventDefault();

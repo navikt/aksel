@@ -12,7 +12,6 @@ import { CalendarMonth, useDayPicker } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
-import { useRenameCSS } from "../../../theme/Theme";
 import { BodyShort } from "../../../typography";
 import { omit } from "../../../util";
 import { useDateTranslationContext } from "../../Date.locale";
@@ -41,7 +40,6 @@ const DatePickerMonths = ({
 
   const { captionLayout } = dayPickerProps;
 
-  const { cn } = useRenameCSS();
   const translate = useDateTranslationContext().translate;
 
   const handleMonthChange = useCallback(
@@ -80,13 +78,9 @@ const DatePickerMonths = ({
 
   return (
     <div {...omit(rest, ["displayIndex"])}>
-      <div className={cn("navds-date__caption")}>
+      <div className="aksel-date__caption">
         {captionLayout?.startsWith("dropdown") && (
-          <span
-            aria-live="polite"
-            aria-atomic="true"
-            className={cn("navds-sr-only")}
-          >
+          <span aria-live="polite" aria-atomic="true" className="aksel-sr-only">
             {format(calendarMonth.date, "LLLL y", { locale })}
           </span>
         )}
@@ -95,15 +89,15 @@ const DatePickerMonths = ({
           disabled={!previousMonth}
           onClick={() => previousMonth && goToMonth(previousMonth)}
           icon={<ArrowLeftIcon title={translate("goToPreviousMonth")} />}
-          className={cn("navds-date__caption-button")}
+          className="aksel-date__caption-button"
           type="button"
         />
         {captionLayout?.startsWith("dropdown") ? (
-          <div className={cn("navds-date__caption")}>
+          <div className="aksel-date__caption">
             <Select
               label={translate("month")}
               hideLabel
-              className={cn("navds-date__caption__month")}
+              className="aksel-date__caption__month"
               onChange={(event) => handleMonthChange(calendarMonth.date, event)}
               value={getMonth(calendarMonth.date)}
             >
@@ -117,7 +111,7 @@ const DatePickerMonths = ({
             <Select
               label={translate("year")}
               hideLabel
-              className={cn("navds-date__caption__year")}
+              className="aksel-date__caption__year"
               onChange={(event) => handleYearChange(calendarMonth.date, event)}
               value={getYear(calendarMonth.date)}
             >
@@ -134,7 +128,7 @@ const DatePickerMonths = ({
             as="span"
             aria-live="polite"
             role="status"
-            className={cn("navds-date__caption-label")}
+            className="aksel-date__caption-label"
           >
             {format(calendarMonth.date, "LLLL y", { locale })}
           </BodyShort>
@@ -145,7 +139,7 @@ const DatePickerMonths = ({
           icon={<ArrowRightIcon title={translate("goToNextMonth")} />}
           onClick={() => nextMonth && goToMonth(nextMonth)}
           disabled={!nextMonth}
-          className={cn("navds-date__caption-button")}
+          className="aksel-date__caption-button"
           type="button"
         />
       </div>

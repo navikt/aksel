@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { omit } from "../../util";
+import { cl } from "../../util/className";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
   PRIMITIVE_PROPS,
@@ -42,7 +42,7 @@ export type StackProps = HTMLAttributes<HTMLDivElement> & {
   wrap?: boolean;
   /**
    * CSS `gap` property.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    *
    * @example
@@ -83,16 +83,12 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal();
-      const prefix = themeContext?.isDarkside ? "ax" : "a";
-      const { cn } = useRenameCSS();
-
       const style: React.CSSProperties = {
         ..._style,
-        ...getResponsiveProps(prefix, `stack`, "gap", "spacing", gap),
-        ...getResponsiveValue(prefix, `stack`, "direction", direction),
-        ...getResponsiveValue(prefix, `stack`, "align", align),
-        ...getResponsiveValue(prefix, `stack`, "justify", justify),
+        ...getResponsiveProps(`stack`, "gap", "space", gap),
+        ...getResponsiveValue(`stack`, "direction", direction),
+        ...getResponsiveValue(`stack`, "align", align),
+        ...getResponsiveValue(`stack`, "justify", justify),
       };
 
       const Comp = asChild ? Slot : Component;
@@ -103,14 +99,14 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
             {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
             style={style}
-            className={cn("navds-stack", className, {
-              "navds-vstack": direction === "column",
-              "navds-hstack": direction === "row",
-              "navds-stack-gap": gap,
-              "navds-stack-align": align,
-              "navds-stack-justify": justify,
-              "navds-stack-direction": direction,
-              "navds-stack-wrap": wrap,
+            className={cl("aksel-stack", className, {
+              "aksel-vstack": direction === "column",
+              "aksel-hstack": direction === "row",
+              "aksel-stack-gap": gap,
+              "aksel-stack-align": align,
+              "aksel-stack-justify": justify,
+              "aksel-stack-direction": direction,
+              "aksel-stack-wrap": wrap,
             })}
           >
             {children}

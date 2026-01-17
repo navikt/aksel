@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
+import { cl } from "../../../util/className";
 import { OverridableComponent } from "../../../util/types";
 import ListItem, { ListItemProps } from "./Item";
 
@@ -22,10 +22,8 @@ export interface ListType
 }
 
 export const List = forwardRef(({ className, children, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
-    <ul {...rest} ref={ref} className={cn("navds-dropdown__list", className)}>
+    <ul {...rest} ref={ref} className={cl("aksel-dropdown__list", className)}>
       {children}
     </ul>
   );

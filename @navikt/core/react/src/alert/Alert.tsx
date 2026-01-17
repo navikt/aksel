@@ -7,9 +7,9 @@ import {
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { BodyLong } from "../typography";
+import { cl } from "../util/className";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -92,7 +92,6 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const translate = useI18n("global");
     const Icon = IconMap[variant];
     return (
@@ -101,33 +100,33 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         data-color={variantToRole(variant)}
         data-variant={variant}
         ref={ref}
-        className={cn(
+        className={cl(
           className,
-          "navds-alert",
-          `navds-alert--${variant}`,
-          `navds-alert--${size}`,
+          "aksel-alert",
+          `aksel-alert--${variant}`,
+          `aksel-alert--${size}`,
           {
-            "navds-alert--full-width": fullWidth,
-            "navds-alert--inline": inline,
-            "navds-alert--close-button": closeButton,
+            "aksel-alert--full-width": fullWidth,
+            "aksel-alert--inline": inline,
+            "aksel-alert--close-button": closeButton,
           },
         )}
       >
-        <Icon title={translate(variant)} className={cn("navds-alert__icon")} />
+        <Icon title={translate(variant)} className="aksel-alert__icon" />
         <BodyLong
           as="div"
           size={size}
-          className={cn(
-            "navds-alert__wrapper",
-            contentMaxWidth && "navds-alert__wrapper--maxwidth",
+          className={cl(
+            "aksel-alert__wrapper",
+            contentMaxWidth && "aksel-alert__wrapper--maxwidth",
           )}
         >
           {children}
         </BodyLong>
         {closeButton && !inline && (
-          <div className={cn("navds-alert__button-wrapper")}>
+          <div className="aksel-alert__button-wrapper">
             <Button
-              className={cn("navds-alert__button")}
+              className="aksel-alert__button"
               size="small"
               variant="tertiary-neutral"
               onClick={onClose}

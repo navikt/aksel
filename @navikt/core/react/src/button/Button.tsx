@@ -1,11 +1,19 @@
 import React, { forwardRef } from "react";
 import { Loader } from "../loader";
-import { useRenameCSS } from "../theme/Theme";
 import { AkselColor } from "../types";
 import { Label } from "../typography";
 import { omit } from "../util";
+import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { OverridableComponent } from "../util/types";
+
+type legacyVariants =
+  | "primary-neutral"
+  | "secondary-neutral"
+  | "tertiary-neutral"
+  | "danger";
+
+type HiddenVariant = legacyVariants & { __brand?: never };
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -17,14 +25,7 @@ export interface ButtonProps
    * Changes design and interaction-visuals.
    * @default "primary"
    */
-  variant?:
-    | "primary"
-    | "primary-neutral"
-    | "secondary"
-    | "secondary-neutral"
-    | "tertiary"
-    | "tertiary-neutral"
-    | "danger";
+  variant?: "primary" | "secondary" | "tertiary" | HiddenVariant;
   /**
    * Changes padding, height, and font-size.
    * @default "medium"
@@ -50,6 +51,14 @@ export interface ButtonProps
    * @default "left"
    */
   iconPosition?: "left" | "right";
+  /**
+   * Overrides inherited color.
+   *
+   * We recommend only using `accent`, `neutral` and `danger`.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
 }
 
 /**
@@ -81,8 +90,6 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       },
       ref,
     ) => {
-      const { cn } = useRenameCSS();
-
       const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
         disabled || loading ? omit(rest, ["href"]) : rest;
 
@@ -100,21 +107,15 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           {...filterProps}
           ref={ref}
           onKeyUp={composeEventHandlers(onKeyUp, handleKeyUp)}
-          className={cn(
-            className,
-            "navds-button",
-            `navds-button--${variant}`,
-            `navds-button--${size}`,
-            {
-              "navds-button--loading": loading,
-              "navds-button--icon-only": !!icon && !children,
-              "navds-button--disabled": disabled ?? loading,
-            },
-          )}
-          disabled={disabled ?? loading ? true : undefined}
+          className={cl(className, "aksel-button", `aksel-button--${size}`, {
+            "aksel-button--loading": loading,
+            "aksel-button--icon-only": !!icon && !children,
+            "aksel-button--disabled": disabled ?? loading,
+          })}
+          disabled={(disabled ?? loading) ? true : undefined}
         >
           {icon && iconPosition === "left" && (
-            <span className={cn("navds-button__icon")}>{icon}</span>
+            <span className="aksel-button__icon">{icon}</span>
           )}
           {loading && <Loader size={size} />}
           {children && (
@@ -123,7 +124,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
             </Label>
           )}
           {icon && iconPosition === "right" && (
-            <span className={cn("navds-button__icon")}>{icon}</span>
+            <span className="aksel-button__icon">{icon}</span>
           )}
         </Component>
       );

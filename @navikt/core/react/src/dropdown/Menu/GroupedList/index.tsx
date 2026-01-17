@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
+import { cl } from "../../../util/className";
 import { OverridableComponent } from "../../../util/types";
 import GroupedHeading, { GroupedHeadingProps } from "./GroupedHeading";
 import GroupedItem, { GroupedItemProps } from "./GroupedItem";
@@ -31,9 +31,8 @@ export interface GroupedListType
 
 export const DescriptionList = forwardRef(
   ({ className, children, ...rest }, ref) => {
-    const { cn } = useRenameCSS();
     return (
-      <dl {...rest} ref={ref} className={cn("navds-dropdown__list", className)}>
+      <dl {...rest} ref={ref} className={cl("aksel-dropdown__list", className)}>
         {children}
       </dl>
     );

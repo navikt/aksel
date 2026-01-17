@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { useRenameCSS } from "../theme/Theme";
 import { BodyShort, Detail } from "../typography";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 import InternalHeaderButton from "./InternalHeaderButton";
 
@@ -21,14 +21,12 @@ export const InternalHeaderUserButton: OverridableComponent<
   InternalHeaderUserButtonProps,
   HTMLButtonElement
 > = forwardRef(({ as, name, description, className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <InternalHeaderButton
       {...rest}
       as={as}
       ref={ref}
-      className={cn("navds-internalheader__user-button", className)}
+      className={cl("aksel-internalheader__user-button", className)}
     >
       <div>
         <BodyShort size="small" as="div">

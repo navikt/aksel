@@ -2,8 +2,6 @@ import selectorParser from "postcss-selector-parser";
 import stylelint from "stylelint";
 
 const ruleName = "aksel/no-legacy-classes";
-const url =
-  "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#aksel/no-legacy-classes";
 const prefix = "navds-";
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -38,6 +36,8 @@ const ruleFunction: stylelint.Rule = () => {
 
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
-ruleFunction.meta = { url };
+ruleFunction.meta = {
+  url: `https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#${ruleName}`,
+};
 
 export default ruleFunction;

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
+import { cl } from "../../../util/className";
 import { OverridableComponent } from "../../../util/types";
 
 export const widths = ["text", "md", "lg", "xl", "2xl"] as const;
@@ -65,16 +65,14 @@ export interface PageBlockProps extends React.HTMLAttributes<HTMLDivElement> {
 export const PageBlock: OverridableComponent<PageBlockProps, HTMLDivElement> =
   forwardRef(
     ({ as: Component = "div", gutters, className, width, ...rest }, ref) => {
-      const { cn } = useRenameCSS();
-
       return (
         <Component
           {...rest}
-          className={cn(
-            "navds-pageblock",
-            width && `navds-pageblock--${width}`,
+          className={cl(
+            "aksel-pageblock",
+            width && `aksel-pageblock--${width}`,
             className,
-            { "navds-pageblock--gutters": gutters },
+            { "aksel-pageblock--gutters": gutters },
           )}
           ref={ref}
         />

@@ -47,7 +47,7 @@ export const DesignsystemForside = defineType({
           name: "text",
           type: "string",
           validation: (Rule) => Rule.required(),
-          initialValue: "Ny versjon av Aksel er ute (darkside) 🎉",
+          initialValue: "Ny versjon av Aksel er ute 🎉",
         }),
         defineField({
           title: "Lenke",

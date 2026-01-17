@@ -5,7 +5,6 @@ import {
   InformationSquareFillIcon,
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
-import { useRenameCSS } from "../../theme/Theme";
 
 const STATUS_ICONS = {
   info: InformationSquareFillIcon,
@@ -19,15 +18,13 @@ function InlineMessageIcon({
 }: {
   status: "info" | "success" | "warning" | "error";
 }) {
-  const { cn } = useRenameCSS();
-
   if (!(status in STATUS_ICONS)) {
     return null;
   }
 
   const Icon = STATUS_ICONS[status];
 
-  return <Icon className={cn("navds-inline-message__icon")} aria-hidden />;
+  return <Icon className="aksel-inline-message__icon" aria-hidden />;
 }
 
 export { InlineMessageIcon };

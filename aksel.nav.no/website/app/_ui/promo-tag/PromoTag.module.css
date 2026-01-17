@@ -1,6 +1,6 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
 .promoTag {
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   width: fit-content;
   display: block;
   margin-inline: auto;
@@ -21,7 +21,7 @@
   border: 1px solid;
   border-color: var(--aksel-border-brand-pink-subtleA);
   color: var(--aksel-text-brand-pink);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   backdrop-filter: blur(3px);
   text-underline-offset: 0.1em;
   text-decoration-thickness: 0.111em;
@@ -43,7 +43,7 @@
 .promoTagLabel {
   display: flex;
   padding: 0 var(--ax-space-8);
-  border-radius: var(--ax-border-radius-xlarge);
+  border-radius: var(--ax-radius-12);
   background-color: var(--aksel-bg-brand-pink-strong);
   margin-block: -3px;
   margin-inline-start: -1px;
@@ -66,7 +66,7 @@
   33% {
     background-color: var(--ax-bg-meta-purple-moderateA);
     border-color: var(--ax-border-meta-purple);
-    color: var(--ax-text-meta-purple-pink);
+    color: var(--ax-text-meta-purple);
   }
 
   66% {

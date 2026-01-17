@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, forwardRef, useEffect } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
+import { cl } from "../util/className";
 import { useTimeout } from "../util/hooks/useTimeout";
 import { useValueAsRef } from "../util/hooks/useValueAsRef";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -45,6 +46,12 @@ interface ProgressBarPropsBase
    * Not needed if `aria-labelledby` is used.
    */
   "aria-label"?: string;
+  /**
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
 }
 
 export type ProgressBarProps = ProgressBarPropsBase &
@@ -95,7 +102,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const translateX = 100 - (Math.round(value) / valueMax) * 100;
     const onTimeoutRef = useValueAsRef(simulated?.onTimeout);
 
@@ -114,9 +120,9 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "navds-progress-bar",
-          `navds-progress-bar--${size}`,
+        className={cl(
+          "aksel-progress-bar",
+          `aksel-progress-bar--${size}`,
           className,
         )}
         aria-valuemax={simulated?.seconds ? 0 : Math.round(valueMax)}
@@ -137,16 +143,16 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         {...rest}
       >
         <div
-          className={cn("navds-progress-bar__foreground", {
-            "navds-progress-bar__foreground--indeterminate":
+          className={cl("aksel-progress-bar__foreground", {
+            "aksel-progress-bar__foreground--indeterminate":
               simulated?.seconds !== undefined,
           })}
           style={{
-            "--__ac-progress-bar-simulated":
+            "--__axc-progress-bar-simulated":
               simulated?.seconds !== undefined
                 ? `${simulated?.seconds}s`
                 : undefined,
-            "--__ac-progress-bar-translate": `-${translateX}%`,
+            "--__axc-progress-bar-translate": `-${translateX}%`,
           }}
         />
       </div>

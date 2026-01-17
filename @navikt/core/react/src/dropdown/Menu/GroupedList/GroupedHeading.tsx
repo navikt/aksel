@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
+import { cl } from "../../../util/className";
 
 export interface GroupedHeadingProps
   extends React.HTMLAttributes<HTMLDetailsElement> {
@@ -13,15 +13,14 @@ export const GroupedHeading = forwardRef<
   HTMLDetailsElement,
   GroupedHeadingProps
 >(({ className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
   return (
     <dt
       {...rest}
       ref={ref}
-      className={cn(
-        "navds-dropdown__list-heading",
-        "navds-heading",
-        "navds-heading--xsmall",
+      className={cl(
+        "aksel-dropdown__list-heading",
+        "aksel-heading",
+        "aksel-heading--xsmall",
         className,
       )}
     />

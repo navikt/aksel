@@ -430,9 +430,8 @@ export const WithDayLabels: StoryFn = () => {
   );
 
   return (
-    <VStack gap="8" width="80vw">
+    <VStack gap="space-32" width="80vw">
       {component}
-
       <div>
         <h3>EN:</h3>
         <Provider locale={en}>{component}</Provider>

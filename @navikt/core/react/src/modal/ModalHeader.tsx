@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { useI18n } from "../util/i18n/i18n.hooks";
 import { useModalContext } from "./Modal.context";
 
@@ -16,16 +16,15 @@ export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
   ({ children, className, closeButton = true, ...rest }, ref) => {
-    const { cn } = useRenameCSS();
     const context = useModalContext();
     const translate = useI18n("global");
 
     return (
-      <div {...rest} ref={ref} className={cn("navds-modal__header", className)}>
+      <div {...rest} ref={ref} className={cl("aksel-modal__header", className)}>
         {context.closeHandler && closeButton && (
           <Button
             type="button"
-            className={cn("navds-modal__button")}
+            className="aksel-modal__button"
             size="small"
             variant="tertiary-neutral"
             onKeyDown={(event) => {

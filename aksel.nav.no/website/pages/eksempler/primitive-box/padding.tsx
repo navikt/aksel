@@ -4,16 +4,16 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <VStack gap="space-16">
-      <Box background="surface-neutral" padding="space-16">
-        <Box background="surface-alt-3-subtle" padding="space-8">
+      <Box background="neutral-strong" padding="space-16">
+        <Box background="neutral-moderate" padding="space-8">
           Statisk padding
         </Box>
       </Box>
       <Box
-        background="surface-neutral"
+        background="neutral-strong"
         padding={{ xs: "space-8", md: "space-24" }}
       >
-        <Box background="surface-alt-3-subtle" padding="space-8">
+        <Box background="neutral-moderate" padding="space-8">
           Dynamisk padding
         </Box>
       </Box>
@@ -29,10 +29,9 @@ export default withDsExample(Example, {
 /* Storybook story */
 export const Demo = {
   render: Example,
-  legacyOnly: true,
 };
 
 export const args = {
   index: 1,
-  desc: "Propen 'padding' lar deg sette padding responsivt basert på brekkpunkt. Verdien mapper til tokens, så f.eks. '4' tilsvarer '--a-spacing-4' som er '1rem'.",
+  desc: "Propen 'padding' lar deg sette padding responsivt basert på brekkpunkt. Verdien mapper til tokens, så f.eks. 'space-4' tilsvarer '--ax-space-4' som er 0.25rem (4px).",
 };

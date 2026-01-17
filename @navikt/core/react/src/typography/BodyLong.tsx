@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import type { AkselColor } from "../types";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -16,6 +17,14 @@ export interface BodyLongProps
    * Text.
    */
   children: React.ReactNode;
+  /**
+   * Overrides inherited color.
+   * @default "neutral"
+   *
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
 }
 
 /**
@@ -53,16 +62,14 @@ export const BodyLong: OverridableComponent<
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <Component
         {...rest}
         ref={ref}
-        className={cn(
+        className={cl(
           className,
-          "navds-body-long",
-          `navds-body-long--${size}`,
+          "aksel-body-long",
+          `aksel-body-long--${size}`,
           typoClassNames({
             spacing,
             truncate,

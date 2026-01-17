@@ -1,5 +1,7 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
+
+const FormSummaryAnswersContext = React.createContext(false);
 
 export interface FormSummaryAnswersProps
   extends React.HTMLAttributes<HTMLDListElement> {
@@ -12,29 +14,21 @@ export interface FormSummaryAnswersProps
 export const FormSummaryAnswers = forwardRef<
   HTMLDListElement,
   FormSummaryAnswersProps
->(
-  (
-    {
-      children,
-      className,
-      "data-color": color = "info",
-      ...rest
-    }: FormSummaryAnswersProps,
-    ref,
-  ) => {
-    const { cn } = useRenameCSS();
+>(({ children, className, ...rest }: FormSummaryAnswersProps, ref) => {
+  const isNested = React.useContext(FormSummaryAnswersContext);
 
-    return (
+  return (
+    <FormSummaryAnswersContext.Provider value>
       <dl
         ref={ref}
-        data-color={color}
+        data-color={isNested ? "info" : undefined}
         {...rest}
-        className={cn("navds-form-summary__answers", className)}
+        className={cl("aksel-form-summary__answers", className)}
       >
         {children}
       </dl>
-    );
-  },
-);
+    </FormSummaryAnswersContext.Provider>
+  );
+});
 
 export default FormSummaryAnswers;

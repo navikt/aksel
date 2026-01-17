@@ -33,9 +33,7 @@ function CardDemo() {
         skade.
       </LinkCard.Description>
       <LinkCard.Footer>
-        <Tag size="small" variant="neutral">
-          Pengestøtte
-        </Tag>
+        <Tag size="small">Pengestøtte</Tag>
       </LinkCard.Footer>
     </LinkCard>
   );

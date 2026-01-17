@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import { Popover } from "../../popover";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { DropdownContext } from "../context";
 import Divider from "./Divider";
 import GroupedList, { GroupedListType } from "./GroupedList";
@@ -61,7 +61,6 @@ export interface MenuType<Props = DropdownMenuProps>
 
 export const Menu = forwardRef<HTMLDivElement, DropdownMenuProps>(
   ({ className, onClose, placement = "bottom-end", ...rest }, ref) => {
-    const { cn } = useRenameCSS();
     const context = useContext(DropdownContext);
 
     if (!context) {
@@ -76,8 +75,7 @@ export const Menu = forwardRef<HTMLDivElement, DropdownMenuProps>(
         {...rest}
         placement={placement}
         ref={ref}
-        arrow={false}
-        className={cn("navds-dropdown__menu", className)}
+        className={cl("aksel-dropdown__menu", className)}
         offset={-4}
         anchorEl={anchorEl}
         open={isOpen}

@@ -1,9 +1,9 @@
 "use client";
 
-import cl from "clsx";
 import React, { ReactElement } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
+import { cl } from "@/ui-utils/className";
 import styles from "./ShowMore.module.css";
 import { useShowMoreContext } from "./ShowMoreContext";
 

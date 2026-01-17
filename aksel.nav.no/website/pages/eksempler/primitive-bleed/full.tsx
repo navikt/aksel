@@ -13,7 +13,7 @@ const Example = () => {
         <Box
           padding="space-12"
           marginBlock="space-0 space-28"
-          background="surface-alt-3-subtle"
+          background="neutral-moderate"
         >
           <HStack justify="center">
             Bleed med marginInline=&quot;full&quot;
@@ -30,7 +30,7 @@ const Example = () => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { legacyOnly: true });
+export default withDsExample(Example);
 
 /* Storybook story */
 export const Demo = {

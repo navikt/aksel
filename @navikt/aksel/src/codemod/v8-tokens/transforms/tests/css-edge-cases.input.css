@@ -1,0 +1,28 @@
+.edge-cases {
+  /* Partial matches - should NOT change */
+  --not-a-spacing-4: 10px;
+  color: var(--not-a-surface-action);
+  margin: var(--a-spacing-4-extra);
+
+  /* Whitespace in definitions - SHOULD be detected */
+  --a-surface-action : blue;
+  --a-surface-action-selected  : red;
+
+  /* Multiple tokens on one line - SHOULD change */
+  padding: var(--a-spacing-4) var(--a-spacing-4);
+
+  /* Inside functions - SHOULD change */
+  width: calc(var(--a-spacing-4) * 2);
+
+  /* Comments - SHOULD change (regex based) */
+  /* var(--a-spacing-4) */
+  border-radius: var(--a-border-radius-medium);
+  border-radius: var(--ax-border-radius-small);
+
+  /* Border radius tokens - SHOULD migrate to numeric values */
+  border-radius: var(--ax-border-radius-full);
+  border-radius: var(--ax-border-radius-small);
+  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-border-radius-xlarge);
+}

@@ -1,6 +1,6 @@
 import React, { createContext, forwardRef, useContext, useRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { omit } from "../util";
+import { cl } from "../util/className";
 import { useControllableState } from "../util/hooks/useControllableState";
 import { AccordionContext } from "./AccordionContext";
 
@@ -47,7 +47,6 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
     });
 
     const context = useContext(AccordionContext);
-    const { cn } = useRenameCSS();
 
     const shouldAnimate = useRef<boolean>(!(Boolean(open) || defaultOpen));
 
@@ -62,10 +61,9 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
 
     return (
       <div
-        className={cn("navds-accordion__item", className, {
-          "navds-accordion__item--open": _open,
-          "navds-accordion__item--neutral": context?.variant === "neutral",
-          "navds-accordion__item--no-animation": !shouldAnimate.current,
+        className={cl("aksel-accordion__item", className, {
+          "aksel-accordion__item--open": _open,
+          "aksel-accordion__item--no-animation": !shouldAnimate.current,
         })}
         data-expanded={_open}
         ref={ref}

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../../theme/Theme";
+import { cl } from "../../../util/className";
 import { useTabPanel } from "./useTabPanel";
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -28,13 +28,12 @@ export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
 const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
   ({ className, value, children, lazy = true, id, ...rest }, ref) => {
     const ctx = useTabPanel({ value });
-    const { cn } = useRenameCSS();
 
     return (
       <div
         ref={ref}
         {...rest}
-        className={cn("navds-tabs__tabpanel", className)}
+        className={cl("aksel-tabs__tabpanel", className)}
         role="tabpanel"
         tabIndex={0}
         aria-labelledby={rest["aria-labelledby"] ?? ctx.labelledbyId}

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 
 export interface LinkPanelTitleProps
@@ -11,16 +11,14 @@ export const LinkPanelTitle: OverridableComponent<
   LinkPanelTitleProps,
   HTMLDivElement
 > = forwardRef(({ className, as: Component = "div", ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <Component
       {...rest}
       ref={ref}
-      className={cn(
-        "navds-link-panel__title",
-        "navds-heading",
-        "navds-heading--medium",
+      className={cl(
+        "aksel-link-panel__title",
+        "aksel-heading",
+        "aksel-heading--medium",
         className,
       )}
     />

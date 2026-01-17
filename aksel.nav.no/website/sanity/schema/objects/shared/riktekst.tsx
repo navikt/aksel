@@ -175,7 +175,7 @@ const Riktekst = (
   const komponent = ["props_seksjon", "kode_eksempler", "token_ref"];
 
   const templates = ["kode_eksempler", "exampletext_block"];
-  const grunnleggende = ["spesial_seksjon", "attachment", "props_seksjon"];
+  const grunnleggende = ["attachment", "props_seksjon"];
   const blogg = ["compare_images"];
 
   fields.push(...standard);

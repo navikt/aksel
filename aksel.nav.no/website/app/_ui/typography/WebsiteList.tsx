@@ -6,7 +6,7 @@ import {
 import styles from "./Typography.module.css";
 
 type ListProps = Pick<AkselListProps, "as" | "children"> &
-  React.HTMLAttributes<HTMLDivElement>;
+  Omit<React.HTMLAttributes<HTMLDivElement>, "title">;
 
 function WebsiteList({ children, as = "ul", ...restProps }: ListProps) {
   return (

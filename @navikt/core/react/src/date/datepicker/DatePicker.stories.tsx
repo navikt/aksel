@@ -75,6 +75,7 @@ export const Default: StoryObj<DefaultStoryProps> = {
           {...newProps}
           locale={props.locale}
           disableWeekends={props.disableWeekends}
+          fixedWeeks={props.fixedWeeks}
         >
           {!props.standalone &&
             (props.inputfield && props.mode !== "multiple" ? (
@@ -129,6 +130,7 @@ export const Default: StoryObj<DefaultStoryProps> = {
       options: ["single", "multiple", "range"],
       control: { type: "radio" },
     },
+    fixedWeeks: { control: { type: "boolean" } },
   },
 };
 
@@ -366,7 +368,7 @@ export const Readonly = () => {
 
 export const StandaloneOptions = () => {
   return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="8">
+    <HGrid columns={{ xs: 1, md: 2 }} gap="space-32">
       <DatePicker.Standalone today={new Date("Nov 23 2022")} />
       <DatePicker.Standalone
         dropdownCaption

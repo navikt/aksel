@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { SetStateAction, useCallback, useMemo, useState } from "react";
+import { cl } from "../../../util/className";
 import { createStrictContext } from "../../../util/create-strict-context";
 import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";

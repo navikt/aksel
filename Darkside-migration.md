@@ -4,12 +4,17 @@
 
 ## Components
 
+## Types
+
+Removed string | {} notation from AkselColor-type.
+
+### Typo
+
+Added "contrast"-option to `textColor` prop.
+
 ### Accordion
 
-Removed
-
-- headingSize
-- css-classes
+`headingSize` now has no effect
 
 Deprecated
 
@@ -17,9 +22,11 @@ Deprecated
 
 ### Chips
 
-Removed
+Deprecated
 
-- css-classes
+- variant
+
+### Chat
 
 Deprecated
 
@@ -27,19 +34,9 @@ Deprecated
 
 ### CopyButton
 
-Removed
-
-- css-classes
-
 Deprecated
 
 - variant
-
-### Guidepanel
-
-Removed
-
-- css classes
 
 ### List
 
@@ -55,15 +52,7 @@ Removed
 
 ### Popover
 
-Deprecated
-
-- arrow
-
-### Stepper
-
-Removed
-
-- css-classes
+`arrow` now has no effect
 
 ### Tag
 
@@ -72,33 +61,17 @@ Changed
 - Variants now `outline`, `moderate` and `strong`
 - Legacy-variants still avaliable, but hidden.
 
-Removed
-
-- navds-tag--<variant> css
-
-### ToggleGroup
-
-Removed
-
-- css-classes
-
 Deprecated
 
 - variant
 
 ### Link
 
-Removed
-
-- css-classes
+`variant="subtle"` now just defaults to neutral
 
 Deprecated
 
 - variant
-
-Removed
-
-- variant="subtle" (only 2-3 users)
 
 ### Checkbox
 
@@ -112,13 +85,9 @@ Removed
 
 ### Page
 
-Removed
-
-- `background`-prop
+`background`-prop now has no effect
 
 ### Box
-
-WIP: Need to create codemod
 
 Changes:
 
@@ -126,4 +95,44 @@ Changes:
 
 Deprecated
 
-- BoxNew tagges as deprecated
+- BoxNew tagged as deprecated
+
+## CSS
+
+Old css removed
+
+- Moved into src-dir (no external effect)
+
+Only index.css and index.min.css avaliable trough CDN now
+All classNames with `navds` prefix removed
+`/darkside`-import removed. Regular import now just "darkside"
+
+## Tailwind
+
+Old config removed, regular import now just new config
+
+## Tokens
+
+Old tokens removed
+
+/darkside imports removed. Direct import `@navikt/ds-tokens` now uses darkside config.
+
+Removed
+
+- `@navikt/ds-tokens/darkside-js`
+- `@navikt/ds-tokens/darkside-css` ++
+
+Added
+
+- `@navikt/ds-tokens/js`
+- `@navikt/ds-tokens/css` ++
+
+## CLI
+
+Added a bunch of new codemods
+
+## Stylelint
+
+- Added rule "aksel/no-legacy-classes".
+- Removed rule "aksel/design-token-no-component-reference" since we don't have any component tokens anymore.
+- Adjusted existing rules according to new tokens/prefixes.

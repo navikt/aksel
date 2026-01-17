@@ -41,7 +41,7 @@ function Bilde(props: ExtractPortableComponentProps<"bilde">) {
       {caption && (
         <HGrid
           as="figcaption"
-          marginBlock="space-8 0"
+          marginBlock="space-8 space-0"
           marginInline="space-12"
           gap="space-4"
           className={styles.bildeCaption}

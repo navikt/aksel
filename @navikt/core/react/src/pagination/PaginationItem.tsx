@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Button, ButtonProps } from "../button";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 
 export interface PaginationItemProps extends ButtonProps {
@@ -37,22 +37,19 @@ export const Item: PaginationItemType = forwardRef(
       page,
       "data-color": color,
       ...rest
-    },
+    }: PaginationItemProps & { as?: React.ElementType },
     ref,
   ) => {
-    const themeContext = useThemeInternal();
-    const { cn } = useRenameCSS();
-
     return (
       <Button
         as={Component}
-        variant={themeContext?.isDarkside ? "tertiary-neutral" : "tertiary"}
+        variant="tertiary"
         data-color={color}
         aria-current={selected}
         data-pressed={selected}
         ref={ref}
-        className={cn("navds-pagination__item", className, {
-          "navds-pagination__item--selected": selected,
+        className={cl("aksel-pagination__item", className, {
+          "aksel-pagination__item--selected": selected,
         })}
         data-page={page}
         /* TODO: Breaking change to remove since it's in use by some applications. Add to future major version. */

@@ -1,8 +1,8 @@
 "use client";
 
-import cl from "clsx";
 import { Heading } from "@navikt/ds-react";
 import { AkselCubeAnimated } from "@/app/_ui/aksel-cube/AkselCube";
+import { cl } from "@/ui-utils/className";
 import styles from "../_ui/frontpage.module.css";
 import { useShouldStopAnimation } from "./useShouldStopAnimation";
 

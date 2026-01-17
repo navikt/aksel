@@ -1,6 +1,5 @@
 import { endOfDay, isSameDay, startOfDay } from "date-fns";
 import React, { forwardRef, useMemo, useRef, useState } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { AxisLabels } from "./AxisLabels";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { RowContext } from "./hooks/useRowContext";
@@ -96,7 +95,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const isMultipleRows = Array.isArray(children);
 
     const firstFocusabled = useRef<
@@ -215,7 +213,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         }}
       >
         <div {...rest} ref={ref}>
-          <div className={cn("navds-timeline")}>
+          <div className="aksel-timeline">
             <AxisLabels templates={axisLabelTemplates} />
 
             {pins.map((PinChild, i) => (

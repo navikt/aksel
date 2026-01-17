@@ -15,7 +15,7 @@ const ActivityColumn = ({
       background="sunken"
       borderColor="neutral-subtleA"
       borderWidth="1"
-      borderRadius="xlarge"
+      borderRadius="12"
       padding="space-12"
     >
       <VStack gap="space-12">

@@ -1,7 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyLong, ErrorMessage } from "../../typography";
+import { cl } from "../../util/className";
 import { useId } from "../../util/hooks";
 import { Checkbox, CheckboxProps } from "../checkbox";
 import { useFormField } from "../useFormField";
@@ -52,7 +51,6 @@ export const ConfirmationPanel = forwardRef<
   HTMLInputElement,
   ConfirmationPanelProps
 >(({ className, children, label, ...props }, ref) => {
-  const { cn } = useRenameCSS();
   const { errorId, showErrorMsg, hasError, size, inputProps } = useFormField(
     props,
     "confirmation-panel",
@@ -68,18 +66,18 @@ export const ConfirmationPanel = forwardRef<
 
   return (
     <div
-      className={cn("navds-confirmation-panel", "navds-form-field", className, {
-        "navds-confirmation-panel--small": size === "small",
-        "navds-confirmation-panel--error": hasError,
-        "navds-confirmation-panel--checked": !!props.checked,
+      className={cl("aksel-confirmation-panel", "aksel-form-field", className, {
+        "aksel-confirmation-panel--small": size === "small",
+        "aksel-confirmation-panel--error": hasError,
+        "aksel-confirmation-panel--checked": !!props.checked,
       })}
       data-color={currentColor}
     >
-      <div className={cn("navds-confirmation-panel__inner")}>
+      <div className="aksel-confirmation-panel__inner">
         {children && (
           <BodyLong
             size={props.size}
-            className={cn("navds-confirmation-panel__content")}
+            className="aksel-confirmation-panel__content"
             id={`confirmation-panel-${id}`}
             as="div"
           >
@@ -100,7 +98,7 @@ export const ConfirmationPanel = forwardRef<
           {label}
         </Checkbox>
       </div>
-      <div className={cn("navds-form-field__error")} id={errorId} role="alert">
+      <div className="aksel-form-field__error" id={errorId} role="alert">
         {showErrorMsg && (
           <ErrorMessage size={size} showIcon>
             {props.error}

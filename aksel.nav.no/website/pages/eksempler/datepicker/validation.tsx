@@ -17,6 +17,7 @@ const Example = () => {
         <DatePicker.Input
           {...inputProps}
           label="Velg dato"
+          description="Format: dd.mm.åååå"
           error={
             hasError &&
             "Du må skrive en dato, f.eks. på denne måten: dd.mm.åååå"

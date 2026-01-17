@@ -1,6 +1,7 @@
 import React, { forwardRef, useContext } from "react";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { useThemeInternal } from "../theme/Theme";
 import { BodyLong } from "../typography";
+import { cl } from "../util/className";
 import { AccordionItemContext } from "./AccordionItem";
 
 export interface AccordionContentProps
@@ -16,7 +17,6 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
     const context = useContext(AccordionItemContext);
 
     const themeContext = useThemeInternal();
-    const { cn } = useRenameCSS();
 
     if (context === null) {
       console.error(
@@ -27,20 +27,17 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
 
     return (
       <BodyLong
+        data-color={themeContext.color}
         {...rest}
         as="div"
         ref={ref}
-        className={cn(
-          "navds-accordion__content",
-          { "navds-accordion__content--closed": !context.open },
+        className={cl(
+          "aksel-accordion__content",
+          { "aksel-accordion__content--closed": !context.open },
           className,
         )}
       >
-        {themeContext?.isDarkside ? (
-          <div className={cn("navds-accordion__content-inner")}>{children}</div>
-        ) : (
-          children
-        )}
+        <div className="aksel-accordion__content-inner">{children}</div>
       </BodyLong>
     );
   },

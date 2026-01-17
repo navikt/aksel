@@ -1,9 +1,8 @@
-import cl from "clsx";
 import React, { forwardRef, useState } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import TextareaAutosize from "../../util/TextareaAutoSize";
+import { cl } from "../../util/className";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useId } from "../../util/hooks";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
@@ -100,8 +99,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...rest
     } = props;
 
-    const { cn } = useRenameCSS();
-
     const maxLengthId = useId();
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
@@ -115,17 +112,17 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     return (
       <div
-        className={cn(
+        className={cl(
           className,
-          "navds-form-field",
-          `navds-form-field--${size}`,
+          "aksel-form-field",
+          `aksel-form-field--${size}`,
           {
-            "navds-form-field--disabled": !!inputProps.disabled,
-            "navds-form-field--readonly": readOnly,
-            "navds-textarea--readonly": readOnly,
-            "navds-textarea--error": hasError,
-            "navds-textarea--autoscrollbar": UNSAFE_autoScrollbar,
-            [`navds-textarea--resize-${resize === true ? "both" : resize}`]:
+            "aksel-form-field--disabled": !!inputProps.disabled,
+            "aksel-form-field--readonly": readOnly,
+            "aksel-textarea--readonly": readOnly,
+            "aksel-textarea--error": hasError,
+            "aksel-textarea--autoscrollbar": UNSAFE_autoScrollbar,
+            [`aksel-textarea--resize-${resize === true ? "both" : resize}`]:
               resize,
           },
         )}
@@ -133,8 +130,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          className={cn("navds-form-field__label", {
-            "navds-sr-only": hideLabel,
+          className={cl("aksel-form-field__label", {
+            "aksel-sr-only": hideLabel,
           })}
         >
           {readOnly && <ReadOnlyIcon />}
@@ -142,8 +139,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         </Label>
         {!!description && (
           <BodyShort
-            className={cn("navds-form-field__description", {
-              "navds-sr-only": hideLabel,
+            className={cl("aksel-form-field__description", {
+              "aksel-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}
@@ -165,10 +162,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           autoScrollbar={UNSAFE_autoScrollbar}
           ref={ref}
           readOnly={readOnly}
-          className={cn(
-            "navds-textarea__input",
-            "navds-body-short",
-            `navds-body-short--${size ?? "medium"}`,
+          className={cl(
+            "aksel-textarea__input",
+            "aksel-body-short",
+            `aksel-body-short--${size ?? "medium"}`,
           )}
           {...(describedBy ? { "aria-describedby": describedBy } : {})}
         />
@@ -182,7 +179,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           />
         )}
         <div
-          className={cn("navds-form-field__error")}
+          className="aksel-form-field__error"
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"

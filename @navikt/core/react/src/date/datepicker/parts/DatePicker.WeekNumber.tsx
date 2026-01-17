@@ -2,8 +2,8 @@ import React, { useMemo } from "react";
 import { CalendarWeek, useDayPicker } from "react-day-picker";
 import { Button } from "../../../button";
 import { Hide, Show } from "../../../layout/responsive";
-import { useRenameCSS } from "../../../theme/Theme";
 import { Detail } from "../../../typography";
+import { cl } from "../../../util/className";
 import { useDateTranslationContext } from "../../Date.locale";
 import { MultipleMode } from "../DatePicker.types";
 
@@ -19,7 +19,6 @@ const DatePickerWeekNumber = ({
   showOnDesktop: boolean;
 } & React.ThHTMLAttributes<HTMLTableCellElement>) => {
   const translate = useDateTranslationContext().translate;
-  const { cn } = useRenameCSS();
 
   const { getModifiers } = useDayPicker();
 
@@ -58,8 +57,8 @@ const DatePickerWeekNumber = ({
   return (
     <DisplayMode above="sm" asChild>
       <td
-        className={cn("rdp-cell", {
-          "navds-date__week-wrapper": !showOnDesktop,
+        className={cl("rdp-cell", {
+          "aksel-date__week-wrapper": !showOnDesktop,
         })}
       >
         <Button
@@ -68,7 +67,7 @@ const DatePickerWeekNumber = ({
           name="week-number"
           aria-label={translate("selectWeekNumber", { week: weekNumber })}
           style={style}
-          className={cn("navds-date__weeknumber", "rdp-weeknumber")}
+          className="aksel-date__weeknumber rdp-weeknumber"
           onClick={() => {
             onWeekNumberClick(
               weekNumber,
@@ -76,9 +75,7 @@ const DatePickerWeekNumber = ({
             );
           }}
           icon={
-            <span className={cn("navds-date__weeknumber-number")}>
-              {weekNumber}
-            </span>
+            <span className="aksel-date__weeknumber-number">{weekNumber}</span>
           }
         />
       </td>

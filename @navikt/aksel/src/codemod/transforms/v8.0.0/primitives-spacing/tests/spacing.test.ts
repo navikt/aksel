@@ -9,6 +9,7 @@ const fixtures = [
   "idempotent",
   "directImport",
   "composed",
+  "object-string",
 ];
 
 for (const fixture of fixtures) {

@@ -2,6 +2,11 @@
   "version": 2,
   "changelog": [
     {
+      "description": "Migrerte til v8 og justerte avstander ([diff](https://github.com/navikt/aksel/pull/4358/files?w=1)).",
+      "date": "15.01.2026",
+      "version": 3
+    },
+    {
       "description": "La til lenker på 'laste siden på nytt' og 'gå tilbake til forrige side', samt la til maksbredde.",
       "date": "07.12.2023",
       "version": 2

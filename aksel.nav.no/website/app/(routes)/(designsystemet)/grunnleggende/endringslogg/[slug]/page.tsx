@@ -118,11 +118,7 @@ export default async function (props: Props) {
             })}
           </BodyShort>
           {fremhevet && (
-            <Tag
-              size="xsmall"
-              variant="neutral-filled"
-              data-color="aksel-brand-pink"
-            >
+            <Tag size="xsmall" variant="strong" data-color="aksel-brand-pink">
               Fremhevet
             </Tag>
           )}
@@ -156,7 +152,7 @@ export default async function (props: Props) {
       </BoxNew>
 
       <HGrid
-        marginBlock="space-28 0"
+        marginBlock="space-28 space-0"
         gap="space-48 space-24"
         columns={{ xs: 1, md: 2 }}
       >

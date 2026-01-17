@@ -1,4 +1,4 @@
-import cl from "clsx";
+import { cl } from "../../util/className";
 import {
   type FormFieldProps,
   containsReadMore,

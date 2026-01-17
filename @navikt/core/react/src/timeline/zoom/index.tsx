@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import ZoomButton, { ZoomButtonType } from "./ZoomButton";
 
 interface ZoomProps extends React.HTMLAttributes<HTMLUListElement> {
@@ -16,10 +16,8 @@ export interface ZoomType<Props = ZoomProps>
 
 export const Zoom = forwardRef<HTMLUListElement, ZoomProps>(
   ({ className, children, ...rest }, ref) => {
-    const { cn } = useRenameCSS();
-
     return (
-      <ul ref={ref} className={cn(className, "navds-timeline__zoom")} {...rest}>
+      <ul ref={ref} className={cl(className, "aksel-timeline__zoom")} {...rest}>
         {children}
       </ul>
     );

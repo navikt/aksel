@@ -3,15 +3,17 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const { monthpickerProps, inputProps, selectedMonth } = useMonthpicker({
-    fromDate: new Date("Aug 23 2019"),
-    toDate: new Date("Aug 23 2025"),
     onMonthChange: console.info,
   });
 
   return (
     <VStack gap="space-16" minHeight="24rem">
       <MonthPicker {...monthpickerProps}>
-        <MonthPicker.Input {...inputProps} label="Velg måned" />
+        <MonthPicker.Input
+          {...inputProps}
+          label="Velg måned"
+          description="Format: mm.åååå"
+        />
       </MonthPicker>
       {selectedMonth?.toLocaleDateString(undefined, {
         year: "numeric",
