@@ -8937,6 +8937,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"aksel-analyzer@workspace:scripts/analyzer":
+  version: 0.0.0-use.local
+  resolution: "aksel-analyzer@workspace:scripts/analyzer"
+  dependencies:
+    "@types/node": "npm:^25.0.3"
+    pkg-exports: "npm:^0.2.0"
+    pkg-types: "npm:^2.3.0"
+    rolldown: "npm:^1.0.0-beta.57"
+    ts-morph: "npm:^27.0.2"
+    tsx: "npm:^4.20.6"
+  languageName: unknown
+  linkType: soft
+
 "aksel-bundle-analyzer@workspace:scripts/bundle-analyzer":
   version: 0.0.0-use.local
   resolution: "aksel-bundle-analyzer@workspace:scripts/bundle-analyzer"
