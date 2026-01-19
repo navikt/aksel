@@ -1,8 +1,8 @@
 import { enGB, nb, nn } from "date-fns/locale";
-import { createStrictContext } from "../util/create-strict-context";
-import { TFunction } from "../util/i18n/i18n.types";
-import en_translations from "../util/i18n/locales/en";
-import nn_translations from "../util/i18n/locales/nn";
+import { createStrictContext } from "../utils/helpers";
+import { TFunction } from "../utils/i18n/i18n.types";
+import en_translations from "../utils/i18n/locales/en";
+import nn_translations from "../utils/i18n/locales/nn";
 
 /** @private */
 export const getLocaleFromString = (locale: "nb" | "nn" | "en" = "nb") => {

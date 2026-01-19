@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { useRef } from "react";
 import { describe, expect, test, vi } from "vitest";
-import { useMergeRefs } from "../hooks/useMergeRefs";
+import { useMergeRefs } from "./useMergeRefs";
 
 describe("useMergeRefs", () => {
   test("returns null when all refs are null or undefined", () => {

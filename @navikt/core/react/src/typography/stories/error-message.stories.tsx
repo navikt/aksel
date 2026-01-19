@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
 import { VStack } from "../../layout/stack";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import ErrorMessage from "../ErrorMessage";
 
 const meta: Meta<typeof ErrorMessage> = {

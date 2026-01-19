@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 
 export interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

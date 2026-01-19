@@ -1,5 +1,5 @@
-import { composeEventHandlers } from "../../../util/composeEventHandlers";
-import { useMergeRefs } from "../../../util/hooks/useMergeRefs";
+import { composeEventHandlers } from "../../../utils/helpers";
+import { useMergeRefs } from "../../../utils/hooks";
 import { useTabsContext, useTabsDescendant } from "../../Tabs.context";
 
 export interface UseTabProps {

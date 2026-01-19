@@ -1,8 +1,8 @@
 import React from "react";
 import { PlusIcon } from "@navikt/aksel-icons";
 import { BodyShort, Label } from "../../../typography";
-import { cl } from "../../../util/className";
-import { useI18n } from "../../../util/i18n/i18n.hooks";
+import { cl } from "../../../utils/helpers";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList, toComboboxOption } from "../combobox-utils";

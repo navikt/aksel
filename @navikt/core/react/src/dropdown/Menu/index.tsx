@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import { Popover } from "../../popover";
-import { cl } from "../../util/className";
+import { cl } from "../../utils/helpers";
 import { DropdownContext } from "../context";
 import Divider from "./Divider";
 import GroupedList, { GroupedListType } from "./GroupedList";

@@ -1,5 +1,5 @@
 import React from "react";
-import { useMergeRefs } from "../util/hooks";
+import { useMergeRefs } from "../../hooks";
 import { mergeProps } from "./merge-props";
 
 interface SlotProps extends React.HTMLAttributes<HTMLElement> {

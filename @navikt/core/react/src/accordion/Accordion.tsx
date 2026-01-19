@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import type { AkselColor } from "../types";
-import { omit } from "../util";
-import { cl } from "../util/className";
+import { omit } from "../utils-external";
+import { cl } from "../utils/helpers";
 import AccordionContent, { AccordionContentProps } from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
 import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";

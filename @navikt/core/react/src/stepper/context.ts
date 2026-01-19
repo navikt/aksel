@@ -1,4 +1,4 @@
-import { createStrictContext } from "../util/create-strict-context";
+import { createStrictContext } from "../utils/helpers";
 
 interface StepperContextValue {
   onStepChange: (step: number) => void;

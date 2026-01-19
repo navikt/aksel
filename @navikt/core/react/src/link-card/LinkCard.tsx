@@ -1,14 +1,13 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import type { AkselColor } from "../types";
 import { BodyLong, Heading } from "../typography";
-import { cl } from "../util/className";
-import { createStrictContext } from "../util/create-strict-context";
 import {
   LinkAnchor,
   LinkAnchorArrow,
   LinkAnchorOverlay,
   LinkAnchorProps,
-} from "../util/link-anchor";
+} from "../utils/components/link-anchor";
+import { cl, createStrictContext } from "../utils/helpers";
 
 /* ------------------------------ LinkCard Root ----------------------------- */
 interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {

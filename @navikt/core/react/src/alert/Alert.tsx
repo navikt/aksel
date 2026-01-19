@@ -9,8 +9,8 @@ import {
 import { Button } from "../button";
 import { AkselColor } from "../types";
 import { BodyLong } from "../typography";
-import { cl } from "../util/className";
-import { useI18n } from "../util/i18n/i18n.hooks";
+import { cl } from "../utils/helpers";
+import { useI18n } from "../utils/i18n/i18n.hooks";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

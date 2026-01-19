@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
-import { cl } from "../../util/className";
-import { useId } from "../../util/hooks";
+import { useId } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 import { Fieldset, FieldsetProps } from "../fieldset";
 import { FieldsetContext } from "../fieldset/context";
 

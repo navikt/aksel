@@ -1,10 +1,9 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { cl } from "../util/className";
-import { composeEventHandlers } from "../util/composeEventHandlers";
-import { useId } from "../util/hooks";
-import { useControllableState } from "../util/hooks/useControllableState";
-import { useI18n } from "../util/i18n/i18n.hooks";
+import { useId } from "../utils-external";
+import { cl, composeEventHandlers } from "../utils/helpers";
+import { useControllableState } from "../utils/hooks";
+import { useI18n } from "../utils/i18n/i18n.hooks";
 import AnimateHeight from "./AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";

@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import { AkselColor } from "../types";
 import { Label } from "../typography";
-import { useId } from "../util";
-import { cl } from "../util/className";
+import { useId } from "../utils-external";
+import { cl } from "../utils/helpers";
 import {
   ToggleGroupDescendantsProvider,
   ToggleGroupProvider,

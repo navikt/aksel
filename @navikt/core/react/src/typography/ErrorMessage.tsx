@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { cl } from "../util/className";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../utils-external";
+import { cl } from "../utils/helpers";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 

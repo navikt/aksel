@@ -1,9 +1,9 @@
 import React, { MouseEvent, forwardRef } from "react";
 import { BodyLong, BodyShort, ErrorMessage } from "../../../../typography";
-import { OverridableComponent } from "../../../../util";
-import { cl } from "../../../../util/className";
-import { useI18n } from "../../../../util/i18n/i18n.hooks";
-import { ComponentTranslation } from "../../../../util/i18n/i18n.types";
+import type { OverridableComponent } from "../../../../utils-external";
+import { cl } from "../../../../utils/helpers";
+import { useI18n } from "../../../../utils/i18n/i18n.hooks";
+import type { ComponentTranslation } from "../../../../utils/i18n/i18n.types";
 import { useFileUploadTranslation } from "../../FileUpload.context";
 import { FileItem } from "./Item.types";
 import { ItemActionField } from "./ItemActionField";

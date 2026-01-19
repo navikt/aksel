@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { DishwasherIcon, FreezerIcon, MugIcon } from "@navikt/aksel-icons";
 import { Tabs } from ".";
 import { VStack } from "../layout/stack";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
 export default {
   title: "ds-react/Tabs",
