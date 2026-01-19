@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import Link from "next/link";
 import { Suspense } from "react";
 import { BodyShort, Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
@@ -7,6 +6,7 @@ import { GlobalSearchButton } from "@/app/_ui/global-search/GlobalSearch.button"
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
 import { ThemeButton } from "@/app/_ui/theming/Theme.button";
 import AkselLogo from "@/assets/Logo";
+import { cl } from "@/ui-utils/className";
 import { HeaderLink } from "./Header.link";
 import styles from "./Header.module.css";
 
@@ -21,7 +21,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
 
   return (
     <header
-      className={clsx(styles.header, {
+      className={cl(styles.header, {
         [styles.headerProduktbloggen]: variant === "produktbloggen",
       })}
     >

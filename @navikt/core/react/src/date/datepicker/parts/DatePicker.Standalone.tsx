@@ -24,11 +24,6 @@ interface DatePickerStandaloneDefaultProps
    * Datepicker classname
    */
   className?: string;
-  /**
-   * If datepicker should be fixed to 6 weeks, regardless of actual weeks in month
-   * @default true
-   */
-  fixedWeeks?: boolean;
 }
 
 type StandaloneConditionalModeProps = SingleMode | MultipleMode | RangeMode;

@@ -43,7 +43,6 @@
     "@sanity/table": "2.0.0",
     "@sanity/vision": "4.20.3",
     "@slack/web-api": "^7.8.0",
-    "clsx": "^2.1.0",
     "codesandbox-import-utils": "^2.2.3",
     "date-fns": "^4.0.0",
     "fuse.js": "^7.0.0",

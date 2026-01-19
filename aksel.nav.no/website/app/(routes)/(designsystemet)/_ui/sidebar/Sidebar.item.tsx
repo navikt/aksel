@@ -1,6 +1,5 @@
 "use client";
 
-import cl from "clsx";
 import { stegaClean } from "next-sanity";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -49,7 +48,7 @@ function DesignsystemSidebarItem(props: {
       <Link
         href={`/${page.slug}`}
         onNavigate={() => toggleOpen(false)}
-        className={cl(styles.navListItemLink, styles.navListNotch)}
+        className={`${styles.navListItemLink} ${styles.navListNotch}`}
         data-notch={active}
         data-current={active}
         onClick={() =>
