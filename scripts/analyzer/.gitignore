@@ -1,2 +1,4 @@
 .bundle-input*
 package-report*
+**/temp/local/*
+**/temp/remote/*

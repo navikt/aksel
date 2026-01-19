@@ -10,9 +10,19 @@
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
-    "pkg-types": "^2.3.0"
+    "pkg-types": "^2.3.0",
+    "rimraf": "6.0.1",
+    "tar": "^7.5.3"
   },
   "scripts": {
-    "run:analyze": "tsx ./src/index.ts"
+    "run:analyze": "yarn clean && yarn pack-local && yarn pack-remote && tsx ./src/index.ts",
+    "run:analyze-fast": "tsx ./src/analyze.ts",
+    "clean": "rimraf temp/remote/* temp/local/* || true",
+    "pack-local": "yarn pack-local-react && yarn pack-local-css",
+    "pack-local-react": "npm pack --pack-destination ../../scripts/analyzer/temp/local -w @navikt/ds-react",
+    "pack-local-css": "npm pack --pack-destination ../../scripts/analyzer/temp/local -w @navikt/ds-css",
+    "pack-remote": "yarn pack-remote-react && yarn pack-remote-css",
+    "pack-remote-react": "npm pack @navikt/ds-react@latest --pack-destination ./temp/remote",
+    "pack-remote-css": "npm pack @navikt/ds-css@latest --pack-destination ./temp/remote"
   }
 }
