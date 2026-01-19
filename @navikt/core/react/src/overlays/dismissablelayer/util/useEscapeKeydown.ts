@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useEventCallback } from "../../../utils/hooks/useEventCallback";
+import { useEventCallback } from "../../../utils/hooks";
 
 export function useEscapeKeydown(
   callback?: (event: KeyboardEvent) => void,

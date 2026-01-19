@@ -1,6 +1,6 @@
 "use client";
 
-import { Timeout } from "../../utils/hooks/useTimeout";
+import { Timeout } from "../../utils/hooks";
 
 // https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/debounce.js
 function debounce<T extends unknown[]>(

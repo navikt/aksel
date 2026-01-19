@@ -4,10 +4,12 @@ import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLay
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
 import { cl } from "../../utils/helpers";
-import { useMergeRefs } from "../../utils/hooks";
-import { useOpenChangeAnimationComplete } from "../../utils/hooks/useOpenChangeAnimationComplete";
-import { useScrollLock } from "../../utils/hooks/useScrollLock";
-import { createTransitionStatusAttribute } from "../../utils/hooks/useTransitionStatus";
+import {
+  createTransitionStatusAttribute,
+  useMergeRefs,
+  useOpenChangeAnimationComplete,
+  useScrollLock,
+} from "../../utils/hooks";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";

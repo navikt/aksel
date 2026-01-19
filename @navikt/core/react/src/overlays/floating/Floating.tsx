@@ -22,9 +22,11 @@ import { useModalContext } from "../../modal/Modal.context";
 import { useClientLayoutEffect } from "../../utils-external";
 import { Slot } from "../../utils/components/slot/Slot";
 import { createStrictContext } from "../../utils/helpers";
-import { useMergeRefs } from "../../utils/hooks";
-import { useEventCallback } from "../../utils/hooks/useEventCallback";
-import { useOpenChangeAnimationComplete } from "../../utils/hooks/useOpenChangeAnimationComplete";
+import {
+  useEventCallback,
+  useMergeRefs,
+  useOpenChangeAnimationComplete,
+} from "../../utils/hooks";
 import type { AsChildProps } from "../../utils/types";
 import {
   type Align,

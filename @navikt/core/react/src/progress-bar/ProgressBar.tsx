@@ -1,8 +1,7 @@
 import React, { HTMLAttributes, forwardRef, useEffect } from "react";
 import type { AkselColor } from "../types";
 import { cl } from "../utils/helpers";
-import { useTimeout } from "../utils/hooks/useTimeout";
-import { useValueAsRef } from "../utils/hooks/useValueAsRef";
+import { useTimeout, useValueAsRef } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
 interface ProgressBarPropsBase

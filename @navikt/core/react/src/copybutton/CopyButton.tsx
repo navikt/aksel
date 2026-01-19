@@ -4,7 +4,7 @@ import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Button, ButtonProps } from "../button";
 import type { AkselColor } from "../types/theme";
 import { cl, clipboardCopy, composeEventHandlers } from "../utils/helpers";
-import { useTimeout } from "../utils/hooks/useTimeout";
+import { useTimeout } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
 export interface CopyButtonProps

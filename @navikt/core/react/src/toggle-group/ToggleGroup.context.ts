@@ -1,6 +1,6 @@
 import { createContext as ReactCreateContext } from "react";
 import { createStrictContext } from "../utils/helpers";
-import { createDescendantContext } from "../utils/hooks/descendants/useDescendant";
+import { createDescendantContext } from "../utils/hooks";
 import { ToggleGroupProps } from "./ToggleGroup.types";
 import { useToggleGroup } from "./useToggleGroup";
 

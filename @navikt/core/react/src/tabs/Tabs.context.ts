@@ -1,5 +1,5 @@
 import { createStrictContext } from "../utils/helpers";
-import { createDescendantContext } from "../utils/hooks/descendants/useDescendant";
+import { createDescendantContext } from "../utils/hooks";
 import { TabsProps } from "./Tabs.types";
 import { useTabs } from "./useTabs";
 

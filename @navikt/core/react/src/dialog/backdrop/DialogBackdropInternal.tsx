@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../utils/helpers";
-import { createTransitionStatusAttribute } from "../../utils/hooks/useTransitionStatus";
+import { createTransitionStatusAttribute } from "../../utils/hooks";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogBackdropInternalProps = Omit<

@@ -4,9 +4,11 @@ import { Portal } from "../../portal";
 import { useId } from "../../utils-external";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { composeEventHandlers, createStrictContext } from "../../utils/helpers";
-import { useMergeRefs } from "../../utils/hooks";
-import { createDescendantContext } from "../../utils/hooks/descendants/useDescendant";
-import { useEventCallback } from "../../utils/hooks/useEventCallback";
+import {
+  createDescendantContext,
+  useEventCallback,
+  useMergeRefs,
+} from "../../utils/hooks";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating } from "../floating/Floating";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
