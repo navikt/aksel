@@ -84,17 +84,7 @@ class Analyzer {
 }
 
 class CSSAnalyzer extends Analyzer {
-  indexSize: number = -1;
-
-  compareIndexSize(otherSize: number): number {
-    return this.getIndexSize() - otherSize;
-  }
-
   getIndexSize(): number {
-    if (this.indexSize !== -1) {
-      return this.indexSize;
-    }
-
     const exportPath = this.getPackageExport(".");
 
     /**
@@ -108,8 +98,8 @@ class CSSAnalyzer extends Analyzer {
       `${this.packageDir}/${exportPath}`,
       "utf-8",
     );
-    this.indexSize = Buffer.byteLength(cssIndexContent, "utf-8");
-    return this.indexSize;
+
+    return Buffer.byteLength(cssIndexContent, "utf-8");
   }
 }
 

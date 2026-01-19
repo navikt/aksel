@@ -1,18 +1,19 @@
-import { CSSAnalyzer, ReactAnalyzer } from "./Analyzer.js";
+import { CSSAnalyzer } from "./Analyzer.js";
 
-export const manager = {
-  react: {
-    local: new ReactAnalyzer("temp/local/*react-*.tgz"),
-    remote: new ReactAnalyzer("temp/remote/*react-*.tgz"),
-  },
-  css: {
-    local: new CSSAnalyzer("temp/local/*css-*.tgz"),
-    remote: new CSSAnalyzer("temp/remote/*css-*.tgz"),
-  },
-};
+console.info("\n\nAnalyzing packages...\n");
 
-/* console.log("Analyzing package sizes...");
+const cssLocal = new CSSAnalyzer("temp/local/*css-*.tgz");
+const cssRemote = new CSSAnalyzer("temp/remote/*css-*.tgz");
 
-console.log(
-  manager.css.local.compareIndexSize(manager.css.remote.getIndexSize()),
-); */
+const cssDiff = cssLocal.getIndexSize() - cssRemote.getIndexSize();
+
+if (cssDiff > 0) {
+  console.info(`CSS index size increased by ${cssDiff} bytes`);
+} else if (cssDiff < 0) {
+  console.info(`CSS index size decreased by ${-cssDiff} bytes`);
+} else {
+  console.info("No change in CSS index size");
+}
+
+/* const reactLocal = new ReactAnalyzer("temp/local/*react-*.tgz");
+const reactRemote = new ReactAnalyzer("temp/remote/*react-*.tgz"); */
