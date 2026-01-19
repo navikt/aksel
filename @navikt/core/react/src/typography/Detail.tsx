@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import type { AkselColor } from "../types";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -62,15 +62,13 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
       },
       ref,
     ) => {
-      const { cn } = useRenameCSS();
-
       return (
         <Component
           {...rest}
           ref={ref}
-          className={cn(
+          className={cl(
             className,
-            "navds-detail",
+            "aksel-detail",
             typoClassNames({
               spacing,
               truncate,
@@ -81,7 +79,7 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
               uppercase,
             }),
             {
-              "navds-detail--small": size === "small",
+              "aksel-detail--small": size === "small",
             },
           )}
         />

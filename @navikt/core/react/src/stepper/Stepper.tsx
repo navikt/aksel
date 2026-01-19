@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import Step, { StepperStepProps } from "./Step";
 import { StepperContextProvider } from "./context";
 
@@ -84,13 +84,12 @@ export const Stepper: StepperComponent = forwardRef<
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     activeStep = activeStep - 1;
     return (
       <ol
         {...rest}
         ref={ref}
-        className={cn("navds-stepper", className)}
+        className={cl("aksel-stepper", className)}
         data-orientation={orientation}
       >
         {React.Children.map(children, (step, index) => {
@@ -101,14 +100,12 @@ export const Stepper: StepperComponent = forwardRef<
 
           return (
             <li
-              className={cn("navds-stepper__item")}
+              className="aksel-stepper__item"
               data-interactive={isInteractive}
               data-color={isInteractive ? undefined : "neutral"}
               key={index + (children?.toString?.() ?? "")}
             >
-              <span
-                className={cn("navds-stepper__line navds-stepper__line--1")}
-              />
+              <span className="aksel-stepper__line aksel-stepper__line--1" />
               <StepperContextProvider
                 interactive={interactive}
                 activeStep={activeStep}
@@ -119,9 +116,7 @@ export const Stepper: StepperComponent = forwardRef<
               >
                 {step}
               </StepperContextProvider>
-              <span
-                className={cn("navds-stepper__line navds-stepper__line--2")}
-              />
+              <span className="aksel-stepper__line aksel-stepper__line--2" />
             </li>
           );
         })}

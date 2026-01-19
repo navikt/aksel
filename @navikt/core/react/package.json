@@ -707,7 +707,6 @@
     "@floating-ui/react-dom": "^2.1.6",
     "@navikt/aksel-icons": "^8.0.0",
     "@navikt/ds-tokens": "^8.0.0",
-    "clsx": "^2.1.0",
     "date-fns": "^4.0.0",
     "react-day-picker": "9.7.0"
   },

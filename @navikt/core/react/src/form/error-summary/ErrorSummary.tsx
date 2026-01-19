@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, Heading } from "../../typography";
+import { cl } from "../../util/className";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
 import { useI18n } from "../../util/i18n/i18n.hooks";
@@ -78,8 +78,6 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     const translate = useI18n("ErrorSummary");
     const wrapperRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
@@ -91,10 +89,10 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       <div
         ref={mergedRef}
         {...rest}
-        className={cn(
+        className={cl(
           className,
-          "navds-error-summary",
-          `navds-error-summary--${size}`,
+          "aksel-error-summary",
+          `aksel-error-summary--${size}`,
         )}
         tabIndex={-1}
         onFocus={composeEventHandlers(rest.onFocus, (event) => {
@@ -104,7 +102,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         })}
       >
         <Heading
-          className={cn("navds-error-summary__heading")}
+          className="aksel-error-summary__heading"
           as={headingTag}
           size={size === "medium" ? "small" : "xsmall"}
           ref={headingRef}
@@ -112,11 +110,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         >
           {heading ?? translate("heading")}
         </Heading>
-        <BodyShort
-          as="ul"
-          size={size}
-          className={cn("navds-error-summary__list")}
-        >
+        <BodyShort as="ul" size={size} className="aksel-error-summary__list">
           {children}
         </BodyShort>
       </div>

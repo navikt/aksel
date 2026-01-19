@@ -12,7 +12,7 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import React, { useState } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { usePeriodContext } from "../hooks/usePeriodContext";
@@ -51,7 +51,6 @@ const ClickablePeriod = React.memo(
     restProps,
     periodRef,
   }: TimelineClickablePeriodProps) => {
-    const { cn } = useRenameCSS();
     const [open, setOpen] = useState(false);
     const { index } = useRowContext();
     const { firstFocus } = usePeriodContext();
@@ -101,12 +100,12 @@ const ClickablePeriod = React.memo(
             mergedRef?.(r);
           }}
           aria-label={label}
-          className={cn(
-            "navds-timeline__period--clickable",
+          className={cl(
+            "aksel-timeline__period--clickable",
             getConditionalClasses(cropped, direction, status),
             restProps?.className,
             {
-              "navds-timeline__period--selected": isActive,
+              "aksel-timeline__period--selected": isActive,
             },
           )}
           aria-expanded={children ? open : undefined}
@@ -138,7 +137,7 @@ const ClickablePeriod = React.memo(
             },
           })}
         >
-          <span className={cn("navds-timeline__period--inner")}>{icon}</span>
+          <span className="aksel-timeline__period--inner">{icon}</span>
         </button>
         {children && open && (
           <FloatingFocusManager
@@ -148,7 +147,7 @@ const ClickablePeriod = React.memo(
             returnFocus={false}
           >
             <div
-              className={cn("navds-timeline__popover")}
+              className="aksel-timeline__popover"
               data-placement={placement}
               ref={refs.setFloating}
               role="dialog"

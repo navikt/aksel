@@ -1,9 +1,9 @@
-import cl from "clsx";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { BodyLong, HGrid, HStack, Heading, Link } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
+import { cl } from "@/ui-utils/className";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import {
   ArticleT,
@@ -75,7 +75,7 @@ export const Highlight = ({
             sizes="(max-width: 768px) 100vw, 50vw"
             aria-hidden
             className={cl(styles.sectionImage, {
-              [`${styles.betaHue}`]:
+              [styles.betaHue]:
                 isKomponent(article) && article.status?.tag === "beta",
             })}
             decoding="auto"
@@ -92,7 +92,7 @@ export const Highlight = ({
             style={{ objectFit: "cover" }}
             aria-hidden
             className={cl(styles.sectionImage, {
-              [`${styles.betaHue}`]: getStatusTag() === "beta",
+              [styles.betaHue]: getStatusTag() === "beta",
             })}
             decoding="auto"
             alt={`thumbnail for ${article.heading}`}

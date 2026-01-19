@@ -1,6 +1,5 @@
 "use client";
 
-import cl from "clsx";
 import React, {
   HTMLAttributes,
   ReactElement,
@@ -10,6 +9,7 @@ import React, {
   useState,
   version,
 } from "react";
+import { cl } from "@/ui-utils/className";
 import styles from "./ShowMore.module.css";
 import ShowMoreButton from "./ShowMoreButton";
 import { ShowMoreContext, useShowMoreContext } from "./ShowMoreContext";

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 
 export interface HeaderCellProps
   extends React.ThHTMLAttributes<HTMLTableCellElement> {
@@ -21,13 +21,12 @@ export type HeaderCellType = React.ForwardRefExoticComponent<
 
 export const HeaderCell: HeaderCellType = forwardRef(
   ({ className, children, align, textSize, ...rest }, ref) => {
-    const { cn } = useRenameCSS();
     return (
       <th
         ref={ref}
-        className={cn("navds-table__header-cell", "navds-label", className, {
-          [`navds-table__header-cell--align-${align}`]: align,
-          "navds-label--small": textSize === "small",
+        className={cl("aksel-table__header-cell", "aksel-label", className, {
+          [`aksel-table__header-cell--align-${align}`]: align,
+          "aksel-label--small": textSize === "small",
         })}
         {...rest}
       >

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import {
   TabsDescendantsProvider,
   TabsProvider,
@@ -74,7 +74,6 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const descendants = useTabsDescendants();
 
     const tabsContext = useTabs({ defaultValue, value, onChange, id });
@@ -98,7 +97,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
             ref={ref}
             {...rest}
             id={id}
-            className={cn("navds-tabs", className, `navds-tabs--${size}`)}
+            className={cl("aksel-tabs", className, `aksel-tabs--${size}`)}
           >
             {children}
           </div>

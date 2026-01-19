@@ -1,6 +1,5 @@
 "use client";
 
-import cl from "clsx";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
 import {
@@ -17,6 +16,7 @@ import {
   TabletIcon,
 } from "@navikt/aksel-icons";
 import { BodyShort, Box, HStack } from "@navikt/ds-react";
+import { cl } from "@/ui-utils/className";
 import styles from "./examples.module.css";
 import { ExampleThemingSwitch } from "./withDsExample.theme";
 

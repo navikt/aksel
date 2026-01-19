@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { DateRange } from "react-day-picker";
-import { useRenameCSS } from "../../../theme/Theme";
+import { cl } from "../../../util/className";
 import { useControllableState } from "../../../util/hooks";
 import { useI18n } from "../../../util/i18n/i18n.hooks";
 import {
@@ -24,11 +24,6 @@ interface DatePickerStandaloneDefaultProps
    * Datepicker classname
    */
   className?: string;
-  /**
-   * If datepicker should be fixed to 6 weeks, regardless of actual weeks in month
-   * @default true
-   */
-  fixedWeeks?: boolean;
 }
 
 type StandaloneConditionalModeProps = SingleMode | MultipleMode | RangeMode;
@@ -57,7 +52,6 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const translate = useI18n(
       "DatePicker",
       translations,
@@ -76,7 +70,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       <DateTranslationContextProvider translate={translate}>
         <div
           ref={ref}
-          className={cn("navds-date__standalone-wrapper", className)}
+          className={cl("aksel-date__standalone-wrapper", className)}
         >
           <ReactDayPicker
             {...rest}

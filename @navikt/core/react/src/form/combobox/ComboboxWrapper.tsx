@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { useInputContext } from "./Input/Input.context";
 
 type ComboboxWrapperProps = {
@@ -20,7 +20,6 @@ const ComboboxWrapper = ({
   inputProps,
   inputSize,
 }: ComboboxWrapperProps) => {
-  const { cn } = useRenameCSS();
   const { toggleOpenButtonRef, clearInput, readOnly } = useInputContext();
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -46,16 +45,16 @@ const ComboboxWrapper = ({
     // biome-ignore lint/a11y/noStaticElementInteractions: Wrapper for combobox input and chips.
     <div
       ref={wrapperRef}
-      className={cn(
+      className={cl(
         className,
-        "navds-form-field",
-        `navds-form-field--${inputSize}`,
+        "aksel-form-field",
+        `aksel-form-field--${inputSize}`,
         {
-          "navds-combobox--error": hasError,
-          "navds-combobox--disabled": !!inputProps.disabled,
-          "navds-combobox--focused": hasFocusWithin,
-          "navds-combobox--readonly": readOnly,
-          "navds-form-field--readonly": readOnly,
+          "aksel-combobox--error": hasError,
+          "aksel-combobox--disabled": !!inputProps.disabled,
+          "aksel-combobox--focused": hasFocusWithin,
+          "aksel-combobox--readonly": readOnly,
+          "aksel-form-field--readonly": readOnly,
         },
       )}
       onFocus={onFocusInsideWrapper}

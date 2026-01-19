@@ -1,6 +1,5 @@
 "use client";
 
-import cl from "clsx";
 import throttle from "lodash/throttle";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -46,12 +45,12 @@ function TableOfContentsScroll({ tocLength }: { tocLength: number }) {
       <div
         style={{ opacity: scrollBlock.start }}
         aria-hidden
-        className={cl(styles.tocShadow, styles.tocShadowTop)}
+        className={`${styles.tocShadow} ${styles.tocShadowTop}`}
       />
       <div
         style={{ opacity: scrollBlock.end }}
         aria-hidden
-        className={cl(styles.tocShadow, styles.tocShadowBottom)}
+        className={`${styles.tocShadow} ${styles.tocShadowBottom}`}
       />
     </>
   );

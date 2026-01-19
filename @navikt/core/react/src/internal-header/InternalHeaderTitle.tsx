@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 
 export interface InternalHeaderTitleProps
@@ -14,16 +14,14 @@ export const InternalHeaderTitle: OverridableComponent<
   InternalHeaderTitleProps,
   HTMLAnchorElement
 > = forwardRef(({ as: Component = "a", children, className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <Component
       {...rest}
       ref={ref}
       size="xsmall"
-      className={cn(
-        "navds-internalheader__title",
-        "navds-body-short",
+      className={cl(
+        "aksel-internalheader__title",
+        "aksel-body-short",
         className,
       )}
     >

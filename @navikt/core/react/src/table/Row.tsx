@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { isElementInteractiveTarget } from "./Table.utils";
 
@@ -39,8 +39,6 @@ export const Row: RowType = forwardRef(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     const handleRowClick = (event: React.MouseEvent<HTMLTableRowElement>) => {
       if (!onRowClick) {
         return;
@@ -55,9 +53,9 @@ export const Row: RowType = forwardRef(
       <tr
         {...rest}
         ref={ref}
-        className={cn("navds-table__row", className, {
-          "navds-table__row--selected": selected,
-          "navds-table__row--shade-on-hover": shadeOnHover,
+        className={cl("aksel-table__row", className, {
+          "aksel-table__row--selected": selected,
+          "aksel-table__row--shade-on-hover": shadeOnHover,
         })}
         onClick={composeEventHandlers(onClick, handleRowClick)}
         data-interactive={!!onRowClick}

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 
 export type BodyProps = React.HTMLAttributes<HTMLTableSectionElement>;
 
@@ -8,9 +8,8 @@ export type BodyType = React.ForwardRefExoticComponent<
 >;
 
 export const Body: BodyType = forwardRef(({ className, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
   return (
-    <tbody {...rest} ref={ref} className={cn("navds-table__body", className)} />
+    <tbody {...rest} ref={ref} className={cl("aksel-table__body", className)} />
   );
 });
 

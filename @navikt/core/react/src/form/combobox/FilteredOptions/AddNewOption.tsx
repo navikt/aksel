@@ -1,7 +1,7 @@
 import React from "react";
 import { PlusIcon } from "@navikt/aksel-icons";
-import { useRenameCSS } from "../../../theme/Theme";
 import { BodyShort, Label } from "../../../typography";
+import { cl } from "../../../util/className";
 import { useI18n } from "../../../util/i18n/i18n.hooks";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -10,8 +10,6 @@ import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const AddNewOption = () => {
-  const { cn } = useRenameCSS();
-
   const {
     inputProps: { id },
     size,
@@ -47,10 +45,10 @@ const AddNewOption = () => {
           toggleIsListOpen(false);
       }}
       id={filteredOptionsUtil.getAddNewOptionId(id)}
-      className={cn(
-        "navds-combobox__list-item navds-combobox__list-item--new-option",
+      className={cl(
+        "aksel-combobox__list-item aksel-combobox__list-item--new-option",
         {
-          "navds-combobox__list-item--new-option--focus":
+          "aksel-combobox__list-item--new-option--focus":
             activeDecendantId === filteredOptionsUtil.getAddNewOptionId(id),
         },
       )}

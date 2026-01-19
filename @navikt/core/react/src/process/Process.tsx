@@ -5,9 +5,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../util";
+import { cl } from "../util/className";
 import { createStrictContext } from "../util/create-strict-context";
 import { useMergeRefs } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -108,8 +108,6 @@ export const Process: ProcessComponent = forwardRef<
     }: ProcessProps,
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
-
     const rootId = useId(id);
 
     const rootRef = useRef<HTMLOListElement>(null);
@@ -158,7 +156,7 @@ export const Process: ProcessComponent = forwardRef<
         // biome-ignore lint/a11y/noRedundantRoles: See comment above
         role="list"
         {...restProps}
-        className={cn("navds-process", className)}
+        className={cl("aksel-process", className)}
         id={rootId}
         aria-controls={activeChildId}
         data-truncated={isTruncated}
@@ -220,7 +218,6 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
     forwardedRef,
   ) => {
     const translate = useI18n("Process");
-    const { cn } = useRenameCSS();
     const eventId = useId();
     const { syncAriaControls, hideStatusText, rootId } = useProcessContext();
 
@@ -237,22 +234,19 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
         id={id ?? eventId}
         {...restProps}
         aria-controls={isActive ? rootId : undefined}
-        className={cn("navds-process__event", className)}
+        className={cl("aksel-process__event", className)}
         data-dot={bullet === undefined}
         data-process-event=""
         data-status={status}
       >
         <ProcessLine position="start" />
-        <div className={cn("navds-process__item")}>
+        <div className="aksel-process__item">
           <ProcessBullet>{bullet}</ProcessBullet>
 
-          <div className={cn("navds-process__body")}>
+          <div className="aksel-process__body">
             {title && <ProcessTitle>{title}</ProcessTitle>}
             {isActive && !hideStatusText && (
-              <BodyShort
-                size="small"
-                className={cn("navds-process__active-label")}
-              >
+              <BodyShort size="small" className="aksel-process__active-label">
                 {translate("active")}
               </BodyShort>
             )}
@@ -277,10 +271,8 @@ interface ProcessTitleProps {
 }
 
 const ProcessTitle = ({ children }: ProcessTitleProps) => {
-  const { cn } = useRenameCSS();
-
   return (
-    <Heading size="small" as="div" className={cn("navds-process__title")}>
+    <Heading size="small" as="div" className="aksel-process__title">
       {children}
     </Heading>
   );
@@ -295,15 +287,13 @@ interface ProcessTimestampProps {
 }
 
 const ProcessTimestamp = ({ children }: ProcessTimestampProps) => {
-  const { cn } = useRenameCSS();
-
   return (
     <BodyShort
       spacing
       as="div"
       size="small"
       textColor="subtle"
-      className={cn("navds-process__timestamp")}
+      className="aksel-process__timestamp"
     >
       {children}
     </BodyShort>
@@ -319,10 +309,8 @@ interface ProcessContentProps {
 }
 
 const ProcessContent = ({ children }: ProcessContentProps) => {
-  const { cn } = useRenameCSS();
-
   return (
-    <BodyLong as="div" className={cn("navds-process__content")}>
+    <BodyLong as="div" className="aksel-process__content">
       {children}
     </BodyLong>
   );
@@ -337,13 +325,11 @@ interface ProcessBulletProps {
 }
 
 const ProcessBullet = ({ children }: ProcessBulletProps) => {
-  const { cn } = useRenameCSS();
-
   return (
     <BodyShort
       as="span"
       weight="semibold"
-      className={cn("navds-process__bullet")}
+      className="aksel-process__bullet"
       aria-hidden
     >
       {children}
@@ -357,11 +343,7 @@ type ProcessLineProps = {
   position?: "start" | "end";
 };
 const ProcessLine = ({ position }: ProcessLineProps) => {
-  const { cn } = useRenameCSS();
-
-  return (
-    <span className={cn("navds-process__line")} data-position={position} />
-  );
+  return <span className="aksel-process__line" data-position={position} />;
 };
 
 /* -------------------------- Process exports ------------------------- */

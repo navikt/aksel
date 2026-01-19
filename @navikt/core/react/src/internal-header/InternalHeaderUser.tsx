@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { BodyShort, Detail } from "../typography";
+import { cl } from "../util/className";
 
 export interface InternalHeaderUserProps
   extends HTMLAttributes<HTMLDivElement> {
@@ -18,13 +18,11 @@ export const InternalHeaderUser = forwardRef<
   HTMLDivElement,
   InternalHeaderUserProps
 >(({ className, name, description, ...rest }, ref) => {
-  const { cn } = useRenameCSS();
-
   return (
     <div
       {...rest}
       ref={ref}
-      className={cn("navds-internalheader__user", className)}
+      className={cl("aksel-internalheader__user", className)}
     >
       <div>
         <BodyShort size="small" as="div">

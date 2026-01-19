@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import type { AkselColor } from "../types";
+import { cl } from "../util/className";
 import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -60,16 +60,14 @@ export const BodyShort: OverridableComponent<
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
-
     return (
       <Component
         {...rest}
         ref={ref}
-        className={cn(
+        className={cl(
           className,
-          "navds-body-short",
-          `navds-body-short--${size}`,
+          "aksel-body-short",
+          `aksel-body-short--${size}`,
           typoClassNames({
             spacing,
             truncate,

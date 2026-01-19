@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { useThemeInternal } from "../theme/Theme";
+import { cl } from "../util/className";
 import { GudiepanelIllustration } from "./Illustration";
 
 export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
@@ -45,7 +46,6 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
     },
     ref,
   ) => {
-    const { cn } = useRenameCSS();
     const themeContext = useThemeInternal();
 
     return (
@@ -53,21 +53,21 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
         data-color={color}
         {...rest}
         ref={ref}
-        className={cn("navds-guide-panel", className)}
+        className={cl("aksel-guide-panel", className)}
         data-responsive={poster === undefined}
         data-poster={poster}
       >
-        <div className={cn("navds-guide")}>
+        <div className="aksel-guide">
           {illustration ?? <GudiepanelIllustration />}
         </div>
-        <div className={cn("navds-guide-panel__content")}>
+        <div className="aksel-guide-panel__content">
           <svg
             viewBox="0 0 33 22"
             width="33"
             height="22"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className={cn("navds-guide-panel__tail")}
+            className="aksel-guide-panel__tail"
           >
             <path
               d="M8.74229e-08 22L0 20L33 20V22L8.74229e-08 22Z"
@@ -85,7 +85,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
             />
           </svg>
           <div
-            className={cn("navds-guide-panel__content-inner")}
+            className="aksel-guide-panel__content-inner"
             data-color={themeContext?.color}
           >
             {children}

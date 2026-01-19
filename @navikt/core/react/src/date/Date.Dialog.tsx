@@ -4,7 +4,7 @@ import { useDialogContext } from "../dialog/root/DialogRoot.context";
 import { Modal } from "../modal";
 import { useModalContext } from "../modal/Modal.context";
 import { Popover } from "../popover";
-import { useRenameCSS } from "../theme/Theme";
+import { cl } from "../util/className";
 import { useMedia } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
 import { TFunction } from "../util/i18n/i18n.types";
@@ -43,7 +43,6 @@ const DateDialog = ({
   popoverProps,
 }: DateWrapperProps) => {
   const translateGlobal = useI18n("global", getGlobalTranslations(locale));
-  const { cn } = useRenameCSS();
 
   const modalRef = useRef<HTMLDialogElement>(null);
 
@@ -65,8 +64,8 @@ const DateDialog = ({
         open={open}
         onClose={onClose}
         placement="bottom-start"
-        className={cn("navds-date__popover", {
-          "navds-date": variant === "month",
+        className={cl("aksel-date__popover", {
+          "aksel-date": variant === "month",
         })}
         {...popoverProps}
       >
@@ -84,14 +83,14 @@ const DateDialog = ({
         onClose();
       }}
       aria-label={translate(variantToLabel[variant])}
-      className={cn("navds-date__modal", {
-        "navds-date__nested-modal": isInModal,
-        "navds-date": variant === "month",
+      className={cl("aksel-date__modal", {
+        "aksel-date__nested-modal": isInModal,
+        "aksel-date": variant === "month",
       })}
       closeOnBackdropClick
       placement="top"
     >
-      <div className={cn("navds-date__modal-body")}>
+      <div className="aksel-date__modal-body">
         {children}
         <Button
           variant="tertiary"

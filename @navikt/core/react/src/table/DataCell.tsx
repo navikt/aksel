@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { BodyShort } from "../typography";
+import { cl } from "../util/className";
 
 export interface DataCellProps
   extends React.TdHTMLAttributes<HTMLTableCellElement> {
@@ -17,13 +17,12 @@ export interface DataCellProps
 
 export const DataCell = forwardRef<HTMLTableCellElement, DataCellProps>(
   ({ className, children = "", align, textSize, ...rest }, ref) => {
-    const { cn } = useRenameCSS();
     return (
       <BodyShort
         as="td"
         ref={ref}
-        className={cn("navds-table__data-cell", className, {
-          [`navds-table__data-cell--align-${align}`]: align,
+        className={cl("aksel-table__data-cell", className, {
+          [`aksel-table__data-cell--align-${align}`]: align,
         })}
         size={textSize}
         {...rest}

@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { BodyLong } from "../typography";
+import { cl } from "../util/className";
 import { ListItem } from "./List.Item";
 import { ListContext } from "./List.context";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -46,8 +46,6 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
   ) => {
     const { size: contextSize } = useContext(ListContext);
 
-    const { cn } = useRenameCSS();
-
     const listSize = size ?? contextSize;
 
     return (
@@ -62,7 +60,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
           {...rest}
           size={listSize}
           ref={ref}
-          className={cn("navds-list", `navds-list--${listSize}`, className)}
+          className={cl("aksel-list", `aksel-list--${listSize}`, className)}
         >
           <ListTag
             role="list"

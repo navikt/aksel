@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { useRenameCSS } from "../theme/Theme";
 import { Label } from "../typography";
+import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { OverridableComponent } from "../util/types";
 import { useStepperContext } from "./context";
@@ -37,7 +37,6 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
       },
       ref,
     ) => {
-      const { cn } = useRenameCSS();
       const context = useStepperContext();
 
       const { activeStep } = context;
@@ -55,11 +54,11 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
           {...rest}
           aria-current={activeStep === context.index ? "step" : undefined}
           ref={ref}
-          className={cn("navds-stepper__step", className, {
-            "navds-stepper__step--active": activeStep === context.index,
-            "navds-stepper__step--behind": activeStep > context.index,
-            "navds-stepper__step--non-interactive": !isInteractive,
-            "navds-stepper__step--completed": completed,
+          className={cl("aksel-stepper__step", className, {
+            "aksel-stepper__step--active": activeStep === context.index,
+            "aksel-stepper__step--behind": activeStep > context.index,
+            "aksel-stepper__step--non-interactive": !isInteractive,
+            "aksel-stepper__step--completed": completed,
           })}
           data-active={activeStep === context.index}
           data-completed={completed}
@@ -67,11 +66,7 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
           onClick={composeEventHandlers(onClick, handleStepClick)}
         >
           {completed ? (
-            <span
-              className={cn(
-                "navds-stepper__circle navds-stepper__circle--success",
-              )}
-            >
+            <span className="aksel-stepper__circle aksel-stepper__circle--success">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
@@ -90,14 +85,14 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
             </span>
           ) : (
             <Label
-              className={cn("navds-stepper__circle")}
+              className="aksel-stepper__circle"
               as="span"
               aria-hidden="true"
             >
               {context.index + 1}
             </Label>
           )}
-          <Label as="span" className={cn("navds-stepper__content")}>
+          <Label as="span" className="aksel-stepper__content">
             {children}
           </Label>
         </Comp>

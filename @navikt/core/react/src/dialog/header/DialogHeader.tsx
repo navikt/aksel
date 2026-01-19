@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { useRenameCSS } from "../../theme/Theme";
+import { cl } from "../../util/className";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { DialogCloseTrigger } from "../close-trigger/DialogCloseTrigger";
 
@@ -32,20 +32,19 @@ const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
     { className, children, withClosebutton = true, ...restProps },
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
     const translate = useI18n("global");
 
     return (
       <div
         {...restProps}
         ref={forwardedRef}
-        className={cn("navds-dialog__header", className)}
+        className={cl("aksel-dialog__header", className)}
       >
         {withClosebutton && (
           <DialogCloseTrigger>
             <Button
               type="button"
-              className={cn("navds-dialog__close-button")}
+              className="aksel-dialog__close-button"
               size="small"
               variant="tertiary-neutral"
               icon={<XMarkIcon title={translate("close")} />}

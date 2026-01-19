@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes, forwardRef } from "react";
-import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
+import { cl } from "../../util/className";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 
@@ -48,8 +48,6 @@ export interface TextFieldProps
  */
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
-    const { cn } = useRenameCSS();
-
     const {
       inputProps,
       errorId,
@@ -72,25 +70,25 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <div
-        className={cn(
+        className={cl(
           className,
-          "navds-form-field",
-          `navds-form-field--${size}`,
+          "aksel-form-field",
+          `aksel-form-field--${size}`,
 
           {
-            "navds-text-field--error": hasError,
-            "navds-text-field--disabled": !!inputProps.disabled,
-            "navds-form-field--disabled": !!inputProps.disabled,
-            "navds-form-field--readonly": readOnly,
-            "navds-text-field--readonly": readOnly,
+            "aksel-text-field--error": hasError,
+            "aksel-text-field--disabled": !!inputProps.disabled,
+            "aksel-form-field--disabled": !!inputProps.disabled,
+            "aksel-form-field--readonly": readOnly,
+            "aksel-text-field--readonly": readOnly,
           },
         )}
       >
         <Label
           htmlFor={inputProps.id}
           size={size}
-          className={cn("navds-form-field__label", {
-            "navds-sr-only": hideLabel,
+          className={cl("aksel-form-field__label", {
+            "aksel-sr-only": hideLabel,
           })}
         >
           {readOnly && <ReadOnlyIcon />}
@@ -99,8 +97,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
         {!!description && (
           <BodyShort
-            className={cn("navds-form-field__description", {
-              "navds-sr-only": hideLabel,
+            className={cl("aksel-form-field__description", {
+              "aksel-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}
@@ -115,15 +113,15 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           ref={ref}
           type={type}
           readOnly={readOnly}
-          className={cn(
-            "navds-text-field__input",
-            "navds-body-short",
-            `navds-body-short--${size ?? "medium"}`,
+          className={cl(
+            "aksel-text-field__input",
+            "aksel-body-short",
+            `aksel-body-short--${size ?? "medium"}`,
           )}
           size={htmlSize}
         />
         <div
-          className={cn("navds-form-field__error")}
+          className="aksel-form-field__error"
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"

@@ -1,12 +1,12 @@
 "use client";
 
-import cl from "clsx";
 import { stegaClean } from "next-sanity";
 import NextLink from "next/link";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
 import { TOC_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
+import { cl } from "@/ui-utils/className";
 import { removeEmojiesFromText } from "@/ui-utils/format-text";
 import styles from "./TableOfContents.module.css";
 import { TableOfContentsScroll } from "./TableOfContents.scroll";
@@ -47,7 +47,7 @@ function TableOfContents({
 
         {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
         <ul
-          className={cl(styles.tocMenuUl, styles.hideScrollbar)}
+          className={`${styles.tocMenuUl} ${styles.hideScrollbar}`}
           id="toc-scroll-wrapper"
           // biome-ignore lint/a11y/noRedundantRoles: WebKit browsers remove list semantics when list-style-type is none
           role="list"

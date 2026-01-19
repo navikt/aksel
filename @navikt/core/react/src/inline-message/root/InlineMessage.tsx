@@ -1,8 +1,8 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
-import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
+import { useThemeInternal } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
 import { type OverridableComponent, useId } from "../../util";
+import { cl } from "../../util/className";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { InlineMessageIcon } from "../icon/InlineMessageIcon";
 
@@ -57,7 +57,6 @@ export const InlineMessage: OverridableComponent<
     }: InlineMessageProps & { as?: React.ElementType },
     forwardedRef,
   ) => {
-    const { cn } = useRenameCSS();
     const themeContext = useThemeInternal();
 
     const translate = useI18n("global");
@@ -67,7 +66,7 @@ export const InlineMessage: OverridableComponent<
     return (
       <BodyShort
         ref={forwardedRef}
-        className={cn("navds-inline-message", className)}
+        className={cl("aksel-inline-message", className)}
         data-color={status === "error" ? "danger" : status}
         {...restProps}
         size={size}
