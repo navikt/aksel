@@ -2,13 +2,15 @@
 import React from "react";
 import { useRefWithInit } from "./useRefWithInit";
 
+type RefCallback<T> = (instance: T | null) => void;
+
 type Empty = null | undefined;
 type InputRef<I> = React.Ref<I> | Empty;
-type Result<I> = React.RefCallback<I> | null;
+type Result<I> = RefCallback<I> | null;
 type Cleanup = () => void;
 
 type ForkRef<I> = {
-  callback: React.RefCallback<I> | null;
+  callback: RefCallback<I> | null;
   cleanup: Cleanup | null;
   refs: InputRef<I>[];
 };
@@ -96,7 +98,7 @@ function update<I>(forkRef: ForkRef<I>, refs: InputRef<I>[]) {
     return;
   }
 
-  forkRef.callback = (instance: I) => {
+  forkRef.callback = (instance) => {
     if (forkRef.cleanup) {
       forkRef.cleanup();
       forkRef.cleanup = null;
