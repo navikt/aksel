@@ -1,8 +1,8 @@
 import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
-import VStack from "../../layout/stack/VStack";
 import { Provider } from "../../provider";
 import en from "../../util/i18n/locales/en";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import FormProgress, { FormProgressProps } from "./FormProgress";
 
 export default {
@@ -171,17 +171,16 @@ export const ColorRole: StoryFn = () => (
   </div>
 );
 
-export const Chromatic: StoryFn = () => (
-  <VStack gap="space-40">
-    <div>
-      <Default activeStep={1} totalSteps={7} />
-    </div>
-    <div>
-      <Controlled />
-    </div>
-    <div>
-      <ColorRole />
-    </div>
-  </VStack>
-);
-Chromatic.parameters = { chromatic: { disable: false } };
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Controlled,
+  ColorRole,
+});
+
+export const ChromaticDark = renderStoriesForChromatic({
+  Default,
+  Controlled,
+  ColorRole,
+});
+
+ChromaticDark.globals = { theme: "dark" };

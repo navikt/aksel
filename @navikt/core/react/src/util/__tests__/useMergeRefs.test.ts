@@ -76,7 +76,7 @@ describe("useMergeRefs", () => {
 
   test("runs previous cleanup before assigning new instance", () => {
     const callOrder: string[] = [];
-    const cleanup = vi.fn(() => callOrder.push("cleanup"));
+    const cleanup = vi.fn<() => void>(() => callOrder.push("cleanup"));
     const fnRef = vi.fn(() => {
       callOrder.push("ref");
       return cleanup;

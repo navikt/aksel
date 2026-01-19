@@ -66,7 +66,7 @@ const CustomItem = ({
   );
 };
 
-export const Default: StoryFn = () => {
+export const Default = () => {
   const [files, setFiles] = useState<FileObject[]>([]);
 
   function addFiles(filesToAdd: FileObject[]) {
@@ -259,8 +259,6 @@ export const ColorRoles = () => (
   <div data-color="brand-magenta">
     <h2>Default</h2>
     <Default />
-    <h2>TriggerWithButton</h2>
-    <TriggerWithButton />
     <h2>DropzoneStates</h2>
     <DropzoneStates />
     <h2>ItemStates</h2>

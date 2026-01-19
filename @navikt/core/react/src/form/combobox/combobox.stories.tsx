@@ -111,7 +111,7 @@ tell anyone that they work (or that they exist).`}
   );
 };
 
-export const MultiSelect: StoryFn = () => {
+export const MultiSelect = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([
     "pear",
     "kiwi",
@@ -132,7 +132,7 @@ export const MultiSelect: StoryFn = () => {
   );
 };
 
-export const MultiSelectWithComplexOptions: StoryFn = () => {
+export const MultiSelectWithComplexOptions = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([
     "HJE",
     "OPP",
@@ -174,7 +174,7 @@ const complexOptions = [
   { label: "Grunn- og hjelpestønad", value: "GRU" },
 ];
 
-export const WithAddNewOptions: StoryFn = ({ open }: { open?: boolean }) => {
+export const WithAddNewOptions = ({ open }: { open?: boolean }) => {
   const comboboxRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState<string | undefined>("hello");
   return (
@@ -192,11 +192,7 @@ export const WithAddNewOptions: StoryFn = ({ open }: { open?: boolean }) => {
   );
 };
 
-export const MultiSelectWithAddNewOptions: StoryFn = ({
-  open,
-}: {
-  open?: boolean;
-}) => {
+export const MultiSelectWithAddNewOptions = ({ open }: { open?: boolean }) => {
   const [value, setValue] = useState<string | undefined>("world");
   const [selectedOptions, setSelectedOptions] = useState<string[]>(["hello"]);
   const comboboxRef = useRef<HTMLInputElement>(null);
@@ -222,7 +218,7 @@ export const MultiSelectWithAddNewOptions: StoryFn = ({
   );
 };
 
-export const MultiSelectWithExternalChips: StoryFn = () => {
+export const MultiSelectWithExternalChips = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([
     "kiwi",
     "pear",
@@ -263,7 +259,7 @@ export const MultiSelectWithExternalChips: StoryFn = () => {
   );
 };
 
-export const Loading: StoryFn = () => (
+export const Loading = () => (
   <UNSAFE_Combobox
     id="combobox-with-loading-indicator"
     label="Komboboks (laster)"
@@ -274,7 +270,7 @@ export const Loading: StoryFn = () => (
   />
 );
 
-export const ComboboxWithNoHits: StoryFn = () => {
+export const ComboboxWithNoHits = () => {
   const [value, setValue] = useState<string | undefined>("Orange");
   return (
     <UNSAFE_Combobox
@@ -288,7 +284,7 @@ export const ComboboxWithNoHits: StoryFn = () => {
   );
 };
 
-export const Controlled: StoryFn = () => {
+export const Controlled = () => {
   const [value, setValue] = useState<string>("apple");
   const [selectedOptions, setSelectedOptions] = useState([
     "passion fruit",
@@ -405,7 +401,7 @@ export const ComboboxSizes = () => {
   );
 };
 
-export const MaxSelectedOptions: StoryFn = ({ open }: { open?: boolean }) => {
+export const MaxSelectedOptions = ({ open }: { open?: boolean }) => {
   const [value, setValue] = useState<string | undefined>("");
   const [selectedOptions, setSelectedOptions] = useState([
     options[0],
@@ -434,7 +430,7 @@ export const MaxSelectedOptions: StoryFn = ({ open }: { open?: boolean }) => {
   );
 };
 
-export const WithError: StoryFn = () => {
+export const WithError = () => {
   const [hasSelectedValue, setHasSelectedValue] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   return (
@@ -488,7 +484,7 @@ export const OnBottom: StoryFn = () => {
   );
 };
 
-export const Disabled: StoryFn = () => {
+export const Disabled = () => {
   const selectedOptionsMultiple = ["napoleonskake", "donut"];
   const selectedOptionsSingle = ["pushups"];
   return (
@@ -512,7 +508,7 @@ export const Disabled: StoryFn = () => {
   );
 };
 
-export const Readonly: StoryFn = () => {
+export const Readonly = () => {
   const selectedOptionsMultiple = ["napoleonskake", "donut"];
   const selectedOptionsSingle = ["pushups"];
   return (
@@ -574,7 +570,7 @@ const ChromaticRender = ({ children }: { children?: React.ReactNode }) => {
   );
 };
 
-export const ColorRoles: StoryFn = () => (
+export const ColorRoles = () => (
   <div data-color="brand-magenta">
     <h2>ColorRoles</h2>
     <ChromaticRender />
@@ -586,9 +582,3 @@ export const Chromatic: StoryFn = () => (
     <ColorRoles />
   </ChromaticRender>
 );
-
-Chromatic.parameters = {
-  chromatic: {
-    disable: false,
-  },
-};
