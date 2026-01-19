@@ -354,6 +354,7 @@ interface ActionMenuContentProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "id"> {
   children?: React.ReactNode;
   align?: "start" | "end";
+  roleGroup?: boolean /* Testing purpose only */;
 }
 
 export const ActionMenuContent = forwardRef<
@@ -366,6 +367,7 @@ export const ActionMenuContent = forwardRef<
       className,
       style,
       align = "start",
+      roleGroup = false,
       ...rest
     }: ActionMenuContentProps,
     ref,
@@ -397,7 +399,12 @@ export const ActionMenuContent = forwardRef<
             },
           }}
         >
-          <div className="aksel-action-menu__content-inner">{children}</div>
+          <div
+            className="aksel-action-menu__content-inner"
+            role={roleGroup ? "group" : undefined}
+          >
+            {children}
+          </div>
         </Menu.Content>
       </Menu.Portal>
     );

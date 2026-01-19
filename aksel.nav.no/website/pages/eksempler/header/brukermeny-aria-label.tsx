@@ -21,8 +21,8 @@ const Example = () => {
               description="Enhet: Skien"
             />
           </ActionMenu.Trigger>
-          <ActionMenu.Content align="end" aria-labelledby="user-menu" roleGroup>
-            <dl id="user-menu">
+          <ActionMenu.Content align="end">
+            <dl aria-label="Brukerinformasjon">
               <BodyShort as="dt" size="small">
                 Ola Normann
               </BodyShort>
