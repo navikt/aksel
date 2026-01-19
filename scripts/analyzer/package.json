@@ -16,7 +16,6 @@
   },
   "scripts": {
     "run:analyze": "yarn clean && yarn pack-local && yarn pack-remote && tsx ./src/index.ts",
-    "run:analyze-fast": "tsx ./src/analyze.ts",
     "clean": "rimraf temp/remote/* temp/local/* || true",
     "pack-local": "yarn pack-local-react && yarn pack-local-css",
     "pack-local-react": "npm pack --pack-destination ../../scripts/analyzer/temp/local -w @navikt/ds-react",

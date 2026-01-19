@@ -1,7 +1,6 @@
 import { CSSAnalyzer, ReactAnalyzer } from "./Analyzer.js";
-import { unpack } from "./unpack.js";
 
-const manager = {
+export const manager = {
   react: {
     local: new ReactAnalyzer("temp/local/*react-*.tgz"),
     remote: new ReactAnalyzer("temp/remote/*react-*.tgz"),
@@ -11,3 +10,9 @@ const manager = {
     remote: new CSSAnalyzer("temp/remote/*css-*.tgz"),
   },
 };
+
+/* console.log("Analyzing package sizes...");
+
+console.log(
+  manager.css.local.compareIndexSize(manager.css.remote.getIndexSize()),
+); */
