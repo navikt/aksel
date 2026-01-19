@@ -16,10 +16,10 @@ import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
 import { Slot } from "../slot/Slot";
 import { Detail } from "../typography";
-import { cl } from "../util/className";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
+import { cl } from "../utils/helpers";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**

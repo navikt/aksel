@@ -4,10 +4,10 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import { omit } from "../../../util";
-import { cl } from "../../../util/className";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
-import { useMergeRefs } from "../../../util/hooks";
+import { omit } from "../../../utils-external";
+import { cl } from "../../../utils/helpers";
+import { useMergeRefs } from "../../../utils/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";

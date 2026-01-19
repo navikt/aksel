@@ -12,9 +12,9 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import React, { useState } from "react";
-import { cl } from "../../util/className";
-import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { useI18n } from "../../util/i18n/i18n.hooks";
+import { cl } from "../../utils/helpers";
+import { useMergeRefs } from "../../utils/hooks";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";

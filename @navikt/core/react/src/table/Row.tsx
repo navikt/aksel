@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { cl } from "../util/className";
 import { composeEventHandlers } from "../util/composeEventHandlers";
+import { cl } from "../utils/helpers";
 import { isElementInteractiveTarget } from "./Table.utils";
 
 export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {

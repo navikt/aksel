@@ -8,9 +8,9 @@ import type {
   AkselShadowToken,
 } from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
-import { omit } from "../../util";
-import { cl } from "../../util/className";
 import { OverridableComponent } from "../../util/types";
+import { omit } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 import BasePrimitive, {
   PRIMITIVE_PROPS,
   PrimitiveProps,

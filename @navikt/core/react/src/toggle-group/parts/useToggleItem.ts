@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { useMergeRefs } from "../../util/hooks/useMergeRefs";
+import { composeEventHandlers } from "../../utils/helpers";
+import { useMergeRefs } from "../../utils/hooks/useMergeRefs";
 import {
   useToggleGroupContext,
   useToggleGroupDescendant,

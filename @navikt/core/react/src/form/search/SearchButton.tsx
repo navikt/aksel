@@ -1,9 +1,9 @@
 import React, { forwardRef, useContext } from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, ButtonProps } from "../../button";
-import { cl } from "../../util/className";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useI18n } from "../../util/i18n/i18n.hooks";
+import { cl } from "../../utils/helpers";
 import { SearchContext } from "./context";
 
 export interface SearchButtonProps

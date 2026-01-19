@@ -6,7 +6,7 @@ import { Button } from "../button";
 import { HStack } from "../layout/stack";
 import { Provider } from "../provider";
 import { en } from "../util/i18n/locales";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import { Process } from "./Process";
 
 const meta: Meta<typeof Process> = {

@@ -1,5 +1,5 @@
 import React from "react";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 
 export const HelpTextIcon = ({ filled = false }: { filled?: boolean }) => {
   return (

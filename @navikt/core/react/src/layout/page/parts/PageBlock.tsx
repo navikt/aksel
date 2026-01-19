@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { cl } from "../../../util/className";
 import { OverridableComponent } from "../../../util/types";
+import { cl } from "../../../utils/helpers";
 
 export const widths = ["text", "md", "lg", "xl", "2xl"] as const;
 

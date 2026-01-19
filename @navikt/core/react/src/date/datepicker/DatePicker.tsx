@@ -1,10 +1,10 @@
 import { isSameDay } from "date-fns";
 import React, { forwardRef, useState } from "react";
 import { DateRange } from "react-day-picker";
-import { cl } from "../../util/className";
-import { useControllableState, useId } from "../../util/hooks";
-import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { useI18n } from "../../util/i18n/i18n.hooks";
+import { useId } from "../../utils-external";
+import { cl } from "../../utils/helpers";
+import { useControllableState, useMergeRefs } from "../../utils/hooks";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { DateDialog } from "../Date.Dialog";
 import { DateInputContextProvider, DatePickerInput } from "../Date.Input";
 import {

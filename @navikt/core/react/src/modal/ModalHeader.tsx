@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { cl } from "../util/className";
 import { useI18n } from "../util/i18n/i18n.hooks";
+import { cl } from "../utils/helpers";
 import { useModalContext } from "./Modal.context";
 
 export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {

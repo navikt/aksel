@@ -7,7 +7,7 @@ import { ProgressBar } from "../../progress-bar";
 import { Stepper, StepperStepProps } from "../../stepper";
 import { BodyShort } from "../../typography";
 import { useI18n } from "../../util/i18n/i18n.hooks";
-import { ComponentTranslation } from "../../util/i18n/i18n.types";
+import { ComponentTranslation } from "../../utils/i18n/i18n.types";
 
 export interface FormProgressProps
   extends React.HTMLAttributes<HTMLDivElement> {

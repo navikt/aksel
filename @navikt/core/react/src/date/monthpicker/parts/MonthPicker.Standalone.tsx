@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { cl } from "../../../util/className";
-import { useDateLocale, useI18n } from "../../../util/i18n/i18n.hooks";
+import { cl } from "../../../utils/helpers";
+import { useDateLocale, useI18n } from "../../../utils/i18n/i18n.hooks";
 import {
   DateTranslationContextProvider,
   getLocaleFromString,

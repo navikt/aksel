@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import TextField from "../textfield/TextField";
 import { Fieldset } from "./index";
 

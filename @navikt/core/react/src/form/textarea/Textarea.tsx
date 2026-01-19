@@ -1,10 +1,10 @@
 import React, { forwardRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { omit } from "../../util";
 import TextareaAutosize from "../../util/TextareaAutoSize";
-import { cl } from "../../util/className";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useId } from "../../util/hooks";
+import { omit } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "./../useFormField";
 import Counter from "./TextareaCounter";

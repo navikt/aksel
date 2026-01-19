@@ -3,11 +3,9 @@ import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Button, ButtonProps } from "../button";
 import type { AkselColor } from "../types/theme";
-import { cl } from "../util/className";
-import { composeEventHandlers } from "../util/composeEventHandlers";
-import copy from "../util/copy";
-import { useTimeout } from "../util/hooks/useTimeout";
-import { useI18n } from "../util/i18n/i18n.hooks";
+import { cl, clipboardCopy, composeEventHandlers } from "../utils/helpers";
+import { useTimeout } from "../utils/hooks/useTimeout";
+import { useI18n } from "../utils/i18n/i18n.hooks";
 
 export interface CopyButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">,
@@ -104,7 +102,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     const timeout = useTimeout();
 
     const handleClick = () => {
-      copy(copyText);
+      clipboardCopy(copyText);
       setActive(true);
       onActiveChange?.(true);
 

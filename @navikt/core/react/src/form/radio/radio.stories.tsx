@@ -5,7 +5,7 @@ import AccordionContent from "../../accordion/AccordionContent";
 import AccordionHeader from "../../accordion/AccordionHeader";
 import AccordionItem from "../../accordion/AccordionItem";
 import VStack from "../../layout/stack/VStack";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Radio from "./Radio";
 import RadioGroup, { RadioGroupProps } from "./RadioGroup";
 

@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Panel } from "../panel";
-import { cl } from "../util/className";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../utils-external";
+import { cl } from "../utils/helpers";
 import {
   LinkPanelDescription,
   LinkPanelDescriptionProps,

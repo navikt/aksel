@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { cl } from "../../util/className";
+import { cl } from "../../utils/helpers";
 import FormSummaryAnswer from "./FormSummaryAnswer";
 import FormSummaryAnswers from "./FormSummaryAnswers";
 import FormSummaryEditLink from "./FormSummaryEditLink";

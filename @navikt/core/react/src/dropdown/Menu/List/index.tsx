@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { cl } from "../../../util/className";
 import { OverridableComponent } from "../../../util/types";
+import { cl } from "../../../utils/helpers";
 import ListItem, { ListItemProps } from "./Item";
 
 export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {

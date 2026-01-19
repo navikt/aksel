@@ -1,9 +1,9 @@
 import React, { SVGProps, forwardRef } from "react";
 import { AkselColor } from "../types";
-import { omit } from "../util";
-import { cl } from "../util/className";
 import { useId } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
+import { omit } from "../utils-external";
+import { cl } from "../utils/helpers";
 
 export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
   /**

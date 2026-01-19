@@ -4,7 +4,7 @@ import { ComponentIcon } from "@navikt/aksel-icons";
 import { Tag, TagProps } from ".";
 import { HStack } from "../layout/stack";
 import type { AkselColor } from "../types/theme";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
 const sizes: TagProps["size"][] = ["xsmall", "small", "medium"];
 

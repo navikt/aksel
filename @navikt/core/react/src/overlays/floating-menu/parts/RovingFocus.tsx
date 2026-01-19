@@ -1,10 +1,10 @@
 import React, { forwardRef, useCallback, useEffect, useRef } from "react";
 import { Slot } from "../../../slot/Slot";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
-import { useMergeRefs } from "../../../util/hooks";
 import { DescendantsManager } from "../../../util/hooks/descendants/descendant";
 import { useEventCallback } from "../../../util/hooks/useEventCallback";
 import { ownerDocument } from "../../../util/owner";
+import { useMergeRefs } from "../../../utils/hooks";
 
 interface RovingFocusProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "tabIndex"> {

@@ -1,6 +1,6 @@
 import React from "react";
-import { cl } from "../../util/className";
 import { useI18n } from "../../util/i18n/i18n.hooks";
+import { cl } from "../../utils/helpers";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
 import type { PeriodProps } from "./types";
 

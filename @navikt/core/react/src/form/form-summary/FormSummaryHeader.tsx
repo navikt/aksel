@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { cl } from "../../util/className";
 import { CompositionWarning } from "../../util/composition-warning";
+import { cl } from "../../utils/helpers";
 
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {

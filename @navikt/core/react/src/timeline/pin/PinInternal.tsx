@@ -13,8 +13,8 @@ import {
 } from "@floating-ui/react";
 import { format } from "date-fns";
 import React, { forwardRef, useState } from "react";
-import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { useI18n } from "../../util/i18n/i18n.hooks";
+import { useMergeRefs } from "../../utils/hooks";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 import { position } from "../utils/calc";
 

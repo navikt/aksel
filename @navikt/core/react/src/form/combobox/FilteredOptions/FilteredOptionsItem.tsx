@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckmarkIcon } from "@navikt/aksel-icons";
 import { BodyShort } from "../../../typography";
-import { cl } from "../../../util/className";
+import { cl } from "../../../utils/helpers";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList } from "../combobox-utils";

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { cl } from "../../util/className";
+import { cl } from "../../utils/helpers";
 import ZoomButton, { ZoomButtonType } from "./ZoomButton";
 
 interface ZoomProps extends React.HTMLAttributes<HTMLUListElement> {

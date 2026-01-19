@@ -1,5 +1,5 @@
 import { createStrictContext } from "../../util/create-strict-context";
-import { ComponentTranslation } from "../../util/i18n/i18n.types";
+import { ComponentTranslation } from "../../utils/i18n/i18n.types";
 
 export type FileUploadLocaleContextProps = {
   translations?: ComponentTranslation<"FileUpload">;
