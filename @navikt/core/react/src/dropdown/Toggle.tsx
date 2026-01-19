@@ -1,6 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import { composeEventHandlers } from "../util/composeEventHandlers";
-import { cl } from "../utils/helpers";
+import { cl, composeEventHandlers } from "../utils/helpers";
 import { DropdownContext } from "./context";
 
 export interface DropdownToggleProps

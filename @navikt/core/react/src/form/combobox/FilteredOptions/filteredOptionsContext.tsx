@@ -1,7 +1,7 @@
 import React, { SetStateAction, useCallback, useMemo, useState } from "react";
-import { createStrictContext } from "../../../util/create-strict-context";
-import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
-import { cl } from "../../../utils/helpers";
+import { useClientLayoutEffect } from "../../../utils-external";
+import { cl, createStrictContext } from "../../../utils/helpers";
+import { usePrevious } from "../../../utils/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { toComboboxOption } from "../combobox-utils";

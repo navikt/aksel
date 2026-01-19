@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useEventCallback } from "../../../util/hooks/useEventCallback";
+import { useEventCallback } from "../../../utils/hooks/useEventCallback";
 import {
   CUSTOM_EVENTS,
   CustomFocusEvent,

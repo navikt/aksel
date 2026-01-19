@@ -4,9 +4,8 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { omit } from "../../../utils-external";
-import { cl } from "../../../utils/helpers";
+import { cl, composeEventHandlers } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";

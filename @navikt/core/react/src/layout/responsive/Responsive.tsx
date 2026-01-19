@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { Slot } from "../../slot/Slot";
+import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
 import { BreakpointsAlias } from "../utilities/types";
 

@@ -3,9 +3,9 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { AkselColor } from "../types";
 import { BodyShort, Heading } from "../typography";
-import { useI18n } from "../util/i18n/i18n.hooks";
 import { useId } from "../utils-external";
 import { cl } from "../utils/helpers";
+import { useI18n } from "../utils/i18n/i18n.hooks";
 import PaginationItem, {
   PaginationItemProps,
   PaginationItemType,

@@ -1,8 +1,8 @@
 import React, { forwardRef, useRef } from "react";
 import type { AkselColor } from "../types";
-import { useControllableState } from "../util/hooks";
 import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
+import { useControllableState } from "../utils/hooks";
 import ExpansionCardContent, {
   ExpansionCardContentProps,
 } from "./ExpansionCardContent";

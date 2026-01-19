@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../../../util/types";
+import type { OverridableComponent } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 
 export const widths = ["text", "md", "lg", "xl", "2xl"] as const;

@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { Slot } from "../../slot/Slot";
-import { OverridableComponent } from "../../util/types";
+import { type OverridableComponent } from "../../utils-external";
 import { omit } from "../../utils-external";
+import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
 import BasePrimitive, {
   PRIMITIVE_PROPS,

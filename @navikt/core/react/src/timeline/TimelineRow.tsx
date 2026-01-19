@@ -1,8 +1,8 @@
 import { format } from "date-fns";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../typography/BodyShort";
-import { useI18n } from "../util/i18n/i18n.hooks";
 import { cl } from "../utils/helpers";
+import { useI18n } from "../utils/i18n/i18n.hooks";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import { useTimelineContext } from "./hooks/useTimelineContext";

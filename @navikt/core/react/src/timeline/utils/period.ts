@@ -1,6 +1,6 @@
 import { format } from "date-fns";
-import type { TFunction } from "../../util/i18n/i18n.types";
 import { cl } from "../../utils/helpers";
+import type { TFunction } from "../../utils/i18n/i18n.types";
 import type { PeriodProps } from "../period/types";
 
 export const getConditionalClasses = (

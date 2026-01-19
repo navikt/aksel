@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../../../util/types";
+import type { OverridableComponent } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import GroupedHeading, { GroupedHeadingProps } from "./GroupedHeading";
 import GroupedItem, { GroupedItemProps } from "./GroupedItem";

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ReadMore } from "../read-more/ReadMore";
-import { useId } from "../util/hooks";
+import { useId } from "../utils-external";
 import { cl } from "../utils/helpers";
 import { FieldsetContext } from "./fieldset/context";
 

@@ -1,12 +1,12 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { Portal } from "../../portal";
-import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { createStrictContext } from "../../util/create-strict-context";
-import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
-import { useId, useMergeRefs } from "../../util/hooks";
-import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
-import { useEventCallback } from "../../util/hooks/useEventCallback";
+import { useId } from "../../utils-external";
+import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
+import { composeEventHandlers, createStrictContext } from "../../utils/helpers";
+import { useMergeRefs } from "../../utils/hooks";
+import { createDescendantContext } from "../../utils/hooks/descendants/useDescendant";
+import { useEventCallback } from "../../utils/hooks/useEventCallback";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating } from "../floating/Floating";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";

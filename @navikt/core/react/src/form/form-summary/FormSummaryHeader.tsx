@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { CompositionWarning } from "../../util/composition-warning";
+import { CompositionWarning } from "../../utils/components/composition-warning";
 import { cl } from "../../utils/helpers";
 
 export interface FormSummaryHeaderProps

@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { BodyLong, ErrorMessage } from "../../typography";
-import { useId } from "../../util/hooks";
+import { useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { Checkbox, CheckboxProps } from "../checkbox";
 import { useFormField } from "../useFormField";

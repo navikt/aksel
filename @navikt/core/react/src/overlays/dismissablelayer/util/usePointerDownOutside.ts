@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import { useEventCallback } from "../../../util/hooks/useEventCallback";
-import { useTimeout } from "../../../util/hooks/useTimeout";
+import { useEventCallback } from "../../../utils/hooks/useEventCallback";
+import { useTimeout } from "../../../utils/hooks/useTimeout";
 import {
   CUSTOM_EVENTS,
   CustomPointerEvent,

@@ -3,9 +3,8 @@ import { ChevronDownIcon } from "@navikt/aksel-icons";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import type { AkselColor } from "../types";
 import { BodyLong } from "../typography";
-import { composeEventHandlers } from "../util/composeEventHandlers";
-import { useControllableState } from "../util/hooks/useControllableState";
-import { cl } from "../utils/helpers";
+import { cl, composeEventHandlers } from "../utils/helpers";
+import { useControllableState } from "../utils/hooks";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

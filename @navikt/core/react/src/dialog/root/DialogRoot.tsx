@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useControllableState } from "../../util/hooks/useControllableState";
-import { useEventCallback } from "../../util/hooks/useEventCallback";
-import { useTransitionStatus } from "../../util/hooks/useTransitionStatus";
 import { useId } from "../../utils-external";
+import { useControllableState } from "../../utils/hooks";
+import { useEventCallback } from "../../utils/hooks/useEventCallback";
+import { useTransitionStatus } from "../../utils/hooks/useTransitionStatus";
 import { DialogBody } from "../body/DialogBody";
 import { DialogCloseTrigger } from "../close-trigger/DialogCloseTrigger";
 import { DialogDescription } from "../description/DialogDescription";

@@ -5,7 +5,7 @@ import { CheckmarkHeavyIcon, SparklesFillIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { HStack } from "../layout/stack";
 import { Provider } from "../provider";
-import { en } from "../util/i18n/locales";
+import { en } from "../utils/i18n/locales";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import { Process } from "./Process";
 

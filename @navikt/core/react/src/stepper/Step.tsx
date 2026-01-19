@@ -1,8 +1,7 @@
 import React, { forwardRef } from "react";
 import { Label } from "../typography";
-import { composeEventHandlers } from "../util/composeEventHandlers";
 import type { OverridableComponent } from "../utils-external";
-import { cl } from "../utils/helpers";
+import { cl, composeEventHandlers } from "../utils/helpers";
 import { useStepperContext } from "./context";
 
 export interface StepperStepProps

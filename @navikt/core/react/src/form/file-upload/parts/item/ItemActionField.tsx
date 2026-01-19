@@ -3,7 +3,7 @@ import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
 import Spacer from "../../../../layout/stack/Spacer";
 import { Loader } from "../../../../loader";
-import { TFunction } from "../../../../util/i18n/i18n.types";
+import type { TFunction } from "../../../../utils/i18n/i18n.types";
 
 interface ItemActionFieldProps {
   isLoading: boolean;
