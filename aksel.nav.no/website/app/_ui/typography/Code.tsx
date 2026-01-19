@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import { Detail } from "@navikt/ds-react";
+import { cl } from "@/ui-utils/className";
 import styles from "./Typography.module.css";
 
 function Code({
@@ -18,7 +18,7 @@ function Code({
     <Detail
       as={as}
       weight="semibold"
-      className={clsx(styles.typoCode, className)}
+      className={cl(styles.typoCode, className)}
       data-highlighted={highlighted}
       data-strikethrough={strikethrough}
     >

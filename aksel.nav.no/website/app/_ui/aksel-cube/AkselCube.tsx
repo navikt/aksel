@@ -1,4 +1,4 @@
-import cl from "clsx";
+import { cl } from "@/ui-utils/className";
 import styles from "./aksel-cube.module.css";
 
 const Rect = ({ ...props }) => (

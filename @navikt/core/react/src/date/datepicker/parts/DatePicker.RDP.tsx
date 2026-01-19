@@ -41,11 +41,6 @@ const LegacyClassNames: Partial<ClassNames> = {
 type ReactDayPickerProps = DatePickerDefaultProps &
   ConditionalModeProps & {
     /**
-     * If datepicker should be fixed to 6 weeks, regardless of actual weeks in month
-     * @default false
-     */
-    fixedWeeks?: boolean;
-    /**
      * Update selected date
      */
     handleSelect: (newSelected: any) => void;
