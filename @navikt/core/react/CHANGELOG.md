@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 8.0.1
+
+### Patch Changes
+
+- DatePicker: Add prop `fixedWeeks` to DatePickerProps ([#4507](https://github.com/navikt/aksel/pull/4507))
+
+- FileUpload.Item: Fix link-color. ([`737f9e4`](https://github.com/navikt/aksel/commit/737f9e47f919036bfaf1c1fa1ac2140feb9afde8))
+
+- Accordion: Avoid AccordionContent inheriting app-color for all text. ([#4514](https://github.com/navikt/aksel/pull/4514))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.0.1
+  - @navikt/aksel-icons@8.0.1
+
 ## 8.0.0
 
 ### Major Changes
