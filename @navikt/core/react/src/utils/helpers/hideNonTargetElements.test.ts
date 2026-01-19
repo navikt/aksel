@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "vitest";
-import { hideNonTargetElements } from "../hideNonTargetElements";
+import { hideNonTargetElements } from "./hideNonTargetElements";
 
 describe("hideNonTargetElements util", () => {
   beforeEach(() => {
