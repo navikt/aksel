@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import { BodyShort } from "../../../typography";
 import { useId } from "../../../util";
 import { cl } from "../../../util/className";
+import { useBaseAlert } from "../root/BaseAlertRoot.context";
 
 interface BaseAlertTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
