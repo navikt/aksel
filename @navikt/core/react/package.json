@@ -51,12 +51,12 @@
     },
     "./locales": {
       "import": {
-        "types": "./esm/util/i18n/locales/index.d.ts",
-        "default": "./esm/util/i18n/locales/index.js"
+        "types": "./esm/utils/i18n/locales/index.d.ts",
+        "default": "./esm/utils/i18n/locales/index.js"
       },
       "require": {
-        "types": "./cjs/util/i18n/locales/index.d.ts",
-        "default": "./cjs/util/i18n/locales/index.js"
+        "types": "./cjs/utils/i18n/locales/index.d.ts",
+        "default": "./cjs/utils/i18n/locales/index.js"
       }
     },
     "./Accordion": {
