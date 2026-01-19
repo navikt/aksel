@@ -46,7 +46,7 @@ const Page = async () => {
               Figma-community
             </Link>
             <Link
-              href="https://aksel.nav.no/grunnleggende/kode/endringslogg"
+              href="https://aksel.nav.no/grunnleggende/endringslogg"
               variant="neutral"
             >
               <ClockDashedIcon aria-hidden />
