@@ -1,14 +1,15 @@
 import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { useModalContext } from "../../modal/Modal.context";
-import { Slot } from "../../slot/Slot";
-import { OverridableComponent, useId } from "../../util";
-import { cl } from "../../util/className";
-import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { createStrictContext } from "../../util/create-strict-context";
-import { useMergeRefs } from "../../util/hooks";
-import { useControllableState } from "../../util/hooks/useControllableState";
-import { requireReactElement } from "../../util/requireReactElement";
+import { type OverridableComponent, useId } from "../../utils-external";
+import { Slot } from "../../utils/components/slot/Slot";
+import {
+  cl,
+  composeEventHandlers,
+  createStrictContext,
+  requireReactElement,
+} from "../../utils/helpers";
+import { useControllableState, useMergeRefs } from "../../utils/hooks";
 import { Menu, MenuPortalProps } from "../floating-menu/Menu";
 
 /* -------------------------------------------------------------------------- */

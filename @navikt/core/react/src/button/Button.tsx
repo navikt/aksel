@@ -2,10 +2,9 @@ import React, { forwardRef } from "react";
 import { Loader } from "../loader";
 import { AkselColor } from "../types";
 import { Label } from "../typography";
-import { omit } from "../util";
-import { cl } from "../util/className";
-import { composeEventHandlers } from "../util/composeEventHandlers";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../utils-external";
+import { omit } from "../utils-external";
+import { cl, composeEventHandlers } from "../utils/helpers";
 
 type legacyVariants =
   | "primary-neutral"

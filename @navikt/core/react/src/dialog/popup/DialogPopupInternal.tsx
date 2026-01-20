@@ -1,13 +1,15 @@
 import React, { forwardRef } from "react";
 import { BoxNew, type BoxNewProps } from "../../layout/box";
 import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
-import { cl } from "../../util/className";
-import { FocusBoundary } from "../../util/focus-boundary/FocusBoundary";
-import { FocusGuards } from "../../util/focus-guards/FocusGuards";
-import { useMergeRefs } from "../../util/hooks";
-import { useOpenChangeAnimationComplete } from "../../util/hooks/useOpenChangeAnimationComplete";
-import { useScrollLock } from "../../util/hooks/useScrollLock";
-import { createTransitionStatusAttribute } from "../../util/hooks/useTransitionStatus";
+import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
+import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
+import { cl } from "../../utils/helpers";
+import {
+  createTransitionStatusAttribute,
+  useMergeRefs,
+  useOpenChangeAnimationComplete,
+  useScrollLock,
+} from "../../utils/hooks";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";

@@ -1,7 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { BodyLong } from "../typography";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import Stepper from "./Stepper";
 
 const meta: Meta<typeof Stepper> = {

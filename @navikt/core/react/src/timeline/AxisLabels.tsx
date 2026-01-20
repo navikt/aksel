@@ -16,8 +16,8 @@ import {
 } from "date-fns";
 import React from "react";
 import { Detail } from "../typography/Detail";
-import { useDateLocale, useI18n } from "../util/i18n/i18n.hooks";
-import { TFunction } from "../util/i18n/i18n.types";
+import { useDateLocale, useI18n } from "../utils/i18n/i18n.hooks";
+import { TFunction } from "../utils/i18n/i18n.types";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { isVisible } from "./utils";
 import { horizontalPositionAndWidth } from "./utils/calc";

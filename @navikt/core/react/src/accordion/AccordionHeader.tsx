@@ -1,8 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { Heading } from "../typography";
-import { cl } from "../util/className";
-import { composeEventHandlers } from "../util/composeEventHandlers";
+import { cl, composeEventHandlers } from "../utils/helpers";
 import { AccordionContext } from "./AccordionContext";
 import { AccordionItemContext } from "./AccordionItem";
 

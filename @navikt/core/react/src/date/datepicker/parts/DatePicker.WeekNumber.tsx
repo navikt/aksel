@@ -3,7 +3,7 @@ import { CalendarWeek, useDayPicker } from "react-day-picker";
 import { Button } from "../../../button";
 import { Hide, Show } from "../../../layout/responsive";
 import { Detail } from "../../../typography";
-import { cl } from "../../../util/className";
+import { cl } from "../../../utils/helpers";
 import { useDateTranslationContext } from "../../Date.locale";
 import { MultipleMode } from "../DatePicker.types";
 

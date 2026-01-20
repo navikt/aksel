@@ -1,4 +1,4 @@
-import { createStrictContext } from "../util/create-strict-context";
+import { createStrictContext } from "../utils/helpers";
 import { CollapsibleBaseProps } from "./Collapsible.types";
 
 export type CollapsibleContextProps = Pick<CollapsibleBaseProps, "open"> & {

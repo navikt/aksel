@@ -7,7 +7,7 @@ import {
   SparklesIcon,
 } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import ToggleGroup from "./ToggleGroup";
 import { ToggleGroupProps } from "./ToggleGroup.types";
 

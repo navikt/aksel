@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Search from "./Search";
 
 export default {

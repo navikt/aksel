@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../slot/Slot";
-import { cl } from "../../util/className";
+import { Slot } from "../../utils/components/slot/Slot";
+import { cl } from "../../utils/helpers";
 import { getResponsiveProps } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 

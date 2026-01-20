@@ -111,7 +111,7 @@ export {
   useClientLayoutEffect,
   useEventListener,
   useId,
-} from "./util";
+} from "./utils-external";
 
 export {
   Checkbox,

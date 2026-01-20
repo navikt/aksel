@@ -1,9 +1,8 @@
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { BodyShort, Heading } from "../../typography";
-import { cl } from "../../util/className";
-import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { useMergeRefs } from "../../util/hooks";
-import { useI18n } from "../../util/i18n/i18n.hooks";
+import { cl, composeEventHandlers } from "../../utils/helpers";
+import { useMergeRefs } from "../../utils/hooks";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 import ErrorSummaryItem from "./ErrorSummaryItem";
 
 export interface ErrorSummaryProps

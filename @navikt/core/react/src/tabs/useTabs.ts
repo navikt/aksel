@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useId } from "../util";
-import { useControllableState } from "../util/hooks/useControllableState";
+import { useId } from "../utils-external";
+import { useControllableState } from "../utils/hooks";
 import { TabsProps } from "./Tabs.types";
 
 export function useTabs({

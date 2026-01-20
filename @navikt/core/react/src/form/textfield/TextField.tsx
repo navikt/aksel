@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes, forwardRef } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { omit } from "../../util";
-import { cl } from "../../util/className";
+import { omit } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 

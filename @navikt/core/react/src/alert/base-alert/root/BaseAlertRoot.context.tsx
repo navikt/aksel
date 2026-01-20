@@ -1,5 +1,5 @@
 import { AkselColor } from "../../../types";
-import { createStrictContext } from "../../../util/create-strict-context";
+import { createStrictContext } from "../../../utils/helpers";
 
 type BaseAlertContextProps = {
   size: "medium" | "small";
