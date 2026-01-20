@@ -8340,6 +8340,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vitest/browser-playwright@npm:4.0.17":
+  version: 4.0.17
+  resolution: "@vitest/browser-playwright@npm:4.0.17"
+  dependencies:
+    "@vitest/browser": "npm:4.0.17"
+    "@vitest/mocker": "npm:4.0.17"
+    tinyrainbow: "npm:^3.0.3"
+  peerDependencies:
+    playwright: "*"
+    vitest: 4.0.17
+  peerDependenciesMeta:
+    playwright:
+      optional: false
+  checksum: 10/ba887cb43d72178a133b51a68a74de45ef4a6d940a924444d777224ac67abf5703445430216ca6c8c6c267f7064113591a4d1f4f4b3ddd18c9f539cf4aaccd3c
+  languageName: node
+  linkType: hard
+
 "@vitest/browser@npm:4.0.17":
   version: 4.0.17
   resolution: "@vitest/browser@npm:4.0.17"
@@ -8959,6 +8976,7 @@ __metadata:
     "@svitejs/changesets-changelog-github-compact": "npm:^1.1.0"
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"
     "@vitest/browser": "npm:4.0.17"
+    "@vitest/browser-playwright": "npm:4.0.17"
     "@vitest/coverage-v8": "npm:4.0.17"
     "@vitest/eslint-plugin": "npm:1.6.6"
     chromatic: "npm:13.3.3"
