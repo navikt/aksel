@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react-vite";
 import React from "react";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Select, { SelectProps } from "./Select";
 
 const meta: Meta<typeof Select> = {

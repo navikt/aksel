@@ -4,7 +4,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import { Textarea } from "./index";
 
 const meta: Meta<typeof Textarea> = {
