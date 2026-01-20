@@ -1,21 +1,7 @@
 import { Metadata } from "next";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
-import {
-  BodyLong,
-  Box,
-  HGrid,
-  Heading,
-  Link,
-  LinkCard,
-  VStack,
-} from "@navikt/ds-react";
-import {
-  LinkCardAnchor,
-  LinkCardFooter,
-  LinkCardTitle,
-} from "@navikt/ds-react/LinkCard";
-import { GodPraksisTaxonomyTag } from "@/app/(routes)/(god-praksis)/_ui/GodPraksisTaxonomyTag";
+import { BodyLong, HGrid, Heading, Link, VStack } from "@navikt/ds-react";
 import { GodPraksisIntroHero } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -24,6 +10,7 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
+import { GpLinkCard } from "../_ui/GpLinkCard";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: seo } = await sanityFetch({
@@ -89,25 +76,12 @@ export default async function Page() {
 
                   return (
                     <li key={article.slug}>
-                      <Box asChild height="100%">
-                        <LinkCard>
-                          <LinkCardTitle as="h3">
-                            <LinkCardAnchor asChild>
-                              <NextLink href={article.slug ?? ""}>
-                                {article.heading}
-                              </NextLink>
-                            </LinkCardAnchor>
-                          </LinkCardTitle>
-                          <LinkCardFooter>
-                            <GodPraksisTaxonomyTag type="undertema">
-                              {undertema}
-                            </GodPraksisTaxonomyTag>
-                            <GodPraksisTaxonomyTag type="innholdstype">
-                              {innholdstype}
-                            </GodPraksisTaxonomyTag>
-                          </LinkCardFooter>
-                        </LinkCard>
-                      </Box>
+                      <GpLinkCard
+                        slug={article.slug}
+                        heading={article.heading}
+                        undertema={undertema}
+                        innholdstype={innholdstype}
+                      />
                     </li>
                   );
                 })}
