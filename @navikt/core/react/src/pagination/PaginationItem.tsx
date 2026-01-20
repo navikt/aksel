@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { Button, ButtonProps } from "../button";
-import { cl } from "../util/className";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../utils-external";
+import { cl } from "../utils/helpers";
 
 export interface PaginationItemProps extends ButtonProps {
   children: React.ReactNode;

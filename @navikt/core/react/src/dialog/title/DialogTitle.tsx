@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { Heading } from "../../typography";
-import { useClientLayoutEffect, useId } from "../../util";
-import { cl } from "../../util/className";
+import { useClientLayoutEffect, useId } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogTitleProps = React.HTMLAttributes<HTMLHeadingElement>;

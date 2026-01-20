@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { useThemeInternal } from "../../../theme/Theme";
-import { cl } from "../../../util/className";
+import { cl } from "../../../utils/helpers";
 
 interface BaseAlertContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

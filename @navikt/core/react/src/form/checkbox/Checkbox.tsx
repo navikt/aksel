@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
-import { omit, useId } from "../../util";
-import { cl } from "../../util/className";
+import { omit, useId } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { CheckboxProps } from "./types";
 import useCheckbox from "./useCheckbox";

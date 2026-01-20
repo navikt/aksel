@@ -13,7 +13,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
 import { BodyShort } from "../../../typography";
-import { omit } from "../../../util";
+import { omit } from "../../../utils-external";
 import { useDateTranslationContext } from "../../Date.locale";
 import {
   calendarRange,

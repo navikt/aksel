@@ -6,11 +6,10 @@ import React, {
   useState,
 } from "react";
 import { BodyLong, BodyShort, Heading } from "../typography";
-import { useId } from "../util";
-import { cl } from "../util/className";
-import { createStrictContext } from "../util/create-strict-context";
-import { useMergeRefs } from "../util/hooks";
-import { useI18n } from "../util/i18n/i18n.hooks";
+import { useId } from "../utils-external";
+import { cl, createStrictContext } from "../utils/helpers";
+import { useMergeRefs } from "../utils/hooks";
+import { useI18n } from "../utils/i18n/i18n.hooks";
 
 interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**

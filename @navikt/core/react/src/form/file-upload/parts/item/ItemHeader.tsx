@@ -1,6 +1,6 @@
 import React from "react";
 import { useThemeInternal } from "../../../../theme/Theme";
-import { LinkAnchor } from "../../../../util/link-anchor";
+import { LinkAnchor } from "../../../../utils/components/link-anchor";
 import { FileItem } from "./Item.types";
 import ItemIcon from "./ItemIcon";
 import { downloadFile } from "./utils/download-file";

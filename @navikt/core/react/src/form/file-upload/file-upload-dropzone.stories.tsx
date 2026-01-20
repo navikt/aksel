@@ -44,7 +44,7 @@ export const Default: StoryObj<typeof FileUpload.Dropzone> = {
   parameters: { chromatic: { disable: true } },
 };
 
-export const States: StoryFn = () => {
+export const States = () => {
   return (
     <div>
       <h2>Disabled</h2>

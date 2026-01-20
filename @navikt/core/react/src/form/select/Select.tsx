@@ -1,8 +1,8 @@
 import React, { SelectHTMLAttributes, forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { omit } from "../../util";
-import { cl } from "../../util/className";
+import { omit } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { createStrictContext } from "../../../util/create-strict-context";
-import { usePrevious } from "../../../util/hooks";
+import { createStrictContext } from "../../../utils/helpers";
+import { usePrevious } from "../../../utils/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { isInList } from "../combobox-utils";
 import { useComboboxCustomOptions } from "../customOptionsContext";

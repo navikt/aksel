@@ -1,7 +1,7 @@
 import { differenceInCalendarDays, isWeekend } from "date-fns";
 import React, { useCallback, useState } from "react";
 import { DayEventHandler, dateMatchModifiers } from "react-day-picker";
-import { useDateLocale } from "../../../util/i18n/i18n.hooks";
+import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
 import { DateInputProps } from "../../Date.Input";
 import { getLocaleFromString } from "../../Date.locale";
 import { formatDateForInput, isValidDate, parseDate } from "../../date-utils";

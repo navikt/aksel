@@ -1,5 +1,5 @@
 import React from "react";
-import { useI18n } from "../util/i18n/i18n.hooks";
+import { useI18n } from "../utils/i18n/i18n.hooks";
 
 export const GudiepanelIllustration = () => {
   const translate = useI18n("GuidePanel");

@@ -4,7 +4,7 @@ import { Alert } from "../alert";
 import { Button } from "../button";
 import { Checkbox } from "../form/checkbox";
 import { BodyLong, Heading } from "../typography";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
 export default {
   title: "ds-react/Skeleton",

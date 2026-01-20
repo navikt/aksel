@@ -1,5 +1,6 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryFn } from "@storybook/react-vite";
 import React from "react";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Select, { SelectProps } from "./Select";
 
 const meta: Meta<typeof Select> = {
@@ -144,40 +145,26 @@ export const ColorRole = () => {
   );
 };
 
-export const Chromatic: StoryObj<typeof Select> = {
-  render: () => (
-    <div>
-      <div>
-        <h2>Default</h2>
-        <Default label="Ipsum enim quis culpa" />
-      </div>
-      <div>
-        <h2>Small</h2>
-        <Small />
-      </div>
-      <div>
-        <h2>Description</h2>
-        <Description />
-      </div>
-      <div>
-        <h2>WithError</h2>
-        <WithError />
-      </div>
-      <div>
-        <h2>Disabled</h2>
-        <Disabled />
-      </div>
-      <div>
-        <h2>HideLabel</h2>
-        <HideLabel />
-      </div>
-      <div>
-        <h2>Readonly</h2>
-        <Readonly />
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Small,
+  Description,
+  WithError,
+  Disabled,
+  HideLabel,
+  Readonly,
+  ColorRole,
+});
+
+export const ChromaticDark = renderStoriesForChromatic({
+  Default,
+  Small,
+  Description,
+  WithError,
+  Disabled,
+  HideLabel,
+  Readonly,
+  ColorRole,
+});
+
+ChromaticDark.globals = { theme: "dark" };

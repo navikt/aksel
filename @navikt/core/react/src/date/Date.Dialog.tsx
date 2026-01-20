@@ -4,10 +4,10 @@ import { useDialogContext } from "../dialog/root/DialogRoot.context";
 import { Modal } from "../modal";
 import { useModalContext } from "../modal/Modal.context";
 import { Popover } from "../popover";
-import { cl } from "../util/className";
-import { useMedia } from "../util/hooks";
-import { useI18n } from "../util/i18n/i18n.hooks";
-import { TFunction } from "../util/i18n/i18n.types";
+import { cl } from "../utils/helpers";
+import { useMedia } from "../utils/hooks";
+import { useI18n } from "../utils/i18n/i18n.hooks";
+import type { TFunction } from "../utils/i18n/i18n.types";
 import { getGlobalTranslations } from "./Date.locale";
 
 const variantToLabel = {

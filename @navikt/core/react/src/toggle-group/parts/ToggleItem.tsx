@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography/BodyShort";
-import { cl } from "../../util/className";
+import { cl } from "../../utils/helpers";
 import { useToggleGroupContext } from "../ToggleGroup.context";
 import { useToggleItem } from "./useToggleItem";
 

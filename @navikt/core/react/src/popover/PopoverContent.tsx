@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 
 export interface PopoverContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
