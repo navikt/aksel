@@ -1,7 +1,7 @@
 import React, { createContext, forwardRef, useContext, useRef } from "react";
-import { omit } from "../util";
-import { cl } from "../util/className";
-import { useControllableState } from "../util/hooks/useControllableState";
+import { omit } from "../utils-external";
+import { cl } from "../utils/helpers";
+import { useControllableState } from "../utils/hooks";
 import { AccordionContext } from "./AccordionContext";
 
 export interface AccordionItemProps

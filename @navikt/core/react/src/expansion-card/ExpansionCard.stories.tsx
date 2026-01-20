@@ -6,7 +6,7 @@ import { Checkbox } from "../form/checkbox";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
 import { BodyLong } from "../typography";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
 const meta: Meta<typeof ExpansionCard> = {
   title: "ds-react/ExpansionCard",

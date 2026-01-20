@@ -3,7 +3,7 @@ import React from "react";
 import { expect, within } from "storybook/test";
 import { Box } from "../../layout/box";
 import { VStack } from "../../layout/stack";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import BodyLong from "../BodyLong";
 
 const meta: Meta<typeof BodyLong> = {

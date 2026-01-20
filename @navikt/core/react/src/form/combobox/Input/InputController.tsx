@@ -3,8 +3,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { forwardRef } from "react";
 import { Floating } from "../../../overlays/floating/Floating";
-import { cl } from "../../../util/className";
-import { useMergeRefs } from "../../../util/hooks";
+import { cl } from "../../../utils/helpers";
+import { useMergeRefs } from "../../../utils/hooks";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "../SelectedOptions/SelectedOptions";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";

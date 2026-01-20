@@ -2,7 +2,7 @@ import React, { HTMLAttributes, forwardRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { AkselColor } from "../types";
 import { BodyLong, HeadingProps } from "../typography";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 import Bubble, { type ChatBubbleProps } from "./Bubble";
 
 export const VARIANTS = ["subtle", "info", "neutral"] as const;

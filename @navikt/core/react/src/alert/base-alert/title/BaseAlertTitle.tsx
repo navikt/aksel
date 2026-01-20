@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../../typography";
-import { useId } from "../../../util";
-import { cl } from "../../../util/className";
+import { useId } from "../../../utils-external";
+import { cl } from "../../../utils/helpers";
 import { useBaseAlert } from "../root/BaseAlertRoot.context";
 
 interface BaseAlertTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {

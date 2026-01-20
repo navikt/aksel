@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { Chips } from ".";
 import { VStack } from "../layout/stack";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
 const meta: Meta<typeof Chips> = {
   title: "ds-react/Chips",

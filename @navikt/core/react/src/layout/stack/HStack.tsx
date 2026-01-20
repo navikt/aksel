@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../../util/types";
+import { type OverridableComponent } from "../../utils-external";
 import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { Stack, StackProps } from "./Stack";
 

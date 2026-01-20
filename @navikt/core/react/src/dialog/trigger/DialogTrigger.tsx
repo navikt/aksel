@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../slot/Slot";
-import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { useMergeRefs } from "../../util/hooks";
+import { Slot } from "../../utils/components/slot/Slot";
+import { composeEventHandlers } from "../../utils/helpers";
+import { useMergeRefs } from "../../utils/hooks";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {

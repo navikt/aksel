@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import { BodyLong } from "../typography";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 import { ListItem } from "./List.Item";
 import { ListContext } from "./List.context";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

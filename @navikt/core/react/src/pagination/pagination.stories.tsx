@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { Link, HashRouter as Router } from "react-router";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import Pagination from "./Pagination";
 
 const meta: Meta<typeof Pagination> = {

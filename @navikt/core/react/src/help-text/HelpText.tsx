@@ -1,10 +1,9 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps } from "../popover";
 import type { AkselColor } from "../types";
-import { cl } from "../util/className";
-import { composeEventHandlers } from "../util/composeEventHandlers";
-import { useMergeRefs } from "../util/hooks/useMergeRefs";
-import { useI18n } from "../util/i18n/i18n.hooks";
+import { cl, composeEventHandlers } from "../utils/helpers";
+import { useMergeRefs } from "../utils/hooks";
+import { useI18n } from "../utils/i18n/i18n.hooks";
 import { HelpTextIcon } from "./HelpTextIcon";
 
 export interface HelpTextProps

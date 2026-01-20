@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { AkselColor } from "../types";
 import { BodyShort } from "../typography";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 
 type legacyVariants =
   | "warning"
