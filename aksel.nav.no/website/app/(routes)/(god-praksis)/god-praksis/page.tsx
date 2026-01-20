@@ -9,7 +9,11 @@ import {
   LinkCard,
   VStack,
 } from "@navikt/ds-react";
-import { LinkCardFooter, LinkCardTitle } from "@navikt/ds-react/LinkCard";
+import {
+  LinkCardAnchor,
+  LinkCardFooter,
+  LinkCardTitle,
+} from "@navikt/ds-react/LinkCard";
 import { GodPraksisTaxonomyTag } from "@/app/(routes)/(god-praksis)/_ui/GodPraksisTaxonomyTag";
 import { GodPraksisIntroHero } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -88,9 +92,11 @@ export default async function Page() {
                       <Box asChild height="100%">
                         <LinkCard>
                           <LinkCardTitle as="h3">
-                            <NextLink href={article.slug ?? ""}>
-                              {article.heading ?? "-"}
-                            </NextLink>
+                            <LinkCardAnchor asChild>
+                              <NextLink href={article.slug ?? ""}>
+                                {article.heading ?? "-"}
+                              </NextLink>
+                            </LinkCardAnchor>
                           </LinkCardTitle>
                           <LinkCardFooter>
                             <GodPraksisTaxonomyTag type="undertema">
