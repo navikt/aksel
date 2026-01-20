@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import { useThemeInternal } from "../theme/Theme";
 import { BodyLong } from "../typography";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 import { AccordionItemContext } from "./AccordionItem";
 
 export interface AccordionContentProps

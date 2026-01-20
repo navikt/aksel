@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { VStack } from "../layout/stack";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import Chat, { POSITIONS, SIZES, VARIANTS } from "./Chat";
 
 export default {

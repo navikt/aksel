@@ -6,7 +6,7 @@ import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Heading } from "../../typography";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import {
   FileObject,
   FileRejected,

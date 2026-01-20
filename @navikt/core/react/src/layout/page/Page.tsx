@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { OverridableComponent, omit } from "../../util";
-import { cl } from "../../util/className";
+import { type OverridableComponent, omit } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 import { PageBlock } from "./parts/PageBlock";
 
 export interface PageProps extends React.HTMLAttributes<HTMLElement> {

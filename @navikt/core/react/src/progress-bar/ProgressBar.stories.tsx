@@ -1,7 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { ProgressBar } from ".";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
 export default {
   title: "ds-react/ProgressBar",

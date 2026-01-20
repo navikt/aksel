@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { cl } from "../../util/className";
+import { cl } from "../../utils/helpers";
 import { useInputContext } from "./Input/Input.context";
 
 type ComboboxWrapperProps = {

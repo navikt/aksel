@@ -1,9 +1,8 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../slot/Slot";
 import { AkselColor } from "../types";
-import { cl } from "../util/className";
-import { createStrictContext } from "../util/create-strict-context";
-import { AsChildProps } from "../util/types";
+import { Slot } from "../utils/components/slot/Slot";
+import { cl, createStrictContext } from "../utils/helpers";
+import type { AsChildProps } from "../utils/types";
 
 const DEFAULT_COLOR: AkselColor = "accent";
 

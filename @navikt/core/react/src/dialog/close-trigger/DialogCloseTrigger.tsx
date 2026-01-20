@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../slot/Slot";
-import { composeEventHandlers } from "../../util/composeEventHandlers";
+import { Slot } from "../../utils/components/slot/Slot";
+import { composeEventHandlers } from "../../utils/helpers";
 import { useDialogContext } from "../root/DialogRoot.context";
 
 interface DialogCloseTriggerProps

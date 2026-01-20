@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { Floating } from "../../overlays/floating/Floating";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { cl } from "../../util/className";
+import { cl } from "../../utils/helpers";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import ComboboxWrapper from "./ComboboxWrapper";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";

@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import { useThemeInternal } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
-import { type OverridableComponent, useId } from "../../util";
-import { cl } from "../../util/className";
-import { useI18n } from "../../util/i18n/i18n.hooks";
+import { type OverridableComponent, useId } from "../../utils-external";
+import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { InlineMessageIcon } from "../icon/InlineMessageIcon";
 
 interface InlineMessageProps extends React.HTMLAttributes<HTMLDivElement> {

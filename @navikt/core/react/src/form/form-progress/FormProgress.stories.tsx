@@ -2,7 +2,7 @@ import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import VStack from "../../layout/stack/VStack";
 import { Provider } from "../../provider";
-import en from "../../util/i18n/locales/en";
+import en from "../../utils/i18n/locales/en";
 import FormProgress, { FormProgressProps } from "./FormProgress";
 
 export default {
