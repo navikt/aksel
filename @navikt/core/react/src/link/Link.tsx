@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { AkselColor } from "../types";
-import { cl } from "../util/className";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../utils-external";
+import { cl } from "../utils/helpers";
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

@@ -6,8 +6,8 @@ import React, {
 } from "react";
 import { Loader } from "../../loader";
 import { BodyShort } from "../../typography";
-import { omit } from "../../util";
-import { cl } from "../../util/className";
+import { omit } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 

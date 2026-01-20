@@ -8,7 +8,7 @@ import {
 } from "date-fns";
 import React, { forwardRef } from "react";
 import { Detail } from "../../typography/Detail";
-import { useI18n } from "../../util/i18n/i18n.hooks";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 
 export interface TimelineZoomButtonProps {

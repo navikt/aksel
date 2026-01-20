@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { createStrictContext } from "../../util/create-strict-context";
+import { createStrictContext } from "../../utils/helpers";
 import { useInputContext } from "./Input/Input.context";
 import { ComboboxOption } from "./types";
 

@@ -1,7 +1,6 @@
 import React, { forwardRef, useContext } from "react";
-import { cl } from "../../../util/className";
-import { composeEventHandlers } from "../../../util/composeEventHandlers";
-import { OverridableComponent } from "../../../util/types";
+import type { OverridableComponent } from "../../../utils-external";
+import { cl, composeEventHandlers } from "../../../utils/helpers";
 import { DropdownContext } from "../../context";
 
 export interface ListItemProps extends React.ButtonHTMLAttributes<HTMLElement> {

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "description": "Design-tokens for Nav designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -42,7 +42,7 @@
     "style-dictionary": "^4.1.1",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
-    "vitest": "^3.2.4"
+    "vitest": "4.0.17"
   },
   "publishConfig": {
     "access": "public",

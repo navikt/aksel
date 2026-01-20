@@ -6,7 +6,7 @@ import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Heading } from "../../typography";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import {
   FileObject,
   FileRejected,
@@ -66,7 +66,7 @@ const CustomItem = ({
   );
 };
 
-export const Default: StoryFn = () => {
+export const Default = () => {
   const [files, setFiles] = useState<FileObject[]>([]);
 
   function addFiles(filesToAdd: FileObject[]) {
@@ -259,8 +259,6 @@ export const ColorRoles = () => (
   <div data-color="brand-magenta">
     <h2>Default</h2>
     <Default />
-    <h2>TriggerWithButton</h2>
-    <TriggerWithButton />
     <h2>DropzoneStates</h2>
     <DropzoneStates />
     <h2>ItemStates</h2>

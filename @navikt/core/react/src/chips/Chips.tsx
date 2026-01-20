@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { cl } from "../util/className";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../utils-external";
+import { cl } from "../utils/helpers";
 import RemovableChips, { ChipsRemovableProps } from "./Removable";
 import ToggleChips, { ChipsToggleProps } from "./Toggle";
 

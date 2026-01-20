@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import { useThemeInternal } from "../theme/Theme";
 import { BodyLong } from "../typography";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 import { AccordionItemContext } from "./AccordionItem";
 
 export interface AccordionContentProps
@@ -27,7 +27,6 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
 
     return (
       <BodyLong
-        data-color={themeContext.color}
         {...rest}
         as="div"
         ref={ref}
@@ -37,7 +36,12 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
           className,
         )}
       >
-        <div className="aksel-accordion__content-inner">{children}</div>
+        <div
+          className="aksel-accordion__content-inner"
+          data-color={themeContext.color}
+        >
+          {children}
+        </div>
       </BodyLong>
     );
   },

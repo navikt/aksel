@@ -4,7 +4,7 @@ import { InformationIcon } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
 import { BodyLong } from "../typography";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import GuidePanel from "./GuidePanel";
 
 type Story = StoryObj<typeof GuidePanel>;

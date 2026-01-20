@@ -3,7 +3,7 @@ import React from "react";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
 import { BodyLong, Heading } from "../typography";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import Alert, { AlertProps } from "./Alert";
 
 const meta: Meta<typeof Alert> = {

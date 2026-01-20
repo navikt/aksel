@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../../typography";
-import { OverridableComponent } from "../../../util";
-import { cl } from "../../../util/className";
+import type { OverridableComponent } from "../../../utils-external";
+import { cl } from "../../../utils/helpers";
 import { useTabsContext } from "../../Tabs.context";
 import { useTab } from "./useTab";
 

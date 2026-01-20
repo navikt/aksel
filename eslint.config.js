@@ -225,6 +225,11 @@ module.exports = tseslint.config([
               message:
                 'Use `node:` prefix when importing native node modules, e.g. `import path from "node:path"`.',
             },
+            {
+              group: ["**/esm/**", "**/cjs/**"],
+              message:
+                "Do not import from build output directories. Import from source instead.",
+            },
           ],
         },
       ],
