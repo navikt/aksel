@@ -1,8 +1,8 @@
 import { LeaveIcon } from "@navikt/aksel-icons";
 import {
-  ActionMenu,
   BodyShort,
   Detail,
+  Dropdown,
   InternalHeader,
   Spacer,
 } from "@navikt/ds-react";
@@ -14,28 +14,27 @@ const Example = () => {
       <InternalHeader>
         <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
         <Spacer />
-        <ActionMenu>
-          <ActionMenu.Trigger>
-            <InternalHeader.UserButton
-              name="Ola N."
-              description="Enhet: Skien"
-            />
-          </ActionMenu.Trigger>
-          <ActionMenu.Content align="end" aria-labelledby="user-menu" roleGroup>
-            <dl id="user-menu">
+        <Dropdown defaultOpen>
+          <InternalHeader.UserButton
+            as={Dropdown.Toggle}
+            name="Ola N."
+            description="Enhet: Skien"
+          />
+          <Dropdown.Menu>
+            <dl>
               <BodyShort as="dt" size="small">
                 Ola Normann
               </BodyShort>
               <Detail as="dd">D123456</Detail>
             </dl>
-            <ActionMenu.Divider />
-            <ActionMenu.Item as="a" href="#">
-              Logg ut
-              <Spacer />
-              <LeaveIcon aria-hidden />
-            </ActionMenu.Item>
-          </ActionMenu.Content>
-        </ActionMenu>
+            <Dropdown.Menu.Divider />
+            <Dropdown.Menu.List>
+              <Dropdown.Menu.List.Item>
+                Logg ut <Spacer /> <LeaveIcon aria-hidden fontSize="1.5rem" />
+              </Dropdown.Menu.List.Item>
+            </Dropdown.Menu.List>
+          </Dropdown.Menu>
+        </Dropdown>
       </InternalHeader>
     </div>
   );
