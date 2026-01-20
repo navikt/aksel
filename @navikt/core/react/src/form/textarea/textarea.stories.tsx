@@ -4,6 +4,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
+import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
 import { Textarea } from "./index";
 
 const meta: Meta<typeof Textarea> = {
@@ -263,34 +264,52 @@ ModalStrictMode.parameters = {
 export const ColorRole = () => {
   return (
     <div data-color="brand-magenta">
-      <Description />
-      <MaxLength />
-      <WithError />
-      <Disabled />
+      <Textarea
+        label="Ipsum enim quis culpa"
+        description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+      />
+      <Textarea maxLength={50} label="Ipsum enim quis culpa" />
+      <Textarea
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+      />
+      <Textarea label="Ipsum enim quis culpa" disabled />
     </div>
   );
 };
 
-export const Chromatic: Story = {
-  render: (props) => (
-    <div>
-      <Textarea {...props} label="Textarea" />
-      <Small />
-      <Description />
-      <WithError />
-      <Disabled />
-      <HideLabel />
-      <MaxLength />
-      <MinRows />
-      <MaxRows />
-      <Resize />
-      <OnChange />
-      <Controlled />
-      <Readonly />
-      <AutoScrollbar label="autoscrollbar" />
-    </div>
-  ),
-  parameters: {
-    chromatic: { disable: false },
-  },
-};
+export const Chromatic = renderStoriesForChromatic({
+  Small,
+  Description,
+  WithError,
+  Disabled,
+  HideLabel,
+  MaxLength,
+  MinRows,
+  MaxRows,
+  Resize,
+  OnChange,
+  Controlled,
+  Readonly,
+  AutoScrollbar,
+  ColorRole,
+});
+
+export const ChromaticDark = renderStoriesForChromatic({
+  Small,
+  Description,
+  WithError,
+  Disabled,
+  HideLabel,
+  MaxLength,
+  MinRows,
+  MaxRows,
+  Resize,
+  OnChange,
+  Controlled,
+  Readonly,
+  AutoScrollbar,
+  ColorRole,
+});
+
+ChromaticDark.globals = { theme: "dark" };

@@ -170,7 +170,7 @@ export const ControlledOpen: StoryFn<typeof Collapsible> = () => (
   </Collapsible>
 );
 
-export const Disabled: StoryFn<typeof Collapsible> = ({ open = false }) => (
+export const Disabled = ({ open = false }) => (
   <Collapsible open={open}>
     <Collapsible.Trigger asChild disabled>
       <Button>Button</Button>
