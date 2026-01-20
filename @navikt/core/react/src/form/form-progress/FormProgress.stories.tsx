@@ -37,6 +37,7 @@ export const Default: StoryFn<ControllableProps> = (props) => (
     <p>Noe innhold som dyttes ned</p>
   </div>
 );
+
 Default.args = { activeStep: 2, totalSteps: 7, interactiveSteps: true };
 
 export const ProvidedTranslations: StoryFn = () => {
@@ -171,14 +172,25 @@ export const ColorRole: StoryFn = () => (
   </div>
 );
 
+const ClosedView = () => (
+  <FormProgress totalSteps={7} activeStep={2}>
+    <FormProgress.Step href="#" completed>
+      Start søknad
+    </FormProgress.Step>
+    <FormProgress.Step href="#">Personopplysninger</FormProgress.Step>
+    <FormProgress.Step interactive={false}>Saksopplysninger</FormProgress.Step>
+    <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
+  </FormProgress>
+);
+
 export const Chromatic = renderStoriesForChromatic({
-  Default,
+  ClosedView,
   Controlled,
   ColorRole,
 });
 
 export const ChromaticDark = renderStoriesForChromatic({
-  Default,
+  ClosedView,
   Controlled,
   ColorRole,
 });
