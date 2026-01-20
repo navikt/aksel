@@ -6,6 +6,15 @@ interface SlotProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
 }
 
+/**
+ * Workaround for RSC related issue.
+ * https://github.com/radix-ui/primitives/issues/3776#issuecomment-3649236326
+ */
+function unwrapLazy(element: React.ReactNode) {
+  const arr = React.Children.toArray(element);
+  return arr.length === 1 ? arr[0] : element;
+}
+
 function getChildRef(children: React.ReactNode): React.Ref<HTMLElement> | null {
   if (!React.isValidElement(children)) {
     return null;
@@ -18,17 +27,19 @@ function getChildRef(children: React.ReactNode): React.Ref<HTMLElement> | null {
 const Slot = React.forwardRef<HTMLElement, SlotProps>((props, forwardedRef) => {
   const { children, ...slotProps } = props;
 
-  const childRef = getChildRef(children);
+  const resolvedChildren = unwrapLazy(children);
+
+  const childRef = getChildRef(resolvedChildren);
   const mergedRef = useMergeRefs(forwardedRef, childRef);
 
-  if (React.isValidElement(children)) {
-    return React.cloneElement<any>(children, {
-      ...mergeProps(slotProps, children.props as any),
+  if (React.isValidElement(resolvedChildren)) {
+    return React.cloneElement<any>(resolvedChildren, {
+      ...mergeProps(slotProps, resolvedChildren.props as any),
       ref: mergedRef,
     });
   }
 
-  if (React.Children.count(children) > 1) {
+  if (React.Children.count(resolvedChildren) > 1) {
     const error = new Error(
       "Aksel: Components using 'asChild' expects to recieve a single React element child.",
     );
