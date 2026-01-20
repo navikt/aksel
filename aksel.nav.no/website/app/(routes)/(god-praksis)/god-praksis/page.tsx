@@ -89,9 +89,6 @@ export default async function Page() {
 
                   return (
                     <li key={article.slug}>
-                      <BodyLong size="small">
-                        |{article.heading}|{article.slug}|
-                      </BodyLong>
                       <Box asChild height="100%">
                         <LinkCard>
                           <LinkCardTitle as="h3">
