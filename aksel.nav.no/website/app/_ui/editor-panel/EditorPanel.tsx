@@ -37,7 +37,7 @@ const VariantConfig: Record<
   EditorPanelProps["variant"],
   {
     heading: string;
-    icon: JSX.Element;
+    icon: React.ReactElement;
     color: AkselColor;
   }
 > = {
