@@ -37,7 +37,10 @@ const Slot = React.forwardRef<HTMLElement, SlotProps>((props, forwardedRef) => {
     throw error;
   }
 
-  console.error("Aksel: Slot component expected a valid React element child.");
+  console.error(
+    "Aksel: Slot component expected a valid React element child.",
+    children,
+  );
 
   return null;
 });
