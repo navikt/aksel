@@ -1,6 +1,20 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BodyLong, HGrid, Heading, Link, VStack } from "@navikt/ds-react";
+import {
+  BodyLong,
+  Box,
+  HGrid,
+  Heading,
+  Link,
+  LinkCard,
+  VStack,
+} from "@navikt/ds-react";
+import {
+  LinkCardAnchor,
+  LinkCardFooter,
+  LinkCardTitle,
+} from "@navikt/ds-react/LinkCard";
+import { GodPraksisTaxonomyTag } from "@/app/(routes)/(god-praksis)/_ui/GodPraksisTaxonomyTag";
 import { GodPraksisIntroHero } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -10,7 +24,6 @@ import {
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
-import { GpLinkCard } from "../_ui/GpLinkCard";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: seo } = await sanityFetch({
@@ -76,12 +89,23 @@ export default async function Page() {
 
                   return (
                     <li key={article.slug}>
-                      <GpLinkCard
-                        slug={article.slug}
-                        heading={article.heading}
-                        undertema={undertema}
-                        innholdstype={innholdstype}
-                      />
+                      <Box asChild height="100%">
+                        <LinkCard>
+                          <LinkCardTitle as="h3">
+                            <LinkCardAnchor asChild>
+                              <a href={article.slug ?? ""}>{article.heading}</a>
+                            </LinkCardAnchor>
+                          </LinkCardTitle>
+                          <LinkCardFooter>
+                            <GodPraksisTaxonomyTag type="undertema">
+                              {undertema}
+                            </GodPraksisTaxonomyTag>
+                            <GodPraksisTaxonomyTag type="innholdstype">
+                              {innholdstype}
+                            </GodPraksisTaxonomyTag>
+                          </LinkCardFooter>
+                        </LinkCard>
+                      </Box>
                     </li>
                   );
                 })}
