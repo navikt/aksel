@@ -582,3 +582,7 @@ export const Chromatic: StoryFn = () => (
     <ColorRoles />
   </ChromaticRender>
 );
+
+Chromatic.parameters = {
+  chromatic: { disable: false },
+};
