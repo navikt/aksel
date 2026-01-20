@@ -93,7 +93,9 @@ export default async function Page() {
                         <LinkCard>
                           <LinkCardTitle as="h3">
                             <LinkCardAnchor asChild>
-                              <a href={article.slug ?? ""}>{article.heading}</a>
+                              <NextLink href={article.slug ?? ""}>
+                                Dette er en test
+                              </NextLink>
                             </LinkCardAnchor>
                           </LinkCardTitle>
                           <LinkCardFooter>
