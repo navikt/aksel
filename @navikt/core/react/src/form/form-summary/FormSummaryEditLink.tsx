@@ -1,10 +1,10 @@
 import React, { forwardRef } from "react";
 import { PencilIcon } from "@navikt/aksel-icons";
 import { Link } from "../../link";
-import { cl } from "../../util/className";
-import { CompositionWarning } from "../../util/composition-warning";
-import { useI18n } from "../../util/i18n/i18n.hooks";
-import { OverridableComponent } from "../../util/types";
+import type { OverridableComponent } from "../../utils-external";
+import { CompositionWarning } from "../../utils/components/composition-warning";
+import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 
 export interface FormSummaryEditProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

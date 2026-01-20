@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect, useRef } from "react";
 import { BodyLong, Heading } from "../typography";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import HelpText from "./HelpText";
 
 const meta: Meta<typeof HelpText> = {

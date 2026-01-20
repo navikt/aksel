@@ -7,7 +7,8 @@ import React, {
 import ReactDOM from "react-dom";
 import { useProvider } from "../provider/Provider";
 import { Theme, useThemeInternal } from "../theme/Theme";
-import { useClientLayoutEffect, useMergeRefs } from "../util/hooks";
+import { useClientLayoutEffect } from "../utils-external";
+import { useMergeRefs } from "../utils/hooks";
 
 export interface PortalProps extends HTMLAttributes<HTMLDivElement> {
   /**

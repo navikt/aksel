@@ -51,12 +51,12 @@
     },
     "./locales": {
       "import": {
-        "types": "./esm/util/i18n/locales/index.d.ts",
-        "default": "./esm/util/i18n/locales/index.js"
+        "types": "./esm/utils/i18n/locales/index.d.ts",
+        "default": "./esm/utils/i18n/locales/index.js"
       },
       "require": {
-        "types": "./cjs/util/i18n/locales/index.d.ts",
-        "default": "./cjs/util/i18n/locales/index.js"
+        "types": "./cjs/utils/i18n/locales/index.d.ts",
+        "default": "./cjs/utils/i18n/locales/index.js"
       }
     },
     "./Accordion": {
@@ -481,12 +481,12 @@
     },
     "./Utils": {
       "import": {
-        "types": "./esm/util/index.d.ts",
-        "default": "./esm/util/index.js"
+        "types": "./esm/utils-external/index.d.ts",
+        "default": "./esm/utils-external/index.js"
       },
       "require": {
-        "types": "./cjs/util/index.d.ts",
-        "default": "./cjs/util/index.js"
+        "types": "./cjs/utils-external/index.d.ts",
+        "default": "./cjs/utils-external/index.js"
       }
     },
     "./Checkbox": {
@@ -696,7 +696,7 @@
     "i18n-jsdoc": "tsx ./scripts/addJsdocToLocales.ts",
     "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
-    "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup && yarn copy-types",
+    "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup && yarn copy-types",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "TZ=UTC vitest run -c tests/vitest.config.ts",
     "test:watch": "TZ=UTC vitest watch -c tests/vitest.config.ts",
@@ -729,7 +729,7 @@
     "tsc-alias": "1.8.16",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
-    "vitest": "^3.2.4"
+    "vitest": "4.0.17"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18 || ^19",

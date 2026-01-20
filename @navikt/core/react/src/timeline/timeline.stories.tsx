@@ -7,8 +7,8 @@ import {
 } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
 import { Provider } from "../provider";
-import en from "../util/i18n/locales/en";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import en from "../utils/i18n/locales/en";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import Timeline, { type TimelineProps } from "./Timeline";
 import type { PeriodProps } from "./period/types";
 

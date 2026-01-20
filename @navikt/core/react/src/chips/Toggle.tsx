@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { AkselColor } from "../types";
-import { cl } from "../util/className";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../utils-external";
+import { cl } from "../utils/helpers";
 
 export interface ChipsToggleProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

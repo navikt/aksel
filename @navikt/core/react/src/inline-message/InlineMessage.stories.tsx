@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import { InlineMessage } from "./index";
 
 const meta: Meta<typeof InlineMessage> = {

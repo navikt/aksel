@@ -50,7 +50,7 @@ export const Icons: StoryFn = () => {
   );
 };
 
-export const States: StoryFn = () => {
+export const States = () => {
   return (
     <div>
       <h2>Error</h2>
@@ -178,7 +178,7 @@ export const Download: StoryFn = () => {
   );
 };
 
-export const Description: StoryFn = () => {
+export const Description = () => {
   return (
     <VStack gap="space-20">
       <FileUpload.Item file={fileTxt} description="Mottat 11.11.11" />

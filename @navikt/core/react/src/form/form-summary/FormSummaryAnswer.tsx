@@ -1,6 +1,6 @@
 import React from "react";
 import { useThemeInternal } from "../../theme/Theme";
-import { cl } from "../../util/className";
+import { cl } from "../../utils/helpers";
 
 export interface FormSummaryAnswerProps
   extends React.HTMLAttributes<HTMLDivElement> {

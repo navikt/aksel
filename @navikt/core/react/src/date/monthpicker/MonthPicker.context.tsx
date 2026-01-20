@@ -1,7 +1,7 @@
 import { Locale, isSameYear } from "date-fns";
 import React from "react";
-import { createStrictContext } from "../../util/create-strict-context";
-import { useControllableState } from "../../util/hooks";
+import { createStrictContext } from "../../utils/helpers";
+import { useControllableState } from "../../utils/hooks";
 import { clampDisplayYear } from "../date-utils";
 import { MonthPickerProps } from "./MonthPicker.types";
 

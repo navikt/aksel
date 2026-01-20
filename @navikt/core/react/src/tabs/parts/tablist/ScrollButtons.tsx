@@ -1,6 +1,6 @@
 import React from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
-import { cl } from "../../../util/className";
+import { cl } from "../../../utils/helpers";
 
 interface ScrollButtonProps {
   hidden: boolean;

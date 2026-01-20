@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { debounce } from "../../../util";
-import { ownerDocument } from "../../../util/owner";
+import { debounce } from "../../../utils-external";
+import { ownerDocument } from "../../../utils/helpers";
 
 export function useScrollButtons(
   listRef: React.RefObject<HTMLDivElement | null>,

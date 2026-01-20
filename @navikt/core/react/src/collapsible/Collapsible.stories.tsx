@@ -4,7 +4,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Box } from "../layout/box";
 import { HStack } from "../layout/stack";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import { Collapsible } from "./Collapsible";
 
 const meta: Meta<typeof Collapsible> = {
@@ -170,7 +170,7 @@ export const ControlledOpen: StoryFn<typeof Collapsible> = () => (
   </Collapsible>
 );
 
-export const Disabled: StoryFn<typeof Collapsible> = ({ open = false }) => (
+export const Disabled = ({ open = false }) => (
   <Collapsible open={open}>
     <Collapsible.Trigger asChild disabled>
       <Button>Button</Button>

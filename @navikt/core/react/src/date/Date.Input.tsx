@@ -3,9 +3,8 @@ import { CalendarIcon } from "@navikt/aksel-icons";
 import { ReadOnlyIcon } from "../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../typography";
-import { omit } from "../util";
-import { cl } from "../util/className";
-import { createStrictContext } from "../util/create-strict-context";
+import { omit } from "../utils-external";
+import { cl, createStrictContext } from "../utils/helpers";
 import { useDateTranslationContext } from "./Date.locale";
 
 interface DateInputContextProps {

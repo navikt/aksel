@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import type { TimelinePeriod, TimelineRow, TimelineRowProps } from "..";
-import { omit } from "../../util";
-import { getChildRef } from "../../util/getChildRef";
+import { omit } from "../../utils-external";
 import { Period } from "./types.external";
 
 type TimelineRowPropsWithRef = React.ComponentProps<typeof TimelineRow>;
@@ -70,3 +69,11 @@ export const parseRows = (rowChildren: ReactNode[]) => {
 
   return parsedChildren;
 };
+
+function getChildRef<T>(
+  children: React.ReactElement<React.RefAttributes<T>>,
+): React.Ref<T> | undefined {
+  return Object.prototype.propertyIsEnumerable.call(children.props, "ref")
+    ? (children.props as any).ref // React 19 (children.ref still works, but gives a warning)
+    : (children as any).ref; // React <19
+}
