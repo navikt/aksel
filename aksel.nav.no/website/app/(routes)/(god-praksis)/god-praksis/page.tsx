@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import {
   BodyLong,
@@ -23,7 +24,6 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
-import { NextLink } from "@/app/_ui/next-link/NextLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: seo } = await sanityFetch({
@@ -94,7 +94,7 @@ export default async function Page() {
                           <LinkCardTitle as="h3">
                             <LinkCardAnchor asChild>
                               <NextLink href={article.slug ?? ""}>
-                                {article.heading ?? "-"}
+                                {article.heading}
                               </NextLink>
                             </LinkCardAnchor>
                           </LinkCardTitle>
