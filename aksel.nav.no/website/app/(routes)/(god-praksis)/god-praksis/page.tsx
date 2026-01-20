@@ -86,6 +86,7 @@ export default async function Page() {
                     (ut) => ut?.temaTitle === tema.title,
                   )?.title;
                   const innholdstype = article.innholdstype;
+                  console.info(article);
 
                   return (
                     <li key={article.slug}>
@@ -94,7 +95,7 @@ export default async function Page() {
                           <LinkCardTitle as="h3">
                             <LinkCardAnchor asChild>
                               <NextLink href={article.slug ?? ""}>
-                                {article.heading}
+                                {article.heading ?? "-"}
                               </NextLink>
                             </LinkCardAnchor>
                           </LinkCardTitle>
