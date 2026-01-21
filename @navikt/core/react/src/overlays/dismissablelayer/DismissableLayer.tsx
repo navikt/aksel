@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { Slot } from "../../utils/components/slot/Slot";
 import { composeEventHandlers, ownerDocument } from "../../utils/helpers";
-import { useMergeRefs } from "../../utils/hooks";
+import { useMergeRefs, useTimeout } from "../../utils/hooks";
 import type { AsChild } from "../../utils/types/AsChild";
 import {
   CustomFocusEvent,
@@ -119,6 +119,8 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
     const context = useContext(DismissableLayerContext);
 
     const triggerPointerDownRef = useRef<boolean>(false);
+    const dismissedWithPointerRef = useRef<boolean>(false);
+    const timeout = useTimeout();
 
     const [, forceRerender] = useState({});
     const [node, setNode] = React.useState<DismissableLayerElement | null>(
@@ -183,6 +185,15 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         if (!shouldEnablePointerEvents) {
           return;
         }
+        dismissedWithPointerRef.current = true;
+
+        /**
+         * We reset dismissedWithPointerRef on the next tick.
+         * This allows pointerDown to run its effect, without re-running them here right after.
+         */
+        timeout.start(0, () => {
+          dismissedWithPointerRef.current = false;
+        });
 
         /**
          * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
@@ -234,6 +245,9 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
 
     const focusOutside = useFocusOutside(
       (event) => {
+        if (dismissedWithPointerRef.current) {
+          return;
+        }
         /**
          * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
          */
