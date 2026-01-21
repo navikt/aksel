@@ -57,7 +57,7 @@ const ShowMoreButton = ({
       onClick: toggleExpansion,
       icon: <ChevronIcon aria-hidden />,
       ...restProps,
-    } as Record<string, unknown>,
+    },
     buttonText,
   );
   return React.isValidElement(childClone) ? childClone : null;
