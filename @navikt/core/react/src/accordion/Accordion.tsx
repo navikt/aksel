@@ -98,20 +98,18 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       if (process.env.NODE_ENV === "production" || !localRef.current) {
         return;
       }
-
       if (
         localRef.current.nextElementSibling?.classList.contains(
           "aksel-accordion",
         )
       ) {
         consoleWarning(
-          "accordion",
           "Do not put multiple accordions directly after each other. Use one <Accordion> with multiple <Accordion.Item> instead.",
           localRef.current,
         );
-      } else if (localRef.current.children.length === 1) {
+      }
+      if (localRef.current.children.length === 1) {
         consoleWarning(
-          "accordion",
           "Accordions should have more than one item. Consider using ExpansionPanel instead.",
           localRef.current,
         );
