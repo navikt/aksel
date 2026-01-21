@@ -1,12 +1,13 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useEffect, useRef, useState } from "react";
-import { PencilIcon, StarIcon } from "@navikt/aksel-icons";
+import { LeaveIcon, PencilIcon, StarIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { HStack, VStack } from "../../layout/stack";
+import { InternalHeader } from "../../internal-header";
+import { HStack, Spacer, VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
 import { Theme } from "../../theme";
 import { Tooltip } from "../../tooltip";
-import { BodyShort } from "../../typography";
+import { BodyShort, Detail } from "../../typography";
 import { ActionMenu } from "./ActionMenu";
 
 export default {
@@ -676,4 +677,39 @@ export const ColorRole = {
   parameters: {
     chromatic: { disable: false },
   },
+};
+
+export const HeaderWithUserInfo = () => {
+  return (
+    <div style={{ minHeight: "8rem" }}>
+      <InternalHeader>
+        <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
+        <Spacer />
+        <ActionMenu>
+          <ActionMenu.Trigger>
+            <InternalHeader.UserButton
+              name="Ola N."
+              description="Enhet: Skien"
+            />
+          </ActionMenu.Trigger>
+          <ActionMenu.Content align="end" aria-labelledby="user-info">
+            <dl id="user-info">
+              <BodyShort as="dt" size="small">
+                Ola Normann
+              </BodyShort>
+              <Detail as="dd">D123456</Detail>
+            </dl>
+            <ActionMenu.Divider />
+            <ActionMenu.Group aria-label="Systemhandlinger">
+              <ActionMenu.Item as="a" href="#">
+                Logg ut
+                <Spacer />
+                <LeaveIcon aria-hidden />
+              </ActionMenu.Item>
+            </ActionMenu.Group>
+          </ActionMenu.Content>
+        </ActionMenu>
+      </InternalHeader>
+    </div>
+  );
 };
