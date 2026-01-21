@@ -4,7 +4,7 @@ import { userEvent, within } from "storybook/test";
 import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { CopyButton } from ".";
 import { Tooltip } from "../tooltip";
-import { renderStoriesForChromatic } from "../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
 const meta: Meta<typeof CopyButton> = {
   title: "ds-react/CopyButton",

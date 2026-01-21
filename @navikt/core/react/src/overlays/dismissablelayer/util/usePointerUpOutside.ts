@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useEventCallback } from "../../../util/hooks/useEventCallback";
+import { useEventCallback } from "../../../utils/hooks";
 import {
   CUSTOM_EVENTS,
   CustomPointerEvent,
@@ -31,17 +31,14 @@ export function usePointerUpOutside(
        * The `DismisableLayer`-API is based on the ability to stop events from propagating and in the end calling `onDismiss`
        * if `usePointerUpOutside`-callback does not run `event.preventDefault()`.
        *
-       * Although `pointerup` is already a cancelable event, we still dispatch a custom event (discrete)
+       * Although `pointerup` is already a cancelable event, we still dispatch a custom event
        * to keep parity with focus outside handling and ensure ordering.
-       *
-       * Since pointer events are `discrete` in React we rely on the same custom dispatch strategy.
        */
       if (event.target && !isPointerInsideReactTreeRef.current) {
         dispatchCustomEvent(
           CUSTOM_EVENTS.POINTER_UP_OUTSIDE,
           handlePointerUpOutside,
           { originalEvent: event },
-          { discrete: true },
         );
       }
       /* Reset for next interaction. */

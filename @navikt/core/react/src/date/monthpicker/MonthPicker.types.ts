@@ -1,4 +1,4 @@
-import { ComponentTranslation } from "../../util/i18n/i18n.types";
+import { ComponentTranslation } from "../../utils/i18n/i18n.types";
 import { Matcher } from "../Date.typeutils";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {

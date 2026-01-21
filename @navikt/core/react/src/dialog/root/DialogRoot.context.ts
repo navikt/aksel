@@ -1,5 +1,5 @@
-import { createStrictContext } from "../../util/create-strict-context";
-import type { TransitionStatus } from "../../util/hooks/useTransitionStatus";
+import { createStrictContext } from "../../utils/helpers";
+import type { TransitionStatus } from "../../utils/hooks";
 
 interface DialogContextProps {
   /**

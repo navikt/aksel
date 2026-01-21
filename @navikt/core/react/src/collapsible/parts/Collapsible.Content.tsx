@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../slot/Slot";
+import { Slot } from "../../utils/components/slot/Slot";
 import { useCollapsibleContext } from "../Collapsible.context";
 
 export interface CollapsibleContentProps

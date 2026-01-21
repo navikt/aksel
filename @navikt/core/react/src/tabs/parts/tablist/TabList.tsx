@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { forwardRef, useRef } from "react";
-import { cl } from "../../../util/className";
-import { composeEventHandlers } from "../../../util/composeEventHandlers";
-import { useMergeRefs } from "../../../util/hooks/useMergeRefs";
+import { cl, composeEventHandlers } from "../../../utils/helpers";
+import { useMergeRefs } from "../../../utils/hooks";
 import ScrollButton from "./ScrollButtons";
 import { useScrollButtons } from "./useScrollButtons";
 import { useTabList } from "./useTabList";

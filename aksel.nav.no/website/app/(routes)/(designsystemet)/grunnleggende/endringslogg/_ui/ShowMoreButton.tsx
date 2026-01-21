@@ -12,7 +12,7 @@ interface ShowMoreButtonProps {
    * A button to use with ShowMore
    * @default '<Button />'
    */
-  children: ReactElement;
+  children: ReactElement<React.ComponentProps<typeof Button>>;
   /**
    * Text to show when content is collapsed.
    * @default "Vis mer"

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BodyShort } from "../../typography";
-import { cl } from "../../util/className";
-import debounce from "../../util/debounce";
-import { useI18n } from "../../util/i18n/i18n.hooks";
+import { debounce } from "../../utils-external";
+import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 import type { TextareaProps } from "./Textarea";
 
 interface Props {

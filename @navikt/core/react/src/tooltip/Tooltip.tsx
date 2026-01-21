@@ -14,12 +14,11 @@ import {
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
-import { Slot } from "../slot/Slot";
 import { Detail } from "../typography";
-import { cl } from "../util/className";
-import { useId } from "../util/hooks";
-import { useControllableState } from "../util/hooks/useControllableState";
-import { useMergeRefs } from "../util/hooks/useMergeRefs";
+import { useId } from "../utils-external";
+import { Slot } from "../utils/components/slot/Slot";
+import { cl } from "../utils/helpers";
+import { useControllableState, useMergeRefs } from "../utils/hooks";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**

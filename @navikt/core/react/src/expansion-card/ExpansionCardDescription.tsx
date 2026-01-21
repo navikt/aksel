@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import { BodyLong } from "../typography";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 import { ExpansionCardContext } from "./context";
 
 export interface ExpansionCardDescriptionProps

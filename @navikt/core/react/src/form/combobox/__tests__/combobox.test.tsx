@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { describe, expect, test, vi } from "vitest";
-import { useId } from "../../../util";
-import nb from "../../../util/i18n/locales/nb";
+import { useId } from "../../../utils-external";
+import nb from "../../../utils/i18n/locales/nb";
 import { ComboboxProps, UNSAFE_Combobox } from "../index";
 
 const options = [

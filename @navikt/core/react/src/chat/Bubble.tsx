@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Detail, Heading, HeadingProps } from "../typography";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 
 export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**

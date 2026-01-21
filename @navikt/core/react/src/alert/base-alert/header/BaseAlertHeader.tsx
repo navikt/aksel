@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../../typography";
-import { cl } from "../../../util/className";
-import { useI18n } from "../../../util/i18n/i18n.hooks";
+import { cl } from "../../../utils/helpers";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useBaseAlert } from "../root/BaseAlertRoot.context";
 import { BaseAlertStatusIcon } from "../root/BaseAlertRoot.utils";
 

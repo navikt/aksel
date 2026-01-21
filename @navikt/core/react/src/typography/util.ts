@@ -1,4 +1,4 @@
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 import { TypoProps } from "./types";
 
 export const typoClassNames = (props: TypoProps & { uppercase?: boolean }) => {
