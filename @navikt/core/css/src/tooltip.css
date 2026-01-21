@@ -28,9 +28,7 @@
   transform: rotate(45deg);
 
   @media (forced-colors: active) {
-    & {
-      display: none;
-    }
+    display: none;
   }
 }
 
@@ -119,8 +117,6 @@
   background: var(--ax-bg-neutral-moderate);
 
   @media (forced-colors: active) {
-    & {
-      outline: 1px solid;
-    }
+    outline: 1px solid;
   }
 }
