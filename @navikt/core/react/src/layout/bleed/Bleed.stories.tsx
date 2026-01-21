@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react-vite";
 import React from "react";
 import { BodyLong } from "../../typography";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import { Box } from "../box";
 import { HStack, VStack } from "../stack";
 import { Bleed } from "./Bleed";

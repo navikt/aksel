@@ -91,6 +91,8 @@
     "@types/jscodeshift": "^0.11.11",
     "@types/jsdom": "^27.0.0",
     "@types/lodash": "4.17.20",
+    "@types/react": "19.2.8",
+    "@types/react-dom": "19.2.3",
     "@types/showdown": "^2.0.6",
     "@types/umami": "^2.10.0",
     "autoprefixer": "^10.4.20",
@@ -109,6 +111,6 @@
     "showdown": "^2.1.0",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
-    "vitest": "^3.2.4"
+    "vitest": "4.0.17"
   }
 }

@@ -3,8 +3,8 @@ import { Preview } from "@storybook/react-vite";
 import React, { useEffect } from "react";
 import "../@navikt/core/css/src/index.css";
 import { Provider } from "../@navikt/core/react/src/provider";
-import { Translations } from "../@navikt/core/react/src/util/i18n/i18n.types";
-import { en, nb, nn } from "../@navikt/core/react/src/util/i18n/locales";
+import { Translations } from "../@navikt/core/react/src/utils/i18n/i18n.types";
+import { en, nb, nn } from "../@navikt/core/react/src/utils/i18n/locales";
 import "./layout.css";
 
 type Language = "nb" | "nn" | "en";

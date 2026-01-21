@@ -5,7 +5,7 @@ import type { AkselColorRole } from "@navikt/ds-tokens/types";
 import { Button } from "../../button";
 import { Spacer, VStack } from "../../layout/stack";
 import { Link } from "../../link";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import {
   InfoCard,
   InfoCardContent,

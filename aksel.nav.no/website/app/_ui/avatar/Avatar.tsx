@@ -1,7 +1,7 @@
 import { stegaClean } from "next-sanity";
 import Image from "next/image";
 import { Children, ReactNode, isValidElement } from "react";
-import { BodyShort, BoxNew, Detail, HStack, VStack } from "@navikt/ds-react";
+import { BodyShort, Box, Detail, HStack, VStack } from "@navikt/ds-react";
 import styles from "./Avatar.module.css";
 
 const MAX_AVATAR_COUNT = 30;
@@ -62,7 +62,7 @@ export const Avatar = ({
       />
       {showName && (
         <VStack align="start">
-          <BoxNew
+          <Box
             asChild
             marginBlock="space-1 space-0"
             marginInline="space-2 space-0"
@@ -70,8 +70,8 @@ export const Avatar = ({
             <Detail as="span" textColor="subtle">
               {type}
             </Detail>
-          </BoxNew>
-          <BoxNew
+          </Box>
+          <Box
             asChild
             marginBlock="space-1 space-0"
             marginInline="space-2 space-0"
@@ -80,7 +80,7 @@ export const Avatar = ({
               as="span"
               className={styles.avatarName}
             >{`${name}`}</BodyShort>
-          </BoxNew>
+          </Box>
         </VStack>
       )}
     </HStack>
@@ -132,14 +132,14 @@ export const AvatarStack = ({
 
       {showNames && (
         <VStack>
-          <BoxNew
+          <Box
             asChild
             marginBlock="space-1 space-0"
             marginInline="space-2 space-0"
           >
             <Detail textColor="subtle">{firstAvatar.props.type}</Detail>
-          </BoxNew>
-          <BoxNew
+          </Box>
+          <Box
             asChild
             marginBlock="space-1 space-0"
             marginInline="space-2 space-0"
@@ -150,7 +150,7 @@ export const AvatarStack = ({
                 <span className={styles.avatarNameSuffix}>{suffix}</span>
               )}
             </BodyShort>
-          </BoxNew>
+          </Box>
         </VStack>
       )}
     </HStack>

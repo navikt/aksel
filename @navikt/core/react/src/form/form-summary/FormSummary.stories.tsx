@@ -1,7 +1,8 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryFn } from "@storybook/react-vite";
 import React from "react";
 import { VStack } from "../../layout/stack";
 import { Link } from "../../link";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import FormSummary from "./FormSummary";
 
 const meta: Meta<typeof FormSummary> = {
@@ -396,57 +397,31 @@ export const ColorRole: StoryFn<typeof FormSummary> = () => (
   </FormSummary>
 );
 
-export const Chromatic: StoryObj<typeof FormSummary> = {
-  render: () => (
-    <div>
-      <div>
-        <h2>Default</h2>
-        <Default>{null}</Default>
-      </div>
-      <div>
-        <h2>Long Texts</h2>
-        <LongTexts>{null}</LongTexts>
-      </div>
-      <div>
-        <h2>No Link</h2>
-        <NoLink>{null}</NoLink>
-      </div>
-      <div>
-        <h2>Realistic Usage</h2>
-        <RealisticUsage>{null}</RealisticUsage>
-      </div>
-      <div>
-        <h2>Empty</h2>
-        <Empty>{null}</Empty>
-      </div>
-      <div>
-        <h2>Comma Separated</h2>
-        <CommaSeparated>{null}</CommaSeparated>
-      </div>
-      <div>
-        <h2>ColorRole</h2>
-        <ColorRole>{null}</ColorRole>
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: {
-      disable: false,
-      modes: {
-        default: {
-          viewport: {
-            width: 620,
-          },
-        },
-        sm: {
-          viewport: {
-            width: 479,
-          },
-        },
-      },
-    },
-  },
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  LongTexts,
+  NoLink,
+  RealisticUsage,
+  Empty,
+  CommaSeparated,
+  ColorRole,
+});
+
+Chromatic.parameters = {
+  chromatic: { disable: false, viewports: [479, 620] },
 };
+
+export const ChromaticDark = renderStoriesForChromatic({
+  Default,
+  LongTexts,
+  NoLink,
+  RealisticUsage,
+  Empty,
+  CommaSeparated,
+  ColorRole,
+});
+
+ChromaticDark.globals = { theme: "dark" };
 
 export const _DevWarning_MisuseInHeaderExample: StoryFn<
   typeof FormSummary

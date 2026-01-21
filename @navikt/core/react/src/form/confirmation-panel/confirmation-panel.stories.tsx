@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { Link } from "../../link";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import { ConfirmationPanel } from "./index";
 
 export default {

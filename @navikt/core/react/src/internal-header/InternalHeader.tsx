@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Theme } from "../theme/Theme";
-import { cl } from "../util/className";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../utils-external";
+import { cl } from "../utils/helpers";
 import InternalHeaderButton, {
   InternalHeaderButtonProps,
 } from "./InternalHeaderButton";

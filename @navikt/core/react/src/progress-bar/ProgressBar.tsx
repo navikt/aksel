@@ -1,9 +1,8 @@
 import React, { HTMLAttributes, forwardRef, useEffect } from "react";
 import type { AkselColor } from "../types";
-import { cl } from "../util/className";
-import { useTimeout } from "../util/hooks/useTimeout";
-import { useValueAsRef } from "../util/hooks/useValueAsRef";
-import { useI18n } from "../util/i18n/i18n.hooks";
+import { cl } from "../utils/helpers";
+import { useTimeout, useValueAsRef } from "../utils/hooks";
+import { useI18n } from "../utils/i18n/i18n.hooks";
 
 interface ProgressBarPropsBase
   extends Omit<HTMLAttributes<HTMLDivElement>, "role"> {

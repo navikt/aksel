@@ -11,10 +11,9 @@ import {
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
-import { omit } from "../util";
-import { cl } from "../util/className";
-import { useClientLayoutEffect } from "../util/hooks";
-import { useMergeRefs } from "../util/hooks/useMergeRefs";
+import { omit, useClientLayoutEffect } from "../utils-external";
+import { cl } from "../utils/helpers";
+import { useMergeRefs } from "../utils/hooks";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {

@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useEventCallback } from "../../../util/hooks/useEventCallback";
-import { useTimeout } from "../../../util/hooks/useTimeout";
+import { useEventCallback, useTimeout } from "../../../utils/hooks";
 import {
   CUSTOM_EVENTS,
   CustomPointerEvent,
@@ -36,16 +35,12 @@ export function usePointerDownOutside(
        * Altrough `pointerdown` is already a cancelable event,
        * to to make sure the batching of events works corretly with `focusIn` in `useFocusOutside`,
        * we still use a custom event like in `useFocusOutside`.
-       *
-       * Since pointer-events are `discrete` events in React: https://github.com/facebook/react/blob/a8a4742f1c54493df00da648a3f9d26e3db9c8b5/packages/react-dom/src/events/ReactDOMEventListener.js#L318
-       * we need to to use flushSync to ensure that the event is dispatched before the next event is raised.
        */
       function dispatchPointerEvent() {
         dispatchCustomEvent(
           CUSTOM_EVENTS.POINTER_DOWN_OUTSIDE,
           handlePointerDownOutside,
           { originalEvent: event },
-          { discrete: true },
         );
       }
 

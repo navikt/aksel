@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import { createStrictContext } from "../../../util/create-strict-context";
-import { useClientLayoutEffect } from "../../../util/hooks";
+import { useClientLayoutEffect } from "../../../utils-external";
+import { createStrictContext } from "../../../utils/helpers";
 import { FormFieldType, useFormField } from "../../useFormField";
 import { ComboboxProps } from "../types";
 

@@ -1,8 +1,8 @@
 import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
-import VStack from "../../layout/stack/VStack";
 import { Provider } from "../../provider";
-import en from "../../util/i18n/locales/en";
+import en from "../../utils/i18n/locales/en";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import FormProgress, { FormProgressProps } from "./FormProgress";
 
 export default {
@@ -37,6 +37,7 @@ export const Default: StoryFn<ControllableProps> = (props) => (
     <p>Noe innhold som dyttes ned</p>
   </div>
 );
+
 Default.args = { activeStep: 2, totalSteps: 7, interactiveSteps: true };
 
 export const ProvidedTranslations: StoryFn = () => {
@@ -171,17 +172,27 @@ export const ColorRole: StoryFn = () => (
   </div>
 );
 
-export const Chromatic: StoryFn = () => (
-  <VStack gap="space-40">
-    <div>
-      <Default activeStep={1} totalSteps={7} />
-    </div>
-    <div>
-      <Controlled />
-    </div>
-    <div>
-      <ColorRole />
-    </div>
-  </VStack>
+const ClosedView = () => (
+  <FormProgress totalSteps={7} activeStep={2}>
+    <FormProgress.Step href="#" completed>
+      Start søknad
+    </FormProgress.Step>
+    <FormProgress.Step href="#">Personopplysninger</FormProgress.Step>
+    <FormProgress.Step interactive={false}>Saksopplysninger</FormProgress.Step>
+    <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
+  </FormProgress>
 );
-Chromatic.parameters = { chromatic: { disable: false } };
+
+export const Chromatic = renderStoriesForChromatic({
+  ClosedView,
+  Controlled,
+  ColorRole,
+});
+
+export const ChromaticDark = renderStoriesForChromatic({
+  ClosedView,
+  Controlled,
+  ColorRole,
+});
+
+ChromaticDark.globals = { theme: "dark" };

@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useThemeInternal } from "../theme/Theme";
-import { cl } from "../util/className";
+import { cl } from "../utils/helpers";
 import { GudiepanelIllustration } from "./Illustration";
 
 export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {

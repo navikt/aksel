@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Link } from "../../link";
-import { renderStoriesForChromatic } from "../../util/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import {
   GlobalAlert,
   GlobalAlertCloseButton,

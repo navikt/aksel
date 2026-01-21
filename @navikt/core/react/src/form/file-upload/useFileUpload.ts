@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useMergeRefs } from "../../util/hooks";
+import { useMergeRefs } from "../../utils/hooks";
 import { FileUploadBaseProps } from "./FileUpload.types";
 import { validateFiles } from "./utils/validate-files";
 
