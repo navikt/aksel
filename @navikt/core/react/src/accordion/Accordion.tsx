@@ -1,8 +1,10 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import type { AkselColor } from "../types";
 import { omit } from "../utils-external";
 import { cl } from "../utils/helpers";
+import { consoleWarning } from "../utils/helpers/consoleWarning";
+import { useMergeRefs } from "../utils/hooks";
 import AccordionContent, { AccordionContentProps } from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
 import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
@@ -89,6 +91,31 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     { className, variant = "default", size = "medium", indent = true, ...rest },
     ref,
   ) => {
+    const localRef = useRef<HTMLDivElement | null>(null);
+    const mergedRef = useMergeRefs(localRef, ref);
+
+    useEffect(() => {
+      if (process.env.NODE_ENV === "production" || !localRef.current) {
+        return;
+      }
+      if (
+        localRef.current.nextElementSibling?.classList.contains(
+          "aksel-accordion",
+        )
+      ) {
+        consoleWarning(
+          "Do not put multiple accordions directly after each other. Use one <Accordion> with multiple <Accordion.Item> instead.",
+          localRef.current,
+        );
+      }
+      if (localRef.current.children.length === 1) {
+        consoleWarning(
+          "Accordions should have more than one item. Consider using ExpansionPanel instead.",
+          localRef.current,
+        );
+      }
+    }, []);
+
     return (
       <AccordionContext.Provider
         value={{
@@ -105,7 +132,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
             `aksel-accordion--${size}`,
             { "aksel-accordion--indent": indent },
           )}
-          ref={ref}
+          ref={mergedRef}
         />
       </AccordionContext.Provider>
     );

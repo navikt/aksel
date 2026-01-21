@@ -9898,7 +9898,7 @@ __metadata:
     react-dom: "npm:19.2.3"
     typescript: "npm:5.9.3"
     vite: "npm:^7.2.4"
-    vite-plugin-singlefile: "npm:^2.2.0"
+    vite-plugin-singlefile: "npm:^2.3.0"
     vite-plugin-svgr: "npm:^4.2.0"
   languageName: unknown
   linkType: soft
@@ -9959,7 +9959,7 @@ __metadata:
     storybook: "npm:^10.1.11"
     storybook-addon-pseudo-states: "npm:^10.1.11"
     stylelint: "npm:^16.24.0"
-    stylelint-config-standard: "npm:^37.0.0"
+    stylelint-config-standard: "npm:^39.0.1"
     stylelint-declaration-block-no-ignored-properties: "npm:^2.8.0"
     stylelint-value-no-unknown-custom-properties: "npm:^6.0.1"
     tsx: "npm:^4.20.6"
@@ -24056,23 +24056,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-recommended@npm:^15.0.0":
-  version: 15.0.0
-  resolution: "stylelint-config-recommended@npm:15.0.0"
+"stylelint-config-recommended@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "stylelint-config-recommended@npm:17.0.0"
   peerDependencies:
-    stylelint: ^16.13.0
-  checksum: 10/11f35fb433c9ea1cb68d3140c116bbd20fafafc01d6a90d8dafb9820d7697df51c3e28ff5d5c98a576282179168d11b65b50cbbbc6d20fa35f5ef9dff6e2c8e1
+    stylelint: ^16.23.0
+  checksum: 10/8164ed0b2cfc7eed58a0239a9689c37f088cedbc0049eea45f855d471ea2e32bf35d6aa60a6115e39d2b863f599f70f81e5bb7f5d84c60a94de186351790a610
   languageName: node
   linkType: hard
 
-"stylelint-config-standard@npm:^37.0.0":
-  version: 37.0.0
-  resolution: "stylelint-config-standard@npm:37.0.0"
+"stylelint-config-standard@npm:^39.0.1":
+  version: 39.0.1
+  resolution: "stylelint-config-standard@npm:39.0.1"
   dependencies:
-    stylelint-config-recommended: "npm:^15.0.0"
+    stylelint-config-recommended: "npm:^17.0.0"
   peerDependencies:
-    stylelint: ^16.13.0
-  checksum: 10/2fe112448a82a59d39d66f7365a55af4092dc9fef9c31503156c8f281c7e62bd1413029b816d0e516df84316018ea69eee84d0b300f6e6e5f4c2cd083717e6c9
+    stylelint: ^16.23.0
+  checksum: 10/b295339fee3f973630d1a1bbc106888304ed085972221199225c34816b6a708aad15d5dbb65b736fb0462fe4d65fd6ee8a92a8f0ce381fd59bf176aab7c9e8e7
   languageName: node
   linkType: hard
 
@@ -25663,15 +25663,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-singlefile@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "vite-plugin-singlefile@npm:2.2.0"
+"vite-plugin-singlefile@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "vite-plugin-singlefile@npm:2.3.0"
   dependencies:
     micromatch: "npm:^4.0.8"
   peerDependencies:
-    rollup: ^4.35.0
-    vite: ^5.4.11 || ^6.0.0
-  checksum: 10/c73b6831d30fe00a6ac441218cc74bb6d94bf48e323c980ed8316b69fdd4c51b44a8c0ed72b3dd34a41ace1b082091504359145938732bca6a20b9c241f1b480
+    rollup: ^4.44.1
+    vite: ^5.4.11 || ^6.0.0 || ^7.0.0
+  checksum: 10/3d8fea78339792e5b5717568b611308a500fbeaa47d2b4f244a21870fd38cde14efae8d92ee14e278860e32a7af6bc90133acb0ac044618b6de823c3405638c6
   languageName: node
   linkType: hard
 
