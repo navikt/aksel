@@ -286,7 +286,6 @@ const MenuContentInternal = forwardRef<
     const descendants = useMenuDescendantsContext();
 
     const context = useMenuContext();
-    // const rootContext = useMenuRootContext();
 
     const contentRef = useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(
@@ -317,11 +316,7 @@ const MenuContentInternal = forwardRef<
             asChild
             descendants={descendants}
             onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
-              // only focus first item when using keyboard
               event.preventDefault();
-              /*if (!rootContext.isUsingKeyboardRef.current) {
-                event.preventDefault();
-              }*/
             })}
           >
             <Floating.Content
