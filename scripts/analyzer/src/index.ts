@@ -1,4 +1,4 @@
-import { CSSAnalyzer } from "./Analyzer.js";
+import { CSSAnalyzer, ReactAnalyzer } from "./Analyzer.js";
 
 console.info("\n\nAnalyzing packages...\n");
 
@@ -15,5 +15,5 @@ if (cssDiff > 0) {
   console.info("No change in CSS index size");
 }
 
-/* const reactLocal = new ReactAnalyzer("temp/local/*react-*.tgz");
-const reactRemote = new ReactAnalyzer("temp/remote/*react-*.tgz"); */
+export const reactLocal = new ReactAnalyzer("temp/local/*react-*.tgz");
+export const reactRemote = new ReactAnalyzer("temp/remote/*react-*.tgz");

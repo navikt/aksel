@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
+    "flat": "6.0.1",
     "pkg-types": "^2.3.0",
     "rimraf": "6.0.1",
     "tar": "^7.5.3"

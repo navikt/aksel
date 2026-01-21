@@ -1,4 +1,5 @@
 import fastGlob from "fast-glob";
+import { flatten } from "flat";
 import { readFileSync, renameSync } from "node:fs";
 import { dirname } from "node:path";
 import { extract } from "tar";
@@ -104,9 +105,52 @@ class CSSAnalyzer extends Analyzer {
 }
 
 class ReactAnalyzer extends Analyzer {
+  exportPaths: ReactExportPaths = {};
+
   constructor(tarballGlob: string) {
     super(tarballGlob);
+    this.resolveExportPaths();
+  }
+
+  private resolveExportPaths() {
+    const exportsField = this.getPackageExports();
+
+    const flattenedExports: Record<string, string> = flatten(exportsField);
+    for (const [key, value] of Object.entries(flattenedExports)) {
+      if (key.includes(".require.")) {
+        continue;
+      }
+
+      const name = extractNameFromFlatObjectKey(key);
+      if (!this.exportPaths[name]) {
+        this.exportPaths[name] = {};
+      }
+
+      if (key.endsWith(".types")) {
+        this.exportPaths[name].typesFile = value;
+      } else if (key.endsWith(".default")) {
+        this.exportPaths[name].jsFile = value;
+      }
+    }
   }
 }
+
+function extractNameFromFlatObjectKey(flatName: string): string {
+  /* Assume root */
+  if (flatName.startsWith("..")) {
+    return ".";
+  }
+  const parts = flatName.split(".");
+
+  return parts[1];
+}
+
+type ReactExportPaths = Record<
+  string,
+  {
+    jsFile?: string;
+    typesFile?: string;
+  }
+>;
 
 export { Analyzer, CSSAnalyzer, ReactAnalyzer };
