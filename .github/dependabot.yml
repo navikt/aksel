@@ -35,6 +35,10 @@ updates:
       storybook:
         patterns:
           - "*storybook*"
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
 
   - package-ecosystem: github-actions
     directory: "/"
