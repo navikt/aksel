@@ -9574,7 +9574,7 @@ __metadata:
     stylelint: "npm:^16.24.0"
     stylelint-config-standard: "npm:^39.0.1"
     stylelint-declaration-block-no-ignored-properties: "npm:^2.8.0"
-    stylelint-value-no-unknown-custom-properties: "npm:^6.0.1"
+    stylelint-value-no-unknown-custom-properties: "npm:^6.1.0"
     tsx: "npm:^4.20.6"
     typescript: "npm:5.9.3"
     typescript-eslint: "npm:^8.39.0"
@@ -23813,15 +23813,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-value-no-unknown-custom-properties@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "stylelint-value-no-unknown-custom-properties@npm:6.0.1"
+"stylelint-value-no-unknown-custom-properties@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "stylelint-value-no-unknown-custom-properties@npm:6.1.0"
   dependencies:
     postcss-value-parser: "npm:^4.2.0"
     resolve: "npm:^1.22.8"
   peerDependencies:
     stylelint: ">=16"
-  checksum: 10/ceb53a731aa2159173f5fefb76f365de0171058f62791cfaa07aac47bb25d8d6ee6a6d1ea4c1919841edc7130cf9ed530a44e6952a72dbdfde27023a305e4739
+  checksum: 10/36bc702f91a7ada88a1fb20850f1d4d79952b14f907d63b5163201671f421fbf72809c87b5e19f65c46bc0cf8f136743ae7acc53304c312c90a70ed5abfddca6
   languageName: node
   linkType: hard
 
