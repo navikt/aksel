@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Internals: Refactor utility structure.
+Internal: Refactor utility structure.

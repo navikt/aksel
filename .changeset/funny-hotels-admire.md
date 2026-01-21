@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Slot: Fix RSC related issue
+Fix RSC related issue when using asChild.
