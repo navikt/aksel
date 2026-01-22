@@ -47,7 +47,7 @@
     "fuse.js": "^7.0.0",
     "isomorphic-dompurify": "2.26.0",
     "jscodeshift": "0.15.2",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "lz-string": "^1.5.0",
     "next": "16.1.2",
     "next-logger": "^5.0.2",
