@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import {
   FaceFrownIcon,
@@ -16,6 +15,7 @@ import {
   LinkCardIcon,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 
 function AnimatedFaceCard() {
   const [state, setState] = useState<number>(3);
@@ -79,7 +79,7 @@ function AnimatedFaceCard() {
       </BoxNew>
       <LinkCardTitle data-color="neutral">
         <LinkCardAnchor asChild>
-          <Link href="/komponenter/ikoner">Ikoner</Link>
+          <NextLink href="/komponenter/ikoner">Ikoner</NextLink>
         </LinkCardAnchor>
       </LinkCardTitle>
       <LinkCardDescription>900+ linje- og fylte ikoner</LinkCardDescription>

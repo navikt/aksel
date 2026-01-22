@@ -22,6 +22,16 @@ const alert = `_type == "alert" =>{
   }
 }`;
 
+/**
+ * The table-plugin from sanity ignores `name` and uses `_type` instead.
+ * Unsure if this is a type-bug, or the actual `_type` is overridden to "table".
+ * For safety, we match `_type` here so that future use of table-module won't break this.
+ */
+const table = `_type == "table" =>{
+  ...,
+  "_type": "tabell_v2"
+}`;
+
 const attachment = `_type == "attachment" =>{
   ...,
   "downloadLink": asset->url,
@@ -153,6 +163,7 @@ ${installSeksjon},
 ${accordionBlock},
 ${expansionCardBlock},
 ${defaultBlock},
+${table},
 `;
 
 export const writersAll = `"writers": array::compact(writers[]->{title, description, avatar_id, type})`;

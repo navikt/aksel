@@ -11,7 +11,7 @@ const ignoredStaticPaths = [
   "/produktbloggen",
 ];
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   /*
    * "Open in studio" links defaults to published perspective, but unpublished drafts have no
    * published content, leading to 404-erros in presentation-mode. By stripping the query,

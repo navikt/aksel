@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { Detail, HStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import { DS_PROMO_QUERY } from "@/app/_sanity/queries";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import styles from "./PromoTag.module.css";
 
 type PromoTagProps = {
@@ -23,7 +23,7 @@ async function PromoTag({ animated = false }: PromoTagProps) {
   }
 
   return (
-    <Link
+    <NextLink
       className={styles.promoTag}
       href={promoData.link}
       data-color="aksel-brand-pink"
@@ -39,7 +39,7 @@ async function PromoTag({ animated = false }: PromoTagProps) {
           <AnimatedArrowRight />
         </HStack>
       </Detail>
-    </Link>
+    </NextLink>
   );
 }
 

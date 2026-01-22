@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.1.0
+
+### Patch Changes
+
+- Clean up some deprecated/invalid CSS ([#4540](https://github.com/navikt/aksel/pull/4540))
+
 ## 8.0.1
 
 ### Patch Changes

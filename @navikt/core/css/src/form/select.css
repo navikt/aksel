@@ -25,11 +25,9 @@
   }
 
   @media (forced-colors: active) {
-    & {
-      background-color: ButtonFace;
-      border-color: ButtonText;
-      color: ButtonText;
-    }
+    background-color: ButtonFace;
+    border-color: ButtonText;
+    color: ButtonText;
   }
 }
 
@@ -50,9 +48,7 @@
   color: var(--ax-text-neutral);
 
   @media (forced-colors: active) {
-    & {
-      color: ButtonText;
-    }
+    color: ButtonText;
   }
 }
 

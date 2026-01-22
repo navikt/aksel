@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 function Header() {
   return <div id="decorator-header" />;

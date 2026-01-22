@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { Suspense } from "react";
 import { BodyShort, Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
 import { GlobalSearchButton } from "@/app/_ui/global-search/GlobalSearch.button";
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { ThemeButton } from "@/app/_ui/theming/Theme.button";
 import AkselLogo from "@/assets/Logo";
 import { cl } from "@/ui-utils/className";
@@ -29,7 +29,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
         Hopp til innhold
       </a>
       <div className={styles.headerContainer}>
-        <Link href="/" passHref className={styles.headerLogoLink}>
+        <NextLink href="/" passHref className={styles.headerLogoLink}>
           <Show above="sm">
             <AkselLogo className={styles.headerLogo} />
           </Show>
@@ -55,7 +55,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
           <BodyShort visuallyHidden as="span">
             Aksel
           </BodyShort>
-        </Link>
+        </NextLink>
 
         <Spacer />
         <Show above="lg" asChild>

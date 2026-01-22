@@ -1,11 +1,11 @@
 "use client";
 
 import { stegaClean } from "next-sanity";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SquareGridFillIcon, SquareGridIcon } from "@navikt/aksel-icons";
 import { BodyShort, HStack, Tag } from "@navikt/ds-react";
 import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { SidebarPageT } from "@/types";
@@ -45,7 +45,7 @@ function DesignsystemSidebarItem(props: {
       data-nested={isIndented ? "true" : undefined}
       className={styles.navListItem}
     >
-      <Link
+      <NextLink
         href={`/${page.slug}`}
         onNavigate={() => toggleOpen(false)}
         className={`${styles.navListItemLink} ${styles.navListNotch}`}
@@ -72,7 +72,7 @@ function DesignsystemSidebarItem(props: {
             {statusTag.text}
           </Tag>
         )}
-      </Link>
+      </NextLink>
     </BodyShort>
   );
 }

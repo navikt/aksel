@@ -220,6 +220,39 @@ export const A11yTest: Story = {
   },
 };
 
+export const Centered: Story = {
+  render: () => {
+    return (
+      <VStack gap="space-16">
+        <GlobalAlert status="announcement">
+          <GlobalAlert.Header>
+            <GlobalAlert.Title>
+              Systemet vil være utilgjengelig natt til søndag (centered)
+            </GlobalAlert.Title>
+          </GlobalAlert.Header>
+          <GlobalAlert.Content>
+            Kunngjøringer brukes for å formidle noe om appen eller systemet,
+            eller endringer som påvirker brukerne. Eksempelvis planlagt
+            vedlikehold eller driftsmeldinger.
+          </GlobalAlert.Content>
+        </GlobalAlert>
+        <GlobalAlert status="announcement" centered={false}>
+          <GlobalAlert.Header>
+            <GlobalAlert.Title>
+              Systemet vil være utilgjengelig natt til søndag (not centered)
+            </GlobalAlert.Title>
+          </GlobalAlert.Header>
+          <GlobalAlert.Content>
+            Kunngjøringer brukes for å formidle noe om appen eller systemet,
+            eller endringer som påvirker brukerne. Eksempelvis planlagt
+            vedlikehold eller driftsmeldinger.
+          </GlobalAlert.Content>
+        </GlobalAlert>
+      </VStack>
+    );
+  },
+};
+
 export const Chromatic = renderStoriesForChromatic({
   Default,
   LeftAlignContent,
@@ -228,6 +261,7 @@ export const Chromatic = renderStoriesForChromatic({
   Compositions,
   CloseButton,
   WrappingTitle,
+  Centered,
 });
 
 export const ChromaticDark = renderStoriesForChromatic({
@@ -238,6 +272,7 @@ export const ChromaticDark = renderStoriesForChromatic({
   Compositions,
   CloseButton,
   WrappingTitle,
+  Centered,
 });
 ChromaticDark.globals = { theme: "dark" };
 

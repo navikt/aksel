@@ -1,4 +1,3 @@
-import React from "react";
 import { InlineMessage, ProgressBar, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 

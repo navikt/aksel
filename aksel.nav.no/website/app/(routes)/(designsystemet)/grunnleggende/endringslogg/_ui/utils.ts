@@ -1,7 +1,7 @@
-import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
+import { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
 
 export const bumpHeadingLevels = (
-  content: ENDRINGSLOGG_QUERYResult[number]["content"],
+  content: ENDRINGSLOGG_QUERY_RESULT[number]["content"],
 ) => {
   return content?.map((block) => {
     const clone = { ...block };

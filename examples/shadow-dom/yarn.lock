@@ -639,29 +639,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.36.0":
-  version: 7.36.0
-  resolution: "@navikt/aksel-icons@npm:7.36.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.36.0%2F5d01680f20cd3ad3c447ea53fd4f71d9e40056e1"
-  checksum: 10/85625f0b31a7c12bcd528706b753cb936a212d8703684ac09f8b11fa971a452775049db8752aa0e0a80416373c48545b2b0bac3b8493d1d227036a139a37d089
+"@navikt/aksel-icons@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "@navikt/aksel-icons@npm:8.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.0.1%2F1ccd2b7ba7e583f9dba124e3a1f9a645c01ad8ca"
+  checksum: 10/291b4cdb0f5472efc1fdc230aecbe3e5a0f14c3df43c00782d7827662375415ea0d4ae7affdd6a1e0f4c650dbf006454d177322badd89a168f22d8cdc2c5e6ca
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=shadow-dom%40workspace%3A.":
-  version: 7.36.0
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=74d344&locator=shadow-dom%40workspace%3A."
-  checksum: 10/1e1a2be06dd1e8bb92798dde863bc3703263a6d9136cadfaa55cb00809e23ef1e88e901737a883fd3107cebbebb88db53ba5b2f322ee43cc797daa6b0f54c679
+  version: 8.0.1
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=71fe84&locator=shadow-dom%40workspace%3A."
+  checksum: 10/ce3a0478a5163c55b63474044a8b18f41e7027f45190c9d6f99e091b22e5d320c569a854c083e561961f0b5d8b311ce6a14eb3f9e050470138411d397034b38c
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=shadow-dom%40workspace%3A.":
-  version: 7.36.0
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=327066&locator=shadow-dom%40workspace%3A."
+  version: 8.0.1
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=6e51da&locator=shadow-dom%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.6"
-    "@navikt/aksel-icons": "npm:^7.36.0"
-    "@navikt/ds-tokens": "npm:^7.36.0"
-    clsx: "npm:^2.1.0"
+    "@navikt/aksel-icons": "npm:^8.0.1"
+    "@navikt/ds-tokens": "npm:^8.0.1"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
   peerDependencies:
@@ -671,14 +670,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/cbe537ee992b12d2f1d7868e7f40ce2587946ae35cedc0531dabd12fe19ce829ee2f0d1121f6f1b2a745dabda1dc48e48a2c703a5d588680b7586f2367880804
+  checksum: 10/12c6a03d5409bd12cf6d68fc6795ecf656db8b008a5daf59d0cded009654b1a3c1ca13bd495c16449522c5c26c7cb8c8d80c6fb2dc3b659c7bb8c386baf7f778
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^7.36.0":
-  version: 7.36.0
-  resolution: "@navikt/ds-tokens@npm:7.36.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.36.0%2Fad3ab2a9f2179c5a4703738de33233af54336dc2"
-  checksum: 10/af67ef47d54d1deab60a541ab12c5a03b0e54399889748f39a92e3b40062249db3964c4e4edd8a599af827bac7d3eb3654b5ad80f85d996515746dfa3e758bcc
+"@navikt/ds-tokens@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "@navikt/ds-tokens@npm:8.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.0.1%2F803115e0f3a6bd7b182228442793e95312c7ceae"
+  checksum: 10/d6d899a87073e55b6e9dccc974f55fcc2d51929d518c401847b0d68c6c8171de911e87794f820e4ac1ef4508a561f82043ad3df430d091abf7a5eff77f1a6187
   languageName: node
   linkType: hard
 
@@ -1053,13 +1052,6 @@ __metadata:
   version: 3.0.0
   resolution: "chownr@npm:3.0.0"
   checksum: 10/b63cb1f73d171d140a2ed8154ee6566c8ab775d3196b0e03a2a94b5f6a0ce7777ee5685ca56849403c8d17bd457a6540672f9a60696a6137c7a409097495b82c
-  languageName: node
-  linkType: hard
-
-"clsx@npm:^2.1.0":
-  version: 2.1.1
-  resolution: "clsx@npm:2.1.1"
-  checksum: 10/cdfb57fa6c7649bbff98d9028c2f0de2f91c86f551179541cf784b1cfdc1562dcb951955f46d54d930a3879931a980e32a46b598acaea274728dbe068deca919
   languageName: node
   linkType: hard
 
@@ -1618,12 +1610,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mkdirp@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "mkdirp@npm:3.0.1"
-  bin:
-    mkdirp: dist/cjs/src/bin.js
-  checksum: 10/16fd79c28645759505914561e249b9a1f5fe3362279ad95487a4501e4467abeb714fd35b95307326b8fd03f3c7719065ef11a6f97b7285d7888306d1bd2232ba
+"minizlib@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "minizlib@npm:3.1.0"
+  dependencies:
+    minipass: "npm:^7.1.2"
+  checksum: 10/f47365cc2cb7f078cbe7e046eb52655e2e7e97f8c0a9a674f4da60d94fb0624edfcec9b5db32e8ba5a99a5f036f595680ae6fe02a262beaa73026e505cc52f99
   languageName: node
   linkType: hard
 
@@ -2056,16 +2048,15 @@ __metadata:
   linkType: hard
 
 "tar@npm:^7.4.3":
-  version: 7.4.3
-  resolution: "tar@npm:7.4.3"
+  version: 7.5.6
+  resolution: "tar@npm:7.5.6"
   dependencies:
     "@isaacs/fs-minipass": "npm:^4.0.0"
     chownr: "npm:^3.0.0"
     minipass: "npm:^7.1.2"
-    minizlib: "npm:^3.0.1"
-    mkdirp: "npm:^3.0.1"
+    minizlib: "npm:^3.1.0"
     yallist: "npm:^5.0.0"
-  checksum: 10/12a2a4fc6dee23e07cc47f1aeb3a14a1afd3f16397e1350036a8f4cdfee8dcac7ef5978337a4e7b2ac2c27a9a6d46388fc2088ea7c80cb6878c814b1425f8ecf
+  checksum: 10/cf4a84d79b9327fcf765f2ea16de4702b9b8dd7dc6b1840b16e0f999628d96b81b2c7efbf83d4eb42b0164856f1db887a5a61ffef97d36cdb77cac742219f9ee
   languageName: node
   linkType: hard
 

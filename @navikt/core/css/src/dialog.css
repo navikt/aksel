@@ -227,8 +227,8 @@
   background:
     linear-gradient(var(--ax-bg-raised) 30%, transparent) top,
     linear-gradient(transparent, var(--ax-bg-raised) 60%) bottom,
-    radial-gradient(farthest-side at 50% 0, rgba(0 0 0 / 0.3), transparent) top,
-    radial-gradient(farthest-side at 50% 100%, rgba(0 0 0 / 0.3), transparent) bottom;
+    radial-gradient(farthest-side at 50% 0, rgb(0 0 0 / 0.3), transparent) top,
+    radial-gradient(farthest-side at 50% 100%, rgb(0 0 0 / 0.3), transparent) bottom;
   background-size:
     100% 40px,
     100% 50px,
