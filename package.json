@@ -45,10 +45,8 @@
       {
         "files": "./aksel.nav.no/website/**",
         "options": {
-          "tailwindConfig": "./aksel.nav.no/website/tailwind.config.js",
           "plugins": [
-            "@trivago/prettier-plugin-sort-imports",
-            "prettier-plugin-tailwindcss"
+            "@trivago/prettier-plugin-sort-imports"
           ]
         }
       },
@@ -113,7 +111,6 @@
     "lint-staged": "16.1.5",
     "playwright": "^1.57.0",
     "prettier": "3.6.2",
-    "prettier-plugin-tailwindcss": "^0.6.14",
     "react": "19.2.3",
     "react-docgen-typescript": "2.2.2",
     "react-dom": "19.2.3",

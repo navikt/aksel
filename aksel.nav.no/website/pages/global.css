@@ -1,9 +1,7 @@
-@layer twBase, dsComponentsLegacy, dsComponents, twComponents, twUtilities;
+@layer tw-snapshot, aksel;
 
-@import "tailwindcss/base" layer(twBase);
-@import "@navikt/ds-css" layer(dsComponents);
-@import "tailwindcss/components" layer(twComponents);
-@import "tailwindcss/utilities" layer(twUtilities);
+@import "../tailwind-snapshot.css" layer(tw-snapshot);
+@import "@navikt/ds-css" layer(aksel);
 
 body {
   background-color: var(--ax-bg-default);
