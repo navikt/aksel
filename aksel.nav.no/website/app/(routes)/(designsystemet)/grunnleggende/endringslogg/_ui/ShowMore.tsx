@@ -148,7 +148,6 @@ export const ShowMore = ({
           behavior: "instant",
           block: "start",
         });
-        // eslint-disable-next-line
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setShouldScroll(false);
       }

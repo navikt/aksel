@@ -100,7 +100,6 @@ export const SearchForm = ({
   useEffect(() => {
     if (!urlParams.has("fritekst")) {
       // In case you clear the URL params by clicking on "Endringslogg" again in the menu
-      // eslint-disable-next-line
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSearchInput("");
     }

@@ -15,7 +15,9 @@ function useRefWithInit<T, U>(
 function useRefWithInit(init: (arg?: unknown) => unknown, initArg?: unknown) {
   const ref = useRef(UNINITIALIZED as any);
 
+  // eslint-disable-next-line react-hooks/refs
   if (ref.current === UNINITIALIZED) {
+    // eslint-disable-next-line react-hooks/refs
     ref.current = init(initArg);
   }
 
