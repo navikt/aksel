@@ -150,6 +150,7 @@ export const ShortcutsAndIcons: Story = {
               shortcut="⌘+T"
               onSelect={() => console.log("Item 1 clicked")}
               icon={<StarIcon aria-hidden />}
+              iconPosition="right"
             >
               Item 1
             </ActionMenu.Item>

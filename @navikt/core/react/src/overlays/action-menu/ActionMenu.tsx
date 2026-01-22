@@ -544,9 +544,14 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
    */
   variant?: "danger";
   /**
-   * Adds an icon on the left side. The icon will always have aria-hidden.
+   * Adds an icon on the left side. For right side position use @property iconPosition. The icon will always have aria-hidden.
    */
   icon?: React.ReactNode;
+  /**
+   * Position of @property icon.
+   * @default "left"
+   */
+  iconPosition?: "left" | "right";
 }
 
 export const ActionMenuItem: OverridableComponent<
@@ -561,6 +566,7 @@ export const ActionMenuItem: OverridableComponent<
       icon,
       shortcut,
       variant,
+      iconPosition = "left",
       ...rest
     },
     ref,
@@ -578,7 +584,10 @@ export const ActionMenuItem: OverridableComponent<
         <Component ref={ref}>
           {children}
           {icon && (
-            <Marker placement="left" className="aksel-action-menu__marker-icon">
+            <Marker
+              placement={iconPosition}
+              className="aksel-action-menu__marker-icon"
+            >
               {icon}
             </Marker>
           )}
