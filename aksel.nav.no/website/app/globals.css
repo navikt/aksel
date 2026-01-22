@@ -1,10 +1,9 @@
 /* stylelint-disable aksel/design-token-no-global-override */
-@layer twBase, dsComponents, twComponents, twUtilities;
 
-@import "tailwindcss/base" layer(twBase);
-@import "@navikt/ds-css" layer(dsComponents);
-@import "tailwindcss/components" layer(twComponents);
-@import "tailwindcss/utilities" layer(twUtilities);
+@layer tw-snapshot, aksel;
+
+@import "../tailwind-snapshot.css" layer(tw-snapshot);
+@import "@navikt/ds-css" layer(aksel);
 
 :root {
   --website-header-height: 4rem;
@@ -55,18 +54,6 @@ body {
 
 [data-aksel-heading-color] {
   color: var(--ax-text-brand-blue);
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
 }
 
 [data-wrapper-prose] {
