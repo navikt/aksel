@@ -1,4 +1,3 @@
-import React from "react";
 import { BugIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,

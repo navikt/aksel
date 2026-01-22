@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import NextLink from "next/link";
 import { ComponentIcon, TokenIcon } from "@navikt/aksel-icons";
 import {
   Bleed,
@@ -24,6 +23,7 @@ import { AnimatedFaceCard } from "@/app/(routes)/(root)/_ui/AnimatedFaceCard";
 import { AnimationButton } from "@/app/(routes)/(root)/_ui/AnimationButton";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { HolidayDecorations } from "@/app/_ui/holiday-deco/HolidayDecorations";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import PromoTag from "@/app/_ui/promo-tag/PromoTag";
 import { sanityFetch } from "../../_sanity/live";
 import {
