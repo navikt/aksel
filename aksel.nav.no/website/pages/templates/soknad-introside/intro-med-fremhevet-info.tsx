@@ -1,4 +1,3 @@
-import React from "react";
 import { ArrowRightIcon, InformationSquareIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
