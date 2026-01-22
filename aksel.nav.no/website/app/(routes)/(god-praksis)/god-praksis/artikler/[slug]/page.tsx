@@ -1,7 +1,6 @@
 import { differenceInMonths } from "date-fns";
 import { Metadata } from "next";
 import { PortableTextBlock, stegaClean } from "next-sanity";
-import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import { TagFillIcon } from "@navikt/aksel-icons";
 import {
@@ -25,6 +24,7 @@ import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { Avatar, avatarUrl } from "@/app/_ui/avatar/Avatar";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";

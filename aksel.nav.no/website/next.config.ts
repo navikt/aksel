@@ -60,13 +60,6 @@ const securityHeaders = [
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
   transpilePackages: ["@navikt/ds-tokens", "react-hotjar"],
-  /* Deprecated */
-  publicRuntimeConfig: {
-    NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
-    UMAMI_TRACKING_ID: isProduction
-      ? "fb69e1e9-1bd3-4fd9-b700-9d035cbf44e1"
-      : "7b9fb2cd-40f4-4a30-b208-5b4dba026b57",
-  },
   /**
    * @important: These are always included in JS-bundle!
    * Only use for public runtime config that is not sensitive
@@ -160,7 +153,10 @@ const nextConfig: NextConfig = {
       "sanity",
     ],
     largePageDataBytes: 128 * 2000,
+    turbopackFileSystemCacheForDev: true,
   },
+  reactCompiler: true,
+
   serverExternalPackages: ["@navikt/next-logger", "next-logger", "pino"],
 };
 

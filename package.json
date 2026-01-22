@@ -88,6 +88,8 @@
     "@storybook/react-vite": "^10.1.11",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/react": "19.2.3",
+    "@types/react-dom": "19.2.3",
     "@vitest/browser": "4.0.17",
     "@vitest/browser-playwright": "4.0.17",
     "@vitest/coverage-v8": "4.0.17",

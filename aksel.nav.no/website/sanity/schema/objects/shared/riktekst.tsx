@@ -8,10 +8,7 @@ import {
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import { Code } from "@/app/_ui/typography/Code";
 import { allArticleDocsRef } from "../../../config";
-import {
-  ExternalLinkRenderer,
-  InternalLinkRenderer,
-} from "../../custom-components/LinkRenderer";
+import { ExternalLinkRenderer } from "../../custom-components/LinkRenderer";
 import { validateHeadingLevels } from "../../documents/presets/validate-heading-levels";
 
 export const styles = [
@@ -89,9 +86,6 @@ export const block = {
             to: allArticleDocsRef,
           },
         ],
-        components: {
-          annotation: InternalLinkRenderer,
-        },
       },
       {
         title: "Lenke",

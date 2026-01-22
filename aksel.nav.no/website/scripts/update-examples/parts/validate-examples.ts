@@ -33,7 +33,8 @@ export function validateExamples(exampleData: ExampleDataT[]) {
   try {
     const cmd = `yarn tsc --noEmit --noUnusedLocals true --incremental false -p ${tempTsConfigFile}`;
     execSync(cmd, { stdio: "inherit" }); // Setting stdio to inherit makes the output visible in the console
-  } catch {
+  } catch (e) {
+    console.error(e);
     success = false;
   }
 
