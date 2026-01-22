@@ -24,21 +24,13 @@ const Example = () => {
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="Gosys">
-          <ActionMenu.Item
-            onSelect={console.info}
-            icon={<PersonIcon />}
-            iconPosition="right"
-          >
+          <ActionMenu.Item onSelect={console.info} icon={<PersonIcon />}>
             Personoversikt
           </ActionMenu.Item>
           <ActionMenu.Item onSelect={console.info} icon={<PersonGroupIcon />}>
             Arbeidsgiveroversikt
           </ActionMenu.Item>
-          <ActionMenu.Item
-            onSelect={console.info}
-            icon={<HandshakeIcon />}
-            iconPosition="right"
-          >
+          <ActionMenu.Item onSelect={console.info} icon={<HandshakeIcon />}>
             Samhandlere
           </ActionMenu.Item>
           <ActionMenu.Item
