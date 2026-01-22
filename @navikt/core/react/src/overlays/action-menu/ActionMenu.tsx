@@ -544,11 +544,11 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
    */
   variant?: "danger";
   /**
-   * Adds an icon on the left side. For right side position use @property iconPosition. The icon will always have aria-hidden.
+   * Adds an icon on the left side. For right side position use iconPosition. The icon will always have aria-hidden.
    */
   icon?: React.ReactNode;
   /**
-   * Position of @property icon.
+   * Position of icon.
    * @default "left"
    */
   iconPosition?: "left" | "right";
@@ -898,7 +898,7 @@ interface ActionMenuSubTriggerProps
   extends Omit<MenuSubTriggerProps, "asChild"> {
   icon?: React.ReactNode;
   /**
-   * Position of @property icon.
+   * Position of icon.
    * @default "left"
    */
   iconPosition?: "left" | "right";
