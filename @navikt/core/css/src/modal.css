@@ -96,12 +96,12 @@
    * Cannot use --ax-bg-overlay because ::backdrop does not inherit from anything but itself.
    * TODO: Consider adding `::backdrop` to global token definitions.
    */
-  background: rgba(12 22 39 / 0.659);
+  background: rgb(12 22 39 / 0.659);
   animation: akselModalBackdropFadeIn 0.7s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .aksel-modal--polyfilled + .backdrop /* Cannot be combined with ::backdrop selector */ {
-  background: rgba(12 22 39 / 0.659);
+  background: rgb(12 22 39 / 0.659);
 
   /* From polyfill: */
   position: fixed;
@@ -142,8 +142,8 @@
   background:
     linear-gradient(var(--__axc-modal-bg) 30%, transparent) top,
     linear-gradient(transparent, var(--__axc-modal-bg) 60%) bottom,
-    radial-gradient(farthest-side at 50% 0, rgba(0 0 0 / 0.3), transparent) top,
-    radial-gradient(farthest-side at 50% 100%, rgba(0 0 0 / 0.3), transparent) bottom;
+    radial-gradient(farthest-side at 50% 0, rgb(0 0 0 / 0.3), transparent) top,
+    radial-gradient(farthest-side at 50% 100%, rgb(0 0 0 / 0.3), transparent) bottom;
   background-size:
     100% 40px,
     100% 50px,

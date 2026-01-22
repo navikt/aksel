@@ -82,9 +82,7 @@
   }
 
   @media (min-width: 480px) {
-    & {
-      padding: var(--ax-space-16) var(--ax-space-20);
-    }
+    padding: var(--ax-space-16) var(--ax-space-20);
 
     .aksel-guide-panel[data-responsive="true"] & {
       min-height: var(--__axc-guide-panel-guide-size);
