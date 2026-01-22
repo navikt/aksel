@@ -24930,7 +24930,7 @@ __metadata:
     "@types/jscodeshift": "npm:^0.11.11"
     "@types/jsdom": "npm:^27.0.0"
     "@types/lodash": "npm:4.17.20"
-    "@types/react": "npm:19.2.8"
+    "@types/react": "npm:19.2.3"
     "@types/react-dom": "npm:19.2.3"
     "@types/showdown": "npm:^2.0.6"
     "@types/umami": "npm:^2.10.0"
