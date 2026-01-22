@@ -897,35 +897,57 @@ type MenuSubTriggerProps = React.ComponentPropsWithoutRef<
 interface ActionMenuSubTriggerProps
   extends Omit<MenuSubTriggerProps, "asChild"> {
   icon?: React.ReactNode;
+  /**
+   * Position of @property icon.
+   * @default "left"
+   */
+  iconPosition?: "left" | "right";
 }
 
 export const ActionMenuSubTrigger = forwardRef<
   ActionMenuSubTriggerElement,
   ActionMenuSubTriggerProps
->(({ children, className, icon, ...rest }: ActionMenuSubTriggerProps, ref) => {
-  return (
-    <Menu.SubTrigger
-      ref={ref}
-      {...rest}
-      asChild={false}
-      className={cl(
-        "aksel-action-menu__item aksel-action-menu__sub-trigger",
-        className,
-        { "aksel-action-menu__item--has-icon": icon },
-      )}
-    >
-      {children}
-      {icon && (
-        <Marker placement="left" className="aksel-action-menu__marker-icon">
-          {icon}
+>(
+  (
+    {
+      children,
+      className,
+      icon,
+      iconPosition = "left",
+      ...rest
+    }: ActionMenuSubTriggerProps,
+    ref,
+  ) => {
+    return (
+      <Menu.SubTrigger
+        ref={ref}
+        {...rest}
+        asChild={false}
+        className={cl(
+          "aksel-action-menu__item aksel-action-menu__sub-trigger",
+          className,
+          {
+            "aksel-action-menu__item--has-icon":
+              icon && iconPosition === "left",
+          },
+        )}
+      >
+        {children}
+        {icon && (
+          <Marker
+            placement={iconPosition}
+            className="aksel-action-menu__marker-icon"
+          >
+            {icon}
+          </Marker>
+        )}
+        <Marker placement="right" className="aksel-action-menu__marker-icon">
+          <ChevronRightIcon aria-hidden />
         </Marker>
-      )}
-      <Marker placement="right" className="aksel-action-menu__marker-icon">
-        <ChevronRightIcon aria-hidden />
-      </Marker>
-    </Menu.SubTrigger>
-  );
-});
+      </Menu.SubTrigger>
+    );
+  },
+);
 
 /* -------------------------------------------------------------------------- */
 /*                            ActionMenuSubContent                            */

@@ -1,6 +1,11 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useEffect, useRef, useState } from "react";
-import { PencilIcon, StarIcon } from "@navikt/aksel-icons";
+import {
+  ArrowDownRightIcon,
+  FaceLaughFillIcon,
+  PencilIcon,
+  StarIcon,
+} from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { HStack, VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
@@ -338,7 +343,9 @@ export const Submenus: Story = {
             Item 1
           </ActionMenu.Item>
           <ActionMenu.Sub open={props.open}>
-            <ActionMenu.SubTrigger>Submenu 1</ActionMenu.SubTrigger>
+            <ActionMenu.SubTrigger icon={<ArrowDownRightIcon aria-hidden />}>
+              Submenu 1
+            </ActionMenu.SubTrigger>
             <ActionMenu.SubContent>
               <ActionMenu.Item
                 onSelect={() => console.log("Subitem 1 clicked")}
@@ -351,7 +358,12 @@ export const Submenus: Story = {
                 Subitem 2
               </ActionMenu.Item>
               <ActionMenu.Sub open={props.open}>
-                <ActionMenu.SubTrigger>Nested submenu 1</ActionMenu.SubTrigger>
+                <ActionMenu.SubTrigger
+                  icon={<FaceLaughFillIcon aria-hidden />}
+                  iconPosition="right"
+                >
+                  Nested submenu 1
+                </ActionMenu.SubTrigger>
                 <ActionMenu.SubContent>
                   <ActionMenu.Item
                     onSelect={() => console.log("Nested Subitem 1 clicked")}
