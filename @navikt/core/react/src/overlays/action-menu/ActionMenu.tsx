@@ -576,7 +576,7 @@ export const ActionMenuItem: OverridableComponent<
         {...rest}
         className={cl("aksel-action-menu__item", className, {
           "aksel-action-menu__item--danger": variant === "danger",
-          "aksel-action-menu__item--has-icon": icon,
+          "aksel-action-menu__item--has-icon": icon && iconPosition === "left",
         })}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
