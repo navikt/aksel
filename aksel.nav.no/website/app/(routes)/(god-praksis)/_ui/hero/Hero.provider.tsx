@@ -102,6 +102,15 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
     setCloseDialogButton(ref);
   }
 
+  const customStyles: React.CSSProperties = {
+    "--website-hero-selector-x": animationRef.x + "px",
+    "--website-hero-selector-y": animationRef.y + "px",
+    marginBottom: getMargin(),
+    transitionTimingFunction: openDialog
+      ? "cubic-bezier(0.3, 1, 0.15, 1)"
+      : "cubic-bezier(0, 0.7, 0.15, 1)",
+  };
+
   return (
     <GodPraksisHeroContext.Provider
       value={{
@@ -121,14 +130,7 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
         paddingInline={{ xs: "space-16", lg: "space-40" }}
         paddingBlock={{ xs: "space-16", lg: "space-40" }}
         className={styles.godPraksisHero}
-        style={{
-          "--website-hero-selector-x": animationRef.x + "px",
-          "--website-hero-selector-y": animationRef.y + "px",
-          marginBottom: getMargin(),
-          transitionTimingFunction: openDialog
-            ? "cubic-bezier(0.3, 1, 0.15, 1)"
-            : "cubic-bezier(0, 0.7, 0.15, 1)",
-        }}
+        style={customStyles}
         ref={(el) => {
           setWrapperHeight(el?.getBoundingClientRect().height || 0);
         }}

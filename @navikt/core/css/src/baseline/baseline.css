@@ -49,7 +49,6 @@ body,
 .sr-only,
 .aksel-sr-only {
   border: 0;
-  clip: rect(0, 0, 0, 0);
   clip-path: inset(50%);
   height: 1px;
   margin: -1px;
@@ -72,7 +71,6 @@ body,
 .sr-only.focusable:focus,
 .aksel-sr-only.focusable:active,
 .aksel-sr-only.focusable:focus {
-  clip: auto;
   clip-path: none;
   height: auto;
   margin: 0;

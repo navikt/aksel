@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { HStack, LinkCard, VStack } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
@@ -8,9 +7,10 @@ import {
   LinkCardImage,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
-import { LANDINGSSIDE_LATEST_QUERYResult } from "@/app/_sanity/query-types";
+import { LANDINGSSIDE_LATEST_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { Avatar, AvatarStack, avatarUrl } from "@/app/_ui/avatar/Avatar";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { cl } from "@/ui-utils/className";
@@ -20,11 +20,11 @@ import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 
 type gp_article =
-  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number];
+  NonNullable<LANDINGSSIDE_LATEST_QUERY_RESULT>[number]["curatedRecent"]["artikler"][number];
 type blogg_article =
-  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["bloggposts"][number];
+  NonNullable<LANDINGSSIDE_LATEST_QUERY_RESULT>[number]["curatedRecent"]["bloggposts"][number];
 type component_article =
-  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["komponenter"][number];
+  NonNullable<LANDINGSSIDE_LATEST_QUERY_RESULT>[number]["curatedRecent"]["komponenter"][number];
 
 export type ArticleT = gp_article | component_article | blogg_article;
 
@@ -90,7 +90,7 @@ const Card = ({ article, visible }: CardProps) => {
       )}
       <LinkCardTitle as="h2">
         <LinkCardAnchor asChild>
-          <Link
+          <NextLink
             onNavigate={() =>
               umamiTrack("navigere", {
                 kilde: "forsidekort",
@@ -100,7 +100,7 @@ const Card = ({ article, visible }: CardProps) => {
             href={`/${article.slug}`}
           >
             {article.heading}
-          </Link>
+          </NextLink>
         </LinkCardAnchor>
       </LinkCardTitle>
       {isArticle(article) || isBlogg(article) ? (

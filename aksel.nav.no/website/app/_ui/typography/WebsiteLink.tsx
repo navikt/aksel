@@ -1,8 +1,8 @@
 "use client";
 
-import NextLink from "next/link";
 import React from "react";
 import { Link } from "@navikt/ds-react";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
 type Props = {

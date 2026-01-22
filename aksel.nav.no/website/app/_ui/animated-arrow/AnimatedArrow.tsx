@@ -1,8 +1,11 @@
-import { SVGProps } from "react";
+import { type ComponentProps } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import styles from "./AnimatedArrow.module.css";
 
-type AnimatedArrowRightProps = SVGProps<SVGSVGElement>;
+type AnimatedArrowRightProps = Omit<
+  ComponentProps<typeof ArrowRightIcon>,
+  "children"
+>;
 
 const AnimatedArrowRight = (props: AnimatedArrowRightProps) => {
   return (

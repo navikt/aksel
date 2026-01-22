@@ -31,6 +31,7 @@ async function fuseGlobalSearch(query: string) {
     includeScore: true,
     shouldSort: true,
     minMatchCharLength: 3,
+    ignoreLocation: true,
     includeMatches: true,
     threshold: 0.18,
     distance: 50,

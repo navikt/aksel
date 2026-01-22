@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { ActionMenu, Button } from "@navikt/ds-react";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -21,9 +21,9 @@ const Example = () => {
           <ActionMenu.Item as="a" href="/eksempel">
             Vanlig lenke
           </ActionMenu.Item>
-          <Link href="/eksempel" passHref legacyBehavior>
+          <NextLink href="/eksempel" passHref legacyBehavior>
             <ActionMenu.Item as="a">Next.js-lenke</ActionMenu.Item>
-          </Link>
+          </NextLink>
           <ActionMenu.Item>React router (se kommentert kode)</ActionMenu.Item>
           <ActionMenu.Item>Remix (se kommentert kode)</ActionMenu.Item>
         </ActionMenu.Group>
