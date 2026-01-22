@@ -1,8 +1,10 @@
 import fastGlob from "fast-glob";
 import { flatten } from "flat";
+import { resolve as resolvePackagePath } from "mlly";
 import { readFileSync, renameSync } from "node:fs";
-import { dirname } from "node:path";
+import { dirname, resolve } from "node:path";
 import { extract } from "tar";
+import { extractTypesFromDts } from "./helpers/extract-types.js";
 
 type PackageJsonExportKey =
   | "."
@@ -105,11 +107,24 @@ class CSSAnalyzer extends Analyzer {
 }
 
 class ReactAnalyzer extends Analyzer {
-  exportPaths: ReactExportPaths = {};
+  exportPaths: Record<
+    string,
+    {
+      jsFile?: string;
+      typesFile?: string;
+      expotedTypes?: string[];
+      expotedComponents?: string[];
+    }
+  > = {};
 
   constructor(tarballGlob: string) {
     super(tarballGlob);
     this.resolveExportPaths();
+    this.resolveExportedTypes();
+  }
+
+  async init() {
+    await this.resolveExportedComponents();
   }
 
   private resolveExportPaths() {
@@ -117,11 +132,20 @@ class ReactAnalyzer extends Analyzer {
 
     const flattenedExports: Record<string, string> = flatten(exportsField);
     for (const [key, value] of Object.entries(flattenedExports)) {
+      /* Skip CJS files */
       if (key.includes(".require.")) {
         continue;
       }
 
-      const name = extractNameFromFlatObjectKey(key);
+      let name: string;
+      /* Assume root */
+      if (key.startsWith("..")) {
+        name = ".";
+      } else {
+        const parts = key.split(".");
+        name = parts[1];
+      }
+
       if (!this.exportPaths[name]) {
         this.exportPaths[name] = {};
       }
@@ -133,24 +157,42 @@ class ReactAnalyzer extends Analyzer {
       }
     }
   }
-}
 
-function extractNameFromFlatObjectKey(flatName: string): string {
-  /* Assume root */
-  if (flatName.startsWith("..")) {
-    return ".";
+  private resolveExportedTypes() {
+    console.info("Resolving exported types...");
+    for (const [name, paths] of Object.entries(this.exportPaths)) {
+      if (!paths.typesFile) {
+        this.exportPaths[name].expotedTypes = [];
+        continue;
+      }
+      const types = extractTypesFromDts(
+        `${this.packageDir}/${paths.typesFile}`,
+      );
+      this.exportPaths[name].expotedTypes = types;
+    }
+
+    console.info("Done resolving exported types.");
   }
-  const parts = flatName.split(".");
 
-  return parts[1];
-}
+  private async resolveExportedComponents() {
+    console.info("Resolving exported components...");
+    for (const [name, paths] of Object.entries(this.exportPaths)) {
+      if (!paths.jsFile) {
+        this.exportPaths[name].expotedComponents = [];
+        continue;
+      }
 
-type ReactExportPaths = Record<
-  string,
-  {
-    jsFile?: string;
-    typesFile?: string;
+      const path = await resolvePackagePath(
+        resolve(this.packageDir, paths.jsFile),
+      );
+      const components = await import(path);
+      const keys = Object.keys(components);
+
+      this.exportPaths[name].expotedComponents = keys;
+    }
+
+    console.info("Done resolving exported types.");
   }
->;
+}
 
 export { Analyzer, CSSAnalyzer, ReactAnalyzer };

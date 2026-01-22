@@ -9345,10 +9345,10 @@ __metadata:
   dependencies:
     "@types/node": "npm:^25.0.3"
     flat: "npm:6.0.1"
-    pkg-exports: "npm:^0.2.0"
+    mlly: "npm:1.8.0"
     pkg-types: "npm:^2.3.0"
     rimraf: "npm:6.0.1"
-    rolldown: "npm:^1.0.0-beta.57"
+    rolldown: "npm:^1.0.0-rc.1"
     tar: "npm:^7.5.3"
     ts-morph: "npm:^27.0.2"
     tsx: "npm:^4.20.6"
@@ -17935,7 +17935,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mlly@npm:^1.4.0, mlly@npm:^1.4.2, mlly@npm:^1.7.4":
+"mlly@npm:1.8.0, mlly@npm:^1.4.0, mlly@npm:^1.4.2, mlly@npm:^1.7.4":
   version: 1.8.0
   resolution: "mlly@npm:1.8.0"
   dependencies:
@@ -21216,7 +21216,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rolldown@npm:^1.0.0-beta.57":
+"rolldown@npm:^1.0.0-beta.57, rolldown@npm:^1.0.0-rc.1":
   version: 1.0.0-rc.1
   resolution: "rolldown@npm:1.0.0-rc.1"
   dependencies:

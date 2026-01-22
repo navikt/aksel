@@ -16,4 +16,7 @@ if (cssDiff > 0) {
 }
 
 export const reactLocal = new ReactAnalyzer("temp/local/*react-*.tgz");
-export const reactRemote = new ReactAnalyzer("temp/remote/*react-*.tgz");
+await reactLocal.init();
+
+console.info(reactLocal.exportPaths);
+/* export const reactRemote = new ReactAnalyzer("temp/remote/*react-*.tgz"); */
