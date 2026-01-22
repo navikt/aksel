@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "8.0.1",
+  "version": "8.1.0",
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
@@ -82,7 +82,7 @@
     "fast-glob": "3.2.11",
     "hast-util-select": "6.0.4",
     "js-yaml": "^4.1.1",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "prettier": "3.6.2",
     "react": "19.2.3",
     "rehype-parse": "9.0.1",

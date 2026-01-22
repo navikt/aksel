@@ -1,5 +1,15 @@
 # @navikt/aksel
 
+## 8.1.0
+
+### Patch Changes
+
+- CLI: Set min-requirement for node to v22. ([#4546](https://github.com/navikt/aksel/pull/4546))
+
+- Updated dependencies [[`b4d56bc`](https://github.com/navikt/aksel/commit/b4d56bc38ae8480236322db964f8d9ffac208773)]:
+  - @navikt/ds-css@8.1.0
+  - @navikt/ds-tokens@8.1.0
+
 ## 8.0.1
 
 ### Patch Changes

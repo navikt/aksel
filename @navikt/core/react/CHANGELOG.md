@@ -1,5 +1,25 @@
 # @navikt/ds-react
 
+## 8.1.0
+
+### Minor Changes
+
+- ActionMenu: When using keyboard changed it to focus on ActionMenu.Content instead of first ActionMenu.Item, allowing non-clickable content to be focusable ([#4522](https://github.com/navikt/aksel/pull/4522))
+
+### Patch Changes
+
+- Accordion: Warn when only one item, or multiple instances after each other. ([#4525](https://github.com/navikt/aksel/pull/4525))
+
+- Internal: Updated DismissableLayer-API for better event-batching. ([#4524](https://github.com/navikt/aksel/pull/4524))
+
+- Internal: Refactor utility structure. ([#4505](https://github.com/navikt/aksel/pull/4505))
+
+- Fix RSC related issue when using asChild. ([#4523](https://github.com/navikt/aksel/pull/4523))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.1.0
+  - @navikt/aksel-icons@8.1.0
+
 ## 8.0.1
 
 ### Patch Changes
