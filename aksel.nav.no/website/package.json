@@ -23,7 +23,7 @@
     "backup": "yarn tsx --env-file-if-exists=.env scripts/backup.ts",
     "generate-testpaths": "yarn tsx --env-file-if-exists=.env ./scripts/generate-testpaths.ts",
     "update:sanity-schema": "cd ./sanity && yarn sanity schema extract --workspace default --path ./sanity-schema.json && yarn sanity typegen generate",
-    "update:sanity-manifest": "cd ./sanity && yarn sanity manifest extract --path ../public/studio/static && yarn sanity schema deploy --workspace default --manifest-dir ../public/studio/static --no-extract-manifest",
+    "update:sanity-manifest": "cd ./sanity && yarn sanity schema deploy --workspace default --manifest-dir ../public/studio/static",
     "cp:playroom": "copyfiles -E -u 3 '../playroom/dist/sandbox/**' public/",
     "cp:static": "copyfiles -E -u 1 '.next/static/**' .next/standalone/aksel.nav.no/website/.next/",
     "cp:public": "copyfiles -E 'public/**' .next/standalone/aksel.nav.no/website/",
