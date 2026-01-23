@@ -577,7 +577,7 @@ export const ActionMenuItem: OverridableComponent<
         className={cl("aksel-action-menu__item", className, {
           "aksel-action-menu__item--danger": variant === "danger",
         })}
-        data-marker={iconPosition}
+        data-marker={icon ? iconPosition : undefined}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
       >
@@ -923,7 +923,7 @@ export const ActionMenuSubTrigger = forwardRef<
           "aksel-action-menu__item aksel-action-menu__sub-trigger",
           className,
         )}
-        data-marker={iconPosition}
+        data-marker={icon ? iconPosition : undefined}
       >
         {children}
         {icon && (
