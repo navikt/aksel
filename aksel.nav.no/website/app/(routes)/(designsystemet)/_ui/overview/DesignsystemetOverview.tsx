@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { BodyLong, Box, HGrid, Heading, LinkCard, Tag } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
@@ -8,11 +7,12 @@ import {
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
 import {
-  DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult,
-  DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult,
+  DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY_RESULT,
+  DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY_RESULT,
 } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { ImageAsThemedSvg } from "@/app/_ui/image-as-svg/ImageAsSvg";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import styles from "./DesignsystemetOverview.module.css";
@@ -20,7 +20,7 @@ import styles from "./DesignsystemetOverview.module.css";
 type DesignsystemetOverviewPageProps = {
   title: string;
   ingress?: string;
-  links: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult;
+  links: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY_RESULT;
 };
 
 function DesignsystemetOverviewPage({
@@ -66,8 +66,8 @@ function DesignsystemetOverviewCard({
   page,
 }: {
   page:
-    | DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult[number]
-    | DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERYResult[number];
+    | DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY_RESULT[number]
+    | DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY_RESULT[number];
 }) {
   const imageUrl = urlForImage(page.status?.bilde)?.url();
 
@@ -93,7 +93,7 @@ function DesignsystemetOverviewCard({
 
       <LinkCardTitle>
         <LinkCardAnchor asChild>
-          <Link href={`/${page?.slug}`}>{page?.heading}</Link>
+          <NextLink href={`/${page?.slug}`}>{page?.heading}</NextLink>
         </LinkCardAnchor>
       </LinkCardTitle>
     </LinkCard>
@@ -101,7 +101,7 @@ function DesignsystemetOverviewCard({
 }
 
 function sortDesignsystemetOverviewList(
-  list: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult,
+  list: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY_RESULT,
 ) {
   return list
     .filter(

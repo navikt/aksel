@@ -1,7 +1,14 @@
 import NextImage from "next/image";
-import NextLink from "next/link";
-import { BodyLong, HGrid, HStack, Heading, Link } from "@navikt/ds-react";
+import {
+  BodyLong,
+  Tag as DsTag,
+  HGrid,
+  HStack,
+  Heading,
+  Link,
+} from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { cl } from "@/ui-utils/className";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
@@ -11,7 +18,7 @@ import {
   isBlogg,
   isKomponent,
 } from "./FrontpageMasonryCard";
-import { BetaTag, Tag } from "./FrontpageTag";
+import { Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 
 export const Highlight = ({
@@ -118,7 +125,11 @@ export const Highlight = ({
               isArticle(article) ? (article.tema?.[0] ?? undefined) : undefined
             }
           />
-          {getStatusTag() === "beta" && <BetaTag />}
+          {getStatusTag() === "beta" && (
+            <DsTag variant="outline" data-color="meta-purple" size="small">
+              Beta
+            </DsTag>
+          )}
         </HStack>
         <Heading size="large" level="3">
           <Link
@@ -135,10 +146,10 @@ export const Highlight = ({
             {article?.heading}
           </Link>
         </Heading>
-        <BodyLong size="medium">
-          {(isArticle(article) || isBlogg(article)) &&
-            (article.ingress ?? article.seo?.meta)}
-        </BodyLong>
+        {(isArticle(article) || isBlogg(article)) && (
+          <BodyLong>{article.ingress ?? article.seo?.meta}</BodyLong>
+        )}
+        {isKomponent(article) && <BodyLong>{article.seo?.meta}</BodyLong>}
       </div>
     </HGrid>
   );

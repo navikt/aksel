@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeftIcon, ChevronDownIcon } from "@navikt/aksel-icons";
 import { HGrid, VStack } from "@navikt/ds-react";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import styles from "./MobileNav.module.css";
 
 function MobileNavMenu({ children }: { children: React.ReactNode }) {
@@ -37,13 +37,13 @@ function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
       </HGrid>
       <span className={styles.divider} />
 
-      <Link href="/god-praksis" className={styles.mobileNavItem}>
+      <NextLink href="/god-praksis" className={styles.mobileNavItem}>
         God praksis
-      </Link>
+      </NextLink>
       <span className={styles.divider} />
-      <Link href="/produktbloggen" className={styles.mobileNavItem}>
+      <NextLink href="/produktbloggen" className={styles.mobileNavItem}>
         Bloggen
-      </Link>
+      </NextLink>
     </VStack>
   );
 }

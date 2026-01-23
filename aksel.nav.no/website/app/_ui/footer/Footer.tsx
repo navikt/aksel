@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { HGrid, Heading } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
 import AkselLogo from "@/assets/Logo";
 import { SANITY_DATASET } from "@/sanity/config";
@@ -97,7 +97,7 @@ function LinkBlock({ heading, links }: LinkBlockPropsT) {
       <ul className={styles.footerLinks}>
         {links.map((link) => (
           <li key={link.url}>
-            <Link
+            <NextLink
               className={styles.footerLink}
               href={link.url}
               prefetch={false}
@@ -107,7 +107,7 @@ function LinkBlock({ heading, links }: LinkBlockPropsT) {
             >
               {link.icon}
               {link.text}
-            </Link>
+            </NextLink>
           </li>
         ))}
       </ul>

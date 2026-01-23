@@ -8,10 +8,7 @@ import {
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import { Code } from "@/app/_ui/typography/Code";
 import { allArticleDocsRef } from "../../../config";
-import {
-  ExternalLinkRenderer,
-  InternalLinkRenderer,
-} from "../../custom-components/LinkRenderer";
+import { ExternalLinkRenderer } from "../../custom-components/LinkRenderer";
 import { validateHeadingLevels } from "../../documents/presets/validate-heading-levels";
 
 export const styles = [
@@ -71,10 +68,10 @@ export const block = {
     ],
     annotations: [
       {
-        title: "Link til sanity-side",
+        title: "Lenke til Sanity-side",
         name: "internalLink",
         type: "object",
-        icon: () => <LinkIcon title="Lenke til sanity-side" />,
+        icon: () => <LinkIcon title="Lenke til internt Sanity-dokument" />,
         options: {
           modal: {
             type: "dialog",
@@ -89,23 +86,33 @@ export const block = {
             to: allArticleDocsRef,
           },
         ],
-        components: {
-          annotation: InternalLinkRenderer,
-        },
       },
       {
         title: "Lenke",
         name: "link",
         type: "object",
-        icon: () => <ExternalLinkIcon title="Lenke til ekstern-side" />,
+        icon: () => <ExternalLinkIcon title="Lenke til ekstern side" />,
         fields: [
           {
             title: "URL",
+            description:
+              "Hvis du skal lenke til et internt Sanity-dokument, bruk 'Lenke til Sanity-side' i stedet.",
             name: "href",
-            type: "url",
+            type: "string",
             validation: (Rule) =>
-              Rule.uri({
-                scheme: ["https", "mailto"],
+              Rule.custom((url) => {
+                if (!url) {
+                  return "URL må fylles ut";
+                }
+                if (
+                  url.startsWith("#") ||
+                  url.startsWith("https://") ||
+                  url.startsWith("mailto://") ||
+                  url.startsWith("/")
+                ) {
+                  return true;
+                }
+                return "Ugyldig URL";
               }),
           },
         ],

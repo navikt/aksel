@@ -221,6 +221,13 @@
 
 .cardImageWrapper {
   background: var(--ax-brand-blue-300);
+  position: relative;
+}
+
+.betaTagWrapper {
+  position: absolute;
+  bottom: var(--ax-space-8);
+  left: var(--ax-space-8);
 }
 
 @media (min-width: 480px) {

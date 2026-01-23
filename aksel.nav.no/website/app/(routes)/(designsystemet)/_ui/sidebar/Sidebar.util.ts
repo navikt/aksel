@@ -2,8 +2,8 @@ import { stegaClean } from "next-sanity";
 import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import {
-  DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult,
-  DESIGNSYSTEM_SIDEBAR_QUERYResult,
+  DESIGNSYSTEM_OVERVIEW_PAGES_QUERY_RESULT,
+  DESIGNSYSTEM_SIDEBAR_QUERY_RESULT,
 } from "@/app/_sanity/query-types";
 import { sanityCategoryLookup } from "@/sanity/config";
 import { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
@@ -18,8 +18,8 @@ function typedKeys<T extends object>(obj: T): (keyof T)[] {
 }
 
 function generateSidebar(
-  input: DESIGNSYSTEM_SIDEBAR_QUERYResult,
-  overviewPages: DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult,
+  input: DESIGNSYSTEM_SIDEBAR_QUERY_RESULT,
+  overviewPages: DESIGNSYSTEM_OVERVIEW_PAGES_QUERY_RESULT,
 ): DesignsystemSidebarDataT {
   return typedKeys(PAGE_ROUTES).map((type) => {
     const overviewPageList = overviewPages.find((page) =>
@@ -107,7 +107,7 @@ function generateSidebar(
   });
 }
 
-type SidebarInputNodeT = DESIGNSYSTEM_SIDEBAR_QUERYResult[number];
+type SidebarInputNodeT = DESIGNSYSTEM_SIDEBAR_QUERY_RESULT[number];
 
 function isValidPage(page: SidebarInputNodeT): page is SidebarInputNodeT & {
   heading: string;

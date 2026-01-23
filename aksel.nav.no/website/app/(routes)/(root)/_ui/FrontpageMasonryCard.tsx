@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import { HStack, LinkCard, VStack } from "@navikt/ds-react";
+import { Tag as DsTag, HStack, LinkCard, VStack } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
   LinkCardDescription,
@@ -8,23 +7,24 @@ import {
   LinkCardImage,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
-import { LANDINGSSIDE_LATEST_QUERYResult } from "@/app/_sanity/query-types";
+import { Tag } from "@/app/(routes)/(root)/_ui/FrontpageTag";
+import { LANDINGSSIDE_LATEST_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { Avatar, AvatarStack, avatarUrl } from "@/app/_ui/avatar/Avatar";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import ErrorBoundary from "@/error-boundary";
 import { cl } from "@/ui-utils/className";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
-import { BetaTag, Tag } from "./FrontpageTag";
 import styles from "./frontpage.module.css";
 
 type gp_article =
-  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["artikler"][number];
+  NonNullable<LANDINGSSIDE_LATEST_QUERY_RESULT>[number]["curatedRecent"]["artikler"][number];
 type blogg_article =
-  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["bloggposts"][number];
+  NonNullable<LANDINGSSIDE_LATEST_QUERY_RESULT>[number]["curatedRecent"]["bloggposts"][number];
 type component_article =
-  NonNullable<LANDINGSSIDE_LATEST_QUERYResult>[number]["curatedRecent"]["komponenter"][number];
+  NonNullable<LANDINGSSIDE_LATEST_QUERY_RESULT>[number]["curatedRecent"]["komponenter"][number];
 
 export type ArticleT = gp_article | component_article | blogg_article;
 
@@ -72,9 +72,7 @@ const Card = ({ article, visible }: CardProps) => {
       {showImage && (
         <LinkCardImage
           aspectRatio="16/9"
-          className={cl(styles.cardImageWrapper, {
-            [styles.betaHue]: getStatusTag() === "beta",
-          })}
+          className={cl(styles.cardImageWrapper)}
         >
           <Image
             src={
@@ -85,12 +83,27 @@ const Card = ({ article, visible }: CardProps) => {
             alt={article.heading + " thumbnail"}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className={cl({
+              [styles.betaHue]: getStatusTag() === "beta",
+            })}
           />
+          {isKomponent(article) && article.status?.tag === "beta" && (
+            <span className={styles.betaTagWrapper}>
+              <DsTag
+                variant="outline"
+                data-color="meta-purple"
+                size="small"
+                className="light"
+              >
+                Beta
+              </DsTag>
+            </span>
+          )}
         </LinkCardImage>
       )}
       <LinkCardTitle as="h2">
         <LinkCardAnchor asChild>
-          <Link
+          <NextLink
             onNavigate={() =>
               umamiTrack("navigere", {
                 kilde: "forsidekort",
@@ -100,7 +113,7 @@ const Card = ({ article, visible }: CardProps) => {
             href={`/${article.slug}`}
           >
             {article.heading}
-          </Link>
+          </NextLink>
         </LinkCardAnchor>
       </LinkCardTitle>
       {isArticle(article) || isBlogg(article) ? (
@@ -113,9 +126,7 @@ const Card = ({ article, visible }: CardProps) => {
         </LinkCardDescription>
       ) : null}
 
-      {(isArticle(article) ||
-        isBlogg(article) ||
-        (isKomponent(article) && article.status?.tag === "beta")) && (
+      {(isArticle(article) || isBlogg(article)) && (
         <VStack asChild gap="space-12" align="start">
           <LinkCardFooter>
             {isBlogg(article) && (
@@ -143,9 +154,6 @@ const Card = ({ article, visible }: CardProps) => {
                 text={article.tema?.[0] ?? undefined}
                 size="xsmall"
               />
-            )}
-            {isKomponent(article) && article.status?.tag === "beta" && (
-              <BetaTag />
             )}
           </LinkCardFooter>
         </VStack>

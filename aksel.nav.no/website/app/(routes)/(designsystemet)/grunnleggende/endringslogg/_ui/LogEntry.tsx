@@ -4,7 +4,6 @@ import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
-import NextLink from "next/link";
 import { useRef } from "react";
 import {
   BodyShort,
@@ -19,8 +18,9 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { ENDRINGSLOGG_QUERYResult } from "@/app/_sanity/query-types";
+import { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { cl } from "@/ui-utils/className";
 import { capitalizeText } from "@/ui-utils/format-text";
 import styles from "./Changelog.module.css";
@@ -29,7 +29,7 @@ import ShowMore from "./ShowMore";
 const Hero = ({
   herobilde,
 }: {
-  herobilde: NonNullable<ENDRINGSLOGG_QUERYResult[number]["herobilde"]>;
+  herobilde: NonNullable<ENDRINGSLOGG_QUERY_RESULT[number]["herobilde"]>;
 }) => (
   <Image
     className={styles.herobilde}
@@ -44,7 +44,7 @@ const Hero = ({
 );
 
 interface Props {
-  logEntry: ENDRINGSLOGG_QUERYResult[number];
+  logEntry: ENDRINGSLOGG_QUERY_RESULT[number];
   isLastOfMonth: boolean;
   isLastEntry: boolean;
 }

@@ -45,10 +45,8 @@
       {
         "files": "./aksel.nav.no/website/**",
         "options": {
-          "tailwindConfig": "./aksel.nav.no/website/tailwind.config.js",
           "plugins": [
-            "@trivago/prettier-plugin-sort-imports",
-            "prettier-plugin-tailwindcss"
+            "@trivago/prettier-plugin-sort-imports"
           ]
         }
       },
@@ -90,6 +88,8 @@
     "@storybook/react-vite": "^10.1.11",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/react": "19.2.3",
+    "@types/react-dom": "19.2.3",
     "@vitest/browser": "4.0.17",
     "@vitest/browser-playwright": "4.0.17",
     "@vitest/coverage-v8": "4.0.17",
@@ -111,7 +111,6 @@
     "lint-staged": "16.1.5",
     "playwright": "^1.57.0",
     "prettier": "3.6.2",
-    "prettier-plugin-tailwindcss": "^0.6.14",
     "react": "19.2.3",
     "react-docgen-typescript": "2.2.2",
     "react-dom": "19.2.3",

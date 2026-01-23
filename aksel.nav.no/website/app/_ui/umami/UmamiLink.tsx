@@ -1,8 +1,8 @@
 "use client";
 
 import { stegaClean } from "next-sanity";
-import NextLink from "next/link";
 import { Link, LinkProps } from "@navikt/ds-react";
+import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./UmamiLink.module.css";
 
