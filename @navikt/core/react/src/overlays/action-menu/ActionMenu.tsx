@@ -576,8 +576,8 @@ export const ActionMenuItem: OverridableComponent<
         {...rest}
         className={cl("aksel-action-menu__item", className, {
           "aksel-action-menu__item--danger": variant === "danger",
-          "aksel-action-menu__item--has-icon": icon && iconPosition === "left",
         })}
+        data-marker={iconPosition}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
       >
@@ -641,10 +641,8 @@ export const ActionMenuCheckboxItem = forwardRef<
           event.preventDefault();
         })}
         asChild={false}
-        className={cl(
-          "aksel-action-menu__item aksel-action-menu__item--has-icon",
-          className,
-        )}
+        className={cl("aksel-action-menu__item", className)}
+        data-marker="left"
         aria-keyshortcuts={shortcut}
       >
         {children}
@@ -777,10 +775,8 @@ export const ActionMenuRadioItem = forwardRef<
           event.preventDefault();
         })}
         asChild={false}
-        className={cl(
-          "aksel-action-menu__item aksel-action-menu__item--has-icon",
-          className,
-        )}
+        className={cl("aksel-action-menu__item", className)}
+        data-marker="left"
       >
         {children}
         <Marker placement="left">
@@ -926,11 +922,8 @@ export const ActionMenuSubTrigger = forwardRef<
         className={cl(
           "aksel-action-menu__item aksel-action-menu__sub-trigger",
           className,
-          {
-            "aksel-action-menu__item--has-icon":
-              icon && iconPosition === "left",
-          },
         )}
+        data-marker={iconPosition}
       >
         {children}
         {icon && (

@@ -84,10 +84,10 @@
     opacity: 0.5;
     pointer-events: none;
   }
-}
 
-.aksel-action-menu__item--has-icon {
-  --__axc-action-menu-item-pl: var(--ax-space-24);
+  &[data-marker="left"] {
+    --__axc-action-menu-item-pl: var(--ax-space-24);
+  }
 }
 
 .aksel-action-menu__sub-trigger {
