@@ -1,8 +1,10 @@
 import fastGlob from "fast-glob";
 import { flatten } from "flat";
 import { resolve as resolvePackagePath } from "mlly";
-import { readFileSync, renameSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { readFileSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { gzipSync } from "node:zlib";
+import { rolldown } from "rolldown";
 import { extract } from "tar";
 import { extractTypesFromDts } from "./helpers/extract-types.js";
 
@@ -111,6 +113,10 @@ type ExportPathConfig = {
   typesFile?: string;
   expotedTypes?: string[];
   expotedComponents?: string[];
+  bundleSizes?: {
+    gzip: number;
+    minified: number;
+  };
 };
 
 type ExportPathsConfig = Record<string, ExportPathConfig>;
@@ -122,9 +128,22 @@ class ReactAnalyzer extends Analyzer {
     this.resolveExportPaths();
 
     for (const [name, config] of Object.entries(this.exportPaths)) {
-      console.info(`analyzing ${name}...`);
+      console.info(`analyzing ${name === "." ? "Root" : name}...`);
       config.expotedTypes = this.exportedTypes(config.typesFile);
       config.expotedComponents = await this.exportedComponents(config.jsFile);
+
+      if (config.expotedComponents.length > 0 && config.jsFile) {
+        /* const importPath =
+          name === "."
+            ? packageName
+            : `${packageName}/${name.replace("./", "")}`; */
+
+        const importPath = await resolvePackagePath(
+          resolve(this.packageDir, config.jsFile),
+        );
+        const code = `import * as _mod from "${importPath}";\nconsole.info(_mod);`;
+        config.bundleSizes = await this.getBundleSize(code);
+      }
     }
   }
 
@@ -174,6 +193,51 @@ class ReactAnalyzer extends Analyzer {
     const path = await resolvePackagePath(resolve(this.packageDir, filePath));
     const components = await import(path);
     return Object.keys(components);
+  }
+
+  async getBundleSize(
+    code: string,
+  ): Promise<{ minified: number; gzip: number }> {
+    const inputFile = join(process.cwd(), `.bundle-input-${Date.now()}.js`);
+    writeFileSync(inputFile, code);
+
+    /* Common externals - peer dependencies that shouldn't be bundled */
+    const commonExternals: string[] = ["react", "react-dom"];
+
+    try {
+      const minBundle = await rolldown({
+        input: inputFile,
+        external: commonExternals,
+        platform: "browser",
+        treeshake: true,
+        logLevel: "silent",
+        resolve: {
+          conditionNames: ["import", "module", "browser", "default"],
+        },
+      });
+
+      const minOutput = await minBundle.generate({
+        format: "esm",
+        minify: true,
+      });
+
+      const minCode = minOutput.output[0].code;
+      const minSize = Buffer.byteLength(minCode, "utf8");
+      const minGzip = gzipSync(minCode).length;
+
+      await minBundle.close();
+
+      return {
+        minified: minSize,
+        gzip: minGzip,
+      };
+    } finally {
+      try {
+        unlinkSync(inputFile);
+      } catch {
+        // Ignore cleanup errors
+      }
+    }
   }
 }
 
