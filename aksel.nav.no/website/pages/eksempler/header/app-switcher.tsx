@@ -1,5 +1,5 @@
 import { ExternalLinkIcon, MenuGridIcon } from "@navikt/aksel-icons";
-import { Dropdown, InternalHeader, Spacer } from "@navikt/ds-react";
+import { ActionMenu, InternalHeader, Spacer } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -8,37 +8,60 @@ const Example = () => {
       <InternalHeader>
         <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
         <Spacer />
-        <Dropdown defaultOpen>
-          <InternalHeader.Button as={Dropdown.Toggle}>
-            <MenuGridIcon
-              style={{ fontSize: "1.5rem" }}
-              title="Systemer og oppslagsverk"
-            />
-          </InternalHeader.Button>
-
-          <Dropdown.Menu>
-            <Dropdown.Menu.GroupedList>
-              <Dropdown.Menu.GroupedList.Heading>
-                Systemer og oppslagsverk
-              </Dropdown.Menu.GroupedList.Heading>
-              <Dropdown.Menu.GroupedList.Item as="a" target="_blank" href="#">
-                A.Inntekt <ExternalLinkIcon aria-hidden />
-              </Dropdown.Menu.GroupedList.Item>
-              <Dropdown.Menu.GroupedList.Item as="a" target="_blank" href="#">
-                Aa-registeret <ExternalLinkIcon aria-hidden />
-              </Dropdown.Menu.GroupedList.Item>
-              <Dropdown.Menu.GroupedList.Item as="a" target="_blank" href="#">
-                Gosys <ExternalLinkIcon aria-hidden />
-              </Dropdown.Menu.GroupedList.Item>
-              <Dropdown.Menu.GroupedList.Item as="a" target="_blank" href="#">
-                Modia personoversikt <ExternalLinkIcon aria-hidden />
-              </Dropdown.Menu.GroupedList.Item>
-              <Dropdown.Menu.GroupedList.Item as="a" target="_blank" href="#">
-                Oppdrag <ExternalLinkIcon aria-hidden />
-              </Dropdown.Menu.GroupedList.Item>
-            </Dropdown.Menu.GroupedList>
-          </Dropdown.Menu>
-        </Dropdown>
+        <ActionMenu>
+          <ActionMenu.Trigger>
+            <InternalHeader.Button>
+              <MenuGridIcon
+                style={{ fontSize: "1.5rem" }}
+                title="Systemer og oppslagsverk"
+              />
+            </InternalHeader.Button>
+          </ActionMenu.Trigger>
+          <ActionMenu.Content align="end">
+            <ActionMenu.Group label="Systemer og oppslagsverk">
+              <ActionMenu.Item
+                as="a"
+                target="_blank"
+                href="#"
+                icon={<ExternalLinkIcon aria-hidden />}
+              >
+                A.Inntekt
+              </ActionMenu.Item>
+              <ActionMenu.Item
+                as="a"
+                target="_blank"
+                href="#"
+                icon={<ExternalLinkIcon aria-hidden />}
+              >
+                Aa-registeret
+              </ActionMenu.Item>
+              <ActionMenu.Item
+                as="a"
+                target="_blank"
+                href="#"
+                icon={<ExternalLinkIcon aria-hidden />}
+              >
+                Gosys
+              </ActionMenu.Item>
+              <ActionMenu.Item
+                as="a"
+                target="_blank"
+                href="#"
+                icon={<ExternalLinkIcon aria-hidden />}
+              >
+                Modia personoversikt
+              </ActionMenu.Item>
+              <ActionMenu.Item
+                as="a"
+                target="_blank"
+                href="#"
+                icon={<ExternalLinkIcon aria-hidden />}
+              >
+                Oppdrag
+              </ActionMenu.Item>
+            </ActionMenu.Group>
+          </ActionMenu.Content>
+        </ActionMenu>
         <InternalHeader.User name="Ola Normann" />
       </InternalHeader>
     </div>
