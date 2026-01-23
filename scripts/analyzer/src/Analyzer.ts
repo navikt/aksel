@@ -124,9 +124,7 @@ class ReactAnalyzer extends Analyzer {
     for (const [name, config] of Object.entries(this.exportPaths)) {
       console.info(`analyzing ${name}...`);
       config.expotedTypes = this.exportedTypes(config.typesFile);
-      config.expotedComponents = await this.exportedComponents(
-        config.typesFile,
-      );
+      config.expotedComponents = await this.exportedComponents(config.jsFile);
     }
   }
 
