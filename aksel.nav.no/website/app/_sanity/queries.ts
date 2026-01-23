@@ -218,18 +218,11 @@ const GOD_PRAKSIS_ALL_TEMA_QUERY =
   description,
   pictogram,
   "slug": slug.current,
-  "articles": *[_type=="aksel_artikkel"
-    && (^._id in undertema[]->tema._ref)] {
+  "articles": *[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)] | order(publishedAt desc)[0...4] {
       heading,
       "slug": slug.current,
       "undertema": undertema[]->{title, "temaTitle": tema->title},
       "innholdstype": innholdstype->title,
-      "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month
-    } | order(coalesce(views, -1) desc)[0...4]{
-      heading,
-      slug,
-      undertema,
-      innholdstype
     },
 }`);
 
