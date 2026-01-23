@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
   BodyLong,
+  BodyShort,
   Box,
   HGrid,
   Heading,
@@ -112,7 +113,7 @@ export default async function Page() {
                   );
                 })}
               </HGrid>
-              <h3>
+              <BodyShort as="h3" size="large">
                 <Link
                   href={`/god-praksis/${tema.slug}`}
                   as={NextLink}
@@ -123,7 +124,7 @@ export default async function Page() {
 
                   <AnimatedArrowRight />
                 </Link>
-              </h3>
+              </BodyShort>
             </section>
           );
         })}
