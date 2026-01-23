@@ -106,25 +106,28 @@ class CSSAnalyzer extends Analyzer {
   }
 }
 
-class ReactAnalyzer extends Analyzer {
-  exportPaths: Record<
-    string,
-    {
-      jsFile?: string;
-      typesFile?: string;
-      expotedTypes?: string[];
-      expotedComponents?: string[];
-    }
-  > = {};
+type ExportPathConfig = {
+  jsFile?: string;
+  typesFile?: string;
+  expotedTypes?: string[];
+  expotedComponents?: string[];
+};
 
-  constructor(tarballGlob: string) {
-    super(tarballGlob);
-    this.resolveExportPaths();
-    this.resolveExportedTypes();
-  }
+type ExportPathsConfig = Record<string, ExportPathConfig>;
+
+class ReactAnalyzer extends Analyzer {
+  exportPaths: ExportPathsConfig = {};
 
   async init() {
-    await this.resolveExportedComponents();
+    this.resolveExportPaths();
+
+    for (const [name, config] of Object.entries(this.exportPaths)) {
+      console.info(`analyzing ${name}...`);
+      config.expotedTypes = this.exportedTypes(config.typesFile);
+      config.expotedComponents = await this.exportedComponents(
+        config.typesFile,
+      );
+    }
   }
 
   private resolveExportPaths() {
@@ -158,40 +161,21 @@ class ReactAnalyzer extends Analyzer {
     }
   }
 
-  private resolveExportedTypes() {
-    console.info("Resolving exported types...");
-    for (const [name, paths] of Object.entries(this.exportPaths)) {
-      if (!paths.typesFile) {
-        this.exportPaths[name].expotedTypes = [];
-        continue;
-      }
-      const types = extractTypesFromDts(
-        `${this.packageDir}/${paths.typesFile}`,
-      );
-      this.exportPaths[name].expotedTypes = types;
+  private exportedTypes(filePath: ExportPathConfig["typesFile"]) {
+    if (!filePath) {
+      return [];
     }
-
-    console.info("Done resolving exported types.");
+    return extractTypesFromDts(`${this.packageDir}/${filePath}`);
   }
 
-  private async resolveExportedComponents() {
-    console.info("Resolving exported components...");
-    for (const [name, paths] of Object.entries(this.exportPaths)) {
-      if (!paths.jsFile) {
-        this.exportPaths[name].expotedComponents = [];
-        continue;
-      }
-
-      const path = await resolvePackagePath(
-        resolve(this.packageDir, paths.jsFile),
-      );
-      const components = await import(path);
-      const keys = Object.keys(components);
-
-      this.exportPaths[name].expotedComponents = keys;
+  private async exportedComponents(filePath: ExportPathConfig["jsFile"]) {
+    if (!filePath) {
+      return [];
     }
 
-    console.info("Done resolving exported types.");
+    const path = await resolvePackagePath(resolve(this.packageDir, filePath));
+    const components = await import(path);
+    return Object.keys(components);
   }
 }
 
