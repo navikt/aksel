@@ -14,7 +14,7 @@ import {
   Textarea,
 } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { FormState, sendFeedbackAction } from "./actions";
+import { sendFeedbackAction } from "./actions";
 import { zodFormDataSchema } from "./actions.zod";
 
 function GodPraksisFeedbackLogin() {
@@ -48,6 +48,11 @@ function GodPraksisFeedbackLogin() {
     </div>
   );
 }
+
+type FormState =
+  | { value: "sent"; error: string | null }
+  | { value: "writing"; error: string | null }
+  | { value: "error"; error: string };
 
 function GodPraksisFeedbackForm({
   docId,

@@ -27,7 +27,7 @@ function GodPrakisChipsNavigationButton(props: GpChipNavigationButtonProps) {
     } else {
       params.set(type, title);
     }
-    return `${pathname}?${params.toString()}`;
+    return stegaClean(`${pathname}?${params.toString()}`);
   };
 
   const handleClick = () => {

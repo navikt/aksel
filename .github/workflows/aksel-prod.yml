@@ -52,6 +52,7 @@ jobs:
           nais_project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           sanity_read_token: ${{ secrets.SANITY_READ }}
           sanity_read_no_drafts_token: ${{ secrets.SANITY_READ_NO_DRAFTS }}
+          sanity_deploy_studio: ${{ secrets.SANITY_DEPLOY_STUDIO }}
 
       - name: Get complete tag
         run: echo "TAG=PROD-$( date +%s )" >> $GITHUB_ENV
