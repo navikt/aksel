@@ -126,7 +126,7 @@
     "vite": "^7.2.4",
     "vite-plugin-turbosnap": "^1.0.3",
     "vite-tsconfig-paths": "^6.0.3",
-    "vitest": "4.0.17"
+    "vitest": "4.0.18"
   },
   "packageManager": "yarn@4.12.0"
 }
