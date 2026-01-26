@@ -9239,7 +9239,7 @@ __metadata:
     "@vitest/browser-playwright": "npm:4.0.17"
     "@vitest/coverage-v8": "npm:4.0.17"
     "@vitest/eslint-plugin": "npm:1.6.6"
-    chromatic: "npm:13.3.3"
+    chromatic: "npm:13.3.5"
     concurrently: "npm:9.2.1"
     cross-env: "npm:^10.0.0"
     eslint: "npm:^9.39.2"
@@ -10501,9 +10501,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:13.3.3":
-  version: 13.3.3
-  resolution: "chromatic@npm:13.3.3"
+"chromatic@npm:13.3.5":
+  version: 13.3.5
+  resolution: "chromatic@npm:13.3.5"
   peerDependencies:
     "@chromatic-com/cypress": ^0.*.* || ^1.0.0
     "@chromatic-com/playwright": ^0.*.* || ^1.0.0
@@ -10516,7 +10516,7 @@ __metadata:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: 10/eb720137b4b0b8d1886cf1d1c94639c1868ba9cc34a5227f00fde9bedb18f25a6aedbda9b01048ca6e6cf42fa3f90aa9ddee04848cdf4c6d47c2babf5f105435
+  checksum: 10/d660e926e2763158eb216c12fd443ac909235b62e0855d6485c5ec270cbde8ce6d5467fc9792a988f2cd4c32722efb9899982b26d4bd8265381846c7d7006c21
   languageName: node
   linkType: hard
 
