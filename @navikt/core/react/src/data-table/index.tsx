@@ -1,0 +1,15 @@
+"use client";
+export { default as DataTable } from "./root/DataTableRoot";
+export type { DataTableProps } from "./root/DataTableRoot";
+export { DataTableCaption } from "./caption/DataTableCaption";
+export type { DataTableCaptionProps } from "./caption/DataTableCaption";
+export { DataTableThead } from "./thead/DataTableThead";
+export type { DataTableTheadProps } from "./thead/DataTableThead";
+export { DataTableTbody } from "./tbody/DataTableTbody";
+export type { DataTableTbodyProps } from "./tbody/DataTableTbody";
+export { DataTableTr } from "./tr/DataTableTr";
+export type { DataTableTrProps } from "./tr/DataTableTr";
+export { DataTableTh } from "./th/DataTableTh";
+export type { DataTableThProps } from "./th/DataTableTh";
+export { DataTableTd } from "./td/DataTableTd";
+export type { DataTableTdProps } from "./td/DataTableTd";
