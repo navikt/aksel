@@ -9,11 +9,11 @@ const DataTableThead = forwardRef<HTMLTableSectionElement, DataTableTheadProps>(
       <thead
         {...rest}
         ref={forwardedRef}
-        className={cl("aksel-data-table__header", className)}
+        className={cl("aksel-data-table__thead", className)}
       />
     );
   },
 );
 
 export { DataTableThead };
-export type { DataTableTheadProps as TableTheadProps };
+export type { DataTableTheadProps };

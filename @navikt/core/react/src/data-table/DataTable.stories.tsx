@@ -15,10 +15,24 @@ export default meta;
 export const Default = () => (
   <DataTable>
     <DataTable.Thead>
-      <tr>
-        <th>Header 1</th>
-        <th>Header 2</th>
-      </tr>
+      <DataTable.Tr>
+        <DataTable.Th>Header 1</DataTable.Th>
+        <DataTable.Th>Header 2</DataTable.Th>
+      </DataTable.Tr>
     </DataTable.Thead>
+    <DataTable.Tbody>
+      <DataTable.Tr>
+        <DataTable.Td>Data 1</DataTable.Td>
+        <DataTable.Td>Data 2</DataTable.Td>
+      </DataTable.Tr>
+      <DataTable.Tr>
+        <DataTable.Td>Data 1</DataTable.Td>
+        <DataTable.Td>Data 2</DataTable.Td>
+      </DataTable.Tr>
+      <DataTable.Tr>
+        <DataTable.Td>Data 1</DataTable.Td>
+        <DataTable.Td>Data 2</DataTable.Td>
+      </DataTable.Tr>
+    </DataTable.Tbody>
   </DataTable>
 );
