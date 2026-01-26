@@ -42,7 +42,7 @@
     "style-dictionary": "^4.1.1",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
-    "vitest": "4.0.16"
+    "vitest": "4.0.18"
   },
   "publishConfig": {
     "access": "public",
