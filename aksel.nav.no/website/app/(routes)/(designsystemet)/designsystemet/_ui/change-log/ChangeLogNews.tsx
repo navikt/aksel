@@ -1,7 +1,7 @@
 import { FileTextIcon, SparklesIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
-  BoxNew,
+  Box,
   HGrid,
   Heading,
   LinkCard,
@@ -60,9 +60,9 @@ async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
             </LinkCardTitle>
           </LinkCard>
         ))}
-        <BoxNew asChild borderColor="neutral">
+        <Box asChild borderColor="neutral">
           <LinkCard>
-            <BoxNew
+            <Box
               asChild
               padding="space-16"
               borderRadius="12"
@@ -76,14 +76,14 @@ async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
                   aria-hidden="true"
                 />
               </LinkCardIcon>
-            </BoxNew>
+            </Box>
             <LinkCardTitle as="span">
               <LinkCardAnchor href="/grunnleggende/endringslogg">
                 Alle endringer
               </LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
-        </BoxNew>
+        </Box>
       </HGrid>
     </VStack>
   );
@@ -119,7 +119,7 @@ function ChangelogIcon({
   }
 
   return (
-    <BoxNew
+    <Box
       asChild
       padding="space-16"
       borderRadius="12"
@@ -133,7 +133,7 @@ function ChangelogIcon({
           aria-hidden="true"
         />
       </LinkCardIcon>
-    </BoxNew>
+    </Box>
   );
 }
 

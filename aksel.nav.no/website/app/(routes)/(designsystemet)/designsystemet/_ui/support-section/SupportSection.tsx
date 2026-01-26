@@ -1,5 +1,5 @@
 import {
-  BoxNew,
+  Box,
   HGrid,
   HStack,
   Heading,
@@ -49,7 +49,7 @@ const SupportSection = ({ entries }: Props) => (
     </Heading>
     <HGrid gap="space-24" columns={{ md: 2 }}>
       {entries.map(({ title, description, link }) => (
-        <BoxNew
+        <Box
           key={title}
           className="support-section"
           background="brand-blue-soft"
@@ -78,7 +78,7 @@ const SupportSection = ({ entries }: Props) => (
               </LinkCardFooter>
             )}
           </LinkCard>
-        </BoxNew>
+        </Box>
       ))}
     </HGrid>
   </VStack>

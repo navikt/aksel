@@ -1,4 +1,4 @@
-import { BodyLong, BoxNew, HGrid, Heading, VStack } from "@navikt/ds-react";
+import { BodyLong, Box, HGrid, Heading, VStack } from "@navikt/ds-react";
 import { DS_FRONT_PAGE_QUERY_RESULT } from "@/app/_sanity/query-types";
 import styles from "./AkselByNumbers.module.css";
 
@@ -48,7 +48,7 @@ const AkselByNumbers = ({
           )[index];
 
           return (
-            <BoxNew
+            <Box
               className={styles.akselByNumbers}
               key={numberTitle}
               borderWidth="1"
@@ -85,7 +85,7 @@ const AkselByNumbers = ({
                   </BodyLong>
                 )}
               </VStack>
-            </BoxNew>
+            </Box>
           );
         })}
       </HGrid>

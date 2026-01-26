@@ -3,7 +3,7 @@ import { TokenForDocumentationT } from "../../types";
 
 const RadiusToken = ({ token }: { token: TokenForDocumentationT }) => (
   <VStack as="div" align="center" justify="center" height="100%">
-    <Box.New
+    <Box
       as="div"
       width="32px"
       height="32px"

@@ -22,7 +22,7 @@ const TokenEntry = ({
   const tokenValue = searchParams?.get("tokenFormat");
   const tokenText = tokenValue ? token[tokenValue] : `--ax-${token.name}`;
   return (
-    <Box.New
+    <Box
       borderWidth={`${index === 0 ? 1 : 0} 0 1`}
       borderColor="neutral-subtle"
       paddingBlock="space-16"
@@ -53,7 +53,7 @@ const TokenEntry = ({
           )}
         </VStack>
       </HGrid>
-    </Box.New>
+    </Box>
   );
 };
 

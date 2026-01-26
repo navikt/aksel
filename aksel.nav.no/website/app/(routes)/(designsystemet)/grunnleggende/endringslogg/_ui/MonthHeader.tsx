@@ -1,6 +1,6 @@
 "use client";
 
-import { BoxNew, HStack, Heading, Hide, VStack } from "@navikt/ds-react";
+import { Box, HStack, Heading, Hide, VStack } from "@navikt/ds-react";
 import { capitalizeText } from "@/ui-utils/format-text";
 import styles from "./Changelog.module.css";
 import MonthBubble from "./MonthBubble";
@@ -17,7 +17,7 @@ export default function MonthHeader({ monthAndYear, index }: Props) {
         {index > 0 && (
           <VStack width="48px" align="center">
             <Hide below="sm" asChild>
-              <BoxNew flexGrow="1" className={styles.timeline} />
+              <Box flexGrow="1" className={styles.timeline} />
             </Hide>
           </VStack>
         )}

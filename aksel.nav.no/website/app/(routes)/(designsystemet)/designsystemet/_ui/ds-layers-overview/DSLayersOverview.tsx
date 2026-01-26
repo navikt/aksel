@@ -7,7 +7,7 @@ import {
 import {
   BodyLong,
   BodyShort,
-  BoxNew,
+  Box,
   Heading,
   Link,
   LinkCard,
@@ -31,7 +31,7 @@ type DSLayersOverviewProps = {
 };
 
 const DSLayersOverview = ({ title, description }: DSLayersOverviewProps) => (
-  <BoxNew
+  <Box
     background="brand-blue-soft"
     borderColor="brand-blue-subtle"
     borderWidth="1"
@@ -60,7 +60,7 @@ const DSLayersOverview = ({ title, description }: DSLayersOverviewProps) => (
         <LinkCardLinks />
       </Show>
     </VStack>
-  </BoxNew>
+  </Box>
 );
 
 const Links = {
@@ -93,7 +93,7 @@ const Links = {
 
 function IllustratedLinks() {
   return (
-    <BoxNew
+    <Box
       maxWidth="600px"
       width="100%"
       paddingInline={{ xs: "space-0", md: "space-0 space-32" }}
@@ -202,7 +202,7 @@ function IllustratedLinks() {
           </Link>
         </ListItem>
       </List>
-    </BoxNew>
+    </Box>
   );
 }
 
@@ -210,14 +210,14 @@ function LinkCardLinks() {
   return (
     <VStack gap="space-16" width="100%">
       {Object.entries(Links).map(([key, { href, label, icon }]) => (
-        <BoxNew key={key} background="brand-blue-moderateA" asChild>
+        <Box key={key} background="brand-blue-moderateA" asChild>
           <LinkCard>
             <LinkCardIcon>{icon}</LinkCardIcon>
             <LinkCardTitle data-color="neutral">
               <LinkCardAnchor href={href}>{label}</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
-        </BoxNew>
+        </Box>
       ))}
     </VStack>
   );
