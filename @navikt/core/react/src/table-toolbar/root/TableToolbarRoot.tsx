@@ -31,6 +31,8 @@ const TableToolbar = React.forwardRef<HTMLDivElement, ToolbarRootProps>(
   },
 ) as TableToolbarRootComponent;
 
+TableToolbar.SearchField = TableToolbarSearchField;
+
 export { TableToolbar };
 export default TableToolbar;
 export type { ToolbarRootProps };

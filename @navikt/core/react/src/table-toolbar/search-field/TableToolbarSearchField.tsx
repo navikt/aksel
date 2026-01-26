@@ -10,4 +10,5 @@ const TableToolbarSearchField = React.forwardRef<
 });
 
 export { TableToolbarSearchField };
+export default TableToolbarSearchField;
 export type { TableToolbarSearchFieldProps };
