@@ -101,7 +101,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       <table
         {...rest}
         ref={forwardedRef}
-        className={cl("aksel-data-table__td", className)}
+        className={cl("aksel-data-table", className)}
       />
     );
   },
