@@ -1,6 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useEffect, useRef, useState } from "react";
-import { LeaveIcon, PencilIcon, StarIcon } from "@navikt/aksel-icons";
+import {
+  ArrowDownRightIcon,
+  CloudIcon,
+  LeaveIcon,
+  PencilIcon,
+  StarIcon,
+} from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { InternalHeader } from "../../internal-header";
 import { HStack, Spacer, VStack } from "../../layout/stack";
@@ -712,4 +718,64 @@ export const HeaderWithUserInfo = () => {
       </InternalHeader>
     </div>
   );
+};
+
+export const IconPosition: Story = {
+  render: (props) => {
+    return (
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Group label="Group 1">
+            <ActionMenu.Item
+              onSelect={() => console.log("Item 1 clicked")}
+              icon={<StarIcon aria-hidden />}
+            >
+              Item 1
+            </ActionMenu.Item>
+            <ActionMenu.Item
+              onSelect={() => console.log("Item 2 clicked")}
+              icon={<PencilIcon aria-hidden />}
+              iconPosition="right"
+            >
+              Item 2
+            </ActionMenu.Item>
+          </ActionMenu.Group>
+          <ActionMenu.Divider />
+          <ActionMenu.Group label="Group 2">
+            <ActionMenu.Sub open={props.open}>
+              <ActionMenu.SubTrigger icon={<ArrowDownRightIcon aria-hidden />}>
+                Submenu 1
+              </ActionMenu.SubTrigger>
+              <ActionMenu.SubContent>
+                <ActionMenu.Item
+                  onSelect={() => console.log("Subitem 1 clicked")}
+                >
+                  Subitem 1
+                </ActionMenu.Item>
+              </ActionMenu.SubContent>
+            </ActionMenu.Sub>
+            <ActionMenu.Sub open={props.open}>
+              <ActionMenu.SubTrigger
+                icon={<CloudIcon aria-hidden />}
+                iconPosition="right"
+              >
+                Submenu 2
+              </ActionMenu.SubTrigger>
+              <ActionMenu.SubContent>
+                <ActionMenu.Item
+                  onSelect={() => console.log("Subitem 1 clicked")}
+                >
+                  Subitem 1
+                </ActionMenu.Item>
+              </ActionMenu.SubContent>
+            </ActionMenu.Sub>
+          </ActionMenu.Group>
+        </ActionMenu.Content>
+      </ActionMenu>
+    );
+  },
+  decorators: [DemoDecorator],
 };
