@@ -26,3 +26,4 @@ async function analyze(directory: "local" | "remote" = "local") {
 }
 
 export { analyze };
+export type { BundleAnalysisResult };
