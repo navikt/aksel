@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "dependencies": {
-    "rolldown": "^1.0.0-rc.1",
+    "rolldown": "latest",
     "ts-morph": "^27.0.2",
     "tsx": "^4.20.6"
   },
