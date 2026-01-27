@@ -70,7 +70,7 @@ function Example() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, { showThemeSwitch: false });
 
 /* Storybook story */
 export const Demo = {

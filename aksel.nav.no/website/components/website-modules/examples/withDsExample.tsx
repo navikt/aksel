@@ -31,11 +31,18 @@ type withDsT = {
   background?: "inverted" | "subtle";
   minHeight?: string;
   showBreakpoints?: boolean;
+  showThemeSwitch?: boolean;
 };
 
 export const withDsExample = (
   Component: ComponentType,
-  { variant, background, minHeight, showBreakpoints }: withDsT = {},
+  {
+    variant,
+    background,
+    minHeight,
+    showBreakpoints,
+    showThemeSwitch = true,
+  }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
     const pathname = usePathname() || "///";
@@ -67,7 +74,7 @@ export const withDsExample = (
             } - aksel.nav.no`}
           </title>
         </Head>
-        <ExampleThemingSwitch />
+        {showThemeSwitch && <ExampleThemingSwitch />}
         {showBreakpoints && <BreakpointText />}
         <main
           id="ds-example"
