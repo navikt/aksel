@@ -35,9 +35,9 @@ function KodeEksemplerIFrame(props: {
 
     const waitForExampleContentToRender = setInterval(() => {
       const exampleIframeDOM = iframeRef.current?.contentDocument;
-      const exampleWrapper = exampleIframeDOM?.getElementById(
-        dir.variant === "templates" ? "__next" : "ds-example",
-      );
+      const exampleWrapper =
+        exampleIframeDOM?.getElementById("ds-example") ||
+        exampleIframeDOM?.getElementById("__next");
 
       if (exampleWrapper?.offsetHeight) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
