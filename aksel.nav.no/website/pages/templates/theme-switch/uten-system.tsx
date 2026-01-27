@@ -21,7 +21,7 @@ function Example() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, { showThemeSwitch: false });
 
 /* Storybook story */
 export const Demo = {
@@ -30,5 +30,6 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  desc: "Undermeny trengs ikke hvis man bare skal kunne bytte mellom lyst og mørkt tema.",
   sandboxEnabled: false,
 };
