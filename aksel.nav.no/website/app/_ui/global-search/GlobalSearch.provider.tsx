@@ -68,7 +68,6 @@ function GlobalSearchResultProvider({
   useEffect(() => {
     if (!paramValue) {
       shouldInitialOpenRef.current = false;
-      // eslint-disable-next-line
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSearchResults(null);
       return;
