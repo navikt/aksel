@@ -9384,6 +9384,7 @@ __metadata:
     tar: "npm:^7.5.3"
     ts-morph: "npm:^27.0.2"
     tsx: "npm:^4.20.6"
+    vitest: "npm:4.0.18"
   languageName: unknown
   linkType: soft
 

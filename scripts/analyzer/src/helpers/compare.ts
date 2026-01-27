@@ -1,3 +1,4 @@
+import type { ExportPathConfig } from "../analyze-react.js";
 import type { BundleAnalysisResult } from "../analyze.js";
 
 type ExportDiff = {
@@ -62,17 +63,18 @@ function compareResults({
   const pathDiffs: Record<string, ExportConfigDiff> = {};
 
   for (const pathKey of allKeys) {
-    const trunkConfig = trunkExports[pathKey];
-    const branchConfig = branchExports[pathKey];
+    /* For some reason undefined is omitted if not set "as" */
+    const trunkConfig = trunkExports[pathKey] as ExportPathConfig | undefined;
+    const branchConfig = branchExports[pathKey] as ExportPathConfig | undefined;
 
     const typesDiff = compareArrays({
-      trunk: trunkConfig.expotedTypes,
-      branch: branchConfig.expotedTypes,
+      trunk: trunkConfig?.exportedTypes,
+      branch: branchConfig?.exportedTypes,
     });
 
     const componentsDiff = compareArrays({
-      trunk: trunkConfig.expotedComponents,
-      branch: branchConfig.expotedComponents,
+      trunk: trunkConfig?.exportedComponents,
+      branch: branchConfig?.exportedComponents,
     });
 
     const sizeDiff: ExportConfigDiff["bundleSize"] = {
@@ -80,13 +82,13 @@ function compareResults({
       minified: 0,
     };
 
-    if (trunkConfig.bundleSize && !branchConfig.bundleSize) {
+    if (trunkConfig?.bundleSize && !branchConfig?.bundleSize) {
       sizeDiff.gzip = -(trunkConfig.bundleSize.gzip ?? 0);
       sizeDiff.minified = -(trunkConfig.bundleSize.minified ?? 0);
-    } else if (!trunkConfig.bundleSize && branchConfig.bundleSize) {
+    } else if (!trunkConfig?.bundleSize && branchConfig?.bundleSize) {
       sizeDiff.gzip = branchConfig.bundleSize.gzip ?? 0;
       sizeDiff.minified = branchConfig.bundleSize.minified ?? 0;
-    } else if (trunkConfig.bundleSize && branchConfig.bundleSize) {
+    } else if (trunkConfig?.bundleSize && branchConfig?.bundleSize) {
       sizeDiff.gzip =
         (branchConfig.bundleSize.gzip ?? 0) -
         (trunkConfig.bundleSize.gzip ?? 0);

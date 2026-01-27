@@ -9,8 +9,8 @@ import { getPackageExports, unpackTar } from "./helpers/unpack.js";
 type ExportPathConfig = {
   jsFile: string | null;
   typesFile: string | null;
-  expotedTypes: string[];
-  expotedComponents: string[];
+  exportedTypes: string[];
+  exportedComponents: string[];
   bundleSize: {
     gzip: number;
     minified: number;
@@ -61,8 +61,8 @@ async function analyzeReact(tarLocation: string): Promise<ExportPathsConfig> {
       }
     }
 
-    let types: ExportPathConfig["expotedTypes"] = [];
-    let components: ExportPathConfig["expotedComponents"] = [];
+    let types: ExportPathConfig["exportedTypes"] = [];
+    let components: ExportPathConfig["exportedComponents"] = [];
     let bundleSizes: ExportPathConfig["bundleSize"] = null;
 
     const typeFile = reactConfig[name].typesFile;
@@ -83,8 +83,8 @@ async function analyzeReact(tarLocation: string): Promise<ExportPathsConfig> {
       }
     }
 
-    reactConfig[name].expotedTypes = types;
-    reactConfig[name].expotedComponents = components;
+    reactConfig[name].exportedTypes = types;
+    reactConfig[name].exportedComponents = components;
     reactConfig[name].bundleSize = bundleSizes;
   }
 
@@ -95,10 +95,11 @@ function createNewConfig(): ExportPathConfig {
   return {
     jsFile: null,
     typesFile: null,
-    expotedTypes: [],
-    expotedComponents: [],
+    exportedTypes: [],
+    exportedComponents: [],
     bundleSize: null,
   };
 }
 
 export { analyzeReact };
+export type { ExportPathConfig };
