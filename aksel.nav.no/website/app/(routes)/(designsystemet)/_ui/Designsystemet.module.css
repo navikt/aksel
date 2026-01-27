@@ -15,7 +15,7 @@
   max-width: 1920px;
 
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  min-height: calc(100vh - var(--website-header-height-width-border));
+  min-height: calc(100vh - var(--website-header-sticky-height));
 }
 
 @media (min-width: 1024px) {

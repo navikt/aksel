@@ -4,14 +4,7 @@ import { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import {
-  BodyShort,
-  BoxNew,
-  HGrid,
-  HStack,
-  Heading,
-  Tag,
-} from "@navikt/ds-react";
+import { BodyShort, Box, HGrid, HStack, Heading, Tag } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -124,7 +117,6 @@ export default async function (props: Props) {
           )}
         </HStack>
       </div>
-
       <TableOfContents
         feedback={{
           name: "Endringslogg",
@@ -132,8 +124,7 @@ export default async function (props: Props) {
         }}
         toc={toc || []}
       />
-
-      <BoxNew marginBlock="space-0 space-24">
+      <Box marginBlock="space-0 space-24">
         {fremhevet && herobilde?.asset && (
           <Image
             className={styles.herobilde}
@@ -149,8 +140,7 @@ export default async function (props: Props) {
           value={content as PortableTextBlock[]}
           data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
         />
-      </BoxNew>
-
+      </Box>
       <HGrid
         marginBlock="space-28 space-0"
         gap="space-48 space-24"

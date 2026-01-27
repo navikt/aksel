@@ -7,7 +7,7 @@ import {
   FaceLaughIcon,
   FaceSmileIcon,
 } from "@navikt/aksel-icons";
-import { BoxNew } from "@navikt/ds-react";
+import { Box } from "@navikt/ds-react";
 import {
   LinkCard,
   LinkCardAnchor,
@@ -67,7 +67,7 @@ function AnimatedFaceCard() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <BoxNew
+      <Box
         asChild
         padding="space-8"
         borderRadius="12"
@@ -76,7 +76,7 @@ function AnimatedFaceCard() {
         <LinkCardIcon>
           <Icon fontSize="3rem" color="var(--ax-text-subtle)" />
         </LinkCardIcon>
-      </BoxNew>
+      </Box>
       <LinkCardTitle data-color="neutral">
         <LinkCardAnchor asChild>
           <NextLink href="/komponenter/ikoner">Ikoner</NextLink>

@@ -6,9 +6,6 @@ registries:
     token: ${{ secrets.READER_TOKEN }}
 updates:
   - package-ecosystem: npm
-    cooldown:
-      default-days: 7
-      semver-major-days: 30
     directory: /
     exclude-paths:
       - "examples/**"
@@ -22,8 +19,10 @@ updates:
       sanity:
         patterns:
           - "sanity"
-          - "@sanity/vision"
-          - "@sanity/schema"
+          - "sanity-*"
+          - "@sanity/*"
+          - "next-sanity"
+          - "@portabletext/*"
       eslint:
         patterns:
           - "eslint"
@@ -40,6 +39,17 @@ updates:
           - "vitest"
           - "@vitest/*"
 
+  - package-ecosystem: npm
+    directory: /examples
+    schedule:
+      interval: weekly
+      day: monday
+      time: "04:00"
+    groups:
+      all-deps:
+        patterns:
+          - "*"
+
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
@@ -52,3 +62,10 @@ updates:
       actions:
         patterns:
           - "*"
+
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "04:00"

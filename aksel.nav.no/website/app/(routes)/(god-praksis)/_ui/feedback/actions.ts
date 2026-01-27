@@ -7,11 +7,6 @@ import { client } from "@/app/_sanity/client";
 import { DOCUMENT_BY_ID_FOR_SLACK_QUERY } from "@/app/_sanity/queries";
 import { zodFormDataSchema } from "./actions.zod";
 
-type FormState =
-  | { value: "sent"; error: string | null }
-  | { value: "writing"; error: string | null }
-  | { value: "error"; error: string };
-
 const slackClient = new WebClient(process.env.SLACK_BOT_USER_TOKEN);
 
 async function sendFeedbackAction(
@@ -190,4 +185,3 @@ function slackBlock({ feedback, article, sender }: SlackBlockT) {
 }
 
 export { sendFeedbackAction };
-export type { FormState };

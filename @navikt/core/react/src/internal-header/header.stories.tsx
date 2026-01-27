@@ -7,8 +7,14 @@ import {
   LeaveIcon,
   MenuGridIcon,
 } from "@navikt/aksel-icons";
-import { BodyLong, BodyShort, Detail, Spacer, VStack } from "@navikt/ds-react";
-import { Dropdown } from "../dropdown";
+import {
+  ActionMenu,
+  BodyLong,
+  BodyShort,
+  Detail,
+  Spacer,
+  VStack,
+} from "@navikt/ds-react";
 import InternalHeader from "./InternalHeader";
 
 export default {
@@ -33,33 +39,35 @@ export const Default = {
           </InternalHeader.Title>
         )}
         {props.systemMenu && (
-          <Dropdown>
-            <InternalHeader.Button
-              as={Dropdown.Toggle}
-              style={{ marginLeft: "auto" }}
-            >
-              <MenuGridIcon
-                style={{ fontSize: "1.5rem" }}
-                title="Systemer og oppslagsverk"
-              />
-            </InternalHeader.Button>
-            <Dropdown.Menu strategy="fixed">
-              <Dropdown.Menu.List>
-                <Dropdown.Menu.List.Item>
+          <ActionMenu>
+            <ActionMenu.Trigger>
+              <InternalHeader.Button style={{ marginLeft: "auto" }}>
+                <MenuGridIcon
+                  style={{ fontSize: "1.5rem" }}
+                  title="Systemer og oppslagsverk"
+                />
+              </InternalHeader.Button>
+            </ActionMenu.Trigger>
+            <ActionMenu.Content align="end">
+              <ActionMenu.Group aria-label="Systemer og oppslagsverk">
+                <ActionMenu.Item
+                  icon={<ExternalLinkIcon aria-hidden fontSize="0.875rem" />}
+                >
                   <span>A.Inntekt</span>
-                  <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
-                </Dropdown.Menu.List.Item>
-                <Dropdown.Menu.List.Item>
+                </ActionMenu.Item>
+                <ActionMenu.Item
+                  icon={<ExternalLinkIcon aria-hidden fontSize="0.875rem" />}
+                >
                   <span>Aa-registeret</span>
-                  <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
-                </Dropdown.Menu.List.Item>
-                <Dropdown.Menu.List.Item>
+                </ActionMenu.Item>
+                <ActionMenu.Item
+                  icon={<ExternalLinkIcon aria-hidden fontSize="0.875rem" />}
+                >
                   <span>Gosys</span>
-                  <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
-                </Dropdown.Menu.List.Item>
-              </Dropdown.Menu.List>
-            </Dropdown.Menu>
-          </Dropdown>
+                </ActionMenu.Item>
+              </ActionMenu.Group>
+            </ActionMenu.Content>
+          </ActionMenu>
         )}
         {(!props.user || props.user === "simple") && (
           <InternalHeader.User
@@ -75,41 +83,50 @@ export const Default = {
           />
         )}
         {props.user === "with dropdown" && (
-          <Dropdown>
-            <InternalHeader.Button
-              as={Dropdown.Toggle}
-              style={{
-                marginLeft: props.systemMenu ? "none" : "auto",
-                paddingRight: "1.5rem",
-                paddingLeft: "1.5rem",
-                gap: "1rem",
-              }}
-            >
-              <BodyShort title="Ola Normann">KH</BodyShort>
-              <ChevronDownIcon title="Brukermeny" />
-            </InternalHeader.Button>
-            <Dropdown.Menu strategy="fixed">
-              <div>
-                <BodyLong size="small" as="div">
-                  Ola Normann 16px
-                </BodyLong>
-                <Detail size="small" as="div">
-                  <div>Ident nr 14px</div>
-                  <div>Enhet: Skien</div>
-                </Detail>
-              </div>
-              <Dropdown.Menu.Divider />
-              <Dropdown.Menu.List>
-                <Dropdown.Menu.List.Item as="a" href="/#settings">
-                  Innstillinger <Spacer />{" "}
-                  <CogIcon aria-hidden fontSize="1.5rem" />
-                </Dropdown.Menu.List.Item>
-                <Dropdown.Menu.List.Item onClick={() => console.log("logg ut")}>
-                  Logg ut <Spacer /> <LeaveIcon aria-hidden fontSize="1.5rem" />
-                </Dropdown.Menu.List.Item>
-              </Dropdown.Menu.List>
-            </Dropdown.Menu>
-          </Dropdown>
+          <ActionMenu>
+            <ActionMenu.Trigger>
+              <InternalHeader.Button
+                style={{
+                  marginLeft: props.systemMenu ? "none" : "auto",
+                  paddingRight: "1.5rem",
+                  paddingLeft: "1.5rem",
+                  gap: "1rem",
+                }}
+              >
+                <BodyShort title="Ola Normann">KH</BodyShort>
+                <ChevronDownIcon title="Brukermeny" />
+              </InternalHeader.Button>
+            </ActionMenu.Trigger>
+            <ActionMenu.Content align="end">
+              <ActionMenu.Label>
+                <dl style={{ margin: "0" }}>
+                  <BodyLong size="small" as="dt">
+                    Ola Normann 16px
+                  </BodyLong>
+                  <Detail size="small" as="dd">
+                    <div>Ident nr 14px</div>
+                    <div>Enhet: Skien</div>
+                  </Detail>
+                </dl>
+              </ActionMenu.Label>
+              <ActionMenu.Divider />
+              <ActionMenu.Group aria-label="Handlinger">
+                <ActionMenu.Item
+                  as="a"
+                  href="/#settings"
+                  icon={<CogIcon aria-hidden fontSize="1.5rem" />}
+                >
+                  Innstillinger
+                </ActionMenu.Item>
+                <ActionMenu.Item
+                  onClick={() => console.log("logg ut")}
+                  icon={<LeaveIcon aria-hidden fontSize="1.5rem" />}
+                >
+                  Logg ut
+                </ActionMenu.Item>
+              </ActionMenu.Group>
+            </ActionMenu.Content>
+          </ActionMenu>
         )}
       </InternalHeader>
     );
@@ -161,73 +178,85 @@ export const UserWithDescription = () => (
 export const UserWithMenu = () => (
   <InternalHeader style={{ width: 600 }}>
     <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
-    <Dropdown>
-      <InternalHeader.Button
-        as={Dropdown.Toggle}
-        style={{
-          marginLeft: "auto",
-          paddingRight: "1.5rem",
-          paddingLeft: "1.5rem",
-          gap: "1rem",
-        }}
-      >
-        <BodyShort title="Ola Normann">KH</BodyShort>
-        <ChevronDownIcon title="Brukermeny" />
-      </InternalHeader.Button>
-      <Dropdown.Menu strategy="fixed">
-        <div>
-          <BodyLong size="small" as="div">
-            Ola Normann 16px
-          </BodyLong>
-          <Detail size="small" as="div">
-            <div>Ident nr 14px</div>
-            <div>Enhet: Skien</div>
-          </Detail>
-        </div>
-        <Dropdown.Menu.Divider />
-        <Dropdown.Menu.List>
-          <Dropdown.Menu.List.Item as="a" href="/#settings">
-            Innstillinger <Spacer /> <CogIcon aria-hidden fontSize="1.5rem" />
-          </Dropdown.Menu.List.Item>
-          <Dropdown.Menu.List.Item onClick={() => console.log("logg ut")}>
-            Logg ut <Spacer /> <LeaveIcon aria-hidden fontSize="1.5rem" />
-          </Dropdown.Menu.List.Item>
-        </Dropdown.Menu.List>
-      </Dropdown.Menu>
-    </Dropdown>
+    <ActionMenu>
+      <ActionMenu.Trigger>
+        <InternalHeader.Button
+          style={{
+            marginLeft: "auto",
+            paddingRight: "1.5rem",
+            paddingLeft: "1.5rem",
+            gap: "1rem",
+          }}
+        >
+          <BodyShort title="Ola Normann">KH</BodyShort>
+          <ChevronDownIcon title="Brukermeny" />
+        </InternalHeader.Button>
+      </ActionMenu.Trigger>
+      <ActionMenu.Content align="end">
+        <ActionMenu.Label>
+          <dl style={{ margin: "0" }}>
+            <BodyLong size="small" as="dt">
+              Ola Normann 16px
+            </BodyLong>
+            <Detail size="small" as="dd">
+              <div>Ident nr 14px</div>
+              <div>Enhet: Skien</div>
+            </Detail>
+          </dl>
+        </ActionMenu.Label>
+        <ActionMenu.Divider />
+        <ActionMenu.Group aria-label="Handlinger">
+          <ActionMenu.Item
+            as="a"
+            href="/#settings"
+            icon={<CogIcon aria-hidden fontSize="1.5rem" />}
+          >
+            Innstillinger
+          </ActionMenu.Item>
+          <ActionMenu.Item
+            onClick={() => console.log("logg ut")}
+            icon={<LeaveIcon aria-hidden fontSize="1.5rem" />}
+          >
+            Logg ut
+          </ActionMenu.Item>
+        </ActionMenu.Group>
+      </ActionMenu.Content>
+    </ActionMenu>
   </InternalHeader>
 );
 
 export const UserWithMenuGridIconMenu = () => (
   <InternalHeader style={{ width: 600 }}>
     <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
-    <Dropdown>
-      <InternalHeader.Button
-        as={Dropdown.Toggle}
-        style={{ marginLeft: "auto" }}
-      >
-        <MenuGridIcon
-          style={{ fontSize: "1.5rem" }}
-          title="Systemer og oppslagsverk"
-        />
-      </InternalHeader.Button>
-      <Dropdown.Menu strategy="fixed">
-        <Dropdown.Menu.List>
-          <Dropdown.Menu.List.Item>
+    <ActionMenu>
+      <ActionMenu.Trigger>
+        <InternalHeader.Button style={{ marginLeft: "auto" }}>
+          <MenuGridIcon
+            style={{ fontSize: "1.5rem" }}
+            title="Systemer og oppslagsverk"
+          />
+        </InternalHeader.Button>
+      </ActionMenu.Trigger>
+      <ActionMenu.Content>
+        <ActionMenu.Group aria-label="Systemer og oppslagsverk">
+          <ActionMenu.Item
+            icon={<ExternalLinkIcon aria-hidden fontSize="0.875rem" />}
+          >
             <span>A.Inntekt</span>
-            <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
-          </Dropdown.Menu.List.Item>
-          <Dropdown.Menu.List.Item>
+          </ActionMenu.Item>
+          <ActionMenu.Item
+            icon={<ExternalLinkIcon aria-hidden fontSize="0.875rem" />}
+          >
             <span>Aa-registeret</span>
-            <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
-          </Dropdown.Menu.List.Item>
-          <Dropdown.Menu.List.Item>
+          </ActionMenu.Item>
+          <ActionMenu.Item
+            icon={<ExternalLinkIcon aria-hidden fontSize="0.875rem" />}
+          >
             <span>Gosys</span>
-            <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
-          </Dropdown.Menu.List.Item>
-        </Dropdown.Menu.List>
-      </Dropdown.Menu>
-    </Dropdown>
+          </ActionMenu.Item>
+        </ActionMenu.Group>
+      </ActionMenu.Content>
+    </ActionMenu>
     <InternalHeader.User name="Ola Normann" description="id: 123456" />
   </InternalHeader>
 );
@@ -236,27 +265,30 @@ export const UserButton = () => (
   <InternalHeader style={{ width: 600 }}>
     <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
     <Spacer />
-    <Dropdown>
-      <InternalHeader.UserButton
-        as={Dropdown.Toggle}
-        name="Ola N."
-        description="Enhet: Skien"
-      />
-      <Dropdown.Menu>
-        <dl>
-          <BodyShort as="dt" size="small">
-            Ola Normann
-          </BodyShort>
-          <Detail as="dd">D123456</Detail>
-        </dl>
-        <Dropdown.Menu.Divider />
-        <Dropdown.Menu.List>
-          <Dropdown.Menu.List.Item>
-            Logg ut <Spacer /> <LeaveIcon aria-hidden fontSize="1.5rem" />
-          </Dropdown.Menu.List.Item>
-        </Dropdown.Menu.List>
-      </Dropdown.Menu>
-    </Dropdown>
+    <ActionMenu>
+      <ActionMenu.Trigger>
+        <InternalHeader.UserButton name="Ola N." description="Enhet: Skien" />
+      </ActionMenu.Trigger>
+      <ActionMenu.Content align="end">
+        <ActionMenu.Label>
+          <dl style={{ margin: "0" }}>
+            <BodyShort as="dt" size="small">
+              Ola Normann
+            </BodyShort>
+            <Detail as="dd">D123456</Detail>
+          </dl>
+        </ActionMenu.Label>
+        <ActionMenu.Divider />
+        <ActionMenu.Group aria-label="Handlinger">
+          <ActionMenu.Item
+            onClick={() => console.log("logg ut")}
+            icon={<LeaveIcon aria-hidden fontSize="1.5rem" />}
+          >
+            Logg ut
+          </ActionMenu.Item>
+        </ActionMenu.Group>
+      </ActionMenu.Content>
+    </ActionMenu>
   </InternalHeader>
 );
 

@@ -1,0 +1,38 @@
+import React from "react";
+import { TableToolbarSearchField } from "../search-field/TableToolbarSearchField";
+
+interface TableToolbarProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+interface TableToolbarRootComponent
+  extends React.ForwardRefExoticComponent<
+    TableToolbarProps & React.RefAttributes<HTMLDivElement>
+  > {
+  /**
+   * @see 🏷️ {@link TableToolbarSearchFieldProps} // TODO doesnt work
+   * @example
+   * ```tsx
+   * <TableToolbar>
+   *   <TableToolbar.SearchField />
+   * </TableToolbar>
+   * ```
+   */
+  SearchField: typeof TableToolbarSearchField;
+}
+
+const TableToolbar = React.forwardRef<HTMLDivElement, TableToolbarProps>(
+  ({ children, ...rest }, forwardRef) => {
+    return (
+      <div ref={forwardRef} {...rest}>
+        {children}
+      </div>
+    );
+  },
+) as TableToolbarRootComponent;
+
+TableToolbar.SearchField = TableToolbarSearchField;
+
+export { TableToolbar };
+export default TableToolbar;
+export type { TableToolbarProps };

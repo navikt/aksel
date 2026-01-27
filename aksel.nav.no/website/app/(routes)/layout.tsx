@@ -24,6 +24,7 @@ export default async function IndexLayout({
         intervalOnGoAway={false}
         refreshOnFocus={false}
         refreshOnMount={false}
+        refreshOnReconnect={false}
       />
     </>
   );

@@ -1,4 +1,4 @@
-import { BoxNew, HGrid, Show } from "@navikt/ds-react";
+import { Box, HGrid, Show } from "@navikt/ds-react";
 import { verifyUserLoggedIn } from "@/app/_auth/rcs";
 import styles from "./GodPraksisFeedback.module.css";
 import {
@@ -10,7 +10,7 @@ async function GodPraksisFeedback({ docId }: { docId: string }) {
   const auth = await verifyUserLoggedIn();
 
   return (
-    <BoxNew
+    <Box
       borderRadius="8"
       borderWidth="1"
       borderColor="neutral-subtleA"
@@ -57,7 +57,7 @@ async function GodPraksisFeedback({ docId }: { docId: string }) {
           </div>
         </Show>
       </HGrid>
-    </BoxNew>
+    </Box>
   );
 }
 export { GodPraksisFeedback };

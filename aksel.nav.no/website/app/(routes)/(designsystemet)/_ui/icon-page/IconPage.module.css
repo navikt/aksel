@@ -72,7 +72,7 @@
 
 .iconPageSidebar {
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  top: calc(var(--website-header-height-width-border) + var(--ax-space-24));
+  top: calc(var(--website-header-sticky-height) + var(--ax-space-24));
   position: sticky;
   height: min-content;
 }

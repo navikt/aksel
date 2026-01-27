@@ -67,14 +67,13 @@ interface InternalHeaderComponent
  * ```jsx
  * <InternalHeader >
  *  <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
- *  <Dropdown>
- *    <InternalHeader.Button
- *      as={Dropdown.Toggle}
- *    >
+ *  <ActionMenu>
+ *   <ActionMenu.Trigger>
+ *    <InternalHeader.Button>
  *      <MenuGridIcon title="MenuGridIconer og oppslagsverk" />
  *    </InternalHeader.Button>
- *    <Dropdown.Menu />
- *  </Dropdown>
+ *   </ActionMenu.Trigger>
+ *  </ActionMenu>
  * </InternalHeader>
  * ```
  */

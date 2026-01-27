@@ -79,17 +79,17 @@
     "concurrently": "9.2.1",
     "copyfiles": "^2.4.1",
     "cross-zip-cli": "1.0.0",
-    "fast-glob": "3.2.11",
+    "fast-glob": "3.3.3",
     "hast-util-select": "6.0.4",
     "js-yaml": "^4.1.1",
     "lodash": "4.17.23",
-    "prettier": "3.6.2",
+    "prettier": "3.8.1",
     "react": "19.2.3",
     "rehype-parse": "9.0.1",
     "tsc-alias": "1.8.16",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
     "unified": "11.0.5",
-    "vitest": "^3.2.4"
+    "vitest": "4.0.18"
   }
 }

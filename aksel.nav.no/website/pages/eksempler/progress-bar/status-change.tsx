@@ -27,5 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "Du kan bruke 'data-color' for å endre farge på ProgressBar basert på status.",
+  desc: "Du kan bruke `data-color` for å endre farge på ProgressBar basert på status.",
 };

@@ -18,7 +18,7 @@ const cspHeader = `
     object-src 'none';
     base-uri 'self';
     form-action 'self' https://codesandbox.io/api/v1/sandboxes/define;
-    frame-ancestors 'self' localhost:3000;
+    frame-ancestors 'self' localhost:3000 https://*.sanity.io;
     frame-src 'self' localhost:3000 http://localhost:3000 https://localhost:3000 https://aksel.ansatt.dev.nav.no;
     media-src 'self' ${cdnUrl} cdn.sanity.io;
     img-src 'self' blob: data: cdn.sanity.io ${dekoratorUrl} https://avatars.githubusercontent.com data: ${cdnUrl};
@@ -27,10 +27,6 @@ const cspHeader = `
 `;
 
 const securityHeaders = [
-  {
-    key: "X-Frame-Options",
-    value: "SAMEORIGIN",
-  },
   {
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",

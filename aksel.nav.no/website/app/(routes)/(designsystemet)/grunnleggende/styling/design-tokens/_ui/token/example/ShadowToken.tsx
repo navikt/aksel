@@ -3,7 +3,7 @@ import { TokenForDocumentationT } from "../../types";
 
 const ShadowToken = ({ token }: { token: TokenForDocumentationT }) => (
   <VStack as="div" align="center" justify="center" height="100%">
-    <Box.New
+    <Box
       borderRadius="4"
       borderWidth="1"
       borderColor="neutral-subtle"
