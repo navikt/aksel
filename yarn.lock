@@ -4724,7 +4724,7 @@ __metadata:
     postcss-selector-parser: "npm:^7.1.0"
     postcss-value-parser: "npm:^4.2.0"
     stylelint: "npm:^16.24.0"
-    stylelint-test-rule-node: "npm:^0.4.0"
+    stylelint-test-rule-node: "npm:^1.0.0"
     tsx: "npm:^4.20.6"
     typescript: "npm:5.9.3"
   languageName: unknown
@@ -22763,12 +22763,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-test-rule-node@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "stylelint-test-rule-node@npm:0.4.0"
+"stylelint-test-rule-node@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "stylelint-test-rule-node@npm:1.0.0"
   peerDependencies:
-    stylelint: ^16.0.1
-  checksum: 10/efa5a4c134169adf19235295c294eebf7b64d72ce8debb305c9d2a08ae84c39ef7b0544ada09a79e29b4c8c57edecb832ef1098534e8e2983fd388d358d78787
+    stylelint: ^17.0.0
+  checksum: 10/d4d3acbeb660b9911a386b6e250922c6252b13609afe5f2edb6836e0a0e314912f0ac16428b0d3426060df41948cc6602e6cb376aed188481a7396ef1cdc6e5a
   languageName: node
   linkType: hard
 
