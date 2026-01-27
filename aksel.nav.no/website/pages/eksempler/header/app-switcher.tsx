@@ -1,8 +1,11 @@
+// eslint-disable-next-line aksel-local/import-check
+import { useTheme } from "next-themes";
 import { ExternalLinkIcon, MenuGridIcon } from "@navikt/aksel-icons";
-import { ActionMenu, InternalHeader, Spacer } from "@navikt/ds-react";
+import { ActionMenu, InternalHeader, Spacer, Theme } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
+  const { resolvedTheme } = useTheme();
   return (
     <div style={{ minHeight: "14rem" }}>
       <InternalHeader>
@@ -17,50 +20,52 @@ const Example = () => {
               />
             </InternalHeader.Button>
           </ActionMenu.Trigger>
-          <ActionMenu.Content align="end">
-            <ActionMenu.Group label="Systemer og oppslagsverk">
-              <ActionMenu.Item
-                as="a"
-                target="_blank"
-                href="#"
-                icon={<ExternalLinkIcon aria-hidden />}
-              >
-                A.Inntekt
-              </ActionMenu.Item>
-              <ActionMenu.Item
-                as="a"
-                target="_blank"
-                href="#"
-                icon={<ExternalLinkIcon aria-hidden />}
-              >
-                Aa-registeret
-              </ActionMenu.Item>
-              <ActionMenu.Item
-                as="a"
-                target="_blank"
-                href="#"
-                icon={<ExternalLinkIcon aria-hidden />}
-              >
-                Gosys
-              </ActionMenu.Item>
-              <ActionMenu.Item
-                as="a"
-                target="_blank"
-                href="#"
-                icon={<ExternalLinkIcon aria-hidden />}
-              >
-                Modia personoversikt
-              </ActionMenu.Item>
-              <ActionMenu.Item
-                as="a"
-                target="_blank"
-                href="#"
-                icon={<ExternalLinkIcon aria-hidden />}
-              >
-                Oppdrag
-              </ActionMenu.Item>
-            </ActionMenu.Group>
-          </ActionMenu.Content>
+          <Theme theme={resolvedTheme as "light" | "dark"}>
+            <ActionMenu.Content align="end">
+              <ActionMenu.Group label="Systemer og oppslagsverk">
+                <ActionMenu.Item
+                  as="a"
+                  target="_blank"
+                  href="#"
+                  icon={<ExternalLinkIcon aria-hidden />}
+                >
+                  A.Inntekt
+                </ActionMenu.Item>
+                <ActionMenu.Item
+                  as="a"
+                  target="_blank"
+                  href="#"
+                  icon={<ExternalLinkIcon aria-hidden />}
+                >
+                  Aa-registeret
+                </ActionMenu.Item>
+                <ActionMenu.Item
+                  as="a"
+                  target="_blank"
+                  href="#"
+                  icon={<ExternalLinkIcon aria-hidden />}
+                >
+                  Gosys
+                </ActionMenu.Item>
+                <ActionMenu.Item
+                  as="a"
+                  target="_blank"
+                  href="#"
+                  icon={<ExternalLinkIcon aria-hidden />}
+                >
+                  Modia personoversikt
+                </ActionMenu.Item>
+                <ActionMenu.Item
+                  as="a"
+                  target="_blank"
+                  href="#"
+                  icon={<ExternalLinkIcon aria-hidden />}
+                >
+                  Oppdrag
+                </ActionMenu.Item>
+              </ActionMenu.Group>
+            </ActionMenu.Content>
+          </Theme>
         </ActionMenu>
         <InternalHeader.User name="Ola Normann" />
       </InternalHeader>
@@ -80,4 +85,5 @@ export const args = {
   index: 4,
   title: "App-meny",
   desc: "App-menyen inneholder lenker til andre interne systemer.",
+  sandboxEnabled: false,
 };
