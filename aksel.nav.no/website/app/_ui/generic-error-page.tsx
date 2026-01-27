@@ -1,10 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { BodyShort, Box, Heading, Link, VStack } from "@navikt/ds-react";
 import { Page } from "@navikt/ds-react/Page";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 
 export default function GenericErrorPage() {
+  const [hasHistory, setHasHistory] = useState(false);
+
+  useEffect(() => {
+    if (history && history.length > 1) {
+      setHasHistory(true);
+    }
+  }, []);
+
   return (
     <Page.Block as="main" width="xl" gutters data-aksel-template="500-v3">
       <Box paddingBlock="space-80 space-32">
@@ -23,13 +32,25 @@ export default function GenericErrorPage() {
                 <WebsiteList>
                   <WebsiteListItem icon>
                     vente noen minutter og{" "}
-                    <Link href="#" onClick={() => location.reload()}>
+                    <Link
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        location.reload();
+                      }}
+                    >
                       laste siden på nytt
                     </Link>
                   </WebsiteListItem>
                   <WebsiteListItem icon>
-                    {history && history.length > 1 ? (
-                      <Link href="#" onClick={() => history.back()}>
+                    {hasHistory ? (
+                      <Link
+                        href="#"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          history.back();
+                        }}
+                      >
                         gå tilbake til forrige side
                       </Link>
                     ) : (
