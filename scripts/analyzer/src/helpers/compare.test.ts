@@ -76,6 +76,33 @@ describe("compareResults", () => {
     expect(result.reactConfigDiff.exportsRemoved).toEqual([]);
   });
 
+  test("detects top-level export keys bundle-size change", () => {
+    const dummy = getDummyResultForTesting();
+
+    const branch = {
+      ...dummy,
+      reactExports: {
+        ...dummy.reactExports,
+        "./button": {
+          jsFile: "button.js",
+          typesFile: "button.d.ts",
+          exportedTypes: [],
+          exportedComponents: ["Button"],
+          bundleSize: { gzip: 1000, minified: 2000 },
+        },
+      },
+    };
+
+    const result = compareResults({ trunk: dummy, branch });
+
+    expect(result.reactConfigDiff.paths["./button"].bundleSize.gzip).toEqual(
+      1000,
+    );
+    expect(
+      result.reactConfigDiff.paths["./button"].bundleSize.minified,
+    ).toEqual(2000);
+  });
+
   test("detects added types and components in a path", () => {
     const dummy = getDummyResultForTesting();
 
