@@ -1,9 +1,10 @@
 import {
-  ArrowDownRightIcon,
+  CheckmarkCircleIcon,
   ChevronDownIcon,
-  CloudIcon,
+  MagnifyingGlassIcon,
   PencilIcon,
-  StarIcon,
+  PersonIcon,
+  XMarkOctagonIcon,
 } from "@navikt/aksel-icons";
 import { ActionMenu, Button } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
@@ -22,47 +23,38 @@ const Example = () => {
         </Button>
       </ActionMenu.Trigger>
       <ActionMenu.Content>
-        <ActionMenu.Group label="Group 1">
+        <ActionMenu.Group label="Handlinger">
           <ActionMenu.Item
-            onSelect={() => console.info("Item 1 clicked")}
-            icon={<StarIcon aria-hidden />}
+            onSelect={console.info}
+            icon={<PersonIcon aria-hidden />}
           >
-            Item 1
+            Personoversikt
           </ActionMenu.Item>
           <ActionMenu.Item
-            onSelect={() => console.info("Item 2 clicked")}
-            icon={<PencilIcon aria-hidden />}
-            iconPosition="right"
+            onSelect={console.info}
+            icon={<MagnifyingGlassIcon aria-hidden />}
           >
-            Item 2
+            Søk journalpost
           </ActionMenu.Item>
         </ActionMenu.Group>
         <ActionMenu.Divider />
-        <ActionMenu.Group label="Group 2">
+        <ActionMenu.Group label="Sak #12345">
           <ActionMenu.Sub>
-            <ActionMenu.SubTrigger icon={<ArrowDownRightIcon aria-hidden />}>
-              Submenu 1
+            <ActionMenu.SubTrigger icon={<PencilIcon aria-hidden />}>
+              Endre status
             </ActionMenu.SubTrigger>
             <ActionMenu.SubContent>
               <ActionMenu.Item
-                onSelect={() => console.info("Subitem 1 clicked")}
+                onSelect={console.info}
+                icon={<CheckmarkCircleIcon aria-hidden />}
               >
-                Subitem 1
+                Godkjent
               </ActionMenu.Item>
-            </ActionMenu.SubContent>
-          </ActionMenu.Sub>
-          <ActionMenu.Sub>
-            <ActionMenu.SubTrigger
-              icon={<CloudIcon aria-hidden />}
-              iconPosition="right"
-            >
-              Submenu 2
-            </ActionMenu.SubTrigger>
-            <ActionMenu.SubContent>
               <ActionMenu.Item
-                onSelect={() => console.info("Subitem 1 clicked")}
+                onSelect={console.info}
+                icon={<XMarkOctagonIcon aria-hidden />}
               >
-                Subitem 1
+                Avslått
               </ActionMenu.Item>
             </ActionMenu.SubContent>
           </ActionMenu.Sub>
