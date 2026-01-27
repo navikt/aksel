@@ -4748,7 +4748,7 @@ __metadata:
     jscodeshift: "npm:0.15.2"
     jscodeshift-add-imports: "npm:1.0.11"
     lodash: "npm:4.17.23"
-    rimraf: "npm:6.0.1"
+    rimraf: "npm:6.1.2"
     typescript: "npm:5.9.3"
     vitest: "npm:4.0.18"
   bin:
@@ -4796,7 +4796,7 @@ __metadata:
     react-day-picker: "npm:9.7.0"
     react-dom: "npm:19.2.3"
     react-router: "npm:^7.12.0"
-    rimraf: "npm:6.0.1"
+    rimraf: "npm:6.1.2"
     swr: "npm:^2.3.6"
     tsc-alias: "npm:1.8.16"
     tsx: "npm:^4.20.6"
@@ -13993,7 +13993,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^11.0.0, glob@npm:^11.1.0":
+"glob@npm:^11.1.0":
   version: 11.1.0
   resolution: "glob@npm:11.1.0"
   dependencies:
@@ -18721,7 +18721,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"package-json-from-dist@npm:^1.0.0":
+"package-json-from-dist@npm:^1.0.0, package-json-from-dist@npm:^1.0.1":
   version: 1.0.1
   resolution: "package-json-from-dist@npm:1.0.1"
   checksum: 10/58ee9538f2f762988433da00e26acc788036914d57c71c246bf0be1b60cdbd77dd60b6a3e1a30465f0b248aeb80079e0b34cb6050b1dfa18c06953bb1cbc7602
@@ -19323,7 +19323,7 @@ __metadata:
     fast-glob: "npm:3.3.3"
     playroom: "npm:^1.0.5"
     react: "npm:19.2.3"
-    rimraf: "npm:6.0.1"
+    rimraf: "npm:6.1.2"
     style-loader: "npm:^3.3.3"
     tsx: "npm:^4.20.6"
   languageName: unknown
@@ -20920,15 +20920,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:6.0.1":
-  version: 6.0.1
-  resolution: "rimraf@npm:6.0.1"
+"rimraf@npm:6.1.2":
+  version: 6.1.2
+  resolution: "rimraf@npm:6.1.2"
   dependencies:
-    glob: "npm:^11.0.0"
-    package-json-from-dist: "npm:^1.0.0"
+    glob: "npm:^13.0.0"
+    package-json-from-dist: "npm:^1.0.1"
   bin:
     rimraf: dist/esm/bin.mjs
-  checksum: 10/0eb7edf08aa39017496c99ba675552dda11a20811ba78f8232da2ba945308c91e9cd673f95998b1a8202bc7436d33390831d23ea38ae52751038d56373ad99e2
+  checksum: 10/add8e566fe903f59d7b55c6c2382320c48302778640d1951baf247b3b451af496c2dee7195c204a8c646fd6327feadd1f5b61ce68c1362d4898075a726d83cc6
   languageName: node
   linkType: hard
 
