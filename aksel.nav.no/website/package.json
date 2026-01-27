@@ -47,7 +47,7 @@
     "date-fns": "^4.0.0",
     "fuse.js": "^7.0.0",
     "isomorphic-dompurify": "2.26.0",
-    "jscodeshift": "0.15.2",
+    "jscodeshift": "17.3.0",
     "lodash": "4.17.23",
     "lz-string": "^1.5.0",
     "next": "16.1.2",

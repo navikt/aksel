@@ -43,13 +43,13 @@
     "fast-glob": "3.3.3",
     "figlet": "1.8.0",
     "is-git-clean": "1.1.0",
-    "jscodeshift": "0.15.2",
+    "jscodeshift": "17.3.0",
     "jscodeshift-add-imports": "1.0.11",
     "lodash": "4.17.23"
   },
   "devDependencies": {
     "@types/cli-progress": "3.11.6",
-    "rimraf": "6.0.1",
+    "rimraf": "6.1.2",
     "typescript": "5.9.3",
     "vitest": "4.0.18"
   },
