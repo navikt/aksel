@@ -84,10 +84,10 @@
     opacity: 0.5;
     pointer-events: none;
   }
-}
 
-.aksel-action-menu__item--has-icon {
-  --__axc-action-menu-item-pl: var(--ax-space-24);
+  &[data-marker="left"] {
+    --__axc-action-menu-item-pl: var(--ax-space-24);
+  }
 }
 
 .aksel-action-menu__sub-trigger {
@@ -131,9 +131,16 @@
   justify-content: center;
 }
 
-.aksel-action-menu__marker-icon svg {
-  font-size: 18px;
-  flex-shrink: 0;
+.aksel-action-menu__marker-icon {
+  svg {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  &.aksel-action-menu__marker--right {
+    margin-left: 0;
+    padding-left: 0;
+  }
 }
 
 /* --------------------------- ActionMenu shortcut -------------------------- */
