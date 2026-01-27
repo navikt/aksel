@@ -2,7 +2,7 @@ import { differenceInDays, differenceInMonths } from "date-fns";
 import { ComponentType } from "react";
 import { ObjectFieldProps, useFormValue } from "sanity";
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
-import { BodyLong, BoxNew, HStack, Heading, Link } from "@navikt/ds-react";
+import { BodyLong, Box, HStack, Heading, Link } from "@navikt/ds-react";
 
 export const UpdateInfo: ComponentType<ObjectFieldProps> = () => {
   const articleType = useFormValue(["_type"]);
@@ -20,7 +20,7 @@ export const UpdateInfo: ComponentType<ObjectFieldProps> = () => {
   }
 
   return (
-    <BoxNew
+    <Box
       background="warning-soft"
       borderWidth="1"
       borderColor="warning-subtleA"
@@ -39,6 +39,6 @@ export const UpdateInfo: ComponentType<ObjectFieldProps> = () => {
           Les mer om hvorfor en artikkel regnes som utdatert.
         </Link>
       </BodyLong>
-    </BoxNew>
+    </Box>
   );
 };

@@ -1,5 +1,5 @@
 import { CodeIcon, PaletteIcon } from "@navikt/aksel-icons";
-import { BoxNew, HGrid, LinkCard } from "@navikt/ds-react";
+import { Box, HGrid, LinkCard } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
   LinkCardDescription,
@@ -28,7 +28,7 @@ function GettingStartedSection({ cards }: GettingStartedSectionProps) {
               <LinkCardAnchor href={link}>{title}</LinkCardAnchor>
             </LinkCardTitle>
             <LinkCardDescription>{description}</LinkCardDescription>
-            <BoxNew
+            <Box
               asChild
               padding="space-8"
               borderRadius="12"
@@ -40,7 +40,7 @@ function GettingStartedSection({ cards }: GettingStartedSectionProps) {
               >
                 <Icon fontSize="48" color="var(--ax-text-subtle)" />
               </LinkCardIcon>
-            </BoxNew>
+            </Box>
           </LinkCard>
         );
       })}

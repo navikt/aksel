@@ -1,4 +1,4 @@
-import { BodyShort, BoxNew, HGrid, HStack, Heading } from "@navikt/ds-react";
+import { BodyShort, Box, HGrid, HStack, Heading } from "@navikt/ds-react";
 
 type EmptyStateCardProps = {
   variant?: "default" | "questionmark";
@@ -10,7 +10,7 @@ function EmptyStateCard({
   actionComponent,
 }: EmptyStateCardProps) {
   return (
-    <BoxNew
+    <Box
       asChild
       borderWidth="1"
       borderColor="neutral-subtleA"
@@ -39,11 +39,11 @@ function EmptyStateCard({
             ser vi på det sammen.
           </BodyShort>
           {actionComponent && (
-            <BoxNew marginBlock="space-24 space-0">{actionComponent}</BoxNew>
+            <Box marginBlock="space-24 space-0">{actionComponent}</Box>
           )}
         </div>
       </HGrid>
-    </BoxNew>
+    </Box>
   );
 }
 

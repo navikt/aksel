@@ -1,7 +1,7 @@
 import { useMemoObservable } from "react-rx";
 import { SanityDocument, useDocumentStore, useFormValue } from "sanity";
 import { FileFillIcon } from "@navikt/aksel-icons";
-import { BodyLong, BoxNew, HStack, Heading } from "@navikt/ds-react";
+import { BodyLong, Box, HStack, Heading } from "@navikt/ds-react";
 
 type MetadataT = {
   title: string;
@@ -29,7 +29,7 @@ export function InnholdstypeHighlight(props) {
   return (
     <div>
       <div>{props.renderDefault(props)}</div>
-      <BoxNew
+      <Box
         background="neutral-soft"
         borderWidth="1"
         borderColor="neutral-subtleA"
@@ -44,7 +44,7 @@ export function InnholdstypeHighlight(props) {
           </Heading>
         </HStack>
         {result.description && <BodyLong>{result.description}</BodyLong>}
-      </BoxNew>
+      </Box>
     </div>
   );
 }

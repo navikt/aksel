@@ -30,7 +30,7 @@ const TokenExample = ({ token }: { token: TokenForDocumentationT }) => {
     default:
       console.warn("Unknown token category", token);
       return (
-        <Box.New
+        <Box
           borderColor="neutral-subtle"
           borderRadius="4"
           background="neutral-moderate"
@@ -44,7 +44,7 @@ const TokenExample = ({ token }: { token: TokenForDocumentationT }) => {
 };
 
 const TokenPreview = ({ token }: { token: TokenForDocumentationT }) => (
-  <Box.New
+  <Box
     aria-hidden="true"
     background={
       token.category === "textColor" && token.modifier === "contrast"
@@ -72,7 +72,7 @@ const TokenPreview = ({ token }: { token: TokenForDocumentationT }) => (
     }
   >
     <TokenExample token={token} />
-  </Box.New>
+  </Box>
 );
 
 export default TokenPreview;

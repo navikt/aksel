@@ -3,7 +3,7 @@ import { ComponentIcon, TokenIcon } from "@navikt/aksel-icons";
 import {
   Bleed,
   BodyLong,
-  BoxNew,
+  Box,
   HGrid,
   HStack,
   Heading,
@@ -80,32 +80,28 @@ const Page = async () => {
         <MainWrapper>
           <div className={styles.heroLinearBG} />
 
-          <BoxNew className={styles.forsidePageWrapper}>
+          <Box className={styles.forsidePageWrapper}>
             <PageBlock width="xl" gutters>
               <Hero />
 
               {/* Designsystemet */}
               <Bleed marginInline="full" reflectivePadding>
-                <BoxNew
+                <Box
                   paddingInline={{ xs: "space-0", sm: "space-48" }}
                   marginInline={{ xs: "space-0", md: "space-96" }}
                 >
-                  <BoxNew paddingBlock="space-0 space-24" marginInline="auto">
+                  <Box paddingBlock="space-0 space-24" marginInline="auto">
                     <PromoTag animated />
-                  </BoxNew>
+                  </Box>
                   <HStack justify="end" marginBlock="space-16">
                     <AnimationButton />
                   </HStack>
                   <HGrid gap="space-24" as="ul" columns={{ sm: 1, xl: 2 }}>
                     <li>
-                      <BoxNew
-                        borderColor="brand-blue"
-                        asChild
-                        position="relative"
-                      >
+                      <Box borderColor="brand-blue" asChild position="relative">
                         <LinkCard data-color="brand-blue" arrow={false}>
                           <HolidayDecorations type={{ name: "tree" }} />
-                          <BoxNew
+                          <Box
                             asChild
                             padding="space-16"
                             borderRadius="12"
@@ -135,7 +131,7 @@ const Page = async () => {
                                 />
                               </svg>
                             </LinkCardIcon>
-                          </BoxNew>
+                          </Box>
 
                           <Show above="sm" asChild>
                             <LinkCardTitle data-color="neutral">
@@ -159,11 +155,11 @@ const Page = async () => {
                             </LinkCardTitle>
                           </Show>
                         </LinkCard>
-                      </BoxNew>
+                      </Box>
                     </li>
                     <li>
                       <LinkCard data-color="brand-blue" arrow={false}>
-                        <BoxNew
+                        <Box
                           asChild
                           padding="space-8"
                           borderRadius="12"
@@ -175,7 +171,7 @@ const Page = async () => {
                               color="var(--ax-text-subtle)"
                             />
                           </LinkCardIcon>
-                        </BoxNew>
+                        </Box>
                         <LinkCardTitle data-color="neutral">
                           <LinkCardAnchor asChild>
                             <NextLink href="/komponenter/core">
@@ -190,7 +186,7 @@ const Page = async () => {
                     </li>
                     <li>
                       <LinkCard data-color="brand-blue" arrow={false}>
-                        <BoxNew
+                        <Box
                           asChild
                           padding="space-8"
                           borderRadius="12"
@@ -202,7 +198,7 @@ const Page = async () => {
                               color="var(--ax-text-subtle)"
                             />
                           </LinkCardIcon>
-                        </BoxNew>
+                        </Box>
                         <LinkCardTitle data-color="neutral">
                           <LinkCardAnchor asChild>
                             <NextLink href="/grunnleggende/styling/design-tokens">
@@ -219,7 +215,7 @@ const Page = async () => {
                       <AnimatedFaceCard />
                     </li>
                   </HGrid>
-                </BoxNew>
+                </Box>
               </Bleed>
 
               {/* God praksis */}
@@ -229,7 +225,7 @@ const Page = async () => {
                 reflectivePadding
                 className={styles.cubeFader}
               >
-                <BoxNew
+                <Box
                   background="raised"
                   borderWidth="1"
                   borderColor="neutral-subtleA"
@@ -240,7 +236,7 @@ const Page = async () => {
                   position="relative"
                 >
                   <VStack gap="space-12">
-                    <BoxNew>
+                    <Box>
                       <Heading
                         level="2"
                         size="xlarge"
@@ -260,7 +256,7 @@ const Page = async () => {
                         kunnskap og erfaring som er nyttig for andre. Derfor
                         deler vi god praksis med hverandre her.
                       </BodyLong>
-                    </BoxNew>
+                    </Box>
 
                     <HGrid as="ul" columns={{ md: 2, xl: 3 }}>
                       {tema.map((t) => (
@@ -274,12 +270,12 @@ const Page = async () => {
                       ))}
                     </HGrid>
                   </VStack>
-                </BoxNew>
+                </Box>
               </Bleed>
               {/* Siste fra Aksel */}
               {latest && <FrontpageLatest latest={latest as LatestT[]} />}
             </PageBlock>
-          </BoxNew>
+          </Box>
         </MainWrapper>
         <HolidayDecorations type={{ name: "snow" }} />
       </PauseAnimationProvider>

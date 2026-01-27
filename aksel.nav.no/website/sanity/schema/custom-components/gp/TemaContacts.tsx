@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 import { useMemoObservable } from "react-rx";
 import { useDocumentStore, useFormValue } from "sanity";
-import { BodyLong, BoxNew, Heading, Link, VStack } from "@navikt/ds-react";
+import { BodyLong, Box, Heading, Link, VStack } from "@navikt/ds-react";
 
 type ResultT = {
   tema: { title: string; contacts: { title: string; email: string }[] };
@@ -29,7 +29,7 @@ export function TemaContacts() {
   }
 
   return (
-    <BoxNew
+    <Box
       background="neutral-soft"
       borderWidth="1"
       borderColor="neutral-subtleA"
@@ -63,6 +63,6 @@ export function TemaContacts() {
           );
         })}
       </VStack>
-    </BoxNew>
+    </Box>
   );
 }

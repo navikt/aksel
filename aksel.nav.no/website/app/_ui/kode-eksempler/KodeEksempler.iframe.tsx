@@ -2,7 +2,7 @@
 
 import { stegaClean } from "next-sanity";
 import { useState } from "react";
-import { BoxNew, HStack, Skeleton, VStack } from "@navikt/ds-react";
+import { Box, HStack, Skeleton, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
 import styles from "./KodeEksempler.module.css";
@@ -84,12 +84,12 @@ function KodeEksemplerIFrame(props: {
         {/* Skeleton loading */}
         {!loaded && (
           <HStack asChild justify="center" align="center">
-            <BoxNew inset="space-0" position="absolute" background="default">
+            <Box inset="space-0" position="absolute" background="default">
               <VStack gap="space-8" width="70%">
                 <Skeleton variant="rounded" width="66%" height="1.5rem" />
                 <Skeleton variant="rounded" width="100%" height="4rem" />
               </VStack>
-            </BoxNew>
+            </Box>
           </HStack>
         )}
       </div>

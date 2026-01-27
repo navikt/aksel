@@ -3,7 +3,7 @@ import { type SanityDocument, useDocumentStore, useFormValue } from "sanity";
 import { TagFillIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
-  BoxNew,
+  Box,
   HStack,
   Heading,
   ReadMore,
@@ -43,7 +43,7 @@ export function UndertemaHighlight(props) {
       <VStack gap="space-16" marginBlock="space-4 space-0">
         {results.toReversed().map((res) => {
           return (
-            <BoxNew
+            <Box
               key={res._id}
               background="neutral-soft"
               borderWidth="1"
@@ -70,7 +70,7 @@ export function UndertemaHighlight(props) {
                   )}
                 </ReadMore>
               </VStack>
-            </BoxNew>
+            </Box>
           );
         })}
         <TemaContacts />
