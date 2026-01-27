@@ -7,10 +7,15 @@
 
 :root {
   --website-header-height: 4rem;
-  --website-header-height-width-border: calc(var(--website-header-height) + 1px);
+  --website-header-sticky-height: 0px;
   --website-font-mono:
     ui-monospace, "Menlo", "Monaco", "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  /* NB: Keep the min-height in sync with corresponding media query in Header.module.css */
+  @media (min-height: 500px) {
+    --website-header-sticky-height: calc(var(--website-header-height) + 1px);
+  }
 }
 
 /* Prevents scroll-rubberbanding on Apple devices  */

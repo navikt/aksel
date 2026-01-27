@@ -1,10 +1,14 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
 .header {
   background-color: var(--ax-bg-default);
-  position: sticky;
   top: 0;
   z-index: 20;
   border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+
+  /* NB: Keep the min-height in sync with corresponding media query in globals.css */
+  @media (min-height: 500px) {
+    position: sticky;
+  }
 }
 
 .headerProduktbloggen {
