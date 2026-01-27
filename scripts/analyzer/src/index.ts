@@ -1,23 +1,18 @@
-import { analyzeCss } from "./analyze-css.js";
-import { analyzeReact } from "./analyze-react.js";
+import assert from "node:assert";
+import { appendFileSync } from "node:fs";
+import { analyze } from "./analyze.js";
 
-console.info("\n\nAnalyzing packages...\n");
+const args = process.argv.slice(2);
 
-const cssFileSize = analyzeCss("temp/local/*css-*.tgz");
-console.info(`CSS index size: ${cssFileSize} bytes\n`);
+const result = analyze(args.includes("--remote") ? "remote" : "local");
 
-const reactConfig = await analyzeReact("temp/local/*react-*.tgz");
-
-type BundleAnalysisResult = {
-  version: string;
-  cssIndexSize: ReturnType<typeof analyzeCss>;
-  reactExports: Awaited<ReturnType<typeof analyzeReact>>;
-};
-
-const analysisResult: BundleAnalysisResult = {
-  version: "1",
-  cssIndexSize: cssFileSize,
-  reactExports: reactConfig,
-};
-
-console.info({ analysisResult });
+if (args.includes("--action-output")) {
+  const outputLine = `analysis-result=${JSON.stringify(result)}\n`;
+  assert(!!process.env.GITHUB_OUTPUT, "GITHUB_OUTPUT is not defined");
+  try {
+    appendFileSync(process.env.GITHUB_OUTPUT, outputLine);
+    console.info(`Successfully set GitHub Action output: analysis-result`);
+  } catch (err) {
+    throw new Error("Error writing to GITHUB_OUTPUT:" + (err as Error).message);
+  }
+}
