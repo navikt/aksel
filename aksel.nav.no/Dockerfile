@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs24-debian12
+FROM node:24-alpine
 
 WORKDIR /app
 COPY aksel.nav.no/website/.next/standalone ./
