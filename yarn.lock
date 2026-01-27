@@ -4703,7 +4703,7 @@ __metadata:
     hast-util-select: "npm:6.0.4"
     js-yaml: "npm:^4.1.1"
     lodash: "npm:4.17.23"
-    prettier: "npm:3.6.2"
+    prettier: "npm:3.8.1"
     react: "npm:19.2.3"
     rehype-parse: "npm:9.0.1"
     tsc-alias: "npm:1.8.16"
@@ -9278,7 +9278,7 @@ __metadata:
     husky: "npm:^8.0.0"
     lint-staged: "npm:16.1.5"
     playwright: "npm:^1.57.0"
-    prettier: "npm:3.6.2"
+    prettier: "npm:3.8.1"
     react: "npm:19.2.3"
     react-docgen-typescript: "npm:2.2.2"
     react-dom: "npm:19.2.3"
@@ -19626,12 +19626,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.6.2":
-  version: 3.6.2
-  resolution: "prettier@npm:3.6.2"
+"prettier@npm:3.8.1, prettier@npm:^3.3.3, prettier@npm:^3.7.4":
+  version: 3.8.1
+  resolution: "prettier@npm:3.8.1"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10/1213691706bcef1371d16ef72773c8111106c3533b660b1cc8ec158bd109cdf1462804125f87f981f23c4a3dba053b6efafda30ab0114cc5b4a725606bb9ff26
+  checksum: 10/3da1cf8c1ef9bea828aa618553696c312e951f810bee368f6887109b203f18ee869fe88f66e65f9cf60b7cb1f2eae859892c860a300c062ff8ec69c381fc8dbd
   languageName: node
   linkType: hard
 
@@ -19641,15 +19641,6 @@ __metadata:
   bin:
     prettier: bin-prettier.js
   checksum: 10/00cdb6ab0281f98306cd1847425c24cbaaa48a5ff03633945ab4c701901b8e96ad558eb0777364ffc312f437af9b5a07d0f45346266e8245beaf6247b9c62b24
-  languageName: node
-  linkType: hard
-
-"prettier@npm:^3.3.3, prettier@npm:^3.7.4":
-  version: 3.8.1
-  resolution: "prettier@npm:3.8.1"
-  bin:
-    prettier: bin/prettier.cjs
-  checksum: 10/3da1cf8c1ef9bea828aa618553696c312e951f810bee368f6887109b203f18ee869fe88f66e65f9cf60b7cb1f2eae859892c860a300c062ff8ec69c381fc8dbd
   languageName: node
   linkType: hard
 
