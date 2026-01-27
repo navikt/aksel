@@ -4,12 +4,12 @@
 }
 
 .monthContainer {
-  scroll-margin-top: var(--website-header-height);
+  scroll-margin-top: var(--website-header-sticky-height);
 }
 
 .monthHeader {
   position: sticky;
-  top: var(--website-header-height);
+  top: var(--website-header-sticky-height);
   background: linear-gradient(var(--ax-bg-default) calc(100% - var(--ax-space-12)), transparent);
   z-index: 2;
 }
@@ -50,7 +50,7 @@
 
 .logEntry {
   /* header + monthSpacer + monthBubble + log entry spacer */
-  scroll-margin-top: calc(var(--website-header-height) + var(--ax-space-12) + 48px + var(--ax-space-32));
+  scroll-margin-top: calc(var(--website-header-sticky-height) + var(--ax-space-12) + 48px + var(--ax-space-32));
   overflow-wrap: anywhere;
 }
 
@@ -59,7 +59,9 @@
 }
 
 .innholdFremhevet {
+  /* stylelint-disable-next-line aksel/design-token-no-global-override */
   --ax-text-brand-blue: var(--aksel-text-brand-pink);
+  /* stylelint-disable-next-line aksel/design-token-no-global-override */
   --ax-text-brand-blue-subtle: var(--aksel-text-brand-pink);
 
   color: var(--aksel-text-brand-pink);
