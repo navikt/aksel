@@ -4882,6 +4882,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@neshca/cache-handler@npm:1.9.0":
+  version: 1.9.0
+  resolution: "@neshca/cache-handler@npm:1.9.0"
+  dependencies:
+    cluster-key-slot: "npm:1.1.2"
+    lru-cache: "npm:10.4.3"
+  peerDependencies:
+    next: ">= 13.5.1 < 15"
+    redis: ">= 4.6"
+  checksum: 10/02ca013db44a0c921aeda641a89bbebd335573c1ae484ba8e290c4b05932d18c91794cdc45f9d20abba76affe0f22d2b7c4640368e76e44a666742a6385575cf
+  languageName: node
+  linkType: hard
+
 "@next/bundle-analyzer@npm:16.1.2":
   version: 16.1.2
   resolution: "@next/bundle-analyzer@npm:16.1.2"
@@ -10694,6 +10707,13 @@ __metadata:
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10/cdfb57fa6c7649bbff98d9028c2f0de2f91c86f551179541cf784b1cfdc1562dcb951955f46d54d930a3879931a980e32a46b598acaea274728dbe068deca919
+  languageName: node
+  linkType: hard
+
+"cluster-key-slot@npm:1.1.2":
+  version: 1.1.2
+  resolution: "cluster-key-slot@npm:1.1.2"
+  checksum: 10/516ed8b5e1a14d9c3a9c96c72ef6de2d70dfcdbaa0ec3a90bc7b9216c5457e39c09a5775750c272369070308542e671146120153062ab5f2f481bed5de2c925f
   languageName: node
   linkType: hard
 
@@ -16577,7 +16597,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lru-cache@npm:^10.2.0, lru-cache@npm:^10.4.3":
+"lru-cache@npm:10.4.3, lru-cache@npm:^10.2.0, lru-cache@npm:^10.4.3":
   version: 10.4.3
   resolution: "lru-cache@npm:10.4.3"
   checksum: 10/e6e90267360476720fa8e83cc168aa2bf0311f3f2eea20a6ba78b90a885ae72071d9db132f40fda4129c803e7dcec3a6b6a6fbb44ca90b081630b810b5d6a41a
@@ -24713,6 +24733,7 @@ __metadata:
     "@floating-ui/react": "npm:0.27.8"
     "@navikt/next-logger": "npm:4.4.1"
     "@navikt/oasis": "npm:3.2.1"
+    "@neshca/cache-handler": "npm:1.9.0"
     "@next/bundle-analyzer": "npm:16.1.2"
     "@next/eslint-plugin-next": "npm:16.1.2"
     "@playwright/test": "npm:^1.57.0"

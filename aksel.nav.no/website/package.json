@@ -33,6 +33,7 @@
     "@floating-ui/react": "0.27.8",
     "@navikt/next-logger": "4.4.1",
     "@navikt/oasis": "3.2.1",
+    "@neshca/cache-handler": "1.9.0",
     "@portabletext/react": "^6.0.2",
     "@sanity/client": "7.14.0",
     "@sanity/code-input": "7.0.6",

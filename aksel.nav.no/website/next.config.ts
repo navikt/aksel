@@ -1,6 +1,9 @@
 import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
+import { createRequire } from "node:module";
 import path from "node:path";
+
+const require = createRequire(import.meta.url);
 
 const useCdn = process.env.USE_CDN_ASSETS === "true";
 const isProduction = process.env.PRODUCTION === "true";
@@ -65,7 +68,7 @@ const nextConfig: NextConfig = {
       ? "fb69e1e9-1bd3-4fd9-b700-9d035cbf44e1"
       : "7b9fb2cd-40f4-4a30-b208-5b4dba026b57",
   },
-  cacheHandler: require.resolve("./cache-handler.js"),
+  cacheHandler: require.resolve("./cache-handler.mjs"),
   cacheMaxMemorySize: 0,
 
   assetPrefix: useCdn ? "https://cdn.nav.no/designsystem/website" : undefined,
@@ -135,6 +138,7 @@ const nextConfig: NextConfig = {
 
   images: {
     unoptimized: true,
+    minimumCacheTTL: 2678400,
     remotePatterns: [
       {
         protocol: "https",
