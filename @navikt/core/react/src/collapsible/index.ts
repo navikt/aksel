@@ -1,10 +1,11 @@
 "use client";
-export { default as Collapsible, type CollapsibleProps } from "./Collapsible";
 export {
-  default as CollapsibleTrigger,
-  type CollapsibleTriggerProps,
-} from "./parts/Collapsible.Trigger";
-export {
-  default as CollapsibleContent,
-  type CollapsibleContentProps,
-} from "./parts/Collapsible.Content";
+  default as Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "./Collapsible";
+export type {
+  CollapsibleProps,
+  CollapsibleTriggerProps,
+  CollapsibleContentProps,
+} from "./Collapsible";

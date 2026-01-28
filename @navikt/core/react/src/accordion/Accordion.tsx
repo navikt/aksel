@@ -10,31 +10,24 @@ import { AccordionContext } from "./AccordionContext";
 import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
 import AccordionItem, { AccordionItemProps } from "./AccordionItem";
 
-interface AccordionComponent
-  extends React.ForwardRefExoticComponent<
-    AccordionProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface AccordionComponent extends React.ForwardRefExoticComponent<
+  AccordionProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link AccordionItemProps}
    */
-  Item: React.ForwardRefExoticComponent<
-    AccordionItemProps & React.RefAttributes<HTMLDivElement>
-  >;
+  Item: typeof AccordionItem;
   /**
    * @see 🏷️ {@link AccordionHeaderProps}
    */
-  Header: React.ForwardRefExoticComponent<
-    AccordionHeaderProps & React.RefAttributes<HTMLButtonElement>
-  >;
+  Header: typeof AccordionHeader;
   /**
    * @see 🏷️ {@link AccordionContentProps}
    */
-  Content: React.ForwardRefExoticComponent<
-    AccordionContentProps & React.RefAttributes<HTMLDivElement>
-  >;
+  Content: typeof AccordionContent;
 }
 
-export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * @deprecated Will be removed in a future major version. Use `data-color` instead.
    */
@@ -144,3 +137,10 @@ Accordion.Content = AccordionContent;
 Accordion.Item = AccordionItem;
 
 export default Accordion;
+export { AccordionItem, AccordionHeader, AccordionContent };
+export type {
+  AccordionProps,
+  AccordionItemProps,
+  AccordionHeaderProps,
+  AccordionContentProps,
+};
