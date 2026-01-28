@@ -11,14 +11,6 @@ type SidebarProps = Omit<SidebarNavProps, "sidebarData">;
 async function DesignsystemSidebar(props: SidebarProps) {
   const { layout = "sidebar" } = props;
 
-  const sidebarData = await getSidebarData();
-
-  return <DesignsystemSidebarNav sidebarData={sidebarData} layout={layout} />;
-}
-
-async function getSidebarData() {
-  "use server";
-
   const [{ data: sidebar }, { data: oversikt }] = await Promise.all([
     sanityFetch({
       query: DESIGNSYSTEM_SIDEBAR_QUERY,
@@ -30,7 +22,7 @@ async function getSidebarData() {
 
   const sidebarData = generateSidebar(sidebar, oversikt);
 
-  return sidebarData;
+  return <DesignsystemSidebarNav sidebarData={sidebarData} layout={layout} />;
 }
 
 export { DesignsystemSidebar };
