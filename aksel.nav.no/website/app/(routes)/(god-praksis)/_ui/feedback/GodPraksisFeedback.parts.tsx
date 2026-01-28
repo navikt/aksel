@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/dist/client/components/navigation";
 import { useState, useTransition } from "react";
+import { z } from "zod";
 import { PersonIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -14,8 +15,14 @@ import {
   Textarea,
 } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { sendFeedbackAction } from "./actions";
-import { zodFormDataSchema } from "./actions.zod";
+
+const zodFormDataSchema = z.object({
+  feedback: z
+    .string({ invalid_type_error: "Ugyldig melding" })
+    .min(1, "Kan ikke send en tom tilbakemelding")
+    .max(500, "Tilbakemeldingen må være under 500 tegn"),
+  docId: z.string({ invalid_type_error: "Ugyldig dokument id" }),
+});
 
 function GodPraksisFeedbackLogin() {
   const pathname = usePathname();
@@ -109,12 +116,17 @@ function GodPraksisFeedbackForm({
     }
 
     startTransition(async () => {
-      const result = await sendFeedbackAction(
-        validatedFormData.data.feedback,
-        validatedFormData.data.docId,
-      );
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        body: JSON.stringify({
+          feedback: validatedFormData.data.feedback,
+          docId: validatedFormData.data.docId,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
 
-      if (result.value === "error") {
+      if (!res.ok) {
+        const result = await res.json();
         setFormState({
           value: "error",
           error: result.error,
