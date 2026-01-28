@@ -4,7 +4,7 @@ import { RectangleSectionsIcon } from "@navikt/aksel-icons";
 import { DataToolbar } from "./index";
 
 const meta: Meta<typeof DataToolbar> = {
-  title: "ds-react/DataToolbar",
+  title: "ds-react/Data/DataToolbar",
   component: DataToolbar,
   parameters: {
     chromatic: { disable: true },

@@ -1,5 +1,5 @@
 .aksel-data-toolbar {
-  padding: var(--ax-space-16) var(--ax-space-24);
+  padding: var(--ax-space-16);
   display: flex;
   align-items: center;
   gap: var(--ax-space-16);

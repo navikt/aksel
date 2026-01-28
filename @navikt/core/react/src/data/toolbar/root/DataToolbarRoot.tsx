@@ -25,6 +25,7 @@ interface DataToolbarRootComponent extends React.ForwardRefExoticComponent<
    * ```
    */
   SearchField: typeof DataToolbarSearchField;
+
   /**
    * @see 🏷️ {@link DataToolbarToggleButtonProps}
    * @example

@@ -17,6 +17,7 @@ const DataToolbarSearchField = React.forwardRef<
       ref={ref}
       {...props}
       variant="simple"
+      size="small"
       onChange={console.info}
       htmlSize="12"
       placeholder="Quick filter"

@@ -3,7 +3,7 @@ import React from "react";
 import { DataTable } from "./root/DataTableRoot";
 
 const meta: Meta<typeof DataTable> = {
-  title: "ds-react/DataTable",
+  title: "ds-react/Data/DataTable",
   component: DataTable,
   parameters: {
     chromatic: { disable: true },

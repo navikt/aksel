@@ -3,7 +3,7 @@ import React from "react";
 import { DataFilter } from "./index";
 
 const meta: Meta<typeof DataFilter> = {
-  title: "ds-react/DataFilter",
+  title: "ds-react/Data/DataFilter",
   component: DataFilter,
   parameters: {
     chromatic: { disable: true },
