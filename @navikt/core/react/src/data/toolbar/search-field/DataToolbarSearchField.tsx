@@ -5,7 +5,7 @@ type DataToolbarSearchFieldProps = Omit<
   React.HTMLAttributes<HTMLInputElement>,
   "data-color" | "size" | "type"
 > &
-  Pick<SearchProps, "label">;
+  Pick<SearchProps, "label" | "onChange">;
 
 const DataToolbarSearchField = React.forwardRef<
   HTMLInputElement,
@@ -18,7 +18,6 @@ const DataToolbarSearchField = React.forwardRef<
       {...props}
       variant="simple"
       size="small"
-      onChange={console.info}
       htmlSize="12"
       placeholder="Quick filter"
     />
