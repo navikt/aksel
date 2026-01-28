@@ -1,22 +1,30 @@
 import React, { forwardRef } from "react";
-import { cl } from "../../utils/helpers";
-import { DataTableCaption } from "../caption/DataTableCaption";
-import { DataTableTbody } from "../tbody/DataTableTbody";
-import { DataTableTd } from "../td/DataTableTd";
-import { DataTableTh } from "../th/DataTableTh";
-import { DataTableThead } from "../thead/DataTableThead";
-import { DataTableTr } from "../tr/DataTableTr";
+import { cl } from "../../../utils/helpers";
+import {
+  DataTableCaption,
+  type DataTableCaptionProps,
+} from "../caption/DataTableCaption";
+import {
+  DataTableTbody,
+  type DataTableTbodyProps,
+} from "../tbody/DataTableTbody";
+import { DataTableTd, type DataTableTdProps } from "../td/DataTableTd";
+import { DataTableTh, type DataTableThProps } from "../th/DataTableTh";
+import {
+  DataTableThead,
+  type DataTableTheadProps,
+} from "../thead/DataTableThead";
+import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
 
 interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode;
 }
 
-interface DataTableRootComponent
-  extends React.ForwardRefExoticComponent<
-    DataTableProps & React.RefAttributes<HTMLDialogElement>
-  > {
+interface DataTableRootComponent extends React.ForwardRefExoticComponent<
+  DataTableProps & React.RefAttributes<HTMLDialogElement>
+> {
   /**
-   * @see 🏷️ {@link DataTableCaptionProps} // TODO doesnt work
+   * @see 🏷️ {@link DataTableCaptionProps}
    * @example
    * ```jsx
    * <DataTable>
@@ -28,7 +36,7 @@ interface DataTableRootComponent
    */
   Caption: typeof DataTableCaption;
   /**
-   * @see 🏷️ {@link DataTableTheadProps} // TODO doesnt work
+   * @see 🏷️ {@link DataTableTheadProps}
    * @example
    * ```jsx
    * <DataTable>
@@ -40,7 +48,7 @@ interface DataTableRootComponent
    */
   Thead: typeof DataTableThead;
   /**
-   * @see 🏷️ {@link DataTableTbodyProps} // TODO doesnt work
+   * @see 🏷️ {@link DataTableTbodyProps}
    * @example
    * ```jsx
    * <DataTable>
@@ -52,7 +60,7 @@ interface DataTableRootComponent
    */
   Tbody: typeof DataTableTbody;
   /**
-   * @see 🏷️ {@link DataTableTrProps} // TODO doesnt work
+   * @see 🏷️ {@link DataTableTrProps}
    * @example
    * ```jsx
    * <DataTable>
@@ -64,7 +72,7 @@ interface DataTableRootComponent
    */
   Tr: typeof DataTableTr;
   /**
-   * @see 🏷️ {@link DataTableThProps} // TODO doesnt work
+   * @see 🏷️ {@link DataTableThProps}
    * @example
    * ```jsx
    * <DataTable>
@@ -77,7 +85,7 @@ interface DataTableRootComponent
    */
   Th: typeof DataTableTh;
   /**
-   * @see 🏷️ {@link DataTableTdProps} // TODO doesnt work
+   * @see 🏷️ {@link DataTableTdProps}
    * @example
    * ```jsx
    * <DataTable>
@@ -114,6 +122,22 @@ DataTable.Th = DataTableTh;
 DataTable.Tr = DataTableTr;
 DataTable.Td = DataTableTd;
 
-export { DataTable };
+export {
+  DataTable,
+  DataTableCaption,
+  DataTableTbody,
+  DataTableTd,
+  DataTableTh,
+  DataTableThead,
+  DataTableTr,
+};
 export default DataTable;
-export type { DataTableProps };
+export type {
+  DataTableProps,
+  DataTableCaptionProps,
+  DataTableTbodyProps,
+  DataTableTdProps,
+  DataTableThProps,
+  DataTableTheadProps,
+  DataTableTrProps,
+};
