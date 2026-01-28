@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.2.0
+
+### @navikt/ds-react
+
+- ActionMenu: Added support for right aligned icons on items ([#4545](https://github.com/navikt/aksel/pull/4545))
+
+### @navikt/ds-css
+
+- ActionMenu: Added support for right aligned icons on items ([#4545](https://github.com/navikt/aksel/pull/4545))
+
 ## 8.1.0
 
 ### @navikt/ds-react
