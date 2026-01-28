@@ -83,7 +83,7 @@ function KomponentLinks({
         </Link>
       )}
       <Link
-        href={`/grunnleggende/endringslogg${heading ? `?fritekst=${removeEmojiesFromText(heading).toLowerCase().trim()}` : ""}`}
+        href={`/grunnleggende/endringslogg${heading ? `?fritekst=${removeEmojiesFromText(heading).trim()}` : ""}`}
         data-color="neutral"
         onClick={() =>
           umamiTrack("navigere", {
