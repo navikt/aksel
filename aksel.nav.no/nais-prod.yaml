@@ -22,12 +22,12 @@ spec:
     max: 4
     scalingStrategy:
       cpu:
-        thresholdPercentage: 70
+        thresholdPercentage: 90
   resources:
     limits:
       memory: 1Gi
     requests:
-      cpu: 172m
+      cpu: 200m
       memory: 896Mi
   liveness:
     path: /api/isAlive

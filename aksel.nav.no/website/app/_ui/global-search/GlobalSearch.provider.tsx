@@ -91,7 +91,6 @@ function GlobalSearchResultProvider({
 
   /**
    * Preload the searchindex cache, so that the first search is faster.
-   *
    */
   useEffect(() => {
     void preloadSearchIndex();
