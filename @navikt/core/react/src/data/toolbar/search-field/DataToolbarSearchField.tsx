@@ -1,12 +1,27 @@
 import React from "react";
+import { Search, type SearchProps } from "../../../form/search";
 
-type DataToolbarSearchFieldProps = React.HTMLAttributes<HTMLInputElement>;
+type DataToolbarSearchFieldProps = Omit<
+  React.HTMLAttributes<HTMLInputElement>,
+  "data-color" | "size" | "type"
+> &
+  Pick<SearchProps, "label">;
 
 const DataToolbarSearchField = React.forwardRef<
   HTMLInputElement,
   DataToolbarSearchFieldProps
 >(({ className, ...props }, ref) => {
-  return <input type="search" className={className} ref={ref} {...props} />;
+  return (
+    <Search
+      className={className}
+      ref={ref}
+      {...props}
+      variant="simple"
+      onChange={console.info}
+      htmlSize="12"
+      placeholder="Quick filter"
+    />
+  );
 });
 
 export { DataToolbarSearchField };

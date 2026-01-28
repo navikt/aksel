@@ -1,6 +1,11 @@
 "use client";
-export { DataToolbar, DataToolbarSearchField } from "./root/DataToolbarRoot";
+export {
+  DataToolbar,
+  DataToolbarSearchField,
+  DataToolbarToggleButton,
+} from "./root/DataToolbarRoot";
 export type {
   DataToolbarProps,
   DataToolbarSearchFieldProps,
+  DataToolbarToggleButtonProps,
 } from "./root/DataToolbarRoot";

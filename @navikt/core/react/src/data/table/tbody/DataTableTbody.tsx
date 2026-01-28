@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { cl } from "../../utils/helpers";
+import { cl } from "../../../utils/helpers";
 
 type DataTableTbodyProps = React.HTMLAttributes<HTMLTableSectionElement>;
 

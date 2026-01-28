@@ -1,0 +1,21 @@
+.aksel-data-toolbar {
+  padding: var(--ax-space-16) var(--ax-space-24);
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-16);
+  border: 1px solid var(--ax-border-neutral);
+  border-radius: var(--ax-radius-16);
+  background-color: var(--ax-bg-raised);
+}
+
+.aksel-data-toolbar__toggle-button {
+  background-color: var(--ax-bg-neutral-moderate);
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &[aria-pressed="true"] {
+    background-color: var(--ax-bg-neutral-strong-pressed);
+  }
+}

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { RectangleSectionsIcon } from "@navikt/aksel-icons";
 import { DataToolbar } from "./index";
 
 const meta: Meta<typeof DataToolbar> = {
@@ -7,6 +8,7 @@ const meta: Meta<typeof DataToolbar> = {
   component: DataToolbar,
   parameters: {
     chromatic: { disable: true },
+    layout: "padded",
   },
 };
 
@@ -17,7 +19,10 @@ type Story = StoryObj<typeof DataToolbar>;
 export const Default: Story = {
   render: () => (
     <DataToolbar>
-      <DataToolbar.SearchField />
+      <DataToolbar.SearchField label="Tekstfilter" />
+      <DataToolbar.ToggleButton>
+        <RectangleSectionsIcon />
+      </DataToolbar.ToggleButton>
     </DataToolbar>
   ),
 };
