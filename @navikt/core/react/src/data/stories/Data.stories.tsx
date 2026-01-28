@@ -6,9 +6,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React, { useState } from "react";
-import { RectangleSectionsIcon } from "@navikt/aksel-icons";
+import { CogIcon, RectangleSectionsIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
+import { ActionMenu } from "../../overlays/action-menu";
 import DataActionBar from "../action-bar/root/DataActionBarRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
@@ -75,6 +76,8 @@ export const Default: Story = {
 export const TanstackExample: Story = {
   render: () => {
     const [globalFilter, setGlobalFilter] = useState<string>();
+    const [columnVisibility, setColumnVisibility] = React.useState({});
+
     const table = useReactTable({
       columns,
       data: sampleData,
@@ -83,10 +86,43 @@ export const TanstackExample: Story = {
       globalFilterFn: "includesString",
       state: {
         globalFilter,
+        columnVisibility,
       },
-      // globalFilterFn: customFilterFn,
       onGlobalFilterChange: setGlobalFilter,
+      onColumnVisibilityChange: setColumnVisibility,
     });
+
+    /* <div className="inline-block border border-black shadow rounded">
+        <div className="px-1 border-b border-black">
+          <label>
+            <input
+              {...{
+                type: 'checkbox',
+                checked: table.getIsAllColumnsVisible(),
+                onChange: table.getToggleAllColumnsVisibilityHandler(),
+              }}
+            />{' '}
+            Toggle All
+          </label>
+        </div>
+        {table.getAllLeafColumns().map((column) => {
+          return (
+            <div key={column.id} className="px-1">
+              <label>
+                <input
+                  {...{
+                    type: 'checkbox',
+                    checked: column.getIsVisible(),
+                    onChange: column.getToggleVisibilityHandler(),
+                  }}
+                />{' '}
+                {column.id}
+              </label>
+            </div>
+          )
+        })}
+      </div> */
+
     return (
       <VStack gap="space-16">
         <DataToolbar>
@@ -97,6 +133,41 @@ export const TanstackExample: Story = {
           <DataToolbar.ToggleButton>
             <RectangleSectionsIcon />
           </DataToolbar.ToggleButton>
+          <ActionMenu>
+            <ActionMenu.Trigger>
+              <Button
+                data-color="neutral"
+                variant="tertiary"
+                size="small"
+                icon={<CogIcon title="Kolonner" />}
+              />
+            </ActionMenu.Trigger>
+            <ActionMenu.Content>
+              <ActionMenu.CheckboxItem
+                checked={table.getIsAllColumnsVisible()}
+                onSelect={(event) => {
+                  const handler = table.getToggleAllColumnsVisibilityHandler();
+                  handler(event);
+                }}
+              >
+                Vis alle
+              </ActionMenu.CheckboxItem>
+              {table.getAllLeafColumns().map((column) => {
+                return (
+                  <ActionMenu.CheckboxItem
+                    key={column.id}
+                    checked={column.getIsVisible()}
+                    onSelect={(event) => {
+                      const handler = column.getToggleVisibilityHandler();
+                      handler(event);
+                    }}
+                  >
+                    {column.id}
+                  </ActionMenu.CheckboxItem>
+                );
+              })}
+            </ActionMenu.Content>
+          </ActionMenu>
         </DataToolbar>
 
         <DataActionBar numOfSelectedRows={2} onClear={() => alert("Cleared!")}>
