@@ -9,7 +9,6 @@ import {
   useState,
 } from "react";
 import { getCookie, setCookie } from "typescript-cookie";
-import { trackCookieConsent } from "@/app/_ui/cookie-consent/CookieConsent.actions";
 import {
   CONSENT_TRACKER_ID,
   CONSENT_TRACKER_STATE,
@@ -134,7 +133,15 @@ async function updateCookieConsent(newState: CONSENT_TRACKER_STATE) {
     expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
   });
 
-  await trackCookieConsent(newState);
+  if (!["accepted", "rejected"].includes(newState)) {
+    return;
+  }
+
+  await fetch("/api/cookie-consent/track", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ state: newState }),
+  }).finally(() => {});
 }
 
 function validateConsentState(state: string): state is CONSENT_TRACKER_STATE {

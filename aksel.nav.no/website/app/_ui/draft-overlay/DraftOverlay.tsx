@@ -9,7 +9,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { Button, Switch } from "@navikt/ds-react";
 import styles from "./DraftOverlay.module.css";
-import { disableDraftModeAction } from "./actions";
 
 function DraftOverlay() {
   const router = useRouter();
@@ -58,9 +57,10 @@ function DraftOverlay() {
 
   const disable = () =>
     startTransition(async () => {
-      await disableDraftModeAction();
-      channelRef.current?.postMessage("draft-mode-disabled");
-      router.refresh();
+      await fetch("/api/draft-mode/disable").finally(() => {
+        channelRef.current?.postMessage("draft-mode-disabled");
+        router.refresh();
+      });
     });
 
   return (
