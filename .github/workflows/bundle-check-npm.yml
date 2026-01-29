@@ -1,4 +1,4 @@
-name: Bundle check against main branch
+name: Bundle check against npm
 
 on:
   pull_request:
@@ -8,9 +8,9 @@ on:
 
 jobs:
   analyze-trunk:
-    name: "Analyzing main branch"
+    name: "Analyzing npm packages"
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.pull_request.title, 'Version Packages') }}
+    if: contains(github.event.pull_request.title, 'Version Packages')
     steps:
       - name: Checkout main-branch
         uses: actions/checkout@v6
@@ -23,20 +23,21 @@ jobs:
         with:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
-      - name: Analyze main branch
+      - name: Analyze npm packages
         id: results
-        run: yarn run:analyze-trunk-action
+        run: yarn run:analyze-npm-action
 
   compare-against-trunk:
-    name: "Analyzing PR branch and comparing against main"
+    name: "Analyzing main branch and comparing against npm"
     runs-on: ubuntu-latest
     needs: analyze-trunk
-    if: ${{ !contains(github.event.pull_request.title, 'Version Packages') }}
+    if: contains(github.event.pull_request.title, 'Version Packages')
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
           fetch-depth: 1
+          ref: main
 
       - name: Setup project
         uses: ./.github/actions/setup
@@ -53,7 +54,7 @@ jobs:
     name: "Create or update PR comment with results"
     runs-on: ubuntu-latest
     needs: compare-against-trunk
-    if: ${{ !contains(github.event.pull_request.title, 'Version Packages') }}
+    if: contains(github.event.pull_request.title, 'Version Packages')
     steps:
       - name: Find Comment
         uses: peter-evans/find-comment@v4
