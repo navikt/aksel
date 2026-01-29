@@ -13,7 +13,7 @@ export const sanityFetch: typeof _sanityFetch = async (args) => {
   const result = await _sanityFetch(args);
 
   /**
-   * sanity:s1:aHJRvA is the tag added to 'catch all' queries in sanitylive
+   * sanity:s1:aHJRvA is the tag added to 'catch all' queries in sanitylive.
    * If we detect this tag, it means that every query will revalidate.
    * This could lead to performance issues.
    */
