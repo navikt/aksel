@@ -9,8 +9,8 @@ export const { sanityFetch: _sanityFetch, SanityLive } = defineLive({
   browserToken: readWithDraftToken,
 });
 
-export const sanityFetch: typeof _sanityFetch = async (args) => {
-  const result = await _sanityFetch(args);
+export const sanityFetch: typeof _sanityFetch = async (options) => {
+  const result = await _sanityFetch(options);
 
   /**
    * sanity:s1:aHJRvA is the tag added to 'catch all' queries in sanitylive.
