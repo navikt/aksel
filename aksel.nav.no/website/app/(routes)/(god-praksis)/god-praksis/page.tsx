@@ -20,8 +20,11 @@ import { GodPraksisIntroHero } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero"
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ALL_TEMA_QUERY,
+  GOD_PRAKSIS_ARTICLES_BY_UNDERTEMA_ID_QUERY,
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
+  GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
 } from "@/app/_sanity/queries";
+import type { GOD_PRAKSIS_ALL_TEMA_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
@@ -52,8 +55,6 @@ export default async function Page() {
     notFound();
   }
 
-  const filteredTemaList = temaList.filter((tema) => tema.articles.length > 0);
-
   return (
     <div>
       <GodPraksisIntroHero
@@ -67,68 +68,90 @@ export default async function Page() {
         paddingInline={{ xs: "space-16", lg: "space-40" }}
         paddingBlock="space-48"
       >
-        {filteredTemaList.map((tema) => {
-          return (
-            <section key={tema.slug} aria-label={`Tema ${tema.title}`}>
-              <VStack gap="space-8" marginBlock="space-0 space-24">
-                <Heading level="2" size="large">
-                  {tema.title}
-                </Heading>
-                {tema.description && <BodyLong>{tema.description}</BodyLong>}
-              </VStack>
-              <HGrid
-                as="ul"
-                columns={{ xs: 1, md: 2 }}
-                gap={{ xs: "space-16", md: "space-24" }}
-                marginBlock="space-0 space-24"
-              >
-                {tema.articles.map((article) => {
-                  const undertema = article.undertema?.find(
-                    (ut) => ut?.temaTitle === tema.title,
-                  )?.title;
-                  const innholdstype = article.innholdstype;
-
-                  return (
-                    <li key={article.slug}>
-                      <Box asChild height="100%">
-                        <LinkCard>
-                          <LinkCardTitle as="h3">
-                            <LinkCardAnchor asChild>
-                              <NextLink href={article.slug ?? ""}>
-                                {article.heading}
-                              </NextLink>
-                            </LinkCardAnchor>
-                          </LinkCardTitle>
-                          <LinkCardFooter>
-                            <GodPraksisTaxonomyTag type="undertema">
-                              {undertema}
-                            </GodPraksisTaxonomyTag>
-                            <GodPraksisTaxonomyTag type="innholdstype">
-                              {innholdstype}
-                            </GodPraksisTaxonomyTag>
-                          </LinkCardFooter>
-                        </LinkCard>
-                      </Box>
-                    </li>
-                  );
-                })}
-              </HGrid>
-              <BodyShort as="h3" size="large">
-                <Link
-                  href={`/god-praksis/${tema.slug}`}
-                  as={NextLink}
-                  data-animated-arrow-anchor
-                  data-color="brand-blue"
-                >
-                  {`Alt fra ${tema.title} `}
-
-                  <AnimatedArrowRight />
-                </Link>
-              </BodyShort>
-            </section>
-          );
+        {temaList.map((tema) => {
+          return <TemaSection key={tema.slug} tema={tema} />;
         })}
       </VStack>
     </div>
+  );
+}
+
+async function TemaSection({
+  tema,
+}: {
+  tema: GOD_PRAKSIS_ALL_TEMA_QUERY_RESULT[number];
+}) {
+  const { data: undertema } = await sanityFetch({
+    query: GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
+    params: { temaId: tema._id },
+  });
+
+  const { data: articles } = await sanityFetch({
+    query: GOD_PRAKSIS_ARTICLES_BY_UNDERTEMA_ID_QUERY,
+    params: { undertemaIds: undertema },
+  });
+
+  if (articles?.length === 0) {
+    return null;
+  }
+
+  return (
+    <section aria-label={`Tema ${tema.title}`}>
+      <VStack gap="space-8" marginBlock="space-0 space-24">
+        <Heading level="2" size="large">
+          {tema.title}
+        </Heading>
+        {tema.description && <BodyLong>{tema.description}</BodyLong>}
+      </VStack>
+      <HGrid
+        as="ul"
+        columns={{ xs: 1, md: 2 }}
+        gap={{ xs: "space-16", md: "space-24" }}
+        marginBlock="space-0 space-24"
+      >
+        {articles.map((article) => {
+          const undertemaTitle = article.undertema?.find(
+            (ut) => ut?.temaTitle === tema.title,
+          )?.title;
+          const innholdstype = article.innholdstype;
+
+          return (
+            <li key={article.slug}>
+              <Box asChild height="100%">
+                <LinkCard>
+                  <LinkCardTitle as="h3">
+                    <LinkCardAnchor asChild>
+                      <NextLink href={article.slug ?? ""}>
+                        {article.heading}
+                      </NextLink>
+                    </LinkCardAnchor>
+                  </LinkCardTitle>
+                  <LinkCardFooter>
+                    <GodPraksisTaxonomyTag type="undertema">
+                      {undertemaTitle}
+                    </GodPraksisTaxonomyTag>
+                    <GodPraksisTaxonomyTag type="innholdstype">
+                      {innholdstype}
+                    </GodPraksisTaxonomyTag>
+                  </LinkCardFooter>
+                </LinkCard>
+              </Box>
+            </li>
+          );
+        })}
+      </HGrid>
+      <BodyShort as="h3" size="large">
+        <Link
+          href={`/god-praksis/${tema.slug}`}
+          as={NextLink}
+          data-animated-arrow-anchor
+          data-color="brand-blue"
+        >
+          {`Alt fra ${tema.title} `}
+
+          <AnimatedArrowRight />
+        </Link>
+      </BodyShort>
+    </section>
   );
 }

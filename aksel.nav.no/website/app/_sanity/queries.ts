@@ -214,17 +214,29 @@ const N_LATEST_CHANGE_LOGS_QUERY = defineQuery(`
 const GOD_PRAKSIS_ALL_TEMA_QUERY =
   defineQuery(`*[_type == "gp.tema"] | order(lower(title)){
   title,
+  _id,
   _updatedAt,
   description,
   pictogram,
   "slug": slug.current,
-  "articles": *[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)] | order(publishedAt desc)[0...4] {
+}`);
+
+const GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY = defineQuery(
+  `*[_type == "gp.tema.undertema" && ($temaId == tema._ref)]._id`,
+);
+
+const GOD_PRAKSIS_ARTICLES_BY_UNDERTEMA_ID_QUERY = defineQuery(
+  `*[_type=="aksel_artikkel" && defined(undertema) && count(undertema[_ref in $undertemaIds]) > 0] | order(publishedAt desc)[0...4] {
       heading,
       "slug": slug.current,
       "undertema": undertema[]->{title, "temaTitle": tema->title},
       "innholdstype": innholdstype->title,
-    },
-}`);
+    }`,
+);
+
+const GOD_PRAKSIS_ARTICLES_COUNT_BY_UNDERTEMA_ID_QUERY = defineQuery(
+  `count(*[_type=="aksel_artikkel" && array::intersects(undertema[]._ref, $undertemaIds)])`,
+);
 
 const GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY = defineQuery(
   `*[_type == "godpraksis_landingsside"][0].seo`,
@@ -413,6 +425,9 @@ export {
   GLOBAL_SEARCH_QUERY_ALL,
   N_LATEST_CHANGE_LOGS_QUERY,
   GOD_PRAKSIS_ALL_TEMA_QUERY,
+  GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
+  GOD_PRAKSIS_ARTICLES_BY_UNDERTEMA_ID_QUERY,
+  GOD_PRAKSIS_ARTICLES_COUNT_BY_UNDERTEMA_ID_QUERY,
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
