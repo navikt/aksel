@@ -2,7 +2,7 @@
 
 import { BodyShort, Heading } from "@navikt/ds-react";
 import { useGlobalSearchResults } from "@/app/_ui/global-search/GlobalSearch.context";
-import { globalSearchConfig } from "@/app/_ui/global-search/server/GlobalSearch.config";
+import { globalSearchConfig } from "@/app/_ui/global-search/GlobalSearch.types";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
 import styles from "./GlobalSearch.module.css";
 

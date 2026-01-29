@@ -10,7 +10,7 @@ import {
 import type {
   SearchHitT,
   SearchResultPageTypesT,
-} from "@/app/_ui/global-search/server/GlobalSearch.config";
+} from "@/app/_ui/global-search/GlobalSearch.types";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { doctypeToColorRole } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";

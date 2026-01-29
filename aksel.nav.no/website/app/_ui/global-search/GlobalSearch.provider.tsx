@@ -14,10 +14,6 @@ import {
   GlobalSearchResultContext,
   useGlobalSearch,
 } from "@/app/_ui/global-search/GlobalSearch.context";
-import {
-  fuseGlobalSearch,
-  preloadSearchIndex,
-} from "@/app/_ui/global-search/server/GlobalSearch.actions";
 import { useParamState } from "@/app/_ui/global-search/useParamState";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
@@ -75,7 +71,17 @@ function GlobalSearchResultProvider({
     }
 
     startTransition(async () => {
-      const newResults = await fuseGlobalSearch(paramValue);
+      if (!paramValue || paramValue.length < 2) {
+        return;
+      }
+
+      const newResults = await fetch("/api/global-search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: paramValue }),
+      })
+        .then((res) => res.json())
+        .catch(() => null);
 
       setSearchResults(newResults);
 
@@ -88,13 +94,6 @@ function GlobalSearchResultProvider({
       }
     });
   }, [paramValue, openSearch]);
-
-  /**
-   * Preload the searchindex cache, so that the first search is faster.
-   */
-  useEffect(() => {
-    void preloadSearchIndex();
-  }, []);
 
   const contextValue = useMemo(
     () => ({

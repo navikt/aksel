@@ -4,7 +4,7 @@ import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import { client } from "@/app/_sanity/client";
 import { GLOBAL_SEARCH_QUERY_ALL } from "@/app/_sanity/queries";
-import { SearchPageT } from "./GlobalSearch.config";
+import type { SearchPageT } from "@/app/_ui/global-search/GlobalSearch.types";
 
 /**
  * We use node-cache here since nextjs built in
@@ -16,7 +16,9 @@ const CACHE_KEY = "globalSearchArticles";
  * When stable, use `use cache` with cache-life
  * https://nextjs.org/docs/app/api-reference/directives/use-cache#revalidating
  */
-async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
+async function fetchSearchArticles(): Promise<
+  ReturnType<typeof sanitizeSanityData>
+> {
   const cachedData =
     searchCache.get<ReturnType<typeof sanitizeSanityData>>(CACHE_KEY);
 
@@ -137,4 +139,4 @@ function mapContent(blocks: any[]) {
   return mapped;
 }
 
-export { fetchArticles };
+export { fetchSearchArticles };

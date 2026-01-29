@@ -1,17 +1,16 @@
-"use server";
-
 import type { FuseResult, FuseResultMatch } from "fuse.js";
 import Fuse from "fuse.js";
 import omit from "lodash/omit";
+import "server-only";
 import {
   SearchHitT,
   SearchPageT,
   globalSearchConfig,
-} from "./GlobalSearch.config";
-import { fetchArticles } from "./GlobalSearch.fetch";
+} from "@/app/_ui/global-search/GlobalSearch.types";
+import { fetchSearchArticles } from "./search-articles";
 
 async function fuseGlobalSearch(query: string) {
-  const localData = await fetchArticles();
+  const localData = await fetchSearchArticles();
   if (!query || query.length < 2) {
     return null;
   }
@@ -122,8 +121,15 @@ function resolveAnchor(match: FuseResultMatch, item: SearchPageT) {
   return null;
 }
 
-async function preloadSearchIndex() {
-  void fetchArticles();
-}
+export async function POST(request: Request) {
+  try {
+    const { query } = (await request.json()) as { query: string };
 
-export { fuseGlobalSearch, preloadSearchIndex };
+    const result = await fuseGlobalSearch(query);
+
+    return Response.json(result);
+  } catch (error) {
+    console.error("Global search failed:", error);
+    return new Response(null, { status: 500 });
+  }
+}
