@@ -1,5 +1,8 @@
 import React from "react";
 import { cl } from "../../../utils/helpers";
+import DataToolbarButton, {
+  DataToolbarButtonProps,
+} from "../button/DataToolbarButton";
 import {
   DataToolbarSearchField,
   type DataToolbarSearchFieldProps,
@@ -25,6 +28,17 @@ interface DataToolbarRootComponent extends React.ForwardRefExoticComponent<
    * ```
    */
   SearchField: typeof DataToolbarSearchField;
+
+  /**
+   * @see 🏷️ {@link DataToolbarButtonProps}
+   * @example
+   * ```tsx
+   * <DataToolbar>
+   *   <DataToolbar.Button />
+   * </DataToolbar>
+   * ```
+   */
+  Button: typeof DataToolbarButton;
 
   /**
    * @see 🏷️ {@link DataToolbarToggleButtonProps}
@@ -54,12 +68,19 @@ const DataToolbar = React.forwardRef<HTMLDivElement, DataToolbarProps>(
 ) as DataToolbarRootComponent;
 
 DataToolbar.SearchField = DataToolbarSearchField;
+DataToolbar.Button = DataToolbarButton;
 DataToolbar.ToggleButton = DataToolbarToggleButton;
 
-export { DataToolbar, DataToolbarSearchField, DataToolbarToggleButton };
+export {
+  DataToolbar,
+  DataToolbarSearchField,
+  DataToolbarButton,
+  DataToolbarToggleButton,
+};
 export default DataToolbar;
 export type {
   DataToolbarProps,
   DataToolbarSearchFieldProps,
+  DataToolbarButtonProps,
   DataToolbarToggleButtonProps,
 };
