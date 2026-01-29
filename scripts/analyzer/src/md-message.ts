@@ -101,7 +101,15 @@ function markdownMessage(compareResults: CompareResults): string {
     lines.push("");
   }
 
-  return lines.join("\n");
+  const message = lines.join("\n");
+
+  const header = "# Bundle Analysis Result\n\n";
+
+  if (message.length > 0) {
+    return header + message;
+  }
+
+  return header + "No changes detected to bundle 🎉";
 }
 
 function formatSize(bytes: number): string {
