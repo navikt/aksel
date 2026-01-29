@@ -4,7 +4,11 @@ import { cl } from "../../utils/helpers";
 import { useControllableState, useMergeRefs } from "../../utils/hooks";
 import { useDateLocale, useI18n } from "../../utils/i18n/i18n.hooks";
 import { DateDialog } from "../Date.Dialog";
-import { DateInputContextProvider, MonthPickerInput } from "../Date.Input";
+import {
+  DateInputContextProvider,
+  DateInputProps,
+  MonthPickerInput,
+} from "../Date.Input";
 import {
   DateTranslationContextProvider,
   getLocaleFromString,
@@ -13,12 +17,15 @@ import {
 import { MonthPickerProvider } from "./MonthPicker.context";
 import { MonthPickerProps } from "./MonthPicker.types";
 import { MonthPickerCaption } from "./parts/MonthPicker.Caption";
-import { MonthPickerStandalone } from "./parts/MonthPicker.Standalone";
+import {
+  MonthPickerStandalone,
+  MonthPickerStandaloneProps,
+} from "./parts/MonthPicker.Standalone";
 import { MonthPickerTable } from "./parts/MonthPicker.Table";
 
-interface MonthPickerComponent
-  extends React.ForwardRefExoticComponent<MonthPickerProps> {
+interface MonthPickerComponent extends React.ForwardRefExoticComponent<MonthPickerProps> {
   /**
+   * @see 🏷️ {@link MonthPickerStandaloneProps}
    * @example
    * ```jsx
    * <MonthPicker.Standalone
@@ -174,3 +181,5 @@ MonthPicker.Standalone = MonthPickerStandalone;
 MonthPicker.Input = MonthPickerInput;
 
 export default MonthPicker;
+export { MonthPickerStandalone, MonthPickerInput };
+export type { MonthPickerProps, MonthPickerStandaloneProps, DateInputProps };

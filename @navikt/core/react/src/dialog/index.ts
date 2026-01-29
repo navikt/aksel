@@ -1,19 +1,23 @@
 "use client";
-export { default as Dialog } from "./root/DialogRoot";
-export type { DialogProps } from "./root/DialogRoot";
-export { DialogTrigger } from "./trigger/DialogTrigger";
-export type { DialogTriggerProps } from "./trigger/DialogTrigger";
-export { DialogPopup } from "./popup/DialogPopup";
-export type { DialogPopupProps } from "./popup/DialogPopup";
-export { DialogCloseTrigger } from "./close-trigger/DialogCloseTrigger";
-export type { DialogCloseTriggerProps } from "./close-trigger/DialogCloseTrigger";
-export { DialogHeader } from "./header/DialogHeader";
-export type { DialogHeaderProps } from "./header/DialogHeader";
-export { DialogFooter } from "./footer/DialogFooter";
-export type { DialogFooterProps } from "./footer/DialogFooter";
-export { DialogTitle } from "./title/DialogTitle";
-export type { DialogTitleProps } from "./title/DialogTitle";
-export { DialogDescription } from "./description/DialogDescription";
-export type { DialogDescriptionProps } from "./description/DialogDescription";
-export { DialogBody } from "./body/DialogBody";
-export type { DialogBodyProps } from "./body/DialogBody";
+export {
+  default as Dialog,
+  DialogTrigger,
+  DialogPopup,
+  DialogCloseTrigger,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  DialogBody,
+} from "./root/DialogRoot";
+export type {
+  DialogProps,
+  DialogTriggerProps,
+  DialogPopupProps,
+  DialogCloseTriggerProps,
+  DialogHeaderProps,
+  DialogFooterProps,
+  DialogTitleProps,
+  DialogDescriptionProps,
+  DialogBodyProps,
+} from "./root/DialogRoot";
