@@ -7,12 +7,12 @@ import { appendFileSync } from "node:fs";
  *    id: results  # <-- ID for the step
  *    run: ...
  */
-function addToActionOutput(data: string) {
-  const outputLine = `analysis-result=${data}\n`;
+function addToActionOutput(key: string, data: string) {
+  const outputLine = `${key}=${data}\n`;
   assert(!!process.env.GITHUB_OUTPUT, "GITHUB_OUTPUT is not defined");
   try {
     appendFileSync(process.env.GITHUB_OUTPUT, outputLine);
-    console.info(`Successfully set GitHub Action output: analysis-result`);
+    console.info(`Successfully set GitHub Action output: ${key}`);
   } catch (err) {
     throw new Error("Error writing to GITHUB_OUTPUT:" + (err as Error).message);
   }
@@ -25,7 +25,7 @@ function addToActionOutput(data: string) {
  *  needs: previous-job
  *  steps:
  *    - env:
- *        RESULT: ${{needs.previous-job.outputs.analysis-result}}
+ *        RESULT: ${{needs.previous-job.outputs.<key>}}
  */
 function getFromActionOutput(): string {
   assert(

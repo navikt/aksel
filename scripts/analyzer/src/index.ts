@@ -6,6 +6,7 @@ import {
   addToActionOutput,
   getFromActionOutput,
 } from "./helpers/git-actions.js";
+import { markdownMessage } from "./md-message.js";
 
 const args = process.argv.slice(2);
 
@@ -21,7 +22,7 @@ if (args.includes("--remote")) {
 }
 
 if (args.includes("--action-output")) {
-  addToActionOutput(JSON.stringify(branchResult));
+  addToActionOutput("analysis-result", JSON.stringify(branchResult));
   exit(0);
 }
 
@@ -32,4 +33,6 @@ const comparison = compareResults({
   branch: branchResult,
 });
 
-console.info(comparison);
+addToActionOutput("markdown-result", markdownMessage(comparison));
+
+console.info("\nCompleted analysis 🎉");
