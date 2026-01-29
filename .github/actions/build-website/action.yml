@@ -22,6 +22,9 @@ inputs:
   sanity_deploy_studio:
     description: "Sanity studio deployment token"
     required: false
+  next_encryption_key:
+    description: "Overrides default NEXT_SERVER_ACTIONS_ENCRYPTION_KEY for production builds"
+    required: false
   production:
     description: "Toggle to differentiate production build (inject stuff based on this)"
     default: false
@@ -49,6 +52,12 @@ runs:
       if: ${{ inputs.production == 'true' }}
       run: |
         echo "PRODUCTION=true" >> aksel.nav.no/website/.env
+      shell: bash
+
+    - name: Override encryption key for production
+      if: ${{ inputs.production == 'true' && inputs.next_encryption_key != '' }}
+      run: |
+        echo "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY=${{ inputs.next_encryption_key }}" >> aksel.nav.no/website/.env
       shell: bash
 
     - name: Update sanity manifest
