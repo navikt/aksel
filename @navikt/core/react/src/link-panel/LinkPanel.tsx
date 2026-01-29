@@ -9,8 +9,7 @@ import {
 } from "./LinkPanelDescription";
 import { LinkPanelTitle, LinkPanelTitleProps } from "./LinkPanelTitle";
 
-export interface LinkPanelProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkPanelProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Panel content
    */
@@ -22,10 +21,12 @@ export interface LinkPanelProps
   border?: boolean;
 }
 
-interface LinkPanelComponentType
-  extends OverridableComponent<LinkPanelProps, HTMLAnchorElement> {
+interface LinkPanelComponentType extends OverridableComponent<
+  LinkPanelProps,
+  HTMLAnchorElement
+> {
   /**
-   * @see 🏷️ {@link LinkPanelDescriptionProps}
+   * @see 🏷️ {@link LinkPanelTitleProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
   Title: OverridableComponent<LinkPanelTitleProps, HTMLDivElement>;

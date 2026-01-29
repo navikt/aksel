@@ -3,13 +3,11 @@ import { BodyLong } from "../typography";
 import { cl } from "../utils/helpers";
 import { ListItem } from "./List.Item";
 import { ListContext } from "./List.context";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { ListItemProps, ListProps } from "./List.types";
 
-export interface ListComponent
-  extends React.ForwardRefExoticComponent<
-    ListProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface ListComponent extends React.ForwardRefExoticComponent<
+  ListProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link ListItemProps}
    */
@@ -78,3 +76,5 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
 List.Item = ListItem;
 
 export default List;
+export { ListItem };
+export type { ListProps, ListItemProps };

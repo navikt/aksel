@@ -6,15 +6,14 @@ import {
   useTabsDescendants,
 } from "./Tabs.context";
 import { TabsProps } from "./Tabs.types";
-import Tab from "./parts/tab/Tab";
-import TabList from "./parts/tablist/TabList";
-import TabPanel from "./parts/tabpanel/TabPanel";
+import Tab, { TabProps } from "./parts/tab/Tab";
+import TabList, { TabListProps } from "./parts/tablist/TabList";
+import TabPanel, { TabPanelProps } from "./parts/tabpanel/TabPanel";
 import { useTabs } from "./useTabs";
 
-interface TabsComponent
-  extends React.ForwardRefExoticComponent<
-    TabsProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface TabsComponent extends React.ForwardRefExoticComponent<
+  TabsProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link TabProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
@@ -112,3 +111,10 @@ Tabs.List = TabList;
 Tabs.Panel = TabPanel;
 
 export default Tabs;
+export { Tab as TabsTab, TabList as TabsList, TabPanel as TabsPanel };
+export type {
+  TabsProps,
+  TabProps as TabsTabProps,
+  TabListProps as TabsListProps,
+  TabPanelProps as TabsPanelProps,
+};

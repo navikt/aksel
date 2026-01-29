@@ -3,7 +3,7 @@ import { cl } from "../utils/helpers";
 import Step, { StepperStepProps } from "./Step";
 import { StepperContextProvider } from "./context";
 
-export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
+interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * `<Stepper.Step />` elements.
    */
@@ -33,10 +33,9 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   interactive?: boolean;
 }
 
-interface StepperComponent
-  extends React.ForwardRefExoticComponent<
-    StepperProps & React.RefAttributes<HTMLOListElement>
-  > {
+interface StepperComponent extends React.ForwardRefExoticComponent<
+  StepperProps & React.RefAttributes<HTMLOListElement>
+> {
   /**
    * @see 🏷️ {@link StepperStepProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
@@ -128,3 +127,5 @@ export const Stepper: StepperComponent = forwardRef<
 Stepper.Step = Step;
 
 export default Stepper;
+export { Step as StepperStep };
+export type { StepperProps, StepperStepProps };

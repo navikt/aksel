@@ -1,10 +1,9 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 import RemovableChips, { ChipsRemovableProps } from "./Removable";
 import ToggleChips, { ChipsToggleProps } from "./Toggle";
 
-export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
+interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
   /**
    * Changes padding and font-sizes.
@@ -13,22 +12,21 @@ export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   size?: "medium" | "small";
 }
 
-interface ChipsComponent
-  extends React.ForwardRefExoticComponent<
-    ChipsProps & React.RefAttributes<HTMLUListElement>
-  > {
+interface ChipsComponent extends React.ForwardRefExoticComponent<
+  ChipsProps & React.RefAttributes<HTMLUListElement>
+> {
   /**
    * Toggle between selected-states.
    * @see 🏷️ {@link ToggleChipsProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Toggle: OverridableComponent<ChipsToggleProps, HTMLButtonElement>;
+  Toggle: typeof ToggleChips;
   /**
    * Remove filter or the likes on click.
    * @see 🏷️ {@link RemovableChipsProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Removable: OverridableComponent<ChipsRemovableProps, HTMLButtonElement>;
+  Removable: typeof RemovableChips;
 }
 
 /**
@@ -81,3 +79,5 @@ Chips.Toggle = ToggleChips;
 Chips.Removable = RemovableChips;
 
 export default Chips;
+export { ToggleChips as ChipsToggle, RemovableChips as ChipsRemovable };
+export type { ChipsProps, ChipsToggleProps, ChipsRemovableProps };

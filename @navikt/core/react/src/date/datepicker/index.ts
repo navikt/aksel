@@ -1,5 +1,14 @@
 "use client";
-export { default as DatePicker, type DatePickerProps } from "./DatePicker";
+export {
+  default as DatePicker,
+  DatePickerStandalone,
+  DatePickerInput,
+} from "./DatePicker";
+export type {
+  DatePickerProps,
+  DatePickerStandaloneProps,
+  DateInputProps,
+} from "./DatePicker";
 export {
   useDatepicker,
   type DateValidationT,
@@ -10,8 +19,3 @@ export {
   type RangeValidationT,
   type UseRangeDatepickerOptions,
 } from "./hooks/useRangeDatepicker";
-export {
-  DatePickerStandalone,
-  type DatePickerStandaloneProps,
-} from "./parts/DatePicker.Standalone";
-export { DatePickerInput, type DateInputProps } from "../Date.Input";
