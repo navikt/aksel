@@ -9388,18 +9388,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aksel-bundle-analyzer@workspace:scripts/bundle-analyzer":
-  version: 0.0.0-use.local
-  resolution: "aksel-bundle-analyzer@workspace:scripts/bundle-analyzer"
-  dependencies:
-    "@types/node": "npm:^25.0.3"
-    pkg-exports: "npm:^0.2.0"
-    pkg-types: "npm:^2.3.0"
-    ts-morph: "npm:^27.0.2"
-    tsx: "npm:^4.20.6"
-  languageName: unknown
-  linkType: soft
-
 "aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/figma-plugin":
   version: 0.0.0-use.local
   resolution: "aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/figma-plugin"
@@ -16621,13 +16609,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"local-pkg@npm:^0.4.3":
-  version: 0.4.3
-  resolution: "local-pkg@npm:0.4.3"
-  checksum: 10/48f38c12721881370bca50ed3b5e3cc6fef741cfb4de7e48666f6ded07c1aaea53cf770cfef84a89bed286c17631111bf99a86241ddf6f679408c79c56f29560
-  languageName: node
-  linkType: hard
-
 "localforage@npm:^1.10.0":
   version: 1.10.0
   resolution: "localforage@npm:1.10.0"
@@ -17943,7 +17924,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mlly@npm:1.8.0, mlly@npm:^1.4.0, mlly@npm:^1.4.2, mlly@npm:^1.7.4":
+"mlly@npm:1.8.0, mlly@npm:^1.4.2, mlly@npm:^1.7.4":
   version: 1.8.0
   resolution: "mlly@npm:1.8.0"
   dependencies:
@@ -19419,17 +19400,6 @@ __metadata:
   dependencies:
     find-up: "npm:^6.3.0"
   checksum: 10/94298b20a446bfbbd66604474de8a0cdd3b8d251225170970f15d9646f633e056c80520dd5b4c1d1050c9fed8f6a9e5054b141c93806439452efe72e57562c03
-  languageName: node
-  linkType: hard
-
-"pkg-exports@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "pkg-exports@npm:0.2.0"
-  dependencies:
-    local-pkg: "npm:^0.4.3"
-    mlly: "npm:^1.4.0"
-    tinypool: "npm:^0.8.0"
-  checksum: 10/8dd0bc1538b441dde2115b6e2a0ad75bcd61f2e1908d38f5daee9dd52cb395d8a19a35c51c57f4c4b085d22ed0076eefd02d2c4b48f4fe0583058de6920576fe
   languageName: node
   linkType: hard
 
@@ -23565,13 +23535,6 @@ __metadata:
     fdir: "npm:^6.5.0"
     picomatch: "npm:^4.0.3"
   checksum: 10/d72bd826a8b0fa5fa3929e7fe5ba48fceb2ae495df3a231b6c5408cd7d8c00b58ab5a9c2a76ba56a62ee9b5e083626f1f33599734bed1ffc4b792406408f0ca2
-  languageName: node
-  linkType: hard
-
-"tinypool@npm:^0.8.0":
-  version: 0.8.4
-  resolution: "tinypool@npm:0.8.4"
-  checksum: 10/7365944c2532f240111443e7012be31a634faf1a02db08a91db3aa07361c26a374d0be00a0f2ea052c4bee39c107ba67f1f814c108d9d51dfc725c559c1a9c03
   languageName: node
   linkType: hard
 

@@ -35,7 +35,6 @@
     "@navikt/aksel",
     "aksel.nav.no",
     "scripts/eslint",
-    "scripts/bundle-analyzer",
     "scripts/analyzer",
     "scripts"
   ],
