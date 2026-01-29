@@ -12,8 +12,6 @@ async function updateProps() {
     );
   }
 
-  const transactionClient = noCdnClient(token).transaction();
-
   const props = propList();
 
   if (checkIfDuplicateExists(propList().map((x: any) => x._id))) {
@@ -22,18 +20,43 @@ async function updateProps() {
     );
   }
 
-  props.forEach((x) => {
-    transactionClient.createOrReplace(x);
+  const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"] {
+    _id,
+    _type,
+    title,
+    displayname,
+    filepath,
+    proplist}`);
+
+  const transactionClient = noCdnClient(token).transaction();
+  let updatedCount = 0;
+
+  props.forEach((localProp: any) => {
+    const remoteProp = remoteProps.find((r: any) => r._id === localProp._id);
+
+    if (
+      !remoteProp ||
+      JSON.stringify(remoteProp) !== JSON.stringify(localProp)
+    ) {
+      transactionClient.createOrReplace(localProp);
+      updatedCount++;
+    }
   });
 
-  await transactionClient
-    .commit()
-    .then(() => console.info("Successfully updated prop-documentation"))
-    .catch((e) => {
-      throw new Error(e.message);
-    });
-
-  const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"]`);
+  if (updatedCount > 0) {
+    await transactionClient
+      .commit()
+      .then(() =>
+        console.info(
+          `Successfully updated ${updatedCount} prop-documentation(s)`,
+        ),
+      )
+      .catch((e) => {
+        throw new Error(e.message);
+      });
+  } else {
+    console.info("No prop changes detected, skipping update");
+  }
 
   let deletedIds: string[] = [];
   for (const prop of remoteProps) {

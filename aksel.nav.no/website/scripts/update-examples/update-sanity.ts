@@ -22,7 +22,6 @@ export async function updateSanity(directory: RootDirectoriesT) {
     );
   }
   console.info(`Processing ${directory}`);
-  const transactionClient = noCdnClient(token).transaction();
   const folders = getDirectories(directory);
   const exampleData: CodeExampleSchemaT[] = [];
 
@@ -38,23 +37,43 @@ export async function updateSanity(directory: RootDirectoriesT) {
     };
 
     exampleData.push(data);
-    transactionClient.createOrReplace(data);
   }
 
   if (!validateExamples(exampleData)) {
     throw new Error("TypeScript errors found in generated code, see above.");
   }
 
-  await transactionClient
-    .commit({ autoGenerateArrayKeys: true, dryRun: isDryRun })
-    .then(() => console.info(`Successfully updated ${directory}`))
-    .catch((e) => {
-      throw new Error(e.message);
-    });
-
   const oldSanityDocuments = await noCdnClient(token).fetch(
     `*[_type == "kode_eksempler_fil" && variant == "${directory}"]`,
   );
+
+  const transactionClient = noCdnClient(token).transaction();
+  let updatedCount = 0;
+
+  /* Only update if there are changes */
+  for (const data of exampleData) {
+    const existingDoc = oldSanityDocuments.find((d: any) => d._id === data._id);
+
+    if (!existingDoc || hasChanges(existingDoc, data)) {
+      transactionClient.createOrReplace(data);
+      updatedCount++;
+    }
+  }
+
+  if (updatedCount > 0) {
+    await transactionClient
+      .commit({ autoGenerateArrayKeys: true, dryRun: isDryRun })
+      .then(() =>
+        console.info(
+          `Successfully updated ${updatedCount} example(s) in ${directory}`,
+        ),
+      )
+      .catch((e) => {
+        throw new Error(e.message);
+      });
+  } else {
+    console.info(`No changes detected for ${directory}`);
+  }
 
   let deletedIds: string[] = [];
   /* Delete old examples */
@@ -98,4 +117,26 @@ export async function updateSanity(directory: RootDirectoriesT) {
 
 function createId(s: string) {
   return `kode_eksempelid_${s.match(/\w/g)?.join("")}`.toLowerCase();
+}
+
+function hasChanges(existingDoc: any, newData: CodeExampleSchemaT): boolean {
+  const relevantFields = [
+    "_id",
+    "_type",
+    "title",
+    "variant",
+    "filer",
+    "metadata",
+  ];
+
+  for (const field of relevantFields) {
+    if (
+      JSON.stringify((existingDoc as any)[field]) !==
+      JSON.stringify((newData as any)[field])
+    ) {
+      return true;
+    }
+  }
+
+  return false;
 }
