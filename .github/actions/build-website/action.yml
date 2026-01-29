@@ -54,12 +54,6 @@ runs:
         echo "PRODUCTION=true" >> aksel.nav.no/website/.env
       shell: bash
 
-    - name: Override encryption key for production
-      if: ${{ inputs.production == 'true' && inputs.next_encryption_key != '' }}
-      run: |
-        echo "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY=${{ inputs.next_encryption_key }}" >> aksel.nav.no/website/.env
-      shell: bash
-
     - name: Update sanity manifest
       if: ${{ inputs.production == 'true' && inputs.sanity_deploy_studio != '' }}
       run: yarn update:sanity-manifest
@@ -72,6 +66,7 @@ runs:
       env:
         SANITY_READ: ${{ inputs.sanity_read_token }}
         SANITY_READ_NO_DRAFTS: ${{ inputs.sanity_read_no_drafts_token }}
+        NEXT_SERVER_ACTIONS_ENCRYPTION_KEY: ${{ inputs.next_encryption_key }}
       shell: bash
 
     - name: Upload static files to Nav CDN
