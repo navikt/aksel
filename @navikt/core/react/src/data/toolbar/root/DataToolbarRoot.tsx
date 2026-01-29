@@ -6,7 +6,7 @@ import {
 } from "../search-field/DataToolbarSearchField";
 import DataToolbarToggleButton, {
   type DataToolbarToggleButtonProps,
-} from "../toggle-button/DataToggleButton";
+} from "../toggle-button/DataToolbarToggleButton";
 
 interface DataToolbarProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
