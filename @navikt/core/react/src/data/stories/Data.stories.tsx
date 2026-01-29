@@ -33,9 +33,7 @@ export const Default: Story = {
     <VStack gap="space-16">
       <DataToolbar>
         <DataToolbar.SearchField label="Tekstfilter" />
-        <DataToolbar.ToggleButton>
-          <RectangleSectionsIcon />
-        </DataToolbar.ToggleButton>
+        <DataToolbar.ToggleButton icon={<RectangleSectionsIcon />} />
       </DataToolbar>
 
       <DataActionBar numOfSelectedRows={2} onClear={() => alert("Cleared!")}>
@@ -130,9 +128,7 @@ export const TanstackExample: Story = {
             label="Tekstfilter"
             onChange={(e) => setGlobalFilter(e)}
           />
-          <DataToolbar.ToggleButton>
-            <RectangleSectionsIcon />
-          </DataToolbar.ToggleButton>
+          <DataToolbar.ToggleButton icon={<RectangleSectionsIcon />} />
           <ActionMenu>
             <ActionMenu.Trigger>
               <Button
