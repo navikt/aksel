@@ -25,7 +25,7 @@
     "aksel-icons-figma-plugin",
     "eslint-plugin-aksel-local",
     "scripts",
-    "aksel-bundle-analyzer"
+    "aksel-analyzer"
   ],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
