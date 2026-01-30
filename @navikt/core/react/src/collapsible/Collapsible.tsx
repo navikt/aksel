@@ -49,7 +49,7 @@ interface CollapsibleComponent extends React.ForwardRefExoticComponent<
  *     <Button>Button</Button>
  *   </Collapsible.Trigger>
  *   <Collapsible.Content asChild>
- *     <Box padding="4" background="info-soft">
+ *     <Box padding="space-16" background="info-soft">
  *       <div>lorem ipsum</div>
  *     </Box>
  *   </Collapsible.Content>

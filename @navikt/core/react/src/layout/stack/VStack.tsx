@@ -14,14 +14,14 @@ export type VStackProps = PrimitiveAsChildProps &
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
- * <VStack gap="8">
+ * <VStack gap="space-32">
  *  <MyComponent />
  *  <MyComponent />
  * </VStack>
  *
  * @example
  * // Responsive gap
- * <VStack gap={{xs: "2", md: "6"}}>
+ * <VStack gap={{xs: "space-8", md: "space-24"}}>
  *  <MyComponent />
  *  <MyComponent />
  * </VStack>
