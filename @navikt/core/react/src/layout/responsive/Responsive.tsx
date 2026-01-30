@@ -65,14 +65,14 @@ const Responsive = forwardRef<
  * @see 🏷️ {@link ResponsiveProps}
  *
  * @example
- * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+ * <HGrid columns={{ xs: 1, md: 2 }} gap="space-16">
  *   <div/>
  *   <Hide below="md" asChild>
  *      // Only visible above "md"
  *   </Hide>
  * </HGrid>
  * @example
- * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+ * <HGrid columns={{ xs: 1, md: 2 }} gap="space-16">
  *   <div/>
  *   <Hide above="md" asChild>
  *      // Only visible below "md"
@@ -90,14 +90,14 @@ export const Hide = forwardRef<HTMLDivElement, ResponsiveProps>(
  * @see 🏷️ {@link ResponsiveProps}
  *
  * @example
- * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+ * <HGrid columns={{ xs: 1, md: 2 }} gap="space-16">
  *   <div/>
  *   <Show below="md" asChild>
  *      // Only visible below "md"
  *   </Show>
  * </HGrid>
  * @example
- * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+ * <HGrid columns={{ xs: 1, md: 2 }} gap="space-16">
  *   <div/>
  *   <Show above="md" asChild>
  *      // Only visible above "md"

@@ -14,10 +14,9 @@ interface FileUploadProps extends HTMLAttributes<HTMLDivElement> {
   translations?: ComponentTranslation<"FileUpload">;
 }
 
-interface FileUploadComponent
-  extends React.ForwardRefExoticComponent<
-    FileUploadProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface FileUploadComponent extends React.ForwardRefExoticComponent<
+  FileUploadProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * Framed area to drag-n-drop files, upload files with button-click or copy-paste.
    * @example
@@ -64,7 +63,7 @@ interface FileUploadComponent
    * Multiple items can be semantically grouped as a list.
    * ```jsx
    * <FileUpload>
-   *   <VStack gap="4" as="ul">
+   *   <VStack gap="space-16" as="ul">
    *     <FileUpload.Item as="li" file={file} />
    *     <FileUpload.Item as="li" file={file2} />
    *     <FileUpload.Item as="li" file={file3} status="uploading" />
@@ -117,7 +116,7 @@ interface FileUploadComponent
  * @example
  * Items
  * ```jsx
- * <VStack gap="4" as="ul">
+ * <VStack gap="space-16" as="ul">
  *   <FileUpload.Item as="li" file={myFile} />
  *   <FileUpload.Item as="li" file={mySecondFile} />
  * </VStack>

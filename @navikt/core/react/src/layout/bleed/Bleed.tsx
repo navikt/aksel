@@ -61,7 +61,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
- * <Box padding="4">
+ * <Box padding="space-16">
  *   <Bleed marginInline="space-16" marginBlock="space-16">
  *     <BodyLong>Some content</BodyLong>
  *   </Bleed>
