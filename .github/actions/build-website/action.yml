@@ -22,6 +22,9 @@ inputs:
   sanity_deploy_studio:
     description: "Sanity studio deployment token"
     required: false
+  next_encryption_key:
+    description: "Overrides default NEXT_SERVER_ACTIONS_ENCRYPTION_KEY for production builds"
+    required: false
   production:
     description: "Toggle to differentiate production build (inject stuff based on this)"
     default: false
@@ -63,6 +66,7 @@ runs:
       env:
         SANITY_READ: ${{ inputs.sanity_read_token }}
         SANITY_READ_NO_DRAFTS: ${{ inputs.sanity_read_no_drafts_token }}
+        NEXT_SERVER_ACTIONS_ENCRYPTION_KEY: ${{ inputs.next_encryption_key }}
       shell: bash
 
     - name: Upload static files to Nav CDN
