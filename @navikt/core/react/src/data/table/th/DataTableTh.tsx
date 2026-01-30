@@ -1,16 +1,67 @@
 import React, { forwardRef } from "react";
+import {
+  CaretLeftRightIcon,
+  PushPinFillIcon,
+  PushPinIcon,
+} from "@navikt/aksel-icons";
+import { Button } from "../../../button";
 import { cl } from "../../../utils/helpers";
 
-type DataTableThProps = React.HTMLAttributes<HTMLTableCellElement>;
+type DataTableThProps = React.HTMLAttributes<HTMLTableCellElement> & {
+  resizeHandler?: React.MouseEventHandler<HTMLButtonElement>;
+  isPinned?: boolean;
+  pinningHandler?: React.MouseEventHandler<HTMLButtonElement>;
+  size?: number;
+};
 
 const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
-  ({ className, ...rest }, forwardedRef) => {
+  (
+    {
+      className,
+      children,
+      resizeHandler,
+      isPinned = false,
+      pinningHandler,
+      size,
+      ...rest
+    },
+    forwardedRef,
+  ) => {
     return (
       <th
         {...rest}
         ref={forwardedRef}
         className={cl("aksel-data-table__th", className)}
-      />
+        style={{ width: size }}
+      >
+        {children}
+        {pinningHandler && (
+          <Button
+            onClick={pinningHandler}
+            size="small"
+            variant="secondary"
+            icon={
+              isPinned ? (
+                <PushPinFillIcon aria-hidden title="Fest kolonne" />
+              ) : (
+                <PushPinIcon aria-hidden title="Løstne kolonne" />
+              )
+            }
+          />
+        )}
+        {resizeHandler && (
+          <Button
+            onMouseDown={resizeHandler}
+            onMouseUp={resizeHandler}
+            className={cl("aksel-data-table__th-resize-handle")}
+            size="small"
+            variant="secondary"
+            icon={
+              <CaretLeftRightIcon aria-hidden title="Endre kolonnestørrelse" />
+            }
+          />
+        )}
+      </th>
     );
   },
 );

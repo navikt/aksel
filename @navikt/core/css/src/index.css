@@ -31,6 +31,7 @@
 @import "./chat.css" layer(aksel.components.modules);
 @import "./copybutton.css" layer(aksel.components.modules);
 @import "./data-toolbar.css" layer(aksel.components.modules);
+@import "./data-table.css" layer(aksel.components.modules);
 @import "./date.css" layer(aksel.components.modules);
 @import "./dialog.css" layer(aksel.components.modules);
 @import "./dropdown.css" layer(aksel.components.modules);
