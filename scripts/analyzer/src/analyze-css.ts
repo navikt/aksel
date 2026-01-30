@@ -12,9 +12,7 @@ function analyzeCss(tarLocation: string): number {
 
   const exportPath = cssPackageExports["."];
 
-  /**
-   * We assume key-value to be string for css-package
-   */
+  /* We assume key-value to be string for css-package */
   assert(
     exportPath && typeof exportPath === "string",
     "Package export '.' not found for css-package",
