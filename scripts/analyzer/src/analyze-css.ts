@@ -7,9 +7,8 @@ import { getPackageExports, unpackTar } from "./helpers/unpack.js";
  * @param tarLocation - location of the css package tarball
  */
 function analyzeCss(tarLocation: string): number {
-  const { packageDir: cssPackageDir } = unpackTar(tarLocation);
-  const { packageExports: cssPackageExports } =
-    getPackageExports(cssPackageDir);
+  const cssPackageDir = unpackTar(tarLocation);
+  const cssPackageExports = getPackageExports(cssPackageDir);
 
   const exportPath = cssPackageExports["."];
 

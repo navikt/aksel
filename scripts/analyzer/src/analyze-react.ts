@@ -22,9 +22,8 @@ type ExportPathsConfig = Record<string, ExportPathConfig>;
 async function analyzeReact(tarLocation: string): Promise<ExportPathsConfig> {
   const reactConfig: ExportPathsConfig = {};
 
-  const { packageDir: reactPackageDir } = unpackTar(tarLocation);
-  const { packageExports: reactPackageExports } =
-    getPackageExports(reactPackageDir);
+  const reactPackageDir = unpackTar(tarLocation);
+  const reactPackageExports = getPackageExports(reactPackageDir);
 
   for (const [key, value] of Object.entries(reactPackageExports)) {
     assert(

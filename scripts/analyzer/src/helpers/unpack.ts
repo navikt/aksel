@@ -8,7 +8,7 @@ import { extract } from "tar";
  * @param tarballGlob Glob describing tarball location
  * @returns unpacked tarball dir-location
  */
-function unpackTar(tarballGlob: string): { packageDir: string } {
+function unpackTar(tarballGlob: string): string {
   const tarballPath = fastGlob.sync(tarballGlob)[0];
   if (!tarballPath) {
     throw new Error(`Tarball not found for glob: ${tarballGlob}`);
@@ -34,7 +34,7 @@ function unpackTar(tarballGlob: string): { packageDir: string } {
     `${dirname(tarballPath)}/${outDir}`,
   );
 
-  return { packageDir: `${dirname(tarballPath)}/${outDir}` };
+  return `${dirname(tarballPath)}/${outDir}`;
 }
 
 type PackageJsonExportKey =
@@ -42,8 +42,6 @@ type PackageJsonExportKey =
   | "import"
   | "require"
   | "types"
-  | "node"
-  | "browser"
   | "default"
   | (string & {});
 
@@ -51,20 +49,16 @@ type PackageJsonExportsObject = {
   [P in PackageJsonExportKey]?: string | PackageJsonExportsObject;
 };
 
-type PackageJsonExports = PackageJsonExportsObject;
-
 /**
  * Loads and returns the package.json exports field
  * @returns package.json exports field
  */
-function getPackageExports(packageDir: string): {
-  packageExports: PackageJsonExports;
-} {
+function getPackageExports(packageDir: string): PackageJsonExportsObject {
   const packageJson = JSON.parse(
     readFileSync(`${packageDir}/package.json`, "utf-8"),
   );
 
-  return { packageExports: packageJson.exports };
+  return packageJson.exports;
 }
 
 export { unpackTar, getPackageExports };
