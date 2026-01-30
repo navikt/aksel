@@ -80,7 +80,7 @@ export const block = {
         },
         fields: [
           {
-            title: "Reference",
+            title: "Artikkel",
             name: "reference",
             type: "reference",
             to: allArticleDocsRef,
