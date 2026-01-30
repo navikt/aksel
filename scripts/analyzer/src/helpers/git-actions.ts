@@ -8,10 +8,12 @@ import { appendFileSync } from "node:fs";
  *    run: ...
  */
 function addToActionOutput(key: string, data: string) {
-  const outputLine = `${key}=${data}\n`;
   assert(!!process.env.GITHUB_OUTPUT, "GITHUB_OUTPUT is not defined");
+  const githubOutputPath = process.env.GITHUB_OUTPUT;
+  const delimiter = `EOF_${process.pid}_${Date.now()}`;
+  const outputBlock = `${key}<<${delimiter}\n${data}\n${delimiter}\n`;
   try {
-    appendFileSync(process.env.GITHUB_OUTPUT, outputLine);
+    appendFileSync(githubOutputPath, outputBlock);
     console.info(`Successfully set GitHub Action output: ${key}`);
   } catch (err) {
     throw new Error("Error writing to GITHUB_OUTPUT:" + (err as Error).message);
