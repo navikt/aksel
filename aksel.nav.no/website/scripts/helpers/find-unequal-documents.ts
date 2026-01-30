@@ -1,25 +1,24 @@
 import { isEqual } from "lodash";
+import { SanityDocumentStub } from "next-sanity";
 import { sanityClient } from "../../sanity/interface/client.server";
 
 /**
  * Deep compare two sets of documents and return those that are unequal based on specified keys.
  */
-function findUnequalDocuments({
+function findUnequalDocuments<T extends SanityDocumentStub>({
   newDocuments,
   oldDocuments,
   keysToCompare,
 }: {
-  newDocuments: any[];
-  oldDocuments: any[];
-  keysToCompare: string[];
+  newDocuments: T[];
+  oldDocuments: T[];
+  keysToCompare: (keyof T)[];
 }) {
   const transactionClient = sanityClient.transaction();
-  const unequalDocuments: any[] = [];
+  const unequalDocuments: T[] = [];
 
   for (const newDocument of newDocuments) {
-    const oldDocument = oldDocuments.find(
-      (r: any) => r._id === newDocument._id,
-    );
+    const oldDocument = oldDocuments.find((r) => r._id === newDocument._id);
 
     /**
      * No old documents equal new document, so lets add it to the list for creation
@@ -41,7 +40,7 @@ function findUnequalDocuments({
      * .create() just adds the documents within a `{ create: {...document} }`-wrapper
      */
     const [serializedOldMutation, serializedNewMutation] =
-      transactionClient.toJSON() as { create: any }[];
+      transactionClient.toJSON() as { create: unknown }[];
 
     /* Clean up transaction for next run */
     transactionClient.reset();
@@ -68,7 +67,7 @@ function findUnequalDocuments({
 
       /* If key exists in only one document, they're unequal */
       if (hasOldKey !== hasNewKey) {
-        console.info(`Key mismatch on document ${newDocument._id}: ${key}`);
+        console.info(`Key mismatch on document ${newDocument._id}:`, key);
         unequalDocuments.push(newDocument);
         break;
       }

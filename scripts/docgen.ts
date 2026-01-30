@@ -2,6 +2,18 @@ import fg from "fast-glob";
 import { writeFileSync } from "node:fs";
 import * as docgen from "react-docgen-typescript";
 
+export interface ComponentDoc extends docgen.ComponentDoc {
+  props: {
+    [key: string]: docgen.PropItem & {
+      // Extra fields added during enrichment
+      example?: string;
+      params?: string[];
+      return?: string;
+      deprecated?: string;
+    };
+  };
+}
+
 const options: docgen.ParserOptions = {
   savePropValueAsString: true,
   shouldRemoveUndefinedFromOptional: true,
@@ -31,7 +43,7 @@ const options: docgen.ParserOptions = {
 
 const tsConfigParser = docgen.withCustomConfig(`./tsconfig.esm.json`, options);
 
-const enrich_extra_prop_fields = (docs: docgen.ComponentDoc[]) => {
+const enrich_extra_prop_fields = (docs: ComponentDoc[]) => {
   for (const doc of docs) {
     for (const prop of Object.values(doc.props)) {
       if (!prop.description) {
@@ -44,7 +56,6 @@ const enrich_extra_prop_fields = (docs: docgen.ComponentDoc[]) => {
       // probably b.c. it's defined two times (discriminated union, see AsChildProps.ts)
       prop.description = prop.description.replace(example_regex, "").trim();
       if (example?.[1] || example?.[3]) {
-        // @ts-expect-error adding a field here to a type that doesn't have it
         prop.example = (example[1] || example[3]).trim();
       }
 
@@ -52,7 +63,6 @@ const enrich_extra_prop_fields = (docs: docgen.ComponentDoc[]) => {
       const params = prop.description.match(params_regex);
       prop.description = prop.description.replace(params_regex, "").trim();
       if (params) {
-        // @ts-expect-error adding a field here to a type that doesn't have it
         prop.params = params.map((param) =>
           param.replace(/@param|@argument|@arg/, "").trim(),
         );
@@ -63,7 +73,6 @@ const enrich_extra_prop_fields = (docs: docgen.ComponentDoc[]) => {
       prop.description = prop.description.replace(return_regex, "").trim();
       if (_return) {
         const return_val = _return[2].replace(/@returns?/, "").trim();
-        // @ts-expect-error adding a field here to a type that doesn't have it
         prop.return = return_val ? return_val : "void";
       }
 
@@ -75,7 +84,6 @@ const enrich_extra_prop_fields = (docs: docgen.ComponentDoc[]) => {
       prop.description = prop.description.replace(deprecation_regex, "").trim();
       if (deprecation) {
         const return_val = deprecation[2].replace(/@deprecated?/, "").trim();
-        // @ts-expect-error adding a field here to a type that doesn't have it
         prop.deprecated = return_val;
       }
     }
@@ -91,7 +99,7 @@ const genDocs = () => {
         !x.toLowerCase().includes("pictogram"),
     );
 
-  const res: docgen.ComponentDoc[][] = [];
+  const res: ComponentDoc[][] = [];
   const fails: string[] = [];
 
   files.forEach((file) => {
@@ -116,4 +124,3 @@ const genDocs = () => {
 };
 
 genDocs();
-/* genDocs("@navikt/internal/react"); */
