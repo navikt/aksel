@@ -106,11 +106,13 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
 const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
   ({ className, ...rest }, forwardedRef) => {
     return (
-      <table
-        {...rest}
-        ref={forwardedRef}
-        className={cl("aksel-data-table", className)}
-      />
+      <div className="aksel-data-table__wrapper">
+        <table
+          {...rest}
+          ref={forwardedRef}
+          className={cl("aksel-data-table", className)}
+        />
+      </div>
     );
   },
 ) as DataTableRootComponent;

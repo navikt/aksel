@@ -1,6 +1,8 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
 import { Preview } from "@storybook/react-vite";
 import React, { useEffect } from "react";
+import "../@navikt/core/css/src/data-table.css";
+import "../@navikt/core/css/src/data-toolbar.css";
 import "../@navikt/core/css/src/index.css";
 import { Provider } from "../@navikt/core/react/src/provider";
 import { Translations } from "../@navikt/core/react/src/utils/i18n/i18n.types";
