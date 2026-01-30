@@ -19,6 +19,12 @@ inputs:
   sanity_read_no_drafts_token:
     description: "Sanity read-only token allowing only published documents"
     required: true
+  sanity_deploy_studio:
+    description: "Sanity studio deployment token"
+    required: false
+  next_encryption_key:
+    description: "Overrides default NEXT_SERVER_ACTIONS_ENCRYPTION_KEY for production builds"
+    required: false
   production:
     description: "Toggle to differentiate production build (inject stuff based on this)"
     default: false
@@ -48,11 +54,19 @@ runs:
         echo "PRODUCTION=true" >> aksel.nav.no/website/.env
       shell: bash
 
+    - name: Update sanity manifest
+      if: ${{ inputs.production == 'true' && inputs.sanity_deploy_studio != '' }}
+      run: yarn update:sanity-manifest
+      env:
+        SANITY_AUTH_TOKEN: ${{ inputs.sanity_deploy_studio }}
+      shell: bash
+
     - name: Build Next.js website
       run: yarn build:next
       env:
         SANITY_READ: ${{ inputs.sanity_read_token }}
         SANITY_READ_NO_DRAFTS: ${{ inputs.sanity_read_no_drafts_token }}
+        NEXT_SERVER_ACTIONS_ENCRYPTION_KEY: ${{ inputs.next_encryption_key }}
       shell: bash
 
     - name: Upload static files to Nav CDN

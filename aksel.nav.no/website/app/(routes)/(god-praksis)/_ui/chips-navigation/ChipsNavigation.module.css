@@ -12,6 +12,7 @@
   border: 1px solid var(--ax-border-subtleA);
   background: var(--ax-bg-moderateA);
   min-height: 2rem;
+  cursor: pointer;
 
   &:hover:not(:disabled) {
     background: var(--ax-bg-moderate-hoverA);

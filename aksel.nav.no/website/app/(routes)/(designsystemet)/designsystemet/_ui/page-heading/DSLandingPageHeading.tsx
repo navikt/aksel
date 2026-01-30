@@ -1,4 +1,4 @@
-import { BodyLong, BoxNew, Heading, VStack } from "@navikt/ds-react";
+import { BodyLong, Box, Heading, VStack } from "@navikt/ds-react";
 import { DS_FRONT_PAGE_QUERY_RESULT } from "@/app/_sanity/query-types";
 import PromoTag from "@/app/_ui/promo-tag/PromoTag";
 import styles from "./DSLandingPageHeading.module.css";
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const DSLandingPageHeading = ({ title, introText }: Props) => (
-  <BoxNew maxWidth="text">
+  <Box maxWidth="text">
     <VStack gap="space-16" maxWidth="600px" align="center">
       <VStack gap="space-16" align="center">
         <PromoTag />
@@ -25,7 +25,7 @@ const DSLandingPageHeading = ({ title, introText }: Props) => (
         </BodyLong>
       )}
     </VStack>
-  </BoxNew>
+  </Box>
 );
 
 export default DSLandingPageHeading;

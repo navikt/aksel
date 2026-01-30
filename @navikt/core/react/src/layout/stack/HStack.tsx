@@ -13,14 +13,14 @@ export type HStackProps = PrimitiveAsChildProps & Omit<StackProps, "direction">;
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
- * <HStack gap="8">
+ * <HStack gap="space-32">
  *  <MyComponent />
  *  <MyComponent />
  * </HStack>
  *
  * @example
  * // Responsive gap
- * <HStack gap={{xs: "2", md: "6"}}>
+ * <HStack gap={{xs: "space-8", md: "space-24"}}>
  *  <MyComponent />
  *  <MyComponent />
  * </HStack>

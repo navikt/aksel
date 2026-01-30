@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { BoxNew, HGrid, Heading } from "@navikt/ds-react";
+import { Box, HGrid, Heading } from "@navikt/ds-react";
 import Card, { ArticleT } from "./FrontpageMasonryCard";
 import { Highlight } from "./HighlightedArticle";
 import styles from "./frontpage.module.css";
@@ -102,7 +102,7 @@ export const FrontpageLatest = ({
   className?: string;
 }) => {
   return (
-    <BoxNew className={className}>
+    <Box className={className}>
       {latest.map((x) => {
         switch (x._type) {
           case "nytt_fra_aksel":
@@ -111,6 +111,6 @@ export const FrontpageLatest = ({
             return null;
         }
       })}
-    </BoxNew>
+    </Box>
   );
 };

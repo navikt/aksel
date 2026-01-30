@@ -87,7 +87,9 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
           </BodyShort>
         )}
       </HStack>
-      {isComponentPage && <KomponentLinks data={data} />}
+      {isComponentPage && (
+        <KomponentLinks data={data} heading={data?.heading} />
+      )}
       <DesignsystemetThumbnail thumbnailUrl={imageUrl} />
     </Box>
   );

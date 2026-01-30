@@ -33,7 +33,7 @@ async function getStaticParamsSlugs() {
     .filter((item): item is NonNullable<typeof item> => Boolean(item))
     .map((slug) => {
       return {
-        slug,
+        slug: slug.replace("produktbloggen/", ""),
       };
     });
 }

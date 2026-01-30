@@ -6,7 +6,7 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
   switch (token.category) {
     case "backgroundColor":
       return (
-        <Box.New
+        <Box
           borderColor="neutral-subtle"
           borderRadius="full"
           borderWidth="1"
@@ -17,7 +17,7 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
       );
     case "borderColor":
       return (
-        <Box.New
+        <Box
           borderRadius="full"
           borderWidth="4"
           width="32px"
@@ -28,7 +28,7 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
     case "textColor": {
       if (token.modifier === "icon") {
         return (
-          <Box.New width="32px" height="32px">
+          <Box width="32px" height="32px">
             <VStack as="div" align="center" justify="center" height="100%">
               <PaletteIcon
                 title="a11y-title"
@@ -36,23 +36,23 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
                 fontSize="var(--ax-font-size-heading-medium)"
               />
             </VStack>
-          </Box.New>
+          </Box>
         );
       }
       return (
-        <Box.New width="32px" height="32px">
+        <Box width="32px" height="32px">
           <VStack as="div" align="center" justify="center" height="100%">
             <Heading as="span" size="medium" style={{ color: token.cssValue }}>
               Aa
             </Heading>
           </VStack>
-        </Box.New>
+        </Box>
       );
     }
     default:
       console.warn("Unknown token category", token);
       return (
-        <Box.New
+        <Box
           borderColor="neutral-subtle"
           borderRadius="full"
           borderWidth="1"

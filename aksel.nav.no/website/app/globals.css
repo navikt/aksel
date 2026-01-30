@@ -1,17 +1,21 @@
 /* stylelint-disable aksel/design-token-no-global-override */
-@layer twBase, dsComponents, twComponents, twUtilities;
 
-@import "tailwindcss/base" layer(twBase);
-@import "@navikt/ds-css" layer(dsComponents);
-@import "tailwindcss/components" layer(twComponents);
-@import "tailwindcss/utilities" layer(twUtilities);
+@layer tw-snapshot, aksel;
+
+@import "../tailwind-snapshot.css" layer(tw-snapshot);
+@import "@navikt/ds-css" layer(aksel);
 
 :root {
   --website-header-height: 4rem;
-  --website-header-height-width-border: calc(var(--website-header-height) + 1px);
+  --website-header-sticky-height: 0px;
   --website-font-mono:
     ui-monospace, "Menlo", "Monaco", "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  /* NB: Keep the min-height in sync with corresponding media query in Header.module.css */
+  @media (min-height: 500px) {
+    --website-header-sticky-height: calc(var(--website-header-height) + 1px);
+  }
 }
 
 /* Prevents scroll-rubberbanding on Apple devices  */
@@ -55,18 +59,6 @@ body {
 
 [data-aksel-heading-color] {
   color: var(--ax-text-brand-blue);
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
 }
 
 [data-wrapper-prose] {

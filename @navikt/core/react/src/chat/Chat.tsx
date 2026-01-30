@@ -9,7 +9,7 @@ export const VARIANTS = ["subtle", "info", "neutral"] as const;
 export const POSITIONS = ["left", "right"] as const;
 export const SIZES = ["medium", "small"] as const;
 
-export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
+interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Children of type `<Chat.Bubble />`.
    */
@@ -62,10 +62,9 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
-interface ChatComponent
-  extends React.ForwardRefExoticComponent<
-    ChatProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface ChatComponent extends React.ForwardRefExoticComponent<
+  ChatProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link ChatBubbleProps}
    */
@@ -162,3 +161,5 @@ function variantToColor(variant: ChatProps["variant"]): AkselColor {
 Chat.Bubble = Bubble;
 
 export default Chat;
+export { Bubble as ChatBubble };
+export type { ChatProps, ChatBubbleProps };

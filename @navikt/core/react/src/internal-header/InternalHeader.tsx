@@ -1,6 +1,5 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Theme } from "../theme/Theme";
-import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 import InternalHeaderButton, {
   InternalHeaderButtonProps,
@@ -15,38 +14,32 @@ import InternalHeaderUserButton, {
   InternalHeaderUserButtonProps,
 } from "./InternalHeaderUserButton";
 
-export interface InternalHeaderProps extends HTMLAttributes<HTMLElement> {
+interface InternalHeaderProps extends HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 }
 
-interface InternalHeaderComponent
-  extends React.ForwardRefExoticComponent<
-    InternalHeaderProps & React.RefAttributes<HTMLElement>
-  > {
+interface InternalHeaderComponent extends React.ForwardRefExoticComponent<
+  InternalHeaderProps & React.RefAttributes<HTMLElement>
+> {
   /**
    * @see 🏷️ {@link InternalHeaderTitleProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Title: OverridableComponent<InternalHeaderTitleProps, HTMLAnchorElement>;
+  Title: typeof InternalHeaderTitle;
   /**
    * @see 🏷️ {@link InternalHeaderUserProps}
    */
-  User: React.ForwardRefExoticComponent<
-    InternalHeaderUserProps & React.RefAttributes<HTMLDivElement>
-  >;
+  User: typeof InternalHeaderUser;
   /**
    * @see 🏷️ {@link InternalHeaderButtonProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Button: OverridableComponent<InternalHeaderButtonProps, HTMLButtonElement>;
+  Button: typeof InternalHeaderButton;
   /**
    * @see 🏷️ {@link InternalHeaderUserButtonProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  UserButton: OverridableComponent<
-    InternalHeaderUserButtonProps,
-    HTMLButtonElement
-  >;
+  UserButton: typeof InternalHeaderUserButton;
 }
 
 /**
@@ -67,14 +60,13 @@ interface InternalHeaderComponent
  * ```jsx
  * <InternalHeader >
  *  <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
- *  <Dropdown>
- *    <InternalHeader.Button
- *      as={Dropdown.Toggle}
- *    >
+ *  <ActionMenu>
+ *   <ActionMenu.Trigger>
+ *    <InternalHeader.Button>
  *      <MenuGridIcon title="MenuGridIconer og oppslagsverk" />
  *    </InternalHeader.Button>
- *    <Dropdown.Menu />
- *  </Dropdown>
+ *   </ActionMenu.Trigger>
+ *  </ActionMenu>
  * </InternalHeader>
  * ```
  */
@@ -99,3 +91,16 @@ InternalHeader.Button = InternalHeaderButton;
 InternalHeader.UserButton = InternalHeaderUserButton;
 
 export default InternalHeader;
+export {
+  InternalHeaderTitle,
+  InternalHeaderUser,
+  InternalHeaderButton,
+  InternalHeaderUserButton,
+};
+export type {
+  InternalHeaderProps,
+  InternalHeaderTitleProps,
+  InternalHeaderUserProps,
+  InternalHeaderButtonProps,
+  InternalHeaderUserButtonProps,
+};

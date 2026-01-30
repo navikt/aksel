@@ -52,7 +52,7 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
    * @example
    * ```jsx
    * <ActionMenu.Trigger>
-   *     <button>Open Menu</button>
+   *   <button>Open Menu</button>
    * </ActionMenu.Trigger>
    * ```
    */
@@ -62,12 +62,12 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
    * @example
    * ```jsx
    * <ActionMenu.Content>
-   *     <ActionMenu.Item>
-   *       Item 1
-   *     </ActionMenu.Item>
-   *     <ActionMenu.Item>
-   *       Item 2
-   *     </ActionMenu.Item>
+   *   <ActionMenu.Item>
+   *     Item 1
+   *   </ActionMenu.Item>
+   *   <ActionMenu.Item>
+   *     Item 2
+   *   </ActionMenu.Item>
    * </ActionMenu.Content>
    * ```
    */
@@ -81,22 +81,22 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
    * @example
    * ```jsx
    * <ActionMenu.Content>
-   *     <ActionMenu.Group label="Group 1">
-   *         <ActionMenu.Item>
-   *           Item 1
-   *         </ActionMenu.Item>
-   *         <ActionMenu.Item>
-   *           Item 2
-   *         </ActionMenu.Item>
-   *     </ActionMenu.Group>
-   *     <ActionMenu.Group label="Group 2">
-   *         <ActionMenu.Item>
-   *           Item 3
-   *         </ActionMenu.Item>
-   *         <ActionMenu.Item>
-   *           Item 4
-   *         </ActionMenu.Item>
-   *     </ActionMenu.Group>
+   *   <ActionMenu.Group label="Group 1">
+   *     <ActionMenu.Item>
+   *       Item 1
+   *     </ActionMenu.Item>
+   *     <ActionMenu.Item>
+   *       Item 2
+   *     </ActionMenu.Item>
+   *   </ActionMenu.Group>
+   *   <ActionMenu.Group label="Group 2">
+   *     <ActionMenu.Item>
+   *       Item 3
+   *     </ActionMenu.Item>
+   *     <ActionMenu.Item>
+   *       Item 4
+   *     </ActionMenu.Item>
+   *   </ActionMenu.Group>
    * </ActionMenu.Content>
    * ```
    */
@@ -107,10 +107,10 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
    * @example
    * ```jsx
    * <ActionMenu.Content>
-   *     <ActionMenu.Label>
-   *         Label
-   *     </ActionMenu.Label>
-   *     <ActionMenu.Divider />
+   *   <ActionMenu.Label>
+   *     Label
+   *   </ActionMenu.Label>
+   *   <ActionMenu.Divider />
    * </ActionMenu.Content
    * ```
    */
@@ -121,26 +121,26 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
    * @example
    * ```jsx
    * <ActionMenu.Content>
-   *     // Grouped
-   *     <ActionMenu.Group label="Group 1">
-   *         <ActionMenu.Item onSelect={navigate}>
-   *           Item 1
-   *         </ActionMenu.Item>
-   *         <ActionMenu.Item onSelect={navigate}>
-   *           Item 2
-   *         </ActionMenu.Item>
-   *     </ActionMenu.Group>
-   *     <ActionMenu.Divider />
-   *     // Standalone
-   *     <ActionMenu.Item onSelect={updateState}>
-   *        Item 3
+   *   // Grouped
+   *   <ActionMenu.Group label="Group 1">
+   *     <ActionMenu.Item onSelect={navigate}>
+   *       Item 1
    *     </ActionMenu.Item>
+   *     <ActionMenu.Item onSelect={navigate}>
+   *       Item 2
+   *     </ActionMenu.Item>
+   *   </ActionMenu.Group>
+   *   <ActionMenu.Divider />
+   *   // Standalone
+   *   <ActionMenu.Item onSelect={updateState}>
+   *      Item 3
+   *   </ActionMenu.Item>
    * </ActionMenu.Content>
    * ```
    * @example As link
    * ```jsx
    * <ActionMenu.Item as="a" href="#">
-   *     Item
+   *   Item
    * </ActionMenu.Item>
    * ```
    */
@@ -296,7 +296,7 @@ const ActionMenuRoot = ({
  *       Item 2
  *     </ActionMenu.Item>
  *   </ActionMenu.Content>
- * <ActionMenu>
+ * </ActionMenu>
  * ```
  */
 export const ActionMenu = ActionMenuRoot as ActionMenuComponent;
@@ -304,8 +304,7 @@ export const ActionMenu = ActionMenuRoot as ActionMenuComponent;
 /* -------------------------------------------------------------------------- */
 /*                             ActionMenuTrigger                              */
 /* -------------------------------------------------------------------------- */
-interface ActionMenuTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ActionMenuTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactElement;
 }
 
@@ -351,8 +350,10 @@ export const ActionMenuTrigger = forwardRef<
 /* -------------------------------------------------------------------------- */
 /*                             ActionMenuContent                              */
 /* -------------------------------------------------------------------------- */
-interface ActionMenuContentProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "id"> {
+interface ActionMenuContentProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "id"
+> {
   children?: React.ReactNode;
   align?: "start" | "end";
 }
@@ -544,9 +545,14 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
    */
   variant?: "danger";
   /**
-   * Adds an icon on the left side. The icon will always have aria-hidden.
+   * Adds an icon on the left side. For right side position use iconPosition. The icon will always have aria-hidden.
    */
   icon?: React.ReactNode;
+  /**
+   * Position of icon.
+   * @default "left"
+   */
+  iconPosition?: "left" | "right";
 }
 
 export const ActionMenuItem: OverridableComponent<
@@ -561,6 +567,7 @@ export const ActionMenuItem: OverridableComponent<
       icon,
       shortcut,
       variant,
+      iconPosition = "left",
       ...rest
     },
     ref,
@@ -570,15 +577,18 @@ export const ActionMenuItem: OverridableComponent<
         {...rest}
         className={cl("aksel-action-menu__item", className, {
           "aksel-action-menu__item--danger": variant === "danger",
-          "aksel-action-menu__item--has-icon": icon,
         })}
+        data-marker={icon ? iconPosition : undefined}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
       >
         <Component ref={ref}>
           {children}
           {icon && (
-            <Marker placement="left" className="aksel-action-menu__marker-icon">
+            <Marker
+              placement={iconPosition}
+              className="aksel-action-menu__marker-icon"
+            >
               {icon}
             </Marker>
           )}
@@ -597,8 +607,10 @@ type MenuCheckboxItemProps = React.ComponentPropsWithoutRef<
   typeof Menu.CheckboxItem
 >;
 
-interface ActionMenuCheckboxItemProps
-  extends Omit<MenuCheckboxItemProps, "asChild"> {
+interface ActionMenuCheckboxItemProps extends Omit<
+  MenuCheckboxItemProps,
+  "asChild"
+> {
   children: React.ReactNode;
   /**
    * Shows connected shortcut-keys for the item.
@@ -632,10 +644,8 @@ export const ActionMenuCheckboxItem = forwardRef<
           event.preventDefault();
         })}
         asChild={false}
-        className={cl(
-          "aksel-action-menu__item aksel-action-menu__item--has-icon",
-          className,
-        )}
+        className={cl("aksel-action-menu__item", className)}
+        data-marker="left"
         aria-keyshortcuts={shortcut}
       >
         {children}
@@ -768,10 +778,8 @@ export const ActionMenuRadioItem = forwardRef<
           event.preventDefault();
         })}
         asChild={false}
-        className={cl(
-          "aksel-action-menu__item aksel-action-menu__item--has-icon",
-          className,
-        )}
+        className={cl("aksel-action-menu__item", className)}
+        data-marker="left"
       >
         {children}
         <Marker placement="left">
@@ -885,46 +893,66 @@ type ActionMenuSubTriggerElement = React.ElementRef<typeof Menu.SubTrigger>;
 type MenuSubTriggerProps = React.ComponentPropsWithoutRef<
   typeof Menu.SubTrigger
 >;
-interface ActionMenuSubTriggerProps
-  extends Omit<MenuSubTriggerProps, "asChild"> {
+interface ActionMenuSubTriggerProps extends Omit<
+  MenuSubTriggerProps,
+  "asChild"
+> {
   icon?: React.ReactNode;
+  /**
+   * Position of icon.
+   * @default "left"
+   */
+  iconPosition?: "left" | "right";
 }
 
 export const ActionMenuSubTrigger = forwardRef<
   ActionMenuSubTriggerElement,
   ActionMenuSubTriggerProps
->(({ children, className, icon, ...rest }: ActionMenuSubTriggerProps, ref) => {
-  return (
-    <Menu.SubTrigger
-      ref={ref}
-      {...rest}
-      asChild={false}
-      className={cl(
-        "aksel-action-menu__item aksel-action-menu__sub-trigger",
-        className,
-        { "aksel-action-menu__item--has-icon": icon },
-      )}
-    >
-      {children}
-      {icon && (
-        <Marker placement="left" className="aksel-action-menu__marker-icon">
-          {icon}
+>(
+  (
+    {
+      children,
+      className,
+      icon,
+      iconPosition = "left",
+      ...rest
+    }: ActionMenuSubTriggerProps,
+    ref,
+  ) => {
+    return (
+      <Menu.SubTrigger
+        ref={ref}
+        {...rest}
+        asChild={false}
+        className={cl(
+          "aksel-action-menu__item aksel-action-menu__sub-trigger",
+          className,
+        )}
+        data-marker={icon ? iconPosition : undefined}
+      >
+        {children}
+        {icon && (
+          <Marker
+            placement={iconPosition}
+            className="aksel-action-menu__marker-icon"
+          >
+            {icon}
+          </Marker>
+        )}
+        <Marker placement="right" className="aksel-action-menu__marker-icon">
+          <ChevronRightIcon aria-hidden />
         </Marker>
-      )}
-      <Marker placement="right" className="aksel-action-menu__marker-icon">
-        <ChevronRightIcon aria-hidden />
-      </Marker>
-    </Menu.SubTrigger>
-  );
-});
+      </Menu.SubTrigger>
+    );
+  },
+);
 
 /* -------------------------------------------------------------------------- */
 /*                            ActionMenuSubContent                            */
 /* -------------------------------------------------------------------------- */
 type ActionMenuSubContentElement = React.ElementRef<typeof Menu.Content>;
 
-interface ActionMenuSubContentProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ActionMenuSubContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 

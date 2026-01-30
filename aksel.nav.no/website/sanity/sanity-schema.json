@@ -806,6 +806,13 @@
                             },
                             "optional": true
                           },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            },
+                            "optional": true
+                          },
                           "_type": {
                             "type": "objectAttribute",
                             "value": {
@@ -1234,6 +1241,13 @@
                             },
                             "optional": true
                           },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            },
+                            "optional": true
+                          },
                           "_type": {
                             "type": "objectAttribute",
                             "value": {
@@ -1599,6 +1613,13 @@
                                   "name": "templates_artikkel.reference"
                                 }
                               ]
+                            },
+                            "optional": true
+                          },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
                             },
                             "optional": true
                           },
@@ -2015,6 +2036,13 @@
                             },
                             "optional": true
                           },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            },
+                            "optional": true
+                          },
                           "_type": {
                             "type": "objectAttribute",
                             "value": {
@@ -2428,6 +2456,13 @@
                             },
                             "optional": true
                           },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            },
+                            "optional": true
+                          },
                           "_type": {
                             "type": "objectAttribute",
                             "value": {
@@ -2838,6 +2873,13 @@
                                   "name": "templates_artikkel.reference"
                                 }
                               ]
+                            },
+                            "optional": true
+                          },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
                             },
                             "optional": true
                           },
@@ -3269,6 +3311,13 @@
                             },
                             "optional": true
                           },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            },
+                            "optional": true
+                          },
                           "_type": {
                             "type": "objectAttribute",
                             "value": {
@@ -3697,6 +3746,13 @@
                         },
                         "optional": true
                       },
+                      "anchor": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "string"
+                        },
+                        "optional": true
+                      },
                       "_type": {
                         "type": "objectAttribute",
                         "value": {
@@ -3925,6 +3981,13 @@
                                   "name": "templates_artikkel.reference"
                                 }
                               ]
+                            },
+                            "optional": true
+                          },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
                             },
                             "optional": true
                           },
@@ -6913,6 +6976,13 @@
                             },
                             "optional": true
                           },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            },
+                            "optional": true
+                          },
                           "_type": {
                             "type": "objectAttribute",
                             "value": {
@@ -7141,6 +7211,13 @@
                             },
                             "optional": true
                           },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            },
+                            "optional": true
+                          },
                           "_type": {
                             "type": "objectAttribute",
                             "value": {
@@ -7366,6 +7443,13 @@
                                   "name": "templates_artikkel.reference"
                                 }
                               ]
+                            },
+                            "optional": true
+                          },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
                             },
                             "optional": true
                           },
@@ -7631,6 +7715,13 @@
                                   "name": "templates_artikkel.reference"
                                 }
                               ]
+                            },
+                            "optional": true
+                          },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
                             },
                             "optional": true
                           },
@@ -10309,6 +10400,13 @@
           "optional": true
         },
         "blurHash": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "thumbHash": {
           "type": "objectAttribute",
           "value": {
             "type": "string"

@@ -60,11 +60,3 @@ export const Tag = ({
       return null;
   }
 };
-
-export const BetaTag = () => {
-  return (
-    <DsTag variant="alt1" size="small">
-      Beta
-    </DsTag>
-  );
-};

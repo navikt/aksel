@@ -70,11 +70,15 @@ function Example() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, {
+  showThemeSwitch: false,
+  minHeight: "120px",
+});
 
 /* Storybook story */
 export const Demo = {
   render: Example,
+  desc: "Bruk Tooltip hvis du bruker en knapp med kun ikon.",
 };
 
 export const args = {

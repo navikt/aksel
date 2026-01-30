@@ -1,4 +1,5 @@
 import { Iframe, IframeOptions, UrlResolver } from "sanity-plugin-iframe-pane";
+import { referencesView } from "sanity-plugin-references";
 import { StructureResolver } from "sanity/structure";
 import { LightBulbIcon } from "@navikt/aksel-icons";
 import {
@@ -156,6 +157,9 @@ export const defaultDocumentNode = (S, { schemaType }) => {
           },
         })
         .title("Forhåndsvisning"),
+      referencesView(S, {
+        title: "Referanser",
+      }),
     ]);
   }
   if (schemaType === "aksel_forside") {

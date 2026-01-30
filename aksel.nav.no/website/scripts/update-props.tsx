@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { noCdnClient } from "../sanity/interface/client.server";
+import { findUnequalDocuments } from "./helpers/find-unequal-documents";
 
 updateProps();
 
@@ -12,8 +13,6 @@ async function updateProps() {
     );
   }
 
-  const transactionClient = noCdnClient(token).transaction();
-
   const props = propList();
 
   if (checkIfDuplicateExists(propList().map((x: any) => x._id))) {
@@ -22,18 +21,44 @@ async function updateProps() {
     );
   }
 
-  props.forEach((x) => {
-    transactionClient.createOrReplace(x);
+  const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"]`);
+
+  const transactionClient = noCdnClient(token).transaction();
+
+  let updatedCount = 0;
+
+  const unequalDocuments = findUnequalDocuments({
+    newDocuments: props,
+    oldDocuments: remoteProps,
+    keysToCompare: [
+      "_id",
+      "_type",
+      "title",
+      "displayname",
+      "filepath",
+      "proplist",
+    ],
   });
 
-  await transactionClient
-    .commit()
-    .then(() => console.info("Successfully updated prop-documentation"))
-    .catch((e) => {
-      throw new Error(e.message);
-    });
+  for (const doc of unequalDocuments) {
+    transactionClient.createOrReplace(doc);
+    updatedCount++;
+  }
 
-  const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"]`);
+  if (updatedCount > 0) {
+    await transactionClient
+      .commit()
+      .then(() =>
+        console.info(
+          `Successfully updated ${updatedCount} prop-documentation(s)`,
+        ),
+      )
+      .catch((e) => {
+        throw new Error(e.message);
+      });
+  } else {
+    console.info("No prop changes detected, skipping update");
+  }
 
   let deletedIds: string[] = [];
   for (const prop of remoteProps) {
@@ -41,6 +66,11 @@ async function updateProps() {
       transactionClient.delete(prop._id);
       deletedIds.push(prop._id);
     }
+  }
+
+  if (deletedIds.length === 0) {
+    console.info("No unused prop-documentation found, skipping delete");
+    return;
   }
 
   await transactionClient

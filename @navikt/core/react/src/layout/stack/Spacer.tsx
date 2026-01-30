@@ -6,7 +6,7 @@ import React from "react";
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/hstack)
  *
  * @example
- * <HStack gap="8">
+ * <HStack gap="space-32">
  *  <MyComponent />
  *  <Spacer />
  *  <MyComponent />

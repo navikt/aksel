@@ -18,6 +18,11 @@ import { FormFieldProps, useFormField } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
 import { SearchContext } from "./context";
 
+export type SearchNativeProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "size" | "onChange" | "type"
+>;
+
 export type SearchClearEvent =
   | {
       trigger: "Click";
@@ -26,8 +31,7 @@ export type SearchClearEvent =
   | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> };
 
 export interface SearchProps
-  extends Omit<FormFieldProps, "readOnly">,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "type"> {
+  extends Omit<FormFieldProps, "readOnly">, SearchNativeProps {
   children?: React.ReactNode;
   /**
    * Search label.
@@ -82,10 +86,9 @@ export interface SearchProps
   "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
-interface SearchComponent
-  extends React.ForwardRefExoticComponent<
-    SearchProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface SearchComponent extends React.ForwardRefExoticComponent<
+  SearchProps & React.RefAttributes<HTMLDivElement>
+> {
   Button: SearchButtonType;
 }
 

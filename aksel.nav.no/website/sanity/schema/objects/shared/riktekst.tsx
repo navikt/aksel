@@ -1,3 +1,11 @@
+import { createClient, groq } from "next-sanity";
+import { useEffect, useState } from "react";
+import {
+  StringInputProps,
+  TitledListValue,
+  defineField,
+  useFormValue,
+} from "sanity";
 import {
   BulletListIcon,
   ExternalLinkIcon,
@@ -7,9 +15,47 @@ import {
 } from "@navikt/aksel-icons";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import { Code } from "@/app/_ui/typography/Code";
+import { clientConfig } from "@/sanity/config";
 import { allArticleDocsRef } from "../../../config";
 import { ExternalLinkRenderer } from "../../custom-components/LinkRenderer";
 import { validateHeadingLevels } from "../../documents/presets/validate-heading-levels";
+
+const sanityClient = createClient({
+  ...clientConfig,
+  withCredentials: true,
+});
+const headingsQuery = groq`*[_id == $id][0].content[style match 'h*']{_key, style, "text": pt::text(@)}`;
+
+function HeadingInput(props: StringInputProps) {
+  const path = props.path.slice(0, -1).concat("reference");
+  const reference = useFormValue(path) as { _ref: string };
+  const [headings, setHeadings] = useState<TitledListValue<string>[]>([]);
+
+  useEffect(() => {
+    getHeadingsFromDocument(reference._ref).then(setHeadings);
+  }, [reference._ref]);
+
+  if (!props.schemaType.options) {
+    props.schemaType.options = {};
+  }
+  props.schemaType.options.list =
+    props.value && !headings.find((h) => h.value === props.value)
+      ? [{ title: props.value, value: props.value }, ...headings]
+      : headings;
+
+  return props.renderDefault(props);
+}
+
+async function getHeadingsFromDocument(ref: string) {
+  const headings = await sanityClient.fetch(headingsQuery, { id: ref });
+  if (!headings) return [];
+  return headings
+    .filter((heading) => heading.text && heading._key)
+    .map((heading) => ({
+      title: `${"- ".repeat(parseInt(heading.style[1], 10) - 2)}${heading.text}`,
+      value: heading._key,
+    }));
+}
 
 export const styles = [
   {
@@ -79,12 +125,34 @@ export const block = {
           },
         },
         fields: [
-          {
-            title: "Reference",
+          defineField({
+            title: "Artikkel",
             name: "reference",
             type: "reference",
             to: allArticleDocsRef,
-          },
+          }),
+          defineField({
+            title: "Anker til overskrift (valgfritt)",
+            name: "anchor",
+            type: "string",
+            hidden: ({ parent }) => !parent?.reference,
+            components: { input: HeadingInput },
+            options: { layout: "dropdown" },
+            validation: (Rule) =>
+              Rule.custom(async (value, context) => {
+                if (!value) return true;
+                const parent = context.parent as {
+                  reference?: { _ref: string };
+                };
+                if (!parent.reference) return true;
+                const ref = parent.reference._ref;
+                const headings = await getHeadingsFromDocument(ref);
+                if (!headings.find((h) => h.value === value)) {
+                  return "Dette ankeret finnes ikke i artikkelen";
+                }
+                return true;
+              }),
+          }),
         ],
       },
       {
