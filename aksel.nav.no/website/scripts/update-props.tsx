@@ -25,27 +25,6 @@ async function updateProps() {
 
   const transactionClient = noCdnClient(token).transaction();
 
-  transactionClient.createIfNotExists({
-    _id: "ds_props",
-    _type: "document",
-    title: "Props Designsystemet",
-    displayname: "Props Designsystemet",
-    filepath: "./test/path.tsx",
-    proplist: [
-      { val: 1, prop: 2 },
-      {
-        val: 2,
-        prop: 3,
-        value: undefined,
-        nested: {
-          a: 1,
-          test: undefined,
-          what: [{ q: 123 }, undefined, { t: undefined }],
-        },
-      },
-    ],
-  });
-
   let updatedCount = 0;
 
   const unequalDocuments = findUnequalDocuments({
@@ -67,7 +46,6 @@ async function updateProps() {
   }
 
   if (updatedCount > 0) {
-    console.info(`Successfully updated ${updatedCount} prop-documentation(s)`);
     await transactionClient
       .commit()
       .then(() =>

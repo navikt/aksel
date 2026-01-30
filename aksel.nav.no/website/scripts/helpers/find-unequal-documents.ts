@@ -13,7 +13,7 @@ function findUnequalDocuments({
   oldDocuments: any[];
   keysToCompare: string[];
 }) {
-  const transationClient = sanityClient.transaction();
+  const transactionClient = sanityClient.transaction();
   const unequalDocuments: any[] = [];
 
   for (const newDocument of newDocuments) {
@@ -34,17 +34,17 @@ function findUnequalDocuments({
      * To get a correct comparison, we create a transaction for both documents, serialize them,
      * and compare the serialized versions based on the provided keys.
      */
-    transationClient.create(oldDocument);
-    transationClient.create(newDocument);
+    transactionClient.create(oldDocument);
+    transactionClient.create(newDocument);
 
     /**
      * .create() just adds the documents within a `{ create: {...document} }`-wrapper
      */
     const [serializedOldMutation, serializedNewMutation] =
-      transationClient.toJSON() as { create: any }[];
+      transactionClient.toJSON() as { create: any }[];
 
     /* Clean up transaction for next run */
-    transationClient.reset();
+    transactionClient.reset();
 
     /**
      * When uploading/downloading documents, Sanity will modify the documents slightly.
