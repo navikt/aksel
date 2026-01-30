@@ -3,6 +3,7 @@ markDefs[]{
   ...,
   _type == 'internalLink' => {
       "slug": @.reference->slug,
+      anchor,
   },
 }`;
 

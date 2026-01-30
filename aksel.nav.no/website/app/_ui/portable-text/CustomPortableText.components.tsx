@@ -100,11 +100,15 @@ function marksComponents() {
       }
       return <WebsiteLink href={href}>{text}</WebsiteLink>;
     },
-    internalLink: ({ text, value: { slug } }) => {
+    internalLink: ({ text, value: { slug, anchor } }) => {
       if (!slug || !slug.current) {
         return <span>{text}</span>;
       }
-      return <WebsiteLink href={`/${slug.current}`}>{text}</WebsiteLink>;
+      return (
+        <WebsiteLink href={`/${slug.current}${anchor ? `#${anchor}` : ""}`}>
+          {text}
+        </WebsiteLink>
+      );
     },
   } satisfies Record<string, PortableTextMarkComponent>;
 }
