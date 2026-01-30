@@ -7,6 +7,7 @@ import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
 import { AuthConfig, defineConfig } from "sanity";
 import { media } from "sanity-plugin-media";
+import { references } from "sanity-plugin-references";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { TestFlaskIcon } from "@navikt/aksel-icons";
@@ -54,6 +55,7 @@ export const workspaceConfig = defineConfig([
       /* 3rd-party */
       table(),
       codeInput(),
+      references({ exclude: ["media.tag", "sanity.imageAsset"] }),
       media(),
       visionTool(),
       colorInput(),
