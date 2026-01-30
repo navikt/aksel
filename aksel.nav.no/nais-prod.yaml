@@ -20,6 +20,7 @@ spec:
   replicas:
     disableAutoScaling: true
     min: 2
+    max: 2
   resources:
     limits:
       memory: 1Gi
