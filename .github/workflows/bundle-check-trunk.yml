@@ -58,6 +58,7 @@ jobs:
     needs: compare-against-trunk
     if: ${{ !contains(github.event.pull_request.title, 'Version Packages') }}
     permissions:
+      contents: read
       pull-requests: write
     steps:
       - name: Find Comment
