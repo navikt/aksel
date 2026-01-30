@@ -51,7 +51,7 @@ jobs:
         run: yarn run:analyze-branch
         id: comparison
         env:
-          RESULT: ${{ needs.analyze-trunk.outputs.analysis-result }}
+          RESULTS: ${{ needs.analyze-trunk.outputs.analysis-result }}
 
   update-comment:
     name: "Create or update PR comment with results"
