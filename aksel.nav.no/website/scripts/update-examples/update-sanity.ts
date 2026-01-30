@@ -1,5 +1,6 @@
 import { CodeExampleSchemaT } from "../../components/types";
 import { noCdnClient } from "../../sanity/interface/client.server";
+import { findUnequalDocuments } from "../helpers/find-unequal-documents";
 import { extractMetadata } from "./parts/extract-metadata";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
@@ -50,14 +51,15 @@ export async function updateSanity(directory: RootDirectoriesT) {
   const transactionClient = noCdnClient(token).transaction();
   let updatedCount = 0;
 
-  /* Only update if there are changes */
-  for (const data of exampleData) {
-    const existingDoc = oldSanityDocuments.find((d: any) => d._id === data._id);
+  const unequalDocuments = findUnequalDocuments({
+    newDocuments: exampleData,
+    oldDocuments: oldSanityDocuments,
+    keysToCompare: ["_id", "_type", "title", "variant", "filer", "metadata"],
+  });
 
-    if (!existingDoc || hasChanges(existingDoc, data)) {
-      transactionClient.createOrReplace(data);
-      updatedCount++;
-    }
+  for (const doc of unequalDocuments) {
+    transactionClient.createOrReplace(doc);
+    updatedCount++;
   }
 
   if (updatedCount > 0) {
@@ -82,6 +84,11 @@ export async function updateSanity(directory: RootDirectoriesT) {
       transactionClient.delete(document._id);
       deletedIds.push(document._id);
     }
+  }
+
+  if (deletedIds.length === 0) {
+    console.info(`No unused ${directory} documentation found, skipping delete`);
+    return;
   }
 
   await transactionClient
@@ -117,26 +124,4 @@ export async function updateSanity(directory: RootDirectoriesT) {
 
 function createId(s: string) {
   return `kode_eksempelid_${s.match(/\w/g)?.join("")}`.toLowerCase();
-}
-
-function hasChanges(existingDoc: any, newData: CodeExampleSchemaT): boolean {
-  const relevantFields = [
-    "_id",
-    "_type",
-    "title",
-    "variant",
-    "filer",
-    "metadata",
-  ];
-
-  for (const field of relevantFields) {
-    if (
-      JSON.stringify((existingDoc as any)[field]) !==
-      JSON.stringify((newData as any)[field])
-    ) {
-      return true;
-    }
-  }
-
-  return false;
 }

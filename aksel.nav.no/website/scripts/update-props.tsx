@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { noCdnClient } from "../sanity/interface/client.server";
+import { findUnequalDocuments } from "./helpers/find-unequal-documents";
 
 updateProps();
 
@@ -20,30 +21,53 @@ async function updateProps() {
     );
   }
 
-  const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"] {
-    _id,
-    _type,
-    title,
-    displayname,
-    filepath,
-    proplist}`);
+  const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"]`);
 
   const transactionClient = noCdnClient(token).transaction();
-  let updatedCount = 0;
 
-  props.forEach((localProp: any) => {
-    const remoteProp = remoteProps.find((r: any) => r._id === localProp._id);
-
-    if (
-      !remoteProp ||
-      JSON.stringify(remoteProp) !== JSON.stringify(localProp)
-    ) {
-      transactionClient.createOrReplace(localProp);
-      updatedCount++;
-    }
+  transactionClient.createIfNotExists({
+    _id: "ds_props",
+    _type: "document",
+    title: "Props Designsystemet",
+    displayname: "Props Designsystemet",
+    filepath: "./test/path.tsx",
+    proplist: [
+      { val: 1, prop: 2 },
+      {
+        val: 2,
+        prop: 3,
+        value: undefined,
+        nested: {
+          a: 1,
+          test: undefined,
+          what: [{ q: 123 }, undefined, { t: undefined }],
+        },
+      },
+    ],
   });
 
+  let updatedCount = 0;
+
+  const unequalDocuments = findUnequalDocuments({
+    newDocuments: props,
+    oldDocuments: remoteProps,
+    keysToCompare: [
+      "_id",
+      "_type",
+      "title",
+      "displayname",
+      "filepath",
+      "proplist",
+    ],
+  });
+
+  for (const doc of unequalDocuments) {
+    transactionClient.createOrReplace(doc);
+    updatedCount++;
+  }
+
   if (updatedCount > 0) {
+    console.info(`Successfully updated ${updatedCount} prop-documentation(s)`);
     await transactionClient
       .commit()
       .then(() =>
@@ -64,6 +88,11 @@ async function updateProps() {
       transactionClient.delete(prop._id);
       deletedIds.push(prop._id);
     }
+  }
+
+  if (deletedIds.length === 0) {
+    console.info("No unused prop-documentation found, skipping delete");
+    return;
   }
 
   await transactionClient
