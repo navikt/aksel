@@ -38,7 +38,7 @@ function findUnequalDocuments({
     transationClient.create(newDocument);
 
     /**
-     * .create() just adds the documents withing a `{ create: {...document} }`-wrapper
+     * .create() just adds the documents within a `{ create: {...document} }`-wrapper
      */
     const [serializedOldMutation, serializedNewMutation] =
       transationClient.toJSON() as { create: any }[];
