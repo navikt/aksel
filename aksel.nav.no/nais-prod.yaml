@@ -13,18 +13,20 @@ spec:
   ingresses:
     - "https://aksel.nav.no"
     - "https://design.nav.no"
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
   replicas:
+    disableAutoScaling: true
     min: 2
-    max: 4
-    scalingStrategy:
-      cpu:
-        thresholdPercentage: 70
+    max: 2
   resources:
     limits:
       memory: 1Gi
     requests:
       cpu: 172m
-      memory: 896Mi
+      memory: 850Mi
   liveness:
     path: /api/isAlive
     initialDelay: 20

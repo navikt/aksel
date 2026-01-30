@@ -10,8 +10,15 @@ import { GodPraksisHeroDialog } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero
 import { GodPraksisHeroProvider } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero.provider";
 import { GodPraksisPictogram } from "@/app/(routes)/(root)/_ui/pictogram/GodPraksisPictogram";
 import { sanityFetch } from "@/app/_sanity/live";
-import { GOD_PRAKSIS_ALL_TEMA_QUERY } from "@/app/_sanity/queries";
-import { GOD_PRAKSIS_TEMA_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import {
+  GOD_PRAKSIS_ALL_TEMA_QUERY,
+  GOD_PRAKSIS_ARTICLES_COUNT_BY_UNDERTEMA_ID_QUERY,
+  GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
+} from "@/app/_sanity/queries";
+import {
+  type GOD_PRAKSIS_ALL_TEMA_QUERY_RESULT,
+  GOD_PRAKSIS_TEMA_BY_SLUG_QUERY_RESULT,
+} from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import styles from "./Hero.module.css";
@@ -83,8 +90,6 @@ async function GodPraksisTemaList() {
     query: GOD_PRAKSIS_ALL_TEMA_QUERY,
   });
 
-  const filteredTemaList = temaList.filter((x) => x.articles.length > 0);
-
   return (
     <nav aria-label="Temavelger">
       <Stack
@@ -93,28 +98,50 @@ async function GodPraksisTemaList() {
         direction={{ xs: "column", md: "row" }}
         as="ul"
       >
-        {filteredTemaList.map((tema) => {
-          const url = urlForImage(tema.pictogram)?.url();
-
-          return (
-            <li key={tema.slug}>
-              <LinkCard arrow={false}>
-                <LinkCardIcon>
-                  <GodPraksisPictogram url={url} />
-                </LinkCardIcon>
-                <LinkCardTitle as="h2">
-                  <LinkCardAnchor asChild>
-                    <NextLink href={`/god-praksis/${tema.slug}`}>
-                      {tema.title ?? ""}
-                    </NextLink>
-                  </LinkCardAnchor>
-                </LinkCardTitle>
-              </LinkCard>
-            </li>
-          );
+        {temaList.map((tema) => {
+          return <HeroTag key={tema._id} tema={tema} />;
         })}
       </Stack>
     </nav>
+  );
+}
+
+async function HeroTag({
+  tema,
+}: {
+  tema: GOD_PRAKSIS_ALL_TEMA_QUERY_RESULT[number];
+}) {
+  const { data: undertema } = await sanityFetch({
+    query: GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
+    params: { temaId: tema._id },
+  });
+
+  const { data: articleCount } = await sanityFetch({
+    query: GOD_PRAKSIS_ARTICLES_COUNT_BY_UNDERTEMA_ID_QUERY,
+    params: { undertemaIds: undertema },
+  });
+
+  if (articleCount === 0) {
+    return null;
+  }
+
+  const url = urlForImage(tema.pictogram)?.url();
+
+  return (
+    <li key={tema.slug}>
+      <LinkCard arrow={false}>
+        <LinkCardIcon>
+          <GodPraksisPictogram url={url} />
+        </LinkCardIcon>
+        <LinkCardTitle as="h2">
+          <LinkCardAnchor asChild>
+            <NextLink href={`/god-praksis/${tema.slug}`}>
+              {tema.title ?? ""}
+            </NextLink>
+          </LinkCardAnchor>
+        </LinkCardTitle>
+      </LinkCard>
+    </li>
   );
 }
 

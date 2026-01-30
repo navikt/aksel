@@ -9,15 +9,14 @@ import {
   useToggleGroupDescendants,
 } from "./ToggleGroup.context";
 import { ToggleGroupProps } from "./ToggleGroup.types";
-import ToggleItem from "./parts/ToggleItem";
+import ToggleItem, { ToggleGroupItemProps } from "./parts/ToggleItem";
 import { useToggleGroup } from "./useToggleGroup";
 
-interface ToggleGroupComponent
-  extends React.ForwardRefExoticComponent<
-    ToggleGroupProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface ToggleGroupComponent extends React.ForwardRefExoticComponent<
+  ToggleGroupProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
-   * @see 🏷️ {@link ToggleItem}
+   * @see 🏷️ {@link ToggleGroupItemProps}
    */
   Item: typeof ToggleItem;
 }
@@ -134,3 +133,5 @@ function variantToColor(
 ToggleGroup.Item = ToggleItem;
 
 export default ToggleGroup;
+export { ToggleItem as ToggleGroupItem };
+export type { ToggleGroupProps, ToggleGroupItemProps };

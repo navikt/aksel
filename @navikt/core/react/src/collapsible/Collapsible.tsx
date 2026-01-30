@@ -3,17 +3,19 @@ import { useId } from "../utils-external";
 import { useControllableState } from "../utils/hooks";
 import { CollapsibleContextProvider } from "./Collapsible.context";
 import { CollapsibleBaseProps } from "./Collapsible.types";
-import CollapsibleContent from "./parts/Collapsible.Content";
-import CollapsibleTrigger from "./parts/Collapsible.Trigger";
+import CollapsibleContent, {
+  CollapsibleContentProps,
+} from "./parts/Collapsible.Content";
+import CollapsibleTrigger, {
+  CollapsibleTriggerProps,
+} from "./parts/Collapsible.Trigger";
 
-export interface CollapsibleProps
-  extends CollapsibleBaseProps,
-    React.HTMLAttributes<HTMLDivElement> {}
+interface CollapsibleProps
+  extends CollapsibleBaseProps, React.HTMLAttributes<HTMLDivElement> {}
 
-interface CollapsibleComponent
-  extends React.ForwardRefExoticComponent<
-    CollapsibleProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface CollapsibleComponent extends React.ForwardRefExoticComponent<
+  CollapsibleProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link CollapsibleTriggerProps}
    */
@@ -47,7 +49,7 @@ interface CollapsibleComponent
  *     <Button>Button</Button>
  *   </Collapsible.Trigger>
  *   <Collapsible.Content asChild>
- *     <Box padding="4" background="info-soft">
+ *     <Box padding="space-16" background="info-soft">
  *       <div>lorem ipsum</div>
  *     </Box>
  *   </Collapsible.Content>
@@ -99,3 +101,9 @@ Collapsible.Trigger = CollapsibleTrigger;
 Collapsible.Content = CollapsibleContent;
 
 export default Collapsible;
+export { CollapsibleTrigger, CollapsibleContent };
+export type {
+  CollapsibleProps,
+  CollapsibleTriggerProps,
+  CollapsibleContentProps,
+};

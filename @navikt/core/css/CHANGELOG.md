@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.2.0
+
+### Minor Changes
+
+- ActionMenu: Added support for right aligned icons on items ([#4545](https://github.com/navikt/aksel/pull/4545))
+
 ## 8.1.0
 
 ### Patch Changes

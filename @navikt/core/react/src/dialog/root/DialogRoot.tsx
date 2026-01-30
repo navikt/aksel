@@ -5,14 +5,20 @@ import {
   useEventCallback,
   useTransitionStatus,
 } from "../../utils/hooks";
-import { DialogBody } from "../body/DialogBody";
-import { DialogCloseTrigger } from "../close-trigger/DialogCloseTrigger";
-import { DialogDescription } from "../description/DialogDescription";
-import { DialogFooter } from "../footer/DialogFooter";
-import { DialogHeader } from "../header/DialogHeader";
-import { DialogPopup } from "../popup/DialogPopup";
-import { DialogTitle } from "../title/DialogTitle";
-import { DialogTrigger } from "../trigger/DialogTrigger";
+import { DialogBody, DialogBodyProps } from "../body/DialogBody";
+import {
+  DialogCloseTrigger,
+  DialogCloseTriggerProps,
+} from "../close-trigger/DialogCloseTrigger";
+import {
+  DialogDescription,
+  DialogDescriptionProps,
+} from "../description/DialogDescription";
+import { DialogFooter, DialogFooterProps } from "../footer/DialogFooter";
+import { DialogHeader, DialogHeaderProps } from "../header/DialogHeader";
+import { DialogPopup, DialogPopupProps } from "../popup/DialogPopup";
+import { DialogTitle, DialogTitleProps } from "../title/DialogTitle";
+import { DialogTrigger, DialogTriggerProps } from "../trigger/DialogTrigger";
 import { DialogContextProvider, useDialogContext } from "./DialogRoot.context";
 
 interface DialogProps {
@@ -56,6 +62,7 @@ interface DialogComponent extends React.FC<DialogProps> {
    * ```
    */
   Trigger: typeof DialogTrigger;
+
   /**
    * @see 🏷️ {@link DialogCloseTriggerProps}
    * @example
@@ -70,6 +77,7 @@ interface DialogComponent extends React.FC<DialogProps> {
    * ```
    */
   CloseTrigger: typeof DialogCloseTrigger;
+
   /**
    * @see 🏷️ {@link DialogPopupProps}
    * @example
@@ -295,4 +303,24 @@ Dialog.Footer = DialogFooter;
 Dialog.Popup = DialogPopup;
 
 export default Dialog;
-export type { DialogProps };
+export {
+  DialogTrigger,
+  DialogCloseTrigger,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogBody,
+  DialogFooter,
+  DialogPopup,
+};
+export type {
+  DialogProps,
+  DialogTriggerProps,
+  DialogCloseTriggerProps,
+  DialogHeaderProps,
+  DialogTitleProps,
+  DialogDescriptionProps,
+  DialogBodyProps,
+  DialogFooterProps,
+  DialogPopupProps,
+};

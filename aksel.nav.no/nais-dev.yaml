@@ -12,6 +12,10 @@ spec:
   port: 3000
   ingresses:
     - "https://aksel.ansatt.dev.nav.no"
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
   resources:
     limits:
       memory: 1Gi

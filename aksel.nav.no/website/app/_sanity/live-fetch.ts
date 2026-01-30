@@ -6,6 +6,8 @@ import {
   DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
   DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
   GOD_PRAKSIS_ALL_TEMA_QUERY,
+  GOD_PRAKSIS_ARTICLES_COUNT_BY_UNDERTEMA_ID_QUERY,
+  GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
   SITEMAP_ARTICLES_BY_TYPE_QUERY,
   SITEMAP_LANDINGPAGES_QUERY,
 } from "@/app/_sanity/queries";
@@ -60,6 +62,30 @@ async function fetchAllSanityPages(): Promise<
     }),
   ]);
 
+  const filteredTema: typeof temaListData = [];
+
+  for (const tema of temaListData) {
+    const { data: undertema } = await sanityFetch({
+      query: GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
+      params: { temaId: tema._id },
+    });
+
+    if (undertema.length === 0) {
+      continue;
+    }
+
+    const { data: articleCount } = await sanityFetch({
+      query: GOD_PRAKSIS_ARTICLES_COUNT_BY_UNDERTEMA_ID_QUERY,
+      params: { undertemaIds: undertema },
+    });
+
+    if (articleCount === 0) {
+      continue;
+    }
+
+    filteredTema.push(tema);
+  }
+
   const paths = [
     { slug: "", lastMod: landingPageData.frontpage },
     { slug: "/god-praksis", lastMod: landingPageData.godpraksis },
@@ -68,11 +94,9 @@ async function fetchAllSanityPages(): Promise<
     ...articleListData.map((page) => {
       return { slug: `/${page.slug}`, lastMod: page._updatedAt };
     }),
-    ...temaListData
-      .filter((tema) => tema.articles.length > 0)
-      .map((page) => {
-        return { slug: `/god-praksis/${page.slug}`, lastMod: page._updatedAt };
-      }),
+    ...filteredTema.map((page) => {
+      return { slug: `/god-praksis/${page.slug}`, lastMod: page._updatedAt };
+    }),
   ];
 
   dsKomponenterData?.overview_pages?.forEach((overviewPage) => {

@@ -6,7 +6,11 @@ import { cl } from "../../utils/helpers";
 import { useControllableState, useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { DateDialog } from "../Date.Dialog";
-import { DateInputContextProvider, DatePickerInput } from "../Date.Input";
+import {
+  DateInputContextProvider,
+  DateInputProps,
+  DatePickerInput,
+} from "../Date.Input";
 import {
   DateTranslationContextProvider,
   getTranslations,
@@ -17,13 +21,15 @@ import {
   DatePickerDefaultProps,
 } from "./DatePicker.types";
 import { ReactDayPicker } from "./parts/DatePicker.RDP";
-import DatePickerStandalone from "./parts/DatePicker.Standalone";
+import DatePickerStandalone, {
+  DatePickerStandaloneProps,
+} from "./parts/DatePicker.Standalone";
 
-export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
+type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
 
-interface DatePickerComponent
-  extends React.ForwardRefExoticComponent<DatePickerProps> {
+interface DatePickerComponent extends React.ForwardRefExoticComponent<DatePickerProps> {
   /**
+   * @see 🏷️ {@link DatePickerStandaloneProps}
    * @example
    * ```jsx
    * <DatePicker.Standalone
@@ -175,3 +181,5 @@ DatePicker.Standalone = DatePickerStandalone;
 DatePicker.Input = DatePickerInput;
 
 export default DatePicker;
+export { DatePickerStandalone, DatePickerInput };
+export type { DatePickerProps, DatePickerStandaloneProps, DateInputProps };
