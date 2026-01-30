@@ -81,6 +81,7 @@ function createDescendantContext<
    * Initializing DescendantsManager
    */
   function useDescendants() {
+    // eslint-disable-next-line react-hooks/refs
     const descendants = useRef(new DescendantsManager<T, K>()).current;
 
     return descendants;
