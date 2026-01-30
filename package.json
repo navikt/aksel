@@ -35,6 +35,7 @@
     "@navikt/aksel",
     "aksel.nav.no",
     "scripts/eslint",
+    "scripts/analyzer",
     "scripts"
   ],
   "prettier": {
