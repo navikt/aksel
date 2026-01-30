@@ -4,7 +4,6 @@ import { compareResults } from "./compare.js";
 
 function getDummyResultForTesting(): BundleAnalysisResult {
   return {
-    version: "1",
     cssIndexSize: 1234,
     reactExports: {
       ".": {
@@ -249,7 +248,6 @@ describe("compareResults", () => {
     const dummy = getDummyResultForTesting();
 
     const branch: BundleAnalysisResult = {
-      version: "1",
       cssIndexSize: 1500,
       reactExports: {
         ".": {

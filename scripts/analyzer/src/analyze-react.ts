@@ -27,8 +27,8 @@ async function analyzeReact(tarLocation: string): Promise<ExportPathsConfig> {
 
   for (const [key, value] of Object.entries(reactPackageExports)) {
     assert(
-      !value || typeof value === "string",
-      `String|undefined exports not supported: ${key}`,
+      value !== undefined && typeof value !== "string",
+      `String or undefined exports not supported in exports at top-level: ${key}`,
     );
 
     let name: string;
