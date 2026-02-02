@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { DayPicker } from "react-day-picker";
 import { Loader } from "../loader";
 import { AkselColor } from "../types";
 import { Label } from "../typography";
@@ -14,8 +15,7 @@ type legacyVariants =
 
 type HiddenVariant = legacyVariants & { __brand?: never };
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button content.
    */
@@ -97,6 +97,8 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           e.currentTarget.click();
         }
       };
+
+      console.info(DayPicker);
 
       return (
         <Component
