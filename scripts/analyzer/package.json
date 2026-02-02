@@ -17,9 +17,9 @@
     "vitest": "4.0.18"
   },
   "scripts": {
-    "run:analyze-npm-action": "yarn clean && yarn pack-remote && tsx ./src/index.ts --remote --action-output",
-    "run:analyze-trunk-action": "yarn clean && yarn pack-local && tsx ./src/index.ts --action-output",
-    "run:analyze-branch": "yarn clean && yarn pack-local && tsx ./src/index.ts",
+    "run:analyze-npm-action": "yarn clean && yarn pack-remote && tsx ./src/analyze-trunk.ts --remote",
+    "run:analyze-trunk-action": "yarn clean && yarn pack-local && tsx ./src/analyze-trunk.ts",
+    "run:analyze-branch": "yarn clean && yarn pack-local && tsx ./src/compare-branch.ts",
     "clean": "tsx ./src/helpers/setup-project.ts",
     "pack-local": "yarn pack-local-react && yarn pack-local-css",
     "pack-local-react": "npm pack --pack-destination ../../scripts/analyzer/temp/local -w @navikt/ds-react",
