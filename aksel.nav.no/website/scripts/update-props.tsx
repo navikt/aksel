@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { ComponentDoc } from "../../../scripts/docgen";
 import { noCdnClient } from "../sanity/interface/client.server";
 import { findUnequalDocuments } from "./helpers/find-unequal-documents";
 
@@ -109,7 +110,7 @@ async function updateProps() {
 }
 
 function propList() {
-  const CoreDocs = JSON.parse(
+  const CoreDocs: ComponentDoc[] = JSON.parse(
     fs.readFileSync(
       path.resolve(process.cwd(), "../../@navikt/core/react/_docs.json"),
       {
@@ -118,7 +119,7 @@ function propList() {
     ),
   );
 
-  return CoreDocs.map((prop: any) => {
+  return CoreDocs.map((prop) => {
     const _id = `${hashString(prop.displayName)}_${hashString(prop.filePath)}`;
 
     return {
@@ -127,7 +128,7 @@ function propList() {
       title: prop.displayName,
       displayname: prop.displayName,
       filepath: prop.filePath,
-      proplist: Object.values(prop.props).map((val: any, y) => {
+      proplist: Object.values(prop.props).map((val, y) => {
         return {
           _type: "prop",
           _key: val.name + y,
