@@ -42,6 +42,10 @@ async function analyzeReact(tarLocation: string): Promise<ExportPathsConfig> {
 
     console.info(`analyzing ${name === "." ? "Root" : name}...`);
 
+    /*
+     * Flattens nested objects into a single-level object with dot notation keys.
+     * { a: { b: 'c' } } becomes { 'a.b': 'c' }
+     */
     const flattenedValue: Record<string, string> = flatten(value);
     for (const [flatKey, flatValue] of Object.entries(flattenedValue)) {
       /* Skip CJS files */
