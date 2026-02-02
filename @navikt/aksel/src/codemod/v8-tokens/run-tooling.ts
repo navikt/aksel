@@ -346,7 +346,7 @@ async function getNextTask(status?: any): Promise<TaskName> {
       ),
       name: "tailwind-tokens",
     },
-    { message: "Run all migrations", name: "run-all-migrations" },
+    { message: "Run all token migrations", name: "run-all-migrations" },
     { message: "Exit", name: "exit" },
   ] as { message: string; name: TaskName }[];
 
