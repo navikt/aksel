@@ -1,10 +1,12 @@
-import { mkdirSync, rmSync } from "node:fs";
+import { existsSync, mkdirSync, rmSync } from "node:fs";
 
 function getPath(subPath: string) {
   return `${process.cwd()}/${subPath}`;
 }
 
-rmSync(getPath("temp"), { recursive: true });
+if (existsSync(getPath("temp"))) {
+  rmSync(getPath("temp"), { recursive: true });
+}
 
 mkdirSync(getPath("temp"));
 mkdirSync(getPath("temp/local"));
