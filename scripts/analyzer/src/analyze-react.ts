@@ -26,6 +26,10 @@ async function analyzeReact(tarLocation: string): Promise<ExportPathsConfig> {
   const reactPackageExports = getPackageExports(reactPackageDir);
 
   for (const [key, value] of Object.entries(reactPackageExports)) {
+    if (key === "./package.json") {
+      continue;
+    }
+
     assert(
       value !== undefined && typeof value !== "string",
       `String or undefined exports not supported in exports at top-level: ${key}`,
