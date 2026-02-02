@@ -21,83 +21,84 @@ function markdownMessage(compareResults: CompareResults): string {
 
   /* Per-export details */
   const paths = Object.entries(reactConfigDiff.paths);
-  const pathsWithChanges = paths.filter(([, diff]) => {
+
+  const pathsWithTypeChanges = paths.filter(([, diff]) => {
+    return diff.types.added.length > 0 || diff.types.removed.length > 0;
+  });
+
+  const pathsWithComponentChanges = paths.filter(([, diff]) => {
     return (
-      diff.types.added.length > 0 ||
-      diff.types.removed.length > 0 ||
-      diff.components.added.length > 0 ||
-      diff.components.removed.length > 0 ||
-      diff.bundleSize.gzip !== 0 ||
-      diff.bundleSize.minified !== 0
+      diff.components.added.length > 0 || diff.components.removed.length > 0
     );
   });
 
-  if (pathsWithChanges.length > 0) {
-    lines.push("## 🔍 Changes by Export Path");
+  const pathsWithBundleSizeChanges = paths.filter(([, diff]) => {
+    return diff.bundleSize.gzip !== 0 || diff.bundleSize.minified !== 0;
+  });
+
+  if (
+    pathsWithTypeChanges.length > 0 ||
+    pathsWithComponentChanges.length > 0 ||
+    pathsWithBundleSizeChanges.length > 0
+  ) {
+    lines.push("## React bundle");
+  }
+
+  if (pathsWithTypeChanges.length > 0) {
+    lines.push("### Types");
     lines.push("");
 
-    for (const [pathKey, diff] of pathsWithChanges) {
-      lines.push(`### \`${pathKey}\``);
-      lines.push("");
+    lines.push("| Name | Added | Removed |");
+    lines.push("|:-----|:------|:--------|");
 
-      /* Types table */
-      if (diff.types.added.length > 0 || diff.types.removed.length > 0) {
-        lines.push("#### Types");
-        lines.push("| Type | Status |");
-        lines.push("|------|--------|");
-        for (const type of diff.types.added) {
-          lines.push(`| ${type} | ✅ Added |`);
-        }
-        for (const type of diff.types.removed) {
-          lines.push(`| ${type} | ❌ Removed |`);
-        }
-        lines.push("");
-      }
+    for (const [pathKey, diff] of pathsWithTypeChanges) {
+      const name = parseName(pathKey);
 
-      /* Components table */
-      if (
-        diff.components.added.length > 0 ||
-        diff.components.removed.length > 0
-      ) {
-        lines.push("#### Components");
-        lines.push("| Component | Status |");
-        lines.push("|-----------|--------|");
-        for (const component of diff.components.added) {
-          lines.push(`| ${component} | ✅ Added |`);
-        }
-        for (const component of diff.components.removed) {
-          lines.push(`| ${component} | ❌ Removed |`);
-        }
-        lines.push("");
-      }
+      lines.push(
+        `|${name}|${(diff.types.added ?? []).join(", ")}|${(diff.types.removed ?? []).join(", ")}|`,
+      );
+    }
+  }
 
-      /* Bundle size table */
-      if (diff.bundleSize.gzip !== 0 || diff.bundleSize.minified !== 0) {
-        lines.push("#### Bundle Size");
-        lines.push("| Format | Change |");
-        lines.push("|--------|--------|");
-        if (diff.bundleSize.minified !== 0) {
-          const color = getSizeColor(diff.bundleSize.minified);
-          lines.push(
-            `| Minified | ${color} ${formatSize(diff.bundleSize.minified)} |`,
-          );
-        }
-        if (diff.bundleSize.gzip !== 0) {
-          const color = getSizeColor(diff.bundleSize.gzip);
-          lines.push(`| Gzip | ${color} ${formatSize(diff.bundleSize.gzip)} |`);
-        }
-        lines.push("");
-      }
+  if (pathsWithComponentChanges.length > 0) {
+    lines.push("### Components");
+    lines.push("");
+
+    lines.push("| Name | Added | Removed |");
+    lines.push("|:-----|:------|:--------|");
+
+    for (const [pathKey, diff] of pathsWithComponentChanges) {
+      const name = parseName(pathKey);
+
+      lines.push(
+        `|${name}|${(diff.types.added ?? []).join(", ")}|${(diff.types.removed ?? []).join(", ")}|`,
+      );
+    }
+  }
+
+  if (pathsWithBundleSizeChanges.length > 0) {
+    lines.push("### Bundle Size");
+    lines.push("");
+
+    lines.push("| Name | Minified | Gzip |");
+    lines.push("|:-----|---------:|-----:|");
+
+    for (const [pathKey, diff] of pathsWithBundleSizeChanges) {
+      const name = parseName(pathKey);
+
+      lines.push(
+        `|${name}|${formatSize(diff.bundleSize.minified)}|${formatSize(diff.bundleSize.gzip)}|`,
+      );
     }
   }
 
   /* CSS size summary */
   if (cssSizeDiff !== 0) {
-    lines.push("## 📄 CSS");
-    const color = getSizeColor(cssSizeDiff);
-    lines.push(`| Format | Change |`);
+    lines.push("## CSS bundle");
+
+    lines.push(`| Name | Change |`);
     lines.push(`|--------|--------|`);
-    lines.push(`| Index | ${color} ${formatSize(cssSizeDiff)} |`);
+    lines.push(`| Index |  ${formatSize(cssSizeDiff)} |`);
     lines.push("");
   }
 
@@ -121,9 +122,8 @@ function formatSize(bytes: number): string {
   return isNegative ? `-${size}` : `+${size}`;
 }
 
-function getSizeColor(bytes: number): string {
-  if (bytes === 0) return "";
-  return bytes > 0 ? "🔴" : "🟢";
+function parseName(pathKey: string): string {
+  return pathKey === "" ? "Root" : pathKey.replace("/", "");
 }
 
 export { markdownMessage };
