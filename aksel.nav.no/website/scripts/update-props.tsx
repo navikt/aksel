@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
+import { ComponentDoc } from "../../../scripts/docgen";
 import { noCdnClient } from "../sanity/interface/client.server";
+import { findUnequalDocuments } from "./helpers/find-unequal-documents";
 
 updateProps();
 
@@ -12,8 +14,6 @@ async function updateProps() {
     );
   }
 
-  const transactionClient = noCdnClient(token).transaction();
-
   const props = propList();
 
   if (checkIfDuplicateExists(propList().map((x: any) => x._id))) {
@@ -22,18 +22,44 @@ async function updateProps() {
     );
   }
 
-  props.forEach((x) => {
-    transactionClient.createOrReplace(x);
+  const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"]`);
+
+  const transactionClient = noCdnClient(token).transaction();
+
+  let updatedCount = 0;
+
+  const unequalDocuments = findUnequalDocuments({
+    newDocuments: props,
+    oldDocuments: remoteProps,
+    keysToCompare: [
+      "_id",
+      "_type",
+      "title",
+      "displayname",
+      "filepath",
+      "proplist",
+    ],
   });
 
-  await transactionClient
-    .commit()
-    .then(() => console.info("Successfully updated prop-documentation"))
-    .catch((e) => {
-      throw new Error(e.message);
-    });
+  for (const doc of unequalDocuments) {
+    transactionClient.createOrReplace(doc);
+    updatedCount++;
+  }
 
-  const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"]`);
+  if (updatedCount > 0) {
+    await transactionClient
+      .commit()
+      .then(() =>
+        console.info(
+          `Successfully updated ${updatedCount} prop-documentation(s)`,
+        ),
+      )
+      .catch((e) => {
+        throw new Error(e.message);
+      });
+  } else {
+    console.info("No prop changes detected, skipping update");
+  }
 
   let deletedIds: string[] = [];
   for (const prop of remoteProps) {
@@ -41,6 +67,11 @@ async function updateProps() {
       transactionClient.delete(prop._id);
       deletedIds.push(prop._id);
     }
+  }
+
+  if (deletedIds.length === 0) {
+    console.info("No unused prop-documentation found, skipping delete");
+    return;
   }
 
   await transactionClient
@@ -79,7 +110,7 @@ async function updateProps() {
 }
 
 function propList() {
-  const CoreDocs = JSON.parse(
+  const CoreDocs: ComponentDoc[] = JSON.parse(
     fs.readFileSync(
       path.resolve(process.cwd(), "../../@navikt/core/react/_docs.json"),
       {
@@ -88,7 +119,7 @@ function propList() {
     ),
   );
 
-  return CoreDocs.map((prop: any) => {
+  return CoreDocs.map((prop) => {
     const _id = `${hashString(prop.displayName)}_${hashString(prop.filePath)}`;
 
     return {
@@ -97,7 +128,7 @@ function propList() {
       title: prop.displayName,
       displayname: prop.displayName,
       filepath: prop.filePath,
-      proplist: Object.values(prop.props).map((val: any, y) => {
+      proplist: Object.values(prop.props).map((val, y) => {
         return {
           _type: "prop",
           _key: val.name + y,

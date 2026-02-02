@@ -1,5 +1,6 @@
 import { CodeExampleSchemaT } from "../../components/types";
 import { noCdnClient } from "../../sanity/interface/client.server";
+import { findUnequalDocuments } from "../helpers/find-unequal-documents";
 import { extractMetadata } from "./parts/extract-metadata";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
@@ -22,7 +23,6 @@ export async function updateSanity(directory: RootDirectoriesT) {
     );
   }
   console.info(`Processing ${directory}`);
-  const transactionClient = noCdnClient(token).transaction();
   const folders = getDirectories(directory);
   const exampleData: CodeExampleSchemaT[] = [];
 
@@ -38,23 +38,44 @@ export async function updateSanity(directory: RootDirectoriesT) {
     };
 
     exampleData.push(data);
-    transactionClient.createOrReplace(data);
   }
 
   if (!validateExamples(exampleData)) {
     throw new Error("TypeScript errors found in generated code, see above.");
   }
 
-  await transactionClient
-    .commit({ autoGenerateArrayKeys: true, dryRun: isDryRun })
-    .then(() => console.info(`Successfully updated ${directory}`))
-    .catch((e) => {
-      throw new Error(e.message);
-    });
-
   const oldSanityDocuments = await noCdnClient(token).fetch(
     `*[_type == "kode_eksempler_fil" && variant == "${directory}"]`,
   );
+
+  const transactionClient = noCdnClient(token).transaction();
+  let updatedCount = 0;
+
+  const unequalDocuments = findUnequalDocuments({
+    newDocuments: exampleData,
+    oldDocuments: oldSanityDocuments,
+    keysToCompare: ["_id", "_type", "title", "variant", "filer", "metadata"],
+  });
+
+  for (const doc of unequalDocuments) {
+    transactionClient.createOrReplace(doc);
+    updatedCount++;
+  }
+
+  if (updatedCount > 0) {
+    await transactionClient
+      .commit({ autoGenerateArrayKeys: true, dryRun: isDryRun })
+      .then(() =>
+        console.info(
+          `Successfully updated ${updatedCount} example(s) in ${directory}`,
+        ),
+      )
+      .catch((e) => {
+        throw new Error(e.message);
+      });
+  } else {
+    console.info(`No changes detected for ${directory}`);
+  }
 
   let deletedIds: string[] = [];
   /* Delete old examples */
@@ -63,6 +84,11 @@ export async function updateSanity(directory: RootDirectoriesT) {
       transactionClient.delete(document._id);
       deletedIds.push(document._id);
     }
+  }
+
+  if (deletedIds.length === 0) {
+    console.info(`No unused ${directory} documentation found, skipping delete`);
+    return;
   }
 
   await transactionClient

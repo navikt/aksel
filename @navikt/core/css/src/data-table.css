@@ -2,3 +2,57 @@
   cursor: col-resize;
   margin-left: auto;
 }
+
+/* TODO: Overflow does not currently work with fixed table layout. No idea why... */
+.aksel-data-table__wrapper {
+  overflow-x: auto;
+  width: 100%;
+  position: relative;
+}
+
+.aksel-data-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  inline-size: 100%;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.aksel-data-table__thead {
+  background-color: var(--ax-bg-raised);
+}
+
+.aksel-data-table__tbody {
+  inline-size: 100%;
+  background-color: var(--ax-bg-raised);
+}
+
+.aksel-data-table__tr {
+  border: none;
+  block-size: 3rem;
+  inline-size: 100%;
+}
+
+.aksel-data-table__th {
+  background-color: var(--ax-bg-neutral-soft);
+  color: var(--ax-text-neutral);
+  padding-inline: var(--ax-space-16);
+  text-align: start;
+  vertical-align: middle;
+}
+
+.aksel-data-table__td {
+  text-align: start;
+  vertical-align: middle;
+  border-block-end: 1px solid var(--ax-border-neutral-subtle);
+  border-block-start: 1px solid var(--ax-bg-raised);
+  color: var(--ax-text-neutral-subtle);
+  padding-inline: 1rem;
+  overflow: hidden;
+
+  & > div {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
