@@ -1,11 +1,7 @@
 import styled from "styled-components";
-import {
-  Space64 as abc132,
-  Space128,
-  Space32,
-  Space6,
-} from "@navikt/ds-tokens/js";
 import { BodyShort } from "@navikt/ds-react";
+
+import { Space6, Space128, Space64, Space32 } from "@navikt/ds-tokens/js";
 
 const StyledNavLink = styled(NavLink)`
   border-bottom: 5px solid white;
@@ -21,7 +17,7 @@ const StyledNavLink = styled(NavLink)`
   padding-left: 5px;
   padding-right: 5px;
   :hover {
-    border-bottom: 5px solid ${abc132};
+    border-bottom: 5px solid ${Space64};
     p {
       color: ${Space6};
     }
