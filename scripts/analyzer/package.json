@@ -18,7 +18,7 @@
   },
   "scripts": {
     "run:analyze-npm-action": "yarn clean && yarn pack-remote && tsx ./src/analyze-trunk.ts --remote",
-    "run:analyze-trunk-action": "yarn clean && yarn pack-remote && tsx ./src/analyze-trunk.ts",
+    "run:analyze-trunk-action": "yarn clean && yarn pack-local && tsx ./src/analyze-trunk.ts",
     "run:analyze-branch": "yarn clean && yarn pack-local && tsx ./src/compare-branch.ts",
     "clean": "tsx ./src/helpers/setup-project.ts",
     "pack-local": "yarn pack-local-react && yarn pack-local-css",
