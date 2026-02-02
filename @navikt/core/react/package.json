@@ -169,16 +169,6 @@
         "default": "./cjs/expansion-card/index.js"
       }
     },
-    "./GuidePanel": {
-      "import": {
-        "types": "./esm/guide-panel/index.d.ts",
-        "default": "./esm/guide-panel/index.js"
-      },
-      "require": {
-        "types": "./cjs/guide-panel/index.d.ts",
-        "default": "./cjs/guide-panel/index.js"
-      }
-    },
     "./HelpText": {
       "import": {
         "types": "./esm/help-text/index.d.ts",

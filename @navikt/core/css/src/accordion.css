@@ -1,19 +1,5 @@
 /* ---------------------------- Accordion header ---------------------------- */
 .aksel-accordion__header {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: var(--ax-space-12);
-  padding: var(--ax-space-12);
-  text-align: left;
-  cursor: pointer;
-  border: none;
-  position: relative;
-  border-radius: var(--ax-radius-8);
-  background: transparent;
-  color: var(--ax-text-subtle);
-
   > * {
     font-weight: var(--ax-font-weight-regular);
   }

@@ -7,8 +7,6 @@ export {
   DialogHeader,
   DialogFooter,
   DialogTitle,
-  DialogDescription,
-  DialogBody,
 } from "./root/DialogRoot";
 export type {
   DialogProps,
@@ -18,6 +16,4 @@ export type {
   DialogHeaderProps,
   DialogFooterProps,
   DialogTitleProps,
-  DialogDescriptionProps,
-  DialogBodyProps,
 } from "./root/DialogRoot";
