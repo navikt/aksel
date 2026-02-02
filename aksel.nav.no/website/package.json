@@ -89,6 +89,7 @@
     "@next/eslint-plugin-next": "16.1.2",
     "@playwright/test": "^1.57.0",
     "@portabletext/block-tools": "^1.1.21",
+    "@sanity/export": "^4",
     "@sanity/schema": "5.5.0",
     "@types/jscodeshift": "^0.11.11",
     "@types/jsdom": "^27.0.0",
