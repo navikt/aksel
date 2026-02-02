@@ -79,6 +79,12 @@ async function runVersionMigration(
     return;
   }
 
+  // Hack: 'v8-tokens' needs to run last because it's interactive
+  if (selectedMigrations.includes("v8-tokens")) {
+    selectedMigrations.splice(selectedMigrations.indexOf("v8-tokens"), 1);
+    selectedMigrations.push("v8-tokens");
+  }
+
   console.info(
     chalk.gray(
       `\nRunning ${selectedMigrations.length} migration(s): ${selectedMigrations.join(", ")}\n`,

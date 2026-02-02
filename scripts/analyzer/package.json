@@ -1,0 +1,32 @@
+{
+  "name": "aksel-analyzer",
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "rolldown": "latest",
+    "ts-morph": "^27.0.2",
+    "tsx": "^4.20.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "flat": "6.0.1",
+    "mlly": "1.8.0",
+    "pkg-types": "^2.3.0",
+    "rimraf": "6.0.1",
+    "tar": "^7.5.3",
+    "vitest": "4.0.18"
+  },
+  "scripts": {
+    "run:analyze-npm-action": "yarn clean && yarn pack-remote && tsx ./src/analyze-trunk.ts --remote",
+    "run:analyze-trunk-action": "yarn clean && yarn pack-local && tsx ./src/analyze-trunk.ts",
+    "run:analyze-branch": "yarn clean && yarn pack-local && tsx ./src/compare-branch.ts",
+    "clean": "tsx ./src/helpers/setup-project.ts",
+    "pack-local": "yarn pack-local-react && yarn pack-local-css",
+    "pack-local-react": "npm pack --pack-destination ../../scripts/analyzer/temp/local -w @navikt/ds-react",
+    "pack-local-css": "npm pack --pack-destination ../../scripts/analyzer/temp/local -w @navikt/ds-css",
+    "pack-remote": "yarn pack-remote-react && yarn pack-remote-css",
+    "pack-remote-react": "npm pack @navikt/ds-react@latest --pack-destination ./temp/remote",
+    "pack-remote-css": "npm pack @navikt/ds-css@latest --pack-destination ./temp/remote",
+    "test": "vitest run"
+  }
+}

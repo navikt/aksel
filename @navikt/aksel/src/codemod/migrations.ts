@@ -162,24 +162,9 @@ export const migrations: MigrationT = {
       ignoredExtensions: CSS_EXTENSIONS,
     },
     {
-      description:
-        "Updates all Primitives to use new `space`-tokens. (Works with old and new system)",
+      description: "Updates all Primitives to use new `space`-tokens.",
       value: "v8-primitive-spacing",
       path: "v8.0.0/primitives-spacing/spacing",
-      ignoredExtensions: CSS_EXTENSIONS,
-    },
-    {
-      description:
-        "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
-      value: "v8-token-spacing",
-      path: "v8.0.0/token-spacing/spacing",
-      ignoredExtensions: [],
-    },
-    {
-      description:
-        "Updates js-tokens to use new `space`-tokens. (Works with old and new system)",
-      value: "v8-token-spacing-js",
-      path: "v8.0.0/token-spacing-js/spacing",
       ignoredExtensions: CSS_EXTENSIONS,
     },
     {

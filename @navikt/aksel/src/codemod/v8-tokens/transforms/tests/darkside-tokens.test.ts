@@ -5,6 +5,7 @@ for (const fixture of [
   "js-replace-all",
   "js-replace-some",
   "js-replace-border",
+  "js-replace-spacing",
 ]) {
   check(__dirname, {
     fixture,
