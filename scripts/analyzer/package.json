@@ -20,7 +20,7 @@
     "run:analyze-npm-action": "yarn clean && yarn pack-remote && tsx ./src/index.ts --remote --action-output",
     "run:analyze-trunk-action": "yarn clean && yarn pack-local && tsx ./src/index.ts --action-output",
     "run:analyze-branch": "yarn clean && yarn pack-local && tsx ./src/index.ts",
-    "clean": "rimraf temp/remote/* temp/local/* || true",
+    "clean": "tsx ./src/helpers/setup-project.ts",
     "pack-local": "yarn pack-local-react && yarn pack-local-css",
     "pack-local-react": "npm pack --pack-destination ../../scripts/analyzer/temp/local -w @navikt/ds-react",
     "pack-local-css": "npm pack --pack-destination ../../scripts/analyzer/temp/local -w @navikt/ds-css",
