@@ -27,8 +27,15 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Analyze main branch
-        id: results
         run: yarn run:analyze-trunk-action
+
+      - name: Upload json report to GitHub Actions Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: trunk-results.json
+          path: scripts/analyzer
+          retention-days: 1
 
   compare-against-trunk:
     name: "Analyzing PR branch and comparing against main"
@@ -46,11 +53,22 @@ jobs:
         with:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
+      - name: Download json from GitHub Actions Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: scripts/analyzer
+          name: trunk-results.json
+
       - name: Analyze trunk and compare against main branch
         run: yarn run:analyze-branch
-        id: comparison
-        env:
-          RESULTS: ${{ needs.analyze-trunk.outputs.analysis-result }}
+
+      - name: Upload comparison markdown to GitHub Actions Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: compare-markdown.md
+          path: scripts/analyzer
+          retention-days: 1
 
   update-comment:
     name: "Create or update PR comment with results"
@@ -61,6 +79,12 @@ jobs:
       contents: read
       pull-requests: write
     steps:
+      - name: Download comparison markdown to GitHub Actions Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: scripts/analyzer
+          name: compare-markdown.md
+
       - name: Find Comment
         uses: peter-evans/find-comment@v4
         id: fc
@@ -74,5 +98,5 @@ jobs:
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
-          body: ${{needs.compare-against-trunk.outputs.markdown-result}}
+          body-path: scripts/analyzer/compare-markdown.md
           edit-mode: replace
