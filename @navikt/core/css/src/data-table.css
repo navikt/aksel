@@ -1,3 +1,8 @@
+.aksel-data-table__th-resize-handle {
+  cursor: col-resize;
+  margin-left: auto;
+}
+
 /* TODO: Overflow does not currently work with fixed table layout. No idea why... */
 .aksel-data-table__wrapper {
   overflow-x: auto;

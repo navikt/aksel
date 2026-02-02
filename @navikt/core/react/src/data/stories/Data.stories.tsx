@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
+  ColumnPinningState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -75,6 +76,8 @@ export const TanstackExample: Story = {
   render: () => {
     const [globalFilter, setGlobalFilter] = useState<string>();
     const [columnVisibility, setColumnVisibility] = React.useState({});
+    const [columnPinning, setColumnPinning] =
+      React.useState<ColumnPinningState>({ left: [], right: [] });
 
     const table = useReactTable({
       columns,
@@ -85,41 +88,13 @@ export const TanstackExample: Story = {
       state: {
         globalFilter,
         columnVisibility,
+        columnPinning,
       },
+      onColumnPinningChange: setColumnPinning,
       onGlobalFilterChange: setGlobalFilter,
       onColumnVisibilityChange: setColumnVisibility,
+      columnResizeMode: "onChange",
     });
-
-    /* <div className="inline-block border border-black shadow rounded">
-        <div className="px-1 border-b border-black">
-          <label>
-            <input
-              {...{
-                type: 'checkbox',
-                checked: table.getIsAllColumnsVisible(),
-                onChange: table.getToggleAllColumnsVisibilityHandler(),
-              }}
-            />{' '}
-            Toggle All
-          </label>
-        </div>
-        {table.getAllLeafColumns().map((column) => {
-          return (
-            <div key={column.id} className="px-1">
-              <label>
-                <input
-                  {...{
-                    type: 'checkbox',
-                    checked: column.getIsVisible(),
-                    onChange: column.getToggleVisibilityHandler(),
-                  }}
-                />{' '}
-                {column.id}
-              </label>
-            </div>
-          )
-        })}
-      </div> */
 
     return (
       <VStack gap="space-16">
@@ -175,14 +150,24 @@ export const TanstackExample: Story = {
           </Button>
         </DataActionBar>
 
-        <DataTable>
+        <DataTable style={{ width: "3000px" }}>
           <DataTable.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (
                 <DataTable.Tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <DataTable.Th key={header.id}>
+                      <DataTable.Th
+                        key={header.id}
+                        size={header.getSize()}
+                        resizeHandler={header.getResizeHandler()}
+                        pinningHandler={
+                          header.column.getIsPinned() === "left"
+                            ? () => header.column.pin(false)
+                            : () => header.column.pin("left")
+                        }
+                        isPinned={header.column.getIsPinned() === "left"}
+                      >
                         {header.isPlaceholder
                           ? null
                           : flexRender(
