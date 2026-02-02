@@ -4,18 +4,13 @@ function markdownMessage(compareResults: CompareResults): string {
   const lines: string[] = [];
   const { cssSizeDiff, reactConfigDiff } = compareResults;
 
-  /* Top-level exports summary */
-  if (
-    reactConfigDiff.exportsAdded.length > 0 ||
-    reactConfigDiff.exportsRemoved.length > 0
-  ) {
-    lines.push("## 📦 Exports");
-    if (reactConfigDiff.exportsAdded.length > 0) {
-      lines.push(`- **Added**: ${reactConfigDiff.exportsAdded.join(", ")}`);
-    }
-    if (reactConfigDiff.exportsRemoved.length > 0) {
-      lines.push(`- **Removed**: ${reactConfigDiff.exportsRemoved.join(", ")}`);
-    }
+  /* CSS size summary */
+  if (cssSizeDiff !== 0) {
+    lines.push("## CSS bundle");
+
+    lines.push(`| Name | Change |`);
+    lines.push(`|--------|--------|`);
+    lines.push(`| Index |  ${formatSize(cssSizeDiff)} |`);
     lines.push("");
   }
 
@@ -44,11 +39,25 @@ function markdownMessage(compareResults: CompareResults): string {
     lines.push("## React bundle");
   }
 
+  if (
+    reactConfigDiff.exportsAdded.length > 0 ||
+    reactConfigDiff.exportsRemoved.length > 0
+  ) {
+    lines.push("### Exports");
+    if (reactConfigDiff.exportsAdded.length > 0) {
+      lines.push(`- **Added**: ${reactConfigDiff.exportsAdded.join(", ")}`);
+    }
+    if (reactConfigDiff.exportsRemoved.length > 0) {
+      lines.push(`- **Removed**: ${reactConfigDiff.exportsRemoved.join(", ")}`);
+    }
+    lines.push("");
+  }
+
   if (pathsWithTypeChanges.length > 0) {
     lines.push("### Types");
     lines.push("");
 
-    lines.push("| Name | Added | Removed |");
+    lines.push("| Name | Added 🔹 | Removed 🔸 |");
     lines.push("|:-----|:------|:--------|");
 
     for (const [pathKey, diff] of pathsWithTypeChanges) {
@@ -64,14 +73,14 @@ function markdownMessage(compareResults: CompareResults): string {
     lines.push("### Components");
     lines.push("");
 
-    lines.push("| Name | Added | Removed |");
+    lines.push("| Name | Added 🔹 | Removed 🔸 |");
     lines.push("|:-----|:------|:--------|");
 
     for (const [pathKey, diff] of pathsWithComponentChanges) {
       const name = parseName(pathKey);
 
       lines.push(
-        `|${name}|${(diff.types.added ?? []).join(", ")}|${(diff.types.removed ?? []).join(", ")}|`,
+        `|${name}|${(diff.components.added ?? []).join(", ")}|${(diff.components.removed ?? []).join(", ")}|`,
       );
     }
   }
@@ -92,16 +101,6 @@ function markdownMessage(compareResults: CompareResults): string {
     }
   }
 
-  /* CSS size summary */
-  if (cssSizeDiff !== 0) {
-    lines.push("## CSS bundle");
-
-    lines.push(`| Name | Change |`);
-    lines.push(`|--------|--------|`);
-    lines.push(`| Index |  ${formatSize(cssSizeDiff)} |`);
-    lines.push("");
-  }
-
   const message = lines.join("\n");
 
   const header = "# Bundle Analysis Result\n\n";
@@ -114,12 +113,11 @@ function markdownMessage(compareResults: CompareResults): string {
 }
 
 function formatSize(bytes: number): string {
-  if (bytes === 0) return "0B";
+  if (bytes === 0) return "0 KB";
   const isNegative = bytes < 0;
   const absBytes = Math.abs(bytes);
-  const size =
-    absBytes < 1024 ? `${absBytes}B` : `${(absBytes / 1024).toFixed(2)}KB`;
-  return isNegative ? `-${size}` : `+${size}`;
+  const size = `${(absBytes / 1024).toFixed(1)} KB`;
+  return isNegative ? `⏷-${size}` : `⏶+${size}`;
 }
 
 function parseName(pathKey: string): string {
