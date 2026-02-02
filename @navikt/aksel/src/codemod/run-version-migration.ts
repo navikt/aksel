@@ -79,6 +79,12 @@ async function runVersionMigration(
     return;
   }
 
+  // Hack: If 'v8-tokens' is selected, move it to the bottom of the list to run last
+  if (selectedMigrations.includes("v8-tokens")) {
+    selectedMigrations.splice(selectedMigrations.indexOf("v8-tokens"), 1);
+    selectedMigrations.push("v8-tokens");
+  }
+
   console.info(
     chalk.gray(
       `\nRunning ${selectedMigrations.length} migration(s): ${selectedMigrations.join(", ")}\n`,

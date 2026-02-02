@@ -23,6 +23,20 @@ npx @navikt/aksel codemod --help
 
 ### v8
 
+#### Tokens
+
+`npx @navikt/aksel codemod v8-tokens ...`
+
+Starts interactive token migration.
+
+```diff
+-margin: var(--a-spacing-1);
++margin: var(--ax-space-4);
+
+-background-color: var(--a-surface-subtle);
++background-color: var(--ax-bg-neutral-soft);
+```
+
 #### Box
 
 `npx @navikt/aksel codemod v8-box ...`
@@ -84,22 +98,15 @@ Updates variant + data-color props based on current variant prop.
 +<Tag variant="outline" data-color="info">
 ```
 
-#### Spacing
+#### Spacing on primitives
 
 `npx @navikt/aksel codemod v8-primitive-spacing ...`
-`npx @navikt/aksel codemod v8-token-spacing ...`
-`npx @navikt/aksel codemod v8-token-spacing-js ...`
 
-Updates use of legacy `spacing` token to new `space`-token
+Updates all primitives to new `space`-tokens.
 
 ```diff
--<HStack gap="spacing-4" />
+-<HStack gap="4" />
 +<HStack gap="space-16" />
-```
-
-```diff
--margin: var(--a-spacing-1);
-+margin: var(--ax-space-4);
 ```
 
 ### v6
