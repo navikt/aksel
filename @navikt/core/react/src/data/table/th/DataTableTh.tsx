@@ -1,23 +1,23 @@
 import React, { forwardRef } from "react";
 import {
-  CaretLeftRightIcon,
   PushPinFillIcon,
   PushPinIcon,
+  SortDownIcon,
+  SortUpIcon,
 } from "@navikt/aksel-icons";
-import { Button } from "../../../button";
+import { HStack, Spacer } from "../../../layout/stack";
+import { ActionMenu } from "../../../overlays/action-menu";
 import { cl } from "../../../utils/helpers";
+import { DataTableThActions } from "./DataTableThActions";
 import { DataTableThSortHandle } from "./DataTableThSortHandle";
 
 type DataTableThProps = React.HTMLAttributes<HTMLTableCellElement> & {
   resizeHandler?: React.MouseEventHandler<HTMLButtonElement>;
   isPinned?: boolean;
-  pinningHandler?: React.MouseEventHandler<HTMLButtonElement>;
+  pinningHandler?: (event: Event) => void;
   size?: number;
   sortDirection?: "asc" | "desc" | "none" | false;
-  onSortChange?: (
-    direction: "asc" | "desc" | "none",
-    event: React.MouseEvent,
-  ) => void;
+  onSortChange?: (direction: "asc" | "desc" | "none", event: Event) => void;
 };
 
 const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
@@ -43,39 +43,58 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         className={cl("aksel-data-table__th", className)}
         style={{ width: size, ...style }}
       >
-        {children}
-
-        <DataTableThSortHandle
-          sortDirection={sortDirection}
-          onSortChange={onSortChange}
-        />
-
-        {pinningHandler && (
-          <Button
-            onClick={pinningHandler}
-            size="small"
-            variant="secondary"
-            icon={
-              isPinned ? (
-                <PushPinFillIcon aria-hidden title="Fest kolonne" />
-              ) : (
-                <PushPinIcon aria-hidden title="Løstne kolonne" />
-              )
-            }
+        <HStack align="center" gap="space-8">
+          {children}
+          <Spacer />
+          <DataTableThSortHandle
+            sortDirection={sortDirection}
+            onSortChange={onSortChange}
           />
-        )}
-        {resizeHandler && (
-          <Button
-            onMouseDown={resizeHandler}
-            onMouseUp={resizeHandler}
-            className={cl("aksel-data-table__th-resize-handle")}
-            size="small"
-            variant="secondary"
-            icon={
-              <CaretLeftRightIcon aria-hidden title="Endre kolonnestørrelse" />
-            }
-          />
-        )}
+
+          <DataTableThActions>
+            {/* TODO: onSortChange just rotates between the three states now */}
+            {/* TODO: Sorting texts do not handle different data-types now */}
+            {sortDirection && (
+              <>
+                <ActionMenu.Item
+                  onSelect={(event) => onSortChange?.("asc", event)}
+                  icon={<SortUpIcon aria-hidden />}
+                >
+                  {sortDirection === "asc" ? "Fjern sortering" : "Sorter Å-A"}
+                </ActionMenu.Item>
+                <ActionMenu.Item
+                  onSelect={(event) => onSortChange?.("desc", event)}
+                  icon={<SortDownIcon aria-hidden />}
+                >
+                  {sortDirection === "desc" ? "Fjern sortering" : "Sorter A-Å"}
+                </ActionMenu.Item>
+              </>
+            )}
+            {pinningHandler && (
+              <ActionMenu.Item
+                onSelect={(event) => pinningHandler(event)}
+                icon={
+                  isPinned ? (
+                    <PushPinFillIcon aria-hidden title="Fest kolonne" />
+                  ) : (
+                    <PushPinIcon aria-hidden title="Løstne kolonne" />
+                  )
+                }
+              >
+                {isPinned ? "Løsne kolonne" : "Fest kolonne"}
+              </ActionMenu.Item>
+            )}
+          </DataTableThActions>
+
+          {resizeHandler && (
+            <button
+              onMouseDown={resizeHandler}
+              onMouseUp={resizeHandler}
+              className={cl("aksel-data-table__th-resize-handle")}
+              data-color="neutral"
+            />
+          )}
+        </HStack>
       </th>
     );
   },

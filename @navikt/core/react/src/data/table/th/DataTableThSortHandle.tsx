@@ -26,10 +26,7 @@ function DataTableThSortHandle({
   onSortChange,
 }: {
   sortDirection?: "asc" | "desc" | "none" | false;
-  onSortChange?: (
-    direction: "asc" | "desc" | "none",
-    event: React.MouseEvent,
-  ) => void;
+  onSortChange?: (direction: "asc" | "desc" | "none", event: Event) => void;
 }) {
   const IconConfig = useMemo(() => {
     if (!sortDirection) {
@@ -60,7 +57,8 @@ function DataTableThSortHandle({
         } else {
           newDirection = "none";
         }
-        onSortChange(newDirection, event);
+        /* TODO: Handle types better */
+        onSortChange(newDirection, event as unknown as Event);
       }}
     />
   );
