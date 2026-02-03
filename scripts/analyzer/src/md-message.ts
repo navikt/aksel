@@ -54,33 +54,51 @@ function markdownMessage(compareResults: CompareResults): string {
   }
 
   if (pathsWithTypeChanges.length > 0) {
+    const hasAdded = pathsWithTypeChanges.some(
+      ([, diff]) => (diff.components.added ?? []).length > 0,
+    );
+    const hasRemoved = pathsWithTypeChanges.some(
+      ([, diff]) => (diff.components.removed ?? []).length > 0,
+    );
+
     lines.push("### Types");
     lines.push("");
 
     lines.push("| Name | Added 🔹 | Removed 🔸 |");
-    lines.push("|:-----|:------|:--------|");
+    lines.push(
+      `|:-----|:-----${hasAdded ? "-" : ":"}|:-------${hasRemoved ? "-" : ":"}|`,
+    );
 
     for (const [pathKey, diff] of pathsWithTypeChanges) {
       const name = parseName(pathKey);
 
       lines.push(
-        `|${name}|${(diff.types.added ?? []).join(", ")}|${(diff.types.removed ?? []).join(", ")}|`,
+        `|${name}|${(diff.types.added ?? []).join(", ") || "-"}|${(diff.types.removed ?? []).join(", ") || "-"}|`,
       );
     }
   }
 
   if (pathsWithComponentChanges.length > 0) {
+    const hasAdded = pathsWithComponentChanges.some(
+      ([, diff]) => (diff.components.added ?? []).length > 0,
+    );
+    const hasRemoved = pathsWithComponentChanges.some(
+      ([, diff]) => (diff.components.removed ?? []).length > 0,
+    );
+
     lines.push("### Components");
     lines.push("");
 
     lines.push("| Name | Added 🔹 | Removed 🔸 |");
-    lines.push("|:-----|:------|:--------|");
+    lines.push(
+      `|:-----|:-----${hasAdded ? "-" : ":"}|:-------${hasRemoved ? "-" : ":"}|`,
+    );
 
     for (const [pathKey, diff] of pathsWithComponentChanges) {
       const name = parseName(pathKey);
 
       lines.push(
-        `|${name}|${(diff.components.added ?? []).join(", ")}|${(diff.components.removed ?? []).join(", ")}|`,
+        `|${name}|${(diff.components.added ?? []).join(", ") || "-"}|${(diff.components.removed ?? []).join(", ") || "-"}|`,
       );
     }
   }
@@ -117,7 +135,12 @@ function formatSize(bytes: number): string {
   const isNegative = bytes < 0;
   const absBytes = Math.abs(bytes);
   const size = `${(absBytes / 1024).toFixed(1)} KB`;
-  return isNegative ? `⏷-${size}` : `⏶+${size}`;
+
+  if (absBytes > 1024 * 100 && !isNegative) {
+    return `⚠️ +${size}`;
+  }
+
+  return isNegative ? `-${size}` : `🔺 +${size}`;
 }
 
 function parseName(pathKey: string): string {
