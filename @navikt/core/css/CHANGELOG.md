@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 8.2.2
+
+### Patch Changes
+
+- ExpansionCard: Remove redundant class name ([#4602](https://github.com/navikt/aksel/pull/4602))
+
+- AccordionItem: Remove redundant class name ([#4602](https://github.com/navikt/aksel/pull/4602))
+
 ## 8.2.1
 
 ## 8.2.0
