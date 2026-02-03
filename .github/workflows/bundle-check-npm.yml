@@ -10,10 +10,20 @@ permissions:
   contents: read
 
 jobs:
+  check-title:
+    name: Check PR title
+    runs-on: ubuntu-latest
+    outputs:
+      should-run: ${{ steps.check.outputs.should-run }}
+    steps:
+      - id: check
+        run: echo "should-run=${{ contains(github.event.pull_request.title, 'Version Packages') }}" >> $GITHUB_OUTPUT
+
   analyze:
     name: "Analyzing npm packages"
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.title, 'Version Packages')
+    needs: check-title
+    if: ${{ needs.check-title.outputs.should-run == 'true' }}
     steps:
       - name: Checkout main-branch
         uses: actions/checkout@v6
@@ -42,8 +52,8 @@ jobs:
   update-comment:
     name: "Create or update PR comment with results"
     runs-on: ubuntu-latest
-    needs: analyze
-    if: contains(github.event.pull_request.title, 'Version Packages')
+    needs: [check-title, analyze]
+    if: ${{ needs.check-title.outputs.should-run == 'true' }}
     permissions:
       contents: read
       pull-requests: write

@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { noCdnClient, sanityClient } from "@/sanity/client.server";
+import { sanityClient } from "@/sanity/client.server";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
 const ignoredStaticPaths = [
@@ -45,6 +45,9 @@ export async function proxy(req: NextRequest) {
   }
 
   try {
+    /**
+     * TODO: Look into updating this using tag-based revalidation
+     */
     const redirect = await sanityClient.fetch(
       `
   *[_type == 'redirect' && source == $source][0] {
@@ -54,16 +57,20 @@ export async function proxy(req: NextRequest) {
   }
 `,
       { source: decodeURIComponent(req.nextUrl.pathname) },
+      { cache: "force-cache", next: { revalidate: 3600 } },
     );
 
     if (redirect) {
-      const token = process.env.SANITY_WRITE;
+      /**
+       * TODO: Temp disabled due to revalidation issues causing excessive re-validations
+       */
+      /* const token = process.env.SANITY_WRITE;
       if (token) {
         noCdnClient(token)
           .patch(redirect._id)
           .set({ redirects: 1 + (redirect.redirects ?? 0) })
           .commit();
-      }
+      } */
 
       if (redirect.destination.startsWith("http")) {
         return NextResponse.redirect(new URL(redirect.destination));
