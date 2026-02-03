@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
-  ColumnPinningState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { useState } from "react";
+import React from "react";
 import { CogIcon, RectangleSectionsIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
@@ -74,25 +74,16 @@ export const Default: Story = {
 
 export const TanstackExample: Story = {
   render: () => {
-    const [globalFilter, setGlobalFilter] = useState<string>();
-    const [columnVisibility, setColumnVisibility] = React.useState({});
-    const [columnPinning, setColumnPinning] =
-      React.useState<ColumnPinningState>({ left: [], right: [] });
+    const memoData = React.useMemo(() => sampleData, []);
 
     const table = useReactTable({
       columns,
-      data: sampleData,
+      data: memoData,
       getCoreRowModel: getCoreRowModel(),
+      getSortedRowModel: getSortedRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
       globalFilterFn: "includesString",
-      state: {
-        globalFilter,
-        columnVisibility,
-        columnPinning,
-      },
-      onColumnPinningChange: setColumnPinning,
-      onGlobalFilterChange: setGlobalFilter,
-      onColumnVisibilityChange: setColumnVisibility,
+      state: {},
       columnResizeMode: "onChange",
     });
 
@@ -101,7 +92,7 @@ export const TanstackExample: Story = {
         <DataToolbar>
           <DataToolbar.SearchField
             label="Tekstfilter"
-            onChange={(e) => setGlobalFilter(e)}
+            onChange={(value) => table.setGlobalFilter(value)}
           />
           <DataToolbar.ToggleButton icon={<RectangleSectionsIcon />} />
           <ActionMenu>
@@ -167,6 +158,12 @@ export const TanstackExample: Story = {
                             : () => header.column.pin("left")
                         }
                         isPinned={header.column.getIsPinned() === "left"}
+                        sortDirection={header.column.getIsSorted() || "none"}
+                        onSortChange={(_, event) => {
+                          const handler =
+                            header.column.getToggleSortingHandler();
+                          handler?.(event);
+                        }}
                       >
                         {header.isPlaceholder
                           ? null

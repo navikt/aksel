@@ -6,12 +6,18 @@ import {
 } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { cl } from "../../../utils/helpers";
+import { DataTableThSortHandle } from "./DataTableThSortHandle";
 
 type DataTableThProps = React.HTMLAttributes<HTMLTableCellElement> & {
   resizeHandler?: React.MouseEventHandler<HTMLButtonElement>;
   isPinned?: boolean;
   pinningHandler?: React.MouseEventHandler<HTMLButtonElement>;
   size?: number;
+  sortDirection?: "asc" | "desc" | "none" | false;
+  onSortChange?: (
+    direction: "asc" | "desc" | "none",
+    event: React.MouseEvent,
+  ) => void;
 };
 
 const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
@@ -23,6 +29,8 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
       isPinned = false,
       pinningHandler,
       size,
+      sortDirection,
+      onSortChange,
       ...rest
     },
     forwardedRef,
@@ -35,6 +43,12 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         style={{ width: size }}
       >
         {children}
+
+        <DataTableThSortHandle
+          sortDirection={sortDirection}
+          onSortChange={onSortChange}
+        />
+
         {pinningHandler && (
           <Button
             onClick={pinningHandler}
