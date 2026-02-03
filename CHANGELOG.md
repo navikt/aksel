@@ -1,5 +1,19 @@
 # Changelog
 
+## 8.2.2
+
+### @navikt/ds-react
+
+- ExpansionCard: Remove redundant class name ([#4602](https://github.com/navikt/aksel/pull/4602))
+
+- AccordionItem: Remove redundant class name ([#4602](https://github.com/navikt/aksel/pull/4602))
+
+### @navikt/ds-css
+
+- ExpansionCard: Remove redundant class name ([#4602](https://github.com/navikt/aksel/pull/4602))
+
+- AccordionItem: Remove redundant class name ([#4602](https://github.com/navikt/aksel/pull/4602))
+
 ## 8.2.1
 
 ### @navikt/aksel
