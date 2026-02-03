@@ -195,8 +195,6 @@ export {
   type DialogPopupProps,
   type DialogHeaderProps,
   type DialogTitleProps,
-  type DialogDescriptionProps,
-  type DialogBodyProps,
   type DialogFooterProps,
 } from "./dialog";
 
