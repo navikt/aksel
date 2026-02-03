@@ -35,11 +35,11 @@ jobs:
         with:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
-      - name: Analyze npm packages
+      - name: Analyze Npm and local packages
         run: yarn run:analyze-npm-action
 
-      - name: Analyze trunk and compare against npm packages
-        run: yarn run:analyze-branch
+      - name: Run comparison analysis
+        run: yarn run:compare-bundles
 
       - name: Upload comparison markdown to GitHub Actions Artifacts
         if: ${{ !cancelled() }}

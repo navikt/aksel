@@ -9409,6 +9409,7 @@ __metadata:
   resolution: "aksel-analyzer@workspace:scripts/analyzer"
   dependencies:
     "@types/node": "npm:^24.10.9"
+    concurrently: "npm:9.2.1"
     flat: "npm:6.0.1"
     mlly: "npm:1.8.0"
     pkg-types: "npm:^2.3.0"

@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { gzipSync } from "node:zlib";
@@ -6,7 +7,7 @@ import { rolldown } from "rolldown";
 async function getBundleSize(
   code: string,
 ): Promise<{ minified: number; gzip: number }> {
-  const inputFile = join(process.cwd(), `.bundle-input-${Date.now()}.js`);
+  const inputFile = join(process.cwd(), `.bundle-input-${randomUUID()}.js`);
   writeFileSync(inputFile, code);
 
   /* Common externals - peer dependencies that shouldn't be bundled */

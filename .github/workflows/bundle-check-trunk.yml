@@ -37,7 +37,7 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Analyze main branch
-        run: yarn run:analyze-trunk-action
+        run: yarn run:analyze-local-action
 
       - name: Upload json report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
@@ -47,10 +47,37 @@ jobs:
           path: scripts/analyzer
           retention-days: 1
 
+  analyze-local:
+    name: "Analyzing PR branch"
+    runs-on: ubuntu-latest
+    needs: check-title
+    if: ${{ needs.check-title.outputs.should-run == 'true' }}
+    steps:
+      - name: Checkout main-branch
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Setup project
+        uses: ./.github/actions/setup
+        with:
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
+
+      - name: Analyze PR branch
+        run: yarn run:analyze-local-action
+
+      - name: Upload json report to GitHub Actions Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: branch-results.json
+          path: scripts/analyzer
+          retention-days: 1
+
   compare-against-trunk:
     name: "Analyzing PR branch and comparing against main"
     runs-on: ubuntu-latest
-    needs: [check-title, analyze-trunk]
+    needs: [check-title, analyze-trunk, analyze-local]
     if: ${{ needs.check-title.outputs.should-run == 'true' }}
     steps:
       - name: Checkout code
@@ -63,14 +90,20 @@ jobs:
         with:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
-      - name: Download json from GitHub Actions Artifacts
+      - name: Download trunk json from GitHub Actions Artifacts
         uses: actions/download-artifact@v7
         with:
           path: scripts/analyzer
           name: trunk-results.json
 
-      - name: Analyze trunk and compare against main branch
-        run: yarn run:analyze-branch
+      - name: Download branch json from GitHub Actions Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: scripts/analyzer
+          name: branch-results.json
+
+      - name: Analyze compare branches
+        run: yarn run:compare-bundles
 
       - name: Upload comparison markdown to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
