@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
@@ -74,7 +74,7 @@
     "@figma/rest-api-spec": "^0.35.0",
     "@svgr/cli": "8.1.0",
     "@types/js-yaml": "^4.0.9",
-    "@types/react": "19.2.8",
+    "@types/react": "19.2.9",
     "adm-zip": "^0.5.10",
     "concurrently": "9.2.1",
     "copyfiles": "^2.4.1",

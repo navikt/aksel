@@ -1,5 +1,15 @@
 # @navikt/aksel
 
+## 8.2.1
+
+### Patch Changes
+
+- CLI: Remove redundant v8 codemods, and fix issue when running v8-tokens together with other codemods. ([#4599](https://github.com/navikt/aksel/pull/4599))
+
+- Updated dependencies []:
+  - @navikt/ds-css@8.2.1
+  - @navikt/ds-tokens@8.2.1
+
 ## 8.2.0
 
 ### Patch Changes
