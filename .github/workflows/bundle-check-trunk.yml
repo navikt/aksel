@@ -64,7 +64,7 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Analyze PR branch
-        run: yarn run:analyze-local-action
+        run: yarn run:analyze-branch-action
 
       - name: Upload json report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
