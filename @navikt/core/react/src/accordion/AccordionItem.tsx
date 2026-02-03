@@ -1,28 +1,29 @@
-import React, { createContext, forwardRef, useContext, useRef } from "react";
+import React, { createContext, forwardRef, useContext } from "react";
 import { omit } from "../utils-external";
 import { cl } from "../utils/helpers";
 import { useControllableState } from "../utils/hooks";
 import { AccordionContext } from "./AccordionContext";
 
-export interface AccordionItemProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Content in Accordion.Item
-   * Should include one Accordion.Header and one Accordion.Content
+   * Content in Accordion.Item.
+   *
+   * Should include one Accordion.Header and one Accordion.Content.
    */
   children: React.ReactNode;
   /**
-   * Controlled open-state
-   * Using this removes automatic control of open-state
+   * Controlled open-state.
+   *
+   * Using this removes automatic control of open-state.
    */
   open?: boolean;
   /**
-   * Defaults the accordion to open if not controlled
+   * The open state when initially rendered. Use when you do not need to control the open state.
    * @default false
    */
   defaultOpen?: boolean;
   /**
-   * Callback for current open-state
+   * Callback for current open-state.
    */
   onOpenChange?: (open: boolean) => void;
 }
@@ -48,13 +49,6 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
 
     const context = useContext(AccordionContext);
 
-    const shouldAnimate = useRef<boolean>(!(Boolean(open) || defaultOpen));
-
-    const handleOpen = () => {
-      _setOpen((x) => !x);
-      shouldAnimate.current = true;
-    };
-
     if (!context?.mounted) {
       console.error("<Accordion.Item> has to be used within an <Accordion>");
     }
@@ -63,7 +57,6 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       <div
         className={cl("aksel-accordion__item", className, {
           "aksel-accordion__item--open": _open,
-          "aksel-accordion__item--no-animation": !shouldAnimate.current,
         })}
         data-expanded={_open}
         ref={ref}
@@ -72,7 +65,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         <AccordionItemContext.Provider
           value={{
             open: _open,
-            toggleOpen: handleOpen,
+            toggleOpen: () => _setOpen((x) => !x),
           }}
         >
           {children}
