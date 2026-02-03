@@ -122,7 +122,7 @@ function markdownMessage(compareResults: CompareResults): string {
       const name = parseName(pathKey);
 
       lines.push(
-        `|${name}|${formatSize(diff.bundleSize.minified)}|${formatSize(diff.bundleSize.gzip)}|${formatPercentage(diff.bundleSize.minifiedPercent)}|`,
+        `|${name}|${formatSize(diff.bundleSize.minified)}|${formatPercentage(diff.bundleSize.minifiedPercent)}|${formatSize(diff.bundleSize.gzip)}|`,
       );
     }
   }
