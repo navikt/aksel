@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.9",
+    "concurrently": "9.2.1",
     "flat": "6.0.1",
     "mlly": "1.8.0",
     "pkg-types": "^2.3.0",
@@ -18,9 +19,10 @@
     "vitest": "4.0.18"
   },
   "scripts": {
-    "run:analyze-npm-action": "yarn clean && yarn pack-remote && tsx ./src/analyze-trunk.ts --remote",
-    "run:analyze-trunk-action": "yarn clean && yarn pack-local && tsx ./src/analyze-trunk.ts",
-    "run:analyze-branch": "yarn clean && yarn pack-local && tsx ./src/compare-branch.ts",
+    "run:analyze-npm-action": "yarn clean && concurrently \"yarn pack-remote && tsx ./src/runners/analyze-package.ts --remote --out trunk-results.json\" \"yarn pack-local && tsx ./src/runners/analyze-package.ts --out branch-results.json\"",
+    "run:analyze-local-action": "yarn clean && yarn pack-local && tsx ./src/runners/analyze-package.ts --out trunk-results.json",
+    "run:analyze-branch-action": "yarn clean && yarn pack-local && tsx ./src/runners/analyze-package.ts --out branch-results.json",
+    "run:compare-bundles": "tsx ./src/runners/compare-bundles.ts",
     "clean": "tsx ./src/helpers/setup-project.ts",
     "pack-local": "yarn pack-local-react && yarn pack-local-css",
     "pack-local-react": "npm pack --pack-destination ../../scripts/analyzer/temp/local -w @navikt/ds-react",

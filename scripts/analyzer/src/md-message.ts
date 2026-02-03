@@ -107,14 +107,22 @@ function markdownMessage(compareResults: CompareResults): string {
     lines.push("### Bundle Size");
     lines.push("");
 
-    lines.push("| Name | Minified | Gzip |");
-    lines.push("|:-----|---------:|-----:|");
+    lines.push("| Name | Min | Min % | Gzip |");
+    lines.push("|:-----|---------:|---------:|-----:|");
 
-    for (const [pathKey, diff] of pathsWithBundleSizeChanges) {
+    const sortedBySize = pathsWithBundleSizeChanges.toSorted((a, b) => {
+      const aSize =
+        Math.abs(a[1].bundleSize.minified) + Math.abs(a[1].bundleSize.gzip);
+      const bSize =
+        Math.abs(b[1].bundleSize.minified) + Math.abs(b[1].bundleSize.gzip);
+      return bSize - aSize;
+    });
+
+    for (const [pathKey, diff] of sortedBySize) {
       const name = parseName(pathKey);
 
       lines.push(
-        `|${name}|${formatSize(diff.bundleSize.minified)}|${formatSize(diff.bundleSize.gzip)}|`,
+        `|${name}|${formatSize(diff.bundleSize.minified)}|${formatSize(diff.bundleSize.gzip)}|${formatPercentage(diff.bundleSize.minifiedPercent)}|`,
       );
     }
   }
@@ -130,17 +138,29 @@ function markdownMessage(compareResults: CompareResults): string {
   return header + "No changes detected to bundle 🎉";
 }
 
+function formatPercentage(percent: number): string {
+  const isNegative = percent < 0;
+  const absPercent = Math.abs(percent);
+  const formatted = `${absPercent.toFixed(2)}%`;
+
+  if (absPercent > 10) {
+    return `⚠️ ${isNegative ? "-" : "+"}${formatted}`;
+  }
+
+  return isNegative ? `-${formatted}` : `+${formatted}`;
+}
+
 function formatSize(bytes: number): string {
   if (bytes === 0) return "0 KB";
   const isNegative = bytes < 0;
   const absBytes = Math.abs(bytes);
-  const size = `${(absBytes / 1024).toFixed(1)} KB`;
+  const size = `${(absBytes / 1024).toFixed(2)} KB`;
 
-  if (absBytes > 1024 * 100 && !isNegative) {
-    return `⚠️ +${size}`;
+  if (absBytes > 1024 * 20) {
+    return `⚠️ ${isNegative ? "-" : "+"}${size}`;
   }
 
-  return isNegative ? `-${size}` : `🔺 +${size}`;
+  return isNegative ? `-${size}` : `+${size}`;
 }
 
 function parseName(pathKey: string): string {

@@ -150,11 +150,3 @@
     }
   }
 }
-
-/* ---------------- Accordion No Animation (defaultOpen) ---------------- */
-
-.aksel-accordion__item--no-animation {
-  & > .aksel-accordion__content {
-    transition: none;
-  }
-}
