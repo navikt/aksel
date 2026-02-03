@@ -18,7 +18,7 @@ const getRandomItems = <T,>(arr: T[], min = 1, max = 5): T[] => {
   return shuffled.slice(0, count);
 };
 
-interface PersonInfo {
+export interface PersonInfo {
   // id: number;
   name: string;
   nationalId: string;

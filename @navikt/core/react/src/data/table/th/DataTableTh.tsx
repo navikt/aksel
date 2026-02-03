@@ -31,6 +31,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
       size,
       sortDirection,
       onSortChange,
+      style,
       ...rest
     },
     forwardedRef,
@@ -40,7 +41,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         {...rest}
         ref={forwardedRef}
         className={cl("aksel-data-table__th", className)}
-        style={{ width: size }}
+        style={{ width: size, ...style }}
       >
         {children}
 

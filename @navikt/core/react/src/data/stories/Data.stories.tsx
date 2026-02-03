@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
+  Table,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -14,7 +15,7 @@ import { ActionMenu } from "../../overlays/action-menu";
 import DataActionBar from "../action-bar/root/DataActionBarRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
-import { columns, sampleData } from "./dummy-data";
+import { PersonInfo, columns, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data",
@@ -74,18 +75,31 @@ export const Default: Story = {
 
 export const TanstackExample: Story = {
   render: () => {
-    const memoData = React.useMemo(() => sampleData, []);
-
     const table = useReactTable({
       columns,
-      data: memoData,
+      data: sampleData,
       getCoreRowModel: getCoreRowModel(),
       getSortedRowModel: getSortedRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
       globalFilterFn: "includesString",
       state: {},
       columnResizeMode: "onChange",
+      debugTable: true,
+      debugHeaders: true,
+      debugColumns: true,
     });
+
+    const columnSizeVars = () => {
+      const headers = table.getFlatHeaders();
+      const colSizes: { [key: string]: `${number}px` } = {};
+      for (let i = 0; i < headers.length; i++) {
+        const header = headers[i];
+        colSizes[`--header-${header.id}-size`] = `${header.getSize()}px`;
+        colSizes[`--col-${header.column.id}-size`] =
+          `${header.column.getSize()}px`;
+      }
+      return colSizes;
+    };
 
     return (
       <VStack gap="space-16">
@@ -141,7 +155,7 @@ export const TanstackExample: Story = {
           </Button>
         </DataActionBar>
 
-        <DataTable style={{ width: "3000px" }}>
+        <DataTable style={{ width: "3000px", ...columnSizeVars() }}>
           <DataTable.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (
@@ -150,7 +164,8 @@ export const TanstackExample: Story = {
                     return (
                       <DataTable.Th
                         key={header.id}
-                        size={header.getSize()}
+                        //size={header.getSize()}
+                        style={{ width: `var(--header-${header.id}-size)` }}
                         resizeHandler={header.getResizeHandler()}
                         pinningHandler={
                           header.column.getIsPinned() === "left"
@@ -178,26 +193,42 @@ export const TanstackExample: Story = {
               );
             })}
           </DataTable.Thead>
-          <DataTable.Tbody>
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <DataTable.Tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <DataTable.Td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </DataTable.Td>
-                    );
-                  })}
-                </DataTable.Tr>
-              );
-            })}
-          </DataTable.Tbody>
+
+          {table.getState().columnSizingInfo.isResizingColumn ? (
+            <MemoizedTableBody table={table} />
+          ) : (
+            <TableBody table={table} />
+          )}
         </DataTable>
       </VStack>
     );
   },
+  parameters: {
+    a11y: { disable: true },
+    controls: { disable: true },
+    docs: { disable: true },
+  },
 };
+
+const TableBody = ({ table }: { table: Table<PersonInfo> }) => (
+  <DataTable.Tbody>
+    {table.getRowModel().rows.map((row) => {
+      return (
+        <DataTable.Tr key={row.id}>
+          {row.getVisibleCells().map((cell) => {
+            return (
+              <DataTable.Td key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </DataTable.Td>
+            );
+          })}
+        </DataTable.Tr>
+      );
+    })}
+  </DataTable.Tbody>
+);
+
+const MemoizedTableBody = React.memo(
+  TableBody,
+  (prev, next) => prev.table.options.data === next.table.options.data,
+) as typeof TableBody;
