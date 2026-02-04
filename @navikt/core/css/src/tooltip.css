@@ -101,7 +101,7 @@
 .aksel-tooltip__keys {
   padding-bottom: var(--ax-space-4);
   display: flex;
-  gap: var(--ax-space-4);
+  gap: var(--ax-space-8);
 }
 
 .aksel-tooltip__key {

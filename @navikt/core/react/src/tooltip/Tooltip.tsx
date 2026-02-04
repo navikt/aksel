@@ -79,7 +79,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * List of Keyboard-keys for shortcuts.
    */
-  keys?: string[];
+  keys?: string[] | [string[], string[]];
   /**
    * When false, Tooltip labels the element, and child-elements content will be ignored by screen-readers.
    * When true, content is added as additional information to the child element.
@@ -204,7 +204,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           ref={refs.setReference}
           {...getReferenceProps()}
           {...labelProps}
-          aria-keyshortcuts={keys ? keys.join("+") : undefined}
+          aria-keyshortcuts={ariaShortcuts(keys)}
         >
           {children}
         </Slot>
@@ -232,15 +232,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               data-state="open"
             >
               {content}
-              {keys && (
-                <span className="aksel-tooltip__keys" aria-hidden>
-                  {keys.map((key) => (
-                    <Detail as="kbd" key={key} className="aksel-tooltip__key">
-                      {key}
-                    </Detail>
-                  ))}
-                </span>
-              )}
+              <TooltipShortcuts shortcuts={keys} />
               {_arrow && (
                 <div
                   ref={(node) => {
@@ -268,5 +260,47 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     );
   },
 );
+
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-keyshortcuts
+ * Space-separated shortcuts is valid syntax
+ */
+function ariaShortcuts(shortcuts: TooltipProps["keys"]) {
+  if (!shortcuts) {
+    return undefined;
+  }
+
+  if (Array.isArray(shortcuts[0])) {
+    return shortcuts.map((key) => key.join("+")).join(" ");
+  }
+
+  return shortcuts.join("+");
+}
+
+function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
+  if (!shortcuts) {
+    return null;
+  }
+
+  if (Array.isArray(shortcuts[0])) {
+    return (
+      <span className="aksel-tooltip__keys" aria-hidden>
+        {shortcuts.map((key) => (
+          <Detail as="kbd" key={key} className="aksel-tooltip__key">
+            {key.join("+")}
+          </Detail>
+        ))}
+      </span>
+    );
+  }
+
+  return (
+    <span className="aksel-tooltip__keys" aria-hidden>
+      <Detail as="kbd" className="aksel-tooltip__key">
+        {shortcuts.join("+")}
+      </Detail>
+    </span>
+  );
+}
 
 export default Tooltip;
