@@ -4,6 +4,7 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -84,7 +85,13 @@ export const TanstackExample: Story = {
       getSortedRowModel: getSortedRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
       globalFilterFn: "includesString",
-      /* getPaginationRowModel: getPaginationRowModel(), */
+      getPaginationRowModel: getPaginationRowModel(),
+      initialState: {
+        pagination: {
+          pageIndex: 1,
+          pageSize: 20,
+        },
+      },
       state: {},
       columnResizeMode: "onChange",
       debugTable: true,

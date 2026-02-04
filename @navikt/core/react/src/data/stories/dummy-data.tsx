@@ -1,6 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import React from "react";
-import { HStack } from "../../layout/stack";
 import { Tag } from "../../tag";
 
 // Helper function to get random integer between min and max (inclusive)
@@ -67,25 +66,27 @@ export const columns = [
     header: "Age",
     accessorKey: "age",
   },
-  {
-    header: "Force sensitive",
-    accessorKey: "forceSensitive",
-  },
+
+  columnHelper.accessor("forceSensitive", {
+    cell: (info) => {
+      const value = info.getValue();
+      return (
+        <Tag
+          size="small"
+          variant="moderate"
+          data-color={value ? "accent" : "warning"}
+        >{`${value ? "Yes" : "No"}`}</Tag>
+      );
+    },
+  }),
   {
     header: "Home system",
     accessorKey: "homeSystem",
   },
-  columnHelper.accessor("skills", {
-    cell: (info) => (
-      <HStack gap="space-8">
-        {info.getValue().map((skill) => (
-          <Tag key={skill} size="small">
-            {skill}
-          </Tag>
-        ))}
-      </HStack>
-    ),
-  }),
+  {
+    header: "Skills",
+    accessorKey: "skills",
+  },
 ];
 
 export const homeSystemOptions = [
