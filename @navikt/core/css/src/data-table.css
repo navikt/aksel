@@ -67,6 +67,8 @@
 
 .aksel-data-table__th-action-button {
   transition: 0.1s ease-in-out;
+
+  /* TODO: Animating all these sort of "stutters" a little now. Can some be removed? */
   transition-property: opacity, width, min-width, max-width, padding;
 
   &:focus-visible {
