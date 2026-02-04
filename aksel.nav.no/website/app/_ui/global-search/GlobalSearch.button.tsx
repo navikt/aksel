@@ -10,6 +10,7 @@ import {
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import {
   Bleed,
+  Box,
   Button,
   Detail,
   Dialog,
@@ -46,15 +47,11 @@ const SearchButton = forwardRef<
     setIsMac(/mac|iphone|ipad|ipod/.test(userAgent));
   }, []);
 
-  const keys = useMemo(() => {
+  const shortCutkey = useMemo(() => {
     if (isMac === null) {
-      return (
-        <Kbd>
-          <Loader size="small" title="Loading" />
-        </Kbd>
-      );
+      return <Loader size="xsmall" title="Finner operativsystemtype" />;
     }
-    return isMac ? <Kbd>⌘</Kbd> : <Kbd>Ctrl</Kbd>;
+    return isMac ? "⌘" : "Ctrl";
   }, [isMac]);
 
   return (
@@ -76,7 +73,9 @@ const SearchButton = forwardRef<
               Søk
               <HStack gap="space-2" asChild>
                 <Detail as="span">
-                  {keys}
+                  <Box className={styles.keyboardShortcut}>
+                    <Kbd>{shortCutkey}</Kbd>
+                  </Box>
                   <Kbd>k</Kbd>
                 </Detail>
               </HStack>

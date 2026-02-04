@@ -156,3 +156,9 @@
     display: block;
   }
 }
+
+.keyboardShortcut {
+  display: inline-block;
+  min-width: 5ch;
+  text-align: center;
+}
