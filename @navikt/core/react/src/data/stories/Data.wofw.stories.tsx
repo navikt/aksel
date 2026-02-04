@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-// eslint-disable-next-line no-restricted-imports
 import React, { useDeferredValue, useMemo, useState } from "react";
 import { VStack } from "../../layout/stack";
 import { DataTable } from "../table";
