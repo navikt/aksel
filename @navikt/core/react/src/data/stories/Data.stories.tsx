@@ -209,6 +209,25 @@ export const TanstackExample: Story = {
           ) : (
             <TableBody table={table} />
           )}
+          <DataTable.Tfoot>
+            {table.getFooterGroups().map((footerGroup) => (
+              <DataTable.Tr key={footerGroup.id}>
+                {footerGroup.headers.map((header) => (
+                  <DataTable.Td
+                    key={header.id}
+                    style={{ width: `var(--header-${header.id}-size)` }}
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.footer,
+                          header.getContext(),
+                        )}
+                  </DataTable.Td>
+                ))}
+              </DataTable.Tr>
+            ))}
+          </DataTable.Tfoot>
         </DataTable>
       </VStack>
     );
