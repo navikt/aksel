@@ -43,13 +43,13 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         className={cl("aksel-data-table__th", className)}
         style={{ width: size, ...style }}
       >
-        <HStack align="center" gap="space-8">
-          {children}
-          <Spacer />
+        <HStack align="center" gap="space-8" wrap={false}>
+          <div className="aksel-data-table__th-content">{children}</div>
           <DataTableThSortHandle
             sortDirection={sortDirection}
             onSortChange={onSortChange}
           />
+          <Spacer />
 
           <DataTableThActions>
             {/* TODO: onSortChange just rotates between the three states now */}
@@ -85,16 +85,16 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
               </ActionMenu.Item>
             )}
           </DataTableThActions>
-
-          {resizeHandler && (
-            <button
-              onMouseDown={resizeHandler}
-              onMouseUp={resizeHandler}
-              className={cl("aksel-data-table__th-resize-handle")}
-              data-color="neutral"
-            />
-          )}
         </HStack>
+
+        {resizeHandler && (
+          <button
+            onMouseDown={resizeHandler}
+            onMouseUp={resizeHandler}
+            className={cl("aksel-data-table__th-resize-handle")}
+            data-color="neutral"
+          />
+        )}
       </th>
     );
   },
