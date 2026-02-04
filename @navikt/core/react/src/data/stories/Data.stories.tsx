@@ -15,6 +15,7 @@ import { ActionMenu } from "../../overlays/action-menu";
 import DataActionBar from "../action-bar/root/DataActionBarRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
+import { DataTableProfiler } from "./DataTableProfiler";
 import { PersonInfo, columns, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
@@ -24,6 +25,7 @@ const meta: Meta<typeof DataTable> = {
     chromatic: { disable: true },
     layout: "padded",
   },
+  decorators: [(Story) => <DataTableProfiler>{Story()}</DataTableProfiler>],
 };
 
 export default meta;
@@ -82,6 +84,7 @@ export const TanstackExample: Story = {
       getSortedRowModel: getSortedRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
       globalFilterFn: "includesString",
+      /* getPaginationRowModel: getPaginationRowModel(), */
       state: {},
       columnResizeMode: "onChange",
       debugTable: true,
