@@ -174,15 +174,14 @@ export const TanstackExample: Story = {
                     return (
                       <DataTable.Th
                         key={header.id}
-                        //size={header.getSize()}
                         style={{ width: `var(--header-${header.id}-size)` }}
                         resizeHandler={header.getResizeHandler()}
-                        pinningHandler={
+                        /* pinningHandler={
                           header.column.getIsPinned() === "left"
                             ? () => header.column.pin(false)
                             : () => header.column.pin("left")
                         }
-                        isPinned={header.column.getIsPinned() === "left"}
+                        isPinned={header.column.getIsPinned() === "left"} */
                         sortDirection={header.column.getIsSorted() || "none"}
                         onSortChange={(_, event) => {
                           const handler =
