@@ -31,27 +31,26 @@ type withDsT = {
   background?: "inverted" | "subtle";
   minHeight?: string;
   showBreakpoints?: boolean;
-  showThemeSwitch?: boolean;
+  theme?: {
+    switch?: boolean;
+    forcedTheme?: "light" | "dark";
+  };
 };
 
 export const withDsExample = (
   Component: ComponentType,
-  {
-    variant,
-    background,
-    minHeight,
-    showBreakpoints,
-    showThemeSwitch = true,
-  }: withDsT = {},
+  { variant, background, minHeight, showBreakpoints, theme }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
     const pathname = usePathname() || "///";
     const pathParts = pathname.split("/");
+    const themeOptions = theme || {};
 
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
       setMounted(true);
     }, []);
+
     if (!mounted) {
       return null;
     }
@@ -64,7 +63,10 @@ export const withDsExample = (
           [styles.containerFull]: variant === "full",
           [styles.containerStaticFull]: variant === "static-full",
           [styles.containerFullscreen]: variant === "fullscreen",
+          light: themeOptions?.forcedTheme === "light",
+          dark: themeOptions?.forcedTheme === "dark",
         })}
+        data-color={themeOptions?.forcedTheme ? "accent" : undefined}
         style={{ background: getBg(background) }}
       >
         <Head>
@@ -74,11 +76,13 @@ export const withDsExample = (
             } - aksel.nav.no`}
           </title>
         </Head>
-        {showThemeSwitch && <ExampleThemingSwitch />}
+        {themeOptions?.switch && <ExampleThemingSwitch />}
         {showBreakpoints && <BreakpointText />}
         <main
           id="ds-example"
-          className={variant === "static" ? styles.exampleStatic : undefined}
+          className={cl({
+            [styles.exampleStatic]: variant === "static",
+          })}
           style={{ minHeight }}
         >
           <Component {...props} />
