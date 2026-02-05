@@ -1,14 +1,16 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../../utils/components/slot/Slot";
 import { FileUploadBaseProps } from "../FileUpload.types";
-import { useFileUpload } from "../useFileUpload";
+import { useFileUpload } from "../hooks/useFileUpload";
 
-export interface FileUploadTriggerProps
-  extends Omit<FileUploadBaseProps, "fileLimit"> {
+interface FileUploadTriggerProps extends Omit<
+  FileUploadBaseProps,
+  "fileLimit"
+> {
   children: React.ReactNode;
 }
 
-const Trigger = forwardRef<HTMLInputElement, FileUploadTriggerProps>(
+const FileUploadTrigger = forwardRef<HTMLInputElement, FileUploadTriggerProps>(
   (
     {
       children,
@@ -45,4 +47,6 @@ const Trigger = forwardRef<HTMLInputElement, FileUploadTriggerProps>(
   },
 );
 
-export default Trigger;
+export default FileUploadTrigger;
+export { FileUploadTrigger };
+export type { FileUploadTriggerProps };

@@ -8,7 +8,7 @@ import {
   FileTextIcon,
   FileWordIcon,
 } from "@navikt/aksel-icons";
-import { FileItem } from "./Item.types";
+import { FileItem } from "../item-root/FileUploadItemRoot.types";
 
 interface ItemIconProps {
   file: FileItem;
