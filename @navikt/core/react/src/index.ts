@@ -37,11 +37,11 @@ export {
   type InternalHeaderUserButtonProps,
   type InternalHeaderUserProps,
 } from "./internal-header";
-export { Bleed, type BleedProps } from "./layout/bleed";
-export { Box, type BoxProps, BoxNew, type BoxNewProps } from "./layout/box";
-export { HGrid, type HGridProps } from "./layout/grid";
-export { Page, type PageBlockProps, type PageProps } from "./layout/page";
-export { Hide, Show, type ResponsiveProps } from "./layout/responsive";
+export { Bleed, type BleedProps } from "./primitives/bleed";
+export { Box, type BoxProps, BoxNew, type BoxNewProps } from "./primitives/box";
+export { HGrid, type HGridProps } from "./primitives/grid";
+export { Page, type PageBlockProps, type PageProps } from "./primitives/page";
+export { Hide, Show, type ResponsiveProps } from "./primitives/responsive";
 export {
   HStack,
   Spacer,
@@ -50,7 +50,7 @@ export {
   type HStackProps,
   type StackProps,
   type VStackProps,
-} from "./layout/stack";
+} from "./primitives/stack";
 export { Link, type LinkProps } from "./link";
 export { List, type ListProps, type ListItemProps } from "./list";
 export { Loader, type LoaderProps } from "./loader";

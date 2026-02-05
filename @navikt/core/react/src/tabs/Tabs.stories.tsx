@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { DishwasherIcon, FreezerIcon, MugIcon } from "@navikt/aksel-icons";
 import { Tabs } from ".";
-import { VStack } from "../layout/stack";
+import { VStack } from "../primitives/stack";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
 export default {

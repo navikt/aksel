@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { PlantIcon } from "@navikt/aksel-icons";
 import { ExpansionCard, ExpansionCardProps } from ".";
 import { Checkbox } from "../form/checkbox";
-import { VStack } from "../layout/stack";
 import { Link } from "../link";
+import { VStack } from "../primitives/stack";
 import { BodyLong } from "../typography";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 

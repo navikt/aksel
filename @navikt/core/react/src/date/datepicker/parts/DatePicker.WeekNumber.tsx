@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { CalendarWeek, useDayPicker } from "react-day-picker";
 import { Button } from "../../../button";
-import { Hide, Show } from "../../../layout/responsive";
+import { Hide, Show } from "../../../primitives/responsive";
 import { Detail } from "../../../typography";
 import { cl } from "../../../utils/helpers";
 import { useDateTranslationContext } from "../../Date.locale";

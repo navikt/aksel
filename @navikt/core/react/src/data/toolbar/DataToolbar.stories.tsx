@@ -7,9 +7,9 @@ import {
 } from "@navikt/aksel-icons";
 import { Checkbox, CheckboxGroup } from "../../form/checkbox";
 import { Select } from "../../form/select";
-import { Spacer, VStack } from "../../layout/stack";
 import { ActionMenu } from "../../overlays/action-menu";
 import { Popover } from "../../popover";
+import { Spacer, VStack } from "../../primitives/stack";
 import { Tooltip } from "../../tooltip";
 import { DataToolbar } from "./index";
 

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useDeferredValue, useMemo, useState } from "react";
-import { VStack } from "../../layout/stack";
+import { VStack } from "../../primitives/stack";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
 import { PersonInfo, sampleData } from "./dummy-data";

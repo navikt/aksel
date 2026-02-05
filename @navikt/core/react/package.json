@@ -201,62 +201,62 @@
     },
     "./Bleed": {
       "import": {
-        "types": "./esm/layout/bleed/index.d.ts",
-        "default": "./esm/layout/bleed/index.js"
+        "types": "./esm/primitives/bleed/index.d.ts",
+        "default": "./esm/primitives/bleed/index.js"
       },
       "require": {
-        "types": "./cjs/layout/bleed/index.d.ts",
-        "default": "./cjs/layout/bleed/index.js"
+        "types": "./cjs/primitives/bleed/index.d.ts",
+        "default": "./cjs/primitives/bleed/index.js"
       }
     },
     "./Box": {
       "import": {
-        "types": "./esm/layout/box/index.d.ts",
-        "default": "./esm/layout/box/index.js"
+        "types": "./esm/primitives/box/index.d.ts",
+        "default": "./esm/primitives/box/index.js"
       },
       "require": {
-        "types": "./cjs/layout/box/index.d.ts",
-        "default": "./cjs/layout/box/index.js"
+        "types": "./cjs/primitives/box/index.d.ts",
+        "default": "./cjs/primitives/box/index.js"
       }
     },
     "./HGrid": {
       "import": {
-        "types": "./esm/layout/grid/index.d.ts",
-        "default": "./esm/layout/grid/index.js"
+        "types": "./esm/primitives/grid/index.d.ts",
+        "default": "./esm/primitives/grid/index.js"
       },
       "require": {
-        "types": "./cjs/layout/grid/index.d.ts",
-        "default": "./cjs/layout/grid/index.js"
+        "types": "./cjs/primitives/grid/index.d.ts",
+        "default": "./cjs/primitives/grid/index.js"
       }
     },
     "./Page": {
       "import": {
-        "types": "./esm/layout/page/index.d.ts",
-        "default": "./esm/layout/page/index.js"
+        "types": "./esm/primitives/page/index.d.ts",
+        "default": "./esm/primitives/page/index.js"
       },
       "require": {
-        "types": "./cjs/layout/page/index.d.ts",
-        "default": "./cjs/layout/page/index.js"
+        "types": "./cjs/primitives/page/index.d.ts",
+        "default": "./cjs/primitives/page/index.js"
       }
     },
     "./Responsive": {
       "import": {
-        "types": "./esm/layout/responsive/index.d.ts",
-        "default": "./esm/layout/responsive/index.js"
+        "types": "./esm/primitives/responsive/index.d.ts",
+        "default": "./esm/primitives/responsive/index.js"
       },
       "require": {
-        "types": "./cjs/layout/responsive/index.d.ts",
-        "default": "./cjs/layout/responsive/index.js"
+        "types": "./cjs/primitives/responsive/index.d.ts",
+        "default": "./cjs/primitives/responsive/index.js"
       }
     },
     "./Stack": {
       "import": {
-        "types": "./esm/layout/stack/index.d.ts",
-        "default": "./esm/layout/stack/index.js"
+        "types": "./esm/primitives/stack/index.d.ts",
+        "default": "./esm/primitives/stack/index.js"
       },
       "require": {
-        "types": "./cjs/layout/stack/index.d.ts",
-        "default": "./cjs/layout/stack/index.js"
+        "types": "./cjs/primitives/stack/index.d.ts",
+        "default": "./cjs/primitives/stack/index.js"
       }
     },
     "./Link": {

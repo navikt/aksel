@@ -3,8 +3,8 @@ import React from "react";
 import { MenuElipsisVerticalCircleIcon } from "@navikt/aksel-icons";
 import { FileItem, FileUpload } from ".";
 import { Button } from "../../button";
-import { VStack } from "../../layout/stack";
 import { ActionMenu } from "../../overlays/action-menu";
+import { VStack } from "../../primitives/stack";
 
 const meta: Meta<typeof FileUpload.Item> = {
   title: "ds-react/FileUpload/Item",
