@@ -3,9 +3,9 @@ export {
   default as Collapsible,
   CollapsibleTrigger,
   CollapsibleContent,
-} from "./Collapsible";
+} from "./root/CollapsibleRoot";
 export type {
   CollapsibleProps,
   CollapsibleTriggerProps,
   CollapsibleContentProps,
-} from "./Collapsible";
+} from "./root/CollapsibleRoot";
