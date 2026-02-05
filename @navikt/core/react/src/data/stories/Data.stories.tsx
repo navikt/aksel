@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
-  ColumnPinningState,
+  Table,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { useState } from "react";
+import React from "react";
 import { CogIcon, RectangleSectionsIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
@@ -14,7 +16,8 @@ import { ActionMenu } from "../../overlays/action-menu";
 import DataActionBar from "../action-bar/root/DataActionBarRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
-import { columns, sampleData } from "./dummy-data";
+import { DataTableProfiler } from "./DataTableProfiler";
+import { PersonInfo, columns, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data",
@@ -23,6 +26,7 @@ const meta: Meta<typeof DataTable> = {
     chromatic: { disable: true },
     layout: "padded",
   },
+  decorators: [(Story) => <DataTableProfiler>{Story()}</DataTableProfiler>],
 };
 
 export default meta;
@@ -74,34 +78,45 @@ export const Default: Story = {
 
 export const TanstackExample: Story = {
   render: () => {
-    const [globalFilter, setGlobalFilter] = useState<string>();
-    const [columnVisibility, setColumnVisibility] = React.useState({});
-    const [columnPinning, setColumnPinning] =
-      React.useState<ColumnPinningState>({ left: [], right: [] });
-
     const table = useReactTable({
       columns,
       data: sampleData,
       getCoreRowModel: getCoreRowModel(),
+      getSortedRowModel: getSortedRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
       globalFilterFn: "includesString",
-      state: {
-        globalFilter,
-        columnVisibility,
-        columnPinning,
+      getPaginationRowModel: getPaginationRowModel(),
+      initialState: {
+        pagination: {
+          pageIndex: 1,
+          pageSize: 20,
+        },
       },
-      onColumnPinningChange: setColumnPinning,
-      onGlobalFilterChange: setGlobalFilter,
-      onColumnVisibilityChange: setColumnVisibility,
+      state: {},
       columnResizeMode: "onChange",
+      debugTable: true,
+      debugHeaders: true,
+      debugColumns: true,
     });
+
+    const columnSizeVars = () => {
+      const headers = table.getFlatHeaders();
+      const colSizes: { [key: string]: `${number}px` } = {};
+      for (let i = 0; i < headers.length; i++) {
+        const header = headers[i];
+        colSizes[`--header-${header.id}-size`] = `${header.getSize()}px`;
+        colSizes[`--col-${header.column.id}-size`] =
+          `${header.column.getSize()}px`;
+      }
+      return colSizes;
+    };
 
     return (
       <VStack gap="space-16">
         <DataToolbar>
           <DataToolbar.SearchField
             label="Tekstfilter"
-            onChange={(e) => setGlobalFilter(e)}
+            onChange={(value) => table.setGlobalFilter(value)}
           />
           <DataToolbar.ToggleButton icon={<RectangleSectionsIcon />} />
           <ActionMenu>
@@ -150,7 +165,7 @@ export const TanstackExample: Story = {
           </Button>
         </DataActionBar>
 
-        <DataTable style={{ width: "3000px" }}>
+        <DataTable style={{ width: "3000px", ...columnSizeVars() }}>
           <DataTable.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (
@@ -159,14 +174,20 @@ export const TanstackExample: Story = {
                     return (
                       <DataTable.Th
                         key={header.id}
-                        size={header.getSize()}
+                        style={{ width: `var(--header-${header.id}-size)` }}
                         resizeHandler={header.getResizeHandler()}
-                        pinningHandler={
+                        /* pinningHandler={
                           header.column.getIsPinned() === "left"
                             ? () => header.column.pin(false)
                             : () => header.column.pin("left")
                         }
-                        isPinned={header.column.getIsPinned() === "left"}
+                        isPinned={header.column.getIsPinned() === "left"} */
+                        sortDirection={header.column.getIsSorted() || "none"}
+                        onSortChange={(_, event) => {
+                          const handler =
+                            header.column.getToggleSortingHandler();
+                          handler?.(event);
+                        }}
                       >
                         {header.isPlaceholder
                           ? null
@@ -181,26 +202,61 @@ export const TanstackExample: Story = {
               );
             })}
           </DataTable.Thead>
-          <DataTable.Tbody>
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <DataTable.Tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <DataTable.Td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
+
+          {table.getState().columnSizingInfo.isResizingColumn ? (
+            <MemoizedTableBody table={table} />
+          ) : (
+            <TableBody table={table} />
+          )}
+          <DataTable.Tfoot>
+            {table.getFooterGroups().map((footerGroup) => (
+              <DataTable.Tr key={footerGroup.id}>
+                {footerGroup.headers.map((header) => (
+                  <DataTable.Td
+                    key={header.id}
+                    style={{ width: `var(--header-${header.id}-size)` }}
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.footer,
+                          header.getContext(),
                         )}
-                      </DataTable.Td>
-                    );
-                  })}
-                </DataTable.Tr>
-              );
-            })}
-          </DataTable.Tbody>
+                  </DataTable.Td>
+                ))}
+              </DataTable.Tr>
+            ))}
+          </DataTable.Tfoot>
         </DataTable>
       </VStack>
     );
   },
+  parameters: {
+    a11y: { disable: true },
+    controls: { disable: true },
+    docs: { disable: true },
+  },
 };
+
+const TableBody = ({ table }: { table: Table<PersonInfo> }) => (
+  <DataTable.Tbody>
+    {table.getRowModel().rows.map((row) => {
+      return (
+        <DataTable.Tr key={row.id}>
+          {row.getVisibleCells().map((cell) => {
+            return (
+              <DataTable.Td key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </DataTable.Td>
+            );
+          })}
+        </DataTable.Tr>
+      );
+    })}
+  </DataTable.Tbody>
+);
+
+const MemoizedTableBody = React.memo(
+  TableBody,
+  (prev, next) => prev.table.options.data === next.table.options.data,
+) as typeof TableBody;

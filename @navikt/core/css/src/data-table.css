@@ -1,8 +1,3 @@
-.aksel-data-table__th-resize-handle {
-  cursor: col-resize;
-  margin-left: auto;
-}
-
 /* TODO: Overflow does not currently work with fixed table layout. No idea why... */
 .aksel-data-table__wrapper {
   overflow-x: auto;
@@ -34,11 +29,59 @@
 }
 
 .aksel-data-table__th {
+  position: relative;
   background-color: var(--ax-bg-neutral-soft);
   color: var(--ax-text-neutral);
   padding-inline: var(--ax-space-16);
   text-align: start;
-  vertical-align: middle;
+  border-inline-end: 1px solid var(--ax-border-neutral-subtle);
+  overflow: hidden;
+
+  &:first-child {
+    border-inline-start: 1px solid var(--ax-border-neutral-subtle);
+  }
+}
+
+.aksel-data-table__th-content {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.aksel-data-table__th-resize-handle {
+  z-index: 2;
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: -3px;
+  cursor: col-resize;
+  margin: 0;
+  padding: 0;
+  width: 5px;
+  background: var(--ax-bg-neutral-strong);
+  border: none;
+
+  &:hover {
+    background: var(--ax-bg-neutral-strong-pressed);
+  }
+}
+
+.aksel-data-table__th-action-button {
+  transition: 0.1s ease-in-out;
+
+  /* TODO: Animating all these sort of "stutters" a little now. Can some be removed? */
+  transition-property: opacity, width, min-width, max-width, padding;
+
+  &:focus-visible {
+    transition: none;
+  }
+
+  &:not(.aksel-data-table__th:hover &, &:focus-visible, &[data-expanded="true"]) {
+    opacity: 0;
+    min-width: 0;
+    max-width: 0;
+    padding: 0;
+    overflow: hidden;
+  }
 }
 
 .aksel-data-table__td {
@@ -49,10 +92,19 @@
   color: var(--ax-text-neutral-subtle);
   padding-inline: 1rem;
   overflow: hidden;
+  border-inline-end: 1px solid var(--ax-border-neutral-subtle);
+
+  &:first-child {
+    border-inline-start: 1px solid var(--ax-border-neutral-subtle);
+  }
 
   & > div {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
+}
+
+.aksel-data-table__tfoot {
+  background-color: var(--ax-bg-raised);
 }

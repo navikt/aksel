@@ -9,6 +9,10 @@ import {
   type DataTableTbodyProps,
 } from "../tbody/DataTableTbody";
 import { DataTableTd, type DataTableTdProps } from "../td/DataTableTd";
+import {
+  DataTableTfoot,
+  type DataTableTfootProps,
+} from "../tfoot/DataTableTfoot";
 import { DataTableTh, type DataTableThProps } from "../th/DataTableTh";
 import {
   DataTableThead,
@@ -101,6 +105,18 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
    * ```
    */
   Td: typeof DataTableTd;
+  /**
+   * @see 🏷️ {@link DataTableTfootProps}
+   * @example
+   * ```jsx
+   * <DataTable>
+   *   <DataTable.Tfoot>
+   *     ...
+   *   </DataTable.Tfoot>
+   * </DataTable>
+   * ```
+   */
+  Tfoot: typeof DataTableTfoot;
 }
 
 const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
@@ -123,6 +139,7 @@ DataTable.Tbody = DataTableTbody;
 DataTable.Th = DataTableTh;
 DataTable.Tr = DataTableTr;
 DataTable.Td = DataTableTd;
+DataTable.Tfoot = DataTableTfoot;
 
 export {
   DataTable,
@@ -132,6 +149,7 @@ export {
   DataTableTh,
   DataTableThead,
   DataTableTr,
+  DataTableTfoot,
 };
 export default DataTable;
 export type {
@@ -142,4 +160,5 @@ export type {
   DataTableThProps,
   DataTableTheadProps,
   DataTableTrProps,
+  DataTableTfootProps,
 };

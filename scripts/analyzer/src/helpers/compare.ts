@@ -12,6 +12,8 @@ type ExportConfigDiff = {
   bundleSize: {
     gzip: number;
     minified: number;
+    gzipPercent: number;
+    minifiedPercent: number;
   };
 };
 
@@ -80,21 +82,34 @@ function compareResults({
     const sizeDiff: ExportConfigDiff["bundleSize"] = {
       gzip: 0,
       minified: 0,
+      gzipPercent: 0,
+      minifiedPercent: 0,
     };
 
     if (trunkConfig?.bundleSize && !branchConfig?.bundleSize) {
       sizeDiff.gzip = -(trunkConfig.bundleSize.gzip ?? 0);
       sizeDiff.minified = -(trunkConfig.bundleSize.minified ?? 0);
+      sizeDiff.gzipPercent = -100;
+      sizeDiff.minifiedPercent = -100;
     } else if (!trunkConfig?.bundleSize && branchConfig?.bundleSize) {
       sizeDiff.gzip = branchConfig.bundleSize.gzip ?? 0;
       sizeDiff.minified = branchConfig.bundleSize.minified ?? 0;
+      sizeDiff.gzipPercent = 100;
+      sizeDiff.minifiedPercent = 100;
     } else if (trunkConfig?.bundleSize && branchConfig?.bundleSize) {
-      sizeDiff.gzip =
-        (branchConfig.bundleSize.gzip ?? 0) -
-        (trunkConfig.bundleSize.gzip ?? 0);
-      sizeDiff.minified =
-        (branchConfig.bundleSize.minified ?? 0) -
-        (trunkConfig.bundleSize.minified ?? 0);
+      const trunkGzip = trunkConfig.bundleSize.gzip ?? 0;
+      const branchGzip = branchConfig.bundleSize.gzip ?? 0;
+      const trunkMinified = trunkConfig.bundleSize.minified ?? 0;
+      const branchMinified = branchConfig.bundleSize.minified ?? 0;
+
+      sizeDiff.gzip = branchGzip - trunkGzip;
+      sizeDiff.minified = branchMinified - trunkMinified;
+      sizeDiff.gzipPercent =
+        trunkGzip > 0 ? ((branchGzip - trunkGzip) / trunkGzip) * 100 : 0;
+      sizeDiff.minifiedPercent =
+        trunkMinified > 0
+          ? ((branchMinified - trunkMinified) / trunkMinified) * 100
+          : 0;
     }
 
     pathDiffs[pathKey] = {
