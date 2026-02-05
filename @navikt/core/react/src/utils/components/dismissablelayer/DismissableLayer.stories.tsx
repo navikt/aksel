@@ -1,5 +1,5 @@
 import React, { StrictMode, useRef, useState } from "react";
-import { HStack, VStack } from "../../primitives/stack";
+import { HStack, VStack } from "../../../primitives/stack";
 import { DismissableLayer } from "./DismissableLayer";
 
 export default {

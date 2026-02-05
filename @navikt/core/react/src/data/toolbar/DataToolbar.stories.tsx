@@ -5,9 +5,9 @@ import {
   CogIcon,
   RectangleSectionsIcon,
 } from "@navikt/aksel-icons";
+import { ActionMenu } from "../../action-menu";
 import { Checkbox, CheckboxGroup } from "../../form/checkbox";
 import { Select } from "../../form/select";
-import { ActionMenu } from "../../overlays/action-menu";
 import { Popover } from "../../popover";
 import { Spacer, VStack } from "../../primitives/stack";
 import { Tooltip } from "../../tooltip";

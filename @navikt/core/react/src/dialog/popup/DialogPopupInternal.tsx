@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
 import { BoxNew, type BoxNewProps } from "../../primitives/box";
+import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
 import { cl } from "../../utils/helpers";

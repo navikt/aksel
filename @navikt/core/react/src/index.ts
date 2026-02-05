@@ -1,6 +1,6 @@
 "use client";
 export { Accordion, type AccordionProps } from "./accordion";
-export { ActionMenu, type ActionMenuProps } from "./overlays/action-menu";
+export { ActionMenu, type ActionMenuProps } from "./action-menu";
 export { Alert, type AlertProps } from "./alert";
 export { Button, type ButtonProps } from "./button";
 export { Chat, type ChatProps } from "./chat";

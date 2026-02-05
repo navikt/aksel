@@ -1,11 +1,13 @@
 import React, { forwardRef, useCallback, useEffect, useRef } from "react";
-import { Slot } from "../../../utils/components/slot/Slot";
-import { composeEventHandlers, ownerDocument } from "../../../utils/helpers";
-import type { DescendantsManager } from "../../../utils/hooks";
-import { useEventCallback, useMergeRefs } from "../../../utils/hooks";
+import { composeEventHandlers, ownerDocument } from "../../../helpers";
+import type { DescendantsManager } from "../../../hooks";
+import { useEventCallback, useMergeRefs } from "../../../hooks";
+import { Slot } from "../../slot/Slot";
 
-interface RovingFocusProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "tabIndex"> {
+interface RovingFocusProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "tabIndex"
+> {
   asChild?: boolean;
   descendants: DescendantsManager<HTMLDivElement, any>;
   onEntryFocus?: (event: Event) => void;

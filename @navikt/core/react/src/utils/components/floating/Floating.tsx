@@ -18,16 +18,16 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useModalContext } from "../../modal/Modal.context";
-import { useClientLayoutEffect } from "../../utils-external";
-import { Slot } from "../../utils/components/slot/Slot";
-import { createStrictContext } from "../../utils/helpers";
+import { useModalContext } from "../../../modal/Modal.context";
+import { useClientLayoutEffect } from "../../../utils-external";
+import { createStrictContext } from "../../helpers";
 import {
   useEventCallback,
   useMergeRefs,
   useOpenChangeAnimationComplete,
-} from "../../utils/hooks";
-import type { AsChildProps } from "../../utils/types";
+} from "../../hooks";
+import type { AsChildProps } from "../../types";
+import { Slot } from "../slot/Slot";
 import {
   type Align,
   type Measurable,
