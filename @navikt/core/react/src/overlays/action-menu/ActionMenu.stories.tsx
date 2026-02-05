@@ -343,6 +343,9 @@ export const Submenus: Story = {
           <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
           </ActionMenu.Item>
+          <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+            Item 2 with a little longer name
+          </ActionMenu.Item>
           <ActionMenu.Sub open={props.open}>
             <ActionMenu.SubTrigger>Submenu 1</ActionMenu.SubTrigger>
             <ActionMenu.SubContent>
@@ -733,7 +736,7 @@ export const IconPosition: Story = {
               onSelect={() => console.log("Item 1 clicked")}
               icon={<StarIcon aria-hidden />}
             >
-              Item 1
+              Item 1 with quite a long text for testing
             </ActionMenu.Item>
             <ActionMenu.Item
               onSelect={() => console.log("Item 2 clicked")}

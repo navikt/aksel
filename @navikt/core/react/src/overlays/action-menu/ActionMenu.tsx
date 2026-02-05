@@ -939,7 +939,7 @@ export const ActionMenuSubTrigger = forwardRef<
             {icon}
           </Marker>
         )}
-        <Marker placement="right" className="aksel-action-menu__marker-icon">
+        <Marker placement="right">
           <ChevronRightIcon aria-hidden />
         </Marker>
       </Menu.SubTrigger>
