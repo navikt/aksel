@@ -1,0 +1,3 @@
+const AVALIABLE_MARKDOWN_ROUTES: string[] = [];
+
+export { AVALIABLE_MARKDOWN_ROUTES };

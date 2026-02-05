@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { AVALIABLE_MARKDOWN_ROUTES } from "@/app/api/markdown/llm.config";
 import { sanityClient } from "@/sanity/client.server";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
@@ -27,6 +28,10 @@ export async function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
+  const { pathname } = req.nextUrl;
+
+  const url = req.nextUrl.clone();
+
   if (
     ignoredPaths.some((prefix) => req.nextUrl.pathname.startsWith(prefix)) ||
     ignoredStaticPaths.some((prefix) => req.nextUrl.pathname === prefix)
@@ -34,7 +39,6 @@ export async function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const url = req.nextUrl.clone();
   if (
     url.pathname.startsWith("/sandbox") &&
     !url.pathname.includes("index.html") &&
@@ -76,6 +80,17 @@ export async function proxy(req: NextRequest) {
         return NextResponse.redirect(new URL(redirect.destination));
       }
       return NextResponse.redirect(new URL(redirect.destination, req.url));
+    }
+
+    /* Check if the request is for a markdown version (.md extension) */
+    if (
+      pathname.endsWith(".md") &&
+      AVALIABLE_MARKDOWN_ROUTES.includes(pathname.slice(0, -3))
+    ) {
+      /* Rewrite to the markdown API route with the original path as a parameter */
+      url.pathname = "/api/markdown";
+
+      return NextResponse.rewrite(url);
     }
 
     return NextResponse.next();
