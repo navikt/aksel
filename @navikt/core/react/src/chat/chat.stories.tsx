@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { PersonIcon } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import Chat, { POSITIONS, SIZES, VARIANTS } from "./Chat";
@@ -200,16 +201,17 @@ export const ToptextPosition: Story = {
 
 export const Avatar: Story = {
   render: () => (
-    <Chat avatar={<Illustration />}>
-      <Chat.Bubble>
-        Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-      </Chat.Bubble>
-      <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
-      <Chat.Bubble>
-        Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
-        labore nisi ut.
-      </Chat.Bubble>
-    </Chat>
+    <>
+      <Chat avatar={<PersonIcon />}>
+        <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
+      </Chat>
+      <Chat avatar={<Illustration />}>
+        <Chat.Bubble>
+          Adipisicing laborum est eu laborum est sit in commodo enim sint
+          laboris labore nisi ut.
+        </Chat.Bubble>
+      </Chat>
+    </>
   ),
 };
 
