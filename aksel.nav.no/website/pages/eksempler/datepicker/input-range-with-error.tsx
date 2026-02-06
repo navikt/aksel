@@ -9,11 +9,10 @@ import {
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const { datepickerProps, toInputProps, fromInputProps, selectedRange } =
-    useRangeDatepicker({
-      fromDate: new Date("Aug 23 2019"),
-      onRangeChange: console.info,
-    });
+  const { datepickerProps, toInputProps, fromInputProps } = useRangeDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    onRangeChange: console.info,
+  });
 
   return (
     <Box minHeight="24rem">
@@ -46,12 +45,6 @@ const Example = () => {
           </div>
         </VStack>
       </DatePicker>
-      {selectedRange && (
-        <Box paddingBlock="space-16 space-0">
-          <div>{selectedRange?.from?.toDateString()}</div>
-          <div>{selectedRange?.to?.toDateString()}</div>
-        </Box>
-      )}
     </Box>
   );
 };
