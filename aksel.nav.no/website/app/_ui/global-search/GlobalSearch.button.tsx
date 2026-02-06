@@ -15,7 +15,6 @@ import {
   Detail,
   Dialog,
   HStack,
-  Loader,
   Show,
 } from "@navikt/ds-react";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
@@ -49,7 +48,7 @@ const SearchButton = forwardRef<
 
   const shortCutkey = useMemo(() => {
     if (isMac === null) {
-      return <Loader size="xsmall" title="Finner operativsystemtype" />;
+      return "⌘";
     }
     return isMac ? "⌘" : "Ctrl";
   }, [isMac]);
@@ -73,7 +72,10 @@ const SearchButton = forwardRef<
               Søk
               <HStack gap="space-2" asChild>
                 <Detail as="span">
-                  <Box className={styles.keyboardShortcut}>
+                  <Box
+                    className={styles.keyboardShortcut}
+                    data-loaded={isMac !== null}
+                  >
                     <Kbd>{shortCutkey}</Kbd>
                   </Box>
                   <Kbd>k</Kbd>
