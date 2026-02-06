@@ -105,6 +105,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           onDragOver={dropzoneCtx.onDragOver}
           onDragLeave={dropzoneCtx.onDragLeave}
           onDrop={dropzoneCtx.onDrop}
+          // eslint-disable-next-line react-hooks/refs
           onClick={composeEventHandlers(onClick, () =>
             inputRef.current?.click(),
           )}

@@ -46,6 +46,7 @@ type Stable<T extends Callback> = {
 
 function useEventCallback<T extends Callback>(callback: T | undefined): T {
   const stable = useRefWithInit(createStableCallback).current as Stable<T>;
+  // eslint-disable-next-line react-hooks/immutability
   stable.next = callback;
   useSafeInsertionEffect(stable.effect);
   return stable.trampoline;

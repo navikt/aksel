@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/refs */
 import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Alert } from "../../alert";
