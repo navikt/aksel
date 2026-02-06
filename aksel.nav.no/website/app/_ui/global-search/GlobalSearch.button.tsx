@@ -36,7 +36,7 @@ const SearchButton = forwardRef<
       {...rest}
       ref={forwardedRef}
       variant="secondary-neutral"
-      aria-keyshortcuts="Control+k"
+      aria-keyshortcuts={isMac ? "Meta+k" : "Control+k"}
     >
       <Bleed asChild marginInline={{ xs: "space-8", md: "space-8 space-0" }}>
         <HStack gap="space-6" align="center" as="span">
