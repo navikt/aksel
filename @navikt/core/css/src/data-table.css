@@ -1,0 +1,128 @@
+/* TODO: Overflow does not currently work with fixed table layout. No idea why... */
+.aksel-data-table__wrapper {
+  overflow-x: auto;
+  width: 100%;
+  position: relative;
+}
+
+.aksel-data-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  width: 1px; /* This is for some reason needed to make the browser respect the column width. TODO: Test in all browsers */
+
+  /*
+  We should NOT set min-width:100% b.c. it will cause inconsistencies in column resizing.
+  We could discuss whether it matters, though. But it feels buggy.
+  Downside is that it looks weird when the table is smaller than the container.
+  Maybe we could "manually" resize the other columns so that it fills the container? But that would add a lot of complexity.
+  We could have a toggle for the resize feature, and let the consumer decide which downside they prefer. Might need that anyways.
+  */
+}
+
+.aksel-data-table__thead {
+  background-color: var(--ax-bg-raised);
+}
+
+.aksel-data-table__tbody {
+  background-color: var(--ax-bg-raised);
+}
+
+.aksel-data-table__tr {
+  border: none;
+  block-size: 3rem;
+}
+
+.aksel-data-table__th {
+  position: relative;
+  background-color: var(--ax-bg-neutral-soft);
+  color: var(--ax-text-neutral);
+  padding-inline: var(--ax-space-16);
+  text-align: start;
+  border-inline-end: 1px solid var(--ax-border-neutral-subtle);
+  overflow: hidden;
+
+  &:first-child {
+    border-inline-start: 1px solid var(--ax-border-neutral-subtle);
+  }
+}
+
+.aksel-data-table__th-content {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.aksel-data-table__th-resize-handle {
+  z-index: 2;
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0; /* TODO: See if we can make the handle appear right between the columns */
+  cursor: col-resize;
+  margin: 0;
+  padding: 0;
+  width: 12px; /* TODO: Violation of WCAG SC 2.5.8 Target Size https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html */
+  border: none;
+  background: transparent;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: 4px;
+  }
+
+  &:hover::after {
+    /* TODO: Consider if the resize-handle should be visible already when hovering the column header */
+    background: var(--ax-bg-accent-strong);
+  }
+
+  &:active::after {
+    background: var(--ax-bg-accent-strong-pressed);
+  }
+}
+
+.aksel-data-table__th-action-button {
+  transition: 0.1s ease-in-out;
+
+  /* TODO: Animating all these sort of "stutters" a little now. Can some be removed? */
+  transition-property: opacity, width, min-width, max-width, padding;
+
+  &:focus-visible {
+    transition: none;
+  }
+
+  &:not(.aksel-data-table__th:hover &, &:focus-visible, &[data-expanded="true"]) {
+    opacity: 0;
+    min-width: 0;
+    max-width: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+.aksel-data-table__td {
+  text-align: start;
+  vertical-align: middle;
+  border-block-end: 1px solid var(--ax-border-neutral-subtle);
+  border-block-start: 1px solid var(--ax-bg-raised);
+  color: var(--ax-text-neutral-subtle);
+  padding-inline: 1rem;
+  overflow: hidden;
+  border-inline-end: 1px solid var(--ax-border-neutral-subtle);
+
+  &:first-child {
+    border-inline-start: 1px solid var(--ax-border-neutral-subtle);
+  }
+
+  & > div {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.aksel-data-table__tfoot {
+  background-color: var(--ax-bg-raised);
+}

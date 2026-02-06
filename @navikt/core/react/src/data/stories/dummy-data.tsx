@@ -1,6 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import React from "react";
-import { HStack } from "../../layout/stack";
 import { Tag } from "../../tag";
 
 // Helper function to get random integer between min and max (inclusive)
@@ -18,7 +17,7 @@ const getRandomItems = <T,>(arr: T[], min = 1, max = 5): T[] => {
   return shuffled.slice(0, count);
 };
 
-interface PersonInfo {
+export interface PersonInfo {
   // id: number;
   name: string;
   nationalId: string;
@@ -66,26 +65,49 @@ export const columns = [
   {
     header: "Age",
     accessorKey: "age",
+    footer: ({ table }) => {
+      const ages: number[] = [];
+      table.getFilteredRowModel().rows.forEach((row) => {
+        const value = row.getValue("age");
+        value && ages.push(value);
+      });
+      return `Avg: ${(ages.reduce((a, b) => a + b, 0) / ages.length).toFixed(2)}`;
+    },
   },
-  {
-    header: "Force sensitive",
-    accessorKey: "forceSensitive",
-  },
+
+  columnHelper.accessor("forceSensitive", {
+    cell: (info) => {
+      const value = info.getValue();
+      return (
+        <Tag
+          size="small"
+          variant="moderate"
+          data-color={value ? "accent" : "warning"}
+        >{`${value ? "Yes" : "No"}`}</Tag>
+      );
+    },
+    footer: ({ table }) => {
+      const totals = new Map();
+      totals.set("Yes", 0);
+      totals.set("No", 0);
+      table.getFilteredRowModel().rows.forEach((row) => {
+        const value = row.getValue("forceSensitive");
+        totals.set(
+          value ? "Yes" : "No",
+          (totals.get(value ? "Yes" : "No") ?? 0) + 1,
+        );
+      });
+      return `Yes: ${totals.get("Yes")}, No: ${totals.get("No")}`;
+    },
+  }),
   {
     header: "Home system",
     accessorKey: "homeSystem",
   },
-  columnHelper.accessor("skills", {
-    cell: (info) => (
-      <HStack gap="space-8">
-        {info.getValue().map((skill) => (
-          <Tag key={skill} size="small">
-            {skill}
-          </Tag>
-        ))}
-      </HStack>
-    ),
-  }),
+  {
+    header: "Skills",
+    accessorKey: "skills",
+  },
 ];
 
 export const homeSystemOptions = [

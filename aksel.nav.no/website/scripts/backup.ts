@@ -19,6 +19,7 @@ const main = async () => {
   await exportDataset({
     // Instance of @sanity/client configured to correct project ID and dataset
     client,
+    compress: true,
 
     // Name of dataset to export
     dataset: "production",

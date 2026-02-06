@@ -38,7 +38,6 @@ module.exports = {
           !isExampleHOC &&
           !isAliasImport
         ) {
-          console.error({ fileContent, hasSandbox });
           context.report({
             node,
             message:

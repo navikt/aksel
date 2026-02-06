@@ -1,4 +1,3 @@
-// eslint-disable-next-line aksel-local/import-check
 import { useTheme } from "next-themes";
 import { ExternalLinkIcon, MenuGridIcon } from "@navikt/aksel-icons";
 import { ActionMenu, InternalHeader, Spacer, Theme } from "@navikt/ds-react";
@@ -85,5 +84,5 @@ export const args = {
   index: 4,
   title: "App-meny",
   desc: "App-menyen inneholder lenker til andre interne systemer.",
-  sandboxEnabled: false,
+  sandbox: false,
 };

@@ -7,6 +7,7 @@ export {
   DataTableTr,
   DataTableTh,
   DataTableTd,
+  DataTableTfoot,
 } from "./root/DataTableRoot";
 export type {
   DataTableProps,
@@ -16,4 +17,5 @@ export type {
   DataTableTrProps,
   DataTableThProps,
   DataTableTdProps,
+  DataTableTfootProps,
 } from "./root/DataTableRoot";

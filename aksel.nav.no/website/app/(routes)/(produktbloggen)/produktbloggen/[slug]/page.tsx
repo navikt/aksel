@@ -79,12 +79,6 @@ export default async function Page({ params }: Props) {
     params: { slug: parsedSlug },
   });
 
-  const publishedAtRaw = pageData?.publishedAt ?? "";
-  const avatars = queryToAvatars(pageData?.writers ?? []);
-  const publishDate = formatDateString(publishedAtRaw);
-
-  const imageUrl = urlForImage(pageData?.seo?.image)?.quality(100).url();
-
   if (!pageData?._id) {
     notFound();
   }
@@ -92,6 +86,12 @@ export default async function Page({ params }: Props) {
   if (!pageData.content || !pageData.heading) {
     return null;
   }
+
+  const publishedAtRaw = pageData?.publishedAt ?? "";
+  const avatars = queryToAvatars(pageData?.writers ?? []);
+  const publishDate = formatDateString(publishedAtRaw);
+
+  const imageUrl = urlForImage(pageData?.seo?.image)?.quality(100).url();
 
   return (
     <>

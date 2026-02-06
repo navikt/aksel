@@ -1,8 +1,22 @@
 "use client";
 
-import { type ButtonHTMLAttributes, forwardRef } from "react";
+import {
+  type ButtonHTMLAttributes,
+  forwardRef,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Bleed, Button, Detail, Dialog, HStack, Show } from "@navikt/ds-react";
+import {
+  Bleed,
+  Box,
+  Button,
+  Detail,
+  Dialog,
+  HStack,
+  Show,
+} from "@navikt/ds-react";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import styles from "./GlobalSearch.module.css";
 
@@ -25,6 +39,20 @@ const SearchButton = forwardRef<
   HTMLButtonElement,
   ButtonHTMLAttributes<HTMLButtonElement>
 >((props, forwardedRef) => {
+  const [isMac, setIsMac] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const userAgent = globalThis.navigator.userAgent.toLowerCase();
+    setIsMac(/mac|iphone|ipad|ipod/.test(userAgent));
+  }, []);
+
+  const shortCutkey = useMemo(() => {
+    if (isMac === null) {
+      return "⌘";
+    }
+    return isMac ? "⌘" : "Ctrl";
+  }, [isMac]);
+
   return (
     <Button
       {...props}
@@ -44,7 +72,12 @@ const SearchButton = forwardRef<
               Søk
               <HStack gap="space-2" asChild>
                 <Detail as="span">
-                  <Kbd>Ctrl</Kbd>
+                  <Box
+                    className={styles.keyboardShortcut}
+                    data-loaded={isMac !== null}
+                  >
+                    <Kbd>{shortCutkey}</Kbd>
+                  </Box>
                   <Kbd>k</Kbd>
                 </Detail>
               </HStack>

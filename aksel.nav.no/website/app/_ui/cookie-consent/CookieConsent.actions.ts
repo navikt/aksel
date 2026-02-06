@@ -1,13 +1,13 @@
 "use server";
 
-import { client } from "@/app/_sanity/client";
-import { writeToken } from "@/app/_sanity/token";
+/* import { client } from "@/app/_sanity/client";
+import { writeToken } from "@/app/_sanity/token"; */
 import { CONSENT_TRACKER_STATE } from "@/app/_ui/cookie-consent/CookieConsent.config";
 
-const stateToSanityKey = {
+/* const stateToSanityKey = {
   accepted: "accept",
   rejected: "decline",
-} as const;
+} as const; */
 
 async function trackCookieConsent(
   newState: CONSENT_TRACKER_STATE,
@@ -16,14 +16,17 @@ async function trackCookieConsent(
     return;
   }
 
-  await client
+  /**
+   * TODO: Temp disabled due to revalidation issues causing excessive re-validations
+   */
+  /* await client
     .config({
       token: writeToken,
     })
     .patch("cookie_tracker")
     .inc({ total: 1, [stateToSanityKey[newState]]: 1 })
     .commit()
-    .catch(() => console.warn("Cookie tracker document patch failed"));
+    .catch(() => console.warn("Cookie tracker document patch failed")); */
 }
 
 export { trackCookieConsent };

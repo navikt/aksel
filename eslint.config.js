@@ -8,7 +8,7 @@ const reactPlugin = require("eslint-plugin-react");
 const reactHooks = require("eslint-plugin-react-hooks");
 const storybook = require("eslint-plugin-storybook");
 const testingLibrary = require("eslint-plugin-testing-library");
-const { globalIgnores } = require("eslint/config");
+const { globalIgnores, defineConfig } = require("eslint/config");
 const globals = require("globals");
 const tseslint = require("typescript-eslint");
 
@@ -19,7 +19,7 @@ const tseslint = require("typescript-eslint");
  * - Consider adding the rule "id-length"
  */
 
-module.exports = tseslint.config([
+module.exports = defineConfig([
   globalIgnores([
     "**/lib",
     "**/public",
@@ -189,6 +189,7 @@ module.exports = tseslint.config([
   },
   {
     files: ["@navikt/**"],
+    ignores: ["**/*.stories.tsx"],
     rules: {
       "no-restricted-imports": [
         "error",
