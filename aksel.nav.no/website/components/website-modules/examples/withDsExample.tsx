@@ -44,7 +44,7 @@ export const withDsExample = (
   const DsHOC = (props: any) => {
     const pathname = usePathname() || "///";
     const pathParts = pathname.split("/");
-    const themeOptions = theme || {};
+    const themeOptions = theme || { switch: true };
 
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
