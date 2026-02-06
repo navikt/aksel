@@ -305,7 +305,7 @@ function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
               ))}
             </HStack>
             {index < shortcuts.length - 1 && (
-              <span> {`${translate("shortcutSeparator")}`} </span>
+              <span> {translate("shortcutSeparator")} </span>
             )}
           </>
         ))}
