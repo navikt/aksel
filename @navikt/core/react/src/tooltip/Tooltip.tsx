@@ -263,16 +263,16 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   },
 );
 
-/**
- * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-keyshortcuts
- * Space-separated shortcuts is valid syntax
- */
 function isKeyShortcutNested(
   shortcuts: TooltipProps["keys"],
 ): shortcuts is [string[], string[]] {
   return Array.isArray(shortcuts?.[0]);
 }
 
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-keyshortcuts
+ * Space-separated shortcuts is valid syntax
+ */
 function ariaShortcuts(shortcuts: TooltipProps["keys"]) {
   if (!shortcuts) {
     return undefined;
@@ -297,7 +297,7 @@ function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
       <span className="aksel-tooltip__keys" aria-hidden>
         {shortcuts.map((key, index) => (
           <>
-            <HStack gap="space-2">
+            <HStack gap="space-4">
               {key.map((k, i) => (
                 <Detail as="kbd" key={i} className="aksel-tooltip__key">
                   {k}
