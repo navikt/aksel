@@ -31,10 +31,15 @@ type withDsT = {
   background?: "inverted" | "subtle";
   minHeight?: string;
   showBreakpoints?: boolean;
-  theme?: {
-    switch?: boolean;
-    forcedTheme?: "light" | "dark";
-  };
+  theme?:
+    | {
+        switch?: false;
+        forcedTheme: "light" | "dark";
+      }
+    | {
+        switch?: boolean;
+        forcedTheme?: never;
+      };
 };
 
 export const withDsExample = (
