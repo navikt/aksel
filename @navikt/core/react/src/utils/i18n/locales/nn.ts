@@ -132,4 +132,7 @@ export default {
       reset: "Tilbakestill tidsperspektiv",
     },
   },
+  Tooltip: {
+    shortcutSeparator: "eller",
+  },
 } satisfies Translations;
