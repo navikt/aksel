@@ -26,7 +26,11 @@ function Example() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { showThemeSwitch: false });
+export default withDsExample(Example, {
+  theme: {
+    switch: false,
+  },
+});
 
 /* Storybook story */
 export const Demo = {
