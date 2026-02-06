@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import React from "react";
 import { CheckmarkHeavyIcon, SparklesFillIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { HStack } from "../layout/stack";
+import { HStack } from "../primitives/stack";
 import { Provider } from "../provider";
 import { en } from "../utils/i18n/locales";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";

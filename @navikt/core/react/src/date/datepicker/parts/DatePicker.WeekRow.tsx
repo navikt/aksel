@@ -1,6 +1,6 @@
 import React from "react";
 import { CalendarWeek } from "react-day-picker";
-import { Show } from "../../../layout/responsive";
+import { Show } from "../../../primitives/responsive";
 import { Detail } from "../../../typography";
 import { useId } from "../../../utils-external";
 import { useDateTranslationContext } from "../../Date.locale";

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
-import { VStack } from "../../layout/stack";
+import { VStack } from "../../primitives/stack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import ErrorMessage from "../ErrorMessage";
 

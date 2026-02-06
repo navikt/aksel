@@ -2,8 +2,8 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { Box } from "../layout/box";
-import { HStack } from "../layout/stack";
+import { Box } from "../primitives/box";
+import { HStack } from "../primitives/stack";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import { Collapsible } from "./Collapsible";
 

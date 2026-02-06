@@ -2,8 +2,8 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
-import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
+import { VStack } from "../../primitives/stack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import { Textarea } from "./index";
 

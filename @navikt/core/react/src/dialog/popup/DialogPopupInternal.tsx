@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { BoxNew, type BoxNewProps } from "../../layout/box";
-import { DismissableLayer } from "../../overlays/dismissablelayer/DismissableLayer";
+import { BoxNew, type BoxNewProps } from "../../primitives/box";
+import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
 import { cl } from "../../utils/helpers";
@@ -14,8 +14,7 @@ import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";
 
-interface DialogPopupInternalProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface DialogPopupInternalProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Determines if the dialog enters a modal state when open.
    * - `true`: user interaction is limited to just the dialog: focus is trapped, document page scroll is locked, and pointer interactions on outside elements are disabled.

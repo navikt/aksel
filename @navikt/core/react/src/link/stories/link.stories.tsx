@@ -3,8 +3,8 @@ import React from "react";
 import { PencilIcon, PlusCircleFillIcon } from "@navikt/aksel-icons";
 import { Alert } from "../../alert";
 import { ConfirmationPanel } from "../../form/confirmation-panel";
-import { Box } from "../../layout/box";
-import { VStack } from "../../layout/stack";
+import { Box } from "../../primitives/box";
+import { VStack } from "../../primitives/stack";
 import { BodyLong } from "../../typography";
 import Link from "../Link";
 

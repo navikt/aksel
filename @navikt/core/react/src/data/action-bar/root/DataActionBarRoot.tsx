@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../../../button";
-import { Box } from "../../../layout/box";
-import { HStack, Spacer } from "../../../layout/stack";
+import { Box } from "../../../primitives/box";
+import { HStack, Spacer } from "../../../primitives/stack";
 import { BodyShort } from "../../../typography";
 
 interface DataActionBarProps extends React.HTMLAttributes<HTMLDivElement> {

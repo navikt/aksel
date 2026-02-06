@@ -1,5 +1,5 @@
 import React from "react";
-import { HStack } from "../../../layout/stack";
+import { HStack } from "../../../primitives/stack";
 import { createDescendantContext } from "./useDescendant";
 
 export default {

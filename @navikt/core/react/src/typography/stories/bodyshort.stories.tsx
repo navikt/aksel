@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
-import { Box } from "../../layout/box";
-import { VStack } from "../../layout/stack";
+import { Box } from "../../primitives/box";
+import { VStack } from "../../primitives/stack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import { BodyShort } from "../BodyShort";
 

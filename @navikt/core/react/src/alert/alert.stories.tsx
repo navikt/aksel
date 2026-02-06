@@ -1,7 +1,7 @@
 import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { VStack } from "../layout/stack";
 import { Link } from "../link";
+import { VStack } from "../primitives/stack";
 import { BodyLong, Heading } from "../typography";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import Alert, { AlertProps } from "./Alert";

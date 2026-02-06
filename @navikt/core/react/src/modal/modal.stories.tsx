@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FileIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Checkbox, CheckboxGroup } from "../form/checkbox";
-import { VStack } from "../layout/stack";
+import { VStack } from "../primitives/stack";
 import { Tooltip } from "../tooltip";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import Modal from "./Modal";

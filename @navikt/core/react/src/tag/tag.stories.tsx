@@ -2,7 +2,7 @@ import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { ComponentIcon } from "@navikt/aksel-icons";
 import { Tag, TagProps } from ".";
-import { HStack } from "../layout/stack";
+import { HStack } from "../primitives/stack";
 import type { AkselColor } from "../types/theme";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 

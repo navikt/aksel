@@ -3,7 +3,7 @@ import { addMonths, format } from "date-fns";
 import { nb } from "date-fns/locale";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
-import { HStack } from "../../layout/stack";
+import { HStack } from "../../primitives/stack";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./hooks/useDatepicker";
 import { useRangeDatepicker } from "./hooks/useRangeDatepicker";

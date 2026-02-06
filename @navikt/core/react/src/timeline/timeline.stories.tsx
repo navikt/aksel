@@ -5,7 +5,7 @@ import {
   ExclamationmarkTriangleFillIcon,
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
-import { VStack } from "../layout/stack";
+import { VStack } from "../primitives/stack";
 import { Provider } from "../provider";
 import en from "../utils/i18n/locales/en";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";

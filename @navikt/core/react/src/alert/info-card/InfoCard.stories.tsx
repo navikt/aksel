@@ -3,8 +3,8 @@ import React from "react";
 import { ChevronDownIcon, InformationSquareIcon } from "@navikt/aksel-icons";
 import type { AkselColorRole } from "@navikt/ds-tokens/types";
 import { Button } from "../../button";
-import { Spacer, VStack } from "../../layout/stack";
 import { Link } from "../../link";
+import { Spacer, VStack } from "../../primitives/stack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import {
   InfoCard,

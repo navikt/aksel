@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
-import VStack from "../../layout/stack/VStack";
+import VStack from "../../primitives/stack/VStack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Checkbox from "./Checkbox";
 import CheckboxGroup, { CheckboxGroupProps } from "./CheckboxGroup";

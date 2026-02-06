@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { PersonIcon } from "@navikt/aksel-icons";
-import { VStack } from "../layout/stack";
+import { VStack } from "../primitives/stack";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import Chat, { POSITIONS, SIZES, VARIANTS } from "./Chat";
 

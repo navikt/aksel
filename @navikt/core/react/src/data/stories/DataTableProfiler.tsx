@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../../button";
-import { Box } from "../../layout/box";
-import { VStack } from "../../layout/stack";
+import { Box } from "../../primitives/box";
+import { VStack } from "../../primitives/stack";
 import { Heading } from "../../typography";
 
 type DataTableProfilerProps = {
