@@ -50,9 +50,7 @@ const SearchButton = forwardRef<
               Søk
               <HStack gap="space-2" asChild>
                 <Detail as="span">
-                  <div className={styles.keyboardShortcut}>
-                    <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
-                  </div>
+                  <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
                   <Kbd>k</Kbd>
                 </Detail>
               </HStack>
