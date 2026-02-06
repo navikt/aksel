@@ -8,7 +8,7 @@ import { DataTableThSortHandle } from "./DataTableThSortHandle";
 
 type DataTableThProps = React.HTMLAttributes<HTMLTableCellElement> & {
   resizeHandler?: React.MouseEventHandler<HTMLButtonElement>;
-  size?: number;
+  size?: number; // TODO: size should be required when resizeHandler is set
   sortDirection?: "asc" | "desc" | "none" | false;
   onSortChange?: (direction: "asc" | "desc" | "none", event: Event) => void;
   render?: {
@@ -49,6 +49,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
       >
         <HStack align="center" gap="space-8" wrap={false}>
           <div className="aksel-data-table__th-content">{children}</div>
+          {/* TODO: If the column is too narrow, the sort button will move when hovering b.c. the actions menu button slides in */}
           <DataTableThSortHandle
             sortDirection={sortDirection}
             onSortChange={onSortChange}
@@ -94,7 +95,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
           <button
             onMouseDown={resizeHandler}
             onMouseUp={resizeHandler}
-            className={cl("aksel-data-table__th-resize-handle")}
+            className="aksel-data-table__th-resize-handle"
             data-color="neutral"
           />
         )}

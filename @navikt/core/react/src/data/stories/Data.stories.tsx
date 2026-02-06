@@ -165,7 +165,7 @@ export const TanstackExample: Story = {
           </Button>
         </DataActionBar>
 
-        <DataTable style={{ width: "3000px", ...columnSizeVars() }}>
+        <DataTable style={columnSizeVars()}>
           <DataTable.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (

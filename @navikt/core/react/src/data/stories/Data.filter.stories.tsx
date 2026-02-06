@@ -65,7 +65,7 @@ export const TanstackColumnFilter: Story = {
     });
 
     return (
-      <DataTable style={{ width: "3000px" }}>
+      <DataTable>
         <DataTable.Thead>
           {table.getHeaderGroups().map((headerGroup) => {
             return (
@@ -74,6 +74,7 @@ export const TanstackColumnFilter: Story = {
                   return (
                     <DataTable.Th
                       key={header.id}
+                      size={200}
                       resizeHandler={header.getResizeHandler()}
                       sortDirection={header.column.getIsSorted() || "none"}
                       onSortChange={(_, event) => {
