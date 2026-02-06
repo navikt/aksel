@@ -1,14 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
+  type Column,
+  type ColumnFiltersState,
   Table,
   flexRender,
   getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { CheckmarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Select } from "../../form/select";
@@ -35,6 +39,8 @@ type Story = StoryObj<typeof DataTable>;
 
 export const TanstackColumnFilter: Story = {
   render: () => {
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
     const table = useReactTable({
       columns,
       data: sampleData,
@@ -43,20 +49,20 @@ export const TanstackColumnFilter: Story = {
       getFilteredRowModel: getFilteredRowModel(),
       globalFilterFn: "includesString",
       getPaginationRowModel: getPaginationRowModel(),
+      getFacetedRowModel: getFacetedRowModel(), // client-side faceting
+      getFacetedUniqueValues: getFacetedUniqueValues(),
       initialState: {
         pagination: {
           pageIndex: 1,
           pageSize: 20,
         },
       },
+      onColumnFiltersChange: setColumnFilters,
+      state: {
+        columnFilters,
+      },
+      filterFns: {},
     });
-
-    const getColumnValues = (columnId: string) => {
-      const values = table
-        .getCoreRowModel()
-        .flatRows.map((row) => row.getValue(columnId)) as string[];
-      return Array.from(new Set(values));
-    };
 
     return (
       <DataTable style={{ width: "3000px" }}>
@@ -75,16 +81,19 @@ export const TanstackColumnFilter: Story = {
                         handler?.(event);
                       }}
                       render={{
-                        filterMenu: {
-                          title: "Filter",
-                          content: (
-                            <DummyFilter
-                              values={getColumnValues(header.column.id)}
-                              /* This only work for values without custom renderer (like boolean tags now) */
-                              title={`Filter: ${header.column.columnDef.header}`}
-                            />
-                          ),
-                        },
+                        /* TODO: This makes no sense at the moment */
+                        filterMenu: header.column.getCanFilter()
+                          ? {
+                              title: "Filter",
+                              content: (
+                                <DummyFilter
+                                  column={header.column}
+                                  /* This only work for values without custom renderer (like boolean tags now) */
+                                  title={`Filter: ${header.column.columnDef.header}`}
+                                />
+                              ),
+                            }
+                          : undefined,
                       }}
                     >
                       {header.isPlaceholder
@@ -132,22 +141,53 @@ export const TanstackColumnFilter: Story = {
   },
 };
 
-function DummyFilter({ values, title }: { values: string[]; title: string }) {
+function DummyFilter({
+  column,
+  title,
+}: {
+  column: Column<PersonInfo, unknown>;
+  title: string;
+}) {
+  const [filterState, setFilterState] = useState({
+    operator: "is",
+    value: "",
+  });
+
+  const sortedUniqueValues = useMemo(
+    () => Array.from(column.getFacetedUniqueValues().keys()),
+    [column],
+  );
+
+  const columnFilterValue = column.getFilterValue();
+
   return (
     <VStack gap="space-8" padding="space-8">
       <BodyShort as="div" size="large" weight="semibold">
         {title}
       </BodyShort>
       <HStack gap="space-8">
-        <Select label="Operator" hideLabel>
+        <Select
+          label="Operator"
+          hideLabel
+          onChange={(e) =>
+            setFilterState((prev) => ({ ...prev, operator: e.target.value }))
+          }
+        >
           <option value="is">is</option>
           <option value="is-not">is not</option>
           <option value="is-any">is any of</option>
           <option value="is-none">is none of</option>
         </Select>
-        <Select label="Verdi" hideLabel>
+        <Select
+          label="Verdi"
+          hideLabel
+          onChange={(e) =>
+            setFilterState((prev) => ({ ...prev, value: e.target.value }))
+          }
+          value={columnFilterValue?.toString()}
+        >
           <option value="">-- Velg verdi --</option>
-          {values.map((value) => (
+          {sortedUniqueValues.map((value) => (
             <option key={value} value={value}>
               {value}
             </option>
@@ -161,7 +201,19 @@ function DummyFilter({ values, title }: { values: string[]; title: string }) {
         borderColor="neutral-subtleA"
       />
       <HStack gap="space-6" justify="space-between">
-        <Button data-color="neutral" variant="tertiary" size="small">
+        <Button
+          data-color="neutral"
+          variant="tertiary"
+          size="small"
+          onClick={() => {
+            /* TODO: State does not reset selects here when deleted */
+            setFilterState({
+              operator: "is",
+              value: "",
+            });
+            column.setFilterValue(undefined);
+          }}
+        >
           Slett
         </Button>
         <Button
@@ -169,6 +221,18 @@ function DummyFilter({ values, title }: { values: string[]; title: string }) {
           variant="primary"
           size="small"
           icon={<CheckmarkIcon aria-hidden />}
+          onClick={() => {
+            /* TODO: Column filters do not work as expected. Do they need to be globel, or do column accessors need to implement filterFn? */
+            if (filterState.operator === "is") {
+              column.setFilterValue(filterState.value);
+            } else if (filterState.operator === "is-not") {
+              column.setFilterValue({ not: filterState.value });
+            } else if (filterState.operator === "is-any") {
+              column.setFilterValue({ in: [filterState.value] });
+            } else if (filterState.operator === "is-none") {
+              column.setFilterValue({ notIn: [filterState.value] });
+            }
+          }}
         >
           Lagre
         </Button>
