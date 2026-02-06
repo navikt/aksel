@@ -1,10 +1,19 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { cl } from "../../utils/helpers";
-import { ComponentTranslation } from "../../utils/i18n/i18n.types";
-import { FileUploadLocaleContextProvider } from "./FileUpload.context";
-import Trigger from "./parts/Trigger";
-import Dropzone from "./parts/dropzone/Dropzone";
-import Item from "./parts/item/Item";
+import { cl } from "../../../utils/helpers";
+import { ComponentTranslation } from "../../../utils/i18n/i18n.types";
+import {
+  FileUploadDropzone,
+  type FileUploadDropzoneProps,
+} from "../dropzone/FileUploadDropzone";
+import {
+  FileUploadItem,
+  type FileUploadItemProps,
+} from "../item-root/FileUploadItemRoot";
+import {
+  FileUploadTrigger,
+  type FileUploadTriggerProps,
+} from "../trigger/FileUploadTrigger";
+import { FileUploadLocaleContextProvider } from "./FileUploadRoot.context";
 
 interface FileUploadProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -19,6 +28,7 @@ interface FileUploadComponent extends React.ForwardRefExoticComponent<
 > {
   /**
    * Framed area to drag-n-drop files, upload files with button-click or copy-paste.
+   * @see 🏷️ {@link FileUploadDropzoneProps}
    * @example
    * Single file
    * ```jsx
@@ -49,10 +59,11 @@ interface FileUploadComponent extends React.ForwardRefExoticComponent<
    * />
    * ```
    */
-  Dropzone: typeof Dropzone;
+  Dropzone: typeof FileUploadDropzone;
 
   /**
    * Displays a file with status, file size, action and error message.
+   * @see 🏷️ {@link FileUploadItemProps}
    * @example
    * Single
    * ```jsx
@@ -92,9 +103,10 @@ interface FileUploadComponent extends React.ForwardRefExoticComponent<
    * <FileUpload.Item file={file} button={{ action:"delete", onClick:... }} />
    * ```
    */
-  Item: typeof Item;
+  Item: typeof FileUploadItem;
   /**
    * Wrapper for a button to trigger file select.
+   * @see 🏷️ {@link FileUploadTriggerProps}
    * @example
    * ```jsx
    * <FileUpload.Trigger onSelect={...}>
@@ -102,7 +114,7 @@ interface FileUploadComponent extends React.ForwardRefExoticComponent<
    * </FileUpload.Trigger>
    * ```
    */
-  Trigger: typeof Trigger;
+  Trigger: typeof FileUploadTrigger;
 }
 
 /**
@@ -134,8 +146,15 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
   },
 ) as FileUploadComponent;
 
-FileUpload.Dropzone = Dropzone;
-FileUpload.Item = Item;
-FileUpload.Trigger = Trigger;
+FileUpload.Dropzone = FileUploadDropzone;
+FileUpload.Item = FileUploadItem;
+FileUpload.Trigger = FileUploadTrigger;
 
 export default FileUpload;
+
+export { FileUploadTrigger, FileUploadDropzone, FileUploadItem };
+export type {
+  FileUploadTriggerProps,
+  FileUploadDropzoneProps,
+  FileUploadItemProps,
+};

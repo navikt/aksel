@@ -1,10 +1,10 @@
 import React from "react";
-import { useThemeInternal } from "../../../../theme/Theme";
-import { LinkAnchor } from "../../../../utils/components/link-anchor";
-import { FileItem } from "./Item.types";
-import ItemIcon from "./ItemIcon";
-import { downloadFile } from "./utils/download-file";
-import { isNativeFile } from "./utils/file-type-checker";
+import { useThemeInternal } from "../../../theme/Theme";
+import { LinkAnchor } from "../../../utils/components/link-anchor";
+import { downloadFile } from "../helpers/download-file";
+import { isNativeFile } from "../helpers/file-type-checker";
+import ItemIcon from "../item-icon/ItemIcon";
+import { FileItem } from "../item-root/FileUploadItemRoot.types";
 
 interface Props {
   file: FileItem;
