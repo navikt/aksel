@@ -90,122 +90,98 @@ export const AsCard = () => (
   </HStack>
 );
 
-export const ThemingDemo = () => {
-  const LinkCard = () => {
-    return (
-      <>
-        <style>
-          {`
-            .link-card {
-              color: unset;
-              text-decoration: none;
-            }
-            .link-card:hover {
-              border-color: var(--ax-border-accent-strong);
-            }
-            .link-card:hover .aksel-heading {
-              color: var(--ax-text-accent-subtle);
-              text-decoration: underline;
-            }
-            .link-card:hover .link-card__chevron,
-            .link-card:focus-within .link-card__chevron {
-              transform: translateX(4px);
-            }
-            .link-card__chevron {
-              flex-shrink: 0;
-              font-size: 1.5rem;
-              transition: transform 200ms;
-            }
-          `}
-        </style>
-        <Box
-          as="a"
-          href="#"
-          className="link-card"
-          borderRadius="2"
-          borderColor="neutral"
-          borderWidth="1"
-          padding="space-16"
-          onClick={() => alert("Clicked!")}
-        >
-          <HStack gap="space-16" align="center">
-            <VStack gap="space-8">
-              <Heading size="medium">
-                LinkCard som bruker Box, HStack og VStack
-              </Heading>
-              <BodyLong>This truly is inside a box!</BodyLong>
-            </VStack>
-            <ChevronRightIcon fontSize={24} className="link-card__chevron" />
-          </HStack>
-        </Box>
-      </>
-    );
-  };
-
-  const ChatBubble = () => {
-    return (
-      <Box
-        background="neutral-soft"
-        padding="space-16"
-        borderRadius="12 12 12 0"
-      >
+export const ThemingDemo = () => (
+  <VStack gap="space-32">
+    <Card>Dette er et Card som bruker Box som base</Card>
+    <LinkCard />
+    <ChatBubble />
+    <PricePill />
+  </VStack>
+);
+const LinkCard = () => (
+  <>
+    <style>
+      {`
+        .link-card {
+          color: unset;
+          text-decoration: none;
+        }
+        .link-card:hover {
+          border-color: var(--ax-border-accent-strong);
+        }
+        .link-card:hover .aksel-heading {
+          color: var(--ax-text-accent-subtle);
+          text-decoration: underline;
+        }
+        .link-card:hover .link-card__chevron,
+        .link-card:focus-within .link-card__chevron {
+          transform: translateX(4px);
+        }
+        .link-card__chevron {
+          flex-shrink: 0;
+          font-size: 1.5rem;
+          transition: transform 200ms;
+        }
+      `}
+    </style>
+    <Box
+      as="a"
+      href="#"
+      className="link-card"
+      borderRadius="2"
+      borderColor="neutral"
+      borderWidth="1"
+      padding="space-16"
+      onClick={() => alert("Clicked!")}
+    >
+      <HStack gap="space-16" align="center">
         <VStack gap="space-8">
-          <Detail>BOX • 01.01.21 14:00</Detail>
-          <BodyLong>
-            Hei! Dette er en chatbobble som bruker Box som base!
-          </BodyLong>
+          <Heading size="medium">
+            LinkCard som bruker Box, HStack og VStack
+          </Heading>
+          <BodyLong>This truly is inside a box!</BodyLong>
+        </VStack>
+        <ChevronRightIcon fontSize={24} className="link-card__chevron" />
+      </HStack>
+    </Box>
+  </>
+);
+const ChatBubble = () => (
+  <Box background="neutral-soft" padding="space-16" borderRadius="12 12 12 0">
+    <VStack gap="space-8">
+      <Detail>BOX • 01.01.21 14:00</Detail>
+      <BodyLong>Hei! Dette er en chatbobble som bruker Box som base!</BodyLong>
+    </VStack>
+  </Box>
+);
+const PricePill = () => (
+  <>
+    <HStack>
+      <Box
+        background="success-soft"
+        padding="space-16"
+        borderRadius="full 0 0 full"
+      >
+        <VStack align="center">
+          <Detail>Episk ny pris</Detail>
+          <Heading size="medium">889.99 kr</Heading>
         </VStack>
       </Box>
-    );
-  };
-
-  const PricePill = () => {
-    return (
-      <>
-        <style>
-          {`
-              .old-price {
-                text-decoration: line-through;
-              }
-            `}
-        </style>
-        <HStack>
-          <Box
-            background="success-soft"
-            padding="space-16"
-            borderRadius="full 0 0 full"
-          >
-            <VStack align="center">
-              <Detail>Episk ny pris</Detail>
-              <Heading size="medium">889.99 kr</Heading>
-            </VStack>
-          </Box>
-          <Box
-            background="danger-soft"
-            padding="space-16"
-            borderRadius="0 full full 0"
-          >
-            <VStack align="center">
-              <Detail>Førpris</Detail>
-              <Heading className="old-price" size="medium">
-                399.99 kr
-              </Heading>
-            </VStack>
-          </Box>
-        </HStack>
-      </>
-    );
-  };
-
-  return (
-    <VStack gap="space-32">
-      <Card>Dette er et Card som bruker Box som base</Card>
-      <LinkCard />
-      <ChatBubble />
-      <PricePill />
-    </VStack>
-  );
-};
+      <Box
+        background="danger-soft"
+        padding="space-16"
+        borderRadius="0 full full 0"
+      >
+        <VStack align="center">
+          <Detail>Førpris</Detail>
+          <Heading size="medium" style={{ textDecoration: "line-through" }}>
+            399.99 kr
+          </Heading>
+        </VStack>
+      </Box>
+    </HStack>
+  </>
+);
 
 export const PaddingBreakpoints = {
   render: () => (
