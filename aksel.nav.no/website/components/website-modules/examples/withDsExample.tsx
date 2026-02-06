@@ -57,14 +57,12 @@ export const withDsExample = (
 
     return (
       <div
-        className={cl(styles.container, {
+        className={cl(styles.container, themeOptions?.forcedTheme, {
           [styles.containerDefault]: !variant,
           [styles.containerStatic]: variant === "static",
           [styles.containerFull]: variant === "full",
           [styles.containerStaticFull]: variant === "static-full",
           [styles.containerFullscreen]: variant === "fullscreen",
-          light: themeOptions?.forcedTheme === "light",
-          dark: themeOptions?.forcedTheme === "dark",
         })}
         data-color={themeOptions?.forcedTheme ? "accent" : undefined}
         style={{ background: getBg(background) }}
