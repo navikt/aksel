@@ -1,9 +1,4 @@
-import React, {
-  InputHTMLAttributes,
-  forwardRef,
-  useEffect,
-  useState,
-} from "react";
+import React, { InputHTMLAttributes, forwardRef, useState } from "react";
 import { Loader } from "../../loader";
 import { BodyShort } from "../../typography";
 import { omit } from "../../utils-external";
@@ -12,7 +7,8 @@ import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 
 export interface SwitchProps
-  extends Omit<FormFieldProps, "error" | "errorId">,
+  extends
+    Omit<FormFieldProps, "error" | "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * Switch-label.
@@ -68,9 +64,9 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       defaultChecked ?? checkedProp ?? false,
     );
 
-    useEffect(() => {
-      checkedProp !== undefined && setChecked(checkedProp);
-    }, [checkedProp]);
+    if (checkedProp !== undefined && checkedProp !== _checked) {
+      setChecked(checkedProp);
+    }
 
     const checked = checkedProp ?? _checked;
 
