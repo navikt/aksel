@@ -1,15 +1,24 @@
 .kbd {
   white-space: nowrap;
   display: inline-block;
+  align-items: center;
+  justify-content: center;
   color: var(--ax-text-neutral);
-  background: var(--ax-bg-default);
-  border: 1px solid var(--ax-border-neutral-subtle);
-  border-bottom: 2px solid var(--ax-border-neutral-subtle);
+  background: var(--ax-bg-sunken);
+  box-shadow:
+    inset 0 -2px 0 0 var(--ax-border-neutral-subtle),
+    inset 0 0 0 1px var(--ax-border-neutral-subtle);
   padding: 0.05em 0.35em 0.1em;
   line-height: inherit;
-  box-shadow: none;
   border-radius: var(--ax-radius-4);
   text-transform: capitalize;
   font-weight: var(--ax-font-weight-bold);
   font-family: var(--ax-font-family);
+  min-width: 20px;
+  font-size: 0.875rem;
+  margin-bottom: 1px;
+
+  & + .kbd {
+    margin-left: var(--ax-space-2);
+  }
 }

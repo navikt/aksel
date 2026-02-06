@@ -156,18 +156,3 @@
     display: block;
   }
 }
-
-.keyboardShortcut {
-  display: inline-block;
-  min-width: 5ch;
-  text-align: center;
-
-  & > kbd {
-    color: transparent;
-    transition: color 0.2s ease-in;
-  }
-
-  &[data-loaded="true"] > kbd {
-    color: inherit;
-  }
-}
