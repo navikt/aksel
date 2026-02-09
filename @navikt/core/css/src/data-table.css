@@ -8,9 +8,26 @@
 .aksel-data-table {
   border-collapse: collapse;
   border-spacing: 0;
-  inline-size: 100%;
   table-layout: fixed;
-  width: 100%;
+  width: 1px; /* This is for some reason needed to make the browser respect the column width. TODO: Test in all browsers */
+
+  /*
+  We should NOT set min-width:100% b.c. it will cause inconsistencies in column resizing.
+  We could discuss whether it matters, though. But it feels buggy.
+  Downside is that it looks weird when the table is smaller than the container.
+  Maybe we could "manually" resize the other columns so that it fills the container? But that would add a lot of complexity.
+  We could have a toggle for the resize feature, and let the consumer decide which downside they prefer. Might need that anyways.
+  */
+
+  --__axc-data-table-density: var(--ax-space-16) 0;
+
+  &[data-density="condensed"] {
+    --__axc-data-table-density: 0 0;
+  }
+
+  &[data-density="spacious"] {
+    --__axc-data-table-density: var(--ax-space-32) 0;
+  }
 }
 
 .aksel-data-table__thead {
@@ -18,14 +35,12 @@
 }
 
 .aksel-data-table__tbody {
-  inline-size: 100%;
   background-color: var(--ax-bg-raised);
 }
 
 .aksel-data-table__tr {
   border: none;
   block-size: 3rem;
-  inline-size: 100%;
 }
 
 .aksel-data-table__th {
@@ -52,16 +67,29 @@
   z-index: 2;
   position: absolute;
   inset-block: 0;
-  inset-inline-end: -3px;
+  inset-inline-end: 0; /* TODO: See if we can make the handle appear right between the columns */
   cursor: col-resize;
   margin: 0;
   padding: 0;
-  width: 5px;
-  background: var(--ax-bg-neutral-strong);
+  width: 12px; /* TODO: Violation of WCAG SC 2.5.8 Target Size https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html */
   border: none;
+  background: transparent;
 
-  &:hover {
-    background: var(--ax-bg-neutral-strong-pressed);
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: 4px;
+  }
+
+  &:hover::after {
+    /* TODO: Consider if the resize-handle should be visible already when hovering the column header */
+    background: var(--ax-bg-accent-strong);
+  }
+
+  &:active::after {
+    background: var(--ax-bg-accent-strong-pressed);
   }
 }
 
@@ -90,6 +118,7 @@
   border-block-end: 1px solid var(--ax-border-neutral-subtle);
   border-block-start: 1px solid var(--ax-bg-raised);
   color: var(--ax-text-neutral-subtle);
+  padding: var(--__axc-data-table-density);
   padding-inline: 1rem;
   overflow: hidden;
   border-inline-end: 1px solid var(--ax-border-neutral-subtle);

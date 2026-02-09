@@ -1,7 +1,10 @@
-import { createStrictContext } from "../utils/helpers";
-import { CollapsibleBaseProps } from "./Collapsible.types";
+import { createStrictContext } from "../../utils/helpers";
 
-export type CollapsibleContextProps = Pick<CollapsibleBaseProps, "open"> & {
+export type CollapsibleContextProps = {
+  /**
+   * The open state of the collapsible.
+   */
+  open: boolean;
   /**
    * Allows connecting trigger to content
    */

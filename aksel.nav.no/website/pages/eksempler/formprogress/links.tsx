@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import { FormProgress } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const activeStep = 2; // Finn steg basert på rute
-
+  const activeStep = useActiveStep(); // Finn steg basert på route
   return (
     <FormProgress totalSteps={5} activeStep={activeStep}>
       <FormProgress.Step href="#/steg-1" completed>
@@ -18,6 +18,21 @@ const Example = () => {
     </FormProgress>
   );
 };
+
+/* Du vil typisk bruke routeren din i stedet for denne hacky løsningen */
+function useActiveStep() {
+  const [activeStep, setActiveStep] = useState(1);
+  useEffect(() => {
+    const updateStep = () => {
+      const hash = window.location.hash;
+      setActiveStep(parseInt(hash[7], 10) || 1);
+    };
+    updateStep();
+    window.addEventListener("hashchange", updateStep);
+    return () => window.removeEventListener("hashchange", updateStep);
+  }, []);
+  return activeStep;
+}
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {

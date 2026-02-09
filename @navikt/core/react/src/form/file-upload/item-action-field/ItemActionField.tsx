@@ -1,9 +1,9 @@
 import React, { MouseEvent } from "react";
 import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
-import { Button } from "../../../../button";
-import { Loader } from "../../../../loader";
-import Spacer from "../../../../primitives/stack/Spacer";
-import type { TFunction } from "../../../../utils/i18n/i18n.types";
+import { Button } from "../../../button";
+import { Loader } from "../../../loader";
+import { Spacer } from "../../../primitives/stack";
+import type { TFunction } from "../../../utils/i18n/i18n.types";
 
 interface ItemActionFieldProps {
   isLoading: boolean;

@@ -74,13 +74,23 @@ export const Placement = () => {
 
 export const Keys = () => {
   return (
-    <Tooltip
-      content="Tooltip example Laboris reprehenderit sit sunt nisi velit mollit esse excepteur. "
-      keys={["CMD", "I"]}
-      open={true}
-    >
-      <button>Element</button>
-    </Tooltip>
+    <div>
+      <Tooltip
+        content="Tooltip example with keys"
+        keys={["CMD", "I"]}
+        open={true}
+      >
+        <button>Element</button>
+      </Tooltip>
+      <Tooltip
+        content="Tooltip example with multiple keys"
+        keys={[["CMD", "I"], ["Home"]]}
+        open={true}
+        placement="bottom"
+      >
+        <button>Element</button>
+      </Tooltip>
+    </div>
   );
 };
 

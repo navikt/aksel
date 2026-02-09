@@ -9,28 +9,34 @@ import styles from "./GlobalSearch.module.css";
 /**
  * Trigger is optional to allow for use in Suspense fallback
  */
-function GlobalSearchButton({ trigger = true }: { trigger?: boolean }) {
+function GlobalSearchButton({
+  trigger = true,
+  isMac,
+}: {
+  trigger?: boolean;
+  isMac: boolean;
+}) {
   if (trigger) {
     return (
       <Dialog.Trigger>
-        <SearchButton />
+        <SearchButton isMac={isMac} />
       </Dialog.Trigger>
     );
   }
 
-  return <SearchButton />;
+  return <SearchButton isMac={isMac} />;
 }
 
 const SearchButton = forwardRef<
   HTMLButtonElement,
-  ButtonHTMLAttributes<HTMLButtonElement>
->((props, forwardedRef) => {
+  ButtonHTMLAttributes<HTMLButtonElement> & { isMac: boolean }
+>(({ isMac, ...rest }, forwardedRef) => {
   return (
     <Button
-      {...props}
+      {...rest}
       ref={forwardedRef}
       variant="secondary-neutral"
-      aria-keyshortcuts="Control+k"
+      aria-keyshortcuts={isMac ? "Meta+k" : "Control+k"}
     >
       <Bleed asChild marginInline={{ xs: "space-8", md: "space-8 space-0" }}>
         <HStack gap="space-6" align="center" as="span">
@@ -44,7 +50,7 @@ const SearchButton = forwardRef<
               Søk
               <HStack gap="space-2" asChild>
                 <Detail as="span">
-                  <Kbd>Ctrl</Kbd>
+                  <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
                   <Kbd>k</Kbd>
                 </Detail>
               </HStack>

@@ -5,7 +5,7 @@ import { Button } from "../button";
 import { Box } from "../primitives/box";
 import { HStack } from "../primitives/stack";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
-import { Collapsible } from "./Collapsible";
+import { Collapsible } from "./root/CollapsibleRoot";
 
 const meta: Meta<typeof Collapsible> = {
   title: "Utilities/Collapsible",
