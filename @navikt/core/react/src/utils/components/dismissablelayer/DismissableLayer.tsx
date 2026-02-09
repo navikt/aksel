@@ -5,10 +5,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Slot } from "../../utils/components/slot/Slot";
-import { composeEventHandlers, ownerDocument } from "../../utils/helpers";
-import { useMergeRefs, useTimeout } from "../../utils/hooks";
-import type { AsChild } from "../../utils/types/AsChild";
+import { composeEventHandlers, ownerDocument } from "../../helpers";
+import { useMergeRefs, useTimeout } from "../../hooks";
+import type { AsChild } from "../../types/AsChild";
+import { Slot } from "../slot/Slot";
 import {
   CustomFocusEvent,
   CustomPointerEvent,
@@ -19,8 +19,7 @@ import { useFocusOutside } from "./util/useFocusOutside";
 import { usePointerDownOutside } from "./util/usePointerDownOutside";
 import { usePointerUpOutside } from "./util/usePointerUpOutside";
 
-interface DismissableLayerBaseProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface DismissableLayerBaseProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * When `true`, hover/focus/click interactions will be disabled on elements outside
    * the `DismissableLayer`. Users will need to click twice on outside elements to

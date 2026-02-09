@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { SparklesIcon } from "@navikt/aksel-icons";
-import { Box } from "../layout/box";
-import { HGrid } from "../layout/grid";
-import { HStack, VStack } from "../layout/stack";
+import { Box } from "../primitives/box";
+import { HGrid } from "../primitives/grid";
+import { HStack, VStack } from "../primitives/stack";
 import { Tag } from "../tag";
 import {
   LinkCard,

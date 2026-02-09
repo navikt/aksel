@@ -1,7 +1,7 @@
 import React from "react";
 import { MenuElipsisVerticalIcon } from "@navikt/aksel-icons";
+import { ActionMenu } from "../../../action-menu";
 import { Button } from "../../../button";
-import { ActionMenu } from "../../../overlays/action-menu";
 
 function DataTableThActions({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);

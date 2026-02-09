@@ -70,8 +70,10 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 
-interface BoxComponentType
-  extends OverridableComponent<BoxProps, HTMLDivElement> {
+interface BoxComponentType extends OverridableComponent<
+  BoxProps,
+  HTMLDivElement
+> {
   /**
    * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/Box' instead (with same props).
    *

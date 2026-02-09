@@ -28,8 +28,10 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
   background?: string;
 }
 
-interface PageComponentType
-  extends OverridableComponent<PageProps, HTMLElement> {
+interface PageComponentType extends OverridableComponent<
+  PageProps,
+  HTMLElement
+> {
   Block: typeof PageBlock;
 }
 

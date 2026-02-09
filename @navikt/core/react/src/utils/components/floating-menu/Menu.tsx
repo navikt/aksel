@@ -1,16 +1,16 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import { Portal } from "../../portal";
-import { useId } from "../../utils-external";
-import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
-import { composeEventHandlers, createStrictContext } from "../../utils/helpers";
+import { Portal } from "../../../portal";
+import { useId } from "../../../utils-external";
+import { composeEventHandlers, createStrictContext } from "../../helpers";
 import {
   createDescendantContext,
   useEventCallback,
   useMergeRefs,
-} from "../../utils/hooks";
+} from "../../hooks";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating } from "../floating/Floating";
+import { FocusBoundary } from "../focus-boundary/FocusBoundary";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
 import {
   SlottedDivElement,

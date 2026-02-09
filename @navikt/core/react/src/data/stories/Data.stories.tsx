@@ -15,9 +15,9 @@ import {
   Density1Icon,
   RectangleSectionsIcon,
 } from "@navikt/aksel-icons";
+import { ActionMenu } from "../../action-menu";
 import { Button } from "../../button";
-import { VStack } from "../../layout/stack";
-import { ActionMenu } from "../../overlays/action-menu";
+import { VStack } from "../../primitives/stack";
 import DataActionBar from "../action-bar/root/DataActionBarRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";

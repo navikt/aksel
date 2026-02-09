@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { FunnelIcon, SortDownIcon, SortUpIcon } from "@navikt/aksel-icons";
-import { HStack, Spacer } from "../../../layout/stack";
-import { ActionMenu } from "../../../overlays/action-menu";
+import { ActionMenu } from "../../../action-menu";
+import { HStack, Spacer } from "../../../primitives/stack";
 import { cl } from "../../../utils/helpers";
 import { DataTableThActions } from "./DataTableThActions";
 import { DataTableThSortHandle } from "./DataTableThSortHandle";

@@ -17,8 +17,8 @@ import {
 } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Search } from "../../../form/search";
-import { VStack } from "../../../layout/stack";
 import { Popover } from "../../../popover";
+import { VStack } from "../../../primitives/stack";
 import { VirtualFocus } from "./VirtualFocus";
 
 export default {
