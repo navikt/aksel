@@ -1,5 +1,7 @@
-import React, { forwardRef } from "react";
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+import React, { forwardRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
+import { useMergeRefs } from "../../../utils/hooks";
 import {
   DataTableCaption,
   type DataTableCaptionProps,
@@ -19,9 +21,16 @@ import {
   type DataTableTheadProps,
 } from "../thead/DataTableThead";
 import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
+import { useTableKeyboardNav } from "./useTableKeyboardNav";
 
 interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode;
+  rowDensity?: "condensed" | "normal" | "spacious";
+  /**
+   * Enables keyboard navigation for table rows and cells.
+   * @default false
+   */
+  withKeyboardNav?: boolean;
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -120,13 +129,23 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
 }
 
 const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
-  ({ className, ...rest }, forwardedRef) => {
+  (
+    { className, rowDensity = "normal", withKeyboardNav = false, ...rest },
+    forwardedRef,
+  ) => {
+    const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
+    const mergedRef = useMergeRefs(forwardedRef, setTableRef);
+
+    useTableKeyboardNav(tableRef, { enabled: withKeyboardNav });
+
     return (
       <div className="aksel-data-table__wrapper">
         <table
           {...rest}
-          ref={forwardedRef}
+          ref={mergedRef}
           className={cl("aksel-data-table", className)}
+          data-density={rowDensity}
+          tabIndex={withKeyboardNav ? 0 : undefined}
         />
       </div>
     );
@@ -146,19 +165,19 @@ export {
   DataTableCaption,
   DataTableTbody,
   DataTableTd,
+  DataTableTfoot,
   DataTableTh,
   DataTableThead,
   DataTableTr,
-  DataTableTfoot,
 };
 export default DataTable;
 export type {
-  DataTableProps,
   DataTableCaptionProps,
+  DataTableProps,
   DataTableTbodyProps,
   DataTableTdProps,
-  DataTableThProps,
-  DataTableTheadProps,
-  DataTableTrProps,
   DataTableTfootProps,
+  DataTableTheadProps,
+  DataTableThProps,
+  DataTableTrProps,
 };

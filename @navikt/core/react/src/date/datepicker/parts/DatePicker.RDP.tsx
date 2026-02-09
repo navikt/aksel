@@ -1,7 +1,7 @@
 import { isBefore, isSameDay, isWeekend } from "date-fns";
 import React, { useCallback } from "react";
 import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
-import { Show } from "../../../layout/responsive";
+import { Show } from "../../../primitives/responsive";
 import { omit } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useDateLocale } from "../../../utils/i18n/i18n.hooks";

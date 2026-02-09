@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { Button } from "../../button";
-import { VStack } from "../../layout/stack";
 import { Link } from "../../link";
+import { VStack } from "../../primitives/stack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import {
   GlobalAlert,

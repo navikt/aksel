@@ -12,9 +12,9 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
-import { HStack } from "../layout/stack";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
+import { HStack } from "../primitives/stack";
 import { Detail } from "../typography";
 import { useId } from "../utils-external";
 import { Slot } from "../utils/components/slot/Slot";

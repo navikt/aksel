@@ -6,7 +6,7 @@ import {
   InboxUpIcon,
   SparklesIcon,
 } from "@navikt/aksel-icons";
-import { VStack } from "../layout/stack";
+import { VStack } from "../primitives/stack";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import ToggleGroup from "./ToggleGroup";
 import { ToggleGroupProps } from "./ToggleGroup.types";

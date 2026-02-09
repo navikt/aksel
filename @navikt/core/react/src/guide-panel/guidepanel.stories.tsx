@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { InformationIcon } from "@navikt/aksel-icons";
-import { VStack } from "../layout/stack";
 import { Link } from "../link";
+import { VStack } from "../primitives/stack";
 import { BodyLong } from "../typography";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import GuidePanel from "./GuidePanel";

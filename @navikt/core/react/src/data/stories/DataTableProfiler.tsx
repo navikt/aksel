@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../../button";
-import { Box } from "../../layout/box";
-import { VStack } from "../../layout/stack";
+import { Box } from "../../primitives/box";
+import { VStack } from "../../primitives/stack";
 import { Heading } from "../../typography";
 
 type DataTableProfilerProps = {
@@ -56,6 +56,12 @@ function rollingLatestValues(
   return newArr;
 }
 
+const getOpacity = (timestamp: number) => {
+  const age = Date.now() - timestamp;
+  const maxAge = 10000;
+  return Math.max(0.4, 1 - age / maxAge);
+};
+
 function ProfilerDisplay({
   getLatestData,
 }: {
@@ -96,12 +102,6 @@ function ProfilerDisplay({
     }, 500);
     return () => clearInterval(interval);
   }, [open]);
-
-  const getOpacity = (timestamp: number) => {
-    const age = Date.now() - timestamp;
-    const maxAge = 10000;
-    return Math.max(0.4, 1 - age / maxAge);
-  };
 
   return (
     <VStack asChild>

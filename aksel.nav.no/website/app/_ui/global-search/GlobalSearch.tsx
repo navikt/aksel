@@ -22,7 +22,7 @@ import {
   GlobalSearchResultsView,
 } from "./GlobalSearch.results";
 
-function GlobalSearch() {
+function GlobalSearch({ isMac }: { isMac: boolean }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [open, setOpen] = useState<boolean>(false);
   const { clearParam } = useParamState("query");
@@ -70,7 +70,7 @@ function GlobalSearch() {
       aria-labelledby="aksel-search-heading"
     >
       <GlobalSearchContext.Provider value={contextValue}>
-        <GlobalSearchButton />
+        <GlobalSearchButton isMac={isMac} />
         <Activity mode={open ? "visible" : "hidden"}>
           <Suspense>
             <GlobalSearchResultProvider>
