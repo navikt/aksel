@@ -100,7 +100,6 @@ function LinkBlock({ heading, links }: LinkBlockPropsT) {
             <NextLink
               className={styles.footerLink}
               href={link.url}
-              prefetch={false}
               data-umami-event="navigere"
               data-umami-event-kilde="footer"
               data-umami-event-url={link.url}

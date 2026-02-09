@@ -81,7 +81,6 @@ function GlobalSearchLink(props: {
               clearDebounce();
             }}
             className={styles.searchLink}
-            prefetch={false}
           >
             {hit.item.heading}
           </Heading>
