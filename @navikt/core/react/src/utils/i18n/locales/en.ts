@@ -132,4 +132,7 @@ export default {
       reset: "Reset zoom",
     },
   },
+  Tooltip: {
+    shortcutSeparator: "or",
+  },
 } satisfies Translations;

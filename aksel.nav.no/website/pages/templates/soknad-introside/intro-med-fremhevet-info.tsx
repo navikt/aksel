@@ -15,6 +15,7 @@ import {
   Tag,
   VStack,
 } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 import ApplicationPictogram from "../../../components/website-modules/examples/__parts/ApplicationPictogram";
 import {
   Env,
@@ -227,7 +228,13 @@ function Example() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default Example;
+export default withDsExample(Example, {
+  theme: {
+    forcedTheme: "light",
+    switch: false,
+  },
+  variant: "fullscreen",
+});
 
 /* Storybook story */
 export const Demo = {
@@ -237,6 +244,6 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  title: "Med Alert",
-  desc: "I noen tilfeller oppstår det akutte eller tidsbestemte forhold rundt søknaden som brukeren må vite om før de starter søknaden. Dette kan være frister, situasjonsbestemte forhold eller annen viktig informasjon som brukeren bør ha før de starter søknaden. Alerten skal være informativ og kortfattet.",
+  title: "Med InfoCard",
+  desc: "I noen tilfeller oppstår det akutte eller tidsbestemte forhold rundt søknaden som brukeren må vite om før de starter søknaden. Dette kan være frister, situasjonsbestemte forhold eller annen viktig informasjon som brukeren bør ha før de starter søknaden. InfoCard skal være informativ og kortfattet.",
 };

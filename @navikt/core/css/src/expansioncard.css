@@ -167,10 +167,3 @@
   opacity: 0;
   transition: opacity 250ms cubic-bezier(0.2, 0, 0, 1);
 }
-
-/* ---------------- ExpansionCard No Animation (defaultOpen) ---------------- */
-.aksel-expansioncard--no-animation {
-  & :is(.aksel-expansioncard__content, .aksel-expansioncard__content-inner) {
-    transition: none;
-  }
-}

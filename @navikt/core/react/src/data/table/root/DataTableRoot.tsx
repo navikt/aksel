@@ -9,6 +9,10 @@ import {
   type DataTableTbodyProps,
 } from "../tbody/DataTableTbody";
 import { DataTableTd, type DataTableTdProps } from "../td/DataTableTd";
+import {
+  DataTableTfoot,
+  type DataTableTfootProps,
+} from "../tfoot/DataTableTfoot";
 import { DataTableTh, type DataTableThProps } from "../th/DataTableTh";
 import {
   DataTableThead,
@@ -18,6 +22,7 @@ import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
 
 interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode;
+  rowDensity?: "condensed" | "normal" | "spacious";
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -101,16 +106,29 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
    * ```
    */
   Td: typeof DataTableTd;
+  /**
+   * @see 🏷️ {@link DataTableTfootProps}
+   * @example
+   * ```jsx
+   * <DataTable>
+   *   <DataTable.Tfoot>
+   *     ...
+   *   </DataTable.Tfoot>
+   * </DataTable>
+   * ```
+   */
+  Tfoot: typeof DataTableTfoot;
 }
 
 const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
-  ({ className, ...rest }, forwardedRef) => {
+  ({ className, rowDensity = "normal", ...rest }, forwardedRef) => {
     return (
       <div className="aksel-data-table__wrapper">
         <table
           {...rest}
           ref={forwardedRef}
           className={cl("aksel-data-table", className)}
+          data-density={rowDensity}
         />
       </div>
     );
@@ -123,6 +141,7 @@ DataTable.Tbody = DataTableTbody;
 DataTable.Th = DataTableTh;
 DataTable.Tr = DataTableTr;
 DataTable.Td = DataTableTd;
+DataTable.Tfoot = DataTableTfoot;
 
 export {
   DataTable,
@@ -132,6 +151,7 @@ export {
   DataTableTh,
   DataTableThead,
   DataTableTr,
+  DataTableTfoot,
 };
 export default DataTable;
 export type {
@@ -142,4 +162,5 @@ export type {
   DataTableThProps,
   DataTableTheadProps,
   DataTableTrProps,
+  DataTableTfootProps,
 };

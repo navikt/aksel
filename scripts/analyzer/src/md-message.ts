@@ -54,33 +54,51 @@ function markdownMessage(compareResults: CompareResults): string {
   }
 
   if (pathsWithTypeChanges.length > 0) {
+    const hasAdded = pathsWithTypeChanges.some(
+      ([, diff]) => (diff.components.added ?? []).length > 0,
+    );
+    const hasRemoved = pathsWithTypeChanges.some(
+      ([, diff]) => (diff.components.removed ?? []).length > 0,
+    );
+
     lines.push("### Types");
     lines.push("");
 
     lines.push("| Name | Added 🔹 | Removed 🔸 |");
-    lines.push("|:-----|:------|:--------|");
+    lines.push(
+      `|:-----|:-----${hasAdded ? "-" : ":"}|:-------${hasRemoved ? "-" : ":"}|`,
+    );
 
     for (const [pathKey, diff] of pathsWithTypeChanges) {
       const name = parseName(pathKey);
 
       lines.push(
-        `|${name}|${(diff.types.added ?? []).join(", ")}|${(diff.types.removed ?? []).join(", ")}|`,
+        `|${name}|${(diff.types.added ?? []).join(", ") || "-"}|${(diff.types.removed ?? []).join(", ") || "-"}|`,
       );
     }
   }
 
   if (pathsWithComponentChanges.length > 0) {
+    const hasAdded = pathsWithComponentChanges.some(
+      ([, diff]) => (diff.components.added ?? []).length > 0,
+    );
+    const hasRemoved = pathsWithComponentChanges.some(
+      ([, diff]) => (diff.components.removed ?? []).length > 0,
+    );
+
     lines.push("### Components");
     lines.push("");
 
     lines.push("| Name | Added 🔹 | Removed 🔸 |");
-    lines.push("|:-----|:------|:--------|");
+    lines.push(
+      `|:-----|:-----${hasAdded ? "-" : ":"}|:-------${hasRemoved ? "-" : ":"}|`,
+    );
 
     for (const [pathKey, diff] of pathsWithComponentChanges) {
       const name = parseName(pathKey);
 
       lines.push(
-        `|${name}|${(diff.components.added ?? []).join(", ")}|${(diff.components.removed ?? []).join(", ")}|`,
+        `|${name}|${(diff.components.added ?? []).join(", ") || "-"}|${(diff.components.removed ?? []).join(", ") || "-"}|`,
       );
     }
   }
@@ -89,14 +107,22 @@ function markdownMessage(compareResults: CompareResults): string {
     lines.push("### Bundle Size");
     lines.push("");
 
-    lines.push("| Name | Minified | Gzip |");
-    lines.push("|:-----|---------:|-----:|");
+    lines.push("| Name | Min | Min % | Gzip |");
+    lines.push("|:-----|---------:|---------:|-----:|");
 
-    for (const [pathKey, diff] of pathsWithBundleSizeChanges) {
+    const sortedBySize = pathsWithBundleSizeChanges.toSorted((a, b) => {
+      const aSize =
+        Math.abs(a[1].bundleSize.minified) + Math.abs(a[1].bundleSize.gzip);
+      const bSize =
+        Math.abs(b[1].bundleSize.minified) + Math.abs(b[1].bundleSize.gzip);
+      return bSize - aSize;
+    });
+
+    for (const [pathKey, diff] of sortedBySize) {
       const name = parseName(pathKey);
 
       lines.push(
-        `|${name}|${formatSize(diff.bundleSize.minified)}|${formatSize(diff.bundleSize.gzip)}|`,
+        `|${name}|${formatSize(diff.bundleSize.minified)}|${formatPercentage(diff.bundleSize.minifiedPercent)}|${formatSize(diff.bundleSize.gzip)}|`,
       );
     }
   }
@@ -112,12 +138,29 @@ function markdownMessage(compareResults: CompareResults): string {
   return header + "No changes detected to bundle 🎉";
 }
 
+function formatPercentage(percent: number): string {
+  const isNegative = percent < 0;
+  const absPercent = Math.abs(percent);
+  const formatted = `${absPercent.toFixed(2)}%`;
+
+  if (absPercent > 10) {
+    return `⚠️ ${isNegative ? "-" : "+"}${formatted}`;
+  }
+
+  return isNegative ? `-${formatted}` : `+${formatted}`;
+}
+
 function formatSize(bytes: number): string {
   if (bytes === 0) return "0 KB";
   const isNegative = bytes < 0;
   const absBytes = Math.abs(bytes);
-  const size = `${(absBytes / 1024).toFixed(1)} KB`;
-  return isNegative ? `⏷-${size}` : `⏶+${size}`;
+  const size = `${(absBytes / 1024).toFixed(2)} KB`;
+
+  if (absBytes > 1024 * 20) {
+    return `⚠️ ${isNegative ? "-" : "+"}${size}`;
+  }
+
+  return isNegative ? `-${size}` : `+${size}`;
 }
 
 function parseName(pathKey: string): string {

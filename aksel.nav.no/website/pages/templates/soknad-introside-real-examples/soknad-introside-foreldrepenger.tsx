@@ -14,6 +14,7 @@ import {
   RadioGroup,
   VStack,
 } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 import ApplicationPictogram from "../../../components/website-modules/examples/__parts/ApplicationPictogram";
 import {
   Env,
@@ -162,7 +163,13 @@ function Example() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default Example;
+export default withDsExample(Example, {
+  theme: {
+    forcedTheme: "light",
+    switch: false,
+  },
+  variant: "fullscreen",
+});
 
 /* Storybook story */
 export const Demo = {

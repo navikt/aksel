@@ -12,6 +12,7 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
+import { HStack } from "../layout/stack";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
 import { Detail } from "../typography";
@@ -19,6 +20,7 @@ import { useId } from "../utils-external";
 import { Slot } from "../utils/components/slot/Slot";
 import { cl } from "../utils/helpers";
 import { useControllableState, useMergeRefs } from "../utils/hooks";
+import { useI18n } from "../utils/i18n/i18n.hooks";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -79,7 +81,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * List of Keyboard-keys for shortcuts.
    */
-  keys?: string[];
+  keys?: string[] | [string[], string[]];
   /**
    * When false, Tooltip labels the element, and child-elements content will be ignored by screen-readers.
    * When true, content is added as additional information to the child element.
@@ -204,7 +206,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           ref={refs.setReference}
           {...getReferenceProps()}
           {...labelProps}
-          aria-keyshortcuts={keys ? keys.join("+") : undefined}
+          aria-keyshortcuts={ariaShortcuts(keys)}
         >
           {children}
         </Slot>
@@ -232,15 +234,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               data-state="open"
             >
               {content}
-              {keys && (
-                <span className="aksel-tooltip__keys" aria-hidden>
-                  {keys.map((key) => (
-                    <Detail as="kbd" key={key} className="aksel-tooltip__key">
-                      {key}
-                    </Detail>
-                  ))}
-                </span>
-              )}
+              <TooltipShortcuts shortcuts={keys} />
               {_arrow && (
                 <div
                   ref={(node) => {
@@ -268,5 +262,66 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     );
   },
 );
+
+function isKeyShortcutNested(
+  shortcuts: TooltipProps["keys"],
+): shortcuts is [string[], string[]] {
+  return Array.isArray(shortcuts?.[0]);
+}
+
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-keyshortcuts
+ * Space-separated shortcuts is valid syntax
+ */
+function ariaShortcuts(shortcuts: TooltipProps["keys"]) {
+  if (!shortcuts) {
+    return undefined;
+  }
+
+  if (isKeyShortcutNested(shortcuts)) {
+    return shortcuts.map((key) => key.join("+")).join(" ");
+  }
+
+  return shortcuts.join("+");
+}
+
+function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
+  const translate = useI18n("Tooltip");
+
+  if (!shortcuts) {
+    return null;
+  }
+
+  if (isKeyShortcutNested(shortcuts)) {
+    return (
+      <span className="aksel-tooltip__keys" aria-hidden>
+        {shortcuts.map((key, index) => (
+          <>
+            <HStack gap="space-4">
+              {key.map((k, i) => (
+                <Detail as="kbd" key={i} className="aksel-tooltip__key">
+                  {k}
+                </Detail>
+              ))}
+            </HStack>
+            {index < shortcuts.length - 1 && (
+              <span> {translate("shortcutSeparator")} </span>
+            )}
+          </>
+        ))}
+      </span>
+    );
+  }
+
+  return (
+    <span className="aksel-tooltip__keys" aria-hidden>
+      {shortcuts.map((k, i) => (
+        <Detail as="kbd" key={i} className="aksel-tooltip__key">
+          {k}
+        </Detail>
+      ))}
+    </span>
+  );
+}
 
 export default Tooltip;

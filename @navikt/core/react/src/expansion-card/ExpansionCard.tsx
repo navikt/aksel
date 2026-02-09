@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef } from "react";
 import type { AkselColor } from "../types";
 import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
@@ -19,10 +19,9 @@ import {
 } from "./ExpansionCardTitle";
 import { ExpansionCardContext } from "./context";
 
-interface ExpansionCardComponent
-  extends React.ForwardRefExoticComponent<
-    ExpansionCardProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface ExpansionCardComponent extends React.ForwardRefExoticComponent<
+  ExpansionCardProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link ExpansionCardHeaderProps}
    */
@@ -48,20 +47,23 @@ interface ExpansionCardComponent
   >;
 }
 
-interface ExpansionCardCommonProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onToggle"> {
+interface ExpansionCardCommonProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "onToggle"
+> {
   children: React.ReactNode;
   /**
-   * Callback for when Card is toggled open/closed
+   * Callback for when Card is opened/closed.
    */
   onToggle?: (open: boolean) => void;
   /**
-   * Controlled open-state
-   * Using this removes automatic control of open-state
+   * Controlled open-state.
+   *
+   * Using this removes automatic control of open-state.
    */
   open?: boolean;
   /**
-   * Defaults to open if not controlled
+   * The open state when initially rendered. Use when you do not need to control the open state.
    * @default false
    */
   defaultOpen?: boolean;
@@ -102,7 +104,7 @@ export type ExpansionCardProps = ExpansionCardCommonProps &
  *
  * @example
  * ```jsx
- * <ExpansionCard aria-label="default-demo">
+ * <ExpansionCard aria-label="Utbetaling av sykepenger">
  *   <ExpansionCard.Header>
  *     <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
  *   </ExpansionCard.Header>
@@ -125,14 +127,9 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
     },
     ref,
   ) => {
-    const shouldFade = useRef<boolean>(!(Boolean(open) || defaultOpen));
-
     const [_open, _setOpen] = useControllableState({
       value: open,
-      onChange: (newValue) => {
-        onToggle?.(newValue);
-        shouldFade.current = true;
-      },
+      onChange: onToggle,
       defaultValue: defaultOpen,
     });
 
@@ -151,9 +148,6 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
             "aksel-expansioncard",
             className,
             `aksel-expansioncard--${size}`,
-            {
-              "aksel-expansioncard--no-animation": !shouldFade.current,
-            },
           )}
           ref={ref}
         />

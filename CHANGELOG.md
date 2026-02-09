@@ -1,5 +1,37 @@
 # Changelog
 
+## 8.3.0
+
+### @navikt/ds-react
+
+- Tooltip: Updated prop 'keys' to allow for multiple shortcuts. ([#4604](https://github.com/navikt/aksel/pull/4604))
+
+### @navikt/ds-css
+
+- Tooltip: Updated prop 'keys' to allow for multiple shortcuts. ([#4604](https://github.com/navikt/aksel/pull/4604))
+
+* Chat: Fix avatar size when using icon from aksel-icons ([#4608](https://github.com/navikt/aksel/pull/4608))
+
+## 8.2.2
+
+### @navikt/ds-react
+
+- ExpansionCard: Remove redundant class name ([#4602](https://github.com/navikt/aksel/pull/4602))
+
+- AccordionItem: Remove redundant class name ([#4602](https://github.com/navikt/aksel/pull/4602))
+
+### @navikt/ds-css
+
+- ExpansionCard: Remove redundant class name ([#4602](https://github.com/navikt/aksel/pull/4602))
+
+- AccordionItem: Remove redundant class name ([#4602](https://github.com/navikt/aksel/pull/4602))
+
+## 8.2.1
+
+### @navikt/aksel
+
+- CLI: Remove redundant v8 codemods, and fix issue when running v8-tokens together with other codemods. ([#4599](https://github.com/navikt/aksel/pull/4599))
+
 ## 8.2.0
 
 ### @navikt/ds-react
