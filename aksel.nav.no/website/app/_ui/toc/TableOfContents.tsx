@@ -70,6 +70,7 @@ function TableOfContents({
                 id={`toc-${node.id}`}
               >
                 <NextLink
+                  prefetch={false}
                   href={`#${node.id}`}
                   onClick={() => {
                     tocCtx.setActiveId(node.id);

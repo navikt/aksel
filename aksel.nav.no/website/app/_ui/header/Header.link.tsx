@@ -30,6 +30,7 @@ function HeaderLink({ name, href }: HeaderLinkProps) {
   return (
     <NextLink
       href={href}
+      prefetch={false}
       data-current={isActive()}
       className={styles.headerLink}
       onClick={() => umamiTrack("navigere", { kilde: "header", url: href })}

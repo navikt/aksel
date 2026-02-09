@@ -159,7 +159,11 @@ function GodPraksisTemaCard({
   }
 
   return (
-    <NextLink href={href} className={styles.godPraksisTemaCard}>
+    <NextLink
+      href={href}
+      prefetch={false}
+      className={styles.godPraksisTemaCard}
+    >
       <span>
         {imageSrc ? (
           <NextImage
