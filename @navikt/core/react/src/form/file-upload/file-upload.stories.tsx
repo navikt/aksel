@@ -4,7 +4,7 @@ import { UploadIcon } from "@navikt/aksel-icons";
 import { FileUpload, FileUploadItemProps } from ".";
 import { Alert } from "../../alert";
 import { Button } from "../../button";
-import { VStack } from "../../layout/stack";
+import { VStack } from "../../primitives/stack";
 import { Heading } from "../../typography";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import {

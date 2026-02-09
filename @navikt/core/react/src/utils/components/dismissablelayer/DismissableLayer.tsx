@@ -5,10 +5,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Slot } from "../../utils/components/slot/Slot";
-import { composeEventHandlers, ownerDocument } from "../../utils/helpers";
-import { useMergeRefs, useTimeout } from "../../utils/hooks";
-import type { AsChild } from "../../utils/types/AsChild";
+import { composeEventHandlers, ownerDocument } from "../../helpers";
+import { useMergeRefs, useTimeout } from "../../hooks";
+import type { AsChild } from "../../types/AsChild";
+import { Slot } from "../slot/Slot";
 import {
   CustomFocusEvent,
   CustomPointerEvent,

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useEventCallback } from "../../../utils/hooks";
+import { useEventCallback } from "../../../hooks";
 import {
   CUSTOM_EVENTS,
   CustomPointerEvent,

@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react-vite";
 import React from "react";
 import { Button } from "../button";
-import { VStack } from "../layout/stack";
+import { VStack } from "../primitives/stack";
 import Tooltip from "./Tooltip";
 
 export default {

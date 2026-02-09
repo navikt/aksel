@@ -1,8 +1,8 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { StarIcon as BaseStarIcon } from "@navikt/aksel-icons";
-import { HStack, VStack } from "../layout/stack";
 import { Modal } from "../modal";
+import { HStack, VStack } from "../primitives/stack";
 import { BodyLong } from "../typography";
 import { Button } from "./index";
 

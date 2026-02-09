@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { Chips } from ".";
-import { VStack } from "../layout/stack";
+import { VStack } from "../primitives/stack";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
 const meta: Meta<typeof Chips> = {

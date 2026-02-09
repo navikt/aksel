@@ -6,8 +6,8 @@ import {
   HeadHeartIcon,
   SplitHorizontalIcon,
 } from "@navikt/aksel-icons";
-import { Box } from "../layout/box";
-import { VStack } from "../layout/stack";
+import { Box } from "../primitives/box";
+import { VStack } from "../primitives/stack";
 import { BodyLong } from "../typography";
 import List from "./List";
 

@@ -10,8 +10,8 @@ import {
 } from "@floating-ui/react";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
-import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
 import { omit, useClientLayoutEffect } from "../utils-external";
+import { DismissableLayer } from "../utils/components/dismissablelayer/DismissableLayer";
 import { cl } from "../utils/helpers";
 import { useMergeRefs } from "../utils/hooks";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";

@@ -8,14 +8,14 @@ import {
   PencilIcon,
   StarIcon,
 } from "@navikt/aksel-icons";
-import { Button } from "../../button";
-import { InternalHeader } from "../../internal-header";
-import { HStack, Spacer, VStack } from "../../layout/stack";
-import { Modal } from "../../modal";
-import { Table } from "../../table";
-import { Theme } from "../../theme";
-import { Tooltip } from "../../tooltip";
-import { BodyShort, Detail } from "../../typography";
+import { Button } from "../button";
+import { InternalHeader } from "../internal-header";
+import { Modal } from "../modal";
+import { HStack, Spacer, VStack } from "../primitives/stack";
+import { Table } from "../table";
+import { Theme } from "../theme";
+import { Tooltip } from "../tooltip";
+import { BodyShort, Detail } from "../typography";
 import { ActionMenu } from "./ActionMenu";
 
 export default {

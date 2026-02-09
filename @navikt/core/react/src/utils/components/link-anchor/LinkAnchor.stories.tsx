@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { Box } from "../../../layout/box";
-import { HStack, VStack } from "../../../layout/stack";
+import { Box } from "../../../primitives/box";
+import { HStack, VStack } from "../../../primitives/stack";
 import { LinkAnchor, LinkAnchorArrow, LinkAnchorOverlay } from "./LinkAnchor";
 
 type Story = StoryObj<typeof LinkAnchor>;

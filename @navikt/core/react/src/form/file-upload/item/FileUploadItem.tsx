@@ -62,7 +62,7 @@ interface FileUploadItemProps extends React.HTMLAttributes<HTMLDivElement> {
   translations?: ComponentTranslation<"FileUpload">["item"];
 }
 
-const FileUploadItem: OverridableComponent<
+export const FileUploadItem: OverridableComponent<
   FileUploadItemProps,
   HTMLDivElement
 > = forwardRef(
@@ -139,5 +139,4 @@ const FileUploadItem: OverridableComponent<
 );
 
 export default FileUploadItem;
-export { FileUploadItem };
 export type { FileUploadItemProps };

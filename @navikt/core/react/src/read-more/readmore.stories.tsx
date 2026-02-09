@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { fn } from "storybook/test";
 import { ReadMore } from ".";
-import { VStack } from "../layout/stack";
+import { VStack } from "../primitives/stack";
 
 export default {
   title: "ds-react/ReadMore",

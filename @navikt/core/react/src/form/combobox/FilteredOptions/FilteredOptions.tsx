@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import { DismissableLayer } from "../../../overlays/dismissablelayer/DismissableLayer";
-import { Floating } from "../../../overlays/floating/Floating";
 import { useClientLayoutEffect } from "../../../utils-external";
+import { DismissableLayer } from "../../../utils/components/dismissablelayer/DismissableLayer";
+import { Floating } from "../../../utils/components/floating/Floating";
 import { cl } from "../../../utils/helpers";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
