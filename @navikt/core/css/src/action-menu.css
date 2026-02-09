@@ -4,31 +4,16 @@
   border-radius: var(--ax-radius-12);
   border: 1px solid var(--ax-border-neutral-subtleA);
   box-shadow: var(--ax-shadow-dialog);
-  transition: transform 250ms cubic-bezier(0, 0, 0, 1) allow-discrete;
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  transform-origin: var(--__axc-action-menu-content-transform-origin);
+  transition:
+    transform 150ms ease allow-discrete,
+    opacity 150ms ease allow-discrete;
 
   &[data-state="open"] {
-    &[data-side="bottom"] {
-      @starting-style {
-        transform: translateY(-4px);
-      }
-    }
-
-    &[data-side="top"] {
-      @starting-style {
-        transform: translateY(4px);
-      }
-    }
-
-    &[data-side="right"] {
-      @starting-style {
-        transform: translateX(-4px);
-      }
-    }
-
-    &[data-side="left"] {
-      @starting-style {
-        transform: translateX(4px);
-      }
+    @starting-style {
+      opacity: 0.8;
+      transform: scale3d(0.94, 0.94, 0.94);
     }
   }
 }
@@ -43,8 +28,6 @@
   background-color: var(--ax-bg-raised);
   min-width: 128px;
   max-width: min(95vw, 640px);
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  transform-origin: var(--__axc-action-menu-content-transform-origin);
   animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   padding: var(--__axc-action-menu-content-p);
@@ -133,7 +116,7 @@
 
 .aksel-action-menu__marker-icon {
   svg {
-    font-size: 18px;
+    font-size: 1.125rem;
     flex-shrink: 0;
   }
 
@@ -141,6 +124,13 @@
     margin-left: 0;
     padding-left: 0;
   }
+}
+
+.aksel-action-menu__sub-icon {
+  display: grid;
+  place-content: center;
+  font-size: 1.125rem;
+  margin-left: auto;
 }
 
 /* --------------------------- ActionMenu shortcut -------------------------- */

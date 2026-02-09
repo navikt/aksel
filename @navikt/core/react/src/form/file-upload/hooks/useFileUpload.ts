@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { useMergeRefs } from "../../utils/hooks";
-import { FileUploadBaseProps } from "./FileUpload.types";
-import { validateFiles } from "./utils/validate-files";
+import { useMergeRefs } from "../../../utils/hooks";
+import { FileUploadBaseProps } from "../FileUpload.types";
+import { validateFiles } from "../helpers/validate-files";
 
 export interface UseFileUploadProps extends Omit<
   FileUploadBaseProps,

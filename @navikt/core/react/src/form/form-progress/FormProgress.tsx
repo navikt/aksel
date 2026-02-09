@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import Button from "../../button/Button";
-import Collapsible from "../../collapsible/Collapsible";
+import { Button } from "../../button";
+import { Collapsible } from "../../collapsible";
 import { HStack } from "../../layout/stack";
 import { ProgressBar } from "../../progress-bar";
 import { Stepper, StepperStepProps } from "../../stepper";

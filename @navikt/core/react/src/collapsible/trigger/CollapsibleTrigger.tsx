@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../utils/components/slot/Slot";
 import { composeEventHandlers } from "../../utils/helpers";
-import { useCollapsibleContext } from "../Collapsible.context";
+import { useCollapsibleContext } from "../root/CollapsibleRoot.context";
 
 export interface CollapsibleTriggerProps extends Omit<
   React.ButtonHTMLAttributes<HTMLButtonElement>,

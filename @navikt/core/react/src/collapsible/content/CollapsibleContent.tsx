@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../utils/components/slot/Slot";
-import { useCollapsibleContext } from "../Collapsible.context";
+import { useCollapsibleContext } from "../root/CollapsibleRoot.context";
 
 export interface CollapsibleContentProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,

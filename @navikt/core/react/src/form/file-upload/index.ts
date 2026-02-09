@@ -1,11 +1,15 @@
 "use client";
-export { default as FileUpload } from "./FileUpload";
-export { default as FileUploadDropzone } from "./parts/dropzone/Dropzone";
-export type { FileUploadDropzoneProps } from "./parts/dropzone/dropzone.types";
 export {
-  default as FileUploadTrigger,
-  type FileUploadTriggerProps,
-} from "./parts/Trigger";
+  default as FileUpload,
+  FileUploadTrigger,
+  FileUploadDropzone,
+  FileUploadItem,
+} from "./root/FileUploadRoot";
+export type {
+  FileUploadTriggerProps,
+  FileUploadDropzoneProps,
+  FileUploadItemProps,
+} from "./root/FileUploadRoot";
 export type {
   FileObject,
   FileRejected,
@@ -14,8 +18,4 @@ export type {
   FilesPartitioned,
   FileRejectionReason,
 } from "./FileUpload.types";
-export {
-  default as FileUploadItem,
-  type FileUploadItemProps,
-} from "./parts/item/Item";
-export type { FileItem, FileMetadata } from "./parts/item/Item.types";
+export type { FileItem, FileMetadata } from "./item/FileUploadItem.types";

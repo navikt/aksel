@@ -4,6 +4,7 @@ import {
   ArrowDownRightIcon,
   CloudIcon,
   LeaveIcon,
+  MenuElipsisVerticalIcon,
   PencilIcon,
   StarIcon,
 } from "@navikt/aksel-icons";
@@ -11,6 +12,7 @@ import { Button } from "../../button";
 import { InternalHeader } from "../../internal-header";
 import { HStack, Spacer, VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
+import { Table } from "../../table";
 import { Theme } from "../../theme";
 import { Tooltip } from "../../tooltip";
 import { BodyShort, Detail } from "../../typography";
@@ -342,6 +344,9 @@ export const Submenus: Story = {
         <ActionMenu.Content>
           <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
+          </ActionMenu.Item>
+          <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+            Item 2 with a little longer name
           </ActionMenu.Item>
           <ActionMenu.Sub open={props.open}>
             <ActionMenu.SubTrigger>Submenu 1</ActionMenu.SubTrigger>
@@ -733,7 +738,7 @@ export const IconPosition: Story = {
               onSelect={() => console.log("Item 1 clicked")}
               icon={<StarIcon aria-hidden />}
             >
-              Item 1
+              Item 1 with quite a long text for testing
             </ActionMenu.Item>
             <ActionMenu.Item
               onSelect={() => console.log("Item 2 clicked")}
@@ -779,3 +784,123 @@ export const IconPosition: Story = {
   },
   decorators: [DemoDecorator],
 };
+
+export const InTableDemo = () => (
+  <Table>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell scope="col">ID</Table.HeaderCell>
+        <Table.HeaderCell scope="col">Status</Table.HeaderCell>
+        <Table.HeaderCell />
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      {[
+        {
+          id: "03121",
+          status: "Avslått",
+        },
+        {
+          id: "16066",
+          status: "Mottatt",
+        },
+        {
+          id: "18124",
+          status: "Godkjent",
+        },
+        {
+          id: "24082",
+          status: "Mottatt",
+        },
+      ].map(({ id, status }, i) => {
+        return (
+          <Table.Row key={i + status} shadeOnHover={false}>
+            <Table.HeaderCell scope="row">{id}</Table.HeaderCell>
+            <Table.DataCell>{status}</Table.DataCell>
+            <Table.DataCell align="right">
+              <ActionMenu>
+                <ActionMenu.Trigger>
+                  <Button
+                    data-color="neutral"
+                    variant="tertiary"
+                    icon={<MenuElipsisVerticalIcon title="Saksmeny" />}
+                    size="small"
+                  />
+                </ActionMenu.Trigger>
+                <ActionMenu.Content>
+                  <ActionMenu.Group label={`Sak #${id}`}>
+                    <ActionMenu.Item onSelect={console.info}>
+                      Ta sak
+                    </ActionMenu.Item>
+                    <ActionMenu.Sub>
+                      <ActionMenu.SubTrigger>
+                        Endre status
+                      </ActionMenu.SubTrigger>
+                      <ActionMenu.SubContent>
+                        <ActionMenu.Item onSelect={console.info}>
+                          Avslått
+                        </ActionMenu.Item>
+                        <ActionMenu.Item onSelect={console.info}>
+                          Godkjent
+                        </ActionMenu.Item>
+                        <ActionMenu.Sub>
+                          <ActionMenu.SubTrigger>
+                            Andre valg
+                          </ActionMenu.SubTrigger>
+                          <ActionMenu.SubContent>
+                            <ActionMenu.Item onSelect={console.info}>
+                              Til godkjenning
+                            </ActionMenu.Item>
+                            <ActionMenu.Item onSelect={console.info}>
+                              Under behandling
+                            </ActionMenu.Item>
+                            <ActionMenu.Item onSelect={console.info}>
+                              Under kontroll
+                            </ActionMenu.Item>
+                          </ActionMenu.SubContent>
+                        </ActionMenu.Sub>
+                      </ActionMenu.SubContent>
+                    </ActionMenu.Sub>
+                    <ActionMenu.Sub>
+                      <ActionMenu.SubTrigger>
+                        Tildel saksbehandler
+                      </ActionMenu.SubTrigger>
+                      <ActionMenu.SubContent>
+                        <ActionMenu.Group label="Saksbehandlere">
+                          <ActionMenu.Item onSelect={console.info}>
+                            Ola Normann
+                          </ActionMenu.Item>
+                          <ActionMenu.Item onSelect={console.info}>
+                            Bo Ramberg
+                          </ActionMenu.Item>
+                          <ActionMenu.Item onSelect={console.info} disabled>
+                            Ole Olsen
+                          </ActionMenu.Item>
+                          <ActionMenu.Item onSelect={console.info} disabled>
+                            Janne Nilssen
+                          </ActionMenu.Item>
+                          <ActionMenu.Item onSelect={console.info}>
+                            Karin Jakobsen
+                          </ActionMenu.Item>
+                          <ActionMenu.Item onSelect={console.info}>
+                            Kari Nordmann
+                          </ActionMenu.Item>
+                        </ActionMenu.Group>
+                      </ActionMenu.SubContent>
+                    </ActionMenu.Sub>
+
+                    <ActionMenu.Divider />
+
+                    <ActionMenu.Item variant="danger" onSelect={console.info}>
+                      Slett sak
+                    </ActionMenu.Item>
+                  </ActionMenu.Group>
+                </ActionMenu.Content>
+              </ActionMenu>
+            </Table.DataCell>
+          </Table.Row>
+        );
+      })}
+    </Table.Body>
+  </Table>
+);
