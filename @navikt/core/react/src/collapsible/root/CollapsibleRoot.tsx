@@ -1,17 +1,33 @@
 import React, { forwardRef, useCallback } from "react";
-import { useId } from "../utils-external";
-import { useControllableState } from "../utils/hooks";
-import { CollapsibleContextProvider } from "./Collapsible.context";
-import { CollapsibleBaseProps } from "./Collapsible.types";
+import { useId } from "../../utils-external";
+import { useControllableState } from "../../utils/hooks";
 import CollapsibleContent, {
   CollapsibleContentProps,
-} from "./parts/Collapsible.Content";
+} from "../content/CollapsibleContent";
 import CollapsibleTrigger, {
   CollapsibleTriggerProps,
-} from "./parts/Collapsible.Trigger";
+} from "../trigger/CollapsibleTrigger";
+import { CollapsibleContextProvider } from "./CollapsibleRoot.context";
 
-interface CollapsibleProps
-  extends CollapsibleBaseProps, React.HTMLAttributes<HTMLDivElement> {}
+interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The open state of the collapsible when it is initially rendered. Use when you do not need to control its open state.
+   */
+  defaultOpen?: boolean;
+  /**
+   * The controlled open state of the collapsible. Must be used in conjunction with onOpenChange.
+   */
+  open?: boolean;
+  /**
+   * Event handler called when the open state of the collapsible changes.
+   */
+  onOpenChange?: (open: boolean) => void;
+  /**
+   * Render the collapsible content lazily. This means that the content will not be rendered until the collapsible is open.
+   * @default false
+   */
+  lazy?: boolean;
+}
 
 interface CollapsibleComponent extends React.ForwardRefExoticComponent<
   CollapsibleProps & React.RefAttributes<HTMLDivElement>
