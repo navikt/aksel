@@ -2,9 +2,9 @@ import { createStrictContext } from "../../utils/helpers";
 
 export type CollapsibleContextProps = {
   /**
-   * The controlled open state of the collapsible. Must be used in conjunction with onOpenChange.
+   * The open state of the collapsible.
    */
-  open?: boolean;
+  open: boolean;
   /**
    * Allows connecting trigger to content
    */
