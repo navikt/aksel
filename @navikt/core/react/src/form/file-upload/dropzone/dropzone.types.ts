@@ -1,9 +1,10 @@
-import type { ComponentTranslation } from "../../../../utils/i18n/i18n.types";
-import { FormFieldProps } from "../../../useFormField";
-import { FileUploadBaseProps } from "../../FileUpload.types";
+import type { ComponentTranslation } from "../../../utils/i18n/i18n.types";
+import { FormFieldProps } from "../../useFormField";
+import { FileUploadBaseProps } from "../FileUpload.types";
 
 export interface FileUploadDropzoneProps
-  extends FileUploadBaseProps,
+  extends
+    FileUploadBaseProps,
     Omit<FormFieldProps, "size" | "readOnly">,
     Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onSelect" | "onClick">,
     Pick<React.HTMLAttributes<HTMLDivElement>, "onClick"> {
