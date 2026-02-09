@@ -8,7 +8,7 @@ import { formatFileSize } from "../helpers/format-file-size";
 import { ItemActionField } from "../item-action-field/ItemActionField";
 import { ItemHeader } from "../item-header/ItemHeader";
 import { useFileUploadTranslation } from "../root/FileUploadRoot.context";
-import { FileItem } from "./FileUploadItemRoot.types";
+import { FileItem } from "./FileUploadItem.types";
 
 interface FileUploadItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

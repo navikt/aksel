@@ -4,7 +4,7 @@ import { LinkAnchor } from "../../../utils/components/link-anchor";
 import { downloadFile } from "../helpers/download-file";
 import { isNativeFile } from "../helpers/file-type-checker";
 import ItemIcon from "../item-icon/ItemIcon";
-import { FileItem } from "../item-root/FileUploadItemRoot.types";
+import { FileItem } from "../item/FileUploadItem.types";
 
 interface Props {
   file: FileItem;

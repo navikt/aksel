@@ -18,7 +18,4 @@ export type {
   FilesPartitioned,
   FileRejectionReason,
 } from "./FileUpload.types";
-export type {
-  FileItem,
-  FileMetadata,
-} from "./item-root/FileUploadItemRoot.types";
+export type { FileItem, FileMetadata } from "./item/FileUploadItem.types";

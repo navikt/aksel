@@ -8,7 +8,7 @@ import {
 import {
   FileUploadItem,
   type FileUploadItemProps,
-} from "../item-root/FileUploadItemRoot";
+} from "../item/FileUploadItem";
 import {
   FileUploadTrigger,
   type FileUploadTriggerProps,

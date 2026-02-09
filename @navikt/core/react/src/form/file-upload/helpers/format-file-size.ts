@@ -1,4 +1,4 @@
-import { FileItem } from "../item-root/FileUploadItemRoot.types";
+import { FileItem } from "../item/FileUploadItem.types";
 
 const MAX_MEGA_BYTES = 500;
 
