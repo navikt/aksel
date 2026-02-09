@@ -14,8 +14,7 @@ import { useDialogContext } from "../root/DialogRoot.context";
 
 type DialogPosition = "center" | "bottom" | "left" | "right" | "fullscreen";
 
-interface DialogPopupInternalProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface DialogPopupInternalProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Determines if the dialog enters a modal state when open.
    * - `true`: user interaction is limited to just the dialog: focus is trapped, document page scroll is locked, and pointer interactions on outside elements are disabled.

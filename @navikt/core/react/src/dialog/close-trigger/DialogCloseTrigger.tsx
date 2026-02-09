@@ -3,8 +3,7 @@ import { Slot } from "../../utils/components/slot/Slot";
 import { composeEventHandlers } from "../../utils/helpers";
 import { useDialogContext } from "../root/DialogRoot.context";
 
-interface DialogCloseTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface DialogCloseTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactElement;
 }
 

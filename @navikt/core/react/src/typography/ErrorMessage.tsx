@@ -5,7 +5,8 @@ import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
 export interface ErrorMessageProps
-  extends Pick<TypoProps, "spacing">,
+  extends
+    Pick<TypoProps, "spacing">,
     React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * medium: 18px, small: 16px.

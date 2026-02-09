@@ -26,10 +26,9 @@ type InfoCardProps = Omit<
   as?: "div" | "section";
 };
 
-interface InfoCardComponent
-  extends React.ForwardRefExoticComponent<
-    InfoCardProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface InfoCardComponent extends React.ForwardRefExoticComponent<
+  InfoCardProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link InfoCardHeaderProps}
    * @example

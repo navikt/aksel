@@ -10,8 +10,7 @@ import { ItemActionField } from "./ItemActionField";
 import { ItemHeader } from "./ItemHeader";
 import { formatFileSize } from "./utils/format-file-size";
 
-export interface FileUploadItemProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface FileUploadItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Overrides html-tag
    * @default "div"

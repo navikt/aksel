@@ -3,8 +3,10 @@ import { Slot } from "../../../utils/components/slot/Slot";
 import { FileUploadBaseProps } from "../FileUpload.types";
 import { useFileUpload } from "../useFileUpload";
 
-export interface FileUploadTriggerProps
-  extends Omit<FileUploadBaseProps, "fileLimit"> {
+export interface FileUploadTriggerProps extends Omit<
+  FileUploadBaseProps,
+  "fileLimit"
+> {
   children: React.ReactNode;
 }
 

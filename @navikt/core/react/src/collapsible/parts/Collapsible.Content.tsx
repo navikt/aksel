@@ -2,11 +2,10 @@ import React, { forwardRef } from "react";
 import { Slot } from "../../utils/components/slot/Slot";
 import { useCollapsibleContext } from "../Collapsible.context";
 
-export interface CollapsibleContentProps
-  extends Omit<
-    React.HTMLAttributes<HTMLDivElement>,
-    "hidden" | "aria-controls" | "id"
-  > {
+export interface CollapsibleContentProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "hidden" | "aria-controls" | "id"
+> {
   /**
    * When true, will render element as its child. This merges classes, styles and event handlers.
    * @default false

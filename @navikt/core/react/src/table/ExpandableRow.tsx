@@ -9,8 +9,10 @@ import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
 import { isElementInteractiveTarget } from "./Table.utils";
 
-export interface ExpandableRowProps
-  extends Omit<RowProps, "content" | "onRowClick"> {
+export interface ExpandableRowProps extends Omit<
+  RowProps,
+  "content" | "onRowClick"
+> {
   /**
    * Content of the expanded row
    */

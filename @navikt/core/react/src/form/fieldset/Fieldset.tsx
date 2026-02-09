@@ -8,8 +8,7 @@ import { FieldsetContext } from "./context";
 import { useFieldset } from "./useFieldset";
 
 export interface FieldsetProps
-  extends FormFieldProps,
-    FieldsetHTMLAttributes<HTMLFieldSetElement> {
+  extends FormFieldProps, FieldsetHTMLAttributes<HTMLFieldSetElement> {
   /**
    * FormFields in Fieldset
    */

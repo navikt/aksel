@@ -5,8 +5,10 @@ import { cl } from "../../../utils/helpers";
 import { useTabsContext } from "../../Tabs.context";
 import { useTab } from "./useTab";
 
-export interface TabProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
+export interface TabProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "children"
+> {
   /**
    * Tab label.
    */

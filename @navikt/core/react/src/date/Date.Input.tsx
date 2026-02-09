@@ -35,8 +35,7 @@ export const {
 });
 
 export interface DateInputProps
-  extends FormFieldProps,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  extends FormFieldProps, Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * Input label
    */

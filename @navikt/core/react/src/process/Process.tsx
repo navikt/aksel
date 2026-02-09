@@ -40,10 +40,9 @@ const { Provider: ProcessContextProvider, useContext: useProcessContext } =
       "`<Process.Event />` must be used within a `<Process />` component.",
   });
 
-interface ProcessComponent
-  extends React.ForwardRefExoticComponent<
-    ProcessProps & React.RefAttributes<HTMLOListElement>
-  > {
+interface ProcessComponent extends React.ForwardRefExoticComponent<
+  ProcessProps & React.RefAttributes<HTMLOListElement>
+> {
   /**
    * @see 🏷️ {@link ProcessEventProps}
    */

@@ -2,8 +2,7 @@ import React, { forwardRef } from "react";
 import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 
-export interface InternalHeaderButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface InternalHeaderButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Application Button
    */

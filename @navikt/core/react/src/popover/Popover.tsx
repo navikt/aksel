@@ -74,10 +74,9 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   flip?: boolean;
 }
 
-interface PopoverComponent
-  extends React.ForwardRefExoticComponent<
-    PopoverProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface PopoverComponent extends React.ForwardRefExoticComponent<
+  PopoverProps & React.RefAttributes<HTMLDivElement>
+> {
   Content: PopoverContentType;
 }
 

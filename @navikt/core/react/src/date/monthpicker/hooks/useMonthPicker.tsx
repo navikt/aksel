@@ -6,11 +6,10 @@ import { getLocaleFromString } from "../../Date.locale";
 import { formatDateForInput, isValidDate, parseDate } from "../../date-utils";
 import { MonthPickerProps } from "../MonthPicker.types";
 
-export interface UseMonthPickerOptions
-  extends Pick<
-    MonthPickerProps,
-    "locale" | "fromDate" | "toDate" | "disabled" | "defaultSelected"
-  > {
+export interface UseMonthPickerOptions extends Pick<
+  MonthPickerProps,
+  "locale" | "fromDate" | "toDate" | "disabled" | "defaultSelected"
+> {
   /**
    * Make Date-selection required
    */

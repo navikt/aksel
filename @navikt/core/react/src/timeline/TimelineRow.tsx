@@ -12,8 +12,7 @@ import {
   TimelineComponentTypes,
 } from "./utils/types.internal";
 
-export interface TimelineRowProps
-  extends React.HTMLAttributes<HTMLOListElement> {
+export interface TimelineRowProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * Label for the timeline row
    */
@@ -29,10 +28,9 @@ export interface TimelineRowProps
   icon?: React.ReactNode;
 }
 
-export interface TimelineRowType
-  extends React.ForwardRefExoticComponent<
-    TimelineRowProps & React.RefAttributes<HTMLOListElement>
-  > {
+export interface TimelineRowType extends React.ForwardRefExoticComponent<
+  TimelineRowProps & React.RefAttributes<HTMLOListElement>
+> {
   componentType: TimelineComponentTypes;
 }
 

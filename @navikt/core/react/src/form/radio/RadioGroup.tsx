@@ -15,11 +15,10 @@ export interface RadioGroupContextProps {
 export const RadioGroupContext =
   React.createContext<RadioGroupContextProps | null>(null);
 
-export interface RadioGroupProps
-  extends Omit<
-    FieldsetProps,
-    "onChange" | "errorPropagation" | "defaultValue" | "nativeReadOnly"
-  > {
+export interface RadioGroupProps extends Omit<
+  FieldsetProps,
+  "onChange" | "errorPropagation" | "defaultValue" | "nativeReadOnly"
+> {
   /**
    * Collection of `<Radio />`-elements
    */

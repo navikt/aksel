@@ -3,7 +3,8 @@ import { FormFieldProps } from "../../../useFormField";
 import { FileUploadBaseProps } from "../../FileUpload.types";
 
 export interface FileUploadDropzoneProps
-  extends FileUploadBaseProps,
+  extends
+    FileUploadBaseProps,
     Omit<FormFieldProps, "size" | "readOnly">,
     Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onSelect" | "onClick">,
     Pick<React.HTMLAttributes<HTMLDivElement>, "onClick"> {

@@ -6,8 +6,7 @@ import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
 export interface DetailProps
-  extends TypoProps,
-    React.HTMLAttributes<HTMLParagraphElement> {
+  extends TypoProps, React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * @deprecated Medium is now the same as small.
    */

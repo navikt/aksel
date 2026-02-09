@@ -4,8 +4,7 @@ import { cl } from "../utils/helpers";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 import { ExpansionCardContext } from "./context";
 
-export interface ExpansionCardHeaderProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface ExpansionCardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 

@@ -8,8 +8,7 @@ import { FormFieldProps, useFormField } from "./../useFormField";
 import Counter from "./TextareaCounter";
 
 export interface TextareaProps
-  extends FormFieldProps,
-    React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  extends FormFieldProps, React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Allowed character-count for content
    *

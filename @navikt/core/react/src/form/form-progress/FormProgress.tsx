@@ -9,8 +9,7 @@ import { BodyShort } from "../../typography";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { ComponentTranslation } from "../../utils/i18n/i18n.types";
 
-export interface FormProgressProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface FormProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Total number of steps.
    */
@@ -53,10 +52,9 @@ export interface FormProgressProps
 
 export type FormProgressStepProps = StepperStepProps;
 
-interface FormProgressComponent
-  extends React.ForwardRefExoticComponent<
-    FormProgressProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface FormProgressComponent extends React.ForwardRefExoticComponent<
+  FormProgressProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * To be used inside `<FormProgress>`.
    */

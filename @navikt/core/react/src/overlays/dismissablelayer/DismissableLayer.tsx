@@ -19,8 +19,7 @@ import { useFocusOutside } from "./util/useFocusOutside";
 import { usePointerDownOutside } from "./util/usePointerDownOutside";
 import { usePointerUpOutside } from "./util/usePointerUpOutside";
 
-interface DismissableLayerBaseProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface DismissableLayerBaseProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * When `true`, hover/focus/click interactions will be disabled on elements outside
    * the `DismissableLayer`. Users will need to click twice on outside elements to

@@ -10,8 +10,7 @@ import Row from "./Row";
 import { TableContext } from "./context";
 import { SortState } from "./types";
 
-export interface TableProps
-  extends React.TableHTMLAttributes<HTMLTableElement> {
+export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {
   /**
    * Changes padding around Cells
    * @default "medium"
@@ -37,10 +36,9 @@ export interface TableProps
   onSortChange?: (sortKey: string) => void;
 }
 
-export interface TableType
-  extends React.ForwardRefExoticComponent<
-    TableProps & React.RefAttributes<HTMLTableElement>
-  > {
+export interface TableType extends React.ForwardRefExoticComponent<
+  TableProps & React.RefAttributes<HTMLTableElement>
+> {
   Header: typeof Header;
   Body: typeof Body;
   Row: typeof Row;
