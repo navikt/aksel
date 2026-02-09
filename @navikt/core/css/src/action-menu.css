@@ -13,30 +13,7 @@
   &[data-state="open"] {
     @starting-style {
       opacity: 0.8;
-    }
-
-    &[data-side="bottom"] {
-      @starting-style {
-        transform: scale3d(0.94, 0.94, 0.94);
-      }
-    }
-
-    &[data-side="top"] {
-      @starting-style {
-        transform: scale3d(0.94, 0.94, 0.94);
-      }
-    }
-
-    &[data-side="right"] {
-      @starting-style {
-        transform: scale3d(0.94, 0.94, 0.94);
-      }
-    }
-
-    &[data-side="left"] {
-      @starting-style {
-        transform: scale3d(0.94, 0.94, 0.94);
-      }
+      transform: scale3d(0.94, 0.94, 0.94);
     }
   }
 }
