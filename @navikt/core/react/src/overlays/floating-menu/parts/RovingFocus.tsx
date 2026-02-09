@@ -4,8 +4,10 @@ import { composeEventHandlers, ownerDocument } from "../../../utils/helpers";
 import type { DescendantsManager } from "../../../utils/hooks";
 import { useEventCallback, useMergeRefs } from "../../../utils/hooks";
 
-interface RovingFocusProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "tabIndex"> {
+interface RovingFocusProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "tabIndex"
+> {
   asChild?: boolean;
   descendants: DescendantsManager<HTMLDivElement, any>;
   onEntryFocus?: (event: Event) => void;

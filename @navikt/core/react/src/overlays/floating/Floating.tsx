@@ -315,6 +315,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
             const { width: anchorWidth, height: anchorHeight } =
               rects.reference;
             const contentStyle = elements.floating.style;
+
             /**
              * Allows styling and animations based on the available space.
              */

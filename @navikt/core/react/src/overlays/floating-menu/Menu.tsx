@@ -251,7 +251,8 @@ type MenuContentInternalPrivateProps = {
 };
 
 interface MenuContentInternalProps
-  extends MenuContentInternalPrivateProps,
+  extends
+    MenuContentInternalPrivateProps,
     Omit<
       React.ComponentPropsWithoutRef<typeof Floating.Content>,
       "dir" | "onPlaced"
