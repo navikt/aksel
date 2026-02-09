@@ -4,11 +4,11 @@
   border-radius: var(--ax-radius-12);
   border: 1px solid var(--ax-border-neutral-subtleA);
   box-shadow: var(--ax-shadow-dialog);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  transform-origin: var(--__axc-action-menu-content-transform-origin);
   transition:
     transform 150ms ease allow-discrete,
     opacity 150ms ease allow-discrete;
-
-  --__acx-action-menu-transform-distance: 0.5rem;
 
   &[data-state="open"] {
     @starting-style {
@@ -17,39 +17,27 @@
 
     &[data-side="bottom"] {
       @starting-style {
-        transform: translate3d(0, calc(var(--__acx-action-menu-transform-distance) * -1), 0) scale3d(0.95, 0.95, 0.95);
+        transform: scale3d(0.94, 0.94, 0.94);
       }
     }
 
     &[data-side="top"] {
       @starting-style {
-        transform: translate3d(0, var(--__acx-action-menu-transform-distance), 0) scale3d(0.95, 0.95, 0.95);
+        transform: scale3d(0.94, 0.94, 0.94);
       }
     }
 
     &[data-side="right"] {
       @starting-style {
-        transform: translate3d(calc(var(--__acx-action-menu-transform-distance) * -1), 0, 0) scale3d(0.95, 0.95, 0.95);
+        transform: scale3d(0.94, 0.94, 0.94);
       }
     }
 
     &[data-side="left"] {
       @starting-style {
-        transform: translate3d(var(--__acx-action-menu-transform-distance), 0, 0) scale3d(0.95, 0.95, 0.95);
+        transform: scale3d(0.94, 0.94, 0.94);
       }
     }
-  }
-}
-
-.aksel-action-menu__sub-content {
-  --__acx-action-menu-transform-distance: 0rem;
-
-  &[data-side="right"] {
-    transform-origin: 0 0;
-  }
-
-  &[data-side="left"] {
-    transform-origin: 0 0;
   }
 }
 
@@ -63,8 +51,6 @@
   background-color: var(--ax-bg-raised);
   min-width: 128px;
   max-width: min(95vw, 640px);
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  transform-origin: var(--__axc-action-menu-content-transform-origin);
   animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   padding: var(--__axc-action-menu-content-p);
@@ -136,11 +122,6 @@
   display: flex;
   align-items: center;
   gap: var(--ax-space-4);
-
-  svg {
-    font-size: 18px;
-    flex-shrink: 0;
-  }
 }
 
 .aksel-action-menu__marker--right {
@@ -157,10 +138,22 @@
 }
 
 .aksel-action-menu__marker-icon {
+  svg {
+    font-size: 1.125rem;
+    flex-shrink: 0;
+  }
+
   &.aksel-action-menu__marker--right {
     margin-left: 0;
     padding-left: 0;
   }
+}
+
+.aksel-action-menu__sub-icon {
+  display: grid;
+  place-content: center;
+  font-size: 1.125rem;
+  margin-left: auto;
 }
 
 /* --------------------------- ActionMenu shortcut -------------------------- */

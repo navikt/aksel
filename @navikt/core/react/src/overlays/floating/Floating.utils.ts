@@ -57,4 +57,4 @@ function getSideAndAlignFromPlacement(placement: Placement) {
 }
 
 export { getSideAndAlignFromPlacement, transformOrigin };
-export type { Side, Align, Measurable };
+export type { Align, Measurable, Side };

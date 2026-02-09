@@ -939,9 +939,9 @@ export const ActionMenuSubTrigger = forwardRef<
             {icon}
           </Marker>
         )}
-        <Marker placement="right">
+        <div className="aksel-action-menu__sub-icon">
           <ChevronRightIcon aria-hidden />
-        </Marker>
+        </div>
       </Menu.SubTrigger>
     );
   },
@@ -959,7 +959,7 @@ interface ActionMenuSubContentProps extends React.HTMLAttributes<HTMLDivElement>
 export const ActionMenuSubContent = forwardRef<
   ActionMenuSubContentElement,
   ActionMenuSubContentProps
->(({ children, className, ...rest }: ActionMenuSubContentProps, ref) => {
+>(({ children, className, style, ...rest }: ActionMenuSubContentProps, ref) => {
   const context = useActionMenuContext();
 
   return (
@@ -974,6 +974,15 @@ export const ActionMenuSubContent = forwardRef<
           "aksel-action-menu__content aksel-action-menu__sub-content",
           className,
         )}
+        style={{
+          ...style,
+          ...{
+            "--__axc-action-menu-content-transform-origin":
+              "var(--__axc-floating-transform-origin)",
+            "--__axc-action-menu-content-available-height":
+              "var(--__axc-floating-available-height)",
+          },
+        }}
       >
         <div className="aksel-action-menu__content-inner">{children}</div>
       </Menu.SubContent>
