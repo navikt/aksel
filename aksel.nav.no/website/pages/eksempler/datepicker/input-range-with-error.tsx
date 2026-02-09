@@ -23,15 +23,15 @@ const Example = () => {
               {...fromInputProps}
               label="Fra"
               description="Format: dd.mm.åååå"
-              error={true}
-              aria-errormessage="input-range-with-error-example"
+              error
+              aria-describedby="input-range-with-error-example"
             />
             <DatePicker.Input
               {...toInputProps}
               label="Til"
               description="Format: dd.mm.åååå"
-              error={true}
-              aria-errormessage="input-range-with-error-example"
+              error
+              aria-describedby="input-range-with-error-example"
             />
           </HStack>
           <div
@@ -40,7 +40,7 @@ const Example = () => {
             aria-live="polite"
           >
             <ErrorMessage showIcon>
-              Ugyldig dato. Formatet må være dd.mm.åååå
+              Du må fylle ut fra- og til-datoer.
             </ErrorMessage>
           </div>
         </VStack>
@@ -59,5 +59,5 @@ export const Demo = {
 
 export const args = {
   index: 11,
-  desc: "Før du velger å bruke range mode, vurder om to separate datepickere i single mode er bedre. Range fungerer best for korte perioder innenfor en måned.",
+  desc: "Eksempel på hvordan du legger inn feilmelding som gjelder for begge feltene.",
 };
