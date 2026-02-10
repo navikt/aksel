@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { forwardRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
@@ -136,7 +135,9 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
     const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-    useTableKeyboardNav(tableRef, { enabled: withKeyboardNav });
+    const { onFocus, tableTabIndex } = useTableKeyboardNav(tableRef, {
+      enabled: withKeyboardNav,
+    });
 
     return (
       <div className="aksel-data-table__border-wrapper">
@@ -146,7 +147,8 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
             ref={mergedRef}
             className={cl("aksel-data-table", className)}
             data-density={rowDensity}
-            tabIndex={withKeyboardNav ? 0 : undefined}
+            tabIndex={tableTabIndex}
+            onFocus={onFocus}
           />
         </div>
       </div>

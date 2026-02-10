@@ -150,6 +150,17 @@
   }
 }
 
+.aksel-data-table__td,
+.aksel-data-table__th {
+  scroll-margin-block: var(--ax-space-0);
+  scroll-margin-inline: var(--ax-space-0);
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -4px;
+  }
+}
+
 .aksel-data-table__tfoot {
   background-color: var(--ax-bg-raised);
 }
