@@ -37,6 +37,20 @@
   }
 }
 
+.aksel-data-table--zebra-stripes {
+  & .aksel-data-table__tbody :where(.aksel-data-table__tr:nth-child(odd)) {
+    background-color: var(--ax-bg-neutral-softA);
+  }
+}
+
+.aksel-data-table--truncate-content {
+  .aksel-data-table__td > div {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
 .aksel-data-table__thead {
   background-color: var(--ax-bg-raised);
   position: sticky;
@@ -141,12 +155,6 @@
 
   .aksel-data-table:not(:has(.aksel-data-table__tfoot)) .aksel-data-table__tr:last-child & {
     border-block-end: none;
-  }
-
-  & > div {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
   }
 }
 

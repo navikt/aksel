@@ -11,8 +11,12 @@ import {
 import React from "react";
 import {
   CheckmarkIcon,
+  ChevronDownUpIcon,
+  ChevronUpDownIcon,
   CogIcon,
   Density1Icon,
+  NotePencilFillIcon,
+  NotePencilIcon,
   RectangleSectionsIcon,
 } from "@navikt/aksel-icons";
 import { ActionMenu } from "../../action-menu";
@@ -86,6 +90,8 @@ export const TanstackExample: Story = {
     const [rowDensity, setRowDensity] = React.useState<
       "normal" | "condensed" | "spacious"
     >("normal");
+    const [zebraStripes, setZebraStripes] = React.useState(false);
+    const [truncateContent, setTruncateContent] = React.useState(true);
     const table = useReactTable({
       columns,
       data: sampleData,
@@ -198,6 +204,32 @@ export const TanstackExample: Story = {
               </ActionMenu.Group>
             </ActionMenu.Content>
           </ActionMenu>
+          <Button
+            icon={
+              zebraStripes ? (
+                <NotePencilFillIcon title="Skru striper av" />
+              ) : (
+                <NotePencilIcon title="Skru striper på" />
+              )
+            }
+            data-color="neutral"
+            variant="tertiary"
+            size="small"
+            onClick={() => setZebraStripes((old) => !old)}
+          />
+          <Button
+            icon={
+              truncateContent ? (
+                <ChevronUpDownIcon title="Kutt innhold" />
+              ) : (
+                <ChevronDownUpIcon title="Vis fullstendig innhold" />
+              )
+            }
+            data-color="neutral"
+            variant="tertiary"
+            size="small"
+            onClick={() => setTruncateContent((old) => !old)}
+          />
         </DataToolbar>
 
         <DataActionBar numOfSelectedRows={2} onClear={() => alert("Cleared!")}>
@@ -209,7 +241,12 @@ export const TanstackExample: Story = {
           </Button>
         </DataActionBar>
 
-        <DataTable style={columnSizeVars()} rowDensity={rowDensity}>
+        <DataTable
+          style={columnSizeVars()}
+          rowDensity={rowDensity}
+          zebraStripes={zebraStripes}
+          truncateContent={truncateContent}
+        >
           <DataTable.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (
