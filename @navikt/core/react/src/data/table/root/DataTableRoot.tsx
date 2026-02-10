@@ -22,7 +22,6 @@ import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
 
 interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode;
-  rowDensity?: "condensed" | "normal" | "spacious";
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -121,14 +120,13 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
 }
 
 const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
-  ({ className, rowDensity = "normal", ...rest }, forwardedRef) => {
+  ({ className, ...rest }, forwardedRef) => {
     return (
       <div className="aksel-data-table__wrapper">
         <table
           {...rest}
           ref={forwardedRef}
           className={cl("aksel-data-table", className)}
-          data-density={rowDensity}
         />
       </div>
     );

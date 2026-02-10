@@ -9,12 +9,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React from "react";
-import {
-  CheckmarkIcon,
-  CogIcon,
-  Density1Icon,
-  RectangleSectionsIcon,
-} from "@navikt/aksel-icons";
+import { CogIcon, RectangleSectionsIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { ActionMenu } from "../../overlays/action-menu";
@@ -83,9 +78,6 @@ export const Default: Story = {
 
 export const TanstackExample: Story = {
   render: () => {
-    const [rowDensity, setRowDensity] = React.useState<
-      "normal" | "condensed" | "spacious"
-    >("normal");
     const table = useReactTable({
       columns,
       data: sampleData,
@@ -162,42 +154,6 @@ export const TanstackExample: Story = {
               })}
             </ActionMenu.Content>
           </ActionMenu>
-          <ActionMenu>
-            <ActionMenu.Trigger>
-              <Button
-                data-color="neutral"
-                variant="tertiary"
-                size="small"
-                icon={<Density1Icon title="Tetthet" />}
-              />
-            </ActionMenu.Trigger>
-            <ActionMenu.Content>
-              <ActionMenu.Group aria-label="Velg tetthet">
-                <ActionMenu.Item
-                  onSelect={() => setRowDensity("condensed")}
-                  icon={
-                    rowDensity === "condensed" ? <CheckmarkIcon /> : undefined
-                  }
-                >
-                  Tett
-                </ActionMenu.Item>
-                <ActionMenu.Item
-                  onSelect={() => setRowDensity("normal")}
-                  icon={rowDensity === "normal" ? <CheckmarkIcon /> : undefined}
-                >
-                  Normal
-                </ActionMenu.Item>
-                <ActionMenu.Item
-                  onSelect={() => setRowDensity("spacious")}
-                  icon={
-                    rowDensity === "spacious" ? <CheckmarkIcon /> : undefined
-                  }
-                >
-                  Løs
-                </ActionMenu.Item>
-              </ActionMenu.Group>
-            </ActionMenu.Content>
-          </ActionMenu>
         </DataToolbar>
 
         <DataActionBar numOfSelectedRows={2} onClear={() => alert("Cleared!")}>
@@ -209,7 +165,7 @@ export const TanstackExample: Story = {
           </Button>
         </DataActionBar>
 
-        <DataTable style={columnSizeVars()} rowDensity={rowDensity}>
+        <DataTable style={columnSizeVars()}>
           <DataTable.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (

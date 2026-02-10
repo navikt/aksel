@@ -18,16 +18,6 @@
   Maybe we could "manually" resize the other columns so that it fills the container? But that would add a lot of complexity.
   We could have a toggle for the resize feature, and let the consumer decide which downside they prefer. Might need that anyways.
   */
-
-  --__axc-data-table-density: var(--ax-space-16) 0;
-
-  &[data-density="condensed"] {
-    --__axc-data-table-density: 0 0;
-  }
-
-  &[data-density="spacious"] {
-    --__axc-data-table-density: var(--ax-space-32) 0;
-  }
 }
 
 .aksel-data-table__thead {
@@ -118,7 +108,6 @@
   border-block-end: 1px solid var(--ax-border-neutral-subtle);
   border-block-start: 1px solid var(--ax-bg-raised);
   color: var(--ax-text-neutral-subtle);
-  padding: var(--__axc-data-table-density);
   padding-inline: 1rem;
   overflow: hidden;
   border-inline-end: 1px solid var(--ax-border-neutral-subtle);
