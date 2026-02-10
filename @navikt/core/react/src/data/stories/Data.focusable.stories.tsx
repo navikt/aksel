@@ -45,9 +45,6 @@ export const Focusable: Story = {
       },
       state: {},
       columnResizeMode: "onChange",
-      debugTable: true,
-      debugHeaders: true,
-      debugColumns: true,
     });
 
     const columnSizeVars = () => {
@@ -109,11 +106,53 @@ export const Focusable: Story = {
       </div>
     );
   },
-  parameters: {
-    a11y: { disable: true },
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+};
+
+export const Spans: Story = {
+  render: () => (
+    <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
+      <DataTable style={{ width: "100%" }} withKeyboardNav>
+        <DataTable.Thead>
+          <DataTable.Tr>
+            <DataTable.Th colSpan={2}>Group A</DataTable.Th>
+            <DataTable.Th colSpan={2}>Group B</DataTable.Th>
+          </DataTable.Tr>
+          <DataTable.Tr>
+            <DataTable.Th>Col 1</DataTable.Th>
+            <DataTable.Th>Col 2</DataTable.Th>
+            <DataTable.Th>Col 3</DataTable.Th>
+            <DataTable.Th>Col 4</DataTable.Th>
+          </DataTable.Tr>
+        </DataTable.Thead>
+        <DataTable.Tbody>
+          <DataTable.Tr>
+            <DataTable.Td rowSpan={2}>Rowspan 2</DataTable.Td>
+            <DataTable.Td>R1C2</DataTable.Td>
+            <DataTable.Td colSpan={2}>Colspan 2</DataTable.Td>
+          </DataTable.Tr>
+          <DataTable.Tr>
+            <DataTable.Td>R2C2</DataTable.Td>
+            <DataTable.Td>R2C3</DataTable.Td>
+            <DataTable.Td>R2C4</DataTable.Td>
+          </DataTable.Tr>
+          <DataTable.Tr>
+            <DataTable.Td>R3C1</DataTable.Td>
+            <DataTable.Td colSpan={2}>Colspan 2</DataTable.Td>
+            <DataTable.Td>R3C4</DataTable.Td>
+          </DataTable.Tr>
+          <DataTable.Tr>
+            <DataTable.Td rowSpan={2}>Rowspan 2</DataTable.Td>
+            <DataTable.Td>R4C2</DataTable.Td>
+            <DataTable.Td>R4C3</DataTable.Td>
+            <DataTable.Td>R4C4</DataTable.Td>
+          </DataTable.Tr>
+          <DataTable.Tr>
+            <DataTable.Td colSpan={3}>Colspan 3</DataTable.Td>
+          </DataTable.Tr>
+        </DataTable.Tbody>
+      </DataTable>
+    </div>
+  ),
 };
 
 const TableBody = ({ table }: { table: Table<PersonInfo> }) => (

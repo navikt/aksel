@@ -126,7 +126,7 @@
     transition: none;
   }
 
-  &:not(.aksel-data-table__th:hover &, &:focus-visible, &[data-expanded="true"]) {
+  &:not(.aksel-data-table__th:is(:hover, :focus-within) &, &:focus-visible, &[data-expanded="true"]) {
     opacity: 0;
     min-width: 0;
     max-width: 0;

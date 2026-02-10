@@ -49,8 +49,8 @@ function useTableKeyboardNav(
     }
 
     const target = event.target as Element | null;
-    const cell = target?.closest("td, th") ?? null;
-    if (!cell || cell === currentCell) {
+    const newCell = target?.closest("td, th") ?? null;
+    if (!newCell || newCell === currentCell) {
       return;
     }
 
@@ -58,8 +58,7 @@ function useTableKeyboardNav(
       (currentCell as HTMLElement).tabIndex = -1;
     }
 
-    (cell as HTMLElement).tabIndex = 0;
-    setCurrentCell(cell);
+    setCurrentCell(newCell);
   });
 
   useEffect(() => {
@@ -125,12 +124,16 @@ function onNavigationKeyDown(
 
 function focusCell(cell: Element): Element {
   const el = cell as HTMLElement;
-  el.tabIndex = 0;
 
-  const focusTarget =
-    el.querySelector(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]',
-    ) ?? el;
+  const insideFocus = el.querySelector(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]',
+  );
+
+  if (!insideFocus) {
+    el.tabIndex = 0;
+  }
+
+  const focusTarget = insideFocus ?? el;
 
   (focusTarget as HTMLElement).focus({
     preventScroll: true,

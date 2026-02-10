@@ -1,7 +1,13 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 
-type DataTableTdProps = React.HTMLAttributes<HTMLTableCellElement>;
+interface DataTableTdProps extends React.HTMLAttributes<HTMLTableCellElement> {
+  /**
+   * TODO: Shouldnt be needed to declare these here... But getting type-errors if not
+   */
+  colSpan?: number;
+  rowSpan?: number;
+}
 
 const DataTableTd = forwardRef<HTMLTableCellElement, DataTableTdProps>(
   ({ className, children, ...rest }, forwardedRef) => {
