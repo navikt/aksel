@@ -1,7 +1,14 @@
-/* TODO: Overflow does not currently work with fixed table layout. No idea why... */
-.aksel-data-table__wrapper {
-  overflow-x: auto;
+.aksel-data-table__border-wrapper {
+  border: 1px solid var(--ax-border-neutral-subtle);
+  border-radius: var(--ax-radius-12);
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.aksel-data-table__scroll-wrapper {
+  overflow: auto;
   width: 100%;
+  height: 100%;
   position: relative;
 }
 
@@ -32,6 +39,8 @@
 
 .aksel-data-table__thead {
   background-color: var(--ax-bg-raised);
+  position: sticky;
+  top: 0;
 }
 
 .aksel-data-table__tbody {
@@ -49,10 +58,10 @@
   color: var(--ax-text-neutral);
   padding-inline: var(--ax-space-16);
   text-align: start;
-  border-inline-end: 1px solid var(--ax-border-neutral-subtle);
+  border-block-end: 1px solid var(--ax-border-neutral-subtle);
   overflow: hidden;
 
-  &:first-child {
+  &:not(:first-child) {
     border-inline-start: 1px solid var(--ax-border-neutral-subtle);
   }
 }
@@ -121,10 +130,17 @@
   padding: var(--__axc-data-table-density);
   padding-inline: 1rem;
   overflow: hidden;
-  border-inline-end: 1px solid var(--ax-border-neutral-subtle);
 
-  &:first-child {
+  &:not(:first-child) {
     border-inline-start: 1px solid var(--ax-border-neutral-subtle);
+  }
+
+  .aksel-data-table__tfoot .aksel-data-table__tr:last-child & {
+    border-block-end: none;
+  }
+
+  .aksel-data-table:not(:has(.aksel-data-table__tfoot)) .aksel-data-table__tr:last-child & {
+    border-block-end: none;
   }
 
   & > div {

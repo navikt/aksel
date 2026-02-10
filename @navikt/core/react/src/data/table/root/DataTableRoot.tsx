@@ -139,14 +139,16 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     useTableKeyboardNav(tableRef, { enabled: withKeyboardNav });
 
     return (
-      <div className="aksel-data-table__wrapper">
-        <table
-          {...rest}
-          ref={mergedRef}
-          className={cl("aksel-data-table", className)}
-          data-density={rowDensity}
-          tabIndex={withKeyboardNav ? 0 : undefined}
-        />
+      <div className="aksel-data-table__border-wrapper">
+        <div className="aksel-data-table__scroll-wrapper">
+          <table
+            {...rest}
+            ref={mergedRef}
+            className={cl("aksel-data-table", className)}
+            data-density={rowDensity}
+            tabIndex={withKeyboardNav ? 0 : undefined}
+          />
+        </div>
       </div>
     );
   },

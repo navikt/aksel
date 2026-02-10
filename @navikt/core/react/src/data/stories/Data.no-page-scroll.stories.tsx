@@ -9,19 +9,13 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React from "react";
-import {
-  CheckmarkIcon,
-  CogIcon,
-  Density1Icon,
-  RectangleSectionsIcon,
-} from "@navikt/aksel-icons";
+import { CogIcon, RectangleSectionsIcon } from "@navikt/aksel-icons";
 import { ActionMenu } from "../../action-menu";
 import { Button } from "../../button";
+import { Box } from "../../primitives/box";
 import { VStack } from "../../primitives/stack";
-import DataActionBar from "../action-bar/root/DataActionBarRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
-import { DataTableProfiler } from "./DataTableProfiler";
 import { PersonInfo, columns, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
@@ -29,63 +23,16 @@ const meta: Meta<typeof DataTable> = {
   component: DataTable,
   parameters: {
     chromatic: { disable: true },
-    layout: "padded",
+    layout: "fullscreen",
   },
-  decorators: [(Story) => <DataTableProfiler>{Story()}</DataTableProfiler>],
 };
 
 export default meta;
 
 type Story = StoryObj<typeof DataTable>;
 
-export const Default: Story = {
-  render: () => (
-    <VStack gap="space-16">
-      <DataToolbar>
-        <DataToolbar.SearchField label="Tekstfilter" />
-        <DataToolbar.ToggleButton icon={<RectangleSectionsIcon />} />
-      </DataToolbar>
-
-      <DataActionBar numOfSelectedRows={2} onClear={() => alert("Cleared!")}>
-        <Button variant="secondary" size="small">
-          Handling 1
-        </Button>
-        <Button variant="secondary" size="small">
-          Handling 2
-        </Button>
-      </DataActionBar>
-
-      <DataTable>
-        <DataTable.Thead>
-          <DataTable.Tr>
-            <DataTable.Th>Header 1</DataTable.Th>
-            <DataTable.Th>Header 2</DataTable.Th>
-          </DataTable.Tr>
-        </DataTable.Thead>
-        <DataTable.Tbody>
-          <DataTable.Tr>
-            <DataTable.Td>Data 1</DataTable.Td>
-            <DataTable.Td>Data 2</DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td>Data 1</DataTable.Td>
-            <DataTable.Td>Data 2</DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td>Data 1</DataTable.Td>
-            <DataTable.Td>Data 2</DataTable.Td>
-          </DataTable.Tr>
-        </DataTable.Tbody>
-      </DataTable>
-    </VStack>
-  ),
-};
-
-export const TanstackExample: Story = {
+export const NoPageScroll: Story = {
   render: () => {
-    const [rowDensity, setRowDensity] = React.useState<
-      "normal" | "condensed" | "spacious"
-    >("normal");
     const table = useReactTable({
       columns,
       data: sampleData,
@@ -107,20 +54,17 @@ export const TanstackExample: Story = {
       debugColumns: true,
     });
 
-    const columnSizeVars = () => {
-      const headers = table.getFlatHeaders();
-      const colSizes: { [key: string]: `${number}px` } = {};
-      for (let i = 0; i < headers.length; i++) {
-        const header = headers[i];
-        colSizes[`--header-${header.id}-size`] = `${header.getSize()}px`;
-        colSizes[`--col-${header.column.id}-size`] =
-          `${header.column.getSize()}px`;
-      }
-      return colSizes;
-    };
-
     return (
-      <VStack gap="space-16">
+      <VStack padding="space-16" gap="space-16" height="100vh">
+        <Box
+          borderWidth="1"
+          padding="space-16"
+          borderColor="neutral"
+          borderRadius="12"
+        >
+          Aktive filtre her
+        </Box>
+
         <DataToolbar>
           <DataToolbar.SearchField
             label="Tekstfilter"
@@ -162,54 +106,9 @@ export const TanstackExample: Story = {
               })}
             </ActionMenu.Content>
           </ActionMenu>
-          <ActionMenu>
-            <ActionMenu.Trigger>
-              <Button
-                data-color="neutral"
-                variant="tertiary"
-                size="small"
-                icon={<Density1Icon title="Tetthet" />}
-              />
-            </ActionMenu.Trigger>
-            <ActionMenu.Content>
-              <ActionMenu.Group aria-label="Velg tetthet">
-                <ActionMenu.Item
-                  onSelect={() => setRowDensity("condensed")}
-                  icon={
-                    rowDensity === "condensed" ? <CheckmarkIcon /> : undefined
-                  }
-                >
-                  Tett
-                </ActionMenu.Item>
-                <ActionMenu.Item
-                  onSelect={() => setRowDensity("normal")}
-                  icon={rowDensity === "normal" ? <CheckmarkIcon /> : undefined}
-                >
-                  Normal
-                </ActionMenu.Item>
-                <ActionMenu.Item
-                  onSelect={() => setRowDensity("spacious")}
-                  icon={
-                    rowDensity === "spacious" ? <CheckmarkIcon /> : undefined
-                  }
-                >
-                  Løs
-                </ActionMenu.Item>
-              </ActionMenu.Group>
-            </ActionMenu.Content>
-          </ActionMenu>
         </DataToolbar>
 
-        <DataActionBar numOfSelectedRows={2} onClear={() => alert("Cleared!")}>
-          <Button variant="secondary" size="small">
-            Handling 1
-          </Button>
-          <Button variant="secondary" size="small">
-            Handling 2
-          </Button>
-        </DataActionBar>
-
-        <DataTable style={columnSizeVars()} rowDensity={rowDensity}>
+        <DataTable>
           <DataTable.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (
@@ -218,14 +117,8 @@ export const TanstackExample: Story = {
                     return (
                       <DataTable.Th
                         key={header.id}
-                        style={{ width: `var(--header-${header.id}-size)` }}
+                        size={header.getSize()}
                         resizeHandler={header.getResizeHandler()}
-                        /* pinningHandler={
-                          header.column.getIsPinned() === "left"
-                            ? () => header.column.pin(false)
-                            : () => header.column.pin("left")
-                        }
-                        isPinned={header.column.getIsPinned() === "left"} */
                         sortDirection={header.column.getIsSorted() || "none"}
                         onSortChange={(_, event) => {
                           const handler =
@@ -266,6 +159,15 @@ export const TanstackExample: Story = {
             ))}
           </DataTable.Tfoot>
         </DataTable>
+
+        <Box
+          borderWidth="1"
+          padding="space-16"
+          borderColor="neutral"
+          borderRadius="12"
+        >
+          Paginering og sånn her
+        </Box>
       </VStack>
     );
   },
@@ -276,23 +178,25 @@ export const TanstackExample: Story = {
   },
 };
 
-const TableBody = ({ table }: { table: Table<PersonInfo> }) => (
-  <DataTable.Tbody>
-    {table.getRowModel().rows.map((row) => {
-      return (
-        <DataTable.Tr key={row.id}>
-          {row.getVisibleCells().map((cell) => {
-            return (
-              <DataTable.Td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </DataTable.Td>
-            );
-          })}
-        </DataTable.Tr>
-      );
-    })}
-  </DataTable.Tbody>
-);
+const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
+  return (
+    <DataTable.Tbody>
+      {table.getRowModel().rows.map((row) => {
+        return (
+          <DataTable.Tr key={row.id}>
+            {row.getVisibleCells().map((cell) => {
+              return (
+                <DataTable.Td key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </DataTable.Td>
+              );
+            })}
+          </DataTable.Tr>
+        );
+      })}
+    </DataTable.Tbody>
+  );
+};
 
 const MemoizedTableBody = React.memo(
   TableBody,
