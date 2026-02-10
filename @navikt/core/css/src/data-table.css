@@ -55,6 +55,7 @@
   background-color: var(--ax-bg-raised);
   position: sticky;
   top: 0;
+  box-shadow: 0 1px 0 0 var(--ax-border-neutral-subtle);
 }
 
 .aksel-data-table__tbody {
@@ -63,14 +64,13 @@
 
 .aksel-data-table__tr {
   border: none;
-  block-size: 3rem;
 }
 
 .aksel-data-table__th {
   position: relative;
   background-color: var(--ax-bg-neutral-soft);
   color: var(--ax-text-neutral);
-  padding-inline: var(--ax-space-16);
+  padding: var(--ax-space-8) var(--ax-space-16);
   text-align: start;
   border-block-end: 1px solid var(--ax-border-neutral-subtle);
   overflow: hidden;
