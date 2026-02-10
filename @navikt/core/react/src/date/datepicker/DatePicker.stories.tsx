@@ -561,15 +561,15 @@ export const DateRangeWithCommonError: Story = {
                 {...fromInputProps}
                 label="Fra"
                 description="Format: dd.mm.åååå"
-                error={true}
-                aria-errormessage="input-range-with-error-example"
+                error
+                aria-describedby="input-range-with-error-example"
               />
               <DatePicker.Input
                 {...toInputProps}
                 label="Til"
                 description="Format: dd.mm.åååå"
-                error={true}
-                aria-errormessage="input-range-with-error-example"
+                error
+                aria-describedby="input-range-with-error-example"
               />
             </HStack>
             <div
@@ -578,7 +578,7 @@ export const DateRangeWithCommonError: Story = {
               aria-live="polite"
             >
               <ErrorMessage showIcon>
-                Ugyldig dato. Formatet må være dd.mm.åååå
+                Du må fylle ut fra- og til-datoer.
               </ErrorMessage>
             </div>
           </VStack>
