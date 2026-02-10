@@ -31,6 +31,12 @@ interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
    * @default false
    */
   withKeyboardNav?: boolean;
+  /**
+   * Zebra striped table
+   * @default false
+   */
+  zebraStripes?: boolean;
+  truncateContent?: boolean;
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -130,7 +136,14 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
 
 const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
   (
-    { className, rowDensity = "normal", withKeyboardNav = false, ...rest },
+    {
+      className,
+      rowDensity = "normal",
+      withKeyboardNav = false,
+      zebraStripes = false,
+      truncateContent = true,
+      ...rest
+    },
     forwardedRef,
   ) => {
     const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
@@ -144,7 +157,10 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
           <table
             {...rest}
             ref={mergedRef}
-            className={cl("aksel-data-table", className)}
+            className={cl("aksel-data-table", className, {
+              "aksel-data-table--zebra-stripes": zebraStripes,
+              "aksel-data-table--truncate-content": truncateContent,
+            })}
             data-density={rowDensity}
             tabIndex={withKeyboardNav ? 0 : undefined}
           />
