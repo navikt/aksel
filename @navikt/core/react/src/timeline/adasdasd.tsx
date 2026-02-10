@@ -5,6 +5,8 @@ import {
   ExclamationmarkTriangleFillIcon,
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
+import { Button } from "../button";
+import { Link } from "../link";
 import { VStack } from "../primitives/stack";
 import { Provider } from "../provider";
 import en from "../utils/i18n/locales/en";
@@ -554,6 +556,47 @@ export const ContentDemo: StoryFn = () => {
   );
 };
 
+export const CustomLabel: StoryFn = () => {
+  return (
+    <div style={{ width: "80vw" }}>
+      <Timeline>
+        <Timeline.Row
+          label={
+            <Button data-color="neutral" size="small" variant="tertiary">
+              Custom label button
+            </Button>
+          }
+        >
+          {row1.map((p) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+        <Timeline.Row label={<Link href="#">Custom label link</Link>}>
+          {row2.map((p) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+      </Timeline>
+    </div>
+  );
+};
+
 export const Chromatic = renderStoriesForChromatic({
   Default,
   English,
@@ -562,4 +605,5 @@ export const Chromatic = renderStoriesForChromatic({
   ActivePeriod,
   WithDayLabels,
   WithYearLabels,
+  CustomLabel,
 });
