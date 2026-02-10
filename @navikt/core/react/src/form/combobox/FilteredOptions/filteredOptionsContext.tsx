@@ -87,6 +87,12 @@ const FilteredOptionsProvider = ({
   const [isMouseLastUsedInputDevice, setIsMouseLastUsedInputDevice] =
     useState(false);
 
+  /**
+   * Returns a map of all possible virtual options avaliable in the combobox, including:
+   * - Filtered options
+   * - Custom options
+   * - Add new option
+   */
   const filteredOptionsMap = useMemo(() => {
     const initialMap = {
       [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
@@ -99,15 +105,24 @@ const FilteredOptionsProvider = ({
       }, {}),
     };
 
-    // Add the options to the map
-    const finalMap = options.reduce((map, _option) => {
+    /* Add the filtered options to the map */
+    const mapWithFiltered = filteredOptions.reduce((map, _option) => {
       const _id = filteredOptionsUtils.getOptionId(id, _option.value);
       map[_id] = _option;
       return map;
     }, initialMap);
 
+    /* Add all options, avoiding duplicates */
+    const finalMap = options.reduce((map, _option) => {
+      const _id = filteredOptionsUtils.getOptionId(id, _option.value);
+      if (!map[_id]) {
+        map[_id] = _option;
+      }
+      return map;
+    }, mapWithFiltered);
+
     return finalMap;
-  }, [allowNewValues, customOptions, id, options, value]);
+  }, [allowNewValues, customOptions, id, filteredOptions, options, value]);
 
   useClientLayoutEffect(() => {
     const autoCompleteCandidate =
