@@ -17,7 +17,7 @@ const Example = () => {
   return (
     <Box minHeight="24rem">
       <DatePicker {...datepickerProps}>
-        <VStack gap="space-16">
+        <VStack gap="space-8">
           <HStack wrap gap="space-16">
             <DatePicker.Input
               {...fromInputProps}
