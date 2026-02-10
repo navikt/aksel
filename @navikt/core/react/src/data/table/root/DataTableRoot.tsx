@@ -1,5 +1,6 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
+import { useMergeRefs } from "../../../utils/hooks";
 import {
   DataTableCaption,
   type DataTableCaptionProps,
@@ -19,10 +20,22 @@ import {
   type DataTableTheadProps,
 } from "../thead/DataTableThead";
 import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
+import { useTableKeyboardNav } from "./useTableKeyboardNav";
 
 interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode;
   rowDensity?: "condensed" | "normal" | "spacious";
+  /**
+   * Enables keyboard navigation for table rows and cells.
+   * @default false
+   */
+  withKeyboardNav?: boolean;
+  /**
+   * Zebra striped table
+   * @default false
+   */
+  zebraStripes?: boolean;
+  truncateContent?: boolean;
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -121,15 +134,39 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
 }
 
 const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
-  ({ className, rowDensity = "normal", ...rest }, forwardedRef) => {
+  (
+    {
+      className,
+      rowDensity = "normal",
+      withKeyboardNav = false,
+      zebraStripes = false,
+      truncateContent = true,
+      ...rest
+    },
+    forwardedRef,
+  ) => {
+    const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
+    const mergedRef = useMergeRefs(forwardedRef, setTableRef);
+
+    const { onFocus, tableTabIndex } = useTableKeyboardNav(tableRef, {
+      enabled: withKeyboardNav,
+    });
+
     return (
-      <div className="aksel-data-table__wrapper">
-        <table
-          {...rest}
-          ref={forwardedRef}
-          className={cl("aksel-data-table", className)}
-          data-density={rowDensity}
-        />
+      <div className="aksel-data-table__border-wrapper">
+        <div className="aksel-data-table__scroll-wrapper">
+          <table
+            {...rest}
+            ref={mergedRef}
+            className={cl("aksel-data-table", className, {
+              "aksel-data-table--zebra-stripes": zebraStripes,
+              "aksel-data-table--truncate-content": truncateContent,
+            })}
+            data-density={rowDensity}
+            tabIndex={tableTabIndex}
+            onFocus={onFocus}
+          />
+        </div>
       </div>
     );
   },
@@ -148,19 +185,19 @@ export {
   DataTableCaption,
   DataTableTbody,
   DataTableTd,
+  DataTableTfoot,
   DataTableTh,
   DataTableThead,
   DataTableTr,
-  DataTableTfoot,
 };
 export default DataTable;
 export type {
-  DataTableProps,
   DataTableCaptionProps,
+  DataTableProps,
   DataTableTbodyProps,
   DataTableTdProps,
-  DataTableThProps,
-  DataTableTheadProps,
-  DataTableTrProps,
   DataTableTfootProps,
+  DataTableTheadProps,
+  DataTableThProps,
+  DataTableTrProps,
 };

@@ -111,11 +111,8 @@ export const TanstackColumnFilter: Story = {
           })}
         </DataTable.Thead>
 
-        {table.getState().columnSizingInfo.isResizingColumn ? (
-          <MemoizedTableBody table={table} />
-        ) : (
-          <TableBody table={table} />
-        )}
+        <MemoizedTableBody table={table} />
+
         <DataTable.Tfoot>
           {table.getFooterGroups().map((footerGroup) => (
             <DataTable.Tr key={footerGroup.id}>
@@ -262,5 +259,5 @@ const TableBody = ({ table }: { table: Table<PersonInfo> }) => (
 
 const MemoizedTableBody = React.memo(
   TableBody,
-  (prev, next) => prev.table.options.data === next.table.options.data,
+  (_prev, next) => !!next.table.getState().columnSizingInfo.isResizingColumn,
 ) as typeof TableBody;

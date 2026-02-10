@@ -6,7 +6,7 @@ import { cl } from "../../../utils/helpers";
 import { DataTableThActions } from "./DataTableThActions";
 import { DataTableThSortHandle } from "./DataTableThSortHandle";
 
-type DataTableThProps = React.HTMLAttributes<HTMLTableCellElement> & {
+interface DataTableThProps extends React.HTMLAttributes<HTMLTableCellElement> {
   resizeHandler?: React.MouseEventHandler<HTMLButtonElement>;
   size?: number; // TODO: size should be required when resizeHandler is set
   sortDirection?: "asc" | "desc" | "none" | false;
@@ -17,7 +17,12 @@ type DataTableThProps = React.HTMLAttributes<HTMLTableCellElement> & {
       content: React.ReactNode;
     };
   };
-};
+  /**
+   * TODO: Shouldnt be needed to declare these here... But getting type-errors if not
+   */
+  colSpan?: number;
+  rowSpan?: number;
+}
 
 /**
  * TODO:

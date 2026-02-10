@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useControllableState } from "../utils/hooks";
 import { ToggleGroupProps } from "./ToggleGroup.types";
 
@@ -15,14 +15,10 @@ export function useToggleGroup({
     onChange,
   });
 
-  /**
-   * Sync focused `value` with controlled `selectedValue`
-   */
-  useEffect(() => {
-    if (value != null) {
-      setFocusedValue(value);
-    }
-  }, [value]);
+  /* Sync focused `value` with controlled `selectedValue` */
+  if (value != null && value !== focusedValue) {
+    setFocusedValue(value);
+  }
 
   return {
     selectedValue,

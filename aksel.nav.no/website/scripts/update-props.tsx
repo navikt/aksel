@@ -97,7 +97,7 @@ async function updateProps() {
         JSON.stringify(
           deletedIds.map(
             (x) =>
-              `https://aksel.nav.no/admin/prod/desk/admin;propsDesignsystemet;${x}`,
+              `https://aksel.nav.no/admin/desk/admin;propsDesignsystemet;${x}`,
           ),
           null,
           2,

@@ -11,8 +11,12 @@ import {
 import React from "react";
 import {
   CheckmarkIcon,
+  ChevronDownUpIcon,
+  ChevronUpDownIcon,
   CogIcon,
   Density1Icon,
+  NotePencilFillIcon,
+  NotePencilIcon,
   RectangleSectionsIcon,
 } from "@navikt/aksel-icons";
 import { ActionMenu } from "../../action-menu";
@@ -86,6 +90,8 @@ export const TanstackExample: Story = {
     const [rowDensity, setRowDensity] = React.useState<
       "normal" | "condensed" | "spacious"
     >("normal");
+    const [zebraStripes, setZebraStripes] = React.useState(false);
+    const [truncateContent, setTruncateContent] = React.useState(true);
     const table = useReactTable({
       columns,
       data: sampleData,
@@ -198,6 +204,32 @@ export const TanstackExample: Story = {
               </ActionMenu.Group>
             </ActionMenu.Content>
           </ActionMenu>
+          <Button
+            icon={
+              zebraStripes ? (
+                <NotePencilFillIcon title="Skru striper av" />
+              ) : (
+                <NotePencilIcon title="Skru striper på" />
+              )
+            }
+            data-color="neutral"
+            variant="tertiary"
+            size="small"
+            onClick={() => setZebraStripes((old) => !old)}
+          />
+          <Button
+            icon={
+              truncateContent ? (
+                <ChevronUpDownIcon title="Kutt innhold" />
+              ) : (
+                <ChevronDownUpIcon title="Vis fullstendig innhold" />
+              )
+            }
+            data-color="neutral"
+            variant="tertiary"
+            size="small"
+            onClick={() => setTruncateContent((old) => !old)}
+          />
         </DataToolbar>
 
         <DataActionBar numOfSelectedRows={2} onClear={() => alert("Cleared!")}>
@@ -209,7 +241,12 @@ export const TanstackExample: Story = {
           </Button>
         </DataActionBar>
 
-        <DataTable style={columnSizeVars()} rowDensity={rowDensity}>
+        <DataTable
+          style={columnSizeVars()}
+          rowDensity={rowDensity}
+          zebraStripes={zebraStripes}
+          truncateContent={truncateContent}
+        >
           <DataTable.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (
@@ -247,19 +284,13 @@ export const TanstackExample: Story = {
             })}
           </DataTable.Thead>
 
-          {table.getState().columnSizingInfo.isResizingColumn ? (
-            <MemoizedTableBody table={table} />
-          ) : (
-            <TableBody table={table} />
-          )}
+          <MemoizedTableBody table={table} />
+
           <DataTable.Tfoot>
             {table.getFooterGroups().map((footerGroup) => (
               <DataTable.Tr key={footerGroup.id}>
                 {footerGroup.headers.map((header) => (
-                  <DataTable.Td
-                    key={header.id}
-                    style={{ width: `var(--header-${header.id}-size)` }}
-                  >
+                  <DataTable.Td key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -302,5 +333,5 @@ const TableBody = ({ table }: { table: Table<PersonInfo> }) => (
 
 const MemoizedTableBody = React.memo(
   TableBody,
-  (prev, next) => prev.table.options.data === next.table.options.data,
+  (_prev, next) => !!next.table.getState().columnSizingInfo.isResizingColumn,
 ) as typeof TableBody;
