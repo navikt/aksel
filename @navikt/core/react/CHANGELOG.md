@@ -1,5 +1,25 @@
 # @navikt/ds-react
 
+## 8.4.0
+
+### Minor Changes
+
+- Timeline: Row label now supports React.ReactNode. ([#4626](https://github.com/navikt/aksel/pull/4626))
+
+### Patch Changes
+
+- ToggleGroup: Remove unnecessary useEffect ([#4625](https://github.com/navikt/aksel/pull/4625))
+
+- Switch: Remove unnecessary useEffect ([#4620](https://github.com/navikt/aksel/pull/4620))
+
+- useEventListener: Add return type to interface ([#4632](https://github.com/navikt/aksel/pull/4632))
+
+- Combobox: Handle scenario with no options + filteredOptions. ([#4627](https://github.com/navikt/aksel/pull/4627))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.4.0
+  - @navikt/aksel-icons@8.4.0
+
 ## 8.3.0
 
 ### Minor Changes
