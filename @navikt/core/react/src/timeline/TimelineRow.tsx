@@ -18,7 +18,10 @@ export type TimelineRowProps = TimelineRowBaseProps &
   (
     | {
         /**
-         * Label for the timeline row as a string
+         * Label for the timeline row as either `string` or `React.ReactNode`
+         *
+         *
+         * **Note**: When using `React.ReactNode`, `icon` and `headingTag` props are not available
          */
         label: string;
         /**
@@ -32,10 +35,6 @@ export type TimelineRowProps = TimelineRowBaseProps &
         icon?: React.ReactNode;
       }
     | {
-        /**
-         * Label for the timeline row as custom ReactNode
-         * Note: When using ReactNode, icon and headingTag props are not available
-         */
         label: Exclude<React.ReactNode, string>;
         headingTag?: never;
         icon?: never;
@@ -50,7 +49,7 @@ export interface TimelineRowType extends React.ForwardRefExoticComponent<
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, className, headingTag = "h3", icon, ...rest }, ref) => {
-    const { periods, id, active } = useRowContext();
+    const { periods, active } = useRowContext();
     const { setActiveRow } = useTimelineContext();
     const translate = useI18n("Timeline");
 
@@ -72,7 +71,6 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           (typeof label === "string" ? (
             <BodyShort
               as={headingTag}
-              id={`timeline-row-${id}`}
               className="aksel-timeline__row-label"
               size="small"
             >
@@ -80,12 +78,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
               {label}
             </BodyShort>
           ) : (
-            <div
-              id={`timeline-row-${id}`}
-              className="aksel-timeline__row-label"
-            >
-              {label}
-            </div>
+            <div className="aksel-timeline__row-label">{label}</div>
           ))}
         <div
           className={cl("aksel-timeline__row", {
