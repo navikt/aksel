@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.4.0
+
+### Patch Changes
+
+- ActionMenu: SubTrigger-icon is now right aligned, updated open-transition effect. ([#4612](https://github.com/navikt/aksel/pull/4612))
+
 ## 8.3.0
 
 ### Minor Changes
