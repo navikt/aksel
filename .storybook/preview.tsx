@@ -28,9 +28,13 @@ const TypoDecorator = ({
   useEffect(() => {
     const fontVariable = fonts.includes(font) ? `"${font}", sans-serif` : null;
     document.body.style.setProperty("--ax-font-family", fontVariable);
+
+    return () => {
+      document.body.style.removeProperty("--ax-font-family");
+    };
   }, [font]);
 
-  return children;
+  return <>{children}</>;
 };
 
 export default {
@@ -97,14 +101,17 @@ export default {
         <StoryFn />
       </TypoDecorator>
     ),
-    (StoryFn, context) =>
-      context.globals.language ? (
-        <Provider locale={locales[context.globals.language as Language]}>
-          <StoryFn />
-        </Provider>
-      ) : (
+    (StoryFn, context) => (
+      <Provider
+        locale={
+          context.globals.language
+            ? locales[context.globals.language as Language]
+            : undefined
+        }
+      >
         <StoryFn />
-      ),
+      </Provider>
+    ),
     withThemeByClassName({
       themes: {
         light: "light",

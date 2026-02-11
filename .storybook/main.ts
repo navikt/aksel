@@ -21,31 +21,49 @@ export default {
   experimental_indexers: (indexers) => {
     // Changes here might need to be reflected in aksel.nav.no/website/.storybook/main.ts
     const customIndexer = async (fileName: string, opts: any) => {
-      let code = readFileSync(fileName, "utf-8").toString();
+      try {
+        let code = readFileSync(fileName, "utf-8").toString();
 
-      const index = indexRegex.exec(code)?.[1];
+        const index = indexRegex.exec(code)?.[1];
 
-      code = code.split(
-        /\/\/ EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE/,
-      )[0];
+        code = code.split(
+          /\/\/ EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE/,
+        )[0];
 
-      const [templateName, name] = fileName
-        .split(`pages/templates/`)[1]
-        .replace(".tsx", "")
-        .split("/");
-      const storyName = process.env.CHROMATIC
-        ? `${templateName} [${index}] ${name}` // Chromatic does not support folders, and doesn't like |
-        : `${index} | ${name}`;
+        const templatePath = fileName.split(`pages/templates/`)[1];
+        if (!templatePath) {
+          console.warn(`[Storybook] Invalid template path: ${fileName}`);
+          return [];
+        }
 
-      code += `
+        const [templateName, name] = templatePath
+          .replace(".tsx", "")
+          .split("/");
+
+        if (!templateName || !name) {
+          console.warn(
+            `[Storybook] Could not parse template name from: ${fileName}`,
+          );
+          return [];
+        }
+
+        const storyName = process.env.CHROMATIC
+          ? `${templateName} [${index ?? "0"}] ${name}` // Chromatic does not support folders, and doesn't like |
+          : `${index ?? "0"} | ${name}`;
+
+        code += `
         export default { title: "Templates/${templateName}/${storyName}" };
         export const Demo = { render: Example };
         Demo.storyName = "${storyName}";`;
 
-      return loadCsf(code, {
-        ...opts,
-        fileName,
-      }).parse().indexInputs;
+        return loadCsf(code, {
+          ...opts,
+          fileName,
+        }).parse().indexInputs;
+      } catch (error) {
+        console.error(`[Storybook] Failed to index ${fileName}:`, error);
+        return [];
+      }
     };
 
     return [
@@ -59,7 +77,7 @@ export default {
 
   staticDirs: ["./public"],
 
-  stories: resolveStoriesPaths,
+  stories: resolveStoriesPaths(),
 
   addons: [
     getAbsolutePath("@storybook/addon-a11y"),
