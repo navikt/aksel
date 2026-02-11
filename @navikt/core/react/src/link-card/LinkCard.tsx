@@ -44,10 +44,9 @@ const { Provider: LinkCardContextProvider, useContext: useLinkCardContext } =
     name: "LinkCardContextProvider",
   });
 
-interface LinkCardComponent
-  extends React.ForwardRefExoticComponent<
-    LinkCardProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface LinkCardComponent extends React.ForwardRefExoticComponent<
+  LinkCardProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link LinkCardTitleProps}
    */

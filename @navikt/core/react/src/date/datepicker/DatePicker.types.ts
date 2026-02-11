@@ -39,7 +39,8 @@ export type ConditionalModeProps = SingleMode | MultipleMode | RangeMode;
 
 // https://daypicker.dev/api/interfaces/PropsBase
 export interface DatePickerDefaultProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
+  extends
+    Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
     Pick<
       PropsBase,
       "month" | "onMonthChange" | "today" | "onDayClick" | "defaultMonth"

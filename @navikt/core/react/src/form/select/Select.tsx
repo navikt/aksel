@@ -7,7 +7,8 @@ import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 
 export interface SelectProps
-  extends FormFieldProps,
+  extends
+    FormFieldProps,
     Omit<SelectHTMLAttributes<HTMLSelectElement>, "size" | "multiple"> {
   /**
    * Collection of <option />-elements.

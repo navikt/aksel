@@ -7,19 +7,18 @@ import { getLocaleFromString } from "../../Date.locale";
 import { formatDateForInput, isValidDate, parseDate } from "../../date-utils";
 import { DatePickerProps } from "../DatePicker";
 
-export interface UseDatepickerOptions
-  extends Pick<
-    DatePickerProps,
-    | "locale"
-    | "fromDate"
-    | "toDate"
-    | "today"
-    | "toDate"
-    | "fromDate"
-    | "toDate"
-    | "disabled"
-    | "disableWeekends"
-  > {
+export interface UseDatepickerOptions extends Pick<
+  DatePickerProps,
+  | "locale"
+  | "fromDate"
+  | "toDate"
+  | "today"
+  | "toDate"
+  | "fromDate"
+  | "toDate"
+  | "disabled"
+  | "disableWeekends"
+> {
   /**
    * The initially selected Date
    */

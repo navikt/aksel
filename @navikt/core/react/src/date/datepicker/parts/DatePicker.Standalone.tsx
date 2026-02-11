@@ -15,11 +15,10 @@ import {
 } from "../DatePicker.types";
 import { ReactDayPicker } from "./DatePicker.RDP";
 
-interface DatePickerStandaloneDefaultProps
-  extends Omit<
-    DatePickerDefaultProps,
-    "open" | "onClose" | "onOpenToggle" | "wrapperClassName" | "strategy"
-  > {
+interface DatePickerStandaloneDefaultProps extends Omit<
+  DatePickerDefaultProps,
+  "open" | "onClose" | "onOpenToggle" | "wrapperClassName" | "strategy"
+> {
   /**
    * Datepicker classname
    */

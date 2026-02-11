@@ -4,8 +4,7 @@ import { AkselColor } from "../types";
 import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 
-export interface LinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Inverts when the underline appears. If this is false,
    * the underline only appears on hover.

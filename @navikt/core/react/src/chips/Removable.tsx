@@ -4,8 +4,7 @@ import { AkselColor } from "../types";
 import { cl, composeEventHandlers } from "../utils/helpers";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
-export interface ChipsRemovableProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ChipsRemovableProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   /**
    * @deprecated Use `data-color` prop instead.

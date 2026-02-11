@@ -27,8 +27,10 @@ const ShowMoreHeading = ({ children }) => {
 };
 
 /* Content */
-export interface ShowMoreContentProps
-  extends Omit<HTMLAttributes<HTMLElement>, "onClick"> {
+export interface ShowMoreContentProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  "onClick"
+> {
   /**
    * The height of the content area when it is collapsed/not expanded
    * @default 10rem
@@ -71,8 +73,10 @@ const ShowMoreContent = ({
 };
 
 /* ShowMore component */
-export interface ShowMoreProps
-  extends Omit<HTMLAttributes<HTMLElement>, "onClick"> {
+export interface ShowMoreProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  "onClick"
+> {
   /**
    * Override what element to render the wrapper as.
    * @default aside

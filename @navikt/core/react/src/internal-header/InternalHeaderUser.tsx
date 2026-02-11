@@ -2,8 +2,7 @@ import React, { HTMLAttributes, forwardRef } from "react";
 import { BodyShort, Detail } from "../typography";
 import { cl } from "../utils/helpers";
 
-export interface InternalHeaderUserProps
-  extends HTMLAttributes<HTMLDivElement> {
+export interface InternalHeaderUserProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * User name
    */

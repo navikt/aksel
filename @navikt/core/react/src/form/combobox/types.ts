@@ -17,7 +17,8 @@ export type ComboboxOption = {
 };
 
 export interface ComboboxProps
-  extends FormFieldProps,
+  extends
+    FormFieldProps,
     Omit<
       InputHTMLAttributes<HTMLInputElement>,
       | "size"

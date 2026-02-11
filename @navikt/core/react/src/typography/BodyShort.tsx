@@ -6,8 +6,7 @@ import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
 export interface BodyShortProps
-  extends TypoProps,
-    React.HTMLAttributes<HTMLParagraphElement> {
+  extends TypoProps, React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * large: 20px, medium: 18px, small: 16px.
    * @default "medium"

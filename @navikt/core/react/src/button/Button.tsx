@@ -14,8 +14,7 @@ type legacyVariants =
 
 type HiddenVariant = legacyVariants & { __brand?: never };
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button content.
    */

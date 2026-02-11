@@ -18,8 +18,7 @@ import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 import { position } from "../utils/calc";
 
-export interface TimelinePinProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
+export interface TimelinePinProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Date position for the pin.
    */

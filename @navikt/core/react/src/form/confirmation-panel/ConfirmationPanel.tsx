@@ -5,11 +5,10 @@ import { cl } from "../../utils/helpers";
 import { Checkbox, CheckboxProps } from "../checkbox";
 import { useFormField } from "../useFormField";
 
-export interface ConfirmationPanelProps
-  extends Omit<
-    CheckboxProps,
-    "children" | "indeterminate" | "hideLabel" | "error" | "readOnly"
-  > {
+export interface ConfirmationPanelProps extends Omit<
+  CheckboxProps,
+  "children" | "indeterminate" | "hideLabel" | "error" | "readOnly"
+> {
   /**
    * Additional information on panel
    */

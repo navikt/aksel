@@ -1,8 +1,7 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 
-export interface GroupedHeadingProps
-  extends React.HTMLAttributes<HTMLDetailsElement> {
+export interface GroupedHeadingProps extends React.HTMLAttributes<HTMLDetailsElement> {
   /**
    * Heading
    */

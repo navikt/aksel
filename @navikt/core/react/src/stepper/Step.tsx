@@ -4,8 +4,7 @@ import type { OverridableComponent } from "../utils-external";
 import { cl, composeEventHandlers } from "../utils/helpers";
 import { useStepperContext } from "./context";
 
-export interface StepperStepProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface StepperStepProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Text content by indicator.
    */
