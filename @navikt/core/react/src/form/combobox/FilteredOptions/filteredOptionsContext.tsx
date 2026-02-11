@@ -93,7 +93,7 @@ const FilteredOptionsProvider = ({
    * - Custom options
    * - Add new option
    */
-  const filteredOptionsMap = useMemo(() => {
+  const allOptionsMap = useMemo(() => {
     const initialMap = {
       [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
         ? toComboboxOption(value)
@@ -176,8 +176,8 @@ const FilteredOptionsProvider = ({
   const isValueNew = useMemo(
     () =>
       Boolean(searchTerm) &&
-      !filteredOptionsMap[filteredOptionsUtils.getOptionId(id, searchTerm)],
-    [filteredOptionsMap, id, searchTerm],
+      !allOptionsMap[filteredOptionsUtils.getOptionId(id, searchTerm)],
+    [allOptionsMap, id, searchTerm],
   );
 
   const ariaDescribedBy = useMemo(() => {
@@ -215,9 +215,8 @@ const FilteredOptionsProvider = ({
   ]);
 
   const currentOption = useMemo(
-    () =>
-      filteredOptionsMap[virtualFocus.activeElement?.getAttribute("id") || -1],
-    [filteredOptionsMap, virtualFocus],
+    () => allOptionsMap[virtualFocus.activeElement?.getAttribute("id") || -1],
+    [allOptionsMap, virtualFocus],
   );
 
   const activeDecendantId = useMemo(
