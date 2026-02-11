@@ -2,8 +2,7 @@ import React, { forwardRef } from "react";
 import { BodyLong } from "../typography";
 import { cl } from "../utils/helpers";
 
-export interface LinkPanelDescriptionProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface LinkPanelDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 

@@ -2,8 +2,7 @@ import React, { forwardRef } from "react";
 import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 
-export interface ExpansionCardTitleProps
-  extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface ExpansionCardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
   /**
    * Changes text-sizing

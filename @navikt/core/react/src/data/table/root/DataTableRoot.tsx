@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { forwardRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
@@ -31,6 +30,12 @@ interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
    * @default false
    */
   withKeyboardNav?: boolean;
+  /**
+   * Zebra striped table
+   * @default false
+   */
+  zebraStripes?: boolean;
+  truncateContent?: boolean;
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -130,13 +135,22 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
 
 const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
   (
-    { className, rowDensity = "normal", withKeyboardNav = false, ...rest },
+    {
+      className,
+      rowDensity = "normal",
+      withKeyboardNav = false,
+      zebraStripes = false,
+      truncateContent = true,
+      ...rest
+    },
     forwardedRef,
   ) => {
     const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
     const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-    useTableKeyboardNav(tableRef, { enabled: withKeyboardNav });
+    const { onFocus, tableTabIndex } = useTableKeyboardNav(tableRef, {
+      enabled: withKeyboardNav,
+    });
 
     return (
       <div className="aksel-data-table__border-wrapper">
@@ -144,9 +158,13 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
           <table
             {...rest}
             ref={mergedRef}
-            className={cl("aksel-data-table", className)}
+            className={cl("aksel-data-table", className, {
+              "aksel-data-table--zebra-stripes": zebraStripes,
+              "aksel-data-table--truncate-content": truncateContent,
+            })}
             data-density={rowDensity}
-            tabIndex={withKeyboardNav ? 0 : undefined}
+            tabIndex={tableTabIndex}
+            onFocus={onFocus}
           />
         </div>
       </div>

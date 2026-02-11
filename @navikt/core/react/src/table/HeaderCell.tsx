@@ -1,8 +1,7 @@
 import React, { forwardRef } from "react";
 import { cl } from "../utils/helpers";
 
-export interface HeaderCellProps
-  extends React.ThHTMLAttributes<HTMLTableCellElement> {
+export interface HeaderCellProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
   scope?: string;
   /**
    * Content alignment inside cell

@@ -1,7 +1,9 @@
 import { HTMLAttributes } from "react";
 
-export interface TabsProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
+export interface TabsProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "onChange" | "dir"
+> {
   children: React.ReactNode;
   /**
    * Changes padding and font-size.

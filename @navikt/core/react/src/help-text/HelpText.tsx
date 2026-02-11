@@ -7,7 +7,8 @@ import { useI18n } from "../utils/i18n/i18n.hooks";
 import { HelpTextIcon } from "./HelpTextIcon";
 
 export interface HelpTextProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     Pick<PopoverProps, "strategy" | "placement"> {
   children: React.ReactNode;
   /**

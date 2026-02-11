@@ -6,7 +6,8 @@ import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
 export interface HeadingProps
-  extends Pick<TypoProps, "spacing" | "visuallyHidden" | "align" | "textColor">,
+  extends
+    Pick<TypoProps, "spacing" | "visuallyHidden" | "align" | "textColor">,
     React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Heading level.

@@ -4,8 +4,10 @@ import { cl } from "../utils/helpers";
 import { useTimeout, useValueAsRef } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
-interface ProgressBarPropsBase
-  extends Omit<HTMLAttributes<HTMLDivElement>, "role"> {
+interface ProgressBarPropsBase extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "role"
+> {
   /**
    * Changes height.
    * @default "medium"

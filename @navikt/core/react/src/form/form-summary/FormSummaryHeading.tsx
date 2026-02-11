@@ -1,8 +1,7 @@
 import React, { forwardRef } from "react";
 import { Heading, HeadingProps } from "../../typography";
 
-export interface FormSummaryHeadingProps
-  extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface FormSummaryHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Heading text.
    */

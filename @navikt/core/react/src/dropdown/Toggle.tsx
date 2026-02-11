@@ -2,8 +2,7 @@ import React, { forwardRef, useContext } from "react";
 import { cl, composeEventHandlers } from "../utils/helpers";
 import { DropdownContext } from "./context";
 
-export interface DropdownToggleProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface DropdownToggleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button content
    */
