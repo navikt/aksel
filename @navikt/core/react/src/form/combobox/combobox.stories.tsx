@@ -326,6 +326,37 @@ export const Controlled = () => {
   );
 };
 
+export const OnlyFilteredOptions = () => {
+  const [value, setValue] = useState<string>("apple");
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const filteredOptions = useMemo(
+    () => options.filter((option) => option.includes(value)),
+    [value],
+  );
+
+  const onToggleSelected = (option: string, isSelected: boolean) => {
+    if (isSelected) {
+      setSelectedOptions([...selectedOptions, option]);
+    } else {
+      setSelectedOptions(selectedOptions.filter((o) => o !== option));
+    }
+  };
+
+  return (
+    <UNSAFE_Combobox
+      label="Hva er dine favorittfrukter?"
+      id="combobox-controlled"
+      filteredOptions={filteredOptions}
+      isMultiSelect
+      options={[]}
+      onChange={setValue}
+      onToggleSelected={onToggleSelected}
+      selectedOptions={selectedOptions}
+      value={value}
+    />
+  );
+};
+
 export const ComboboxSizes = () => {
   const [multiSelectedOptions, setMultiSelectedOptions] = useState<string[]>([
     "pear",
