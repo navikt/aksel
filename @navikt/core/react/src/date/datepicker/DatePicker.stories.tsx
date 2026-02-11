@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import { Button } from "../../button";
 import { Dialog } from "../../dialog";
 import Modal from "../../modal/Modal";
+import { Box } from "../../primitives/box";
 import { HGrid } from "../../primitives/grid";
-import { Spacer } from "../../primitives/stack";
-import { BodyLong } from "../../typography";
+import { HStack, Spacer, VStack } from "../../primitives/stack";
+import { BodyLong, ErrorMessage } from "../../typography";
 import { useId } from "../../utils-external";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import DatePicker, { DatePickerProps } from "./DatePicker";
@@ -543,6 +544,50 @@ export const ColorRole = () => (
   </div>
 );
 
+export const DateRangeWithCommonError: Story = {
+  render: () => {
+    const { datepickerProps, fromInputProps, toInputProps } =
+      useRangeDatepicker({
+        fromDate: new Date("Aug 23 2019"),
+        onRangeChange: console.info,
+      });
+
+    return (
+      <Box minHeight="24rem">
+        <DatePicker {...datepickerProps}>
+          <VStack gap="space-16">
+            <HStack wrap gap="space-16">
+              <DatePicker.Input
+                {...fromInputProps}
+                label="Fra"
+                description="Format: dd.mm.åååå"
+                error
+                aria-describedby="input-range-with-error-example"
+              />
+              <DatePicker.Input
+                {...toInputProps}
+                label="Til"
+                description="Format: dd.mm.åååå"
+                error
+                aria-describedby="input-range-with-error-example"
+              />
+            </HStack>
+            <div
+              id="input-range-with-error-example"
+              aria-relevant="additions removals"
+              aria-live="polite"
+            >
+              <ErrorMessage showIcon>
+                Du må fylle ut fra- og til-datoer.
+              </ErrorMessage>
+            </div>
+          </VStack>
+        </DatePicker>
+      </Box>
+    );
+  },
+};
+
 export const ChromaticSmallMobile: Story = {
   render: () => {
     const { datepickerProps, inputProps } = useDatepicker({
@@ -588,4 +633,5 @@ export const Chromatic = renderStoriesForChromatic({
   Readonly,
   StandaloneOptions,
   WeekNumber,
+  DateRangeWithCommonError,
 });

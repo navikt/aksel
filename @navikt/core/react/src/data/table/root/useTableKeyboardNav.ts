@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useEventCallback } from "../../../utils/hooks";
+import { shouldBlockArrowKeyNavigation } from "../helpers/block-arrow-navigation";
+import { getFocusableTarget } from "../helpers/focusable-target";
+import { buildTableGrid } from "../helpers/table-grid";
 
 type DirectionsT = "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight";
 
@@ -14,6 +17,11 @@ function useTableKeyboardNav(
       return;
     }
     const key = event.key;
+    if (shouldBlockArrowKeyNavigation(event)) {
+      return;
+    }
+
+    const activeCell = currentCell;
 
     let newCell: Element | null = null;
     /**
@@ -28,14 +36,14 @@ function useTableKeyboardNav(
         newCell = onNavigationKeyDown(
           keyToCoord(key as DirectionsT),
           tableRef,
-          currentCell,
+          activeCell,
         );
         break;
       }
     }
 
-    if (newCell && currentCell && newCell !== currentCell) {
-      (currentCell as HTMLElement).tabIndex = -1;
+    if (newCell && activeCell && newCell !== activeCell) {
+      (activeCell as HTMLElement).tabIndex = -1;
     }
 
     if (newCell) {
@@ -61,6 +69,35 @@ function useTableKeyboardNav(
     setCurrentCell(newCell);
   });
 
+  /**
+   * Lets us check if `currentCell` is removed:
+   * - When filtering rows
+   * - Pagination
+   * - Column visibility changes
+   */
+  const observerRef = useRef<MutationObserver | null>(null);
+
+  useEffect(() => {
+    if (!tableRef || !enabled) {
+      return;
+    }
+
+    observerRef.current = new MutationObserver(() => {
+      if (currentCell && !currentCell.isConnected) {
+        setCurrentCell(null);
+      }
+    });
+
+    observerRef.current.observe(tableRef, { subtree: true, childList: true });
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
+    };
+  }, [tableRef, enabled, currentCell]);
+
   useEffect(() => {
     if (!tableRef || !enabled) {
       return;
@@ -78,8 +115,11 @@ function useTableKeyboardNav(
   return {
     tableTabIndex: enabled ? (currentCell ? undefined : 0) : undefined,
     onFocus: () => {
-      if (!currentCell && tableRef) {
-        onNavigationKeyDown({ x: 0, y: 0 }, tableRef, currentCell);
+      if (!tableRef) {
+        return;
+      }
+      if (!currentCell) {
+        onNavigationKeyDown({ x: 0, y: 0 }, tableRef, null);
       }
     },
   };
@@ -99,47 +139,56 @@ function onNavigationKeyDown(
     return firstCell ? focusCell(firstCell) : null;
   }
 
-  const currentRow = currentCell.closest("tr");
-  if (!currentRow) {
+  const { grid, positions, maxCols } = buildTableGrid(tableRef);
+  const currentPos = positions.get(currentCell);
+  if (!currentPos) {
     return null;
   }
 
-  const allRows = tableRef.querySelectorAll("tr");
-  const currentRowIndex = Array.from(allRows).indexOf(currentRow);
-
-  const cellsInRow = currentRow.querySelectorAll("td, th");
-  const currentCellIndex = Array.from(cellsInRow).indexOf(currentCell);
-
-  const newRowIndex = currentRowIndex + coord.y;
-  const newCellIndex = currentCellIndex + coord.x;
-
-  const newRow = allRows[newRowIndex];
-  if (!newRow) {
-    return null;
-  }
-
-  const newCell = newRow.querySelectorAll("td, th")[newCellIndex];
-  return newCell ? focusCell(newCell) : null;
+  const nextCell = findNextCell(grid, currentPos, coord, currentCell, maxCols);
+  return nextCell ? focusCell(nextCell) : null;
 }
 
-function focusCell(cell: Element): Element {
-  const el = cell as HTMLElement;
+function findNextCell(
+  grid: (Element | undefined)[][],
+  currentPos: { x: number; y: number },
+  coord: { x: number; y: number },
+  currentCell: Element,
+  maxCols: number,
+): Element | null {
+  let x = currentPos.x + coord.x;
+  let y = currentPos.y + coord.y;
 
-  const insideFocus = el.querySelector(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]',
-  );
+  const maxRows = grid.length;
 
-  if (!insideFocus) {
-    el.tabIndex = 0;
+  while (y >= 0 && y < maxRows && x >= 0 && x < maxCols) {
+    const row = grid[y] ?? [];
+    const cell = row[x];
+    if (cell && cell !== currentCell && !!getFocusableTarget(cell)) {
+      return cell;
+    }
+    x += coord.x;
+    y += coord.y;
   }
 
-  const focusTarget = insideFocus ?? el;
+  return null;
+}
 
-  (focusTarget as HTMLElement).focus({
+function focusCell(cell: Element): Element | null {
+  const focusTarget = getFocusableTarget(cell);
+  if (!focusTarget) {
+    return null;
+  }
+
+  if (focusTarget === cell) {
+    (cell as HTMLElement).tabIndex = 0;
+  }
+
+  focusTarget.focus({
     preventScroll: true,
   });
 
-  el.scrollIntoView({
+  focusTarget.scrollIntoView({
     behavior: "smooth",
     block: "nearest",
     inline: "nearest",

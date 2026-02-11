@@ -73,12 +73,6 @@ export const Focusable: Story = {
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
                         resizeHandler={header.getResizeHandler()}
-                        /* pinningHandler={
-                          header.column.getIsPinned() === "left"
-                            ? () => header.column.pin(false)
-                            : () => header.column.pin("left")
-                        }
-                        isPinned={header.column.getIsPinned() === "left"} */
                         sortDirection={header.column.getIsSorted() || "none"}
                         onSortChange={(_, event) => {
                           const handler =
@@ -148,6 +142,116 @@ export const Spans: Story = {
           </DataTable.Tr>
           <DataTable.Tr>
             <DataTable.Td colSpan={3}>Colspan 3</DataTable.Td>
+          </DataTable.Tr>
+        </DataTable.Tbody>
+      </DataTable>
+    </div>
+  ),
+};
+
+export const FocusableInputs: Story = {
+  render: () => (
+    <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
+      <DataTable style={{ width: "100%" }} withKeyboardNav>
+        <DataTable.Thead>
+          <DataTable.Tr>
+            <DataTable.Th>Col 1</DataTable.Th>
+            <DataTable.Th>Col 2</DataTable.Th>
+            <DataTable.Th>Col 3</DataTable.Th>
+            <DataTable.Th>Col 4</DataTable.Th>
+          </DataTable.Tr>
+        </DataTable.Thead>
+        <DataTable.Tbody>
+          <DataTable.Tr>
+            <DataTable.Td>
+              <input type="checkbox" />
+            </DataTable.Td>
+            <DataTable.Td>
+              <input type="text" placeholder="Col 2" />
+            </DataTable.Td>
+            <DataTable.Td>Col 3</DataTable.Td>
+            <DataTable.Td>Col 4</DataTable.Td>
+          </DataTable.Tr>
+          <DataTable.Tr>
+            <DataTable.Td>
+              <input type="checkbox" />
+            </DataTable.Td>
+            <DataTable.Td>
+              <input type="text" placeholder="Col 2" defaultValue="Test" />
+            </DataTable.Td>
+            <DataTable.Td>
+              <select>
+                <option value="">Select</option>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+              </select>
+            </DataTable.Td>
+            <DataTable.Td>Col 4</DataTable.Td>
+          </DataTable.Tr>
+          <DataTable.Tr>
+            <DataTable.Td>
+              <input type="checkbox" />
+            </DataTable.Td>
+            <DataTable.Td>
+              <textarea placeholder="Col 2" />
+            </DataTable.Td>
+            <DataTable.Td>Col 3</DataTable.Td>
+            <DataTable.Td>Col 4</DataTable.Td>
+          </DataTable.Tr>
+        </DataTable.Tbody>
+      </DataTable>
+    </div>
+  ),
+};
+
+export const FocusableDisabledCells: Story = {
+  render: () => (
+    <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
+      <DataTable style={{ width: "100%" }} withKeyboardNav>
+        <DataTable.Thead>
+          <DataTable.Tr>
+            <DataTable.Th>Col 1</DataTable.Th>
+            <DataTable.Th>Col 2</DataTable.Th>
+            <DataTable.Th>Col 3</DataTable.Th>
+            <DataTable.Th>Col 4</DataTable.Th>
+          </DataTable.Tr>
+        </DataTable.Thead>
+        <DataTable.Tbody>
+          <DataTable.Tr>
+            <DataTable.Td>Col 1</DataTable.Td>
+            <DataTable.Td>Col 2</DataTable.Td>
+            <DataTable.Td style={{ display: "none" }}>Col 3</DataTable.Td>
+            <DataTable.Td style={{ visibility: "hidden" }}>Col 4</DataTable.Td>
+          </DataTable.Tr>
+          <DataTable.Tr>
+            <DataTable.Td>
+              <button disabled>Disabled button</button>
+            </DataTable.Td>
+            <DataTable.Td>
+              <input type="text" disabled defaultValue="Disabled input" />
+            </DataTable.Td>
+            <DataTable.Td>
+              <select disabled>
+                <option>Disabled select</option>
+              </select>
+            </DataTable.Td>
+            <DataTable.Td>
+              <textarea disabled>Disabled textarea</textarea>
+            </DataTable.Td>
+          </DataTable.Tr>
+          <DataTable.Tr>
+            <DataTable.Td>
+              <button aria-disabled="true">Aria-Disabled button</button>
+            </DataTable.Td>
+            <DataTable.Td>Col 2</DataTable.Td>
+            <DataTable.Td>Col 3</DataTable.Td>
+            <DataTable.Td>Col 4</DataTable.Td>
+          </DataTable.Tr>
+          <DataTable.Tr>
+            <DataTable.Td>Col 1</DataTable.Td>
+            <DataTable.Td>Col 2</DataTable.Td>
+            <DataTable.Td>Col 3</DataTable.Td>
+            <DataTable.Td>Col 4</DataTable.Td>
           </DataTable.Tr>
         </DataTable.Tbody>
       </DataTable>
