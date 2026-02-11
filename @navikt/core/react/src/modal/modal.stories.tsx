@@ -33,6 +33,7 @@ export const WithUseRef: StoryFn = () => {
     <div style={{ height: "200vh" }}>
       <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
       <Modal
+        // eslint-disable-next-line react-hooks/refs
         open={ref.current ? undefined : true /* initially open */}
         onClose={() => null}
         ref={ref}
@@ -322,6 +323,7 @@ export const WithTooltip: StoryFn = () => {
     <div>
       <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
       <Modal
+        // eslint-disable-next-line react-hooks/refs
         open={ref.current ? undefined : true /* initially open */}
         onClose={() => null}
         ref={ref}

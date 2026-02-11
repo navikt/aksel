@@ -42,7 +42,7 @@ module.exports = defineConfig([
   js.configs.recommended,
   reactPlugin.configs.flat.recommended,
   //reactPlugin.configs.flat["jsx-runtime"], // Not sure if this will cause problems for projects not using the new JSX transform
-  reactHooks.configs["recommended-latest"],
+  reactHooks.configs.flat["recommended-latest"],
   jsxA11y.flatConfigs.recommended,
   storybook.configs["flat/recommended"],
   importPlugin.flatConfigs.recommended,
