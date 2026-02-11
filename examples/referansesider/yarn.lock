@@ -838,27 +838,27 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
-  version: 8.0.1
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=47f4ac&locator=referansesider%40workspace%3A."
-  checksum: 10/716e57ae6ad7752683b45f86b647fceeee977d9f65d1cb69a5814bf7f20085b25e60a10ae4cb48dd75ebd0d2857098c322c6e17680fc70a75843b7c584772378
+  version: 8.3.0
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=000b47&locator=referansesider%40workspace%3A."
+  checksum: 10/5a37c2dbf49bd2c5f67052ba214bfad30897fb464c684aeaf3fff19d8a0649a5fa8ae08ab9b73536923d2148f0d2ee88d9e3d79cfe2d6d5abf9d728c4d5b6ee7
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
-  version: 8.0.1
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=71fe84&locator=referansesider%40workspace%3A."
-  checksum: 10/ce3a0478a5163c55b63474044a8b18f41e7027f45190c9d6f99e091b22e5d320c569a854c083e561961f0b5d8b311ce6a14eb3f9e050470138411d397034b38c
+  version: 8.3.0
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=57f267&locator=referansesider%40workspace%3A."
+  checksum: 10/edaa39dbf90d2a71733296932f510879e853aed98dfc997b14174d73457dfbb6756ab449440f411231b8f0d9a01a078b86379b61c208141201acf4ab79a01000
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:../../@navikt/core/react::locator=referansesider%40workspace%3A.":
-  version: 8.0.1
-  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=6e51da&locator=referansesider%40workspace%3A."
+  version: 8.3.0
+  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=1fb6fa&locator=referansesider%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.6"
-    "@navikt/aksel-icons": "npm:^8.0.1"
-    "@navikt/ds-tokens": "npm:^8.0.1"
+    "@navikt/aksel-icons": "npm:^8.3.0"
+    "@navikt/ds-tokens": "npm:^8.3.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
   peerDependencies:
@@ -868,14 +868,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/12c6a03d5409bd12cf6d68fc6795ecf656db8b008a5daf59d0cded009654b1a3c1ca13bd495c16449522c5c26c7cb8c8d80c6fb2dc3b659c7bb8c386baf7f778
+  checksum: 10/783e07a7e8fbedc197132ed46884f3aa611ef1802b7ebf25a78ddfc74d66fb6a8fa187cecf4423a1582ac3e6862979f59658bbbb63dd5d99741baa786cf16dd1
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
-  version: 8.0.1
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=e47e86&locator=referansesider%40workspace%3A."
-  checksum: 10/252675711b57cd3f484a32136aacfbbcc88f66f40be28b54f81366485c0fb72782f0dc2094c2c720f731a8fe57f957fd0dfbbfbd42917d3024520b537096b64c
+  version: 8.3.0
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=689e8e&locator=referansesider%40workspace%3A."
+  checksum: 10/973ab4eb16ac301679e4e7566f2c23515e703262815270fc8ae8b079a61db985275befcf8ea9c18b8bc7f356f994d7606aa2bb9de9023a4c6e4365b047573e4b
   languageName: node
   linkType: hard
 
@@ -4094,15 +4094,15 @@ __metadata:
   linkType: hard
 
 "tar@npm:^7.4.3":
-  version: 7.5.6
-  resolution: "tar@npm:7.5.6"
+  version: 7.5.7
+  resolution: "tar@npm:7.5.7"
   dependencies:
     "@isaacs/fs-minipass": "npm:^4.0.0"
     chownr: "npm:^3.0.0"
     minipass: "npm:^7.1.2"
     minizlib: "npm:^3.1.0"
     yallist: "npm:^5.0.0"
-  checksum: 10/cf4a84d79b9327fcf765f2ea16de4702b9b8dd7dc6b1840b16e0f999628d96b81b2c7efbf83d4eb42b0164856f1db887a5a61ffef97d36cdb77cac742219f9ee
+  checksum: 10/0d6938dd32fe5c0f17c8098d92bd9889ee0ed9d11f12381b8146b6e8c87bb5aa49feec7abc42463f0597503d8e89e4c4c0b42bff1a5a38444e918b4878b7fd21
   languageName: node
   linkType: hard
 
