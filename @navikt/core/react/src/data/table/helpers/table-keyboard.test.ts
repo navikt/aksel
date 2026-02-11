@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { shouldBlockArrowKeyNavigation } from "./block-arrow-navigation";
+import { shouldBlockArrowKeyNavigation } from "./table-keyboard";
 
 describe("shouldBlockArrowKeyNavigation", () => {
   test("should return false for non-arrow keys", () => {

@@ -1,8 +1,32 @@
-import { isArrowKey } from "./key-handler";
+const keyToCoord = {
+  ArrowUp: { x: 0, y: -1 },
+  ArrowDown: { x: 0, y: 1 },
+  ArrowLeft: { x: -1, y: 0 },
+  ArrowRight: { x: 1, y: 0 },
+} as const;
 
+type DirectionsT = keyof typeof keyToCoord;
+type Delta = { x: number; y: number };
+
+function getDeltaFromKey(key: string): Delta | null {
+  if (key in keyToCoord) {
+    return keyToCoord[key as DirectionsT];
+  }
+
+  return null;
+}
+
+/**
+ * Tries to make assumptions of what the user is currently doing inside a table cell
+ * Should block navigation if:
+ * - Input has selection, caret is not at start/end
+ * - Select arrow down/up for opening popup
+ * - User is navigating inside multiline textarea
+ * - contenteditable attrb is in use
+ */
 function shouldBlockArrowKeyNavigation(event: KeyboardEvent): boolean {
   const key = event.key;
-  if (!isArrowKey(key)) {
+  if (!(key in keyToCoord)) {
     return false;
   }
 
@@ -15,9 +39,11 @@ function shouldBlockArrowKeyNavigation(event: KeyboardEvent): boolean {
     return true;
   }
 
+  /* If not any of these elements, assueme "safe" to navigate */
   const editable = el.closest(
     'input, textarea, select, [contenteditable="true"]',
   );
+
   if (!editable) {
     return false;
   }
@@ -97,4 +123,4 @@ function isTextInputType(type: string): boolean {
   }
 }
 
-export { shouldBlockArrowKeyNavigation };
+export { getDeltaFromKey, shouldBlockArrowKeyNavigation };
