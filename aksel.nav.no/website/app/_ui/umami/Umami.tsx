@@ -6,7 +6,7 @@ import { useCookieConsent } from "@/app/_ui/cookie-consent/CookieConsent.Provide
 import { IS_NEXT_SERVERSIDE } from "@/ui-utils/is-server";
 
 const trackingId = process.env.UMAMI_TRACKING_ID;
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = process.env.PRODUCTION === "true";
 
 type UmamiTag = "organic" | "polluted";
 
