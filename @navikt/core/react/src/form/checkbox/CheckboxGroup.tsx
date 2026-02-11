@@ -13,11 +13,10 @@ export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(
   null,
 );
 
-export interface CheckboxGroupProps
-  extends Omit<
-    FieldsetProps,
-    "onChange" | "errorPropagation" | "defaultValue" | "nativeReadOnly"
-  > {
+export interface CheckboxGroupProps extends Omit<
+  FieldsetProps,
+  "onChange" | "errorPropagation" | "defaultValue" | "nativeReadOnly"
+> {
   /**
    * Collection of `<Checkbox/>`.
    */

@@ -4,8 +4,7 @@ import { cl } from "../../utils/helpers";
 /**
  * Footer slot for actions in `FormSummary`.
  */
-export interface FormSummaryFooterProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface FormSummaryFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Should include `<FormSummary.EditLink>`.
    */

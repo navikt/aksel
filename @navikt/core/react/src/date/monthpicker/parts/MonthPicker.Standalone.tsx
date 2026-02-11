@@ -11,11 +11,10 @@ import { MonthPickerProps } from "../MonthPicker.types";
 import { MonthPickerCaption } from "./MonthPicker.Caption";
 import { MonthPickerTable } from "./MonthPicker.Table";
 
-export interface MonthPickerStandaloneProps
-  extends Omit<
-    MonthPickerProps,
-    "open" | "onClose" | "onOpenToggle" | "wrapperClassName" | "strategy"
-  > {
+export interface MonthPickerStandaloneProps extends Omit<
+  MonthPickerProps,
+  "open" | "onClose" | "onOpenToggle" | "wrapperClassName" | "strategy"
+> {
   /**
    * Monthpicker classname
    */

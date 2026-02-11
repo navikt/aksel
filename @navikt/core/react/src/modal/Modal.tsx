@@ -22,10 +22,9 @@ import { ModalProps } from "./types";
 
 const polyfillClassName = "aksel-modal--polyfilled";
 
-interface ModalComponent
-  extends React.ForwardRefExoticComponent<
-    ModalProps & React.RefAttributes<HTMLDialogElement>
-  > {
+interface ModalComponent extends React.ForwardRefExoticComponent<
+  ModalProps & React.RefAttributes<HTMLDialogElement>
+> {
   Header: typeof ModalHeader;
   Body: typeof ModalBody;
   Footer: typeof ModalFooter;

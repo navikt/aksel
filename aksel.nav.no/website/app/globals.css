@@ -149,9 +149,9 @@ address {
   --aksel-brand-pink-900: #f986bd;
   --aksel-brand-pink-1000: #fde1f1;
   --aksel-brand-pink-100A: hsl(1deg 85% 53% / 0.13);
-  --aksel-brand-pink-200A: hsl(359deg 90% 61%/ 0.16);
-  --aksel-brand-pink-300A: hsl(356deg 93% 67%/ 0.2);
-  --aksel-brand-pink-400A: hsl(352deg 92% 70%/ 0.26);
+  --aksel-brand-pink-200A: hsl(359deg 90% 61% / 0.16);
+  --aksel-brand-pink-300A: hsl(356deg 93% 67% / 0.2);
+  --aksel-brand-pink-400A: hsl(352deg 92% 70% / 0.26);
 }
 
 :root,

@@ -2,7 +2,8 @@ import { InputHTMLAttributes } from "react";
 import { FormFieldProps } from "../useFormField";
 
 export interface CheckboxProps
-  extends FormFieldProps,
+  extends
+    FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
    * Adds error indication on checkbox.

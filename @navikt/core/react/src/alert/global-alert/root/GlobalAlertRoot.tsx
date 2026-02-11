@@ -17,8 +17,10 @@ import {
   type GlobalAlertTitleProps,
 } from "../title/GlobalAlertTitle";
 
-interface GlobalAlertProps
-  extends Omit<BaseAlert.RootProps, "type" | "global" | "data-color"> {
+interface GlobalAlertProps extends Omit<
+  BaseAlert.RootProps,
+  "type" | "global" | "data-color"
+> {
   status: Exclude<BaseAlert.RootProps["status"], undefined>;
   /**
    * data-color has no effect on GlobalAlert.
@@ -31,10 +33,9 @@ interface GlobalAlertProps
   centered?: boolean;
 }
 
-interface GlobalAlertComponent
-  extends React.ForwardRefExoticComponent<
-    GlobalAlertProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface GlobalAlertComponent extends React.ForwardRefExoticComponent<
+  GlobalAlertProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link GlobalAlertHeaderProps}
    * @example

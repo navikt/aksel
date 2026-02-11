@@ -39,11 +39,10 @@ function getStyleValue(value: string) {
   return parseInt(value, 10) || 0;
 }
 
-interface TextareaAutosizeProps
-  extends Omit<
-    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    "children" | "rows"
-  > {
+interface TextareaAutosizeProps extends Omit<
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+  "children" | "rows"
+> {
   /**
    * Maximum number of rows to display.
    */

@@ -6,8 +6,7 @@ import { BodyLong } from "../typography";
 import { cl, composeEventHandlers } from "../utils/helpers";
 import { useControllableState } from "../utils/hooks";
 
-export interface ReadMoreProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ReadMoreProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Content inside ReadMore.
    */

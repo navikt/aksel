@@ -9,10 +9,9 @@ import FormSummaryHeading from "./FormSummaryHeading";
 import FormSummaryLabel from "./FormSummaryLabel";
 import FormSummaryValue from "./FormSummaryValue";
 
-interface FormSummaryComponent
-  extends React.ForwardRefExoticComponent<
-    FormSummaryProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface FormSummaryComponent extends React.ForwardRefExoticComponent<
+  FormSummaryProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * Must include `<FormSummary.Heading>`.
    */

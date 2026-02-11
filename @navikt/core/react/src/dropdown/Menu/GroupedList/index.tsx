@@ -4,18 +4,16 @@ import { cl } from "../../../utils/helpers";
 import GroupedHeading, { GroupedHeadingProps } from "./GroupedHeading";
 import GroupedItem, { GroupedItemProps } from "./GroupedItem";
 
-export interface GroupedListProps
-  extends React.HTMLAttributes<HTMLDListElement> {
+export interface GroupedListProps extends React.HTMLAttributes<HTMLDListElement> {
   /**
    * Menu list content
    */
   children: React.ReactNode;
 }
 
-export interface GroupedListType
-  extends React.ForwardRefExoticComponent<
-    GroupedListProps & React.RefAttributes<HTMLDListElement>
-  > {
+export interface GroupedListType extends React.ForwardRefExoticComponent<
+  GroupedListProps & React.RefAttributes<HTMLDListElement>
+> {
   /**
    * @see 🏷️ {@link GroupedHeadingProps}
    */
