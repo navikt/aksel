@@ -7,13 +7,13 @@ interface ListenerT {
     name: string,
     handler: (event?: any) => void,
     ...args: any[]
-  );
+  ): void;
 
   removeEventListener(
     name: string,
     handler: (event?: any) => void,
     ...args: any[]
-  );
+  ): void;
 }
 
 /* https://github.com/streamich/react-use/blob/master/src/useEvent.ts */
