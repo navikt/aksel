@@ -12,21 +12,34 @@ import {
   TimelineComponentTypes,
 } from "./utils/types.internal";
 
-export interface TimelineRowProps extends React.HTMLAttributes<HTMLOListElement> {
-  /**
-   * Label for the timeline row
-   */
-  label: string;
-  /**
-   * Heading level for the label e.g h2, h3...
-   * @default "h3"
-   */
-  headingTag?: "h2" | "h3" | "h4" | "h5" | "h6";
-  /**
-   * Icon next to label
-   */
-  icon?: React.ReactNode;
-}
+type TimelineRowBaseProps = React.HTMLAttributes<HTMLOListElement>;
+
+export type TimelineRowProps = TimelineRowBaseProps &
+  (
+    | {
+        /**
+         * Label for the timeline row as either `string` or `React.ReactNode`
+         *
+         *
+         * **Note**: When using `React.ReactNode`, `icon` and `headingTag` props are not available
+         */
+        label: string;
+        /**
+         * Heading level for the label e.g h2, h3...
+         * @default "h3"
+         */
+        headingTag?: "h2" | "h3" | "h4" | "h5" | "h6";
+        /**
+         * Icon next to label
+         */
+        icon?: React.ReactNode;
+      }
+    | {
+        label: Exclude<React.ReactNode, string>;
+        headingTag?: never;
+        icon?: never;
+      }
+  );
 
 export interface TimelineRowType extends React.ForwardRefExoticComponent<
   TimelineRowProps & React.RefAttributes<HTMLOListElement>
@@ -36,7 +49,7 @@ export interface TimelineRowType extends React.ForwardRefExoticComponent<
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, className, headingTag = "h3", icon, ...rest }, ref) => {
-    const { periods, id, active } = useRowContext();
+    const { periods, active } = useRowContext();
     const { setActiveRow } = useTimelineContext();
     const translate = useI18n("Timeline");
 
@@ -54,17 +67,19 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
 
     return (
       <>
-        {label && (
-          <BodyShort
-            as={headingTag}
-            id={`timeline-row-${id}`}
-            className="aksel-timeline__row-label"
-            size="small"
-          >
-            {icon}
-            {label}
-          </BodyShort>
-        )}
+        {label &&
+          (typeof label === "string" ? (
+            <BodyShort
+              as={headingTag}
+              className="aksel-timeline__row-label"
+              size="small"
+            >
+              {icon}
+              {label}
+            </BodyShort>
+          ) : (
+            <div className="aksel-timeline__row-label">{label}</div>
+          ))}
         <div
           className={cl("aksel-timeline__row", {
             "aksel-timeline__row--active": active,
