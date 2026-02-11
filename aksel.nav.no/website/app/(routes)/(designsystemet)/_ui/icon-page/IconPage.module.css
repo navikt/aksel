@@ -6,6 +6,7 @@
   border: 1px solid var(--ax-border-neutral-subtleA);
   color: var(--ax-text-neutral);
   border-radius: var(--ax-radius-8);
+  cursor: pointer;
 
   &:hover {
     background-color: var(--ax-bg-neutral-moderate-hover);
