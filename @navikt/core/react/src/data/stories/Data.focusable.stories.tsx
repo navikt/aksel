@@ -470,6 +470,59 @@ export const Cache: Story = {
   },
 };
 
+export const FocusElementInsideTable: Story = {
+  render: () => {
+    return (
+      <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
+        <DataTable style={{ width: "100%" }} withKeyboardNav>
+          <DataTable.Thead>
+            <DataTable.Tr>
+              <DataTable.Th>Col 1</DataTable.Th>
+              <DataTable.Th>Col 2</DataTable.Th>
+              <DataTable.Th>Col 3</DataTable.Th>
+              <DataTable.Th>Col 4</DataTable.Th>
+            </DataTable.Tr>
+          </DataTable.Thead>
+          <DataTable.Tbody>
+            <DataTable.Tr>
+              <DataTable.Td>Col 1</DataTable.Td>
+              <DataTable.Td>
+                <button>Focusable button</button>
+              </DataTable.Td>
+              <DataTable.Th>Col 3</DataTable.Th>
+              <DataTable.Td>Col 4</DataTable.Td>
+            </DataTable.Tr>
+
+            <DataTable.Tr>
+              <DataTable.Td>Col 1</DataTable.Td>
+              <DataTable.Td>Col 2</DataTable.Td>
+              <DataTable.Td>Col 3</DataTable.Td>
+              <DataTable.Td>Col 4</DataTable.Td>
+            </DataTable.Tr>
+          </DataTable.Tbody>
+        </DataTable>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button = canvas.getByText("Focusable button");
+    await userEvent.click(button);
+    expect(button).toHaveFocus();
+
+    const { expectNodeFocus, expectCellFocus, right, left, down } =
+      keyboardUtils();
+
+    await right();
+    expectNodeFocus("Col 3");
+    await left();
+    expect(button).toHaveFocus();
+    await down();
+    expectCellFocus("Col 2");
+  },
+};
+
 const TableBody = ({ table }: { table: Table<PersonInfo> }) => (
   <DataTable.Tbody>
     {table.getRowModel().rows.map((row) => {

@@ -173,10 +173,18 @@ function useTableKeyboardNav(
     tableTabIndex: enabled ? (activeCell ? undefined : 0) : undefined,
     /*
      * Allows us to capture focus on the table when navigating with Tab from outside, and move it to the first cell.
-     * We only want to do this if there is no active cell.
+     * We only want to do this if no cell is already focused.
      */
-    onFocusCapture: () => {
-      if (!tableRef || activeCell) {
+    onFocus: () => {
+      if (!tableRef) {
+        return;
+      }
+
+      const focusedElement = document.activeElement;
+      const cellInTable = focusedElement?.closest("td, th");
+
+      /* Assume onFocusIn handler has updates cell */
+      if (cellInTable && tableRef.contains(cellInTable)) {
         return;
       }
 

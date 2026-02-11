@@ -148,7 +148,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
     const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-    const { onFocusCapture, tableTabIndex } = useTableKeyboardNav(tableRef, {
+    const { onFocus, tableTabIndex } = useTableKeyboardNav(tableRef, {
       enabled: withKeyboardNav,
     });
 
@@ -164,7 +164,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
             })}
             data-density={rowDensity}
             tabIndex={tableTabIndex}
-            onFocusCapture={onFocusCapture}
+            onFocus={onFocus}
           />
         </div>
       </div>
