@@ -39,7 +39,7 @@ interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
-  DataTableProps & React.RefAttributes<HTMLDialogElement>
+  DataTableProps & React.RefAttributes<HTMLTableElement>
 > {
   /**
    * @see 🏷️ {@link DataTableCaptionProps}

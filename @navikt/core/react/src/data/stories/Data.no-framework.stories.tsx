@@ -91,7 +91,12 @@ export const ExampleWithoutTanstack: Story = {
       [deferredFilterString, globalFilterLower],
     );
 
-    function resizeHandler(event: React.MouseEvent<HTMLButtonElement>) {
+    function resizeHandler(
+      event:
+        | React.MouseEvent<HTMLButtonElement>
+        | React.TouchEvent<HTMLButtonElement>,
+    ) {
+      // @ts-expect-error // TODO: Handle touch
       const startX = event.clientX;
       const th = (event.target as HTMLElement).closest(
         "th",

@@ -91,7 +91,6 @@
   padding: var(--ax-space-8) var(--ax-space-16);
   text-align: start;
   border-block-end: 1px solid var(--ax-border-neutral-subtle);
-  overflow: hidden;
 
   &:not(:first-child) {
     border-inline-start: 1px solid var(--ax-border-neutral-subtle);
@@ -107,30 +106,31 @@
 .aksel-data-table__th-resize-handle {
   z-index: 2;
   position: absolute;
-  inset-block: 0;
-  inset-inline-end: 0; /* TODO: See if we can make the handle appear right between the columns */
   cursor: col-resize;
   margin: 0;
   padding: 0;
-  width: 12px; /* TODO: Violation of WCAG SC 2.5.8 Target Size https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html */
   border: none;
   background: transparent;
+  display: flex;
+  justify-content: center;
+  inset-block: 0;
+  inset-inline-end: -10px;
+  width: 19px; /* TODO: Violation of WCAG SC 2.5.8 Target Size? https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html */
 
   &::after {
     content: "";
     position: absolute;
     inset-block: 0;
-    inset-inline-end: 0;
-    width: 4px;
+    width: 3px;
   }
 
   &:hover::after {
     /* TODO: Consider if the resize-handle should be visible already when hovering the column header */
-    background: var(--ax-bg-accent-strong);
+    background: var(--ax-bg-strong);
   }
 
   &:active::after {
-    background: var(--ax-bg-accent-strong-pressed);
+    background: var(--ax-bg-strong-pressed);
   }
 }
 
@@ -144,7 +144,8 @@
     transition: none;
   }
 
-  &:not(.aksel-data-table__th:is(:hover, :focus-within) &, &:focus-visible, &[data-expanded="true"]) {
+  &:not(.aksel-data-table__th:is(:hover, :focus-within) &, &:focus-visible, &[data-expanded="true"]),
+  .aksel-data-table__th:has(.aksel-data-table__th-resize-handle:hover:not(:focus)) & {
     opacity: 0;
     min-width: 0;
     max-width: 0;
@@ -161,7 +162,6 @@
   color: var(--ax-text-neutral-subtle);
   padding: var(--__axc-data-table-density);
   padding-inline: 1rem;
-  overflow: hidden;
 
   &:not(:first-child) {
     border-inline-start: 1px solid var(--ax-border-neutral-subtle);

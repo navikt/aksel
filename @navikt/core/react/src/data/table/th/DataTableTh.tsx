@@ -7,7 +7,11 @@ import { DataTableThActions } from "./DataTableThActions";
 import { DataTableThSortHandle } from "./DataTableThSortHandle";
 
 interface DataTableThProps extends React.HTMLAttributes<HTMLTableCellElement> {
-  resizeHandler?: React.MouseEventHandler<HTMLButtonElement>;
+  resizeHandler?: (
+    event:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.TouchEvent<HTMLButtonElement>,
+  ) => void;
   size?: number; // TODO: size should be required when resizeHandler is set
   sortDirection?: "asc" | "desc" | "none" | false;
   onSortChange?: (direction: "asc" | "desc" | "none", event: Event) => void;
@@ -98,10 +102,10 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
 
         {resizeHandler && (
           <button
+            // TODO: Should probably not be a button since it doesn't have onClick
             onMouseDown={resizeHandler}
-            onMouseUp={resizeHandler}
+            onTouchStart={resizeHandler}
             className="aksel-data-table__th-resize-handle"
-            data-color="neutral"
           />
         )}
       </th>
