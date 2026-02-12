@@ -1,7 +1,7 @@
 "use client";
 
 import { stegaClean } from "next-sanity";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, HStack, Skeleton, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
@@ -19,7 +19,7 @@ function KodeEksemplerIFrame(props: {
 }) {
   const { dir } = props;
 
-  const [frameState, setFrameState] = useState(300);
+  const [iframeHeight, setIframeHeight] = useState(300);
 
   const {
     activeExample: { current, loaded, updateLoaded },
@@ -42,7 +42,7 @@ function KodeEksemplerIFrame(props: {
       if (exampleWrapper?.offsetHeight) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
         clearInterval(waitForExampleContentToRender);
-        setFrameState(Math.min(Math.max(newHeight, 300), 900));
+        setIframeHeight(Math.min(Math.max(newHeight, 300), 900));
         updateLoaded(true);
       }
 
@@ -52,14 +52,17 @@ function KodeEksemplerIFrame(props: {
         clearInterval(waitForExampleContentToRender);
       }
     }, 100);
-
-    return () => clearInterval(waitForExampleContentToRender);
   };
 
   const demoVariant = dir.variant;
   const iframeUrl = stegaClean(`/${demoVariant}/${dir.title}/${current?.navn}`);
 
   const hasJSXSnippet = !!current?.kompaktInnhold;
+
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   return (
     <div>
@@ -70,10 +73,10 @@ function KodeEksemplerIFrame(props: {
         >
           <iframe
             key={iframeUrl}
-            src={iframeUrl}
+            // We set src after mount as a workaround for onLoad not triggering on initial render (https://github.com/vercel/next.js/issues/69736)
+            src={hasMounted ? iframeUrl : undefined}
             ref={iframeRef}
-            height={frameState}
-            /* @note: onLoad does no trigger for initial render in dev-mode */
+            height={iframeHeight}
             onLoad={handleExampleLoad}
             aria-label={`${dir?.title} ${current?.title} eksempel`}
             title="Demo"
