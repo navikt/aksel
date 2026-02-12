@@ -44,7 +44,7 @@
 }
 
 .aksel-data-table--truncate-content {
-  .aksel-data-table__td > div {
+  .aksel-data-table__td > div:not(:has(> .aksel-checkbox)) {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -66,6 +66,24 @@
   border: none;
 }
 
+.aksel-data-table__tr--selected {
+  background-color: var(--ax-bg-softA);
+  box-shadow:
+    inset 1px 0 0 0 var(--ax-border-default),
+    inset -1px 0 0 0 var(--ax-border-default);
+
+  &:first-of-type {
+    box-shadow:
+      inset 1px 0 0 0 var(--ax-border-default),
+      inset -1px 0 0 0 var(--ax-border-default),
+      inset 0 1px 0 0 var(--ax-border-default);
+  }
+
+  & :is(.aksel-data-table__td, .aksel-data-table__th) {
+    border-color: var(--ax-border-default);
+  }
+}
+
 .aksel-data-table__th {
   position: relative;
   background-color: var(--ax-bg-neutral-soft);
@@ -80,7 +98,7 @@
   }
 }
 
-.aksel-data-table__th-content {
+.aksel-data-table__th-content:not(:has(> .aksel-checkbox)) {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -153,7 +171,7 @@
     border-block-end: none;
   }
 
-  .aksel-data-table:not(:has(.aksel-data-table__tfoot)) .aksel-data-table__tr:last-child & {
+  .aksel-data-table:not(:has(.aksel-data-table__tfoot)) .aksel-data-table__tr:not(.aksel-data-table__tr--selected):last-child & {
     border-block-end: none;
   }
 }

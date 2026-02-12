@@ -1,15 +1,19 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 
-type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement>;
+type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement> & {
+  selected?: boolean;
+};
 
 const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
-  ({ className, ...rest }, forwardedRef) => {
+  ({ className, selected = false, ...rest }, forwardedRef) => {
     return (
       <tr
         {...rest}
         ref={forwardedRef}
-        className={cl("aksel-data-table__tr", className)}
+        className={cl("aksel-data-table__tr", className, {
+          "aksel-data-table__tr--selected": selected,
+        })}
       />
     );
   },
