@@ -15,7 +15,7 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * `<Process.Event />` elements.
    */
-  children: React.ReactElement<typeof ProcessEvent>[];
+  children: React.ReactNode;
   /**
    * Hides the "aktiv"-text when the event is active.
    * @default false
