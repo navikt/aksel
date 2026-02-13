@@ -30,5 +30,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  desc: "<List> wrapper <ul> og <List.Item> wrapper <li>.",
+  desc: "<List> rendrer en <ul> og <List.Item> rendrer en <li>.",
 };

@@ -40,5 +40,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Husk å sette aria-hidden på dekorative ikoner.",
+  desc: "Husk å sette `aria-hidden` på dekorative ikoner.",
 };
