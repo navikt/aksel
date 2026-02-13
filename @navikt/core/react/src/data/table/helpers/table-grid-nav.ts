@@ -55,24 +55,10 @@ function buildTableGridMap(tableRef: HTMLTableElement): {
   return { grid, positions };
 }
 
-type TableGrid = ReturnType<typeof buildTableGridMap>;
-
-type GridCache = { grid: TableGrid | null; dirty: boolean };
-
-/**
- * Makes sure to keep a cached version of the table grid, and only rebuild it when necessary (when "dirty" flag is set)
- */
-function ensureTableGrid(
-  tableRef: HTMLTableElement,
-  tableGridCache: GridCache,
-): TableGrid {
-  if (tableGridCache.dirty || !tableGridCache.grid) {
-    tableGridCache.grid = buildTableGridMap(tableRef);
-    tableGridCache.dirty = false;
-  }
-
-  return tableGridCache.grid;
-}
+type GridCache = {
+  grid: ReturnType<typeof buildTableGridMap> | null;
+  dirty: boolean;
+};
 
 /**
  * Finds the next cell in the given direction, starting from the current position.
@@ -106,9 +92,4 @@ function findNextFocusableCell(
   return null;
 }
 
-export {
-  buildTableGridMap,
-  ensureTableGrid,
-  findNextFocusableCell,
-  type GridCache,
-};
+export { buildTableGridMap, findNextFocusableCell, type GridCache };

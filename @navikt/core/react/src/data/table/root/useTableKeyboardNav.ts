@@ -1,31 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { useEventCallback } from "../../../utils/hooks";
 import { focusInitialTableTarget } from "../helpers/table-cell";
 import { focusCellAndUpdateTabIndex } from "../helpers/table-focus";
-import {
-  type GridCache,
-  ensureTableGrid,
-  findNextFocusableCell,
-} from "../helpers/table-grid-nav";
+import { findNextFocusableCell } from "../helpers/table-grid-nav";
 import {
   getDeltaFromKey,
   shouldBlockArrowKeyNavigation,
 } from "../helpers/table-keyboard";
+import { useGridCache } from "../hooks/useGridCache";
 
 function useTableKeyboardNav(
   tableRef: HTMLTableElement | null,
   { enabled }: { enabled: boolean },
 ) {
-  const [activeCell, setActiveCell] = useState<Element | null>(null);
-  const activeCellRef = useRef<Element | null>(null);
-  activeCellRef.current = activeCell;
-
-  const observerRef = useRef<MutationObserver | null>(null);
-
-  const gridCacheRef = useRef<GridCache>({
-    grid: null,
-    dirty: true,
-  });
+  const { getTableGrid, activeCell, setActiveCell } = useGridCache(
+    tableRef,
+    enabled,
+  );
 
   /**
    * TODO:
@@ -44,10 +35,7 @@ function useTableKeyboardNav(
         return null;
       }
 
-      const { grid, positions } = ensureTableGrid(
-        tableRef,
-        gridCacheRef.current,
-      );
+      const { grid, positions } = getTableGrid(tableRef);
       const currentPos = positions.get(currentCell);
 
       if (!currentPos) {
@@ -120,40 +108,8 @@ function useTableKeyboardNav(
   });
 
   /**
-   * Observes changes is table structure and updates the grid cache accordingly.
-   * - We want to check if elements are removed/added, like when filtering table, pagination etc
-   * - Changes in colspan/rowspan that can affect the grid structure
-   * - Hidden attribute or styles that can affect focusability of cells
-   *
-   * We also check if the active cell is removed from the DOM, and clear it if so.
+   * Attach event listeners for keyboard navigation and focus management.
    */
-  useEffect(() => {
-    if (!tableRef || !enabled) {
-      return;
-    }
-
-    observerRef.current = new MutationObserver(() => {
-      gridCacheRef.current.dirty = true;
-      if (activeCellRef.current && !activeCellRef.current.isConnected) {
-        setActiveCell(null);
-      }
-    });
-
-    observerRef.current.observe(tableRef, {
-      subtree: true,
-      childList: true,
-      attributes: true,
-      attributeFilter: ["colspan", "rowspan", "hidden", "style"],
-    });
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-        observerRef.current = null;
-      }
-    };
-  }, [tableRef, enabled]);
-
   useEffect(() => {
     if (!tableRef || !enabled) {
       return;
@@ -167,18 +123,6 @@ function useTableKeyboardNav(
       tableRef.removeEventListener("focusin", handleTableFocusIn);
     };
   }, [tableRef, handleTableKeyDown, handleTableFocusIn, enabled]);
-
-  /*
-   * If keyboard-nav is re-enabled, we need to make sure to update the grid cache,
-   * since the table might have changed while it was disabled.
-   */
-  useEffect(() => {
-    if (!enabled) {
-      return;
-    }
-
-    gridCacheRef.current.dirty = true;
-  }, [enabled]);
 
   return {
     /* Table should only have tabIndex until the focus is moved inside and is enabled */
