@@ -94,6 +94,13 @@ function useTableKeyboardNav(
    */
   const onFocusIn = useEventCallback((event: FocusEvent): void => {
     const target = event.target as Element | null;
+
+    if (tableRef && target === tableRef) {
+      const firstCell = getFirstCell(tableRef);
+      firstCell && focusCell(firstCell);
+      return;
+    }
+
     const newCell = target?.closest("td, th") ?? null;
     if (!newCell || newCell === activeCell) {
       return;
@@ -171,26 +178,6 @@ function useTableKeyboardNav(
   return {
     /* Table should only have tabIndex until the focus is moved inside and is enabled */
     tableTabIndex: enabled ? (activeCell ? undefined : 0) : undefined,
-    /*
-     * Allows us to capture focus on the table when navigating with Tab from outside, and move it to the first cell.
-     * We only want to do this if no cell is already focused.
-     */
-    onFocus: () => {
-      if (!tableRef) {
-        return;
-      }
-
-      const focusedElement = document.activeElement;
-      const cellInTable = focusedElement?.closest("td, th");
-
-      /* Assume onFocusIn handler has updates cell */
-      if (cellInTable && tableRef.contains(cellInTable)) {
-        return;
-      }
-
-      const firstCell = getFirstCell(tableRef);
-      return firstCell ? focusCell(firstCell) : null;
-    },
   };
 }
 
