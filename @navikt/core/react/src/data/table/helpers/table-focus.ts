@@ -6,7 +6,7 @@
  * If the assumed focus target is not the cell itself, we check if that element is hidden or disabled, and fall back to the cell if so,
  * since we want to avoid/can't focus hidden/disabled elements.
  */
-function getFocusableTarget(cell: Element): HTMLElement | null {
+function findFocusableElementInCell(cell: Element): HTMLElement | null {
   const el = cell as HTMLElement | null;
   if (!el || isHiddenElement(el)) {
     return null;
@@ -65,7 +65,7 @@ function isDisabledElement(el: HTMLElement): boolean {
 }
 
 function focusCell(cell: Element): Element | null {
-  const focusTarget = getFocusableTarget(cell);
+  const focusTarget = findFocusableElementInCell(cell);
   if (!focusTarget) {
     return null;
   }
@@ -103,4 +103,4 @@ function focusCellAndUpdateTabIndex(
   return focusCell(nextCell);
 }
 
-export { focusCell, focusCellAndUpdateTabIndex, getFocusableTarget };
+export { focusCell, focusCellAndUpdateTabIndex, findFocusableElementInCell };

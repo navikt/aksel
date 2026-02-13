@@ -1,9 +1,9 @@
-import { getFocusableTarget } from "./table-focus";
+import { findFocusableElementInCell } from "./table-focus";
 
 /**
  * Builds a utility grid allowing for easier keyboard-navigation between cells on columns and rows
  */
-function buildTableGrid(tableRef: HTMLTableElement): {
+function buildTableGridMap(tableRef: HTMLTableElement): {
   grid: (Element | undefined)[][];
   positions: Map<Element, { x: number; y: number }>;
 } {
@@ -55,7 +55,7 @@ function buildTableGrid(tableRef: HTMLTableElement): {
   return { grid, positions };
 }
 
-type TableGrid = ReturnType<typeof buildTableGrid>;
+type TableGrid = ReturnType<typeof buildTableGridMap>;
 
 type GridCache = { grid: TableGrid | null; dirty: boolean };
 
@@ -67,7 +67,7 @@ function ensureTableGrid(
   tableGridCache: GridCache,
 ): TableGrid {
   if (tableGridCache.dirty || !tableGridCache.grid) {
-    tableGridCache.grid = buildTableGrid(tableRef);
+    tableGridCache.grid = buildTableGridMap(tableRef);
     tableGridCache.dirty = false;
   }
 
@@ -79,7 +79,7 @@ function ensureTableGrid(
  * Skips over cells that are not focusable or are the same as the current cell.
  * Returns null if no next cell is found in the given direction.
  */
-function findNextCell(
+function findNextFocusableCell(
   grid: (Element | undefined)[][],
   currentPos: { x: number; y: number },
   delta: { x: number; y: number },
@@ -96,7 +96,7 @@ function findNextCell(
       break;
     }
     const cell = row[x];
-    if (cell && cell !== currentCell && !!getFocusableTarget(cell)) {
+    if (cell && cell !== currentCell && !!findFocusableElementInCell(cell)) {
       return cell;
     }
     x += delta.x;
@@ -106,4 +106,9 @@ function findNextCell(
   return null;
 }
 
-export { buildTableGrid, ensureTableGrid, findNextCell, type GridCache };
+export {
+  buildTableGridMap,
+  ensureTableGrid,
+  findNextFocusableCell,
+  type GridCache,
+};

@@ -5,7 +5,7 @@ import { focusCellAndUpdateTabIndex } from "../helpers/table-focus";
 import {
   type GridCache,
   ensureTableGrid,
-  findNextCell,
+  findNextFocusableCell,
 } from "../helpers/table-grid-nav";
 import {
   getDeltaFromKey,
@@ -31,7 +31,7 @@ function useTableKeyboardNav(
    * TODO:
    * - Save original tabIndex of cells and restore when navigating away?
    */
-  const navigateByArrowKey = useEventCallback(
+  const findNextCellInDirection = useEventCallback(
     (delta: { x: number; y: number }) => {
       if (!tableRef) {
         return null;
@@ -54,7 +54,12 @@ function useTableKeyboardNav(
         return null;
       }
 
-      const nextCell = findNextCell(grid, currentPos, delta, currentCell);
+      const nextCell = findNextFocusableCell(
+        grid,
+        currentPos,
+        delta,
+        currentCell,
+      );
 
       return nextCell
         ? focusCellAndUpdateTabIndex(nextCell, currentCell)
@@ -72,7 +77,7 @@ function useTableKeyboardNav(
    * - Consider adding Home, End, PageUp, PageDown navigation
    *
    */
-  const onKeyDown = useEventCallback((event: KeyboardEvent): void => {
+  const handleTableKeyDown = useEventCallback((event: KeyboardEvent): void => {
     /* Stops keydown from moving if we can assume that you are currently editing input, select etc */
     if (shouldBlockArrowKeyNavigation(event)) {
       return;
@@ -83,7 +88,7 @@ function useTableKeyboardNav(
     const delta = getDeltaFromKey(event.key);
     if (delta) {
       event.preventDefault();
-      newCell = navigateByArrowKey(delta);
+      newCell = findNextCellInDirection(delta);
     }
 
     newCell && setActiveCell(newCell);
@@ -93,7 +98,7 @@ function useTableKeyboardNav(
    * When focus is moved to elements inside a cell like inputs, checkbox etc
    * we want to update the active cell to the parent td/th, so that keyboard navigation continues to work as expected from there.
    */
-  const onFocusIn = useEventCallback((event: FocusEvent): void => {
+  const handleTableFocusIn = useEventCallback((event: FocusEvent): void => {
     const target = event.target as Element | null;
 
     if (tableRef && target === tableRef) {
@@ -154,14 +159,14 @@ function useTableKeyboardNav(
       return;
     }
 
-    tableRef.addEventListener("keydown", onKeyDown);
-    tableRef.addEventListener("focusin", onFocusIn);
+    tableRef.addEventListener("keydown", handleTableKeyDown);
+    tableRef.addEventListener("focusin", handleTableFocusIn);
 
     return () => {
-      tableRef.removeEventListener("keydown", onKeyDown);
-      tableRef.removeEventListener("focusin", onFocusIn);
+      tableRef.removeEventListener("keydown", handleTableKeyDown);
+      tableRef.removeEventListener("focusin", handleTableFocusIn);
     };
-  }, [tableRef, onKeyDown, onFocusIn, enabled]);
+  }, [tableRef, handleTableKeyDown, handleTableFocusIn, enabled]);
 
   /*
    * If keyboard-nav is re-enabled, we need to make sure to update the grid cache,
