@@ -1,26 +1,26 @@
 import { describe, expect, test } from "vitest";
-import { shouldBlockArrowKeyNavigation } from "./table-keyboard";
+import { shouldBlockNavigation } from "./table-keyboard";
 
-describe("shouldBlockArrowKeyNavigation", () => {
+describe("shouldBlockNavigation", () => {
   test("should return false for non-arrow keys", () => {
     const event = new KeyboardEvent("keydown", { key: "Enter" });
     Object.defineProperty(event, "target", {
       value: document.createElement("div"),
     });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should return false when target is null", () => {
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: null });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should return false for non-editable elements", () => {
     const div = document.createElement("div");
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: div });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should return true when target is contentEditable", () => {
@@ -30,7 +30,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
 
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: div });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
 
     document.body.removeChild(div);
   });
@@ -44,7 +44,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
 
     const event = new KeyboardEvent("keydown", { key: "ArrowRight" });
     Object.defineProperty(event, "target", { value: child });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
 
     document.body.removeChild(parent);
   });
@@ -54,7 +54,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     input.type = "checkbox";
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should return false for radio input", () => {
@@ -62,7 +62,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     input.type = "radio";
     const event = new KeyboardEvent("keydown", { key: "ArrowRight" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should return false for non-text input types", () => {
@@ -70,7 +70,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     input.type = "button";
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should return true for text input when selectionStart is null", () => {
@@ -86,7 +86,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     });
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
   });
 
   test("should block ArrowLeft when cursor is not at start of text input", () => {
@@ -96,7 +96,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     input.setSelectionRange(2, 2);
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
   });
 
   test("should not block ArrowLeft when cursor is at start of text input", () => {
@@ -106,7 +106,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     input.setSelectionRange(0, 0);
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should block ArrowRight when cursor is not at end of text input", () => {
@@ -116,7 +116,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     input.setSelectionRange(2, 2);
     const event = new KeyboardEvent("keydown", { key: "ArrowRight" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
   });
 
   test("should not block ArrowRight when cursor is at end of text input", () => {
@@ -126,7 +126,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     input.setSelectionRange(4, 4);
     const event = new KeyboardEvent("keydown", { key: "ArrowRight" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should block ArrowLeft when text is selected in input", () => {
@@ -136,7 +136,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     input.setSelectionRange(0, 2);
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
   });
 
   test("should block ArrowRight when text is selected in input", () => {
@@ -146,7 +146,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     input.setSelectionRange(1, 3);
     const event = new KeyboardEvent("keydown", { key: "ArrowRight" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
   });
 
   test("should handle various text input types", () => {
@@ -161,7 +161,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
       input.setSelectionRange(2, 2);
       const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
       Object.defineProperty(event, "target", { value: input });
-      expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+      expect(shouldBlockNavigation(event)).toBe(true);
     });
   });
 
@@ -171,7 +171,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     textarea.setSelectionRange(5, 5);
     const event = new KeyboardEvent("keydown", { key: "ArrowUp" });
     Object.defineProperty(event, "target", { value: textarea });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
   });
 
   test("should not block ArrowUp when cursor is at start of textarea", () => {
@@ -180,7 +180,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     textarea.setSelectionRange(0, 0);
     const event = new KeyboardEvent("keydown", { key: "ArrowUp" });
     Object.defineProperty(event, "target", { value: textarea });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should block ArrowDown when cursor is not at end of textarea", () => {
@@ -189,7 +189,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
     textarea.setSelectionRange(5, 5);
     const event = new KeyboardEvent("keydown", { key: "ArrowDown" });
     Object.defineProperty(event, "target", { value: textarea });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
   });
 
   test("should not block ArrowDown when cursor is at end of textarea", () => {
@@ -198,35 +198,35 @@ describe("shouldBlockArrowKeyNavigation", () => {
     textarea.setSelectionRange(11, 11);
     const event = new KeyboardEvent("keydown", { key: "ArrowDown" });
     Object.defineProperty(event, "target", { value: textarea });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should return true for select with ArrowDown", () => {
     const select = document.createElement("select");
     const event = new KeyboardEvent("keydown", { key: "ArrowDown" });
     Object.defineProperty(event, "target", { value: select });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
   });
 
   test("should return true for select with ArrowUp", () => {
     const select = document.createElement("select");
     const event = new KeyboardEvent("keydown", { key: "ArrowUp" });
     Object.defineProperty(event, "target", { value: select });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
   });
 
   test("should return false for select with ArrowLeft", () => {
     const select = document.createElement("select");
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: select });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should return false for select with ArrowRight", () => {
     const select = document.createElement("select");
     const event = new KeyboardEvent("keydown", { key: "ArrowRight" });
     Object.defineProperty(event, "target", { value: select });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(false);
+    expect(shouldBlockNavigation(event)).toBe(false);
   });
 
   test("should handle element inside editable parent", () => {
@@ -240,7 +240,7 @@ describe("shouldBlockArrowKeyNavigation", () => {
 
     const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
     Object.defineProperty(event, "target", { value: input });
-    expect(shouldBlockArrowKeyNavigation(event)).toBe(true);
+    expect(shouldBlockNavigation(event)).toBe(true);
 
     document.body.removeChild(wrapper);
   });

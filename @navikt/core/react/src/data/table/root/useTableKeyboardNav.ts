@@ -2,16 +2,32 @@ import { useEffect } from "react";
 import { useEventCallback } from "../../../utils/hooks";
 import { focusInitialTableTarget } from "../helpers/table-cell";
 import { focusCellAndUpdateTabIndex } from "../helpers/table-focus";
-import { findNextFocusableCell } from "../helpers/table-grid-nav";
 import {
-  getDeltaFromKey,
-  shouldBlockArrowKeyNavigation,
+  findFirstCell,
+  findFirstCellInRow,
+  findLastCell,
+  findLastCellInRow,
+  findNextFocusableCell,
+} from "../helpers/table-grid-nav";
+import {
+  type NavigationAction,
+  getNavigationAction,
+  shouldBlockNavigation,
 } from "../helpers/table-keyboard";
 import { useGridCache } from "../hooks/useGridCache";
 
+type UseTableKeyboardNavOptions = {
+  enabled: boolean;
+  /**
+   * Custom callback to determine if navigation should be blocked.
+   * Called before default blocking logic.
+   */
+  shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
+};
+
 function useTableKeyboardNav(
   tableRef: HTMLTableElement | null,
-  { enabled }: { enabled: boolean },
+  { enabled, shouldBlockNavigation: customBlockFn }: UseTableKeyboardNavOptions,
 ) {
   const { getTableGrid, activeCell, setActiveCell } = useGridCache(
     tableRef,
@@ -19,11 +35,10 @@ function useTableKeyboardNav(
   );
 
   /**
-   * TODO:
-   * - Save original tabIndex of cells and restore when navigating away?
+   * Executes a navigation action and returns the target cell.
    */
-  const findNextCellInDirection = useEventCallback(
-    (delta: { x: number; y: number }) => {
+  const executeNavigationAction = useEventCallback(
+    (action: NavigationAction) => {
       if (!tableRef) {
         return null;
       }
@@ -38,16 +53,42 @@ function useTableKeyboardNav(
       const { grid, positions } = getTableGrid(tableRef);
       const currentPos = positions.get(currentCell);
 
-      if (!currentPos) {
+      if (
+        !currentPos &&
+        action.type !== "tableStart" &&
+        action.type !== "tableEnd"
+      ) {
         return null;
       }
 
-      const nextCell = findNextFocusableCell(
-        grid,
-        currentPos,
-        delta,
-        currentCell,
-      );
+      let nextCell: Element | null = null;
+
+      switch (action.type) {
+        case "delta":
+          nextCell = findNextFocusableCell(
+            grid,
+            currentPos!,
+            action.delta,
+            currentCell,
+          );
+          break;
+
+        case "home":
+          nextCell = findFirstCellInRow(grid, positions, currentCell);
+          break;
+
+        case "end":
+          nextCell = findLastCellInRow(grid, positions, currentCell);
+          break;
+
+        case "tableStart":
+          nextCell = findFirstCell(grid, currentCell);
+          break;
+
+        case "tableEnd":
+          nextCell = findLastCell(grid, currentCell);
+          break;
+      }
 
       return nextCell
         ? focusCellAndUpdateTabIndex(nextCell, currentCell)
@@ -56,29 +97,21 @@ function useTableKeyboardNav(
   );
 
   /**
-   * Handles keyboard navigation with arrow keys.
-   * We check if the key is an arrow key, and if so, we calculate the next cell to focus based on the current active cell and the grid structure.
-   *
-   * TODO:
-   * - Check for other "blocking" scenarios, like actionmenus, dropdown etc
-   * - Consider having acallback user can hook into to determine if navigation should be blocked
-   * - Consider adding Home, End, PageUp, PageDown navigation
-   *
+   * Handles keyboard navigation with arrow keys, Home/End, and PageUp/PageDown.
+   * Checks if navigation should be blocked based on current focus context.
    */
   const handleTableKeyDown = useEventCallback((event: KeyboardEvent): void => {
-    /* Stops keydown from moving if we can assume that you are currently editing input, select etc */
-    if (shouldBlockArrowKeyNavigation(event)) {
+    if (shouldBlockNavigation(event, customBlockFn)) {
       return;
     }
 
-    let newCell: Element | null = null;
-
-    const delta = getDeltaFromKey(event.key);
-    if (delta) {
-      event.preventDefault();
-      newCell = findNextCellInDirection(delta);
+    const action = getNavigationAction(event);
+    if (!action) {
+      return;
     }
 
+    event.preventDefault();
+    const newCell = executeNavigationAction(action);
     newCell && setActiveCell(newCell);
   });
 
@@ -131,3 +164,4 @@ function useTableKeyboardNav(
 }
 
 export { useTableKeyboardNav };
+export type { UseTableKeyboardNavOptions };

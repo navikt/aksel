@@ -126,8 +126,100 @@ function findNextFocusableCell(
   }
 }
 
+/**
+ * Finds the first focusable cell in the same row as the current position.
+ */
+function findFirstCellInRow(
+  grid: (Element | undefined)[][],
+  positions: Map<Element, { x: number; y: number }>,
+  currentCell: Element,
+): Element | null {
+  const currentPos = positions.get(currentCell);
+  if (!currentPos) {
+    return null;
+  }
+
+  const row = grid[currentPos.y] ?? [];
+  for (let x = 0; x < row.length; x += 1) {
+    const cell = row[x];
+    if (isCellFocusable(cell, currentCell)) {
+      return cell;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Finds the last focusable cell in the same row as the current position.
+ */
+function findLastCellInRow(
+  grid: (Element | undefined)[][],
+  positions: Map<Element, { x: number; y: number }>,
+  currentCell: Element,
+): Element | null {
+  const currentPos = positions.get(currentCell);
+  if (!currentPos) {
+    return null;
+  }
+
+  const row = grid[currentPos.y] ?? [];
+  for (let x = row.length - 1; x >= 0; x -= 1) {
+    const cell = row[x];
+    if (isCellFocusable(cell, currentCell)) {
+      return cell;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Finds the first focusable cell in the entire table.
+ */
+function findFirstCell(
+  grid: (Element | undefined)[][],
+  currentCell: Element,
+): Element | null {
+  for (let y = 0; y < grid.length; y += 1) {
+    const row = grid[y] ?? [];
+    for (let x = 0; x < row.length; x += 1) {
+      const cell = row[x];
+      if (isCellFocusable(cell, currentCell)) {
+        return cell;
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Finds the last focusable cell in the entire table.
+ */
+function findLastCell(
+  grid: (Element | undefined)[][],
+  currentCell: Element,
+): Element | null {
+  for (let y = grid.length - 1; y >= 0; y -= 1) {
+    const row = grid[y] ?? [];
+    for (let x = row.length - 1; x >= 0; x -= 1) {
+      const cell = row[x];
+      if (isCellFocusable(cell, currentCell)) {
+        return cell;
+      }
+    }
+  }
+
+  return null;
+}
+
 export {
   buildTableGridMap,
+  findFirstCell,
+  findFirstCellInRow,
+  findLastCell,
+  findLastCellInRow,
   findNextFocusableCell,
   getNextGridPosition,
   isCellFocusable,

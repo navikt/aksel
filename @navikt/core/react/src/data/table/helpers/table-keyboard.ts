@@ -7,16 +7,46 @@ const keyToCoord = {
 
 type DirectionsT = keyof typeof keyToCoord;
 type Delta = { x: number; y: number };
+type NavigationAction =
+  | { type: "delta"; delta: Delta }
+  | { type: "home" }
+  | { type: "end" }
+  | { type: "tableStart" }
+  | { type: "tableEnd" };
 
-function getDeltaFromKey(key: string): Delta | null {
+/**
+ * Maps keyboard events to navigation actions.
+ * Supports arrow keys, Home/End (row navigation), Ctrl/Cmd+Home/End (table navigation),
+ * and PageUp/PageDown (multi-row navigation).
+ */
+function getNavigationAction(event: KeyboardEvent): NavigationAction | null {
+  const key = event.key;
+
+  /* Arrow keys -> directional navigation */
   if (key in keyToCoord) {
-    return keyToCoord[key as DirectionsT];
+    return { type: "delta", delta: keyToCoord[key as DirectionsT] };
+  }
+
+  // Home/End keys
+  if (key === "Home") {
+    return event.ctrlKey || event.metaKey
+      ? { type: "tableStart" }
+      : { type: "home" };
+  }
+
+  if (key === "End") {
+    return event.ctrlKey || event.metaKey
+      ? { type: "tableEnd" }
+      : { type: "end" };
   }
 
   return null;
 }
 
 /**
+ * Determines if keyboard navigation should be blocked based on the current focus context.
+ * Allows for custom blocking logic via an optional callback.
+ *
  * Tries to make assumptions of what the user is currently doing inside a table cell
  * Should block navigation if:
  * - Input has selection, caret is not at start/end
@@ -24,7 +54,15 @@ function getDeltaFromKey(key: string): Delta | null {
  * - User is navigating inside multiline textarea
  * - contenteditable attrb is in use
  */
-function shouldBlockArrowKeyNavigation(event: KeyboardEvent): boolean {
+function shouldBlockNavigation(
+  event: KeyboardEvent,
+  customBlockFn?: (event: KeyboardEvent) => boolean,
+): boolean {
+  /* Check custom block function first */
+  if (customBlockFn?.(event)) {
+    return true;
+  }
+
   const key = event.key;
   if (!(key in keyToCoord)) {
     return false;
@@ -123,4 +161,5 @@ function isTextInputType(type: string): boolean {
   }
 }
 
-export { getDeltaFromKey, shouldBlockArrowKeyNavigation };
+export { getNavigationAction, shouldBlockNavigation };
+export type { Delta, NavigationAction };

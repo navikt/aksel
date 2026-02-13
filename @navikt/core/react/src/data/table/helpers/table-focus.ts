@@ -1,4 +1,30 @@
 /**
+ * WeakMap to store original tabIndex values for cells.
+ * Used to restore tabIndex when navigation moves away from a cell.
+ */
+const originalTabIndexMap = new WeakMap<Element, number>();
+
+/**
+ * Stores the original tabIndex of a cell if not already stored, and returns it.
+ */
+function syncOriginalTabIndex(cell: Element): void {
+  if (!originalTabIndexMap.has(cell)) {
+    const current = (cell as HTMLElement).tabIndex;
+    originalTabIndexMap.set(cell, current);
+  }
+}
+
+/**
+ * Restores the original tabIndex for a cell.
+ */
+function restoreTabIndex(cell: Element): void {
+  const original = originalTabIndexMap.get(cell);
+  if (original !== undefined) {
+    (cell as HTMLElement).tabIndex = original;
+  }
+}
+
+/**
  * Makes sure only focusable and non-disabled elements are targeted when navigating through the table using keyboard interactions.
  * Tries to find the most logical focus target inside a cell, by looking for commonly used interactive elements,
  * falling back to the cell itself if no focusable targets are found.
@@ -31,8 +57,7 @@ function findFocusableElementInCell(cell: Element): HTMLElement | null {
 }
 
 /**
- * Checks if an element is visually hidden.
- * TODO: validate this implementation against SR-only elements
+ * Checks if an element is visually hidden (but not SR-only).
  */
 function isHiddenElement(el: HTMLElement): boolean {
   if (el.hidden) {
@@ -118,7 +143,8 @@ function focusCellAndUpdateTabIndex(
   { shouldFocus = true }: { shouldFocus?: boolean } = {},
 ): Element | null {
   if (previousCell && previousCell !== nextCell) {
-    (previousCell as HTMLElement).tabIndex = -1;
+    syncOriginalTabIndex(previousCell);
+    restoreTabIndex(previousCell);
   }
 
   if (!shouldFocus) {
@@ -136,4 +162,5 @@ export {
   isDisabledElement,
   isHiddenElement,
   prepareCellFocus,
+  restoreTabIndex,
 };
