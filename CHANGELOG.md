@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.4.1
+
+### @navikt/ds-css
+
+- Combobox: Single-select typo now scales based on 'size'-prop ([#4638](https://github.com/navikt/aksel/pull/4638))
+
 ## 8.4.0
 
 ### @navikt/ds-react
