@@ -61,6 +61,44 @@ type GridCache = {
 };
 
 /**
+ * Pure function that calculates the next grid position given a current position and delta.
+ * Returns the position if valid, or null if out of bounds.
+ */
+function getNextGridPosition(
+  grid: (Element | undefined)[][],
+  currentPos: { x: number; y: number },
+  delta: { x: number; y: number },
+): { x: number; y: number } | null {
+  const x = currentPos.x + delta.x;
+  const y = currentPos.y + delta.y;
+
+  if (y < 0 || y >= grid.length) {
+    return null;
+  }
+
+  const row = grid[y] ?? [];
+  if (x < 0 || x >= row.length) {
+    return null;
+  }
+
+  return { x, y };
+}
+
+/**
+ * Checks if a cell is focusable (not the same as current cell and contains focusable elements).
+ * Type guard that narrows Element | undefined to Element.
+ */
+function isCellFocusable(
+  cell: Element | undefined,
+  currentCell: Element,
+): cell is Element {
+  if (!cell || cell === currentCell) {
+    return false;
+  }
+  return !!findFocusableElementInCell(cell);
+}
+
+/**
  * Finds the next cell in the given direction, starting from the current position.
  * Skips over cells that are not focusable or are the same as the current cell.
  * Returns null if no next cell is found in the given direction.
@@ -71,25 +109,27 @@ function findNextFocusableCell(
   delta: { x: number; y: number },
   currentCell: Element,
 ): Element | null {
-  let x = currentPos.x + delta.x;
-  let y = currentPos.y + delta.y;
+  let position = currentPos;
 
-  const maxRows = grid.length;
-
-  while (y >= 0 && y < maxRows) {
-    const row = grid[y] ?? [];
-    if (x < 0 || x >= row.length) {
-      break;
+  while (true) {
+    const nextPos = getNextGridPosition(grid, position, delta);
+    if (!nextPos) {
+      return null;
     }
-    const cell = row[x];
-    if (cell && cell !== currentCell && !!findFocusableElementInCell(cell)) {
+
+    const cell = grid[nextPos.y][nextPos.x];
+    if (isCellFocusable(cell, currentCell)) {
       return cell;
     }
-    x += delta.x;
-    y += delta.y;
-  }
 
-  return null;
+    position = nextPos;
+  }
 }
 
-export { buildTableGridMap, findNextFocusableCell, type GridCache };
+export {
+  buildTableGridMap,
+  findNextFocusableCell,
+  getNextGridPosition,
+  isCellFocusable,
+};
+export type { GridCache };

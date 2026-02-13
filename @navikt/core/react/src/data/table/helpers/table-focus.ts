@@ -31,8 +31,8 @@ function findFocusableElementInCell(cell: Element): HTMLElement | null {
 }
 
 /**
- * TODO:
- * - validate this implementation against SR-only elements
+ * Checks if an element is visually hidden.
+ * TODO: validate this implementation against SR-only elements
  */
 function isHiddenElement(el: HTMLElement): boolean {
   if (el.hidden) {
@@ -43,6 +43,9 @@ function isHiddenElement(el: HTMLElement): boolean {
   return style.display === "none" || style.visibility === "hidden";
 }
 
+/**
+ * Checks if an element is disabled (via aria-disabled, fieldset, or native disabled property).
+ */
 function isDisabledElement(el: HTMLElement): boolean {
   if (el.getAttribute("aria-disabled") === "true") {
     return true;
@@ -64,7 +67,11 @@ function isDisabledElement(el: HTMLElement): boolean {
   return false;
 }
 
-function focusCell(cell: Element): Element | null {
+/**
+ * Determines the focus target and updates tabIndex if the cell itself should be focused.
+ * Returns null if no focusable target found.
+ */
+function prepareCellFocus(cell: Element): HTMLElement | null {
   const focusTarget = findFocusableElementInCell(cell);
   if (!focusTarget) {
     return null;
@@ -74,16 +81,34 @@ function focusCell(cell: Element): Element | null {
     (cell as HTMLElement).tabIndex = 0;
   }
 
-  focusTarget.focus({
+  return focusTarget;
+}
+
+/**
+ * Applies focus and scroll to an element.
+ */
+function applyFocusAndScroll(element: HTMLElement): void {
+  element.focus({
     preventScroll: true,
   });
 
-  focusTarget.scrollIntoView({
+  element.scrollIntoView({
     behavior: "smooth",
     block: "nearest",
     inline: "nearest",
   });
+}
 
+/**
+ * Focuses a cell by finding its focusable target and applying focus with scroll.
+ */
+function focusCell(cell: Element): Element | null {
+  const focusTarget = prepareCellFocus(cell);
+  if (!focusTarget) {
+    return null;
+  }
+
+  applyFocusAndScroll(focusTarget);
   return cell;
 }
 
@@ -103,4 +128,12 @@ function focusCellAndUpdateTabIndex(
   return focusCell(nextCell);
 }
 
-export { focusCell, focusCellAndUpdateTabIndex, findFocusableElementInCell };
+export {
+  applyFocusAndScroll,
+  focusCell,
+  focusCellAndUpdateTabIndex,
+  findFocusableElementInCell,
+  isDisabledElement,
+  isHiddenElement,
+  prepareCellFocus,
+};
