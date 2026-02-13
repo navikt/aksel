@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useEventCallback } from "../../../utils/hooks";
-import { getActiveCell, getFirstCell } from "../helpers/table-cell";
-import { focusCell, focusCellAndUpdateTabIndex } from "../helpers/table-focus";
+import { focusInitialTableTarget } from "../helpers/table-cell";
+import { focusCellAndUpdateTabIndex } from "../helpers/table-focus";
 import {
   type GridCache,
   ensureTableGrid,
@@ -33,8 +33,14 @@ function useTableKeyboardNav(
    */
   const navigateByArrowKey = useEventCallback(
     (delta: { x: number; y: number }) => {
-      const currentCell = getActiveCell(tableRef, activeCell);
-      if (!currentCell || !tableRef) {
+      if (!tableRef) {
+        return null;
+      }
+
+      let currentCell = activeCell;
+      currentCell ??= focusInitialTableTarget(tableRef);
+
+      if (!currentCell) {
         return null;
       }
 
@@ -91,8 +97,7 @@ function useTableKeyboardNav(
     const target = event.target as Element | null;
 
     if (tableRef && target === tableRef) {
-      const firstCell = getFirstCell(tableRef);
-      firstCell && focusCell(firstCell);
+      focusInitialTableTarget(tableRef);
       return;
     }
 

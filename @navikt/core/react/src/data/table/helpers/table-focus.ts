@@ -83,6 +83,7 @@ function focusCell(cell: Element): Element | null {
     block: "nearest",
     inline: "nearest",
   });
+
   return cell;
 }
 
