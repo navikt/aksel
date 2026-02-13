@@ -6,12 +6,10 @@ import { getFocusableTarget } from "./table-focus";
 function buildTableGrid(tableRef: HTMLTableElement): {
   grid: (Element | undefined)[][];
   positions: Map<Element, { x: number; y: number }>;
-  maxCols: number;
 } {
   const rows = tableRef.rows;
   const grid: (Element | undefined)[][] = [];
   const positions = new Map<Element, { x: number; y: number }>();
-  let maxCols = 0;
 
   /* Walk trough each row in order */
   for (let rowIndex = 0; rowIndex < rows.length; rowIndex += 1) {
@@ -51,13 +49,10 @@ function buildTableGrid(tableRef: HTMLTableElement): {
       }
 
       colIndex += colSpan;
-      if (colIndex > maxCols) {
-        maxCols = colIndex;
-      }
     }
   }
 
-  return { grid, positions, maxCols };
+  return { grid, positions };
 }
 
 type TableGrid = ReturnType<typeof buildTableGrid>;
@@ -89,15 +84,17 @@ function findNextCell(
   currentPos: { x: number; y: number },
   delta: { x: number; y: number },
   currentCell: Element,
-  maxCols: number,
 ): Element | null {
   let x = currentPos.x + delta.x;
   let y = currentPos.y + delta.y;
 
   const maxRows = grid.length;
 
-  while (y >= 0 && y < maxRows && x >= 0 && x < maxCols) {
+  while (y >= 0 && y < maxRows) {
     const row = grid[y] ?? [];
+    if (x < 0 || x >= row.length) {
+      break;
+    }
     const cell = row[x];
     if (cell && cell !== currentCell && !!getFocusableTarget(cell)) {
       return cell;

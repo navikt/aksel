@@ -38,7 +38,7 @@ function useTableKeyboardNav(
         return null;
       }
 
-      const { grid, positions, maxCols } = ensureTableGrid(
+      const { grid, positions } = ensureTableGrid(
         tableRef,
         gridCacheRef.current,
       );
@@ -48,13 +48,8 @@ function useTableKeyboardNav(
         return null;
       }
 
-      const nextCell = findNextCell(
-        grid,
-        currentPos,
-        delta,
-        currentCell,
-        maxCols,
-      );
+      const nextCell = findNextCell(grid, currentPos, delta, currentCell);
+
       return nextCell
         ? focusCellAndUpdateTabIndex(nextCell, currentCell)
         : null;

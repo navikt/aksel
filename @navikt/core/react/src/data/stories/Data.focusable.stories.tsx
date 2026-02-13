@@ -365,7 +365,9 @@ export const DisabledCells: Story = {
           </DataTable.Tr>
           <DataTable.Tr>
             <DataTable.Td>Normal 1</DataTable.Td>
-            <DataTable.Td>Normal 2</DataTable.Td>
+            <DataTable.Td style={{ visibility: "hidden" }}>
+              <button disabled>Disabled button</button>
+            </DataTable.Td>
             <DataTable.Td>Normal 3</DataTable.Td>
             <DataTable.Td>Normal 4</DataTable.Td>
           </DataTable.Tr>
