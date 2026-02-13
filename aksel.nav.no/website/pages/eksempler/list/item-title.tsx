@@ -34,5 +34,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Du kan også sette en tittel på hvert element i listen.",
+  desc: "Du kan sette en tittel på hvert element i listen. Dette er kun visuelt og får ingen semantisk betydning.",
 };
