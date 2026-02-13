@@ -42,7 +42,7 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
    * @see [📝 Landmarks unique](https://dequeuniversity.com/rules/axe/4.6/landmark-unique)
    *
    *
-   * **When using `acticle`, make sure `<LinkCard.Title />` is a heading and **not** a `span`.**
+   * **When using `article`, make sure `<LinkCard.Title />` is a heading and not a `span`.**
    * @default "div"
    */
   as?: "div" | "section" | "article";
