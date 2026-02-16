@@ -99,6 +99,7 @@ function isCellFocusable(cell: Element | undefined): cell is Element {
  * Finds the next cell in the given direction, starting from the current position.
  * Skips over cells that are not focusable.
  * Returns null if no next cell is found in the given direction.
+ * TODO: Bug found: Since we dont check against current cell now, rowspan/colspan return the same cell, making no navigation happend.
  */
 function findNextFocusableCell(
   grid: (Element | undefined)[][],

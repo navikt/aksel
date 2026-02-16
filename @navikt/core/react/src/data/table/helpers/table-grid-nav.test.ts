@@ -10,20 +10,20 @@ import {
   isCellFocusable,
 } from "./table-grid-nav";
 
+let container: HTMLDivElement;
+
+afterEach(() => {
+  container?.parentNode && document.body.removeChild(container);
+});
+
+function createTable(html: string): HTMLTableElement {
+  container = document.createElement("div");
+  container.innerHTML = html;
+  document.body.appendChild(container);
+  return container.querySelector("table")!;
+}
+
 describe("buildTableGridMap", () => {
-  let container: HTMLDivElement;
-
-  afterEach(() => {
-    container?.parentNode && document.body.removeChild(container);
-  });
-
-  function createTable(html: string): HTMLTableElement {
-    container = document.createElement("div");
-    container.innerHTML = html;
-    document.body.appendChild(container);
-    return container.querySelector("table")!;
-  }
-
   test("should build grid for simple 2x2 table without spans", () => {
     const table = createTable(`
       <table>
@@ -407,19 +407,6 @@ describe("getNextGridPosition", () => {
 });
 
 describe("isCellFocusable", () => {
-  let container: HTMLDivElement;
-
-  afterEach(() => {
-    container?.parentNode && document.body.removeChild(container);
-  });
-
-  function createTable(html: string): HTMLTableElement {
-    container = document.createElement("div");
-    container.innerHTML = html;
-    document.body.appendChild(container);
-    return container.querySelector("table")!;
-  }
-
   test("should return false when cell is undefined", () => {
     expect(isCellFocusable(undefined)).toBe(false);
   });
@@ -440,19 +427,6 @@ describe("isCellFocusable", () => {
 });
 
 describe("findNextFocusableCell", () => {
-  let container: HTMLDivElement;
-
-  afterEach(() => {
-    container?.parentNode && document.body.removeChild(container);
-  });
-
-  function createTable(html: string): HTMLTableElement {
-    container = document.createElement("div");
-    container.innerHTML = html;
-    document.body.appendChild(container);
-    return container.querySelector("table")!;
-  }
-
   test("should find next focusable cell to the right", () => {
     const table = createTable(`
       <table>
@@ -531,19 +505,6 @@ describe("findNextFocusableCell", () => {
 });
 
 describe("findFirstCellInRow", () => {
-  let container: HTMLDivElement;
-
-  afterEach(() => {
-    container?.parentNode && document.body.removeChild(container);
-  });
-
-  function createTable(html: string): HTMLTableElement {
-    container = document.createElement("div");
-    container.innerHTML = html;
-    document.body.appendChild(container);
-    return container.querySelector("table")!;
-  }
-
   test("should find first focusable cell in row", () => {
     const table = createTable(`
       <table>
@@ -565,19 +526,6 @@ describe("findFirstCellInRow", () => {
 });
 
 describe("findLastCellInRow", () => {
-  let container: HTMLDivElement;
-
-  afterEach(() => {
-    container?.parentNode && document.body.removeChild(container);
-  });
-
-  function createTable(html: string): HTMLTableElement {
-    container = document.createElement("div");
-    container.innerHTML = html;
-    document.body.appendChild(container);
-    return container.querySelector("table")!;
-  }
-
   test("should find last focusable cell in row", () => {
     const table = createTable(`
       <table>
@@ -599,19 +547,6 @@ describe("findLastCellInRow", () => {
 });
 
 describe("findFirstCell", () => {
-  let container: HTMLDivElement;
-
-  afterEach(() => {
-    container?.parentNode && document.body.removeChild(container);
-  });
-
-  function createTable(html: string): HTMLTableElement {
-    container = document.createElement("div");
-    container.innerHTML = html;
-    document.body.appendChild(container);
-    return container.querySelector("table")!;
-  }
-
   test("should find first focusable cell in table", () => {
     const table = createTable(`
       <table>
@@ -658,19 +593,6 @@ describe("findFirstCell", () => {
 });
 
 describe("findLastCell", () => {
-  let container: HTMLDivElement;
-
-  afterEach(() => {
-    container?.parentNode && document.body.removeChild(container);
-  });
-
-  function createTable(html: string): HTMLTableElement {
-    container = document.createElement("div");
-    container.innerHTML = html;
-    document.body.appendChild(container);
-    return container.querySelector("table")!;
-  }
-
   test("should find last focusable cell in table", () => {
     const table = createTable(`
       <table>
