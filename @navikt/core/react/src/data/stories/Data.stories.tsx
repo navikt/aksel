@@ -10,18 +10,15 @@ import {
 } from "@tanstack/react-table";
 import React from "react";
 import {
-  CheckmarkIcon,
-  ChevronDownUpIcon,
-  ChevronUpDownIcon,
-  CogIcon,
-  Density1Icon,
-  NotePencilFillIcon,
-  NotePencilIcon,
+  MenuElipsisVerticalCircleIcon,
   RectangleSectionsIcon,
 } from "@navikt/aksel-icons";
-import { ActionMenu } from "../../action-menu";
 import { Button } from "../../button";
-import { VStack } from "../../primitives/stack";
+import { Dialog } from "../../dialog";
+import { Radio, RadioGroup } from "../../form/radio";
+import { Switch } from "../../form/switch";
+import { HStack, VStack } from "../../primitives/stack";
+import { BodyShort } from "../../typography";
 import DataActionBar from "../action-bar/root/DataActionBarRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
@@ -133,103 +130,93 @@ export const TanstackExample: Story = {
             onChange={(value) => table.setGlobalFilter(value)}
           />
           <DataToolbar.ToggleButton icon={<RectangleSectionsIcon />} />
-          <ActionMenu>
-            <ActionMenu.Trigger>
+          <Dialog>
+            <Dialog.Trigger>
               <Button
+                icon={
+                  <MenuElipsisVerticalCircleIcon
+                    aria-hidden
+                    title="Åpne meny for innstillinger"
+                  />
+                }
                 data-color="neutral"
                 variant="tertiary"
                 size="small"
-                icon={<CogIcon title="Kolonner" />}
               />
-            </ActionMenu.Trigger>
-            <ActionMenu.Content>
-              <ActionMenu.CheckboxItem
-                checked={table.getIsAllColumnsVisible()}
-                onSelect={(event) => {
-                  const handler = table.getToggleAllColumnsVisibilityHandler();
-                  handler(event);
-                }}
-              >
-                Vis alle
-              </ActionMenu.CheckboxItem>
-              {table.getAllLeafColumns().map((column) => {
-                return (
-                  <ActionMenu.CheckboxItem
-                    key={column.id}
-                    checked={column.getIsVisible()}
-                    onSelect={(event) => {
-                      const handler = column.getToggleVisibilityHandler();
-                      handler(event);
-                    }}
-                  >
-                    {column.id}
-                  </ActionMenu.CheckboxItem>
-                );
-              })}
-            </ActionMenu.Content>
-          </ActionMenu>
-          <ActionMenu>
-            <ActionMenu.Trigger>
-              <Button
-                data-color="neutral"
-                variant="tertiary"
-                size="small"
-                icon={<Density1Icon title="Tetthet" />}
-              />
-            </ActionMenu.Trigger>
-            <ActionMenu.Content>
-              <ActionMenu.Group aria-label="Velg tetthet">
-                <ActionMenu.Item
-                  onSelect={() => setRowDensity("condensed")}
-                  icon={
-                    rowDensity === "condensed" ? <CheckmarkIcon /> : undefined
-                  }
-                >
-                  Tett
-                </ActionMenu.Item>
-                <ActionMenu.Item
-                  onSelect={() => setRowDensity("normal")}
-                  icon={rowDensity === "normal" ? <CheckmarkIcon /> : undefined}
-                >
-                  Normal
-                </ActionMenu.Item>
-                <ActionMenu.Item
-                  onSelect={() => setRowDensity("spacious")}
-                  icon={
-                    rowDensity === "spacious" ? <CheckmarkIcon /> : undefined
-                  }
-                >
-                  Løs
-                </ActionMenu.Item>
-              </ActionMenu.Group>
-            </ActionMenu.Content>
-          </ActionMenu>
-          <Button
-            icon={
-              zebraStripes ? (
-                <NotePencilFillIcon title="Skru striper av" />
-              ) : (
-                <NotePencilIcon title="Skru striper på" />
-              )
-            }
-            data-color="neutral"
-            variant="tertiary"
-            size="small"
-            onClick={() => setZebraStripes((old) => !old)}
-          />
-          <Button
-            icon={
-              truncateContent ? (
-                <ChevronUpDownIcon title="Kutt innhold" />
-              ) : (
-                <ChevronDownUpIcon title="Vis fullstendig innhold" />
-              )
-            }
-            data-color="neutral"
-            variant="tertiary"
-            size="small"
-            onClick={() => setTruncateContent((old) => !old)}
-          />
+            </Dialog.Trigger>
+            <Dialog.Popup width="large">
+              <Dialog.Header>
+                <Dialog.Title>Innstillinger</Dialog.Title>
+                <Dialog.Description>
+                  Her kan du justere innstillinger for tabellen
+                </Dialog.Description>
+              </Dialog.Header>
+              <Dialog.Body>
+                <HStack gap="space-32" paddingBlock="space-0 space-32">
+                  <VStack gap="space-36" maxWidth="50%">
+                    <RadioGroup
+                      legend="Velg radtetthet"
+                      onChange={setRowDensity}
+                      size="small"
+                      value={rowDensity}
+                    >
+                      <Radio value="condensed">Tett</Radio>
+                      <Radio value="normal">Normal</Radio>
+                      <Radio value="spacious">Løs</Radio>
+                    </RadioGroup>
+                    <Switch
+                      size="small"
+                      checked={truncateContent}
+                      onChange={(e) => setTruncateContent(e.target.checked)}
+                      description="Velg denne for å kutte innhold som ikke får plass i cellen til en linje."
+                    >
+                      Kutt innhold
+                    </Switch>
+                    <Switch
+                      size="small"
+                      checked={zebraStripes}
+                      onChange={(e) => setZebraStripes(e.target.checked)}
+                      description="Velg denne for å få stripede rader."
+                    >
+                      Stripede rader
+                    </Switch>
+                  </VStack>
+                  <VStack maxWidth="50%" gap="space-16">
+                    <BodyShort weight="semibold">Vis kolonner</BodyShort>
+                    <VStack gap="space-8">
+                      <Switch
+                        checked={table.getIsAllColumnsVisible()}
+                        size="small"
+                        onChange={(event) => {
+                          const handler =
+                            table.getToggleAllColumnsVisibilityHandler();
+                          handler?.(event);
+                        }}
+                      >
+                        Velg alle
+                      </Switch>
+                      {table.getAllLeafColumns().map((column) => {
+                        return (
+                          <Switch
+                            key={column.id}
+                            size="small"
+                            checked={column.getIsVisible()}
+                            onChange={(event) => {
+                              const handler =
+                                column.getToggleVisibilityHandler();
+                              handler(event);
+                            }}
+                          >
+                            {column.id}
+                          </Switch>
+                        );
+                      })}
+                    </VStack>
+                  </VStack>
+                </HStack>
+              </Dialog.Body>
+            </Dialog.Popup>
+          </Dialog>
         </DataToolbar>
 
         <DataActionBar numOfSelectedRows={2} onClear={() => alert("Cleared!")}>
