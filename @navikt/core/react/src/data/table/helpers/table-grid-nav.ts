@@ -85,14 +85,11 @@ function getNextGridPosition(
 }
 
 /**
- * Checks if a cell is focusable (not the same as current cell and contains focusable elements).
+ * Checks if a cell is focusable (contains focusable elements).
  * Type guard that narrows Element | undefined to Element.
  */
-function isCellFocusable(
-  cell: Element | undefined,
-  currentCell: Element,
-): cell is Element {
-  if (!cell || cell === currentCell) {
+function isCellFocusable(cell: Element | undefined): cell is Element {
+  if (!cell) {
     return false;
   }
   return !!findFocusableElementInCell(cell);
@@ -100,14 +97,13 @@ function isCellFocusable(
 
 /**
  * Finds the next cell in the given direction, starting from the current position.
- * Skips over cells that are not focusable or are the same as the current cell.
+ * Skips over cells that are not focusable.
  * Returns null if no next cell is found in the given direction.
  */
 function findNextFocusableCell(
   grid: (Element | undefined)[][],
   currentPos: { x: number; y: number },
   delta: { x: number; y: number },
-  currentCell: Element,
 ): Element | null {
   let position = currentPos;
 
@@ -118,7 +114,7 @@ function findNextFocusableCell(
     }
 
     const cell = grid[nextPos.y][nextPos.x];
-    if (isCellFocusable(cell, currentCell)) {
+    if (isCellFocusable(cell)) {
       return cell;
     }
 
@@ -127,22 +123,16 @@ function findNextFocusableCell(
 }
 
 /**
- * Finds the first focusable cell in the same row as the current position.
+ * Finds the first focusable cell in the given row.
  */
 function findFirstCellInRow(
   grid: (Element | undefined)[][],
-  positions: Map<Element, { x: number; y: number }>,
-  currentCell: Element,
+  rowIndex: number,
 ): Element | null {
-  const currentPos = positions.get(currentCell);
-  if (!currentPos) {
-    return null;
-  }
-
-  const row = grid[currentPos.y] ?? [];
+  const row = grid[rowIndex] ?? [];
   for (let x = 0; x < row.length; x += 1) {
     const cell = row[x];
-    if (isCellFocusable(cell, currentCell)) {
+    if (isCellFocusable(cell)) {
       return cell;
     }
   }
@@ -151,22 +141,16 @@ function findFirstCellInRow(
 }
 
 /**
- * Finds the last focusable cell in the same row as the current position.
+ * Finds the last focusable cell in the given row.
  */
 function findLastCellInRow(
   grid: (Element | undefined)[][],
-  positions: Map<Element, { x: number; y: number }>,
-  currentCell: Element,
+  rowIndex: number,
 ): Element | null {
-  const currentPos = positions.get(currentCell);
-  if (!currentPos) {
-    return null;
-  }
-
-  const row = grid[currentPos.y] ?? [];
+  const row = grid[rowIndex] ?? [];
   for (let x = row.length - 1; x >= 0; x -= 1) {
     const cell = row[x];
-    if (isCellFocusable(cell, currentCell)) {
+    if (isCellFocusable(cell)) {
       return cell;
     }
   }
@@ -177,15 +161,12 @@ function findLastCellInRow(
 /**
  * Finds the first focusable cell in the entire table.
  */
-function findFirstCell(
-  grid: (Element | undefined)[][],
-  currentCell: Element,
-): Element | null {
+function findFirstCell(grid: (Element | undefined)[][]): Element | null {
   for (let y = 0; y < grid.length; y += 1) {
     const row = grid[y] ?? [];
     for (let x = 0; x < row.length; x += 1) {
       const cell = row[x];
-      if (isCellFocusable(cell, currentCell)) {
+      if (isCellFocusable(cell)) {
         return cell;
       }
     }
@@ -197,15 +178,12 @@ function findFirstCell(
 /**
  * Finds the last focusable cell in the entire table.
  */
-function findLastCell(
-  grid: (Element | undefined)[][],
-  currentCell: Element,
-): Element | null {
+function findLastCell(grid: (Element | undefined)[][]): Element | null {
   for (let y = grid.length - 1; y >= 0; y -= 1) {
     const row = grid[y] ?? [];
     for (let x = row.length - 1; x >= 0; x -= 1) {
       const cell = row[x];
-      if (isCellFocusable(cell, currentCell)) {
+      if (isCellFocusable(cell)) {
         return cell;
       }
     }

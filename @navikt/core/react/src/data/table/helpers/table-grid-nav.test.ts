@@ -1,5 +1,14 @@
 import { afterEach, describe, expect, test } from "vitest";
-import { buildTableGridMap } from "./table-grid-nav";
+import {
+  buildTableGridMap,
+  findFirstCell,
+  findFirstCellInRow,
+  findLastCell,
+  findLastCellInRow,
+  findNextFocusableCell,
+  getNextGridPosition,
+  isCellFocusable,
+} from "./table-grid-nav";
 
 describe("buildTableGridMap", () => {
   let container: HTMLDivElement;
@@ -370,5 +379,339 @@ describe("buildTableGridMap", () => {
 
     expect(positions.get(cells[3])).toEqual({ x: 1, y: 1 });
     expect(positions.get(cells[4])).toEqual({ x: 2, y: 1 });
+  });
+});
+
+describe("getNextGridPosition", () => {
+  test("should return null when moving out of bounds", () => {
+    const grid = [
+      [undefined, undefined],
+      [undefined, undefined],
+    ];
+    const down = getNextGridPosition(grid, { x: 0, y: 1 }, { x: 0, y: 1 });
+    const up = getNextGridPosition(grid, { x: 0, y: 0 }, { x: 0, y: -1 });
+    const right = getNextGridPosition(grid, { x: 1, y: 0 }, { x: 1, y: 0 });
+    const left = getNextGridPosition(grid, { x: 0, y: 0 }, { x: -1, y: 0 });
+
+    expect(down).toBeNull();
+    expect(up).toBeNull();
+    expect(right).toBeNull();
+    expect(left).toBeNull();
+  });
+
+  test("should handle empty grid", () => {
+    const grid: (Element | undefined)[][] = [];
+    const result = getNextGridPosition(grid, { x: 0, y: 0 }, { x: 1, y: 0 });
+    expect(result).toBeNull();
+  });
+});
+
+describe("isCellFocusable", () => {
+  let container: HTMLDivElement;
+
+  afterEach(() => {
+    container?.parentNode && document.body.removeChild(container);
+  });
+
+  function createTable(html: string): HTMLTableElement {
+    container = document.createElement("div");
+    container.innerHTML = html;
+    document.body.appendChild(container);
+    return container.querySelector("table")!;
+  }
+
+  test("should return false when cell is undefined", () => {
+    expect(isCellFocusable(undefined)).toBe(false);
+  });
+
+  test("should return true when cell has focusable elements", () => {
+    const table = createTable(`
+      <table>
+        <tr>
+          <td>A</td>
+          <td><button>B</button></td>
+        </tr>
+      </table>
+    `);
+    const cells = table.querySelectorAll("td");
+
+    expect(isCellFocusable(cells[1])).toBe(true);
+  });
+});
+
+describe("findNextFocusableCell", () => {
+  let container: HTMLDivElement;
+
+  afterEach(() => {
+    container?.parentNode && document.body.removeChild(container);
+  });
+
+  function createTable(html: string): HTMLTableElement {
+    container = document.createElement("div");
+    container.innerHTML = html;
+    document.body.appendChild(container);
+    return container.querySelector("table")!;
+  }
+
+  test("should find next focusable cell to the right", () => {
+    const table = createTable(`
+      <table>
+        <tr>
+          <td><button>A</button></td>
+          <td><button>B</button></td>
+          <td><button>C</button></td>
+        </tr>
+      </table>
+    `);
+
+    const { grid, positions } = buildTableGridMap(table);
+    const cells = Array.from(table.querySelectorAll("td"));
+
+    const currentPos = positions.get(cells[0])!;
+    const result = findNextFocusableCell(grid, currentPos, { x: 1, y: 0 });
+
+    expect(result).toBe(cells[1]);
+  });
+
+  test("should not skip non-focusable cells", () => {
+    const table = createTable(`
+      <table>
+        <tr>
+          <td><button>A</button></td>
+          <td>B</td>
+          <td><button>C</button></td>
+        </tr>
+      </table>
+    `);
+
+    const { grid, positions } = buildTableGridMap(table);
+    const cells = Array.from(table.querySelectorAll("td"));
+
+    const currentPos = positions.get(cells[0])!;
+    const result = findNextFocusableCell(grid, currentPos, { x: 1, y: 0 });
+
+    expect(result).toBe(cells[1]);
+  });
+
+  test("should return null when reaching edge of grid", () => {
+    const table = createTable(`
+      <table>
+        <tr>
+          <td><button>A</button></td>
+          <td>B</td>
+        </tr>
+      </table>
+    `);
+
+    const { grid, positions } = buildTableGridMap(table);
+    const cells = Array.from(table.querySelectorAll("td"));
+
+    const currentPos = positions.get(cells[1])!;
+    const result = findNextFocusableCell(grid, currentPos, { x: 1, y: 0 });
+
+    expect(result).toBeNull();
+  });
+
+  test("should find next focusable cell downward", () => {
+    const table = createTable(`
+      <table>
+        <tr><td><button>A</button></td></tr>
+        <tr><td><button>B</button></td></tr>
+      </table>
+    `);
+
+    const { grid, positions } = buildTableGridMap(table);
+    const cells = Array.from(table.querySelectorAll("td"));
+
+    const currentPos = positions.get(cells[0])!;
+    const result = findNextFocusableCell(grid, currentPos, { x: 0, y: 1 });
+
+    expect(result).toBe(cells[1]);
+  });
+});
+
+describe("findFirstCellInRow", () => {
+  let container: HTMLDivElement;
+
+  afterEach(() => {
+    container?.parentNode && document.body.removeChild(container);
+  });
+
+  function createTable(html: string): HTMLTableElement {
+    container = document.createElement("div");
+    container.innerHTML = html;
+    document.body.appendChild(container);
+    return container.querySelector("table")!;
+  }
+
+  test("should find first focusable cell in row", () => {
+    const table = createTable(`
+      <table>
+        <tr>
+          <td><button>A</button></td>
+          <td><button>B</button></td>
+          <td><button>C</button></td>
+        </tr>
+      </table>
+    `);
+
+    const { grid } = buildTableGridMap(table);
+    const cells = Array.from(table.querySelectorAll("td"));
+
+    const result = findFirstCellInRow(grid, 0);
+
+    expect(result).toBe(cells[0]);
+  });
+});
+
+describe("findLastCellInRow", () => {
+  let container: HTMLDivElement;
+
+  afterEach(() => {
+    container?.parentNode && document.body.removeChild(container);
+  });
+
+  function createTable(html: string): HTMLTableElement {
+    container = document.createElement("div");
+    container.innerHTML = html;
+    document.body.appendChild(container);
+    return container.querySelector("table")!;
+  }
+
+  test("should find last focusable cell in row", () => {
+    const table = createTable(`
+      <table>
+        <tr>
+          <td><button>A</button></td>
+          <td><button>B</button></td>
+          <td><button>C</button></td>
+        </tr>
+      </table>
+    `);
+
+    const { grid } = buildTableGridMap(table);
+    const cells = Array.from(table.querySelectorAll("td"));
+
+    const result = findLastCellInRow(grid, 0);
+
+    expect(result).toBe(cells[2]);
+  });
+});
+
+describe("findFirstCell", () => {
+  let container: HTMLDivElement;
+
+  afterEach(() => {
+    container?.parentNode && document.body.removeChild(container);
+  });
+
+  function createTable(html: string): HTMLTableElement {
+    container = document.createElement("div");
+    container.innerHTML = html;
+    document.body.appendChild(container);
+    return container.querySelector("table")!;
+  }
+
+  test("should find first focusable cell in table", () => {
+    const table = createTable(`
+      <table>
+        <tr>
+          <td><button>A</button></td>
+          <td><button>B</button></td>
+        </tr>
+        <tr>
+          <td><button>C</button></td>
+          <td><button>D</button></td>
+        </tr>
+      </table>
+    `);
+
+    const { grid } = buildTableGridMap(table);
+    const cells = Array.from(table.querySelectorAll("td"));
+
+    const result = findFirstCell(grid);
+
+    expect(result).toBe(cells[0]);
+  });
+
+  test("should skip non-focusable cells", () => {
+    const table = createTable(`
+      <table>
+        <tr>
+          <td style="visibility:hidden;">A</td>
+          <td>B</td>
+        </tr>
+        <tr>
+          <td><button>C</button></td>
+          <td><button>D</button></td>
+        </tr>
+      </table>
+    `);
+
+    const { grid } = buildTableGridMap(table);
+    const cells = Array.from(table.querySelectorAll("td"));
+
+    const result = findFirstCell(grid);
+
+    expect(result).toBe(cells[1]);
+  });
+});
+
+describe("findLastCell", () => {
+  let container: HTMLDivElement;
+
+  afterEach(() => {
+    container?.parentNode && document.body.removeChild(container);
+  });
+
+  function createTable(html: string): HTMLTableElement {
+    container = document.createElement("div");
+    container.innerHTML = html;
+    document.body.appendChild(container);
+    return container.querySelector("table")!;
+  }
+
+  test("should find last focusable cell in table", () => {
+    const table = createTable(`
+      <table>
+        <tr>
+          <td><button>A</button></td>
+          <td><button>B</button></td>
+        </tr>
+        <tr>
+          <td><button>C</button></td>
+          <td><button>D</button></td>
+        </tr>
+      </table>
+    `);
+
+    const { grid } = buildTableGridMap(table);
+    const cells = Array.from(table.querySelectorAll("td"));
+
+    const result = findLastCell(grid);
+
+    expect(result).toBe(cells[3]);
+  });
+
+  test("should skip non-focusable cells", () => {
+    const table = createTable(`
+      <table>
+        <tr>
+          <td><button>A</button></td>
+          <td><button>B</button></td>
+        </tr>
+        <tr>
+          <td><button>C</button></td>
+          <td style="visibility:hidden;">D</td>
+        </tr>
+      </table>
+    `);
+
+    const { grid } = buildTableGridMap(table);
+    const cells = Array.from(table.querySelectorAll("td"));
+
+    const result = findLastCell(grid);
+
+    expect(result).toBe(cells[2]);
   });
 });

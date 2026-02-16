@@ -53,46 +53,49 @@ function useTableKeyboardNav(
       const { grid, positions } = getTableGrid(tableRef);
       const currentPos = positions.get(currentCell);
 
-      if (
-        !currentPos &&
-        action.type !== "tableStart" &&
-        action.type !== "tableEnd"
-      ) {
-        return null;
-      }
-
       let nextCell: Element | null = null;
 
       switch (action.type) {
-        case "delta":
-          nextCell = findNextFocusableCell(
-            grid,
-            currentPos!,
-            action.delta,
-            currentCell,
-          );
+        case "delta": {
+          if (!currentPos) {
+            return null;
+          }
+          nextCell = findNextFocusableCell(grid, currentPos, action.delta);
           break;
+        }
 
-        case "home":
-          nextCell = findFirstCellInRow(grid, positions, currentCell);
+        case "home": {
+          if (!currentPos) {
+            return null;
+          }
+          nextCell = findFirstCellInRow(grid, currentPos.y);
           break;
+        }
 
-        case "end":
-          nextCell = findLastCellInRow(grid, positions, currentCell);
+        case "end": {
+          if (!currentPos) {
+            return null;
+          }
+          nextCell = findLastCellInRow(grid, currentPos.y);
           break;
+        }
 
-        case "tableStart":
-          nextCell = findFirstCell(grid, currentCell);
+        case "tableStart": {
+          nextCell = findFirstCell(grid);
           break;
+        }
 
-        case "tableEnd":
-          nextCell = findLastCell(grid, currentCell);
+        case "tableEnd": {
+          nextCell = findLastCell(grid);
           break;
+        }
       }
 
-      return nextCell
-        ? focusCellAndUpdateTabIndex(nextCell, currentCell)
-        : null;
+      if (!nextCell || nextCell === currentCell) {
+        return null;
+      }
+
+      return focusCellAndUpdateTabIndex(nextCell, currentCell);
     },
   );
 
