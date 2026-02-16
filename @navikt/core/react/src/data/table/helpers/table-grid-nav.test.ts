@@ -442,7 +442,12 @@ describe("findNextFocusableCell", () => {
     const cells = Array.from(table.querySelectorAll("td"));
 
     const currentPos = positions.get(cells[0])!;
-    const result = findNextFocusableCell(grid, currentPos, { x: 1, y: 0 });
+    const result = findNextFocusableCell(
+      grid,
+      currentPos,
+      { x: 1, y: 0 },
+      cells[0],
+    );
 
     expect(result).toBe(cells[1]);
   });
@@ -462,7 +467,12 @@ describe("findNextFocusableCell", () => {
     const cells = Array.from(table.querySelectorAll("td"));
 
     const currentPos = positions.get(cells[0])!;
-    const result = findNextFocusableCell(grid, currentPos, { x: 1, y: 0 });
+    const result = findNextFocusableCell(
+      grid,
+      currentPos,
+      { x: 1, y: 0 },
+      cells[0],
+    );
 
     expect(result).toBe(cells[1]);
   });
@@ -481,7 +491,12 @@ describe("findNextFocusableCell", () => {
     const cells = Array.from(table.querySelectorAll("td"));
 
     const currentPos = positions.get(cells[1])!;
-    const result = findNextFocusableCell(grid, currentPos, { x: 1, y: 0 });
+    const result = findNextFocusableCell(
+      grid,
+      currentPos,
+      { x: 1, y: 0 },
+      cells[1],
+    );
 
     expect(result).toBeNull();
   });
@@ -498,7 +513,12 @@ describe("findNextFocusableCell", () => {
     const cells = Array.from(table.querySelectorAll("td"));
 
     const currentPos = positions.get(cells[0])!;
-    const result = findNextFocusableCell(grid, currentPos, { x: 0, y: 1 });
+    const result = findNextFocusableCell(
+      grid,
+      currentPos,
+      { x: 0, y: 1 },
+      cells[0],
+    );
 
     expect(result).toBe(cells[1]);
   });

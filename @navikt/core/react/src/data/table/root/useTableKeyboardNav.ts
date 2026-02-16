@@ -60,7 +60,12 @@ function useTableKeyboardNav(
           if (!currentPos) {
             return null;
           }
-          nextCell = findNextFocusableCell(grid, currentPos, action.delta);
+          nextCell = findNextFocusableCell(
+            grid,
+            currentPos,
+            action.delta,
+            currentCell,
+          );
           break;
         }
 
