@@ -108,57 +108,59 @@ export const NoPageScroll: Story = {
           </ActionMenu>
         </DataToolbar>
 
-        <DataTable>
-          <DataTable.Thead>
-            {table.getHeaderGroups().map((headerGroup) => {
-              return (
-                <DataTable.Tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <DataTable.Th
-                        key={header.id}
-                        size={header.getSize()}
-                        resizeHandler={header.getResizeHandler()}
-                        sortDirection={header.column.getIsSorted() || "none"}
-                        onSortChange={(_, event) => {
-                          const handler =
-                            header.column.getToggleSortingHandler();
-                          handler?.(event);
-                        }}
-                      >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
-                            )}
-                      </DataTable.Th>
-                    );
-                  })}
+        <Box flexGrow="1" overflow="hidden">
+          <DataTable>
+            <DataTable.Thead>
+              {table.getHeaderGroups().map((headerGroup) => {
+                return (
+                  <DataTable.Tr key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
+                      return (
+                        <DataTable.Th
+                          key={header.id}
+                          size={header.getSize()}
+                          resizeHandler={header.getResizeHandler()}
+                          sortDirection={header.column.getIsSorted() || "none"}
+                          onSortChange={(_, event) => {
+                            const handler =
+                              header.column.getToggleSortingHandler();
+                            handler?.(event);
+                          }}
+                        >
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext(),
+                              )}
+                        </DataTable.Th>
+                      );
+                    })}
+                  </DataTable.Tr>
+                );
+              })}
+            </DataTable.Thead>
+
+            <MemoizedTableBody table={table} />
+
+            <DataTable.Tfoot>
+              {table.getFooterGroups().map((footerGroup) => (
+                <DataTable.Tr key={footerGroup.id}>
+                  {footerGroup.headers.map((header) => (
+                    <DataTable.Td key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.footer,
+                            header.getContext(),
+                          )}
+                    </DataTable.Td>
+                  ))}
                 </DataTable.Tr>
-              );
-            })}
-          </DataTable.Thead>
-
-          <MemoizedTableBody table={table} />
-
-          <DataTable.Tfoot>
-            {table.getFooterGroups().map((footerGroup) => (
-              <DataTable.Tr key={footerGroup.id}>
-                {footerGroup.headers.map((header) => (
-                  <DataTable.Td key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.footer,
-                          header.getContext(),
-                        )}
-                  </DataTable.Td>
-                ))}
-              </DataTable.Tr>
-            ))}
-          </DataTable.Tfoot>
-        </DataTable>
+              ))}
+            </DataTable.Tfoot>
+          </DataTable>
+        </Box>
 
         <Box
           borderWidth="1"
