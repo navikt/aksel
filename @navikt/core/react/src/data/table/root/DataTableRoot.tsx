@@ -26,16 +26,22 @@ interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode;
   rowDensity?: "condensed" | "normal" | "spacious";
   /**
-   * Enables keyboard navigation for table rows and cells.
-   * @default false
-   */
-  withKeyboardNav?: boolean;
-  /**
    * Zebra striped table
    * @default false
    */
   zebraStripes?: boolean;
   truncateContent?: boolean;
+  /**
+   * Enables keyboard navigation for table rows and cells.
+   * @default false
+   */
+  withKeyboardNav?: boolean;
+  /**
+   * Custom callback to determine if navigation should be blocked.
+   * Called before default blocking logic.
+   * Requires `withKeyboardNav` to be `true`.
+   */
+  shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -141,6 +147,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       withKeyboardNav = false,
       zebraStripes = false,
       truncateContent = true,
+      shouldBlockNavigation,
       ...rest
     },
     forwardedRef,
@@ -148,8 +155,9 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
     const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-    const { tableTabIndex } = useTableKeyboardNav(tableRef, {
+    const { tabIndex } = useTableKeyboardNav(tableRef, {
       enabled: withKeyboardNav,
+      shouldBlockNavigation,
     });
 
     return (
@@ -163,7 +171,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
               "aksel-data-table--truncate-content": truncateContent,
             })}
             data-density={rowDensity}
-            tabIndex={tableTabIndex}
+            tabIndex={tabIndex}
           />
         </div>
       </div>

@@ -27,7 +27,6 @@ function getNavigationAction(event: KeyboardEvent): NavigationAction | null {
     return { type: "delta", delta: keyToCoord[key as DirectionsT] };
   }
 
-  // Home/End keys
   if (key === "Home") {
     return event.ctrlKey || event.metaKey
       ? { type: "tableStart" }
@@ -54,15 +53,7 @@ function getNavigationAction(event: KeyboardEvent): NavigationAction | null {
  * - User is navigating inside multiline textarea
  * - contenteditable attrb is in use
  */
-function shouldBlockNavigation(
-  event: KeyboardEvent,
-  customBlockFn?: (event: KeyboardEvent) => boolean,
-): boolean {
-  /* Check custom block function first */
-  if (customBlockFn?.(event)) {
-    return true;
-  }
-
+function shouldBlockNavigation(event: KeyboardEvent): boolean {
   const key = event.key;
   if (!(key in keyToCoord)) {
     return false;

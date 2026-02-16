@@ -101,7 +101,11 @@ function useTableKeyboardNav(
    * Checks if navigation should be blocked based on current focus context.
    */
   const handleTableKeyDown = useEventCallback((event: KeyboardEvent): void => {
-    if (shouldBlockNavigation(event, customBlockFn)) {
+    if (customBlockFn?.(event)) {
+      return;
+    }
+
+    if (shouldBlockNavigation(event)) {
       return;
     }
 
@@ -159,7 +163,7 @@ function useTableKeyboardNav(
 
   return {
     /* Table should only have tabIndex until the focus is moved inside and is enabled */
-    tableTabIndex: enabled ? (activeCell ? undefined : 0) : undefined,
+    tabIndex: enabled ? (activeCell ? undefined : 0) : undefined,
   };
 }
 
