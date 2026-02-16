@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 8.5.0
+
+### Minor Changes
+
+- Accordion: Now supports 'as'-prop for making element either: div or section. ([#4641](https://github.com/navikt/aksel/pull/4641))
+
+- LinkCard: Now supports 'as'-prop for making element either: div, section or article. ([#4641](https://github.com/navikt/aksel/pull/4641))
+
+### Patch Changes
+
+- Process: Allow mix of single items and array as children ([#4643](https://github.com/navikt/aksel/pull/4643))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.5.0
+  - @navikt/aksel-icons@8.5.0
+
 ## 8.4.1
 
 ### Patch Changes
