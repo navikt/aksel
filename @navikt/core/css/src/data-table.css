@@ -29,7 +29,7 @@
   --__axc-data-table-density: var(--ax-space-16) 0;
 
   &[data-density="condensed"] {
-    --__axc-data-table-density: 0 0;
+    --__axc-data-table-density: var(--ax-space-8) 0;
   }
 
   &[data-density="spacious"] {
