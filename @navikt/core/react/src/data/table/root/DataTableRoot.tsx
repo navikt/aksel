@@ -30,6 +30,10 @@ interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
    * @default false
    */
   zebraStripes?: boolean;
+  /**
+   * Truncate content in cells and show ellipsis for overflowed text.
+   * @default true
+   */
   truncateContent?: boolean;
   /**
    * Enables keyboard navigation for table rows and cells.
@@ -166,10 +170,9 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
           <table
             {...rest}
             ref={mergedRef}
-            className={cl("aksel-data-table", className, {
-              "aksel-data-table--zebra-stripes": zebraStripes,
-              "aksel-data-table--truncate-content": truncateContent,
-            })}
+            className={cl("aksel-data-table", className)}
+            data-zebra-stripes={zebraStripes}
+            data-truncate-content={truncateContent}
             data-density={rowDensity}
             tabIndex={tabIndex}
           />
