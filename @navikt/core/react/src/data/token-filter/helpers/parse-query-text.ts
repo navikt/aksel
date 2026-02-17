@@ -1,21 +1,17 @@
-import type {
-  QueryFilterOperator,
-  QueryFilteringProperties,
-  QueryFilteringProperty,
-} from "../TokenFilter.types";
+import type { ParsedProperty, QueryFilterOperator } from "../TokenFilter.types";
 
 type ParsedText =
   | {
       /** User has typed property + complete operator + value (e.g., "Status != active") */
       step: "property";
-      property: QueryFilteringProperty;
+      property: ParsedProperty;
       operator: QueryFilterOperator;
       value: string;
     }
   | {
       /** User is typing the operator after property (e.g., "Status !") */
       step: "operator";
-      property: QueryFilteringProperty;
+      property: ParsedProperty;
       operatorPrefix: string;
     }
   | {
@@ -30,7 +26,7 @@ type ParsedText =
  */
 function parseQueryText(
   filteringText: string,
-  filteringProperties: QueryFilteringProperties,
+  filteringProperties: ParsedProperty[],
 ): ParsedText {
   const property = matchFilteringProperty(filteringProperties, filteringText);
   if (!property) {
@@ -93,9 +89,9 @@ const QUERY_OPERATORS: QueryFilterOperator[] = [
  * Case-insensitive matching.
  */
 function matchFilteringProperty(
-  filteringProperties: QueryFilteringProperties,
+  filteringProperties: ParsedProperty[],
   text: string,
-): QueryFilteringProperty | undefined {
+): ParsedProperty | undefined {
   const sortedProperties = [...filteringProperties].sort(
     (a, b) => b.propertyLabel.length - a.propertyLabel.length,
   );
@@ -138,5 +134,5 @@ function matchOperator(
   );
 }
 
-export { parseQueryText, QUERY_OPERATORS };
+export { QUERY_OPERATORS, parseQueryText };
 export type { ParsedText };
