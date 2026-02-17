@@ -18,6 +18,7 @@ type ParsedText =
       /** No property match; treat as free-text search */
       step: "free-text";
       value: string;
+      operator?: QueryFilterOperator;
     };
 
 /**
@@ -30,6 +31,15 @@ function parseQueryText(
 ): ParsedText {
   const property = matchFilteringProperty(filteringProperties, filteringText);
   if (!property) {
+    const freeTextOperator = matchOperator(QUERY_OPERATORS, filteringText);
+    if (freeTextOperator) {
+      return {
+        step: "free-text",
+        operator: freeTextOperator,
+        value: filteringText.substring(freeTextOperator.length).trimStart(),
+      };
+    }
+
     return {
       step: "free-text",
       value: filteringText,

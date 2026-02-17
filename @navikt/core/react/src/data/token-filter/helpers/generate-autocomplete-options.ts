@@ -29,7 +29,7 @@ function generateAutoCompleteOptions(
   }
   if (queryState.step === "operator") {
     return {
-      filterText:
+      value:
         queryState.property.propertyLabel + " " + queryState.operatorPrefix,
       options: [
         ...generatePropertySuggestions(filteringProperties),
@@ -44,23 +44,24 @@ function generateAutoCompleteOptions(
         },
       ],
     };
-  } else if (queryState.step === "free-text") {
-    const needsValueSuggestions = !!queryState.value;
-    const needsPropertySuggestions = true; /* !(queryState.step === 'free-text' && queryState.operator === '!:'); */
-    return {
-      filterText: queryState.value,
-      options: [
-        ...(needsPropertySuggestions
-          ? generatePropertySuggestions(filteringProperties)
-          : []),
-        ...(needsValueSuggestions
-          ? generateAllValueSuggestions(filteringOptions)
-          : []),
-      ],
-    };
   }
 
-  return [];
+  const needsValueSuggestions = !!queryState.value;
+  const needsPropertySuggestions = !(
+    queryState.step === "free-text" && queryState.operator === "!:"
+  );
+
+  return {
+    value: queryState.value,
+    options: [
+      ...(needsPropertySuggestions
+        ? generatePropertySuggestions(filteringProperties)
+        : []),
+      ...(needsValueSuggestions
+        ? generateAllValueSuggestions(filteringOptions)
+        : []),
+    ],
+  };
 }
 
 interface OptionGroup<T> {

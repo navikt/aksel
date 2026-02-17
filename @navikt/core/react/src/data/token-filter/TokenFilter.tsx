@@ -1,6 +1,7 @@
 import React, { forwardRef, useState } from "react";
 import { Popover } from "../../popover";
 import { cl } from "../../utils/helpers";
+import { AutoSuggest } from "./AutoSuggest";
 import type {
   ParsedOption,
   ParsedProperty,
@@ -39,13 +40,9 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
       options,
     );
 
-    /* const options = [
-      { label: "Option 1", value: "option1" },
-      { label: "Option 1", value: "option1" },
-      { label: "Option 1", value: "option1" },
-      { label: "Group 1", options: [{ label: "Option 1", value: "option1" }] },
-      { label: "Group 2", options: [{ label: "Option 1", value: "option1" }] },
-    ]; */
+    const handleSelectOption = (value: string) => {
+      setFilterText(value);
+    };
 
     return (
       <div
@@ -66,7 +63,12 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           open={filterText.length > 0}
           onClose={() => setFilterText("")}
         >
-          123
+          <AutoSuggest
+            /* @ts-expect-error TODO: FIX */
+            options={autoCompleteOptions.options}
+            filterText={filterText}
+            onSelect={handleSelectOption}
+          />
         </Popover>
         {query.tokens.map((token, index) => {
           return (
@@ -86,9 +88,6 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
     );
   },
 );
-
-/* const getProperty = (propertyKey: string)  =>
-        propertyByKey.get(propertyKey) ?? null; */
 
 function derrivedFilterState(
   filteringProperties: QueryFilteringProperties,
