@@ -6,7 +6,7 @@ import type {
   QueryFilteringOptions,
   QueryFilteringProperties,
 } from "./TokenFilter.types";
-import { parseQueryText } from "./helpers/parse-query-text.test";
+import { parseQueryText } from "./helpers/parse-query-text";
 
 type TokenFilterProps = {
   query: QueryFilterQuery;
