@@ -15,12 +15,27 @@ interface AutoCompleteOption {
 }
 
 function buildQueryString(
-  propertyLabel: string = "",
-  operator: string = "",
-  value: string = "",
+  propertyLabel: string,
+  operator: string,
+  value: string,
 ): string {
-  return `${propertyLabel} ${operator} ${value}`;
+  const parts = [propertyLabel, operator, value].filter(Boolean);
+  return parts.join(" ");
 }
+
+/* TODO: i18n */
+const OPERATOR_LABELS: Record<string, string> = {
+  ":": "contains",
+  "!:": "does not contain",
+  "=": "is",
+  "!=": "is not",
+  "^": "starts with",
+  "!^": "does not start with",
+  ">=": "is greater than or equal to",
+  "<=": "is less than or equal to",
+  ">": "is greater than",
+  "<": "is less than",
+};
 
 function generateAutoCompleteOptions(
   queryState: ParsedText,
@@ -60,7 +75,7 @@ function generateAutoCompleteOptions(
         queryState.property.propertyLabel,
         queryState.operatorPrefix,
         "",
-      ).trim(),
+      ),
       options: [
         ...generatePropertySuggestions(filteringProperties),
         {
@@ -74,8 +89,8 @@ function generateAutoCompleteOptions(
               queryState.property.propertyLabel,
               value,
               "",
-            ).trim(),
-            description: humanReadableOperator(value),
+            ),
+            description: OPERATOR_LABELS[value] ?? "",
           })),
           /* TODO: i18n */
           label: "Operator",
@@ -103,10 +118,10 @@ function generateAutoCompleteOptions(
 }
 
 function createAutoCompleteOption(
-  propertyLabel: string = "",
-  operator: string = "",
-  value: string = "",
-  label: string = "",
+  propertyLabel: string,
+  operator: string,
+  value: string,
+  label: string,
   tags?: string[],
   filteringTags?: string[],
 ): AutoCompleteOption {
@@ -193,46 +208,6 @@ function generatePropertySuggestions(
   }
 
   return groups;
-}
-
-/* TODO: i18n */
-function humanReadableOperator(operator: string | undefined): string {
-  if (!operator) {
-    return "";
-  }
-  switch (operator) {
-    case ":":
-      return "contains";
-    case "!:": {
-      return "does not contain";
-    }
-    case "=": {
-      return "is";
-    }
-    case "!=": {
-      return "is not";
-    }
-    case "^": {
-      return "starts with";
-    }
-    case "!^": {
-      return "does not start with";
-    }
-    case ">=": {
-      return "is greater than or equal to";
-    }
-    case "<=": {
-      return "is less than or equal to";
-    }
-    case ">": {
-      return "is greater than";
-    }
-    case "<": {
-      return "is less than";
-    }
-    default:
-      return "";
-  }
 }
 
 export { generateAutoCompleteOptions };
