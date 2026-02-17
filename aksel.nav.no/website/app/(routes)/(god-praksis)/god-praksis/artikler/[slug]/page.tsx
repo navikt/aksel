@@ -119,15 +119,14 @@ export default async function Page(props: Props) {
         </BodyShort>
         <HStack gap="space-8" marginBlock="space-16 space-48">
           {undertema?.map(({ tema, title }) => {
-            const href = stegaClean(
-              `/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
-                title ?? "",
-              )}`,
-            );
+            const cleanTitle = stegaClean(title ?? "");
+            const href = `/god-praksis/${stegaClean(tema?.slug)}?undertema=${encodeURIComponent(
+              cleanTitle,
+            )}`;
 
             return (
               <NextLink
-                key={title}
+                key={cleanTitle}
                 className={styles.pageUndertemaTag}
                 href={href}
                 data-animated-arrow-anchor
@@ -136,7 +135,9 @@ export default async function Page(props: Props) {
                 data-umami-event-url={href}
               >
                 <TagFillIcon aria-hidden fontSize="1.25rem" />
-                <span className={styles.pageUndertemaTagText}>{title}</span>
+                <span className={styles.pageUndertemaTagText}>
+                  {cleanTitle}
+                </span>
                 <AnimatedArrowRight />
               </NextLink>
             );

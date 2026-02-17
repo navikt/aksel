@@ -1,4 +1,5 @@
 import { Metadata, ResolvingMetadata } from "next";
+import { stegaClean } from "next-sanity";
 import { notFound } from "next/navigation";
 import {
   BodyLong,
@@ -232,7 +233,7 @@ export default async function Page(props: Props) {
         paddingInline={{ xs: "space-16", lg: "space-40" }}
       >
         <GodPrakisChipsNavigation
-          articles={articlesByContext}
+          articles={stegaClean(articlesByContext)}
           innholdstype={innholdstypeParam}
           undertema={undertemaParam}
         />
