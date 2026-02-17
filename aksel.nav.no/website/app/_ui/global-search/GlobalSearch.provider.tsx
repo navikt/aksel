@@ -4,7 +4,6 @@ import {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
   useTransition,
 } from "react";
@@ -26,8 +25,7 @@ function GlobalSearchResultProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { openSearch, open } = useGlobalSearch();
-  const shouldInitialOpenRef = useRef<boolean>(true);
+  const { open } = useGlobalSearch();
 
   const [searchResult, setSearchResults] =
     useState<GlobalSearchActionReturnT | null>(null);
@@ -67,7 +65,6 @@ function GlobalSearchResultProvider({
 
   useEffect(() => {
     if (!paramValue) {
-      shouldInitialOpenRef.current = false;
       // eslint-disable-next-line
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSearchResults(null);
@@ -78,21 +75,10 @@ function GlobalSearchResultProvider({
       const newResults = await fuseGlobalSearch(paramValue);
 
       setSearchResults(newResults);
-
-      /*
-       * We use a ref to ensure the dialog only auto-opens after results are in to avoid CLS.
-       */
-      if (shouldInitialOpenRef.current) {
-        openSearch();
-        shouldInitialOpenRef.current = false;
-      }
     });
-  }, [paramValue, openSearch]);
+  }, [paramValue]);
 
-  /**
-   * Preload the searchindex cache, so that the first search is faster.
-   *
-   */
+  /* Preload the searchindex cache, so that the first search is faster. */
   useEffect(() => {
     void preloadSearchIndex();
   }, []);
