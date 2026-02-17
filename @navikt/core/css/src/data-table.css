@@ -132,6 +132,15 @@
   &:active::after {
     background: var(--ax-bg-strong-pressed);
   }
+
+  .aksel-data-table__th:last-child & {
+    inset-inline-end: 0;
+    width: 15px;
+
+    &::after {
+      inset-inline-end: 0;
+    }
+  }
 }
 
 .aksel-data-table__th-action-button {
