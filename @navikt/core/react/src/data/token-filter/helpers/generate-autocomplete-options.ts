@@ -36,7 +36,38 @@ const OPERATOR_LABELS: Record<string, string> = {
   ">": "is greater than",
   "<": "is less than",
 };
+/**
+ * Grouping option for autocomplete suggestions structures:
+ *
+ * Step: "free-text" + empty value:
+ * - Group: "Properties" with all properties.
+ *
+ * Step: "free-text" with non-empty value:
+ * - Group: "Properties". All properties including the filter text in label or description or tags. String match.
+ * - Group: "Values". All "property = value" combinations where either the property label or value label or description or tags include the filter text. String match.
+ * - - Ignore all other operators than "=" for value suggestions.
+ *
+ * Step: "property" + empty value:
+ * - Group: "Operators". All operators valid for the selected property.
+ *
+ * Step: "property" + non-empty value:
+ * - Group: "Operators". All operators valid for the selected property with string match. Only relevant for multi letter operators like "!="
+ *
+ * Step: "operator" + empty value:
+ * - Group: "<Property> values". All values valid for the selected property and operator. String match on value label, description and tags.
+ *
+ * Step: "operator" + non-empty value:
+ * - Group: "<Property> values". All values valid for the selected property and operator with string match. String match on value label, description and tags.
+ *
+ *
+ * TODO:
+ * - Handle custom groups
+ * - Multi vs single-select: Allow operators for each options where user can define type to be enum: { operator: "=", tokenType: "enum" }. Enum-type options allow selecting multiple values, i.e state = ("active", "pending"))
+ */
 
+/**
+ * TODO: Update based on instructions above.
+ */
 function generateAutoCompleteOptions(
   queryState: ParsedText,
   filteringProperties: ParsedProperty[] = [],
