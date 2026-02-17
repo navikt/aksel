@@ -74,7 +74,7 @@ function GlobalSearch({ isMac }: { isMac: boolean }) {
         <Activity mode={open ? "visible" : "hidden"}>
           <Suspense>
             <GlobalSearchResultProvider>
-              <GlobalSearchDialog>
+              <GlobalSearchDialog isMac={isMac}>
                 <GlobalSearchForm />
                 <div className={styles.searchResults}>
                   <GlobalSearchEmptyState />
