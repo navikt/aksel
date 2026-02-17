@@ -66,7 +66,8 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           <AutoSuggest
             /* @ts-expect-error TODO: FIX */
             options={autoCompleteOptions.options}
-            filterText={filterText}
+            value={filterText}
+            filterText={autoCompleteOptions.value}
             onSelect={handleSelectOption}
           />
         </Popover>

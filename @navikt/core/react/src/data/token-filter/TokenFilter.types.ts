@@ -24,13 +24,21 @@ type QueryFilterQuery = {
   operation: QueryFilterOperation;
 };
 
-type QueryFilteringOptions = {
+type QueryFilteringOption = {
   propertyKey: string;
   value: any;
   label?: string;
   tags?: string[];
   filteringTags?: string[];
-}[];
+  disabled?: boolean;
+};
+
+type QueryFilteringOptions = QueryFilteringOption[];
+
+type QueryFilteringOptionGroup = {
+  label: string;
+  options: QueryFilteringOptions;
+};
 
 type QueryFilteringProperty = {
   key: string;
@@ -66,4 +74,6 @@ export type {
   QueryFilteringProperties,
   ParsedProperty,
   ParsedOption,
+  QueryFilteringOption,
+  QueryFilteringOptionGroup,
 };
