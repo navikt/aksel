@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Activity,
-  Suspense,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Dialog } from "@navikt/ds-react";
 import { GlobalSearchResultProvider } from "@/app/_ui/global-search/GlobalSearch.provider";
 import { useParamState } from "@/app/_ui/global-search/useParamState";
@@ -24,8 +17,8 @@ import {
 
 function GlobalSearch({ isMac }: { isMac: boolean }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [open, setOpen] = useState<boolean>(false);
-  const { clearParam } = useParamState("query");
+  const { clearParam, paramValue } = useParamState("query");
+  const [open, setOpen] = useState<boolean>(!!paramValue);
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -52,7 +45,6 @@ function GlobalSearch({ isMac }: { isMac: boolean }) {
     () => ({
       open,
       closeSearch: () => setOpen(false),
-      openSearch: () => setOpen(true),
       inputRef,
     }),
     [open],
@@ -71,20 +63,18 @@ function GlobalSearch({ isMac }: { isMac: boolean }) {
     >
       <GlobalSearchContext.Provider value={contextValue}>
         <GlobalSearchButton isMac={isMac} />
-        <Activity mode={open ? "visible" : "hidden"}>
-          <Suspense>
-            <GlobalSearchResultProvider>
-              <GlobalSearchDialog isMac={isMac}>
-                <GlobalSearchForm />
-                <div className={styles.searchResults}>
-                  <GlobalSearchEmptyState />
-                  <GlobalSearchEmptySearchState />
-                  <GlobalSearchResultsView />
-                </div>
-              </GlobalSearchDialog>
-            </GlobalSearchResultProvider>
-          </Suspense>
-        </Activity>
+        <Suspense>
+          <GlobalSearchResultProvider>
+            <GlobalSearchDialog isMac={isMac}>
+              <GlobalSearchForm />
+              <div className={styles.searchResults}>
+                <GlobalSearchEmptyState />
+                <GlobalSearchEmptySearchState />
+                <GlobalSearchResultsView />
+              </div>
+            </GlobalSearchDialog>
+          </GlobalSearchResultProvider>
+        </Suspense>
       </GlobalSearchContext.Provider>
     </Dialog>
   );

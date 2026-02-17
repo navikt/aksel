@@ -1,20 +1,18 @@
+/* stylelint-disable no-duplicate-selectors */
+
 .aksel-data-table__border-wrapper {
-  border: 1px solid var(--ax-border-neutral-subtle);
-  border-radius: var(--ax-radius-12);
-  overflow: hidden;
-  flex-grow: 1;
+  /* display:flex and max-height:100% is needed for a "no page scroll" layout */
+  display: flex;
+  max-height: 100%;
 }
 
 .aksel-data-table__scroll-wrapper {
   overflow: auto;
   width: 100%;
-  height: 100%;
   position: relative;
 }
 
 .aksel-data-table {
-  border-collapse: collapse;
-  border-spacing: 0;
   table-layout: fixed;
   width: 1px; /* This is for some reason needed to make the browser respect the column width. TODO: Test in all browsers */
 
@@ -55,15 +53,10 @@
   background-color: var(--ax-bg-raised);
   position: sticky;
   top: 0;
-  box-shadow: 0 1px 0 0 var(--ax-border-neutral-subtle);
 }
 
 .aksel-data-table__tbody {
   background-color: var(--ax-bg-raised);
-}
-
-.aksel-data-table__tr {
-  border: none;
 }
 
 .aksel-data-table__tr--selected {
@@ -84,17 +77,48 @@
   }
 }
 
+/* BORDER STYLING START */
+
+.aksel-data-table__border-wrapper {
+  border-radius: var(--ax-radius-12);
+  overflow: hidden;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 1px solid var(--ax-border-neutral-subtle);
+    border-radius: var(--ax-radius-12);
+  }
+}
+
+.aksel-data-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-right: 1px solid var(--ax-border-neutral-subtle);
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
+}
+
+.aksel-data-table__thead {
+  box-shadow: 0 1px 0 0 var(--ax-border-neutral-subtle);
+}
+
+.aksel-data-table__th,
+.aksel-data-table__td {
+  /* border doesn't work on sticky thead when we have collapsed borders, so using box-shadow instead */
+  box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
+}
+
+/* BORDER STYLING END */
+
 .aksel-data-table__th {
   position: relative;
   background-color: var(--ax-bg-neutral-soft);
   color: var(--ax-text-neutral);
   padding: var(--ax-space-8) var(--ax-space-16);
   text-align: start;
-  border-block-end: 1px solid var(--ax-border-neutral-subtle);
-
-  &:not(:first-child) {
-    border-inline-start: 1px solid var(--ax-border-neutral-subtle);
-  }
 }
 
 .aksel-data-table__th-content {
@@ -132,6 +156,15 @@
   &:active::after {
     background: var(--ax-bg-strong-pressed);
   }
+
+  .aksel-data-table__th:last-child & {
+    inset-inline-end: 0;
+    width: 15px;
+
+    &::after {
+      inset-inline-end: 0;
+    }
+  }
 }
 
 .aksel-data-table__th-action-button {
@@ -157,25 +190,11 @@
 .aksel-data-table__td {
   text-align: start;
   vertical-align: middle;
-  border-block-end: 1px solid var(--ax-border-neutral-subtle);
-  border-block-start: 1px solid var(--ax-bg-raised);
   color: var(--ax-text-neutral-subtle);
 
   > div {
     padding: var(--__axc-data-table-density);
     padding-inline: 1rem;
-  }
-
-  &:not(:first-child) {
-    border-inline-start: 1px solid var(--ax-border-neutral-subtle);
-  }
-
-  .aksel-data-table__tfoot .aksel-data-table__tr:last-child & {
-    border-block-end: none;
-  }
-
-  .aksel-data-table:not(:has(.aksel-data-table__tfoot)) .aksel-data-table__tr:not(.aksel-data-table__tr--selected):last-child & {
-    border-block-end: none;
   }
 }
 
