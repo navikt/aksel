@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useRef } from "react";
 
 interface UseParamStateResult {
@@ -14,7 +14,6 @@ interface UseParamStateResult {
 function useParamState(param: string): UseParamStateResult {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { replace } = useRouter();
 
   const currentValue = searchParams?.get(param) ?? "";
   const lastAppliedRef = useRef<string>(currentValue);
@@ -44,10 +43,10 @@ function useParamState(param: string): UseParamStateResult {
       }
 
       const nextUrl = buildUrl(isClearing ? null : normalized);
-      replace(nextUrl);
+      window.history.replaceState(null, "", nextUrl);
       lastAppliedRef.current = normalized;
     },
-    [buildUrl, replace],
+    [buildUrl],
   );
 
   const clearParam = useCallback(() => {
@@ -56,9 +55,9 @@ function useParamState(param: string): UseParamStateResult {
     }
 
     const nextUrl = buildUrl(null);
-    replace(nextUrl);
+    window.history.replaceState(null, "", nextUrl);
     lastAppliedRef.current = "";
-  }, [buildUrl, currentValue, replace]);
+  }, [buildUrl, currentValue]);
 
   return {
     paramValue: currentValue,

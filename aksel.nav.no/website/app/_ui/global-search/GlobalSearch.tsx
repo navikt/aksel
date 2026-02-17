@@ -24,8 +24,8 @@ import {
 
 function GlobalSearch({ isMac }: { isMac: boolean }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [open, setOpen] = useState<boolean>(false);
-  const { clearParam } = useParamState("query");
+  const { clearParam, paramValue } = useParamState("query");
+  const [open, setOpen] = useState<boolean>(!!paramValue);
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -52,7 +52,6 @@ function GlobalSearch({ isMac }: { isMac: boolean }) {
     () => ({
       open,
       closeSearch: () => setOpen(false),
-      openSearch: () => setOpen(true),
       inputRef,
     }),
     [open],
