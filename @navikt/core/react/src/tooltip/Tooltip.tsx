@@ -296,10 +296,10 @@ function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
     return (
       <span className="aksel-tooltip__keys" aria-hidden>
         {shortcuts.map((key, index) => (
-          <React.Fragment key={`shortcut-${key.join("")}`}>
+          <>
             <HStack gap="space-4">
               {key.map((k, i) => (
-                <Detail key={i} as="kbd" className="aksel-tooltip__key">
+                <Detail as="kbd" key={i} className="aksel-tooltip__key">
                   {k}
                 </Detail>
               ))}
@@ -307,7 +307,7 @@ function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
             {index < shortcuts.length - 1 && (
               <span> {translate("shortcutSeparator")} </span>
             )}
-          </React.Fragment>
+          </>
         ))}
       </span>
     );
@@ -316,7 +316,7 @@ function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
   return (
     <span className="aksel-tooltip__keys" aria-hidden>
       {shortcuts.map((k, i) => (
-        <Detail key={i} as="kbd" className="aksel-tooltip__key">
+        <Detail as="kbd" key={i} className="aksel-tooltip__key">
           {k}
         </Detail>
       ))}
