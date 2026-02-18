@@ -3,6 +3,7 @@ import type {
   ParsedProperty,
   QueryFilterOperator,
 } from "../TokenFilter.types";
+import { createGroups } from "./grouping";
 import { type ParsedText, QUERY_OPERATORS } from "./parse-query-text";
 import { OPERATOR_LABELS, buildQueryString } from "./query-builder";
 import { matchesFilterText } from "./text-matching";
@@ -43,18 +44,12 @@ function generatePropertySuggestions(
   filteringProperties: ParsedProperty[] = [],
   filterText = "",
 ): OptionGroup<ParsedProperty>[] {
-  const defaultGroup: OptionGroup<ParsedProperty> = {
-    label: "Properties",
-    options: [],
-  };
-  const customGroups: Record<string, OptionGroup<ParsedProperty>> = {};
-
-  for (const property of filteringProperties) {
+  const filteredProperties = filteringProperties.filter((property) => {
     if (!property) {
-      continue;
+      return false;
     }
 
-    const matches = matchesFilterText(
+    return matchesFilterText(
       [
         property.propertyLabel,
         property.groupValuesLabel,
@@ -62,36 +57,13 @@ function generatePropertySuggestions(
       ].filter(Boolean),
       filterText,
     );
+  });
 
-    if (!matches) {
-      continue;
-    }
-
-    const groupLabel = property.propertyGroup?.trim();
-
-    if (groupLabel) {
-      if (!customGroups[groupLabel]) {
-        customGroups[groupLabel] = {
-          label: groupLabel,
-          options: [],
-        };
-      }
-      customGroups[groupLabel].options.push(property);
-      continue;
-    }
-
-    defaultGroup.options.push(property);
-  }
-
-  const groups: OptionGroup<ParsedProperty>[] = [
-    ...Object.values(customGroups),
-  ];
-
-  if (defaultGroup.options.length > 0) {
-    groups.push(defaultGroup);
-  }
-
-  return groups;
+  return createGroups(
+    filteredProperties,
+    (property) => property.propertyGroup,
+    "Properties",
+  );
 }
 
 function generateOperatorSuggestions(
