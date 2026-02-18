@@ -2,4 +2,4 @@
 "@navikt/aksel-stylelint": minor
 ---
 
-Migrate stylelint plugin to ESM
+Stylelint: Migrate plugin to ESM. Now requires stylelint v16 or above.
