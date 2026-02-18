@@ -1,4 +1,4 @@
-import type { OptionGroup } from "./generate-autocomplete-options";
+import type { OptionGroup } from "../AutoSuggest.types";
 
 /**
  * Groups items into labeled groups with support for a default group.

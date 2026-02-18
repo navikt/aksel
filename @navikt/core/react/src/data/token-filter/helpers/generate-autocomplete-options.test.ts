@@ -1,14 +1,12 @@
 import { describe, expect, test } from "vitest";
+import type { AutoCompleteOption } from "../AutoSuggest.types";
 import type {
   ParsedOption,
   ParsedProperty,
   QueryFilteringOption,
   QueryFilteringProperty,
 } from "../TokenFilter.types";
-import {
-  type AutoCompleteOption,
-  generateAutoCompleteOptions,
-} from "./generate-autocomplete-options";
+import { generateAutoCompleteOptions } from "./generate-autocomplete-options";
 import type { ParsedText } from "./parse-query-text";
 
 const properties: QueryFilteringProperty[] = [

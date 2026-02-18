@@ -1,3 +1,4 @@
+import type { AutoCompleteOption, OptionGroup } from "../AutoSuggest.types";
 import type {
   ParsedOption,
   ParsedProperty,
@@ -8,19 +9,17 @@ import { type ParsedText, QUERY_OPERATORS } from "./parse-query-text";
 import { OPERATOR_LABELS, buildQueryString } from "./query-builder";
 import { matchesFilterText } from "./text-matching";
 
-interface OptionGroup<T> {
-  label: string;
-  options: T[];
-}
-
-interface AutoCompleteOption {
-  value: string;
-  label: string;
-  tags?: string[];
-  filteringTags?: string[];
-  description?: string;
-}
-
+/**
+ * Returns the valid operators for a given property.
+ * Currently returns all operators for all properties.
+ *
+ * TODO: Implement per-property operator configuration.
+ * This will allow properties to restrict which operators are valid.
+ * For example, a boolean property might only support "=" and "!=",
+ * while a text property supports ":", "!:", "^", etc.
+ *
+ * @returns Array of valid operators for the property
+ */
 function getValidOperatorsForProperty(
   /* TODO: Will be implemented when each property can configure operator per instance */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -198,8 +197,8 @@ function generateFreeTextValueSuggestions(
  * - options: Grouped suggestions to display (properties, operators, or values).
  *
  * @param queryState - Parsed query state from parseQueryText
- * @param filteringProperties - Available properties for filtering
- * @param filteringOptions - Available values for filtering
+ * @param filteringProperties - Available properties for filtering (defaults to empty array)
+ * @param filteringOptions - Available values for filtering (defaults to empty array)
  * @returns Object containing the query value and suggestion groups
  */
 function generateAutoCompleteOptions(
@@ -291,5 +290,3 @@ function generateAutoCompleteOptions(
 }
 
 export { generateAutoCompleteOptions, QUERY_OPERATORS };
-
-export type { AutoCompleteOption, OptionGroup };
