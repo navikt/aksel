@@ -182,24 +182,11 @@ function generatePropertySuggestions(
 function generateOperatorSuggestions(
   property: ParsedProperty,
   operatorPrefix = "",
-  filterText = "",
 ): OptionGroup<AutoCompleteOption>[] {
-  const prefilteredOperators = filterOperatorsByPrefix(
+  const operators = filterOperatorsByPrefix(
     getValidOperatorsForProperty(property),
     operatorPrefix,
   );
-
-  const operators: QueryFilterOperator[] = [];
-  for (const operator of prefilteredOperators) {
-    if (
-      matchesFilterText(
-        [operator, OPERATOR_LABELS[operator] ?? ""].filter(Boolean),
-        filterText,
-      )
-    ) {
-      operators.push(operator);
-    }
-  }
 
   if (operators.length === 0) {
     return [];
@@ -281,4 +268,4 @@ function createValueSuggestions(
   return Object.values(groups).filter((group) => group.options.length > 0);
 }
 
-export { generateAutoCompleteOptions, QUERY_OPERATORS };
+export { generateAutoCompleteOptions };

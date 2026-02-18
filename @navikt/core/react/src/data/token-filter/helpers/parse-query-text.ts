@@ -1,6 +1,6 @@
 import type { ParsedProperty, QueryFilterOperator } from "../TokenFilter.types";
-import { QUERY_OPERATORS } from "./generate-autocomplete-options";
 import {
+  QUERY_OPERATORS,
   matchFilteringProperty,
   matchOperator,
   matchOperatorPrefix,

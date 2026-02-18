@@ -35,18 +35,31 @@ function matchOperator(
 
 /**
  * Match a property from the input text by longest property label.
- * Case-insensitive matching.
+ *
+ * properties: [{ propertyLabel: "Instance" }, { propertyLabel: "Instance ID" }]
+ * text = "Instance ID:"
+ *
+ * Result: { propertyLabel: "Instance ID" }
  */
 function matchFilteringProperty(
   filteringProperties: ParsedProperty[],
   text: string,
 ): ParsedProperty | undefined {
-  const sortedProperties = [...filteringProperties].sort(
-    (a, b) => b.propertyLabel.length - a.propertyLabel.length,
-  );
-  return sortedProperties.find((prop) =>
-    text.toLowerCase().startsWith(prop.propertyLabel.toLowerCase()),
-  );
+  const lowerText = text.toLowerCase();
+  let bestMatch: ParsedProperty | undefined;
+
+  for (const prop of filteringProperties) {
+    if (lowerText.startsWith(prop.propertyLabel.toLowerCase())) {
+      if (
+        !bestMatch ||
+        prop.propertyLabel.length > bestMatch.propertyLabel.length
+      ) {
+        bestMatch = prop;
+      }
+    }
+  }
+
+  return bestMatch;
 }
 
 /**
