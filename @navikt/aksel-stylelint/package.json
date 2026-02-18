@@ -2,6 +2,9 @@
   "name": "@navikt/aksel-stylelint",
   "version": "8.5.1",
   "type": "module",
+  "engines": {
+    "node": ">=18.12.0"
+  },
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/grunnleggende/kode/stylelint",
   "repository": {
