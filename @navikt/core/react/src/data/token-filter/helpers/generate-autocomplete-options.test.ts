@@ -8,7 +8,7 @@ import type {
 import {
   type AutoCompleteOption,
   generateAutoCompleteOptions,
-} from "./generate-autocomplete-options-v2";
+} from "./generate-autocomplete-options";
 import type { ParsedText } from "./parse-query-text";
 
 const properties: QueryFilteringProperty[] = [

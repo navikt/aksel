@@ -1,4 +1,8 @@
-import type { ParsedOption, ParsedProperty } from "../TokenFilter.types";
+import type {
+  ParsedOption,
+  ParsedProperty,
+  QueryFilterOperator,
+} from "../TokenFilter.types";
 import { type ParsedText, QUERY_OPERATORS } from "./parse-query-text";
 
 interface OptionGroup<T> {
@@ -23,8 +27,7 @@ function buildQueryString(
   return parts.join(" ");
 }
 
-/* TODO: i18n */
-const OPERATOR_LABELS: Record<string, string> = {
+const OPERATOR_LABELS: Record<QueryFilterOperator, string> = {
   ":": "contains",
   "!:": "does not contain",
   "=": "is",
@@ -36,173 +39,52 @@ const OPERATOR_LABELS: Record<string, string> = {
   ">": "is greater than",
   "<": "is less than",
 };
-/**
- * Grouping option for autocomplete suggestions structures:
- *
- * Step: "free-text" + empty value:
- * - Group: "Properties" with all properties.
- *
- * Step: "free-text" with non-empty value:
- * - Group: "Properties". All properties including the filter text in label or description or tags. String match.
- * - Group: "Values". All "property = value" combinations where either the property label or value label or description or tags include the filter text. String match.
- * - - Ignore all other operators than "=" for value suggestions.
- *
- * Step: "property" + empty value:
- * - Group: "Operators". All operators valid for the selected property.
- *
- * Step: "property" + non-empty value:
- * - Group: "Operators". All operators valid for the selected property with string match. Only relevant for multi letter operators like "!="
- *
- * Step: "operator" + empty value:
- * - Group: "<Property> values". All values valid for the selected property and operator. String match on value label, description and tags.
- *
- * Step: "operator" + non-empty value:
- * - Group: "<Property> values". All values valid for the selected property and operator with string match. String match on value label, description and tags.
- *
- *
- * TODO:
- * - Handle custom groups
- * - Multi vs single-select: Allow operators for each options where user can define type to be enum: { operator: "=", tokenType: "enum" }. Enum-type options allow selecting multiple values, i.e state = ("active", "pending"))
- */
 
-/**
- * TODO: Update based on instructions above.
- */
-function generateAutoCompleteOptions(
-  queryState: ParsedText,
-  filteringProperties: ParsedProperty[] = [],
-  filteringOptions: ParsedOption[] = [],
-) {
-  if (queryState.step === "property") {
-    if (!queryState.property) {
-      return {
-        value: queryState.value,
-        options: [],
-      };
-    }
-    const { propertyLabel, groupValuesLabel } = queryState.property;
-    const options = filteringOptions.filter(
-      (o) => o.property === queryState.property,
-    );
-
-    return {
-      value: queryState.value,
-      options: [
-        {
-          label: groupValuesLabel,
-          options: options.map(({ label, value, tags, filteringTags }) => ({
-            value: buildQueryString(propertyLabel, queryState.operator, value),
-            label,
-            tags,
-            filteringTags,
-          })),
-        },
-      ],
-    };
-  }
-  if (queryState.step === "operator") {
-    return {
-      value: buildQueryString(
-        queryState.property.propertyLabel,
-        queryState.operatorPrefix,
-        "",
-      ),
-      options: [
-        ...generatePropertySuggestions(filteringProperties),
-        {
-          options: QUERY_OPERATORS.map((value) => ({
-            value: buildQueryString(
-              queryState.property.propertyLabel,
-              value,
-              "",
-            ),
-            label: buildQueryString(
-              queryState.property.propertyLabel,
-              value,
-              "",
-            ),
-            description: OPERATOR_LABELS[value] ?? "",
-          })),
-          /* TODO: i18n */
-          label: "Operator",
-        },
-      ],
-    };
+function matchesFilterText(
+  searchFieldValues: string[],
+  filterText: string,
+): boolean {
+  const normalizedFilter = filterText.trim().toLowerCase();
+  if (!normalizedFilter) {
+    return true;
   }
 
-  const needsValueSuggestions = !!queryState.value;
-  const needsPropertySuggestions = !(
-    queryState.step === "free-text" && queryState.operator === "!:"
+  const parts = normalizedFilter.split(/\s+/).filter(Boolean);
+  if (parts.length === 0) {
+    return true;
+  }
+
+  const normalizedFields = searchFieldValues
+    .map((value) => value?.toLowerCase())
+    .filter(Boolean);
+
+  return parts.every((part) =>
+    normalizedFields.some((field) => field.includes(part)),
   );
-
-  return {
-    value: queryState.value,
-    options: [
-      ...(needsPropertySuggestions
-        ? generatePropertySuggestions(filteringProperties)
-        : []),
-      ...(needsValueSuggestions
-        ? generateAllValueSuggestions(filteringOptions)
-        : []),
-    ],
-  };
 }
 
-function createAutoCompleteOption(
-  propertyLabel: string,
-  operator: string,
-  value: string,
-  label: string,
-  tags?: string[],
-  filteringTags?: string[],
-): AutoCompleteOption {
-  return {
-    value: buildQueryString(propertyLabel, operator, value),
-    label: buildQueryString(propertyLabel, operator, label),
-    tags,
-    filteringTags,
-  };
+function getValidOperatorsForProperty(
+  /* TODO: Will be implemented when each property can configure operator per instance */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _property: ParsedProperty,
+): QueryFilterOperator[] {
+  return QUERY_OPERATORS;
 }
 
-function generateAllValueSuggestions(
-  filteringOptions: ParsedOption[] = [],
-): OptionGroup<AutoCompleteOption>[] {
-  const groups: Record<string, OptionGroup<AutoCompleteOption>> = {};
-
-  for (const option of filteringOptions) {
-    if (!option || !option.property) {
-      continue;
-    }
-
-    const groupLabel = option.property.groupValuesLabel || "Values";
-
-    if (!groups[groupLabel]) {
-      groups[groupLabel] = {
-        label: groupLabel,
-        options: [],
-      };
-    }
-
-    const { label, value, tags, filteringTags, property } = option;
-    const options = QUERY_OPERATORS.map((operator) =>
-      createAutoCompleteOption(
-        property.propertyLabel,
-        operator,
-        value,
-        label,
-        tags,
-        filteringTags,
-      ),
-    );
-
-    groups[groupLabel].options.push(...options);
+function filterOperatorsByPrefix(
+  operators: QueryFilterOperator[],
+  prefix: string,
+): QueryFilterOperator[] {
+  if (!prefix) {
+    return operators;
   }
 
-  return Object.values(groups);
+  return operators.filter((operator) => operator.startsWith(prefix));
 }
 
 function generatePropertySuggestions(
   filteringProperties: ParsedProperty[] = [],
+  filterText = "",
 ): OptionGroup<ParsedProperty>[] {
   const defaultGroup: OptionGroup<ParsedProperty> = {
     label: "Properties",
@@ -214,6 +96,20 @@ function generatePropertySuggestions(
     if (!property) {
       continue;
     }
+
+    const matches = matchesFilterText(
+      [
+        property.propertyLabel,
+        property.groupValuesLabel,
+        property.propertyGroup,
+      ].filter(Boolean),
+      filterText,
+    );
+
+    if (!matches) {
+      continue;
+    }
+
     const groupLabel = property.propertyGroup?.trim();
 
     if (groupLabel) {
@@ -241,4 +137,233 @@ function generatePropertySuggestions(
   return groups;
 }
 
-export { generateAutoCompleteOptions };
+function generateOperatorSuggestions(
+  property: ParsedProperty,
+  operatorPrefix = "",
+  filterText = "",
+): OptionGroup<AutoCompleteOption>[] {
+  const operators = filterOperatorsByPrefix(
+    getValidOperatorsForProperty(property),
+    operatorPrefix,
+  ).filter((operator) =>
+    matchesFilterText(
+      [operator, OPERATOR_LABELS[operator] ?? ""].filter(Boolean),
+      filterText,
+    ),
+  );
+
+  if (operators.length === 0) {
+    return [];
+  }
+
+  return [
+    {
+      label: "Operators",
+      options: operators.map((operator) => ({
+        value: buildQueryString(property.propertyLabel, operator, ""),
+        label: buildQueryString(property.propertyLabel, operator, ""),
+        description: OPERATOR_LABELS[operator] ?? "",
+      })),
+    },
+  ];
+}
+
+function generateValueSuggestions(
+  filteringOptions: ParsedOption[] = [],
+  property: ParsedProperty,
+  operator: QueryFilterOperator,
+  filterText = "",
+): OptionGroup<AutoCompleteOption>[] {
+  const options = filteringOptions.filter(
+    (option) => option?.property === property,
+  );
+
+  if (options.length === 0) {
+    return [];
+  }
+
+  const groupLabel = property.groupValuesLabel || "Values";
+  const matchedOptions = options
+    .filter((option) =>
+      matchesFilterText(
+        [
+          option.label,
+          ...(option.tags ?? []),
+          ...(option.filteringTags ?? []),
+        ].filter(Boolean),
+        filterText,
+      ),
+    )
+    .map(({ label, value, tags, filteringTags }) => ({
+      value: buildQueryString(property.propertyLabel, operator, value),
+      label,
+      tags,
+      filteringTags,
+    }));
+
+  if (matchedOptions.length === 0) {
+    return [];
+  }
+
+  return [
+    {
+      label: groupLabel,
+      options: matchedOptions,
+    },
+  ];
+}
+
+function generateFreeTextValueSuggestions(
+  filteringOptions: ParsedOption[] = [],
+  operator: QueryFilterOperator,
+  filterText = "",
+): OptionGroup<AutoCompleteOption>[] {
+  const groups: Record<string, OptionGroup<AutoCompleteOption>> = {};
+
+  for (const option of filteringOptions) {
+    if (!option?.property) {
+      continue;
+    }
+
+    const matches = matchesFilterText(
+      [
+        option.property.propertyLabel,
+        option.label,
+        ...(option.tags ?? []),
+        ...(option.filteringTags ?? []),
+      ].filter(Boolean),
+      filterText,
+    );
+
+    if (!matches) {
+      continue;
+    }
+
+    const groupLabel = option.property.groupValuesLabel || "Values";
+
+    if (!groups[groupLabel]) {
+      groups[groupLabel] = {
+        label: groupLabel,
+        options: [],
+      };
+    }
+
+    groups[groupLabel].options.push({
+      value: buildQueryString(
+        option.property.propertyLabel,
+        operator,
+        option.value,
+      ),
+      label: option.label,
+      tags: option.tags,
+      filteringTags: option.filteringTags,
+    });
+  }
+
+  return Object.values(groups).filter((group) => group.options.length > 0);
+}
+
+function generateAutoCompleteOptions(
+  queryState: ParsedText,
+  filteringProperties: ParsedProperty[] = [],
+  filteringOptions: ParsedOption[] = [],
+) {
+  /* State: Property AND operator exists */
+  if (queryState.step === "property") {
+    /* State: Just property AND operator exists. No value */
+    if (!queryState.value) {
+      return {
+        value: queryState.value,
+        options: generateValueSuggestions(
+          filteringOptions,
+          queryState.property,
+          queryState.operator,
+        ),
+      };
+    }
+
+    /* State: Propery AND operator AND value */
+    return {
+      value: queryState.value,
+      options: generateValueSuggestions(
+        filteringOptions,
+        queryState.property,
+        queryState.operator,
+        queryState.value,
+      ),
+    };
+  }
+
+  /* State: Propery, but no complete operator */
+  if (queryState.step === "operator") {
+    const operators = filterOperatorsByPrefix(
+      getValidOperatorsForProperty(queryState.property),
+      queryState.operatorPrefix,
+    );
+
+    if (operators.length === 0) {
+      throw new Error("Detected unhandles state. Implement edgecase");
+
+      //return {
+      //  value: buildQueryString(
+      //    queryState.property.propertyLabel,
+      //    queryState.operatorPrefix,
+      //    "",
+      //  ),
+      //  options: [] as OptionGroup<AutoCompleteOption | ParsedProperty>[],
+      //};
+    }
+
+    return {
+      value: buildQueryString(
+        queryState.property.propertyLabel,
+        queryState.operatorPrefix,
+        "",
+      ),
+      options: generateOperatorSuggestions(
+        queryState.property,
+        queryState.operatorPrefix,
+      ),
+    };
+  }
+
+  /* State: Input starts with operator, but no value yet */
+  if (!queryState.value && queryState.operator) {
+    return {
+      value: "",
+      options: [],
+    };
+  }
+
+  /* State: Empty input */
+  if (!queryState.value) {
+    return {
+      value: queryState.value,
+      options: generatePropertySuggestions(filteringProperties),
+    };
+  }
+
+  /**
+   * State: Free-text writing without match on property
+   * - If input starts with operator, show value suggestions based on operator
+   * - Otherwise, show properties and values matching free-text
+   */
+  return {
+    value: queryState.value,
+    options: generateFreeTextValueSuggestions(
+      filteringOptions,
+      queryState.operator ?? "=",
+      queryState.value,
+    ),
+  };
+}
+
+export {
+  buildQueryString,
+  generateAutoCompleteOptions,
+  matchesFilterText,
+  OPERATOR_LABELS,
+  QUERY_OPERATORS,
+};
+
+export type { AutoCompleteOption, OptionGroup };
