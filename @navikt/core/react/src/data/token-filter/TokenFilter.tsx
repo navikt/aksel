@@ -71,6 +71,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           }}
         >
           <AutoSuggest
+            /* @ts-expect-error TODO: handle conversion better */
             options={autoCompleteOptions.options}
             onSelect={handleSelectOption}
           />

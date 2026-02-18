@@ -36,6 +36,7 @@ const parsedProperties: ParsedProperty[] = properties.map((prop) => ({
   groupValuesLabel: prop.groupValuesLabel ?? "",
   propertyGroup: prop.group ?? "",
   externalProperty: prop,
+  operators: prop.operators ?? [],
 }));
 
 const statusOptions: QueryFilteringOption[] = [
@@ -435,6 +436,461 @@ describe("generateAutoCompleteOptions v2", () => {
       expect(
         (result.options[0].options[0] as AutoCompleteOption).value,
       ).toContain(" !: ");
+    });
+  });
+
+  describe("custom operators configuration", () => {
+    test("property with string-format operators should filter to only those operators", () => {
+      const propertyWithCustomOps: ParsedProperty = {
+        propertyKey: "custom",
+        propertyLabel: "Custom",
+        groupValuesLabel: "Custom values",
+        propertyGroup: "Custom",
+        operators: ["=", "!="],
+        externalProperty: {
+          key: "custom",
+          propertyLabel: "Custom",
+          operators: ["=", "!="],
+        },
+      };
+
+      const queryState: ParsedText = {
+        step: "operator",
+        property: propertyWithCustomOps,
+        operatorPrefix: "",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        [propertyWithCustomOps],
+        [],
+      );
+
+      expect(result.options[0].options).toHaveLength(2);
+      const operatorSymbols = result.options[0].options.map(
+        (o) => (o as AutoCompleteOption).value.split(" ")[1],
+      );
+      expect(operatorSymbols).toEqual(["=", "!="]);
+    });
+
+    test("property with object-format operators should extract operator strings", () => {
+      const propertyWithObjectOps: ParsedProperty = {
+        propertyKey: "custom2",
+        propertyLabel: "Custom2",
+        groupValuesLabel: "Custom2 values",
+        propertyGroup: "Custom",
+        operators: [
+          { operator: ":", tokenType: "single" },
+          { operator: "!:", tokenType: "single" },
+        ],
+        externalProperty: {
+          key: "custom2",
+          propertyLabel: "Custom2",
+          operators: [
+            { operator: ":", tokenType: "single" },
+            { operator: "!:", tokenType: "single" },
+          ],
+        },
+      };
+
+      const queryState: ParsedText = {
+        step: "operator",
+        property: propertyWithObjectOps,
+        operatorPrefix: "",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        [propertyWithObjectOps],
+        [],
+      );
+
+      expect(result.options[0].options).toHaveLength(2);
+      const operatorSymbols = result.options[0].options.map(
+        (o) => (o as AutoCompleteOption).value.split(" ")[1],
+      );
+      expect(operatorSymbols).toEqual([":", "!:"]);
+    });
+
+    test("property with mixed operator formats should normalize and filter", () => {
+      const propertyWithMixedOps: ParsedProperty = {
+        propertyKey: "mixed",
+        propertyLabel: "Mixed",
+        groupValuesLabel: "Mixed values",
+        propertyGroup: "Custom",
+        operators: [
+          "=",
+          { operator: "!=", tokenType: "single" },
+          "invalid-operator",
+        ],
+        externalProperty: {
+          key: "mixed",
+          propertyLabel: "Mixed",
+          operators: [
+            "=",
+            { operator: "!=", tokenType: "single" },
+            "invalid-operator",
+          ],
+        },
+      };
+
+      const queryState: ParsedText = {
+        step: "operator",
+        property: propertyWithMixedOps,
+        operatorPrefix: "",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        [propertyWithMixedOps],
+        [],
+      );
+
+      expect(result.options[0].options).toHaveLength(2);
+      const operatorSymbols = result.options[0].options.map(
+        (o) => (o as AutoCompleteOption).value.split(" ")[1],
+      );
+      expect(operatorSymbols).toEqual(["=", "!="]);
+    });
+  });
+
+  describe("edge case: operator without value", () => {
+    test("should return empty options when operator is present but value is empty", () => {
+      const queryState: ParsedText = {
+        step: "free-text",
+        value: "",
+        operator: "!=",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.value).toBe("");
+      expect(result.options).toEqual([]);
+    });
+
+    test("should return empty options when operator-start input has no value", () => {
+      const queryState: ParsedText = {
+        step: "free-text",
+        value: "",
+        operator: ":",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.value).toBe("");
+      expect(result.options).toEqual([]);
+    });
+  });
+
+  describe("scoped vs non-scoped value suggestions", () => {
+    test("scoped to property should only show values from that property", () => {
+      const statusProperty = parsedProperties[0];
+
+      const queryState: ParsedText = {
+        step: "property",
+        property: statusProperty,
+        operator: "=",
+        value: "",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options).toHaveLength(1);
+      expect(result.options[0].label).toBe("Status values");
+      expect(result.options[0].options).toHaveLength(3);
+      expect(
+        (result.options[0].options[0] as AutoCompleteOption).value,
+      ).toContain("Status");
+    });
+
+    test("non-scoped (free-text) with empty value should show all properties", () => {
+      const queryState: ParsedText = {
+        step: "free-text",
+        value: "",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      const propertyGroups = result.options.filter(
+        (g) => g.label === "Metadata" || g.label === "Location",
+      );
+      expect(propertyGroups.length).toBeGreaterThan(0);
+    });
+
+    test("scoped property search should not include property labels in search fields", () => {
+      const statusProperty = parsedProperties[0];
+
+      const queryState: ParsedText = {
+        step: "property",
+        property: statusProperty,
+        operator: "=",
+        value: "region",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options).toHaveLength(0);
+    });
+
+    test("non-scoped search should include property labels in search", () => {
+      const queryState: ParsedText = {
+        step: "free-text",
+        value: "region",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      const _regionOptions = result.options.find(
+        (g) => g.label === "Region values",
+      );
+      expect(_regionOptions).toBeDefined();
+    });
+  });
+
+  describe("filtering tags and metadata", () => {
+    test("should match filteringTags in search", () => {
+      const optionsWithFilteringTags: ParsedOption[] = [
+        {
+          property: parsedProperties[1],
+          value: "special-region",
+          label: "Special Region",
+          tags: [],
+          filteringTags: ["premium", "exclusive"],
+        },
+      ];
+
+      const queryState: ParsedText = {
+        step: "free-text",
+        value: "premium",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        optionsWithFilteringTags,
+      );
+
+      const regionGroup = result.options.find(
+        (g) => g.label === "Region values",
+      );
+      expect(regionGroup?.options).toHaveLength(1);
+      expect((regionGroup?.options[0] as AutoCompleteOption).label).toBe(
+        "Special Region",
+      );
+    });
+
+    test("should preserve tags and filteringTags in suggestions", () => {
+      const queryState: ParsedText = {
+        step: "free-text",
+        value: "region",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      const regionGroup = result.options.find(
+        (g) => g.label === "Region values",
+      );
+      const usEastOption = regionGroup?.options.find(
+        (o) => (o as AutoCompleteOption).label === "US East",
+      ) as AutoCompleteOption;
+
+      expect(usEastOption).toBeDefined();
+      expect(usEastOption.tags).toContain("north america");
+      expect(usEastOption.tags).toContain("usa");
+    });
+  });
+
+  describe("properties with no groupValuesLabel", () => {
+    test("should default to 'Values' when groupValuesLabel is empty", () => {
+      const propertyWithoutGroupLabel: ParsedProperty = {
+        propertyKey: "nogroup",
+        propertyLabel: "NoGroup",
+        groupValuesLabel: "",
+        propertyGroup: "Custom",
+        operators: [],
+        externalProperty: {
+          key: "nogroup",
+          propertyLabel: "NoGroup",
+        },
+      };
+
+      const optionsForProperty: ParsedOption[] = [
+        {
+          property: propertyWithoutGroupLabel,
+          value: "val1",
+          label: "Value 1",
+          tags: [],
+          filteringTags: [],
+        },
+      ];
+
+      const queryState: ParsedText = {
+        step: "property",
+        property: propertyWithoutGroupLabel,
+        operator: "=",
+        value: "",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        [propertyWithoutGroupLabel],
+        optionsForProperty,
+      );
+
+      expect(result.options[0].label).toBe("Values");
+    });
+  });
+
+  describe("null or missing property references", () => {
+    test("should skip options with null property reference", () => {
+      const optionsWithNull: ParsedOption[] = [
+        {
+          property: null,
+          value: "orphaned",
+          label: "Orphaned Value",
+          tags: [],
+          filteringTags: [],
+        },
+        ...parsedOptions,
+      ];
+
+      const queryState: ParsedText = {
+        step: "free-text",
+        value: "orphaned",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        optionsWithNull,
+      );
+
+      const orphanedOption = result.options.some((g) =>
+        g.options.some((o) => o.label === "Orphaned Value"),
+      );
+      expect(orphanedOption).toBe(false);
+    });
+
+    test("should skip properties with no data", () => {
+      const queryState: ParsedText = {
+        step: "free-text",
+        value: "",
+      };
+
+      const result = generateAutoCompleteOptions(queryState, [], []);
+
+      expect(result.options).toEqual([]);
+    });
+  });
+
+  describe("operator prefix filtering", () => {
+    test("prefix ':' should match ':' and '!:' operators", () => {
+      const queryState: ParsedText = {
+        step: "operator",
+        property: parsedProperties[0],
+        operatorPrefix: ":",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options[0].options.length).toBeGreaterThan(0);
+      const operators = result.options[0].options.map(
+        (o) => (o as AutoCompleteOption).value.split(" ")[1],
+      );
+      expect(operators).toContain(":");
+    });
+
+    test("prefix '>' should match '>', '>=', '!>' operators", () => {
+      const queryState: ParsedText = {
+        step: "operator",
+        property: parsedProperties[0],
+        operatorPrefix: ">",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options[0].options.length).toBeGreaterThan(0);
+      const operators = result.options[0].options.map(
+        (o) => (o as AutoCompleteOption).value.split(" ")[1],
+      );
+      expect(operators).toContain(">");
+      expect(operators).toContain(">=");
+    });
+  });
+
+  describe("buildQueryString integration", () => {
+    test("query string should contain property, operator, and value", () => {
+      const queryState: ParsedText = {
+        step: "property",
+        property: parsedProperties[0],
+        operator: "=",
+        value: "active",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options[0].options.length).toBeGreaterThan(0);
+      const queryStr = (result.options[0].options[0] as AutoCompleteOption)
+        .value;
+      expect(queryStr).toContain("Status");
+      expect(queryStr).toContain("=");
+      expect(queryStr).toContain("active");
+    });
+
+    test("operator-step value should only contain property and operator", () => {
+      const queryState: ParsedText = {
+        step: "operator",
+        property: parsedProperties[0],
+        operatorPrefix: "=",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.value).toBe("Status =");
     });
   });
 });
