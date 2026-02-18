@@ -4,6 +4,7 @@ import type {
   QueryFilterOperator,
 } from "../TokenFilter.types";
 import { type ParsedText, QUERY_OPERATORS } from "./parse-query-text";
+import { OPERATOR_LABELS, buildQueryString } from "./query-builder";
 import { matchesFilterText } from "./text-matching";
 
 interface OptionGroup<T> {
@@ -18,28 +19,6 @@ interface AutoCompleteOption {
   filteringTags?: string[];
   description?: string;
 }
-
-function buildQueryString(
-  propertyLabel: string,
-  operator: string,
-  value: string,
-): string {
-  const parts = [propertyLabel, operator, value].filter(Boolean);
-  return parts.join(" ");
-}
-
-const OPERATOR_LABELS: Record<QueryFilterOperator, string> = {
-  ":": "contains",
-  "!:": "does not contain",
-  "=": "is",
-  "!=": "is not",
-  "^": "starts with",
-  "!^": "does not start with",
-  ">=": "is greater than or equal to",
-  "<=": "is less than or equal to",
-  ">": "is greater than",
-  "<": "is less than",
-};
 
 function getValidOperatorsForProperty(
   /* TODO: Will be implemented when each property can configure operator per instance */
@@ -336,11 +315,6 @@ function generateAutoCompleteOptions(
   };
 }
 
-export {
-  buildQueryString,
-  generateAutoCompleteOptions,
-  OPERATOR_LABELS,
-  QUERY_OPERATORS,
-};
+export { generateAutoCompleteOptions, QUERY_OPERATORS };
 
 export type { AutoCompleteOption, OptionGroup };
