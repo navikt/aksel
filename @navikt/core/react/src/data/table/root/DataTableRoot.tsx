@@ -24,6 +24,10 @@ import { useTableKeyboardNav } from "./useTableKeyboardNav";
 
 interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode;
+  /**
+   * Controls vertical cell padding.
+   * @default "normal"
+   */
   rowDensity?: "condensed" | "normal" | "spacious";
   /**
    * Zebra striped table
@@ -32,9 +36,11 @@ interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   zebraStripes?: boolean;
   /**
    * Truncate content in cells and show ellipsis for overflowed text.
+   *
+   * **NB:** When using `layout="auto"`, you have to manually set a `maxWidth` on columns that should be truncated.
    * @default true
    */
-  truncateContent?: boolean;
+  truncateContent?: boolean; // TODO: Consider making this default false when layout=auto, and maybe disallow it but add a wrap prop on the td-comp.
   /**
    * Enables keyboard navigation for table rows and cells.
    * @default false
@@ -46,6 +52,21 @@ interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
    * Requires `withKeyboardNav` to be `true`.
    */
   shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
+  /**
+   * Controls table layout.
+   *
+   * ### fixed
+   * Gives you full control of column widths. This is required for resizable columns.
+   *
+   * ### auto
+   * Makes the columns resize automatically based on the content.
+   * The table will take up at least 100% of available width.
+   *
+   * **NB:** When using this with `truncateContent`, you have to manually
+   * set a `contentMaxWidth` on cells that should be truncated.
+   * @default "fixed"
+   */
+  layout?: "fixed" | "auto";
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -143,6 +164,12 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
   Tfoot: typeof DataTableTfoot;
 }
 
+/**
+ * TODO Component description etc.
+ *
+ * **NB:** To get sticky headers, you have to set a height restriction on the table container. You can use VStack for this:
+ * TODO example
+ */
 const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
   (
     {
@@ -152,6 +179,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       zebraStripes = false,
       truncateContent = true,
       shouldBlockNavigation,
+      layout = "fixed",
       ...rest
     },
     forwardedRef,
@@ -174,6 +202,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
             data-zebra-stripes={zebraStripes}
             data-truncate-content={truncateContent}
             data-density={rowDensity}
+            data-layout={layout}
             tabIndex={tabIndex}
           />
         </div>
