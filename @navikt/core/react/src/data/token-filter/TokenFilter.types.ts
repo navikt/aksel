@@ -43,8 +43,8 @@ type QueryFilteringOptionGroup = {
 type QueryFilteringProperty = {
   key: string;
   propertyLabel: string;
-  groupValuesLabel: string;
-  group: string;
+  groupValuesLabel?: string;
+  group?: string;
 };
 
 type QueryFilteringProperties = QueryFilteringProperty[];

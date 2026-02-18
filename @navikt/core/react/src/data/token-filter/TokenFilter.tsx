@@ -1,6 +1,7 @@
 import React, { forwardRef, useState } from "react";
 import { Popover } from "../../popover";
 import { cl } from "../../utils/helpers";
+import { AutoSuggest } from "./AutoSuggest";
 import type {
   ParsedOption,
   ParsedProperty,
@@ -39,9 +40,12 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
       options,
     );
 
-    /* const handleSelectOption = (value: string) => {
+    const handleSelectOption = (value: string) => {
       setFilterText(value);
-    }; */
+      setCustomOpen(false);
+    };
+
+    const [customOpen, setCustomOpen] = useState(false);
 
     return (
       <div
@@ -56,20 +60,21 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           ref={setInputAnchor}
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
+          onFocus={() => setCustomOpen(true)}
         />
         <Popover
           anchorEl={inputAnchor}
-          open={filterText.length > 0}
-          onClose={() => setFilterText("")}
+          open={customOpen}
+          onClose={() => {
+            setFilterText("");
+            setCustomOpen(false);
+          }}
         >
-          a
-          {/* <AutoSuggest
-
+          <AutoSuggest
+            /* @ts-expect-error TODO FIX */
             options={autoCompleteOptions.options}
-            value={filterText}
-            filterText={autoCompleteOptions.value}
             onSelect={handleSelectOption}
-          /> */}
+          />
         </Popover>
         {query.tokens.map((token, index) => {
           return (
