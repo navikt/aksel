@@ -45,6 +45,7 @@ const parsedProperties: ParsedProperty[] = properties.map((prop) => ({
   groupValuesLabel: prop.groupValuesLabel ?? "",
   propertyGroup: prop.group ?? "",
   externalProperty: prop,
+  operators: prop.operators ?? [],
 }));
 
 describe("parseQueryText", () => {

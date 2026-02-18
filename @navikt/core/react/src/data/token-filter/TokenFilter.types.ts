@@ -40,11 +40,16 @@ type QueryFilteringOptionGroup = {
   options: QueryFilteringOptions;
 };
 
+type QueryFilteringScopedOperator =
+  | string
+  | { operator: string; tokenType: "single" | "multiple" };
+
 type QueryFilteringProperty = {
   key: string;
   propertyLabel: string;
   groupValuesLabel?: string;
   group?: string;
+  operators?: QueryFilteringScopedOperator[];
 };
 
 type QueryFilteringProperties = QueryFilteringProperty[];
@@ -54,6 +59,7 @@ type ParsedProperty = {
   propertyLabel: string;
   groupValuesLabel: string;
   propertyGroup: string;
+  operators: QueryFilteringScopedOperator[];
   externalProperty: QueryFilteringProperty;
 };
 

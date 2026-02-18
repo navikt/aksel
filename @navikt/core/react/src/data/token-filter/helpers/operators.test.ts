@@ -116,6 +116,7 @@ describe("matchFilteringProperty", () => {
       groupValuesLabel: "",
       propertyGroup: "testgroup",
       externalProperty: {} as any,
+      operators: [],
     },
     {
       propertyKey: "hostname",
@@ -123,6 +124,7 @@ describe("matchFilteringProperty", () => {
       groupValuesLabel: "",
       propertyGroup: "testgroup",
       externalProperty: {} as any,
+      operators: [],
     },
     {
       propertyKey: "instance-id",
@@ -130,6 +132,7 @@ describe("matchFilteringProperty", () => {
       groupValuesLabel: "",
       propertyGroup: "testgroup",
       externalProperty: {} as any,
+      operators: [],
     },
     {
       propertyKey: "region",
@@ -137,6 +140,7 @@ describe("matchFilteringProperty", () => {
       groupValuesLabel: "",
       propertyGroup: "testgroup",
       externalProperty: {} as any,
+      operators: [],
     },
     {
       propertyKey: "availability-zone",
@@ -144,6 +148,7 @@ describe("matchFilteringProperty", () => {
       groupValuesLabel: "",
       propertyGroup: "testgroup",
       externalProperty: {} as any,
+      operators: [],
     },
   ];
 

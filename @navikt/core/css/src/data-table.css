@@ -13,9 +13,6 @@
 }
 
 .aksel-data-table {
-  table-layout: fixed;
-  width: 1px; /* This is for some reason needed to make the browser respect the column width. TODO: Test in all browsers */
-
   /*
   We should NOT set min-width:100% b.c. it will cause inconsistencies in column resizing.
   We could discuss whether it matters, though. But it feels buggy.
@@ -23,6 +20,15 @@
   Maybe we could "manually" resize the other columns so that it fills the container? But that would add a lot of complexity.
   We could have a toggle for the resize feature, and let the consumer decide which downside they prefer. Might need that anyways.
   */
+
+  &[data-layout="fixed"] {
+    table-layout: fixed;
+    width: 1px; /* This is for some reason needed to make the browser respect the column width. TODO: Test in all browsers */
+  }
+
+  &[data-layout="auto"] {
+    min-width: 100%;
+  }
 
   --__axc-data-table-density: var(--ax-space-16) 0;
 

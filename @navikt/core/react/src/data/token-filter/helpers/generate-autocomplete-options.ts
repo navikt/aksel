@@ -115,21 +115,39 @@ function generateAutoCompleteOptions(
 
 /**
  * Returns the valid operators for a given property.
- * Currently returns all operators for all properties.
+ * Extracts operators from the property's custom operator configuration.
+ * If none are configured, falls back to all available operators.
  *
- * TODO: Implement per-property operator configuration.
- * This will allow properties to restrict which operators are valid.
- * For example, a boolean property might only support "=" and "!=",
- * while a text property supports ":", "!:", "^", etc.
+ * The QueryFilteringScopedOperator can be a simple string (e.g., "=")
+ * or an object with operator and tokenType (e.g., { operator: ":", tokenType: "single" }).
+ * This function normalizes both formats and returns just the operator strings.
  *
  * @returns Array of valid operators for the property
+ *
+ * TODO: We omit passing the tokenType for now since it's not currently used in the UI. But will be needed for single/multi-selection.
  */
 function getValidOperatorsForProperty(
-  /* TODO: Will be implemented when each property can configure operator per instance */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _property: ParsedProperty,
+  property: ParsedProperty,
 ): QueryFilterOperator[] {
-  return QUERY_OPERATORS;
+  const { operators } = property;
+
+  /* If no operators configured, return all available operators */
+  if (!operators || operators.length === 0) {
+    return QUERY_OPERATORS;
+  }
+
+  /*
+   * Extract operator strings from QueryFilteringScopedOperator format
+   * Handle both simple strings and objects with operator property
+   */
+  const operatorStrings = operators.map((op) =>
+    typeof op === "string" ? op : op.operator,
+  );
+
+  /* Filter to only valid QUERY_OPERATORS to ensure type safety */
+  return operatorStrings.filter((op) =>
+    QUERY_OPERATORS.includes(op as QueryFilterOperator),
+  ) as QueryFilterOperator[];
 }
 
 /**

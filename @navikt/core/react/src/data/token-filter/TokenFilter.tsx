@@ -71,7 +71,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           }}
         >
           <AutoSuggest
-            /* @ts-expect-error TODO FIX */
+            /* @ts-expect-error TODO: handle conversion better */
             options={autoCompleteOptions.options}
             onSelect={handleSelectOption}
           />
@@ -111,7 +111,7 @@ function derrivedFilterState(
       propertyLabel: property?.propertyLabel ?? "",
       groupValuesLabel: property?.groupValuesLabel ?? "",
       propertyGroup: property?.group,
-      /* operators: (property?.operators ?? []).map(op => (typeof op === 'string' ? op : op.operator)), */
+      operators: property?.operators ?? [],
       /* defaultOperator: property?.defaultOperator ?? '=', */
       externalProperty: property,
     });
