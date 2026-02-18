@@ -215,6 +215,7 @@ function generateValueSuggestions(
 
 function generateFreeTextValueSuggestions(
   filteringOptions: ParsedOption[] = [],
+  operator: QueryFilterOperator,
   filterText = "",
 ): OptionGroup<AutoCompleteOption>[] {
   const groups: Record<string, OptionGroup<AutoCompleteOption>> = {};
@@ -248,7 +249,11 @@ function generateFreeTextValueSuggestions(
     }
 
     groups[groupLabel].options.push({
-      value: buildQueryString(option.property.propertyLabel, "=", option.value),
+      value: buildQueryString(
+        option.property.propertyLabel,
+        operator,
+        option.value,
+      ),
       label: option.label,
       tags: option.tags,
       filteringTags: option.filteringTags,
@@ -322,6 +327,14 @@ function generateAutoCompleteOptions(
     };
   }
 
+  /* State: Input starts with operator, but no value yet */
+  if (!queryState.value && queryState.operator) {
+    return {
+      value: "",
+      options: [],
+    };
+  }
+
   /* State: Empty input */
   if (!queryState.value) {
     return {
@@ -330,19 +343,18 @@ function generateAutoCompleteOptions(
     };
   }
 
-  /* TODO: unsure if needed  */
-  const propertySuggestions =
-    queryState.operator === "!:"
-      ? []
-      : generatePropertySuggestions(filteringProperties, queryState.value);
-
-  /* State: Free-text writing without match on property or operator */
+  /**
+   * State: Free-text writing without match on property
+   * - If input starts with operator, show value suggestions based on operator
+   * - Otherwise, show properties and values matching free-text
+   */
   return {
     value: queryState.value,
-    options: [
-      ...propertySuggestions,
-      ...generateFreeTextValueSuggestions(filteringOptions, queryState.value),
-    ],
+    options: generateFreeTextValueSuggestions(
+      filteringOptions,
+      queryState.operator ?? "=",
+      queryState.value,
+    ),
   };
 }
 

@@ -42,8 +42,8 @@ const properties: QueryFilteringProperty[] = [
 const parsedProperties: ParsedProperty[] = properties.map((prop) => ({
   propertyKey: prop.key,
   propertyLabel: prop.propertyLabel,
-  groupValuesLabel: prop.groupValuesLabel,
-  propertyGroup: prop.group,
+  groupValuesLabel: prop.groupValuesLabel ?? "",
+  propertyGroup: prop.group ?? "",
   externalProperty: prop,
 }));
 
