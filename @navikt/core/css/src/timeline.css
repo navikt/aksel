@@ -177,7 +177,7 @@
 .aksel-timeline__pin-wrapper::before {
   content: "";
   top: 0.9rem;
-  height: calc(100% - (0.9rem * 2));
+  height: calc(100% - 2rem);
   width: 1px;
   margin: 0 auto;
   background: var(--ax-border-neutral-strong);
