@@ -1,176 +1,246 @@
-import type { ParsedOption, ParsedProperty } from "../TokenFilter.types";
-import { type ParsedText, QUERY_OPERATORS } from "./parse-query-text";
-
-interface OptionGroup<T> {
-  label: string;
-  options: T[];
-}
-
-interface AutoCompleteOption {
-  value: string;
-  label: string;
-  tags?: string[];
-  filteringTags?: string[];
-  description?: string;
-}
-
-function buildQueryString(
-  propertyLabel: string,
-  operator: string,
-  value: string,
-): string {
-  const parts = [propertyLabel, operator, value].filter(Boolean);
-  return parts.join(" ");
-}
-
-/* TODO: i18n */
-const OPERATOR_LABELS: Record<string, string> = {
-  ":": "contains",
-  "!:": "does not contain",
-  "=": "is",
-  "!=": "is not",
-  "^": "starts with",
-  "!^": "does not start with",
-  ">=": "is greater than or equal to",
-  "<=": "is less than or equal to",
-  ">": "is greater than",
-  "<": "is less than",
-};
-/**
- * Grouping option for autocomplete suggestions structures:
- *
- * Step: "free-text" + empty value:
- * - Group: "Properties" with all properties.
- *
- * Step: "free-text" with non-empty value:
- * - Group: "Properties". All properties including the filter text in label or description or tags. String match.
- * - Group: "Values". All "property = value" combinations where either the property label or value label or description or tags include the filter text. String match.
- * - - Ignore all other operators than "=" for value suggestions.
- *
- * Step: "property" + empty value:
- * - Group: "Operators". All operators valid for the selected property.
- *
- * Step: "property" + non-empty value:
- * - Group: "Operators". All operators valid for the selected property with string match. Only relevant for multi letter operators like "!="
- *
- * Step: "operator" + empty value:
- * - Group: "<Property> values". All values valid for the selected property and operator. String match on value label, description and tags.
- *
- * Step: "operator" + non-empty value:
- * - Group: "<Property> values". All values valid for the selected property and operator with string match. String match on value label, description and tags.
- *
- *
- * TODO:
- * - Handle custom groups
- * - Multi vs single-select: Allow operators for each options where user can define type to be enum: { operator: "=", tokenType: "enum" }. Enum-type options allow selecting multiple values, i.e state = ("active", "pending"))
- */
+import type { AutoCompleteOption, OptionGroup } from "../AutoSuggest.types";
+import type {
+  ParsedOption,
+  ParsedProperty,
+  QueryFilterOperator,
+} from "../TokenFilter.types";
+import { createGroups } from "./grouping";
+import { QUERY_OPERATORS } from "./operators";
+import { type ParsedText } from "./parse-query-text";
+import { OPERATOR_LABELS, buildQueryString } from "./query-builder";
+import { matchesFilterText } from "./text-matching";
 
 /**
- * TODO: Update based on instructions above.
+ * Generates "options" to be used as autosuggest-ottion based on the current query state.
+ *
+ * The query parser recognizes three states:
+ * - "property": User has selected/matched a property and operator ("Status = active")
+ * - "operator": User has matched a property but is typing the operator ("Status" or "Status !")
+ * - "free-text": User is typing freely without a property match (e.g., "act" or "!: test")
+ *
+ * @returns
+ * - value: The canonical query string representation for the current state.
+ *   Used by the UI to determine cursor position and input replacement.
+ * - options: Grouped suggestions to display (properties, operators, or values).
  */
 function generateAutoCompleteOptions(
   queryState: ParsedText,
   filteringProperties: ParsedProperty[] = [],
   filteringOptions: ParsedOption[] = [],
 ) {
+  /* State: Property and operator are matched, suggest values */
   if (queryState.step === "property") {
-    if (!queryState.property) {
-      return {
-        value: queryState.value,
-        options: [],
-      };
-    }
-    const { propertyLabel, groupValuesLabel } = queryState.property;
-    const options = filteringOptions.filter(
-      (o) => o.property === queryState.property,
-    );
+    const filterText = queryState.value || "";
 
     return {
       value: queryState.value,
-      options: [
-        {
-          label: groupValuesLabel,
-          options: options.map(({ label, value, tags, filteringTags }) => ({
-            value: buildQueryString(propertyLabel, queryState.operator, value),
-            label,
-            tags,
-            filteringTags,
-          })),
-        },
-      ],
-    };
-  }
-  if (queryState.step === "operator") {
-    return {
-      value: buildQueryString(
-        queryState.property.propertyLabel,
-        queryState.operatorPrefix,
-        "",
+      options: createValueSuggestions(
+        filteringOptions,
+        queryState.operator,
+        filterText,
+        queryState.property,
       ),
-      options: [
-        ...generatePropertySuggestions(filteringProperties),
-        {
-          options: QUERY_OPERATORS.map((value) => ({
-            value: buildQueryString(
-              queryState.property.propertyLabel,
-              value,
-              "",
-            ),
-            label: buildQueryString(
-              queryState.property.propertyLabel,
-              value,
-              "",
-            ),
-            description: OPERATOR_LABELS[value] ?? "",
-          })),
-          /* TODO: i18n */
-          label: "Operator",
-        },
-      ],
     };
   }
 
-  const needsValueSuggestions = !!queryState.value;
-  const needsPropertySuggestions = !(
-    queryState.step === "free-text" && queryState.operator === "!:"
-  );
+  /* State: Property matched, but operator is incomplete */
+  if (queryState.step === "operator") {
+    const operators = filterOperatorsByPrefix(
+      getValidOperatorsForProperty(queryState.property),
+      queryState.operatorPrefix,
+    );
 
+    const partialQuery = buildQueryString(
+      queryState.property.propertyLabel,
+      queryState.operatorPrefix,
+      "",
+    );
+
+    /**
+     * Edge case: User typed an invalid operator prefix that doesn't match any operators.
+     * This can happen when typing characters that don't start any valid operator.
+     * Return empty suggestions gracefully - the UI will show "no results".
+     *
+     * TODO: When per-property operator configuration is implemented,
+     * this could also occur when a property restricts which operators are valid.
+     */
+    if (operators.length === 0) {
+      return {
+        value: partialQuery,
+        options: [],
+      };
+    }
+
+    return {
+      value: partialQuery,
+      options: generateOperatorSuggestions(
+        queryState.property,
+        queryState.operatorPrefix,
+      ),
+    };
+  }
+
+  /*
+   * Edge case: Input starts with operator but has no value yet (user typed just "!=")
+   * Wait for value before showing suggestions
+   */
+  if (!queryState.value && queryState.operator) {
+    return {
+      value: "",
+      options: [],
+    };
+  }
+
+  /* Empty input: Show all properties */
+  if (!queryState.value) {
+    return {
+      value: "",
+      options: generatePropertySuggestions(filteringProperties),
+    };
+  }
+
+  /*
+   * Free-text search: Show matching values across all properties
+   * Use the detected operator if input started with one (e.g., "!= test"), otherwise default to "="
+   */
   return {
     value: queryState.value,
-    options: [
-      ...(needsPropertySuggestions
-        ? generatePropertySuggestions(filteringProperties)
-        : []),
-      ...(needsValueSuggestions
-        ? generateAllValueSuggestions(filteringOptions)
-        : []),
-    ],
+    options: createValueSuggestions(
+      filteringOptions,
+      queryState.operator ?? "=",
+      queryState.value,
+    ),
   };
 }
 
-function createAutoCompleteOption(
-  propertyLabel: string,
-  operator: string,
-  value: string,
-  label: string,
-  tags?: string[],
-  filteringTags?: string[],
-): AutoCompleteOption {
-  return {
-    value: buildQueryString(propertyLabel, operator, value),
-    label: buildQueryString(propertyLabel, operator, label),
-    tags,
-    filteringTags,
-  };
+/**
+ * Returns the valid operators for a given property.
+ * Currently returns all operators for all properties.
+ *
+ * TODO: Implement per-property operator configuration.
+ * This will allow properties to restrict which operators are valid.
+ * For example, a boolean property might only support "=" and "!=",
+ * while a text property supports ":", "!:", "^", etc.
+ *
+ * @returns Array of valid operators for the property
+ */
+function getValidOperatorsForProperty(
+  /* TODO: Will be implemented when each property can configure operator per instance */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _property: ParsedProperty,
+): QueryFilterOperator[] {
+  return QUERY_OPERATORS;
 }
 
-function generateAllValueSuggestions(
+/**
+ * Filters the list of operators based on the provided prefix.
+ * If the prefix is empty, all operators are returned.
+ */
+function filterOperatorsByPrefix(
+  operators: QueryFilterOperator[],
+  prefix: string,
+): QueryFilterOperator[] {
+  if (!prefix) {
+    return operators;
+  }
+
+  return operators.filter((operator) => operator.startsWith(prefix));
+}
+
+function generatePropertySuggestions(
+  filteringProperties: ParsedProperty[] = [],
+  filterText = "",
+): OptionGroup<ParsedProperty>[] {
+  const filteredProperties: ParsedProperty[] = [];
+
+  for (const property of filteringProperties) {
+    if (!property) {
+      continue;
+    }
+
+    if (
+      matchesFilterText(
+        [
+          property.propertyLabel,
+          property.groupValuesLabel,
+          property.propertyGroup,
+        ].filter(Boolean),
+        filterText,
+      )
+    ) {
+      filteredProperties.push(property);
+    }
+  }
+
+  return createGroups(
+    filteredProperties,
+    (property) => property.propertyGroup,
+    "Properties",
+  );
+}
+
+function generateOperatorSuggestions(
+  property: ParsedProperty,
+  operatorPrefix = "",
+): OptionGroup<AutoCompleteOption>[] {
+  const operators = filterOperatorsByPrefix(
+    getValidOperatorsForProperty(property),
+    operatorPrefix,
+  );
+
+  if (operators.length === 0) {
+    return [];
+  }
+
+  return [
+    {
+      label: "Operators",
+      options: operators.map((operator) => ({
+        value: buildQueryString(property.propertyLabel, operator, ""),
+        label: buildQueryString(property.propertyLabel, operator, ""),
+        description: OPERATOR_LABELS[operator] ?? "",
+      })),
+    },
+  ];
+}
+
+/**
+ * Creates value suggestions for autocomplete.
+ * When scopedProperty is provided, only shows values for that property (single group).
+ * When scopedProperty is omitted, searches across all properties (multiple groups).
+ */
+function createValueSuggestions(
   filteringOptions: ParsedOption[] = [],
+  operator: QueryFilterOperator,
+  filterText = "",
+  scopedProperty?: ParsedProperty,
 ): OptionGroup<AutoCompleteOption>[] {
   const groups: Record<string, OptionGroup<AutoCompleteOption>> = {};
 
   for (const option of filteringOptions) {
-    if (!option || !option.property) {
+    if (!option?.property) {
+      continue;
+    }
+
+    /* If scoped to a property, filter to only that property's options */
+    if (scopedProperty && option.property !== scopedProperty) {
+      continue;
+    }
+
+    /* Build search fields */
+    const searchFields = [
+      option.label,
+      ...(option.tags ?? []),
+      ...(option.filteringTags ?? []),
+    ];
+
+    if (!scopedProperty) {
+      searchFields.push(option.property.propertyLabel);
+    }
+
+    const matches = matchesFilterText(searchFields.filter(Boolean), filterText);
+
+    if (!matches) {
       continue;
     }
 
@@ -183,62 +253,19 @@ function generateAllValueSuggestions(
       };
     }
 
-    const { label, value, tags, filteringTags, property } = option;
-    const options = QUERY_OPERATORS.map((operator) =>
-      createAutoCompleteOption(
-        property.propertyLabel,
+    groups[groupLabel].options.push({
+      value: buildQueryString(
+        option.property.propertyLabel,
         operator,
-        value,
-        label,
-        tags,
-        filteringTags,
+        option.value,
       ),
-    );
-
-    groups[groupLabel].options.push(...options);
+      label: option.label,
+      tags: option.tags,
+      filteringTags: option.filteringTags,
+    });
   }
 
-  return Object.values(groups);
-}
-
-function generatePropertySuggestions(
-  filteringProperties: ParsedProperty[] = [],
-): OptionGroup<ParsedProperty>[] {
-  const defaultGroup: OptionGroup<ParsedProperty> = {
-    label: "Properties",
-    options: [],
-  };
-  const customGroups: Record<string, OptionGroup<ParsedProperty>> = {};
-
-  for (const property of filteringProperties) {
-    if (!property) {
-      continue;
-    }
-    const groupLabel = property.propertyGroup?.trim();
-
-    if (groupLabel) {
-      if (!customGroups[groupLabel]) {
-        customGroups[groupLabel] = {
-          label: groupLabel,
-          options: [],
-        };
-      }
-      customGroups[groupLabel].options.push(property);
-      continue;
-    }
-
-    defaultGroup.options.push(property);
-  }
-
-  const groups: OptionGroup<ParsedProperty>[] = [
-    ...Object.values(customGroups),
-  ];
-
-  if (defaultGroup.options.length > 0) {
-    groups.push(defaultGroup);
-  }
-
-  return groups;
+  return Object.values(groups).filter((group) => group.options.length > 0);
 }
 
 export { generateAutoCompleteOptions };
