@@ -97,55 +97,16 @@ function generateOperatorSuggestions(
   ];
 }
 
-function generateValueSuggestions(
-  filteringOptions: ParsedOption[] = [],
-  property: ParsedProperty,
-  operator: QueryFilterOperator,
-  filterText = "",
-): OptionGroup<AutoCompleteOption>[] {
-  const options = filteringOptions.filter(
-    (option) => option?.property === property,
-  );
-
-  if (options.length === 0) {
-    return [];
-  }
-
-  const groupLabel = property.groupValuesLabel || "Values";
-  const matchedOptions = options
-    .filter((option) =>
-      matchesFilterText(
-        [
-          option.label,
-          ...(option.tags ?? []),
-          ...(option.filteringTags ?? []),
-        ].filter(Boolean),
-        filterText,
-      ),
-    )
-    .map(({ label, value, tags, filteringTags }) => ({
-      value: buildQueryString(property.propertyLabel, operator, value),
-      label,
-      tags,
-      filteringTags,
-    }));
-
-  if (matchedOptions.length === 0) {
-    return [];
-  }
-
-  return [
-    {
-      label: groupLabel,
-      options: matchedOptions,
-    },
-  ];
-}
-
-function generateFreeTextValueSuggestions(
+/**
+ * Creates value suggestions for autocomplete.
+ * When scopedProperty is provided, only shows values for that property (single group).
+ * When scopedProperty is omitted, searches across all properties (multiple groups).
+ */
+function createValueSuggestions(
   filteringOptions: ParsedOption[] = [],
   operator: QueryFilterOperator,
   filterText = "",
+  scopedProperty?: ParsedProperty,
 ): OptionGroup<AutoCompleteOption>[] {
   const groups: Record<string, OptionGroup<AutoCompleteOption>> = {};
 
@@ -154,15 +115,24 @@ function generateFreeTextValueSuggestions(
       continue;
     }
 
-    const matches = matchesFilterText(
-      [
-        option.property.propertyLabel,
-        option.label,
-        ...(option.tags ?? []),
-        ...(option.filteringTags ?? []),
-      ].filter(Boolean),
-      filterText,
-    );
+    // If scoped to a property, filter to only that property's options
+    if (scopedProperty && option.property !== scopedProperty) {
+      continue;
+    }
+
+    // Build search fields
+    const searchFields = [
+      option.label,
+      ...(option.tags ?? []),
+      ...(option.filteringTags ?? []),
+    ];
+
+    // For free-text search (no scoped property), also search property label
+    if (!scopedProperty) {
+      searchFields.push(option.property.propertyLabel);
+    }
+
+    const matches = matchesFilterText(searchFields.filter(Boolean), filterText);
 
     if (!matches) {
       continue;
@@ -190,6 +160,28 @@ function generateFreeTextValueSuggestions(
   }
 
   return Object.values(groups).filter((group) => group.options.length > 0);
+}
+
+function generateValueSuggestions(
+  filteringOptions: ParsedOption[] = [],
+  property: ParsedProperty,
+  operator: QueryFilterOperator,
+  filterText = "",
+): OptionGroup<AutoCompleteOption>[] {
+  return createValueSuggestions(
+    filteringOptions,
+    operator,
+    filterText,
+    property,
+  );
+}
+
+function generateFreeTextValueSuggestions(
+  filteringOptions: ParsedOption[] = [],
+  operator: QueryFilterOperator,
+  filterText = "",
+): OptionGroup<AutoCompleteOption>[] {
+  return createValueSuggestions(filteringOptions, operator, filterText);
 }
 
 function generateAutoCompleteOptions(
