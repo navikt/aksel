@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 8.5.1
+
+### Patch Changes
+
+- Tooltip: Legger til manglende `key` prop for flere shortcuts. ([#4656](https://github.com/navikt/aksel/pull/4656))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.5.1
+  - @navikt/aksel-icons@8.5.1
+
 ## 8.5.0
 
 ### Minor Changes
