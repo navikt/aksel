@@ -8,7 +8,7 @@ import type {
   QueryFilteringOptions,
   QueryFilteringProperties,
 } from "./TokenFilter.types";
-import { generateAutoCompleteOptions } from "./helpers/generate-autocomplete-options";
+import { generateAutoCompleteOptions } from "./helpers/generate-autocomplete-options-v2";
 import { parseQueryText } from "./helpers/parse-query-text";
 
 type TokenFilterProps = {

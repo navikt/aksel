@@ -45,6 +45,17 @@ const properties = [
   },
 ];
 
+const propertiesWithoutGroups = properties.map((prop) => {
+  const copy: {
+    key: string;
+    propertyLabel: string;
+    groupValuesLabel: string;
+    group?: string;
+  } = structuredClone(prop);
+  delete copy.group;
+  return copy;
+});
+
 const filteringOptions = [
   { propertyKey: "status", value: "running" },
   { propertyKey: "status", value: "stopped" },
@@ -61,7 +72,7 @@ const filteringOptions = [
   { propertyKey: "region", value: "ap-southeast-1" },
 ];
 
-export const Default: Story = {
+export const WithGroups: Story = {
   render: () => {
     const [query, setQuery] = useState<any>({
       tokens: [],
@@ -69,12 +80,36 @@ export const Default: Story = {
     });
 
     return (
-      <TokenFilter
-        query={query}
-        onChange={(newQuery) => setQuery(newQuery)}
-        filteringProperties={properties}
-        filteringOptions={filteringOptions}
-      />
+      <div>
+        <h2>TokenFilter with groups</h2>
+        <TokenFilter
+          query={query}
+          onChange={(newQuery) => setQuery(newQuery)}
+          filteringProperties={properties}
+          filteringOptions={filteringOptions}
+        />
+      </div>
+    );
+  },
+};
+
+export const WithOutGroups: Story = {
+  render: () => {
+    const [query, setQuery] = useState<any>({
+      tokens: [],
+      operation: "and",
+    });
+
+    return (
+      <div>
+        <h2>TokenFilter without groups</h2>
+        <TokenFilter
+          query={query}
+          onChange={(newQuery) => setQuery(newQuery)}
+          filteringProperties={propertiesWithoutGroups}
+          filteringOptions={filteringOptions}
+        />
+      </div>
     );
   },
 };
