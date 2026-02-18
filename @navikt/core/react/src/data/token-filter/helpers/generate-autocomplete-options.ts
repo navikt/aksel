@@ -184,63 +184,74 @@ function generateFreeTextValueSuggestions(
   return createValueSuggestions(filteringOptions, operator, filterText);
 }
 
+/**
+ * Generates autocomplete suggestions based on the current query state.
+ *
+ * The query parser recognizes three states:
+ * - "property": User has selected/matched a property and operator (e.g., "Status = active")
+ * - "operator": User has matched a property but is typing the operator (e.g., "Status !")
+ * - "free-text": User is typing freely without a property match (e.g., "act" or "!:test")
+ *
+ * Returns an object with:
+ * - value: The canonical query string representation for the current state.
+ *   Used by the UI to determine cursor position and input replacement.
+ * - options: Grouped suggestions to display (properties, operators, or values).
+ *
+ * @param queryState - Parsed query state from parseQueryText
+ * @param filteringProperties - Available properties for filtering
+ * @param filteringOptions - Available values for filtering
+ * @returns Object containing the query value and suggestion groups
+ */
 function generateAutoCompleteOptions(
   queryState: ParsedText,
   filteringProperties: ParsedProperty[] = [],
   filteringOptions: ParsedOption[] = [],
 ) {
-  /* State: Property AND operator exists */
+  /* State: Property and operator are matched, suggest values */
   if (queryState.step === "property") {
-    /* State: Just property AND operator exists. No value */
-    if (!queryState.value) {
-      return {
-        value: queryState.value,
-        options: generateValueSuggestions(
-          filteringOptions,
-          queryState.property,
-          queryState.operator,
-        ),
-      };
-    }
+    const filterText = queryState.value || "";
 
-    /* State: Propery AND operator AND value */
     return {
       value: queryState.value,
       options: generateValueSuggestions(
         filteringOptions,
         queryState.property,
         queryState.operator,
-        queryState.value,
+        filterText,
       ),
     };
   }
 
-  /* State: Propery, but no complete operator */
+  // State: Property matched, but operator is incomplete
   if (queryState.step === "operator") {
     const operators = filterOperatorsByPrefix(
       getValidOperatorsForProperty(queryState.property),
       queryState.operatorPrefix,
     );
 
-    if (operators.length === 0) {
-      throw new Error("Detected unhandles state. Implement edgecase");
+    const partialQuery = buildQueryString(
+      queryState.property.propertyLabel,
+      queryState.operatorPrefix,
+      "",
+    );
 
-      //return {
-      //  value: buildQueryString(
-      //    queryState.property.propertyLabel,
-      //    queryState.operatorPrefix,
-      //    "",
-      //  ),
-      //  options: [] as OptionGroup<AutoCompleteOption | ParsedProperty>[],
-      //};
+    /**
+     * Edge case: User typed an invalid operator prefix that doesn't match any operators.
+     * This can happen when typing characters that don't start any valid operator.
+     * Return empty suggestions gracefully - the UI will show "no results".
+     *
+     * TODO: When per-property operator configuration is implemented,
+     * this could also occur when a property restricts which operators are valid.
+     */
+    if (operators.length === 0) {
+      return {
+        value: partialQuery,
+        options: [],
+      };
     }
 
     return {
-      value: buildQueryString(
-        queryState.property.propertyLabel,
-        queryState.operatorPrefix,
-        "",
-      ),
+      value: partialQuery,
       options: generateOperatorSuggestions(
         queryState.property,
         queryState.operatorPrefix,
@@ -248,7 +259,10 @@ function generateAutoCompleteOptions(
     };
   }
 
-  /* State: Input starts with operator, but no value yet */
+  // State: Free-text mode (no property match)
+
+  // Edge case: Input starts with operator but has no value yet (e.g., user typed just "!=")
+  // Don't show suggestions - wait for them to type a value
   if (!queryState.value && queryState.operator) {
     return {
       value: "",
@@ -256,19 +270,16 @@ function generateAutoCompleteOptions(
     };
   }
 
-  /* State: Empty input */
+  // Empty input: Show all properties
   if (!queryState.value) {
     return {
-      value: queryState.value,
+      value: "",
       options: generatePropertySuggestions(filteringProperties),
     };
   }
 
-  /**
-   * State: Free-text writing without match on property
-   * - If input starts with operator, show value suggestions based on operator
-   * - Otherwise, show properties and values matching free-text
-   */
+  // Free-text search: Show matching values across all properties
+  // Use the detected operator if input started with one (e.g., "!=test"), otherwise default to "="
   return {
     value: queryState.value,
     options: generateFreeTextValueSuggestions(

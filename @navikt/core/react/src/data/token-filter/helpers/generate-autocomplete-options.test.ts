@@ -340,20 +340,21 @@ describe("generateAutoCompleteOptions v2", () => {
       ).toBe("is greater than or equal to");
     });
 
-    test("invalid prefix: should throw error", () => {
+    test("invalid prefix: should return empty suggestions", () => {
       const queryState: ParsedText = {
         step: "operator",
         property: statusProperty,
         operatorPrefix: "invalid",
       };
 
-      expect(() =>
-        generateAutoCompleteOptions(
-          queryState,
-          parsedProperties,
-          parsedOptions,
-        ),
-      ).toThrow("Detected unhandles state. Implement edgecase");
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.value).toBe("Status invalid");
+      expect(result.options).toEqual([]);
     });
   });
 
