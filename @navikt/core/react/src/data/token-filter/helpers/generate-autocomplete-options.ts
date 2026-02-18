@@ -4,6 +4,7 @@ import type {
   QueryFilterOperator,
 } from "../TokenFilter.types";
 import { type ParsedText, QUERY_OPERATORS } from "./parse-query-text";
+import { matchesFilterText } from "./text-matching";
 
 interface OptionGroup<T> {
   label: string;
@@ -39,29 +40,6 @@ const OPERATOR_LABELS: Record<QueryFilterOperator, string> = {
   ">": "is greater than",
   "<": "is less than",
 };
-
-function matchesFilterText(
-  searchFieldValues: string[],
-  filterText: string,
-): boolean {
-  const normalizedFilter = filterText.trim().toLowerCase();
-  if (!normalizedFilter) {
-    return true;
-  }
-
-  const parts = normalizedFilter.split(/\s+/).filter(Boolean);
-  if (parts.length === 0) {
-    return true;
-  }
-
-  const normalizedFields = searchFieldValues
-    .map((value) => value?.toLowerCase())
-    .filter(Boolean);
-
-  return parts.every((part) =>
-    normalizedFields.some((field) => field.includes(part)),
-  );
-}
 
 function getValidOperatorsForProperty(
   /* TODO: Will be implemented when each property can configure operator per instance */
@@ -361,7 +339,6 @@ function generateAutoCompleteOptions(
 export {
   buildQueryString,
   generateAutoCompleteOptions,
-  matchesFilterText,
   OPERATOR_LABELS,
   QUERY_OPERATORS,
 };
