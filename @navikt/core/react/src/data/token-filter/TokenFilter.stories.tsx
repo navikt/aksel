@@ -1,6 +1,7 @@
 import { StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { TokenFilter } from "./TokenFilter";
+import type { QueryFilteringProperties } from "./TokenFilter.types";
 
 export default {
   title: "ds-react/data/TokenFilter",
@@ -114,6 +115,79 @@ export const WithOutGroups: Story = {
   },
 };
 
+const propertiesWithOperators: QueryFilteringProperties = [
+  {
+    key: "status",
+    propertyLabel: "Status",
+    groupValuesLabel: "Status value",
+    group: "Instance",
+    operators: [
+      { operator: "=", tokenType: "multiple" },
+      { operator: "!=", tokenType: "multiple" },
+    ],
+  },
+  {
+    key: "hostname",
+    propertyLabel: "Hostname",
+    groupValuesLabel: "Hostname value",
+    group: "Instance",
+    operators: ["=", "!="],
+  },
+  {
+    key: "instanceid",
+    propertyLabel: "Instance ID",
+    groupValuesLabel: "Instance ID value",
+    group: "Instance",
+    operators: ["=", "!="],
+  },
+  {
+    key: "region",
+    propertyLabel: "Region",
+    groupValuesLabel: "Region value",
+    group: "Location",
+    operators: [
+      { operator: "=", tokenType: "multiple" },
+      { operator: "!=", tokenType: "multiple" },
+    ],
+  },
+  {
+    key: "availability_zone",
+    propertyLabel: "Availability Zone",
+    groupValuesLabel: "Availability Zone value",
+    group: "Location",
+    operators: [
+      { operator: "=", tokenType: "multiple" },
+      { operator: "!=", tokenType: "multiple" },
+      { operator: ":", tokenType: "single" },
+      { operator: "!:", tokenType: "single" },
+      { operator: "!:", tokenType: "single" },
+      { operator: "!^", tokenType: "single" },
+      { operator: "^", tokenType: "single" },
+    ],
+  },
+];
+
+export const CustomOperators: Story = {
+  render: () => {
+    const [query, setQuery] = useState<any>({
+      tokens: [],
+      operation: "and",
+    });
+
+    return (
+      <div>
+        <h2>TokenFilter custom operators</h2>
+        <TokenFilter
+          query={query}
+          onChange={(newQuery) => setQuery(newQuery)}
+          filteringProperties={propertiesWithOperators}
+          filteringOptions={filteringOptions}
+        />
+      </div>
+    );
+  },
+};
+
 export const OperatorFiltering: Story = {
   render: () => {
     const [query, setQuery] = useState<any>({
@@ -205,7 +279,7 @@ export const MixedGroups: Story = {
 
     return (
       <div>
-        <h2>TokenFilter without groups</h2>
+        <h2>TokenFilter Mixed groups</h2>
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
