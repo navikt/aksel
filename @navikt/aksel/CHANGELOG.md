@@ -1,5 +1,13 @@
 # @navikt/aksel
 
+## 8.5.2
+
+### Patch Changes
+
+- Updated dependencies [[`2caeacc`](https://github.com/navikt/aksel/commit/2caeacc21b91d246beb8cc718ea80ceeba709c2c)]:
+  - @navikt/ds-css@8.5.2
+  - @navikt/ds-tokens@8.5.2
+
 ## 8.5.1
 
 ### Patch Changes
