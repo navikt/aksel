@@ -1,6 +1,7 @@
 {
   "name": "@navikt/aksel-stylelint",
   "version": "8.5.1",
+  "type": "module",
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/grunnleggende/kode/stylelint",
   "repository": {

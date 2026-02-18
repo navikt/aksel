@@ -1,5 +1,10 @@
 import { readFileSync } from "node:fs";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import valueParser from "postcss-value-parser";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export const isCustomProperty = (property) => {
   return property.startsWith("--");
