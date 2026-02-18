@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.5.1
+
+### @navikt/ds-react
+
+- Tooltip: Legger til manglende `key` prop for flere shortcuts. ([#4656](https://github.com/navikt/aksel/pull/4656))
+
 ## 8.5.0
 
 ### @navikt/ds-react
