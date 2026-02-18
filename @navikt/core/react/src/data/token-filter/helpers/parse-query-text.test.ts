@@ -3,7 +3,7 @@ import type {
   ParsedProperty,
   QueryFilteringProperty,
 } from "../TokenFilter.types";
-import { QUERY_OPERATORS, parseQueryText } from "./parse-query-text";
+import { parseQueryText } from "./parse-query-text";
 import type { ParsedText } from "./parse-query-text";
 
 const properties: QueryFilteringProperty[] = [
@@ -358,36 +358,6 @@ describe("parseQueryText", () => {
       expect(propertyResult.property.propertyKey).toBe("instance-id");
       expect(propertyResult.operator).toBe(":");
       expect(propertyResult.value).toBe("value");
-    });
-  });
-
-  describe("QUERY_OPERATORS", () => {
-    test("should return qUERY_OPERATORS in specificity order", () => {
-      const qUERY_OPERATORS = QUERY_OPERATORS;
-      expect(qUERY_OPERATORS[0]).toBe(">=");
-      expect(qUERY_OPERATORS[1]).toBe("<=");
-      expect(qUERY_OPERATORS[2]).toBe("!=");
-      expect(qUERY_OPERATORS[3]).toBe("!:");
-      expect(qUERY_OPERATORS[4]).toBe("!^");
-    });
-
-    test("should have all required qUERY_OPERATORS", () => {
-      const qUERY_OPERATORS = QUERY_OPERATORS;
-      const requiredQUERY_OPERATORS = [
-        "=",
-        "!=",
-        ":",
-        "!:",
-        "^",
-        "!^",
-        ">=",
-        "<=",
-        "<",
-        ">",
-      ];
-      requiredQUERY_OPERATORS.forEach((op) => {
-        expect(qUERY_OPERATORS).toContain(op);
-      });
     });
   });
 

@@ -17,12 +17,13 @@ import type { OptionGroup } from "../AutoSuggest.types";
  *   (p) => p.group,
  *   "Properties"
  * );
- * // Returns:
- * // [
- * //   { label: "Metadata", options: [{ name: "Status", group: "Metadata" }] },
- * //   { label: "Location", options: [{ name: "Region", group: "Location" }] },
- * //   { label: "Properties", options: [{ name: "Type", group: "" }] }
- * // ]
+ *
+ * Returns:
+ * [
+ *   { label: "Metadata", options: [{ name: "Status", group: "Metadata" }] },
+ *   { label: "Location", options: [{ name: "Region", group: "Location" }] },
+ *   { label: "Properties", options: [{ name: "Type", group: "" }] }
+ * ]
  */
 function createGroups<T>(
   items: T[],
@@ -69,39 +70,4 @@ function createGroups<T>(
   return groups;
 }
 
-/**
- * Filters items and groups them with support for a default group.
- * Empty or whitespace-only group labels are treated as belonging to the default group.
- *
- * @param items - Array of items to filter and group
- * @param shouldInclude - Predicate function to determine if an item should be included
- * @param getGroupLabel - Function to extract the group label from an item
- * @param defaultGroupLabel - Label for items without a group (default: "Default")
- * @returns Array of groups with non-empty options
- *
- * @example
- * const options = [
- *   { name: "Active", type: "status", value: "active" },
- *   { name: "US East", type: "region", value: "us-east" },
- *   { name: "Inactive", type: "status", value: "inactive" },
- * ];
- * const groups = filterAndGroup(
- *   options,
- *   (o) => o.type === "status",
- *   (o) => o.type,
- *   "Values"
- * );
- * // Returns:
- * // [{ label: "status", options: [{ name: "Active", ... }, { name: "Inactive", ... }] }]
- */
-function filterAndGroup<T>(
-  items: T[],
-  shouldInclude: (item: T) => boolean,
-  getGroupLabel: (item: T) => string | undefined | null,
-  defaultGroupLabel = "Default",
-): OptionGroup<T>[] {
-  const filteredItems = items.filter(shouldInclude);
-  return createGroups(filteredItems, getGroupLabel, defaultGroupLabel);
-}
-
-export { createGroups, filterAndGroup };
+export { createGroups };

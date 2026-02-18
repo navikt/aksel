@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { createGroups, filterAndGroup } from "./grouping";
+import { createGroups } from "./grouping";
 
 interface TestItem {
   name: string;
@@ -201,89 +201,6 @@ describe("createGroups", () => {
       const groups = createGroups(items, (item) => item.group);
 
       expect(groups[0].label).toBe("Default");
-    });
-  });
-});
-
-describe("filterAndGroup", () => {
-  describe("filtering and grouping", () => {
-    test("filters and groups items", () => {
-      const items: TestItem[] = [
-        { name: "Active", group: "Status", value: "active" },
-        { name: "US East", group: "Region", value: "us-east" },
-        { name: "Inactive", group: "Status", value: "inactive" },
-        { name: "EU West", group: "Region", value: "eu-west" },
-      ];
-
-      const groups = filterAndGroup(
-        items,
-        (item) => item.group === "Status",
-        (item) => item.group,
-      );
-
-      expect(groups).toHaveLength(1);
-      expect(groups[0].label).toBe("Status");
-      expect(groups[0].options).toHaveLength(2);
-    });
-
-    test("returns empty array when no items match filter", () => {
-      const items: TestItem[] = [
-        { name: "Item 1", group: "Group A", value: "1" },
-      ];
-
-      const groups = filterAndGroup(
-        items,
-        (item) => item.value === "999",
-        (item) => item.group,
-      );
-
-      expect(groups).toEqual([]);
-    });
-
-    test("uses default group for filtered items without group", () => {
-      const items: TestItem[] = [
-        { name: "Item 1", group: "Group A", value: "1" },
-        { name: "Item 2", value: "2" },
-        { name: "Item 3", group: "Group B", value: "3" },
-      ];
-
-      const groups = filterAndGroup(
-        items,
-        (item) => item.value !== "3",
-        (item) => item.group,
-        "Other",
-      );
-
-      expect(groups).toHaveLength(2);
-      expect(groups[1].label).toBe("Other");
-    });
-  });
-
-  describe("edge cases", () => {
-    test("handles empty array", () => {
-      const groups = filterAndGroup(
-        [],
-        () => true,
-        (item: TestItem) => item.group,
-      );
-
-      expect(groups).toEqual([]);
-    });
-
-    test("includes all items when filter always returns true", () => {
-      const items: TestItem[] = [
-        { name: "Item 1", group: "Group A", value: "1" },
-        { name: "Item 2", group: "Group A", value: "2" },
-      ];
-
-      const groups = filterAndGroup(
-        items,
-        () => true,
-        (item) => item.group,
-      );
-
-      expect(groups).toHaveLength(1);
-      expect(groups[0].options).toHaveLength(2);
     });
   });
 });
