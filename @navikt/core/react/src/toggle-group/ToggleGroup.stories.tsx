@@ -1,5 +1,6 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import { Meta, StoryFn, type StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 import {
   EnvelopeClosedIcon,
   EnvelopeOpenIcon,
@@ -20,6 +21,8 @@ const meta: Meta<typeof ToggleGroup> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof ToggleGroup>;
 
 const Items = (icon?: boolean, both?: boolean) => {
   const hasLabel = both || !icon;
@@ -142,6 +145,60 @@ export const Small = () => {
       </ToggleGroup>
     </VStack>
   );
+};
+
+export const PlayControlled: Story = {
+  render: () => {
+    const [activeValue, setActiveValue] = useState("ny");
+
+    return (
+      <ToggleGroup value={activeValue} onChange={setActiveValue}>
+        {Items()}
+      </ToggleGroup>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const initialToggle = canvas.getByText("Ny").closest("button");
+
+    expect(initialToggle).toHaveAttribute("aria-checked", "true");
+    expect(initialToggle).toHaveAttribute("tabindex", "0");
+    initialToggle?.focus();
+    expect(initialToggle).toHaveFocus();
+
+    await userEvent.keyboard("{ArrowRight}");
+    const nextToggle = canvas.getByText("Leste").closest("button");
+    expect(nextToggle).toHaveFocus();
+    expect(nextToggle).toHaveAttribute("aria-checked", "false");
+    expect(nextToggle).toHaveAttribute("tabindex", "0");
+
+    expect(initialToggle).toHaveAttribute("aria-checked", "true");
+    expect(initialToggle).toHaveAttribute("tabindex", "-1");
+
+    await userEvent.keyboard("{Enter}");
+    expect(nextToggle).toHaveAttribute("aria-checked", "true");
+
+    await userEvent.keyboard("{ArrowLeft}");
+    await userEvent.keyboard("{ArrowLeft}");
+    const firstToggle = canvas.getByText("Uleste").closest("button");
+    expect(firstToggle).toHaveFocus();
+    expect(firstToggle).toHaveAttribute("aria-checked", "false");
+    expect(firstToggle).toHaveAttribute("tabindex", "0");
+
+    expect(nextToggle).toHaveAttribute("aria-checked", "true");
+    expect(nextToggle).toHaveAttribute("tabindex", "-1");
+  },
+};
+
+export const PlayUnControlled: Story = {
+  render: () => {
+    return (
+      <ToggleGroup defaultValue="ny" onChange={() => null}>
+        {Items()}
+      </ToggleGroup>
+    );
+  },
+  play: PlayControlled.play,
 };
 
 export const Chromatic = renderStoriesForChromatic({
