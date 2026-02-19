@@ -33,7 +33,6 @@ module.exports = defineConfig([
     "**/tokens/**/plugin.js",
     "**/.next",
     "**/query-types.ts",
-    "examples/referansesider",
     "examples/astro/.astro",
     ".yarn",
     "**/next-env.d.ts",
