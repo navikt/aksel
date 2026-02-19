@@ -110,11 +110,14 @@ function generateAutoCompleteOptions(
    */
   return {
     value: queryState.value,
-    options: createValueSuggestions(
-      filteringOptions,
-      queryState.operator ?? "=",
-      queryState.value,
-    ),
+    options: [
+      ...generatePropertySuggestions(filteringProperties, queryState.value),
+      ...createValueSuggestions(
+        filteringOptions,
+        queryState.operator ?? "=",
+        queryState.value,
+      ),
+    ],
   };
 }
 
@@ -201,10 +204,6 @@ function generatePropertySuggestions(
     "Properties",
   );
 
-  /**
-   * TODO: Unify data better here
-   * - descrition etc
-   */
   return groups.map((group) => ({
     label: group.label,
     options: group.options.map((property) => ({
@@ -243,6 +242,8 @@ function generateOperatorSuggestions(
  * Creates value suggestions for autocomplete.
  * When scopedProperty is provided, only shows values for that property (single group).
  * When scopedProperty is omitted, searches across all properties (multiple groups).
+ * TODO: This could potentially contain an unlimited number of options if there are many values across properties.
+ * May need virtualization/async or other filtering mechanism.
  */
 function createValueSuggestions(
   filteringOptions: ParsedOption[] = [],
