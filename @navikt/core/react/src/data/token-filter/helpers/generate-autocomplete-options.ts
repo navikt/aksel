@@ -65,9 +65,6 @@ function generateAutoCompleteOptions(
      * Edge case: User typed an invalid operator prefix that doesn't match any operators.
      * This can happen when typing characters that don't start any valid operator.
      * Return empty suggestions gracefully - the UI will show "no results".
-     *
-     * TODO: When per-property operator configuration is implemented,
-     * this could also occur when a property restricts which operators are valid.
      */
     if (operators.length === 0) {
       return {
