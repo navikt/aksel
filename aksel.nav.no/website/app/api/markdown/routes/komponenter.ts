@@ -1,6 +1,6 @@
 import { sanityMarkdownFetch } from "@/app/_sanity/live";
 import { ALL_KOMPONENTS_MARKDOWN_QUERY } from "@/app/_sanity/queries";
-import { portableMarkdown } from "@/app/api/markdown/helpers/portableMarkdown";
+import { portableMarkdown } from "@/app/api/markdown/helpers/portable-markdown";
 import { buildMarkdown } from "../helpers/build-markdown";
 
 async function markdown() {
