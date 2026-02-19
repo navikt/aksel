@@ -1,10 +1,6 @@
 import valueParser from "postcss-value-parser";
 import stylelint from "stylelint";
-import {
-  getPackageVersion,
-  isCustomProperty,
-  tokenExists,
-} from "../../utils.js";
+import { getPackageVersion, tokenExists } from "../../utils.js";
 
 const ruleName = "aksel/design-token-exists";
 const prefix = "--ax-";
@@ -32,7 +28,6 @@ const checkDeclValue = (
   valueParser(value).walk((node) => {
     if (
       node.type === "word" &&
-      isCustomProperty(node.value) &&
       node.value.startsWith(prefix) &&
       !tokenExists([prefix], node.value)
     ) {
@@ -52,11 +47,7 @@ const checkDeclProp = (
   postcssResult: stylelint.PostcssResult,
   rootNode: stylelint.Problem["node"],
 ) => {
-  if (
-    isCustomProperty(prop) &&
-    prop.startsWith(prefix) &&
-    !tokenExists([prefix], prop)
-  ) {
+  if (prop.startsWith(prefix) && !tokenExists([prefix], prop)) {
     stylelint.utils.report({
       message: messages.propNotExist(rootNode),
       node: rootNode,
