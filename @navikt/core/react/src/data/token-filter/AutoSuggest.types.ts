@@ -7,7 +7,6 @@ interface AutoCompleteOption {
   value: string;
   label: string;
   tags?: string[];
-  filteringTags?: string[];
   description?: string;
 }
 

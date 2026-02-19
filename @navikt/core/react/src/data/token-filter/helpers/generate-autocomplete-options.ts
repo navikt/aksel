@@ -264,11 +264,7 @@ function createValueSuggestions(
     }
 
     /* Build search fields */
-    const searchFields = [
-      option.label,
-      ...(option.tags ?? []),
-      ...(option.filteringTags ?? []),
-    ];
+    const searchFields = [option.label, ...(option.tags ?? [])];
 
     if (!scopedProperty) {
       searchFields.push(option.property.propertyLabel);
@@ -297,7 +293,6 @@ function createValueSuggestions(
       ),
       label: option.label,
       tags: option.tags,
-      filteringTags: option.filteringTags,
     });
   }
 

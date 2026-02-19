@@ -121,7 +121,6 @@ function derrivedFilterState(
     value: option.value,
     label: option.label ?? option.value ?? "",
     tags: option.tags ?? [],
-    filteringTags: option.filteringTags ?? [],
   }));
 
   return { properties: [...propertyMap.values()], options: internalOptions };

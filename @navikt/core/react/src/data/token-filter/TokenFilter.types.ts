@@ -29,7 +29,6 @@ type QueryFilteringOption = {
   value: any;
   label?: string;
   tags?: string[];
-  filteringTags?: string[];
   disabled?: boolean;
 };
 
@@ -68,7 +67,6 @@ type ParsedOption = {
   value: any;
   label: string;
   tags: string[];
-  filteringTags: string[];
 };
 
 export type {

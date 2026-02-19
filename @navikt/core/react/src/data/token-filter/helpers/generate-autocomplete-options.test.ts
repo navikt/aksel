@@ -71,7 +71,6 @@ const parsedOptions: ParsedOption[] = allOptions.map((option) => {
     value: option.value,
     label: option.label || String(option.value),
     tags: option.tags || [],
-    filteringTags: option.filteringTags || [],
   };
 });
 
@@ -671,63 +670,6 @@ describe("generateAutoCompleteOptions v2", () => {
     });
   });
 
-  describe("filtering tags and metadata", () => {
-    test("should match filteringTags in search", () => {
-      const optionsWithFilteringTags: ParsedOption[] = [
-        {
-          property: parsedProperties[1],
-          value: "special-region",
-          label: "Special Region",
-          tags: [],
-          filteringTags: ["premium", "exclusive"],
-        },
-      ];
-
-      const queryState: ParsedText = {
-        step: "free-text",
-        value: "premium",
-      };
-
-      const result = generateAutoCompleteOptions(
-        queryState,
-        parsedProperties,
-        optionsWithFilteringTags,
-      );
-
-      const regionGroup = result.options.find(
-        (g) => g.label === "Region values",
-      );
-      expect(regionGroup?.options).toHaveLength(1);
-      expect((regionGroup?.options[0] as AutoCompleteOption).label).toBe(
-        "Special Region",
-      );
-    });
-
-    test("should preserve tags and filteringTags in suggestions", () => {
-      const queryState: ParsedText = {
-        step: "free-text",
-        value: "region",
-      };
-
-      const result = generateAutoCompleteOptions(
-        queryState,
-        parsedProperties,
-        parsedOptions,
-      );
-
-      const regionGroup = result.options.find(
-        (g) => g.label === "Region values",
-      );
-      const usEastOption = regionGroup?.options.find(
-        (o) => (o as AutoCompleteOption).label === "US East",
-      ) as AutoCompleteOption;
-
-      expect(usEastOption).toBeDefined();
-      expect(usEastOption.tags).toContain("north america");
-      expect(usEastOption.tags).toContain("usa");
-    });
-  });
-
   describe("properties with no groupValuesLabel", () => {
     test("should default to 'Values' when groupValuesLabel is empty", () => {
       const propertyWithoutGroupLabel: ParsedProperty = {
@@ -748,7 +690,6 @@ describe("generateAutoCompleteOptions v2", () => {
           value: "val1",
           label: "Value 1",
           tags: [],
-          filteringTags: [],
         },
       ];
 
@@ -777,7 +718,6 @@ describe("generateAutoCompleteOptions v2", () => {
           value: "orphaned",
           label: "Orphaned Value",
           tags: [],
-          filteringTags: [],
         },
         ...parsedOptions,
       ];
