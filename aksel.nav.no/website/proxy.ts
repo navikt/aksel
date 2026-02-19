@@ -1,6 +1,5 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { AVALIABLE_MARKDOWN_ROUTES } from "@/app/api/markdown/llm.config";
 import { sanityClient } from "@/sanity/client.server";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
@@ -83,10 +82,7 @@ export async function proxy(req: NextRequest) {
     }
 
     /* Check if the request is for a markdown version (.md extension) */
-    if (
-      pathname.endsWith(".md") &&
-      AVALIABLE_MARKDOWN_ROUTES.includes(pathname.slice(0, -3))
-    ) {
+    if (pathname.endsWith(".md")) {
       /* Rewrite to the markdown API route with the original path as a parameter */
       url.pathname = "/api/markdown";
 

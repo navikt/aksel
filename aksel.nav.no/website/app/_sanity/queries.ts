@@ -447,3 +447,17 @@ export {
   TOC_BY_SLUG_QUERY,
   DS_PROMO_QUERY,
 };
+
+/* MARKDOWN QUERIES */
+
+const ALL_KOMPONENTS_MARKDOWN_QUERY = defineQuery(
+  `*[_type == "komponent_artikkel" && slug.current == "komponenter/core/select"][0]{
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
+  }`,
+);
+
+export { ALL_KOMPONENTS_MARKDOWN_QUERY };
