@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.5.2
+
+### Patch Changes
+
+- Timeline: Adjust pin position ([#4664](https://github.com/navikt/aksel/pull/4664))
+
 ## 8.5.1
 
 ## 8.5.0

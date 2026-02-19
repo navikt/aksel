@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-stylelint",
-  "version": "8.5.1",
+  "version": "8.5.2",
   "type": "module",
   "engines": {
     "node": ">=18.12.0"
@@ -42,8 +42,8 @@
     "dev": "yarn watch:lint"
   },
   "devDependencies": {
-    "@navikt/ds-css": "^8.5.1",
-    "@navikt/ds-tokens": "^8.5.1",
+    "@navikt/ds-css": "^8.5.2",
+    "@navikt/ds-tokens": "^8.5.2",
     "concurrently": "9.2.1",
     "postcss-selector-parser": "^7.1.0",
     "postcss-value-parser": "^4.2.0",
