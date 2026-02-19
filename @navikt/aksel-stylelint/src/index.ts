@@ -1,8 +1,8 @@
-import { createPlugin } from "stylelint";
-import { rules } from "./rules";
+import stylelint from "stylelint";
+import { rules } from "./rules/index.js";
 
 const rulesPlugins = Object.keys(rules).map((ruleName) => {
-  return createPlugin(`${ruleName}`, rules[ruleName]);
+  return stylelint.createPlugin(`${ruleName}`, rules[ruleName]);
 });
 
-module.exports = rulesPlugins;
+export default rulesPlugins;
