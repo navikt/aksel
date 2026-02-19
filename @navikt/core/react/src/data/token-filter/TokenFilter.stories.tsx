@@ -115,6 +115,29 @@ export const WithOutGroups: Story = {
   },
 };
 
+export const MultipleTokens: Story = {
+  render: () => {
+    const [query, setQuery] = useState<any>({
+      tokens: [],
+      operation: "and",
+    });
+
+    console.log(query);
+
+    return (
+      <div>
+        <h2>TokenFilter without groups</h2>
+        <TokenFilter
+          query={query}
+          onChange={(newQuery) => setQuery(newQuery)}
+          filteringProperties={propertiesWithoutGroups}
+          filteringOptions={filteringOptions}
+        />
+      </div>
+    );
+  },
+};
+
 const propertiesWithOperators: QueryFilteringProperties = [
   {
     key: "status",
