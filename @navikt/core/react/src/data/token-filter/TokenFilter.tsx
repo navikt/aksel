@@ -71,7 +71,6 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           }}
         >
           <AutoSuggest
-            /* @ts-expect-error TODO: handle conversion better */
             options={autoCompleteOptions.options}
             onSelect={handleSelectOption}
           />
@@ -88,7 +87,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
             <li key={prop.key}>{prop.propertyLabel}</li>
           ))}
         </ul>
-        <pre>{JSON.stringify(queryState, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(queryState, null, 2)}</pre> */}
         <pre>{JSON.stringify(autoCompleteOptions, null, 2)}</pre>
       </div>
     );

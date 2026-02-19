@@ -23,11 +23,16 @@ import { matchesFilterText } from "./text-matching";
  *   Used by the UI to determine cursor position and input replacement.
  * - options: Grouped suggestions to display (properties, operators, or values).
  */
+type AutoCompleteResult = {
+  value: string;
+  options: OptionGroup<AutoCompleteOption>[];
+};
+
 function generateAutoCompleteOptions(
   queryState: ParsedText,
   filteringProperties: ParsedProperty[] = [],
   filteringOptions: ParsedOption[] = [],
-) {
+): AutoCompleteResult {
   /* State: Property and operator are matched, suggest values */
   if (queryState.step === "property") {
     const filterText = queryState.value || "";
@@ -168,7 +173,7 @@ function filterOperatorsByPrefix(
 function generatePropertySuggestions(
   filteringProperties: ParsedProperty[] = [],
   filterText = "",
-): OptionGroup<ParsedProperty>[] {
+): OptionGroup<AutoCompleteOption>[] {
   const filteredProperties: ParsedProperty[] = [];
 
   for (const property of filteringProperties) {
@@ -190,11 +195,23 @@ function generatePropertySuggestions(
     }
   }
 
-  return createGroups(
+  const groups = createGroups(
     filteredProperties,
     (property) => property.propertyGroup,
     "Properties",
   );
+
+  /**
+   * TODO: Unify data better here
+   * - descrition etc
+   */
+  return groups.map((group) => ({
+    label: group.label,
+    options: group.options.map((property) => ({
+      value: buildQueryString(property.propertyLabel, "", ""),
+      label: property.propertyLabel,
+    })),
+  }));
 }
 
 function generateOperatorSuggestions(
