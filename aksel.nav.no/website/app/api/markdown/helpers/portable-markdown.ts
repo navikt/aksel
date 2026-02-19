@@ -22,6 +22,18 @@ function portableMarkdown(input?: any[]) {
   }
   return portableTextToMarkdown(input, {
     unknownType: ({ value }) => `<!-- Unknown type: ${value._type} -->`,
+    marks: {
+      kbd: ({ children }) => `<kbd>${children}</kbd>`,
+      quote: ({ children }) => `"${children}"`,
+      internalLink: ({ children, value }) => {
+        const slug = value?.slug?.current;
+        if (!slug) {
+          return children;
+        }
+        const anchor = value?.anchor ? `#${value.anchor}` : "";
+        return `[${children}](https://aksel.nav.no/${slug}${anchor})`;
+      },
+    },
     types: {
       relatert_innhold: RelatertInnholdMarkdown,
       do_dont: DoDontMarkdown,
