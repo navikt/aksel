@@ -1,5 +1,5 @@
 import stylelint from "stylelint";
-import { getPackageVersion, isCustomProperty } from "../../utils.js";
+import { getPackageVersion } from "../../utils.js";
 
 const ruleName = "aksel/design-token-no-global-override";
 const prefix = "--ax-";
@@ -16,7 +16,7 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
 const ruleFunction: stylelint.Rule = () => {
   return (postcssRoot, postcssResult) => {
     postcssRoot.walkDecls((node) => {
-      if (isCustomProperty(node.prop) && node.prop.startsWith(prefix)) {
+      if (node.prop.startsWith(prefix)) {
         stylelint.utils.report({
           message: messages.propOverrideGlobal(node),
           node,

@@ -34,8 +34,8 @@
   ],
   "scripts": {
     "test": "yarn build && node --import tsx --test ./dist/**/*.test.js",
-    "copy-css": "node -e \"require('fs').copyFileSync('../core/css/dist/index.css','dist/index.css')\"",
-    "copy-tokens": "node -e \"require('fs').copyFileSync('legacy-tokens.json','dist/tokens.json')\"",
+    "copy-css": "node -e \"require('fs').copyFileSync('../core/css/dist/global/tokens.css','dist/global-tokens.css')\"",
+    "copy-tokens": "node -e \"require('fs').copyFileSync('legacy-tokens.json','dist/component-tokens.json')\"",
     "copy": "yarn copy-css && yarn copy-tokens",
     "build": "tsc -p . && concurrently \"yarn:copy-*\"",
     "watch:lint": "tsc --watch -p .",
