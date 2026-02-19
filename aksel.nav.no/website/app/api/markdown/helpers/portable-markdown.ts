@@ -48,7 +48,7 @@ function portableMarkdown(input?: any[]) {
       kode: KodeMarkdown,
       kode_eksempler: KodeEksemplerMarkdown,
       token_kategori: () =>
-        "Komponent-tokens ikke støttet fra versjon 8.0.0 og nyere.",
+        "Komponent-tokens ikke støttet fra versjon 8.0.0 og nyere. Bruk theming og `data-color`-attrbutten for å style komponenter basert på tokens.",
       exampletext_block: ExampleTextMarkdown,
       attachment: AttachmentMarkdown,
       compare_images: () => "",
