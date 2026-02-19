@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   plugins: ["."],
   rules: {
     "aksel/design-token-exists": true,

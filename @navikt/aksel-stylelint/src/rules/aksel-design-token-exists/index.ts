@@ -1,6 +1,10 @@
 import valueParser from "postcss-value-parser";
 import stylelint from "stylelint";
-import { getPackageVersion, isCustomProperty, tokenExists } from "../../utils";
+import {
+  getPackageVersion,
+  isCustomProperty,
+  tokenExists,
+} from "../../utils.js";
 
 const ruleName = "aksel/design-token-exists";
 const prefix = "--ax-";

@@ -1,5 +1,5 @@
 import stylelint from "stylelint";
-import { getPackageVersion, isCustomProperty } from "../../utils";
+import { getPackageVersion, isCustomProperty } from "../../utils.js";
 
 const ruleName = "aksel/design-token-no-global-override";
 const prefix = "--ax-";
