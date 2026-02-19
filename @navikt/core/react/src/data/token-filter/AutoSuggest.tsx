@@ -23,15 +23,9 @@ const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
                   <div key={option.value}>
                     <button
                       type="button"
-                      onClick={() =>
-                        /* @ts-expect-error TODO: We need to convert the data properly */
-                        onSelect(option.value ?? option.propertyKey)
-                      }
+                      onClick={() => onSelect(option.value)}
                     >
-                      <span>
-                        {/* @ts-expect-error TODO: We need to convert the data properly */}
-                        {option.value ?? option.label ?? option.propertyLabel}
-                      </span>
+                      <span>{option.label}</span>
                       {option.description && <span>{option.description}</span>}
                       {option.tags && option.tags.length > 0 && (
                         <div>
