@@ -11,7 +11,7 @@ function KodeMarkdown(data: ExtractPortableMarkdownComponentProps<"kode">) {
   const lang = code.language ?? "tsx";
 
   return buildMarkdown(
-    `\`\`\`${lang}${title ? ` title: ${title}` : ""}\n${code.code}\n\`\`\``,
+    `\`\`\`${lang}\n${title ? ` /* ${title} */` : ""}${code.code}\n\`\`\``,
   );
 }
 
