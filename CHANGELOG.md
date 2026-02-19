@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.6.0
+
+### @navikt/aksel-stylelint
+
+- Stylelint: Migrate plugin to ESM. Now requires stylelint v16 or above. ([#4662](https://github.com/navikt/aksel/pull/4662))
+
+### @navikt/ds-react
+
+- ToggleGroup: Fixed focus related issue introduced in v8.4.0. ([#4668](https://github.com/navikt/aksel/pull/4668))
+
 ## 8.5.2
 
 ### @navikt/ds-css
