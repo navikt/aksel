@@ -11,16 +11,16 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
-    "@astrojs/node": "^9.5.2",
+    "@astrojs/node": "^9.5.4",
     "@astrojs/react": "^4.4.2",
     "@navikt/aksel-icons": "file:./../../@navikt/aksel-icons",
     "@navikt/ds-css": "file:./../../@navikt/core/css",
     "@navikt/ds-react": "file:./../../@navikt/core/react",
-    "@types/react": "^19.2.8",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "astro": "^5.16.10",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "astro": "^5.17.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "typescript": "5.9.3"
   }
 }
