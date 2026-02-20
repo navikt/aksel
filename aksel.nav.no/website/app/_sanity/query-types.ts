@@ -11541,6 +11541,809 @@ export type SITEMAP_ARTICLES_BY_TYPE_QUERY_RESULT = Array<
     }
 >;
 
+// Source: ../app/_sanity/queries.ts
+// Variable: ALL_KOMPONENTS_MARKDOWN_QUERY
+// Query: *[_type == "komponent_artikkel" && slug.current == "komponenter/core/select"][0]{    ...,    content[]{      ...,      _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{...}  },},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"},    }  }
+export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = {
+  _id: string;
+  _type: "komponent_artikkel";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  updateInfo?: UpdateInfo;
+  publishedAt?: string;
+  heading?: string;
+  kategori?: "core" | "legacy" | "primitives" | "standalone";
+  sidebarindex?: number;
+  slug?: Slug;
+  status?: {
+    tag?: "beta" | "deprecated" | "new" | "ready";
+    unsafe?: boolean;
+    internal?: boolean;
+    bilde?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  hide_feedback?: boolean;
+  intro?: Intro_komponent;
+  content: Array<
+    | {
+        _key: string;
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "accordion";
+        list: Array<{
+          title?: string;
+          content: Array<
+            | {
+                _key: string;
+                _type: "accordion";
+                list?: Array<{
+                  title?: string;
+                  content?: Riktekst_standard;
+                  _type: "element";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "alert";
+                variant?: "error" | "info" | "success" | "warning";
+                heading?: string;
+                heading_level?: "h2" | "h3" | "h4";
+                body: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        reference?:
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
+                        anchor: string | null;
+                        _type: "internalLink";
+                        _key: string;
+                        slug: Slug | null;
+                      }
+                    | {
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }> | null;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                alt?: string;
+                caption?: string;
+                small?: boolean;
+                kilde?: Kilde;
+                dekorativt?: boolean;
+                border?: boolean;
+                background?: Color;
+                markDefs: null;
+                floating_text: null;
+              }
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs: Array<
+                  | {
+                      reference?:
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
+                      anchor: string | null;
+                      _type: "internalLink";
+                      _key: string;
+                      slug: Slug | null;
+                    }
+                  | {
+                      href?: string;
+                      _type: "link";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "do_dont";
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Do_dont_block
+                >;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "exampletext_block";
+                title?: string;
+                text?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "expansioncard";
+                heading?: string;
+                heading_level?: "h2" | "h3" | "h4";
+                description?: string;
+                body?: Riktekst_accordion;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "kode";
+                code?: Code;
+                title?: string;
+                markDefs: null;
+                ref: null;
+              }
+            | {
+                _key: string;
+                _type: "language";
+                body?: Riktekst_enkel;
+                language?: "en";
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "relatert_innhold";
+                title: string | null;
+                lenker: Array<{
+                  title?: string;
+                  intern?: boolean;
+                  intern_lenke: string | null;
+                  ekstern_link?: string;
+                  ekstern_domene?: boolean;
+                  _type: "lenke";
+                  _key: string;
+                }> | null;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "table";
+                rows?: Array<
+                  {
+                    _key: string;
+                  } & TableRow
+                >;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "tips";
+                body: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        reference?:
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
+                        anchor: string | null;
+                        _type: "internalLink";
+                        _key: string;
+                        slug: Slug | null;
+                      }
+                    | {
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }> | null;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "video";
+                webm: {
+                  url: string | null;
+                  extension: string | null;
+                };
+                fallback: {
+                  url: string | null;
+                  extension: string | null;
+                };
+                track: string | null;
+                alt?: string;
+                caption?: string;
+                transkripsjon?: string;
+                markDefs: null;
+              }
+          > | null;
+          _type: "element";
+          _key: string;
+        }> | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "alert";
+        variant?: "error" | "info" | "success" | "warning";
+        heading?: string;
+        heading_level?: "h2" | "h3" | "h4";
+        body: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: "bullet" | "number";
+          markDefs: Array<
+            | {
+                reference?:
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
+                anchor: string | null;
+                _type: "internalLink";
+                _key: string;
+                slug: Slug | null;
+              }
+            | {
+                href?: string;
+                _type: "link";
+                _key: string;
+              }
+          > | null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "bilde";
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        caption?: string;
+        small?: boolean;
+        kilde?: Kilde;
+        dekorativt?: boolean;
+        border?: boolean;
+        background?: Color;
+        markDefs: null;
+        floating_text: null;
+      }
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs: Array<
+          | {
+              reference?:
+                | Aksel_artikkelReference
+                | Aksel_bloggReference
+                | Aksel_prinsippReference
+                | Aksel_standaloneReference
+                | Ds_artikkelReference
+                | Komponent_artikkelReference
+                | Templates_artikkelReference;
+              anchor: string | null;
+              _type: "internalLink";
+              _key: string;
+              slug: Slug | null;
+            }
+          | {
+              href?: string;
+              _type: "link";
+              _key: string;
+            }
+        > | null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        _key: string;
+        _type: "do_dont";
+        blokker?: Array<
+          {
+            _key: string;
+          } & Do_dont_block
+        >;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "exampletext_block";
+        title?: string;
+        text?: string;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "expansioncard";
+        heading?: string;
+        heading_level?: "h2" | "h3" | "h4";
+        description?: string;
+        body: Array<
+          | {
+              _key: string;
+              _type: "alert";
+              variant?: "error" | "info" | "success" | "warning";
+              heading?: string;
+              heading_level?: "h2" | "h3" | "h4";
+              body: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "normal";
+                listItem?: "bullet" | "number";
+                markDefs: Array<
+                  | {
+                      reference?:
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
+                      anchor: string | null;
+                      _type: "internalLink";
+                      _key: string;
+                      slug: Slug | null;
+                    }
+                  | {
+                      href?: string;
+                      _type: "link";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }> | null;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "bilde";
+              asset?: SanityImageAssetReference;
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              caption?: string;
+              small?: boolean;
+              kilde?: Kilde;
+              dekorativt?: boolean;
+              border?: boolean;
+              background?: Color;
+              markDefs: null;
+              floating_text: null;
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<
+                | {
+                    reference?:
+                      | Aksel_artikkelReference
+                      | Aksel_bloggReference
+                      | Aksel_prinsippReference
+                      | Aksel_standaloneReference
+                      | Ds_artikkelReference
+                      | Komponent_artikkelReference
+                      | Templates_artikkelReference;
+                    anchor: string | null;
+                    _type: "internalLink";
+                    _key: string;
+                    slug: Slug | null;
+                  }
+                | {
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }
+              > | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "do_dont";
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Do_dont_block
+              >;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "exampletext_block";
+              title?: string;
+              text?: string;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "kode";
+              code?: Code;
+              title?: string;
+              markDefs: null;
+              ref: null;
+            }
+          | {
+              _key: string;
+              _type: "relatert_innhold";
+              title: string | null;
+              lenker: Array<{
+                title?: string;
+                intern?: boolean;
+                intern_lenke: string | null;
+                ekstern_link?: string;
+                ekstern_domene?: boolean;
+                _type: "lenke";
+                _key: string;
+              }> | null;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "table";
+              rows?: Array<
+                {
+                  _key: string;
+                } & TableRow
+              >;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "tips";
+              body: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "normal";
+                listItem?: "bullet" | "number";
+                markDefs: Array<
+                  | {
+                      reference?:
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
+                      anchor: string | null;
+                      _type: "internalLink";
+                      _key: string;
+                      slug: Slug | null;
+                    }
+                  | {
+                      href?: string;
+                      _type: "link";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }> | null;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "video";
+              webm: {
+                url: string | null;
+                extension: string | null;
+              };
+              fallback: {
+                url: string | null;
+                extension: string | null;
+              };
+              track: string | null;
+              alt?: string;
+              caption?: string;
+              transkripsjon?: string;
+              markDefs: null;
+            }
+        > | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "kode_eksempler";
+        title?: string;
+        dir: {
+          _id: string;
+          _type: "kode_eksempler_fil";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          variant?: "eksempler" | "templates";
+          filer?: Array<{
+            title?: string;
+            navn?: string;
+            kompaktInnhold?: string;
+            innhold?: string;
+            description?: string;
+            index?: number;
+            sandboxEnabled?: boolean;
+            sandboxBase64?: string;
+            _type: "fil";
+            _key: string;
+          }>;
+          metadata?: {
+            version?: number;
+            changelog?: Array<{
+              description?: string;
+              version?: number;
+              date?: string;
+              _type: "entry";
+              _key: string;
+            }>;
+          };
+        } | null;
+        compact?: boolean;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "kode";
+        code?: Code;
+        title?: string;
+        markDefs: null;
+        ref: null;
+      }
+    | {
+        _key: string;
+        _type: "language";
+        body: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: "bullet" | "number";
+          markDefs: Array<
+            | {
+                reference?:
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
+                anchor: string | null;
+                _type: "internalLink";
+                _key: string;
+                slug: Slug | null;
+              }
+            | {
+                href?: string;
+                _type: "link";
+                _key: string;
+              }
+          > | null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        language?: "en";
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "props_seksjon";
+        title?: string;
+        komponenter: Array<{
+          title?: string;
+          overridable?: boolean;
+          propref: {
+            _id: string;
+            _type: "ds_props";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            title?: string;
+            displayname?: string;
+            filepath?: string;
+            proplist?: Array<{
+              name?: string;
+              defaultValue?: string;
+              description?: string;
+              required?: boolean;
+              type?: string;
+              ref?: boolean;
+              return?: string;
+              example?: string;
+              params?: Array<string>;
+              deprecated?: string;
+              _type: "prop";
+              _key: string;
+            }>;
+          } | null;
+          _type: "komponent";
+          _key: string;
+        }> | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "relatert_innhold";
+        title: string | null;
+        lenker: Array<{
+          title?: string;
+          intern?: boolean;
+          intern_lenke: string | null;
+          ekstern_link?: string;
+          ekstern_domene?: boolean;
+          _type: "lenke";
+          _key: string;
+        }> | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "tabell_v2";
+        rows?: Array<
+          {
+            _key: string;
+          } & TableRow
+        >;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "tips";
+        body: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: "bullet" | "number";
+          markDefs: Array<
+            | {
+                reference?:
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
+                anchor: string | null;
+                _type: "internalLink";
+                _key: string;
+                slug: Slug | null;
+              }
+            | {
+                href?: string;
+                _type: "link";
+                _key: string;
+              }
+          > | null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "video";
+        webm: {
+          url: string | null;
+          extension: string | null;
+        };
+        fallback: {
+          url: string | null;
+          extension: string | null;
+        };
+        track: string | null;
+        alt?: string;
+        caption?: string;
+        transkripsjon?: string;
+        markDefs: null;
+      }
+  > | null;
+  kodepakker?: Array<string>;
+  figma_link?: string;
+  seo?: Seo;
+} | null;
+
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "aksel_ds_forside"][0] {\n    ds_forside_title,\n    ds_forside_ingress,\n    ds_getting_started[]{ description, icon, link, title },\n    ds_layers_overview,\n    ds_changelog { title, ingress },\n    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},\n    ds_support[]{description, link, title},\n    seo { image, meta }\n  }': DS_FRONT_PAGE_QUERY_RESULT;
@@ -11582,5 +12385,6 @@ declare module "@sanity/client" {
     '*[_id == $id][0]{\n      "id": _id,\n      "title": heading,\n      "slug": slug.current,\n    }': DOCUMENT_BY_ID_FOR_SLACK_QUERY_RESULT;
     '\n{\n      "frontpage": *[_type == "aksel_forside"][0]._updatedAt,\n      "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,\n      "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,\n}\n  ': SITEMAP_LANDINGPAGES_QUERY_RESULT;
     '\n  *[_type in $doctypes]{\n    "slug": slug.current,\n    _updatedAt\n  }\n  ': SITEMAP_ARTICLES_BY_TYPE_QUERY_RESULT;
+    '*[_type == "komponent_artikkel" && slug.current == "komponenter/core/select"][0]{\n    ...,\n    content[]{\n      ...,\n      \n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{...}\n  },\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n},\n\n    }\n  }': ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT;
   }
 }
