@@ -1,11 +1,12 @@
-import Komponenter from "./routes/komponenter";
+/* import Komponenter from "./routes/komponenter"; */
 
 type MarkdownRoute = () => Promise<string>;
 
 type Routes = Record<`/${string}`, MarkdownRoute>;
 
 const MARKDOWN_ROUTES: Routes = {
-  "/komponenter": Komponenter.markdown,
+  /* Uncomment to test route */
+  /* "/komponenter": Komponenter.markdown, */
 };
 
 const AVALIABLE_MARKDOWN_ROUTES = Object.keys(MARKDOWN_ROUTES);
