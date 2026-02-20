@@ -24839,6 +24839,7 @@ __metadata:
     "@next/eslint-plugin-next": "npm:16.1.2"
     "@playwright/test": "npm:^1.57.0"
     "@portabletext/block-tools": "npm:^5.0.1"
+    "@portabletext/markdown": "npm:^1.1.2"
     "@portabletext/react": "npm:^6.0.2"
     "@sanity/client": "npm:7.14.0"
     "@sanity/code-input": "npm:7.0.6"
