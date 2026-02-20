@@ -450,6 +450,7 @@ export {
 
 /* MARKDOWN QUERIES */
 
+/* TODO: Testing query for markdown. Will fetch all komponenter-routes when implemented */
 const ALL_KOMPONENTS_MARKDOWN_QUERY = defineQuery(
   `*[_type == "komponent_artikkel" && slug.current == "komponenter/core/select"][0]{
     ...,
