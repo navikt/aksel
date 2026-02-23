@@ -1,52 +1,54 @@
 import { describe, expect, test } from "vitest";
 import type {
-  ParsedProperty,
-  QueryFilteringProperty,
+  ExternalProperties,
+  InternalParsedTextState,
+  InternalPropertyDefinition,
 } from "../TokenFilter.types";
 import { parseQueryText } from "./parse-query-text";
-import type { ParsedText } from "./parse-query-text";
 
-const properties: QueryFilteringProperty[] = [
+const properties: ExternalProperties = [
   {
-    groupValuesLabel: "",
+    groupLabel: "",
     group: "testgroup",
     key: "status",
-    propertyLabel: "Status",
+    label: "Status",
   },
   {
-    groupValuesLabel: "",
+    groupLabel: "",
     group: "testgroup",
     key: "hostname",
-    propertyLabel: "Hostname",
+    label: "Hostname",
   },
   {
-    groupValuesLabel: "",
+    groupLabel: "",
     group: "testgroup",
     key: "instance-id",
-    propertyLabel: "Instance ID",
+    label: "Instance ID",
   },
   {
-    groupValuesLabel: "",
+    groupLabel: "",
     group: "testgroup",
     key: "region",
-    propertyLabel: "Region",
+    label: "Region",
   },
   {
-    groupValuesLabel: "",
+    groupLabel: "",
     group: "testgroup",
     key: "availability-zone",
-    propertyLabel: "Availability Zone",
+    label: "Availability Zone",
   },
 ];
 
-const parsedProperties: ParsedProperty[] = properties.map((prop) => ({
-  propertyKey: prop.key,
-  propertyLabel: prop.propertyLabel,
-  groupValuesLabel: prop.groupValuesLabel ?? "",
-  propertyGroup: prop.group ?? "",
-  externalProperty: prop,
-  operators: prop.operators ?? [],
-}));
+const parsedProperties: InternalPropertyDefinition[] = properties.map(
+  (prop) => ({
+    key: prop.key,
+    label: prop.label,
+    groupLabel: prop.groupLabel ?? "",
+    group: prop.group ?? "",
+    externalProperty: prop,
+    operators: prop.operators ?? [],
+  }),
+);
 
 describe("parseQueryText", () => {
   describe("value extraction", () => {
@@ -54,7 +56,7 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Status=active", parsedProperties);
       expect(result.step).toBe("property");
       const propertyResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "property" }
       >;
       expect(propertyResult.value).toBe("active");
@@ -64,7 +66,7 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Status=   active", parsedProperties);
       expect(result.step).toBe("property");
       const propertyResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "property" }
       >;
       expect(propertyResult.value).toBe("active");
@@ -74,7 +76,7 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Status=", parsedProperties);
       expect(result.step).toBe("property");
       const propertyResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "property" }
       >;
       expect(propertyResult.value).toBe("");
@@ -84,7 +86,7 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Status=   ", parsedProperties);
       expect(result.step).toBe("property");
       const propertyResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "property" }
       >;
       expect(propertyResult.value).toBe("");
@@ -97,7 +99,7 @@ describe("parseQueryText", () => {
       );
       expect(result.step).toBe("property");
       const propertyResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "property" }
       >;
       expect(propertyResult.value).toBe("active and running");
@@ -107,7 +109,7 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Instance ID=server-123", parsedProperties);
       expect(result.step).toBe("property");
       const propertyResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "property" }
       >;
       expect(propertyResult.value).toBe("server-123");
@@ -119,7 +121,7 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Status   =value", parsedProperties);
       expect(result.step).toBe("property");
       const propertyResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "property" }
       >;
       expect(propertyResult.operator).toBe("=");
@@ -130,7 +132,7 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Status >value", parsedProperties);
       expect(result.step).toBe("property");
       const propertyResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "property" }
       >;
       expect(propertyResult.operator).toBe(">");
@@ -141,7 +143,7 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Status   ", parsedProperties);
       expect(result.step).toBe("operator");
       const operatorResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "operator" }
       >;
       expect(operatorResult.operatorPrefix).toBe("");
@@ -163,7 +165,7 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Status", parsedProperties);
       expect(result.step).toBe("operator");
       const operatorResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "operator" }
       >;
       expect(operatorResult.operatorPrefix).toBe("");
@@ -173,10 +175,10 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Instance ID:value", parsedProperties);
       expect(result.step).toBe("property");
       const propertyResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "property" }
       >;
-      expect(propertyResult.property.propertyKey).toBe("instance-id");
+      expect(propertyResult.property.key).toBe("instance-id");
       expect(propertyResult.operator).toBe(":");
       expect(propertyResult.value).toBe("value");
     });
@@ -187,7 +189,7 @@ describe("parseQueryText", () => {
       const result = parseQueryText("Random text", parsedProperties);
       expect(result.step).toBe("free-text");
       const freeTextResult = result as Extract<
-        ParsedText,
+        InternalParsedTextState,
         { step: "free-text" }
       >;
       expect(freeTextResult.value).toBe("Random text");

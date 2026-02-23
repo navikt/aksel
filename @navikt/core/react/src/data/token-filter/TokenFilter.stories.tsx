@@ -1,7 +1,7 @@
 import { StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { TokenFilter } from "./TokenFilter";
-import type { QueryFilteringProperties } from "./TokenFilter.types";
+import type { ExternalProperties } from "./TokenFilter.types";
 
 export default {
   title: "ds-react/data/TokenFilter",
@@ -16,32 +16,32 @@ type Story = StoryObj<typeof TokenFilter>;
 const properties = [
   {
     key: "status",
-    propertyLabel: "Status",
-    groupValuesLabel: "Status value",
+    label: "Status",
+    groupLabel: "Status value",
     group: "Instance",
   },
   {
     key: "hostname",
-    propertyLabel: "Hostname",
-    groupValuesLabel: "Hostname value",
+    label: "Hostname",
+    groupLabel: "Hostname value",
     group: "Instance",
   },
   {
     key: "instanceid",
-    propertyLabel: "Instance ID",
-    groupValuesLabel: "Instance ID value",
+    label: "Instance ID",
+    groupLabel: "Instance ID value",
     group: "Instance",
   },
   {
     key: "region",
-    propertyLabel: "Region",
-    groupValuesLabel: "Region value",
+    label: "Region",
+    groupLabel: "Region value",
     group: "Location",
   },
   {
     key: "availability_zone",
-    propertyLabel: "Availability Zone",
-    groupValuesLabel: "Availability Zone value",
+    label: "Availability Zone",
+    groupLabel: "Availability Zone value",
     group: "Location",
   },
 ];
@@ -49,15 +49,15 @@ const properties = [
 const propertiesWithoutGroups = properties.map((prop) => {
   const copy: {
     key: string;
-    propertyLabel: string;
-    groupValuesLabel: string;
+    label: string;
+    groupLabel: string;
     group?: string;
   } = structuredClone(prop);
   delete copy.group;
   return copy;
 });
 
-const filteringOptions = [
+const propertyOptions = [
   { propertyKey: "status", value: "running" },
   { propertyKey: "status", value: "stopped" },
   { propertyKey: "status", value: "stopping" },
@@ -86,8 +86,8 @@ export const WithGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          filteringProperties={properties}
-          filteringOptions={filteringOptions}
+          propertyOptions={properties}
+          propertyDefinitions={propertyOptions}
         />
       </div>
     );
@@ -107,8 +107,8 @@ export const WithOutGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          filteringProperties={propertiesWithoutGroups}
-          filteringOptions={filteringOptions}
+          propertyOptions={propertiesWithoutGroups}
+          propertyDefinitions={propertyOptions}
         />
       </div>
     );
@@ -130,62 +130,62 @@ export const MultipleTokens: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          filteringProperties={propertiesWithoutGroups}
-          filteringOptions={filteringOptions}
+          propertyOptions={propertiesWithoutGroups}
+          propertyDefinitions={propertyOptions}
         />
       </div>
     );
   },
 };
 
-const propertiesWithOperators: QueryFilteringProperties = [
+const propertiesWithOperators: ExternalProperties = [
   {
     key: "status",
-    propertyLabel: "Status",
-    groupValuesLabel: "Status value",
+    label: "Status",
+    groupLabel: "Status value",
     group: "Instance",
     operators: [
-      { operator: "=", tokenType: "multiple" },
-      { operator: "!=", tokenType: "multiple" },
+      { operator: "=", type: "multiple" },
+      { operator: "!=", type: "multiple" },
     ],
   },
   {
     key: "hostname",
-    propertyLabel: "Hostname",
-    groupValuesLabel: "Hostname value",
+    label: "Hostname",
+    groupLabel: "Hostname value",
     group: "Instance",
     operators: ["=", "!="],
   },
   {
     key: "instanceid",
-    propertyLabel: "Instance ID",
-    groupValuesLabel: "Instance ID value",
+    label: "Instance ID",
+    groupLabel: "Instance ID value",
     group: "Instance",
     operators: ["=", "!="],
   },
   {
     key: "region",
-    propertyLabel: "Region",
-    groupValuesLabel: "Region value",
+    label: "Region",
+    groupLabel: "Region value",
     group: "Location",
     operators: [
-      { operator: "=", tokenType: "multiple" },
-      { operator: "!=", tokenType: "multiple" },
+      { operator: "=", type: "multiple" },
+      { operator: "!=", type: "multiple" },
     ],
   },
   {
     key: "availability_zone",
-    propertyLabel: "Availability Zone",
-    groupValuesLabel: "Availability Zone value",
+    label: "Availability Zone",
+    groupLabel: "Availability Zone value",
     group: "Location",
     operators: [
-      { operator: "=", tokenType: "multiple" },
-      { operator: "!=", tokenType: "multiple" },
-      { operator: ":", tokenType: "single" },
-      { operator: "!:", tokenType: "single" },
-      { operator: "!:", tokenType: "single" },
-      { operator: "!^", tokenType: "single" },
-      { operator: "^", tokenType: "single" },
+      { operator: "=", type: "multiple" },
+      { operator: "!=", type: "multiple" },
+      { operator: ":", type: "single" },
+      { operator: "!:", type: "single" },
+      { operator: "!:", type: "single" },
+      { operator: "!^", type: "single" },
+      { operator: "^", type: "single" },
     ],
   },
 ];
@@ -203,8 +203,8 @@ export const CustomOperators: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          filteringProperties={propertiesWithOperators}
-          filteringOptions={filteringOptions}
+          propertyOptions={propertiesWithOperators}
+          propertyDefinitions={propertyOptions}
         />
       </div>
     );
@@ -240,8 +240,8 @@ export const OperatorFiltering: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          filteringProperties={properties}
-          filteringOptions={filteringOptions}
+          propertyOptions={properties}
+          propertyDefinitions={propertyOptions}
         />
         <div style={{ marginTop: "20px" }}>
           <h3>Test scenarios:</h3>
@@ -264,22 +264,22 @@ export const OperatorFiltering: Story = {
 
 const mixProperties = [
   {
-    groupValuesLabel: "Status values",
+    groupLabel: "Status values",
     group: "Metadata",
     key: "status",
-    propertyLabel: "Status",
+    label: "Status",
   },
   {
-    groupValuesLabel: "Region values",
+    groupLabel: "Region values",
     group: "Location",
     key: "region",
-    propertyLabel: "Region",
+    label: "Region",
   },
   {
-    groupValuesLabel: "Type values",
+    groupLabel: "Type values",
     group: "",
     key: "type",
-    propertyLabel: "Type",
+    label: "Type",
   },
 ];
 
@@ -317,8 +317,8 @@ export const MixedGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          filteringProperties={mixProperties}
-          filteringOptions={[...statusOptions, ...regionOptions]}
+          propertyOptions={mixProperties}
+          propertyDefinitions={[...statusOptions, ...regionOptions]}
         />
       </div>
     );

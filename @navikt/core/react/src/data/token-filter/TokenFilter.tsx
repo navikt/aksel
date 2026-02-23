@@ -4,23 +4,23 @@ import { HStack } from "../../primitives/stack";
 import { cl } from "../../utils/helpers";
 import { AutoSuggest } from "./AutoSuggest";
 import type {
-  ParsedOption,
-  ParsedProperty,
-  QueryFilterOperation,
-  QueryFilterQuery,
-  QueryFilterToken,
-  QueryFilteringOptions,
-  QueryFilteringProperties,
+  ExternalProperties,
+  ExternalPropertyDefinitions,
+  ExternalQuery,
+  ExternalToken,
+  InternalPropertyDefinition,
+  InternalPropertyOption,
+  OperationT,
 } from "./TokenFilter.types";
 import { generateAutoCompleteOptions } from "./helpers/generate-autocomplete-options";
 import { parseQueryText } from "./helpers/parse-query-text";
 
 type TokenFilterProps = {
-  query: QueryFilterQuery;
-  onChange: (newQuery: QueryFilterQuery) => void;
+  query: ExternalQuery;
+  onChange: (newQuery: ExternalQuery) => void;
   className?: string;
-  filteringOptions: QueryFilteringOptions;
-  filteringProperties: QueryFilteringProperties;
+  propertyDefinitions: ExternalPropertyDefinitions;
+  propertyOptions: ExternalProperties;
 };
 
 /**
@@ -30,25 +30,23 @@ type TokenFilterProps = {
  */
 export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
   (
-    { query, className, filteringProperties, filteringOptions, onChange },
+    { query, className, propertyDefinitions, propertyOptions, onChange },
     ref,
   ) => {
     const [inputAnchor, setInputAnchor] = useState<HTMLInputElement | null>(
       null,
     );
-
     const [filterText, setFilterText] = useState<string>("");
-    const { properties, options } = derrivedFilterState(
-      filteringProperties,
-      filteringOptions,
-    );
 
-    const queryState = parseQueryText(filterText, properties);
+    const { parsedPropertyDefinitions, parsedPropertyOptions } =
+      derrivedFilterState(propertyDefinitions, propertyOptions);
+
+    const queryState = parseQueryText(filterText, parsedPropertyDefinitions);
 
     const autoCompleteOptions = generateAutoCompleteOptions(
       queryState,
-      properties,
-      options,
+      parsedPropertyDefinitions,
+      parsedPropertyOptions,
     );
 
     const [customOpen, setCustomOpen] = useState(false);
@@ -59,9 +57,9 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
     });
 
     const createToken = (newText: string) => {
-      const newQueryState = parseQueryText(newText, properties);
+      const newQueryState = parseQueryText(newText, parsedPropertyDefinitions);
 
-      let newToken: QueryFilterToken | null = null;
+      let newToken: ExternalToken | null = null;
 
       switch (newQueryState.step) {
         case "property": {
@@ -69,7 +67,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
             return;
           }
           newToken = {
-            propertyKey: newQueryState.property.propertyKey,
+            propertyKey: newQueryState.property.key,
             operator: newQueryState.operator,
             value: newQueryState.value,
           };
@@ -149,8 +147,8 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           })}
         </HStack>
         <ul>
-          {filteringProperties.map((prop) => (
-            <li key={prop.key}>{prop.propertyLabel}</li>
+          {propertyOptions.map((prop) => (
+            <li key={prop.key}>{prop.label}</li>
           ))}
         </ul>
         {/* <pre>{JSON.stringify(queryState, null, 2)}</pre> */}
@@ -161,20 +159,19 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
 );
 
 function derrivedFilterState(
-  filteringProperties: QueryFilteringProperties,
-  filteringOptions: QueryFilteringOptions,
-  /* query: QueryFilterQuery */
+  propertyDefinitions: ExternalPropertyDefinitions,
+  propteryOptions: ExternalProperties,
 ): {
-  properties: ParsedProperty[];
-  options: ParsedOption[];
+  parsedPropertyDefinitions: InternalPropertyDefinition[];
+  parsedPropertyOptions: InternalPropertyOption[];
 } {
   const propertyMap = new Map<string, any>();
 
-  for (const property of filteringProperties) {
+  for (const property of propteryOptions) {
     propertyMap.set(property.key, {
       propertyKey: property.key,
-      propertyLabel: property?.propertyLabel ?? "",
-      groupValuesLabel: property?.groupValuesLabel ?? "",
+      propertyLabel: property?.label ?? "",
+      groupValuesLabel: property?.groupLabel ?? "",
       propertyGroup: property?.group,
       operators: property?.operators ?? [],
       /* defaultOperator: property?.defaultOperator ?? '=', */
@@ -182,32 +179,35 @@ function derrivedFilterState(
     });
   }
 
-  const internalOptions = filteringOptions.map((option) => ({
+  const internalOptions = propertyDefinitions.map((option) => ({
     property: propertyMap.get(option.propertyKey) ?? null,
     value: option.value,
     label: option.label ?? option.value ?? "",
     tags: option.tags ?? [],
   }));
 
-  return { properties: [...propertyMap.values()], options: internalOptions };
+  return {
+    parsedPropertyDefinitions: [...propertyMap.values()],
+    parsedPropertyOptions: internalOptions,
+  };
 }
 
 function createActionHandlers({
   query,
   onChange,
 }: {
-  query: QueryFilterQuery;
-  onChange: (newQuery: QueryFilterQuery) => void;
+  query: ExternalQuery;
+  onChange: (newQuery: ExternalQuery) => void;
 }) {
-  const handleChange = (newQuery: QueryFilterQuery) => {
+  const handleChange = (newQuery: ExternalQuery) => {
     onChange(newQuery);
   };
 
-  const addToken = (token: QueryFilterToken) => {
+  const addToken = (token: ExternalToken) => {
     handleChange({ ...query, tokens: [...query.tokens, token] });
   };
 
-  const updateToken = (updateIndex: number, updatedToken: QueryFilterToken) => {
+  const updateToken = (updateIndex: number, updatedToken: ExternalToken) => {
     handleChange({
       ...query,
       tokens: query.tokens.map((token, index) =>
@@ -216,7 +216,7 @@ function createActionHandlers({
     });
   };
 
-  const updateOperation = (operation: QueryFilterOperation) => {
+  const updateOperation = (operation: OperationT) => {
     handleChange({ ...query, operation });
   };
 

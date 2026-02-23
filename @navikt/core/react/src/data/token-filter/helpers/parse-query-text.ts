@@ -1,4 +1,7 @@
-import type { ParsedProperty, QueryFilterOperator } from "../TokenFilter.types";
+import type {
+  InternalParsedTextState,
+  InternalPropertyDefinition,
+} from "../TokenFilter.types";
 import {
   QUERY_OPERATORS,
   matchFilteringProperty,
@@ -6,35 +9,14 @@ import {
   matchOperatorPrefix,
 } from "./operators";
 
-type ParsedText =
-  | {
-      /** User has typed property + complete operator + value (e.g., "Status != active") */
-      step: "property";
-      property: ParsedProperty;
-      operator: QueryFilterOperator;
-      value: string;
-    }
-  | {
-      /** User is typing the operator after property (e.g., "Status !") */
-      step: "operator";
-      property: ParsedProperty;
-      operatorPrefix: string;
-    }
-  | {
-      /** No property match; treat as free-text search */
-      step: "free-text";
-      value: string;
-      operator?: QueryFilterOperator;
-    };
-
 /**
  * Parse user input text to extract property, operator, and value components.
  * Handles partial input (e.g., user typing "Status !" to complete the operator).
  */
 function parseQueryText(
   filteringText: string,
-  filteringProperties: ParsedProperty[],
-): ParsedText {
+  filteringProperties: InternalPropertyDefinition[],
+): InternalParsedTextState {
   const property = matchFilteringProperty(filteringProperties, filteringText);
   if (!property) {
     const freeTextOperator = matchOperator(QUERY_OPERATORS, filteringText);
@@ -53,7 +35,7 @@ function parseQueryText(
   }
 
   const textWithoutProperty = filteringText
-    .substring(property.propertyLabel.length)
+    .substring(property.label.length)
     .trimStart();
 
   const operator = matchOperator(QUERY_OPERATORS, textWithoutProperty);
@@ -83,4 +65,3 @@ function parseQueryText(
 }
 
 export { parseQueryText };
-export type { ParsedText };

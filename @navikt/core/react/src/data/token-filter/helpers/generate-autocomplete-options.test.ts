@@ -1,51 +1,53 @@
 import { describe, expect, test } from "vitest";
 import type { AutoCompleteOption } from "../AutoSuggest.types";
 import type {
-  ParsedOption,
-  ParsedProperty,
-  QueryFilteringOption,
-  QueryFilteringProperty,
+  ExternalProperties,
+  ExternalPropertyDefinition,
+  InternalParsedTextState,
+  InternalPropertyDefinition,
+  InternalPropertyOption,
 } from "../TokenFilter.types";
 import { generateAutoCompleteOptions } from "./generate-autocomplete-options";
-import type { ParsedText } from "./parse-query-text";
 
-const properties: QueryFilteringProperty[] = [
+const properties: ExternalProperties = [
   {
-    groupValuesLabel: "Status values",
+    groupLabel: "Status values",
     group: "Metadata",
     key: "status",
-    propertyLabel: "Status",
+    label: "Status",
   },
   {
-    groupValuesLabel: "Region values",
+    groupLabel: "Region values",
     group: "Location",
     key: "region",
-    propertyLabel: "Region",
+    label: "Region",
   },
   {
-    groupValuesLabel: "Type values",
+    groupLabel: "Type values",
     group: "",
     key: "type",
-    propertyLabel: "Type",
+    label: "Type",
   },
 ];
 
-const parsedProperties: ParsedProperty[] = properties.map((prop) => ({
-  propertyKey: prop.key,
-  propertyLabel: prop.propertyLabel,
-  groupValuesLabel: prop.groupValuesLabel ?? "",
-  propertyGroup: prop.group ?? "",
-  externalProperty: prop,
-  operators: prop.operators ?? [],
-}));
+const parsedProperties: InternalPropertyDefinition[] = properties.map(
+  (prop) => ({
+    key: prop.key,
+    label: prop.label,
+    groupLabel: prop.groupLabel ?? "",
+    group: prop.group ?? "",
+    externalProperty: prop,
+    operators: prop.operators ?? [],
+  }),
+);
 
-const statusOptions: QueryFilteringOption[] = [
+const statusOptions: ExternalPropertyDefinition[] = [
   { propertyKey: "status", value: "active", label: "Active" },
   { propertyKey: "status", value: "pending", label: "Pending" },
   { propertyKey: "status", value: "inactive", label: "Inactive" },
 ];
 
-const regionOptions: QueryFilteringOption[] = [
+const regionOptions: ExternalPropertyDefinition[] = [
   {
     propertyKey: "region",
     value: "us-east-1",
@@ -60,12 +62,13 @@ const regionOptions: QueryFilteringOption[] = [
   },
 ];
 
-const allOptions: QueryFilteringOption[] = [...statusOptions, ...regionOptions];
+const allOptions: ExternalPropertyDefinition[] = [
+  ...statusOptions,
+  ...regionOptions,
+];
 
-const parsedOptions: ParsedOption[] = allOptions.map((option) => {
-  const property = parsedProperties.find(
-    (p) => p.propertyKey === option.propertyKey,
-  );
+const parsedOptions: InternalPropertyOption[] = allOptions.map((option) => {
+  const property = parsedProperties.find((p) => p.key === option.propertyKey);
   return {
     property: property || null,
     value: option.value,
@@ -77,7 +80,7 @@ const parsedOptions: ParsedOption[] = allOptions.map((option) => {
 describe("generateAutoCompleteOptions v2", () => {
   describe("free-text step", () => {
     test("empty value: should return all properties", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "",
       };
@@ -102,7 +105,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("non-empty value: should return filtered properties and values", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "statu",
       };
@@ -124,7 +127,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("non-empty value with operator '!:': should skip property suggestions", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "test",
         operator: "!:",
@@ -144,7 +147,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("non-empty value: case-insensitive filtering", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "STATU",
       };
@@ -166,7 +169,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("non-empty value: should match tags", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "europe",
       };
@@ -188,7 +191,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("non-empty value: whitespace-aware matching", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "us east",
       };
@@ -214,7 +217,7 @@ describe("generateAutoCompleteOptions v2", () => {
     const statusProperty = parsedProperties[0];
 
     test("empty value: should return all values for selected property", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "property",
         property: statusProperty,
         operator: "=",
@@ -234,7 +237,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("non-empty value: should return filtered values", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "property",
         property: statusProperty,
         operator: "=",
@@ -256,7 +259,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("should use specified operator in value suggestions", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "property",
         property: statusProperty,
         operator: "!=",
@@ -279,7 +282,7 @@ describe("generateAutoCompleteOptions v2", () => {
     const statusProperty = parsedProperties[0];
 
     test("empty prefix: should return all operators", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: statusProperty,
         operatorPrefix: "",
@@ -297,7 +300,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("operator prefix '!': should filter operators starting with '!'", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: statusProperty,
         operatorPrefix: "!",
@@ -319,7 +322,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("operator prefix '>=': should filter to single operator", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: statusProperty,
         operatorPrefix: ">=",
@@ -339,7 +342,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("invalid prefix: should return empty suggestions", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: statusProperty,
         operatorPrefix: "invalid",
@@ -358,7 +361,7 @@ describe("generateAutoCompleteOptions v2", () => {
 
   describe("operator filtering by description", () => {
     test("should filter operators by description text", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: parsedProperties[0],
         operatorPrefix: "",
@@ -379,7 +382,7 @@ describe("generateAutoCompleteOptions v2", () => {
 
   describe("empty groups filtering", () => {
     test("should not return empty option groups", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "nonexistent",
       };
@@ -398,7 +401,7 @@ describe("generateAutoCompleteOptions v2", () => {
 
   describe("value suggestions use correct operator", () => {
     test("free-text step uses '=' operator for all values", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "active",
       };
@@ -419,7 +422,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("property step uses selected operator", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "property",
         property: parsedProperties[0],
         operator: "!:",
@@ -440,20 +443,20 @@ describe("generateAutoCompleteOptions v2", () => {
 
   describe("custom operators configuration", () => {
     test("property with string-format operators should filter to only those operators", () => {
-      const propertyWithCustomOps: ParsedProperty = {
-        propertyKey: "custom",
-        propertyLabel: "Custom",
-        groupValuesLabel: "Custom values",
-        propertyGroup: "Custom",
+      const propertyWithCustomOps: InternalPropertyDefinition = {
+        key: "custom",
+        label: "Custom",
+        groupLabel: "Custom values",
+        group: "Custom",
         operators: ["=", "!="],
         externalProperty: {
           key: "custom",
-          propertyLabel: "Custom",
+          label: "Custom",
           operators: ["=", "!="],
         },
       };
 
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: propertyWithCustomOps,
         operatorPrefix: "",
@@ -473,26 +476,26 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("property with object-format operators should extract operator strings", () => {
-      const propertyWithObjectOps: ParsedProperty = {
-        propertyKey: "custom2",
-        propertyLabel: "Custom2",
-        groupValuesLabel: "Custom2 values",
-        propertyGroup: "Custom",
+      const propertyWithObjectOps: InternalPropertyDefinition = {
+        key: "custom2",
+        label: "Custom2",
+        groupLabel: "Custom2 values",
+        group: "Custom",
         operators: [
-          { operator: ":", tokenType: "single" },
-          { operator: "!:", tokenType: "single" },
+          { operator: ":", type: "single" },
+          { operator: "!:", type: "single" },
         ],
         externalProperty: {
           key: "custom2",
-          propertyLabel: "Custom2",
+          label: "Custom2",
           operators: [
-            { operator: ":", tokenType: "single" },
-            { operator: "!:", tokenType: "single" },
+            { operator: ":", type: "single" },
+            { operator: "!:", type: "single" },
           ],
         },
       };
 
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: propertyWithObjectOps,
         operatorPrefix: "",
@@ -512,28 +515,28 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("property with mixed operator formats should normalize and filter", () => {
-      const propertyWithMixedOps: ParsedProperty = {
-        propertyKey: "mixed",
-        propertyLabel: "Mixed",
-        groupValuesLabel: "Mixed values",
-        propertyGroup: "Custom",
+      const propertyWithMixedOps: InternalPropertyDefinition = {
+        key: "mixed",
+        label: "Mixed",
+        groupLabel: "Mixed values",
+        group: "Custom",
         operators: [
           "=",
-          { operator: "!=", tokenType: "single" },
+          { operator: "!=", type: "single" },
           "invalid-operator",
         ],
         externalProperty: {
           key: "mixed",
-          propertyLabel: "Mixed",
+          label: "Mixed",
           operators: [
             "=",
-            { operator: "!=", tokenType: "single" },
+            { operator: "!=", type: "single" },
             "invalid-operator",
           ],
         },
       };
 
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: propertyWithMixedOps,
         operatorPrefix: "",
@@ -555,7 +558,7 @@ describe("generateAutoCompleteOptions v2", () => {
 
   describe("edge case: operator without value", () => {
     test("should return empty options when operator is present but value is empty", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "",
         operator: "!=",
@@ -572,7 +575,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("should return empty options when operator-start input has no value", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "",
         operator: ":",
@@ -593,7 +596,7 @@ describe("generateAutoCompleteOptions v2", () => {
     test("scoped to property should only show values from that property", () => {
       const statusProperty = parsedProperties[0];
 
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "property",
         property: statusProperty,
         operator: "=",
@@ -615,7 +618,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("non-scoped (free-text) with empty value should show all properties", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "",
       };
@@ -635,7 +638,7 @@ describe("generateAutoCompleteOptions v2", () => {
     test("scoped property search should not include property labels in search fields", () => {
       const statusProperty = parsedProperties[0];
 
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "property",
         property: statusProperty,
         operator: "=",
@@ -652,7 +655,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("non-scoped search should include property labels in search", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "region",
       };
@@ -672,19 +675,19 @@ describe("generateAutoCompleteOptions v2", () => {
 
   describe("properties with no groupValuesLabel", () => {
     test("should default to 'Values' when groupValuesLabel is empty", () => {
-      const propertyWithoutGroupLabel: ParsedProperty = {
-        propertyKey: "nogroup",
-        propertyLabel: "NoGroup",
-        groupValuesLabel: "",
-        propertyGroup: "Custom",
+      const propertyWithoutGroupLabel: InternalPropertyDefinition = {
+        key: "nogroup",
+        label: "NoGroup",
+        groupLabel: "",
+        group: "Custom",
         operators: [],
         externalProperty: {
           key: "nogroup",
-          propertyLabel: "NoGroup",
+          label: "NoGroup",
         },
       };
 
-      const optionsForProperty: ParsedOption[] = [
+      const optionsForProperty: InternalPropertyOption[] = [
         {
           property: propertyWithoutGroupLabel,
           value: "val1",
@@ -693,7 +696,7 @@ describe("generateAutoCompleteOptions v2", () => {
         },
       ];
 
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "property",
         property: propertyWithoutGroupLabel,
         operator: "=",
@@ -712,7 +715,7 @@ describe("generateAutoCompleteOptions v2", () => {
 
   describe("null or missing property references", () => {
     test("should skip options with null property reference", () => {
-      const optionsWithNull: ParsedOption[] = [
+      const optionsWithNull: InternalPropertyOption[] = [
         {
           property: null,
           value: "orphaned",
@@ -722,7 +725,7 @@ describe("generateAutoCompleteOptions v2", () => {
         ...parsedOptions,
       ];
 
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "orphaned",
       };
@@ -740,7 +743,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("should skip properties with no data", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "free-text",
         value: "",
       };
@@ -753,7 +756,7 @@ describe("generateAutoCompleteOptions v2", () => {
 
   describe("operator prefix filtering", () => {
     test("prefix ':' should match ':' and '!:' operators", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: parsedProperties[0],
         operatorPrefix: ":",
@@ -773,7 +776,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("prefix '>' should match '>', '>=', '!>' operators", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: parsedProperties[0],
         operatorPrefix: ">",
@@ -796,7 +799,7 @@ describe("generateAutoCompleteOptions v2", () => {
 
   describe("buildQueryString integration", () => {
     test("query string should contain property, operator, and value", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "property",
         property: parsedProperties[0],
         operator: "=",
@@ -818,7 +821,7 @@ describe("generateAutoCompleteOptions v2", () => {
     });
 
     test("operator-step value should only contain property and operator", () => {
-      const queryState: ParsedText = {
+      const queryState: InternalParsedTextState = {
         step: "operator",
         property: parsedProperties[0],
         operatorPrefix: "=",

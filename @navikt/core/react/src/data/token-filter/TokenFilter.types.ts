@@ -1,4 +1,5 @@
-type QueryFilterOperator =
+/* External API */
+type OperatorT =
   | "<"
   | "<="
   | ">"
@@ -11,74 +12,99 @@ type QueryFilterOperator =
   | "!^"
   | (string & {});
 
-type QueryFilterOperation = "and" | "or";
+type OperationT = "and" | "or";
 
-type QueryFilterToken = {
+type ExternalToken = {
   propertyKey: string;
-  operator: QueryFilterOperator;
-  value: any;
+  operator: OperatorT;
+  value: string;
 };
 
-type QueryFilterQuery = {
-  tokens: QueryFilterToken[];
-  operation: QueryFilterOperation;
+type ExternalQuery = {
+  tokens: ExternalToken[];
+  operation: OperationT;
 };
 
-type QueryFilteringOption = {
+type ExternalPropertyDefinition = {
   propertyKey: string;
-  value: any;
+  value: string;
   label?: string;
   tags?: string[];
   disabled?: boolean;
 };
 
-type QueryFilteringOptions = QueryFilteringOption[];
+type ExternalPropertyDefinitions = ExternalPropertyDefinition[];
 
-type QueryFilteringOptionGroup = {
+type ExternalPropertyGroup = {
   label: string;
-  options: QueryFilteringOptions;
+  options: ExternalPropertyDefinitions;
 };
 
-type QueryFilteringScopedOperator =
+type ExternalPropertyOperator =
   | string
-  | { operator: string; tokenType: "single" | "multiple" };
+  | { operator: string; type: "single" | "multiple" };
 
-type QueryFilteringProperty = {
+type ExternalProperty = {
   key: string;
-  propertyLabel: string;
-  groupValuesLabel?: string;
+  label: string;
+  groupLabel?: string;
   group?: string;
-  operators?: QueryFilteringScopedOperator[];
+  operators?: ExternalPropertyOperator[];
 };
 
-type QueryFilteringProperties = QueryFilteringProperty[];
+type ExternalProperties = ExternalProperty[];
 
-type ParsedProperty = {
-  propertyKey: string;
-  propertyLabel: string;
-  groupValuesLabel: string;
-  propertyGroup: string;
-  operators: QueryFilteringScopedOperator[];
-  externalProperty: QueryFilteringProperty;
+export type {
+  ExternalProperties,
+  ExternalPropertyDefinition,
+  ExternalPropertyDefinitions,
+  ExternalPropertyGroup,
+  ExternalQuery,
+  ExternalToken,
+  OperationT,
+  OperatorT,
 };
 
-type ParsedOption = {
-  property: ParsedProperty | null;
-  value: any;
+/* Internal API */
+type InternalPropertyDefinition = {
+  key: string;
+  label: string;
+  groupLabel: string;
+  group: string;
+  operators: ExternalPropertyOperator[];
+  externalProperty: ExternalProperty;
+};
+
+type InternalPropertyOption = {
+  property: InternalPropertyDefinition | null;
+  value: string;
   label: string;
   tags: string[];
 };
 
+type InternalParsedTextState =
+  | {
+      /** User has typed property + complete operator + value (e.g., "Status != active") */
+      step: "property";
+      property: InternalPropertyDefinition;
+      operator: OperatorT;
+      value: string;
+    }
+  | {
+      /** User is typing the operator after property (e.g., "Status !") */
+      step: "operator";
+      property: InternalPropertyDefinition;
+      operatorPrefix: string;
+    }
+  | {
+      /** No property match; treat as free-text search */
+      step: "free-text";
+      value: string;
+      operator?: OperatorT;
+    };
+
 export type {
-  QueryFilterOperator,
-  QueryFilterQuery,
-  QueryFilteringOptions,
-  QueryFilteringProperty,
-  QueryFilterOperation,
-  QueryFilteringProperties,
-  ParsedProperty,
-  ParsedOption,
-  QueryFilteringOption,
-  QueryFilteringOptionGroup,
-  QueryFilterToken,
+  InternalPropertyDefinition,
+  InternalPropertyOption,
+  InternalParsedTextState,
 };

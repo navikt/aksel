@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { ParsedProperty } from "../TokenFilter.types";
+import type { InternalPropertyDefinition } from "../TokenFilter.types";
 import {
   QUERY_OPERATORS,
   matchFilteringProperty,
@@ -109,44 +109,44 @@ describe("matchOperator", () => {
 });
 
 describe("matchFilteringProperty", () => {
-  const properties: ParsedProperty[] = [
+  const properties: InternalPropertyDefinition[] = [
     {
-      propertyKey: "status",
-      propertyLabel: "Status",
-      groupValuesLabel: "",
-      propertyGroup: "testgroup",
+      key: "status",
+      label: "Status",
+      groupLabel: "",
+      group: "testgroup",
       externalProperty: {} as any,
       operators: [],
     },
     {
-      propertyKey: "hostname",
-      propertyLabel: "Hostname",
-      groupValuesLabel: "",
-      propertyGroup: "testgroup",
+      key: "hostname",
+      label: "Hostname",
+      groupLabel: "",
+      group: "testgroup",
       externalProperty: {} as any,
       operators: [],
     },
     {
-      propertyKey: "instance-id",
-      propertyLabel: "Instance ID",
-      groupValuesLabel: "",
-      propertyGroup: "testgroup",
+      key: "instance-id",
+      label: "Instance ID",
+      groupLabel: "",
+      group: "testgroup",
       externalProperty: {} as any,
       operators: [],
     },
     {
-      propertyKey: "region",
-      propertyLabel: "Region",
-      groupValuesLabel: "",
-      propertyGroup: "testgroup",
+      key: "region",
+      label: "Region",
+      groupLabel: "",
+      group: "testgroup",
       externalProperty: {} as any,
       operators: [],
     },
     {
-      propertyKey: "availability-zone",
-      propertyLabel: "Availability Zone",
-      groupValuesLabel: "",
-      propertyGroup: "testgroup",
+      key: "availability-zone",
+      label: "Availability Zone",
+      groupLabel: "",
+      group: "testgroup",
       externalProperty: {} as any,
       operators: [],
     },
@@ -154,27 +154,27 @@ describe("matchFilteringProperty", () => {
 
   test("should match a basic property", () => {
     const result = matchFilteringProperty(properties, "Status");
-    expect(result?.propertyKey).toBe("status");
+    expect(result?.key).toBe("status");
   });
 
   test("should match property case-insensitively", () => {
     const result = matchFilteringProperty(properties, "status");
-    expect(result?.propertyKey).toBe("status");
+    expect(result?.key).toBe("status");
   });
 
   test("should match property with mixed casing", () => {
     const result = matchFilteringProperty(properties, "sTaTuS");
-    expect(result?.propertyKey).toBe("status");
+    expect(result?.key).toBe("status");
   });
 
   test("should use longest matching property when properties overlap", () => {
     const result = matchFilteringProperty(properties, "Instance ID");
-    expect(result?.propertyKey).toBe("instance-id");
+    expect(result?.key).toBe("instance-id");
   });
 
   test("should prefer longest property: Availability Zone vs Zone", () => {
     const result = matchFilteringProperty(properties, "Availability Zone");
-    expect(result?.propertyKey).toBe("availability-zone");
+    expect(result?.key).toBe("availability-zone");
   });
 
   test("should return undefined when no property matches", () => {
@@ -189,12 +189,12 @@ describe("matchFilteringProperty", () => {
 
   test("should match property from partial input", () => {
     const result = matchFilteringProperty(properties, "Status=value");
-    expect(result?.propertyKey).toBe("status");
+    expect(result?.key).toBe("status");
   });
 
   test("should match property with spaces in label", () => {
     const result = matchFilteringProperty(properties, "Instance ID:value");
-    expect(result?.propertyKey).toBe("instance-id");
+    expect(result?.key).toBe("instance-id");
   });
 });
 

@@ -1,11 +1,11 @@
-import type { QueryFilterOperator } from "../TokenFilter.types";
+import type { OperatorT } from "../TokenFilter.types";
 
 /**
  * Human-readable labels for query filter operators.
  * Used for displaying operator descriptions in autocomplete suggestions.
  * TODO: Support i18n
  */
-const OPERATOR_LABELS: Record<QueryFilterOperator, string> = {
+const OPERATOR_LABELS: Record<OperatorT, string> = {
   ":": "contains",
   "!:": "does not contain",
   "=": "is",

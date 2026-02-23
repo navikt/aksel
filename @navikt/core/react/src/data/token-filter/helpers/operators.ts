@@ -1,11 +1,14 @@
-import type { ParsedProperty, QueryFilterOperator } from "../TokenFilter.types";
+import type {
+  InternalPropertyDefinition,
+  OperatorT,
+} from "../TokenFilter.types";
 
 /**
  * Operators ordered by specificity (longest/most specific first)
  * This ensures longer operators like ">=" and "<=" are matched
  * before shorter ones like ">" and "<"
  */
-const Operators: Record<QueryFilterOperator, null> = {
+const Operators: Record<OperatorT, null> = {
   ">=": null,
   "<=": null,
   "!=": null,
@@ -18,16 +21,16 @@ const Operators: Record<QueryFilterOperator, null> = {
   "<": null,
 };
 
-const QUERY_OPERATORS: QueryFilterOperator[] = Object.keys(Operators);
+const QUERY_OPERATORS: OperatorT[] = Object.keys(Operators);
 
 /**
  * Match an operator from the input text.
  * Operators are already sorted by specificity, so no re-sorting needed.
  */
 function matchOperator(
-  allowedOperators: QueryFilterOperator[],
+  allowedOperators: OperatorT[],
   text: string,
-): QueryFilterOperator | undefined {
+): OperatorT | undefined {
   return allowedOperators.find((operator) =>
     text.toLowerCase().startsWith(operator.toLowerCase()),
   );
@@ -42,18 +45,15 @@ function matchOperator(
  * Result: { propertyLabel: "Instance ID" }
  */
 function matchFilteringProperty(
-  filteringProperties: ParsedProperty[],
+  filteringProperties: InternalPropertyDefinition[],
   text: string,
-): ParsedProperty | undefined {
+): InternalPropertyDefinition | undefined {
   const lowerText = text.toLowerCase();
-  let bestMatch: ParsedProperty | undefined;
+  let bestMatch: InternalPropertyDefinition | undefined;
 
   for (const prop of filteringProperties) {
-    if (lowerText.startsWith(prop.propertyLabel.toLowerCase())) {
-      if (
-        !bestMatch ||
-        prop.propertyLabel.length > bestMatch.propertyLabel.length
-      ) {
+    if (lowerText.startsWith(prop.label.toLowerCase())) {
+      if (!bestMatch || prop.label.length > bestMatch.label.length) {
         bestMatch = prop;
       }
     }
@@ -67,7 +67,7 @@ function matchFilteringProperty(
  * Returns the prefix if valid, null otherwise.
  */
 function matchOperatorPrefix(
-  allowedOperators: QueryFilterOperator[],
+  allowedOperators: OperatorT[],
   filteringText: string,
 ): string | null {
   const trimmedText = filteringText.trim();
@@ -84,8 +84,8 @@ function matchOperatorPrefix(
 }
 
 export {
-  QUERY_OPERATORS,
-  matchOperator,
   matchFilteringProperty,
+  matchOperator,
   matchOperatorPrefix,
+  QUERY_OPERATORS,
 };
