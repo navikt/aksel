@@ -165,16 +165,15 @@ function derrivedFilterState(
   parsedPropertyDefinitions: InternalPropertyDefinition[];
   parsedPropertyOptions: InternalPropertyOption[];
 } {
-  const propertyMap = new Map<string, any>();
+  const propertyMap = new Map<string, InternalPropertyDefinition>();
 
   for (const property of propteryOptions) {
     propertyMap.set(property.key, {
-      propertyKey: property.key,
-      propertyLabel: property?.label ?? "",
-      groupValuesLabel: property?.groupLabel ?? "",
-      propertyGroup: property?.group,
+      key: property.key,
+      label: property?.label ?? "",
+      groupLabel: property?.groupLabel ?? "",
+      group: property?.group ?? "",
       operators: property?.operators ?? [],
-      /* defaultOperator: property?.defaultOperator ?? '=', */
       externalProperty: property,
     });
   }
