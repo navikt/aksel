@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 8.6.0
+
+### Patch Changes
+
+- ToggleGroup: Fixed focus related issue introduced in v8.4.0. ([#4668](https://github.com/navikt/aksel/pull/4668))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.6.0
+  - @navikt/aksel-icons@8.6.0
+
 ## 8.5.2
 
 ### Patch Changes

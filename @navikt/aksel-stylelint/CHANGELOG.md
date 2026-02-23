@@ -1,5 +1,11 @@
 # @navikt/aksel-stylelint
 
+## 8.6.0
+
+### Minor Changes
+
+- Stylelint: Migrate plugin to ESM. Now requires stylelint v16 or above. ([#4662](https://github.com/navikt/aksel/pull/4662))
+
 ## 8.5.2
 
 ## 8.5.1
