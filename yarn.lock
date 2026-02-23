@@ -8608,9 +8608,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/eslint-plugin@npm:1.6.7":
-  version: 1.6.7
-  resolution: "@vitest/eslint-plugin@npm:1.6.7"
+"@vitest/eslint-plugin@npm:1.6.9":
+  version: 1.6.9
+  resolution: "@vitest/eslint-plugin@npm:1.6.9"
   dependencies:
     "@typescript-eslint/scope-manager": "npm:^8.55.0"
     "@typescript-eslint/utils": "npm:^8.55.0"
@@ -8623,7 +8623,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 10/ba4d45fd359f63080ffe5fe5869a23730dac3f3c480ee2eefacacbcbea599b0256694a62c2dc4460d31f5886221d74a95de260531dc80c792b54d1676922502d
+  checksum: 10/b718dc25635bdd997b37302db7e1184f26dd872e99d139684b754e960acc2f2fdce9a48015a473bb7e9724e93cd6aa67939a6183e4dfa26417cb8c5b35dea2df
   languageName: node
   linkType: hard
 
@@ -9167,7 +9167,7 @@ __metadata:
     "@vitest/browser": "npm:4.0.18"
     "@vitest/browser-playwright": "npm:4.0.18"
     "@vitest/coverage-v8": "npm:4.0.18"
-    "@vitest/eslint-plugin": "npm:1.6.7"
+    "@vitest/eslint-plugin": "npm:1.6.9"
     chromatic: "npm:15.1.0"
     concurrently: "npm:9.2.1"
     cross-env: "npm:^10.0.0"
@@ -9180,7 +9180,7 @@ __metadata:
     eslint-plugin-storybook: "npm:^10.1.11"
     eslint-plugin-testing-library: "npm:^7.6.3"
     fast-glob: "npm:3.3.3"
-    globals: "npm:^16.3.0"
+    globals: "npm:^17.3.0"
     husky: "npm:^8.0.0"
     lint-staged: "npm:16.2.7"
     playwright: "npm:^1.57.0"
@@ -14057,10 +14057,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^16.3.0":
-  version: 16.5.0
-  resolution: "globals@npm:16.5.0"
-  checksum: 10/f9e8a2a13f50222c127030a619e283e7bbfe32966316bdde0715af1d15a7e40cb9c24ff52cad59671f97762ed8b515353c2f8674f560c63d9385f19ee26735a6
+"globals@npm:^17.3.0":
+  version: 17.3.0
+  resolution: "globals@npm:17.3.0"
+  checksum: 10/44ba2b7db93eb6a2531dfba09219845e21f2e724a4f400eb59518b180b7d5bcf7f65580530e3d3023d7dc2bdbacf5d265fd87c393f567deb9a2b0472b51c9d5e
   languageName: node
   linkType: hard
 
