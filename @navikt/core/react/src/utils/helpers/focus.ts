@@ -49,7 +49,9 @@ function focusElement(
   const previouslyFocusedElement = document.activeElement;
 
   cancelAnimationFrame(rafId);
-  const exec = () => element.focus({ preventScroll });
+  const exec = () => {
+    element.focus({ preventScroll });
+  };
 
   if (sync) {
     exec();
