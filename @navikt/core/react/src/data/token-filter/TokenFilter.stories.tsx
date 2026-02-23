@@ -214,7 +214,18 @@ export const CustomOperators: Story = {
 export const OperatorFiltering: Story = {
   render: () => {
     const [query, setQuery] = useState<any>({
-      tokens: [],
+      tokens: [
+        {
+          value: "stopped",
+          propertyKey: "status",
+          operator: "=",
+        },
+        {
+          value: "prod-1",
+          propertyKey: "hostname",
+          operator: "!=",
+        },
+      ],
       operation: "and",
     });
 

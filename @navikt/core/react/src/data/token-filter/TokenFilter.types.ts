@@ -80,4 +80,5 @@ export type {
   ParsedOption,
   QueryFilteringOption,
   QueryFilteringOptionGroup,
+  QueryFilterToken,
 };

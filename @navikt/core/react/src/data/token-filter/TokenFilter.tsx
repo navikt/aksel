@@ -1,11 +1,14 @@
 import React, { forwardRef, useState } from "react";
 import { Popover } from "../../popover";
+import { HStack } from "../../primitives/stack";
 import { cl } from "../../utils/helpers";
 import { AutoSuggest } from "./AutoSuggest";
 import type {
   ParsedOption,
   ParsedProperty,
+  QueryFilterOperation,
   QueryFilterQuery,
+  QueryFilterToken,
   QueryFilteringOptions,
   QueryFilteringProperties,
 } from "./TokenFilter.types";
@@ -26,7 +29,10 @@ type TokenFilterProps = {
  * - Handle token rendering and editing (e.g., show tokens for matched properties/operators/values, allow deleting tokens).
  */
 export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
-  ({ query, className, filteringProperties, filteringOptions }, ref) => {
+  (
+    { query, className, filteringProperties, filteringOptions, onChange },
+    ref,
+  ) => {
     const [inputAnchor, setInputAnchor] = useState<HTMLInputElement | null>(
       null,
     );
@@ -45,12 +51,50 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
       options,
     );
 
-    const handleSelectOption = (value: string) => {
-      setFilterText(value);
-      setCustomOpen(false);
+    const [customOpen, setCustomOpen] = useState(false);
+
+    const { addToken } = createActionHandlers({
+      query,
+      onChange,
+    });
+
+    const createToken = (newText: string) => {
+      const newQueryState = parseQueryText(newText, properties);
+
+      let newToken: QueryFilterToken | null = null;
+
+      switch (newQueryState.step) {
+        case "property": {
+          if (newQueryState.value === "") {
+            return;
+          }
+          newToken = {
+            propertyKey: newQueryState.property.propertyKey,
+            operator: newQueryState.operator,
+            value: newQueryState.value,
+          };
+          break;
+        }
+        case "free-text": {
+          break;
+        }
+        case "operator": {
+          break;
+        }
+      }
+      if (newToken) {
+        addToken(newToken);
+        setFilterText("");
+        setCustomOpen(false);
+      }
     };
 
-    const [customOpen, setCustomOpen] = useState(false);
+    const handleSelectOption = (value: string) => {
+      setFilterText(value);
+      createToken(value);
+    };
+
+    const isValid = queryState.step === "property" && queryState.value !== "";
 
     return (
       <div
@@ -66,6 +110,14 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
           onFocus={() => setCustomOpen(true)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              createToken(filterText);
+            }
+          }}
+          style={{
+            outline: isValid ? "1px solid green" : "1px solid transparent",
+          }}
         />
         <Popover
           anchorEl={inputAnchor}
@@ -80,13 +132,22 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
             onSelect={handleSelectOption}
           />
         </Popover>
-        {query.tokens.map((token, index) => {
-          return (
-            <div key={index} className="aksel-property-filter__token">
-              <strong>{token.propertyKey}</strong> {token.operator}{" "}
-            </div>
-          );
-        })}
+        <HStack marginBlock="space-8" gap="space-8">
+          {query.tokens.map((token, index) => {
+            return (
+              <React.Fragment
+                key={`${token.propertyKey}-${token.operator}-${token.value}-${index}`}
+              >
+                <button key={index}>
+                  {`${token.propertyKey} ${token.operator} ${token.value}`}
+                </button>
+                {index < query.tokens.length - 1 && (
+                  <span>{query.operation}</span>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </HStack>
         <ul>
           {filteringProperties.map((prop) => (
             <li key={prop.key}>{prop.propertyLabel}</li>
@@ -129,4 +190,52 @@ function derrivedFilterState(
   }));
 
   return { properties: [...propertyMap.values()], options: internalOptions };
+}
+
+function createActionHandlers({
+  query,
+  onChange,
+}: {
+  query: QueryFilterQuery;
+  onChange: (newQuery: QueryFilterQuery) => void;
+}) {
+  const handleChange = (newQuery: QueryFilterQuery) => {
+    onChange(newQuery);
+  };
+
+  const addToken = (token: QueryFilterToken) => {
+    handleChange({ ...query, tokens: [...query.tokens, token] });
+  };
+
+  const updateToken = (updateIndex: number, updatedToken: QueryFilterToken) => {
+    handleChange({
+      ...query,
+      tokens: query.tokens.map((token, index) =>
+        index === updateIndex ? updatedToken : token,
+      ),
+    });
+  };
+
+  const updateOperation = (operation: QueryFilterOperation) => {
+    handleChange({ ...query, operation });
+  };
+
+  const removeToken = (removeIndex: number) => {
+    handleChange({
+      ...query,
+      tokens: query.tokens.filter((_, index) => index !== removeIndex),
+    });
+  };
+
+  const removeAllTokens = () => {
+    handleChange({ ...query, tokens: [] });
+  };
+
+  return {
+    addToken,
+    updateToken,
+    updateOperation,
+    removeToken,
+    removeAllTokens,
+  };
 }
