@@ -75,7 +75,7 @@ function PropsSeksjonMarkdown(
 }
 
 function escapeCell(value: string): string {
-  return value.replace(/\|/g, "\\|").replace(/\n/g, " ");
+  return value.replace(/\\/g, "\\\\").replace(/\|/g, "\\|").replace(/\n/g, " ");
 }
 
 function extractElementType(refType: string): string | null {
