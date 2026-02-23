@@ -1,10 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Button } from "../button";
 import { useDialogContext } from "../dialog/root/DialogRoot.context";
 import { Modal } from "../modal";
 import { useModalContext } from "../modal/Modal.context";
 import { Popover } from "../popover";
+import { useClientLayoutEffect } from "../utils-external";
 import { cl } from "../utils/helpers";
+import { focusElement } from "../utils/helpers/focus";
 import { useMedia } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 import type { TFunction } from "../utils/i18n/i18n.types";
@@ -45,6 +47,7 @@ const DateDialog = ({
   const translateGlobal = useI18n("global", getGlobalTranslations(locale));
 
   const modalRef = useRef<HTMLDialogElement>(null);
+  const [popoverRef, setPopoverRef] = useState<HTMLDivElement | null>(null);
 
   const isInModal = useModalContext(false) !== undefined;
   const isInDialog = useDialogContext(false) !== undefined;
@@ -52,6 +55,26 @@ const DateDialog = ({
     useMedia("screen and (min-width: 768px)", true) &&
     !isInModal &&
     !isInDialog;
+
+  /* Handles mount focus */
+  useClientLayoutEffect(() => {
+    const container = popoverRef;
+
+    if (!container || !hideModal) {
+      return;
+    }
+
+    queueMicrotask(() => {
+      /* const elToFocus = getTabbableCandidates(container)[0]; */
+      const elToFocus = container;
+
+      elToFocus &&
+        focusElement(elToFocus, {
+          preventScroll: true,
+          sync: false,
+        });
+    });
+  }, [popoverRef, hideModal]);
 
   if (!open) {
     return null;
@@ -68,6 +91,10 @@ const DateDialog = ({
           "aksel-date": variant === "month",
         })}
         {...popoverProps}
+        ref={setPopoverRef}
+        tabIndex={-1}
+        role="dialog"
+        aria-labelledby="test-id-month-year-label"
       >
         {children}
       </Popover>

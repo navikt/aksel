@@ -160,8 +160,9 @@ export const useDatepicker = (
   const handleOpen = useCallback(
     (newOpen: boolean) => {
       setOpen(newOpen);
-      newOpen &&
+      if (newOpen) {
         setMonth(selectedDay ?? defaultSelected ?? defaultMonth ?? today);
+      }
     },
     [defaultMonth, defaultSelected, selectedDay, today],
   );

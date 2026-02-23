@@ -80,7 +80,12 @@ const DatePickerMonths = ({
     <div {...omit(rest, ["displayIndex"])}>
       <div className="aksel-date__caption">
         {captionLayout?.startsWith("dropdown") && (
-          <span aria-live="polite" aria-atomic="true" className="aksel-sr-only">
+          <span
+            aria-live="polite"
+            aria-atomic="true"
+            className="aksel-sr-only"
+            id="test-id-month-year-label"
+          >
             {format(calendarMonth.date, "LLLL y", { locale })}
           </span>
         )}

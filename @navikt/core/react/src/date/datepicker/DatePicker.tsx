@@ -145,6 +145,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           <div
             ref={mergedRef}
             className={cl("aksel-date__wrapper", wrapperClassName)}
+            data-datepicker-container
           >
             {children}
             <DateDialog
