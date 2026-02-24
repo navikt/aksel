@@ -1,15 +1,15 @@
-import { defineLive } from "next-sanity/live";
+import { type DefinedSanityFetchType, defineLive } from "next-sanity/live";
 import "server-only";
 import { readWithDraftToken } from "@/app/_sanity/token";
 import { client } from "./client";
 
-export const { sanityFetch: _sanityFetch, SanityLive } = defineLive({
+const { sanityFetch: _sanityFetch, SanityLive } = defineLive({
   client,
   serverToken: readWithDraftToken,
   browserToken: readWithDraftToken,
 });
 
-export const sanityFetch: typeof _sanityFetch = async (options) => {
+const sanityFetch: DefinedSanityFetchType = async (options) => {
   const result = await _sanityFetch(options);
 
   /**
@@ -25,3 +25,13 @@ export const sanityFetch: typeof _sanityFetch = async (options) => {
 
   return result;
 };
+
+const sanityMarkdownFetch: DefinedSanityFetchType = async (options) => {
+  return await sanityFetch({
+    ...options,
+    stega: false,
+    perspective: "published",
+  });
+};
+
+export { sanityFetch, sanityMarkdownFetch, SanityLive };
