@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import type { AutoCompleteOption } from "../AutoSuggest.types";
 import type {
-  ExternalProperties,
+  ExternalOption,
   ExternalPropertyDefinition,
   InternalParsedTextState,
   InternalPropertyDefinition,
@@ -9,7 +9,7 @@ import type {
 } from "../TokenFilter.types";
 import { generateAutoCompleteOptions } from "./generate-autocomplete-options";
 
-const properties: ExternalProperties = [
+const properties: ExternalPropertyDefinition[] = [
   {
     groupLabel: "Status values",
     group: "Metadata",
@@ -41,13 +41,13 @@ const parsedProperties: InternalPropertyDefinition[] = properties.map(
   }),
 );
 
-const statusOptions: ExternalPropertyDefinition[] = [
+const statusOptions: ExternalOption[] = [
   { propertyKey: "status", value: "active", label: "Active" },
   { propertyKey: "status", value: "pending", label: "Pending" },
   { propertyKey: "status", value: "inactive", label: "Inactive" },
 ];
 
-const regionOptions: ExternalPropertyDefinition[] = [
+const regionOptions: ExternalOption[] = [
   {
     propertyKey: "region",
     value: "us-east-1",
@@ -62,10 +62,7 @@ const regionOptions: ExternalPropertyDefinition[] = [
   },
 ];
 
-const allOptions: ExternalPropertyDefinition[] = [
-  ...statusOptions,
-  ...regionOptions,
-];
+const allOptions: ExternalOption[] = [...statusOptions, ...regionOptions];
 
 const parsedOptions: InternalPropertyOption[] = allOptions.map((option) => {
   const property = parsedProperties.find((p) => p.key === option.propertyKey);

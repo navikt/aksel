@@ -1,12 +1,12 @@
 import { describe, expect, test } from "vitest";
 import type {
-  ExternalProperties,
+  ExternalPropertyDefinition,
   InternalParsedTextState,
   InternalPropertyDefinition,
 } from "../TokenFilter.types";
 import { parseQueryText } from "./parse-query-text";
 
-const properties: ExternalProperties = [
+const properties: ExternalPropertyDefinition[] = [
   {
     groupLabel: "",
     group: "testgroup",

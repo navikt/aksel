@@ -25,7 +25,7 @@ type ExternalQuery = {
   operation: OperationT;
 };
 
-type ExternalPropertyDefinition = {
+type ExternalOption = {
   propertyKey: string;
   value: string;
   label?: string;
@@ -33,18 +33,14 @@ type ExternalPropertyDefinition = {
   disabled?: boolean;
 };
 
-type ExternalPropertyDefinitions = ExternalPropertyDefinition[];
+type ExternalOptions = ExternalOption[];
 
 type ExternalPropertyGroup = {
   label: string;
-  options: ExternalPropertyDefinitions;
+  options: ExternalOptions;
 };
 
-type ExternalPropertyOperator =
-  | string
-  | { operator: string; type: "single" | "multiple" };
-
-type ExternalProperty = {
+type ExternalPropertyDefinition = {
   key: string;
   label: string;
   groupLabel?: string;
@@ -52,10 +48,15 @@ type ExternalProperty = {
   operators?: ExternalPropertyOperator[];
 };
 
-type ExternalProperties = ExternalProperty[];
+type ExternalPropertyDefinitions = ExternalPropertyDefinition[];
+
+type ExternalPropertyOperator =
+  | string
+  | { operator: string; type: "single" | "multiple" };
 
 export type {
-  ExternalProperties,
+  ExternalOption,
+  ExternalOptions,
   ExternalPropertyDefinition,
   ExternalPropertyDefinitions,
   ExternalPropertyGroup,
@@ -72,7 +73,7 @@ type InternalPropertyDefinition = {
   groupLabel: string;
   group: string;
   operators: ExternalPropertyOperator[];
-  externalProperty: ExternalProperty;
+  externalProperty: ExternalPropertyDefinition;
 };
 
 type InternalPropertyOption = {

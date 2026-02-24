@@ -1,7 +1,7 @@
 import { StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { TokenFilter } from "./TokenFilter";
-import type { ExternalProperties } from "./TokenFilter.types";
+import type { ExternalPropertyDefinition } from "./TokenFilter.types";
 
 export default {
   title: "ds-react/data/TokenFilter",
@@ -86,8 +86,8 @@ export const WithGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          propertyOptions={properties}
-          propertyDefinitions={propertyOptions}
+          options={propertyOptions}
+          propertyDefinitions={properties}
         />
       </div>
     );
@@ -107,8 +107,8 @@ export const WithOutGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          propertyOptions={propertiesWithoutGroups}
-          propertyDefinitions={propertyOptions}
+          options={propertyOptions}
+          propertyDefinitions={propertiesWithoutGroups}
         />
       </div>
     );
@@ -130,15 +130,15 @@ export const MultipleTokens: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          propertyOptions={propertiesWithoutGroups}
-          propertyDefinitions={propertyOptions}
+          options={propertyOptions}
+          propertyDefinitions={propertiesWithoutGroups}
         />
       </div>
     );
   },
 };
 
-const propertiesWithOperators: ExternalProperties = [
+const propertiesWithOperators: ExternalPropertyDefinition[] = [
   {
     key: "status",
     label: "Status",
@@ -203,8 +203,8 @@ export const CustomOperators: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          propertyOptions={propertiesWithOperators}
-          propertyDefinitions={propertyOptions}
+          options={propertyOptions}
+          propertyDefinitions={propertiesWithOperators}
         />
       </div>
     );
@@ -240,8 +240,8 @@ export const OperatorFiltering: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          propertyOptions={properties}
-          propertyDefinitions={propertyOptions}
+          options={propertyOptions}
+          propertyDefinitions={properties}
         />
         <div style={{ marginTop: "20px" }}>
           <h3>Test scenarios:</h3>
@@ -317,8 +317,8 @@ export const MixedGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          propertyOptions={mixProperties}
-          propertyDefinitions={[...statusOptions, ...regionOptions]}
+          options={[...statusOptions, ...regionOptions]}
+          propertyDefinitions={mixProperties}
         />
       </div>
     );

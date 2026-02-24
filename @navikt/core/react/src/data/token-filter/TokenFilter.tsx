@@ -4,7 +4,7 @@ import { HStack } from "../../primitives/stack";
 import { cl } from "../../utils/helpers";
 import { AutoSuggest } from "./AutoSuggest";
 import type {
-  ExternalProperties,
+  ExternalOptions,
   ExternalPropertyDefinitions,
   ExternalQuery,
   ExternalToken,
@@ -20,7 +20,7 @@ type TokenFilterProps = {
   onChange: (newQuery: ExternalQuery) => void;
   className?: string;
   propertyDefinitions: ExternalPropertyDefinitions;
-  propertyOptions: ExternalProperties;
+  options: ExternalOptions;
 };
 
 /**
@@ -29,17 +29,14 @@ type TokenFilterProps = {
  * - Handle token rendering and editing (e.g., show tokens for matched properties/operators/values, allow deleting tokens).
  */
 export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
-  (
-    { query, className, propertyDefinitions, propertyOptions, onChange },
-    ref,
-  ) => {
+  ({ query, className, propertyDefinitions, options, onChange }, ref) => {
     const [inputAnchor, setInputAnchor] = useState<HTMLInputElement | null>(
       null,
     );
     const [filterText, setFilterText] = useState<string>("");
 
     const { parsedPropertyDefinitions, parsedPropertyOptions } =
-      derrivedFilterState(propertyDefinitions, propertyOptions);
+      derrivedFilterState(propertyDefinitions, options);
 
     const queryState = parseQueryText(filterText, parsedPropertyDefinitions);
 
@@ -147,8 +144,8 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           })}
         </HStack>
         <ul>
-          {propertyOptions.map((prop) => (
-            <li key={prop.key}>{prop.label}</li>
+          {options.map((prop) => (
+            <li key={prop.value}>{prop.label}</li>
           ))}
         </ul>
         {/* <pre>{JSON.stringify(queryState, null, 2)}</pre> */}
@@ -160,14 +157,14 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
 
 function derrivedFilterState(
   propertyDefinitions: ExternalPropertyDefinitions,
-  propteryOptions: ExternalProperties,
+  propteryOptions: ExternalOptions,
 ): {
   parsedPropertyDefinitions: InternalPropertyDefinition[];
   parsedPropertyOptions: InternalPropertyOption[];
 } {
   const propertyMap = new Map<string, InternalPropertyDefinition>();
 
-  for (const property of propteryOptions) {
+  for (const property of propertyDefinitions) {
     propertyMap.set(property.key, {
       key: property.key,
       label: property?.label ?? "",
@@ -178,12 +175,16 @@ function derrivedFilterState(
     });
   }
 
-  const internalOptions = propertyDefinitions.map((option) => ({
-    property: propertyMap.get(option.propertyKey) ?? null,
-    value: option.value,
-    label: option.label ?? option.value ?? "",
-    tags: option.tags ?? [],
-  }));
+  const internalOptions: InternalPropertyOption[] = [];
+
+  for (const option of propteryOptions) {
+    internalOptions.push({
+      property: propertyMap.get(option.propertyKey) ?? null,
+      value: option.value,
+      label: option.label ?? option.value ?? "",
+      tags: option.tags ?? [],
+    });
+  }
 
   return {
     parsedPropertyDefinitions: [...propertyMap.values()],
