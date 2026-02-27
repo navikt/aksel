@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { useThemeInternal } from "../../theme/Theme";
-import { BodyLong, BodyShort } from "../../typography";
+import { BodyLong } from "../../typography";
 import { type OverridableComponent, useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
@@ -75,9 +75,9 @@ export const InlineMessage: OverridableComponent<
       >
         <InlineMessageIcon status={status} />
         {status && (
-          <BodyShort id={statusId} aria-hidden visuallyHidden>
+          <BodyLong id={statusId} aria-hidden visuallyHidden>
             {`${translate(status)}: `}
-          </BodyShort>
+          </BodyLong>
         )}
         {/** biome-ignore lint/a11y/useAriaPropsSupportedByRole: Testing shows that this works. */}
         <span
