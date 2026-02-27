@@ -255,8 +255,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     );
 
     const onChangeHandler = useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = event.target.value;
+      (event: React.InputEvent<HTMLInputElement>) => {
+        const newValue = event.currentTarget.value;
         if (newValue && newValue !== "") {
           toggleIsListOpen(true);
         } else if (filteredOptions.length === 0) {
