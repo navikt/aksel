@@ -4452,7 +4452,7 @@ __metadata:
     "@figma/rest-api-spec": "npm:^0.35.0"
     "@svgr/cli": "npm:8.1.0"
     "@types/js-yaml": "npm:^4.0.9"
-    "@types/react": "npm:19.2.9"
+    "@types/react": "npm:19.2.14"
     adm-zip: "npm:^0.5.10"
     concurrently: "npm:9.2.1"
     copyfiles: "npm:^2.4.1"
@@ -4462,7 +4462,7 @@ __metadata:
     js-yaml: "npm:^4.1.1"
     lodash: "npm:4.17.23"
     prettier: "npm:3.8.1"
-    react: "npm:19.2.3"
+    react: "npm:19.2.4"
     rehype-parse: "npm:9.0.1"
     tsc-alias: "npm:1.8.16"
     tsx: "npm:^4.20.6"
@@ -4541,7 +4541,7 @@ __metadata:
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/user-event": "npm:^14.5.2"
     "@types/jscodeshift": "npm:^0.11.11"
-    "@types/react": "npm:19.2.9"
+    "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
     aksel: "workspace:^"
     concurrently: "npm:9.2.1"
@@ -4550,9 +4550,9 @@ __metadata:
     fast-glob: "npm:3.3.3"
     jscodeshift: "npm:17.3.0"
     jsdom: "npm:27.1.0"
-    react: "npm:19.2.3"
+    react: "npm:19.2.4"
     react-day-picker: "npm:9.7.0"
-    react-dom: "npm:19.2.3"
+    react-dom: "npm:19.2.4"
     react-router: "npm:^7.13.0"
     rimraf: "npm:6.1.2"
     swr: "npm:^2.3.6"
@@ -7983,21 +7983,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.0 || ^19.0.0":
+"@types/react@npm:*, @types/react@npm:19.2.14, @types/react@npm:^18.0.0 || ^19.0.0":
   version: 19.2.14
   resolution: "@types/react@npm:19.2.14"
   dependencies:
     csstype: "npm:^3.2.2"
   checksum: 10/fbff239089ee64b6bd9b00543594db498278b06de527ef1b0f71bb0eb09cc4445a71b5dd3c0d3d0257255c4eed94406be40a74ad4a987ade8a8d5dd65c82bc5f
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:19.2.9":
-  version: 19.2.9
-  resolution: "@types/react@npm:19.2.9"
-  dependencies:
-    csstype: "npm:^3.2.2"
-  checksum: 10/580a4acf91cb596edfcf280e3d94380bd5bc675fdce257787432cc77ab67440374fd17a1abde869f3bd47ec1705bf2d66e442a9e9e371603f628e34f9d5790a6
   languageName: node
   linkType: hard
 
@@ -9093,12 +9084,12 @@ __metadata:
     "@navikt/ds-react": "npm:*"
     "@svgr/core": "npm:^8.1.0"
     "@types/node": "npm:^24.10.9"
-    "@types/react": "npm:19.2.9"
+    "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
     "@vitejs/plugin-react": "npm:^5.1.0"
     fuse.js: "npm:^7.0.0"
-    react: "npm:19.2.3"
-    react-dom: "npm:19.2.3"
+    react: "npm:19.2.4"
+    react-dom: "npm:19.2.4"
     typescript: "npm:5.9.3"
     vite: "npm:^7.2.4"
     vite-plugin-singlefile: "npm:^2.3.0"
@@ -9133,7 +9124,7 @@ __metadata:
     "@svitejs/changesets-changelog-github-compact": "npm:^1.1.0"
     "@tanstack/react-table": "npm:8.21.3"
     "@trivago/prettier-plugin-sort-imports": "npm:^6.0.2"
-    "@types/react": "npm:19.2.9"
+    "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
     "@vitest/browser": "npm:4.0.18"
     "@vitest/browser-playwright": "npm:4.0.18"
@@ -9156,9 +9147,9 @@ __metadata:
     lint-staged: "npm:16.2.7"
     playwright: "npm:^1.57.0"
     prettier: "npm:3.8.1"
-    react: "npm:19.2.3"
+    react: "npm:19.2.4"
     react-docgen-typescript: "npm:2.2.2"
-    react-dom: "npm:19.2.3"
+    react-dom: "npm:19.2.4"
     storybook: "npm:^10.2.10"
     storybook-addon-pseudo-states: "npm:^10.2.10"
     stylelint: "npm:^17.2.0"
@@ -19302,7 +19293,7 @@ __metadata:
     css-loader: "npm:^6.8.1"
     fast-glob: "npm:3.3.3"
     playroom: "npm:^1.0.5"
-    react: "npm:19.2.3"
+    react: "npm:19.2.4"
     rimraf: "npm:6.1.2"
     style-loader: "npm:^3.3.3"
     tsx: "npm:^4.20.6"
@@ -20032,18 +20023,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.2.3":
-  version: 19.2.3
-  resolution: "react-dom@npm:19.2.3"
-  dependencies:
-    scheduler: "npm:^0.27.0"
-  peerDependencies:
-    react: ^19.2.3
-  checksum: 10/5780f6d4c8e8ece09f82c5500ba2d55e01c30b5273f9281734d7d3b65013cd1fa52ec4e4436e5248c0a9e5bc340836044051168bbad8d7eac4d33ee6c2a867a1
-  languageName: node
-  linkType: hard
-
-"react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0":
+"react-dom@npm:19.2.4, react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0":
   version: 19.2.4
   resolution: "react-dom@npm:19.2.4"
   dependencies:
@@ -20346,14 +20326,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.2.3":
-  version: 19.2.3
-  resolution: "react@npm:19.2.3"
-  checksum: 10/d16b7f35c0d35a56f63d9d1693819762e4abc479c57dd6310298920bed3820fcec7e17a99d44983416d8f5049143ea45b8005d3ab8324bae8973224400502b08
-  languageName: node
-  linkType: hard
-
-"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0":
+"react@npm:19.2.4, react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0":
   version: 19.2.4
   resolution: "react@npm:19.2.4"
   checksum: 10/18179fe217f67eb2d0bc61cd04e7ad3c282ea09a1dface7eacd71816f62609f4bbf566c447c704335284deb8397b00bca084e0cd60e6f437279a7498e2d0bfe0
@@ -24803,7 +24776,7 @@ __metadata:
     "@types/jscodeshift": "npm:^0.11.11"
     "@types/jsdom": "npm:^27.0.0"
     "@types/lodash": "npm:4.17.20"
-    "@types/react": "npm:19.2.9"
+    "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
     "@types/showdown": "npm:^2.0.6"
     "@types/umami": "npm:^2.10.0"
@@ -24829,8 +24802,8 @@ __metadata:
     pino: "npm:^8.21.0"
     pino-pretty: "npm:^10.0.0"
     prism-react-renderer: "npm:^2.0.0"
-    react: "npm:19.2.3"
-    react-dom: "npm:19.2.3"
+    react: "npm:19.2.4"
+    react-dom: "npm:19.2.4"
     react-hook-form: "npm:^7.53.0"
     react-markdown: "npm:^9.0.1"
     react-responsive-masonry: "npm:2.2.0"
