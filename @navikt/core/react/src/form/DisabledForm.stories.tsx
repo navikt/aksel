@@ -14,8 +14,35 @@ import { Textarea } from "./textarea";
 import { TextField } from "./textfield";
 
 function DisabledFormElements() {
+  const [opacity, setOpacity] = React.useState(() => {
+    const tokenvalue = getComputedStyle(document.documentElement)
+      .getPropertyValue("--ax-opacity-disabled")
+      .trim();
+    return tokenvalue;
+  });
+
   return (
     <VStack gap="space-8" style={{ maxWidth: 600, padding: "2rem" }}>
+      <div>
+        <label htmlFor="opacity">{`Opacity for disabled elements: ${opacity}`}</label>
+      </div>
+      <input
+        type="range"
+        id="opacity"
+        name="opacity"
+        min="0"
+        max="1"
+        step="0.1"
+        value={opacity}
+        onChange={(e) => {
+          const newOpacity = e.target.value;
+          setOpacity(newOpacity);
+          document.documentElement.style.setProperty(
+            "--ax-opacity-disabled",
+            newOpacity,
+          );
+        }}
+      />
       <HStack gap="space-4">
         <Button disabled type="submit" variant="primary">
           Button
