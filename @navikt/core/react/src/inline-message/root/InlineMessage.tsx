@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { useThemeInternal } from "../../theme/Theme";
-import { BodyShort } from "../../typography";
+import { BodyLong, BodyShort } from "../../typography";
 import { type OverridableComponent, useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
@@ -64,7 +64,7 @@ export const InlineMessage: OverridableComponent<
     const contentId = useId();
 
     return (
-      <BodyShort
+      <BodyLong
         ref={forwardedRef}
         className={cl("aksel-inline-message", className)}
         data-color={status === "error" ? "danger" : status}
@@ -87,7 +87,7 @@ export const InlineMessage: OverridableComponent<
         >
           {children}
         </span>
-      </BodyShort>
+      </BodyLong>
     );
   },
 );
