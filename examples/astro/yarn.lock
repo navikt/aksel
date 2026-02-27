@@ -1146,34 +1146,34 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:./../../@navikt/aksel-icons::locator=irregular-iron%40workspace%3A.":
-  version: 8.5.2
-  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=4e8629&locator=irregular-iron%40workspace%3A."
-  checksum: 10/48ab328e02372818a29070da6359f7f18a24a94bfd97971e2394defc64bd5a08c502449ab173f550a0171c6690eab7cf5236f24e662076f13207916e0d281537
+  version: 8.6.0
+  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=a3bbe3&locator=irregular-iron%40workspace%3A."
+  checksum: 10/3a7d25493b3ce4dc726c525c650739e35cab2137884ae2eaa1580c895bf3e18114195a41542ae28e7f9e6b5e68cc09966032fef2686e09dc5b0ff43a950b54ab
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^8.5.2":
-  version: 8.5.2
-  resolution: "@navikt/aksel-icons@npm:8.5.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.5.2%2F20ae4441783ab8766b26beb0aa02e1b9ce9a8425"
-  checksum: 10/4da2668021706e11a67aebe1f76e7d477cf9c8bae03149204d1a14118de92e2e744a718ebccfb30b8ea5b0e0ce053f82b027542e28fa1e07ff74f4cf88d00545
+"@navikt/aksel-icons@npm:^8.6.0":
+  version: 8.6.0
+  resolution: "@navikt/aksel-icons@npm:8.6.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.6.0%2Fff360cbe68f878b6e8deb59c19a23aa30eacab9e"
+  checksum: 10/bb1052e82447fad574f8648e747a5bfb8c1aeb2a9aa7189c2eaa5cc398170d1140b9913fbdcfcc9fde9a16460268616b2d82e3abf27456df62e19378b0902cf6
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=irregular-iron%40workspace%3A.":
-  version: 8.5.2
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=2edd85&locator=irregular-iron%40workspace%3A."
-  checksum: 10/7192b4f951b92f2e14ef2a1739173c9f922878f559c6982af38159303c493d4f5555d417e12be3f6db30675c637818a37e2581c5d4a4caaccfa2d0f58101995f
+  version: 8.6.0
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=81b6bb&locator=irregular-iron%40workspace%3A."
+  checksum: 10/f8ef50cae0ad8b0f91c9ee1a00ef85a57bd609521a5ced8a59c7377c917b4dcb993215390abfe0a1eedd3382f8e91e77b0edf12cfea9b6ebeb10b4d3c51aa2c0
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=irregular-iron%40workspace%3A.":
-  version: 8.5.2
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=8453d3&locator=irregular-iron%40workspace%3A."
+  version: 8.6.0
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=4d01c9&locator=irregular-iron%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.6"
-    "@navikt/aksel-icons": "npm:^8.5.2"
-    "@navikt/ds-tokens": "npm:^8.5.2"
+    "@navikt/aksel-icons": "npm:^8.6.0"
+    "@navikt/ds-tokens": "npm:^8.6.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
   peerDependencies:
@@ -1183,14 +1183,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/134ca02adad8b2e87bbf0678e5eb5f064db9a846405db5316cb274a203526085ed496fdce845029124f2404ee369f0d8e8c476692289fd358f1bc7a5aec8afad
+  checksum: 10/f754b233f6f074051762c2d38b14effaf8cd26cfeaab422b564bafe27d470060fc283f2c61b15ac6be05739f657b6db911f9f12db5d98d1ba050a7ffa3d6ad70
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^8.5.2":
-  version: 8.5.2
-  resolution: "@navikt/ds-tokens@npm:8.5.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.5.2%2F1339bac9146a8627a4446b54b921914eae1eb75a"
-  checksum: 10/5d8c8ef66728246ccb35134510fc4e794e2144d5f5b67d127176c309cd28001c5e11062002e69ab03fc2a1cabf95f0b3f62d1c11149a7a766b080172d3a1c43e
+"@navikt/ds-tokens@npm:^8.6.0":
+  version: 8.6.0
+  resolution: "@navikt/ds-tokens@npm:8.6.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.6.0%2Facac1517c2bc4c4eda259f1bc591db24656f102f"
+  checksum: 10/a780de47ff6f6bcd67908dde26f5b150a3160ab3d1fcedfa13e682f2edd7dd9b7ca863eaec20dd72b0af843f9b017c6dcdea28b0bae363d8299a78f1551a3c4f
   languageName: node
   linkType: hard
 
@@ -3873,11 +3873,11 @@ __metadata:
   linkType: hard
 
 "minimatch@npm:^10.2.1":
-  version: 10.2.1
-  resolution: "minimatch@npm:10.2.1"
+  version: 10.2.2
+  resolution: "minimatch@npm:10.2.2"
   dependencies:
     brace-expansion: "npm:^5.0.2"
-  checksum: 10/d41c195ee1f2c70a75641088e36d0fa5fa286cb6fe48558e6d3bf3d95f640eda453c217707215389b12234df12175f65f338c0b841b36b0125177dbd6a80d026
+  checksum: 10/e135be7b502ac97c02bcee42ccc1c55dc26dbac036c0f4acde69e42fe339d7fb53fae711e57b3546cb533426382ea492c73a073c7f78832e0453d120d48dd015
   languageName: node
   linkType: hard
 
