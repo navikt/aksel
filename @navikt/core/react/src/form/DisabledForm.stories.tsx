@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { VStack } from "../primitives/stack";
+import { Button } from "../button";
+import { HStack, VStack } from "../primitives/stack";
 import { Checkbox, CheckboxGroup } from "./checkbox";
 import { UNSAFE_Combobox } from "./combobox";
 import { Fieldset } from "./fieldset";
@@ -15,6 +16,17 @@ import { TextField } from "./textfield";
 function DisabledFormElements() {
   return (
     <VStack gap="space-8" style={{ maxWidth: 600, padding: "2rem" }}>
+      <HStack gap="space-4">
+        <Button disabled type="submit" variant="primary">
+          Button
+        </Button>
+        <Button disabled type="submit" variant="secondary">
+          Button
+        </Button>
+        <Button disabled type="submit" variant="tertiary">
+          Button
+        </Button>
+      </HStack>
       <TextField label="TextField" disabled />
 
       <TextField label="TextField with value" disabled value="Disabled value" />
