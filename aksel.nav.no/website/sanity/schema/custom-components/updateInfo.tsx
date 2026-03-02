@@ -43,8 +43,9 @@ const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
         loading={updating}
         onClick={handleUpdate}
         disabled={readOnly}
+        data-color="neutral"
       >
-        Godkjenn innhold
+        Oppdatert godkjenningsdato
       </Button>
     </Box>
   );
@@ -77,7 +78,7 @@ const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
       <InfoCard.Content style={{ background: "transparent" }}>
         <BodyLong spacing>
           Artikkelen trenger ny godkjenning. Les gjennom og oppdater innholdet,
-          og klikk på &ldquo;Godkjenn innhold&rdquo;.
+          for så å oppdatere godkjenningsdatoen.
         </BodyLong>
         <BodyLong>
           {articleType === "aksel_artikkel"

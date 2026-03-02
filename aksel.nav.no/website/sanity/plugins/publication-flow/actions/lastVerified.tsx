@@ -1,7 +1,7 @@
 "use client";
 
 import { format } from "date-fns";
-import { useCallback, useEffectEvent, useState } from "react";
+import { useEffectEvent, useState } from "react";
 import { DocumentActionComponent, useDocumentOperation } from "sanity";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import {
@@ -11,6 +11,7 @@ import {
   HStack,
   Heading,
   List,
+  VStack,
 } from "@navikt/ds-react";
 
 type Steps = "1" | "2";
@@ -25,32 +26,37 @@ export function setLastVerified(
 
     const [isDialogOpen, setDialogOpen] = useState(false);
 
-    const toggleDialog = useEffectEvent((nextState: boolean) => {
-      setDialogOpen(nextState);
-      if (!nextState) {
-        setCurrentStep("1");
-      }
+    const openDialog = useEffectEvent(() => {
+      setDialogOpen(true);
     });
 
-    const publishDocument = useCallback(
-      (withNewVerify: boolean = false) => {
-        toggleDialog(false);
-        if (withNewVerify) {
-          patch.execute([
-            {
-              set: {
-                updateInfo: {
-                  lastVerified: format(new Date(), "yyyy-MM-dd"),
-                },
-              },
+    const closeDialog = useEffectEvent(() => {
+      setDialogOpen(false);
+      setCurrentStep("1");
+    });
+
+    const publishDocument = useEffectEvent((withNewVerify: boolean = false) => {
+      closeDialog();
+      if (withNewVerify) {
+        patch.execute([
+          {
+            set: {
+              "updateInfo.lastVerified": format(new Date(), "yyyy-MM-dd"),
             },
-          ]);
-        }
-        originalResult?.onHandle?.();
-      },
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [originalResult, patch],
-    );
+          },
+        ]);
+      }
+      originalResult?.onHandle?.();
+    });
+
+    const handleContinue = useEffectEvent(() => {
+      if (props.published) {
+        setCurrentStep("2");
+      } else {
+        /* Sanity functions handles initial lastVerified timestamp creation */
+        publishDocument(false);
+      }
+    });
 
     if (!originalResult) {
       return null;
@@ -59,7 +65,7 @@ export function setLastVerified(
     return {
       ...originalResult,
       label: props.published ? "Publiser" : originalResult.label,
-      onHandle: () => toggleDialog(true),
+      onHandle: openDialog,
       dialog: isDialogOpen && {
         header: (
           <Heading level="2" size="medium">
@@ -68,16 +74,21 @@ export function setLastVerified(
               : "Publiser artikkel"}
           </Heading>
         ),
-        onClose: () => toggleDialog(false),
+        onClose: closeDialog,
         content:
           currentStep === "1" ? (
             <StepOne
-              onCancel={() => toggleDialog(false)}
-              onContinue={() => setCurrentStep("2")}
+              onCancel={closeDialog}
+              onContinue={handleContinue}
+              isPublished={!!props.published}
             />
           ) : (
             <StepTwo
-              onPublish={(withNewVerify) => publishDocument(withNewVerify)}
+              onPublish={publishDocument}
+              lastVerified={
+                (props.draft as any)?.updateInfo?.lastVerified ??
+                (props.published as any)?.updateInfo?.lastVerified
+              }
             />
           ),
       },
@@ -88,10 +99,11 @@ export function setLastVerified(
 type StepOneProps = {
   onContinue: () => void;
   onCancel: () => void;
+  isPublished: boolean;
 };
 
 function StepOne(props: StepOneProps) {
-  const { onContinue, onCancel } = props;
+  const { onContinue, onCancel, isPublished = false } = props;
 
   return (
     <div>
@@ -115,13 +127,17 @@ function StepOne(props: StepOneProps) {
         <Button onClick={onCancel} variant="secondary">
           Jeg vil endre noe først
         </Button>
-        <Button
-          onClick={onContinue}
-          iconPosition="right"
-          icon={<ChevronRightIcon aria-hidden />}
-        >
-          Fortsett
-        </Button>
+        {isPublished ? (
+          <Button
+            onClick={onContinue}
+            iconPosition="right"
+            icon={<ChevronRightIcon aria-hidden />}
+          >
+            Fortsett
+          </Button>
+        ) : (
+          <Button onClick={onContinue}>Publiser</Button>
+        )}
       </HStack>
     </div>
   );
@@ -129,19 +145,30 @@ function StepOne(props: StepOneProps) {
 
 type StepTwoProps = {
   onPublish: (withNewVerify: boolean) => void;
+  lastVerified?: string;
 };
 
 function StepTwo(props: StepTwoProps) {
-  const { onPublish } = props;
+  const { onPublish, lastVerified } = props;
 
   return (
     <div>
-      <BodyLong>
-        Hvis innholdet fortsatt er relevant og oppdatert, kan du velge å
-        publisere med oppdatert godkjenningsdato. Hvis du derimot mener at
-        innholdet trenger en gjennomgang, kan du publisere uten å oppdatere
-        godkjenningsdatoen.
-      </BodyLong>
+      <VStack gap="space-8">
+        <BodyLong>
+          Hvis innholdet fortsatt er relevant og oppdatert, kan du velge å
+          publisere med oppdatert godkjenningsdato. Hvis du derimot mener at
+          innholdet trenger en gjennomgang, kan du publisere uten å oppdatere
+          godkjenningsdatoen.
+        </BodyLong>
+        {lastVerified && (
+          <BodyLong>
+            Nåværende godkjenningsdato:{" "}
+            <BodyLong as="strong" size="large" weight="semibold">
+              {format(new Date(lastVerified), "dd.MM.yyyy")}
+            </BodyLong>
+          </BodyLong>
+        )}
+      </VStack>
       <HGrid gap="space-8" marginBlock="space-16 space-0">
         <Button variant="secondary" onClick={() => onPublish(false)}>
           Bruk eksisterende godkjenningsdato
