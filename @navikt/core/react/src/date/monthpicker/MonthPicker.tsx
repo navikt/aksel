@@ -97,6 +97,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     );
     const langProviderLocale = useDateLocale();
     const ariaId = useId(id);
+    const popupLabelId = useId();
 
     const [open, setOpen] = useControllableState({
       defaultValue: false,
@@ -131,6 +132,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
           onOpen={() => setOpen((x) => !x)}
           ariaId={ariaId}
           defined={true}
+          popupLabelId={popupLabelId}
         >
           <MonthPickerProvider
             dropdownCaption={dropdownCaption}

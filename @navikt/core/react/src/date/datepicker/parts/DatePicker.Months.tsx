@@ -14,6 +14,7 @@ import { Button } from "../../../button";
 import { Select } from "../../../form/select";
 import { BodyShort } from "../../../typography";
 import { omit } from "../../../utils-external";
+import { useDateInputContext } from "../../Date.Input";
 import { useDateTranslationContext } from "../../Date.locale";
 import {
   calendarRange,
@@ -37,6 +38,8 @@ const DatePickerMonths = ({
 } & React.HTMLAttributes<HTMLDivElement>) => {
   const { dayPickerProps, goToMonth, previousMonth, nextMonth } =
     useDayPicker();
+
+  const context = useDateInputContext();
 
   const { captionLayout } = dayPickerProps;
 
@@ -84,7 +87,7 @@ const DatePickerMonths = ({
             aria-live="polite"
             aria-atomic="true"
             className="aksel-sr-only"
-            id="test-id-month-year-label"
+            id={context.popupLabelId}
           >
             {format(calendarMonth.date, "LLLL y", { locale })}
           </span>
@@ -134,6 +137,7 @@ const DatePickerMonths = ({
             aria-live="polite"
             role="status"
             className="aksel-date__caption-label"
+            id={context.popupLabelId}
           >
             {format(calendarMonth.date, "LLLL y", { locale })}
           </BodyShort>

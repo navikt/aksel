@@ -24,6 +24,10 @@ interface DateInputContextProps {
    * Flag for enabled-check
    */
   defined: boolean;
+  /**
+   * Id for the label of the popup, used for aria-labelledby
+   */
+  popupLabelId: string;
 }
 
 export const {

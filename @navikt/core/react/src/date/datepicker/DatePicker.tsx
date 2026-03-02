@@ -95,6 +95,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     );
 
     const ariaId = useId(id);
+    const popupLabelId = useId();
 
     const [open, setOpen] = useControllableState({
       defaultValue: false,
@@ -141,11 +142,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           }}
           ariaId={ariaId}
           defined={true}
+          popupLabelId={popupLabelId}
         >
           <div
             ref={mergedRef}
             className={cl("aksel-date__wrapper", wrapperClassName)}
-            data-datepicker-container
           >
             {children}
             <DateDialog

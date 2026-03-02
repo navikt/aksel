@@ -10,6 +10,7 @@ import { focusElement } from "../utils/helpers/focus";
 import { useMedia } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 import type { TFunction } from "../utils/i18n/i18n.types";
+import { useDateInputContext } from "./Date.Input";
 import { getGlobalTranslations } from "./Date.locale";
 
 const variantToLabel = {
@@ -56,6 +57,8 @@ const DateDialog = ({
     !isInModal &&
     !isInDialog;
 
+  const context = useDateInputContext();
+
   /* Handles mount focus */
   useClientLayoutEffect(() => {
     const container = popoverRef;
@@ -65,14 +68,12 @@ const DateDialog = ({
     }
 
     queueMicrotask(() => {
-      /* const elToFocus = getTabbableCandidates(container)[0]; */
-      const elToFocus = container;
-
-      elToFocus &&
-        focusElement(elToFocus, {
+      if (container) {
+        focusElement(container, {
           preventScroll: true,
           sync: false,
         });
+      }
     });
   }, [popoverRef, hideModal]);
 
@@ -94,7 +95,7 @@ const DateDialog = ({
         ref={setPopoverRef}
         tabIndex={-1}
         role="dialog"
-        aria-labelledby="test-id-month-year-label"
+        aria-labelledby={context.ariaId}
       >
         {children}
       </Popover>
