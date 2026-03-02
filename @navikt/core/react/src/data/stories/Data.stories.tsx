@@ -256,6 +256,18 @@ export const TanstackExample: Story = {
                             header.column.getToggleSortingHandler();
                           handler?.(event);
                         }}
+                        keyboardResizingHandler={(increment) => {
+                          const newColumnSizing = {};
+                          table.getFlatHeaders().forEach((h) => {
+                            if (h.id === header.id) {
+                              newColumnSizing[h.id] =
+                                header.getSize() + increment;
+                            } else {
+                              newColumnSizing[h.id] = h.getSize();
+                            }
+                          });
+                          table.setColumnSizing(newColumnSizing);
+                        }}
                       >
                         {header.isPlaceholder
                           ? null

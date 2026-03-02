@@ -147,6 +147,12 @@
   inset-inline-end: -10px;
   width: 19px; /* TODO: Violation of WCAG SC 2.5.8 Target Size? https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html */
 
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: -3px;
+    border-radius: var(--ax-radius-8);
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -159,7 +165,8 @@
     background: var(--ax-bg-strong);
   }
 
-  &:active::after {
+  &:active::after,
+  &:focus::after {
     background: var(--ax-bg-strong-pressed);
   }
 
@@ -169,6 +176,34 @@
 
     &::after {
       inset-inline-end: 0;
+    }
+  }
+
+  &[data-active="true"] {
+    .aksel-data-table__th-resize-handle-indicator {
+      position: absolute;
+      top: 50%;
+      color: var(--ax-bg-strong);
+      transform: translateY(-50%);
+      height: 1.5rem;
+
+      &.aksel-data-table__th-resize-handle-indicator--start {
+        right: 12px;
+      }
+
+      &.aksel-data-table__th-resize-handle-indicator--end {
+        left: 12px;
+      }
+    }
+
+    &::after {
+      background: var(--ax-bg-strong);
+    }
+
+    &:focus-visible,
+    &:focus,
+    &:active {
+      outline: none;
     }
   }
 }

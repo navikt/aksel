@@ -1,5 +1,11 @@
 import React, { forwardRef } from "react";
-import { FunnelIcon, SortDownIcon, SortUpIcon } from "@navikt/aksel-icons";
+import {
+  CaretLeftCircleFillIcon,
+  CaretRightCircleFillIcon,
+  FunnelIcon,
+  SortDownIcon,
+  SortUpIcon,
+} from "@navikt/aksel-icons";
 import { ActionMenu } from "../../../action-menu";
 import { HStack, Spacer } from "../../../primitives/stack";
 import { cl } from "../../../utils/helpers";
@@ -26,6 +32,7 @@ interface DataTableThProps extends React.HTMLAttributes<HTMLTableCellElement> {
    */
   colSpan?: number;
   rowSpan?: number;
+  keyboardResizingHandler?: (size: number) => void;
 }
 
 /**
@@ -43,11 +50,28 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
       onSortChange,
       style,
       render,
+      keyboardResizingHandler,
       ...rest
     },
     forwardedRef,
   ) => {
     const { filterMenu } = render || {};
+    const [resizeHandlerActive, setResizeHandlerActive] = React.useState(false);
+
+    const keyDownHandler = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (keyboardResizingHandler) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setResizeHandlerActive((active) => !active);
+        } else if (
+          resizeHandlerActive &&
+          (event.key === "ArrowLeft" || event.key === "ArrowRight")
+        ) {
+          event.preventDefault();
+          keyboardResizingHandler(event.key === "ArrowRight" ? 10 : -10);
+        }
+      }
+    };
 
     return (
       <th
@@ -103,10 +127,25 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         {resizeHandler && (
           <button
             // TODO: Should probably not be a button since it doesn't have onClick
+            // TODO: Make it work with tableKeyboardNavigation
             onMouseDown={resizeHandler}
             onTouchStart={resizeHandler}
+            onBlur={() => setResizeHandlerActive(false)}
             className="aksel-data-table__th-resize-handle"
-          />
+            data-active={resizeHandlerActive}
+            onKeyDown={keyDownHandler}
+          >
+            {resizeHandlerActive && (
+              <>
+                <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--start">
+                  <CaretLeftCircleFillIcon aria-hidden fontSize="1.5rem" />
+                </span>
+                <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--end">
+                  <CaretRightCircleFillIcon aria-hidden fontSize="1.5rem" />
+                </span>
+              </>
+            )}
+          </button>
         )}
       </th>
     );
