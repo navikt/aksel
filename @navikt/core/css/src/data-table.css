@@ -26,6 +26,12 @@
     width: 1px; /* This is for some reason needed to make the browser respect the column width. TODO: Test in all browsers */
   }
 
+  /* TODO: review side-effects from this hack */
+  &[data-layout="fixed"]:has(.aksel-data-table__filler-cell) {
+    min-width: 100%;
+  }
+
+  /* TODO: review side-effects from this hack */
   &[data-layout="auto"] {
     min-width: 100%;
   }
@@ -252,4 +258,8 @@
 
 .aksel-data-table__tfoot {
   background-color: var(--ax-bg-raised);
+}
+
+.aksel-data-table__filler-cell {
+  width: auto;
 }
