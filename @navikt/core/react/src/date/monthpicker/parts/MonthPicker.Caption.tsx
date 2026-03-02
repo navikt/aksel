@@ -14,7 +14,7 @@ import { useDateTranslationContext } from "../../Date.locale";
 import { useMonthPickerContext } from "../MonthPicker.context";
 
 type MonthPickerCaptionProps = {
-  labelId: string;
+  labelId?: string;
 };
 
 const MonthPickerCaption = ({ labelId }: MonthPickerCaptionProps) => {
