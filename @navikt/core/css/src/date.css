@@ -129,6 +129,13 @@
   }
 }
 
+.aksel-date__popover {
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
 .aksel-date__caption {
   display: flex;
   justify-content: space-between;

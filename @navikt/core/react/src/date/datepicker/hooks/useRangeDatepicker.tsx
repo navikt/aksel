@@ -1,6 +1,7 @@
 import { differenceInCalendarDays, isSameDay, isWeekend } from "date-fns";
 import React, { useState } from "react";
 import { dateMatchModifiers } from "react-day-picker";
+import { focusElement } from "../../../utils/helpers/focus";
 import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
 import { DateInputProps } from "../../Date.Input";
 import { getLocaleFromString } from "../../Date.locale";
@@ -539,7 +540,10 @@ export const useRangeDatepicker = (
     onOpenToggle: () => setOpen((x) => !x),
     onClose: () => {
       setOpen(false);
-      anchorRef?.focus();
+      /* Delay focus to allow "open"-button to update title before focus */
+      queueMicrotask(() =>
+        focusElement(anchorRef, { sync: false, preventScroll: true }),
+      );
     },
     disabled,
     disableWeekends,

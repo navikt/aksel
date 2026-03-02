@@ -316,10 +316,9 @@ export const useDatepicker = (
     onClose: () => {
       handleOpen(false);
       /* Delay focus to allow "open"-button to update title before focus */
-      focusElement(anchorRef, {
-        sync: false,
-        preventScroll: true,
-      });
+      queueMicrotask(() =>
+        focusElement(anchorRef, { sync: false, preventScroll: true }),
+      );
     },
     onOpenToggle: () => handleOpen(!open),
     disabled,
