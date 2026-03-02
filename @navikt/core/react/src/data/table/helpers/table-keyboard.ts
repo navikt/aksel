@@ -52,6 +52,7 @@ function getNavigationAction(event: KeyboardEvent): NavigationAction | null {
  * - Select arrow down/up for opening popup
  * - User is navigating inside multiline textarea
  * - contenteditable attrb is in use
+ * - element has attribute data-block-keyboard-nav="true"
  */
 function shouldBlockNavigation(event: KeyboardEvent): boolean {
   const key = event.key;
@@ -68,9 +69,9 @@ function shouldBlockNavigation(event: KeyboardEvent): boolean {
     return true;
   }
 
-  /* If not any of these elements, assueme "safe" to navigate */
+  /* If not any of these elements, assume "safe" to navigate */
   const editable = el.closest(
-    'input, textarea, select, [contenteditable="true"]',
+    'input, textarea, select, [contenteditable="true"], [data-block-keyboard-nav="true"]',
   );
 
   if (!editable) {
@@ -92,7 +93,10 @@ function shouldBlockNavigation(event: KeyboardEvent): boolean {
     return false;
   }
 
-  return editable.hasAttribute("contenteditable");
+  return (
+    editable.hasAttribute("contenteditable") ||
+    editable.hasAttribute("data-block-keyboard-nav")
+  );
 }
 
 function shouldBlockInputArrow(input: HTMLInputElement, key: string): boolean {

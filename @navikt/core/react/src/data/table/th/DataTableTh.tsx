@@ -133,6 +133,8 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
             onBlur={() => setResizeHandlerActive(false)}
             className="aksel-data-table__th-resize-handle"
             data-active={resizeHandlerActive}
+            // TODO Very open to a better name for this
+            data-block-keyboard-nav
             onKeyDown={keyDownHandler}
           >
             {resizeHandlerActive && (
