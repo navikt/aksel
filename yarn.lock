@@ -4501,7 +4501,7 @@ __metadata:
     commander: "npm:14.0.3"
     enquirer: "npm:2.4.1"
     fast-glob: "npm:3.3.3"
-    figlet: "npm:1.8.0"
+    figlet: "npm:1.10.0"
     is-git-clean: "npm:1.1.0"
     jscodeshift: "npm:17.3.0"
     jscodeshift-add-imports: "npm:1.0.11"
@@ -10791,7 +10791,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:14.0.3, commander@npm:^14.0.2":
+"commander@npm:14.0.3, commander@npm:^14.0.0, commander@npm:^14.0.2":
   version: 14.0.3
   resolution: "commander@npm:14.0.3"
   checksum: 10/dfa9ebe2a433d277de5cb0252d23b10a543d245d892db858d23b516336a835c50fd4f52bee4cd13c705cc8acb6f03dc632c73dd806f7d06d3353eb09953dd17a
@@ -13269,12 +13269,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figlet@npm:1.8.0":
-  version: 1.8.0
-  resolution: "figlet@npm:1.8.0"
+"figlet@npm:1.10.0":
+  version: 1.10.0
+  resolution: "figlet@npm:1.10.0"
+  dependencies:
+    commander: "npm:^14.0.0"
   bin:
     figlet: bin/index.js
-  checksum: 10/e52933f9cba3c03c6f399763363502b6e6396d1ca6ca9d79cd8bd467aa85b64ee12c7b2cc5ae5901af5a6fe085414accac14890949130e908da8dd2a8bb8c8ac
+  checksum: 10/c0ab3499b424427d71ea90e6b2fd8d5c96e00a11ba86173884e4b14c9b908e0d78a1bb9ca58520445c586aa1b85596b9938aac4ae5b3d97311b70b2a7b547f9d
   languageName: node
   linkType: hard
 
