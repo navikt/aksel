@@ -21,7 +21,6 @@ export const oppdateringsvarsel = defineField({
       type: "date",
       name: "lastVerified",
       title: "Sist oppdatert",
-      description: "Kun synlig for utviklere",
       readOnly: true,
     }),
   ],
