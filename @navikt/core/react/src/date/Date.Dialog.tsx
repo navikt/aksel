@@ -10,7 +10,6 @@ import { focusElement } from "../utils/helpers/focus";
 import { useMedia } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 import type { TFunction } from "../utils/i18n/i18n.types";
-import { useDateInputContext } from "./Date.Input";
 import { getGlobalTranslations } from "./Date.locale";
 
 const variantToLabel = {
@@ -33,6 +32,10 @@ type DateWrapperProps = {
     id?: string;
     strategy?: "absolute" | "fixed";
   };
+  /**
+   * Id for the label of the popup, used for aria-labelledby
+   */
+  popupLabelId?: string;
 };
 
 const DateDialog = ({
@@ -44,6 +47,7 @@ const DateDialog = ({
   translate,
   variant,
   popoverProps,
+  popupLabelId,
 }: DateWrapperProps) => {
   const translateGlobal = useI18n("global", getGlobalTranslations(locale));
 
@@ -56,8 +60,6 @@ const DateDialog = ({
     useMedia("screen and (min-width: 768px)", true) &&
     !isInModal &&
     !isInDialog;
-
-  const context = useDateInputContext();
 
   /* Handles mount focus */
   useClientLayoutEffect(() => {
@@ -95,7 +97,7 @@ const DateDialog = ({
         ref={setPopoverRef}
         tabIndex={-1}
         role="dialog"
-        aria-labelledby={context.popupLabelId}
+        aria-labelledby={popupLabelId}
       >
         {children}
       </Popover>

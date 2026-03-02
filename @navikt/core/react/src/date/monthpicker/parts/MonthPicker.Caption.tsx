@@ -14,10 +14,10 @@ import { useDateTranslationContext } from "../../Date.locale";
 import { useMonthPickerContext } from "../MonthPicker.context";
 
 type MonthPickerCaptionProps = {
-  labelId?: string;
+  popupLabelId?: string;
 };
 
-const MonthPickerCaption = ({ labelId }: MonthPickerCaptionProps) => {
+const MonthPickerCaption = ({ popupLabelId }: MonthPickerCaptionProps) => {
   const { fromDate, toDate, locale, year, onYearChange, caption } =
     useMonthPickerContext();
 
@@ -67,7 +67,7 @@ const MonthPickerCaption = ({ labelId }: MonthPickerCaptionProps) => {
           aria-live="polite"
           aria-atomic="true"
           className="aksel-sr-only"
-          id={labelId}
+          id={popupLabelId}
         >
           {year.getFullYear()}
         </span>
@@ -99,7 +99,7 @@ const MonthPickerCaption = ({ labelId }: MonthPickerCaptionProps) => {
         <span
           className="aksel-date__year-label"
           aria-live="polite"
-          id={labelId}
+          id={popupLabelId}
         >
           {year.getFullYear()}
         </span>
