@@ -10,14 +10,16 @@ import React from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
-import { useDateInputContext } from "../../Date.Input";
 import { useDateTranslationContext } from "../../Date.locale";
 import { useMonthPickerContext } from "../MonthPicker.context";
 
-const MonthPickerCaption = () => {
+type MonthPickerCaptionProps = {
+  labelId: string;
+};
+
+const MonthPickerCaption = ({ labelId }: MonthPickerCaptionProps) => {
   const { fromDate, toDate, locale, year, onYearChange, caption } =
     useMonthPickerContext();
-  const context = useDateInputContext();
 
   const translate = useDateTranslationContext().translate;
 
@@ -65,7 +67,7 @@ const MonthPickerCaption = () => {
           aria-live="polite"
           aria-atomic="true"
           className="aksel-sr-only"
-          id={context.popupLabelId}
+          id={labelId}
         >
           {year.getFullYear()}
         </span>
@@ -97,7 +99,7 @@ const MonthPickerCaption = () => {
         <span
           className="aksel-date__year-label"
           aria-live="polite"
-          id={context.popupLabelId}
+          id={labelId}
         >
           {year.getFullYear()}
         </span>

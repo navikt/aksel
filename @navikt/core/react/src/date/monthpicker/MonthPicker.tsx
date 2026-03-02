@@ -132,7 +132,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
           onOpen={() => setOpen((x) => !x)}
           ariaId={ariaId}
           defined={true}
-          popupLabelId={popupLabelId}
         >
           <MonthPickerProvider
             dropdownCaption={dropdownCaption}
@@ -167,7 +166,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                 }}
               >
                 <div className={cl("rdp-month", className)}>
-                  <MonthPickerCaption />
+                  <MonthPickerCaption labelId={popupLabelId} />
                   <MonthPickerTable />
                 </div>
               </DateDialog>
