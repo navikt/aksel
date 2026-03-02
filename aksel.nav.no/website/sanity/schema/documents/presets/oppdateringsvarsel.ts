@@ -1,5 +1,5 @@
 import { defineField } from "sanity";
-import { UpdateInfo } from "../../custom-components";
+import { UpdateInfo, UpdateInfoInput } from "../../custom-components";
 
 export type Oppdateringsvarsel = {
   updateInfo: {
@@ -14,6 +14,7 @@ export const oppdateringsvarsel = defineField({
   group: "innhold",
   components: {
     field: UpdateInfo,
+    input: UpdateInfoInput,
   },
   fields: [
     defineField({
@@ -21,9 +22,6 @@ export const oppdateringsvarsel = defineField({
       name: "lastVerified",
       title: "Sist oppdatert",
       description: "Kun synlig for utviklere",
-      hidden: ({ currentUser }) => {
-        return !currentUser?.roles.some((r) => r.name === "developer");
-      },
       readOnly: true,
     }),
   ],

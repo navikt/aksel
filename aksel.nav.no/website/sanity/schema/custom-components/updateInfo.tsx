@@ -1,16 +1,64 @@
-import { differenceInDays, differenceInMonths } from "date-fns";
-import { ComponentType } from "react";
-import { ObjectFieldProps, useFormValue } from "sanity";
+import { differenceInDays, differenceInMonths, format } from "date-fns";
+import { ComponentType, useCallback, useState } from "react";
+import {
+  ObjectFieldProps,
+  ObjectInputProps,
+  set,
+  useClient,
+  useFormValue,
+} from "sanity";
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
-import { BodyLong, Box, HStack, Heading, Link } from "@navikt/ds-react";
+import { BodyLong, Box, Button, InfoCard } from "@navikt/ds-react";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
-export const UpdateInfo: ComponentType<ObjectFieldProps> = () => {
+const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
+  const { onChange, readOnly } = props;
+
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
+
+  const documentId = useFormValue(["_id"]) as string | undefined;
+
+  const [updating, setUpdating] = useState(false);
+
+  const handleUpdate = useCallback(async () => {
+    if (!documentId) return;
+
+    setUpdating(true);
+    try {
+      const today = format(new Date(), "yyyy-MM-dd");
+      const publishedId = documentId.replace(/^drafts\./, "");
+      const updatePayload = { updateInfo: { lastVerified: today } };
+
+      await client.patch(publishedId).set(updatePayload).commit();
+      onChange(set(today));
+    } finally {
+      setUpdating(false);
+    }
+  }, [client, documentId, onChange]);
+
+  return (
+    <Box marginBlock="space-16 space-0">
+      <Button
+        variant="primary"
+        loading={updating}
+        onClick={handleUpdate}
+        disabled={readOnly}
+      >
+        Godkjenn innhold
+      </Button>
+    </Box>
+  );
+};
+
+const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
   const articleType = useFormValue(["_type"]);
 
   const verified: any = useFormValue(["updateInfo", "lastVerified"]);
+
   if (!verified) {
     return null;
   }
+
   const diff = differenceInMonths(new Date(), new Date(verified));
   const diffInDays = differenceInDays(new Date(), new Date(verified));
   const outDated = diff >= (articleType === "aksel_artikkel" ? 12 : 6);
@@ -20,25 +68,26 @@ export const UpdateInfo: ComponentType<ObjectFieldProps> = () => {
   }
 
   return (
-    <Box
-      background="warning-soft"
-      borderWidth="1"
-      borderColor="warning-subtleA"
-      borderRadius="4"
-      padding="space-16"
-    >
-      <HStack gap="space-4" marginBlock="space-0 space-4" align="center">
-        <HourglassBottomFilledIcon aria-hidden fontSize="1.25rem" />
-        <Heading level="3" size="small">
-          Artikkelen er utdatert {`(${diffInDays} dager)`}
-        </Heading>
-      </HStack>
-      <BodyLong>
-        {`Artikkelen er utdatert og trenger ny godkjenning. Les gjennom og oppdater innholdet, for så å klikke på "Godkjenn innhold"-knapp. `}
-        <Link href="https://aksel.nav.no/side/skriv-for-aksel#a5b79ddd59da">
-          Les mer om hvorfor en artikkel regnes som utdatert.
-        </Link>
-      </BodyLong>
-    </Box>
+    <InfoCard data-color="warning">
+      <InfoCard.Header icon={<HourglassBottomFilledIcon aria-hidden />}>
+        <InfoCard.Title>
+          Artikkelen er utdatert ({diffInDays} dager siden sist godkjent)
+        </InfoCard.Title>
+      </InfoCard.Header>
+      <InfoCard.Content style={{ background: "transparent" }}>
+        <BodyLong spacing>
+          Artikkelen trenger ny godkjenning. Les gjennom og oppdater innholdet,
+          og klikk på &ldquo;Godkjenn innhold&rdquo;.
+        </BodyLong>
+        <BodyLong>
+          {articleType === "aksel_artikkel"
+            ? "Etter 12 måneder regnes en God praksis-artikkel som utdatert."
+            : "Etter 6 måneder regnes en Designsystem-artikkel som utdatert."}
+        </BodyLong>
+        {props.children}
+      </InfoCard.Content>
+    </InfoCard>
   );
 };
+
+export { UpdateInfo, UpdateInfoInput };
