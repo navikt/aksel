@@ -95,7 +95,7 @@ const DateDialog = ({
         ref={setPopoverRef}
         tabIndex={-1}
         role="dialog"
-        aria-labelledby={context.ariaId}
+        aria-labelledby={context.popupLabelId}
       >
         {children}
       </Popover>
