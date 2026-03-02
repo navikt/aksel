@@ -6102,6 +6102,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sanity/functions@npm:1.2.0":
+  version: 1.2.0
+  resolution: "@sanity/functions@npm:1.2.0"
+  checksum: 10/6ac3c087c4f2f2a7069c54b1c23a7dbd78f0fcabe11f4093d32b10b4d2c75b20eb703222fe8c93093cafb5bc0cff82fdb7a2b44c13bbb0588ff7efb60c6b4bb4
+  languageName: node
+  linkType: hard
+
 "@sanity/generate-help-url@npm:^4.0.0":
   version: 4.0.0
   resolution: "@sanity/generate-help-url@npm:4.0.0"
@@ -24592,10 +24599,12 @@ __metadata:
     "@portabletext/block-tools": "npm:^5.0.1"
     "@portabletext/markdown": "npm:^1.1.2"
     "@portabletext/react": "npm:^6.0.2"
+    "@sanity/blueprints": "npm:^0.12.2"
     "@sanity/client": "npm:7.14.0"
     "@sanity/code-input": "npm:7.0.8"
     "@sanity/color-input": "npm:6.0.4"
     "@sanity/export": "npm:^4"
+    "@sanity/functions": "npm:1.2.0"
     "@sanity/image-url": "npm:2.0.3"
     "@sanity/locale-nb-no": "npm:^1.1.29"
     "@sanity/preview-url-secret": "npm:4.0.3"

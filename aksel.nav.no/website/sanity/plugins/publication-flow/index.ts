@@ -1,11 +1,5 @@
 import { DocumentActionComponent, definePlugin } from "sanity";
-import { allArticleDocuments } from "@/sanity/config";
-import { forcedPublishActions } from "./actions/forcedPublish";
-import {
-  setLastVerified,
-  setLastVerifiedWithoutPublish,
-} from "./actions/lastVerified";
-import { setPublishedAt } from "./actions/publishedAt";
+import { setLastVerified } from "./actions/lastVerified";
 
 /**
  * Plugin that adds customized publication flow to documents.
@@ -25,16 +19,10 @@ export const publicationFlow = definePlugin(() => {
           "aksel_artikkel",
         ].some((docType) => docType === context.schemaType);
 
-        const shouldSetPublishedAt = allArticleDocuments.some(
-          (docType) => docType === context.schemaType,
-        );
-
         if (shouldUseQualityControl) {
           newActions = newActions.reduce((prev, originalAction) => {
             if (originalAction.action === "publish") {
               prev.push(setLastVerified(originalAction));
-              prev.push(forcedPublishActions(originalAction));
-              prev.push(setLastVerifiedWithoutPublish(context));
             } else {
               prev.push(originalAction);
             }
@@ -44,16 +32,7 @@ export const publicationFlow = definePlugin(() => {
           return newActions;
         }
 
-        if (!shouldSetPublishedAt) {
-          return newActions;
-        }
-
-        return newActions.map((originalAction) => {
-          if (originalAction.action === "publish") {
-            return setPublishedAt(originalAction);
-          }
-          return originalAction;
-        });
+        return newActions;
       },
     },
   };
