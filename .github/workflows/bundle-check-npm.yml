@@ -47,7 +47,7 @@ jobs:
 
       - name: Upload comparison markdown to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: compare-markdown.md
           path: scripts/analyzer
@@ -62,7 +62,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Download comparison markdown to GitHub Actions Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           path: scripts/analyzer
           name: compare-markdown.md
