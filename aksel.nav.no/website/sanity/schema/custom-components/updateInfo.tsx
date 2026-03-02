@@ -29,8 +29,16 @@ const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
       const publishedId = documentId.replace(/^drafts\./, "");
       const updatePayload = { updateInfo: { lastVerified: today } };
 
-      await client.patch(publishedId).set(updatePayload).commit();
-      onChange(set(today));
+      await client
+        .patch(publishedId)
+        .set(updatePayload)
+        .commit()
+        .catch(() => {
+          console.warn(
+            `Failed to update lastVerified for document ${publishedId}. Document might not be published yet.`,
+          );
+        });
+      onChange(set(updatePayload));
     } finally {
       setUpdating(false);
     }
