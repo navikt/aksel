@@ -120,8 +120,9 @@ export const NoPageScroll: Story = {
                           key={header.id}
                           size={header.getSize()}
                           resizeHandler={header.getResizeHandler()}
+                          sortable
                           sortDirection={header.column.getIsSorted() || "none"}
-                          onSortChange={(_, event) => {
+                          onSortClick={(event) => {
                             const handler =
                               header.column.getToggleSortingHandler();
                             handler?.(event);
