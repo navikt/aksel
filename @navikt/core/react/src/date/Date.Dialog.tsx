@@ -1,10 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef } from "react";
 import { Button } from "../button";
 import { useDialogContext } from "../dialog/root/DialogRoot.context";
 import { Modal } from "../modal";
 import { useModalContext } from "../modal/Modal.context";
 import { Popover } from "../popover";
-import { useClientLayoutEffect } from "../utils-external";
 import { cl } from "../utils/helpers";
 import { focusElement } from "../utils/helpers/focus";
 import { useMedia } from "../utils/hooks";
@@ -52,7 +51,6 @@ const DateDialog = ({
   const translateGlobal = useI18n("global", getGlobalTranslations(locale));
 
   const modalRef = useRef<HTMLDialogElement>(null);
-  const [popoverRef, setPopoverRef] = useState<HTMLDivElement | null>(null);
 
   const isInModal = useModalContext(false) !== undefined;
   const isInDialog = useDialogContext(false) !== undefined;
@@ -61,21 +59,9 @@ const DateDialog = ({
     !isInModal &&
     !isInDialog;
 
-  /* Handles mount focus */
-  useClientLayoutEffect(() => {
-    if (!popoverRef || !hideModal) {
-      return;
-    }
-
-    queueMicrotask(() => {
-      if (popoverRef) {
-        focusElement(popoverRef, {
-          preventScroll: true,
-          sync: false,
-        });
-      }
-    });
-  }, [popoverRef, hideModal]);
+  const popoverRefCallback = useCallback((element: HTMLDivElement | null) => {
+    focusElement(element, { preventScroll: true, sync: false });
+  }, []);
 
   if (!open) {
     return null;
@@ -92,7 +78,7 @@ const DateDialog = ({
           "aksel-date": variant === "month",
         })}
         {...popoverProps}
-        ref={setPopoverRef}
+        ref={popoverRefCallback}
         tabIndex={-1}
         role="dialog"
         aria-labelledby={popupLabelId}
