@@ -1,8 +1,10 @@
 import React, { forwardRef, useState } from "react";
 import { Popover } from "../../popover";
 import { HStack } from "../../primitives/stack";
+import Listbox from "../../utils/components/Listbox/root/ListboxRoot";
 import { cl } from "../../utils/helpers";
-import { AutoSuggest } from "./AutoSuggest";
+import { AutoCompleteOption } from "./AutoSuggest.types";
+// import { AutoSuggest } from "./AutoSuggest";
 import type {
   ExternalOptions,
   ExternalPropertyDefinitions,
@@ -34,6 +36,8 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
       null,
     );
     const [filterText, setFilterText] = useState<string>("");
+    const [virtuallyFocusedItemValue, setVirtuallyFocusedItemValue] =
+      useState("");
 
     const { parsedPropertyDefinitions, parsedPropertyOptions } =
       derrivedFilterState(propertyDefinitions, options);
@@ -84,9 +88,9 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
       }
     };
 
-    const handleSelectOption = (value: string) => {
-      setFilterText(value);
-      createToken(value);
+    const handleSelectOption = (option: AutoCompleteOption) => {
+      setFilterText(option.value);
+      createToken(option.value);
     };
 
     const isValid = queryState.step === "property" && queryState.value !== "";
@@ -97,36 +101,51 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
         className={cl("aksel-property-filter", className)}
         role="search"
       >
-        <input
-          type="text"
-          className="aksel-property-filter__input"
-          placeholder="Type to filter..."
-          ref={setInputAnchor}
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
-          onFocus={() => setCustomOpen(true)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              createToken(filterText);
-            }
-          }}
-          style={{
-            outline: isValid ? "1px solid green" : "1px solid transparent",
-          }}
-        />
-        <Popover
-          anchorEl={inputAnchor}
-          open={customOpen}
-          onClose={() => {
-            setFilterText("");
-            setCustomOpen(false);
-          }}
-        >
-          <AutoSuggest
+        <Listbox setVirtuallyFocusedItemValue={setVirtuallyFocusedItemValue}>
+          <Listbox.InputSlot>
+            <input
+              type="text"
+              className="aksel-property-filter__input"
+              placeholder="Type to filter..."
+              ref={setInputAnchor}
+              value={filterText}
+              onChange={(e) => setFilterText(e.target.value)}
+              onFocus={() => setCustomOpen(true)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  createToken(filterText);
+                }
+              }}
+              style={{
+                outline: isValid ? "1px solid green" : "1px solid transparent",
+              }}
+            />
+          </Listbox.InputSlot>
+          <Popover
+            anchorEl={inputAnchor}
+            open={customOpen}
+            onClose={() => {
+              setFilterText("");
+              setCustomOpen(false);
+            }}
+          >
+            {/* <AutoSuggest
             options={autoCompleteOptions.options}
             onSelect={handleSelectOption}
-          />
-        </Popover>
+          /> */}
+            <Listbox.List
+              virtuallyFocusedItemValue={virtuallyFocusedItemValue}
+              setVirtuallyFocusedItemValue={setVirtuallyFocusedItemValue}
+              items={autoCompleteOptions.options.map((option) => ({
+                label: option.label,
+                id: option.label,
+                items: option.options,
+              }))}
+              onToggleItem={handleSelectOption}
+              style={{ maxHeight: "350px" }}
+            />
+          </Popover>
+        </Listbox>
         <HStack marginBlock="space-8" gap="space-8">
           {query.tokens.map((token, index) => {
             return (
