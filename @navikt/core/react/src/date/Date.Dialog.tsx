@@ -63,15 +63,13 @@ const DateDialog = ({
 
   /* Handles mount focus */
   useClientLayoutEffect(() => {
-    const container = popoverRef;
-
-    if (!container || !hideModal) {
+    if (!popoverRef || !hideModal) {
       return;
     }
 
     queueMicrotask(() => {
-      if (container) {
-        focusElement(container, {
+      if (popoverRef) {
+        focusElement(popoverRef, {
           preventScroll: true,
           sync: false,
         });
