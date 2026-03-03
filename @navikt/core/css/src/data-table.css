@@ -128,6 +128,42 @@
   color: var(--ax-text-neutral);
   padding: var(--ax-space-8) var(--ax-space-16);
   text-align: start;
+
+  &:has(.aksel-data-table__th-sort-button) {
+    padding: 0;
+  }
+}
+
+.aksel-data-table__th-sort-button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-8);
+  width: 100%;
+  padding: var(--ax-space-8) var(--ax-space-16);
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &:active {
+    background-color: var(--ax-bg-neutral-moderate-pressed);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -2px;
+  }
+}
+
+.aksel-data-table__th-sort-icon {
+  flex-shrink: 0;
+  font-size: var(--ax-font-size-xlarge);
 }
 
 .aksel-data-table__th-content {

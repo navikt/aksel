@@ -65,7 +65,7 @@ export const TanstackColumnFilter: Story = {
     });
 
     return (
-      <DataTable>
+      <DataTable withKeyboardNav>
         <DataTable.Thead>
           {table.getHeaderGroups().map((headerGroup) => {
             return (
@@ -76,26 +76,27 @@ export const TanstackColumnFilter: Story = {
                       key={header.id}
                       size={200}
                       resizeHandler={header.getResizeHandler()}
+                      sortable
                       sortDirection={header.column.getIsSorted() || "none"}
-                      onSortChange={(_, event) => {
+                      onSortClick={(event) => {
                         const handler = header.column.getToggleSortingHandler();
                         handler?.(event);
                       }}
-                      render={{
-                        /* TODO: This makes no sense at the moment */
+                      /* render={{
+
                         filterMenu: header.column.getCanFilter()
                           ? {
                               title: "Filter",
                               content: (
                                 <DummyFilter
                                   column={header.column}
-                                  /* This only work for values without custom renderer (like boolean tags now) */
+
                                   title={`Filter: ${header.column.columnDef.header}`}
                                 />
                               ),
                             }
                           : undefined,
-                      }}
+                      }} */
                     >
                       {header.isPlaceholder
                         ? null
@@ -139,7 +140,7 @@ export const TanstackColumnFilter: Story = {
   },
 };
 
-function DummyFilter({
+export function DummyFilter({
   column,
   title,
 }: {

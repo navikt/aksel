@@ -86,8 +86,9 @@ export const TanstackDemo: Story = {
                           });
                           table.setColumnSizing(newColumnSizing);
                         }}
+                        sortable
                         sortDirection={header.column.getIsSorted() || "none"}
-                        onSortChange={(_, event) => {
+                        onSortClick={(event) => {
                           const handler =
                             header.column.getToggleSortingHandler();
                           handler?.(event);

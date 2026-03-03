@@ -250,8 +250,9 @@ export const TanstackExample: Story = {
                             : () => header.column.pin("left")
                         }
                         isPinned={header.column.getIsPinned() === "left"} */
+                        sortable
                         sortDirection={header.column.getIsSorted() || "none"}
-                        onSortChange={(_, event) => {
+                        onSortClick={(event) => {
                           const handler =
                             header.column.getToggleSortingHandler();
                           handler?.(event);
