@@ -30,7 +30,9 @@ type ResolveListboxItem<
 export interface ListboxListBaseProps<
   T extends ListboxItemData | ListboxGroupData<ListboxItemData>,
 > {
-  children?: React.ReactNode | ((item: T) => React.ReactNode);
+  children?:
+    | React.ReactNode
+    | ((itemOrGroup: ResolveListboxItem<T> | T) => React.ReactNode);
   virtuallyFocusedItemValue: string;
   setVirtuallyFocusedItemValue: (value: string) => void;
   items: T[];
@@ -44,7 +46,7 @@ export type ListboxListProps<
 > = ListboxListBaseProps<T> &
   Omit<
     React.HTMLAttributes<HTMLDivElement>,
-    "role" | "tabIndex" | "onMouseOver"
+    "role" | "tabIndex" | "onMouseOver" | "children"
   >;
 
 function ListboxList<

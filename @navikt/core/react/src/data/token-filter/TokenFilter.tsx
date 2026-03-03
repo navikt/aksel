@@ -1,6 +1,8 @@
 import React, { forwardRef, useState } from "react";
 import { Popover } from "../../popover";
 import { HStack } from "../../primitives/stack";
+import { ListboxGroup } from "../../utils/components/Listbox/group/ListboxGroup";
+import { ListboxItem } from "../../utils/components/Listbox/item/ListboxItem";
 import Listbox from "../../utils/components/Listbox/root/ListboxRoot";
 import { cl } from "../../utils/helpers";
 import { AutoCompleteOption } from "./AutoSuggest.types";
@@ -143,9 +145,39 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
               }))}
               onToggleItem={handleSelectOption}
               style={{ maxHeight: "350px" }}
-            />
+            >
+              {autoCompleteOptions.options.map((group) => (
+                <ListboxGroup
+                  key={group.label}
+                  group={{ label: group.label, id: group.label, items: [] }}
+                  childrenProp={false}
+                >
+                  {group.options.map((item) => (
+                    <ListboxItem
+                      key={item.value}
+                      item={item}
+                      onToggleItem={handleSelectOption}
+                      isSelected={false}
+                      hasVirtualFocus={virtuallyFocusedItemValue === item.value}
+                      textToHighlight=""
+                    >
+                      <span>{item.label}</span>
+                      {item.description && <em> {item.description}</em>}
+                      {item.tags && item.tags.length > 0 && (
+                        <div>
+                          {item.tags.map((tag) => (
+                            <span key={tag}>{tag}</span>
+                          ))}
+                        </div>
+                      )}
+                    </ListboxItem>
+                  ))}
+                </ListboxGroup>
+              ))}
+            </Listbox.List>
           </Popover>
         </Listbox>
+
         <HStack marginBlock="space-8" gap="space-8">
           {query.tokens.map((token, index) => {
             return (
