@@ -136,7 +136,6 @@ export const NoPageScroll: Story = {
                         </DataTable.Th>
                       );
                     })}
-                    <th className="aksel-data-table__th aksel-data-table__filler-cell" />
                   </DataTable.Tr>
                 );
               })}
@@ -157,7 +156,6 @@ export const NoPageScroll: Story = {
                           )}
                     </DataTable.Td>
                   ))}
-                  <td className="aksel-data-table__td aksel-data-table__filler-cell" />
                 </DataTable.Tr>
               ))}
             </DataTable.Tfoot>
@@ -195,7 +193,6 @@ const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
                 </DataTable.Td>
               );
             })}
-            <td className="aksel-data-table__td aksel-data-table__filler-cell" />
           </DataTable.Tr>
         );
       })}

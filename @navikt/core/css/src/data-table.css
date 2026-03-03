@@ -262,4 +262,5 @@
 
 .aksel-data-table__filler-cell {
   width: auto;
+  display: table-cell;
 }
