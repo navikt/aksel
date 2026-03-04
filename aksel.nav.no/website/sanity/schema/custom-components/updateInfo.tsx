@@ -63,9 +63,9 @@ const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
 const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
   const articleType = useFormValue(["_type"]);
 
-  const verified: any = useFormValue(["updateInfo", "lastVerified"]);
+  const verified = useFormValue(["updateInfo", "lastVerified"]);
 
-  if (!verified) {
+  if (typeof verified !== "string") {
     return null;
   }
 
