@@ -1,5 +1,5 @@
 import { differenceInDays, differenceInMonths, format } from "date-fns";
-import { ComponentType, useCallback, useState } from "react";
+import { ComponentType, useState } from "react";
 import {
   ObjectFieldProps,
   ObjectInputProps,
@@ -20,7 +20,7 @@ const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
 
   const [updating, setUpdating] = useState(false);
 
-  const handleUpdate = useCallback(async () => {
+  const handleUpdate = async () => {
     if (!documentId) return;
 
     setUpdating(true);
@@ -42,7 +42,7 @@ const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
     } finally {
       setUpdating(false);
     }
-  }, [client, documentId, onChange]);
+  };
 
   return (
     <Box marginBlock="space-16 space-0">

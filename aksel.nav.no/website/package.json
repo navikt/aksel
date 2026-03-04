@@ -90,7 +90,7 @@
     "@playwright/test": "^1.57.0",
     "@portabletext/block-tools": "^5.0.1",
     "@portabletext/markdown": "^1.1.2",
-    "@sanity/blueprints": "^0.12.2",
+    "@sanity/blueprints": "0.12.2",
     "@sanity/export": "^4",
     "@sanity/functions": "1.2.0",
     "@sanity/schema": "5.11.0",

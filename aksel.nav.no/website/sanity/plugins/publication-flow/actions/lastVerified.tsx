@@ -1,7 +1,7 @@
 "use client";
 
 import { format } from "date-fns";
-import { useEffectEvent, useState } from "react";
+import { useState } from "react";
 import { DocumentActionComponent, useDocumentOperation } from "sanity";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import {
@@ -26,16 +26,14 @@ export function setLastVerified(
 
     const [isDialogOpen, setDialogOpen] = useState(false);
 
-    const openDialog = useEffectEvent(() => {
-      setDialogOpen(true);
-    });
+    const openDialog = () => setDialogOpen(true);
 
-    const closeDialog = useEffectEvent(() => {
+    const closeDialog = () => {
       setDialogOpen(false);
       setCurrentStep("1");
-    });
+    };
 
-    const publishDocument = useEffectEvent((withNewVerify: boolean = false) => {
+    const publishDocument = (withNewVerify: boolean = false) => {
       closeDialog();
       if (withNewVerify) {
         patch.execute([
@@ -47,16 +45,16 @@ export function setLastVerified(
         ]);
       }
       originalResult?.onHandle?.();
-    });
+    };
 
-    const handleContinue = useEffectEvent(() => {
+    const handleContinue = () => {
       if (props.published) {
         setCurrentStep("2");
       } else {
         /* Sanity functions handles initial lastVerified timestamp creation */
         publishDocument(false);
       }
-    });
+    };
 
     if (!originalResult) {
       return null;
@@ -64,7 +62,7 @@ export function setLastVerified(
 
     return {
       ...originalResult,
-      label: props.published ? "Publiser" : originalResult.label,
+      label: originalResult.label,
       onHandle: openDialog,
       dialog: isDialogOpen && {
         header: (
@@ -108,7 +106,6 @@ function StepOne(props: StepOneProps) {
   return (
     <div>
       <List>
-        <List.Item>Brukt riktig overskriftsnivå?</List.Item>
         <List.Item>
           Brukt et aktivt og forståelig språk? Og ellers skrevet i tråd med slik
           vi skriver på Aksel?

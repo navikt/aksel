@@ -5781,7 +5781,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/blueprints@npm:^0.12.2":
+"@sanity/blueprints@npm:0.12.2, @sanity/blueprints@npm:^0.12.2":
   version: 0.12.2
   resolution: "@sanity/blueprints@npm:0.12.2"
   checksum: 10/43e261b139975d98a06a466879acf4c9a1905075bfc50cecd64928f59a853235afe71c1b40c9da925e6a93526b940785aa1367c853c00233f076ab83aa8697b1
@@ -24599,7 +24599,7 @@ __metadata:
     "@portabletext/block-tools": "npm:^5.0.1"
     "@portabletext/markdown": "npm:^1.1.2"
     "@portabletext/react": "npm:^6.0.2"
-    "@sanity/blueprints": "npm:^0.12.2"
+    "@sanity/blueprints": "npm:0.12.2"
     "@sanity/client": "npm:7.14.0"
     "@sanity/code-input": "npm:7.0.8"
     "@sanity/color-input": "npm:6.0.4"
