@@ -17,6 +17,22 @@ const locales: Record<Language, Translations> = {
   en,
 };
 
+const LanguageDecorator = ({
+  children,
+  lang,
+}: {
+  children: React.ReactNode;
+  lang: Language | undefined;
+}) => {
+  useEffect(() => {
+    document.documentElement.lang = lang || "nb";
+  }, [lang]);
+
+  return (
+    <Provider locale={lang ? locales[lang] : undefined}>{children}</Provider>
+  );
+};
+
 const fonts = ["Source Sans 3", "Open Sans"];
 
 const TypoDecorator = ({
@@ -103,15 +119,9 @@ export default {
       </TypoDecorator>
     ),
     (StoryFn, context) => (
-      <Provider
-        locale={
-          context.globals.language
-            ? locales[context.globals.language as Language]
-            : undefined
-        }
-      >
+      <LanguageDecorator lang={context.globals.language}>
         <StoryFn />
-      </Provider>
+      </LanguageDecorator>
     ),
     withThemeByClassName({
       themes: {
