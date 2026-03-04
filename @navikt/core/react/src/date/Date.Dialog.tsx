@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useRef } from "react";
 import { Button } from "../button";
 import { useDialogContext } from "../dialog/root/DialogRoot.context";
 import { Modal } from "../modal";
@@ -59,10 +59,6 @@ const DateDialog = ({
     !isInModal &&
     !isInDialog;
 
-  const popoverRefCallback = useCallback((element: HTMLDivElement | null) => {
-    focusElement(element, { preventScroll: true, sync: false });
-  }, []);
-
   if (!open) {
     return null;
   }
@@ -78,7 +74,7 @@ const DateDialog = ({
           "aksel-date": variant === "month",
         })}
         {...popoverProps}
-        ref={popoverRefCallback}
+        ref={focusPopoverOnOpen}
         tabIndex={-1}
         role="dialog"
         aria-labelledby={popupLabelId}
@@ -118,4 +114,9 @@ const DateDialog = ({
     </Modal>
   );
 };
+
+function focusPopoverOnOpen(element: HTMLDivElement | null) {
+  focusElement(element, { preventScroll: true, sync: false });
+}
+
 export { DateDialog };
