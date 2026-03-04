@@ -95,6 +95,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     );
 
     const ariaId = useId(id);
+    const popupLabelId = useId();
 
     const [open, setOpen] = useControllableState({
       defaultValue: false,
@@ -161,6 +162,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 id: ariaId,
                 strategy,
               }}
+              popupLabelId={popupLabelId}
             >
               <ReactDayPicker
                 {...rest}
@@ -168,6 +170,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 handleSelect={setValue}
                 selected={value as any}
                 mode={mode as any}
+                popupLabelId={popupLabelId}
               />
             </DateDialog>
           </div>

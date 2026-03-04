@@ -44,6 +44,10 @@ type ReactDayPickerProps = DatePickerDefaultProps &
      * Update selected date
      */
     handleSelect: (newSelected: any) => void;
+    /**
+     * Id for the label of the popup, used for aria-labelledby
+     */
+    popupLabelId?: string;
   };
 
 const ReactDayPicker = ({
@@ -61,6 +65,7 @@ const ReactDayPicker = ({
   mode: _mode,
   handleSelect,
   locale: _locale,
+  popupLabelId,
   ...rest
 }: ReactDayPickerProps) => {
   const langProviderLocale = useDateLocale();
@@ -130,9 +135,10 @@ const ReactDayPicker = ({
               onWeekNumberClick={
                 mode === "multiple" ? onWeekNumberClick : undefined
               }
+              popupLabelId={popupLabelId}
             />
           ),
-          [locale, mode, onWeekNumberClick],
+          [locale, mode, onWeekNumberClick, popupLabelId],
         ),
         Day: useCallback(
           (props) => (

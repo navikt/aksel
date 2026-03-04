@@ -1,6 +1,7 @@
 import { differenceInCalendarDays, isWeekend } from "date-fns";
 import React, { useCallback, useState } from "react";
 import { DayEventHandler, dateMatchModifiers } from "react-day-picker";
+import { focusElement } from "../../../utils/helpers/focus";
 import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
 import { DateInputProps } from "../../Date.Input";
 import { getLocaleFromString } from "../../Date.locale";
@@ -160,8 +161,9 @@ export const useDatepicker = (
   const handleOpen = useCallback(
     (newOpen: boolean) => {
       setOpen(newOpen);
-      newOpen &&
+      if (newOpen) {
         setMonth(selectedDay ?? defaultSelected ?? defaultMonth ?? today);
+      }
     },
     [defaultMonth, defaultSelected, selectedDay, today],
   );
@@ -313,7 +315,10 @@ export const useDatepicker = (
     open,
     onClose: () => {
       handleOpen(false);
-      anchorRef?.focus();
+      /* Delay focus to allow "open"-button to update title before focus */
+      queueMicrotask(() =>
+        focusElement(anchorRef, { sync: false, preventScroll: true }),
+      );
     },
     onOpenToggle: () => handleOpen(!open),
     disabled,
