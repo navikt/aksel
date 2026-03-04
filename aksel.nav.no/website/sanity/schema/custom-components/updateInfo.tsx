@@ -47,13 +47,14 @@ const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
   return (
     <Box marginBlock="space-16 space-0">
       <Button
+        size="small"
         variant="primary"
         loading={updating}
         onClick={handleUpdate}
         disabled={readOnly}
         data-color="neutral"
       >
-        Oppdatert godkjenningsdato
+        Oppdater godkjenningsdato
       </Button>
     </Box>
   );
@@ -77,18 +78,18 @@ const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
   }
 
   return (
-    <InfoCard data-color="warning">
+    <InfoCard size="small" data-color="warning">
       <InfoCard.Header icon={<HourglassBottomFilledIcon aria-hidden />}>
         <InfoCard.Title>
           Artikkelen er utdatert ({diffInDays} dager siden sist godkjent)
         </InfoCard.Title>
       </InfoCard.Header>
       <InfoCard.Content style={{ background: "transparent" }}>
-        <BodyLong spacing>
+        <BodyLong size="small" spacing>
           Artikkelen trenger ny godkjenning. Les gjennom og oppdater innholdet,
           for så å oppdatere godkjenningsdatoen.
         </BodyLong>
-        <BodyLong>
+        <BodyLong size="small">
           {articleType === "aksel_artikkel"
             ? "Etter 12 måneder regnes en God praksis-artikkel som utdatert."
             : "Etter 6 måneder regnes en Designsystem-artikkel som utdatert."}
