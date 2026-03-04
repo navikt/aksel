@@ -1,11 +1,11 @@
 import React, { forwardRef } from "react";
 import {
+  ArrowsUpDownIcon,
   CaretLeftCircleFillIcon,
   CaretRightCircleFillIcon,
   SortDownIcon,
   SortUpIcon,
 } from "@navikt/aksel-icons";
-import { HStack, Spacer } from "../../../primitives/stack";
 import { cl } from "../../../utils/helpers";
 
 type SortDirection = "asc" | "desc" | "none";
@@ -50,7 +50,7 @@ interface DataTableThProps extends React.HTMLAttributes<HTMLTableCellElement> {
 const SORT_ICON: Record<SortDirection, React.ElementType | null> = {
   asc: SortUpIcon,
   desc: SortDownIcon,
-  none: null,
+  none: ArrowsUpDownIcon,
 };
 
 /**
@@ -74,6 +74,8 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
     forwardedRef,
   ) => {
     const [resizeHandlerActive, setResizeHandlerActive] = React.useState(false);
+    const [isOverflowing, setIsOverflowing] = React.useState(false);
+    const contentRef = React.useRef<HTMLDivElement>(null);
 
     const keyDownHandler = (event: React.KeyboardEvent<HTMLButtonElement>) => {
       if (keyboardResizingHandler) {
@@ -97,29 +99,37 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         {...rest}
         ref={forwardedRef}
         className={cl("aksel-data-table__th", className)}
+        data-sortable={sortable}
         style={{ width: size, ...style }}
         aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
+        onPointerEnter={() => {
+          const el = contentRef.current;
+          setIsOverflowing(el ? el.scrollWidth > el.offsetWidth : false);
+          console.info("is overflowing", isOverflowing);
+        }}
+        onPointerLeave={() => setIsOverflowing(false)}
       >
-        <HStack align="center" wrap={false}>
-          <HStack
-            className={cl({ "aksel-data-table__th-sort-button": sortable })}
+        {sortable ? (
+          <button
+            className="aksel-data-table__th-sort-button"
             onClick={sortable ? onSortClick : undefined}
-            as={sortable ? "button" : "div"}
           >
-            <div className="aksel-data-table__th-content">{children}</div>
             {SortIcon && (
-              <>
-                <Spacer />
-                <SortIcon
-                  aria-hidden
-                  className="aksel-data-table__th-sort-icon"
-                />
-              </>
+              <SortIcon
+                aria-hidden
+                data-sort-direction={sortDirection}
+                className="aksel-data-table__th-sort-icon"
+              />
             )}
-          </HStack>
-          {/* <button>
-            <ChevronDownIcon aria-hidden />
-          </button> */}
+            <div ref={contentRef} className="aksel-data-table__th-content">
+              {children}
+            </div>
+          </button>
+        ) : (
+          <div ref={contentRef} className="aksel-data-table__th-content">
+            {children}
+          </div>
+        )}
 
         {resizeHandler && (
           <button
@@ -145,7 +155,6 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
             )}
           </button>
         )}
-        </HStack>
       </th>
     );
   },

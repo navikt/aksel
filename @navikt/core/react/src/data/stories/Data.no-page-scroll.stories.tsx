@@ -109,7 +109,7 @@ export const NoPageScroll: Story = {
         </DataToolbar>
 
         <Box flexGrow="1" overflow="hidden">
-          <DataTable>
+          <DataTable withKeyboardNav>
             <DataTable.Thead>
               {table.getHeaderGroups().map((headerGroup) => {
                 return (

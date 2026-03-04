@@ -129,23 +129,23 @@
   padding: var(--ax-space-8) var(--ax-space-16);
   text-align: start;
 
-  &:has(.aksel-data-table__th-sort-button) {
+  &[data-sortable="true"] {
     padding: 0;
+    block-size: 2rem;
   }
 }
 
 .aksel-data-table__th-sort-button {
-  all: unset;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: var(--ax-space-8);
+  gap: var(--ax-space-2);
+  padding-inline-start: var(--ax-space-16);
+  block-size: 2rem;
   width: 100%;
-  padding: var(--ax-space-8) var(--ax-space-16);
   cursor: pointer;
-  font: inherit;
-  color: inherit;
   text-align: start;
+  background-color: transparent;
+  border: none;
 
   &:hover {
     background-color: var(--ax-bg-neutral-moderate-hover);
@@ -163,7 +163,14 @@
 
 .aksel-data-table__th-sort-icon {
   flex-shrink: 0;
-  font-size: var(--ax-font-size-xlarge);
+
+  &[data-sort-direction="none"] {
+    display: none;
+  }
+
+  .aksel-data-table__th-sort-button:is(:hover, :focus-visible, :focus-within) & {
+    display: block;
+  }
 }
 
 .aksel-data-table__th-content {
