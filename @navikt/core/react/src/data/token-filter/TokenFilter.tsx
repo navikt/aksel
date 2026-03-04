@@ -1,10 +1,8 @@
 import React, { forwardRef, useState } from "react";
-import { Popover } from "../../popover";
+import { Chips } from "../../chips";
 import { HStack } from "../../primitives/stack";
-import { ListboxGroup } from "../../utils/components/Listbox/group/ListboxGroup";
-import { ListboxItem } from "../../utils/components/Listbox/item/ListboxItem";
-import Listbox from "../../utils/components/Listbox/root/ListboxRoot";
 import { cl } from "../../utils/helpers";
+import { AutoSuggest } from "./AutoSuggest";
 import { AutoCompleteOption } from "./AutoSuggest.types";
 // import { AutoSuggest } from "./AutoSuggest";
 import type {
@@ -34,12 +32,8 @@ type TokenFilterProps = {
  */
 export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
   ({ query, className, propertyDefinitions, options, onChange }, ref) => {
-    const [inputAnchor, setInputAnchor] = useState<HTMLInputElement | null>(
-      null,
-    );
     const [filterText, setFilterText] = useState<string>("");
-    const [virtuallyFocusedItemValue, setVirtuallyFocusedItemValue] =
-      useState("");
+    const [open, setOpen] = useState(false);
 
     const { parsedPropertyDefinitions, parsedPropertyOptions } =
       derrivedFilterState(propertyDefinitions, options);
@@ -52,14 +46,12 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
       parsedPropertyOptions,
     );
 
-    const [customOpen, setCustomOpen] = useState(false);
-
-    const { addToken } = createActionHandlers({
+    const { addToken, removeToken } = createActionHandlers({
       query,
       onChange,
     });
 
-    const createToken = (newText: string) => {
+    const createToken = (newText: string): boolean => {
       const newQueryState = parseQueryText(newText, parsedPropertyDefinitions);
 
       let newToken: ExternalToken | null = null;
@@ -67,7 +59,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
       switch (newQueryState.step) {
         case "property": {
           if (newQueryState.value === "") {
-            return;
+            return false;
           }
           newToken = {
             propertyKey: newQueryState.property.key,
@@ -86,16 +78,29 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
       if (newToken) {
         addToken(newToken);
         setFilterText("");
-        setCustomOpen(false);
+        return true;
       }
+      return false;
     };
 
     const handleSelectOption = (option: AutoCompleteOption) => {
-      setFilterText(option.value);
-      createToken(option.value);
-    };
+      const newQueryState = parseQueryText(
+        option.value,
+        parsedPropertyDefinitions,
+      );
 
-    const isValid = queryState.step === "property" && queryState.value !== "";
+      if (
+        (newQueryState.step === "property" && newQueryState.value === "") ||
+        newQueryState.step === "operator"
+      ) {
+        /* Add space after for better formatting */
+        /* TODO: Handle this scenario better */
+        setFilterText(`${option.value} `);
+        return false;
+      }
+      setFilterText(option.value);
+      return createToken(option.value);
+    };
 
     return (
       <div
@@ -103,90 +108,28 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
         className={cl("aksel-property-filter", className)}
         role="search"
       >
-        <Listbox setVirtuallyFocusedItemValue={setVirtuallyFocusedItemValue}>
-          <Listbox.InputSlot>
-            <input
-              type="text"
-              className="aksel-property-filter__input"
-              placeholder="Type to filter..."
-              ref={setInputAnchor}
-              value={filterText}
-              onChange={(e) => setFilterText(e.target.value)}
-              onFocus={() => setCustomOpen(true)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  createToken(filterText);
-                }
-              }}
-              style={{
-                outline: isValid ? "1px solid green" : "1px solid transparent",
-              }}
-            />
-          </Listbox.InputSlot>
-          <Popover
-            anchorEl={inputAnchor}
-            open={customOpen}
-            onClose={() => {
-              setFilterText("");
-              setCustomOpen(false);
-            }}
-          >
-            {/* <AutoSuggest
-            options={autoCompleteOptions.options}
-            onSelect={handleSelectOption}
-          /> */}
-            <Listbox.List
-              virtuallyFocusedItemValue={virtuallyFocusedItemValue}
-              setVirtuallyFocusedItemValue={setVirtuallyFocusedItemValue}
-              items={autoCompleteOptions.options.map((option) => ({
-                label: option.label,
-                id: option.label,
-                items: option.options,
-              }))}
-              onToggleItem={handleSelectOption}
-              style={{ maxHeight: "350px" }}
-            >
-              {autoCompleteOptions.options.map((group) => (
-                <ListboxGroup
-                  key={group.label}
-                  group={{ label: group.label, id: group.label, items: [] }}
-                  childrenProp={false}
-                >
-                  {group.options.map((item) => (
-                    <ListboxItem
-                      key={item.value}
-                      item={item}
-                      onToggleItem={handleSelectOption}
-                      isSelected={false}
-                      hasVirtualFocus={virtuallyFocusedItemValue === item.value}
-                      textToHighlight=""
-                    >
-                      <span>{item.label}</span>
-                      {item.description && <em> {item.description}</em>}
-                      {item.tags && item.tags.length > 0 && (
-                        <div>
-                          {item.tags.map((tag) => (
-                            <span key={tag}>{tag}</span>
-                          ))}
-                        </div>
-                      )}
-                    </ListboxItem>
-                  ))}
-                </ListboxGroup>
-              ))}
-            </Listbox.List>
-          </Popover>
-        </Listbox>
-
+        <AutoSuggest
+          onSelect={handleSelectOption}
+          options={autoCompleteOptions.options}
+          value={filterText}
+          onChange={setFilterText}
+          open={open}
+          setOpen={setOpen}
+        />
         <HStack marginBlock="space-8" gap="space-8">
           {query.tokens.map((token, index) => {
             return (
               <React.Fragment
                 key={`${token.propertyKey}-${token.operator}-${token.value}-${index}`}
               >
-                <button key={index}>
+                <Chips.Removable
+                  key={index}
+                  onClick={() => {
+                    removeToken(index);
+                  }}
+                >
                   {`${token.propertyKey} ${token.operator} ${token.value}`}
-                </button>
+                </Chips.Removable>
                 {index < query.tokens.length - 1 && (
                   <span>{query.operation}</span>
                 )}
@@ -194,13 +137,6 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
             );
           })}
         </HStack>
-        <ul>
-          {options.map((prop) => (
-            <li key={prop.value}>{prop.label}</li>
-          ))}
-        </ul>
-        {/* <pre>{JSON.stringify(queryState, null, 2)}</pre> */}
-        <pre>{JSON.stringify(autoCompleteOptions, null, 2)}</pre>
       </div>
     );
   },

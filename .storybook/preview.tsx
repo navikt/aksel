@@ -2,6 +2,7 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 import { Preview } from "@storybook/react-vite";
 import React, { useEffect } from "react";
 import "../@navikt/core/css/src/data-table.css";
+import "../@navikt/core/css/src/data-token-filter.css";
 import "../@navikt/core/css/src/data-toolbar.css";
 import "../@navikt/core/css/src/index.css";
 import "../@navikt/core/css/src/listbox.css";

@@ -1,0 +1,36 @@
+.aksel-property-filter__popup {
+  overflow: hidden;
+  border-radius: var(--ax-radius-12);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  box-shadow: var(--ax-shadow-dialog);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  transform-origin: var(--__axc-floating-transform-origin);
+  transition:
+    transform 150ms ease allow-discrete,
+    opacity 150ms ease allow-discrete;
+
+  @starting-style {
+    opacity: 0.8;
+    transform: scale3d(0.94, 0.94, 0.94);
+  }
+
+  min-width: 260px;
+}
+
+.aksel-property-filter__popup-inner {
+  --__axc-token-filter-content-p: var(--ax-space-8);
+  --__axc-token-filter-item-pr: var(--ax-space-8);
+  --__axc-token-filter-item-pl: var(--ax-space-8);
+  --__axc-token-filter-item-height: 2rem;
+
+  border-radius: var(--ax-radius-12);
+  background-color: var(--ax-bg-raised);
+  min-width: 128px;
+  max-width: min(95vw, 640px);
+  animation-duration: 160ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  padding: var(--__axc-token-filter-content-p);
+  overflow: auto;
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  max-height: var(--__axc-floating-available-height);
+}

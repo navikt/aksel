@@ -281,7 +281,7 @@ function createValueSuggestions(
 
     groups[groupLabel].options.push({
       value: buildQueryString(option.property.label, operator, option.value),
-      label: option.label,
+      label: buildQueryString(option.property.label, operator, option.value),
       tags: option.tags,
     });
   }
