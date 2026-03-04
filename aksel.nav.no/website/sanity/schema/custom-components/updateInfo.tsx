@@ -91,8 +91,8 @@ const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
         </BodyLong>
         <BodyLong size="small">
           {articleType === "aksel_artikkel"
-            ? "Etter 12 måneder regnes en God praksis-artikkel som utdatert."
-            : "Etter 6 måneder regnes en Designsystem-artikkel som utdatert."}
+            ? "En God praksis-artikkel regnes som utdatert etter 12 måneder."
+            : "En Designsystem-artikkel regnes som utdatert etter 6 måneder."}
         </BodyLong>
         {props.children}
       </InfoCard.Content>
