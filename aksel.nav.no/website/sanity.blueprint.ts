@@ -30,5 +30,14 @@ export default defineBlueprint({
       },
       src: "./sanity/functions/first-verified-at",
     }),
+    defineDocumentFunction({
+      name: "unpublish",
+      event: {
+        on: ["delete"],
+        filter: `_type in ${allVerifiedDocuments} && defined(updateInfo.lastVerified)`,
+        projection: "{_id}",
+      },
+      src: "./sanity/functions/unpublish",
+    }),
   ],
 });

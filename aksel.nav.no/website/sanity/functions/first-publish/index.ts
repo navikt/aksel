@@ -13,7 +13,7 @@ const handler = documentEventHandler(async ({ context, event }) => {
 
   try {
     const publishedAt = new Date().toISOString();
-    const result = await client
+    await client
       .patch(data._id)
       .setIfMissing({
         publishedAt,
@@ -23,7 +23,6 @@ const handler = documentEventHandler(async ({ context, event }) => {
       local
         ? `(LOCAL TEST MODE - Content Lake not updated) Set publishedAt timestamp for document (${data._id}): ${publishedAt}  `
         : `Set publishedAt timestamp for document (${data._id}): ${publishedAt}`,
-      result,
     );
   } catch (error) {
     console.error("Error setting publishedAt timestamp:", error);
