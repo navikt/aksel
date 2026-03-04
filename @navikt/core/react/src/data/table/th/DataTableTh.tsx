@@ -121,31 +121,30 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
             <ChevronDownIcon aria-hidden />
           </button> */}
 
-          {resizeHandler && (
-            <button
-              // TODO: Should probably not be a button since it doesn't have onClick
-              // TODO: Make it work with tableKeyboardNavigation
-              onMouseDown={resizeHandler}
-              onTouchStart={resizeHandler}
-              onBlur={() => setResizeHandlerActive(false)}
-              className="aksel-data-table__th-resize-handle"
-              data-active={resizeHandlerActive}
-              // TODO Very open to a better name for this
-              data-block-keyboard-nav
-              onKeyDown={keyDownHandler}
-            >
-              {resizeHandlerActive && (
-                <>
-                  <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--start">
-                    <CaretLeftCircleFillIcon aria-hidden fontSize="1.5rem" />
-                  </span>
-                  <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--end">
-                    <CaretRightCircleFillIcon aria-hidden fontSize="1.5rem" />
-                  </span>
-                </>
-              )}
-            </button>
-          )}
+        {resizeHandler && (
+          <button
+            // TODO: Should probably not be a button since it doesn't have onClick
+            onMouseDown={resizeHandler}
+            onTouchStart={resizeHandler}
+            onBlur={() => setResizeHandlerActive(false)}
+            className="aksel-data-table__th-resize-handle"
+            data-active={resizeHandlerActive}
+            // TODO Very open to a better name for this
+            data-block-keyboard-nav
+            onKeyDown={keyDownHandler}
+          >
+            {resizeHandlerActive && (
+              <>
+                <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--start">
+                  <CaretLeftCircleFillIcon aria-hidden fontSize="1.5rem" />
+                </span>
+                <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--end">
+                  <CaretRightCircleFillIcon aria-hidden fontSize="1.5rem" />
+                </span>
+              </>
+            )}
+          </button>
+        )}
         </HStack>
       </th>
     );
