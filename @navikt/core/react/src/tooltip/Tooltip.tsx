@@ -237,9 +237,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               <TooltipShortcuts shortcuts={keys} />
               {_arrow && (
                 <div
-                  ref={(node) => {
-                    arrowRef.current = node;
-                  }}
+                  ref={arrowRef}
                   className="aksel-tooltip__arrow"
                   style={{
                     left: arrowX != null ? `${arrowX}px` : "",

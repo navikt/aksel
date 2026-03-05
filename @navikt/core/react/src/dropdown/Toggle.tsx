@@ -1,5 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import { cl, composeEventHandlers } from "../utils/helpers";
+import { useMergeRefs } from "../utils/hooks";
 import { DropdownContext } from "./context";
 
 export interface DropdownToggleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -15,30 +16,23 @@ export const DropdownToggle = forwardRef<
 >(({ className, onClick, ...rest }, ref) => {
   const context = useContext(DropdownContext);
 
+  const mergedRef = useMergeRefs(context?.setAnchorEl, ref);
+
   if (!context) {
     console.warn("Dropdown.Toggle has to be wrapped in <Dropdown />");
     return null;
   }
 
-  const { setAnchorEl, handleToggle, isOpen } = context;
+  const { handleToggle, isOpen } = context;
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    setAnchorEl(e.currentTarget);
+  const handleClick = () => {
     handleToggle(!isOpen);
   };
 
   return (
     <button
       {...rest}
-      ref={(el) => {
-        setAnchorEl(el);
-
-        if (typeof ref === "function") {
-          ref(el);
-        } else if (ref != null) {
-          ref.current = el;
-        }
-      }}
+      ref={mergedRef}
       onClick={composeEventHandlers(onClick, handleClick)}
       aria-expanded={isOpen}
       className={cl("aksel-dropdown__toggle", className)}

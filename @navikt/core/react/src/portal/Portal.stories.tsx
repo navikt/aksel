@@ -54,10 +54,10 @@ export const CustomPortalRoot = () => {
 
 export const CustomPortalRootFromProvider = () => {
   const [portalContainer, setPortalContainer] =
-    React.useState<HTMLDivElement>();
+    React.useState<HTMLDivElement | null>(null);
 
   return (
-    <Provider rootElement={portalContainer}>
+    <Provider rootElement={portalContainer ?? undefined}>
       <div style={{ background: "red", padding: "1rem" }}>
         <div style={{ background: "orange" }}>
           <h1>Tree A</h1>
@@ -65,12 +65,7 @@ export const CustomPortalRootFromProvider = () => {
             <p>This is mounted to Tree B, while created inside Tree A</p>
           </Portal>
         </div>
-        <div
-          style={{ background: "lightgray" }}
-          ref={(el) => {
-            el && setPortalContainer(el);
-          }}
-        >
+        <div style={{ background: "lightgray" }} ref={setPortalContainer}>
           <h1>Tree B</h1>
         </div>
       </div>
