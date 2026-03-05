@@ -615,6 +615,24 @@ export const ChromaticSmallMobile: Story = {
   },
 };
 
+export const FixedWeeks = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Apr 23 2026"),
+    defaultMonth: new Date("Apr 23 2026"),
+  });
+
+  return (
+    <Box minHeight="24rem">
+      <div style={{ display: "flex", gap: "1rem" }}>
+        <DatePicker {...datepickerProps} dropdownCaption fixedWeeks open>
+          <DatePicker.Input {...inputProps} label="Velg dato" />
+        </DatePicker>
+      </div>
+    </Box>
+  );
+};
+
 export const Chromatic = renderStoriesForChromatic({
   DropdownCaption,
   DisabledDays,
@@ -634,4 +652,5 @@ export const Chromatic = renderStoriesForChromatic({
   StandaloneOptions,
   WeekNumber,
   DateRangeWithCommonError,
+  FixedWeeks,
 });
