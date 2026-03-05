@@ -62,7 +62,6 @@ export function setLastVerified(
 
     return {
       ...originalResult,
-      label: originalResult.label,
       onHandle: openDialog,
       dialog: isDialogOpen && {
         header: (
