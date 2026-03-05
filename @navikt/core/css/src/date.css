@@ -7,6 +7,11 @@
 
   .rdp-cell {
     padding: 1px; /* Some CSS-resets sets padding:0 on all items */
+
+    &[data-outside="true"] {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 
   .rdp-day_range_middle {
