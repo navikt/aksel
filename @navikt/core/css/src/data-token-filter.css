@@ -32,5 +32,5 @@
   padding: var(--__axc-token-filter-content-p);
   overflow: auto;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  max-height: var(--__axc-floating-available-height);
+  max-height: calc(var(--__axc-floating-available-height) - 4px);
 }

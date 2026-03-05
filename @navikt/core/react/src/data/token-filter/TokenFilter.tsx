@@ -4,7 +4,6 @@ import { HStack } from "../../primitives/stack";
 import { cl } from "../../utils/helpers";
 import { AutoSuggest } from "./AutoSuggest";
 import { AutoCompleteOption } from "./AutoSuggest.types";
-// import { AutoSuggest } from "./AutoSuggest";
 import type {
   ExternalOptions,
   ExternalPropertyDefinitions,
