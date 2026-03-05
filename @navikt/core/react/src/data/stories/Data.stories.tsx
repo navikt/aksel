@@ -20,6 +20,7 @@ import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort } from "../../typography";
 import DataActionBar from "../action-bar/root/DataActionBarRoot";
+import DataDragAndDrop from "../drag-and-drop/root/DataDragAndDropRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
 import { DataTableProfiler } from "./DataTableProfiler";
@@ -89,6 +90,9 @@ export const TanstackExample: Story = {
     >("normal");
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
+    const [columnOrder, setColumnOrder] = React.useState<string[]>(
+      columns.map((col) => col.accessorKey!),
+    );
     const table = useReactTable({
       columns,
       data: sampleData,
@@ -103,7 +107,10 @@ export const TanstackExample: Story = {
           pageSize: 20,
         },
       },
-      state: {},
+      state: {
+        columnOrder,
+      },
+      onColumnOrderChange: setColumnOrder,
       columnResizeMode: "onChange",
       debugTable: true,
       debugHeaders: true,
@@ -195,22 +202,30 @@ export const TanstackExample: Story = {
                       >
                         Velg alle
                       </Switch>
-                      {table.getAllLeafColumns().map((column) => {
-                        return (
-                          <Switch
-                            key={column.id}
-                            size="small"
-                            checked={column.getIsVisible()}
-                            onChange={(event) => {
-                              const handler =
-                                column.getToggleVisibilityHandler();
-                              handler(event);
-                            }}
-                          >
-                            {column.id}
-                          </Switch>
-                        );
-                      })}
+                      <DataDragAndDrop setItems={setColumnOrder}>
+                        {table.getAllLeafColumns().map((column, index) => {
+                          return (
+                            <DataDragAndDrop.Item
+                              id={column.id}
+                              index={index}
+                              key={column.id}
+                            >
+                              <Switch
+                                key={column.id}
+                                size="small"
+                                checked={column.getIsVisible()}
+                                onChange={(event) => {
+                                  const handler =
+                                    column.getToggleVisibilityHandler();
+                                  handler(event);
+                                }}
+                              >
+                                {column.id}
+                              </Switch>
+                            </DataDragAndDrop.Item>
+                          );
+                        })}
+                      </DataDragAndDrop>
                     </VStack>
                   </VStack>
                 </HStack>
@@ -250,11 +265,24 @@ export const TanstackExample: Story = {
                             : () => header.column.pin("left")
                         }
                         isPinned={header.column.getIsPinned() === "left"} */
+                        sortable
                         sortDirection={header.column.getIsSorted() || "none"}
-                        onSortChange={(_, event) => {
+                        onSortClick={(event) => {
                           const handler =
                             header.column.getToggleSortingHandler();
                           handler?.(event);
+                        }}
+                        keyboardResizingHandler={(increment) => {
+                          const newColumnSizing = {};
+                          table.getFlatHeaders().forEach((h) => {
+                            if (h.id === header.id) {
+                              newColumnSizing[h.id] =
+                                header.getSize() + increment;
+                            } else {
+                              newColumnSizing[h.id] = h.getSize();
+                            }
+                          });
+                          table.setColumnSizing(newColumnSizing);
                         }}
                       >
                         {header.isPlaceholder

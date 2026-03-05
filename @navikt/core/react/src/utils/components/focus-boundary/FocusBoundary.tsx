@@ -11,6 +11,7 @@ import {
   ownerDocument,
   resolveRef,
 } from "../../helpers";
+import { focusElement, getTabbableCandidates } from "../../helpers/focus";
 import { useMergeRefs } from "../../hooks";
 import { useValueAsRef } from "../../hooks/useValueAsRef";
 import { Slot } from "../slot/Slot";
@@ -118,7 +119,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         if (container.contains(target)) {
           lastFocusedElementRef.current = target;
         } else {
-          focus(lastFocusedElementRef.current, { select: true });
+          focusElement(lastFocusedElementRef.current, { select: true });
         }
       }
 
@@ -150,7 +151,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
          * when they are not supposed to (like when clicking on elements outside the container
          */
         if (!container.contains(relatedTarget)) {
-          focus(lastFocusedElementRef.current, { select: true });
+          focusElement(lastFocusedElementRef.current, { select: true });
         }
       }
 
@@ -165,7 +166,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
         }
 
         if (mutations.some((mutation) => mutation.removedNodes.length > 0)) {
-          focus(container);
+          focusElement(container);
         }
       };
 
@@ -230,7 +231,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
       const previouslyFocusedElement = ownerDoc.activeElement;
 
       queueMicrotask(() => {
-        const focusableElements = removeLinks(getTabbableCandidates(container));
+        const focusableElements = getTabbableCandidates(container);
         const initialFocusValueOrFn = initialFocusRef.current;
         const resolvedInitialFocus =
           typeof initialFocusValueOrFn === "function"
@@ -262,7 +263,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
           return;
         }
 
-        focus(elToFocus, {
+        focusElement(elToFocus, {
           preventScroll: elToFocus === container,
           sync: false,
         });
@@ -361,12 +362,12 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
           if (!event.shiftKey && focusedElement === last) {
             event.preventDefault();
             if (loop) {
-              focus(first, { select: true });
+              focusElement(first, { select: true });
             }
           } else if (event.shiftKey && focusedElement === first) {
             event.preventDefault();
             if (loop) {
-              focus(last, { select: true });
+              focusElement(last, { select: true });
             }
           }
         }
@@ -399,40 +400,6 @@ function getTabbableEdges(container: HTMLElement) {
 }
 
 /**
- * Returns a list of potential tabbable candidates.
- * We do not take into account tabindex values.
- *
- * See: https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker
- * Credit: https://github.com/discord/focus-layers/blob/master/src/util/wrapFocus.tsx#L1
- */
-function getTabbableCandidates(container: HTMLElement) {
-  const nodes: HTMLElement[] = [];
-  const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, {
-    acceptNode: (node: any) => {
-      const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
-      if (node.disabled || node.hidden || isHiddenInput) {
-        return NodeFilter.FILTER_SKIP;
-      }
-
-      /**
-       * `.tabIndex` is not the same as the `tabindex` attribute. It works on the
-       * runtime's understanding of tabbability, so this automatically accounts
-       * for any kind of element that could be tabbed to.
-       */
-      return node.tabIndex >= 0
-        ? NodeFilter.FILTER_ACCEPT
-        : NodeFilter.FILTER_SKIP;
-    },
-  });
-
-  while (walker.nextNode()) {
-    nodes.push(walker.currentNode as HTMLElement);
-  }
-
-  return nodes;
-}
-
-/**
  * Returns the first visible element in a list.
  * NOTE: Only checks visibility up to the `container`.
  */
@@ -460,39 +427,6 @@ function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
     node = node.parentElement as HTMLElement;
   }
   return false;
-}
-
-let rafId = 0;
-function focus(
-  element?: HTMLElement | null,
-  { select = false, preventScroll = true, sync = true } = {},
-) {
-  if (!element?.focus) {
-    return;
-  }
-
-  const previouslyFocusedElement = document.activeElement;
-
-  cancelAnimationFrame(rafId);
-  const exec = () => element.focus({ preventScroll });
-
-  if (sync) {
-    exec();
-  } else {
-    rafId = requestAnimationFrame(exec);
-  }
-
-  if (!select) {
-    return;
-  }
-
-  /* By default, inputs that gets focus should select its contents */
-  if (
-    element !== previouslyFocusedElement &&
-    element instanceof HTMLInputElement &&
-    "select" in element
-  )
-    element.select();
 }
 
 /* ---------------------------- FocusBoundary stack ---------------------------- */
@@ -529,10 +463,6 @@ function arrayRemove<T>(array: T[], item: T) {
     updatedArray.splice(index, 1);
   }
   return updatedArray;
-}
-
-function removeLinks(items: HTMLElement[]) {
-  return items.filter((item) => item.tagName !== "A");
 }
 
 const LIST_LIMIT = 10;

@@ -28,12 +28,14 @@ const DatePickerMonths = ({
   calendarMonth,
   locale,
   onWeekNumberClick,
+  popupLabelId,
   ...rest
 }: {
   calendarMonth: CalendarMonth;
   displayIndex: number;
   locale: Locale;
   onWeekNumberClick: MultipleMode["onWeekNumberClick"];
+  popupLabelId?: string;
 } & React.HTMLAttributes<HTMLDivElement>) => {
   const { dayPickerProps, goToMonth, previousMonth, nextMonth } =
     useDayPicker();
@@ -80,7 +82,12 @@ const DatePickerMonths = ({
     <div {...omit(rest, ["displayIndex"])}>
       <div className="aksel-date__caption">
         {captionLayout?.startsWith("dropdown") && (
-          <span aria-live="polite" aria-atomic="true" className="aksel-sr-only">
+          <span
+            aria-live="polite"
+            aria-atomic="true"
+            className="aksel-sr-only"
+            id={popupLabelId}
+          >
             {format(calendarMonth.date, "LLLL y", { locale })}
           </span>
         )}
@@ -129,6 +136,7 @@ const DatePickerMonths = ({
             aria-live="polite"
             role="status"
             className="aksel-date__caption-label"
+            id={popupLabelId}
           >
             {format(calendarMonth.date, "LLLL y", { locale })}
           </BodyShort>

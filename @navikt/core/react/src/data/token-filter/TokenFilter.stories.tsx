@@ -1,13 +1,19 @@
 import { StoryObj } from "@storybook/react-vite";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { VStack } from "../../primitives/stack";
+import { DataTable } from "../table";
 import { TokenFilter } from "./TokenFilter";
-import type { ExternalPropertyDefinition } from "./TokenFilter.types";
+import type {
+  ExternalPropertyDefinition,
+  ExternalQuery,
+} from "./TokenFilter.types";
 
 export default {
   title: "ds-react/data/TokenFilter",
   component: TokenFilter,
   parameters: {
     chromatic: { disable: true },
+    layout: "padded",
   },
 };
 
@@ -321,6 +327,108 @@ export const MixedGroups: Story = {
           propertyDefinitions={mixProperties}
         />
       </div>
+    );
+  },
+};
+
+const servers = [
+  { name: "web-prod-1", status: "running", region: "us-east-1", cpu: "12%" },
+  { name: "web-prod-2", status: "running", region: "eu-west-1", cpu: "45%" },
+  { name: "api-prod-1", status: "stopped", region: "us-east-1", cpu: "0%" },
+  {
+    name: "db-prod-1",
+    status: "running",
+    region: "ap-southeast-1",
+    cpu: "78%",
+  },
+  { name: "worker-1", status: "pending", region: "eu-west-1", cpu: "3%" },
+  { name: "api-dev-1", status: "stopping", region: "us-east-1", cpu: "5%" },
+  { name: "web-dev-1", status: "running", region: "eu-west-1", cpu: "22%" },
+];
+
+const tablePropertyDefs = [
+  {
+    key: "status",
+    label: "Status",
+    groupLabel: "Status",
+    operators: ["=", "!="],
+  },
+  {
+    key: "region",
+    label: "Region",
+    groupLabel: "Region",
+    operators: ["=", "!="],
+  },
+];
+
+const tableOptions = [
+  { propertyKey: "status", value: "running" },
+  { propertyKey: "status", value: "stopped" },
+  { propertyKey: "status", value: "stopping" },
+  { propertyKey: "status", value: "pending" },
+  { propertyKey: "region", value: "us-east-1" },
+  { propertyKey: "region", value: "eu-west-1" },
+  { propertyKey: "region", value: "ap-southeast-1" },
+];
+
+export const WithDataTable: Story = {
+  render: () => {
+    const [query, setQuery] = useState<ExternalQuery>({
+      tokens: [],
+      operation: "and",
+    });
+
+    const filtered = useMemo(() => {
+      if (query.tokens.length === 0) return servers;
+
+      return servers.filter((server) => {
+        const results = query.tokens.map((token) => {
+          const value = server[token.propertyKey as keyof typeof server];
+          if (token.operator === "=") return value === token.value;
+          if (token.operator === "!=") return value !== token.value;
+          return true;
+        });
+
+        return query.operation === "and"
+          ? results.every(Boolean)
+          : results.some(Boolean);
+      });
+    }, [query]);
+
+    return (
+      <VStack gap="space-32">
+        <TokenFilter
+          query={query}
+          onChange={setQuery}
+          options={tableOptions}
+          propertyDefinitions={tablePropertyDefs}
+        />
+        <DataTable zebraStripes layout="auto">
+          <DataTable.Thead>
+            <DataTable.Tr>
+              <DataTable.Th>Name</DataTable.Th>
+              <DataTable.Th>Status</DataTable.Th>
+              <DataTable.Th>Region</DataTable.Th>
+              <DataTable.Th>CPU</DataTable.Th>
+            </DataTable.Tr>
+          </DataTable.Thead>
+          <DataTable.Tbody>
+            {filtered.map((s) => (
+              <DataTable.Tr key={s.name}>
+                <DataTable.Td>{s.name}</DataTable.Td>
+                <DataTable.Td>{s.status}</DataTable.Td>
+                <DataTable.Td>{s.region}</DataTable.Td>
+                <DataTable.Td>{s.cpu}</DataTable.Td>
+              </DataTable.Tr>
+            ))}
+            {filtered.length === 0 && (
+              <DataTable.Tr>
+                <DataTable.Td colSpan={4}>No results</DataTable.Td>
+              </DataTable.Tr>
+            )}
+          </DataTable.Tbody>
+        </DataTable>
+      </VStack>
     );
   },
 };

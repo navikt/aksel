@@ -20,6 +20,7 @@ import {
   type DataTableTheadProps,
 } from "../thead/DataTableThead";
 import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
+import { DataTableContextProvider } from "./DataTableRoot.context";
 import { useTableKeyboardNav } from "./useTableKeyboardNav";
 
 interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
@@ -193,20 +194,22 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     });
 
     return (
-      <div className="aksel-data-table__border-wrapper">
-        <div className="aksel-data-table__scroll-wrapper">
-          <table
-            {...rest}
-            ref={mergedRef}
-            className={cl("aksel-data-table", className)}
-            data-zebra-stripes={zebraStripes}
-            data-truncate-content={truncateContent}
-            data-density={rowDensity}
-            data-layout={layout}
-            tabIndex={tabIndex}
-          />
+      <DataTableContextProvider layout={layout}>
+        <div className="aksel-data-table__border-wrapper">
+          <div className="aksel-data-table__scroll-wrapper">
+            <table
+              {...rest}
+              ref={mergedRef}
+              className={cl("aksel-data-table", className)}
+              data-zebra-stripes={zebraStripes}
+              data-truncate-content={truncateContent}
+              data-density={rowDensity}
+              data-layout={layout}
+              tabIndex={tabIndex}
+            />
+          </div>
         </div>
-      </div>
+      </DataTableContextProvider>
     );
   },
 ) as DataTableRootComponent;

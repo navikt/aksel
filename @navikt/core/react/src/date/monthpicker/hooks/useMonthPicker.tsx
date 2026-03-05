@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { dateMatchModifiers } from "react-day-picker";
+import { focusElement } from "../../../utils/helpers/focus";
 import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
 import { DateInputProps } from "../../Date.Input";
 import { getLocaleFromString } from "../../Date.locale";
@@ -310,7 +311,10 @@ export const useMonthpicker = (
     onOpenToggle: () => handleOpen(!open),
     onClose: () => {
       handleOpen(false);
-      anchorRef?.focus();
+      /* Delay focus to allow "open"-button to update title before focus */
+      queueMicrotask(() =>
+        focusElement(anchorRef, { sync: false, preventScroll: true }),
+      );
     },
     disabled,
   };

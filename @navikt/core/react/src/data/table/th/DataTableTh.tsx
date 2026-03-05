@@ -1,10 +1,14 @@
 import React, { forwardRef } from "react";
-import { FunnelIcon, SortDownIcon, SortUpIcon } from "@navikt/aksel-icons";
-import { ActionMenu } from "../../../action-menu";
-import { HStack, Spacer } from "../../../primitives/stack";
+import {
+  ArrowsUpDownIcon,
+  CaretLeftCircleFillIcon,
+  CaretRightCircleFillIcon,
+  SortDownIcon,
+  SortUpIcon,
+} from "@navikt/aksel-icons";
 import { cl } from "../../../utils/helpers";
-import { DataTableThActions } from "./DataTableThActions";
-import { DataTableThSortHandle } from "./DataTableThSortHandle";
+
+type SortDirection = "asc" | "desc" | "none";
 
 interface DataTableThProps extends React.HTMLAttributes<HTMLTableCellElement> {
   resizeHandler?: (
@@ -13,8 +17,22 @@ interface DataTableThProps extends React.HTMLAttributes<HTMLTableCellElement> {
       | React.TouchEvent<HTMLButtonElement>,
   ) => void;
   size?: number; // TODO: size should be required when resizeHandler is set
-  sortDirection?: "asc" | "desc" | "none" | false;
-  onSortChange?: (direction: "asc" | "desc" | "none", event: Event) => void;
+  /**
+   * Makes the column header sortable. The entire header cell content becomes
+   * a clickable button when true.
+   */
+  sortable?: boolean;
+  /**
+   * Current sort direction. Only relevant when `sortable` is true.
+   * Uses values matching the `aria-sort` attribute directly.
+   * @default "none"
+   */
+  sortDirection?: SortDirection;
+  /**
+   * Called when the user clicks the sortable header.
+   * The consumer is responsible for determining and setting the next sort state.
+   */
+  onSortClick?: (event: React.MouseEvent<HTMLElement>) => void;
   render?: {
     filterMenu?: {
       title: string;
@@ -26,7 +44,14 @@ interface DataTableThProps extends React.HTMLAttributes<HTMLTableCellElement> {
    */
   colSpan?: number;
   rowSpan?: number;
+  keyboardResizingHandler?: (size: number) => void;
 }
+
+const SORT_ICON: Record<SortDirection, React.ElementType | null> = {
+  asc: SortUpIcon,
+  desc: SortDownIcon,
+  none: ArrowsUpDownIcon,
+};
 
 /**
  * TODO:
@@ -39,79 +64,110 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
       children,
       resizeHandler,
       size,
-      sortDirection,
-      onSortChange,
+      sortable = false,
+      sortDirection = "none",
+      onSortClick,
       style,
-      render,
+      keyboardResizingHandler,
       ...rest
     },
     forwardedRef,
   ) => {
-    const { filterMenu } = render || {};
+    const [resizeHandlerActive, setResizeHandlerActive] = React.useState(false);
+    const [isOverflowing, setIsOverflowing] = React.useState(false);
+    const contentRef = React.useRef<HTMLDivElement>(null);
+
+    const keyDownHandler = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (keyboardResizingHandler) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setResizeHandlerActive((active) => !active);
+        } else if (
+          resizeHandlerActive &&
+          (event.key === "ArrowLeft" || event.key === "ArrowRight")
+        ) {
+          event.preventDefault();
+          keyboardResizingHandler(event.key === "ArrowRight" ? 10 : -10);
+        }
+      }
+    };
+
+    const SortIcon = sortable ? SORT_ICON[sortDirection] : null;
 
     return (
       <th
         {...rest}
         ref={forwardedRef}
         className={cl("aksel-data-table__th", className)}
+        data-sortable={sortable}
         style={{ width: size, ...style }}
+        aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
+        onPointerEnter={() => {
+          const el = contentRef.current;
+          setIsOverflowing(el ? el.scrollWidth > el.offsetWidth : false);
+          console.info("is overflowing", isOverflowing);
+        }}
+        onPointerLeave={() => setIsOverflowing(false)}
       >
-        <HStack align="center" gap="space-8" wrap={false}>
-          <div className="aksel-data-table__th-content">{children}</div>
-          {/* TODO: If the column is too narrow, the sort button will move when hovering b.c. the actions menu button slides in */}
-          <DataTableThSortHandle
-            sortDirection={sortDirection}
-            onSortChange={onSortChange}
-          />
-          <Spacer />
-
-          <DataTableThActions>
-            {/* TODO: onSortChange just rotates between the three states now */}
-            {/* TODO: Sorting texts do not handle different data-types now */}
-            {sortDirection && (
-              <ActionMenu.Group label="Sortering">
-                <ActionMenu.Item
-                  onSelect={(event) => onSortChange?.("desc", event)}
-                  icon={<SortUpIcon aria-hidden />}
-                >
-                  {sortDirection === "desc" ? "Fjern sortering" : "A-Z"}
-                </ActionMenu.Item>
-                <ActionMenu.Item
-                  onSelect={(event) => onSortChange?.("asc", event)}
-                  icon={<SortDownIcon aria-hidden />}
-                >
-                  {sortDirection === "asc" ? "Fjern sortering" : "Z-A"}
-                </ActionMenu.Item>
-              </ActionMenu.Group>
+        {sortable ? (
+          <button
+            className="aksel-data-table__th-sort-button"
+            onClick={sortable ? onSortClick : undefined}
+          >
+            {SortIcon && (
+              <SortIcon
+                aria-hidden
+                data-sort-direction={sortDirection}
+                className="aksel-data-table__th-sort-icon"
+              />
             )}
-            {filterMenu && (
-              <ActionMenu.Group label="Filter">
-                <ActionMenu.Sub>
-                  <ActionMenu.SubTrigger icon={<FunnelIcon aria-hidden />}>
-                    {filterMenu.title}
-                  </ActionMenu.SubTrigger>
-                  <ActionMenu.SubContent>
-                    {/* TODO: ActionMenu stops tab from working, so user cant tab "into" filter now even when wrapper has focus */}
-                    {filterMenu.content}
-                  </ActionMenu.SubContent>
-                </ActionMenu.Sub>
-              </ActionMenu.Group>
-            )}
-          </DataTableThActions>
-        </HStack>
+            <div ref={contentRef} className="aksel-data-table__th-content">
+              {children}
+            </div>
+          </button>
+        ) : (
+          <div ref={contentRef} className="aksel-data-table__th-content">
+            {children}
+          </div>
+        )}
 
         {resizeHandler && (
           <button
             // TODO: Should probably not be a button since it doesn't have onClick
             onMouseDown={resizeHandler}
             onTouchStart={resizeHandler}
+            onBlur={() => setResizeHandlerActive(false)}
             className="aksel-data-table__th-resize-handle"
-          />
+            data-active={resizeHandlerActive}
+            // TODO Very open to a better name for this
+            data-block-keyboard-nav
+            onKeyDown={keyDownHandler}
+          >
+            {resizeHandlerActive && (
+              <>
+                <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--start">
+                  <CaretLeftCircleFillIcon aria-hidden fontSize="1.5rem" />
+                </span>
+                <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--end">
+                  <CaretRightCircleFillIcon aria-hidden fontSize="1.5rem" />
+                </span>
+              </>
+            )}
+          </button>
         )}
       </th>
     );
   },
 );
+
+function getAriaSort(
+  sortDirection: SortDirection | undefined,
+): "ascending" | "descending" | "none" | undefined {
+  if (sortDirection === "asc") return "ascending";
+  if (sortDirection === "desc") return "descending";
+  if (sortDirection === "none") return "none";
+  return undefined;
+}
 
 export { DataTableTh };
 export type { DataTableThProps };

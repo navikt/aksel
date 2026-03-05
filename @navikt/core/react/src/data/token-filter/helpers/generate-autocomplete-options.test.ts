@@ -183,7 +183,7 @@ describe("generateAutoCompleteOptions v2", () => {
       expect(valueGroup).toBeDefined();
       expect(valueGroup?.options).toHaveLength(1);
       expect((valueGroup?.options[0] as AutoCompleteOption).label).toBe(
-        "EU West",
+        "Region = eu-west-1",
       );
     });
 
@@ -205,7 +205,7 @@ describe("generateAutoCompleteOptions v2", () => {
       expect(valueGroup).toBeDefined();
       expect(valueGroup?.options).toHaveLength(1);
       expect((valueGroup?.options[0] as AutoCompleteOption).label).toBe(
-        "US East",
+        "Region = us-east-1",
       );
     });
   });
@@ -251,8 +251,8 @@ describe("generateAutoCompleteOptions v2", () => {
       expect(result.options).toHaveLength(1);
       expect(result.options[0].options).toHaveLength(2);
       const labels = result.options[0].options.map((o) => o.label);
-      expect(labels).toContain("Active");
-      expect(labels).toContain("Inactive");
+      expect(labels).toContain("Status = active");
+      expect(labels).toContain("Status = inactive");
     });
 
     test("should use specified operator in value suggestions", () => {

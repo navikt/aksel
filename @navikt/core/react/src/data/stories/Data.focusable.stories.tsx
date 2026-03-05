@@ -74,8 +74,21 @@ export const TanstackDemo: Story = {
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
                         resizeHandler={header.getResizeHandler()}
+                        keyboardResizingHandler={(increment) => {
+                          const newColumnSizing = {};
+                          table.getFlatHeaders().forEach((h) => {
+                            if (h.id === header.id) {
+                              newColumnSizing[h.id] =
+                                header.getSize() + increment;
+                            } else {
+                              newColumnSizing[h.id] = h.getSize();
+                            }
+                          });
+                          table.setColumnSizing(newColumnSizing);
+                        }}
+                        sortable
                         sortDirection={header.column.getIsSorted() || "none"}
-                        onSortChange={(_, event) => {
+                        onSortClick={(event) => {
                           const handler =
                             header.column.getToggleSortingHandler();
                           handler?.(event);

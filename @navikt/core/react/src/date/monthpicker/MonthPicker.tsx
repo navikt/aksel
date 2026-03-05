@@ -97,6 +97,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     );
     const langProviderLocale = useDateLocale();
     const ariaId = useId(id);
+    const popupLabelId = useId();
 
     const [open, setOpen] = useControllableState({
       defaultValue: false,
@@ -163,9 +164,10 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                   id: ariaId,
                   strategy,
                 }}
+                popupLabelId={popupLabelId}
               >
                 <div className={cl("rdp-month", className)}>
-                  <MonthPickerCaption />
+                  <MonthPickerCaption popupLabelId={popupLabelId} />
                   <MonthPickerTable />
                 </div>
               </DateDialog>

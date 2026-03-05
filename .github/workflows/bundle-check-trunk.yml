@@ -45,7 +45,7 @@ jobs:
 
       - name: Upload json report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: trunk-results.json
           path: scripts/analyzer
@@ -72,7 +72,7 @@ jobs:
 
       - name: Upload json report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: branch-results.json
           path: scripts/analyzer
@@ -94,13 +94,13 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Download trunk json from GitHub Actions Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           path: scripts/analyzer
           name: trunk-results.json
 
       - name: Download branch json from GitHub Actions Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           path: scripts/analyzer
           name: branch-results.json
@@ -110,7 +110,7 @@ jobs:
 
       - name: Upload comparison markdown to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: compare-markdown.md
           path: scripts/analyzer
@@ -125,7 +125,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Download comparison markdown to GitHub Actions Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           path: scripts/analyzer
           name: compare-markdown.md

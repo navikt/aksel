@@ -2,8 +2,10 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 import { Preview } from "@storybook/react-vite";
 import React, { useEffect } from "react";
 import "../@navikt/core/css/src/data-table.css";
+import "../@navikt/core/css/src/data-token-filter.css";
 import "../@navikt/core/css/src/data-toolbar.css";
 import "../@navikt/core/css/src/index.css";
+import "../@navikt/core/css/src/listbox.css";
 import { Provider } from "../@navikt/core/react/src/provider";
 import { Translations } from "../@navikt/core/react/src/utils/i18n/i18n.types";
 import { en, nb, nn } from "../@navikt/core/react/src/utils/i18n/locales";
@@ -14,6 +16,22 @@ const locales: Record<Language, Translations> = {
   nb,
   nn,
   en,
+};
+
+const LanguageDecorator = ({
+  children,
+  lang,
+}: {
+  children: React.ReactNode;
+  lang: Language | undefined;
+}) => {
+  useEffect(() => {
+    document.documentElement.lang = lang || "nb";
+  }, [lang]);
+
+  return (
+    <Provider locale={lang ? locales[lang] : undefined}>{children}</Provider>
+  );
 };
 
 const fonts = ["Source Sans 3", "Open Sans"];
@@ -102,15 +120,9 @@ export default {
       </TypoDecorator>
     ),
     (StoryFn, context) => (
-      <Provider
-        locale={
-          context.globals.language
-            ? locales[context.globals.language as Language]
-            : undefined
-        }
-      >
+      <LanguageDecorator lang={context.globals.language}>
         <StoryFn />
-      </Provider>
+      </LanguageDecorator>
     ),
     withThemeByClassName({
       themes: {

@@ -1,6 +1,6 @@
 .aksel-inline-message {
   display: flex;
-  gap: var(--ax-space-4);
+  gap: var(--ax-space-8);
   color: var(--ax-text-default);
 }
 
@@ -8,6 +8,7 @@
   color: var(--ax-text-subtle);
   font-size: 1.5rem;
   flex: 0 0 auto;
+  margin-block-start: var(--ax-space-2);
 
   .aksel-inline-message[data-size="small"] & {
     font-size: 1.25rem;
