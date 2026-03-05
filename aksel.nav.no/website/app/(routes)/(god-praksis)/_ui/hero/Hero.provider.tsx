@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useRef,
+  useState,
+} from "react";
 import { Box } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
 import styles from "./Hero.module.css";
@@ -34,6 +40,7 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const [dialogHeight, setDialogHeight] = useState(0);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
   const [wrapperHeight, setWrapperHeight] = useState(0);
   const [animationRef, setAnimationRef] = useState({ x: 0, y: 0 });
 
@@ -56,7 +63,10 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
 
       // Since we cant focus elements inside `display: none` elements, we need to
       // wait for the dialog to be open before we focus the close button
-      setTimeout(() => closeDialogButton?.focus());
+      setTimeout(() => {
+        closeDialogButton?.focus();
+        setDialogHeight(dialogRef.current?.getBoundingClientRect().height || 0);
+      });
     },
     [closeDialogButton],
   );
@@ -84,15 +94,15 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
    * by increasing the margin-bottom of the wrapper
    */
   const getMargin = () => {
-    if (!openDialog) return 0;
+    if (!openDialog) {
+      return 0;
+    }
     const height = dialogHeight ? dialogHeight - wrapperHeight : 0;
-    if (height > 0) return height;
+    if (height > 0) {
+      return height;
+    }
     return 0;
   };
-
-  function registerDialogRef(ref: HTMLDivElement | null) {
-    setDialogHeight(ref?.getBoundingClientRect().height || 0);
-  }
 
   function registerOpenDialogButtonRef(ref: HTMLButtonElement | null) {
     setOpenDialogButton(ref);
@@ -120,7 +130,9 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
           setClose: () => setOpenDialog(false),
         },
         registerRef: {
-          dialogRef: registerDialogRef,
+          dialogRef: (ref) => {
+            dialogRef.current = ref;
+          },
           openDialogButtonRef: registerOpenDialogButtonRef,
           closeDialogButtonRef: registerCloseDialogButtonRef,
         },
