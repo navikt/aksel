@@ -1,75 +1,57 @@
 import React from "react";
-import type { ListboxItemData } from "../list/ListboxList";
+import { cl } from "../../../helpers";
 
-export interface ListboxItemProps<T extends ListboxItemData> {
-  item: T;
-  onToggleItem: (item: T, isSelected: boolean) => void;
-  isSelected: boolean;
+export interface ListboxItemProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "role" | "tabIndex"
+> {
+  /**
+   * Unique ID used for tracking which item has virtual focus.
+   */
+  id: string;
   hasVirtualFocus: boolean;
-  textToHighlight: string;
-  children?: React.ReactNode;
+  children: React.ReactNode;
+  /**
+   * Callback when item is selected.
+   * To improve performance when you have many items,
+   * memoize the prop with e.g. useEventCallback.
+   */
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
-function ListboxItemComponent<T extends ListboxItemData>({
-  item,
-  onToggleItem,
-  isSelected,
+function ListboxItemComponent({
+  id,
   hasVirtualFocus,
-  textToHighlight,
   children,
-}: ListboxItemProps<T>) {
-  //console.log("Rendering item", item.value);
+  className,
+  ...rest
+}: ListboxItemProps) {
+  //console.log("Rendering item", id);
+
+  // TODO: Slot?
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
-      className="aksel-listbox__item"
+      aria-selected={false}
+      {...rest}
+      className={cl("aksel-listbox__item", className)}
       role="option"
       tabIndex={-1}
-      aria-selected={isSelected}
-      onClick={() => onToggleItem(item, !isSelected)}
-      data-value={item.value}
       data-virtual-focus={hasVirtualFocus}
+      data-id={id}
       id={hasVirtualFocus ? "aksel-listbox__item-active" : undefined}
     >
-      <div className="aksel-listbox__item-checkmark" aria-hidden>
-        ✓
-      </div>
-      <div>
-        {children ??
-          (textToHighlight
-            ? highlightSubstring(item.label, textToHighlight)
-            : item.label)}
-      </div>
+      {children}
     </div>
   );
 }
 
-const highlightSubstring = (text: string, substring: string) => {
-  const indexOfHighlightedText = text
-    .toLocaleLowerCase()
-    .indexOf(substring.toLocaleLowerCase());
-  if (indexOfHighlightedText === -1) {
-    // This can happen if the consumer has implemented their own filtering logic
-    return [text, "", ""];
-  }
-  const start = text.substring(0, indexOfHighlightedText);
-  const highlight = text.substring(
-    indexOfHighlightedText,
-    indexOfHighlightedText + substring.length,
-  );
-  const end = text.substring(indexOfHighlightedText + substring.length);
-  return (
-    // Aria-label is used to fix testing-library wrongly evaluating the accessible name of the option when highlighting text
-    // biome-ignore lint/a11y/useAriaPropsSupportedByRole: Doesn't matter if it doesn't work
-    <span aria-label={text}>
-      {start}
-      {highlight && <mark>{highlight}</mark>}
-      {end}
-    </span>
-  );
-};
-
+/**
+ * This component is memoized. To improve performance when you have many items,
+ * make sure all object props have stable references (i.e. memoize the event handlers with e.g. useEventCallback).
+ *
+ * NB: Remember to set `aria-selected` on selected items!
+ */
 export const ListboxItem = React.memo(
   ListboxItemComponent,
 ) as typeof ListboxItemComponent;

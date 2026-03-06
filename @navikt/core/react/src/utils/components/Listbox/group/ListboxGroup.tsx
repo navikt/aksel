@@ -1,22 +1,12 @@
 import React from "react";
 import { useId } from "../../../../utils-external";
-import type {
-  ListboxGroupData,
-  ListboxItemData,
-  ListboxListBaseProps,
-} from "../list/ListboxList";
 
-interface ListboxGroupProps<
-  T extends ListboxItemData | ListboxGroupData<ListboxItemData>,
-> {
-  group: ListboxGroupData<ListboxItemData>;
-  childrenProp: ListboxListBaseProps<T>["children"];
+interface ListboxGroupProps {
+  label: React.ReactNode;
   children: React.ReactNode;
 }
 
-function ListboxGroup<
-  T extends ListboxItemData | ListboxGroupData<ListboxItemData>,
->({ group, childrenProp, children }: ListboxGroupProps<T>) {
+function ListboxGroup({ label, children }: ListboxGroupProps) {
   const labelId = useId();
 
   return (
@@ -26,9 +16,7 @@ function ListboxGroup<
       aria-labelledby={labelId}
     >
       <div id={labelId} aria-hidden>
-        {typeof childrenProp === "function"
-          ? childrenProp(group as T)
-          : group.label}
+        {label}
       </div>
       {children}
     </div>

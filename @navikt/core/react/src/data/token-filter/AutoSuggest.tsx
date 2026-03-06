@@ -22,8 +22,7 @@ interface AutoSuggestProps {
 
 const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
   ({ options, onSelect, value, onChange, open, setOpen }, ref) => {
-    const [virtuallyFocusedItemValue, setVirtuallyFocusedItemValue] =
-      useState<string>("");
+    const [virtuallyFocusedItemId, setVirtuallyFocusedItemId] = useState("");
 
     const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null);
 
@@ -50,7 +49,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
 
     return (
       <Floating>
-        <Listbox setVirtuallyFocusedItemValue={setVirtuallyFocusedItemValue}>
+        <Listbox setVirtuallyFocusedItemId={setVirtuallyFocusedItemId}>
           <Floating.Anchor>
             <Listbox.InputSlot>
               <Search
@@ -77,8 +76,8 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
             <AutoSuggestPopup
               options={options}
               onSelect={handleSelectOption}
-              focusedValue={virtuallyFocusedItemValue}
-              setFocusedValue={setVirtuallyFocusedItemValue}
+              focusedValue={virtuallyFocusedItemId}
+              setFocusedValue={setVirtuallyFocusedItemId}
               onClose={handleClose}
               safeZoneAnchor={inputRef}
             />
@@ -125,30 +124,15 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
           className="aksel-property-filter__popup"
         >
           <div className="aksel-property-filter__popup-inner">
-            <Listbox.List
-              virtuallyFocusedItemValue={focusedValue}
-              setVirtuallyFocusedItemValue={setFocusedValue}
-              items={options.map((option) => ({
-                label: option.label,
-                id: option.label,
-                items: option.options,
-              }))}
-              onToggleItem={onSelect}
-            >
+            <Listbox.List setVirtuallyFocusedItemId={setFocusedValue}>
               {options.map((group) => (
-                <ListboxGroup
-                  key={group.label}
-                  group={{ label: group.label, id: group.label, items: [] }}
-                  childrenProp={false}
-                >
+                <ListboxGroup key={group.label} label={group.label}>
                   {group.options.map((item) => (
                     <ListboxItem
                       key={item.value}
-                      item={item}
-                      onToggleItem={onSelect}
-                      isSelected={false}
+                      id={item.value}
+                      onClick={() => onSelect(item)}
                       hasVirtualFocus={focusedValue === item.value}
-                      textToHighlight=""
                     >
                       <VStack gap="space-0">
                         <Label as="div">{item.label}</Label>

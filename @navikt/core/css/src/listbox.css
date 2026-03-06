@@ -1,5 +1,4 @@
 .aksel-listbox__list {
-  overflow: auto;
   padding: var(--ax-space-4);
 }
 
@@ -7,19 +6,9 @@
   cursor: default;
   border-radius: var(--ax-radius-8);
   padding: var(--ax-space-4) var(--ax-space-2);
-  display: flex;
-  gap: var(--ax-space-6);
   scroll-margin-block: 4px;
 
   &[data-virtual-focus="true"] {
     outline: 2px solid var(--ax-border-focus);
   }
-
-  & > div:last-child {
-    flex-grow: 1;
-  }
-}
-
-.aksel-listbox__item[aria-selected="false"] .aksel-listbox__item-checkmark {
-  visibility: hidden;
 }

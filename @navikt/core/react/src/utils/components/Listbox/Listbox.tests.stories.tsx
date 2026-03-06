@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { expect, fireEvent } from "storybook/test";
+import { expect, fireEvent, fn } from "storybook/test";
+import { ListboxItemProps } from "./item/ListboxItem";
 import Listbox from "./root/ListboxRoot";
 
 const meta: Meta<typeof Listbox> = {
@@ -30,18 +31,42 @@ const items = [
   { label: "Last item", value: "last" },
 ];
 
-function ListboxStory() {
-  const [virtuallyFocusedItemValue, setVirtuallyFocusedItemValue] =
-    useState("");
+function ListboxStory({
+  onClick = () => {},
+}: {
+  onClick?: ListboxItemProps["onClick"];
+}) {
+  const [virtuallyFocusedItemId, setVirtuallyFocusedItemId] = useState("");
 
   return (
-    <Listbox setVirtuallyFocusedItemValue={setVirtuallyFocusedItemValue}>
-      <Listbox.List
-        virtuallyFocusedItemValue={virtuallyFocusedItemValue}
-        setVirtuallyFocusedItemValue={setVirtuallyFocusedItemValue}
-        items={items}
-        onToggleItem={() => {}}
-      />
+    <Listbox setVirtuallyFocusedItemId={setVirtuallyFocusedItemId}>
+      <Listbox.List setVirtuallyFocusedItemId={setVirtuallyFocusedItemId}>
+        {items.map((itemOrGroup) =>
+          "items" in itemOrGroup && itemOrGroup.items ? (
+            <Listbox.Group key={itemOrGroup.label} label={itemOrGroup.label}>
+              {itemOrGroup.items.map((item) => (
+                <Listbox.Item
+                  key={item.value}
+                  id={item.value}
+                  onClick={onClick}
+                  hasVirtualFocus={virtuallyFocusedItemId === item.value}
+                >
+                  {item.label}
+                </Listbox.Item>
+              ))}
+            </Listbox.Group>
+          ) : (
+            <Listbox.Item
+              key={itemOrGroup.value}
+              id={itemOrGroup.value}
+              onClick={onClick}
+              hasVirtualFocus={virtuallyFocusedItemId === itemOrGroup.value}
+            >
+              {itemOrGroup.label}
+            </Listbox.Item>
+          ),
+        )}
+      </Listbox.List>
     </Listbox>
   );
 }
@@ -50,7 +75,7 @@ const getVirtuallyFocusedValue = (canvasElement: HTMLElement) => {
   const focused = canvasElement.querySelector<HTMLElement>(
     '[data-virtual-focus="true"]',
   );
-  return focused?.dataset.value;
+  return focused?.dataset.id;
 };
 
 const pressKey = (canvasElement: HTMLElement, key: string) => {
@@ -112,5 +137,27 @@ export const HomeAndEndKeys: StoryObj = {
 
     pressKey(canvasElement, "End");
     expect(getVirtuallyFocusedValue(canvasElement)).toBe("last");
+  },
+};
+
+export const EnterKey: StoryObj<{
+  onClick: (id: string | undefined) => void;
+}> = {
+  render: ({ onClick }) => (
+    <ListboxStory
+      onClick={(event) => onClick(event.currentTarget.dataset.id)}
+    />
+  ),
+  play: async ({ canvasElement, args }) => {
+    pressKey(canvasElement, "ArrowDown");
+    pressKey(canvasElement, "ArrowDown");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("group-1-first");
+
+    pressKey(canvasElement, "Enter");
+    expect(args.onClick).toHaveBeenCalledOnce();
+    expect(args.onClick).toHaveBeenCalledWith("group-1-first");
+  },
+  args: {
+    onClick: fn(),
   },
 };

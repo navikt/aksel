@@ -1,22 +1,24 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: We know what we are doing */
 import React from "react";
+import { ListboxGroup } from "../group/ListboxGroup";
 import { ListboxInputSlot } from "../input-slot/ListboxInputSlot";
+import { ListboxItem } from "../item/ListboxItem";
 import { ListboxList } from "../list/ListboxList";
 import { findNextItem, findPrevItem } from "./domHelpers";
 
 export interface ListboxProps {
   children: React.ReactNode;
-  setVirtuallyFocusedItemValue: (value: string) => void;
+  setVirtuallyFocusedItemId: (value: string) => void;
 }
 
 /**
  * Low level component for displaying a list of selectable items with optional grouping.
  * Keyboard navigation is implemented with virtual focus so that real focus can remain on an input field.
  */
-function Listbox({ children, setVirtuallyFocusedItemValue }: ListboxProps) {
+function Listbox({ children, setVirtuallyFocusedItemId }: ListboxProps) {
   const virtuallyFocusItem = (element: HTMLElement | null) => {
-    setVirtuallyFocusedItemValue(element?.dataset.value || "");
+    setVirtuallyFocusedItemId(element?.dataset.id || "");
     element?.scrollIntoView({ block: "nearest" });
   };
 
@@ -48,7 +50,7 @@ function Listbox({ children, setVirtuallyFocusedItemValue }: ListboxProps) {
         }
 
         const virtuallyFocusWithFallback = (
-          getElement: (currentItem: HTMLElement) => HTMLElement | null,
+          getNextElement: (currentItem: HTMLElement) => HTMLElement | null,
           getFallback: () => HTMLElement | null,
         ) => {
           event.preventDefault();
@@ -56,7 +58,7 @@ function Listbox({ children, setVirtuallyFocusedItemValue }: ListboxProps) {
             virtuallyFocusItem(getFallback());
             return;
           }
-          const nextItem = getElement(focusedItemElm);
+          const nextItem = getNextElement(focusedItemElm);
           if (!nextItem) {
             virtuallyFocusItem(getFallback());
             return;
@@ -96,5 +98,7 @@ function Listbox({ children, setVirtuallyFocusedItemValue }: ListboxProps) {
 
 Listbox.InputSlot = ListboxInputSlot;
 Listbox.List = ListboxList;
+Listbox.Item = ListboxItem;
+Listbox.Group = ListboxGroup;
 
 export default Listbox;
