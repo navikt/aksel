@@ -1,4 +1,6 @@
 .aksel-date {
+  --__axc-date-button-size: 2.5rem;
+
   padding: var(--ax-space-16);
 
   .rdp-table {
@@ -9,8 +11,8 @@
     padding: 1px; /* Some CSS-resets sets padding:0 on all items */
 
     &[data-outside="true"] {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: var(--__axc-date-button-size);
+      height: var(--__axc-date-button-size);
     }
   }
 
@@ -45,8 +47,8 @@
   .rdp-button {
     all: unset;
     display: block;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: var(--__axc-date-button-size);
+    height: var(--__axc-date-button-size);
     text-align: center;
     border-radius: var(--ax-radius-8);
   }
@@ -284,14 +286,9 @@
 
 @media (min-width: 480px) {
   .aksel-date {
-    padding: var(--ax-space-20);
+    --__axc-date-button-size: 3rem;
 
-    & .rdp-cell {
-      &[data-outside="true"] {
-        width: 3rem;
-        height: 3rem;
-      }
-    }
+    padding: var(--ax-space-20);
   }
 
   .aksel-date__modal-body {
@@ -302,7 +299,6 @@
     gap: var(--ax-space-8);
   }
 
-  .aksel-date .rdp-button,
   .aksel-date__caption-button {
     width: 3rem;
     height: 3rem;
