@@ -38,7 +38,7 @@ const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
             `Failed to update lastVerified for document ${publishedId}. Document might not be published yet.`,
           );
         });
-      onChange(set(updatePayload));
+      onChange(set(updatePayload.updateInfo));
     } finally {
       setUpdating(false);
     }
