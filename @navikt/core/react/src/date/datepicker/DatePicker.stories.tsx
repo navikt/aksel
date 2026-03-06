@@ -651,6 +651,6 @@ export const Chromatic = renderStoriesForChromatic({
   Readonly,
   StandaloneOptions,
   WeekNumber,
-  DateRangeWithCommonError,
   FixedWeeks,
+  DateRangeWithCommonError,
 });
