@@ -9,7 +9,6 @@ import {
   ReadMore,
   VStack,
 } from "@navikt/ds-react";
-import { TemaContacts } from "./TemaContacts";
 
 type MetadataT = {
   title: string;
@@ -73,7 +72,6 @@ export function UndertemaHighlight(props) {
             </Box>
           );
         })}
-        <TemaContacts />
       </VStack>
     </div>
   );

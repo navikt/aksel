@@ -51,8 +51,8 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
     return (
       <Floating>
         <Listbox setVirtuallyFocusedItemValue={setVirtuallyFocusedItemValue}>
-          <Listbox.InputSlot>
-            <Floating.Anchor>
+          <Floating.Anchor>
+            <Listbox.InputSlot>
               <Search
                 label="Tabellsøk"
                 variant="simple"
@@ -71,8 +71,8 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
               }
             }} */
               />
-            </Floating.Anchor>
-          </Listbox.InputSlot>
+            </Listbox.InputSlot>
+          </Floating.Anchor>
           {open && (
             <AutoSuggestPopup
               options={options}
@@ -113,7 +113,7 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
     return (
       <DismissableLayer
         asChild
-        onDismiss={() => onClose()}
+        onDismiss={onClose}
         safeZone={{ anchor: safeZoneAnchor }}
       >
         <Floating.Content
@@ -134,7 +134,6 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
                 items: option.options,
               }))}
               onToggleItem={onSelect}
-              style={{ maxHeight: "350px" }}
             >
               {options.map((group) => (
                 <ListboxGroup
