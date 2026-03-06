@@ -623,7 +623,7 @@ export const FixedWeeks = () => {
   });
 
   return (
-    <Box minHeight="24rem">
+    <Box minHeight="32rem">
       <div style={{ display: "flex", gap: "1rem" }}>
         <DatePicker {...datepickerProps} dropdownCaption fixedWeeks open>
           <DatePicker.Input {...inputProps} label="Velg dato" />
