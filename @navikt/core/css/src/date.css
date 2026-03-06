@@ -13,6 +13,12 @@
     &[data-outside="true"] {
       width: var(--__axc-date-button-size);
       height: var(--__axc-date-button-size);
+
+      /* Padding is ignored when element is empty */
+      &:empty {
+        width: calc(var(--__axc-date-button-size) + 2px);
+        height: calc(var(--__axc-date-button-size) + 2px);
+      }
     }
   }
 
