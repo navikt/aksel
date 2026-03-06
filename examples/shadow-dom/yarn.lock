@@ -512,14 +512,14 @@ __metadata:
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=shadow-dom%40workspace%3A.":
   version: 8.6.0
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=81b6bb&locator=shadow-dom%40workspace%3A."
-  checksum: 10/f8ef50cae0ad8b0f91c9ee1a00ef85a57bd609521a5ced8a59c7377c917b4dcb993215390abfe0a1eedd3382f8e91e77b0edf12cfea9b6ebeb10b4d3c51aa2c0
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=c62080&locator=shadow-dom%40workspace%3A."
+  checksum: 10/d415ed1e71d310660f5cb623fdadd5910e10eacc12d8a10c71389ebf0a990bbed7ab6dbb8927b9488d0a2aca52490f343dab2e0693b3c1325c0f660f52bc989c
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=shadow-dom%40workspace%3A.":
   version: 8.6.0
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=e9c2ac&locator=shadow-dom%40workspace%3A."
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=550883&locator=shadow-dom%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.6"
@@ -534,7 +534,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/8cf9cf8a3f447f56288e4a0fca0a932532e14b138a02520f6fd93b79297f82f3254089afa2c9abc9a0cf9092e3ec20953df0238969cb5a354a24dd89921ecc09
+  checksum: 10/22bbb9e48a1d1a40ac4d5834b50fe899f379991ddc14327189ec3dd20a45445af2b0295cde685099c2ec7c7771a2bc29559b120e6b915cd00a091bc4a6493fa4
   languageName: node
   linkType: hard
 
@@ -1274,11 +1274,11 @@ __metadata:
   linkType: hard
 
 "minimatch@npm:^10.2.1":
-  version: 10.2.2
-  resolution: "minimatch@npm:10.2.2"
+  version: 10.2.4
+  resolution: "minimatch@npm:10.2.4"
   dependencies:
     brace-expansion: "npm:^5.0.2"
-  checksum: 10/e135be7b502ac97c02bcee42ccc1c55dc26dbac036c0f4acde69e42fe339d7fb53fae711e57b3546cb533426382ea492c73a073c7f78832e0453d120d48dd015
+  checksum: 10/aea4874e521c55bb60744685bbffe3d152e5460f84efac3ea936e6bbe2ceba7deb93345fec3f9bb17f7b6946776073a64d40ae32bf5f298ad690308121068a1f
   languageName: node
   linkType: hard
 
