@@ -28,12 +28,12 @@ const BaseSEOPreset = {
       name: "meta",
       type: "text",
       title: "OG-description (valgfritt)",
-      description: "Erstatter ingress som OG-description og meta-tag",
+      description: "Brukes i meta-tagger",
       rows: 3,
       validation: (Rule) =>
         Rule.max(160).warning("OG-beskrivelse bør være kortere enn 160 tegn."),
     }),
-    {
+    defineField({
       title: "OG-image",
       name: "image",
       type: "image",
@@ -43,7 +43,7 @@ const BaseSEOPreset = {
       },
       validation: (Rule) =>
         Rule.custom((image) => {
-          if (!image) {
+          if (!image?.asset) {
             return true;
           }
 
@@ -61,7 +61,7 @@ const BaseSEOPreset = {
           }
           return true;
         }),
-    },
+    }),
   ],
 };
 

@@ -168,8 +168,6 @@ const TOC_BY_SLUG_QUERY =
 
 const METADATA_BY_SLUG_QUERY = defineQuery(`*[slug.current == $slug][0]{
   heading,
-  ingress,
-  publishedAt,
   seo
 }`);
 
