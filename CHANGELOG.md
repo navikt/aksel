@@ -1,5 +1,23 @@
 # Changelog
 
+## 8.7.0
+
+### @navikt/ds-css
+
+- Datepicker, MonthPicker: Opening popover now auto-focuses it. ([#4676](https://github.com/navikt/aksel/pull/4676))
+
+* Datepicker: Fixed issue where using `fixedWeeks` still caused layout-changes in some edgecases. ([#4701](https://github.com/navikt/aksel/pull/4701))
+
+* InlineMessage: Now uses BodyLong instead of BodyShort. Icon has some small adjustments to align with new typo. ([#4683](https://github.com/navikt/aksel/pull/4683))
+
+### @navikt/ds-react
+
+- Datepicker, MonthPicker: Opening popover now auto-focuses it. ([#4676](https://github.com/navikt/aksel/pull/4676))
+
+* Provider: rootElement-prop now accepts null. ([#4700](https://github.com/navikt/aksel/pull/4700))
+
+* InlineMessage: Now uses BodyLong instead of BodyShort. Icon has some small adjustments to align with new typo. ([#4683](https://github.com/navikt/aksel/pull/4683))
+
 ## 8.6.0
 
 ### @navikt/aksel-stylelint
