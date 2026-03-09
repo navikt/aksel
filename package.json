@@ -109,7 +109,7 @@
     "eslint-plugin-storybook": "^10.2.10",
     "eslint-plugin-testing-library": "^7.6.3",
     "fast-glob": "3.3.3",
-    "globals": "^17.3.0",
+    "globals": "^17.4.0",
     "husky": "^8.0.0",
     "lint-staged": "16.2.7",
     "playwright": "^1.57.0",
