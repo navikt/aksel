@@ -1,8 +1,8 @@
-.aksel-listbox__list {
+.aksel-listbox__options {
   padding: var(--ax-space-4);
 }
 
-.aksel-listbox__item {
+.aksel-listbox__option {
   cursor: default;
   border-radius: var(--ax-radius-8);
   padding: var(--ax-space-4) var(--ax-space-2);

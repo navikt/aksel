@@ -1,32 +1,32 @@
 import React from "react";
 import { cl } from "../../../helpers";
 
-export interface ListboxItemProps extends Omit<
+export interface ListboxOptionProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
   "role" | "tabIndex"
 > {
   /**
-   * Unique ID used for tracking which item has virtual focus.
+   * Unique ID used for tracking which option has virtual focus.
    */
   id: string;
   hasVirtualFocus: boolean;
   children: React.ReactNode;
   /**
-   * Callback when item is selected.
-   * To improve performance when you have many items,
+   * Callback when option is selected.
+   * To improve performance when you have many options,
    * memoize the prop with e.g. useEventCallback.
    */
   onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
-function ListboxItemComponent({
+function ListboxOptionComponent({
   id,
   hasVirtualFocus,
   children,
   className,
   ...rest
-}: ListboxItemProps) {
-  //console.log("Rendering item", id);
+}: ListboxOptionProps) {
+  //console.log("Rendering option", id);
 
   // TODO: Slot?
 
@@ -34,12 +34,12 @@ function ListboxItemComponent({
     <div
       aria-selected={false}
       {...rest}
-      className={cl("aksel-listbox__item", className)}
+      className={cl("aksel-listbox__option", className)}
       role="option"
       tabIndex={-1}
       data-virtual-focus={hasVirtualFocus}
       data-id={id}
-      id={hasVirtualFocus ? "aksel-listbox__item-active" : undefined}
+      id={hasVirtualFocus ? "aksel-listbox__option-active" : undefined}
     >
       {children}
     </div>
@@ -47,11 +47,11 @@ function ListboxItemComponent({
 }
 
 /**
- * This component is memoized. To improve performance when you have many items,
+ * This component is memoized. To improve performance when you have many options,
  * make sure all object props have stable references (i.e. memoize the event handlers with e.g. useEventCallback).
  *
- * NB: Remember to set `aria-selected` on selected items!
+ * NB: Remember to set `aria-selected` on selected options!
  */
-export const ListboxItem = React.memo(
-  ListboxItemComponent,
-) as typeof ListboxItemComponent;
+export const ListboxOption = React.memo(
+  ListboxOptionComponent,
+) as typeof ListboxOptionComponent;

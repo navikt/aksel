@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, fireEvent, fn } from "storybook/test";
-import { ListboxItemProps } from "./item/ListboxItem";
+import { ListboxOptionProps } from "./option/ListboxOption";
 import Listbox from "./root/ListboxRoot";
 
 const meta: Meta<typeof Listbox> = {
@@ -34,39 +34,41 @@ const items = [
 function ListboxStory({
   onClick = () => {},
 }: {
-  onClick?: ListboxItemProps["onClick"];
+  onClick?: ListboxOptionProps["onClick"];
 }) {
-  const [virtuallyFocusedItemId, setVirtuallyFocusedItemId] = useState("");
+  const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
 
   return (
-    <Listbox setVirtuallyFocusedItemId={setVirtuallyFocusedItemId}>
-      <Listbox.List setVirtuallyFocusedItemId={setVirtuallyFocusedItemId}>
+    <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
+      <Listbox.Options
+        setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
+      >
         {items.map((itemOrGroup) =>
           "items" in itemOrGroup && itemOrGroup.items ? (
             <Listbox.Group key={itemOrGroup.label} label={itemOrGroup.label}>
               {itemOrGroup.items.map((item) => (
-                <Listbox.Item
+                <Listbox.Option
                   key={item.value}
                   id={item.value}
                   onClick={onClick}
-                  hasVirtualFocus={virtuallyFocusedItemId === item.value}
+                  hasVirtualFocus={virtuallyFocusedOptionId === item.value}
                 >
                   {item.label}
-                </Listbox.Item>
+                </Listbox.Option>
               ))}
             </Listbox.Group>
           ) : (
-            <Listbox.Item
+            <Listbox.Option
               key={itemOrGroup.value}
               id={itemOrGroup.value}
               onClick={onClick}
-              hasVirtualFocus={virtuallyFocusedItemId === itemOrGroup.value}
+              hasVirtualFocus={virtuallyFocusedOptionId === itemOrGroup.value}
             >
               {itemOrGroup.label}
-            </Listbox.Item>
+            </Listbox.Option>
           ),
         )}
-      </Listbox.List>
+      </Listbox.Options>
     </Listbox>
   );
 }

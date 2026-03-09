@@ -62,14 +62,14 @@ interface RenderItemsProps {
   items: (MyGroup | MyItem)[];
   selectedItems: MyItem["value"][];
   filterString: string;
-  virtuallyFocusedItemId: string;
+  virtuallyFocusedOptionId: string;
   onSelect: (item: MyItem) => void;
 }
 const RenderItems = ({
   items,
   selectedItems,
   filterString,
-  virtuallyFocusedItemId,
+  virtuallyFocusedOptionId,
   onSelect,
 }: RenderItemsProps) =>
   items.map((itemOrGroup) =>
@@ -79,30 +79,30 @@ const RenderItems = ({
         label={<em>{itemOrGroup.label}</em>}
       >
         {itemOrGroup.items.map((item) => (
-          <Listbox.Item
+          <Listbox.Option
             key={item.value}
             id={item.value}
             onClick={() => onSelect(item)}
             aria-selected={selectedItems.includes(item.value)}
-            hasVirtualFocus={virtuallyFocusedItemId === item.value}
+            hasVirtualFocus={virtuallyFocusedOptionId === item.value}
             style={{ paddingLeft: "1em" }}
           >
             <HighlightText text={filterString}>{item.label}</HighlightText>
             {selectedItems.includes(item.value) && <Checkmark />}
-          </Listbox.Item>
+          </Listbox.Option>
         ))}
       </Listbox.Group>
     ) : (
-      <Listbox.Item
+      <Listbox.Option
         key={itemOrGroup.value}
         id={itemOrGroup.value}
         onClick={() => onSelect(itemOrGroup)}
         aria-selected={selectedItems.includes(itemOrGroup.value)}
-        hasVirtualFocus={virtuallyFocusedItemId === itemOrGroup.value}
+        hasVirtualFocus={virtuallyFocusedOptionId === itemOrGroup.value}
       >
         <HighlightText text={filterString}>{itemOrGroup.label}</HighlightText>
         {selectedItems.includes(itemOrGroup.value) && <Checkmark />}
-      </Listbox.Item>
+      </Listbox.Option>
     ),
   );
 const Checkmark = () => <div style={{ float: "right" }}>✓</div>;
@@ -113,7 +113,7 @@ export const Default = () => {
     null,
   );
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [virtuallyFocusedItemId, setVirtuallyFocusedItemId] = useState("");
+  const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
   const [open, setOpen] = useState(false);
 
   const filteredItems = filterString
@@ -130,7 +130,7 @@ export const Default = () => {
     <Floating>
       <div>Selected: {selectedItem}</div>
 
-      <Listbox setVirtuallyFocusedItemId={setVirtuallyFocusedItemId}>
+      <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
         <Floating.Anchor>
           <Listbox.InputSlot>
             <Search
@@ -167,17 +167,17 @@ export const Default = () => {
                   width: "var(--__axc-floating-anchor-width)",
                 }}
               >
-                <Listbox.List
-                  setVirtuallyFocusedItemId={setVirtuallyFocusedItemId}
+                <Listbox.Options
+                  setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
                 >
                   <RenderItems
                     items={filteredItems}
                     selectedItems={selectedItem ? [selectedItem] : []}
                     filterString={filterString}
-                    virtuallyFocusedItemId={virtuallyFocusedItemId}
+                    virtuallyFocusedOptionId={virtuallyFocusedOptionId}
                     onSelect={onSelect}
                   />
-                </Listbox.List>
+                </Listbox.Options>
               </Box>
             </Floating.Content>
           </DismissableLayer>
@@ -191,7 +191,7 @@ export const WithPopover = () => {
   const [filterString, setFilterString] = useState("");
   const [selectedItems, setSelectedItems] = useState<MyItem["value"][]>([]);
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [virtuallyFocusedItemId, setVirtuallyFocusedItemId] = useState("");
+  const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
   const [open, setOpen] = useState(false);
 
   const filteredItems = filterString
@@ -199,7 +199,7 @@ export const WithPopover = () => {
     : groupedItems;
 
   return (
-    <Listbox setVirtuallyFocusedItemId={setVirtuallyFocusedItemId}>
+    <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
       <Listbox.InputSlot>
         <TextField
           label="Test"
@@ -221,12 +221,14 @@ export const WithPopover = () => {
         placement="bottom"
       >
         <Popover.Content>
-          <Listbox.List setVirtuallyFocusedItemId={setVirtuallyFocusedItemId}>
+          <Listbox.Options
+            setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
+          >
             <RenderItems
               items={filteredItems}
               selectedItems={selectedItems}
               filterString={filterString}
-              virtuallyFocusedItemId={virtuallyFocusedItemId}
+              virtuallyFocusedOptionId={virtuallyFocusedOptionId}
               onSelect={(item) => {
                 setSelectedItems((prev) =>
                   prev.includes(item.value)
@@ -236,7 +238,7 @@ export const WithPopover = () => {
                 //setOpen(false);
               }}
             />
-          </Listbox.List>
+          </Listbox.Options>
         </Popover.Content>
       </Popover>
     </Listbox>

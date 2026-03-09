@@ -1,5 +1,5 @@
-function findNextItem(currentItem: HTMLElement) {
-  const nextElement = currentItem.nextElementSibling as HTMLElement | null;
+function findNextOption(currentOption: HTMLElement) {
+  const nextElement = currentOption.nextElementSibling as HTMLElement | null;
   if (nextElement) {
     if (nextElement.role === "group") {
       return nextElement.querySelector<HTMLElement>('[role="option"]');
@@ -11,7 +11,7 @@ function findNextItem(currentItem: HTMLElement) {
 
   // No next element: Current element might be inside a group.
   // Check if the parent has a next sibling
-  const parentNextElement = currentItem.parentElement
+  const parentNextElement = currentOption.parentElement
     ?.nextElementSibling as HTMLElement | null;
   if (parentNextElement) {
     if (parentNextElement.role === "group") {
@@ -25,8 +25,9 @@ function findNextItem(currentItem: HTMLElement) {
   return null;
 }
 
-function findPrevItem(currentItem: HTMLElement) {
-  const prevElement = currentItem.previousElementSibling as HTMLElement | null;
+function findPrevOption(currentOption: HTMLElement) {
+  const prevElement =
+    currentOption.previousElementSibling as HTMLElement | null;
   if (prevElement) {
     if (prevElement.role === "group") {
       return prevElement.querySelector<HTMLElement>(
@@ -40,7 +41,7 @@ function findPrevItem(currentItem: HTMLElement) {
 
   // No previous element: Current element might be inside a group.
   // Check if the parent has a previous sibling.
-  const parentPrevElement = currentItem.parentElement
+  const parentPrevElement = currentOption.parentElement
     ?.previousElementSibling as HTMLElement | null;
   if (parentPrevElement) {
     if (parentPrevElement.role === "group") {
@@ -56,4 +57,4 @@ function findPrevItem(currentItem: HTMLElement) {
   return null;
 }
 
-export { findNextItem, findPrevItem };
+export { findNextOption, findPrevOption };

@@ -8,7 +8,7 @@ interface ListboxInputSlotProps {
 const ListboxInputSlot = ({ children }: ListboxInputSlotProps) => {
   return (
     <Slot
-      aria-activedescendant="aksel-listbox__item-active"
+      aria-activedescendant="aksel-listbox__option-active"
       // @ts-expect-error - You are meant to use an <input>, but Slot doesn't know that.
       autoComplete="off"
       role="combobox"

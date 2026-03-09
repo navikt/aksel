@@ -3,22 +3,22 @@
 import React from "react";
 import { ListboxGroup } from "../group/ListboxGroup";
 import { ListboxInputSlot } from "../input-slot/ListboxInputSlot";
-import { ListboxItem } from "../item/ListboxItem";
-import { ListboxList } from "../list/ListboxList";
-import { findNextItem, findPrevItem } from "./domHelpers";
+import { ListboxOption } from "../option/ListboxOption";
+import { ListboxOptions } from "../options/ListboxOptions";
+import { findNextOption, findPrevOption } from "./domHelpers";
 
 export interface ListboxProps {
   children: React.ReactNode;
-  setVirtuallyFocusedItemId: (value: string) => void;
+  setVirtuallyFocusedOptionId: (value: string) => void;
 }
 
 /**
- * Low level component for displaying a list of selectable items with optional grouping.
+ * Low level component for displaying a list of selectable options with optional grouping.
  * Keyboard navigation is implemented with virtual focus so that real focus can remain on an input field.
  */
-function Listbox({ children, setVirtuallyFocusedItemId }: ListboxProps) {
-  const virtuallyFocusItem = (element: HTMLElement | null) => {
-    setVirtuallyFocusedItemId(element?.dataset.id || "");
+function Listbox({ children, setVirtuallyFocusedOptionId }: ListboxProps) {
+  const virtuallyFocusOption = (element: HTMLElement | null) => {
+    setVirtuallyFocusedOptionId(element?.dataset.id || "");
     element?.scrollIntoView({ block: "nearest" });
   };
 
@@ -32,59 +32,59 @@ function Listbox({ children, setVirtuallyFocusedItemId }: ListboxProps) {
         }
 
         // Helper functions
-        const getFirstItem = (suffix: string = "") =>
+        const getFirstOption = (suffix: string = "") =>
           listbox.querySelector<HTMLElement>(`[role="option"]${suffix}`);
-        const getLastItem = () => {
-          const allItems =
+        const getLastOption = () => {
+          const allOptions =
             listbox.querySelectorAll<HTMLElement>('[role="option"]');
-          return allItems[allItems.length - 1];
+          return allOptions[allOptions.length - 1];
         };
 
-        const focusedItemElm = getFirstItem('[data-virtual-focus="true"]');
+        const focusedOptionElm = getFirstOption('[data-virtual-focus="true"]');
 
-        // Doesn't make sense to have real focus on one item and virtual focus on another at the same time.
+        // Doesn't make sense to have real focus on one option and virtual focus on another at the same time.
         // Not sure if it matters, though 🤔
-        const itemElmWithRealFocus = getFirstItem(":focus");
-        if (itemElmWithRealFocus) {
+        const optionElmWithRealFocus = getFirstOption(":focus");
+        if (optionElmWithRealFocus) {
           listbox.focus();
         }
 
         const virtuallyFocusWithFallback = (
-          getNextElement: (currentItem: HTMLElement) => HTMLElement | null,
+          getNextElement: (currentOption: HTMLElement) => HTMLElement | null,
           getFallback: () => HTMLElement | null,
         ) => {
           event.preventDefault();
-          if (!focusedItemElm) {
-            virtuallyFocusItem(getFallback());
+          if (!focusedOptionElm) {
+            virtuallyFocusOption(getFallback());
             return;
           }
-          const nextItem = getNextElement(focusedItemElm);
-          if (!nextItem) {
-            virtuallyFocusItem(getFallback());
+          const nextOption = getNextElement(focusedOptionElm);
+          if (!nextOption) {
+            virtuallyFocusOption(getFallback());
             return;
           }
-          virtuallyFocusItem(nextItem);
+          virtuallyFocusOption(nextOption);
         };
 
         switch (event.key) {
           case "ArrowDown":
-            virtuallyFocusWithFallback(findNextItem, getFirstItem);
+            virtuallyFocusWithFallback(findNextOption, getFirstOption);
             break;
           case "ArrowUp":
-            virtuallyFocusWithFallback(findPrevItem, getLastItem);
+            virtuallyFocusWithFallback(findPrevOption, getLastOption);
             break;
           case "Home":
             event.preventDefault();
-            virtuallyFocusItem(getFirstItem());
+            virtuallyFocusOption(getFirstOption());
             break;
           case "End":
             event.preventDefault();
-            virtuallyFocusItem(getLastItem());
+            virtuallyFocusOption(getLastOption());
             break;
           case "Enter":
           case "Accept":
-            if (focusedItemElm) {
-              focusedItemElm.click();
+            if (focusedOptionElm) {
+              focusedOptionElm.click();
             }
             break;
           // TODO: Consider implementing PageUp/PageDown too
@@ -97,8 +97,8 @@ function Listbox({ children, setVirtuallyFocusedItemId }: ListboxProps) {
 }
 
 Listbox.InputSlot = ListboxInputSlot;
-Listbox.List = ListboxList;
-Listbox.Item = ListboxItem;
+Listbox.Options = ListboxOptions;
+Listbox.Option = ListboxOption;
 Listbox.Group = ListboxGroup;
 
 export default Listbox;

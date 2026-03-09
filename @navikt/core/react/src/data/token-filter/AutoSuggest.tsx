@@ -2,8 +2,6 @@ import React, { forwardRef, useState } from "react";
 import { Search } from "../../form/search";
 import { VStack } from "../../primitives/stack";
 import { Detail, Label } from "../../typography";
-import { ListboxGroup } from "../../utils/components/Listbox/group/ListboxGroup";
-import { ListboxItem } from "../../utils/components/Listbox/item/ListboxItem";
 import Listbox from "../../utils/components/Listbox/root/ListboxRoot";
 import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
 import { Floating } from "../../utils/components/floating/Floating";
@@ -22,7 +20,8 @@ interface AutoSuggestProps {
 
 const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
   ({ options, onSelect, value, onChange, open, setOpen }, ref) => {
-    const [virtuallyFocusedItemId, setVirtuallyFocusedItemId] = useState("");
+    const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] =
+      useState("");
 
     const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null);
 
@@ -49,7 +48,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
 
     return (
       <Floating>
-        <Listbox setVirtuallyFocusedItemId={setVirtuallyFocusedItemId}>
+        <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
           <Floating.Anchor>
             <Listbox.InputSlot>
               <Search
@@ -76,8 +75,8 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
             <AutoSuggestPopup
               options={options}
               onSelect={handleSelectOption}
-              focusedValue={virtuallyFocusedItemId}
-              setFocusedValue={setVirtuallyFocusedItemId}
+              focusedValue={virtuallyFocusedOptionId}
+              setFocusedValue={setVirtuallyFocusedOptionId}
               onClose={handleClose}
               safeZoneAnchor={inputRef}
             />
@@ -124,11 +123,11 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
           className="aksel-property-filter__popup"
         >
           <div className="aksel-property-filter__popup-inner">
-            <Listbox.List setVirtuallyFocusedItemId={setFocusedValue}>
+            <Listbox.Options setVirtuallyFocusedOptionId={setFocusedValue}>
               {options.map((group) => (
-                <ListboxGroup key={group.label} label={group.label}>
+                <Listbox.Group key={group.label} label={group.label}>
                   {group.options.map((item) => (
-                    <ListboxItem
+                    <Listbox.Option
                       key={item.value}
                       id={item.value}
                       onClick={() => onSelect(item)}
@@ -147,11 +146,11 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
                           ))}
                         </div>
                       )} */}
-                    </ListboxItem>
+                    </Listbox.Option>
                   ))}
-                </ListboxGroup>
+                </Listbox.Group>
               ))}
-            </Listbox.List>
+            </Listbox.Options>
           </div>
         </Floating.Content>
       </DismissableLayer>
