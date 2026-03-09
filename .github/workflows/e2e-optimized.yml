@@ -42,13 +42,13 @@ jobs:
           sanity_read_token: ${{ secrets.SANITY_READ }}
           sanity_read_no_drafts_token: ${{ secrets.SANITY_READ_NO_DRAFTS }}
       - name: Log in to the Container registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: aksel.nav.no/Dockerfile
