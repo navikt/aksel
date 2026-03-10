@@ -74,7 +74,7 @@ const DataDragAndDrop = forwardRef<HTMLDivElement, DataDragAndDropProps>(
               {children}
             </div>
           </VStack>
-          <DragOverlay>
+          <DragOverlay dropAnimation={null}>
             {(source) => {
               // Overlay not needed and causes glitching when using keyboard
               if (inputMethod === "keyboard") return null;

@@ -327,10 +327,13 @@
   }
 }
 
-.aksel-data-table__drag-and-drop-item-drag-handler {
+.aksel-data-drag-and-drop-drag-handler__button {
   cursor: grab;
   height: 1.5rem;
   position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
 
   &:focus-visible {
     outline: 2px solid var(--ax-border-focus);
@@ -339,17 +342,6 @@
   }
 }
 
-.aksel-data-table__drag-and-drop-item-keyboard-drag-icon {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.aksel-data-drag-and-drop-drag-handler__arrow {
   height: 1.2rem;
-
-  &[data-direction="up"] {
-    top: -10px;
-  }
-
-  &[data-direction="down"] {
-    bottom: -29px;
-  }
 }

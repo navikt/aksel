@@ -1,13 +1,9 @@
 import { useSortable } from "@dnd-kit/react/sortable";
 import React, { useRef } from "react";
-import {
-  CaretDownCircleFillIcon,
-  CaretUpCircleFillIcon,
-  DragVerticalIcon,
-} from "@navikt/aksel-icons";
 import { HStack } from "../../../primitives/stack";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
+import { DataDragAndDropDragHandler } from "../drag-handler/DataDragAndDropDragHandler";
 import { DataDragAndDropContext } from "../root/DataDragAndDrop.context";
 
 interface DataDragAndDropItemProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -62,34 +58,10 @@ const DataDragAndDropItem = React.forwardRef<
         data-drop-target={mouseDropTarget}
         tabIndex={-1}
       >
-        <div
-          className="aksel-data-table__drag-and-drop-item-drag-handler"
-          ref={handleRef}
-          // TODO Consider moving this to its own component
-          // TODO Perhaps make it a button where clicking also enables arrow icons?
-        >
-          {keyboardDragging && (
-            <span
-              className="aksel-data-table__drag-and-drop-item-keyboard-drag-icon"
-              data-direction="up"
-            >
-              <CaretUpCircleFillIcon aria-hidden fontSize="1.2rem" />
-            </span>
-          )}
-          <DragVerticalIcon
-            aria-hidden
-            title="Dra for å flytte"
-            fontSize="1.5rem"
-          />
-          {keyboardDragging && (
-            <span
-              className="aksel-data-table__drag-and-drop-item-keyboard-drag-icon"
-              data-direction="down"
-            >
-              <CaretDownCircleFillIcon aria-hidden fontSize="1.2rem" />
-            </span>
-          )}
-        </div>
+        <DataDragAndDropDragHandler
+          handleRef={handleRef}
+          keyboardDragging={keyboardDragging}
+        />
         <div>{children}</div>
       </div>
     </HStack>
