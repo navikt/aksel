@@ -1,9 +1,10 @@
+import path from "path";
+import type { PlayroomConfig } from "playroom";
+
 // Note: Hot module reloading for dev has been turned off for this environment
 // Why? We embed playroom in an iframe, and that iframe is loaded from the public asset folder
 // So we need to build into that public asset folder. Hence no dev mode and HMR
 // Workaround: restart the next dev server after each change to the playroom config and associated files.
-
-const path = require("path");
 
 module.exports = {
   baseUrl: "./",
@@ -17,7 +18,6 @@ module.exports = {
   themes: "./src/themes.ts",
   port: 9000,
   frameComponent: path.resolve("./src/FrameComponent.tsx"),
-  useScope: path.resolve("./src/useScope.tsx"),
   openBrowser: false,
   paramType: "search", // default is 'hash'
   iframeSandbox: "allow-scripts allow-same-origin allow-modals",
@@ -25,7 +25,7 @@ module.exports = {
 <GlobalAlert status="success">
   <GlobalAlert.Header>
     <GlobalAlert.Title>Welcome to Aksel sandbox!</GlobalAlert.Title>
-  </GlobalAlertHeader>
+  </GlobalAlert.Header>
 </GlobalAlert>
   `,
   webpackConfig: () => ({
@@ -59,4 +59,4 @@ module.exports = {
       ],
     },
   }),
-};
+} satisfies PlayroomConfig;
