@@ -24,20 +24,6 @@ export const UseScrollLock: StoryObj = {
   },
 };
 
-export const UseScrollLockEdgecase: StoryObj = {
-  render: ScrollLockComponent,
-  decorators: [
-    (story) => (
-      <div style={{ height: "5000px", background: "var(--ax-bg-softA)" }}>
-        {story()}
-      </div>
-    ),
-  ],
-  parameters: {
-    layout: "fullscreen",
-  },
-};
-
 export const UseScrollLockScrollXAndY: StoryObj = {
   render: ScrollLockComponent,
   decorators: [
