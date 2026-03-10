@@ -3,4 +3,4 @@
 "@navikt/ds-css": minor
 ---
 
-InfoCard: New sub-component Infocard.Message.
+InfoCard: New sub-component InfoCard.Message.
