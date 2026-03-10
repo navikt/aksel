@@ -119,14 +119,14 @@ export default async function Page(props: Props) {
    */
   for (const article of articleList) {
     const relevantUndertema = article.undertema?.find(
-      (ut) => ut?.temaTitle === temaPage.title,
+      (ut) => stegaClean(ut?.temaTitle) === stegaClean(temaPage.title),
     )?.title;
 
     if (relevantUndertema && article.innholdstype) {
       sortedArticles.push({
         ...article,
-        innholdstype: article.innholdstype,
-        undertema: relevantUndertema,
+        innholdstype: stegaClean(article.innholdstype),
+        undertema: stegaClean(relevantUndertema),
         displayDate: formatDateString(article.displayDate ?? ""),
       });
     }
@@ -197,8 +197,9 @@ export default async function Page(props: Props) {
       if (!articlesMap[key]) {
         const description =
           groupByField !== "innholdstype"
-            ? temaPage.undertema.find((ut) => ut.title === article.undertema)
-                ?.description
+            ? temaPage.undertema.find(
+                (ut) => stegaClean(ut.title) === article.undertema,
+              )?.description
             : undefined;
 
         articlesMap[key] = {
