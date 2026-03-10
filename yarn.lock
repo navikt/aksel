@@ -1337,7 +1337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.20.2, @babel/preset-env@npm:^7.23.2, @babel/preset-env@npm:^7.28.6":
+"@babel/preset-env@npm:^7.20.2, @babel/preset-env@npm:^7.28.6, @babel/preset-env@npm:^7.29.0":
   version: 7.29.0
   resolution: "@babel/preset-env@npm:7.29.0"
   dependencies:
@@ -1443,7 +1443,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-react@npm:^7.18.6, @babel/preset-react@npm:^7.22.15, @babel/preset-react@npm:^7.28.5":
+"@babel/preset-react@npm:^7.18.6, @babel/preset-react@npm:^7.28.5":
   version: 7.28.5
   resolution: "@babel/preset-react@npm:7.28.5"
   dependencies:
@@ -1459,7 +1459,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.18.6, @babel/preset-typescript@npm:^7.23.2, @babel/preset-typescript@npm:^7.24.7, @babel/preset-typescript@npm:^7.28.5":
+"@babel/preset-typescript@npm:^7.18.6, @babel/preset-typescript@npm:^7.24.7, @babel/preset-typescript@npm:^7.28.5":
   version: 7.28.5
   resolution: "@babel/preset-typescript@npm:7.28.5"
   dependencies:
@@ -11227,7 +11227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^6.7.2, css-loader@npm:^6.8.1":
+"css-loader@npm:^6.7.2":
   version: 6.11.0
   resolution: "css-loader@npm:6.11.0"
   dependencies:
@@ -11248,6 +11248,30 @@ __metadata:
     webpack:
       optional: true
   checksum: 10/9e3665509f6786d46683de5c5f5c4bdd4aa62396b4017b41dbbb41ea5ada4012c80ee1e3302b79b504bc24da7fa69e3552d99006cecc953e0d9eef4a3053b929
+  languageName: node
+  linkType: hard
+
+"css-loader@npm:^7.1.4":
+  version: 7.1.4
+  resolution: "css-loader@npm:7.1.4"
+  dependencies:
+    icss-utils: "npm:^5.1.0"
+    postcss: "npm:^8.4.40"
+    postcss-modules-extract-imports: "npm:^3.1.0"
+    postcss-modules-local-by-default: "npm:^4.0.5"
+    postcss-modules-scope: "npm:^3.2.0"
+    postcss-modules-values: "npm:^4.0.0"
+    postcss-value-parser: "npm:^4.2.0"
+    semver: "npm:^7.6.3"
+  peerDependencies:
+    "@rspack/core": 0.x || ^1.0.0 || ^2.0.0-0
+    webpack: ^5.27.0
+  peerDependenciesMeta:
+    "@rspack/core":
+      optional: true
+    webpack:
+      optional: true
+  checksum: 10/4a37f3bd5db6d7d13a71f6ffff6d7afc3b243d4e2105c98dd1df9c1ae719cf95c3b46c47aeb6c5fd3675caf60bdb144e9baeba979a432df0906613e8f07b7623
   languageName: node
   linkType: hard
 
@@ -19141,9 +19165,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playroom@npm:^1.0.5":
-  version: 1.0.7
-  resolution: "playroom@npm:1.0.7"
+"playroom@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "playroom@npm:1.2.1"
   dependencies:
     "@babel/core": "npm:^7.20.5"
     "@babel/parser": "npm:^7.23.4"
@@ -19201,7 +19225,7 @@ __metadata:
     react-dom: ^18 || ^19
   bin:
     playroom: bin/cli.cjs
-  checksum: 10/b5df3585bf65bfec36515bc7c852870d46605b3c61eeafb4620778f19ad01eb30fbb0b13750b8dbb9487d17ab4c77b8d1894b38b77082bd9bcefa7c6221eb1c3
+  checksum: 10/386cb1d477604f88f14443b1ed78ffcb8c69a97f17d8e0136576c307139cb7aee4b40e68922355932d3db9aaa0afc96b2d0f848b9759f89a71fd1391dade4e62
   languageName: node
   linkType: hard
 
@@ -19209,18 +19233,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "playroom@workspace:aksel.nav.no/playroom"
   dependencies:
-    "@babel/preset-env": "npm:^7.23.2"
-    "@babel/preset-react": "npm:^7.22.15"
-    "@babel/preset-typescript": "npm:^7.23.2"
+    "@babel/preset-env": "npm:^7.29.0"
+    "@babel/preset-react": "npm:^7.28.5"
+    "@babel/preset-typescript": "npm:^7.28.5"
     babel-loader: "npm:^9.1.3"
     babel-plugin-preval: "npm:^5.1.0"
-    css-loader: "npm:^6.8.1"
-    fast-glob: "npm:3.3.3"
-    playroom: "npm:^1.0.5"
+    css-loader: "npm:^7.1.4"
+    playroom: "npm:^1.2.1"
     react: "npm:19.2.4"
-    rimraf: "npm:6.1.2"
-    style-loader: "npm:^3.3.3"
+    style-loader: "npm:^4.0.0"
     tsx: "npm:^4.20.6"
+    typescript: "npm:5.9.3"
   languageName: unknown
   linkType: soft
 
@@ -19472,6 +19495,17 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10/9e4fbe97574091e9736d0e82a591e29aa100a0bf60276a926308f8c57249698935f35c5d2f4e80de778d0cbb8dcffab4f383d85fd50c5649aca421c3df729b86
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.4.40":
+  version: 8.5.8
+  resolution: "postcss@npm:8.5.8"
+  dependencies:
+    nanoid: "npm:^3.3.11"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10/cbacbfd7f767e2c820d4bf09a3a744834dd7d14f69ff08d1f57b1a7defce9ae5efcf31981890d9697a972a64e9965de677932ef28e4c8ba23a87aad45b82c459
   languageName: node
   linkType: hard
 
@@ -20805,18 +20839,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:6.1.2, rimraf@npm:^6.0.1":
-  version: 6.1.2
-  resolution: "rimraf@npm:6.1.2"
-  dependencies:
-    glob: "npm:^13.0.0"
-    package-json-from-dist: "npm:^1.0.1"
-  bin:
-    rimraf: dist/esm/bin.mjs
-  checksum: 10/add8e566fe903f59d7b55c6c2382320c48302778640d1951baf247b3b451af496c2dee7195c204a8c646fd6327feadd1f5b61ce68c1362d4898075a726d83cc6
-  languageName: node
-  linkType: hard
-
 "rimraf@npm:6.1.3":
   version: 6.1.3
   resolution: "rimraf@npm:6.1.3"
@@ -20848,6 +20870,18 @@ __metadata:
   bin:
     rimraf: dist/esm/bin.mjs
   checksum: 10/f3b8ce81eecbde4628b07bdf9e2fa8b684e0caea4999acb1e3b0402c695cd41f28cd075609a808e61ce2672f528ca079f675ab1d8e8d5f86d56643a03e0b8d2e
+  languageName: node
+  linkType: hard
+
+"rimraf@npm:^6.0.1":
+  version: 6.1.2
+  resolution: "rimraf@npm:6.1.2"
+  dependencies:
+    glob: "npm:^13.0.0"
+    package-json-from-dist: "npm:^1.0.1"
+  bin:
+    rimraf: dist/esm/bin.mjs
+  checksum: 10/add8e566fe903f59d7b55c6c2382320c48302778640d1951baf247b3b451af496c2dee7195c204a8c646fd6327feadd1f5b61ce68c1362d4898075a726d83cc6
   languageName: node
   linkType: hard
 
@@ -22609,12 +22643,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-loader@npm:^3.3.3":
-  version: 3.3.4
-  resolution: "style-loader@npm:3.3.4"
+"style-loader@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "style-loader@npm:4.0.0"
   peerDependencies:
-    webpack: ^5.0.0
-  checksum: 10/2dd2a77d4fc689e1f73836ed7653830cb4e628af0b2979dcf6f31524c72bf44fca4bac8aebe62df95a5f9be19bea18f952a2cfcaaeff32c524c4402226d9c58f
+    webpack: ^5.27.0
+  checksum: 10/93f25b7e70cfca9d1d8427170384262b59a5b0e84e7191a5a26636a77799caeed46d9a3e45ee7b9afa0f69176e3b98d5a6c5e81593ff1fd0946f1c5682fd2a68
   languageName: node
   linkType: hard
 
