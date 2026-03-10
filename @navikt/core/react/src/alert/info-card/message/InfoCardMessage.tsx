@@ -1,12 +1,9 @@
 import React, { forwardRef } from "react";
+import type { AkselColor } from "../../../types";
 import { BodyLong } from "../../../typography";
 import { cl } from "../../../utils/helpers";
-import { BaseAlert } from "../../base-alert";
 
-type InfoCardMessageProps = Omit<
-  BaseAlert.RootProps,
-  "type" | "global" | "status" | "as"
-> & {
+interface InfoCardMessageProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Changes the HTML element used for the root element.
    *
@@ -18,22 +15,30 @@ type InfoCardMessageProps = Omit<
    */
   as?: "div" | "section";
   /**
+   * Changes the size.
+   * @default "medium"
+   */
+  size?: "medium" | "small";
+  /**
    * Icon to display in message.
    */
   icon: React.ReactNode;
-};
+  /**
+   * Overrides inherited color.
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
+}
 
 /**
- * A component for displaying informational content in a card format.
+ * A component for displaying informational messages.
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/infocard)
- * @see 🏷️ {@link InfoCardProps}
+ * @see 🏷️ {@link InfoCardMessageProps}
  * @example
  * ```jsx
- *  <InfoCard data-color="info">
- *    <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
- *      <InfoCard.Title>Info title</InfoCard.Title>
- *    </InfoCard.Header>
- *    <InfoCard.Content>Content</InfoCard.Content>
+ *  <InfoCard data-color="info" icon={<InformationSquareIcon aria-hidden />}>
+ *    Message contents
  *  </InfoCard>
  * ```
  */
