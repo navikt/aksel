@@ -174,6 +174,27 @@ export const WrappingTitle: Story = {
   },
 };
 
+export const Message: Story = {
+  render: () => {
+    return (
+      <VStack gap="space-16">
+        <InfoCard.Message icon={<InformationSquareIcon />}>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
+          tempore corrupti asperiores praesentium? Asperiores, doloribus?
+          Molestias, laudantium saepe. Nihil in alias praesentium maxime iure
+          ipsam? Accusantium libero quia quis!
+        </InfoCard.Message>
+        <InfoCard.Message icon={<InformationSquareIcon />} size="small">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
+          tempore corrupti asperiores praesentium? Asperiores, doloribus?
+          Molestias, laudantium saepe. Nihil in alias praesentium maxime iure
+          ipsam? Accusantium libero quia quis!
+        </InfoCard.Message>
+      </VStack>
+    );
+  },
+};
+
 export const Chromatic = renderStoriesForChromatic({
   Default,
   SizeSmall,

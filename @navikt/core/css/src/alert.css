@@ -192,3 +192,25 @@
     color: var(--ax-text-neutral-contrast);
   }
 }
+
+.aksel-base-alert__message {
+  border-radius: var(--ax-radius-12);
+  overflow: clip;
+  height: fit-content;
+  outline: 1px solid var(--ax-border-subtleA);
+  outline-offset: -1px;
+  background: var(--ax-bg-moderate);
+  color: var(--ax-text-default);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ax-space-8);
+  padding: var(--ax-space-12) var(--ax-space-16);
+
+  & > .aksel-base-alert__icon {
+    margin-top: 2px;
+  }
+
+  &[data-size="small"] > .aksel-base-alert__icon {
+    margin-top: 0;
+  }
+}
