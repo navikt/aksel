@@ -41,7 +41,7 @@ function toVal(mix: Exclude<ClassValue, null | undefined | false>) {
 }
 
 function cl(...inputs: ClassValue[]) {
-  let parsedValue = "";
+  let parsedValue: string;
   let currentValue: ClassValue;
   let result = "";
 
