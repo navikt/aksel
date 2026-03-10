@@ -37,9 +37,9 @@ interface InfoCardMessageProps extends React.HTMLAttributes<HTMLDivElement> {
  * @see 🏷️ {@link InfoCardMessageProps}
  * @example
  * ```jsx
- *  <InfoCard data-color="info" icon={<InformationSquareIcon aria-hidden />}>
+ *  <InfoCard.Message data-color="info" icon={<InformationSquareIcon aria-hidden />}>
  *    Message contents
- *  </InfoCard>
+ *  </InfoCard.Message>
  * ```
  */
 const InfoCardMessage = forwardRef<HTMLDivElement, InfoCardMessageProps>(
