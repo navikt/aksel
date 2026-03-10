@@ -154,7 +154,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
         />
         <button
           disabled={inputProps.disabled || readOnly}
-          tabIndex={readOnly ? -1 : context?.open ? -1 : 0}
+          tabIndex={readOnly ? -1 : undefined}
           onClick={() => {
             context?.onOpen();
             setAnchorRef?.(buttonRef.current);
