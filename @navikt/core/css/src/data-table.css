@@ -315,7 +315,7 @@
   }
 
   &[data-keyboard-dragging="true"] {
-    .aksel-data-table__drag-and-drop-item-drag-handler {
+    .aksel-data-drag-and-drop-drag-handler__button {
       outline: 2px solid var(--ax-border-focus);
       outline-offset: -1px;
       border-radius: var(--ax-radius-8);

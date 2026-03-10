@@ -62,11 +62,9 @@ const DataDragAndDrop = forwardRef<HTMLDivElement, DataDragAndDropProps>(
             }
           }}
           onDragEnd={(event) => {
-            if (event.operation.activatorEvent?.type === "pointerdown") {
-              const { source, target } = event.operation;
-              if (!isSortable(source) || !isSortable(target)) return;
-              setItemOrder(source.initialIndex, target.index);
-            }
+            const { source, target } = event.operation;
+            if (!isSortable(source) || !isSortable(target)) return;
+            setItemOrder(source.initialIndex, target.index);
           }}
         >
           <VStack asChild gap="space-12">
