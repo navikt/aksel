@@ -43,6 +43,13 @@ export interface ReadMoreProps extends React.ButtonHTMLAttributes<HTMLButtonElem
    * @private
    */
   "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
+  /**
+   * Changes variant of ReadMore.
+   *
+   * `moderate` is a more expressive variant
+   * @default "ghost"
+   */
+  variant?: "moderate" | "ghost";
 }
 
 /**
@@ -66,6 +73,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       onClick,
       size = "medium",
       onOpenChange,
+      variant = "ghost",
       ...rest
     }: ReadMoreProps,
     ref,
@@ -86,7 +94,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           className,
           { "aksel-read-more--open": _open },
         )}
-        data-volume="low"
+        data-variant={variant}
       >
         <button
           {...rest}
