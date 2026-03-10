@@ -1,17 +1,21 @@
 import { useState } from "react";
-import { Box, MonthPicker, useMonthpicker } from "@navikt/ds-react";
+import {
+  Box,
+  MonthPicker,
+  MonthValidationT,
+  useMonthpicker,
+} from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
-const year = new Date().getFullYear();
-
 const Example = () => {
-  const [hasError, setHasError] = useState(false);
+  const [validation, setValidation] = useState<MonthValidationT | null>(null);
+  const [validationToShow, setValidationToShow] =
+    useState<MonthValidationT | null>(null);
+
   const { monthpickerProps, inputProps } = useMonthpicker({
-    fromDate: new Date(`Aug 23 ${year - 1}`),
-    toDate: new Date(`Aug 23 ${year + 1}`),
-    onValidate: (val) => {
-      setHasError(!val.isValidMonth);
-      console.info(val);
+    onValidate: (newValidation) => {
+      setValidation(newValidation);
+      console.info(newValidation);
     },
   });
 
@@ -20,9 +24,13 @@ const Example = () => {
       <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input
           {...inputProps}
-          label="Velg måned"
-          error={hasError && "Du må velge måned"}
+          label="Velg startmåned"
           description="Format: mm.åååå"
+          onBlur={() => setValidationToShow(validation)}
+          error={
+            validationToShow?.isValidMonth === false &&
+            "Du må velge eller skrive inn en startmåned. Format: mm.åååå"
+          }
         />
       </MonthPicker>
     </Box>
@@ -39,5 +47,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Bruk `onValidate`-callback for å håndtere validering.",
+  desc: "Bruk `onValidate`-callback for å håndtere validering. Se også [Mønster for skjemavalidering](/monster-maler/soknadsdialog/monster-for-skjemavalidering).",
 };
