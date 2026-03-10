@@ -12,7 +12,7 @@ export { useRefWithInit } from "./useRefWithInit";
 export { useScrollLock } from "./useScrollLock";
 export { Timeout, useTimeout } from "./useTimeout";
 export {
-  TransitionStatus,
+  type TransitionStatus,
   createTransitionStatusAttribute,
   useTransitionStatus,
 } from "./useTransitionStatus";
