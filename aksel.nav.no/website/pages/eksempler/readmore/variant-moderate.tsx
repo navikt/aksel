@@ -3,7 +3,11 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ReadMore size="small" header="Dette regnes som helsemessige begrensninger">
+    <ReadMore
+      variant="moderate"
+      header="Dette regnes som helsemessige begrensninger"
+      size="large"
+    >
       Med helsemessige begrensninger mener vi funksjonshemming, sykdom,
       allergier som hindrer deg i arbeidet eller andre årsaker som må tas hensyn
       til når du skal finne nytt arbeid. Du må oppgi hva som gjelder for deg, og
@@ -21,5 +25,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 2,
 };
