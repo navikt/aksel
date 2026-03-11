@@ -74,11 +74,21 @@ interface UseMonthPickerValue {
 }
 
 export type MonthValidationT = {
-  isDisabled: boolean;
-  isEmpty: boolean;
-  isInvalid: boolean;
+  /**
+   * Whether there are any validation errors.
+   * - When `true`, all the other properties will be `false`.
+   * - When `false`, at least one of the other properties will be `true`.
+   */
   isValidMonth: boolean;
+  /** Whether the month is a disabled month */
+  isDisabled: boolean;
+  /** Whether the input field is empty */
+  isEmpty: boolean;
+  /** Whether the entered value cannot be parsed as a month (i.e. wrong format) */
+  isInvalid: boolean;
+  /** Whether the month is before `fromDate` */
   isBefore: boolean;
+  /** Whether the month is after `toDate` */
   isAfter: boolean;
 };
 

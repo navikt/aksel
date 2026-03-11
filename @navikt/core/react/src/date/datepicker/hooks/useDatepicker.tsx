@@ -90,12 +90,23 @@ interface UseDatepickerValue {
 }
 
 export type DateValidationT = {
-  isDisabled: boolean;
-  isWeekend: boolean;
-  isEmpty: boolean;
-  isInvalid: boolean;
+  /**
+   * Whether there are any validation errors.
+   * - When `true`, all the other properties will be `false`.
+   * - When `false`, at least one of the other properties will be `true`.
+   */
   isValidDate: boolean;
+  /** Whether the date is a disabled date */
+  isDisabled: boolean;
+  /** Whether the date falls on a weekend and `disableWeekends` is true */
+  isWeekend: boolean;
+  /** Whether the input field is empty */
+  isEmpty: boolean;
+  /** Whether the entered value cannot be parsed as a date (i.e. wrong format or non-existing date) */
+  isInvalid: boolean;
+  /** Whether the date is before `fromDate` */
   isBefore: boolean;
+  /** Whether the date is after `toDate` */
   isAfter: boolean;
 };
 
