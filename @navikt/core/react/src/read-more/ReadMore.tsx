@@ -88,13 +88,9 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
 
     return (
       <div
-        className={cl(
-          "aksel-read-more",
-          `aksel-read-more--${size}`,
-          className,
-          { "aksel-read-more--open": _open },
-        )}
+        className={cl("aksel-read-more", `aksel-read-more--${size}`, className)}
         data-variant={variant}
+        data-state={_open ? "open" : "closed"}
       >
         <button
           {...rest}
@@ -105,7 +101,6 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           })}
           onClick={composeEventHandlers(onClick, () => _setOpen((x) => !x))}
           aria-expanded={_open}
-          data-state={_open ? "open" : "closed"}
         >
           <ChevronDownIcon
             className="aksel-read-more__expand-icon"
@@ -120,7 +115,6 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
             "aksel-read-more__content--closed": !_open,
           })}
           size={typoSize}
-          data-state={_open ? "open" : "closed"}
         >
           {children}
         </BodyLong>
