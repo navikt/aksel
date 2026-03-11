@@ -21,6 +21,6 @@ export const deprecations: DeprecatedList = [
   {
     classes: ["aksel-read-more__content--closed", "aksel-read-more--open"],
     message:
-      "Removed in version ^8.7. Use data-state='open' or 'closed' instead.",
+      "Removed in version ^8.8. Use data-state='open' or 'closed' instead.",
   },
 ];
