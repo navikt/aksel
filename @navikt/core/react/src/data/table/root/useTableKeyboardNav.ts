@@ -130,6 +130,7 @@ function useTableKeyboardNav(
   /**
    * When focus is moved to elements inside a cell like inputs, checkbox etc
    * we want to update the active cell to the parent td/th, so that keyboard navigation continues to work as expected from there.
+   * Make sure td/th elements have tabIndex={-1} so they can receive focus on click
    */
   const handleTableFocusIn = useEventCallback((event: FocusEvent): void => {
     const target = event.target as Element | null;

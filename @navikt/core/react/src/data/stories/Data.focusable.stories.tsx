@@ -119,7 +119,7 @@ export const TanstackDemo: Story = {
 export const Spans: Story = {
   render: () => (
     <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-      <DataTable style={{ width: "100%" }} withKeyboardNav>
+      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
             <DataTable.Th colSpan={2}>Group A</DataTable.Th>
@@ -208,7 +208,7 @@ export const Spans: Story = {
 export const Inputs: Story = {
   render: () => (
     <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-      <DataTable style={{ width: "100%" }} withKeyboardNav>
+      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
             <DataTable.Th>Col 1</DataTable.Th>
@@ -334,7 +334,7 @@ export const Inputs: Story = {
 export const DisabledCells: Story = {
   render: () => (
     <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-      <DataTable style={{ width: "100%" }} withKeyboardNav>
+      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
             <DataTable.Th>Col 1</DataTable.Th>
@@ -445,7 +445,7 @@ export const Cache: Story = {
         <button onClick={() => setShowThatSingleRow((s) => !s)}>
           Toggle single row: {showThatSingleRow ? "ON" : "OFF"}
         </button>
-        <DataTable style={{ width: "100%" }} withKeyboardNav>
+        <DataTable style={{ width: "100%" }} layout="auto">
           <DataTable.Thead>
             <DataTable.Tr>
               <DataTable.Th>Col 1</DataTable.Th>
@@ -489,7 +489,7 @@ export const FocusElementInsideTable: Story = {
   render: () => {
     return (
       <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-        <DataTable style={{ width: "100%" }} withKeyboardNav>
+        <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
           <DataTable.Thead>
             <DataTable.Tr>
               <DataTable.Th>Col 1</DataTable.Th>

@@ -108,6 +108,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
           console.info("is overflowing", isOverflowing);
         }}
         onPointerLeave={() => setIsOverflowing(false)}
+        tabIndex={-1}
       >
         {sortable ? (
           <button
@@ -119,6 +120,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
                 aria-hidden
                 data-sort-direction={sortDirection}
                 className="aksel-data-table__th-sort-icon"
+                fontSize="1.25rem"
               />
             )}
             <div ref={contentRef} className="aksel-data-table__th-content">

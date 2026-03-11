@@ -23,6 +23,7 @@ const DataTableTd = forwardRef<HTMLTableCellElement, DataTableTdProps>(
         {...rest}
         ref={forwardedRef}
         className={cl("aksel-data-table__td", className)}
+        tabIndex={-1}
       >
         <div style={{ maxWidth: contentMaxWidth }}>{children}</div>
       </td>
