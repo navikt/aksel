@@ -46,7 +46,10 @@ export interface ReadMoreProps extends React.ButtonHTMLAttributes<HTMLButtonElem
   /**
    * Changes variant of ReadMore.
    *
-   * `moderate` is a more expressive variant
+   * `moderate` is a more expressive variant.
+   *
+   *
+   * `ghost` is more subtle, mainly for use in forms.
    * @default "ghost"
    */
   variant?: "moderate" | "ghost";
@@ -109,13 +112,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           <span>{header}</span>
         </button>
 
-        <BodyLong
-          as="div"
-          className={cl("aksel-read-more__content", {
-            "aksel-read-more__content--closed": !_open,
-          })}
-          size={typoSize}
-        >
+        <BodyLong as="div" className="aksel-read-more__content" size={typoSize}>
           {children}
         </BodyLong>
       </div>

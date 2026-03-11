@@ -68,13 +68,25 @@ export const Open: Story = {
 export const Moderate: Story = {
   render: (args) => (
     <VStack gap="space-16" maxWidth="35rem">
-      <ReadMore variant="moderate" size="large" header={args?.header}>
+      <ReadMore
+        variant="moderate"
+        size="large"
+        header={args?.header ?? Default?.args?.header}
+      >
         {Content}
       </ReadMore>
-      <ReadMore variant="moderate" size="medium" header={args?.header}>
+      <ReadMore
+        variant="moderate"
+        size="medium"
+        header={args?.header ?? Default?.args?.header}
+      >
         {Content}
       </ReadMore>
-      <ReadMore variant="moderate" size="small" header={args?.header}>
+      <ReadMore
+        variant="moderate"
+        size="small"
+        header={args?.header ?? Default?.args?.header}
+      >
         {Content}
       </ReadMore>
     </VStack>
@@ -90,13 +102,25 @@ export const Moderate: Story = {
 export const Ghost: Story = {
   render: (args) => (
     <VStack gap="space-16" maxWidth="35rem">
-      <ReadMore variant="ghost" size="large" header={args?.header}>
+      <ReadMore
+        variant="ghost"
+        size="large"
+        header={args?.header ?? Default?.args?.header}
+      >
         {Content}
       </ReadMore>
-      <ReadMore variant="ghost" size="medium" header={args?.header}>
+      <ReadMore
+        variant="ghost"
+        size="medium"
+        header={args?.header ?? Default?.args?.header}
+      >
         {Content}
       </ReadMore>
-      <ReadMore variant="ghost" size="small" header={args?.header}>
+      <ReadMore
+        variant="ghost"
+        size="small"
+        header={args?.header ?? Default?.args?.header}
+      >
         {Content}
       </ReadMore>
     </VStack>

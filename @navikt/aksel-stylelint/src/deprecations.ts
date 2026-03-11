@@ -18,4 +18,9 @@ export const deprecations: DeprecatedList = [
       "Removed in vX.X.X, see documentation [link] for more information.",
     deprecatePrefix: true,
   },
+  {
+    classes: ["aksel-read-more__content--closed", "aksel-read-more--open"],
+    message:
+      "Removed in version ^8.7. Use data-state='open' or 'closed' instead.",
+  },
 ];
