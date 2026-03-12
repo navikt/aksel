@@ -3,4 +3,4 @@
 "@navikt/ds-css": minor
 ---
 
-ReadMore: Added variants `ghost` and `moderate`.
+ReadMore: Added variant `moderate`.
