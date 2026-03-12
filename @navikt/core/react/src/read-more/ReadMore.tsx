@@ -46,7 +46,7 @@ export interface ReadMoreProps extends React.ButtonHTMLAttributes<HTMLButtonElem
   /**
    * Changes variant of ReadMore.
    *
-   * `moderate` is a more expressive variant.
+   * `moderate` is a more visually prominent variant.
    *
    *
    * `ghost` is more subtle, mainly for use in forms.
