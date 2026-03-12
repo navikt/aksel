@@ -1,85 +1,73 @@
 <h1 align="center">
-    <img src="/aksel.nav.no/website/public/favicon.svg" style="width:13rem" />
-    <br/><br/>Aksel
+  <img src="https://raw.githubusercontent.com/navikt/aksel/main/aksel.nav.no/website/public/favicon.svg" width="96" alt="Aksel logo" />
+  <br /><br />Aksel
 </h1>
 
 <div align="center">
-    <p>Nav's design system + Aksel.nav.no</p>
-    <p>
-      <a href="https://aksel.nav.no/storybook/"><img alt="Storybook" src="https://shields.io/badge/storybook-white?logo=storybook&style=flat" /></a>&nbsp;
-      <a href="https://github.com/navikt/aksel/pulls"><img alt="PRs" src="https://img.shields.io/badge/PRs-welcome-green.svg?color=%23262626" /></a>&nbsp;
-      <a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=version" /></a>&nbsp;
-    </p>
-    <p>
-      <a href="https://aksel.nav.no">Nettside</a> | <a href="https://github.com/navikt/aksel/issues">Issues</a>
-    </p>
+  <p>NAV designsystem - React-komponenter, CSS, tokens, ikoner og dokumentasjon</p>
+  <p>
+    <a href="https://www.npmjs.com/package/@navikt/ds-react"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-react?label=Version" /></a>&nbsp;
+  </p>
+  <p>
+    <a href="https://aksel.nav.no">aksel.nav.no</a> &nbsp;·&nbsp;
+    <a href="https://aksel.nav.no/komponenter">Komponenter</a> &nbsp;·&nbsp;
+    <a href="https://aksel.nav.no/storybook/">Storybook</a> &nbsp;·&nbsp;
+    <a href="https://github.com/navikt/aksel/issues">Issues</a>
+  </p>
 </div>
 
-## Innhold
+---
 
-```sh
-@navikt/
-├── core/react      # @navikt/ds-react, kjernekomponenter
-├── core/css        # @navikt/ds-css, css kjernekomponenter
-├── core/tokens     # @navikt/ds-tokens, tokens
-├── core/tailwind   # @navikt/ds-tailwind, tailwind-config
-├── aksel-icons     # @navikt/aksel-icons, ikonpakke
-├── aksel-stylelint # @navikt/aksel-stylelint, stylelint-config
-└── aksel           # @navikt/aksel, kommandolinje-verktøy
+## Dokumentasjon
 
-aksel.nav.no/
-├── website         # Next.js-app
-├── website/sanity  # Sanity CMS-app
-└── playroom        # aksel.nav.no/sandbox
-```
+For å komme i gang, se [Aksel dokumentasjonen](https://aksel.nav.no/grunnleggende/introduksjon/kom-i-gang-med-kodepakkene)
 
 ## Kommandoer
 
-Installer dependencies og bygg workspace:
+| Kommando         | Beskrivelse                                |
+| ---------------- | ------------------------------------------ |
+| `yarn boot`      | Bygger alle pakker (topologisk rekkefølge) |
+| `yarn dev`       | Starter dokumentasjonssiden                |
+| `yarn storybook` | Starter Storybook                          |
+| `yarn test`      | Kjører alle tester                         |
+| `yarn lint`      | Kjører ESLint, Stylelint og Biome          |
+| `yarn clean`     | Fjerner genererte filer                    |
+| `yarn changeset` | Oppretter en ny versjon.                   |
 
-```sh
-yarn && yarn boot
+## Repo-struktur
+
 ```
+@navikt/
+├── core/react      # @navikt/ds-react
+├── core/css        # @navikt/ds-css
+├── core/tokens     # @navikt/ds-tokens
+├── core/tailwind   # @navikt/ds-tailwind
+├── aksel-icons     # @navikt/aksel-icons
+├── aksel-stylelint # @navikt/aksel-stylelint
+└── aksel           # @navikt/aksel
 
-### Tilgang til Github Package Registry
-
-Siden vi bruker avhengigheter som ligger i GPR, så må man sette opp tilgang til GPR med en PAT (personal access token) som har `read:packages` og er autorisert for organisasjonen "navikt". Du kan [opprette PAT her](https://github.com/settings/tokens). (Ikke Nav-ansatt? Se [CONTRIBUTING.md](https://github.com/navikt/aksel/blob/main/CONTRIBUTING.md))
-
-I din `.bashrc` eller `.zshrc`, sett følgende miljøvariabel:
-
-`export NPM_AUTH_TOKEN=<din PAT med read:packages>`
-
-### Shortcuts
-
-| Command                   | Script                                                                                                 |
-| ------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `yarn boot`               | Bygger alle pakker                                                                                     |
-| `yarn storybook`          | Starter storybook                                                                                      |
-| `yarn dev`                | Starter aksel-nettsiden [(Mer info)](https://github.com/navikt/aksel/blob/main/aksel.nav.no/README.md) |
-| `yarn example:shadow-dom` | Starter demo-app med shadow-dom                                                                        |
-| `yarn lint`               | Linter kode og css                                                                                     |
-| `yarn test`               | Kjører tester                                                                                          |
-| `yarn clean`              | Fjerner genererte filer                                                                                |
-| `yarn changeset`          | Ny versjon-entry [(how-to)](https://github.com/navikt/aksel/blob/main/.changeset/README.md)            |
+aksel.nav.no/
+├── website         # Next.js-app (dokumentasjonsside)
+├── website/sanity  # Sanity CMS
+└── playroom        # aksel.nav.no/sandbox
+```
 
 ## Bidra
 
-Vi tar gjerne imot PR-er! [CONTRIBUTING.md](https://github.com/navikt/aksel/blob/main/CONTRIBUTING.md)
+Se [CONTRIBUTING.md](https://github.com/navikt/aksel/blob/main/CONTRIBUTING.md) for mer informasjon.
 
-## Lisenser
+## Lisens
 
 [MIT](https://github.com/navikt/aksel/blob/main/LICENSE)
 
-## Codeowners
+## Kontakt
 
-Løsningen forvaltes av team Aksel
-
-[Slack](https://nav-it.slack.com/archives/C7NE7A8UF)
+Løsningen forvaltes av team Aksel i Nav. Ta kontakt på Slack [#aksel-designsystemet](https://nav-it.slack.com/archives/C7NE7A8UF).
 
 ## Contributors
 
 <a href="https://github.com/navikt/aksel/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=navikt/aksel" />
+  <img src="https://contrib.rocks/image?repo=navikt/aksel" alt="Contributors" />
 </a>
 
 ## Thanks
@@ -88,6 +76,6 @@ Løsningen forvaltes av team Aksel
 
 Thanks to [Chromatic](https://www.chromatic.com/) for providing the visual testing platform that helps us review UI changes and catch visual regressions.
 
-## Kode generert av GitHub Copilot
+---
 
 Dette repoet bruker GitHub Copilot til å generere kode.
