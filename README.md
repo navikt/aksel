@@ -4,7 +4,7 @@
 </h1>
 
 <div align="center">
-  <p>NAV designsystem - React-komponenter, CSS, tokens, ikoner og dokumentasjon</p>
+  <p>Nav designsystem - React-komponenter, CSS, tokens, ikoner og dokumentasjon</p>
   <p>
     <a href="https://www.npmjs.com/package/@navikt/ds-react"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-react?label=Version" /></a>&nbsp;
   </p>
@@ -67,7 +67,7 @@ Løsningen forvaltes av team Aksel i Nav. Ta kontakt på Slack [#aksel-designsys
 ## Contributors
 
 <a href="https://github.com/navikt/aksel/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=navikt/aksel" alt="Contributors" />
+  <img src="https://contrib.rocks/image?repo=navikt/aksel" alt="Bidragsytere" />
 </a>
 
 ## Thanks
