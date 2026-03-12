@@ -151,3 +151,34 @@ export const AutoLayout: Story = {
     docs: { disable: true },
   },
 };
+
+export const AutoLayoutSortable: Story = {
+  render: () => (
+    <DataTable layout="auto">
+      <DataTable.Thead>
+        <DataTable.Tr>
+          <DataTable.Th sortable>Left</DataTable.Th>
+          <DataTable.Th sortable>Center</DataTable.Th>
+          <DataTable.Th sortable>Right</DataTable.Th>
+        </DataTable.Tr>
+      </DataTable.Thead>
+      <DataTable.Tbody>
+        <DataTable.Tr>
+          <DataTable.Td>Data 1</DataTable.Td>
+          <DataTable.Td>Yes</DataTable.Td>
+          <DataTable.Td>100 500</DataTable.Td>
+        </DataTable.Tr>
+        <DataTable.Tr>
+          <DataTable.Td>Data 2</DataTable.Td>
+          <DataTable.Td>No</DataTable.Td>
+          <DataTable.Td>2 000 200</DataTable.Td>
+        </DataTable.Tr>
+        <DataTable.Tr>
+          <DataTable.Td>Data 3</DataTable.Td>
+          <DataTable.Td>Maybe</DataTable.Td>
+          <DataTable.Td>1 000 200</DataTable.Td>
+        </DataTable.Tr>
+      </DataTable.Tbody>
+    </DataTable>
+  ),
+};

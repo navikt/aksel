@@ -14,16 +14,25 @@ interface DataTableTdProps extends React.TdHTMLAttributes<HTMLTableCellElement> 
    * Need to work on the name though. Or maybe have two separate props?
    */
   //textWrap?: boolean | number | `${number}${string}`;
+  /**
+   * Content alignment inside cell
+   * @default "left"
+   */
+  textAlign?: "left" | "center" | "right";
 }
 
 const DataTableTd = forwardRef<HTMLTableCellElement, DataTableTdProps>(
-  ({ className, children, contentMaxWidth, ...rest }, forwardedRef) => {
+  (
+    { className, children, contentMaxWidth, textAlign = "left", ...rest },
+    forwardedRef,
+  ) => {
     return (
       <td
         {...rest}
         ref={forwardedRef}
         className={cl("aksel-data-table__td", className)}
         tabIndex={-1}
+        data-align={textAlign}
       >
         <div style={{ maxWidth: contentMaxWidth }}>{children}</div>
       </td>

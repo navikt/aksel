@@ -23,7 +23,7 @@ import DataActionBar from "../action-bar/root/DataActionBarRoot";
 import DataDragAndDrop from "../drag-and-drop/root/DataDragAndDropRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
-import { DataTableProfiler } from "./DataTableProfiler";
+/* import { DataTableProfiler } from "./DataTableProfiler"; */
 import { PersonInfo, columns, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
@@ -33,7 +33,7 @@ const meta: Meta<typeof DataTable> = {
     chromatic: { disable: true },
     layout: "padded",
   },
-  decorators: [(Story) => <DataTableProfiler>{Story()}</DataTableProfiler>],
+  /* decorators: [(Story) => <DataTableProfiler>{Story()}</DataTableProfiler>], */
 };
 
 export default meta;
@@ -80,6 +80,72 @@ export const Default: Story = {
         </DataTable.Tbody>
       </DataTable>
     </VStack>
+  ),
+};
+
+export const TextAlign: Story = {
+  render: () => (
+    <DataTable layout="auto">
+      <DataTable.Thead>
+        <DataTable.Tr>
+          <DataTable.Th>Left</DataTable.Th>
+          <DataTable.Th textAlign="center">Center</DataTable.Th>
+          <DataTable.Th textAlign="right">Right</DataTable.Th>
+        </DataTable.Tr>
+      </DataTable.Thead>
+      <DataTable.Tbody>
+        <DataTable.Tr>
+          <DataTable.Td>Data 1</DataTable.Td>
+          <DataTable.Td textAlign="center">Yes</DataTable.Td>
+          <DataTable.Td textAlign="right">100 500</DataTable.Td>
+        </DataTable.Tr>
+        <DataTable.Tr>
+          <DataTable.Td>Data 2</DataTable.Td>
+          <DataTable.Td textAlign="center">No</DataTable.Td>
+          <DataTable.Td textAlign="right">2 000 200</DataTable.Td>
+        </DataTable.Tr>
+        <DataTable.Tr>
+          <DataTable.Td>Data 3</DataTable.Td>
+          <DataTable.Td textAlign="center">Maybe</DataTable.Td>
+          <DataTable.Td textAlign="right">1 000 200</DataTable.Td>
+        </DataTable.Tr>
+      </DataTable.Tbody>
+    </DataTable>
+  ),
+};
+
+export const TextAlignSortable: Story = {
+  render: () => (
+    <DataTable layout="auto">
+      <DataTable.Thead>
+        <DataTable.Tr>
+          <DataTable.Th sortable>Left</DataTable.Th>
+          <DataTable.Th sortable textAlign="center">
+            Center
+          </DataTable.Th>
+          <DataTable.Th sortable textAlign="right">
+            Right
+          </DataTable.Th>
+        </DataTable.Tr>
+      </DataTable.Thead>
+      <DataTable.Tbody>
+        <DataTable.Tr>
+          <DataTable.Td>Data 1</DataTable.Td>
+          <DataTable.Td textAlign="center">Yes</DataTable.Td>
+          <DataTable.Td textAlign="right">100 500</DataTable.Td>
+        </DataTable.Tr>
+        <DataTable.Tr>
+          <DataTable.Td>Data 2</DataTable.Td>
+          <DataTable.Td textAlign="center">No</DataTable.Td>
+          <DataTable.Td textAlign="right">2 000 200</DataTable.Td>
+        </DataTable.Tr>
+        <DataTable.Tr>
+          <DataTable.Td>Data 3</DataTable.Td>
+          <DataTable.Td textAlign="center">Maybe</DataTable.Td>
+          <DataTable.Td textAlign="right">1 000 200</DataTable.Td>
+        </DataTable.Tr>
+      </DataTable.Tbody>
+    </DataTable>
   ),
 };
 

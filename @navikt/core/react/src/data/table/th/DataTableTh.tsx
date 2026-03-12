@@ -18,6 +18,11 @@ interface DataTableThProps extends React.HTMLAttributes<HTMLTableCellElement> {
   ) => void;
   size?: number; // TODO: size should be required when resizeHandler is set
   /**
+   * Content alignment inside cell
+   * @default "left"
+   */
+  textAlign?: "left" | "center" | "right";
+  /**
    * Makes the column header sortable. The entire header cell content becomes
    * a clickable button when true.
    */
@@ -69,6 +74,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
       onSortClick,
       style,
       keyboardResizingHandler,
+      textAlign = "left",
       ...rest
     },
     forwardedRef,
@@ -109,6 +115,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         }}
         onPointerLeave={() => setIsOverflowing(false)}
         tabIndex={-1}
+        data-align={textAlign}
       >
         {sortable ? (
           <button
