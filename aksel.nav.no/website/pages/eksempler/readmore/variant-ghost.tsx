@@ -1,14 +1,37 @@
-import { ReadMore } from "@navikt/ds-react";
+import { ReadMore, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ReadMore header="Dette regnes som helsemessige begrensninger">
-      Med helsemessige begrensninger mener vi funksjonshemming, sykdom,
-      allergier som hindrer deg i arbeidet eller andre årsaker som må tas hensyn
-      til når du skal finne nytt arbeid. Du må oppgi hva som gjelder for deg, og
-      dokumentere de helsemessige årsakene du viser til.
-    </ReadMore>
+    <VStack gap="space-16" align="center">
+      <ReadMore
+        header="Dette regnes som helsemessige begrensninger"
+        size="large"
+      >
+        Med helsemessige begrensninger mener vi funksjonshemming, sykdom,
+        allergier som hindrer deg i arbeidet eller andre årsaker som må tas
+        hensyn til når du skal finne nytt arbeid. Du må oppgi hva som gjelder
+        for deg, og dokumentere de helsemessige årsakene du viser til.
+      </ReadMore>
+      <ReadMore
+        header="Dette regnes som helsemessige begrensninger"
+        size="medium"
+      >
+        Med helsemessige begrensninger mener vi funksjonshemming, sykdom,
+        allergier som hindrer deg i arbeidet eller andre årsaker som må tas
+        hensyn til når du skal finne nytt arbeid. Du må oppgi hva som gjelder
+        for deg, og dokumentere de helsemessige årsakene du viser til.
+      </ReadMore>
+      <ReadMore
+        header="Dette regnes som helsemessige begrensninger"
+        size="small"
+      >
+        Med helsemessige begrensninger mener vi funksjonshemming, sykdom,
+        allergier som hindrer deg i arbeidet eller andre årsaker som må tas
+        hensyn til når du skal finne nytt arbeid. Du må oppgi hva som gjelder
+        for deg, og dokumentere de helsemessige årsakene du viser til.
+      </ReadMore>
+    </VStack>
   );
 };
 
@@ -21,5 +44,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 2,
 };

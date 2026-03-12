@@ -23,5 +23,4 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Children kan erstatte knapp hvis man f.eks. trenger eget ikon eller 'type'-prop.",
 };
