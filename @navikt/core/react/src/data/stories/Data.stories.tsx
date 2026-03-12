@@ -85,7 +85,7 @@ export const Default: Story = {
 
 export const TextAlign: Story = {
   render: () => (
-    <DataTable layout="auto">
+    <DataTable layout="auto" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
           <DataTable.Th>Left</DataTable.Th>
@@ -116,7 +116,7 @@ export const TextAlign: Story = {
 
 export const TextAlignSortable: Story = {
   render: () => (
-    <DataTable layout="auto">
+    <DataTable layout="auto" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
           <DataTable.Th sortable>Left</DataTable.Th>

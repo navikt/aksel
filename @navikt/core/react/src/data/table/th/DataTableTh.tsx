@@ -122,6 +122,9 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
             className="aksel-data-table__th-sort-button"
             onClick={sortable ? onSortClick : undefined}
           >
+            <div ref={contentRef} className="aksel-data-table__th-content">
+              {children}
+            </div>
             {SortIcon && (
               <SortIcon
                 aria-hidden
@@ -130,9 +133,6 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
                 fontSize="1.25rem"
               />
             )}
-            <div ref={contentRef} className="aksel-data-table__th-content">
-              {children}
-            </div>
           </button>
         ) : (
           <div ref={contentRef} className="aksel-data-table__th-content">

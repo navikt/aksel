@@ -168,19 +168,27 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: -2px;
+    outline: none;
   }
 }
 
 .aksel-data-table__th-sort-icon {
   flex-shrink: 0;
+  margin-left: auto;
 
   &[data-sort-direction="none"] {
-    display: none;
+    visibility: hidden;
   }
 
   .aksel-data-table__th-sort-button:is(:hover, :focus-visible, :focus-within) & {
+    visibility: visible;
+  }
+
+  .aksel-data-table[data-layout="fixed"] &[data-sort-direction="none"] {
+    display: none;
+  }
+
+  .aksel-data-table[data-layout="fixed"] .aksel-data-table__th-sort-button:is(:hover, :focus-visible, :focus-within) & {
     display: block;
   }
 }
@@ -307,7 +315,9 @@
   scroll-margin-block: var(--ax-space-0);
   scroll-margin-inline: var(--ax-space-0);
 
-  &:focus-visible {
+  &:focus-visible,
+  /* Focus instead of focus-visible so that effect of sort-icon staying isnt strange */
+  &:has(.aksel-data-table__th-sort-button:focus) {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: -4px;
   }
